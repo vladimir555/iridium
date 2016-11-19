@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="utility"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test">
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="utility-test">
+				<Option output="/Users/aa/workspace/qtcreator/utility/bin/utility-test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/source"/>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 utility-test"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="utility-test/fast">
+				<Option output="/Users/aa/workspace/qtcreator/utility/bin/utility-test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/source"/>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 utility-test/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="utility">
+				<Option output="/Users/aa/workspace/qtcreator/utility/lib/libutility.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/source"/>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 utility"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="utility/fast">
+				<Option output="/Users/aa/workspace/qtcreator/utility/lib/libutility.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/aa/workspace/qtcreator/utility"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/source"/>
+					<Add directory="/Users/aa/workspace/qtcreator/utility/utility/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 utility/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/aa/workspace/qtcreator/utility/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility-test/source/utility/networking/server/socket/socket-test.cpp">
+			<Option target="utility-test"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/networking/address.cpp">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/networking/address.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/networking/server/socket/implementation/socket.cpp">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/networking/server/socket/implementation/socket.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/networking/server/socket/socket.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/pasring/node.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/pattern/initializable.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/pattern/non_copyable.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/pattern/non_movable.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/pattern/singleton.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/smart_ptr.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility/source/utility/system/terminator.h">
+			<Option target="utility-test"/>
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

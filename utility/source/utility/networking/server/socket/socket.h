@@ -1,25 +1,22 @@
-#include "socket.h"
-
 
 
 namespace utility {
 namespace networking {
 namespace server {
 namespace socket {
-namespace implementation {
 
 
-void CWebSocketpp::initialize() {
+class ISocket {
+public:
+    virtual void initialize() = 0;
+    virtual void finalize() = 0;
 
-}
+    //todo:
+    virtual void handle() = 0;
+
+};
 
 
-void CWebSocketpp::finalize() {
-
-}
-
-
-} // implementation
 } // socket
 } // server
 } // networking

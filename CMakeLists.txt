@@ -10,8 +10,8 @@ add_compile_options("-std=c++11")
 add_compile_options("-Wall")
 
 file(GLOB_RECURSE SOURCE 
-    ${CMAKE_SOURCE_DIR}/utility/source/*.h
-    ${CMAKE_SOURCE_DIR}/utility/source/*.cpp)
+    ${CMAKE_SOURCE_DIR}/utility/source/utility/*.h
+    ${CMAKE_SOURCE_DIR}/utility/source/utility/*.cpp)
 
 include_directories(${CMAKE_SOURCE_DIR}/utility/source ${CMAKE_SOURCE_DIR}/utility/include)
 
@@ -34,8 +34,8 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
 
 # source files for test
 file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_SOURCE_DIR}/utility-test/source/*.h
-    ${CMAKE_SOURCE_DIR}/utility-test/source/*.cpp
+    ${CMAKE_SOURCE_DIR}/utility-test/source/utility/*.h
+    ${CMAKE_SOURCE_DIR}/utility-test/source/utility/*.cpp
 )
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST} ${SOURCE})
