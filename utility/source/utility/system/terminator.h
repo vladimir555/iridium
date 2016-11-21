@@ -2,6 +2,9 @@
 #include "utility/pattern/singleton.h"
 
 
+#include <list>
+
+
 namespace utility {
 namespace system {
 
@@ -11,13 +14,14 @@ public:
     DEFINE_SMART_PTR(ITerminatorHandler);
     ///
     virtual ~ITerminatorHandler() = default;
+public:
     ///
-    virtual void handleTerminator() = 0;
+    virtual void handleTerminate() = 0;
 };
 
 
 class Terminator:
-    public pattern::Singleton//,
+    public pattern::Singleton<Terminator>//,
     //public threading::implementation::CTimedMutex
 {
 public:
@@ -32,6 +36,8 @@ private:
     friend void handleAppicationTerminate();
     ///
     Terminator();
+    ///
+    void handleTerminate();
     ///
     std::list<ITerminatorHandler::TWeakPtr> m_handlers;
 };

@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc lib/libutility.a  CMakeFiles/utility.dir/utility/source/utility/networking/address.cpp.o CMakeFiles/utility.dir/utility/source/utility/networking/server/socket/implementation/socket.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib lib/libutility.a

@@ -1,5 +1,0 @@
-/Users/aa/workspace/qtcreator/utility/CMakeFiles/rebuild_cache.dir
-/Users/aa/workspace/qtcreator/utility/CMakeFiles/edit_cache.dir
-/Users/aa/workspace/qtcreator/utility/CMakeFiles/test.dir
-/Users/aa/workspace/qtcreator/utility/CMakeFiles/utility-test.dir
-/Users/aa/workspace/qtcreator/utility/CMakeFiles/utility.dir

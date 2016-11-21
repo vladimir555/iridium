@@ -174,6 +174,96 @@ utility-test/source/utility/networking/server/socket/socket-test.cpp.s:
 	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility-test/source/utility/networking/server/socket/socket-test.cpp.s
 .PHONY : utility-test/source/utility/networking/server/socket/socket-test.cpp.s
 
+utility/source/utility/convertion/implementation/convert.o: utility/source/utility/convertion/implementation/convert.cpp.o
+
+.PHONY : utility/source/utility/convertion/implementation/convert.o
+
+# target to build an object file
+utility/source/utility/convertion/implementation/convert.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/convert.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/convert.cpp.o
+.PHONY : utility/source/utility/convertion/implementation/convert.cpp.o
+
+utility/source/utility/convertion/implementation/convert.i: utility/source/utility/convertion/implementation/convert.cpp.i
+
+.PHONY : utility/source/utility/convertion/implementation/convert.i
+
+# target to preprocess a source file
+utility/source/utility/convertion/implementation/convert.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/convert.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/convert.cpp.i
+.PHONY : utility/source/utility/convertion/implementation/convert.cpp.i
+
+utility/source/utility/convertion/implementation/convert.s: utility/source/utility/convertion/implementation/convert.cpp.s
+
+.PHONY : utility/source/utility/convertion/implementation/convert.s
+
+# target to generate assembly for a file
+utility/source/utility/convertion/implementation/convert.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/convert.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/convert.cpp.s
+.PHONY : utility/source/utility/convertion/implementation/convert.cpp.s
+
+utility/source/utility/convertion/implementation/platform/linux/convert.o: utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
+
+.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.o
+
+# target to build an object file
+utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
+.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
+
+utility/source/utility/convertion/implementation/platform/linux/convert.i: utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
+
+.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.i
+
+# target to preprocess a source file
+utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
+.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
+
+utility/source/utility/convertion/implementation/platform/linux/convert.s: utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
+
+.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.s
+
+# target to generate assembly for a file
+utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
+.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
+
+utility/source/utility/convertion/implementation/platform/windows/convert.o: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
+
+.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.o
+
+# target to build an object file
+utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
+.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
+
+utility/source/utility/convertion/implementation/platform/windows/convert.i: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
+
+.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.i
+
+# target to preprocess a source file
+utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
+.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
+
+utility/source/utility/convertion/implementation/platform/windows/convert.s: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
+
+.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.s
+
+# target to generate assembly for a file
+utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
+.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
+
 utility/source/utility/networking/address.o: utility/source/utility/networking/address.cpp.o
 
 .PHONY : utility/source/utility/networking/address.o
@@ -234,6 +324,126 @@ utility/source/utility/networking/server/socket/implementation/socket.cpp.s:
 	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/networking/server/socket/implementation/socket.cpp.s
 .PHONY : utility/source/utility/networking/server/socket/implementation/socket.cpp.s
 
+utility/source/utility/system/terminator.o: utility/source/utility/system/terminator.cpp.o
+
+.PHONY : utility/source/utility/system/terminator.o
+
+# target to build an object file
+utility/source/utility/system/terminator.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/system/terminator.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/system/terminator.cpp.o
+.PHONY : utility/source/utility/system/terminator.cpp.o
+
+utility/source/utility/system/terminator.i: utility/source/utility/system/terminator.cpp.i
+
+.PHONY : utility/source/utility/system/terminator.i
+
+# target to preprocess a source file
+utility/source/utility/system/terminator.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/system/terminator.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/system/terminator.cpp.i
+.PHONY : utility/source/utility/system/terminator.cpp.i
+
+utility/source/utility/system/terminator.s: utility/source/utility/system/terminator.cpp.s
+
+.PHONY : utility/source/utility/system/terminator.s
+
+# target to generate assembly for a file
+utility/source/utility/system/terminator.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/system/terminator.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/system/terminator.cpp.s
+.PHONY : utility/source/utility/system/terminator.cpp.s
+
+utility/source/utility/threading/implementation/condition.o: utility/source/utility/threading/implementation/condition.cpp.o
+
+.PHONY : utility/source/utility/threading/implementation/condition.o
+
+# target to build an object file
+utility/source/utility/threading/implementation/condition.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/condition.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/condition.cpp.o
+.PHONY : utility/source/utility/threading/implementation/condition.cpp.o
+
+utility/source/utility/threading/implementation/condition.i: utility/source/utility/threading/implementation/condition.cpp.i
+
+.PHONY : utility/source/utility/threading/implementation/condition.i
+
+# target to preprocess a source file
+utility/source/utility/threading/implementation/condition.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/condition.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/condition.cpp.i
+.PHONY : utility/source/utility/threading/implementation/condition.cpp.i
+
+utility/source/utility/threading/implementation/condition.s: utility/source/utility/threading/implementation/condition.cpp.s
+
+.PHONY : utility/source/utility/threading/implementation/condition.s
+
+# target to generate assembly for a file
+utility/source/utility/threading/implementation/condition.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/condition.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/condition.cpp.s
+.PHONY : utility/source/utility/threading/implementation/condition.cpp.s
+
+utility/source/utility/threading/implementation/mutex.o: utility/source/utility/threading/implementation/mutex.cpp.o
+
+.PHONY : utility/source/utility/threading/implementation/mutex.o
+
+# target to build an object file
+utility/source/utility/threading/implementation/mutex.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/mutex.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/mutex.cpp.o
+.PHONY : utility/source/utility/threading/implementation/mutex.cpp.o
+
+utility/source/utility/threading/implementation/mutex.i: utility/source/utility/threading/implementation/mutex.cpp.i
+
+.PHONY : utility/source/utility/threading/implementation/mutex.i
+
+# target to preprocess a source file
+utility/source/utility/threading/implementation/mutex.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/mutex.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/mutex.cpp.i
+.PHONY : utility/source/utility/threading/implementation/mutex.cpp.i
+
+utility/source/utility/threading/implementation/mutex.s: utility/source/utility/threading/implementation/mutex.cpp.s
+
+.PHONY : utility/source/utility/threading/implementation/mutex.s
+
+# target to generate assembly for a file
+utility/source/utility/threading/implementation/mutex.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/mutex.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/mutex.cpp.s
+.PHONY : utility/source/utility/threading/implementation/mutex.cpp.s
+
+utility/source/utility/threading/implementation/timed_mutex.o: utility/source/utility/threading/implementation/timed_mutex.cpp.o
+
+.PHONY : utility/source/utility/threading/implementation/timed_mutex.o
+
+# target to build an object file
+utility/source/utility/threading/implementation/timed_mutex.cpp.o:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/timed_mutex.cpp.o
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/timed_mutex.cpp.o
+.PHONY : utility/source/utility/threading/implementation/timed_mutex.cpp.o
+
+utility/source/utility/threading/implementation/timed_mutex.i: utility/source/utility/threading/implementation/timed_mutex.cpp.i
+
+.PHONY : utility/source/utility/threading/implementation/timed_mutex.i
+
+# target to preprocess a source file
+utility/source/utility/threading/implementation/timed_mutex.cpp.i:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/timed_mutex.cpp.i
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/timed_mutex.cpp.i
+.PHONY : utility/source/utility/threading/implementation/timed_mutex.cpp.i
+
+utility/source/utility/threading/implementation/timed_mutex.s: utility/source/utility/threading/implementation/timed_mutex.cpp.s
+
+.PHONY : utility/source/utility/threading/implementation/timed_mutex.s
+
+# target to generate assembly for a file
+utility/source/utility/threading/implementation/timed_mutex.cpp.s:
+	$(MAKE) -f CMakeFiles/utility-test.dir/build.make CMakeFiles/utility-test.dir/utility/source/utility/threading/implementation/timed_mutex.cpp.s
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/threading/implementation/timed_mutex.cpp.s
+.PHONY : utility/source/utility/threading/implementation/timed_mutex.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -248,12 +458,33 @@ help:
 	@echo "... utility-test/source/utility/networking/server/socket/socket-test.o"
 	@echo "... utility-test/source/utility/networking/server/socket/socket-test.i"
 	@echo "... utility-test/source/utility/networking/server/socket/socket-test.s"
+	@echo "... utility/source/utility/convertion/implementation/convert.o"
+	@echo "... utility/source/utility/convertion/implementation/convert.i"
+	@echo "... utility/source/utility/convertion/implementation/convert.s"
+	@echo "... utility/source/utility/convertion/implementation/platform/linux/convert.o"
+	@echo "... utility/source/utility/convertion/implementation/platform/linux/convert.i"
+	@echo "... utility/source/utility/convertion/implementation/platform/linux/convert.s"
+	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.o"
+	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.i"
+	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.s"
 	@echo "... utility/source/utility/networking/address.o"
 	@echo "... utility/source/utility/networking/address.i"
 	@echo "... utility/source/utility/networking/address.s"
 	@echo "... utility/source/utility/networking/server/socket/implementation/socket.o"
 	@echo "... utility/source/utility/networking/server/socket/implementation/socket.i"
 	@echo "... utility/source/utility/networking/server/socket/implementation/socket.s"
+	@echo "... utility/source/utility/system/terminator.o"
+	@echo "... utility/source/utility/system/terminator.i"
+	@echo "... utility/source/utility/system/terminator.s"
+	@echo "... utility/source/utility/threading/implementation/condition.o"
+	@echo "... utility/source/utility/threading/implementation/condition.i"
+	@echo "... utility/source/utility/threading/implementation/condition.s"
+	@echo "... utility/source/utility/threading/implementation/mutex.o"
+	@echo "... utility/source/utility/threading/implementation/mutex.i"
+	@echo "... utility/source/utility/threading/implementation/mutex.s"
+	@echo "... utility/source/utility/threading/implementation/timed_mutex.o"
+	@echo "... utility/source/utility/threading/implementation/timed_mutex.i"
+	@echo "... utility/source/utility/threading/implementation/timed_mutex.s"
 .PHONY : help
 
 

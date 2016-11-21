@@ -1,0 +1,7 @@
+/CMakeLists.txt.user
+/Makefile
+/CTestTestfile.cmake
+/CMakeFiles
+/bin/*
+/lib/*
+

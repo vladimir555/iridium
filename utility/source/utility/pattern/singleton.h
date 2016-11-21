@@ -26,7 +26,7 @@ public:
 
 
 template<typename TClass>
-TClass &Singleton::instance() {
+TClass &Singleton<TClass>::instance() {
     static TClass m_instance;
     return m_instance; // ----->
 }
