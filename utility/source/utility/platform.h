@@ -15,10 +15,23 @@
 #ifdef _WIN32
 #define WINDOWS_PLATFORM
 #define PLATFORM_PATH platform/windows/
+#if _WIN32 || _WIN64
+#if _WIN64
+#definr CPU64
+#else
+#define CPU32
+#endif
+#endif
 #endif
 
 
 #ifdef __APPLE_OS__
+#define MACOS_PLATFORM
+#define PLATFORM_PATH platform/macos/
+#endif
+
+
+#ifdef __APPLE__
 #define MACOS_PLATFORM
 #define PLATFORM_PATH platform/macos/
 #endif
@@ -34,14 +47,3 @@
 #define PLATFORM_XSTR(x) #x
 #define PLATFORM_STR(x) PLATFORM_XSTR(x)
 #define PLATFORM_HEADER(y) PLATFORM_STR(PLATFORM_IDENT(PLATFORM_PATH)PLATFORM_IDENT(y))
-
-
-#if _WIN32 || _WIN64
-#if _WIN64
-#definr CPU64
-#else
-#define CPU32
-#endif
-#endif
-
-

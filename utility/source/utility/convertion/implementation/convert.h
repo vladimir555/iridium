@@ -67,11 +67,11 @@ std::string convert(double const &value);
 
 
 template<>
-std::string convert(std::wstring const &value);
+std::string convert(std::chrono::system_clock::time_point const &value);
 
 
 template<>
-std::string convert(std::chrono::system_clock::time_point const &value);
+std::string convert(std::wstring const &value);
 
 
 template<>
@@ -100,6 +100,10 @@ uint64_t convert(std::string const &value);
 
 template<>
 double convert(std::string const &value);
+
+
+template<>
+std::chrono::system_clock::time_point convert(std::string const &value);
 
 
 template<>
