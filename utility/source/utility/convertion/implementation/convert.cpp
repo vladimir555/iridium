@@ -14,6 +14,9 @@ using std::runtime_error;
 using std::chrono::system_clock;
 using std::thread;
 using std::stringstream;
+using std::wstring_convert;
+using std::codecvt_utf8;
+using std::codecvt_utf8_utf16;
 
 
 namespace {
@@ -63,27 +66,41 @@ string convert(int32_t const &value) {
 
 
 template<>
-string convert(uint32_t const &value, int const &base);
+string convert(uint32_t const &value, int const &base) {
+    return convert<string>(static_cast<int32_t>(value), base); // ----->
+}
 
 
 template<>
-string convert(uint32_t const &value);
+string convert(uint32_t const &value) {
+    return convert<string>(value, 10); // ----->
+}
 
 
 template<>
-string convert(int64_t const &value, int const &base);
+string convert(int64_t const &value, int const &base) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, base);
+    return buffer; // ----->
+}
 
 
 template<>
-string convert(int64_t const &value);
+string convert(int64_t const &value) {
+    return convert<string>(value, 10); // ----->
+}
 
 
 template<>
-string convert(uint64_t const &value, int const &base);
+string convert(uint64_t const &value, int const &base) {
+    return convert<string>(static_cast<int64_t>(value), base); // ----->
+}
 
 
 template<>
-string convert(uint64_t const &value);
+string convert(uint64_t const &value) {
+    return convert<string>(value, 10); // ----->
+}
 
 
 template<>
@@ -116,7 +133,16 @@ string convert(system_clock::time_point const &value) {
 
 
 template<>
-string convert(std::wstring const &value);
+string convert(std::string const &value) {
+    return value; // ----->
+}
+
+
+template<>
+string convert(std::wstring const &value) {
+    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
+    return converter.to_bytes(value); // ----->
+}
 
 
 template<>
@@ -155,14 +181,30 @@ int32_t convert(std::string const &value) {
         auto result = platform::sscanf(value.c_str(), "%i", &i);
         if (result == 1)
             return i; // ----->
+        else
+            throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
     } else
         return i; // ----->
-    throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
 }
 
 
 template<>
-uint32_t convert(std::string const &value);
+uint32_t convert(std::string const &value) {
+    for (auto const ch: value)
+        if (ch < '0' || ch > '9')
+            throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
+
+    int32_t i = atoi(value.c_str());
+
+    if (i == 0) {
+        auto result = platform::sscanf(value.c_str(), "%i", &i);
+        if (result == 1)
+            return i; // ----->
+        else
+            throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
+    } else
+        return i; // ----->
+}
 
 
 template<>
@@ -177,18 +219,49 @@ int64_t convert(std::string const &value) {
         auto result = platform::sscanf(value.c_str(), "%i", &i);
         if (result == 1)
             return i; // ----->
+        else
+            throw runtime_error("convertion '" + value + "' to int64 error"); // ----->
     } else
         return i; // ----->
-    throw runtime_error("convertion '" + value + "' to int64 error"); // ----->
 }
 
 
 template<>
-uint64_t convert(std::string const &value);
+uint64_t convert(std::string const &value) {
+    for (auto const ch: value)
+        if (ch < '0' || ch > '9')
+            throw runtime_error("convertion '" + value + "' to int64 error");
+
+    int64_t i = atol(value.c_str());
+
+    if (i == 0) {
+        auto result = platform::sscanf(value.c_str(), "%i", &i);
+        if (result == 1)
+            return i; // ----->
+        else
+            throw runtime_error("convertion '" + value + "' to int64 error"); // ----->
+    } else
+        return i; // ----->
+}
 
 
 template<>
-double convert(std::string const &value);
+double convert(std::string const &value) {
+    for (auto const &ch: value)
+        if ((ch < '0' || ch > '9') && ch != '.' && ch !='-')
+            throw runtime_error("convertion '" + value + "' to double error"); // ----->
+
+    double d = atof(value.c_str());
+
+    if (d == 0.0) {
+        auto result = platform::sscanf(value.c_str(), "%lf", &d);
+        if (result == 1)
+            return d; // ----->
+        else
+            throw runtime_error("convertion '" + value + "' to double error"); // ----->
+    } else
+        return d; // ----->
+}
 
 
 template<>
@@ -221,7 +294,10 @@ system_clock::time_point convert(string const &value) {
 
 
 template<>
-std::wstring convert(std::string const &value);
+std::wstring convert(std::string const &value) {
+    wstring_convert<codecvt_utf8_utf16<wchar_t> > converter;
+    return converter.from_bytes(value); // ----->
+}
 
 
 } // implementation

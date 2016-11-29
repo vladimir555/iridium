@@ -2,6 +2,6 @@
 /Makefile
 /CTestTestfile.cmake
 /CMakeFiles
-/bin/*
-/lib/*
+/bin
+/lib
 

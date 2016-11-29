@@ -71,6 +71,10 @@ std::string convert(std::chrono::system_clock::time_point const &value);
 
 
 template<>
+std::string convert(std::string const &value);
+
+
+template<>
 std::string convert(std::wstring const &value);
 
 
