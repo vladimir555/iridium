@@ -1,3 +1,7 @@
+#ifndef HEADER_ADDRESS_3F6003E0_9A9B_4B6E_B9D0_6928A962DC4B
+#define HEADER_ADDRESS_3F6003E0_9A9B_4B6E_B9D0_6928A962DC4B
+
+
 #include <string>
 
 
@@ -18,3 +22,6 @@ struct TAddressIPv4 {
 
 } // networking
 } // utility
+
+
+#endif // HEADER_ADDRESS_3F6003E0_9A9B_4B6E_B9D0_6928A962DC4B

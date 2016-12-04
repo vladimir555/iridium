@@ -1,3 +1,7 @@
+#ifndef HEADER_TERMINATOR_14A1C7DA_9ECF_49BD_8318_A7E5A92FDC8A
+#define HEADER_TERMINATOR_14A1C7DA_9ECF_49BD_8318_A7E5A92FDC8A
+
+
 #include "utility/smart_ptr.h"
 #include "utility/pattern/singleton.h"
 
@@ -45,3 +49,6 @@ private:
 
 } // system
 } // utility
+
+
+#endif // HEADER_TERMINATOR_14A1C7DA_9ECF_49BD_8318_A7E5A92FDC8A

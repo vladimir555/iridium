@@ -1,5 +1,5 @@
-
-
+#ifndef HEADER_SOCKET_CD651BC4_EA37_4328_B05D_024B00945420
+#define HEADER_SOCKET_CD651BC4_EA37_4328_B05D_024B00945420
 
 
 #include "utility/networking/server/socket/socket.h"
@@ -37,3 +37,6 @@ private:
 } // server
 } // networking
 } // utility
+
+
+#endif // HEADER_SOCKET_CD651BC4_EA37_4328_B05D_024B00945420

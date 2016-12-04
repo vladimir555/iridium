@@ -1,3 +1,7 @@
+#ifndef HEADER_CONVERT_F8F7946D_F3C0_4846_84B6_A76A19C27EAA
+#define HEADER_CONVERT_F8F7946D_F3C0_4846_84B6_A76A19C27EAA
+
+
 #include <stdint.h>
 
 
@@ -55,3 +59,6 @@ auto mkgmtime = ::timegm;
 } // implementation
 } // convertion
 } // utility
+
+
+#endif // HEADER_CONVERT_F8F7946D_F3C0_4846_84B6_A76A19C27EAA

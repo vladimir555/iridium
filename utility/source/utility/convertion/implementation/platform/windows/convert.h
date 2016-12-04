@@ -1,3 +1,7 @@
+#ifndef HEADER_CONVERT_6C2CA6BA_1018_4B37_8BDC_3178D549B4AC
+#define HEADER_CONVERT_6C2CA6BA_1018_4B37_8BDC_3178D549B4AC
+
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -37,3 +41,6 @@ auto mkgmtime = ::mkgmtime; //todo: 32 64 func
 
 
 //#include <utility/macros/enable_warnings.h>
+
+
+#endif // HEADER_CONVERT_6C2CA6BA_1018_4B37_8BDC_3178D549B4AC

@@ -1,3 +1,7 @@
+#ifndef HEADER_CONVERT_B235DF7F_6B26_4C85_A676_53C18B086095
+#define HEADER_CONVERT_B235DF7F_6B26_4C85_A676_53C18B086095
+
+
 #include <string>
 #include <chrono>
 #include <thread>
@@ -117,3 +121,6 @@ std::wstring convert(std::string const &value);
 } // implementation
 } // convertion
 } // utility
+
+
+#endif // HEADER_CONVERT_B235DF7F_6B26_4C85_A676_53C18B086095

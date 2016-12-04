@@ -1,5 +1,5 @@
-
-
+#ifndef HEADER_SINGLETON_33ED8344_7855_4F54_A108_7FF9BC7D71B4
+#define HEADER_SINGLETON_33ED8344_7855_4F54_A108_7FF9BC7D71B4
 
 
 #include "non_copyable.h"
@@ -34,3 +34,6 @@ TClass &Singleton<TClass>::instance() {
 
 } // pattern
 } // utility
+
+
+#endif // HEADER_SINGLETON_33ED8344_7855_4F54_A108_7FF9BC7D71B4

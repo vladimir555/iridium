@@ -1,3 +1,5 @@
+#ifndef HEADER_SOCKET_268F1DCB_ADF2_4B30_A901_3F22D2C3774E
+#define HEADER_SOCKET_268F1DCB_ADF2_4B30_A901_3F22D2C3774E
 
 
 namespace utility {
@@ -21,3 +23,6 @@ public:
 } // server
 } // networking
 } // utility
+
+
+#endif // HEADER_SOCKET_268F1DCB_ADF2_4B30_A901_3F22D2C3774E
