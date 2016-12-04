@@ -24,7 +24,7 @@ namespace {
 
 auto const time_format                  = "%Y-%m-%d %H:%M:%S";
 auto const time_scan_format             = "%04i-%02i-%02i %02i:%02i:%02i";
-auto const time_scan_format_size        = sizeof(time_scan_format);
+auto const time_scan_format_size        = 23;
 auto const double_to_string_buffer_size = 32;
 auto const int_to_string_buffer_size    = 32;
 auto const time_to_string_buffer_size   = 64;
@@ -126,7 +126,7 @@ string convert(system_clock::time_point const &value) {
     if (tm_) {
         char buffer[time_to_string_buffer_size];
         strftime(buffer, time_to_string_buffer_size, time_format, tm_);
-        return buffer; // ----->
+        return string(buffer) + ".000"; // ----->
     } else
         throw runtime_error("convertion time to string error"); // ----->
 }
@@ -267,7 +267,7 @@ double convert(std::string const &value) {
 template<>
 system_clock::time_point convert(string const &value) {
     if (value.size() != time_scan_format_size)
-       throw runtime_error("convertion '" + value + "' to time error");
+       throw runtime_error("convertion 1'" + value + "' to time error");
 
     struct std::tm tm_ = {};
     auto result = platform::sscanf(value.c_str(), time_scan_format,
@@ -285,11 +285,11 @@ system_clock::time_point convert(string const &value) {
         auto time = platform::mkgmtime(&tm_);
 
         if (time < 0)
-            throw runtime_error("convertion '" + value + "' to time error"); // ----->
+            throw runtime_error("convertion 2'" + value + "' to time error"); // ----->
 
         return system_clock::from_time_t(time); // ----->
     } else
-        throw runtime_error("convertion '" + value + "' to time error"); // ----->
+        throw runtime_error("convertion 3'" + value + "' to time error"); // ----->
 }
 
 

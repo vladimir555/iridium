@@ -174,33 +174,6 @@ utility/source/utility/convertion/implementation/convert.cpp.s:
 	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/convert.cpp.s
 .PHONY : utility/source/utility/convertion/implementation/convert.cpp.s
 
-utility/source/utility/convertion/implementation/platform/linux/convert.o: utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
-
-.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.o
-
-# target to build an object file
-utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o:
-	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
-.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.cpp.o
-
-utility/source/utility/convertion/implementation/platform/linux/convert.i: utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
-
-.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.i
-
-# target to preprocess a source file
-utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i:
-	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
-.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.cpp.i
-
-utility/source/utility/convertion/implementation/platform/linux/convert.s: utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
-
-.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.s
-
-# target to generate assembly for a file
-utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s:
-	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
-.PHONY : utility/source/utility/convertion/implementation/platform/linux/convert.cpp.s
-
 utility/source/utility/convertion/implementation/platform/windows/convert.o: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
 
 .PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.o
@@ -458,9 +431,6 @@ help:
 	@echo "... utility/source/utility/convertion/implementation/convert.o"
 	@echo "... utility/source/utility/convertion/implementation/convert.i"
 	@echo "... utility/source/utility/convertion/implementation/convert.s"
-	@echo "... utility/source/utility/convertion/implementation/platform/linux/convert.o"
-	@echo "... utility/source/utility/convertion/implementation/platform/linux/convert.i"
-	@echo "... utility/source/utility/convertion/implementation/platform/linux/convert.s"
 	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.o"
 	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.i"
 	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.s"

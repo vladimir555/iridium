@@ -6,10 +6,15 @@ namespace {
 
 template<typename TInt>
 void itoaInternal(TInt value, char *buffer, int const &base) {
+    if (value < 0) {
+       *buffer = '-';
+        buffer++;
+        value = -value;
+    }
     do {
         char ch = value % base;
         if (ch > 9)
-            ch = 'a' - 18 + ch;
+            ch = 'A' - 10 + ch;
         else
             ch = '0' + ch;
        *buffer = ch;

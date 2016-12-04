@@ -1,3 +1,10 @@
+#if ((ULONG_MAX) == (UINT_MAX))
+#define PLATFORM_CPU64
+#else
+#define PLATFORM_CPU32
+#endif
+
+
 #ifdef __linux
 #ifndef ANDROID
 #define LINUX_PLATFORM
@@ -15,13 +22,13 @@
 #ifdef _WIN32
 #define WINDOWS_PLATFORM
 #define PLATFORM_PATH platform/windows/
-#if _WIN32 || _WIN64
-#if _WIN64
-#definr CPU64
-#else
-#define CPU32
-#endif
-#endif
+//#if _WIN32 || _WIN64
+//#if _WIN64
+//#define CPU64
+//#else
+//#define CPU32
+//#endif
+//#endif
 #endif
 
 
