@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/Cellar/cmake/3.7.0/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/Cellar/cmake/3.7.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -173,33 +173,6 @@ utility/source/utility/convertion/implementation/convert.s: utility/source/utili
 utility/source/utility/convertion/implementation/convert.cpp.s:
 	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/convert.cpp.s
 .PHONY : utility/source/utility/convertion/implementation/convert.cpp.s
-
-utility/source/utility/convertion/implementation/platform/windows/convert.o: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
-
-.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.o
-
-# target to build an object file
-utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o:
-	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
-.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.cpp.o
-
-utility/source/utility/convertion/implementation/platform/windows/convert.i: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
-
-.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.i
-
-# target to preprocess a source file
-utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i:
-	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
-.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.cpp.i
-
-utility/source/utility/convertion/implementation/platform/windows/convert.s: utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
-
-.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.s
-
-# target to generate assembly for a file
-utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s:
-	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
-.PHONY : utility/source/utility/convertion/implementation/platform/windows/convert.cpp.s
 
 utility/source/utility/networking/address.o: utility/source/utility/networking/address.cpp.o
 
@@ -431,9 +404,6 @@ help:
 	@echo "... utility/source/utility/convertion/implementation/convert.o"
 	@echo "... utility/source/utility/convertion/implementation/convert.i"
 	@echo "... utility/source/utility/convertion/implementation/convert.s"
-	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.o"
-	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.i"
-	@echo "... utility/source/utility/convertion/implementation/platform/windows/convert.s"
 	@echo "... utility/source/utility/networking/address.o"
 	@echo "... utility/source/utility/networking/address.i"
 	@echo "... utility/source/utility/networking/address.s"

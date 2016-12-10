@@ -63,6 +63,22 @@ std::string convert(uint64_t const &value);
 
 
 template<>
+std::string convert(uint16_t const &value, int const &base);
+
+
+template<>
+std::string convert(uint16_t const &value);
+
+
+template<>
+std::string convert(uint8_t const &value, int const &base);
+
+
+template<>
+std::string convert(uint8_t const &value);
+
+
+template<>
 std::string convert(double const &value, int const &base);
 
 
@@ -104,6 +120,14 @@ int64_t convert(std::string const &value);
 
 template<>
 uint64_t convert(std::string const &value);
+
+
+template<>
+uint16_t convert(std::string const &value);
+
+
+template<>
+uint8_t convert(std::string const &value);
 
 
 template<>

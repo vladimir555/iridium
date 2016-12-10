@@ -23,7 +23,7 @@ namespace {
 
 
 auto const time_format                  = "%Y-%m-%d %H:%M:%S";
-auto const time_scan_format             = "%04i-%02i-%02i %02i:%02i:%02i";
+auto const time_scan_format             = "%04d-%02d-%02d %02d:%02d:%02d";
 auto const time_scan_format_size        = 23;
 auto const double_to_string_buffer_size = 32;
 auto const int_to_string_buffer_size    = 32;
@@ -100,6 +100,30 @@ string convert(uint64_t const &value, int const &base) {
 template<>
 string convert(uint64_t const &value) {
     return convert<string>(value, 10); // ----->
+}
+
+
+template<>
+string convert(uint16_t const &value, int const &base) {
+    return convert<string>(static_cast<uint32_t>(value), base); // ----->
+}
+
+
+template<>
+string convert(uint16_t const &value) {
+    return convert<string>(static_cast<uint32_t>(value)); // ----->
+}
+
+
+template<>
+string convert(uint8_t const &value, int const &base) {
+    return convert<string>(static_cast<uint32_t>(value), base); // ----->
+}
+
+
+template<>
+string convert(uint8_t const &value) {
+    return convert<string>(static_cast<uint32_t>(value)); // ----->
 }
 
 
@@ -246,6 +270,24 @@ uint64_t convert(std::string const &value) {
 
 
 template<>
+uint16_t convert(string const &value) {
+    auto result = convert<uint32_t>(value);
+    if (result > UINT16_MAX)
+        throw runtime_error("convertion '" + value + "' to uint16 error"); // ----->
+    return std::move(result);
+}
+
+
+template<>
+uint8_t convert(string const &value) {
+    auto result = convert<uint32_t>(value);
+    if (result > UINT8_MAX)
+        throw runtime_error("convertion '" + value + "' to uint8 error"); // ----->
+    return std::move(result);
+}
+
+
+template<>
 double convert(std::string const &value) {
     for (auto const &ch: value)
         if ((ch < '0' || ch > '9') && ch != '.' && ch !='-')
@@ -267,7 +309,7 @@ double convert(std::string const &value) {
 template<>
 system_clock::time_point convert(string const &value) {
     if (value.size() != time_scan_format_size)
-       throw runtime_error("convertion 1'" + value + "' to time error");
+       throw runtime_error("convertion '" + value + "' to time error");
 
     struct std::tm tm_ = {};
     auto result = platform::sscanf(value.c_str(), time_scan_format,
@@ -285,11 +327,11 @@ system_clock::time_point convert(string const &value) {
         auto time = platform::mkgmtime(&tm_);
 
         if (time < 0)
-            throw runtime_error("convertion 2'" + value + "' to time error"); // ----->
+            throw runtime_error("convertion '" + value + "' to time error"); // ----->
 
         return system_clock::from_time_t(time); // ----->
     } else
-        throw runtime_error("convertion 3'" + value + "' to time error"); // ----->
+        throw runtime_error("convertion '" + value + "' to time error"); // ----->
 }
 
 

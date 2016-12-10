@@ -44,9 +44,9 @@ string makeTestValue(int const &i) {
 
 template<typename TFrom, typename TTo>
 void runBenchmark() {
-    cout << "convert" << endl
-         << "from: " << string(typeid(TFrom).name()) << endl
-         << "to:   " << string(typeid(TTo).name()) << endl;
+    cout << "convert"                                   << endl
+         << "from: " << string(typeid(TFrom).name())    << endl
+         << "to  : " << string(typeid(TTo).name())      << endl;
 
 
 #ifdef MACOS_PLATFORM
@@ -121,6 +121,7 @@ TEST(convertion, types) {
     ASSERT_EQ("true"        , convert<string>(true));
     ASSERT_EQ("false"       , convert<string>(false));
 
+    ASSERT_EQ("12345"       , convert<string>(static_cast<uint64_t>(12345)));
     ASSERT_EQ("5"           , convert<string>(static_cast<uint64_t>(5)));
     ASSERT_EQ("5"           , convert<string>(static_cast<uint32_t>(5)));
     ASSERT_EQ("-5"          , convert<string>(static_cast<int64_t>(-5)));
@@ -160,6 +161,9 @@ TEST(convertion, types) {
     ASSERT_EQ(1430802305,
               system_clock::to_time_t(convert<system_clock::time_point>(
               string("2015-05-05 05:05:05.000"))));
+    ASSERT_EQ(1430784000,
+              system_clock::to_time_t(convert<system_clock::time_point>(
+              string("2015-05-05 00:00:00.000"))));
 #ifdef PLATFORM_CPU64
     ASSERT_EQ(4449517261,
               system_clock::to_time_t(convert<system_clock::time_point>(

@@ -3,6 +3,7 @@
 
 
 #include <stdint.h>
+#include <algorithm>
 
 
 namespace {
@@ -15,6 +16,7 @@ void itoaInternal(TInt value, char *buffer, int const &base) {
         buffer++;
         value = -value;
     }
+    char *buffer_begin = buffer;
     do {
         char ch = value % base;
         if (ch > 9)
@@ -26,6 +28,7 @@ void itoaInternal(TInt value, char *buffer, int const &base) {
         buffer++;
     } while (value);
    *buffer = 0;
+    std::reverse(buffer_begin, buffer);
 }
 
 
@@ -61,4 +64,4 @@ auto mkgmtime = ::timegm;
 } // utility
 
 
-#endif HEADER_CONVERT_4E798452_2556_4F08_AEB5_E3E462292F8E
+#endif //HEADER_CONVERT_4E798452_2556_4F08_AEB5_E3E462292F8E
