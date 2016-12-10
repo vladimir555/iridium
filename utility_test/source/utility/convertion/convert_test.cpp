@@ -1,4 +1,5 @@
 #include <utility/convertion/convert.h>
+#include <utility/caching/lazy_cacher.h>
 #include <utility/platform.h>
 
 #include <string>
@@ -6,6 +7,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <chrono>
+#include <functional>
 
 #include <gtest/gtest.h>
 
@@ -81,30 +83,30 @@ void runBenchmark() {
                 to[i] = convert<TTo>(static_cast<TFrom>(from[i]));
 
         auto end        = system_clock::now();
-        time_convert = duration_cast<nanoseconds>(end - begin).count();
+        time_convert    = duration_cast<nanoseconds>(end - begin).count();
     }
 
-//    int64_t time_cached_convert = 0;
-//    {
-//        vector<TTo> to(item_count);
-//        auto begin      = system_clock::now();
+    int64_t time_cached_convert = 0;
+    {
+        vector<TTo> to(item_count);
+        auto begin      = system_clock::now();
 
-//        auto convertCached = std::bind(
-//                    utility::caching::LazyCacher<TTo, TFrom>::cacheFunc,
-//                    convert<TTo, TFrom>,
-//                    std::placeholders::_1);
+        auto convertCached = std::bind(
+                    utility::caching::LazyCacher<TTo, TFrom>::cacheFunc,
+                    convert<TTo, TFrom>,
+                    std::placeholders::_1);
 
-//        for (size_t n = 0; n < iteration_count; n++)
-//            for (size_t i = 0; i < item_count; i++)
-//                to[i] = convertCached<TTo>(static_cast<TFrom>(from[i]));
+        for (size_t n = 0; n < iteration_count; n++)
+            for (size_t i = 0; i < item_count; i++)
+                to[i] = convertCached(static_cast<TFrom>(from[i]));
 
-//        auto end              = system_clock::now();
-//        time_cached_convert   = duration_cast<nanoseconds>(end - begin).count();
-//    }
+        auto end              = system_clock::now();
+        time_cached_convert   = duration_cast<nanoseconds>(end - begin).count();
+    }
 
     cout << "convert        time: " << time_convert << " ns" << endl;
-//    cout << "convert cached time: " << time_convert << " ns" << endl;
-//    cout << "convert vs cached convert: " << (time_convert * 100 / time_cached_convert) << " %" << endl;
+    cout << "convert cached time: " << time_convert << " ns" << endl;
+    cout << "convert vs cached convert: " << (time_convert * 100 / time_cached_convert) << " %" << endl;
     cout << endl;
 }
 
