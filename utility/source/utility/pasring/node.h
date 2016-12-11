@@ -47,15 +47,13 @@ public:
     ///
     virtual bool hasChilds() const = 0;
     ///
-    virtual INode::TSharedPtr addChilds() const = 0;
-    ///
     virtual INode::TSharedPtr addChild(INode::TSharedPtr const &child_node) = 0;
     ///
     virtual INode::TSharedPtr addChild(std::string const &name) = 0;
     ///
     virtual INode::TSharedPtr addChild(std::string const &name, std::string const &value) = 0;
     ///
-    virtual INode::TConstSharedPtr clone() const = 0;
+    virtual INode::TSharedPtr clone() const = 0;
     ///
     static std::string const PATH_DELIMITER;
 };
