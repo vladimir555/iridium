@@ -237,7 +237,7 @@ int64_t convert(std::string const &value) {
         if ((ch < '0' || ch > '9') && ch != '-')
             throw runtime_error("convertion '" + value + "' to int64 error");
 
-    int64_t i = atol(value.c_str());
+    int64_t i = atoll(value.c_str());
 
     if (i == 0) {
         auto result = platform::sscanf(value.c_str(), "%i", &i);
