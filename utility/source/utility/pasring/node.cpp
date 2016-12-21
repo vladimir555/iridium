@@ -19,7 +19,7 @@ namespace {
 
 
 string convertNodeToString(utility::parsing::INode::TConstSharedPtr const &node, string const &tab = "") {
-    string result = tab + "'" + node->getName() + "'" + " = " + node->getValue() + "'";
+    string result = tab + "'" + node->getName() + "'" + " = '" + node->getValue() + "'\n";
     for (auto const &i: *node)
         result += convertNodeToString(i, tab + "  ");
     return result; // ----->
