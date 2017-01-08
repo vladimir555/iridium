@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.0/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.1/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.7.0/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.7.1/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/aa/workspace/qtcreator/utility
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.7.0/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.7.1/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.7.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.7.1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -81,7 +81,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.7.0/bin/ctest --force-new-ctest-process $(ARGS)
+	/usr/local/Cellar/cmake/3.7.1/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -254,6 +254,60 @@ utility/source/utility/pasring/implementation/node_.s: utility/source/utility/pa
 utility/source/utility/pasring/implementation/node_.cpp.s:
 	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/node_.cpp.s
 .PHONY : utility/source/utility/pasring/implementation/node_.cpp.s
+
+utility/source/utility/pasring/implementation/parser.o: utility/source/utility/pasring/implementation/parser.cpp.o
+
+.PHONY : utility/source/utility/pasring/implementation/parser.o
+
+# target to build an object file
+utility/source/utility/pasring/implementation/parser.cpp.o:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/parser.cpp.o
+.PHONY : utility/source/utility/pasring/implementation/parser.cpp.o
+
+utility/source/utility/pasring/implementation/parser.i: utility/source/utility/pasring/implementation/parser.cpp.i
+
+.PHONY : utility/source/utility/pasring/implementation/parser.i
+
+# target to preprocess a source file
+utility/source/utility/pasring/implementation/parser.cpp.i:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/parser.cpp.i
+.PHONY : utility/source/utility/pasring/implementation/parser.cpp.i
+
+utility/source/utility/pasring/implementation/parser.s: utility/source/utility/pasring/implementation/parser.cpp.s
+
+.PHONY : utility/source/utility/pasring/implementation/parser.s
+
+# target to generate assembly for a file
+utility/source/utility/pasring/implementation/parser.cpp.s:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/parser.cpp.s
+.PHONY : utility/source/utility/pasring/implementation/parser.cpp.s
+
+utility/source/utility/pasring/implementation/xml_parser.o: utility/source/utility/pasring/implementation/xml_parser.cpp.o
+
+.PHONY : utility/source/utility/pasring/implementation/xml_parser.o
+
+# target to build an object file
+utility/source/utility/pasring/implementation/xml_parser.cpp.o:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/xml_parser.cpp.o
+.PHONY : utility/source/utility/pasring/implementation/xml_parser.cpp.o
+
+utility/source/utility/pasring/implementation/xml_parser.i: utility/source/utility/pasring/implementation/xml_parser.cpp.i
+
+.PHONY : utility/source/utility/pasring/implementation/xml_parser.i
+
+# target to preprocess a source file
+utility/source/utility/pasring/implementation/xml_parser.cpp.i:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/xml_parser.cpp.i
+.PHONY : utility/source/utility/pasring/implementation/xml_parser.cpp.i
+
+utility/source/utility/pasring/implementation/xml_parser.s: utility/source/utility/pasring/implementation/xml_parser.cpp.s
+
+.PHONY : utility/source/utility/pasring/implementation/xml_parser.s
+
+# target to generate assembly for a file
+utility/source/utility/pasring/implementation/xml_parser.cpp.s:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/xml_parser.cpp.s
+.PHONY : utility/source/utility/pasring/implementation/xml_parser.cpp.s
 
 utility/source/utility/pasring/node.o: utility/source/utility/pasring/node.cpp.o
 
@@ -494,6 +548,12 @@ help:
 	@echo "... utility/source/utility/pasring/implementation/node_.o"
 	@echo "... utility/source/utility/pasring/implementation/node_.i"
 	@echo "... utility/source/utility/pasring/implementation/node_.s"
+	@echo "... utility/source/utility/pasring/implementation/parser.o"
+	@echo "... utility/source/utility/pasring/implementation/parser.i"
+	@echo "... utility/source/utility/pasring/implementation/parser.s"
+	@echo "... utility/source/utility/pasring/implementation/xml_parser.o"
+	@echo "... utility/source/utility/pasring/implementation/xml_parser.i"
+	@echo "... utility/source/utility/pasring/implementation/xml_parser.s"
 	@echo "... utility/source/utility/pasring/node.o"
 	@echo "... utility/source/utility/pasring/node.i"
 	@echo "... utility/source/utility/pasring/node.s"
