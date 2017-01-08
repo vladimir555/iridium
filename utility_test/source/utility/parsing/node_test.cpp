@@ -46,10 +46,13 @@ string const expected_xml = "";
 
 TEST(parsing, nodes) {
     auto node = createTestNode();
+    //cout << convert<string>(node) << endl;
 
-    cout << convert<string>(node) << endl;
-
-    ASSERT_TRUE(true);
+    ASSERT_TRUE(node->findChilds("/wrong_node/").empty());
+    ASSERT_TRUE(node->findChilds("wrong_node/").empty());
+    ASSERT_TRUE(node->findChilds("/").empty());
+    ASSERT_TRUE(node->findChilds("").empty());
+    ASSERT_EQ(3, node->findChilds("/item").size());
 }
 
 

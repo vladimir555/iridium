@@ -18,6 +18,15 @@ T assertExists(T const &&t, std::string const &error) {
 }
 
 
+template<typename T>
+T assertOne(T const &&t, std::string const &error) {
+    if (t.size() == 1)
+        return t; // ----->
+    else
+        throw std::runtime_error(error);
+}
+
+
 } // utility
 
 

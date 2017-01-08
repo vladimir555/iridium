@@ -525,6 +525,33 @@ utility_test/source/utility/parsing/node_test.cpp.s:
 	$(MAKE) -f CMakeFiles/utility_test.dir/build.make CMakeFiles/utility_test.dir/utility_test/source/utility/parsing/node_test.cpp.s
 .PHONY : utility_test/source/utility/parsing/node_test.cpp.s
 
+utility_test/source/utility/parsing/parsing_test.o: utility_test/source/utility/parsing/parsing_test.cpp.o
+
+.PHONY : utility_test/source/utility/parsing/parsing_test.o
+
+# target to build an object file
+utility_test/source/utility/parsing/parsing_test.cpp.o:
+	$(MAKE) -f CMakeFiles/utility_test.dir/build.make CMakeFiles/utility_test.dir/utility_test/source/utility/parsing/parsing_test.cpp.o
+.PHONY : utility_test/source/utility/parsing/parsing_test.cpp.o
+
+utility_test/source/utility/parsing/parsing_test.i: utility_test/source/utility/parsing/parsing_test.cpp.i
+
+.PHONY : utility_test/source/utility/parsing/parsing_test.i
+
+# target to preprocess a source file
+utility_test/source/utility/parsing/parsing_test.cpp.i:
+	$(MAKE) -f CMakeFiles/utility_test.dir/build.make CMakeFiles/utility_test.dir/utility_test/source/utility/parsing/parsing_test.cpp.i
+.PHONY : utility_test/source/utility/parsing/parsing_test.cpp.i
+
+utility_test/source/utility/parsing/parsing_test.s: utility_test/source/utility/parsing/parsing_test.cpp.s
+
+.PHONY : utility_test/source/utility/parsing/parsing_test.s
+
+# target to generate assembly for a file
+utility_test/source/utility/parsing/parsing_test.cpp.s:
+	$(MAKE) -f CMakeFiles/utility_test.dir/build.make CMakeFiles/utility_test.dir/utility_test/source/utility/parsing/parsing_test.cpp.s
+.PHONY : utility_test/source/utility/parsing/parsing_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -578,6 +605,9 @@ help:
 	@echo "... utility_test/source/utility/parsing/node_test.o"
 	@echo "... utility_test/source/utility/parsing/node_test.i"
 	@echo "... utility_test/source/utility/parsing/node_test.s"
+	@echo "... utility_test/source/utility/parsing/parsing_test.o"
+	@echo "... utility_test/source/utility/parsing/parsing_test.i"
+	@echo "... utility_test/source/utility/parsing/parsing_test.s"
 .PHONY : help
 
 

@@ -246,6 +246,9 @@
 		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility_test/source/utility/parsing/node_test.cpp">
 			<Option target="utility_test"/>
 		</Unit>
+		<Unit filename="/Users/aa/workspace/qtcreator/utility/utility_test/source/utility/parsing/parsing_test.cpp">
+			<Option target="utility_test"/>
+		</Unit>
 		<Unit filename="/Users/aa/workspace/qtcreator/utility/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
