@@ -228,6 +228,33 @@ utility/source/utility/networking/server/socket/implementation/socket.cpp.s:
 	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/networking/server/socket/implementation/socket.cpp.s
 .PHONY : utility/source/utility/networking/server/socket/implementation/socket.cpp.s
 
+utility/source/utility/pasring/implementation/json_parser.o: utility/source/utility/pasring/implementation/json_parser.cpp.o
+
+.PHONY : utility/source/utility/pasring/implementation/json_parser.o
+
+# target to build an object file
+utility/source/utility/pasring/implementation/json_parser.cpp.o:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/json_parser.cpp.o
+.PHONY : utility/source/utility/pasring/implementation/json_parser.cpp.o
+
+utility/source/utility/pasring/implementation/json_parser.i: utility/source/utility/pasring/implementation/json_parser.cpp.i
+
+.PHONY : utility/source/utility/pasring/implementation/json_parser.i
+
+# target to preprocess a source file
+utility/source/utility/pasring/implementation/json_parser.cpp.i:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/json_parser.cpp.i
+.PHONY : utility/source/utility/pasring/implementation/json_parser.cpp.i
+
+utility/source/utility/pasring/implementation/json_parser.s: utility/source/utility/pasring/implementation/json_parser.cpp.s
+
+.PHONY : utility/source/utility/pasring/implementation/json_parser.s
+
+# target to generate assembly for a file
+utility/source/utility/pasring/implementation/json_parser.cpp.s:
+	$(MAKE) -f CMakeFiles/utility.dir/build.make CMakeFiles/utility.dir/utility/source/utility/pasring/implementation/json_parser.cpp.s
+.PHONY : utility/source/utility/pasring/implementation/json_parser.cpp.s
+
 utility/source/utility/pasring/implementation/node_.o: utility/source/utility/pasring/implementation/node_.cpp.o
 
 .PHONY : utility/source/utility/pasring/implementation/node_.o
@@ -572,6 +599,9 @@ help:
 	@echo "... utility/source/utility/networking/server/socket/implementation/socket.o"
 	@echo "... utility/source/utility/networking/server/socket/implementation/socket.i"
 	@echo "... utility/source/utility/networking/server/socket/implementation/socket.s"
+	@echo "... utility/source/utility/pasring/implementation/json_parser.o"
+	@echo "... utility/source/utility/pasring/implementation/json_parser.i"
+	@echo "... utility/source/utility/pasring/implementation/json_parser.s"
 	@echo "... utility/source/utility/pasring/implementation/node_.o"
 	@echo "... utility/source/utility/pasring/implementation/node_.i"
 	@echo "... utility/source/utility/pasring/implementation/node_.s"
