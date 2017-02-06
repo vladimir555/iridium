@@ -14,11 +14,11 @@ namespace parsing {
 
 class IParser {
 public:
-    DEFINE_CREATE(IParser)
+    DEFINE_SMART_PTR(IParser);
     ///
     virtual ~IParser() = default;
     ///
-    virtual INode::TSharedPtr getRootNode() = 0;
+    virtual INode::TSharedPtr getRootNode() const = 0;
     ///
     virtual void setRootNode(INode::TSharedPtr const &root_node) = 0;
     ///

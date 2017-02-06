@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(utility)
 
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
+
 #BUILD
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin CACHE PATH "Single Directory for all")

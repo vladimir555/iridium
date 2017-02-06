@@ -58,6 +58,7 @@ INode::TNodes CNode::findChilds(string const &path) {
             if (node->getName() == child_path)
                 nodes.splice(nodes.end(), node->findChilds(next_path));
     }
+
     return nodes; // ----->
 }
 

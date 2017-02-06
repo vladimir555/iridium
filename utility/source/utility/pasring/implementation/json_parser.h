@@ -4,7 +4,6 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/pasring/node.h"
-#include "utility/pasring/parser.h"
 
 #include "parser.h"
 
@@ -14,12 +13,9 @@ namespace parsing {
 namespace implementation {
 
 
-class CJSONParser:
-    public IParser,
-    public CParser
-{
+class CJSONParser: public CParser {
 public:
-    DEFINE_SMART_PTR(CJSONParser);
+    DEFINE_CREATE(CJSONParser)
     ///
     CJSONParser() = default;
     ///

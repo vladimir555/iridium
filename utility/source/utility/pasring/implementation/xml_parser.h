@@ -4,7 +4,6 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/pasring/node.h"
-#include "utility/pasring/parser.h"
 
 #include "parser.h"
 
@@ -15,12 +14,9 @@ namespace implementation {
 
 
 ///
-class CXMLParser:
-    public IParser,
-    public CParser
-{
+class CXMLParser: public CParser {
 public:
-    DEFINE_SMART_PTR(CXMLParser);
+    DEFINE_CREATE(CXMLParser)
     ///
     CXMLParser() = default;
     ///

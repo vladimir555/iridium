@@ -32,11 +32,11 @@ INode::TSharedPtr convertXMLNodeToNode(TXMLNode const * const xml_node) {
 
         auto xml_node_attribute = xml_node->first_attribute();
         while (xml_node_attribute) {
-            node->addChild((xml_node_attribute->name(), xml_node_attribute->value()));
+            node->addChild(xml_node_attribute->name(), xml_node_attribute->value());
             xml_node_attribute = xml_node_attribute->next_attribute();
         }
 
-        if(xml_node->value_size() > 0 )
+        if(xml_node->value_size() > 0)
             node->addChild("", xml_node->value());
 
         auto xml_node_child = xml_node->first_node();

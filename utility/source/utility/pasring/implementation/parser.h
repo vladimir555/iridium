@@ -3,6 +3,7 @@
 
 
 #include "utility/pasring/node.h"
+#include "utility/pasring/parser.h"
 
 
 namespace utility {
@@ -10,16 +11,16 @@ namespace parsing {
 namespace implementation {
 
 
-class CParser {
+class CParser: public IParser {
 public:
     ///
     CParser() = default;
     ///
     ~CParser() = default;
     ///
-    virtual INode::TSharedPtr getRootNode();
+    virtual INode::TSharedPtr getRootNode() const override;
     ///
-    virtual void setRootNode(INode::TSharedPtr const &root_node);
+    virtual void setRootNode(INode::TSharedPtr const &root_node) override;
 
 protected:
     ///

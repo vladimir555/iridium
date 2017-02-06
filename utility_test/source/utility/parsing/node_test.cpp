@@ -46,7 +46,6 @@ string const expected_xml = "";
 
 TEST(parsing, nodes) {
     auto node = createTestNode();
-    //cout << convert<string>(node) << endl;
 
     ASSERT_TRUE(node->findChilds("/wrong_node/").empty());
     ASSERT_TRUE(node->findChilds("wrong_node/").empty());
