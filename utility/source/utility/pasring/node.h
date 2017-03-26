@@ -45,6 +45,8 @@ public:
     ///
     virtual const_iterator end() const = 0;
     ///
+    virtual size_t size() const = 0;
+    ///
     virtual bool hasChilds() const = 0;
     ///
     virtual INode::TSharedPtr addChild(INode::TSharedPtr const &child_node) = 0;

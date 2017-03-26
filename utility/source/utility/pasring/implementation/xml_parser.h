@@ -22,9 +22,9 @@ public:
     ///
     virtual ~CXMLParser() = default;
     ///
-    virtual void parse(std::string const &source);
+    virtual void parse(std::string const &source) override;
     ///
-    virtual std::string compose() const;
+    virtual std::string compose() const override;
 };
 
 

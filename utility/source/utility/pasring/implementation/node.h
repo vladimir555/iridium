@@ -40,7 +40,7 @@ public:
     ///
     INode::const_iterator end() const override;
     ///
-    size_t size() const;
+    size_t size() const override;
     ///
     bool hasChilds() const override;
     ///

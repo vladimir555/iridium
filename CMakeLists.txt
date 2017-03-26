@@ -51,6 +51,7 @@ target_link_libraries(
   ${PROJECT_NAME}
   ${GTEST_LIBRARY} 
   ${GTEST_MAIN_LIBRARY}
+  libjsoncpp.a
 )
 
 add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})

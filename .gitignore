@@ -1,7 +1,12 @@
-/CMakeLists.txt.user
-/Makefile
-/CTestTestfile.cmake
 /CMakeFiles
 /bin
 /lib
+/obj
 
+/.DS_Store
+CMakeCache.txt
+CTestTestfile.cmake
+Makefile
+cmake_install.cmake
+CTestTestfile.cmake
+cmake_install.cmake

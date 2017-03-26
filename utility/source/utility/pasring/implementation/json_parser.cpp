@@ -2,7 +2,7 @@
 
 #include <map>
 #include <list>
-#include <jsoncpp/json.h>
+#include <json/json.h>
 
 #include "utility/pasring/implementation/node.h"
 #include "utility/assert.h"
@@ -24,6 +24,7 @@ namespace implementation {
 void convertJsonNodeToNode(Value const &json_node, INode::TSharedPtr node) {
     for (auto json_node_item = json_node.begin(); json_node_item != json_node.end(); json_node_item++) {
         string json_node_name = json_node_item.name();
+
         switch (json_node_item->type()) {
         case Json::arrayValue:
             for (auto json_array_item = json_node_item->begin(); json_array_item != json_node_item->end(); json_array_item++) {
@@ -55,14 +56,13 @@ void convertJsonNodeToNode(Value const &json_node, INode::TSharedPtr node) {
 }
 
 
-
 void convertNodeToJsonNode(INode::TConstSharedPtr const &node, Value &json_node_) {
     map<string, list<INode::TConstSharedPtr> > m;
 
     for (auto const &i: *node)
         m[i->getName()].push_back(i);
 
-    for (auto const &i : m) {
+    for (auto const &i: m) {
         Value json_child;
 
         if (i.second.size() == 1) {
@@ -92,27 +92,28 @@ void convertNodeToJsonNode(INode::TConstSharedPtr const &node, Value &json_node_
 
 
 void CJSONParser::parse(std::string const &source) {
-    Value   root;
-    Reader  reader;
-    bool    is_parsed = reader.parse(source, root);
+    Value           root;
+    Json::Reader    reader;
+    bool            is_parsed = reader.parse(source, root);
 
     if (is_parsed) {
-        m_root_node = CNode::create("", "");
+        m_root_node = CNode::create("root", "");
         convertJsonNodeToNode(root, m_root_node);
-        if (m_root_node->hasChilds())
+        if (m_root_node->size() == 1)
             m_root_node = *m_root_node->begin();
         else
-            throw std::runtime_error("json parsing error"); // ----->
+            throw std::runtime_error("json parsing error: empty nodes"); // ----->
     } else
-        throw std::runtime_error("json parsing error"); // ----->
+        throw std::runtime_error("json parsing error: recursive parse error"); // ----->
 }
 
 
 std::string CJSONParser::compose() const {
     Value root(Json::objectValue);
     convertNodeToJsonNode(m_root_node, root);
-    FastWriter json_fast_writer;
-    return json_fast_writer.write(root);
+    //Json::FastWriter writer;
+    Json::StyledWriter writer;
+    return writer.write(root);
 }
 
 
