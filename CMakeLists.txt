@@ -15,16 +15,17 @@ add_compile_options("-std=c++11")
 add_compile_options("-Wall")
 
 file(GLOB_RECURSE SOURCE 
-    ${CMAKE_SOURCE_DIR}/utility/source/utility/*.h
-    ${CMAKE_SOURCE_DIR}/utility/source/utility/*.cpp
+    ${CMAKE_SOURCE_DIR}/source/utility/*.h
+    ${CMAKE_SOURCE_DIR}/source/utility/*.cpp
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/utility/source ${CMAKE_SOURCE_DIR}/utility/include)
+include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/include /usr/include/jsoncpp)
 
 #add_executable(${PROJECT_NAME} ${SOURCE})
 
 #find_package(Boost COMPONENTS system REQUIRED)
 #set(Poco_LIBRARIES libPocoFoundation.so libPocoUtil.so libPocoNet.so libPocoJSON.so)
+find_package(Threads)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE})
 
@@ -39,8 +40,8 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
 # source files for test
 file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_SOURCE_DIR}/utility_test/source/utility/*.h
-    ${CMAKE_SOURCE_DIR}/utility_test/source/utility/*.cpp
+    ${CMAKE_SOURCE_DIR}/source/utility_test/*.h
+    ${CMAKE_SOURCE_DIR}/source/utility_test/*.cpp
 )
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
@@ -51,7 +52,7 @@ target_link_libraries(
   ${PROJECT_NAME}
   ${GTEST_LIBRARY} 
   ${GTEST_MAIN_LIBRARY}
-  libjsoncpp.a
+  ${CMAKE_THREAD_LIBS_INIT}
 )
 
 add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})
