@@ -222,6 +222,12 @@ TEST(convertion, enum_) {
 
     ASSERT_THROW(convert<TEnum>(string("E55")), std::runtime_error);
     ASSERT_THROW(convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))), std::runtime_error);
+
+    std::list<TEnum::TEnumInternal> l;
+    for (auto const &i: TEnum::getEnums())
+        l.push_back(i);
+
+    ASSERT_EQ(std::list<TEnum::TEnumInternal>( { TEnum::E1, TEnum::E2, TEnum::E3, TEnum::E4, TEnum::E5 } ), l);
 }
 
 
