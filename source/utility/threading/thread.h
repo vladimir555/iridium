@@ -19,7 +19,7 @@ class IThread:
     public pattern::IInitializable
 {
 public:
-    DEFINE_SMART_PTR(IThread);
+    DEFINE_SMART_PTR(IThread)
     ///
     virtual ~IThread() = default;
     /// for std::map caching

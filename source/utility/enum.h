@@ -57,7 +57,7 @@ private: \
     static std::map<TEnumInternal, std::string> const map_enum_string; \
     static std::map<TEnumInternal, std::string> const &generateMap() { \
         static std::map<TEnumInternal, std::string> m; \
-        Enums __VA_ARGS__; \
+        Enums __attribute__((unused)) __VA_ARGS__; \
         auto i = Enums::enums.begin(); \
         for (auto const &arg: utility::split(#__VA_ARGS__, ",")) { \
             std::string name  = utility::trim(utility::split(arg, "=")[0]); \

@@ -13,7 +13,7 @@ namespace pattern {
 template<typename TSubject>
 class IPrototype {
 public:
-    DEFINE_SMART_PTR(IPrototype<TSubject>);
+    DEFINE_SMART_PTR(IPrototype<TSubject>)
     /// default destructor
     virtual ~IPrototype() = default;
     /// 

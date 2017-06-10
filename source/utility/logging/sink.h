@@ -17,7 +17,7 @@ namespace logging {
 ///
 class ISink : public pattern::IInitializable {
 public:
-    DEFINE_SMART_PTR(ISink);
+    DEFINE_SMART_PTR(ISink)
     ///
     DEFINE_ENUM(
         TType,

@@ -15,7 +15,7 @@ namespace fs {
 
 class ICache: public pattern::IInitializable {
 public:
-    DEFINE_SMART_PTR(ICache);
+    DEFINE_SMART_PTR(ICache)
     /// destructor
     virtual ~ICache() = default;
     /// insert value, return value id

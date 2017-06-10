@@ -17,7 +17,7 @@ namespace implementation {
 
 class CFastTextWriter : public ITextWriter {
 public:
-    DEFINE_CREATE(CFastTextWriter);
+    DEFINE_CREATE(CFastTextWriter)
     ///
     explicit CFastTextWriter(std::string const &file_name);
     ///

@@ -16,7 +16,7 @@ namespace parsing {
 ///
 class IParser {
 public:
-    DEFINE_SMART_PTR(IParser);
+    DEFINE_SMART_PTR(IParser)
     ///
     virtual ~IParser() = default;
     ///

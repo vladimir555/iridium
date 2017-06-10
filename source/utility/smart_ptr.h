@@ -9,7 +9,7 @@
 typedef std::shared_ptr<TClass>         TSharedPtr; \
 typedef std::weak_ptr  <TClass>         TWeakPtr; \
 typedef std::shared_ptr<TClass const>   TConstSharedPtr; \
-typedef std::weak_ptr  <TClass const>   TConstWeakPtr
+typedef std::weak_ptr  <TClass const>   TConstWeakPtr;
 
 
 #define DEFINE_CREATE(TClass) \

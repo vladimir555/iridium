@@ -21,7 +21,7 @@ namespace logging {
 
 
 Logger::~Logger() {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     if (m_channel) {
         m_channel->finalize();
         m_channel.reset();
@@ -32,7 +32,7 @@ Logger::~Logger() {
 // todo: factory 
 // todo: refactoring for external sinks via convertion or factory ! one sub config for one sink
 void Logger::update(config::TLogger const &config) {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     if (m_channel)
         m_channel->finalize();
 
@@ -70,7 +70,7 @@ void Logger::log(TEvent &&e) {
 
 
 void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     if (m_channel)
         m_channel->finalize();
     else

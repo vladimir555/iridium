@@ -14,7 +14,7 @@ namespace threading {
 template<typename TItem>
 class IAsyncQueue {
 public:
-    DEFINE_SMART_PTR(IAsyncQueue);
+    DEFINE_SMART_PTR(IAsyncQueue)
     ///
     virtual ~IAsyncQueue() = default;
     ///

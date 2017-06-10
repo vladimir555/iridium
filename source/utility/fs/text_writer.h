@@ -15,7 +15,7 @@ namespace fs {
 
 class ITextWriter: public pattern::IInitializable {
 public:
-    DEFINE_SMART_PTR(ITextWriter);
+    DEFINE_SMART_PTR(ITextWriter)
     ///
     ~ITextWriter() = default;
     ///

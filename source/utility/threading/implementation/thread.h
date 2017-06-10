@@ -22,7 +22,7 @@ class CThread:
     public pattern::NonCopyable
 {
 public:
-    DEFINE_CREATE(CThread);
+    DEFINE_CREATE(CThread)
     ///
     CThread(IRunnable::TSharedPtr runnuble, std::string const &name);
     ///

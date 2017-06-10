@@ -2,6 +2,7 @@
 
 #include <utility/parsing/serialization/node.h>
 #include <utility/parsing/implementation/node.h>
+#include <utility/enum.h>
 
 #include <iostream>
 
@@ -20,7 +21,7 @@ namespace serialization {
 
 
 struct C {
-
+    DEFINE_ENUM(TEnum, ENUM1, ENUM2)
 };
 
 
@@ -29,7 +30,7 @@ DEFINE_ROOT_NODE_BEGIN(Root)
     DEFINE_NODE_BEGIN(FirstItem)
         DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue1")
         DEFINE_ATTRIBUTE(int, AttributeTwo)
-        //DEFINE_ATTRIBUTE(C::Enum, Enum)
+        DEFINE_ATTRIBUTE(C::TEnum, Enum)
     DEFINE_NODE_END(FirstItem)
 
     DEFINE_NODE_BEGIN(SecondItem)
@@ -52,7 +53,7 @@ TEST(parsing, serialization) {
     {
         auto item = node->addChild("first-item");
         item->addChild("attribute-two", "55");
-        item->addChild("enum", "ENUM_2");
+        item->addChild("enum", "ENUM2");
     }
 
     node->addChild("second_item")->addChild("attribute-one", "second-item-value");
@@ -77,9 +78,13 @@ TEST(parsing, serialization) {
 
     ASSERT_EQ("defaultValue1", static_cast<string>   (root.FirstItem.AttributeOne));
     ASSERT_EQ(55             , static_cast<int>      (root.FirstItem.AttributeTwo));
+    ASSERT_EQ(C::TEnum::ENUM2, root.FirstItem.Enum.get());
 }
 
 
 } // serialization
 } // parsing
 } // utility
+
+
+IMPLEMENT_ENUM(utility::parsing::serialization::C::TEnum)

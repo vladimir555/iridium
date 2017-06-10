@@ -49,11 +49,11 @@ private:
 
 
 #define LOCK_SCOPE \
-utility::threading::SynchronizedScope _(this, __FUNCTION__)
+utility::threading::SynchronizedScope _(this, __FUNCTION__);
 
 
 #define LOCK_SCOPE_FAST \
-utility::threading::SynchronizedScopeSimple _(this)
+utility::threading::SynchronizedScopeSimple _(this);
 
 
 #endif // HEADER_SYNCHRONIZED_63BFE515_3627_47E2_A357_FE7D548A4136

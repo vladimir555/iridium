@@ -35,7 +35,7 @@ class CAsyncQueue:
     private CCondition
 {
 public:
-    DEFINE_CREATE(CAsyncQueue);
+    DEFINE_CREATE(CAsyncQueue)
     ///
     CAsyncQueue();
     ///
@@ -69,7 +69,7 @@ CAsyncQueue<TItem>::CAsyncQueue()
 
 template<typename TItem>
 size_t CAsyncQueue<TItem>::push(TItem const &item) {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
 
     m_is_do_wait = true;
     m_items.push_back(item);
@@ -81,7 +81,7 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
 
 template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
 
     m_is_do_wait    = true;
     auto items_     = items;
@@ -98,7 +98,7 @@ std::list<TItem> CAsyncQueue<TItem>::pop() {
     while (m_is_do_wait && m_items.empty())
         wait();
     {
-        LOCK_SCOPE_FAST;
+        LOCK_SCOPE_FAST
         return std::move(m_items); // ----->
     }
 }

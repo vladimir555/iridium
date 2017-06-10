@@ -12,31 +12,31 @@ namespace implementation {
 
 
 void CChannel::initialize() {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
     broadcast(&ISink::initialize);
 }
 
 
 void CChannel::finalize() {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
     broadcast(&ISink::finalize);
 }
 
 
 void CChannel::attach(ISink::TSharedPtr sink) {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
     Broadcaster<ISink>::attach(sink);
 }
 
 
 void CChannel::detach(ISink::TSharedPtr sink) {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
     Broadcaster<ISink>::detach(sink);
 }
 
 
 void CChannel::log(TEvent &&e) {
-    LOCK_SCOPE_FAST;
+    LOCK_SCOPE_FAST
     broadcast(&ISink::log, e);
 }
 

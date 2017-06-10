@@ -13,7 +13,7 @@ namespace threading {
 ///
 class IMutex {
 public:
-    DEFINE_SMART_PTR(IMutex);
+    DEFINE_SMART_PTR(IMutex)
     ///
     virtual ~IMutex() = default;
     ///

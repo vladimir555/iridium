@@ -15,7 +15,7 @@ namespace system {
 
 class ITerminatorHandler {
 public:
-    DEFINE_SMART_PTR(ITerminatorHandler);
+    DEFINE_SMART_PTR(ITerminatorHandler)
     ///
     virtual ~ITerminatorHandler() = default;
 public:

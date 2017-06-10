@@ -23,7 +23,7 @@ class CChannel:
     public threading::implementation::CMutex
 {
 public:
-    DEFINE_CREATE(CChannel);
+    DEFINE_CREATE(CChannel)
     ///
     CChannel() = default;
     ///

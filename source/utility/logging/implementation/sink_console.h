@@ -18,7 +18,7 @@ namespace implementation {
 //todo: async base sink with worker
 class CSinkConsole : public CSink {
 public:
-    DEFINE_CREATE(CSinkConsole);
+    DEFINE_CREATE(CSinkConsole)
     ///
     explicit CSinkConsole(TEvent::TLevel const &level);
     ///
@@ -28,7 +28,7 @@ private:
     ///
     class CSinkWorker : public threading::implementation::CWorker<TEvent> {
     public:
-        DEFINE_CREATE(CSinkWorker);
+        DEFINE_CREATE(CSinkWorker)
         CSinkWorker();
         virtual ~CSinkWorker() = default;
     private:

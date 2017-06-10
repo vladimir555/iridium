@@ -14,7 +14,7 @@ namespace threading {
 ///
 class IRunnable {
 public:
-    DEFINE_SMART_PTR(IRunnable);
+    DEFINE_SMART_PTR(IRunnable)
     ///
     virtual ~IRunnable() = default;
     ///

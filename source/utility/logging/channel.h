@@ -13,7 +13,7 @@ namespace logging {
 ///
 class IChannel : public pattern::IInitializable {
 public:
-    DEFINE_SMART_PTR(IChannel);
+    DEFINE_SMART_PTR(IChannel)
     ///
     virtual ~IChannel() = default;
     ///

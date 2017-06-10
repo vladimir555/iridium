@@ -127,4 +127,4 @@ void itoa(uint64_t const &value, char *buffer, int const &base) {
 } // utility
 
 
-#endif
+#endif // LINUX_PLATFORM FREEBSD_PLATFORM MACOS_PLATFORM

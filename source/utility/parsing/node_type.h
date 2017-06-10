@@ -18,7 +18,7 @@ namespace parsing {
 template<typename TValue>
 class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
-    DEFINE_SMART_PTR(INodeType<TValue>);
+    DEFINE_SMART_PTR(INodeType<TValue>)
     ///
     typedef std::list<typename INodeType::TSharedPtr> TNodes;
     ///

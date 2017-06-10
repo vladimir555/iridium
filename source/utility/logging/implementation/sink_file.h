@@ -18,7 +18,7 @@ namespace implementation {
 ///
 class CSinkFile: public CSink {
 public:
-    DEFINE_CREATE(CSinkFile);
+    DEFINE_CREATE(CSinkFile)
     ///
     CSinkFile(TEvent::TLevel const &level, std::string const &file_name);
     ///
@@ -28,7 +28,7 @@ private:
     ///
     class CSinkWorker : public threading::implementation::CWorker<TEvent> {
     public:
-        DEFINE_CREATE(CSinkWorker);
+        DEFINE_CREATE(CSinkWorker)
         ///
         CSinkWorker(std::string const &file_name, bool const &is_daily_rotation = true);
         ///

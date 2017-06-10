@@ -22,7 +22,7 @@ namespace threading {
 template<typename TItem>
 class IWorker: public pattern::IInitializable {
 public:
-    DEFINE_SMART_PTR(IWorker<TItem>);
+    DEFINE_SMART_PTR(IWorker<TItem>)
     ///
     virtual ~IWorker() = default;
     ///

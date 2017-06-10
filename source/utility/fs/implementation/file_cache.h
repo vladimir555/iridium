@@ -17,7 +17,7 @@ namespace implementation {
 
 class CFileCache : public ICache {
 public:
-    DEFINE_CREATE(CFileCache);
+    DEFINE_CREATE(CFileCache)
     ///
     explicit CFileCache(std::string const &file_name);
     ///

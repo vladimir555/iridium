@@ -13,7 +13,7 @@ namespace threading {
 ///
 class ICondition {
 public:
-    DEFINE_SMART_PTR(ICondition);
+    DEFINE_SMART_PTR(ICondition)
     ///
     virtual ~ICondition() = default;
     ///

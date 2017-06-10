@@ -233,4 +233,3 @@ TEST(convertion, enum_) {
 
 } // convertion
 } // utility
-
