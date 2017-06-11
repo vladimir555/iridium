@@ -14,6 +14,7 @@ namespace implementation {
 
 class CRunnuble: public IRunnable {
 public:
+    DEFINE_CREATE(CRunnuble)
     ///
     CRunnuble();
     ///

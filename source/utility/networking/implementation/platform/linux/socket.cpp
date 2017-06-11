@@ -20,13 +20,13 @@ using utility::convertion::convert;
 namespace {
 
 
-static int const DEFAULT_SOCKET_LISTEN_QUEUE_SIZE   = 5;
-static int const DEFAULT_SOCKET_BUFFER_SIZE         = 5;
+static int const DEFAULT_SOCKET_LISTEN_QUEUE_SIZE   = 16;
+static int const DEFAULT_SOCKET_BUFFER_SIZE         = 512;
 
 
 int assertOK(int const &result, std::string const &message) {
     if (result < 0)
-        throw std::runtime_error(message); // ----->
+        throw std::runtime_error(message + ", " + std::strerror(errno)); // ----->
     else
         return result; // ----->
 }
@@ -46,7 +46,9 @@ CSocket::CSocket(URL const &url)
     m_url(url),
     m_socket(0),
     m_socket_listen_queue_size(DEFAULT_SOCKET_LISTEN_QUEUE_SIZE)
-{}
+{
+    std::cout << "socket constructor 1" << std::endl;
+}
 
 
 CSocket::CSocket(URL const &url, int const &socket)
@@ -54,11 +56,14 @@ CSocket::CSocket(URL const &url, int const &socket)
     m_url(url),
     m_socket(socket),
     m_socket_listen_queue_size(DEFAULT_SOCKET_LISTEN_QUEUE_SIZE)
-{}
+{
+    std::cout << "socket constructor 2 " << m_socket << std::endl;
+}
 
 
 CSocket::~CSocket() {
-    interrupt();
+    //interrupt();
+    std::cout << "socket destructor " << m_socket << std::endl;
 }
 
 
@@ -74,7 +79,8 @@ void CSocket::close() {
 
 
 void CSocket::write(packet_t const &packet) {
-    auto write_size = assertOK(::write(m_socket, packet.data(), packet.size()),
+    void const *buffer = static_cast<void const *>(packet.data());
+    auto write_size = assertOK(::write(m_socket, buffer, packet.size()),
         "socket write error: url " + convert<string>(m_url));
 }
 
