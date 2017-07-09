@@ -26,9 +26,11 @@ public:
     virtual bool operator < (IThread const &thread) const = 0;
     ///
     virtual std::string getName() const = 0;
-    ///
-    static void sleep(int const &milliseconds);
 };
+
+
+void sleep(int const &milliseconds);
+std::string getThreadID();
 
 
 } // threading

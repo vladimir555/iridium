@@ -6,12 +6,12 @@
 
 #include "utility/convertion/convert.h"
 #include "utility/logging/logger.h"
+#include "utility/threading/thread.h"
 
 
 using std::string;
 using std::exception;
 using std::runtime_error;
-using std::this_thread::get_id;
 using std::stringstream;
 using utility::convertion::convert;
 
@@ -24,7 +24,7 @@ SynchronizedScope::SynchronizedScope(IMutex *mutex, string const &scope_name)
 :
     m_mutex(mutex)
 {
-    string scope_name_ = scope_name + ":" + convert<string>(get_id());
+    string scope_name_ = scope_name + ":" + convert<string>(getThreadID());
     try {
         m_mutex->lock();
         m_mutex->m_scope_name = std::move(scope_name_);

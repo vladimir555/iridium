@@ -71,6 +71,30 @@ std::string convert(std::chrono::high_resolution_clock::time_point const &value)
 
 
 template<>
+std::string convert(std::chrono::hours const &value);
+
+
+template<>
+std::string convert(std::chrono::minutes const &value);
+
+
+template<>
+std::string convert(std::chrono::seconds const &value);
+
+
+template<>
+std::string convert(std::chrono::milliseconds const &value);
+
+
+template<>
+std::string convert(std::chrono::microseconds const &value);
+
+
+template<>
+std::string convert(std::chrono::nanoseconds const &value);
+
+
+template<>
 std::string convert(bool const &value);
 
 

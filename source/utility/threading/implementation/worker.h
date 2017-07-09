@@ -23,63 +23,65 @@ template<typename TItem>
 class CWorker: public IWorker<TItem> {
 public:
     DEFINE_CREATE(CWorker<TItem>)
-    ///
-    CWorker(std::string const &name);
-    ///
-    CWorker(typename IAsyncQueue<TItem>::TSharedPtr const &async_queue, std::string const &name);
-    ///
+    CWorker(
+        std::string const &name,
+        typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler);
+    CWorker(
+        std::string const &name,
+        typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler,
+        typename IAsyncQueue<TItem>::TSharedPtr    const &async_queue);
     virtual ~CWorker() = default;
-    ///
+
+    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
+
     virtual void initialize() override;
-    ///
     virtual void finalize() override;
-    ///
-    virtual size_t push(TItem const &item) override;
-    ///
-    virtual size_t push(typename IWorker<TItem>::TItems const &items) override;
-    ///
-    virtual bool handleStart() override;
-    ///
-    virtual void handleFinish() override;
+
+    virtual size_t push(TItem  const &item)  override;
+    virtual size_t push(TItems const &items) override;
+
+    virtual void handleStart() override;
+    virtual void handleStop() override;
+    virtual void handleItems(TItems const &items) override;
 private:
-    ///
     class Runnuble: public CRunnuble {
     public:
         DEFINE_CREATE(Runnuble)
-        ///
         Runnuble(CWorker &worker);
-        ///
         virtual ~Runnuble() = default;
-        ///
         virtual void run() override;
     private:
-        ///
         CWorker &m_worker;
     };
-    ///
-    typename IAsyncQueue<TItem>::TSharedPtr m_async_queue;
-    ///
-    IRunnable::TSharedPtr m_runnuble;
-    ///
-    IThread::TSharedPtr m_thread;
+    typename IWorkerHandler<TItem>::TSharedPtr  m_worker_handler;
+    typename IAsyncQueue<TItem>::TSharedPtr     m_async_queue;
+    IRunnable::TSharedPtr   m_runnuble;
+    IThread::TSharedPtr     m_thread;
 };
 
 
 template<typename TItem>
-CWorker<TItem>::CWorker(std::string const &name)
+CWorker<TItem>::CWorker(
+    std::string const &name,
+    typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler)
 :
-    m_async_queue(CAsyncQueue<TItem>::create()),
-    m_runnuble   (Runnuble::create(*this)),
-    m_thread     (CThread::create(m_runnuble, name))
+    m_worker_handler    (worker_handler),
+    m_async_queue       (CAsyncQueue<TItem>::create()),
+    m_runnuble          (Runnuble::create(*this)),
+    m_thread            (CThread::create(m_runnuble, name))
 {}
 
 
 template<typename TItem>
-CWorker<TItem>::CWorker(typename IAsyncQueue<TItem>::TSharedPtr const &async_queue, std::string const &name)
+CWorker<TItem>::CWorker(
+    std::string const &name,
+    typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler,
+    typename IAsyncQueue<TItem>::TSharedPtr    const &async_queue)
 :
-    m_async_queue(async_queue),
-    m_runnuble   (Runnuble::create(*this)),
-    m_thread     (CThread::create(m_runnuble, name))
+    m_worker_handler    (worker_handler),
+    m_async_queue       (async_queue),
+    m_runnuble          (Runnuble::create(*this)),
+    m_thread            (CThread::create(m_runnuble, name))
 {}
 
 
@@ -103,21 +105,26 @@ size_t CWorker<TItem>::push(TItem const &item) {
 
 
 template<typename TItem>
-size_t CWorker<TItem>::push(typename IWorker<TItem>::TItems const &items) {
+size_t CWorker<TItem>::push(TItems const &items) {
     return m_async_queue->push(items); // ----->
 }
 
 
 template<typename TItem>
-bool CWorker<TItem>::handleStart() {
-    // default empty implementation
-    return true; // ----->
+void CWorker<TItem>::handleStart() {
+    m_worker_handler->handleStart();
 }
 
 
 template<typename TItem>
-void CWorker<TItem>::handleFinish() {
-    // default empty implementation
+void CWorker<TItem>::handleStop() {
+    m_worker_handler->handleStop();
+}
+
+
+template<typename TItem>
+void CWorker<TItem>::handleItems(TItems const &items) {
+    m_worker_handler->handleItems(items);
 }
 
 
@@ -131,12 +138,12 @@ CWorker<TItem>::Runnuble::Runnuble(CWorker &worker)
 template<typename TItem>
 void CWorker<TItem>::Runnuble::run() {
     try {
-        while (m_is_running && !m_worker.handleStart()) {};
+        m_worker.handleStart();
         while(m_is_running) {
             auto items = m_worker.m_async_queue->pop();
             m_worker.handleItems(items);
         }
-        m_worker.handleFinish();
+        m_worker.handleStop();
     } catch (std::exception const &e) {
         LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();
         // todo: handler

@@ -47,6 +47,11 @@
 #endif
 
 
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM) || defined(MACOS_PLATFORM)
+#define UNIX_PLATFORM
+#endif
+
+
 #define PLATFORM_IDENT(x) x
 #define PLATFORM_XSTR(x) #x
 #define PLATFORM_STR(x) PLATFORM_XSTR(x)

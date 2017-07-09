@@ -41,7 +41,7 @@ namespace fs {
 namespace implementation {
 
 
-CFastTextWriter::CFastTextWriter(std::string const &file_name)
+CFastTextWriter::CFastTextWriter(string const &file_name)
 :
     m_file_name(file_name) 
 {}
@@ -53,12 +53,12 @@ CFastTextWriter::~CFastTextWriter() {
 }
 
 
-void CFastTextWriter::writeLine(std::string const &line_) {
+void CFastTextWriter::writeLine(string const &line_) {
     if (!m_file)
         throw std::runtime_error("fast text writer not initialized"); // ----->
 
-    auto    line    = line_ + "\n";
-    auto    count   = fwriteInternal(line.c_str(), 1, line.size(), m_file);
+    auto        line    = line_ + "\n";
+    uint32_t    count   = fwriteInternal(line.c_str(), 1, line.size(), m_file);
 
     if (count != line.size())
         throw std::runtime_error(
@@ -73,7 +73,6 @@ void CFastTextWriter::flush() {
     auto result = fflushInternal(m_file);
     assertOK(result, "write to file '" + m_file_name + "' error, flush error: " + strerrorInternal(errno));
 }
-
 
 
 void CFastTextWriter::initialize() {

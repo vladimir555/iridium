@@ -35,6 +35,9 @@ TEST(networking, url) {
     url = convert<URL>(string("http://hostname.ru"));
     ASSERT_TRUE(static_cast<bool>(url.getHost()));
     ASSERT_EQ("hostname.ru", *url.getHost());
+
+    ASSERT_NO_FATAL_FAILURE(URL("http://ya.ru").getIPv4());
+    ASSERT_LE(7, URL("http://ya.ru").getIPv4AsString().size());
 }
 
 

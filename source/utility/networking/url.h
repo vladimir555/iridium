@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "utility/convertion/convert.h"
+#include "types.h"
 
 
 namespace utility {
@@ -17,7 +18,6 @@ namespace networking {
 
 class URL {
 public:
-#include "utility/macros/disable_warnings.h"
     DEFINE_ENUM(
         TProtocol, 
         TCP     = -2,
@@ -28,17 +28,11 @@ public:
         Telnet  = 23,
         MYSQL   = 3306
     )
-#include "utility/macros/enable_warnings.h"
 
     explicit URL(std::string const &url);
-    ~URL() = default;
+   ~URL() = default;
 
     URL &operator = (URL const &url) = default;
-
-    typedef std::vector<uint8_t>    TIPv4;
-    typedef uint16_t                TPort;
-    typedef std::string             THost;
-    typedef std::string             TAddress;
 
     typedef std::shared_ptr<TIPv4 const>        TIPv4SharedPtr;
     typedef std::shared_ptr<TPort const>        TPortSharedPtr;

@@ -1,6 +1,7 @@
 #include "convert.h"
 
 
+
 #include <chrono>
 #include <algorithm>
 #include <codecvt>
@@ -12,8 +13,14 @@
 #include "utility/strings.h"
 
 
-using std::chrono::system_clock;
 using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::hours;
+using std::chrono::minutes;
+using std::chrono::seconds;
+using std::chrono::milliseconds;
+using std::chrono::microseconds;
+using std::chrono::nanoseconds;
 using std::stringstream;
 using std::time_t;
 using std::string;
@@ -57,8 +64,7 @@ std::atomic<int> config::double_precission(5);
 
 template<>
 string convert(high_resolution_clock::time_point const &value) {
-    //time_t t = system_clock::to_time_t(value);
-    auto value_ms   = std::chrono::duration_cast<std::chrono::milliseconds>(value.time_since_epoch()).count();
+    auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();
     auto ms         = value_ms % 1000;
     time_t t        = value_ms / 1000;
     auto tm_        = platform::gmtime(&t);
@@ -69,6 +75,42 @@ string convert(high_resolution_clock::time_point const &value) {
         return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
     } else
         throw runtime_error("convert time_t (gmtime) to string error"); // ----->
+}
+
+
+template<>
+string convert(hours const &value) {
+    return convert<string>(value.count()) + " h";
+}
+
+
+template<>
+string convert(minutes const &value) {
+    return convert<string>(value.count()) + " m";
+}
+
+
+template<>
+string convert(seconds const &value) {
+    return convert<string>(value.count()) + " s";
+}
+
+
+template<>
+string convert(milliseconds const &value) {
+    return convert<string>(value.count()) + " ms";
+}
+
+
+template<>
+string convert(microseconds const &value) {
+    return convert<string>(value.count()) + " mcs";
+}
+
+
+template<>
+string convert(nanoseconds const &value) {
+    return convert<string>(value.count()) + " ns";
 }
 
 
@@ -181,7 +223,6 @@ high_resolution_clock::time_point convert(string const &value) {
     if (value.size() != time_scan_format_size)
         throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
 
-    // todo: add msec
     struct std::tm  tm_ = {};
     int ms      = 0;
     int result  = platform::sscanf(value.c_str(), time_scan_format.c_str(),
@@ -225,7 +266,6 @@ bool convert(string const &value_) {
 
 template<>
 int32_t convert(string const &value) {
-    // check string
     for (auto const ch: value)
         if ((ch < '0' || ch > '9') && ch != '-')
             throw runtime_error("convert '" + value + "' to int32 error"); // ----->
@@ -246,7 +286,6 @@ int32_t convert(string const &value) {
 
 template<>
 int64_t convert(string const &value) {
-    // check string
     for (auto const ch : value)
         if ((ch < '0' || ch > '9') && ch != '-')
             throw runtime_error("convert '" + value + "' to int64 error"); // ----->
@@ -267,7 +306,7 @@ int64_t convert(string const &value) {
 
 template<>
 uint32_t convert(string const &value) {
-    // todo: type test
+    // todo: int test
     return convert<int32_t>(value); // ----->
 }
 

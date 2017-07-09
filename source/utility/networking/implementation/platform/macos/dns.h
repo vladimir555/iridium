@@ -1,0 +1,17 @@
+#ifndef HEADER_DNS_9BAAB2D7_848C_4611_AC00_E2279F04F853
+#define HEADER_DNS_9BAAB2D7_848C_4611_AC00_E2279F04F853
+
+
+#include "utility/platform.h"
+
+
+#ifdef MACOS_PLATFORM
+
+
+#include "../linux/dns.h"
+
+
+#endif // MACOS_PLATFORM
+
+
+#endif // HEADER_DNS_9BAAB2D7_848C_4611_AC00_E2279F04F853

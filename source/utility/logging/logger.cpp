@@ -86,7 +86,7 @@ void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
 
 LogStream::LogStream(TEvent::TLevel const &level)
 :
-    m_event({ level, "" }) 
+    m_event({ level, threading::getThreadID() + " " })
 {}
 
 

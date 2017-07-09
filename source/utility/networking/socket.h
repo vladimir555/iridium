@@ -6,6 +6,8 @@
 #include "utility/pattern/initializable.h"
 #include "utility/convertion/convert.h"
 
+#include "types.h"
+
 #include <vector>
 #include <string>
 
@@ -24,6 +26,7 @@ public:
     virtual void write(packet_t const &packet) = 0;
     // todo: expected pacet size parameter
     virtual packet_t read() = 0;
+    virtual void close() = 0;
 };
 
 
@@ -33,7 +36,6 @@ public:
     virtual ~ISocket() = default;
 
     virtual void open() = 0;
-    virtual void close() = 0;
     virtual void connect() = 0;
     virtual void listen() = 0;
     virtual ISocketStream::TSharedPtr accept() = 0;

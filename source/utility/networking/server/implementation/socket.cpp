@@ -41,9 +41,9 @@ CSocket::Acceptor::Acceptor(URL const &url, TSocketStreamQueue::TSharedPtr const
 
 
 void CSocket::Acceptor::run() {
-    m_socket->open();
-    m_socket->listen();
     try {
+        m_socket->open();
+        m_socket->listen();
         while(m_is_running)
             m_socket_stream_queue->push(m_socket->accept());
     } catch (std::exception const &e) {

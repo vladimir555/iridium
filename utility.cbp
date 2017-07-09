@@ -470,12 +470,6 @@
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/implementation/thread.h">
 			<Option target="utility"/>
 		</Unit>
-		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/implementation/thread_pool.cpp">
-			<Option target="utility"/>
-		</Unit>
-		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/implementation/thread_pool.h">
-			<Option target="utility"/>
-		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/implementation/timed_mutex.cpp">
 			<Option target="utility"/>
 		</Unit>
@@ -483,6 +477,9 @@
 			<Option target="utility"/>
 		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/implementation/worker.h">
+			<Option target="utility"/>
+		</Unit>
+		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/implementation/worker_pool.h">
 			<Option target="utility"/>
 		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/mutex.h">
@@ -503,13 +500,16 @@
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/thread.h">
 			<Option target="utility"/>
 		</Unit>
-		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/thread_pool.h">
-			<Option target="utility"/>
-		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/worker.h">
 			<Option target="utility"/>
 		</Unit>
+		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility/threading/worker_pool.h">
+			<Option target="utility"/>
+		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility_test/convertion/test_convert.cpp">
+			<Option target="utility_test"/>
+		</Unit>
+		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility_test/logging/test_logger.cpp">
 			<Option target="utility_test"/>
 		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility_test/main.cpp">
@@ -534,6 +534,9 @@
 			<Option target="utility_test"/>
 		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility_test/test_strings.cpp">
+			<Option target="utility_test"/>
+		</Unit>
+		<Unit filename="/Users/volodja/workspace/qtcreator/utility/source/utility_test/threading/test_worker.cpp">
 			<Option target="utility_test"/>
 		</Unit>
 		<Unit filename="/Users/volodja/workspace/qtcreator/utility/CMakeLists.txt">

@@ -1,0 +1,330 @@
+15:27:59.571 0x70000bcd0000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:27:59.571 0x70000bcd0000 D debug
+15:27:59.571 0x70000bcd0000 I info
+15:27:59.571 0x70000bcd0000 W warning
+15:27:59.571 0x70000bcd0000 E error
+15:27:59.571 0x70000bcd0000 F fatal
+15:27:59.571 0x70000bcd0000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:28:27.024 0x7000050d8000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:28:27.024 0x7000050d8000 D debug
+15:28:27.024 0x7000050d8000 I info
+15:28:27.024 0x7000050d8000 W warning
+15:28:27.024 0x7000050d8000 E error
+15:28:27.024 0x7000050d8000 F fatal
+15:28:27.024 0x7000050d8000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:28:59.007 0x70000d93b000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:28:59.007 0x70000d93b000 D debug
+15:28:59.007 0x70000d93b000 I info
+15:28:59.007 0x70000d93b000 W warning
+15:28:59.007 0x70000d93b000 E error
+15:28:59.007 0x70000d93b000 F fatal
+15:28:59.007 0x70000d93b000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:37:25.947 0x70000209a000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:37:25.947 0x70000209a000 D debug
+15:37:25.947 0x70000209a000 I info
+15:37:25.947 0x70000209a000 W warning
+15:37:25.947 0x70000209a000 E error
+15:37:25.947 0x70000209a000 F fatal
+15:37:25.947 0x70000209a000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:37:38.017 0x7000082ba000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:37:38.017 0x7000082ba000 D debug
+15:37:38.017 0x7000082ba000 I info
+15:37:38.017 0x7000082ba000 W warning
+15:37:38.017 0x7000082ba000 E error
+15:37:38.017 0x7000082ba000 F fatal
+15:37:38.017 0x7000082ba000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:37:40.891 0x700003d25000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:37:40.891 0x700003d25000 D debug
+15:37:40.891 0x700003d25000 I info
+15:37:40.891 0x700003d25000 W warning
+15:37:40.891 0x700003d25000 E error
+15:37:40.891 0x700003d25000 F fatal
+15:37:40.891 0x700003d25000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:37:42.949 0x7000026a9000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:37:42.949 0x7000026a9000 D debug
+15:37:42.949 0x7000026a9000 I info
+15:37:42.949 0x7000026a9000 W warning
+15:37:42.949 0x7000026a9000 E error
+15:37:42.949 0x7000026a9000 F fatal
+15:37:42.949 0x7000026a9000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:38:51.192 0x700007cb2000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:38:51.192 0x700007cb2000 D debug
+15:38:51.192 0x700007cb2000 I info
+15:38:51.192 0x700007cb2000 W warning
+15:38:51.193 0x700007cb2000 E error
+15:38:51.193 0x700007cb2000 F fatal
+15:38:51.193 0x700007cb2000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:38:59.637 0x70000cd40000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:38:59.638 0x70000cd40000 D debug
+15:38:59.638 0x70000cd40000 I info
+15:38:59.638 0x70000cd40000 W warning
+15:38:59.638 0x70000cd40000 E error
+15:38:59.638 0x70000cd40000 F fatal
+15:38:59.638 0x70000cd40000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:39:09.496 0x70000143e000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:39:09.496 0x70000143e000 D debug
+15:39:09.496 0x70000143e000 I info
+15:39:09.496 0x70000143e000 W warning
+15:39:09.496 0x70000143e000 E error
+15:39:09.496 0x70000143e000 F fatal
+15:39:09.496 0x70000143e000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:39:18.208 0x700008351000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:39:18.208 0x700008351000 D debug
+15:39:18.208 0x700008351000 I info
+15:39:18.208 0x700008351000 W warning
+15:39:18.208 0x700008351000 E error
+15:39:18.208 0x700008351000 F fatal
+15:39:18.208 0x700008351000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:39:45.475 0x70000df39000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:39:45.475 0x70000df39000 D debug
+15:39:45.475 0x70000df39000 I info
+15:39:45.475 0x70000df39000 W warning
+15:39:45.475 0x70000df39000 E error
+15:39:45.475 0x70000df39000 F fatal
+15:39:45.475 0x70000df39000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:44:25.137 0x7000037e7000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:44:25.137 0x7000037e7000 D debug
+15:44:25.137 0x7000037e7000 I info
+15:44:25.137 0x7000037e7000 W warning
+15:44:25.137 0x7000037e7000 E error
+15:44:25.137 0x7000037e7000 F fatal
+15:44:25.137 0x7000037e7000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:44:48.761 0x70000b717000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:44:48.761 0x70000b717000 D debug
+15:44:48.761 0x70000b717000 I info
+15:44:48.762 0x70000b717000 W warning
+15:44:48.762 0x70000b717000 E error
+15:44:48.762 0x70000b717000 F fatal
+15:44:48.762 0x70000b717000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:45:19.628 0x7000074fc000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:45:19.628 0x7000074fc000 D debug
+15:45:19.628 0x7000074fc000 I info
+15:45:19.628 0x7000074fc000 W warning
+15:45:19.628 0x7000074fc000 E error
+15:45:19.628 0x7000074fc000 F fatal
+15:45:19.628 0x7000074fc000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+15:59:47.585 0x70000a68f000 T TestBody: async log trace string via macros, int: 5 bool: true
+15:59:47.585 0x70000a68f000 D debug
+15:59:47.585 0x70000a68f000 I info
+15:59:47.585 0x70000a68f000 W warning
+15:59:47.585 0x70000a68f000 E error
+15:59:47.586 0x70000a68f000 F fatal
+15:59:47.586 0x70000a68f000 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+16:03:28.157T TestBody: async log trace string via macros, int: 5 bool: true
+16:03:28.157D debug
+16:03:28.157I info
+16:03:28.157W warning
+16:03:28.157E error
+16:03:28.157F fatal
+16:03:28.157I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+16:03:52.030 T TestBody: async log trace string via macros, int: 5 bool: true
+16:03:52.030 D debug
+16:03:52.030 I info
+16:03:52.030 W warning
+16:03:52.030 E error
+16:03:52.030 F fatal
+16:03:52.030 I node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+16:06:46.402 T 0x7fffa32183c0TestBody: async log trace string via macros, int: 5 bool: true
+16:06:46.404 D 0x7fffa32183c0debug
+16:06:46.405 I 0x7fffa32183c0info
+16:06:46.405 W 0x7fffa32183c0warning
+16:06:46.405 E 0x7fffa32183c0error
+16:06:46.405 F 0x7fffa32183c0fatal
+16:06:46.405 I 0x7fffa32183c0node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+16:07:04.453 T 0x7fffa32183c0 TestBody: async log trace string via macros, int: 5 bool: true
+16:07:04.453 D 0x7fffa32183c0 debug
+16:07:04.453 I 0x7fffa32183c0 info
+16:07:04.453 W 0x7fffa32183c0 warning
+16:07:04.453 E 0x7fffa32183c0 error
+16:07:04.453 F 0x7fffa32183c0 fatal
+16:07:04.453 I 0x7fffa32183c0 node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+16:08:46.810 T 0x7fffa32183c0 TestBody: async log trace string via macros, int: 5 bool: true
+16:08:46.810 D 0x7fffa32183c0 debug
+16:08:46.810 I 0x7fffa32183c0 info
+16:08:46.810 W 0x7fffa32183c0 warning
+16:08:46.810 E 0x7fffa32183c0 error
+16:08:46.810 F 0x7fffa32183c0 fatal
+16:08:46.810 I 0x7fffa32183c0 node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+
+16:13:43.273 T 0x7fffa32183c0 TestBody: async log trace string via macros, int: 5 bool: true
+16:13:43.273 D 0x7fffa32183c0 debug
+16:13:43.273 I 0x7fffa32183c0 info
+16:13:43.273 W 0x7fffa32183c0 warning
+16:13:43.273 E 0x7fffa32183c0 error
+16:13:43.273 F 0x7fffa32183c0 fatal
+16:13:43.273 I 0x7fffa32183c0 node:
+'logger' = ''
+  'level' = 'TRACE_LEVEL'
+  'console-sink' = ''
+    'level' = 'TRACE_LEVEL'
+  'file-sink' = ''
+    'level' = 'TRACE_LEVEL'
+    'file-name' = '.log'
+

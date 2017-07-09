@@ -1,7 +1,12 @@
 #include "sink.h"
 
 
-using utility::threading::IWorker;
+
+#include "utility/threading/implementation/worker.h"
+
+
+using utility::threading::IWorkerHandler;
+using utility::threading::implementation::CWorker;
 
 
 namespace utility {
@@ -9,10 +14,10 @@ namespace logging {
 namespace implementation {
 
 
-CSink::CSink(TEvent::TLevel const &level, IWorker<TEvent>::TSharedPtr worker)
+CSink::CSink(TEvent::TLevel const &level, IWorkerHandler<TEvent>::TSharedPtr const &worker)
 :
-    m_level (level),
-    m_worker(worker)
+    m_level(level),
+    m_worker(CWorker<TEvent>::create("sink", worker))
 {}
 
 

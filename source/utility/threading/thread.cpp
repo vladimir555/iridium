@@ -2,6 +2,11 @@
 
 
 #include "utility/platform.h"
+#include "utility/convertion/convert.h"
+
+
+using utility::convertion::convert;
+using std::string;
 
 
 namespace {
@@ -29,8 +34,13 @@ namespace utility {
 namespace threading {
 
 
-void IThread::sleep(int const &milliseconds) {
+void sleep(int const &milliseconds) {
     std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+}
+
+
+std::string getThreadID() {
+    return convert<string>(std::this_thread::get_id()); // ----->
 }
 
 

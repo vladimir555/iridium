@@ -7,6 +7,8 @@
 #include "utility/threading/runnable.h"
 #include "utility/pattern/non_copyable.h"
 
+#include "condition.h"
+
 #include <thread>
 #include <atomic>
 #include <string>
@@ -24,7 +26,7 @@ class CThread:
 public:
     DEFINE_CREATE(CThread)
     ///
-    CThread(IRunnable::TSharedPtr runnuble, std::string const &name);
+    CThread(IRunnable::TSharedPtr const &runnuble, std::string const &name);
     ///
     virtual ~CThread() = default;
     ///
@@ -48,7 +50,7 @@ protected:
     ///
     std::atomic<bool>               m_is_thread_running;
     ///
-    static void run(IRunnable::TSharedPtr m_runnuble);
+    static void run(IRunnable::TSharedPtr const &runnuble, std::atomic<bool> *is_thread_running);
 };
 
 

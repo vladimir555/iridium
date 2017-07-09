@@ -1,5 +1,9 @@
 #include "socket.h"
 
+#include <netdb.h>
+
+#include "utility/assert.h"
+
 
 typedef utility::networking::ISocketStream::packet_t packet_t;
 using std::string;

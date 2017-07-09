@@ -15,9 +15,9 @@
 
 
 using namespace std;
-using std::chrono::system_clock;
 using std::chrono::duration_cast;
 using std::chrono::nanoseconds;
+using std::chrono::high_resolution_clock;
 
 
 namespace utility {
@@ -81,20 +81,20 @@ namespace convertion {
 //    int64_t time_convert = 0;
 //    {
 //        vector<TTo> to(item_count);
-//        auto begin      = system_clock::now();
+//        auto begin      = high_resolution_clock::now();
 
 //        for (size_t n = 0; n < iteration_count; n++)
 //            for (size_t i = 0; i < item_count; i++)
 //                to[i] = convert<TTo>(static_cast<TFrom>(from[i]));
 
-//        auto end        = system_clock::now();
+//        auto end        = high_resolution_clock::now();
 //        time_convert    = duration_cast<nanoseconds>(end - begin).count();
 //    }
 
 //    int64_t time_cached_convert = 0;
 //    {
 //        vector<TTo> to(item_count);
-//        auto begin      = system_clock::now();
+//        auto begin      = high_resolution_clock::now();
 
 //        auto convertCached = std::bind(
 //                    utility::caching::LazyCacher<TTo, TFrom>::cacheFunc,
@@ -105,7 +105,7 @@ namespace convertion {
 //            for (size_t i = 0; i < item_count; i++)
 //                to[i] = convertCached(static_cast<TFrom>(from[i]));
 
-//        auto end              = system_clock::now();
+//        auto end              = high_resolution_clock::now();
 //        time_cached_convert   = duration_cast<nanoseconds>(end - begin).count();
 //    }
 

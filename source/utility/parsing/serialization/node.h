@@ -257,6 +257,7 @@ std::string convertCamelToDashed(std::string const &camel);
     } class_name = *this;
 
 
+// todo: push_back
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
     struct T##class_name : protected utility::parsing::serialization::Node<void> { \
         T##class_name(utility::parsing::INode::TConstSharedPtr const &node, std::string const &path) : utility::parsing::serialization::Node<void> \

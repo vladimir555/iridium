@@ -5,6 +5,7 @@
 #include <condition_variable>
 #include <atomic>
 
+#include "utility/smart_ptr.h"
 #include "utility/threading/condition.h"
 #include "mutex.h"
 
@@ -16,6 +17,7 @@ namespace implementation {
 
 class CCondition : public CMutex, public ICondition {
 public:
+    DEFINE_CREATE(CCondition)
     ///
     CCondition() = default;
     ///

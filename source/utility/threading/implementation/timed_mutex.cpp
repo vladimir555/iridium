@@ -7,7 +7,6 @@
 
 
 using std::string;
-using std::this_thread::get_id;
 
 using utility::convertion::convert;
 

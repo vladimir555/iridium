@@ -1,6 +1,7 @@
 #include "url.h"
 
 #include "utility/strings.h"
+#include "dns.h"
 
 #include <regex>
 
@@ -79,22 +80,30 @@ URL::URL(std::string const &url)
     }
 
     // port from protocol
-
     if (!((m_host || m_ipv4) && m_port && *m_port != 0))
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 }
 
 
 URL::TIPv4SharedPtr const URL::getIPv4() const {
-    return this->m_ipv4; // ----->
+    if (m_ipv4)
+        return this->m_ipv4; // ----->
+    else {
+        if (m_host)
+            return std::make_shared<TIPv4 const>(utility::networking::getIPv4ByHost(*m_host));
+        else
+            return nullptr;
+    }
 }
 
 
 std::string const URL::getIPv4AsString() const {
     string result;
 
-    if (m_ipv4 && m_ipv4->size() == 4)
-        for (auto const ip : (*m_ipv4))
+
+    auto ipv4 = getIPv4();
+    if (ipv4 && ipv4->size() == 4)
+        for (auto const ip : (*ipv4))
             result += convert<string>(ip) + ".";
 
     return result.substr(0, result.size() - 1); // ----->
@@ -116,7 +125,7 @@ URL::TProtocolSharedPtr const URL::getProtocol() const {
 }
 
 
-URL::TAddress const URL::getAddress() const {
+TAddress const URL::getAddress() const {
     return m_address; // ----->
 }
 

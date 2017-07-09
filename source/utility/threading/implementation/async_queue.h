@@ -15,9 +15,6 @@
 #include "condition.h"
 
 
-#include "utility/logging/logger.h"
-
-
 namespace utility {
 namespace threading {
 namespace implementation {
@@ -107,7 +104,7 @@ std::list<TItem> CAsyncQueue<TItem>::pop() {
 template<typename TItem>
 void CAsyncQueue<TItem>::interrupt() {
     m_is_do_wait = false;
-    notifyOne();
+    notifyAll();
 }
 
 

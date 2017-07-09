@@ -10,21 +10,29 @@ namespace utility {
 namespace threading {
 
 
-///
 template<typename TItem>
-class IAsyncQueue {
+class IAsyncQueuePusher {
+public:
+    DEFINE_SMART_PTR(IAsyncQueuePusher)
+    virtual ~IAsyncQueuePusher() = default;
+
+    typedef std::list<TItem> TItems;
+
+    virtual size_t push(TItem  const &item) = 0;
+    virtual size_t push(TItems const &items) = 0;
+};
+
+
+template<typename TItem>
+class IAsyncQueue: public IAsyncQueuePusher<TItem> {
 public:
     DEFINE_SMART_PTR(IAsyncQueue)
-    ///
     virtual ~IAsyncQueue() = default;
-    ///
-    virtual size_t push(TItem const &item) = 0;
-    ///
-    virtual size_t push(std::list<TItem> const &items) = 0;
-    ///
-    virtual std::list<TItem> pop() = 0;
-    ///
-    virtual void interrupt() = 0;
+
+    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
+
+    virtual TItems  pop() = 0;
+    virtual void    interrupt() = 0;
 };
 
 

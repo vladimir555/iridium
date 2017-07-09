@@ -15,49 +15,28 @@ namespace logging {
 namespace implementation {
 
 
-///
-class CSinkFile: public CSink {
+class CSinkFile:
+    public std::enable_shared_from_this<CSinkFile>,
+    public CSink,
+    public threading::IWorkerHandler<TEvent>
+{
 public:
     DEFINE_CREATE(CSinkFile)
-    ///
     CSinkFile(TEvent::TLevel const &level, std::string const &file_name);
-    ///
     virtual ~CSinkFile() = default;
 
 private:
-    ///
-    class CSinkWorker : public threading::implementation::CWorker<TEvent> {
-    public:
-        DEFINE_CREATE(CSinkWorker)
-        ///
-        CSinkWorker(std::string const &file_name, bool const &is_daily_rotation = true);
-        ///
-        virtual ~CSinkWorker() = default;
-        ///
-        virtual void initialize() override;
-        ///
-        virtual void finalize() override;
+    void handleStart() override;
+    void handleStop() override;
+    void handleItems(TItems const &e) override;
 
-    private:
-        ///
-        void initializeInternal();
-        ///
-        void finalizeInternal();
-        ///
-        virtual void handleItems(TItems const &e) override;
-        /////
-        //::FILE     *m_file = nullptr;
-        ///
-        std::string m_file_name;
-        ///
-        std::string m_file_name_original;
-        ///
-        bool        m_is_rotation_by_day;
-        ///
-        time_t      m_last_initialization_time;
-        ///
-        fs::ITextWriter::TSharedPtr m_text_file_writer;
-    };
+    std::string m_file_name;
+    std::string m_file_name_original;
+    bool        m_is_rotation_by_day;
+    std::chrono::high_resolution_clock::time_point
+                m_last_initialization_time;
+    fs::ITextWriter::TSharedPtr
+                m_text_file_writer;
 };
 
 

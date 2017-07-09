@@ -77,7 +77,7 @@ LogStream const & LogStream::operator << (TValue const &v) const {
 
 
 #define LOGT \
-utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL)
+utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << __FUNCTION__ << ": "
 #define LOGD \
 utility::logging::LogStream(utility::logging::TEvent::TLevel::DEBUG_LEVEL)
 #define LOGI \

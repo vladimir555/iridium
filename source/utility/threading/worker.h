@@ -16,28 +16,32 @@ namespace utility {
 namespace threading {
 
 
-// todo: interfaces: base handlers, worker from IAsyncqueue, some handlers extends base handlers
+template<typename TItem_>
+class IWorkerHandler {
+public:
+    DEFINE_SMART_PTR(IWorkerHandler<TItem_>)
+    virtual ~IWorkerHandler() = default;
 
-///
+    typedef TItem_ TItem;
+    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
+
+    virtual void handleStart()  = 0;
+    virtual void handleStop() = 0;
+    virtual void handleItems(TItems const &items) = 0;
+};
+
+
 template<typename TItem>
-class IWorker: public pattern::IInitializable {
+class IWorker:
+    public IAsyncQueuePusher<TItem>,
+    public pattern::IInitializable,
+    protected IWorkerHandler<TItem>
+{
 public:
     DEFINE_SMART_PTR(IWorker<TItem>)
-    ///
     virtual ~IWorker() = default;
-    ///
-    typedef std::list<TItem> TItems;
-    ///
-    virtual size_t push(TItem const &item) = 0;
-    ///
-    virtual size_t push(TItems const &items) = 0;
-    /// handler calling until throw exception or return true
-    virtual bool handleStart() = 0;
-    ///
-    virtual void handleFinish() = 0;
-protected:
-    ///
-    virtual void handleItems(TItems const &itemS) = 0;
+
+    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 };
 
 

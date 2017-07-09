@@ -18,21 +18,23 @@ namespace logging {
 namespace implementation {
 
 
-CSinkConsole::CSinkWorker::CSinkWorker()
-:
-    CWorker<TEvent>("ConsoleSink")
-{}
-
-
 CSinkConsole::CSinkConsole(TEvent::TLevel const &level)
 :
-    CSink(level, CSinkWorker::create())
+    CSink(level, getSharedThis(this))
 {}
 
 
-void CSinkConsole::CSinkWorker::handleItems(TItems const &events) {
+void CSinkConsole::handleItems(TItems const &events) {
     for (auto const &e: events)
         cout << makeLine(e) << endl;
+}
+
+
+void CSinkConsole::handleStart() {
+}
+
+
+void CSinkConsole::handleStop() {
 }
 
 

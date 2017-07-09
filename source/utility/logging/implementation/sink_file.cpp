@@ -8,7 +8,8 @@
 using std::string;
 using utility::convertion::convert;
 using utility::fs::implementation::CFastTextWriter;
-using std::chrono::system_clock;
+using utility::threading::implementation::CWorker;
+using std::chrono::high_resolution_clock;
 
 
 namespace utility {
@@ -18,36 +19,18 @@ namespace implementation {
 
 CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 :
-    CSink(level, CSinkWorker::create(file_name))
-{}
-
-
-CSinkFile::CSinkWorker::CSinkWorker(string const &file_name, bool const &is_daily_rotation)
-:
-    CWorker<TEvent>             ("FileSink"),
+    CSink                       (level, getSharedThis(this)),
     m_file_name                 (file_name),
     m_file_name_original        (file_name),
-    m_is_rotation_by_day        (is_daily_rotation),
-    m_last_initialization_time  (0)
+    m_is_rotation_by_day        (true),
+    m_last_initialization_time  ()
 {}
 
 
-void CSinkFile::CSinkWorker::initialize() {
-    initializeInternal();
-    CWorker<TEvent>::initialize();
-}
-
-
-void CSinkFile::CSinkWorker::finalize() {
-    CWorker<TEvent>::finalize();
-    finalizeInternal();
-}
-
-
-void CSinkFile::CSinkWorker::initializeInternal() {
+void CSinkFile::handleStart() {
     if (m_is_rotation_by_day) {
-        auto date                   = convert<string>(system_clock::now()).substr(0, 10);
-        m_last_initialization_time  = system_clock::to_time_t(convert<system_clock::time_point>(date + "T00:00:00.000"));
+        auto date                   = convert<string>(high_resolution_clock::now()).substr(0, 10);
+        m_last_initialization_time  = convert<high_resolution_clock::time_point>(date + " 00:00:00.000");
 
         m_file_name = m_file_name_original;
         auto file_ext_position = m_file_name.find_last_of('.');
@@ -62,22 +45,22 @@ void CSinkFile::CSinkWorker::initializeInternal() {
 }
 
 
-void CSinkFile::CSinkWorker::finalizeInternal() {
+void CSinkFile::handleStop() {
     m_text_file_writer->finalize();
 }
 
 
-void CSinkFile::CSinkWorker::handleItems(TItems const &events) {
-    if (m_is_rotation_by_day && system_clock::to_time_t(system_clock::now()) > m_last_initialization_time) {
-        finalizeInternal();
-        initializeInternal();
+void CSinkFile::handleItems(TItems const &events) {
+    if (m_is_rotation_by_day && high_resolution_clock::now() > m_last_initialization_time) {
+        handleStop();
+        handleStart();
     }
 
     for (auto const &e : events)
         m_text_file_writer->writeLine(makeLine(e));
 
     m_text_file_writer->flush();
-};
+}
 
 
 } // implementation
