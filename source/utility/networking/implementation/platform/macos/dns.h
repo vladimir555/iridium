@@ -8,7 +8,7 @@
 #ifdef MACOS_PLATFORM
 
 
-#include "../linux/dns.h"
+#include "../unix/dns.h"
 
 
 #endif // MACOS_PLATFORM

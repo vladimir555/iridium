@@ -1,32 +1,18 @@
-#ifndef HEADER_DNS_3797E08A_AF11_43C7_BE08_3B45CFCCCB33
-#define HEADER_DNS_3797E08A_AF11_43C7_BE08_3B45CFCCCB33
+#ifndef HEADER_DNS_C2E9A23C_4342_4222_AD05_3EF8336A12D8
+#define HEADER_DNS_C2E9A23C_4342_4222_AD05_3EF8336A12D8
 
 
 #include "utility/platform.h"
 
 
-#ifdef UNIX_PLATFORM
+#ifdef LINUX_PLATFORM
 
 
-#include "utility/networking/types.h"
+#include "../unix/dns.h"
 
 
-namespace utility {
-namespace networking {
-namespace implementation {
-namespace platform {
+#endif // LINUX_PLATFORM
 
 
-TIPv4 getIPv4ByHost(std::string const &host);
 
-
-} // platform
-} // implementation
-} // networking
-} // utility
-
-
-#endif // HEADER_DNS_3797E08A_AF11_43C7_BE08_3B45CFCCCB33
-
-
-#endif // UNIX_PLATFORM
+#endif // HEADER_DNS_C2E9A23C_4342_4222_AD05_3EF8336A12D8

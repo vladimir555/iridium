@@ -8,7 +8,7 @@
 #ifdef MACOS_PLATFORM
 
 
-#include "../linux/socket.h"
+#include "../unix/socket.h"
 
 
 #endif // MACOS_PLATFORM

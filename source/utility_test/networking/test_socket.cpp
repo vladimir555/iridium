@@ -63,6 +63,7 @@ public:
                 "Connection: keep-alive\n"
                 "Accept-Ranges: bytes\n\n\n"
                 ) + message);
+
             i->write(write_packet);
             i->close();
         }

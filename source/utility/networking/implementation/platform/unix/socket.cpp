@@ -1,6 +1,7 @@
 #include "utility/platform.h"
 
 
+
 #ifdef UNIX_PLATFORM
 
 
@@ -91,13 +92,16 @@ void CSocket::close() {
 
 void CSocket::write(packet_t const &packet) {
     LOGT << "::write socket " << m_socket << " packet " << packet << " ...";
-    auto sent_size = 0;
-    while (sent_size < packet.size()) {
-        void const *buffer = static_cast<void const *>(packet.data() + sent_size);
-        sent_size += assertOK(::send(m_socket, buffer, DEFAULT_SOCKET_BUFFER_SIZE, 0),
+    size_t lpos = 0;
+    while (lpos < packet.size()) {
+        auto buffer = static_cast<void const *>(packet.data() + lpos);
+        auto rpos = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
+        if (rpos > packet.size())
+            rpos = packet.size();
+        lpos += assertOK(::send(m_socket, buffer, rpos - lpos, 0),
             "socket write error");
     }
-    LOGT << "::write write_size " << sent_size;
+    LOGT << "::write write_size " << lpos;
 }
 
 

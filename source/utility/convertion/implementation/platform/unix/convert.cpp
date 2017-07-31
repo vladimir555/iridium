@@ -2,7 +2,7 @@
 
 
 
-#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM) || defined(MACOS_PLATFORM)
+#ifdef UNIX_PLATFORM
 
 
 #include "convert.h"
@@ -127,4 +127,4 @@ void itoa(uint64_t const &value, char *buffer, int const &base) {
 } // utility
 
 
-#endif // LINUX_PLATFORM FREEBSD_PLATFORM MACOS_PLATFORM
+#endif // UNIX_PLATFORM

@@ -11,3 +11,5 @@ cmake_install.cmake
 CTestTestfile.cmake
 cmake_install.cmake
 CMakeLists.txt.*
+*.log
+

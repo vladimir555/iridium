@@ -7,7 +7,7 @@
 
 #ifdef MACOS_PLATFORM
 
-#include "../linux/convert.h"
+#include "../unix/convert.h"
 
 #endif // MACOS_PLATFORM
 

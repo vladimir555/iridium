@@ -20,6 +20,16 @@ using std::chrono::nanoseconds;
 using std::chrono::high_resolution_clock;
 
 
+enum TAnotherEnum {
+    AE1 = 55,
+    AE2 = 555
+};
+
+
+DEFINE_ENUM(TEnum, E1, E2, E3 = 5, E4 = AE1, E5)
+IMPLEMENT_ENUM(TEnum)
+
+
 namespace utility {
 namespace convertion {
 
@@ -186,19 +196,9 @@ TEST(convertion, types) {
 }
 
 
-enum TAnotherEnum {
-    AE1 = 55,
-    AE2 = 555
-};
-
-
 enum TEnumTest {
     E1, E2, E3 = 5, E4 = AE1, E5
 };
-
-
-DEFINE_ENUM(TEnum, E1, E2, E3 = 5, E4 = AE1, E5)
-IMPLEMENT_ENUM(TEnum)
 
 
 TEST(convertion, enum_) {
