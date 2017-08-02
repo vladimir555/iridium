@@ -128,6 +128,9 @@ void CSocket::listen() {
     server_address.sin_addr.s_addr  = INADDR_ANY;
     server_address.sin_port         = htons(*m_url.getPort());
 
+    int yes = 1;
+    setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
+
     LOGT << "::bind socket " << m_socket;
     assertOK(::bind(m_socket, (struct sockaddr *) (&server_address), sizeof(server_address)),
         "socket bind error");
@@ -145,6 +148,7 @@ ISocketStream::TSharedPtr CSocket::accept() {
 
     LOGT << "::accept socket " << m_socket << "... ";
 
+
     auto socket_accept = assertOK(::accept(m_socket, (struct sockaddr *) (&client_address), &client_address_size),
         "socket accept error");
 
@@ -155,7 +159,8 @@ ISocketStream::TSharedPtr CSocket::accept() {
 
 
 void CSocket::interrupt() {
-    LOGT << "none";
+    LOGT << "::shutdown";
+    ::shutdown(m_socket, 2);
 //    assertOK(::shutdown(m_socket, 2),
 //        "socket interrupt error: url " + convert<string>(m_url));
 }
