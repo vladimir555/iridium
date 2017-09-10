@@ -17,35 +17,36 @@ namespace utility {
 namespace networking {
 namespace implementation {
 namespace platform {
+namespace unix {
 
 
 class CSocket: public ISocket {
 public:
     DEFINE_CREATE(CSocket)
 
-    CSocket(URL const &url, bool const &is_blocking_connection = false);
+    CSocket(URL const &url);
     virtual ~CSocket();
 
     void open() override;
     void close() override;
-    void write(packet_t const &packet) override;
-    packet_t read() override;
+    void write(TPacket const &packet) override;
+    TPacket read() override;
     void listen() override;
-    ISocketStream::TSharedPtr accept() override;
+    TSocketStreams accept() override;
     void interrupt() override;
     void connect() override;
 
-private:
+protected:
     CSocket(URL const &url, int const &socket);
-
     int assertOK(int const &result, std::string const &message) const;
+    URL getPeerURL(int const &socket);
 
     URL m_url;
     int m_socket;
-    bool m_is_blocking_connection;
 };
 
 
+} // unix
 } // platform
 } // implementation
 } // networking

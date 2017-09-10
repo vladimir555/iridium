@@ -10,6 +10,13 @@
 #include <iostream>
 
 
+#ifdef _MSC_VER        
+#define UNUSED
+#else
+#define UNUSED __attribute__((unused))
+#endif
+
+
 #define DEFINE_ENUM(TEnum, ...) \
 class TEnum { \
 public: \
@@ -57,7 +64,7 @@ private: \
     static std::map<TEnumInternal, std::string> const map_enum_string; \
     static std::map<TEnumInternal, std::string> const &generateMap() { \
         static std::map<TEnumInternal, std::string> m; \
-        Enums __attribute__((unused)) __VA_ARGS__; \
+        Enums UNUSED __VA_ARGS__; \
         auto i = Enums::enums.begin(); \
         for (auto const &arg: utility::split(#__VA_ARGS__, ",")) { \
             std::string name  = utility::trim(utility::split(arg, "=")[0]); \
@@ -101,6 +108,7 @@ public: \
 //DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
 
 
+/// use not in namespace
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = TEnum::UNKNOWN; \

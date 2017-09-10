@@ -11,6 +11,21 @@
 #include "../unix/socket.h"
 
 
+namespace utility {
+namespace networking {
+namespace implementation {
+namespace platform {
+
+
+using unix::CSocket;
+
+
+} // platform
+} // implementation
+} // networking
+} // utility
+
+
 #endif // LINUX_PLATFORM
 
 

@@ -156,6 +156,22 @@ string convert(uint32_t const &value, int const &base) {
 
 
 template<>
+string convert(uint16_t const &value, int const &base) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, base);
+    return buffer; // ----->
+}
+
+
+template<>
+string convert(uint8_t const &value, int const &base) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, base);
+    return buffer; // ----->
+}
+
+
+template<>
 string convert(int64_t const &value) {
     return convert<string>(value, 10); // ----->
 }

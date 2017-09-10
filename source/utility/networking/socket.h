@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <string>
+#include <list>
 
 
 namespace utility {
@@ -21,11 +22,11 @@ public:
     DEFINE_SMART_PTR(ISocketStream)
     virtual ~ISocketStream() = default;
 
-    typedef std::vector<uint8_t> packet_t;
+    typedef std::vector<uint8_t> TPacket;
 
-    virtual void write(packet_t const &packet) = 0;
+    virtual void write(TPacket const &packet) = 0;
     // todo: expected pacet size parameter
-    virtual packet_t read() = 0;
+    virtual TPacket read() = 0;
     virtual void close() = 0;
 };
 
@@ -35,10 +36,12 @@ public:
     DEFINE_SMART_PTR(ISocket)
     virtual ~ISocket() = default;
 
+    typedef std::list<ISocketStream::TSharedPtr> TSocketStreams;
+
     virtual void open() = 0;
     virtual void connect() = 0;
     virtual void listen() = 0;
-    virtual ISocketStream::TSharedPtr accept() = 0;
+    virtual TSocketStreams accept() = 0;
     virtual void interrupt() = 0;
 };
 
@@ -47,8 +50,8 @@ public:
 } // utility
 
 
-DEFINE_CONVERT(utility::networking::ISocketStream::packet_t, std::string)
-DEFINE_CONVERT(std::string, utility::networking::ISocketStream::packet_t)
+DEFINE_CONVERT(utility::networking::ISocketStream::TPacket, std::string)
+DEFINE_CONVERT(std::string, utility::networking::ISocketStream::TPacket)
 
 
 #endif // HEADER_SOCKET_423B8F1C_F93C_43CC_99D9_06CB1A1062CF

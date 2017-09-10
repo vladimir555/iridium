@@ -27,12 +27,12 @@ void CSocket::finalize() {
 }
 
 
-void CSocket::write(packet_t const &packet) {
+void CSocket::write(TPacket const &packet) {
     m_socket->write(packet);
 }
 
 
-CSocket::packet_t CSocket::read() {
+CSocket::TPacket CSocket::read() {
     return m_socket->read();
 }
 

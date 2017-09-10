@@ -32,7 +32,6 @@ using utility::threading::IWorkerHandler;
 using utility::threading::IAsyncQueue;
 using utility::threading::IThread;
 using utility::threading::implementation::CAsyncQueue;
-
 using utility::networking::getIPv4ByHost;
 
 
@@ -53,7 +52,7 @@ public:
             string message = "<html><head><title>utility</title></head>"
                              "<body>answer from thread " + getThreadID() + "</body></html>\n";
             //sleep(5000);
-            auto write_packet = convert<ISocket::packet_t>(string(
+            auto write_packet = convert<ISocket::TPacket>(string(
                 "HTTP/1.1 200 OK\n"
                 "Server: utility/1.0.0\n"
                 "Date: Sat, 08 Mar 2014 22:53:46 GMT\n"
@@ -88,7 +87,7 @@ public:
         for (size_t i = 0; i < 10; i++)
             acceptors.push_back(SocketAcceptorA::create());
         m_socket_acceptor_pool  = CWorkerPool<ISocketStream::TSharedPtr>::create(
-                    acceptors, "socket_acceptor_pool");;
+            acceptors, "socket_acceptor_pool");;
     }
     virtual ~SocketServer() = default;
 
@@ -132,41 +131,54 @@ TEST(networking, socket) {
             utility::parsing::implementation::CNode::create("logger");
         root->addChild("console-sink");
         utility::logging::Logger::instance().update(utility::logging::config::TLogger(root));
+
+//        testKEvent();
+//        return;
     }
 
-//    IWorkerPool<SocketAcceptorA>::TSharedPtr worker_pool = CWorkerPool<SocketAcceptorA>::create(5, "worker_pool");
+//    SocketServer::TSharedPtr socket_server = SocketServer::create();
+//    IThread::TSharedPtr socket_server_thread = CThread::create(socket_server, "socket server");
 
-//    worker_pool->initialize();
+//    socket_server_thread->initialize();
 
-//    cout << "start" << endl;
+//    LOGT << "waiting begin";
+//    sleep(50000);
+//    LOGT << "waiting end";
 
-//    sleep(10000);
-//    cout << "stop" << endl;
+//    socket_server_thread->finalize();
 
-//    worker_pool->finalize();
+    ISocket::TSharedPtr s = CSocket::create(URL("tcp://127.0.0.1:55555"));
+    s->open();
+    s->listen();
+    while(true) {
+        LOGT << "sleep\n";
+        sleep(10000);
+        auto a = s->accept();
+        LOGT << "accepted count " << a.size();
+        for (auto &i: a) {
+            LOGT << 11;
+            auto p = static_cast<ISocketStream::TSharedPtr>(i)->read();
+            //LOGT << "packet " << p;
+            string message = "<html><head><title>utility</title></head>"
+                             "<body>answer from thread " + getThreadID() + " !</body></html>\n";
+            p = convert<ISocket::TPacket>(string(
+                "HTTP/1.1 200 OK\n"
+                "Server: utility/1.0.0\n"
+                "Date: Sat, 08 Mar 2014 22:53:46 GMT\n"
+                "Content-Type: text/html\n"
+                "Content-Length: " + convert<string>(message.size()) + "\n"
+                "Last-Modified: Sat, 08 Mar 2014 22:53:30 GMT\n"
+                "Connection: keep-alive\n"
+                "Accept-Ranges: bytes\n\n\n"
+                ) + message);
+            static_cast<ISocketStream::TSharedPtr>(i)->write(p);
+            //static_cast<ISocketStream::TSharedPtr>(i)->close();
+            //LOGT << "packet " << p;
+        }
+    }
 
+    LOGT << "end";
 
-
-    SocketServer::TSharedPtr socket_server = SocketServer::create();
-    IThread::TSharedPtr socket_server_thread = CThread::create(socket_server, "socket server");
-//    client::ISocket::TSharedPtr socket_client = client::implementation::CSocket::create(URL("127.0.0.1:55555"));
-
-    socket_server_thread->initialize();
-
-    LOGT << "waiting begin";
-    sleep(50000);
-//    socket_client->initialize();
-//    //auto p = convert<ISocket::packet_t>(string("hello!"));
-//    //socket_client->write(p);
-//    IThread::sleep(1000);
-
-////    IThread::sleep(1000);
-    LOGT << "waiting end";
-
-    socket_server_thread->finalize();
-
-//    IThread::sleep(1000);
-//    socket_client->finalize();
 }
 
 
