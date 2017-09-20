@@ -37,6 +37,16 @@ CSocket::TPacket CSocket::read() {
 }
 
 
+void CSocket::close() {
+    m_socket->close();
+}
+
+
+URL CSocket::getURL() const {
+    return m_socket->getURL();
+}
+
+
 } // implementation
 } // client
 } // networking

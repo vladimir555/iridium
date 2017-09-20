@@ -23,8 +23,10 @@ public:
     void initialize() override;
     void finalize()   override;
 
-    void write(TPacket const &packet) override;
+    void    write(TPacket const &packet) override;
     TPacket read() override;
+    void    close() override;
+    URL     getURL() const override;
 
 private:
     networking::ISocket::TSharedPtr m_socket;

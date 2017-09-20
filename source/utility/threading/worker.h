@@ -27,7 +27,7 @@ public:
 
     virtual void handleStart()  = 0;
     virtual void handleStop() = 0;
-    virtual void handleItems(TItems const &items) = 0;
+    virtual TItems handleItems(TItems const &items) = 0;
 };
 
 

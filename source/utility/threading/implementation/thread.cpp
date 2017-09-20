@@ -2,6 +2,8 @@
 
 #include "utility/convertion/convert.h"
 
+#include "condition.h"
+
 #include <iostream>
 #include <chrono>
 
@@ -17,7 +19,7 @@ using utility::convertion::convert;
 auto now = std::chrono::high_resolution_clock::now;
 
 
-static auto const THREAD_START_TIMEOUT = milliseconds(10000);
+static auto const THREAD_START_TIMEOUT_MS = 10000;
 
 
 namespace utility {
@@ -29,17 +31,17 @@ CThread::CThread(IRunnable::TSharedPtr const &runnuble, string const &name)
 :
     m_name          (name),
     m_runnuble      (runnuble),
-    m_runnuble_name (name)
+    m_runnuble_name (name),
+    m_is_started_condition(CCondition::create())
 {}
 
 
 void CThread::initialize() {
-    m_thread = make_shared<thread>(run, m_runnuble, &m_is_thread_running);
-    auto timeout_time_point = now() + THREAD_START_TIMEOUT;
-    while(!m_is_thread_running) {
-        if  (timeout_time_point < now())
-            throw std::runtime_error("thread '" + m_name + "' start error: timeout " +
-                convert<string>(THREAD_START_TIMEOUT)); // ----->
+    m_thread = make_shared<thread>(run, m_runnuble, m_is_started_condition);
+    try {
+        m_is_started_condition->wait(THREAD_START_TIMEOUT_MS);
+    } catch (std::exception const &e) {
+        throw std::runtime_error("thread '" + m_name + "' start error: " + e.what()); // ----->
     }
 }
 
@@ -65,9 +67,9 @@ std::string CThread::getName() const {
 }
 
 
-void CThread::run(IRunnable::TSharedPtr const &runnuble, std::atomic<bool> *is_thread_running) {
+void CThread::run(IRunnable::TSharedPtr const &runnuble, ICondition::TSharedPtr is_started_condition) {
     try {
-        *is_thread_running = true;
+        is_started_condition->notifyOne();
         runnuble->run();
     } catch (std::exception &e) {
         cerr << "thread error: " << e.what();

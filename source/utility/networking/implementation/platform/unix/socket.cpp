@@ -40,34 +40,34 @@ namespace unix {
 
 CSocket::CSocket(URL const &url)
 :
-    m_url(url),
-    m_socket(0)
+    m_socket(0),
+    m_url   (url)
 {
-    LOGT << "url " << url;
+//    LOGT << "url " << url;
 }
 
 
-CSocket::CSocket(URL const &url, int const &socket)
+CSocket::CSocket(int const &socket)
 :
-    m_url(url),
-    m_socket(socket)
+    m_socket(socket),
+    m_url   (getPeerURL(socket))
 {
-    LOGT << "url " << url << " socket " << socket;
+//    LOGT << "url " << m_url << " socket " << socket;
 }
 
 
 CSocket::~CSocket() {
     //interrupt();
-    LOGT << "socket " << m_socket;
+//    LOGT << "socket " << m_socket;
 }
 
 
 void CSocket::open() {
     // todo: SOCK_STREAM - tcp, SOCK_DGRAM - udp
 
-    LOGT << "::socket AF_INET, SOCK_STREAM ...";
+//    LOGT << "::socket AF_INET, SOCK_STREAM ...";
 
-    auto protocol = IPPROTO_IP;
+   auto protocol = IPPROTO_IP;
     if (!m_url.getProtocol() || *m_url.getProtocol() == URL::TProtocol::UDP)
         protocol = IPPROTO_UDP;
     else
@@ -76,12 +76,12 @@ void CSocket::open() {
     m_socket = assertOK(::socket(AF_INET, SOCK_STREAM, protocol),
         "socket open error");
 
-    LOGT << "socket " << m_socket;
+//    LOGT << "socket " << m_socket;
 }
 
 
 void CSocket::close() {
-    LOGT << "::close socket " << m_socket;
+//    LOGT << "::close socket " << m_socket;
     assertOK(::close(m_socket), "close socket error");
 }
 
@@ -97,7 +97,7 @@ void CSocket::write(TPacket const &packet) {
         lpos += assertOK(::send(m_socket, buffer, rpos - lpos, 0),
             "socket write error");
     }
-    LOGT << "::write socket " << m_socket << " write_size " << lpos;
+//    LOGT << "::write socket " << m_socket << " write_size " << lpos;
 }
 
 
@@ -111,7 +111,7 @@ CSocket::TPacket CSocket::read() {
 
     auto result = TPacket(buffer, buffer + received_size);
 
-    LOGT << "::recv socket " << m_socket << " received_size " << received_size;// << " buffer\n" << result;
+//    LOGT << "::recv socket " << m_socket << " received_size " << received_size;// << " buffer\n" << result;
     return result; // ----->
 }
 
@@ -131,12 +131,12 @@ void CSocket::listen() {
     int yes = 1;
     setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
 
-    LOGT << "::bind socket " << m_socket;
+//    LOGT << "::bind socket " << m_socket;
     assertOK(::bind(m_socket, (struct sockaddr *) (&server_address), sizeof(server_address)),
         "socket bind error");
 
     // waiting for incoming packet
-    LOGT << "::listen socket " << m_socket;
+//    LOGT << "::listen socket " << m_socket;
     assertOK(::listen(m_socket, SOMAXCONN),
         "socket listen error");
 }
@@ -146,21 +146,21 @@ ISocket::TSocketStreams CSocket::accept() {
     struct sockaddr_in client_address = { 0 };
     socklen_t client_address_size = sizeof(client_address);
 
-    LOGT << "::accept socket " << m_socket << "... ";
+//    LOGT << "::accept socket " << m_socket << "... ";
 
     auto client_socket = assertOK(::accept(m_socket, (struct sockaddr *) (&client_address), &client_address_size),
         "socket accept error");
 
-    LOGT << "::accept socket " << m_socket << " accepted " << client_socket;
+//    LOGT << "::accept socket " << m_socket << " accepted " << client_socket;
 
     return ISocket::TSocketStreams(
-        { ISocketStream::TSharedPtr(new unix::CSocket(getPeerURL(client_socket), client_socket)) }
+        { ISocketStream::TSharedPtr(new unix::CSocket(client_socket)) }
     ); // ----->
 }
 
 
 void CSocket::interrupt() {
-    LOGT << "::shutdown socket " << m_socket;
+//    LOGT << "::shutdown socket " << m_socket;
     ::shutdown(m_socket, 2);
 //    assertOK(::shutdown(m_socket, 2),
 //        "socket interrupt error: url " + convert<string>(m_url));
@@ -176,10 +176,15 @@ void CSocket::connect() {
     address.sin_family       = AF_INET;
     address.sin_port         = htons( *m_url.getPort() );
 
-    LOGT << "::connect socket " << m_socket;
+//    LOGT << "::connect socket " << m_socket;
 
     assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)),
         "socket connect error");
+}
+
+
+URL CSocket::getURL() const {
+    return m_url;
 }
 
 
@@ -198,6 +203,16 @@ URL CSocket::getPeerURL(int const &socket) {
     assertOK(::getpeername(socket, (sockaddr *)&peer, &peer_len),
         "socket get peer ip error");
     return URL(string("tcp://") + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port)));
+}
+
+
+void CSocket::setBlockingMode(bool const &is_blocking) {
+    auto flags = assertOK(fcntl(m_socket, F_GETFL, 0), "socket get flag error");
+    if (is_blocking)
+        flags &= !O_NONBLOCK;
+    else
+        flags |=  O_NONBLOCK;
+    assertOK(fcntl(m_socket, F_SETFL, flags), "socket set flag error");
 }
 
 

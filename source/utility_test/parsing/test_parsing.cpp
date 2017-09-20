@@ -5,6 +5,7 @@
 #include <utility/parsing/parser.h>
 #include <utility/parsing/implementation/parser_xml.h>
 #include <utility/parsing/implementation/parser_json.h>
+#include <utility/parsing/implementation/parser_http_request.h>
 #include <utility/assert.h>
 
 
@@ -13,6 +14,7 @@ using utility::parsing::INode;
 using utility::parsing::implementation::CNode;
 using utility::parsing::implementation::CXMLParser;
 using utility::parsing::implementation::CJSONParser;
+using utility::parsing::implementation::CHTTPRequestParser;
 
 
 namespace {
@@ -140,6 +142,14 @@ string json_str_expects = ""
 "}\n";
 
 
+string http_header = ""
+"content-type: text/html; charset=windows-1251\n"
+"Allow: GET, HEAD\n"
+"Content-Length: 356\n"
+"ALLOW: GET, OPTIONS\n"
+"Content-Length:   1984";
+
+
 } // unnamed
 
 
@@ -184,6 +194,14 @@ TEST(parsing, compose_json) {
     auto json_str       = parser->compose(node);
 
     ASSERT_EQ(json_str_expects, json_str);
+}
+
+
+TEST(parsing, parse_http_request) {
+    auto parser         = CHTTPRequestParser::create();
+    auto node           = parser->parse(http_header);
+
+    std::cout << "http:\n" << convertion::convert<string>(node) << "\n";
 }
 
 

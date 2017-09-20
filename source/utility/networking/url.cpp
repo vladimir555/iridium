@@ -65,19 +65,26 @@ URL::URL(std::string const &url)
         }
     }
 
-    if (std::regex_match(address, std::regex(IPv4_REGEX))) {
-        auto ip = split(address, ".");
-        if (ip.size() == 4) {
+    // todo: rm slow regex
+//    if (std::regex_match(address, std::regex(IPv4_REGEX))) {
+    // todo: optimize
+    auto ip = split(address, ".");
+    if (ip.size() == 4) {
+        try {
             TIPv4 ipv4;
             for (auto const &ip_byte : ip)
                 ipv4.push_back(convert<uint8_t>(ip_byte));
             m_ipv4 = make_shared< vector<uint8_t> >(ipv4);
-        } else {
-            throw std::runtime_error("wrong url '" + m_address + "': error parsing network ipv4 address"); // ----->
+        } catch (...) {
+            m_host = make_shared<string>(address);
         }
     } else {
         m_host = make_shared<string>(address);
     }
+
+//} else {
+//    throw std::runtime_error("wrong url '" + m_address + "': error parsing network ipv4 address"); // ----->
+//}
 
     // port from protocol
     if (!((m_host || m_ipv4) && m_port && *m_port != 0))

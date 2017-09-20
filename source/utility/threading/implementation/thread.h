@@ -48,9 +48,10 @@ protected:
     ///
     std::string                     m_runnuble_name;
     ///
-    std::atomic<bool>               m_is_thread_running;
+    static void run(IRunnable::TSharedPtr const &runnuble, ICondition::TSharedPtr is_started_condition/*std::atomic<bool> *is_thread_running*/);
+private:
     ///
-    static void run(IRunnable::TSharedPtr const &runnuble, std::atomic<bool> *is_thread_running);
+    ICondition::TSharedPtr          m_is_started_condition;
 };
 
 

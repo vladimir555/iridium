@@ -4,6 +4,8 @@
 
 #include "utility/pattern/initializable.h"
 #include "utility/smart_ptr.h"
+#include "utility/threading/worker_pool.h"
+#include "utility/networking/socket.h"
 
 
 namespace utility {
@@ -15,6 +17,11 @@ class ISocket: public pattern::IInitializable {
 public:
     DEFINE_SMART_PTR(ISocket)
     virtual ~ISocket() = default;
+
+    typedef threading::IWorkerPool<ISocketStream::TSharedPtr>
+        TSocketStreamsWorkerPool;
+    typedef std::list<threading::IWorkerHandler<ISocketStream::TSharedPtr>::TSharedPtr >
+        TSocketStreamsHandlers;
 };
 
 

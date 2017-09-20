@@ -2,14 +2,15 @@
 #define HEADER_SOCKET_47A3CECD_0FF4_40FF_AF19_67FC1ED75B78
 
 
-#include "utility/networking/url.h"
 #include "utility/networking/server/socket.h"
-
+#include "utility/networking/url.h"
 #include "utility/networking//socket.h"
 
 #include "utility/threading/implementation/runnuble.h"
 #include "utility/threading/thread.h"
-#include "utility/threading/async_queue.h"
+#include "utility/threading/worker_pool.h"
+
+#include <list>
 
 
 namespace utility {
@@ -20,8 +21,7 @@ namespace implementation {
 
 class CSocket: public ISocket {
 public:
-    typedef threading::IAsyncQueue<ISocketStream::TSharedPtr> TSocketStreamQueue;
-    CSocket(URL const &url, TSocketStreamQueue::TSharedPtr const &socket_stream_queue);
+    CSocket(URL const &url, TSocketStreamsHandlers const &socket_stream_handlers);
     DEFINE_CREATE(CSocket)
     virtual ~CSocket() = default;
 
@@ -32,15 +32,15 @@ private:
     class Acceptor: public threading::implementation::CRunnuble {
     public:
         DEFINE_CREATE(Acceptor)
-        Acceptor(URL const &url, TSocketStreamQueue::TSharedPtr const &socket_stream_queue);
+        Acceptor(URL const &url, TSocketStreamsHandlers const &socket_stream_handlers);
         virtual ~Acceptor() = default;
 
         void run() override;
         void stop() override;
-    private:
-        networking::ISocket::TSharedPtr m_socket;
-        TSocketStreamQueue::TSharedPtr  m_socket_stream_queue;
 
+    private:
+        networking::ISocket::TSharedPtr         m_socket;
+        TSocketStreamsWorkerPool::TSharedPtr    m_worker_pool;
     };
 
     threading::IRunnable::TSharedPtr    m_runnuble;

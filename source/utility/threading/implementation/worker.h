@@ -42,7 +42,7 @@ public:
 
     virtual void handleStart() override;
     virtual void handleStop() override;
-    virtual void handleItems(TItems const &items) override;
+    virtual TItems handleItems(TItems const &items) override;
 private:
     class Runnuble: public CRunnuble {
     public:
@@ -123,8 +123,8 @@ void CWorker<TItem>::handleStop() {
 
 
 template<typename TItem>
-void CWorker<TItem>::handleItems(TItems const &items) {
-    m_worker_handler->handleItems(items);
+typename CWorker<TItem>::TItems CWorker<TItem>::handleItems(TItems const &items) {
+    return m_worker_handler->handleItems(items);
 }
 
 
@@ -141,7 +141,9 @@ void CWorker<TItem>::Runnuble::run() {
         m_worker.handleStart();
         while(m_is_running) {
             auto items = m_worker.m_async_queue->pop();
-            m_worker.handleItems(items);
+            auto left  = m_worker.handleItems(items);
+            if (!left.empty())
+                m_worker.push(left);
         }
         m_worker.handleStop();
     } catch (std::exception const &e) {

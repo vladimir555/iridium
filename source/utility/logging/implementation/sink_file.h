@@ -28,7 +28,7 @@ public:
 private:
     void handleStart() override;
     void handleStop() override;
-    void handleItems(TItems const &e) override;
+    TItems handleItems(TItems const &e) override;
 
     std::string m_file_name;
     std::string m_file_name_original;

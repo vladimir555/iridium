@@ -52,6 +52,11 @@
 #endif
 
 
+#if defined(FREEBSD_PLATFORM) || defined(MACOS_PLATFORM)
+#define FREEBSD_LIKE_PLATFORM
+#endif
+
+
 #define PLATFORM_IDENT(x) x
 #define PLATFORM_XSTR(x) #x
 #define PLATFORM_STR(x) PLATFORM_XSTR(x)

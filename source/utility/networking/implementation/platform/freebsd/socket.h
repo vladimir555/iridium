@@ -1,16 +1,16 @@
-#ifndef HEADER_SOCKET_07851BE9_9CF3_4DA7_9978_85E7575152E4
-#define HEADER_SOCKET_07851BE9_9CF3_4DA7_9978_85E7575152E4
+#ifndef HEADER_SOCKET_6EC11FC9_CBC3_439A_8053_B2E0D1EFC2B6
+#define HEADER_SOCKET_6EC11FC9_CBC3_439A_8053_B2E0D1EFC2B6
 
 
 #include "utility/platform.h"
 
 
-#ifdef LINUX_PLATFORM
+#ifdef FREEBSD_LIKE_PLATFORM
 
 
 #include "../unix/socket.h"
 
-#include <sys/epoll.h>
+#include <sys/event.h>
 #include <vector>
 
 
@@ -28,13 +28,14 @@ public:
 
     void listen() override;
     TSocketStreams accept() override;
-
 private:
     CSocket(int const &socket);
 
-    int                 m_epoll;
-    struct epoll_event  m_event;
-    std::vector<struct epoll_event> m_events;
+    std::vector<struct kevent>  m_events;
+    std::vector<struct kevent>  m_monitor_events;
+    size_t                      m_monitor_events_used_count;
+
+    int m_kqueue;
 };
 
 
@@ -44,7 +45,7 @@ private:
 } // utility
 
 
-#endif // LINUX_PLATFORM
+#endif // FREEBSD_LIKE_PLATFORM
 
 
-#endif // HEADER_SOCKET_07851BE9_9CF3_4DA7_9978_85E7575152E4
+#endif // HEADER_SOCKET_6EC11FC9_CBC3_439A_8053_B2E0D1EFC2B6

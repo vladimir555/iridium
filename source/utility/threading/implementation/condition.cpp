@@ -9,7 +9,7 @@
 using std::mutex;
 using std::unique_lock;
 using std::string;
-using std::chrono::seconds;
+using std::chrono::milliseconds;
 using utility::convertion::convert;
 
 
@@ -28,12 +28,12 @@ void CCondition::wait() const {
 }
 
 
-void CCondition::wait(int const &timeout_sec) const {
+void CCondition::wait(int const &timeout_ms) const {
     try {
         unique_lock<mutex> lock(m_mutex);
-        m_condition.wait_for(lock, seconds(timeout_sec));
+        m_condition.wait_for(lock, milliseconds(timeout_ms));
     } catch (std::exception const &e) {
-        throw std::runtime_error("condition variable waiting error, timeout " + convert<string>(timeout_sec) + " sec: " + e.what()); // ----->
+        throw std::runtime_error("condition variable waiting error, timeout " + convert<string>(timeout_ms) + " ms: " + e.what()); // ----->
     }
 }
 

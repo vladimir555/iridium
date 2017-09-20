@@ -23,6 +23,7 @@ namespace implementation {
 // ----- interface
 
 
+// todo: waiting for processing queue on interrupting
 template<typename TItem>
 class CAsyncQueue:
     public  IAsyncQueue<TItem>,

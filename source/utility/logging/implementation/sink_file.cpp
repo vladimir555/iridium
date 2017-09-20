@@ -50,7 +50,7 @@ void CSinkFile::handleStop() {
 }
 
 
-void CSinkFile::handleItems(TItems const &events) {
+CSinkFile::TItems CSinkFile::handleItems(TItems const &events) {
     if (m_is_rotation_by_day && high_resolution_clock::now() > m_last_initialization_time) {
         handleStop();
         handleStart();
@@ -60,6 +60,8 @@ void CSinkFile::handleItems(TItems const &events) {
         m_text_file_writer->writeLine(makeLine(e));
 
     m_text_file_writer->flush();
+
+    return TItems();
 }
 
 

@@ -6,6 +6,7 @@
 #include "utility/pattern/initializable.h"
 #include "utility/convertion/convert.h"
 
+#include "url.h"
 #include "types.h"
 
 #include <vector>
@@ -28,6 +29,7 @@ public:
     // todo: expected pacet size parameter
     virtual TPacket read() = 0;
     virtual void close() = 0;
+    virtual URL getURL() const = 0;
 };
 
 

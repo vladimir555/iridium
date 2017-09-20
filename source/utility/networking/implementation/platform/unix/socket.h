@@ -35,14 +35,16 @@ public:
     TSocketStreams accept() override;
     void interrupt() override;
     void connect() override;
+    URL  getURL() const override;
 
 protected:
-    CSocket(URL const &url, int const &socket);
+    CSocket(int const &socket);
     int assertOK(int const &result, std::string const &message) const;
     URL getPeerURL(int const &socket);
+    void setBlockingMode(bool const &is_blocking);
 
-    URL m_url;
     int m_socket;
+    URL m_url;
 };
 
 

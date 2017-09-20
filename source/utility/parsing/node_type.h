@@ -43,7 +43,7 @@ public:
     ///
     virtual typename INodeType::TNodes findChilds(std::string const &path) = 0;
     ///// todo:
-    //virtual typename INodeType::TNodesConst findChildNodesByPath(std::string const &path) const = 0;
+    //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
 
     ///
     virtual iterator begin() = 0;

@@ -8,41 +8,7 @@
 #ifdef MACOS_PLATFORM
 
 
-#include "../unix/socket.h"
-
-#include <sys/event.h>
-#include <vector>
-
-
-namespace utility {
-namespace networking {
-namespace implementation {
-namespace platform {
-
-
-class CSocket: public unix::CSocket {
-public:
-    DEFINE_CREATE(CSocket)
-    CSocket(URL const &url);
-    virtual ~CSocket() = default;
-
-    void listen() override;
-    TSocketStreams accept() override;
-private:
-    CSocket(URL const &url, int const &socket);
-
-    std::vector<struct kevent>  m_events;
-    std::vector<struct kevent>  m_monitor_events;
-    size_t                      m_monitor_events_used_count;
-
-    int m_kqueue;
-};
-
-
-} // platform
-} // implementation
-} // networking
-} // utility
+#include "../freebsd/socket.h"
 
 
 #endif // MACOS_PLATFORM

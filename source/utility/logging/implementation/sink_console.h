@@ -26,7 +26,7 @@ public:
     virtual ~CSinkConsole() = default;
 
 private:
-    void handleItems(TItems const &events) override;
+    TItems handleItems(TItems const &events) override;
     void handleStart() override;
     void handleStop() override;
 };

@@ -19,11 +19,17 @@ T assertExists(T const &&t, std::string const &error) {
 
 
 template<typename T>
-T assertOne(T const &&t, std::string const &error) {
-    if (t.size() == 1)
+T assertCount(T const &&t, size_t const &count, std::string const &error) {
+    if (t.size() == count)
         return t; // ----->
     else
         throw std::runtime_error(error);
+}
+
+
+template<typename T>
+T assertOne(T const &&t, std::string const &error) {
+    return assertCount(t, 1, error); // ----->
 }
 
 

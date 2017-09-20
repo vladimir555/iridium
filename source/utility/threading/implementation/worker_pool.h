@@ -24,7 +24,7 @@ template<typename TItem>
 class CWorkerPool: public IWorkerPool<TItem> {
 public:
     DEFINE_CREATE(CWorkerPool<TItem>)
-    CWorkerPool(std::list<typename IWorkerHandler<TItem>::TSharedPtr> const &handlers, std::string const &name);
+    explicit CWorkerPool(std::list<typename IWorkerHandler<TItem>::TSharedPtr> const &handlers, std::string const &name);
     virtual ~CWorkerPool() = default;
 
     typedef typename IWorkerPool<TItem>::TItems TItems;
@@ -67,10 +67,8 @@ void CWorkerPool<TItem>::initialize() {
 
 template<typename TItem>
 void CWorkerPool<TItem>::finalize() {
-    for (auto &worker: m_workers) {
-        m_queue->interrupt();
+    for (auto &worker: m_workers)
         worker->finalize();
-    }
 }
 
 

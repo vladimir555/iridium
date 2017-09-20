@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.5)
 project(utility)
 
-set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
-#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
+set(CMAKE_C_COMPILER "/usr/bin/clang")
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+
+set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O2")
+#set(CMAKE_BUILD_TYPE "Debug")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 
 #BUILD
 
@@ -48,11 +52,11 @@ add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
 
 # Link test executable against gtest & gtest_main
 target_link_libraries(
-  ${PROJECT_TEST_NAME} 
-  ${PROJECT_NAME}
-  ${GTEST_LIBRARY} 
-  ${GTEST_MAIN_LIBRARY}
-  ${CMAKE_THREAD_LIBS_INIT}
+    ${PROJECT_TEST_NAME} 
+    ${PROJECT_NAME}
+    ${GTEST_LIBRARY} 
+    ${GTEST_MAIN_LIBRARY}
+    ${CMAKE_THREAD_LIBS_INIT}
 )
 
 add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})
