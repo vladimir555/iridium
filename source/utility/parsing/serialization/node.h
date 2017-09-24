@@ -4,11 +4,11 @@
 
 #include <string>
 
-
 #include "utility/parsing/node.h"
 #include "utility/parsing/implementation/node.h"
 #include "utility/convertion/implementation/convert.h"
 
+#include <iostream>
 
 namespace utility {
 namespace parsing {
@@ -21,10 +21,6 @@ namespace serialization {
 template<typename TValue>
 class Node {
 public:
-    /// attribute
-    Node(Node<void> const &parent, std::string const &name, TValue const &default_value);
-    /// attribute
-    Node(Node<void> const &parent, std::string const &name);
     ///
    ~Node() = default;
     ///
@@ -40,8 +36,13 @@ public:
     ///
     bool operator== (TValue const &value) const;
 protected:
-    INode::TConstSharedPtr  m_node;
-    std::shared_ptr<TValue> m_value;
+    /// attribute
+    Node(Node<void> const &parent, std::string const &name, TValue const &default_value);
+    /// attribute
+    Node(Node<void> const &parent, std::string const &name);
+
+    INode::TConstSharedPtr  m_node_source;
+    INode::TSharedPtr       m_node_destination;
     std::string             m_path;
     bool                    m_is_default = false;
 };
@@ -50,23 +51,34 @@ protected:
 template<>
 class Node<void> {
 public:
-    /// root node
-    Node(INode::TConstSharedPtr const &node, std::string const &name, std::string const &path = "");
-    /// node
-    Node(Node<void> const &parent, std::string const &name);
+    /// root node for desiarization only
+    Node(std::string const &name);
+    /// root node for serialization and desiarization
+    Node(INode::TConstSharedPtr const &node, std::string const &name);
     ///
    ~Node() = default;
+    ///
+    INode::TSharedPtr       getNodeDefaults() const;
 
-    INode::TConstSharedPtr  m_node;
+    INode::TConstSharedPtr  m_node_source;
+    INode::TSharedPtr       m_node_destination;
     std::string             m_path;
+
+protected:
+    /// root node
+    Node(
+        INode::TConstSharedPtr  const &node_source,
+        INode::TSharedPtr       const &node_destination,
+        std::string             const &name,
+        std::string             const &path);
+    /// node
+    Node(Node<void> const &parent, std::string const &name);
 };
 
 
 template<typename TNode>
 class NodeList {
 public:
-    ///
-    NodeList(Node<void> const &parent, std::string const &name);
     ///
    ~NodeList() = default;
     ///
@@ -83,8 +95,16 @@ public:
     const_iterator end() const;
     ///
     size_t size() const;
+    ///
+    void add(TNode const &node);
+
+protected:
+    ///
+    NodeList(Node<void> const &parent, std::string const &name);
 
 private:
+    ///
+    Node<void> const &m_parent;
     ///
     std::list<TNode> m_nodes;
 };
@@ -99,14 +119,14 @@ private:
 template<typename TValue>
 Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue const &default_value) {
     m_path = parent.m_path + "/" + name;
-    if (parent.m_node)
-        m_node = parent.m_node->getChild(name);
+    if (parent.m_node_source)
+        m_node_source       = parent.m_node_source->getChild(name);
 
-    if (m_node)
-        m_value = std::make_shared<TValue>(convertion::convert<TValue>(m_node->getValue()));
-    else {
-        m_value = std::make_shared<TValue>(default_value);
-        m_is_default = true;
+    if (m_node_source) {
+        m_node_destination  = parent.m_node_destination->addChild(name, m_node_source->getValue());
+    } else {
+        m_node_destination  = parent.m_node_destination->addChild(name, convertion::convert<std::string>(default_value));
+        m_is_default        = true;
     }
 }
 
@@ -114,11 +134,11 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue con
 template<typename TValue>
 Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
     m_path = parent.m_path + "/" + name;
-    if (parent.m_node)
-        m_node = parent.m_node->getChild(name);
+    if (parent.m_node_source)
+        m_node_source       = parent.m_node_source->getChild(name);
 
-    if (m_node)
-        m_value = std::make_shared<TValue>(convertion::convert<TValue>(m_node->getValue()));
+    if (m_node_source)
+        m_node_destination  = parent.m_node_destination->addChild(name, m_node_source->getValue());
     else
         throw std::runtime_error("node '" + m_path + "' not found"); // ----->
 }
@@ -126,8 +146,8 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
 
 template<typename TValue>
 TValue Node<TValue>::get() const {
-    if (m_value)
-        return *m_value; // ----->
+    if (m_node_destination)
+        return convertion::convert<TValue>(m_node_destination->getValue());
     else
         throw std::runtime_error("value " + m_path + " not serialized"); // ----->
 }
@@ -135,7 +155,7 @@ TValue Node<TValue>::get() const {
 
 template<typename TValue>
 void Node<TValue>::set(TValue const &value) {
-    m_value = std::make_shared<TValue>(value);
+    m_node_destination->setValue(convertion::convert<std::string>(value));
 }
 
 
@@ -169,10 +189,14 @@ bool Node<TValue>::operator== (TValue const &value) const {
 
 
 template<typename TNode>
-NodeList<TNode>::NodeList(Node<void> const &parent, std::string const &name) {
-    for (auto const &i: *parent.m_node)
-        if (i->getName() == name)
-            m_nodes.push_back(TNode(i, parent.m_path));
+NodeList<TNode>::NodeList(Node<void> const &parent, std::string const &name)
+:
+    m_parent(parent)
+{
+    if (parent.m_node_source)
+        for (auto const &i: *parent.m_node_source)
+            if (i->getName() == name)
+                m_nodes.push_back(TNode(i, parent.m_node_destination->addChild(name), parent.m_path));
 }
 
 
@@ -206,6 +230,13 @@ size_t NodeList<TNode>::size() const {
 }
 
 
+template<typename TNode>
+void NodeList<TNode>::add(TNode const &node) {
+    m_parent.m_node_destination->addChild(node.getNodeDefaults());
+    m_nodes.push_back(node);
+}
+
+
 // -----
 
 
@@ -220,7 +251,12 @@ std::string convertCamelToDashed(std::string const &camel);
 #define DEFINE_ROOT_NODE_BEGIN(class_name) \
     struct T##class_name : protected utility::parsing::serialization::Node<void> { \
         T##class_name(utility::parsing::INode::TConstSharedPtr const &node): utility::parsing::serialization::Node<void> \
-        (node, utility::parsing::serialization::convertCamelToDashed(#class_name)) {}
+        (node, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        T##class_name(): utility::parsing::serialization::Node<void> \
+        (utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        utility::parsing::INode::TSharedPtr getNodeDefaults() const { \
+            return utility::parsing::serialization::Node<void>::getNodeDefaults(); \
+        }
 
 
 #define DEFINE_ROOT_NODE_BEGIN_TYPED(class_name) \
@@ -233,7 +269,7 @@ std::string convertCamelToDashed(std::string const &camel);
 
 #define DEFINE_NODE_BEGIN(class_name) \
     struct T##class_name : protected utility::parsing::serialization::Node<void> { \
-        T##class_name(utility::parsing::serialization::Node<void> const &parent) : utility::parsing::serialization::Node<void> \
+        T##class_name(utility::parsing::serialization::Node<void> const &parent): utility::parsing::serialization::Node<void> \
         (parent, utility::parsing::serialization::convertCamelToDashed(#class_name)) {}
 
 
@@ -259,9 +295,15 @@ std::string convertCamelToDashed(std::string const &camel);
 
 // todo: push_back
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
-    struct T##class_name : protected utility::parsing::serialization::Node<void> { \
-        T##class_name(utility::parsing::INode::TConstSharedPtr const &node, std::string const &path) : utility::parsing::serialization::Node<void> \
-        (node, utility::parsing::serialization::convertCamelToDashed(#class_name), path) {}
+    struct T##class_name : public utility::parsing::serialization::Node<void> { \
+        T##class_name( \
+        utility::parsing::INode::TConstSharedPtr const &node_source, \
+        utility::parsing::INode::TSharedPtr const &node_destination, \
+        std::string const &path): \
+        utility::parsing::serialization::Node<void> \
+        (node_source, node_destination, utility::parsing::serialization::convertCamelToDashed(#class_name), path) {} \
+        T##class_name(): utility::parsing::serialization::Node<void> \
+        (utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
 
 
 #define DEFINE_NODE_LIST_END(class_name) \
