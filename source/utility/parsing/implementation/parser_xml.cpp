@@ -2,12 +2,16 @@
 
 #include <sstream>
 #include <vector>
+#include <list>
+#include <unordered_map>
 
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_print.hpp>
 
 #include "node.h"
 #include "utility/assert.h"
+#include "utility/items.h"
+#include "utility/strings.h"
 
 
 using TXMLDocument  = rapidxml::xml_document<>;
@@ -16,9 +20,22 @@ using TXMLAttribute = rapidxml::xml_attribute<>;
 
 
 using std::stringstream;
-using std::vector;
 using std::istreambuf_iterator;
 using std::string;
+using std::vector;
+using std::list;
+using std::unordered_map;
+
+
+namespace {
+
+
+string mask(string const &source) {
+    return source;
+}
+
+
+}
 
 
 namespace utility {
@@ -37,8 +54,15 @@ INode::TSharedPtr convertXMLNodeToNode(TXMLNode const * const xml_node) {
             xml_node_attribute = xml_node_attribute->next_attribute();
         }
 
-        if(xml_node->value_size() > 0)
-            node->addChild("", xml_node->value());
+        if(xml_node->value_size() > 0) {
+            if (xml_node->first_attribute() == nullptr &&
+               (xml_node->first_node()      == nullptr ||
+                xml_node->first_node()->name_size() == 0))
+            {
+                return CNode::create(xml_node->name(), xml_node->value()); // ----->
+            } else
+                node->addChild("", xml_node->value());
+        }
 
         auto xml_node_child = xml_node->first_node();
         while (xml_node_child) {
@@ -55,22 +79,34 @@ INode::TSharedPtr convertXMLNodeToNode(TXMLNode const * const xml_node) {
 
 TXMLNode *convertNodeToXMLNode(INode::TConstSharedPtr const &node, TXMLNode *xml_node_, TXMLDocument &xml_document) {
     if (node->hasChilds()) {
-        auto name           = xml_document.allocate_string(node->getName().c_str());
+        auto name           = xml_document.allocate_string(mask(node->getName()).c_str());
         auto xml_node_child = xml_document.allocate_node(rapidxml::node_element, name);
 
-        for (auto const &node_child: *node)
-            convertNodeToXMLNode(node_child, xml_node_child, xml_document); // <-----
+        unordered_map<string, int> m;
+        for (auto const &child: *node)
+            m[child->getName()]++;
+
+        for (auto const &child: *node) {
+            if (!child->hasChilds() && m[child->getName()] > 1) {
+                auto name  = xml_document.allocate_string(mask(child->getName()).c_str());
+                auto value = xml_document.allocate_string(mask(child->getValue()).c_str());
+                auto xml_node_array_item = xml_document.allocate_node(rapidxml::node_element, name);
+                xml_node_array_item->value(value);
+                xml_node_child->append_node(xml_node_array_item);
+            } else
+                convertNodeToXMLNode(child, xml_node_child, xml_document); // <-----
+        }
 
         if (xml_node_)
             xml_node_->append_node(xml_node_child);
         else
             xml_node_ = xml_node_child;
     } else {
-        auto value = xml_document.allocate_string(node->getValue().c_str());
+        auto value = xml_document.allocate_string(mask(node->getValue()).c_str());
         if (node->getName().empty()) {
             xml_node_->value(value);
         } else {
-            auto name           = xml_document.allocate_string(node->getValue().c_str());
+            auto name           = xml_document.allocate_string(mask(node->getName()).c_str());
             auto xml_attribute  = xml_document.allocate_attribute(name, value);
             xml_node_->append_attribute(xml_attribute);
         }
@@ -90,7 +126,7 @@ INode::TSharedPtr CXMLParser::parse(string const &source) const {
 }
 
 
-string CXMLParser::compose(INode::TConstSharedPtr const &root_node, INode::TConstSharedPtr const &) const {
+string CXMLParser::compose(INode::TConstSharedPtr const &root_node) const {
     TXMLDocument xml_document;
 
     auto xml_node_declaration = xml_document.allocate_node(rapidxml::node_declaration);

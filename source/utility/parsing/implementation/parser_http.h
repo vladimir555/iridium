@@ -15,14 +15,14 @@ namespace implementation {
 
 
 //todo: http request / responce
-class CHTTPRequestParser: public IParser {
+class CHTTPParser: public IParser {
 public:
-    DEFINE_CREATE(CHTTPRequestParser)
-    CHTTPRequestParser() = default;
-    virtual ~CHTTPRequestParser() = default;
+    DEFINE_CREATE(CHTTPParser)
+    CHTTPParser() = default;
+    virtual ~CHTTPParser() = default;
 
     INode::TSharedPtr parse(std::string const &source) const override;
-    std::string compose(INode::TConstSharedPtr const &root_node, INode::TConstSharedPtr const &root_node_types = nullptr) const override;
+    std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 
 

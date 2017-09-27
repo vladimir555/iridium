@@ -23,7 +23,7 @@ public:
     ///
     virtual INode::TSharedPtr parse(std::string const &source) const override;
     ///
-    virtual std::string compose(INode::TConstSharedPtr const &root_node, INode::TConstSharedPtr const &root_node_types = nullptr) const override;
+    virtual std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 
 

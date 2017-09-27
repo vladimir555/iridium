@@ -1,6 +1,6 @@
 #include "parser_json.h"
 
-#include <map>
+#include <unordered_map>
 #include <list>
 
 #include "utility/parsing/implementation/node.h"
@@ -8,10 +8,11 @@
 #include "utility/convertion/type_name.h"
 #include "utility/assert.h"
 #include "utility/strings.h"
+#include "utility/items.h"
 
 
 using std::string;
-using std::map;
+using std::unordered_map;
 using std::list;
 
 
@@ -39,11 +40,11 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
     string  value;
     TMarker marker   = TMarker::NAME;
 
-    auto clearFields = [&name, &value] () {
+    auto clearEntry = [&name, &value] () {
         name.clear();         
         value.clear(); 
     };
-    auto trimFields  = [&name, &value] () {
+    auto trimEntry  = [&name, &value] () {
         name    = trim(name , " \t\n\r\"");
         value   = trim(value, " \t\n\r\"");
         if (name.substr(0, 2)  == "\\\"")
@@ -55,10 +56,11 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
         &name, 
         &value, 
         &node, 
-        &trimFields, 
-        &clearFields
+        &trimEntry,
+        &clearEntry,
+        &is_array_item
     ] () { 
-        trimFields(); 
+        trimEntry();
         if (!name.empty() && !value.empty()) {
             if (name == "#text")
                 name.clear();
@@ -66,23 +68,30 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
             if (isdigit(static_cast<int>(name[0])))
                 throw std::runtime_error("wrong json field name: " + name); // ----->
 
-            for (auto const ch : name)
+            for (auto const ch: name)
                 if (ispunct(static_cast<int>(ch)))
                     throw std::runtime_error("wrong json field name: " + name); // ----->
 
             node->addChild(name, value);
+        } else {
+            // array simple item
+            if (is_array_item && !name.empty() && value.empty())
+                node->addChild("", name);
+            else {
+                // todo: error
+            }
         }
-        clearFields();
+        clearEntry();
     };
 
     while (index < source.size()) {
-        auto ch = source[index];
+        auto ch  = source[index];
         index++;
 
         if (ch == '{') {
             INode::TSharedPtr node_child;
 
-            trimFields();
+            trimEntry();
 
             if (name.empty())
                 node_child = node;
@@ -94,21 +103,31 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
             if (is_array_item)
                 return; // <-----
 
-            clearFields();
+            clearEntry();
             continue; // <---
         }
 
         if (ch == '[') {
             while (ch != ']') {
-                trimFields();
-                INode::TSharedPtr node_child = CNode::create(name, "");
-                convertStringToNode(source, node_child, index, true); // <-----
-                if (node_child->hasChilds())
-                    node->addChild(node_child);
+                trimEntry();
+                INode::TSharedPtr node_array_item_tmp = CNode::create(name);
+                convertStringToNode(source, node_array_item_tmp, index, true); // <-----
+                if (node_array_item_tmp->hasChilds()) {
+                    auto node_array_item = CNode::create(name);
+                    for (auto const &child: *node_array_item_tmp)
+                        if (child->getName().empty())
+                            // simple array item like [1, 2, ... ]
+                            node->addChild(name, child->getValue());
+                        else
+                            // object array item like [ { ... },  { ... }, ...]
+                            node_array_item->addChild(child);
+                    if (node_array_item->hasChilds())
+                        node->addChild(node_array_item);
+                }
                 ch = source[index - 1];
             }
 
-            clearFields();
+            clearEntry();
             continue; // <---
         }
 
@@ -145,82 +164,67 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 
     if (root_node->size() == 1)
         root_node = *root_node->begin();
-    else
-        throw std::runtime_error("json parsing error"); // ----->
+    else {
+        auto childs = root_node;
+        root_node = CNode::create("root");
+        root_node->addChild(childs);
+    }
 
     return root_node; // ----->
 }
 
 
-void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result, string const &tab = "", INode::TConstSharedPtr const &node_type = nullptr) {
-    struct TJSONEntry { 
-        INode::TConstSharedPtr node; 
-        INode::TConstSharedPtr node_type; 
-    };
+void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result, string const &tab = "") {
+    unordered_map<string, list< INode::TConstSharedPtr > > m;
+    list<string> names;
 
-    map<string, list< TJSONEntry > > m;
+    for (auto const &i : *node) {
+        addUnique(i->getName(), names);
+        m[i->getName()].push_back(i);
+    }
 
-    if (node_type) {
-        auto inode      = node->begin();
-        auto inode_type = node_type->begin();
-        while (inode != node->end()) {
-            if (inode_type != node_type->end()) {
-                m[(*inode)->getName()].push_back({ *inode, *inode_type });
-                inode_type++;
-            } else
-                m[(*inode)->getName()].push_back({ *inode, nullptr });
-            inode++;
-        }
-    } else
-        for (auto const &i : *node)
-            m[i->getName()].push_back( { i, nullptr } );
-
-    for (auto const &i : m) {
+    for (auto const &name: names) {
+        auto nodes = m[name];
         string line_end;
-        if (m.size() == 1 || i.first == (--m.end())->first)
+        if (m.size() == 1 || isLastItem(name, names))
             line_end = "\n";
         else
             line_end = ",\n";
 
-        if (i.second.size() == 1) {
-            auto node_child = *i.second.begin();
+        if (nodes.size() == 1) {
+            auto node_child = *nodes.begin();
 
-            if (node_child.node->hasChilds()) {
-                result += tab + node_child.node->getName() + ": {\n";
-                convertNodeToJsonString(node_child.node, result, tab + DEFAULT_TAB, node_child.node_type); // <-----
+            if (node_child->hasChilds()) {
+                result += tab + node_child->getName() + ": {\n";
+                convertNodeToJsonString(node_child, result, tab + DEFAULT_TAB); // <-----
                 result += tab + "}" + line_end;
             } else {
-                string name = node_child.node->getName();
+                string name = node_child->getName();
 
                 if (name.empty())
                     name = "#text";
-
-                string value_interpretation;
-                if (node_child.node_type) {
-                    if (node_child.node_type->getValue() == convertion::getTypeName<string>())
-                        value_interpretation = "\"" + node_child.node->getValue() + "\"";
-                    else
-                        value_interpretation = node_child.node->getValue();
-                } else
-                    value_interpretation = "\"" + node_child.node->getValue() + "\"";
                     
+                result += tab;
                 if (tab.empty())
-                    result += tab + DEFAULT_TAB + name + ": " + value_interpretation + line_end;
-                else
-                    result += tab + name + ": " + value_interpretation + line_end;
+                    result += DEFAULT_TAB;
+                result += name + ": " + "\"" + node_child->getValue() + "\"" + line_end;
             }
         } else {
-            result += tab + i.first + ": [\n";
-            for (auto const &ii : i.second) {
+            result += tab + name + ": [\n";
+            for (auto const &node : nodes) {
                 string line_end_;
-                if (i.second.size() == 1 || ii.node == (--i.second.end())->node)
+                if (nodes.size() == 1 || isLastItem(node, nodes))
                     line_end_ = "\n";
                 else
                     line_end_ = ",\n";
 
-                result += tab + DEFAULT_TAB + "{\n";
-                convertNodeToJsonString(ii.node, result, tab + DEFAULT_TAB + DEFAULT_TAB, ii.node_type); // <-----
-                result += tab + DEFAULT_TAB + "}" + line_end_;
+                if (node->hasChilds()) {
+                    result += tab + DEFAULT_TAB + "{\n";
+                    convertNodeToJsonString(node, result, tab + DEFAULT_TAB + DEFAULT_TAB); // <-----
+                    result += tab + DEFAULT_TAB + "}" + line_end_;
+                } else {
+                    result += tab + DEFAULT_TAB + "\"" + node->getValue() + "\"" + line_end_;
+                }
             }
             result += tab + "]" + line_end;
         }
@@ -228,10 +232,10 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
 }
 
 
-string CJSONParser::compose(INode::TConstSharedPtr const &root_node, INode::TConstSharedPtr const &root_node_types) const {
+string CJSONParser::compose(INode::TConstSharedPtr const &root_node) const {
     string result;
-    convertNodeToJsonString(root_node, result, DEFAULT_TAB, root_node_types);
-    result = "{\n" + result + "}\n";
+    convertNodeToJsonString(root_node, result, DEFAULT_TAB + DEFAULT_TAB);
+    result = "{\n" + DEFAULT_TAB + root_node->getName() + ": {\n" + result + DEFAULT_TAB + "}\n}\n";
     return result; // ----->
 }
 

@@ -5,7 +5,11 @@
 
 using std::string;
 using std::vector;
+using std::list;
 using std::transform;
+
+#include <iostream>
+using namespace std;
 
 
 namespace utility {
@@ -39,11 +43,21 @@ string upperCase(string const &source) {
 }
 
 
-string replace(string const &source, char const &from, char const &to) {
-    string result = source;
-    for (auto &ch: result)
-        if (ch == from)
-            ch =  to;
+string replace(string const &source, string const &from, string const &to) {
+    size_t lpos = 0;
+    size_t rpos = 0;
+    string result;
+
+    while (rpos != string::npos) {
+        rpos = source.find(from, lpos + from.size());
+        if (rpos == string::npos)
+            result += source.substr(lpos, string::npos);
+        else {
+            result += source.substr(lpos, rpos - lpos);
+            result += to;
+        }
+        lpos = rpos + from.size();
+    }
     return result; // ----->
 }
 
@@ -60,8 +74,8 @@ string trim(string const &source, string const &symbols) {
     if (source.empty())
         return ""; // ----->
 
-    size_t left     = 0;
-    size_t right    = source.size() - 1;
+    size_t lpos = 0;
+    size_t rpos = source.size() - 1;
 
     auto testSymbol = [symbols] (char const &ch_) -> bool {
         for (auto const ch : symbols)
@@ -70,14 +84,14 @@ string trim(string const &source, string const &symbols) {
         return false;
     };
 
-    while (left <= right && testSymbol(source[left]))
-        left++;
+    while (lpos <= rpos && testSymbol(source[lpos]))
+        lpos++;
 
-    while (left <= right && testSymbol(source[right]))
-        right--;
+    while (lpos <= rpos && testSymbol(source[rpos]))
+        rpos--;
 
-    if (right >= left)
-        return source.substr(left, right - left + 1); // ----->
+    if (rpos >= lpos)
+        return source.substr(lpos, rpos - lpos + 1); // ----->
     else
         return ""; // ----->
 }

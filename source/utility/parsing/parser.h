@@ -22,7 +22,7 @@ public:
     ///
     virtual INode::TSharedPtr parse(std::string const &source) const = 0;
     ///
-    virtual std::string compose(INode::TConstSharedPtr const &root_node, INode::TConstSharedPtr const &root_node_types = nullptr) const = 0;
+    virtual std::string compose(INode::TConstSharedPtr const &root_node) const = 0;
 };
 
 

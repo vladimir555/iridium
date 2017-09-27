@@ -259,10 +259,6 @@ std::string convertCamelToDashed(std::string const &camel);
         }
 
 
-#define DEFINE_ROOT_NODE_BEGIN_TYPED(class_name) \
-    DEFINE_ROOT_NODE_BEGIN(class_name)
-
-
 #define DEFINE_ROOT_NODE_END() \
     };
 
