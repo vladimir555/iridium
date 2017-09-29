@@ -13,40 +13,39 @@
 namespace utility {
 namespace networking {
 namespace http {
-
-
-DEFINE_ENUM(
-    TAllow,
-    GET,
-    OPTIONS,
-    HEAD
-)
+namespace request {
 
 
 DEFINE_ROOT_NODE_BEGIN(Http)
-    struct TRequestLine {
+    struct TMessageLine {
         TMethod     method;
         std::string uri;
         std::string protocol;
     };
-    DEFINE_ATTRIBUTE(TRequestLine, Message)
+    DEFINE_ATTRIBUTE(TMessageLine, Message)
     DEFINE_NODE_BEGIN(Headers)
         DEFINE_ATTRIBUTE(std::string, Host)
         DEFINE_ATTRIBUTE(std::string, UserAgent)
         DEFINE_ATTRIBUTE(int, KeepAlive)
         DEFINE_ATTRIBUTE(std::string, Connection)
         DEFINE_ATTRIBUTE_LIST(std::string, Accept)
+        DEFINE_ATTRIBUTE_LIST(std::string, AcceptLanguage)
+        DEFINE_ATTRIBUTE_LIST(std::string, AcceptEncoding)
+        DEFINE_ATTRIBUTE_LIST(std::string, AcceptCharset)
+        DEFINE_ATTRIBUTE_LIST(std::string, Cookie)
     DEFINE_NODE_END(Headers)
+    DEFINE_ATTRIBUTE(std::string, Body)
 DEFINE_ROOT_NODE_END()
 
 
+} // request
 } // http
 } // networking
 } // utility
 
 
-DEFINE_CONVERT(utility::networking::http::THttp::TRequestLine, std::string)
-DEFINE_CONVERT(std::string, utility::networking::http::THttp::TRequestLine)
+DEFINE_CONVERT(utility::networking::http::request::THttp::TMessageLine, std::string)
+DEFINE_CONVERT(std::string, utility::networking::http::request::THttp::TMessageLine)
 
 
 #endif // HEADER_REQUEST_E86B18F8_93B2_4E65_B812_2A46EF802DC6

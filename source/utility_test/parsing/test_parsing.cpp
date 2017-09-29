@@ -188,9 +188,9 @@ string const http_header_node = ""
 "  'message' = 'GET / HTTP/1.1'\n"
 "  'headers' = ''\n"
 "    'content-type' = 'text/html; charset=windows-1251'\n"
-"    'allow' = 'options'\n"
-"    'allow' = 'head'\n"
-"    'allow' = 'get'\n"
+"    'allow' = 'OPTIONS'\n"
+"    'allow' = 'HEAD'\n"
+"    'allow' = 'GET'\n"
 "    'content-length' = '1984'\n"
 "  'body' = ''\n";
 
@@ -198,8 +198,8 @@ string const http_header_node = ""
 string const http_header_composed = ""
 "GET / HTTP/1.1\n"
 "content-type: text/html; charset=windows-1251\n"
-"allow: get, head, options\n"
-"content-length: 1984\n";
+"allow: GET, HEAD, OPTIONS\n"
+"content-length: 1984\n\n";
 
 
 } // unnamed

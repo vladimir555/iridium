@@ -18,14 +18,15 @@ list<string> split(string const &source, string const &delimiter, size_t const &
     while (rpos != string::npos) {
 
         if (max_items == 0 || result.size() < (max_items - 1))
-            rpos = source.find(delimiter, lpos + delimiter.size());
+            rpos = source.find(delimiter, lpos + delimiter.size() - 1);
         else
             rpos = string::npos;
 
-        auto item = source.substr(lpos, rpos - lpos);
-
-        if (item != delimiter)
-            result.push_back(item);
+        if (lpos < rpos) {
+            auto item = source.substr(lpos, rpos - lpos);
+            if (item != delimiter && !item.empty())
+                result.push_back(item);
+        }
 
         lpos = rpos + delimiter.size();
     }

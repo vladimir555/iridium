@@ -58,7 +58,7 @@ Node<void>::Node(Node<void> const &parent, std::string const &name) {
 }
 
 
-INode::TSharedPtr Node<void>::getNodeDefaults() const {
+INode::TSharedPtr Node<void>::getNode() const {
     return m_node_destination; // ----->
 }
 

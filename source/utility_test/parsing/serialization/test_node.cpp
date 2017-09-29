@@ -90,7 +90,7 @@ TEST(parsing, serialization) {
     ASSERT_EQ("defaultValue1", static_cast<string>   (root.FirstItem.AttributeOne));
     ASSERT_EQ(55             , static_cast<int>      (root.FirstItem.AttributeTwo));
     ASSERT_EQ(C::TEnum::ENUM2,                        root.FirstItem.Enum.get());
-    ASSERT_EQ("defaultValue1", root.getNodeDefaults()->getChild("first-item")->getChild("attribute-one")->getValue());
+    ASSERT_EQ("defaultValue1", root.getNode()->getChild("first-item")->getChild("attribute-one")->getValue());
 
     ASSERT_EQ(2, root.Item1.size());
     auto i = root.Item1.begin();

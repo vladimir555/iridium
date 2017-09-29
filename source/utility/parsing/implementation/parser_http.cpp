@@ -64,42 +64,45 @@ INode::TSharedPtr CHTTPParser::parse(std::string const &source) const {
     unordered_map<string, unordered_set<string> > cache;
     list<string>    names;
     string          body;
-    bool            is_body_section = false;
-    auto            lines           = split(source, "\n");
+    auto            lines = split(source, "\n\n");
+
+    if (lines.size() > 1) {
+        auto tmp = lines.front();
+        lines.pop_front();
+        for (auto const &line: lines)
+            body += line;
+        lines = split(tmp, "\n");
+    } else
+        lines = split(source, "\n");
 
     node->addChild(HTTP_MESSAGE, lines.front());
     lines.pop_front();
 
     for (auto const &line: lines) {
-        if (line.empty()) {
-            is_body_section = true;
-            continue; // <---
-        }
+        auto arg    = assertSize(split(line, ":", 2), 2, "http header parsing error: line '" + line + "'");
+        auto name   = lowerCase(arg.front());
 
-        if (is_body_section)
-            body += line;
-        else {
-            auto arg    = assertSize(split(line, ":", 2), 2, "http header parsing error: line '" + line + "'");
-            auto name   = lowerCase(arg.front());
+        addUnique(name, names);
 
-            addUnique(name, names);
+        arg.pop_front();
 
-            arg.pop_front();
-            auto values = split(arg.front(), ",");
+        list<string> values;
+        if (name == "last-modified" || name == "date")
+            values.push_back(arg.front());
+        else
+            values = split(arg.front(), ",");
 
-            if (values.size() == 1)
-                cache[name].clear();
+        if (values.size() == 1)
+            cache[name].clear();
 
-            for (auto const &value: values)
-                cache[name].insert(trim(lowerCase(value)));
-        }
+        for (auto const &value: values)
+            cache[name].insert(trim(value));
     }
 
     auto headers = node->addChild(HTTP_HEADERS);
-    for (auto const &name: names) {
+    for (auto const &name: names)
         for (auto const &value: cache[name])
             headers->addChild(name, value);
-    }
 
     node->addChild(HTTP_BODY, body);
 
@@ -107,17 +110,17 @@ INode::TSharedPtr CHTTPParser::parse(std::string const &source) const {
 }
 
 
-std::string CHTTPParser::compose(INode::TConstSharedPtr const &root_node) const {
+std::string CHTTPParser::compose(INode::TConstSharedPtr const &node) const {
     string result;
 
-    auto message = assertExists(root_node->getChild(HTTP_MESSAGE), "http composing error: node " + HTTP_MESSAGE + "does not exists");
+    auto message = assertExists(node->getChild(HTTP_MESSAGE), "http composing error: node " + HTTP_MESSAGE + " does not exists");
     result      += message->getValue() + "\n";
 
-    if (root_node) {
+    if (node) {
         unordered_map<string, unordered_set<string> > cache;
         list<string> names;
 
-        auto headers = assertExists(root_node->getChild(HTTP_HEADERS), "http composing error: node " + HTTP_HEADERS + "does not exists");
+        auto headers = assertExists(node->getChild(HTTP_HEADERS), "http composing error: node " + HTTP_HEADERS + " does not exists");
         for (auto const &header: *headers) {
             addUnique(header->getName(), names);
             cache[header->getName()].insert(header->getValue());
@@ -135,8 +138,8 @@ std::string CHTTPParser::compose(INode::TConstSharedPtr const &root_node) const 
     } else
         throw std::runtime_error("http composing error: http header root node is null"); // ----->
 
-    auto body   = assertExists(root_node->getChild(HTTP_BODY), "http composing error: node " + HTTP_BODY + "does not exists");
-    result     += body->getValue();
+    auto body   = assertExists(node->getChild(HTTP_BODY), "http composing error: node " + HTTP_BODY + " does not exists");
+    result     += "\n" + body->getValue();
 
     return result; // ----->
 }

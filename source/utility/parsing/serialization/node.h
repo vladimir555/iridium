@@ -35,7 +35,7 @@ public:
     ///
     bool operator== (TValue const &value) const;
     ///
-    INode::TSharedPtr getNodeDefaults() const;
+    INode::TSharedPtr getNode() const;
 protected:
     /// list attribute
     Node(
@@ -66,7 +66,7 @@ public:
     ///
    ~Node() = default;
     ///
-    INode::TSharedPtr       getNodeDefaults() const;
+    INode::TSharedPtr       getNode() const;
 
     INode::TConstSharedPtr  m_node_source;
     INode::TSharedPtr       m_node_destination;
@@ -153,7 +153,7 @@ Node<TValue>::Node(std::string const &name) {
 
 
 template<typename TValue>
-INode::TSharedPtr Node<TValue>::getNodeDefaults() const {
+INode::TSharedPtr Node<TValue>::getNode() const {
     return m_node_destination; // ----->
 }
 
@@ -275,7 +275,7 @@ size_t NodeList<TNode>::size() const {
 
 template<typename TNode>
 void NodeList<TNode>::add(TNode const &node) {
-    m_parent.m_node_destination->addChild(node.getNodeDefaults());
+    m_parent.m_node_destination->addChild(node.getNode());
     m_nodes.push_back(node);
 }
 
@@ -307,8 +307,8 @@ std::string convertCamelToDashed(std::string const &camel);
         (node, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
         T##class_name(): utility::parsing::serialization::Node<void> \
         (utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
-        utility::parsing::INode::TSharedPtr getNodeDefaults() const { \
-            return utility::parsing::serialization::Node<void>::getNodeDefaults(); \
+        utility::parsing::INode::TSharedPtr getNode() const { \
+            return utility::parsing::serialization::Node<void>::getNode(); \
         }
 
 
