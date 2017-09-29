@@ -62,4 +62,6 @@ __time64_t mkgmtime(struct tm * const tm_) {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // WINDOWS_PLATFORM

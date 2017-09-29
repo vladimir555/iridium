@@ -1,6 +1,7 @@
 #include "url.h"
 
 #include "utility/strings.h"
+#include "utility/items.h"
 #include "dns.h"
 
 #include <regex>
@@ -37,7 +38,7 @@ URL::URL(std::string const &url)
     if (m_address.empty())
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 
-    auto tokens = split(m_address, PROTOCOL_DELIMITER);
+    auto tokens = assign(split(m_address, PROTOCOL_DELIMITER));
 
     if (tokens.size() != 1 && tokens.size() != 2)
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
@@ -50,7 +51,7 @@ URL::URL(std::string const &url)
         other = tokens[0];
     }
 
-    tokens = split(other, PORT_DELIMITER);
+    tokens = assign(split(other, PORT_DELIMITER));
 
     if (tokens.size() != 1 && tokens.size() != 2)
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->

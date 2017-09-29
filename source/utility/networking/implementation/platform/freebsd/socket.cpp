@@ -171,4 +171,6 @@ CSocket::TSocketStreams CSocket::accept() {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // FREEBSD_LIKE_PLATFORM

@@ -104,4 +104,6 @@ CSocket::TSocketStreams CSocket::accept() {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // LINUX_PLATFORM

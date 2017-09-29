@@ -6,7 +6,9 @@
 namespace utility {
 
 ///
-std::vector<std::string> split(std::string const &source, std::string const &delimiter);
+std::list<std::string> split(std::string const &source, std::string const &delimiter, size_t const &max_items);
+///
+std::list<std::string> split(std::string const &source, std::string const &delimiter);
 ///
 std::string lowerCase(std::string const &source);
 ///

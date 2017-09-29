@@ -210,4 +210,6 @@ void CSocket::interrupt() {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // WINDOWS_PLATFORM

@@ -223,4 +223,6 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // UNIX_PLATFORM

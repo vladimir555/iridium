@@ -44,4 +44,6 @@ TIPv4 getIPv4ByHost(string const &host) {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // UNIX_PLATFORM

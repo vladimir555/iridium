@@ -3,21 +3,26 @@
 
 
 #include <algorithm>
+#include <list>
+#include <vector>
 
 
 namespace utility {
 
 
 template<typename T>
-bool isLastItem(typename T::value_type const &i, T const &t) {
-    return i == *(--t.end());
+void addUnique(typename T::value_type const &i, T &t) {
+    if (std::find(t.begin(), t.end(), i) == t.end())
+        t.push_back(i);
 }
 
 
 template<typename T>
-void addUnique(typename T::value_type const &i, T &t) {
-    if (std::find(t.begin(), t.end(), i) == t.end())
-        t.push_back(i);
+std::vector<T> assign(std::list<T> const &source) {
+    return std::vector<T> {
+        std::make_move_iterator(std::begin(source)),
+        std::make_move_iterator(std::end(source))
+    }; // ----->
 }
 
 

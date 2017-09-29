@@ -175,18 +175,21 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 
 
 void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result, string const &tab = "") {
-    unordered_map<string, list< INode::TConstSharedPtr > > m;
+    unordered_map<string, list< INode::TConstSharedPtr > > map_name_node;
     list<string> names;
 
     for (auto const &i : *node) {
         addUnique(i->getName(), names);
-        m[i->getName()].push_back(i);
+        map_name_node[i->getName()].push_back(i);
     }
 
+    size_t name_number = 0;
     for (auto const &name: names) {
-        auto nodes = m[name];
-        string line_end;
-        if (m.size() == 1 || isLastItem(name, names))
+        auto    nodes = map_name_node[name];
+        string  line_end;
+
+        name_number++;
+        if (map_name_node.size() == 1 || name_number == names.size())
             line_end = "\n";
         else
             line_end = ",\n";
@@ -211,9 +214,11 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
             }
         } else {
             result += tab + name + ": [\n";
+            size_t node_number = 0;
             for (auto const &node : nodes) {
                 string line_end_;
-                if (nodes.size() == 1 || isLastItem(node, nodes))
+                node_number++;
+                if (nodes.size() == 1 || node_number == nodes.size())
                     line_end_ = "\n";
                 else
                     line_end_ = ",\n";

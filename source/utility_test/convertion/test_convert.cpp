@@ -202,23 +202,28 @@ enum TEnumTest {
 
 
 TEST(convertion, enum_) {
-    ASSERT_EQ(TEnumTest::E1, TEnum::E1);
-    ASSERT_EQ(TEnumTest::E2, TEnum::E2);
-    ASSERT_EQ(TEnumTest::E3, TEnum::E3);
-    ASSERT_EQ(TEnumTest::E4, TEnum::E4);
-    ASSERT_EQ(TEnumTest::E5, TEnum::E5);
+    ASSERT_EQ(static_cast<int>(TEnumTest::E1), TEnum::E1);
+    ASSERT_EQ(static_cast<int>(TEnumTest::E2), TEnum::E2);
+    ASSERT_EQ(static_cast<int>(TEnumTest::E3), TEnum::E3);
+    ASSERT_EQ(static_cast<int>(TEnumTest::E4), TEnum::E4);
+    ASSERT_EQ(static_cast<int>(TEnumTest::E5), TEnum::E5);
 
-    ASSERT_EQ(TEnumTest::E1, convert<TEnum>(string("E1")));
-    ASSERT_EQ(TEnumTest::E2, convert<TEnum>(string("E2")));
-    ASSERT_EQ(TEnumTest::E3, convert<TEnum>(string("E3")));
-    ASSERT_EQ(TEnumTest::E4, convert<TEnum>(string("E4")));
-    ASSERT_EQ(TEnumTest::E5, convert<TEnum>(string("E5")));
+    ASSERT_EQ(static_cast<int>(TEnumTest::E1), convert<TEnum>(string("E1")));
+    ASSERT_EQ(static_cast<int>(TEnumTest::E2), convert<TEnum>(string("E2")));
+    ASSERT_EQ(static_cast<int>(TEnumTest::E3), convert<TEnum>(string("E3")));
+    ASSERT_EQ(static_cast<int>(TEnumTest::E4), convert<TEnum>(string("E4")));
+    ASSERT_EQ(static_cast<int>(TEnumTest::E5), convert<TEnum>(string("E5")));
 
     ASSERT_EQ("E1", convert<string>(TEnum::E1));
     ASSERT_EQ("E2", convert<string>(TEnum::E2));
     ASSERT_EQ("E3", convert<string>(TEnum::E3));
     ASSERT_EQ("E4", convert<string>(TEnum::E4));
     ASSERT_EQ("E5", convert<string>(TEnum::E5));
+
+    {
+        TEnum e = TEnum::E1;
+        convert<string>(e);
+    }
 
     ASSERT_THROW(convert<TEnum>(string("E55")), std::runtime_error);
     ASSERT_THROW(convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))), std::runtime_error);

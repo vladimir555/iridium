@@ -127,4 +127,6 @@ void itoa(uint64_t const &value, char *buffer, int const &base) {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // UNIX_PLATFORM

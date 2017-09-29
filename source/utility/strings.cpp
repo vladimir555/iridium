@@ -8,24 +8,33 @@ using std::vector;
 using std::list;
 using std::transform;
 
-#include <iostream>
-using namespace std;
-
 
 namespace utility {
 
 
-vector<string> split(string const &source, string const &delimiter) {
-    vector<string> result;
+list<string> split(string const &source, string const &delimiter, size_t const &max_items) {
+    list<string> result;
     size_t lpos = 0, rpos = 0;
     while (rpos != string::npos) {
-        rpos = source.find(delimiter, lpos + delimiter.size());
+
+        if (max_items == 0 || result.size() < (max_items - 1))
+            rpos = source.find(delimiter, lpos + delimiter.size());
+        else
+            rpos = string::npos;
+
         auto item = source.substr(lpos, rpos - lpos);
+
         if (item != delimiter)
             result.push_back(item);
+
         lpos = rpos + delimiter.size();
     }
     return result; // ----->
+}
+
+
+list<string> split(string const &source, string const &delimiter) {
+    return split(source, delimiter, 0);
 }
 
 

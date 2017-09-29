@@ -67,7 +67,7 @@ private: \
         Enums UNUSED __VA_ARGS__; \
         auto i = Enums::enums.begin(); \
         for (auto const &arg: utility::split(#__VA_ARGS__, ",")) { \
-            std::string name  = utility::trim(utility::split(arg, "=")[0]); \
+            std::string name  = utility::trim(utility::split(arg, "=").front()); \
             if (m.find(*i) == m.end()) \
                 m[*i++] = name; \
             else \

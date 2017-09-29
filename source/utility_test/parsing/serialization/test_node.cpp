@@ -2,6 +2,7 @@
 
 #include <utility/parsing/serialization/node.h>
 #include <utility/parsing/implementation/node.h>
+#include <utility/parsing/implementation/parser_xml.h>
 #include <utility/enum.h>
 
 #include <iostream>
@@ -42,27 +43,9 @@ DEFINE_ROOT_NODE_BEGIN(Root)
             DEFINE_ATTRIBUTE_DEFAULT(int, AttributeTwo, 555)
         DEFINE_NODE_END(SubItem)
     DEFINE_NODE_LIST_END(Item1)
+
+    DEFINE_ATTRIBUTE_LIST(std::string, Array)
 DEFINE_ROOT_NODE_END()
-
-
-//DEFINE_ROOT_NODE_BEGIN(RootDefaults)
-//    DEFINE_NODE_BEGIN(FirstItem)
-//        DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue1")
-//        DEFINE_ATTRIBUTE_DEFAULT(int, AttributeTwo, 55)
-//        DEFINE_ATTRIBUTE_DEFAULT(C::TEnum, Enum, C::TEnum::ENUM2)
-//    DEFINE_NODE_END(FirstItem)
-
-//    DEFINE_NODE_BEGIN(SecondItem)
-//        DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue2")
-//    DEFINE_NODE_END(SecondItem)
-
-//    DEFINE_NODE_LIST_BEGIN(Item1)
-//        DEFINE_NODE_BEGIN(SubItem)
-//            DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "attribute-one")
-//            DEFINE_ATTRIBUTE_DEFAULT(int, AttributeTwo, 5)
-//        DEFINE_NODE_END(SubItem)
-//    DEFINE_NODE_LIST_END(Item1)
-//DEFINE_ROOT_NODE_END()
 
 
 TEST(parsing, serialization) {
@@ -92,7 +75,14 @@ TEST(parsing, serialization) {
     {
         auto item = node->addChild("item1")->addChild("sub-item");
         item->addChild("attribute-one", "Value2");
-//        item->addChild("attribute-two", "5");
+    }
+
+    {
+        node->addChild("array", "5");
+        node->addChild("array", "4");
+        node->addChild("array", "3");
+        node->addChild("array", "2");
+        node->addChild("array", "1");
     }
 
     TRoot root(node);
@@ -115,11 +105,17 @@ TEST(parsing, serialization) {
     i++;
     ASSERT_EQ(55555, i->SubItem.AttributeTwo.get());
 
-//    TRootDefaults root_defaults;
+    string result;
+    for (auto const &i: root.Array)
+        result += i.get();
+    ASSERT_EQ("54321", result);
 
-//    ASSERT_EQ("defaultValue1", static_cast<string>   (root_defaults.FirstItem.AttributeOne));
-//    ASSERT_EQ(55             , static_cast<int>      (root_defaults.FirstItem.AttributeTwo));
-//    ASSERT_EQ(C::TEnum::ENUM2,                        root_defaults.FirstItem.Enum.get());
+    root.Array.add(string("12345"));
+
+    result.clear();
+    for (auto const &i: root.Array)
+        result += i.get();
+    ASSERT_EQ("5432112345", result);
 }
 
 

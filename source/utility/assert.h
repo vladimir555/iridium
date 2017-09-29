@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <string>
 
+#include "utility/convertion/convert.h"
+
 
 namespace utility {
 
@@ -19,17 +21,19 @@ T assertExists(T const &&t, std::string const &error) {
 
 
 template<typename T>
-T assertCount(T const &&t, size_t const &count, std::string const &error) {
-    if (t.size() == count)
+T assertSize(T const &&t, size_t const &size, std::string const &error) {
+    if (t.size() == size)
         return t; // ----->
     else
-        throw std::runtime_error(error);
+        throw std::runtime_error(error + ", wrong items size " +
+            convertion::convert<std::string>(t.size()) + ", expects " +
+            convertion::convert<std::string>(size));
 }
 
 
 template<typename T>
 T assertOne(T const &&t, std::string const &error) {
-    return assertCount(t, 1, error); // ----->
+    return assertSize(t, 1, error); // ----->
 }
 
 

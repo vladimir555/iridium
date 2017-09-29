@@ -8,7 +8,10 @@
 #include <utility/parsing/implementation/parser_http.h>
 #include <utility/assert.h>
 
+
 #include <iostream>
+using namespace std;
+
 
 using std::string;
 using utility::parsing::INode;
@@ -172,6 +175,7 @@ string const json_str_expects = ""
 
 
 string const http_header = ""
+"GET / HTTP/1.1\n"
 "content-type: text/html; charset=windows-1251\n"
 "Allow: GET, HEAD\n"
 "Content-Length: 356\n"
@@ -181,14 +185,18 @@ string const http_header = ""
 
 string const http_header_node = ""
 "'http' = ''\n"
-"  'content-type' = 'text/html; charset=windows-1251'\n"
-"  'allow' = 'options'\n"
-"  'allow' = 'head'\n"
-"  'allow' = 'get'\n"
-"  'content-length' = '1984'\n";
+"  'message' = 'GET / HTTP/1.1'\n"
+"  'headers' = ''\n"
+"    'content-type' = 'text/html; charset=windows-1251'\n"
+"    'allow' = 'options'\n"
+"    'allow' = 'head'\n"
+"    'allow' = 'get'\n"
+"    'content-length' = '1984'\n"
+"  'body' = ''\n";
 
 
 string const http_header_composed = ""
+"GET / HTTP/1.1\n"
 "content-type: text/html; charset=windows-1251\n"
 "allow: get, head, options\n"
 "content-length: 1984\n";
@@ -269,15 +277,6 @@ TEST(parsing, compose_http_request) {
     auto http_header_   = parser->compose(node);
 
     ASSERT_EQ(http_header_composed, http_header_);
-
-    {
-        auto json = CJSONParser::create();
-        auto xml  = CXMLParser::create();
-        std::cout << "node: " << std::endl << convertion::convert<string>(node) << std::endl;
-        std::cout << "http: " << std::endl << parser->compose(node) << std::endl;
-        std::cout << "json: " << std::endl << json->compose(node) << std::endl;
-        std::cout << "xml : " << std::endl <<  xml->compose(node) << std::endl;
-    }
 }
 
 

@@ -43,10 +43,7 @@ Node<void>::Node(
     else
         throw std::runtime_error("node '" + m_path + "' not found"); // ----->
 
-    if (node_destination)
-        m_node_destination = node_destination;
-    else
-        m_node_destination = CNode::create(name);
+    m_node_destination = node_destination;
 }
 
 

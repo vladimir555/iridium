@@ -8,7 +8,6 @@
 #include "utility/parsing/implementation/node.h"
 #include "utility/convertion/implementation/convert.h"
 
-#include <iostream>
 
 namespace utility {
 namespace parsing {
@@ -35,7 +34,16 @@ public:
     Node &operator= (TValue const &value);
     ///
     bool operator== (TValue const &value) const;
+    ///
+    INode::TSharedPtr getNodeDefaults() const;
 protected:
+    /// list attribute
+    Node(
+        INode::TConstSharedPtr  const &node_source,
+        INode::TSharedPtr       const &node_destination,
+        std::string             const &name,
+        std::string             const &path);
+    Node(std::string const &name);
     /// attribute
     Node(Node<void> const &parent, std::string const &name, TValue const &default_value);
     /// attribute
@@ -65,7 +73,7 @@ public:
     std::string             m_path;
 
 protected:
-    /// root node
+    /// list node
     Node(
         INode::TConstSharedPtr  const &node_source,
         INode::TSharedPtr       const &node_destination,
@@ -97,6 +105,9 @@ public:
     size_t size() const;
     ///
     void add(TNode const &node);
+    ///
+    template<typename TValue>
+    void add(TValue const &node);
 
 protected:
     ///
@@ -114,6 +125,37 @@ private:
 
 
 // ----- Node
+
+
+template<typename TValue>
+Node<TValue>::Node(
+    INode::TConstSharedPtr  const &node_source,
+    INode::TSharedPtr       const &node_destination,
+    std::string             const &name,
+    std::string             const &path)
+{
+    m_path = path + "/" + name;
+
+    if (node_source && node_source->getName() == name)
+        m_node_source       = node_source;
+    else
+        throw std::runtime_error("node '" + m_path + "' not found"); // ----->
+
+    m_node_destination = node_destination;
+}
+
+
+template<typename TValue>
+Node<TValue>::Node(std::string const &name) {
+    m_path              = "/" + name;
+    m_node_destination  = implementation::CNode::create(name);
+}
+
+
+template<typename TValue>
+INode::TSharedPtr Node<TValue>::getNodeDefaults() const {
+    return m_node_destination; // ----->
+}
 
 
 template<typename TValue>
@@ -193,10 +235,11 @@ NodeList<TNode>::NodeList(Node<void> const &parent, std::string const &name)
 :
     m_parent(parent)
 {
-    if (parent.m_node_source)
+    if (parent.m_node_source) {
         for (auto const &i: *parent.m_node_source)
             if (i->getName() == name)
-                m_nodes.push_back(TNode(i, parent.m_node_destination->addChild(name), parent.m_path));
+                m_nodes.push_back(TNode(i, parent.m_node_destination->addChild(i->clone()), parent.m_path));
+    }
 }
 
 
@@ -237,6 +280,15 @@ void NodeList<TNode>::add(TNode const &node) {
 }
 
 
+template<typename TNode>
+template<typename TValue>
+void NodeList<TNode>::add(TValue const &value) {
+    TNode node;
+    node.set(value);
+    add(node);
+}
+
+
 // -----
 
 
@@ -250,7 +302,8 @@ std::string convertCamelToDashed(std::string const &camel);
 
 #define DEFINE_ROOT_NODE_BEGIN(class_name) \
     struct T##class_name : protected utility::parsing::serialization::Node<void> { \
-        T##class_name(utility::parsing::INode::TConstSharedPtr const &node): utility::parsing::serialization::Node<void> \
+        T##class_name(utility::parsing::INode::TConstSharedPtr const &node): \
+        utility::parsing::serialization::Node<void> \
         (node, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
         T##class_name(): utility::parsing::serialization::Node<void> \
         (utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
@@ -265,7 +318,8 @@ std::string convertCamelToDashed(std::string const &camel);
 
 #define DEFINE_NODE_BEGIN(class_name) \
     struct T##class_name : protected utility::parsing::serialization::Node<void> { \
-        T##class_name(utility::parsing::serialization::Node<void> const &parent): utility::parsing::serialization::Node<void> \
+        T##class_name(utility::parsing::serialization::Node<void> const &parent): \
+        utility::parsing::serialization::Node<void> \
         (parent, utility::parsing::serialization::convertCamelToDashed(#class_name)) {}
 
 
@@ -275,7 +329,8 @@ std::string convertCamelToDashed(std::string const &camel);
 
 #define DEFINE_ATTRIBUTE_DEFAULT(type, class_name, default_value) \
     struct T##class_name : public utility::parsing::serialization::Node<type> { \
-        T##class_name(utility::parsing::serialization::Node<void> const &parent): utility::parsing::serialization::Node<type> \
+        T##class_name(utility::parsing::serialization::Node<void> const &parent): \
+        utility::parsing::serialization::Node<type> \
         (parent, utility::parsing::serialization::convertCamelToDashed(#class_name), default_value) {} \
         using utility::parsing::serialization::Node<type>::operator =; \
     } class_name = *this;
@@ -283,13 +338,13 @@ std::string convertCamelToDashed(std::string const &camel);
 
 #define DEFINE_ATTRIBUTE(type, class_name) \
     struct T##class_name : public utility::parsing::serialization::Node<type> { \
-        T##class_name(utility::parsing::serialization::Node<void> const &parent) : utility::parsing::serialization::Node<type> \
+        T##class_name(utility::parsing::serialization::Node<void> const &parent): \
+        utility::parsing::serialization::Node<type> \
         (parent, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
         using utility::parsing::serialization::Node<type>::operator =; \
     } class_name = *this;
 
 
-// todo: push_back
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
     struct T##class_name : public utility::parsing::serialization::Node<void> { \
         T##class_name( \
@@ -305,7 +360,31 @@ std::string convertCamelToDashed(std::string const &camel);
 #define DEFINE_NODE_LIST_END(class_name) \
     }; \
     struct T##class_name##List : public utility::parsing::serialization::NodeList<T##class_name> { \
-        T##class_name##List(utility::parsing::serialization::Node<void> const &parent) : utility::parsing::serialization::NodeList<T##class_name> \
+        T##class_name##List(utility::parsing::serialization::Node<void> const &parent): \
+        utility::parsing::serialization::NodeList<T##class_name> \
+        (parent, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+    } class_name = *this;
+
+
+#define DEFINE_ATTRIBUTE_LIST(type, class_name) \
+    struct T##class_name : public utility::parsing::serialization::Node<type> { \
+        T##class_name(utility::parsing::serialization::Node<void> const &parent): \
+            utility::parsing::serialization::Node<type> \
+                (parent, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        using utility::parsing::serialization::Node<type>::operator =; \
+        T##class_name( \
+            utility::parsing::INode::TConstSharedPtr const &node_source, \
+            utility::parsing::INode::TSharedPtr const &node_destination, \
+            std::string const &path): \
+                utility::parsing::serialization::Node<type> \
+                    (node_source, node_destination, utility::parsing::serialization::convertCamelToDashed(#class_name), path) {} \
+        T##class_name(): \
+            utility::parsing::serialization::Node<type> \
+                (utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+    }; \
+    struct T##class_name##List : public utility::parsing::serialization::NodeList<T##class_name> { \
+        T##class_name##List(utility::parsing::serialization::Node<void> const &parent): \
+        utility::parsing::serialization::NodeList<T##class_name> \
         (parent, utility::parsing::serialization::convertCamelToDashed(#class_name)) {} \
     } class_name = *this;
 
