@@ -95,7 +95,6 @@ TEST(networking, socket) {
 
     server_socket->initialize();
 
-
     client::ISocket::TSharedPtr client_socket = client::implementation::CSocket::create(url);
     //sleep(5000);
 

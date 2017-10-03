@@ -45,7 +45,7 @@ string const responce_example = ""
 "last-modified: Wed, 22 Jul 2009 19:15:56 GMT\n"
 "content-length: 88\n"
 "content-type: text/html\n"
-"connection: Closed\n\n"
+"connection: Closed\n\n\n"
 "<html>\n"
 "<body>\n"
 "<h1>Hello, World!::</h1>\n"
@@ -112,8 +112,12 @@ public:
     virtual ~HTTPHandler() = default;
 
     string handle(TRequest const &request) override {
-        return "<html><body>Hello! uri = " + request.uri + "</body></html>";
+        i++;
+        return  "<html><body>Hello! uri = " + request.uri +
+                " " + convert<string>(i) + " " + "</body></html>";
     }
+private:
+    int i = 0;
 };
 
 
@@ -122,6 +126,7 @@ TEST(networking, http_server) {
     LOGT << "start";
 
     server::IHTTP::THTTPHandlers    handlers;
+    handlers.push_back(HTTPHandler::create());
     handlers.push_back(HTTPHandler::create());
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
 

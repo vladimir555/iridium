@@ -16,7 +16,8 @@ using std::string;
 namespace {
 
 
-size_t const MIN_HTTP_HEADER_SIZE = 16;
+//size_t const MIN_HTTP_HEADER_SIZE = 16;
+size_t const MIN_HTTP_HEADER_SIZE = 93;
 
 
 }
@@ -55,37 +56,40 @@ CHTTP::CSocketHandler::CSocketHandler(IHTTPHandler::TSharedPtr const &http_handl
 {}
 
 
+
+
 CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets const &sockets) {
     TSockets sockets_;
 
     for (auto const &socket: sockets) {
         try {
             auto packet = socket->read();
+            if (packet.size() < 93)
+                LOGT << "size = " << packet.size();
 
-            if (packet.size() < MIN_HTTP_HEADER_SIZE) {
-                sockets_.push_back(socket);
-                continue; // <---
-            }
+//            if (packet.size() < MIN_HTTP_HEADER_SIZE) {
+//                sockets_.push_back(socket);
+//                continue; // <---
+//            }
 
             // drops slow connections with not full headers
             http::request::THttp    http_request(m_parser->parse(convert<string>(packet)));
+            http::response::THttp   http_response;
             IHTTPHandler::TRequest  request;
-            http::response::THttp   response;
 
-            request.uri                     = http_request.Message.get().uri;
-            auto                    body    = m_http_handler->handle(request);
-            response.Body                   = body;
-            response.Headers.ContentLength  = body.size();
-            response.Headers.server         = "utility";
-            response.Headers.Connection     = "Closed";
-            response.Message.set( {"HTTP/1.1", 200, "OK"} );
-            packet                          = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
+            request.uri                         = http_request.Message.get().uri;
+            auto                    body        = m_http_handler->handle(request);
+            http_response.Body                  = body;
+            http_response.Headers.ContentLength = body.size();
+            http_response.Headers.server        = "utility";
+            http_response.Message.set( {"HTTP/1.1", 200, "OK"} );
+            packet                              = convert<ISocketStream::TPacket>(m_parser->compose(http_response.getNode()));
 
             socket->write(packet);
         } catch (std::exception const &e) {
             LOGE << e.what();
-            socket->close();
         }
+        socket->close();
     }
 
     return sockets_;
