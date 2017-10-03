@@ -78,7 +78,10 @@ INode::TSharedPtr CHTTPParser::parse(std::string const &source) const {
     node->addChild(HTTP_MESSAGE, lines.front());
     lines.pop_front();
 
-    for (auto const &line: lines) {
+    for (auto const &line_: lines) {
+        auto line   = trim(line_);
+        if (line.empty())
+            continue; // <---
         auto arg    = assertSize(split(line, ":", 2), 2, "http header parsing error: line '" + line + "'");
         auto name   = lowerCase(arg.front());
 
@@ -139,7 +142,7 @@ std::string CHTTPParser::compose(INode::TConstSharedPtr const &node) const {
         throw std::runtime_error("http composing error: http header root node is null"); // ----->
 
     auto body   = assertExists(node->getChild(HTTP_BODY), "http composing error: node " + HTTP_BODY + " does not exists");
-    result     += "\n" + body->getValue();
+    result     += "\n\n" + body->getValue();
 
     return result; // ----->
 }

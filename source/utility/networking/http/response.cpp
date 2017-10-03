@@ -66,7 +66,7 @@ string convert(THttp::THeaders::THTTPDate const &source) {
     string date = convertion::convert<string>(source.date);
     // 2009-07-27 12:28:53
     return days[0] + ", " + date.substr(8, 2) + " " + months[convertion::convert<uint64_t>(date.substr(5, 2))] + " " + date.substr(0, 4) + " " +
-        date.substr(11, 8); // ----->
+        date.substr(11, 8) + " GMT"; // ----->
 }
 
 

@@ -10,6 +10,8 @@ using namespace std;
 #include "utility/parsing/implementation/parser_http.h"
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
+#include "utility/networking/server/implementation/http.h"
+#include "utility/logging/logger.h"
 
 
 using utility::parsing::implementation::CHTTPParser;
@@ -101,6 +103,33 @@ TEST(networking, http_response) {
 //    cout << "response:" << endl << str << endl;
 
     ASSERT_EQ(responce_example, str);
+}
+
+
+class HTTPHandler: public server::IHTTPHandler {
+public:
+    DEFINE_CREATE(HTTPHandler)
+    virtual ~HTTPHandler() = default;
+
+    string handle(TRequest const &request) override {
+        return "<html><body>Hello! uri = " + request.uri + "</body></html>";
+    }
+};
+
+
+TEST(networking, http_server) {
+    logging::update(true);
+    LOGT << "start";
+
+    server::IHTTP::THTTPHandlers    handlers;
+    handlers.push_back(HTTPHandler::create());
+    server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
+
+    http_server->initialize();
+
+    sleep(50);
+
+    http_server->finalize();
 }
 
 

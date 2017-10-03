@@ -18,10 +18,9 @@ public:
     DEFINE_SMART_PTR(ISocket)
     virtual ~ISocket() = default;
 
-    typedef threading::IWorkerPool<ISocketStream::TSharedPtr>
-        TSocketStreamsWorkerPool;
-    typedef std::list<threading::IWorkerHandler<ISocketStream::TSharedPtr>::TSharedPtr >
-        TSocketStreamsHandlers;
+    typedef threading::IWorkerPool<ISocketStream::TSharedPtr>       TSocketStreamsWorkerPool;
+    typedef threading::IWorkerHandler<ISocketStream::TSharedPtr>    TSocketStreamsHandler;
+    typedef std::list<TSocketStreamsHandler::TSharedPtr>            TSocketStreamsHandlers;
 };
 
 

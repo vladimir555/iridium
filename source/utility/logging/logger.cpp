@@ -101,5 +101,34 @@ LogStream const & LogStream::operator << (char const *s) const {
 }
 
 
+void update(bool const &is_enable_console, std::string const &file_name) {
+    auto root = parsing::implementation::CNode::create("logger");
+
+    root->addChild("level", "TRACE_LEVEL");
+
+    if (is_enable_console)
+        root->addChild("console-sink")->addChild("level", "TRACE_LEVEL");
+
+    if (!file_name.empty()) {
+        auto file_sink = root->addChild("file-sink");
+        file_sink->addChild("level", "TRACE_LEVEL");
+        file_sink->addChild("file-name", file_name);
+    }
+
+    config::TLogger logger_config(root);
+    Logger::instance().update(logger_config);
+}
+
+
+void update(bool const &is_enable_console) {
+    update(is_enable_console, "");
+}
+
+
+void update(std::string const &file_name) {
+    update(false, file_name);
+}
+
+
 } // logger
 } // utility
