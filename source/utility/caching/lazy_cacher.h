@@ -4,6 +4,12 @@
 
 #include <map>
 #include <functional>
+#include <tuple>
+
+
+#include <list>
+#include <iostream>
+using namespace std;
 
 
 namespace utility {
@@ -13,18 +19,19 @@ namespace caching {
 // ----- interface
 
 
+// todo: not work !
 template<typename TResult, typename ... TArgs>
 class LazyCacher {
 public:
     typedef std::function<TResult(TArgs ...)> TFunc;
-    static TResult cacheFunc(TFunc func, TArgs const & ... args);
+    static TResult cacheFunc(TFunc func, TArgs ... args);
     static void clean();
     static void clean(TArgs const & ... args);
     static void clean(TResult const &result);
 
 private:
-    typedef std::tuple<TArgs const & ... >  TArgsTuple;
-    typedef std::map<TArgsTuple, TResult>   TArgsTupleResultMap;
+    typedef std::tuple<TArgs const & ... > TArgsTuple;
+    typedef std::map<TArgsTuple, TResult> TArgsTupleResultMap;
     static TArgsTupleResultMap m;
 };
 
@@ -33,15 +40,18 @@ private:
 
 
 template<typename TResult, typename ... TArgs>
-TResult LazyCacher<TResult, TArgs ... >::cacheFunc(TFunc func, TArgs const & ... args) {
+TResult LazyCacher<TResult, TArgs ... >::cacheFunc(TFunc func, TArgs ... args) {
     TArgsTuple args_tuple(args ...);
 
-    auto i = m.find(args_tuple);
+    typename TArgsTupleResultMap::const_iterator i = m.find(args_tuple);
     if (i == m.end()) {
+//        cout << "func: " << std::get<0>(args_tuple) << endl;
         auto r = func(args ...);
         m[args_tuple] = r;
-        return std::move(r); // ----->
+//        return std::move(r); // ----->
+        return r; // ----->
     } else {
+//        cout << "cache: " << std::get<0>(args_tuple) << endl;
         return i->second; // ----->
     }
 }

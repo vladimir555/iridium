@@ -64,26 +64,12 @@ CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets cons
     for (auto const &socket: sockets) {
         try {
             auto packet = socket->read();
-            if (packet.size() < 93)
-                LOGT << "size = " << packet.size();
 
-//            if (packet.size() < MIN_HTTP_HEADER_SIZE) {
-//                sockets_.push_back(socket);
-//                continue; // <---
-//            }
+            http::request::THttp    request (m_parser->parse(convert<string>(packet)));
+            http::response::THttp   response    = m_http_handler->handle(request);
 
-            // drops slow connections with not full headers
-            http::request::THttp    http_request(m_parser->parse(convert<string>(packet)));
-            http::response::THttp   http_response;
-            IHTTPHandler::TRequest  request;
-
-            request.uri                         = http_request.Message.get().uri;
-            auto                    body        = m_http_handler->handle(request);
-            http_response.Body                  = body;
-            http_response.Headers.ContentLength = body.size();
-            http_response.Headers.server        = "utility";
-            http_response.Message.set( {"HTTP/1.1", 200, "OK"} );
-            packet                              = convert<ISocketStream::TPacket>(m_parser->compose(http_response.getNode()));
+            response.Headers.ContentLength      = response.Body.get().size();
+            packet                              = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
 
             socket->write(packet);
         } catch (std::exception const &e) {

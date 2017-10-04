@@ -3,6 +3,7 @@
 
 
 #include "utility/parsing/serialization/node.h"
+#include "utility/networking/socket.h"
 
 #include <string>
 #include <chrono>
@@ -20,19 +21,19 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         int code;
         std::string reason;
     };
-    DEFINE_ATTRIBUTE_DEFAULT(TMessageLine, Message, TMessageLine())
+    DEFINE_ATTRIBUTE_DEFAULT(TMessageLine, Message, TMessageLine( {"HTTP/1.1", 200, "OK"} ))
     DEFINE_NODE_BEGIN(Headers)
         struct THTTPDate {
             std::chrono::high_resolution_clock::time_point date;
         };
         DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, Date, THTTPDate())
-        DEFINE_ATTRIBUTE_DEFAULT(std::string, server, "")
+        DEFINE_ATTRIBUTE_DEFAULT(std::string, server, "utility")
         DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, LastModified, THTTPDate())
         DEFINE_ATTRIBUTE_DEFAULT(int, ContentLength, 0)
         DEFINE_ATTRIBUTE_DEFAULT(std::string, ContentType, "text/html")
         DEFINE_ATTRIBUTE_DEFAULT(std::string, Connection, "")
     DEFINE_NODE_END(Headers)
-    DEFINE_ATTRIBUTE_DEFAULT(std::string, Body, "")
+    DEFINE_ATTRIBUTE_DEFAULT(ISocket::TPacket, Body, ISocket::TPacket())
 DEFINE_ROOT_NODE_END()
 
 

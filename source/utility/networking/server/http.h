@@ -5,6 +5,7 @@
 #include "utility/smart_ptr.h"
 #include "utility/pattern/initializable.h"
 #include "utility/networking/http/request.h"
+#include "utility/networking/http/response.h"
 
 #include <string>
 #include <list>
@@ -20,12 +21,7 @@ public:
     DEFINE_SMART_PTR(IHTTPHandler)
     virtual ~IHTTPHandler() = default;
 
-    struct TRequest {
-        std::string uri;
-    };
-
-    // return body or throw;
-    virtual std::string handle(TRequest const &request) = 0;
+    virtual http::response::THttp handle(http::request::THttp const &request) = 0;
 };
 
 

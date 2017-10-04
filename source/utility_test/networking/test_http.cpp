@@ -11,6 +11,7 @@ using namespace std;
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
 #include "utility/networking/server/implementation/http.h"
+#include "utility/networking/server/implementation/http_fs_mapper.h"
 #include "utility/logging/logger.h"
 
 
@@ -106,19 +107,20 @@ TEST(networking, http_response) {
 }
 
 
-class HTTPHandler: public server::IHTTPHandler {
-public:
-    DEFINE_CREATE(HTTPHandler)
-    virtual ~HTTPHandler() = default;
+//class HTTPHandler: public server::IHTTPHandler {
+//public:
+//    DEFINE_CREATE(HTTPHandler)
+//    virtual ~HTTPHandler() = default;
 
-    string handle(TRequest const &request) override {
-        i++;
-        return  "<html><body>Hello! uri = " + request.uri +
-                " " + convert<string>(i) + " " + "</body></html>";
-    }
-private:
-    int i = 0;
-};
+//    ISocket::TPacket handle(TRequest const &request) override {
+//        i++;
+//        return  convert<ISocket::TPacket>
+//            ("<html><body>Hello! uri = " + request.uri +
+//            " " + convert<string>(i) + " " + "</body></html>");
+//    }
+//private:
+//    int i = 0;
+//};
 
 
 TEST(networking, http_server) {
@@ -126,8 +128,10 @@ TEST(networking, http_server) {
     LOGT << "start";
 
     server::IHTTP::THTTPHandlers    handlers;
-    handlers.push_back(HTTPHandler::create());
-    handlers.push_back(HTTPHandler::create());
+//    handlers.push_back(HTTPHandler::create());
+//    handlers.push_back(HTTPHandler::create());
+    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
+    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
 
     http_server->initialize();
