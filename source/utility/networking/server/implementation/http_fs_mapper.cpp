@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include "utility/fs/files.h"
+#include "utility/networking/http/mime.h"
 
 
 using std::string;
@@ -17,6 +18,8 @@ using std::bind;
 using std::unordered_map;
 using std::placeholders::_1;
 using utility::fs::checkFileExistence;
+using utility::fs::extractFileNameExtension;
+using utility::networking::http::MIME;
 
 
 namespace utility {
@@ -52,14 +55,13 @@ CHTTPFSMapper::CHTTPFSMapper(string const &path)
 http::response::THttp CHTTPFSMapper::handle(http::request::THttp const &request) {
     http::response::THttp response;
     try {
-        auto file_name = m_path + request.Message.get().uri;
-        response.Body = readFileCached(file_name);
-        if (fs::extractFileNameExtension(file_name) == "jpg")
-            response.Headers.ContentType = "image/jpg";
+        auto file_name                  = m_path + request.Message.get().uri;
+        response.Body                   = readFileCached(file_name);
+        response.Headers.ContentType    = MIME::instance().getByFileNameExtension(extractFileNameExtension(file_name));
     } catch (std::exception const &e) {
         response.Message = {"HTTP/1.1", 404, "Not found"};
     }
-    return response;
+    return response; // ----->
 }
 
 
@@ -70,7 +72,7 @@ ISocket::TPacket CHTTPFSMapper::readFileCached(string const &file_name) {
         result                  = readFile(file_name);
         m_file_cache[file_name] = result;
     }
-    return result;
+    return result; // ----->
 }
 
 

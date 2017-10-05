@@ -131,7 +131,7 @@ TEST(networking, http_server) {
 //    handlers.push_back(HTTPHandler::create());
 //    handlers.push_back(HTTPHandler::create());
     handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
+//    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
 
     http_server->initialize();

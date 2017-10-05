@@ -17,7 +17,7 @@ namespace {
 
 
 //size_t const MIN_HTTP_HEADER_SIZE = 16;
-size_t const MIN_HTTP_HEADER_SIZE = 93;
+//size_t const MIN_HTTP_HEADER_SIZE = 93;
 
 
 }
@@ -70,6 +70,8 @@ CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets cons
 
             response.Headers.ContentLength      = response.Body.get().size();
             packet                              = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
+
+            LOGT << "write:\n" << packet;
 
             socket->write(packet);
         } catch (std::exception const &e) {

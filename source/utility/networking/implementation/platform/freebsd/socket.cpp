@@ -62,7 +62,7 @@ namespace implementation {
 namespace platform {
 
 
-size_t const MAX_EVENT_COUNT    = 256;
+size_t const MAX_EVENT_COUNT    = 128;
 int    const KEVENT_TIMIOUT_MS  = 1000;
 
 
@@ -102,7 +102,7 @@ void CSocket::listen() {
 CSocket::TSocketStreams CSocket::accept() {
     CSocket::TSocketStreams sockets;
 
-    const struct timespec timeout = { KEVENT_TIMIOUT_MS / 1000, KEVENT_TIMIOUT_MS % 1000 };
+    static struct timespec const timeout = { KEVENT_TIMIOUT_MS / 1000, KEVENT_TIMIOUT_MS % 1000 };
 
     auto events_count = assertOK(
         kevent(m_kqueue, m_monitor_events.data(), m_monitor_events_used_count, m_events.data(), m_events.size(), &timeout),
@@ -127,6 +127,7 @@ CSocket::TSocketStreams CSocket::accept() {
 //            LOGE <<  CSocket(m_events[i].ident).getURL() << " kevent error: " <<
 //                     string(strerror(m_events[i].data))  << " " << flagsToString(m_events[i].flags) <<
 //                     " queue size " << m_monitor_events_used_count;
+//            ::close(m_events[i].ident);
 //            if (m_monitor_events_used_count >= m_monitor_events.size())
 //                continue;
 //            m_monitor_events[m_monitor_events_used_count] =
