@@ -9,6 +9,10 @@ typedef utility::networking::ISocketStream::TPacket TPacket;
 using std::string;
 
 
+//utility::threading::implementation::CMutex utility::networking::ISocketStream::map_url_read_cache_mutex;
+//auto utility::networking::ISocketStream::map_url_read_cache         = std::map<std::string, TPacket>();
+
+
 namespace {
 
 

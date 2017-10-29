@@ -11,6 +11,9 @@
 
 #include "utility/networking/socket.h"
 #include "utility/networking/url.h"
+#include "utility/encryption/openssl.h"
+
+#include <unordered_set>
 
 
 namespace utility {
@@ -38,13 +41,18 @@ public:
     URL  getURL() const override;
 
 protected:
-    CSocket(int const &socket);
+    CSocket(int const &socket, encryption::openssl::Context::TSharedPtr const &context = nullptr);
     int assertOK(int const &result, std::string const &message) const;
     URL getPeerURL(int const &socket);
     void setBlockingMode(bool const &is_blocking);
+    std::list<int> acceptInternal();
 
+    std::unordered_set<std::string> m_acepted_url_set;
+    bool m_is_blocking_mode;
     int m_socket;
     URL m_url;
+    encryption::openssl::Context::TSharedPtr        m_encryptor;
+    encryption::openssl::Context::SSL::TSharedPtr   m_ssl;
 };
 
 

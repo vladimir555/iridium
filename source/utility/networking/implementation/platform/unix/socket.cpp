@@ -20,6 +20,8 @@
 
 using std::string;
 using utility::convertion::convert;
+using utility::convertion::convertPtr;
+using utility::encryption::openssl::Context;
 
 
 namespace {
@@ -40,18 +42,27 @@ namespace unix {
 
 CSocket::CSocket(URL const &url)
 :
-    m_socket(0),
-    m_url   (url)
+    m_is_blocking_mode  (false),
+    m_socket            (0),
+    m_url               (url),
+    m_encryptor         (nullptr)
 {
 //    LOGT << "url " << url;
 }
 
 
-CSocket::CSocket(int const &socket)
+CSocket::CSocket(int const &socket, Context::TSharedPtr const &encryptor)
 :
-    m_socket(socket),
-    m_url   (getPeerURL(socket))
+    m_is_blocking_mode  (false),
+    m_socket            (socket),
+    m_url               (getPeerURL(socket)),
+    m_encryptor         (encryptor)
 {
+//    LOGT << 11;
+    // todo: url ssl map !
+    if (m_encryptor)
+        m_ssl = m_encryptor->accept(m_socket);
+//    LOGT << 22;
 //    LOGT << "url " << m_url << " socket " << socket;
 }
 
@@ -67,15 +78,14 @@ void CSocket::open() {
 
 //    LOGT << "::socket AF_INET, SOCK_STREAM ...";
 
-   auto protocol = IPPROTO_IP;
+    auto protocol = IPPROTO_TCP;
     if (!m_url.getProtocol() || *m_url.getProtocol() == URL::TProtocol::UDP)
         protocol = IPPROTO_UDP;
-    else
-        protocol = IPPROTO_TCP;
 
-    m_socket = assertOK(::socket(AF_INET, SOCK_STREAM, protocol),
-        "socket open error");
+    m_socket = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
 
+//    if (!m_context && m_descriptor)
+//        m_descriptor = OpenSSL::createDescriptor(context, socket);
 //    LOGT << "socket " << m_socket;
 }
 
@@ -88,31 +98,37 @@ void CSocket::close() {
 
 void CSocket::write(TPacket const &packet) {
 //    LOGT << "::write socket " << m_socket << " packet " << packet;
-    size_t lpos = 0;
-    while (lpos < packet.size()) {
-        auto buffer = static_cast<void const *>(packet.data() + lpos);
-        auto rpos = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
-        if (rpos > packet.size())
-            rpos = packet.size();
-        lpos += assertOK(::send(m_socket, buffer, rpos - lpos, 0),
-            "socket write error");
+    if (m_ssl) {
+        m_ssl->write(packet);
+    } else {
+        size_t lpos = 0;
+        while (lpos < packet.size()) {
+            auto buffer = static_cast<void const *>(packet.data() + lpos);
+            auto rpos = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
+            if (rpos > packet.size())
+                rpos = packet.size();
+            lpos += assertOK(::send(m_socket, buffer, rpos - lpos, 0), "socket write error");
+        }
     }
 //    LOGT << "::write socket " << m_socket << " write_size " << lpos;
 }
 
 
 CSocket::TPacket CSocket::read() {
-    char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
-
-//    LOGT << "::recv socket " << m_socket << "...";
-
-    auto received_size = assertOK(::recv(m_socket, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0),
-        "socket read error");
-
-    auto result = TPacket(buffer, buffer + received_size);
-
+//    LOGT << "read socket " << m_socket << "...";
 //    LOGT << "::recv socket " << m_socket << " received_size " << received_size;// << " buffer\n" << result;
-    return result; // ----->
+
+    if (m_ssl) {
+//        CSocket::TPacket result;
+//        while (result.empty())
+//            result = m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE);
+//        return result;
+        return m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE); // ----->
+    } else {
+        char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
+        auto received_size = assertOK(::recv(m_socket, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
+        return TPacket(buffer, buffer + received_size); // ----->
+    }
 }
 
 
@@ -132,38 +148,38 @@ void CSocket::listen() {
     setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
 
 //    LOGT << "::bind socket " << m_socket;
-    assertOK(::bind(m_socket, (struct sockaddr *) (&server_address), sizeof(server_address)),
-        "socket bind error");
+    assertOK(::bind(m_socket, (struct sockaddr *) (&server_address), sizeof(server_address)), "socket bind error");
 
     // waiting for incoming packet
 //    LOGT << "::listen socket " << m_socket;
-    assertOK(::listen(m_socket, SOMAXCONN),
-        "socket listen error");
+    assertOK(::listen(m_socket, SOMAXCONN), "socket listen error");
+
+    if (!m_encryptor && m_url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::HTTPS)
+        m_encryptor = Context::create(m_is_blocking_mode);
 }
 
 
 ISocket::TSocketStreams CSocket::accept() {
-    struct sockaddr_in client_address = { 0 };
-    socklen_t client_address_size = sizeof(client_address);
+    // todo: thread for every socket
+    ISocket::TSocketStreams sockets;
+    for (auto const &socket: acceptInternal())
+        sockets.push_back(ISocketStream::TSharedPtr(new unix::CSocket(socket, m_encryptor)));
 
-//    LOGT << "::accept socket " << m_socket << "... ";
+    // todo: update socket id by cached url port
+    // socket = map[url]
+    // socket->update(socket_id);
 
-    auto client_socket = assertOK(::accept(m_socket, (struct sockaddr *) (&client_address), &client_address_size),
-        "socket accept error");
-
-//    LOGT << "::accept socket " << m_socket << " accepted " << client_socket;
-
-    return ISocket::TSocketStreams(
-        { ISocketStream::TSharedPtr(new unix::CSocket(client_socket)) }
-    ); // ----->
+    return sockets; // ----->
 }
 
 
 void CSocket::interrupt() {
 //    LOGT << "::shutdown socket " << m_socket;
+
+//    if (m_context)
+//        OpenSSL::releaseContext(m_context);
+
     ::shutdown(m_socket, 2);
-//    assertOK(::shutdown(m_socket, 2),
-//        "socket interrupt error: url " + convert<string>(m_url));
 }
 
 
@@ -178,8 +194,7 @@ void CSocket::connect() {
 
 //    LOGT << "::connect socket " << m_socket;
 
-    assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)),
-        "socket connect error");
+    assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error");
 }
 
 
@@ -190,8 +205,7 @@ URL CSocket::getURL() const {
 
 int CSocket::assertOK(int const &result, std::string const &message) const {
     if (result < 0)
-        throw std::runtime_error(message + ": url " + convert<string>(m_url) +
-            ", " + std::strerror(errno)); // ----->
+        throw std::runtime_error(message + ": url " + convert<string>(m_url) + ", " + std::strerror(errno)); // ----->
     else
         return result; // ----->
 }
@@ -200,9 +214,10 @@ int CSocket::assertOK(int const &result, std::string const &message) const {
 URL CSocket::getPeerURL(int const &socket) {
     struct sockaddr_in   peer;
     unsigned int         peer_len = sizeof(peer);
-    assertOK(::getpeername(socket, (sockaddr *)&peer, &peer_len),
-        "socket get peer ip error");
-    return URL(string("tcp://") + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port)));
+    if (::getpeername(socket, (sockaddr *)&peer, &peer_len) < 0)
+        throw std::runtime_error("socket get peer ip error for socket fd " + convert<string>(socket)); // ----->
+//    return URL(convertPtr(m_url.getProtocol()) + "://" + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port))); // ----->
+    return URL(string("tcp://") + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port))); // ----->
 }
 
 
@@ -213,6 +228,24 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
     else
         flags |=  O_NONBLOCK;
     assertOK(fcntl(m_socket, F_SETFL, flags), "socket set flag error");
+    m_is_blocking_mode = is_blocking;
+}
+
+
+std::list<int> CSocket::acceptInternal() {
+    std::list<int>      sockets;
+    struct sockaddr_in  client_address      = { 0 };
+    socklen_t           client_address_size = sizeof(client_address);
+    int                 socket              = 0;
+
+    do {
+        socket = ::accept(m_socket, (struct sockaddr *) (&client_address), &client_address_size);
+//        LOGT << "accepted " << socket;
+        if (socket > 0)
+            sockets.push_back(socket);
+    } while (socket > 0);
+
+    return sockets; // ----->
 }
 
 

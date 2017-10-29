@@ -23,7 +23,7 @@ file(GLOB_RECURSE SOURCE
     ${CMAKE_SOURCE_DIR}/source/utility/*.cpp
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/include /usr/include/jsoncpp)
+include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/include /usr/local/ssl/include)
 
 #add_executable(${PROJECT_NAME} ${SOURCE})
 
@@ -36,6 +36,7 @@ add_library(${PROJECT_NAME} STATIC ${SOURCE})
 #TEST
 enable_testing()
 find_package(GTest REQUIRED)
+find_package(OpenSSL REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/utility/source)
 
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
@@ -57,6 +58,7 @@ target_link_libraries(
     ${GTEST_LIBRARY} 
     ${GTEST_MAIN_LIBRARY}
     ${CMAKE_THREAD_LIBS_INIT}
+    ${OPENSSL_LIBRARIES}
 )
 
 add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})

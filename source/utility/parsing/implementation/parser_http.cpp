@@ -108,7 +108,6 @@ INode::TSharedPtr CHTTPParser::parse(std::string const &source) const {
             headers->addChild(name, value);
 
     node->addChild(HTTP_BODY, body);
-
     return node; // ----->
 }
 

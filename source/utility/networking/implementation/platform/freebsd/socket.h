@@ -9,6 +9,7 @@
 
 
 #include "../unix/socket.h"
+#include "utility/encryption/openssl.h"
 
 #include <sys/event.h>
 #include <vector>
@@ -29,7 +30,7 @@ public:
     void listen() override;
     TSocketStreams accept() override;
 private:
-    CSocket(int const &socket);
+    CSocket(int const &socket, encryption::openssl::Context::TSharedPtr const &context);
 
     std::vector<struct kevent>  m_events;
     std::vector<struct kevent>  m_monitor_events;

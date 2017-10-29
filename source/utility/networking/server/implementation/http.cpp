@@ -17,7 +17,7 @@ namespace {
 
 
 //size_t const MIN_HTTP_HEADER_SIZE = 16;
-//size_t const MIN_HTTP_HEADER_SIZE = 93;
+size_t const MIN_HTTP_HEADER_SIZE = 93;
 
 
 }
@@ -56,39 +56,58 @@ CHTTP::CSocketHandler::CSocketHandler(IHTTPHandler::TSharedPtr const &http_handl
 {}
 
 
+CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets const &sockets_) {
+    TSockets sockets;
 
-
-CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets const &sockets) {
-    TSockets sockets_;
-
-    for (auto const &socket: sockets) {
+    for (auto const &socket: sockets_) {
         try {
-            auto packet = socket->read();
+//            ISocketStream::map_url_read_cache_mutex.lock();
+//            auto packet = ISocketStream::map_url_read_cache.at(convert<string>(socket->getURL()));
+//            auto p      = socket->read();
+//            packet.insert(packet.end(), p.begin(), p.end());
+//            ISocketStream::map_url_read_cache[convert<string>(socket->getURL())] = packet;
+//            ISocketStream::map_url_read_cache_mutex.unlock();
+            auto packet      = socket->read();
 
-            http::request::THttp    request (m_parser->parse(convert<string>(packet)));
+            // todo: map url port packet
+            if (packet.size() < MIN_HTTP_HEADER_SIZE) {
+//                LOGT << "skip socket " << socket->getURL();
+                sockets.push_back(socket);
+                continue; // <---
+            }
+
+//            LOGT << "url " << socket->getURL() << " read size " << packet.size();
+
+            http::request::THttp    request      (m_parser->parse(convert<string>(packet)));
             http::response::THttp   response    = m_http_handler->handle(request);
 
             response.Headers.ContentLength      = response.Body.get().size();
             packet                              = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
 
-            LOGT << "write:\n" << packet;
+//            LOGT << x"write:\n" << packet;
 
             socket->write(packet);
         } catch (std::exception const &e) {
-            LOGE << e.what();
+            LOGE << "url " << socket->getURL() << " handler error: " << e.what();
         }
         socket->close();
+//        ISocketStream::map_url_read_cache_mutex.lock();
+//        LOGT << "delete url " << socket->getURL();
+//        ISocketStream::map_url_read_cache.erase(convert<string>(socket->getURL()));
+//        ISocketStream::map_url_read_cache_mutex.unlock();
     }
 
-    return sockets_;
+    return sockets; // ----->
 }
 
 
 void CHTTP::CSocketHandler::handleStart() {
+    LOGT << "start";
 }
 
 
 void CHTTP::CSocketHandler::handleStop() {
+    LOGT << "stop";
 }
 
 

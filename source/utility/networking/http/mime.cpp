@@ -1,6 +1,7 @@
 #include "mime.h"
 
 #include <algorithm>
+#include <stdexcept>
 
 
 namespace utility {

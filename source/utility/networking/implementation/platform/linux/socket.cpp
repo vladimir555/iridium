@@ -13,6 +13,13 @@
 #include <utility/logging/logger.h>
 
 
+using utility::encryption::openssl::Context;
+
+// todo: rm
+using utility::convertion::convert;
+using std::string;
+
+
 int const MAX_EVENTS            = 1024;
 int const EPOLL_WAIT_TIMEOUT_MS = 1000;
 
@@ -32,9 +39,9 @@ CSocket::CSocket(URL const &url)
 {}
 
 
-CSocket::CSocket(int const &socket)
+CSocket::CSocket(int const &socket, Context::TSharedPtr const &encryptor)
 :
-    unix::CSocket   (socket),
+    unix::CSocket   (socket, encryptor),
     m_epoll         (0),
     m_event         ({0}),
     m_events        (MAX_EVENTS, {0})
@@ -69,32 +76,29 @@ CSocket::TSocketStreams CSocket::accept() {
         } else
         if (m_events[i].data.fd == m_socket) {
 //            LOGT << "event on server socket";
-            struct sockaddr     in_addr         = { 0 };
-            socklen_t           in_len          = sizeof(in_addr);
-            int                 client_socket   = 0;
-            while (true) {
-                client_socket = ::accept(m_socket, &in_addr, &in_len);
-                if (client_socket == -1) {
-                    if ((errno == EAGAIN) ||
-                         errno == EWOULDBLOCK)
-                    {
-//                        LOGT << "EAGAIN | EWOULDBLOCK";
-                    } else {
-//                        LOGT << "accept error";
-                    }
-                    break;
-                } else {
-//                    LOGT << "acepted socket " << client_socket;
-                    auto client_socket_stream = new CSocket(client_socket);
-//                    client_socket_stream->setBlockingMode(false);
-                    sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
-//                    LOGT << "push_back socket " << client_socket;
+            for (auto const &socket: unix::CSocket::acceptInternal()) {
+//                map_url_read_cache_mutex.lock();
+                try {
+//                    auto url = getPeerURL(socket);
+//                    if (map_url_read_cache.find(convert<string>(url)) == map_url_read_cache.end()) {
+//                        map_url_read_cache[convert<string>(url)] = TPacket();
+
+                        auto client_socket_stream = new CSocket(socket, m_encryptor);
+                        client_socket_stream->setBlockingMode(false);
+                        sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
+
+//                        LOGT << "insert url " << url;
+//                    }
+                } catch (std::exception const &e) {
+                    LOGF << e.what();
+                    ::close(socket);
                 }
+//                map_url_read_cache_mutex.unlock();
             }
         }
     }
 
-    return sockets;
+    return sockets; // ----->
 }
 
 

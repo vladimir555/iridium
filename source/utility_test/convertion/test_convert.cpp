@@ -225,6 +225,11 @@ TEST(convertion, enum_) {
         convert<string>(e);
     }
 
+    {
+        TEnum e = static_cast<TEnum::TEnumInternal>(1);
+        convert<string>(e);
+    }
+
     ASSERT_THROW(convert<TEnum>(string("E55")), std::runtime_error);
     ASSERT_THROW(convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))), std::runtime_error);
 

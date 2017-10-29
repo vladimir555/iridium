@@ -13,10 +13,9 @@ namespace threading {
 namespace implementation {
 
 
-class CMutex:
-    public IMutex
-{
+class CMutex: public IMutex {
 public:
+    DEFINE_CREATE(CMutex)
     ///
     CMutex() = default;
     ///

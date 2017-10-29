@@ -18,6 +18,7 @@
 
 
 using utility::convertion::convert;
+using utility::encryption::openssl::Context;
 using std::string;
 
 
@@ -47,15 +48,6 @@ DEFINE_ENUM(
 IMPLEMENT_ENUM(EventFlags)
 
 
-string flagsToString(int const &flags) {
-    string result;
-    for (auto const &f: EventFlags::getEnums())
-        if (flags & f)
-            result += convert<string>(f) + " ";
-    return result;
-}
-
-
 namespace utility {
 namespace networking {
 namespace implementation {
@@ -75,9 +67,10 @@ CSocket::CSocket(URL const &url)
 {}
 
 
-CSocket::CSocket(int const &socket)
+// todo: cached packet socket class instead
+CSocket::CSocket(int const &socket, Context::TSharedPtr const &encryptor)
 :
-    unix::CSocket               (socket),
+    unix::CSocket               (socket, encryptor),
     m_events                    (MAX_EVENT_COUNT - 1, { 0 }),
     m_monitor_events            (m_events.size() + 1, { 0 }),
     m_monitor_events_used_count (0)
@@ -91,7 +84,6 @@ void CSocket::listen() {
     unix::CSocket::listen();
 
     m_kqueue = assertOK(kqueue(), "socket kqueue create error");
-
     m_monitor_events[0] = { static_cast<uintptr_t>(m_socket), EVFILT_READ, EV_ADD, 0, 0, nullptr };
     m_monitor_events_used_count = 1;
 
@@ -107,62 +99,62 @@ CSocket::TSocketStreams CSocket::accept() {
     auto events_count = assertOK(
         kevent(m_kqueue, m_monitor_events.data(), m_monitor_events_used_count, m_events.data(), m_events.size(), &timeout),
         "socket resolving kevent error");
-
     m_monitor_events_used_count = 1;
 
     for (int i = 0; i < events_count; i++) {
         if (m_events[i].ident == 0)
-            continue;
+            continue; // <---
 
         if (m_events[i].flags & EV_EOF) {
             if (m_monitor_events_used_count >= m_monitor_events.size())
-                continue;
+                continue; // <---
             m_monitor_events[m_monitor_events_used_count] =
                 { m_events[i].ident, EVFILT_READ, EV_DELETE, 0, 0, nullptr };
             m_monitor_events_used_count++;
-            continue;
+            continue; // <---
         }
 
         if (m_events[i].flags & EV_ERROR) {
-//            LOGE <<  CSocket(m_events[i].ident).getURL() << " kevent error: " <<
-//                     string(strerror(m_events[i].data))  << " " << flagsToString(m_events[i].flags) <<
-//                     " queue size " << m_monitor_events_used_count;
-//            ::close(m_events[i].ident);
-//            if (m_monitor_events_used_count >= m_monitor_events.size())
-//                continue;
-//            m_monitor_events[m_monitor_events_used_count] =
-//                { m_events[i].ident, EVFILT_READ, EV_DELETE, 0, 0, nullptr };
-//            m_monitor_events_used_count++;
-            continue;
+            LOGE <<  "kevent error: " <<
+                string(strerror(m_events[i].data)) << " " <<
+                EventFlags(m_events[i].flags).convertToFlagsString() <<
+                " queue size " << m_monitor_events_used_count;
+            continue; // <---
         }
 
         if (m_events[i].ident == m_socket) {
-            struct sockaddr address             = { 0 };
-            socklen_t       address_length      =   0;
-            int             client_socket_id    =   0;
-
             if (m_monitor_events_used_count >= m_monitor_events.size())
-                continue;
+                continue; // <---
 
-            do {
-                client_socket_id = ::accept(m_socket, &address, &address_length);
-                if (client_socket_id > 0) {
-                    m_monitor_events[m_monitor_events_used_count] =
-                        { static_cast<uintptr_t>(client_socket_id), EVFILT_READ, EV_ADD | EV_ONESHOT, 0, 0, nullptr };
-                    m_monitor_events_used_count++;
-                }
-            } while(client_socket_id > 0);
-
+            for (auto const &socket: unix::CSocket::acceptInternal()) {
+                m_monitor_events[m_monitor_events_used_count] =
+                    { static_cast<uintptr_t>(socket), EVFILT_READ, EV_ADD | EV_ONESHOT, 0, 0, nullptr };
+                m_monitor_events_used_count++;
+            }
         } else {
-            auto client_socket_stream = new CSocket(m_events[i].ident);
-            client_socket_stream->setBlockingMode(false);
-//            LOGT << "push_back " << client_socket_stream->getURL() << " flags " << m_events[i].flags <<
-//                " " << flagsToString(m_events[i].flags);
-            sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
+//            map_url_read_cache_mutex.lock();
+            try {
+//                auto url = getPeerURL(m_events[i].ident);
+//                if (map_url_read_cache.find(convert<string>(url)) == map_url_read_cache.end()) {
+//                    map_url_read_cache[convert<string>(url)] = TPacket();
+
+                    auto client_socket_stream = new CSocket(m_events[i].ident, m_encryptor);
+                    client_socket_stream->setBlockingMode(false);
+
+                    sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
+
+//                    LOGT << "insert url " << url;
+//                    LOGT << "push_back " << client_socket_stream->getURL() << " flags " << m_events[i].flags <<
+//                        " " << EventFlags(m_events[i].flags).convertToFlagsString();
+//                }
+            } catch (std::exception const &e) {
+                LOGF << e.what();
+                ::close(m_events[i].ident);
+            }
+//            map_url_read_cache_mutex.unlock();
         }
     }
-
-    return sockets;
+    return sockets; // ----->
 }
 
 

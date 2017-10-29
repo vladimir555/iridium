@@ -29,7 +29,7 @@ namespace implementation {
 
 
 ISocket::TPacket readFile(string const &file_name) {
-    LOGT << "read file: '" << file_name << "'";
+//    LOGT << "read file: '" << file_name << "'";
 
     std::ifstream file(file_name, std::ios::binary);
 

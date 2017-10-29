@@ -139,12 +139,8 @@ template<typename TItem>
 void CWorker<TItem>::Runnuble::run() {
     try {
         m_worker.handleStart();
-        while(m_is_running) {
-            auto items = m_worker.m_async_queue->pop();
-            auto left  = m_worker.handleItems(items);
-            if (!left.empty())
-                m_worker.push(left);
-        }
+        while(m_is_running)
+            m_worker.push(m_worker.handleItems(m_worker.m_async_queue->pop()));
         m_worker.handleStop();
     } catch (std::exception const &e) {
         LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();

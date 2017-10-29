@@ -25,6 +25,7 @@ public: \
         __VA_ARGS__ \
     }; \
     TEnum(TEnumInternal const &e): m_value(e) {} \
+    TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
         for (auto &i : map_enum_string) \
             if (utility::lowerCase(i.second) == utility::lowerCase(s)) \
@@ -101,6 +102,13 @@ public: \
     } \
     static std::string convert(TEnum::TEnumInternal const &e) { \
         return convert(TEnum(e)); \
+    } \
+    std::string convertToFlagsString() const { \
+        std::string result; \
+        for (auto const &f: TEnum::getEnums()) \
+            if (m_value & f) \
+                result += convert(f) + " "; \
+        return result; \
     } \
 };
 //DEFINE_CONVERT(TEnum, std::string)

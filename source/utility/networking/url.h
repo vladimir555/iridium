@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <vector>
+#include <set>
 
 #include "utility/convertion/convert.h"
 #include "types.h"
@@ -29,7 +30,7 @@ public:
         MYSQL   = 3306
     )
 
-    explicit URL(std::string const &url);
+    URL(std::string const &url);
    ~URL() = default;
 
     URL &operator = (URL const &url) = default;
@@ -45,6 +46,9 @@ public:
     THostSharedPtr      const getHost()         const;
     TProtocolSharedPtr  const getProtocol()     const;
     TAddress            const getAddress()      const;
+
+    bool operator < (URL const &url) const {return true;}
+//    ::std::size_t operator ()(const ::std::set<URL*> &vertexSet) const { return 0; }
 
 private:
     TIPv4SharedPtr      m_ipv4;

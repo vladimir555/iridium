@@ -9,6 +9,7 @@
 
 
 #include "../unix/socket.h"
+#include "utility/encryption/openssl.h"
 
 #include <sys/epoll.h>
 #include <vector>
@@ -30,7 +31,7 @@ public:
     TSocketStreams accept() override;
 
 private:
-    CSocket(int const &socket);
+    CSocket(int const &socket, encryption::openssl::Context::TSharedPtr const &context);
 
     int                 m_epoll;
     struct epoll_event  m_event;

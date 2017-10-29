@@ -12,9 +12,9 @@ namespace utility {
 
 
 template<typename T>
-T assertExists(T const &&t, std::string const &error) {
+T assertExists(T t, std::string const &error) {
     if (t)
-        return t; // ----->
+        return std::move(t); // ----->
     else
         throw std::runtime_error(error);
 }

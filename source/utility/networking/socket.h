@@ -14,6 +14,10 @@
 #include <list>
 
 
+#include <map>
+#include "utility/threading/implementation/mutex.h"
+
+
 namespace utility {
 namespace networking {
 
@@ -30,6 +34,9 @@ public:
     virtual TPacket read() = 0;
     virtual void close() = 0;
     virtual URL getURL() const = 0;
+
+//    static threading::implementation::CMutex    map_url_read_cache_mutex;
+//    static std::map<std::string, TPacket>       map_url_read_cache;
 };
 
 
