@@ -15,7 +15,9 @@
 #include <fcntl.h>
 #include <cstring>
 
+#include "utility/threading/synchronized_scope.h"
 #include "utility/logging/logger.h"
+
 
 
 using std::string;
@@ -43,61 +45,51 @@ namespace unix {
 CSocket::CSocket(URL const &url)
 :
     m_is_blocking_mode  (false),
-    m_socket            (0),
+    m_socket_fd         (0),
     m_url               (url),
     m_encryptor         (nullptr)
-{
-//    LOGT << "url " << url;
-}
+{}
 
 
-CSocket::CSocket(int const &socket, Context::TSharedPtr const &encryptor)
+CSocket::CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor)
 :
     m_is_blocking_mode  (false),
-    m_socket            (socket),
-    m_url               (getPeerURL(socket)),
-    m_encryptor         (encryptor)
+    m_socket_fd         (socket),
+    m_url               (url),
+    m_encryptor         (acceptor->m_encryptor),
+    m_acceptor          (acceptor)
 {
-//    LOGT << 11;
-    // todo: url ssl map !
     if (m_encryptor)
-        m_ssl = m_encryptor->accept(m_socket);
-//    LOGT << 22;
-//    LOGT << "url " << m_url << " socket " << socket;
+        m_ssl = m_encryptor->accept(m_socket_fd);
 }
 
 
 CSocket::~CSocket() {
-    //interrupt();
-//    LOGT << "socket " << m_socket;
+//    interrupt();
 }
 
 
 void CSocket::open() {
-    // todo: SOCK_STREAM - tcp, SOCK_DGRAM - udp
-
-//    LOGT << "::socket AF_INET, SOCK_STREAM ...";
-
-    auto protocol = IPPROTO_TCP;
+   auto protocol = IPPROTO_TCP;
     if (!m_url.getProtocol() || *m_url.getProtocol() == URL::TProtocol::UDP)
         protocol = IPPROTO_UDP;
 
-    m_socket = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
-
-//    if (!m_context && m_descriptor)
-//        m_descriptor = OpenSSL::createDescriptor(context, socket);
-//    LOGT << "socket " << m_socket;
+    m_socket_fd = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
 }
 
 
 void CSocket::close() {
-//    LOGT << "::close socket " << m_socket;
-    assertOK(::close(m_socket), "close socket error");
+    LOCK_SCOPE_FAST;
+    if (m_ssl)
+        m_ssl.reset();
+    assertOK(::close(m_socket_fd), "close socket error");
+    if (m_acceptor)
+        m_acceptor->removeURLFromMap(m_url);
 }
 
 
 void CSocket::write(TPacket const &packet) {
-//    LOGT << "::write socket " << m_socket << " packet " << packet;
+    LOCK_SCOPE_FAST;
     if (m_ssl) {
         m_ssl->write(packet);
     } else {
@@ -107,28 +99,23 @@ void CSocket::write(TPacket const &packet) {
             auto rpos = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
             if (rpos > packet.size())
                 rpos = packet.size();
-            lpos += assertOK(::send(m_socket, buffer, rpos - lpos, 0), "socket write error");
+            lpos += assertOK(::send(m_socket_fd, buffer, rpos - lpos, 0), "socket write error");
         }
     }
-//    LOGT << "::write socket " << m_socket << " write_size " << lpos;
 }
 
 
 CSocket::TPacket CSocket::read() {
-//    LOGT << "read socket " << m_socket << "...";
-//    LOGT << "::recv socket " << m_socket << " received_size " << received_size;// << " buffer\n" << result;
-
+    LOCK_SCOPE_FAST;
+    TPacket result;
     if (m_ssl) {
-//        CSocket::TPacket result;
-//        while (result.empty())
-//            result = m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE);
-//        return result;
-        return m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE); // ----->
+        result = m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE); // ----->
     } else {
         char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
-        auto received_size = assertOK(::recv(m_socket, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
-        return TPacket(buffer, buffer + received_size); // ----->
+        auto received_size = assertOK(::recv(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
+        result = TPacket(buffer, buffer + received_size); // ----->
     }
+    return result; // ----->
 }
 
 
@@ -145,14 +132,10 @@ void CSocket::listen() {
     server_address.sin_port         = htons(*m_url.getPort());
 
     int yes = 1;
-    setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
+    setsockopt(m_socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
 
-//    LOGT << "::bind socket " << m_socket;
-    assertOK(::bind(m_socket, (struct sockaddr *) (&server_address), sizeof(server_address)), "socket bind error");
-
-    // waiting for incoming packet
-//    LOGT << "::listen socket " << m_socket;
-    assertOK(::listen(m_socket, SOMAXCONN), "socket listen error");
+    assertOK(::bind(m_socket_fd, (struct sockaddr *) (&server_address), sizeof(server_address)), "socket bind error");
+    assertOK(::listen(m_socket_fd, SOMAXCONN), "socket listen error");
 
     if (!m_encryptor && m_url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::HTTPS)
         m_encryptor = Context::create(m_is_blocking_mode);
@@ -160,26 +143,17 @@ void CSocket::listen() {
 
 
 ISocket::TSocketStreams CSocket::accept() {
-    // todo: thread for every socket
+    // todo: thread for every accepted socket
     ISocket::TSocketStreams sockets;
     for (auto const &socket: acceptInternal())
-        sockets.push_back(ISocketStream::TSharedPtr(new unix::CSocket(socket, m_encryptor)));
-
-    // todo: update socket id by cached url port
-    // socket = map[url]
-    // socket->update(socket_id);
+        sockets.push_back(ISocketStream::TSharedPtr(new unix::CSocket(socket, getPeerURL(socket), shared_from_this())));
 
     return sockets; // ----->
 }
 
 
 void CSocket::interrupt() {
-//    LOGT << "::shutdown socket " << m_socket;
-
-//    if (m_context)
-//        OpenSSL::releaseContext(m_context);
-
-    ::shutdown(m_socket, 2);
+    ::shutdown(m_socket_fd, 2);
 }
 
 
@@ -192,9 +166,7 @@ void CSocket::connect() {
     address.sin_family       = AF_INET;
     address.sin_port         = htons( *m_url.getPort() );
 
-//    LOGT << "::connect socket " << m_socket;
-
-    assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error");
+    assertOK(::connect(m_socket_fd, (struct sockaddr *) &address, sizeof(address)), "socket connect error");
 }
 
 
@@ -216,18 +188,22 @@ URL CSocket::getPeerURL(int const &socket) {
     unsigned int         peer_len = sizeof(peer);
     if (::getpeername(socket, (sockaddr *)&peer, &peer_len) < 0)
         throw std::runtime_error("socket get peer ip error for socket fd " + convert<string>(socket)); // ----->
-//    return URL(convertPtr(m_url.getProtocol()) + "://" + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port))); // ----->
-    return URL(string("tcp://") + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port))); // ----->
+
+    //LOGT << "m_url: " << m_url;
+    auto protocol   = convert<string>(URL::TProtocol::TCP);
+    if (m_url.getProtocol())
+        protocol    = convert<string>(*m_url.getProtocol());
+    return URL(protocol + "://" + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port))); // ----->
 }
 
 
 void CSocket::setBlockingMode(bool const &is_blocking) {
-    auto flags = assertOK(fcntl(m_socket, F_GETFL, 0), "socket get flag error");
+    auto flags = assertOK(fcntl(m_socket_fd, F_GETFL, 0), "socket get flag error");
     if (is_blocking)
         flags &= !O_NONBLOCK;
     else
         flags |=  O_NONBLOCK;
-    assertOK(fcntl(m_socket, F_SETFL, flags), "socket set flag error");
+    assertOK(fcntl(m_socket_fd, F_SETFL, flags), "socket set flag error");
     m_is_blocking_mode = is_blocking;
 }
 
@@ -239,13 +215,33 @@ std::list<int> CSocket::acceptInternal() {
     int                 socket              = 0;
 
     do {
-        socket = ::accept(m_socket, (struct sockaddr *) (&client_address), &client_address_size);
-//        LOGT << "accepted " << socket;
-        if (socket > 0)
-            sockets.push_back(socket);
+        socket = ::accept(m_socket_fd, (struct sockaddr *) (&client_address), &client_address_size);
+        if (socket > 0) {
+            LOCK_SCOPE_FAST;
+            auto i = m_map_url_socket.find(getPeerURL(socket));
+            if (i == m_map_url_socket.end())
+                sockets.push_back(socket);
+            else
+                i->second->updateAcceptedSocketFD(socket);
+        }
     } while (socket > 0);
 
     return sockets; // ----->
+}
+
+
+void CSocket::updateAcceptedSocketFD(int const &socket_fd) {
+    LOCK_SCOPE_FAST;
+    LOGT << m_url << " update fd " << m_socket_fd << " -> " << socket_fd;
+    m_socket_fd = socket_fd;
+    if (m_ssl && m_encryptor)
+        m_ssl = m_encryptor->accept(m_socket_fd);
+}
+
+
+void CSocket::removeURLFromMap(URL const &url) {
+    LOCK_SCOPE_FAST;
+    m_map_url_socket.erase(url);
 }
 
 

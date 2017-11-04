@@ -58,45 +58,26 @@ CHTTP::CSocketHandler::CSocketHandler(IHTTPHandler::TSharedPtr const &http_handl
 
 CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets const &sockets_) {
     TSockets sockets;
-
     for (auto const &socket: sockets_) {
         try {
-//            ISocketStream::map_url_read_cache_mutex.lock();
-//            auto packet = ISocketStream::map_url_read_cache.at(convert<string>(socket->getURL()));
-//            auto p      = socket->read();
-//            packet.insert(packet.end(), p.begin(), p.end());
-//            ISocketStream::map_url_read_cache[convert<string>(socket->getURL())] = packet;
-//            ISocketStream::map_url_read_cache_mutex.unlock();
             auto packet      = socket->read();
 
-            // todo: map url port packet
             if (packet.size() < MIN_HTTP_HEADER_SIZE) {
 //                LOGT << "skip socket " << socket->getURL();
                 sockets.push_back(socket);
                 continue; // <---
             }
 
-//            LOGT << "url " << socket->getURL() << " read size " << packet.size();
-
             http::request::THttp    request      (m_parser->parse(convert<string>(packet)));
             http::response::THttp   response    = m_http_handler->handle(request);
-
             response.Headers.ContentLength      = response.Body.get().size();
             packet                              = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
-
-//            LOGT << x"write:\n" << packet;
-
             socket->write(packet);
         } catch (std::exception const &e) {
             LOGE << "url " << socket->getURL() << " handler error: " << e.what();
         }
         socket->close();
-//        ISocketStream::map_url_read_cache_mutex.lock();
-//        LOGT << "delete url " << socket->getURL();
-//        ISocketStream::map_url_read_cache.erase(convert<string>(socket->getURL()));
-//        ISocketStream::map_url_read_cache_mutex.unlock();
     }
-
     return sockets; // ----->
 }
 

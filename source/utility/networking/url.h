@@ -33,7 +33,7 @@ public:
     URL(std::string const &url);
    ~URL() = default;
 
-    URL &operator = (URL const &url) = default;
+//    URL &operator = (URL const &url) = default;
 
     typedef std::shared_ptr<TIPv4 const>        TIPv4SharedPtr;
     typedef std::shared_ptr<TPort const>        TPortSharedPtr;
@@ -47,7 +47,7 @@ public:
     TProtocolSharedPtr  const getProtocol()     const;
     TAddress            const getAddress()      const;
 
-    bool operator < (URL const &url) const {return true;}
+    bool operator < (URL const &url) const;
 //    ::std::size_t operator ()(const ::std::set<URL*> &vertexSet) const { return 0; }
 
 private:

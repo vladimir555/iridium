@@ -29,8 +29,6 @@ namespace implementation {
 
 
 ISocket::TPacket readFile(string const &file_name) {
-//    LOGT << "read file: '" << file_name << "'";
-
     std::ifstream file(file_name, std::ios::binary);
 
     if (!file.is_open())
@@ -59,6 +57,7 @@ http::response::THttp CHTTPFSMapper::handle(http::request::THttp const &request)
         response.Body                   = readFileCached(file_name);
         response.Headers.ContentType    = MIME::instance().getByFileNameExtension(extractFileNameExtension(file_name));
     } catch (std::exception const &e) {
+        LOGW << "http request error: " << e.what();
         response.Message = {"HTTP/1.1", 404, "Not found"};
     }
     return response; // ----->

@@ -22,7 +22,7 @@ TEST(networking, url) {
 
     URL url("https://172.16.0.64:55555");
 
-    ASSERT_FALSE(static_cast<bool>(url.getHost()));
+    ASSERT_TRUE(static_cast<bool>(url.getHost()));
     ASSERT_TRUE(static_cast<bool>(url.getIPv4()));
     ASSERT_TRUE(static_cast<bool>(url.getPort()));
     ASSERT_TRUE(static_cast<bool>(url.getProtocol()));

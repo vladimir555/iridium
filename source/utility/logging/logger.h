@@ -82,7 +82,7 @@ void update(std::string const &file_name);
 
 
 #define LOGT \
-utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << __FUNCTION__ << ": "
+utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << __PRETTY_FUNCTION__ << ": "
 #define LOGD \
 utility::logging::LogStream(utility::logging::TEvent::TLevel::DEBUG_LEVEL)
 #define LOGI \

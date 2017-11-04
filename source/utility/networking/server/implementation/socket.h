@@ -33,25 +33,9 @@ public:
     void finalize() override;
 
 private:
-    // todo: https acceptor big refactoring
-    class SocketsMap: public threading::implementation::CMutex {
-    public:
-        SocketsMap() = default;
-       ~SocketsMap() = default;
-        DEFINE_SMART_PTR(SocketsMap)
-        DEFINE_CREATE(SocketsMap)
-
-        bool addUnique  (ISocketStream::TSharedPtr const &socket);
-        void remove     (ISocketStream::TSharedPtr const &socket);
-
-    private:
-        // todo: unordered map
-        std::map<URL, ISocketStream::TSharedPtr> m_map_url_socket_stream;
-    };
-
     class CCachedSocketStream: public ISocketStream {
     public:
-        CCachedSocketStream(SocketsMap::TSharedPtr const &sockets_map, ISocketStream::TSharedPtr const &source_socket);
+        CCachedSocketStream(ISocketStream::TSharedPtr const &source_socket);
         virtual ~CCachedSocketStream() = default;
         DEFINE_CREATE(CCachedSocketStream)
 
@@ -63,7 +47,6 @@ private:
     private:
         TPacket                     m_cache;
         ISocketStream::TSharedPtr   m_source_socket;
-        SocketsMap::TSharedPtr      m_sockets_map;
     };
 
     class Acceptor: public threading::implementation::CRunnuble {
@@ -78,7 +61,6 @@ private:
     private:
         networking::ISocket::TSharedPtr         m_socket;
         TSocketStreamsWorkerPool::TSharedPtr    m_worker_pool;
-        SocketsMap::TSharedPtr                  m_sockets_map;
     };
 
     threading::IRunnable::TSharedPtr    m_runnuble;

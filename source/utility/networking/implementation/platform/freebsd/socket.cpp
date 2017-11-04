@@ -68,9 +68,9 @@ CSocket::CSocket(URL const &url)
 
 
 // todo: cached packet socket class instead
-CSocket::CSocket(int const &socket, Context::TSharedPtr const &encryptor)
+CSocket::CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor)
 :
-    unix::CSocket               (socket, encryptor),
+    unix::CSocket               (socket, url, acceptor),
     m_events                    (MAX_EVENT_COUNT - 1, { 0 }),
     m_monitor_events            (m_events.size() + 1, { 0 }),
     m_monitor_events_used_count (0)
@@ -78,13 +78,13 @@ CSocket::CSocket(int const &socket, Context::TSharedPtr const &encryptor)
 
 
 void CSocket::listen() {
-    assertOK( fcntl( m_socket, F_SETFL, fcntl( m_socket, F_GETFL, 0 ) | O_NONBLOCK ),
+    assertOK( fcntl( m_socket_fd, F_SETFL, fcntl( m_socket_fd, F_GETFL, 0 ) | O_NONBLOCK ),
         "socket set non blocking fail" );
 
     unix::CSocket::listen();
 
     m_kqueue = assertOK(kqueue(), "socket kqueue create error");
-    m_monitor_events[0] = { static_cast<uintptr_t>(m_socket), EVFILT_READ, EV_ADD, 0, 0, nullptr };
+    m_monitor_events[0] = { static_cast<uintptr_t>(m_socket_fd), EVFILT_READ, EV_ADD, 0, 0, nullptr };
     m_monitor_events_used_count = 1;
 
     setBlockingMode(false);
@@ -106,6 +106,7 @@ CSocket::TSocketStreams CSocket::accept() {
             continue; // <---
 
         if (m_events[i].flags & EV_EOF) {
+//            LOGT << getPeerURL(m_events[i].ident) << "EOF";
             if (m_monitor_events_used_count >= m_monitor_events.size())
                 continue; // <---
             m_monitor_events[m_monitor_events_used_count] =
@@ -122,7 +123,7 @@ CSocket::TSocketStreams CSocket::accept() {
             continue; // <---
         }
 
-        if (m_events[i].ident == m_socket) {
+        if (m_events[i].ident == m_socket_fd) {
             if (m_monitor_events_used_count >= m_monitor_events.size())
                 continue; // <---
 
@@ -132,26 +133,17 @@ CSocket::TSocketStreams CSocket::accept() {
                 m_monitor_events_used_count++;
             }
         } else {
-//            map_url_read_cache_mutex.lock();
             try {
-//                auto url = getPeerURL(m_events[i].ident);
-//                if (map_url_read_cache.find(convert<string>(url)) == map_url_read_cache.end()) {
-//                    map_url_read_cache[convert<string>(url)] = TPacket();
+                auto client_socket_stream = new CSocket(m_events[i].ident, getPeerURL(m_events[i].ident), shared_from_this());
+                client_socket_stream->setBlockingMode(false);
 
-                    auto client_socket_stream = new CSocket(m_events[i].ident, m_encryptor);
-                    client_socket_stream->setBlockingMode(false);
-
-                    sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
-
-//                    LOGT << "insert url " << url;
-//                    LOGT << "push_back " << client_socket_stream->getURL() << " flags " << m_events[i].flags <<
-//                        " " << EventFlags(m_events[i].flags).convertToFlagsString();
-//                }
+                sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
+//                LOGT << "push_back " << client_socket_stream->getURL() << " flags " << m_events[i].flags <<
+//                    " " << EventFlags(m_events[i].flags).convertToFlagsString();
             } catch (std::exception const &e) {
                 LOGF << e.what();
                 ::close(m_events[i].ident);
             }
-//            map_url_read_cache_mutex.unlock();
         }
     }
     return sockets; // ----->

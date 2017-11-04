@@ -12,8 +12,10 @@
 #include "utility/networking/socket.h"
 #include "utility/networking/url.h"
 #include "utility/encryption/openssl.h"
+#include "utility/threading/implementation/mutex.h"
 
-#include <unordered_set>
+#include <map>
+#include <memory>
 
 
 namespace utility {
@@ -23,36 +25,44 @@ namespace platform {
 namespace unix {
 
 
-class CSocket: public ISocket {
+class CSocket: public ISocket, public threading::implementation::CMutex, public std::enable_shared_from_this<CSocket> {
 public:
+    DEFINE_SMART_PTR(CSocket)
     DEFINE_CREATE(CSocket)
 
     CSocket(URL const &url);
     virtual ~CSocket();
 
-    void open() override;
-    void close() override;
-    void write(TPacket const &packet) override;
-    TPacket read() override;
-    void listen() override;
-    TSocketStreams accept() override;
-    void interrupt() override;
-    void connect() override;
-    URL  getURL() const override;
+    void            open() override;
+    void            close() override;
+    void            write(TPacket const &packet) override;
+    TPacket         read() override;
+    void            listen() override;
+    TSocketStreams  accept() override;
+    void            interrupt() override;
+    void            connect() override;
+    URL             getURL() const override;
 
 protected:
-    CSocket(int const &socket, encryption::openssl::Context::TSharedPtr const &context = nullptr);
-    int assertOK(int const &result, std::string const &message) const;
-    URL getPeerURL(int const &socket);
-    void setBlockingMode(bool const &is_blocking);
-    std::list<int> acceptInternal();
+    CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor);
+    int             assertOK(int const &result, std::string const &message) const;
+    URL             getPeerURL(int const &socket);
+    void            setBlockingMode(bool const &is_blocking);
+    std::list<int>  acceptInternal();
 
-    std::unordered_set<std::string> m_acepted_url_set;
-    bool m_is_blocking_mode;
-    int m_socket;
-    URL m_url;
+    bool            m_is_blocking_mode;
+    int             m_socket_fd;
+    URL             m_url;
+
     encryption::openssl::Context::TSharedPtr        m_encryptor;
     encryption::openssl::Context::SSL::TSharedPtr   m_ssl;
+
+private:
+    void            updateAcceptedSocketFD(int const &socket_fd);
+    void            removeURLFromMap(URL const &url);
+
+    std::map<URL, CSocket::TSharedPtr>  m_map_url_socket;
+    CSocket::TSharedPtr                 m_acceptor;
 };
 
 

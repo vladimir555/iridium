@@ -106,7 +106,6 @@ public:
     networking::ISocket::TPacket read(TSSL *ssl, size_t const &size);
     std::string getErrorString();
     std::string getErrorString(int const &code);
-    std::string getSSLErrorString(TSSL *ssl);
     std::string getSSLErrorString(TSSL *ssl, int const &code);
 
 private:

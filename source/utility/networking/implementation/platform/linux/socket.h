@@ -31,7 +31,7 @@ public:
     TSocketStreams accept() override;
 
 private:
-    CSocket(int const &socket, encryption::openssl::Context::TSharedPtr const &context);
+    CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor);
 
     int                 m_epoll;
     struct epoll_event  m_event;

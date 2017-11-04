@@ -262,15 +262,15 @@ TEST(networking, http_server) {
     server::IHTTP::THTTPHandlers    handlers;
 //    handlers.push_back(HTTPHandler::create());
 //    handlers.push_back(HTTPHandler::create());
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html1"));
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html2"));
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html3"));
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html4"));
+    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
+    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
+//    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
+//    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("https://127.0.0.1:55555"), handlers);
 
     http_server->initialize();
 
-    sleep(5);
+    sleep(500);
 
     LOGT << "stop";
     http_server->finalize();

@@ -4,7 +4,7 @@
 #include "utility/items.h"
 #include "dns.h"
 
-#include <regex>
+#include "utility/logging/logger.h"
 
 
 IMPLEMENT_ENUM(utility::networking::URL::TProtocol)
@@ -14,6 +14,13 @@ using std::make_shared;
 using std::string;
 using std::vector;
 using utility::convertion::convert;
+using utility::convertion::convertPtr;
+
+
+//template<>
+//size_t std::hash<utility::networking::URL>() {
+
+//}
 
 
 namespace {
@@ -21,7 +28,7 @@ namespace {
 
 string const PROTOCOL_DELIMITER = "://";
 string const PORT_DELIMITER     = ":";
-string const IPv4_REGEX         = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
+//string const IPv4_REGEX         = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
 
 
 } // unnamed
@@ -40,20 +47,19 @@ URL::URL(std::string const &url)
 
     auto tokens = assign(split(m_address, PROTOCOL_DELIMITER));
 
-    if (tokens.size() != 1 && tokens.size() != 2)
+    if (tokens.size() > 2)
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 
-    string other;
+    string address_port;
     if (tokens.size() == 2) {
-        m_protocol = make_shared<TProtocol>(convert<TProtocol>(tokens[0]));
-        other = tokens[1];
-    } else {
-        other = tokens[0];
-    }
+        m_protocol   = make_shared<TProtocol>(convert<TProtocol>(tokens[0]));
+        address_port = tokens[1];
+    } else
+        address_port = tokens[0];
 
-    tokens = assign(split(other, PORT_DELIMITER));
+    tokens = assign(split(address_port, PORT_DELIMITER));
 
-    if (tokens.size() != 1 && tokens.size() != 2)
+    if (tokens.size() < 1 || tokens.size() > 2)
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 
     string address = tokens[0];
@@ -66,12 +72,9 @@ URL::URL(std::string const &url)
         }
     }
 
-    // todo: rm slow regex
-    // if (std::regex_match(address, std::regex(IPv4_REGEX))) {
-    // todo: optimize
-
     auto ip = split(address, ".");
 
+    m_host = make_shared<string>(address);
     if (ip.size() == 4) {
         try {
             TIPv4 ipv4;
@@ -80,17 +83,10 @@ URL::URL(std::string const &url)
 
             m_ipv4 = make_shared<vector<uint8_t> >(ipv4);
         } catch (...) {
-            m_host = make_shared<string>(address);
         }
-    } else {
-        m_host = make_shared<string>(address);
     }
 
-    // } else {
-    //     throw std::runtime_error("wrong url '" + m_address + "': error parsing network ipv4 address"); // ----->
-    // }
-
-    // port from protocol
+    // port from protocol default port
     if (!((m_host || m_ipv4) && m_port && *m_port != 0))
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 }
@@ -141,6 +137,12 @@ TAddress const URL::getAddress() const {
 }
 
 
+bool URL::operator < (URL const &url) const {
+    return (m_host <  url.m_host) ||
+          ((m_host == url.m_host) && m_port && url.m_port && (*m_port < *url.m_port)); // ----->
+}
+
+
 } // networking
 } // utility
 
@@ -149,7 +151,7 @@ namespace {
 
 
 utility::networking::URL createURL(string const &value) {
-    return std::move(utility::networking::URL(value)); // ----->
+    return utility::networking::URL(value); // ----->
 }
 
 
