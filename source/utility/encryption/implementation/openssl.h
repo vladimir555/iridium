@@ -13,8 +13,8 @@
 #include "utility/smart_ptr.h"
 #include "utility/enum.h"
 
-
-#include "keys.h"
+#include "utility/encryption/keys.h"
+#include "utility/encryption/ssl.h"
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -25,6 +25,7 @@
 
 namespace utility {
 namespace encryption {
+namespace implementation {
 namespace openssl {
 
 
@@ -114,34 +115,37 @@ private:
 };
 
 
-class Context: public std::enable_shared_from_this<Context> {
+class CContext:
+    public IContext,
+    public std::enable_shared_from_this<CContext>
+{
 public:
-    Context(
-        bool const &is_blocking_mode                = false,
+    CContext(
+        bool        const &is_blocking_mode         = false,
         std::string const &file_name_private_key    = DEFAULT_FILE_NAME_PRIVATE_KEY,
         std::string const &file_name_certificate    = DEFAULT_FILE_NAME_CERTIFICATE);
-   ~Context();
-    DEFINE_SMART_PTR(Context)
-    DEFINE_CREATE(Context)
+    virtual ~CContext();
+    DEFINE_SMART_PTR(CContext)
+    DEFINE_CREATE(CContext)
 
-    class SSL {
+    class CSSL: public ISSL {
     public:
-        SSL(Context::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode);
-       ~SSL();
-        DEFINE_SMART_PTR(SSL)
-        DEFINE_CREATE(SSL)
+        CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode);
+        virtual ~CSSL();
+        DEFINE_SMART_PTR(CSSL)
+        DEFINE_CREATE(CSSL)
 
-        void write(networking::ISocket::TPacket const &packet);
-        networking::ISocket::TPacket read(size_t const &size);
+        void write(networking::ISocket::TPacket const &packet) override;
+        networking::ISocket::TPacket read(size_t const &size) override;
     private:
-        friend class Context;
+        friend class CContext;
         void accept();
 
         bool        m_is_blocking_mode;
         API::TSSL  *m_ssl;
     };
 
-    SSL::TSharedPtr accept(int const &fd);
+    ISSL::TSharedPtr accept(int const &fd) override;
 
 private:
     bool            m_is_blocking_mode;
@@ -150,6 +154,7 @@ private:
 
 
 } // openssl
+} // implementation
 } // encryption
 } // utility
 

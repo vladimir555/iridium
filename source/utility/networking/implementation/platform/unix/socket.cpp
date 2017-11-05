@@ -15,15 +15,15 @@
 #include <fcntl.h>
 #include <cstring>
 
+#include "utility/encryption/implementation/ssl.h"
 #include "utility/threading/synchronized_scope.h"
 #include "utility/logging/logger.h"
-
 
 
 using std::string;
 using utility::convertion::convert;
 using utility::convertion::convertPtr;
-using utility::encryption::openssl::Context;
+using utility::encryption::implementation::CContext;
 
 
 namespace {
@@ -138,7 +138,7 @@ void CSocket::listen() {
     assertOK(::listen(m_socket_fd, SOMAXCONN), "socket listen error");
 
     if (!m_encryptor && m_url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::HTTPS)
-        m_encryptor = Context::create(m_is_blocking_mode);
+        m_encryptor = CContext::create(m_is_blocking_mode);
 }
 
 

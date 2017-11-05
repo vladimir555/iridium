@@ -14,8 +14,8 @@ using std::string;
 using utility::convertion::convert;
 
 
-IMPLEMENT_ENUM(utility::encryption::openssl::API::TErrorCode)
-IMPLEMENT_ENUM(utility::encryption::openssl::API::TSSLErrorCode)
+IMPLEMENT_ENUM(utility::encryption::implementation::openssl::API::TErrorCode)
+IMPLEMENT_ENUM(utility::encryption::implementation::openssl::API::TSSLErrorCode)
 
 
 // todo: signals handlers singleton
@@ -26,6 +26,7 @@ void handleSignal(int signal) {
 
 namespace utility {
 namespace encryption {
+namespace implementation {
 namespace openssl {
 
 
@@ -35,21 +36,20 @@ API::API() {
     SSL_library_init();
     OpenSSL_add_ssl_algorithms();
 
-    LOGT << "set empty signal handler broken ssl pipe";
+    LOGT << "set empty signal handler for broken ssl pipe";
     struct sigaction sh;
     struct sigaction osh;
 
-    sh.sa_handler = &handleSignal; //Can set to SIG_IGN
-    // Restart interrupted system calls
-    sh.sa_flags = SA_RESTART;
+    // can set to SIG_IGN
+    sh.sa_handler   = &handleSignal;
+    // restart interrupted system calls
+    sh.sa_flags     = SA_RESTART;
 
-    // Block every signal during the handler
+    // block every signal during the handler
     sigemptyset(&sh.sa_mask);
 
-    if (sigaction(SIGPIPE, &sh, &osh) < 0) {
+    if (sigaction(SIGPIPE, &sh, &osh) < 0)
         throw std::runtime_error("sigaction error");
-    }
-
 }
 
 
@@ -60,7 +60,7 @@ API::~API() {
 
 
 string API::getErrorString() {
-    BIO    *bio = BIO_new(BIO_s_mem());
+    BIO    *bio     = BIO_new(BIO_s_mem());
     ERR_print_errors(bio);
     char   *buffer  = nullptr;
     size_t  length  = BIO_get_mem_data(bio, &buffer);
@@ -166,7 +166,7 @@ networking::ISocket::TPacket API::read(TSSL *ssl, size_t const &size) {
 }
 
 
-Context::Context(bool const &is_blocking_mode, std::string const &file_name_private_key, std::string const &file_name_certificate)
+CContext::CContext(bool const &is_blocking_mode, std::string const &file_name_private_key, std::string const &file_name_certificate)
 :
     m_is_blocking_mode(is_blocking_mode)
 {
@@ -174,48 +174,51 @@ Context::Context(bool const &is_blocking_mode, std::string const &file_name_priv
 }
 
 
-Context::~Context() {
+CContext::~CContext() {
     API::instance().releaseContext(m_context);
 }
 
 
-Context::SSL::TSharedPtr Context::accept(int const &fd) {
-    SSL::TSharedPtr ssl = SSL::create(shared_from_this(), fd, m_is_blocking_mode);
+ISSL::TSharedPtr CContext::accept(int const &fd) {
+    CSSL::TSharedPtr ssl = CSSL::create(shared_from_this(), fd, m_is_blocking_mode);
     ssl->accept();
     return ssl;
 }
 
 
-Context::SSL::SSL(Context::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode)
+CContext::CSSL::CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode)
 :
     m_is_blocking_mode  (is_blocking_mode),
     m_ssl               (API::instance().createSSL(context->m_context, fd))
 {}
 
 
-Context::SSL::~SSL() {
+CContext::CSSL::~CSSL() {
     API::instance().releaseSSL(m_ssl);
 }
 
 
-void Context::SSL::write(networking::ISocket::TPacket const &packet) {
+void CContext::CSSL::write(networking::ISocket::TPacket const &packet) {
     API::instance().write(m_ssl, packet);
 }
 
 
-networking::ISocket::TPacket Context::SSL::read(size_t const &size) {
+networking::ISocket::TPacket CContext::CSSL::read(size_t const &size) {
     return API::instance().read(m_ssl, size); // ----->
 }
 
 
-void Context::SSL::accept() {
+void CContext::CSSL::accept() {
     API::instance().acceptSSL(m_ssl, m_is_blocking_mode);
 }
 
 
 } // openssl
+} // implementation
 } // encryption
 } // utility
 
 
+#else
+void dummy() {}
 #endif // BUILD_FLAG_OPENSSL

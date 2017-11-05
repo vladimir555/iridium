@@ -9,6 +9,7 @@
 #include "utility/logging/logger.h"
 #include "utility/assert.h"
 #include "utility/enum.h"
+#include "utility/encryption/implementation/ssl.h"
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -18,7 +19,6 @@
 
 
 using utility::convertion::convert;
-using utility::encryption::openssl::Context;
 using std::string;
 
 

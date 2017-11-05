@@ -11,7 +11,7 @@
 
 #include "utility/networking/socket.h"
 #include "utility/networking/url.h"
-#include "utility/encryption/openssl.h"
+#include "utility/encryption/ssl.h"
 #include "utility/threading/implementation/mutex.h"
 
 #include <map>
@@ -25,7 +25,11 @@ namespace platform {
 namespace unix {
 
 
-class CSocket: public ISocket, public threading::implementation::CMutex, public std::enable_shared_from_this<CSocket> {
+class CSocket:
+    public ISocket,
+    public threading::implementation::CMutex,
+    public std::enable_shared_from_this<CSocket>
+{
 public:
     DEFINE_SMART_PTR(CSocket)
     DEFINE_CREATE(CSocket)
@@ -54,8 +58,8 @@ protected:
     int             m_socket_fd;
     URL             m_url;
 
-    encryption::openssl::Context::TSharedPtr        m_encryptor;
-    encryption::openssl::Context::SSL::TSharedPtr   m_ssl;
+    encryption::IContext::TSharedPtr    m_encryptor;
+    encryption::ISSL::TSharedPtr        m_ssl;
 
 private:
     void            updateAcceptedSocketFD(int const &socket_fd);
