@@ -21,13 +21,14 @@ class URL {
 public:
     DEFINE_ENUM(
         TProtocol, 
-        TCP     = -2,
-        UDP     = -3,
-        HTTP    = 80, 
-        HTTPS   = 443, 
-        SSH     = 22, 
-        Telnet  = 23,
-        MYSQL   = 3306
+        TCP         = -2,
+        UDP         = -3,
+        HTTP        = 80,
+        HTTPS       = 443,
+        SSH         = 22,
+        Telnet      = 23,
+        MYSQL       = 3306,
+        POSTGRESQL  = 5432
     )
 
     URL(std::string const &url);
