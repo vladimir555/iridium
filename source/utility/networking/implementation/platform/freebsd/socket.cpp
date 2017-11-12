@@ -68,7 +68,7 @@ CSocket::CSocket(URL const &url)
 
 
 // todo: cached packet socket class instead
-CSocket::CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor)
+CSocket::CSocket(int const &socket, URL const &url, unix::CSocket *acceptor)
 :
     unix::CSocket               (socket, url, acceptor),
     m_events                    (MAX_EVENT_COUNT - 1, { 0 }),
@@ -134,7 +134,7 @@ CSocket::TSocketStreams CSocket::accept() {
             }
         } else {
             try {
-                auto client_socket_stream = new CSocket(m_events[i].ident, getPeerURL(m_events[i].ident), shared_from_this());
+                auto client_socket_stream = new CSocket(m_events[i].ident, getPeerURL(m_events[i].ident), this);
                 client_socket_stream->setBlockingMode(false);
 
                 sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));

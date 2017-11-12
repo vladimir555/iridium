@@ -17,7 +17,7 @@ namespace {
 
 
 //size_t const MIN_HTTP_HEADER_SIZE = 16;
-size_t const MIN_HTTP_HEADER_SIZE = 93;
+size_t const MIN_HTTP_HEADER_SIZE = 84;
 
 
 }

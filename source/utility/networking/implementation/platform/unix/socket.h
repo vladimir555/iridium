@@ -12,7 +12,7 @@
 #include "utility/networking/socket.h"
 #include "utility/networking/url.h"
 #include "utility/encryption/ssl.h"
-#include "utility/threading/implementation/mutex.h"
+#include "utility/threading/implementation/timed_mutex.h"
 
 #include <map>
 #include <memory>
@@ -27,8 +27,7 @@ namespace unix {
 
 class CSocket:
     public ISocket,
-    public threading::implementation::CMutex,
-    public std::enable_shared_from_this<CSocket>
+    public threading::implementation::CTimedMutex
 {
 public:
     DEFINE_SMART_PTR(CSocket)
@@ -48,7 +47,7 @@ public:
     URL             getURL() const override;
 
 protected:
-    CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor);
+    CSocket(int const &socket, URL const &url, unix::CSocket *acceptor);
     int             assertOK(int const &result, std::string const &message) const;
     URL             getPeerURL(int const &socket);
     void            setBlockingMode(bool const &is_blocking);
@@ -65,8 +64,8 @@ private:
     void            updateAcceptedSocketFD(int const &socket_fd);
     void            removeURLFromMap(URL const &url);
 
-    std::map<URL, CSocket::TSharedPtr>  m_map_url_socket;
-    CSocket::TSharedPtr                 m_acceptor;
+    std::map<URL, CSocket::TSharedPtr>   m_map_url_socket;
+    CSocket                             *m_acceptor;
 };
 
 
