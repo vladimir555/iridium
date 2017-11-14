@@ -260,12 +260,8 @@ TEST(networking, http_server) {
     LOGT << "start";
 
     server::IHTTP::THTTPHandlers    handlers;
-//    handlers.push_back(HTTPHandler::create());
-//    handlers.push_back(HTTPHandler::create());
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
-    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
-//    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
-//    handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
+    for (int i = 0; i < 1; i++)
+        handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
 
     http_server->initialize();

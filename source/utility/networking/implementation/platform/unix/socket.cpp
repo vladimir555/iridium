@@ -61,7 +61,7 @@ CSocket::CSocket(int const &socket, URL const &url, unix::CSocket *acceptor)
     m_encryptor         (acceptor->m_encryptor),
     m_acceptor          (acceptor)
 {
-//    LOCK_SCOPE;
+    LOCK_SCOPE;
     if (m_encryptor)
         m_ssl = m_encryptor->accept(m_socket_fd);
 }
@@ -73,7 +73,7 @@ CSocket::~CSocket() {
 
 
 void CSocket::open() {
-    LOCK_SCOPE;
+    LOCK_SCOPE
    auto protocol = IPPROTO_TCP;
     if (!m_url.getProtocol() || *m_url.getProtocol() == URL::TProtocol::UDP)
         protocol = IPPROTO_UDP;
@@ -83,7 +83,8 @@ void CSocket::open() {
 
 
 void CSocket::close() {
-    LOCK_SCOPE;
+    LOGT << m_url << " " << m_socket_fd;
+    LOCK_SCOPE
     if (m_ssl)
         m_ssl.reset();
     assertOK(::close(m_socket_fd), "close socket error");
@@ -93,15 +94,15 @@ void CSocket::close() {
 
 
 void CSocket::write(TPacket const &packet) {
-    LOGT << m_url << " " << m_socket_fd;
-    LOCK_SCOPE;
+//    LOGT << m_url << " " << m_socket_fd;
+    LOCK_SCOPE
     if (m_ssl) {
         m_ssl->write(packet);
     } else {
         size_t lpos = 0;
         while (lpos < packet.size()) {
             auto buffer = static_cast<void const *>(packet.data() + lpos);
-            auto rpos = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
+            auto rpos   = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
             if (rpos > packet.size())
                 rpos = packet.size();
             lpos += assertOK(::send(m_socket_fd, buffer, rpos - lpos, 0), "socket write error");
@@ -113,7 +114,7 @@ void CSocket::write(TPacket const &packet) {
 
 CSocket::TPacket CSocket::read() {
     LOGT << m_url << " " << m_socket_fd;
-    LOCK_SCOPE;
+    LOCK_SCOPE
     TPacket result;
     if (m_ssl) {
         result = m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE); // ----->
@@ -128,7 +129,7 @@ CSocket::TPacket CSocket::read() {
 
 
 void CSocket::listen() {
-//    LOCK_SCOPE;
+    LOCK_SCOPE
     //todo: unix / inet protocol by url
     struct sockaddr_in server_address = { 0 };
 
@@ -162,13 +163,13 @@ ISocket::TSocketStreams CSocket::accept() {
 
 
 void CSocket::interrupt() {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     ::shutdown(m_socket_fd, 2);
 }
 
 
 void CSocket::connect() {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     struct sockaddr_in address;
     auto ipv4 = *m_url.getIPv4();
     address.sin_addr.s_addr  = htonl(
@@ -182,7 +183,7 @@ void CSocket::connect() {
 
 
 URL CSocket::getURL() const {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     return m_url;
 }
 
@@ -210,7 +211,7 @@ URL CSocket::getPeerURL(int const &socket) {
 
 
 void CSocket::setBlockingMode(bool const &is_blocking) {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     auto flags = assertOK(fcntl(m_socket_fd, F_GETFL, 0), "socket get flag error");
     if (is_blocking)
         flags &= !O_NONBLOCK;
@@ -222,7 +223,6 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
 
 
 std::list<int> CSocket::acceptInternal() {
-    LOCK_SCOPE;
     std::list<int>      sockets;
     struct sockaddr_in  client_address      = { 0 };
     socklen_t           client_address_size = sizeof(client_address);
@@ -231,6 +231,7 @@ std::list<int> CSocket::acceptInternal() {
     do {
         socket = ::accept(m_socket_fd, (struct sockaddr *) (&client_address), &client_address_size);
         if (socket > 0) {
+            LOCK_SCOPE
             auto i = m_map_url_socket.find(getPeerURL(socket));
             if (i == m_map_url_socket.end())
                 sockets.push_back(socket);
@@ -244,7 +245,7 @@ std::list<int> CSocket::acceptInternal() {
 
 
 void CSocket::updateAcceptedSocketFD(int const &socket_fd) {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     LOGT << m_url << " update fd " << m_socket_fd << " -> " << socket_fd;
     m_socket_fd = socket_fd;
     if (m_ssl && m_encryptor)
@@ -253,7 +254,7 @@ void CSocket::updateAcceptedSocketFD(int const &socket_fd) {
 
 
 void CSocket::removeURLFromMap(URL const &url) {
-    LOCK_SCOPE;
+    LOCK_SCOPE
     m_map_url_socket.erase(url);
 }
 

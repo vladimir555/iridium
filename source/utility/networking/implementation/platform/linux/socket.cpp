@@ -13,9 +13,6 @@
 #include <utility/logging/logger.h>
 
 
-using utility::encryption::openssl::Context;
-
-
 int const MAX_EVENTS            = 1024;
 int const EPOLL_WAIT_TIMEOUT_MS = 1000;
 

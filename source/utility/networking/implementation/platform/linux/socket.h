@@ -9,7 +9,6 @@
 
 
 #include "../unix/socket.h"
-#include "utility/encryption/openssl.h"
 
 #include <sys/epoll.h>
 #include <vector>

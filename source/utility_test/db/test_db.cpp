@@ -1,5 +1,11 @@
 #include <gtest/gtest.h>
 
+#include <utility/build_flags.h>
+
+
+#ifdef BUILD_FLAG_POSTGRESQL
+
+
 #include <utility/db/implementation/postgresql_connector.h>
 
 
@@ -26,3 +32,6 @@ TEST(db, postgres) {
 
 } // db
 } // utility
+
+
+#endif // BUILD_FLAG_POSTGRESQL
