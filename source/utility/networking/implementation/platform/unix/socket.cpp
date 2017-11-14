@@ -182,6 +182,7 @@ void CSocket::connect() {
 
 
 URL CSocket::getURL() const {
+    LOCK_SCOPE;
     return m_url;
 }
 

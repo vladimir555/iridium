@@ -20,22 +20,23 @@ namespace utility {
 namespace threading {
 
 
-SynchronizedScope::SynchronizedScope(IMutex *mutex, string const &scope_name)
+SynchronizedScope::SynchronizedScope(IMutex const *mutex, string const &scope_name)
 :
     m_mutex(mutex)
 {
-    string scope_name_ = scope_name + ":" + convert<string>(getThreadID());
+    string const scope_name_ = scope_name + ":" + convert<string>(getThreadID());
     try {
         m_mutex->lock();
-        m_mutex->m_scope_name = std::move(scope_name_);
+        m_mutex->setScopeName(scope_name_);
     } catch (exception const &e) {
-        throw runtime_error("mutex deadlock " + m_mutex->m_scope_name + " with " + scope_name_ + "': " + e.what()); // ----->
+        throw runtime_error("mutex deadlock " + m_mutex->getScopeName() + " with " + scope_name_ + "': " + e.what()); // ----->
     }
 }
 
 
 SynchronizedScope::~SynchronizedScope() {
     m_mutex->unlock();
+    m_mutex->setScopeName("");
 }
 
 

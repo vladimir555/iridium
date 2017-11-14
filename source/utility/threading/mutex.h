@@ -20,8 +20,10 @@ public:
     virtual void lock() const = 0;
     ///
     virtual void unlock() const = 0;
-    /// todo: move to base mutex
-    std::string m_scope_name;
+    ///
+    virtual void setScopeName(std::string const &scope_name) const = 0;
+    ///
+    virtual std::string getScopeName() const = 0;
 };
 
 

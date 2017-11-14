@@ -2,7 +2,7 @@
 #define HEADER_TIMED_MUTEX_D7B87D44_698A_4699_A45E_4941FD101097
 
 
-#include "utility/threading/mutex.h"
+#include "base_mutex.h"
 
 #include <mutex>
 #include <string>
@@ -13,16 +13,16 @@ namespace threading {
 namespace implementation {
 
 
-class CTimedMutex : public IMutex {
+class CTimedMutex : public CBaseMutex {
 public:
     ///
     CTimedMutex() = default;
     ///
     virtual ~CTimedMutex() = default;
     ///
-    virtual void lock() const override;
+    void lock() const override;
     ///
-    virtual void unlock() const override;
+    void unlock() const override;
 private:
     ///
     mutable std::timed_mutex m_timed_mutex;

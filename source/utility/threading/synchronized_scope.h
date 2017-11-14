@@ -21,11 +21,11 @@ class SynchronizedScope:
     public pattern::NonMovable
 {
 public:
-    explicit SynchronizedScope(IMutex *mutex, std::string const &scope_name);
+    explicit SynchronizedScope(IMutex const *mutex, std::string const &scope_name);
     virtual ~SynchronizedScope();
 
 private:
-    IMutex  *m_mutex;
+    IMutex const *m_mutex;
 };
 
 

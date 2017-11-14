@@ -34,7 +34,6 @@ public:
 private:
     ///
     mutable std::condition_variable m_condition;
-
 };
 
 
