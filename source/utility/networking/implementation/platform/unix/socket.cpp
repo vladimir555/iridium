@@ -72,6 +72,7 @@ void CSocket::open() {
         protocol = IPPROTO_UDP;
 
     m_socket_fd = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
+//    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
 }
 
 
@@ -105,8 +106,8 @@ void CSocket::write(TPacket const &packet) {
 
 
 CSocket::TPacket CSocket::read() {
-//    LOGT << m_url << " " << m_socket_fd;
     LOCK_SCOPE
+//    LOGT << m_url << " " << m_socket_fd;
     TPacket result;
     if (m_ssl) {
         result = m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE); // ----->
@@ -263,7 +264,7 @@ CSocket::TSharedPtr CSocket::createInternal(int const &socket_fd) {
 
     socket->m_acceptor  = this;
     socket->m_socket_fd = socket_fd;
-    socket->setBlockingMode(false);
+//    socket->setBlockingMode(false);
 
     m_accepted_sockets.push_back(socket);
 

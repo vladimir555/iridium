@@ -259,7 +259,7 @@ TEST(networking, http_server) {
     LOGT << "start";
 
     server::IHTTP::THTTPHandlers    handlers;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 2; i++)
         handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
 
