@@ -37,7 +37,7 @@ add_library(${PROJECT_NAME} STATIC ${SOURCE})
 enable_testing()
 find_package(GTest REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(PostgreSQL REQUIRED)
+#find_package(PostgreSQL REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/utility/source)
 
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
@@ -60,7 +60,7 @@ target_link_libraries(
     ${GTEST_MAIN_LIBRARY}
     ${CMAKE_THREAD_LIBS_INIT}
     ${OPENSSL_LIBRARIES}
-    ${PostgreSQL_LIBRARIES}
+#    ${PostgreSQL_LIBRARIES}
 )
 
 add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})

@@ -48,7 +48,8 @@ public:
     TProtocolSharedPtr  const getProtocol()     const;
     TAddress            const getAddress()      const;
 
-    bool operator < (URL const &url) const;
+    bool operator == (URL const &url) const;
+    bool operator <  (URL const &url) const;
 //    ::std::size_t operator ()(const ::std::set<URL*> &vertexSet) const { return 0; }
 
 private:

@@ -7,7 +7,7 @@
 #include "utility/logging/logger.h"
 #include "utility/assert.h"
 
-#include <signal.h>
+//#include <signal.h>
 
 
 using std::string;
@@ -18,10 +18,10 @@ IMPLEMENT_ENUM(utility::encryption::implementation::openssl::API::TErrorCode)
 IMPLEMENT_ENUM(utility::encryption::implementation::openssl::API::TSSLErrorCode)
 
 
-// todo: signals handlers singleton
-void handleSignal(int signal) {
-    LOGT << "broken pipe signal " << signal;
-}
+//// todo: signals handlers singleton
+//void handleSignal(int signal) {
+//    LOGT << "broken pipe signal " << signal;
+//}
 
 
 namespace utility {
@@ -36,20 +36,20 @@ API::API() {
     SSL_library_init();
     OpenSSL_add_ssl_algorithms();
 
-    LOGT << "set empty signal handler for broken ssl pipe";
-    struct sigaction sh;
-    struct sigaction osh;
+//    LOGT << "set empty signal handler for broken ssl pipe";
+//    struct sigaction sh;
+//    struct sigaction osh;
 
-    // can set to SIG_IGN
-    sh.sa_handler   = &handleSignal;
-    // restart interrupted system calls
-    sh.sa_flags     = SA_RESTART;
+//    // can set to SIG_IGN
+//    sh.sa_handler   = &handleSignal;
+//    // restart interrupted system calls
+//    sh.sa_flags     = SA_RESTART;
 
-    // block every signal during the handler
-    sigemptyset(&sh.sa_mask);
+//    // block every signal during the handler
+//    sigemptyset(&sh.sa_mask);
 
-    if (sigaction(SIGPIPE, &sh, &osh) < 0)
-        throw std::runtime_error("sigaction error");
+//    if (sigaction(SIGPIPE, &sh, &osh) < 0)
+//        throw std::runtime_error("sigaction error");
 }
 
 

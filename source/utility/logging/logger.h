@@ -8,6 +8,7 @@
 
 #include "utility/threading/implementation/timed_mutex.h"
 #include "utility/threading/implementation/mutex.h"
+#include "utility/strings.h"
 
 #include <mutex>
 
@@ -82,7 +83,7 @@ void update(std::string const &file_name);
 
 
 #define LOGT \
-utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << __PRETTY_FUNCTION__ << ": "
+utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << __FUNCTION__ << ": "
 #define LOGD \
 utility::logging::LogStream(utility::logging::TEvent::TLevel::DEBUG_LEVEL)
 #define LOGI \

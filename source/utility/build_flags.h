@@ -3,7 +3,7 @@
 
 
 //#define BUILD_FLAG_MYSQL
-#define BUILD_FLAG_POSTGRESQL
+//#define BUILD_FLAG_POSTGRESQL
 #define BUILD_FLAG_OPENSSL
 
 

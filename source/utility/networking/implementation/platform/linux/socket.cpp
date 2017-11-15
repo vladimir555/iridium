@@ -32,15 +32,6 @@ CSocket::CSocket(URL const &url)
 {}
 
 
-CSocket::CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor)
-:
-    unix::CSocket   (socket, url, acceptor),
-    m_epoll         (0),
-    m_event         ({0}),
-    m_events        (MAX_EVENTS, {0})
-{}
-
-
 void CSocket::listen() {
     unix::CSocket::listen();
     setBlockingMode(false);
@@ -67,14 +58,14 @@ CSocket::TSocketStreams CSocket::accept() {
             continue;
         } else
         if (m_events[i].data.fd == m_socket_fd) {
-            for (auto const &socket: unix::CSocket::acceptInternal()) {
+            for (auto const &socket_fd: unix::CSocket::acceptInternal()) {
                 try {
-                    auto client_socket_stream = new CSocket(socket, getPeerURL(socket), shared_from_this());
-                    client_socket_stream->setBlockingMode(false);
-                    sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
+                    auto socket = unix::CSocket::createInternal(socket_fd);
+                    if (socket)
+                        sockets.push_back(ISocketStream::TSharedPtr(socket));
                 } catch (std::exception const &e) {
                     LOGF << e.what();
-                    ::close(socket);
+                    ::close(socket_fd);
                 }
             }
         }

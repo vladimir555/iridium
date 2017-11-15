@@ -5,7 +5,6 @@
 #include "base_mutex.h"
 
 #include <mutex>
-#include <string>
 
 
 namespace utility {

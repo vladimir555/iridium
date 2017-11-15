@@ -243,7 +243,6 @@ TEST(networking, http_response) {
 //public:
 //    DEFINE_CREATE(HTTPHandler)
 //    virtual ~HTTPHandler() = default;
-
 //    ISocket::TPacket handle(TRequest const &request) override {
 //        i++;
 //        return  convert<ISocket::TPacket>
@@ -266,7 +265,8 @@ TEST(networking, http_server) {
 
     http_server->initialize();
 
-    sleep(500);
+    for (auto i = 0; i < 10; i++)
+        sleep(500);
 
     LOGT << "stop";
     http_server->finalize();

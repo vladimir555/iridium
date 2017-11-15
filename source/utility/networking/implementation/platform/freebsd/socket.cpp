@@ -10,6 +10,7 @@
 #include "utility/assert.h"
 #include "utility/enum.h"
 #include "utility/encryption/implementation/ssl.h"
+#include "utility/threading/synchronized_scope.h"
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -67,14 +68,14 @@ CSocket::CSocket(URL const &url)
 {}
 
 
-// todo: cached packet socket class instead
-CSocket::CSocket(int const &socket, URL const &url, unix::CSocket *acceptor)
-:
-    unix::CSocket               (socket, url, acceptor),
-    m_events                    (MAX_EVENT_COUNT - 1, { 0 }),
-    m_monitor_events            (m_events.size() + 1, { 0 }),
-    m_monitor_events_used_count (0)
-{}
+//// todo: cached packet socket class instead
+//CSocket::CSocket(int const &socket, URL const &url, unix::CSocket *acceptor)
+//:
+//    unix::CSocket               (socket, url, acceptor),
+//    m_events                    (MAX_EVENT_COUNT - 1, { 0 }),
+//    m_monitor_events            (m_events.size() + 1, { 0 }),
+//    m_monitor_events_used_count (0)
+//{}
 
 
 void CSocket::listen() {
@@ -134,10 +135,16 @@ CSocket::TSocketStreams CSocket::accept() {
             }
         } else {
             try {
-                auto client_socket_stream = new CSocket(m_events[i].ident, getPeerURL(m_events[i].ident), this);
-                client_socket_stream->setBlockingMode(false);
+                auto socket = unix::CSocket::createInternal(m_events[i].ident);
+                if (socket)
+                    sockets.push_back(ISocketStream::TSharedPtr(socket));
 
-                sockets.push_back(ISocketStream::TSharedPtr(client_socket_stream));
+//                auto client_socket = new CSocket(m_events[i].ident, getPeerURL(m_events[i].ident), this);
+//                client_socket->setBlockingMode(false);
+//                CSocket::TSharedPtr client_socket_ptr(client_socket);
+
+//                if (create(client_socket_ptr))
+//                    sockets.push_back(ISocketStream::TSharedPtr(client_socket_ptr));
 //                LOGT << "push_back " << client_socket_stream->getURL() << " flags " << m_events[i].flags <<
 //                    " " << EventFlags(m_events[i].flags).convertToFlagsString();
             } catch (std::exception const &e) {

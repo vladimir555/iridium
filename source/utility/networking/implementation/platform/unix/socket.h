@@ -12,10 +12,11 @@
 #include "utility/networking/socket.h"
 #include "utility/networking/url.h"
 #include "utility/encryption/ssl.h"
-#include "utility/threading/implementation/timed_mutex.h"
+#include "utility/threading/implementation/recursive_mutex.h"
 
 #include <map>
 #include <memory>
+#include <atomic>
 
 
 namespace utility {
@@ -27,7 +28,7 @@ namespace unix {
 
 class CSocket:
     public ISocket,
-    public threading::implementation::CTimedMutex
+    public threading::implementation::CRecursiveMutex
 {
 public:
     DEFINE_SMART_PTR(CSocket)
@@ -47,7 +48,6 @@ public:
     URL             getURL() const override;
 
 protected:
-    CSocket(int const &socket, URL const &url, unix::CSocket *acceptor);
     int             assertOK(int const &result, std::string const &message) const;
     URL             getPeerURL(int const &socket);
     void            setBlockingMode(bool const &is_blocking);
@@ -55,17 +55,18 @@ protected:
 
     bool            m_is_blocking_mode;
     int             m_socket_fd;
-    URL             m_url;
+    URL const       m_url;
 
     encryption::IContext::TSharedPtr    m_encryptor;
     encryption::ISSL::TSharedPtr        m_ssl;
 
-private:
-    void            updateAcceptedSocketFD(int const &socket_fd);
-    void            removeURLFromMap(URL const &url);
+    CSocket::TSharedPtr createInternal(int const &socket_fd);
 
-    std::map<URL, CSocket::TSharedPtr>   m_map_url_socket;
-    CSocket                             *m_acceptor;
+private:
+    void remove(CSocket const * const accepted_socket);
+
+    std::list<CSocket::TSharedPtr>      m_accepted_sockets;
+    CSocket                            *m_acceptor;
 };
 
 

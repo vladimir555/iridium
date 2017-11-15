@@ -1,13 +1,11 @@
 #include "timed_mutex.h"
 
 #include <chrono>
-#include <thread>
 
 #include "utility/convertion/convert.h"
 
 
 using std::string;
-
 using utility::convertion::convert;
 
 

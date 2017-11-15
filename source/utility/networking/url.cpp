@@ -137,7 +137,14 @@ TAddress const URL::getAddress() const {
 }
 
 
-bool URL::operator < (URL const &url) const {
+bool URL::operator == (URL const &url) const {
+    return (( m_host ==  url.m_host) &&
+            ((m_port &&  url.m_port  && (*m_port == *url.m_port)) ||
+            (!m_port || !url.m_port))); // ----->
+}
+
+
+bool URL::operator <  (URL const &url) const {
     return (m_host <  url.m_host) ||
           ((m_host == url.m_host) && m_port && url.m_port && (*m_port < *url.m_port)); // ----->
 }

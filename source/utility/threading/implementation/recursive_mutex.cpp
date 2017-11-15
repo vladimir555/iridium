@@ -1,4 +1,4 @@
-#include "mutex.h"
+#include "recursive_mutex.h"
 
 
 
@@ -7,12 +7,12 @@ namespace threading {
 namespace implementation {
 
 
-void CMutex::lock() const {
+void CRecursiveMutex::lock() const {
     m_mutex.lock();
 }
 
 
-void CMutex::unlock() const {
+void CRecursiveMutex::unlock() const {
     m_mutex.unlock();
 }
 

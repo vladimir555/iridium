@@ -14,10 +14,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <cstring>
+#include <signal.h>
 
 #include "utility/encryption/implementation/ssl.h"
 #include "utility/threading/synchronized_scope.h"
 #include "utility/logging/logger.h"
+
+#include <iostream>
 
 
 using std::string;
@@ -30,6 +33,12 @@ namespace {
 
 
 static int const DEFAULT_SOCKET_BUFFER_SIZE = 512;
+
+
+// todo: signals handlers singleton
+void handleSignal(int signal) {
+    LOGT << "broken pipe signal " << signal;
+}
 
 
 } // unnamed
@@ -47,24 +56,9 @@ CSocket::CSocket(URL const &url)
     m_is_blocking_mode  (false),
     m_socket_fd         (0),
     m_url               (url),
-    m_encryptor         (nullptr)
-{
-//    LOCK_SCOPE;
-}
-
-
-CSocket::CSocket(int const &socket, URL const &url, unix::CSocket *acceptor)
-:
-    m_is_blocking_mode  (false),
-    m_socket_fd         (socket),
-    m_url               (url),
-    m_encryptor         (acceptor->m_encryptor),
-    m_acceptor          (acceptor)
-{
-    LOCK_SCOPE;
-    if (m_encryptor)
-        m_ssl = m_encryptor->accept(m_socket_fd);
-}
+    m_encryptor         (nullptr),
+    m_acceptor          (nullptr)
+{}
 
 
 CSocket::~CSocket() {
@@ -83,19 +77,20 @@ void CSocket::open() {
 
 
 void CSocket::close() {
-    LOGT << m_url << " " << m_socket_fd;
     LOCK_SCOPE
+    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl)
         m_ssl.reset();
-    assertOK(::close(m_socket_fd), "close socket error");
     if (m_acceptor)
-        m_acceptor->removeURLFromMap(m_url);
+        m_acceptor->remove(this);
+    assertOK(::close(m_socket_fd), "close socket error");
 }
 
 
-void CSocket::write(TPacket const &packet) {
-//    LOGT << m_url << " " << m_socket_fd;
-    LOCK_SCOPE
+void CSocket::write(TPacket const &packet_) {
+    auto packet = packet_;
+    LOCK_SCOPE;
+    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl) {
         m_ssl->write(packet);
     } else {
@@ -106,14 +101,14 @@ void CSocket::write(TPacket const &packet) {
             if (rpos > packet.size())
                 rpos = packet.size();
             lpos += assertOK(::send(m_socket_fd, buffer, rpos - lpos, 0), "socket write error");
-            LOGT << "lpos " << lpos;
+//            LOGT << "lpos " << lpos;
         }
     }
 }
 
 
 CSocket::TPacket CSocket::read() {
-    LOGT << m_url << " " << m_socket_fd;
+//    LOGT << m_url << " " << m_socket_fd;
     LOCK_SCOPE
     TPacket result;
     if (m_ssl) {
@@ -121,7 +116,7 @@ CSocket::TPacket CSocket::read() {
     } else {
         char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
         auto received_size = assertOK(::recv(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
-        LOGT << "received_size " << received_size;
+        LOGT << m_url << " " << m_socket_fd << " received_size " << received_size;
         result = TPacket(buffer, buffer + received_size); // ----->
     }
     return result; // ----->
@@ -144,19 +139,34 @@ void CSocket::listen() {
     int yes = 1;
     setsockopt(m_socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
 
-    assertOK(::bind(m_socket_fd, (struct sockaddr *) (&server_address), sizeof(server_address)), "socket bind error");
+    assertOK(::bind  (m_socket_fd, (struct sockaddr *) (&server_address), sizeof(server_address)), "socket bind error");
     assertOK(::listen(m_socket_fd, SOMAXCONN), "socket listen error");
 
     if (!m_encryptor && m_url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::HTTPS)
         m_encryptor = CContext::create(m_is_blocking_mode);
+
+    LOGT << "set empty signal handler for broken pipe";
+    struct sigaction sh;
+    struct sigaction osh;
+
+    // can set to SIG_IGN
+    sh.sa_handler   = &handleSignal;
+    // restart interrupted system calls
+    sh.sa_flags     = SA_RESTART;
+
+    // block every signal during the handler
+    sigemptyset(&sh.sa_mask);
+
+    if (sigaction(SIGPIPE, &sh, &osh) < 0)
+        throw std::runtime_error("sigaction error");
 }
 
 
 ISocket::TSocketStreams CSocket::accept() {
     // todo: thread for every accepted socket
     ISocket::TSocketStreams sockets;
-    for (auto const &socket: acceptInternal())
-        sockets.push_back(ISocketStream::TSharedPtr(new unix::CSocket(socket, getPeerURL(socket), this)));
+//    for (auto const &socket: acceptInternal())
+//        sockets.push_back(ISocketStream::TSharedPtr(new unix::CSocket(socket, getPeerURL(socket), this)));
 
     return sockets; // ----->
 }
@@ -183,12 +193,13 @@ void CSocket::connect() {
 
 
 URL CSocket::getURL() const {
-    LOCK_SCOPE
+    LOCK_SCOPE;
     return m_url;
 }
 
 
 int CSocket::assertOK(int const &result, std::string const &message) const {
+    LOCK_SCOPE;
     if (result < 0)
         throw std::runtime_error(message + ": url " + convert<string>(m_url) + ", " + std::strerror(errno)); // ----->
     else
@@ -197,6 +208,7 @@ int CSocket::assertOK(int const &result, std::string const &message) const {
 
 
 URL CSocket::getPeerURL(int const &socket) {
+    LOCK_SCOPE
     struct sockaddr_in   peer;
     unsigned int         peer_len = sizeof(peer);
     if (::getpeername(socket, (sockaddr *)&peer, &peer_len) < 0)
@@ -223,6 +235,7 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
 
 
 std::list<int> CSocket::acceptInternal() {
+    LOCK_SCOPE
     std::list<int>      sockets;
     struct sockaddr_in  client_address      = { 0 };
     socklen_t           client_address_size = sizeof(client_address);
@@ -230,32 +243,56 @@ std::list<int> CSocket::acceptInternal() {
 
     do {
         socket = ::accept(m_socket_fd, (struct sockaddr *) (&client_address), &client_address_size);
-        if (socket > 0) {
-            LOCK_SCOPE
-            auto i = m_map_url_socket.find(getPeerURL(socket));
-            if (i == m_map_url_socket.end())
-                sockets.push_back(socket);
-            else
-                i->second->updateAcceptedSocketFD(socket);
-        }
+        if (socket > 0)
+            sockets.push_back(socket);
     } while (socket > 0);
 
     return sockets; // ----->
 }
 
 
-void CSocket::updateAcceptedSocketFD(int const &socket_fd) {
-    LOCK_SCOPE
-    LOGT << m_url << " update fd " << m_socket_fd << " -> " << socket_fd;
-    m_socket_fd = socket_fd;
-    if (m_ssl && m_encryptor)
-        m_ssl = m_encryptor->accept(m_socket_fd);
+CSocket::TSharedPtr CSocket::createInternal(int const &socket_fd) {
+    LOCK_SCOPE;
+    auto const url = getPeerURL(socket_fd);
+    for (auto const &i: m_accepted_sockets) {
+        if (i->getURL() == url) {
+            LOGT << "update fd " << i->m_socket_fd << " -> " << socket_fd;
+
+            assertOK(::close(i->m_socket_fd), "close socket error");
+
+            i->m_socket_fd  = socket_fd;
+
+            if (m_encryptor)
+                i->m_ssl    = m_encryptor->accept(m_socket_fd);
+
+            return nullptr; // ----->
+        }
+    }
+
+    auto socket         = create(url);
+
+    socket->m_acceptor  = this;
+    socket->m_socket_fd = socket_fd;
+    socket->setBlockingMode(false);
+
+    m_accepted_sockets.push_back(socket);
+
+    LOGT << "url " << socket->getURL() << " " << socket->m_socket_fd;
+
+    return socket; // ----->
 }
 
 
-void CSocket::removeURLFromMap(URL const &url) {
-    LOCK_SCOPE
-    m_map_url_socket.erase(url);
+void CSocket::remove(CSocket const * const accepted_socket) {
+    LOCK_SCOPE;
+    for (auto const &i: m_accepted_sockets) {
+        if (i->getURL() == accepted_socket->getURL()) {
+            LOGT << i->getURL() << " " << i->m_socket_fd;
+            m_accepted_sockets.remove(i);
+            return; // ----->
+        }
+    }
+    LOGT << "sockets size " << m_accepted_sockets.size();
 }
 
 

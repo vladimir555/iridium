@@ -22,18 +22,16 @@ namespace platform {
 
 class CSocket: public unix::CSocket {
 public:
-    DEFINE_CREATE(CSocket)
-    CSocket(URL const &url);
-    virtual ~CSocket() = default;
+    DEFINE_CREATE  (CSocket)
+                    CSocket(URL const &url);
+    virtual        ~CSocket() = default;
 
-    void listen() override;
-    TSocketStreams accept() override;
+    void            listen() override;
+    TSocketStreams  accept() override;
 
 private:
-    CSocket(int const &socket, URL const &url, unix::CSocket::TSharedPtr const &acceptor);
-
-    int                 m_epoll;
-    struct epoll_event  m_event;
+    int                             m_epoll;
+                struct epoll_event  m_event;
     std::vector<struct epoll_event> m_events;
 };
 
