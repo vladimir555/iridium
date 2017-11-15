@@ -13,6 +13,7 @@
 #include "utility/networking/url.h"
 #include "utility/encryption/ssl.h"
 #include "utility/threading/implementation/recursive_mutex.h"
+#include "utility/threading/implementation/timed_mutex.h"
 
 #include <map>
 #include <memory>
@@ -28,7 +29,7 @@ namespace unix {
 
 class CSocket:
     public ISocket,
-    public threading::implementation::CRecursiveMutex
+    public threading::implementation::CTimedMutex
 {
 public:
     DEFINE_SMART_PTR(CSocket)

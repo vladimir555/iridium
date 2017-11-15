@@ -29,8 +29,6 @@ public:
     void listen() override;
     TSocketStreams accept() override;
 private:
-//    CSocket(int const &socket, URL const &url, unix::CSocket *acceptor);
-
     std::vector<struct kevent>  m_events;
     std::vector<struct kevent>  m_monitor_events;
     size_t                      m_monitor_events_used_count;

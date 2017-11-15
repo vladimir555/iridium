@@ -24,7 +24,7 @@ public:
     void unlock() const override;
 private:
     ///
-    mutable std::timed_mutex m_timed_mutex;
+    mutable std::recursive_timed_mutex m_timed_mutex;
 };
 
 

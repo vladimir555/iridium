@@ -68,16 +68,6 @@ CSocket::CSocket(URL const &url)
 {}
 
 
-//// todo: cached packet socket class instead
-//CSocket::CSocket(int const &socket, URL const &url, unix::CSocket *acceptor)
-//:
-//    unix::CSocket               (socket, url, acceptor),
-//    m_events                    (MAX_EVENT_COUNT - 1, { 0 }),
-//    m_monitor_events            (m_events.size() + 1, { 0 }),
-//    m_monitor_events_used_count (0)
-//{}
-
-
 void CSocket::listen() {
     assertOK( fcntl( m_socket_fd, F_SETFL, fcntl( m_socket_fd, F_GETFL, 0 ) | O_NONBLOCK ),
         "socket set non blocking fail" );

@@ -18,6 +18,7 @@
 
 #include "utility/encryption/implementation/ssl.h"
 #include "utility/threading/synchronized_scope.h"
+#include "utility/assert.h"
 #include "utility/logging/logger.h"
 
 #include <iostream>
@@ -62,12 +63,10 @@ CSocket::CSocket(URL const &url)
 
 
 CSocket::~CSocket() {
-//    interrupt();
 }
 
 
 void CSocket::open() {
-    LOCK_SCOPE
    auto protocol = IPPROTO_TCP;
     if (!m_url.getProtocol() || *m_url.getProtocol() == URL::TProtocol::UDP)
         protocol = IPPROTO_UDP;
@@ -77,8 +76,7 @@ void CSocket::open() {
 
 
 void CSocket::close() {
-    LOCK_SCOPE
-    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
+//    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl)
         m_ssl.reset();
     if (m_acceptor)
@@ -87,10 +85,9 @@ void CSocket::close() {
 }
 
 
-void CSocket::write(TPacket const &packet_) {
-    auto packet = packet_;
+void CSocket::write(TPacket const &packet) {
     LOCK_SCOPE;
-    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
+//    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl) {
         m_ssl->write(packet);
     } else {
@@ -116,7 +113,7 @@ CSocket::TPacket CSocket::read() {
     } else {
         char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
         auto received_size = assertOK(::recv(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
-        LOGT << m_url << " " << m_socket_fd << " received_size " << received_size;
+//        LOGT << m_url << " " << m_socket_fd << " received_size " << received_size;
         result = TPacket(buffer, buffer + received_size); // ----->
     }
     return result; // ----->
@@ -124,7 +121,6 @@ CSocket::TPacket CSocket::read() {
 
 
 void CSocket::listen() {
-    LOCK_SCOPE
     //todo: unix / inet protocol by url
     struct sockaddr_in server_address = { 0 };
 
@@ -173,13 +169,11 @@ ISocket::TSocketStreams CSocket::accept() {
 
 
 void CSocket::interrupt() {
-    LOCK_SCOPE
     ::shutdown(m_socket_fd, 2);
 }
 
 
 void CSocket::connect() {
-    LOCK_SCOPE
     struct sockaddr_in address;
     auto ipv4 = *m_url.getIPv4();
     address.sin_addr.s_addr  = htonl(
@@ -199,7 +193,6 @@ URL CSocket::getURL() const {
 
 
 int CSocket::assertOK(int const &result, std::string const &message) const {
-    LOCK_SCOPE;
     if (result < 0)
         throw std::runtime_error(message + ": url " + convert<string>(m_url) + ", " + std::strerror(errno)); // ----->
     else
@@ -208,7 +201,6 @@ int CSocket::assertOK(int const &result, std::string const &message) const {
 
 
 URL CSocket::getPeerURL(int const &socket) {
-    LOCK_SCOPE
     struct sockaddr_in   peer;
     unsigned int         peer_len = sizeof(peer);
     if (::getpeername(socket, (sockaddr *)&peer, &peer_len) < 0)
@@ -223,7 +215,6 @@ URL CSocket::getPeerURL(int const &socket) {
 
 
 void CSocket::setBlockingMode(bool const &is_blocking) {
-    LOCK_SCOPE
     auto flags = assertOK(fcntl(m_socket_fd, F_GETFL, 0), "socket get flag error");
     if (is_blocking)
         flags &= !O_NONBLOCK;
@@ -235,7 +226,6 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
 
 
 std::list<int> CSocket::acceptInternal() {
-    LOCK_SCOPE
     std::list<int>      sockets;
     struct sockaddr_in  client_address      = { 0 };
     socklen_t           client_address_size = sizeof(client_address);
@@ -277,22 +267,23 @@ CSocket::TSharedPtr CSocket::createInternal(int const &socket_fd) {
 
     m_accepted_sockets.push_back(socket);
 
-    LOGT << "url " << socket->getURL() << " " << socket->m_socket_fd;
+//    LOGT << "url " << socket->getURL() << " " << socket->m_socket_fd;
 
     return socket; // ----->
 }
 
 
 void CSocket::remove(CSocket const * const accepted_socket) {
+    auto url = assertExists(accepted_socket, "accepted_socket is null")->getURL();
     LOCK_SCOPE;
     for (auto const &i: m_accepted_sockets) {
-        if (i->getURL() == accepted_socket->getURL()) {
-            LOGT << i->getURL() << " " << i->m_socket_fd;
+        if (i->getURL() == url) {
+//            LOGT << url << " " << i->m_socket_fd;
             m_accepted_sockets.remove(i);
             return; // ----->
         }
     }
-    LOGT << "sockets size " << m_accepted_sockets.size();
+//    LOGT << "sockets size " << m_accepted_sockets.size();
 }
 
 

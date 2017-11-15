@@ -74,7 +74,7 @@ CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets cons
             packet                              = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
             socket->write(packet);
         } catch (std::exception const &e) {
-            LOGE << "url " << socket->getURL() << " handler error: " << e.what();
+            LOGE << socket->getURL() << " " << e.what();
         }
         socket->close();
     }
