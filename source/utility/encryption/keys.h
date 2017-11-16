@@ -9,8 +9,11 @@ namespace utility {
 namespace encryption {
 
 
-std::string const DEFAULT_FILE_NAME_PRIVATE_KEY = "key.pem";
-std::string const DEFAULT_FILE_NAME_CERTIFICATE = "cert.pem";
+//std::string const DEFAULT_FILE_NAME_PRIVATE_KEY = "key.pem";
+//std::string const DEFAULT_FILE_NAME_CERTIFICATE = "certificate.pem";
+
+std::string const DEFAULT_FILE_NAME_PRIVATE_KEY = "utility.key";
+std::string const DEFAULT_FILE_NAME_CERTIFICATE = "utility.crt";
 
 
 } // encryption

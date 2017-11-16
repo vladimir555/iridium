@@ -33,7 +33,7 @@ using utility::encryption::implementation::CContext;
 namespace {
 
 
-static int const DEFAULT_SOCKET_BUFFER_SIZE = 512;
+static int const DEFAULT_SOCKET_BUFFER_SIZE = 16384;
 
 
 // todo: signals handlers singleton
@@ -54,7 +54,7 @@ namespace unix {
 
 CSocket::CSocket(URL const &url)
 :
-    m_is_blocking_mode  (false),
+    m_is_blocking_mode  (true),
     m_socket_fd         (0),
     m_url               (url),
     m_encryptor         (nullptr),
@@ -67,17 +67,18 @@ CSocket::~CSocket() {
 
 
 void CSocket::open() {
-   auto protocol = IPPROTO_TCP;
-    if (!m_url.getProtocol() || *m_url.getProtocol() == URL::TProtocol::UDP)
-        protocol = IPPROTO_UDP;
+    LOGT;
+   auto protocol    = IPPROTO_TCP;
+    if (m_url.getProtocol() == URL::TProtocol::UDP)
+        protocol    = IPPROTO_UDP;
 
-    m_socket_fd = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
+    m_socket_fd     = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
 //    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
 }
 
 
 void CSocket::close() {
-//    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
+    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl)
         m_ssl.reset();
     if (m_acceptor)
@@ -88,8 +89,9 @@ void CSocket::close() {
 
 void CSocket::write(TPacket const &packet) {
     LOCK_SCOPE;
-//    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
+    LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl) {
+        LOGT << "ssl write";
         m_ssl->write(packet);
     } else {
         size_t lpos = 0;
@@ -110,7 +112,10 @@ CSocket::TPacket CSocket::read() {
 //    LOGT << m_url << " " << m_socket_fd;
     TPacket result;
     if (m_ssl) {
+//        LOGT << "read ssl";
+//        while (result.empty())
         result = m_ssl->read(DEFAULT_SOCKET_BUFFER_SIZE); // ----->
+//        LOGT << "read ssl result " << result.size();
     } else {
         char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
         auto received_size = assertOK(::recv(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
@@ -122,6 +127,7 @@ CSocket::TPacket CSocket::read() {
 
 
 void CSocket::listen() {
+    LOGT;
     //todo: unix / inet protocol by url
     struct sockaddr_in server_address = { 0 };
 
@@ -139,7 +145,7 @@ void CSocket::listen() {
     assertOK(::bind  (m_socket_fd, (struct sockaddr *) (&server_address), sizeof(server_address)), "socket bind error");
     assertOK(::listen(m_socket_fd, SOMAXCONN), "socket listen error");
 
-    if (!m_encryptor && m_url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::HTTPS)
+    if (!m_encryptor && m_url.getProtocol() == URL::TProtocol::HTTPS)
         m_encryptor = CContext::create(m_is_blocking_mode);
 
     LOGT << "set empty signal handler for broken pipe";
@@ -175,6 +181,7 @@ void CSocket::interrupt() {
 
 
 void CSocket::connect() {
+    LOGT;
     struct sockaddr_in address;
     auto ipv4 = *m_url.getIPv4();
     address.sin_addr.s_addr  = htonl(
@@ -210,7 +217,7 @@ URL CSocket::getPeerURL(int const &socket) {
     //LOGT << "m_url: " << m_url;
     auto protocol   = convert<string>(URL::TProtocol::TCP);
     if (m_url.getProtocol())
-        protocol    = convert<string>(*m_url.getProtocol());
+        protocol    = convert<string>(m_url.getProtocol());
     return URL(protocol + "://" + inet_ntoa(peer.sin_addr) + ":" + convert<string>(ntohs(peer.sin_port))); // ----->
 }
 
@@ -264,18 +271,21 @@ CSocket::TSharedPtr CSocket::createInternal(int const &socket_fd) {
 
     socket->m_acceptor  = this;
     socket->m_socket_fd = socket_fd;
-//    socket->setBlockingMode(false);
+
+    LOGT << 1;
+    if (m_encryptor)
+        socket->m_ssl   = m_encryptor->accept(m_socket_fd);
+    LOGT << 2;
 
     m_accepted_sockets.push_back(socket);
 
 //    LOGT << "url " << socket->getURL() << " " << socket->m_socket_fd;
-
     return socket; // ----->
 }
 
 
 void CSocket::remove(CSocket const * const accepted_socket) {
-    auto url = assertExists(accepted_socket, "accepted_socket is null")->getURL();
+    auto url = assertExists(accepted_socket, "removing null accepted socket")->getURL();
     LOCK_SCOPE;
     for (auto const &i: m_accepted_sockets) {
         if (i->getURL() == url) {

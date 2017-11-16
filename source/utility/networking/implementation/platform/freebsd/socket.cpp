@@ -69,16 +69,12 @@ CSocket::CSocket(URL const &url)
 
 
 void CSocket::listen() {
-    assertOK( fcntl( m_socket_fd, F_SETFL, fcntl( m_socket_fd, F_GETFL, 0 ) | O_NONBLOCK ),
-        "socket set non blocking fail" );
-
+    setBlockingMode(false);
     unix::CSocket::listen();
 
     m_kqueue = assertOK(kqueue(), "socket kqueue create error");
     m_monitor_events[0] = { static_cast<uintptr_t>(m_socket_fd), EVFILT_READ, EV_ADD, 0, 0, nullptr };
     m_monitor_events_used_count = 1;
-
-    setBlockingMode(false);
 }
 
 

@@ -14,6 +14,7 @@
 #include <list>
 #include <map>
 #include <memory>
+#include <chrono>
 
 
 namespace utility {
@@ -45,8 +46,9 @@ private:
         URL     getURL() const override;
 
     private:
-        TPacket                     m_cache;
-        ISocketStream::TSharedPtr   m_source_socket;
+        TPacket                             m_cache;
+        ISocketStream::TSharedPtr           m_source_socket;
+        std::chrono::high_resolution_clock::time_point m_last_read_time;
     };
 
     class Acceptor: public threading::implementation::CRunnuble {

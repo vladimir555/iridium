@@ -7,6 +7,7 @@
 #include "utility/logging/logger.h"
 #include "utility/assert.h"
 
+#include "utility/threading/thread.h"
 //#include <signal.h>
 
 
@@ -98,6 +99,7 @@ T assertOK(T t, string const &message) {
 
 
 API::TContext *API::createContext(std::string const &file_name_private_key, std::string const &file_name_certificate) {
+    LOGT;
     // create context
     auto const *method  = assertOK(SSLv23_server_method(), "openssl init ssl v23 error");
     auto       *context = assertOK(SSL_CTX_new(method),    "openssl init context error");
@@ -113,11 +115,13 @@ API::TContext *API::createContext(std::string const &file_name_private_key, std:
 
 
 void API::releaseContext(TContext *context) {
+    LOGT;
     SSL_CTX_free(context);
 }
 
 
 API::TSSL *API::createSSL(TContext *context, int const &fd) {
+    LOGT;
     auto ssl = assertOK(SSL_new(context), "openssl creating ssl error");
     assertOK(SSL_set_fd(ssl, fd), "openssl creating ssl set fd error");
     return ssl; // ----->
@@ -125,31 +129,36 @@ API::TSSL *API::createSSL(TContext *context, int const &fd) {
 
 
 void API::releaseSSL(TSSL *descriptor) {
+    LOGT;
     SSL_shutdown(descriptor);
     SSL_free(descriptor);
 }
 
 
 void API::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
+    LOGT << "is_blocking_mode = " << is_blocking_mode;
     auto accept_result = SSL_accept(ssl);
     if (accept_result <= 0) {
         TSSLErrorCode code = SSL_get_error(ssl, accept_result);
         if (is_blocking_mode || (
-            code != TSSLErrorCode::SSL_ERROR_CODE_WANT_READ &&
-            code != TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
+            code != TSSLErrorCode::SSL_ERROR_CODE_WANT_READ     &&
+            code != TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE    &&
+            code != TSSLErrorCode::SSL_ERROR_CODE_NONE)
         )
             assertOK(ssl, code, "openssl accepting error");
     }
+    SSL_set_accept_state(ssl);
 }
 
 
 void API::write(TSSL *ssl, networking::ISocket::TPacket const &packet) {
+    LOGT;
     assertOK(SSL_write(ssl, packet.data(), packet.size()), "openssl writing error");
 }
 
 
 networking::ISocket::TPacket API::read(TSSL *ssl, size_t const &size) {
-    static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 512;
+    static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 16384;
 
     char    buffer[DEFAULT_SOCKET_BUFFER_SIZE];
     int     received_size = -1;
@@ -159,8 +168,14 @@ networking::ISocket::TPacket API::read(TSSL *ssl, size_t const &size) {
     if (received_size == 0)
         throw std::runtime_error("openssl reading error: socket was closed by client"); // ----->
 
-    if (received_size <  0)
-        return networking::ISocket::TPacket(); // ----->
+    if (received_size <  0) {
+        TSSLErrorCode code = SSL_get_error(ssl, received_size);
+//        LOGT << "ssl error " << code;
+        if (code == TSSLErrorCode::SSL_ERROR_CODE_WANT_READ)
+            return networking::ISocket::TPacket(); // ----->
+        else
+            throw std::runtime_error("openssl reading error: " + getSSLErrorString(ssl, code));
+    }
 
     return networking::ISocket::TPacket(buffer, buffer + received_size); // ----->
 }
@@ -180,6 +195,7 @@ CContext::~CContext() {
 
 
 ISSL::TSharedPtr CContext::accept(int const &fd) {
+    LOGT << "fd " << fd;
     CSSL::TSharedPtr ssl = CSSL::create(shared_from_this(), fd, m_is_blocking_mode);
     ssl->accept();
     return ssl;

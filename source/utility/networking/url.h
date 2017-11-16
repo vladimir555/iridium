@@ -45,7 +45,7 @@ public:
     std::string         const getIPv4AsString() const;
     TPortSharedPtr      const getPort()         const;
     THostSharedPtr      const getHost()         const;
-    TProtocolSharedPtr  const getProtocol()     const;
+    TProtocol           const getProtocol()     const;
     TAddress            const getAddress()      const;
 
     bool operator == (URL const &url) const;

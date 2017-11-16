@@ -15,6 +15,11 @@ using utility::threading::implementation::CWorkerPool;
 using utility::threading::implementation::CMutex;
 using utility::convertion::convert;
 using std::string;
+using std::chrono::high_resolution_clock;
+using std::chrono::seconds;
+
+
+auto const DEFAULT_READ_TIMEOUT = seconds(5);
 
 
 namespace utility {
@@ -42,7 +47,8 @@ void CSocket::finalize() {
 
 CSocket::CCachedSocketStream::CCachedSocketStream(ISocketStream::TSharedPtr const &source_socket)
 :
-    m_source_socket (assertExists(source_socket, "source socket is NULL"))
+    m_source_socket (assertExists(source_socket, "source socket is NULL")),
+    m_last_read_time(high_resolution_clock::now())
 {}
 
 
@@ -52,8 +58,16 @@ void CSocket::CCachedSocketStream::write(TPacket const &packet) {
 
 
 ISocketStream::TPacket CSocket::CCachedSocketStream::read() {
-    auto p = m_source_socket->read();
-    m_cache.insert(m_cache.end(), p.begin(), p.end());
+    auto packet = m_source_socket->read();
+    auto now    = high_resolution_clock::now();
+
+    if (packet.empty()) {
+        if (now - m_last_read_time > DEFAULT_READ_TIMEOUT)
+            throw std::runtime_error("socket read error: timeout");
+    } else
+        m_last_read_time = now;
+
+    m_cache.insert(m_cache.end(), packet.begin(), packet.end());
     return m_cache; // ----->
 }
 

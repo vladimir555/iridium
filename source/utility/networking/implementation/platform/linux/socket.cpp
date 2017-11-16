@@ -33,8 +33,9 @@ CSocket::CSocket(URL const &url)
 
 
 void CSocket::listen() {
-    unix::CSocket::listen();
     setBlockingMode(false);
+
+    unix::CSocket::listen();
 
     m_epoll         = assertOK(epoll_create1(0), "socket epoll create error");
 

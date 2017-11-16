@@ -127,8 +127,11 @@ URL::THostSharedPtr const URL::getHost() const {
 }
 
 
-URL::TProtocolSharedPtr const URL::getProtocol() const {
-    return m_protocol; // ----->
+URL::TProtocol const URL::getProtocol() const {
+    if (m_protocol)
+        return *m_protocol; // ----->
+    else
+        return TProtocol::UNKNOWN;
 }
 
 

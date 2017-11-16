@@ -80,9 +80,9 @@ SSL_CTX *create_context()
 
     ctx = SSL_CTX_new(method);
     if (!ctx) {
-    perror("Unable to create SSL context");
-    ERR_print_errors_fp(stderr);
-    exit(EXIT_FAILURE);
+        perror("Unable to create SSL context");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
     }
 
     return ctx;
@@ -93,12 +93,12 @@ void configure_context(SSL_CTX *ctx)
     SSL_CTX_set_ecdh_auto(ctx, 1);
 
     /* Set the key and cert */
-    if (SSL_CTX_use_certificate_file(ctx, "cert.pem", SSL_FILETYPE_PEM) <= 0) {
+    if (SSL_CTX_use_certificate_file(ctx, "utility.crt", SSL_FILETYPE_PEM) <= 0) {
         ERR_print_errors_fp(stderr);
     exit(EXIT_FAILURE);
     }
 
-    if (SSL_CTX_use_PrivateKey_file(ctx, "key.pem", SSL_FILETYPE_PEM) <= 0 ) {
+    if (SSL_CTX_use_PrivateKey_file (ctx, "utility.key", SSL_FILETYPE_PEM) <= 0 ) {
         ERR_print_errors_fp(stderr);
     exit(EXIT_FAILURE);
     }
@@ -148,9 +148,9 @@ int test()
     cleanup_openssl();
 }
 
-//TEST(networking, openssl) {
-//    test();
-//}
+TEST(networking, openssl) {
+    test();
+}
 
 
 namespace utility {
@@ -261,7 +261,7 @@ TEST(networking, http_server) {
     server::IHTTP::THTTPHandlers    handlers;
     for (int i = 0; i < 2; i++)
         handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
-    server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
+    server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("https://127.0.0.1:55555"), handlers);
 
     http_server->initialize();
 

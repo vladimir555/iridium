@@ -27,7 +27,7 @@ TEST(networking, url) {
     ASSERT_TRUE(static_cast<bool>(url.getPort()));
     ASSERT_TRUE(static_cast<bool>(url.getProtocol()));
 
-    ASSERT_EQ(URL::TProtocol::HTTPS, *url.getProtocol());
+    ASSERT_EQ(URL::TProtocol::HTTPS, url.getProtocol());
     ASSERT_EQ(std::vector<uint8_t>({ 172, 16, 0, 64 }), *url.getIPv4());
     ASSERT_EQ("172.16.0.64", url.getIPv4AsString());
     ASSERT_EQ(55555, *url.getPort());
