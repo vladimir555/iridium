@@ -148,9 +148,9 @@ int test()
     cleanup_openssl();
 }
 
-TEST(networking, openssl) {
-    test();
-}
+//TEST(networking, openssl) {
+//    test();
+//}
 
 
 namespace utility {
@@ -177,8 +177,7 @@ string const responce_example = ""
 "server: Apache/2.2.14 (Win32)\n"
 "last-modified: Wed, 22 Jul 2009 19:15:56 GMT\n"
 "content-length: 88\n"
-"content-type: text/html\n"
-"connection: Closed\n\n\n"
+"content-type: text/html\n\n\n"
 "<html>\n"
 "<body>\n"
 "<h1>Hello, World!::</h1>\n"
