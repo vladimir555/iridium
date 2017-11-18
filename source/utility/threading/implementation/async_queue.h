@@ -14,6 +14,7 @@
 
 #include "condition.h"
 
+#include <iostream>
 
 namespace utility {
 namespace threading {
@@ -69,7 +70,6 @@ template<typename TItem>
 size_t CAsyncQueue<TItem>::push(TItem const &item) {
     LOCK_SCOPE_FAST
 
-    m_is_do_wait = true;
     m_items.push_back(item);
     notifyOne();
 
@@ -81,8 +81,7 @@ template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
     LOCK_SCOPE_FAST
 
-    m_is_do_wait    = true;
-    auto items_     = items;
+    auto items_ = items;
 
     m_items.splice(m_items.end(), items_);
     notifyOne();
@@ -93,12 +92,13 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop() {
-    while (m_is_do_wait && m_items.empty())
+    while (true) {
         wait();
-    {
-        LOCK_SCOPE_FAST
-        return std::move(m_items); // ----->
+        LOCK_SCOPE_FAST;
+        if (!m_items.empty() || !m_is_do_wait)
+            return std::move(m_items); // ----->
     }
+    return std::list<TItem>();
 }
 
 

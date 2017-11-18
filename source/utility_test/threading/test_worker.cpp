@@ -53,6 +53,7 @@ private:
     }
 
     void handleStart() override {
+//        cout << "start" << endl;
     }
 
     void handleStop() override {

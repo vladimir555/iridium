@@ -25,7 +25,7 @@ public:
     typedef TItem_ TItem;
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 
-    virtual void handleStart()  = 0;
+    virtual void handleStart() = 0;
     virtual void handleStop() = 0;
     virtual TItems handleItems(TItems const &items) = 0;
 };

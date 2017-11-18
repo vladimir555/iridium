@@ -69,7 +69,7 @@ std::string CThread::getName() const {
 }
 
 
-void CThread::run(IRunnable::TSharedPtr const &runnuble, ICondition::TSharedPtr is_started_condition) {
+void CThread::run(IRunnable::TSharedPtr const &runnuble, ICondition::TSharedPtr const &is_started_condition) {
     try {
         is_started_condition->notifyOne();
         runnuble->run();
