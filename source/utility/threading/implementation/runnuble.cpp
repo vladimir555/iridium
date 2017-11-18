@@ -8,16 +8,11 @@ namespace implementation {
 
 CRunnuble::CRunnuble() 
 :
-    m_is_running(false)
+    m_is_running(true)
 {}
 
 
-void CRunnuble::initialize() {
-    m_is_running = true;
-}
-
-
-void CRunnuble::finalize() {
+void CRunnuble::stop() {
     m_is_running = false;
 }
 

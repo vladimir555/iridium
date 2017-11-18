@@ -90,7 +90,6 @@ CSocket::Acceptor::Acceptor(URL const &url, CSocket::TSocketStreamsHandlers cons
 
 
 void CSocket::Acceptor::initialize() {
-    CRunnuble::initialize();
     m_socket->open();
     m_socket->listen();
     m_worker_pool->initialize();
@@ -98,7 +97,6 @@ void CSocket::Acceptor::initialize() {
 
 
 void CSocket::Acceptor::finalize() {
-    CRunnuble::finalize();
     m_worker_pool->finalize();
     m_socket->close();
 }
@@ -112,6 +110,7 @@ void CSocket::Acceptor::run() {
                 sockets.push_back(CCachedSocketStream::create(socket));
             m_worker_pool->push(sockets);
         }
+        std::cout << 5 << std::endl;
     } catch (std::exception const &e) {
         LOGF << "server socket " << m_socket->getURL() << " error: " << e.what();
         if (m_is_running)

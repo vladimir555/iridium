@@ -49,7 +49,9 @@ private:
         DEFINE_CREATE(Runnuble)
         Runnuble(CWorker &worker);
         virtual ~Runnuble() = default;
-        virtual void run() override;
+        void run() override;
+        void initialize() override;
+        void finalize() override;
     private:
         CWorker &m_worker;
     };
@@ -138,15 +140,25 @@ CWorker<TItem>::Runnuble::Runnuble(CWorker &worker)
 template<typename TItem>
 void CWorker<TItem>::Runnuble::run() {
     try {
-        m_worker.handleStart();
         while(m_is_running)
             m_worker.push(m_worker.handleItems(m_worker.m_async_queue->pop()));
-        m_worker.handleStop();
     } catch (std::exception const &e) {
         LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();
         // todo: handler
         // m_worker->handleException(e);
     }
+}
+
+
+template<typename TItem>
+void CWorker<TItem>::Runnuble::initialize() {
+    m_worker.handleStart();
+}
+
+
+template<typename TItem>
+void CWorker<TItem>::Runnuble::finalize() {
+    m_worker.handleStop();
 }
 
 

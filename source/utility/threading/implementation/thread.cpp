@@ -49,8 +49,9 @@ void CThread::initialize() {
 
 void CThread::finalize() {
     if (m_thread && m_thread->joinable()) {
-        m_runnuble->finalize();
+        m_runnuble->stop();
         m_thread->join();
+        m_runnuble->finalize();
     }
 }
 

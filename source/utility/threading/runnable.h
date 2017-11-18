@@ -20,6 +20,8 @@ public:
     virtual ~IRunnable() = default;
     ///
     virtual void run() = 0;
+    ///
+    virtual void stop() = 0;
 };
 
 

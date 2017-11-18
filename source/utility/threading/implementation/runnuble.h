@@ -20,9 +20,7 @@ public:
     ///
     virtual ~CRunnuble() = default;
     ///
-    virtual void initialize() override;
-    ///
-    virtual void finalize() override;
+    void stop() override;
 
 protected:
     ///

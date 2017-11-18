@@ -265,8 +265,9 @@ TEST(networking, http_server) {
     http_server->initialize();
     LOGT << "start !";
 
-    for (auto i = 0; i < 10; i++)
-        sleep(500);
+//    for (auto i = 0; i < 10; i++)
+//        sleep(500);
+    sleep(1);
 
     LOGT << "stop";
     http_server->finalize();
