@@ -256,7 +256,6 @@ TEST(networking, http_response) {
 
 TEST(networking, http_server) {
     logging::update(true);
-    LOGT << "start";
 
     server::IHTTP::THTTPHandlers    handlers;
     for (int i = 0; i < 2; i++)
@@ -264,6 +263,7 @@ TEST(networking, http_server) {
     server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("https://127.0.0.1:55555"), handlers);
 
     http_server->initialize();
+    LOGT << "start !";
 
     for (auto i = 0; i < 10; i++)
         sleep(500);

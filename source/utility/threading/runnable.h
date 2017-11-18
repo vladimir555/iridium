@@ -3,6 +3,7 @@
 
 
 #include "utility/smart_ptr.h"
+#include "utility/pattern/initializable.h"
 
 #include <string>
 
@@ -12,15 +13,13 @@ namespace threading {
 
 
 ///
-class IRunnable {
+class IRunnable: public pattern::IInitializable {
 public:
     DEFINE_SMART_PTR(IRunnable)
     ///
     virtual ~IRunnable() = default;
     ///
     virtual void run() = 0;
-    ///
-    virtual void stop() = 0;
 };
 
 

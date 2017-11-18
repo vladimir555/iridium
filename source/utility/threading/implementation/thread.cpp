@@ -37,6 +37,7 @@ CThread::CThread(IRunnable::TSharedPtr const &runnuble, string const &name)
 
 
 void CThread::initialize() {
+    m_runnuble->initialize();
     m_thread = make_shared<thread>(run, m_runnuble, m_is_started_condition);
     try {
         m_is_started_condition->wait(THREAD_START_TIMEOUT_MS);
@@ -48,7 +49,7 @@ void CThread::initialize() {
 
 void CThread::finalize() {
     if (m_thread && m_thread->joinable()) {
-        m_runnuble->stop();
+        m_runnuble->finalize();
         m_thread->join();
     }
 }

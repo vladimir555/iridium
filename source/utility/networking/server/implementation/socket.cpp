@@ -89,11 +89,23 @@ CSocket::Acceptor::Acceptor(URL const &url, CSocket::TSocketStreamsHandlers cons
 {}
 
 
-void CSocket::Acceptor::run() {
+void CSocket::Acceptor::initialize() {
+    CRunnuble::initialize();
+    m_socket->open();
+    m_socket->listen();
     m_worker_pool->initialize();
+}
+
+
+void CSocket::Acceptor::finalize() {
+    CRunnuble::finalize();
+    m_worker_pool->finalize();
+    m_socket->close();
+}
+
+
+void CSocket::Acceptor::run() {
     try {
-        m_socket->open();
-        m_socket->listen();
         while(m_is_running) {
             networking::ISocket::TSocketStreams sockets;
             for (auto const &socket: m_socket->accept())
@@ -105,13 +117,6 @@ void CSocket::Acceptor::run() {
         if (m_is_running)
             m_socket->close();
     }
-    m_worker_pool->finalize();
-}
-
-
-void CSocket::Acceptor::stop() {
-    CRunnuble::stop();
-    m_socket->close();
 }
 
 

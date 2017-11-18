@@ -30,6 +30,7 @@ public:
     DEFINE_CREATE(CSocket)
     virtual ~CSocket() = default;
 
+    // todo: waiting for opening socket
     void initialize() override;
     void finalize() override;
 
@@ -57,8 +58,9 @@ private:
         virtual ~Acceptor() = default;
         DEFINE_CREATE(Acceptor)
 
+        void initialize() override;
+        void finalize() override;
         void run() override;
-        void stop() override;
 
     private:
         networking::ISocket::TSharedPtr         m_socket;

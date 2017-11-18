@@ -8,13 +8,17 @@ namespace implementation {
 
 CRunnuble::CRunnuble() 
 :
-    m_is_running(true)
+    m_is_running(false)
 {}
 
 
-void CRunnuble::stop() {
+void CRunnuble::initialize() {
+    m_is_running = true;
+}
+
+
+void CRunnuble::finalize() {
     m_is_running = false;
-    //todo: condition for waiting stop
 }
 
 
