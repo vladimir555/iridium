@@ -19,4 +19,9 @@ static std::shared_ptr<TClass> create(TArgs && ... args) { \
 }
 
 
+#define DEFINE_INTERFACE(TClass) \
+DEFINE_SMART_PTR(TClass) \
+virtual ~TClass() = default;
+
+
 #endif // HEADER_SMART_PTR_C1E6B022_A228_47C3_9E76_E3C64E43617E

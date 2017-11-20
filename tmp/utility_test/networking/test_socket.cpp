@@ -126,54 +126,6 @@ TEST(networking, dns) {
 }
 
 
-// -----
-
-
-//class IProtocol {
-//public:
-//    DEFINE_SMART_PTR(IProtocol)
-//    IProtocol() = default;
-//    virtual ~IProtocol() = default;
-
-//    class IPacket {
-//    public:
-//        DEFINE_SMART_PTR(IPacket)
-//        IPacket() = default;
-//        virtual ~IPacket() = default;
-
-//        ISocket::TPacket get(size_t const &lpos, size_t const &rpos);
-//    };
-
-//    IPacket::TSharedPtr exchange(IPacket::TSharedPtr const &request);
-//};
-
-
-//class ISocketAction {
-//public:
-//    DEFINE_INTERFACE(ISocketAction)
-//    virtual void doAction() = 0;
-//};
-
-
-//class SocketActionRead {
-//public:
-//    DEFINE_CREATE(SocketActionRead)
-//    void doAction();
-//};
-
-
-//class SocketActionWrite {
-//public:
-//    DEFINE_CREATE(SocketActionRead)
-//    void doAction();
-//};
-
-
-//TEST(networking, socket_action) {
-
-//}
-
-
 } // socket
 } // networking
 } // utility

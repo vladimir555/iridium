@@ -1,12 +1,11 @@
 #include "http.h"
 #include "socket.h"
 
-#include "utility/protocol/http/request.h"
-#include "utility/protocol/http/response.h"
-#include "utility/convertion/convert.h"
+#include "utility/networking/http/request.h"
+#include "utility/networking/http/response.h"
 #include "utility/logging/logger.h"
-
 #include "utility/parsing/implementation/parser_http.h"
+#include "utility/convertion/convert.h"
 
 
 using utility::parsing::implementation::CHTTPParser;
@@ -69,8 +68,8 @@ CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets cons
                 continue; // <---
             }
 
-            protocol::http::request::THttp    request      (m_parser->parse(convert<string>(packet)));
-            protocol::http::response::THttp   response    = m_http_handler->handle(request);
+            http::request::THttp    request      (m_parser->parse(convert<string>(packet)));
+            http::response::THttp   response    = m_http_handler->handle(request);
             response.Headers.ContentLength      = response.Body.get().size();
             packet                              = convert<ISocketStream::TPacket>(m_parser->compose(response.getNode()));
             socket->write(packet);

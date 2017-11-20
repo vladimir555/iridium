@@ -7,7 +7,7 @@
 #include <unordered_map>
 
 #include "utility/fs/files.h"
-#include "utility/protocol/http/mime.h"
+#include "utility/networking/http/mime.h"
 
 
 using std::string;
@@ -19,7 +19,7 @@ using std::unordered_map;
 using std::placeholders::_1;
 using utility::fs::checkFileExistence;
 using utility::fs::extractFileNameExtension;
-using utility::protocol::http::MIME;
+using utility::networking::http::MIME;
 
 
 namespace utility {
@@ -50,8 +50,8 @@ CHTTPFSMapper::CHTTPFSMapper(string const &path)
 {}
 
 
-protocol::http::response::THttp CHTTPFSMapper::handle(protocol::http::request::THttp const &request) {
-    protocol::http::response::THttp response;
+http::response::THttp CHTTPFSMapper::handle(http::request::THttp const &request) {
+    http::response::THttp response;
     try {
         auto file_name                  = m_path + request.Message.get().uri;
         response.Body                   = readFileCached(file_name);

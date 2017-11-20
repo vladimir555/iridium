@@ -5,8 +5,8 @@
 using namespace std;
 
 
-#include "utility/protocol/http/request.h"
-#include "utility/protocol/http/response.h"
+#include "utility/networking/http/request.h"
+#include "utility/networking/http/response.h"
 #include "utility/parsing/implementation/parser_http.h"
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
@@ -202,7 +202,7 @@ TEST(networking, http_request) {
 //        }
 
 
-        protocol::http::request::THttp http(node);
+        request::THttp http(node);
 //        ASSERT_EQ(request_example, parser->compose(http.getNode()));
 
 //        cout << "http message method    : " << convert<string>(http.Message.get().method) << endl;
@@ -227,7 +227,7 @@ TEST(networking, http_response) {
 
 //    cout << "node:" << endl << convert<string>(node) << endl;
 
-    protocol::http::response::THttp http(node);
+    response::THttp http(node);
 
     auto node_  = http.getNode();
     auto str    = parser->compose(node_);

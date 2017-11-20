@@ -22,7 +22,7 @@ public:
     CHTTPFSMapper(std::string const &path);
     virtual ~CHTTPFSMapper() = default;
 
-    protocol::http::response::THttp handle(protocol::http::request::THttp const &request) override;
+    http::response::THttp handle(http::request::THttp const &request) override;
 private:
     std::string m_path;
     std::unordered_map<std::string, networking::ISocket::TPacket> m_file_cache;

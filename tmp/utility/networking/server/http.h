@@ -4,8 +4,8 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/pattern/initializable.h"
-#include "utility/protocol/http/request.h"
-#include "utility/protocol/http/response.h"
+#include "utility/networking/http/request.h"
+#include "utility/networking/http/response.h"
 
 #include <string>
 #include <list>
@@ -21,7 +21,7 @@ public:
     DEFINE_SMART_PTR(IHTTPHandler)
     virtual ~IHTTPHandler() = default;
 
-    virtual protocol::http::response::THttp handle(protocol::http::request::THttp const &request) = 0;
+    virtual http::response::THttp handle(http::request::THttp const &request) = 0;
 };
 
 
