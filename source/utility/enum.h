@@ -24,6 +24,7 @@ public: \
         UNKNOWN = -1, \
         __VA_ARGS__ \
     }; \
+    TEnum(): m_value(TEnumInternal::UNKNOWN) {} \
     TEnum(TEnumInternal const &e): m_value(e) {} \
     TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
