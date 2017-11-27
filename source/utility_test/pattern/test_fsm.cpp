@@ -31,46 +31,57 @@ namespace pattern {
 */
 
 
-class Light {
+DEFINE_ENUM(
+    TState,
+    LIGHT_OFF,
+    LIGHT_ON
+)
+
+DEFINE_ENUM(
+    TEvent,
+    PUSH_BUTTON
+)
+
+
+class Light: public implementation::CFSM<TEvent, TState> {
 public:
     Light();
     virtual ~Light() = default;
 
-    DEFINE_ENUM(
-        TState,
-        LIGHT_OFF,
-        LIGHT_ON
-    )
-
-    DEFINE_ENUM(
-        TEvent,
-        PUSH_BUTTON
-    )
-
-    TState doAction(TEvent const &event);
+// todo:
+//    template<TEvent::TEnumInternal, TState::TEnumInternal, TState::TEnumInternal>
+//    class Handler {
+//    public:
+//        Handler(Light *parent): m_parent(parent) {}
+//       ~Handler() = default;
+//        void handle();
+//    private:
+//        Light *m_parent;
+//    };
+//    Handler<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON> h = this;
 
 private:
     template<TEvent::TEnumInternal, TState::TEnumInternal, TState::TEnumInternal>
     void handle();
 
-    IFSM<TState, TEvent>::TSharedPtr m_fsm;
     int i = 0;
 };
 
 
-Light::TState Light::doAction(TEvent const &event) {
-    return m_fsm->doAction(event);
-}
+//template<>
+//void Light::Handler<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON>::handle() {
+//}
 
 
 template<>
-void Light::handle<Light::TEvent::PUSH_BUTTON, Light::TState::LIGHT_OFF, Light::TState::LIGHT_ON>() {
+void Light::handle<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON>() {
     cout << "enable  " << i << std::endl;
     i++;
 }
 
+
 template<>
-void Light::handle<Light::TEvent::PUSH_BUTTON, Light::TState::LIGHT_ON, Light::TState::LIGHT_OFF>() {
+void Light::handle<TEvent::PUSH_BUTTON, TState::LIGHT_ON, TState::LIGHT_OFF>() {
     cout << "disable " << i << std::endl;
     i++;
 }
@@ -78,12 +89,11 @@ void Light::handle<Light::TEvent::PUSH_BUTTON, Light::TState::LIGHT_ON, Light::T
 
 Light::Light()
 :
-    m_fsm(
-    implementation::CFSM<Light>::create(TState::LIGHT_OFF, 5,
-    implementation::CFSM<Light>::TTransitions({
+    implementation::CFSM<TEvent, TState>(TState::LIGHT_OFF, 5,
+    implementation::CFSM<TEvent, TState>::TTransitions({
         DEFINE_FSM_MAP_TRANSITION(TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON),
         DEFINE_FSM_MAP_TRANSITION(TEvent::PUSH_BUTTON, TState::LIGHT_ON , TState::LIGHT_OFF)
-    })))
+    }))
 {}
 
 
@@ -111,8 +121,8 @@ TEST(pattern, fsm_switch) {
 } // utility
 
 
-IMPLEMENT_ENUM(utility::pattern::Light::TState)
-IMPLEMENT_ENUM(utility::pattern::Light::TEvent)
+IMPLEMENT_ENUM(utility::pattern::TState)
+IMPLEMENT_ENUM(utility::pattern::TEvent)
 
 
 //#define DEFINE_FSM_SWOTCH(TState, TEvent)

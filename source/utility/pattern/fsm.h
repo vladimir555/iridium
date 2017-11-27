@@ -9,7 +9,7 @@ namespace utility {
 namespace pattern {
 
 
-template<typename TState, typename TEvent>
+template<typename TEvent, typename TState>
 class IFSM {
 public:
     DEFINE_INTERFACE(IFSM)

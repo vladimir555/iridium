@@ -14,19 +14,17 @@ namespace implementation {
 // -----interface
 
 
-template<typename TParent>
-class CFSM: public IFSM<typename TParent::TState, typename TParent::TEvent> {
+template<typename TEvent, typename TState>
+class CFSM: public IFSM<TEvent, TState> {
 public:
-    typedef std::function<void()>       THandler;
-    typedef typename TParent::TState    TState;
-    typedef typename TParent::TEvent    TEvent;
+    typedef std::function<void()>   THandler;
     struct TTransition {
         TEvent      event;
         TState      from;
         TState      to;
         THandler    handler;
     };
-    typedef std::list<TTransition>      TTransitions;
+    typedef std::list<TTransition>  TTransitions;
 
     DEFINE_CREATE(CFSM)
     CFSM(TState const &start_state, size_t const &history_size, TTransitions const &transitions);
@@ -46,8 +44,8 @@ private:
 // -----implementation
 
 
-template<typename TParent>
-CFSM<TParent>::CFSM(TState const &start_state, size_t const &history_size, TTransitions const &transitions)
+template<typename TEvent, typename TState>
+CFSM<TEvent, TState>::CFSM(TState const &start_state, size_t const &history_size, TTransitions const &transitions)
 :
     m_state         (start_state),
     m_transitions   (transitions),
@@ -55,8 +53,8 @@ CFSM<TParent>::CFSM(TState const &start_state, size_t const &history_size, TTran
 {}
 
 
-template<typename TParent>
-typename CFSM<TParent>::TState CFSM<TParent>::doAction(typename CFSM<TParent>::TEvent const &event) {
+template<typename TEvent, typename TState>
+TState CFSM<TEvent, TState>::doAction(TEvent const &event) {
     for (auto const &i: m_transitions) {
         if (i.event == event && i.from == m_state) {
             if (i.handler)
@@ -74,8 +72,8 @@ typename CFSM<TParent>::TState CFSM<TParent>::doAction(typename CFSM<TParent>::T
 }
 
 
-template<typename TParent>
-typename CFSM<TParent>::TTransitions CFSM<TParent>::getHistory() const {
+template<typename TEvent, typename TState>
+typename CFSM<TEvent, TState>::TTransitions CFSM<TEvent, TState>::getHistory() const {
     return m_history; // ----->
 }
 
