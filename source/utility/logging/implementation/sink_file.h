@@ -26,9 +26,9 @@ public:
     virtual ~CSinkFile() = default;
 
 private:
-    void handleStart() override;
-    void handleStop() override;
-    TItems handleItems(TItems const &e) override;
+    void initialize() override;
+    void finalize() override;
+    TItems handle(TItems const &e) override;
 
     std::string m_file_name;
     std::string m_file_name_original;

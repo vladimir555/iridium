@@ -25,17 +25,16 @@ public:
     typedef TItem_ TItem;
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 
-    virtual void handleStart() = 0;
-    virtual void handleStop() = 0;
-    virtual TItems handleItems(TItems const &items) = 0;
+    virtual void initialize() = 0;
+    virtual void finalize() = 0;
+    virtual TItems handle(TItems const &items) = 0;
 };
 
 
 template<typename TItem>
 class IWorker:
     public IAsyncQueuePusher<TItem>,
-    public pattern::IInitializable,
-    protected IWorkerHandler<TItem>
+    public pattern::IInitializable
 {
 public:
     DEFINE_SMART_PTR(IWorker<TItem>)

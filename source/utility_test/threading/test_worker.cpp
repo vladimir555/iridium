@@ -41,7 +41,7 @@ public:
     Worker() = default;
     virtual ~Worker() = default;
 private:
-    TItems handleItems(TItems const &items) override {
+    TItems handle(TItems const &items) override {
         for (auto const &i: items) {
 //            cout << "processing " << i << endl;
             out.push_back(i);
@@ -52,11 +52,11 @@ private:
         return TItems();
     }
 
-    void handleStart() override {
+    void initialize() override {
 //        cout << "start" << endl;
     }
 
-    void handleStop() override {
+    void finalize() override {
 //        cout << "stop" << endl;
     }
 };

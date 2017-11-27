@@ -40,9 +40,6 @@ public:
     virtual size_t push(TItem  const &item)  override;
     virtual size_t push(TItems const &items) override;
 
-    virtual void handleStart() override;
-    virtual void handleStop() override;
-    virtual TItems handleItems(TItems const &items) override;
 private:
     class Runnuble: public CRunnuble {
     public:
@@ -113,24 +110,6 @@ size_t CWorker<TItem>::push(TItems const &items) {
 
 
 template<typename TItem>
-void CWorker<TItem>::handleStart() {
-    m_worker_handler->handleStart();
-}
-
-
-template<typename TItem>
-void CWorker<TItem>::handleStop() {
-    m_worker_handler->handleStop();
-}
-
-
-template<typename TItem>
-typename CWorker<TItem>::TItems CWorker<TItem>::handleItems(TItems const &items) {
-    return m_worker_handler->handleItems(items);
-}
-
-
-template<typename TItem>
 CWorker<TItem>::Runnuble::Runnuble(CWorker &worker) 
 :    
     m_worker(worker)
@@ -141,7 +120,7 @@ template<typename TItem>
 void CWorker<TItem>::Runnuble::run() {
     try {
         while(m_is_running)
-            m_worker.push(m_worker.handleItems(m_worker.m_async_queue->pop()));
+            m_worker.push(m_worker.m_worker_handler->handle(m_worker.m_async_queue->pop()));
     } catch (std::exception const &e) {
         LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();
         // todo: handler
@@ -152,13 +131,13 @@ void CWorker<TItem>::Runnuble::run() {
 
 template<typename TItem>
 void CWorker<TItem>::Runnuble::initialize() {
-    m_worker.handleStart();
+    m_worker.m_worker_handler->initialize();
 }
 
 
 template<typename TItem>
 void CWorker<TItem>::Runnuble::finalize() {
-    m_worker.handleStop();
+    m_worker.m_worker_handler->finalize();
 }
 
 

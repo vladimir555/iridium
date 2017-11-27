@@ -34,9 +34,9 @@ private:
 
         CSocketHandler(IHTTPHandler::TSharedPtr const &http_handler);
 
-        TSockets    handleItems(TSockets const &items) override;
-        void        handleStart() override;
-        void        handleStop()  override;
+        TSockets    handle(TSockets const &items) override;
+        void        initialize() override;
+        void        finalize()  override;
     private:
         IHTTPHandler::TSharedPtr        m_http_handler;
         parsing::IParser::TSharedPtr    m_parser;

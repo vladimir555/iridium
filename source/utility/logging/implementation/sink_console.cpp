@@ -24,18 +24,18 @@ CSinkConsole::CSinkConsole(TEvent::TLevel const &level)
 {}
 
 
-CSinkConsole::TItems CSinkConsole::handleItems(TItems const &events) {
+CSinkConsole::TItems CSinkConsole::handle(TItems const &events) {
     for (auto const &e: events)
         cout << makeLine(e) << endl;
     return TItems();
 }
 
 
-void CSinkConsole::handleStart() {
+void CSinkConsole::initialize() {
 }
 
 
-void CSinkConsole::handleStop() {
+void CSinkConsole::finalize() {
 }
 
 

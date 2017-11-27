@@ -57,7 +57,7 @@ CHTTP::CSocketHandler::CSocketHandler(IHTTPHandler::TSharedPtr const &http_handl
 {}
 
 
-CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets const &sockets_) {
+CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handle(TSockets const &sockets_) {
     TSockets sockets;
     for (auto const &socket: sockets_) {
         try {
@@ -83,12 +83,12 @@ CHTTP::CSocketHandler::TSockets CHTTP::CSocketHandler::handleItems(TSockets cons
 }
 
 
-void CHTTP::CSocketHandler::handleStart() {
+void CHTTP::CSocketHandler::initialize() {
     LOGT << "start";
 }
 
 
-void CHTTP::CSocketHandler::handleStop() {
+void CHTTP::CSocketHandler::finalize() {
     LOGT << "stop";
 }
 

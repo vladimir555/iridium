@@ -45,7 +45,7 @@ public:
     SocketAcceptorA() = default;
    ~SocketAcceptorA() = default;
 
-    TItems handleItems(TItems const &items) override {
+    TItems handle(TItems const &items) override {
         cout << "item" << endl;
         for (auto const &i: items) {
             try {
@@ -76,11 +76,11 @@ public:
         return TItems();
     }
 
-    void handleStart() override {
+    void initialize() override {
         //cout << "socket acceptor pool thread " << getThreadID() << " start" << endl;
     }
 
-    void handleStop() override {
+    void finalize() override {
         //cout << "socket acceptor pool thread " << getThreadID() << " stop" << endl;
     }
 };

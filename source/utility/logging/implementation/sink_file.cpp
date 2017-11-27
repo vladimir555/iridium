@@ -27,7 +27,7 @@ CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 {}
 
 
-void CSinkFile::handleStart() {
+void CSinkFile::initialize() {
     if (m_is_rotation_by_day) {
         auto date                   = convert<string>(high_resolution_clock::now()).substr(0, 10);
         m_last_initialization_time  = convert<high_resolution_clock::time_point>(date + " 00:00:00.000");
@@ -45,15 +45,15 @@ void CSinkFile::handleStart() {
 }
 
 
-void CSinkFile::handleStop() {
+void CSinkFile::finalize() {
     m_text_file_writer->finalize();
 }
 
 
-CSinkFile::TItems CSinkFile::handleItems(TItems const &events) {
+CSinkFile::TItems CSinkFile::handle(TItems const &events) {
     if (m_is_rotation_by_day && high_resolution_clock::now() > m_last_initialization_time) {
-        handleStop();
-        handleStart();
+        finalize();
+        initialize();
     }
 
     for (auto const &e : events)
