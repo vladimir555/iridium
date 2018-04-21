@@ -2,14 +2,14 @@
 
 #include "utility/convertion/convert.h"
 #include "utility/fs/implementation/fast_text_writer.h"
+#include "utility/threading/implementation/worker.h"
 
-#include <chrono>
 
 using std::string;
 using utility::convertion::convert;
 using utility::fs::implementation::CFastTextWriter;
 using utility::threading::implementation::CWorker;
-using std::chrono::high_resolution_clock;
+using std::chrono::system_clock;
 
 
 namespace utility {
@@ -19,7 +19,12 @@ namespace implementation {
 
 CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 :
-    CSink                       (level, getSharedThis(this)),
+    CSink(level, CWorkerHandler::create(level, file_name))
+{}
+
+
+CSinkFile::CWorkerHandler::CWorkerHandler(TEvent::TLevel const &level, std::string const &file_name)
+:
     m_file_name                 (file_name),
     m_file_name_original        (file_name),
     m_is_rotation_by_day        (true),
@@ -27,10 +32,10 @@ CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 {}
 
 
-void CSinkFile::initialize() {
+void CSinkFile::CWorkerHandler::initialize() {
     if (m_is_rotation_by_day) {
-        auto date                   = convert<string>(high_resolution_clock::now()).substr(0, 10);
-        m_last_initialization_time  = convert<high_resolution_clock::time_point>(date + " 00:00:00.000");
+        auto date                   = convert<string>(system_clock::now()).substr(0, 10);
+        m_last_initialization_time  = convert<system_clock::time_point>(date + " 00:00:00.000");
 
         m_file_name = m_file_name_original;
         auto file_ext_position = m_file_name.find_last_of('.');
@@ -45,13 +50,13 @@ void CSinkFile::initialize() {
 }
 
 
-void CSinkFile::finalize() {
+void CSinkFile::CWorkerHandler::finalize() {
     m_text_file_writer->finalize();
 }
 
 
-CSinkFile::TItems CSinkFile::handle(TItems const &events) {
-    if (m_is_rotation_by_day && high_resolution_clock::now() > m_last_initialization_time) {
+CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const &events) {
+    if (m_is_rotation_by_day && system_clock::now() > m_last_initialization_time) {
         finalize();
         initialize();
     }
@@ -61,7 +66,7 @@ CSinkFile::TItems CSinkFile::handle(TItems const &events) {
 
     m_text_file_writer->flush();
 
-    return TItems();
+    return TItems(); // ----->
 }
 
 

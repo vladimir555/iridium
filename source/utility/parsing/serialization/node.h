@@ -238,7 +238,7 @@ NodeList<TNode>::NodeList(Node<void> const &parent, std::string const &name)
     if (parent.m_node_source) {
         for (auto const &i: *parent.m_node_source)
             if (i->getName() == name)
-                m_nodes.push_back(TNode(i, parent.m_node_destination->addChild(i->clone()), parent.m_path));
+                m_nodes.push_back(TNode(i, parent.m_node_destination->addChild(i->getName(), i->getValue()), parent.m_path));
     }
 }
 

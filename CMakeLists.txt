@@ -1,22 +1,33 @@
 cmake_minimum_required(VERSION 3.5)
 project(utility)
 
-set(CMAKE_C_COMPILER "/usr/bin/clang")
-set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+#set(CMAKE_C_COMPILER "/usr/bin/clang")
+#set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 
-set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
-#set(CMAKE_BUILD_TYPE "Debug")
+#set(CMAKE_BUILD_TYPE "Release")
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
+set(CMAKE_BUILD_TYPE "Debug")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
+
+#LDFLAGS:  -L/usr/local/opt/openssl/lib
+#CPPFLAGS: -I/usr/local/opt/openssl/include
+
+#set(OPENSSL_CRYPTO_LIBRARY "")
+#set(OPENSSL_INCLUDE_DIR "")
+#set(OPENSSL_ROOT_DIR "/usr/local/ssl")
+#set(OPENSSL_LIBRARIES "/usr/local/ssl/lib")
+
 
 #BUILD
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin CACHE PATH "Single Directory for all")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib CACHE PATH "Single Directory for all")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/obj CACHE PATH "Single Directory for all")
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin CACHE PATH "Single Directory for all")
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib CACHE PATH "Single Directory for all")
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/obj CACHE PATH "Single Directory for all")
 
-add_compile_options("-std=c++14")
-add_compile_options("-Wall")
+#add_compile_options("-std=c++14")
+#add_compile_options("-Wall")
+
+set(CMAKE_CXX_STANDARD 14)
 
 file(GLOB_RECURSE SOURCE 
     ${CMAKE_SOURCE_DIR}/source/utility/*.h

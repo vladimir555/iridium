@@ -22,12 +22,12 @@ namespace platform {
 
 class CSocket: public unix::CSocket {
 public:
-    DEFINE_CREATE  (CSocket)
-                    CSocket(URL const &url);
-    virtual        ~CSocket() = default;
+    DEFINE_IMPLEMENTATION(CSocket)
+    CSocket(URL const &url);
 
-    void            listen() override;
-    TSocketStreams  accept() override;
+    void    listen() override;
+    TEvents accept() override;
+    void    close()  override;
 
 private:
     int                             m_epoll;

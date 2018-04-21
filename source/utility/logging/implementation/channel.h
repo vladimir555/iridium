@@ -23,11 +23,7 @@ class CChannel:
     public threading::implementation::CMutex
 {
 public:
-    DEFINE_CREATE(CChannel)
-    ///
-    CChannel() = default;
-    ///
-    virtual ~CChannel() = default;
+    DEFINE_IMPLEMENTATION(CChannel)
     ///
     virtual void initialize() override;
     ///
@@ -38,8 +34,6 @@ public:
     virtual void detach(ISink::TSharedPtr sink) override;
     ///
     virtual void log(TEvent &&event) override;
-    /////
-    //virtual void log(std::atomic<std::unique_ptr<TEvent> > const &e);
 };
 
 

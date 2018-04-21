@@ -65,11 +65,15 @@ string API::getErrorString() {
     ERR_print_errors(bio);
     char   *buffer  = nullptr;
     size_t  length  = BIO_get_mem_data(bio, &buffer);
-    char   *result  = static_cast<char *>(calloc(1, 1 + length));
-    if (result)
-        memcpy(result, buffer, length);
-    BIO_free(bio);
-    return result; // ----->
+//    char   *result  = static_cast<char *>(calloc(1, 1 + length));
+//    if (result)
+//        memcpy(result, buffer, length);
+//    BIO_free(bio);
+//    if (result)
+//        return result; // ----->
+//    else
+//        return string(); // ----->
+    return string(buffer, length); // ----->
 }
 
 

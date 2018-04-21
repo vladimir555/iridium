@@ -27,6 +27,9 @@ DEFINE_ROOT_NODE_BEGIN(Logger)
 DEFINE_ROOT_NODE_END()
 
 
+TLogger createDefaultConsoleLoggerConfig();
+
+
 } // config
 } // logger
 } // utility

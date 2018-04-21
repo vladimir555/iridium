@@ -102,6 +102,7 @@ TXMLNode *convertNodeToXMLNode(INode::TConstSharedPtr const &node, TXMLNode *xml
         else
             xml_node_ = xml_node_child;
     } else {
+        assertExists(xml_node_, "xml_node does not exists");
         auto value = xml_document.allocate_string(mask(node->getValue()).c_str());
         if (node->getName().empty()) {
             xml_node_->value(value);

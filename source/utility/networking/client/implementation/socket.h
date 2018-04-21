@@ -23,7 +23,7 @@ public:
     void initialize() override;
     void finalize()   override;
 
-    void    write(TPacket const &packet) override;
+    size_t  write(TPacket const &packet) override;
     TPacket read() override;
     void    close() override;
     URL     getURL() const override;

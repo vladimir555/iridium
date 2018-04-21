@@ -73,16 +73,18 @@ void CSocket::listen() {
     unix::CSocket::listen();
 
     m_kqueue = assertOK(kqueue(), "socket kqueue create error");
-    m_monitor_events[0] = { static_cast<uintptr_t>(m_socket_fd), EVFILT_READ, EV_ADD, 0, 0, nullptr };
+    m_monitor_events[0] = { static_cast<uintptr_t>(m_socket_fd), EVFILT_READ | EVFILT_WRITE, EV_ADD, 0, 0, nullptr };
     m_monitor_events_used_count = 1;
 }
 
 
-CSocket::TSocketStreams CSocket::accept() {
-    CSocket::TSocketStreams sockets;
+ISocket::TEvents CSocket::accept() {
+    LOGT << "accept";
+    TEvents sockets_events;
 
     static struct timespec const timeout = { KEVENT_TIMIOUT_MS / 1000, KEVENT_TIMIOUT_MS % 1000 };
 
+    sleep(1);
     auto events_count = assertOK(
         kevent(m_kqueue, m_monitor_events.data(), m_monitor_events_used_count, m_events.data(), m_events.size(), &timeout),
         "socket resolving kevent error");
@@ -93,13 +95,14 @@ CSocket::TSocketStreams CSocket::accept() {
             continue; // <---
 
         LOGT << "fd " << m_events[i].ident << " flags " << EventFlags(m_events[i].flags).convertToFlagsString();
+        LOGT << "accept fd " << m_socket_fd;
 
         if (m_events[i].flags & EV_EOF) {
 //            LOGT << getPeerURL(m_events[i].ident) << "EOF";
             if (m_monitor_events_used_count >= m_monitor_events.size())
                 continue; // <---
             m_monitor_events[m_monitor_events_used_count] =
-                { m_events[i].ident, EVFILT_READ, EV_DELETE, 0, 0, nullptr };
+                { m_events[i].ident, EVFILT_READ | EVFILT_WRITE, EV_DELETE, 0, 0, nullptr };
             m_monitor_events_used_count++;
             continue; // <---
         }
@@ -116,25 +119,44 @@ CSocket::TSocketStreams CSocket::accept() {
             if (m_monitor_events_used_count >= m_monitor_events.size())
                 continue; // <---
 
-            for (auto const &socket: unix::CSocket::acceptInternal()) {
+            std::list<int> accepted_sockets_fd;
+            auto sse = unix::CSocket::acceptInternal(accepted_sockets_fd);
+            for (auto const &socket_fd: accepted_sockets_fd) {
                 m_monitor_events[m_monitor_events_used_count] =
-                    { static_cast<uintptr_t>(socket), EVFILT_READ, EV_ADD, 0, 0, nullptr };
+                    { static_cast<uintptr_t>(socket_fd), EVFILT_READ | EVFILT_WRITE, EV_ADD, 0, 0, nullptr };
                 m_monitor_events_used_count++;
             }
+            sockets_events.insert(sockets_events.end(), sse.begin(), sse.end());
         } else {
             try {
-                auto socket = unix::CSocket::createInternal(m_events[i].ident);
-                if (socket)
-                    sockets.push_back(ISocketStream::TSharedPtr(socket));
-                LOGT << "fd " << m_events[i].ident << " push_back " << socket->getURL() << " flags " << m_events[i].flags <<
-                    " " << EventFlags(m_events[i].flags).convertToFlagsString();
+                auto socket_event       = TEvent::create();
+
+//                socket_event->socket = findAcceptedSocket(m_events[i].ident);
+
+                auto socket             = CSocket::create(getPeerURL(m_events[i].ident));
+                socket->m_socket_fd     = m_events[i].ident;
+                socket->m_encryptor     = m_encryptor;
+                socket_event->socket    = socket;
+
+                if (m_events[i].fflags & EVFILT_READ)
+                    socket_event->action = TEvent::TAction::READ;
+                if (m_events[i].fflags & EVFILT_WRITE)
+                    socket_event->action = TEvent::TAction::WRITE;
+                sockets_events.push_back(socket_event);
+
+//                auto socket = unix::CSocket::createInternal(m_events[i].ident);
+//                if (socket)
+//                    sockets_events.push_back(ISocketStream::TSharedPtr(socket));
+//                LOGT << "fd " << m_events[i].ident << " push_back " << socket->getURL() << " flags " << m_events[i].flags <<
+//                    " " << EventFlags(m_events[i].flags).convertToFlagsString();
             } catch (std::exception const &e) {
                 LOGF << e.what();
                 ::close(m_events[i].ident);
             }
         }
     }
-    return sockets; // ----->
+    LOGT << "return count " << sockets_events.size();
+    return sockets_events; // ----->
 }
 
 

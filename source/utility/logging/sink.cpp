@@ -11,7 +11,7 @@ IMPLEMENT_ENUM(utility::logging::ISink::TType)
 
 using utility::convertion::convert;
 using std::string;
-using std::chrono::high_resolution_clock;
+using std::chrono::system_clock;
 using utility::threading::getThreadID;
 
 
@@ -21,7 +21,7 @@ namespace logging {
 
 std::string ISink::makeLine(TEvent const &e) {
     return
-        convert<string>(high_resolution_clock::now()).substr(11, string::npos) + " " +
+        convert<string>(system_clock::now()).substr(11, string::npos) + " " +
         convert<string>(e.level).substr(0, 1) + " " + e.line; // ----->
 }
 

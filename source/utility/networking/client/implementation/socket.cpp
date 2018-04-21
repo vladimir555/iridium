@@ -27,8 +27,8 @@ void CSocket::finalize() {
 }
 
 
-void CSocket::write(TPacket const &packet) {
-    m_socket->write(packet);
+size_t CSocket::write(TPacket const &packet) {
+    return m_socket->write(packet); // ----->
 }
 
 

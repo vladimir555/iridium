@@ -1,6 +1,7 @@
 #include "socket.h"
 
 #include "utility/networking/implementation/socket.h"
+#include "utility/networking/implementation/socket_handler.h"
 
 #include "utility/threading/implementation/thread.h"
 #include "utility/threading/implementation/worker_pool.h"
@@ -13,8 +14,13 @@
 using utility::threading::implementation::CThread;
 using utility::threading::implementation::CWorkerPool;
 using utility::threading::implementation::CMutex;
+using utility::networking::implementation::CSocketHandler;
 using utility::convertion::convert;
+using utility::protocol::IProtocol;
+using utility::protocol::IPacket;
+
 using std::string;
+using std::map;
 using std::chrono::high_resolution_clock;
 using std::chrono::seconds;
 
@@ -28,94 +34,115 @@ namespace server {
 namespace implementation {
 
 
-CSocket::CSocket(URL const &url, TSocketStreamsHandlers const &socket_stream_handlers)
+CSocket::CSocket(URL const &url, IProtocol::TSharedPtr const &protocol, int const &count)
 :
-    m_runnuble      (Acceptor::create(url, socket_stream_handlers)),
-    m_thread        (CThread::create(m_runnuble, "socket acceptor " + convert<string>(url)))
+    m_acceptor_thread(CThread::create(CAcceptor::create(url, protocol, count), "socket acceptor " + convert<string>(url)))
 {}
 
 
 void CSocket::initialize() {
-    m_thread->initialize();
+    m_acceptor_thread->initialize();
 }
 
 
 void CSocket::finalize() {
-    m_thread->finalize();
+    m_acceptor_thread->finalize();
 }
 
 
-CSocket::CCachedSocketStream::CCachedSocketStream(ISocketStream::TSharedPtr const &source_socket)
+CSocket::CAcceptor::CAcceptor(URL const &url, IProtocol::TSharedPtr const &protocol, int const &count)
 :
-    m_source_socket (assertExists(source_socket, "source socket is NULL")),
-    m_last_read_time(high_resolution_clock::now())
-{}
+    m_socket    (networking::implementation::CSocket::create(url)),
+    m_protocol  (SynchronizedProtocolHandler::create(protocol))
+{
+    TEventsHandlers handlers;
 
+    for (int i = 0; i < count; i++)
+        handlers.push_back(CEventsHandler::create(m_protocol));
 
-void CSocket::CCachedSocketStream::write(TPacket const &packet) {
-    m_source_socket->write(packet);
+    LOGT << "create worker pool size " << handlers.size();
+    m_worker_pool = threading::implementation::CWorkerPool<networking::ISocket::TEvent::TSharedPtr>::create(handlers, "socket_acceptor");
 }
 
 
-ISocketStream::TPacket CSocket::CCachedSocketStream::read() {
-    auto packet = m_source_socket->read();
-    auto now    = high_resolution_clock::now();
-
-    if (packet.empty()) {
-        if (now - m_last_read_time > DEFAULT_READ_TIMEOUT)
-            throw std::runtime_error("socket read error: timeout");
-    } else
-        m_last_read_time = now;
-
-    m_cache.insert(m_cache.end(), packet.begin(), packet.end());
-    return m_cache; // ----->
-}
-
-
-void CSocket::CCachedSocketStream::close() {
-    m_source_socket->close();
-}
-
-
-URL CSocket::CCachedSocketStream::getURL() const {
-    return m_source_socket->getURL(); // ------>
-}
-
-
-CSocket::Acceptor::Acceptor(URL const &url, CSocket::TSocketStreamsHandlers const &socket_stream_handlers)
-:
-    m_socket        (networking::implementation::CSocket::create(url)),
-    m_worker_pool   (CWorkerPool<ISocketStream::TSharedPtr>::create(socket_stream_handlers, "socket_acceptor_handler"))
-{}
-
-
-void CSocket::Acceptor::initialize() {
+void CSocket::CAcceptor::initialize() {
     m_socket->open();
     m_socket->listen();
     m_worker_pool->initialize();
+    LOGT << "start acceptor";
 }
 
 
-void CSocket::Acceptor::finalize() {
+void CSocket::CAcceptor::finalize() {
     m_worker_pool->finalize();
     m_socket->close();
+    LOGT << "stop acceptor";
 }
 
 
-void CSocket::Acceptor::run() {
+void CSocket::CAcceptor::run() {
     try {
-        while(m_is_running) {
-            networking::ISocket::TSocketStreams sockets;
-            for (auto const &socket: m_socket->accept())
-                sockets.push_back(CCachedSocketStream::create(socket));
-            m_worker_pool->push(sockets);
+        while (m_is_running) {
+            m_worker_pool->push(m_socket->accept());
+//            auto items = m_socket->accept();
+//            m_worker_pool->push(items);
         }
-        std::cout << 5 << std::endl;
     } catch (std::exception const &e) {
-        LOGF << "server socket " << m_socket->getURL() << " error: " << e.what();
+        LOGF << "server socket acceptor " << m_socket->getURL() << " error: " << e.what();
         if (m_is_running)
             m_socket->close();
     }
+}
+
+
+CSocket::CAcceptor::SynchronizedProtocolHandler::SynchronizedProtocolHandler(IProtocol::TSharedPtr const &protocol)
+:
+    m_protocol(protocol)
+{}
+
+
+IPacket::TSharedPtr CSocket::CAcceptor::SynchronizedProtocolHandler::exchange(IPacket::TSharedPtr const &packet) {
+    LOCK_SCOPE
+    return m_protocol->exchange(packet); // ----->
+}
+
+
+CSocket::CAcceptor::CEventsHandler::CEventsHandler(protocol::IProtocol::TSharedPtr const &protocol)
+:
+    m_protocol(protocol)
+{
+    LOGT << "create event handler";
+}
+
+
+CSocket::CAcceptor::CEventsHandler::TItems CSocket::CAcceptor::CEventsHandler::handle(TItems const &events) {
+    LOGT << "event handler, items count " << events.size();
+    TItems next_events;
+    for (networking::ISocket::TEvent::TSharedPtr const &event: events) {
+        if (m_map_url_socket[event->socket->getURL()]) {
+            LOGT << "event handler, socket handler from map";
+            m_map_url_socket[event->socket->getURL()]->handle(event->action);
+        } else {
+            LOGT << "event handler, add socket handler to map";
+            m_map_url_socket[event->socket->getURL()] = CSocketHandler::create(event->socket, m_protocol);
+            m_map_url_socket[event->socket->getURL()]->handle(event->action);
+        }
+
+        if (event->action == networking::ISocket::TEvent::TAction::CLOSE)
+            m_map_url_socket[event->socket->getURL()].reset();
+    }
+
+    return next_events;
+}
+
+
+void CSocket::CAcceptor::CEventsHandler::initialize() {
+    LOGT << "initialize event handler";
+}
+
+
+void CSocket::CAcceptor::CEventsHandler::finalize() {
+    LOGT << "finalize event handler";
 }
 
 

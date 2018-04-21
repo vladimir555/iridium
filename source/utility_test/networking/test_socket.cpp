@@ -87,29 +87,29 @@ public:
 
 
 TEST(networking, socket) {
-    URL url("tcp://127.0.0.1:55555");
+//    URL url("tcp://127.0.0.1:55555");
 
-    server::ISocket::TSocketStreamsHandlers handlers;
-    handlers.push_back(SocketAcceptorA::create());
-    server::ISocket::TSharedPtr server_socket = server::implementation::CSocket::create(URL(url), handlers);
+//    server::ISocket::TSocketStreamsHandlers handlers;
+//    handlers.push_back(SocketAcceptorA::create());
+//    server::ISocket::TSharedPtr server_socket = server::implementation::CSocket::create(URL(url), handlers);
 
-    server_socket->initialize();
+//    server_socket->initialize();
 
-    client::ISocket::TSharedPtr client_socket = client::implementation::CSocket::create(url);
-    //sleep(5000);
+//    client::ISocket::TSharedPtr client_socket = client::implementation::CSocket::create(url);
+//    //sleep(5000);
 
-    // todo: tests
-    for (int i = 0; i < 5; i++)
-    try {
-        client_socket->initialize();
-        client_socket->write(convert<client::ISocket::TPacket>(string("test\n")));
-        client_socket->finalize();
-        break;
-    } catch (std::exception const &e) {
-        cout << "error: " << e.what() << endl;
-    }
+//    // todo: tests
+//    for (int i = 0; i < 5; i++)
+//    try {
+//        client_socket->initialize();
+//        client_socket->write(convert<client::ISocket::TPacket>(string("test\n")));
+//        client_socket->finalize();
+//        break;
+//    } catch (std::exception const &e) {
+//        cout << "error: " << e.what() << endl;
+//    }
 
-    server_socket->finalize();
+//    server_socket->finalize();
 }
 
 

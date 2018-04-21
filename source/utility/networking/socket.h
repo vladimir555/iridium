@@ -5,6 +5,7 @@
 #include "utility/smart_ptr.h"
 #include "utility/pattern/initializable.h"
 #include "utility/convertion/convert.h"
+#include "utility/pattern/fsm.h"
 
 #include "url.h"
 #include "types.h"
@@ -12,10 +13,7 @@
 #include <vector>
 #include <string>
 #include <list>
-
-
 #include <map>
-#include "utility/threading/implementation/mutex.h"
 
 
 namespace utility {
@@ -24,31 +22,37 @@ namespace networking {
 
 class ISocketStream {
 public:
-    DEFINE_SMART_PTR(ISocketStream)
-    virtual ~ISocketStream() = default;
+    DEFINE_INTERFACE(ISocketStream)
 
     typedef std::vector<uint8_t> TPacket;
 
-    virtual void write(TPacket const &packet) = 0;
+    virtual size_t write(TPacket const &packet) = 0;
     // todo: expected pacet size parameter
-    virtual TPacket read() = 0;
-    virtual void close() = 0;
-    virtual URL getURL() const = 0;
+    virtual TPacket read()      = 0;
+    virtual void close()        = 0;
+    virtual URL getURL() const  = 0;
 };
 
 
 class ISocket : public ISocketStream {
 public:
-    DEFINE_SMART_PTR(ISocket)
-    virtual ~ISocket() = default;
+    DEFINE_INTERFACE(ISocket)
 
-    typedef std::list<ISocketStream::TSharedPtr> TSocketStreams;
+    struct TEvent {
+        DEFINE_SMART_PTR(TEvent)
+        DEFINE_CREATE(TEvent)
+        DEFINE_ENUM(TAction, ACCEPT, READ, WRITE, CLOSE)
+        TAction action;
+        ISocketStream::TSharedPtr socket;
+    };
 
-    virtual void open() = 0;
-    virtual void connect() = 0;
-    virtual void listen() = 0;
-    virtual TSocketStreams accept() = 0;
-    virtual void interrupt() = 0;
+    typedef std::list<TEvent::TSharedPtr> TEvents;
+
+    virtual void    open()          = 0;
+    virtual void    connect()       = 0;
+    virtual void    listen()        = 0;
+    virtual TEvents accept()        = 0;
+    virtual void    interrupt()     = 0;
 };
 
 
@@ -56,8 +60,8 @@ public:
 } // utility
 
 
-DEFINE_CONVERT(utility::networking::ISocketStream::TPacket, std::string)
-DEFINE_CONVERT(std::string, utility::networking::ISocketStream::TPacket)
+//DEFINE_CONVERT(utility::networking::ISocketStream::TPacket, std::string)
+//DEFINE_CONVERT(std::string, utility::networking::ISocketStream::TPacket)
 
 
 #endif // HEADER_SOCKET_423B8F1C_F93C_43CC_99D9_06CB1A1062CF

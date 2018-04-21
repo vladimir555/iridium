@@ -23,25 +23,23 @@ namespace platform {
 
 class CSocket: public ISocket {
 public:
-    DEFINE_CREATE(CSocket)
-    CSocket(URL const &url, SOCKET const &m_socket);
+    DEFINE_IMPLEMENTATION(CSocket)
     CSocket(URL const &url);
-   ~CSocket() = default;
+	CSocket(URL const &url, SOCKET const &m_socket);
 
-    void write(packet_t const &packet);
-    packet_t read();
-
-    void open();
-    void close();
-    void connect();
-    void listen();
-    ISocketStream::TSharedPtr accept();
-    void interrupt();
+	void    open() override;
+	void    close() override;
+	size_t  write(TPacket const &packet) override;
+	TPacket read() override;
+	void    listen() override;
+	TEvents accept() override;
+	void    interrupt() override;
+	void    connect() override;
+	URL     getURL() const override;
 
 private:
     URL     m_url;
     SOCKET  m_socket = INVALID_SOCKET;
-    WSADATA m_wsa_data;
 };
 
 

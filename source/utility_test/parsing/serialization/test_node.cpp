@@ -27,6 +27,7 @@ struct C {
 
 
 DEFINE_ROOT_NODE_BEGIN(Root)
+    DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue1")
     DEFINE_NODE_BEGIN(FirstItem)
         DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue1")
         DEFINE_ATTRIBUTE(int, AttributeTwo)
@@ -48,7 +49,25 @@ DEFINE_ROOT_NODE_BEGIN(Root)
 DEFINE_ROOT_NODE_END()
 
 
+DEFINE_ROOT_NODE_BEGIN(Root2)
+    DEFINE_ATTRIBUTE_DEFAULT(C::TEnum, Enum, C::TEnum::ENUM1)
+    DEFINE_NODE_LIST_BEGIN(SubItem1)
+        DEFINE_ATTRIBUTE_DEFAULT(C::TEnum, Enum, C::TEnum::ENUM1)
+    DEFINE_NODE_LIST_END(SubItem1)
+DEFINE_ROOT_NODE_END()
+
+
 TEST(parsing, serialization) {
+    {
+        auto root_node = CNode::create("root2");
+        root_node->addChild("sub-item1")->addChild("enum", "ENUM2");
+
+        TRoot2 root2(root_node);
+
+        ASSERT_EQ(1, root2.getNode()->findChilds("/sub-item1").size());
+        ASSERT_NO_THROW(root2.SubItem1.begin()->Enum.get());
+    }
+
 
     ASSERT_EQ("camel5-struct-name", convertCamelToDashed("Camel5StructName"));
     ASSERT_EQ("",  convertCamelToDashed(""));

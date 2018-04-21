@@ -98,7 +98,7 @@ Light::Light()
 
 
 TEST(pattern, fsm_map) {
-    logging::update(true);
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
     Light light;
 
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
@@ -108,7 +108,7 @@ TEST(pattern, fsm_map) {
 
 
 TEST(pattern, fsm_switch) {
-    logging::update(true);
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
     test::Light light;
 
     light.doAction(test::Light::TEvent::PUSH_BUTTON);

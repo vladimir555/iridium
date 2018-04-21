@@ -4,12 +4,15 @@
 
 #include "utility/networking/server/socket.h"
 #include "utility/networking/url.h"
-#include "utility/networking//socket.h"
+#include "utility/networking/socket.h"
+#include "utility/networking/socket_handler.h"
 
-#include "utility/threading/implementation/runnuble.h"
 #include "utility/threading/thread.h"
 #include "utility/threading/worker_pool.h"
 #include "utility/threading/implementation/mutex.h"
+#include "utility/threading/implementation/runnuble.h"
+
+#include "utility/protocol/protocol.h"
 
 #include <list>
 #include <map>
@@ -23,52 +26,68 @@ namespace server {
 namespace implementation {
 
 
-class CSocket: public ISocket, public std::enable_shared_from_this<CSocket> {
+class CSocket:
+    public ISocket,
+    public std::enable_shared_from_this<CSocket>
+{
 public:
-    CSocket(URL const &url, TSocketStreamsHandlers const &socket_stream_handlers);
     DEFINE_SMART_PTR(CSocket)
-    DEFINE_CREATE(CSocket)
-    virtual ~CSocket() = default;
+    DEFINE_IMPLEMENTATION(CSocket)
+    CSocket(URL const &url, protocol::IProtocol::TSharedPtr const &protocol, int const &count);
 
-    // todo: waiting for opening socket
     void initialize() override;
     void finalize() override;
 
 private:
-    class CCachedSocketStream: public ISocketStream {
+    class CAcceptor: public threading::implementation::CRunnuble {
     public:
-        CCachedSocketStream(ISocketStream::TSharedPtr const &source_socket);
-        virtual ~CCachedSocketStream() = default;
-        DEFINE_CREATE(CCachedSocketStream)
-
-        void    write(TPacket const &packet) override;
-        TPacket read() override;
-        void    close() override;
-        URL     getURL() const override;
-
-    private:
-        TPacket                             m_cache;
-        ISocketStream::TSharedPtr           m_source_socket;
-        std::chrono::high_resolution_clock::time_point m_last_read_time;
-    };
-
-    class Acceptor: public threading::implementation::CRunnuble {
-    public:
-        Acceptor(URL const &url, TSocketStreamsHandlers const &socket_stream_handlers);
-        virtual ~Acceptor() = default;
-        DEFINE_CREATE(Acceptor)
+        DEFINE_IMPLEMENTATION(CAcceptor)
+        CAcceptor(URL const &url, utility::protocol::IProtocol::TSharedPtr const &protocol, int const &count);
 
         void initialize() override;
         void finalize() override;
         void run() override;
 
     private:
-        networking::ISocket::TSharedPtr         m_socket;
-        TSocketStreamsWorkerPool::TSharedPtr    m_worker_pool;
+
+        // todo: not synchronized protocol for every thread
+        class SynchronizedProtocolHandler:
+            public threading::implementation::CMutex,
+            public utility::protocol::IProtocol
+        {
+        public:
+            DEFINE_IMPLEMENTATION(SynchronizedProtocolHandler)
+            SynchronizedProtocolHandler(utility::protocol::IProtocol::TSharedPtr const &protocol);
+
+            utility::protocol::IPacket::TSharedPtr exchange(utility::protocol::IPacket::TSharedPtr const &packet) override;
+
+        private:
+            utility::protocol::IProtocol::TSharedPtr m_protocol;
+        };
+
+        // thread
+        class CEventsHandler: public TEventsHandler {
+        public:
+            DEFINE_IMPLEMENTATION(CEventsHandler)
+            CEventsHandler(protocol::IProtocol::TSharedPtr const &protocol);
+
+            TItems handle(TItems const &items) override;
+
+            void initialize() override;
+            void finalize() override;
+        private:
+            // sockets map
+            std::map<URL, ISocketHandler::TSharedPtr>   m_map_url_socket;
+            protocol::IProtocol::TSharedPtr             m_protocol;
+        };
+
+        utility::protocol::IProtocol::TSharedPtr    m_protocol;
+        networking::ISocket::TSharedPtr             m_socket;
+        TEventsWorkerPool::TSharedPtr               m_worker_pool;
     };
 
-    threading::IRunnable::TSharedPtr    m_runnuble;
-    threading::IThread::TSharedPtr      m_thread;
+    threading::IRunnable::TSharedPtr    m_acceptor_runnuble;
+    threading::IThread::TSharedPtr      m_acceptor_thread;
 };
 
 

@@ -73,9 +73,7 @@ LogStream const & LogStream::operator << (TValue const &v) const {
 }
 
 
-void update(bool const &is_enable_console, std::string const &file_name);
-void update(bool const &is_enable_console);
-void update(std::string const &file_name);
+void update(config::TLogger const &config);
 
 
 } // logger

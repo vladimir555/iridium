@@ -33,7 +33,7 @@ using utility::encryption::implementation::CContext;
 namespace {
 
 
-static int const DEFAULT_SOCKET_BUFFER_SIZE = 8912;
+static int const DEFAULT_SOCKET_BUFFER_SIZE = 8;//8912;
 
 
 // todo: signals handlers singleton
@@ -57,13 +57,9 @@ CSocket::CSocket(URL const &url)
     m_is_blocking_mode  (true),
     m_socket_fd         (0),
     m_url               (url),
-    m_encryptor         (nullptr),
-    m_acceptor          (nullptr)
+    m_encryptor         (nullptr)
+//    , m_acceptor          (nullptr)
 {}
-
-
-CSocket::~CSocket() {
-}
 
 
 void CSocket::open() {
@@ -81,36 +77,50 @@ void CSocket::close() {
     LOGT << m_url << " " << static_cast<int>(m_socket_fd);
     if (m_ssl)
         m_ssl.reset();
-    if (m_acceptor)
-        m_acceptor->remove(this);
+//    if (m_acceptor)
+//        m_acceptor->remove(this);
     assertOK(::close(m_socket_fd), "close socket error");
 }
 
 
-void CSocket::write(TPacket const &packet) {
-    LOCK_SCOPE;
+size_t CSocket::write(TPacket const &packet) {
+//    LOCK_SCOPE;
     LOGT << m_url << " " << static_cast<int>(m_socket_fd);
-//    setBlockingMode(true);
     if (m_ssl) {
         LOGT << "ssl write";
         m_ssl->write(packet);
     } else {
-        size_t lpos = 0;
-        while (lpos < packet.size()) {
-            auto buffer = static_cast<void const *>(packet.data() + lpos);
-            auto rpos   = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
-            if (rpos > packet.size())
-                rpos = packet.size();
-            lpos += assertOK(::send(m_socket_fd, buffer, rpos - lpos, 0), "socket write error, lpos " + convert<string>(lpos));
-//            LOGT << "lpos " << lpos;
-        }
+        auto buffer = static_cast<void const *>(packet.data());
+        auto result = ::send(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE, 0);
+        LOGT << "result " << result;
+        if (result == EAGAIN)
+            return DEFAULT_SOCKET_BUFFER_SIZE; // ----->
+        else
+            return result; // ----->
+
+//        size_t lpos = 0;
+//        while (lpos < packet.size()) {
+//            auto buffer = static_cast<void const *>(packet.data() + lpos);
+//            auto rpos   = lpos + DEFAULT_SOCKET_BUFFER_SIZE;
+
+//            if (rpos > packet.size())
+//                rpos = packet.size();
+
+//            auto result = ::send(m_socket_fd, buffer, rpos - lpos, 0);
+//            if (result == EAGAIN && !m_is_blocking_mode)
+//                return lpos; // ----->
+
+//            lpos += assertOK(result, "socket write error, lpos " + convert<string>(lpos));
+////            LOGT << "lpos " << lpos;
+//        }
+//        return lpos;
     }
-//    setBlockingMode(false);
+    return packet.size(); // ----->
 }
 
 
 CSocket::TPacket CSocket::read() {
-    LOCK_SCOPE
+//    LOCK_SCOPE
 //    LOGT << m_url << " " << m_socket_fd;
     TPacket result;
     if (m_ssl) {
@@ -121,6 +131,7 @@ CSocket::TPacket CSocket::read() {
     } else {
         char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
         auto received_size = assertOK(::recv(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error");
+        LOGT << "result " << received_size;
 //        LOGT << m_url << " " << m_socket_fd << " received_size " << received_size;
         result = TPacket(buffer, buffer + received_size); // ----->
     }
@@ -167,13 +178,9 @@ void CSocket::listen() {
 }
 
 
-ISocket::TSocketStreams CSocket::accept() {
-    // todo: thread for every accepted socket
-    ISocket::TSocketStreams sockets;
-//    for (auto const &socket: acceptInternal())
-//        sockets.push_back(ISocketStream::TSharedPtr(new unix::CSocket(socket, getPeerURL(socket), this)));
-
-    return sockets; // ----->
+// todo: async socket emulator, read and write by blocks 512 bytes for every open socket
+ISocket::TEvents CSocket::accept() {
+    throw std::runtime_error("not implemented"); // ----->
 }
 
 
@@ -197,7 +204,7 @@ void CSocket::connect() {
 
 
 URL CSocket::getURL() const {
-    LOCK_SCOPE;
+//    LOCK_SCOPE;
     return m_url;
 }
 
@@ -235,69 +242,69 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
 }
 
 
-std::list<int> CSocket::acceptInternal() {
-    std::list<int>      sockets;
+CSocket::TEvents CSocket::acceptInternal(std::list<int> &accepted_sockets_fd) {
+    ISocket::TEvents events;
+
     struct sockaddr_in  client_address      = { 0 };
     socklen_t           client_address_size = sizeof(client_address);
-    int                 socket              = 0;
+    int                 socket_fd           = 0;
 
     do {
-        socket = ::accept(m_socket_fd, (struct sockaddr *) (&client_address), &client_address_size);
-        if (socket > 0)
-            sockets.push_back(socket);
-    } while (socket > 0);
-
-    return sockets; // ----->
-}
-
-
-CSocket::TSharedPtr CSocket::createInternal(int const &socket_fd) {
-    LOCK_SCOPE;
-    auto const url = getPeerURL(socket_fd);
-    for (auto const &i: m_accepted_sockets) {
-        if (i->getURL() == url) {
-            LOGT << "update fd " << i->m_socket_fd << " -> " << socket_fd;
-
-            assertOK(::close(i->m_socket_fd), "close socket error");
-
-            i->m_socket_fd  = socket_fd;
+        socket_fd = ::accept(m_socket_fd, (struct sockaddr *) (&client_address), &client_address_size);
+        if  (socket_fd > 0) {
+            auto const url = getPeerURL(socket_fd);
+            auto socket    = create(url);
+            socket->m_socket_fd = socket_fd;
 
             if (m_encryptor)
-                i->m_ssl    = m_encryptor->accept(m_socket_fd);
+                socket->m_ssl   = m_encryptor->accept(m_socket_fd);
 
-            return nullptr; // ----->
+            {
+                auto event      = TEvent::create();
+                event->action   = TEvent::TAction::ACCEPT;
+                event->socket   = socket;
+
+                events.push_back(event);
+            }
+
+//            {
+//                auto event      = TEvent::create();
+//                event->action   = TEvent::TAction::READ;
+//                event->socket   = socket;
+
+//                events.push_back(event);
+//            }
+
+            accepted_sockets_fd.push_back(socket_fd);
         }
-    }
+    } while (socket_fd > 0);
 
-    auto socket         = create(url);
-
-    socket->m_acceptor  = this;
-    socket->m_socket_fd = socket_fd;
-
-    LOGT << 1;
-    if (m_encryptor)
-        socket->m_ssl   = m_encryptor->accept(m_socket_fd);
-    LOGT << 2;
-
-    m_accepted_sockets.push_back(socket);
-
-//    LOGT << "url " << socket->getURL() << " " << socket->m_socket_fd;
-    return socket; // ----->
+    return events; // ----->
 }
 
 
-void CSocket::remove(CSocket const * const accepted_socket) {
-    auto url = assertExists(accepted_socket, "removing null accepted socket")->getURL();
-    LOCK_SCOPE;
-    for (auto const &i: m_accepted_sockets) {
-        if (i->getURL() == url) {
-//            LOGT << url << " " << i->m_socket_fd;
-            m_accepted_sockets.remove(i);
-            return; // ----->
-        }
-    }
-//    LOGT << "sockets size " << m_accepted_sockets.size();
-}
+//CSocket::TSharedPtr CSocket::findAcceptedSocket(int const &socket_fd) {
+//    LOCK_SCOPE;
+//    auto const url = getPeerURL(socket_fd);
+//    for (auto const &i: m_accepted_sockets)
+//        if (i->getURL() == url)
+//            return i; // ----->
+//    return nullptr; // ----->
+//}
+
+
+//void CSocket::remove(CSocket const * const accepted_socket) {
+//    auto url = assertExists(accepted_socket, "removing accepted socket is null")->getURL();
+//    LOCK_SCOPE;
+//    for (auto const &i: m_accepted_sockets) {
+//        if (i->getURL() == url) {
+////            LOGT << url << " " << i->m_socket_fd;
+//            m_accepted_sockets.remove(i);
+//            return; // ----->
+//        }
+//    }
+////    LOGT << "sockets size " << m_accepted_sockets.size();
+//}
 
 
 } // unix

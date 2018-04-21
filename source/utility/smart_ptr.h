@@ -24,4 +24,9 @@ DEFINE_SMART_PTR(TClass) \
 virtual ~TClass() = default;
 
 
+#define DEFINE_IMPLEMENTATION(TClass) \
+DEFINE_CREATE(TClass) \
+virtual ~TClass() = default;
+
+
 #endif // HEADER_SMART_PTR_C1E6B022_A228_47C3_9E76_E3C64E43617E

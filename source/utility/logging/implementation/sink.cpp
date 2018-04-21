@@ -14,10 +14,10 @@ namespace logging {
 namespace implementation {
 
 
-CSink::CSink(TEvent::TLevel const &level, IWorkerHandler<TEvent>::TSharedPtr const &worker)
+CSink::CSink(TEvent::TLevel const &level, IWorkerHandler<TEvent>::TSharedPtr const &worker_handler)
 :
     m_level(level),
-    m_worker(CWorker<TEvent>::create("sink", worker))
+    m_worker(CWorker<TEvent>::create("sink", worker_handler))
 {}
 
 

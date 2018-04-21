@@ -1,9 +1,7 @@
 #include <gtest/gtest.h>
 
-
 #include <iostream>
 using namespace std;
-
 
 #include "utility/protocol/http/request.h"
 #include "utility/protocol/http/response.h"
@@ -11,145 +9,145 @@ using namespace std;
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
 #include "utility/networking/server/implementation/http.h"
-#include "utility/networking/server/implementation/http_fs_mapper.h"
 #include "utility/logging/logger.h"
 
+#include "utility/networking/server/implementation/socket.h"
+#include "utility/networking/implementation/socket_handler.h"
+#include "utility/protocol/http/implementation/protocol.h"
 
+
+using utility::networking::server::implementation::CSocket;
+using utility::protocol::http::implementation::CProtocol;
 using utility::parsing::implementation::CHTTPParser;
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;
 using utility::convertion::convert;
+using utility::threading::sleep;
+using std::string;
 
 
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <openssl/ssl.h>
-#include <openssl/err.h>
+//#include <stdio.h>
+//#include <unistd.h>
+//#include <sys/socket.h>
+//#include <arpa/inet.h>
+//#include <openssl/ssl.h>
+//#include <openssl/err.h>
 
 
-int create_socket(int port)
-{
-    int s;
-    struct sockaddr_in addr;
+//int create_socket(int port)
+//{
+//    int s;
+//    struct sockaddr_in addr;
 
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port);
-    addr.sin_addr.s_addr = htonl(INADDR_ANY);
+//    addr.sin_family = AF_INET;
+//    addr.sin_port = htons(port);
+//    addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-    s = socket(AF_INET, SOCK_STREAM, 0);
-    if (s < 0) {
-    perror("Unable to create socket");
-    exit(EXIT_FAILURE);
-    }
+//    s = socket(AF_INET, SOCK_STREAM, 0);
+//    if (s < 0) {
+//    perror("Unable to create socket");
+//    exit(EXIT_FAILURE);
+//    }
 
-    if (::bind(s, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
-    perror("Unable to bind");
-    exit(EXIT_FAILURE);
-    }
+//    if (::bind(s, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
+//    perror("Unable to bind");
+//    exit(EXIT_FAILURE);
+//    }
 
-    if (listen(s, 1) < 0) {
-    perror("Unable to listen");
-    exit(EXIT_FAILURE);
-    }
+//    if (listen(s, 1) < 0) {
+//    perror("Unable to listen");
+//    exit(EXIT_FAILURE);
+//    }
 
-    return s;
-}
+//    return s;
+//}
 
+//void init_openssl()
+//{
+//    SSL_load_error_strings();
+//    OpenSSL_add_ssl_algorithms();
+//}
 
-void init_openssl()
-{
-    SSL_load_error_strings();
-    OpenSSL_add_ssl_algorithms();
-}
+//void cleanup_openssl()
+//{
+//    EVP_cleanup();
+//}
 
+//SSL_CTX *create_context()
+//{
+//    const SSL_METHOD *method;
+//    SSL_CTX *ctx;
 
-void cleanup_openssl()
-{
-    EVP_cleanup();
-}
+//    method = SSLv23_server_method();
 
+//    ctx = SSL_CTX_new(method);
+//    if (!ctx) {
+//        perror("Unable to create SSL context");
+//        ERR_print_errors_fp(stderr);
+//        exit(EXIT_FAILURE);
+//    }
 
-SSL_CTX *create_context()
-{
-    const SSL_METHOD *method;
-    SSL_CTX *ctx;
+//    return ctx;
+//}
 
-    method = SSLv23_server_method();
+//void configure_context(SSL_CTX *ctx)
+//{
+//    SSL_CTX_set_ecdh_auto(ctx, 1);
 
-    ctx = SSL_CTX_new(method);
-    if (!ctx) {
-        perror("Unable to create SSL context");
-        ERR_print_errors_fp(stderr);
-        exit(EXIT_FAILURE);
-    }
+//    /* Set the key and cert */
+//    if (SSL_CTX_use_certificate_file(ctx, "utility.crt", SSL_FILETYPE_PEM) <= 0) {
+//        ERR_print_errors_fp(stderr);
+//    exit(EXIT_FAILURE);
+//    }
 
-    return ctx;
-}
+//    if (SSL_CTX_use_PrivateKey_file (ctx, "utility.key", SSL_FILETYPE_PEM) <= 0 ) {
+//        ERR_print_errors_fp(stderr);
+//    exit(EXIT_FAILURE);
+//    }
+//}
 
-void configure_context(SSL_CTX *ctx)
-{
-    SSL_CTX_set_ecdh_auto(ctx, 1);
+//int test()
+//{
+//    int sock;
+//    SSL_CTX *ctx;
 
-    /* Set the key and cert */
-    if (SSL_CTX_use_certificate_file(ctx, "utility.crt", SSL_FILETYPE_PEM) <= 0) {
-        ERR_print_errors_fp(stderr);
-    exit(EXIT_FAILURE);
-    }
+//    init_openssl();
+//    ctx = create_context();
 
-    if (SSL_CTX_use_PrivateKey_file (ctx, "utility.key", SSL_FILETYPE_PEM) <= 0 ) {
-        ERR_print_errors_fp(stderr);
-    exit(EXIT_FAILURE);
-    }
-}
+//    configure_context(ctx);
 
-int test()
-{
-    int sock;
-    SSL_CTX *ctx;
+//    sock = create_socket(4433);
 
-    init_openssl();
-    ctx = create_context();
+//    /* Handle connections */
+//    while(1) {
+//        struct sockaddr_in addr;
+//        uint len = sizeof(addr);
+//        SSL *ssl;
+//        const char reply[] = "test\n";
 
-    configure_context(ctx);
+//        int client = accept(sock, (struct sockaddr*)&addr, &len);
+//        if (client < 0) {
+//            perror("Unable to accept");
+//            exit(EXIT_FAILURE);
+//        }
 
-    sock = create_socket(4433);
+//        ssl = SSL_new(ctx);
+//        SSL_set_fd(ssl, client);
 
-    /* Handle connections */
-    while(1) {
-        struct sockaddr_in addr;
-        uint len = sizeof(addr);
-        SSL *ssl;
-        const char reply[] = "test\n";
+//        if (SSL_accept(ssl) <= 0) {
+//            ERR_print_errors_fp(stderr);
+//        }
+//        else {
+//            SSL_write(ssl, reply, strlen(reply));
+//        }
 
-        int client = accept(sock, (struct sockaddr*)&addr, &len);
-        if (client < 0) {
-            perror("Unable to accept");
-            exit(EXIT_FAILURE);
-        }
+//        SSL_free(ssl);
+//        close(client);
+//    }
 
-        ssl = SSL_new(ctx);
-        SSL_set_fd(ssl, client);
-
-        if (SSL_accept(ssl) <= 0) {
-            ERR_print_errors_fp(stderr);
-        }
-        else {
-            SSL_write(ssl, reply, strlen(reply));
-        }
-
-        SSL_free(ssl);
-        close(client);
-    }
-
-    close(sock);
-    SSL_CTX_free(ctx);
-    cleanup_openssl();
-}
-
-//TEST(networking, openssl) {
-//    test();
+//    close(sock);
+//    SSL_CTX_free(ctx);
+//    cleanup_openssl();
 //}
 
 
@@ -190,32 +188,32 @@ TEST(networking, http_request) {
     auto node   = parser->parse(request_example);
 
     try {
-//        cout << "node: " << convert<string>(node) << endl;
+//        LOGT << "node: " << convert<string>(node);
 
 //        {
 //            auto json = CJSONParser::create();
 //            auto xml  = CXMLParser::create();
-//            cout << "node: " << endl << convert<string>(node) << endl;
-//            cout << "http: " << endl << parser->compose(node) << endl;
-//            cout << "json: " << endl << json->compose(node) << endl;
-//            cout << "xml : " << endl <<  xml->compose(node) << endl;
+//            LOGT << "node: " << endl << convert<string>(node);
+//            LOGT << "http: " << endl << parser->compose(node);
+//            LOGT << "json: " << endl << json->compose(node);
+//            LOGT << "xml : " << endl <<  xml->compose(node);
 //        }
 
 
         protocol::http::request::THttp http(node);
 //        ASSERT_EQ(request_example, parser->compose(http.getNode()));
 
-//        cout << "http message method    : " << convert<string>(http.Message.get().method) << endl;
-//        cout << "http message uri       : " << http.Message.get().uri << endl;
-//        cout << "http message protocol  : " << http.Message.get().protocol << endl;
+//        LOGT << "http message method    : " << convert<string>(http.Message.get().method);
+//        LOGT << "http message uri       : " << http.Message.get().uri;
+//        LOGT << "http message protocol  : " << http.Message.get().protocol;
 
-//        cout << "http header host       : " << http.Headers.Host.get() << endl;
+//        LOGT << "http header host       : " << http.Headers.Host.get();
 
 //        for (auto const &accept: http.Headers.Accept)
-//            cout << "accept: " << accept.get() << endl;
+//            LOGT << "accept: " << accept.get();
 
     } catch (std::exception const &e) {
-        cout << e.what() << endl;
+        LOGT << e.what();
         FAIL();
     }
 }
@@ -225,51 +223,32 @@ TEST(networking, http_response) {
     auto parser = CHTTPParser::create();
     auto node   = parser->parse(responce_example);
 
-//    cout << "node:" << endl << convert<string>(node) << endl;
+//    LOGT << "node:" << endl << convert<string>(node);
 
     protocol::http::response::THttp http(node);
 
     auto node_  = http.getNode();
     auto str    = parser->compose(node_);
 
-//    cout << "response:" << endl << str << endl;
+//    LOGT << "response:" << endl << str;
 
     ASSERT_EQ(responce_example, str);
 }
 
 
-//class HTTPHandler: public server::IHTTPHandler {
-//public:
-//    DEFINE_CREATE(HTTPHandler)
-//    virtual ~HTTPHandler() = default;
-//    ISocket::TPacket handle(TRequest const &request) override {
-//        i++;
-//        return  convert<ISocket::TPacket>
-//            ("<html><body>Hello! uri = " + request.uri +
-//            " " + convert<string>(i) + " " + "</body></html>");
-//    }
-//private:
-//    int i = 0;
-//};
-
-
 TEST(networking, http_server) {
-    logging::update(true);
-
-    server::IHTTP::THTTPHandlers    handlers;
-    for (int i = 0; i < 2; i++)
-        handlers.push_back(server::implementation::CHTTPFSMapper::create("html"));
-    server::IHTTP::TSharedPtr       http_server = server::implementation::CHTTP::create(URL("http://127.0.0.1:55555"), handlers);
-
-    http_server->initialize();
-    LOGT << "start !";
-
-//    for (auto i = 0; i < 10; i++)
-//        sleep(500);
-    sleep(100);
-
-    LOGT << "stop";
-    http_server->finalize();
+    return;
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    try {
+        auto server = CSocket::create(URL("http://127.0.0.1:55555"), CProtocol::create(), 2);
+        server->initialize();
+        LOGT << "start !";
+        sleep(1000);
+        LOGT << "stop";
+        server->finalize();
+    } catch (std::exception const &e) {
+        LOGE << e.what();
+    }
 }
 
 

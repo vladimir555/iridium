@@ -6,9 +6,8 @@
 #include "implementation/sink_file.h"
 
 #include "utility/threading/synchronized_scope.h"
+#include "utility/threading/thread.h"
 #include "utility/assert.h"
-
-#include <iostream>
 
 
 using utility::logging::implementation::CChannel;
@@ -33,6 +32,7 @@ Logger::~Logger() {
 // todo: refactoring for external sinks via convertion or factory ! one sub config for one sink
 void Logger::update(config::TLogger const &config) {
     LOCK_SCOPE
+
     if (m_channel)
         m_channel->finalize();
 
@@ -101,32 +101,8 @@ LogStream const & LogStream::operator << (char const *s) const {
 }
 
 
-void update(bool const &is_enable_console, std::string const &file_name) {
-    auto root = parsing::implementation::CNode::create("logger");
-
-    root->addChild("level", "TRACE_LEVEL");
-
-    if (is_enable_console)
-        root->addChild("console-sink")->addChild("level", "TRACE_LEVEL");
-
-    if (!file_name.empty()) {
-        auto file_sink = root->addChild("file-sink");
-        file_sink->addChild("level", "TRACE_LEVEL");
-        file_sink->addChild("file-name", file_name);
-    }
-
-    config::TLogger logger_config(root);
-    Logger::instance().update(logger_config);
-}
-
-
-void update(bool const &is_enable_console) {
-    update(is_enable_console, "");
-}
-
-
-void update(std::string const &file_name) {
-    update(false, file_name);
+void update(config::TLogger const &config) {
+    Logger::instance().update(config);
 }
 
 

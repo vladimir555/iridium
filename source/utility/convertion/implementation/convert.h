@@ -14,6 +14,7 @@ namespace convertion {
 namespace implementation {
 
 
+// todo: not good for multithreading
 struct config {
     static std::atomic<int> double_precission;
 };
@@ -68,6 +69,10 @@ std::string convertPtr(std::shared_ptr<TValue> const &value, TFormat const &form
 
 template<>
 std::string convert(std::chrono::high_resolution_clock::time_point const &value);
+
+
+template<>
+std::string convert(std::chrono::system_clock::time_point const &value);
 
 
 template<>
@@ -152,6 +157,10 @@ std::string convert(std::thread::id const &value);
 
 template<>
 std::chrono::high_resolution_clock::time_point convert(std::string const &value);
+
+
+template<>
+std::chrono::system_clock::time_point convert(std::string const &value);
 
 
 template<>

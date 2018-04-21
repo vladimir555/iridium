@@ -1,11 +1,12 @@
 #include "thread.h"
 
 #include "utility/convertion/convert.h"
+#include "utility/assert.h"
 
 #include "condition.h"
 
-#include <iostream>
 #include <chrono>
+#include <iostream>
 
 
 using std::thread;
@@ -30,7 +31,7 @@ namespace implementation {
 CThread::CThread(IRunnable::TSharedPtr const &runnuble, string const &name)
 :
     m_name          (name),
-    m_runnuble      (runnuble),
+    m_runnuble      (assertExists(runnuble, "runnuble is null")),
     m_runnuble_name (name),
     m_is_started_condition(CCondition::create())
 {}

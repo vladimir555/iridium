@@ -7,11 +7,11 @@
 #include "async_queue.h"
 #include "runnuble.h"
 
+#include "utility/logging/logger.h"
 #include "utility/threading/worker.h"
 #include "utility/threading/thread.h"
 #include "utility/threading/runnable.h"
 #include "utility/threading/implementation/thread.h"
-#include "utility/logging/logger.h"
 
 
 namespace utility {

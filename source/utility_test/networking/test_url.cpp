@@ -37,7 +37,7 @@ TEST(networking, url) {
     ASSERT_EQ("hostname.ru", *url.getHost());
 
     ASSERT_NO_FATAL_FAILURE(URL("http://ya.ru").getIPv4());
-    ASSERT_LE(7, URL("http://ya.ru").getIPv4AsString().size());
+    ASSERT_LE(static_cast<size_t>(7), URL("http://ya.ru").getIPv4AsString().size());
 }
 
 

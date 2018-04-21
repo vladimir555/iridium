@@ -57,8 +57,8 @@ void CFastTextWriter::writeLine(string const &line_) {
     if (!m_file)
         throw std::runtime_error("fast text writer not initialized"); // ----->
 
-    auto        line    = line_ + "\n";
-    uint32_t    count   = fwriteInternal(line.c_str(), 1, line.size(), m_file);
+    auto    line    = line_ + "\n";
+    size_t	count   = fwriteInternal(line.c_str(), 1, line.size(), m_file);
 
     if (count != line.size())
         throw std::runtime_error(

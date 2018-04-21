@@ -20,6 +20,9 @@ namespace implementation {
 namespace platform {
 
 
+//typedef unix::CSocket CSocket;
+
+
 class CSocket: public unix::CSocket {
 public:
     DEFINE_CREATE(CSocket)
@@ -27,13 +30,12 @@ public:
     virtual ~CSocket() = default;
 
     void listen() override;
-    TSocketStreams accept() override;
+    TEvents accept() override;
 private:
     std::vector<struct kevent>  m_events;
     std::vector<struct kevent>  m_monitor_events;
     size_t                      m_monitor_events_used_count;
-
-    int m_kqueue;
+    int                         m_kqueue;
 };
 
 

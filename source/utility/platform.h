@@ -5,6 +5,8 @@
 #ifdef __linux
 #ifndef ANDROID
 #define LINUX_PLATFORM
+#undef linux
+#undef unix
 #define PLATFORM_PATH platform/linux/
 #endif
 #endif
@@ -60,7 +62,7 @@
 #define PLATFORM_IDENT(x) x
 #define PLATFORM_XSTR(x) #x
 #define PLATFORM_STR(x) PLATFORM_XSTR(x)
-#define PLATFORM_HEADER(y) PLATFORM_STR(PLATFORM_IDENT(PLATFORM_PATH)PLATFORM_IDENT(y))
+#define PLATFORM_HEADER(file_name) PLATFORM_STR(PLATFORM_IDENT(PLATFORM_PATH)PLATFORM_IDENT(file_name))
 
 
 #if _WIN32 || _WIN64

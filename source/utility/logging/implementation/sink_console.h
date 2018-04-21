@@ -3,9 +3,7 @@
 
 
 #include "utility/smart_ptr.h"
-#include "utility/logging/sink.h"
 #include "utility/logging/event.h"
-#include "utility/threading/implementation/worker.h"
 
 #include "sink.h"
 
@@ -15,20 +13,19 @@ namespace logging {
 namespace implementation {
 
 
-class CSinkConsole:
-    public std::enable_shared_from_this<CSinkConsole>,
-    public CSink,
-    public threading::IWorkerHandler<TEvent>
-{
+class CSinkConsole: public CSink {
 public:
-    DEFINE_CREATE(CSinkConsole)
+    DEFINE_IMPLEMENTATION(CSinkConsole)
     explicit CSinkConsole(TEvent::TLevel const &level);
-    virtual ~CSinkConsole() = default;
 
 private:
-    TItems handle(TItems const &events) override;
-    void initialize() override;
-    void finalize() override;
+    class CWorkerHandler: public threading::IWorkerHandler<TEvent> {
+    public:
+        DEFINE_IMPLEMENTATION(CWorkerHandler)
+        TItems handle(TItems const &events) override;
+        void initialize() override;
+        void finalize() override;
+    };
 };
 
 
