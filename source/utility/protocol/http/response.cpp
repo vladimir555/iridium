@@ -56,7 +56,7 @@ THttp::THeaders::THTTPDate convertToHTTPDate(string const &source) {
         throw std::runtime_error("parsing http date string error: '" + source + "'");
 
     return THttp::THeaders::THTTPDate( {
-        convertion::convert<std::chrono::high_resolution_clock::time_point>(
+        convertion::convert<std::chrono::system_clock::time_point>(
             items[3] + "-" + rjust(convertion::convert<string>(month_number), 2, '0') + "-" + items[1] + " " + items[4]
     ) } ); // ----->
 }
@@ -65,7 +65,9 @@ THttp::THeaders::THTTPDate convertToHTTPDate(string const &source) {
 string convert(THttp::THeaders::THTTPDate const &source) {
     string date = convertion::convert<string>(source.date);
     // 2009-07-27 12:28:53
-    return days[0] + ", " + date.substr(8, 2) + " " + months[convertion::convert<uint64_t>(date.substr(5, 2))] + " " + date.substr(0, 4) + " " +
+    return days[0] + ", " + date.substr(8, 2) + " " + 
+        months[convertion::convert<unsigned int>(date.substr(5, 2))] + 
+        " " + date.substr(0, 4) + " " +
         date.substr(11, 8) + " GMT"; // ----->
 }
 

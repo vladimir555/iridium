@@ -236,20 +236,19 @@ TEST(networking, http_response) {
 }
 
 
-TEST(networking, http_server) {
-    return;
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
-    try {
-        auto server = CSocket::create(URL("http://127.0.0.1:55555"), CProtocol::create(), 2);
-        server->initialize();
-        LOGT << "start !";
-        sleep(1000);
-        LOGT << "stop";
-        server->finalize();
-    } catch (std::exception const &e) {
-        LOGE << e.what();
-    }
-}
+//TEST(networking, http_server) {
+//    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+//    try {
+//        auto server = CSocket::create(URL("http://127.0.0.1:55555"), CProtocol::create(), 2);
+//        server->initialize();
+//        LOGT << "start !";
+//        sleep(1000);
+//        LOGT << "stop";
+//        server->finalize();
+//    } catch (std::exception const &e) {
+//        LOGE << e.what();
+//    }
+//}
 
 
 } // socket

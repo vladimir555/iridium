@@ -81,8 +81,9 @@ URL::URL(std::string const &url)
             for (auto const &ip_byte : ip)
                 ipv4.push_back(convert<uint8_t>(ip_byte));
 
-            m_ipv4 = make_shared<vector<uint8_t> >(ipv4);
+            m_ipv4 = make_shared<TIPv4 const>(ipv4);
         } catch (...) {
+            m_ipv4.reset();
         }
     }
 
@@ -94,12 +95,12 @@ URL::URL(std::string const &url)
 
 URL::TIPv4SharedPtr const URL::getIPv4() const {
     if (m_ipv4)
-        return this->m_ipv4; // ----->
+        return m_ipv4; // ----->
     else {
         if (m_host)
-            return std::make_shared<TIPv4 const>(utility::networking::getIPv4ByHost(*m_host));
+            return make_shared<TIPv4 const>(getIPv4ByHost(*m_host)); // ----->
         else
-            return nullptr;
+            return nullptr; // ----->
     }
 }
 
@@ -107,11 +108,12 @@ URL::TIPv4SharedPtr const URL::getIPv4() const {
 std::string const URL::getIPv4AsString() const {
     string result;
 
-
     auto ipv4 = getIPv4();
     if (ipv4 && ipv4->size() == 4)
         for (auto const ip : (*ipv4))
             result += convert<string>(ip) + ".";
+    else
+        return ""; // ----->
 
     return result.substr(0, result.size() - 1); // ----->
 }

@@ -92,7 +92,7 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop() {
-    while (true) {
+    while (m_is_do_wait) {
         wait();
         LOCK_SCOPE_FAST;
         if (!m_items.empty() || !m_is_do_wait)

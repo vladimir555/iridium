@@ -63,20 +63,20 @@ namespace implementation {
 std::atomic<int> config::double_precission(5);
 
 
-template<>
-string convert(high_resolution_clock::time_point const &value) {
-    auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();
-    auto ms         = value_ms % 1000;
-    time_t t        = value_ms / 1000;
-    auto tm_        = platform::gmtime(&t);
-
-    if (tm_) {
-        char buffer[time_to_string_buffer_size];
-        strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), tm_);
-        return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
-    } else
-        throw runtime_error("convert time_t (gmtime) to string error"); // ----->
-}
+//template<>
+//string convert(high_resolution_clock::time_point const &value) {
+//    auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();
+//    auto ms         = value_ms % 1000;
+//    time_t t        = value_ms / 1000;
+//    auto tm_        = platform::gmtime(&t);
+//
+//    if (tm_) {
+//        char buffer[time_to_string_buffer_size];
+//        strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), tm_);
+//        return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
+//    } else
+//        throw runtime_error("convert time_t (gmtime) to string error"); // ----->
+//}
 
 
 template<>
@@ -251,35 +251,35 @@ std::string convert(std::thread::id const &value) {
 }
 
 
-template<>
-high_resolution_clock::time_point convert(string const &value) {
-    if (value.size() != time_scan_format_size)
-        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
-
-    struct std::tm  tm_ = {};
-    int ms      = 0;
-    int result  = platform::sscanf(value.c_str(), time_scan_format.c_str(),
-        &tm_.tm_year,
-        &tm_.tm_mon,
-        &tm_.tm_mday,
-        &tm_.tm_hour,
-        &tm_.tm_min,
-        &tm_.tm_sec,
-        &ms);
-
-    tm_.tm_year -= 1900;
-    tm_.tm_mon  -= 1;
-
-    if (result == 7) {
-        auto time = platform::mkgmtime(&tm_);
-
-        if (time < 0)
-            throw runtime_error("convert '" + value + "' to time_t error, mkgmtime error"); // ----->
-
-        return high_resolution_clock::time_point(std::chrono::seconds(time)) + std::chrono::milliseconds(ms); // ----->
-    } else
-        throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
-}
+//template<>
+//high_resolution_clock::time_point convert(string const &value) {
+//    if (value.size() != time_scan_format_size)
+//        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
+//
+//    struct std::tm  tm_ = {};
+//    int ms      = 0;
+//    int result  = platform::sscanf(value.c_str(), time_scan_format.c_str(),
+//        &tm_.tm_year,
+//        &tm_.tm_mon,
+//        &tm_.tm_mday,
+//        &tm_.tm_hour,
+//        &tm_.tm_min,
+//        &tm_.tm_sec,
+//        &ms);
+//
+//    tm_.tm_year -= 1900;
+//    tm_.tm_mon  -= 1;
+//
+//    if (result == 7) {
+//        auto time = platform::mkgmtime(&tm_);
+//
+//        if (time < 0)
+//            throw runtime_error("convert '" + value + "' to time_t error, mkgmtime error"); // ----->
+//
+//        return high_resolution_clock::time_point(std::chrono::seconds(time)) + std::chrono::milliseconds(ms); // ----->
+//    } else
+//        throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
+//}
 
 
 template<>

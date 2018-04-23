@@ -14,10 +14,7 @@ namespace implementation {
 
 class CTimedMutex : public CBaseMutex {
 public:
-    ///
-    CTimedMutex() = default;
-    ///
-    virtual ~CTimedMutex() = default;
+    DEFINE_IMPLEMENTATION(CTimedMutex)
     ///
     void lock() const override;
     ///

@@ -128,5 +128,7 @@ void itoa(uint64_t const &value, char *buffer, int const &base) {
 
 
 #else
+#ifndef _MSC_VER
 void dummy() {}
+#endif
 #endif // UNIX_PLATFORM

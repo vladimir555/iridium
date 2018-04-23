@@ -24,7 +24,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
     DEFINE_ATTRIBUTE_DEFAULT(TMessageLine, Message, TMessageLine( {"HTTP/1.1", 200, "OK"} ))
     DEFINE_NODE_BEGIN(Headers)
         struct THTTPDate {
-            std::chrono::high_resolution_clock::time_point date;
+            std::chrono::system_clock::time_point date;
         };
         DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, Date, THTTPDate())
         DEFINE_ATTRIBUTE_DEFAULT(std::string, server, "utility")

@@ -104,7 +104,7 @@ CSocket::TEvents CSocket::accept() {
         } else {
             auto event      = TEvent::create();
             event->action   = TEvent::TAction::ACCEPT;
-            event->socket   = socket;
+            //event->socket   = socket;
 
             events.push_back(event);
         }

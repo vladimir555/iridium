@@ -28,14 +28,12 @@
     <ClCompile Include="parsing\serialization\test_node.cpp" />
     <ClCompile Include="parsing\test_node.cpp" />
     <ClCompile Include="parsing\test_parsing.cpp" />
-    <ClCompile Include="pattern\fsm_map.cpp" />
     <ClCompile Include="pattern\fsm_switch.cpp" />
     <ClCompile Include="pattern\test_fsm.cpp" />
     <ClCompile Include="test_strings.cpp" />
     <ClCompile Include="threading\test_worker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pattern\fsm_map.h" />
     <ClInclude Include="pattern\fsm_switch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

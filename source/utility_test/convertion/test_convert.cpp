@@ -17,7 +17,7 @@
 using namespace std;
 using std::chrono::duration_cast;
 using std::chrono::nanoseconds;
-using std::chrono::high_resolution_clock;
+using std::chrono::system_clock;
 
 
 enum TAnotherEnum {
@@ -157,8 +157,6 @@ TEST(convertion, types) {
     ASSERT_EQ( "17976931348623157", convert<string>( DBL_MAX).substr(0, 17));
     ASSERT_EQ("-17976931348623157", convert<string>(-DBL_MAX).substr(0, 18));
 
-    ASSERT_EQ("ħëłlö"       , convert<string>(wstring(L"ħëłlö")));
-
     ASSERT_EQ(true          , convert<bool>(string("True")));
     ASSERT_EQ(false         , convert<bool>(string("false")));
     ASSERT_THROW(convert<bool>(string("wrong true"))    , std::exception);
@@ -176,12 +174,11 @@ TEST(convertion, types) {
     ASSERT_THROW(convert<double>(string("5.5 wrong"))   , std::exception);
     ASSERT_THROW(convert<double>(string(""))            , std::exception);
 
-    typedef std::chrono::high_resolution_clock::time_point TTime;
+    typedef system_clock::time_point TTime;
     using std::chrono::seconds;
     auto to_time_t = [] (TTime const &t) {
         return time_t(std::chrono::duration_cast<std::chrono::seconds>(t.time_since_epoch()).count());
     };
-    TTime   value;
 
     ASSERT_EQ("2015-05-05 05:05:05.000", convert<string>(TTime(seconds(1430802305))));
 
@@ -193,6 +190,8 @@ TEST(convertion, types) {
 #endif
 
     ASSERT_THROW(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
+
+    ASSERT_EQ("ħëłlö", convert<string>(wstring(L"ħëłlö")));
 }
 
 

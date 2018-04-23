@@ -5,7 +5,7 @@
 #include <utility/threading/thread.h>
 #include <utility/threading/implementation/worker.h>
 #include <utility/threading/implementation/worker_pool.h>
-#include <utility/threading/implementation/condition.h>
+#include <utility/threading/implementation/recursive_mutex.h>
 #include <utility/convertion/convert.h>
 
 
@@ -13,13 +13,13 @@ using namespace std;
 using utility::convertion::convert;
 using utility::threading::implementation::CWorker;
 using utility::threading::implementation::CWorkerPool;
-using utility::threading::implementation::CCondition;
+using utility::threading::implementation::CRecursiveMutex;
 using utility::threading::IThread;
 using utility::threading::IWorker;
 using utility::threading::IWorkerPool;
 using utility::threading::IWorkerHandler;
 using utility::threading::sleep;
-using utility::threading::ICondition;
+using utility::threading::IMutex;
 
 
 namespace {
@@ -33,6 +33,7 @@ list<int>       out;
 //list<string> in_;
 //list<string> out_;
 //ICondition::TSharedPtr  condition = CCondition::create();
+IMutex::TSharedPtr m = CRecursiveMutex::create();
 
 
 class Worker: public IWorkerHandler<int> {
@@ -43,21 +44,22 @@ public:
 private:
     TItems handle(TItems const &items) override {
         for (auto const &i: items) {
-//            cout << "processing " << i << endl;
+            //cout << "processing " << i << endl;
             out.push_back(i);
             processed++;
             sleep(10);
         }
-        sleep(100);
         return TItems();
     }
 
     void initialize() override {
-//        cout << "start" << endl;
+        m->lock();
+        //cout << "start" << endl;
     }
 
     void finalize() override {
-//        cout << "stop" << endl;
+        m->unlock();
+        //cout << "stop" << endl;
     }
 };
 
@@ -81,18 +83,27 @@ TEST(threading, worker) {
 
     worker->initialize();
 
-    for (auto const &i: in) {
+    for (auto const &i : in) {
 //        cout << "push " << i << endl;
         worker->push(i);
     }
 
     for (int i = 0; i < 10 && processed < 50; i++)
         sleep(100);
+
     worker->finalize();
+
     ASSERT_EQ(in, out);
-    sleep(100);
+
     worker->push(5);
+
+    //m->lock();
+
+    worker->finalize();
+
+    m->lock();
     ASSERT_EQ(in, out);
+    m->unlock();
 }
 
 
@@ -118,11 +129,19 @@ TEST(threading, worker_pool) {
         sleep(10);
     }
 
-    for (int i = 0; i < 10 && processed < 50; i++)
-        sleep(100);
+    //for (int i = 0; i < 10 && processed < 50; i++)
+    //    sleep(100);
+
+    //m->lock();
+
     worker_pool->finalize();
+
+    m->lock();
+
     out.sort();
+
     ASSERT_EQ(in, out);
+    m->unlock();
 }
 
 

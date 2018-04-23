@@ -48,9 +48,6 @@
     <ClCompile Include="parsing\test_parsing.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="pattern\fsm_map.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="pattern\fsm_switch.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
@@ -59,9 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pattern\fsm_map.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="pattern\fsm_switch.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>

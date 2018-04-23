@@ -25,10 +25,6 @@
     <ClInclude Include="caching\lazy_cacher.h" />
     <ClInclude Include="convertion\convert.h" />
     <ClInclude Include="convertion\implementation\convert.h" />
-    <ClInclude Include="convertion\implementation\platform\freebsd\convert.h" />
-    <ClInclude Include="convertion\implementation\platform\linux\convert.h" />
-    <ClInclude Include="convertion\implementation\platform\macos\convert.h" />
-    <ClInclude Include="convertion\implementation\platform\unix\convert.h" />
     <ClInclude Include="convertion\implementation\platform\windows\convert.h" />
     <ClInclude Include="convertion\implementation\type_name.h" />
     <ClInclude Include="convertion\type_name.h" />
@@ -64,14 +60,6 @@
     <ClInclude Include="networking\client\socket.h" />
     <ClInclude Include="networking\dns.h" />
     <ClInclude Include="networking\implementation\dns.h" />
-    <ClInclude Include="networking\implementation\platform\freebsd\dns.h" />
-    <ClInclude Include="networking\implementation\platform\freebsd\socket.h" />
-    <ClInclude Include="networking\implementation\platform\linux\dns.h" />
-    <ClInclude Include="networking\implementation\platform\linux\socket.h" />
-    <ClInclude Include="networking\implementation\platform\macos\dns.h" />
-    <ClInclude Include="networking\implementation\platform\macos\socket.h" />
-    <ClInclude Include="networking\implementation\platform\unix\dns.h" />
-    <ClInclude Include="networking\implementation\platform\unix\socket.h" />
     <ClInclude Include="networking\implementation\platform\windows\dns.h" />
     <ClInclude Include="networking\implementation\platform\windows\socket.h" />
     <ClInclude Include="networking\implementation\socket.h" />
@@ -137,8 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp" />
-    <ClCompile Include="convertion\implementation\platform\macos\convert.cpp" />
-    <ClCompile Include="convertion\implementation\platform\unix\convert.cpp" />
     <ClCompile Include="convertion\implementation\platform\windows\convert.cpp" />
     <ClCompile Include="convertion\implementation\type_name.cpp" />
     <ClCompile Include="db\config.cpp" />
@@ -159,10 +145,6 @@
     <ClCompile Include="logging\logger.cpp" />
     <ClCompile Include="logging\sink.cpp" />
     <ClCompile Include="networking\client\implementation\socket.cpp" />
-    <ClCompile Include="networking\implementation\platform\freebsd\socket.cpp" />
-    <ClCompile Include="networking\implementation\platform\linux\socket.cpp" />
-    <ClCompile Include="networking\implementation\platform\unix\dns.cpp" />
-    <ClCompile Include="networking\implementation\platform\unix\socket.cpp" />
     <ClCompile Include="networking\implementation\platform\windows\dns.cpp" />
     <ClCompile Include="networking\implementation\platform\windows\socket.cpp" />
     <ClCompile Include="networking\implementation\socket_handler.cpp" />

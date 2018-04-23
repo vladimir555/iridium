@@ -14,11 +14,9 @@ using std::make_shared;
 using std::string;
 using std::cerr;
 using std::chrono::milliseconds;
-
 using utility::convertion::convert;
 
-auto now = std::chrono::high_resolution_clock::now;
-
+auto now = std::chrono::system_clock::now;
 
 static auto const THREAD_START_TIMEOUT_MS = 10000;
 

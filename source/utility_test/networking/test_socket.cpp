@@ -113,17 +113,17 @@ TEST(networking, socket) {
 }
 
 
-TEST(networking, dns) {
-    auto ipv4 = getIPv4ByHost("ya.ru");
-
-    cout << "ya.ru ip: "
-         << static_cast<int>(ipv4[0]) << "."
-         << static_cast<int>(ipv4[1]) << "."
-         << static_cast<int>(ipv4[2]) << "."
-         << static_cast<int>(ipv4[3]) << endl;
-
-    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
-}
+//TEST(networking, dns) {
+//    auto ipv4 = getIPv4ByHost("ya.ru");
+//
+//    cout << "ya.ru ip: "
+//         << static_cast<int>(ipv4[0]) << "."
+//         << static_cast<int>(ipv4[1]) << "."
+//         << static_cast<int>(ipv4[2]) << "."
+//         << static_cast<int>(ipv4[3]) << endl;
+//
+//    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
+//}
 
 
 // -----

@@ -29,6 +29,7 @@ using std::wstring;
 using std::vector;
 
 
+#include "utility/logging/logger.h"
 namespace utility {
 namespace networking {
 namespace implementation {
@@ -43,7 +44,7 @@ TIPv4 WSA::getIPv4ByName(std::string const &name) {
     hints.ai_family     = AF_UNSPEC;    // use AF_INET6 to force IPv6
     hints.ai_socktype   = SOCK_STREAM;
 
-    int error_code     = getaddrinfo(name.c_str(), "http", &hints, &servinfo);
+    int error_code      = getaddrinfo(name.c_str(), "http", &hints, &servinfo);
 
     if (servinfo) {
         auto ipv4_value =
@@ -101,19 +102,19 @@ SOCKET WSA::connect(URL const &url) {
 
     auto ipv4 = *url.getIPv4();
 
-    address.sin_family = AF_INET;
+    address.sin_family  = AF_INET;
     auto a = (ipv4[0] << 24) | (ipv4[1] << 16) | (ipv4[2] << 8) | ipv4[3];
-    address.sin_addr = *(struct in_addr *)&a;
-    address.sin_port = *url.getPort();
+    address.sin_addr    = *(struct in_addr *)&a;
+    address.sin_port    = *url.getPort();
 
-    //if (m_url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::UDP)
+    //if (url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::UDP)
     //    address.ai_protocol   = IPPROTO_UDP;
     //else
     //    address.ai_protocol   = IPPROTO_TCP;
 
     struct addrinfo *address_result = nullptr;
     // resolve the server address and port
-    //assertOK(::getaddrinfo(nullptr, convert<string>(*m_url.getPort()).c_str(), &address, &address_result), "socket getaddrinfo error");
+    assertOK(::getaddrinfo(nullptr, convert<string>(*url.getPort()).c_str(), reinterpret_cast<ADDRINFOA *>(&address), &address_result), "socket getaddrinfo error");
     // create a SOCKET for connecting to server
     auto socket = assertOK(::socket(address_result->ai_family, address_result->ai_socktype, address_result->ai_protocol), "socket error");
 
@@ -176,13 +177,17 @@ void WSA::setBlockingMode(SOCKET const &socket, bool const &is_blocking) {
 }
 
 
-WSA::WSA() {
+WSA::WSA()
+:
+    m_wsa_data({ 0 })
+{
     assertOK(::WSAStartup(MAKEWORD(2, 2), &m_wsa_data), "WSA startup error");
+    LOGT << "wsa startup";
 }
 
 
 WSA::~WSA() {
-    WSACleanup();
+    ::WSACleanup();
 }
 
 
@@ -235,4 +240,6 @@ string WSA::getLastWSAErrorString() {
 } // utility
 
 
+#else
+void dummy() {}
 #endif // WINDOWS_PLATFORM

@@ -162,6 +162,9 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
 } // db
 } // utility
 
+
 #else
+#ifndef _MSC_VER
 void dummy() {}
+#endif
 #endif // COMPILATION_FLAG_MYSQL

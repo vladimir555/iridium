@@ -21,18 +21,6 @@
     <ClInclude Include="caching\lazy_cacher.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="convertion\implementation\platform\freebsd\convert.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="convertion\implementation\platform\linux\convert.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="convertion\implementation\platform\macos\convert.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="convertion\implementation\platform\unix\convert.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="convertion\implementation\platform\windows\convert.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -130,30 +118,6 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="networking\client\socket.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\freebsd\dns.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\freebsd\socket.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\linux\dns.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\linux\socket.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\macos\dns.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\macos\socket.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\unix\dns.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="networking\implementation\platform\unix\socket.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="networking\implementation\platform\windows\socket.h">
@@ -410,9 +374,6 @@
     <ClCompile Include="logging\sink.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="networking\implementation\platform\unix\dns.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="networking\implementation\socket_handler.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
@@ -494,12 +455,6 @@
     <ClCompile Include="convertion\implementation\platform\windows\convert.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="convertion\implementation\platform\macos\convert.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="convertion\implementation\platform\unix\convert.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="db\implementation\connector.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
@@ -507,15 +462,6 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="networking\client\implementation\socket.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="networking\implementation\platform\freebsd\socket.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="networking\implementation\platform\linux\socket.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="networking\implementation\platform\unix\socket.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="networking\implementation\platform\windows\dns.cpp">
