@@ -17,12 +17,6 @@ using utility::convertion::convert;
 using utility::convertion::convertPtr;
 
 
-//template<>
-//size_t std::hash<utility::networking::URL>() {
-
-//}
-
-
 namespace {
 
 

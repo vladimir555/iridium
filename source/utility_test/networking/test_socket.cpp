@@ -3,7 +3,6 @@
 #include <utility/networking/client/socket.h>
 #include <utility/networking/client/implementation/socket.h>
 #include <utility/networking/server/socket.h>
-#include <utility/networking/server/implementation/socket.h>
 #include <utility/networking/dns.h>
 
 #include <utility/threading/worker_pool.h>
@@ -11,6 +10,8 @@
 #include <utility/threading/implementation/runnuble.h>
 #include <utility/threading/implementation/worker_pool.h>
 #include <utility/threading/implementation/worker.h>
+
+#include <utility/logging/logger.h>
 
 #include <utility/convertion/convert.h>
 
@@ -172,6 +173,37 @@ TEST(networking, socket) {
 //TEST(networking, socket_action) {
 
 //}
+
+
+TEST(networking, url) {
+    ASSERT_THROW(URL(""), std::exception);
+    ASSERT_THROW(URL("172.16.0.64"), std::exception);
+    ASSERT_THROW(URL("55555"), std::exception);
+    ASSERT_THROW(URL(":55555"), std::exception);
+    ASSERT_THROW(URL("::"), std::exception);
+
+    URL url("https://172.16.0.64:55555");
+
+    ASSERT_TRUE(static_cast<bool>(url.getHost()));
+    ASSERT_TRUE(static_cast<bool>(url.getIPv4()));
+    ASSERT_TRUE(static_cast<bool>(url.getPort()));
+    ASSERT_TRUE(static_cast<bool>(url.getProtocol()));
+
+    ASSERT_EQ(URL::TProtocol::HTTPS, url.getProtocol());
+    ASSERT_EQ(std::vector<uint8_t>({ 172, 16, 0, 64 }), *url.getIPv4());
+    ASSERT_EQ("172.16.0.64", url.getIPv4AsString());
+    ASSERT_EQ(55555, *url.getPort());
+
+    url = convert<URL>(string("http://hostname.ru"));
+    ASSERT_TRUE(static_cast<bool>(url.getHost()));
+    ASSERT_EQ("hostname.ru", *url.getHost());
+
+    // test dns resolver
+    ASSERT_TRUE(URL("http://ya.ru").getIPv4());
+    ASSERT_LE(static_cast<size_t>(7), URL("http://ya.ru").getIPv4AsString().size());
+    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
+    ASSERT_THROW(URL("http://ya.rur").getIPv4AsString(), std::exception);
+}
 
 
 } // socket

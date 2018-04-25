@@ -22,9 +22,8 @@
     <ClCompile Include="convertion\test_convert.cpp" />
     <ClCompile Include="db\test_db.cpp" />
     <ClCompile Include="logging\test_logger.cpp" />
-    <ClCompile Include="networking\test_http.cpp" />
+    <ClCompile Include="parsing\serialization\test_http.cpp" />
     <ClCompile Include="networking\test_socket.cpp" />
-    <ClCompile Include="networking\test_url.cpp" />
     <ClCompile Include="parsing\serialization\test_node.cpp" />
     <ClCompile Include="parsing\test_node.cpp" />
     <ClCompile Include="parsing\test_parsing.cpp" />

@@ -46,14 +46,8 @@ private:
 
     std::string getLastWSAErrorString();
 
-    template<typename T>
-    T assertOK(T const &result, std::string const &message);
-
-    template<>
-    SOCKET WSA::assertOK(SOCKET const &socket, std::string const &message);
-
-    template<>
-    int WSA::assertOK(int const &result, std::string const &message);
+    SOCKET  WSA::assertOK(SOCKET const &socket, std::string const &message);
+    void    WSA::assertOK(int    const &result, std::string const &message);
 
     WSADATA m_wsa_data;
 };

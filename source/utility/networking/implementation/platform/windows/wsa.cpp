@@ -30,6 +30,7 @@ using std::vector;
 
 
 #include "utility/logging/logger.h"
+#include <iostream>
 namespace utility {
 namespace networking {
 namespace implementation {
@@ -37,10 +38,9 @@ namespace platform {
 
 
 TIPv4 WSA::getIPv4ByName(std::string const &name) {
-    struct addrinfo hints, *servinfo;
+    struct addrinfo hints = { 0 }, *servinfo = nullptr;
     TIPv4           ipv4;
 
-    memset(&hints, 0, sizeof hints);
     hints.ai_family     = AF_UNSPEC;    // use AF_INET6 to force IPv6
     hints.ai_socktype   = SOCK_STREAM;
 
@@ -62,7 +62,7 @@ TIPv4 WSA::getIPv4ByName(std::string const &name) {
         freeaddrinfo(servinfo);
     };
 
-    assertOK(error_code, "get ip by host name '" + name + "' error: " + getLastWSAErrorString());
+    assertOK(error_code, "get ip by host name '" + name + "' error");
 
     return ipv4; // ----->
 }
@@ -86,9 +86,11 @@ TPacket WSA::read(SOCKET const &socket, size_t const &size) {
 
 
 size_t  WSA::write(SOCKET const &socket, TPacket const &packet) {
-    return assertOK(
-        ::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())), packet.size(), 0), 
-        "socket write error"); // ----->
+    auto result = ::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())), packet.size(), 0);
+    if (result == SOCKET_ERROR)
+        assertOK(result, "socket write error"); // ----->
+
+    return result; // ----->
 }
 
 
@@ -182,7 +184,6 @@ WSA::WSA()
     m_wsa_data({ 0 })
 {
     assertOK(::WSAStartup(MAKEWORD(2, 2), &m_wsa_data), "WSA startup error");
-    LOGT << "wsa startup";
 }
 
 
@@ -191,27 +192,19 @@ WSA::~WSA() {
 }
 
 
-template<>
 SOCKET WSA::assertOK(SOCKET const &socket, std::string const &message) {
     if (socket == INVALID_SOCKET) {
         auto error = getLastWSAErrorString();
         closesocket(socket);
-        WSACleanup();
         throw std::runtime_error(message + ": " + error); // ----->
     } else
         return std::move(socket); // ----->
 }
 
 
-template<>
-int WSA::assertOK(int const &result, std::string const &message) {
-    if (result == 0)
-        return std::move(result); // ----->
-    else {
-        auto error = getLastWSAErrorString();
-        WSACleanup();
-        throw std::runtime_error(message + ": " + error); // ----->
-    }
+void WSA::assertOK(int const &result, std::string const &message) {
+    if (result != 0)
+        throw std::runtime_error(message + ": " + getLastWSAErrorString()); // ----->
 }
 
 
