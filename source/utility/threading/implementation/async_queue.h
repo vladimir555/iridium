@@ -48,9 +48,9 @@ public:
 
 private:
     std::list<TItem>        m_items;
-    ICondition::TSharedPtr  m_condition;    
     std::atomic<bool>       m_is_do_wait;
     std::atomic<bool>       m_is_empty;
+    ICondition::TSharedPtr  m_condition;
 };
 
 

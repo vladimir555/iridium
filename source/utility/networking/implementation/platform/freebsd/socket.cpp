@@ -129,20 +129,20 @@ ISocket::TEvents CSocket::accept() {
             sockets_events.insert(sockets_events.end(), sse.begin(), sse.end());
         } else {
             try {
-                auto socket_event       = TEvent::create();
+//                auto socket_event       = TEvent::create();
 
-//                socket_event->socket = findAcceptedSocket(m_events[i].ident);
+////                socket_event->socket = findAcceptedSocket(m_events[i].ident);
 
-                auto socket             = CSocket::create(getPeerURL(m_events[i].ident));
-                socket->m_socket_fd     = m_events[i].ident;
-                socket->m_encryptor     = m_encryptor;
-                socket_event->socket    = socket;
+//                auto socket             = CSocket::create(getPeerURL(m_events[i].ident));
+//                socket->m_socket_fd     = m_events[i].ident;
+//                socket->m_encryptor     = m_encryptor;
+//                socket_event->socket    = socket;
 
-                if (m_events[i].fflags & EVFILT_READ)
-                    socket_event->action = TEvent::TAction::READ;
-                if (m_events[i].fflags & EVFILT_WRITE)
-                    socket_event->action = TEvent::TAction::WRITE;
-                sockets_events.push_back(socket_event);
+//                if (m_events[i].fflags & EVFILT_READ)
+//                    socket_event->action = TEvent::TAction::READ;
+//                if (m_events[i].fflags & EVFILT_WRITE)
+//                    socket_event->action = TEvent::TAction::WRITE;
+//                sockets_events.push_back(socket_event);
 
 //                auto socket = unix::CSocket::createInternal(m_events[i].ident);
 //                if (socket)

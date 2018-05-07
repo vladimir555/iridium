@@ -78,7 +78,7 @@ CWorkerPool<TItem>::CWorkerPool(
 
 template<typename TItem>
 void CWorkerPool<TItem>::initialize() {
-    static auto const THREAD_START_TIMEOUT_MS = 10000;
+//    static auto const THREAD_START_TIMEOUT_MS = 10000;
 
     for (auto &worker: m_workers)
         worker->initialize();

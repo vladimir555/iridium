@@ -18,7 +18,7 @@ using utility::convertion::convert;
 
 auto now = std::chrono::system_clock::now;
 
-static auto const THREAD_START_TIMEOUT_MS = 10000;
+//static auto const THREAD_START_TIMEOUT_MS = 10000;
 
 
 namespace utility {

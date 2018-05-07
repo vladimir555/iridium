@@ -25,7 +25,7 @@ using std::chrono::high_resolution_clock;
 using std::chrono::seconds;
 
 
-auto const DEFAULT_READ_TIMEOUT = seconds(5);
+//auto const DEFAULT_READ_TIMEOUT = seconds(5);
 
 
 namespace utility {
@@ -52,8 +52,8 @@ void CSocket::finalize() {
 
 CSocket::CAcceptor::CAcceptor(URL const &url, IProtocol::TSharedPtr const &protocol, int const &count)
 :
-    m_socket    (networking::implementation::CSocket::create(url)),
-    m_protocol  (SynchronizedProtocolHandler::create(protocol))
+    m_protocol  (SynchronizedProtocolHandler::create(protocol)),
+    m_socket    (networking::implementation::CSocket::create(url))
 {
     TEventsHandlers handlers;
 
