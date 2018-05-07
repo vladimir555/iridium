@@ -12,16 +12,16 @@ namespace utility {
 
 
 template<typename T>
-T assertExists(T t, std::string const &error) {
+T &assertExists(T &&t, std::string const &error) {
     if (t)
-        return std::move(t); // ----->
+        return t; // ----->
     else
         throw std::runtime_error(error);
 }
 
 
 template<typename T>
-T assertSize(T const &&t, size_t const &size, std::string const &error) {
+T &assertSize(T &&t, size_t const &size, std::string const &error) {
     if (t.size() == size)
         return t; // ----->
     else
@@ -32,13 +32,13 @@ T assertSize(T const &&t, size_t const &size, std::string const &error) {
 
 
 template<typename T>
-T assertOne(T const &&t, std::string const &error) {
+T &assertOne(T &&t, std::string const &error) {
     return assertSize(t, 1, error); // ----->
 }
 
 
 template<typename T>
-T assertComplete(T const &&t, std::string const &error) {
+T &assertComplete(T &&t, std::string const &error) {
     if (t.size() >= 1)
         return t; // ----->
     else

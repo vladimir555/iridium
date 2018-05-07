@@ -24,12 +24,13 @@ class CWorker: public IWorker<TItem> {
 public:
     DEFINE_CREATE(CWorker<TItem>)
     CWorker(
-        std::string const &name,
-        typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler);
+        std::string                                 const &name,
+        typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler);
     CWorker(
-        std::string const &name,
-        typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler,
-        typename IAsyncQueue<TItem>::TSharedPtr    const &async_queue);
+        std::string                                 const &name,
+        typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler,
+        typename IAsyncQueue<TItem>::TSharedPtr     const &async_queue,
+        IAsyncQueue<bool>::TSharedPtr               const &thread_working_status_queue);
     virtual ~CWorker() = default;
 
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
@@ -61,8 +62,8 @@ private:
 
 template<typename TItem>
 CWorker<TItem>::CWorker(
-    std::string const &name,
-    typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler)
+    std::string                                 const &name,
+    typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler)
 :
     m_worker_handler    (worker_handler),
     m_async_queue       (CAsyncQueue<TItem>::create()),
@@ -73,14 +74,15 @@ CWorker<TItem>::CWorker(
 
 template<typename TItem>
 CWorker<TItem>::CWorker(
-    std::string const &name,
-    typename IWorkerHandler<TItem>::TSharedPtr const &worker_handler,
-    typename IAsyncQueue<TItem>::TSharedPtr    const &async_queue)
+    std::string                                 const &name,
+    typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler,
+    typename IAsyncQueue<TItem>::TSharedPtr     const &async_queue,
+    IAsyncQueue<bool>::TSharedPtr               const &thread_working_status_queue)
 :
     m_worker_handler    (worker_handler),
     m_async_queue       (async_queue),
     m_runnuble          (Runnuble::create(*this)),
-    m_thread            (CThread::create(m_runnuble, name))
+    m_thread            (CThread::create(m_runnuble, name, thread_working_status_queue))
 {}
 
 

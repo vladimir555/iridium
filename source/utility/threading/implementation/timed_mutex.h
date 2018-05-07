@@ -19,9 +19,9 @@ public:
     void lock() const override;
     ///
     void unlock() const override;
-private:
+protected:
     ///
-    mutable std::recursive_timed_mutex m_timed_mutex;
+    mutable std::recursive_timed_mutex m_mutex;
 };
 
 

@@ -8,27 +8,30 @@
 
 #include "wsa.h"
 
+#include "utility/threading/thread.h"
+
 
 int const DEFAULT_BUFFER_SIZE = 512;
 
 
+#include "utility/logging/logger.h"
 namespace utility {
 namespace networking {
 namespace implementation {
 namespace platform {
 
 
-CSocket::CSocket(URL const &url, SOCKET const &socket)
-:
-    m_url   (url), 
-    m_socket(socket)
-{}
-
-
 CSocket::CSocket(URL const &url)
 :
     m_url(url) 
 {}
+
+
+CSocket::CSocket(URL const &url, SOCKET const &socket)
+:
+    m_url   (url),
+    m_socket(socket) {
+}
 
 
 size_t CSocket::write(TPacket const &packet) {
@@ -62,12 +65,17 @@ URL CSocket::getURL() const {
 
 void CSocket::listen() {
     m_socket = WSA::instance().listen(m_url);
+    WSA::instance().setBlockingMode(m_socket, false);
 }
 
 
 CSocket::TEvents CSocket::accept() {
-    CSocket::TEvents events;
-    WSA::instance().accept(m_socket);
+    TEvents events;
+    threading::sleep(1000);
+    LOGT << "try accept";
+    auto s = WSA::instance().accept(m_socket);
+    LOGT << "s = " << s;
+    //events.push_back(TEvent::create(TEvent::TAction::ACCEPT, CSocket::create(m_url, WSA::instance().accept(m_socket))));
     return events;
 }
 

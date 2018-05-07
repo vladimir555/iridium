@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="caching\cached_value.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="caching\lazy_cacher.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="convertion\implementation\platform\windows\convert.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -322,6 +316,12 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="networking\implementation\platform\windows\wsa.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="caching\cached_value.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="caching\lazy_cacher.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

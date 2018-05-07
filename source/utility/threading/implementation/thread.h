@@ -7,7 +7,7 @@
 #include "utility/threading/runnable.h"
 #include "utility/pattern/non_copyable.h"
 
-#include "condition.h"
+#include "async_queue.h"
 
 #include <thread>
 #include <atomic>
@@ -26,7 +26,10 @@ class CThread:
 public:
     DEFINE_CREATE(CThread)
     ///
-    CThread(IRunnable::TSharedPtr const &runnuble, std::string const &name);
+    CThread(
+        IRunnable::TSharedPtr           const &runnuble, 
+        std::string                     const &name, 
+        IAsyncQueue<bool>::TSharedPtr   const &thread_working_status_queue = nullptr);
     ///
     virtual ~CThread() = default;
     ///
@@ -48,10 +51,10 @@ protected:
     ///
     std::string                     m_runnuble_name;
     ///
-    static void run(IRunnable::TSharedPtr const &runnuble, ICondition::TSharedPtr const &is_started_condition/*std::atomic<bool> *is_thread_running*/);
+    static void run(IRunnable::TSharedPtr const &runnuble, IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue);
 private:
     ///
-    ICondition::TSharedPtr          m_is_started_condition;
+    IAsyncQueue<bool>::TSharedPtr m_thread_working_status_queue;
 };
 
 

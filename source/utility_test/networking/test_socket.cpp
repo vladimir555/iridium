@@ -1,38 +1,22 @@
 #include <gtest/gtest.h>
 
-#include <utility/networking/client/socket.h>
 #include <utility/networking/client/implementation/socket.h>
-#include <utility/networking/server/socket.h>
+#include <utility/networking/server/implementation/socket.h>
+#include <utility/networking/url.h>
 #include <utility/networking/dns.h>
-
-#include <utility/threading/worker_pool.h>
-#include <utility/threading/implementation/thread.h>
-#include <utility/threading/implementation/runnuble.h>
-#include <utility/threading/implementation/worker_pool.h>
-#include <utility/threading/implementation/worker.h>
-
+#include <utility/protocol/http/implementation/protocol.h>
+#include <utility/protocol/http/implementation/uri_fs_mapper.h>
 #include <utility/logging/logger.h>
-
 #include <utility/convertion/convert.h>
+#include <utility/networking/implementation/platform/windows/wsa.h>
+#include <utility/threading/thread.h>
 
 
 using namespace std;
 
 using utility::networking::getIPv4ByHost;
-
-using utility::threading::IWorkerPool;
-using utility::threading::IWorkerHandler;
-using utility::threading::IAsyncQueue;
-using utility::threading::IThread;
-using utility::threading::getThreadID;
-using utility::threading::sleep;
-using utility::threading::implementation::CAsyncQueue;
-using utility::threading::implementation::CThread;
-using utility::threading::implementation::CWorker;
-using utility::threading::implementation::CWorkerPool;
-using utility::threading::implementation::CRunnuble;
-
 using utility::convertion::convert;
+using utility::threading::sleep;
 
 
 namespace utility {
@@ -40,139 +24,41 @@ namespace networking {
 namespace socket {
 
 
-class SocketAcceptorA: public IWorkerHandler<ISocketStream::TSharedPtr> {
-public:
-    DEFINE_CREATE(SocketAcceptorA)
-    SocketAcceptorA() = default;
-   ~SocketAcceptorA() = default;
+TEST(networking, socket_loopback) {
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
-    TItems handle(TItems const &items) override {
-        cout << "item" << endl;
-        for (auto const &i: items) {
-            try {
-                auto packet = i->read();
-//                cout << "packet size " << packet.size() << endl;
-//                cout << "packet: " << convert<string>(packet) << endl;
+    protocol::http::IHTTPHandler::TSharedPtr    http_handler = 
+        protocol::http::implementation::CURIFSMapper::create(".");
+    protocol::IProtocol::TSharedPtr             protocol = 
+        protocol::http::implementation::CProtocol::create(http_handler);
+    server::ISocket::TSharedPtr                 socket = 
+        server::implementation::CSocket::create(URL("http://127.0.0.1:55555"), protocol, 2);
 
-                string message = "<html><head><title>utility</title></head>"
-                                 "<body>answer from thread " + getThreadID() + "</body></html>\n";
-                //sleep(5000);
-                auto write_packet = convert<ISocket::TPacket>(string(
-                    "HTTP/1.1 200 OK\n"
-                    "Server: utility/1.0.0\n"
-                    "Date: Sat, 08 Mar 2014 22:53:46 GMT\n"
-                    "Content-Type: text/html\n"
-                    "Content-Length: " + convert<string>(message.size()) + "\n"
-                    "Last-Modified: Sat, 08 Mar 2014 22:53:30 GMT\n"
-                    "Connection: keep-alive\n"
-                    "Accept-Ranges: bytes\n\n\n"
-                    ) + message);
-
-                i->write(write_packet);
-                i->close();
-            } catch (std::exception const &e) {
-                cout << "socket error: " << e.what() << endl;
-            }
-        }
-        return TItems();
+    return;
+    try {
+        socket->initialize();
+        LOGT << "begin";
+        //threading::sleep(1000);
+        LOGT << "end";
+        socket->finalize();
+    } catch (std::exception const &e) {
+        FAIL() << e.what();
     }
-
-    void initialize() override {
-        //cout << "socket acceptor pool thread " << getThreadID() << " start" << endl;
-    }
-
-    void finalize() override {
-        //cout << "socket acceptor pool thread " << getThreadID() << " stop" << endl;
-    }
-};
-
-
-TEST(networking, socket) {
-//    URL url("tcp://127.0.0.1:55555");
-
-//    server::ISocket::TSocketStreamsHandlers handlers;
-//    handlers.push_back(SocketAcceptorA::create());
-//    server::ISocket::TSharedPtr server_socket = server::implementation::CSocket::create(URL(url), handlers);
-
-//    server_socket->initialize();
-
-//    client::ISocket::TSharedPtr client_socket = client::implementation::CSocket::create(url);
-//    //sleep(5000);
-
-//    // todo: tests
-//    for (int i = 0; i < 5; i++)
-//    try {
-//        client_socket->initialize();
-//        client_socket->write(convert<client::ISocket::TPacket>(string("test\n")));
-//        client_socket->finalize();
-//        break;
-//    } catch (std::exception const &e) {
-//        cout << "error: " << e.what() << endl;
-//    }
-
-//    server_socket->finalize();
 }
 
 
-//TEST(networking, dns) {
-//    auto ipv4 = getIPv4ByHost("ya.ru");
-//
-//    cout << "ya.ru ip: "
-//         << static_cast<int>(ipv4[0]) << "."
-//         << static_cast<int>(ipv4[1]) << "."
-//         << static_cast<int>(ipv4[2]) << "."
-//         << static_cast<int>(ipv4[3]) << endl;
-//
-//    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
-//}
+TEST(networking, dns) {
+    auto ipv4 = getIPv4ByHost("ya.ru");
 
+    //cout << "ya.ru ip: "
+    //    << static_cast<int>(ipv4[0]) << "."
+    //    << static_cast<int>(ipv4[1]) << "."
+    //    << static_cast<int>(ipv4[2]) << "."
+    //    << static_cast<int>(ipv4[3]) << endl;
 
-// -----
-
-
-//class IProtocol {
-//public:
-//    DEFINE_SMART_PTR(IProtocol)
-//    IProtocol() = default;
-//    virtual ~IProtocol() = default;
-
-//    class IPacket {
-//    public:
-//        DEFINE_SMART_PTR(IPacket)
-//        IPacket() = default;
-//        virtual ~IPacket() = default;
-
-//        ISocket::TPacket get(size_t const &lpos, size_t const &rpos);
-//    };
-
-//    IPacket::TSharedPtr exchange(IPacket::TSharedPtr const &request);
-//};
-
-
-//class ISocketAction {
-//public:
-//    DEFINE_INTERFACE(ISocketAction)
-//    virtual void doAction() = 0;
-//};
-
-
-//class SocketActionRead {
-//public:
-//    DEFINE_CREATE(SocketActionRead)
-//    void doAction();
-//};
-
-
-//class SocketActionWrite {
-//public:
-//    DEFINE_CREATE(SocketActionRead)
-//    void doAction();
-//};
-
-
-//TEST(networking, socket_action) {
-
-//}
+    ASSERT_EQ(4, ipv4.size());
+    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
+}
 
 
 TEST(networking, url) {
@@ -199,11 +85,81 @@ TEST(networking, url) {
     ASSERT_EQ("hostname.ru", *url.getHost());
 
     // test dns resolver
-    ASSERT_TRUE(URL("http://ya.ru").getIPv4());
+    ASSERT_TRUE(static_cast<bool>(URL("http://ya.ru").getIPv4()));
     ASSERT_LE(static_cast<size_t>(7), URL("http://ya.ru").getIPv4AsString().size());
-    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
     ASSERT_THROW(URL("http://ya.rur").getIPv4AsString(), std::exception);
 }
+
+
+//class A {
+//public:
+//    A() {
+//        cout << "create" << endl;
+//        i = 5;
+//    }
+//    ~A() {
+//        cout << "destroy" << endl;
+//        i = 0;
+//    }
+//    A(A const &a) {
+//        cout << "copy" << endl;
+//    }
+//    A(A const &&a) {
+//        cout << "move" << endl;
+//    }
+//    A(A &a) {
+//        cout << "copy 2" << endl;
+//    }
+//    A(A &&a) {
+//        cout << "move 2" << endl;
+//    }
+//    void f() const {
+//        cout << "func " << i << endl;
+//        i++;
+//    }
+//    mutable int i = 5;
+//};
+//
+//
+//template<typename T>
+//T &f(T &t) {
+//    return t;
+//}
+
+
+#ifdef WINDOWS_PLATFORM
+TEST(networking, wsa) {
+    return;
+    //{
+    //    A const a;
+    //    cout << "begin" << endl;
+    //    {
+    //        f(a).f();
+    //        //aa.f();
+    //    }
+    //    cout << "end" << endl;
+    //}
+    //
+    //return;
+
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+
+    using implementation::platform::WSA;
+
+    try {
+        auto listen_socket = WSA::instance().listen(URL("127.0.0.1:55555"));
+
+        LOGT << "listen_socket " << listen_socket;
+    } catch (std::exception const &e) {
+        FAIL() << e.what();
+    }
+
+    //auto accept_socket = WSA::instance().accept(listen_socket);
+
+    //LOGT << "accept_socket " << accept_socket;
+    sleep(1000);
+}
+#endif
 
 
 } // socket

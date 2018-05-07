@@ -14,7 +14,6 @@
 
 #include "condition.h"
 
-#include <iostream>
 
 namespace utility {
 namespace threading {
@@ -30,8 +29,7 @@ class CAsyncQueue:
     public  IAsyncQueue<TItem>,
     public  pattern::NonCopyable,
     public  pattern::NonMovable,
-
-    private CCondition
+    private CMutex
 {
 public:
     DEFINE_CREATE(CAsyncQueue)
@@ -49,10 +47,10 @@ public:
     virtual void interrupt() override;
 
 private:
-    ///
-    std::list<TItem>  m_items;
-    ///
-    std::atomic<bool> m_is_do_wait;
+    std::list<TItem>        m_items;
+    ICondition::TSharedPtr  m_condition;    
+    std::atomic<bool>       m_is_do_wait;
+    std::atomic<bool>       m_is_empty;
 };
 
 
@@ -60,9 +58,11 @@ private:
 
 
 template<typename TItem>
-CAsyncQueue<TItem>::CAsyncQueue() 
+CAsyncQueue<TItem>::CAsyncQueue()
 :
-    m_is_do_wait(true)
+    m_is_do_wait(true),
+    m_is_empty  (true),
+    m_condition (CCondition::create())
 {}
 
 
@@ -71,7 +71,8 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
     LOCK_SCOPE_FAST
 
     m_items.push_back(item);
-    notifyOne();
+    m_is_empty = false;
+    m_condition->notifyOne();
 
     return m_items.size(); // ----->
 }
@@ -84,7 +85,8 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
     auto items_ = items;
 
     m_items.splice(m_items.end(), items_);
-    notifyOne();
+    m_is_empty = false;
+    m_condition->notifyOne();
 
     return m_items.size(); // ----->
 }
@@ -92,20 +94,18 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop() {
-    while (m_is_do_wait) {
-        wait();
-        LOCK_SCOPE_FAST;
-        if (!m_items.empty() || !m_is_do_wait)
-            return std::move(m_items); // ----->
-    }
-    return std::list<TItem>();
+    if (m_is_do_wait && m_is_empty)
+        m_condition->wait();
+
+    LOCK_SCOPE_FAST
+    return std::move(m_items);
 }
 
 
 template<typename TItem>
 void CAsyncQueue<TItem>::interrupt() {
     m_is_do_wait = false;
-    notifyAll();
+    m_condition->notifyAll();
 }
 
 

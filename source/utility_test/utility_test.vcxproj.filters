@@ -51,6 +51,9 @@
     <ClCompile Include="parsing\serialization\test_http.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="networking\wsa_example.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pattern\fsm_switch.h">

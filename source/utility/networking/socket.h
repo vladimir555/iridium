@@ -42,6 +42,9 @@ public:
         DEFINE_SMART_PTR(TEvent)
         DEFINE_CREATE(TEvent)
         DEFINE_ENUM(TAction, ACCEPT, READ, WRITE, CLOSE)
+
+        TEvent(TAction const &action, ISocketStream::TSharedPtr const &socket) : action(action), socket(socket) {};
+
         TAction action;
         ISocketStream::TSharedPtr socket;
     };

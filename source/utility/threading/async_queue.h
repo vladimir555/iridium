@@ -13,8 +13,7 @@ namespace threading {
 template<typename TItem>
 class IAsyncQueuePusher {
 public:
-    DEFINE_SMART_PTR(IAsyncQueuePusher)
-    virtual ~IAsyncQueuePusher() = default;
+    DEFINE_INTERFACE(IAsyncQueuePusher)
 
     typedef std::list<TItem> TItems;
 
@@ -26,8 +25,7 @@ public:
 template<typename TItem>
 class IAsyncQueue: public IAsyncQueuePusher<TItem> {
 public:
-    DEFINE_SMART_PTR(IAsyncQueue)
-    virtual ~IAsyncQueue() = default;
+    DEFINE_INTERFACE(IAsyncQueue)
 
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 

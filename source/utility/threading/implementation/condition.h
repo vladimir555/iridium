@@ -15,13 +15,11 @@ namespace threading {
 namespace implementation {
 
 
-class CCondition : public CMutex, public ICondition {
+class CCondition : protected CMutex, public ICondition {
 public:
-    DEFINE_CREATE(CCondition)
+    DEFINE_IMPLEMENTATION(CCondition)
     ///
     CCondition() = default;
-    ///
-    virtual ~CCondition() = default;
     ///
     virtual void wait() const override;
     ///

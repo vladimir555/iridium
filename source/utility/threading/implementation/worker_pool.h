@@ -5,9 +5,10 @@
 #include "utility/threading/worker_pool.h"
 #include "utility/threading/thread.h"
 #include "utility/threading/worker.h"
-#include "utility/threading/implementation/worker.h"
-
 #include "utility/convertion/convert.h"
+
+#include "worker.h"
+#include "async_queue.h"
 
 #include <list>
 
@@ -23,9 +24,11 @@ namespace implementation {
 template<typename TItem>
 class CWorkerPool: public IWorkerPool<TItem> {
 public:
-    DEFINE_CREATE(CWorkerPool<TItem>)
-    explicit CWorkerPool(typename IWorkerPool<TItem>::TWorkerHandlers const &handlers, std::string const &name);
-    virtual ~CWorkerPool() = default;
+    DEFINE_IMPLEMENTATION(CWorkerPool<TItem>)
+
+    explicit CWorkerPool(
+        typename IWorkerPool<TItem>::TWorkerHandlers const &handlers, 
+        std::string const &name);
 
     typedef typename IWorkerPool<TItem>::TItems TItems;
 
@@ -36,8 +39,12 @@ public:
     size_t push(TItems const &items) override;
 
 private:
+    void waitForMultipleStatus(bool const &status);
+
+    std::string                                     m_name;
     typename IAsyncQueue<TItem>::TSharedPtr         m_queue;
     std::list<typename IWorker<TItem>::TSharedPtr>  m_workers;
+    IAsyncQueue<bool>::TSharedPtr                   m_thread_working_status_queue;
 };
 
 
@@ -45,14 +52,25 @@ private:
 
 
 template<typename TItem>
-CWorkerPool<TItem>::CWorkerPool(typename IWorkerPool<TItem>::TWorkerHandlers const &handlers, std::string const &name) {
+CWorkerPool<TItem>::CWorkerPool(
+    typename IWorkerPool<TItem>::TWorkerHandlers const &handlers, 
+    std::string const &name)
+:
+    m_name(name)
+{
     m_queue = CAsyncQueue<TItem>::create();
 
+    m_thread_working_status_queue = CAsyncQueue<bool>::create();
     auto i = 0;
     for (auto const &handler: handlers) {
         m_workers.push_back(
             CWorker<TItem>::create(
-                name + "[" + convertion::convert<std::string>(i) + "]", handler, m_queue) );
+                name + "[" + convertion::convert<std::string>(i) + "]", 
+                handler, 
+                m_queue, 
+                m_thread_working_status_queue
+            ) 
+        );
         i++;
     }
 }
@@ -60,8 +78,12 @@ CWorkerPool<TItem>::CWorkerPool(typename IWorkerPool<TItem>::TWorkerHandlers con
 
 template<typename TItem>
 void CWorkerPool<TItem>::initialize() {
+    static auto const THREAD_START_TIMEOUT_MS = 10000;
+
     for (auto &worker: m_workers)
         worker->initialize();
+
+    waitForMultipleStatus(true);
 }
 
 
@@ -69,6 +91,8 @@ template<typename TItem>
 void CWorkerPool<TItem>::finalize() {
     for (auto &worker: m_workers)
         worker->finalize();
+
+    waitForMultipleStatus(false);
 }
 
 
@@ -81,6 +105,22 @@ size_t CWorkerPool<TItem>::push(TItem const &item) {
 template<typename TItem>
 size_t CWorkerPool<TItem>::push(TItems const &items) {
     return m_queue->push(items); // ----->
+}
+
+
+template<typename TItem>
+void CWorkerPool<TItem>::waitForMultipleStatus(bool const &status) {
+    // todo: wait timeout
+    try {
+        size_t count = 0;
+        while (count < m_workers.size()) {
+            for (auto const &s : m_thread_working_status_queue->pop())
+                if (status == s)
+                    count++;
+        }
+    } catch (std::exception const &e) {
+        throw std::runtime_error("worker pool '" + m_name + "' start error: " + e.what()); // ----->
+    }
 }
 
 

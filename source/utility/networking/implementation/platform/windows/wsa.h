@@ -44,13 +44,34 @@ private:
 
     WSA();
 
-    std::string getLastWSAErrorString();
+    std::string getLastWSAErrorString() const;
 
-    SOCKET  WSA::assertOK(SOCKET const &socket, std::string const &message);
-    void    WSA::assertOK(int    const &result, std::string const &message);
+    template<typename T>
+    void assertEQ(T const &result, T const &value, std::string const &message) const;
+    template<typename T>
+    T &assertNE(T &&result, T const &value, std::string const &message) const;
 
     WSADATA m_wsa_data;
 };
+
+
+// implementation
+
+
+template<typename T>
+void WSA::assertEQ(T const &result, T const &value, std::string const &message) const {
+    if (result != value)
+        throw std::runtime_error(message + ": " + getLastWSAErrorString()); // ----->
+}
+
+
+template<typename T>
+T &WSA::assertNE(T &&result, T const &value, std::string const &message) const {
+    if (result == value)
+        throw std::runtime_error(message + ": " + getLastWSAErrorString()); // ----->
+    else
+        return result; // ----->
+}
 
 
 } // platform

@@ -24,13 +24,13 @@ namespace implementation {
 
 
 void CTimedMutex::lock() const {
-    if (!m_timed_mutex.try_lock_for(DEFAULT_LOCK_TIMEOUT))
+    if (!m_mutex.try_lock_for(DEFAULT_LOCK_TIMEOUT))
         throw std::runtime_error("timed mutex lock error: timeout " + convert<string>(DEFAULT_LOCK_TIMEOUT.count()) + " sec"); // ----->
 }
 
 
 void CTimedMutex::unlock() const {
-    m_timed_mutex.unlock();
+    m_mutex.unlock();
 }
 
 

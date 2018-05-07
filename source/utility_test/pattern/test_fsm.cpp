@@ -31,6 +31,12 @@ namespace pattern {
 */
 
 
+// todo: fsm table
+// State | Action | Result State
+// off   | push   | on
+// on    | push   | off
+
+
 DEFINE_ENUM(
     TState,
     LIGHT_OFF,
@@ -41,6 +47,12 @@ DEFINE_ENUM(
     TEvent,
     PUSH_BUTTON
 )
+
+
+class ILight: public IFSM<TEvent, TState> {
+public:
+    DEFINE_INTERFACE(ILight)
+};
 
 
 class Light: public implementation::CFSM<TEvent, TState> {

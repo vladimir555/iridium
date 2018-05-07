@@ -260,11 +260,11 @@ CSocket::TEvents CSocket::acceptInternal(std::list<int> &accepted_sockets_fd) {
                 socket->m_ssl   = m_encryptor->accept(m_socket_fd);
 
             {
-                auto event      = TEvent::create();
-                event->action   = TEvent::TAction::ACCEPT;
-                event->socket   = socket;
+                //auto event      = TEvent::create();
+                //event->action   = TEvent::TAction::ACCEPT;
+                //event->socket   = socket;
 
-                events.push_back(event);
+                //events.push_back(event);
             }
 
 //            {

@@ -68,7 +68,7 @@ private:
 
 
 namespace utility {
-namespace networking {
+namespace threading {
 
 
 TEST(threading, worker) {
@@ -84,10 +84,11 @@ TEST(threading, worker) {
     worker->initialize();
 
     for (auto const &i : in) {
-//        cout << "push " << i << endl;
+        //cout << "push " << i << endl;
         worker->push(i);
     }
 
+    // todo: waiting for single worker
     for (int i = 0; i < 10 && processed < 50; i++)
         sleep(100);
 
@@ -108,6 +109,15 @@ TEST(threading, worker) {
 
 
 TEST(threading, worker_pool) {
+    IAsyncQueue<int>::TSharedPtr q = implementation::CAsyncQueue<int>::create();
+    q->push(5);
+    q->push(55);
+    auto i = q->pop();
+
+    ASSERT_EQ(2,  i.size());
+    ASSERT_EQ(5,  i.front());
+    ASSERT_EQ(55, i.back());
+
     list<IWorkerHandler<int>::TSharedPtr > l;
 
     for (size_t i = 0; i < 10; i++)

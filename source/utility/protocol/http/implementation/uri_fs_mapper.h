@@ -18,9 +18,9 @@ namespace implementation {
 
 class CURIFSMapper: public IHTTPHandler {
 public:
-    DEFINE_CREATE(CURIFSMapper)
+    DEFINE_IMPLEMENTATION(CURIFSMapper)
+
     CURIFSMapper(std::string const &fs_path);
-    virtual ~CURIFSMapper() = default;
 
     response::THttp handle(request::THttp const &request) override;
 private:

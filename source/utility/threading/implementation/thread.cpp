@@ -3,7 +3,7 @@
 #include "utility/convertion/convert.h"
 #include "utility/assert.h"
 
-#include "condition.h"
+#include "async_queue.h"
 
 #include <chrono>
 #include <iostream>
@@ -26,22 +26,32 @@ namespace threading {
 namespace implementation {
 
 
-CThread::CThread(IRunnable::TSharedPtr const &runnuble, string const &name)
+CThread::CThread(
+    IRunnable::TSharedPtr           const &runnuble, 
+    string                          const &name, 
+    IAsyncQueue<bool>::TSharedPtr   const &thread_working_status_queue)
 :
-    m_name          (name),
-    m_runnuble      (assertExists(runnuble, "runnuble is null")),
-    m_runnuble_name (name),
-    m_is_started_condition(CCondition::create())
+    m_name                  (name),
+    m_runnuble              (assertExists(runnuble, "runnuble is null")),
+    m_runnuble_name         (name),
+    m_thread_working_status_queue(thread_working_status_queue)
 {}
 
 
 void CThread::initialize() {
     m_runnuble->initialize();
-    m_thread = make_shared<thread>(run, m_runnuble, m_is_started_condition);
-    try {
-        m_is_started_condition->wait(THREAD_START_TIMEOUT_MS);
-    } catch (std::exception const &e) {
-        throw std::runtime_error("thread '" + m_name + "' start error: " + e.what()); // ----->
+    if (m_thread_working_status_queue) {
+        m_thread = make_shared<thread>(run, m_runnuble, m_thread_working_status_queue);
+    } else {
+        m_thread_working_status_queue = CAsyncQueue<bool>::create();
+        m_thread = make_shared<thread>(run, m_runnuble, m_thread_working_status_queue);
+        try {
+            auto statuses = m_thread_working_status_queue->pop();
+            if (statuses.size() != 1 || !statuses.back())
+                throw std::runtime_error("wrong thread start status"); // ----->
+        } catch (std::exception const &e) {
+            throw std::runtime_error("thread '" + m_name + "' start error: " + e.what()); // ----->
+        }
     }
 }
 
@@ -68,10 +78,11 @@ std::string CThread::getName() const {
 }
 
 
-void CThread::run(IRunnable::TSharedPtr const &runnuble, ICondition::TSharedPtr const &is_started_condition) {
+void CThread::run(IRunnable::TSharedPtr const &runnuble, IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue) {
     try {
-        is_started_condition->notifyOne();
+        thread_working_status_queue->push(true);
         runnuble->run();
+        thread_working_status_queue->push(false);
     } catch (std::exception &e) {
         cerr << "thread error: " << e.what();
     } catch (...) {

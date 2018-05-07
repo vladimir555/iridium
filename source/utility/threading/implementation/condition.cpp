@@ -31,6 +31,7 @@ void CCondition::wait() const {
 void CCondition::wait(int const &timeout_ms) const {
     try {
         unique_lock<mutex> lock(m_mutex);
+        // todo: maybe need while !m_mutex
         m_condition.wait_for(lock, milliseconds(timeout_ms));
     } catch (std::exception const &e) {
         throw std::runtime_error("condition variable waiting error, timeout " + convert<string>(timeout_ms) + " ms: " + e.what()); // ----->

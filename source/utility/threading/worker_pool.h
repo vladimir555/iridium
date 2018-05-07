@@ -23,8 +23,7 @@ class IWorkerPool:
 public:
     typedef           IWorkerHandler<TItem> TWorkerHandler;
     typedef std::list<typename TWorkerHandler::TSharedPtr> TWorkerHandlers;
-    DEFINE_SMART_PTR(IWorkerPool<TItem>)
-    virtual ~IWorkerPool() = default;
+    DEFINE_INTERFACE(IWorkerPool<TItem>)
 };
 
 

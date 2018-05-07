@@ -102,11 +102,11 @@ CSocket::TEvents CSocket::accept() {
                 epoll_ctl(m_epoll, EPOLL_CTL_ADD, fd, &event);
             }
         } else {
-            auto event      = TEvent::create();
-            event->action   = TEvent::TAction::ACCEPT;
-            //event->socket   = socket;
+            //auto event = ISocket::TEvent::create({ 0 });
+            //event->action   = ISocket::TEvent::TAction::ACCEPT;
+            ////event->socket   = socket;
 
-            events.push_back(event);
+            //events.push_back(event);
         }
     }
     sleep(1);

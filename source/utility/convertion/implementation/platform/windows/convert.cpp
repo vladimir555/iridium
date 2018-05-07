@@ -1,3 +1,7 @@
+#include <string>
+
+#include "utility/convertion/convert.h"
+
 #include "convert.h"
 
 
@@ -7,6 +11,10 @@
 #include <stdlib.h>
 #include <ctime>
 #include <stdio.h>
+
+
+using std::string;
+using utility::convertion::convert;
 
 
 namespace utility {
@@ -60,6 +68,12 @@ __time64_t mkgmtime(struct tm * const tm_) {
 } // implementation
 } // convertuin
 } // utility
+
+
+template<>
+std::string utility::convertion::implementation::convert(unsigned long const &value) {
+    return convert<string>(static_cast<uint64_t>(value)); // ----->
+}
 
 
 #else
