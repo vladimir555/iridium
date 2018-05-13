@@ -209,14 +209,6 @@ URL CSocket::getURL() const {
 }
 
 
-int CSocket::assertOK(int const &result, std::string const &message) const {
-    if (result < 0)
-        throw std::runtime_error(message + ": url " + convert<string>(m_url) + ", " + std::strerror(errno) + ", code " + convert<string>(errno)); // ----->
-    else
-        return result; // ----->
-}
-
-
 URL CSocket::getPeerURL(int const &socket) {
     struct sockaddr_in   peer;
     unsigned int         peer_len = sizeof(peer);

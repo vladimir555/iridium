@@ -43,7 +43,8 @@ public:
     URL             getURL() const override;
 
 protected:
-    int             assertOK(int const &result, std::string const &message) const;
+    template<typename T>
+    T               assertOK(T const &result, std::string const &message) const;
     URL             getPeerURL(int const &socket);
     void            setBlockingMode(bool const &is_blocking);
 
@@ -63,6 +64,16 @@ private:
 //    std::list<CSocket::TSharedPtr>  m_accepted_sockets;
 //    CSocket                        *m_acceptor;
 };
+
+
+template<typename T>
+T CSocket::assertOK(T const &result, std::string const &message) const {
+    if (result < 0)
+        throw std::runtime_error(message + ": url " + convertion::convert<std::string>(m_url) +
+            ", " + std::strerror(errno) + ", code " + convertion::convert<std::string>(errno)); // ----->
+    else
+        return result; // ----->
+}
 
 
 } // unix

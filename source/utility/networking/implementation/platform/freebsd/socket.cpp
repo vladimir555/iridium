@@ -86,7 +86,10 @@ ISocket::TEvents CSocket::accept() {
 
     sleep(1);
     auto events_count = assertOK(
-        kevent(m_kqueue, m_monitor_events.data(), m_monitor_events_used_count, m_events.data(), m_events.size(), &timeout),
+        kevent(m_kqueue,
+               m_monitor_events.data(), m_monitor_events_used_count,
+               m_events.data(), m_events.size() & std::numeric_limits<int>::max(),
+               &timeout),
         "socket resolving kevent error");
     m_monitor_events_used_count = 1;
 
@@ -109,7 +112,7 @@ ISocket::TEvents CSocket::accept() {
 
         if (m_events[i].flags & EV_ERROR) {
             LOGE <<  "kevent error: " <<
-                string(strerror(m_events[i].data)) << " " <<
+                // string(strerror(m_events[i].data)) << " " <<
                 EventFlags(m_events[i].flags).convertToFlagsString() <<
                 " queue size " << m_monitor_events_used_count;
             continue; // <---

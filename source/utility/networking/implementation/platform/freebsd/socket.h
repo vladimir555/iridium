@@ -34,7 +34,7 @@ public:
 private:
     std::vector<struct kevent>  m_events;
     std::vector<struct kevent>  m_monitor_events;
-    size_t                      m_monitor_events_used_count;
+    int                         m_monitor_events_used_count;
     int                         m_kqueue;
 };
 
