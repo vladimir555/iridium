@@ -80,7 +80,7 @@ void CSocket::listen() {
 
 ISocket::TEvents CSocket::accept() {
     LOGT << "accept";
-    TEvents sockets_events;
+    TEvents events;
 
     static struct timespec const timeout = { KEVENT_TIMIOUT_MS / 1000, KEVENT_TIMIOUT_MS % 1000 };
 
@@ -129,9 +129,21 @@ ISocket::TEvents CSocket::accept() {
                     { static_cast<uintptr_t>(socket_fd), EVFILT_READ | EVFILT_WRITE, EV_ADD, 0, 0, nullptr };
                 m_monitor_events_used_count++;
             }
-            sockets_events.insert(sockets_events.end(), sse.begin(), sse.end());
+            events.insert(events.end(), sse.begin(), sse.end());
         } else {
             try {
+                auto action = TEvent::TAction::UNKNOWN;
+                
+                if (m_events[i].fflags & EVFILT_READ)
+                    action = TEvent::TAction::READ;
+                if (m_events[i].fflags & EVFILT_WRITE)
+                    action = TEvent::TAction::WRITE;
+
+                auto socket = CSocket::create(getPeerURL(static_cast<int>(m_events[i].ident)));
+                auto event  = TEvent::create(action, socket);
+                
+                events.push_back(event);
+                
 //                auto socket_event       = TEvent::create();
 
 ////                socket_event->socket = findAcceptedSocket(m_events[i].ident);
@@ -158,8 +170,8 @@ ISocket::TEvents CSocket::accept() {
             }
         }
     }
-    LOGT << "return count " << sockets_events.size();
-    return sockets_events; // ----->
+    LOGT << "return count " << events.size();
+    return events; // ----->
 }
 
 

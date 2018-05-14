@@ -198,6 +198,7 @@
 		DD36030820A8F0F100DA27BD /* test_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD3602F520A8F0B300DA27BD /* test_logger.cpp */; };
 		DD36030B20A8FAB700DA27BD /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD36030920A8F9A100DA27BD /* libgtest.a */; };
 		DD36030D20A8FAC000DA27BD /* libgtest_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD36030C20A8FAC000DA27BD /* libgtest_main.a */; };
+		DD36031020A9F05600DA27BD /* kevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36030E20A9F05600DA27BD /* kevent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -420,6 +421,8 @@
 		DD3602F620A8F0B300DA27BD /* utility_test.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = utility_test.vcxproj; sourceTree = "<group>"; };
 		DD36030920A8F9A100DA27BD /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest.a; path = ../../../../../usr/local/lib/libgtest.a; sourceTree = "<group>"; };
 		DD36030C20A8FAC000DA27BD /* libgtest_main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest_main.a; path = ../../../../../usr/local/lib/libgtest_main.a; sourceTree = "<group>"; };
+		DD36030E20A9F05600DA27BD /* kevent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kevent.cpp; sourceTree = "<group>"; };
+		DD36030F20A9F05600DA27BD /* kevent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kevent.hpp; sourceTree = "<group>"; };
 		DDBA76DA20A8DC6700F9D4B1 /* libutility.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libutility.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -447,30 +450,30 @@
 		DD36010420A8E45A00DA27BD /* utility */ = {
 			isa = PBXGroup;
 			children = (
-				DD36010520A8E45A00DA27BD /* encryption */,
+				DD36010F20A8E45A00DA27BD /* strings.cpp */,
+				DD36014120A8E45A00DA27BD /* utility.vcxproj.filters */,
+				DD3601CB20A8E45A00DA27BD /* assert.h */,
+				DD36015920A8E45A00DA27BD /* build_flags.h */,
+				DD36010E20A8E45A00DA27BD /* enum.h */,
+				DD36018220A8E45A00DA27BD /* items.h */,
+				DD3601CC20A8E45A00DA27BD /* platform.h */,
+				DD36015820A8E45A00DA27BD /* smart_ptr.h */,
+				DD36016F20A8E45A00DA27BD /* strings.h */,
 				DD36010C20A8E45A00DA27BD /* utility.vcxproj.user */,
 				DD36010D20A8E45A00DA27BD /* utility.vcxproj */,
-				DD36010E20A8E45A00DA27BD /* enum.h */,
-				DD36010F20A8E45A00DA27BD /* strings.cpp */,
-				DD36011020A8E45A00DA27BD /* networking */,
-				DD36014120A8E45A00DA27BD /* utility.vcxproj.filters */,
+				DD3601BD20A8E45A00DA27BD /* caching */,
 				DD36014220A8E45A00DA27BD /* convertion */,
-				DD36015820A8E45A00DA27BD /* smart_ptr.h */,
-				DD36015920A8E45A00DA27BD /* build_flags.h */,
-				DD36015A20A8E45A00DA27BD /* protocol */,
-				DD36016F20A8E45A00DA27BD /* strings.h */,
-				DD36017020A8E45A00DA27BD /* macros */,
-				DD36017320A8E45A00DA27BD /* system */,
 				DD36017620A8E45A00DA27BD /* db */,
-				DD36018220A8E45A00DA27BD /* items.h */,
+				DD36010520A8E45A00DA27BD /* encryption */,
+				DD3601C020A8E45A00DA27BD /* fs */,
+				DD3601CD20A8E45A00DA27BD /* logging */,
+				DD36017020A8E45A00DA27BD /* macros */,
+				DD36011020A8E45A00DA27BD /* networking */,
 				DD36018320A8E45A00DA27BD /* parsing */,
 				DD36019620A8E45A00DA27BD /* pattern */,
+				DD36015A20A8E45A00DA27BD /* protocol */,
+				DD36017320A8E45A00DA27BD /* system */,
 				DD3601A020A8E45A00DA27BD /* threading */,
-				DD3601BD20A8E45A00DA27BD /* caching */,
-				DD3601C020A8E45A00DA27BD /* fs */,
-				DD3601CB20A8E45A00DA27BD /* assert.h */,
-				DD3601CC20A8E45A00DA27BD /* platform.h */,
-				DD3601CD20A8E45A00DA27BD /* logging */,
 			);
 			name = utility;
 			path = source/utility;
@@ -499,16 +502,16 @@
 		DD36011020A8E45A00DA27BD /* networking */ = {
 			isa = PBXGroup;
 			children = (
-				DD36011120A8E45A00DA27BD /* types.h */,
 				DD36011220A8E45A00DA27BD /* socket.cpp */,
 				DD36011320A8E45A00DA27BD /* url.cpp */,
-				DD36011420A8E45A00DA27BD /* server */,
-				DD36011B20A8E45A00DA27BD /* url.h */,
-				DD36011C20A8E45A00DA27BD /* socket_handler.h */,
-				DD36011D20A8E45A00DA27BD /* implementation */,
 				DD36013A20A8E45A00DA27BD /* dns.h */,
-				DD36013B20A8E45A00DA27BD /* client */,
+				DD36011C20A8E45A00DA27BD /* socket_handler.h */,
 				DD36014020A8E45A00DA27BD /* socket.h */,
+				DD36011120A8E45A00DA27BD /* types.h */,
+				DD36011B20A8E45A00DA27BD /* url.h */,
+				DD36013B20A8E45A00DA27BD /* client */,
+				DD36011D20A8E45A00DA27BD /* implementation */,
+				DD36011420A8E45A00DA27BD /* server */,
 			);
 			path = networking;
 			sourceTree = "<group>";
@@ -981,7 +984,7 @@
 				DD3602F620A8F0B300DA27BD /* utility_test.vcxproj */,
 			);
 			name = utility_test;
-			path = source/utility_test;
+			path = source/utility/utility_test;
 			sourceTree = "<group>";
 		};
 		DD3602DF20A8F0B300DA27BD /* networking */ = {
@@ -989,6 +992,8 @@
 			children = (
 				DD3602E020A8F0B300DA27BD /* test_socket.cpp */,
 				DD3602E120A8F0B300DA27BD /* wsa_example.cpp */,
+				DD36030E20A9F05600DA27BD /* kevent.cpp */,
+				DD36030F20A9F05600DA27BD /* kevent.hpp */,
 			);
 			path = networking;
 			sourceTree = "<group>";
@@ -1066,10 +1071,10 @@
 		DDBA76CF20A8DC0300F9D4B1 = {
 			isa = PBXGroup;
 			children = (
-				DD3602DD20A8F0B300DA27BD /* utility_test */,
-				DD36010420A8E45A00DA27BD /* utility */,
-				DDBA76DB20A8DC6700F9D4B1 /* Products */,
 				DD3602F720A8F0C900DA27BD /* Frameworks */,
+				DDBA76DB20A8DC6700F9D4B1 /* Products */,
+				DD36010420A8E45A00DA27BD /* utility */,
+				DD3602DD20A8F0B300DA27BD /* utility_test */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1294,6 +1299,7 @@
 				DD36030220A8F0F100DA27BD /* test_node.cpp in Sources */,
 				DD36030320A8F0F100DA27BD /* test_node.cpp in Sources */,
 				DD36030420A8F0F100DA27BD /* fsm_switch.cpp in Sources */,
+				DD36031020A9F05600DA27BD /* kevent.cpp in Sources */,
 				DD36030520A8F0F100DA27BD /* test_fsm.cpp in Sources */,
 				DD36030620A8F0F100DA27BD /* fsm_switch.h in Sources */,
 				DD36030720A8F0F100DA27BD /* test_worker.cpp in Sources */,

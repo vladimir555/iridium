@@ -13,19 +13,17 @@ namespace logging {
 namespace implementation {
 
 
-class CSinkConsole: public CSink {
+class CSinkConsole: public ISink, pattern::NonCopyable {
 public:
     DEFINE_IMPLEMENTATION(CSinkConsole)
     explicit CSinkConsole(TEvent::TLevel const &level);
 
+    void initialize() override;
+    void finalize() override;
+    void log(TEvent const &event) override;
+
 private:
-    class CWorkerHandler: public threading::IWorkerHandler<TEvent> {
-    public:
-        DEFINE_IMPLEMENTATION(CWorkerHandler)
-        TItems handle(TItems const &events) override;
-        void initialize() override;
-        void finalize() override;
-    };
+    TEvent::TLevel m_level;
 };
 
 

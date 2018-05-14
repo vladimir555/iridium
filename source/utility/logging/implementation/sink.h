@@ -15,10 +15,10 @@ namespace implementation {
 class CSink : public ISink, pattern::NonCopyable {
 public:
     CSink(TEvent::TLevel const &level, threading::IWorkerHandler<TEvent>::TSharedPtr const &worker);
-    virtual ~CSink() = default;
-    virtual void initialize() override;
-    virtual void finalize() override;
-    virtual void log(TEvent const &event) override;
+   ~CSink() = default;
+    void initialize() override;
+    void finalize() override;
+    void log(TEvent const &event) override;
 
 private:
     TEvent::TLevel const m_level;

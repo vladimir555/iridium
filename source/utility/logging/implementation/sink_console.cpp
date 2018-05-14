@@ -13,22 +13,21 @@ namespace implementation {
 
 CSinkConsole::CSinkConsole(TEvent::TLevel const &level)
 :
-    CSink(level, CWorkerHandler::create())
+    m_level(level)
 {}
 
 
-CSinkConsole::CWorkerHandler::TItems CSinkConsole::CWorkerHandler::handle(TItems const &events) {
-    for (auto const &e: events)
-        cout << makeLine(e) << endl;
-    return TItems(); // ----->
+void CSinkConsole::log(TEvent const &event) {
+    if (event.level >= m_level)
+        cout << makeLine(event) << endl;
 }
 
 
-void CSinkConsole::CWorkerHandler::initialize() {
+void CSinkConsole::initialize() {
 }
 
 
-void CSinkConsole::CWorkerHandler::finalize() {
+void CSinkConsole::finalize() {
 }
 
 
