@@ -3,6 +3,7 @@
 /lib
 /obj
 
+/.vs
 /.DS_Store
 CMakeCache.txt
 CTestTestfile.cmake

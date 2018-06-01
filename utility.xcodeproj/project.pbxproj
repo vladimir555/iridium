@@ -15,42 +15,22 @@
 		DD3601E520A8E45A00DA27BD /* enum.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36010E20A8E45A00DA27BD /* enum.h */; };
 		DD3601E620A8E45A00DA27BD /* strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36010F20A8E45A00DA27BD /* strings.cpp */; };
 		DD3601E720A8E45A00DA27BD /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36011120A8E45A00DA27BD /* types.h */; };
-		DD3601E820A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36011220A8E45A00DA27BD /* socket.cpp */; };
 		DD3601E920A8E45B00DA27BD /* url.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36011320A8E45A00DA27BD /* url.cpp */; };
-		DD3601EA20A8E45B00DA27BD /* http.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36011620A8E45A00DA27BD /* http.h */; };
-		DD3601EB20A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36011720A8E45A00DA27BD /* socket.cpp */; };
-		DD3601EC20A8E45B00DA27BD /* http.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36011820A8E45A00DA27BD /* http.cpp */; };
-		DD3601ED20A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36011920A8E45A00DA27BD /* socket.h */; };
-		DD3601EE20A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36011A20A8E45A00DA27BD /* socket.h */; };
 		DD3601EF20A8E45B00DA27BD /* url.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36011B20A8E45A00DA27BD /* url.h */; };
-		DD3601F020A8E45B00DA27BD /* socket_handler.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36011C20A8E45A00DA27BD /* socket_handler.h */; };
 		DD3601F120A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012020A8E45A00DA27BD /* dns.h */; };
 		DD3601F220A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012120A8E45A00DA27BD /* socket.h */; };
-		DD3601F320A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36012320A8E45A00DA27BD /* socket.cpp */; };
 		DD3601F420A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012420A8E45A00DA27BD /* dns.h */; };
-		DD3601F520A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012520A8E45A00DA27BD /* socket.h */; };
-		DD3601F620A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36012720A8E45A00DA27BD /* socket.cpp */; };
 		DD3601F720A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012820A8E45A00DA27BD /* dns.h */; };
-		DD3601F820A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012920A8E45A00DA27BD /* socket.h */; };
 		DD3601F920A8E45B00DA27BD /* dns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36012A20A8E45A00DA27BD /* dns.cpp */; };
-		DD3601FA20A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36012C20A8E45A00DA27BD /* socket.cpp */; };
 		DD3601FB20A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012D20A8E45A00DA27BD /* dns.h */; };
 		DD3601FC20A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36012E20A8E45A00DA27BD /* socket.h */; };
-		DD3601FD20A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36013020A8E45A00DA27BD /* socket.cpp */; };
 		DD3601FE20A8E45B00DA27BD /* wsa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36013120A8E45A00DA27BD /* wsa.cpp */; };
 		DD3601FF20A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013220A8E45A00DA27BD /* dns.h */; };
 		DD36020020A8E45B00DA27BD /* wsa.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013320A8E45A00DA27BD /* wsa.h */; };
 		DD36020120A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013420A8E45A00DA27BD /* socket.h */; };
 		DD36020220A8E45B00DA27BD /* dns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36013520A8E45A00DA27BD /* dns.cpp */; };
-		DD36020320A8E45B00DA27BD /* socket_handler.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013620A8E45A00DA27BD /* socket_handler.h */; };
-		DD36020420A8E45B00DA27BD /* socket_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36013720A8E45A00DA27BD /* socket_handler.cpp */; };
 		DD36020520A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013820A8E45A00DA27BD /* dns.h */; };
-		DD36020620A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013920A8E45A00DA27BD /* socket.h */; };
 		DD36020720A8E45B00DA27BD /* dns.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013A20A8E45A00DA27BD /* dns.h */; };
-		DD36020820A8E45B00DA27BD /* socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36013D20A8E45A00DA27BD /* socket.cpp */; };
-		DD36020920A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013E20A8E45A00DA27BD /* socket.h */; };
-		DD36020A20A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36013F20A8E45A00DA27BD /* socket.h */; };
-		DD36020B20A8E45B00DA27BD /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36014020A8E45A00DA27BD /* socket.h */; };
 		DD36020C20A8E45B00DA27BD /* type_name.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36014320A8E45A00DA27BD /* type_name.h */; };
 		DD36020D20A8E45B00DA27BD /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD36014520A8E45A00DA27BD /* convert.cpp */; };
 		DD36020E20A8E45B00DA27BD /* type_name.h in Headers */ = {isa = PBXBuildFile; fileRef = DD36014620A8E45A00DA27BD /* type_name.h */; };
@@ -196,7 +176,6 @@
 		DD7D6D7720AA09EF0006720D /* test_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7D6D6420AA09570006720D /* test_node.cpp */; };
 		DD7D6D7820AA09EF0006720D /* fsm_switch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7D6D6620AA09570006720D /* fsm_switch.cpp */; };
 		DD7D6D7920AA09EF0006720D /* test_fsm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7D6D6720AA09570006720D /* test_fsm.cpp */; };
-		DD7D6D7A20AA09EF0006720D /* fsm_switch.h in Sources */ = {isa = PBXBuildFile; fileRef = DD7D6D6820AA09570006720D /* fsm_switch.h */; };
 		DD7D6D7B20AA09EF0006720D /* test_worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7D6D6A20AA09570006720D /* test_worker.cpp */; };
 		DD7D6D7C20AA09EF0006720D /* test_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7D6D6C20AA09570006720D /* test_logger.cpp */; };
 /* End PBXBuildFile section */
@@ -232,23 +211,12 @@
 		DD36010E20A8E45A00DA27BD /* enum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enum.h; sourceTree = "<group>"; };
 		DD36010F20A8E45A00DA27BD /* strings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = strings.cpp; sourceTree = "<group>"; };
 		DD36011120A8E45A00DA27BD /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		DD36011220A8E45A00DA27BD /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
 		DD36011320A8E45A00DA27BD /* url.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = url.cpp; sourceTree = "<group>"; };
-		DD36011620A8E45A00DA27BD /* http.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
-		DD36011720A8E45A00DA27BD /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
-		DD36011820A8E45A00DA27BD /* http.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http.cpp; sourceTree = "<group>"; };
-		DD36011920A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		DD36011A20A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
 		DD36011B20A8E45A00DA27BD /* url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = url.h; sourceTree = "<group>"; };
-		DD36011C20A8E45A00DA27BD /* socket_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_handler.h; sourceTree = "<group>"; };
 		DD36012020A8E45A00DA27BD /* dns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dns.h; sourceTree = "<group>"; };
 		DD36012120A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		DD36012320A8E45A00DA27BD /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
 		DD36012420A8E45A00DA27BD /* dns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dns.h; sourceTree = "<group>"; };
-		DD36012520A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		DD36012720A8E45A00DA27BD /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
 		DD36012820A8E45A00DA27BD /* dns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dns.h; sourceTree = "<group>"; };
-		DD36012920A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
 		DD36012A20A8E45A00DA27BD /* dns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dns.cpp; sourceTree = "<group>"; };
 		DD36012C20A8E45A00DA27BD /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
 		DD36012D20A8E45A00DA27BD /* dns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dns.h; sourceTree = "<group>"; };
@@ -259,15 +227,8 @@
 		DD36013320A8E45A00DA27BD /* wsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsa.h; sourceTree = "<group>"; };
 		DD36013420A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
 		DD36013520A8E45A00DA27BD /* dns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dns.cpp; sourceTree = "<group>"; };
-		DD36013620A8E45A00DA27BD /* socket_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_handler.h; sourceTree = "<group>"; };
-		DD36013720A8E45A00DA27BD /* socket_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket_handler.cpp; sourceTree = "<group>"; };
 		DD36013820A8E45A00DA27BD /* dns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dns.h; sourceTree = "<group>"; };
-		DD36013920A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
 		DD36013A20A8E45A00DA27BD /* dns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dns.h; sourceTree = "<group>"; };
-		DD36013D20A8E45A00DA27BD /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
-		DD36013E20A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		DD36013F20A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		DD36014020A8E45A00DA27BD /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
 		DD36014320A8E45A00DA27BD /* type_name.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = type_name.h; sourceTree = "<group>"; };
 		DD36014520A8E45A00DA27BD /* convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = convert.cpp; sourceTree = "<group>"; };
 		DD36014620A8E45A00DA27BD /* type_name.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = type_name.h; sourceTree = "<group>"; };
@@ -492,48 +453,20 @@
 		DD36011020A8E45A00DA27BD /* networking */ = {
 			isa = PBXGroup;
 			children = (
-				DD36011220A8E45A00DA27BD /* socket.cpp */,
 				DD36011320A8E45A00DA27BD /* url.cpp */,
 				DD36013A20A8E45A00DA27BD /* dns.h */,
-				DD36011C20A8E45A00DA27BD /* socket_handler.h */,
-				DD36014020A8E45A00DA27BD /* socket.h */,
 				DD36011120A8E45A00DA27BD /* types.h */,
 				DD36011B20A8E45A00DA27BD /* url.h */,
-				DD36013B20A8E45A00DA27BD /* client */,
 				DD36011D20A8E45A00DA27BD /* implementation */,
-				DD36011420A8E45A00DA27BD /* server */,
 			);
 			path = networking;
-			sourceTree = "<group>";
-		};
-		DD36011420A8E45A00DA27BD /* server */ = {
-			isa = PBXGroup;
-			children = (
-				DD36011520A8E45A00DA27BD /* implementation */,
-				DD36011A20A8E45A00DA27BD /* socket.h */,
-			);
-			path = server;
-			sourceTree = "<group>";
-		};
-		DD36011520A8E45A00DA27BD /* implementation */ = {
-			isa = PBXGroup;
-			children = (
-				DD36011620A8E45A00DA27BD /* http.h */,
-				DD36011720A8E45A00DA27BD /* socket.cpp */,
-				DD36011820A8E45A00DA27BD /* http.cpp */,
-				DD36011920A8E45A00DA27BD /* socket.h */,
-			);
-			path = implementation;
 			sourceTree = "<group>";
 		};
 		DD36011D20A8E45A00DA27BD /* implementation */ = {
 			isa = PBXGroup;
 			children = (
 				DD36011E20A8E45A00DA27BD /* platform */,
-				DD36013620A8E45A00DA27BD /* socket_handler.h */,
-				DD36013720A8E45A00DA27BD /* socket_handler.cpp */,
 				DD36013820A8E45A00DA27BD /* dns.h */,
-				DD36013920A8E45A00DA27BD /* socket.h */,
 			);
 			path = implementation;
 			sourceTree = "<group>";
@@ -562,9 +495,7 @@
 		DD36012220A8E45A00DA27BD /* freebsd */ = {
 			isa = PBXGroup;
 			children = (
-				DD36012320A8E45A00DA27BD /* socket.cpp */,
 				DD36012420A8E45A00DA27BD /* dns.h */,
-				DD36012520A8E45A00DA27BD /* socket.h */,
 			);
 			path = freebsd;
 			sourceTree = "<group>";
@@ -572,9 +503,7 @@
 		DD36012620A8E45A00DA27BD /* unix */ = {
 			isa = PBXGroup;
 			children = (
-				DD36012720A8E45A00DA27BD /* socket.cpp */,
 				DD36012820A8E45A00DA27BD /* dns.h */,
-				DD36012920A8E45A00DA27BD /* socket.h */,
 				DD36012A20A8E45A00DA27BD /* dns.cpp */,
 			);
 			path = unix;
@@ -601,24 +530,6 @@
 				DD36013520A8E45A00DA27BD /* dns.cpp */,
 			);
 			path = windows;
-			sourceTree = "<group>";
-		};
-		DD36013B20A8E45A00DA27BD /* client */ = {
-			isa = PBXGroup;
-			children = (
-				DD36013C20A8E45A00DA27BD /* implementation */,
-				DD36013F20A8E45A00DA27BD /* socket.h */,
-			);
-			path = client;
-			sourceTree = "<group>";
-		};
-		DD36013C20A8E45A00DA27BD /* implementation */ = {
-			isa = PBXGroup;
-			children = (
-				DD36013D20A8E45A00DA27BD /* socket.cpp */,
-				DD36013E20A8E45A00DA27BD /* socket.h */,
-			);
-			path = implementation;
 			sourceTree = "<group>";
 		};
 		DD36014220A8E45A00DA27BD /* convertion */ = {
@@ -1093,20 +1004,15 @@
 				DD36026120A8E45B00DA27BD /* condition.h in Headers */,
 				DD36020120A8E45B00DA27BD /* socket.h in Headers */,
 				DD3601F120A8E45B00DA27BD /* dns.h in Headers */,
-				DD36020620A8E45B00DA27BD /* socket.h in Headers */,
 				DD36021420A8E45B00DA27BD /* convert.h in Headers */,
 				DD36024120A8E45B00DA27BD /* node_type.h in Headers */,
-				DD3601EE20A8E45B00DA27BD /* socket.h in Headers */,
 				DD36021920A8E45B00DA27BD /* convert.h in Headers */,
 				DD36027120A8E45B00DA27BD /* cached_value.h in Headers */,
 				DD36024620A8E45B00DA27BD /* node_type.h in Headers */,
-				DD36020320A8E45B00DA27BD /* socket_handler.h in Headers */,
-				DD3601EA20A8E45B00DA27BD /* http.h in Headers */,
 				DD36025320A8E45B00DA27BD /* fsm_map.h in Headers */,
 				DD3601FC20A8E45B00DA27BD /* socket.h in Headers */,
 				DD36025920A8E45B00DA27BD /* worker.h in Headers */,
 				DD36025620A8E45B00DA27BD /* condition.h in Headers */,
-				DD36020920A8E45B00DA27BD /* socket.h in Headers */,
 				DD3601F220A8E45B00DA27BD /* socket.h in Headers */,
 				DD36020720A8E45B00DA27BD /* dns.h in Headers */,
 				DD36025420A8E45B00DA27BD /* prototype.h in Headers */,
@@ -1122,7 +1028,6 @@
 				DD36022220A8E45B00DA27BD /* protocol.h in Headers */,
 				DD36023A20A8E45B00DA27BD /* postgresql_connector.h in Headers */,
 				DD36022620A8E45B00DA27BD /* uri_fs_mapper.h in Headers */,
-				DD36020A20A8E45B00DA27BD /* socket.h in Headers */,
 				DD36022F20A8E45B00DA27BD /* enable_warnings.h in Headers */,
 				DD3601FF20A8E45B00DA27BD /* dns.h in Headers */,
 				DD36025220A8E45B00DA27BD /* initializable.h in Headers */,
@@ -1134,12 +1039,9 @@
 				DD36028820A8E45B00DA27BD /* sink.h in Headers */,
 				DD36026F20A8E45B00DA27BD /* mutex.h in Headers */,
 				DD36026720A8E45B00DA27BD /* timed_mutex.h in Headers */,
-				DD3601F020A8E45B00DA27BD /* socket_handler.h in Headers */,
 				DD3601E020A8E45A00DA27BD /* keys.h in Headers */,
 				DD36023F20A8E45B00DA27BD /* node.h in Headers */,
 				DD3601E420A8E45A00DA27BD /* ssl.h in Headers */,
-				DD3601F520A8E45B00DA27BD /* socket.h in Headers */,
-				DD3601F820A8E45B00DA27BD /* socket.h in Headers */,
 				DD36024E20A8E45B00DA27BD /* non_movable.h in Headers */,
 				DD36023C20A8E45B00DA27BD /* items.h in Headers */,
 				DD36021E20A8E45B00DA27BD /* http.h in Headers */,
@@ -1163,7 +1065,6 @@
 				DD36027420A8E45B00DA27BD /* cache.h in Headers */,
 				DD3601E120A8E45A00DA27BD /* ssl.h in Headers */,
 				DD36024220A8E45B00DA27BD /* file_parser.h in Headers */,
-				DD36020B20A8E45B00DA27BD /* socket.h in Headers */,
 				DD36026A20A8E45B00DA27BD /* base_mutex.h in Headers */,
 				DD3601F420A8E45B00DA27BD /* dns.h in Headers */,
 				DD36022320A8E45B00DA27BD /* mime.h in Headers */,
@@ -1184,7 +1085,6 @@
 				DD36025820A8E45B00DA27BD /* synchronized_scope.h in Headers */,
 				DD36027920A8E45B00DA27BD /* fast_text_writer.h in Headers */,
 				DD36021120A8E45B00DA27BD /* convert.h in Headers */,
-				DD3601ED20A8E45B00DA27BD /* socket.h in Headers */,
 				DD36021720A8E45B00DA27BD /* convert.h in Headers */,
 				DD36020E20A8E45B00DA27BD /* type_name.h in Headers */,
 				DD36021B20A8E45B00DA27BD /* build_flags.h in Headers */,
@@ -1287,7 +1187,6 @@
 				DD7D6D7720AA09EF0006720D /* test_node.cpp in Sources */,
 				DD7D6D7820AA09EF0006720D /* fsm_switch.cpp in Sources */,
 				DD7D6D7920AA09EF0006720D /* test_fsm.cpp in Sources */,
-				DD7D6D7A20AA09EF0006720D /* fsm_switch.h in Sources */,
 				DD7D6D7B20AA09EF0006720D /* test_worker.cpp in Sources */,
 				DD7D6D7C20AA09EF0006720D /* test_logger.cpp in Sources */,
 			);
@@ -1305,13 +1204,11 @@
 				DD36027820A8E45B00DA27BD /* fast_text_writer.cpp in Sources */,
 				DD3601E620A8E45A00DA27BD /* strings.cpp in Sources */,
 				DD36023320A8E45B00DA27BD /* config.cpp in Sources */,
-				DD36020820A8E45B00DA27BD /* socket.cpp in Sources */,
 				DD36028620A8E45B00DA27BD /* channel.cpp in Sources */,
 				DD36024C20A8E45B00DA27BD /* file_parser.cpp in Sources */,
 				DD36023720A8E45B00DA27BD /* mysql_connector.cpp in Sources */,
 				DD36022920A8E45B00DA27BD /* method.cpp in Sources */,
 				DD36022B20A8E45B00DA27BD /* packet.cpp in Sources */,
-				DD3601EB20A8E45B00DA27BD /* socket.cpp in Sources */,
 				DD36023420A8E45B00DA27BD /* connector.cpp in Sources */,
 				DD36022420A8E45B00DA27BD /* uri_fs_mapper.cpp in Sources */,
 				DD36025E20A8E45B00DA27BD /* base_mutex.cpp in Sources */,
@@ -1321,8 +1218,6 @@
 				DD36020F20A8E45B00DA27BD /* convert.cpp in Sources */,
 				DD36026320A8E45B00DA27BD /* recursive_mutex.cpp in Sources */,
 				DD36024B20A8E45B00DA27BD /* parser_xml.cpp in Sources */,
-				DD3601E820A8E45B00DA27BD /* socket.cpp in Sources */,
-				DD36020420A8E45B00DA27BD /* socket_handler.cpp in Sources */,
 				DD36026020A8E45B00DA27BD /* thread.cpp in Sources */,
 				DD36027620A8E45B00DA27BD /* file_cache.cpp in Sources */,
 				DD36022020A8E45B00DA27BD /* request.cpp in Sources */,
@@ -1335,7 +1230,6 @@
 				DD36023620A8E45B00DA27BD /* postgresql_connector.cpp in Sources */,
 				DD36021820A8E45B00DA27BD /* type_name.cpp in Sources */,
 				DD3601E320A8E45A00DA27BD /* openssl.cpp in Sources */,
-				DD3601F620A8E45B00DA27BD /* socket.cpp in Sources */,
 				DD36026E20A8E45B00DA27BD /* synchronized_scope.cpp in Sources */,
 				DD36021520A8E45B00DA27BD /* convert.cpp in Sources */,
 				DD36028B20A8E45B00DA27BD /* logger.cpp in Sources */,
@@ -1344,17 +1238,13 @@
 				DD36025C20A8E45B00DA27BD /* runnuble.cpp in Sources */,
 				DD36025F20A8E45B00DA27BD /* mutex.cpp in Sources */,
 				DD36024520A8E45B00DA27BD /* parser_json.cpp in Sources */,
-				DD3601FA20A8E45B00DA27BD /* socket.cpp in Sources */,
 				DD36027E20A8E45B00DA27BD /* sink.cpp in Sources */,
 				DD36022520A8E45B00DA27BD /* mime.cpp in Sources */,
 				DD36026420A8E45B00DA27BD /* timed_mutex.cpp in Sources */,
 				DD3601F920A8E45B00DA27BD /* dns.cpp in Sources */,
 				DD36028920A8E45B00DA27BD /* sink_file.cpp in Sources */,
-				DD3601EC20A8E45B00DA27BD /* http.cpp in Sources */,
 				DD36023E20A8E45B00DA27BD /* node.cpp in Sources */,
-				DD3601F320A8E45B00DA27BD /* socket.cpp in Sources */,
 				DD36020D20A8E45B00DA27BD /* convert.cpp in Sources */,
-				DD3601FD20A8E45B00DA27BD /* socket.cpp in Sources */,
 				DD36020220A8E45B00DA27BD /* dns.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

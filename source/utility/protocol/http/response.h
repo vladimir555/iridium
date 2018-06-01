@@ -3,7 +3,7 @@
 
 
 #include "utility/parsing/serialization/node.h"
-#include "utility/networking/socket.h"
+#include "utility/networking/types.h"
 
 #include <string>
 #include <chrono>
@@ -33,7 +33,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         DEFINE_ATTRIBUTE_DEFAULT(std::string, ContentType, "text/html")
 //        DEFINE_ATTRIBUTE_DEFAULT(std::string, Connection, "")
     DEFINE_NODE_END(Headers)
-    DEFINE_ATTRIBUTE_DEFAULT(networking::ISocket::TPacket, Body, networking::ISocket::TPacket())
+    DEFINE_ATTRIBUTE_DEFAULT(networking::TPacket, Body, networking::TPacket())
 DEFINE_ROOT_NODE_END()
 
 

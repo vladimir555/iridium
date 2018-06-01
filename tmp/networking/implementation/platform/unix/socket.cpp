@@ -91,7 +91,7 @@ size_t CSocket::write(TPacket const &packet) {
         m_ssl->write(packet);
     } else {
         auto buffer = static_cast<void const *>(packet.data());
-        auto result = ::send(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE, 0);
+        	auto result = ::send(m_socket_fd, buffer, DEFAULT_SOCKET_BUFFER_SIZE, 0);
         LOGT << "result " << result;
         if (result == EAGAIN)
             return DEFAULT_SOCKET_BUFFER_SIZE; // ----->
@@ -145,7 +145,6 @@ void CSocket::listen() {
     struct sockaddr_in server_address = { 0 };
 
     server_address.sin_family       = AF_INET;
-//    server_address.sin_addr.s_addr  = INADDR_ANY;
     auto ipv4 = *m_url.getIPv4();
     server_address.sin_addr.s_addr  = htonl(
         ( ipv4[0] << 24 ) | ( ipv4[1] << 16 ) |

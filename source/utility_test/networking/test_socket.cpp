@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
 
-#include <utility/networking/client/implementation/socket.h>
-#include <utility/networking/server/implementation/socket.h>
 #include <utility/networking/url.h>
 #include <utility/networking/dns.h>
 #include <utility/protocol/http/implementation/protocol.h>
@@ -24,27 +22,27 @@ namespace networking {
 namespace socket {
 
 
-TEST(networking, socket_loopback) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
-
-    protocol::http::IHTTPHandler::TSharedPtr    http_handler = 
-        protocol::http::implementation::CURIFSMapper::create(".");
-    protocol::IProtocol::TSharedPtr             protocol = 
-        protocol::http::implementation::CProtocol::create(http_handler);
-    server::ISocket::TSharedPtr                 socket = 
-        server::implementation::CSocket::create(URL("http://127.0.0.1:55555"), protocol, 2);
-
-    return;
-    try {
-        socket->initialize();
-        LOGT << "begin";
-        //threading::sleep(1000);
-        LOGT << "end";
-        socket->finalize();
-    } catch (std::exception const &e) {
-        FAIL() << e.what();
-    }
-}
+//TEST(networking, socket_loopback) {
+//    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+//
+//    protocol::http::IHTTPHandler::TSharedPtr    http_handler =
+//        protocol::http::implementation::CURIFSMapper::create(".");
+//    protocol::IProtocol::TSharedPtr             protocol =
+//        protocol::http::implementation::CProtocol::create(http_handler);
+//    server::ISocket::TSharedPtr                 socket =
+//        server::implementation::CSocket::create(URL("http://127.0.0.1:55555"), protocol, 2);
+//
+//    return;
+//    try {
+//        socket->initialize();
+//        LOGT << "begin";
+//        //threading::sleep(1000);
+//        LOGT << "end";
+//        socket->finalize();
+//    } catch (std::exception const &e) {
+//        FAIL() << e.what();
+//    }
+//}
 
 
 TEST(networking, dns) {

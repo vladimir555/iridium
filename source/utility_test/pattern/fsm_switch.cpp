@@ -63,7 +63,7 @@ Light::TState Light::doAction(TEvent const &event) {
     default:
         throw exception();
     }
-    throw exception();
+    //throw exception();
 }
 
 

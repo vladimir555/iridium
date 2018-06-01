@@ -4,11 +4,6 @@
 #include "utility/items.h"
 #include "dns.h"
 
-#include "utility/logging/logger.h"
-
-
-IMPLEMENT_ENUM(utility::networking::URL::TProtocol)
-
 
 using std::make_shared;
 using std::string;
@@ -17,15 +12,7 @@ using utility::convertion::convert;
 using utility::convertion::convertPtr;
 
 
-namespace {
-
-
-string const PROTOCOL_DELIMITER = "://";
-string const PORT_DELIMITER     = ":";
-//string const IPv4_REGEX         = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
-
-
-} // unnamed
+IMPLEMENT_ENUM(utility::networking::URL::TProtocol)
 
 
 namespace utility {
@@ -36,6 +23,10 @@ URL::URL(std::string const &url)
 :
     m_address(lowerCase(url))
 {
+    //string const IPv4_REGEX                = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
+    static string const PROTOCOL_DELIMITER = "://";
+    static string const PORT_DELIMITER     = ":";
+
     if (m_address.empty())
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 
@@ -61,9 +52,8 @@ URL::URL(std::string const &url)
     if (tokens.size() == 2)
         m_port = make_shared<TPort>(convert<TPort>(tokens[1]));
     else {
-        if (m_protocol && *m_protocol != TProtocol::UNKNOWN && *m_protocol > 0) {
+        if (m_protocol && *m_protocol != TProtocol::UNKNOWN && *m_protocol > 0)
             m_port = make_shared<TPort>(static_cast<TPort>(*m_protocol));
-        }
     }
 
     auto ip = split(address, ".");

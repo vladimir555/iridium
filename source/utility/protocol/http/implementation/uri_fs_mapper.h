@@ -4,6 +4,7 @@
 
 #include "utility/networking/types.h"
 #include "utility/protocol/http/http.h"
+//#include "utility/protocol/packet.h"
 #include "utility/logging/logger.h"
 
 #include <string>
@@ -25,7 +26,7 @@ public:
     response::THttp handle(request::THttp const &request) override;
 private:
     std::string m_fs_path;
-    std::unordered_map<std::string, networking::ISocket::TPacket> m_file_cache;
+    std::unordered_map<std::string, networking::TPacket> m_file_cache;
 
     networking::TPacket readFileCached(std::string const &file_name);
 };

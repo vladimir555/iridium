@@ -10,17 +10,12 @@ using namespace std;
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
 
-#include "utility/networking/server/implementation/socket.h"
-#include "utility/networking/implementation/socket_handler.h"
 
-
-using utility::networking::server::implementation::CSocket;
 using utility::protocol::http::implementation::CProtocol;
 using utility::parsing::implementation::CHTTPParser;
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;
 using utility::convertion::convert;
-using utility::threading::sleep;
 using std::string;
 
 
