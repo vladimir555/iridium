@@ -45,7 +45,7 @@ private:
     ///
     std::string                 m_file_name;
     ///
-    ITextWriter::TSharedPtr     m_text_writer;
+    IFileWriter::TSharedPtr     m_text_writer;
     ///
     std::vector< std::shared_ptr<std::string> > m_lines;
 };

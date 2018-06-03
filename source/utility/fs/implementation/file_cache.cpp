@@ -36,7 +36,7 @@ namespace implementation {
 CFileCache::CFileCache(std::string const &file_name)
 :
     m_file_name     (file_name),
-    m_text_writer   (CFastTextWriter::create(file_name))
+    m_text_writer   (CFileWriter::create(file_name))
 {}
 
 
@@ -108,7 +108,8 @@ void CFileCache::finalize() {
 
 
 size_t CFileCache::push(string const &line) {
-    m_text_writer->writeLine(MARKER_CACHED_LINE + line);
+    auto line_ = MARKER_CACHED_LINE + line;
+    m_text_writer->write(io::TBuffer(line_.begin(), line_.end()));
     m_lines.push_back(make_shared<string>(line));
     return m_lines.size();
 }
@@ -128,7 +129,8 @@ string CFileCache::get(size_t const &id) const {
 void CFileCache::remove(size_t const &id) {
     if (id < m_lines.size()) {
         if (m_lines[id]) {
-            m_text_writer->writeLine(MARKER_REMOVED_INDEX + convert<string>(id));
+            auto line = MARKER_REMOVED_INDEX + convert<string>(id);
+            m_text_writer->write(io::TBuffer(line.begin(), line.end()));
             m_lines[id].reset();
         }
     } else

@@ -15,7 +15,7 @@ using std::string;
 using utility::fs::readTextFile;
 using utility::fs::extractFileNameExtension;
 using utility::fs::checkFileExistence;
-using utility::fs::implementation::CFastTextWriter;
+using utility::fs::implementation::CFileWriter;
 
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;
@@ -55,9 +55,10 @@ INode::TSharedPtr parseFile(string const &file_name) {
 
 void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
     auto parser         = createParserByExtension(file_name);
-    auto text_writer    = CFastTextWriter::create(file_name);
+    auto text_writer    = CFileWriter::create(file_name);
+    auto line           = parser->compose(root_node);
 
-    text_writer->writeLine(parser->compose(root_node));
+    text_writer->write(io::TBuffer(line.begin(), line.end()));
 }
 
 

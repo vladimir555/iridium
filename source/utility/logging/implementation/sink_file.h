@@ -32,7 +32,7 @@ private:
         bool        m_is_rotation_by_day;
         std::chrono::system_clock::time_point
                     m_last_initialization_time;
-        fs::ITextWriter::TSharedPtr
+        fs::IFileWriter::TSharedPtr
                     m_text_file_writer;
     };
 };

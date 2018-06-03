@@ -15,19 +15,20 @@ namespace fs {
 namespace implementation {
 
 
-class CFastTextWriter : public ITextWriter {
+class CFileWriter : public IFileWriter {
 public:
-    DEFINE_CREATE(CFastTextWriter)
+    DEFINE_CREATE(CFileWriter)
     ///
-    explicit CFastTextWriter(std::string const &file_name);
+    explicit CFileWriter(std::string const &file_name);
     ///
-    virtual ~CFastTextWriter();
+    virtual ~CFileWriter();
     ///
     void initialize() override; 
     ///
     void finalize() override;
     ///
-    void writeLine(std::string const &line) override;
+//    size_t writeLine(std::string const &line) override;
+    size_t write(io::TBuffer const &packet) override;
     ///
     void flush() override;
 

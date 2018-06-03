@@ -7,7 +7,7 @@
 
 using std::string;
 using utility::convertion::convert;
-using utility::fs::implementation::CFastTextWriter;
+using utility::fs::implementation::CFileWriter;
 using utility::threading::implementation::CWorker;
 using std::chrono::system_clock;
 
@@ -45,7 +45,7 @@ void CSinkFile::CWorkerHandler::initialize() {
             m_file_name.replace(m_file_name.find_last_of('.'), 1, date + ".");
     }
 
-    m_text_file_writer = CFastTextWriter::create(m_file_name);
+    m_text_file_writer = CFileWriter::create(m_file_name);
     m_text_file_writer->initialize();
 }
 
@@ -61,8 +61,10 @@ CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const
         initialize();
     }
 
-    for (auto const &e : events)
-        m_text_file_writer->writeLine(makeLine(e));
+    for (auto const &e : events) {
+        auto line = makeLine(e);
+        m_text_file_writer->write(io::TBuffer(line.begin(), line.end()));
+    }
 
     m_text_file_writer->flush();
 

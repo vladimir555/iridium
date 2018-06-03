@@ -7,24 +7,21 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/pattern/initializable.h"
+#include "utility/io/stream.h"
 
 
 namespace utility {
 namespace fs {
 
 
-class ITextWriter: public pattern::IInitializable {
+// todo: Adapter for IStream
+class IFileWriter:
+    public pattern::IInitializable,
+    public io::IStreamWriter
+{
 public:
-    DEFINE_SMART_PTR(ITextWriter)
-    ///
-    ~ITextWriter() = default;
-    ///
-    virtual void writeLine(std::string const &line) = 0;
-    ///
+    DEFINE_INTERFACE(IFileWriter)
     virtual void flush() = 0;
-private:
-    ///
-    std::string m_file_name;
 };
 
 
