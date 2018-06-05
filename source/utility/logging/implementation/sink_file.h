@@ -3,7 +3,7 @@
 
 
 #include "utility/threading/worker.h"
-#include "utility/fs/text_writer.h"
+#include "utility/fs/file_writer.h"
 
 #include "sink.h"
 

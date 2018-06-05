@@ -1,7 +1,7 @@
 #include "sink_file.h"
 
 #include "utility/convertion/convert.h"
-#include "utility/fs/implementation/fast_text_writer.h"
+#include "utility/fs/implementation/file_writer.h"
 #include "utility/threading/implementation/worker.h"
 
 

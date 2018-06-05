@@ -7,7 +7,7 @@
 
 #include "utility/strings.h"
 #include "utility/fs/files.h"
-#include "utility/fs/implementation/fast_text_writer.h"
+#include "utility/fs/implementation/file_writer.h"
 
 
 using std::string;

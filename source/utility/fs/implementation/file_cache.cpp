@@ -1,6 +1,6 @@
 #include "file_cache.h"
 
-#include "fast_text_writer.h"
+#include "file_writer.h"
 
 #include "utility/convertion/convert.h"
 #include "utility/fs/files.h"

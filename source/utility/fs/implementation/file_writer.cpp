@@ -1,4 +1,4 @@
-#include "fast_text_writer.h"
+#include "file_writer.h"
 
 #include <cstring>
 

@@ -7,7 +7,7 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/fs/cache.h"
-#include "utility/fs/text_writer.h"
+#include "utility/fs/file_writer.h"
 
 
 namespace utility {

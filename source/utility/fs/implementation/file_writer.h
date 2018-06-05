@@ -1,5 +1,5 @@
-#ifndef HEADER_FAST_TEXT_WRITER_6A05934B_514A_4E85_97E7_69A721D4ED29
-#define HEADER_FAST_TEXT_WRITER_6A05934B_514A_4E85_97E7_69A721D4ED29
+#ifndef HEADER_FILE_WRITER_6A05934B_514A_4E85_97E7_69A721D4ED29
+#define HEADER_FILE_WRITER_6A05934B_514A_4E85_97E7_69A721D4ED29
 
 
 #include <string>
@@ -7,7 +7,7 @@
 
 #include "utility/smart_ptr.h"
 
-#include "utility/fs/text_writer.h"
+#include "utility/fs/file_writer.h"
 
 
 namespace utility {
@@ -45,4 +45,4 @@ private:
 } // utility
 
 
-#endif // HEADER_FAST_TEXT_WRITER_6A05934B_514A_4E85_97E7_69A721D4ED29
+#endif // HEADER_FILE_WRITER_6A05934B_514A_4E85_97E7_69A721D4ED29
