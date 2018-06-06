@@ -117,7 +117,7 @@ size_t write(int const &m_socket_fd, std::vector<char> const &packet, size_t con
 }
 
 struct TPeer {
-    DEFINE_ENUM(TAction, OPEN, READ, WRITE, CLOSE);
+    DEFINE_ENUM(TAction, OPEN, READ, WRITE, CLOSE)
 
     // todo: send read and write buffer to protocol without action;
     
@@ -187,7 +187,7 @@ public:
 class Peer {
 public:
     DEFINE_SMART_PTR(Peer)
-    DEFINE_CREATE(Peer);
+    DEFINE_CREATE(Peer)
     
     Peer(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);
    ~Peer() = default;

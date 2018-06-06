@@ -47,6 +47,7 @@ class IStream:
 {
 public:
     DEFINE_INTERFACE(IStream)
+    virtual int getID() const = 0;
 };
 // CSocket: public IInitializable, public IStream
 // CFastWriter: public IInitializable, public IStreamWriter

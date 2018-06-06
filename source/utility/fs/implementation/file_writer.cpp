@@ -91,6 +91,14 @@ void CFileWriter::finalize() {
 }
 
 
+//int CFileWriter::getID() const override {
+//    if (m_file)
+//        return m_file->_file; // ----->
+//    else
+//        return -1;
+//}
+
+
 } // implementation
 } // fs
 } // utility

@@ -31,6 +31,8 @@ public:
     size_t write(io::TBuffer const &packet) override;
     ///
     void flush() override;
+    ///
+//    int getID() const override;
 
 private:
     ///
