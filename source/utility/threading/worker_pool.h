@@ -13,7 +13,7 @@ namespace utility {
 namespace threading {
 
 
-template<typename TItem>
+template<typename TItem = IJob::TSharedPtr>
 class IWorkerPool:
     public pattern::IInitializable,
     public IAsyncQueuePusher<TItem>

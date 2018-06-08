@@ -16,7 +16,14 @@ namespace utility {
 namespace threading {
 
 
-template<typename TItem_>
+class IJob {
+public:
+    DEFINE_INTERFACE(IJob)
+    virtual bool do_() = 0;
+};
+
+
+template<typename TItem_ = IJob::TSharedPtr>
 class IWorkerHandler {
 public:
     DEFINE_SMART_PTR(IWorkerHandler<TItem_>)
@@ -31,7 +38,7 @@ public:
 };
 
 
-template<typename TItem>
+template<typename TItem = IJob::TSharedPtr>
 class IWorker:
     public IAsyncQueuePusher<TItem>,
     public pattern::IInitializable

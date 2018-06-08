@@ -19,19 +19,29 @@ namespace threading {
 namespace implementation {
 
 
-template<typename TItem>
+class CWorkerHandler: public IWorkerHandler<IJob::TSharedPtr> {
+public:
+    DEFINE_IMPLEMENTATION(CWorkerHandler)
+    CWorkerHandler() = default;
+
+    void initialize() override;
+    void finalize() override;
+    TItems handle(TItems const &items) override;
+};
+
+
+template<typename TItem = IJob::TSharedPtr>
 class CWorker: public IWorker<TItem> {
 public:
-    DEFINE_CREATE(CWorker<TItem>)
+    DEFINE_IMPLEMENTATION(CWorker<TItem>)
     CWorker(
         std::string                                 const &name,
-        typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler);
+        typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler = CWorkerHandler::create());
     CWorker(
         std::string                                 const &name,
         typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler,
         typename IAsyncQueue<TItem>::TSharedPtr     const &async_queue,
         IAsyncQueue<bool>::TSharedPtr               const &thread_working_status_queue);
-    virtual ~CWorker() = default;
 
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 

@@ -123,7 +123,7 @@ TEST(threading, worker_pool) {
     for (size_t i = 0; i < 10; i++)
         l.push_back(Worker::create());
 
-    IWorkerPool<int>::TSharedPtr worker_pool = CWorkerPool<int>::create(l, "worker_pool");
+    IWorkerPool<int>::TSharedPtr worker_pool = CWorkerPool<int>::create("worker_pool", l);
 
     processed = 0;
     in.clear();
@@ -152,6 +152,36 @@ TEST(threading, worker_pool) {
 
     ASSERT_EQ(in, out);
     m->unlock();
+}
+
+
+class CJob: public IJob {
+public:
+    DEFINE_IMPLEMENTATION(CJob)
+
+    CJob() = default;
+    bool do_() override {
+        LOGT << "job ";
+        return true;
+    }
+};
+
+
+TEST(threading, worker_job) {
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    IWorker<>::TSharedPtr worker = CWorker<>::create("worker_name");
+    worker->initialize();
+    worker->push(CJob::create());
+    worker->finalize();
+}
+
+
+TEST(threading, worker_pool_job) {
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    IWorkerPool<>::TSharedPtr worker = CWorkerPool<>::create("worker_name", 2);
+    worker->initialize();
+    worker->push(CJob::create());
+    worker->finalize();
 }
 
 

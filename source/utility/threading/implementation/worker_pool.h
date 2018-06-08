@@ -21,14 +21,20 @@ namespace implementation {
 // ----- interface
 
 
-template<typename TItem>
+template<typename TItem = IJob::TSharedPtr>
 class CWorkerPool: public IWorkerPool<TItem> {
 public:
     DEFINE_IMPLEMENTATION(CWorkerPool<TItem>)
 
     explicit CWorkerPool(
-        typename IWorkerPool<TItem>::TWorkerHandlers const &handlers, 
-        std::string const &name);
+        std::string const &name,
+        typename IWorkerPool<TItem>::TWorkerHandlers const &handlers
+    );
+
+    explicit CWorkerPool(
+        std::string const &name,
+        int const &count
+    );
 
     typedef typename IWorkerPool<TItem>::TItems TItems;
 
@@ -53,8 +59,8 @@ private:
 
 template<typename TItem>
 CWorkerPool<TItem>::CWorkerPool(
-    typename IWorkerPool<TItem>::TWorkerHandlers const &handlers, 
-    std::string const &name)
+    std::string const &name,
+    typename IWorkerPool<TItem>::TWorkerHandlers const &handlers)
 :
     m_name(name)
 {
@@ -70,6 +76,35 @@ CWorkerPool<TItem>::CWorkerPool(
                 m_queue, 
                 m_thread_working_status_queue
             ) 
+        );
+        i++;
+    }
+}
+
+
+template<typename TItem>
+CWorkerPool<TItem>::CWorkerPool(
+    std::string const &name,
+    int         const &count)
+:
+    m_name(name)
+{
+    m_queue = CAsyncQueue<TItem>::create();
+    // todo: refactoring
+    typename IWorkerPool<TItem>::TWorkerHandlers handlers;
+    for (int i = 0; i < count; i++)
+        handlers.push_back(CWorkerHandler::create());
+
+    m_thread_working_status_queue = CAsyncQueue<bool>::create();
+    auto i = 0;
+    for (auto const &handler: handlers) {
+        m_workers.push_back(
+            CWorker<TItem>::create(
+                name + "[" + convertion::convert<std::string>(i) + "]",
+                handler,
+                m_queue,
+                m_thread_working_status_queue
+            )
         );
         i++;
     }
