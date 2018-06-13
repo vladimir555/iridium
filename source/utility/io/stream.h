@@ -37,7 +37,6 @@ class IStreamWriter {
 public:
     DEFINE_INTERFACE(IStreamWriter)
     virtual size_t write(TBuffer const &packet) = 0;
-//    todo: virtual size_t write(std::string const &packet) = 0;
 };
     
     
@@ -49,15 +48,18 @@ public:
     DEFINE_INTERFACE(IStream)
     virtual int getID() const = 0;
 };
-// CSocket: public IInitializable, public IStream
-// CFastWriter: public IInitializable, public IStreamWriter
+
+
+class StreamProxy: public IStream {
+public:
+    StreamProxy(IStream::TSharedPtr const &input, IStream::TSharedPtr const &output);
+};
+
 
 /*
-
 events: accept, read, write, end -> acceptor worker -> initialize -> protocol workers -> finalize
 protocol workers:
     transaction: event -> action -> on read: buffer -> protocol -> event on read, event end -> acceptor worker
-
  */
 
 

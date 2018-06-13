@@ -7,7 +7,7 @@
 
 #include "utility/smart_ptr.h"
 
-#include "utility/fs/file_writer.h"
+#include "utility/fs/file_stream.h"
 
 
 namespace utility {
@@ -15,29 +15,26 @@ namespace fs {
 namespace implementation {
 
 
-class CFileWriter : public IFileWriter {
+class CFileStream:
+    public IFileWriter,
+    public IFileReader
+{
 public:
-    DEFINE_CREATE(CFileWriter)
-    ///
-    explicit CFileWriter(std::string const &file_name);
-    ///
-    virtual ~CFileWriter();
-    ///
+    DEFINE_CREATE(CFileStream)
+    explicit CFileStream(std::string const &file_name);
+    virtual ~CFileStream();
+
     void initialize() override; 
-    ///
     void finalize() override;
-    ///
-//    size_t writeLine(std::string const &line) override;
+
     size_t write(io::TBuffer const &packet) override;
-    ///
+    io::TBuffer read(size_t const &size) override;
+
     void flush() override;
-    ///
 //    int getID() const override;
 
 private:
-    ///
     std::string     m_file_name;
-    ///
     ::FILE         *m_file = nullptr;
 };
 

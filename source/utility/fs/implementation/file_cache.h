@@ -7,7 +7,7 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/fs/cache.h"
-#include "utility/fs/file_writer.h"
+#include "utility/fs/file_stream.h"
 
 
 namespace utility {
@@ -45,7 +45,7 @@ private:
     ///
     std::string                 m_file_name;
     ///
-    IFileWriter::TSharedPtr     m_text_writer;
+    IFileWriter::TSharedPtr     m_file_writer;
     ///
     std::vector< std::shared_ptr<std::string> > m_lines;
 };

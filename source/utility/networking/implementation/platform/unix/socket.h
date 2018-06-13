@@ -21,8 +21,8 @@ namespace unix {
 
 class CSocket: public ISocket {
 public:
+    DEFINE_IMPLEMENTATION(CSocket)
     CSocket(URL const &url, bool const &is_server_mode);
-    virtual ~CSocket() = default;
 
     void    initialize() override;
     void    finalize() override;

@@ -5,7 +5,6 @@
 #include "utility/smart_ptr.h"
 
 #include "async_queue.h"
-#include "runnuble.h"
 
 #include "utility/logging/logger.h"
 #include "utility/threading/worker.h"
@@ -52,12 +51,12 @@ public:
     virtual size_t push(TItems const &items) override;
 
 private:
-    class Runnuble: public CRunnuble {
+    class Runnuble: public IRunnable {
     public:
-        DEFINE_CREATE(Runnuble)
+        DEFINE_IMPLEMENTATION(Runnuble)
+
         Runnuble(CWorker &worker);
-        virtual ~Runnuble() = default;
-        void run() override;
+        void run(std::atomic<bool> &is_running) override;
         void initialize() override;
         void finalize() override;
     private:
@@ -129,9 +128,9 @@ CWorker<TItem>::Runnuble::Runnuble(CWorker &worker)
 
 
 template<typename TItem>
-void CWorker<TItem>::Runnuble::run() {
+void CWorker<TItem>::Runnuble::run(std::atomic<bool> &is_running) {
     try {
-        while (m_is_running)
+        while (is_running)
             m_worker.push(m_worker.m_worker_handler->handle(m_worker.m_async_queue->pop()));
     } catch (std::exception const &e) {
         LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();

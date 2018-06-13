@@ -11,10 +11,9 @@ namespace utility {
 namespace protocol {
 
 
-class IProtocol /*: public pattern::IPrototype<IProtocol>*/ {
+class IProtocol {
 public:
     DEFINE_INTERFACE(IProtocol)
-
     virtual IPacket::TSharedPtr exchange(IPacket::TSharedPtr const &request) = 0;
 };
 

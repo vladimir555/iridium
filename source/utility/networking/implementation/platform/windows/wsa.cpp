@@ -75,7 +75,7 @@ TPacket WSA::read(SOCKET const &socket, size_t const &size) {
     LOGT << socket;
     int             received_size = 0;
     vector<char>    buffer(size);
-    TPacket		    result;
+    TPacket         result;
 
     //ZeroMemory(buffer, size);
     received_size = ::recv(socket, buffer.data(), size, 0);

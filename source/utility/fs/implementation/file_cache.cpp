@@ -36,7 +36,7 @@ namespace implementation {
 CFileCache::CFileCache(std::string const &file_name)
 :
     m_file_name     (file_name),
-    m_text_writer   (CFileWriter::create(file_name))
+    m_file_writer   (CFileStream::create(file_name))
 {}
 
 
@@ -82,7 +82,7 @@ void CFileCache::initialize() {
         fs::remove(m_file_name);
     }
 
-    m_text_writer->initialize();
+    m_file_writer->initialize();
 
     // todo: move file_name
     m_lines.clear();
@@ -97,19 +97,19 @@ void CFileCache::initialize() {
         if (!is_removed_index)
             push(items[i]);
     }
-    m_text_writer->flush();
+    m_file_writer->flush();
 }
 
 
 void CFileCache::finalize() {
-    m_text_writer->finalize();
+    m_file_writer->finalize();
     m_lines.clear();
 }
 
 
 size_t CFileCache::push(string const &line) {
     auto line_ = MARKER_CACHED_LINE + line;
-    m_text_writer->write(io::TBuffer(line_.begin(), line_.end()));
+    m_file_writer->write(io::TBuffer(line_.begin(), line_.end()));
     m_lines.push_back(make_shared<string>(line));
     return m_lines.size();
 }
@@ -130,7 +130,7 @@ void CFileCache::remove(size_t const &id) {
     if (id < m_lines.size()) {
         if (m_lines[id]) {
             auto line = MARKER_REMOVED_INDEX + convert<string>(id);
-            m_text_writer->write(io::TBuffer(line.begin(), line.end()));
+            m_file_writer->write(io::TBuffer(line.begin(), line.end()));
             m_lines[id].reset();
         }
     } else
@@ -140,7 +140,7 @@ void CFileCache::remove(size_t const &id) {
 
 void CFileCache::clean() {
     m_lines.clear();
-    m_text_writer->finalize();
+    m_file_writer->finalize();
     fs::remove(m_file_name);
 }
 
@@ -156,7 +156,7 @@ bool CFileCache::checkExistense(size_t const &id) const {
 
 
 void CFileCache::flush() {
-    m_text_writer->flush();
+    m_file_writer->flush();
 }
 
 

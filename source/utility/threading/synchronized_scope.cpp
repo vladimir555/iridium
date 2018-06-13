@@ -20,9 +20,9 @@ namespace utility {
 namespace threading {
 
 
-SynchronizedScope::SynchronizedScope(IMutex const *mutex, string const &scope_name)
+SynchronizedScope::SynchronizedScope(Synchronized const *synchronized, string const &scope_name)
 :
-    m_mutex(mutex)
+    m_mutex(synchronized->getMutex())
 {
     string const scope_name_ = scope_name + ":" + convert<string>(getThreadID());
     try {
@@ -40,9 +40,9 @@ SynchronizedScope::~SynchronizedScope() {
 }
 
 
-SynchronizedScopeSimple::SynchronizedScopeSimple(IMutex *mutex)
+SynchronizedScopeSimple::SynchronizedScopeSimple(Synchronized const *synchronized)
 :
-    m_mutex(mutex) 
+    m_mutex(synchronized->getMutex())
 {
     m_mutex->lock();
 }

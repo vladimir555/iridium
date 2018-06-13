@@ -6,8 +6,7 @@
 #include "utility/pattern/singleton.h"
 #include "utility/smart_ptr.h"
 
-#include "utility/threading/implementation/timed_mutex.h"
-#include "utility/threading/implementation/mutex.h"
+#include "utility/threading/synchronized.h"
 #include "utility/strings.h"
 
 #include <mutex>
@@ -25,7 +24,7 @@ namespace logging {
 // todo: separate logger to other type with singleton
 class Logger :
     public pattern::Singleton<Logger>,
-    public threading::implementation::CMutex
+    public threading::Synchronized
 {
 public:
     ///
@@ -40,7 +39,7 @@ public:
 private:
     friend class pattern::Singleton<Logger>;
     ///
-    Logger() = default;
+    Logger();
     ///
     IChannel::TSharedPtr m_channel;
 };

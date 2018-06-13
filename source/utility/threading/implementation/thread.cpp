@@ -40,11 +40,12 @@ CThread::CThread(
 
 void CThread::initialize() {
     m_runnuble->initialize();
+    m_is_running = true;
     if (m_thread_working_status_queue) {
-        m_thread = make_shared<thread>(run, m_runnuble, m_thread_working_status_queue);
+        m_thread = make_shared<thread>(run, m_runnuble, m_thread_working_status_queue, &m_is_running);
     } else {
         m_thread_working_status_queue = CAsyncQueue<bool>::create();
-        m_thread = make_shared<thread>(run, m_runnuble, m_thread_working_status_queue);
+        m_thread = make_shared<thread>(run, m_runnuble, m_thread_working_status_queue, &m_is_running);
         try {
             auto statuses = m_thread_working_status_queue->pop();
             if (statuses.size() != 1 || !statuses.back())
@@ -58,7 +59,8 @@ void CThread::initialize() {
 
 void CThread::finalize() {
     if (m_thread && m_thread->joinable()) {
-        m_runnuble->stop();
+//        m_runnuble->stop();
+        m_is_running = false;
         m_thread->join();
         m_runnuble->finalize();
     }
@@ -78,10 +80,14 @@ std::string CThread::getName() const {
 }
 
 
-void CThread::run(IRunnable::TSharedPtr const &runnuble, IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue) {
+void CThread::run(
+    IRunnable::TSharedPtr const &runnuble,
+    IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue,
+    std::atomic<bool> * const is_running
+) {
     try {
         thread_working_status_queue->push(true);
-        runnuble->run();
+        runnuble->run(*is_running);
         thread_working_status_queue->push(false);
     } catch (std::exception &e) {
         cerr << "thread error: " << e.what();

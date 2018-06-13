@@ -1,14 +1,22 @@
 #include "channel.h"
 #include "utility/pattern/initializable.h"
+#include "utility/threading/implementation/mutex.h"
 #include "utility/threading/synchronized_scope.h"
 
 
 using utility::pattern::IInitializable;
+using utility::threading::implementation::CMutex;
 
 
 namespace utility {
 namespace logging {
 namespace implementation {
+
+
+CChannel::CChannel()
+:
+    Synchronized(CMutex::create())
+{}
 
 
 void CChannel::initialize() {

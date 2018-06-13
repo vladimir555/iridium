@@ -6,6 +6,7 @@
 #include "implementation/sink_file.h"
 
 #include "utility/threading/synchronized_scope.h"
+#include "utility/threading/implementation/mutex.h"
 #include "utility/threading/thread.h"
 #include "utility/assert.h"
 
@@ -13,10 +14,17 @@
 using utility::logging::implementation::CChannel;
 using utility::logging::implementation::CSinkConsole;
 using utility::logging::implementation::CSinkFile;
+using utility::threading::implementation::CMutex;
 
 
 namespace utility {
 namespace logging {
+
+
+Logger::Logger()
+:
+    Synchronized(CMutex::create())
+{}
 
 
 Logger::~Logger() {

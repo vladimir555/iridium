@@ -10,6 +10,7 @@
 
 #include "utility/threading/async_queue.h"
 #include "utility/threading/condition.h"
+#include "utility/threading/synchronized.h"
 #include "utility/threading/synchronized_scope.h"
 
 #include "condition.h"
@@ -29,7 +30,7 @@ class CAsyncQueue:
     public  IAsyncQueue<TItem>,
     public  pattern::NonCopyable,
     public  pattern::NonMovable,
-    private CMutex
+    private Synchronized
 {
 public:
     DEFINE_CREATE(CAsyncQueue)
@@ -60,6 +61,7 @@ private:
 template<typename TItem>
 CAsyncQueue<TItem>::CAsyncQueue()
 :
+    Synchronized(CMutex::create()),
     m_is_do_wait(true),
     m_is_empty  (true),
     m_condition (CCondition::create())

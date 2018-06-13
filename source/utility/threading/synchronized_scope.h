@@ -11,6 +11,8 @@
 #include "utility/pattern/non_copyable.h"
 #include "utility/pattern/non_movable.h"
 
+#include "synchronized.h"
+
 
 namespace utility {
 namespace threading {
@@ -21,11 +23,11 @@ class SynchronizedScope:
     public pattern::NonMovable
 {
 public:
-    explicit SynchronizedScope(IMutex const *mutex, std::string const &scope_name);
-    virtual ~SynchronizedScope();
+    explicit SynchronizedScope(Synchronized const *synchronized, std::string const &scope_name);
+    ~SynchronizedScope();
 
 private:
-    IMutex const *m_mutex;
+    IMutex::TSharedPtr m_mutex;
 };
 
 
@@ -34,10 +36,10 @@ class SynchronizedScopeSimple:
     public pattern::NonMovable 
 {
 public:
-    explicit SynchronizedScopeSimple(IMutex *mutex);
-   ~SynchronizedScopeSimple();
+    explicit SynchronizedScopeSimple(Synchronized const *synchronized);
+    ~SynchronizedScopeSimple();
 private:
-    IMutex *m_mutex;
+    IMutex::TSharedPtr m_mutex;
 };
 
 

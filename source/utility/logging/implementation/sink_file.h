@@ -3,7 +3,7 @@
 
 
 #include "utility/threading/worker.h"
-#include "utility/fs/file_writer.h"
+#include "utility/fs/file_stream.h"
 
 #include "sink.h"
 
@@ -33,7 +33,7 @@ private:
         std::chrono::system_clock::time_point
                     m_last_initialization_time;
         fs::IFileWriter::TSharedPtr
-                    m_text_file_writer;
+                    m_file_writer;
     };
 };
 

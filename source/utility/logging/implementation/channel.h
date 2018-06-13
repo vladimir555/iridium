@@ -8,7 +8,7 @@
 #include "utility/logging/sink.h"
 #include "utility/pattern/broadcaster.h"
 #include "utility/pattern/non_copyable.h"
-#include "utility/threading/implementation/mutex.h"
+#include "utility/threading/synchronized.h"
 
 
 namespace utility {
@@ -20,10 +20,11 @@ class CChannel:
     public IChannel,
     public pattern::Broadcaster<ISink>,
     public pattern::NonCopyable,
-    public threading::implementation::CMutex
+    public threading::Synchronized
 {
 public:
     DEFINE_IMPLEMENTATION(CChannel)
+    CChannel();
     ///
     virtual void initialize() override;
     ///
