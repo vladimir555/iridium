@@ -8,15 +8,15 @@
 #define HEADER_SOCKET_95D177C4_558D_4614_9449_385F91986A6B
 
 
-#include "utility/networking/url.h"
-#include "utility/networking/socket.h"
+#include "utility/net/url.h"
+#include "utility/net/socket.h"
 
 
 #include <ws2tcpip.h>
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace implementation {
 namespace platform {
 
@@ -45,7 +45,7 @@ private:
 
 } // platform
 } // implementation
-} // networking
+} // net
 } // utility
 
 

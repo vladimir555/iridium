@@ -3,7 +3,7 @@
 
 
 #include "utility/threading/worker.h"
-#include "utility/fs/file_stream.h"
+#include "utility/io/fs/file_stream.h"
 
 #include "sink.h"
 
@@ -32,7 +32,7 @@ private:
         bool        m_is_rotation_by_day;
         std::chrono::system_clock::time_point
                     m_last_initialization_time;
-        fs::IFileWriter::TSharedPtr
+        io::fs::IFileWriter::TSharedPtr
                     m_file_writer;
     };
 };

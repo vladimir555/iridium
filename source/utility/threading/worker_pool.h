@@ -21,7 +21,7 @@ class IWorkerPool:
 //    static_assert(std::is_base_of< IWorkerHandler<typename TWorkerHandler::TItem>, TWorkerHandler >::value,
 //        "TWorker must be inherit from IWorkerHandler");
 public:
-    typedef           IWorkerHandler<TItem> TWorkerHandler;
+    typedef IWorkerHandler<TItem> TWorkerHandler;
     typedef std::list<typename TWorkerHandler::TSharedPtr> TWorkerHandlers;
     DEFINE_INTERFACE(IWorkerPool<TItem>)
 };

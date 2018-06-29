@@ -9,7 +9,7 @@
 
 
 #include "utility/pattern/singleton.h"
-#include "utility/networking/socket.h"
+#include "utility/net/socket.h"
 #include "utility/smart_ptr.h"
 #include "utility/enum.h"
 
@@ -103,8 +103,8 @@ public:
     TSSL *createSSL(TContext *context, int const &file_descriptor);
     void releaseSSL(TSSL *ssl);
     void acceptSSL(TSSL *ssl, bool const &is_blocking_mode);
-    void write(TSSL *ssl, networking::ISocket::TPacket const &packet);
-    networking::ISocket::TPacket read(TSSL *ssl, size_t const &size);
+    void write(TSSL *ssl, net::ISocket::TPacket const &packet);
+    net::ISocket::TPacket read(TSSL *ssl, size_t const &size);
     std::string getErrorString();
     std::string getErrorString(int const &code);
     std::string getSSLErrorString(TSSL *ssl, int const &code);
@@ -135,8 +135,8 @@ public:
         DEFINE_SMART_PTR(CSSL)
         DEFINE_CREATE(CSSL)
 
-        void write(networking::ISocket::TPacket const &packet) override;
-        networking::ISocket::TPacket read(size_t const &size) override;
+        void write(net::ISocket::TPacket const &packet) override;
+        net::ISocket::TPacket read(size_t const &size) override;
     private:
         friend class CContext;
         void accept();

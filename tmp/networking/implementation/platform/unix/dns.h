@@ -8,11 +8,11 @@
 #ifdef UNIX_PLATFORM
 
 
-#include "utility/networking/types.h"
+#include "utility/net/types.h"
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace implementation {
 namespace platform {
 
@@ -22,7 +22,7 @@ TIPv4 getIPv4ByHost(std::string const &host);
 
 } // platform
 } // implementation
-} // networking
+} // net
 } // utility
 
 

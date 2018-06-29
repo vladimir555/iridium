@@ -2,13 +2,13 @@
 //#define HEADER_HTTP_83EE5E1A_5D87_40B6_8887_5E602ECCEE3D
 
 
-//#include "utility/networking/server/http.h"
+//#include "utility/net/server/http.h"
 //#include "utility/parsing/parser.h"
 //#include "socket.h"
 
 
 //namespace utility {
-//namespace networking {
+//namespace net {
 //namespace server {
 //namespace implementation {
 
@@ -48,7 +48,7 @@
 
 //} // implementation
 //} // server
-//} // networking
+//} // net
 //} // utility
 
 

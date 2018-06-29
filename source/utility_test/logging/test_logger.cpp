@@ -46,5 +46,5 @@ TEST(logging, logger) {
 }
 
 
-} // networking
+} // net
 } // utility

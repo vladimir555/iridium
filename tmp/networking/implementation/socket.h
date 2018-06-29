@@ -9,7 +9,7 @@
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace implementation {
 
 
@@ -17,7 +17,7 @@ using platform::CSocket;
 
 
 } // implementation
-} // networking
+} // net
 } // utility
 
 

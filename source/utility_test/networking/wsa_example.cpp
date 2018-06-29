@@ -27,7 +27,7 @@ typedef struct _SOCKET_INFORMATION {
 
 
 //int main(int argc, char** argv)
-TEST(networking, wsa_example) {
+TEST(net, wsa_example) {
     return;
     DWORD EventTotal = 0;
     WSAEVENT EventArray[WSA_MAXIMUM_WAIT_EVENTS];
@@ -268,7 +268,7 @@ TEST(networking, wsa_example) {
 //
 //#define DATA_BUFSIZE 4096
 
-//TEST(networking, wsa_example2) {
+//TEST(net, wsa_example2) {
 //    return;
 //    //-----------------------------------------
 //    // Declare and initialize variables

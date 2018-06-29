@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include "utility/networking/url.h"
+#include "utility/io/net/url.h"
 #include "utility/parsing/serialization/node.h"
 #include "utility/db/connector.h"
 
@@ -14,7 +14,7 @@ namespace config {
 
 
 DEFINE_ROOT_NODE_BEGIN(DatebaseConnector)
-    DEFINE_ATTRIBUTE(networking::URL        , Url)
+    DEFINE_ATTRIBUTE(io::net::URL    , Url)
     DEFINE_ATTRIBUTE(IDBConnector::TDBType  , Type)
     DEFINE_ATTRIBUTE(std::string            , User)
     DEFINE_ATTRIBUTE(std::string            , Password)

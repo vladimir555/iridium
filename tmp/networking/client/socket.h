@@ -4,11 +4,11 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/pattern/initializable.h"
-#include "utility/networking/socket.h"
+#include "utility/net/socket.h"
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace client {
 
 
@@ -20,7 +20,7 @@ public:
 
 
 } // client
-} // networking
+} // net
 } // utility
 
 

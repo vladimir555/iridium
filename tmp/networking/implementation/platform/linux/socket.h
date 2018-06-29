@@ -15,7 +15,7 @@
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace implementation {
 namespace platform {
 
@@ -38,7 +38,7 @@ private:
 
 } // platform
 } // implementation
-} // networking
+} // net
 } // utility
 
 

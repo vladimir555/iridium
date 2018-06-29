@@ -155,13 +155,13 @@ void API::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
 }
 
 
-void API::write(TSSL *ssl, networking::ISocket::TPacket const &packet) {
+void API::write(TSSL *ssl, net::ISocket::TPacket const &packet) {
     LOGT;
     assertOK(SSL_write(ssl, packet.data(), packet.size()), "openssl writing error");
 }
 
 
-networking::ISocket::TPacket API::read(TSSL *ssl, size_t const &size) {
+net::ISocket::TPacket API::read(TSSL *ssl, size_t const &size) {
     static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 16384;
 
     char    buffer[DEFAULT_SOCKET_BUFFER_SIZE];
@@ -176,12 +176,12 @@ networking::ISocket::TPacket API::read(TSSL *ssl, size_t const &size) {
         TSSLErrorCode code = SSL_get_error(ssl, received_size);
 //        LOGT << "ssl error " << code;
         if (code == TSSLErrorCode::SSL_ERROR_CODE_WANT_READ)
-            return networking::ISocket::TPacket(); // ----->
+            return net::ISocket::TPacket(); // ----->
         else
             throw std::runtime_error("openssl reading error: " + getSSLErrorString(ssl, code));
     }
 
-    return networking::ISocket::TPacket(buffer, buffer + received_size); // ----->
+    return net::ISocket::TPacket(buffer, buffer + received_size); // ----->
 }
 
 
@@ -218,12 +218,12 @@ CContext::CSSL::~CSSL() {
 }
 
 
-void CContext::CSSL::write(networking::ISocket::TPacket const &packet) {
+void CContext::CSSL::write(net::ISocket::TPacket const &packet) {
     API::instance().write(m_ssl, packet);
 }
 
 
-networking::ISocket::TPacket CContext::CSSL::read(size_t const &size) {
+net::ISocket::TPacket CContext::CSSL::read(size_t const &size) {
     return API::instance().read(m_ssl, size); // ----->
 }
 

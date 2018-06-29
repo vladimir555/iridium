@@ -2,10 +2,10 @@
 #define HEADER_SOCKET_47A3CECD_0FF4_40FF_AF19_67FC1ED75B78
 
 
-#include "utility/networking/server/socket.h"
-#include "utility/networking/url.h"
-#include "utility/networking/socket.h"
-#include "utility/networking/socket_handler.h"
+#include "utility/net/server/socket.h"
+#include "utility/net/url.h"
+#include "utility/net/socket.h"
+#include "utility/net/socket_handler.h"
 
 #include "utility/threading/thread.h"
 #include "utility/threading/worker_pool.h"
@@ -21,7 +21,7 @@
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace server {
 namespace implementation {
 
@@ -82,7 +82,7 @@ private:
         };
 
         utility::protocol::IProtocol::TSharedPtr    m_protocol;
-        networking::ISocket::TSharedPtr             m_socket;
+        net::ISocket::TSharedPtr             m_socket;
         TEventsWorkerPool::TSharedPtr               m_worker_pool;
     };
 
@@ -93,7 +93,7 @@ private:
 
 } // implementation
 } // server
-} // networking
+} // net
 } // utility
 
 

@@ -8,7 +8,7 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/db/connector.h"
-#include "utility/networking/url.h"
+#include "utility/net/url.h"
 
 #include "connector.h"
 
@@ -29,7 +29,7 @@ class CPostgreSQLConnector:
 public:
     DEFINE_CREATE(CPostgreSQLConnector)
     ///
-    CPostgreSQLConnector(networking::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
+    CPostgreSQLConnector(net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
     ///
     virtual        ~CPostgreSQLConnector();
     ///
@@ -46,7 +46,7 @@ private:
 //    std::shared_ptr<pqxx::connection>   m_connection;
     PGconn             *m_connection;
     ///
-    networking::URL     m_url;
+    net::URL     m_url;
     ///
     std::string         m_user;
     ///

@@ -17,7 +17,7 @@
 
 
 namespace utility {
-namespace networking {
+namespace net {
 
 
 class ISocketStream {
@@ -59,12 +59,12 @@ public:
 };
 
 
-} // networking
+} // net
 } // utility
 
 
-//DEFINE_CONVERT(utility::networking::ISocketStream::TPacket, std::string)
-//DEFINE_CONVERT(std::string, utility::networking::ISocketStream::TPacket)
+//DEFINE_CONVERT(utility::net::ISocketStream::TPacket, std::string)
+//DEFINE_CONVERT(std::string, utility::net::ISocketStream::TPacket)
 
 
 #endif // HEADER_SOCKET_423B8F1C_F93C_43CC_99D9_06CB1A1062CF

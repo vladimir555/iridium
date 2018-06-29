@@ -1,28 +1,31 @@
 #include <gtest/gtest.h>
 
-#include <utility/networking/url.h>
-#include <utility/networking/dns.h>
-#include <utility/protocol/http/implementation/protocol.h>
-#include <utility/protocol/http/implementation/uri_fs_mapper.h>
+#include <utility/io/net/url.h>
+#include <utility/io/net/dns.h>
+#include <utility/io/protocol/http/implementation/protocol.h>
+#include <utility/io/protocol/http/implementation/uri_fs_mapper.h>
 #include <utility/logging/logger.h>
 #include <utility/convertion/convert.h>
-#include <utility/networking/implementation/platform/windows/wsa.h>
+#include <utility/io/net/implementation/platform/windows/wsa.h>
 #include <utility/threading/thread.h>
 
 
+#include <memory>
+
 using namespace std;
 
-using utility::networking::getIPv4ByHost;
+using utility::io::net::getIPv4ByHost;
 using utility::convertion::convert;
 using utility::threading::sleep;
 
 
 namespace utility {
-namespace networking {
+namespace io {
+namespace net {
 namespace socket {
 
 
-//TEST(networking, socket_loopback) {
+//TEST(net, socket_loopback) {
 //    logging::update(logging::config::createDefaultConsoleLoggerConfig());
 //
 //    protocol::http::IHTTPHandler::TSharedPtr    http_handler =
@@ -45,7 +48,7 @@ namespace socket {
 //}
 
 
-TEST(networking, dns) {
+TEST(net, dns) {
     auto ipv4 = getIPv4ByHost("ya.ru");
 
     //cout << "ya.ru ip: "
@@ -59,7 +62,7 @@ TEST(networking, dns) {
 }
 
 
-TEST(networking, url) {
+TEST(net, url) {
     ASSERT_THROW(URL(""), std::exception);
     ASSERT_THROW(URL("172.16.0.64"), std::exception);
     ASSERT_THROW(URL("55555"), std::exception);
@@ -89,44 +92,57 @@ TEST(networking, url) {
 }
 
 
-//class A {
-//public:
-//    A() {
-//        cout << "create" << endl;
-//        i = 5;
-//    }
-//    ~A() {
-//        cout << "destroy" << endl;
-//        i = 0;
-//    }
-//    A(A const &a) {
-//        cout << "copy" << endl;
-//    }
-//    A(A const &&a) {
-//        cout << "move" << endl;
-//    }
-//    A(A &a) {
-//        cout << "copy 2" << endl;
-//    }
-//    A(A &&a) {
-//        cout << "move 2" << endl;
-//    }
-//    void f() const {
-//        cout << "func " << i << endl;
-//        i++;
-//    }
-//    mutable int i = 5;
-//};
-//
-//
+class A {
+public:
+    A() {
+        cout << "create" << endl;
+        i = 5;
+    }
+    ~A() {
+        cout << "destroy" << endl;
+        i = 0;
+    }
+    A(A const &a) {
+        cout << "copy" << endl;
+    }
+    A(A const &&a) {
+        cout << "move" << endl;
+    }
+    A(A &a) {
+        cout << "copy 2" << endl;
+    }
+    A(A &&a) {
+        cout << "move 2" << endl;
+    }
+    void f() const {
+        cout << "func " << i << endl;
+        i++;
+    }
+    mutable int i = 5;
+
+    auto makeFunc() {
+        return [this](){f();};
+    }
+};
+
+
 //template<typename T>
 //T &f(T &t) {
 //    return t;
 //}
 
+//A a;
+
+
+TEST(test, test) {
+//    A a;
+//    auto func = a.makeFunc();
+//    func();
+}
+
 
 #ifdef WINDOWS_PLATFORM
-TEST(networking, wsa) {
+TEST(net, wsa) {
     return;
     //{
     //    A const a;
@@ -161,5 +177,6 @@ TEST(networking, wsa) {
 
 
 } // socket
-} // networking
+} // net
+} // io
 } // utility

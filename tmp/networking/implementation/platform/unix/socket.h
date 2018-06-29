@@ -9,8 +9,8 @@
 #define HEADER_SOCKET_397080E6_6910_4C45_AAB7_D404A42C7D12
 
 
-#include "utility/networking/socket.h"
-#include "utility/networking/url.h"
+#include "utility/net/socket.h"
+#include "utility/net/url.h"
 #include "utility/encryption/ssl.h"
 #include "utility/threading/implementation/recursive_mutex.h"
 #include "utility/threading/implementation/timed_mutex.h"
@@ -21,7 +21,7 @@
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace implementation {
 namespace platform {
 namespace unix {
@@ -79,7 +79,7 @@ T CSocket::assertOK(T const &result, std::string const &message) const {
 } // unix
 } // platform
 } // implementation
-} // networking
+} // net
 } // utility
 
 

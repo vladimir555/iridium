@@ -52,6 +52,7 @@ public:
 
 class StreamProxy: public IStream {
 public:
+    // todo: subject, listeners, many clients, proxy protocol impl
     StreamProxy(IStream::TSharedPtr const &input, IStream::TSharedPtr const &output);
 };
 

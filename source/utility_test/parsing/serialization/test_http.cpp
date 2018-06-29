@@ -3,15 +3,15 @@
 #include <iostream>
 using namespace std;
 
-#include "utility/protocol/http/request.h"
-#include "utility/protocol/http/response.h"
-#include "utility/protocol/http/implementation/protocol.h"
+#include "utility/io/protocol/http/request.h"
+#include "utility/io/protocol/http/response.h"
+#include "utility/io/protocol/http/implementation/protocol.h"
 #include "utility/parsing/implementation/parser_http.h"
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
 
 
-using utility::protocol::http::implementation::CProtocol;
+using utility::io::protocol::http::implementation::CProtocol;
 using utility::parsing::implementation::CHTTPParser;
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;
@@ -20,7 +20,8 @@ using std::string;
 
 
 namespace utility {
-namespace networking {
+namespace io {
+namespace net {
 namespace http {
 
 
@@ -104,5 +105,6 @@ TEST(serialization, http_response) {
 
 
 } // socket
-} // networking
+} // net
+} // io
 } // utility

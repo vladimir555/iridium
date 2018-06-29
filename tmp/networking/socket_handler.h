@@ -7,7 +7,7 @@
 
 
 namespace utility {
-namespace networking {
+namespace net {
 
 
 class ISocketHandler {
@@ -18,7 +18,7 @@ public:
 };
 
 
-} // networking
+} // net
 } // utility
 
 

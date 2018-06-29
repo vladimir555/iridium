@@ -12,7 +12,7 @@
 
 using std::string;
 using std::vector;
-using utility::networking::URL;
+using utility::net::URL;
 using utility::convertion::convert;
 
 

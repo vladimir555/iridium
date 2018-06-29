@@ -2,14 +2,14 @@
 #define HEADER_SOCKET_HANDLER_36FE0D79_C5EF_47DD_8394_219A31904066
 
 
-#include "utility/networking/socket_handler.h"
+#include "utility/net/socket_handler.h"
 #include "utility/protocol/protocol.h"
 #include "utility/protocol/packet.h"
 #include "socket.h"
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace implementation {
 
 
@@ -36,7 +36,7 @@ private:
 
 
 } // implementation
-} // networking
+} // net
 } // utility
 
 

@@ -3,13 +3,13 @@
 
 
 #include "utility/smart_ptr.h"
-#include "utility/networking/socket.h"
-#include "utility/networking/client/socket.h"
-#include "utility/networking/url.h"
+#include "utility/net/socket.h"
+#include "utility/net/client/socket.h"
+#include "utility/net/url.h"
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace client {
 namespace implementation {
 
@@ -29,13 +29,13 @@ public:
     URL     getURL() const override;
 
 private:
-    networking::ISocket::TSharedPtr m_socket;
+    net::ISocket::TSharedPtr m_socket;
 };
 
 
 } // implementation
 } // client
-} // networking
+} // net
 } // utility
 
 

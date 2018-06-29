@@ -1,13 +1,13 @@
 #include "sink_file.h"
 
 #include "utility/convertion/convert.h"
-#include "utility/fs/implementation/file_writer.h"
+#include "utility/io/fs/implementation/file_writer.h"
 #include "utility/threading/implementation/worker.h"
 
 
 using std::string;
 using utility::convertion::convert;
-using utility::fs::implementation::CFileStream;
+using utility::io::fs::implementation::CFileStream;
 using utility::threading::implementation::CWorker;
 using std::chrono::system_clock;
 

@@ -15,7 +15,7 @@
 
 using std::string;
 using std::vector;
-using utility::networking::URL;
+using utility::net::URL;
 using utility::convertion::convert;
 using utility::convertion::convertPtr;
 

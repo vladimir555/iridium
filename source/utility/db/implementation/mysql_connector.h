@@ -8,7 +8,7 @@
 
 #include "utility/smart_ptr.h"
 #include "utility/db/connector.h"
-#include "utility/networking/url.h"
+#include "utility/net/url.h"
 
 #include "connector.h"
 
@@ -28,7 +28,7 @@ class CMySQLConnector:
 public:
     DEFINE_CREATE(CMySQLConnector)
     ///
-    CMySQLConnector(networking::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
+    CMySQLConnector(net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
     ///
     virtual        ~CMySQLConnector();
     ///
@@ -42,7 +42,7 @@ private:
     ///
     ::MYSQL         m_connection;
     ///
-    networking::URL m_url;
+    net::URL m_url;
     ///
     std::string     m_user;
     ///

@@ -5,11 +5,11 @@
 #include "utility/pattern/initializable.h"
 #include "utility/smart_ptr.h"
 #include "utility/threading/worker_pool.h"
-#include "utility/networking/socket.h"
+#include "utility/net/socket.h"
 
 
 namespace utility {
-namespace networking {
+namespace net {
 namespace server {
 
 
@@ -18,14 +18,14 @@ public:
     DEFINE_SMART_PTR(ISocket)
     virtual ~ISocket() = default;
 
-    typedef threading::IWorkerPool<networking::ISocket::TEvent::TSharedPtr> TEventsWorkerPool;
+    typedef threading::IWorkerPool<net::ISocket::TEvent::TSharedPtr> TEventsWorkerPool;
     typedef TEventsWorkerPool::TWorkerHandler  TEventsHandler;
     typedef TEventsWorkerPool::TWorkerHandlers TEventsHandlers;
 };
 
 
 } // server
-} // networking
+} // net
 } // utility
 
 

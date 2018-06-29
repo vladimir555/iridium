@@ -8,7 +8,7 @@
 
 #include <gtest/gtest.h>
 #include <utility/logging/logger.h>
-#include <utility/networking/url.h>
+#include <utility/io/net/url.h>
 
 #include <vector>
 #include <list>
@@ -28,7 +28,7 @@
 
 using utility::logging::update;
 using utility::logging::config::createDefaultConsoleLoggerConfig;
-using utility::networking::URL;
+using utility::io::net::URL;
 using utility::convertion::convert;
 
 

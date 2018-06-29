@@ -6,16 +6,16 @@
 #include "implementation/parser_xml.h"
 
 #include "utility/strings.h"
-#include "utility/fs/files.h"
-#include "utility/fs/implementation/file_writer.h"
+#include "utility/io/fs/files.h"
+#include "utility/io/fs/implementation/file_writer.h"
 
 
 using std::string;
 
-using utility::fs::readTextFile;
-using utility::fs::extractFileNameExtension;
-using utility::fs::checkFileExistence;
-using utility::fs::implementation::CFileStream;
+using utility::io::fs::readTextFile;
+using utility::io::fs::extractFileNameExtension;
+using utility::io::fs::checkFileExistence;
+using utility::io::fs::implementation::CFileStream;
 
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;

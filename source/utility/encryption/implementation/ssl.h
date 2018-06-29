@@ -46,10 +46,10 @@ public:
         DEFINE_SMART_PTR(CSSL)
         DEFINE_CREATE(CSSL)
 
-        void write(networking::ISocket::TPacket const &packet) override {}
-        networking::ISocket::TPacket read(size_t const &size) override {
+        void write(net::ISocket::TPacket const &packet) override {}
+        net::ISocket::TPacket read(size_t const &size) override {
             throw std::runtime_error("SSL not implemented"); // ----->
-            return networking::ISocket::TPacket(); // ----->
+            return net::ISocket::TPacket(); // ----->
         }
     };
 
