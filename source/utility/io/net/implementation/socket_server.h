@@ -49,22 +49,22 @@ private:
         void run(std::atomic<bool> &is_running) override;
     private:
         ISocket::TSharedPtr         m_socket;
-        io::IListener::TSharedPtr   m_listener;
-        threading::IWorkerPool <io::IListener::Event::TSharedPtr> ::TSharedPtr
+        IListener::TSharedPtr       m_listener;
+        threading::IWorkerPool <IListener::Event::TSharedPtr> ::TSharedPtr
                                     m_worker_pool;
     };
 
     class StreamLocker: public threading::Synchronized {
     public:
         StreamLocker();
-        io::IStream::TSharedPtr get(int const &id);
-        void set(int const &id, io::IStream::TSharedPtr &stream);
+        IStream::TSharedPtr get(int const &id);
+        void set(int const &id, IStream::TSharedPtr &stream);
     private:
-        std::map<int, io::IStream::TSharedPtr> m_map_id_stream;
+        std::map<int, IStream::TSharedPtr> m_map_id_stream;
     };
 
     class CSocketHandler:
-        public threading::IWorkerHandler <io::IListener::Event::TSharedPtr>
+        public threading::IWorkerHandler <IListener::Event::TSharedPtr>
     {
     public:
         DEFINE_IMPLEMENTATION(CSocketHandler)
@@ -82,14 +82,14 @@ private:
             DEFINE_CREATE   (StreamHandler)
             StreamHandler(
                 protocol::IProtocol::TSharedPtr const &protocol,
-                io::IStream::TSharedPtr         const &stream
+                IStream::TSharedPtr             const &stream
             );
            ~StreamHandler() = default;
 
-            bool handle(io::IListener::Event const &event);
+            bool handle(IListener::Event const &event);
         private:
             protocol::IProtocol::TSharedPtr m_protocol;
-            io::IStream::TSharedPtr         m_stream;
+            IStream::TSharedPtr             m_stream;
         };
 
         std::map<int, StreamHandler::TSharedPtr>    m_map_id_stream;

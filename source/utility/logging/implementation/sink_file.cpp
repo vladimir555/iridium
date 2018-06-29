@@ -7,6 +7,7 @@
 
 using std::string;
 using utility::convertion::convert;
+using utility::io::TBuffer;
 using utility::io::fs::implementation::CFileStream;
 using utility::threading::implementation::CWorker;
 using std::chrono::system_clock;
@@ -64,7 +65,7 @@ CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const
     for (auto const &e : events) {
         auto line = makeLine(e);
         line.push_back('\n');
-        m_file_writer->write(io::TBuffer(line.begin(), line.end()));
+        m_file_writer->write(TBuffer(line.begin(), line.end()));
     }
 
     m_file_writer->flush();

@@ -100,13 +100,13 @@ CSocketServer::StreamLocker::StreamLocker()
 {}
 
 
-io::IStream::TSharedPtr CSocketServer::StreamLocker::get(int const &id) {
+IStream::TSharedPtr CSocketServer::StreamLocker::get(int const &id) {
     LOCK_SCOPE
     return m_map_id_stream[id];
 }
 
 
-void CSocketServer::StreamLocker::set(int const &id, io::IStream::TSharedPtr &stream) {
+void CSocketServer::StreamLocker::set(int const &id, IStream::TSharedPtr &stream) {
     LOCK_SCOPE
     m_map_id_stream[id] = stream;
 }
@@ -133,10 +133,9 @@ CSocketServer::CSocketHandler::TItems CSocketServer::CSocketHandler::handle(TIte
 
 CSocketServer::CSocketHandler::StreamHandler::StreamHandler(
     protocol::IProtocol::TSharedPtr const &protocol,
-    io::IStream::TSharedPtr         const &stream
-) {
-
-}
+    IStream::TSharedPtr             const &stream
+)
+{}
 
 
 bool CSocketServer::CSocketHandler::StreamHandler::handle(IListener::Event const &event) {

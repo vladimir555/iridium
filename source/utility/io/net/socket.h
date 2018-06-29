@@ -14,7 +14,7 @@ namespace net {
 
 class ISocket:
     public pattern::IInitializable,
-    public io::IStream
+    public IStream
 {
 public:
     DEFINE_INTERFACE(ISocket)

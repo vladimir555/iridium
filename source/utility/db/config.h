@@ -14,7 +14,7 @@ namespace config {
 
 
 DEFINE_ROOT_NODE_BEGIN(DatebaseConnector)
-    DEFINE_ATTRIBUTE(io::net::URL    , Url)
+    DEFINE_ATTRIBUTE(io::net::URL           , Url)
     DEFINE_ATTRIBUTE(IDBConnector::TDBType  , Type)
     DEFINE_ATTRIBUTE(std::string            , User)
     DEFINE_ATTRIBUTE(std::string            , Password)

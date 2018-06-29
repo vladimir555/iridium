@@ -17,7 +17,7 @@ class IProtocol {
 public:
     DEFINE_INTERFACE(IProtocol)
     // returns null on ending processing
-    virtual io::IStreamReader::TSharedPtr exchange(io::TBuffer const &request) = 0;
+    virtual IStreamReader::TSharedPtr exchange(TBuffer const &request) = 0;
 };
 // todo: command pattern: ... command socket read -> fs, command write to fs
 

@@ -16,6 +16,7 @@ using utility::io::fs::readTextFile;
 using utility::io::fs::extractFileNameExtension;
 using utility::io::fs::checkFileExistence;
 using utility::io::fs::implementation::CFileStream;
+using utility::io::TBuffer;
 
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;
@@ -58,7 +59,7 @@ void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
     auto text_writer    = CFileStream::create(file_name);
     auto line           = parser->compose(root_node);
 
-    text_writer->write(io::TBuffer(line.begin(), line.end()));
+    text_writer->write(TBuffer(line.begin(), line.end()));
 }
 
 

@@ -34,7 +34,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         DEFINE_ATTRIBUTE_DEFAULT(std::string, ContentType, "text/html")
 //        DEFINE_ATTRIBUTE_DEFAULT(std::string, Connection, "")
     DEFINE_NODE_END(Headers)
-    DEFINE_ATTRIBUTE_DEFAULT(io::net::TPacket, Body, io::net::TPacket())
+    DEFINE_ATTRIBUTE_DEFAULT(net::TPacket, Body, net::TPacket())
 DEFINE_ROOT_NODE_END()
 
 
