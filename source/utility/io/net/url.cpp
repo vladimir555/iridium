@@ -118,7 +118,7 @@ URL::TProtocol const URL::getProtocol() const {
     if (m_protocol)
         return *m_protocol; // ----->
     else
-        return TProtocol::UNKNOWN;
+        return TProtocol::UNKNOWN; // ----->
 }
 
 

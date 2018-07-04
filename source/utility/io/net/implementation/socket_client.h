@@ -3,7 +3,7 @@
 
 
 #include "utility/platform.h"
-#include PLATFORM_HEADER(socket_client.h)
+//#include PLATFORM_HEADER(socket_client.h)
 
 
 namespace utility {
@@ -11,7 +11,7 @@ namespace net {
 namespace implementation {
 
 
-typedef platform::CSocketClient CSocketClient;
+//typedef platform::CSocketClient CSocketClient;
 
 
 } // implementation

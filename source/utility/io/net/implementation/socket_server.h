@@ -7,12 +7,15 @@
 #include "utility/io/net/url.h"
 #include "utility/pattern/initializable.h"
 #include "utility/io/protocol/protocol_factory.h"
+#include "utility/io/buffer.h"
 #include "utility/threading/worker_pool.h"
 #include "utility/threading/thread.h"
 #include "utility/threading/runnable.h"
 #include "utility/threading/synchronized.h"
+#include "utility/threading/synchronized_container.h"
 #include "utility/io/listener.h"
-#include "utility/io/stream_context.h"
+#include "utility/parsing/parser.h"
+#include "utility/io/protocol/http/content_storage.h"
 
 #include <map>
 
@@ -28,64 +31,65 @@ public:
     DEFINE_IMPLEMENTATION(CSocketServer)
 
     CSocketServer(
-        URL const &url,
-        int const &threads_count,
+        URL     const &url,
+        size_t  const &threads_count,
         protocol::IProtocolFactory::TSharedPtr const &protocol_factory);
 
-    void initialize() override;
-    void finalize() override;
+    void initialize()   override;
+    void finalize()     override;
 
 private:
     class CAcceptor: public threading::IRunnable {
     public:
         DEFINE_IMPLEMENTATION(CAcceptor)
 
-        class StreamStorage: private threading::Synchronized {
-        public:
-            DEFINE_CREATE(StreamStorage)
-            StreamStorage();
-           ~StreamStorage() = default;
-
-            StreamContext::TSharedPtr get(int const &id);
-            void set(int const &id, StreamContext::TSharedPtr &stream_context);
-        private:
-            std::map<int, StreamContext::TSharedPtr> m_map_id_stream_context;
+        struct TPeer {
+            ISocket::TSharedPtr         client_stream;
+            IStreamReader::TSharedPtr   server_stream_reader;
+            IStreamWriter::TSharedPtr   server_stream_writer;
+            Buffer::TSharedPtr          buffer;
+            int                         state = 0;
         };
-
-
-        class CSocketHandler: public threading::IWorkerHandler <IListener::Event::TSharedPtr> {
+        typedef threading::SynchronizedContainer<IStream::TSharedPtr, IStreamHandler::TSharedPtr> TStreamHandlers;
+        
+        class CIOEventHandler: public threading::IWorkerHandler<io::Event::TSharedPtr> {
         public:
-            DEFINE_IMPLEMENTATION(CSocketHandler)
+            DEFINE_IMPLEMENTATION(CIOEventHandler)
 
-            CSocketHandler(protocol::IProtocol::TSharedPtr const &protocol, StreamStorage::TSharedPtr const &stream_storage);
+            CIOEventHandler(protocol::IProtocolFactory::TSharedPtr const &protocol, TStreamHandlers::TSharedPtr const &streams);
 
             void    initialize()    override;
             void    finalize()      override;
-            TItems  handle(TItems const &item) override;
+            TItems  handle(TItems const &events) override;
 
         private:
-            protocol::IProtocol::TSharedPtr     m_protocol;
-            StreamStorage::TSharedPtr           m_stream_storage;
+            bool transmit(IStreamReader::TSharedPtr const &reader, IStreamWriter::TSharedPtr const &writer);
+            protocol::IProtocolFactory::TSharedPtr      m_protocol_factory;
+            TStreamHandlers::TSharedPtr                 m_stream_handlers;
+            size_t                                      m_buffer_size;
+            parsing::IParser::TSharedPtr                m_parser;
+            protocol::http::IContentStorage::TSharedPtr m_content_storage;
         };
 
-
         CAcceptor(
-            URL const &url,
-            int const &threads_count,
+            URL    const &url,
+            size_t const &threads_count,
             protocol::IProtocolFactory::TSharedPtr const &protocol_factory);
 
         void initialize()   override;
         void finalize()     override;
         void run(std::atomic<bool> &is_running) override;
+        
     private:
         IListener::TSharedPtr                   m_listener;
         ISocket::TSharedPtr                     m_socket;
-        threading::IWorkerPool <IListener::Event::TSharedPtr> ::TSharedPtr
-                                                m_worker_pool;
+        threading::IWorkerPool <Event::TSharedPtr>::TSharedPtr
+                                                m_worker_pool_peer_handler;
         protocol::IProtocolFactory::TSharedPtr  m_protocol_factory;
-        StreamStorage::TSharedPtr               m_stream_storage;
+        
+        TStreamHandlers::TSharedPtr                      m_peers;
+        IInitializable::TSharedPtr              m_initializer;
     };
-
 
     threading::IThread::TSharedPtr              m_thread_acceptor;
 };

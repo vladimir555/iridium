@@ -7,7 +7,7 @@
  * example:
  * thread pool for:
  * 
- * int f1(int const &);
+ * int  f1(int const &);
  * void f2(int const &);
  *
  * async( f2( async( f1(1) ) + async( f2(2) ) ) ); // f1 runs parallel with f2

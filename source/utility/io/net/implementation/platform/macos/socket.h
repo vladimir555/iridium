@@ -22,5 +22,4 @@ typedef unix::CSocket CSocket;
 } // utility
 
 
-
 #endif // HEADER_SOCKET_EF0CBDFF_315D_4BFE_8D59_0A44EE80B87C

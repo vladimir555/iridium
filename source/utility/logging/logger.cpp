@@ -114,5 +114,28 @@ void update(config::TLogger const &config) {
 }
 
 
+std::string convertFunctionNameToLogFunctionName(std::string const &name) {
+    auto l = split(split(name, "(").front(), "::");
+    std::string result = l.back();
+    l.pop_back();
+    result = l.back() + "::" + result;
+    
+//    auto result = name;
+//    auto words  = split(split(name, "(").front(), "::");
+//    if (words.size() > 1) {
+//        result  = words.back();
+//        words.pop_back();
+//        result  = words.back() + "::" + result;
+//    }
+    
+    static auto const tab_size = 25;
+    
+    if (result.size() < tab_size)
+        return result + std::string(tab_size - result.size(), ' '); // ----->
+    
+    return result; // ----->
+}
+
+
 } // logger
 } // utility

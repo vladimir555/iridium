@@ -79,6 +79,8 @@ std::atomic<int> config::double_precission(5);
 //}
 
 
+// typedef std::chrono::duration<int, std::ratio_multiply< minutes::period, std::ratio<5> >::type> _5minutes;
+// tt = floor<_5minutes>(t);
 template<>
 string convert(system_clock::time_point const &value) {
     auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();

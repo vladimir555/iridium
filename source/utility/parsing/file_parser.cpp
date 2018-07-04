@@ -7,7 +7,7 @@
 
 #include "utility/strings.h"
 #include "utility/io/fs/files.h"
-#include "utility/io/fs/implementation/file_writer.h"
+#include "utility/io/fs/implementation/file_stream_writer.h"
 
 
 using std::string;
@@ -15,8 +15,8 @@ using std::string;
 using utility::io::fs::readTextFile;
 using utility::io::fs::extractFileNameExtension;
 using utility::io::fs::checkFileExistence;
-using utility::io::fs::implementation::CFileStream;
-using utility::io::TBuffer;
+using utility::io::fs::implementation::CFileStreamWriter;
+using utility::io::Buffer;
 
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;
@@ -56,10 +56,10 @@ INode::TSharedPtr parseFile(string const &file_name) {
 
 void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
     auto parser         = createParserByExtension(file_name);
-    auto text_writer    = CFileStream::create(file_name);
+    auto text_writer    = CFileStreamWriter::create(file_name);
     auto line           = parser->compose(root_node);
 
-    text_writer->write(TBuffer(line.begin(), line.end()));
+    text_writer->write(Buffer(line.begin(), line.end()));
 }
 
 

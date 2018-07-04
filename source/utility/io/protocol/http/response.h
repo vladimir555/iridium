@@ -3,7 +3,7 @@
 
 
 #include "utility/parsing/serialization/node.h"
-#include "utility/io/net/types.h"
+#include "utility/io/buffer.h"
 
 #include <string>
 #include <chrono>
@@ -19,7 +19,7 @@ namespace response {
 DEFINE_ROOT_NODE_BEGIN(Http)
     struct TMessageLine {
         std::string protocol;
-        int code;
+        int         code;
         std::string reason;
     };
     DEFINE_ATTRIBUTE_DEFAULT(TMessageLine, Message, TMessageLine( {"HTTP/1.1", 200, "OK"} ))
@@ -34,7 +34,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         DEFINE_ATTRIBUTE_DEFAULT(std::string, ContentType, "text/html")
 //        DEFINE_ATTRIBUTE_DEFAULT(std::string, Connection, "")
     DEFINE_NODE_END(Headers)
-    DEFINE_ATTRIBUTE_DEFAULT(net::TPacket, Body, net::TPacket())
+    DEFINE_ATTRIBUTE_DEFAULT(Buffer, Body, Buffer())
 DEFINE_ROOT_NODE_END()
 
 

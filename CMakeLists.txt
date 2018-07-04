@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(utility)
+# todo: morion, akela, magur, pluto, eris, euryale
 
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
@@ -29,7 +30,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 #add_compile_options("-std=c++14")
 #add_compile_options("-Wall")
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB_RECURSE SOURCE 
     ${CMAKE_SOURCE_DIR}/source/utility/*.h
@@ -44,12 +45,14 @@ include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/include /usr/
 #set(Poco_LIBRARIES libPocoFoundation.so libPocoUtil.so libPocoNet.so libPocoJSON.so)
 find_package(Threads)
 
+#set(CMAKE_FIND_FRAMEWORK LAST)
+
 add_library(${PROJECT_NAME} STATIC ${SOURCE})
 
 #TEST
 enable_testing()
 find_package(GTest REQUIRED)
-find_package(OpenSSL REQUIRED)
+#find_package(OpenSSL REQUIRED)
 #find_package(PostgreSQL REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/utility/source)
 
@@ -72,7 +75,7 @@ target_link_libraries(
     ${GTEST_LIBRARY} 
     ${GTEST_MAIN_LIBRARY}
     ${CMAKE_THREAD_LIBS_INIT}
-    ${OPENSSL_LIBRARIES}
+#    ${OPENSSL_LIBRARIES}
 #    ${PostgreSQL_LIBRARIES}
 )
 

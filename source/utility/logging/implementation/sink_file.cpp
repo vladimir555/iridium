@@ -1,14 +1,14 @@
 #include "sink_file.h"
 
 #include "utility/convertion/convert.h"
-#include "utility/io/fs/implementation/file_writer.h"
+#include "utility/io/fs/implementation/file_stream_writer.h"
 #include "utility/threading/implementation/worker.h"
 
 
 using std::string;
 using utility::convertion::convert;
-using utility::io::TBuffer;
-using utility::io::fs::implementation::CFileStream;
+using utility::io::Buffer;
+using utility::io::fs::implementation::CFileStreamWriter;
 using utility::threading::implementation::CWorker;
 using std::chrono::system_clock;
 
@@ -46,7 +46,7 @@ void CSinkFile::CWorkerHandler::initialize() {
             m_file_name.replace(m_file_name.find_last_of('.'), 1, date + ".");
     }
 
-    m_file_writer = CFileStream::create(m_file_name);
+    m_file_writer = CFileStreamWriter::create(m_file_name);
     m_file_writer->initialize();
 }
 
@@ -65,7 +65,7 @@ CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const
     for (auto const &e : events) {
         auto line = makeLine(e);
         line.push_back('\n');
-        m_file_writer->write(TBuffer(line.begin(), line.end()));
+        m_file_writer->write(Buffer(line.begin(), line.end()));
     }
 
     m_file_writer->flush();

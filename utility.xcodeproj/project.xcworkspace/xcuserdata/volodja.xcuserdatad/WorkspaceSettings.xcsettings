@@ -3,9 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>BuildLocationStyle</key>
-	<string>UseAppPreferences</string>
+	<string>CustomLocation</string>
+	<key>CustomBuildIntermediatesPath</key>
+	<string>/Users/volodja/workspace/xcode/buid-utility/Intermediates.noindex</string>
 	<key>CustomBuildLocationType</key>
-	<string>RelativeToDerivedData</string>
+	<string>Absolute</string>
+	<key>CustomBuildProductsPath</key>
+	<string>/Users/volodja/workspace/xcode/buid-utility</string>
+	<key>CustomIndexStorePath</key>
+	<string>/Users/volodja/workspace/xcode/buid-utility/Index/DataStore</string>
 	<key>DerivedDataLocationStyle</key>
 	<string>Default</string>
 	<key>EnabledFullIndexStoreVisibility</key>

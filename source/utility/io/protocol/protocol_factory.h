@@ -3,7 +3,8 @@
 
 
 #include "utility/smart_ptr.h"
-#include "protocol.h"
+#include "utility/io/stream.h"
+#include "utility/io/stream_handler.h"
 
 
 namespace utility {
@@ -14,7 +15,7 @@ namespace protocol {
 class IProtocolFactory {
 public:
     DEFINE_INTERFACE(IProtocolFactory)
-    IProtocol::TSharedPtr create();
+    virtual IStreamHandler::TSharedPtr createStreamHandler(IStream::TSharedPtr const &stream) = 0;
 };
 
 

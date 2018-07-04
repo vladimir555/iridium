@@ -33,16 +33,19 @@ public:
 
     int     getID() const override;
 
-    size_t  write(TBuffer const &packet) override;
-    TBuffer read(size_t const &size) override;
+    size_t  write(Buffer const &buffer) override;
+    Buffer  read(size_t const &size) override;
+    
+//    void    flush() override;
 
 private:
-    CSocket(int const &fd);
+    CSocket(URL const &url, int const &fd);
 
+    URL     getPeerURL(int const &fd);
     void    setBlockingMode(bool const &is_blocking);
 
-    URL     m_url;
     bool    m_is_server_mode;
+    URL     m_url;
     int     m_socket;
 };
 

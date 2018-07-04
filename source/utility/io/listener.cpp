@@ -1,16 +1,18 @@
 #include "listener.h"
 
 
-IMPLEMENT_ENUM(utility::io::IListener::Event::TEvent)
+IMPLEMENT_ENUM(utility::io::Event::TType)
 
 
 namespace utility {
 namespace io {
 
 
-IListener::Event::Event(TEvent const &event_, IStream::TSharedPtr const &stream_)
+Event::Event(
+    TType               const &type_,
+    IStream::TSharedPtr const &stream_)
 :
-    event   (event_),
+    type    (type_),
     stream  (stream_)
 {}
 

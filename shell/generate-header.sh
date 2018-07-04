@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 cd $(dirname "$0")
 cd ../source
 
@@ -16,4 +18,4 @@ for ARG in ${@:2}; do
 done;
 HEADER_PATH="${FILE_PATH}/$1.h"
 
-echo "${HEADER_MACRO_BEGIN}${NAMESPACE_BEGIN}${NAMESPACE_END}${HEADER_MACRO_END}" > ${HEADER_PATH}
+echo "${HEADER_MACRO_BEGIN}${NAMESPACE_BEGIN}${NAMESPACE_END}${HEADER_MACRO_END}" >> ${HEADER_PATH}

@@ -9,6 +9,7 @@ namespace utility {
 namespace threading {
 
 
+// todo: rename ThreadSafe
 class Synchronized {
 public:
     Synchronized(IMutex::TSharedPtr const &mutex);

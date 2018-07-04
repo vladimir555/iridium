@@ -19,7 +19,7 @@ using utility::convertion::convert;
 
 DEFINE_ENUM(
     TEventFlag,
-
+    // input flags
     ADD             = EV_ADD,
     DELETE          = EV_DELETE,
     ENABLE          = EV_ENABLE,
@@ -34,7 +34,7 @@ DEFINE_ENUM(
     SYSFLAGS        = EV_SYSFLAGS,
     FLAG0           = EV_FLAG0,
     FLAG1           = EV_FLAG1,
-
+    // output flags
     EOF_            = EV_EOF,
     ERROR           = EV_ERROR
 )
@@ -76,15 +76,18 @@ T assertOK(T const &result, std::string const &message) {
 }
 
 
-size_t const MAX_EVENT_COUNT    = 3;
-int    const KEVENT_TIMIOUT_MS  = 1000;
+size_t const MAX_EVENT_COUNT    = 4;
+int    const KEVENT_TIMIOUT_MS  = 10000;
 
 
-std::vector<struct kevent>  m_events        (MAX_EVENT_COUNT - 1, { 0 });
-std::vector<struct kevent>  m_monitor_events(m_events.size() + 1, { 0 });
-int                         m_monitor_events_used_count = 0;
-int                         m_kqueue;
-int                         m_socket_fd = 0;
+//std::vector<struct kevent>  m_events        (MAX_EVENT_COUNT - 1, { 0 });
+//std::vector<struct kevent>  m_monitor_events(m_events.size() + 1, { 0 });
+//int                         m_monitor_events_used_count = 0;
+//int                         m_kqueue;
+//int                         m_socket_fd = 0;
+
+
+static const struct kevent DEFAULT_KEVENT = {};
 
 
 namespace utility {
@@ -95,8 +98,8 @@ namespace platform {
 
 CListener::CListener()
 :
-    m_events                      (MAX_EVENT_COUNT - 1, { 0 }),
-    m_monitor_events              (m_events.size() + 1, { 0 }),
+    m_events                      (MAX_EVENT_COUNT, DEFAULT_KEVENT),
+    m_monitor_events              (m_events.size(), DEFAULT_KEVENT),
     m_monitor_events_used_count   (0),
     m_kqueue                      (0)
 {}
@@ -123,32 +126,62 @@ void CListener::initialize() {
 
 
 void CListener::finalize() {
-
 }
 
 
+string convertToString(std::vector<struct kevent> const &m, std::vector<struct kevent> const &e) {
+    string monitor, events;
+    for (auto const &i: m)
+        monitor +=
+        convert<string>(i.ident) + " " +
+        convert<string>(i.flags) + ", ";
+
+    for (auto const &i: e)
+        events  +=
+        convert<string>(i.ident) + " " +
+        convert<string>(i.flags) + ", ";
+
+    return
+        "m: " + monitor + " | " +
+        "e: " + events;
+}
+
+    
 void CListener::add(IStream::TSharedPtr const &stream) {
-    if (m_monitor_events_used_count < m_monitor_events.size()) {
+    auto id = stream->getID();
+    LOGT << "stream " << id;
+
+    if (m_monitor_events_used_count < static_cast<int>(m_monitor_events.size())) {
         m_monitor_events[m_monitor_events_used_count] = {
-            static_cast<uintptr_t>(stream->getID()),
-            TEvenFilterFlag::READ | TEvenFilterFlag::WRITE,
-            TEventFlag::ADD,
+            static_cast<uintptr_t>(id),
+            TEvenFilterFlag::READ  |
+            TEvenFilterFlag::WRITE, //|
+            //TEvenFilterFlag::SIGNAL,
+            TEventFlag::ADD     |
+            TEventFlag::ONESHOT,
             0, 0, nullptr
         };
         m_monitor_events_used_count++;
-        m_map_fd_stream[stream->getID()] = stream;
+        m_map_fd_stream[id] = stream;
     } else
         throw std::runtime_error("kevents buffer is full"); // ----->
+    
+    LOGT << "3 " << convertToString(m_monitor_events, m_events);
 }
 
 
 void CListener::del(IStream::TSharedPtr const &stream) {
-
+    LOGT << "stream " << stream->getID();
 }
 
 
 CListener::TEvents CListener::wait() {
-    struct timespec const timeout = { KEVENT_TIMIOUT_MS / 1000, KEVENT_TIMIOUT_MS % 1000 };
+    static struct timespec const timeout = {
+        KEVENT_TIMIOUT_MS / 1000,
+        KEVENT_TIMIOUT_MS % 1000
+    };
+
+    LOGT << "1 " << convertToString(m_monitor_events, m_events);
 
     auto events_count = assertOK(
          kevent(m_kqueue,
@@ -158,32 +191,47 @@ CListener::TEvents CListener::wait() {
              m_events.size() & std::numeric_limits<int>::max(),
              &timeout),
          "kevent waiting event error");
+//    m_monitor_events_used_count = 1;
 
+    LOGT << "2 " << convertToString(m_monitor_events, m_events);
+
+    LOGT << "m_monitor_events_used_count " << m_monitor_events_used_count << " events_count " << events_count;
     TEvents events;
     for (int i = 0; i < events_count; i++) {
-        auto const &kevent_entry = m_monitor_events[i];
-        auto stream = m_map_fd_stream[kevent_entry.ident];
+        auto &monitor_entry = m_events[i];
+        if (monitor_entry.ident == 0)
+            continue;
+        auto stream = m_map_fd_stream[monitor_entry.ident];
         if  (stream) {
-            auto event  = Event::TEvent::UNKNOWN;
+            auto event  = Event::TType::UNKNOWN;
 
-            if (kevent_entry.flags & TEventFlag::EOF_)
-                event   = Event::TEvent::CLOSE;
+            LOGT << "flags : " << TEventFlag        (monitor_entry.flags ).convertToFlagsString();
+            LOGT << "fflags: " << monitor_entry.fflags;
+            LOGT << "filter: " << TEvenFilterFlag   (monitor_entry.filter).convertToFlagsString();
+//            NOTE_RENAME
+            
+            if (monitor_entry.flags & TEventFlag::EOF_)
+                event   = Event::TType::CLOSE;
 
-            if (kevent_entry.flags & TEventFlag::ERROR)
-                event   = Event::TEvent::ERROR;
+            if (monitor_entry.flags & TEventFlag::ERROR)
+                event   = Event::TType::ERROR;
 
-            if (kevent_entry.filter & TEvenFilterFlag::READ)
-                event   = Event::TEvent::READ;
+            if (monitor_entry.filter & TEvenFilterFlag::READ)
+                event   = Event::TType::READ;
 
-            if (kevent_entry.filter & TEvenFilterFlag::WRITE)
-                event   = Event::TEvent::WRITE;
+            if (monitor_entry.filter & TEvenFilterFlag::WRITE)
+                event   = Event::TType::WRITE;
+
+            LOGT << "event " << event << " reader " << stream->getID() << " ident " << monitor_entry.ident;
+
+//            m_monitor_events[i].flags |= TEventFlag::CLEAR;
 
             events.push_back(Event::create(event, stream));
         } else {
             throw std::runtime_error("kevent not mapped event id " +
-                convert<string>(kevent_entry.ident) +
-                " flags "  + TEventFlag     (kevent_entry.flags) .convertToFlagsString() +
-                " filter " + TEvenFilterFlag(kevent_entry.filter).convertToFlagsString()); // ----->
+                convert<string>(monitor_entry.ident) +
+                " flags "  + TEventFlag     (monitor_entry.flags) .convertToFlagsString() +
+                " filter " + TEvenFilterFlag(monitor_entry.filter).convertToFlagsString()); // ----->
         }
     }
 

@@ -15,27 +15,33 @@ namespace utility {
 namespace io {
 
 
+class Event {
+public:
+    DEFINE_CREATE   (Event)
+    DEFINE_ENUM     (TType, OPEN, CLOSE, READ, WRITE, ERROR)
+    
+    Event(
+        TType               const &type,
+        IStream::TSharedPtr const &stream);
+    virtual ~Event() = default;
+    
+    TType               type;
+    IStream::TSharedPtr stream;
+};
+
+
 class IListener: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IListener)
 
-    class Event {
-    public:
-        DEFINE_CREATE       (Event)
-        DEFINE_ENUM         (TEvent, OPEN, CLOSE, READ, WRITE, ERROR)
-
-        Event(TEvent const &event_, IStream::TSharedPtr const &stream_);
-        virtual ~Event() = default;
-
-        TEvent              event;
-        IStream::TSharedPtr stream;
-    };
-
     typedef std::list<Event::TSharedPtr> TEvents;
 
-    virtual void add(IStream::TSharedPtr const &stream) = 0;
-    virtual void del(IStream::TSharedPtr const &stream) = 0;
-    virtual TEvents wait()  = 0;
+    /// add stream for monitoring
+    virtual void    add(IStream::TSharedPtr const &stream) = 0;
+    /// del stream from monitoring set
+    virtual void    del(IStream::TSharedPtr const &stream) = 0;
+    /// waiting for new events
+    virtual TEvents wait() = 0;
 };
 
 

@@ -75,12 +75,22 @@ LogStream const & LogStream::operator << (TValue const &v) const {
 void update(config::TLogger const &config);
 
 
+std::string convertFunctionNameToLogFunctionName(std::string const &name);
+
+
 } // logger
 } // utility
 
 
 #define LOGT \
-utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << __FUNCTION__ << ": "
+utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << \
+utility::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
+//#define LOGT \
+//utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << \
+//utility::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
+//#define LOGT \
+//utility::logging::LogStream(utility::logging::TEvent::TLevel::TRACE_LEVEL) << \
+//utility::split(utility::split(__PRETTY_FUNCTION__, "(").front(), " ").back() << "\n"
 #define LOGD \
 utility::logging::LogStream(utility::logging::TEvent::TLevel::DEBUG_LEVEL)
 #define LOGI \
@@ -91,7 +101,6 @@ utility::logging::LogStream(utility::logging::TEvent::TLevel::WARNING_LEVEL)
 utility::logging::LogStream(utility::logging::TEvent::TLevel::ERROR_LEVEL)
 #define LOGF \
 utility::logging::LogStream(utility::logging::TEvent::TLevel::FATAL_LEVEL)
-
 
 
 #endif // HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9

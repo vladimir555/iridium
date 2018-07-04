@@ -5,13 +5,12 @@ using namespace std;
 
 #include "utility/io/protocol/http/request.h"
 #include "utility/io/protocol/http/response.h"
-#include "utility/io/protocol/http/implementation/protocol.h"
 #include "utility/parsing/implementation/parser_http.h"
 #include "utility/parsing/implementation/parser_json.h"
 #include "utility/parsing/implementation/parser_xml.h"
 
 
-using utility::io::protocol::http::implementation::CProtocol;
+//using utility::io::protocol::http::implementation::CProtocol;
 using utility::parsing::implementation::CHTTPParser;
 using utility::parsing::implementation::CJSONParser;
 using utility::parsing::implementation::CXMLParser;

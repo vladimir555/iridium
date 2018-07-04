@@ -1,6 +1,6 @@
 #include "file_cache.h"
 
-#include "file_writer.h"
+#include "file_stream_writer.h"
 
 #include "utility/convertion/convert.h"
 #include "utility/io/fs/files.h"
@@ -37,7 +37,7 @@ namespace implementation {
 CFileCache::CFileCache(std::string const &file_name)
 :
     m_file_name     (file_name),
-    m_file_writer   (CFileStream::create(file_name))
+    m_file_writer   (CFileStreamWriter::create(file_name))
 {}
 
 
@@ -45,8 +45,8 @@ void CFileCache::initialize() {
     if (!m_lines.empty())
         return; // ----->
 
-    vector<size_t>  indexes_for_remove;
-    vector<string>  items;
+    vector<size_t> indexes_for_remove;
+    vector<string> items;
 
     if (fs::checkFileExistence(m_file_name)) {
         vector<string> text_file = fs::readTextFile(m_file_name, false);
@@ -57,7 +57,7 @@ void CFileCache::initialize() {
                 continue; // <---
 
             if (checkMarker(line, MARKER_CACHED_LINE)) {
-                if (!item.empty())
+                if(!item.empty())
                     items.push_back(item);
                 item = line.substr(MARKER_CACHED_LINE.size(), string::npos);
                 continue; // <---
@@ -110,7 +110,7 @@ void CFileCache::finalize() {
 
 size_t CFileCache::push(string const &line) {
     auto line_ = MARKER_CACHED_LINE + line;
-    m_file_writer->write(TBuffer(line_.begin(), line_.end()));
+    m_file_writer->write(Buffer(line_.begin(), line_.end()));
     m_lines.push_back(make_shared<string>(line));
     return m_lines.size();
 }
@@ -131,7 +131,7 @@ void CFileCache::remove(size_t const &id) {
     if (id < m_lines.size()) {
         if (m_lines[id]) {
             auto line = MARKER_REMOVED_INDEX + convert<string>(id);
-            m_file_writer->write(TBuffer(line.begin(), line.end()));
+            m_file_writer->write(Buffer(line.begin(), line.end()));
             m_lines[id].reset();
         }
     } else

@@ -13,22 +13,37 @@ namespace implementation {
 class CStreamReaderBuffer: public IStreamReader {
 public:
     DEFINE_IMPLEMENTATION(CStreamReaderBuffer)
-    CStreamReaderBuffer(TBuffer const &buffer);
-    TBuffer read(size_t const &size) override;
+    
+    CStreamReaderBuffer(
+//        IStreamReader::TSharedPtr   const &stream_reader,
+        Buffer::TSharedPtr const &buffer);
+    
+    void    initialize() override;
+    void    finalize() override;
+    int     getID() const override;
+    
+    Buffer read(size_t const &size) override;
 
 private:
-    TBuffer     m_buffer;
-    size_t      m_pos;
+//    IStreamReader::TSharedPtr   m_reader;
+    Buffer::TSharedPtr          m_buffer;
+    size_t                      m_pos;
 };
 
 
 class CStreamWriterBuffer: public IStreamWriter {
 public:
     DEFINE_IMPLEMENTATION(CStreamWriterBuffer)
-    CStreamWriterBuffer(TBuffer &buffer);
-    size_t write(TBuffer const &packet) override;
+    CStreamWriterBuffer(Buffer::TSharedPtr const &buffer);
+    
+    void    initialize() override;
+    void    finalize() override;
+    int     getID() const override;
+
+    size_t  write(Buffer const &buffer) override;
+
 private:
-    TBuffer &m_buffer;
+    Buffer::TSharedPtr  m_buffer;
 };
 
 

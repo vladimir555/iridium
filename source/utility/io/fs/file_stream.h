@@ -2,7 +2,6 @@
 #define HEADER_FILE_WRITER_F3E80B53_9C20_48EC_9242_9B22CED298F0
 
 
-#include "utility/pattern/initializable.h"
 #include "utility/io/stream.h"
 
 
@@ -11,29 +10,24 @@ namespace io {
 namespace fs {
 
 
-class IFileWriter:
-    public IStreamWriter,
-    public pattern::IInitializable
-{
+class IFileStreamWriter: public IStreamWriter {
 public:
-    DEFINE_INTERFACE(IFileWriter)
+    DEFINE_INTERFACE(IFileStreamWriter)
     virtual void flush() = 0;
 };
 
 
-class IFileReader:
-    public IStreamReader,
-    public pattern::IInitializable
-{
+class IFileStreamReader: public IStreamReader {
 public:
-    DEFINE_INTERFACE(IFileReader)
+    DEFINE_INTERFACE(IFileStreamReader)
+    virtual size_t getSize() = 0;
 };
-
-
+    
+    
 //class IFileStream:
-//    public virtual IFileWriter,
-//    public virtual IFileReader,
-//    public virtual io::IStream
+//    public IStream,
+//    public IFileStreamReader,
+//    public IFileStreamWriter
 //{
 //public:
 //    DEFINE_INTERFACE(IFileStream)

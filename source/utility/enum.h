@@ -117,7 +117,7 @@ public: \
 //DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
 
 
-/// use not in namespace
+/// use not in namespace, todo: private enum
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = TEnum::UNKNOWN; \

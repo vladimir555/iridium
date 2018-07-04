@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 cd $(dirname "$0")
 cd ../source
 
@@ -19,4 +22,4 @@ HEADER_PATH="${FILE_PATH}/$1.h"
 echo "${HEADER_MACRO_BEGIN}${NAMESPACE_BEGIN}${NAMESPACE_END}${HEADER_MACRO_END}" > ${HEADER_PATH}
 
 SOURCE_PATH="${FILE_PATH}/$1.cpp"
-echo "#include \"$1.h\"\n\n${NAMESPACE_BEGIN}${NAMESPACE_END}" > ${SOURCE_PATH}
+echo "#include \"$1.h\"\n\n${NAMESPACE_BEGIN}${NAMESPACE_END}" >> ${SOURCE_PATH}

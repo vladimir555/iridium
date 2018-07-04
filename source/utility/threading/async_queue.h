@@ -10,6 +10,8 @@ namespace utility {
 namespace threading {
 
 
+// todo: must be SyncQueue
+// todo: rename to ThreadSafeQueuePusher
 template<typename TItem>
 class IAsyncQueuePusher {
 public:
@@ -17,11 +19,12 @@ public:
 
     typedef std::list<TItem> TItems;
 
-    virtual size_t push(TItem  const &item) = 0;
+    virtual size_t push(TItem  const &item)  = 0;
     virtual size_t push(TItems const &items) = 0;
 };
 
 
+// todo: rename to ThreadSafeQueue
 template<typename TItem>
 class IAsyncQueue: public IAsyncQueuePusher<TItem> {
 public:

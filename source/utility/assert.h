@@ -8,6 +8,9 @@
 #include "utility/convertion/convert.h"
 
 
+// todo: contition.h, example bool isOneOf(item, enum1, enum2, ...) { if (item == enum1 || item == enum2 ...)
+
+
 namespace utility {
 
 

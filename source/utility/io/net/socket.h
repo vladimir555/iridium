@@ -12,10 +12,7 @@ namespace io {
 namespace net {
 
 
-class ISocket:
-    public pattern::IInitializable,
-    public IStream
-{
+class ISocket: public IStreamPort {
 public:
     DEFINE_INTERFACE(ISocket)
 

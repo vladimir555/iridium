@@ -1,9 +1,14 @@
+#ifndef HEADER_STRINGS_C3181805_20F9_4385_B40C_23E8C7598D9B
+#define HEADER_STRINGS_C3181805_20F9_4385_B40C_23E8C7598D9B
+
+
 #include <string>
 #include <vector>
 #include <list>
 
 
 namespace utility {
+
 
 ///
 std::list<std::string> split(std::string const &source, std::string const &delimiter, size_t const &max_items);
@@ -24,3 +29,6 @@ std::string trim(std::string const &source);
 
 
 } // utility
+
+
+#endif // HEADER_STRINGS_C3181805_20F9_4385_B40C_23E8C7598D9B

@@ -6,12 +6,16 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <stdio.h>
+
 #include <string>
+#include <cstring>
 
 #include "utility/convertion/convert.h"
+#include "utility/logging/logger.h"
 
 
-using utility::io::TBuffer;
+using utility::io::Buffer;
 using utility::io::IStream;
 using utility::convertion::convert;
 using utility::io::net::URL;
@@ -28,7 +32,7 @@ T assertOK(T const &result, string const &message, URL const &url) {
 }
 
 
-static int const DEFAULT_SOCKET_BUFFER_SIZE = 8;//8912;
+static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 8;//8912;
 
 
 namespace utility {
@@ -41,42 +45,44 @@ namespace unix {
 
 CSocket::CSocket(URL const &url, bool const &is_server_mode)
 :
-    m_url               (url),
-    m_is_server_mode    (is_server_mode),
-    m_socket            (0)
+    m_is_server_mode(is_server_mode),
+    m_url           (url),
+    m_socket        (0)
 {}
 
 
-CSocket::CSocket(int const &fd)
+CSocket::CSocket(URL const &url, int const &fd)
 :
-    m_url   (""),
-    m_socket(fd)
-{
+    m_is_server_mode(false),
+    m_url           (url),
+    m_socket        (fd)
+{}
+
+
+URL CSocket::getPeerURL(int const &fd) {
     struct sockaddr_in   peer;
     unsigned int         peer_len = sizeof(peer);
 
-    if (::getpeername(m_socket, (sockaddr *)&peer, &peer_len) < 0)
+    if (::getpeername(fd, (sockaddr *)&peer, &peer_len) < 0)
         throw std::runtime_error("socket get peer ip error for socket fd " +
-        convert<string>(socket)); // ----->
+        convert<string>(m_socket)); // ----->
 
-    auto protocol = convert<string>(URL::TProtocol::TCP);
-    if (m_url.getProtocol())
-        protocol  = convert<string>(m_url.getProtocol());
-    m_url = URL(protocol + "://" + inet_ntoa(peer.sin_addr) + ":" +
+   auto protocol =  m_url.getProtocol();
+    if (protocol == URL::TProtocol::UNKNOWN)
+        protocol =  URL::TProtocol::TCP;
+
+    return URL(convert<string>(protocol) + "://" + inet_ntoa(peer.sin_addr) + ":" +
         convert<string>(ntohs(peer.sin_port))); // ----->
 }
 
 
 void CSocket::initialize() {
     // open
-    auto protocol   = IPPROTO_TCP;
-    if (m_url.getProtocol() == URL::TProtocol::UDP)
-        protocol    = IPPROTO_UDP;
-
+    auto protocol   = m_url.getProtocol() == URL::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;
     m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error", m_url);
 
     //todo: unix / inet protocol by url
-    struct sockaddr_in address  = { 0 };
+    struct sockaddr_in address  = {};
     auto ipv4 = *m_url.getIPv4();
     address.sin_addr.s_addr     = htonl(
         ( ipv4[0] << 24 ) | ( ipv4[1] << 16 ) |
@@ -88,13 +94,13 @@ void CSocket::initialize() {
         // bind, listen
 
         int yes = 1;
-        setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
+        // todo: TCP_NODELAY
+        setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
 
-        assertOK(::bind  (m_socket, (struct sockaddr *) (&address), sizeof(address)), "socket bind error", m_url);
-        assertOK(::listen(m_socket, SOMAXCONN), "socket listen error", m_url);
+        assertOK(::bind   (m_socket, (struct sockaddr *) &address, sizeof(address)), "socket bind error", m_url);
+        assertOK(::listen (m_socket, SOMAXCONN), "socket listen error", m_url);
     } else {
         // connect
-
         assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error", m_url);
     }
     setBlockingMode(false);
@@ -108,12 +114,13 @@ void CSocket::finalize() {
 
 
 IStream::TSharedPtr CSocket::accept() {
-    struct sockaddr_in  peer_address      = { 0 };
+    struct sockaddr_in  peer_address      = {};
     socklen_t           peer_address_size = sizeof(peer_address);
 
-    auto peer_fd = ::accept(m_socket, (struct sockaddr *) (&peer_address), &peer_address_size);
+    auto peer_fd = ::accept(m_socket, (struct sockaddr *) &peer_address, &peer_address_size);
     if  (peer_fd > 0) {
-        auto peer = new unix::CSocket(peer_fd);
+        LOGT << "fd " << peer_fd;
+        auto peer = new unix::CSocket(getPeerURL(peer_fd), peer_fd);
         peer->setBlockingMode(false);
         return IStream::TSharedPtr(peer); // ----->
     } else
@@ -122,34 +129,52 @@ IStream::TSharedPtr CSocket::accept() {
 
 
 URL CSocket::getURL() const {
-    return m_url; // ----->
+    return m_url;       // ----->
 }
 
 
 int CSocket::getID() const {
-    return m_socket; // ----->
+    return m_socket;    // ----->
 }
 
 
-size_t CSocket::write(TBuffer const &packet) {
-    auto buffer = static_cast<void const *>(packet.data());
-    auto result = ::send(m_socket, buffer, DEFAULT_SOCKET_BUFFER_SIZE, 0);
+size_t CSocket::write(Buffer const &buffer_) {
+    LOGT << "fd " << m_socket << " '" << buffer_ << "'";
+    
+    auto buffer = static_cast<void const *>(buffer_.data());
+    auto size   = DEFAULT_SOCKET_BUFFER_SIZE;
+    
+    if (size > buffer_.size())
+        size = buffer_.size();
+    
+    auto result = ::send(m_socket, buffer, size, 0);
 
     // was sended async
-    if (result == EAGAIN || result == EWOULDBLOCK)
-        return packet.size() < DEFAULT_SOCKET_BUFFER_SIZE ? packet.size() : DEFAULT_SOCKET_BUFFER_SIZE; // ----->
+    if (result == EAGAIN ||
+        result == EWOULDBLOCK
+    )
+        return
+        buffer_.size() < DEFAULT_SOCKET_BUFFER_SIZE ?
+        buffer_.size() : DEFAULT_SOCKET_BUFFER_SIZE; // ----->
     else
         return result; // ----->
 
-    return packet.size(); // ----->
+    return buffer_.size(); // ----->
 }
 
 
-TBuffer CSocket::read(size_t const &size) {
-    char buffer[DEFAULT_SOCKET_BUFFER_SIZE];
-    auto received_size = assertOK(::recv(m_socket, buffer, DEFAULT_SOCKET_BUFFER_SIZE - 1, 0), "socket read error", m_url);
-    return TBuffer(buffer, buffer + received_size); // ----->
+Buffer CSocket::read(size_t const &size) {
+    char buffer[size];
+    auto received_size = assertOK(::recv(m_socket, buffer, size - 1, 0), "socket read error", m_url);
+    LOGT << "fd " << m_socket << " " << Buffer(buffer, buffer + received_size);
+    return Buffer(buffer, buffer + received_size); // ----->
 }
+    
+    
+//void CSocket::flush() {
+//// todo:
+////    flush(m_socket);
+//}
 
 
 void CSocket::setBlockingMode(bool const &is_blocking) {
