@@ -36,24 +36,24 @@ public:
 class IStreamWriter {
 public:
     DEFINE_INTERFACE(IStreamWriter)
-    virtual size_t write(TBuffer const &packet) = 0;
+    virtual size_t write(TBuffer const &buffer) = 0;
 };
-    
-    
-class IStream:
-    public IStreamReader,
-    public IStreamWriter
-{
+
+
+class IStreamID {
 public:
-    DEFINE_INTERFACE(IStream)
+    DEFINE_INTERFACE(IStreamID)
     virtual int getID() const = 0;
 };
 
-
-class StreamProxy: public IStream {
+    
+class IStream:
+    public IStreamReader,
+    public IStreamWriter,
+    public IStreamID
+{
 public:
-    // todo: subject, listeners, many clients, proxy protocol impl
-    StreamProxy(IStream::TSharedPtr const &input, IStream::TSharedPtr const &output);
+    DEFINE_INTERFACE(IStream)
 };
 
 
@@ -69,4 +69,5 @@ protocol workers:
 
 
 #endif // HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358
+
 

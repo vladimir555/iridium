@@ -7,7 +7,6 @@
 
 #include "uri_fs_mapper.h"
 
-#include "utility/logging/logger.h"
 
 using utility::convertion::convert;
 using utility::io::protocol::implementation::CPacket;
@@ -22,7 +21,7 @@ namespace http {
 namespace implementation {
 
 
-CProtocol::CProtocol(IHTTPHandler::TSharedPtr const &http_handler)
+CProtocol::CProtocol(IHTTPSource::TSharedPtr const &http_handler)
 :
     m_parser        (CHTTPParser::create()),
     m_http_handler  (http_handler)

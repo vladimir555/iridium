@@ -13,6 +13,7 @@ typedef std::weak_ptr  <TClass const>   TConstWeakPtr;
 
 
 #define DEFINE_CREATE(TClass) \
+DEFINE_SMART_PTR(TClass) \
 template<typename ... TArgs> \
 static std::shared_ptr<TClass> create(TArgs && ... args) { \
     return std::make_shared<TClass>(args ...); \

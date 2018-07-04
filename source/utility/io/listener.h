@@ -21,9 +21,7 @@ public:
 
     class Event {
     public:
-        DEFINE_SMART_PTR    (Event)
         DEFINE_CREATE       (Event)
-
         DEFINE_ENUM         (TEvent, OPEN, CLOSE, READ, WRITE, ERROR)
 
         Event(TEvent const &event_, IStream::TSharedPtr const &stream_);

@@ -17,10 +17,10 @@ namespace protocol {
 namespace http {
 
 
-class IHTTPHandler {
+class IHTTPSource {
 public:
-    DEFINE_SMART_PTR(IHTTPHandler)
-    virtual ~IHTTPHandler() = default;
+    DEFINE_SMART_PTR(IHTTPSource)
+    virtual ~IHTTPSource() = default;
 
     virtual response::THttp handle(request::THttp const &request) = 0;
 };

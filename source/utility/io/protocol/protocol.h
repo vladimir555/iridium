@@ -2,10 +2,8 @@
 #define HEADER_PROTOCOL_570AE72E_F2A1_4E8F_B673_F4CFD49B3014
 
 
-#include "utility/pattern/prototype.h"
 #include "utility/smart_ptr.h"
-#include "packet.h"
-#include "utility/io/stream.h"
+#include "utility/io/stream_proxy.h"
 
 
 namespace utility {
@@ -13,13 +11,11 @@ namespace io {
 namespace protocol {
 
 
-class IProtocol {
+class IProtocol: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IProtocol)
-    // returns null on ending processing
-    virtual IStreamReader::TSharedPtr exchange(TBuffer const &request) = 0;
+    IStreamProxy::TSharedPtr update(IStreamProxy::TSharedPtr const &stream_proxy, IStream::TSharedPtr const &stream);
 };
-// todo: command pattern: ... command socket read -> fs, command write to fs
 
 
 } // protocol

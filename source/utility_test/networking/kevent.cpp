@@ -186,7 +186,6 @@ public:
 
 class Peer {
 public:
-    DEFINE_SMART_PTR(Peer)
     DEFINE_CREATE(Peer)
     
     Peer(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);

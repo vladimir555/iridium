@@ -3,7 +3,7 @@
 
 
 #include "utility/io/net/types.h"
-#include "utility/io/protocol/http/http.h"
+#include "utility/io/protocol/http/http_source.h"
 //#include "utility/protocol/packet.h"
 #include "utility/logging/logger.h"
 
@@ -18,7 +18,7 @@ namespace http {
 namespace implementation {
 
 
-class CURIFSMapper: public IHTTPHandler {
+class CURIFSMapper: public IHTTPSource {
 public:
     DEFINE_IMPLEMENTATION(CURIFSMapper)
 

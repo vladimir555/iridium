@@ -4,7 +4,7 @@
 
 #include "utility/io/protocol/protocol.h"
 #include "utility/parsing/parser.h"
-#include "utility/io/protocol/http/http.h"
+#include "utility/io/protocol/http/http_source.h"
 #include "utility/io/protocol/packet.h"
 
 
@@ -18,13 +18,13 @@ namespace implementation {
 class CProtocol: public IProtocol {
 public:
     DEFINE_CREATE(CProtocol)
-    CProtocol(IHTTPHandler::TSharedPtr const &http_handler = nullptr);
+    CProtocol(IHTTPSource::TSharedPtr const &http_handler = nullptr);
     virtual ~CProtocol() = default;
 
 //    IPacket::TSharedPtr exchange(IPacket::TSharedPtr const &request) override;
 private:
     parsing::IParser::TSharedPtr    m_parser;
-    IHTTPHandler::TSharedPtr        m_http_handler;
+    IHTTPSource::TSharedPtr         m_http_handler;
 };
 
 

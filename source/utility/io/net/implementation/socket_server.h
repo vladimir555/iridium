@@ -12,6 +12,7 @@
 #include "utility/threading/runnable.h"
 #include "utility/threading/synchronized.h"
 #include "utility/io/listener.h"
+#include "utility/io/stream_context.h"
 
 #include <map>
 
@@ -39,6 +40,35 @@ private:
     public:
         DEFINE_IMPLEMENTATION(CAcceptor)
 
+        class StreamStorage: private threading::Synchronized {
+        public:
+            DEFINE_CREATE(StreamStorage)
+            StreamStorage();
+           ~StreamStorage() = default;
+
+            StreamContext::TSharedPtr get(int const &id);
+            void set(int const &id, StreamContext::TSharedPtr &stream_context);
+        private:
+            std::map<int, StreamContext::TSharedPtr> m_map_id_stream_context;
+        };
+
+
+        class CSocketHandler: public threading::IWorkerHandler <IListener::Event::TSharedPtr> {
+        public:
+            DEFINE_IMPLEMENTATION(CSocketHandler)
+
+            CSocketHandler(protocol::IProtocol::TSharedPtr const &protocol, StreamStorage::TSharedPtr const &stream_storage);
+
+            void    initialize()    override;
+            void    finalize()      override;
+            TItems  handle(TItems const &item) override;
+
+        private:
+            protocol::IProtocol::TSharedPtr     m_protocol;
+            StreamStorage::TSharedPtr           m_stream_storage;
+        };
+
+
         CAcceptor(
             URL const &url,
             int const &threads_count,
@@ -48,56 +78,16 @@ private:
         void finalize()     override;
         void run(std::atomic<bool> &is_running) override;
     private:
-        ISocket::TSharedPtr         m_socket;
-        IListener::TSharedPtr       m_listener;
+        IListener::TSharedPtr                   m_listener;
+        ISocket::TSharedPtr                     m_socket;
         threading::IWorkerPool <IListener::Event::TSharedPtr> ::TSharedPtr
-                                    m_worker_pool;
+                                                m_worker_pool;
+        protocol::IProtocolFactory::TSharedPtr  m_protocol_factory;
+        StreamStorage::TSharedPtr               m_stream_storage;
     };
 
-    class StreamLocker: public threading::Synchronized {
-    public:
-        StreamLocker();
-        IStream::TSharedPtr get(int const &id);
-        void set(int const &id, IStream::TSharedPtr &stream);
-    private:
-        std::map<int, IStream::TSharedPtr> m_map_id_stream;
-    };
 
-    class CSocketHandler:
-        public threading::IWorkerHandler <IListener::Event::TSharedPtr>
-    {
-    public:
-        DEFINE_IMPLEMENTATION(CSocketHandler)
-
-        CSocketHandler(protocol::IProtocol::TSharedPtr const &protocol);
-
-        void    initialize()    override;
-        void    finalize()      override;
-        TItems  handle(TItems const &item) override;
-
-    private:
-        class StreamHandler {
-        public:
-            DEFINE_SMART_PTR(StreamHandler)
-            DEFINE_CREATE   (StreamHandler)
-            StreamHandler(
-                protocol::IProtocol::TSharedPtr const &protocol,
-                IStream::TSharedPtr             const &stream
-            );
-           ~StreamHandler() = default;
-
-            bool handle(IListener::Event const &event);
-        private:
-            protocol::IProtocol::TSharedPtr m_protocol;
-            IStream::TSharedPtr             m_stream;
-        };
-
-        std::map<int, StreamHandler::TSharedPtr>    m_map_id_stream;
-        protocol::IProtocol::TSharedPtr             m_protocol;
-    };
-
-    threading::IThread::TSharedPtr          m_thread_acceptor;
-    protocol::IProtocolFactory::TSharedPtr  m_protocol_factory;
+    threading::IThread::TSharedPtr              m_thread_acceptor;
 };
 
 
