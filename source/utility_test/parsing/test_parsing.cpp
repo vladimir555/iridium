@@ -198,7 +198,7 @@ string const http_header_node = "\n"
 string const http_header_composed = ""
 "GET / HTTP/1.1\n"
 "content-type: text/html; charset=windows-1251\n"
-"allow: GET, HEAD, OPTIONS\n"
+"allow: HEAD, OPTIONS, GET\n"
 "content-length: 1984\n\n";
 
 

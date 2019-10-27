@@ -116,15 +116,14 @@ void CFileStream::initialize() {
     finalize();
     
     string open_mode;
-    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ})
+    if (m_open_mode == TOpenMode::READ)
         open_mode = "rb";
-    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::WRITE})
-        open_mode = "ab";
-    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ, TOpenMode::WRITE})
-        open_mode = "rb+";
-    
+    if (m_open_mode == TOpenMode::WRITE)
+        open_mode = "ab+";
+//    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ, TOpenMode::WRITE})
+//        open_mode = "rb+";
+
     m_file = fopenInternal(m_file_name.c_str(), open_mode.c_str());
-    
     assertOK(m_file,
          "initialize file '" + m_file_name + "'" +
          " mode "   + convert<string>(m_open_mode) +
@@ -149,7 +148,7 @@ int CFileStream::getID() const {
     if (m_file)
 #ifdef LINUX_PLATFORM
         return m_file->_fileno; // ----->
-#elif  FREEBSD_PLATFORM
+#elif  FREEBSD_LIKE_PLATFORM
         return m_file->_file; // ----->
 #endif
     else

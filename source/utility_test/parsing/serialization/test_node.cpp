@@ -83,7 +83,7 @@ TEST(parsing, serialization) {
 
     node->addChild("second-item")->addChild("attribute-one", "second-item-value");
 
-    ASSERT_THROW(TRoot(node).getNode(), std::exception);
+    ASSERT_NO_THROW(TRoot(node).getNode());
 
     {
         auto item = node->addChild("item1")->addChild("sub-item");
