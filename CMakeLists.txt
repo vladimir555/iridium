@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(utility)
-# todo: morion, akela, magur, pluto, eris, euryale
+# todo: morion, akela, magur, pluto, eris, euryale, dew
 
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
@@ -48,6 +48,13 @@ find_package(Threads)
 #set(CMAKE_FIND_FRAMEWORK LAST)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE})
+
+install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
+install(
+    DIRECTORY "${CMAKE_SOURCE_DIR}/source/utility"
+    DESTINATION "include"
+    FILES_MATCHING PATTERN "*.h"
+)
 
 #TEST
 enable_testing()
