@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-project(utility)
-# todo: morion, akela, magur, pluto, eris, euryale, dew
+project(iridium)
+# todo: morion, akela, magur, pluto, eris, euryale, dew, iridium
 
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
@@ -33,8 +33,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB_RECURSE SOURCE 
-    ${CMAKE_SOURCE_DIR}/source/utility/*.h
-    ${CMAKE_SOURCE_DIR}/source/utility/*.cpp
+    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}/*.h
+    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}/*.cpp
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/include /usr/local/ssl/include)
@@ -51,7 +51,7 @@ add_library(${PROJECT_NAME} STATIC ${SOURCE})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
 install(
-    DIRECTORY "${CMAKE_SOURCE_DIR}/source/utility"
+    DIRECTORY "${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}"
     DESTINATION "include"
     FILES_MATCHING PATTERN "*.h"
 )
@@ -61,7 +61,7 @@ enable_testing()
 find_package(GTest REQUIRED)
 #find_package(OpenSSL REQUIRED)
 #find_package(PostgreSQL REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/utility/source)
+include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
 
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
@@ -69,8 +69,8 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
 # source files for test
 file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_SOURCE_DIR}/source/utility_test/*.h
-    ${CMAKE_SOURCE_DIR}/source/utility_test/*.cpp
+    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.h
+    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.cpp
 )
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
