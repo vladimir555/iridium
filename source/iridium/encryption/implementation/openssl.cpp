@@ -239,6 +239,4 @@ void CContext::CSSL::accept() {
 } // iridium
 
 
-#else
-void dummy() {}
 #endif // BUILD_FLAG_OPENSSL

@@ -24,6 +24,4 @@ std::string iridium::convertion::implementation::convert(unsigned long const &va
 }
 
 
-#else
-void dummy() {}
 #endif // PLATFORM_MACOS

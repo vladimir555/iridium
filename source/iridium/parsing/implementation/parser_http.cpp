@@ -10,8 +10,9 @@
 #include <list>
 #include <string>
 
-#include <iostream>
-using namespace std;
+
+//#include <iostream>
+//using namespace std;
 
 
 using std::unordered_map;
@@ -44,10 +45,10 @@ node:
 namespace {
 
 
-string const HTTP           = "http";
-string const HTTP_MESSAGE   = "message";
-string const HTTP_HEADERS   = "headers";
-string const HTTP_BODY      = "body";
+static string const HTTP           = "http";
+static string const HTTP_MESSAGE   = "message";
+static string const HTTP_HEADERS   = "headers";
+static string const HTTP_BODY      = "body";
 
 
 }
@@ -58,7 +59,7 @@ namespace parsing {
 namespace implementation {
 
 
-INode::TSharedPtr CHTTPParser::parse(std::string const &source) const {
+INode::TSharedPtr CHTTPParser::parse(string const &source) const {
     auto node = CNode::create(HTTP);
 
     unordered_map<string, unordered_set<string> > cache;
@@ -112,7 +113,7 @@ INode::TSharedPtr CHTTPParser::parse(std::string const &source) const {
 }
 
 
-std::string CHTTPParser::compose(INode::TConstSharedPtr const &node) const {
+string CHTTPParser::compose(INode::TConstSharedPtr const &node) const {
     string result;
 
     auto message = assertExists(node->getChild(HTTP_MESSAGE), "http composing error: node " + HTTP_MESSAGE + " does not exists");

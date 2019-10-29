@@ -6,9 +6,6 @@ namespace db {
 namespace implementation {
 
 
-void dummy() {}
-
-
 } // implementation
 } // db
 } // iridium

@@ -10,6 +10,20 @@ using iridium::convertion::convert;
 using std::string;
 
 
+namespace {
+
+
+std::string convert_(iridium::db::config::TDatebaseConnector::TType const &v) {
+    return convert<std::string>(v.get()); // ----->
+}
+
+
+}
+
+
+IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TType, convert_)
+
+
 #ifdef BUILD_FLAG_MYSQL
 using iridium::db::implementation::CMySQLConnector;
 #endif // BUILD_FLAG_MYSQL

@@ -30,8 +30,7 @@ public:
         POSTGRESQL
     )
 
-    DEFINE_SMART_PTR(IDBConnector)
-    virtual ~IDBConnector() = default;
+    DEFINE_INTERFACE(IDBConnector)
     ///
     typedef std::map<std::string, std::string> TRow;
     ///

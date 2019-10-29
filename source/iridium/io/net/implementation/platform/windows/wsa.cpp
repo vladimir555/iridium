@@ -463,6 +463,4 @@ string WSA::getLastWSAErrorString() const {
 } // iridium
 
 
-#else
-void dummy() {}
 #endif // WINDOWS_PLATFORM

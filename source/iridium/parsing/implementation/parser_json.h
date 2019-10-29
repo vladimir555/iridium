@@ -15,15 +15,13 @@ namespace implementation {
 ///
 class CJSONParser : public IParser {
 public:
-    DEFINE_CREATE(CJSONParser)
+    DEFINE_IMPLEMENTATION(CJSONParser)
     ///
     CJSONParser() = default;
     ///
-    virtual ~CJSONParser() = default;
+    INode::TSharedPtr parse(std::string const &source) const override;
     ///
-    virtual INode::TSharedPtr parse(std::string const &source) const override;
-    ///
-    virtual std::string compose(INode::TConstSharedPtr const &root_node) const override;
+    std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 
 

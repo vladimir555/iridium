@@ -116,8 +116,4 @@ CPostgreSQLConnector::TRows CPostgreSQLConnector::sendQuery(string const &query)
 } // iridium
 
 
-#else
-#ifndef _MSC_VER
-void dummy() {}
-#endif
 #endif // COMPILATION_FLAG_MYSQL

@@ -70,21 +70,21 @@
 
 
 #if _WIN32 || _WIN64
-   #if _WIN64
-     #define PLATFORM_CPU64
-  #else
-    #define PLATFORM_CPU32
-  #endif
+    #if _WIN64
+        #define PLATFORM_CPU64
+    #else
+        #define PLATFORM_CPU32
+    #endif
 #endif
 
 
 // Check GCC
 #if __GNUC__
-  #if defined(__x86_64__) || defined(__ppc64__)
-    #define PLATFORM_CPU64
-  #else
-    #define PLATFORM_CPU32
-  #endif
+    #if defined(__x86_64__) || defined(__ppc64__)
+        #define PLATFORM_CPU64
+    #else
+        #define PLATFORM_CPU32
+    #endif
 #endif
 
 

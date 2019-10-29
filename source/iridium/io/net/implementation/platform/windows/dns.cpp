@@ -27,6 +27,4 @@ TIPv4 getIPv4ByHost(string const &host) {
 } // iridium
 
 
-#else
-void dummy() {}
 #endif // WINDOWS_PLATFORM

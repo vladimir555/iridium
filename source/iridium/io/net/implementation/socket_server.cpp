@@ -5,16 +5,18 @@
 #include "iridium/threading/implementation/worker_pool.h"
 #include "iridium/threading/implementation/recursive_mutex.h"
 #include "iridium/threading/synchronized_scope.h"
+
 #include "iridium/io/implementation/listener.h"
 #include "iridium/io/implementation/transmitter.h"
 #include "iridium/io/implementation/stream_buffer.h"
 #include "iridium/io/implementation/stream_reader_list.h"
-#include "iridium/pattern/implementation/initializer.h"
-
-#include "iridium/parsing/implementation/parser_http.cpp"
 #include "iridium/io/protocol/http/request.h"
 #include "iridium/io/protocol/http/response.h"
 #include "iridium/io/protocol/http/implementation/content_storage.h"
+
+#include "iridium/pattern/implementation/initializer.h"
+
+#include "iridium/parsing/implementation/parser_http.h"
 
 #include <string>
 
@@ -164,8 +166,8 @@ void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
 
 
 CSocketServer::CAcceptor::CIOEventHandler::CIOEventHandler(
-    IProtocolFactory::TSharedPtr const &protocol,
-    TStreamHandlers::TSharedPtr    const &streams)
+    IProtocolFactory::TSharedPtr    const &protocol,
+    TStreamHandlers::TSharedPtr     const &streams)
 :
 //    m_protocol  (protocol),
 //    m_peers             (streams),

@@ -15,15 +15,13 @@ namespace implementation {
 ///
 class CXMLParser: public IParser {
 public:
-    DEFINE_CREATE(CXMLParser)
+    DEFINE_IMPLEMENTATION(CXMLParser)
     ///
     CXMLParser() = default;
     ///
-    virtual ~CXMLParser() = default;
+    INode::TSharedPtr parse(std::string const &source) const override;
     ///
-    virtual INode::TSharedPtr parse(std::string const &source) const override;
-    ///
-    virtual std::string compose(INode::TConstSharedPtr const &root_node) const override;
+    std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 
 
