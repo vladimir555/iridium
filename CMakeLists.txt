@@ -47,6 +47,13 @@ find_package(Threads)
 
 #set(CMAKE_FIND_FRAMEWORK LAST)
 
+set(CPACK_GENERATOR "DEB")
+set(CPACK_PACKAGE_NAME lib${PROJECT_NAME})
+set(CPACK_DEBIAN_PACKAGE_DESCRIPTION    "${PROJECT_NAME} C++ framework without dependencies")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER     "Bulaev Vladimir <bulaev_vladimir@mail.ru>")
+set(CPACK_DEBIAN_PACKAGE_DEBUG "YES")
+include(CPack)
+
 add_library(${PROJECT_NAME} STATIC ${SOURCE})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
