@@ -137,11 +137,11 @@ Node<TValue>::Node(
     m_path = path + "/" + name;
 
     if (node_source && node_source->getName() == name)
-        m_node_source       = node_source;
+        m_node_source   = node_source;
     else
         throw std::runtime_error("node '" + m_path + "' not found"); // ----->
 
-    m_node_destination = node_destination;
+    m_node_destination  = node_destination;
 }
 
 
@@ -163,6 +163,8 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue con
     m_path = parent.m_path + "/" + name;
     if (parent.m_node_source)
         m_node_source       = parent.m_node_source->getChild(name);
+    else
+        m_node_source       = nullptr; // pvs warn
 
     if (m_node_source) {
         m_node_destination  = parent.m_node_destination->addChild(name, m_node_source->getValue());
@@ -178,6 +180,8 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
     m_path = parent.m_path + "/" + name;
     if (parent.m_node_source)
         m_node_source       = parent.m_node_source->getChild(name);
+    else
+        m_node_source       = nullptr; // pvs warn
 
     if (m_node_source)
         m_node_destination  = parent.m_node_destination->addChild(name, m_node_source->getValue());

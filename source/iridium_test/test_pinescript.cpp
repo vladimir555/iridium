@@ -1,3 +1,7 @@
+/*
+* This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
+*/
 ////@version=3
 //strategy("Pivoting Pivot HL", overlay=true, default_qty_type=strategy.cash, default_qty_value=100000, pyramiding=0)
 //FromMonth = input(defval = 6, title = "From Month", minval = 1, maxval = 12)
