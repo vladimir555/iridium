@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DD23A1C0224B6F02000C413D"
-               BuildableName = "libutility.a"
-               BlueprintName = "utility"
-               ReferencedContainer = "container:utility.xcodeproj">
+               BuildableName = "libiridium.a"
+               BlueprintName = "iridium"
+               ReferencedContainer = "container:iridium.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD23A1C0224B6F02000C413D"
-            BuildableName = "libutility.a"
-            BlueprintName = "utility"
-            ReferencedContainer = "container:utility.xcodeproj">
+            BuildableName = "libiridium.a"
+            BlueprintName = "iridium"
+            ReferencedContainer = "container:iridium.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD23A1C0224B6F02000C413D"
-            BuildableName = "libutility.a"
-            BlueprintName = "utility"
-            ReferencedContainer = "container:utility.xcodeproj">
+            BuildableName = "libiridium.a"
+            BlueprintName = "iridium"
+            ReferencedContainer = "container:iridium.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

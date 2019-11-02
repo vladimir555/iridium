@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utility", "source\utility\utility.vcxproj", "{1243CCB7-0933-4BD6-834A-554AA346A00C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium", "source\iridium\iridium.vcxproj", "{1243CCB7-0933-4BD6-834A-554AA346A00C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utility_test", "source\utility_test\utility_test.vcxproj", "{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium_test", "source\iridium_test\iridium_test.vcxproj", "{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1243CCB7-0933-4BD6-834A-554AA346A00C} = {1243CCB7-0933-4BD6-834A-554AA346A00C}
 	EndProjectSection

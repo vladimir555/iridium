@@ -11,7 +11,7 @@
 		DD1214B322B7484800D8D08B /* file_stream_reader.h in Headers */ = {isa = PBXBuildFile; fileRef = DD1214AF22B7484800D8D08B /* file_stream_reader.h */; };
 		DD1214B422B7484800D8D08B /* file_stream_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD1214B022B7484800D8D08B /* file_stream_writer.cpp */; };
 		DD1214B522B7484800D8D08B /* file_stream_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD1214B122B7484800D8D08B /* file_stream_reader.cpp */; };
-		DD23A3B2224BB1CC000C413D /* libutility.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD23A1C1224B6F02000C413D /* libutility.a */; };
+		DD23A3B2224BB1CC000C413D /* libiridium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD23A1C1224B6F02000C413D /* libiridium.a */; };
 		DD23A3B4224BB31A000C413D /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD23A3B3224BB31A000C413D /* libgtest.a */; };
 		DD23A3B6224BB33D000C413D /* libgtest_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD23A3B5224BB33D000C413D /* libgtest_main.a */; };
 		DD485C4E229EA8B600191D0C /* transmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD485C4C229EA8B600191D0C /* transmitter.cpp */; };
@@ -221,7 +221,7 @@
 			containerPortal = DD23A1B9224B6F02000C413D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DD23A1C0224B6F02000C413D;
-			remoteInfo = utility;
+			remoteInfo = iridium;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -242,7 +242,7 @@
 		DD1214AF22B7484800D8D08B /* file_stream_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_stream_reader.h; sourceTree = "<group>"; };
 		DD1214B022B7484800D8D08B /* file_stream_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream_writer.cpp; sourceTree = "<group>"; };
 		DD1214B122B7484800D8D08B /* file_stream_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_stream_reader.cpp; sourceTree = "<group>"; };
-		DD23A1C1224B6F02000C413D /* libutility.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libutility.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD23A1C1224B6F02000C413D /* libiridium.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiridium.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD23A1D1224B726C000C413D /* keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		DD23A1D2224B726C000C413D /* ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl.h; sourceTree = "<group>"; };
 		DD23A1D4224B726C000C413D /* openssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openssl.h; sourceTree = "<group>"; };
@@ -414,14 +414,14 @@
 		DD23A2AD224B726C000C413D /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
 		DD23A2AE224B726C000C413D /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
 		DD23A2AF224B726C000C413D /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
-		DD23A382224B9896000C413D /* utility_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = utility_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD23A382224B9896000C413D /* iridium_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = iridium_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD23A3B3224BB31A000C413D /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest.a; path = ../../../../../usr/local/lib/libgtest.a; sourceTree = "<group>"; };
 		DD23A3B5224BB33D000C413D /* libgtest_main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest_main.a; path = ../../../../../usr/local/lib/libgtest_main.a; sourceTree = "<group>"; };
 		DD485C4B229EA70B00191D0C /* transmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transmitter.h; sourceTree = "<group>"; };
 		DD485C4C229EA8B600191D0C /* transmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transmitter.cpp; sourceTree = "<group>"; };
 		DD485C4D229EA8B600191D0C /* transmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transmitter.h; sourceTree = "<group>"; };
 		DD485C5022A0F50800191D0C /* synchronized_container.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = synchronized_container.cpp; sourceTree = "<group>"; };
-		DD485C5522A0F75600191D0C /* synchronized_container.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = synchronized_container.h; path = source/utility/threading/synchronized_container.h; sourceTree = "<group>"; };
+		DD485C5522A0F75600191D0C /* synchronized_container.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = synchronized_container.h; path = source/iridium/threading/synchronized_container.h; sourceTree = "<group>"; };
 		DD4D50A222C64807008B7C3A /* stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stream.cpp; sourceTree = "<group>"; };
 		DD4D50A422C669D8008B7C3A /* stream_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stream_handler.cpp; sourceTree = "<group>"; };
 		DD4D50A522C669D8008B7C3A /* stream_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_handler.h; sourceTree = "<group>"; };
@@ -445,7 +445,7 @@
 		DD7CE9DE225E37AB0098985B /* fsm_switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fsm_switch.h; sourceTree = "<group>"; };
 		DD7CE9E0225E37AB0098985B /* test_db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_db.cpp; sourceTree = "<group>"; };
 		DD7CE9E2225E37AB0098985B /* test_convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_convert.cpp; sourceTree = "<group>"; };
-		DD7CE9E3225E37AB0098985B /* test_strings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test_strings.cpp; path = source/utility_test/test_strings.cpp; sourceTree = SOURCE_ROOT; };
+		DD7CE9E3225E37AB0098985B /* test_strings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test_strings.cpp; path = source/iridium_test/test_strings.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,7 +460,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD23A3B2224BB1CC000C413D /* libutility.a in Frameworks */,
+				DD23A3B2224BB1CC000C413D /* libiridium.a in Frameworks */,
 				DD23A3B4224BB31A000C413D /* libgtest.a in Frameworks */,
 				DD23A3B6224BB33D000C413D /* libgtest_main.a in Frameworks */,
 			);
@@ -475,8 +475,8 @@
 				DD485C5522A0F75600191D0C /* synchronized_container.h */,
 				DD23A3B1224BB1CC000C413D /* Frameworks */,
 				DD23A1C2224B6F02000C413D /* Products */,
-				DD23A1CF224B726C000C413D /* utility */,
-				DD23A38B224B997C000C413D /* utility_test */,
+				DD23A1CF224B726C000C413D /* iridium */,
+				DD23A38B224B997C000C413D /* iridium_test */,
 			);
 			sourceTree = "<group>";
 			wrapsLines = 0;
@@ -484,13 +484,13 @@
 		DD23A1C2224B6F02000C413D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DD23A1C1224B6F02000C413D /* libutility.a */,
-				DD23A382224B9896000C413D /* utility_test */,
+				DD23A1C1224B6F02000C413D /* libiridium.a */,
+				DD23A382224B9896000C413D /* iridium_test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DD23A1CF224B726C000C413D /* utility */ = {
+		DD23A1CF224B726C000C413D /* iridium */ = {
 			isa = PBXGroup;
 			children = (
 				DD23A29B224B726C000C413D /* assert.h */,
@@ -513,8 +513,8 @@
 				DD23A24A224B726C000C413D /* system */,
 				DD23A279224B726C000C413D /* threading */,
 			);
-			name = utility;
-			path = source/utility;
+			name = iridium;
+			path = source/iridium;
 			sourceTree = "<group>";
 		};
 		DD23A1D0224B726C000C413D /* encryption */ = {
@@ -1022,7 +1022,7 @@
 			path = implementation;
 			sourceTree = "<group>";
 		};
-		DD23A38B224B997C000C413D /* utility_test */ = {
+		DD23A38B224B997C000C413D /* iridium_test */ = {
 			isa = PBXGroup;
 			children = (
 				DD7CE9E3225E37AB0098985B /* test_strings.cpp */,
@@ -1034,7 +1034,7 @@
 				DD7CE9DB225E37AB0098985B /* pattern */,
 				DD7CE9D3225E37AB0098985B /* threading */,
 			);
-			path = utility_test;
+			path = iridium_test;
 			sourceTree = "<group>";
 		};
 		DD23A3B1224BB1CC000C413D /* Frameworks */ = {
@@ -1054,7 +1054,7 @@
 				DD7CE9D2225E37AB0098985B /* test_node.cpp */,
 			);
 			name = parsing;
-			path = source/utility_test/parsing;
+			path = source/iridium_test/parsing;
 			sourceTree = SOURCE_ROOT;
 		};
 		DD7CE9CF225E37AB0098985B /* serialization */ = {
@@ -1072,7 +1072,7 @@
 				DD7CE9D4225E37AB0098985B /* test_worker.cpp */,
 			);
 			name = threading;
-			path = source/utility_test/threading;
+			path = source/iridium_test/threading;
 			sourceTree = SOURCE_ROOT;
 		};
 		DD7CE9D5225E37AB0098985B /* net */ = {
@@ -1083,7 +1083,7 @@
 				DD7CE9D8225E37AB0098985B /* wsa_example.cpp */,
 			);
 			name = net;
-			path = source/utility_test/net;
+			path = source/iridium_test/net;
 			sourceTree = SOURCE_ROOT;
 		};
 		DD7CE9D9225E37AB0098985B /* logging */ = {
@@ -1092,7 +1092,7 @@
 				DD7CE9DA225E37AB0098985B /* test_logger.cpp */,
 			);
 			name = logging;
-			path = source/utility_test/logging;
+			path = source/iridium_test/logging;
 			sourceTree = SOURCE_ROOT;
 		};
 		DD7CE9DB225E37AB0098985B /* pattern */ = {
@@ -1103,7 +1103,7 @@
 				DD7CE9DE225E37AB0098985B /* fsm_switch.h */,
 			);
 			name = pattern;
-			path = source/utility_test/pattern;
+			path = source/iridium_test/pattern;
 			sourceTree = SOURCE_ROOT;
 		};
 		DD7CE9DF225E37AB0098985B /* db */ = {
@@ -1112,7 +1112,7 @@
 				DD7CE9E0225E37AB0098985B /* test_db.cpp */,
 			);
 			name = db;
-			path = source/utility_test/db;
+			path = source/iridium_test/db;
 			sourceTree = SOURCE_ROOT;
 		};
 		DD7CE9E1225E37AB0098985B /* convertion */ = {
@@ -1121,7 +1121,7 @@
 				DD7CE9E2225E37AB0098985B /* test_convert.cpp */,
 			);
 			name = convertion;
-			path = source/utility_test/convertion;
+			path = source/iridium_test/convertion;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -1260,9 +1260,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		DD23A1C0224B6F02000C413D /* utility */ = {
+		DD23A1C0224B6F02000C413D /* iridium */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD23A1CC224B6F02000C413D /* Build configuration list for PBXNativeTarget "utility" */;
+			buildConfigurationList = DD23A1CC224B6F02000C413D /* Build configuration list for PBXNativeTarget "iridium" */;
 			buildPhases = (
 				DD23A1BD224B6F02000C413D /* Headers */,
 				DD23A1BE224B6F02000C413D /* Sources */,
@@ -1272,14 +1272,14 @@
 			);
 			dependencies = (
 			);
-			name = utility;
-			productName = utility;
-			productReference = DD23A1C1224B6F02000C413D /* libutility.a */;
+			name = iridium;
+			productName = iridium;
+			productReference = DD23A1C1224B6F02000C413D /* libiridium.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		DD23A381224B9896000C413D /* utility_test */ = {
+		DD23A381224B9896000C413D /* iridium_test */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD23A386224B9896000C413D /* Build configuration list for PBXNativeTarget "utility_test" */;
+			buildConfigurationList = DD23A386224B9896000C413D /* Build configuration list for PBXNativeTarget "iridium_test" */;
 			buildPhases = (
 				DD23A37E224B9896000C413D /* Sources */,
 				DD23A37F224B9896000C413D /* Frameworks */,
@@ -1290,9 +1290,9 @@
 			dependencies = (
 				DD23A38A224B9945000C413D /* PBXTargetDependency */,
 			);
-			name = utility_test;
-			productName = utility_test;
-			productReference = DD23A382224B9896000C413D /* utility_test */;
+			name = iridium_test;
+			productName = iridium_test;
+			productReference = DD23A382224B9896000C413D /* iridium_test */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -1312,7 +1312,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DD23A1BC224B6F02000C413D /* Build configuration list for PBXProject "utility" */;
+			buildConfigurationList = DD23A1BC224B6F02000C413D /* Build configuration list for PBXProject "iridium" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1324,8 +1324,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DD23A1C0224B6F02000C413D /* utility */,
-				DD23A381224B9896000C413D /* utility_test */,
+				DD23A1C0224B6F02000C413D /* iridium */,
+				DD23A381224B9896000C413D /* iridium_test */,
 			);
 		};
 /* End PBXProject section */
@@ -1430,7 +1430,7 @@
 /* Begin PBXTargetDependency section */
 		DD23A38A224B9945000C413D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DD23A1C0224B6F02000C413D /* utility */;
+			target = DD23A1C0224B6F02000C413D /* iridium */;
 			targetProxy = DD23A389224B9945000C413D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1632,7 +1632,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DD23A1BC224B6F02000C413D /* Build configuration list for PBXProject "utility" */ = {
+		DD23A1BC224B6F02000C413D /* Build configuration list for PBXProject "iridium" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD23A1CA224B6F02000C413D /* Debug */,
@@ -1641,7 +1641,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD23A1CC224B6F02000C413D /* Build configuration list for PBXNativeTarget "utility" */ = {
+		DD23A1CC224B6F02000C413D /* Build configuration list for PBXNativeTarget "iridium" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD23A1CD224B6F02000C413D /* Debug */,
@@ -1650,7 +1650,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD23A386224B9896000C413D /* Build configuration list for PBXNativeTarget "utility_test" */ = {
+		DD23A386224B9896000C413D /* Build configuration list for PBXNativeTarget "iridium_test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD23A387224B9896000C413D /* Debug */,

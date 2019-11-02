@@ -5,13 +5,13 @@
 	<key>BuildLocationStyle</key>
 	<string>CustomLocation</string>
 	<key>CustomBuildIntermediatesPath</key>
-	<string>/Users/volodja/workspace/xcode/buid-utility/Intermediates.noindex</string>
+	<string>/Users/volodja/workspace/xcode/buid-iridium/Intermediates.noindex</string>
 	<key>CustomBuildLocationType</key>
 	<string>Absolute</string>
 	<key>CustomBuildProductsPath</key>
-	<string>/Users/volodja/workspace/xcode/buid-utility</string>
+	<string>/Users/volodja/workspace/xcode/buid-iridium</string>
 	<key>CustomIndexStorePath</key>
-	<string>/Users/volodja/workspace/xcode/buid-utility/Index/DataStore</string>
+	<string>/Users/volodja/workspace/xcode/buid-iridium/Index/DataStore</string>
 	<key>DerivedDataLocationStyle</key>
 	<string>Default</string>
 	<key>EnabledFullIndexStoreVisibility</key>
