@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_STREAM_HANDLER_5D620AAC_438B_4AE1_85D9_45A5A447505E
 #define HEADER_STREAM_HANDLER_5D620AAC_438B_4AE1_85D9_45A5A447505E
 

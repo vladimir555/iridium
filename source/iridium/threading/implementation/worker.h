@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_WORKER_62A45EF9_ADAA_4252_940F_C9952EAFD0A6
 #define HEADER_WORKER_62A45EF9_ADAA_4252_940F_C9952EAFD0A6
 

@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_PROTOTYPE_248BDC92_79E1_458D_85F8_A8E49C19564B
 #define HEADER_PROTOTYPE_248BDC92_79E1_458D_85F8_A8E49C19564B
 

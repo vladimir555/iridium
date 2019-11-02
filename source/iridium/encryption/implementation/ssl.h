@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SSL_994B9C4C_4FE3_4E23_BBA5_5FADE1EE091C
 #define HEADER_SSL_994B9C4C_4FE3_4E23_BBA5_5FADE1EE091C
 

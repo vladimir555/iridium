@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_TERMINATOR_14A1C7DA_9ECF_49BD_8318_A7E5A92FDC8A
 #define HEADER_TERMINATOR_14A1C7DA_9ECF_49BD_8318_A7E5A92FDC8A
 

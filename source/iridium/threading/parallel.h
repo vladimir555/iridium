@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_PARALLEL_32399357_4743_4072_9BE1_2E3B22B7E9EE
 #define HEADER_PARALLEL_32399357_4743_4072_9BE1_2E3B22B7E9EE
 

@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_PROTOCOL_FACTORY_6E49C5FE_ACE3_453D_B03A_222083C6A96C
 #define HEADER_PROTOCOL_FACTORY_6E49C5FE_ACE3_453D_B03A_222083C6A96C
 

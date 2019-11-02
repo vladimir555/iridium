@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_THREAD_POOL_EF4A52A1_FBFD_4975_BFC8_607474576C7F
 #define HEADER_THREAD_POOL_EF4A52A1_FBFD_4975_BFC8_607474576C7F
 

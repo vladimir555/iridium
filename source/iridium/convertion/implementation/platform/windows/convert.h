@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_CONVERT_331F2175_E59F_4DD5_A043_451816549CD0
 #define HEADER_CONVERT_331F2175_E59F_4DD5_A043_451816549CD0
 

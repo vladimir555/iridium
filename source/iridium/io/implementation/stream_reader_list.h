@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_STREAM_LIST_3E262388_342C_4EDD_9ADF_F42774DC3E9C
 #define HEADER_STREAM_LIST_3E262388_342C_4EDD_9ADF_F42774DC3E9C
 

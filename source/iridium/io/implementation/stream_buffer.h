@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB
 #define HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB
 

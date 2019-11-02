@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_LISTENER_C34DC1E3_F80D_41A8_8CCC_08D026E35B74
 #define HEADER_LISTENER_C34DC1E3_F80D_41A8_8CCC_08D026E35B74
 

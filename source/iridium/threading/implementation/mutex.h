@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_MUTEX_7E2413B9_1604_4ADD_9540_34FED57BFF14
 #define HEADER_MUTEX_7E2413B9_1604_4ADD_9540_34FED57BFF14
 

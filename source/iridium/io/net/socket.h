@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SOCKET_F2E1584B_C2F5_4504_8194_4002936076F6
 #define HEADER_SOCKET_F2E1584B_C2F5_4504_8194_4002936076F6
 

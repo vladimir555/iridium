@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_TIMED_MUTEX_D7B87D44_698A_4699_A45E_4941FD101097
 #define HEADER_TIMED_MUTEX_D7B87D44_698A_4699_A45E_4941FD101097
 

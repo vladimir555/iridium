@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_CHANNEL_5FD4CE02_783F_4C83_8BE8_804EC068D52A
 #define HEADER_CHANNEL_5FD4CE02_783F_4C83_8BE8_804EC068D52A
 

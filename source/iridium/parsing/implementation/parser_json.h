@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_PARSER_JSON_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88
 #define HEADER_PARSER_JSON_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88
 

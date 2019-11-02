@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_FSM_732D8850_143F_4B86_ABD1_CB9CB17B9C34
 #define HEADER_FSM_732D8850_143F_4B86_ABD1_CB9CB17B9C34
 

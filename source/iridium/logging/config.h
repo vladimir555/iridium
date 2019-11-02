@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_CONFIG_004DD24D_1205_412D_8CEF_618368AB483A
 #define HEADER_CONFIG_004DD24D_1205_412D_8CEF_618368AB483A
 

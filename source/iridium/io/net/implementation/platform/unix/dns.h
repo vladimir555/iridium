@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_DNS_3797E08A_AF11_43C7_BE08_3B45CFCCCB33
 #define HEADER_DNS_3797E08A_AF11_43C7_BE08_3B45CFCCCB33
 

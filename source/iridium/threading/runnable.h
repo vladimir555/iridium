@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_RUNNUBLE_82187C6C_2498_4042_A14B_902FECFE4570
 #define HEADER_RUNNUBLE_82187C6C_2498_4042_A14B_902FECFE4570
 

@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SYNCHRONIZED_63BFE515_3627_47E2_A357_FE7D548A4136
 #define HEADER_SYNCHRONIZED_63BFE515_3627_47E2_A357_FE7D548A4136
 

@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_TYPE_NAME_661E1CCF_1F7C_495A_A751_095975AE071E
 #define HEADER_TYPE_NAME_661E1CCF_1F7C_495A_A751_095975AE071E
 

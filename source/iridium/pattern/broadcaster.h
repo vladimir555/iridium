@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_BROADCASTER_843F1FB7_7A80_4BAF_8C67_457F4D84B287
 #define HEADER_BROADCASTER_843F1FB7_7A80_4BAF_8C67_457F4D84B287
 

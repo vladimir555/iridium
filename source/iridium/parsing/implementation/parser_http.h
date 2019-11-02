@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
 #define HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
 

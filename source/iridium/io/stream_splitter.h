@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_STREAM_SPLITTER_4B83B055_A008_4ECF_A9B4_D98F8738A808
 #define HEADER_STREAM_SPLITTER_4B83B055_A008_4ECF_A9B4_D98F8738A808
 

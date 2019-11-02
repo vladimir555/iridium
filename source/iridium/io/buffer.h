@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_BUFFER_65899B5B_473A_41CF_A262_28E212DF19F1
 #define HEADER_BUFFER_65899B5B_473A_41CF_A262_28E212DF19F1
 

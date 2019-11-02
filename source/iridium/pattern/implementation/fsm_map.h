@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_FSM_MAP_7D416CBE_F331_40CD_A51A_E2C41D1FF072
 #define HEADER_FSM_MAP_7D416CBE_F331_40CD_A51A_E2C41D1FF072
 

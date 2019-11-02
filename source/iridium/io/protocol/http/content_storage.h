@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_CONTENT_STORAGE_357A6B8F_B845_4480_B73F_8334B28B71A6
 #define HEADER_CONTENT_STORAGE_357A6B8F_B845_4480_B73F_8334B28B71A6
 

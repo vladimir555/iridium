@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB
 #define HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB
 

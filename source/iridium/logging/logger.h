@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9
 #define HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9
 

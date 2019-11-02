@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_FILE_CACHE_8ABCB65B_D74A_48BA_80C2_E6B63B28786F
 #define HEADER_FILE_CACHE_8ABCB65B_D74A_48BA_80C2_E6B63B28786F
 

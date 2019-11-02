@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C
 #define HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C
 

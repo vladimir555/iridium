@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_RECURSIVE_MUTEX_3CFC03BD_CF41_4162_9850_23A598835F85
 #define HEADER_RECURSIVE_MUTEX_3CFC03BD_CF41_4162_9850_23A598835F85
 
