@@ -13,4 +13,4 @@ CTestTestfile.cmake
 cmake_install.cmake
 CMakeLists.txt.*
 *.log
-
+*.autosave

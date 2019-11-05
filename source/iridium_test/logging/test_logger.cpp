@@ -65,8 +65,8 @@ TEST(logging, logger) {
 //spdlog  async: 1396 ms
 //iridium async: 1379 ms
 //spdlog  async: 1504 ms
-//iridium line : 16:50:46.050 T 140484597368640 logging_bench_Test::TestBody string 1 0.00010 false
-//spdlog  line : [2019-11-05 23:46:32.278] [async_file_logger] [warning] string 1 0.0001 false
+//iridium line : 17:49:23.581 W 140328983201600 string 100000 10.00000 true
+//spdlog  line : [2019-11-05 23:49:25.186] [async_file_logger] [warning] string 100000 10 true
 //TEST(logging, bench) {
 //    config::TLogger config;
 //    config::TLogger::TFileSink sink;
