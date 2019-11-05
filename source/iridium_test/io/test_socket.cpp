@@ -59,18 +59,18 @@ TEST(net, socket_loopback) {
     
 
 
-//    auto protocol_factory   = CProtocolFactory::create();
-//    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), 1, protocol_factory);
+    auto protocol_factory   = CProtocolFactory::create();
+    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), 1, protocol_factory);
 
-//    try {
-//        socket->initialize();
-//        LOGT << "begin";
-//        threading::sleep(100000);
-//        LOGT << "end";
-//        socket->finalize();
-//    } catch (std::exception const &e) {
-//        FAIL() << e.what();
-//    }
+    try {
+        socket->initialize();
+        LOGT << "begin";
+        threading::sleep(100000);
+        LOGT << "end";
+        socket->finalize();
+    } catch (std::exception const &e) {
+        FAIL() << e.what();
+    }
 }
 
 

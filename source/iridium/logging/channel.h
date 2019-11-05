@@ -21,9 +21,9 @@ public:
     ///
     virtual ~IChannel() = default;
     ///
-    virtual void attach(ISink::TSharedPtr sink) = 0;
+    virtual void attach(ISink::TSharedPtr const &sink) = 0;
     ///
-    virtual void detach(ISink::TSharedPtr sink) = 0;
+    virtual void detach(ISink::TSharedPtr const &sink) = 0;
     ///
     virtual void log(TEvent &&e) = 0;
 };

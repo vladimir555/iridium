@@ -11,7 +11,6 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/enum.h"
-//#include "iridium/io/fs/file_stream.h"
 #include "iridium/io/stream.h"
 
 
@@ -41,7 +40,7 @@ protected:
     DEFINE_CREATE(CFileStream)
 
     explicit CFileStream(std::string const &file_name, TOpenMode const &open_mode);
-    virtual ~CFileStream();
+    virtual ~CFileStream() override;
 
 private:
     std::string     m_file_name;

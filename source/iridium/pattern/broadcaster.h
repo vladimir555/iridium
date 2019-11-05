@@ -26,9 +26,9 @@ public:
     ///
     virtual ~Broadcaster() = default;
     ///
-    void attach(typename TReceiver::TSharedPtr &receiver);
+    void attach(typename TReceiver::TSharedPtr const &receiver);
     ///
-    void detach(typename TReceiver::TSharedPtr &receiver);
+    void detach(typename TReceiver::TSharedPtr const &receiver);
     ///
     template<typename TReceiver_, typename ... TArgs>
     void broadcast(void(TReceiver_::*f)(TArgs const & ...), TArgs const & ... args);
@@ -43,14 +43,14 @@ private:
 
 
 template<typename TReceiver>
-void Broadcaster<TReceiver>::attach(typename TReceiver::TSharedPtr &receiver) {
+void Broadcaster<TReceiver>::attach(typename TReceiver::TSharedPtr const &receiver) {
     if (!m_receivers.insert(receiver).second)
         throw std::logic_error("attach duplicate receiver"); // ----->
 }
 
 
 template<typename TReceiver>
-void Broadcaster<TReceiver>::detach(typename TReceiver::TSharedPtr &receiver) {
+void Broadcaster<TReceiver>::detach(typename TReceiver::TSharedPtr const &receiver) {
     if (m_receivers.erase(receiver) == 0)
         throw std::logic_error("detach unatached receiver"); // ----->
 }

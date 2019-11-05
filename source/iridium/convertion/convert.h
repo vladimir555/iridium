@@ -2,7 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-
 #ifndef HEADER_CONVERT_A1637EFD_3229_474D_BFEB_E9EAD7FF0C20
 #define HEADER_CONVERT_A1637EFD_3229_474D_BFEB_E9EAD7FF0C20
 

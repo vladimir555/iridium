@@ -35,13 +35,13 @@ void CChannel::finalize() {
 }
 
 
-void CChannel::attach(ISink::TSharedPtr sink) {
+void CChannel::attach(ISink::TSharedPtr const &sink) {
     LOCK_SCOPE
     Broadcaster<ISink>::attach(sink);
 }
 
 
-void CChannel::detach(ISink::TSharedPtr sink) {
+void CChannel::detach(ISink::TSharedPtr const &sink) {
     LOCK_SCOPE
     Broadcaster<ISink>::detach(sink);
 }

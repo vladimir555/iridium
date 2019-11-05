@@ -169,7 +169,7 @@ size_t CFileStream::getSize() const {
         " mode "   + convert<string>(m_open_mode) +
         " error: " + strerrorInternal(errno)); // ----->
 
-    return file_stat.st_size; // ----->
+    return static_cast<size_t>(file_stat.st_size); // ----->
 }
 
 

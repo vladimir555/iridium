@@ -50,7 +50,7 @@ void CListener::add(IStream::TSharedPtr const &stream) {
     event.data.fd   = stream->getID();
 
 //    auto result     =
-            epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
+     epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
 
     m_map_fd_stream[stream->getID()] = stream;
 }

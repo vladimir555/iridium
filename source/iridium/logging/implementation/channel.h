@@ -34,9 +34,9 @@ public:
     ///
     virtual void finalize() override;
     ///
-    virtual void attach(ISink::TSharedPtr sink) override;
+    virtual void attach(ISink::TSharedPtr const &sink) override;
     ///
-    virtual void detach(ISink::TSharedPtr sink) override;
+    virtual void detach(ISink::TSharedPtr const &sink) override;
     ///
     virtual void log(TEvent &&event) override;
 };

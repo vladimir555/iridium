@@ -13,6 +13,7 @@
 
 
 #include "iridium/io/listener.h"
+
 #include <unordered_map>
 
 
@@ -36,6 +37,7 @@ public:
 
 private:
     std::unordered_map<uintptr_t, IStream::TSharedPtr> m_map_fd_stream;
+    int                             m_epoll_fd;
 };
 
 
