@@ -170,11 +170,12 @@ void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
 
 
 CSocketServer::CAcceptor::CIOEventHandler::CIOEventHandler(
-    IProtocolFactory::TSharedPtr    const &protocol,
+    IProtocolFactory::TSharedPtr    const &protocol_factory,
     TStreamHandlers::TSharedPtr     const &streams)
 :
-//    m_protocol  (protocol),
+    m_protocol_factory  (protocol_factory),
 //    m_peers             (streams),
+    m_stream_handlers   (TStreamHandlers::create()),
     m_buffer_size       (5),
     m_parser            (CHTTPParser::create()),
     m_content_storage   (CContentStorage::create("."))
@@ -225,8 +226,10 @@ CSocketServer::CAcceptor::CIOEventHandler::handle(TItems const &events) {
             stream_handler  = m_protocol_factory->createStreamHandler(event->stream);
             m_stream_handlers->set(event->stream, stream_handler);
         }
+        LOGT << "! 1";
         
         event->type = stream_handler->handle(event->type);
+        LOGT << "! 2";
         
         LOGT << "event fd " << event->stream->getID() << " " << event->type << " updated";
         

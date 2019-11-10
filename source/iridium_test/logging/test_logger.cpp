@@ -9,10 +9,10 @@
 #include <iridium/parsing/implementation/node.h>
 #include <iridium/threading/thread.h>
 
-#include "spdlog/spdlog.h"
-#include "spdlog/async.h"
-#include "spdlog/async_logger.h"
-#include "spdlog/sinks/basic_file_sink.h"
+//#include "spdlog/spdlog.h"
+//#include "spdlog/async.h"
+//#include "spdlog/async_logger.h"
+//#include "spdlog/sinks/basic_file_sink.h"
 
 #include <sys/types.h>
 

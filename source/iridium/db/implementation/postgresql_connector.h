@@ -12,12 +12,12 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/db/connector.h"
-#include "iridium/net/url.h"
+#include "iridium/io/net/url.h"
 
 #include "connector.h"
 
 #include <string>
-#include <libpq-fe.h>
+#include <postgresql/libpq-fe.h>
 //#include <pqxx/connection>
 
 
@@ -33,9 +33,9 @@ class CPostgreSQLConnector:
 public:
     DEFINE_CREATE(CPostgreSQLConnector)
     ///
-    CPostgreSQLConnector(net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
+    CPostgreSQLConnector(io::net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
     ///
-    virtual        ~CPostgreSQLConnector();
+    virtual        ~CPostgreSQLConnector() override;
     ///
     virtual void    initialize() override;
     ///
@@ -48,15 +48,15 @@ private:
     void            executeCommand(std::string const &command);
     ///
 //    std::shared_ptr<pqxx::connection>   m_connection;
-    PGconn             *m_connection;
+    PGconn         *m_connection;
     ///
-    net::URL     m_url;
+    io::net::URL    m_url;
     ///
-    std::string         m_user;
+    std::string     m_user;
     ///
-    std::string         m_password;
+    std::string     m_password;
     ///
-    std::string         m_database;
+    std::string     m_database;
 };
 
 

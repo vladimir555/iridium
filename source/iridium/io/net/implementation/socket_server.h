@@ -60,7 +60,9 @@ private:
         public:
             DEFINE_IMPLEMENTATION(CIOEventHandler)
 
-            CIOEventHandler(protocol::IProtocolFactory::TSharedPtr const &protocol, TStreamHandlers::TSharedPtr const &streams);
+            CIOEventHandler(
+                protocol::IProtocolFactory::TSharedPtr const &protocol_factory,
+                TStreamHandlers::TSharedPtr const &streams);
 
             void    initialize()    override;
             void    finalize()      override;

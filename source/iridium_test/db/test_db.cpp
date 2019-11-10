@@ -18,7 +18,8 @@ namespace db {
 
 
 TEST(db, postgres) {
-    IDBConnector::TSharedPtr connector = implementation::CPostgreSQLConnector::create(net::URL("postgresql://localhost"), "volodja", "", "postgres");
+    IDBConnector::TSharedPtr connector = implementation::CPostgreSQLConnector::create(
+        io::net::URL("postgresql://localhost"), "postgres", "", "postgres");
     connector->initialize();
     auto rows = connector->sendQuery("select * from pg_database;");
     connector->finalize();

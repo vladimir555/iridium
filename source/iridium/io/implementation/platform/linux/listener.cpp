@@ -44,7 +44,7 @@ void CListener::finalize() {
 
 
 void CListener::add(IStream::TSharedPtr const &stream) {
-    struct epoll_event event = { 0 };
+    struct epoll_event event = {};
 
     event.events    = EPOLLIN | EPOLLET;
     event.data.fd   = stream->getID();

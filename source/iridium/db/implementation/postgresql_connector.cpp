@@ -16,10 +16,9 @@
 //#include <pqxx/transaction>
 
 
-
 using std::string;
 using std::vector;
-using iridium::net::URL;
+using iridium::io::net::URL;
 using iridium::convertion::convert;
 using iridium::convertion::convertPtr;
 

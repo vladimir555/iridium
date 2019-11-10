@@ -1,19 +1,26 @@
 cmake_minimum_required(VERSION 3.5)
 project(iridium)
-# todo: morion, akela, magur, pluto, eris, euryale, dew, iridium
 
+# clang or gcc
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 #set(CMAKE_C_COMPILER "clang")
 #set(CMAKE_CXX_COMPILER "clang++")
 
+# release or debug
 #set(CMAKE_BUILD_TYPE "Release")
 #set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
 set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 
-#LDFLAGS:  -L/usr/local/opt/openssl/lib
-#CPPFLAGS: -I/usr/local/opt/openssl/include
+# build components
+#set(BUILD_FLAG_POSTGRESQL 1)
+
+if (BUILD_FLAG_POSTGRESQL)
+    add_compile_definitions(BUILD_FLAG_POSTGRESQL)
+    set(PostgreSQL_TYPE_INCLUDE_DIR "/usr/include")
+endif()
+
 
 #set(OPENSSL_CRYPTO_LIBRARY "")
 #set(OPENSSL_INCLUDE_DIR "")
@@ -47,6 +54,8 @@ find_package(Threads)
 
 #set(CMAKE_FIND_FRAMEWORK LAST)
 
+# deb package
+# todo: dependencies postgres deb
 set(CPACK_GENERATOR "DEB")
 set(CPACK_PACKAGE_NAME lib${PROJECT_NAME})
 set(CPACK_DEBIAN_PACKAGE_DESCRIPTION    "${PROJECT_NAME} C++ framework without dependencies")
@@ -65,15 +74,17 @@ install(
 )
 
 #TEST
-enable_testing()
-find_package(GTest REQUIRED)
-#find_package(OpenSSL REQUIRED)
-#find_package(PostgreSQL REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
-
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
+enable_testing()
 
-#add_dependencies( ${PROJECT_TEST_NAME} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/libutility.a)
+find_package(GTest REQUIRED)
+
+#find_package(OpenSSL REQUIRED)
+if (BUILD_FLAG_POSTGRESQL)
+    find_package(PostgreSQL REQUIRED)
+endif()
+
+include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
 
 # source files for test
 file(GLOB_RECURSE SOURCE_TEST
@@ -91,7 +102,7 @@ target_link_libraries(
     ${GTEST_MAIN_LIBRARY}
     ${CMAKE_THREAD_LIBS_INIT}
 #    ${OPENSSL_LIBRARIES}
-#    ${PostgreSQL_LIBRARIES}
+    ${PostgreSQL_LIBRARIES}
 )
 
 add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})
