@@ -13,6 +13,9 @@ namespace implementation {
 CStreamSplitter::CStreamSplitter(
     IStreamReader::TSharedPtr const &reader,
     IStreamWriter::TSharedPtr const &writer)
+:
+    m_reader(reader),
+    m_writer(writer)
 {}
 
     

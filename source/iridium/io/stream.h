@@ -30,6 +30,7 @@ namespace io {
 class IStream: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)
+    // todo: for windows int &getID() const;
     virtual int getID() const = 0;
 };
 

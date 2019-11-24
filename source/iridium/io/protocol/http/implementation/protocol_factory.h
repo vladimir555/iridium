@@ -21,7 +21,7 @@ public:
     DEFINE_IMPLEMENTATION(CProtocolFactory)
     CProtocolFactory() = default;
     
-    IStreamHandler::TSharedPtr createStreamHandler(IStream::TSharedPtr const &stream) override;
+    IProtocolHandler::TSharedPtr    createProtocolHandler() override;
 };
     
 

@@ -28,6 +28,7 @@
 using iridium::threading::implementation::CRecursiveMutex;
 using iridium::threading::implementation::CThread;
 using iridium::threading::implementation::CWorkerPool;
+using iridium::threading::implementation::CMutex;
 using iridium::threading::IWorkerPool;
 using iridium::threading::IJob;
 using iridium::io::implementation::CListener;
@@ -38,6 +39,7 @@ using iridium::io::IStream;
 using iridium::io::implementation::CStreamReaderBuffer;
 using iridium::io::implementation::CStreamWriterBuffer;
 using iridium::io::implementation::CStreamReaderList;
+using iridium::io::implementation::CTransmitter;
 //using iridium::io::protocol::IProtocol;
 using iridium::io::protocol::IProtocolFactory;
 //using iridium::io::protocol::http::implementation::CProtocol;
@@ -49,6 +51,9 @@ using iridium::parsing::implementation::CHTTPParser;
 
 using std::map;
 using std::string;
+
+
+size_t const DEFAULT_BUFFER_SIZE = 4;
 
 
 namespace iridium {
@@ -129,11 +134,12 @@ CSocketServer::CAcceptor::CAcceptor(
 :
     m_listener  (CListener::create()),
     m_socket    (CSocket::create(url, true)),
-    m_peers     (TStreamHandlers::create())
+    m_peers     (Peers::create(protocol_factory))
 {
     IWorkerPool<io::Event::TSharedPtr>::TWorkerHandlers handlers;
     for (size_t i = 0; i < threads_count; i++) {
-        auto handler = CIOEventHandler::create(nullptr/*protocol_factory->createStreamHandler()*/, m_peers);
+        // todo: !!!!! factory of factory thread saving
+        auto handler = CIOEventHandler::create(m_peers);
         handlers.push_back(handler);
     }
 
@@ -155,7 +161,7 @@ void CSocketServer::CAcceptor::finalize() {
 void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
     m_listener->add(m_socket);
     while (is_running) {
-        LOGT << "sleep";
+//        LOGT << "sleep";
         threading::sleep(500);
         for (auto const &event: m_listener->wait()) {
             if (event->stream->getID() == m_socket->getID()) {
@@ -169,16 +175,41 @@ void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
 }
 
 
-CSocketServer::CAcceptor::CIOEventHandler::CIOEventHandler(
-    IProtocolFactory::TSharedPtr    const &protocol_factory,
-    TStreamHandlers::TSharedPtr     const &streams)
+CSocketServer::CAcceptor::Peers::Peers(IProtocolFactory::TSharedPtr const &protocol_factory)
 :
-    m_protocol_factory  (protocol_factory),
-//    m_peers             (streams),
-    m_stream_handlers   (TStreamHandlers::create()),
-    m_buffer_size       (5),
-    m_parser            (CHTTPParser::create()),
-    m_content_storage   (CContentStorage::create("."))
+    Synchronized        (threading::implementation::CMutex::create()),
+    m_protocol_factory  (protocol_factory)
+{}
+
+
+CSocketServer::CAcceptor::TPeer::TSharedPtr
+CSocketServer::CAcceptor::Peers::getPeer(IStream::TSharedPtr const &stream) {
+    LOCK_SCOPE_FAST
+    auto peer = m_map_stream_peer[stream];
+    if (!peer) {
+        peer = TPeer::create();
+        peer->protocol_handler      = m_protocol_factory->createProtocolHandler();
+        peer->transmitter           = CTransmitter::create(DEFAULT_BUFFER_SIZE);
+        m_map_stream_peer[stream]   = peer;
+    }
+    return peer; // ----->
+}
+
+
+void CSocketServer::CAcceptor::Peers::delPeer(IStream::TSharedPtr const &stream) {
+    LOCK_SCOPE_FAST
+    m_map_stream_peer.erase(stream);
+}
+
+
+CSocketServer::CAcceptor::CIOEventHandler::CIOEventHandler(Peers::TSharedPtr const &peers)
+:
+    m_peers(peers)
+//    m_protocol_factory  (protocol_factory),
+//    m_peers             (Peers::create())
+//    m_buffer_size       (5),
+//    m_parser            (CHTTPParser::create()),
+//    m_content_storage   (CContentStorage::create("."))
 {}
 
 
@@ -214,33 +245,44 @@ void CSocketServer::CAcceptor::CIOEventHandler::finalize() {}
 
 CSocketServer::CAcceptor::CIOEventHandler::TItems
 CSocketServer::CAcceptor::CIOEventHandler::handle(TItems const &events) {
-    LOGT << "sleep";
+//    LOGT << "sleep";
     threading::sleep(500);
     
     TItems events_;
 
     for (auto event: events) {
         LOGT << "event fd " << event->stream->getID() << " " << event->type;
-        auto stream_handler = m_stream_handlers->get(event->stream);
-        if (!stream_handler) {
-            stream_handler  = m_protocol_factory->createStreamHandler(event->stream);
-            m_stream_handlers->set(event->stream, stream_handler);
-        }
-        LOGT << "! 1";
-        
-        event->type = stream_handler->handle(event->type);
-        LOGT << "! 2";
-        
-        LOGT << "event fd " << event->stream->getID() << " " << event->type << " updated";
-        
-        if (event->type == Event::TType::CLOSE ||
-            event->type == Event::TType::ERROR)
-        {
-            LOGT << "close fd " << event->stream->getID();
+        auto peer = m_peers->getPeer(event->stream);
+        // todo: !
+        // protocol listener interface
+        // onEvent: stream fd, event type as EOF, ERROR, DATA(for read)
+        // first  <-> second streams
+        // client <-> server streams
+        // no transmit inside protocol handler
+        try {
+            LOGT << "protocol handle begin";
+            auto is_continue = peer->protocol_handler->update(peer->transmitter, event);
+            LOGT << "protocol handle end";
+            if (is_continue) {
+                // eof
+                LOGT << "transmit begin";
+                if (peer->transmitter->transmit())
+                    events_.push_back(event);
+//                else
+//                    events_.push_back(Event::create(Event::TType::CLOSE, event->stream));
+                LOGT << "transmit end";
+            } else {
+                // close socket by protocol
+                LOGT << "protocol handle close socket";
+                event->stream->finalize();
+                m_peers->delPeer(event->stream);
+                continue; // <---
+            }
+        } catch (std::exception const &e) {
+            LOGE << "peer error: " << e.what();
             event->stream->finalize();
-            m_stream_handlers->del(event->stream);
-        } else
-            events_.push_back(event);
+            m_peers->delPeer(event->stream);
+        }
     }
     
 //    for (auto event: events) {

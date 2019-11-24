@@ -32,7 +32,7 @@ public:
     void    initialize() override;
     void    finalize() override;
 
-    IStream::TSharedPtr accept() override;
+    ISocket::TSharedPtr accept() override;
     URL     getURL() const override;
 
     int     getID() const override;
@@ -48,6 +48,7 @@ private:
     URL     getPeerURL(int const &fd);
     void    setBlockingMode(bool const &is_blocking);
 
+    bool    m_is_blocking;
     bool    m_is_server_mode;
     URL     m_url;
     int     m_socket;

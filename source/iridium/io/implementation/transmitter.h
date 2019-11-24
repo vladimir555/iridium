@@ -27,16 +27,18 @@ class CTransmitter: public ITransmitter {
 public:
     DEFINE_IMPLEMENTATION(CTransmitter)
 
+    CTransmitter(size_t const &buffer_size);
+    // todo: rm constructor
     CTransmitter(
         IStreamReader::TSharedPtr   const &reader,
         IStreamWriter::TSharedPtr   const &writer,
         size_t                      const &buffer_size = 5
     );
 
-//    void set(IStream::TSharedPtr const &reader) override;
-//    void set(IStream::TSharedPtr const &writer) override;
-//    IStream::TSharedPtr getReader() const override;
-//    IStream::TSharedPtr getWriter() const override;
+    void setReader(IStreamReader::TSharedPtr const &reader) override;
+    void setWriter(IStreamWriter::TSharedPtr const &writer) override;
+    IStreamReader::TSharedPtr getReader() const override;
+    IStreamWriter::TSharedPtr getWriter() const override;
 
     bool transmit() override;
 

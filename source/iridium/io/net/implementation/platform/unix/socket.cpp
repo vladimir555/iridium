@@ -117,7 +117,7 @@ void CSocket::finalize() {
 }
 
 
-IStream::TSharedPtr CSocket::accept() {
+ISocket::TSharedPtr CSocket::accept() {
     struct sockaddr_in  peer_address      = {};
     socklen_t           peer_address_size = sizeof(peer_address);
 
@@ -126,7 +126,7 @@ IStream::TSharedPtr CSocket::accept() {
         LOGT << "fd " << peer_fd;
         auto peer = new unix::CSocket(getPeerURL(peer_fd), peer_fd);
         peer->setBlockingMode(false);
-        return IStream::TSharedPtr(peer); // ----->
+        return ISocket::TSharedPtr(peer); // ----->
     } else
         return nullptr; // ----->
 }
@@ -169,7 +169,11 @@ size_t CSocket::write(Buffer const &buffer_) {
 
 Buffer CSocket::read(size_t const &size) {
     char buffer[size];
-    auto received_size = assertOK(::recv(m_socket, buffer, size - 1, 0), "socket read error", m_url);
+    auto received_size  = ::recv(m_socket, buffer, size - 1, 0);
+    if(!(received_size == EOF && !m_is_blocking))
+        assertOK(received_size, "socket read error", m_url);
+    else
+        received_size = 0;
     LOGT << "fd " << m_socket << " " << Buffer(buffer, buffer + received_size);
     return Buffer(buffer, buffer + received_size); // ----->
 }
@@ -188,6 +192,7 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
     else
         flags |=  O_NONBLOCK;
     assertOK(fcntl(m_socket, F_SETFL, flags), "socket set flag error", m_url);
+    m_is_blocking = is_blocking;
 }
 
 

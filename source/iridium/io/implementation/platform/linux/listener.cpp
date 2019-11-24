@@ -30,12 +30,12 @@ static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 1000;
 
 CListener::CListener()
 :
-    m_epoll_fd  (0)
+    m_epoll_fd(0)
 {}
 
 
 void CListener::initialize() {
-    m_epoll_fd      = epoll_create1(0);
+    m_epoll_fd = epoll_create1(0);
 }
 
 
@@ -43,20 +43,20 @@ void CListener::finalize() {
 }
 
 
-void CListener::add(IStream::TSharedPtr const &stream) {
+void CListener::add(IStreamPort::TSharedPtr const &stream) {
     struct epoll_event event = {};
 
-    event.events    = EPOLLIN | EPOLLET;
+    event.events    = EPOLLIN | EPOLLET | EPOLLOUT;
     event.data.fd   = stream->getID();
 
 //    auto result     =
-            epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
+    epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
 
     m_map_fd_stream[stream->getID()] = stream;
 }
 
 
-void CListener::del(IStream::TSharedPtr const &stream) {
+void CListener::del(IStreamPort::TSharedPtr const &/*stream*/) {
 }
 
 

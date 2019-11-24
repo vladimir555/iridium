@@ -25,10 +25,9 @@ void CStreamReaderList::finalize() {}
 
 
 Buffer CStreamReaderList::read(size_t const &size) {
-    LOGT << 1;
     if(!m_is_started) {
-        m_is_started    = true;
-        m_stream        = m_streams.begin();
+        m_is_started = true;
+        m_stream     = m_streams.begin();
     }
     while (m_stream != m_streams.end()) {
         auto result  = m_stream->get()->read(size);
@@ -36,9 +35,12 @@ Buffer CStreamReaderList::read(size_t const &size) {
             LOGT << "next stream";
             m_stream++;
             continue; // <---
-        } else
+        } else {
+            LOGT << "return: " << result;
             return result; // ----->
+        }
     }
+    LOGT << "return: empty";
     return {}; // ----->
 }
     

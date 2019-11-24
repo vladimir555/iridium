@@ -25,12 +25,12 @@ public:
     DEFINE_ENUM     (TType, OPEN, CLOSE, READ, WRITE, ERROR)
     
     Event(
-        TType               const &type,
-        IStream::TSharedPtr const &stream);
+        TType                   const &type,
+        IStreamPort::TSharedPtr const &stream);
     virtual ~Event() = default;
     
-    TType               type;
-    IStream::TSharedPtr stream;
+    TType                   type;
+    IStreamPort::TSharedPtr stream;
 };
 
 
@@ -41,9 +41,9 @@ public:
     typedef std::list<Event::TSharedPtr> TEvents;
 
     /// add stream for monitoring
-    virtual void    add(IStream::TSharedPtr const &stream) = 0;
+    virtual void    add(IStreamPort::TSharedPtr const &stream) = 0;
     /// del stream from monitoring set
-    virtual void    del(IStream::TSharedPtr const &stream) = 0;
+    virtual void    del(IStreamPort::TSharedPtr const &stream) = 0;
     /// waiting for new events
     virtual TEvents wait() = 0;
 };

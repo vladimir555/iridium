@@ -22,13 +22,19 @@ namespace iridium {
 namespace io {
 
 
-class ITransmitter {
+class ITransmitterStreams {
+public:
+    DEFINE_INTERFACE(ITransmitterStreams)
+    virtual void setReader(IStreamReader::TSharedPtr const &reader) = 0;
+    virtual void setWriter(IStreamWriter::TSharedPtr const &writer) = 0;
+    virtual IStreamReader::TSharedPtr getReader() const = 0;
+    virtual IStreamWriter::TSharedPtr getWriter() const = 0;
+};
+
+
+class ITransmitter: public ITransmitterStreams {
 public:
     DEFINE_INTERFACE(ITransmitter)
-//    virtual void setReader(IStream::TSharedPtr const &reader) = 0;
-//    virtual void setWriter(IStream::TSharedPtr const &writer) = 0;
-//    virtual IStream::TSharedPtr getReader() const = 0;
-//    virtual IStream::TSharedPtr getWriter() const = 0;
     virtual bool transmit() = 0;
 };
 

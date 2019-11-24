@@ -20,7 +20,7 @@ class ISocket: public IStreamPort {
 public:
     DEFINE_INTERFACE(ISocket)
 
-    virtual IStream::TSharedPtr accept() = 0;
+    virtual ISocket::TSharedPtr accept() = 0;
     virtual URL getURL() const = 0;
 };
 

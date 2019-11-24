@@ -31,13 +31,14 @@ public:
     void    initialize()   override;
     void    finalize()     override;
 
-    void    add(IStream::TSharedPtr const &stream) override;
-    void    del(IStream::TSharedPtr const &stream) override;
+    void    add(IStreamPort::TSharedPtr const &stream) override;
+    void    del(IStreamPort::TSharedPtr const &stream) override;
     TEvents wait() override;
 
 private:
-    std::unordered_map<uintptr_t, IStream::TSharedPtr> m_map_fd_stream;
-    int                             m_epoll_fd;
+    std::unordered_map<uintptr_t, IStreamPort::TSharedPtr>
+            m_map_fd_stream;
+    int     m_epoll_fd;
 };
 
 

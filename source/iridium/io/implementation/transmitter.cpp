@@ -17,6 +17,12 @@ namespace io {
 namespace implementation {
 
 
+CTransmitter::CTransmitter(size_t const &buffer_size)
+:
+    m_buffer_size(buffer_size)
+{}
+
+
 CTransmitter::CTransmitter(
     IStreamReader::TSharedPtr   const &reader,
     IStreamWriter::TSharedPtr   const &writer,
@@ -28,36 +34,36 @@ CTransmitter::CTransmitter(
 {}
 
 
-//void CTransmitter::setReader(IStream::TSharedPtr const &reader) {
-//    m_reader = reader;
-//}
-//
-//
-//void CTransmitter::setWriter(IStream::TSharedPtr const &writer) {
-//    m_writer = writer;
-//}
+void CTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {
+    m_reader = reader;
+}
 
 
-//IStream::TSharedPtr CTransmitter::getReader() const {
-//    return m_reader; // ----->
-//}
-//
-//
-//IStream::TSharedPtr CTransmitter::getWriter() const {
-//    return m_writer; // ----->
-//}
+void CTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
+    m_writer = writer;
+}
+
+
+IStreamReader::TSharedPtr CTransmitter::getReader() const {
+    return m_reader; // ----->
+}
+
+
+IStreamWriter::TSharedPtr CTransmitter::getWriter() const {
+    return m_writer; // ----->
+}
 
 
 bool CTransmitter::transmit() {
     
     auto buffer = m_reader->read(m_buffer_size);
 
-    LOGT << "read  '" << buffer << "' buffer.size = " << buffer.size();
+//    LOGT << "read  '" << buffer << "' buffer.size = " << buffer.size();
 
     if (buffer.empty())
         return false; // ----->
 
-    auto size = m_writer->write(buffer);
+    auto size   = m_writer->write(buffer);
 
     LOGT << "write '" << buffer << "'";
 

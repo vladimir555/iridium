@@ -4,7 +4,7 @@
 */
 #include "protocol_factory.h"
 
-#include "stream_handler.h"
+#include "protocol_handler.h"
 
 
 namespace iridium {
@@ -14,8 +14,8 @@ namespace http {
 namespace implementation {
 
 
-IStreamHandler::TSharedPtr CProtocolFactory::createStreamHandler(IStream::TSharedPtr const &stream) {
-    return CStreamHandler::create(std::dynamic_pointer_cast<IStreamPort>(stream)); // ----->
+IProtocolHandler::TSharedPtr CProtocolFactory::createProtocolHandler() {
+    return CProtocolHandler::create(); // ----->
 }
    
 

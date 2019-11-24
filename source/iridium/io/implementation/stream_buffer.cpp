@@ -39,11 +39,13 @@ Buffer CStreamReaderBuffer::read(size_t const &size) {
 //    m_buffer->insert(m_buffer->end(), buffer.begin(), buffer.end());
 //    return buffer; // ----->
 
+    LOGT << "read: size = " << size;
     if (m_pos < m_buffer->size() && size > 0) {
         auto lpos = m_pos;
         m_pos += size;
         if (m_pos > m_buffer->size())
             m_pos = m_buffer->size();
+        LOGT << "read: " << Buffer(&(*m_buffer)[lpos], &(*m_buffer)[m_pos]);
         return Buffer(&(*m_buffer)[lpos], &(*m_buffer)[m_pos]); // ----->
     } else
         return Buffer();
@@ -68,7 +70,9 @@ int  CStreamWriterBuffer::getID() const {
 
 
 size_t CStreamWriterBuffer::write(Buffer const &buffer) {
+    LOGT << "write: '" << buffer << "'";
     m_buffer->insert(m_buffer->end(), buffer.begin(), buffer.end());
+    LOGT << "buffer: " << *m_buffer;
     return buffer.size(); // ----->
 }
     

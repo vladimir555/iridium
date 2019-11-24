@@ -8,7 +8,8 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/io/stream.h"
-#include "iridium/io/stream_handler.h"
+#include "iridium/io/transmitter.h"
+#include "iridium/io/listener.h"
 
 
 namespace iridium {
@@ -16,10 +17,18 @@ namespace io {
 namespace protocol {
 
 
+class IProtocolHandler {
+public:
+    DEFINE_INTERFACE(IProtocolHandler);
+    // result: do continue or not
+    virtual bool update(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) = 0;
+};
+
+
 class IProtocolFactory {
 public:
     DEFINE_INTERFACE(IProtocolFactory)
-    virtual IStreamHandler::TSharedPtr createStreamHandler(IStream::TSharedPtr const &stream) = 0;
+    virtual IProtocolHandler::TSharedPtr createProtocolHandler() = 0;
 };
 
 
