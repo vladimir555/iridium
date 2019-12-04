@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
-project(iridium)
-
 # clang or gcc
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
-#set(CMAKE_C_COMPILER "clang")
-#set(CMAKE_CXX_COMPILER "clang++")
+project(iridium)
 
 # release or debug
 #set(CMAKE_BUILD_TYPE "Release")

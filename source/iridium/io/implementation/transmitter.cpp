@@ -6,6 +6,7 @@
 
 #include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
+#include "iridium/assert.h"
 
 
 using iridium::convertion::convert;
@@ -56,6 +57,9 @@ IStreamWriter::TSharedPtr CTransmitter::getWriter() const {
 
 bool CTransmitter::transmit() {
     
+    assertExists(m_reader, "transmitter: reader does not exists");
+    assertExists(m_reader, "transmitter: writer does not exists");
+
     auto buffer = m_reader->read(m_buffer_size);
 
 //    LOGT << "read  '" << buffer << "' buffer.size = " << buffer.size();

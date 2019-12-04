@@ -95,6 +95,8 @@ bool CProtocolHandler::update(
                 LOGT << "begin read client";
             }
         }
+        if (event->type == Event::TType::CLOSE)
+            result = false;
     } catch (std::exception const &e) {
         LOGE << "http protocol error: " << e.what();
         result = false;

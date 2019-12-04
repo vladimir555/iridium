@@ -59,6 +59,7 @@ private:
         struct TPeer {
             DEFINE_CREATE(TPeer)
             protocol::IProtocolHandler::TSharedPtr  protocol_handler;
+            bool                                    is_continue;
             ITransmitter::TSharedPtr                transmitter;
         };
 
@@ -107,6 +108,7 @@ private:
         
     private:
         IListener::TSharedPtr       m_listener;
+//        threading::IAsyncQueue<IStreamPort::TSharedPtr> m_ports_to_delete; // todo:
         ISocket::TSharedPtr         m_socket;
         threading::IWorkerPool <Event::TSharedPtr>::TSharedPtr
                                     m_worker_pool_peer_handler;

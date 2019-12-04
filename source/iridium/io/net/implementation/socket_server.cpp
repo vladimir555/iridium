@@ -253,35 +253,34 @@ CSocketServer::CAcceptor::CIOEventHandler::handle(TItems const &events) {
     for (auto event: events) {
         LOGT << "event fd " << event->stream->getID() << " " << event->type;
         auto peer = m_peers->getPeer(event->stream);
-        // todo: !
-        // protocol listener interface
-        // onEvent: stream fd, event type as EOF, ERROR, DATA(for read)
-        // first  <-> second streams
-        // client <-> server streams
-        // no transmit inside protocol handler
-        try {
-            LOGT << "protocol handle begin";
-            auto is_continue = peer->protocol_handler->update(peer->transmitter, event);
-            LOGT << "protocol handle end";
-            if (is_continue) {
-                // eof
+        // todo: handling buffer overflow and eof on transmitting
+        if (peer) {
+            try {
+                LOGT << "protocol handle begin";
+                peer->is_continue = peer->protocol_handler->update(peer->transmitter, event);
+                LOGT << "protocol handle end";
+
                 LOGT << "transmit begin";
                 if (peer->transmitter->transmit())
                     events_.push_back(event);
-//                else
-//                    events_.push_back(Event::create(Event::TType::CLOSE, event->stream));
+                else {
+                    // stop streaming on eof and protocol finished
+                    if (!peer->is_continue) {
+                        LOGT << "1 close";
+                        m_peers->delPeer(event->stream);
+                        LOGT << "2 close";
+                        event->stream->finalize();
+                        LOGT << "3 close";
+                    }
+                }
                 LOGT << "transmit end";
-            } else {
-                // close socket by protocol
-                LOGT << "protocol handle close socket";
-                event->stream->finalize();
+            } catch (std::exception const &e) {
+                LOGE << "peer error: " << e.what();
                 m_peers->delPeer(event->stream);
-                continue; // <---
+                event->stream->finalize();
             }
-        } catch (std::exception const &e) {
-            LOGE << "peer error: " << e.what();
-            event->stream->finalize();
-            m_peers->delPeer(event->stream);
+        } else {
+            LOGE << "peer is null";
         }
     }
     
