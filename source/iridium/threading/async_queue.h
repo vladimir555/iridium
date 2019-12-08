@@ -36,7 +36,7 @@ public:
 
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 
-    virtual TItems  pop() = 0;
+    virtual TItems  pop(bool const &is_do_wait = true) = 0;
     virtual void    interrupt() = 0;
 };
 

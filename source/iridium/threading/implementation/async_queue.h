@@ -47,7 +47,7 @@ public:
     ///
     virtual size_t push(std::list<TItem> const &items) override;
     ///
-    virtual std::list<TItem> pop() override;
+    virtual std::list<TItem> pop(bool const &is_do_wait = true) override;
     ///
     virtual void interrupt() override;
 
@@ -99,8 +99,8 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 
 template<typename TItem>
-std::list<TItem> CAsyncQueue<TItem>::pop() {
-    if (m_is_do_wait && m_is_empty)
+std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_do_wait) {
+    if (is_do_wait && m_is_do_wait && m_is_empty)
         m_condition->wait();
 
     LOCK_SCOPE_FAST

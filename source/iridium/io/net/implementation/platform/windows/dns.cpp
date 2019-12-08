@@ -15,6 +15,7 @@ using std::string;
 
 
 namespace iridium {
+namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
@@ -28,6 +29,7 @@ TIPv4 getIPv4ByHost(string const &host) {
 } // platform
 } // implementation
 } // net
+} // io
 } // iridium
 
 

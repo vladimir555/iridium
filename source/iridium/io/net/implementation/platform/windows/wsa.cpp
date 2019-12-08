@@ -39,6 +39,7 @@ using std::vector;
 #include "iridium/logging/logger.h"
 #include <iostream>
 namespace iridium {
+namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
@@ -75,11 +76,11 @@ TIPv4 WSA::getIPv4ByName(std::string const &name) {
 }
 
 
-TPacket WSA::read(SOCKET const &socket, size_t const &size) {
+Buffer WSA::read(SOCKET const &socket, size_t const &size) {
     LOGT << socket;
     int             received_size = 0;
     vector<char>    buffer(size);
-    TPacket         result;
+    Buffer          result;
 
     //ZeroMemory(buffer, size);
     received_size = ::recv(socket, buffer.data(), size, 0);
@@ -93,7 +94,7 @@ TPacket WSA::read(SOCKET const &socket, size_t const &size) {
 }
 
 
-size_t  WSA::write(SOCKET const &socket, TPacket const &packet) {
+size_t  WSA::write(SOCKET const &socket, Buffer const &packet) {
     LOGT << socket;
     return assertNE(::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())), packet.size(), 0), SOCKET_ERROR, "socket write error");
 }
@@ -464,6 +465,7 @@ string WSA::getLastWSAErrorString() const {
 } // platform
 } // implementation
 } // net
+} // io
 } // iridium
 
 

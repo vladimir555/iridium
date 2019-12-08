@@ -13,7 +13,8 @@
 
 
 #include "iridium/pattern/singleton.h"
-#include "iridium/net/url.h"
+#include "iridium/io/net/url.h"
+#include "iridium/io/buffer.h"
 #include "iridium/smart_ptr.h"
 
 #include <string>
@@ -23,6 +24,7 @@
 
 
 namespace iridium {
+namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
@@ -34,8 +36,8 @@ public:
 
     TIPv4   getIPv4ByName(std::string const &name);
 
-    TPacket read(SOCKET const &socket, size_t const &size);
-    size_t  write(SOCKET const &socket, TPacket const &packet);
+    Buffer read(SOCKET const &socket, size_t const &size);
+    size_t  write(SOCKET const &socket, Buffer const &packet);
     void    close(SOCKET const &socket);
     SOCKET  connect(URL const &url);
     SOCKET  listen(URL const &url);
@@ -81,6 +83,7 @@ T &WSA::assertNE(T &&result, T const &value, std::string const &message) const {
 } // platform
 } // implementation
 } // net
+} // io
 } // iridium
 
 

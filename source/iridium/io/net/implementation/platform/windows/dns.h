@@ -12,10 +12,11 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/net/types.h"
+#include "iridium/io/net/types.h"
 
 
 namespace iridium {
+namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
@@ -27,6 +28,7 @@ TIPv4 getIPv4ByHost(std::string const &host);
 } // platform
 } // implementation
 } // net
+} // io
 } // iridium
 
 

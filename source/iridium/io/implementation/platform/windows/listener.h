@@ -2,20 +2,19 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-#ifndef HEADER_LISTENER_4F88765B_9F8A_4F8A_8622_061022685F80
-#define HEADER_LISTENER_4F88765B_9F8A_4F8A_8622_061022685F80
+#ifndef HEADER_LISTENER_324A28CA_8E92_4C84_BE9F_6BF4899756D4
+#define HEADER_LISTENER_324A28CA_8E92_4C84_BE9F_6BF4899756D4
 
 
 #include "iridium/platform.h"
 
 
-#ifdef LINUX_PLATFORM
+#ifdef WINDOWS_PLATFORM
 
 
 #include "iridium/io/listener.h"
 
-#include <unordered_map>
-#include <sys/epoll.h>
+//#include <unordered_map>
 
 
 namespace iridium {
@@ -36,13 +35,10 @@ public:
     void    del(IStreamPort::TSharedPtr const &stream) override;
     TEvents wait() override;
 
-private:
-    static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;
-
-    std::unordered_map<uintptr_t, IStreamPort::TSharedPtr>
-            m_map_fd_stream;
-    int     m_epoll_fd;
-    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
+//private:
+//    std::unordered_map<uintptr_t, IStreamPort::TSharedPtr>
+//            m_map_fd_stream;
+//    int     m_epoll_fd;
 };
 
 
@@ -55,4 +51,4 @@ private:
 #endif // LINUX_PLATFORM
 
 
-#endif // HEADER_LISTENER_4F88765B_9F8A_4F8A_8622_061022685F80
+#endif // HEADER_LISTENER_324A28CA_8E92_4C84_BE9F_6BF4899756D4

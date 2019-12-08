@@ -49,31 +49,39 @@ private:
     public:
         DEFINE_IMPLEMENTATION(CAcceptor)
 
-//        struct TPeer {
-//            ISocket::TSharedPtr         client_stream;
-//            IStreamReader::TSharedPtr   server_stream_reader;
-//            IStreamWriter::TSharedPtr   server_stream_writer;
-//            Buffer::TSharedPtr          buffer;
-//            int                         state = 0;
-//        };
-        struct TPeer {
-            DEFINE_CREATE(TPeer)
-            protocol::IProtocolHandler::TSharedPtr  protocol_handler;
-            bool                                    is_continue;
-            ITransmitter::TSharedPtr                transmitter;
-        };
-
         class Peers: public threading::Synchronized {
         public:
             DEFINE_CREATE(Peers)
-            Peers(protocol::IProtocolFactory::TSharedPtr const &protocol_factory);
+            Peers(
+                protocol::IProtocolFactory::TSharedPtr                      const &protocol_factory,
+                threading::IAsyncQueue<IStreamPort::TSharedPtr>::TSharedPtr const &streams_to_delete
+            );
             virtual ~Peers() = default;
 
-            TPeer::TSharedPtr   getPeer(IStream::TSharedPtr const &stream);
-            void                delPeer(IStream::TSharedPtr const &stream);
+            bool handle(io::Event::TSharedPtr const &event);
+
+//            TPeer::TSharedPtr   holdPeer    (IStream::TSharedPtr const &stream);
+//            void                releasePeer (IStream::TSharedPtr const &stream);
         private:
-            protocol::IProtocolFactory::TSharedPtr              m_protocol_factory;
-            std::map<IStream::TSharedPtr, TPeer::TSharedPtr>    m_map_stream_peer;
+            struct TPeer {
+                DEFINE_CREATE(TPeer)
+
+                protocol::IProtocolHandler::TSharedPtr
+                    protocol_handler;
+
+                ITransmitter::TSharedPtr
+                    transmitter;
+            };
+
+            protocol::IProtocolFactory::TSharedPtr
+                m_protocol_factory;
+
+            threading::IAsyncQueue<IStreamPort::TSharedPtr>::TSharedPtr
+                m_streams_to_delete;
+
+            // todo: vector
+            std::map<IStream::TSharedPtr, TPeer::TSharedPtr>
+                m_map_stream_peer;
         };
 
 //        typedef threading::SynchronizedContainer<IStream::TSharedPtr, TPeer::TSharedPtr> TPeers;
@@ -108,7 +116,8 @@ private:
         
     private:
         IListener::TSharedPtr       m_listener;
-//        threading::IAsyncQueue<IStreamPort::TSharedPtr> m_ports_to_delete; // todo:
+        threading::IAsyncQueue<IStreamPort::TSharedPtr>::TSharedPtr
+                                    m_streams_to_delete; // todo:
         ISocket::TSharedPtr         m_socket;
         threading::IWorkerPool <Event::TSharedPtr>::TSharedPtr
                                     m_worker_pool_peer_handler;

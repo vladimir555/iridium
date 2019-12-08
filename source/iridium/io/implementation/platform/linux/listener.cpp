@@ -10,7 +10,7 @@
 
 #include <string>
 #include <vector>
-#include <sys/epoll.h>
+
 #include "iridium/logging/logger.h"
 
 
@@ -25,7 +25,6 @@ namespace platform {
 //}
 
 
-static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
 static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 1000;
 
 
@@ -57,13 +56,12 @@ void CListener::add(IStreamPort::TSharedPtr const &stream) {
 }
 
 
-void CListener::del(IStreamPort::TSharedPtr const &/*stream*/) {
+void CListener::del(IStreamPort::TSharedPtr const &stream) {
+    epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr);
 }
 
 
 CListener::TEvents CListener::wait() {
-    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
-
     auto count = epoll_wait(
         m_epoll_fd,
         epoll_events,
@@ -85,7 +83,6 @@ CListener::TEvents CListener::wait() {
             type    = Event::TType::READ;
         if (epoll_events[i].events & EPOLLRDHUP) {
             type    = Event::TType::CLOSE;
-            epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, epoll_events[i].data.fd, &epoll_events[i]);
          }
 
         events.push_back(Event::create(type, m_map_fd_stream[epoll_events[i].data.fd]));

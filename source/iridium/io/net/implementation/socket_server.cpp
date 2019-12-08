@@ -8,6 +8,7 @@
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/worker_pool.h"
 #include "iridium/threading/implementation/recursive_mutex.h"
+#include "iridium/threading/implementation/async_queue.h"
 #include "iridium/threading/synchronized_scope.h"
 
 #include "iridium/io/implementation/listener.h"
@@ -29,6 +30,7 @@ using iridium::threading::implementation::CRecursiveMutex;
 using iridium::threading::implementation::CThread;
 using iridium::threading::implementation::CWorkerPool;
 using iridium::threading::implementation::CMutex;
+using iridium::threading::implementation::CAsyncQueue;
 using iridium::threading::IWorkerPool;
 using iridium::threading::IJob;
 using iridium::io::implementation::CListener;
@@ -132,9 +134,10 @@ CSocketServer::CAcceptor::CAcceptor(
     size_t  const &threads_count,
     IProtocolFactory::TSharedPtr const &protocol_factory)
 :
-    m_listener  (CListener::create()),
-    m_socket    (CSocket::create(url, true)),
-    m_peers     (Peers::create(protocol_factory))
+    m_listener          (CListener::create()),
+    m_streams_to_delete (CAsyncQueue<IStreamPort::TSharedPtr>::create()),
+    m_socket            (CSocket::create(url, true)),
+    m_peers             (Peers::create(protocol_factory, m_streams_to_delete))
 {
     IWorkerPool<io::Event::TSharedPtr>::TWorkerHandlers handlers;
     for (size_t i = 0; i < threads_count; i++) {
@@ -163,6 +166,9 @@ void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
     while (is_running) {
 //        LOGT << "sleep";
         threading::sleep(500);
+        for (auto const &stream: m_streams_to_delete->pop(false))
+            m_listener->del(stream);
+        // all fds are unique from listener
         for (auto const &event: m_listener->wait()) {
             if (event->stream->getID() == m_socket->getID()) {
                 LOGT << "try accept";
@@ -175,30 +181,69 @@ void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
 }
 
 
-CSocketServer::CAcceptor::Peers::Peers(IProtocolFactory::TSharedPtr const &protocol_factory)
+CSocketServer::CAcceptor::Peers::Peers(
+    IProtocolFactory::TSharedPtr                                const &protocol_factory,
+    threading::IAsyncQueue<IStreamPort::TSharedPtr>::TSharedPtr const &streams_to_delete)
 :
     Synchronized        (threading::implementation::CMutex::create()),
-    m_protocol_factory  (protocol_factory)
+    m_protocol_factory  (protocol_factory),
+    m_streams_to_delete (streams_to_delete)
 {}
 
 
-CSocketServer::CAcceptor::TPeer::TSharedPtr
-CSocketServer::CAcceptor::Peers::getPeer(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE_FAST
-    auto peer = m_map_stream_peer[stream];
-    if (!peer) {
-        peer = TPeer::create();
-        peer->protocol_handler      = m_protocol_factory->createProtocolHandler();
-        peer->transmitter           = CTransmitter::create(DEFAULT_BUFFER_SIZE);
-        m_map_stream_peer[stream]   = peer;
+bool CSocketServer::CAcceptor::Peers::handle(io::Event::TSharedPtr const &event) {
+    TPeer::TSharedPtr peer;
+
+    {
+        LOCK_SCOPE_FAST
+        auto i = m_map_stream_peer.find(event->stream);
+        if (i == m_map_stream_peer.end()) {
+            LOGT << "peer create";
+            peer = TPeer::create();
+            peer->protocol_handler  = m_protocol_factory->createProtocolHandler();
+            peer->transmitter       = CTransmitter::create(DEFAULT_BUFFER_SIZE);
+
+            m_map_stream_peer[event->stream] = peer;
+        } else {
+            LOGT << "peer get";
+            // m_map_stream_peer[event->stream] == nullptr means that peer in processing
+            peer = std::move(i->second);
+            if (!peer)
+                return false; // ----->
+        }
     }
-    return peer; // ----->
-}
 
+    bool is_continue    = false;
+    bool is_transmitted = false;
+    try {
+        LOGT << "peer protocol update";
+        is_continue = peer->protocol_handler->update(peer->transmitter, event);
+        LOGT << "peer protocol update result " << is_continue;
+        if (is_continue) {
+            LOGT << "peer transmit " << is_continue;
+            is_transmitted = peer->transmitter->transmit();
+            LOGT << "peer transmit result " << is_transmitted;
+        }
+    } catch (std::exception const &e) {
+        LOGE << "peer error: " << e.what();
+        is_continue = false;
+    }
 
-void CSocketServer::CAcceptor::Peers::delPeer(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE_FAST
-    m_map_stream_peer.erase(stream);
+    if (!is_continue) {
+        LOGT << "peer delete";
+        m_streams_to_delete->push(event->stream);
+        try {
+            event->stream->finalize();
+        } catch (std::exception const &e) {
+            LOGE << "peer error: " << e.what();
+        }
+    }
+
+    {
+        LOCK_SCOPE_FAST
+        m_map_stream_peer[event->stream] = std::move(peer);
+        return is_continue && is_transmitted; // ----->
+    }
 }
 
 
@@ -252,37 +297,49 @@ CSocketServer::CAcceptor::CIOEventHandler::handle(TItems const &events) {
 
     for (auto event: events) {
         LOGT << "event fd " << event->stream->getID() << " " << event->type;
-        auto peer = m_peers->getPeer(event->stream);
-        // todo: handling buffer overflow and eof on transmitting
-        if (peer) {
-            try {
-                LOGT << "protocol handle begin";
-                peer->is_continue = peer->protocol_handler->update(peer->transmitter, event);
-                LOGT << "protocol handle end";
-
-                LOGT << "transmit begin";
-                if (peer->transmitter->transmit())
-                    events_.push_back(event);
-                else {
-                    // stop streaming on eof and protocol finished
-                    if (!peer->is_continue) {
-                        LOGT << "1 close";
-                        m_peers->delPeer(event->stream);
-                        LOGT << "2 close";
-                        event->stream->finalize();
-                        LOGT << "3 close";
-                    }
-                }
-                LOGT << "transmit end";
-            } catch (std::exception const &e) {
-                LOGE << "peer error: " << e.what();
-                m_peers->delPeer(event->stream);
-                event->stream->finalize();
-            }
-        } else {
-            LOGE << "peer is null";
-        }
+        if (m_peers->handle(event))
+            events_.push_back(event);
     }
+
+    return events_; // ----->
+
+//    for (auto event: events) {
+//        LOGT << "event fd " << event->stream->getID() << " " << event->type;
+//        auto peer = m_peers->holdPeer(event->stream);
+//        // todo: handling buffer overflow and eof on transmitting
+//        static int i =0;
+//        if (peer) {
+//            try {
+//                LOGT << "protocol handle begin";
+//                peer->is_continue = peer->protocol_handler->update(peer->transmitter, event);
+//                LOGT << "protocol handle end";
+
+//                LOGT << "transmit begin";
+//                if (peer->transmitter->transmit())
+//                    events_.push_back(event);
+////                else {
+////                    // stop streaming on eof and protocol finished
+////                    if (!peer->is_continue) {
+////                        LOGT << "1 close";
+////                        event->stream->finalize();
+////                        LOGT << "2 close";
+////                    }
+////                }
+//                i++;
+//                if (i == 5) // todo: rm
+//                    throw std::runtime_error("fake exception");
+//                LOGT << "transmit end";
+//            } catch (std::exception const &e) {
+//                LOGE << "peer error: " << e.what();
+//                peer->is_continue = false;
+//            }
+//            if (!peer->is_continue)
+//                m_streams_to_delete->push(event->stream);
+//            m_peers->releasePeer(event->stream);
+//        } else {
+//            LOGE << "peer is null";
+//        }
+//    }
     
 //    for (auto event: events) {
 //        LOGT << "next";
@@ -360,7 +417,7 @@ CSocketServer::CAcceptor::CIOEventHandler::handle(TItems const &events) {
 //        }
 //    }
 
-    return events_; // ----->
+//    return events_; // ----->
 }
 
 
