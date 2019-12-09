@@ -86,6 +86,11 @@ std::string convertFunctionNameToLogFunctionName(std::string const &name);
 } // iridium
 
 
+#ifdef _MSC_VER
+#define _PRETTY_FUNCTION_ _FUNCSIG_
+#endif // _MSC_VER
+
+
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
 iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "

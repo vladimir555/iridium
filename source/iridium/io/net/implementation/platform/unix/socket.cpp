@@ -4,6 +4,10 @@
 */
 #include "socket.h"
 
+
+#ifdef UNIX_PLATFORM
+
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -202,3 +206,6 @@ void CSocket::setBlockingMode(bool const &is_blocking) {
 } // net
 } // io
 } // iridium
+
+
+#endif // UNIX_PLATFORM
