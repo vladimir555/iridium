@@ -149,13 +149,13 @@ void CFileStream::finalize() {
 
 int CFileStream::getID() const {
     // todo: move to separate headers
-    if (m_file)
+    if (m_file) {
 #ifdef LINUX_PLATFORM
         return m_file->_fileno; // ----->
 #elif  FREEBSD_LIKE_PLATFORM
         return m_file->_file; // ----->
 #endif
-    else
+    } else
         return -1;
 }
     

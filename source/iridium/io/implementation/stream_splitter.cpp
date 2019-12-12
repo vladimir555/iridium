@@ -4,6 +4,8 @@
 */
 #include "stream_splitter.h"
 
+#include <stdexcept>
+
 
 namespace iridium {
 namespace io {

@@ -85,9 +85,8 @@ std::string convertFunctionNameToLogFunctionName(std::string const &name);
 } // logger
 } // iridium
 
-
 #ifdef _MSC_VER
-#define _PRETTY_FUNCTION_ _FUNCSIG_
+#define __PRETTY_FUNCTION__ __FUNCSIG__
 #endif // _MSC_VER
 
 
