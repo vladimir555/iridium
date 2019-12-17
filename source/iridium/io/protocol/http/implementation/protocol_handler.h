@@ -2,9 +2,10 @@
 #define HEADER_PROTOCOL_HANDLER_AC6719DC_DDB4_4F4A_ACF1_A4EA7453E5B4
 
 
-//#include "iridium/parsing/parser.h"
+#include "iridium/parsing/parser.h"
 #include "iridium/io/stream_splitter.h"
 #include "iridium/io/protocol/protocol_factory.h"
+#include "iridium/io/protocol/http/content_storage.h"
 
 
 namespace iridium {
@@ -28,9 +29,8 @@ private:
     IStreamPort::TSharedPtr         m_client_stream;
     Buffer::TSharedPtr              m_write_buffer;
 
-//    parsing::IParser::TSharedPtr    m_parser;
-//    IContentStorage::TSharedPtr     m_content_storage;
-//    ITransmitter::TSharedPtr        m_transmitter;
+    parsing::IParser::TSharedPtr    m_parser;
+    IContentStorage::TSharedPtr     m_content_storage;
 };
 
 

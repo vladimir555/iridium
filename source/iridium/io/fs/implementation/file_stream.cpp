@@ -7,8 +7,10 @@
 #include <cstring>
 #include <sys/stat.h>
 
-#include <iridium/convertion/convert.h>
-#include <iridium/platform.h>
+#include "iridium/convertion/convert.h"
+#include "iridium/platform.h"
+
+#include "iridium/logging/logger.h"
 
 
 using std::string;
@@ -108,6 +110,9 @@ size_t CFileStream::write(Buffer const &line) {
 
 
 void CFileStream::flush() {
+    if (!m_file)
+        throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
+
     auto result = fflushInternal(m_file);
     assertOK(result,
         "flush file '"  + m_file_name + "'" +
@@ -148,10 +153,13 @@ void CFileStream::finalize() {
 
 
 int CFileStream::getID() const {
+    if (!m_file)
+        throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
+
     // todo: move to separate headers
     if (m_file) {
 #ifdef LINUX_PLATFORM
-        return m_file->_fileno; // ----->
+        return fileno(m_file); // ----->
 #elif  FREEBSD_LIKE_PLATFORM
         return m_file->_file; // ----->
 #endif
@@ -161,9 +169,15 @@ int CFileStream::getID() const {
     
     
 size_t CFileStream::getSize() const {
+    if (!m_file)
+        throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
+
     struct stat file_stat = {};
 
     auto result = fstat(fileno(m_file), &file_stat);
+
+    LOGT << "filesize = " << file_stat.st_size << " filename = " << m_file_name;
+
     assertOK(result,
         "get size file '" + m_file_name + "'" +
         " mode "   + convert<string>(m_open_mode) +

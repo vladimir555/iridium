@@ -56,7 +56,6 @@ IStreamWriter::TSharedPtr CTransmitter::getWriter() const {
 
 
 bool CTransmitter::transmit() {
-    
     assertExists(m_reader, "transmitter: reader does not exists");
     assertExists(m_reader, "transmitter: writer does not exists");
 
@@ -77,25 +76,6 @@ bool CTransmitter::transmit() {
             " < read size "                     + convert<string>(buffer.size())); // ----->
     else
         return true; // ----->
-
-    
-//    auto buffer = m_reader->read(m_buffer_size);
-//
-//    LOGT << "read  '" << buffer << "' buffer.size = " << buffer.size();
-//
-//    if (buffer.empty())
-//        return false; // ----->
-//
-//    auto size = m_writer->write(buffer);
-//
-//    LOGT << "write '" << buffer << "'";
-//
-//    if (size < buffer.size())
-//        throw std::runtime_error(
-//            "stream proxy error: write size "   + convert<string>(size) +
-//            " < read size "                     + convert<string>(buffer.size())); // ----->
-//    else
-//        return true; // ----->
 }
     
 

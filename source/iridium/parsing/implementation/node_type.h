@@ -170,6 +170,7 @@ typename INodeType<TValue>::iterator CNodeType<TValue>::end() {
 template<typename TValue>
 typename INodeType<TValue>::const_iterator CNodeType<TValue>::begin() const {
     return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).begin(); // ----->
+//    return std::reinterpret_pointer_cast<typename INodeType<TValue>::TNodesConst>(m_nodes).begin(); // ----->
 }
 
 

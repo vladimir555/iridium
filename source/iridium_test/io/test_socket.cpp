@@ -65,7 +65,7 @@ TEST(net, socket_loopback) {
     try {
         socket->initialize();
         LOGT << "begin";
-        threading::sleep(100000);
+        threading::sleep(500000);
         LOGT << "end";
         socket->finalize();
     } catch (std::exception const &e) {

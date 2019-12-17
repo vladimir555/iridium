@@ -10,7 +10,7 @@
 
 #include <string>
 #include <vector>
-
+#include <sys/epoll.h>
 #include "iridium/logging/logger.h"
 
 
@@ -20,11 +20,11 @@ namespace implementation {
 namespace platform {
 
 
-// todo: assert !!!
 //static int assertOK(int const &result, std::string const &error_message) {
 //}
 
 
+static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
 static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 1000;
 
 
@@ -46,7 +46,7 @@ void CListener::finalize() {
 void CListener::add(IStreamPort::TSharedPtr const &stream) {
     struct epoll_event event = {};
 
-    event.events    = EPOLLIN | EPOLLOUT | EPOLLET | EPOLLRDHUP;
+    event.events    = EPOLLIN | EPOLLET | EPOLLOUT;
     event.data.fd   = stream->getID();
 
 //    auto result     =
@@ -56,12 +56,13 @@ void CListener::add(IStreamPort::TSharedPtr const &stream) {
 }
 
 
-void CListener::del(IStreamPort::TSharedPtr const &stream) {
-    epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr);
+void CListener::del(IStreamPort::TSharedPtr const &/*stream*/) {
 }
 
 
 CListener::TEvents CListener::wait() {
+    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
+
     auto count = epoll_wait(
         m_epoll_fd,
         epoll_events,
@@ -74,18 +75,8 @@ CListener::TEvents CListener::wait() {
 
     for (auto i = 0; i < count; i++) {
         LOGT << "epoll event: " << epoll_events[i].events;
-
-        Event::TType type;
-
-        if (epoll_events[i].events & EPOLLIN)
-            type    = Event::TType::WRITE;
-        if (epoll_events[i].events & EPOLLOUT)
-            type    = Event::TType::READ;
-        if (epoll_events[i].events & EPOLLRDHUP) {
-            type    = Event::TType::CLOSE;
-         }
-
-        events.push_back(Event::create(type, m_map_fd_stream[epoll_events[i].data.fd]));
+        auto event = Event::create(Event::TType::READ, m_map_fd_stream[epoll_events[i].data.fd]);
+        events.push_back(event);
     }
 
     return events; // ----->
