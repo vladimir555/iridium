@@ -27,7 +27,7 @@ public:
 private:
     IStreamSplitter::TSharedPtr     m_server_stream;
     IStreamPort::TSharedPtr         m_client_stream;
-    Buffer::TSharedPtr              m_write_buffer;
+    Buffer::TSharedPtr              m_peer_buffer;
 
     parsing::IParser::TSharedPtr    m_parser;
     IContentStorage::TSharedPtr     m_content_storage;

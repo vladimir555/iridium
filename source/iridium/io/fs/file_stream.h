@@ -8,10 +8,20 @@
 
 #include "iridium/io/stream.h"
 
+#include <chrono>
+
 
 namespace iridium {
 namespace io {
 namespace fs {
+
+
+// todo: refactoring interfaces
+
+
+struct TFileStatus {
+    std::chrono::system_clock::time_point last_modified;
+};
 
 
 class IFileStreamWriter: public IStreamWriter {
@@ -25,6 +35,8 @@ class IFileStreamReader: public IStreamReader {
 public:
     DEFINE_INTERFACE(IFileStreamReader)
     virtual size_t getSize() = 0;
+    // todo: move to IFileStream
+    virtual TFileStatus getStatus() = 0;
 };
     
     

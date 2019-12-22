@@ -41,7 +41,11 @@ file(GLOB_RECURSE SOURCE
     ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}/*.cpp
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/include /usr/local/ssl/include)
+include_directories(
+    /usr/local/include
+    ${CMAKE_SOURCE_DIR}/source
+    ${CMAKE_SOURCE_DIR}/include
+    /usr/local/ssl/include)
 
 #add_executable(${PROJECT_NAME} ${SOURCE})
 

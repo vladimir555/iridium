@@ -24,7 +24,7 @@ namespace platform {
 //}
 
 
-static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
+//static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
 static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 1000;
 
 

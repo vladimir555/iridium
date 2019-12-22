@@ -35,6 +35,9 @@ namespace http {
 namespace response {
 
 
+std::string const THttp::DEFAULT_SERVER_NAME = "iridium";
+
+
 THttp::TMessageLine convertToMessageLine(string const &source) {
     auto    lines = assertSize(split(source, " "), 3, "wrong http request line format: '" + source + "'");
     auto    line  = lines.begin();
@@ -55,7 +58,7 @@ THttp::THeaders::THTTPDate convertToHTTPDate(string const &source) {
     for (size_t i = 0; i < months.size(); i++)
         if (items[2] == months[i]) {
             month_number = i + 1;
-            break;
+            break; // --->
         }
     if (month_number == 0)
         throw std::runtime_error("parsing http date string error: '" + source + "'");
@@ -68,12 +71,13 @@ THttp::THeaders::THTTPDate convertToHTTPDate(string const &source) {
 
 
 string convert(THttp::THeaders::THTTPDate const &source) {
-    string date = convertion::convert<string>(source.date);
+    using iridium::convertion::convert;
+    string date = convert<string>(source.date);
     // 2009-07-27 12:28:53
-    return days[0] + ", " + date.substr(8, 2) + " " + 
-        months[convertion::convert<unsigned int>(date.substr(5, 2))] + 
-        " " + date.substr(0, 4) + " " +
-        date.substr(11, 8) + " GMT"; // ----->
+    // 0123456789012345678
+    auto day    = days  [convert<unsigned int>(date.substr(8, 2)) % 7];
+    auto month  = months[convert<unsigned int>(date.substr(5, 2)) % 12];
+    return day + " " + month + " " + date.substr(0, 4) + " " + date.substr(11, 8) + " GMT"; // ----->
 }
 
 

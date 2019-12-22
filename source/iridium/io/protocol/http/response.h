@@ -21,6 +21,8 @@ namespace response {
 
 
 DEFINE_ROOT_NODE_BEGIN(Http)
+    static std::string const DEFAULT_SERVER_NAME;
+
     struct TMessageLine {
         std::string protocol;
         int         code;
@@ -32,7 +34,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
             std::chrono::system_clock::time_point date;
         };
         DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, Date, THTTPDate())
-        DEFINE_ATTRIBUTE_DEFAULT(std::string, server, "iridium")
+        DEFINE_ATTRIBUTE_DEFAULT(std::string, server, DEFAULT_SERVER_NAME)
         DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, LastModified, THTTPDate())
         DEFINE_ATTRIBUTE_DEFAULT(size_t, ContentLength, 0)
         DEFINE_ATTRIBUTE_DEFAULT(std::string, ContentType, "text/html")

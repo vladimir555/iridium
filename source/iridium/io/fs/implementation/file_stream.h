@@ -12,6 +12,7 @@
 #include "iridium/smart_ptr.h"
 #include "iridium/enum.h"
 #include "iridium/io/stream.h"
+#include "iridium/io/fs/file_stream.h"
 
 
 namespace iridium {
@@ -35,6 +36,8 @@ public:
     size_t  write(Buffer const &buffer);
 
     void    flush();
+
+    TFileStatus getStatus();
 
 protected:
     DEFINE_CREATE(CFileStream)

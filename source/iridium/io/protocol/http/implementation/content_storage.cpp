@@ -7,6 +7,7 @@
 #include "iridium/io/fs/implementation/file_stream_reader.h"
 
 #include "iridium/logging/logger.h"
+#include "iridium/io/fs/files.h"
 
 
 using iridium::io::fs::implementation::CFileStreamReader;
@@ -28,11 +29,10 @@ CContentStorage::CContentStorage(std::string const &root_path)
 fs::IFileStreamReader::TSharedPtr CContentStorage::getContent(std::string const &path) {
     LOGT << "root_path = " << m_root_path << " path = " << path;
 
-    // todo: check path sequrity
-    auto   stream_reader = CFileStreamReader::create(m_root_path + path);
-    stream_reader->initialize();
-    // todo: fix finalize
-    return stream_reader; // ----->
+    if (fs::checkFileExistence(m_root_path + path))
+        return CFileStreamReader::create(m_root_path + path); // ----->
+
+    return nullptr; // ----->
 };
 
 

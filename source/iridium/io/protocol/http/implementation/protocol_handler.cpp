@@ -31,7 +31,8 @@ using iridium::parsing::implementation::CNode;
 using iridium::parsing::implementation::CHTTPParser;
 
 
-static size_t const DEFAULT_HTTP_HEADER_SIZE_MIN = 78;
+static size_t const DEFAULT_HTTP_HEADER_SIZE_MIN    = 78;
+static string const DEFAULT_HTTP_PATH               = "/index.html";
 
 
 namespace iridium {
@@ -56,43 +57,68 @@ bool CProtocolHandler::update(
 {
     auto result = true;
 
+    // todo:
+    // http codes enum;
+    // http date fix;
+    // content_stream initizlize / finalize fix;
+    // rm debug sleeps, logs
+    // uri path checking
+
     try {
         if (event->type == Event::TType::READ) {
-            if (m_write_buffer) {
-                LOGT << "write buffer:\n" << *m_write_buffer << "\nsize = " << m_write_buffer->size();
-                auto header  = string(m_write_buffer->begin(), m_write_buffer->end());
+            if (m_peer_buffer) {
+                LOGT << "write buffer:\n" << *m_peer_buffer << "\nsize = " << m_peer_buffer->size();
+                auto header  = string(m_peer_buffer->begin(), m_peer_buffer->end());
 
-                if (m_write_buffer->size() > DEFAULT_HTTP_HEADER_SIZE_MIN &&
-                    string(m_write_buffer->end() - 4, m_write_buffer->end()) == "\r\n\r\n")
+                if (m_peer_buffer->size() > DEFAULT_HTTP_HEADER_SIZE_MIN &&
+                    string(m_peer_buffer->end() - 4, m_peer_buffer->end()) == "\r\n\r\n")
                 {
-                    request ::THttp request     (m_parser->parse(convert<string>(*m_write_buffer)));
+                    request ::THttp request     (m_parser->parse(convert<string>(*m_peer_buffer)));
                     response::THttp response    (CNode::create("http"));
 
-                    LOGT << "parsed client request:\n" << request.getNode();
+                    LOGT << "parsed client request:" << request.getNode();
 
-                    auto content_stream_reader      = m_content_storage->getContent(request.Message.get().uri);
-                    LOGT << "response.Body.get().size()         = " << response.Body.get().size();
-                    LOGT << "content_stream_reader->getSize()   = " << content_stream_reader->getSize();
-                    response.Headers.ContentLength  = response.Body.get().size() + content_stream_reader->getSize();
+                    auto uri = request.Message.get().uri;
+                    if (uri == "/")
+                        uri  = DEFAULT_HTTP_PATH;
+
+                    fs::IFileStreamReader::TSharedPtr content_stream_reader;
+                    try {
+                        content_stream_reader = m_content_storage->getContent(uri);
+                        if (content_stream_reader) {
+                            content_stream_reader->initialize();
+                            response.Headers.ContentLength = response.Body.get().size() + content_stream_reader->getSize();
+                            response.Message = {"HTTP/1.1", 200, "OK"};
+                        } else {
+                            response.Message = {"HTTP/1.1", 404, "Error"};
+                        }
+                        response.Headers.Date.set({std::chrono::system_clock::now()});
+                    } catch (std::exception const &e) {
+                        LOGE << "http handle error: " << e.what();
+                        if (content_stream_reader)
+                            content_stream_reader->finalize();
+                        content_stream_reader.reset();
+                        response.Message = {"HTTP/1.1", 500, "Internal Server Error"};
+                    }
 
                     auto stream_reader_list = CStreamReaderList::create();
-                    auto header_buffer      = Buffer::create(m_parser->compose(response.getNode()));
+                    stream_reader_list->add(CStreamReaderBuffer::create(Buffer::create(m_parser->compose(response.getNode()))));
 
-                    stream_reader_list->add(CStreamReaderBuffer::create(header_buffer));
-                    stream_reader_list->add(content_stream_reader);
+                    if (content_stream_reader)
+                        stream_reader_list->add(content_stream_reader);
 
                     transmitter->setReader(stream_reader_list);
                     transmitter->setWriter(event->stream);
 
                     event->type = Event::TType::WRITE;
-                    m_write_buffer.reset();
+                    m_peer_buffer.reset();
 
                     LOGT << "begin write to client";
                 }
             } else {
-                m_write_buffer = Buffer::create();
+                m_peer_buffer = Buffer::create();
                 transmitter->setReader(event->stream);
-                transmitter->setWriter(CStreamWriterBuffer::create(m_write_buffer));
+                transmitter->setWriter(CStreamWriterBuffer::create(m_peer_buffer));
 
                 LOGT << "begin read client";
             }
@@ -100,7 +126,7 @@ bool CProtocolHandler::update(
         if (event->type == Event::TType::CLOSE)
             result = false;
     } catch (std::exception const &e) {
-         LOGE << "http protocol error: " << e.what();
+        LOGE << "http protocol error: " << e.what();
         result = false;
     }
 
