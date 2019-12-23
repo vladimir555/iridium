@@ -19,7 +19,6 @@
 #include "iridium/io/protocol/http/implementation/content_storage.h"
 
 #include "iridium/pattern/implementation/initializer.h"
-
 #include "iridium/parsing/implementation/parser_http.h"
 
 #include <string>
@@ -53,7 +52,7 @@ using std::map;
 using std::string;
 
 
-size_t const DEFAULT_BUFFER_SIZE = 4;
+size_t const DEFAULT_BUFFER_SIZE = 8192;
 
 
 namespace iridium {
@@ -116,10 +115,10 @@ void CSocketServer::CAcceptor::run(std::atomic<bool> &is_running) {
     m_listener->add(m_socket);
     while (is_running) {
 //        LOGT << "sleep";
-        threading::sleep(500);
+//        threading::sleep(500);
         for (auto const &event: m_listener->wait()) {
             if (event->stream->getID() == m_socket->getID()) {
-                LOGT << "try accept";
+//                LOGT << "try accept";
                 while (auto peer = m_socket->accept())
                     m_listener->add(peer);
             } else
@@ -171,33 +170,40 @@ void CSocketServer::CAcceptor::CIOEventHandler::finalize() {}
 CSocketServer::CAcceptor::CIOEventHandler::TItems
 CSocketServer::CAcceptor::CIOEventHandler::handle(TItems const &events) {
 //    LOGT << "sleep";
-    threading::sleep(500);
+//    threading::sleep(500);
     
     TItems events_;
 
     for (auto event: events) {
-        LOGT << "event fd " << event->stream->getID() << " " << event->type;
+//        LOGT << "event fd " << event->stream->getID() << " " << event->type;
         auto peer = m_peers->getPeer(event->stream);
         // todo: handling buffer overflow and eof on transmitting
         try {
-            LOGT << "protocol handle begin";
+//            LOGT << "protocol handle begin";
             peer->is_continue = peer->protocol_handler->update(peer->transmitter, event);
-            LOGT << "protocol handle end";
+//            LOGT << "protocol handle end";
 
-            LOGT << "transmit begin";
+//            LOGT << "transmit begin";
+            // todo: !!! fix peer error: transmitter error: write size 4959 < read size 8192
             if (peer->transmitter->transmit())
                 events_.push_back(event);
             else {
                 // stop streaming on eof and protocol finished
                 if (!peer->is_continue) {
-                    event->stream->finalize();
+                    if (peer->transmitter) {
+                        peer->transmitter->getReader()->finalize();
+                        peer->transmitter->getWriter()->finalize();
+                    }
                     m_peers->delPeer(event->stream);
                 }
             }
-            LOGT << "transmit end";
+//            LOGT << "transmit end";
         } catch (std::exception const &e) {
             LOGE << "peer error: " << e.what();
-            event->stream->finalize();
+            if (peer->transmitter) {
+                peer->transmitter->getReader()->finalize();
+                peer->transmitter->getWriter()->finalize();
+            }
             m_peers->delPeer(event->stream);
         }
     }

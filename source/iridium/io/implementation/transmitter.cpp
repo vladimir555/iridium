@@ -68,7 +68,7 @@ bool CTransmitter::transmit() {
 
     auto size   = m_writer->write(buffer);
 
-    LOGT << "write '" << buffer << "'";
+//    LOGT << "write '" << buffer << "'";
 
     if (size < buffer.size())
         throw std::runtime_error(

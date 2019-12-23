@@ -32,15 +32,15 @@ Buffer CStreamReaderList::read(size_t const &size) {
     while (m_stream != m_streams.end()) {
         auto result  = m_stream->get()->read(size);
         if  (result.empty()) {
-            LOGT << "next stream";
+//            LOGT << "next stream";
             m_stream++;
             continue; // <---
         } else {
-            LOGT << "return: " << result;
+//            LOGT << "return: " << result;
             return result; // ----->
         }
     }
-    LOGT << "return: empty";
+//    LOGT << "return: empty";
     return {}; // ----->
 }
     
@@ -55,7 +55,7 @@ int CStreamReaderList::getID() const {
 
 void CStreamReaderList::add(IStreamReader::TSharedPtr const &stream_reader) {
     m_streams.push_back(stream_reader);
-    LOGT << "add stream, size = " << m_streams.size();
+//    LOGT << "add stream, size = " << m_streams.size();
 }
 
 

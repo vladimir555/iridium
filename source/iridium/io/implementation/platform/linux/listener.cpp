@@ -69,12 +69,12 @@ CListener::TEvents CListener::wait() {
         DEFAULT_EVENTS_COUNT_LIMIT,
         DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
 
-    LOGT << "epoll count " << count;
+//    LOGT << "epoll count " << count;
 
     CListener::TEvents events;
 
     for (auto i = 0; i < count; i++) {
-        LOGT << "epoll event: " << epoll_events[i].events;
+//        LOGT << "epoll event: " << epoll_events[i].events;
         auto event = Event::create(Event::TType::READ, m_map_fd_stream[epoll_events[i].data.fd]);
         events.push_back(event);
     }

@@ -40,7 +40,7 @@ T assertOK(T const &result, string const &message, URL const &url) {
 }
 
 
-static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 8;//8912;
+static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 8912; // todo: one buffer
 
 
 namespace iridium {
@@ -127,7 +127,7 @@ ISocket::TSharedPtr CSocket::accept() {
 
     auto peer_fd = ::accept(m_socket, (struct sockaddr *) &peer_address, &peer_address_size);
     if  (peer_fd > 0) {
-        LOGT << "fd " << peer_fd;
+//        LOGT << "fd " << peer_fd;
         auto peer = new unix::CSocket(getPeerURL(peer_fd), peer_fd);
         peer->setBlockingMode(false);
         return ISocket::TSharedPtr(peer); // ----->
@@ -147,7 +147,7 @@ int CSocket::getID() const {
 
 
 size_t CSocket::write(Buffer const &buffer_) {
-    LOGT << "fd " << m_socket << " '" << buffer_ << "'";
+//    LOGT << "fd " << m_socket << " '" << buffer_ << "'";
     
     auto buffer = static_cast<void const *>(buffer_.data());
     auto size   = DEFAULT_SOCKET_BUFFER_SIZE;
@@ -178,7 +178,7 @@ Buffer CSocket::read(size_t const &size) {
         assertOK(received_size, "socket read error", m_url);
     else
         received_size = 0;
-    LOGT << "fd " << m_socket << " " << Buffer(buffer, buffer + received_size);
+//    LOGT << "fd " << m_socket << " " << Buffer(buffer, buffer + received_size);
     return Buffer(buffer, buffer + received_size); // ----->
 }
     

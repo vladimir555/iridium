@@ -42,7 +42,7 @@ private:
     std::unordered_map<uintptr_t, IStreamPort::TSharedPtr>
             m_map_fd_stream;
     int     m_epoll_fd;
-    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
+    //struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 };
 
 

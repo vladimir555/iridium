@@ -47,6 +47,11 @@ size_t CFileStreamReader::getSize() {
 }
 
 
+TFileStatus CFileStreamReader::getStatus() {
+    return CFileStream::getStatus(); // ----->
+}
+
+
 } // implementation
 } // fs
 } // io
