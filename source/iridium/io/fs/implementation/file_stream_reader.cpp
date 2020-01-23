@@ -37,7 +37,7 @@ int CFileStreamReader::getID() const {
 }
 
 
-Buffer CFileStreamReader::read(size_t const &size) {
+Buffer::TSharedPtr CFileStreamReader::read(size_t const &size) {
     return CFileStream::read(size); // ----->
 }
 

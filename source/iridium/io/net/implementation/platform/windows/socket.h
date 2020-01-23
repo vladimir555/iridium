@@ -38,7 +38,7 @@ public:
 	int     getID() const override;
 
 	size_t  write(Buffer const &buffer) override;
-	Buffer  read(size_t const &size) override;
+	Buffer::TSharedPtr read(size_t const &size) override;
 
 	//    void    flush() override;
 

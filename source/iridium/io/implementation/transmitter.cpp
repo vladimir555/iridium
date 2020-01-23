@@ -10,6 +10,7 @@
 
 
 using iridium::convertion::convert;
+using iridium::threading::IAsyncQueuePusher;
 using std::string;
 
 
@@ -18,30 +19,59 @@ namespace io {
 namespace implementation {
 
 
-CTransmitter::CTransmitter(size_t const &buffer_size)
-:
-    m_buffer_size(buffer_size)
-{}
+size_t const CTransmitter::DEFAULT_BUFFER_SIZE  = 1024 * 1024 * 10;
+size_t const CTransmitter::DEFAULT_BUFFER_COUNT = 8;
 
 
 CTransmitter::CTransmitter(
-    IStreamReader::TSharedPtr   const &reader,
-    IStreamWriter::TSharedPtr   const &writer,
-    size_t                      const &buffer_size
-):
-    m_reader        (reader),
-    m_writer        (writer),
-    m_buffer_size   (buffer_size)
+    IListener::TSharedPtr   const &listener,
+    size_t                  const &buffer_size,
+    size_t                  const &buffer_count)
+:
+    m_buffer_size   (buffer_size),
+    m_buffer_count  (buffer_count),
+    m_listener      (listener)
 {}
 
 
+CTransmitter::~CTransmitter() {
+    if (m_reader) {
+        m_reader->finalize();
+        m_listener->del(m_reader);
+    }
+
+    if (m_writer) {
+        m_writer->finalize();
+        m_listener->del(m_writer);
+    }
+}
+
+
 void CTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {
+//    LOGT << "fd " << reader->getID();
+
+    // todo: conflict with other transmitters
+    if (m_reader) {
+        m_listener->del(m_reader);
+        //m_reader->finalize();
+    }
+
     m_reader = reader;
+    m_listener->add(reader);
 }
 
 
 void CTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
+//    LOGT << "fd " << writer->getID();
+
+    // todo: conflict with other transmitters
+    if (m_writer) {
+        m_listener->del(m_writer);
+        //m_writer->finalize();
+    }
+
     m_writer = writer;
+    m_listener->add(writer);
 }
 
 
@@ -55,27 +85,59 @@ IStreamWriter::TSharedPtr CTransmitter::getWriter() const {
 }
 
 
-bool CTransmitter::transmit() {
+bool CTransmitter::transmit(Event::TSharedPtr const &event) {
     assertExists(m_reader, "transmitter: reader does not exists");
-    assertExists(m_reader, "transmitter: writer does not exists");
+    assertExists(m_writer, "transmitter: writer does not exists");
 
-    auto buffer = m_reader->read(m_buffer_size);
+    LOGT << "fd " << event->stream->getID() << " event " << event->type
+         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
 
-//    LOGT << "read  '" << buffer << "' buffer.size = " << buffer.size();
+    if (event->type == Event::TType::CLOSE || 
+        event->type == Event::TType::ERROR) 
+    {
+        if (m_reader)
+            m_reader->finalize();
+        if (m_writer)
+            m_writer->finalize();
+        return false;
+    }
 
-    if (buffer.empty())
-        return false; // ----->
+    bool result = true;
 
-    auto size   = m_writer->write(buffer);
+    if  (m_buffers.size()  <  m_buffer_count &&
+        (m_buffers.empty() || m_reader->getID() == 0 ||
+        (m_reader->getID() == event->stream->getID() && 
+        (event->type & Event::TType::READ))))
+    {
+        auto buffer = m_reader->read(m_buffer_size);
+        if  (buffer && buffer->size() > 0) {
+            m_buffers.push_back(buffer);
+//            LOGT << "read " << buffer->size();
+        } else {
+            result = !m_buffers.empty();
+//            LOGT << "read EOF";
+        }
+    }
 
-//    LOGT << "write '" << buffer << "'";
+    if (!m_buffers.empty() && 
+        (m_writer->getID() == 0 || 
+       ((m_writer->getID() == event->stream->getID() &&
+        (event->type & Event::TType::WRITE)))))
+    {
+        auto size =  m_writer->write(*m_buffers.front());
+        if  (size == m_buffers.front()->size())
+            m_buffers.pop_front();
+        else {
+            if (size > 0) {
+                Buffer::TSharedPtr buffer = m_buffers.front();
+                buffer->assign(buffer->begin() + size, buffer->end());
+            }
+        }
 
-    if (size < buffer.size())
-        throw std::runtime_error(
-            "transmitter error: write size "    + convert<string>(size) +
-            " < read size "                     + convert<string>(buffer.size())); // ----->
-    else
-        return true; // ----->
+//        LOGT << "wrote " << size;
+    }
+
+    return result; // ----->
 }
     
 

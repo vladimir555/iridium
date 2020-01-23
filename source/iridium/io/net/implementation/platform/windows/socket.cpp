@@ -46,7 +46,7 @@ size_t CSocket::write(Buffer const &buffer) {
 }
 
 
-Buffer CSocket::read(size_t const &size) {
+Buffer::TSharedPtr CSocket::read(size_t const &size) {
     throw std::runtime_error("windows socket not implemented");
 }
 

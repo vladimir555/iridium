@@ -13,12 +13,9 @@ namespace io {
 namespace implementation {
 
 
-CStreamReaderBuffer::CStreamReaderBuffer(
-//    IStreamReader::TSharedPtr   const &reader,
-    Buffer::TSharedPtr          const &buffer)
+CStreamReaderBuffer::CStreamReaderBuffer(Buffer::TSharedPtr const &buffer)
 :
-//    m_reader    (assertExists(reader , "stream reader is null")),
-    m_buffer    (assertExists(buffer        , "buffer is null")),
+    m_buffer    (assertExists(buffer, "buffer is null")),
     m_pos       (0)
 {}
 
@@ -34,21 +31,15 @@ int CStreamReaderBuffer::getID() const {
 }
     
 
-Buffer CStreamReaderBuffer::read(size_t const &size) {
-//    auto buffer = m_reader->read(size);
-//    m_buffer->insert(m_buffer->end(), buffer.begin(), buffer.end());
-//    return buffer; // ----->
-
-//    LOGT << "read: size = " << size;
+Buffer::TSharedPtr CStreamReaderBuffer::read(size_t const &size) {
     if (m_pos < m_buffer->size() && size > 0) {
         auto lpos = m_pos;
         m_pos += size;
         if (m_pos > m_buffer->size())
             m_pos = m_buffer->size();
-//        LOGT << "read: " << Buffer(&(*m_buffer)[lpos], &(*m_buffer)[m_pos]);
-        return Buffer(&(*m_buffer)[lpos], &(*m_buffer)[m_pos]); // ----->
+        return Buffer::create(&(*m_buffer)[lpos], &(*m_buffer)[m_pos]); // ----->
     } else
-        return Buffer();
+        return {}; // ----->
 }
 
 
@@ -70,15 +61,9 @@ int  CStreamWriterBuffer::getID() const {
 
 
 size_t CStreamWriterBuffer::write(Buffer const &buffer) {
-//    LOGT << "write: '" << buffer << "'";
     m_buffer->insert(m_buffer->end(), buffer.begin(), buffer.end());
-//    LOGT << "buffer: " << *m_buffer;
     return buffer.size(); // ----->
 }
-    
-    
-//void CStreamWriterBuffer::flush() {
-//}
 
 
 } // implementation

@@ -18,18 +18,15 @@ class CStreamReaderBuffer: public IStreamReader {
 public:
     DEFINE_IMPLEMENTATION(CStreamReaderBuffer)
     
-    CStreamReaderBuffer(
-//        IStreamReader::TSharedPtr   const &stream_reader,
-        Buffer::TSharedPtr const &buffer);
+    CStreamReaderBuffer(Buffer::TSharedPtr const &buffer);
     
     void    initialize() override;
     void    finalize() override;
     int     getID() const override;
     
-    Buffer read(size_t const &size) override;
+    Buffer::TSharedPtr read(size_t const &size) override;
 
 private:
-//    IStreamReader::TSharedPtr   m_reader;
     Buffer::TSharedPtr          m_buffer;
     size_t                      m_pos;
 };

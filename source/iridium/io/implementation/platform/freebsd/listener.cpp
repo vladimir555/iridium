@@ -155,7 +155,7 @@ void CListener::add(IStream::TSharedPtr const &stream) {
     auto id = stream->getID();
     LOGT << "stream " << id;
 
-    if (m_monitor_events_used_count < static_cast<int>(m_monitor_events.size())) {
+    if (m_monitor_events_used_count < static_cast<int>(m_monitor_events.size()) && id != 0) {
         m_monitor_events[m_monitor_events_used_count] = {
             static_cast<uintptr_t>(id),
             TEvenFilterFlag::READ  |

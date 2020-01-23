@@ -39,12 +39,12 @@ void CListener::finalize() {
 }
 
 
-void CListener::add(IStreamPort::TSharedPtr const &stream) {
+void CListener::add(IStream::TSharedPtr const &stream) {
     throw std::runtime_error("windows async io not implemented");
 }
 
 
-void CListener::del(IStreamPort::TSharedPtr const &/*stream*/) {
+void CListener::del(IStream::TSharedPtr const &/*stream*/) {
     throw std::runtime_error("windows async io not implemented");
 }
 

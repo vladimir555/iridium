@@ -42,6 +42,7 @@
     <ClInclude Include="encryption\keys.h" />
     <ClInclude Include="encryption\ssl.h" />
     <ClInclude Include="enum.h" />
+    <ClInclude Include="io\net\implementation\peer_handler.h" />
     <ClInclude Include="fs\cache.h" />
     <ClInclude Include="fs\files.h" />
     <ClInclude Include="fs\file_value.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="io\protocol\http\response.h" />
     <ClInclude Include="io\protocol\protocol_factory.h" />
     <ClInclude Include="io\stream.h" />
+    <ClInclude Include="io\stream_splitter.h" />
     <ClInclude Include="io\transmitter.h" />
     <ClInclude Include="items.h" />
     <ClInclude Include="logging\channel.h" />
@@ -107,6 +109,8 @@
     <ClInclude Include="logging\sink.h" />
     <ClInclude Include="macros\disable_warnings.h" />
     <ClInclude Include="macros\enable_warnings.h" />
+    <ClInclude Include="pattern\observer.h" />
+    <ClInclude Include="pattern\observable.h" />
     <ClInclude Include="parsing\file_parser.h" />
     <ClInclude Include="parsing\implementation\node.h" />
     <ClInclude Include="parsing\implementation\node_type.h" />
@@ -126,9 +130,11 @@
     <ClInclude Include="pattern\non_movable.h" />
     <ClInclude Include="pattern\prototype.h" />
     <ClInclude Include="pattern\singleton.h" />
+    <ClInclude Include="io\net\implementation\peers.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="smart_ptr.h" />
     <ClInclude Include="io\net\implementation\platform\windows\socket.h" />
+    <ClInclude Include="io\net\implementation\socket_server_acceptor.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="system\terminator.h" />
     <ClInclude Include="threading\async_queue.h" />
@@ -165,6 +171,7 @@
     <ClCompile Include="db\implementation\mysql_connector.cpp" />
     <ClCompile Include="db\implementation\postgresql_connector.cpp" />
     <ClCompile Include="encryption\implementation\openssl.cpp" />
+    <ClCompile Include="io\net\implementation\peer_handler.cpp" />
     <ClCompile Include="io\buffer.cpp" />
     <ClCompile Include="io\fs\files.cpp" />
     <ClCompile Include="io\fs\implementation\file_cache.cpp" />
@@ -184,6 +191,7 @@
     <ClCompile Include="io\net\implementation\platform\windows\dns.cpp" />
     <ClCompile Include="io\net\implementation\platform\windows\wsa.cpp" />
     <ClCompile Include="io\net\implementation\socket_server.cpp" />
+    <ClCompile Include="io\transmitter.cpp" />
     <ClCompile Include="io\net\url.cpp" />
     <ClCompile Include="io\protocol\http\implementation\content_storage.cpp" />
     <ClCompile Include="io\protocol\http\implementation\mime.cpp" />
@@ -201,6 +209,8 @@
     <ClCompile Include="logging\implementation\sink_file.cpp" />
     <ClCompile Include="logging\logger.cpp" />
     <ClCompile Include="logging\sink.cpp" />
+    <ClCompile Include="pattern\observer.cpp" />
+    <ClCompile Include="pattern\observable.cpp" />
     <ClCompile Include="parsing\file_parser.cpp" />
     <ClCompile Include="parsing\implementation\parser_http.cpp" />
     <ClCompile Include="parsing\implementation\parser_json.cpp" />
@@ -209,6 +219,8 @@
     <ClCompile Include="parsing\serialization\node.cpp" />
     <ClCompile Include="pattern\implementation\initializer.cpp" />
     <ClCompile Include="io\net\implementation\platform\windows\socket.cpp" />
+    <ClCompile Include="io\net\implementation\socket_server_acceptor.cpp" />
+    <ClCompile Include="io\net\implementation\peers.cpp" />
     <ClCompile Include="strings.cpp" />
     <ClCompile Include="system\terminator.cpp" />
     <ClCompile Include="threading\implementation\base_mutex.cpp" />
@@ -221,9 +233,6 @@
     <ClCompile Include="threading\synchronized.cpp" />
     <ClCompile Include="threading\synchronized_scope.cpp" />
     <ClCompile Include="threading\thread.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="io\net\implementation\socket_server.pages" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -14,7 +14,7 @@ namespace io {
 
 Event::Event(
     TType                   const &type_,
-    IStreamPort::TSharedPtr const &stream_)
+    IStream::TSharedPtr     const &stream_)
 :
     type    (type_),
     stream  (stream_)

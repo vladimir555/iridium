@@ -16,6 +16,7 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/io/stream.h"
+#include "iridium/io/listener.h"
 
 
 namespace iridium {
@@ -35,8 +36,11 @@ public:
 class ITransmitter: public ITransmitterStreams {
 public:
     DEFINE_INTERFACE(ITransmitter)
-    virtual bool transmit() = 0;
+    virtual bool transmit(Event::TSharedPtr const &event) = 0;
 };
+
+
+bool operator < (ITransmitter::TSharedPtr const &l, ITransmitter::TSharedPtr const &r);
 
 
 } // io

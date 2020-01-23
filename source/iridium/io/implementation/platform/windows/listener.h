@@ -31,8 +31,8 @@ public:
     void    initialize()   override;
     void    finalize()     override;
 
-    void    add(IStreamPort::TSharedPtr const &stream) override;
-    void    del(IStreamPort::TSharedPtr const &stream) override;
+    void    add(IStream::TSharedPtr const &stream) override;
+    void    del(IStream::TSharedPtr const &stream) override;
     TEvents wait() override;
 
 //private:

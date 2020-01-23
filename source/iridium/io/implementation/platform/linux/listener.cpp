@@ -43,20 +43,27 @@ void CListener::finalize() {
 }
 
 
-void CListener::add(IStreamPort::TSharedPtr const &stream) {
-    struct epoll_event event = {};
+void CListener::add(IStream::TSharedPtr const &stream) {
+    if (stream->getID() > 0 && m_map_fd_stream.find(stream->getID()) == m_map_fd_stream.end()) {
+//        LOGT << "fd " << stream->getID();
 
-    event.events    = EPOLLIN | EPOLLET | EPOLLOUT;
-    event.data.fd   = stream->getID();
+        struct epoll_event event = {};
 
-//    auto result     =
-    epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
+        event.events    = EPOLLIN | EPOLLOUT | EPOLLET;
+        event.data.fd   = stream->getID();
 
-    m_map_fd_stream[stream->getID()] = stream;
+    //    auto result     =
+        epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
+
+        m_map_fd_stream[stream->getID()] = stream;
+    }
 }
 
 
-void CListener::del(IStreamPort::TSharedPtr const &/*stream*/) {
+void CListener::del(IStream::TSharedPtr const &stream) {
+//    LOGT << "fd " << stream->getID();
+    if (stream->getID() > 0)
+        m_map_fd_stream.erase(stream->getID());
 }
 
 
@@ -75,7 +82,16 @@ CListener::TEvents CListener::wait() {
 
     for (auto i = 0; i < count; i++) {
 //        LOGT << "epoll event: " << epoll_events[i].events;
+        Event::TType event_type = Event::TType::NONE;
+
+        if (epoll_events[i].events & EPOLLIN)
+            event_type = event_type | Event::TType::READ;
+
+        if (epoll_events[i].events & EPOLLOUT)
+            event_type = event_type | Event::TType::WRITE;
+
         auto event = Event::create(Event::TType::READ, m_map_fd_stream[epoll_events[i].data.fd]);
+//        LOGT << "fd " << event->stream->getID() << " type " << event->type << " code " << epoll_events[i].events;
         events.push_back(event);
     }
 

@@ -225,12 +225,12 @@ TEST(convertion, enum_) {
 
     {
         TEnum e = TEnum::E1;
-        convert<string>(e);
+        cout << convert<string>(e) << endl;
     }
 
     {
         TEnum e = static_cast<TEnum::TEnumInternal>(1);
-        convert<string>(e);
+        cout << convert<string>(e) << endl;
     }
 
     ASSERT_THROW(convert<TEnum>(string("E55")), std::runtime_error);

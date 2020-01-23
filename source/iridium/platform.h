@@ -25,13 +25,13 @@
 #ifdef _WIN32
 #define WINDOWS_PLATFORM
 #define PLATFORM_PATH platform/windows/
-//#if _WIN32 || _WIN64
-//#if _WIN64
-//#define CPU64
-//#else
-//#define CPU32
-//#endif
-//#endif
+#if _WIN32 || _WIN64
+#if _WIN64
+#define CPU64
+#else
+#define CPU32
+#endif
+#endif
 #endif
 
 

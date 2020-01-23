@@ -22,7 +22,7 @@ public:
     Buffer() = default;
     Buffer(std::string const &str);
     template<typename ... TArgs>
-    Buffer(TArgs ... args): std::vector<unsigned char>(args ...) {};
+    Buffer(TArgs ... args): std::vector<unsigned char>(args ...) {}
 };
 
 

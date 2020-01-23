@@ -109,6 +109,7 @@ TEST(threading, worker) {
     m->lock();
     ASSERT_EQ(in, out);
     m->unlock();
+    // todo: test for queue size = 0
 }
 
 

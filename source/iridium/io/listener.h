@@ -9,6 +9,7 @@
 #include "iridium/smart_ptr.h"
 #include "iridium/enum.h"
 #include "iridium/pattern/initializable.h"
+#include "iridium/threading/async_queue.h"
 
 #include "stream.h"
 
@@ -22,15 +23,15 @@ namespace io {
 class Event {
 public:
     DEFINE_CREATE   (Event)
-    DEFINE_ENUM     (TType, OPEN, CLOSE, READ, WRITE, ERROR)
+    DEFINE_ENUM     (TType, NONE, OPEN, CLOSE, READ, WRITE, ERROR)
     
     Event(
-        TType                   const &type,
-        IStreamPort::TSharedPtr const &stream);
+        TType               const &type,
+        IStream::TSharedPtr const &stream);
     virtual ~Event() = default;
     
     TType                   type;
-    IStreamPort::TSharedPtr stream;
+    IStream::TSharedPtr     stream;
 };
 
 
@@ -41,9 +42,9 @@ public:
     typedef std::list<Event::TSharedPtr> TEvents;
 
     /// add stream for monitoring
-    virtual void    add(IStreamPort::TSharedPtr const &stream) = 0;
+    virtual void    add(IStream::TSharedPtr const &stream) = 0;
     /// del stream from monitoring set
-    virtual void    del(IStreamPort::TSharedPtr const &stream) = 0;
+    virtual void    del(IStream::TSharedPtr const &stream) = 0;
     /// waiting for new events
     virtual TEvents wait() = 0;
 };

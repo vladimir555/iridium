@@ -47,13 +47,13 @@ public:
     ///
     virtual size_t push(std::list<TItem> const &items) override;
     ///
-    virtual std::list<TItem> pop(bool const &is_do_wait = true) override;
+    virtual std::list<TItem> pop(bool const &is_waiting = true) override;
     ///
     virtual void interrupt() override;
 
 private:
     std::list<TItem>        m_items;
-    std::atomic<bool>       m_is_do_wait;
+    std::atomic<bool>       m_is_waiting;
     std::atomic<bool>       m_is_empty;
     ICondition::TSharedPtr  m_condition;
 };
@@ -66,7 +66,7 @@ template<typename TItem>
 CAsyncQueue<TItem>::CAsyncQueue()
 :
     Synchronized(CMutex::create()),
-    m_is_do_wait(true),
+    m_is_waiting(true),
     m_is_empty  (true),
     m_condition (CCondition::create())
 {}
@@ -77,7 +77,7 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
     LOCK_SCOPE_FAST
 
     m_items.push_back(item);
-    m_is_empty = false;
+    m_is_empty = m_items.empty();
     m_condition->notifyOne();
 
     return m_items.size(); // ----->
@@ -91,7 +91,7 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
     auto items_ = items;
 
     m_items.splice(m_items.end(), items_);
-    m_is_empty = false;
+    m_is_empty = m_items.empty();
     m_condition->notifyOne();
 
     return m_items.size(); // ----->
@@ -99,8 +99,8 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 
 template<typename TItem>
-std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_do_wait) {
-    if (is_do_wait && m_is_do_wait && m_is_empty)
+std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
+    if (is_waiting && m_is_waiting && m_is_empty)
         m_condition->wait();
 
     LOCK_SCOPE_FAST
@@ -110,7 +110,7 @@ std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_do_wait) {
 
 template<typename TItem>
 void CAsyncQueue<TItem>::interrupt() {
-    m_is_do_wait = false;
+    m_is_waiting = false;
     m_condition->notifyAll();
 }
 

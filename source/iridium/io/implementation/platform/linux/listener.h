@@ -32,14 +32,14 @@ public:
     void    initialize()   override;
     void    finalize()     override;
 
-    void    add(IStreamPort::TSharedPtr const &stream) override;
-    void    del(IStreamPort::TSharedPtr const &stream) override;
+    void    add(IStream::TSharedPtr const &stream) override;
+    void    del(IStream::TSharedPtr const &stream) override;
     TEvents wait() override;
 
 private:
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;
 
-    std::unordered_map<uintptr_t, IStreamPort::TSharedPtr>
+    std::unordered_map<uintptr_t, IStream::TSharedPtr>
             m_map_fd_stream;
     int     m_epoll_fd;
     //struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];

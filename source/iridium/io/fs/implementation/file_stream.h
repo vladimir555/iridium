@@ -32,7 +32,7 @@ public:
     
     size_t  getSize() const;
     
-    Buffer  read (size_t const &size);
+    Buffer::TSharedPtr read (size_t const &size);
     size_t  write(Buffer const &buffer);
 
     void    flush();

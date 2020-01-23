@@ -58,6 +58,8 @@ bool CProtocolHandler::update(
 {
     auto result = true;
 
+//    LOGT << "begin: event " << event->type;
+
     // todo:
     // http codes enum;
     // +http date fix;
@@ -68,7 +70,9 @@ bool CProtocolHandler::update(
     // buffer size fix
 
     try {
-        if (event->type == Event::TType::READ) {
+        if (event->type == Event::TType::READ ||
+            event->type == Event::TType::OPEN)
+        {
             if (m_peer_buffer) {
 //                LOGT << "write buffer:\n" << *m_peer_buffer << "\nsize = " << m_peer_buffer->size();
                 auto header  = string(m_peer_buffer->begin(), m_peer_buffer->end());
@@ -79,7 +83,7 @@ bool CProtocolHandler::update(
                     request ::THttp request     (m_parser->parse(convert<string>(*m_peer_buffer)));
                     response::THttp response    (CNode::create("http"));
 
-                    LOGT << "request:" << request.getNode();
+//                    LOGT << "request:" << request.getNode();
 
                     auto uri = request.Message.get().uri;
                     if (uri == "/")
@@ -95,7 +99,7 @@ bool CProtocolHandler::update(
                             response.Headers.LastModified   = {content_stream_reader->getStatus().last_modified};
                             response.Headers.ContentType    = MIME::instance().getByFileNameExtension(split(uri, ".").back()); // todo: optimize
                         } else {
-                            response.Message = {"HTTP/1.1", 404, "Error"};
+                            response.Message                = {"HTTP/1.1", 404, "Error"};
                         }
                         response.Headers.Date               = {std::chrono::system_clock::now()};
 
@@ -114,18 +118,18 @@ bool CProtocolHandler::update(
                         stream_reader_list->add(content_stream_reader);
 
                     transmitter->setReader(stream_reader_list);
-                    transmitter->setWriter(event->stream);
+                    transmitter->setWriter(std::dynamic_pointer_cast<IStreamWriter>(event->stream));
 
                     event->type = Event::TType::WRITE;
                     m_peer_buffer.reset();
 
-                    LOGT << "response header:" << response.getNode();
+//                    LOGT << "response header:" << response.getNode();
 
 //                    LOGT << "begin write to client";
                 }
             } else {
                 m_peer_buffer = Buffer::create();
-                transmitter->setReader(event->stream);
+                transmitter->setReader(std::dynamic_pointer_cast<IStreamReader>(event->stream));
                 transmitter->setWriter(CStreamWriterBuffer::create(m_peer_buffer));
 
 //                LOGT << "begin read client";
@@ -138,6 +142,7 @@ bool CProtocolHandler::update(
         result = false;
     }
 
+//    LOGT << "end: " << result;
     return result; // ----->
 }
 

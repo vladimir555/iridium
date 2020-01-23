@@ -38,7 +38,8 @@ public:
 class IStreamReader: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamReader)
-    virtual Buffer read(size_t const &size) = 0;
+    /// return nullptr on EOF, empty buffer on not ready data
+    virtual Buffer::TSharedPtr read(size_t const &size) = 0;
 };
 
 

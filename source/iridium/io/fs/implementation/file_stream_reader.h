@@ -26,7 +26,7 @@ public:
 
     int     getID() const override;
 
-    Buffer  read(size_t const &size) override;
+    Buffer::TSharedPtr read(size_t const &size) override;
     size_t  getSize() override;
     TFileStatus getStatus() override;
 };

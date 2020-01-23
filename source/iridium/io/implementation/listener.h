@@ -10,7 +10,6 @@
 #include PLATFORM_HEADER(listener.h)
 
 
-
 namespace iridium {
 namespace io {
 namespace implementation {

@@ -7,8 +7,10 @@
 #include <cstring>
 #include <sys/stat.h>
 
-#include <iridium/convertion/convert.h>
-#include <iridium/platform.h>
+#include "iridium/convertion/convert.h"
+#include "iridium/platform.h"
+
+#include "iridium/logging/logger.h"
 
 
 using std::string;
@@ -26,6 +28,7 @@ auto freadInternal      = ::fread;
 auto fflushInternal     = ::fflush;
 auto ferrorInternal     = ::ferror;
 auto strerrorInternal   = ::strerror;
+auto filenoInternal     = ::fileno;
 #include <iridium/macros/enable_warnings.h>
 
 
@@ -66,17 +69,21 @@ CFileStream::~CFileStream() {
 }
 
     
-Buffer CFileStream::read(size_t const &size) {
+Buffer::TSharedPtr CFileStream::read(size_t const &size) {
     if (!m_file)
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
     
-    Buffer buffer(size);
+    auto buffer = Buffer::create(size, 0);
     
-    auto count = freadInternal(buffer.data(), 1, buffer.size(), m_file);
+    auto count = freadInternal(buffer->data(), 1, buffer->size(), m_file);
     
-    //    LOGT << "size = " << count << " buffer = '" << buffer << "'";
-    if (count == 0)
+//    LOGT << "read size = " << count;
+    if (count == 0) {
+//        LOGT << "fd " << getID() << " empty read";
         return {}; // ----->
+    } else {
+        buffer->resize(count);
+    }
     
     if (ferrorInternal(m_file))
         throw std::runtime_error(
@@ -85,6 +92,7 @@ Buffer CFileStream::read(size_t const &size) {
             " error: was read " + convert<string>(count) +
             " bytes, "          + strerrorInternal(errno)); // ----->
     
+    // todo: optimize for speed, move
     return buffer; // ----->
 }
 
@@ -94,6 +102,10 @@ size_t CFileStream::write(Buffer const &line) {
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
 
     size_t count = fwriteInternal(line.data(), 1, line.size(), m_file);
+
+//    if (count == 0) {
+//        LOGT << "fd " << getID() << " empty write";
+//    }
 
     if (count != line.size())
         throw std::runtime_error(
@@ -118,17 +130,23 @@ void CFileStream::flush() {
 
 TFileStatus CFileStream::getStatus() {
     TFileStatus file_status = {};
-
-    struct stat result = {};
+    struct stat result      = {};
 
     assertOK(::fstat(getID(), &result),
          "get stat file '"  + m_file_name + "'" +
          " error: "         + strerrorInternal(errno));
 
-    auto d = std::chrono::seconds       {result.st_mtim.tv_sec}
-           + std::chrono::nanoseconds   {result.st_mtim.tv_nsec};
-
-    std::chrono::system_clock::time_point tp{std::chrono::duration_cast<std::chrono::system_clock::duration>(d)};
+#ifdef WINDOWS_PLATFORM
+    auto tp = std::chrono::system_clock::from_time_t( result.st_mtime );
+           
+#else
+    std::chrono::system_clock::time_point tp{ 
+        std::chrono::duration_cast<std::chrono::system_clock::duration>(
+            std::chrono::seconds       {result.st_mtim.tv_sec} +
+            std::chrono::nanoseconds   {result.st_mtim.tv_nsec}
+        ) 
+    };
+#endif
 
     file_status.last_modified = tp;
 
@@ -169,13 +187,17 @@ void CFileStream::finalize() {
 
 int CFileStream::getID() const {
     // todo: move to separate headers
-    if (m_file)
-#ifdef LINUX_PLATFORM
+    if (m_file) {
+#ifdef  LINUX_PLATFORM
         return m_file->_fileno; // ----->
-#elif  FREEBSD_LIKE_PLATFORM
+#endif
+#ifdef  FREEBSD_LIKE_PLATFORM
         return m_file->_file; // ----->
 #endif
-    else
+#ifdef  WINDOWS_PLATFORM
+        return filenoInternal(m_file); // ----->
+#endif
+    } else
         return -1;
 }
     
@@ -183,7 +205,7 @@ int CFileStream::getID() const {
 size_t CFileStream::getSize() const {
     struct stat file_stat = {};
 
-    auto result = fstat(fileno(m_file), &file_stat);
+    auto result = fstat(filenoInternal(m_file), &file_stat);
     assertOK(result,
         "get size file '" + m_file_name + "'" +
         " mode "   + convert<string>(m_open_mode) +

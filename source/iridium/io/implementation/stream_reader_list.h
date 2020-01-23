@@ -24,15 +24,14 @@ public:
     void    initialize()    override;
     void    finalize()      override;
     
-    Buffer  read(size_t const &size)    override;
-    int     getID()     const           override;
+    Buffer::TSharedPtr read(size_t const &size) override;
+    int     getID() const override;
 
-    void add(IStreamReader::TSharedPtr const &stream_reader);
+    void    add(IStreamReader::TSharedPtr const &stream_reader);
 
 private:
     std::list<IStreamReader::TSharedPtr>            m_streams;
     std::list<IStreamReader::TSharedPtr>::iterator  m_stream;
-    bool m_is_started;
 };
 
 

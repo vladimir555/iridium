@@ -12,6 +12,7 @@
 #include <iridium/io/net/implementation/platform/windows/wsa.h>
 #include <iridium/threading/thread.h>
 
+#include <iridium/io/fs/implementation/file_stream_reader.h>
 
 #include <memory>
 
@@ -31,6 +32,8 @@ using iridium::io::protocol::http::implementation::CProtocolFactory;
 using iridium::io::net::implementation::CSocketServer;
 
 
+#include <set>
+
 namespace iridium {
 namespace io {
 namespace net {
@@ -38,7 +41,27 @@ namespace socket {
 
 
 TEST(net, socket_loopback) {
+
+    //std::set<int> s1{ 1, 2 };
+    //std::set<int> s2{ 2, 1 };
+    //std::set<IStream::TSharedPtr> s;
+    //std::map< std::set<int>, int > m;
+
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
+
+//    IStreamReader::TSharedPtr reader = fs::implementation::CFileStreamReader::create("html/index.html");
+//    reader->initialize();
+//    LOGT << "read size = " << reader->read(8192).size();
+//    reader->finalize();
+//    return;
+
+    //LOGT << "set: '" << (bool)(s1 == s2) << "'";
+    //m[s1] = 1;
+    //LOGT << m[s1];
+    //m[s2] = 2;
+    //LOGT << m[s1];
+    //LOGT << m.size();
+    //return;
     
 //    {
 //        auto reader = CFileStream::create("index.html", CFileStream::TOpenMode::READ);
@@ -60,7 +83,7 @@ TEST(net, socket_loopback) {
 
 
     auto protocol_factory   = CProtocolFactory::create();
-    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), 1, protocol_factory);
+    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
 
     try {
         socket->initialize();

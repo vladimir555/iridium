@@ -40,7 +40,7 @@ T assertOK(T const &result, string const &message, URL const &url) {
 }
 
 
-static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 8912; // todo: one buffer
+static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 8192; // todo: one buffer
 
 
 namespace iridium {
@@ -88,6 +88,7 @@ void CSocket::initialize() {
     // open
     auto protocol   = m_url.getProtocol() == URL::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;
     m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error", m_url);
+    LOGT << "fd " << m_socket;
 
     //todo: unix / inet protocol by url
     struct sockaddr_in address  = {};
@@ -116,6 +117,7 @@ void CSocket::initialize() {
 
 
 void CSocket::finalize() {
+    LOGT << "fd " << m_socket;
     ::shutdown(m_socket, 2);
     assertOK(::close(m_socket), "close socket error", m_url);
 }
@@ -127,7 +129,7 @@ ISocket::TSharedPtr CSocket::accept() {
 
     auto peer_fd = ::accept(m_socket, (struct sockaddr *) &peer_address, &peer_address_size);
     if  (peer_fd > 0) {
-//        LOGT << "fd " << peer_fd;
+        LOGT << "fd " << peer_fd;
         auto peer = new unix::CSocket(getPeerURL(peer_fd), peer_fd);
         peer->setBlockingMode(false);
         return ISocket::TSharedPtr(peer); // ----->
@@ -147,8 +149,6 @@ int CSocket::getID() const {
 
 
 size_t CSocket::write(Buffer const &buffer_) {
-//    LOGT << "fd " << m_socket << " '" << buffer_ << "'";
-    
     auto buffer = static_cast<void const *>(buffer_.data());
     auto size   = DEFAULT_SOCKET_BUFFER_SIZE;
     
@@ -156,6 +156,16 @@ size_t CSocket::write(Buffer const &buffer_) {
         size = buffer_.size();
     
     auto result = ::send(m_socket, buffer, size, 0);
+//    LOGT << "fd " << m_socket << " size " << result;
+
+//    LOGT << "fd " << m_socket << " size = " << result;
+
+    if (result < 0) {
+        if (errno == EAGAIN)
+            return 0;
+        else
+            assertOK(result, "socket write error", m_url);
+    }
 
     // was sended async
     if (result == EAGAIN ||
@@ -171,15 +181,33 @@ size_t CSocket::write(Buffer const &buffer_) {
 }
 
 
-Buffer CSocket::read(size_t const &size) {
+Buffer::TSharedPtr CSocket::read(size_t const &size) {
     char buffer[size];
     auto received_size  = ::recv(m_socket, buffer, size - 1, 0);
+//    LOGT << "fd " << m_socket << " size " << received_size;
+
+//    if (m_is_blocking) {
+//        assertOK(received_size, "socket read error", m_url);
+//    } else {
+//        if (received_size == EOF)
+//            return {}; // ----->
+//        else
+//            assertOK(received_size, "socket read error", m_url);
+//    }
+
+    if (received_size == EOF) {
+//        LOGT << "EOF";
+        return {};
+    }
+
     if(!(received_size == EOF && !m_is_blocking))
         assertOK(received_size, "socket read error", m_url);
     else
         received_size = 0;
+
 //    LOGT << "fd " << m_socket << " " << Buffer(buffer, buffer + received_size);
-    return Buffer(buffer, buffer + received_size); // ----->
+//    LOGT << "received_size  = " << received_size;
+    return Buffer::create(Buffer(buffer, buffer + received_size)); // ----->
 }
     
     

@@ -16,6 +16,7 @@
 
 #include "iridium/io/transmitter.h"
 #include "iridium/io/stream.h"
+#include "iridium/threading/async_queue.h"
 
 
 namespace iridium {
@@ -25,27 +26,32 @@ namespace implementation {
 
 class CTransmitter: public ITransmitter {
 public:
-    DEFINE_IMPLEMENTATION(CTransmitter)
+    DEFINE_CREATE(CTransmitter)
 
-    CTransmitter(size_t const &buffer_size);
-    // todo: rm constructor
+    static size_t const DEFAULT_BUFFER_SIZE;
+    static size_t const DEFAULT_BUFFER_COUNT;
+
     CTransmitter(
-        IStreamReader::TSharedPtr   const &reader,
-        IStreamWriter::TSharedPtr   const &writer,
-        size_t                      const &buffer_size = 5
-    );
+        IListener::TSharedPtr   const &listener,
+        size_t                  const &buffer_size  = DEFAULT_BUFFER_SIZE,
+        size_t                  const &buffer_count = DEFAULT_BUFFER_COUNT);
+
+    virtual ~CTransmitter();
 
     void setReader(IStreamReader::TSharedPtr const &reader) override;
     void setWriter(IStreamWriter::TSharedPtr const &writer) override;
     IStreamReader::TSharedPtr getReader() const override;
     IStreamWriter::TSharedPtr getWriter() const override;
 
-    bool transmit() override;
+    bool transmit(Event::TSharedPtr const &event) override;
 
 private:
-    IStreamReader::TSharedPtr   m_reader;
-    IStreamWriter::TSharedPtr   m_writer;
-    size_t                      m_buffer_size;
+    IStreamReader::TSharedPtr       m_reader;
+    IStreamWriter::TSharedPtr       m_writer;
+    size_t const                    m_buffer_size;
+    size_t const                    m_buffer_count;
+    IListener::TSharedPtr           m_listener;
+    std::list<Buffer::TSharedPtr>   m_buffers;
 };
     
 
