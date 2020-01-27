@@ -18,6 +18,11 @@ CPeerHandler::TItems CPeerHandler::handle(TItems const &peers_) {
 //    LOGT << "-----in  peers size " << peers_.size();
     TItems peers;
     for (auto const &peer : peers_) {
+        if (peer->is_in_processing) {
+            LOGT << "thread collision";
+            continue; // <-----
+        }
+        peer->is_in_processing = true;
 //        LOGT << "peer fd " << peer->event->stream->getID() << " event " << peer->event->type;
 
         bool is_continue    = peer->protocol_handler->update(peer->transmitter, peer->event);
@@ -36,6 +41,7 @@ CPeerHandler::TItems CPeerHandler::handle(TItems const &peers_) {
                 peers.push_back(peer);
             }
         }
+        peer->is_in_processing = false;
     }
 
 //    LOGT << "-----out peers size " << peers.size();

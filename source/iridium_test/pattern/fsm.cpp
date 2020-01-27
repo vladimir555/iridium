@@ -2,7 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 #include <iostream>
 #include <map>
 #include <functional>
@@ -113,7 +113,7 @@ Light::Light()
 {}
 
 
-TEST(pattern, fsm_map) {
+TEST(fsm_map) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     Light light;
 
@@ -123,7 +123,7 @@ TEST(pattern, fsm_map) {
 }
 
 
-TEST(pattern, fsm_switch) {
+TEST(fsm_switch) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     test::Light light;
 

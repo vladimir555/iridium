@@ -8,6 +8,7 @@
 #include "iridium/io/protocol/protocol_factory.h"
 
 #include <map>
+#include <atomic>
 
 
 namespace iridium {
@@ -21,6 +22,7 @@ struct Peer {
     protocol::IProtocolHandler::TSharedPtr  protocol_handler;
     io::ITransmitter::TSharedPtr            transmitter;
     Event::TSharedPtr                       event;
+    std::atomic<bool>                       is_in_processing;
 };
 
 

@@ -2,7 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 #include <iostream>
 #include <iridium/parsing/node.h>
 #include <iridium/parsing/implementation/node.h>
@@ -48,14 +48,15 @@ INode::TSharedPtr createTestNode() {
 string const expected_xml = "";
 
 
-TEST(parsing, nodes) {
+TEST(nodes) {
     auto node = createTestNode();
 
-    ASSERT_TRUE(node->findChilds("/wrong_node/").empty());
-    ASSERT_TRUE(node->findChilds("wrong_node/").empty());
-    ASSERT_TRUE(node->findChilds("/").empty());
-    ASSERT_TRUE(node->findChilds("").empty());
-    ASSERT_EQ(3, node->findChilds("/item").size());
+    ASSERT(node->findChilds("/wrong_node/").empty());
+    ASSERT(node->findChilds("wrong_node/").empty());
+    ASSERT(node->findChilds("/").empty());
+    ASSERT(node->findChilds("").empty());
+
+    ASSERT(3, equal, node->findChilds("/item").size());
 }
 
 

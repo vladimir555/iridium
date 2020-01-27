@@ -2,17 +2,17 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 
 #include <iostream>
 using namespace std;
 
-#include "iridium/io/protocol/http/request.h"
-#include "iridium/io/protocol/http/response.h"
-#include "iridium/parsing/implementation/parser_http.h"
-#include "iridium/parsing/implementation/parser_json.h"
-#include "iridium/parsing/implementation/parser_xml.h"
-#include "iridium/logging/logger.h"
+#include <iridium/io/protocol/http/request.h>
+#include <iridium/io/protocol/http/response.h>
+#include <iridium/parsing/implementation/parser_http.h>
+#include <iridium/parsing/implementation/parser_json.h>
+#include <iridium/parsing/implementation/parser_xml.h>
+#include <iridium/logging/logger.h>
 
 
 //using iridium::io::protocol::http::implementation::CProtocol;
@@ -56,11 +56,10 @@ string const responce_example = ""
 "</html>\n";
 
 
-TEST(serialization, http_request) {
+TEST(http_request) {
     auto parser = CHTTPParser::create();
     auto node   = parser->parse(request_example);
 
-    try {
 //        LOGT << "node: " << convert<string>(node);
 
 //        {
@@ -85,13 +84,10 @@ TEST(serialization, http_request) {
 //        for (auto const &accept: http.Headers.Accept)
 //            LOGT << "accept: " << accept.get();
 
-    } catch (std::exception const &e) {
-        FAIL() << e.what();
-    }
 }
 
 
-TEST(serialization, http_response) {
+TEST(http_response) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
     auto parser = CHTTPParser::create();

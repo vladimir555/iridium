@@ -2,7 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 
 #include <iridium/io/net/url.h>
 #include <iridium/io/net/dns.h>
@@ -24,7 +24,7 @@ using iridium::convertion::convert;
 using iridium::threading::sleep;
 
 
-#include "iridium/io/fs/implementation/file_stream.h"
+#include <iridium/io/fs/implementation/file_stream.h>
 #include <iridium/io/protocol/http/implementation/protocol_factory.h>
 using iridium::io::fs::implementation::CFileStream;
 //using iridium::io::implementation::CStreamProxy;
@@ -40,7 +40,7 @@ namespace net {
 namespace socket {
 
 
-TEST(net, socket_loopback) {
+TEST(socket_loopback) {
 
     //std::set<int> s1{ 1, 2 };
     //std::set<int> s2{ 2, 1 };
@@ -85,19 +85,15 @@ TEST(net, socket_loopback) {
     auto protocol_factory   = CProtocolFactory::create();
     auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
 
-    try {
-        socket->initialize();
-        LOGT << "begin";
-        threading::sleep(500000);
-        LOGT << "end";
-        socket->finalize();
-    } catch (std::exception const &e) {
-        FAIL() << e.what();
-    }
+    socket->initialize();
+    LOGT << "begin";
+    threading::sleep(500000);
+    LOGT << "end";
+    socket->finalize();
 }
 
 
-TEST(net, dns) {
+TEST(dns) {
     auto ipv4 = getIPv4ByHost("ya.ru");
 
     //cout << "ya.ru ip: "
@@ -106,38 +102,38 @@ TEST(net, dns) {
     //    << static_cast<int>(ipv4[2]) << "."
     //    << static_cast<int>(ipv4[3]) << endl;
 
-    ASSERT_EQ(4, ipv4.size());
-    ASSERT_THROW(getIPv4ByHost("ya.rur"), std::exception);
+    ASSERT(4, equal, ipv4.size());
+    ASSERT(getIPv4ByHost("ya.rur"), std::exception);
 }
 
 
-TEST(net, url) {
-    ASSERT_THROW(URL("")            , std::exception);
-    ASSERT_THROW(URL("172.16.0.64") , std::exception);
-    ASSERT_THROW(URL("55555")       , std::exception);
-    ASSERT_THROW(URL(":55555")      , std::exception);
-    ASSERT_THROW(URL("::")          , std::exception);
+TEST(url) {
+    ASSERT(URL("")            , std::exception);
+    ASSERT(URL("172.16.0.64") , std::exception);
+    ASSERT(URL("55555")       , std::exception);
+    ASSERT(URL(":55555")      , std::exception);
+    ASSERT(URL("::")          , std::exception);
 
     URL url("https://172.16.0.64:55555");
 
-    ASSERT_TRUE(static_cast<bool>(url.getHost()));
-    ASSERT_TRUE(static_cast<bool>(url.getIPv4()));
-    ASSERT_TRUE(static_cast<bool>(url.getPort()));
-    ASSERT_TRUE(static_cast<bool>(url.getProtocol()));
+    ASSERT(static_cast<bool>(url.getHost()));
+    ASSERT(static_cast<bool>(url.getIPv4()));
+    ASSERT(static_cast<bool>(url.getPort()));
+    ASSERT(static_cast<bool>(url.getProtocol()));
 
-    ASSERT_EQ(URL::TProtocol::HTTPS, url.getProtocol());
-    ASSERT_EQ(std::vector<uint8_t>({ 172, 16, 0, 64 }), *url.getIPv4());
-    ASSERT_EQ("172.16.0.64", url.getIPv4AsString());
-    ASSERT_EQ(55555, *url.getPort());
+    ASSERT(URL::TProtocol::HTTPS, equal, url.getProtocol());
+    ASSERT(std::vector<uint8_t>({ 172, 16, 0, 64 }), equal, *url.getIPv4());
+    ASSERT("172.16.0.64", equal, url.getIPv4AsString());
+    ASSERT(55555, equal, *url.getPort());
 
     url = convert<URL>(string("http://hostname.ru"));
-    ASSERT_TRUE(static_cast<bool>(url.getHost()));
-    ASSERT_EQ("hostname.ru", *url.getHost());
+    ASSERT(static_cast<bool>(url.getHost()));
+    ASSERT("hostname.ru", equal, *url.getHost());
 
     // test dns resolver
-    ASSERT_TRUE(static_cast<bool>(URL("http://ya.ru").getIPv4()));
-    ASSERT_LE(static_cast<size_t>(7), URL("http://ya.ru").getIPv4AsString().size());
-    ASSERT_THROW(URL("http://ya.rur").getIPv4AsString(), std::exception);
+    ASSERT(static_cast<bool>(URL("http://ya.ru").getIPv4()));
+    ASSERT(static_cast<size_t>(7), equal, URL("http://ya.ru").getIPv4AsString().size());
+    ASSERT(URL("http://ya.rur").getIPv4AsString(), std::exception);
 }
 
 

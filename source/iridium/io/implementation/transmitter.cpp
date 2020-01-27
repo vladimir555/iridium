@@ -19,7 +19,7 @@ namespace io {
 namespace implementation {
 
 
-size_t const CTransmitter::DEFAULT_BUFFER_SIZE  = 1024 * 1024 * 10;
+size_t const CTransmitter::DEFAULT_BUFFER_SIZE  = 8192;
 size_t const CTransmitter::DEFAULT_BUFFER_COUNT = 8;
 
 
@@ -89,8 +89,8 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
     assertExists(m_reader, "transmitter: reader does not exists");
     assertExists(m_writer, "transmitter: writer does not exists");
 
-    LOGT << "fd " << event->stream->getID() << " event " << event->type
-         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
+//    LOGT << "fd " << event->stream->getID() << " event " << event->type
+//         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
 
     if (event->type == Event::TType::CLOSE || 
         event->type == Event::TType::ERROR) 

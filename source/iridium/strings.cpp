@@ -40,6 +40,8 @@ list<string> split(string const &source, string const &delimiter, size_t const &
 
 
 list<string> split(string const &source, string const &delimiter) {
+    if (delimiter.empty())
+        throw std::runtime_error("empty delimiter"); // ----->
     return split(source, delimiter, 0);
 }
 

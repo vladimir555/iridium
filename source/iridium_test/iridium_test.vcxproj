@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,25 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="convertion\test_convert.cpp" />
-    <ClCompile Include="db\test_db.cpp" />
-    <ClCompile Include="io\test_socket.cpp" />
-    <ClCompile Include="io\test_streams.cpp" />
-    <ClCompile Include="io\wsa_example.cpp" />
-    <ClCompile Include="logging\test_logger.cpp" />
-    <ClCompile Include="parsing\serialization\test_http.cpp" />
-    <ClCompile Include="parsing\serialization\test_node.cpp" />
-    <ClCompile Include="parsing\test_node.cpp" />
-    <ClCompile Include="parsing\test_parsing.cpp" />
-    <ClCompile Include="pattern\fsm_switch.cpp" />
-    <ClCompile Include="pattern\test_fsm.cpp" />
-    <ClCompile Include="test_strings.cpp">
-      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdcpp14</LanguageStandard>
-      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdcpp14</LanguageStandard>
-      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp14</LanguageStandard>
-      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdcpp14</LanguageStandard>
-    </ClCompile>
-    <ClCompile Include="threading\test_worker.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="testing\example.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pattern\fsm_map.h" />

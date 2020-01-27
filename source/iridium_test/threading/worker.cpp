@@ -2,7 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 #include <iostream>
 #include <atomic>
 
@@ -75,7 +75,7 @@ namespace iridium {
 namespace threading {
 
 
-TEST(threading, worker) {
+TEST(worker) {
     IWorker<int>::TSharedPtr worker = CWorker<int>::create("worker", Worker::create());
 
     processed = 0;
@@ -98,7 +98,7 @@ TEST(threading, worker) {
 
     worker->finalize();
 
-    ASSERT_EQ(in, out);
+    ASSERT(in, equal, out);
 
     worker->push(5);
 
@@ -107,21 +107,21 @@ TEST(threading, worker) {
     worker->finalize();
 
     m->lock();
-    ASSERT_EQ(in, out);
+    ASSERT(in, equal, out);
     m->unlock();
     // todo: test for queue size = 0
 }
 
 
-TEST(threading, worker_pool) {
+TEST(worker_pool) {
     IAsyncQueue<int>::TSharedPtr q = implementation::CAsyncQueue<int>::create();
     q->push(5);
     q->push(55);
     auto i = q->pop();
 
-    ASSERT_EQ(2,  i.size());
-    ASSERT_EQ(5,  i.front());
-    ASSERT_EQ(55, i.back());
+    ASSERT(2    , equal, i.size());
+    ASSERT(5    , equal, i.front());
+    ASSERT(55   , equal, i.back());
 
     list<IWorkerHandler<int>::TSharedPtr > l;
 
@@ -155,7 +155,7 @@ TEST(threading, worker_pool) {
 
     out.sort();
 
-    ASSERT_EQ(in, out);
+    ASSERT(in, equal, out);
     m->unlock();
 }
 
@@ -172,7 +172,7 @@ public:
 };
 
 
-TEST(threading, worker_job) {
+TEST(worker_job) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     IWorker<>::TSharedPtr worker = CWorker<>::create("worker_name");
     worker->initialize();
@@ -181,7 +181,7 @@ TEST(threading, worker_job) {
 }
 
 
-TEST(threading, worker_pool_job) {
+TEST(worker_pool_job) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     IWorkerPool<>::TSharedPtr worker = CWorkerPool<>::create("worker_name", 2);
     worker->initialize();

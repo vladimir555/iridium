@@ -2,7 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 
 #include <iridium/parsing/node.h>
 #include <iridium/parsing/implementation/node.h>
@@ -213,57 +213,57 @@ namespace iridium {
 namespace parsing {
 
 
-TEST(parsing, parse_xml) {
+TEST(parse_xml) {
     auto parser         = CXMLParser::create();
     auto node           = parser->parse(beer_xml);
     auto value_nodes    = assertComplete(node->findChilds("/Brewery/Beer/name"), "tags not found");
 
-    ASSERT_EQ("Centennial",          (*value_nodes.begin())->getValue());
-    ASSERT_EQ("Farmhouse Ale",     (*++value_nodes.begin())->getValue());
-    ASSERT_EQ("Two Hearted Ale", (*++++value_nodes.begin())->getValue());
+    ASSERT("Centennial"     , equal,     (*value_nodes.begin())->getValue());
+    ASSERT("Farmhouse Ale"  , equal,   (*++value_nodes.begin())->getValue());
+    ASSERT("Two Hearted Ale", equal, (*++++value_nodes.begin())->getValue());
 
     string array;
     for (auto const &i: *node)
         if (i->getName() == "array")
             array += i->getValue();
 
-    ASSERT_EQ("54321", array);
+    ASSERT("54321", equal, array);
 }
 
 
-TEST(parsing, compose_xml) {
+TEST(compose_xml) {
     auto parser         = CXMLParser::create();
     auto node           = createTestNode();
     auto xml_str        = parser->compose(node);
 
-    ASSERT_EQ(xml_str_expects, xml_str);
+    ASSERT(xml_str_expects, equal, xml_str);
 }
 
 
-TEST(parsing, parse_json) {
+TEST(parse_json) {
     auto parser         = CJSONParser::create();
     auto node           = parser->parse(beer_json);
     auto value_nodes    = assertComplete(node->findChilds("/Brewery/Beer/name"), "tags not found");
 
-    ASSERT_EQ("Centennial",          (*value_nodes.begin())->getValue());
-    ASSERT_EQ("Farmhouse Ale",     (*++value_nodes.begin())->getValue());
-    ASSERT_EQ("Two Hearted Ale", (*++++value_nodes.begin())->getValue());
+    ASSERT("Centennial"     , equal,     (*value_nodes.begin())->getValue());
+    ASSERT("Farmhouse Ale"  , equal,   (*++value_nodes.begin())->getValue());
+    ASSERT("Two Hearted Ale", equal, (*++++value_nodes.begin())->getValue());
 
     string array;
     for (auto const &i: *node)
         if (i->getName() == "array")
             array += i->getValue();
 
-    ASSERT_EQ("54321", array);
+    ASSERT("54321", equal, array);
 }
 
 
-TEST(parsing, compose_json) {
+TEST(compose_json) {
     auto parser         = CJSONParser::create();
     auto node           = createTestNode();
     auto json_str       = parser->compose(node);
 
-    ASSERT_EQ(json_str_expects, json_str);
+    ASSERT(json_str_expects, equal, json_str);
 }
 
 // todo: differ for windows and linux
@@ -275,12 +275,12 @@ TEST(parsing, compose_json) {
 //}
 
 
-TEST(parsing, compose_http_request) {
+TEST(compose_http_request) {
     auto parser         = CHTTPParser::create();
     auto node           = parser->parse(http_header);
     auto http_header_   = parser->compose(node);
 
-    ASSERT_EQ(http_header_composed, http_header_);
+    ASSERT(http_header_composed, equal, http_header_);
 }
 
 

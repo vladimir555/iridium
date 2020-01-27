@@ -19,35 +19,35 @@ namespace iridium {
 
 
 template<typename T>
-T &assertExists(T &&t, std::string const &error) {
-    if (t)
-        return t; // ----->
+T &assertExists(T &&value, std::string const &error) {
+    if (value)
+        return value; // ----->
     else
         throw std::runtime_error(error);
 }
 
 
 template<typename T>
-T &assertSize(T &&t, size_t const &size, std::string const &error) {
-    if (t.size() == size)
-        return t; // ----->
+T &assertSize(T &&values, size_t const &size, std::string const &error) {
+    if (values.size() == size)
+        return values; // ----->
     else
         throw std::runtime_error(error + ", wrong items size " +
-            convertion::convert<std::string>(t.size()) + ", expects " +
+            convertion::convert<std::string>(values.size()) + ", expects " +
             convertion::convert<std::string>(size));
 }
 
 
 template<typename T>
-T &assertOne(T &&t, std::string const &error) {
-    return assertSize(t, 1, error); // ----->
+T &assertOne(T &&values, std::string const &error) {
+    return assertSize(values, 1, error); // ----->
 }
 
 
 template<typename T>
-T &assertComplete(T &&t, std::string const &error) {
-    if (t.size() >= 1)
-        return t; // ----->
+T &assertComplete(T &&values, std::string const &error) {
+    if (values.size() >= 1)
+        return values; // ----->
     else
         throw std::runtime_error(error);
 }

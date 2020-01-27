@@ -2,7 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
+#include <iridium/testing/tester.h>
 #include <iostream>
 
 #include <iridium/logging/logger.h>
@@ -26,7 +26,7 @@ namespace iridium {
 namespace logging {
 
 
-TEST(logging, logger) {
+TEST(logger) {
 //    cout << "thread id " << getpid() << endl;
 
 //    uint64_t tid;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -137,6 +137,8 @@
     <ClInclude Include="io\net\implementation\socket_server_acceptor.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="system\terminator.h" />
+    <ClInclude Include="testing\test.h" />
+    <ClInclude Include="testing\tester.h" />
     <ClInclude Include="threading\async_queue.h" />
     <ClInclude Include="threading\condition.h" />
     <ClInclude Include="threading\implementation\async_queue.h" />
@@ -223,6 +225,8 @@
     <ClCompile Include="io\net\implementation\peers.cpp" />
     <ClCompile Include="strings.cpp" />
     <ClCompile Include="system\terminator.cpp" />
+    <ClCompile Include="testing\test.cpp" />
+    <ClCompile Include="testing\tester.cpp" />
     <ClCompile Include="threading\implementation\base_mutex.cpp" />
     <ClCompile Include="threading\implementation\condition.cpp" />
     <ClCompile Include="threading\implementation\mutex.cpp" />

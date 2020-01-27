@@ -11,7 +11,7 @@
 #include <map>
 
 
-#include <iridium/threading/implementation/mutex.h>
+#include "iridium/threading/implementation/mutex.h"
 
 
 namespace iridium {
@@ -21,6 +21,7 @@ namespace caching {
 // ----- interface
 
 
+// todo: init static mutex for any translation units
 template<typename TValue>
 class CachedValue {
 public:

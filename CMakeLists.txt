@@ -74,18 +74,11 @@ install(
     FILES_MATCHING PATTERN "*.h"
 )
 
-#TEST
+
+#IRIDIUM_TEST
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
-enable_testing()
 
-find_package(GTest REQUIRED)
-
-#find_package(OpenSSL REQUIRED)
-if (BUILD_FLAG_POSTGRESQL)
-    find_package(PostgreSQL REQUIRED)
-endif()
-
-include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
+include_directories(${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
 
 # source files for test
 file(GLOB_RECURSE SOURCE_TEST
@@ -94,16 +87,39 @@ file(GLOB_RECURSE SOURCE_TEST
 )
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
+target_link_libraries(${PROJECT_TEST_NAME} ${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
+#add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})
 
-# Link test executable against gtest & gtest_main
-target_link_libraries(
-    ${PROJECT_TEST_NAME} 
-    ${PROJECT_NAME}
-    ${GTEST_LIBRARY} 
-    ${GTEST_MAIN_LIBRARY}
-    ${CMAKE_THREAD_LIBS_INIT}
-#    ${OPENSSL_LIBRARIES}
-    ${PostgreSQL_LIBRARIES}
-)
+##GTEST
+#set(PROJECT_GTEST_NAME ${PROJECT_NAME}_gtest)
+#enable_testing()
 
-add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})
+#find_package(GTest REQUIRED)
+
+##find_package(OpenSSL REQUIRED)
+#if (BUILD_FLAG_POSTGRESQL)
+#    find_package(PostgreSQL REQUIRED)
+#endif()
+
+#include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
+
+## source files for test
+#file(GLOB_RECURSE SOURCE_TEST
+#    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_gtest/*.h
+#    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_gtest/*.cpp
+#)
+
+#add_executable(${PROJECT_GTEST_NAME} ${SOURCE_TEST})
+
+## Link test executable against gtest & gtest_main
+#target_link_libraries(
+#    ${PROJECT_GTEST_NAME}
+#    ${PROJECT_NAME}
+#    ${GTEST_LIBRARY}
+#    ${GTEST_MAIN_LIBRARY}
+#    ${CMAKE_THREAD_LIBS_INIT}
+##    ${OPENSSL_LIBRARIES}
+#    ${PostgreSQL_LIBRARIES}
+#)
+
+#add_test(NAME ${PROJECT_GTEST_NAME} COMMAND ${PROJECT_GTEST_NAME})

@@ -74,6 +74,7 @@ public:
 private:
     ///
     //std::string m_name;
+    ///
     caching::CachedString m_name;
     ///
     TValue m_value;
@@ -139,7 +140,7 @@ typename INodeType<TValue>::TNodes CNodeType<TValue>::findChilds(std::string con
         next_path = path.substr(child_path.size() + INodeType<TValue>::PATH_DELIMITER.size());
 
     if (next_path.empty()) {
-        for (auto &node : m_nodes) {
+        for (auto &node: m_nodes) {
             if (node->getName() == child_path) {
                 nodes.push_back(node);
             }

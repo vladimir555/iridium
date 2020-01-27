@@ -28,13 +28,15 @@ Peers::Peers(
 Peer::TSharedPtr Peers::get(IStream::TSharedPtr const &stream) {
     LOCK_SCOPE
         auto peer = m_map_stream_peer[stream];
-    if (!peer)
+    if(!peer) {
         peer = Peer::create();
+        peer->is_in_processing = false;
+    }
 
-    if (!peer->protocol_handler)
+    if(!peer->protocol_handler)
         peer->protocol_handler = m_protocol_factory->createProtocolHandler();
 
-    if (!peer->transmitter)
+    if(!peer->transmitter)
         peer->transmitter =
         CPeerTransmitter::create(
             CTransmitter::create(m_listener), shared_from_this(), peer);
@@ -53,10 +55,11 @@ CPeerTransmitter::CPeerTransmitter(
     ITransmitter::TSharedPtr    const &transmitter,
     Peers::TSharedPtr           const &peers,
     Peer::TSharedPtr            const &peer)
-    :
-    m_transmitter(transmitter),
-    m_peers(peers),
-    m_peer(peer) {}
+:
+    m_transmitter   (transmitter),
+    m_peers         (peers),
+    m_peer          (peer)
+{}
 
 
 void CPeerTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {

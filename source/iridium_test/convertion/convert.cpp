@@ -2,6 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
+#include <iridium/testing/tester.h>
 #include <iridium/convertion/convert.h>
 //#include <iridium/caching/lazy_cacher.h>
 #include <iridium/platform.h>
@@ -14,8 +15,6 @@
 #include <typeinfo>
 #include <chrono>
 #include <functional>
-
-#include <gtest/gtest.h>
 
 
 using namespace std;
@@ -138,45 +137,49 @@ namespace convertion {
 //}
 
 
-TEST(convertion, types) {
-    ASSERT_EQ("true"        , convert<string>(true));
-    ASSERT_EQ("false"       , convert<string>(false));
+TEST(types) {
+    ASSERT("true", equal, convert<string>(true));
+    ASSERT("false"  , equal, convert<string>(false));
 
-    ASSERT_EQ("12345"       , convert<string>(static_cast<uint64_t>(12345)));
-    ASSERT_EQ("5"           , convert<string>(static_cast<uint64_t>(5)));
-    ASSERT_EQ("5"           , convert<string>(static_cast<uint32_t>(5)));
-    ASSERT_EQ("-5"          , convert<string>(static_cast<int64_t>(-5)));
-    ASSERT_EQ("-5"          , convert<string>(static_cast<int32_t>(-5)));
-    ASSERT_EQ("0"           , convert<string>(static_cast<int64_t>(0)));
-    ASSERT_EQ("0"           , convert<string>(static_cast<int32_t>(0)));
-    ASSERT_EQ("F"           , convert<string>(15, 16));
+    ASSERT("12345"  , equal, convert<string>(static_cast<uint64_t>(12345)));
+    ASSERT("5"      , equal, convert<string>(static_cast<uint64_t>(5)));
+    ASSERT("5"      , equal, convert<string>(static_cast<uint32_t>(5)));
+    ASSERT("-5"     , equal, convert<string>(static_cast<int64_t>(-5)));
+    ASSERT("-5"     , equal, convert<string>(static_cast<int32_t>(-5)));
+    ASSERT("0"      , equal, convert<string>(static_cast<int64_t>(0)));
+    ASSERT("0"      , equal, convert<string>(static_cast<int32_t>(0)));
+    ASSERT("F"      , equal, convert<string>(15, 16));
 
-    ASSERT_EQ("5.50000"     , convert<string>(5.5));
-    ASSERT_EQ("5.56"        , convert<string>(5.556, 2));
-    ASSERT_EQ("5.55"        , convert<string>(5.554, 2));
-    ASSERT_EQ("625.10"      , convert<string>(625.1, 2));
-    ASSERT_EQ("-5.50000"    , convert<string>(-5.5));
-    ASSERT_EQ("-5.56"       , convert<string>(-5.556, 2));
-    ASSERT_EQ("-5.55"       , convert<string>(-5.554, 2));
-    ASSERT_EQ( "17976931348623157", convert<string>( DBL_MAX).substr(0, 17));
-    ASSERT_EQ("-17976931348623157", convert<string>(-DBL_MAX).substr(0, 18));
+    ASSERT("5.50000", equal, convert<string>(5.5));
+    ASSERT("5.56"   , equal, convert<string>(5.556, 2));
+    ASSERT("5.55"   , equal, convert<string>(5.554, 2));
+    ASSERT("625.10" , equal, convert<string>(625.1, 2));
+    ASSERT("-5.50000",equal, convert<string>(-5.5));
+    ASSERT("-5.56"  , equal, convert<string>(-5.556, 2));
+    ASSERT("-5.55"  , equal, convert<string>(-5.554, 2));
+    ASSERT( "17976931348623157", equal, convert<string>( std::numeric_limits<double>::max()).substr(0, 17));
+    ASSERT("-17976931348623157", equal, convert<string>(-std::numeric_limits<double>::max()).substr(0, 18));
 
-    ASSERT_EQ(true          , convert<bool>(string("True")));
-    ASSERT_EQ(false         , convert<bool>(string("false")));
-    ASSERT_THROW(convert<bool>(string("wrong true"))    , std::exception);
-    ASSERT_THROW(convert<bool>(string(""))              , std::exception);
+    ASSERT(true     , equal, convert<bool>(string("True")));
+    ASSERT(false    , equal, convert<bool>(string("false")));
 
-    ASSERT_EQ(0             , convert<int32_t>(string("0")));
-    ASSERT_EQ(5             , convert<int32_t>(string("5")));
-    ASSERT_EQ(-5            , convert<int32_t>(string("-5")));
-    ASSERT_THROW(convert<int32_t>(string("5 wrong"))    , std::exception);
-    ASSERT_THROW(convert<int32_t>(string(""))           , std::exception);
+    ASSERT(convert<bool>(string("wrong true")), std::exception);
+    ASSERT(convert<bool>(string(""))          , std::exception);
 
-    ASSERT_DOUBLE_EQ(5.5    , convert<double>(string("5.5")));
-    ASSERT_DOUBLE_EQ(-5.5   , convert<double>(string("-5.5")));
-    ASSERT_DOUBLE_EQ(static_cast<double>(525.1) , convert<double>(string("525.1")));
-    ASSERT_THROW(convert<double>(string("5.5 wrong"))   , std::exception);
-    ASSERT_THROW(convert<double>(string(""))            , std::exception);
+    ASSERT(0        , equal, convert<int32_t>(string("0")));
+    ASSERT(5        , equal, convert<int32_t>(string("5")));
+    ASSERT(-5       , equal, convert<int32_t>(string("-5")));
+
+    ASSERT(convert<int32_t>(string("5 wrong")), std::exception);
+    ASSERT(convert<int32_t>(string(""))       , std::exception);
+
+    ASSERT(5.5      , equal, convert<double>(string("5.5")));
+    ASSERT(-5.5     , equal, convert<double>(string("-5.5")));
+
+    ASSERT(static_cast<double>(525.1), equal, convert<double>(string("525.1")));
+
+    ASSERT(convert<double>(string("5.5 wrong")) , std::exception);
+    ASSERT(convert<double>(string(""))          , std::exception);
 
     typedef system_clock::time_point TTime;
     using std::chrono::seconds;
@@ -184,18 +187,18 @@ TEST(convertion, types) {
         return time_t(std::chrono::duration_cast<std::chrono::seconds>(t.time_since_epoch()).count());
     };
 
-    ASSERT_EQ("2015-05-05 05:05:05.000", convert<string>(TTime(seconds(1430802305))));
+    ASSERT("2015-05-05 05:05:05.000", equal, convert<string>(TTime(seconds(1430802305))));
 
-    ASSERT_EQ(1430802305, to_time_t(convert<TTime>(string("2015-05-05 05:05:05.000"))));
-    ASSERT_EQ(TTime(std::chrono::milliseconds(555)), convert<TTime>(string("1970-01-01 00:00:00.555")));
+    ASSERT(to_time_t(convert<TTime>(string("2015-05-05 05:05:05.000"))), equal, 1430802305);
+    ASSERT(TTime(std::chrono::milliseconds(555)), equal, convert<TTime>(string("1970-01-01 00:00:00.555")));
 
 #ifdef PLATFORM_CPU64
-    ASSERT_EQ(4449517261, to_time_t(convert<TTime>(string("2111-01-01 01:01:01.000"))));
+    ASSERT(4449517261, equal, to_time_t(convert<TTime>(string("2111-01-01 01:01:01.000"))));
 #endif
 
-    ASSERT_THROW(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
+    ASSERT(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
 
-    ASSERT_EQ("ħëłlö", convert<string>(wstring(L"ħëłlö")));
+    ASSERT("ħëłlö", equal, convert<string>(wstring(L"ħëłlö")));
 }
 
 
@@ -204,24 +207,24 @@ enum TEnumTest {
 };
 
 
-TEST(convertion, enum_) {
-    ASSERT_EQ(static_cast<int>(TEnumTest::E1), TEnum::E1);
-    ASSERT_EQ(static_cast<int>(TEnumTest::E2), TEnum::E2);
-    ASSERT_EQ(static_cast<int>(TEnumTest::E3), TEnum::E3);
-    ASSERT_EQ(static_cast<int>(TEnumTest::E4), TEnum::E4);
-    ASSERT_EQ(static_cast<int>(TEnumTest::E5), TEnum::E5);
+TEST(enum_) {
+    ASSERT(TEnum::E1, equal, static_cast<int>(TEnumTest::E1));
+    ASSERT(TEnum::E2, equal, static_cast<int>(TEnumTest::E2));
+    ASSERT(TEnum::E3, equal, static_cast<int>(TEnumTest::E3));
+    ASSERT(TEnum::E4, equal, static_cast<int>(TEnumTest::E4));
+    ASSERT(TEnum::E5, equal, static_cast<int>(TEnumTest::E5));
 
-    ASSERT_EQ(static_cast<int>(TEnumTest::E1), convert<TEnum>(string("E1")));
-    ASSERT_EQ(static_cast<int>(TEnumTest::E2), convert<TEnum>(string("E2")));
-    ASSERT_EQ(static_cast<int>(TEnumTest::E3), convert<TEnum>(string("E3")));
-    ASSERT_EQ(static_cast<int>(TEnumTest::E4), convert<TEnum>(string("E4")));
-    ASSERT_EQ(static_cast<int>(TEnumTest::E5), convert<TEnum>(string("E5")));
+    ASSERT(static_cast<int>(TEnumTest::E1), equal, convert<TEnum>(string("E1")));
+    ASSERT(static_cast<int>(TEnumTest::E2), equal, convert<TEnum>(string("E2")));
+    ASSERT(static_cast<int>(TEnumTest::E3), equal, convert<TEnum>(string("E3")));
+    ASSERT(static_cast<int>(TEnumTest::E4), equal, convert<TEnum>(string("E4")));
+    ASSERT(static_cast<int>(TEnumTest::E5), equal, convert<TEnum>(string("E5")));
 
-    ASSERT_EQ("E1", convert<string>(TEnum::E1));
-    ASSERT_EQ("E2", convert<string>(TEnum::E2));
-    ASSERT_EQ("E3", convert<string>(TEnum::E3));
-    ASSERT_EQ("E4", convert<string>(TEnum::E4));
-    ASSERT_EQ("E5", convert<string>(TEnum::E5));
+    ASSERT("E1", equal, convert<string>(TEnum::E1));
+    ASSERT("E2", equal, convert<string>(TEnum::E2));
+    ASSERT("E3", equal, convert<string>(TEnum::E3));
+    ASSERT("E4", equal, convert<string>(TEnum::E4));
+    ASSERT("E5", equal, convert<string>(TEnum::E5));
 
     {
         TEnum e = TEnum::E1;
@@ -233,14 +236,14 @@ TEST(convertion, enum_) {
         cout << convert<string>(e) << endl;
     }
 
-    ASSERT_THROW(convert<TEnum>(string("E55")), std::runtime_error);
-    ASSERT_THROW(convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))), std::runtime_error);
+    ASSERT(convert<TEnum>(string("E55")), std::runtime_error);
+    ASSERT(convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))), std::runtime_error);
 
     std::list<TEnum::TEnumInternal> l;
     for (auto const &i: TEnum::getEnums())
         l.push_back(i);
 
-    ASSERT_EQ(std::list<TEnum::TEnumInternal>( { TEnum::E1, TEnum::E2, TEnum::E3, TEnum::E4, TEnum::E5 } ), l);
+    ASSERT(std::list<TEnum::TEnumInternal>( { TEnum::E1, TEnum::E2, TEnum::E3, TEnum::E4, TEnum::E5 } ), equal, l);
 }
 
 

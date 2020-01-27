@@ -25,5 +25,5 @@ string convertNodeToString(iridium::parsing::INode::TConstSharedPtr const &node,
 } // unnamed
 
 
-IMPLEMENT_CONVERT(std::string, iridium::parsing::INode::TConstSharedPtr, convertNodeToString)
-IMPLEMENT_CONVERT(std::string, iridium::parsing::INode::TSharedPtr, convertNodeToString)
+IMPLEMENT_CONVERT(std::string, iridium::parsing::INode::TConstSharedPtr , convertNodeToString)
+IMPLEMENT_CONVERT(std::string, iridium::parsing::INode::TSharedPtr      , convertNodeToString)

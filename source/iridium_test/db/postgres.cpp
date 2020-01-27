@@ -2,8 +2,7 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include <gtest/gtest.h>
-
+#include <iridium/testing/tester.h>
 #include <iridium/build_flags.h>
 
 
@@ -17,7 +16,7 @@ namespace iridium {
 namespace db {
 
 
-TEST(db, postgres) {
+TEST(postgres) {
     IDBConnector::TSharedPtr connector = implementation::CPostgreSQLConnector::create(
         io::net::URL("postgresql://localhost"), "postgres", "", "postgres");
     connector->initialize();
