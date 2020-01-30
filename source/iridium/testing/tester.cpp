@@ -37,7 +37,6 @@ string convertNodeTestToString(
 
 
 Tester::Tester() {
-    m_test_root_node = CNodeTest::create("root");
 }
 
 
@@ -47,6 +46,7 @@ void Tester::add(ITest * const test, std::string const &path_) {
 
 
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
+    m_test_root_node = CNodeTest::create("root");
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
     static string const DEFAULT_DELIMITER = "/";
@@ -104,7 +104,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     if (!m_failed_paths.empty()) {
         string tests;
         for (auto const &line: m_failed_paths)
-            tests += line + "\n";
+            tests += line + "\n\n";
         LOGE << "\n\nfailed tests:\n" + tests;
     }
 

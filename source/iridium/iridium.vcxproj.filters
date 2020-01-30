@@ -563,12 +563,6 @@
     <ClCompile Include="io\transmitter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="iridium\iridium.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="iridium\pch.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="logging\config.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>

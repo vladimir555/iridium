@@ -203,8 +203,6 @@
     <ClCompile Include="io\protocol\http\response.cpp" />
     <ClCompile Include="io\stream.cpp" />
     <ClCompile Include="io\transmitter.cpp" />
-    <ClCompile Include="iridium\iridium.cpp" />
-    <ClCompile Include="iridium\pch.cpp" />
     <ClCompile Include="logging\config.cpp" />
     <ClCompile Include="logging\event.cpp" />
     <ClCompile Include="logging\implementation\channel.cpp" />
