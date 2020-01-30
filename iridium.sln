@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium", "source\iridium\iridium.vcxproj", "{1243CCB7-0933-4BD6-834A-554AA346A00C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium", "source\iridium\iridium.vcxproj", "{93465FDF-FB97-43B6-AFBC-EF3831327242}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium_test", "source\iridium_test\iridium_test.vcxproj", "{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium_test", "source\iridium_test\iridium_test.vcxproj", "{68C40E02-4887-44F7-BDC0-BD00B617BA38}"
 	ProjectSection(ProjectDependencies) = postProject
-		{1243CCB7-0933-4BD6-834A-554AA346A00C} = {1243CCB7-0933-4BD6-834A-554AA346A00C}
+		{93465FDF-FB97-43B6-AFBC-EF3831327242} = {93465FDF-FB97-43B6-AFBC-EF3831327242}
 	EndProjectSection
 EndProject
 Global
@@ -18,27 +18,27 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Debug|x64.ActiveCfg = Debug|x64
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Debug|x64.Build.0 = Debug|x64
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Debug|x86.ActiveCfg = Debug|Win32
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Debug|x86.Build.0 = Debug|Win32
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Release|x64.ActiveCfg = Release|x64
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Release|x64.Build.0 = Release|x64
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Release|x86.ActiveCfg = Release|Win32
-		{1243CCB7-0933-4BD6-834A-554AA346A00C}.Release|x86.Build.0 = Release|Win32
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Debug|x64.ActiveCfg = Debug|x64
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Debug|x64.Build.0 = Debug|x64
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Debug|x86.ActiveCfg = Debug|Win32
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Debug|x86.Build.0 = Debug|Win32
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Release|x64.ActiveCfg = Release|x64
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Release|x64.Build.0 = Release|x64
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Release|x86.ActiveCfg = Release|Win32
-		{F8E8659E-2A44-49FE-9A2C-5BFE368CD633}.Release|x86.Build.0 = Release|Win32
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Debug|x64.ActiveCfg = Debug|x64
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Debug|x64.Build.0 = Debug|x64
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Debug|x86.ActiveCfg = Debug|Win32
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Debug|x86.Build.0 = Debug|Win32
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Release|x64.ActiveCfg = Release|x64
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Release|x64.Build.0 = Release|x64
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Release|x86.ActiveCfg = Release|Win32
+		{93465FDF-FB97-43B6-AFBC-EF3831327242}.Release|x86.Build.0 = Release|Win32
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Debug|x64.ActiveCfg = Debug|x64
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Debug|x64.Build.0 = Debug|x64
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Debug|x86.ActiveCfg = Debug|Win32
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Debug|x86.Build.0 = Debug|Win32
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Release|x64.ActiveCfg = Release|x64
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Release|x64.Build.0 = Release|x64
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Release|x86.ActiveCfg = Release|Win32
+		{68C40E02-4887-44F7-BDC0-BD00B617BA38}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E71D7706-CB8D-4F1B-981E-D4088D56CFEA}
+		SolutionGuid = {FC689C78-FF04-4B4E-AA36-DC7D9D81E45B}
 	EndGlobalSection
 EndGlobal

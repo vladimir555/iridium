@@ -205,13 +205,9 @@ TEST(net, wsa) {
 
     using implementation::platform::WSA;
 
-    try {
-        auto listen_socket = WSA::instance().listen(URL("127.0.0.1:55555"));
+    auto listen_socket = WSA::instance().listen(URL("127.0.0.1:55555"));
 
-        LOGT << "listen_socket " << listen_socket;
-    } catch (std::exception const &e) {
-        FAIL() << e.what();
-    }
+    LOGT << "listen_socket " << listen_socket;
 
     //auto accept_socket = WSA::instance().accept(listen_socket);
 

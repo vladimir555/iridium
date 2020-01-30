@@ -107,7 +107,13 @@ LogStream::~LogStream() {
 }
 
 
-LogStream const & LogStream::operator << (char const *s) const {
+LogStream const &LogStream::operator << (char const * const s) const {
+    m_event.line = m_event.line + s;
+    return std::move(*this); // ----->
+}
+
+
+LogStream const &LogStream::operator << (char * s) const {
     m_event.line = m_event.line + s;
     return std::move(*this); // ----->
 }

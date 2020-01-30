@@ -65,21 +65,24 @@ public: \
 void Test_##name::run()
 
 #define ASSERT_3(left, condition, right) \
-condition(left, right, std::string(#left) + " " + #condition + " " + #right, iridium::convertion::convert<std::string>(__LINE__));
+condition(left, right, std::string(#left) + " " + #condition + " " + #right, \
+iridium::convertion::convert<std::string, uint32_t>(__LINE__));
 
 #define ASSERT_2(func, exception) \
 { auto const l = [&](){func;}; assert<decltype(l), exception> \
-(l, std::string(#func) + " doesn't throw " + #exception, iridium::convertion::convert<std::string>(__LINE__)); }
+(l, std::string(#func) + " doesn't throw " + #exception, \
+iridium::convertion::convert<std::string, std::string>(__FILE__)); }
 
 #define ASSERT_1(is_true) \
-assert(is_true, std::string(#is_true), iridium::convertion::convert<std::string>(__LINE__));
+assert(is_true, std::string(#is_true), \
+iridium::convertion::convert<std::string, std::string>(__FILE__));
 
 #define ASSERT(...) \
     dMACRO_CHOOSER(ASSERT, __VA_ARGS__)(__VA_ARGS__)
 
 #define IMPLEMENT_TEST_MAIN() \
 int main(int argc, char* argv[]) { \
-    return iridium::testing::Tester::instance().run(argc, argv, __FILE__); \
+    return iridium::testing::Tester::instance().run(argc, argv, std::string(__FILE__)); \
 }
 
 

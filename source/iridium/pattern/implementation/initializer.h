@@ -9,6 +9,7 @@
 #include "iridium/pattern/initializable.h"
 
 #include <list>
+#include <stdexcept>
 
 
 namespace iridium {

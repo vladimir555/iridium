@@ -73,9 +73,9 @@ public:
 
 private:
     ///
-    //std::string m_name;
+    std::string m_name;
     ///
-    caching::CachedString m_name;
+    // todo: caching::CachedString m_name;
     ///
     TValue m_value;
     ///

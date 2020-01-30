@@ -57,7 +57,8 @@ struct LogStream {
     ///
     ~LogStream();
     ///
-    LogStream const & operator << (char const *s) const;
+    LogStream const& operator << (char const * const s) const;
+    LogStream const& operator << (char       *       s) const;
     ///
     template<typename TValue>
     LogStream const & operator << (TValue const &v) const;
