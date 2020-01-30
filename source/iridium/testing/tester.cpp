@@ -99,6 +99,8 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 
     runTests(m_test_root_node, "");
 
+    LOGI << "\n\ntotal:  " << m_test_list.size() << "\nfailed: " << m_failed_paths.size();
+
     if (!m_failed_paths.empty()) {
         string tests;
         for (auto const &line: m_failed_paths)
@@ -118,18 +120,21 @@ void Tester::runTests(INodeTest::TSharedPtr const &node, std::string const &path
             run_path.substr(0, m_path_exclude.size()) != m_path_exclude))
         {
             try {
-                LOGI << run_path;
+                LOGI << "RUN  " << run_path;
                 i->getValue()->run();
-                LOGI << run_path << " OK";
+                LOGI << "OK   " << run_path;
             } catch (Exception const &e) {
-                m_failed_paths.push_back(run_path);
-                LOGE << run_path << " FAIL\n" << e.what();
+                string error = run_path + "\n" + e.what();
+                m_failed_paths.push_back(error);
+                LOGE << "FAIL " << error;
             } catch (std::exception const &e) {
-                m_failed_paths.push_back(run_path);
-                LOGE << run_path << " FAIL\n" << e.what();
+                string error = run_path + "\n" + e.what();
+                m_failed_paths.push_back(error);
+                LOGE << "FAIL " << error;
             } catch (...) {
-                m_failed_paths.push_back(run_path);
-                LOGE << run_path << " FAIL\nunknown exception";
+                string error = run_path + "\nunknown exception";
+                m_failed_paths.push_back(error);
+                LOGE << "FAIL " << error;
             }
         } else
             runTests(i, path + "/" + i->getName());

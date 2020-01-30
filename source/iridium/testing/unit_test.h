@@ -5,7 +5,8 @@
 #include <string>
 #include <stdexcept>
 
-#include "iridium/logging/logger.h"
+#include "iridium/convertion/convert.h"
+
 
 namespace iridium {
 namespace testing {
@@ -26,7 +27,17 @@ public:
     UnitTest() = default;
    ~UnitTest() = default;
 
-    void fail(std::string const &condition_source, std::string const &line);
+    template<typename TValue>
+    void fail(
+        TValue      const &left,
+        TValue      const &right,
+        std::string const &condition_name,
+        std::string const &condition_source,
+        std::string const &line);
+
+    void fail(
+        std::string const &condition_source,
+        std::string const &line);
 
     template<typename TValue>
     void less(TValue const &left, TValue const &right,
@@ -65,11 +76,24 @@ public:
 
 
 template<typename TValue>
+void UnitTest::fail(
+    TValue      const &left,
+    TValue      const &right,
+    std::string const &condition_name,
+    std::string const &condition_source,
+    std::string const &line)
+{
+    // todo: print values
+    throw Exception("'" + condition_source + "' at line " + line); // ----->
+}
+
+
+template<typename TValue>
 void UnitTest::less(TValue const &left, TValue const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!(left < right))
-        fail(condition_source, line);
+        fail(left, right, "less", condition_source, line);
 }
 
 
@@ -78,7 +102,7 @@ void UnitTest::lessEqual(TValue const &left, TValue const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!(left <= right))
-        fail(condition_source, line);
+        fail(left, right, "lessEqual", condition_source, line);
 }
 
 
@@ -87,7 +111,7 @@ void UnitTest::equal(TValue const &left, TValue const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!(left == right))
-        fail(condition_source, line);
+        fail(left, right, "equal", condition_source, line);
 }
 
 
@@ -96,7 +120,7 @@ void UnitTest::greater(TValue const &left, TValue const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!(left > right))
-        fail(condition_source, line);
+        fail(left, right, "greater", condition_source, line);
 }
 
 
@@ -105,7 +129,7 @@ void UnitTest::greaterEqual(TValue const &left, TValue const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!(left >= right))
-        fail(condition_source, line);
+        fail(left, right, "greaterEqual", condition_source, line);
 }
 
 

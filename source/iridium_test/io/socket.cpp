@@ -132,7 +132,7 @@ TEST(url) {
 
     // test dns resolver
     ASSERT(static_cast<bool>(URL("http://ya.ru").getIPv4()));
-    ASSERT(static_cast<size_t>(7), equal, URL("http://ya.ru").getIPv4AsString().size());
+    ASSERT(static_cast<size_t>(7), less, URL("http://ya.ru").getIPv4AsString().size());
     ASSERT(URL("http://ya.rur").getIPv4AsString(), std::exception);
 }
 

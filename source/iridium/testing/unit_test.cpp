@@ -22,7 +22,10 @@ std::string Exception::what() const {
 }
 
 
-void UnitTest::fail(std::string const &condition_source, std::string const &line) {
+void UnitTest::fail(
+    std::string const &condition_source,
+    std::string const &line)
+{
     throw Exception("'" + condition_source + "' at line " + line); // ----->
 }
 
@@ -32,7 +35,7 @@ void UnitTest::less(double const &left, double const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!std::isless(left, right))
-        fail(condition_source, line);
+        fail(left, right, "less", condition_source, line);
 }
 
 
@@ -41,7 +44,7 @@ void UnitTest::lessEqual(double const &left, double const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!std::islessequal(left, right))
-        fail(condition_source, line);
+        fail(left, right, "lessEqual", condition_source, line);
 }
 
 
@@ -50,7 +53,7 @@ void UnitTest::equal(double const &left, double const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!(std::fabs(left - right) < std::numeric_limits<double>::epsilon()))
-        fail(condition_source, line);
+        fail(left, right, "equal", condition_source, line);
 }
 
 
@@ -59,7 +62,7 @@ void UnitTest::greater(double const &left, double const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!std::isgreater(left, right))
-        fail(condition_source, line);
+        fail(left, right, "greater", condition_source, line);
 }
 
 
@@ -68,7 +71,7 @@ void UnitTest::greaterEqual(double const &left, double const &right,
     std::string const &condition_source, std::string const &line)
 {
     if (!std::isgreaterequal(left, right))
-        fail(condition_source, line);
+        fail(left, right, "lessEqual", condition_source, line);
 }
 
 
@@ -78,13 +81,6 @@ void UnitTest::assert(bool const &is_true,
     if (!is_true)
         fail(condition_source, line);
 }
-
-
-//void UnitTest::equal(std::string const &left, std::string const &right,
-//    std::string const &condition_source, std::string const &line)
-//{
-//    equal<std::string>(left, right, condition_source, line);
-//}
 
 
 } // testing
