@@ -1,5 +1,10 @@
 #include <iridium/testing/tester.h>
 
+#include <string>
+
+
+using namespace std;
+
 
 //TEST(bool_) {
 //    ASSERT(1 == 2);
@@ -26,6 +31,6 @@
 TEST(OK) {
     ASSERT(true);
     ASSERT(1, equal, 1);
-    ASSERT("asd", equal, "asd");
+    ASSERT("asd", equal, string("asd"));
     ASSERT(2, greater, 1);
 }

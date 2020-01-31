@@ -23,12 +23,13 @@ TEST(postgres) {
     auto rows = connector->sendQuery("select * from pg_database;");
     connector->finalize();
 
-    ASSERT_LE(0, rows.size());
-//    for (auto const &row: rows) {
-//        LOGT << "";
-//        for (auto const &i: row)
-//            LOGT << i.first << " = " << i.second;
-//    }
+//    ASSERT(0, less, rows.size());
+    less(0, rows.size(), "", "");
+    for (auto const &row: rows) {
+        LOGT << "";
+        for (auto const &i: row)
+            LOGT << i.first << " = " << i.second;
+    }
 
 //    sleep(1);
 }

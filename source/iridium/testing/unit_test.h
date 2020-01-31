@@ -39,24 +39,24 @@ public:
         std::string const &condition_source,
         std::string const &line);
 
-    template<typename TValue>
-    void less(TValue const &left, TValue const &right,
+    template<typename TLeft, typename TRight>
+    void less(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
-    template<typename TValue>
-    void lessEqual(TValue const &left, TValue const &right,
+    template<typename TLeft, typename TRight>
+    void lessEqual(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
-    template<typename TValue>
-    void equal(TValue const &left, TValue const &right,
+    template<typename TLeft, typename TRight>
+    void equal(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
-    template<typename TValue>
-    void greater(TValue const &left, TValue const &right,
+    template<typename TLeft, typename TRight>
+    void greater(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
-    template<typename TValue>
-    void greaterEqual(TValue const &left, TValue const &right,
+    template<typename TLeft, typename TRight>
+    void greaterEqual(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
     template<typename TFunction, typename TException>
@@ -64,10 +64,6 @@ public:
         std::string const &condition_source, std::string const &line);
 
     void assert(bool const &is_true,
-        std::string const &condition_source, std::string const &line);
-
-    template<typename TLeft, typename TRight>
-    void equal(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 };
 
@@ -88,48 +84,53 @@ void UnitTest::fail(
 }
 
 
-template<typename TValue>
-void UnitTest::less(TValue const &left, TValue const &right,
+template<typename TLeft, typename TRight>
+void UnitTest::less(TLeft const &left, TRight const &right,
     std::string const &condition_source, std::string const &line)
 {
-    if (!(left < right))
-        fail(left, right, "less", condition_source, line);
+    TRight left_(left);
+    if (!(left_ < right))
+        fail(left_, right, "less", condition_source, line);
 }
 
 
-template<typename TValue>
-void UnitTest::lessEqual(TValue const &left, TValue const &right,
+template<typename TLeft, typename TRight>
+void UnitTest::lessEqual(TLeft const &left, TRight const &right,
     std::string const &condition_source, std::string const &line)
 {
-    if (!(left <= right))
-        fail(left, right, "lessEqual", condition_source, line);
+    TRight left_(left);
+    if (!(left_ <= right))
+        fail(static_cast<TRight>(left), right, "lessEqual", condition_source, line);
 }
 
 
-template<typename TValue>
-void UnitTest::equal(TValue const &left, TValue const &right,
+template<typename TLeft, typename TRight>
+void UnitTest::equal(TLeft const &left, TRight const &right,
     std::string const &condition_source, std::string const &line)
 {
-    if (!(left == right))
-        fail(left, right, "equal", condition_source, line);
+    TRight left_(left);
+    if (!(left_ == right))
+        fail(left_, right, "equal", condition_source, line);
 }
 
 
-template<typename TValue>
-void UnitTest::greater(TValue const &left, TValue const &right,
+template<typename TLeft, typename TRight>
+void UnitTest::greater(TLeft const &left, TRight const &right,
     std::string const &condition_source, std::string const &line)
 {
-    if (!(left > right))
-        fail(left, right, "greater", condition_source, line);
+    TRight left_(left);
+    if (!(left_ > right))
+        fail(left_, right, "greater", condition_source, line);
 }
 
 
-template<typename TValue>
-void UnitTest::greaterEqual(TValue const &left, TValue const &right,
+template<typename TLeft, typename TRight>
+void UnitTest::greaterEqual(TLeft const &left, TRight const &right,
     std::string const &condition_source, std::string const &line)
 {
-    if (!(left >= right))
-        fail(left, right, "greaterEqual", condition_source, line);
+    TRight left_(left);
+    if (!(left_ >= right))
+        fail(left_, right, "greaterEqual", condition_source, line);
 }
 
 
@@ -150,14 +151,6 @@ void UnitTest::assert(TFunction const &func,
 
     if (is_fail)
         fail(condition_source, line);
-}
-
-
-template<typename TLeft, typename TRight>
-void UnitTest::equal(TLeft const &left, TRight const &right,
-    std::string const &condition_source, std::string const &line)
-{
-    equal<TRight>(left, right, condition_source, line);
 }
 
 

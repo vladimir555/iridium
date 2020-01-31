@@ -11,10 +11,10 @@ set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 
 # build components
-#set(BUILD_FLAG_POSTGRESQL 1)
+set(BUILD_FLAG_POSTGRESQL 1)
 
 if (BUILD_FLAG_POSTGRESQL)
-    add_compile_definitions(BUILD_FLAG_POSTGRESQL)
+#    add_compile_definitions(BUILD_FLAG_POSTGRESQL)
     set(PostgreSQL_TYPE_INCLUDE_DIR "/usr/include")
 endif()
 
@@ -87,7 +87,17 @@ file(GLOB_RECURSE SOURCE_TEST
 )
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
-target_link_libraries(${PROJECT_TEST_NAME} ${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
+
+if (BUILD_FLAG_POSTGRESQL)
+    find_package(PostgreSQL REQUIRED)
+endif()
+
+target_link_libraries(
+    ${PROJECT_TEST_NAME}
+    ${PROJECT_NAME}
+#    ${CMAKE_THREAD_LIBS_INIT}
+    ${PostgreSQL_LIBRARIES}
+)
 #add_test(NAME ${PROJECT_TEST_NAME} COMMAND ${PROJECT_TEST_NAME})
 
 ##GTEST
@@ -97,10 +107,6 @@ target_link_libraries(${PROJECT_TEST_NAME} ${PROJECT_NAME} ${CMAKE_THREAD_LIBS_I
 #find_package(GTest REQUIRED)
 
 ##find_package(OpenSSL REQUIRED)
-#if (BUILD_FLAG_POSTGRESQL)
-#    find_package(PostgreSQL REQUIRED)
-#endif()
-
 #include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
 
 ## source files for test
