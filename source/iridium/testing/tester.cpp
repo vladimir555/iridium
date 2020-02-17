@@ -80,11 +80,15 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     }
 
     if (argc == 2) {
-        if (string(argv[1]) == "help")
+        if (string(argv[1]) == "help"   ||
+            string(argv[1]) == "--help" ||
+            string(argv[1]) == "/?")
+        {
             LOGI    << "\nusage:\n"
                     << std::string(argv[0]) << " help\n"
                     << std::string(argv[0]) << " list\n"
                     << std::string(argv[0]) << " run [ include_path ] [ exclude_path ]\n";
+        }
 
         if (string(argv[1]) == "list")
             LOGI << "\ntests:" << m_test_root_node;
