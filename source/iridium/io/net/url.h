@@ -33,7 +33,7 @@ public:
         SSH         = 22,
         Telnet      = 23,
         MYSQL       = 3306,
-        POSTGRESQL  = 5432
+        POSTGRES    = 5432
     )
 
     URL(std::string const &url);

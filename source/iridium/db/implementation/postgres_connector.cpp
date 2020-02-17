@@ -8,12 +8,11 @@
 #ifdef BUILD_FLAG_POSTGRESQL
 
 
-#include "postgresql_connector.h"
+#include "postgres_connector.h"
 
 #include <iridium/convertion/convert.h>
 #include <iridium/logging/logger.h>
 #include <iridium/assert.h>
-//#include <pqxx/transaction>
 
 
 using std::string;
@@ -28,7 +27,7 @@ namespace db {
 namespace implementation {
 
 
-CPostgreSQLConnector::CPostgreSQLConnector(URL const &url, string const &user, string const &password, string const &database)
+CPostgresConnector::CPostgresConnector(URL const &url, string const &user, string const &password, string const &database)
 :
     m_connection(nullptr),
     m_url       (url),
@@ -38,11 +37,11 @@ CPostgreSQLConnector::CPostgreSQLConnector(URL const &url, string const &user, s
 {}
 
 
-CPostgreSQLConnector::~CPostgreSQLConnector() {
+CPostgresConnector::~CPostgresConnector() {
 }
 
 
-void CPostgreSQLConnector::initialize() {
+void CPostgresConnector::initialize() {
 //    m_connection = std::make_shared<pqxx::connection>(
 //         "host="        + convert<string>(m_url)    +
 //        " user="        + m_user                    +
@@ -62,24 +61,24 @@ void CPostgreSQLConnector::initialize() {
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
         PQfinish(m_connection);
-        throw DBException("connect to postgresql '" + convert<string>(m_url) + "' error: " + error); // ----->
+        throw Exception("connect to postgresql '" + convert<string>(m_url) + "' error: " + error); // ----->
     }
 
     LOGI << "initialization Postgres '" << m_url << "' database '" << m_database << "' done";
 }
 
 
-void CPostgreSQLConnector::finalize() {
+void CPostgresConnector::finalize() {
     PQfinish(m_connection);
 }
 
 
-void CPostgreSQLConnector::executeCommand(std::string const &command) {
+void CPostgresConnector::executeCommand(std::string const &command) {
 
 }
 
 
-CPostgreSQLConnector::TRows CPostgreSQLConnector::sendQuery(string const &query) {
+CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
     LOGT << "send sql query: " << query;
     TRows rows;
 
@@ -96,7 +95,7 @@ CPostgreSQLConnector::TRows CPostgreSQLConnector::sendQuery(string const &query)
         string error = PQerrorMessage(m_connection);
         PQclear(result);
         PQfinish(m_connection);
-        throw DBException("query to postgresql host error: " + error); // ----->
+        throw Exception("query to postgresql host error: " + error); // ----->
     }
     PQclear(result);
 

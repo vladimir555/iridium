@@ -18,7 +18,6 @@
 
 #include <string>
 #include <postgresql/libpq-fe.h>
-//#include <pqxx/connection>
 
 
 namespace iridium {
@@ -26,16 +25,16 @@ namespace db {
 namespace implementation {
 
 
-class CPostgreSQLConnector:
-    public IDBConnector,
+class CPostgresConnector:
+    public IConnector,
     public CConnector
 {
 public:
-    DEFINE_CREATE(CPostgreSQLConnector)
+    DEFINE_CREATE(CPostgresConnector)
     ///
-    CPostgreSQLConnector(io::net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
+    CPostgresConnector(io::net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
     ///
-    virtual        ~CPostgreSQLConnector() override;
+    virtual        ~CPostgresConnector() override;
     ///
     virtual void    initialize() override;
     ///
@@ -47,7 +46,6 @@ private:
     ///
     void            executeCommand(std::string const &command);
     ///
-//    std::shared_ptr<pqxx::connection>   m_connection;
     PGconn         *m_connection;
     ///
     io::net::URL    m_url;

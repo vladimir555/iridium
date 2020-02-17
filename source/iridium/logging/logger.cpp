@@ -21,6 +21,7 @@ using iridium::logging::implementation::CSinkFile;
 using iridium::threading::implementation::CMutex;
 
 
+#include <iostream>
 namespace iridium {
 namespace logging {
 
@@ -125,24 +126,19 @@ void update(config::TLogger const &config) {
 
 
 std::string convertFunctionNameToLogFunctionName(std::string const &name) {
-    auto l = split(split(name, "(").front(), "::");
-    std::string result = l.back();
-    l.pop_back();
-    result = l.back() + "::" + result;
-    
-//    auto result = name;
-//    auto words  = split(split(name, "(").front(), "::");
-//    if (words.size() > 1) {
-//        result  = words.back();
-//        words.pop_back();
-//        result  = words.back() + "::" + result;
-//    }
-    
-    static auto const tab_size = 25;
-    
-    if (result.size() < tab_size)
-        return result + std::string(tab_size - result.size(), ' '); // ----->
-    
+    static size_t DEFAULT_FUNC_NAME_SIZE = 16;
+
+    size_t rpos = name.find("(");
+    size_t lpos = name.find_last_of(" ", rpos) + 1;
+
+    if (lpos == std::string::npos)
+        lpos = 0;
+
+    std::string result = name.substr(lpos, rpos - lpos);
+
+    if (result.size() < DEFAULT_FUNC_NAME_SIZE)
+        result.append(DEFAULT_FUNC_NAME_SIZE - result.size(), ' ');
+
     return result; // ----->
 }
 

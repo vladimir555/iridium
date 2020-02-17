@@ -29,8 +29,11 @@ using namespace std;
 
 
 TEST(OK) {
-    ASSERT(true);
-    ASSERT(1, equal, 1);
-    ASSERT("asd", equal, string("asd"));
-    ASSERT(2, greater, 1);
+    //ASSERT(true);
+    //ASSERT(1, equal, 1);
+    //ASSERT("asd", equal, string("asd"));
+    //ASSERT(2, greater, 1);
+
+    double d = 5.5;
+    ASSERT(5.5, equal, d);
 }

@@ -31,21 +31,21 @@ struct C {
 
 
 DEFINE_ROOT_NODE_BEGIN(Root)
-    DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue1")
+    DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue1")
     DEFINE_NODE_BEGIN(FirstItem)
-        DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue1")
+        DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue1")
         DEFINE_ATTRIBUTE(int, AttributeTwo)
         DEFINE_ATTRIBUTE(C::TEnum, Enum)
     DEFINE_NODE_END(FirstItem)
 
     DEFINE_NODE_BEGIN(SecondItem)
-        DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "defaultValue2")
+        DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue2")
     DEFINE_NODE_END(SecondItem)
 
     DEFINE_NODE_LIST_BEGIN(Item1)
         DEFINE_NODE_BEGIN(SubItem)
-            DEFINE_ATTRIBUTE_DEFAULT(string, AttributeOne, "attribute-one")
-            DEFINE_ATTRIBUTE_DEFAULT(int, AttributeTwo, 555)
+            DEFINE_ATTRIBUTE(string, AttributeOne, "attribute-one")
+            DEFINE_ATTRIBUTE(int, AttributeTwo, 555)
         DEFINE_NODE_END(SubItem)
     DEFINE_NODE_LIST_END(Item1)
 
@@ -54,9 +54,9 @@ DEFINE_ROOT_NODE_END()
 
 
 DEFINE_ROOT_NODE_BEGIN(Root2)
-    DEFINE_ATTRIBUTE_DEFAULT(C::TEnum, Enum, C::TEnum::ENUM1)
+    DEFINE_ATTRIBUTE(C::TEnum, Enum, C::TEnum::ENUM1)
     DEFINE_NODE_LIST_BEGIN(SubItem1)
-        DEFINE_ATTRIBUTE_DEFAULT(C::TEnum, Enum, C::TEnum::ENUM1)
+        DEFINE_ATTRIBUTE(C::TEnum, Enum, C::TEnum::ENUM1)
     DEFINE_NODE_LIST_END(SubItem1)
 DEFINE_ROOT_NODE_END()
 

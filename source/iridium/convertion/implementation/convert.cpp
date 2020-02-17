@@ -59,6 +59,7 @@ size_t const time_to_string_buffer_size     = 64;
 #include PLATFORM_HEADER(convert.h)
 
 
+#include <iostream>
 namespace iridium {
 namespace convertion {
 namespace implementation {

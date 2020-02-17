@@ -18,11 +18,16 @@ namespace config {
 
 
 DEFINE_ROOT_NODE_BEGIN(DatebaseConnector)
-    DEFINE_ATTRIBUTE(io::net::URL           , Url)
-    DEFINE_ATTRIBUTE(IDBConnector::TDBType  , Type)
-    DEFINE_ATTRIBUTE(std::string            , User)
-    DEFINE_ATTRIBUTE(std::string            , Password)
-    DEFINE_ATTRIBUTE_DEFAULT(std::string    , Database, "")
+    DEFINE_ENUM(
+        TDBType,
+        MYSQL,
+        POSTGRES
+    )
+    DEFINE_ATTRIBUTE(io::net::URL   , Url)
+    DEFINE_ATTRIBUTE(TDBType        , Type)
+    DEFINE_ATTRIBUTE(std::string    , User)
+    DEFINE_ATTRIBUTE(std::string    , Password)
+    DEFINE_ATTRIBUTE(std::string    , Database, {})
 DEFINE_ROOT_NODE_END()
 
 
@@ -30,7 +35,7 @@ DEFINE_ROOT_NODE_END()
 
 
 /// IDBConnector builder
-IDBConnector::TSharedPtr createConnector(config::TDatebaseConnector const &config);
+IConnector::TSharedPtr createConnector(config::TDatebaseConnector const &config);
 
 
 } // db

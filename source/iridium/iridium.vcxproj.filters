@@ -429,6 +429,9 @@
     <ClInclude Include="threading\worker_pool.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="db\implementation\postgres_connector.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp">
@@ -660,6 +663,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="threading\thread.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="db\implementation\postgres_connector.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

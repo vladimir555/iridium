@@ -14,6 +14,8 @@
 #include <algorithm>
 
 
+#include <iostream>
+#include <string>
 namespace {
 
 
@@ -33,6 +35,7 @@ void itoaUInt(TUInt const &value_, char *buffer, int const &base) {
         buffer++;
         value /= base;
     } while (value);
+
    *buffer = 0;
     std::reverse(buffer_begin, buffer);
 }
@@ -61,57 +64,13 @@ namespace implementation {
 namespace platform {
 
 
-void itoa(int32_t const &value_, char *buffer, int const &base) {
-    // code copies for fix clang bug
-    uint32_t value = value_;
-
-    if (value_ < 0) {
-       *buffer = '-';
-        buffer++;
-        value = -value_;
-    }
-
-    char* buffer_begin = buffer;
-    do {
-        char ch = value % base;
-        if (ch > 9)
-            ch = 'A' - 10 + ch;
-        else
-            ch = '0' + ch;
-
-       *buffer = ch;
-        buffer++;
-        value /= base;
-    } while (value);
-   *buffer = 0;
-    std::reverse(buffer_begin, buffer);
+void itoa(int32_t const &value, char *buffer, int const &base) {
+    itoaInt(value, buffer, base);
 }
 
 
-void itoa(int64_t const &value_, char *buffer, int const &base) {
-    // code copies for fix clang bug
-    uint64_t value = value_;
-
-    if (value_ < 0) {
-       *buffer = '-';
-        buffer++;
-        value = -value_;
-    }
-
-    char* buffer_begin = buffer;
-    do {
-        char ch = value % base;
-        if (ch > 9)
-            ch = 'A' - 10 + ch;
-        else
-            ch = '0' + ch;
-
-       *buffer = ch;
-        buffer++;
-        value /= base;
-    } while (value);
-   *buffer = 0;
-    std::reverse(buffer_begin, buffer);
+void itoa(int64_t const &value, char *buffer, int const &base) {
+    itoaInt(value, buffer, base);
 }
 
 

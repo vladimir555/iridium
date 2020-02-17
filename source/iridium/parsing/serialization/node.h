@@ -11,6 +11,7 @@
 #include "iridium/parsing/node.h"
 #include "iridium/parsing/implementation/node.h"
 #include "iridium/convertion/implementation/convert.h"
+#include "iridium/macros/va_args.h"
 
 
 namespace iridium {
@@ -335,8 +336,18 @@ std::string convertCamelToDashed(std::string const &camel);
     } class_name = *this;
 
 
-#define DEFINE_ATTRIBUTE_DEFAULT(type, class_name, default_value) \
+#define DEFINE_ATTRIBUTE_2(type, class_name) \
     struct T##class_name : public iridium::parsing::serialization::Node<type> { \
+        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
+        iridium::parsing::serialization::Node<type> \
+        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        using iridium::parsing::serialization::Node<type>::operator =; \
+    } class_name = *this;
+
+
+#define DEFINE_ATTRIBUTE_3(type, class_name, default_value) \
+    struct T##class_name : public iridium::parsing::serialization::Node<type> { \
+        typedef type TType; \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::Node<type> \
         (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name), default_value) {} \
@@ -344,13 +355,8 @@ std::string convertCamelToDashed(std::string const &camel);
     } class_name = *this;
 
 
-#define DEFINE_ATTRIBUTE(type, class_name) \
-    struct T##class_name : public iridium::parsing::serialization::Node<type> { \
-        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::Node<type> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
-        using iridium::parsing::serialization::Node<type>::operator =; \
-    } class_name = *this;
+#define DEFINE_ATTRIBUTE(...) \
+    dMACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
 
 
 #define DEFINE_NODE_LIST_BEGIN(class_name) \

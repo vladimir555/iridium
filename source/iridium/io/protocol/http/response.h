@@ -28,19 +28,19 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         int         code;
         std::string reason;
     };
-    DEFINE_ATTRIBUTE_DEFAULT(TMessageLine, Message, TMessageLine( {"HTTP/1.1", 200, "OK"} ))
+    DEFINE_ATTRIBUTE(TMessageLine, Message, TMessageLine( {"HTTP/1.1", 200, "OK"} ))
     DEFINE_NODE_BEGIN(Headers)
         struct THTTPDate {
             std::chrono::system_clock::time_point date;
         };
-        DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, Date, THTTPDate())
-        DEFINE_ATTRIBUTE_DEFAULT(std::string, server, DEFAULT_SERVER_NAME)
-        DEFINE_ATTRIBUTE_DEFAULT(THTTPDate, LastModified, THTTPDate())
-        DEFINE_ATTRIBUTE_DEFAULT(size_t, ContentLength, 0)
-        DEFINE_ATTRIBUTE_DEFAULT(std::string, ContentType, "text/html")
-//        DEFINE_ATTRIBUTE_DEFAULT(std::string, Connection, "")
+        DEFINE_ATTRIBUTE(THTTPDate, Date, THTTPDate())
+        DEFINE_ATTRIBUTE(std::string, server, DEFAULT_SERVER_NAME)
+        DEFINE_ATTRIBUTE(THTTPDate, LastModified, THTTPDate())
+        DEFINE_ATTRIBUTE(size_t, ContentLength, 0)
+        DEFINE_ATTRIBUTE(std::string, ContentType, "text/html")
+//        DEFINE_ATTRIBUTE(std::string, Connection, "")
     DEFINE_NODE_END(Headers)
-    DEFINE_ATTRIBUTE_DEFAULT(Buffer, Body, Buffer())
+    DEFINE_ATTRIBUTE(Buffer, Body, Buffer())
 DEFINE_ROOT_NODE_END()
 
 

@@ -19,22 +19,16 @@ namespace iridium {
 namespace db {
 
 
-class DBException : public std::runtime_error {
+class Exception : public std::runtime_error {
 public:
-    explicit DBException(std::string const &e);
-    virtual ~DBException() = default;
+    explicit Exception(std::string const &e);
+    virtual ~Exception() = default;
 };
 
 
-class IDBConnector: public pattern::IInitializable {
+class IConnector: public pattern::IInitializable {
 public:
-    DEFINE_ENUM(
-        TDBType,
-        MYSQL,
-        POSTGRESQL
-    )
-
-    DEFINE_INTERFACE(IDBConnector)
+    DEFINE_INTERFACE(IConnector)
     ///
     typedef std::map<std::string, std::string> TRow;
     ///

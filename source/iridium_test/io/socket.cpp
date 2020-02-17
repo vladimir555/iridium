@@ -187,7 +187,7 @@ TEST(url) {
 
 
 #ifdef WINDOWS_PLATFORM
-TEST(net, wsa) {
+TEST(wsa) {
     return;
     //{
     //    A const a;

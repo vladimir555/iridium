@@ -97,14 +97,7 @@ public: \
             return e; \
     } \
     static std::string convert(TEnum const &e) { \
-        auto result = static_cast<std::string>(e); \
-        if (result == "UNKNOWN") { \
-            auto message = "convert enum " + std::string(#TEnum) + " int " + iridium::convertion::convert<std::string>(static_cast<int>(static_cast<TEnumInternal>(e))) + " to string error: valid enum keys is"; \
-            for (auto const &i: getEnums()) \
-                message += " " + static_cast<std::string>(TEnum(i)) + " = " + iridium::convertion::convert<std::string>(static_cast<int>(i)); \
-            throw std::runtime_error(message); \
-        } \
-        return result; \
+        return static_cast<std::string>(e); \
     } \
     static std::string convert(TEnum::TEnumInternal const &e) { \
         return convert(TEnum(e)); \
@@ -133,3 +126,16 @@ IMPLEMENT_CONVERT(std::string, TEnum::TEnumInternal, TEnum::convert)
 
 
 #endif // HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
+
+/*
+static std::string convert(TEnum const &e) { \
+    auto result = static_cast<std::string>(e); \
+    if (result == "UNKNOWN") { \
+        auto message = "convert enum " + std::string(#TEnum) + " int " + iridium::convertion::convert<std::string>(static_cast<int>(static_cast<TEnumInternal>(e))) + " to string error: valid enum keys is"; \
+        for (auto const &i: getEnums()) \
+            message += " " + static_cast<std::string>(TEnum(i)) + " = " + iridium::convertion::convert<std::string>(static_cast<int>(i)); \
+        throw std::runtime_error(message); \
+    } \
+    return result; \
+} \
+*/

@@ -100,6 +100,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     runTests(m_test_root_node, "");
 
     LOGI << "\n\ntotal:  " << m_test_list.size() << "\nfailed: " << m_failed_paths.size();
+    // todo: tested. passed
 
     if (!m_failed_paths.empty()) {
         string tests;

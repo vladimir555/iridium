@@ -20,13 +20,13 @@ namespace config {
 
 
 DEFINE_ROOT_NODE_BEGIN(Logger)
-    DEFINE_ATTRIBUTE_DEFAULT(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
+    DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
     DEFINE_NODE_LIST_BEGIN(ConsoleSink)
-        DEFINE_ATTRIBUTE_DEFAULT(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
+        DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
     DEFINE_NODE_LIST_END(ConsoleSink)
     DEFINE_NODE_LIST_BEGIN(FileSink)
-        DEFINE_ATTRIBUTE_DEFAULT(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
-        DEFINE_ATTRIBUTE_DEFAULT(std::string, FileName, "")
+        DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
+        DEFINE_ATTRIBUTE(std::string, FileName, "")
     DEFINE_NODE_LIST_END(FileSink)
 DEFINE_ROOT_NODE_END()
 

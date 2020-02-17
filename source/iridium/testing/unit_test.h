@@ -71,6 +71,32 @@ public:
 // -----
 
 
+template<>
+void UnitTest::less(
+    double const &left, double const &right,
+    std::string const &condition_source, std::string const &line);
+
+
+template<>
+void UnitTest::lessEqual(double const &left, double const &right,
+    std::string const &condition_source, std::string const &line);
+
+
+template<>
+void UnitTest::equal(double const &left, double const &right,
+    std::string const &condition_source, std::string const &line);
+
+
+template<>
+void UnitTest::greater(double const &left, double const &right,
+    std::string const &condition_source, std::string const &line);
+
+
+template<>
+void UnitTest::greaterEqual(double const &left, double const &right,
+    std::string const &condition_source, std::string const &line);
+
+
 template<typename TValue>
 void UnitTest::fail(
     TValue      const &left,
@@ -108,7 +134,7 @@ template<typename TLeft, typename TRight>
 void UnitTest::equal(TLeft const &left, TRight const &right,
     std::string const &condition_source, std::string const &line)
 {
-    TRight left_(left);
+    TRight left_ = static_cast<TRight>(left);
     if (!(left_ == right))
         fail(left_, right, "equal", condition_source, line);
 }
@@ -144,7 +170,7 @@ void UnitTest::assert(TFunction const &func,
         func();
         is_fail     = true;
         fail(condition_source, line);
-    } catch (TException const &e) {
+    } catch (TException const &) {
     } catch (...) {
         is_fail     = true;
     }

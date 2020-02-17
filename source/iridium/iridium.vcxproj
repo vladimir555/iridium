@@ -36,7 +36,7 @@
     <ClInclude Include="db\connector.h" />
     <ClInclude Include="db\implementation\connector.h" />
     <ClInclude Include="db\implementation\mysql_connector.h" />
-    <ClInclude Include="db\implementation\postgresql_connector.h" />
+    <ClInclude Include="db\implementation\postgres_connector.h" />
     <ClInclude Include="encryption\implementation\openssl.h" />
     <ClInclude Include="encryption\implementation\ssl.h" />
     <ClInclude Include="encryption\keys.h" />
@@ -168,7 +168,7 @@
     <ClCompile Include="db\connector.cpp" />
     <ClCompile Include="db\implementation\connector.cpp" />
     <ClCompile Include="db\implementation\mysql_connector.cpp" />
-    <ClCompile Include="db\implementation\postgresql_connector.cpp" />
+    <ClCompile Include="db\implementation\postgres_connector.cpp" />
     <ClCompile Include="encryption\implementation\openssl.cpp" />
     <ClCompile Include="io\buffer.cpp" />
     <ClCompile Include="io\fs\files.cpp" />
@@ -319,7 +319,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -337,7 +337,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -357,7 +357,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -379,7 +379,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
