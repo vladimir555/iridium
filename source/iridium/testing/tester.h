@@ -43,6 +43,7 @@ private:
     INodeTest::TSharedPtr   m_test_root_node;
 
     std::list< std::pair< ITest *, std::string > > m_test_list;
+    std::list<std::string>  m_passed_paths;
     std::list<std::string>  m_failed_paths;
 };
 

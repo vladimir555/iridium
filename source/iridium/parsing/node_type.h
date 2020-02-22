@@ -62,7 +62,7 @@ public:
     ///
     virtual bool hasChilds() const = 0;
 
-    ///
+    /// get first child by name
     virtual typename INodeType<TValue>::TSharedPtr getChild(std::string const &name) = 0;
     ///
     virtual typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const = 0;

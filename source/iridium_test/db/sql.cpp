@@ -31,12 +31,12 @@
 //};
 
 
-//DEFINE_ROOT_NODE_BEGIN(Authors)
-//    DEFINE_NODE_LIST_BEGIN(Rows)
-//        DEFINE_ATTRIBUTE_DEFAULT(uint64_t   , id    , {})
-//        DEFINE_ATTRIBUTE_DEFAULT(std::string, name  , {})
-//    DEFINE_NODE_LIST_END(Rows)
-//DEFINE_ROOT_NODE_END()
+DEFINE_ROOT_NODE_BEGIN(Authors)
+    DEFINE_NODE_BEGIN(Rows)
+        DEFINE_ATTRIBUTE(uint64_t   , id    , {})
+        DEFINE_ATTRIBUTE(std::string, name  , {})
+    DEFINE_NODE_END(Rows)
+DEFINE_ROOT_NODE_END()
 
 
 //template<typename TNode>
@@ -46,51 +46,137 @@
 //};
 
 
-//class Select {
-//public:
-//    Select(std::list<TBook::Columns>);
-//   ~Select() = default;
-//};
-
-
+//template<typename ... TTables>
 //class From {
 //public:
-//    From(TBook const &book) {}
-//   ~From() {}
-//};
+//    From(TTables const & ... tables) {}
 
-
-//template<typename TTable>
-//class Select {
-//public:
-//    Select(TTable const &table): m_table(table) {}
-
-////    template<typename TTable::TValue>
-//    class Condition {
+//    class Select {
 //    public:
-//        Condition() = default;
-//       ~Condition() = default;
-
-////        typedef typename TTable::TRows::TValue TValue;
-
-//        template<TTable::TRows>
-//        bool operator <  (TTable::TRows::TValue const &value) {
-//            return false;
-//        }
+//        Select() {}
+//       ~Select() = default;
 //    };
 
-//    void Where(Condition const &condition) {}
+//    Select *Select_() { return new From<TTables ... >::Select(); }
 //private:
-//    TTable m_table;
+////    TTables m_tables;
 //};
+
+
+template<typename TValue>
+struct Condition {
+    Condition(TValue const &value) {
+    }
+
+    Condition operator <  (TValue const &value) {
+        return *this;
+    }
+
+    Condition operator <= (TValue const &value) {
+        return *this;
+    }
+
+    Condition operator >  (TValue const &value) {
+        return *this;
+    }
+
+    Condition operator >= (TValue const &value) {
+        return *this;
+    }
+
+    Condition operator == (TValue const &value) {
+        return *this;
+    }
+
+    Condition operator && (TValue const &value) {
+        return *this;
+    }
+};
+
+
+struct SQL {
+    std::string getSQL() {
+        return "sql";
+    }
+};
+
+
+struct Order: SQL {
+    SQL order() {
+        return SQL();
+    }
+};
+
+
+struct Having: Order {
+    Order having() {
+        return Order();
+    }
+};
+
+
+struct Group: Having {
+    Having group() {
+        return Having();
+    }
+};
+
+
+struct Where: Group {
+    Group where() {
+        return Group();
+    }
+};
+
+
+struct Select {
+    template<typename ... TColumns>
+    Where select(TColumns const & ... columns) {
+        return Where();
+    }
+    Where select() {
+        return Where();
+    }
+};
+
+
+template<typename ... TTables>
+Select from(TTables const & ... tables) {
+    return Select();
+}
+
+
+//SELECT
+//  [DISTINCT | DISTINCTROW | ALL]
+//  select_expression,...
+//FROM table_references
+//[WHERE where_definition]
+//[GROUP BY {unsigned_integer | col_name | formula}]
+//[HAVING where_definition]
+//[ORDER BY {unsigned_integer | col_name | formula} [ASC | DESC], ...]
 
 
 //SELECT DATALENGTH(ProductName) as [SizeInBytes] FROM MyOrderTable
 TEST(query) {
-//    TAuthors authors;
+    TAuthors authors;
+
+    from(authors).select(authors.Rows.id, authors.Rows.name).getSQL();
+
+    from(authors).select(authors.Rows.id).order().getSQL();
+    from(authors).select(authors.Rows.id).group().getSQL();
+    from(authors).select(authors.Rows.id).where().group().getSQL();
+
+    from(authors).select().where().getSQL();
+    from(authors).select().where().group().getSQL();
+    from(authors).select().where().order().getSQL();
+    from(authors).select().group().getSQL();
+    from(authors).select().having().getSQL();
+    from(authors).select().group().having().order().getSQL();
+
+//    Condition(5) < 5;
     
-//    Select s(authors);
-//    s.Where(Condition());
+//    From f(authors);
+//    f.Select_();
 
 //    LOGT << TBook::TColumns().
 
@@ -107,6 +193,5 @@ TEST(query) {
 //    config.User     = "postgres";
 //    config.Password = "postgres";
 //    config.Database = "postgres";
-
-//    auto connector = Connector::create(config);
+//    auto connector  = Connector::create(config);
 }

@@ -103,8 +103,9 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 
     runTests(m_test_root_node, "");
 
-    LOGI << "\n\ntotal:  " << m_test_list.size() << "\nfailed: " << m_failed_paths.size();
-    // todo: tested. passed
+    LOGI << "\n\ntotal:  " << m_test_list.size()
+         << "\npassed: "  << m_passed_paths.size()
+         << "\nfailed: "  << m_failed_paths.size();
 
     if (!m_failed_paths.empty()) {
         string tests;
@@ -128,6 +129,7 @@ void Tester::runTests(INodeTest::TSharedPtr const &node, std::string const &path
                 LOGI << "RUN  " << run_path;
                 i->getValue()->run();
                 LOGI << "OK   " << run_path;
+                m_passed_paths.push_back(run_path);
             } catch (Exception const &e) {
                 string error = run_path + "\n" + e.what();
                 m_failed_paths.push_back(error);

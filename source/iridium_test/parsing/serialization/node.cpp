@@ -7,6 +7,7 @@
 #include <iridium/parsing/serialization/node.h>
 #include <iridium/parsing/implementation/node.h>
 #include <iridium/parsing/implementation/parser_xml.h>
+#include <iridium/parsing/implementation/parser_json.h>
 #include <iridium/enum.h>
 
 #include <iostream>
@@ -58,6 +59,7 @@ DEFINE_ROOT_NODE_BEGIN(Root2)
     DEFINE_NODE_LIST_BEGIN(SubItem1)
         DEFINE_ATTRIBUTE(C::TEnum, Enum, C::TEnum::ENUM1)
     DEFINE_NODE_LIST_END(SubItem1)
+    DEFINE_ATTRIBUTE_LIST(string, List)
 DEFINE_ROOT_NODE_END()
 
 
@@ -68,13 +70,19 @@ TEST(serialization) {
 
         TRoot2 root2(root_node);
 
-        ASSERT(1, equal, root2.getNode()->findChilds("/sub-item1").size());
+        ASSERT(1 , equal, root2.getNode()->findChilds("/sub-item1").size());
         root2.SubItem1.begin()->Enum.get(); // assert no throw
+
+        root2.List.add("item1");
+        root2.List.add("item2");
+        ASSERT(2 , equal, root2.getNode()->findChilds("/list").size());
+
+        return;
     }
 
 
     ASSERT("camel5-struct-name", equal, convertCamelToDashed("Camel5StructName"));
-    ASSERT("", equal,  convertCamelToDashed(""));
+    ASSERT("" , equal, convertCamelToDashed(""));
     ASSERT("a", equal, convertCamelToDashed("A"));
 
     INode::TSharedPtr node = CNode::create("root");
