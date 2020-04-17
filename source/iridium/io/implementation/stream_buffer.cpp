@@ -60,9 +60,9 @@ int  CStreamWriterBuffer::getID() const {
 }
 
 
-size_t CStreamWriterBuffer::write(Buffer const &buffer) {
-    m_buffer->insert(m_buffer->end(), buffer.begin(), buffer.end());
-    return buffer.size(); // ----->
+size_t CStreamWriterBuffer::write(Buffer::TSharedPtr const &buffer) {
+    m_buffer->insert(m_buffer->end(), buffer->begin(), buffer->end());
+    return buffer->size(); // ----->
 }
 
 

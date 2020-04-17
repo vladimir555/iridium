@@ -29,14 +29,14 @@ Light::TState Light::doAction(TEvent const &event) { \
 
 template<>
 void Light::handle<Light::TEvent::PUSH_BUTTON, Light::TState::LIGHT_OFF, Light::TState::LIGHT_ON>() {
-    std::cout << "enable  " << i << std::endl;
+    actions.push_back("enable  " + convertion::convert<std::string>(i));
     i++;
 }
 
 
 template<>
 void Light::handle<Light::TEvent::PUSH_BUTTON, Light::TState::LIGHT_ON, Light::TState::LIGHT_OFF>() {
-    std::cout << "disable " << i << std::endl;
+    actions.push_back("disable " + convertion::convert<std::string>(i));
     i++;
 }
 

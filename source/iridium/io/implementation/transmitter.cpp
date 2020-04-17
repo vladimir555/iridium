@@ -124,10 +124,10 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
        ((m_writer->getID() == event->stream->getID() &&
         (event->type & Event::TType::WRITE)))))
     {
-        auto size =  m_writer->write(*m_buffers.front());
-        if  (size == m_buffers.front()->size())
+        auto size =  m_writer->write(m_buffers.front());
+        if  (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
-        else {
+        } else {
             if (size > 0) {
                 Buffer::TSharedPtr buffer = m_buffers.front();
                 buffer->assign(buffer->begin() + size, buffer->end());

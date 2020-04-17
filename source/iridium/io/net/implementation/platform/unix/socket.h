@@ -37,12 +37,12 @@ public:
 
     int     getID() const override;
 
-    size_t  write(Buffer const &buffer) override;
+    size_t  write(Buffer::TSharedPtr const &buffer) override;
     Buffer::TSharedPtr read(size_t const &size) override;
     
 //    void    flush() override;
 
-private:
+protected:
     CSocket(URL const &url, int const &fd);
 
     URL     getPeerURL(int const &fd);

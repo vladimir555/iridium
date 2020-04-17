@@ -56,7 +56,7 @@ Buffer::TSharedPtr CStreamSplitter::read(size_t const &size) {
 }
 
     
-size_t CStreamSplitter::write(Buffer const &buffer) {
+size_t CStreamSplitter::write(Buffer::TSharedPtr const &buffer) {
     if (m_writer)
         return m_writer->write(buffer); // ----->
     else

@@ -6,26 +6,22 @@
 #define HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC
 
 
-#include "iridium/net/socket.h"
+#include "iridium/io/net/socket.h"
 
 
 namespace iridium {
 namespace encryption {
 
 
-class ISSL {
+class ISSL: public io::IStreamPort {
 public:
-    virtual ~ISSL() = default;
-    DEFINE_SMART_PTR(ISSL)
-    virtual void write(net::ISocket::TPacket const &packet) = 0;
-    virtual net::ISocket::TPacket read(size_t const &size) = 0;
+    DEFINE_INTERFACE(ISSL)
 };
 
 
 class IContext {
 public:
-    virtual ~IContext() = default;
-    DEFINE_SMART_PTR(IContext)
+    DEFINE_INTERFACE(IContext)
     virtual ISSL::TSharedPtr accept(int const &fd) = 0;
 };
 

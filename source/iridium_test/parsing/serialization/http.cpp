@@ -29,7 +29,7 @@ namespace net {
 namespace http {
 
 
-string const request_example = ""
+string const request_example =
 "GET / HTTP/1.1\n"
 "host: www.google.com\n"
 "user-agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; ru; rv:1.9.2) Gecko/20100115 Firefox/3.6 GTB7.1\n"
@@ -42,7 +42,7 @@ string const request_example = ""
 "cookie: PREF=ID=2578ccacb1ecf2aa:U=3a0a80ae418769c4:TM=1264579766:LM=1284111039:DV=sTIUytipGDoC:S=N0XC7wB0v7c6CCnH\n";
 
 
-string const responce_example = ""
+string const responce_example =
 "HTTP/1.1 200 OK\n"
 "date: Mon, 27 Jul 2009 12:28:53 GMT\n"
 "server: Apache/2.2.14 (Win32)\n"
@@ -102,9 +102,9 @@ TEST(http_response) {
     auto node_  = http.getNode();
     auto str    = parser->compose(node_);
 
-    LOGT << "response:" << str;
+//    LOGT << "response:" << str;
 
-//    ASSERT_EQ(responce_example, str);
+// todo:   ASSERT(responce_example, equal, str);
 }
 
 

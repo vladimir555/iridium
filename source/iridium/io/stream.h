@@ -39,6 +39,7 @@ class IStreamReader: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamReader)
     /// return nullptr on EOF, empty buffer on not ready data
+    /// size = 0 returns last accumulated buffer if exists
     virtual Buffer::TSharedPtr read(size_t const &size) = 0;
 };
 
@@ -46,7 +47,7 @@ public:
 class IStreamWriter: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamWriter)
-    virtual size_t write(Buffer const &buffer) = 0;
+    virtual size_t write(Buffer::TSharedPtr const &buffer) = 0;
 };
 
     

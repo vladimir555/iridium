@@ -6,8 +6,9 @@
 #define HEADER_BUILD_FLAGS_C48326BD_8009_40B6_880F_590C8A2F2371
 
 
+// build macroses defined in CMakeList.txt
 //#define BUILD_FLAG_MYSQL
-#define BUILD_FLAG_POSTGRESQL
+//#define BUILD_FLAG_POSTGRES
 //#define BUILD_FLAG_OPENSSL
 
 

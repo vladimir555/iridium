@@ -63,7 +63,7 @@ void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
     auto text_writer    = CFileStreamWriter::create(file_name);
     auto line           = parser->compose(root_node);
 
-    text_writer->write(Buffer(line.begin(), line.end()));
+    text_writer->write(Buffer::create(line.begin(), line.end()));
 }
 
 

@@ -134,10 +134,16 @@ std::string convertFunctionNameToLogFunctionName(std::string const &name) {
     if (lpos == std::string::npos)
         lpos = 0;
 
+    while (!std::isalpha(name[lpos]) && lpos < name.size())
+        lpos++;
+
     std::string result = name.substr(lpos, rpos - lpos);
 
     if (result.size() < DEFAULT_FUNC_NAME_SIZE)
         result.append(DEFAULT_FUNC_NAME_SIZE - result.size(), ' ');
+
+    if (result.size() > 1)
+        result = split(result, "::").back();
 
     return result; // ----->
 }

@@ -10,6 +10,7 @@
 #include "iridium/smart_ptr.h"
 #include <vector>
 #include <string>
+#include <list>
 
 
 namespace iridium {
@@ -21,6 +22,7 @@ public:
     DEFINE_CREATE(Buffer)
     Buffer() = default;
     Buffer(std::string const &str);
+    Buffer(std::list<Buffer::TSharedPtr> const &buffers);
     template<typename ... TArgs>
     Buffer(TArgs ... args): std::vector<unsigned char>(args ...) {}
 };

@@ -1,5 +1,7 @@
 #include <iridium/enum.h>
 
+#include <string>
+#include <list>
 
 
 namespace iridium {
@@ -31,6 +33,8 @@ public:
 
 
     int i = 0;
+
+    std::list<std::string> actions;
 };
 
 

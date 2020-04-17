@@ -114,7 +114,7 @@ void CFileCache::finalize() {
 
 size_t CFileCache::push(string const &line) {
     auto line_ = MARKER_CACHED_LINE + line;
-    m_file_writer->write(Buffer(line_.begin(), line_.end()));
+    m_file_writer->write(Buffer::create(line_.begin(), line_.end()));
     m_lines.push_back(make_shared<string>(line));
     return m_lines.size();
 }
@@ -135,7 +135,7 @@ void CFileCache::remove(size_t const &id) {
     if (id < m_lines.size()) {
         if (m_lines[id]) {
             auto line = MARKER_REMOVED_INDEX + convert<string>(id);
-            m_file_writer->write(Buffer(line.begin(), line.end()));
+            m_file_writer->write(Buffer::create(line.begin(), line.end()));
             m_lines[id].reset();
         }
     } else

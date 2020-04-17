@@ -97,22 +97,22 @@ Buffer::TSharedPtr CFileStream::read(size_t const &size) {
 }
 
     
-size_t CFileStream::write(Buffer const &line) {
+size_t CFileStream::write(Buffer::TSharedPtr const &line) {
     if (!m_file)
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
 
-    size_t count = fwriteInternal(line.data(), 1, line.size(), m_file);
+    size_t count = fwriteInternal(line->data(), 1, line->size(), m_file);
 
 //    if (count == 0) {
 //        LOGT << "fd " << getID() << " empty write";
 //    }
 
-    if (count != line.size())
+    if (count != line->size())
         throw std::runtime_error(
             "write file '"          + m_file_name + "'" +
             " mode "                + convert<string>(m_open_mode) +
             " error: was written "  + convert<string>(count) +
-            " from "                + convert<string>(line.size()) +
+            " from "                + convert<string>(line->size()) +
             " bytes: "              + strerrorInternal(errno)); // ----->
 
     return count; // ----->

@@ -69,7 +69,7 @@ CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const
     for (auto const &e : events) {
         auto line = makeLine(e);
         line.push_back('\n');
-        m_file_writer->write(Buffer(line.begin(), line.end()));
+        m_file_writer->write(Buffer::create(line.begin(), line.end()));
     }
 
     m_file_writer->flush();

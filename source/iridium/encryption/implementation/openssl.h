@@ -13,7 +13,7 @@
 
 
 #include "iridium/pattern/singleton.h"
-#include "iridium/net/socket.h"
+#include "iridium/io/net/socket.h"
 #include "iridium/smart_ptr.h"
 #include "iridium/enum.h"
 
@@ -39,7 +39,6 @@ public:
     typedef SSL     TSSL;
     virtual ~API();
 
-
     DEFINE_ENUM(
         TErrorCode,
         ERROR_CODE_R_SYS_LIB    = ERR_R_SYS_LIB,
@@ -53,30 +52,30 @@ public:
         ERROR_CODE_R_DSA_LIB    = ERR_R_DSA_LIB,
         ERROR_CODE_R_X509_LIB   = ERR_R_X509_LIB,
         ERROR_CODE_R_ASN1_LIB   = ERR_R_ASN1_LIB,
-        ERROR_CODE_R_CONF_LIB   = ERR_R_CONF_LIB,
-        ERROR_CODE_R_CRYPTO_LIB = ERR_R_CRYPTO_LIB,
+//        ERROR_CODE_R_CONF_LIB   = ERR_R_CONF_LIB,
+//        ERROR_CODE_R_CRYPTO_LIB = ERR_R_CRYPTO_LIB,
         ERROR_CODE_R_EC_LIB     = ERR_R_EC_LIB,
-        ERROR_CODE_R_SSL_LIB    = ERR_R_SSL_LIB,
+//        ERROR_CODE_R_SSL_LIB    = ERR_R_SSL_LIB,
         ERROR_CODE_R_BIO_LIB    = ERR_R_BIO_LIB,
         ERROR_CODE_R_PKCS7_LIB  = ERR_R_PKCS7_LIB,
         ERROR_CODE_R_X509V3_LIB = ERR_R_X509V3_LIB,
-        ERROR_CODE_R_PKCS12_LIB = ERR_R_PKCS12_LIB,
-        ERROR_CODE_R_RAND_LIB   = ERR_R_RAND_LIB,
-        ERROR_CODE_R_DSO_LIB    = ERR_R_DSO_LIB,
+//        ERROR_CODE_R_PKCS12_LIB = ERR_R_PKCS12_LIB,
+//        ERROR_CODE_R_RAND_LIB   = ERR_R_RAND_LIB,
+//        ERROR_CODE_R_DSO_LIB    = ERR_R_DSO_LIB,
         ERROR_CODE_R_ENGINE_LIB = ERR_R_ENGINE_LIB,
-        ERROR_CODE_R_OCSP_LIB   = ERR_R_OCSP_LIB,
+//        ERROR_CODE_R_OCSP_LIB   = ERR_R_OCSP_LIB,
         ERROR_CODE_R_UI_LIB     = ERR_R_UI_LIB,
-        ERROR_CODE_R_COMP_LIB   = ERR_R_COMP_LIB,
+//        ERROR_CODE_R_COMP_LIB   = ERR_R_COMP_LIB,
         ERROR_CODE_R_ECDSA_LIB  = ERR_R_ECDSA_LIB,
-        ERROR_CODE_R_ECDH_LIB   = ERR_R_ECDH_LIB,
-        ERROR_CODE_R_STORE_LIB  = ERR_R_STORE_LIB,
-        ERROR_CODE_R_TS_LIB     = ERR_R_TS_LIB,
+//        ERROR_CODE_R_ECDH_LIB   = ERR_R_ECDH_LIB,
+//        ERROR_CODE_R_STORE_LIB  = ERR_R_STORE_LIB,
+//        ERROR_CODE_R_TS_LIB     = ERR_R_TS_LIB,
 
         ERROR_CODE_R_NESTED_ASN1_ERROR          = ERR_R_NESTED_ASN1_ERROR,
-        ERROR_CODE_R_BAD_ASN1_OBJECT_HEADER     = ERR_R_BAD_ASN1_OBJECT_HEADER,
-        ERROR_CODE_R_BAD_GET_ASN1_OBJECT_CALL   = ERR_R_BAD_GET_ASN1_OBJECT_CALL,
-        ERROR_CODE_R_EXPECTING_AN_ASN1_SEQUENCE = ERR_R_EXPECTING_AN_ASN1_SEQUENCE,
-        ERROR_CODE_R_ASN1_LENGTH_MISMATCH       = ERR_R_ASN1_LENGTH_MISMATCH,
+//        ERROR_CODE_R_BAD_ASN1_OBJECT_HEADER     = ERR_R_BAD_ASN1_OBJECT_HEADER,
+//        ERROR_CODE_R_BAD_GET_ASN1_OBJECT_CALL   = ERR_R_BAD_GET_ASN1_OBJECT_CALL,
+//        ERROR_CODE_R_EXPECTING_AN_ASN1_SEQUENCE = ERR_R_EXPECTING_AN_ASN1_SEQUENCE,
+//        ERROR_CODE_R_ASN1_LENGTH_MISMATCH       = ERR_R_ASN1_LENGTH_MISMATCH,
         ERROR_CODE_R_MISSING_ASN1_EOS           = ERR_R_MISSING_ASN1_EOS,
 
         ERROR_CODE_R_FATAL                          = ERR_R_FATAL,
@@ -103,15 +102,28 @@ public:
     TContext *createContext(
         std::string const &file_name_private_key,
         std::string const &file_name_certificate);
+
     void releaseContext(TContext *context);
+
     TSSL *createSSL(TContext *context, int const &file_descriptor);
+
     void releaseSSL(TSSL *ssl);
+
     void acceptSSL(TSSL *ssl, bool const &is_blocking_mode);
-    void write(TSSL *ssl, net::ISocket::TPacket const &packet);
-    net::ISocket::TPacket read(TSSL *ssl, size_t const &size);
+
+    TSSLErrorCode connectSSL(TSSL *ssl);
+
+    TSSLErrorCode doHandshake(TSSL *ssl);
+
+    size_t write(TSSL *ssl, io::Buffer::TSharedPtr const &packet);
+
+    io::Buffer::TSharedPtr read(TSSL *ssl, size_t const &size);
+
     std::string getErrorString();
     std::string getErrorString(int const &code);
+
     std::string getSSLErrorString(TSSL *ssl, int const &code);
+    TSSLErrorCode getSSLErrorCode(TSSL *ssl, int const &code);
 
 private:
     friend class pattern::Singleton<API>;
@@ -129,18 +141,19 @@ public:
         std::string const &file_name_private_key    = DEFAULT_FILE_NAME_PRIVATE_KEY,
         std::string const &file_name_certificate    = DEFAULT_FILE_NAME_CERTIFICATE);
     virtual ~CContext();
-    DEFINE_SMART_PTR(CContext)
     DEFINE_CREATE(CContext)
 
     class CSSL: public ISSL {
     public:
         CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode);
         virtual ~CSSL();
-        DEFINE_SMART_PTR(CSSL)
         DEFINE_CREATE(CSSL)
 
-        void write(net::ISocket::TPacket const &packet) override;
-        net::ISocket::TPacket read(size_t const &size) override;
+        size_t write(io::Buffer::TSharedPtr const &packet) override;
+        io::Buffer::TSharedPtr read(size_t const &size) override;
+        int getID() const override;
+        void initialize() override;
+        void finalize() override;
     private:
         friend class CContext;
         void accept();

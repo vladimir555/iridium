@@ -37,7 +37,7 @@ int CFileStreamWriter::getID() const {
 }
 
 
-size_t CFileStreamWriter::write(Buffer const &buffer) {
+size_t CFileStreamWriter::write(Buffer::TSharedPtr const &buffer) {
     return CFileStream::write(buffer); // ----->
 }
 

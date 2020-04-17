@@ -41,7 +41,7 @@ public:
     void    finalize() override;
     int     getID() const override;
 
-    size_t  write(Buffer const &buffer) override;
+    size_t  write(Buffer::TSharedPtr const &buffer) override;
 
 private:
     Buffer::TSharedPtr  m_buffer;

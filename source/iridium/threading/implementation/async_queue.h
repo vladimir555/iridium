@@ -20,6 +20,7 @@
 #include "condition.h"
 
 
+//#include <iostream>
 namespace iridium {
 namespace threading {
 namespace implementation {
@@ -100,10 +101,12 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
+//    std::cout << "pop " << is_waiting << " " << m_is_waiting << " " << m_is_empty << std::endl;
     if (is_waiting && m_is_waiting && m_is_empty)
         m_condition->wait();
 
     LOCK_SCOPE_FAST
+    m_is_empty = true;
     return std::move(m_items);
 }
 

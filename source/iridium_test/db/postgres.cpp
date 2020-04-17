@@ -6,7 +6,7 @@
 #include <iridium/build_flags.h>
 
 
-#ifdef BUILD_FLAG_POSTGRESQL
+#ifdef BUILD_FLAG_POSTGRES
 
 
 #include <iridium/db/implementation/postgres_connector.h>
@@ -30,12 +30,12 @@ TEST(postgres) {
     connector->finalize();
 
     ASSERT(0, less, rows.size());
-    less(0, rows.size(), "", "");
-    for (auto const &row: rows) {
-        LOGT << "";
-        for (auto const &i: row)
-            LOGT << i.first << " = " << i.second;
-    }
+//    less(0, rows.size(), "", "");
+//    for (auto const &row: rows) {
+//        LOGT << "";
+//        for (auto const &i: row)
+//            LOGT << i.first << " = " << i.second;
+//    }
 }
 
 
@@ -43,4 +43,4 @@ TEST(postgres) {
 } // iridium
 
 
-#endif // BUILD_FLAG_POSTGRESQL
+#endif // BUILD_FLAG_POSTGRES

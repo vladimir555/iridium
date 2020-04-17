@@ -83,7 +83,7 @@ CSocketServerAcceptor::CSocketServerAcceptor(
     m_peers             (Peers::create(m_protocol_factory, m_listener))
 {
     CWorkerPool<Peer::TSharedPtr>::TWorkerHandlers handlers;
-    for (auto i = 0; i < threads_count; i++)
+    for (size_t i = 0; i < threads_count; i++)
         handlers.push_back(CPeerHandler::create());
     m_worker_pool_peer_handler = CWorkerPool<Peer::TSharedPtr>::create("peer_handler", handlers);
 }

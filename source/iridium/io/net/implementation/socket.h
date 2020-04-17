@@ -16,6 +16,7 @@ namespace net {
 namespace implementation {
 
 
+// todo: factory
 typedef platform::CSocket CSocket;
 
 

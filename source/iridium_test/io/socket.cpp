@@ -7,6 +7,7 @@
 #include <iridium/io/net/url.h>
 #include <iridium/io/net/dns.h>
 #include <iridium/io/net/implementation/socket_server.h>
+#include <iridium/io/net/implementation/socket_client.h>
 #include <iridium/logging/logger.h>
 #include <iridium/convertion/convert.h>
 #include <iridium/io/net/implementation/platform/windows/wsa.h>
@@ -30,6 +31,7 @@ using iridium::io::fs::implementation::CFileStream;
 //using iridium::io::implementation::CStreamProxy;
 using iridium::io::protocol::http::implementation::CProtocolFactory;
 using iridium::io::net::implementation::CSocketServer;
+using iridium::io::net::implementation::CSocketClient;
 
 
 #include <set>
@@ -41,54 +43,30 @@ namespace socket {
 
 
 TEST(socket_loopback) {
-
-    //std::set<int> s1{ 1, 2 };
-    //std::set<int> s2{ 2, 1 };
-    //std::set<IStream::TSharedPtr> s;
-    //std::map< std::set<int>, int > m;
-
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
-//    IStreamReader::TSharedPtr reader = fs::implementation::CFileStreamReader::create("html/index.html");
-//    reader->initialize();
-//    LOGT << "read size = " << reader->read(8192).size();
-//    reader->finalize();
-//    return;
+//    auto protocol_factory   = CProtocolFactory::create();
+//    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
 
-    //LOGT << "set: '" << (bool)(s1 == s2) << "'";
-    //m[s1] = 1;
-    //LOGT << m[s1];
-    //m[s2] = 2;
-    //LOGT << m[s1];
-    //LOGT << m.size();
-    //return;
-    
-//    {
-//        auto reader = CFileStream::create("index.html", CFileStream::TOpenMode::READ);
-//        auto writer = CFileStream::create("index.html.output", CFileStream::TOpenMode::WRITE);
-//
-//        reader->initialize();
-//        writer->initialize();
-//
-//        IStreamProxy::TSharedPtr  proxy  = CStreamProxy::create(reader, writer);
-//
-//        while (proxy->transmit());
-//
-//        reader->finalize();
-//        writer->finalize();
-//
-//        return;
-//    }
-    
+//    socket->initialize();
+//    LOGT << "begin";
+//    threading::sleep(500000);
+//    LOGT << "end";
+//    socket->finalize();
 
 
-    auto protocol_factory   = CProtocolFactory::create();
-    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
-
+//    auto socket = CSocketClient::create(URL("http://127.0.0.1:55555"));
+    auto socket = CSocketClient::create(URL("https://example.com"));
+    string request = ""
+    "GET / HTTP/1.1\r\n"
+    "Host: example.com:80\r\n"
+    "User-Agent: curl/7.58.0\r\n"
+    "Accept: */*"
+    "\r\n"
+    "\r\n";
     socket->initialize();
-    LOGT << "begin";
-    threading::sleep(500000);
-    LOGT << "end";
+    socket->write(Buffer::create(request));
+    LOGT << "read\n'" << *socket->read(10) << "'";
     socket->finalize();
 }
 

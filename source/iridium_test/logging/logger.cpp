@@ -35,7 +35,7 @@ TEST(logger) {
 
     INode::TSharedPtr root = CNode::create("logger");
     root->addChild("level", "TRACE_LEVEL");
-    root->addChild("console-sink")->addChild("level", "TRACE_LEVEL");
+//    root->addChild("console-sink")->addChild("level", "TRACE_LEVEL");
     auto file_sink = root->addChild("file-sink");
     file_sink->addChild("level", "TRACE_LEVEL");
     file_sink->addChild("file-name", ".log");

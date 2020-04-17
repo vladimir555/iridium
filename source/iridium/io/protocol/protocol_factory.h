@@ -19,7 +19,7 @@ namespace protocol {
 
 class IProtocolHandler {
 public:
-    DEFINE_INTERFACE(IProtocolHandler);
+    DEFINE_INTERFACE(IProtocolHandler)
     // result: do continue or not
     virtual bool update(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) = 0;
 };

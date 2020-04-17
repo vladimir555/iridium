@@ -36,9 +36,9 @@ IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TType, c
 #ifdef BUILD_FLAG_MYSQL
 using iridium::db::implementation::CMySQLConnector;
 #endif // BUILD_FLAG_MYSQL
-#ifdef BUILD_FLAG_POSTGRESQL
+#ifdef BUILD_FLAG_POSTGRES
 using iridium::db::implementation::CPostgresConnector;
-#endif // BUILD_FLAG_POSTGRESQL
+#endif // BUILD_FLAG_POSTGRES
 
 
 namespace iridium {
@@ -53,10 +53,10 @@ IConnector::TSharedPtr createConnector(TDatebaseConnector const &config) {
     case TDatebaseConnector::TDBType::TType::MYSQL:
         return CMySQLConnector::create(config.Url, config.User, config.Password, config.Database); // ----->
 #endif // BUILD_FLAG_MYSQL
-#ifdef BUILD_FLAG_POSTGRESQL
+#ifdef BUILD_FLAG_POSTGRES
     case TDatebaseConnector::TDBType::POSTGRES:
         return  CPostgresConnector::create(config.Url, config.User, config.Password, config.Database); // ----->
-#endif // BUILD_FLAG_POSTGRESQL
+#endif // BUILD_FLAG_POSTGRES
     default:
         throw std::runtime_error("wrong config: unknown db type " + convert<string>(config.Type)); // ----->
     }

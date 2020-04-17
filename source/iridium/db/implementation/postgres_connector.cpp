@@ -5,7 +5,7 @@
 #include "iridium/build_flags.h"
 
 
-#ifdef BUILD_FLAG_POSTGRESQL
+#ifdef BUILD_FLAG_POSTGRES
 
 
 #include "postgres_connector.h"
@@ -64,7 +64,7 @@ void CPostgresConnector::initialize() {
         throw Exception("connect to postgresql '" + convert<string>(m_url) + "' error: " + error); // ----->
     }
 
-    LOGI << "initialization Postgres '" << m_url << "' database '" << m_database << "' done";
+//    LOGI << "initialization Postgres '" << m_url << "' database '" << m_database << "' done";
 }
 
 
@@ -79,11 +79,11 @@ void CPostgresConnector::executeCommand(std::string const &command) {
 
 
 CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
-    LOGT << "send sql query: " << query;
+//    LOGT << "send sql query: " << query;
     TRows rows;
 
     auto result = PQexec(m_connection, query.c_str());
-    LOGT << "status: " << int(PQresultStatus(result));
+//    LOGT << "status: " << int(PQresultStatus(result));
     if (PQresultStatus(result) == PGRES_TUPLES_OK) {
         for (int row_index = 0; row_index < PQntuples(result); row_index++) {
             TRow row;
@@ -118,4 +118,4 @@ CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
 } // iridium
 
 
-#endif // COMPILATION_FLAG_MYSQL
+#endif // BUILD_FLAG_POSTGRES

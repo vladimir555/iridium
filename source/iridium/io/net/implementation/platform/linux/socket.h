@@ -9,6 +9,50 @@
 #include "../unix/socket.h"
 
 
+#ifdef LINUX_PLATFORM
+#ifdef BUILD_FLAG_OPENSSL
+
+
+#include "iridium/encryption/implementation/openssl.h"
+
+
+namespace iridium {
+namespace io {
+namespace net {
+namespace implementation {
+namespace platform {
+
+
+class CSocket: public unix::CSocket {
+public:
+    DEFINE_IMPLEMENTATION(CSocket)
+    CSocket(URL const &url, bool const &is_server_mode);
+
+    void initialize() override;
+    void finalize() override;
+
+    ISocket::TSharedPtr accept() override;
+
+    size_t write(Buffer::TSharedPtr const &buffer) override;
+    Buffer::TSharedPtr read(size_t const &size) override;
+
+private:
+//    bool continueReadSSLConnect();
+
+    encryption::implementation::openssl::API::TContext  *m_context;
+    encryption::implementation::openssl::API::TSSL      *m_ssl;
+    int m_ssl_init_step;
+};
+
+
+} // platform
+} // implementation
+} // net
+} // io
+} // iridium
+
+
+#else
 namespace iridium {
 namespace io {
 namespace net {
@@ -24,6 +68,8 @@ typedef unix::CSocket CSocket;
 } // net
 } // io
 } // iridium
+#endif // BUILD_FLAG_OPENSSL
+#endif // LINUX_PLATFORM
 
 
 #endif // HEADER_SOCKET_952003F7_E74B_4AAA_AE03_D02905A2C89B

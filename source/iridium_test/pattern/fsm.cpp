@@ -64,6 +64,8 @@ public:
     Light();
     virtual ~Light() = default;
 
+    list<string> getLastActions() const;
+
 // todo:
 //    template<TEvent::TEnumInternal, TState::TEnumInternal, TState::TEnumInternal>
 //    class Handler {
@@ -80,7 +82,8 @@ private:
     template<TEvent::TEnumInternal, TState::TEnumInternal, TState::TEnumInternal>
     void handle();
 
-    int i = 0;
+    int             m_i = 0;
+    list<string>    m_actions;
 };
 
 
@@ -91,15 +94,15 @@ private:
 
 template<>
 void Light::handle<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON>() {
-    cout << "enable  " << i << std::endl;
-    i++;
+    m_actions.push_back("enable  " + convertion::convert<string>(m_i));
+    m_i++;
 }
 
 
 template<>
 void Light::handle<TEvent::PUSH_BUTTON, TState::LIGHT_ON, TState::LIGHT_OFF>() {
-    cout << "disable " << i << std::endl;
-    i++;
+    m_actions.push_back("disable " + convertion::convert<string>(m_i));
+    m_i++;
 }
 
 
@@ -113,6 +116,11 @@ Light::Light()
 {}
 
 
+std::list<string> Light::getLastActions() const {
+    return m_actions;
+}
+
+
 TEST(fsm_map) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     Light light;
@@ -120,6 +128,14 @@ TEST(fsm_map) {
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
+
+    ASSERT(
+        list({
+            string("enable  0"),
+            string("disable 1"),
+            string("enable  2"),
+        }), equal, light.getLastActions()
+    );
 }
 
 
@@ -130,6 +146,14 @@ TEST(fsm_switch) {
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
+
+    ASSERT(
+        list({
+            string("enable  0"),
+            string("disable 1"),
+            string("enable  2"),
+        }), equal, light.actions
+    );
 }
 
 

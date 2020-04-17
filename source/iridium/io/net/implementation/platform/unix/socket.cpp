@@ -19,15 +19,20 @@
 #include <string>
 #include <cstring>
 
+#include <vector>
+
 #include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
 
 
+#include <linux/tls.h>
+#include <netinet/tcp.h>
 using iridium::io::Buffer;
 using iridium::io::IStream;
 using iridium::convertion::convert;
 using iridium::io::net::URL;
 using std::string;
+using std::vector;
 
 
 template<typename T>
@@ -100,8 +105,6 @@ void CSocket::initialize() {
     address.sin_port            = htons( *m_url.getPort() );
 
     if (m_is_server_mode) {
-        // bind, listen
-
         int yes = 1;
         // todo: TCP_NODELAY
         setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
@@ -109,7 +112,6 @@ void CSocket::initialize() {
         assertOK(::bind   (m_socket, (struct sockaddr *) &address, sizeof(address)), "socket bind error", m_url);
         assertOK(::listen (m_socket, SOMAXCONN), "socket listen error", m_url);
     } else {
-        // connect
         assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error", m_url);
     }
     setBlockingMode(false);
@@ -148,17 +150,15 @@ int CSocket::getID() const {
 }
 
 
-size_t CSocket::write(Buffer const &buffer_) {
-    auto buffer = static_cast<void const *>(buffer_.data());
+size_t CSocket::write(Buffer::TSharedPtr const &buffer_) {
+    auto buffer = static_cast<void const *>(buffer_->data());
     auto size   = DEFAULT_SOCKET_BUFFER_SIZE;
     
-    if (size > buffer_.size())
-        size = buffer_.size();
+    if (size > buffer_->size())
+        size = buffer_->size();
     
     auto result = ::send(m_socket, buffer, size, 0);
-//    LOGT << "fd " << m_socket << " size " << result;
-
-//    LOGT << "fd " << m_socket << " size = " << result;
+    LOGT << "fd " << m_socket << " size " << result;
 
     if (result < 0) {
         if (errno == EAGAIN)
@@ -172,19 +172,20 @@ size_t CSocket::write(Buffer const &buffer_) {
         result == EWOULDBLOCK
     )
         return
-        buffer_.size() < DEFAULT_SOCKET_BUFFER_SIZE ?
-        buffer_.size() : DEFAULT_SOCKET_BUFFER_SIZE; // ----->
+        buffer_->size() < DEFAULT_SOCKET_BUFFER_SIZE ?
+        buffer_->size() : DEFAULT_SOCKET_BUFFER_SIZE; // ----->
     else
         return result; // ----->
 
-    return buffer_.size(); // ----->
+    return buffer_->size(); // ----->
 }
 
 
-Buffer::TSharedPtr CSocket::read(size_t const &size) {
+Buffer::TSharedPtr CSocket::read(size_t const &size_) {
+    auto const size = size_ > 0 ? size_: DEFAULT_SOCKET_BUFFER_SIZE;
     char buffer[size];
     auto received_size  = ::recv(m_socket, buffer, size - 1, 0);
-//    LOGT << "fd " << m_socket << " size " << received_size;
+    LOGT << "fd " << m_socket << " size " << received_size;
 
 //    if (m_is_blocking) {
 //        assertOK(received_size, "socket read error", m_url);

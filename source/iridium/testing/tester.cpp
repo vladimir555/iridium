@@ -103,9 +103,9 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 
     runTests(m_test_root_node, "");
 
-    LOGI << "\n\ntotal:  " << m_test_list.size()
-         << "\npassed: "  << m_passed_paths.size()
-         << "\nfailed: "  << m_failed_paths.size();
+    LOGI << "\npassed: "    << m_passed_paths.size()
+         << "\nfailed: "    << m_failed_paths.size()
+         << "\ntotal:  "    << m_test_list.size();
 
     if (!m_failed_paths.empty()) {
         string tests;

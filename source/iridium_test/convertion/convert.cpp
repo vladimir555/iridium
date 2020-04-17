@@ -228,16 +228,15 @@ TEST(enum_) {
 
     {
         TEnum e = TEnum::E1;
-        cout << convert<string>(e) << endl;
+        ASSERT("E1", equal, convert<string>(e));
     }
 
     {
         TEnum e = static_cast<TEnum::TEnumInternal>(1);
-        cout << convert<string>(e) << endl;
+        ASSERT("E2", equal, convert<string>(e));
     }
 
     ASSERT(convert<TEnum>(string("E55")), std::runtime_error);
-//    ASSERT(convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))), std::runtime_error);
     ASSERT("UNKNOWN", equal, convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))));
 
     std::list<TEnum::TEnumInternal> l;

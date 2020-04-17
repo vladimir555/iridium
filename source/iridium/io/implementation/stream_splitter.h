@@ -30,7 +30,7 @@ public:
     void    set(IStreamWriter::TSharedPtr const &writer) override;
     
     Buffer::TSharedPtr  read (size_t const &size) override;
-    size_t              write(Buffer const &buffer) override;
+    size_t              write(Buffer::TSharedPtr const &buffer) override;
     
 private:
     IStreamReader::TSharedPtr   m_reader;

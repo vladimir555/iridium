@@ -39,6 +39,15 @@ DEFINE_ROOT_NODE_BEGIN(Authors)
 DEFINE_ROOT_NODE_END()
 
 
+DEFINE_ROOT_NODE_BEGIN(Books)
+    DEFINE_NODE_BEGIN(Rows)
+        DEFINE_ATTRIBUTE(uint64_t   , id_author, {})
+        DEFINE_ATTRIBUTE(uint64_t   , id    , {})
+        DEFINE_ATTRIBUTE(std::string, name  , {})
+    DEFINE_NODE_END(Rows)
+DEFINE_ROOT_NODE_END()
+
+
 //template<typename TNode>
 //class Table {
 //public:
@@ -91,6 +100,9 @@ struct Condition {
     Condition operator && (TValue const &value) {
         return *this;
     }
+
+private:
+    TValue m_value;
 };
 
 
@@ -123,7 +135,8 @@ struct Group: Having {
 
 
 struct Where: Group {
-    Group where() {
+    template<typename TValue>
+    Group where(Condition<TValue> const &condition) {
         return Group();
     }
 };
@@ -146,6 +159,12 @@ Select from(TTables const & ... tables) {
 }
 
 
+template<typename TTable1, typename TTable2>
+struct Join: public TTable1, public TTable2 {
+    // todo: join types enum in constructor
+};
+
+
 //SELECT
 //  [DISTINCT | DISTINCTROW | ALL]
 //  select_expression,...
@@ -158,20 +177,24 @@ Select from(TTables const & ... tables) {
 
 //SELECT DATALENGTH(ProductName) as [SizeInBytes] FROM MyOrderTable
 TEST(query) {
+    Join<TAuthors, TBooks> join_authors_books;
+
     TAuthors authors;
 
     from(authors).select(authors.Rows.id, authors.Rows.name).getSQL();
 
     from(authors).select(authors.Rows.id).order().getSQL();
     from(authors).select(authors.Rows.id).group().getSQL();
-    from(authors).select(authors.Rows.id).where().group().getSQL();
+    from(authors).select(authors.Rows.id).where(Condition(5) < 5).group().getSQL();
 
-    from(authors).select().where().getSQL();
-    from(authors).select().where().group().getSQL();
-    from(authors).select().where().order().getSQL();
+    from(authors).select().where(Condition(5) < 5).getSQL();
+    from(authors).select().where(Condition(5) < 5).group().getSQL();
+    from(authors).select().where(Condition(5) < 5).order().getSQL();
     from(authors).select().group().getSQL();
     from(authors).select().having().getSQL();
     from(authors).select().group().having().order().getSQL();
+
+    from(Join<TAuthors, TBooks>()).select(authors.Rows.id, authors.Rows.name).getSQL();
 
 //    Condition(5) < 5;
     

@@ -49,7 +49,7 @@ void CListener::add(IStream::TSharedPtr const &stream) {
 
         struct epoll_event event = {};
 
-        event.events    = EPOLLIN | EPOLLOUT | EPOLLET;
+        event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
         event.data.fd   = stream->getID();
 
     //    auto result     =
@@ -81,18 +81,12 @@ CListener::TEvents CListener::wait() {
     CListener::TEvents events;
 
     for (auto i = 0; i < count; i++) {
-//        LOGT << "epoll event: " << epoll_events[i].events;
-        Event::TType event_type = Event::TType::NONE;
-
+        LOGT << "epoll event code: " << epoll_events[i].events;
         if (epoll_events[i].events & EPOLLIN)
-            event_type = event_type | Event::TType::READ;
+            events.push_back(Event::create(Event::TType::READ,  m_map_fd_stream[epoll_events[i].data.fd]));
 
         if (epoll_events[i].events & EPOLLOUT)
-            event_type = event_type | Event::TType::WRITE;
-
-        auto event = Event::create(Event::TType::READ, m_map_fd_stream[epoll_events[i].data.fd]);
-//        LOGT << "fd " << event->stream->getID() << " type " << event->type << " code " << epoll_events[i].events;
-        events.push_back(event);
+            events.push_back(Event::create(Event::TType::WRITE, m_map_fd_stream[epoll_events[i].data.fd]));
     }
 
     return events; // ----->

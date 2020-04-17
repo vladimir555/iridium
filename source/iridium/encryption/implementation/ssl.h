@@ -24,44 +24,35 @@ namespace encryption {
 namespace implementation {
 
 
-#ifdef BUILD_FLAG_OPENSSL
-typedef openssl::CContext CContext;
-#else
-// fake ssl context
-class CContext: public IContext {
+class CContextDefault: public IContext {
 public:
-    CContext(
+    DEFINE_IMPLEMENTATION(CContextDefault)
+    CContextDefault(
         bool        const &is_blocking_mode         = false,
         std::string const &file_name_private_key    = DEFAULT_FILE_NAME_PRIVATE_KEY,
-        std::string const &file_name_certificate    = DEFAULT_FILE_NAME_CERTIFICATE)
-    {
-        throw std::runtime_error("SSL not implemented"); // ----->
-    }
-    virtual ~CContext() = default;
-    DEFINE_SMART_PTR(CContext)
-    DEFINE_CREATE(CContext)
+        std::string const &file_name_certificate    = DEFAULT_FILE_NAME_CERTIFICATE);
 
     class CSSL: public ISSL {
     public:
-        CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode) {
-            throw std::runtime_error("SSL not implemented"); // ----->
-        }
-        virtual ~CSSL() = default;
-        DEFINE_SMART_PTR(CSSL)
-        DEFINE_CREATE(CSSL)
+        DEFINE_IMPLEMENTATION(CSSL)
+        CSSL(IContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode);
 
-        void write(net::ISocket::TPacket const &packet) override {}
-        net::ISocket::TPacket read(size_t const &size) override {
-            throw std::runtime_error("SSL not implemented"); // ----->
-            return net::ISocket::TPacket(); // ----->
-        }
+        size_t write(io::Buffer::TSharedPtr const &packet) override;
+        io::Buffer::TSharedPtr read(size_t const &size) override;
+
+        int getID() const override;
+        void initialize() override;
+        void finalize() override;
     };
 
-    ISSL::TSharedPtr accept(int const &fd) override {
-        throw std::runtime_error("SSL not implemented"); // ----->
-        return nullptr; // ----->
-    }
+    ISSL::TSharedPtr accept(int const &fd) override;
 };
+
+
+#ifdef BUILD_FLAG_OPENSSL
+typedef openssl::CContext CContext;
+#else
+typedef CContextDefault CContext;
 #endif // BUILD_FLAG_OPENSSL
 
 

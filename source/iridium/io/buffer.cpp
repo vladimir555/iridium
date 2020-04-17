@@ -17,6 +17,12 @@ Buffer::Buffer(std::string const &str)
 {}
 
 
+Buffer::Buffer(std::list<Buffer::TSharedPtr> const &buffers) {
+    for (auto const &buffer: buffers)
+        this->insert(end(), buffer->begin(), buffer->end());
+}
+
+
 } // io
 } // iridium
 
