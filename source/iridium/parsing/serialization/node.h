@@ -318,7 +318,10 @@ std::string convertCamelToDashed(std::string const &camel);
         (iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
         iridium::parsing::INode::TSharedPtr getNode() const { \
             return iridium::parsing::serialization::Node<void>::getNode(); \
-        }
+        } \
+        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
+        iridium::parsing::serialization::Node<void> \
+        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {}
 
 
 #define DEFINE_ROOT_NODE_END() \
@@ -401,6 +404,10 @@ std::string convertCamelToDashed(std::string const &camel);
         iridium::parsing::serialization::NodeList<T##class_name> \
         (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
     } class_name = *this;
+
+
+#define DEFINE_NODE_EXTERNAL(class_name) \
+    T##class_name class_name = *this;
 
 
 #endif // HEADER_NODE_94200784_8C23_4200_B54C_65736B455736

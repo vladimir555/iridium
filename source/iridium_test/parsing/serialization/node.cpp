@@ -31,6 +31,16 @@ struct C {
 };
 
 
+DEFINE_ROOT_NODE_BEGIN(ExternalRoot)
+    DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue1")
+    DEFINE_NODE_BEGIN(FirstItem)
+        DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue1")
+        DEFINE_ATTRIBUTE(int, AttributeTwo)
+        DEFINE_ATTRIBUTE(C::TEnum, Enum)
+    DEFINE_NODE_END(FirstItem)
+DEFINE_ROOT_NODE_END()
+
+
 DEFINE_ROOT_NODE_BEGIN(Root)
     DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue1")
     DEFINE_NODE_BEGIN(FirstItem)
@@ -51,6 +61,8 @@ DEFINE_ROOT_NODE_BEGIN(Root)
     DEFINE_NODE_LIST_END(Item1)
 
     DEFINE_ATTRIBUTE_LIST(std::string, Array)
+
+    DEFINE_NODE_EXTERNAL(ExternalRoot)
 DEFINE_ROOT_NODE_END()
 
 
@@ -64,6 +76,8 @@ DEFINE_ROOT_NODE_END()
 
 
 TEST(serialization) {
+    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+
     {
         auto root_node = CNode::create("root2");
         root_node->addChild("sub-item1")->addChild("enum", "ENUM2");
@@ -76,10 +90,7 @@ TEST(serialization) {
         root2.List.add("item1");
         root2.List.add("item2");
         ASSERT(2 , equal, root2.getNode()->findChilds("/list").size());
-
-        return;
     }
-
 
     ASSERT("camel5-struct-name", equal, convertCamelToDashed("Camel5StructName"));
     ASSERT("" , equal, convertCamelToDashed(""));
@@ -94,6 +105,13 @@ TEST(serialization) {
     }
 
     node->addChild("second-item")->addChild("attribute-one", "second-item-value");
+
+    {
+        auto item = node->addChild("external-root")->addChild("first-item");
+        item->addChild("attribute-one", "value11");
+        item->addChild("attribute-two", "55");
+        item->addChild("enum", "ENUM1");
+    }
 
     TRoot(node).getNode(); // assert no throw
 
@@ -146,7 +164,12 @@ TEST(serialization) {
     result.clear();
     for (auto const &i: root.Array)
         result += i.get();
-    ASSERT("5432112345", equal, result);
+
+    ASSERT("5432112345"     , equal, result);
+    ASSERT("defaultValue1"  , equal, root.ExternalRoot.AttributeOne.get());
+    ASSERT("value11"        , equal, root.ExternalRoot.FirstItem.AttributeOne.get());
+    ASSERT(55               , equal, root.ExternalRoot.FirstItem.AttributeTwo.get());
+    ASSERT(C::TEnum::ENUM1  , equal, root.ExternalRoot.FirstItem.Enum.get());
 }
 
 
