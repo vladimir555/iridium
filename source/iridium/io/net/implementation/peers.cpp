@@ -74,12 +74,12 @@ void CPeerTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
 }
 
 
-IStreamReader::TSharedPtr CPeerTransmitter::getReader() const {
+IStreamReader::TConstSharedPtr CPeerTransmitter::getReader() const {
     return m_transmitter->getReader(); // ----->
 }
 
 
-IStreamWriter::TSharedPtr CPeerTransmitter::getWriter() const {
+IStreamWriter::TConstSharedPtr CPeerTransmitter::getWriter() const {
     return m_transmitter->getWriter(); // ----->
 }
 

@@ -14,6 +14,7 @@
 #include <iridium/threading/thread.h>
 
 #include <iridium/io/fs/implementation/file_stream_reader.h>
+#include <iridium/io/implementation/stream_buffer.h>
 
 #include <memory>
 
@@ -32,14 +33,73 @@ using iridium::io::fs::implementation::CFileStream;
 using iridium::io::protocol::http::implementation::CProtocolFactory;
 using iridium::io::net::implementation::CSocketServer;
 using iridium::io::net::implementation::CSocketClient;
+using iridium::io::implementation::CStreamReaderBuffer;
+using iridium::io::implementation::CStreamWriterBuffer;
 
 
 #include <set>
+
 
 namespace iridium {
 namespace io {
 namespace net {
 namespace socket {
+
+
+class CHTTPProtocolClientHandler: public protocol::IProtocolHandler {
+public:
+    DEFINE_IMPLEMENTATION(CHTTPProtocolClientHandler)
+
+    CHTTPProtocolClientHandler() {
+        m_state             = 0;
+        m_response          = Buffer::create();
+        m_response_stream   = CStreamWriterBuffer::create(m_response);
+    }
+
+    bool update(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) override {
+        LOGT << "state = " << m_state;
+
+        if (event->type == Event::TType::OPEN ||
+            event->type == Event::TType::WRITE &&
+            m_state == 0)
+        {
+            string request = ""
+            "GET / HTTP/1.1\r\n"
+            "Host: example.com:80\r\n"
+            "User-Agent: curl/7.58.0\r\n"
+            "Accept: */*"
+            "\r\n"
+            "\r\n";
+
+            transmitter->setReader(CStreamReaderBuffer::create(Buffer::create(request)));
+            transmitter->setWriter(std::dynamic_pointer_cast<IStreamWriter>(event->stream));
+
+            m_state++;
+
+            return true;
+        }
+
+        if (event->type == Event::TType::READ && m_state == 1) {
+            transmitter->setReader(std::dynamic_pointer_cast<IStreamReader>(event->stream));
+            transmitter->setWriter(m_response_stream);
+
+            m_state++;
+
+            return true;
+        }
+
+        if (m_state == 2) {
+            LOGT << *m_response;
+        }
+
+        return true;
+    }
+
+private:
+    int m_state;
+    IStreamWriter::TSharedPtr m_response_stream;
+    Buffer::TSharedPtr m_response;
+};
 
 
 TEST(socket_loopback) {
@@ -55,18 +115,20 @@ TEST(socket_loopback) {
 //    socket->finalize();
 
 
-//    auto socket = CSocketClient::create(URL("http://127.0.0.1:55555"));
-    auto socket = CSocketClient::create(URL("https://example.com"));
-    string request = ""
-    "GET / HTTP/1.1\r\n"
-    "Host: example.com:80\r\n"
-    "User-Agent: curl/7.58.0\r\n"
-    "Accept: */*"
-    "\r\n"
-    "\r\n";
+    auto socket = CSocketClient::create(URL("http://example.com"), CHTTPProtocolClientHandler::create());
+//    string request = ""
+//    "GET / HTTP/1.1\r\n"
+//    "Host: example.com:80\r\n"
+//    "User-Agent: curl/7.58.0\r\n"
+//    "Accept: */*"
+//    "\r\n"
+//    "\r\n";
     socket->initialize();
-    socket->write(Buffer::create(request));
-    LOGT << "read\n'" << *socket->read(10) << "'";
+
+    LOGT << "begin";
+    threading::sleep(5000);
+    LOGT << "end";
+
     socket->finalize();
 }
 

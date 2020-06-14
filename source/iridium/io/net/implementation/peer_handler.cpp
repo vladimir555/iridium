@@ -19,7 +19,7 @@ CPeerHandler::TItems CPeerHandler::handle(TItems const &peers_) {
     TItems peers;
     for (auto const &peer : peers_) {
         if (peer->is_in_processing) {
-            LOGT << "thread collision";
+            LOGT << "threads collision";
             continue; // <-----
         }
         peer->is_in_processing = true;

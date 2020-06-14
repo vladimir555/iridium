@@ -17,7 +17,6 @@ namespace implementation {
 class CStreamReaderBuffer: public IStreamReader {
 public:
     DEFINE_IMPLEMENTATION(CStreamReaderBuffer)
-    
     CStreamReaderBuffer(Buffer::TSharedPtr const &buffer);
     
     void    initialize() override;
@@ -27,11 +26,12 @@ public:
     Buffer::TSharedPtr read(size_t const &size) override;
 
 private:
-    Buffer::TSharedPtr          m_buffer;
-    size_t                      m_pos;
+    Buffer::TSharedPtr  m_buffer;
+    size_t              m_pos;
 };
 
 
+// todo: interface with getBuffer
 class CStreamWriterBuffer: public IStreamWriter {
 public:
     DEFINE_IMPLEMENTATION(CStreamWriterBuffer)

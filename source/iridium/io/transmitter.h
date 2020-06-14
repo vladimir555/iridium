@@ -28,8 +28,8 @@ public:
     DEFINE_INTERFACE(ITransmitterStreams)
     virtual void setReader(IStreamReader::TSharedPtr const &reader) = 0;
     virtual void setWriter(IStreamWriter::TSharedPtr const &writer) = 0;
-    virtual IStreamReader::TSharedPtr getReader() const = 0;
-    virtual IStreamWriter::TSharedPtr getWriter() const = 0;
+    virtual IStreamReader::TConstSharedPtr getReader() const = 0;
+    virtual IStreamWriter::TConstSharedPtr getWriter() const = 0;
 };
 
 

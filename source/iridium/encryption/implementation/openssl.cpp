@@ -111,20 +111,30 @@ TValue assertOK(TValue value, string const &message) {
 }
 
 
-API::TContext *API::createContext(std::string const &file_name_private_key, std::string const &file_name_certificate) {
-    LOGT;
-    // create context
-//    auto const *method  = assertOK(TLS_method(),        "openssl init tls error");
-    auto const *method  = assertOK(TLS_client_method(), "openssl init tls error");
-    auto       *context = assertOK(SSL_CTX_new(method), "openssl init context error");
+API::TContext *API::createContext(bool const &is_client_method) {
+    SSL_METHOD const *method = nullptr;
 
+    if (is_client_method)
+        method = assertOK(TLS_client_method(), "openssl client method init tls error");
+    else
+        method = assertOK(TLS_server_method(), "openssl server method init tls error");
+
+    return assertOK(SSL_CTX_new(method), "openssl init context error"); // ----->
+}
+
+
+void API::configureContext(
+    TContext  * const  context,
+    std::string const &file_name_private_key,
+    std::string const &file_name_certificate)
+{
+//    LOGT;
     // configure context
     SSL_CTX_set_ecdh_auto(context, 1);
     assertOK(SSL_CTX_use_certificate_file(context, file_name_certificate.c_str(), SSL_FILETYPE_PEM), "openssl use certificate error");
     assertOK(SSL_CTX_use_PrivateKey_file (context, file_name_private_key.c_str(), SSL_FILETYPE_PEM), "openssl use private key error");
 
-    LOGT << file_name_private_key << " " << file_name_certificate;
-    return context; // ----->
+//    LOGT << file_name_private_key << " " << file_name_certificate;
 }
 
 
@@ -144,8 +154,10 @@ API::TSSL *API::createSSL(TContext *context, int const &fd) {
 
 void API::releaseSSL(TSSL *ssl) {
     LOGT;
-    SSL_shutdown(ssl);
-    SSL_free(ssl);
+    if (ssl) {
+        SSL_shutdown(ssl);
+        SSL_free(ssl);
+    }
 }
 
 
@@ -168,23 +180,25 @@ void API::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
 API::TSSLErrorCode API::connectSSL(TSSL *ssl) {
     auto code   = SSL_connect(ssl);
     auto error  = getSSLErrorCode(ssl, code);
-    LOGT << error;
+//    LOGT << error;
     return error;
 }
 
 
 API::TSSLErrorCode API::doHandshake(TSSL *ssl) {
-    auto code   = SSL_do_handshake(ssl);
-    auto error  =  getSSLErrorCode(ssl, code);
-    LOGT << error;
-    return error;
+    auto code = SSL_do_handshake(ssl);
+    if  (code == 1)
+        return API::TSSLErrorCode::SSL_ERROR_CODE_NONE;
+    else
+        return getSSLErrorCode(ssl, code);
 }
 
 
 size_t API::write(TSSL *ssl, io::Buffer::TSharedPtr const &packet) {
-    LOGT << SSL_write(ssl, packet->data(), packet->size());
-//    assertOK(SSL_write(ssl, packet->data(), packet->size()), "openssl writing error");
+//    LOGT << SSL_write(ssl, packet->data(), packet->size());
+    assertOK(SSL_write(ssl, packet->data(), packet->size()), "openssl writing error");
     //todo:
+    LOGT << "ssl write: " << *packet;
     return packet->size();
 }
 
@@ -197,10 +211,12 @@ io::Buffer::TSharedPtr API::read(TSSL *ssl, size_t const &size) {
     size_t  received_bytes = 0;
 
     read_result = SSL_read_ex(ssl, buffer, size, &received_bytes);
-    LOGT << "received_size: " << received_bytes;
+    LOGT << "ssl read received_size: " << received_bytes;
 
+//    if (read_result == 0)
+//        throw std::runtime_error("openssl reading error: socket was closed by client"); // ----->
     if (read_result == 0)
-        throw std::runtime_error("openssl reading error: socket was closed by client"); // ----->
+        return io::Buffer::create(); // ----->
 
     if (read_result <  0) {
         TSSLErrorCode code = SSL_get_error(ssl, read_result);
@@ -223,7 +239,8 @@ CContext::CContext(
 :
     m_is_blocking_mode(is_blocking_mode)
 {
-    m_context = API::instance().createContext(file_name_private_key, file_name_certificate);
+    m_context = API::instance().createContext();
+    API::instance().configureContext(m_context, file_name_private_key, file_name_certificate);
 }
 
 

@@ -9,21 +9,17 @@
 
 
 #include <sys/socket.h>
-#include <netinet/in.h>
+
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <unistd.h>
 
 #include <stdio.h>
-
-#include <string>
-#include <cstring>
-
 #include <vector>
 
-#include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
 
+#include <signal.h>
 
 #include <linux/tls.h>
 #include <netinet/tcp.h>
@@ -33,16 +29,6 @@ using iridium::convertion::convert;
 using iridium::io::net::URL;
 using std::string;
 using std::vector;
-
-
-template<typename T>
-T assertOK(T const &result, string const &message, URL const &url) {
-    if (result < 0)
-        throw std::runtime_error(message + ": url " + convert<string>(url) +
-            ", " + std::strerror(errno) + ", code " + convert<string>(errno)); // ----->
-    else
-        return result; // ----->
-}
 
 
 static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 8192; // todo: one buffer
@@ -60,7 +46,8 @@ CSocket::CSocket(URL const &url, bool const &is_server_mode)
 :
     m_is_server_mode(is_server_mode),
     m_url           (url),
-    m_socket        (0)
+    m_socket        (0),
+    m_address       ({})
 {}
 
 
@@ -68,7 +55,8 @@ CSocket::CSocket(URL const &url, int const &fd)
 :
     m_is_server_mode(false),
     m_url           (url),
-    m_socket        (fd)
+    m_socket        (fd),
+    m_address       ({})
 {}
 
 
@@ -92,11 +80,12 @@ URL CSocket::getPeerURL(int const &fd) {
 void CSocket::initialize() {
     // open
     auto protocol   = m_url.getProtocol() == URL::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;
-    m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error", m_url);
+    m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, protocol), "socket open error", m_url);
     LOGT << "fd " << m_socket;
 
     //todo: unix / inet protocol by url
-    struct sockaddr_in address  = {};
+//    struct sockaddr_in address  = {};
+    auto &address = m_address = {};
     auto ipv4 = *m_url.getIPv4();
     address.sin_addr.s_addr     = htonl(
         ( ipv4[0] << 24 ) | ( ipv4[1] << 16 ) |
@@ -112,9 +101,12 @@ void CSocket::initialize() {
         assertOK(::bind   (m_socket, (struct sockaddr *) &address, sizeof(address)), "socket bind error", m_url);
         assertOK(::listen (m_socket, SOMAXCONN), "socket listen error", m_url);
     } else {
-        assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error", m_url);
+//        assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error", m_url);
     }
     setBlockingMode(false);
+
+    // todo: make static
+    signal(SIGPIPE, SIG_IGN);
 }
 
 
@@ -151,6 +143,7 @@ int CSocket::getID() const {
 
 
 size_t CSocket::write(Buffer::TSharedPtr const &buffer_) {
+    LOGT << "fd " << m_socket << " size " << buffer_->size();
     auto buffer = static_cast<void const *>(buffer_->data());
     auto size   = DEFAULT_SOCKET_BUFFER_SIZE;
     
@@ -158,7 +151,7 @@ size_t CSocket::write(Buffer::TSharedPtr const &buffer_) {
         size = buffer_->size();
     
     auto result = ::send(m_socket, buffer, size, 0);
-    LOGT << "fd " << m_socket << " size " << result;
+    LOGT << "fd " << m_socket << " size " << result << " sent";
 
     if (result < 0) {
         if (errno == EAGAIN)

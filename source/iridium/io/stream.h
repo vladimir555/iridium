@@ -47,6 +47,7 @@ public:
 class IStreamWriter: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamWriter)
+    /// return 0 - socket not ready
     virtual size_t write(Buffer::TSharedPtr const &buffer) = 0;
 };
 

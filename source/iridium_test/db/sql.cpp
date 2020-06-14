@@ -180,6 +180,7 @@ TEST(query) {
     Join<TAuthors, TBooks> join_authors_books;
 
     TAuthors authors;
+    // todo: table attributes operators instead Condition()
 
     from(authors).select(authors.Rows.id, authors.Rows.name).getSQL();
 
@@ -190,6 +191,7 @@ TEST(query) {
     from(authors).select().where(Condition(5) < 5).getSQL();
     from(authors).select().where(Condition(5) < 5).group().getSQL();
     from(authors).select().where(Condition(5) < 5).order().getSQL();
+
     from(authors).select().group().getSQL();
     from(authors).select().having().getSQL();
     from(authors).select().group().having().order().getSQL();

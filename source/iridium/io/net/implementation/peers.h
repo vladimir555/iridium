@@ -55,8 +55,8 @@ public:
 
     void setReader(IStreamReader::TSharedPtr const &reader) override;
     void setWriter(IStreamWriter::TSharedPtr const &writer) override;
-    IStreamReader::TSharedPtr getReader() const override;
-    IStreamWriter::TSharedPtr getWriter() const override;
+    IStreamReader::TConstSharedPtr getReader() const override;
+    IStreamWriter::TConstSharedPtr getWriter() const override;
 
     bool transmit(Event::TSharedPtr const &event) override;
 

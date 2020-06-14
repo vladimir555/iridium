@@ -30,6 +30,7 @@
 namespace iridium {
 namespace encryption {
 namespace implementation {
+// todo: rename ...::openssl::API to ...::external::OpenSSL
 namespace openssl {
 
 
@@ -99,7 +100,10 @@ public:
         SSL_ERROR_CODE_WANT_ACCEPT      = SSL_ERROR_WANT_ACCEPT
     )
 
-    TContext *createContext(
+    TContext *createContext(bool const &is_client_method = true);
+
+    void configureContext(
+        TContext  * const  context,
         std::string const &file_name_private_key,
         std::string const &file_name_certificate);
 

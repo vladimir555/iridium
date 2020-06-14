@@ -37,7 +37,7 @@ public:
     Buffer::TSharedPtr read(size_t const &size) override;
 
 private:
-//    bool continueReadSSLConnect();
+    bool initializeAsync();
 
     encryption::implementation::openssl::API::TContext  *m_context;
     encryption::implementation::openssl::API::TSSL      *m_ssl;

@@ -4,7 +4,6 @@
 */
 #include "socket_server.h"
 
-
 #include "socket_server_acceptor.h"
 
 #include "iridium/threading/implementation/thread.h"

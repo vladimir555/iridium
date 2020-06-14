@@ -14,6 +14,11 @@
 
 #include "iridium/io/net/url.h"
 #include "iridium/io/net/socket.h"
+#include "iridium/convertion/convert.h"
+
+#include <cstring>
+#include <string>
+#include <netinet/in.h>
 
 
 namespace iridium {
@@ -45,6 +50,17 @@ public:
 protected:
     CSocket(URL const &url, int const &fd);
 
+    template<typename T>
+    T assertOK(T const &result, std::string const &message, URL const &url) {
+        using convertion::convert;
+        using std::string;
+        if (result < 0)
+            throw std::runtime_error(message + ": url " + convert<string>(url) +
+                ", " + std::strerror(errno) + ", code " + convert<string>(errno)); // ----->
+        else
+            return result; // ----->
+    }
+
     URL     getPeerURL(int const &fd);
     void    setBlockingMode(bool const &is_blocking);
 
@@ -52,6 +68,7 @@ protected:
     bool    m_is_server_mode;
     URL     m_url;
     int     m_socket;
+    struct sockaddr_in m_address;
 };
 
 

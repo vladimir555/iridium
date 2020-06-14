@@ -48,7 +48,7 @@ CTransmitter::~CTransmitter() {
 
 
 void CTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {
-//    LOGT << "fd " << reader->getID();
+    LOGT << "fd " << reader->getID();
 
     // todo: conflict with other transmitters
     if (m_reader) {
@@ -62,7 +62,7 @@ void CTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {
 
 
 void CTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
-//    LOGT << "fd " << writer->getID();
+    LOGT << "fd " << writer->getID();
 
     // todo: conflict with other transmitters
     if (m_writer) {
@@ -75,12 +75,12 @@ void CTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
 }
 
 
-IStreamReader::TSharedPtr CTransmitter::getReader() const {
+IStreamReader::TConstSharedPtr CTransmitter::getReader() const {
     return m_reader; // ----->
 }
 
 
-IStreamWriter::TSharedPtr CTransmitter::getWriter() const {
+IStreamWriter::TConstSharedPtr CTransmitter::getWriter() const {
     return m_writer; // ----->
 }
 
@@ -89,8 +89,8 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
     assertExists(m_reader, "transmitter: reader does not exists");
     assertExists(m_writer, "transmitter: writer does not exists");
 
-//    LOGT << "fd " << event->stream->getID() << " event " << event->type
-//         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
+    LOGT << "fd " << event->stream->getID() << " event " << event->type
+         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
 
     if (event->type == Event::TType::CLOSE || 
         event->type == Event::TType::ERROR) 

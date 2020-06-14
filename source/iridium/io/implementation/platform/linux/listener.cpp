@@ -10,18 +10,20 @@
 
 #include <string>
 #include <vector>
+#include <cstring>
 #include <sys/epoll.h>
 #include "iridium/logging/logger.h"
+#include "iridium/convertion/convert.h"
+
+
+using iridium::convertion::convert;
+using std::string;
 
 
 namespace iridium {
 namespace io {
 namespace implementation {
 namespace platform {
-
-
-//static int assertOK(int const &result, std::string const &error_message) {
-//}
 
 
 //static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
@@ -36,16 +38,18 @@ CListener::CListener()
 
 void CListener::initialize() {
     m_epoll_fd = epoll_create1(0);
+    LOGT;
 }
 
 
 void CListener::finalize() {
+    LOGT;
 }
 
 
 void CListener::add(IStream::TSharedPtr const &stream) {
     if (stream->getID() > 0 && m_map_fd_stream.find(stream->getID()) == m_map_fd_stream.end()) {
-//        LOGT << "fd " << stream->getID();
+        LOGT << "fd " << stream->getID();
 
         struct epoll_event event = {};
 
@@ -53,7 +57,7 @@ void CListener::add(IStream::TSharedPtr const &stream) {
         event.data.fd   = stream->getID();
 
     //    auto result     =
-        epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event);
+        assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event), "epoll add error");
 
         m_map_fd_stream[stream->getID()] = stream;
     }
@@ -61,9 +65,11 @@ void CListener::add(IStream::TSharedPtr const &stream) {
 
 
 void CListener::del(IStream::TSharedPtr const &stream) {
-//    LOGT << "fd " << stream->getID();
-    if (stream->getID() > 0)
+    LOGT << "fd " << stream->getID();
+    if (stream->getID() > 0) {
         m_map_fd_stream.erase(stream->getID());
+        assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr), "epoll del error");
+    }
 }
 
 
@@ -76,7 +82,7 @@ CListener::TEvents CListener::wait() {
         DEFAULT_EVENTS_COUNT_LIMIT,
         DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
 
-//    LOGT << "epoll count " << count;
+    LOGT << "epoll count " << count;
 
     CListener::TEvents events;
 
@@ -90,6 +96,15 @@ CListener::TEvents CListener::wait() {
     }
 
     return events; // ----->
+}
+
+
+int CListener::assertOK(int const &result, std::string const &message) {
+    if (result < 0)
+        throw std::runtime_error(
+            message + ", " + std::strerror(errno)  + ", code " + convert<string>(errno)); // ----->
+    else
+        return result; // ----->
 }
 
 

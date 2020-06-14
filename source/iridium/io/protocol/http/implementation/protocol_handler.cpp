@@ -97,7 +97,8 @@ bool CProtocolHandler::update(
                             response.Headers.ContentLength  = response.Body.get().size() + content_stream_reader->getSize();
                             response.Message                = {"HTTP/1.1", 200, "OK"};
                             response.Headers.LastModified   = {content_stream_reader->getStatus().last_modified};
-                            response.Headers.ContentType    = MIME::instance().getByFileNameExtension(split(uri, ".").back()); // todo: optimize
+                            // todo: optimize
+                            response.Headers.ContentType    = MIME::instance().getByFileNameExtension(split(uri, ".").back());
                         } else {
                             response.Message                = {"HTTP/1.1", 404, "Error"};
                         }

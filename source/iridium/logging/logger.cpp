@@ -19,9 +19,9 @@ using iridium::logging::implementation::CChannel;
 using iridium::logging::implementation::CSinkConsole;
 using iridium::logging::implementation::CSinkFile;
 using iridium::threading::implementation::CMutex;
+using std::string;
 
 
-#include <iostream>
 namespace iridium {
 namespace logging {
 
@@ -125,25 +125,30 @@ void update(config::TLogger const &config) {
 }
 
 
-std::string convertFunctionNameToLogFunctionName(std::string const &name) {
+string convertFunctionNameToLogFunctionName(string const &name) {
     static size_t DEFAULT_FUNC_NAME_SIZE = 16;
 
     size_t rpos = name.find("(");
     size_t lpos = name.find_last_of(" ", rpos) + 1;
 
-    if (lpos == std::string::npos)
+    if (lpos == string::npos)
         lpos = 0;
 
-    while (!std::isalpha(name[lpos]) && lpos < name.size())
+    while ( !std::isalpha(name[lpos]) && lpos < name.size())
         lpos++;
 
-    std::string result = name.substr(lpos, rpos - lpos);
+    string result = name.substr(lpos, rpos - lpos);
 
     if (result.size() < DEFAULT_FUNC_NAME_SIZE)
         result.append(DEFAULT_FUNC_NAME_SIZE - result.size(), ' ');
 
-    if (result.size() > 1)
-        result = split(result, "::").back();
+    if (result.size() > 1) {
+        std::list<string> words = split(result, "::");
+        result = words.back();
+        words.pop_back();
+        if (!words.empty())
+            result = words.back() + "::" + result;
+    }
 
     return result; // ----->
 }

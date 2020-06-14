@@ -39,6 +39,8 @@ public:
 private:
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;
 
+    static int assertOK(int const &result, std::string const &message);
+
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
             m_map_fd_stream;
     int     m_epoll_fd;
