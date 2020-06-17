@@ -59,11 +59,13 @@ INode::TSharedPtr parseFile(string const &file_name) {
 
 
 void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
-    auto parser         = createParserByExtension(file_name);
-    auto text_writer    = CFileStreamWriter::create(file_name);
-    auto line           = parser->compose(root_node);
+    auto parser = createParserByExtension(file_name);
+    auto writer = CFileStreamWriter::create(file_name);
+    auto line   = parser->compose(root_node);
 
-    text_writer->write(Buffer::create(line.begin(), line.end()));
+    writer->initialize();
+    writer->write(Buffer::create(line.begin(), line.end()));
+    writer->finalize();
 }
 
 
