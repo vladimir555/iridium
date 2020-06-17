@@ -29,7 +29,6 @@ static const string DEFAULT_TAB = "    ";
 }
 
 
-#include "iridium/logging/logger.h"
 namespace iridium {
 namespace parsing {
 namespace implementation {
@@ -50,16 +49,15 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
         value.clear(); 
     };
     auto validateName   = [&name] () {
-        if (name.empty() || name == "#text")
+        if (name.empty())
             return; // ----->
 
-        LOGT << "name = '" << name << "'";
         if (name[0] >= '0' && name[0] <= '9')
-            throw std::runtime_error("wrong json field name: " + name); // ----->
+            throw std::runtime_error("json parsing error: wrong json field name: " + name); // ----->
 
         for (auto const ch: name)
             if (ch != '.' && ispunct(static_cast<int>(ch)))
-                throw std::runtime_error("wrong json field name: " + name); // ----->
+                throw std::runtime_error("json parsing error: wrong json field name: " + name); // ----->
     };
     auto trimEntry      = [&name, &value] () {
         name    = trim(name , " \t\n\r\"");
@@ -69,7 +67,7 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
         if (value.substr(0, 2) == "\\\"")
             value += "\"";
     };
-    auto addEntry    = [
+    auto addEntry       = [
         &name, 
         &value, 
         &node,
@@ -79,19 +77,21 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
         &is_array_item
     ] () { 
         trimEntry();
-        if (!name.empty() && !value.empty()) {
-            if (name == "#text")
-                name.clear();
-
-            validateName();
-            node->addChild(name, value);
-        } else {
+        if (name.empty() || value.empty()) {
             // array simple item
             if (is_array_item && !name.empty() && value.empty())
                 node->addChild("", name);
             else {
                 // todo: error
+//                throw std::runtime_error("json parsing error: wrong node for array item, node: '" +
+//                    name + "' = '" + value + "'"); // ----->
             }
+        } else {
+            if (name == "#text")
+                name.clear();
+
+            validateName();
+            node->addChild(name, value);
         }
         clearEntry();
     };
@@ -123,6 +123,7 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
         if (ch == '[') {
             while (ch != ']') {
                 trimEntry();
+                validateName();
                 INode::TSharedPtr node_array_item_tmp = CNode::create(name);
                 convertStringToNode(source, node_array_item_tmp, index, true); // <-----
                 if (node_array_item_tmp->hasChilds()) {
