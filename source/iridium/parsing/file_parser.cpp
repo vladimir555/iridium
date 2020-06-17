@@ -11,16 +11,14 @@
 
 #include "iridium/strings.h"
 #include "iridium/io/fs/files.h"
-#include "iridium/io/fs/implementation/file_stream_writer.h"
 
 
 using std::string;
 
-using iridium::io::fs::readTextFile;
+using iridium::io::fs::readFile;
+using iridium::io::fs::writeFile;
+
 using iridium::io::fs::extractFileNameExtension;
-using iridium::io::fs::checkFileExistence;
-using iridium::io::fs::implementation::CFileStreamWriter;
-using iridium::io::Buffer;
 
 using iridium::parsing::implementation::CJSONParser;
 using iridium::parsing::implementation::CXMLParser;
@@ -44,28 +42,18 @@ IParser::TSharedPtr createParserByExtension(string const &file_name) {
 
 
 INode::TSharedPtr parseFile(string const &file_name) {
-    if (!checkFileExistence(file_name))
-        throw std::runtime_error("file '" + file_name + "' does not exists"); // ----->
+    auto parser = createParserByExtension(file_name);
+    auto text   = readFile(file_name);
 
-    auto    parser     = createParserByExtension(file_name);
-    auto    lines      = readTextFile(file_name);
-    string  text;
-
-    for (auto const &line : lines)
-        text += line;
-
-    return     parser->parse(text); // ----->
+    return parser->parse(text); // ----->
 }
 
 
 void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
     auto parser = createParserByExtension(file_name);
-    auto writer = CFileStreamWriter::create(file_name, true);
-    auto line   = parser->compose(root_node);
+    auto text   = parser->compose(root_node);
 
-    writer->initialize();
-    writer->write(Buffer::create(line.begin(), line.end()));
-    writer->finalize();
+    writeFile(file_name, text);
 }
 
 
