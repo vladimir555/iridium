@@ -23,7 +23,7 @@ namespace implementation {
 
 class CFileStream: public IStream {
 public:
-    DEFINE_ENUM(TOpenMode, READ, WRITE)
+    DEFINE_ENUM(TOpenMode, READ, WRITE, REWRITE)
 
     void    initialize() override;
     void    finalize() override;

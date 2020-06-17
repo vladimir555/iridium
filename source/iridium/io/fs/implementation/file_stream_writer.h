@@ -19,7 +19,7 @@ namespace implementation {
 class CFileStreamWriter: public CFileStream, public IFileStreamWriter {
 public:
     DEFINE_IMPLEMENTATION(CFileStreamWriter)
-    CFileStreamWriter(std::string const &path);
+    CFileStreamWriter(std::string const &path, bool const &is_rewrite = false);
     
     void    initialize()  override;
     void    finalize()    override;

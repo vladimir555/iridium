@@ -7,10 +7,20 @@
 #include <fstream>
 #include <stdio.h>
 
+#include "iridium/io/fs/implementation/file_stream_reader.h"
+#include "iridium/io/fs/implementation/file_stream_writer.h"
+
 
 using std::string;
 using std::vector;
 using std::ifstream;
+
+using iridium::io::fs::implementation::CFileStreamReader;
+using iridium::io::fs::implementation::CFileStreamWriter;
+using iridium::convertion::convert;
+
+
+static const size_t DEFAULT_BUFFER_SIZE = 16384;
 
 
 namespace iridium {
@@ -41,6 +51,38 @@ vector<string> readTextFile(string const &file_name, bool const &is_throw_if_not
     }
 
     return text; // ----->
+}
+
+
+string readFile(string const file_name) {
+    string  result;
+    auto    reader = CFileStreamReader::create(file_name);
+
+    reader->initialize();
+
+    // todo: read timeout checking
+    auto    file_size = reader->getSize();
+    while  (file_size > result.size()) {
+        auto buffer = reader->read(DEFAULT_BUFFER_SIZE);
+        if (buffer)
+            result += convert<string>(*buffer);
+        else
+            throw std::runtime_error("read file '" + file_name + "' error"); // ----->
+    }
+    reader->finalize();
+
+    return result; // ----->
+}
+
+
+void writeFile(string const file_name, string const &text) {
+    auto writer = CFileStreamWriter::create(file_name, true);
+    writer->initialize();
+    auto size = writer->write(Buffer::create(text));
+    writer->finalize();
+    if (size != text.size())
+        throw std::runtime_error("write file '" + file_name + "' error: written bytes " +
+            convert<string>(size) + " < " + convert<string>(text.size())); // ----->
 }
 
 

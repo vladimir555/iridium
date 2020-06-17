@@ -16,9 +16,9 @@ namespace fs {
 namespace implementation {
     
     
-CFileStreamWriter::CFileStreamWriter(std::string const &path)
+CFileStreamWriter::CFileStreamWriter(std::string const &path, bool const &is_rewrite)
 :
-    CFileStream(path, TOpenMode::WRITE)
+    CFileStream(path, is_rewrite ? TOpenMode::REWRITE : TOpenMode::WRITE)
 {}
 
 
