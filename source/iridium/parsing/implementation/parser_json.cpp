@@ -202,7 +202,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
             auto node_child = *nodes.begin();
 
             if (node_child->hasChilds()) {
-                result += tab + node_child->getName() + ": {\n";
+                result += tab + "\"" + node_child->getName() + "\"" + ": {\n";
                 convertNodeToJsonString(node_child, result, tab + DEFAULT_TAB); // <-----
                 result += tab + "}" + line_end;
             } else {
@@ -214,10 +214,10 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
                 result += tab;
                 if (tab.empty())
                     result += DEFAULT_TAB;
-                result += name + ": " + "\"" + node_child->getValue() + "\"" + line_end;
+                result += "\"" + name + "\"" + ": " + "\"" + node_child->getValue() + "\"" + line_end;
             }
         } else {
-            result += tab + name + ": [\n";
+            result += tab + "\"" + name + "\"" + ": [\n";
             size_t node_number = 0;
             for (auto const &node : nodes) {
                 string line_end_;
@@ -244,7 +244,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
 string CJSONParser::compose(INode::TConstSharedPtr const &root_node) const {
     string result;
     convertNodeToJsonString(root_node, result, DEFAULT_TAB + DEFAULT_TAB);
-    result = "{\n" + DEFAULT_TAB + root_node->getName() + ": {\n" + result + DEFAULT_TAB + "}\n}\n";
+    result = "{\n" + DEFAULT_TAB + "\"" + root_node->getName() + "\"" + ": {\n" + result + DEFAULT_TAB + "}\n}\n";
     return result; // ----->
 }
 

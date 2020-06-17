@@ -15,8 +15,8 @@ set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 
 # components
-set(CONFIG_POSTGRES 1)
-set(CONFIG_OPENSSL  1)
+# set(CONFIG_POSTGRES 1)
+# set(CONFIG_OPENSSL  1)
 
 if (CONFIG_POSTGRES)
     add_definitions(-DBUILD_FLAG_POSTGRES)
