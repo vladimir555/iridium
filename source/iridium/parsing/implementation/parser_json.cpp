@@ -29,6 +29,7 @@ static const string DEFAULT_TAB = "    ";
 }
 
 
+#include "iridium/logging/logger.h"
 namespace iridium {
 namespace parsing {
 namespace implementation {
@@ -42,13 +43,25 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
 
     string  name;
     string  value;
-    TMarker marker   = TMarker::NAME;
+    TMarker marker      = TMarker::NAME;
 
-    auto clearEntry = [&name, &value] () {
+    auto clearEntry     = [&name, &value] () {
         name.clear();         
         value.clear(); 
     };
-    auto trimEntry  = [&name, &value] () {
+    auto validateName   = [&name] () {
+        if (name.empty() || name == "#text")
+            return; // ----->
+
+        LOGT << "name = '" << name << "'";
+        if (name[0] >= '0' && name[0] <= '9')
+            throw std::runtime_error("wrong json field name: " + name); // ----->
+
+        for (auto const ch: name)
+            if (ch != '.' && ispunct(static_cast<int>(ch)))
+                throw std::runtime_error("wrong json field name: " + name); // ----->
+    };
+    auto trimEntry      = [&name, &value] () {
         name    = trim(name , " \t\n\r\"");
         value   = trim(value, " \t\n\r\"");
         if (name.substr(0, 2)  == "\\\"")
@@ -59,7 +72,8 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
     auto addEntry    = [
         &name, 
         &value, 
-        &node, 
+        &node,
+        &validateName,
         &trimEntry,
         &clearEntry,
         &is_array_item
@@ -69,13 +83,7 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
             if (name == "#text")
                 name.clear();
 
-            if (isdigit(static_cast<int>(name[0])))
-                throw std::runtime_error("wrong json field name: " + name); // ----->
-
-            for (auto const ch: name)
-                if (ispunct(static_cast<int>(ch)))
-                    throw std::runtime_error("wrong json field name: " + name); // ----->
-
+            validateName();
             node->addChild(name, value);
         } else {
             // array simple item
@@ -96,6 +104,7 @@ void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &i
             INode::TSharedPtr node_child;
 
             trimEntry();
+            validateName();
 
             if (name.empty())
                 node_child = node;
