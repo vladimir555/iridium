@@ -391,6 +391,7 @@ std::string convertCamelToDashed(std::string const &camel);
 
 
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
+    struct T##class_name##List; \
     struct T##class_name : public iridium::parsing::serialization::Node<void> { \
         T##class_name( \
         iridium::parsing::INode::TConstSharedPtr const &node_source, \
@@ -439,7 +440,11 @@ std::string convertCamelToDashed(std::string const &camel);
 
 
 #define DEFINE_NODE_PTR(class_name) \
-    NodePtr<T##class_name> class_name##_ptr = *this;
+    iridium::parsing::serialization::NodePtr<T##class_name> class_name##_ptr = *this;
+
+
+#define DEFINE_NODE_LIST_PTR(class_name) \
+    iridium::parsing::serialization::NodePtr<T##class_name##List> class_name##_ptr = *this;
 
 
 #endif // HEADER_NODE_94200784_8C23_4200_B54C_65736B455736
