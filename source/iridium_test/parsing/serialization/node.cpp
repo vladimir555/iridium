@@ -53,6 +53,11 @@ DEFINE_ROOT_NODE_BEGIN(Root)
         DEFINE_ATTRIBUTE(string, AttributeOne, "defaultValue2")
     DEFINE_NODE_END(SecondItem)
 
+    DEFINE_NODE_BEGIN(ThirdItem)
+        DEFINE_ATTRIBUTE(string, Value)
+        DEFINE_NODE_PTR(ThirdItem)
+    DEFINE_NODE_END(ThirdItem)
+
     DEFINE_NODE_LIST_BEGIN(Item1)
         DEFINE_NODE_BEGIN(SubItem)
             DEFINE_ATTRIBUTE(string, AttributeOne, "attribute-one")
@@ -104,7 +109,12 @@ TEST(serialization) {
         item->addChild("enum", "ENUM2");
     }
 
-    node->addChild("second-item")->addChild("attribute-one", "second-item-value");
+    {
+        node->addChild("second-item")->addChild("attribute-one", "second-item-value");
+        auto i = node->addChild("third-item");
+        i->addChild("value", "5");
+        i->addChild("third-item")->addChild("value", "55");
+    }
 
     {
         auto item = node->addChild("external-root")->addChild("first-item");
@@ -135,6 +145,11 @@ TEST(serialization) {
     }
 
     TRoot root(node);
+
+    ASSERT( static_cast<bool>(root.ThirdItem.ThirdItem_ptr.get()));
+    ASSERT(!static_cast<bool>(root.ThirdItem.ThirdItem_ptr.get()->ThirdItem_ptr.get()));
+    ASSERT("5"  , equal, root.ThirdItem.Value.get())
+    ASSERT("55" , equal, root.ThirdItem.ThirdItem_ptr.get()->Value.get())
 
     ASSERT("defaultValue1", equal, static_cast<string>   (root.FirstItem.AttributeOne));
     ASSERT(55             , equal, static_cast<int>      (root.FirstItem.AttributeTwo));

@@ -126,6 +126,18 @@ private:
 };
 
 
+template<typename TNode>
+class NodePtr {
+public:
+    NodePtr(Node<void> const &parent);
+   ~NodePtr() = default;
+    std::shared_ptr<TNode> get() const;
+
+private:
+    typename std::shared_ptr<TNode> m_node;
+};
+
+
 // ----- implementation
 
 
@@ -296,8 +308,24 @@ void NodeList<TNode>::add(TValue const &value) {
     node.set(value);
     add(node);
 }
+// -----
 
 
+// ----- NodeList
+
+
+template<typename TNode>
+NodePtr<TNode>::NodePtr(Node<void> const &parent) {
+    try {
+        m_node = std::make_shared<TNode>(parent);
+    } catch (...) {}
+}
+
+
+template<typename TNode>
+std::shared_ptr<TNode> NodePtr<TNode>::get() const {
+    return m_node; // ----->
+}
 // -----
 
 
@@ -408,6 +436,10 @@ std::string convertCamelToDashed(std::string const &camel);
 
 #define DEFINE_NODE_EXTERNAL(class_name) \
     T##class_name class_name = *this;
+
+
+#define DEFINE_NODE_PTR(class_name) \
+    NodePtr<T##class_name> class_name##_ptr = *this;
 
 
 #endif // HEADER_NODE_94200784_8C23_4200_B54C_65736B455736
