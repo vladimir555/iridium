@@ -440,7 +440,8 @@ std::string convertCamelToDashed(std::string const &camel);
 
 
 #define DEFINE_NODE_PTR(class_name) \
-    iridium::parsing::serialization::NodePtr<T##class_name> class_name##_ptr = *this;
+    typedef typename iridium::parsing::serialization::NodePtr<T##class_name> T##class_name##Ptr; \
+    T##class_name##Ptr class_name##_ptr = *this;
 
 
 #define DEFINE_NODE_LIST_PTR(class_name) \
