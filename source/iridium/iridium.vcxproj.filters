@@ -66,9 +66,6 @@
     <ClInclude Include="db\implementation\mysql_connector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="db\implementation\postgresql_connector.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="encryption\implementation\openssl.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -432,6 +429,9 @@
     <ClInclude Include="db\implementation\postgres_connector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="io\net\implementation\socket_client_handler.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp">
@@ -459,9 +459,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="db\implementation\mysql_connector.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="db\implementation\postgresql_connector.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="encryption\implementation\openssl.cpp">
@@ -666,6 +663,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="db\implementation\postgres_connector.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\net\implementation\socket_client.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\net\implementation\socket_client_handler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

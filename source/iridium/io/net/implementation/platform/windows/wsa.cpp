@@ -83,7 +83,7 @@ Buffer WSA::read(SOCKET const &socket, size_t const &size) {
     Buffer          result;
 
     //ZeroMemory(buffer, size);
-    received_size = ::recv(socket, buffer.data(), size, 0);
+    received_size = ::recv(socket, buffer.data(), static_cast<int>(size), 0);
     if (received_size > 0)
         result.insert(result.end(), buffer.begin(), buffer.end());
         /*result.insert(result.end(), buffer.data(), buffer.data() + received_size);*/
@@ -96,7 +96,8 @@ Buffer WSA::read(SOCKET const &socket, size_t const &size) {
 
 size_t  WSA::write(SOCKET const &socket, Buffer const &packet) {
     LOGT << socket;
-    return assertNE(::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())), packet.size(), 0), SOCKET_ERROR, "socket write error");
+    return assertNE(::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())), 
+        static_cast<int>(packet.size()), 0), SOCKET_ERROR, "socket write error");
 }
 
 

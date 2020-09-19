@@ -164,29 +164,42 @@ class CJob: public IJob {
 public:
     DEFINE_IMPLEMENTATION(CJob)
 
-    CJob() = default;
+    CJob(list<string> &items): m_items(items) {}
     bool do_() override {
-        LOGT << "job ";
+        //LOGT << "job ";
+        m_items.push_back("job");
         return true;
     }
+private:
+    list<string> &m_items;
 };
 
 
 TEST(worker_job) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     IWorker<>::TSharedPtr worker = CWorker<>::create("worker_name");
+    
+    list<string> items;
+
     worker->initialize();
-    worker->push(CJob::create());
+    worker->push(CJob::create(items));
     worker->finalize();
+
+    ASSERT(list<string>{ "job" }, equal, items);
 }
 
 
 TEST(worker_pool_job) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
     IWorkerPool<>::TSharedPtr worker = CWorkerPool<>::create("worker_name", 2);
+
+    list<string> items;
+
     worker->initialize();
-    worker->push(CJob::create());
+    worker->push(CJob::create(items));
     worker->finalize();
+
+    ASSERT(list<string>{ "job" }, equal, items);
 }
 
 

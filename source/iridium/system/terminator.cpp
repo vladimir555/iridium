@@ -5,6 +5,9 @@
 #include "terminator.h"
 
 
+// todo: use signals
+
+
 namespace iridium {
 namespace system {
 

@@ -12,6 +12,8 @@
 #include "iridium/strings.h"
 #include "iridium/io/fs/files.h"
 
+#include <stdexcept>
+
 
 using std::string;
 

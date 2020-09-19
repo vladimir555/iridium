@@ -130,7 +130,7 @@ TEST(fsm_map) {
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
 
     ASSERT(
-        list({
+        list<string>({
             string("enable  0"),
             string("disable 1"),
             string("enable  2"),
@@ -148,7 +148,7 @@ TEST(fsm_switch) {
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
 
     ASSERT(
-        list({
+        list<string>({
             string("enable  0"),
             string("disable 1"),
             string("enable  2"),

@@ -102,35 +102,35 @@ private:
 };
 
 
-TEST(socket_loopback) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+//TEST(socket_loopback) {
+//    logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
-//    auto protocol_factory   = CProtocolFactory::create();
-//    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
+////    auto protocol_factory   = CProtocolFactory::create();
+////    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
 
+////    socket->initialize();
+////    LOGT << "begin";
+////    threading::sleep(500000);
+////    LOGT << "end";
+////    socket->finalize();
+
+
+//    auto socket = CSocketClient::create(URL("http://example.com"), CHTTPProtocolClientHandler::create());
+////    string request = ""
+////    "GET / HTTP/1.1\r\n"
+////    "Host: example.com:80\r\n"
+////    "User-Agent: curl/7.58.0\r\n"
+////    "Accept: */*"
+////    "\r\n"
+////    "\r\n";
 //    socket->initialize();
+
 //    LOGT << "begin";
-//    threading::sleep(500000);
+//    threading::sleep(5000);
 //    LOGT << "end";
+
 //    socket->finalize();
-
-
-    auto socket = CSocketClient::create(URL("http://example.com"), CHTTPProtocolClientHandler::create());
-//    string request = ""
-//    "GET / HTTP/1.1\r\n"
-//    "Host: example.com:80\r\n"
-//    "User-Agent: curl/7.58.0\r\n"
-//    "Accept: */*"
-//    "\r\n"
-//    "\r\n";
-    socket->initialize();
-
-    LOGT << "begin";
-    threading::sleep(5000);
-    LOGT << "end";
-
-    socket->finalize();
-}
+//}
 
 
 TEST(dns) {

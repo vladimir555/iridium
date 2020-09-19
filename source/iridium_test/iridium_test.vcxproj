@@ -128,7 +128,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib;libpq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(LIBS)\lib\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -148,7 +148,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib;libpq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(LIBS)\lib\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -172,7 +172,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib;libpq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(LIBS)\lib\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -196,7 +196,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib;libpq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)build\$(Configuration)\$(Platform)\lib\iridium.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(LIBS)\lib\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

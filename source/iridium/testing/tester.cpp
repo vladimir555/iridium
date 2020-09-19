@@ -79,19 +79,23 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         }
     }
 
-    if (argc == 2) {
-        if (string(argv[1]) == "help"   ||
-            string(argv[1]) == "--help" ||
-            string(argv[1]) == "/?")
-        {
-            LOGI    << "\nusage:\n"
-                    << std::string(argv[0]) << " help\n"
-                    << std::string(argv[0]) << " list\n"
-                    << std::string(argv[0]) << " run [ include_path ] [ exclude_path ]\n";
-        }
+    if (argc > 1 && 
+       (string(argv[1]) == "help"   ||
+        string(argv[1]) == "--help" ||
+        string(argv[1]) == "/?"     ||
+       (string(argv[1]) != "run"    &&
+        string(argv[1]) != "list")))
+    {
+        LOGI << "\nusage:\n"
+            << std::string(argv[0]) << " help\n"
+            << std::string(argv[0]) << " list\n"
+            << std::string(argv[0]) << " run [ include_path ] [ exclude_path ]\n";
+        return 0; // ----->
+    }
 
-        if (string(argv[1]) == "list")
-            LOGI << "\ntests:" << m_test_root_node;
+    if (argc == 2 && string(argv[1]) == "list") {
+        LOGI << "\ntests:" << m_test_root_node
+             << "\ntotal:  " << m_test_list.size();
         return 0; // ----->
     }
 

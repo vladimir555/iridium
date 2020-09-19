@@ -92,7 +92,7 @@ string const beer_json = ""
 "                \"name\" : \"Bells Brewery\"\n"
 "            }\n"
 "        ],\n"
-"        array: [5, 4, 3, 2, 1]\n"
+"        \"array\": [\"5\", \"4\", \"3\", \"2\", \"1\"]\n"
 "    }\n"
 "}\n"
 "";
@@ -202,7 +202,7 @@ string const http_header_node = "\n"
 string const http_header_composed = ""
 "GET / HTTP/1.1\n"
 "content-type: text/html; charset=windows-1251\n"
-"allow: HEAD, OPTIONS, GET\n"
+"allow: GET, HEAD, OPTIONS\n"
 "content-length: 1984\n\n";
 
 
@@ -241,20 +241,21 @@ TEST(compose_xml) {
 
 
 TEST(parse_json) {
-    auto parser         = CJSONParser::create();
-    auto node           = parser->parse(beer_json);
-    auto value_nodes    = assertComplete(node->findChilds("/Brewery/Beer/name"), "tags not found");
+     auto parser         = CJSONParser::create();
+     auto node           = parser->parse(beer_json);
 
-    ASSERT("Centennial"     , equal,     (*value_nodes.begin())->getValue());
-    ASSERT("Farmhouse Ale"  , equal,   (*++value_nodes.begin())->getValue());
-    ASSERT("Two Hearted Ale", equal, (*++++value_nodes.begin())->getValue());
+     auto value_nodes    = assertComplete(node->findChilds("/MyBeerJournal/Brewery/Beer/name"), "tags not found");
 
-    string array;
-    for (auto const &i: *node)
-        if (i->getName() == "array")
-            array += i->getValue();
+     ASSERT("Centennial"     , equal,     (*value_nodes.begin())->getValue());
+     ASSERT("Farmhouse Ale"  , equal,   (*++value_nodes.begin())->getValue());
+     ASSERT("Two Hearted Ale", equal, (*++++value_nodes.begin())->getValue());
 
-    ASSERT("54321", equal, array);
+     string array;
+     for (auto const &i: *node->getChild("MyBeerJournal"))
+         if (i->getName() == "array")
+             array += i->getValue();
+
+     ASSERT("54321", equal, array);
 }
 
 

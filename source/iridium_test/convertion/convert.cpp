@@ -198,7 +198,7 @@ TEST(types) {
 
     ASSERT(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
 
-    ASSERT("ħëłlö", equal, convert<string>(wstring(L"ħëłlö")));
+    ASSERT(u8"ħëłlö", equal, convert<string>(wstring(L"ħëłlö")));
 }
 
 
