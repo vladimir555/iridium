@@ -423,7 +423,7 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                     (ch == ']' && stack_array.empty()))
                 {
                     throw std::runtime_error(
-                        string("json parsing error: [stack] unxpected symbol '") +
+                        string("json parsing error: unxpected symbol '") +
                         ch + "' at " + convert<string>(line) + ':' + convert<string>(index)); // ----->
                 }
 

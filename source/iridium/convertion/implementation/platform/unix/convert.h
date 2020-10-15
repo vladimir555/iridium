@@ -55,6 +55,12 @@ struct tm *gmtime(TArgs ... args) {
 
 
 template<typename ... TArgs>
+void gmtime_r(TArgs ... args) {
+    ::gmtime_r(args ...); // ----->
+}
+
+
+template<typename ... TArgs>
 int sprintf(TArgs ... args) {
     return ::sprintf(args ...); // ----->
 }

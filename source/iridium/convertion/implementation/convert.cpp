@@ -91,14 +91,21 @@ string convert(system_clock::time_point const &value) {
     auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();
     auto ms         = value_ms % 1000;
     time_t t        = system_clock::to_time_t(value);
-    auto tm_        = platform::gmtime(&t);
 
-    if (tm_) {
-        char buffer[time_to_string_buffer_size];
-        strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), tm_);
-        return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
-    } else
-        throw runtime_error("convert time_t (gmtime) to string error"); // ----->
+//    auto tm_        = platform::gmtime(&t);
+
+//    if (tm_) {
+//        char buffer[time_to_string_buffer_size];
+//        strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), tm_);
+//        return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
+//    } else
+//        throw runtime_error("convert time_t (gmtime) to string error"); // ----->
+
+    struct tm tm_   = {};
+    platform::gmtime_r(&t, &tm_);
+    char buffer[time_to_string_buffer_size];
+    strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), &tm_);
+    return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
 }
 
 

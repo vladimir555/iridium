@@ -59,8 +59,8 @@ public:
     bool update(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) override {
         LOGT << "state = " << m_state;
 
-        if (event->type == Event::TType::OPEN ||
-            event->type == Event::TType::WRITE &&
+        if((event->type == Event::TType::OPEN   ||
+            event->type == Event::TType::WRITE) &&
             m_state == 0)
         {
             string request = ""
@@ -102,7 +102,7 @@ private:
 };
 
 
-//TEST(socket_loopback) {
+TEST(socket_loopback) {
 //    logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
 ////    auto protocol_factory   = CProtocolFactory::create();
@@ -115,7 +115,7 @@ private:
 ////    socket->finalize();
 
 
-//    auto socket = CSocketClient::create(URL("http://example.com"), CHTTPProtocolClientHandler::create());
+//    auto socket = CSocketClient::create(URL("https://example.com"), CHTTPProtocolClientHandler::create());
 ////    string request = ""
 ////    "GET / HTTP/1.1\r\n"
 ////    "Host: example.com:80\r\n"
@@ -130,7 +130,7 @@ private:
 //    LOGT << "end";
 
 //    socket->finalize();
-//}
+}
 
 
 TEST(dns) {
