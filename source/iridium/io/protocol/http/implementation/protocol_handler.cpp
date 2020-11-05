@@ -52,7 +52,7 @@ CProtocolHandler::CProtocolHandler() {
 }
 
 
-bool CProtocolHandler::update(
+bool CProtocolHandler::redirectStreams(
     ITransmitterStreams::TSharedPtr const &transmitter,
     Event::TSharedPtr               const &event)
 {

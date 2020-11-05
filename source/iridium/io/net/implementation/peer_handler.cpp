@@ -25,7 +25,7 @@ CPeerHandler::TItems CPeerHandler::handle(TItems const &peers_) {
         peer->is_in_processing = true;
 //        LOGT << "peer fd " << peer->event->stream->getID() << " event " << peer->event->type;
 
-        bool is_continue    = peer->protocol_handler->update(peer->transmitter, peer->event);
+        bool is_continue    = peer->protocol_handler->redirectStreams(peer->transmitter, peer->event);
         bool is_transmitted = peer->transmitter->transmit(peer->event);
 
 //        LOGT << "is_continue    = " << is_continue;

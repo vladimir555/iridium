@@ -1,33 +1,33 @@
-// Copyright © 2019 Bulaev Vladimir.
-// Contacts: <bulaev_vladimir@mail.ru>
-// License: https://www.gnu.org/licenses/lgpl-3.0
+//// Copyright © 2019 Bulaev Vladimir.
+//// Contacts: <bulaev_vladimir@mail.ru>
+//// License: https://www.gnu.org/licenses/lgpl-3.0
 
-#ifndef HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC
-#define HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC
-
-
-#include "iridium/io/net/socket.h"
+//#ifndef HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC
+//#define HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC
 
 
-namespace iridium {
-namespace encryption {
+//#include "iridium/io/net/socket.h"
 
 
-class ISSL: public io::IStreamPort {
-public:
-    DEFINE_INTERFACE(ISSL)
-};
+//namespace iridium {
+//namespace encryption {
 
 
-class IContext {
-public:
-    DEFINE_INTERFACE(IContext)
-    virtual ISSL::TSharedPtr accept(int const &fd) = 0;
-};
+//class ISSL: public io::IStreamPort {
+//public:
+//    DEFINE_INTERFACE(ISSL)
+//};
 
 
-} // encryption
-} // iridium
+//class IContext {
+//public:
+//    DEFINE_INTERFACE(IContext)
+//    virtual ISSL::TSharedPtr accept(int const &fd) = 0;
+//};
 
 
-#endif // HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC
+//} // encryption
+//} // iridium
+
+
+//#endif // HEADER_SSL_84E083DB_766C_4092_A0B2_0781653E5DBC

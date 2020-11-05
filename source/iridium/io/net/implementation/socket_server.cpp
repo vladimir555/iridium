@@ -298,7 +298,7 @@ void CSocketServer::finalize() {
 //        // todo: handling buffer overflow and eof on transmitting
 //        try {
 ////            LOGT << "protocol handle begin";
-//            peer->is_continue = peer->protocol_handler->update(peer->transmitter, event);
+//            peer->is_continue = peer->protocol_handler->redirectStreams(peer->transmitter, event);
 //
 //            // one transmitter for both streams
 //

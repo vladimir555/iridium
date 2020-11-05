@@ -21,7 +21,8 @@ class IProtocolHandler {
 public:
     DEFINE_INTERFACE(IProtocolHandler)
     // result: do continue or not
-    virtual bool update(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) = 0;
+    // todo: rename redirectStreams
+    virtual bool redirectStreams(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) = 0;
 };
 
 

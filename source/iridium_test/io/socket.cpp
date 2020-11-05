@@ -28,6 +28,8 @@ using iridium::threading::sleep;
 
 #include <iridium/io/fs/implementation/file_stream.h>
 #include <iridium/io/protocol/http/implementation/protocol_factory.h>
+#include <iridium/io/implementation/listener.h>
+#include <iridium/io/net/implementation/socket.h>
 using iridium::io::fs::implementation::CFileStream;
 //using iridium::io::implementation::CStreamProxy;
 using iridium::io::protocol::http::implementation::CProtocolFactory;
@@ -56,8 +58,9 @@ public:
         m_response_stream   = CStreamWriterBuffer::create(m_response);
     }
 
-    bool update(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) override {
-        LOGT << "state = " << m_state;
+    // redirect streams
+    bool redirectStreams(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) override {
+        LOGT << "state = " << m_state << " event = " << event->type;
 
         if((event->type == Event::TType::OPEN   ||
             event->type == Event::TType::WRITE) &&
@@ -65,7 +68,7 @@ public:
         {
             string request = ""
             "GET / HTTP/1.1\r\n"
-            "Host: example.com:80\r\n"
+            "Host: ya.ru:443\r\n"
             "User-Agent: curl/7.58.0\r\n"
             "Accept: */*"
             "\r\n"
@@ -102,49 +105,101 @@ private:
 };
 
 
-TEST(socket_loopback) {
+//TEST(https_server) {
 //    logging::update(logging::config::createDefaultConsoleLoggerConfig());
-
-////    auto protocol_factory   = CProtocolFactory::create();
-////    auto socket             = CSocketServer::create(URL("http://127.0.0.1:55555"), protocol_factory, 10);
-
-////    socket->initialize();
-////    LOGT << "begin";
-////    threading::sleep(500000);
-////    LOGT << "end";
-////    socket->finalize();
-
-
-//    auto socket = CSocketClient::create(URL("https://example.com"), CHTTPProtocolClientHandler::create());
-////    string request = ""
-////    "GET / HTTP/1.1\r\n"
-////    "Host: example.com:80\r\n"
-////    "User-Agent: curl/7.58.0\r\n"
-////    "Accept: */*"
-////    "\r\n"
-////    "\r\n";
+//    auto protocol_factory   = CProtocolFactory::create();
+//    auto socket             = CSocketServer::create(URL("https://example.com"), protocol_factory, 10);
 //    socket->initialize();
+//    LOGT << "begin";
+//    threading::sleep(500000);
+//    LOGT << "end";
+//    socket->finalize();
+//}
 
+
+//TEST(https_client) {
+//    auto socket = CSocketClient::create(URL("http://ya.ru"), CHTTPProtocolClientHandler::create());
+//    socket->initialize();
 //    LOGT << "begin";
 //    threading::sleep(5000);
 //    LOGT << "end";
+//    socket->finalize();
+//}
+
+
+//TEST(https_client) {
+//    string request = ""
+//    "GET / HTTP/1.1\r\n"
+//    "Host: example.com:80\r\n"
+//    "User-Agent: curl/7.58.0\r\n"
+//    "Accept: */*"
+//    "\r\n"
+//    "\r\n";
+
+//    using io::implementation::CListener;
+//    using io::net::implementation::CSocket;
+
+//    auto listener = CListener::create();
+////    auto socket   = CSocket::create(URL("https://localhost:1443"), false);
+//    auto socket   = CSocket::create(URL("https://example.com"), false);
+
+//    socket->initialize();
+//    listener->initialize();
+
+//    listener->add(socket);
+
+//    LOGT << "! 1 write";
+//    size_t write_result = 0;
+//    write_result = socket->write(Buffer::create(request));
+
+//    auto is_continue = true;
+//    do {
+//        LOGT << "! step";
+//        auto events = listener->wait();
+
+//        if (events.empty())
+//            break;
+
+//        for (auto const &event: events) {
+//            LOGT << "! event: " << event->type;
+//            if (event->stream == socket) {
+//                if (event->type == io::Event::TType::READ) {
+//                    LOGT << "! 2 read";
+//                    auto result = socket->read(64);
+//                    if (result) {
+//                        auto result = socket->read(64);
+////                        LOGT << *result;
+////                        if (result->empty())
+//                            continue;
+//                    }
+//                }
+//                if (event->type == io::Event::TType::WRITE && write_result == 0) {
+//                    LOGT << "! 2 write";
+//                    write_result = socket->write(Buffer::create(request));
+//                    if (write_result == 0)
+//                        continue;
+//                }
+//            }
+//        }
+//    } while (is_continue);
 
 //    socket->finalize();
-}
+//    listener->finalize();
+//}
 
 
-TEST(dns) {
-    auto ipv4 = getIPv4ByHost("ya.ru");
+//TEST(dns) {
+//    auto ipv4 = getIPv4ByHost("ya.ru");
 
-    //cout << "ya.ru ip: "
-    //    << static_cast<int>(ipv4[0]) << "."
-    //    << static_cast<int>(ipv4[1]) << "."
-    //    << static_cast<int>(ipv4[2]) << "."
-    //    << static_cast<int>(ipv4[3]) << endl;
+//    //cout << "ya.ru ip: "
+//    //    << static_cast<int>(ipv4[0]) << "."
+//    //    << static_cast<int>(ipv4[1]) << "."
+//    //    << static_cast<int>(ipv4[2]) << "."
+//    //    << static_cast<int>(ipv4[3]) << endl;
 
-    ASSERT(4, equal, ipv4.size());
-    ASSERT(getIPv4ByHost("ya.rur"), std::exception);
-}
+//    ASSERT(4, equal, ipv4.size());
+//    ASSERT(getIPv4ByHost("ya.rur"), std::exception);
+//}
 
 
 TEST(url) {

@@ -35,15 +35,15 @@ CTransmitter::CTransmitter(
 
 
 CTransmitter::~CTransmitter() {
-    if (m_reader) {
-        m_reader->finalize();
-        m_listener->del(m_reader);
-    }
+//    if (m_reader) {
+//        m_reader->finalize();
+//        m_listener->del(m_reader);
+//    }
 
-    if (m_writer) {
-        m_writer->finalize();
-        m_listener->del(m_writer);
-    }
+//    if (m_writer) {
+//        m_writer->finalize();
+//        m_listener->del(m_writer);
+//    }
 }
 
 
