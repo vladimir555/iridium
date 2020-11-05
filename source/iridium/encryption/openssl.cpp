@@ -19,8 +19,8 @@ using std::string;
 using iridium::convertion::convert;
 
 
-IMPLEMENT_ENUM(iridium::encryption::implementation::openssl::API::TErrorCode)
-IMPLEMENT_ENUM(iridium::encryption::implementation::openssl::API::TSSLErrorCode)
+IMPLEMENT_ENUM(iridium::encryption::OpenSSL::TErrorCode)
+IMPLEMENT_ENUM(iridium::encryption::OpenSSL::TSSLErrorCode)
 
 
 //// todo: signals handlers singleton
@@ -31,11 +31,11 @@ IMPLEMENT_ENUM(iridium::encryption::implementation::openssl::API::TSSLErrorCode)
 
 namespace iridium {
 namespace encryption {
-namespace implementation {
-namespace openssl {
+//namespace implementation {
+//namespace openssl {
 
 
-API::API() {
+OpenSSL::OpenSSL() {
     LOGT << "initialize openssl";
     SSL_load_error_strings();
     SSL_library_init();
@@ -58,13 +58,13 @@ API::API() {
 }
 
 
-API::~API() {
+OpenSSL::~OpenSSL() {
     ERR_free_strings();
     EVP_cleanup();
 }
 
 
-string API::getErrorString() {
+string OpenSSL::getErrorString() {
     BIO    *bio     = BIO_new(BIO_s_mem());
     ERR_print_errors(bio);
     char   *buffer  = nullptr;
@@ -81,41 +81,41 @@ string API::getErrorString() {
 }
 
 
-string API::getSSLErrorString(TSSL *ssl, int const &code_) {
+string OpenSSL::getSSLErrorString(TSSL *ssl, int const &code_) {
     auto code = SSL_get_error(ssl, code_);
     return std::string(ERR_error_string(code, nullptr)) +
         ", error code: " + convert<std::string>(static_cast<TSSLErrorCode>(code)); // ----->
 }
 
 
-API::TSSLErrorCode API::getSSLErrorCode(TSSL *ssl, int const &code) {
+OpenSSL::TSSLErrorCode OpenSSL::getSSLErrorCode(TSSL *ssl, int const &code) {
     return SSL_get_error(ssl, code);
 }
 
 
 void assertOK(int const &code, string const &message) {
     if (code <= 0)
-        throw std::runtime_error(message + ": " + API::instance().getErrorString()); // ----->
+        throw std::runtime_error(message + ": " + OpenSSL::instance().getErrorString()); // ----->
 }
 
 
-void assertOK(API::TSSL *ssl, int const &code, string const &message) {
-    if (ssl && API::TSSLErrorCode(code) != API::TSSLErrorCode::SSL_ERROR_CODE_NONE)
-        throw std::runtime_error(message + ": " + API::instance().getSSLErrorString(ssl, code)); // ----->
+void assertOK(OpenSSL::TSSL *ssl, int const &code, string const &message) {
+    if (ssl && OpenSSL::TSSLErrorCode(code) != OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_NONE)
+        throw std::runtime_error(message + ": " + OpenSSL::instance().getSSLErrorString(ssl, code)); // ----->
 }
 
 
 template<typename TValue>
 TValue assertOK(TValue value, string const &message) {
-    return std::move(iridium::assertExists(value, message + ": " + API::instance().getErrorString())); // ----->
+    return std::move(iridium::assertExists(value, message + ": " + OpenSSL::instance().getErrorString())); // ----->
 }
 
 
-API::TContext *API::createContext(bool const &is_client_method) {
+OpenSSL::TContext *OpenSSL::createContext(bool const &is_client_method) {
     SSL_METHOD const *method = nullptr;
 
     if (is_client_method)
-        method = assertOK(TLS_client_method(), "openssl client method init tls error");
+        method = assertOK(SSLv23_client_method(), "openssl client method init tls error");
     else
         method = assertOK(TLS_server_method(), "openssl server method init tls error");
 
@@ -123,7 +123,7 @@ API::TContext *API::createContext(bool const &is_client_method) {
 }
 
 
-void API::configureContext(
+void OpenSSL::configureContext(
     TContext  * const  context,
     std::string const &file_name_private_key,
     std::string const &file_name_certificate)
@@ -138,13 +138,13 @@ void API::configureContext(
 }
 
 
-void API::releaseContext(TContext *context) {
+void OpenSSL::releaseContext(TContext *context) {
     LOGT;
     SSL_CTX_free(context);
 }
 
 
-API::TSSL *API::createSSL(TContext *context, int const &fd) {
+OpenSSL::TSSL *OpenSSL::createSSL(TContext *context, int const &fd) {
     LOGT;
     auto ssl = assertOK(SSL_new(context), "openssl creating ssl error");
     assertOK(SSL_set_fd(ssl, fd), "openssl creating ssl set fd error");
@@ -152,7 +152,7 @@ API::TSSL *API::createSSL(TContext *context, int const &fd) {
 }
 
 
-void API::releaseSSL(TSSL *ssl) {
+void OpenSSL::releaseSSL(TSSL *ssl) {
     LOGT;
     if (ssl) {
         SSL_shutdown(ssl);
@@ -161,7 +161,7 @@ void API::releaseSSL(TSSL *ssl) {
 }
 
 
-void API::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
+void OpenSSL::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
     LOGT << "is_blocking_mode = " << is_blocking_mode;
     auto accept_result = SSL_accept(ssl);
     if (accept_result <= 0) {
@@ -177,24 +177,35 @@ void API::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
 }
 
 
-API::TSSLErrorCode API::connectSSL(TSSL *ssl) {
+OpenSSL::TSSLErrorCode OpenSSL::connectSSL(TSSL *ssl) {
     auto code   = SSL_connect(ssl);
     auto error  = getSSLErrorCode(ssl, code);
-//    LOGT << error;
+
+    LOGT << error << " code " << code << " error: " << getErrorString();
     return error;
 }
 
 
-API::TSSLErrorCode API::doHandshake(TSSL *ssl) {
+OpenSSL::TSSLErrorCode OpenSSL::setConnectState(TSSL *ssl) {
+    SSL_set_connect_state(ssl);
+    // todo: SSL_set_accept_state(ssl); for server
+    auto error  = getErrorString();
+    LOGT << error;
+    SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+    return TSSLErrorCode::SSL_ERROR_CODE_NONE;
+}
+
+
+OpenSSL::TSSLErrorCode OpenSSL::doHandshake(TSSL *ssl) {
     auto code = SSL_do_handshake(ssl);
     if  (code == 1)
-        return API::TSSLErrorCode::SSL_ERROR_CODE_NONE;
+        return OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_NONE;
     else
         return getSSLErrorCode(ssl, code);
 }
 
 
-size_t API::write(TSSL *ssl, io::Buffer::TSharedPtr const &packet) {
+size_t OpenSSL::write(TSSL *ssl, io::Buffer::TSharedPtr const &packet) {
 //    LOGT << SSL_write(ssl, packet->data(), packet->size());
     assertOK(SSL_write(ssl, packet->data(), packet->size()), "openssl writing error");
     //todo:
@@ -203,23 +214,24 @@ size_t API::write(TSSL *ssl, io::Buffer::TSharedPtr const &packet) {
 }
 
 
-io::Buffer::TSharedPtr API::read(TSSL *ssl, size_t const &size) {
-    static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 16384;
+io::Buffer::TSharedPtr OpenSSL::read(TSSL *ssl, size_t const &size) {
+//    static size_t const DEFAULT_SOCKET_BUFFER_SIZE = 16384;
 
-    char    buffer[DEFAULT_SOCKET_BUFFER_SIZE];
-    int     read_result = -1;
+//    char    buffer[DEFAULT_SOCKET_BUFFER_SIZE];
+    char    buffer[size];
+    int     result = -1;
     size_t  received_bytes = 0;
 
-    read_result = SSL_read_ex(ssl, buffer, size, &received_bytes);
-    LOGT << "ssl read received_size: " << received_bytes;
+    result = SSL_read_ex(ssl, buffer, size, &received_bytes);
+    LOGT << "ssl read received_size: " << received_bytes << " read result = " << result;
 
 //    if (read_result == 0)
 //        throw std::runtime_error("openssl reading error: socket was closed by client"); // ----->
-    if (read_result == 0)
+    if (result == 0)
         return io::Buffer::create(); // ----->
 
-    if (read_result <  0) {
-        TSSLErrorCode code = SSL_get_error(ssl, read_result);
+    if (result <  0) {
+        TSSLErrorCode code = SSL_get_error(ssl, result);
         LOGT << "ssl error " << getSSLErrorString(ssl, code);
         if (code == TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
             code == TSSLErrorCode::SSL_ERROR_CODE_NONE)
@@ -228,78 +240,78 @@ io::Buffer::TSharedPtr API::read(TSSL *ssl, size_t const &size) {
             throw std::runtime_error("openssl reading error: " + getSSLErrorString(ssl, code));
     }
 
-    return io::Buffer::create(buffer, buffer + read_result); // ----->
+    return io::Buffer::create(io::Buffer(buffer, buffer + (int)received_bytes)); // ----->
 }
 
 
-CContext::CContext(
-    bool        const &is_blocking_mode,
-    std::string const &file_name_private_key,
-    std::string const &file_name_certificate)
-:
-    m_is_blocking_mode(is_blocking_mode)
-{
-    m_context = API::instance().createContext();
-    API::instance().configureContext(m_context, file_name_private_key, file_name_certificate);
-}
+//CContext::CContext(
+//    bool        const &is_blocking_mode,
+//    std::string const &file_name_private_key,
+//    std::string const &file_name_certificate)
+//:
+//    m_is_blocking_mode(is_blocking_mode)
+//{
+//    m_context = API::instance().createContext();
+//    API::instance().configureContext(m_context, file_name_private_key, file_name_certificate);
+//}
 
 
-CContext::~CContext() {
-    API::instance().releaseContext(m_context);
-}
+//CContext::~CContext() {
+//    API::instance().releaseContext(m_context);
+//}
 
 
-ISSL::TSharedPtr CContext::accept(int const &fd) {
-    LOGT << "fd " << fd;
-    CSSL::TSharedPtr ssl = CSSL::create(shared_from_this(), fd, m_is_blocking_mode);
-    ssl->accept();
-    return ssl;
-}
+//ISSL::TSharedPtr CContext::accept(int const &fd) {
+//    LOGT << "fd " << fd;
+//    CSSL::TSharedPtr ssl = CSSL::create(shared_from_this(), fd, m_is_blocking_mode);
+//    ssl->accept();
+//    return ssl;
+//}
 
 
-CContext::CSSL::CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode)
-:
-    m_is_blocking_mode  (is_blocking_mode),
-    m_ssl               (API::instance().createSSL(context->m_context, fd))
-{}
+//CContext::CSSL::CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode)
+//:
+//    m_is_blocking_mode  (is_blocking_mode),
+//    m_ssl               (API::instance().createSSL(context->m_context, fd))
+//{}
 
 
-CContext::CSSL::~CSSL() {
-    API::instance().releaseSSL(m_ssl);
-}
+//CContext::CSSL::~CSSL() {
+//    API::instance().releaseSSL(m_ssl);
+//}
 
 
-size_t CContext::CSSL::write(io::Buffer::TSharedPtr const &packet) {
-    API::instance().write(m_ssl, packet);
-    return packet->size();
-}
+//size_t CContext::CSSL::write(io::Buffer::TSharedPtr const &packet) {
+//    API::instance().write(m_ssl, packet);
+//    return packet->size();
+//}
 
 
-io::Buffer::TSharedPtr CContext::CSSL::read(size_t const &size) {
-    return API::instance().read(m_ssl, size); // ----->
-}
+//io::Buffer::TSharedPtr CContext::CSSL::read(size_t const &size) {
+//    return API::instance().read(m_ssl, size); // ----->
+//}
 
 
-int CContext::CSSL::getID() const {
-    return {};
-}
+//int CContext::CSSL::getID() const {
+//    return {};
+//}
 
 
-void CContext::CSSL::initialize() {
-}
+//void CContext::CSSL::initialize() {
+//}
 
 
-void CContext::CSSL::finalize() {
-}
+//void CContext::CSSL::finalize() {
+//}
 
 
-void CContext::CSSL::accept() {
-    API::instance().acceptSSL(m_ssl, m_is_blocking_mode);
-}
+//void CContext::CSSL::accept() {
+//    API::instance().acceptSSL(m_ssl, m_is_blocking_mode);
+//}
 
 
-} // openssl
-} // implementation
+//} // openssl
+//} // implementation
 } // encryption
 } // iridium
 

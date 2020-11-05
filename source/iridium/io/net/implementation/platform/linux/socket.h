@@ -13,7 +13,7 @@
 #ifdef BUILD_FLAG_OPENSSL
 
 
-#include "iridium/encryption/implementation/openssl.h"
+#include "iridium/encryption/openssl.h"
 
 
 namespace iridium {
@@ -39,8 +39,8 @@ public:
 private:
     bool initializeAsync();
 
-    encryption::implementation::openssl::API::TContext  *m_context;
-    encryption::implementation::openssl::API::TSSL      *m_ssl;
+    encryption::OpenSSL::TContext  *m_context;
+    encryption::OpenSSL::TSSL      *m_ssl;
     int m_ssl_init_step;
 };
 

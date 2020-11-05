@@ -18,7 +18,7 @@
 #include "iridium/enum.h"
 
 #include "iridium/encryption/keys.h"
-#include "iridium/encryption/ssl.h"
+//#include "iridium/encryption/ssl.h"
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -29,16 +29,16 @@
 
 namespace iridium {
 namespace encryption {
-namespace implementation {
+//namespace implementation {
 // todo: rename ...::openssl::API to ...::external::OpenSSL
-namespace openssl {
+//namespace openssl {
 
 
-class API: public pattern::Singleton<API> {
+class OpenSSL: public pattern::Singleton<OpenSSL> {
 public:
     typedef SSL_CTX TContext;
     typedef SSL     TSSL;
-    virtual ~API();
+    virtual ~OpenSSL();
 
     DEFINE_ENUM(
         TErrorCode,
@@ -117,6 +117,8 @@ public:
 
     TSSLErrorCode connectSSL(TSSL *ssl);
 
+    TSSLErrorCode setConnectState(TSSL *ssl);
+
     TSSLErrorCode doHandshake(TSSL *ssl);
 
     size_t write(TSSL *ssl, io::Buffer::TSharedPtr const &packet);
@@ -130,52 +132,52 @@ public:
     TSSLErrorCode getSSLErrorCode(TSSL *ssl, int const &code);
 
 private:
-    friend class pattern::Singleton<API>;
-    API();
+    friend class pattern::Singleton<OpenSSL>;
+    OpenSSL();
 };
 
 
-class CContext:
-    public IContext,
-    public std::enable_shared_from_this<CContext>
-{
-public:
-    CContext(
-        bool        const &is_blocking_mode         = false,
-        std::string const &file_name_private_key    = DEFAULT_FILE_NAME_PRIVATE_KEY,
-        std::string const &file_name_certificate    = DEFAULT_FILE_NAME_CERTIFICATE);
-    virtual ~CContext();
-    DEFINE_CREATE(CContext)
+//class CContext:
+//    public IContext,
+//    public std::enable_shared_from_this<CContext>
+//{
+//public:
+//    CContext(
+//        bool        const &is_blocking_mode         = false,
+//        std::string const &file_name_private_key    = DEFAULT_FILE_NAME_PRIVATE_KEY,
+//        std::string const &file_name_certificate    = DEFAULT_FILE_NAME_CERTIFICATE);
+//    virtual ~CContext();
+//    DEFINE_CREATE(CContext)
 
-    class CSSL: public ISSL {
-    public:
-        CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode);
-        virtual ~CSSL();
-        DEFINE_CREATE(CSSL)
+//    class CSSL: public ISSL {
+//    public:
+//        CSSL(CContext::TSharedPtr const &context, int const &fd, bool const &is_blocking_mode);
+//        virtual ~CSSL();
+//        DEFINE_CREATE(CSSL)
 
-        size_t write(io::Buffer::TSharedPtr const &packet) override;
-        io::Buffer::TSharedPtr read(size_t const &size) override;
-        int getID() const override;
-        void initialize() override;
-        void finalize() override;
-    private:
-        friend class CContext;
-        void accept();
+//        size_t write(io::Buffer::TSharedPtr const &packet) override;
+//        io::Buffer::TSharedPtr read(size_t const &size) override;
+//        int getID() const override;
+//        void initialize() override;
+//        void finalize() override;
+//    private:
+//        friend class CContext;
+//        void accept();
 
-        bool        m_is_blocking_mode;
-        API::TSSL  *m_ssl;
-    };
+//        bool        m_is_blocking_mode;
+//        API::TSSL  *m_ssl;
+//    };
 
-    ISSL::TSharedPtr accept(int const &fd) override;
+//    ISSL::TSharedPtr accept(int const &fd) override;
 
-private:
-    bool            m_is_blocking_mode;
-    API::TContext  *m_context;
-};
+//private:
+//    bool            m_is_blocking_mode;
+//    API::TContext  *m_context;
+//};
 
 
-} // openssl
-} // implementation
+//} // openssl
+//} // implementation
 } // encryption
 } // iridium
 

@@ -37,7 +37,7 @@ void CSocketClientHandler::run(std::atomic<bool> &is_running) {
 
     {
         auto initial_event  = Event::create(Event{Event::TType::WRITE, m_socket});
-        is_continue         = m_protocol_handler->update(m_transmitter, initial_event);
+        is_continue         = m_protocol_handler->redirectStreams(m_transmitter, initial_event);
 //        initial_event->type = Event::TType::WRITE;
         is_transmitted      = m_transmitter->transmit(initial_event);
     }
@@ -45,7 +45,7 @@ void CSocketClientHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
         for (auto const &event: m_listener->wait()) {
             LOGT << event->stream->getID() << " " << event->type;
-            is_continue     = m_protocol_handler->update(m_transmitter, event);
+            is_continue     = m_protocol_handler->redirectStreams(m_transmitter, event);
             is_transmitted  = m_transmitter->transmit(event);
         }
     }

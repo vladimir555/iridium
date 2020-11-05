@@ -20,7 +20,7 @@ public:
     DEFINE_IMPLEMENTATION(CProtocolHandler)
 //    CProtocolHandler() = default;
     CProtocolHandler();
-    bool update(
+    bool redirectStreams(
         ITransmitterStreams::TSharedPtr const &transmitter,
         Event::TSharedPtr               const &event) override;
 

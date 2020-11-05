@@ -80,7 +80,7 @@ URL CSocket::getPeerURL(int const &fd) {
 void CSocket::initialize() {
     // open
     auto protocol   = m_url.getProtocol() == URL::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;
-    m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, protocol), "socket open error", m_url);
+    m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error", m_url);
     LOGT << "fd " << m_socket;
 
     //todo: unix / inet protocol by url
@@ -93,15 +93,18 @@ void CSocket::initialize() {
     address.sin_family          = AF_INET;
     address.sin_port            = htons( *m_url.getPort() );
 
+    static int const yes = 1;
     if (m_is_server_mode) {
-        int yes = 1;
         // todo: TCP_NODELAY
         setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
 
         assertOK(::bind   (m_socket, (struct sockaddr *) &address, sizeof(address)), "socket bind error", m_url);
         assertOK(::listen (m_socket, SOMAXCONN), "socket listen error", m_url);
     } else {
-//        assertOK(::connect(m_socket, (struct sockaddr *) &address, sizeof(address)), "socket connect error", m_url);
+        setsockopt(m_socket, SOL_TCP, TCP_NODELAY, &yes, sizeof(yes));
+//        assertOK(
+        ::connect(m_socket, (struct sockaddr *) &address, sizeof(address));
+//        , "socket connect error", m_url);
     }
     setBlockingMode(false);
 
