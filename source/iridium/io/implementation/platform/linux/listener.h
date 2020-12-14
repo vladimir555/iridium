@@ -13,6 +13,7 @@
 
 
 #include "iridium/io/listener.h"
+#include "iridium/threading/synchronized.h"
 
 #include <unordered_map>
 #include <sys/epoll.h>
@@ -24,7 +25,10 @@ namespace implementation {
 namespace platform {
 
 
-class CListener: public IListener {
+class CListener:
+    public IListener,
+    protected threading::CSynchronized
+{
 public:
     DEFINE_IMPLEMENTATION(CListener)
     CListener();
@@ -37,6 +41,9 @@ public:
     TEvents wait() override;
 
 private:
+    threading::IMutex::TSharedPtr getMutex() const override;
+//    threading::IMutex::TSharedPtr threading::CSynchronized::getMutex() const;
+
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;
 
     static int assertOK(int const &result, std::string const &message);
@@ -44,6 +51,7 @@ private:
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
             m_map_fd_stream;
     int     m_epoll_fd;
+    int     m_event_fd;
     //struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 };
 

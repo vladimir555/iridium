@@ -19,7 +19,7 @@ namespace implementation {
 
 CChannel::CChannel()
 :
-    Synchronized(CMutex::create())
+    CSynchronized(CMutex::create())
 {}
 
 

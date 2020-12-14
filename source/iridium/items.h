@@ -30,6 +30,17 @@ std::vector<T> assign(std::list<T> const &source) {
 }
 
 
+template<typename T, typename ... TItems>
+bool checkOneOf(T const &source, TItems const & ... items_) {
+    std::initializer_list<T> const &items{items_ ...};
+    for (auto const &item: items)
+        if (source == item)
+            return true;
+
+    return false; // ----->
+}
+
+
 } // iridium
 
 

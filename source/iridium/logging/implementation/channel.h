@@ -24,7 +24,7 @@ class CChannel:
     public IChannel,
     public pattern::Broadcaster<ISink>,
     public pattern::NonCopyable,
-    public threading::Synchronized
+    public threading::CSynchronized
 {
 public:
     DEFINE_IMPLEMENTATION(CChannel)

@@ -17,7 +17,7 @@ using iridium::threading::implementation::CAsyncQueue;
 using iridium::threading::implementation::CThread;
 using iridium::threading::implementation::CMutex;
 using iridium::threading::implementation::CWorker;
-using iridium::threading::Synchronized;
+using iridium::threading::CSynchronized;
 using iridium::io::implementation::CListener;
 using iridium::convertion::convert;
 using std::string;
@@ -250,26 +250,26 @@ namespace implementation {
 //}
 
 
-CSocketClient::CSocketClient(
-    URL const &url,
-    protocol::IProtocolHandler::TSharedPtr
-        const &protocol_handler)
-:
-    m_thread_socket_client(
-        CThread::create(
-            CSocketClientHandler::create(url, protocol_handler),
-            "socket_client"))
-{}
+//CSocketClient::CSocketClient(
+//    URL const &url,
+//    protocol::IProtocolHandler::TSharedPtr
+//        const &protocol_handler)
+//:
+//    m_thread_socket_client(
+//        CThread::create(
+//            CSocketClientHandler::create(url, protocol_handler),
+//            "socket_client"))
+//{}
 
 
-void CSocketClient::initialize() {
-    m_thread_socket_client->initialize();
-}
+//void CSocketClient::initialize() {
+//    m_thread_socket_client->initialize();
+//}
 
 
-void CSocketClient::finalize() {
-    m_thread_socket_client->finalize();
-}
+//void CSocketClient::finalize() {
+//    m_thread_socket_client->finalize();
+//}
 
 
 } // implementation

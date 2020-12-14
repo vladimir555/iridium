@@ -15,8 +15,11 @@
 
 #include <iridium/io/fs/implementation/file_stream_reader.h>
 #include <iridium/io/implementation/stream_buffer.h>
+#include <iridium/io/protocol/http/implementation/protocol_factory.h>
+#include <iridium/io/protocol/http/implementation/request_handler.h>
+#include <iridium/io/protocol/http/implementation/response_handler.h>
 
-#include <memory>
+#include "iridium/items.h"
 
 
 using namespace std;
@@ -27,25 +30,32 @@ using iridium::threading::sleep;
 
 
 #include <iridium/io/fs/implementation/file_stream.h>
-#include <iridium/io/protocol/http/implementation/protocol_factory.h>
 #include <iridium/io/implementation/listener.h>
 #include <iridium/io/net/implementation/socket.h>
 using iridium::io::fs::implementation::CFileStream;
 //using iridium::io::implementation::CStreamProxy;
-using iridium::io::protocol::http::implementation::CProtocolFactory;
-using iridium::io::net::implementation::CSocketServer;
-using iridium::io::net::implementation::CSocketClient;
+//using iridium::io::net::implementation::CSocketServer;
+//using iridium::io::net::implementation::CSocketClient;
 using iridium::io::implementation::CStreamReaderBuffer;
 using iridium::io::implementation::CStreamWriterBuffer;
+using iridium::io::protocol::http::implementation::CSimpleProtocolFactory;
 
 
 #include <set>
 
 
+#include "iridium/io/implementation/stream_pool.h"
+#include "iridium/io/net/implementation/socket_client.h"
+#include "iridium/io/net/implementation/socket_acceptor.h"
+#include "iridium/io/net/implementation/socket_peer.h"
+#include "iridium/io/net/implementation/client.h"
+#include "iridium/io/net/socket.h"
+
+
 namespace iridium {
 namespace io {
 namespace net {
-namespace socket {
+namespace test {
 
 
 class CHTTPProtocolClientHandler: public protocol::IProtocolHandler {
@@ -62,20 +72,30 @@ public:
     bool redirectStreams(ITransmitterStreams::TSharedPtr const &transmitter, Event::TSharedPtr const &event) override {
         LOGT << "state = " << m_state << " event = " << event->type;
 
-        if((event->type == Event::TType::OPEN   ||
-            event->type == Event::TType::WRITE) &&
-            m_state == 0)
+        if(checkOneOf(event->type,
+            Event::TType::OPEN,
+            Event::TType::WRITE
+        ) && m_state == 0)
+
+//        if(checkOneOf<Event::TType>(
+//            event->type, {
+//                Event::TType::OPEN,
+//                Event::TType::WRITE
+//            }) &&
+//            m_state == 0)
         {
             string request = ""
             "GET / HTTP/1.1\r\n"
-            "Host: ya.ru:443\r\n"
+            "Host: example.com:443\r\n"
             "User-Agent: curl/7.58.0\r\n"
             "Accept: */*"
             "\r\n"
             "\r\n";
 
-            transmitter->setReader(CStreamReaderBuffer::create(Buffer::create(request)));
-            transmitter->setWriter(std::dynamic_pointer_cast<IStreamWriter>(event->stream));
+            transmitter->set(
+                CStreamReaderBuffer::create(
+                    Buffer::create(request)),
+                    std::dynamic_pointer_cast<IStreamWriter>(event->stream));
 
             m_state++;
 
@@ -83,8 +103,7 @@ public:
         }
 
         if (event->type == Event::TType::READ && m_state == 1) {
-            transmitter->setReader(std::dynamic_pointer_cast<IStreamReader>(event->stream));
-            transmitter->setWriter(m_response_stream);
+            transmitter->set(std::dynamic_pointer_cast<IStreamReader>(event->stream), m_response_stream);
 
             m_state++;
 
@@ -105,26 +124,46 @@ private:
 };
 
 
-//TEST(https_server) {
+TEST(https_server) {
+
+//    stream_pool->add();
+
+//    // todo: https
 //    logging::update(logging::config::createDefaultConsoleLoggerConfig());
-//    auto protocol_factory   = CProtocolFactory::create();
-//    auto socket             = CSocketServer::create(URL("https://example.com"), protocol_factory, 10);
+//    auto protocol_factory   = CSimpleProtocolFactory<protocol::http::implementation::CResponseProtocolHandler>::create();
+//    auto socket             = CSocketServer::create(URL("http://localhost:55555"), protocol_factory, 1);
 //    socket->initialize();
 //    LOGT << "begin";
 //    threading::sleep(500000);
 //    LOGT << "end";
 //    socket->finalize();
-//}
+}
 
 
-//TEST(https_client) {
+TEST(https_client) {
+//    logging::update(iridium::logging::config::createDefaultConsoleLoggerConfig());
+
+//    IClient::TSharedPtr client =
+//            implementation::CClient::create(
+//                URL("https://example.com"),
+//                CHTTPProtocolClientHandler::create());
+
+//    client->initialize();
+
+//    LOGT << "begin";
+//    threading::sleep(5000);
+//    LOGT << "end";
+
+//    client->finalize();
+
+
 //    auto socket = CSocketClient::create(URL("http://ya.ru"), CHTTPProtocolClientHandler::create());
 //    socket->initialize();
 //    LOGT << "begin";
 //    threading::sleep(5000);
 //    LOGT << "end";
 //    socket->finalize();
-//}
+}
 
 
 //TEST(https_client) {
@@ -203,6 +242,7 @@ private:
 
 
 TEST(url) {
+    using iridium::io::net::URL;
     ASSERT(URL("")            , std::exception);
     ASSERT(URL("172.16.0.64") , std::exception);
     ASSERT(URL("55555")       , std::exception);
@@ -312,7 +352,7 @@ TEST(wsa) {
 #endif
 
 
-} // socket
+} // test
 } // net
 } // io
 } // iridium

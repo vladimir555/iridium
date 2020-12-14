@@ -4,7 +4,7 @@
 */
 #include "protocol_factory.h"
 
-#include "protocol_handler.h"
+#include "response_handler.h"
 
 
 namespace iridium {
@@ -14,9 +14,9 @@ namespace http {
 namespace implementation {
 
 
-IProtocolHandler::TSharedPtr CProtocolFactory::createProtocolHandler() {
-    return CProtocolHandler::create(); // ----->
-}
+//IProtocolHandler::TSharedPtr CResponseProtocolFactory::createProtocolHandler() {
+//    return CResponseProtocolHandler::create(); // ----->
+//}
    
 
 } // implementation

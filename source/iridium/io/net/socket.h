@@ -16,13 +16,36 @@ namespace io {
 namespace net {
 
 
-class ISocket: public IStreamPort {
+//class ISocket: public IStreamPort {
+//public:
+//    DEFINE_INTERFACE(ISocket)
+
+//    virtual ISocket::TSharedPtr accept() = 0;
+//    virtual URL getURL() const = 0;
+//};
+
+
+class ISocket: public IStream {
 public:
     DEFINE_INTERFACE(ISocket)
 
-    virtual ISocket::TSharedPtr accept() = 0;
     virtual URL getURL() const = 0;
 };
+
+
+class ISocketStream: public ISocket, public IStreamPort {
+public:
+    DEFINE_INTERFACE(ISocketStream)
+};
+
+
+class ISocketAcceptor: public ISocket {
+public:
+    DEFINE_INTERFACE(ISocketAcceptor)
+
+    virtual ISocketStream::TSharedPtr accept() = 0;
+};
+
 
 
 } // net

@@ -19,49 +19,50 @@ namespace net {
 namespace implementation {
 
 
-CSocketClientHandler::CSocketClientHandler(
-    URL const &url,
-    protocol::IProtocolHandler::TSharedPtr
-        const &protocol_handler)
-:
-    m_protocol_handler  (protocol_handler),
-    m_listener          (CListener::create()),
-    m_socket            (CSocket::create(url, false)),
-    m_transmitter       (CTransmitter::create(m_listener))
-{}
+//CSocketClientHandler::CSocketClientHandler(
+//    URL const &url,
+//    protocol::IProtocolHandler::TSharedPtr
+//        const &protocol_handler)
+//:
+//    m_protocol_handler  (protocol_handler),
+//    m_listener          (CListener::create()),
+//    m_socket            (io::net::implementation::platform::unix::CSocketClient::create(url)),
+//    m_transmitter       (CTransmitter::create(m_listener))
+//{}
 
 
-void CSocketClientHandler::run(std::atomic<bool> &is_running) {
-    bool is_continue    = false;
-    bool is_transmitted = false;
+//void CSocketClientHandler::run(std::atomic<bool> &is_running) {
+//    bool is_continue    = false;
+//    bool is_transmitted = false;
 
-    {
-        auto initial_event  = Event::create(Event{Event::TType::WRITE, m_socket});
-        is_continue         = m_protocol_handler->redirectStreams(m_transmitter, initial_event);
-//        initial_event->type = Event::TType::WRITE;
-        is_transmitted      = m_transmitter->transmit(initial_event);
-    }
+//    {
+//        auto initial_event  = Event::create(Event{Event::TType::WRITE, m_socket});
+//        is_continue         = m_protocol_handler->redirectStreams(m_transmitter, initial_event);
+////        initial_event->type = Event::TType::WRITE;
+//        is_transmitted      = m_transmitter->transmit(initial_event);
+//    }
 
-    while (is_running) {
-        for (auto const &event: m_listener->wait()) {
-            LOGT << event->stream->getID() << " " << event->type;
-            is_continue     = m_protocol_handler->redirectStreams(m_transmitter, event);
-            is_transmitted  = m_transmitter->transmit(event);
-        }
-    }
-}
+//    while (is_running) {
 
-
-void CSocketClientHandler::initialize() {
-    m_listener->initialize();
-    m_socket->initialize();
-}
+//        for (auto const &event: m_listener->wait()) {
+//            LOGT << event->stream->getID() << " " << event->type;
+//            is_continue     = m_protocol_handler->redirectStreams(m_transmitter, event);
+//            is_transmitted  = m_transmitter->transmit(event);
+//        }
+//    }
+//}
 
 
-void CSocketClientHandler::finalize() {
-    m_socket->finalize();
-    m_listener->finalize();
-}
+//void CSocketClientHandler::initialize() {
+//    m_listener->initialize();
+//    m_socket->initialize();
+//}
+
+
+//void CSocketClientHandler::finalize() {
+//    m_socket->finalize();
+//    m_listener->finalize();
+//}
 
 
 } // implementation

@@ -9,7 +9,7 @@ namespace iridium {
 namespace io {
 
     
-bool operator < (IStream::TSharedPtr const &l, IStream::TSharedPtr const &r) {
+bool operator < (IStream::TConstSharedPtr const &l, IStream::TConstSharedPtr const &r) {
     return l && r && l->getID() < r->getID();
 }
     

@@ -32,14 +32,16 @@ public:
     static size_t const DEFAULT_BUFFER_COUNT;
 
     CTransmitter(
-        IListener::TSharedPtr   const &listener,
         size_t                  const &buffer_size  = DEFAULT_BUFFER_SIZE,
         size_t                  const &buffer_count = DEFAULT_BUFFER_COUNT);
 
     virtual ~CTransmitter();
 
-    void setReader(IStreamReader::TSharedPtr const &reader) override;
-    void setWriter(IStreamWriter::TSharedPtr const &writer) override;
+    void set(
+        IStreamReader::TSharedPtr const &reader,
+        IStreamWriter::TSharedPtr const &writer
+    ) override;
+
     IStreamReader::TConstSharedPtr getReader() const override;
     IStreamWriter::TConstSharedPtr getWriter() const override;
 
@@ -50,7 +52,6 @@ private:
     IStreamWriter::TSharedPtr       m_writer;
     size_t const                    m_buffer_size;
     size_t const                    m_buffer_count;
-    IListener::TSharedPtr           m_listener;
     std::list<Buffer::TSharedPtr>   m_buffers;
 };
     
