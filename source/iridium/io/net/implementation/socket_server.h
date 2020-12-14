@@ -18,23 +18,23 @@ namespace net {
 namespace implementation {
 
 
-class CSocketServer: 
-    public pattern::IInitializable
-{
-public:
-    DEFINE_IMPLEMENTATION(CSocketServer)
+//class CSocketServer:
+//    public pattern::IInitializable
+//{
+//public:
+//    DEFINE_IMPLEMENTATION(CSocketServer)
 
-    CSocketServer(
-        URL     const &url,
-        protocol::IProtocolFactory::TSharedPtr const &protocol_factory,
-        size_t  const &threads_count);
+//    CSocketServer(
+//        URL     const &url,
+//        protocol::IProtocolFactory::TSharedPtr const &protocol_factory,
+//        size_t  const &threads_count);
 
-    void initialize()   override;
-    void finalize()     override;
+//    void initialize()   override;
+//    void finalize()     override;
 
-private:
-    threading::IThread::TSharedPtr m_thread_acceptor;
-};
+//private:
+//    threading::IThread::TSharedPtr m_thread_acceptor;
+//};
 
 
 } // implementation

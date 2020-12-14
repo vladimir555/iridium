@@ -26,10 +26,15 @@ namespace io {
 class ITransmitterStreams {
 public:
     DEFINE_INTERFACE(ITransmitterStreams)
-    virtual void setReader(IStreamReader::TSharedPtr const &reader) = 0;
-    virtual void setWriter(IStreamWriter::TSharedPtr const &writer) = 0;
+//    virtual void setReader(IStreamReader::TSharedPtr const &reader) = 0;
+//    virtual void setWriter(IStreamWriter::TSharedPtr const &writer) = 0;
     virtual IStreamReader::TConstSharedPtr getReader() const = 0;
     virtual IStreamWriter::TConstSharedPtr getWriter() const = 0;
+
+    virtual void set(
+        IStreamReader::TSharedPtr const &reader,
+        IStreamWriter::TSharedPtr const &writer
+    ) = 0;
 };
 
 
@@ -40,7 +45,7 @@ public:
 };
 
 
-bool operator < (ITransmitter::TSharedPtr const &l, ITransmitter::TSharedPtr const &r);
+bool operator < (ITransmitterStreams::TSharedPtr const &l, ITransmitterStreams::TSharedPtr const &r);
 
 
 } // io

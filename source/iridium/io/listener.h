@@ -10,6 +10,7 @@
 #include "iridium/enum.h"
 #include "iridium/pattern/initializable.h"
 #include "iridium/threading/async_queue.h"
+#include "iridium/threading/synchronized.h"
 
 #include "stream.h"
 
@@ -35,7 +36,11 @@ public:
 };
 
 
-class IListener: public pattern::IInitializable {
+// synchronized
+class IListener:
+    public threading::ISynchronized,
+    public pattern::IInitializable
+{
 public:
     DEFINE_INTERFACE(IListener)
 

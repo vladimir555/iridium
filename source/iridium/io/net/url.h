@@ -36,6 +36,8 @@ public:
         POSTGRES    = 5432
     )
 
+    DEFINE_CREATE(URL)
+
     URL(std::string const &url);
    ~URL() = default;
 

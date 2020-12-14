@@ -1,95 +1,95 @@
-#include "peers.h"
+//#include "peers.h"
 
-#include "iridium/threading/implementation/recursive_mutex.h"
-#include "iridium/threading/synchronized_scope.h"
-#include "iridium/io/implementation/transmitter.h"
-
-
-using iridium::threading::implementation::CRecursiveMutex;
-using iridium::io::implementation::CTransmitter;
+//#include "iridium/threading/implementation/recursive_mutex.h"
+//#include "iridium/threading/synchronized_scope.h"
+//#include "iridium/io/implementation/transmitter.h"
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
+//using iridium::threading::implementation::CRecursiveMutex;
+//using iridium::io::implementation::CTransmitter;
 
 
-Peers::Peers(
-    protocol::IProtocolFactory::TSharedPtr  const &protocol_factory,
-    IListener::TSharedPtr                   const &listener)
-:
-    Synchronized        (CRecursiveMutex::create()),
-    m_protocol_factory  (protocol_factory),
-    m_listener          (listener)
-{}
+//namespace iridium {
+//namespace io {
+//namespace net {
+//namespace implementation {
 
 
-Peer::TSharedPtr Peers::get(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE
-        auto peer = m_map_stream_peer[stream];
-    if(!peer) {
-        peer = Peer::create();
-        peer->is_in_processing = false;
-    }
-
-    if(!peer->protocol_handler)
-        peer->protocol_handler = m_protocol_factory->createProtocolHandler();
-
-    if(!peer->transmitter)
-        peer->transmitter =
-        CPeerTransmitter::create(
-            CTransmitter::create(m_listener), shared_from_this(), peer);
-
-    return peer; // ----->
-}
+//Peers::Peers(
+//    protocol::IProtocolFactory::TSharedPtr  const &protocol_factory,
+//    IListener::TSharedPtr                   const &listener)
+//:
+//    Synchronized        (CRecursiveMutex::create()),
+//    m_protocol_factory  (protocol_factory),
+//    m_listener          (listener)
+//{}
 
 
-void Peers::set(IStream::TSharedPtr const &stream, Peer::TSharedPtr const &peer) {
-    LOCK_SCOPE
-        m_map_stream_peer[stream] = peer;
-}
+//Peer::TSharedPtr Peers::get(IStream::TSharedPtr const &stream) {
+//    LOCK_SCOPE
+//        auto peer = m_map_stream_peer[stream];
+//    if(!peer) {
+//        peer = Peer::create();
+//        peer->is_in_processing = false;
+//    }
+
+//    if(!peer->protocol_handler)
+//        peer->protocol_handler = m_protocol_factory->createProtocolHandler();
+
+//    if(!peer->transmitter)
+//        peer->transmitter =
+//        CPeerTransmitter::create(
+//            CTransmitter::create(m_listener), shared_from_this(), peer);
+
+//    return peer; // ----->
+//}
 
 
-CPeerTransmitter::CPeerTransmitter(
-    ITransmitter::TSharedPtr    const &transmitter,
-    Peers::TSharedPtr           const &peers,
-    Peer::TSharedPtr            const &peer)
-:
-    m_transmitter   (transmitter),
-    m_peers         (peers),
-    m_peer          (peer)
-{}
+//void Peers::set(IStream::TSharedPtr const &stream, Peer::TSharedPtr const &peer) {
+//    LOCK_SCOPE
+//        m_map_stream_peer[stream] = peer;
+//}
 
 
-void CPeerTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {
-    m_transmitter->setReader(reader);
-    m_peers->set(reader, m_peer);
-}
+//CPeerTransmitter::CPeerTransmitter(
+//    ITransmitter::TSharedPtr    const &transmitter,
+//    Peers::TSharedPtr           const &peers,
+//    Peer::TSharedPtr            const &peer)
+//:
+//    m_transmitter   (transmitter),
+//    m_peers         (peers),
+//    m_peer          (peer)
+//{}
 
 
-void CPeerTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
-    m_transmitter->setWriter(writer);
-    m_peers->set(writer, m_peer);
-}
+//void CPeerTransmitter::setReader(IStreamReader::TSharedPtr const &reader) {
+//    m_transmitter->setReader(reader);
+//    m_peers->set(reader, m_peer);
+//}
 
 
-IStreamReader::TConstSharedPtr CPeerTransmitter::getReader() const {
-    return m_transmitter->getReader(); // ----->
-}
+//void CPeerTransmitter::setWriter(IStreamWriter::TSharedPtr const &writer) {
+//    m_transmitter->setWriter(writer);
+//    m_peers->set(writer, m_peer);
+//}
 
 
-IStreamWriter::TConstSharedPtr CPeerTransmitter::getWriter() const {
-    return m_transmitter->getWriter(); // ----->
-}
+//IStreamReader::TConstSharedPtr CPeerTransmitter::getReader() const {
+//    return m_transmitter->getReader(); // ----->
+//}
 
 
-bool CPeerTransmitter::transmit(Event::TSharedPtr const &event) {
-    return m_transmitter->transmit(event); // ----->
-}
+//IStreamWriter::TConstSharedPtr CPeerTransmitter::getWriter() const {
+//    return m_transmitter->getWriter(); // ----->
+//}
 
 
-} // implementation
-} // net
-} // io
-} // iridium
+//bool CPeerTransmitter::transmit(Event::TSharedPtr const &event) {
+//    return m_transmitter->transmit(event); // ----->
+//}
+
+
+//} // implementation
+//} // net
+//} // io
+//} // iridium

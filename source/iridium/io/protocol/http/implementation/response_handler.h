@@ -15,11 +15,11 @@ namespace http {
 namespace implementation {
 
 
-class CProtocolHandler: public IProtocolHandler {
+class CResponseProtocolHandler: public IProtocolHandler {
 public:
-    DEFINE_IMPLEMENTATION(CProtocolHandler)
+    DEFINE_IMPLEMENTATION(CResponseProtocolHandler)
 //    CProtocolHandler() = default;
-    CProtocolHandler();
+    CResponseProtocolHandler();
     bool redirectStreams(
         ITransmitterStreams::TSharedPtr const &transmitter,
         Event::TSharedPtr               const &event) override;

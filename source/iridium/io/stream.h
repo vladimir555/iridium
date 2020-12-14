@@ -61,14 +61,14 @@ public:
 };
 
     
-bool operator < (IStream::TSharedPtr const &l, IStream::TSharedPtr const &r);
+bool operator < (IStream::TConstSharedPtr const &l, IStream::TConstSharedPtr const &r);
     
     
 /*
 events: accept, read, write, end -> acceptor worker -> initialize -> protocol workers -> finalize
 protocol workers:
     transaction: event -> action -> on read: buffer -> protocol -> event on read, event end -> acceptor worker
- */
+*/
 
 
 } // io

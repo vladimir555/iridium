@@ -12,6 +12,9 @@
 #ifdef BUILD_FLAG_OPENSSL
 
 
+#include "iridium/encryption/keys.h"
+
+
 using iridium::encryption::OpenSSL;
 
 
@@ -21,152 +24,145 @@ namespace net {
 namespace implementation {
 namespace platform {
 
+//// todo:
+//// CSocketAcceptor
+//// CSocketClient
+//// CSocketPeer
+//CSocket::CSocket(URL const &url, TMode const &mode)
+//:
+//    unix::CSocket   (url, mode),
+//    m_ssl           (nullptr),
+//    m_ssl_init_step (0)
+//{}
 
-CSocket::CSocket(URL const &url, bool const &is_server_mode)
-:
-    unix::CSocket   (url, is_server_mode),
-    m_ssl_init_step (0)
-{}
+
+//CSocket::CSocket(URL const &url, int const &fd, encryption::OpenSSL::TSSL *ssl)
+//:
+//    unix::CSocket   (url, fd),
+//    m_ssl_init_step (4)
+//{
+//    m_mode  = TMode::PEER;
+//    m_ssl   = ssl;
+//}
 
 
-void CSocket::initialize() {
-    unix::CSocket::initialize();
+//void CSocket::initialize() {
+//    if (m_mode != TMode::PEER)
+//        unix::CSocket::initialize();
 
-//    assertOK(::connect(m_socket, (struct sockaddr *) &m_address, sizeof(m_address)), "socket connect error", m_url);
+//    if (m_url.getProtocol() == URL::TProtocol::HTTPS && m_mode == TMode::SERVER) {
+//        m_context   = OpenSSL::instance().createContext(true);
 
-//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
-//        m_context   = API::instance().createContext("cert/iridium.key", "cert/iridium.crt");
-//        m_ssl       = API::instance().createSSL(m_context, m_socket);
-////        API::instance().connectSSL(m_ssl);
-////        // todo: int ssl init steps on read/wite methods
-//        m_ssl_init_step = 1;
+//        OpenSSL::instance().configureContext(m_context,
+//            encryption::DEFAULT_FILE_NAME_PRIVATE_KEY,
+//            encryption::DEFAULT_FILE_NAME_CERTIFICATE);
+//        m_ssl_init_step = 4;
 //    }
+//}
 
-}
 
-
-void CSocket::finalize() {
+//void CSocket::finalize() {
 //    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
-//        API::instance().releaseSSL(m_ssl);
-//        API::instance().releaseContext(m_context);
+//        if (m_ssl)
+//            OpenSSL::instance().releaseSSL(m_ssl);
+//        OpenSSL::instance().releaseContext(m_context);
 //    }
-    unix::CSocket::finalize();
-}
+//    unix::CSocket::finalize();
+//}
 
 
-ISocket::TSharedPtr CSocket::accept() {
+//ISocket::TSharedPtr CSocket::accept() {
 //    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
-//        API::instance().acceptSSL(m_ssl, m_is_blocking);
-//        return nullptr; // todo:
+//        auto socket = unix::CSocket::accept();
+//        if (!socket)
+//            return nullptr; // ----->
+//        auto ssl    = OpenSSL::instance().createSSL(m_context, socket->getID());
+//        LOGT << "! " << m_is_blocking;
+//        OpenSSL::instance().acceptSSL(ssl, m_is_blocking);
+
+//        return CSocket::create(socket->getURL(), socket->getID(), ssl);
 //    } else {
-        return unix::CSocket::accept();
+//        return unix::CSocket::accept();
 //    }
-}
+//    return nullptr;
+//}
 
 
-size_t CSocket::write(Buffer::TSharedPtr const &buffer) {
-//    if (initializeAsync()) {
+//size_t CSocket::write(Buffer::TSharedPtr const &buffer) {
+//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
+//        if (initializeSSLAsync()) {
+//            assertExists(buffer, "write error: buffer is null");
+//            assertExists(m_ssl,  "write error: ssl is null");
+//            LOGT << "ssl write";
+//            return OpenSSL::instance().write(m_ssl, buffer); // ----->
+//        } else
+//            return 0; // ----->
+//    } else
 //        return unix::CSocket::write(buffer); // ----->
-//    } else {
-//        return 0;
-//    }
-
-    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
-        if (initializeAsync()) {
-            assertExists(buffer, "write error: buffer is null");
-            assertExists(m_ssl,  "write error: ssl is null");
-            LOGT << "ssl write";
-            return OpenSSL::instance().write(m_ssl, buffer); // ----->
-        } else
-            return 0; // ----->
-    } else
-        return unix::CSocket::write(buffer); // ----->
-}
+//}
 
 
-Buffer::TSharedPtr CSocket::read(size_t const &size) {
-//    if (initializeAsync()) {
+//Buffer::TSharedPtr CSocket::read(size_t const &size) {
+//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
+//        if (initializeSSLAsync()) {
+//            auto result = OpenSSL::instance().read(m_ssl, size);
+//            LOGT << "ssl read: " << *result;
+//            return result;
+//        } else
+//            return Buffer::create(); // ----->
+//    } else
 //        return unix::CSocket::read(size); // ----->
-//    } else {
-//        return Buffer::create(); // ----->
+//}
+
+
+//bool CSocket::initializeSSLAsync() {
+//    switch (m_ssl_init_step) {
+//    case 0: {
+//        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
+//        m_ssl_init_step++;
 //    }
+//    case 1: {
+//        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
+//        LOGT << "context...";
 
-    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
-        if (initializeAsync()) {
-            auto result = OpenSSL::instance().read(m_ssl, size);
-            LOGT << "ssl read: " << *result;
-            return result;
-        } else
-            return Buffer::create(); // ----->
-    } else
-        return unix::CSocket::read(size); // ----->
-}
+//        if (m_mode == TMode::CLIENT) {
+//            m_context   = OpenSSL::instance().createContext();
+//            m_ssl       = OpenSSL::instance().createSSL(m_context, m_socket);
+//            OpenSSL::instance().setConnectState(m_ssl);
+//        }
 
 
-bool CSocket::initializeAsync() {
-    switch (m_ssl_init_step) {
-    case 0: {
-        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
-//        LOGT << "connect...";
-//        auto result = ::connect(m_socket, (struct sockaddr *) &m_address, sizeof(m_address));
-//        LOGT << "connect " << result;
-//        if (result == -1)
+//        LOGT << "context OK";
+//        m_ssl_init_step++;
+//    }
+//    case 2: {
+//        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
+//        m_ssl_init_step++;
+//    }
+//    case 3: {
+//        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
+//        LOGT << "handshake SSL...";
+
+//        auto result =  OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ;
+//        while (
+//            result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
+//            result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
+//            result =  OpenSSL::instance().doHandshake(m_ssl);
+
+//        LOGT << "handshake SSL " << result;
+//        if (result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
+//            result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
 //            return false; // ----->
 //        else
-            m_ssl_init_step++;
-    }
-    case 1: {
-        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
-        LOGT << "context...";
-        m_context   = OpenSSL::instance().createContext();
-        m_ssl       = OpenSSL::instance().createSSL(m_context, m_socket);
-        OpenSSL::instance().setConnectState(m_ssl);
-        LOGT << "context OK";
-        m_ssl_init_step++;
-    }
-    case 2: {
-        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
-//        LOGT << "connect SSL...";
-
-//        auto result = API::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ;
-////        while (
-////            result == API::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
-////            result == API::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
-////        {
-//            result =  API::instance().connectSSL(m_ssl);
-//            LOGT << "connect SSL " << result;
-////        }
-
-//        if (result == API::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
-//            result == API::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
-//            return false; // ----->
-//        else
-            m_ssl_init_step++;
-    }
-    case 3: {
-        LOGT << "-----m_ssl_init_step = " << m_ssl_init_step;
-        LOGT << "handshake SSL...";
-
-        auto result =  OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ;
-        while (
-            result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
-            result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
-            result =  OpenSSL::instance().doHandshake(m_ssl);
-
-        LOGT << "handshake SSL " << result;
-        if (result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
-            result == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE)
-            return false; // ----->
-        else
-            m_ssl_init_step++;
-    }
-    default:
-        LOGT << "skip";
-        return true; // ----->
-    }
-    LOGT << "done";
-    return true; // ----->
-}
+//            m_ssl_init_step++;
+//    }
+//    default:
+//        LOGT << "skip";
+//        return true; // ----->
+//    }
+//    LOGT << "done";
+//    return true; // ----->
+//}
 
 
 } // platform

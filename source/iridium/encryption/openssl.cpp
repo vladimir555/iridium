@@ -12,6 +12,7 @@
 #include "iridium/assert.h"
 
 #include "iridium/threading/thread.h"
+#include "iridium/items.h"
 //#include <signal.h>
 
 
@@ -77,7 +78,9 @@ string OpenSSL::getErrorString() {
 //        return result; // ----->
 //    else
 //        return string(); // ----->
-    return string(buffer, length); // ----->
+    string result(buffer, length);
+    delete buffer;
+    return result; // ----->
 }
 
 
@@ -111,13 +114,14 @@ TValue assertOK(TValue value, string const &message) {
 }
 
 
-OpenSSL::TContext *OpenSSL::createContext(bool const &is_client_method) {
+OpenSSL::TContext *OpenSSL::createContext(bool const &is_server_method) {
+    LOGT;
     SSL_METHOD const *method = nullptr;
 
-    if (is_client_method)
-        method = assertOK(SSLv23_client_method(), "openssl client method init tls error");
-    else
+    if (is_server_method)
         method = assertOK(TLS_server_method(), "openssl server method init tls error");
+    else
+        method = assertOK(TLS_client_method(), "openssl client method init tls error");
 
     return assertOK(SSL_CTX_new(method), "openssl init context error"); // ----->
 }
@@ -163,14 +167,17 @@ void OpenSSL::releaseSSL(TSSL *ssl) {
 
 void OpenSSL::acceptSSL(TSSL *ssl, bool const &is_blocking_mode) {
     LOGT << "is_blocking_mode = " << is_blocking_mode;
-    auto accept_result = SSL_accept(ssl);
-    if (accept_result <= 0) {
+    if (!ssl)
+        throw std::runtime_error("openssl accepting error: ssl is null");
+    auto accept_result  = SSL_accept(ssl);
+    if ( accept_result <= 0) {
         TSSLErrorCode code = SSL_get_error(ssl, accept_result);
-        if (is_blocking_mode || (
-            code != TSSLErrorCode::SSL_ERROR_CODE_WANT_READ     &&
-            code != TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE    &&
-            code != TSSLErrorCode::SSL_ERROR_CODE_NONE)
-        )
+        if (is_blocking_mode ||
+            !checkOneOf(code,
+                TSSLErrorCode::SSL_ERROR_CODE_WANT_READ,
+                TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE,
+                TSSLErrorCode::SSL_ERROR_CODE_NONE
+            ))
             assertOK(ssl, code, "openssl accepting error");
     }
     SSL_set_accept_state(ssl);
@@ -188,8 +195,16 @@ OpenSSL::TSSLErrorCode OpenSSL::connectSSL(TSSL *ssl) {
 
 OpenSSL::TSSLErrorCode OpenSSL::setConnectState(TSSL *ssl) {
     SSL_set_connect_state(ssl);
-    // todo: SSL_set_accept_state(ssl); for server
-    auto error  = getErrorString();
+    auto error = getErrorString();
+    LOGT << error;
+    SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+    return TSSLErrorCode::SSL_ERROR_CODE_NONE;
+}
+
+
+OpenSSL::TSSLErrorCode OpenSSL::setAcceptState(TSSL *ssl) {
+    SSL_set_accept_state(ssl);
+    auto error = getErrorString();
     LOGT << error;
     SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
     return TSSLErrorCode::SSL_ERROR_CODE_NONE;
@@ -220,10 +235,9 @@ io::Buffer::TSharedPtr OpenSSL::read(TSSL *ssl, size_t const &size) {
 //    char    buffer[DEFAULT_SOCKET_BUFFER_SIZE];
     char    buffer[size];
     int     result = -1;
-    size_t  received_bytes = 0;
 
-    result = SSL_read_ex(ssl, buffer, size, &received_bytes);
-    LOGT << "ssl read received_size: " << received_bytes << " read result = " << result;
+    result = SSL_read(ssl, buffer, size);
+    LOGT << "ssl read received_size: " << result << " read result = " << result;
 
 //    if (read_result == 0)
 //        throw std::runtime_error("openssl reading error: socket was closed by client"); // ----->
@@ -240,7 +254,7 @@ io::Buffer::TSharedPtr OpenSSL::read(TSSL *ssl, size_t const &size) {
             throw std::runtime_error("openssl reading error: " + getSSLErrorString(ssl, code));
     }
 
-    return io::Buffer::create(io::Buffer(buffer, buffer + (int)received_bytes)); // ----->
+    return io::Buffer::create(io::Buffer(buffer, buffer + (int)result)); // ----->
 }
 
 

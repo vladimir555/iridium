@@ -1,0 +1,104 @@
+#include "socket_client.h"
+
+
+#ifdef UNIX_PLATFORM
+
+
+using iridium::encryption::OpenSSL;
+
+
+namespace iridium {
+namespace io {
+namespace net {
+namespace implementation {
+namespace platform {
+namespace unix {
+
+
+CSocketClient::CSocketClient(URL const &url)
+:
+    CSocketBase             (url),
+    m_is_ssl_handshake_done (false)
+{}
+
+
+void CSocketClient::initialize() {
+    open();
+    connect();
+
+    if (m_url->getProtocol() == URL::TProtocol::HTTPS) {
+        m_context   = OpenSSL::instance().createContext();
+        m_ssl       = OpenSSL::instance().createSSL(m_context, m_socket);
+        OpenSSL::instance().setConnectState(m_ssl);
+        m_is_ssl_handshake_done = false;
+    }
+}
+
+
+void CSocketClient::finalize() {
+    if (m_ssl) {
+        OpenSSL::instance().releaseSSL(m_ssl);
+        m_ssl = nullptr;
+    }
+    if (m_context) {
+        OpenSSL::instance().releaseContext(m_context);
+        m_context = nullptr;
+    }
+    close();
+}
+
+
+URL CSocketClient::getURL() const {
+    return CSocketBase::getURL();
+}
+
+
+int CSocketClient::getID() const {
+    return m_socket; // ----->
+}
+
+
+Buffer::TSharedPtr CSocketClient::read(size_t const &size) {
+    if (m_ssl) {
+        if (assertSSLInitialized())
+            return OpenSSL::instance().read(m_ssl, size); // ----->
+        else
+            return Buffer::create(); // ----->
+    } else
+        return CSocketBase::read(size); // ----->
+}
+
+
+size_t CSocketClient::write(Buffer::TSharedPtr const &buffer) {
+    if (m_ssl) {
+        if (assertSSLInitialized())
+            return OpenSSL::instance().write(m_ssl, buffer); // ----->
+        else
+            return 0; // ----->
+    } else
+        return CSocketBase::write(buffer); // ----->
+}
+
+
+bool CSocketClient::assertSSLInitialized() {
+    if (m_is_ssl_handshake_done)
+        return true; // ----->
+
+    auto    code =  OpenSSL::instance().doHandshake(m_ssl);
+    m_is_ssl_handshake_done =
+            code == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
+            code == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE; // ----->
+
+    return m_is_ssl_handshake_done; // ----->
+}
+
+
+} // unix
+} // platform
+} // implementation
+} // net
+} // io
+} // iridium
+
+
+#endif // UNIX_PLATFORM

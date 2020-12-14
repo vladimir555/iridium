@@ -16,14 +16,30 @@ namespace http {
 namespace implementation {
         
     
-class CProtocolFactory: public IProtocolFactory {
-public:
-    DEFINE_IMPLEMENTATION(CProtocolFactory)
-    CProtocolFactory() = default;
+//class CResponseProtocolFactory: public IProtocolFactory {
+//public:
+//    DEFINE_IMPLEMENTATION(CResponseProtocolFactory)
+//    CResponseProtocolFactory() = default;
     
+//    IProtocolHandler::TSharedPtr    createProtocolHandler() override;
+//};
+
+
+template<typename TProtocolHandler>
+class CSimpleProtocolFactory: public IProtocolFactory {
+public:
+    DEFINE_IMPLEMENTATION(CSimpleProtocolFactory)
+    CSimpleProtocolFactory() = default;
+
     IProtocolHandler::TSharedPtr    createProtocolHandler() override;
 };
-    
+
+
+template<typename TProtocolHandler>
+IProtocolHandler::TSharedPtr CSimpleProtocolFactory<TProtocolHandler>::createProtocolHandler() {
+    return TProtocolHandler::create(); // ----->
+}
+
 
 } // implementation
 } // http

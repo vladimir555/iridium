@@ -61,6 +61,7 @@ int  CStreamWriterBuffer::getID() const {
 
 
 size_t CStreamWriterBuffer::write(Buffer::TSharedPtr const &buffer) {
+    // todo: https://linux.die.net/man/3/open_memstream
     m_buffer->insert(m_buffer->end(), buffer->begin(), buffer->end());
     return buffer->size(); // ----->
 }

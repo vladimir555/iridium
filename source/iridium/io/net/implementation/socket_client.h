@@ -2,23 +2,30 @@
 #define HEADER_SOCKET_CLIENT_EB673EE6_B48F_42B2_827B_C63CD492DE0F
 
 
-#include "iridium/io/stream.h"
-#include "iridium/io/net/url.h"
-#include "iridium/io/net/socket.h"
-#include "iridium/io/listener.h"
-#include "iridium/io/protocol/protocol_factory.h"
+//#include "iridium/io/stream.h"
+//#include "iridium/io/net/url.h"
+//#include "iridium/io/net/socket.h"
+//#include "iridium/io/listener.h"
+//#include "iridium/io/protocol/protocol_factory.h"
 
-#include "iridium/threading/async_queue.h"
-#include "iridium/threading/worker.h"
-#include "iridium/threading/thread.h"
-#include "iridium/threading/runnable.h"
-#include "iridium/threading/synchronized.h"
+//#include "iridium/threading/async_queue.h"
+//#include "iridium/threading/worker.h"
+//#include "iridium/threading/thread.h"
+//#include "iridium/threading/runnable.h"
+//#include "iridium/threading/synchronized.h"
+
+
+#include "iridium/platform.h"
+#include PLATFORM_HEADER(socket_client.h)
 
 
 namespace iridium {
 namespace io {
 namespace net {
 namespace implementation {
+
+
+typedef platform::CSocketClient CSocketClient;
 
 
 //class CStreamPortSynchronized: public IStreamPort, public threading::Synchronized {
@@ -159,22 +166,22 @@ namespace implementation {
 //};
 
 
-class CSocketClient: public pattern::IInitializable
-{
-public:
-    DEFINE_IMPLEMENTATION(CSocketClient)
+//class CSocketClient: public pattern::IInitializable
+//{
+//public:
+//    DEFINE_IMPLEMENTATION(CSocketClient)
 
-    CSocketClient(
-        URL const &url,
-        protocol::IProtocolHandler::TSharedPtr
-            const &protocol_handler);
+//    CSocketClient(
+//        URL const &url,
+//        protocol::IProtocolHandler::TSharedPtr
+//            const &protocol_handler);
 
-    void initialize()   override;
-    void finalize()     override;
+//    void initialize()   override;
+//    void finalize()     override;
 
-private:
-    threading::IThread::TSharedPtr m_thread_socket_client;
-};
+//private:
+//    threading::IThread::TSharedPtr m_thread_socket_client;
+//};
 
 
 } // implementation

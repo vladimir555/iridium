@@ -19,29 +19,29 @@ namespace net {
 namespace implementation {
 
 
-CSocketServer::CSocketServer(
-    URL     const &url,
-    IProtocolFactory::TSharedPtr const &protocol_factory,
-    size_t  const &threads_count)
-:
-    m_thread_acceptor(
-        CThread::create(
-            CSocketServerAcceptor::create(
-                url, 
-                protocol_factory, 
-                threads_count),
-            "socket_acceptor"))
-{}
+//CSocketServer::CSocketServer(
+//    URL     const &url,
+//    IProtocolFactory::TSharedPtr const &protocol_factory,
+//    size_t  const &threads_count)
+//:
+//    m_thread_acceptor(
+//        CThread::create(
+//            CSocketServerAcceptor::create(
+//                url,
+//                protocol_factory,
+//                threads_count),
+//            "socket_acceptor"))
+//{}
 
 
-void CSocketServer::initialize() {
-    m_thread_acceptor->initialize();
-}
+//void CSocketServer::initialize() {
+//    m_thread_acceptor->initialize();
+//}
 
 
-void CSocketServer::finalize() {
-    m_thread_acceptor->finalize();
-}
+//void CSocketServer::finalize() {
+//    m_thread_acceptor->finalize();
+//}
 
 
 } // implementation

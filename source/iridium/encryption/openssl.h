@@ -119,6 +119,8 @@ public:
 
     TSSLErrorCode setConnectState(TSSL *ssl);
 
+    TSSLErrorCode setAcceptState(TSSL *ssl);
+
     TSSLErrorCode doHandshake(TSSL *ssl);
 
     size_t write(TSSL *ssl, io::Buffer::TSharedPtr const &packet);

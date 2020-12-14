@@ -57,7 +57,7 @@ DEFINE_CONVERT(std::string, iridium::testing::INodeTest::TSharedPtr)
 
 
 #define TEST(name) \
-class Test_##name final: public iridium::testing::ITest, public iridium::testing::UnitTest { \
+class Test_##name final: public ::iridium::testing::ITest, public ::iridium::testing::UnitTest { \
 public: \
     DEFINE_IMPLEMENTATION(Test_##name) \
     Test_##name() { iridium::testing::Tester::instance().add(this, std::string(__FILE__) + "/" + #name); } \

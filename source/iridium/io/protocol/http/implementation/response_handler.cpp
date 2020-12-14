@@ -1,4 +1,4 @@
-#include "protocol_handler.h"
+#include "response_handler.h"
 
 #include "iridium/logging/logger.h"
 
@@ -45,14 +45,14 @@ namespace http {
 namespace implementation {
 
 
-CProtocolHandler::CProtocolHandler() {
+CResponseProtocolHandler::CResponseProtocolHandler() {
     m_parser            = CHTTPParser::create();
     // todo: path, path check
     m_content_storage   = CContentStorage::create("html/");
 }
 
 
-bool CProtocolHandler::redirectStreams(
+bool CResponseProtocolHandler::redirectStreams(
     ITransmitterStreams::TSharedPtr const &transmitter,
     Event::TSharedPtr               const &event)
 {
@@ -76,6 +76,10 @@ bool CProtocolHandler::redirectStreams(
             if (m_peer_buffer) {
 //                LOGT << "write buffer:\n" << *m_peer_buffer << "\nsize = " << m_peer_buffer->size();
                 auto header  = string(m_peer_buffer->begin(), m_peer_buffer->end());
+
+                LOGT << "! 1 " << bool(m_peer_buffer->size() > DEFAULT_HTTP_HEADER_SIZE_MIN);
+                LOGT << "! 2 " << bool(string(m_peer_buffer->end() - 4, m_peer_buffer->end()) == "\r\n\r\n");
+                LOGT << "! 3 " << header;
 
                 if (m_peer_buffer->size() > DEFAULT_HTTP_HEADER_SIZE_MIN &&
                     string(m_peer_buffer->end() - 4, m_peer_buffer->end()) == "\r\n\r\n")
@@ -118,22 +122,21 @@ bool CProtocolHandler::redirectStreams(
                     if (content_stream_reader)
                         stream_reader_list->add(content_stream_reader);
 
-                    transmitter->setReader(stream_reader_list);
-                    transmitter->setWriter(std::dynamic_pointer_cast<IStreamWriter>(event->stream));
+                    transmitter->set(stream_reader_list, std::dynamic_pointer_cast<IStreamWriter>(event->stream));
 
                     event->type = Event::TType::WRITE;
                     m_peer_buffer.reset();
 
 //                    LOGT << "response header:" << response.getNode();
 
-//                    LOGT << "begin write to client";
+                    LOGT << "begin write to client";
                 }
             } else {
                 m_peer_buffer = Buffer::create();
-                transmitter->setReader(std::dynamic_pointer_cast<IStreamReader>(event->stream));
-                transmitter->setWriter(CStreamWriterBuffer::create(m_peer_buffer));
+                transmitter->set(std::dynamic_pointer_cast<IStreamReader>(event->stream),
+                                 CStreamWriterBuffer::create(m_peer_buffer));
 
-//                LOGT << "begin read client";
+                LOGT << "begin read from client";
             }
         }
         if (event->type == Event::TType::CLOSE)
