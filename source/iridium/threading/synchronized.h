@@ -13,21 +13,20 @@ namespace iridium {
 namespace threading {
 
 
-// thread safe
-class ISynchronized {
-public:
-    DEFINE_INTERFACE(ISynchronized)
-    virtual IMutex::TSharedPtr getMutex() const = 0;
-};
+//// thread safe
+//class ISynchronized {
+//public:
+//    DEFINE_INTERFACE(ISynchronized)
+//    virtual IMutex::TSharedPtr getMutex() const = 0;
+//};
 
 
 // todo: rename ThreadSafe
-class CSynchronized: public ISynchronized {
+class Synchronized {
 public:
-    DEFINE_IMPLEMENTATION(CSynchronized)
-    CSynchronized(IMutex::TSharedPtr const &mutex);
+    Synchronized(IMutex::TSharedPtr const &mutex);
 
-    IMutex::TSharedPtr getMutex() const override;
+    IMutex::TSharedPtr getMutex() const;
 
 private:
     IMutex::TSharedPtr m_mutex;

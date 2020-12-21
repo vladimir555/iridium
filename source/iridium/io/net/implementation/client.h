@@ -4,7 +4,7 @@
 
 #include "iridium/io/protocol/protocol_factory.h"
 #include "iridium/io/net/url.h"
-#include "iridium/io/net/client.h"
+#include "iridium/io/client.h"
 #include "iridium/io/stream_pool.h"
 
 

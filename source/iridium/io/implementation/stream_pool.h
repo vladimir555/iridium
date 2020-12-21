@@ -7,6 +7,9 @@
 #include "iridium/threading/runnable.h"
 #include "iridium/threading/synchronized.h"
 #include "iridium/threading/worker_pool.h"
+#include "iridium/threading/synchronized_container.h"
+
+#include "transmitter.h"
 
 #include <map>
 #include <list>
@@ -33,14 +36,13 @@ private:
     class CListenerHandler:
         public threading::IRunnable,
         public IStreamPool,
-        protected threading::CSynchronized
+        protected threading::Synchronized
     {
     public:
         DEFINE_IMPLEMENTATION(CListenerHandler)
         CListenerHandler();
 
-        void    add(IStreamPort::TSharedPtr  const &stream, protocol::IProtocolHandler::TSharedPtr const &protocol_handler) override;
-        void    add(IStream::TConstSharedPtr const &stream, protocol::IProtocolHandler::TSharedPtr const &protocol_handler);
+        void    add(IStreamPort::TSharedPtr const &stream, protocol::IProtocolHandler::TSharedPtr const &protocol_handler) override;
         void    del(IStream::TSharedPtr const &stream) override;
 
         void    initialize()   override;
@@ -49,29 +51,43 @@ private:
         void    run(std::atomic<bool> &is_running) override;
 
     private:
-        struct TransmitterHandler {
-            DEFINE_CREATE(TransmitterHandler)
-            Event::TSharedPtr                       event;
-            protocol::IProtocolHandler::TSharedPtr  protocol_handler;
-            io::ITransmitter::TSharedPtr            transmitter;
+        typedef threading::SynchronizedContainer<IStream::TSharedPtr, ITransmitter::TSharedPtr> TTransmitters;
+
+        class CTransmitterHandler:
+            public threading::Synchronized,
+            public CTransmitter,
+            public std::enable_shared_from_this<CTransmitterHandler>
+        {
+        public:
+            DEFINE_CREATE(CTransmitterHandler)
+            CTransmitterHandler(protocol::IProtocolHandler::TSharedPtr const &protocol_handler, TTransmitters &transmitters);
+            virtual ~CTransmitterHandler();
+
+            void set(const IStreamReader::TSharedPtr &reader, const IStreamWriter::TSharedPtr &writer) override;
+            bool transmit(const Event::TSharedPtr &event) override;
+
+        private:
+            TTransmitters          &m_transmitters;
+            protocol::IProtocolHandler::TSharedPtr
+                                    m_protocol_handler;
+
         };
 
         // streams threads
-        class CStreamHandler: public threading::IWorkerHandler<TransmitterHandler::TSharedPtr> {
+        class CStreamHandler: public threading::IWorkerHandler<Event::TSharedPtr> {
         public:
             DEFINE_IMPLEMENTATION(CStreamHandler)
-            CStreamHandler(CListenerHandler &listener_handler);
+            CStreamHandler(TTransmitters &transmitters);
 
             void    initialize  () override;
             void    finalize    () override;
-            TItems  handle      (TItems const &stream_handler) override;
+            TItems  handle      (TItems const &events) override;
         private:
-            CListenerHandler       &m_listener_handler;
+            TTransmitters          &m_transmitters;
         };
 
-        std::map<int, protocol::IProtocolHandler::TSharedPtr>
-                                    m_map_stream_protocol;
-        threading::IWorkerPool<TransmitterHandler::TSharedPtr>::TSharedPtr
+        TTransmitters               m_transmitters;
+        threading::IWorkerPool<Event::TSharedPtr>::TSharedPtr
                                     m_worker_pool;
     };
 

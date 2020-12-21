@@ -4,9 +4,13 @@
 #ifdef UNIX_PLATFORM
 
 
+#include "iridium/items.h"
+
+
 using iridium::encryption::OpenSSL;
 
 
+#include "iridium/logging/logger.h"
 namespace iridium {
 namespace io {
 namespace net {
@@ -18,18 +22,22 @@ namespace unix {
 CSocketClient::CSocketClient(URL const &url)
 :
     CSocketBase             (url),
+    m_ssl                   (nullptr),
     m_is_ssl_handshake_done (false)
 {}
 
 
 void CSocketClient::initialize() {
+    LOGT << *m_url;
     open();
     connect();
 
     if (m_url->getProtocol() == URL::TProtocol::HTTPS) {
-        m_context   = OpenSSL::instance().createContext();
+        m_context   = OpenSSL::instance().createContext(false);
         m_ssl       = OpenSSL::instance().createSSL(m_context, m_socket);
-        OpenSSL::instance().setConnectState(m_ssl);
+        auto code   = OpenSSL::instance().setConnectState(m_ssl);
+        LOGT << "set_connect_state code = " << code;
+        assertSSLInitialized();
         m_is_ssl_handshake_done = false;
     }
 }
@@ -85,9 +93,10 @@ bool CSocketClient::assertSSLInitialized() {
         return true; // ----->
 
     auto    code =  OpenSSL::instance().doHandshake(m_ssl);
-    m_is_ssl_handshake_done =
-            code == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ ||
-            code == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE; // ----->
+    LOGT << "do_handshake code = " << code;
+    m_is_ssl_handshake_done = !checkOneOf(code,
+        OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_READ,
+        OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_WANT_WRITE);
 
     return m_is_ssl_handshake_done; // ----->
 }

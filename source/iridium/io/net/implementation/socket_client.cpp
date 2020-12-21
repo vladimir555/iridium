@@ -17,7 +17,7 @@ using iridium::threading::implementation::CAsyncQueue;
 using iridium::threading::implementation::CThread;
 using iridium::threading::implementation::CMutex;
 using iridium::threading::implementation::CWorker;
-using iridium::threading::CSynchronized;
+using iridium::threading::Synchronized;
 using iridium::io::implementation::CListener;
 using iridium::convertion::convert;
 using std::string;

@@ -39,6 +39,8 @@ void CSocketPeer::initialize() {
 
 
 void CSocketPeer::finalize() {
+    if (m_ssl)
+        OpenSSL::instance().releaseSSL(m_ssl);
     close();
 }
 

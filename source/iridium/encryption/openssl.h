@@ -100,7 +100,7 @@ public:
         SSL_ERROR_CODE_WANT_ACCEPT      = SSL_ERROR_WANT_ACCEPT
     )
 
-    TContext *createContext(bool const &is_client_method = true);
+    TContext *createContext(bool const &is_server_method);
 
     void configureContext(
         TContext  * const  context,

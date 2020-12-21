@@ -35,7 +35,7 @@ class CAsyncQueue:
     public  IAsyncQueue<TItem>,
     public  pattern::NonCopyable,
     public  pattern::NonMovable,
-    private CSynchronized
+    private Synchronized
 {
 public:
     DEFINE_CREATE(CAsyncQueue)
@@ -66,7 +66,7 @@ private:
 template<typename TItem>
 CAsyncQueue<TItem>::CAsyncQueue()
 :
-    CSynchronized(CMutex::create()),
+    Synchronized(CMutex::create()),
     m_is_waiting(true),
     m_is_empty  (true),
     m_condition (CCondition::create())

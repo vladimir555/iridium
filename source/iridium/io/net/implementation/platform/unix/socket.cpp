@@ -292,6 +292,7 @@ void CSocketBase::close() {
     LOGT << "fd " << m_socket;
     ::shutdown(m_socket, 2);
     assertOK(::close(m_socket), "socket closing error, fd " + convert<string>(m_socket));
+    m_socket    = 0;
     m_is_opened = false;
 }
 

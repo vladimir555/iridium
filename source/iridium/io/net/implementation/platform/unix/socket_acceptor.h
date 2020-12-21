@@ -38,7 +38,6 @@ public:
 
 private:
     encryption::OpenSSL::TContext  *m_context;
-    encryption::OpenSSL::TSSL      *m_ssl;
 };
 
 

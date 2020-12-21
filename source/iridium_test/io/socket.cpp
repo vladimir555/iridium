@@ -118,9 +118,9 @@ public:
     }
 
 private:
-    int m_state;
-    IStreamWriter::TSharedPtr m_response_stream;
-    Buffer::TSharedPtr m_response;
+    int                         m_state;
+    IStreamWriter::TSharedPtr   m_response_stream;
+    Buffer::TSharedPtr          m_response;
 };
 
 
@@ -145,6 +145,7 @@ TEST(https_client) {
 
 //    IClient::TSharedPtr client =
 //            implementation::CClient::create(
+////                URL("https://127.0.0.1:44330"),
 //                URL("https://example.com"),
 //                CHTTPProtocolClientHandler::create());
 
@@ -155,14 +156,6 @@ TEST(https_client) {
 //    LOGT << "end";
 
 //    client->finalize();
-
-
-//    auto socket = CSocketClient::create(URL("http://ya.ru"), CHTTPProtocolClientHandler::create());
-//    socket->initialize();
-//    LOGT << "begin";
-//    threading::sleep(5000);
-//    LOGT << "end";
-//    socket->finalize();
 }
 
 

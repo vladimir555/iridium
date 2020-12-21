@@ -8,6 +8,9 @@
 #include "iridium/logging/logger.h"
 #include "iridium/assert.h"
 #include "iridium/io/service.h"
+#include "iridium/items.h"
+
+#include <set>
 
 
 using iridium::convertion::convert;
@@ -64,38 +67,26 @@ void CTransmitter::set(
 
     LOGT << "from: " << from;
 
-    if (m_reader &&
-        m_reader->getID() > 0 &&
-        m_reader->getID() != reader->getID() &&
-        m_reader->getID() != writer->getID())
-    {
+    if (m_reader && std::set<IStream::TSharedPtr>{reader, writer}.count(m_reader) == 0) {
+        LOGT << "finalize m_reader fd " << m_reader->getID();
         Service::instance().del(m_reader);
         m_reader->finalize();
     }
 
-    if (m_writer &&
-        m_writer->getID() > 0 &&
-        m_writer->getID() != reader->getID() &&
-        m_writer->getID() != writer->getID())
-    {
+    if (m_writer && std::set<IStream::TSharedPtr>{reader, writer}.count(m_writer) == 0) {
+        LOGT << "finalize m_writer fd " << m_writer->getID();
         Service::instance().del(m_writer);
         m_writer->finalize();
     }
 
-    if (reader && reader->getID() > 0 &&
-       (!m_reader ||
-       (reader->getID() != m_reader->getID() &&
-        reader->getID() != m_writer->getID())))
-    {
+    if (reader && std::set<IStream::TSharedPtr>{m_reader, m_writer}.count(reader) == 0) {
+        LOGT << "initialize reader fd " << reader->getID();
         reader->initialize();
         Service::instance().add(reader);
     }
 
-    if (writer && writer->getID() > 0 &&
-       (!m_writer ||
-       (writer->getID() != m_reader->getID() &&
-        writer->getID() != m_writer->getID())))
-    {
+    if (writer && std::set<IStream::TSharedPtr>{m_reader, m_writer}.count(writer) == 0) {
+        LOGT << "initialize writer fd " << writer->getID();
         writer->initialize();
         Service::instance().add(writer);
     }
@@ -142,22 +133,22 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
     if  (m_buffers.size()  <  m_buffer_count &&
         (m_buffers.empty() || m_reader->getID() == 0 ||
         (m_reader->getID() == event->stream->getID() && 
-        (event->type == Event::TType::READ))))
+        (checkOneOf(event->type, Event::TType::OPEN, Event::TType::READ)))))
     {
         auto buffer = m_reader->read(m_buffer_size);
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
-//            LOGT << "read " << buffer->size();
+            LOGT << "read " << buffer->size();
         } else {
             result = !m_buffers.empty();
-//            LOGT << "read EOF";
+            LOGT << "read EOF";
         }
     }
 
     if (!m_buffers.empty() && 
         (m_writer->getID() == 0 || 
        ((m_writer->getID() == event->stream->getID() &&
-        (event->type == Event::TType::WRITE)))))
+        (checkOneOf(event->type, Event::TType::OPEN, Event::TType::WRITE))))))
     {
         auto size =  m_writer->write(m_buffers.front());
         if  (size == m_buffers.front()->size()) {
@@ -167,12 +158,18 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
             buffer->assign(buffer->begin() + size, buffer->end());
         }
 
-//        LOGT << "wrote " << size;
+        LOGT << "wrote " << size;
+
+        LOGT << "! " << m_buffers.size() << " " << size;
+        if (m_buffers.empty() && size == 0)
+            result = false;
     }
 
+
+    LOGT << "result = " << result;
     return result; // ----->
 }
-    
+
 
 } // implementation
 } // io

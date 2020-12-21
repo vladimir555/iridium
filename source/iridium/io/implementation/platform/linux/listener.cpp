@@ -22,7 +22,7 @@
 
 using iridium::convertion::convert;
 using iridium::threading::implementation::CMutex;
-using iridium::threading::CSynchronized;
+using iridium::threading::Synchronized;
 using std::string;
 
 
@@ -59,14 +59,12 @@ DEFINE_ENUM(
 
 CListener::CListener()
 :
-    CSynchronized(CMutex::create()),
     m_epoll_fd(0),
     m_event_fd(0)
 {}
 
 
 void CListener::initialize() {
-    LOCK_SCOPE_FAST;
 //    m_epoll_fd = epoll_create1(0);
     m_epoll_fd = epoll_create(1);
 //    m_event_fd = eventfd(0, 0);
@@ -83,14 +81,12 @@ void CListener::initialize() {
 
 
 void CListener::finalize() {
-    LOCK_SCOPE_FAST;
     LOGT;
     ::close(m_epoll_fd);
 }
 
 
 void CListener::add(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE_FAST;
     if (stream->getID() > 0 && m_map_fd_stream.find(stream->getID()) == m_map_fd_stream.end()) {
         LOGT << "fd " << stream->getID();
 
@@ -107,7 +103,6 @@ void CListener::add(IStream::TSharedPtr const &stream) {
 
 
 void CListener::del(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE_FAST;
     LOGT << "fd " << stream->getID();
     if (stream->getID() > 0) {
         m_map_fd_stream.erase(stream->getID());
@@ -117,7 +112,6 @@ void CListener::del(IStream::TSharedPtr const &stream) {
 
 
 CListener::TEvents CListener::wait() {
-    LOCK_SCOPE_FAST;
     struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
     auto count = epoll_wait(
@@ -134,7 +128,7 @@ CListener::TEvents CListener::wait() {
         if (epoll_events[i].data.fd == m_event_fd)
             continue; // <---
 
-        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " << TEpollEvent(epoll_events[i].events);
+        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " << TEpollEvent(epoll_events[i].events).convertToFlagsString();
         if (epoll_events[i].events & EPOLLIN)
             events.push_back(Event::create(Event::TType::READ,  m_map_fd_stream[epoll_events[i].data.fd]));
 
@@ -143,11 +137,6 @@ CListener::TEvents CListener::wait() {
     }
 
     return events; // ----->
-}
-
-
-threading::IMutex::TSharedPtr CListener::getMutex() const {
-    return CSynchronized::getMutex(); // ----->
 }
 
 

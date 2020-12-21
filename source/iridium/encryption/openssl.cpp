@@ -70,17 +70,7 @@ string OpenSSL::getErrorString() {
     ERR_print_errors(bio);
     char   *buffer  = nullptr;
     size_t  length  = BIO_get_mem_data(bio, &buffer);
-//    char   *result  = static_cast<char *>(calloc(1, 1 + length));
-//    if (result)
-//        memcpy(result, buffer, length);
-//    BIO_free(bio);
-//    if (result)
-//        return result; // ----->
-//    else
-//        return string(); // ----->
-    string result(buffer, length);
-    delete buffer;
-    return result; // ----->
+    return  string(buffer, length); // ----->
 }
 
 
@@ -189,7 +179,7 @@ OpenSSL::TSSLErrorCode OpenSSL::connectSSL(TSSL *ssl) {
     auto error  = getSSLErrorCode(ssl, code);
 
     LOGT << error << " code " << code << " error: " << getErrorString();
-    return error;
+    return error; // ----->
 }
 
 
@@ -198,7 +188,7 @@ OpenSSL::TSSLErrorCode OpenSSL::setConnectState(TSSL *ssl) {
     auto error = getErrorString();
     LOGT << error;
     SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
-    return TSSLErrorCode::SSL_ERROR_CODE_NONE;
+    return TSSLErrorCode::SSL_ERROR_CODE_NONE; // ----->
 }
 
 
@@ -207,25 +197,29 @@ OpenSSL::TSSLErrorCode OpenSSL::setAcceptState(TSSL *ssl) {
     auto error = getErrorString();
     LOGT << error;
     SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
-    return TSSLErrorCode::SSL_ERROR_CODE_NONE;
+    return TSSLErrorCode::SSL_ERROR_CODE_NONE; // ----->
 }
 
 
 OpenSSL::TSSLErrorCode OpenSSL::doHandshake(TSSL *ssl) {
     auto code = SSL_do_handshake(ssl);
     if  (code == 1)
-        return OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_NONE;
-    else
-        return getSSLErrorCode(ssl, code);
+        return OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_NONE; // ----->
+    else {
+        auto ssl_code =  getSSLErrorCode(ssl, code);
+        if  (ssl_code == OpenSSL::TSSLErrorCode::SSL_ERROR_CODE_SSL)
+            throw std::runtime_error("socket ssl handshake error: " +
+                OpenSSL::instance().getSSLErrorString(ssl, code) + ", " +
+                OpenSSL::instance().getErrorString()); // ----->
+        return ssl_code; // ----->
+    }
 }
 
 
 size_t OpenSSL::write(TSSL *ssl, io::Buffer::TSharedPtr const &packet) {
-//    LOGT << SSL_write(ssl, packet->data(), packet->size());
     assertOK(SSL_write(ssl, packet->data(), packet->size()), "openssl writing error");
-    //todo:
     LOGT << "ssl write: " << *packet;
-    return packet->size();
+    return packet->size(); // ----->
 }
 
 
@@ -237,7 +231,8 @@ io::Buffer::TSharedPtr OpenSSL::read(TSSL *ssl, size_t const &size) {
     int     result = -1;
 
     result = SSL_read(ssl, buffer, size);
-    LOGT << "ssl read received_size: " << result << " read result = " << result;
+    LOGT << "ssl read received_size: " << result << " read result = " << result << "\n" <<
+            io::Buffer(buffer, buffer + (int)result);
 
 //    if (read_result == 0)
 //        throw std::runtime_error("openssl reading error: socket was closed by client"); // ----->

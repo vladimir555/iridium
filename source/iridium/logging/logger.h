@@ -28,7 +28,7 @@ namespace logging {
 // todo: separate logger to other type with singleton
 class Logger :
     public pattern::Singleton<Logger>,
-    public threading::CSynchronized
+    public threading::Synchronized
 {
 public:
     ///

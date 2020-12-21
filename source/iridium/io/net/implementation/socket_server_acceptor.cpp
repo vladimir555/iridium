@@ -19,7 +19,7 @@ using iridium::threading::implementation::CWorkerPool;
 using iridium::io::implementation::CListener;
 using iridium::io::protocol::IProtocolFactory;
 
-using iridium::threading::CSynchronized;
+using iridium::threading::Synchronized;
 
 
 namespace iridium {

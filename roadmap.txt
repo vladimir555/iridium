@@ -4,5 +4,7 @@ linux kernel based socket ssl connection
 websocket client
 http client
 freebsd kevent async socket
+rtsp
+video codec wrapper: libaom + libopus
 
 wrk -d 10m -t 4 -c 20 http://10.0.1.11:8X8X/blog
