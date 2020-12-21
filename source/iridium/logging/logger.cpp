@@ -28,7 +28,7 @@ namespace logging {
 
 Logger::Logger()
 :
-    CSynchronized(CMutex::create())
+    Synchronized(CMutex::create())
 {}
 
 

@@ -28,6 +28,7 @@ public:
         TProtocol, 
         TCP         = -2,
         UDP         = -3,
+        FILE        = -4,
         HTTP        = 80,
         HTTPS       = 443,
         SSH         = 22,

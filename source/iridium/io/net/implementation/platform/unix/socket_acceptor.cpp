@@ -21,8 +21,7 @@ namespace unix {
 CSocketAcceptor::CSocketAcceptor(URL const &url)
 :
     CSocketBase     (url),
-    m_context       (nullptr),
-    m_ssl           (nullptr)
+    m_context       (nullptr)
 {}
 
 

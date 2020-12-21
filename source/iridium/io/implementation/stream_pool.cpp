@@ -7,6 +7,7 @@
 #include "iridium/io/service.h"
 #include "iridium/io/implementation/transmitter.h"
 #include "iridium/assert.h"
+#include "iridium/items.h"
 
 #include <set>
 
@@ -54,14 +55,14 @@ void CStreamPool::finalize() {
 
 CStreamPool::CListenerHandler::CListenerHandler()
 :
-    CSynchronized   (CMutex::create())
+    Synchronized(CMutex::create())
 {
-    threading::IWorkerPool<TransmitterHandler::TSharedPtr>::TWorkerHandlers handlers;
+    threading::IWorkerPool<Event::TSharedPtr>::TWorkerHandlers handlers;
 
     for (auto i = 0; i < 1; i++)
-        handlers.push_back(CStreamHandler::create(*this));
+        handlers.push_back(CStreamHandler::create(m_transmitters));
 
-    m_worker_pool = CWorkerPool<TransmitterHandler::TSharedPtr>::create("io_event_handler", handlers);
+    m_worker_pool = CWorkerPool<Event::TSharedPtr>::create("io_event_handler", handlers);
 }
 
 
@@ -70,25 +71,22 @@ void CStreamPool::CListenerHandler::add(
     protocol::IProtocolHandler::TSharedPtr  const &protocol_handler)
 {
     LOCK_SCOPE_FAST
-    Service::instance().add(stream);
-    m_map_stream_protocol[stream->getID()] = protocol_handler;
-    LOGT << "fd " << stream->getID();
-}
+    try {
+        auto transmitter = CTransmitterHandler::create(protocol_handler, m_transmitters);
 
+        transmitter->transmit(Event::create(Event::TType::OPEN, stream));
+        m_transmitters.set(stream, transmitter);
 
-void CStreamPool::CListenerHandler::add(
-    IStream::TConstSharedPtr                const &stream,
-    protocol::IProtocolHandler::TSharedPtr  const &protocol_handler)
-{
-    LOCK_SCOPE_FAST
-    m_map_stream_protocol[stream->getID()] = protocol_handler;
-    LOGT << "fd " << stream->getID();
+        LOGT << "fd " << stream->getID();
+    } catch (std::exception const &e) {
+        LOGE << e.what();
+    }
 }
 
 
 void CStreamPool::CListenerHandler::del(IStream::TSharedPtr const &stream) {
     LOCK_SCOPE_FAST
-    m_map_stream_protocol[stream->getID()] = nullptr; // todo: erase
+    m_transmitters.del(stream);
     LOGT << "fd " << stream->getID();
 }
 
@@ -107,35 +105,57 @@ void CStreamPool::CListenerHandler::finalize() {
 
 void CStreamPool::CListenerHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
-        std::list<TransmitterHandler::TSharedPtr> events;
-
-        {
-            LOCK_SCOPE_FAST
-            for (auto const &event: Service::instance().wait()) {
-                assertExists(event->stream, "event stream is null");
-                LOGT << "fd " << event->stream->getID();
-                auto protocol = m_map_stream_protocol[event->stream->getID()];
-                if (!protocol)
-                    LOGE << "protocol is NULL, fd " << event->stream->getID();
-                events.push_back(
-                    TransmitterHandler::create(
-                    TransmitterHandler {
-                        event,
-                        m_map_stream_protocol[event->stream->getID()],
-                        CTransmitter::create()
-                    }
-                ) );
-            }
-        }
-
-        m_worker_pool->push(events);
+        m_worker_pool->push(Service::instance().wait());
     }
 }
 
 
-CStreamPool::CListenerHandler::CStreamHandler::CStreamHandler(CListenerHandler &listener_handler)
+CStreamPool::CListenerHandler::CTransmitterHandler::CTransmitterHandler(
+    protocol::IProtocolHandler::TSharedPtr const &protocol_handler,
+    TTransmitters &transmitters)
 :
-    m_listener_handler(listener_handler)
+    threading::Synchronized(threading::implementation::CMutex::create()),
+    m_transmitters      (transmitters),
+    m_protocol_handler  (protocol_handler)
+{}
+
+
+CStreamPool::CListenerHandler::CTransmitterHandler::~CTransmitterHandler() {
+    // todo: check null
+    // todo: m_transmitters.del
+}
+
+
+void CStreamPool::CListenerHandler::CTransmitterHandler::set(
+    const IStreamReader::TSharedPtr &reader,
+    const IStreamWriter::TSharedPtr &writer)
+{
+    if (reader)
+        m_transmitters.set(reader, shared_from_this());
+    if (writer)
+        m_transmitters.set(writer, shared_from_this());
+    CTransmitter::set(reader, writer);
+}
+
+
+bool CStreamPool::CListenerHandler::CTransmitterHandler::transmit(const Event::TSharedPtr &event) {
+    LOCK_SCOPE;
+    if (!checkOneOf(event->type, Event::TType::ERROR, Event::TType::CLOSE)  &&
+        m_protocol_handler->redirectStreams(shared_from_this(), event)      &&
+        CTransmitter::transmit(event)
+    ) {
+        threading::sleep(1000);
+        return true; // ----->
+    } else {
+        // todo: m_transmitters.del
+        return false;
+    }
+}
+
+
+CStreamPool::CListenerHandler::CStreamHandler::CStreamHandler(TTransmitters &transmitters)
+:
+    m_transmitters(transmitters)
 {}
 
 
@@ -146,47 +166,20 @@ void CStreamPool::CListenerHandler::CStreamHandler::finalize() {}
 
 
 CStreamPool::CListenerHandler::CStreamHandler::TItems
-CStreamPool::CListenerHandler::CStreamHandler::handle(TItems const &handlers_) {
-    TItems handlers;
+CStreamPool::CListenerHandler::CStreamHandler::handle(TItems const &events_) {
+    TItems events;
 
-    for (auto const &handler: handlers_) {
-        assertExists(handler->protocol_handler, "protocol is null");
-        assertExists(handler->transmitter,      "transmitter is null");
-
-        std::set<IStream::TConstSharedPtr> streams{
-            handler->transmitter->getReader(),
-            handler->transmitter->getWriter()
-        };
-
-        if (handler->protocol_handler->redirectStreams(
-            handler->transmitter,
-            handler->event) &&
-            handler->transmitter->transmit(
-            handler->event))
-        {
-            if (handler->transmitter->getReader()->getID() > 0 &&
-                streams.count(handler->transmitter->getReader()) == 0)
-            {
-                m_listener_handler.add(
-                    handler->transmitter->getReader(),
-                    handler->protocol_handler);
-            }
-
-            if (handler->transmitter->getWriter()->getID() > 0 &&
-                streams.count(handler->transmitter->getWriter()) == 0)
-            {
-                m_listener_handler.add(
-                    handler->transmitter->getWriter(),
-                    handler->protocol_handler);
-            }
-
-            handlers.push_back(handler);
-        } else {
-            // todo: del protocols from map
+    for (auto const &event: events_) {
+        try {
+            if (m_transmitters.get(event->stream)->transmit(event))
+                events.push_back(event);
+        } catch (std::exception const &e) {
+            LOGE << e.what();
+            m_transmitters.del(event->stream);
         }
     }
 
-    return handlers; // -----
+    return events; // -----
 }
 
 

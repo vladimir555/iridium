@@ -13,13 +13,13 @@ namespace iridium {
 namespace threading {
 
 
-CSynchronized::CSynchronized(IMutex::TSharedPtr const &mutex)
+Synchronized::Synchronized(IMutex::TSharedPtr const &mutex)
 :
     m_mutex(mutex)
 {}
 
 
-IMutex::TSharedPtr CSynchronized::getMutex() const {
+IMutex::TSharedPtr Synchronized::getMutex() const {
     return m_mutex; // ----->
 }
 

@@ -7,7 +7,6 @@
 
 namespace iridium {
 namespace io {
-namespace net {
 
 
 class IServer: public pattern::IInitializable {
@@ -16,7 +15,6 @@ public:
 };
 
 
-} // net
 } // io
 } // iridium
 

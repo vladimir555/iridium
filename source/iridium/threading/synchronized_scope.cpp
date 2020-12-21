@@ -24,7 +24,7 @@ namespace iridium {
 namespace threading {
 
 
-SynchronizedScope::SynchronizedScope(CSynchronized const *synchronized, string const &scope_name)
+SynchronizedScope::SynchronizedScope(Synchronized const *synchronized, string const &scope_name)
 :
     m_mutex(synchronized->getMutex())
 {
@@ -44,7 +44,7 @@ SynchronizedScope::~SynchronizedScope() {
 }
 
 
-SynchronizedScopeSimple::SynchronizedScopeSimple(CSynchronized const *synchronized)
+SynchronizedScopeSimple::SynchronizedScopeSimple(Synchronized const *synchronized)
 :
     m_mutex(synchronized->getMutex())
 {

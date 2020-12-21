@@ -4,16 +4,21 @@
 
 #include "iridium/io/listener.h"
 #include "iridium/pattern/singleton.h"
+#include "iridium/threading/synchronized.h"
+
+#include <atomic>
 
 
 namespace iridium {
 namespace io {
 
 
-class Service: public IListener, public pattern::Singleton<Service> {
+class Service:
+    public IListener,
+    public pattern::Singleton<Service>,
+    public threading::Synchronized
+{
 public:
-//    friend class pattern::Singleton<Service>;
-
     Service();
     virtual ~Service();
 
@@ -24,9 +29,9 @@ public:
 private:
     void    initialize() override;
     void    finalize() override;
-    threading::IMutex::TSharedPtr getMutex() const override;
 
-    IListener::TSharedPtr m_listener;
+    IListener::TSharedPtr   m_listener;
+    std::atomic<bool>       m_is_initialized;
 };
 
 

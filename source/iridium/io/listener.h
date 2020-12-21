@@ -37,10 +37,7 @@ public:
 
 
 // synchronized
-class IListener:
-    public threading::ISynchronized,
-    public pattern::IInitializable
-{
+class IListener: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IListener)
 
