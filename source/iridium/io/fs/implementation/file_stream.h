@@ -9,10 +9,10 @@
 #include <string>
 #include <stdio.h>
 
-#include "iridium/smart_ptr.h"
 #include "iridium/enum.h"
 #include "iridium/io/stream.h"
 #include "iridium/io/fs/file_stream.h"
+#include "iridium/pattern/non_copyable.h"
 
 
 namespace iridium {
@@ -21,7 +21,7 @@ namespace fs {
 namespace implementation {
 
 
-class CFileStream: public IStream {
+class CFileStream: public IStream, public pattern::NonCopyable {
 public:
     DEFINE_ENUM(TOpenMode, READ, WRITE, REWRITE)
 

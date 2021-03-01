@@ -27,18 +27,19 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         std::string uri;
         std::string protocol;
     };
-    DEFINE_ATTRIBUTE(TMessageLine, Message)
+    DEFINE_ATTRIBUTE(TMessageLine, Message, TMessageLine({TMethod::GET, "", ""}))
     DEFINE_NODE_BEGIN(Headers)
-        DEFINE_ATTRIBUTE(std::string, Host)
-        DEFINE_ATTRIBUTE(std::string, UserAgent)
+        DEFINE_ATTRIBUTE(std::string, Host, "")
+        DEFINE_ATTRIBUTE(std::string, UserAgent, "")
         DEFINE_ATTRIBUTE(std::string, Connection, "")
         DEFINE_ATTRIBUTE_LIST(std::string, Accept)
         DEFINE_ATTRIBUTE_LIST(std::string, AcceptLanguage)
         DEFINE_ATTRIBUTE_LIST(std::string, AcceptEncoding)
         DEFINE_ATTRIBUTE_LIST(std::string, AcceptCharset)
         DEFINE_ATTRIBUTE_LIST(std::string, Cookie)
+    // todo: Keep-Alive: timeout=5, max=1000
     DEFINE_NODE_END(Headers)
-    DEFINE_ATTRIBUTE(std::string, Body)
+    DEFINE_ATTRIBUTE(std::string, Body, "")
 DEFINE_ROOT_NODE_END()
 
 

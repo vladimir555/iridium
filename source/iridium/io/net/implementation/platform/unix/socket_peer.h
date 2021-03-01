@@ -9,9 +9,11 @@
 
 
 #include "iridium/io/net/socket.h"
+#include "iridium/io/listener.h"
 #include "iridium/encryption/openssl.h"
 
 #include "socket.h"
+#include "socket_acceptor.h"
 
 
 namespace iridium {
@@ -22,12 +24,9 @@ namespace platform {
 namespace unix {
 
 
-class CSocketPeer: public CSocketBase, public ISocketStream {
+class CSocketPeer: virtual public CSocketBase, public ISocketStream, public std::enable_shared_from_this<CSocketPeer> {
 public:
     DEFINE_IMPLEMENTATION(CSocketPeer)
-
-    CSocketPeer(int const &fd, URL::TProtocol const &protocol);
-    CSocketPeer(int const &fd, URL::TProtocol const &protocol, encryption::OpenSSL::TSSL *ssl);
 
     void initialize() override;
     void finalize() override;
@@ -36,6 +35,12 @@ public:
     int getID() const override;
     Buffer::TSharedPtr read(size_t const &size) override;
     size_t write(Buffer::TSharedPtr const &buffer) override;
+
+//protected:
+//    friend class CSocketAcceptor;
+
+    CSocketPeer(int const &fd, URL::TProtocol const &protocol, IListenerStreams::TSharedPtr const &listener);
+    CSocketPeer(int const &fd, URL::TProtocol const &protocol, encryption::OpenSSL::TSSL *ssl, IListenerStreams::TSharedPtr const &listener);
 
 private:
     URL::TProtocol              m_protocol;

@@ -23,9 +23,9 @@ public:
     SynchronizedContainer();
    ~SynchronizedContainer() = default;
 
-    void    set(TKey const &key, TValue const &value);
+    size_t  set(TKey const &key, TValue const &value);
     TValue  get(TKey const &key) const;
-    void    del(TKey const &key);
+    size_t  del(TKey const &key);
     
 private:
     std::unordered_map<TKey, TValue> m_map_key_value;
@@ -40,9 +40,10 @@ SynchronizedContainer<TKey, TValue>::SynchronizedContainer()
     
     
 template<typename TKey, typename TValue>
-void SynchronizedContainer<TKey, TValue>::set(TKey const &key, TValue const &value) {
+size_t SynchronizedContainer<TKey, TValue>::set(TKey const &key, TValue const &value) {
     LOCK_SCOPE_FAST
     m_map_key_value[key] = value;
+    return m_map_key_value.size(); // ----->
 }
 
     
@@ -58,9 +59,10 @@ TValue SynchronizedContainer<TKey, TValue>::get(TKey const &key) const {
 
     
 template<typename TKey, typename TValue>
-void SynchronizedContainer<TKey, TValue>::del(TKey const &key) {
+size_t SynchronizedContainer<TKey, TValue>::del(TKey const &key) {
     LOCK_SCOPE_FAST
-    m_map_key_value.erase(key); // ----->
+    m_map_key_value.erase(key);
+    return m_map_key_value.size(); // ----->
 }
 
     

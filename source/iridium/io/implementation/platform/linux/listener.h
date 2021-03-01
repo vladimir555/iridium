@@ -13,6 +13,8 @@
 
 
 #include "iridium/io/listener.h"
+#include "iridium/threading/synchronized.h"
+#include "iridium/threading/async_queue.h"
 
 #include <unordered_map>
 #include <sys/epoll.h>
@@ -25,7 +27,9 @@ namespace platform {
 
 
 class CListener:
-    public IListener
+    public IListener,
+    public threading::Synchronized,
+    public std::enable_shared_from_this<CListener>
 {
 public:
     DEFINE_IMPLEMENTATION(CListener)
@@ -43,11 +47,15 @@ private:
 
     static int assertOK(int const &result, std::string const &message);
 
+    void    addInternal(IStream::TSharedPtr const &stream);
+    void    delInternal(IStream::TSharedPtr const &stream);
+
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
             m_map_fd_stream;
     int     m_epoll_fd;
     int     m_event_fd;
-    //struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
+    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_add;
+    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_del;
 };
 
 

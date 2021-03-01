@@ -5,20 +5,22 @@
 #include "listener.h"
 
 
-IMPLEMENT_ENUM(iridium::io::Event::TType)
+IMPLEMENT_ENUM(iridium::io::IListener::Event::TType)
 
 
 namespace iridium {
 namespace io {
 
 
-Event::Event(
-    TType                   const &type_,
-    IStream::TSharedPtr     const &stream_)
-:
-    type    (type_),
-    stream  (stream_)
-{}
+//IListener::Event::Event(
+//    TType                   const &type_,
+//    IStream::TSharedPtr     const &stream_,
+//    IListener::TSharedPtr   const &listener_)
+//:
+//    type    (type_),
+//    stream  (stream_),
+//    listener(listener_)
+//{}
 
 
 } // io

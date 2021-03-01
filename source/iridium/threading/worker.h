@@ -28,16 +28,13 @@ public:
 
 
 template<typename TItem_ = IJob::TSharedPtr>
-class IWorkerHandler {
+class IWorkerHandler: public pattern::IInitializable {
 public:
-    DEFINE_SMART_PTR(IWorkerHandler<TItem_>)
-    virtual ~IWorkerHandler() = default;
+    DEFINE_INTERFACE(IWorkerHandler<TItem_>)
 
     typedef TItem_ TItem;
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 
-    virtual void    initialize  () = 0;
-    virtual void    finalize    () = 0;
     virtual TItems  handle      (TItems const &items) = 0;
 };
 
@@ -48,8 +45,7 @@ class IWorker:
     public pattern::IInitializable
 {
 public:
-    DEFINE_SMART_PTR(IWorker<TItem>)
-    virtual ~IWorker() = default;
+    DEFINE_INTERFACE(IWorker<TItem>)
 
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 };

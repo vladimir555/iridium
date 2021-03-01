@@ -10,6 +10,7 @@
 using iridium::encryption::OpenSSL;
 
 
+#include "iridium/logging/logger.h"
 namespace iridium {
 namespace io {
 namespace net {
@@ -18,9 +19,9 @@ namespace platform {
 namespace unix {
 
 
-CSocketAcceptor::CSocketAcceptor(URL const &url)
+CSocketAcceptor::CSocketAcceptor(URL const &url, IListenerStreams::TSharedPtr const &listener)
 :
-    CSocketBase     (url),
+    CSocketBase     (url, listener),
     m_context       (nullptr)
 {}
 
@@ -29,22 +30,29 @@ void CSocketAcceptor::initialize() {
     open();
 
     if (m_url->getProtocol() == URL::TProtocol::HTTPS) {
-        m_context   = OpenSSL::instance().createContext(true);
+        m_context = OpenSSL::instance().createContext(true);
 
         OpenSSL::instance().configureContext(m_context,
             encryption::DEFAULT_FILE_NAME_PRIVATE_KEY,
             encryption::DEFAULT_FILE_NAME_CERTIFICATE);
-    }
+    } else
+        m_context = nullptr;
 
     listen();
+
+    if (m_listener && m_is_opened)
+        m_listener->add(shared_from_this());
 }
 
 
 void CSocketAcceptor::finalize() {
-    if (m_context)
-        OpenSSL::instance().releaseContext(m_context);
+    if (m_listener && m_is_opened)
+        m_listener->del(shared_from_this());
 
-    m_context = nullptr;
+    if (m_context) {
+        OpenSSL::instance().releaseContext(m_context);
+        m_context = nullptr;
+    }
 
     close();
 }
@@ -61,14 +69,14 @@ int CSocketAcceptor::getID() const {
 
 
 ISocketStream::TSharedPtr CSocketAcceptor::accept() {
-    auto fd =  CSocketBase::accept();
+    auto fd = CSocketBase::accept();
     if  (fd) {
         if (m_context) {
             auto ssl = OpenSSL::instance().createSSL(m_context, fd);
-            OpenSSL::instance().acceptSSL(ssl, m_is_blocking);
-            return CSocketPeer::create(fd, m_url->getProtocol(), ssl); // ----->
+            OpenSSL::instance().acceptSSL(ssl, !static_cast<bool>(m_listener));
+            return CSocketPeer::create(fd, m_url->getProtocol(), ssl, m_listener); // ----->
         } else
-            return CSocketPeer::create(fd, m_url->getProtocol()); // ----->
+            return CSocketPeer::create(fd, m_url->getProtocol(), m_listener); // ----->
     } else
         return nullptr; // ----->
 }

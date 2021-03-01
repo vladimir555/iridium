@@ -14,9 +14,8 @@
 #define HEADER_TRANSMITTER_5C67BADB_452C_4A6B_963B_63DBF32A6D5D
 
 
-#include "iridium/io/transmitter.h"
+#include "iridium/io/pipe.h"
 #include "iridium/io/stream.h"
-#include "iridium/threading/async_queue.h"
 
 
 namespace iridium {
@@ -24,18 +23,15 @@ namespace io {
 namespace implementation {
 
 
-class CTransmitter: public ITransmitter {
+class CPipe: public IPipe {
 public:
-    DEFINE_CREATE(CTransmitter)
+    DEFINE_CREATE(CPipe)
 
     static size_t const DEFAULT_BUFFER_SIZE;
     static size_t const DEFAULT_BUFFER_COUNT;
 
-    CTransmitter(
-        size_t                  const &buffer_size  = DEFAULT_BUFFER_SIZE,
-        size_t                  const &buffer_count = DEFAULT_BUFFER_COUNT);
-
-    virtual ~CTransmitter();
+    CPipe();
+    virtual ~CPipe();
 
     void set(
         IStreamReader::TSharedPtr const &reader,
@@ -45,7 +41,7 @@ public:
     IStreamReader::TConstSharedPtr getReader() const override;
     IStreamWriter::TConstSharedPtr getWriter() const override;
 
-    bool transmit(Event::TSharedPtr const &event) override;
+    bool transmit(IListener::Event::TConstSharedPtr const &event) override;
 
 private:
     IStreamReader::TSharedPtr       m_reader;

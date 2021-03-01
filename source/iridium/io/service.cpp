@@ -1,64 +1,67 @@
-#include "service.h"
+//#include "service.h"
 
-#include "implementation/listener.h"
-#include "iridium/threading/implementation/mutex.h"
-#include "iridium/threading/synchronized_scope.h"
-
-
-namespace iridium {
-namespace io {
+//#include "implementation/listener.h"
+//#include "iridium/threading/implementation/mutex.h"
+//#include "iridium/threading/synchronized_scope.h"
 
 
-Service::Service()
-:
-    threading::Synchronized(threading::implementation::CMutex::create()),
-    m_listener      (implementation::CListener::create()),
-    m_is_initialized(false)
-{
-    initialize();
-}
+//#include "iridium/logging/logger.h"
+//namespace iridium {
+//namespace io {
 
 
-Service::~Service() {
-    finalize();
-}
+//Service::Service()
+//:
+//    threading::Synchronized(threading::implementation::CMutex::create()),
+//    m_listener      (implementation::CListener::create()),
+//    m_is_initialized(false)
+//{
+//    Service::initialize();
+//}
 
 
-void Service::add(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE
-    m_listener->add(stream);
-}
+//Service::~Service() {
+//    Service::finalize();
+//}
 
 
-void Service::del(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE
-    m_listener->del(stream);
-}
+//void Service::add(IStream::TSharedPtr const &stream) {
+//    LOCK_SCOPE
+//    m_listener->add(stream);
+//}
 
 
-IListener::TEvents Service::wait() {
-    LOCK_SCOPE
-    return m_listener->wait(); // ----->
-}
+//void Service::del(IStream::TSharedPtr const &stream) {
+//    LOCK_SCOPE
+//    m_listener->del(stream);
+//}
 
 
-void Service::initialize() {
-    LOCK_SCOPE
-    if (m_is_initialized)
-        return; // ----->
-    m_listener->initialize();
-    m_is_initialized = true;
-}
+//IListener::TEvents Service::wait() {
+//    LOCK_SCOPE
+//    return m_listener->wait(); // ----->
+//}
 
 
-void Service::finalize() {
-    LOCK_SCOPE
-    if (!m_is_initialized)
-        return; // ----->
-    m_listener->finalize();
-    m_is_initialized = false;
-}
+//void Service::initialize() {
+//    LOCK_SCOPE
+//    if (m_is_initialized)
+//        return; // ----->
+//    LOGT;
+//    m_listener->initialize();
+//    m_is_initialized = true;
+//}
 
 
-} // io
-} // iridium
+//void Service::finalize() {
+//    LOCK_SCOPE
+//    if (!m_is_initialized)
+//        return; // ----->
+//    LOGT;
+//    m_listener->finalize();
+//    m_is_initialized = false;
+//}
+
+
+//} // io
+//} // iridium

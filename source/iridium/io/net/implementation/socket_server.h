@@ -8,8 +8,7 @@
 
 #include "iridium/pattern/initializable.h"
 #include "iridium/threading/thread.h"
-#include "iridium/io/net/url.h"
-#include "iridium/io/protocol/protocol_factory.h"
+#include "iridium/io/url.h"
 
 
 namespace iridium {

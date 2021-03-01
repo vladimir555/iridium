@@ -12,9 +12,12 @@
 #ifdef UNIX_PLATFORM
 
 
-#include "iridium/io/net/url.h"
+#include "iridium/io/listener.h"
+#include "iridium/io/url.h"
+#include "iridium/io/net/socket.h"
 #include "iridium/io/net/socket.h"
 #include "iridium/convertion/convert.h"
+#include "iridium/pattern/non_copyable.h"
 
 #include <cstring>
 #include <string>
@@ -29,56 +32,10 @@ namespace platform {
 namespace unix {
 
 
-//class CSocket: public ISocket {
-//public:
-//    DEFINE_ENUM(TMode, SERVER, CLIENT, PEER)
-
-//    DEFINE_IMPLEMENTATION(CSocket)
-//    CSocket(URL const &url, TMode const &mode);
-
-//    void    initialize() override;
-//    void    finalize() override;
-
-//    ISocket::TSharedPtr accept() override;
-//    URL     getURL() const override;
-
-//    int     getID() const override;
-
-//    size_t  write(Buffer::TSharedPtr const &buffer) override;
-//    Buffer::TSharedPtr read(size_t const &size) override;
-    
-////    void    flush() override;
-
-//protected:
-//    CSocket(URL const &url, int const &fd);
-
-//    template<typename T>
-//    T assertOK(T const &result, std::string const &message, URL const &url) {
-//        using convertion::convert;
-//        using std::string;
-//        if (result < 0)
-//            throw std::runtime_error(message + ": url " + convert<string>(url) +
-//                ", " + std::strerror(errno) + ", code " + convert<string>(errno)); // ----->
-//        else
-//            return result; // ----->
-//    }
-
-//    URL     getPeerURL(int const &fd);
-//    void    setBlockingMode(bool const &is_blocking);
-
-//    TMode   m_mode;
-
-//    bool    m_is_blocking;
-//    URL     m_url;
-//    int     m_socket;
-//    struct sockaddr_in m_address;
-//};
-
-
-class CSocketBase {
+class CSocketBase: public ISocket, public pattern::NonCopyable {
 protected:
-    CSocketBase(URL const &url);
-    CSocketBase(int const &socket);
+    CSocketBase(URL const &url   , IListenerStreams::TSharedPtr const &listener);
+    CSocketBase(int const &socket, IListenerStreams::TSharedPtr const &listener);
     virtual ~CSocketBase() = default;
 
     void    open();
@@ -93,13 +50,15 @@ protected:
     size_t  write(Buffer::TSharedPtr const &buffer);
     Buffer::TSharedPtr read(size_t const &size);
 
-    void    setBlockingMode(bool const &is_blocking);
+    void    setBlockingMode(int const &socket, bool const &is_blocking);
 
-    URL     getURL() const;
+    URL     getURL() const override;
+    int     getID()  const override;
 
-    bool            m_is_blocking;
-    int             m_socket;
-    URL::TSharedPtr m_url;
+    int                     m_socket;
+    URL::TSharedPtr         m_url;
+    bool                    m_is_opened;
+    IListenerStreams::TSharedPtr m_listener;
 
 private:
     template<typename T>
@@ -107,10 +66,9 @@ private:
 
     static int initSignal();
 
-    static int const YES;
+    static int const        YES;
 
-    struct sockaddr_in m_address;
-    bool m_is_opened;
+    struct sockaddr_in      m_address;
 };
 
 

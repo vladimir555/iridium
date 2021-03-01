@@ -6,7 +6,7 @@
 #define HEADER_PROTOCOL_FACTORY_C1D59795_4D13_4FA7_A9D7_D11A452EC2D1
 
 
-#include "iridium/io/protocol/protocol_factory.h"
+#include "iridium/io/protocol/session.h"
 
 
 namespace iridium {
@@ -25,20 +25,20 @@ namespace implementation {
 //};
 
 
-template<typename TProtocolHandler>
-class CSimpleProtocolFactory: public IProtocolFactory {
-public:
-    DEFINE_IMPLEMENTATION(CSimpleProtocolFactory)
-    CSimpleProtocolFactory() = default;
+//template<typename TProtocolHandler>
+//class CSimpleProtocolFactory: public ISessionFactory {
+//public:
+//    DEFINE_IMPLEMENTATION(CSimpleProtocolFactory)
+//    CSimpleProtocolFactory() = default;
 
-    IProtocolHandler::TSharedPtr    createProtocolHandler() override;
-};
+//    ISession::TSharedPtr    createSession() override;
+//};
 
 
-template<typename TProtocolHandler>
-IProtocolHandler::TSharedPtr CSimpleProtocolFactory<TProtocolHandler>::createProtocolHandler() {
-    return TProtocolHandler::create(); // ----->
-}
+//template<typename TProtocolHandler>
+//ISession::TSharedPtr CSimpleProtocolFactory<TProtocolHandler>::createSession() {
+//    return TProtocolHandler::create(); // ----->
+//}
 
 
 } // implementation

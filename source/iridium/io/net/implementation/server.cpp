@@ -1,70 +1,101 @@
 #include "server.h"
-#include "socket_acceptor.h"
-#include "iridium/io/service.h"
+
 #include "iridium/io/implementation/stream_pool.h"
+#include "iridium/io/implementation/listener.h"
+#include "iridium/io/net/implementation/socket_acceptor.h"
 #include "iridium/threading/implementation/thread.h"
+#include "iridium/pattern/implementation/initializer.h"
 
 
-using iridium::threading::implementation::CThread;
 using iridium::io::implementation::CStreamPool;
+using iridium::io::implementation::CListener;
+using iridium::io::net::implementation::CSocketAcceptor;
+using iridium::threading::implementation::CThread;
+using iridium::pattern::implementation::CInitializer;
 
 
+#include "iridium/io/implementation/pipe.h"
+#include "socket_acceptor.h"
+#include "iridium/logging/logger.h"
 namespace iridium {
 namespace io {
 namespace net {
 namespace implementation {
 
 
-CServer::CServer(URL const &url, protocol::IProtocolFactory::TSharedPtr const &protocol_factory)
+class CAcceptorSession: public protocol::ISession {
+public:
+    DEFINE_IMPLEMENTATION(CAcceptorSession)
+
+    class CFakePipe: public io::implementation::CPipe {
+    public:
+        DEFINE_IMPLEMENTATION(CFakePipe)
+        CFakePipe() = default;
+        bool transmit(IListener::Event::TConstSharedPtr const &) override {
+            return true;
+        };
+    };
+
+    CAcceptorSession(
+        URL                             const &url,
+        IPeerSessionFactory::TSharedPtr const &session_factory,
+        IStreamPool::TSharedPtr         const &stream_pool)
+    :
+        m_url               (url),
+        m_session_factory   (session_factory),
+        m_stream_pool       (stream_pool)
+    {}
+
+    IStream::TSharedPtr getStream(IListener::TSharedPtr const &listener) override {
+        LOGT << "create acceptor";
+        m_socket = CSocketAcceptor::create(m_url, listener);
+        m_socket->initialize();
+        return m_socket;
+    }
+
+    IPipe::TSharedPtr getPipe(IListener::Event::TConstSharedPtr const &event) override {
+        if(!m_pipe) {
+            LOGT << "init acceptor";
+            m_pipe = CFakePipe::create();
+        }
+
+        if (event->stream == m_socket) {
+            LOGT << "accepting";
+            while (auto peer = m_socket->accept()) {
+                m_stream_pool->add(m_session_factory->createSession(peer));
+            }
+        }
+
+        return m_pipe;
+    }
+
+private:
+    URL                             m_url;
+    IPeerSessionFactory::TSharedPtr m_session_factory;
+    IStreamPool::TSharedPtr         m_stream_pool;
+    IPipe::TSharedPtr               m_pipe;
+    ISocketAcceptor::TSharedPtr     m_socket;
+};
+
+
+
+CServer::CServer(URL const &url, IPeerSessionFactory::TSharedPtr const &session_factory)
 :
-    m_thread(CThread::create(CRunnable::create(url, protocol_factory), "acceptor"))
+    m_url               (url),
+    m_session_factory   (session_factory),
+    m_stream_pool       (CStreamPool::create())
 {}
 
 
 void CServer::initialize() {
-    m_thread->initialize();
+    m_stream_pool->initialize();
+    m_stream_pool->add(CAcceptorSession::create(m_url, m_session_factory, m_stream_pool));
 }
 
 
 void CServer::finalize() {
-    m_thread->finalize();
-}
-
-
-CServer::CRunnable::CRunnable(URL const &url, protocol::IProtocolFactory::TSharedPtr const &protocol_factory)
-:
-    m_socket            (CSocketAcceptor::create(url)),
-    m_stream_pool       (CStreamPool::create()),
-    m_protocol_factory  (protocol_factory)
-{}
-
-
-void CServer::CRunnable::initialize() {
-    m_socket->initialize();
-    m_stream_pool->initialize();
-
-    Service::instance().add(m_socket);
-}
-
-
-void CServer::CRunnable::finalize() {
-    Service::instance().del(m_socket);
-
     m_stream_pool->finalize();
-    m_socket->finalize();
-}
-
-
-void CServer::CRunnable::run(std::atomic<bool> &is_running) {
-    while (is_running) {
-        for (auto const &event: Service::instance().wait()) {
-            if (event->stream->getID() == m_socket->getID()) {
-                while (auto peer = m_socket->accept()) {
-                    m_stream_pool->add(peer, m_protocol_factory->createProtocolHandler());
-                }
-            }
-        }
-    }
+//    m_stream_pool->del();
 }
 
 

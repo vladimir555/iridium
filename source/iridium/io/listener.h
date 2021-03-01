@@ -11,6 +11,7 @@
 #include "iridium/pattern/initializable.h"
 #include "iridium/threading/async_queue.h"
 #include "iridium/threading/synchronized.h"
+#include "iridium/pattern/observable.h"
 
 #include "stream.h"
 
@@ -21,32 +22,36 @@ namespace iridium {
 namespace io {
 
 
-class Event {
+class IListenerStreams {
 public:
-    DEFINE_CREATE   (Event)
-    DEFINE_ENUM     (TType, NONE, OPEN, CLOSE, READ, WRITE, ERROR)
-    
-    Event(
-        TType               const &type,
-        IStream::TSharedPtr const &stream);
-    virtual ~Event() = default;
-    
-    TType                   type;
-    IStream::TSharedPtr     stream;
-};
-
-
-// synchronized
-class IListener: public pattern::IInitializable {
-public:
-    DEFINE_INTERFACE(IListener)
-
-    typedef std::list<Event::TSharedPtr> TEvents;
-
+    DEFINE_INTERFACE(IListenerStreams)
     /// add stream for monitoring
     virtual void    add(IStream::TSharedPtr const &stream) = 0;
     /// del stream from monitoring set
     virtual void    del(IStream::TSharedPtr const &stream) = 0;
+};
+
+
+// synchronized
+class IListener: public pattern::IInitializable, public IListenerStreams {
+public:
+    DEFINE_INTERFACE(IListener)
+
+    struct Event {
+        DEFINE_CREATE   (Event)
+        DEFINE_ENUM     (TType, NONE, OPEN, CLOSE, READ, WRITE, EOF_, ERROR)
+
+        TType                   type;
+        IStream::TSharedPtr     stream;
+        IListener::TSharedPtr   listener;
+    };
+
+    typedef std::list<Event::TSharedPtr> TEvents;
+
+//    /// add stream for monitoring
+//    virtual void    add(IStream::TSharedPtr const &stream) = 0;
+//    /// del stream from monitoring set
+//    virtual void    del(IStream::TSharedPtr const &stream) = 0;
     /// waiting for new events
     virtual TEvents wait() = 0;
 };

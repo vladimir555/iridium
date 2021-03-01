@@ -4,8 +4,6 @@
 */
 #include "protocol_factory.h"
 
-#include "response_handler.h"
-
 
 namespace iridium {
 namespace io {

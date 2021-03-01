@@ -8,11 +8,8 @@
 #include "iridium/threading/runnable.h"
 #include "iridium/threading/worker_pool.h"
 #include "iridium/io/listener.h"
-#include "iridium/io/protocol/protocol_factory.h"
 #include "iridium/io/net/socket.h"
-#include "iridium/io/net/url.h"
-
-#include "iridium/io/protocol/protocol_factory.h"
+#include "iridium/io/url.h"
 
 #include "peers.h"
 
