@@ -19,6 +19,7 @@ typedef std::vector<uint8_t>    TIPv4;
 typedef uint16_t                TPort;
 typedef std::string             THost;
 typedef std::string             TAddress;
+typedef std::string             TPath;
 
 
 } // net

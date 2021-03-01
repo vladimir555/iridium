@@ -17,12 +17,14 @@
 
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/implementation/mutex.h"
+#include "iridium/threading/implementation/async_queue.h"
 #include "iridium/threading/synchronized_scope.h"
 
 
 using iridium::convertion::convert;
 using iridium::threading::implementation::CMutex;
 using iridium::threading::Synchronized;
+using iridium::threading::implementation::CAsyncQueue;
 using std::string;
 
 
@@ -59,36 +61,110 @@ DEFINE_ENUM(
 
 CListener::CListener()
 :
+    Synchronized(CMutex::create()),
     m_epoll_fd(0),
-    m_event_fd(0)
+    m_event_fd(0),
+    m_streams_to_add(CAsyncQueue<IStream::TSharedPtr>::create()),
+    m_streams_to_del(CAsyncQueue<IStream::TSharedPtr>::create())
 {}
 
 
 void CListener::initialize() {
+    LOCK_SCOPE_FAST
+    if (m_epoll_fd > 0)
+        return; // ----->
+
 //    m_epoll_fd = epoll_create1(0);
     m_epoll_fd = epoll_create(1);
-//    m_event_fd = eventfd(0, 0);
+    m_event_fd = eventfd(0, 0);
 
-//    struct epoll_event event = {};
+    struct epoll_event event = {};
 
-//    event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
-//    event.data.fd   = m_event_fd;
+    event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
+    event.data.fd   = m_event_fd;
 
-//    assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
+    assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
 
-    LOGT;
+    LOGT << "listener fd " << m_epoll_fd << " breaker fd " << m_event_fd;
 }
 
 
 void CListener::finalize() {
-    LOGT;
+    LOCK_SCOPE_FAST
+    if (m_epoll_fd == 0)
+        return; // ----->
+
+    LOGT << m_epoll_fd;
+    ::close(m_event_fd);
     ::close(m_epoll_fd);
+
+    m_epoll_fd = 0;
 }
 
 
 void CListener::add(IStream::TSharedPtr const &stream) {
+    LOGT << "listener fd " << m_epoll_fd << " add " << stream->getID();
+    if (m_epoll_fd == 0)
+        throw std::runtime_error("epoll add error: not initialized"); // ----->
+    m_streams_to_add->push(stream);
+}
+
+
+void CListener::del(IStream::TSharedPtr const &stream) {
+    if (m_epoll_fd == 0)
+        throw std::runtime_error("epoll del error: not initialized"); // ----->
+    m_streams_to_del->push(stream);
+}
+
+
+CListener::TEvents CListener::wait() {
+    LOCK_SCOPE_FAST
+
+    if (m_epoll_fd == 0)
+        throw std::runtime_error("epoll wait error: not initialized"); // ----->
+
+    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
+
+    for (auto const &stream: m_streams_to_add->pop(false))
+        addInternal(stream);
+
+    auto count = epoll_wait(
+        m_epoll_fd,
+        epoll_events,
+        DEFAULT_EVENTS_COUNT_LIMIT,
+        DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
+
+    LOGT << m_epoll_fd << " epoll count " << count;
+
+    CListener::TEvents events;
+
+    for (auto i = 0; i < count; i++) {
+        if (epoll_events[i].data.fd == m_event_fd)
+            continue; // <---
+
+        LOGT << m_epoll_fd << " epoll event: fd " << epoll_events[i].data.fd << " code " <<
+                TEpollEvent(epoll_events[i].events).convertToFlagsString();
+
+        if (epoll_events[i].events & EPOLLIN)
+            events.push_back(Event::create(Event { Event::TType::READ,  m_map_fd_stream[epoll_events[i].data.fd], shared_from_this() } ));
+
+        if (epoll_events[i].events & EPOLLOUT)
+            events.push_back(Event::create(Event { Event::TType::WRITE, m_map_fd_stream[epoll_events[i].data.fd], shared_from_this() } ));
+    }
+
+    for (auto const &stream: m_streams_to_del->pop(false))
+        delInternal(stream);
+
+    return events; // ----->
+}
+
+
+void CListener::addInternal(IStream::TSharedPtr const &stream) {
+    if (m_epoll_fd == 0)
+        throw std::runtime_error("epoll add error: not initialized"); // ----->
+
     if (stream->getID() > 0 && m_map_fd_stream.find(stream->getID()) == m_map_fd_stream.end()) {
-        LOGT << "fd " << stream->getID();
+        LOGT << m_epoll_fd << " fd " << stream->getID();
 
         struct epoll_event event = {};
 
@@ -98,45 +174,22 @@ void CListener::add(IStream::TSharedPtr const &stream) {
         assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event), "epoll add error");
 
         m_map_fd_stream[stream->getID()] = stream;
+
+//        // todo: check overflow
+//        eventfd_write(m_event_fd, 0);
     }
 }
 
 
-void CListener::del(IStream::TSharedPtr const &stream) {
-    LOGT << "fd " << stream->getID();
+void CListener::delInternal(IStream::TSharedPtr const &stream) {
+    if (m_epoll_fd == 0)
+        throw std::runtime_error("epoll add error: not initialized"); // ----->
+
+    LOGT << m_epoll_fd << " fd " << stream->getID();
     if (stream->getID() > 0) {
         m_map_fd_stream.erase(stream->getID());
         assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr), "epoll del error");
     }
-}
-
-
-CListener::TEvents CListener::wait() {
-    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
-
-    auto count = epoll_wait(
-        m_epoll_fd,
-        epoll_events,
-        DEFAULT_EVENTS_COUNT_LIMIT,
-        DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
-
-    LOGT << "epoll count " << count;
-
-    CListener::TEvents events;
-
-    for (auto i = 0; i < count; i++) {
-        if (epoll_events[i].data.fd == m_event_fd)
-            continue; // <---
-
-        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " << TEpollEvent(epoll_events[i].events).convertToFlagsString();
-        if (epoll_events[i].events & EPOLLIN)
-            events.push_back(Event::create(Event::TType::READ,  m_map_fd_stream[epoll_events[i].data.fd]));
-
-        if (epoll_events[i].events & EPOLLOUT)
-            events.push_back(Event::create(Event::TType::WRITE, m_map_fd_stream[epoll_events[i].data.fd]));
-    }
-
-    return events; // ----->
 }
 
 

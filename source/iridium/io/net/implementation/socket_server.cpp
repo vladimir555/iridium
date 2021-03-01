@@ -10,7 +10,6 @@
 
 
 using iridium::threading::implementation::CThread;
-using iridium::io::protocol::IProtocolFactory;
 
 
 namespace iridium {

@@ -9,6 +9,7 @@
 
 
 #include "iridium/io/net/socket.h"
+#include "iridium/io/listener.h"
 
 #include "iridium/encryption/openssl.h"
 
@@ -23,10 +24,10 @@ namespace platform {
 namespace unix {
 
 
-class CSocketAcceptor: public CSocketBase, public ISocketAcceptor {
+class CSocketAcceptor: public CSocketBase, public ISocketAcceptor, public std::enable_shared_from_this<CSocketAcceptor> {
 public:
     DEFINE_IMPLEMENTATION(CSocketAcceptor)
-    CSocketAcceptor(URL const &url);
+    CSocketAcceptor(URL const &url, IListenerStreams::TSharedPtr const &listener = nullptr);
 
     void initialize() override;
     void finalize() override;
@@ -37,7 +38,7 @@ public:
     ISocketStream::TSharedPtr accept() override;
 
 private:
-    encryption::OpenSSL::TContext  *m_context;
+    encryption::OpenSSL::TContext *m_context;
 };
 
 

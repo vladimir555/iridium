@@ -7,8 +7,8 @@
 
 
 #include "iridium/io/stream.h"
+#include "iridium/io/url.h"
 #include "iridium/pattern/initializable.h"
-#include "url.h"
 
 
 namespace iridium {
@@ -25,7 +25,7 @@ namespace net {
 //};
 
 
-class ISocket: public IStream {
+class ISocket: virtual public IStream {
 public:
     DEFINE_INTERFACE(ISocket)
 
@@ -33,7 +33,7 @@ public:
 };
 
 
-class ISocketStream: public ISocket, public IStreamPort {
+class ISocketStream: public ISocket, virtual public IStreamPort {
 public:
     DEFINE_INTERFACE(ISocketStream)
 };

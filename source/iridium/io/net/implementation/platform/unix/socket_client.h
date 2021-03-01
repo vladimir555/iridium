@@ -10,6 +10,7 @@
 
 #include "iridium/io/net/socket.h"
 #include "iridium/encryption/openssl.h"
+#include "iridium/io/listener.h"
 
 #include "socket.h"
 
@@ -22,10 +23,14 @@ namespace platform {
 namespace unix {
 
 
-class CSocketClient: public CSocketBase, public ISocketStream {
+class CSocketClient:
+    virtual public CSocketBase,
+    public ISocketStream,
+    public std::enable_shared_from_this<CSocketClient>
+{
 public:
     DEFINE_IMPLEMENTATION(CSocketClient)
-    CSocketClient(URL const &url);
+    CSocketClient(URL const &url, IListener::TSharedPtr const &listener = nullptr);
 
     void initialize() override;
     void finalize() override;

@@ -58,8 +58,8 @@ namespace implementation {
 
 CFileStream::CFileStream(string const &file_name, TOpenMode const &open_mode)
 :
-    m_file_name(file_name),
-    m_open_mode(open_mode)
+    m_file_name (file_name),
+    m_open_mode (open_mode)
 {}
 
 
@@ -92,7 +92,6 @@ Buffer::TSharedPtr CFileStream::read(size_t const &size) {
             " error: was read " + convert<string>(count) +
             " bytes, "          + strerrorInternal(errno)); // ----->
     
-    // todo: optimize for speed, move
     return buffer; // ----->
 }
 
@@ -102,10 +101,6 @@ size_t CFileStream::write(Buffer::TSharedPtr const &line) {
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
 
     size_t count = fwriteInternal(line->data(), 1, line->size(), m_file);
-
-//    if (count == 0) {
-//        LOGT << "fd " << getID() << " empty write";
-//    }
 
     if (count != line->size())
         throw std::runtime_error(
@@ -200,7 +195,7 @@ int CFileStream::getID() const {
         return filenoInternal(m_file); // ----->
 #endif
     } else
-        return -1;
+        throw std::runtime_error("file stream '" + m_file_name + "' get id error: not initialized"); // ----->
 }
     
     

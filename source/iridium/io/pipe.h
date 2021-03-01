@@ -23,11 +23,9 @@ namespace iridium {
 namespace io {
 
 
-class ITransmitterStreams {
+class IPipeStreams {
 public:
-    DEFINE_INTERFACE(ITransmitterStreams)
-//    virtual void setReader(IStreamReader::TSharedPtr const &reader) = 0;
-//    virtual void setWriter(IStreamWriter::TSharedPtr const &writer) = 0;
+    DEFINE_INTERFACE(IPipeStreams)
     virtual IStreamReader::TConstSharedPtr getReader() const = 0;
     virtual IStreamWriter::TConstSharedPtr getWriter() const = 0;
 
@@ -38,14 +36,15 @@ public:
 };
 
 
-class ITransmitter: public ITransmitterStreams {
+class IPipe: public IPipeStreams {
 public:
-    DEFINE_INTERFACE(ITransmitter)
-    virtual bool transmit(Event::TSharedPtr const &event) = 0;
+    DEFINE_INTERFACE(IPipe)
+    // false - buffers are empty
+    virtual bool transmit(IListener::Event::TConstSharedPtr const &event) = 0;
 };
 
 
-bool operator < (ITransmitterStreams::TSharedPtr const &l, ITransmitterStreams::TSharedPtr const &r);
+//bool operator < (IPipeStreams::TSharedPtr const &l, IPipeStreams::TSharedPtr const &r);
 
 
 } // io

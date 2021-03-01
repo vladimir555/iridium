@@ -3,10 +3,20 @@
 
 
 #include "iridium/pattern/initializable.h"
+#include "stream.h"
+#include "protocol/session.h"
 
 
 namespace iridium {
 namespace io {
+
+
+// todo: mv to net
+class IPeerSessionFactory {
+public:
+    DEFINE_INTERFACE(IPeerSessionFactory)
+    virtual protocol::ISession::TSharedPtr createSession(IStreamPort::TSharedPtr const &peer) = 0;
+};
 
 
 class IServer: public pattern::IInitializable {

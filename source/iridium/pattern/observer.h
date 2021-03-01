@@ -16,9 +16,7 @@ template<typename TEvent>
 class IObserver {
 public:
 	DEFINE_INTERFACE(IObserver<TEvent>)
-	virtual void handle(
-		TEvent const& event,
-		typename IObservable<TEvent>::TSharedPtr const &observable) = 0;
+	virtual void handle(TEvent const& event) = 0;
 };
 
 

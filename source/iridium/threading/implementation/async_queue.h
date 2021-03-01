@@ -87,15 +87,18 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
 
 template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
-    LOCK_SCOPE_FAST
+    if (items.size() > 0) {
+        LOCK_SCOPE_FAST
 
-    auto items_ = items;
+        auto items_ = items;
 
-    m_items.splice(m_items.end(), items_);
-    m_is_empty = m_items.empty();
-    m_condition->notifyOne();
+        m_items.splice(m_items.end(), items_);
+        m_is_empty = m_items.empty();
+        m_condition->notifyOne();
 
-    return m_items.size(); // ----->
+        return m_items.size(); // ----->
+    } else
+        return 0; // ----->
 }
 
 

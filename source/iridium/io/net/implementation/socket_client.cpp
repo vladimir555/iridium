@@ -22,10 +22,8 @@ using iridium::io::implementation::CListener;
 using iridium::convertion::convert;
 using std::string;
 
-using iridium::io::protocol::IProtocolFactory;
 
-
-static size_t const DEFAULT_BUFFER_SIZE = 8192;
+//static size_t const DEFAULT_BUFFER_SIZE = 8192;
 
 
 namespace iridium {

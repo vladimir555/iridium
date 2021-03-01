@@ -17,7 +17,6 @@
 using iridium::threading::implementation::CAsyncQueue;
 using iridium::threading::implementation::CWorkerPool;
 using iridium::io::implementation::CListener;
-using iridium::io::protocol::IProtocolFactory;
 
 using iridium::threading::Synchronized;
 

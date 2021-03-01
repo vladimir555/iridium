@@ -21,6 +21,7 @@
 #include "buffer.h"
 
 #include <vector>
+#include <functional>
 
 
 namespace iridium {
@@ -60,19 +61,33 @@ public:
     DEFINE_INTERFACE(IStreamPort)
 };
 
-    
-bool operator < (IStream::TConstSharedPtr const &l, IStream::TConstSharedPtr const &r);
-    
-    
-/*
-events: accept, read, write, end -> acceptor worker -> initialize -> protocol workers -> finalize
-protocol workers:
-    transaction: event -> action -> on read: buffer -> protocol -> event on read, event end -> acceptor worker
-*/
+
+//bool operator < (IStream::TSharedPtr        const &l, IStream::TSharedPtr       const &r);
+//bool operator < (IStream::TSharedPtr        const &l, IStream::TConstSharedPtr  const &r);
+//bool operator < (IStream::TSharedPtr        const &l, IStream::TWeakPtr         const &r);
+//bool operator < (IStream::TSharedPtr        const &l, IStream::TConstWeakPtr    const &r);
+//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TSharedPtr       const &r);
+//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TConstSharedPtr  const &r);
+//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TWeakPtr         const &r);
+//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TConstWeakPtr    const &r);
+//bool operator < (IStream::TWeakPtr          const &l, IStream::TSharedPtr       const &r);
+//bool operator < (IStream::TWeakPtr          const &l, IStream::TConstSharedPtr  const &r);
+//bool operator < (IStream::TWeakPtr          const &l, IStream::TWeakPtr         const &r);
+//bool operator < (IStream::TWeakPtr          const &l, IStream::TConstWeakPtr    const &r);
+//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TSharedPtr       const &r);
+//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TConstSharedPtr  const &r);
+//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TWeakPtr         const &r);
+//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TConstWeakPtr    const &r);
 
 
 } // io
 } // iridium
+
+
+//template <>
+//struct std::hash<iridium::io::IStream::TSharedPtr> {
+//    std::size_t operator()(iridium::io::IStream::TSharedPtr const &stream) const;
+//};
 
 
 #endif // HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358

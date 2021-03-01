@@ -55,7 +55,7 @@ void CStreamWriterBuffer::initialize() {}
 void CStreamWriterBuffer::finalize() {}
 
 
-int  CStreamWriterBuffer::getID() const {
+int CStreamWriterBuffer::getID() const {
     return {}; //----->
 }
 

@@ -3,9 +3,11 @@
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/mutex.h"
 #include "iridium/threading/implementation/worker_pool.h"
+#include "iridium/threading/implementation/async_queue.h"
 #include "iridium/threading/synchronized_scope.h"
-#include "iridium/io/service.h"
-#include "iridium/io/implementation/transmitter.h"
+#include "iridium/io/implementation/listener.h"
+#include "iridium/io/implementation/pipe.h"
+
 #include "iridium/assert.h"
 #include "iridium/items.h"
 
@@ -15,6 +17,8 @@
 using iridium::threading::implementation::CThread;
 using iridium::threading::implementation::CMutex;
 using iridium::threading::implementation::CWorkerPool;
+using iridium::threading::implementation::CAsyncQueue;
+//using iridium::io::net::
 
 
 #include "iridium/logging/logger.h"
@@ -24,162 +28,137 @@ namespace implementation {
 
 
 CStreamPool::CStreamPool() {
-    auto runnable   = CListenerHandler::create();
-    m_runnable      = runnable;
-    m_thread        = CThread::create(runnable, "io_event_listener");
+    auto listener_handler   = CListenerHandler::create(CListener::create());
+    m_listener_handler      = listener_handler;
+    m_listener_thread       = CThread::create(listener_handler, "io_event_listener");
 }
 
 
-void CStreamPool::add(
-    IStreamPort::TSharedPtr                 const &stream,
-    protocol::IProtocolHandler::TSharedPtr  const &protocol_handler)
-{
-    m_runnable->add(stream, protocol_handler);
+void CStreamPool::add(protocol::ISession::TSharedPtr const &session) {
+    m_listener_handler->add(session);
 }
 
 
-void CStreamPool::del(IStream::TSharedPtr const &stream) {
-    m_runnable->del(stream);
+void CStreamPool::del(protocol::ISession::TSharedPtr const &session) {
+    m_listener_handler->del(session);
 }
 
 
 void CStreamPool::initialize() {
-    m_thread->initialize();
+    m_listener_thread->initialize();
 }
 
 
 void CStreamPool::finalize() {
-    m_thread->finalize();
+    m_listener_thread->finalize();
 }
 
 
-CStreamPool::CListenerHandler::CListenerHandler()
+CStreamPool::CListenerHandler::CListenerHandler(IListener::TSharedPtr const &listener)
 :
-    Synchronized(CMutex::create())
-{
-    threading::IWorkerPool<Event::TSharedPtr>::TWorkerHandlers handlers;
+    Synchronized (CMutex::create()),
+    m_listener   (listener),
+    m_sessions   (Sessions::create()),
+    m_worker_pool(CWorkerPool<Event::TSharedPtr>::create("io_event_handler",
+        createObjects<TWorkerPool::TWorkerHandler, CEventHandler>(1, m_sessions)))
+{}
 
-    for (auto i = 0; i < 1; i++)
-        handlers.push_back(CStreamHandler::create(m_transmitters));
 
-    m_worker_pool = CWorkerPool<Event::TSharedPtr>::create("io_event_handler", handlers);
+void CStreamPool::CListenerHandler::add(protocol::ISession::TSharedPtr const &session) {
+    LOCK_SCOPE
+    auto event = Event::create(Event{ {Event::TType::OPEN, nullptr, m_listener}, session} );
+    m_worker_pool->push(event);
 }
 
 
-void CStreamPool::CListenerHandler::add(
-    IStreamPort::TSharedPtr                 const &stream,
-    protocol::IProtocolHandler::TSharedPtr  const &protocol_handler)
-{
-    LOCK_SCOPE_FAST
-    try {
-        auto transmitter = CTransmitterHandler::create(protocol_handler, m_transmitters);
-
-        transmitter->transmit(Event::create(Event::TType::OPEN, stream));
-        m_transmitters.set(stream, transmitter);
-
-        LOGT << "fd " << stream->getID();
-    } catch (std::exception const &e) {
-        LOGE << e.what();
-    }
-}
-
-
-void CStreamPool::CListenerHandler::del(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE_FAST
-    m_transmitters.del(stream);
-    LOGT << "fd " << stream->getID();
+void CStreamPool::CListenerHandler::del(protocol::ISession::TSharedPtr const &session) {
+    LOCK_SCOPE
+    LOGT;
+//    m_sessions->m_streams_to_delete->push(stream);
 }
 
 
 void CStreamPool::CListenerHandler::initialize() {
-    LOCK_SCOPE_FAST
+    LOCK_SCOPE
+    m_listener->initialize();
+//    m_sessions = Sessions::create();
     m_worker_pool->initialize();
 }
 
 
 void CStreamPool::CListenerHandler::finalize() {
-    LOCK_SCOPE_FAST
+    LOCK_SCOPE
+    m_sessions.reset();
     m_worker_pool->finalize();
+    m_listener->finalize();
 }
 
 
 void CStreamPool::CListenerHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
-        m_worker_pool->push(Service::instance().wait());
+        for (auto const &event_: m_listener->wait()) {
+            auto event = Event::create(Event
+                { {event_->type, event_->stream, event_->listener}, m_sessions->m_map_stream_session.get(event_->stream) });
+            m_worker_pool->push(event);
+        }
     }
 }
 
 
-CStreamPool::CListenerHandler::CTransmitterHandler::CTransmitterHandler(
-    protocol::IProtocolHandler::TSharedPtr const &protocol_handler,
-    TTransmitters &transmitters)
-:
-    threading::Synchronized(threading::implementation::CMutex::create()),
-    m_transmitters      (transmitters),
-    m_protocol_handler  (protocol_handler)
+CStreamPool::CListenerHandler::Sessions::Sessions()
+//:
+//    m_streams_to_delete(CAsyncQueue<IStream::TSharedPtr>::create())
 {}
 
 
-CStreamPool::CListenerHandler::CTransmitterHandler::~CTransmitterHandler() {
-    // todo: check null
-    // todo: m_transmitters.del
-}
-
-
-void CStreamPool::CListenerHandler::CTransmitterHandler::set(
-    const IStreamReader::TSharedPtr &reader,
-    const IStreamWriter::TSharedPtr &writer)
-{
-    if (reader)
-        m_transmitters.set(reader, shared_from_this());
-    if (writer)
-        m_transmitters.set(writer, shared_from_this());
-    CTransmitter::set(reader, writer);
-}
-
-
-bool CStreamPool::CListenerHandler::CTransmitterHandler::transmit(const Event::TSharedPtr &event) {
-    LOCK_SCOPE;
-    if (!checkOneOf(event->type, Event::TType::ERROR, Event::TType::CLOSE)  &&
-        m_protocol_handler->redirectStreams(shared_from_this(), event)      &&
-        CTransmitter::transmit(event)
-    ) {
-        threading::sleep(1000);
-        return true; // ----->
-    } else {
-        // todo: m_transmitters.del
-        return false;
-    }
-}
-
-
-CStreamPool::CListenerHandler::CStreamHandler::CStreamHandler(TTransmitters &transmitters)
+CStreamPool::CListenerHandler::CEventHandler::CEventHandler(Sessions::TSharedPtr const &sessions)
 :
-    m_transmitters(transmitters)
+    m_sessions(sessions)
 {}
 
 
-void CStreamPool::CListenerHandler::CStreamHandler::initialize() {}
+void CStreamPool::CListenerHandler::CEventHandler::initialize() {
+    LOGT;
+}
 
 
-void CStreamPool::CListenerHandler::CStreamHandler::finalize() {}
+void CStreamPool::CListenerHandler::CEventHandler::finalize() {
+    LOGT;
+}
 
 
-CStreamPool::CListenerHandler::CStreamHandler::TItems
-CStreamPool::CListenerHandler::CStreamHandler::handle(TItems const &events_) {
+CStreamPool::CListenerHandler::CEventHandler::TItems
+CStreamPool::CListenerHandler::CEventHandler::handle(TItems const &events_) {
     TItems events;
 
     for (auto const &event: events_) {
-        try {
-            if (m_transmitters.get(event->stream)->transmit(event))
-                events.push_back(event);
-        } catch (std::exception const &e) {
-            LOGE << e.what();
-            m_transmitters.del(event->stream);
+        if (auto session = event->session) {
+            if(!event->stream) {
+                event->stream = session->getStream(event->listener);
+                m_sessions->m_map_stream_session.set(event->stream, session);
+            }
+
+            LOGT << "event fd " << event->stream->getID() << " " << event->type;
+
+            if (auto pipe = session->getPipe(event)) {
+                // EOF -> redirect streams
+                if (!pipe->transmit(event)) {
+                    event->stream   = std::const_pointer_cast<IStream>(IStream::TConstSharedPtr(pipe->getReader()));
+                    event->type     = IListener::Event::TType::EOF_;
+                    session->getPipe(event);
+                }
+
+                if (pipe && pipe->getReader() && pipe->getReader()->getID() > 0)
+                    m_sessions->m_map_stream_session.set(pipe->getReader(), session);
+                if (pipe && pipe->getWriter() && pipe->getWriter()->getID() > 0)
+                    m_sessions->m_map_stream_session.set(pipe->getWriter(), session);
+            } else {
+                LOGT << "del session fd " << event->stream->getID();
+            }
         }
     }
 
-    return events; // -----
+    return events; // ----->
 }
 
 

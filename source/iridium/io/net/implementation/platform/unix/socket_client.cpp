@@ -19,9 +19,9 @@ namespace platform {
 namespace unix {
 
 
-CSocketClient::CSocketClient(URL const &url)
+CSocketClient::CSocketClient(URL const &url, IListener::TSharedPtr const &listener)
 :
-    CSocketBase             (url),
+    CSocketBase             (url, listener),
     m_ssl                   (nullptr),
     m_is_ssl_handshake_done (false)
 {}
@@ -40,18 +40,28 @@ void CSocketClient::initialize() {
         assertSSLInitialized();
         m_is_ssl_handshake_done = false;
     }
+
+    if (m_listener && m_is_opened) {
+        LOGT << "add to listener fd " << getID();
+        m_listener->add(shared_from_this());
+    }
 }
 
 
 void CSocketClient::finalize() {
+    if (m_listener && m_is_opened)
+        m_listener->del(shared_from_this());
+
     if (m_ssl) {
         OpenSSL::instance().releaseSSL(m_ssl);
         m_ssl = nullptr;
     }
+
     if (m_context) {
         OpenSSL::instance().releaseContext(m_context);
         m_context = nullptr;
     }
+
     close();
 }
 
@@ -62,7 +72,7 @@ URL CSocketClient::getURL() const {
 
 
 int CSocketClient::getID() const {
-    return m_socket; // ----->
+    return CSocketBase::getID(); // ----->
 }
 
 

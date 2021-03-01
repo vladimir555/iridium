@@ -1,41 +1,39 @@
-#include "response_handler.h"
+#include "peer_session.h"
 
 #include "iridium/logging/logger.h"
 
-#include "iridium/io/buffer.h"
 #include "iridium/io/protocol/http/request.h"
 #include "iridium/io/protocol/http/response.h"
 #include "iridium/io/implementation/stream_reader_list.h"
 #include "iridium/io/implementation/stream_buffer.h"
 #include "iridium/io/implementation/stream_splitter.h"
-#include "iridium/io/implementation/transmitter.h"
+#include "iridium/io/implementation/pipe.h"
 
 #include "iridium/parsing/implementation/parser_http.h"
 #include "iridium/parsing/implementation/node.h"
 
-#include "iridium/convertion/convert.h"
+//#include "iridium/convertion/convert.h"
 
 #include "content_storage.h"
 #include "mime.h"
 
-#include "iridium/strings.h"
+#include "iridium/items.h"
 
-#include <string>
+//#include <string>
 
 
 using std::string;
 using iridium::io::implementation::CStreamReaderList;
 using iridium::io::implementation::CStreamReaderBuffer;
 using iridium::io::implementation::CStreamWriterBuffer;
-using iridium::io::implementation::CStreamSplitter;
-using iridium::io::implementation::CTransmitter;
+using iridium::io::implementation::CPipe;
 using iridium::convertion::convert;
 using iridium::parsing::implementation::CNode;
 using iridium::parsing::implementation::CHTTPParser;
 
 
-static size_t const DEFAULT_HTTP_HEADER_SIZE_MIN    = 78;
-static string const DEFAULT_HTTP_PATH               = "/index.html";
+static size_t   const DEFAULT_HTTP_HEADER_SIZE_MIN  = 78;
+static char     const DEFAULT_HTTP_PATH[]           = "/index.html";
 
 
 namespace iridium {
@@ -45,21 +43,22 @@ namespace http {
 namespace implementation {
 
 
-CResponseProtocolHandler::CResponseProtocolHandler() {
-    m_parser            = CHTTPParser::create();
-    // todo: path, path check
-    m_content_storage   = CContentStorage::create("html/");
+CPeerSession::CPeerSession(IStreamPort::TSharedPtr const &peer)
+:
+    m_peer              (peer),
+    m_pipe              (CPipe::create()),
+    m_parser            (CHTTPParser::create()),
+    m_is_keep_alive     (false),
+    m_content_storage   (CContentStorage::create(""))
+{}
+
+
+IStream::TSharedPtr CPeerSession::getStream(IListener::TSharedPtr const &/*listener*/) {
+    return m_peer; // ----->
 }
 
 
-bool CResponseProtocolHandler::redirectStreams(
-    ITransmitterStreams::TSharedPtr const &transmitter,
-    Event::TSharedPtr               const &event)
-{
-    auto result = true;
-
-//    LOGT << "begin: event " << event->type;
-
+IPipe::TSharedPtr CPeerSession::getPipe(IListener::Event::TConstSharedPtr const &event) {
     // todo:
     // http codes enum;
     // +http date fix;
@@ -69,29 +68,32 @@ bool CResponseProtocolHandler::redirectStreams(
     // http timeout
     // buffer size fix
 
+    LOGT << "event " << event->type << " fd " << event->stream->getID();
+
+    typedef IListener::Event::TType TEventType;
+
     try {
-        if (event->type == Event::TType::READ ||
-            event->type == Event::TType::OPEN)
-        {
-            if (m_peer_buffer) {
-//                LOGT << "write buffer:\n" << *m_peer_buffer << "\nsize = " << m_peer_buffer->size();
-                auto header  = string(m_peer_buffer->begin(), m_peer_buffer->end());
+        if (event->stream == m_peer) {
+            if (event->type == TEventType::OPEN) {
+                m_request_buffer = Buffer::create();
+                m_pipe->set(m_peer, CStreamWriterBuffer::create(m_request_buffer));
+            }
 
-                LOGT << "! 1 " << bool(m_peer_buffer->size() > DEFAULT_HTTP_HEADER_SIZE_MIN);
-                LOGT << "! 2 " << bool(string(m_peer_buffer->end() - 4, m_peer_buffer->end()) == "\r\n\r\n");
-                LOGT << "! 3 " << header;
+            if (checkOneOf(event->type, TEventType::READ, TEventType::EOF_) && m_pipe->getReader() == m_peer) {
+                auto header = string(m_request_buffer->begin(), m_request_buffer->end());
 
-                if (m_peer_buffer->size() > DEFAULT_HTTP_HEADER_SIZE_MIN &&
-                    string(m_peer_buffer->end() - 4, m_peer_buffer->end()) == "\r\n\r\n")
+                // finished reading http header
+                if (header.size() > DEFAULT_HTTP_HEADER_SIZE_MIN &&
+                    header.substr(header.size() - 4) == "\r\n\r\n")
                 {
-                    request ::THttp request     (m_parser->parse(convert<string>(*m_peer_buffer)));
-                    response::THttp response    (CNode::create("http"));
-
-//                    LOGT << "request:" << request.getNode();
+                    request ::THttp request (m_parser->parse(header));
+                    response::THttp response(CNode::create("http"));
 
                     auto uri = request.Message.get().uri;
                     if (uri == "/")
                         uri  = DEFAULT_HTTP_PATH;
+
+                    m_is_keep_alive = request.Headers.Connection.get() == "Keep-Alive";
 
                     fs::IFileStreamReader::TSharedPtr content_stream_reader;
                     try {
@@ -122,32 +124,29 @@ bool CResponseProtocolHandler::redirectStreams(
                     if (content_stream_reader)
                         stream_reader_list->add(content_stream_reader);
 
-                    transmitter->set(stream_reader_list, std::dynamic_pointer_cast<IStreamWriter>(event->stream));
-
-                    event->type = Event::TType::WRITE;
-                    m_peer_buffer.reset();
-
-//                    LOGT << "response header:" << response.getNode();
-
-                    LOGT << "begin write to client";
+                    m_pipe->set(stream_reader_list, m_peer);
+                } else {
+                    // wrong header, close peer
+                    if (event->type == TEventType::EOF_)
+                        return nullptr; // ----->
                 }
-            } else {
-                m_peer_buffer = Buffer::create();
-                transmitter->set(std::dynamic_pointer_cast<IStreamReader>(event->stream),
-                                 CStreamWriterBuffer::create(m_peer_buffer));
+            }
 
-                LOGT << "begin read from client";
+            // finished writing
+            if (event->type == TEventType::EOF_ && m_pipe->getWriter() == m_peer) {
+                if (m_is_keep_alive) {
+                    m_request_buffer->clear();
+                    m_pipe->set(m_peer, CStreamWriterBuffer::create(m_request_buffer));
+                } else
+                    return nullptr; // ----->
             }
         }
-        if (event->type == Event::TType::CLOSE)
-            result = false;
     } catch (std::exception const &e) {
-        LOGE << "http protocol error: " << e.what();
-        result = false;
+        LOGE << "peer error: " << e.what();
+        return nullptr; // ----->
     }
 
-//    LOGT << "end: " << result;
-    return result; // ----->
+    return m_pipe; // ----->
 }
 
 

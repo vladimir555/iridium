@@ -32,12 +32,35 @@ std::vector<T> assign(std::list<T> const &source) {
 
 template<typename T, typename ... TItems>
 bool checkOneOf(T const &source, TItems const & ... items_) {
-    std::initializer_list<T> const &items{items_ ...};
+    std::initializer_list<T const> const &items{items_ ...};
+
     for (auto const &item: items)
-        if (source == item)
+        if (item == source)
             return true;
 
     return false; // ----->
+}
+
+
+template<typename TObject, typename ... TArgs>
+std::list<typename TObject::TSharedPtr> createObjects(size_t const &count, TArgs ... args) {
+    std::list<typename TObject::TSharedPtr> objects;
+
+    for (size_t i = 0; i < count; i++)
+        objects.push_back(TObject::create(args ...));
+
+    return objects; // ----->
+}
+
+
+template<typename TInterface, typename TObject, typename ... TArgs>
+std::list<typename TInterface::TSharedPtr> createObjects(size_t const &count, TArgs ... args) {
+    std::list<typename TInterface::TSharedPtr> objects;
+
+    for (size_t i = 0; i < count; i++)
+        objects.push_back(TObject::create(args ...));
+
+    return objects; // ----->
 }
 
 

@@ -17,17 +17,21 @@ namespace platform {
 namespace unix {
 
 
-CSocketPeer::CSocketPeer(int const &fd, URL::TProtocol const &protocol)
+CSocketPeer::CSocketPeer(int const &fd, URL::TProtocol const &protocol, IListenerStreams::TSharedPtr const &listener)
 :
-    CSocketBase (fd),
+    CSocketBase (fd, listener),
     m_protocol  (protocol),
     m_ssl       (nullptr)
 {}
 
 
-CSocketPeer::CSocketPeer(int const &fd, URL::TProtocol const &protocol, encryption::OpenSSL::TSSL *ssl)
+CSocketPeer::CSocketPeer(
+    int const &fd,
+    URL::TProtocol const &protocol,
+    encryption::OpenSSL::TSSL *ssl,
+    IListenerStreams::TSharedPtr const &listener)
 :
-    CSocketBase (fd),
+    CSocketBase (fd, listener),
     m_protocol  (protocol),
     m_ssl       (ssl)
 {}
@@ -35,12 +39,19 @@ CSocketPeer::CSocketPeer(int const &fd, URL::TProtocol const &protocol, encrypti
 
 void CSocketPeer::initialize() {
     m_url = URL::create(getSocketURL(m_protocol));
+
+    if (m_listener && m_is_opened)
+        m_listener->add(shared_from_this());
 }
 
 
 void CSocketPeer::finalize() {
+    if (m_listener && m_is_opened)
+        m_listener->del(shared_from_this());
+
     if (m_ssl)
         OpenSSL::instance().releaseSSL(m_ssl);
+
     close();
 }
 
@@ -51,7 +62,7 @@ URL CSocketPeer::getURL() const {
 
 
 int CSocketPeer::getID() const {
-    return m_socket; // ----->
+    return CSocketBase::getID(); // ----->
 }
 
 

@@ -2,15 +2,13 @@
 * This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 * PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 */
-#include "transmitter.h"
+#include "pipe.h"
 
 #include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
 #include "iridium/assert.h"
 #include "iridium/io/service.h"
 #include "iridium/items.h"
-
-#include <set>
 
 
 using iridium::convertion::convert;
@@ -23,33 +21,32 @@ namespace io {
 namespace implementation {
 
 
-size_t const CTransmitter::DEFAULT_BUFFER_SIZE  = 8192;
-size_t const CTransmitter::DEFAULT_BUFFER_COUNT = 8;
+size_t const CPipe::DEFAULT_BUFFER_SIZE  = 8192;
+size_t const CPipe::DEFAULT_BUFFER_COUNT = 8;
 
 
-CTransmitter::CTransmitter(
-    size_t                  const &buffer_size,
-    size_t                  const &buffer_count)
+CPipe::CPipe()
 :
-    m_buffer_size   (buffer_size),
-    m_buffer_count  (buffer_count)
+    m_buffer_size   (DEFAULT_BUFFER_SIZE),
+    m_buffer_count  (DEFAULT_BUFFER_COUNT)
 {}
 
 
-CTransmitter::~CTransmitter() {
+CPipe::~CPipe() {
+    LOGT;
     if (m_reader) {
-        Service::instance().del(m_reader);
+        LOGT << "del " << m_reader->getID();
         m_reader->finalize();
     }
 
     if (m_writer) {
-        Service::instance().del(m_writer);
+        LOGT << "del " << m_writer->getID();
         m_writer->finalize();
     }
 }
 
 
-void CTransmitter::set(
+void CPipe::set(
     IStreamReader::TSharedPtr const &reader,
     IStreamWriter::TSharedPtr const &writer)
 {
@@ -67,28 +64,24 @@ void CTransmitter::set(
 
     LOGT << "from: " << from;
 
-    if (m_reader && std::set<IStream::TSharedPtr>{reader, writer}.count(m_reader) == 0) {
+    if (m_reader && !checkOneOf<IStream::TSharedPtr>(m_reader, reader, writer)) {
         LOGT << "finalize m_reader fd " << m_reader->getID();
-        Service::instance().del(m_reader);
         m_reader->finalize();
     }
 
-    if (m_writer && std::set<IStream::TSharedPtr>{reader, writer}.count(m_writer) == 0) {
+    if (m_writer && !checkOneOf<IStream::TSharedPtr>(m_writer, reader, writer)) {
         LOGT << "finalize m_writer fd " << m_writer->getID();
-        Service::instance().del(m_writer);
         m_writer->finalize();
     }
 
-    if (reader && std::set<IStream::TSharedPtr>{m_reader, m_writer}.count(reader) == 0) {
-        LOGT << "initialize reader fd " << reader->getID();
+    if (reader && !checkOneOf<IStream::TSharedPtr>(reader, m_reader, m_writer)) {
         reader->initialize();
-        Service::instance().add(reader);
+        LOGT << "initialize reader fd " << reader->getID();
     }
 
-    if (writer && std::set<IStream::TSharedPtr>{m_reader, m_writer}.count(writer) == 0) {
-        LOGT << "initialize writer fd " << writer->getID();
+    if (writer && !checkOneOf<IStream::TSharedPtr>(writer, m_reader, m_writer)) {
         writer->initialize();
-        Service::instance().add(writer);
+        LOGT << "initialize writer fd " << writer->getID();
     }
 
     m_reader = reader;
@@ -108,22 +101,25 @@ void CTransmitter::set(
 }
 
 
-IStreamReader::TConstSharedPtr CTransmitter::getReader() const {
+IStreamReader::TConstSharedPtr CPipe::getReader() const {
     return m_reader; // ----->
 }
 
 
-IStreamWriter::TConstSharedPtr CTransmitter::getWriter() const {
+IStreamWriter::TConstSharedPtr CPipe::getWriter() const {
     return m_writer; // ----->
 }
 
 
-bool CTransmitter::transmit(Event::TSharedPtr const &event) {
+bool CPipe::transmit(IListener::Event::TConstSharedPtr const &event) {
     // todo: pipe for unix
     // todo: openssl pipe https://linux.die.net/man/3/bio_s_bio
 
-    assertExists(m_reader, "transmitter: reader does not exists");
-    assertExists(m_writer, "transmitter: writer does not exists");
+    assertExists(m_reader, "pipe: reader does not exists");
+    assertExists(m_writer, "pipe: writer does not exists");
+
+//    if (event->type == IListener::Event::TType::OPEN)
+//        return true;
 
     LOGT << "fd " << event->stream->getID() << " event " << event->type
          << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
@@ -131,10 +127,11 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
     bool result = true;
 
     if  (m_buffers.size()  <  m_buffer_count &&
-        (m_buffers.empty() || m_reader->getID() == 0 ||
+        (m_reader->getID() == 0 ||
         (m_reader->getID() == event->stream->getID() && 
-        (checkOneOf(event->type, Event::TType::OPEN, Event::TType::READ)))))
+        (event->type == IListener::Event::TType::READ))))
     {
+        LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
@@ -148,8 +145,9 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
     if (!m_buffers.empty() && 
         (m_writer->getID() == 0 || 
        ((m_writer->getID() == event->stream->getID() &&
-        (checkOneOf(event->type, Event::TType::OPEN, Event::TType::WRITE))))))
+        (event->type == IListener::Event::TType::WRITE)))))
     {
+        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
         if  (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
@@ -160,11 +158,10 @@ bool CTransmitter::transmit(Event::TSharedPtr const &event) {
 
         LOGT << "wrote " << size;
 
-        LOGT << "! " << m_buffers.size() << " " << size;
-        if (m_buffers.empty() && size == 0)
+        LOGT << "buffers size " << m_buffers.size() << " " << size;
+        if (m_buffers.empty())
             result = false;
     }
-
 
     LOGT << "result = " << result;
     return result; // ----->

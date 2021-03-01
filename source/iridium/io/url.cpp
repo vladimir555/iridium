@@ -6,7 +6,7 @@
 
 #include "iridium/strings.h"
 #include "iridium/items.h"
-#include "dns.h"
+#include "net/dns.h"
 
 
 using std::make_shared;
@@ -14,14 +14,16 @@ using std::string;
 using std::vector;
 using iridium::convertion::convert;
 using iridium::convertion::convertPtr;
+using iridium::io::net::TAddress;
+using iridium::io::net::TPort;
+using iridium::io::net::TIPv4;
 
 
-IMPLEMENT_ENUM(iridium::io::net::URL::TProtocol)
+IMPLEMENT_ENUM(iridium::io::URL::TProtocol)
 
 
 namespace iridium {
 namespace io {
-namespace net {
 
 
 URL::URL(std::string const &url)
@@ -53,6 +55,13 @@ URL::URL(std::string const &url)
         throw std::runtime_error("wrong url '" + m_address + "'"); // ----->
 
     string address = tokens[0];
+
+    {
+        auto tokens_ = split(address, "/", 2);
+        address = tokens_.front();
+        if (tokens_.size() == 2)
+            m_path = make_shared<string>("/" + tokens_.back());
+    }
 
     if (tokens.size() == 2)
         m_port = make_shared<TPort>(convert<TPort>(tokens[1]));
@@ -87,7 +96,7 @@ URL::TIPv4SharedPtr const URL::getIPv4() const {
         return m_ipv4; // ----->
     else {
         if (m_host)
-            return make_shared<TIPv4 const>(getIPv4ByHost(*m_host)); // ----->
+            return make_shared<TIPv4 const>(net::getIPv4ByHost(*m_host)); // ----->
         else
             return nullptr; // ----->
     }
@@ -118,6 +127,11 @@ URL::THostSharedPtr const URL::getHost() const {
 }
 
 
+URL::TPathSharedPtr const URL::getPath() const {
+    return m_path; // ----->
+}
+
+
 URL::TProtocol const URL::getProtocol() const {
     if (m_protocol)
         return *m_protocol; // ----->
@@ -144,7 +158,6 @@ bool URL::operator <  (URL const &url) const {
 }
 
 
-} // net
 } // io
 } // iridium
 
@@ -152,12 +165,12 @@ bool URL::operator <  (URL const &url) const {
 namespace {
 
 
-iridium::io::net::URL createURL(string const &value) {
-    return iridium::io::net::URL(value); // ----->
+iridium::io::URL createURL(string const &value) {
+    return iridium::io::URL(value); // ----->
 }
 
 
-string getAddress(iridium::io::net::URL const &url) {
+string getAddress(iridium::io::URL const &url) {
     return url.getAddress(); // ----->
 }
 
@@ -165,5 +178,5 @@ string getAddress(iridium::io::net::URL const &url) {
 } // unnamed
 
 
-IMPLEMENT_CONVERT(iridium::io::net::URL, std::string, createURL)
-IMPLEMENT_CONVERT(std::string, iridium::io::net::URL, getAddress)
+IMPLEMENT_CONVERT(iridium::io::URL, std::string, createURL)
+IMPLEMENT_CONVERT(std::string, iridium::io::URL, getAddress)

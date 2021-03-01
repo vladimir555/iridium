@@ -79,7 +79,7 @@ private:
     ///
     TValue m_value;
     ///
-    typename INodeType<TValue>::TNodes m_nodes;
+    /*mutable*/ typename INodeType<TValue>::TNodes m_nodes;
 };
 
 
@@ -170,13 +170,13 @@ typename INodeType<TValue>::iterator CNodeType<TValue>::end() {
 
 template<typename TValue>
 typename INodeType<TValue>::const_iterator CNodeType<TValue>::begin() const {
-    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).begin(); // ----->
+    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).cbegin(); // ----->
 }
 
 
 template<typename TValue>
 typename INodeType<TValue>::const_iterator CNodeType<TValue>::end() const {
-    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).end(); // ----->
+    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).cend(); // ----->
 }
 
 
