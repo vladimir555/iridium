@@ -7,7 +7,6 @@
 #include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
 #include "iridium/assert.h"
-#include "iridium/io/service.h"
 #include "iridium/items.h"
 
 
@@ -117,9 +116,6 @@ bool CPipe::transmit(IListener::Event::TConstSharedPtr const &event) {
 
     assertExists(m_reader, "pipe: reader does not exists");
     assertExists(m_writer, "pipe: writer does not exists");
-
-//    if (event->type == IListener::Event::TType::OPEN)
-//        return true;
 
     LOGT << "fd " << event->stream->getID() << " event " << event->type
          << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
