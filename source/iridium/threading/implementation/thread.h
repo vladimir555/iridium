@@ -31,8 +31,8 @@ public:
     DEFINE_CREATE(CThread)
     ///
     CThread(
-        IRunnable::TSharedPtr           const &runnuble, 
-        std::string                     const &name, 
+        std::string                     const &name,
+        IRunnable::TSharedPtr           const &runnuble,
         IAsyncQueue<bool>::TSharedPtr   const &thread_working_status_queue = nullptr);
     ///
     virtual ~CThread() = default;
@@ -49,11 +49,9 @@ protected:
     ///
     std::string                     m_name;
     ///
-    std::shared_ptr<std::thread>    m_thread;
-    ///
     IRunnable::TSharedPtr           m_runnuble;
     ///
-    std::string                     m_runnuble_name;
+    std::shared_ptr<std::thread>    m_thread;
     ///
     static void run(
         IRunnable::TSharedPtr const &runnuble,

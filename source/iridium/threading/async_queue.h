@@ -38,6 +38,8 @@ public:
 
     virtual TItems  pop(bool const &is_do_wait = true) = 0;
     virtual void    interrupt() = 0;
+
+    virtual bool empty() = 0;
 };
 
 

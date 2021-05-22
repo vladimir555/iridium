@@ -18,14 +18,9 @@ void CWorkerHandler::initialize() {}
 void CWorkerHandler::finalize() {}
 
 
-CWorkerHandler::TItems CWorkerHandler::handle(TItems const &items_) {
-    TItems items;
-
+void CWorkerHandler::handle(TItems const &items_) {
     for (auto const &item: items_)
-        if (!item->do_())
-            items.push_back(item);
-
-    return items; // ----->
+        item->execute();
 }
 
 

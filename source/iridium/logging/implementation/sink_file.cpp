@@ -28,7 +28,7 @@ CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 {}
 
 
-CSinkFile::CWorkerHandler::CWorkerHandler(TEvent::TLevel const &level, std::string const &file_name)
+CSinkFile::CWorkerHandler::CWorkerHandler(TEvent::TLevel const &, std::string const &file_name)
 :
     m_file_name                 (file_name),
     m_file_name_original        (file_name),
@@ -60,7 +60,7 @@ void CSinkFile::CWorkerHandler::finalize() {
 }
 
 
-CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const &events) {
+void CSinkFile::CWorkerHandler::handle(TItems const &events) {
     if (m_is_rotation_by_day && system_clock::now() > m_last_initialization_time) {
         finalize();
         initialize();
@@ -73,8 +73,6 @@ CSinkFile::CWorkerHandler::TItems CSinkFile::CWorkerHandler::handle(TItems const
     }
 
     m_file_writer->flush();
-
-    return TItems(); // ----->
 }
 
 
