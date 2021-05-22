@@ -29,7 +29,7 @@ private:
         CWorkerHandler(TEvent::TLevel const &level, std::string const &file_name);
         void initialize() override;
         void finalize() override;
-        TItems handle(TItems const &e) override;
+        void handle(TItems const &e) override;
     private:
         std::string m_file_name;
         std::string m_file_name_original;

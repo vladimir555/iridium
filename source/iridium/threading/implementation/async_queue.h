@@ -42,16 +42,17 @@ public:
     ///
     CAsyncQueue();
     ///
-    virtual ~CAsyncQueue() = default;
+    ~CAsyncQueue() = default;
     ///
-    virtual size_t push(TItem const &item) override;
+    size_t push(TItem const &item) override;
     ///
-    virtual size_t push(std::list<TItem> const &items) override;
+    size_t push(std::list<TItem> const &items) override;
     ///
-    virtual std::list<TItem> pop(bool const &is_waiting = true) override;
+    std::list<TItem> pop(bool const &is_waiting = true) override;
     ///
-    virtual void interrupt() override;
-
+    void interrupt() override;
+    ///
+    bool empty() override;
 private:
     std::list<TItem>        m_items;
     std::atomic<bool>       m_is_waiting;
@@ -118,6 +119,12 @@ template<typename TItem>
 void CAsyncQueue<TItem>::interrupt() {
     m_is_waiting = false;
     m_condition->notifyAll();
+}
+
+
+template<typename TItem>
+bool CAsyncQueue<TItem>::empty() {
+    return m_is_empty; // ----->
 }
 
 

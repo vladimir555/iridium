@@ -21,30 +21,32 @@ namespace io {
 namespace implementation {
 
 
-class CStreamPool: public IStreamPool {
+class CStreamPool:
+    public IStreamPool,
+    public threading::Synchronized,
+    public std::enable_shared_from_this<CStreamPool>
+{
 public:
     DEFINE_IMPLEMENTATION(CStreamPool)
     CStreamPool();
 
-    void add(protocol::ISession::TSharedPtr const &session) override;
-    void del(protocol::ISession::TSharedPtr const &session) override;
+    typedef IListener::Event    Event;
+    typedef protocol::ISession  ISession;
+
+    void add(ISession::TSharedPtr const &session) override;
+    void del(ISession::TSharedPtr const &session) override;
 
     void initialize()   override;
     void finalize()     override;
 
 private:
-    // io listener thread
-    class CListenerHandler:
-        public threading::IRunnable,
-        public IStreamPool,
-        protected threading::Synchronized
-    {
+    typedef threading::IAsyncQueue<Event::TSharedPtr> TIEventQueue;
+
+    friend class CListenerHandler;
+    class CListenerHandler: public threading::IRunnable {
     public:
         DEFINE_IMPLEMENTATION(CListenerHandler)
-        CListenerHandler(IListener::TSharedPtr const &listener);
-
-        void add(protocol::ISession::TSharedPtr const &session) override;
-        void del(protocol::ISession::TSharedPtr const &session) override;
+        CListenerHandler(CStreamPool::TWeakPtr const &stream_pool);
 
         void initialize()   override;
         void finalize()     override;
@@ -52,40 +54,38 @@ private:
         void run(std::atomic<bool> &is_running) override;
 
     private:
-
-        struct Sessions {
-            DEFINE_CREATE(Sessions)
-            Sessions();
-            threading::SynchronizedContainer<IStream::TConstSharedPtr, protocol::ISession::TSharedPtr> m_map_stream_session;
-        };
-
-        struct Event: public IListener::Event {
-            DEFINE_CREATE(Event)
-            protocol::ISession::TSharedPtr session;
-        };
-
-
-        class CEventHandler: public threading::IWorkerHandler<Event::TSharedPtr> {
-        public:
-            DEFINE_IMPLEMENTATION(CEventHandler)
-            CEventHandler(Sessions::TSharedPtr const &sessions);
-
-            void    initialize  () override;
-            void    finalize    () override;
-            TItems  handle      (TItems const &events) override;
-        private:
-            Sessions::TSharedPtr    m_sessions;
-        };
-
-        typedef threading::IWorkerPool<Event::TSharedPtr> TWorkerPool;
-
-        IListener::TSharedPtr   m_listener;
-        Sessions::TSharedPtr    m_sessions;
-        TWorkerPool::TSharedPtr m_worker_pool;
+        CStreamPool::TWeakPtr       m_stream_pool;
     };
 
-    IStreamPool::TSharedPtr         m_listener_handler;
+    struct TContext {
+        DEFINE_CREATE(TContext)
+        ISession::TSharedPtr        m_session;
+        TIEventQueue::TSharedPtr    m_events;
+    };
+
+    std::map<ISession::TSharedPtr, TIEventQueue::TSharedPtr>    m_map_session_events;
+    std::map<IStream::TSharedPtr, ISession::TSharedPtr>         m_map_stream_session;
+
+    TContext::TSharedPtr getContext(ISession::TSharedPtr const &session, Event::TSharedPtr const &event);
+
+    friend class CContextHandler;
+    class CContextHandler: public threading::IWorkerHandler<TContext::TSharedPtr> {
+    public:
+        DEFINE_IMPLEMENTATION(CContextHandler)
+        CContextHandler(CStreamPool::TWeakPtr const &stream_pool);
+
+        void initialize  () override;
+        void finalize    () override;
+        void handle      (TItems const &events) override;
+    private:
+        CStreamPool::TWeakPtr m_stream_pool;
+    };
+
+
+    bool                            m_is_initialized;
+    IListener::TSharedPtr           m_listener;
     threading::IThread::TSharedPtr  m_listener_thread;
+    threading::IWorkerPool<TContext::TSharedPtr>::TSharedPtr m_context_handler_pool;
 };
 
 

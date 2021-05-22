@@ -23,7 +23,7 @@ namespace threading {
 class IJob {
 public:
     DEFINE_INTERFACE(IJob)
-    virtual bool do_() = 0;
+    virtual bool execute() = 0;
 };
 
 
@@ -35,7 +35,7 @@ public:
     typedef TItem_ TItem;
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 
-    virtual TItems  handle      (TItems const &items) = 0;
+    virtual void handle(TItems const &items) = 0;
 };
 
 

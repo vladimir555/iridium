@@ -25,20 +25,26 @@ namespace implementation {
 // ----- interface
 
 
+// todo: WorkerPool factory or full refactoring
 template<typename TItem = IJob::TSharedPtr>
 class CWorkerPool: public IWorkerPool<TItem> {
 public:
     DEFINE_IMPLEMENTATION(CWorkerPool<TItem>)
 
-    explicit CWorkerPool(
-        std::string const &name,
-        typename IWorkerPool<TItem>::TWorkerHandlers const &handlers
-    );
+    template<typename TWorkerHandler, typename ... TArgs>
+    static TSharedPtr create(std::string const &name, size_t const &count, TArgs ... args) {
+        typename IWorkerPool<TItem>::TWorkerHandlers handlers;
 
-    explicit CWorkerPool(
-        std::string const &name,
-        int const &count
-    );
+        for (size_t i = 0; i < count; i++) {
+            auto handler = TWorkerHandler::create(args ...);
+            handlers.push_back(handler);
+        }
+
+        return create(name, handlers);
+    }
+
+    explicit CWorkerPool(std::string const &name, typename IWorkerPool<TItem>::TWorkerHandlers const &handlers);
+    explicit CWorkerPool(std::string const &name, size_t const &count);
 
     typedef typename IWorkerPool<TItem>::TItems TItems;
 
@@ -62,9 +68,7 @@ private:
 
 
 template<typename TItem>
-CWorkerPool<TItem>::CWorkerPool(
-    std::string const &name,
-    typename IWorkerPool<TItem>::TWorkerHandlers const &handlers)
+CWorkerPool<TItem>::CWorkerPool(std::string const &name, typename IWorkerPool<TItem>::TWorkerHandlers const &handlers)
 :
     m_name(name)
 {
@@ -87,9 +91,7 @@ CWorkerPool<TItem>::CWorkerPool(
 
 
 template<typename TItem>
-CWorkerPool<TItem>::CWorkerPool(
-    std::string const &name,
-    int         const &count)
+CWorkerPool<TItem>::CWorkerPool(std::string const &name, size_t const &count)
 :
     m_name(name)
 {
