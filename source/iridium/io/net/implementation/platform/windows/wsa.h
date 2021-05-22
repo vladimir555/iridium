@@ -13,7 +13,7 @@
 
 
 #include "iridium/pattern/singleton.h"
-#include "iridium/io/net/url.h"
+#include "iridium/io/url.h"
 #include "iridium/io/buffer.h"
 #include "iridium/smart_ptr.h"
 

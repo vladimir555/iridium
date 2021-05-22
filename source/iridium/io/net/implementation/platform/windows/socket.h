@@ -13,7 +13,7 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/io/net/url.h"
+#include "iridium/io/url.h"
 #include "iridium/io/net/socket.h"
 
 
@@ -32,13 +32,13 @@ public:
 	void    initialize() override;
 	void    finalize() override;
 
-	ISocket::TSharedPtr accept() override;
-	URL     getURL() const override;
+	//ISocket::TSharedPtr accept() override;
+	//URL     getURL() const override;
 
-	int     getID() const override;
+	//int     getID() const override;
 
-	size_t write(Buffer::TSharedPtr const& buffer) override;
-	Buffer::TSharedPtr read(size_t const &size) override;
+	//size_t write(Buffer::TSharedPtr const& buffer) override;
+	//Buffer::TSharedPtr read(size_t const &size) override;
 
 	//    void    flush() override;
 

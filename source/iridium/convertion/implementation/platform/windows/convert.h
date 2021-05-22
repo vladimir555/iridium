@@ -37,6 +37,9 @@ void itoa(uint64_t const &value, char *buffer, int const &base);
 ::tm *gmtime(time_t const * const t);
 
 
+void gmtime_r(time_t* t, struct tm* tm_);
+
+
 #ifdef PLATFORM_CPU32
 __time32_t mkgmtime(struct tm * const tm_);
 #endif

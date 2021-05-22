@@ -29,7 +29,7 @@ public:
 
     void initialize() override;
     void finalize() override;
-    TItems handle(TItems const &items) override;
+    void handle(TItems const &items) override;
 };
 
 
@@ -40,6 +40,7 @@ public:
     CWorker(
         std::string                                 const &name,
         typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler = CWorkerHandler::create());
+
     CWorker(
         std::string                                 const &name,
         typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler,
@@ -81,7 +82,7 @@ CWorker<TItem>::CWorker(
     m_worker_handler    (worker_handler),
     m_async_queue       (CAsyncQueue<TItem>::create()),
     m_runnuble          (Runnuble::create(*this)),
-    m_thread            (CThread::create(m_runnuble, name))
+    m_thread            (CThread::create(name, m_runnuble))
 {}
 
 
@@ -95,7 +96,7 @@ CWorker<TItem>::CWorker(
     m_worker_handler    (worker_handler),
     m_async_queue       (async_queue),
     m_runnuble          (Runnuble::create(*this)),
-    m_thread            (CThread::create(m_runnuble, name, thread_working_status_queue))
+    m_thread            (CThread::create(name, m_runnuble, thread_working_status_queue))
 {}
 
 
@@ -135,9 +136,10 @@ template<typename TItem>
 void CWorker<TItem>::Runnuble::run(std::atomic<bool> &is_running) {
     try {
         while (is_running)
-            m_worker.push(m_worker.m_worker_handler->handle(m_worker.m_async_queue->pop()));
+            m_worker.m_worker_handler->handle(m_worker.m_async_queue->pop());
     } catch (std::exception const &e) {
         LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();
+//        is_running = false;
         // todo: handler
         // m_worker->handleException(e);
     }

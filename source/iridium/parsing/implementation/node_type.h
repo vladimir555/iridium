@@ -27,48 +27,46 @@ namespace implementation {
 template<typename TValue>
 class CNodeType : public INodeType<TValue> {
 public:
-    DEFINE_CREATE(CNodeType<TValue>)
+    DEFINE_IMPLEMENTATION(CNodeType<TValue>)
     ///
     explicit CNodeType(std::string const &name, TValue const &value);
     ///
     explicit CNodeType(std::string const &name);
     ///
-    virtual ~CNodeType();
+    std::string getName()  const override final;
     ///
-    virtual std::string getName()  const override final;
+    TValue getValue() const override;
     ///
-    virtual TValue getValue() const override;
+    void setValue(TValue const &value) override;
     ///
-    virtual void setValue(TValue const &value) override;
-    ///
-    virtual typename INodeType<TValue>::TNodes findChilds(std::string const &path) override;
+    typename INodeType<TValue>::TNodes findChilds(std::string const &path) override;
 
     ///
-    virtual typename INodeType<TValue>::iterator begin() override;
+    typename INodeType<TValue>::iterator begin() override;
     ///
-    virtual typename INodeType<TValue>::iterator end() override;
+    typename INodeType<TValue>::iterator end() override;
     ///
-    virtual typename INodeType<TValue>::const_iterator begin() const override;
+    typename INodeType<TValue>::const_iterator begin() const override;
     ///
-    virtual typename INodeType<TValue>::const_iterator end() const override;
+    typename INodeType<TValue>::const_iterator end() const override;
     ///
     size_t size() const override;
     ///
-    virtual bool hasChilds() const override;
+    bool hasChilds() const override;
 
     ///
-    virtual typename INodeType<TValue>::TSharedPtr getChild(std::string const &name) override;
+    typename INodeType<TValue>::TSharedPtr getChild(std::string const &name) override;
     ///
-    virtual typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
+    typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
 
     ///
-    virtual typename INodeType<TValue>::TSharedPtr addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
+    typename INodeType<TValue>::TSharedPtr addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
     ///
-    virtual typename INodeType<TValue>::TSharedPtr addChild(std::string const &name) override;
+    typename INodeType<TValue>::TSharedPtr addChild(std::string const &name) override;
     ///
-    virtual typename INodeType<TValue>::TSharedPtr addChild(std::string const &name, TValue const &value) override;
+    typename INodeType<TValue>::TSharedPtr addChild(std::string const &name, TValue const &value) override;
     ///
-    virtual typename INodeType<TValue>::TSharedPtr clone() const override;
+    typename INodeType<TValue>::TSharedPtr clone() const override;
 
 
 private:
@@ -99,11 +97,6 @@ CNodeType<TValue>::CNodeType(std::string const &name)
 :
     m_name(name),
     m_value() 
-{}
-
-
-template<typename TValue>
-CNodeType<TValue>::~CNodeType() 
 {}
 
 
