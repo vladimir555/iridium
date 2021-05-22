@@ -46,14 +46,13 @@ public:
     Worker() = default;
     virtual ~Worker() = default;
 private:
-    TItems handle(TItems const &items) override {
+    void handle(TItems const &items) override {
         for (auto const &i: items) {
             //cout << "processing " << i << endl;
             out.push_back(i);
             processed++;
             sleep(10);
         }
-        return TItems();
     }
 
     void initialize() override {
@@ -165,7 +164,7 @@ public:
     DEFINE_IMPLEMENTATION(CJob)
 
     CJob(list<string> &items): m_items(items) {}
-    bool do_() override {
+    bool execute() override {
         //LOGT << "job ";
         m_items.push_back("job");
         return true;

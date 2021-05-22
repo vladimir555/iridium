@@ -415,7 +415,7 @@ double convert(string const &value) {
         if ((ch < '0' || ch > '9') && ch != '.' && ch != '-')
             throw runtime_error("convert '" + value + "' to double error"); // ----->
 
-    double d = atof(value.c_str());
+    auto d = ::atof(value.c_str());
 
     if (d == 0.0) {
         int result = platform::sscanf(value.c_str(), "%lf", &d);

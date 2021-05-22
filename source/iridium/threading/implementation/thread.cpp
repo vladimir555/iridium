@@ -31,13 +31,12 @@ namespace implementation {
 
 
 CThread::CThread(
-    IRunnable::TSharedPtr           const &runnuble, 
-    string                          const &name, 
+    string                          const &name,
+    IRunnable::TSharedPtr           const &runnuble,
     IAsyncQueue<bool>::TSharedPtr   const &thread_working_status_queue)
 :
-    m_name                  (name),
-    m_runnuble              (assertExists(runnuble, "runnuble is null")),
-    m_runnuble_name         (name),
+    m_name      (name),
+    m_runnuble  (assertExists(runnuble, "runnuble is null")),
     m_thread_working_status_queue(thread_working_status_queue)
 {}
 
@@ -63,7 +62,6 @@ void CThread::initialize() {
 
 void CThread::finalize() {
     if (m_thread && m_thread->joinable()) {
-//        m_runnuble->stop();
         m_is_running = false;
         m_thread->join();
         m_runnuble->finalize();
