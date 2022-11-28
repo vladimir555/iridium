@@ -9,7 +9,7 @@
 #include "iridium/smart_ptr.h"
 
 #include "iridium/threading/async_queue.h"
-#include "iridium/threading/runnable.h"
+//#include "iridium/threading/runnable.h"
 #include "iridium/pattern/initializable.h"
 
 #include <string>
@@ -20,34 +20,62 @@ namespace iridium {
 namespace threading {
 
 
-class IJob {
-public:
-    DEFINE_INTERFACE(IJob)
-    virtual bool execute() = 0;
-};
+//template<typename TInputItem, typename TOutputItem = TInputItem>
+//class IWorkerHandler: public pattern::IInitializable {
+//public:
+//    DEFINE_INTERFACE(IWorkerHandler);
+//    typedef typename IAsyncQueuePusher<TInputItem>::TItems  TInputItems;
+//    typedef typename IAsyncQueuePopper<TOutputItem>::TItems TOutputItems;
+//    virtual TOutputItems handle(TInputItems const &items) = 0;
+//};
 
 
-template<typename TItem_ = IJob::TSharedPtr>
-class IWorkerHandler: public pattern::IInitializable {
-public:
-    DEFINE_INTERFACE(IWorkerHandler<TItem_>)
-
-    typedef TItem_ TItem;
-    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
-
-    virtual void handle(TItems const &items) = 0;
-};
-
-
-template<typename TItem = IJob::TSharedPtr>
-class IWorker:
-    public IAsyncQueuePusher<TItem>,
-    public pattern::IInitializable
+template<typename TItem>
+class IWorkerPusher:
+    public virtual IAsyncQueuePusher<TItem>,
+    public virtual pattern::IInitializable
 {
 public:
-    DEFINE_INTERFACE(IWorker<TItem>)
+    DEFINE_INTERFACE(IWorkerPusher);
+    typedef typename IAsyncQueuePusher<TItem>::TItems TInputItems;
+    class IHandler: public pattern::IInitializable {
+    public:
+        DEFINE_INTERFACE(IHandler)
+        virtual void handle(TInputItems const &items) = 0;
+    };
+};
 
-    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
+
+template<typename TItem>
+class IWorkerPopper:
+    public virtual IAsyncQueuePopper<TItem>,
+    public virtual pattern::IInitializable
+{
+public:
+    DEFINE_INTERFACE(IWorkerPopper)
+    typedef typename IAsyncQueuePusher<TItem>::TItems TOutputItems;
+    class IHandler: public pattern::IInitializable {
+    public:
+        DEFINE_INTERFACE(IHandler)
+        virtual TOutputItems handle() = 0;
+    };
+};
+
+
+template<typename TInputItem, typename TOutputItem = TInputItem>
+class IWorker:
+    public IWorkerPusher<TInputItem>,
+    public IWorkerPopper<TOutputItem>
+{
+public:
+    DEFINE_INTERFACE(IWorker)
+    typedef typename IWorkerPusher<TInputItem>::TInputItems TInputItems;
+    typedef typename IWorkerPopper<TOutputItem>::TOutputItems TOutputItems;
+    class IHandler: public pattern::IInitializable {
+    public:
+        DEFINE_INTERFACE(IHandler)
+        virtual TOutputItems handle(TInputItems const &items) = 0;
+    };
 };
 
 

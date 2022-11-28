@@ -52,7 +52,7 @@ public:
     ///
     void interrupt() override;
     ///
-    bool empty() override;
+    bool empty() const override;
 private:
     std::list<TItem>        m_items;
     std::atomic<bool>       m_is_waiting;
@@ -123,7 +123,7 @@ void CAsyncQueue<TItem>::interrupt() {
 
 
 template<typename TItem>
-bool CAsyncQueue<TItem>::empty() {
+bool CAsyncQueue<TItem>::empty() const {
     return m_is_empty; // ----->
 }
 

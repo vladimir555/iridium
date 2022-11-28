@@ -60,10 +60,10 @@ public:
         std::string const &condition_source, std::string const &line);
 
     template<typename TFunction, typename TException>
-    void assert(TFunction const &func,
+    void assert_(TFunction const &func,
         std::string const &condition_source, std::string const &line);
 
-    void assert(bool const &is_true,
+    void assert_(bool const &is_true,
         std::string const &condition_source, std::string const &line);
 };
 
@@ -99,9 +99,9 @@ void UnitTest::greaterEqual(double const &left, double const &right,
 
 template<typename TValue>
 void UnitTest::fail(
-    TValue      const &left,
-    TValue      const &right,
-    std::string const &condition_name,
+    TValue      const &,
+    TValue      const &,
+    std::string const &,
     std::string const &condition_source,
     std::string const &line)
 {
@@ -161,7 +161,7 @@ void UnitTest::greaterEqual(TLeft const &left, TRight const &right,
 
 
 template<typename TFunction, typename TException>
-void UnitTest::assert(TFunction const &func,
+void UnitTest::assert_(TFunction const &func,
     std::string const &condition_source, std::string const &line)
 {
     bool is_fail    = false;

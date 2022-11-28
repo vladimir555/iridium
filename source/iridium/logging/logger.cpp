@@ -154,5 +154,14 @@ string convertFunctionNameToLogFunctionName(string const &name) {
 }
 
 
+string extractFileNameToLog(string const &path) {
+    static size_t const DEFAULT_FILE_NAME_LOG_SIZE = 24;
+    string file_name = path.substr(path.find_last_of('/') + 1, std::string::npos);
+    if (file_name.size() < DEFAULT_FILE_NAME_LOG_SIZE)
+        file_name.append(DEFAULT_FILE_NAME_LOG_SIZE - file_name.size(), ' ');
+    return file_name; // ----->
+}
+
+
 } // logger
 } // iridium

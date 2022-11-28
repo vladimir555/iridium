@@ -3,7 +3,7 @@
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
 //
-//  transmitter.h
+//  pipe.h
 //  iridium
 //
 //  created by volodja on 2019-05-29
@@ -16,7 +16,7 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/io/stream.h"
-#include "iridium/io/listener.h"
+#include "iridium/io/event.h"
 
 
 namespace iridium {
@@ -36,11 +36,17 @@ public:
 };
 
 
-class IPipe: public IPipeStreams {
+class IPipeTransmitter {
+public:
+    DEFINE_INTERFACE(IPipeTransmitter)
+    // false - buffers are empty
+    virtual bool transmit(IEvent::TConstSharedPtr const &event) = 0;
+};
+
+
+class IPipe: public IPipeStreams, public IPipeTransmitter {
 public:
     DEFINE_INTERFACE(IPipe)
-    // false - buffers are empty
-    virtual bool transmit(IListener::Event::TConstSharedPtr const &event) = 0;
 };
 
 

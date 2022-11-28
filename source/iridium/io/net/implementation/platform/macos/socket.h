@@ -16,7 +16,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef unix::CSocket CSocket;
+typedef unix_::CSocketBase CSocket;
 
 
 } // platform

@@ -5,12 +5,11 @@
 #include "iridium/platform.h"
 
 
-#ifdef UNIX_PLATFORM
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
 
 
 #include "iridium/io/net/socket.h"
 #include "iridium/encryption/openssl.h"
-#include "iridium/io/listener.h"
 
 #include "socket.h"
 
@@ -47,7 +46,6 @@ private:
     encryption::OpenSSL::TContext  *m_context;
     encryption::OpenSSL::TSSL      *m_ssl;
     bool                            m_is_ssl_handshake_done;
-
 };
 
 
@@ -59,7 +57,7 @@ private:
 } // iridium
 
 
-#endif // UNIX_PLATFORM
+#endif // LINUX_PLATFORM || FREEBSD_PLATFORM
 
 
 #endif // HEADER_SOCKET_CLIENT_DC6913D5_8C89_4528_9946_093DB16A8061

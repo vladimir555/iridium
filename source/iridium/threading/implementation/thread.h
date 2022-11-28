@@ -54,9 +54,10 @@ protected:
     std::shared_ptr<std::thread>    m_thread;
     ///
     static void run(
-        IRunnable::TSharedPtr const &runnuble,
+        std::string                         const &name,
+        IRunnable::TSharedPtr               const &runnuble,
         IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue,
-        std::atomic<bool> * const is_running
+        std::atomic<bool> *                 const  is_running
     );
 private:
     ///

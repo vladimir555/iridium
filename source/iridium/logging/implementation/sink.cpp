@@ -9,8 +9,8 @@
 #include "iridium/threading/implementation/worker.h"
 
 
-using iridium::threading::IWorkerHandler;
-using iridium::threading::implementation::CWorker;
+using iridium::threading::IWorker;
+using iridium::threading::implementation::CWorkerPusher;
 
 
 namespace iridium {
@@ -18,10 +18,10 @@ namespace logging {
 namespace implementation {
 
 
-CSink::CSink(TEvent::TLevel const &level, IWorkerHandler<TEvent>::TSharedPtr const &worker_handler)
+CSink::CSink(TEvent::TLevel const &level, threading::IWorkerPusher<TEvent>::IHandler::TSharedPtr const &worker_handler)
 :
     m_level(level),
-    m_worker(CWorker<TEvent>::create("sink", worker_handler))
+    m_worker(CWorkerPusher<TEvent>::create("sink", worker_handler))
 {}
 
 

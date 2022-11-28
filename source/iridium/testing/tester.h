@@ -19,32 +19,26 @@ namespace iridium {
 namespace testing {
 
 
-typedef parsing::INodeType<ITest *> INodeTest;
-
-
 class Tester final: public pattern::Singleton<Tester> {
 public:
     virtual ~Tester() = default;
-    ///
+    typedef parsing::INodeType<ITest *> INodeTest;
     void add(ITest * const test, std::string const &path);
-    ///
     int  run(int argc, char* argv[], std::string const &main_cpp_path);
 
 private:
+    Tester() = default;
     friend class pattern::Singleton<Tester>;
-    ///
-    void runTests(INodeTest::TSharedPtr const &node, std::string const &path);
-    ///
-    Tester();
-    ///
-    std::string             m_path_base;
-    std::string             m_path_include;
-    std::string             m_path_exclude;
-    INodeTest::TSharedPtr   m_test_root_node;
+    typedef std::map< std::string, ITest * > TTestList;
 
-    std::list< std::pair< ITest *, std::string > > m_test_list;
-    std::list<std::string>  m_passed_paths;
-    std::list<std::string>  m_failed_paths;
+    INodeTest::TSharedPtr getTestTree(
+        std::string             const &main_cpp_path_,
+        std::string             const &include = {},
+        std::list<std::string>  const &exclude = {}
+    ) const;
+
+    TTestList m_map_path_test;
+
 };
 
 
@@ -52,8 +46,8 @@ private:
 } // iridium
 
 
-DEFINE_CONVERT(std::string, iridium::testing::INodeTest::TConstSharedPtr)
-DEFINE_CONVERT(std::string, iridium::testing::INodeTest::TSharedPtr)
+#define CONCAT_IMPL( x, y ) x##y
+#define MACRO_CONCAT( x, y ) CONCAT_IMPL( x, y )
 
 
 #define TEST(name) \
@@ -70,12 +64,13 @@ condition(left, right, std::string(#left) + " " + #condition + " " + #right, \
 iridium::convertion::convert<std::string, uint32_t>(__LINE__));
 
 #define ASSERT_2(func, exception) \
-{ auto const l = [&](){func;}; assert<decltype(l), exception> \
+{ auto const l = [&](){func;}; assert_<decltype(l), exception> \
 (l, std::string(#func) + " doesn't throw " + #exception, \
-iridium::convertion::convert<std::string, std::string>(__FILE__)); }
+iridium::convertion::convert<std::string, std::string>(__FILE__) + ":" + \
+iridium::convertion::convert<std::string, uint32_t>(__LINE__)); }
 
 #define ASSERT_1(is_true) \
-assert(is_true, std::string(#is_true), \
+assert_(is_true, std::string(#is_true), \
 iridium::convertion::convert<std::string, std::string>(__FILE__));
 
 #define ASSERT(...) \

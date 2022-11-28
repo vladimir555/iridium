@@ -6,8 +6,6 @@
 #define HEADER_WORKER_62A45EF9_ADAA_4252_940F_C9952EAFD0A6
 
 
-#include "iridium/smart_ptr.h"
-
 #include "async_queue.h"
 
 #include "iridium/logging/logger.h"
@@ -16,145 +14,186 @@
 #include "iridium/threading/runnable.h"
 #include "iridium/threading/implementation/thread.h"
 
+#include "worker_handler.h"
+
 
 namespace iridium {
 namespace threading {
 namespace implementation {
 
 
-class CWorkerHandler: public IWorkerHandler<IJob::TSharedPtr> {
+template<typename TItem>
+class CWorkerPusher: public IWorkerPusher<TItem> {
 public:
-    DEFINE_IMPLEMENTATION(CWorkerHandler)
-    CWorkerHandler() = default;
+    DEFINE_IMPLEMENTATION(CWorkerPusher)
+
+    typedef typename IAsyncQueuePusher<TItem>::TItems   TItems;
+    typedef typename IWorkerPusher<TItem>::IHandler     IHandler;
+
+    CWorkerPusher(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;
-    void handle(TItems const &items) override;
-};
 
-
-template<typename TItem = IJob::TSharedPtr>
-class CWorker: public IWorker<TItem> {
-public:
-    DEFINE_IMPLEMENTATION(CWorker<TItem>)
-    CWorker(
-        std::string                                 const &name,
-        typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler = CWorkerHandler::create());
-
-    CWorker(
-        std::string                                 const &name,
-        typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler,
-        typename IAsyncQueue<TItem>::TSharedPtr     const &async_queue,
-        IAsyncQueue<bool>::TSharedPtr               const &thread_working_status_queue);
-
-    typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
-
-    virtual void initialize() override;
-    virtual void finalize() override;
-
-    virtual size_t push(TItem  const &item)  override;
-    virtual size_t push(TItems const &items) override;
+    size_t push(TItem  const &item)  override;
+    size_t push(TItems const &items) override;
 
 private:
-    class Runnuble: public IRunnable {
-    public:
-        DEFINE_IMPLEMENTATION(Runnuble)
-
-        Runnuble(CWorker &worker);
-        void run(std::atomic<bool> &is_running) override;
-        void initialize() override;
-        void finalize() override;
-    private:
-        CWorker &m_worker;
-    };
-    typename IWorkerHandler<TItem>::TSharedPtr  m_worker_handler;
-    typename IAsyncQueue<TItem>::TSharedPtr     m_async_queue;
-    IRunnable::TSharedPtr   m_runnuble;
-    IThread::TSharedPtr     m_thread;
+    typename IAsyncQueue<TItem>::TSharedPtr m_queue;
+    IThread::TSharedPtr                     m_thread;
 };
 
 
 template<typename TItem>
-CWorker<TItem>::CWorker(
-    std::string                                 const &name,
-    typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler)
+class CWorkerPopper: public IWorkerPopper<TItem> {
+public:
+    DEFINE_IMPLEMENTATION(CWorkerPopper)
+
+    typedef typename IAsyncQueuePopper<TItem>::TItems   TItems;
+    typedef typename IWorkerPopper<TItem>::IHandler     IHandler;
+
+    CWorkerPopper(std::string const &name, typename IHandler::TSharedPtr const &handler);
+
+    void initialize() override;
+    void finalize() override;
+
+    TItems pop(bool const &is_do_wait) override;
+
+private:
+    typename IAsyncQueue<TItem>::TSharedPtr m_queue;
+    IThread::TSharedPtr                     m_thread;
+};
+
+
+template<typename TInputItem, typename TOutputItem = TInputItem>
+class CWorker: public IWorker<TInputItem, TOutputItem> {
+public:
+    DEFINE_IMPLEMENTATION(CWorker)
+
+    typedef typename IAsyncQueuePusher<TInputItem>::TItems      TInputItems;
+    typedef typename IAsyncQueuePusher<TOutputItem>::TItems     TOutputItems;
+    typedef typename IWorker<TInputItem, TOutputItem>::IHandler IHandler;
+
+    CWorker(std::string const &name, typename IHandler::TSharedPtr const &handler);
+
+    void initialize() override;
+    void finalize() override;
+
+    size_t push(TInputItem  const &item)  override;
+    size_t push(TInputItems const &items) override;
+
+    TOutputItems pop(bool const &is_do_wait) override;
+
+private:
+    typename IAsyncQueue<TInputItem>::TSharedPtr    m_input_queue;
+    typename IAsyncQueue<TOutputItem>::TSharedPtr   m_output_queue;
+    IThread::TSharedPtr                             m_thread;
+};
+
+
+//----- implementation
+
+
+template<typename TItem>
+CWorkerPusher<TItem>::CWorkerPusher(std::string const &name, typename IWorkerPusher<TItem>::IHandler::TSharedPtr const &handler)
 :
-    m_worker_handler    (worker_handler),
-    m_async_queue       (CAsyncQueue<TItem>::create()),
-    m_runnuble          (Runnuble::create(*this)),
-    m_thread            (CThread::create(name, m_runnuble))
+    m_queue     (CAsyncQueue<TItem>::create()),
+    m_thread    (CThread::create(name, CWorkerPusherRunnable<TItem>::create(handler, m_queue)))
 {}
 
 
 template<typename TItem>
-CWorker<TItem>::CWorker(
-    std::string                                 const &name,
-    typename IWorkerHandler<TItem>::TSharedPtr  const &worker_handler,
-    typename IAsyncQueue<TItem>::TSharedPtr     const &async_queue,
-    IAsyncQueue<bool>::TSharedPtr               const &thread_working_status_queue)
-:
-    m_worker_handler    (worker_handler),
-    m_async_queue       (async_queue),
-    m_runnuble          (Runnuble::create(*this)),
-    m_thread            (CThread::create(name, m_runnuble, thread_working_status_queue))
-{}
-
-
-template<typename TItem>
-void CWorker<TItem>::initialize() {
+void CWorkerPusher<TItem>::initialize() {
     m_thread->initialize();
 }
 
 
 template<typename TItem>
-void CWorker<TItem>::finalize() {
-    m_async_queue->interrupt();
+void CWorkerPusher<TItem>::finalize() {
+    m_queue->interrupt();
     m_thread->finalize();
 }
 
 
 template<typename TItem>
-size_t CWorker<TItem>::push(TItem const &item) {
-    return m_async_queue->push(item); // ----->
+size_t CWorkerPusher<TItem>::push(TItem const &item) {
+    return m_queue->push(item);
 }
 
 
 template<typename TItem>
-size_t CWorker<TItem>::push(TItems const &items) {
-    return m_async_queue->push(items); // ----->
+size_t CWorkerPusher<TItem>::push(TItems const &items) {
+    return m_queue->push(items);
 }
 
 
 template<typename TItem>
-CWorker<TItem>::Runnuble::Runnuble(CWorker &worker) 
-:    
-    m_worker(worker)
+CWorkerPopper<TItem>::CWorkerPopper(std::string const &name, typename IWorkerPopper<TItem>::IHandler::TSharedPtr const &handler)
+:
+    m_queue     (CAsyncQueue<TItem>::create()),
+    m_thread    (CThread::create(name, CWorkerPopperRunnable<TItem>::create(handler, m_queue)))
 {}
 
 
 template<typename TItem>
-void CWorker<TItem>::Runnuble::run(std::atomic<bool> &is_running) {
-    try {
-        while (is_running)
-            m_worker.m_worker_handler->handle(m_worker.m_async_queue->pop());
-    } catch (std::exception const &e) {
-        LOGF << "worker thread '" << m_worker.m_thread->getName() << "' fatal error, stop thread: " << e.what();
-//        is_running = false;
-        // todo: handler
-        // m_worker->handleException(e);
-    }
+void CWorkerPopper<TItem>::initialize() {
+    m_thread->initialize();
 }
 
 
 template<typename TItem>
-void CWorker<TItem>::Runnuble::initialize() {
-    m_worker.m_worker_handler->initialize();
+void CWorkerPopper<TItem>::finalize() {
+    m_queue->interrupt();
+    m_thread->finalize();
 }
 
 
 template<typename TItem>
-void CWorker<TItem>::Runnuble::finalize() {
-    m_worker.m_worker_handler->finalize();
+typename CWorkerPopper<TItem>::TItems CWorkerPopper<TItem>::pop(bool const &is_do_wait) {
+    return m_queue->pop(is_do_wait);
+}
+
+
+template<typename TInputItem, typename TOutputItem>
+CWorker<TInputItem, TOutputItem>::CWorker(
+    std::string const &name,
+    typename IWorker<TInputItem, TOutputItem>::IHandler::TSharedPtr const &handler)
+:
+    m_input_queue   (CAsyncQueue<TInputItem>::create()),
+    m_output_queue  (CAsyncQueue<TOutputItem>::create()),
+    m_thread        (CThread::create(name, CWorkerRunnable<TInputItem, TOutputItem>::create(handler, m_input_queue, m_output_queue)))
+{}
+
+
+template<typename TInputItem, typename TOutputItem>
+void CWorker<TInputItem, TOutputItem>::initialize() {
+    m_thread->initialize();
+}
+
+
+template<typename TInputItem, typename TOutputItem>
+void CWorker<TInputItem, TOutputItem>::finalize() {
+    m_input_queue->interrupt();
+    m_output_queue->interrupt();
+    m_thread->finalize();
+}
+
+
+template<typename TInputItem, typename TOutputItem>
+size_t CWorker<TInputItem, TOutputItem>::push(TInputItem const &item) {
+    return m_input_queue->push(item);
+}
+
+
+template<typename TInputItem, typename TOutputItem>
+size_t CWorker<TInputItem, TOutputItem>::push(TInputItems const &items) {
+    return m_input_queue->push(items);
+}
+
+
+template<typename TInputItem, typename TOutputItem>
+typename CWorker<TInputItem, TOutputItem>::TOutputItems CWorker<TInputItem, TOutputItem>::pop(bool const &is_do_wait) {
+    return m_output_queue->pop(is_do_wait);
 }
 
 

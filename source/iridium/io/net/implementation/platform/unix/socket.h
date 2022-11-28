@@ -12,9 +12,7 @@
 #ifdef UNIX_PLATFORM
 
 
-#include "iridium/io/listener.h"
 #include "iridium/io/url.h"
-#include "iridium/io/net/socket.h"
 #include "iridium/io/net/socket.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/pattern/non_copyable.h"
@@ -29,13 +27,13 @@ namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
-namespace unix {
+namespace unix_ {
 
 
 class CSocketBase: public ISocket, public pattern::NonCopyable {
 protected:
-    CSocketBase(URL const &url   , IListenerStreams::TSharedPtr const &listener);
-    CSocketBase(int const &socket, IListenerStreams::TSharedPtr const &listener);
+    CSocketBase(URL const &url);
+    CSocketBase(int const &socket);
     virtual ~CSocketBase() = default;
 
     void    open();
@@ -55,10 +53,9 @@ protected:
     URL     getURL() const override;
     int     getID()  const override;
 
-    int                     m_socket;
-    URL::TSharedPtr         m_url;
-    bool                    m_is_opened;
-    IListenerStreams::TSharedPtr m_listener;
+    int             m_socket;
+    URL::TSharedPtr m_url;
+    bool            m_is_opened;
 
 private:
     template<typename T>
@@ -66,9 +63,9 @@ private:
 
     static int initSignal();
 
-    static int const        YES;
+    static int const    YES;
 
-    struct sockaddr_in      m_address;
+    struct sockaddr_in  m_address;
 };
 
 
@@ -88,7 +85,7 @@ T CSocketBase::assertOK(T const &result, std::string const &message) {
 }
 
 
-} // unix
+} // unix_
 } // platform
 } // implementation
 } // net

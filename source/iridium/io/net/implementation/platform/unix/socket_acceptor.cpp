@@ -1,7 +1,7 @@
 #include "socket_acceptor.h"
 
 
-#ifdef UNIX_PLATFORM
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
 
 
 #include "socket_peer.h"
@@ -30,11 +30,12 @@ void CSocketAcceptor::initialize() {
     open();
 
     if (m_url->getProtocol() == URL::TProtocol::HTTPS) {
-        m_context = OpenSSL::instance().createContext(true);
+        throw std::runtime_error("ssl socket is not implemented"); // ----->
+//        m_context = OpenSSL::instance().createContext(true);
 
-        OpenSSL::instance().configureContext(m_context,
-            encryption::DEFAULT_FILE_NAME_PRIVATE_KEY,
-            encryption::DEFAULT_FILE_NAME_CERTIFICATE);
+//        OpenSSL::instance().configureContext(m_context,
+//            encryption::DEFAULT_FILE_NAME_PRIVATE_KEY,
+//            encryption::DEFAULT_FILE_NAME_CERTIFICATE);
     } else
         m_context = nullptr;
 
@@ -90,4 +91,4 @@ ISocketStream::TSharedPtr CSocketAcceptor::accept() {
 } // iridium
 
 
-#endif // UNIX_PLATFORM
+#endif // LINUX_PLATFORM || FREEBSD_PLATFORM

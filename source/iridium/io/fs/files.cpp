@@ -20,9 +20,6 @@ using iridium::io::fs::implementation::CFileStreamWriter;
 using iridium::convertion::convert;
 
 
-static const size_t DEFAULT_BUFFER_SIZE = 16384;
-
-
 namespace iridium {
 namespace io {
 namespace fs {

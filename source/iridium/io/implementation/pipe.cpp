@@ -11,7 +11,6 @@
 
 
 using iridium::convertion::convert;
-using iridium::threading::IAsyncQueuePusher;
 using std::string;
 
 
@@ -20,7 +19,7 @@ namespace io {
 namespace implementation {
 
 
-size_t const CPipe::DEFAULT_BUFFER_SIZE  = 8192;
+size_t const CPipe::DEFAULT_BUFFER_SIZE  = 248;
 size_t const CPipe::DEFAULT_BUFFER_COUNT = 8;
 
 
@@ -32,16 +31,16 @@ CPipe::CPipe()
 
 
 CPipe::~CPipe() {
-    LOGT;
-    if (m_reader) {
-        LOGT << "del " << m_reader->getID();
-        m_reader->finalize();
-    }
+////    LOGT;
+//    if (m_reader) {
+////        LOGT << "del " << m_reader->getID();
+//        m_reader->finalize();
+//    }
 
-    if (m_writer) {
-        LOGT << "del " << m_writer->getID();
-        m_writer->finalize();
-    }
+//    if (m_writer) {
+////        LOGT << "del " << m_writer->getID();
+//        m_writer->finalize();
+//    }
 }
 
 
@@ -61,27 +60,27 @@ void CPipe::set(
     else
         from += "null ";
 
-    LOGT << "from: " << from;
+//    LOGT << "from: " << from;
 
-    if (m_reader && !checkOneOf<IStream::TSharedPtr>(m_reader, reader, writer)) {
-        LOGT << "finalize m_reader fd " << m_reader->getID();
-        m_reader->finalize();
-    }
+//    if (m_reader && !checkOneOf<IStream::TSharedPtr>(m_reader, reader, writer)) {
+//        LOGT << "finalize m_reader fd " << m_reader->getID();
+//        m_reader->finalize();
+//    }
 
-    if (m_writer && !checkOneOf<IStream::TSharedPtr>(m_writer, reader, writer)) {
-        LOGT << "finalize m_writer fd " << m_writer->getID();
-        m_writer->finalize();
-    }
+//    if (m_writer && !checkOneOf<IStream::TSharedPtr>(m_writer, reader, writer)) {
+//        LOGT << "finalize m_writer fd " << m_writer->getID();
+//        m_writer->finalize();
+//    }
 
-    if (reader && !checkOneOf<IStream::TSharedPtr>(reader, m_reader, m_writer)) {
-        reader->initialize();
-        LOGT << "initialize reader fd " << reader->getID();
-    }
+//    if (reader && !checkOneOf<IStream::TSharedPtr>(reader, m_reader, m_writer)) {
+//        reader->initialize();
+//        LOGT << "initialize reader fd " << reader->getID();
+//    }
 
-    if (writer && !checkOneOf<IStream::TSharedPtr>(writer, m_reader, m_writer)) {
-        writer->initialize();
-        LOGT << "initialize writer fd " << writer->getID();
-    }
+//    if (writer && !checkOneOf<IStream::TSharedPtr>(writer, m_reader, m_writer)) {
+//        writer->initialize();
+//        LOGT << "initialize writer fd " << writer->getID();
+//    }
 
     m_reader = reader;
     m_writer = writer;
@@ -96,7 +95,7 @@ void CPipe::set(
     else
         to += "null ";
 
-    LOGT << "to  : " << to;
+//    LOGT << "to  : " << to;
 }
 
 
@@ -110,40 +109,41 @@ IStreamWriter::TConstSharedPtr CPipe::getWriter() const {
 }
 
 
-bool CPipe::transmit(IListener::Event::TConstSharedPtr const &event) {
+bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
     // todo: pipe for unix
     // todo: openssl pipe https://linux.die.net/man/3/bio_s_bio
 
     assertExists(m_reader, "pipe: reader does not exists");
     assertExists(m_writer, "pipe: writer does not exists");
 
-    LOGT << "fd " << event->stream->getID() << " event " << event->type
-         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
+//    LOGT << "fd " << event->getStream()->getID() << " event " << event->getType()
+//         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
 
     bool result = true;
 
     if  (m_buffers.size()  <  m_buffer_count &&
         (m_reader->getID() == 0 ||
-        (m_reader->getID() == event->stream->getID() && 
-        (event->type == IListener::Event::TType::READ))))
+        (m_reader->getID() == event->getStream()->getID() &&
+        (event->getType() == IEvent::TType::WRITE))))
     {
-        LOGT << "do read";
+//        LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
+//        LOGT << buffer->size();
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
-            LOGT << "read " << buffer->size();
+//            LOGT << "read " << buffer->size();
         } else {
             result = !m_buffers.empty();
-            LOGT << "read EOF";
+//            LOGT << "read EOF";
         }
     }
 
-    if (!m_buffers.empty() && 
-        (m_writer->getID() == 0 || 
-       ((m_writer->getID() == event->stream->getID() &&
-        (event->type == IListener::Event::TType::WRITE)))))
+    if  (!m_buffers.empty() &&
+         (m_writer->getID() == 0 ||
+        ((m_writer->getID() == event->getStream()->getID() &&
+         (event->getType() == IEvent::TType::READ)))))
     {
-        LOGT << "do write";
+//        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
         if  (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
@@ -152,14 +152,14 @@ bool CPipe::transmit(IListener::Event::TConstSharedPtr const &event) {
             buffer->assign(buffer->begin() + size, buffer->end());
         }
 
-        LOGT << "wrote " << size;
+//        LOGT << "wrote " << size;
 
-        LOGT << "buffers size " << m_buffers.size() << " " << size;
-        if (m_buffers.empty())
+//        LOGT << "buffers size " << m_buffers.size() << " " << size;
+        if (m_buffers.empty() && size <= 0)
             result = false;
     }
 
-    LOGT << "result = " << result;
+//    LOGT << "result = " << result;
     return result; // ----->
 }
 

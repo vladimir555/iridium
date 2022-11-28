@@ -9,15 +9,18 @@
 #include <string>
 #include <list>
 
+#include "iridium/convertion/convert.h"
 #include "iridium/pattern/prototype.h"
 #include "iridium/smart_ptr.h"
-#include "iridium/convertion/convert.h"
 
 
 namespace iridium {
 namespace parsing {
 
 
+// todo: Depth-First Search, DFS) and (Breadth-First Search, BFS) methods maybe parallel
+///
+/// \brief The INodeType class
 ///
 template<typename TValue>
 class INodeType : public pattern::IPrototype<INodeType<TValue> > {
@@ -45,7 +48,8 @@ public:
     ///
     virtual void setValue(TValue const &value) = 0;
     /// todo: multithread, parallel execution, work pool
-    virtual typename INodeType::TNodes findChilds(std::string const &path) = 0;
+    /// todo: return full sub tree with childs
+    //virtual typename INodeType::TNodes findChilds(std::string const &path) = 0;
     ///// todo:
     //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
 

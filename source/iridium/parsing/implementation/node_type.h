@@ -39,7 +39,7 @@ public:
     ///
     void setValue(TValue const &value) override;
     ///
-    typename INodeType<TValue>::TNodes findChilds(std::string const &path) override;
+    //typename INodeType<TValue>::TNodes findChilds(std::string const &path) override;
 
     ///
     typename INodeType<TValue>::iterator begin() override;
@@ -118,35 +118,35 @@ void CNodeType<TValue>::setValue(TValue const &value) {
 }
 
 
-template<typename TValue>
-typename INodeType<TValue>::TNodes CNodeType<TValue>::findChilds(std::string const &path) {
-    // todo: depth test
-    typename INodeType<TValue>::TNodes nodes;
+//template<typename TValue>
+//typename INodeType<TValue>::TNodes CNodeType<TValue>::findChilds(std::string const &path) {
+//    // todo: depth test
+//    typename INodeType<TValue>::TNodes nodes;
 
-    if (path.empty())
-        return nodes; // ----->
+//    if (path.empty())
+//        return nodes; // ----->
 
-    std::string const child_path = path.substr(1, path.find(INodeType<TValue>::PATH_DELIMITER, 1) - 1);
-    std::string next_path;
+//    std::string const child_path = path.substr(1, path.find(INodeType<TValue>::PATH_DELIMITER, 1) - 1);
+//    std::string next_path;
 
-    if ((child_path.size() + INodeType<TValue>::PATH_DELIMITER.size()) <= path.size())
-        next_path = path.substr(child_path.size() + INodeType<TValue>::PATH_DELIMITER.size());
+//    if ((child_path.size() + INodeType<TValue>::PATH_DELIMITER.size()) <= path.size())
+//        next_path = path.substr(child_path.size() + INodeType<TValue>::PATH_DELIMITER.size());
 
-    if (next_path.empty()) {
-        for (auto &node: m_nodes) {
-            if (node->getName() == child_path) {
-                nodes.push_back(node);
-            }
-        }
-    } else {
-        for (auto &node: m_nodes) {
-            if (node->getName() == child_path) {
-                nodes.splice(nodes.end(), node->findChilds(next_path));
-            }
-        }
-    }
-    return nodes; // ----->
-}
+//    if (next_path.empty()) {
+//        for (auto &node: m_nodes) {
+//            if (node->getName() == child_path) {
+//                nodes.push_back(node);
+//            }
+//        }
+//    } else {
+//        for (auto &node: m_nodes) {
+//            if (node->getName() == child_path) {
+//                nodes.splice(nodes.end(), node->findChilds(next_path));
+//            }
+//        }
+//    }
+//    return nodes; // ----->
+//}
 
 
 template<typename TValue>

@@ -23,13 +23,14 @@ public:
     CSinkFile(TEvent::TLevel const &level, std::string const &file_name);
 
 private:
-    class CWorkerHandler: public threading::IWorkerHandler<TEvent> {
+    class CWorkerHandler: public threading::IWorkerPusher<TEvent>::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CWorkerHandler)
         CWorkerHandler(TEvent::TLevel const &level, std::string const &file_name);
         void initialize() override;
         void finalize() override;
-        void handle(TItems const &e) override;
+        typedef threading::IWorkerPusher<TEvent>::TInputItems TInputItems;
+        void handle(TInputItems const &e) override;
     private:
         std::string m_file_name;
         std::string m_file_name_original;

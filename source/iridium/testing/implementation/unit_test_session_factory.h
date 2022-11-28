@@ -1,0 +1,13 @@
+#ifndef HEADER_UNIT_TEST_SESSION_FACTORY_53B2272F_B37B_4EB3_A2AB_4D5418C43FA2
+#define HEADER_UNIT_TEST_SESSION_FACTORY_53B2272F_B37B_4EB3_A2AB_4D5418C43FA2
+
+
+namespace iridium {
+namespace testing {
+namespace implementation {
+} // implementation
+} // testing
+} // iridium
+
+
+#endif // HEADER_UNIT_TEST_SESSION_FACTORY_53B2272F_B37B_4EB3_A2AB_4D5418C43FA2

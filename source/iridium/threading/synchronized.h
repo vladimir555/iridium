@@ -23,7 +23,10 @@ namespace threading {
 
 // todo: rename ThreadSafe
 class Synchronized {
-public:
+protected:
+    friend class SynchronizedScope;
+    friend class SynchronizedScopeSimple;
+
     Synchronized(IMutex::TSharedPtr const &mutex);
 
     IMutex::TSharedPtr getMutex() const;

@@ -4,6 +4,7 @@ linux kernel based socket ssl connection
 websocket client
 http client
 freebsd kevent async socket
+jsonrcp
 rtsp
 video codec wrapper: libaom + libopus
 or

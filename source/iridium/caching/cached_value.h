@@ -42,9 +42,9 @@ public:
 
 private:
     ///
-    static std::map<CachedValue, std::shared_ptr<TValue> > m;
+    static thread_local std::map<CachedValue, std::shared_ptr<TValue> > m;
     ///
-    static threading::IMutex::TConstSharedPtr m_mutex;
+//    static threading::IMutex::TConstSharedPtr m_mutex;
     ///
     mutable std::shared_ptr<TValue> m_value;
 };
@@ -54,11 +54,11 @@ private:
 
 
 template<typename TValue>
-std::map<CachedValue<TValue>, std::shared_ptr<TValue> > CachedValue<TValue>::m = std::map<CachedValue<TValue>, std::shared_ptr<TValue> >();
+thread_local std::map<CachedValue<TValue>, std::shared_ptr<TValue> > CachedValue<TValue>::m = std::map<CachedValue<TValue>, std::shared_ptr<TValue> >();
 
 
-template<typename TValue>
-threading::IMutex::TConstSharedPtr CachedValue<TValue>::m_mutex = std::make_shared<threading::implementation::CMutex>();
+//template<typename TValue>
+//threading::IMutex::TConstSharedPtr CachedValue<TValue>::m_mutex = std::make_shared<threading::implementation::CMutex>();
 
 
 template<typename TValue>
@@ -71,13 +71,13 @@ template<typename TValue>
 template<typename TParam>
 CachedValue<TValue>::CachedValue(TParam const &value) {
     m_value = std::make_shared<TValue>(value);
-    m_mutex->lock();
+//    m_mutex->lock();
     m_value = m[*this];
     if (!m_value) {
         m_value     = std::make_shared<TValue>(value);
         m[*this]    = m_value;
     }
-    m_mutex->unlock();
+//    m_mutex->unlock();
 }
 
 

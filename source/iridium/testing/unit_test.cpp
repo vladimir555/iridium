@@ -75,7 +75,7 @@ void UnitTest::greaterEqual(double const &left, double const &right,
 }
 
 
-void UnitTest::assert(bool const &is_true,
+void UnitTest::assert_(bool const &is_true,
     std::string const &condition_source, std::string const &line)
 {
     if (!is_true)

@@ -5,11 +5,10 @@
 #include "iridium/platform.h"
 
 
-#ifdef UNIX_PLATFORM
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
 
 
 #include "iridium/io/net/socket.h"
-#include "iridium/io/listener.h"
 #include "iridium/encryption/openssl.h"
 
 #include "socket.h"
@@ -56,7 +55,7 @@ private:
 } // iridium
 
 
-#endif // UNIX_PLATFORM
+#endif // LINUX_PLATFORM || FREEBSD_PLATFORM
 
 
 #endif // HEADER_SOCKET_PEER_A0DDF81D_C429_41EB_BA32_0F1C38A0390D

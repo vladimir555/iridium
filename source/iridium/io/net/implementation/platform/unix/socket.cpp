@@ -9,23 +9,19 @@
 
 
 #include "iridium/assert.h"
-
+#include "iridium/logging/logger.h"
 
 #include <sys/socket.h>
-
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <unistd.h>
-
 #include <stdio.h>
 #include <vector>
-
-#include "iridium/logging/logger.h"
-
 #include <signal.h>
-
-#include <linux/tls.h>
 #include <netinet/tcp.h>
+
+
+
 using iridium::io::Buffer;
 using iridium::io::IStream;
 using iridium::convertion::convert;
@@ -42,24 +38,22 @@ namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
-namespace unix {
+namespace unix_ {
 
 
-CSocketBase::CSocketBase(URL const &url, IListenerStreams::TSharedPtr const &listener)
+CSocketBase::CSocketBase(URL const &url)
 :
     m_socket        (0),
     m_url           (URL::create(url)),
     m_is_opened     (false),
-    m_listener      (listener),
     m_address       ({})
 {}
 
 
-CSocketBase::CSocketBase(int const &socket, IListenerStreams::TSharedPtr const &listener)
+CSocketBase::CSocketBase(int const &socket)
 :
     m_socket        (socket),
     m_is_opened     (true),
-    m_listener      (listener),
     m_address       ({})
 {}
 
@@ -117,16 +111,15 @@ void CSocketBase::listen() {
 
     assertOK(::bind   (m_socket, (struct sockaddr *) &m_address, sizeof(m_address)), "socket bind error");
     assertOK(::listen (m_socket, SOMAXCONN), "socket listen error");
-    if (m_listener)
-        setBlockingMode(m_socket, false);
+    setBlockingMode(m_socket, false);
 }
 
 
 void CSocketBase::connect() {
-    setsockopt(m_socket, SOL_TCP, TCP_NODELAY, &YES, sizeof(YES));
+    // instead SOL_TCP
+    setsockopt(m_socket, SOL_SOCKET, TCP_NODELAY, &YES, sizeof(YES));
     assertOK(::connect(m_socket, (struct sockaddr *) &m_address, sizeof(m_address)), "socket connect error");
-    if (m_listener)
-        setBlockingMode(m_socket, false);
+    setBlockingMode(m_socket, false);
 }
 
 
@@ -137,8 +130,7 @@ int CSocketBase::accept() {
     auto peer_fd = ::accept(m_socket, (struct sockaddr *) &peer_address, &peer_address_size);
     if  (peer_fd > 0) {
         LOGT << "fd " << m_socket << " accepted " << peer_fd;
-        if (m_listener)
-            setBlockingMode(peer_fd, false);
+        setBlockingMode(peer_fd, false);
         return peer_fd; // ----->
     } else
         return 0; // ----->
@@ -194,7 +186,7 @@ Buffer::TSharedPtr CSocketBase::read(size_t const &size_) {
     char buffer[size];
     auto received_size  = ::recv(m_socket, buffer, size - 1, 0);
 
-    if(received_size == EOF || m_listener)
+    if(received_size == EOF)
         assertOK(received_size, "socket read error");
     else
         received_size = 0;
@@ -227,7 +219,7 @@ int CSocketBase::getID() const {
 }
 
 
-} // unix
+} // unix_
 } // platform
 } // implementation
 } // net

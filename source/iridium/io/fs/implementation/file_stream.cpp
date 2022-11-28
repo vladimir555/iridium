@@ -133,9 +133,19 @@ TFileStatus CFileStream::getStatus() {
 
 #ifdef WINDOWS_PLATFORM
     auto tp = std::chrono::system_clock::from_time_t( result.st_mtime );
-           
-#else
-    std::chrono::system_clock::time_point tp{ 
+#endif
+#ifdef MACOS_PLATFORM
+//#if defined(MACOS_PLATFORM) || defined(EMSCRIPTEN_PLATFORM)
+    std::chrono::system_clock::time_point tp {
+        std::chrono::duration_cast<std::chrono::system_clock::duration>(
+            std::chrono::seconds       {result.st_mtimespec.tv_sec} +
+            std::chrono::nanoseconds   {result.st_mtimespec.tv_nsec}
+        )
+    };
+#endif
+//#ifdef LINUX_PLATFORM
+#if defined(LINUX_PLATFORM) || defined(EMSCRIPTEN_PLATFORM)
+    std::chrono::system_clock::time_point tp {
         std::chrono::duration_cast<std::chrono::system_clock::duration>(
             std::chrono::seconds       {result.st_mtim.tv_sec} +
             std::chrono::nanoseconds   {result.st_mtim.tv_nsec}
@@ -194,15 +204,23 @@ int CFileStream::getID() const {
 #ifdef  WINDOWS_PLATFORM
         return filenoInternal(m_file); // ----->
 #endif
-    } else
-        throw std::runtime_error("file stream '" + m_file_name + "' get id error: not initialized"); // ----->
+    }
+    throw std::runtime_error("file stream '" + m_file_name + "' get id error: not initialized"); // ----->
 }
     
     
 size_t CFileStream::getSize() const {
+#ifdef MACOS_PLATFORM
     struct stat file_stat = {};
+#else
+    struct stat64 file_stat = {};
+#endif
 
+#ifdef MACOS_PLATFORM
     auto result = fstat(filenoInternal(m_file), &file_stat);
+#else
+    auto result = fstat64(filenoInternal(m_file), &file_stat);
+#endif
     assertOK(result,
         "get size file '" + m_file_name + "'" +
         " mode "   + convert<string>(m_open_mode) +

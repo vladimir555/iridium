@@ -4,7 +4,7 @@
 
 #include "iridium/io/client.h"
 #include "iridium/io/url.h"
-#include "iridium/io/stream_pool.h"
+#include "iridium/io/session.h"
 
 
 namespace iridium {
@@ -15,12 +15,14 @@ namespace implementation {
 class CClient: public IClient {
 public:
     DEFINE_IMPLEMENTATION(CClient)
-    CClient(protocol::ISession::TSharedPtr const &session);
+    CClient(URL const &url, IProtocol::TSharedPtr const &protocol);
     void initialize()   override;
     void finalize()     override;
+
 private:
-    protocol::ISession::TSharedPtr  m_session;
-    IStreamPool::TSharedPtr         m_stream_pool;
+    IStreamPort::TSharedPtr     m_stream;
+    IProtocol::TSharedPtr       m_protocol;
+    ISessionManager::TSharedPtr m_session_manager;
 };
 
 

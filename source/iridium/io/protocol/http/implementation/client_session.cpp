@@ -1,114 +1,114 @@
-#include "client_session.h"
-#include "iridium/io/protocol/http/request.h"
-#include "iridium/io/implementation/stream_buffer.h"
-#include "iridium/io/implementation/pipe.h"
-#include "iridium/io/net/implementation/socket_client.h"
-#include "iridium/parsing/implementation/parser_http.h"
-#include "iridium/assert.h"
+//#include "client_session.h"
+//#include "iridium/io/protocol/http/request.h"
+//#include "iridium/io/implementation/stream_buffer.h"
+//#include "iridium/io/implementation/pipe.h"
+//#include "iridium/io/net/implementation/socket_client.h"
+//#include "iridium/parsing/implementation/parser_http.h"
+//#include "iridium/assert.h"
 
 
-using iridium::io::implementation::CStreamReaderBuffer;
-using iridium::io::implementation::CStreamWriterBuffer;
-using iridium::io::implementation::CPipe;
-using iridium::io::net::implementation::CSocketClient;
+//using iridium::io::implementation::CStreamReaderBuffer;
+//using iridium::io::implementation::CStreamWriterBuffer;
+//using iridium::io::implementation::CPipe;
+//using iridium::io::net::implementation::CSocketClient;
 
 
-#include "iridium/threading/implementation/mutex.h"
-#include "iridium/threading/synchronized_scope.h"
-#include "iridium/logging/logger.h"
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace implementation {
+//#include "iridium/threading/implementation/mutex.h"
+//#include "iridium/threading/synchronized_scope.h"
+//#include "iridium/logging/logger.h"
+//namespace iridium {
+//namespace io {
+//namespace protocol {
+//namespace http {
+//namespace implementation {
 
 
-CClientSession::CClientSession(URL const &url)
-:
-    m_pipe  (CPipe::create()),
-    m_url   (url)
-{}
+//CClientSession::CClientSession(URL const &url)
+//:
+//    m_pipe  (CPipe::create()),
+//    m_url   (url)
+//{}
 
 
-IStream::TSharedPtr CClientSession::getStream(IListener::TSharedPtr const &listener) {
-    if (m_socket)
-        return m_socket;
-    else
-        return m_socket = CSocketClient::create(m_url, listener);
-}
+//IStream::TSharedPtr CClientSession::getStream(IListener::TSharedPtr const &listener) {
+//    if (m_socket)
+//        return m_socket;
+//    else
+//        return m_socket = CSocketClient::create(m_url, listener);
+//}
 
 
-IPipe::TSharedPtr CClientSession::getPipe(IListener::Event::TConstSharedPtr const &event) {
-    LOGT << "event " << event->type << " fd " << event->stream->getID() << " count = " << count++;
+//IPipe::TSharedPtr CClientSession::getPipe(IListener::Event::TConstSharedPtr const &event) {
+//    LOGT << "event " << event->type << " fd " << event->stream->getID() << " count = " << count++;
 
-    if (event->stream == m_socket && event->type == IListener::Event::TType::OPEN) {
-//        auto            parser = parsing::implementation::CHTTPParser::create();
-//        request::THttp  http;
+//    if (event->stream == m_socket && event->type == IListener::Event::TType::OPEN) {
+////        auto            parser = parsing::implementation::CHTTPParser::create();
+////        request::THttp  http;
 
-//        http.Headers.Host      = *assertExists(m_url.getHost(), "url does not contain hostname");
-//        http.Headers.UserAgent = "iridium";
-//        m_request_buffer       = Buffer::create(parser->compose(http.getNode()));
-        LOGT << "create request socket";
+////        http.Headers.Host      = *assertExists(m_url.getHost(), "url does not contain hostname");
+////        http.Headers.UserAgent = "iridium";
+////        m_request_buffer       = Buffer::create(parser->compose(http.getNode()));
+//        LOGT << "create request socket";
+
+////        std::string request = ""
+////            "GET / HTTP/1.1\r\n"
+////            "Host: example.com:443\r\n"
+////            "User-Agent: curl/7.58.0\r\n"
+////            "Accept: */*"
+////            "\r\n"
+////            "\r\n";
+
+//        std::string path = "/";
+//        if (m_url.getPath())
+//            path = *m_url.getPath();
+//        std::string host = *m_url.getHost();
+//        std::string port = convertion::convert<std::string>(*m_url.getPort());
 
 //        std::string request = ""
-//            "GET / HTTP/1.1\r\n"
-//            "Host: example.com:443\r\n"
+//            "GET " + path + " HTTP/1.1\r\n"
+//            "Host: " + host + ":" + port + "\r\n"
 //            "User-Agent: curl/7.58.0\r\n"
 //            "Accept: */*"
 //            "\r\n"
 //            "\r\n";
 
-        std::string path = "/";
-        if (m_url.getPath())
-            path = *m_url.getPath();
-        std::string host = *m_url.getHost();
-        std::string port = convertion::convert<std::string>(*m_url.getPort());
 
-        std::string request = ""
-            "GET " + path + " HTTP/1.1\r\n"
-            "Host: " + host + ":" + port + "\r\n"
-            "User-Agent: curl/7.58.0\r\n"
-            "Accept: */*"
-            "\r\n"
-            "\r\n";
+//        m_request_buffer = Buffer::create(request);
+//        m_request_stream = CStreamReaderBuffer::create(m_request_buffer);
+//        m_pipe->set(m_request_stream, m_socket);
 
+//        return m_pipe; // ----->
+//    }
 
-        m_request_buffer = Buffer::create(request);
-        m_request_stream = CStreamReaderBuffer::create(m_request_buffer);
-        m_pipe->set(m_request_stream, m_socket);
+//    if (event->stream == m_request_stream && event->type == IListener::Event::TType::EOF_) {
+//        LOGT << "switch to getting response";
 
-        return m_pipe; // ----->
-    }
+//        m_response_buffer = Buffer::create();
+//        m_response_stream = CStreamWriterBuffer::create(m_response_buffer);
+//        m_pipe->set(m_socket, m_response_stream);
 
-    if (event->stream == m_request_stream && event->type == IListener::Event::TType::EOF_) {
-        LOGT << "switch to getting response";
+//        return m_pipe; // ----->
+//    }
 
-        m_response_buffer = Buffer::create();
-        m_response_stream = CStreamWriterBuffer::create(m_response_buffer);
-        m_pipe->set(m_socket, m_response_stream);
+//    if (m_response_buffer) {
+//        LOGT << "response_buffer size = " << m_response_buffer->size();
+//        LOGT << "response:" << *m_response_buffer;
+//    }
 
-        return m_pipe; // ----->
-    }
+//    if (m_response_buffer && m_response_buffer->size() > 900)
+//        m_pipe.reset();
 
-    if (m_response_buffer) {
-        LOGT << "response_buffer size = " << m_response_buffer->size();
-        LOGT << "response:" << *m_response_buffer;
-    }
+//    if (m_pipe)
+//        LOGT << "return pipe";
+//    else
+//        LOGT << "return null";
 
-    if (m_response_buffer && m_response_buffer->size() > 900)
-        m_pipe.reset();
-
-    if (m_pipe)
-        LOGT << "return pipe";
-    else
-        LOGT << "return null";
-
-    return m_pipe;
-}
+//    return m_pipe;
+//}
 
 
-} // implementation
-} // http
-} // protocol
-} // io
-} // iridium
+//} // implementation
+//} // http
+//} // protocol
+//} // io
+//} // iridium

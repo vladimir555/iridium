@@ -140,6 +140,10 @@ std::string convert(uint32_t const &value);
 
 
 template<>
+std::string convert(int16_t const &value);
+
+
+template<>
 std::string convert(uint16_t const &value);
 
 

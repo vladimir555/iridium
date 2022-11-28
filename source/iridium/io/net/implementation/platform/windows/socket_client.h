@@ -8,7 +8,6 @@
 
 
 #include "iridium/io/net/socket.h"
-#include "iridium/io/listener.h"
 
 
 namespace iridium {

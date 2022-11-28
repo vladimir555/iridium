@@ -83,7 +83,10 @@ void update(config::TLogger const &config);
 std::string convertFunctionNameToLogFunctionName(std::string const &name);
 
 
-} // logger
+std::string extractFileNameToLog(std::string const &path);
+
+
+} // logging
 } // iridium
 
 #ifdef _MSC_VER
@@ -93,7 +96,18 @@ std::string convertFunctionNameToLogFunctionName(std::string const &name);
 
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
+iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
+
+
+//#define LOGT \
+//iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
+//std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1, std::string::npos) << ":" << __LINE__ << " "
+
+
+//#define LOGT \
+//iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
+//iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
+
 /*
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
@@ -102,6 +116,7 @@ iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << "
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
 iridium::split(iridium::split(__PRETTY_FUNCTION__, "(").front(), " ").back() << "\n"
 */
+
 #define LOGD \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG_LEVEL)
 #define LOGI \

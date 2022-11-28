@@ -15,7 +15,7 @@ namespace pattern {
 
 
 ///
-/// \brief The Singleton class
+/// \brief The Meyers singleton class, thread safe
 ///
 template<typename TClass>
 class Singleton:

@@ -15,3 +15,5 @@ CMakeLists.txt.*
 *.log
 *.autosave
 /build
+.vscode
+/html
