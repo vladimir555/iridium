@@ -20,8 +20,6 @@ using iridium::threading::implementation::CWorkerPool;
 using iridium::threading::implementation::CRecursiveMutex;
 using iridium::threading::IThread;
 using iridium::threading::IWorker;
-using iridium::threading::IWorkerPool;
-using iridium::threading::IWorkerHandler;
 using iridium::threading::sleep;
 using iridium::threading::IMutex;
 
@@ -40,19 +38,23 @@ list<int>       out;
 IMutex::TSharedPtr m = CRecursiveMutex::create();
 
 
-class Worker: public IWorkerHandler<int> {
+class CWorkerHandler: public IWorker<int, int>::IHandler {
 public:
-    DEFINE_CREATE(Worker)
-    Worker() = default;
-    virtual ~Worker() = default;
+    DEFINE_CREATE(CWorkerHandler)
+    CWorkerHandler() = default;
+    virtual ~CWorkerHandler() = default;
 private:
-    void handle(TItems const &items) override {
+    typedef typename IWorker<int>::TInputItems  TInputItems;
+    typedef typename IWorker<int>::TOutputItems TOutputItems;
+
+    TInputItems handle(TOutputItems const &items) override {
         for (auto const &i: items) {
             //cout << "processing " << i << endl;
             out.push_back(i);
             processed++;
             sleep(10);
         }
+        return {};
     }
 
     void initialize() override {
@@ -75,7 +77,7 @@ namespace threading {
 
 
 TEST(worker) {
-    IWorker<int>::TSharedPtr worker = CWorker<int>::create("worker", Worker::create());
+    IWorker<int>::TSharedPtr worker = CWorker<int>::create("worker", CWorkerHandler::create());
 
     processed = 0;
     in.clear();
@@ -113,6 +115,8 @@ TEST(worker) {
 
 
 TEST(worker_pool) {
+    sleep(500);
+
     IAsyncQueue<int>::TSharedPtr q = implementation::CAsyncQueue<int>::create();
     q->push(5);
     q->push(55);
@@ -122,12 +126,12 @@ TEST(worker_pool) {
     ASSERT(5    , equal, i.front());
     ASSERT(55   , equal, i.back());
 
-    list<IWorkerHandler<int>::TSharedPtr > l;
+    CWorkerPool<int>::THandlers handlers;
 
     for (size_t i = 0; i < 10; i++)
-        l.push_back(Worker::create());
+        handlers.push_back(CWorkerHandler::create());
 
-    IWorkerPool<int>::TSharedPtr worker_pool = CWorkerPool<int>::create("worker_pool", l);
+    IWorker<int>::TSharedPtr worker_pool = CWorkerPool<int>::create("worker_pool", handlers);
 
     processed = 0;
     in.clear();
@@ -156,49 +160,6 @@ TEST(worker_pool) {
 
     ASSERT(in, equal, out);
     m->unlock();
-}
-
-
-class CJob: public IJob {
-public:
-    DEFINE_IMPLEMENTATION(CJob)
-
-    CJob(list<string> &items): m_items(items) {}
-    bool execute() override {
-        //LOGT << "job ";
-        m_items.push_back("job");
-        return true;
-    }
-private:
-    list<string> &m_items;
-};
-
-
-TEST(worker_job) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
-    IWorker<>::TSharedPtr worker = CWorker<>::create("worker_name");
-    
-    list<string> items;
-
-    worker->initialize();
-    worker->push(CJob::create(items));
-    worker->finalize();
-
-    ASSERT(list<string>{ "job" }, equal, items);
-}
-
-
-TEST(worker_pool_job) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
-    IWorkerPool<>::TSharedPtr worker = CWorkerPool<>::create("worker_name", 2);
-
-    list<string> items;
-
-    worker->initialize();
-    worker->push(CJob::create(items));
-    worker->finalize();
-
-    ASSERT(list<string>{ "job" }, equal, items);
 }
 
 

@@ -9,8 +9,6 @@
 #include <string>
 #include <fstream>
 
-#include "text_writer.h"
-#include "implementation/fast_text_writer.h"
 #include "iridium/convertion/convert.h"
 
 

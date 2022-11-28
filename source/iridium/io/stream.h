@@ -28,10 +28,14 @@ namespace iridium {
 namespace io {
 
 
+static size_t const DEFAULT_BUFFER_SIZE = 16;
+
+
 class IStream: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)
     // todo: for windows int &getID() const;
+    // todo: std::list<int&>
     virtual int getID() const = 0;
 };
 
@@ -39,9 +43,9 @@ public:
 class IStreamReader: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamReader)
-    /// return nullptr on EOF, empty buffer on not ready data
+    /// return nullptr on EOF or unexpected closed, empty buffer on not ready data
     /// size = 0 returns last accumulated buffer if exists
-    virtual Buffer::TSharedPtr read(size_t const &size) = 0;
+    virtual Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) = 0;
 };
 
 

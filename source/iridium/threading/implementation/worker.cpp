@@ -12,16 +12,17 @@ namespace threading {
 namespace implementation {
 
 
-void CWorkerHandler::initialize() {}
+//void CWorkerHandler::initialize() {}
 
 
-void CWorkerHandler::finalize() {}
+//void CWorkerHandler::finalize() {}
 
 
-void CWorkerHandler::handle(TItems const &items_) {
-    for (auto const &item: items_)
-        item->execute();
-}
+//CWorkerHandler::TItems CWorkerHandler::handle(TItems const &items) {
+//    for (auto const &item: items)
+//        item->execute();
+//    return items;
+//}
 
 
 } // implementation

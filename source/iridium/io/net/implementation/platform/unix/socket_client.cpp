@@ -1,7 +1,7 @@
 #include "socket_client.h"
 
 
-#ifdef UNIX_PLATFORM
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
 
 
 #include "iridium/items.h"
@@ -120,4 +120,4 @@ bool CSocketClient::assertSSLInitialized() {
 } // iridium
 
 
-#endif // UNIX_PLATFORM
+#endif // LINUX_PLATFORM || FREEBSD_PLATFORM

@@ -49,6 +49,9 @@ URL::URL(std::string const &url)
     } else
         address_port = tokens[0];
 
+    if (m_protocol && *m_protocol == TProtocol::FILE)
+        return;
+
     tokens = assign(split(address_port, PORT_DELIMITER));
 
     if (tokens.size() < 1 || tokens.size() > 2)

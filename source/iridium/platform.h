@@ -35,6 +35,12 @@
 #endif
 
 
+#ifdef __EMSCRIPTEN__
+#define EMSCRIPTEN_PLATFORM
+#define PLATFORM_PATH platform/emscripten/
+#endif
+
+
 #ifdef __APPLE_OS__
 #define MACOS_PLATFORM
 #define PLATFORM_PATH platform/macos/
@@ -53,7 +59,7 @@
 #endif
 
 
-#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM) || defined(MACOS_PLATFORM)
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM) || defined(MACOS_PLATFORM) || defined(EMSCRIPTEN_PLATFORM)
 #define UNIX_PLATFORM
 #endif
 

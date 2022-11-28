@@ -1,7 +1,7 @@
 #include "socket_peer.h"
 
 
-#ifdef UNIX_PLATFORM
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
 
 
 using iridium::encryption::OpenSSL;
@@ -90,4 +90,4 @@ size_t CSocketPeer::write(Buffer::TSharedPtr const &buffer) {
 } // iridium
 
 
-#endif // UNIX_PLATFORM
+#endif // LINUX_PLATFORM || FREEBSD_PLATFORM

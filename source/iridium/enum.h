@@ -25,7 +25,7 @@
 class TEnum { \
 public: \
     enum TEnumInternal { \
-        UNKNOWN = -1, \
+        UNKNOWN = std::numeric_limits<int>::min(), \
         __VA_ARGS__ \
     }; \
     TEnum(): m_value(TEnumInternal::UNKNOWN) {} \

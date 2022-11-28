@@ -45,19 +45,19 @@ INode::TSharedPtr createTestNode() {
 }
 
 
-string const expected_xml = "";
+//string const expected_xml = "";
 
 
-TEST(nodes) {
-    auto node = createTestNode();
+//TEST(nodes) {
+//    auto node = createTestNode();
 
-    ASSERT(node->findChilds("/wrong_node/").empty());
-    ASSERT(node->findChilds("wrong_node/").empty());
-    ASSERT(node->findChilds("/").empty());
-    ASSERT(node->findChilds("").empty());
+//    ASSERT(node->findChilds("/wrong_node/").empty());
+//    ASSERT(node->findChilds("wrong_node/").empty());
+//    ASSERT(node->findChilds("/").empty());
+//    ASSERT(node->findChilds("").empty());
 
-    ASSERT(3, equal, node->findChilds("/item").size());
-}
+//    ASSERT(3, equal, node->findChilds("/item").size());
+//}
 
 
 } // parsing

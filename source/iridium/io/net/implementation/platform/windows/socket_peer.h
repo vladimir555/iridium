@@ -8,7 +8,6 @@
 
 
 #include "iridium/io/net/socket.h"
-#include "iridium/io/listener.h"
 #include "iridium/encryption/openssl.h"
 
 #include "socket.h"

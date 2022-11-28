@@ -69,19 +69,19 @@ namespace convertion {
 //#ifdef MACOS_PLATFORM
 //    static auto const item_count        = 5000;
 //    static auto const iteration_count   = 5;
-//#endif
+//# endif
 //#ifdef LINUX_PLATFORM
 //    static auto const item_count        = 5000;
 //    static auto const iteration_count   = 5;
-//#endif
+//# endif
 //#ifdef FREEBSD_PLATFORM
 //    static auto const item_count        = 5000;
 //    static auto const iteration_count   = 5;
-//#endif
+//# endif
 //#ifdef WINDOWS_PLATFORM
 //    static auto const item_count        = 100000;
 //    static auto const iteration_count   = 10;
-//#endif
+//# endif
 
 
 //    vector<TFrom> from;

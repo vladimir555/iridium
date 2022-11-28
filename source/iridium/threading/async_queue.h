@@ -16,6 +16,7 @@ namespace threading {
 
 // todo: must be SyncQueue
 // todo: rename to ThreadSafeQueuePusher
+// todo: virtual public ISynchronized
 template<typename TItem>
 class IAsyncQueuePusher {
 public:
@@ -28,18 +29,31 @@ public:
 };
 
 
+// todo: virtual public ISynchronized
+template<typename TItem>
+class IAsyncQueuePopper {
+public:
+    DEFINE_INTERFACE(IAsyncQueuePopper)
+
+    typedef std::list<TItem> TItems;
+
+    virtual TItems pop(bool const &is_do_wait = true) = 0;
+};
+
+
 // todo: rename to ThreadSafeQueue
 template<typename TItem>
-class IAsyncQueue: public IAsyncQueuePusher<TItem> {
+class IAsyncQueue:
+    public IAsyncQueuePusher<TItem>,
+    public IAsyncQueuePopper<TItem>
+{
 public:
     DEFINE_INTERFACE(IAsyncQueue)
 
     typedef typename IAsyncQueuePusher<TItem>::TItems TItems;
 
-    virtual TItems  pop(bool const &is_do_wait = true) = 0;
-    virtual void    interrupt() = 0;
-
-    virtual bool empty() = 0;
+    virtual void interrupt() = 0;
+    virtual bool empty() const = 0;
 };
 
 

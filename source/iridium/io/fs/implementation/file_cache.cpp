@@ -49,7 +49,7 @@ void CFileCache::initialize() {
     if (!m_lines.empty())
         return; // ----->
 
-    vector<size_t> indexes_for_remove;
+    vector<uint64_t> indexes_for_remove;
     vector<string> items;
 
     if (fs::checkFileExistence(m_file_name)) {
@@ -72,7 +72,7 @@ void CFileCache::initialize() {
                     items.push_back(item);
                     item.clear();
                 }
-                indexes_for_remove.push_back(convert<size_t>(line.substr(MARKER_REMOVED_INDEX.size(), string::npos)));
+                indexes_for_remove.push_back(convert<uint64_t>(line.substr(MARKER_REMOVED_INDEX.size(), string::npos)));
                 continue; // <---
             }
 

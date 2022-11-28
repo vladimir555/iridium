@@ -1,14 +1,18 @@
 #include "socket.h"
 
-#include <linux/tls.h>
-#include <netinet/tcp.h>
-#include <string.h>
 
 #include "iridium/logging/logger.h"
 #include "iridium/assert.h"
 
 
 #ifdef LINUX_PLATFORM
+
+
+#include <linux/tls.h>
+#include <netinet/tcp.h>
+#include <string.h>
+
+
 #ifdef BUILD_FLAG_OPENSSL
 
 

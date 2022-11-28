@@ -60,7 +60,7 @@ void CSinkFile::CWorkerHandler::finalize() {
 }
 
 
-void CSinkFile::CWorkerHandler::handle(TItems const &events) {
+void CSinkFile::CWorkerHandler::handle(TInputItems const &events) {
     if (m_is_rotation_by_day && system_clock::now() > m_last_initialization_time) {
         finalize();
         initialize();

@@ -10,7 +10,7 @@
 #include "iridium/parsing/node.h"
 #include "iridium/parsing/parser.h"
 
-#include <vector>
+
 namespace iridium {
 namespace parsing {
 namespace implementation {
