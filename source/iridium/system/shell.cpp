@@ -1,7 +1,7 @@
 #include "shell.h"
 
 #include "iridium/system/implementation/process.h"
-#include "iridium/io/implementation/event_provider.h"
+#include "iridium/io/implementation/multiplexer.h"
 #include "iridium/logging/logger.h"
 
 
@@ -11,7 +11,7 @@ using std::chrono::milliseconds;
 
 using iridium::system::implementation::CProcessStream;
 //using iridium::io::IListener;
-using iridium::io::implementation::CEventProvider;
+using iridium::io::implementation::CMultiplexer;
 using iridium::convertion::convert;
 using iridium::convertion::convertPtr;
 
@@ -45,7 +45,7 @@ Command::Command(
     std::string     const &arguments,
     TTimeDuration   const &timeout)
 :
-    m_event_provider(CEventProvider::create()),
+    m_event_provider(CMultiplexer::create()),
     m_process       (CProcessStream::create(application_path, arguments)),
     m_timeout       (timeout),
     m_command_line  (application_path + " " + arguments)

@@ -1,6 +1,6 @@
 #include "unit_test_pool.h"
 #include "iridium/system/implementation/process.h"
-#include "iridium/io/implementation/event_provider.h"
+#include "iridium/io/implementation/multiplexer.h"
 
 
 

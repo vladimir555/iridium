@@ -3,7 +3,7 @@
 
 
 #include "iridium/threading/worker.h"
-#include "iridium/io/event_provider.h"
+#include "iridium/io/multiplexer.h"
 #include "iridium/system/process.h"
 #include <string>
 
@@ -35,7 +35,7 @@ public:
 
 private:
     std::string                     m_app_path;
-    io::IEventProvider::TSharedPtr  m_event_provider;
+    io::IMultiplexer::TSharedPtr  m_event_provider;
 };
 
 

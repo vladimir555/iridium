@@ -8,7 +8,7 @@
 //#ifdef EMSCRIPTEN_PLATFORM
 
 
-#include "iridium/io/event_provider.h"
+#include "iridium/io/multiplexer.h"
 
 
 namespace iridium {
@@ -18,10 +18,10 @@ namespace platform {
 
 
 // todo: rename CMultiplexer
-class CEventProvider: public IEventProvider {
+class CMultiplexer: public IMultiplexer {
 public:
-    DEFINE_IMPLEMENTATION(CEventProvider)
-    CEventProvider(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT) {
+    DEFINE_IMPLEMENTATION(CMultiplexer)
+    CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT) {
         throw std::runtime_error("not implemented");
     }
 

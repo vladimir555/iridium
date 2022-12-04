@@ -1,6 +1,6 @@
 #include "session_manager.h"
 
-#include "event_provider.h"
+#include "multiplexer.h"
 
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/worker_pool.h"
@@ -24,7 +24,7 @@ namespace implementation {
 CSessionManager::CSessionManager()
 :
     m_protocol_count(0),
-    m_event_provider(CEventProvider::create()),
+    m_event_provider(CMultiplexer::create()),
     m_cache(Cache::create(m_event_provider, m_protocol_count, m_cv)),
     m_worker_pool(CWorkerPool<IEvent::TSharedPtr>::create(
         "stream_worker",
@@ -32,7 +32,7 @@ CSessionManager::CSessionManager()
             std::thread::hardware_concurrency(), m_cache))),
     m_event_provider_thread(
         CThread::create("event_provider",
-            CEventProviderThreadHandler::create(m_worker_pool, m_event_provider))),
+            CMultiplexerThreadHandler::create(m_worker_pool, m_event_provider))),
     m_event_queue_loop_thread(
         CThread::create("event_queue_loop",
             CEventQueueLoopThreadHandler::create(m_worker_pool)))
@@ -107,7 +107,7 @@ bool CSessionManager::wait(std::chrono::nanoseconds const &timeout) {
 
 
 CSessionManager::Cache::Cache(
-    IEventProvider::TSharedPtr const    &event_provider,
+    IMultiplexer::TSharedPtr const    &event_provider,
     std::atomic<size_t>                 &protocol_count,
     std::condition_variable             &cv)
 :
@@ -177,23 +177,23 @@ CSessionManager::TContext::TSharedPtr CSessionManager::Cache::get(IEvent::TShare
 }
 
 
-CSessionManager::CEventProviderThreadHandler::CEventProviderThreadHandler(
+CSessionManager::CMultiplexerThreadHandler::CMultiplexerThreadHandler(
     IContextWorker::TSharedPtr const &worker_pool,
-    IEventProvider::TSharedPtr const &event_provider)
+    IMultiplexer::TSharedPtr const &event_provider)
 :
     m_event_provider(event_provider),
     m_worker_pool   (worker_pool)
 {}
 
 
-void CSessionManager::CEventProviderThreadHandler::initialize() {}
+void CSessionManager::CMultiplexerThreadHandler::initialize() {}
 
 
-void CSessionManager::CEventProviderThreadHandler::finalize() {}
+void CSessionManager::CMultiplexerThreadHandler::finalize() {}
 
 
-void CSessionManager::CEventProviderThreadHandler::run(std::atomic<bool> &is_running) {
-//    LOGT << "CEventProviderThreadHandler loop";
+void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
+//    LOGT << "CMultiplexerThreadHandler loop";
     while (is_running)
         m_worker_pool->push(m_event_provider->waitEvents());
 }

@@ -8,7 +8,7 @@
 #ifdef FREEBSD_LIKE_PLATFORM
 
 
-#include "iridium/io/event_provider.h"
+#include "iridium/io/multiplexer.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/synchronized.h"
 #include "iridium/threading/async_queue.h"
@@ -29,10 +29,10 @@ namespace platform {
 
 
 // todo: rename CMultiplexer
-class CEventProvider: public IEventProvider, public threading::Synchronized {
+class CMultiplexer: public IMultiplexer, public threading::Synchronized {
 public:
-    DEFINE_IMPLEMENTATION(CEventProvider)
-    CEventProvider(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);
+    DEFINE_IMPLEMENTATION(CMultiplexer)
+    CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);
 
     void initialize()   override;
     void finalize()     override;
@@ -65,7 +65,7 @@ private:
 
 
 template<typename T>
-T CEventProvider::assertOK(T const &result, std::string const &message) {
+T CMultiplexer::assertOK(T const &result, std::string const &message) {
     if (result < 0)
         throw std::runtime_error(message + ": " + std::strerror(errno) +
           ", code " + iridium::convertion::convert<std::string>(errno)); // ----->
