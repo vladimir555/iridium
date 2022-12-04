@@ -1,4 +1,4 @@
-#include "event_provider.h"
+#include "multiplexer.h"
 
 
 #ifdef FREEBSD_LIKE_PLATFORM
@@ -80,12 +80,12 @@ namespace implementation {
 namespace platform {
 
 
-void CEventProvider::handleSignal(int signal) {
+void CMultiplexer::handleSignal(int signal) {
     LOGT << "broken pipe signal " << signal;
 };
 
 
-CEventProvider::CEventProvider(std::chrono::microseconds const &timeout)
+CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
 :
     Synchronized(CMutex::create()),
 
@@ -104,7 +104,7 @@ CEventProvider::CEventProvider(std::chrono::microseconds const &timeout)
 {}
 
 
-std::array<int, 2> CEventProvider::registerPipe() {
+std::array<int, 2> CMultiplexer::registerPipe() {
     std::array<int, 2> result;
 
     assertOK(pipe(result.data()), "pipe creating error");
@@ -126,7 +126,7 @@ std::array<int, 2> CEventProvider::registerPipe() {
 };
 
 
-void CEventProvider::initialize() {
+void CMultiplexer::initialize() {
 //    LOGT << __FUNCTION__;
 
     if (m_kqueue)
@@ -155,7 +155,7 @@ void CEventProvider::initialize() {
 }
 
 
-void CEventProvider::finalize() {
+void CMultiplexer::finalize() {
 //    LOGT << __FUNCTION__;
     if (!m_kqueue)
         throw std::runtime_error("event profider finalization error: not initialized"); // ----->
@@ -168,7 +168,7 @@ void CEventProvider::finalize() {
 }
 
 
-void CEventProvider::subscribe(IStream::TSharedPtr const &stream) {
+void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("event provider subscribing error: kqueue is not initialized"); // ----->
 
@@ -190,7 +190,7 @@ void CEventProvider::subscribe(IStream::TSharedPtr const &stream) {
 }
 
 
-void CEventProvider::unsubscribe(IStream::TSharedPtr const &stream) {
+void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("event provider unsubscribing error: kqueue is not initialized"); // ----->
 
@@ -207,7 +207,7 @@ void CEventProvider::unsubscribe(IStream::TSharedPtr const &stream) {
 }
 
 
-std::list<IEvent::TSharedPtr> CEventProvider::waitEvents() {
+std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
     std::list<IEvent::TSharedPtr> events;
 
     if (m_kqueue == 0)

@@ -8,7 +8,7 @@
 #ifdef MACOS_PLATFORM
 
 
-#include "../freebsd/event_provider.h"
+#include "../freebsd/multiplexer.h"
 
 
 #endif // MACOS_PLATFORM

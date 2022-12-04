@@ -6,7 +6,7 @@
 
 
 #include "iridium/platform.h"
-#include PLATFORM_HEADER(event_provider.h)
+#include PLATFORM_HEADER(multiplexer.h)
 
 
 namespace iridium {
@@ -15,7 +15,7 @@ namespace implementation {
 
 
 // todo: factory
-typedef platform::CEventProvider CEventProvider;
+typedef platform::CMultiplexer CMultiplexer;
 
 
 } // implementation

@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "iridium/io/event_provider.h"
+#include "iridium/io/multiplexer.h"
 
 #include "process.h"
 
@@ -44,7 +44,7 @@ public:
     int run(std::string &output);
 
 private:
-    io::IEventProvider::TSharedPtr  m_event_provider;
+    io::IMultiplexer::TSharedPtr  m_event_provider;
     IProcess::TSharedPtr            m_process;
     TTimeDuration                   m_timeout;
     std::string                     m_command_line;

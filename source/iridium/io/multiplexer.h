@@ -15,9 +15,9 @@ namespace io {
 
 // todo: public IAsyncQueuePopper<IEvent::TSharedPtr>
 // todo: rename IMultiplexer
-class IEventProvider: public pattern::IInitializable {
+class IMultiplexer: public pattern::IInitializable {
 public:
-    DEFINE_INTERFACE(IEventProvider)
+    DEFINE_INTERFACE(IMultiplexer)
 
     static std::chrono::seconds const DEFAULT_WAITING_TIMEOUT;
 

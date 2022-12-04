@@ -3,7 +3,7 @@
 
 
 #include "iridium/io/session.h"
-#include "iridium/io/event_provider.h"
+#include "iridium/io/multiplexer.h"
 #include "iridium/threading/thread.h"
 #include "iridium/threading/runnable.h"
 #include "iridium/threading/worker.h"
@@ -44,7 +44,7 @@ private:
     public:
         DEFINE_CREATE(Cache)
         Cache(
-            IEventProvider::TSharedPtr const    &event_provider,
+            IMultiplexer::TSharedPtr const    &event_provider,
             std::atomic<size_t>                 &protocol_count,
             std::condition_variable             &cv);
         virtual ~Cache() = default;
@@ -57,7 +57,7 @@ private:
             m_map_stream_context;
         std::unordered_map<TContext::TSharedPtr, IStream::TSharedPtr>
             m_map_context_stream;
-        IEventProvider::TSharedPtr
+        IMultiplexer::TSharedPtr
             m_event_provider;
         std::atomic<size_t>
            &m_protocol_count;
@@ -67,19 +67,19 @@ private:
 
     typedef threading::IWorker<IEvent::TSharedPtr> IContextWorker;
 
-    class CEventProviderThreadHandler: public iridium::threading::IRunnable {
+    class CMultiplexerThreadHandler: public iridium::threading::IRunnable {
     public:
-        DEFINE_IMPLEMENTATION(CEventProviderThreadHandler)
-        CEventProviderThreadHandler(
+        DEFINE_IMPLEMENTATION(CMultiplexerThreadHandler)
+        CMultiplexerThreadHandler(
             IContextWorker::TSharedPtr const &worker_pool,
-            IEventProvider::TSharedPtr const &event_provider);
+            IMultiplexer::TSharedPtr const &event_provider);
 
         void initialize() override;
         void finalize() override;
 
         void run(std::atomic<bool> &is_running) override;
     private:
-        IEventProvider::TSharedPtr
+        IMultiplexer::TSharedPtr
             m_event_provider;
         IContextWorker::TSharedPtr
             m_worker_pool;
@@ -115,7 +115,7 @@ private:
     std::condition_variable m_cv;
     std::atomic<size_t>     m_protocol_count;
 
-    IEventProvider::TSharedPtr
+    IMultiplexer::TSharedPtr
         m_event_provider;
     Cache::TSharedPtr
         m_cache;
