@@ -117,7 +117,12 @@ void CProcessStream::initialize() {
 
     LOGT << "start process: " << m_command_line;
     posix_spawnattr_t attr = { 0 };
+
+#ifdef POSIX_SPAWN_SETSID
     posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
+#elif defined(POSIX_SPAWN_SETSID_NP)
+    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
+#endif
 
     assertOK(
         posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ),

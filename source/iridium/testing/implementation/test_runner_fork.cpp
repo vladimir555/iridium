@@ -115,9 +115,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //        return true;
 //    }
 
-    bool result = checkOneOf(event->getType(), io::IEvent::TType::READ, io::IEvent::TType::WRITE, io::IEvent::TType::OPEN);
-    LOGT << __FUNCTION__ << ", result: " << result;
-    return result;
+//    bool result = checkOneOf(event->getType(), io::IEvent::TType::READ, io::IEvent::TType::WRITE, io::IEvent::TType::OPEN);
+//    LOGT << __FUNCTION__ << ", result: " << result;
+//    return result;
+    return true;
 }
 
 

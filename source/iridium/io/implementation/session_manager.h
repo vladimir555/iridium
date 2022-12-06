@@ -58,7 +58,7 @@ private:
         std::unordered_map<TContext::TSharedPtr, IStream::TSharedPtr>
             m_map_context_stream;
         IMultiplexer::TSharedPtr
-            m_event_provider;
+            m_multiplexer;
         std::atomic<size_t>
            &m_protocol_count;
         std::condition_variable
