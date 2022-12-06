@@ -107,14 +107,14 @@ bool CSessionManager::wait(std::chrono::nanoseconds const &timeout) {
 
 
 CSessionManager::Cache::Cache(
-    IMultiplexer::TSharedPtr const    &event_provider,
-    std::atomic<size_t>                 &protocol_count,
-    std::condition_variable             &cv)
+    IMultiplexer::TSharedPtr const &event_provider,
+    std::atomic<size_t>            &protocol_count,
+    std::condition_variable        &cv)
 :
     threading::Synchronized (CMutex::create()),
-    m_event_provider        (event_provider),
-    m_protocol_count        (protocol_count),
-    m_cv                    (cv)
+    m_multiplexer   (event_provider),
+    m_protocol_count(protocol_count),
+    m_cv            (cv)
 {}
 
 
@@ -139,8 +139,8 @@ void CSessionManager::Cache::del(TContext::TSharedPtr const &context) {
         auto reader = std::const_pointer_cast<IStreamReader>(pipe->getReader());
         auto writer = std::const_pointer_cast<IStreamWriter>(pipe->getWriter());
 
-        m_event_provider->unsubscribe(reader);
-        m_event_provider->unsubscribe(writer);
+        m_multiplexer->unsubscribe(reader);
+        m_multiplexer->unsubscribe(writer);
 
         m_map_stream_context.erase(reader);
         m_map_stream_context.erase(writer);
@@ -168,7 +168,7 @@ CSessionManager::TContext::TSharedPtr CSessionManager::Cache::get(IEvent::TShare
 
         if (event->getType() == IEvent::TType::OPEN) {
             event->getStream()->initialize();
-            m_event_provider->subscribe(event->getStream());
+            m_multiplexer->subscribe(event->getStream());
         }
 
         context->events->push(event);
@@ -261,8 +261,11 @@ CSessionManager::CContextWorkerHandler::handle(
                         !context->protocol->control(context_event, context->map_id_pipe))
                     {
                         is_delete_context = true;
-                        break; // --->
+//                        break; // --->
                     }
+
+                    if (context_event->getType() == IEvent::TType::CLOSE)
+                        is_delete_context = true;
 
                     for (auto const &i: context->map_id_pipe) {
                         auto &pipe = i.second;
@@ -283,6 +286,12 @@ CSessionManager::CContextWorkerHandler::handle(
                             LOGT << "TRANSMIT 2 result '" << static_cast<bool>(result) << "'";
                         }
 
+//                        if (context_event->getType() == IEvent::TType::CLOSE) {
+//                            auto result = pipe->transmit(context_event);
+//                            LOGT << "TRANSMIT 3 result '" << static_cast<bool>(result) << "'";
+//                        }
+
+
 //                        if (context_event->getType() == IEvent::TType::OPEN)
 //                            context_event->setType(IEvent::TType::READ);
 //                        if (!result) {
@@ -296,6 +305,7 @@ CSessionManager::CContextWorkerHandler::handle(
                         is_delete_context = true;
                         context_event->setType(IEvent::TType::CLOSE);
                         context->protocol->control(context_event, context->map_id_pipe);
+
                         break; // --->
                     }
                 }

@@ -10,6 +10,7 @@
 
 #include <errno.h>
 #include <netdb.h>
+#include <netinet/in.h>
 
 #include "iridium/assert.h"
 

@@ -57,11 +57,11 @@ DEFINE_ENUM(
     PROC        = EVFILT_PROC,
     SIGNAL      = EVFILT_SIGNAL,
     TIMER       = EVFILT_TIMER,
-    MACHPORT    = EVFILT_MACHPORT,
+//    MACHPORT    = EVFILT_MACHPORT,
     FS          = EVFILT_FS,
     USER        = EVFILT_USER,
-    VM          = EVFILT_VM,
-    EXCEPT      = EVFILT_EXCEPT,
+//    VM          = EVFILT_VM,
+//    EXCEPT      = EVFILT_EXCEPT,
     SYSCOUN     = EVFILT_SYSCOUNT
 )
 

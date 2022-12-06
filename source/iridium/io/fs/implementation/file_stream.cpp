@@ -134,7 +134,7 @@ TFileStatus CFileStream::getStatus() {
 #ifdef WINDOWS_PLATFORM
     auto tp = std::chrono::system_clock::from_time_t( result.st_mtime );
 #endif
-#ifdef MACOS_PLATFORM
+#ifdef FREEBSD_LIKE_PLATFORM
 //#if defined(MACOS_PLATFORM) || defined(EMSCRIPTEN_PLATFORM)
     std::chrono::system_clock::time_point tp {
         std::chrono::duration_cast<std::chrono::system_clock::duration>(
@@ -210,13 +210,13 @@ int CFileStream::getID() const {
     
     
 size_t CFileStream::getSize() const {
-#ifdef MACOS_PLATFORM
+#ifdef FREEBSD_LIKE_PLATFORM
     struct stat file_stat = {};
 #else
     struct stat64 file_stat = {};
 #endif
 
-#ifdef MACOS_PLATFORM
+#ifdef FREEBSD_LIKE_PLATFORM
     auto result = fstat(filenoInternal(m_file), &file_stat);
 #else
     auto result = fstat64(filenoInternal(m_file), &file_stat);
