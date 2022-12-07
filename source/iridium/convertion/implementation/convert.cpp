@@ -89,7 +89,7 @@ std::atomic<int> config::double_precission(5);
 template<>
 string convert(system_clock::time_point const &value) {
     auto  value_ms  = duration_cast<milliseconds>(value.time_since_epoch()).count();
-    auto        ms  = value_ms % 1000;
+    uint32_t    ms  = value_ms % 1000;
     time_t      t   = system_clock::to_time_t(value);
     struct tm   tm_ = {};
 
@@ -103,37 +103,37 @@ string convert(system_clock::time_point const &value) {
 
 template<>
 string convert(hours const &value) {
-    return convert<string>(value.count()) + " h";
+    return convert<string, uint32_t>(value.count()) + " h";
 }
 
 
 template<>
 string convert(minutes const &value) {
-    return convert<string>(value.count()) + " m";
+    return convert<string, uint32_t>(value.count()) + " m";
 }
 
 
 template<>
 string convert(seconds const &value) {
-    return convert<string>(value.count()) + " s";
+    return convert<string, uint32_t>(value.count()) + " s";
 }
 
 
 template<>
 string convert(milliseconds const &value) {
-    return convert<string>(value.count()) + " ms";
+    return convert<string, uint32_t>(value.count()) + " ms";
 }
 
 
 template<>
 string convert(microseconds const &value) {
-    return convert<string>(value.count()) + " mcs";
+    return convert<string, uint32_t>(value.count()) + " mcs";
 }
 
 
 template<>
 string convert(nanoseconds const &value) {
-    return convert<string>(value.count()) + " ns";
+    return convert<string, uint32_t>(value.count()) + " ns";
 }
 
 
