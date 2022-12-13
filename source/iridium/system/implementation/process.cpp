@@ -63,8 +63,12 @@ CProcessStream::CProcessStream(
 
 
 void CProcessStream::initialize() {
-    if (m_fd)
-        throw std::runtime_error("initializing process stream '" + m_command_line + "' error: already initialized"); // ----->
+    if (m_fd) {
+        LOGW << "initializing process stream '" + m_command_line + "' error: already initialized";
+        return;
+    }
+//    if (m_fd)
+//        throw std::runtime_error("initializing process stream '" + m_command_line + "' error: already initialized"); // ----->
 
     int cout_pipe[2] = { 0 };
     int cerr_pipe[2] = { 0 };
@@ -118,11 +122,13 @@ void CProcessStream::initialize() {
     LOGT << "start process: " << m_command_line;
     posix_spawnattr_t attr = { 0 };
 
-#ifdef POSIX_SPAWN_SETSID
-    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
-#elif defined(POSIX_SPAWN_SETSID_NP)
-    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
-#endif
+//#ifdef POSIX_SPAWN_SETSID
+//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
+//#elif defined(POSIX_SPAWN_SETSID_NP)
+//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
+//#else
+//    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+//#endif
 
     assertOK(
         posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ),

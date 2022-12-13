@@ -29,11 +29,23 @@ namespace io {
 //};
 
 
+class IPipeManager {
+public:
+    DEFINE_INTERFACE(IPipeManager)
+
+    virtual IPipe::TSharedPtr   create          (std::string const &name) = 0;
+    virtual void                remove          (std::string const &name) = 0;
+    virtual void                updateReader    (std::string const &name, IStreamReader::TSharedPtr const &reader) = 0;
+    virtual void                updateWriter    (std::string const &name, IStreamWriter::TSharedPtr const &writer) = 0;
+};
+
+
+
 // todo:
 class IProtocol {
 public:
     DEFINE_INTERFACE(IProtocol)
-    virtual bool control(IEvent::TSharedPtr const &event, std::unordered_map<int, IPipe::TSharedPtr> &pipes) = 0;
+    virtual bool control(IEvent::TSharedPtr const &event, IPipeManager::TSharedPtr const &pipe_manager) = 0;
 };
 
 

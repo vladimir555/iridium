@@ -39,8 +39,8 @@ public:
 
     std::list<IEvent::TSharedPtr> waitEvents() override;
 
-    void subscribe  (IStream::TSharedPtr const &stream) override;
-    void unsubscribe(IStream::TSharedPtr const &stream) override;
+    void subscribe  (IStream::TConstSharedPtr const &stream) override;
+    void unsubscribe(IStream::TConstSharedPtr const &stream) override;
 
 private:
     static size_t const DEFAULT_EVENTS_LIMIT = 4;
@@ -60,7 +60,7 @@ private:
     std::array<int, 2> m_pipe_add;
     std::array<int, 2> m_pipe_del;
 
-    std::unordered_map<uintptr_t, IStream::TSharedPtr> m_map_fd_stream;
+    std::unordered_map<uintptr_t, IStream::TConstSharedPtr> m_map_fd_stream;
 };
 
 

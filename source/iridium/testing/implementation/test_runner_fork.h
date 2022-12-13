@@ -27,7 +27,7 @@ private:
         DEFINE_IMPLEMENTATION(CTestProtocolHandler)
         bool control(
             io::IEvent::TSharedPtr const &event,
-            std::unordered_map<int, io::IPipe::TSharedPtr> &pipes) override;
+            io::IPipeManager::TSharedPtr const &pipe_manager) override;
         io::Buffer::TSharedPtr getBuffer() const;
     private:
         io::IStreamWriter::TSharedPtr   m_stream_output;

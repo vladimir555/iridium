@@ -29,6 +29,10 @@ public:
     virtual IStreamReader::TConstSharedPtr getReader() const = 0;
     virtual IStreamWriter::TConstSharedPtr getWriter() const = 0;
 
+    // todo:
+//    virtual IStreamReader::TConstSharedPtr setReader(IStreamReader::TSharedPtr const &reader) const = 0;
+//    virtual IStreamWriter::TConstSharedPtr setWriter(IStreamWriter::TSharedPtr const &writer) const = 0;
+
     virtual void set(
         IStreamReader::TSharedPtr const &reader,
         IStreamWriter::TSharedPtr const &writer

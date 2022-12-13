@@ -94,20 +94,17 @@ void CTestRunnerFork::scan(
 
 bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr const &event,
-    std::unordered_map<int, io::IPipe::TSharedPtr> &pipes)
+    io::IPipeManager::TSharedPtr const &pipe_manager)
 {
-    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
+//    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
 //    if (m_buffer_output)
 //        LOGT << "buffer:\n" << *m_buffer_output;
-    if (event->getType() == io::IEvent::TType::OPEN && !m_stream_output) {
-        auto pipe = CPipe::create();
+    if (event->getType() == io::IEvent::TType::OPEN) {
+        pipe_manager->create("process");
+        pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
         m_buffer_output = io::Buffer::create();
         m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
-        pipe->set(std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()), m_stream_output);
-        pipes[0] = pipe;
-
-//        LOGT << "1 true";
-        return true;
+        pipe_manager->updateWriter("process", m_stream_output);
     }
 
 //    if (event->getType() == io::IEvent::TType::READ) {
