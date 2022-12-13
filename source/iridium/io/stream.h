@@ -36,6 +36,7 @@ public:
     DEFINE_INTERFACE(IStream)
     // todo: for windows int &getID() const;
     // todo: std::list<int&>
+    // todo: getURL, file:// ; memory:// ... ; sort by URL
     virtual int getID() const = 0;
 };
 

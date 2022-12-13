@@ -61,7 +61,7 @@ DEFINE_ENUM(
     FS          = EVFILT_FS,
     USER        = EVFILT_USER,
 //    VM          = EVFILT_VM,
-//    EXCEPT      = EVFILT_EXCEPT,
+    EXCEPT      = EVFILT_EXCEPT,
     SYSCOUN     = EVFILT_SYSCOUNT
 )
 
@@ -168,7 +168,7 @@ void CMultiplexer::finalize() {
 }
 
 
-void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
+void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("event provider subscribing error: kqueue is not initialized"); // ----->
 
@@ -190,7 +190,7 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 }
 
 
-void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
+void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("event provider unsubscribing error: kqueue is not initialized"); // ----->
 
@@ -274,7 +274,17 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
                 monitored.push_back(
                     {
                         .ident  = static_cast<uintptr_t>(fd),
-                        .filter = EVFILT_WRITE,// | EVFILT_READ,
+                        .filter = EVFILT_READ,
+                        .flags  = flags,
+                        .fflags = 0,
+                        .data   = 0,
+                        .udata  = nullptr
+                    }
+                );
+                monitored.push_back(
+                    {
+                        .ident  = static_cast<uintptr_t>(fd),
+                        .filter = EVFILT_WRITE,
                         .flags  = flags,
                         .fflags = 0,
                         .data   = 0,
@@ -294,7 +304,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
             continue; // <---
         }
 
-        auto const stream = m_map_fd_stream[triggered_event.ident];
+        auto const stream = std::const_pointer_cast<IStream>(m_map_fd_stream[triggered_event.ident]);
         if  (stream) {
 //            IEvent::TType event_type = IEvent::TType::UNKNOWN;
 

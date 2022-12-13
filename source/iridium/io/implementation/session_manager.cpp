@@ -4,6 +4,7 @@
 
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/worker_pool.h"
+#include "iridium/io/implementation/pipe.h"
 #include "iridium/items.h"
 #include "event.h"
 
@@ -21,72 +22,187 @@ namespace io {
 namespace implementation {
 
 
+CSessionManager::ContextManager::ContextManager(IMultiplexer::TSharedPtr const &multiplexer)
+:
+    Synchronized    (CMutex::create()),
+    m_multiplexer   (multiplexer)
+{}
+
+
+CSessionManager::ContextManager::~ContextManager() {}
+
+
+CSessionManager::ContextManager::Context::Context(
+    IMultiplexer::TSharedPtr    const &multiplexer,
+    ContextManager::TSharedPtr  const &context_manager,
+    IProtocol::TSharedPtr       const &protocol)
+:
+    m_multiplexer       (multiplexer),
+    m_context_manager   (context_manager),
+    m_protocol          (protocol),
+    m_events            (CAsyncQueue<IEvent::TSharedPtr>::create())
+{}
+
+
+CSessionManager::ContextManager::Context::~Context() {
+    for (auto const &name_pipe: m_map_name_pipe) {
+        if (name_pipe.second->getReader())
+            m_multiplexer->unsubscribe(name_pipe.second->getReader());
+        if (name_pipe.second->getWriter())
+            m_multiplexer->unsubscribe(name_pipe.second->getWriter());
+    }
+}
+
+
+IPipe::TSharedPtr CSessionManager::ContextManager::Context::create(std::string const &name) {
+    remove(name);
+
+    auto pipe = CPipe::create();
+
+    m_map_name_pipe[name] = pipe;
+    return pipe;
+}
+
+
+void CSessionManager::ContextManager::Context::remove(std::string const &name) {
+    if (auto pipe = findPipe(name)) {
+        if (pipe->getReader())
+            m_multiplexer->unsubscribe(pipe->getReader());
+        if (pipe->getWriter())
+            m_multiplexer->unsubscribe(pipe->getWriter());
+    }
+}
+
+
+void CSessionManager::ContextManager::Context::updateReader(
+    std::string const &name, IStreamReader::TSharedPtr const &reader)
+{
+    if (auto pipe = findPipe(name)) {
+        if (pipe->getReader() != reader) {
+            if (reader) {
+                auto stream_pipe  = m_map_stream_pipe.find(reader);
+                if  (stream_pipe == m_map_stream_pipe.end()) {
+                    reader->initialize();
+                    m_map_stream_pipe[reader] = pipe;
+                }
+            }
+
+            if (pipe->getReader())
+                m_multiplexer->unsubscribe(pipe->getReader());
+            pipe->set(reader, std::const_pointer_cast<IStreamWriter>(pipe->getWriter()));
+            m_multiplexer->subscribe(reader);
+            m_events->push(CEvent::create(reader, IEvent::TType::READ));
+        }
+    } else
+        throw std::runtime_error("pipe manager update error: reader '" + name + "' not found"); // ----->
+}
+
+
+void CSessionManager::ContextManager::Context::updateWriter(
+    std::string const &name, IStreamWriter::TSharedPtr const &writer)
+{
+    if (auto pipe = findPipe(name)) {
+        if (pipe->getWriter() != writer) {
+            if (writer) {
+                auto stream_pipe  = m_map_stream_pipe.find(writer);
+                if  (stream_pipe == m_map_stream_pipe.end()) {
+                    writer->initialize();
+                    m_map_stream_pipe[writer] = pipe;
+                }
+            }
+            if (pipe->getWriter())
+                m_multiplexer->unsubscribe(pipe->getWriter());
+            pipe->set(std::const_pointer_cast<IStreamReader>(pipe->getReader()), writer);
+            m_multiplexer->subscribe(writer);
+            m_events->push(CEvent::create(writer, IEvent::TType::WRITE));
+        }
+    } else
+        throw std::runtime_error("pipe manager update error: writer '" + name + "' not found"); // ----->
+}
+
+
+IPipe::TSharedPtr CSessionManager::ContextManager::Context::findPipe(std::string const &name) const {
+    auto i = m_map_name_pipe.find(name);
+    if (i == m_map_name_pipe.end())
+        return nullptr; // ----->
+    else
+        return i->second; // ----->
+}
+
+
+IPipe::TSharedPtr CSessionManager::ContextManager::Context::findPipe(IStream::TSharedPtr const &stream) const {
+    auto stream_pipe  = m_map_stream_pipe.find(stream);
+    if  (stream_pipe == m_map_stream_pipe.end())
+        return nullptr;
+    else
+        return stream_pipe->second;
+}
+
+
+void CSessionManager::ContextManager::Context::pushEvent(IEvent::TSharedPtr const &event) {
+    m_events->push(event);
+}
+
+
+std::list<IEvent::TSharedPtr> CSessionManager::ContextManager::Context::popEvents() {
+    return m_events->pop(false); // ----->
+}
+
+
+IProtocol::TSharedPtr CSessionManager::ContextManager::Context::getProtocol() const {
+    return m_protocol; // ----->
+}
+
+
 CSessionManager::CSessionManager()
 :
     m_protocol_count(0),
-    m_event_provider(CMultiplexer::create()),
-    m_cache(Cache::create(m_event_provider, m_protocol_count, m_cv)),
-    m_worker_pool(CWorkerPool<IEvent::TSharedPtr>::create(
-        "stream_worker",
-        createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-            std::thread::hardware_concurrency(), m_cache))),
-    m_event_provider_thread(
-        CThread::create("event_provider",
-            CMultiplexerThreadHandler::create(m_worker_pool, m_event_provider))),
-    m_event_queue_loop_thread(
-        CThread::create("event_queue_loop",
-            CEventQueueLoopThreadHandler::create(m_worker_pool)))
+    m_multiplexer(
+        CMultiplexer::create()),
+    m_context_manager(
+        ContextManager::create(m_multiplexer)),
+    m_context_worker(
+        CWorkerPool<IEvent::TSharedPtr>::create(
+            "stream_worker",
+            createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
+                std::thread::hardware_concurrency(), m_context_manager))),
+    m_multiplexer_thread(
+        CThread::create("event_multiplexer",
+            CMultiplexerThreadHandler::create(m_context_worker, m_multiplexer))),
+    m_event_repeater_thread(
+        CThread::create("event_repeater",
+            CEventRepeaterHandler::create(m_context_worker)))
 {}
 
 
 void CSessionManager::initialize() {
-    m_event_provider->initialize();
-    m_event_provider_thread->initialize();
-    m_event_queue_loop_thread->initialize();
-    m_worker_pool->initialize();
+    m_multiplexer->initialize();
+    m_multiplexer_thread->initialize();
+    m_event_repeater_thread->initialize();
+    m_context_worker->initialize();
     m_protocol_count = 0;
 }
 
 
 void CSessionManager::finalize() {
-//    LOGT << __FUNCTION__;
-//    LOGT << 111;
-//    m_worker_pool->finalize();
-//    LOGT << 222;
-//    m_event_provider_thread->finalize();
-//    LOGT << 333;
-//    m_event_provider->finalize();
-//    LOGT << 444;
-//    m_event_queue_loop_thread->finalize();
-//    LOGT << 555;
-
-//    LOGT << 111;
-    m_worker_pool->finalize();
-//    LOGT << 222;
-    m_event_provider->finalize();
-//    LOGT << 333;
-    m_event_provider_thread->finalize();
-//    LOGT << 444;
-    m_event_queue_loop_thread->finalize();
-//    LOGT << 555;
-
+    m_context_worker->finalize();
+    m_multiplexer->finalize();
+    m_multiplexer_thread->finalize();
+    m_event_repeater_thread->finalize();
 
     if (m_protocol_count > 0)
         LOGW << "running protocols left: " << static_cast<size_t>(m_protocol_count);
-//    LOGT << 666;
 }
 
 
-void CSessionManager::manage(
-    IStreamPort::TSharedPtr const &stream,
-    IProtocol::TSharedPtr const &protocol)
-{
-//  if (stream && protocol && stream->getID() > 0) {
+void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
+    if (stream && protocol) {
 //    LOGT << "manage: fd " << stream->getID();
-    m_cache->put(stream, protocol);
-    m_worker_pool->push(CEvent::create(stream, IEvent::TType::OPEN));
-//  } else
-//      throw std::runtime_error("session manage error: invalid stream or protocol"); // ----->
+        m_context_manager->updateContext(
+            stream, ContextManager::Context::create(m_multiplexer, m_context_manager, protocol));
+        m_context_worker->push(CEvent::create(stream, IEvent::TType::OPEN));
+    } else
+        throw std::runtime_error("session manage error: null stream or protocol"); // ----->
     m_protocol_count++;
 //    LOGT << "protocol count: " << static_cast<size_t>(m_protocol_count);
 }
@@ -106,83 +222,58 @@ bool CSessionManager::wait(std::chrono::nanoseconds const &timeout) {
 }
 
 
-CSessionManager::Cache::Cache(
-    IMultiplexer::TSharedPtr const &event_provider,
-    std::atomic<size_t>            &protocol_count,
-    std::condition_variable        &cv)
-:
-    threading::Synchronized (CMutex::create()),
-    m_multiplexer   (event_provider),
-    m_protocol_count(protocol_count),
-    m_cv            (cv)
-{}
-
-
-void CSessionManager::Cache::put(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
+CSessionManager::ContextManager::Context::TSharedPtr CSessionManager::ContextManager::acquireContext(
+    IEvent::TSharedPtr const &event)
+{
     LOCK_SCOPE;
-    auto context                    = TContext::create();
-
-    context->protocol               = protocol;
-    context->events                 = CAsyncQueue<IEvent::TSharedPtr>::create();
-    m_map_stream_context[stream]    = context;
-    m_map_context_stream[context]   = stream;
-//    LOGT << "cache put: fd " << stream->getID();
-//    m_event_provider->subscribe(stream);
-}
-
-
-void CSessionManager::Cache::del(TContext::TSharedPtr const &context) {
-    LOCK_SCOPE;
-    for (auto &i: context->map_id_pipe) {
-        auto &pipe = i.second;
-
-        auto reader = std::const_pointer_cast<IStreamReader>(pipe->getReader());
-        auto writer = std::const_pointer_cast<IStreamWriter>(pipe->getWriter());
-
-        m_multiplexer->unsubscribe(reader);
-        m_multiplexer->unsubscribe(writer);
-
-        m_map_stream_context.erase(reader);
-        m_map_stream_context.erase(writer);
-
-//        reader->finalize();
-//        writer->finalize();
-    }
-    m_map_context_stream.erase(context);
-
-    m_protocol_count--;
-//    if (m_protocol_count == 0)
-        m_cv.notify_all();
-
-//    LOGT << "!!! protocol count: " << static_cast<size_t>(m_protocol_count);
-}
-
-
-CSessionManager::TContext::TSharedPtr CSessionManager::Cache::get(IEvent::TSharedPtr const &event) {
-    LOCK_SCOPE;
-    auto i = m_map_stream_context.find(event->getStream());
-    if (i == m_map_stream_context.end())
-        return nullptr; // ----->
-    else {
-        auto context = i->second;
-
-        if (event->getType() == IEvent::TType::OPEN) {
-            event->getStream()->initialize();
-            m_multiplexer->subscribe(event->getStream());
+    auto stream_context  = m_map_stream_context.find(event->getStream());
+    if  (stream_context != m_map_stream_context.end()) {
+        auto context = stream_context->second;
+        context->pushEvent(event);
+        auto i  = m_acquired_contexts.find(context);
+        if  (i == m_acquired_contexts.end()) {
+            m_acquired_contexts.insert(context);
+            return context; // ----->
         }
-
-        context->events->push(event);
-        return context; // ----->
     }
+
+    return nullptr;
+}
+
+
+void CSessionManager::ContextManager::releaseContext(Context::TSharedPtr const &context) {
+    LOCK_SCOPE;
+    m_acquired_contexts.erase(context);
+}
+
+
+//void CSessionManager::ContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
+//    LOCK_SCOPE;
+//    updateContext(stream, Context::create(m_multiplexer, m_context_manager, protocol));
+//}
+
+
+void CSessionManager::ContextManager::updateContext(IStream::TSharedPtr const &stream, Context::TSharedPtr const &context) {
+    LOCK_SCOPE;
+    m_map_stream_context[stream] = context;
+    m_map_context_streams[context].insert(stream);
+}
+
+
+void CSessionManager::ContextManager::removeContext(Context::TSharedPtr const &context) {
+    LOCK_SCOPE;
+    for (auto const &stream: m_map_context_streams.at(context))
+        m_map_stream_context.erase(stream);
+    m_map_context_streams.erase(context);
 }
 
 
 CSessionManager::CMultiplexerThreadHandler::CMultiplexerThreadHandler(
-    IContextWorker::TSharedPtr const &worker_pool,
-    IMultiplexer::TSharedPtr const &event_provider)
+    IContextWorker::TSharedPtr  const &context_worker,
+    IMultiplexer::TSharedPtr    const &multiplexer)
 :
-    m_event_provider(event_provider),
-    m_worker_pool   (worker_pool)
+    m_multiplexer   (multiplexer),
+    m_context_worker(context_worker)
 {}
 
 
@@ -195,45 +286,39 @@ void CSessionManager::CMultiplexerThreadHandler::finalize() {}
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
 //    LOGT << "CMultiplexerThreadHandler loop";
     while (is_running)
-        m_worker_pool->push(m_event_provider->waitEvents());
+        m_context_worker->push(m_multiplexer->waitEvents());
 }
 
 
-CSessionManager::CContextWorkerHandler::CContextWorkerHandler(Cache::TSharedPtr const &cache)
+CSessionManager::CContextWorkerHandler::CContextWorkerHandler(ContextManager::TSharedPtr const &context_manager)
 :
-    m_cache(cache)
+    m_context_manager(context_manager)
 {}
 
 
-CSessionManager::CEventQueueLoopThreadHandler::CEventQueueLoopThreadHandler(IContextWorker::TSharedPtr const &worker_pool)
+CSessionManager::CEventRepeaterHandler::CEventRepeaterHandler(IContextWorker::TSharedPtr const &context_worker)
 :
-    m_worker_pool(worker_pool)
+    m_context_worker(context_worker)
 {}
 
 
-void CSessionManager::CEventQueueLoopThreadHandler::initialize() {}
+void CSessionManager::CEventRepeaterHandler::initialize() {}
 
 
-void CSessionManager::CEventQueueLoopThreadHandler::finalize() {
-//    LOGT << __FUNCTION__;
-}
+void CSessionManager::CEventRepeaterHandler::finalize() {}
 
 
-void CSessionManager::CEventQueueLoopThreadHandler::run(std::atomic<bool> &is_running) {
-    LOGT << "CEventQueueLoopThreadHandler loop";
+void CSessionManager::CEventRepeaterHandler::run(std::atomic<bool> &is_running) {
+    LOGT << __FUNCTION__ << " loop";
     while (is_running)
-        m_worker_pool->push(m_worker_pool->pop(is_running));
+        m_context_worker->push(m_context_worker->pop(is_running));
 }
 
 
-void CSessionManager::CContextWorkerHandler::initialize() {
-//    LOGT << "initialize";
-}
+void CSessionManager::CContextWorkerHandler::initialize() {}
 
 
-void CSessionManager::CContextWorkerHandler::finalize() {
-//    LOGT << "finalize";
-}
+void CSessionManager::CContextWorkerHandler::finalize() {}
 
 
 CSessionManager::IContextWorker::TOutputItems
@@ -241,7 +326,7 @@ CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::TInputItems const &events)
 {
     // events to repeat handling
-    IContextWorker::TOutputItems result_events;
+    IContextWorker::TOutputItems next_events;
 
     for (auto const &event: events) {
 //        LOGT << "handle event: " << event->getType();
@@ -252,62 +337,20 @@ CSessionManager::CContextWorkerHandler::handle(
 //        auto id = event->getStream()->getID();
 //        LOGT << "handle: fd " << id << " " << event->getType();
 
-        if (auto context = m_cache->get(event)) {
+        // try to
+        if (auto context = m_context_manager->acquireContext(event)) {
             bool is_delete_context = false;
             try {
-                auto context_events = context->events->pop(false);
-                for (auto &context_event: context_events) {
-                    if (!checkOneOf(context_event->getType(), IEvent::TType::READ, IEvent::TType::WRITE) &&
-                        !context->protocol->control(context_event, context->map_id_pipe))
-                    {
-                        is_delete_context = true;
-//                        break; // --->
-                    }
+                auto const context_events = context->popEvents();
+                for (auto const &context_event: context_events) {
 
-                    if (context_event->getType() == IEvent::TType::CLOSE)
-                        is_delete_context = true;
+                    is_delete_context = context->getProtocol()->control(context_event, context) ||
+                        context_event->getType() == IEvent::TType::ERROR;
+                    LOGT << "is_delete_context = " << is_delete_context;
 
-                    for (auto const &i: context->map_id_pipe) {
-                        auto &pipe = i.second;
-//                        context_event->setType(IEvent::TType::READ);
-
-                        threading::sleep(500);
-                        bool result = pipe->transmit(context_event);
-                        LOGT << "TRANSMIT 1 result '" << static_cast<bool>(result) << "'";
-
-                        if (result && checkOneOf(context_event->getType(), IEvent::TType::READ, IEvent::TType::WRITE)) {
-                            // repeat event
-//                            LOGT << "handle: fd " << event->getStream()->getID() << " " << event->getType() << " repeat";
-                            result_events.push_back(event);
-                        }
-
-                        if (!result) {
-                            result = pipe->transmit(context_event);
-                            LOGT << "TRANSMIT 2 result '" << static_cast<bool>(result) << "'";
-                        }
-
-//                        if (context_event->getType() == IEvent::TType::CLOSE) {
-//                            auto result = pipe->transmit(context_event);
-//                            LOGT << "TRANSMIT 3 result '" << static_cast<bool>(result) << "'";
-//                        }
-
-
-//                        if (context_event->getType() == IEvent::TType::OPEN)
-//                            context_event->setType(IEvent::TType::READ);
-//                        if (!result) {
-////                            LOGT << "delete context due transmitting error";
-//                            is_delete_context = true;
-//                        }
-                    }
-
-                    if (!context->protocol->control(context_event, context->map_id_pipe) || is_delete_context) {
-//                        LOGT << "delete context due protocol";
-                        is_delete_context = true;
-                        context_event->setType(IEvent::TType::CLOSE);
-                        context->protocol->control(context_event, context->map_id_pipe);
-
-                        break; // --->
-                    }
+                    auto pipe = context->findPipe(context_event->getStream());
+                    if  (pipe && pipe->transmit(context_event))
+                        context->pushEvent(context_event);
                 }
             } catch (std::exception const &e) {
                 LOGE << e.what();
@@ -315,14 +358,16 @@ CSessionManager::CContextWorkerHandler::handle(
             }
 
             if (is_delete_context) {
-//                LOGT << "delete context, buffer:\n";
-                m_cache->del(context);
+                LOGT << "delete context, buffer:\n";
+                m_context_manager->removeContext(context);
+            } else {
+                next_events.splice(next_events.end(), context->popEvents());
             }
 //            threading::sleep(100);
         }
     }
 //    threading::sleep(100);
-    return result_events; // ----->
+    return next_events; // ----->
 }
 
 
