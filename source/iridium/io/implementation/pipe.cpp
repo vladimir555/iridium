@@ -119,32 +119,34 @@ bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
 //    LOGT << "fd " << event->getStream()->getID() << " event " << event->getType()
 //         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
 
-    bool result = true;
+    bool result = false;
 
     if  (m_buffers.size()  <  m_buffer_count &&
         (m_reader->getID() == 0 ||
         (m_reader->getID() == event->getStream()->getID() &&
-        (event->getType() == IEvent::TType::WRITE))))
+        (event->getType() == IEvent::TType::READ))))
     {
-//        LOGT << "do read";
+        LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
+
 //        LOGT << buffer->size();
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
-//            LOGT << "read " << buffer->size();
+            result |= true;
+            LOGT << "read " << buffer->size();
         } else {
-            result = !m_buffers.empty();
-//            LOGT << "read EOF";
+            LOGT << "read EOF";
         }
     }
 
     if  (!m_buffers.empty() &&
          (m_writer->getID() == 0 ||
         ((m_writer->getID() == event->getStream()->getID() &&
-         (event->getType() == IEvent::TType::READ)))))
+         (event->getType() == IEvent::TType::WRITE)))))
     {
-//        LOGT << "do write";
+        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
+        result |= size > 0;
         if  (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
         } else {
@@ -152,11 +154,11 @@ bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
             buffer->assign(buffer->begin() + size, buffer->end());
         }
 
-//        LOGT << "wrote " << size;
+        LOGT << "wrote " << size;
 
-//        LOGT << "buffers size " << m_buffers.size() << " " << size;
-        if (m_buffers.empty() && size <= 0)
-            result = false;
+//        LOGT << "buffers size: " << m_buffers.size() << ", size: " << size;
+//        if (m_buffers.empty() && size <= 0)
+//            result = false;
     }
 
 //    LOGT << "result = " << result;

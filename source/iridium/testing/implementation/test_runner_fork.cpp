@@ -50,26 +50,23 @@ CTestRunnerFork::TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_
 
 //    for (auto const &path: paths)
     string path = "/threading/worker.cpp";
-    {
-        LOGT << path;
+    LOGT << path;
 
-        auto process    = CProcessStream::create(m_app_path, "run --raw " + path);
-        auto handler    = CTestProtocolHandler::create();
+    auto process    = CProcessStream::create(m_app_path, "run --raw " + path);
+    auto handler    = CTestProtocolHandler::create();
 
-        map_path_handler[path] = handler;
-        m_session_manager->manage(process, handler);
+    map_path_handler[path] = handler;
+    m_session_manager->manage(process, handler);
 
-//        if (--count < 1)
-//            break;
-    }
-
-    if (!m_session_manager->wait(std::chrono::seconds(10)))
+    if (!m_session_manager->wait(std::chrono::seconds(50)))
         LOGW << "tests timeout";
+
+    LOGT << process->getState() << " " << *process->getExitCode();
 
     m_session_manager->finalize();
 
     for (auto const &path_handler: map_path_handler)
-        LOGT << "----- " << path_handler.first << ":\n"
+        LOGT << "----- " << path_handler.first << ":\n\n"
              << *path_handler.second->getBuffer() << "\n-----"
              << ", size: " << path_handler.second->getBuffer()->size();
 
@@ -107,14 +104,11 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         pipe_manager->updateWriter("process", m_stream_output);
     }
 
-//    if (event->getType() == io::IEvent::TType::READ) {
-//        LOGT << "2 true";
-//        return true;
-//    }
 
-//    bool result = checkOneOf(event->getType(), io::IEvent::TType::READ, io::IEvent::TType::WRITE, io::IEvent::TType::OPEN);
-//    LOGT << __FUNCTION__ << ", result: " << result;
-//    return result;
+
+    LOGT << __FUNCTION__
+         << "\nevent: " << event->getStream()->getID() << " " << event->getType()
+         << "\nbuffer:\n" << *m_buffer_output;
     return true;
 }
 
