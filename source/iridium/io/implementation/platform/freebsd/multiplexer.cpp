@@ -238,7 +238,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
         uint16_t flags = 0;
         if (triggered_event.ident == m_pipe_add[0])
-            flags = EV_ADD | EV_ONESHOT;// | EV_EOF;
+            flags = EV_ADD | EV_CLEAR;// | EV_EOF;
 
         if (triggered_event.ident == m_pipe_del[0])
             flags = EV_DELETE;
@@ -308,16 +308,16 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
         if  (stream) {
 //            IEvent::TType event_type = IEvent::TType::UNKNOWN;
 
-            if (triggered_event.filter & EVFILT_READ)
+            if (triggered_event.filter == EVFILT_READ)
                 events.push_back(CEvent::create(stream, IEvent::TType::READ));
 
-            if (triggered_event.filter & EVFILT_WRITE)
+            if (triggered_event.filter == EVFILT_WRITE)
                 events.push_back(CEvent::create(stream, IEvent::TType::WRITE));
 
-            if (triggered_event.flags & EV_ERROR)
+            if (triggered_event.flags == EV_ERROR)
                 events.push_back(CEvent::create(stream, IEvent::TType::ERROR));
 
-            if (triggered_event.flags & EV_EOF)
+            if (triggered_event.flags == EV_EOF)
                 events.push_back(CEvent::create(stream, IEvent::TType::CLOSE));
 
 //            LOGT << "event: " << event_type

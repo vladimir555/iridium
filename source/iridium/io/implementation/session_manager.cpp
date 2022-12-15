@@ -74,50 +74,64 @@ void CSessionManager::ContextManager::Context::remove(std::string const &name) {
 }
 
 
-void CSessionManager::ContextManager::Context::updateReader(
-    std::string const &name, IStreamReader::TSharedPtr const &reader)
+void CSessionManager::ContextManager::Context::updateStream(
+    std::string         const &name,
+    IStream::TSharedPtr const &stream,
+    IEvent::TType       const &type)
 {
     if (auto pipe = findPipe(name)) {
-        if (pipe->getReader() != reader) {
-            if (reader) {
-                auto stream_pipe  = m_map_stream_pipe.find(reader);
+        IStream::TConstSharedPtr prev_stream;
+
+        if (type == IEvent::TType::READ)
+            prev_stream = pipe->getReader();
+        else
+        if (type == IEvent::TType::WRITE)
+            prev_stream = pipe->getWriter();
+        else
+            throw std::runtime_error(
+                "context update error: pipe '" + name +
+                "', stream type '" + convert<string>(type) + "' is wrong"); // ----->
+
+        if (prev_stream != stream) {
+            if (stream) {
+                auto stream_pipe  = m_map_stream_pipe.find(stream);
                 if  (stream_pipe == m_map_stream_pipe.end()) {
-                    reader->initialize();
-                    m_map_stream_pipe[reader] = pipe;
+                    stream->initialize();
+                    m_multiplexer->subscribe(stream);
+                    m_map_stream_pipe[stream] = pipe;
                 }
             }
 
-            if (pipe->getReader())
-                m_multiplexer->unsubscribe(pipe->getReader());
-            pipe->set(reader, std::const_pointer_cast<IStreamWriter>(pipe->getWriter()));
-            m_multiplexer->subscribe(reader);
-            m_events->push(CEvent::create(reader, IEvent::TType::READ));
+            if (type == IEvent::TType::READ)
+                pipe->set(
+                    std::dynamic_pointer_cast<IStreamReader>(stream),
+                    std::const_pointer_cast<IStreamWriter>(pipe->getWriter()));
+            if (type == IEvent::TType::WRITE)
+                pipe->set(
+                    std::const_pointer_cast<IStreamReader>(pipe->getReader()),
+                    std::dynamic_pointer_cast<IStreamWriter>(stream));
+
+            if (stream->getID() > 0) {
+                LOGT << "pipe event: " << stream->getID() << " " << type;
+                m_events->push(CEvent::create(stream, type));
+            }
         }
     } else
-        throw std::runtime_error("pipe manager update error: reader '" + name + "' not found"); // ----->
+        throw std::runtime_error("context update error: pipe '" + name + "' not found"); // ----->
+}
+
+
+void CSessionManager::ContextManager::Context::updateReader(
+    std::string const &name, IStreamReader::TSharedPtr const &reader)
+{
+    updateStream(name, reader, IEvent::TType::READ);
 }
 
 
 void CSessionManager::ContextManager::Context::updateWriter(
     std::string const &name, IStreamWriter::TSharedPtr const &writer)
 {
-    if (auto pipe = findPipe(name)) {
-        if (pipe->getWriter() != writer) {
-            if (writer) {
-                auto stream_pipe  = m_map_stream_pipe.find(writer);
-                if  (stream_pipe == m_map_stream_pipe.end()) {
-                    writer->initialize();
-                    m_map_stream_pipe[writer] = pipe;
-                }
-            }
-            if (pipe->getWriter())
-                m_multiplexer->unsubscribe(pipe->getWriter());
-            pipe->set(std::const_pointer_cast<IStreamReader>(pipe->getReader()), writer);
-            m_multiplexer->subscribe(writer);
-            m_events->push(CEvent::create(writer, IEvent::TType::WRITE));
-        }
-    } else
-        throw std::runtime_error("pipe manager update error: writer '" + name + "' not found"); // ----->
+    updateStream(name, writer, IEvent::TType::WRITE);
 }
 
 
@@ -145,7 +159,8 @@ void CSessionManager::ContextManager::Context::pushEvent(IEvent::TSharedPtr cons
 
 
 std::list<IEvent::TSharedPtr> CSessionManager::ContextManager::Context::popEvents() {
-    return m_events->pop(false); // ----->
+    auto events = m_events->pop(false); // ----->
+    return events;
 }
 
 
@@ -284,7 +299,6 @@ void CSessionManager::CMultiplexerThreadHandler::finalize() {}
 
 
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
-//    LOGT << "CMultiplexerThreadHandler loop";
     while (is_running)
         m_context_worker->push(m_multiplexer->waitEvents());
 }
@@ -309,9 +323,12 @@ void CSessionManager::CEventRepeaterHandler::finalize() {}
 
 
 void CSessionManager::CEventRepeaterHandler::run(std::atomic<bool> &is_running) {
-    LOGT << __FUNCTION__ << " loop";
-    while (is_running)
-        m_context_worker->push(m_context_worker->pop(is_running));
+    while (is_running) {
+        auto events = m_context_worker->pop();
+        for (auto const &event: events)
+            LOGT << "loop: " << event->getStream()->getID() << " " << event->getType();
+        m_context_worker->push(events);
+    }
 }
 
 
@@ -326,48 +343,71 @@ CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::TInputItems const &events)
 {
     // events to repeat handling
-    IContextWorker::TOutputItems next_events;
+    IContextWorker::TOutputItems events_to_repeat;
 
     for (auto const &event: events) {
-//        LOGT << "handle event: " << event->getType();
-
-//        if (event->getType() == IEvent::TType::OPEN)
-//            event->getStream()->initialize();
-
-//        auto id = event->getStream()->getID();
-//        LOGT << "handle: fd " << id << " " << event->getType();
-
-        // try to
+        LOGT << "event: " << event->getType();
         if (auto context = m_context_manager->acquireContext(event)) {
-            bool is_delete_context = false;
+            bool is_valid_context = false;
             try {
-                auto const context_events = context->popEvents();
+                auto context_events = context->popEvents();
+//                LOGT << "!!!!! 1: " << context_events.size();
+//                std::unique(context_events.begin(), context_events.end(),
+//                    [] (auto const &left, auto const &right) {
+//                        return
+//                            left->getStream()->getID() == right->getStream()->getID() &&
+//                            left->getType()            == right->getType();
+//                    }
+//                );
+//                LOGT << "!!!!! 2: " << context_events.size();
                 for (auto const &context_event: context_events) {
 
-                    is_delete_context = context->getProtocol()->control(context_event, context) ||
-                        context_event->getType() == IEvent::TType::ERROR;
-                    LOGT << "is_delete_context = " << is_delete_context;
+                    is_valid_context = context->getProtocol()->control(context_event, context);
+                    LOGT << "is_valid_context = " << is_valid_context;
+
+                    if (context_event->getType() == IEvent::TType::OPEN)
+                        continue;
+
+                    LOGT << "event: " << context_event->getStream()->getID() << " " << context_event->getType();
 
                     auto pipe = context->findPipe(context_event->getStream());
-                    if  (pipe && pipe->transmit(context_event))
-                        context->pushEvent(context_event);
+                    if  (pipe) {
+                        auto result = pipe->transmit(context_event);
+                        LOGT << "tramsmit: " << result;
+                        result = false;
+                        if (result &&
+                            checkOneOf(
+                                event->getType(),
+                                IEvent::TType::READ,
+                                IEvent::TType::WRITE,
+                                IEvent::TType::CLOSE) &&
+                            event->getStream()->getID() > 0)
+                        {
+                            LOGT << "repeat: " << context_event->getStream()->getID() << " " << context_event->getType();
+                            context->pushEvent(context_event);
+                        }
+                    } else {
+                        LOGT << "pipe not found: fd " << context_event->getStream()->getID();
+                    }
                 }
             } catch (std::exception const &e) {
                 LOGE << e.what();
-                is_delete_context = true;
+                is_valid_context = false;
             }
 
-            if (is_delete_context) {
-                LOGT << "delete context, buffer:\n";
-                m_context_manager->removeContext(context);
+            if (is_valid_context) {
+                events_to_repeat.splice(events_to_repeat.end(), context->popEvents());
             } else {
-                next_events.splice(next_events.end(), context->popEvents());
+                m_context_manager->removeContext(context);
             }
-//            threading::sleep(100);
+            threading::sleep(100);
+            m_context_manager->releaseContext(context);
         }
     }
 //    threading::sleep(100);
-    return next_events; // ----->
+//    for (auto const &event: events_to_repeat)
+//        LOGT << "repeat: " << event->getStream()->getID() << " " << event->getType();
+    return events_to_repeat; // ----->
 }
 
 

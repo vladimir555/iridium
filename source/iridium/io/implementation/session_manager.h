@@ -18,52 +18,6 @@ namespace io {
 namespace implementation {
 
 
-//class ContextManager {
-//public:
-//    DEFINE_CREATE(ContextManager)
-
-//    ContextManager();
-//    virtual ~ContextManager();
-
-////    void manage();
-
-//    class Context {
-//    public:
-//        DEFINE_CREATE(Context)
-
-//        Context(
-//            IMultiplexer::TSharedPtr    const &multiplexer,
-//            ContextManager::TSharedPtr  const &context_manager,
-//            IProtocol::TSharedPtr       const &protocol);
-//        virtual ~Context();
-
-//        IPipe::TSharedPtr create(std::string const &name);
-//        void remove(std::string const &name);
-//        void updateReader(std::string const &name, IStreamReader::TSharedPtr const &reader);
-//        void updateWriter(std::string const &name, IStreamWriter::TSharedPtr const &writer);
-//        std::list<IEvent::TSharedPtr> popPipeEvents();
-
-//    private:
-//        IPipe::TSharedPtr findPipe(std::string const &name) const;
-
-//        IMultiplexer::TSharedPtr
-//            m_multiplexer;
-//        std::unordered_map<std::string, IPipe::TSharedPtr>
-//            m_map_name_pipe;
-//        std::list<IEvent::TSharedPtr>
-//            m_pipe_events;
-//        IProtocol::TSharedPtr
-//            m_protocol;
-//    };
-
-//private:
-//    typedef std::shared_ptr<std::unordered_map<IStream::TSharedPtr, Context::TSharedPtr> > TMapStreamContextPtr;
-//    TMapStreamContextPtr
-//        m_map_stream_context;
-//};
-
-
-
 class CSessionManager: public ISessionManager {
 public:
     DEFINE_IMPLEMENTATION(CSessionManager);
@@ -95,6 +49,7 @@ private:
 
             IPipe::TSharedPtr   create          (std::string const &name) override;
             void                remove          (std::string const &name) override;
+            void                updateStream    (std::string const &name, IStream::TSharedPtr const &stream, IEvent::TType const &type);
             void                updateReader    (std::string const &name, IStreamReader::TSharedPtr const &reader) override;
             void                updateWriter    (std::string const &name, IStreamWriter::TSharedPtr const &writer) override;
 
