@@ -48,20 +48,21 @@ CTestRunnerFork::TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_
 
 //    int count = 2;
 
-//    for (auto const &path: paths)
-    string path = "/threading/worker.cpp";
-    LOGT << path;
+    for (auto const &path: paths) {
+//    string path = "/threading/worker.cpp";
+        LOGT << path;
 
-    auto process    = CProcessStream::create(m_app_path, "run --raw " + path);
-    auto handler    = CTestProtocolHandler::create();
+        auto process    = CProcessStream::create(m_app_path, "run --raw " + path);
+        auto handler    = CTestProtocolHandler::create(process);
 
-    map_path_handler[path] = handler;
-    m_session_manager->manage(process, handler);
+        map_path_handler[path] = handler;
+        m_session_manager->manage(process, handler);
+    }
 
     if (!m_session_manager->wait(std::chrono::seconds(50)))
         LOGW << "tests timeout";
 
-    LOGT << process->getState() << " " << *process->getExitCode();
+//    LOGT << process->getState() << " " << *process->getExitCode();
 
     m_session_manager->finalize();
 
@@ -82,11 +83,17 @@ void CTestRunnerFork::scan(
     for (auto const &child: *node) {
         if (child->hasChilds() && !child->begin()->get()->hasChilds()) {
             paths.push_back(path + "/" + child->getName());
-            LOGT << path + "/" + child->getName();
+//            LOGT << path + "/" + child->getName();
         }
         scan(child, path + "/" + child->getName(), paths);
     }
 }
+
+
+CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(system::IProcess::TSharedPtr const &process)
+:
+    m_process(process)
+{}
 
 
 bool CTestRunnerFork::CTestProtocolHandler::control(
@@ -106,10 +113,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
 
 
-    LOGT << __FUNCTION__
-         << "\nevent: " << event->getStream()->getID() << " " << event->getType()
-         << "\nbuffer:\n" << *m_buffer_output;
-    return true;
+//    LOGT << __FUNCTION__
+//         << "\nevent: " << event->getStream()->getID() << " " << event->getType()
+//         << "\nbuffer:\n" << *m_buffer_output;
+    return !static_cast<bool>(m_process->getExitCode());
 }
 
 

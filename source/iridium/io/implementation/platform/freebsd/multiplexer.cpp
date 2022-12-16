@@ -177,7 +177,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     if (fd <= 0)
         return;
 
-    LOGT << __FUNCTION__ << " fd: " << fd;
+//    LOGT << __FUNCTION__ << " fd: " << fd;
 
     // todo: optimize uintptr_t
     auto    result  = write(m_pipe_add[1], &fd, 8);
@@ -198,7 +198,7 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
     if (fd <= 0)
         return;
 
-    LOGT << __FUNCTION__ << " fd: " << fd;
+//    LOGT << __FUNCTION__ << " fd: " << fd;
 
 //    auto    result  = write(m_pipe_del[1], &fd, 8);
 //    LOGT << "unsubscribe write result: " << result;
@@ -228,13 +228,13 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
 
-        LOGT << "triggered_event: ident " << triggered_event.ident
-             << ", flags " << TEventFlag(triggered_event.flags).convertToFlagsString()
-             << ", filter " << (int16_t)triggered_event.filter
-             << ", filter " << TEventFilter(triggered_event.filter)
-             << ", data " << triggered_event.data
-             << ", fflags " << triggered_event.fflags
-             << ", udata " << (uint64_t)triggered_event.udata;
+//        LOGT << "triggered_event: ident " << triggered_event.ident
+//             << ", flags " << TEventFlag(triggered_event.flags).convertToFlagsString()
+//             << ", filter " << (int16_t)triggered_event.filter
+//             << ", filter " << TEventFilter(triggered_event.filter)
+//             << ", data " << triggered_event.data
+//             << ", fflags " << triggered_event.fflags
+//             << ", udata " << (uint64_t)triggered_event.udata;
 
         uint16_t flags = 0;
         if (triggered_event.ident == m_pipe_add[0])
@@ -340,11 +340,11 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
         m_kqueue = 0;
     }
 
-    LOGT << __FUNCTION__ << ", events:";
+//    LOGT << __FUNCTION__ << ", events:";
 //    string events_str;
-    for (auto const &event: events) {
-        LOGT << event->getStream()->getID() << " " << event->getType();
-    }
+//    for (auto const &event: events) {
+//        LOGT << event->getStream()->getID() << " " << event->getType();
+//    }
 
     return events; // ----->
 }

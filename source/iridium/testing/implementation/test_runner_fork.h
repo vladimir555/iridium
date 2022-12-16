@@ -4,6 +4,7 @@
 
 #include "iridium/testing/test_runner.h"
 #include "iridium/io/session.h"
+#include "iridium/system/process.h"
 
 
 namespace iridium {
@@ -25,11 +26,13 @@ private:
     class CTestProtocolHandler: public io::IProtocol {
     public:
         DEFINE_IMPLEMENTATION(CTestProtocolHandler)
+        CTestProtocolHandler(system::IProcess::TSharedPtr const &process);
         bool control(
             io::IEvent::TSharedPtr const &event,
             io::IPipeManager::TSharedPtr const &pipe_manager) override;
         io::Buffer::TSharedPtr getBuffer() const;
     private:
+        system::IProcess::TSharedPtr    m_process;
         io::IStreamWriter::TSharedPtr   m_stream_output;
         io::Buffer::TSharedPtr          m_buffer_output;
     };
