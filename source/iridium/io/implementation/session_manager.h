@@ -33,10 +33,12 @@ private:
     public:
         DEFINE_CREATE(ContextManager)
 
-        ContextManager(IMultiplexer::TSharedPtr const &multiplexer);
+        ContextManager(
+            IMultiplexer::TSharedPtr const &multiplexer,
+            std::condition_variable        &cv,
+            std::atomic<size_t>            &protocol_count);
         virtual ~ContextManager();
 
-        friend class Context;
         class Context: public IPipeManager {
         public:
             DEFINE_CREATE(Context)
@@ -75,10 +77,8 @@ private:
                 m_events;
         };
 
-//    protected:
         Context::TSharedPtr acquireContext  (IEvent::TSharedPtr  const &event);
         void                releaseContext  (Context::TSharedPtr const &context);
-//        void                createContext   (IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);
         void                updateContext   (IStream::TSharedPtr const &stream, Context::TSharedPtr const &context);
         void                removeContext   (Context::TSharedPtr const &context);
 
@@ -91,6 +91,10 @@ private:
             m_map_context_streams;
         std::unordered_set<Context::TSharedPtr>
             m_acquired_contexts;
+        std::condition_variable
+            &m_cv;
+        std::atomic<size_t>
+            &m_protocol_count;
     };
 
     typedef threading::IWorker<IEvent::TSharedPtr> IContextWorker;

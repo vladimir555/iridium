@@ -126,16 +126,16 @@ bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
         (m_reader->getID() == event->getStream()->getID() &&
         (event->getType() == IEvent::TType::READ))))
     {
-        LOGT << "do read";
+//        LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
 
 //        LOGT << buffer->size();
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
             result |= true;
-            LOGT << "read " << buffer->size();
+//            LOGT << "read " << buffer->size();
         } else {
-            LOGT << "read EOF";
+//            LOGT << "read EOF";
         }
     }
 
@@ -144,7 +144,7 @@ bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
         ((m_writer->getID() == event->getStream()->getID() &&
          (event->getType() == IEvent::TType::WRITE)))))
     {
-        LOGT << "do write";
+//        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
         result |= size > 0;
         if  (size == m_buffers.front()->size()) {
@@ -154,7 +154,7 @@ bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
             buffer->assign(buffer->begin() + size, buffer->end());
         }
 
-        LOGT << "wrote " << size;
+//        LOGT << "wrote " << size;
 
 //        LOGT << "buffers size: " << m_buffers.size() << ", size: " << size;
 //        if (m_buffers.empty() && size <= 0)
