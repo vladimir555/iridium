@@ -9,6 +9,8 @@
 #include "mutex.h"
 #include "iridium/smart_ptr.h"
 
+#include <chrono>
+
 
 namespace iridium {
 namespace threading {
@@ -17,13 +19,11 @@ namespace threading {
 ///
 class ICondition {
 public:
-    DEFINE_SMART_PTR(ICondition)
-    ///
-    virtual ~ICondition() = default;
+    DEFINE_INTERFACE(ICondition)
     ///
     virtual void wait() const = 0;
     ///
-    virtual void wait(int const &timeout_sec) const = 0;
+    virtual bool wait(std::chrono::nanoseconds const &timeout) const = 0;
     ///
     virtual void notifyOne() const = 0;
     ///

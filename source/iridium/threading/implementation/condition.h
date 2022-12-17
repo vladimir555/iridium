@@ -27,7 +27,7 @@ public:
     ///
     virtual void wait() const override;
     ///
-    virtual void wait(int const &timeout_sec) const override;
+    virtual bool wait(std::chrono::nanoseconds const &timeout) const override;
     ///
     virtual void notifyOne() const override;
     ///

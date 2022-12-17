@@ -62,7 +62,7 @@ CTestRunnerFork::TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_
     m_session_manager->finalize();
 
     for (auto const &path_handler: map_path_handler) {
-        LOGI << "\n" << path_handler.first << ":\n\n"
+        LOGI << "\n" << path_handler.first << ":\n"
              << *path_handler.second->getBuffer();
         string passed, failed;
 //        for (auto const &)
