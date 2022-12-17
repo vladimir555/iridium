@@ -145,8 +145,10 @@ void CProcessStream::initialize() {
     m_exit_code.reset();
 
     auto state = getState();
-    if  (state != TState::RUNNING)
-        throw std::runtime_error("process " + m_command_line + " is not running, state " + convert<string>(state)); // ----->
+    if  (state.condition != TState::TCondition::RUNNING)
+        throw std::runtime_error(
+            "process " + m_command_line +
+            " is not running, process condition: " + convert<string>(state.condition)); // ----->
 }
 
 
@@ -156,10 +158,10 @@ void CProcessStream::finalize() {
         return;
 
     auto timeout = system_clock::now() + DEFAULT_PROCESS_TIMEOUT;
-    while (system_clock::now() < timeout && getState() == TState::RUNNING)
+    while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING)
         std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
 
-    if (getState() == TState::RUNNING) {
+    if (getState().condition == TState::TCondition::RUNNING) {
         LOGW << "kill pid " << m_pid << " " << m_command_line;
         kill(m_pid, SIGKILL);
     }
@@ -175,20 +177,14 @@ void CProcessStream::finalize() {
 }
 
 
-std::shared_ptr<int> CProcessStream::getExitCode() {
-    getState();
-    return m_exit_code;
-}
-
-
-CProcessStream::TState CProcessStream::getState() {
-    TState state = TState::UNKNOWN;
+IProcess::TState CProcessStream::getState() {
+    TState::TCondition condition = TState::TCondition::UNKNOWN;
 
     if (m_pid != 0) {
         int  pid_state = 0;
         auto result = waitpid(m_pid, &pid_state, WNOHANG);
         if  (result == 0 && pid_state == 0)
-            state = TState::RUNNING;
+            condition = TState::TCondition::RUNNING;
 
         if  (result > 0) {
             m_state_internal.is_exited        = WIFEXITED     (pid_state);
@@ -227,13 +223,16 @@ CProcessStream::TState CProcessStream::getState() {
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);
-        state = TState::DONE;
+        condition = TState::TCondition::DONE;
     }
 
     if (!m_state_internal.is_exited &&  m_state_internal.is_signaled)
-        state = TState::CRASHED;
+        condition = TState::TCondition::CRASHED;
 
-    return state;
+    return {
+        .condition = condition,
+        .exit_code = m_exit_code
+    };
 }
 
 

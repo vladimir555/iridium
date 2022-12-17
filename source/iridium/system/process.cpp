@@ -1,4 +1,4 @@
 #include "process.h"
 
 
-IMPLEMENT_ENUM(iridium::system::IProcess::TState)
+IMPLEMENT_ENUM(iridium::system::IProcess::TState::TCondition)

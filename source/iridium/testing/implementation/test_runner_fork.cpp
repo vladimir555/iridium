@@ -6,7 +6,6 @@
 #include "iridium/system/implementation/process.h"
 
 #include "iridium/logging/logger.h"
-
 #include "iridium/items.h"
 
 
@@ -14,6 +13,7 @@ using iridium::io::implementation::CSessionManager;
 using iridium::io::implementation::CPipe;
 using iridium::io::implementation::CStreamWriterBuffer;
 using iridium::system::implementation::CProcessStream;
+using iridium::system::IProcess;
 
 using std::string;
 using std::list;
@@ -46,10 +46,7 @@ CTestRunnerFork::TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_
 
     std::unordered_map<std::string, CTestProtocolHandler::TSharedPtr> map_path_handler;
 
-//    int count = 2;
-
     for (auto const &path: paths) {
-//    string path = "/threading/worker.cpp";
         LOGT << path;
 
         auto process    = CProcessStream::create(m_app_path, "run --raw " + path);
@@ -62,14 +59,14 @@ CTestRunnerFork::TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_
     if (!m_session_manager->wait(std::chrono::seconds(50)))
         LOGW << "tests timeout";
 
-//    LOGT << process->getState() << " " << *process->getExitCode();
-
     m_session_manager->finalize();
 
-    for (auto const &path_handler: map_path_handler)
-        LOGT << "----- " << path_handler.first << ":\n\n"
-             << *path_handler.second->getBuffer() << "\n-----"
-             << ", size: " << path_handler.second->getBuffer()->size();
+    for (auto const &path_handler: map_path_handler) {
+        LOGI << "\n" << path_handler.first << ":\n\n"
+             << *path_handler.second->getBuffer();
+        string passed, failed;
+//        for (auto const &)
+    }
 
     return result;
 }
@@ -116,12 +113,18 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //    LOGT << __FUNCTION__
 //         << "\nevent: " << event->getStream()->getID() << " " << event->getType()
 //         << "\nbuffer:\n" << *m_buffer_output;
-    return !static_cast<bool>(m_process->getExitCode());
+    m_state = m_process->getState();
+    return !m_state.exit_code;
 }
 
 
 io::Buffer::TSharedPtr CTestRunnerFork::CTestProtocolHandler::getBuffer() const {
     return m_buffer_output;
+}
+
+
+IProcess::TState CTestRunnerFork::CTestProtocolHandler::getExitState() const {
+    return m_state; // ----->
 }
 
 

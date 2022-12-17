@@ -101,24 +101,24 @@ int Command::run(std::string &output) {
         state = m_process->getState();
 
         if (now > stop_time)
-            state  = IProcess::TState::TIMEOUT;
+            state.condition  = IProcess::TState::TCondition::TIMEOUT;
 
-        if (state != IProcess::TState::RUNNING)
+        if (state.condition != IProcess::TState::TCondition::RUNNING)
             break; // --->
     }
 
     m_process->finalize();
     m_event_provider->unsubscribe(m_process);
 
-    if (state == IProcess::TState::DONE) {
-        auto exit_code = m_process->getExitCode();
-        return exit_code ? *exit_code : -1; // ----->
+    if (state.condition == IProcess::TState::TCondition::DONE) {
+        auto state = m_process->getState();
+        return state.exit_code ? *state.exit_code : -1; // ----->
     } else {
         string error = "execution command '" + m_command_line + "' error: ";
-        if (state == IProcess::TState::TIMEOUT)
+        if (state.condition == IProcess::TState::TCondition::TIMEOUT)
             error += "timeout " + convert<string>(m_timeout);
         else
-            error += "wrong state " + convert<string>(state);
+            error += "wrong process condition " + convert<string>(state.condition);
 
         throw Exception(error, state);
     }

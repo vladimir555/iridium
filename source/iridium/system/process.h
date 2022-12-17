@@ -14,10 +14,13 @@ class IProcess: virtual public io::IStreamPort {
 public:
     DEFINE_INTERFACE(IProcess)
 
-    DEFINE_ENUM(TState, DONE, CRASHED, INTERRUPTED, RUNNING, TIMEOUT)
+    struct TState {
+        DEFINE_ENUM(TCondition, DONE, CRASHED, INTERRUPTED, RUNNING, TIMEOUT);
+        TCondition              condition;
+        std::shared_ptr<int>    exit_code;
+    };
 
     virtual TState getState() = 0;
-    virtual std::shared_ptr<int> getExitCode() = 0;
 };
 
 
