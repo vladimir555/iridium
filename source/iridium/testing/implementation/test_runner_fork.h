@@ -31,8 +31,10 @@ private:
             io::IEvent::TSharedPtr const &event,
             io::IPipeManager::TSharedPtr const &pipe_manager) override;
         io::Buffer::TSharedPtr getBuffer() const;
+        system::IProcess::TState getExitState() const;
     private:
         system::IProcess::TSharedPtr    m_process;
+        system::IProcess::TState        m_state;
         io::IStreamWriter::TSharedPtr   m_stream_output;
         io::Buffer::TSharedPtr          m_buffer_output;
     };

@@ -28,7 +28,6 @@ public:
     void finalize()     override;
 
     TState getState()   override;
-    std::shared_ptr<int> getExitCode() override;
 
 private:
     struct TStateInternal {

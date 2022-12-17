@@ -264,7 +264,7 @@ TEST(OK) {
         LOGT << result;
     } catch (Command::Exception const &e) {
         LOGE << "error: " << e.what();
-        LOGE << "state: " << e.getState();
+        LOGE << "state: " << e.getState().condition;
         LOGT << "output: " << output;
     }
 }

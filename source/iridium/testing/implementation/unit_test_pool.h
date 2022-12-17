@@ -35,7 +35,7 @@ public:
 
 private:
     std::string                     m_app_path;
-    io::IMultiplexer::TSharedPtr  m_event_provider;
+    io::IMultiplexer::TSharedPtr    m_event_provider;
 };
 
 
