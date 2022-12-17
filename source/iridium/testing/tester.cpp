@@ -74,16 +74,16 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 
         auto result = test_runner->run(root);
 
-        LOGI << "\npassed: " << result.passed.size()
-             << "\nfailed: " << result.failed.size()
-             << "\ntotal:  " << m_map_path_test.size();
-
         if (!result.failed.empty()) {
             string tests;
             for (auto const &line: result.failed)
                 tests += line + "\n\n";
             LOGE << "\n\nfailed tests:\n" + tests;
         }
+
+        LOGI << "\npassed: " << result.passed.size()
+             << "\nfailed: " << result.failed.size()
+             << "\ntotal:  " << m_map_path_test.size();
 
         return result.failed.empty(); // ----->
     } else {

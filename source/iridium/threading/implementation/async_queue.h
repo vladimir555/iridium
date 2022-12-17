@@ -50,6 +50,8 @@ public:
     ///
     std::list<TItem> pop(bool const &is_waiting = true) override;
     ///
+    std::list<TItem> pop(std::chrono::nanoseconds const &timeout) override;
+    ///
     void interrupt() override;
     ///
     bool empty() const override;
@@ -105,9 +107,20 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
-//    std::cout << "pop " << is_waiting << " " << m_is_waiting << " " << m_is_empty << std::endl;
     if (is_waiting && m_is_waiting && m_is_empty)
         m_condition->wait();
+
+    LOCK_SCOPE_FAST
+    m_is_empty = true;
+    return std::move(m_items);
+}
+
+
+template<typename TItem>
+std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout) {
+    if (m_is_waiting && m_is_empty)
+        if (!m_condition->wait(timeout))
+            return {};
 
     LOCK_SCOPE_FAST
     m_is_empty = true;
