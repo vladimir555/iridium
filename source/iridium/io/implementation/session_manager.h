@@ -148,7 +148,7 @@ private:
     std::condition_variable
         m_cv;
     std::atomic<size_t>
-        m_protocol_count;
+        m_session_count;
 
     IMultiplexer::TSharedPtr
         m_multiplexer;

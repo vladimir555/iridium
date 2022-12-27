@@ -5,9 +5,20 @@
 #include "iridium/parsing/node_type.h"
 #include "test.h"
 
+#include "iridium/parsing/serialization/node.h"
+
 
 namespace iridium {
 namespace testing {
+
+
+DEFINE_ROOT_NODE_BEGIN(TestResult)
+    DEFINE_NODE_LIST_BEGIN(Test)
+        DEFINE_ATTRIBUTE(std::string, Path, "")
+        DEFINE_ATTRIBUTE(std::string, Error, "")
+        DEFINE_ATTRIBUTE(std::string, Output, "")
+    DEFINE_NODE_LIST_END(Test)
+DEFINE_ROOT_NODE_END()
 
 
 class ITestRunner {
@@ -15,12 +26,12 @@ public:
     DEFINE_INTERFACE(ITestRunner)
     typedef parsing::INodeType<ITest *> INodeTest;
 
-    struct TResult {
-        std::list<std::string> passed;
-        std::list<std::string> failed;
-    };
+//    struct TResult {
+//        std::list<std::string> passed;
+//        std::list<std::string> failed;
+//    };
 
-    virtual TResult run(INodeTest::TSharedPtr const &node_test) = 0;
+    virtual TTestResult run(INodeTest::TSharedPtr const &node_test) = 0;
 };
 
 

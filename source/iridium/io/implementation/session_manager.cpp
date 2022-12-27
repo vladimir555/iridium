@@ -176,11 +176,11 @@ IProtocol::TSharedPtr CSessionManager::ContextManager::Context::getProtocol() co
 
 CSessionManager::CSessionManager()
 :
-    m_protocol_count(0),
+    m_session_count(0),
     m_multiplexer(
         CMultiplexer::create()),
     m_context_manager(
-        ContextManager::create(m_multiplexer, m_cv, m_protocol_count)),
+        ContextManager::create(m_multiplexer, m_cv, m_session_count)),
     m_context_worker(
         CWorkerPool<IEvent::TSharedPtr>::create(
             "stream_worker",
@@ -200,7 +200,7 @@ void CSessionManager::initialize() {
     m_multiplexer_thread->initialize();
     m_event_repeater_thread->initialize();
     m_context_worker->initialize();
-    m_protocol_count = 0;
+    m_session_count = 0;
 }
 
 
@@ -210,8 +210,8 @@ void CSessionManager::finalize() {
     m_multiplexer_thread->finalize();
     m_event_repeater_thread->finalize();
 
-    if (m_protocol_count > 0)
-        LOGW << "running protocols left: " << static_cast<size_t>(m_protocol_count);
+    if (m_session_count > 0)
+        LOGW << "running session count left: " << static_cast<size_t>(m_session_count);
 }
 
 
@@ -223,7 +223,7 @@ void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::T
         m_context_worker->push(CEvent::create(stream, IEvent::TType::OPEN));
     } else
         throw std::runtime_error("session manage error: null stream or protocol"); // ----->
-    m_protocol_count++;
+    m_session_count++;
 //    LOGT << "protocol count: " << static_cast<size_t>(m_protocol_count);
 }
 
@@ -231,7 +231,7 @@ void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::T
 bool CSessionManager::wait(std::chrono::nanoseconds const &timeout) {
     std::unique_lock<std::mutex> l(m_cv_mutex);
 
-    auto * const protocol_count = &m_protocol_count;
+    auto * const protocol_count = &m_session_count;
 
     return m_cv.wait_for(l, timeout,
         [protocol_count] {

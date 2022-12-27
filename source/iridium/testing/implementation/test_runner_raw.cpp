@@ -14,42 +14,44 @@ namespace testing {
 namespace implementation {
 
 
-CTestRunnerRaw::TResult CTestRunnerRaw::run(INodeTest::TSharedPtr const &node_test) {
-    TResult result;
-    run(result.passed, result.failed, node_test);
+TTestResult CTestRunnerRaw::run(INodeTest::TSharedPtr const &node_test) {
+    TTestResult result;
+    run(result, node_test);
     return result;
 }
 
 
 void CTestRunnerRaw::run(
-    std::list<std::string>        &passed_paths,
-    std::list<std::string>        &failed_paths,
+    TTestResult                   &results,
     INodeTest::TSharedPtr   const &node,
     std::string             const &path)
 {
     for (auto const &node_child : *node) {
         string run_path = path + "/" + node_child->getName();
+
+        TTestResult::TTest result;
+        result.Path = run_path;
+
         if (node_child->getValue()) {
             try {
                 LOGI << "RUN  " << run_path;
                 node_child->getValue()->run();
                 LOGI << "OK   " << run_path;
-                passed_paths.push_back(run_path);
             } catch (Exception const &e) {
-                string error = run_path + "\n" + e.what();
-                failed_paths.push_back(error);
-                LOGE << "FAIL " << error;
+                result.Error = e.what();
             } catch (std::exception const &e) {
-                string error = run_path + "\n" + e.what();
-                failed_paths.push_back(error);
-                LOGE << "FAIL " << error;
+                result.Error = e.what();
             } catch (...) {
-                string error = run_path + "\nunknown exception";
-                failed_paths.push_back(error);
-                LOGE << "FAIL " << error;
+                result.Error = "unknown exception";
             }
+            if (!result.Error.get().empty()) {
+                LOGE << result.Error.get();
+                LOGE << "FAIL " << run_path;
+            }
+
+            results.Test.add(result);
         } else
-            run(passed_paths, failed_paths, node_child, path + "/" + node_child->getName());
+            run(results, node_child, path + "/" + node_child->getName());
     }
 }
 
