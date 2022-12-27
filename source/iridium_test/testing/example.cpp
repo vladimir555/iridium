@@ -268,3 +268,11 @@ TEST(OK) {
         LOGT << "output: " << output;
     }
 }
+
+
+TEST(timeout) {
+    LOGT << "sleep ...";
+//    iridium::threading::sleep(10000);
+    LOGT << "sleep OK";
+}
+

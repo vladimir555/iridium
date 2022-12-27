@@ -15,11 +15,11 @@ public:
     CTestRunnerRaw() = default;
     DEFINE_IMPLEMENTATION(CTestRunnerRaw)
 
-    TResult run(INodeTest::TSharedPtr const &node_test) override;
+    TTestResult run(INodeTest::TSharedPtr const &node_test) override;
+
 private:
     void run(
-        std::list<std::string>        &passed_paths,
-        std::list<std::string>        &failed_paths,
+        TTestResult                   &test_results,
         INodeTest::TSharedPtr   const &node,
         std::string             const &path = "");
 };

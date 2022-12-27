@@ -10,6 +10,7 @@
 
 #include "iridium/testing/implementation/test_runner_raw.h"
 #include "iridium/testing/implementation/test_runner_fork.h"
+#include "iridium/parsing/implementation/parser_json.h"
 
 
 using std::string;
@@ -19,6 +20,8 @@ using iridium::parsing::INodeType;
 using iridium::parsing::implementation::CNodeType;
 using iridium::testing::implementation::CTestRunnerRaw;
 using iridium::testing::implementation::CTestRunnerFork;
+
+using iridium::parsing::implementation::CJSONParser;
 
 
 namespace iridium {
@@ -65,27 +68,36 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         ITestRunner::TSharedPtr test_runner;
 
         // todo: args
-        std::chrono::milliseconds timeout(1000);
+        std::chrono::milliseconds timeout(5000);
 
         if (is_raw)
             test_runner = CTestRunnerRaw::create();
         else
-            test_runner = CTestRunnerFork::create(args[0], 1/*std::thread::hardware_concurrency()*/, timeout);
+            test_runner = CTestRunnerFork::create(args[0], timeout);
 
         auto result = test_runner->run(root);
 
-        if (!result.failed.empty()) {
-            string tests;
-            for (auto const &line: result.failed)
-                tests += line + "\n\n";
-            LOGE << "\n\nfailed tests:\n" + tests;
+        size_t failed_count = 0;
+        size_t passed_count = 0;
+
+        if (is_raw) {
+            auto json = CJSONParser::create()->compose(result.getNode());
+            LOGI << "\n\n" << json << "\n" << json.size();
+        } else {
+            string failed_tests;
+            for (auto const &line: result.Test) {
+                if (!line.Error.get().empty())
+                    failed_tests += line.Error.get() + "\n\n";
+            }
+
+            LOGE << "\n\nfailed tests:\n" + failed_tests;
+
+            LOGI << "\npassed: " << passed_count
+                 << "\nfailed: " << failed_count
+                 << "\ntotal:  " << m_map_path_test.size();
+
         }
-
-        LOGI << "\npassed: " << result.passed.size()
-             << "\nfailed: " << result.failed.size()
-             << "\ntotal:  " << m_map_path_test.size();
-
-        return result.failed.empty(); // ----->
+        return failed_count == 0; // ----->
     } else {
         LOGI << "\nusage:\n"
             << args[0] << " help\n"

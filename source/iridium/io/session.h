@@ -15,20 +15,6 @@ namespace iridium {
 namespace io {
 
 
-//class ISession {
-//public:
-//    DEFINE_INTERFACE(ISession)
-//    virtual void set(int const &index, IPipeStreams::TSharedPtr const &pipe) = 0;
-//    virtual void del(int const &index) = 0;
-//};
-
-
-//class ISessionHandler: public ISession {
-//public:
-//    virtual void process(IEvent::TSharedPtr const &event) = 0;
-//};
-
-
 class IPipeManager {
 public:
     DEFINE_INTERFACE(IPipeManager)

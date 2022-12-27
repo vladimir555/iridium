@@ -119,7 +119,7 @@ void CProcessStream::initialize() {
 
     argv[1 + m_args.size()] = nullptr;
 
-    LOGT << "start process: " << m_command_line;
+//    LOGT << "start process: " << m_command_line;
     posix_spawnattr_t attr = { 0 };
 
 //#ifdef POSIX_SPAWN_SETSID
@@ -218,8 +218,8 @@ IProcess::TState CProcessStream::getState() {
     if (m_state_internal.is_continued)
         process_state_str += " continued";
 
-    if (!process_state_str.empty())
-        LOGT << "process state: " << process_state_str;
+//    if (!process_state_str.empty())
+//        LOGT << "process state: " << process_state_str;
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);
