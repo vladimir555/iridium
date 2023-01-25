@@ -61,7 +61,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
         map_path_handler[path] = handler;
         m_session_manager->manage(process, handler);
-        LOGT << "process start: " << path;
+//        LOGT << "process start: " << path;
     }
 
 //    if (!m_session_manager->wait(std::chrono::seconds(50)))
