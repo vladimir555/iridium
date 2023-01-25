@@ -30,7 +30,7 @@ Command::Exception::Exception(std::string const &what, IProcess::TState const &s
 {}
 
 
-char const *Command::Exception::what() const _NOEXCEPT {
+char const *Command::Exception::what() const noexcept {
     return m_what.c_str();
 }
 

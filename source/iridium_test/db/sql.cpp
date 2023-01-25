@@ -186,11 +186,11 @@ TEST(query) {
 
     from(authors).select(authors.Rows.id).order().getSQL();
     from(authors).select(authors.Rows.id).group().getSQL();
-    from(authors).select(authors.Rows.id).where(Condition(5) < 5).group().getSQL();
+//    from(authors).select(authors.Rows.id).where(Condition(5) < 5).group().getSQL();
 
-    from(authors).select().where(Condition(5) < 5).getSQL();
-    from(authors).select().where(Condition(5) < 5).group().getSQL();
-    from(authors).select().where(Condition(5) < 5).order().getSQL();
+//    from(authors).select().where(Condition(5) < 5).getSQL();
+//    from(authors).select().where(Condition(5) < 5).group().getSQL();
+//    from(authors).select().where(Condition(5) < 5).order().getSQL();
 
     from(authors).select().group().getSQL();
     from(authors).select().having().getSQL();

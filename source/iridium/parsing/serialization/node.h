@@ -390,6 +390,7 @@ std::string convertCamelToDashed(std::string const &camel);
     dMACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
 
 
+// todo: bugfix node name, e g NameList instead Name
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
     struct T##class_name##List; \
     struct T##class_name : public iridium::parsing::serialization::Node<void> { \

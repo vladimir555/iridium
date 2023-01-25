@@ -45,10 +45,10 @@ void CThread::initialize() {
     m_runnuble->initialize();
     m_is_running = true;
     if (m_thread_working_status_queue) {
-        m_thread = std::make_shared<thread>(run, m_name, m_runnuble, m_thread_working_status_queue, &m_is_running);
+        m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_thread_working_status_queue, &m_is_running);
     } else {
         m_thread_working_status_queue = CAsyncQueue<bool>::create();
-        m_thread = std::make_shared<thread>(run, m_name, m_runnuble, m_thread_working_status_queue, &m_is_running);
+        m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_thread_working_status_queue, &m_is_running);
         try {
             auto statuses = m_thread_working_status_queue->pop();
             if (statuses.size() != 1 || !statuses.back())

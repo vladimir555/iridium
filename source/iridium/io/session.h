@@ -19,8 +19,8 @@ class IPipeManager {
 public:
     DEFINE_INTERFACE(IPipeManager)
 
-    virtual IPipe::TSharedPtr   create          (std::string const &name) = 0;
-    virtual void                remove          (std::string const &name) = 0;
+    virtual IPipe::TSharedPtr   createPipe          (std::string const &name) = 0;
+    virtual void                removePipe          (std::string const &name) = 0;
     virtual void                updateReader    (std::string const &name, IStreamReader::TSharedPtr const &reader) = 0;
     virtual void                updateWriter    (std::string const &name, IStreamWriter::TSharedPtr const &writer) = 0;
 };
@@ -43,7 +43,7 @@ public:
         IStreamPort::TSharedPtr const &stream,
         IProtocol::TSharedPtr const &protocol) = 0;
     ///
-    virtual bool wait(std::chrono::nanoseconds const &timeout) = 0;
+//    virtual bool wait(std::chrono::nanoseconds const &timeout) = 0;
 };
 
 

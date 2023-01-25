@@ -5,7 +5,7 @@ namespace iridium {
 namespace io {
 
 
-auto const IMultiplexer::DEFAULT_WAITING_TIMEOUT = std::chrono::seconds(1);
+std::chrono::seconds const IMultiplexer::DEFAULT_WAITING_TIMEOUT(1);
 
 
 } // io

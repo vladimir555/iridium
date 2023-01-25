@@ -62,7 +62,6 @@ public:
 
 private:
     typename IAsyncQueue<TItem>::TSharedPtr m_queue;
-//    std::list<IThread::TSharedPtr>          m_threads;
 };
 
 
@@ -84,7 +83,6 @@ public:
 
 private:
     typename IAsyncQueue<TItem>::TSharedPtr m_queue;
-//    std::list<IThread::TSharedPtr>          m_threads;
 };
 
 
@@ -111,7 +109,6 @@ public:
 private:
     typename IAsyncQueue<TInputItem>::TSharedPtr    m_input_queue;
     typename IAsyncQueue<TOutputItem>::TSharedPtr   m_output_queue;
-//    std::list<IThread::TSharedPtr>                  m_threads;
 };
 
 

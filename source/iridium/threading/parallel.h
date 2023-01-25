@@ -29,7 +29,7 @@
 
 #include "thread.h"
 #include "runnable.h"
-#include "worker_pool.h"
+#include "worker.h"
 
 
 namespace iridium {
@@ -37,13 +37,13 @@ namespace threading {
 
 
 // todo: worker with jobs
-template<typename TReturn, typename ... TAgrs>
+template<typename TResult, typename ... TAgrs>
 class Async {
 public:
-    Async(TArgs &&args ...);
+    Async(TAgrs ... args) {};
    ~Async() = default;
-    TReturn &get() const;
-    operator TReturn () const;
+    TResult &get() const;
+    operator TResult () const;
 private:
     class CRunnable: public IRunnable {
     public:
@@ -52,17 +52,17 @@ private:
 };
 
 
-class Parallel {
-public:
-    Parallel();
-    // todo:
-//    auto makeAsyncFunc() {
-//        return [this](){f();};
-//    }
+//class Parallel {
+//public:
+//    Parallel();
+//    // todo:
+////    auto makeAsyncFunc() {
+////        return [this](){f();};
+////    }
 
-private:
-    IWorkerPool<>::TSharedPtr m_worker_pool;
-};
+//private:
+//    IWorker<void>::TSharedPtr m_worker_pool;
+//};
 
     
 } // threading

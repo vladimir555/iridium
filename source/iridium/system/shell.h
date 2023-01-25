@@ -33,7 +33,7 @@ public:
     class Exception: public std::exception {
     public:
         Exception(std::string const &what, IProcess::TState const &state);
-        char const *what() const _NOEXCEPT override;
+        char const *what() const noexcept override;
         IProcess::TState getState() const;
     private:
         std::string         m_what;

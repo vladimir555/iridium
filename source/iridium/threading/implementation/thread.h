@@ -51,7 +51,7 @@ protected:
     ///
     IRunnable::TSharedPtr           m_runnuble;
     ///
-    std::shared_ptr<std::thread>    m_thread;
+    std::unique_ptr<std::thread>    m_thread;
     ///
     static void run(
         std::string                         const &name,

@@ -8,6 +8,8 @@
 
 #include "mutex.h"
 
+#include "implementation/mutex.h"
+
 
 namespace iridium {
 namespace threading {
@@ -17,7 +19,7 @@ namespace threading {
 //class ISynchronized {
 //public:
 //    DEFINE_INTERFACE(ISynchronized)
-//    virtual IMutex::TSharedPtr getMutex() const = 0;
+//    virtual IMutex * const getMutex() const = 0;
 //};
 
 
@@ -28,6 +30,8 @@ protected:
     friend class SynchronizedScopeSimple;
 
     Synchronized(IMutex::TSharedPtr const &mutex);
+    Synchronized();
+    ~Synchronized() = default;
 
     IMutex::TSharedPtr getMutex() const;
 

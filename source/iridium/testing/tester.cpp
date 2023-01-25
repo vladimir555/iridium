@@ -42,7 +42,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     logging::update(logging::config::createDefaultConsoleLoggerConfig());
 
     vector<string> args;
-    for (size_t i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
         args.push_back(argv[i]);
 
     if (args.size() == 2 && args[1] == "list") {

@@ -26,7 +26,7 @@ namespace logging {
 
 
 // todo: separate logger to other type with singleton
-class Logger :
+class Logger:
     public pattern::Singleton<Logger>,
     public threading::Synchronized
 {
@@ -43,7 +43,7 @@ public:
 private:
     friend class pattern::Singleton<Logger>;
     ///
-    Logger();
+    Logger() = default;
     ///
     IChannel::TSharedPtr m_channel;
 };
@@ -99,14 +99,19 @@ iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
 iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
 
 
-//#define LOGT \
-//iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-//std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1, std::string::npos) << ":" << __LINE__ << " "
+/*
+#define LOGT \
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
+std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1, std::string::npos) << ":" << __LINE__ << " "
+*/
 
 
-//#define LOGT \
-//iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-//iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
+/*
+#define LOGT \
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
+iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
+*/
+
 
 /*
 #define LOGT \

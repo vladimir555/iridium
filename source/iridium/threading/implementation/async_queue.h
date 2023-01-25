@@ -69,7 +69,7 @@ private:
 template<typename TItem>
 CAsyncQueue<TItem>::CAsyncQueue()
 :
-    Synchronized(CMutex::create()),
+//    Synchronized(CMutex::create()),
     m_is_waiting(true),
     m_is_empty  (true),
     m_condition (CCondition::create())
@@ -119,8 +119,7 @@ std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout) {
     if (m_is_waiting && m_is_empty)
-        if (!m_condition->wait(timeout))
-            return {};
+        m_condition->wait(timeout);
 
     LOCK_SCOPE_FAST
     m_is_empty = true;

@@ -14,7 +14,7 @@ namespace io {
 class IEvent {
 public:
     DEFINE_INTERFACE(IEvent)
-    DEFINE_ENUM(TType, NONE, OPEN, CLOSE, READ, WRITE, EOF_, ERROR)
+    DEFINE_ENUM(TType, NONE, OPEN, CLOSE, READ, WRITE, TIMEOUT, EOF_, ERROR)
     virtual void                setType(TType const &type) = 0;
     virtual TType               getType()   const = 0;
     virtual IStream::TSharedPtr getStream() const = 0;

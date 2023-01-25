@@ -26,18 +26,11 @@ public:
     void initialize() override;
     void finalize() override;
     void manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) override;
-    bool wait(std::chrono::nanoseconds const &timeout) override;
 
 private:
-    class ContextManager: public threading::Synchronized {
+    class ContextManager: virtual public threading::Synchronized {
     public:
         DEFINE_CREATE(ContextManager)
-
-        ContextManager(
-            IMultiplexer::TSharedPtr const &multiplexer,
-            std::condition_variable        &cv,
-            std::atomic<size_t>            &protocol_count);
-        virtual ~ContextManager();
 
         class Context: public IPipeManager {
         public:
@@ -45,12 +38,12 @@ private:
 
             Context(
                 IMultiplexer::TSharedPtr    const &multiplexer,
-                ContextManager::TSharedPtr  const &context_manager,
+                ContextManager * const context_manager,
                 IProtocol::TSharedPtr       const &protocol);
             virtual ~Context();
 
-            IPipe::TSharedPtr   create          (std::string const &name) override;
-            void                remove          (std::string const &name) override;
+            IPipe::TSharedPtr   createPipe      (std::string const &name) override;
+            void                removePipe      (std::string const &name) override;
             void                updateStream    (std::string const &name, IStream::TSharedPtr const &stream, IEvent::TType const &type);
             void                updateReader    (std::string const &name, IStreamReader::TSharedPtr const &reader) override;
             void                updateWriter    (std::string const &name, IStreamWriter::TSharedPtr const &writer) override;
@@ -65,8 +58,8 @@ private:
 
             IMultiplexer::TSharedPtr
                 m_multiplexer;
-            ContextManager::TSharedPtr
-                m_context_manager;
+//            ContextManager * const
+//                m_context_manager;
             IProtocol::TSharedPtr
                 m_protocol;
             std::unordered_map<std::string, IPipe::TSharedPtr>
@@ -75,12 +68,18 @@ private:
                 m_map_stream_pipe;
             threading::IAsyncQueue<IEvent::TSharedPtr>::TSharedPtr
                 m_events;
-        };
+        }; // Context
+
+        ContextManager(IMultiplexer::TSharedPtr const &multiplexer);
+        virtual ~ContextManager();
 
         Context::TSharedPtr acquireContext  (IEvent::TSharedPtr  const &event);
         void                releaseContext  (Context::TSharedPtr const &context);
-        void                updateContext   (IStream::TSharedPtr const &stream, Context::TSharedPtr const &context);
+        void                updateContext   (Context::TSharedPtr const &context, IStream::TSharedPtr const &stream);
         void                removeContext   (Context::TSharedPtr const &context);
+
+        std::list<IStream::TConstSharedPtr> getOutdatedStreams();
+        void updateStreamTimestamp(IStream::TConstSharedPtr const &stream);
 
     private:
         IMultiplexer::TSharedPtr
@@ -89,12 +88,10 @@ private:
             m_map_stream_context;
         std::unordered_map<Context::TSharedPtr, std::unordered_set<IStream::TSharedPtr> >
             m_map_context_streams;
+        std::unordered_map<IStream::TConstSharedPtr, std::chrono::system_clock::time_point>
+            m_map_stream_timestamp;
         std::unordered_set<Context::TSharedPtr>
             m_acquired_contexts;
-        std::condition_variable
-            &m_cv;
-        std::atomic<size_t>
-            &m_protocol_count;
     };
 
     typedef threading::IWorker<IEvent::TSharedPtr> IContextWorker;
@@ -104,7 +101,10 @@ private:
         DEFINE_IMPLEMENTATION(CMultiplexerThreadHandler)
         CMultiplexerThreadHandler(
             IContextWorker::TSharedPtr  const &context_worker,
-            IMultiplexer::TSharedPtr    const &multiplexer);
+            IMultiplexer::TSharedPtr    const &multiplexer,
+//            ContextManager::TWeakPtr    const &context_manager
+            ContextManager * const  context_manager
+        );
 
         void initialize() override;
         void finalize() override;
@@ -115,6 +115,8 @@ private:
             m_multiplexer;
         IContextWorker::TSharedPtr
             m_context_worker;
+        ContextManager * const
+            m_context_manager;
     };
 
     class CEventRepeaterHandler: public threading::IRunnable {
@@ -134,21 +136,16 @@ private:
     class CContextWorkerHandler: public IContextWorker::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CContextWorkerHandler)
-        CContextWorkerHandler(ContextManager::TSharedPtr const &context_manager);
+//        CContextWorkerHandler(ContextManager::TWeakPtr const &context_manager);
+        CContextWorkerHandler(ContextManager * const context_manager);
         void initialize() override;
         void finalize() override;
         IContextWorker::TOutputItems handle(IContextWorker::TInputItems const &events) override;
     private:
-        ContextManager::TSharedPtr
-            m_context_manager;
+        ContextManager * const m_context_manager;
+//        ContextManager::TSharedPtr
+//            m_context_manager;
     };
-
-    std::mutex
-        m_cv_mutex;
-    std::condition_variable
-        m_cv;
-    std::atomic<size_t>
-        m_session_count;
 
     IMultiplexer::TSharedPtr
         m_multiplexer;

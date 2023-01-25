@@ -9,7 +9,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(iridium)
 
-set(CMAKE_CXX_STANDARD 17)
+
+set(CMAKE_CXX_STANDARD 14)
 
 # release
 #set(CMAKE_BUILD_TYPE "Release")
@@ -18,9 +19,11 @@ set(CMAKE_CXX_STANDARD 17)
 # debug
 set(CMAKE_BUILD_TYPE "Debug")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
   
+remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
+
 # components
 # set(CONFIG_POSTGRES 1)
 set(CONFIG_OPENSSL 0)

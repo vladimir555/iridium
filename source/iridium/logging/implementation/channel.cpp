@@ -18,8 +18,8 @@ namespace implementation {
 
 
 CChannel::CChannel()
-:
-    Synchronized(CMutex::create())
+//:
+//    Synchronized(CMutex::create())
 {}
 
 

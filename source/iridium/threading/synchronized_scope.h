@@ -27,7 +27,7 @@ class SynchronizedScope:
     public pattern::NonMovable
 {
 public:
-    explicit SynchronizedScope(Synchronized const *synchronized, std::string const &scope_name);
+    explicit SynchronizedScope(Synchronized const * const synchronized, std::string const &scope_name);
     ~SynchronizedScope();
 
 private:
@@ -40,7 +40,7 @@ class SynchronizedScopeSimple:
     public pattern::NonMovable 
 {
 public:
-    explicit SynchronizedScopeSimple(Synchronized const *synchronized);
+    explicit SynchronizedScopeSimple(Synchronized const * const synchronized);
     ~SynchronizedScopeSimple();
 private:
     IMutex::TSharedPtr m_mutex;

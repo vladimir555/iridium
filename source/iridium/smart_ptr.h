@@ -12,8 +12,10 @@
 #define DEFINE_SMART_PTR(TClass) \
 typedef ::std::shared_ptr<TClass>         TSharedPtr; \
 typedef ::std::weak_ptr  <TClass>         TWeakPtr; \
+typedef ::std::unique_ptr<TClass>         TUniquePtr; \
 typedef ::std::shared_ptr<TClass const>   TConstSharedPtr; \
-typedef ::std::weak_ptr  <TClass const>   TConstWeakPtr;
+typedef ::std::weak_ptr  <TClass const>   TConstWeakPtr; \
+typedef ::std::unique_ptr<TClass const>   TConstUniquePtr;
 
 
 #define DEFINE_CREATE(TClass) \
