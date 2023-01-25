@@ -28,7 +28,7 @@ public:
     void manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) override;
 
 private:
-    class ContextManager: virtual public threading::Synchronized {
+    class ContextManager: public threading::Synchronized {
     public:
         DEFINE_CREATE(ContextManager)
 

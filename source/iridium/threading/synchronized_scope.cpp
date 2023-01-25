@@ -53,7 +53,7 @@ SynchronizedScopeSimple::SynchronizedScopeSimple(Synchronized const * const sync
 }
 
 
-SynchronizedScopeSimple::~SynchronizedScopeSimple() {    
+SynchronizedScopeSimple::~SynchronizedScopeSimple() {
     m_mutex->unlock();
 }
 

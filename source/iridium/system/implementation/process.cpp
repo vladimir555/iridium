@@ -219,8 +219,8 @@ IProcess::TState CProcessStream::getState() {
     if (m_state_internal.is_continued)
         process_state_str += " continued";
 
-    if (!process_state_str.empty())
-        LOGT << "process '" << m_app << " " << m_args.back() << "' state: " << process_state_str;
+//    if (!process_state_str.empty())
+//        LOGT << "process '" << m_app << " " << m_args.back() << "' state: " << process_state_str;
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);

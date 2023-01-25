@@ -80,7 +80,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             break; // --->
 
         for (auto const &result: results) {
-            LOGT << "process stop:  " << result->path;
+//            LOGT << "process stop:  " << result->path;
             if (/*result->state.condition == IProcess::TState::TCondition::DONE &&*/
                 result->state.exit_code && *result->state.exit_code == 1)
             {
