@@ -115,7 +115,7 @@ using namespace iridium::io;
 //        std::string const &command,
 //        std::chrono::seconds const &timeout_ms  = std::chrono::seconds(10))
 //    {
-//        IListener::TSharedPtr   listener        = implementation::CListener::create();
+//        IListener::TSharedPtr   listener        = implementation::CMultiplexer::create();
 //        IProcess::TSharedPtr    process         = CProcessStream::create(command, "", listener);
 
 //        listener->initialize();
@@ -272,7 +272,7 @@ TEST(OK) {
 
 TEST(timeout) {
     LOGT << "sleep ...";
-//    iridium::threading::sleep(10000);
+    iridium::threading::sleep(30000);
     LOGT << "sleep OK";
 }
 

@@ -11,6 +11,7 @@
 #include <iridium/threading/implementation/worker_pool.h>
 #include <iridium/threading/implementation/recursive_mutex.h>
 #include <iridium/convertion/convert.h>
+#include <iridium/items.h>
 
 
 using namespace std;
@@ -18,8 +19,11 @@ using iridium::convertion::convert;
 using iridium::threading::implementation::CWorker;
 using iridium::threading::implementation::CWorkerPool;
 using iridium::threading::implementation::CRecursiveMutex;
+using iridium::threading::implementation::CAsyncQueue;
+using iridium::threading::implementation::CMutex;
 using iridium::threading::IThread;
 using iridium::threading::IWorker;
+using iridium::threading::IAsyncQueue;
 using iridium::threading::sleep;
 using iridium::threading::IMutex;
 
@@ -27,45 +31,31 @@ using iridium::threading::IMutex;
 namespace {
 
 
-atomic<int>     processed;
-list<int>       in;
-list<int>       out;
-
-
-//list<string> in_;
-//list<string> out_;
-//ICondition::TSharedPtr  condition = CCondition::create();
-IMutex::TSharedPtr m = CRecursiveMutex::create();
+atomic<int> processed   (0);
+atomic<int> sum         (0);
 
 
 class CWorkerHandler: public IWorker<int, int>::IHandler {
 public:
-    DEFINE_CREATE(CWorkerHandler)
+    DEFINE_IMPLEMENTATION(CWorkerHandler)
     CWorkerHandler() = default;
-    virtual ~CWorkerHandler() = default;
 private:
     typedef typename IWorker<int>::TInputItems  TInputItems;
     typedef typename IWorker<int>::TOutputItems TOutputItems;
 
     TInputItems handle(TOutputItems const &items) override {
+        TInputItems result;
         for (auto const &i: items) {
-            //cout << "processing " << i << endl;
-            out.push_back(i);
             processed++;
+            sum += i;
+            result.push_back(sum);
             sleep(10);
         }
-        return {};
+        return result;
     }
 
-    void initialize() override {
-        m->lock();
-        //cout << "start" << endl;
-    }
-
-    void finalize() override {
-        m->unlock();
-        //cout << "stop" << endl;
-    }
+    void initialize() override {}
+    void finalize() override {}
 };
 
 
@@ -80,86 +70,56 @@ TEST(worker) {
     IWorker<int>::TSharedPtr worker = CWorker<int>::create("worker", CWorkerHandler::create());
 
     processed = 0;
-    in.clear();
-    out.clear();
-
-    for (int i = 0; i < 50; i++)
-        in.push_back(i);
+    sum = 0;
+    int const count = 100;
+    int const count_sum = 4950;
 
     worker->initialize();
 
-    for (auto const &i : in) {
-        //cout << "push " << i << endl;
+    for (int i = 0; i < 100; i++)
         worker->push(i);
-    }
 
-    // todo: waiting for single worker
-    for (int i = 0; i < 10 && processed < 50; i++)
+    for (int i = 0; i < 10 && processed < count; i++)
         sleep(100);
 
     worker->finalize();
 
-    ASSERT(in, equal, out);
+    ASSERT(processed, equal, count);
+    ASSERT(sum, equal, count_sum);
 
     worker->push(5);
 
-    //m->lock();
-
-    worker->finalize();
-
-    m->lock();
-    ASSERT(in, equal, out);
-    m->unlock();
-    // todo: test for queue size = 0
+    ASSERT(processed, equal, count);
+    ASSERT(sum, equal, count_sum);
 }
 
 
 TEST(worker_pool) {
-    sleep(500);
-
-    IAsyncQueue<int>::TSharedPtr q = implementation::CAsyncQueue<int>::create();
-    q->push(5);
-    q->push(55);
-    auto i = q->pop();
-
-    ASSERT(2    , equal, i.size());
-    ASSERT(5    , equal, i.front());
-    ASSERT(55   , equal, i.back());
-
-    CWorkerPool<int>::THandlers handlers;
-
-    for (size_t i = 0; i < 10; i++)
-        handlers.push_back(CWorkerHandler::create());
-
-    IWorker<int>::TSharedPtr worker_pool = CWorkerPool<int>::create("worker_pool", handlers);
+    IWorker<int>::TSharedPtr worker = CWorkerPool<int>::create("worker",
+        createObjects<IWorker<int>::IHandler, CWorkerHandler>(std::thread::hardware_concurrency()));
 
     processed = 0;
-    in.clear();
-    out.clear();
+    sum = 0;
+    int const count = 100;
+    int const count_sum = 4950;
 
-    for (int i = 0; i < 50; i++)
-        in.push_back(i);
+    worker->initialize();
 
-    worker_pool->initialize();
+    for (int i = 0; i < 100; i++)
+        worker->push(i);
 
-    for (auto const &i: in) {
-        worker_pool->push(i);
-        sleep(10);
-    }
+    for (int i = 0; i < 10 && processed < count; i++)
+        sleep(100);
 
-    //for (int i = 0; i < 10 && processed < 50; i++)
-    //    sleep(100);
+    worker->finalize();
 
-    //m->lock();
+    ASSERT(processed, equal, count);
+    ASSERT(sum, equal, count_sum);
 
-    worker_pool->finalize();
+    worker->push(5);
 
-    m->lock();
-
-    out.sort();
-
-    ASSERT(in, equal, out);
-    m->unlock();
+    ASSERT(processed, equal, count);
+    ASSERT(sum, equal, count_sum);
 }
 
 

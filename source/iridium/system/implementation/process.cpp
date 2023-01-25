@@ -113,22 +113,22 @@ void CProcessStream::initialize() {
     );
 
     char *argv[1 + m_args.size() + 1];
-    argv[0] = m_app.data();
-    for (int i = 0; i < m_args.size(); i++)
-        argv[i + 1] = m_args[i].data();
+    argv[0] = (char *)m_app.data();
+    for (size_t i = 0; i < m_args.size(); i++)
+        argv[i + 1] = (char *)m_args[i].data();
 
     argv[1 + m_args.size()] = nullptr;
 
-//    LOGT << "start process: " << m_command_line;
+    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
     posix_spawnattr_t attr = { 0 };
 
-//#ifdef POSIX_SPAWN_SETSID
-//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
-//#elif defined(POSIX_SPAWN_SETSID_NP)
-//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
-//#else
-//    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
-//#endif
+#ifdef POSIX_SPAWN_SETSID
+    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
+#elif defined(POSIX_SPAWN_SETSID_NP)
+    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
+#else
+    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+#endif
 
     assertOK(
         posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ),
@@ -153,7 +153,7 @@ void CProcessStream::initialize() {
 
 
 void CProcessStream::finalize() {
-    LOGT << "stop process: " << m_command_line;
+    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
     if (m_pid == 0)
         return;
 
@@ -183,6 +183,7 @@ IProcess::TState CProcessStream::getState() {
     if (m_pid != 0) {
         int  pid_state = 0;
         auto result = waitpid(m_pid, &pid_state, WNOHANG);
+//        LOGT << "waitpid: " << m_command_line << " pid: " << m_pid << " result: " << result << " state: " << pid_state;
         if  (result == 0 && pid_state == 0)
             condition = TState::TCondition::RUNNING;
 
@@ -218,8 +219,8 @@ IProcess::TState CProcessStream::getState() {
     if (m_state_internal.is_continued)
         process_state_str += " continued";
 
-//    if (!process_state_str.empty())
-//        LOGT << "process state: " << process_state_str;
+    if (!process_state_str.empty())
+        LOGT << "process '" << m_app << " " << m_args.back() << "' state: " << process_state_str;
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);

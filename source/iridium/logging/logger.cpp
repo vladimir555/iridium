@@ -26,12 +26,6 @@ namespace iridium {
 namespace logging {
 
 
-Logger::Logger()
-:
-    Synchronized(CMutex::create())
-{}
-
-
 Logger::~Logger() {
     LOCK_SCOPE
     if (m_channel) {

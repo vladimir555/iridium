@@ -61,6 +61,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
         map_path_handler[path] = handler;
         m_session_manager->manage(process, handler);
+        LOGT << "process start: " << path;
     }
 
 //    if (!m_session_manager->wait(std::chrono::seconds(50)))
@@ -71,12 +72,15 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     auto parser = CJSONParser::create();
 
+    int count_wait = 1;
+
     while (true) {
         auto results = process_result_queue->pop(DEFAULT_TEST_PROCESS_TIMEOUT);
-        if (results.empty())
+        if  (results.empty() && count_wait-- <= 0)
             break; // --->
 
         for (auto const &result: results) {
+            LOGT << "process stop:  " << result->path;
             if (/*result->state.condition == IProcess::TState::TCondition::DONE &&*/
                 result->state.exit_code && *result->state.exit_code == 1)
             {
@@ -85,14 +89,12 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             } else {
                 TTestResult::TTest test;
                 test.Path   = result->path;
-                test.Error  = convert<string>(result->state.condition);
+                test.Error  = convert<string>( result->state.condition);
                 test.Output = convert<string>(*result->output);
                 test_results.Test.add(test);
                 continue; // <---
             }
 //            test_result.Test.add(test);
-
-            map_path_handler.erase(result->path);
 
             try {
                 auto output = convert<string>(*result->output);
@@ -106,11 +108,15 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                     test_results.Test.add(test);
                 }
                 output = output.substr(0, left - size);
-                LOGI << "\n" << result->path << ":\n" << output;
+                LOGI << "\n" << result->path << "\n" << output;
             } catch (...) {
-                LOGF << "internal error parsing test result: " << convert<string>(*result->output);
+                LOGF << "internal parsing test result error: " << convert<string>(*result->output);
             }
 
+            map_path_handler.erase(result->path);
+
+            if (map_path_handler.empty())
+                break; // --->
         }
     }
 
@@ -161,24 +167,31 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr const &event,
     io::IPipeManager::TSharedPtr const &pipe_manager)
 {
+//    std::cout << "THREAD BEGIN: " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
+//        convert<string>(std::this_thread::get_id()) << std::endl;
+    if (m_state.exit_code)
+        return false;
 //    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
 //    if (m_buffer_output)
 //        LOGT << "buffer:\n" << *m_buffer_output;
 
     if (event->getType() == io::IEvent::TType::OPEN) {
-        pipe_manager->create("process");
+        pipe_manager->createPipe("process");
         pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
         m_buffer_output = io::Buffer::create();
         m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
         pipe_manager->updateWriter("process", m_stream_output);
     }
 
-//    LOGT << __FUNCTION__
-//         << "\nevent: " << event->getStream()->getID() << " " << event->getType()
-//         << "\nbuffer:\n" << *m_buffer_output;
-
     m_state = m_process->getState();
-    if (m_state.exit_code)
+
+//    LOGT << __FUNCTION__
+//         << "\nevent: " << event->getStream()->getID()
+//         << " " << event->getType()
+////         << "\nbuffer:\n" << *m_buffer_output
+//         << "\nstate: " << m_state.condition;
+
+    if (m_state.exit_code) {
         m_process_result_queue->push(
             TProcessResult::create(
                 TProcessResult {
@@ -188,7 +201,14 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                 }
             )
         );
+    }
 
+    //threading::sleep(50);
+
+    m_state = m_process->getState();
+
+//    std::cout << "THREAD END  : " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
+//        convert<string>(std::this_thread::get_id()) << std::endl;
     return !m_state.exit_code;
 }
 

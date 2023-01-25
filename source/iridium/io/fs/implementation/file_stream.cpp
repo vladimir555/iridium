@@ -58,8 +58,8 @@ namespace implementation {
 
 CFileStream::CFileStream(string const &file_name, TOpenMode const &open_mode)
 :
-    m_file_name (file_name),
-    m_open_mode (open_mode)
+    m_file_name(file_name),
+    m_open_mode(open_mode)
 {}
 
 

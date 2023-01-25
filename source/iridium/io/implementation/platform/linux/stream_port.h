@@ -17,7 +17,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix::CStreamPort CStreamPort;
+typedef platform::unix_::CStreamPort CStreamPort;
 
 
 } // platform

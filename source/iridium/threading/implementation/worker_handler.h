@@ -85,7 +85,9 @@ private:
 
 
 template<typename TItem>
-CWorkerPusherRunnable<TItem>::CWorkerPusherRunnable(typename IHandler::TSharedPtr const &handler, typename IAsyncQueue<TItem>::TSharedPtr const &queue)
+CWorkerPusherRunnable<TItem>::CWorkerPusherRunnable(
+    typename IHandler::TSharedPtr const &handler,
+    typename IAsyncQueue<TItem>::TSharedPtr const &queue)
 :
     m_queue     (queue),
     m_handler   (handler)
@@ -116,7 +118,9 @@ void CWorkerPusherRunnable<TItem>::finalize() {
 
 
 template<typename TItem>
-CWorkerPopperRunnable<TItem>::CWorkerPopperRunnable(typename IHandler::TSharedPtr const &handler, typename IAsyncQueue<TItem>::TSharedPtr const &queue)
+CWorkerPopperRunnable<TItem>::CWorkerPopperRunnable(
+    typename IHandler::TSharedPtr const &handler,
+    typename IAsyncQueue<TItem>::TSharedPtr const &queue)
 :
     m_queue     (queue),
     m_handler   (handler)

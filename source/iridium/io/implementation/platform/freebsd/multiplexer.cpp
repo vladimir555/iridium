@@ -87,8 +87,6 @@ void CMultiplexer::handleSignal(int signal) {
 
 CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
 :
-    Synchronized(CMutex::create()),
-
     m_timeout {
         duration_cast<seconds>(timeout).count(),
         duration_cast<nanoseconds>(timeout).count() %

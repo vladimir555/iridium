@@ -7,8 +7,12 @@
 
 
 #include "synchronized.h"
+#include "iridium/assert.h"
+
+#include "implementation/mutex.h"
 
 
+#include <iostream>
 namespace iridium {
 namespace threading {
 
@@ -16,6 +20,12 @@ namespace threading {
 Synchronized::Synchronized(IMutex::TSharedPtr const &mutex)
 :
     m_mutex(mutex)
+{}
+
+
+Synchronized::Synchronized()
+:
+    m_mutex(implementation::CMutex::create())
 {}
 
 

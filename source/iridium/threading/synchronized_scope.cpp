@@ -6,11 +6,12 @@
 
 #include <stdexcept>
 #include <thread>
-#include <sstream>
+#include <iostream>
 
 #include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
 #include "iridium/threading/thread.h"
+#include "iridium/assert.h"
 
 
 using std::string;
@@ -24,11 +25,11 @@ namespace iridium {
 namespace threading {
 
 
-SynchronizedScope::SynchronizedScope(Synchronized const *synchronized, string const &scope_name)
+SynchronizedScope::SynchronizedScope(Synchronized const * const synchronized, string const &scope_name)
 :
     m_mutex(synchronized->getMutex())
 {
-    string const scope_name_ = scope_name + ":" + convert<string>(getThreadID());
+    string const scope_name_ = scope_name + ":" + convert<string>(std::this_thread::get_id());
     try {
         m_mutex->lock();
         m_mutex->setScopeName(scope_name_);
@@ -44,7 +45,7 @@ SynchronizedScope::~SynchronizedScope() {
 }
 
 
-SynchronizedScopeSimple::SynchronizedScopeSimple(Synchronized const *synchronized)
+SynchronizedScopeSimple::SynchronizedScopeSimple(Synchronized const * const synchronized)
 :
     m_mutex(synchronized->getMutex())
 {
@@ -52,7 +53,7 @@ SynchronizedScopeSimple::SynchronizedScopeSimple(Synchronized const *synchronize
 }
 
 
-SynchronizedScopeSimple::~SynchronizedScopeSimple() {
+SynchronizedScopeSimple::~SynchronizedScopeSimple() {    
     m_mutex->unlock();
 }
 
