@@ -96,8 +96,9 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             }
 //            test_result.Test.add(test);
 
+            string output;
             try {
-                auto output = convert<string>(*result->output);
+                output = convert<string>(*result->output);
                 auto right  = output.find_last_not_of('\n');
                 auto left   = output.find_last_of('\n', right);
                 auto size   = convert<uint32_t>(output.substr(left + 1, right - left));
@@ -110,7 +111,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 output = output.substr(0, left - size);
                 LOGI << "\n" << result->path << "\n" << output;
             } catch (...) {
-                LOGF << "internal parsing test result error: " << convert<string>(*result->output);
+                LOGF << "internal parsing test result error: " << output;
             }
 
             map_path_handler.erase(result->path);
