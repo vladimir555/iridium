@@ -86,8 +86,14 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         } else {
             string failed_tests;
             for (auto const &line: result.Test) {
-                if (!line.Error.get().empty())
-                    failed_tests += line.Error.get() + "\n\n";
+                if (!line.Error.get().empty()) {
+                    failed_count++;
+                    failed_tests +=
+                        line.Path.get()  + "\n" +
+                        line.Error.get() + "\n\n";
+                } else {
+                    passed_count++;
+                }
             }
 
             LOGE << "\n\nfailed tests:\n" + failed_tests;
