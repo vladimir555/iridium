@@ -62,6 +62,7 @@ DEFINE_ENUM(
 
 CMultiplexer::CMultiplexer()
 :
+    Synchronized(CMutex::create()),
     m_epoll_fd(0),
     m_event_fd(0),
     m_streams_to_add(CAsyncQueue<IStream::TConstSharedPtr>::create()),
@@ -71,8 +72,9 @@ CMultiplexer::CMultiplexer()
 
 void CMultiplexer::initialize() {
     LOCK_SCOPE_FAST
-    if (m_epoll_fd > 0)
-        return; // ----->
+
+    if (m_epoll_fd)
+        throw std::runtime_error("multiplexer initializing error: epoll is initialized"); // ----->
 
 //    m_epoll_fd = epoll_create1(0);
     m_epoll_fd = epoll_create(1);
@@ -91,8 +93,9 @@ void CMultiplexer::initialize() {
 
 void CMultiplexer::finalize() {
     LOCK_SCOPE_FAST
-    if (m_epoll_fd == 0)
-        return; // ----->
+
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer finalizing error: epoll is not initialized"); // ----->
 
     LOGT << m_epoll_fd;
     ::close(m_event_fd);
@@ -103,16 +106,21 @@ void CMultiplexer::finalize() {
 
 
 void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
+    LOCK_SCOPE_FAST
+
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer unsubscribing error: epoll is not initialized"); // ----->
+
     LOGT << "listener fd " << m_epoll_fd << " add " << stream->getID();
-    if (m_epoll_fd == 0)
-        throw std::runtime_error("epoll add error: not initialized"); // ----->
     m_streams_to_add->push(stream);
 }
 
 
 void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
-    if (m_epoll_fd == 0)
-        throw std::runtime_error("epoll del error: not initialized"); // ----->
+    LOCK_SCOPE_FAST
+
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer subscribing error: epoll is not initialized"); // ----->
     m_streams_to_del->push(stream);
 }
 
@@ -120,8 +128,8 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
 std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
     LOCK_SCOPE_FAST
 
-    if (m_epoll_fd == 0)
-        throw std::runtime_error("epoll wait error: not initialized"); // ----->
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer wait events error: epoll is not initialized"); // ----->
 
     struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
@@ -145,13 +153,13 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
         LOGT << m_epoll_fd << " epoll event: fd " << epoll_events[i].data.fd << " code " <<
                 TEpollEvent(epoll_events[i].events).convertToFlagsString();
 
-        auto const stream = std::const_pointer_cast<IStream>(m_map_fd_stream[epoll_events[i].data.fd]);
-
         if (epoll_events[i].events & EPOLLIN)
-            events.push_back(CEvent::create(stream, IEvent::TType::READ));
+            events.push_back(
+                CEvent::create(std::const_pointer_cast<IStream>(m_map_fd_stream[epoll_events[i].data.fd]), IEvent::TType::READ));
 
         if (epoll_events[i].events & EPOLLOUT)
-            events.push_back(CEvent::create(stream, IEvent::TType::WRITE));
+            events.push_back(
+                CEvent::create(std::const_pointer_cast<IStream>(m_map_fd_stream[epoll_events[i].data.fd]), IEvent::TType::WRITE));
     }
 
     for (auto const &stream: m_streams_to_del->pop(false))

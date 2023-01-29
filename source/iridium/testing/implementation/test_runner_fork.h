@@ -15,9 +15,10 @@ namespace implementation {
 
 class CTestRunnerFork: public ITestRunner {
 public:
+    static std::chrono::seconds const DEFAULT_TIMEOUT;
     CTestRunnerFork(
-        std::string const &app_name,
-        std::chrono::milliseconds const &timeout
+        std::string                 const &app_name,
+        std::chrono::milliseconds   const &timeout = DEFAULT_TIMEOUT
     );
     DEFINE_IMPLEMENTATION(CTestRunnerFork)
 

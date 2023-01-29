@@ -28,8 +28,7 @@ namespace platform {
 
 class CMultiplexer:
     public IMultiplexer,
-    public threading::Synchronized,
-    public std::enable_shared_from_this<CMultiplexer>
+    public threading::Synchronized
 {
 public:
     DEFINE_IMPLEMENTATION(CMultiplexer)
@@ -38,8 +37,9 @@ public:
     void    initialize()   override;
     void    finalize()     override;
 
-    void    subscribe  (IStream::TConstSharedPtr const &stream) override;
-    void    unsubscribe(IStream::TConstSharedPtr const &stream) override;
+    void    subscribe(IStream::TConstSharedPtr const &stream) override;
+    void  unsubscribe(IStream::TConstSharedPtr const &stream) override;
+
     std::list<IEvent::TSharedPtr> waitEvents() override;
 
 private:

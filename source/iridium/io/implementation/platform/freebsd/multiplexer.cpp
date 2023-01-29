@@ -69,11 +69,6 @@ DEFINE_ENUM(
 IMPLEMENT_ENUM(TEventFilter)
 
 
-enum E {
-    E1 = std::numeric_limits<int>::min()
-};
-
-
 namespace iridium {
 namespace io {
 namespace implementation {
@@ -148,7 +143,7 @@ void CMultiplexer::initialize() {
         m_pipe_add = registerPipe();
         m_pipe_del = registerPipe();
     } catch (std::exception const &e) {
-        throw std::runtime_error("event provider initialization error: " + string(e.what())); // ----->
+        throw std::runtime_error("multiplexer initialization error: " + string(e.what())); // ----->
     }
 }
 
@@ -156,19 +151,19 @@ void CMultiplexer::initialize() {
 void CMultiplexer::finalize() {
 //    LOGT << __FUNCTION__;
     if (!m_kqueue)
-        throw std::runtime_error("event profider finalization error: not initialized"); // ----->
+        throw std::runtime_error("multiplexer finalization error: not initialized"); // ----->
 
     int64_t fd      = -1;
     auto    result  = write(m_pipe_add[1], &fd, 8);
 
     if (result < 0)
-        throw std::runtime_error("event provider finalization error: " + string(strerror(errno))); // ----->
+        throw std::runtime_error("multiplexer finalization error: " + string(strerror(errno))); // ----->
 }
 
 
 void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     if (!m_kqueue)
-        throw std::runtime_error("event provider subscribing error: kqueue is not initialized"); // ----->
+        throw std::runtime_error("multiplexer subscribing error: kqueue is not initialized"); // ----->
 
     int64_t fd = stream->getID();
 
@@ -181,7 +176,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     auto    result  = write(m_pipe_add[1], &fd, 8);
 
     if (result < 0)
-        throw std::runtime_error("event provider subscribing error: " + string(strerror(errno))); // ----->
+        throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
 
     LOCK_SCOPE;
     m_map_fd_stream[fd] = stream;
@@ -190,7 +185,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
 
 void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
     if (!m_kqueue)
-        throw std::runtime_error("event provider unsubscribing error: kqueue is not initialized"); // ----->
+        throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
 
     int64_t fd = stream->getID();
     if (fd <= 0)
@@ -206,10 +201,10 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
 
 
 std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
-    std::list<IEvent::TSharedPtr> events;
+    if (!m_kqueue)
+        throw std::runtime_error("multiplexer waiting events error: kqueue is not initialized"); // ----->
 
-    if (m_kqueue == 0)
-        return events; // ----->
+    std::list<IEvent::TSharedPtr> events;
 
 //    LOGT << "!!!!! WAIT ...";
     auto triggered_event_count = assertOK(
@@ -327,7 +322,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 //            LOGE << "event provider waiting error: kevent not mapped event, fd: " +
 //                convert<string>(triggered_event.ident);
             throw std::runtime_error(
-                "event provider waiting error: kevent not mapped event, fd: " +
+                "multiplexer waiting events error: kevent not mapped event, fd: " +
                 convert<string>(triggered_event.ident)); // ----->
         }
     }
