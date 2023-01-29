@@ -16,6 +16,7 @@
 #include <thread>
 #include <atomic>
 #include <string>
+#include <chrono>
 
 
 namespace iridium {
@@ -29,11 +30,9 @@ class CThread:
 {
 public:
     DEFINE_CREATE(CThread)
+    static std::chrono::seconds const DEFAULT_TIMEOUT;
     ///
-    CThread(
-        std::string                     const &name,
-        IRunnable::TSharedPtr           const &runnuble,
-        IAsyncQueue<bool>::TSharedPtr   const &thread_working_status_queue = nullptr);
+    CThread(std::string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
     ///
     virtual ~CThread() = default;
     ///
@@ -54,15 +53,18 @@ protected:
     std::unique_ptr<std::thread>    m_thread;
     ///
     static void run(
-        std::string                         const &name,
-        IRunnable::TSharedPtr               const &runnuble,
-        IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue,
-        std::atomic<bool> *                 const  is_running
+        std::string             const &name,
+        IRunnable::TSharedPtr   const &runnuble,
+        IAsyncQueuePusher<bool>::TSharedPtr const &statuses,
+        std::atomic<bool> *     const  is_running
     );
 private:
-    ///
-    IAsyncQueue<bool>::TSharedPtr   m_thread_working_status_queue;
-    std::atomic<bool>               m_is_running;
+    std::atomic<bool>
+        m_is_running;
+    IAsyncQueue<bool>::TSharedPtr
+        m_statuses;
+    std::chrono::nanoseconds const
+        m_timeout;
 };
 
 

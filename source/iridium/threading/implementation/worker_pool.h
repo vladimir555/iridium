@@ -37,10 +37,9 @@ protected:
     void waitForMultipleStatus(bool const &status);
 
     std::list<IThread::TSharedPtr>  m_threads;
-    IAsyncQueue<bool>::TSharedPtr   m_thread_working_status_queue;
 
 private:
-    std::string                     m_name;
+    std::string m_name;
 };
 
 
@@ -125,7 +124,7 @@ CWorkerPoolPusher<TItem>::CWorkerPoolPusher(std::string const &name, THandlers c
     for (auto const &handler: handlers)
         m_threads.push_back(
             CThread::create(name + "[" + convert<string>(i++) + "]",
-            CWorkerPusherRunnable<TItem>::create(handler, m_queue), m_thread_working_status_queue));
+            CWorkerPusherRunnable<TItem>::create(handler, m_queue)));
 }
 
 
@@ -133,7 +132,6 @@ template<typename TItem>
 void CWorkerPoolPusher<TItem>::initialize() {
     for (auto const &thread: m_threads)
         thread->initialize();
-    waitForMultipleStatus(true);
 }
 
 
@@ -142,7 +140,6 @@ void CWorkerPoolPusher<TItem>::finalize() {
     m_queue->interrupt();
     for (auto const &thread: m_threads)
         thread->finalize();
-    waitForMultipleStatus(false);
 }
 
 
@@ -168,7 +165,7 @@ CWorkerPoolPopper<TItem>::CWorkerPoolPopper(std::string const &name, THandlers c
     for (auto const &handler: handlers)
         m_threads.push_back(
             CThread::create(name + "[" + convert<string>(i++) + "]",
-            CWorkerPopperRunnable<TItem>::create(handler, m_queue), m_thread_working_status_queue));
+            CWorkerPopperRunnable<TItem>::create(handler, m_queue)));
 }
 
 
@@ -176,7 +173,6 @@ template<typename TItem>
 void CWorkerPoolPopper<TItem>::initialize() {
     for (auto const &thread: m_threads)
         thread->initialize();
-    waitForMultipleStatus(true);
 }
 
 
@@ -184,7 +180,6 @@ template<typename TItem>
 void CWorkerPoolPopper<TItem>::finalize() {
     for (auto const &thread: m_threads)
         thread->finalize();
-    waitForMultipleStatus(false);
     m_queue->interrupt();
 }
 
@@ -212,8 +207,8 @@ CWorkerPool<TInputItem, TOutputItem>::CWorkerPool(std::string const &name, THand
     for (auto const &handler: handlers)
         m_threads.push_back(CThread::create(
             name + "[" + convert<string>(i++) + "]",
-            CWorkerRunnable<TInputItem, TOutputItem>::create(handler, m_input_queue, m_output_queue),
-            m_thread_working_status_queue));
+            CWorkerRunnable<TInputItem, TOutputItem>::create(
+                handler, m_input_queue, m_output_queue)));
 }
 
 
@@ -221,7 +216,6 @@ template<typename TInputItem, typename TOutputItem>
 void CWorkerPool<TInputItem, TOutputItem>::initialize() {
     for (auto const &thread: m_threads)
         thread->initialize();
-    waitForMultipleStatus(true);
 }
 
 
@@ -232,7 +226,7 @@ void CWorkerPool<TInputItem, TOutputItem>::finalize() {
     for (auto const &thread: m_threads)
         thread->finalize();
     m_output_queue->interrupt();
-    waitForMultipleStatus(false);
+    m_input_queue->interrupt();
 }
 
 

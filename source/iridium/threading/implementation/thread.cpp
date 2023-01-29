@@ -8,9 +8,6 @@
 #include "iridium/logging/logger.h"
 #include "iridium/assert.h"
 
-#include "async_queue.h"
-
-#include <chrono>
 #include <iostream>
 
 
@@ -20,42 +17,37 @@ using std::cerr;
 using std::chrono::milliseconds;
 using iridium::convertion::convert;
 
-auto now = std::chrono::system_clock::now;
-
-//static auto const THREAD_START_TIMEOUT_MS = 10000;
-
 
 namespace iridium {
 namespace threading {
 namespace implementation {
 
 
-CThread::CThread(
-    string                          const &name,
-    IRunnable::TSharedPtr           const &runnuble,
-    IAsyncQueue<bool>::TSharedPtr   const &thread_working_status_queue)
+std::chrono::seconds const CThread::DEFAULT_TIMEOUT(10);
+
+
+CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout)
 :
     m_name      (name),
     m_runnuble  (assertExists(runnuble, "thread '" + name + "' creation error: runnuble is null")),
-    m_thread_working_status_queue(thread_working_status_queue)
+    m_statuses  (CAsyncQueue<bool>::create()),
+    m_timeout   (timeout)
 {}
 
 
 void CThread::initialize() {
+    if (m_thread)
+        throw std::runtime_error("thread '" + m_name + "' initializing error: already initialized"); // ----->
+
     m_runnuble->initialize();
     m_is_running = true;
-    if (m_thread_working_status_queue) {
-        m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_thread_working_status_queue, &m_is_running);
-    } else {
-        m_thread_working_status_queue = CAsyncQueue<bool>::create();
-        m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_thread_working_status_queue, &m_is_running);
-        try {
-            auto statuses = m_thread_working_status_queue->pop();
-            if (statuses.size() != 1 || !statuses.back())
-                throw std::runtime_error("wrong thread start status"); // ----->
-        } catch (std::exception const &e) {
-            throw std::runtime_error("thread '" + m_name + "' starting error: " + e.what()); // ----->
-        }
+    m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_statuses, &m_is_running);
+    try {
+        auto statuses = m_statuses->pop(m_timeout);
+        if (statuses.empty())
+            throw std::runtime_error("timeout");
+    } catch (std::exception const &e) {
+        throw std::runtime_error("thread '" + m_name + "' initializing error: " + e.what()); // ----->
     }
 }
 
@@ -63,8 +55,23 @@ void CThread::initialize() {
 void CThread::finalize() {
     if (m_thread && m_thread->joinable()) {
         m_is_running = false;
-        m_thread->join();
-        m_runnuble->finalize();
+
+        try {
+            auto statuses = m_statuses->pop(m_timeout);
+            if (statuses.empty())
+                throw std::runtime_error("timeout");
+            else {
+                m_thread->join();
+                m_runnuble->finalize();
+            }
+        } catch (std::exception const &e) {
+            // todo: pthread_cancel & widows teminate thread
+            m_thread->detach();
+            throw std::runtime_error("thread '" + m_name + "' finalizing error: " + e.what()); // ----->
+        }
+        m_thread.reset();
+    } else {
+        throw std::runtime_error("thread '" + m_name + "' finalizing error: not initialized"); // ----->
     }
 }
 
@@ -83,17 +90,16 @@ std::string CThread::getName() const {
 
 
 void CThread::run(
-    std::string                         const &name,
-    IRunnable::TSharedPtr               const &runnuble,
-    IAsyncQueuePusher<bool>::TSharedPtr const &thread_working_status_queue,
-    std::atomic<bool> *                 const  is_running
-)
-{
+    std::string             const &name,
+    IRunnable::TSharedPtr   const &runnuble,
+    IAsyncQueuePusher<bool>::TSharedPtr  const &statuses,
+    std::atomic<bool> *     const  is_running
+) {
     std::string error;
     try {
-        thread_working_status_queue->push(true);
+        statuses->push(true);
         runnuble->run(*is_running);
-        thread_working_status_queue->push(false);
+        statuses->push(false);
     } catch (std::exception &e) {
         error = "thread '" + name + "' stopped, error: " + e.what();
     } catch (...) {

@@ -33,6 +33,9 @@ namespace testing {
 namespace implementation {
 
 
+std::chrono::seconds const CTestRunnerFork::DEFAULT_TIMEOUT(10);
+
+
 CTestRunnerFork::CTestRunnerFork(
     std::string     const &app_path,
     milliseconds    const &timeout)
@@ -67,19 +70,17 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 //    if (!m_session_manager->wait(std::chrono::seconds(50)))
 //        LOGW << "tests timeout";
 
-
-    static std::chrono::seconds const DEFAULT_TEST_PROCESS_TIMEOUT(5);
-
     auto parser = CJSONParser::create();
 
-    int count_wait = 1;
+    int count_wait = paths.size();
 
-    while (true) {
-        auto results = process_result_queue->pop(DEFAULT_TEST_PROCESS_TIMEOUT);
-        if  (results.empty() && count_wait-- <= 0)
+    while (count_wait > 0) {
+        auto results = process_result_queue->pop(m_timeout);
+        if  (results.empty())
             break; // --->
 
         for (auto const &result: results) {
+            count_wait--;
 //            LOGT << "process stop:  " << result->path;
             if (/*result->state.condition == IProcess::TState::TCondition::DONE &&*/
                 result->state.exit_code && *result->state.exit_code == 1)
@@ -111,7 +112,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 output = output.substr(0, left - size);
                 LOGI << "\n" << result->path << "\n" << output;
             } catch (...) {
-                LOGF << "internal parsing test result error: " << output;
+                LOGF << "internal parsing test result error:\n" << output;
             }
 
             map_path_handler.erase(result->path);

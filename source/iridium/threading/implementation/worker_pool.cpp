@@ -13,34 +13,33 @@ namespace implementation {
 
 WorkerPoolBase::WorkerPoolBase(std::string const &name)
 :
-    m_thread_working_status_queue   (CAsyncQueue<bool>::create()),
-    m_name                          (name)
+    m_name(name)
 {}
 
 
-void WorkerPoolBase::waitForMultipleStatus(bool const &status) {
-    static auto const now = std::chrono::system_clock::now;
-    auto const timeout = DEFAULT_TIMEOUT;
+//void WorkerPoolBase::waitForMultipleStatus(bool const &status) {
+//    static auto const now = std::chrono::system_clock::now;
+//    auto const timeout = DEFAULT_TIMEOUT;
 
-    try {
-        size_t  count   = 0;
-        auto    end     = now() + timeout;
+//    try {
+//        size_t  count   = 0;
+//        auto    end     = now() + timeout;
 
-        while (count < m_threads.size() && now() < end) {
-            for (auto const &s : m_thread_working_status_queue->pop(timeout))
-                if (status == s)
-                    count++;
-        }
+//        while (count < m_threads.size() && now() < end) {
+//            for (auto const &s : m_thread_working_status_queue->pop(timeout))
+//                if (status == s)
+//                    count++;
+//        }
 
-        if (count < m_threads.size())
-            throw std::runtime_error("timeout" );
+//        if (count < m_threads.size())
+//            throw std::runtime_error("timeout" );
 
-    } catch (std::exception const &e) {
-        throw std::runtime_error("worker pool '" + m_name +
-            "' status '" + convertion::convert<std::string>(status) +
-            "' waiting error: " + e.what()); // ----->
-    }
-}
+//    } catch (std::exception const &e) {
+//        throw std::runtime_error("worker pool '" + m_name +
+//            "' status '" + convertion::convert<std::string>(status) +
+//            "' waiting error: " + e.what()); // ----->
+//    }
+//}
 
 
 } // implementation
