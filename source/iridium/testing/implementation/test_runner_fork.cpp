@@ -181,7 +181,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             if (s.substr(l, 3) == "}\n\n") {
                 l += 3;
                 auto r = s.find_first_of('\n', l);
-                if (r != std::string::npos && convert<size_t>(s.substr(l, r - l)) > 0)
+                if (r != std::string::npos && convert<uint64_t>(s.substr(l, r - l)) > 0)
                     return false;
             }
         }
