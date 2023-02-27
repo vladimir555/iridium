@@ -52,7 +52,7 @@ private:
 
     std::unordered_map<uintptr_t, IStream::TConstSharedPtr>
             m_map_fd_stream;
-    int     m_epoll_fd;
+    std::atomic<int>    m_epoll_fd;
     int     m_event_fd;
     threading::IAsyncQueue<IStream::TConstSharedPtr>::TSharedPtr m_streams_to_add;
     threading::IAsyncQueue<IStream::TConstSharedPtr>::TSharedPtr m_streams_to_del;

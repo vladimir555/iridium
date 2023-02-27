@@ -24,7 +24,11 @@ public:
     Buffer(std::string const &str);
     Buffer(std::list<Buffer::TSharedPtr> const &buffers);
     template<typename ... TArgs>
-    Buffer(TArgs ... args): std::vector<unsigned char>(args ...) {}
+    Buffer(TArgs ... args)
+    :
+        std::vector<unsigned char>(args ...)
+    {}
+//    size_t findLast(std::string const &str);
 };
 
 

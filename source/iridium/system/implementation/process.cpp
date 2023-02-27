@@ -127,13 +127,19 @@ void CProcessStream::initialize() {
 #elif defined(POSIX_SPAWN_SETSID_NP)
     posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
 #else
-    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
+//    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
 #endif
 
     assertOK(
         posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ),
        "posix_spawnp"
     );
+
+//    auto r =
+//    posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ);
+//    LOGT << "posix_spawnp: " << r << " " << m_pid;
+//    assertOK(r, "posix_spawnp");
 
     close(cout_pipe[1]);
     close(cerr_pipe[1]);
@@ -153,7 +159,7 @@ void CProcessStream::initialize() {
 
 
 void CProcessStream::finalize() {
-    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
+//    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
     if (m_pid == 0)
         return;
 
@@ -183,7 +189,7 @@ IProcess::TState CProcessStream::getState() {
     if (m_pid != 0) {
         int  pid_state = 0;
         auto result = waitpid(m_pid, &pid_state, WNOHANG);
-//        LOGT << "waitpid: " << m_command_line << " pid: " << m_pid << " result: " << result << " state: " << pid_state;
+//        LOGT << "waitpid: " << m_command_line << " pid: " << m_pid << " result(pid): " << result << " state: " << pid_state;
         if  (result == 0 && pid_state == 0)
             condition = TState::TCondition::RUNNING;
 

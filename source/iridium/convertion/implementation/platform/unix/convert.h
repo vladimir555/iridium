@@ -61,8 +61,8 @@ void gmtime_r(TArgs ... args) {
 
 
 template<typename ... TArgs>
-int sprintf(TArgs ... args) {
-    return ::sprintf(args ...); // ----->
+int snprintf(TArgs ... args) {
+    return ::snprintf(args ...); // ----->
 }
 
 

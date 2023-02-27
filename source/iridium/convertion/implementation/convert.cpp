@@ -44,8 +44,8 @@ namespace {
 
 
 // 2015-05-05T05:05:05
-string const time_format_unix               = "%Y-%m-%d %H:%M:%S";
-string const time_scan_format               = "%04d-%02d-%02d %02d:%02d:%02d.%03d";
+char   const time_format_unix[]             = "%Y-%m-%d %H:%M:%S";
+char   const time_scan_format[]             = "%04d-%02d-%02d %02d:%02d:%02d.%03d";
 size_t const time_scan_format_size          = 23;
 size_t const double_to_string_buffer_size   = 512;
 size_t const int_to_string_buffer_size      = 64;
@@ -96,7 +96,7 @@ string convert(system_clock::time_point const &value) {
     platform::gmtime_r(&t, &tm_);
 
     char buffer[time_to_string_buffer_size];
-    strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), &tm_);
+    strftime(buffer, time_to_string_buffer_size, time_format_unix, &tm_);
     return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
 }
 
@@ -243,7 +243,7 @@ string convert(double const &value, int const &precision) {
 
     string p = string("%0.") + convert<string>(precision) + "lf";
     char buffer[double_to_string_buffer_size];
-    platform::sprintf(buffer, p.c_str(), value);
+    platform::snprintf(buffer, double_to_string_buffer_size, p.c_str(), value);
     return buffer; // ----->
 }
 
@@ -301,7 +301,7 @@ system_clock::time_point convert(string const &value) {
 
     struct std::tm  tm_ = {};
     int ms = 0;
-    int result = platform::sscanf(value.c_str(), time_scan_format.c_str(),
+    int result = platform::sscanf(value.c_str(), time_scan_format,
         &tm_.tm_year,
         &tm_.tm_mon,
         &tm_.tm_mday,
@@ -324,6 +324,26 @@ system_clock::time_point convert(string const &value) {
     else
         throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
 }
+
+
+//// default format: "%Y-%m-%d %H:%M:%S%z %Z"
+//template<>
+//std::chrono::system_clock::time_point convert(std::string const &source, std::string const &format) {
+//    std::tm tm_ = {};
+//    std::istringstream ss(source);
+//    ss >> std::get_time(&tm_, format.c_str());
+//    return std::chrono::system_clock::from_time_t(mktime(&tm_));
+//}
+//std::string dateTimeToString(date_time time) {
+//    std::time_t now_c = std::chrono::system_clock::to_time_t(time);
+//    auto tm = std::localtime(&now_c);
+//    char buffer[32];
+//    std::strftime(buffer, 32, "%Y-%m-%d %H:%M:%S%z %Z", tm);
+//    return std::string(buffer);
+//}
+
+
+
 
 
 template<>

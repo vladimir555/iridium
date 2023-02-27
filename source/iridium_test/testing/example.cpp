@@ -276,3 +276,9 @@ TEST(timeout) {
     LOGT << "sleep OK";
 }
 
+
+//TEST(crash) {
+//    int *a = nullptr;
+//    *a = 5;
+//}
+

@@ -76,8 +76,8 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
             assertOK(result, "write error");
     }
 
-//    LOGT << __FUNCTION__ << " fd: " << m_fd << ", size: " << received_size << ", buffer:\n"
-//         << static_cast<char const *>(buffer) << ", errno: " << errno;
+//    LOGT << __FUNCTION__ << " fd: " << m_fd << ", result: " << result << ", buffer:\n---\n"
+//         << std::string(buffer, buffer + result) << "\n---\nerrno: " << std::strerror(errno);
 
 //    if(received_size == EOF || !m_is_blocking_mode) {
 //        if (received_size == -1 && errno == EAGAIN)

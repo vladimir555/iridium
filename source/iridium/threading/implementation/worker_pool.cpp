@@ -2,7 +2,7 @@
 
 
 // todo: make arg
-static std::chrono::minutes DEFAULT_TIMEOUT(1);
+//static std::chrono::minutes DEFAULT_TIMEOUT(1);
 
 
 #include <iostream>

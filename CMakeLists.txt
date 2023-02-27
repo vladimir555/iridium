@@ -19,17 +19,17 @@ set(CMAKE_CXX_STANDARD 14)
 # debug
 set(CMAKE_BUILD_TYPE "Debug")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
   
 remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
 
 # components
 # set(CONFIG_POSTGRES 1)
 set(CONFIG_OPENSSL 0)
-if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(CONFIG_OPENSSL 1)
-endif()
+#if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+#    set(CONFIG_OPENSSL 1)
+#endif()
 
 if (CONFIG_POSTGRES)
     add_definitions(-DBUILD_FLAG_POSTGRES)

@@ -27,7 +27,7 @@ class Node {
 public:
     ///
    ~Node() = default;
-    ///
+    /// todo: lazy convertion
     TValue get() const;
     ///
     void set(TValue const &value);
@@ -209,6 +209,7 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
 
 template<typename TValue>
 TValue Node<TValue>::get() const {
+    // todo: lazy convertion with cached value
     if (m_node_destination)
         return convertion::convert<TValue>(m_node_destination->getValue());
     else
