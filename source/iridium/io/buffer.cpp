@@ -23,6 +23,15 @@ Buffer::Buffer(std::list<Buffer::TSharedPtr> const &buffers) {
 }
 
 
+//size_t Buffer::findLast(std::string const &str) {
+//    auto i = std::find_end(begin(), end(), str.begin(), str.end());
+//    if (i == end())
+//        return std::string::npos;
+
+//    return i - begin();
+//}
+
+
 } // io
 } // iridium
 

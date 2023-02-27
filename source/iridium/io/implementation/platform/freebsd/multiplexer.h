@@ -17,6 +17,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+#include <cstring>
 #include <array>
 
 #include <sys/event.h>

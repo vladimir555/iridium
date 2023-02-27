@@ -77,8 +77,8 @@ void CMultiplexer::initialize() {
         throw std::runtime_error("multiplexer initializing error: epoll is initialized"); // ----->
 
 //    m_epoll_fd = epoll_create1(0);
-    m_epoll_fd = epoll_create(1);
-    m_event_fd = eventfd(0, 0);
+    m_epoll_fd = epoll_create(DEFAULT_EVENTS_COUNT_LIMIT);
+    m_event_fd = eventfd(0, EFD_NONBLOCK);
 
     struct epoll_event event = {};
 
@@ -87,7 +87,7 @@ void CMultiplexer::initialize() {
 
     assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
 
-    LOGT << "listener fd " << m_epoll_fd << " breaker fd " << m_event_fd;
+//    LOGT << __FUNCTION__ << "fd " << m_epoll_fd << " breaker fd " << m_event_fd;
 }
 
 
@@ -97,7 +97,7 @@ void CMultiplexer::finalize() {
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer finalizing error: epoll is not initialized"); // ----->
 
-    LOGT << m_epoll_fd;
+//    LOGT << m_epoll_fd;
     ::close(m_event_fd);
     ::close(m_epoll_fd);
 
@@ -106,22 +106,29 @@ void CMultiplexer::finalize() {
 
 
 void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
-    LOCK_SCOPE_FAST
+    if (!stream || !stream->getID())
+        return;
 
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer unsubscribing error: epoll is not initialized"); // ----->
 
-    LOGT << "listener fd " << m_epoll_fd << " add " << stream->getID();
+//    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " add " << stream->getID();
     m_streams_to_add->push(stream);
+    eventfd_write(m_event_fd, 0);
 }
 
 
 void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
-    LOCK_SCOPE_FAST
+    if (!stream || !stream->getID())
+        return;
 
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer subscribing error: epoll is not initialized"); // ----->
+
+//    LOGT << __FUNCTION__ << " " << m_epoll_fd << " " << stream->getID();
+
     m_streams_to_del->push(stream);
+    eventfd_write(m_event_fd, 0);
 }
 
 
@@ -142,16 +149,16 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
         DEFAULT_EVENTS_COUNT_LIMIT,
         DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
 
-    LOGT << m_epoll_fd << " epoll count " << count;
+//    LOGT << m_epoll_fd << " epoll count " << count;
 
     std::list<IEvent::TSharedPtr> events;
 
     for (auto i = 0; i < count; i++) {
+//        LOGT << m_epoll_fd << " epoll event: fd " << epoll_events[i].data.fd << " code " <<
+//            TEpollEvent(epoll_events[i].events).convertToFlagsString();
+
         if (epoll_events[i].data.fd == m_event_fd)
             continue; // <---
-
-        LOGT << m_epoll_fd << " epoll event: fd " << epoll_events[i].data.fd << " code " <<
-                TEpollEvent(epoll_events[i].events).convertToFlagsString();
 
         if (epoll_events[i].events & EPOLLIN)
             events.push_back(
@@ -170,17 +177,18 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
 
 void CMultiplexer::addInternal(IStream::TConstSharedPtr const &stream) {
-    if (m_epoll_fd == 0)
-        throw std::runtime_error("epoll add error: not initialized"); // ----->
+//    if (m_epoll_fd == 0)
+//        throw std::runtime_error("epoll add error: not initialized"); // ----->
 
     if (stream->getID() > 0 && m_map_fd_stream.find(stream->getID()) == m_map_fd_stream.end()) {
-        LOGT << m_epoll_fd << " fd " << stream->getID();
+//        LOGT << m_epoll_fd << " fd " << stream->getID();
 
         struct epoll_event event = {};
 
         event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
         event.data.fd   = stream->getID();
 
+//        LOGT << "add internal: " << stream->getID();
         assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, stream->getID(), &event), "epoll add error");
 
         m_map_fd_stream[stream->getID()] = stream;
@@ -192,10 +200,10 @@ void CMultiplexer::addInternal(IStream::TConstSharedPtr const &stream) {
 
 
 void CMultiplexer::delInternal(IStream::TConstSharedPtr const &stream) {
-    if (m_epoll_fd == 0)
-        throw std::runtime_error("epoll add error: not initialized"); // ----->
+//    if (m_epoll_fd == 0)
+//        throw std::runtime_error("epoll add error: not initialized"); // ----->
 
-    LOGT << m_epoll_fd << " fd " << stream->getID();
+//    LOGT << m_epoll_fd << " fd " << stream->getID();
     if (stream->getID() > 0) {
         m_map_fd_stream.erase(stream->getID());
         assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr), "epoll del error");

@@ -62,6 +62,9 @@ struct LogStream {
     ///
     template<typename TValue>
     LogStream const & operator << (TValue const &v) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::atomic<TValue> const &v) const;
 
 private:
     ///
@@ -73,6 +76,13 @@ private:
 template<typename TValue>
 LogStream const & LogStream::operator << (TValue const &v) const {
     m_event.line += convertion::convert<std::string>(v);
+    return std::move(*this); // ----->
+}
+
+
+template<typename TValue>
+LogStream const & LogStream::operator << (std::atomic<TValue> const &v) const {
+    m_event.line += convertion::convert<std::string>(static_cast<TValue>(v));
     return std::move(*this); // ----->
 }
 

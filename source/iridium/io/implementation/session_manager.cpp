@@ -181,41 +181,23 @@ IProtocol::TSharedPtr CSessionManager::ContextManager::Context::getProtocol() co
 
 
 CSessionManager::CSessionManager()
-//:
-//    m_session_count(0),
-
-//    m_multiplexer(
-//        CMultiplexer::create()),
-//    m_context_manager(
-//        ContextManager::create(m_multiplexer)),
-//    m_context_worker(
-//        CWorkerPool<IEvent::TSharedPtr>::create(
-//            "stream_worker",
-//            createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-//                std::thread::hardware_concurrency(), m_context_manager))),
-//    m_multiplexer_thread(
-//        CThread::create("event_multiplexer",
-//            CMultiplexerThreadHandler::create(m_context_worker, m_multiplexer, m_context_manager))),
-//    m_event_repeater_thread(
-//        CThread::create("event_repeater",
-//            CEventRepeaterHandler::create(m_context_worker)))
-{
-    m_multiplexer =
-        CMultiplexer::create();
-    m_context_manager =
-        ContextManager::create(m_multiplexer);
-    m_context_worker =
+:
+    m_multiplexer(
+        CMultiplexer::create()),
+    m_context_manager(
+        ContextManager::create(m_multiplexer)),
+    m_context_worker(
         CWorkerPool<IEvent::TSharedPtr>::create(
             "stream_worker",
             createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-                std::thread::hardware_concurrency(), m_context_manager.get()));
-    m_multiplexer_thread =
+                std::thread::hardware_concurrency(), m_context_manager.get()))),
+    m_multiplexer_thread(
         CThread::create("event_multiplexer",
-            CMultiplexerThreadHandler::create(m_context_worker, m_multiplexer, m_context_manager.get()));
-    m_event_repeater_thread =
+            CMultiplexerThreadHandler::create(m_context_worker, m_multiplexer, m_context_manager.get()))),
+    m_event_repeater_thread(
         CThread::create("event_repeater",
-            CEventRepeaterHandler::create(m_context_worker));
-}
+            CEventRepeaterHandler::create(m_context_worker)))
+{}
 
 
 void CSessionManager::initialize() {
@@ -291,11 +273,12 @@ void CSessionManager::ContextManager::removeContext(Context::TSharedPtr const &c
         m_map_stream_context.erase(stream);
         m_map_stream_timestamp.erase(stream);
     }
-    auto result = m_map_context_streams.erase(context);
-    if (result > 0) {
+//    auto result =
+    m_map_context_streams.erase(context);
+//    if (result > 0) {
 //        m_protocol_count--;
 //        m_cv.notify_one();
-    }
+//    }
 }
 
 
@@ -416,10 +399,10 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
 
                 for (auto const &context_event: context_events) {
-
 //                    is_valid_context = context->getProtocol()->control(context_event, context);
-//                    LOGT << "is_valid_context = " << is_valid_context;
+
                     is_valid_context = context->getProtocol()->control(context_event, context);
+//                    LOGT << "is_valid_context = " << is_valid_context;
                     if (context_event->getType() == IEvent::TType::OPEN) {
 //                        is_valid_context = context->getProtocol()->control(context_event, context);
                         continue;
@@ -429,11 +412,11 @@ CSessionManager::CContextWorkerHandler::handle(
 
                     auto pipe = context->findPipe(context_event->getStream());
                     if  (pipe) {
-                        auto result = pipe->transmit(context_event);
+                        bool is_transmitted = pipe->transmit(context_event);
                         m_context_manager->updateStreamTimestamp(context_event->getStream());
-//                        LOGT << "tramsmit: " << result;
+//                        LOGT << "tramsmit: " << is_transmitted;
 //                        result = false;
-                        if (result &&
+                        if (is_transmitted &&
                             checkOneOf(
                                 event->getType(),
                                 IEvent::TType::READ,
@@ -449,12 +432,14 @@ CSessionManager::CContextWorkerHandler::handle(
                         LOGE << "pipe not found: fd " << context_event->getStream()->getID();
                     }
                     is_valid_context = context->getProtocol()->control(context_event, context);
+//                    LOGT << "is_valid_context = " << is_valid_context;
                 }
             } catch (std::exception const &e) {
                 LOGE << e.what();
                 is_valid_context = false;
             }
 
+            // todo: check timeout for not valid but transmitting context
             if (is_valid_context) {
                 events_to_repeat.splice(events_to_repeat.end(), context->popEvents());
             } else {

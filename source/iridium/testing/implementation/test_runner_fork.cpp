@@ -104,15 +104,15 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 auto left   = output.find_last_of('\n', right);
                 auto size   = convert<uint32_t>(output.substr(left + 1, right - left));
                 // todo: bugfix parser
-                auto json   = parser->parse(output.substr(left - size - 1, size))->getChild("test-result");
-                TTestResult test_results_fork(json);
+                auto node   = parser->parse(output.substr(left - size - 1, size))->getChild("test-result");
+                TTestResult test_results_fork(node);
                 for (auto const &test: test_results_fork.Test) {
                     test_results.Test.add(test);
                 }
                 output = output.substr(0, left - size);
                 LOGI << "\n" << result->path << "\n" << output;
             } catch (...) {
-                LOGF << "internal parsing test result error:\n" << output;
+                LOGF << "test process parsing output error:\n-----\n" << output << "\n-----";
             }
 
             map_path_handler.erase(result->path);
@@ -129,10 +129,11 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
         for (auto const &path_handler: map_path_handler) {
             msg += path_handler.first + ":\n";
-            msg += convertion::convert<string>(*path_handler.second->getBuffer()) + "\n";
+            if (path_handler.second->getBuffer())
+                msg += convertion::convert<string>(*path_handler.second->getBuffer()) + "\n";
         }
 
-        LOGE << msg;
+        LOGE << "\n-----" << msg << "\n-----";
     }
 
     return test_results;
@@ -169,49 +170,78 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr const &event,
     io::IPipeManager::TSharedPtr const &pipe_manager)
 {
-//    std::cout << "THREAD BEGIN: " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
-//        convert<string>(std::this_thread::get_id()) << std::endl;
-    if (m_state.exit_code)
-        return false;
-//    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
-//    if (m_buffer_output)
-//        LOGT << "buffer:\n" << *m_buffer_output;
+    try {
+    //    std::cout << "THREAD BEGIN: " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
+    //        convert<string>(std::this_thread::get_id()) << std::endl;
+        if (m_state.exit_code && m_buffer_output && m_buffer_output->size() > 1) {
+            // todo: fix checking with size == size
+            auto s = std::string(m_buffer_output->begin(), m_buffer_output->end());
+            auto l = s.find_last_of('}');
 
-    if (event->getType() == io::IEvent::TType::OPEN) {
-        pipe_manager->createPipe("process");
-        pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
-        m_buffer_output = io::Buffer::create();
-        m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
-        pipe_manager->updateWriter("process", m_stream_output);
-    }
+            if (s.substr(l, 3) == "}\n\n") {
+                l += 3;
+                auto r = s.find_first_of('\n', l);
+                if (r != std::string::npos && convert<size_t>(s.substr(l, r - l)) > 0)
+                    return false;
+            }
+        }
+    //    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
+    //    if (m_buffer_output)
+    //        LOGT << "buffer:\n" << *m_buffer_output;
 
-    m_state = m_process->getState();
+        if (event->getType() == io::IEvent::TType::OPEN) {
+            pipe_manager->createPipe("process");
+            pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
+            m_buffer_output = io::Buffer::create();
+            m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
+            pipe_manager->updateWriter("process", m_stream_output);
+        }
 
-//    LOGT << __FUNCTION__
-//         << "\nevent: " << event->getStream()->getID()
-//         << " " << event->getType()
-////         << "\nbuffer:\n" << *m_buffer_output
-//         << "\nstate: " << m_state.condition;
+        m_state = m_process->getState();
 
-    if (m_state.exit_code) {
+    //    LOGT << __FUNCTION__
+    //         << "\nevent: " << event->getStream()->getID()
+    //         << " " << event->getType()
+    ////         << "\nbuffer:\n" << *m_buffer_output
+    //         << "\nstate: " << m_state.condition;
+
+        if (m_state.exit_code) {
+            m_process_result_queue->push(
+                TProcessResult::create(
+                    TProcessResult {
+                        .path   = m_path,
+                        .state  = m_state,
+                        .output = m_buffer_output
+                    }
+                )
+            );
+        }
+
+        //threading::sleep(50);
+
+        m_state = m_process->getState();
+
+    //    std::cout << "THREAD END  : " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
+    //        convert<string>(std::this_thread::get_id()) << std::endl;
+        return !m_state.exit_code;
+    } catch (std::exception const &e) {
+        string what(e.what());
+        // todo: refactor inserting
+        if (!m_buffer_output)
+            m_buffer_output = io::Buffer::create();
+        m_buffer_output->push_back('\n');
+        m_buffer_output->insert(m_buffer_output->begin(), what.begin(), what.end());
         m_process_result_queue->push(
             TProcessResult::create(
                 TProcessResult {
                     .path   = m_path,
-                    .state  = m_state,
+                    .state  = { IProcess::TState::TCondition::INTERRUPTED, 0 },
                     .output = m_buffer_output
                 }
             )
         );
+        return false;
     }
-
-    //threading::sleep(50);
-
-    m_state = m_process->getState();
-
-//    std::cout << "THREAD END  : " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
-//        convert<string>(std::this_thread::get_id()) << std::endl;
-    return !m_state.exit_code;
 }
 
 

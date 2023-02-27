@@ -61,7 +61,7 @@ DEFINE_ENUM(
     FS          = EVFILT_FS,
     USER        = EVFILT_USER,
 //    VM          = EVFILT_VM,
-    EXCEPT      = EVFILT_EXCEPT,
+//    EXCEPT      = EVFILT_EXCEPT,
     SYSCOUN     = EVFILT_SYSCOUNT
 )
 
@@ -157,7 +157,7 @@ void CMultiplexer::finalize() {
     auto    result  = write(m_pipe_add[1], &fd, 8);
 
     if (result < 0)
-        throw std::runtime_error("multiplexer finalization error: " + string(strerror(errno))); // ----->
+        throw std::runtime_error("multiplexer finalization error: " + string(std::strerror(errno))); // ----->
 }
 
 
