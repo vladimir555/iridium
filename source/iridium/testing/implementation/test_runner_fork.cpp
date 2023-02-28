@@ -171,19 +171,29 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IPipeManager::TSharedPtr const &pipe_manager)
 {
     try {
-    //    std::cout << "THREAD BEGIN: " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
-    //        convert<string>(std::this_thread::get_id()) << std::endl;
-        if (m_state.exit_code && m_buffer_output && m_buffer_output->size() > 1) {
-            // todo: fix checking with size == size
-            auto s = std::string(m_buffer_output->begin(), m_buffer_output->end());
-            auto l = s.find_last_of('}');
+        bool is_parsed = false;
+//        if (event->getType() == io::IEvent::TType::OPEN)
+//            LOGT << "0 event: " << event->getType();
+//        else
+//            LOGT << "0 event: " << event->getType() << " " << event->getStream()->getID();
+        // todo: optimize !!!
+        try {
+            if (m_state.exit_code && m_buffer_output && m_buffer_output->size() > 1) {
+//                LOGT << "1 exit_code: " << m_state.exit_code;
+                // todo: fix checking with size == size
+                auto s = std::string(m_buffer_output->begin(), m_buffer_output->end());
+                auto l = s.find_last_of('}');
 
-            if (s.substr(l, 3) == "}\n\n") {
-                l += 3;
-                auto r = s.find_first_of('\n', l);
-                if (r != std::string::npos && convert<uint64_t>(s.substr(l, r - l)) > 0)
-                    return false;
+                if (s.substr(l, 3) == "}\n\n") {
+                    l += 3;
+                    auto r = s.find_first_of('\n', l);
+//                    LOGT << "2 size: '" << s.substr(l, r - l) << "', str size: " << s.size();
+                    if (r != std::string::npos && convert<uint64_t>(s.substr(l, r - l)) > 0)
+                        is_parsed = true;
+                }
             }
+        } catch (...) {
+
         }
     //    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
     //    if (m_buffer_output)
@@ -205,7 +215,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     ////         << "\nbuffer:\n" << *m_buffer_output
     //         << "\nstate: " << m_state.condition;
 
-        if (m_state.exit_code) {
+        if (is_parsed) {
             m_process_result_queue->push(
                 TProcessResult::create(
                     TProcessResult {
@@ -223,7 +233,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     //    std::cout << "THREAD END  : " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
     //        convert<string>(std::this_thread::get_id()) << std::endl;
-        return !m_state.exit_code;
+        return !is_parsed;
     } catch (std::exception const &e) {
         string what(e.what());
         // todo: refactor inserting

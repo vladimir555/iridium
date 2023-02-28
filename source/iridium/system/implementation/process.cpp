@@ -151,7 +151,7 @@ void CProcessStream::initialize() {
     m_exit_code.reset();
 
     auto state = getState();
-    if  (state.condition != TState::TCondition::RUNNING)
+    if  (!checkOneOf(state.condition, TState::TCondition::RUNNING, TState::TCondition::DONE))
         throw std::runtime_error(
             "process " + m_command_line +
             " is not running, process condition: " + convert<string>(state.condition)); // ----->

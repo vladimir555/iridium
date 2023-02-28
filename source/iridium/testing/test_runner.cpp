@@ -6,20 +6,16 @@ using iridium::testing::ITestRunner;
 
 
 string convertNodeTestToString(
-    typename ITestRunner::INodeTest::TConstSharedPtr const &node,
+    typename ITestRunner::INodeTest const &node,
     string const &tab = "")
 {
-    if (!node)
-        return "NULL"; // ----->
+    string result = "\n" + tab + "'" + node.getName() + "'";
 
-    string result = "\n" + tab + "'" + node->getName() + "'";
-
-    for (auto const &i: *node)
-        result += convertNodeTestToString(i, tab + "  ");
+    for (auto const &i: node)
+        result += convertNodeTestToString(*i, tab + "  ");
 
     return result; // ----->
 }
 
 
-IMPLEMENT_CONVERT(std::string, ITestRunner::INodeTest::TConstSharedPtr , convertNodeTestToString)
-IMPLEMENT_CONVERT(std::string, ITestRunner::INodeTest::TSharedPtr      , convertNodeTestToString)
+IMPLEMENT_CONVERT(std::string, ITestRunner::INodeTest, convertNodeTestToString)
