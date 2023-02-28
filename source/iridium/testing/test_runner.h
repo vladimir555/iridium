@@ -39,9 +39,7 @@ public:
 } // iridium
 
 
-DEFINE_CONVERT(std::string, iridium::testing::ITestRunner::INodeTest::TConstSharedPtr)
-DEFINE_CONVERT(std::string, iridium::testing::ITestRunner::INodeTest::TSharedPtr)
-
+DEFINE_CONVERT(std::string, iridium::testing::ITestRunner::INodeTest)
 
 
 #endif // HEADER_TEST_RUNNER_34E956BA_A097_4535_8EF2_FC8842A198B7

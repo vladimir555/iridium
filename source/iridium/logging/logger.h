@@ -65,6 +65,12 @@ struct LogStream {
     ///
     template<typename TValue>
     LogStream const & operator << (std::atomic<TValue> const &v) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (TValue * const * v) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::shared_ptr<TValue> const &v) const;
 
 private:
     ///
@@ -74,15 +80,29 @@ private:
 
 //todo: thread safe
 template<typename TValue>
-LogStream const & LogStream::operator << (TValue const &v) const {
+LogStream const &LogStream::operator << (TValue const &v) const {
     m_event.line += convertion::convert<std::string>(v);
     return std::move(*this); // ----->
 }
 
 
 template<typename TValue>
-LogStream const & LogStream::operator << (std::atomic<TValue> const &v) const {
+LogStream const &LogStream::operator << (std::atomic<TValue> const &v) const {
     m_event.line += convertion::convert<std::string>(static_cast<TValue>(v));
+    return std::move(*this); // ----->
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (TValue * const * v) const {
+    m_event.line += v ? convertion::convert<std::string>(*v) : "nullptr";
+    return std::move(*this); // ----->
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (std::shared_ptr<TValue> const &v) const {
+    m_event.line += v ? convertion::convert<std::string>(*v) : "nullptr";
     return std::move(*this); // ----->
 }
 

@@ -96,7 +96,8 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
                 }
             }
 
-            LOGE << "\n\nfailed tests:\n" + failed_tests;
+            if (!failed_tests.empty())
+                LOGE << "\n\nfailed tests:\n" + failed_tests;
 
             LOGI << "\npassed: " << passed_count
                  << "\nfailed: " << failed_count
