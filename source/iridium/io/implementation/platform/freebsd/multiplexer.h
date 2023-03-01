@@ -19,6 +19,7 @@
 #include <string>
 #include <cstring>
 #include <array>
+#include <atomic>
 
 #include <sys/event.h>
 
@@ -57,9 +58,9 @@ private:
 
     std::vector<struct kevent> m_triggered_events;
 
-    int m_kqueue;
-    std::array<int, 2> m_pipe_add;
-    std::array<int, 2> m_pipe_del;
+    std::atomic<int>    m_kqueue;
+    std::array<int, 2>  m_pipe_add;
+    std::array<int, 2>  m_pipe_del;
 
     std::unordered_map<uintptr_t, IStream::TConstSharedPtr> m_map_fd_stream;
 };

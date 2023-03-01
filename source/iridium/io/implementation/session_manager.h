@@ -38,7 +38,7 @@ private:
 
             Context(
                 IMultiplexer::TSharedPtr    const &multiplexer,
-                ContextManager * const context_manager,
+                ContextManager            * const context_manager,
                 IProtocol::TSharedPtr       const &protocol);
             virtual ~Context();
 
@@ -58,8 +58,6 @@ private:
 
             IMultiplexer::TSharedPtr
                 m_multiplexer;
-//            ContextManager * const
-//                m_context_manager;
             IProtocol::TSharedPtr
                 m_protocol;
             std::unordered_map<std::string, IPipe::TSharedPtr>
@@ -77,6 +75,7 @@ private:
         void                releaseContext  (Context::TSharedPtr const &context);
         void                updateContext   (Context::TSharedPtr const &context, IStream::TSharedPtr const &stream);
         void                removeContext   (Context::TSharedPtr const &context);
+        void                clear();
 
         std::list<IStream::TConstSharedPtr> getOutdatedStreams();
         void updateStreamTimestamp(IStream::TConstSharedPtr const &stream);
@@ -102,8 +101,7 @@ private:
         CMultiplexerThreadHandler(
             IContextWorker::TSharedPtr  const &context_worker,
             IMultiplexer::TSharedPtr    const &multiplexer,
-//            ContextManager::TWeakPtr    const &context_manager
-            ContextManager * const  context_manager
+            ContextManager::TSharedPtr  const &context_manager
         );
 
         void initialize() override;
@@ -115,7 +113,7 @@ private:
             m_multiplexer;
         IContextWorker::TSharedPtr
             m_context_worker;
-        ContextManager * const
+        ContextManager::TSharedPtr
             m_context_manager;
     };
 
@@ -136,15 +134,13 @@ private:
     class CContextWorkerHandler: public IContextWorker::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CContextWorkerHandler)
-//        CContextWorkerHandler(ContextManager::TWeakPtr const &context_manager);
-        CContextWorkerHandler(ContextManager * const context_manager);
+        CContextWorkerHandler(ContextManager::TSharedPtr const &context_manager);
         void initialize() override;
         void finalize() override;
         IContextWorker::TOutputItems handle(IContextWorker::TInputItems const &events) override;
     private:
-        ContextManager * const m_context_manager;
-//        ContextManager::TSharedPtr
-//            m_context_manager;
+        ContextManager::TSharedPtr
+            m_context_manager;
     };
 
     IMultiplexer::TSharedPtr

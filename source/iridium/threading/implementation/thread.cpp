@@ -108,7 +108,7 @@ void CThread::run(
     if (!error.empty()) {
         // for exceptions in logger
 //        cerr << error;
-        LOGT << error;
+        LOGF << error;
     }
 }
 
