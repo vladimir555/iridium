@@ -71,12 +71,12 @@ CMultiplexer::CMultiplexer()
 
 
 void CMultiplexer::initialize() {
+//    LOGT << __FUNCTION__;
     LOCK_SCOPE_FAST
 
     if (m_epoll_fd)
         throw std::runtime_error("multiplexer initializing error: epoll is initialized"); // ----->
 
-//    m_epoll_fd = epoll_create1(0);
     m_epoll_fd = epoll_create(DEFAULT_EVENTS_COUNT_LIMIT);
     m_event_fd = eventfd(0, EFD_NONBLOCK);
 
@@ -87,17 +87,17 @@ void CMultiplexer::initialize() {
 
     assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
 
-//    LOGT << __FUNCTION__ << "fd " << m_epoll_fd << " breaker fd " << m_event_fd;
+    LOGT << __FUNCTION__ << ": " << m_epoll_fd << ", breaker fd " << m_event_fd;
 }
 
 
 void CMultiplexer::finalize() {
+//    LOGT << __FUNCTION__ << ": " << m_epoll_fd;
     LOCK_SCOPE_FAST
 
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer finalizing error: epoll is not initialized"); // ----->
 
-//    LOGT << m_epoll_fd;
     ::close(m_event_fd);
     ::close(m_epoll_fd);
 
@@ -109,10 +109,11 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     if (!stream || !stream->getID())
         return;
 
-    if (!m_epoll_fd)
-        throw std::runtime_error("multiplexer unsubscribing error: epoll is not initialized"); // ----->
+//    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " " << stream->getID();
 
-//    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " add " << stream->getID();
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer subscribing error: epoll is not initialized"); // ----->
+
     m_streams_to_add->push(stream);
     eventfd_write(m_event_fd, 0);
 }
@@ -122,10 +123,10 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
     if (!stream || !stream->getID())
         return;
 
-    if (!m_epoll_fd)
-        throw std::runtime_error("multiplexer subscribing error: epoll is not initialized"); // ----->
+//    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " " << stream->getID();
 
-//    LOGT << __FUNCTION__ << " " << m_epoll_fd << " " << stream->getID();
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer unsubscribing error: epoll is not initialized"); // ----->
 
     m_streams_to_del->push(stream);
     eventfd_write(m_event_fd, 0);
