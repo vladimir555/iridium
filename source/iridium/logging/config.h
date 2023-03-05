@@ -31,7 +31,7 @@ DEFINE_ROOT_NODE_BEGIN(Logger)
 DEFINE_ROOT_NODE_END()
 
 
-TLogger createDefaultConsoleLoggerConfig();
+TLogger createDefault();
 
 
 } // config

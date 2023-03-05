@@ -122,7 +122,7 @@ std::list<string> Light::getLastActions() const {
 
 
 TEST(fsm_map) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    logging::update(logging::config::createDefault());
     Light light;
 
     light.doAction(test::Light::TEvent::PUSH_BUTTON);
@@ -140,7 +140,7 @@ TEST(fsm_map) {
 
 
 TEST(fsm_switch) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    logging::update(logging::config::createDefault());
     test::Light light;
 
     light.doAction(test::Light::TEvent::PUSH_BUTTON);

@@ -13,7 +13,7 @@ namespace logging {
 namespace config {
 
 
-TLogger createDefaultConsoleLoggerConfig() {
+TLogger createDefault() {
     auto root = CNode::create("logger");
 
     root->addChild("level", "TRACE_LEVEL");

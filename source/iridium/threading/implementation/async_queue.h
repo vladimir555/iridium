@@ -82,7 +82,8 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
 
     m_items.push_back(item);
     m_is_empty = m_items.empty();
-    m_condition->notifyOne();
+//    m_condition->notifyOne();
+    m_condition->notifyAll();
 
     return m_items.size(); // ----->
 }
@@ -90,18 +91,14 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
 
 template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
-    if (items.size() > 0) {
-        LOCK_SCOPE_FAST
+    LOCK_SCOPE_FAST
 
-        auto items_ = items;
+    m_items.insert(m_items.end(), items.begin(), items.end());
+    m_is_empty = m_items.empty();
+//    m_condition->notifyOne();
+    m_condition->notifyAll();
 
-        m_items.splice(m_items.end(), items_);
-        m_is_empty = m_items.empty();
-        m_condition->notifyOne();
-
-        return m_items.size(); // ----->
-    } else
-        return 0; // ----->
+    return m_items.size(); // ----->
 }
 
 
@@ -111,8 +108,9 @@ std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
         m_condition->wait();
 
     LOCK_SCOPE_FAST
+    auto result = std::move(m_items);
     m_is_empty = true;
-    return std::move(m_items);
+    return result;
 }
 
 
@@ -122,8 +120,9 @@ std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout
         m_condition->wait(timeout);
 
     LOCK_SCOPE_FAST
+    auto result = std::move(m_items);
     m_is_empty = true;
-    return std::move(m_items);
+    return result;
 }
 
 

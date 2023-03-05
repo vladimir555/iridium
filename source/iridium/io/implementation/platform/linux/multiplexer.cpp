@@ -37,7 +37,7 @@ namespace platform {
 
 
 //static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
-static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 1000;
+static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 5000;
 
 
 DEFINE_ENUM(
@@ -92,15 +92,14 @@ void CMultiplexer::initialize() {
 
 
 void CMultiplexer::finalize() {
-//    LOGT << __FUNCTION__ << ": " << m_epoll_fd;
-    LOCK_SCOPE_FAST
-
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer finalizing error: epoll is not initialized"); // ----->
 
-    ::close(m_event_fd);
+//    LOGT << "notify close epoll";
+    int64_t i = 0;
+    write(m_event_fd, &i, 8);
+//    LOGT << "close epoll";
     ::close(m_epoll_fd);
-
     m_epoll_fd = 0;
 }
 
@@ -134,15 +133,22 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
 
 
 std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
-    LOCK_SCOPE_FAST
-
     if (!m_epoll_fd)
-        throw std::runtime_error("multiplexer wait events error: epoll is not initialized"); // ----->
+        return {};
+//    if (!m_epoll_fd)
+//        throw std::runtime_error("multiplexer wait events error: epoll is not initialized"); // ----->
+
+    LOCK_SCOPE_FAST
 
     struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
     for (auto const &stream: m_streams_to_add->pop(false))
         addInternal(stream);
+
+    for (auto const &stream: m_streams_to_del->pop(false))
+        delInternal(stream);
+
+//    LOGT << "wait epoll ...";
 
     auto count = epoll_wait(
         m_epoll_fd,
@@ -150,7 +156,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
         DEFAULT_EVENTS_COUNT_LIMIT,
         DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
 
-//    LOGT << m_epoll_fd << " epoll count " << count;
+//    LOGT << "wait epoll OK: " << m_epoll_fd << " epoll count " << count;
 
     std::list<IEvent::TSharedPtr> events;
 
@@ -169,9 +175,6 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
             events.push_back(
                 CEvent::create(std::const_pointer_cast<IStream>(m_map_fd_stream[epoll_events[i].data.fd]), IEvent::TType::WRITE));
     }
-
-    for (auto const &stream: m_streams_to_del->pop(false))
-        delInternal(stream);
 
     return events; // ----->
 }
@@ -204,7 +207,7 @@ void CMultiplexer::delInternal(IStream::TConstSharedPtr const &stream) {
 //    if (m_epoll_fd == 0)
 //        throw std::runtime_error("epoll add error: not initialized"); // ----->
 
-//    LOGT << m_epoll_fd << " fd " << stream->getID();
+    LOGT << "epoll del: " << m_epoll_fd << " fd " << stream->getID();
     if (stream->getID() > 0) {
         m_map_fd_stream.erase(stream->getID());
         assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr), "epoll del error");

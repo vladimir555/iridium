@@ -20,8 +20,9 @@ typedef INodeType<std::string> INode;
 } // iridium
 
 
-DEFINE_CONVERT(std::string, iridium::parsing::INode::TConstSharedPtr)
-DEFINE_CONVERT(std::string, iridium::parsing::INode::TSharedPtr)
+//DEFINE_CONVERT(std::string, iridium::parsing::INode::TConstSharedPtr)
+//DEFINE_CONVERT(std::string, iridium::parsing::INode::TSharedPtr)
+DEFINE_CONVERT(std::string, iridium::parsing::INode)
 
 
 #endif // HEADER_NODE_7F5A86D1_A48E_4F8A_9779_D7495B3528A3

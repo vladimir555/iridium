@@ -88,7 +88,7 @@ TEST(http_request) {
 
 
 TEST(http_response) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+//    logging::update(logging::config::createDefault());
 
     auto parser = CHTTPParser::create();
     auto node   = parser->parse(responce_example);

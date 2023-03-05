@@ -39,7 +39,9 @@ void Tester::add(ITest * const test, std::string const &path_) {
 
 
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    logging::update(logging::config::createDefault());
+
+    // todo: command line parser with long - short arg name std::map CCommandLineParser(std::map ...)
 
     vector<string> args;
     for (int i = 0; i < argc; i++)
@@ -50,14 +52,14 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         return 0; // ----->
     }
 
-    if (args.size() == 1 ||  (args.size() > 1 && args[1] == "run")) {
+    if (args.size() == 1 || (args.size() > 1 && args[1] == "run")) {
         size_t  i = 2;
-        bool    is_raw = args.size() > i && args[i] == "--raw";
+        bool    is_json_result = args.size() > i && args[i] == "--json-result";
 
-        if (is_raw)
+        if (is_json_result)
             i++;
 
-        string  include = args.size() > i ? args[i] : "/";
+        string include = args.size() > i ? args[i] : "/";
 
         list<string> excludes;
         for (++i; i < args.size(); i++)
@@ -68,9 +70,9 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         ITestRunner::TSharedPtr test_runner;
 
         // todo: args
-        std::chrono::milliseconds timeout(5000);
+        std::chrono::milliseconds timeout(10000);
 
-        if (is_raw)
+        if (is_json_result)
             test_runner = CTestRunnerRaw::create();
         else
             test_runner = CTestRunnerFork::create(args[0], timeout);
@@ -80,7 +82,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         size_t failed_count = 0;
         size_t passed_count = 0;
 
-        if (is_raw) {
+        if (is_json_result) {
             auto json = CJSONParser::create()->compose(result.getNode());
             LOGI << "\n\n" << json << "\n" << json.size();
         } else {
