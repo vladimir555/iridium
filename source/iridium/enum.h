@@ -25,8 +25,8 @@
 class TEnum { \
 public: \
     enum TEnumInternal { \
-        UNKNOWN = std::numeric_limits<int>::min(), \
-        __VA_ARGS__ \
+        __VA_ARGS__, \
+        UNKNOWN = std::numeric_limits<int>::min() \
     }; \
     TEnum(): m_value(TEnumInternal::UNKNOWN) {} \
     TEnum(TEnum const &e) = default; \
@@ -34,8 +34,10 @@ public: \
     TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
         for (auto &i : map_enum_string) \
-            if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) \
+            if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) { \
                 m_value = i.first; \
+                break; \
+            } \
     } \
    ~TEnum() = default; \
     operator std::string() const { \
@@ -118,7 +120,7 @@ public: \
 /// use not in namespace, todo: private enum
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
-int TEnum::Enums::index = TEnum::UNKNOWN; \
+int TEnum::Enums::index = -1; \
 std::map<TEnum::TEnumInternal, std::string> const TEnum::map_enum_string(TEnum::generateMap()); \
 IMPLEMENT_CONVERT(TEnum, std::string, TEnum::convert) \
 IMPLEMENT_CONVERT(std::string, TEnum, TEnum::convert) \
