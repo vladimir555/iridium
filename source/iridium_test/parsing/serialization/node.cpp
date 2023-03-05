@@ -81,7 +81,7 @@ DEFINE_ROOT_NODE_END()
 
 
 TEST(serialization) {
-    logging::update(logging::config::createDefaultConsoleLoggerConfig());
+    logging::update(logging::config::createDefault());
 
     {
         auto root_node = CNode::create("root2");

@@ -29,73 +29,78 @@ namespace {
 
 
 string const beer_xml = ""
-"<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-"<MyBeerJournal>"
-"    <Brewery name=\"Founders Brewing Company\" location=\"Grand Rapids, MI\">"
-"        <Beer name=\"Centennial\" description=\"IPA\" rating=\"A+\" dateSampled=\"01/02/2011\">"
-"            \"What an excellent IPA. This is the most delicious beer I have ever tasted!\""
-"        </Beer>"
-"    </Brewery>"
-"    <Brewery name=\"Brewery Vivant\" location=\"Grand Rapids, MI\">"
-"        <Beer name=\"Farmhouse Ale\" description=\"Belgian Ale\" rating=\"B\" dateSampled=\"02/07/2015\">"
-"            This beer is not so good... but I am not that big of a fan of english style ales."
-"        </Beer>"
-"    </Brewery>"
-"    <Brewery name=\"Bells Brewery\" location=\"Kalamazoo, MI\">"
-"        <Beer name=\"Two Hearted Ale\" description=\"IPA\" rating=\"A\" dateSampled=\"03/15/2012\">"
-"            Another execllent brew. Two Hearted gives Founders Centennial a run for it's money."
-"        </Beer>"
-"    </Brewery>"
-"    <array>5</array>"
-"    <array>4</array>"
-"    <array>3</array>"
-"    <array>2</array>"
-"    <array>1</array>"
-"</MyBeerJournal>";
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+"<MyBeerJournal>\n"
+"    <Brewery location=\"Grand Rapids, MI\" name=\"Founders Brewing Company\">\n"
+"        <Beer dateSampled=\"01/02/2011\" description=\"IPA\" name=\"Centennial\" rating=\"A+\">\n"
+"            \"What an excellent IPA. This is the most delicious beer I have ever tasted!\"\n"
+"        </Beer>\n"
+"    </Brewery>\n"
+"    <Brewery location=\"Grand Rapids, MI\" name=\"Brewery Vivant\">\n"
+"        <Beer dateSampled=\"02/07/2015\" description=\"Belgian Ale\" name=\"Farmhouse Ale\" rating=\"B\">\n"
+"            This beer is not so good... but I am not that big of a fan of english style ales.\n"
+"        </Beer>\n"
+"    </Brewery>\n"
+"    <Brewery location=\"Kalamazoo, MI\" name=\"Bells Brewery\">\n"
+"        <Beer dateSampled=\"03/15/2012\" description=\"IPA\" name=\"Two Hearted Ale\" rating=\"A\">\n"
+"            Another execllent brew. Two Hearted gives Founders Centennial a run for it's money.\n"
+"        </Beer>\n"
+"    </Brewery>\n"
+"    <array>5</array>\n"
+"    <array>4</array>\n"
+"    <array>3</array>\n"
+"    <array>2</array>\n"
+"    <array>1</array>\n"
+"</MyBeerJournal>\n\n";
 
 
 string const beer_json = ""
 "{\n"
-"    \"MyBeerJournal\": {"
-"        \"Brewery\" : [\n"
+"    \"MyBeerJournal\": {\n"
+"        \"Brewery\": [\n"
 "            {\n"
-"                \"Beer\" : {\n"
-"                    \"#text\" : \"            \\\"What an excellent IPA. This is the most delicious beer I have ever tasted!\\\"        \",\n"
-"                    \"dateSampled\" : \"01/02/2011\",\n"
-"                    \"description\" : \"IPA\",\n"
-"                    \"name\" : \"Centennial\",\n"
-"                    \"rating\" : \"A+\"\n"
+"                \"Beer\": {\n"
+"                    \"#text\": \"\n            \\\"What an excellent IPA. This is the most delicious beer I have ever tasted!\\\"\n        \",\n"
+"                    \"dateSampled\": \"01/02/2011\",\n"
+"                    \"description\": \"IPA\",\n"
+"                    \"name\": \"Centennial\",\n"
+"                    \"rating\": \"A+\"\n"
 "                },\n"
-"                \"location\" : \"Grand Rapids, MI\",\n"
-"                \"name\" : \"Founders Brewing Company\"\n"
+"                \"location\": \"Grand Rapids, MI\",\n"
+"                \"name\": \"Founders Brewing Company\"\n"
 "            },\n"
 "            {\n"
-"                \"Beer\" : {\n"
-"                    \"#text\" : \"            This beer is not so good... but I am not that big of a fan of english style ales.        \",\n"
-"                    \"dateSampled\" : \"02/07/2015\",\n"
-"                    \"description\" : \"Belgian Ale\",\n"
-"                    \"name\" : \"Farmhouse Ale\",\n"
-"                    \"rating\" : \"B\"\n"
+"                \"Beer\": {\n"
+"                    \"#text\": \"\n            This beer is not so good... but I am not that big of a fan of english style ales.\n        \",\n"
+"                    \"dateSampled\": \"02/07/2015\",\n"
+"                    \"description\": \"Belgian Ale\",\n"
+"                    \"name\": \"Farmhouse Ale\",\n"
+"                    \"rating\": \"B\"\n"
 "                },\n"
-"                \"location\" : \"Grand Rapids, MI\",\n"
-"                \"name\" : \"Brewery Vivant\"\n"
+"                \"location\": \"Grand Rapids, MI\",\n"
+"                \"name\": \"Brewery Vivant\"\n"
 "            },\n"
 "            {\n"
-"                \"Beer\" : {\n"
-"                    \"#text\" : \"            Another execllent brew. Two Hearted gives Founders Centennial a run for it's money.        \",\n"
-"                    \"dateSampled\" : \"03/15/2012\",\n"
-"                    \"description\" : \"IPA\",\n"
-"                    \"name\" : \"Two Hearted Ale\",\n"
-"                    \"rating\" : \"A\"\n"
+"                \"Beer\": {\n"
+"                    \"#text\": \"\n            Another execllent brew. Two Hearted gives Founders Centennial a run for it's money.\n        \",\n"
+"                    \"dateSampled\": \"03/15/2012\",\n"
+"                    \"description\": \"IPA\",\n"
+"                    \"name\": \"Two Hearted Ale\",\n"
+"                    \"rating\": \"A\"\n"
 "                },\n"
-"                \"location\" : \"Kalamazoo, MI\",\n"
-"                \"name\" : \"Bells Brewery\"\n"
+"                \"location\": \"Kalamazoo, MI\",\n"
+"                \"name\": \"Bells Brewery\"\n"
 "            }\n"
 "        ],\n"
-"        \"array\": [\"5\", \"4\", \"3\", \"2\", \"1\"]\n"
+"        \"array\": [\n"
+"            \"5\",\n"
+"            \"4\",\n"
+"            \"3\",\n"
+"            \"2\",\n"
+"            \"1\"\n"
+"        ]\n"
 "    }\n"
-"}\n"
-"";
+"}\n";
 
 
 INode::TSharedPtr createTestNode() {
@@ -135,16 +140,16 @@ INode::TSharedPtr createTestNode() {
 string const xml_str_expects = ""
 "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
 "<root>\n"
-"\t<item attr_value=\"value_1\" attr_name=\"name_1\"/>\n"
-"\t<item attr_value=\"value_2\" attr_name=\"name_2\">\n"
-"\t\t<sub_item item=\"sub_item_attr_value_5\"/>\n"
-"\t</item>\n"
-"\t<array>5</array>\n"
-"\t<array>4</array>\n"
-"\t<array>3</array>\n"
-"\t<array>2</array>\n"
-"\t<array>1</array>\n"
-"\t<item>text</item>\n"
+"    <item attr_value=\"value_1\" attr_name=\"name_1\"/>\n"
+"    <item attr_value=\"value_2\" attr_name=\"name_2\">\n"
+"        <sub_item item=\"sub_item_attr_value_5\"/>\n"
+"    </item>\n"
+"    <array>5</array>\n"
+"    <array>4</array>\n"
+"    <array>3</array>\n"
+"    <array>2</array>\n"
+"    <array>1</array>\n"
+"    <item>text</item>\n"
 "</root>\n\n";
 
 
@@ -249,13 +254,14 @@ TEST(parse_json) {
 //     auto value_nodes    = assertComplete(node->findChilds("/MyBeerJournal/Brewery/Beer/name"), "tags not found");
 
      // todo:
-     ASSERT("Centennial", equal, node->getChild("MyBeerJournal")->getChild("Brewery")->getChild("Beer")->getChild("name")->getValue());
+     ASSERT("MyBeerJournal", equal, node->getName());
+     ASSERT("Centennial", equal, node->getChild("Brewery")->getChild("Beer")->getChild("name")->getValue());
 //     ASSERT("Centennial"     , equal,     (*value_nodes.begin())->getValue());
 //     ASSERT("Farmhouse Ale"  , equal,   (*++value_nodes.begin())->getValue());
 //     ASSERT("Two Hearted Ale", equal, (*++++value_nodes.begin())->getValue());
 
      string array;
-     for (auto const &i: *node->getChild("MyBeerJournal"))
+     for (auto const &i: *node)
          if (i->getName() == "array")
              array += i->getValue();
 
@@ -286,6 +292,22 @@ TEST(compose_http_request) {
     auto http_header_   = parser->compose(node);
 
     ASSERT(http_header_composed, equal, http_header_);
+}
+
+
+TEST(parse_compose) {
+    auto parser_json = CJSONParser::create();
+    auto parser_xml  = CXMLParser::create();
+
+    auto node = parser_json->parse(beer_json);
+
+    auto xml_str = parser_xml->compose(node);
+
+    ASSERT(beer_xml, equal, xml_str);
+
+    auto json_str = parser_json->compose(node);
+
+    ASSERT(beer_json, equal, json_str);
 }
 
 

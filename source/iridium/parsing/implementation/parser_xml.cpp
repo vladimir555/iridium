@@ -35,6 +35,13 @@ namespace {
 
 
 string mask(string const &source) {
+//    string result;
+//    for (auto const &ch: source) {
+//        if (iridium::checkOneOf(ch, /*'&', '\'', '<', '>', */'\n'))
+//            result += '\\';
+//        result += ch;
+//    }
+//    return result;
     return source;
 }
 
@@ -108,6 +115,7 @@ TXMLNode *convertNodeToXMLNode(INode::TConstSharedPtr const &node, TXMLNode *xml
     } else {
         assertExists(xml_node_, "xml_node does not exists");
         auto value = xml_document.allocate_string(mask(node->getValue()).c_str());
+
         if (node->getName().empty()) {
             xml_node_->value(value);
         } else {
@@ -132,6 +140,8 @@ INode::TSharedPtr CXMLParser::parse(string const &source) const {
 
 
 string CXMLParser::compose(INode::TConstSharedPtr const &root_node) const {
+    assertExists(root_node, "xml compose error: node is null");
+
     TXMLDocument xml_document;
 
     auto xml_node_declaration = xml_document.allocate_node(rapidxml::node_declaration);
@@ -143,7 +153,7 @@ string CXMLParser::compose(INode::TConstSharedPtr const &root_node) const {
     xml_document.append_node(xml_root_node);
 
     string xml_as_string;
-    rapidxml::print(std::back_inserter(xml_as_string), xml_document);
+    rapidxml::print(std::back_inserter(xml_as_string), xml_document, rapidxml::print_ident_spaces | rapidxml::print_no_expand_quote_in_text);
 
     return xml_as_string; // ----->
 }

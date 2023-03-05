@@ -204,10 +204,10 @@ void CSessionManager::initialize() {
 
 void CSessionManager::finalize() {
     m_context_worker->finalize();
-    m_multiplexer_thread->finalize();
     m_event_repeater_thread->finalize();
     m_context_manager->clear();
     m_multiplexer->finalize();
+    m_multiplexer_thread->finalize();
 }
 
 

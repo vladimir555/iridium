@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "iridium/logging/logger.h"
+
 
 using std::thread;
 using std::string;
@@ -43,9 +45,16 @@ void CThread::initialize() {
     m_is_running = true;
     m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_statuses, &m_is_running);
     try {
+//        LOGT << "wait start thread: " << m_name << " ...";
         auto statuses = m_statuses->pop(m_timeout);
-        if (statuses.empty())
-            throw std::runtime_error("timeout");
+//        auto statuses = m_statuses->pop();
+//        LOGT << "wait start thread: " << m_name << " OK";
+        if (statuses.empty() || !statuses.front())
+            throw std::runtime_error("timeout: " + convert<string>(m_timeout));
+        if (statuses.size() > 1) {
+            statuses.pop_front();
+            m_statuses->push(statuses);
+        }
     } catch (std::exception const &e) {
         throw std::runtime_error("thread '" + m_name + "' initializing error: " + e.what()); // ----->
     }
@@ -57,9 +66,12 @@ void CThread::finalize() {
         m_is_running = false;
 
         try {
+//            LOGT << "wait stop thread: " << m_name << " ...";
             auto statuses = m_statuses->pop(m_timeout);
-            if (statuses.empty())
-                throw std::runtime_error("timeout");
+//            auto statuses = m_statuses->pop();
+//            LOGT << "wait stop thread: " << m_name << " OK";
+            if (statuses.empty() || statuses.back())
+                throw std::runtime_error("timeout: " + convert<string>(m_timeout));
             else {
                 m_thread->join();
                 m_runnuble->finalize();
@@ -98,7 +110,9 @@ void CThread::run(
     std::string error;
     try {
         statuses->push(true);
+//        LOGT << "start thread: " << name;
         runnuble->run(*is_running);
+//        LOGT << "stop  thread: " << name;
         statuses->push(false);
     } catch (std::exception &e) {
         error = "thread '" + name + "' stopped, error: " + e.what();

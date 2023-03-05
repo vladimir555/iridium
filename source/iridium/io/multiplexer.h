@@ -20,6 +20,7 @@ public:
 
     static std::chrono::seconds const DEFAULT_WAITING_TIMEOUT;
 
+    // no throw
     virtual std::list<IEvent::TSharedPtr> waitEvents() = 0;
     // todo: subscribe for IStreamReader and IStreamWriter
     virtual void subscribe  (IStream::TConstSharedPtr const &stream) = 0;

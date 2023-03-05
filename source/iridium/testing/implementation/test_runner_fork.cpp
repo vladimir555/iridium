@@ -59,7 +59,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     for (auto const &path: paths) {
 //        LOGT << path;
 
-        auto process = CProcessStream::create(m_app_path, "run --raw " + path);
+        auto process = CProcessStream::create(m_app_path, "run --json-result " + path);
         auto handler = CTestProtocolHandler::create(process, path, process_result_queue);
 
         map_path_handler[path] = handler;
@@ -170,6 +170,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr const &event,
     io::IPipeManager::TSharedPtr const &pipe_manager)
 {
+    LOGT << "event: " << event->getType() << ", fd " << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID());
+
     try {
         bool is_parsed = false;
 //        if (event->getType() == io::IEvent::TType::OPEN)
@@ -195,7 +197,6 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         } catch (...) {
 
         }
-    //    LOGT << __FUNCTION__ << ", fd: " << event->getStream()->getID() << " event: " << event->getType();
     //    if (m_buffer_output)
     //        LOGT << "buffer:\n" << *m_buffer_output;
 

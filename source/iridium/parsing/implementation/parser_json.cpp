@@ -31,7 +31,7 @@ static const string DEFAULT_TAB = "    ";
 }
 
 
-//#include "iridium/logging/logger.h"
+#include "iridium/logging/logger.h"
 namespace iridium {
 namespace parsing {
 namespace implementation {
@@ -173,12 +173,12 @@ namespace implementation {
 // }
 
 
-bool checkOneOf(char const &symbol, string const &symbols) {
-    for (auto const &ch: symbols)
-        if (ch == symbol)
-            return true; // ----->
-    return false; // ----->
-}
+//bool checkOneOf(char const &symbol, string const &symbols) {
+//    for (auto const &ch: symbols)
+//        if (ch == symbol)
+//            return true; // ----->
+//    return false; // ----->
+//}
 
 
 //INode::TSharedPtr convertStringToNode(string const &source) {
@@ -398,6 +398,8 @@ INode::TSharedPtr convertStringToNode(string const &source) {
 
             if (ch == ':') {
                 name = std::move(value);
+                if (name == "#text")
+                    name.clear();
                 continue; // <---
             }
 
@@ -473,7 +475,22 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 // 
 //     return root_node; // ----->
     
-    return convertStringToNode(source);
+    auto root_node = convertStringToNode(source);
+    if (root_node->size() == 1)
+        root_node = *root_node->begin();
+
+    return root_node;
+}
+
+
+string mask(string const &source) {
+    string result;
+    for (auto const &ch: source) {
+        if (ch == '"')
+            result += '\\';
+        result += ch;
+    }
+    return result; // ----->
 }
 
 
@@ -513,7 +530,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
                 result += tab;
                 if (tab.empty())
                     result += DEFAULT_TAB;
-                result += "\"" + name + "\"" + ": " + "\"" + node_child->getValue() + "\"" + line_end;
+                result += "\"" + name + "\"" + ": " + "\"" + mask(node_child->getValue()) + "\"" + line_end;
             }
         } else {
             result += tab + "\"" + name + "\"" + ": [\n";
@@ -531,7 +548,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
                     convertNodeToJsonString(node, result, tab + DEFAULT_TAB + DEFAULT_TAB); // <-----
                     result += tab + DEFAULT_TAB + "}" + line_end_;
                 } else {
-                    result += tab + DEFAULT_TAB + "\"" + node->getValue() + "\"" + line_end_;
+                    result += tab + DEFAULT_TAB + "\"" + mask(node->getValue()) + "\"" + line_end_;
                 }
             }
             result += tab + "]" + line_end;

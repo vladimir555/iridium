@@ -236,6 +236,8 @@ IProcess::TState CProcessStream::getState() {
     if (!m_state_internal.is_exited &&  m_state_internal.is_signaled)
         condition = TState::TCondition::CRASHED;
 
+//    LOGT << "process '" << m_app << " " << m_args.back() << "' condition: " << condition;
+
     return {
         .condition = condition,
         .exit_code = m_exit_code

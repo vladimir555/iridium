@@ -202,7 +202,9 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
 
 std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
     if (!m_kqueue)
-        throw std::runtime_error("multiplexer waiting events error: kqueue is not initialized"); // ----->
+        return {};
+//    if (!m_kqueue)
+//        throw std::runtime_error("multiplexer waiting events error: kqueue is not initialized"); // ----->
 
     std::list<IEvent::TSharedPtr> events;
 
