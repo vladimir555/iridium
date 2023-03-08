@@ -140,6 +140,7 @@ void CWorkerPoolPusher<TItem>::finalize() {
     m_queue->interrupt();
     for (auto const &thread: m_threads)
         thread->finalize();
+    m_queue->interrupt();
 }
 
 
@@ -178,6 +179,7 @@ void CWorkerPoolPopper<TItem>::initialize() {
 
 template<typename TItem>
 void CWorkerPoolPopper<TItem>::finalize() {
+    m_queue->interrupt();
     for (auto const &thread: m_threads)
         thread->finalize();
     m_queue->interrupt();

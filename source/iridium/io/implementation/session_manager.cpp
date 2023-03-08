@@ -283,9 +283,11 @@ std::list<IStream::TConstSharedPtr> CSessionManager::ContextManager::getOutdated
     LOCK_SCOPE;
 
     std::list<IStream::TConstSharedPtr> result;
-    for (auto const &stream_timestamp: m_map_stream_timestamp)
+    for (auto const &stream_timestamp: m_map_stream_timestamp) {
+//        LOGT << "compare: " << stream_timestamp.second << " < " << timestamp;
         if (stream_timestamp.second < timestamp)
             result.push_back(stream_timestamp.first);
+    }
 
 //    string s;
 //    for (auto const &i: result)
@@ -297,7 +299,7 @@ std::list<IStream::TConstSharedPtr> CSessionManager::ContextManager::getOutdated
 
 
 void CSessionManager::ContextManager::updateStreamTimestamp(IStream::TConstSharedPtr const &stream) {
-    auto timestamp = std::chrono::system_clock::now() - DEFAULT_TIMEOUT;
+    auto timestamp = std::chrono::system_clock::now();
 
     LOCK_SCOPE;
 
@@ -397,10 +399,16 @@ CSessionManager::CContextWorkerHandler::handle(
 //                    is_valid_context = context->getProtocol()->control(context_event, context);
 
                     is_valid_context = context->getProtocol()->control(context_event, context);
+
+//                    LOGT << "is_valid_context = " << is_valid_context;
+
+                    if (!is_valid_context)
+                        continue; // <---
+
 //                    LOGT << "is_valid_context = " << is_valid_context;
                     if (context_event->getType() == IEvent::TType::OPEN) {
 //                        is_valid_context = context->getProtocol()->control(context_event, context);
-                        continue;
+                        continue; // <---
                     }
 
 //                    LOGT << "event: " << context_event->getStream()->getID() << " " << context_event->getType();
@@ -427,7 +435,12 @@ CSessionManager::CContextWorkerHandler::handle(
                         LOGE << "pipe not found: fd " << context_event->getStream()->getID();
                     }
                     is_valid_context = context->getProtocol()->control(context_event, context);
+
 //                    LOGT << "is_valid_context = " << is_valid_context;
+
+                    if (!is_valid_context)
+                        continue; // <---
+
                 }
             } catch (std::exception const &e) {
                 LOGE << e.what();
@@ -438,6 +451,7 @@ CSessionManager::CContextWorkerHandler::handle(
             if (is_valid_context) {
                 events_to_repeat.splice(events_to_repeat.end(), context->popEvents());
             } else {
+//                LOGT << "remove context";
                 m_context_manager->removeContext(context);
             }
 //            threading::sleep(100);

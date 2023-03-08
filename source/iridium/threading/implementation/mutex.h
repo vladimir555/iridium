@@ -16,11 +16,13 @@ namespace threading {
 namespace implementation {
 
 
-class CMutex: public CBaseMutex {
+class CMutex: virtual public CBaseMutex {
 public:
     DEFINE_CREATE(CMutex)
     ///
     CMutex() = default;
+//    ///
+//    CMutex(IMutex::TSharedPtr const &mutex);
     ///
     virtual ~CMutex() = default;
     ///
