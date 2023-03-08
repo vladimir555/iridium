@@ -22,6 +22,11 @@ namespace threading {
 namespace implementation {
 
 
+//CCondition::CCondition(IMutex::TSharedPtr const &mutex) {
+//    mutex->
+//}
+
+
 void CCondition::wait() const {
     try {
         unique_lock<mutex> lock(m_mutex);
@@ -51,6 +56,26 @@ void CCondition::notifyOne() const {
 void CCondition::notifyAll() const {
     m_condition.notify_all();
 }
+
+
+//void CCondition::lock() const {
+//    CMutex::lock();
+//}
+
+
+//void CCondition::unlock() const {
+//    CMutex::unlock();
+//}
+
+
+//void CCondition::setScopeName(std::string const &scope_name) const {
+//    CMutex::setScopeName(scope_name);
+//}
+
+
+//std::string CCondition::getScopeName() const {
+//    return CMutex::getScopeName();
+//}
 
 
 } // implementation

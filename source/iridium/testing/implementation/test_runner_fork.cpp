@@ -5,9 +5,7 @@
 #include "iridium/io/implementation/stream_buffer.h"
 #include "iridium/system/implementation/process.h"
 #include "iridium/threading/implementation/async_queue.h"
-
 #include "iridium/parsing/implementation/parser_json.h"
-
 #include "iridium/logging/logger.h"
 #include "iridium/items.h"
 
@@ -64,65 +62,39 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
         map_path_handler[path] = handler;
         m_session_manager->manage(process, handler);
-//        LOGT << "process start: " << path;
     }
-
-//    if (!m_session_manager->wait(std::chrono::seconds(50)))
-//        LOGW << "tests timeout";
 
     auto parser = CJSONParser::create();
 
     int count_wait = paths.size();
 
     while (count_wait > 0) {
-        auto results = process_result_queue->pop(m_timeout);
-        if  (results.empty())
+        LOGT << "wait queue: " << count_wait;
+        auto test_fork_handler_results = process_result_queue->pop(m_timeout);
+
+        if  (test_fork_handler_results.empty())
             break; // --->
 
-        for (auto const &result: results) {
+        for (auto const &result: test_fork_handler_results) {
             count_wait--;
-//            LOGT << "process stop:  " << result->path;
-            if (/*result->state.condition == IProcess::TState::TCondition::DONE &&*/
-                result->state.exit_code && *result->state.exit_code == 1)
-            {
-//                test.Error = "";
-//                test_result.Test.add(test);
-            } else {
-                TTestResult::TTest test;
-                test.Path   = result->path;
-                test.Error  = convert<string>( result->state.condition);
-                test.Output = convert<string>(*result->output);
-                test_results.Test.add(test);
-                continue; // <---
-            }
-//            test_result.Test.add(test);
+//            LOGT << "count_wait: " << count_wait;
 
-            string output;
-            try {
-                output = convert<string>(*result->output);
-                auto right  = output.find_last_not_of('\n');
-                auto left   = output.find_last_of('\n', right);
-                auto size   = convert<uint32_t>(output.substr(left + 1, right - left));
-                // todo: bugfix parser
-                auto node   = parser->parse(output.substr(left - size - 1, size))->getChild("test-result");
-                TTestResult test_results_fork(node);
+            if (result->node) {
+//                LOGT << result->node;
+                TTestResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Test) {
                     test_results.Test.add(test);
+                    LOGI << test.Path.get() << ":\n" << result->output;
                 }
-                output = output.substr(0, left - size);
-                LOGI << "\n" << result->path << "\n" << output;
-            } catch (...) {
-                LOGF << "test process parsing output error:\n-----\n" << output << "\n-----";
             }
-
             map_path_handler.erase(result->path);
-
-            if (map_path_handler.empty())
-                break; // --->
         }
+//        LOGT << "count_wait: " << count_wait;
     }
 
+//    LOGT << "session manager finalize ... ";
     m_session_manager->finalize();
+//    LOGT << "session manager finalize OK";
 
     if (!map_path_handler.empty()) {
         string msg = "\n\ntimeout:\n";
@@ -162,7 +134,9 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
 :
     m_process               (process),
     m_path                  (path),
-    m_process_result_queue  (process_result_queue)
+    m_process_result_queue  (process_result_queue),
+    m_is_finished             (false),
+    m_parser                (CJSONParser::create())
 {}
 
 
@@ -170,71 +144,77 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr const &event,
     io::IPipeManager::TSharedPtr const &pipe_manager)
 {
-    LOGT << "event: " << event->getType() << ", fd " << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID());
+//    LOGT << "event: " << event->getType() << ", fd " << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID());
+
+    if (m_is_finished)
+        return false; // ----->
+
+    m_state = m_process->getState();
+
+//    LOGT << "process state: " << m_state.condition;
+
+    if (event->getType() == io::IEvent::TType::OPEN) {
+        pipe_manager->createPipe("process");
+        pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
+        m_buffer_output = io::Buffer::create();
+        m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
+        pipe_manager->updateWriter("process", m_stream_output);
+        return true; // ----->
+    }
 
     try {
-        bool is_parsed = false;
-//        if (event->getType() == io::IEvent::TType::OPEN)
-//            LOGT << "0 event: " << event->getType();
-//        else
-//            LOGT << "0 event: " << event->getType() << " " << event->getStream()->getID();
-        // todo: optimize !!!
-        try {
-            if (m_state.exit_code && m_buffer_output && m_buffer_output->size() > 1) {
-//                LOGT << "1 exit_code: " << m_state.exit_code;
-                // todo: fix checking with size == size
-                auto s = std::string(m_buffer_output->begin(), m_buffer_output->end());
-                auto l = s.find_last_of('}');
+        if (m_state.exit_code   &&
+            m_buffer_output     &&
+            m_buffer_output->size() > 4 &&
+            m_buffer_output->back() == '\n')
+        {
+            size_t right    = m_buffer_output->size() - 1;
+            size_t left     = right;
 
-                if (s.substr(l, 3) == "}\n\n") {
-                    l += 3;
-                    auto r = s.find_first_of('\n', l);
-//                    LOGT << "2 size: '" << s.substr(l, r - l) << "', str size: " << s.size();
-                    if (r != std::string::npos && convert<uint64_t>(s.substr(l, r - l)) > 0)
-                        is_parsed = true;
-                }
+            while (left > 0 && m_buffer_output->at(left - 1) != '\n')
+                left--;
+
+            auto size = convert<uint64_t>(string(m_buffer_output->begin() + left, m_buffer_output->begin() + right));
+
+
+            if (m_buffer_output->at(--left) == '\n' &&
+                m_buffer_output->at(--left) == '\n' &&
+                m_buffer_output->at(--left) == '}'  &&
+                m_buffer_output->at(left - size + 2) == '{')
+            {
+                right   = left + 1;
+                left    = left - size + 2;
+            } else
+                return true; // ----->
+
+            try {
+                string json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+                auto node = m_parser->parse(json);
+
+                m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
+
+                m_process_result_queue->push(
+                    TProcessResult::create(
+                        TProcessResult {
+                            .path   = m_path,
+                            .state  = m_state,
+                            .output = m_buffer_output,
+                            .node   = node
+                        }
+                    )
+                );
+
+                m_is_finished = true;
+//                LOGT << "PARSING DONE";
+//            } catch (std::exception const &e) {
+//                LOGT << e.what();
+            } catch (...) {
+
             }
-        } catch (...) {
-
-        }
-    //    if (m_buffer_output)
-    //        LOGT << "buffer:\n" << *m_buffer_output;
-
-        if (event->getType() == io::IEvent::TType::OPEN) {
-            pipe_manager->createPipe("process");
-            pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
-            m_buffer_output = io::Buffer::create();
-            m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
-            pipe_manager->updateWriter("process", m_stream_output);
         }
 
-        m_state = m_process->getState();
-
-    //    LOGT << __FUNCTION__
-    //         << "\nevent: " << event->getStream()->getID()
-    //         << " " << event->getType()
-    ////         << "\nbuffer:\n" << *m_buffer_output
-    //         << "\nstate: " << m_state.condition;
-
-        if (is_parsed) {
-            m_process_result_queue->push(
-                TProcessResult::create(
-                    TProcessResult {
-                        .path   = m_path,
-                        .state  = m_state,
-                        .output = m_buffer_output
-                    }
-                )
-            );
-        }
-
-        //threading::sleep(50);
-
-        m_state = m_process->getState();
-
-    //    std::cout << "THREAD END  : " << static_cast<uint64_t>(uintptr_t(this)) << " " <<
-    //        convert<string>(std::this_thread::get_id()) << std::endl;
-        return !is_parsed;
+//        LOGT << "stop handler, parsing done, m_is_finished: " << m_is_finished;
+        return !m_is_finished;
     } catch (std::exception const &e) {
         string what(e.what());
         // todo: refactor inserting
@@ -246,11 +226,13 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             TProcessResult::create(
                 TProcessResult {
                     .path   = m_path,
-                    .state  = { IProcess::TState::TCondition::INTERRUPTED, 0 },
+                    .state  = m_state,
                     .output = m_buffer_output
                 }
             )
         );
+        m_is_finished = true;
+//        LOGT << "stop handler, parsing failed, m_is_finished: " << m_is_finished;
         return false;
     }
 }

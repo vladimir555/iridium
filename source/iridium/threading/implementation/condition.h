@@ -19,19 +19,29 @@ namespace threading {
 namespace implementation {
 
 
-class CCondition : protected CMutex, public ICondition {
+class CCondition: public ICondition, public CMutex {
 public:
     DEFINE_IMPLEMENTATION(CCondition)
     ///
     CCondition() = default;
     ///
-    virtual void wait() const override;
+//    CCondition(IMutex::TSharedPtr const &mutex);
     ///
-    virtual bool wait(std::chrono::nanoseconds const &timeout) const override;
+    void wait() const override;
     ///
-    virtual void notifyOne() const override;
+    bool wait(std::chrono::nanoseconds const &timeout) const override;
     ///
-    virtual void notifyAll() const override;
+    void notifyOne() const override;
+    ///
+    void notifyAll() const override;
+//    ///
+//    void lock() const override;
+//    ///
+//    void unlock() const override;
+//    ///
+//    void setScopeName(std::string const &scope_name) const override;
+//    ///
+//    std::string getScopeName() const override;
 
 private:
     ///

@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "iridium/logging/logger.h"
+#include "iridium/threading/implementation/async_queue.h"
 
 
 using std::thread;
@@ -30,10 +31,11 @@ std::chrono::seconds const CThread::DEFAULT_TIMEOUT(10);
 
 CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout)
 :
-    m_name      (name),
-    m_runnuble  (assertExists(runnuble, "thread '" + name + "' creation error: runnuble is null")),
-    m_statuses  (CAsyncQueue<bool>::create()),
-    m_timeout   (timeout)
+    m_name              (name),
+    m_runnuble          (assertExists(runnuble, "thread '" + name + "' creation error: runnuble is null")),
+    m_error_queue_start (CAsyncQueue<string>::create()),
+    m_error_queue_stop  (CAsyncQueue<string>::create()),
+    m_timeout           (timeout)
 {}
 
 
@@ -43,48 +45,47 @@ void CThread::initialize() {
 
     m_runnuble->initialize();
     m_is_running = true;
-    m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_statuses, &m_is_running);
+    m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_error_queue_start, m_error_queue_stop, &m_is_running);
+
+    string error;
+
     try {
 //        LOGT << "wait start thread: " << m_name << " ...";
-        auto statuses = m_statuses->pop(m_timeout);
-//        auto statuses = m_statuses->pop();
+        error = checkErrorQueue(m_error_queue_start);
 //        LOGT << "wait start thread: " << m_name << " OK";
-        if (statuses.empty() || !statuses.front())
-            throw std::runtime_error("timeout: " + convert<string>(m_timeout));
-        if (statuses.size() > 1) {
-            statuses.pop_front();
-            m_statuses->push(statuses);
-        }
     } catch (std::exception const &e) {
         throw std::runtime_error("thread '" + m_name + "' initializing error: " + e.what()); // ----->
     }
+
+    if (!error.empty())
+        throw std::runtime_error("thread '" + m_name + "' initializing error: " + error); // ----->
 }
 
 
 void CThread::finalize() {
-    if (m_thread && m_thread->joinable()) {
-        m_is_running = false;
-
-        try {
-//            LOGT << "wait stop thread: " << m_name << " ...";
-            auto statuses = m_statuses->pop(m_timeout);
-//            auto statuses = m_statuses->pop();
-//            LOGT << "wait stop thread: " << m_name << " OK";
-            if (statuses.empty() || statuses.back())
-                throw std::runtime_error("timeout: " + convert<string>(m_timeout));
-            else {
-                m_thread->join();
-                m_runnuble->finalize();
-            }
-        } catch (std::exception const &e) {
-            // todo: pthread_cancel & widows teminate thread
-            m_thread->detach();
-            throw std::runtime_error("thread '" + m_name + "' finalizing error: " + e.what()); // ----->
-        }
-        m_thread.reset();
-    } else {
+    if (!m_thread || !m_thread->joinable())
         throw std::runtime_error("thread '" + m_name + "' finalizing error: not initialized"); // ----->
+
+    m_is_running = false;
+
+    string error;
+    try {
+//        LOGT << "wait stop thread: " << m_name << " ...";
+        error = checkErrorQueue(m_error_queue_stop);
+//        LOGT << "wait stop thread: " << m_name << " OK";
+
+        m_thread->join();
+        m_runnuble->finalize();
+    } catch (std::exception const &e) {
+        // todo: pthread_cancel & widows teminate thread
+        m_thread->detach();
+        throw std::runtime_error("thread '" + m_name + "' finalizing error: " + e.what()); // ----->
     }
+
+    m_thread.reset();
+
+    if (!error.empty())
+        throw std::runtime_error("thread '" + m_name + "' finalizing error: " + error); // ----->
 }
 
 
@@ -104,26 +105,50 @@ std::string CThread::getName() const {
 void CThread::run(
     std::string             const &name,
     IRunnable::TSharedPtr   const &runnuble,
-    IAsyncQueuePusher<bool>::TSharedPtr  const &statuses,
-    std::atomic<bool> *     const  is_running
-) {
+    IAsyncQueuePusher<string>::TSharedPtr const &status_start,
+    IAsyncQueuePusher<string>::TSharedPtr const &status_stop,
+    std::atomic<bool> *     const  is_running) 
+{
     std::string error;
+    bool        is_started = false;
+
     try {
-        statuses->push(true);
+        status_start->push("");
+        is_started = true;
 //        LOGT << "start thread: " << name;
         runnuble->run(*is_running);
+        is_started = false;
 //        LOGT << "stop  thread: " << name;
-        statuses->push(false);
+        status_stop->push("");
     } catch (std::exception &e) {
         error = "thread '" + name + "' stopped, error: " + e.what();
     } catch (...) {
         error = "thread '" + name + "' stopped, error: unknown";
     }
     if (!error.empty()) {
-        // for exceptions in logger
-//        cerr << error;
+        if (is_started)
+            status_stop->push(error);
+        else
+            status_start->push(error);
         LOGF << error;
     }
+}
+
+
+string CThread::checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const &error_queue) {
+//    auto errors = error_queue->pop(m_timeout);
+    auto errors = error_queue->pop();
+
+    if (errors.empty())
+        throw std::runtime_error("timeout: " + convert<string>(m_timeout));
+
+    string error_message;
+
+    for (auto const &error: errors)
+        if (!error.empty())
+            error_message += error + "; ";
+
+    return error_message;
 }
 
 

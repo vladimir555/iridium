@@ -46,23 +46,28 @@ public:
 
 protected:
     ///
+    static void run(
+        std::string             const &name,
+        IRunnable::TSharedPtr   const &runnuble,
+        IAsyncQueuePusher<std::string>::TSharedPtr const &status_start,
+        IAsyncQueuePusher<std::string>::TSharedPtr const &status_stop,
+        std::atomic<bool> *     const  is_running
+    );
+    ///
     std::string                     m_name;
     ///
     IRunnable::TSharedPtr           m_runnuble;
     ///
     std::unique_ptr<std::thread>    m_thread;
-    ///
-    static void run(
-        std::string             const &name,
-        IRunnable::TSharedPtr   const &runnuble,
-        IAsyncQueuePusher<bool>::TSharedPtr const &statuses,
-        std::atomic<bool> *     const  is_running
-    );
 private:
+    std::string checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const &error_queue);
+
     std::atomic<bool>
         m_is_running;
-    IAsyncQueue<bool>::TSharedPtr
-        m_statuses;
+    IAsyncQueue<std::string>::TSharedPtr
+        m_error_queue_start;
+    IAsyncQueue<std::string>::TSharedPtr
+        m_error_queue_stop;
     std::chrono::nanoseconds const
         m_timeout;
 };

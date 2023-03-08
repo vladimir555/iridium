@@ -20,7 +20,7 @@
 #include "condition.h"
 
 
-//#include <iostream>
+#include <iostream>
 namespace iridium {
 namespace threading {
 namespace implementation {
@@ -34,7 +34,8 @@ template<typename TItem>
 class CAsyncQueue:
     public  IAsyncQueue<TItem>,
     public  pattern::NonCopyable,
-    public  pattern::NonMovable,
+//    public  pattern::NonMovable,
+    public  CCondition,
     private Synchronized
 {
 public:
@@ -59,7 +60,9 @@ private:
     std::list<TItem>        m_items;
     std::atomic<bool>       m_is_waiting;
     std::atomic<bool>       m_is_empty;
-    ICondition::TSharedPtr  m_condition;
+//    ICondition::TSharedPtr  m_condition;
+    std::mutex              m_mutex;
+    std::condition_variable m_condition;
 };
 
 
@@ -69,67 +72,110 @@ private:
 template<typename TItem>
 CAsyncQueue<TItem>::CAsyncQueue()
 :
-//    Synchronized(CMutex::create()),
+//    Synchronized(),
     m_is_waiting(true),
-    m_is_empty  (true),
-    m_condition (CCondition::create())
+    m_is_empty  (true)
+//    m_condition (CCondition::create())
 {}
 
 
 template<typename TItem>
 size_t CAsyncQueue<TItem>::push(TItem const &item) {
-    LOCK_SCOPE_FAST
+//    LOCK_SCOPE_FAST
+
+//    m_items.push_back(item);
+//    m_is_empty = m_items.empty();
+//    m_condition->notifyOne();
+
+//    return m_items.size(); // ----->
+
+    std::unique_lock<std::mutex> l(m_mutex);
 
     m_items.push_back(item);
     m_is_empty = m_items.empty();
-//    m_condition->notifyOne();
-    m_condition->notifyAll();
+    auto size  = m_items.size();
 
-    return m_items.size(); // ----->
+    l.unlock();
+    m_condition.notify_one();
+
+    return size; // ----->
 }
 
 
 template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
-    LOCK_SCOPE_FAST
+//    LOCK_SCOPE_FAST
+
+//    m_items.insert(m_items.end(), items.begin(), items.end());
+//    m_is_empty = m_items.empty();
+//    m_condition->notifyOne();
+
+//    return m_items.size(); // ----->
+
+    std::unique_lock<std::mutex> l(m_mutex);
 
     m_items.insert(m_items.end(), items.begin(), items.end());
-    m_is_empty = m_items.empty();
-//    m_condition->notifyOne();
-    m_condition->notifyAll();
+    m_is_empty  = m_items.empty();
+    auto size   = m_items.size();
 
-    return m_items.size(); // ----->
+    l.unlock();
+    m_condition.notify_one();
+
+    return size; // ----->
 }
 
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
-    if (is_waiting && m_is_waiting && m_is_empty)
-        m_condition->wait();
+//    if (is_waiting && m_is_waiting && m_is_empty)
+//        m_condition->wait();
 
-    LOCK_SCOPE_FAST
-    auto result = std::move(m_items);
+//    LOCK_SCOPE_FAST
+//    auto result = std::move(m_items);
+//    m_is_empty = true;
+//    return result;
+
+    std::unique_lock<std::mutex> l(m_mutex);
+    while (m_is_waiting && m_is_empty && is_waiting)
+        m_condition.wait(l);
+
     m_is_empty = true;
-    return result;
+    return std::move(m_items); // ----->
 }
 
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout) {
-    if (m_is_waiting && m_is_empty)
-        m_condition->wait(timeout);
+//    if (m_is_waiting && m_is_empty)
+//        m_condition->wait(timeout);
 
-    LOCK_SCOPE_FAST
-    auto result = std::move(m_items);
+//    LOCK_SCOPE_FAST
+//    auto result = std::move(m_items);
+//    m_is_empty = true;
+//    return result;
+
+    std::unique_lock<std::mutex> l(m_mutex);
+
+    if (m_is_waiting && m_is_empty)
+        m_condition.wait_for(l, timeout);
+
+//    auto now = std::chrono::system_clock::now;
+//    auto time_end = now() + timeout;
+//    while (m_is_waiting && m_is_empty && now() < time_end)
+//        m_condition.wait_until(l, time_end);
+
     m_is_empty = true;
-    return result;
+    return std::move(m_items); // ----->
 }
 
 
 template<typename TItem>
 void CAsyncQueue<TItem>::interrupt() {
+//    m_is_waiting = false;
+//    m_condition->notifyAll();
+
     m_is_waiting = false;
-    m_condition->notifyAll();
+    m_condition.notify_all();
 }
 
 

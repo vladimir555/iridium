@@ -14,7 +14,7 @@ namespace threading {
 namespace implementation {
 
 
-class CBaseMutex: public IMutex {
+class CBaseMutex: virtual public IMutex {
 public:
     CBaseMutex() = default;
     virtual ~CBaseMutex() = default;

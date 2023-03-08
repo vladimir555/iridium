@@ -17,7 +17,7 @@ namespace threading {
 
 
 ///
-class ICondition {
+class ICondition: virtual public IMutex {
 public:
     DEFINE_INTERFACE(ICondition)
     ///

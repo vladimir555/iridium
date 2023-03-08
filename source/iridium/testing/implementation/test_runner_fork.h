@@ -6,6 +6,7 @@
 #include "iridium/io/session.h"
 #include "iridium/system/process.h"
 #include "iridium/threading/async_queue.h"
+#include "iridium/parsing/parser.h"
 
 
 namespace iridium {
@@ -29,6 +30,7 @@ private:
         std::string                 path;
         system::IProcess::TState    state;
         io::Buffer::TSharedPtr      output;
+        parsing::INode::TSharedPtr  node;
     };
 
     class CTestProtocolHandler: public io::IProtocol {
@@ -54,6 +56,8 @@ private:
         system::IProcess::TState        m_state;
         io::IStreamWriter::TSharedPtr   m_stream_output;
         io::Buffer::TSharedPtr          m_buffer_output;
+        bool                            m_is_finished;
+        parsing::IParser::TSharedPtr    m_parser;
     };
 
     void scan(
