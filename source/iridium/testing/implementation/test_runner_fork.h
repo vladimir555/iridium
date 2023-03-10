@@ -23,7 +23,7 @@ public:
     );
     DEFINE_IMPLEMENTATION(CTestRunnerFork)
 
-    TTestResult run(INodeTest::TSharedPtr const &node_test) override;
+    TResult run(INodeTest::TSharedPtr const &node_test) override;
 private:
     struct TProcessResult {
         DEFINE_CREATE(TProcessResult)

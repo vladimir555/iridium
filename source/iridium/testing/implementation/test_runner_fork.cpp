@@ -44,8 +44,8 @@ CTestRunnerFork::CTestRunnerFork(
 {}
 
 
-TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
-    TTestResult test_results;
+TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
+    TResult test_results;
     m_session_manager->initialize();
 
     list<string> paths;
@@ -57,7 +57,7 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     for (auto const &path: paths) {
 //        LOGT << path;
 
-        auto process = CProcessStream::create(m_app_path, "run --json-result " + path);
+        auto process = CProcessStream::create(m_app_path, "run --mode=raw --print-result=json " + path);
         auto handler = CTestProtocolHandler::create(process, path, process_result_queue);
 
         map_path_handler[path] = handler;
@@ -81,9 +81,9 @@ TTestResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
             if (result->node) {
 //                LOGT << result->node;
-                TTestResult test_results_fork(result->node);
-                for (auto const &test: test_results_fork.Test) {
-                    test_results.Test.add(test);
+                TResult test_results_fork(result->node);
+                for (auto const &test: test_results_fork.Tests) {
+                    test_results.Tests.add(test);
                     LOGI << test.Path.get() << ":\n" << result->output;
                 }
             }
@@ -144,14 +144,14 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr const &event,
     io::IPipeManager::TSharedPtr const &pipe_manager)
 {
-//    LOGT << "event: " << event->getType() << ", fd " << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID());
+//    LOGT << "event: " << event->getType()
+//         << ", fd " << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID())
+//         << ". process state: " << m_state.condition;
 
     if (m_is_finished)
         return false; // ----->
 
     m_state = m_process->getState();
-
-//    LOGT << "process state: " << m_state.condition;
 
     if (event->getType() == io::IEvent::TType::OPEN) {
         pipe_manager->createPipe("process");

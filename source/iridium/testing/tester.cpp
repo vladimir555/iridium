@@ -1,27 +1,72 @@
 #include "tester.h"
+#include "unit_test.h"
+
 #include "iridium/logging/logger.h"
-#include "iridium/parsing/implementation/node_type.h"
 #include "iridium/strings.h"
 #include "iridium/assert.h"
 #include "iridium/items.h"
 
-
-#include "unit_test.h"
-
-#include "iridium/testing/implementation/test_runner_raw.h"
-#include "iridium/testing/implementation/test_runner_fork.h"
 #include "iridium/parsing/implementation/parser_json.h"
+
+#include "implementation/test_runner_raw.h"
+#include "implementation/test_runner_fork.h"
 
 
 using std::string;
 using std::vector;
 using std::list;
+using std::chrono::seconds;
+
 using iridium::parsing::INodeType;
 using iridium::parsing::implementation::CNodeType;
+using iridium::parsing::implementation::CJSONParser;
 using iridium::testing::implementation::CTestRunnerRaw;
 using iridium::testing::implementation::CTestRunnerFork;
+using iridium::convertion::convert;
 
-using iridium::parsing::implementation::CJSONParser;
+
+namespace iridium {
+namespace testing {
+
+
+struct TCmdArgs {
+    DEFINE_CREATE(TCmdArgs)
+
+    DEFINE_ENUM(
+        TCommand,
+        RUN,
+        LIST
+    );
+
+    DEFINE_ENUM(
+        TMode,
+        PARALLEL,
+        SERIAL,
+        RAW
+    );
+
+    DEFINE_ENUM(
+        TPrintResult,
+        JSON
+    );
+
+    TCommand                command;
+    TMode                   mode;
+    TPrintResult            print_result;
+    std::chrono::seconds    timeout;
+    string                  include_path;
+    list<string>            exclude_paths;
+    string                  app_name;
+};
+
+
+} // testing
+} // iridium
+
+
+IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TCommand);
+IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TMode);
+IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TPrintResult);
 
 
 namespace iridium {
@@ -38,81 +83,152 @@ void Tester::add(ITest * const test, std::string const &path_) {
 }
 
 
-int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
-    logging::update(logging::config::createDefault());
-
-    // todo: command line parser with long - short arg name std::map CCommandLineParser(std::map ...)
-
+TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
     vector<string> args;
     for (int i = 0; i < argc; i++)
         args.push_back(argv[i]);
 
-    if (args.size() == 2 && args[1] == "list") {
-        LOGI << getTestTree(main_cpp_path);
-        return 0; // ----->
+    try {
+        TCmdArgs::TSharedPtr result = TCmdArgs::create(
+            TCmdArgs {
+                .command            = TCmdArgs::TCommand::RUN,
+                .mode               = TCmdArgs::TMode::PARALLEL,
+                .print_result  = TCmdArgs::TPrintResult::UNKNOWN,
+                .timeout            = std::chrono::seconds(10),
+                .include_path       = "/",
+                .app_name           = args[0]
+            }
+        );
+
+        result->app_name = argv[0];
+
+        if (args.size() == 1)
+            return result; // ----->
+
+        if (args.size() >  1)
+            result->command = convert<TCmdArgs::TCommand>(args[1]);
+
+        if (result->command == TCmdArgs::TCommand::LIST) {
+            if (args.size() == 2)
+                return result; // ----->
+            else
+                throw nullptr; // --->
+        }
+
+        if (args.size() > 2 && args[1] == "run") {
+            size_t i = 2;
+
+            static string const TIMEOUT         = "--timeout";
+            static string const PRINT_RESULT    = "--print-result";
+            static string const MODE            = "--mode";
+
+            while (i < args.size() && args[i].substr(0, 2) == "--") {
+                if (args[i].substr(0, MODE.size()) == MODE)
+                    result->mode = convert<TCmdArgs::TMode>(split(args[i], "=").back());
+                else
+                if (args[i].substr(0, PRINT_RESULT.size()) == PRINT_RESULT)
+                    result->print_result = convert<TCmdArgs::TPrintResult>(split(args[i], "=").back());
+                else
+                if (args[i].substr(0, TIMEOUT.size()) == TIMEOUT)
+                    result->timeout = seconds(convert<uint64_t>(split(args[i], "=").back()));
+                else
+                    throw nullptr; // --->
+                i++;
+            }
+
+            if (args.size() > 3) {
+                result->include_path = args[i];
+                i++;
+            }
+
+            if (args.size() > 4) {
+                for (; i < args.size(); i++)
+                    result->exclude_paths.push_back(args[i]);
+            }
+
+            return result; // ----->
+        } else
+            throw nullptr; // --->
+
+        return result; // ----->
+    } catch (std::exception const &e) {
+        LOGE << e.what();
+    } catch (...) {
     }
 
-    if (args.size() == 1 || (args.size() > 1 && args[1] == "run")) {
-        size_t  i = 2;
-        bool    is_json_result = args.size() > i && args[i] == "--json-result";
+    // todo: print availabe enums
+    LOGI << "\nusage:\n"
+        << args[0] << " help\n"
+        << args[0] << " list\n"
+        << args[0] << " run [ --mode=raw|serial|parallel ] [ --print-result=json ]"
+        << " [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]\n";
 
-        if (is_json_result)
-            i++;
+    return nullptr; // ----->
+}
 
-        string include = args.size() > i ? args[i] : "/";
 
-        list<string> excludes;
-        for (++i; i < args.size(); i++)
-            excludes.push_back(args[i]);
+int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
+    logging::update(logging::config::createDefault());
 
-        auto root = getTestTree(main_cpp_path, include, excludes);
+    auto args = parseCommandLine(argc, argv);
+
+    if (args) {
+        LOGT << "\napp          : " << args->app_name
+             << "\ncommand      : " << args->command
+             << "\nmode         : " << args->mode
+             << "\ntimeout      : " << args->timeout
+             << "\nprint_result : " << args->print_result
+             << "\ninclude_path : " << args->include_path;
+
+        if (args->command == TCmdArgs::TCommand::LIST) {
+            LOGI << getTestTree(main_cpp_path);
+            return 0; // ----->
+        }
 
         ITestRunner::TSharedPtr test_runner;
 
-        // todo: args
-        std::chrono::milliseconds timeout(10000);
-
-        if (is_json_result)
+        if (args->mode == TCmdArgs::TMode::RAW)
             test_runner = CTestRunnerRaw::create();
         else
-            test_runner = CTestRunnerFork::create(args[0], timeout);
+            test_runner = CTestRunnerFork::create(args->app_name, args->timeout);
 
+        auto root   = getTestTree(main_cpp_path, args->include_path, args->exclude_paths);
         auto result = test_runner->run(root);
 
         size_t failed_count = 0;
         size_t passed_count = 0;
+        string errors;
+        string interrupts;
 
-        if (is_json_result) {
+        for (auto const &test: result.Tests) {
+            if (test.Error.get().empty())
+                passed_count++;
+            else {
+                if (test.Output.get().empty())
+                    errors      += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
+                else
+                    interrupts  += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n" + test.Output.get() + "\n";
+                failed_count++;
+            }
+        }
+
+        if (!errors.empty())
+            LOGE << "\n\nerrors:" << errors;
+        if (!interrupts.empty())
+            LOGE << "\n\ninterrupted:" << interrupts;
+
+        LOGI << "\npassed: " << passed_count
+             << "\nfailed: " << failed_count
+             << "\ntotal:  " << result.Tests.size();
+
+        if (args->print_result == TCmdArgs::TPrintResult::JSON) {
             auto json = CJSONParser::create()->compose(result.getNode());
             LOGI << "\n\n" << json << "\n" << json.size();
-        } else {
-            string failed_tests;
-            for (auto const &line: result.Test) {
-                if (!line.Error.get().empty()) {
-                    failed_count++;
-                    failed_tests +=
-                        line.Path.get()  + "\n" +
-                        line.Error.get() + "\n\n";
-                } else {
-                    passed_count++;
-                }
-            }
-
-            if (!failed_tests.empty())
-                LOGE << "\n\nfailed tests:\n" + failed_tests;
-
-            LOGI << "\npassed: " << passed_count
-                 << "\nfailed: " << failed_count
-                 << "\ntotal:  " << m_map_path_test.size();
-
         }
-        return failed_count == 0; // ----->
+
+        return errors.empty() && interrupts.empty() ? 0 : 1; // ----->
     } else {
-        LOGI << "\nusage:\n"
-            << args[0] << " help\n"
-            << args[0] << " list\n"
-            << args[0] << " run [--raw] [ include_path ] [ exclude_path ] ... [ exclude_path ]\n";
-        return 0; // ----->
+        return 1; // ----->
     }
 }
 
@@ -120,9 +236,8 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 Tester::INodeTest::TSharedPtr Tester::getTestTree(
     string          const &main_cpp_path_,
     string          const &include,
-    list<string>    const &excludes
-) const {
-
+    list<string>    const &excludes) const
+{
     static string   const ROOT_NODE_NAME = "root";
 
     auto main_cpp_path = main_cpp_path_;
