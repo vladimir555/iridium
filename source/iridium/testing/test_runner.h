@@ -12,12 +12,12 @@ namespace iridium {
 namespace testing {
 
 
-DEFINE_ROOT_NODE_BEGIN(TestResult)
-    DEFINE_NODE_LIST_BEGIN(Test)
+DEFINE_ROOT_NODE_BEGIN(Result)
+    DEFINE_NODE_LIST_BEGIN(Tests)
         DEFINE_ATTRIBUTE(std::string, Path, "")
         DEFINE_ATTRIBUTE(std::string, Error, "")
         DEFINE_ATTRIBUTE(std::string, Output, "")
-    DEFINE_NODE_LIST_END(Test)
+    DEFINE_NODE_LIST_END(Tests)
 DEFINE_ROOT_NODE_END()
 
 
@@ -26,12 +26,7 @@ public:
     DEFINE_INTERFACE(ITestRunner)
     typedef parsing::INodeType<ITest *> INodeTest;
 
-//    struct TResult {
-//        std::list<std::string> passed;
-//        std::list<std::string> failed;
-//    };
-
-    virtual TTestResult run(INodeTest::TSharedPtr const &node_test) = 0;
+    virtual TResult run(INodeTest::TSharedPtr const &node_test) = 0;
 };
 
 

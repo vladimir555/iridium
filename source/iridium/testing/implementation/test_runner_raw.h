@@ -15,13 +15,15 @@ public:
     CTestRunnerRaw() = default;
     DEFINE_IMPLEMENTATION(CTestRunnerRaw)
 
-    TTestResult run(INodeTest::TSharedPtr const &node_test) override;
+    TResult run(INodeTest::TSharedPtr const &node_test) override;
 
 private:
     void run(
-        TTestResult                   &test_results,
+        TResult                       &test_results,
         INodeTest::TSharedPtr   const &node,
         std::string             const &path = "");
+
+//    bool m_is_print_json;
 };
 
 
