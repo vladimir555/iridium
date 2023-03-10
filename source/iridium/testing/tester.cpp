@@ -34,6 +34,7 @@ struct TCmdArgs {
 
     DEFINE_ENUM(
         TCommand,
+        HELP,
         RUN,
         LIST
     );
@@ -93,7 +94,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
             TCmdArgs {
                 .command            = TCmdArgs::TCommand::RUN,
                 .mode               = TCmdArgs::TMode::PARALLEL,
-                .print_result  = TCmdArgs::TPrintResult::UNKNOWN,
+                .print_result       = TCmdArgs::TPrintResult::UNKNOWN,
                 .timeout            = std::chrono::seconds(10),
                 .include_path       = "/",
                 .app_name           = args[0]
@@ -107,6 +108,9 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 
         if (args.size() >  1)
             result->command = convert<TCmdArgs::TCommand>(args[1]);
+
+        if (result->command == TCmdArgs::TCommand::HELP)
+            throw nullptr; // --->
 
         if (result->command == TCmdArgs::TCommand::LIST) {
             if (args.size() == 2)
@@ -173,12 +177,12 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     auto args = parseCommandLine(argc, argv);
 
     if (args) {
-        LOGT << "\napp          : " << args->app_name
-             << "\ncommand      : " << args->command
-             << "\nmode         : " << args->mode
-             << "\ntimeout      : " << args->timeout
-             << "\nprint_result : " << args->print_result
-             << "\ninclude_path : " << args->include_path;
+//        LOGT << "\napp          : " << args->app_name
+//             << "\ncommand      : " << args->command
+//             << "\nmode         : " << args->mode
+//             << "\ntimeout      : " << args->timeout
+//             << "\nprint_result : " << args->print_result
+//             << "\ninclude_path : " << args->include_path;
 
         if (args->command == TCmdArgs::TCommand::LIST) {
             LOGI << getTestTree(main_cpp_path);
@@ -212,14 +216,16 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             }
         }
 
-        if (!errors.empty())
-            LOGE << "\n\nerrors:" << errors;
-        if (!interrupts.empty())
-            LOGE << "\n\ninterrupted:" << interrupts;
+        if (args->print_result == TCmdArgs::TPrintResult::UNKNOWN) {
+            if (!errors.empty())
+                LOGE << "\nerrors:" << errors << "\n";
+            if (!interrupts.empty())
+                LOGE << "\ninterrupted:" << interrupts << "\n";
 
-        LOGI << "\npassed: " << passed_count
-             << "\nfailed: " << failed_count
-             << "\ntotal:  " << result.Tests.size();
+            LOGI << "\npassed: " << passed_count
+                 << "\nfailed: " << failed_count
+                 << "\ntotal:  " << result.Tests.size();
+        }
 
         if (args->print_result == TCmdArgs::TPrintResult::JSON) {
             auto json = CJSONParser::create()->compose(result.getNode());
