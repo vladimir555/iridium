@@ -69,7 +69,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     int count_wait = paths.size();
 
     while (count_wait > 0) {
-        LOGT << "wait queue: " << count_wait;
+//        LOGT << "wait queue: " << count_wait;
         auto test_fork_handler_results = process_result_queue->pop(m_timeout);
 
         if  (test_fork_handler_results.empty())
@@ -84,11 +84,13 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 TResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Tests) {
                     test_results.Tests.add(test);
-                    LOGI << test.Path.get() << ":\n" << result->output;
                 }
             }
             map_path_handler.erase(result->path);
         }
+
+        LOGI << test_fork_handler_results.back()->path << ":\n"
+             << test_fork_handler_results.back()->output;
 //        LOGT << "count_wait: " << count_wait;
     }
 
@@ -135,7 +137,7 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
     m_process               (process),
     m_path                  (path),
     m_process_result_queue  (process_result_queue),
-    m_is_finished             (false),
+    m_is_finished           (false),
     m_parser                (CJSONParser::create())
 {}
 
