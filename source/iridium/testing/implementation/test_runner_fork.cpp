@@ -123,14 +123,28 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                  << process_result->output;
     }
 
-    for (auto const &path_handler: map_path_handler) {
-        TResult::TTests test;
-//        for (auto const &node: node_test->)
-        test.Path   = path_handler.first;
-        test.Error  = convert<string>(path_handler.second->getExitState().condition);
-        if (path_handler.second->getBuffer())
-            test.Output = convert<string>(*path_handler.second->getBuffer());
-        test_results.Tests.add(test);
+    if (!map_path_handler.empty()) {
+        LOGF << "\nTIMEOUT:\n";
+        for (auto const &path_handler: map_path_handler) {
+            for (auto const &node: *node_test->slice(path_handler.first).back()) {
+//                LOGT << "SLICE: " << node;
+                TResult::TTests test;
+                test.Path   = path_handler.first + "/" + node->getName();
+                test.Error  = "TIMEOUT";
+                test_results.Tests.add(test);
+            }
+            LOGF << "TIMEOUT "
+                 << path_handler.first << ":\n\n"
+                 << path_handler.second->getBuffer();
+        }
+//            TResult::TTests test;
+//    //        for (auto const &node: node_test->)
+//            test.Path   = path_handler.first;
+//            test.Error  = convert<string>(path_handler.second->getExitState().condition);
+//            if (path_handler.second->getBuffer())
+//                test.Output = convert<string>(*path_handler.second->getBuffer());
+//            test_results.Tests.add(test);
+//        }
     }
 
 //    if (!map_path_handler.empty()) {
