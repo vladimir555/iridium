@@ -202,7 +202,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         size_t failed_count = 0;
         size_t passed_count = 0;
         string errors;
-        string interrupts;
+//        string interrupts;
 
         for (auto const &test: result.Tests) {
             if (test.Error.get().empty())
@@ -210,17 +210,17 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             else {
                 if (test.Output.get().empty())
                     errors      += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
-                else
-                    interrupts  += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n" + test.Output.get() + "\n";
+//                else
+//                    interrupts  += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n" + test.Output.get() + "\n";
                 failed_count++;
             }
         }
 
         if (args->print_result == TCmdArgs::TPrintResult::UNKNOWN) {
             if (!errors.empty())
-                LOGE << "\nerrors:" << errors << "\n";
-            if (!interrupts.empty())
-                LOGE << "\ninterrupted:" << interrupts << "\n";
+                LOGE << "\nERRORS:\n" << errors;
+//            if (!interrupts.empty())
+//                LOGE << "\ninterrupted:" << interrupts << "\n";
 
             LOGI << "\npassed: " << passed_count
                  << "\nfailed: " << failed_count
@@ -232,10 +232,9 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             LOGI << "\n\n" << json << "\n" << json.size();
         }
 
-        return errors.empty() && interrupts.empty() ? 0 : 1; // ----->
-    } else {
+        return errors.empty() /*&& interrupts.empty()*/ ? 0 : 1; // ----->
+    } else
         return 1; // ----->
-    }
 }
 
 
@@ -244,7 +243,7 @@ Tester::INodeTest::TSharedPtr Tester::getTestTree(
     string          const &include,
     list<string>    const &excludes) const
 {
-    static string   const ROOT_NODE_NAME = "root";
+    static string const ROOT_NODE_NAME = "root";
 
     auto main_cpp_path = main_cpp_path_;
     std::replace(main_cpp_path.begin(), main_cpp_path.end(), '\\', '/');

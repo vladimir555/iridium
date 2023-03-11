@@ -76,39 +76,44 @@ void CProcessStream::initialize() {
     assertOK(pipe(cout_pipe), "pipe");
     assertOK(pipe(cerr_pipe), "pipe");
 
-    posix_spawn_file_actions_t action;
+    posix_spawn_file_actions_t actions;
     assertOK(
-        posix_spawn_file_actions_init(&action),
+        posix_spawn_file_actions_init(&actions),
        "posix_spawn_file_actions_init"
     );
 
     assertOK(
-        posix_spawn_file_actions_addclose(&action, cout_pipe[0]),
+        posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
        "posix_spawn_file_actions_addclose"
     );
 
     assertOK(
-        posix_spawn_file_actions_addclose(&action, cerr_pipe[0]),
+        posix_spawn_file_actions_addclose(&actions, cerr_pipe[0]),
        "posix_spawn_file_actions_addclose"
     );
 
     assertOK(
-        posix_spawn_file_actions_adddup2(&action, cout_pipe[1], 1),
+        posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
        "posix_spawn_file_actions_adddup2"
     );
 
     assertOK(
-        posix_spawn_file_actions_adddup2(&action, cerr_pipe[1], 2),
+        posix_spawn_file_actions_adddup2(&actions, cerr_pipe[1], 2),
        "posix_spawn_file_actions_adddup2"
     );
 
     assertOK(
-        posix_spawn_file_actions_addclose(&action, cout_pipe[1]),
+        posix_spawn_file_actions_adddup2(&actions, 1, 2),
+       "posix_spawn_file_actions_adddup2"
+    );
+
+    assertOK(
+        posix_spawn_file_actions_addclose(&actions, cout_pipe[1]),
        "posix_spawn_file_actions_addclose"
     );
 
     assertOK(
-        posix_spawn_file_actions_addclose(&action, cerr_pipe[1]),
+        posix_spawn_file_actions_addclose(&actions, cerr_pipe[1]),
        "posix_spawn_file_actions_addclose"
     );
 
@@ -132,7 +137,7 @@ void CProcessStream::initialize() {
 #endif
 
     assertOK(
-        posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ),
+        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
        "posix_spawnp"
     );
 

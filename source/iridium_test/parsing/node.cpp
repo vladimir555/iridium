@@ -48,16 +48,16 @@ INode::TSharedPtr createTestNode() {
 //string const expected_xml = "";
 
 
-//TEST(nodes) {
-//    auto node = createTestNode();
+TEST(slice) {
+    auto node = createTestNode();
 
-//    ASSERT(node->findChilds("/wrong_node/").empty());
-//    ASSERT(node->findChilds("wrong_node/").empty());
-//    ASSERT(node->findChilds("/").empty());
-//    ASSERT(node->findChilds("").empty());
+    ASSERT(node->slice("/wrong_node/").empty());
+    ASSERT(node->slice("wrong_node/").empty());
+    ASSERT(node->slice("").empty());
 
-//    ASSERT(3, equal, node->findChilds("/item").size());
-//}
+    ASSERT(3, equal, node->slice("/").size());
+    ASSERT(3, equal, node->slice("/item").size());
+}
 
 
 } // parsing
