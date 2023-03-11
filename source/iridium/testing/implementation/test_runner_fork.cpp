@@ -55,8 +55,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     auto process_result_queue = CAsyncQueue<TProcessResult::TConstSharedPtr>::create();
 
     for (auto const &path: paths) {
-//        LOGT << path;
-
         auto process = CProcessStream::create(m_app_path, "run --mode=raw --print-result=json " + path);
         auto handler = CTestProtocolHandler::create(process, path, process_result_queue);
 
@@ -71,7 +69,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 
     while (count_wait > 0) {
-//        LOGT << "wait queue: " << count_wait;
         auto test_fork_handler_results = process_result_queue->pop(m_timeout);
 
         if  (test_fork_handler_results.empty())
@@ -79,10 +76,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
         for (auto const &result: test_fork_handler_results) {
             count_wait--;
-//            LOGT << "count_wait: " << count_wait;
-
             if (result->node) {
-//                LOGT << result->node;
                 TResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
@@ -97,8 +91,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                  << process_result->output;
         else {
             for (auto const &node: *node_test->slice(process_result->path).back()) {
-//                LOGT << "SLICE: " << node;
-
                 TResult::TTests test;
                 test.Path   = process_result->path + "/" + node->getName();
 
@@ -111,9 +103,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         }
     }
 
-//    LOGT << "session manager finalize ... ";
     m_session_manager->finalize();
-//    LOGT << "session manager finalize OK";
 
     if (!interrupted.empty()) {
         LOGF << "\nINTERRUPTED:\n";
@@ -127,7 +117,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         LOGF << "\nTIMEOUT:\n";
         for (auto const &path_handler: map_path_handler) {
             for (auto const &node: *node_test->slice(path_handler.first).back()) {
-//                LOGT << "SLICE: " << node;
                 TResult::TTests test;
                 test.Path   = path_handler.first + "/" + node->getName();
                 test.Error  = "TIMEOUT";
@@ -137,25 +126,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                  << path_handler.first << ":\n\n"
                  << path_handler.second->getBuffer();
         }
-//            TResult::TTests test;
-//    //        for (auto const &node: node_test->)
-//            test.Path   = path_handler.first;
-//            test.Error  = convert<string>(path_handler.second->getExitState().condition);
-//            if (path_handler.second->getBuffer())
-//                test.Output = convert<string>(*path_handler.second->getBuffer());
-//            test_results.Tests.add(test);
-//        }
     }
-
-//    if (!map_path_handler.empty()) {
-//        string msg = "\n\ntimeout:\n";
-//        for (auto const &path_handler: map_path_handler) {
-//            msg += path_handler.first + ":\n";
-//            if (path_handler.second->getBuffer())
-//                msg += convert<string>(*path_handler.second->getBuffer()) + "\n";
-//        }
-//        LOGE << "\n-----" << msg << "\n-----";
-//    }
 
     return test_results;
 }
@@ -167,10 +138,8 @@ void CTestRunnerFork::scan(
     list<std::string>           &paths)
 {
     for (auto const &child: *node) {
-        if (child->hasChilds() && !child->begin()->get()->hasChilds()) {
+        if (child->hasChilds() && !child->begin()->get()->hasChilds())
             paths.push_back(path + "/" + child->getName());
-//            LOGT << path + "/" + child->getName();
-        }
         scan(child, path + "/" + child->getName(), paths);
     }
 }
@@ -236,7 +205,6 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             } else
                 return true; // ----->
 
-//            try {
             string json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
             auto node = m_parser->parse(json);
 
@@ -254,25 +222,12 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             );
 
             m_is_finished = true;
-//                LOGT << "PARSING DONE";
-//            } catch (std::exception const &e) {
-//                LOGT << e.what();
-//            } catch (...) {
-
-//            }
         }
 
-//        LOGT << "stop handler, parsing done, m_is_finished: " << m_is_finished;
-        return !m_is_finished;
-//    } catch (std::exception const &e) {
+        return !m_is_finished; // ----->
     } catch (...) {
-//        string what(e.what());
-        // todo: refactor inserting
         if(!m_buffer_output)
             m_buffer_output = io::Buffer::create();
-//        m_buffer_output->push_back('\n');
-//        m_buffer_output->insert(m_buffer_output->begin(), what.begin(), what.end());
-//        m_buffer_output->push_back('\n');
         m_process_result_queue->push(
             TProcessResult::create(
                 TProcessResult {
@@ -283,15 +238,13 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             )
         );
         m_is_finished = true;
-//        LOGT << "PARSING FAILED";
-//        LOGT << "stop handler, parsing failed, m_is_finished: " << m_is_finished;
-        return false;
+        return false; // ----->
     }
 }
 
 
 io::Buffer::TSharedPtr CTestRunnerFork::CTestProtocolHandler::getBuffer() const {
-    return m_buffer_output;
+    return m_buffer_output; // ----->
 }
 
 

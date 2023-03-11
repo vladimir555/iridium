@@ -45,9 +45,6 @@ INode::TSharedPtr createTestNode() {
 }
 
 
-//string const expected_xml = "";
-
-
 TEST(slice) {
     auto node = createTestNode();
 

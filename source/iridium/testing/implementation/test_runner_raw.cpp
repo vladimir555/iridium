@@ -16,12 +16,6 @@ namespace testing {
 namespace implementation {
 
 
-//CTestRunnerRaw::CTestRunnerRaw(bool const &is_print_json)
-//:
-//    m_is_print_json(is_print_json)
-//{}
-
-
 TResult CTestRunnerRaw::run(INodeTest::TSharedPtr const &node_test) {
     TResult result;
 
