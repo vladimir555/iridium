@@ -74,32 +74,32 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         if  (test_fork_handler_results.empty())
             break; // --->
 
-        for (auto const &result: test_fork_handler_results) {
+        for (auto const &handler_result: test_fork_handler_results) {
             count_wait--;
-            if (result->node) {
-                TResult test_results_fork(result->node);
+            if (handler_result->node) {
+                TResult test_results_fork(handler_result->node);
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
             }
-            map_path_handler.erase(result->path);
-        }
+            map_path_handler.erase(handler_result->path);
 
-        auto process_result = test_fork_handler_results.back();
+//            LOGT << handler_result->state.condition;
 
-        if (process_result->state.condition == IProcess::TState::TCondition::DONE)
-            LOGI << process_result->path << ":\n"
-                 << process_result->output;
-        else {
-            for (auto const &node: *node_test->slice(process_result->path).back()) {
-                TResult::TTests test;
-                test.Path   = process_result->path + "/" + node->getName();
+            if (handler_result->state.condition == IProcess::TState::TCondition::DONE)
+                LOGI << handler_result->path << ":\n"
+                     << handler_result->output;
+            else {
+                for (auto const &node: *node_test->slice(handler_result->path).back()) {
+                    TResult::TTests test;
+                    test.Path   = handler_result->path + "/" + node->getName();
 
-                test.Error  = convert<string>(process_result->state.condition);
-                test_results.Tests.add(test);
+                    test.Error  = convert<string>(handler_result->state.condition);
+                    test_results.Tests.add(test);
+                }
+                interrupted.push_back(handler_result);
+                LOGF << handler_result->path << ":\n"
+                     << handler_result->state.condition;
             }
-            interrupted.push_back(process_result);
-            LOGF << process_result->path << ":\n"
-                 << process_result->state.condition;
         }
     }
 
@@ -180,19 +180,30 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         return true; // ----->
     }
 
+    TProcessResult::TSharedPtr process_result;
+
     try {
         if (m_state.condition != IProcess::TState::TCondition::RUNNING &&
             m_buffer_output             &&
             m_buffer_output->size() > 4 &&
             m_buffer_output->back() == '\n')
         {
+            process_result = TProcessResult::create(
+                TProcessResult {
+                    .path   = m_path,
+                    .state  = m_state,
+                    .output = m_buffer_output
+                }
+            );
+
             size_t right    = m_buffer_output->size() - 1;
             size_t left     = right;
 
             while (left > 0 && m_buffer_output->at(left - 1) != '\n')
                 left--;
 
-            auto size = convert<uint64_t>(string(m_buffer_output->begin() + left, m_buffer_output->begin() + right));
+            auto size = convert<uint64_t>(
+                string(m_buffer_output->begin() + left, m_buffer_output->begin() + right));
 
 
             if (m_buffer_output->at(--left) == '\n' &&
@@ -206,40 +217,27 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                 return true; // ----->
 
             string json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+
             auto node = m_parser->parse(json);
+
+//            LOGT << node;
 
             m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
 
-            m_process_result_queue->push(
-                TProcessResult::create(
-                    TProcessResult {
-                        .path   = m_path,
-                        .state  = m_state,
-                        .output = m_buffer_output,
-                        .node   = node
-                    }
-                )
-            );
+            process_result->node = node;
 
             m_is_finished = true;
         }
-
-        return !m_is_finished; // ----->
     } catch (...) {
-        if(!m_buffer_output)
-            m_buffer_output = io::Buffer::create();
-        m_process_result_queue->push(
-            TProcessResult::create(
-                TProcessResult {
-                    .path   = m_path,
-                    .state  = m_state,
-                    .output = m_buffer_output
-                }
-            )
-        );
         m_is_finished = true;
-        return false; // ----->
     }
+
+//    LOGT << m_buffer_output;
+
+    if (m_is_finished && process_result)
+        m_process_result_queue->push(process_result);
+
+    return !m_is_finished; // ----->
 }
 
 
