@@ -206,8 +206,8 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             if (test.Error.get().empty())
                 passed_count++;
             else {
-                if (test.Output.get().empty())
-                    errors      += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
+//                if (test.Output.get().empty())
+                errors += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
                 failed_count++;
             }
         }
