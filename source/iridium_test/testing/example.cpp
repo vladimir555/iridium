@@ -277,8 +277,7 @@ TEST(OK) {
 //}
 
 
-//TEST(crash) {
-//    int *a = nullptr;
-//    *a = 5;
-//}
-
+TEST(crash) {
+    int *a = nullptr;
+    *a = 5;
+}
