@@ -22,8 +22,6 @@ private:
         TResult                       &test_results,
         INodeTest::TSharedPtr   const &node,
         std::string             const &path = "");
-
-//    bool m_is_print_json;
 };
 
 

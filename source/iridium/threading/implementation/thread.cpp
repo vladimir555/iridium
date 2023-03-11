@@ -50,9 +50,7 @@ void CThread::initialize() {
     string error;
 
     try {
-//        LOGT << "wait start thread: " << m_name << " ...";
         error = checkErrorQueue(m_error_queue_start);
-//        LOGT << "wait start thread: " << m_name << " OK";
     } catch (std::exception const &e) {
         throw std::runtime_error("thread '" + m_name + "' initializing error: " + e.what()); // ----->
     }
@@ -70,9 +68,7 @@ void CThread::finalize() {
 
     string error;
     try {
-//        LOGT << "wait stop thread: " << m_name << " ...";
         error = checkErrorQueue(m_error_queue_stop);
-//        LOGT << "wait stop thread: " << m_name << " OK";
 
         m_thread->join();
         m_runnuble->finalize();
@@ -115,10 +111,8 @@ void CThread::run(
     try {
         status_start->push("");
         is_started = true;
-//        LOGT << "start thread: " << name;
         runnuble->run(*is_running);
         is_started = false;
-//        LOGT << "stop  thread: " << name;
         status_stop->push("");
     } catch (std::exception &e) {
         error = "thread '" + name + "' stopped, error: " + e.what();
@@ -136,8 +130,7 @@ void CThread::run(
 
 
 string CThread::checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const &error_queue) {
-//    auto errors = error_queue->pop(m_timeout);
-    auto errors = error_queue->pop();
+    auto errors = error_queue->pop(m_timeout);
 
     if (errors.empty())
         throw std::runtime_error("timeout: " + convert<string>(m_timeout));

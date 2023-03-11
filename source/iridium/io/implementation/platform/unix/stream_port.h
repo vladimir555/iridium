@@ -37,8 +37,6 @@ public:
     int                 getID() const                           override;
 
 protected:
-//    void                open();
-//    void                close();
     void                setBlockingMode(int const &socket, bool const &is_blocking);
 
     int             m_fd;
