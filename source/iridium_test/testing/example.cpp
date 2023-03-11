@@ -270,14 +270,14 @@ TEST(OK) {
 }
 
 
-//TEST(timeout) {
-//    LOGT << "sleep ...";
-//    iridium::threading::sleep(30000);
-//    LOGT << "sleep OK";
-//}
-
-
-TEST(crash) {
-    int *a = nullptr;
-    *a = 5;
+TEST(timeout) {
+    LOGT << "sleep ...";
+    iridium::threading::sleep(30000);
+    LOGT << "sleep OK";
 }
+
+
+//TEST(crash) {
+//    int *a = nullptr;
+//    *a = 5;
+//}
