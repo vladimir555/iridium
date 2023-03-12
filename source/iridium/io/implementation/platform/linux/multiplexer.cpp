@@ -77,6 +77,8 @@ void CMultiplexer::initialize() {
     if (m_epoll_fd)
         throw std::runtime_error("multiplexer initializing error: epoll is initialized"); // ----->
 
+    m_is_closing = false;
+
     m_epoll_fd = epoll_create(DEFAULT_EVENTS_COUNT_LIMIT);
     m_event_fd = eventfd(0, EFD_NONBLOCK);
 
@@ -95,17 +97,14 @@ void CMultiplexer::finalize() {
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer finalizing error: epoll is not initialized"); // ----->
 
-//    LOGT << "notify close epoll";
+    m_is_closing = true;
     int64_t i = 0;
     write(m_event_fd, &i, 8);
-//    LOGT << "close epoll";
-    ::close(m_epoll_fd);
-    m_epoll_fd = 0;
 }
 
 
 void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
-    if (!stream || !stream->getID())
+    if (!stream || !stream->getID() || m_is_closing)
         return;
 
 //    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " " << stream->getID();
@@ -119,7 +118,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
 
 
 void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
-    if (!stream || !stream->getID())
+    if (!stream || !stream->getID() || m_is_closing)
         return;
 
 //    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " " << stream->getID();
@@ -134,11 +133,16 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
 
 std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
     if (!m_epoll_fd)
-        return {};
-//    if (!m_epoll_fd)
-//        throw std::runtime_error("multiplexer wait events error: epoll is not initialized"); // ----->
+        return {}; // ----->
 
     LOCK_SCOPE_FAST
+
+    if (m_is_closing) {
+//        LOGT << "close epoll";
+        ::close(m_epoll_fd);
+        m_epoll_fd = 0;
+        return {}; // ----->
+    }
 
     struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 

@@ -26,7 +26,7 @@ namespace threading {
 namespace implementation {
 
 
-std::chrono::seconds const CThread::DEFAULT_TIMEOUT(10);
+std::chrono::seconds const CThread::DEFAULT_TIMEOUT(30);
 
 
 CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout)
@@ -106,11 +106,10 @@ void CThread::run(
     std::atomic<bool> *     const  is_running) 
 {
     std::string error;
-    bool        is_started = false;
+    bool        is_started = true;
 
     try {
         status_start->push("");
-        is_started = true;
         runnuble->run(*is_running);
         is_started = false;
         status_stop->push("");

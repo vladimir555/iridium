@@ -22,7 +22,7 @@ set(CMAKE_BUILD_TYPE "Debug")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0") # -fsanitize=thread")
   
-remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
+#remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
 
 # components
 # set(CONFIG_POSTGRES 1)

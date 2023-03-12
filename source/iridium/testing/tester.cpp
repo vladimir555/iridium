@@ -119,7 +119,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
                 throw nullptr; // --->
         }
 
-        if (args.size() > 2 && args[1] == "run") {
+        if (args.size() >= 2 && args[1] == "run") {
             size_t i = 2;
 
             static string const TIMEOUT         = "--timeout";
@@ -140,12 +140,12 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
                 i++;
             }
 
-            if (args.size() > 3) {
+            if (args.size() > 2) {
                 result->include_path = args[i];
                 i++;
             }
 
-            if (args.size() > 4) {
+            if (args.size() > 3) {
                 for (; i < args.size(); i++)
                     result->exclude_paths.push_back(args[i]);
             }
@@ -218,7 +218,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 
             LOGI << "\npassed: " << passed_count
                  << "\nfailed: " << failed_count
-                 << "\ntotal:  " << result.Tests.size();
+                 << "\ntotal:  " << m_map_path_test.size();
         }
 
         if (args->print_result == TCmdArgs::TPrintResult::JSON) {
