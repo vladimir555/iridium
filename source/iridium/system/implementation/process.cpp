@@ -125,19 +125,20 @@ void CProcessStream::initialize() {
     argv[1 + m_args.size()] = nullptr;
 
 //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-    posix_spawnattr_t attr = { 0 };
+//    posix_spawnattr_t attr = { 0 };
 
-#ifdef POSIX_SPAWN_SETSID
-    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
-#elif defined(POSIX_SPAWN_SETSID_NP)
-    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
-#else
-//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
-//    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
-#endif
+//#ifdef POSIX_SPAWN_SETSID
+//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
+//#elif defined(POSIX_SPAWN_SETSID_NP)
+//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
+//#else
+////    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
+////    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+//#endif
 
     assertOK(
-        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
+//        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
+        posix_spawnp(&m_pid, m_app.c_str(), &actions, 0, argv, environ),
        "posix_spawnp"
     );
 
@@ -164,7 +165,7 @@ void CProcessStream::initialize() {
 
 
 void CProcessStream::finalize() {
-//    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
+//    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
     if (m_pid == 0)
         return;
 
@@ -189,12 +190,20 @@ void CProcessStream::finalize() {
 
 
 IProcess::TState CProcessStream::getState() {
+
+
     TState::TCondition condition = TState::TCondition::UNKNOWN;
 
     if (m_pid != 0) {
         int  pid_state = 0;
         auto result = waitpid(m_pid, &pid_state, WNOHANG);
+
 //        LOGT << "waitpid: " << m_command_line << " pid: " << m_pid << " result(pid): " << result << " state: " << pid_state;
+//        {
+//            auto result = kill(m_pid, 0);
+//            LOGT << "kill: " << m_command_line << " pid: " << m_pid << " result: " << result;
+//        }
+
         if  (result == 0 && pid_state == 0)
             condition = TState::TCondition::RUNNING;
 
