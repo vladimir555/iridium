@@ -1,55 +1,55 @@
-#ifndef HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
-#define HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
+//#ifndef HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
+//#define HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
 
 
-#include "iridium/platform.h"
+//#include "iridium/platform.h"
 
 
-#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
+//#if defined(LINUX_PLATFORM) || defined(FREEBSD_LIKE_PLATFORM)
 
 
-#include "iridium/io/net/socket.h"
+//#include "iridium/io/net/socket.h"
 
-#include "iridium/encryption/openssl.h"
+//#include "iridium/encryption/openssl.h"
 
-#include "socket.h"
-
-
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
-namespace unix {
+//#include "socket.h"
 
 
-class CSocketAcceptor: public CSocketBase, public ISocketAcceptor, public std::enable_shared_from_this<CSocketAcceptor> {
-public:
-    DEFINE_IMPLEMENTATION(CSocketAcceptor)
-    CSocketAcceptor(URL const &url, IListenerStreams::TSharedPtr const &listener = nullptr);
-
-    void initialize() override;
-    void finalize() override;
-
-    URL getURL() const override;
-    int getID() const override;
-
-    ISocketStream::TSharedPtr accept() override;
-
-private:
-    encryption::OpenSSL::TContext *m_context;
-};
+//namespace iridium {
+//namespace io {
+//namespace net {
+//namespace implementation {
+//namespace platform {
+//namespace unix_ {
 
 
-} // unix
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+//class CSocketAcceptor: public CSocketBase, public ISocketAcceptor {
+//public:
+//    DEFINE_IMPLEMENTATION(CSocketAcceptor)
+//    CSocketAcceptor(URL const &url);
+
+//    void initialize() override;
+//    void finalize() override;
+
+//    URL getURL() const override;
+//    int getID() const override;
+
+//    ISocketStream::TSharedPtr accept() override;
+
+//private:
+////    encryption::OpenSSL::TContext *m_context;
+//};
 
 
-#endif // LINUX_PLATFORM || FREEBSD_PLATFORM
+//} // unix
+//} // platform
+//} // implementation
+//} // net
+//} // io
+//} // iridium
 
 
-#endif // HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
+//#endif // LINUX_PLATFORM || FREEBSD_PLATFORM
+
+
+//#endif // HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3

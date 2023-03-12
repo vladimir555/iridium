@@ -1,7 +1,7 @@
 //#include "socket_acceptor.h"
 
 
-//#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
+//#if defined(LINUX_PLATFORM) || defined(FREEBSD_LIKE_PLATFORM)
 
 
 //#include "socket_peer.h"
