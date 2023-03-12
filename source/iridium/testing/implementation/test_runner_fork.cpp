@@ -203,9 +203,18 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             while (left > 0 && m_buffer_output->at(left - 1) != '\n')
                 left--;
 
-            auto size = convert<uint64_t>(
-                string(m_buffer_output->begin() + left, m_buffer_output->begin() + right));
+            string size_str(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
 
+//            LOGT << "find size ...";
+
+            if (size_str.find_first_not_of("0123456789") != string::npos)
+                return true; // ----->
+
+//            LOGT << "find size OK";
+
+            auto size = convert<uint64_t>(size_str);
+
+//            LOGT << "find json ...";
 
             if (m_buffer_output->at(--left) == '\n' &&
                 m_buffer_output->at(--left) == '\n' &&
@@ -217,21 +226,26 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             } else
                 return true; // ----->
 
-            string json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+//            LOGT << "find json OK";
 
-            auto node = m_parser->parse(json);
+//            LOGT << "parse json ...";
 
-//            LOGT << node;
+            string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+            auto    node = m_parser->parse(json);
 
             m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
-
             process_result->node = node;
-
             m_is_finished = true;
+
+//            LOGT << "parse json OK";
         }
+    } catch (std::exception const &e) {
+        LOGF << e.what();
+        m_is_finished = true;
     } catch (...) {
         m_is_finished = true;
     }
+//    m_is_finished = true;
 
 //    LOGT << m_buffer_output;
 
