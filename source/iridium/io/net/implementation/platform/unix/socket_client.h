@@ -5,7 +5,7 @@
 #include "iridium/platform.h"
 
 
-#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
+#if defined(LINUX_PLATFORM) || defined(FREEBSD_LIKE_PLATFORM)
 
 
 #include "iridium/io/net/socket.h"
@@ -19,7 +19,7 @@ namespace io {
 namespace net {
 namespace implementation {
 namespace platform {
-namespace unix {
+namespace unix_ {
 
 
 class CSocketClient:

@@ -1,7 +1,7 @@
 //#include "socket_peer.h"
 
 
-//#if defined(LINUX_PLATFORM) || defined(FREEBSD_PLATFORM)
+//#if defined(LINUX_PLATFORM) || defined(FREEBSD_LIKE_PLATFORM)
 
 
 //using iridium::encryption::OpenSSL;

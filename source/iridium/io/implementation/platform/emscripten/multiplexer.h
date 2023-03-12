@@ -36,10 +36,10 @@ public:
         throw std::runtime_error("not implemented");
     }
 
-    void subscribe  (IStream::TSharedPtr const &stream) override {
+    void subscribe  (IStream::TConstSharedPtr const &stream) override {
         throw std::runtime_error("not implemented");
     }
-    void unsubscribe(IStream::TSharedPtr const &stream) override {
+    void unsubscribe(IStream::TConstSharedPtr const &stream) override {
         throw std::runtime_error("not implemented");
     }
 };
