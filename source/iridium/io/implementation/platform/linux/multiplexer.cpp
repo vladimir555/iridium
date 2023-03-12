@@ -171,6 +171,10 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
         if (epoll_events[i].data.fd == m_event_fd)
             continue; // <---
 
+        if (epoll_events[i].events & EPOLLHUP)
+            events.push_back(
+                CEvent::create(std::const_pointer_cast<IStream>(m_map_fd_stream[epoll_events[i].data.fd]), IEvent::TType::CLOSE));
+
         if (epoll_events[i].events & EPOLLIN)
             events.push_back(
                 CEvent::create(std::const_pointer_cast<IStream>(m_map_fd_stream[epoll_events[i].data.fd]), IEvent::TType::READ));

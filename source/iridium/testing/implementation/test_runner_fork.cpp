@@ -64,18 +64,19 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     auto parser = CJSONParser::create();
 
-    int count_wait = paths.size();
+    int paths_left = paths.size();
 
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 
-    while (count_wait > 0) {
+    while (paths_left > 0) {
+//        LOGT << "paths left: " << paths_left;
         auto test_fork_handler_results = process_result_queue->pop(m_timeout);
 
         if  (test_fork_handler_results.empty())
             break; // --->
 
         for (auto const &handler_result: test_fork_handler_results) {
-            count_wait--;
+            paths_left--;
             if (handler_result->node) {
                 TResult test_results_fork(handler_result->node);
                 for (auto const &test: test_results_fork.Tests)
