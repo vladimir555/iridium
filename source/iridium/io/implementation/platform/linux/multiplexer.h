@@ -56,6 +56,7 @@ private:
     int     m_event_fd;
     threading::IAsyncQueue<IStream::TConstSharedPtr>::TSharedPtr m_streams_to_add;
     threading::IAsyncQueue<IStream::TConstSharedPtr>::TSharedPtr m_streams_to_del;
+    std::atomic<bool> m_is_closing;
 };
 
 

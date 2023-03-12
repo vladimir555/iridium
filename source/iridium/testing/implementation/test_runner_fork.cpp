@@ -119,7 +119,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             for (auto const &node: *node_test->slice(path_handler.first).back()) {
                 TResult::TTests test;
                 test.Path   = path_handler.first + "/" + node->getName();
-                test.Error  = "TIMEOUT";
+                test.Error  = "TIMEOUT: process status " + convert<string>(path_handler.second->getExitState().condition);
                 test_results.Tests.add(test);
             }
             LOGF << "TIMEOUT "
