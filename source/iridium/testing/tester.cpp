@@ -174,61 +174,67 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     logging::update(logging::config::createDefault());
 
-    auto args = parseCommandLine(argc, argv);
+    try {
+        auto args = parseCommandLine(argc, argv);
 
-    if (args) {
-//        LOGT << "\napp          : " << args->app_name
-//             << "\ncommand      : " << args->command
-//             << "\nmode         : " << args->mode
-//             << "\ntimeout      : " << args->timeout
-//             << "\nprint_result : " << args->print_result
-//             << "\ninclude_path : " << args->include_path;
+        if (args) {
+    //        LOGT << "\napp          : " << args->app_name
+    //             << "\ncommand      : " << args->command
+    //             << "\nmode         : " << args->mode
+    //             << "\ntimeout      : " << args->timeout
+    //             << "\nprint_result : " << args->print_result
+    //             << "\ninclude_path : " << args->include_path;
 
-        if (args->command == TCmdArgs::TCommand::LIST) {
-            LOGI << getTestTree(main_cpp_path);
-            return 0; // ----->
-        }
-
-        ITestRunner::TSharedPtr test_runner;
-
-        if (args->mode == TCmdArgs::TMode::RAW)
-            test_runner = CTestRunnerRaw::create();
-        else
-            test_runner = CTestRunnerFork::create(args->app_name, args->timeout);
-
-        auto root   = getTestTree(main_cpp_path, args->include_path, args->exclude_paths);
-        auto result = test_runner->run(root);
-
-        size_t failed_count = 0;
-        size_t passed_count = 0;
-        string errors;
-        for (auto const &test: result.Tests) {
-            if (test.Error.get().empty())
-                passed_count++;
-            else {
-//                if (test.Output.get().empty())
-                errors += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
-                failed_count++;
+            if (args->command == TCmdArgs::TCommand::LIST) {
+                LOGI << getTestTree(main_cpp_path);
+                return 0; // ----->
             }
-        }
 
-        if (args->print_result == TCmdArgs::TPrintResult::UNKNOWN) {
-            if (!errors.empty())
-                LOGE << "\nERRORS:\n" << errors;
+            ITestRunner::TSharedPtr test_runner;
 
-            LOGI << "\npassed: " << passed_count
-                 << "\nfailed: " << failed_count
-                 << "\ntotal:  " << m_map_path_test.size();
-        }
+            if (args->mode == TCmdArgs::TMode::RAW)
+                test_runner = CTestRunnerRaw::create();
+            else
+                test_runner = CTestRunnerFork::create(args->app_name, args->timeout);
 
-        if (args->print_result == TCmdArgs::TPrintResult::JSON) {
-            auto json = CJSONParser::create()->compose(result.getNode());
-            LOGI << "\n\n" << json << "\n" << json.size();
-        }
+            auto root   = getTestTree(main_cpp_path, args->include_path, args->exclude_paths);
+            auto result = test_runner->run(root);
 
-        return !errors.empty(); // ----->
-    } else
-        return 1; // ----->
+            size_t failed_count = 0;
+            size_t passed_count = 0;
+            string errors;
+            for (auto const &test: result.Tests) {
+                if (test.Error.get().empty())
+                    passed_count++;
+                else {
+    //                if (test.Output.get().empty())
+                    errors += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
+                    failed_count++;
+                }
+            }
+
+            if (args->print_result == TCmdArgs::TPrintResult::UNKNOWN) {
+                if (!errors.empty())
+                    LOGE << "\nERRORS:\n" << errors;
+
+                LOGI << "\npassed: " << passed_count
+                     << "\nfailed: " << failed_count
+                     << "\ntotal:  " << m_map_path_test.size();
+            }
+
+            if (args->print_result == TCmdArgs::TPrintResult::JSON) {
+                auto json = CJSONParser::create()->compose(result.getNode());
+                LOGI << "\n\n" << json << "\n" << json.size();
+            }
+
+            return !errors.empty(); // ----->
+        } else
+            return 1; // ----->
+    } catch (std::exception const &e) {
+        LOGF << e.what();
+        return 1;
+    }
+    return 0;
 }
 
 

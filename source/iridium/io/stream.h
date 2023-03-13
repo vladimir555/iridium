@@ -15,6 +15,7 @@
 #define HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358
 
 
+#include "iridium/platform.h"
 #include "iridium/smart_ptr.h"
 #include "iridium/pattern/initializable.h"
 
@@ -34,10 +35,16 @@ static size_t const DEFAULT_BUFFER_SIZE = 16;
 class IStream: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)
+#ifdef UNIX_PLATFORM
+    typedef int TID;
+#elif WINDOWS_PLATFORM
+    typedef SOCKET &TID;
+#endif
+
     // todo: for windows int &getID() const;
     // todo: std::list<int&>
     // todo: getURL, file:// ; memory:// ... ; sort by URL
-    virtual int getID() const = 0;
+    virtual TID getID() const = 0;
 };
 
     
