@@ -145,7 +145,7 @@ void CMultiplexer::initialize() {
 
 
 void CMultiplexer::finalize() {
-//    LOGT << __FUNCTION__;
+    LOGT << __FUNCTION__;
     if (!m_kqueue)
         throw std::runtime_error("multiplexer finalization error: not initialized"); // ----->
 
@@ -161,19 +161,25 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer subscribing error: kqueue is not initialized"); // ----->
 
+    if (!stream)
+        return; // ----->
+
     int64_t fd = stream->getID();
 
     if (fd <= 0)
         return;
+    {
+        LOCK_SCOPE;
+        m_map_fd_stream[fd] = stream;
+    }
 
+//    LOGT << __FUNCTION__ << ", id: " << fd;
     // todo: optimize uintptr_t
-    auto    result  = write(m_pipe_add[1], &fd, 8);
+    auto result = write(m_pipe_add[1], &fd, 8);
 
     if (result < 0)
         throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
 
-    LOCK_SCOPE;
-    m_map_fd_stream[fd] = stream;
 }
 
 
@@ -184,6 +190,12 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
     int64_t fd = stream->getID();
     if (fd <= 0)
         return;
+
+//    LOGT << __FUNCTION__ << ", id: " << fd;
+    auto result = write(m_pipe_del[1], &fd, 8);
+
+    if (result < 0)
+        throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
 }
 
 
@@ -202,6 +214,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
          "kevent waiting event error");
 
     LOCK_SCOPE;
+
     bool is_finalized = false;
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
@@ -216,7 +229,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
         uint16_t flags = 0;
         if (triggered_event.ident == m_pipe_add[0])
-            flags = EV_ADD | EV_CLEAR;// | EV_EOF;
+            flags = EV_ADD | EV_CLEAR | EV_EOF;
 
         if (triggered_event.ident == m_pipe_del[0])
             flags = EV_DELETE;
@@ -234,12 +247,14 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
                 throw std::runtime_error("read control pipe error: " + string(strerror(errno)));
 
             for (size_t i = 0; i < fds.size(); i++) {
-                auto const &fd = fds[i];
+                auto const fd = fds[i];
 
                 if (fd == -1) {
                     is_finalized = true;
                     break; // --->
                 }
+
+//                LOGT << "kevent update: " << fd << " " << TEventFlag(flags).convertToFlagsString();
 
                 if (flags == EV_DELETE)
                     m_map_fd_stream[fd] = nullptr;
@@ -247,23 +262,35 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
                 monitored.push_back(
                     {
                         .ident  = static_cast<uintptr_t>(fd),
-                        .filter = EVFILT_READ,
+                        .filter = EVFILT_READ | EVFILT_WRITE,
                         .flags  = flags,
                         .fflags = 0,
                         .data   = 0,
                         .udata  = nullptr
                     }
                 );
-                monitored.push_back(
-                    {
-                        .ident  = static_cast<uintptr_t>(fd),
-                        .filter = EVFILT_WRITE,
-                        .flags  = flags,
-                        .fflags = 0,
-                        .data   = 0,
-                        .udata  = nullptr
-                    }
-                );
+//                } else {
+//                    monitored.push_back(
+//                        {
+//                            .ident  = static_cast<uintptr_t>(fd),
+//                            .filter = EVFILT_READ | EVFILT_WRITE,
+//                            .flags  = flags,
+//                            .fflags = 0,
+//                            .data   = 0,
+//                            .udata  = nullptr
+//                        }
+//                    );
+//                    monitored.push_back(
+//                        {
+//                            .ident  = static_cast<uintptr_t>(fd),
+//                            .filter = EVFILT_WRITE,
+//                            .flags  = flags,
+//                            .fflags = 0,
+//                            .data   = 0,
+//                            .udata  = nullptr
+//                        }
+//                    );
+//                }
             }
 
             if (is_finalized)
@@ -275,6 +302,9 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
             continue; // <---
         }
 
+        if (triggered_event.ident == m_pipe_add[0] || triggered_event.ident == m_pipe_del[0])
+            continue; // <---
+
         auto const stream = std::const_pointer_cast<IStream>(m_map_fd_stream[triggered_event.ident]);
         if  (stream) {
             if (triggered_event.filter == EVFILT_READ)
@@ -283,16 +313,19 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
             if (triggered_event.filter == EVFILT_WRITE)
                 events.push_back(CEvent::create(stream, IEvent::TType::WRITE));
 
-            if (triggered_event.flags == EV_ERROR)
+            if (triggered_event.flags & EV_ERROR)
                 events.push_back(CEvent::create(stream, IEvent::TType::ERROR));
 
-            if (triggered_event.flags == EV_EOF)
+            if (triggered_event.flags & EV_EOF) {
+//                LOGT << "! EOF, id: " << stream->getID();
                 events.push_back(CEvent::create(stream, IEvent::TType::CLOSE));
+            }
         } else {
             throw std::runtime_error(
                 "multiplexer waiting events error: kevent not mapped event, fd: " +
                 convert<string>(triggered_event.ident)); // ----->
         }
+
     }
 
     if (is_finalized) {

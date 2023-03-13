@@ -32,17 +32,20 @@ public:
     DEFINE_CREATE(CThread)
     static std::chrono::seconds const DEFAULT_TIMEOUT;
     ///
-    CThread(std::string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
+    CThread(
+        std::string const &name,
+        IRunnable::TSharedPtr const &runnuble,
+        std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
     ///
     virtual ~CThread() = default;
     ///
-    virtual void initialize() override;
+    void initialize() override;
     ///
-    virtual void finalize() override;
+    void finalize() override;
     ///
-    virtual bool operator < (IThread const &thread) const override;
+    bool operator < (IThread const &thread) const override;
     ///
-    virtual std::string getName() const override;
+    std::string getName() const override;
 
 protected:
     ///
