@@ -166,9 +166,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     if (m_is_finished)
         return false; // ----->
 
-//    LOGT << "event: " <<  event->getType()
-//         << ", fd "   << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID())
-//         << ". process state: " << m_state.condition;
+//    LOGT << "\nevent: " <<  event->getType()
+//         << "\nfd: "    << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID())
+//         << "\nprocess_state: " << m_state.condition
+//         << "\nbuffer:\n" << m_buffer_output;
 
     m_state = m_process->getState();
 
@@ -184,7 +185,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     TProcessResult::TSharedPtr process_result;
 
     try {
-        if (m_state.condition != IProcess::TState::TCondition::RUNNING &&
+        if ((m_state.condition != IProcess::TState::TCondition::RUNNING /*|| event->getType() == io::IEvent::TType::CLOSE*/) &&
             m_buffer_output             &&
             m_buffer_output->size() > 4 &&
             m_buffer_output->back() == '\n')

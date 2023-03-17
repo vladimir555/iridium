@@ -40,10 +40,14 @@ CSessionManager::ContextManager::Context::Context(
 
 CSessionManager::ContextManager::Context::~Context() {
     for (auto const &name_pipe: m_map_name_pipe) {
-        if (name_pipe.second->getReader())
+        if (name_pipe.second->getReader()) {
             m_multiplexer->unsubscribe(name_pipe.second->getReader());
-        if (name_pipe.second->getWriter())
+//            std::const_pointer_cast<IStreamReader>(name_pipe.second->getReader())->finalize();
+        }
+        if (name_pipe.second->getWriter()) {
             m_multiplexer->unsubscribe(name_pipe.second->getWriter());
+//            std::const_pointer_cast<IStreamWriter>(name_pipe.second->getWriter())->finalize();
+        }
     }
 }
 
@@ -387,13 +391,13 @@ CSessionManager::CContextWorkerHandler::handle(
                     if (!is_valid_context)
                         continue; // <---
 
-                    if (context_event->getType() == IEvent::TType::OPEN) {
+                    if (context_event->getType() == IEvent::TType::OPEN)
                         continue; // <---
-                    }
 
                     auto pipe = context->findPipe(context_event->getStream());
                     if  (pipe) {
                         bool is_transmitted = pipe->transmit(context_event);
+//                        LOGT << "transmit: " << is_transmitted;
                         m_context_manager->updateStreamTimestamp(context_event->getStream());
                         if (is_transmitted &&
                             checkOneOf(
@@ -403,8 +407,13 @@ CSessionManager::CContextWorkerHandler::handle(
                                 IEvent::TType::CLOSE) &&
                             event->getStream()->getID() > 0)
                         {
+                            if (event->getType() == IEvent::TType::CLOSE)
+                                event->setType(IEvent::TType::READ);
+
                             context->pushEvent(context_event);
                         }
+                        if (is_transmitted && event->getType() == IEvent::TType::CLOSE)
+                            context->pushEvent(context_event);
                     } else {
                         // todo: throw
                         LOGE << "pipe not found: fd " << context_event->getStream()->getID();

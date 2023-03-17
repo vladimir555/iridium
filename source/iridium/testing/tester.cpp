@@ -95,7 +95,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
                 .command            = TCmdArgs::TCommand::RUN,
                 .mode               = TCmdArgs::TMode::PARALLEL,
                 .print_result       = TCmdArgs::TPrintResult::UNKNOWN,
-                .timeout            = std::chrono::seconds(10),
+                .timeout            = std::chrono::minutes(1),
                 .include_path       = "/",
                 .app_name           = args[0]
             }
