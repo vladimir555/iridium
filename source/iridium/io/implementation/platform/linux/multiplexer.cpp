@@ -217,8 +217,10 @@ void CMultiplexer::delInternal(IStream::TConstSharedPtr const &stream) {
 
 //    LOGT << "epoll del: " << m_epoll_fd << " fd " << stream->getID();
     if (stream->getID() > 0) {
-        m_map_fd_stream.erase(stream->getID());
-        assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, stream->getID(), nullptr), "epoll del error");
+        auto id = stream->getID();
+        assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, id, nullptr), "epoll del error");
+        std::const_pointer_cast<IStream>(stream)->finalize();
+        m_map_fd_stream.erase(id);
     }
 }
 
