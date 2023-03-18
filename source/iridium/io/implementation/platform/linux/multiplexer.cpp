@@ -104,14 +104,15 @@ void CMultiplexer::finalize() {
 
 
 void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
-    if (!stream || !stream->getID() || m_is_closing)
-        return;
+    if (!stream || m_is_closing)
+        return; // ----->
 
-//    LOGT << __FUNCTION__ << ": " << m_epoll_fd << " " << stream->getID();
+//    LOGT << __FUNCTION__ << ": " << m_epoll_fd;
 
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer subscribing error: epoll is not initialized"); // ----->
 
+    std::const_pointer_cast<IStream>(stream)->initialize();
     m_streams_to_add->push(stream);
     eventfd_write(m_event_fd, 0);
 }

@@ -96,7 +96,6 @@ void CSessionManager::ContextManager::Context::updateStream(
             if (stream) {
                 auto stream_pipe  = m_map_stream_pipe.find(stream);
                 if  (stream_pipe == m_map_stream_pipe.end()) {
-                    stream->initialize();
                     m_multiplexer->subscribe(stream);
                     m_map_stream_pipe[stream] = pipe;
                 }
