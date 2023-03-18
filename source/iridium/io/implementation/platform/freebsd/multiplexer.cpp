@@ -165,10 +165,15 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     if (!stream)
         return; // ----->
 
-    int64_t fd = stream->getID();
+    int64_t fd = 0;
+
+    std::const_pointer_cast<IStream>(stream)->initialize();
+
+    fd = stream->getID();
 
     if (fd <= 0)
         return;
+
     {
         LOCK_SCOPE;
         m_map_fd_stream[fd] = stream;
