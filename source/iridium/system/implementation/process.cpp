@@ -165,13 +165,16 @@ void CProcessStream::initialize() {
 
 
 void CProcessStream::finalize() {
-//    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
     if (m_pid == 0)
         return;
 
+//    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
+
+//    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
     auto timeout = system_clock::now() + DEFAULT_PROCESS_TIMEOUT;
     while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING)
         std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
+//    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " DONE";
 
     if (getState().condition == TState::TCondition::RUNNING) {
         LOGW << "kill pid " << m_pid << " " << m_command_line;
@@ -184,14 +187,13 @@ void CProcessStream::finalize() {
         m_fd        = 0;
     }
 
-    m_state_internal = { 0 };
+//    m_state_internal = { 0 };
     m_pid = 0;
+//    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " done";
 }
 
 
 IProcess::TState CProcessStream::getState() {
-
-
     TState::TCondition condition = TState::TCondition::UNKNOWN;
 
     if (m_pid != 0) {

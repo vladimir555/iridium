@@ -28,7 +28,7 @@ public:
 
 
 // todo:
-class IProtocol {
+class IProtocol /*: public pattern::IInitializable*/ {
 public:
     DEFINE_INTERFACE(IProtocol)
     virtual bool control(IEvent::TSharedPtr const &event, IPipeManager::TSharedPtr const &pipe_manager) = 0;

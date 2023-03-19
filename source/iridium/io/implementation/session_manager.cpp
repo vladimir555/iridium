@@ -29,7 +29,7 @@ std::chrono::seconds const DEFAULT_TIMEOUT(10);
 
 CSessionManager::ContextManager::Context::Context(
     IMultiplexer::TSharedPtr    const &multiplexer,
-    ContextManager *    const context_manager,
+    ContextManager            * const context_manager,
     IProtocol::TSharedPtr       const &protocol)
 :
     m_multiplexer       (multiplexer),
@@ -40,15 +40,12 @@ CSessionManager::ContextManager::Context::Context(
 
 CSessionManager::ContextManager::Context::~Context() {
     for (auto const &name_pipe: m_map_name_pipe) {
-        if (name_pipe.second->getReader()) {
+        if (name_pipe.second->getReader())
             m_multiplexer->unsubscribe(name_pipe.second->getReader());
-//            std::const_pointer_cast<IStreamReader>(name_pipe.second->getReader())->finalize();
-        }
-        if (name_pipe.second->getWriter()) {
+        if (name_pipe.second->getWriter())
             m_multiplexer->unsubscribe(name_pipe.second->getWriter());
-//            std::const_pointer_cast<IStreamWriter>(name_pipe.second->getWriter())->finalize();
-        }
     }
+//    m_protocol->finalize();
 }
 
 
@@ -104,10 +101,10 @@ void CSessionManager::ContextManager::Context::updateStream(
             if (type == IEvent::TType::READ)
                 pipe->set(
                     std::dynamic_pointer_cast<IStreamReader>(stream),
-                    std::const_pointer_cast<IStreamWriter>(pipe->getWriter()));
+                      std::const_pointer_cast<IStreamWriter>(pipe->getWriter()));
             if (type == IEvent::TType::WRITE)
                 pipe->set(
-                    std::const_pointer_cast<IStreamReader>(pipe->getReader()),
+                      std::const_pointer_cast<IStreamReader>(pipe->getReader()),
                     std::dynamic_pointer_cast<IStreamWriter>(stream));
 
             if (stream->getID() > 0)
@@ -214,6 +211,7 @@ void CSessionManager::finalize() {
 
 void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
     if (stream && protocol) {
+//        protocol->initialize();
         m_context_manager->updateContext(
             ContextManager::Context::create(m_multiplexer, m_context_manager.get(), protocol), stream);
         m_context_worker->push(CEvent::create(stream, IEvent::TType::OPEN));

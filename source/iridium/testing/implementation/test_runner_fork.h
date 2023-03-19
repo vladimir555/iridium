@@ -27,10 +27,11 @@ public:
 private:
     struct TProcessResult {
         DEFINE_CREATE(TProcessResult)
-        std::string                 path;
+        std::string                     path;
         system::IProcess::TState    state;
-        io::Buffer::TSharedPtr      output;
-        parsing::INode::TSharedPtr  node;
+//        system::IProcess::TSharedPtr    process;
+        io::Buffer::TSharedPtr          output;
+        parsing::INode::TSharedPtr      node;
     };
 
     class CTestProtocolHandler: public io::IProtocol {
@@ -45,6 +46,9 @@ private:
             io::IEvent::TSharedPtr          const &event,
             io::IPipeManager::TSharedPtr    const &pipe_manager) override;
 
+//        void initialize() override;
+//        void finalize() override;
+
         io::Buffer::TSharedPtr      getBuffer() const;
         system::IProcess::TState    getExitState() const;
 
@@ -58,6 +62,7 @@ private:
         io::Buffer::TSharedPtr          m_buffer_output;
         bool                            m_is_finished;
         parsing::IParser::TSharedPtr    m_parser;
+        TProcessResult::TSharedPtr      m_process_result;
     };
 
     void scan(
