@@ -173,8 +173,8 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
 
 
 bool CTestRunnerFork::CTestProtocolHandler::control(
-    io::IEvent::TSharedPtr const &event,
-    io::IPipeManager::TSharedPtr const &pipe_manager)
+    io::IEvent::TSharedPtr          const &event,
+    io::IPipeManager::TSharedPtr    const &pipe_manager)
 {
     if (m_is_finished)
         return false; // ----->
@@ -266,7 +266,24 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
 //    LOGT << m_buffer_output;
 
-    if (m_is_finished/* && process_result*/)
+    if (!checkOneOf(m_state.condition,
+        IProcess::TState::TCondition::DONE,
+        IProcess::TState::TCondition::RUNNING))
+    {
+        if(!m_process_result) {
+            m_process_result = TProcessResult::create(
+                TProcessResult {
+                    .path   = m_path,
+                    .state  = m_state,
+                    .output = m_buffer_output
+                }
+            );
+        }
+
+        m_is_finished = true;
+    }
+
+    if (m_is_finished)
         m_process_result_queue->push(m_process_result);
 
     return !m_is_finished; // ----->

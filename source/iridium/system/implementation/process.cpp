@@ -179,6 +179,8 @@ void CProcessStream::finalize() {
     if (getState().condition == TState::TCondition::RUNNING) {
         LOGW << "kill pid " << m_pid << " " << m_command_line;
         kill(m_pid, SIGKILL);
+//        m_state_internal.is_signaled = true;
+        //todo: timeout condition
     }
 
     if (m_pipe_out) {
