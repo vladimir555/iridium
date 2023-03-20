@@ -12,15 +12,9 @@ namespace pattern {
 namespace implementation {
 
 
-//CInitializer::CInitializer(std::list<IInitializable::TSharedPtr> const &items)
-//:
-//    m_is_initialized    (false),
-//    m_items             (items)
-//{}
-
-
 CInitializer::~CInitializer() {
-    finalize();
+    if (m_is_initialized)
+        CInitializer::finalize();
 }
 
 
