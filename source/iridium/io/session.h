@@ -19,16 +19,15 @@ class IPipeManager {
 public:
     DEFINE_INTERFACE(IPipeManager)
 
-    virtual IPipe::TSharedPtr   createPipe          (std::string const &name) = 0;
-    virtual void                removePipe          (std::string const &name) = 0;
+    virtual IPipe::TSharedPtr   createPipe      (std::string const &name) = 0;
+    virtual void                removePipe      (std::string const &name) = 0;
     virtual void                updateReader    (std::string const &name, IStreamReader::TSharedPtr const &reader) = 0;
     virtual void                updateWriter    (std::string const &name, IStreamWriter::TSharedPtr const &writer) = 0;
 };
 
 
 
-// todo:
-class IProtocol /*: public pattern::IInitializable*/ {
+class IProtocol {
 public:
     DEFINE_INTERFACE(IProtocol)
     virtual bool control(IEvent::TSharedPtr const &event, IPipeManager::TSharedPtr const &pipe_manager) = 0;
@@ -38,12 +37,10 @@ public:
 class ISessionManager: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(ISessionManager)
-    ///
+
     virtual void manage(
         IStreamPort::TSharedPtr const &stream,
-        IProtocol::TSharedPtr const &protocol) = 0;
-    ///
-//    virtual bool wait(std::chrono::nanoseconds const &timeout) = 0;
+        IProtocol::TSharedPtr   const &protocol) = 0;
 };
 
 
