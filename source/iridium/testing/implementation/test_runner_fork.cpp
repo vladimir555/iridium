@@ -70,7 +70,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 
     while (paths_left > 0) {
-//        LOGT << "paths left: " << paths_left;
         auto test_fork_handler_results = process_result_queue->pop(m_timeout);
 
         if  (test_fork_handler_results.empty())
@@ -90,8 +89,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 state = map_path_handler[handler_result->path]->getExitState();
 
             map_path_handler.erase(handler_result->path);
-
-//            LOGT << "STATE: " << handler_result->path << " " << state.condition << " " << state.exit_code;
 
             if (checkOneOf(state.condition,
                 IProcess::TState::TCondition::DONE,
@@ -114,9 +111,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         }
     }
 
-//    LOGT << "session manager finalize ...";
     m_session_manager->finalize();
-//    LOGT << "session manager finalize OK";
 
     if (!interrupted.empty()) {
         LOGF << "\nINTERRUPTED:\n";
@@ -207,7 +202,6 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             m_process_result = TProcessResult::create(
                 TProcessResult {
                     .path   = m_path,
-//                    .process = m_process,
                     .state  = m_state,
                     .output = m_buffer_output
                 }
@@ -221,16 +215,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
             string size_str(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
 
-//            LOGT << "find size ...";
-
             if (size_str.find_first_not_of("0123456789") != string::npos)
                 return true; // ----->
 
-//            LOGT << "find size OK";
-
             auto size = convert<uint64_t>(size_str);
-
-//            LOGT << "find json ...";
 
             if (m_buffer_output->at(--left) == '\n' &&
                 m_buffer_output->at(--left) == '\n' &&
@@ -242,19 +230,12 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             } else
                 return true; // ----->
 
-//            LOGT << "find json OK";
-
-//            LOGT << "parse json ...";
-
             string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
             auto    node = m_parser->parse(json);
 
             m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
             m_process_result->node = node;
             m_is_finished = true;
-
-//            LOGT << "parse json OK";
-//            LOGT << "parsed json for path: " << m_path;
         }
     } catch (std::exception const &e) {
         LOGF << e.what();
@@ -262,9 +243,6 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     } catch (...) {
         m_is_finished = (m_state.condition != IProcess::TState::TCondition::RUNNING);
     }
-//    m_is_finished = true;
-
-//    LOGT << m_buffer_output;
 
     if (!checkOneOf(m_state.condition,
         IProcess::TState::TCondition::DONE,
@@ -288,17 +266,6 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     return !m_is_finished; // ----->
 }
-
-
-//void CTestRunnerFork::CTestProtocolHandler::initialize() {
-//}
-
-
-//void CTestRunnerFork::CTestProtocolHandler::finalize() {
-////    LOGT << "finalize protocol: " << m_path;
-////    if (m_process_result && m_is_finished)
-////        m_process_result_queue->push(m_process_result);
-//}
 
 
 io::Buffer::TSharedPtr CTestRunnerFork::CTestProtocolHandler::getBuffer() const {

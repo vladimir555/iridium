@@ -27,27 +27,24 @@ public:
 private:
     struct TProcessResult {
         DEFINE_CREATE(TProcessResult)
-        std::string                     path;
+        std::string                 path;
         system::IProcess::TState    state;
-//        system::IProcess::TSharedPtr    process;
-        io::Buffer::TSharedPtr          output;
-        parsing::INode::TSharedPtr      node;
+        io::Buffer::TSharedPtr      output;
+        parsing::INode::TSharedPtr  node;
     };
 
     class CTestProtocolHandler: public io::IProtocol {
     public:
         DEFINE_IMPLEMENTATION(CTestProtocolHandler)
         CTestProtocolHandler(
-            system::IProcess::TSharedPtr const &process,
-            std::string const &path,
-            threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr const &process_result_queue);
+            system::IProcess::TSharedPtr    const &process,
+            std::string                     const &path,
+            threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
+                                            const &process_result_queue);
 
         bool control(
             io::IEvent::TSharedPtr          const &event,
             io::IPipeManager::TSharedPtr    const &pipe_manager) override;
-
-//        void initialize() override;
-//        void finalize() override;
 
         io::Buffer::TSharedPtr      getBuffer() const;
         system::IProcess::TState    getExitState() const;
