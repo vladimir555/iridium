@@ -1,16 +1,17 @@
 #include "test_runner_fork.h"
 
+#include "iridium/parsing/implementation/parser_json.h"
 #include "iridium/io/implementation/session_manager.h"
 #include "iridium/io/implementation/pipe.h"
 #include "iridium/io/implementation/stream_buffer.h"
 #include "iridium/system/implementation/process.h"
 #include "iridium/threading/implementation/async_queue.h"
-#include "iridium/parsing/implementation/parser_json.h"
 #include "iridium/logging/logger.h"
 #include "iridium/items.h"
 #include "iridium/assert.h"
 
 
+using iridium::parsing::implementation::CJSONParser;
 using iridium::io::implementation::CSessionManager;
 using iridium::io::implementation::CPipe;
 using iridium::io::implementation::CStreamWriterBuffer;
@@ -23,8 +24,6 @@ using iridium::convertion::convert;
 using std::string;
 using std::list;
 using std::chrono::milliseconds;
-
-using iridium::parsing::implementation::CJSONParser;
 
 
 namespace iridium {
@@ -63,50 +62,48 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         m_session_manager->manage(process, handler);
     }
 
-    auto parser = CJSONParser::create();
-
     int paths_left = paths.size();
 
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 
     while (paths_left > 0) {
-        auto test_fork_handler_results = process_result_queue->pop(m_timeout);
+        auto results = process_result_queue->pop(m_timeout);
 
-        if  (test_fork_handler_results.empty())
+        if  (results.empty())
             break; // --->
 
-        for (auto const &handler_result: test_fork_handler_results) {
+        for (auto const &result: results) {
             paths_left--;
-            if (handler_result->node) {
-                TResult test_results_fork(handler_result->node);
+            if (result->node) {
+                TResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
             }
 
-            auto state = handler_result->state;
+            auto state = result->state;
 
             if (state.condition == IProcess::TState::TCondition::RUNNING)
-                state = map_path_handler[handler_result->path]->getExitState();
+                state = map_path_handler[result->path]->getExitState();
 
-            map_path_handler.erase(handler_result->path);
+            map_path_handler.erase(result->path);
 
             if (checkOneOf(state.condition,
                 IProcess::TState::TCondition::DONE,
                 IProcess::TState::TCondition::RUNNING))
             {
-                LOGI << handler_result->path << ":\n"
-                     << handler_result->output;
+                LOGI << result->path << ":\n"
+                     << result->output;
             } else {
-                for (auto const &node: *assertOne(node_test->slice(handler_result->path), "not expected few paths by handler").back()) {
+                for (auto const &node: *assertOne(node_test->slice(result->path), "not expected few paths by handler").back()) {
                     TResult::TTests test;
-                    test.Path   = handler_result->path + "/" + node->getName();
-                    test.Error  = convert<string>(handler_result->state.condition);
+                    test.Path   = result->path + "/" + node->getName();
+                    test.Error  = convert<string>(result->state.condition);
 
                     test_results.Tests.add(test);
                 }
-                interrupted.push_back(handler_result);
-                LOGF << handler_result->path << ":\n"
-                     << handler_result->state.condition;
+                interrupted.push_back(result);
+                LOGF << result->path << ":\n"
+                     << result->state.condition;
             }
         }
     }
@@ -160,10 +157,10 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
                             const &process_result_queue)
 :
     m_process               (process),
-    m_path                  (path),
     m_process_result_queue  (process_result_queue),
-    m_is_finished           (false),
-    m_parser                (CJSONParser::create())
+    m_buffer_output         (io::Buffer::create()),
+    m_parser                (CJSONParser::create()),
+    m_process_result        (TProcessResult::create( TProcessResult { .path = path } ) )
 {}
 
 
@@ -171,7 +168,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IEvent::TSharedPtr          const &event,
     io::IPipeManager::TSharedPtr    const &pipe_manager)
 {
-    if (m_is_finished)
+    if (m_process_result->output)
         return false; // ----->
 
 //    LOGT << "\nevent: " <<  event->getType()
@@ -179,14 +176,12 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //         << "\nprocess_state: " << m_state.condition
 //         << "\nbuffer:\n" << m_buffer_output;
 
-    m_state = m_process->getState();
+    m_process_result->state = m_process->getState();
 
     if (event->getType() == io::IEvent::TType::OPEN) {
         pipe_manager->createPipe("process");
         pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
-        m_buffer_output = io::Buffer::create();
-        m_stream_output = CStreamWriterBuffer::create(m_buffer_output);
-        pipe_manager->updateWriter("process", m_stream_output);
+        pipe_manager->updateWriter("process", CStreamWriterBuffer::create(m_buffer_output));
         return true; // ----->
     }
 
@@ -199,16 +194,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             m_buffer_output->size() > 4 &&
             m_buffer_output->back() == '\n')
         {
-            m_process_result = TProcessResult::create(
-                TProcessResult {
-                    .path   = m_path,
-                    .state  = m_state,
-                    .output = m_buffer_output
-                }
-            );
-
-            size_t right    = m_buffer_output->size() - 1;
-            size_t left     = right;
+            size_t right = m_buffer_output->size() - 1;
+            size_t left  = right;
 
             while (left > 0 && m_buffer_output->at(left - 1) != '\n')
                 left--;
@@ -234,37 +221,30 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             auto    node = m_parser->parse(json);
 
             m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
-            m_process_result->node = node;
-            m_is_finished = true;
+            m_process_result->node      = node;
+            m_process_result->output    = m_buffer_output;
         }
     } catch (std::exception const &e) {
         LOGF << e.what();
-        m_is_finished = (m_state.condition != IProcess::TState::TCondition::RUNNING);
+        if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
+            m_process_result->output = m_buffer_output;;
     } catch (...) {
-        m_is_finished = (m_state.condition != IProcess::TState::TCondition::RUNNING);
+        if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
+            m_process_result->output = m_buffer_output;;
     }
 
-    if (!checkOneOf(m_state.condition,
+    // detect crash
+    if (!checkOneOf(m_process_result->state.condition,
         IProcess::TState::TCondition::DONE,
         IProcess::TState::TCondition::RUNNING))
     {
-        if(!m_process_result) {
-            m_process_result = TProcessResult::create(
-                TProcessResult {
-                    .path   = m_path,
-                    .state  = m_state,
-                    .output = m_buffer_output
-                }
-            );
-        }
-
-        m_is_finished = true;
+        m_process_result->output = m_buffer_output;
     }
 
-    if (m_is_finished)
+    if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
 
-    return !m_is_finished; // ----->
+    return !m_process_result->output; // ----->
 }
 
 
