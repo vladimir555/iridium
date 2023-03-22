@@ -51,13 +51,9 @@ private:
 
     private:
         system::IProcess::TSharedPtr    m_process;
-        std::string                     m_path;
         threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
                                         m_process_result_queue;
-        system::IProcess::TState        m_state;
-        io::IStreamWriter::TSharedPtr   m_stream_output;
         io::Buffer::TSharedPtr          m_buffer_output;
-        bool                            m_is_finished;
         parsing::IParser::TSharedPtr    m_parser;
         TProcessResult::TSharedPtr      m_process_result;
     };
