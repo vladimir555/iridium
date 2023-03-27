@@ -303,16 +303,15 @@ TEST(compose_http_request) {
 
 
 TEST(parse_compose) {
-    auto parser_json = CJSONParser::create();
-    auto parser_xml  = CXMLParser::create();
+    auto parser_json    = CJSONParser::create();
+    auto parser_xml     = CXMLParser::create();
 
-    auto node = parser_json->parse(beer_json);
-
-    auto xml_str = parser_xml->compose(node);
+    auto node           = parser_json->parse(beer_json);
+    auto xml_str        = parser_xml->compose(node);
 
     ASSERT(beer_xml, equal, xml_str);
 
-    auto json_str = parser_json->compose(node);
+    auto json_str       = parser_json->compose(node);
 
     ASSERT(beer_json, equal, json_str);
 }

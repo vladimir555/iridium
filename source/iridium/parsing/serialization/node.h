@@ -330,7 +330,7 @@ std::shared_ptr<TNode> NodePtr<TNode>::get() const {
 // -----
 
 
-std::string convertCamelToDashed(std::string const &camel);
+std::string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimeter_symbol);
 
 
 } // serialization
@@ -338,19 +338,28 @@ std::string convertCamelToDashed(std::string const &camel);
 } // iridium
 
 
-#define DEFINE_ROOT_NODE_BEGIN(class_name) \
+#define DEFINE_ROOT_NODE_BEGIN_2(class_name, name_delimeter_symbol) \
     struct T##class_name : protected iridium::parsing::serialization::Node<void> { \
+        static int const NAME_DELIMETER_SYMBOL = name_delimeter_symbol; \
         T##class_name(iridium::parsing::INode::TConstSharedPtr const &node): \
         iridium::parsing::serialization::Node<void> \
-        (node, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
         T##class_name(): iridium::parsing::serialization::Node<void> \
-        (iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
         iridium::parsing::INode::TSharedPtr getNode() const { \
             return iridium::parsing::serialization::Node<void>::getNode(); \
         } \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::Node<void> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {}
+        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
+
+
+#define DEFINE_ROOT_NODE_BEGIN_1(class_name) \
+    DEFINE_ROOT_NODE_BEGIN_2(class_name, '-')
+
+
+#define DEFINE_ROOT_NODE_BEGIN(...) \
+    dMACRO_CHOOSER(DEFINE_ROOT_NODE_BEGIN, __VA_ARGS__)(__VA_ARGS__)
 
 
 #define DEFINE_ROOT_NODE_END() \
@@ -361,7 +370,7 @@ std::string convertCamelToDashed(std::string const &camel);
     struct T##class_name : protected iridium::parsing::serialization::Node<void> { \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::Node<void> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {}
+        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
 
 
 #define DEFINE_NODE_END(class_name) \
@@ -372,7 +381,7 @@ std::string convertCamelToDashed(std::string const &camel);
     struct T##class_name : public iridium::parsing::serialization::Node<type> { \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::Node<type> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
         using iridium::parsing::serialization::Node<type>::operator =; \
     } class_name = *this;
 
@@ -382,7 +391,7 @@ std::string convertCamelToDashed(std::string const &camel);
         typedef type TType; \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::Node<type> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name), default_value) {} \
+        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), default_value) {} \
         using iridium::parsing::serialization::Node<type>::operator =; \
     } class_name = *this;
 
@@ -400,9 +409,9 @@ std::string convertCamelToDashed(std::string const &camel);
         iridium::parsing::INode::TSharedPtr const &node_destination, \
         std::string const &path): \
         iridium::parsing::serialization::Node<void> \
-        (node_source, node_destination, iridium::parsing::serialization::convertCamelToDashed(#class_name), path) {} \
+        (node_source, node_destination, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
         T##class_name(): iridium::parsing::serialization::Node<void> \
-        (iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
 
 
 #define DEFINE_NODE_LIST_END(class_name) \
@@ -410,7 +419,7 @@ std::string convertCamelToDashed(std::string const &camel);
     struct T##class_name##List : public iridium::parsing::serialization::NodeList<T##class_name> { \
         T##class_name##List(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::NodeList<T##class_name> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
     } class_name = *this;
 
 
@@ -418,22 +427,22 @@ std::string convertCamelToDashed(std::string const &camel);
     struct T##class_name : public iridium::parsing::serialization::Node<type> { \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
             iridium::parsing::serialization::Node<type> \
-                (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+                (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
         using iridium::parsing::serialization::Node<type>::operator =; \
         T##class_name( \
             iridium::parsing::INode::TConstSharedPtr const &node_source, \
             iridium::parsing::INode::TSharedPtr const &node_destination, \
             std::string const &path): \
                 iridium::parsing::serialization::Node<type> \
-                    (node_source, node_destination, iridium::parsing::serialization::convertCamelToDashed(#class_name), path) {} \
+                    (node_source, node_destination, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
         T##class_name(): \
             iridium::parsing::serialization::Node<type> \
-                (iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+                (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
     }; \
     struct T##class_name##List : public iridium::parsing::serialization::NodeList<T##class_name> { \
         T##class_name##List(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::NodeList<T##class_name> \
-        (parent, iridium::parsing::serialization::convertCamelToDashed(#class_name)) {} \
+        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
     } class_name = *this;
 
 
@@ -441,6 +450,7 @@ std::string convertCamelToDashed(std::string const &camel);
     T##class_name class_name = *this;
 
 
+// recursive node
 #define DEFINE_NODE_PTR(class_name) \
     typedef typename iridium::parsing::serialization::NodePtr<T##class_name> T##class_name##Ptr; \
     T##class_name##Ptr class_name##_ptr = *this;
