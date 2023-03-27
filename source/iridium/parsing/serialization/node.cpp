@@ -67,7 +67,7 @@ INode::TSharedPtr Node<void>::getNode() const {
 }
 
 
-string convertCamelToDashed(std::string const &camel) {
+string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimeter_symbol) {
     //todo: optimize
     string result = camel;
 
@@ -79,7 +79,7 @@ string convertCamelToDashed(std::string const &camel) {
         char lo_ch = static_cast<char>(tolower(result[i]));
         if (result[i] != lo_ch) {
             result[i] = static_cast<char>(lo_ch);
-            result.insert(i, "-");
+            result.insert(i, string() + delimeter_symbol);
         }
         i++;
     }

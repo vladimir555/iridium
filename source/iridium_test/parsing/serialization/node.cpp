@@ -98,9 +98,9 @@ TEST(serialization) {
 //        ASSERT(2 , equal, root2.getNode()->findChilds("/list").size());
     }
 
-    ASSERT("camel5-struct-name", equal, convertCamelToDashed("Camel5StructName"));
-    ASSERT("" , equal, convertCamelToDashed(""));
-    ASSERT("a", equal, convertCamelToDashed("A"));
+    ASSERT("camel5-struct-name" , equal, convertCamelToSplittedBySymbol("Camel5StructName", '-'));
+    ASSERT(""                   , equal, convertCamelToSplittedBySymbol("", '-'));
+    ASSERT("a"                  , equal, convertCamelToSplittedBySymbol("A", '-'));
 
     INode::TSharedPtr node = CNode::create("root");
 
@@ -189,6 +189,48 @@ TEST(serialization) {
 }
 
 
+//namespace benchmark {
+
+
+//DEFINE_ROOT_NODE_BEGIN(Root, '_')
+//    DEFINE_NODE_LIST_BEGIN(Array)
+//        DEFINE_ATTRIBUTE(uint64_t, Id)
+//        DEFINE_ATTRIBUTE(string, Type)
+//        DEFINE_NODE_BEGIN(Actor)
+//            DEFINE_ATTRIBUTE(uint64_t, Id)
+//            DEFINE_ATTRIBUTE(string, Login)
+//            DEFINE_ATTRIBUTE(string, Url)
+//            DEFINE_ATTRIBUTE(string, AvatarUrl)
+//        DEFINE_NODE_END(Actor)
+//        DEFINE_NODE_BEGIN(Repo)
+//            DEFINE_ATTRIBUTE(uint64_t, Id)
+//            DEFINE_ATTRIBUTE(string, Name)
+//            DEFINE_ATTRIBUTE(string, Url)
+//        DEFINE_NODE_END(Repo)
+//        DEFINE_NODE_BEGIN(Payload)
+//            DEFINE_ATTRIBUTE(uint64_t, PushId, 0)
+//            DEFINE_ATTRIBUTE(uint64_t, Size, 0)
+//            DEFINE_ATTRIBUTE(uint64_t, DistinctSize, 0)
+//            DEFINE_ATTRIBUTE(string, Ref, "")
+//            DEFINE_ATTRIBUTE(string, RefType, "")
+//            DEFINE_ATTRIBUTE(string, MasterBranch, "")
+//            DEFINE_ATTRIBUTE(string, PusherType, "")
+//            DEFINE_NODE_LIST_BEGIN(Commits)
+//                DEFINE_ATTRIBUTE(string, Sha)
+//                DEFINE_NODE_BEGIN(Author)
+//                    DEFINE_ATTRIBUTE(string, Name, "")
+//                    DEFINE_ATTRIBUTE(string, Email)
+//                DEFINE_NODE_END(Author)
+//            DEFINE_NODE_LIST_END(Commits)
+//        DEFINE_NODE_END(Payload)
+//        DEFINE_ATTRIBUTE(std::chrono::system_clock::time_point, CreatedAt)
+//    DEFINE_NODE_LIST_END(Array)
+//DEFINE_ROOT_NODE_END();
+
+
+//}
+
+
 //TEST(benchmark) {
 //    using implementation::CJSONParser;
 //    using iridium::io::fs::readFile;
@@ -204,7 +246,15 @@ TEST(serialization) {
 //    now    = std::chrono::system_clock::now();
 //    auto json_string = parser->compose(node);
 //    LOGT << "composing time is " << std::chrono::system_clock::now() - now;
-//    writeFile("sample.composed.json", json_string);
+//    now    = std::chrono::system_clock::now();
+//    benchmark::TRoot json_serialized(node);
+//    LOGT << "serialize time is " << std::chrono::system_clock::now() - now;
+//    LOGT << json_serialized.Array.size();
+////    writeFile("sample.composed.json", json_string);
+// apple m1, input json 42 MB
+// parsing   time is 236776 microseconds
+// composing time is 245826 microseconds
+// serialize time is 63970 microseconds
 //}
 
 

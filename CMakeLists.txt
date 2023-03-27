@@ -61,7 +61,7 @@ include_directories(
 # postgresql-all openssl libssl-dev
 set(CPACK_GENERATOR "DEB")
 set(CPACK_PACKAGE_NAME lib${PROJECT_NAME})
-set(CPACK_DEBIAN_PACKAGE_DESCRIPTION    "${PROJECT_NAME} C++ framework without dependencies")
+set(CPACK_DEBIAN_PACKAGE_DESCRIPTION    "${PROJECT_NAME} C++ lightweight framework")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER     "Bulaev Vladimir <bulaev_vladimir@mail.ru>")
 #set(CPACK_DEBIAN_PACKAGE_DEBUG "YES")
 include(CPack)
