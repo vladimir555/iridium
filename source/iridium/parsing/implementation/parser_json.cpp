@@ -358,6 +358,7 @@ INode::TSharedPtr convertStringToNode(string const &source) {
     string  name = "root";
     string  value;
     bool    is_quotes   = false;
+    bool    is_quoted_value = false;
     bool    is_masked   = false;
     size_t  line        = 0;
     size_t  index       = 0;
@@ -381,7 +382,9 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                 }
 
                 if (ch == '"') {
-                    is_quotes = false;
+                    is_quotes       = false;
+                    is_quoted_value = true;
+
                     continue; // <---
                 }
             }
@@ -392,14 +395,19 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                 continue; // <---
 
             if (ch == '"') {
-                is_quotes = true;
+                is_quotes       = true;
+                is_quoted_value = true;
                 continue; // <---
             }
 
             if (ch == ':') {
                 name = std::move(value);
+                value.clear();
+
                 if (name == "#text")
                     name.clear();
+
+                is_quoted_value = false;
                 continue; // <---
             }
 
@@ -417,8 +425,26 @@ INode::TSharedPtr convertStringToNode(string const &source) {
             }
 
             if (ch == '}' || ch == ',' || ch == ']') {
-                if (!value.empty())
+                if (!value.empty()) {
+                    static string const TRUE   = "true";
+                    static string const FALSE  = "false";
+                    static string const NULL_  = "null";
+
+                    // true, false, int, float allowed without quotes
+                    if (!is_quoted_value &&
+                        value != TRUE  &&
+                        value != FALSE &&
+                        value != NULL_ &&
+                        value.find_first_not_of("0.123456789") != string::npos)
+                    {
+                        throw std::runtime_error(
+                            string("json parsing error: unquoted value '") + value + "' at " +
+                            convert<string>(line) + ':' +
+                            convert<string>(index - value.size())); // ----->
+                    }
+
                     node->addChild(name, value);
+                }
                 value.clear();
 
                 if ((ch == '}' && stack.empty()) ||
@@ -449,6 +475,11 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                 continue; // <---
             }
 
+            if (!name.empty()) {
+                value += ch;
+                continue; // <---
+            }
+
             throw std::runtime_error(
                 string("json parsing error: unxpected symbol '") +
                 ch + "' at " + convert<string>(line) + ':' + convert<string>(index)); // ----->
@@ -476,17 +507,21 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 //     return root_node; // ----->
     
     auto root_node = convertStringToNode(source);
-    if (root_node->size() == 1)
-        root_node = *root_node->begin();
+//    LOGT << root_node;
+    if (root_node) {
+        if (root_node->size() == 1)
+            root_node = *root_node->begin();
+    } else
+        throw std::runtime_error("json parsing error: node is null"); // ----->
 
-    return root_node;
+    return root_node; // ----->
 }
 
 
 string mask(string const &source) {
     string result;
     for (auto const &ch: source) {
-        if (ch == '"')
+        if (ch == '"' || ch == '\\')
             result += '\\';
         result += ch;
     }

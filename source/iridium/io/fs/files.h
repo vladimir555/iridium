@@ -18,10 +18,10 @@ namespace fs {
 std::vector<std::string> readTextFile(std::string const &file_name, bool const &is_throw_if_not_exists = true);
 
 
-std::string readFile(std::string const file_name);
+std::string readFile(std::string const &file_name);
 
 
-void writeFile(std::string const file_name, std::string const &text);
+void writeFile(std::string const &file_name, std::string const &text);
 
 
 bool checkFileExistence(std::string const &file_name);
