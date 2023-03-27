@@ -254,8 +254,8 @@ TEST(parse_json) {
 //     auto value_nodes    = assertComplete(node->findChilds("/MyBeerJournal/Brewery/Beer/name"), "tags not found");
 
      // todo:
-     ASSERT("MyBeerJournal", equal, node->getName());
-     ASSERT("Centennial", equal, node->getChild("Brewery")->getChild("Beer")->getChild("name")->getValue());
+     ASSERT("MyBeerJournal" , equal, node->getName());
+     ASSERT("Centennial"    , equal, node->getChild("Brewery")->getChild("Beer")->getChild("name")->getValue());
 //     ASSERT("Centennial"     , equal,     (*value_nodes.begin())->getValue());
 //     ASSERT("Farmhouse Ale"  , equal,   (*++value_nodes.begin())->getValue());
 //     ASSERT("Two Hearted Ale", equal, (*++++value_nodes.begin())->getValue());
@@ -266,6 +266,13 @@ TEST(parse_json) {
              array += i->getValue();
 
      ASSERT("54321", equal, array);
+
+     ASSERT("true"          , equal, parser->parse("{ \"value\":true }")->getValue());
+     ASSERT("false"         , equal, parser->parse("{ \"value\":false }")->getValue());
+     ASSERT("null"          , equal, parser->parse("{ \"value\":null }")->getValue());
+     ASSERT("0.123456789"   , equal, parser->parse("{ \"value\":0.123456789 }")->getValue());
+     ASSERT("null0"         , equal, parser->parse("{ \"value\":\"null0\" }")->getValue());
+     ASSERT(parser->parse("{ \"value\":null0 }"), std::exception);
 }
 
 

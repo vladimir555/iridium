@@ -51,7 +51,7 @@ vector<string> readTextFile(string const &file_name, bool const &is_throw_if_not
 }
 
 
-string readFile(string const file_name) {
+string readFile(string const &file_name) {
     string  result;
     auto    reader = CFileStreamReader::create(file_name);
 
@@ -72,7 +72,7 @@ string readFile(string const file_name) {
 }
 
 
-void writeFile(string const file_name, string const &text) {
+void writeFile(string const &file_name, string const &text) {
     auto writer = CFileStreamWriter::create(file_name, true);
     writer->initialize();
     auto size = writer->write(Buffer::create(text));

@@ -103,37 +103,37 @@ string convert(system_clock::time_point const &value) {
 
 template<>
 string convert(hours const &value) {
-    return convert<string, uint32_t>(value.count()) + " h";
+    return convert<string, uint32_t>(value.count()) + " hours";
 }
 
 
 template<>
 string convert(minutes const &value) {
-    return convert<string, uint32_t>(value.count()) + " m";
+    return convert<string, uint32_t>(value.count()) + " minutes";
 }
 
 
 template<>
 string convert(seconds const &value) {
-    return convert<string, uint32_t>(value.count()) + " s";
+    return convert<string, uint32_t>(value.count()) + " seconds";
 }
 
 
 template<>
 string convert(milliseconds const &value) {
-    return convert<string, uint32_t>(value.count()) + " ms";
+    return convert<string, uint32_t>(value.count()) + " milliseconds";
 }
 
 
 template<>
 string convert(microseconds const &value) {
-    return convert<string, uint32_t>(value.count()) + " mcs";
+    return convert<string, uint32_t>(value.count()) + " microseconds";
 }
 
 
 template<>
 string convert(nanoseconds const &value) {
-    return convert<string, uint32_t>(value.count()) + " ns";
+    return convert<string, uint32_t>(value.count()) + " nanoseconds";
 }
 
 

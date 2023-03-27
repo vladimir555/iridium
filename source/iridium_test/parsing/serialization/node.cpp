@@ -8,6 +8,7 @@
 #include <iridium/parsing/implementation/node.h>
 #include <iridium/parsing/implementation/parser_xml.h>
 #include <iridium/parsing/implementation/parser_json.h>
+#include <iridium/io/fs/files.h>
 #include <iridium/enum.h>
 
 #include <iostream>
@@ -186,6 +187,25 @@ TEST(serialization) {
     ASSERT(55               , equal, root.ExternalRoot.FirstItem.AttributeTwo.get());
     ASSERT(C::TEnum::ENUM1  , equal, root.ExternalRoot.FirstItem.Enum.get());
 }
+
+
+//TEST(benchmark) {
+//    using implementation::CJSONParser;
+//    using iridium::io::fs::readFile;
+//    using iridium::io::fs::writeFile;
+
+//    auto parser = CJSONParser::create();
+//    auto file   = readFile("sample.json");
+
+//    auto now    = std::chrono::system_clock::now();
+//    auto node   = parser->parse(file);
+//    std::chrono::duration<double, std::milli>(std::chrono::system_clock::now() - now);
+//    LOGT << "parsing   time is " << std::chrono::system_clock::now() - now;
+//    now    = std::chrono::system_clock::now();
+//    auto json_string = parser->compose(node);
+//    LOGT << "composing time is " << std::chrono::system_clock::now() - now;
+//    writeFile("sample.composed.json", json_string);
+//}
 
 
 } // serialization
