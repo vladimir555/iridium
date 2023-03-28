@@ -231,30 +231,41 @@ TEST(serialization) {
 //}
 
 
+//// apple m1, input json 42 MB
+//// C++
+//// reading   time is 26333 microseconds
+//// parsing   time is 236776 microseconds
+//// composing time is 245826 microseconds
+//// serialize time is 63970 microseconds
+//// total serizliztion time is 300746 microseconds
+//// Swift 5
+//// 0.769556 seconds = 769556 microseconds
+//// (~x2,5 more slow)
 //TEST(benchmark) {
 //    using implementation::CJSONParser;
 //    using iridium::io::fs::readFile;
 //    using iridium::io::fs::writeFile;
 
+//    auto now    = std::chrono::system_clock::now();
 //    auto parser = CJSONParser::create();
 //    auto file   = readFile("sample.json");
+//    LOGT << "reading   time is " << std::chrono::system_clock::now() - now;
 
-//    auto now    = std::chrono::system_clock::now();
-//    auto node   = parser->parse(file);
+//    now = std::chrono::system_clock::now();
+//    auto node = parser->parse(file);
 //    std::chrono::duration<double, std::milli>(std::chrono::system_clock::now() - now);
 //    LOGT << "parsing   time is " << std::chrono::system_clock::now() - now;
-//    now    = std::chrono::system_clock::now();
+
+//    now = std::chrono::system_clock::now();
 //    auto json_string = parser->compose(node);
 //    LOGT << "composing time is " << std::chrono::system_clock::now() - now;
-//    now    = std::chrono::system_clock::now();
+
+//    now = std::chrono::system_clock::now();
 //    benchmark::TRoot json_serialized(node);
 //    LOGT << "serialize time is " << std::chrono::system_clock::now() - now;
 //    LOGT << json_serialized.Array.size();
-////    writeFile("sample.composed.json", json_string);
-// apple m1, input json 42 MB
-// parsing   time is 236776 microseconds
-// composing time is 245826 microseconds
-// serialize time is 63970 microseconds
+//    writeFile("sample.composed.json", json_string);
+
 //}
 
 
