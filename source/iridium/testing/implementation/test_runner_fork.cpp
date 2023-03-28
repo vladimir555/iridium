@@ -62,7 +62,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         m_session_manager->manage(process, handler);
     }
 
-    int paths_left = paths.size();
+    int64_t paths_left = paths.size();
 
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 

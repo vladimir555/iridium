@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.21)
 
 # clang or gcc
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
@@ -50,6 +50,8 @@ file(GLOB_RECURSE SOURCE
     ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}/*.cpp
 )
 
+source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOURCE})
+
 include_directories(
     /usr/local/include
     ${CMAKE_SOURCE_DIR}/source
@@ -86,6 +88,8 @@ file(GLOB_RECURSE SOURCE_TEST
     ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.h
     ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.cpp
 )
+
+source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test FILES ${SOURCE_TEST})
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
 

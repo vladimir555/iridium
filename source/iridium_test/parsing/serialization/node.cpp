@@ -240,7 +240,7 @@ TEST(serialization) {
 //// total serizliztion time is 300746 microseconds
 //// Swift 5
 //// 0.769556 seconds = 769556 microseconds
-//// (~x2,5 more slow)
+//// (~x2,5 slower)
 //TEST(benchmark) {
 //    using implementation::CJSONParser;
 //    using iridium::io::fs::readFile;

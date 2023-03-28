@@ -251,7 +251,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
             std::vector<int64_t>        fds         (fd_count, 0);
             std::vector<struct kevent>  monitored;//   {fd_count, (struct kevent) {0}};
 
-            auto result = read(triggered_event.ident, fds.data(), byte_count);
+            auto result = read(static_cast<int>(triggered_event.ident), fds.data(), byte_count);
 
             if (result < 0)
                 throw std::runtime_error("read control pipe error: " + string(strerror(errno)));
@@ -281,7 +281,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
             if (is_finalized)
                 break; // --->
 
-            assertOK(kevent(m_kqueue, monitored.data(), monitored.size(), nullptr, 0, nullptr),
+            assertOK(kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr),
                 "kevent update monitored events error");
 
             for (auto const &i: monitored) {
