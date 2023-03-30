@@ -125,11 +125,12 @@ void CProcessStream::initialize() {
     argv[1 + m_args.size()] = nullptr;
 
 //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-//    posix_spawnattr_t attr = { 0 };
 
 //#ifdef POSIX_SPAWN_SETSID
+//    posix_spawnattr_t attr = { 0 };
 //    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
 //#elif defined(POSIX_SPAWN_SETSID_NP)
+//    posix_spawnattr_t attr = { 0 };
 //    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
 //#else
 ////    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);

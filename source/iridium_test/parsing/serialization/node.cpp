@@ -190,8 +190,8 @@ TEST(serialization) {
 
 
 //namespace benchmark {
-
-
+//
+//
 //DEFINE_ROOT_NODE_BEGIN(Root, '_')
 //    DEFINE_NODE_LIST_BEGIN(Array)
 //        DEFINE_ATTRIBUTE(uint64_t, Id)
@@ -226,11 +226,11 @@ TEST(serialization) {
 //        DEFINE_ATTRIBUTE(std::chrono::system_clock::time_point, CreatedAt)
 //    DEFINE_NODE_LIST_END(Array)
 //DEFINE_ROOT_NODE_END();
-
-
+//
+//
 //}
-
-
+//
+//
 //// apple m1, input json 42 MB
 //// C++
 //// reading   time is 26333 microseconds
@@ -245,27 +245,27 @@ TEST(serialization) {
 //    using implementation::CJSONParser;
 //    using iridium::io::fs::readFile;
 //    using iridium::io::fs::writeFile;
-
+//
 //    auto now    = std::chrono::system_clock::now();
 //    auto parser = CJSONParser::create();
 //    auto file   = readFile("sample.json");
 //    LOGT << "reading   time is " << std::chrono::system_clock::now() - now;
-
+//
 //    now = std::chrono::system_clock::now();
 //    auto node = parser->parse(file);
 //    std::chrono::duration<double, std::milli>(std::chrono::system_clock::now() - now);
 //    LOGT << "parsing   time is " << std::chrono::system_clock::now() - now;
-
+//
 //    now = std::chrono::system_clock::now();
 //    auto json_string = parser->compose(node);
 //    LOGT << "composing time is " << std::chrono::system_clock::now() - now;
-
+//
 //    now = std::chrono::system_clock::now();
 //    benchmark::TRoot json_serialized(node);
 //    LOGT << "serialize time is " << std::chrono::system_clock::now() - now;
 //    LOGT << json_serialized.Array.size();
 //    writeFile("sample.composed.json", json_string);
-
+//
 //}
 
 
