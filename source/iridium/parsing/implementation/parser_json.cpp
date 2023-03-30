@@ -344,8 +344,12 @@ namespace implementation {
 //}
 
 
-INode::TSharedPtr convertStringToNode(string const &source) {
-    INode::TSharedPtr       node = CNode::create("root");
+INode::TSharedPtr convertJSONStringToNode(string const &source) {
+    static string const DEFAULT_TEXT_NAME   = "#text"; // xml node without node name
+    static string const DEFAULT_ROOT_NAME   = "root";
+    static string const DEFAULT_ARRAY_NAME  = "array";
+    
+    INode::TSharedPtr       node = CNode::create(DEFAULT_ROOT_NAME), root = node;
     list<INode::TSharedPtr> stack;
 
     struct TArrayNode {
@@ -354,14 +358,15 @@ INode::TSharedPtr convertStringToNode(string const &source) {
     };
 
     list<TArrayNode>        stack_array;
+    string                  expected_brackets;
 
-    string  name = "root";
+    string  name;
     string  value;
-    bool    is_quotes   = false;
+    bool    is_quotes       = false;
     bool    is_quoted_value = false;
-    bool    is_masked   = false;
-    size_t  line        = 0;
-    size_t  index       = 0;
+    bool    is_masked       = false;
+    size_t  line            = 0;
+    size_t  index           = 0;
 
     for (auto const &ch: source) {
         index++;
@@ -384,7 +389,6 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                 if (ch == '"') {
                     is_quotes       = false;
                     is_quoted_value = true;
-
                     continue; // <---
                 }
             }
@@ -412,28 +416,36 @@ INode::TSharedPtr convertStringToNode(string const &source) {
             }
 
             if (ch == '{') {
-//                LOGT << "push " << node->getName() << " -> " << name;
+                if (name.empty())
+                    name = DEFAULT_ROOT_NAME;
+//                LOGT << "push  node: " << node->getName() << " -> " << name;
                 stack.push_back(node);
                 node = node->addChild(name);
+                expected_brackets.push_back('}');
+//                LOGT << "open : " << string() + ch << " , brackets: '" << expected_brackets << "'";
                 continue; // <---
             }
 
             if (ch == '[') {
-//                LOGT << "push array " << node->getName() << " -> " << name;
+                if (name.empty())
+                    name = DEFAULT_ARRAY_NAME;
+//                LOGT << "push array: " << node->getName() << " -> " << name;
                 stack_array.push_back( { node, name } );
+                expected_brackets.push_back(']');
+//                LOGT << "open : " << string() + ch << " , brackets: '" << expected_brackets << "'";
                 continue; // <---
             }
 
             if (ch == '}' || ch == ',' || ch == ']') {
                 if (!value.empty()) {
-                    static string const TRUE   = "true";
-                    static string const FALSE  = "false";
-                    static string const NULL_  = "null";
+                    static string const TRUE_   = "true";
+                    static string const FALSE_  = "false";
+                    static string const NULL_   = "null";
 
                     // true, false, int, float allowed without quotes
                     if (!is_quoted_value &&
-                        value != TRUE  &&
-                        value != FALSE &&
+                        value != TRUE_  &&
+                        value != FALSE_ &&
                         value != NULL_ &&
                         value.find_first_not_of("0.123456789") != string::npos)
                     {
@@ -447,8 +459,17 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                 }
                 value.clear();
 
-                if ((ch == '}' && stack.empty()) ||
-                    (ch == ']' && stack_array.empty()))
+                bool is_expected_bracket = false;
+                if (!expected_brackets.empty() &&
+                    (expected_brackets.back() == ch))
+                {
+                    is_expected_bracket = true;
+                    expected_brackets.pop_back();
+//                    LOGT << "close: " << string() + ch << " , brackets: '" << expected_brackets << "'";
+                }
+                
+                if ((ch == '}' && (stack.empty()        || !is_expected_bracket)) ||
+                    (ch == ']' && (stack_array.empty()  || !is_expected_bracket)))
                 {
                     throw std::runtime_error(
                         string("json parsing error: unxpected symbol '") +
@@ -457,7 +478,7 @@ INode::TSharedPtr convertStringToNode(string const &source) {
 
                 if (ch == '}') {
                     node = stack.back();
-//                    LOGT << "pop  " << name << " -> " << node->getName();
+//                    LOGT << "pop   node: " << name << " -> " << node->getName();
                     stack.pop_back();
                     if (stack_array.empty() || stack_array.back().node != node)
                         name = node->getName();
@@ -467,7 +488,7 @@ INode::TSharedPtr convertStringToNode(string const &source) {
 
                 if (ch == ']') {
                     node = stack_array.back().node;
-//                    LOGT << "pop  array " << name << " -> " << node->getName();
+//                    LOGT << "pop  array: " << name << " -> " << node->getName();
                     stack_array.pop_back();
                     name = node->getName();
                 }
@@ -485,10 +506,14 @@ INode::TSharedPtr convertStringToNode(string const &source) {
                 ch + "' at " + convert<string>(line) + ':' + convert<string>(index)); // ----->
         }
     }
+    
+    if (!expected_brackets.empty())
+        throw std::runtime_error(string("json parsing error: expected symbol '") +
+            expected_brackets.back() + "' at end of json"); // ----->
 
-    return node->getChild("root"); // ----->
+    return root; // ----->
 }
-
+	
 
 INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 //     INode::TSharedPtr   root_node = CNode::create("root", "");
@@ -506,7 +531,7 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 // 
 //     return root_node; // ----->
     
-    auto root_node = convertStringToNode(source);
+    auto root_node = convertJSONStringToNode(source);
 //    LOGT << root_node;
     if (root_node) {
         if (root_node->size() == 1)
@@ -529,7 +554,7 @@ string mask(string const &source) {
 }
 
 
-void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result, string const &tab = "") {
+void convertNodeToJSONString(INode::TConstSharedPtr const &node, string &result, string const &tab = "") {
     unordered_map<string, list< INode::TConstSharedPtr > > map_name_node;
     list<string> names;
 
@@ -554,7 +579,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
 
             if (node_child->hasChilds()) {
                 result += tab + "\"" +  node_child->getName() + "\"" + ": {\n";
-                convertNodeToJsonString(node_child, result, tab + DEFAULT_TAB); // <-----
+                convertNodeToJSONString(node_child, result, tab + DEFAULT_TAB); // <-----
                 result += tab + "}" + line_end;
             } else {
                 string name = node_child->getName();
@@ -580,7 +605,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
 
                 if (node->hasChilds()) {
                     result += tab + DEFAULT_TAB + "{\n";
-                    convertNodeToJsonString(node, result, tab + DEFAULT_TAB + DEFAULT_TAB); // <-----
+                    convertNodeToJSONString(node, result, tab + DEFAULT_TAB + DEFAULT_TAB); // <-----
                     result += tab + DEFAULT_TAB + "}" + line_end_;
                 } else {
                     result += tab + DEFAULT_TAB + "\"" + mask(node->getValue()) + "\"" + line_end_;
@@ -594,7 +619,7 @@ void convertNodeToJsonString(INode::TConstSharedPtr const &node, string &result,
 
 string CJSONParser::compose(INode::TConstSharedPtr const &root_node) const {
     string result;
-    convertNodeToJsonString(root_node, result, DEFAULT_TAB + DEFAULT_TAB);
+    convertNodeToJSONString(root_node, result, DEFAULT_TAB + DEFAULT_TAB);
     result = "{\n" + DEFAULT_TAB + "\"" + root_node->getName() + "\"" + ": {\n" + result + DEFAULT_TAB + "}\n}\n";
     return result; // ----->
 }

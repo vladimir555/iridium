@@ -46,7 +46,7 @@ T &assertOne(T &&values, std::string const &error) {
 
 template<typename T>
 T &assertComplete(T &&values, std::string const &error) {
-    if (values.size() >= 1)
+    if (values.size() > 0)
         return values; // ----->
     else
         throw std::runtime_error(error);
