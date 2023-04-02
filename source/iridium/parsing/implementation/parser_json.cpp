@@ -345,11 +345,11 @@ namespace implementation {
 
 
 INode::TSharedPtr convertJSONStringToNode(string const &source) {
-    static string const DEFAULT_TEXT_NAME   = "#text"; // xml node without node name
-    static string const DEFAULT_ROOT_NAME   = "root";
-    static string const DEFAULT_ARRAY_NAME  = "array";
+    static string const DEFAULT_NODE_NAME_TEXT   = "#text"; // xml node without node name
+    static string const DEFAULT_NODE_NAME_ROOT   = "root";
+    static string const DEFAULT_NODE_NAME_ARRAY  = "array";
     
-    INode::TSharedPtr       node = CNode::create(DEFAULT_ROOT_NAME), root = node;
+    INode::TSharedPtr       node = CNode::create(DEFAULT_NODE_NAME_ROOT), root = node;
     list<INode::TSharedPtr> stack;
 
     struct TArrayNode {
@@ -408,7 +408,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                 name = std::move(value);
                 value.clear();
 
-                if (name == "#text")
+                if (name == DEFAULT_NODE_NAME_TEXT)
                     name.clear();
 
                 is_quoted_value = false;
@@ -417,7 +417,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
 
             if (ch == '{') {
                 if (name.empty())
-                    name = DEFAULT_ROOT_NAME;
+                    name = DEFAULT_NODE_NAME_ROOT;
 //                LOGT << "push  node: " << node->getName() << " -> " << name;
                 stack.push_back(node);
                 node = node->addChild(name);
@@ -428,7 +428,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
 
             if (ch == '[') {
                 if (name.empty())
-                    name = DEFAULT_ARRAY_NAME;
+                    name = DEFAULT_NODE_NAME_ARRAY;
 //                LOGT << "push array: " << node->getName() << " -> " << name;
                 stack_array.push_back( { node, name } );
                 expected_brackets.push_back(']');
@@ -511,7 +511,10 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
         throw std::runtime_error(string("json parsing error: expected symbol '") +
             expected_brackets.back() + "' at end of json"); // ----->
 
-    return root; // ----->
+    if (root->size() == 1 && root->getChild(DEFAULT_NODE_NAME_ROOT))
+        return root->getChild(DEFAULT_NODE_NAME_ROOT); // ----->
+    else
+        return root; // ----->
 }
 	
 
@@ -531,15 +534,14 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 // 
 //     return root_node; // ----->
     
-    auto root_node = convertJSONStringToNode(source);
-//    LOGT << root_node;
-    if (root_node) {
-        if (root_node->size() == 1)
-            root_node = *root_node->begin();
+    auto node = convertJSONStringToNode(source);
+    if  (node) {
+        if (node->size() == 1)
+            node = *node->begin();
     } else
         throw std::runtime_error("json parsing error: node is null"); // ----->
 
-    return root_node; // ----->
+    return node; // ----->
 }
 
 

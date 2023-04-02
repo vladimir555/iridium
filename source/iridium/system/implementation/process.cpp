@@ -137,11 +137,15 @@ void CProcessStream::initialize() {
 ////    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
 //#endif
 
+    pid_t pid = m_pid;
+    
     assertOK(
 //        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
-        posix_spawnp(&m_pid, m_app.c_str(), &actions, 0, argv, environ),
+        posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv, environ),
        "posix_spawnp"
     );
+    
+    m_pid = pid;
 
 //    auto r =
 //    posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ);
