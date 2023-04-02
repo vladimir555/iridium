@@ -186,6 +186,12 @@ TEST(serialization) {
     ASSERT("value11"        , equal, root.ExternalRoot.FirstItem.AttributeOne.get());
     ASSERT(55               , equal, root.ExternalRoot.FirstItem.AttributeTwo.get());
     ASSERT(C::TEnum::ENUM1  , equal, root.ExternalRoot.FirstItem.Enum.get());
+    
+    {
+        INode::TSharedPtr node = CNode::create("root_wrong");
+        ASSERT((TRoot(node)), std::exception);
+        ASSERT((TRoot(nullptr)), std::exception);
+    }
 }
 
 

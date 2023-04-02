@@ -286,7 +286,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
             for (auto const &i: monitored) {
                 if (i.flags == (EV_DELETE | EV_DISABLE)) {
-                    std::const_pointer_cast<IStream>(m_map_fd_stream[i.ident])->finalize();
+//                    std::const_pointer_cast<IStream>(m_map_fd_stream[i.ident])->finalize();
                     m_map_fd_stream[i.ident] = nullptr;
     //                    LOGT << "! unmap fd: " << fd << " by event from fd: " << triggered_event.ident;
                 }

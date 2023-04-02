@@ -66,6 +66,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 
+    // TODO: exception handling
     while (paths_left > 0) {
         auto results = process_result_queue->pop(m_timeout);
 
@@ -75,6 +76,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         for (auto const &result: results) {
             paths_left--;
             if (result->node) {
+//                LOGT << result->node;
                 TResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
