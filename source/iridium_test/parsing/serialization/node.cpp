@@ -187,10 +187,19 @@ TEST(serialization) {
     ASSERT(55               , equal, root.ExternalRoot.FirstItem.AttributeTwo.get());
     ASSERT(C::TEnum::ENUM1  , equal, root.ExternalRoot.FirstItem.Enum.get());
     
+    ASSERT((TRoot(nullptr)), std::exception);
     {
         INode::TSharedPtr node = CNode::create("root_wrong");
         ASSERT((TRoot(node)), std::exception);
-        ASSERT((TRoot(nullptr)), std::exception);
+        node->addChild("first-item")->addChild("attribute-two", "55");
+        ASSERT((TRoot(node)), std::exception);
+    }
+    
+    {
+        INode::TSharedPtr node = CNode::create("root");
+        ASSERT((TRoot(node)), std::exception);
+        node->addChild("first-item")->addChild("attribute-two", "55");
+        ASSERT((TRoot(node)), std::exception);
     }
 }
 
