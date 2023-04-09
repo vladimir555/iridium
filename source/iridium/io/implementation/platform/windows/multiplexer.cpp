@@ -25,12 +25,12 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 }
 
 // todo: subscribe for IStreamReader and IStreamWriter
-void subscribe(IStream::TConstSharedPtr const &stream) {
+void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
     throw std::runtime_error("multiplexer is not implemented");
 }
 
 // finalize and unsubscribe stream
-void unsubscribe(IStream::TConstSharedPtr const &stream) {
+void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
     throw std::runtime_error("multiplexer is not implemented");
 }
 
