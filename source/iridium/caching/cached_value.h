@@ -11,9 +11,6 @@
 #include <map>
 
 
-#include "iridium/threading/implementation/mutex.h"
-
-
 namespace iridium {
 namespace caching {
 

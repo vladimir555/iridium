@@ -24,11 +24,11 @@ class CChannel:
     public IChannel,
     public pattern::Broadcaster<ISink>,
     public pattern::NonCopyable,
-    public threading::Synchronized
+    public threading::Synchronized<std::mutex>
 {
 public:
     DEFINE_IMPLEMENTATION(CChannel)
-    CChannel();
+    CChannel() = default;
     ///
     virtual void initialize() override;
     ///

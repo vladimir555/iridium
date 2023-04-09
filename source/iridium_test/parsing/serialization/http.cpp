@@ -1,11 +1,4 @@
-/*
-* This is an independent project of an individual developer. Dear PVS-Studio, please check it.
-* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
-*/
 #include <iridium/testing/tester.h>
-
-#include <iostream>
-using namespace std;
 
 #include <iridium/io/protocol/http/request.h>
 #include <iridium/io/protocol/http/response.h>

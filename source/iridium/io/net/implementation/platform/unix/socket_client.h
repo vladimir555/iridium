@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SOCKET_CLIENT_DC6913D5_8C89_4528_9946_093DB16A8061
 #define HEADER_SOCKET_CLIENT_DC6913D5_8C89_4528_9946_093DB16A8061
 

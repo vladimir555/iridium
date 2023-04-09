@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_EVENT_PROVIDER_14F82211_CB2B_4426_94FE_0D72FE64652E
 #define HEADER_EVENT_PROVIDER_14F82211_CB2B_4426_94FE_0D72FE64652E
 
@@ -20,6 +24,7 @@
 #include <cstring>
 #include <array>
 #include <atomic>
+#include <mutex>
 
 #include <sys/event.h>
 
@@ -30,8 +35,7 @@ namespace implementation {
 namespace platform {
 
 
-// todo: rename CMultiplexer
-class CMultiplexer: public IMultiplexer, public threading::Synchronized {
+class CMultiplexer: public IMultiplexer, public threading::Synchronized<std::mutex> {
 public:
     DEFINE_IMPLEMENTATION(CMultiplexer)
     CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);

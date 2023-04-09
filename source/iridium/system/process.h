@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_PROCESS_70CE2A25_38CC_4D60_A1A7_B14F33DB94CF
 #define HEADER_PROCESS_70CE2A25_38CC_4D60_A1A7_B14F33DB94CF
 

@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SHELL_46F6D204_C1A7_4BCF_944F_F085BB17E1E2
 #define HEADER_SHELL_46F6D204_C1A7_4BCF_944F_F085BB17E1E2
 

@@ -1,7 +1,3 @@
-/*
-* This is an independent project of an individual developer. Dear PVS-Studio, please check it.
-* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
-*/
 #include "config.h"
 
 #include "implementation/mysql_connector.h"
@@ -19,18 +15,18 @@ using std::string;
 IMPLEMENT_ENUM(iridium::db::config::TDatebaseConnector::TDBType)
 
 
-namespace {
-
-
-std::string convert_(iridium::db::config::TDatebaseConnector::TType const &value) {
-    return convert<std::string>(value.get()); // ----->
-}
-
-
-}
-
-
-IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TType, convert_)
+//namespace {
+//
+//
+//std::string convert_(iridium::db::config::TDatebaseConnector::TType const &value) {
+//    return convert<std::string>(value); // ----->
+//}
+//
+//
+//}
+//
+//
+//IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TDBType, convert_)
 
 
 #ifdef BUILD_FLAG_MYSQL

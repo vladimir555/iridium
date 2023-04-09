@@ -20,7 +20,6 @@ class IRunnable: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IRunnable)
     virtual void run(std::atomic<bool> &is_running) = 0;
-//    virtual void stop() = 0;
 };
 
 

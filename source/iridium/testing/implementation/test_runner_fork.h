@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_TEST_RUNNER_FORK_7CD34E81_3DBC_4751_AAA2_AEC4EFBA58AA
 #define HEADER_TEST_RUNNER_FORK_7CD34E81_3DBC_4751_AAA2_AEC4EFBA58AA
 

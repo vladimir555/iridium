@@ -1,7 +1,6 @@
-// Copyright © 2019 Bulaev Vladimir.
+// Copyright ï¿½ 2019 Bulaev Vladimir.
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
-
 
 #ifndef HEADER_SOCKET_846B93DA_90F4_4B30_BBFF_EC3D1526964B
 #define HEADER_SOCKET_846B93DA_90F4_4B30_BBFF_EC3D1526964B

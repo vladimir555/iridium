@@ -6,8 +6,6 @@
 
 #include "iridium/logging/logger.h"
 #include "iridium/io/implementation/event.h"
-#include "iridium/threading/mutex.h"
-#include "iridium/threading/synchronized_scope.h"
 #include "iridium/threading/implementation/async_queue.h"
 #include "iridium/threading/implementation/worker.h"
 #include "iridium/items.h"
@@ -27,7 +25,6 @@ using std::chrono::nanoseconds;
 using iridium::convertion::convert;
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CWorker;
-using iridium::threading::implementation::CMutex;
 
 
 DEFINE_ENUM(
@@ -175,7 +172,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
         return;
 
     {
-        LOCK_SCOPE;
+        LOCK_SCOPE();
         m_map_fd_stream[fd] = stream;
 //        LOGT << "!   map fd: " << fd;
     }
@@ -220,7 +217,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
              &m_timeout),
          "kevent waiting event error");
 
-    LOCK_SCOPE;
+    LOCK_SCOPE();
 
     bool is_finalized = false;
     for (int i = 0; i < triggered_event_count; i++) {

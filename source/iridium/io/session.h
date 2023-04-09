@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SESSION_BB5946FC_0AA1_4747_AE53_07DB1F105A72
 #define HEADER_SESSION_BB5946FC_0AA1_4747_AE53_07DB1F105A72
 

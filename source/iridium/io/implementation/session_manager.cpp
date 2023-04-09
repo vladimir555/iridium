@@ -2,10 +2,8 @@
 
 #include "multiplexer.h"
 
-#include "iridium/threading/synchronized_scope.h"
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/worker_pool.h"
-#include "iridium/threading/implementation/recursive_mutex.h"
 #include "iridium/io/implementation/pipe.h"
 #include "iridium/items.h"
 #include "event.h"
@@ -14,8 +12,6 @@
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CThread;
 using iridium::threading::implementation::CWorkerPool;
-using iridium::threading::implementation::CMutex;
-using iridium::threading::implementation::CRecursiveMutex;
 using iridium::threading::implementation::CAsyncQueue;
 using iridium::createObjects;
 
@@ -224,7 +220,7 @@ void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::T
 CSessionManager::ContextManager::Context::TSharedPtr CSessionManager::ContextManager::acquireContext(
     IEvent::TSharedPtr const &event)
 {
-    LOCK_SCOPE;
+    LOCK_SCOPE();
     m_map_stream_timestamp[event->getStream()] = std::chrono::system_clock::now();
     auto stream_context  = m_map_stream_context.find(event->getStream());
     if  (stream_context != m_map_stream_context.end()) {
@@ -242,13 +238,13 @@ CSessionManager::ContextManager::Context::TSharedPtr CSessionManager::ContextMan
 
 
 void CSessionManager::ContextManager::releaseContext(Context::TSharedPtr const &context) {
-    LOCK_SCOPE;
+    LOCK_SCOPE();
     m_acquired_contexts.erase(context);
 }
 
 
 void CSessionManager::ContextManager::updateContext(Context::TSharedPtr const &context, IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE;
+    LOCK_SCOPE();
     m_map_stream_context[stream] = context;
     m_map_context_streams[context].insert(stream);
     m_map_stream_timestamp[stream] = std::chrono::system_clock::now();
@@ -256,7 +252,7 @@ void CSessionManager::ContextManager::updateContext(Context::TSharedPtr const &c
 
 
 void CSessionManager::ContextManager::removeContext(Context::TSharedPtr const &context) {
-    LOCK_SCOPE;
+    LOCK_SCOPE();
     for (auto const &stream: m_map_context_streams.at(context)) {
         m_map_stream_context.erase(stream);
         m_map_stream_timestamp.erase(stream);
@@ -266,7 +262,7 @@ void CSessionManager::ContextManager::removeContext(Context::TSharedPtr const &c
 
 
 void CSessionManager::ContextManager::clear() {
-    LOCK_SCOPE;
+    LOCK_SCOPE();
     m_map_stream_context.clear();
     m_map_context_streams.clear();
     m_map_stream_timestamp.clear();
@@ -277,7 +273,7 @@ void CSessionManager::ContextManager::clear() {
 std::list<IStream::TConstSharedPtr> CSessionManager::ContextManager::getOutdatedStreams() {
     auto timestamp = std::chrono::system_clock::now() - DEFAULT_TIMEOUT;
 
-    LOCK_SCOPE;
+    LOCK_SCOPE();
 
     std::list<IStream::TConstSharedPtr> result;
     for (auto const &stream_timestamp: m_map_stream_timestamp) {
@@ -292,7 +288,7 @@ std::list<IStream::TConstSharedPtr> CSessionManager::ContextManager::getOutdated
 void CSessionManager::ContextManager::updateStreamTimestamp(IStream::TConstSharedPtr const &stream) {
     auto timestamp = std::chrono::system_clock::now();
 
-    LOCK_SCOPE;
+    LOCK_SCOPE();
 
     m_map_stream_timestamp[stream] = timestamp;
 }

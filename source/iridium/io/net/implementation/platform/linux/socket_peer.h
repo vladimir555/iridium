@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SOCKET_PEER_59393E2C_61A3_4D7B_9C6B_49EDA1293C16
 #define HEADER_SOCKET_PEER_59393E2C_61A3_4D7B_9C6B_49EDA1293C16
 

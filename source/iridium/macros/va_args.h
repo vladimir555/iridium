@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_VA_ARGS_A200B22F_46BD_4D03_A488_82E71F3E5F7F
 #define HEADER_VA_ARGS_A200B22F_46BD_4D03_A488_82E71F3E5F7F
 

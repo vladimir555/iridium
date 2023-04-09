@@ -8,7 +8,6 @@
 
 #include "iridium/pattern/initializable.h"
 #include "iridium/pattern/singleton.h"
-#include "iridium/smart_ptr.h"
 
 #include "iridium/threading/synchronized.h"
 #include "iridium/strings.h"
@@ -28,7 +27,7 @@ namespace logging {
 // todo: separate logger to other type with singleton
 class Logger:
     public pattern::Singleton<Logger>,
-    public threading::Synchronized
+    public threading::Synchronized<std::mutex>
 {
 public:
     ///

@@ -2,15 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-//
-//  stream.h
-//  iridium
-//
-//  created by volodja on 2018-06-01
-//
-
-
-
 #ifndef HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358
 #define HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358
 
