@@ -2,6 +2,7 @@
 
 #include "multiplexer.h"
 
+#include "iridium/threading/synchronized_scope.h"
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/worker_pool.h"
 #include "iridium/threading/implementation/recursive_mutex.h"

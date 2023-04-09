@@ -39,13 +39,21 @@ CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std:
 {}
 
 
+CThread::~CThread() {
+    if (m_is_running) {
+        std::cerr << "FATAL: destroying thread '" << m_name << "' without finalizing" << std::endl;
+        finalize();
+    }
+}
+
+
 void CThread::initialize() {
     if (m_thread)
         throw std::runtime_error("thread '" + m_name + "' initializing error: already initialized"); // ----->
 
     m_runnuble->initialize();
     m_is_running = true;
-    m_thread = std::make_unique<thread>(run, m_name, m_runnuble, m_error_queue_start, m_error_queue_stop, &m_is_running);
+    m_thread = std::make_shared<thread>(run, m_name, m_runnuble, m_error_queue_start, m_error_queue_stop, &m_is_running);
 
     string error;
 
@@ -55,7 +63,7 @@ void CThread::initialize() {
         throw std::runtime_error("thread '" + m_name + "' initializing error: " + e.what()); // ----->
     }
 
-    if (!error.empty())
+    if (!error.empty() || !m_thread->joinable())
         throw std::runtime_error("thread '" + m_name + "' initializing error: " + error); // ----->
 }
 
@@ -108,6 +116,8 @@ void CThread::run(
     std::string error;
     bool        is_started = true;
 
+    IThread::setNameStatic(name);
+    
     try {
         status_start->push("");
         runnuble->run(*is_running);

@@ -9,21 +9,13 @@
 #include "mutex.h"
 
 #include "implementation/mutex.h"
+#include "implementation/condition.h"
 
 
 namespace iridium {
 namespace threading {
 
 
-//// thread safe
-//class ISynchronized {
-//public:
-//    DEFINE_INTERFACE(ISynchronized)
-//    virtual IMutex * const getMutex() const = 0;
-//};
-
-
-// todo: rename ThreadSafe
 class Synchronized {
 protected:
     friend class SynchronizedScope;
@@ -31,12 +23,13 @@ protected:
 
     Synchronized(IMutex::TSharedPtr const &mutex);
     Synchronized();
-    ~Synchronized() = default;
+   ~Synchronized() = default;
 
-    IMutex::TSharedPtr getMutex() const;
+    IMutex::TSharedPtr      getMutex() const;
+    ICondition::TSharedPtr  getCondition() const;
 
 private:
-    IMutex::TSharedPtr m_mutex;
+    IMutex::TSharedPtr      m_mutex;
 };
 
 
