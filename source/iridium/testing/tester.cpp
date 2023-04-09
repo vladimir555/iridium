@@ -149,7 +149,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
                 i++;
             }
 
-            if (args.size() > 2) {
+            if (args.size() > 2 && i < args.size()) {
                 result->include_path = args[i];
                 i++;
             }
