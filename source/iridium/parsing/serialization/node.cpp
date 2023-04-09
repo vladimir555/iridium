@@ -2,6 +2,8 @@
 
 #include "iridium/parsing/implementation/node.h"
 
+#include <stdexcept>
+
 
 using std::string;
 using iridium::parsing::implementation::CNode;
