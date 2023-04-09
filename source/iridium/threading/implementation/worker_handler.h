@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_WORKER_HANDLER_D977DE0C_D1EF_4571_9709_FC454A816A33
 #define HEADER_WORKER_HANDLER_D977DE0C_D1EF_4571_9709_FC454A816A33
 

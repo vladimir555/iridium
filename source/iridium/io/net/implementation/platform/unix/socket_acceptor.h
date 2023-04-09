@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 //#ifndef HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
 //#define HEADER_SOCKET_ACCEPTOR_1D0E7ED6_8B6F_48B7_BEA9_1C2248714CA3
 
@@ -12,7 +16,7 @@
 
 //#include "iridium/encryption/openssl.h"
 
-//#include "socket.h"
+//#include "socket.h"=
 
 
 //namespace iridium {

@@ -1,7 +1,3 @@
-/*
-* This is an independent project of an individual developer. Dear PVS-Studio, please check it.
-* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
-*/
 #include "logger.h"
 
 
@@ -9,8 +5,6 @@
 #include "implementation/sink_console.h"
 #include "implementation/sink_file.h"
 
-#include "iridium/threading/synchronized_scope.h"
-#include "iridium/threading/implementation/mutex.h"
 #include "iridium/threading/thread.h"
 #include "iridium/assert.h"
 
@@ -18,7 +12,6 @@
 using iridium::logging::implementation::CChannel;
 using iridium::logging::implementation::CSinkConsole;
 using iridium::logging::implementation::CSinkFile;
-using iridium::threading::implementation::CMutex;
 using std::string;
 
 
@@ -27,7 +20,7 @@ namespace logging {
 
 
 Logger::~Logger() {
-    LOCK_SCOPE
+    LOCK_SCOPE();
     if (m_channel) {
         m_channel->finalize();
         m_channel.reset();
@@ -38,7 +31,7 @@ Logger::~Logger() {
 // todo: factory 
 // todo: refactoring for external sinks via convertion or factory ! one sub config for one sink
 void Logger::update(config::TLogger const &config) {
-    LOCK_SCOPE
+    LOCK_SCOPE();
 
     if (m_channel)
         m_channel->finalize();
@@ -77,7 +70,7 @@ void Logger::log(TEvent &&e) {
 
 
 void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
-    LOCK_SCOPE
+    LOCK_SCOPE();
     if (m_channel)
         m_channel->finalize();
     else

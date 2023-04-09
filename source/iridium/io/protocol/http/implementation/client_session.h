@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 //#ifndef HEADER_REQUEST_HANDLER_43E16DA0_43FF_4E9E_A7AA_DDBAF520DE8A
 //#define HEADER_REQUEST_HANDLER_43E16DA0_43FF_4E9E_A7AA_DDBAF520DE8A
 

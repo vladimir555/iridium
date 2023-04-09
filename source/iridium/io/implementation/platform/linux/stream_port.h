@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_STREAM_PORT_44EAE897_34B0_426B_BD53_4421355EEBA6
 #define HEADER_STREAM_PORT_44EAE897_34B0_426B_BD53_4421355EEBA6
 

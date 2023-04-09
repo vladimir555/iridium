@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SESSION_MANAGER_D7D8E1E1_DE14_43A0_AAFC_8E95DFFE4453
 #define HEADER_SESSION_MANAGER_D7D8E1E1_DE14_43A0_AAFC_8E95DFFE4453
 
@@ -11,6 +15,7 @@
 
 #include <unordered_map>
 #include <unordered_set>
+#include <mutex>
 
 
 namespace iridium {
@@ -28,7 +33,7 @@ public:
     void manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) override;
 
 private:
-    class ContextManager: public threading::Synchronized {
+    class ContextManager: public threading::Synchronized<std::mutex> {
     public:
         DEFINE_CREATE(ContextManager)
 

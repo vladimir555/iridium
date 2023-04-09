@@ -2,14 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-//
-//  pipe.h
-//  iridium
-//
-//  created by volodja on 2019-05-29
-//
-
-
 #ifndef HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
 #define HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
 

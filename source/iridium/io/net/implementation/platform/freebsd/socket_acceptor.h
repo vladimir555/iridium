@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_SOCKET_ACCEPTOR_E881803B_D869_4CAC_8429_8F9220B1981E
 #define HEADER_SOCKET_ACCEPTOR_E881803B_D869_4CAC_8429_8F9220B1981E
 

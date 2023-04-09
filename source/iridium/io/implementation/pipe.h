@@ -2,14 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-//
-//  transmitter.h
-//  iridium
-//
-//  created by volodja on 2019-05-29
-//
-
-
 #ifndef HEADER_TRANSMITTER_5C67BADB_452C_4A6B_963B_63DBF32A6D5D
 #define HEADER_TRANSMITTER_5C67BADB_452C_4A6B_963B_63DBF32A6D5D
 

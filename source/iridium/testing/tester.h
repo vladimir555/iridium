@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_TESTER_2DFB0DB0_F2C1_425A_947D_7883FD5FAB64
 #define HEADER_TESTER_2DFB0DB0_F2C1_425A_947D_7883FD5FAB64
 

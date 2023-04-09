@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_STREAM_PORT_810D3421_E75E_49EB_A765_C12A13401FDF
 #define HEADER_STREAM_PORT_810D3421_E75E_49EB_A765_C12A13401FDF
 

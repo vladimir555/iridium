@@ -1,3 +1,7 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 //#ifndef HEADER_PROTOCOL_HANDLER_AC6719DC_DDB4_4F4A_ACF1_A4EA7453E5B4
 //#define HEADER_PROTOCOL_HANDLER_AC6719DC_DDB4_4F4A_ACF1_A4EA7453E5B4
 

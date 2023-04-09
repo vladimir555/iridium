@@ -7,9 +7,8 @@
 
 
 #include <unordered_map>
-#include "iridium/smart_ptr.h"
-#include "synchronized_scope.h"
-#include "implementation/recursive_mutex.h"
+#include <mutex>
+#include "iridium/threading/synchronized.h"
 
 
 namespace iridium {
@@ -17,11 +16,10 @@ namespace threading {
 
 
 template<typename TKey, typename TValue>
-class SynchronizedContainer: public Synchronized {
+class SynchronizedContainer: public Synchronized<std::mutex> {
 public:
-    DEFINE_CREATE(SynchronizedContainer)
+    DEFINE_IMPLEMENTATION(SynchronizedContainer)
     SynchronizedContainer();
-   ~SynchronizedContainer() = default;
 
     size_t  set(TKey const &key, TValue const &value);
     TValue  get(TKey const &key) const;
@@ -41,7 +39,7 @@ SynchronizedContainer<TKey, TValue>::SynchronizedContainer()
     
 template<typename TKey, typename TValue>
 size_t SynchronizedContainer<TKey, TValue>::set(TKey const &key, TValue const &value) {
-    LOCK_SCOPE_FAST
+    LOCK_SCOPE()
     m_map_key_value[key] = value;
     return m_map_key_value.size(); // ----->
 }
@@ -49,7 +47,7 @@ size_t SynchronizedContainer<TKey, TValue>::set(TKey const &key, TValue const &v
     
 template<typename TKey, typename TValue>
 TValue SynchronizedContainer<TKey, TValue>::get(TKey const &key) const {
-    LOCK_SCOPE_FAST
+    LOCK_SCOPE()
     auto i  = m_map_key_value.find(key);
     if  (i == m_map_key_value.end())
         return {}; // ----->
@@ -60,7 +58,7 @@ TValue SynchronizedContainer<TKey, TValue>::get(TKey const &key) const {
     
 template<typename TKey, typename TValue>
 size_t SynchronizedContainer<TKey, TValue>::del(TKey const &key) {
-    LOCK_SCOPE_FAST
+    LOCK_SCOPE()
     m_map_key_value.erase(key);
     return m_map_key_value.size(); // ----->
 }
