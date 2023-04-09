@@ -3,6 +3,8 @@
 #include "iridium/platform.h"
 #include "iridium/convertion/convert.h"
 
+#include <stdexcept>
+
 
 using iridium::convertion::convert;
 using std::string;
