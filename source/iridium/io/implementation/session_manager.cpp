@@ -2,6 +2,7 @@
 
 #include "multiplexer.h"
 
+#include "iridium/logging/logger.h"
 #include "iridium/threading/implementation/thread.h"
 #include "iridium/threading/implementation/worker_pool.h"
 #include "iridium/io/implementation/pipe.h"

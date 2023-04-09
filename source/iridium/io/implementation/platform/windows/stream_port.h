@@ -1,0 +1,45 @@
+#ifndef HEADER_STREAM_PORT_070ECA4F_6B07_4564_A97F_165282BB6685
+#define HEADER_STREAM_PORT_070ECA4F_6B07_4564_A97F_165282BB6685
+
+
+#include "iridium/platform.h"
+
+
+#ifdef WINDOWS_PLATFORM
+
+
+#include "iridium/io/stream.h"
+#include "iridium/io/url.h"
+#include "iridium/pattern/non_copyable.h"
+
+
+namespace iridium {
+namespace io {
+namespace implementation {
+namespace platform {
+
+
+class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
+ public:
+	DEFINE_IMPLEMENTATION(CStreamPort)
+	CStreamPort(URL const &url);
+
+	void initialize() override;
+    void finalize() override;
+
+	TID getID() const override;
+	Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
+    size_t write(Buffer::TSharedPtr const &buffer) override;
+};
+
+
+} // platform
+} // implementation
+} // io
+} // iridium
+
+
+#endif  // WINDOWS_PLATFORM
+
+
+#endif // HEADER_STREAM_PORT_070ECA4F_6B07_4564_A97F_165282BB6685

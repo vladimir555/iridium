@@ -56,6 +56,12 @@ int sscanf(TArgs ... args) {
 }
 
 
+template<typename ... TArgs>
+int snprintf(TArgs ... args) {
+    return ::snprintf(args ...); // ----->
+}
+
+
 __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_1_ARGLIST(int, sprintf, vsprintf_s, _Post_z_ char, _Dest, _In_z_ _Printf_format_string_ const char *, _Format);
 
 

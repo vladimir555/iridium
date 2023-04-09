@@ -55,9 +55,9 @@ struct TCmdArgs {
     TMode                   mode;
     TPrintResult            print_result;
     std::chrono::seconds    timeout;
+    string                  app_name;
     string                  include_path;
     list<string>            exclude_paths;
-    string                  app_name;
 };
 
 
@@ -91,13 +91,22 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 
     try {
         TCmdArgs::TSharedPtr result = TCmdArgs::create(
+            // not compartible with visual studio
+            //TCmdArgs {
+            //    .command            = TCmdArgs::TCommand::RUN,
+            //    .mode               = TCmdArgs::TMode::PARALLEL,
+            //    .print_result       = TCmdArgs::TPrintResult::UNKNOWN,
+            //    .timeout            = std::chrono::minutes(1),
+            //    .app_name           = args[0],
+            //    .include_path       = "/"
+            //}
             TCmdArgs {
-                .command            = TCmdArgs::TCommand::RUN,
-                .mode               = TCmdArgs::TMode::PARALLEL,
-                .print_result       = TCmdArgs::TPrintResult::UNKNOWN,
-                .timeout            = std::chrono::minutes(1),
-                .include_path       = "/",
-                .app_name           = args[0]
+                TCmdArgs::TCommand::RUN,
+                TCmdArgs::TMode::PARALLEL,
+                TCmdArgs::TPrintResult::UNKNOWN,
+                std::chrono::minutes(1),
+                args[0],
+                "/"
             }
         );
 

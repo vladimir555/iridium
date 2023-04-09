@@ -163,7 +163,7 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
     m_process_result_queue  (process_result_queue),
     m_buffer_output         (io::Buffer::create()),
     m_parser                (CJSONParser::create()),
-    m_process_result        (TProcessResult::create( TProcessResult { .path = path } ) )
+    m_process_result        (TProcessResult::create( TProcessResult { path } ) )
 {}
 
 

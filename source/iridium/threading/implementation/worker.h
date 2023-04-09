@@ -8,12 +8,9 @@
 
 #include "async_queue.h"
 
-#include "iridium/logging/logger.h"
 #include "iridium/threading/worker.h"
-#include "iridium/threading/thread.h"
-#include "iridium/threading/runnable.h"
-#include "iridium/threading/implementation/thread.h"
 
+#include "thread.h"
 #include "worker_handler.h"
 
 
@@ -30,7 +27,7 @@ public:
     typedef typename IAsyncQueuePusher<TItem>::TItems   TItems;
     typedef typename IWorkerPusher<TItem>::IHandler     IHandler;
 
-    CWorkerPusher(std::string const &name, typename IHandler::TSharedPtr const &handler);
+    CWorkerPusher(std::string const &name, typename IWorkerPusher<TItem>::IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;
@@ -52,7 +49,7 @@ public:
     typedef typename IAsyncQueuePopper<TItem>::TItems   TItems;
     typedef typename IWorkerPopper<TItem>::IHandler     IHandler;
 
-    CWorkerPopper(std::string const &name, typename IHandler::TSharedPtr const &handler);
+    CWorkerPopper(std::string const &name, typename IWorkerPopper<TItem>::IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;
@@ -75,7 +72,7 @@ public:
     typedef typename IAsyncQueuePusher<TOutputItem>::TItems     TOutputItems;
     typedef typename IWorker<TInputItem, TOutputItem>::IHandler IHandler;
 
-    CWorker(std::string const &name, typename IHandler::TSharedPtr const &handler);
+    CWorker(std::string const &name, typename IWorker<TInputItem, TOutputItem>::IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;

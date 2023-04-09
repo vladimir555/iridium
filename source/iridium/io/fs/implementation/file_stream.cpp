@@ -208,11 +208,15 @@ int CFileStream::getID() const {
 size_t CFileStream::getSize() const {
 #ifdef FREEBSD_LIKE_PLATFORM
     struct stat file_stat = {};
+#elif defined(WINDOWS_PLATFORM)
+    struct stat   file_stat = {};
 #else
     struct stat64 file_stat = {};
 #endif
 
 #ifdef FREEBSD_LIKE_PLATFORM
+    auto result = fstat(filenoInternal(m_file), &file_stat);
+#elif defined(WINDOWS_PLATFORM)
     auto result = fstat(filenoInternal(m_file), &file_stat);
 #else
     auto result = fstat64(filenoInternal(m_file), &file_stat);

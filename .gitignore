@@ -17,3 +17,5 @@ CMakeLists.txt.*
 /build
 .vscode
 /html
+.DS_Store
+.vscode

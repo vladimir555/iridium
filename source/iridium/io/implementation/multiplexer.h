@@ -9,7 +9,6 @@
 #include "iridium/platform.h"
 
 
-#include "iridium/platform.h"
 #include PLATFORM_HEADER(multiplexer.h)
 
 

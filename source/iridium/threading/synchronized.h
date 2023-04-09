@@ -10,6 +10,8 @@
 #include "iridium/pattern/non_copyable.h"
 #include "iridium/pattern/non_movable.h"
 
+#include <mutex>
+
 
 namespace iridium {
 namespace threading {
