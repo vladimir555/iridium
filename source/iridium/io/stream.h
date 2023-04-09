@@ -28,8 +28,9 @@ public:
     DEFINE_INTERFACE(IStream)
 #ifdef UNIX_PLATFORM
     typedef int TID;
-#elif WINDOWS_PLATFORM
-    typedef SOCKET &TID;
+#endif
+#ifdef WINDOWS_PLATFORM
+    typedef int TID;
 #endif
 
     // todo: for windows int &getID() const;

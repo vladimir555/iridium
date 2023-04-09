@@ -9,11 +9,9 @@
 #include "iridium/smart_ptr.h"
 
 #include "iridium/threading/async_queue.h"
-//#include "iridium/threading/runnable.h"
 #include "iridium/pattern/initializable.h"
 
 #include <string>
-#include <atomic>
 
 
 namespace iridium {

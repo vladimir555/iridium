@@ -12,6 +12,7 @@
 #include <list>
 #include <map>
 #include <iostream>
+#include <limits>
 
 
 #ifdef _MSC_VER        
@@ -26,7 +27,7 @@ class TEnum { \
 public: \
     enum TEnumInternal { \
         __VA_ARGS__, \
-        UNKNOWN = std::numeric_limits<int>::min() \
+        UNKNOWN = INT_MIN \
     }; \
     TEnum(): m_value(TEnumInternal::UNKNOWN) {} \
     TEnum(TEnum const &e) = default; \
