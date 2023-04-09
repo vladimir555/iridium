@@ -49,7 +49,7 @@ private:
             processed++;
             sum += i;
             result.push_back(sum);
-            sleep(10);
+            sleep(1);
         }
         return result;
     }
@@ -98,28 +98,43 @@ TEST(worker_pool) {
     IWorker<int>::TSharedPtr worker = CWorkerPool<int>::create("worker",
         createObjects<IWorker<int>::IHandler, CWorkerHandler>(std::thread::hardware_concurrency()));
 
+    // global vars
     processed = 0;
     sum = 0;
+    
     int const count = 100;
     int const count_sum = 4950;
 
     worker->initialize();
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < count; i++)
         worker->push(i);
 
-    for (int i = 0; i < 10 && processed < count; i++)
-        sleep(100);
-
+//    for (int i = 0; i < 10 && processed < count; i++)
+//        sleep(100);
+    std::list<int> result;
+//    LOGT << "start";
+    while (result.size() < count) {
+        auto items = worker->pop(std::chrono::seconds(5));
+        if (items.empty())
+            break; // --->
+        result.splice(result.end(), items);
+    }
+//    LOGT << "stop";
+    
     worker->finalize();
 
-    ASSERT(processed, equal, count);
-    ASSERT(sum, equal, count_sum);
+    ASSERT(processed, equal     , result.size());
+    ASSERT(processed, greater   , 0);
+    ASSERT(sum      , equal     , result.back());
+
+    ASSERT(processed, equal     , count);
+    ASSERT(sum      , equal     , count_sum);
 
     worker->push(5);
 
-    ASSERT(processed, equal, count);
-    ASSERT(sum, equal, count_sum);
+    ASSERT(processed, equal     , count);
+    ASSERT(sum      , equal     , count_sum);
 }
 
 

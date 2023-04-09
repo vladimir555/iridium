@@ -37,7 +37,7 @@ public:
         IRunnable::TSharedPtr const &runnuble,
         std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
     ///
-    virtual ~CThread() = default;
+    virtual ~CThread();
     ///
     void initialize() override;
     ///
@@ -57,11 +57,11 @@ protected:
         std::atomic<bool> *     const  is_running
     );
     ///
-    std::string                     m_name;
+    std::string const               m_name;
     ///
     IRunnable::TSharedPtr           m_runnuble;
     ///
-    std::unique_ptr<std::thread>    m_thread;
+    std::shared_ptr<std::thread>    m_thread;
 private:
     std::string checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const &error_queue);
 

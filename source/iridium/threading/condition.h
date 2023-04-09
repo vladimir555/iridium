@@ -17,7 +17,7 @@ namespace threading {
 
 
 ///
-class ICondition: virtual public IMutex {
+class ICondition {
 public:
     DEFINE_INTERFACE(ICondition)
     ///
@@ -28,6 +28,8 @@ public:
     virtual void notifyOne() const = 0;
     ///
     virtual void notifyAll() const = 0;
+    ///
+    virtual IMutex::TSharedPtr getMutex() = 0;
 };
 
 

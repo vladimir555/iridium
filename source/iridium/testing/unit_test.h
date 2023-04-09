@@ -21,12 +21,29 @@ private:
     std::string m_what;
 };
 
+//template <class T, std::size_t = sizeof(T)>
+//std::true_type  is_complete_impl(T *);
+//std::false_type is_complete_impl(...);
+//
+//template <class T>
+//using is_complete = decltype(is_complete_impl(std::declval<T*>()));
+//
+//template<typename TValue, is_complete<iridium::convertion::convert<std::string(TValue const &value)> >
+//std::string convert(TValue const &value) {
+//
+//}
 
 class UnitTest {
 public:
     UnitTest() = default;
    ~UnitTest() = default;
 
+
+//    template<typename TValue>
+//    std::string convert(TValue value) {
+//
+//    }
+    
     template<typename TValue>
     void fail(
         TValue      const &left,
