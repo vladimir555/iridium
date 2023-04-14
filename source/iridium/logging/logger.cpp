@@ -72,10 +72,10 @@ config::TLogger Logger::getConfig() {
 }
 
 
-void Logger::log(TEvent &&e) {
+void Logger::log(TEvent const &e) {
     LOCK_SCOPE();
     for (auto const &sink: m_sinks)
-        sink->log(std::move(e));
+        sink->log(e);
 }
 
 

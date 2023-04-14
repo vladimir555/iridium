@@ -36,7 +36,7 @@ public:
     ///
     config::TLogger getConfig();
     ///
-    void log(TEvent &&event);
+    void log(TEvent const &event);
     ///
     void addCustomSink(ISink::TSharedPtr const &sink);
 
