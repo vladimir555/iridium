@@ -16,6 +16,7 @@ namespace logging {
 namespace implementation {
 
 
+// todo: CSinkAsync(ISink::TSharedPtr ... ) wrapper
 // cached async sink
 class CSink: public ISink, pattern::NonCopyable {
 public:
