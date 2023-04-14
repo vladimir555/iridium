@@ -48,6 +48,7 @@ protected:
     size_t  write(Buffer::TSharedPtr const &buffer);
     Buffer::TSharedPtr read(size_t const &size);
 
+    // todo: rename non-blocking -> overlapped
     void    setBlockingMode(int const &socket, bool const &is_blocking);
 
     URL     getURL() const override;

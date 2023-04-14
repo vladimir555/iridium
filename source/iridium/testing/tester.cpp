@@ -181,12 +181,22 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 
 
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
-    logging::update(logging::config::createDefault());
-
+    logging::setConfig(logging::config::createDefault());
+    
     try {
         auto args = parseCommandLine(argc, argv);
-
+        
         if (args) {
+//            {
+//                iridium::logging::config::TLogger config = logging::Logger::instance().getConfig();
+//                iridium::logging::config::TLogger::TFileSink file_sink;
+//
+//                file_sink.FileName = args->app_name + ".log";
+//                config.FileSink.add(file_sink);
+//
+//                iridium::logging::setConfig(config);
+//            }
+            
     //        LOGT << "\napp          : " << args->app_name
     //             << "\ncommand      : " << args->command
     //             << "\nmode         : " << args->mode

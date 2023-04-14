@@ -27,10 +27,13 @@ private:
     public:
         DEFINE_IMPLEMENTATION(CWorkerHandler)
         CWorkerHandler(TEvent::TLevel const &level, std::string const &file_name);
+
         void initialize() override;
         void finalize() override;
+
         typedef threading::IWorkerPusher<TEvent>::TInputItems TInputItems;
         void handle(TInputItems const &e) override;
+
     private:
         std::string m_file_name;
         std::string m_file_name_original;

@@ -5,12 +5,13 @@
 #include "iridium/threading/implementation/worker.h"
 
 
-using std::string;
 using iridium::convertion::convert;
 using iridium::io::Buffer;
 using iridium::io::fs::implementation::CFileStreamWriter;
 using iridium::threading::implementation::CWorker;
+
 using std::chrono::system_clock;
+using std::string;
 
 
 namespace iridium {
@@ -28,19 +29,23 @@ CSinkFile::CWorkerHandler::CWorkerHandler(TEvent::TLevel const &, std::string co
 :
     m_file_name                 (file_name),
     m_file_name_original        (file_name),
-    m_is_rotation_by_day        (true),
-    m_last_initialization_time  ()
+    m_is_rotation_by_day        (true), // todo: rotation time 1h, 1d, 1w ...
+    m_last_initialization_time  (),
+    m_file_writer               (nullptr)
 {}
 
 
 void CSinkFile::CWorkerHandler::initialize() {
+    if (m_file_writer)
+        return; // ----->
+    
     if (m_is_rotation_by_day) {
         auto date                   = convert<string>(system_clock::now()).substr(0, 10);
         m_last_initialization_time  = convert<system_clock::time_point>(date + " 00:00:00.000");
 
         m_file_name = m_file_name_original;
         auto file_ext_position = m_file_name.find_last_of('.');
-        if (file_ext_position > 0)
+        if  (file_ext_position > 0)
             m_file_name.replace(m_file_name.find_last_of('.'), 1, "-" + date + ".");
         else
             m_file_name.replace(m_file_name.find_last_of('.'), 1, date + ".");
@@ -52,11 +57,17 @@ void CSinkFile::CWorkerHandler::initialize() {
 
 
 void CSinkFile::CWorkerHandler::finalize() {
-    m_file_writer->finalize();
+    if (m_file_writer) {
+        m_file_writer->finalize();
+        m_file_writer.reset();
+    }
 }
 
 
 void CSinkFile::CWorkerHandler::handle(TInputItems const &events) {
+    if (!m_file_writer)
+        return; // ----->
+    
     if (m_is_rotation_by_day && system_clock::now() > m_last_initialization_time) {
         finalize();
         initialize();

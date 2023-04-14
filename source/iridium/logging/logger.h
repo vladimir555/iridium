@@ -24,7 +24,6 @@ namespace iridium {
 namespace logging {
 
 
-// todo: separate logger to other type with singleton
 class Logger:
     public pattern::Singleton<Logger>,
     public threading::Synchronized<std::mutex>
@@ -32,8 +31,10 @@ class Logger:
 public:
     ///
     virtual ~Logger();
-    /// logger factory method
-    void update(config::TLogger const &config);
+    ///
+    void setConfig(config::TLogger const &config);
+    ///
+    config::TLogger getConfig();
     ///
     void log(TEvent &&event);
     ///
@@ -44,7 +45,9 @@ private:
     ///
     Logger() = default;
     ///
-    IChannel::TSharedPtr m_channel;
+    std::list<ISink::TSharedPtr> m_sinks;
+    ///
+    parsing::INode::TSharedPtr m_config;
 };
 
 
@@ -56,8 +59,8 @@ struct LogStream {
     ///
     ~LogStream();
     ///
-    LogStream const& operator << (char const * const s) const;
-    LogStream const& operator << (char       *       s) const;
+    LogStream const & operator << (char const * const s) const;
+    LogStream const & operator << (char       *       s) const;
     ///
     template<typename TValue>
     LogStream const & operator << (TValue const &v) const;
@@ -106,7 +109,7 @@ LogStream const &LogStream::operator << (std::shared_ptr<TValue> const &v) const
 }
 
 
-void update(config::TLogger const &config);
+void setConfig(config::TLogger const &config);
 
 
 std::string convertFunctionNameToLogFunctionName(std::string const &name);
