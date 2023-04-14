@@ -75,14 +75,16 @@ void CThread::finalize() {
         error = checkErrorQueue(m_error_queue_stop);
 
         m_thread->join();
+        m_thread.reset();
         m_runnuble->finalize();
     } catch (std::exception const &e) {
         // todo: pthread_cancel & widows teminate thread
-        m_thread->detach();
-        throw std::runtime_error("thread '" + m_name + "' finalizing error: " + e.what()); // ----->
+        if (m_thread) {
+            m_thread->detach();
+            m_thread.reset();
+        }
+        error += e.what();
     }
-
-    m_thread.reset();
 
     if (!error.empty())
         throw std::runtime_error("thread '" + m_name + "' finalizing error: " + error); // ----->
@@ -98,7 +100,7 @@ std::string CThread::getName() const {
     if (m_thread)
         return m_name + " " + convert<string>(m_thread->get_id()); // ----->
     else
-        return m_name;
+        return m_name; // ----->
 }
 
 
@@ -120,9 +122,9 @@ void CThread::run(
         is_started = false;
         status_stop->push("");
     } catch (std::exception &e) {
-        error = "thread '" + name + "' stopped, error: " + e.what();
+        error = "thread '" + name + "' stopped by error: " + e.what();
     } catch (...) {
-        error = "thread '" + name + "' stopped, error: unknown";
+        error = "thread '" + name + "' stopped by error: unknown";
     }
     if (!error.empty()) {
         if (is_started)
@@ -138,7 +140,7 @@ string CThread::checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const
     auto errors = error_queue->pop(m_timeout);
 
     if (errors.empty())
-        throw std::runtime_error("timeout: " + convert<string>(m_timeout));
+        throw std::runtime_error("timeout: " + convert<string>(m_timeout)); // ----->
 
     string error_message;
 
@@ -146,7 +148,7 @@ string CThread::checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const
         if (!error.empty())
             error_message += error + "; ";
 
-    return error_message;
+    return error_message; // ----->
 }
 
 

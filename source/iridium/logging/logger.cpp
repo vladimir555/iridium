@@ -9,7 +9,6 @@
 #include "iridium/assert.h"
 
 
-using iridium::logging::implementation::CChannel;
 using iridium::logging::implementation::CSinkConsole;
 using iridium::logging::implementation::CSinkFile;
 using std::string;
@@ -21,63 +20,69 @@ namespace logging {
 
 Logger::~Logger() {
     LOCK_SCOPE();
-    if (m_channel) {
-        m_channel->finalize();
-        m_channel.reset();
+    for (auto const &sink: m_sinks)
+    try {
+        sink->finalize();
+    } catch (std::exception const &e) {
+        std::cerr << "logger finalization error: " << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "logger finalization error: unknown exception" << std::endl;
     }
 }
 
 
-// todo: factory 
-// todo: refactoring for external sinks via convertion or factory ! one sub config for one sink
-void Logger::update(config::TLogger const &config) {
+void Logger::setConfig(config::TLogger const &config) {
     LOCK_SCOPE();
 
-    if (m_channel)
-        m_channel->finalize();
-
-    m_channel = CChannel::create();
-
+    for (auto const &sink: m_sinks)
+        sink->finalize();
+    
+    m_sinks.clear();
+    
     // console sink
-    bool is_console_sink_activated = false;
-    for (auto const &sink : config.ConsoleSink) {
-        if (is_console_sink_activated)
-            throw std::runtime_error("only one console sink can be"); // ----->
-        else {
-            auto level = sink.Level;
-            if (level == TEvent::TLevel::UNKNOWN)
-                level  = config.Level;
-            m_channel->attach(CSinkConsole::create(sink.Level));
-            is_console_sink_activated = true;
-        }
-    }
-
-    for (auto const &sink : config.FileSink) {
-        auto level = sink.Level;
+    if (config.ConsoleSink.size() > 0) {
+        auto const &sink_config = *assertOne(config.ConsoleSink, "only one console sink can be").begin();
+        auto level = sink_config.Level;
         if (level == TEvent::TLevel::UNKNOWN)
             level  = config.Level;
-        m_channel->attach(CSinkFile::create(sink.Level, sink.FileName));
+        auto sink = CSinkConsole::create(sink_config.Level);
+        sink->initialize();
+        m_sinks.push_back(sink);
     }
 
-    m_channel->initialize();
+    // file sinks
+    for (auto const &sink_config: config.FileSink) {
+        auto level = sink_config.Level;
+        if (level == TEvent::TLevel::UNKNOWN)
+            level  = config.Level;
+        auto sink = CSinkFile::create(sink_config.Level, sink_config.FileName);
+        sink->initialize();
+        m_sinks.push_back(sink);
+    }
+    
+    m_config = config.getNode();
+}
+
+
+config::TLogger Logger::getConfig() {
+    if (m_config)
+        return config::TLogger(m_config);
+    else
+        throw std::runtime_error("logger config is empty");
 }
 
 
 void Logger::log(TEvent &&e) {
-    if (m_channel)
-        m_channel->log(std::move(e));
+    LOCK_SCOPE();
+    for (auto const &sink: m_sinks)
+        sink->log(std::move(e));
 }
 
 
 void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
     LOCK_SCOPE();
-    if (m_channel)
-        m_channel->finalize();
-    else
-        m_channel = CChannel::create();
-
-    m_channel->attach(sink);
-    m_channel->initialize();
+    sink->initialize();
+    m_sinks.push_back(sink);
 }
 
 
@@ -107,8 +112,8 @@ LogStream const &LogStream::operator << (char * s) const {
 }
 
 
-void update(config::TLogger const &config) {
-    Logger::instance().update(config);
+void setConfig(config::TLogger const &config) {
+    Logger::instance().setConfig(config);
 }
 
 
@@ -143,7 +148,12 @@ string convertFunctionNameToLogFunctionName(string const &name) {
 
 string extractFileNameToLog(string const &path) {
     static size_t const DEFAULT_FILE_NAME_LOG_SIZE = 24;
-    string file_name = path.substr(path.find_last_of('/') + 1, std::string::npos);
+#ifdef WINDOWS_PLATFORM
+    static char const split_symbol = '\\';
+#else
+    static char const split_symbol = '/';
+#endif
+    string file_name = path.substr(path.find_last_of(split_symbol) + 1, std::string::npos);
     if (file_name.size() < DEFAULT_FILE_NAME_LOG_SIZE)
         file_name.append(DEFAULT_FILE_NAME_LOG_SIZE - file_name.size(), ' ');
     return file_name; // ----->

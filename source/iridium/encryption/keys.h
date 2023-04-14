@@ -13,9 +13,6 @@ namespace iridium {
 namespace encryption {
 
 
-//std::string const DEFAULT_FILE_NAME_PRIVATE_KEY = "key.pem";
-//std::string const DEFAULT_FILE_NAME_CERTIFICATE = "certificate.pem";
-
 std::string const DEFAULT_FILE_NAME_PRIVATE_KEY = "iridium.key";
 std::string const DEFAULT_FILE_NAME_CERTIFICATE = "iridium.crt";
 

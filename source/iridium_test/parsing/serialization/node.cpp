@@ -17,7 +17,7 @@ using std::endl;
 using iridium::convertion::convert;
 using iridium::parsing::implementation::CNode;
 
-
+    
 namespace iridium {
 namespace parsing {
 namespace serialization {
@@ -64,6 +64,11 @@ DEFINE_ROOT_NODE_BEGIN(Root)
 
     DEFINE_ATTRIBUTE_LIST(std::string, Array)
 
+    DEFINE_NODE_BEGIN(TextNode)
+        DEFINE_ATTRIBUTE(string, TextNodeAttribute, "text-node-attribute-value")
+//        DEFINE_ATTRIBUTE(string, #Text, "text")
+    DEFINE_NODE_END(TextNode)
+
     DEFINE_NODE_EXTERNAL(ExternalRoot)
 DEFINE_ROOT_NODE_END()
 
@@ -78,7 +83,9 @@ DEFINE_ROOT_NODE_END()
 
 
 TEST(serialization) {
-    logging::update(logging::config::createDefault());
+//    int \#value;
+
+    logging::setConfig(logging::config::createDefault());
 
     {
         auto root_node = CNode::create("root2");

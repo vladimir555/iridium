@@ -16,7 +16,8 @@ namespace logging {
 namespace implementation {
 
 
-class CSink : public ISink, pattern::NonCopyable {
+// cached async sink
+class CSink: public ISink, pattern::NonCopyable {
 public:
     CSink(TEvent::TLevel const &level, threading::IWorkerPusher<TEvent>::IHandler::TSharedPtr const &worker_handler);
    ~CSink() = default;
