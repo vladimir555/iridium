@@ -85,8 +85,6 @@ DEFINE_ROOT_NODE_END()
 TEST(serialization) {
 //    int \#value;
 
-    logging::setConfig(logging::config::createDefault());
-
     {
         auto root_node = CNode::create("root2");
         root_node->addChild("sub-item1")->addChild("enum", "ENUM2");
