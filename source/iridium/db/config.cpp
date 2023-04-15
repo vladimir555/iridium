@@ -13,20 +13,7 @@ using std::string;
 
 
 IMPLEMENT_ENUM(iridium::db::config::TDatebaseConnector::TDBType)
-
-
-//namespace {
-//
-//
-//std::string convert_(iridium::db::config::TDatebaseConnector::TType const &value) {
-//    return convert<std::string>(value); // ----->
-//}
-//
-//
-//}
-//
-//
-//IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TDBType, convert_)
+IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TType, iridium::convertion::convert<std::string>)
 
 
 #ifdef BUILD_FLAG_MYSQL

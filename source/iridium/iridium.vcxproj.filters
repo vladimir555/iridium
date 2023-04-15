@@ -701,9 +701,6 @@
     <ClCompile Include="io\implementation\stream_reader_list.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="io\implementation\stream_splitter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="io\net\implementation\platform\unix\dns.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -800,40 +797,19 @@
     <ClCompile Include="system\terminator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="testing\test.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="testing\tester.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="testing\unit_test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="threading\implementation\base_mutex.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="threading\implementation\condition.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="threading\implementation\mutex.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="threading\implementation\recursive_mutex.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="threading\implementation\thread.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="threading\implementation\timed_mutex.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="threading\implementation\worker.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="threading\synchronized.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="threading\synchronized_scope.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="threading\thread.cpp">
@@ -869,22 +845,10 @@
     <ClCompile Include="io\implementation\pipe.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="io\implementation\stream_async.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="io\implementation\stream_pool.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="io\protocol\http\implementation\acceptor_session.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="io\protocol\http\implementation\client_session.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\protocol\http\implementation\peer_session.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="io\protocol\http\implementation\peer_session_factory.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\net\implementation\platform\unix\socket_acceptor.cpp">
