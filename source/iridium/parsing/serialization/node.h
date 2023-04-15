@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <stdexcept>
 
 #include "iridium/parsing/node.h"
 #include "iridium/parsing/implementation/node.h"

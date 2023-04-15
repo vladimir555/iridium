@@ -207,7 +207,7 @@ int CFileStream::getID() const {
     
 size_t CFileStream::getSize() const {
 #ifdef FREEBSD_LIKE_PLATFORM
-    struct stat file_stat = {};
+    struct stat   file_stat = {};
 #elif defined(WINDOWS_PLATFORM)
     struct stat   file_stat = {};
 #else
