@@ -18,7 +18,7 @@ namespace implementation {
 namespace platform {
 
 
-class CProcessStream: public IProcess, public io::implementation::CStreamPort {
+class CProcessStream: public IProcess {
 public:
     DEFINE_IMPLEMENTATION(CProcessStream)
     CProcessStream(
@@ -30,6 +30,10 @@ public:
     
     void initialize()   override;
     void finalize()     override;
+
+    TID getID() const override;
+    io::Buffer::TSharedPtr read(size_t const &size) override;
+    size_t write(io::Buffer::TSharedPtr const &buffer) override;
     
     TState getState()   override;
 };
