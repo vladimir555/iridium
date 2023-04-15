@@ -13,7 +13,6 @@ using std::string;
 
 
 IMPLEMENT_ENUM(iridium::db::config::TDatebaseConnector::TDBType)
-IMPLEMENT_CONVERT(std::string, iridium::db::config::TDatebaseConnector::TType, iridium::convertion::convert<std::string>)
 
 
 #ifdef BUILD_FLAG_MYSQL
@@ -41,7 +40,7 @@ IConnector::TSharedPtr createConnector(TDatebaseConnector const &config) {
         return  CPostgresConnector::create(config.Url, config.User, config.Password, config.Database); // ----->
 #endif // BUILD_FLAG_POSTGRES
     default:
-        throw std::runtime_error("wrong config: unknown db type " + convert<string>(config.Type)); // ----->
+        throw std::runtime_error("wrong config: unknown db type " + convert<string>(config.Type.get())); // ----->
     }
 }
 
