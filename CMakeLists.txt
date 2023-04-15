@@ -51,7 +51,7 @@ file(GLOB_RECURSE SOURCE
 )
 
 source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOURCE})
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+#set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 include_directories(
     /usr/local/include
@@ -70,8 +70,8 @@ set(CPACK_DEBIAN_PACKAGE_MAINTAINER     "Bulaev Vladimir <bulaev_vladimir@mail.r
 include(CPack)
 
 # static or shared
-#add_library(${PROJECT_NAME} STATIC ${SOURCE})
-add_library(${PROJECT_NAME} SHARED ${SOURCE})
+add_library(${PROJECT_NAME} STATIC ${SOURCE})
+#add_library(${PROJECT_NAME} SHARED ${SOURCE})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
 install(
