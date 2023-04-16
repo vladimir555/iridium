@@ -23,6 +23,9 @@ namespace serialization {
 // ----- interface
 
 
+// todo: copy constructor; rm TType; fix List property name
+
+
 template<typename TValue>
 class Node {
 public:

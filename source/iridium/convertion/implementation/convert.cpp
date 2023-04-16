@@ -3,6 +3,7 @@
 #include "convert.h"
 
 #include <chrono>
+#include <ratio>
 #include <algorithm>
 #include <codecvt>
 #include <stdexcept>
@@ -105,7 +106,7 @@ string convert(hours const &value) {
 template<>
 string convert(minutes const &value) {
     if ((value.count() % 60) == 0)
-        return convert<string>(hours(value.count() % 60));
+        return convert<string>(std::chrono::duration_cast<hours>(value));
     return convert<string, minutes::rep>(value.count()) + " minutes";
 }
 
@@ -113,7 +114,7 @@ string convert(minutes const &value) {
 template<>
 string convert(seconds const &value) {
     if ((value.count() % 60) == 0)
-        return convert<string>(minutes(value.count() % 60));
+        return convert<string>(std::chrono::duration_cast<minutes>(value));
     return convert<string, seconds::rep>(value.count()) + " seconds";
 }
 
@@ -121,7 +122,7 @@ string convert(seconds const &value) {
 template<>
 string convert(milliseconds const &value) {
     if ((value.count() % 1000) == 0)
-        return convert<string>(seconds(value.count() % 1000));
+        return convert<string>(std::chrono::duration_cast<seconds>(value));
     return convert<string, milliseconds::rep>(value.count()) + " milliseconds";
 }
 
@@ -129,7 +130,7 @@ string convert(milliseconds const &value) {
 template<>
 string convert(microseconds const &value) {
     if ((value.count() % 1000) == 0)
-        return convert<string>(milliseconds(value.count() % 1000));
+        return convert<string>(std::chrono::duration_cast<milliseconds>(value));
     return convert<string, microseconds::rep>(value.count()) + " microseconds";
 }
 
@@ -137,7 +138,7 @@ string convert(microseconds const &value) {
 template<>
 string convert(nanoseconds const &value) {
     if ((value.count() % 1000) == 0)
-        return convert<string>(microseconds(value.count() % 1000));
+        return convert<string>(std::chrono::duration_cast<microseconds>(value));
     return convert<string, nanoseconds::rep>(value.count()) + " nanoseconds";
 }
 
