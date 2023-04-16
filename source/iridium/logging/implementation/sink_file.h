@@ -17,32 +17,24 @@ namespace logging {
 namespace implementation {
 
 
-class CSinkFile: public CSink {
+class CSinkFile: public ISink {
 public:
     DEFINE_IMPLEMENTATION(CSinkFile)
     CSinkFile(TEvent::TLevel const &level, std::string const &file_name);
 
+    void initialize() override;
+    void finalize() override;
+    void log(TEvent const &event) override;
+
 private:
-    class CWorkerHandler: public threading::IWorkerPusher<TEvent>::IHandler {
-    public:
-        DEFINE_IMPLEMENTATION(CWorkerHandler)
-        CWorkerHandler(TEvent::TLevel const &level, std::string const &file_name);
-
-        void initialize() override;
-        void finalize() override;
-
-        typedef threading::IWorkerPusher<TEvent>::TInputItems TInputItems;
-        void handle(TInputItems const &e) override;
-
-    private:
-        std::string m_file_name;
-        std::string m_file_name_original;
-        bool        m_is_rotation_by_day;
-        std::chrono::system_clock::time_point
-                    m_last_initialization_time;
-        io::fs::IFileStreamWriter::TSharedPtr
-                    m_file_writer;
-    };
+    TEvent::TLevel m_level;
+    std::string m_file_name;
+    std::string m_file_name_original;
+    bool        m_is_rotation_by_day;
+    std::chrono::system_clock::time_point
+                m_last_initialization_time;
+    io::fs::IFileStreamWriter::TSharedPtr
+                m_file_writer;
 };
 
 

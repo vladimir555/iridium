@@ -12,6 +12,7 @@
 #include "sink.h"
 
 #include "iridium/parsing/serialization/node.h"
+#include "iridium/io/url.h"
 
 
 namespace iridium {
@@ -21,13 +22,13 @@ namespace config {
 
 DEFINE_ROOT_NODE_BEGIN(Logger)
     DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
-    DEFINE_NODE_LIST_BEGIN(ConsoleSink)
-        DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
-    DEFINE_NODE_LIST_END(ConsoleSink)
-    DEFINE_NODE_LIST_BEGIN(FileSink)
-        DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE_LEVEL)
-        DEFINE_ATTRIBUTE(std::string, FileName, "")
-    DEFINE_NODE_LIST_END(FileSink)
+    DEFINE_NODE_LIST_BEGIN(Sink)
+        DEFINE_ENUM(TSinkType, CONSOLE, FILE) // todo: db
+        DEFINE_ATTRIBUTE(TSinkType      , Type      , TSinkType::UNKNOWN)
+        DEFINE_ATTRIBUTE(bool           , IsAsync   , false)
+        DEFINE_ATTRIBUTE(std::string    , Url       , "")
+        DEFINE_ATTRIBUTE(TEvent::TLevel , Level     , TEvent::TLevel::TRACE_LEVEL)
+    DEFINE_NODE_LIST_END(Sink)
 DEFINE_ROOT_NODE_END()
 
 

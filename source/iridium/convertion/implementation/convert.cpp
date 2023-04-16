@@ -104,30 +104,40 @@ string convert(hours const &value) {
 
 template<>
 string convert(minutes const &value) {
+    if ((value.count() % 60) == 0)
+        return convert<string>(hours(value.count() % 60));
     return convert<string, minutes::rep>(value.count()) + " minutes";
 }
 
 
 template<>
 string convert(seconds const &value) {
+    if ((value.count() % 60) == 0)
+        return convert<string>(minutes(value.count() % 60));
     return convert<string, seconds::rep>(value.count()) + " seconds";
 }
 
 
 template<>
 string convert(milliseconds const &value) {
+    if ((value.count() % 1000) == 0)
+        return convert<string>(seconds(value.count() % 1000));
     return convert<string, milliseconds::rep>(value.count()) + " milliseconds";
 }
 
 
 template<>
 string convert(microseconds const &value) {
+    if ((value.count() % 1000) == 0)
+        return convert<string>(milliseconds(value.count() % 1000));
     return convert<string, microseconds::rep>(value.count()) + " microseconds";
 }
 
 
 template<>
 string convert(nanoseconds const &value) {
+    if ((value.count() % 1000) == 0)
+        return convert<string>(microseconds(value.count() % 1000));
     return convert<string, nanoseconds::rep>(value.count()) + " nanoseconds";
 }
 

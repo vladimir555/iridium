@@ -188,21 +188,24 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         
         if (args) {
 //            {
-//                iridium::logging::config::TLogger config = logging::Logger::instance().getConfig();
-//                iridium::logging::config::TLogger::TFileSink file_sink;
+//                using iridium::logging::config::TLogger;
+//                TLogger config = logging::Logger::instance().getConfig();
+//                TLogger::TSink file_sink;
 //
-//                file_sink.FileName = args->app_name + ".log";
-//                config.FileSink.add(file_sink);
+//                file_sink.Url = args->app_name + ".log";
+//                file_sink.Type = TLogger::TSink::TSinkType::FILE;
+//                file_sink.IsAsync = true;
+//                config.Sink.add(file_sink);
 //
 //                iridium::logging::setConfig(config);
 //            }
             
-    //        LOGT << "\napp          : " << args->app_name
-    //             << "\ncommand      : " << args->command
-    //             << "\nmode         : " << args->mode
-    //             << "\ntimeout      : " << args->timeout
-    //             << "\nprint_result : " << args->print_result
-    //             << "\ninclude_path : " << args->include_path;
+//            LOGT << "\napp          : " << args->app_name
+//                 << "\ncommand      : " << args->command
+//                 << "\nmode         : " << args->mode
+//                 << "\ntimeout      : " << args->timeout
+//                 << "\nprint_result : " << args->print_result
+//                 << "\ninclude_path : " << args->include_path;
 
             if (args->command == TCmdArgs::TCommand::LIST) {
                 LOGI << getTestTree(main_cpp_path);

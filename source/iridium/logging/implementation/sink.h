@@ -18,16 +18,30 @@ namespace implementation {
 
 // todo: CSinkAsync(ISink::TSharedPtr ... ) wrapper
 // cached async sink
-class CSink: public ISink, pattern::NonCopyable {
+class CSinkAsync: public ISink, pattern::NonCopyable {
 public:
-    CSink(TEvent::TLevel const &level, threading::IWorkerPusher<TEvent>::IHandler::TSharedPtr const &worker_handler);
-   ~CSink() = default;
+    DEFINE_IMPLEMENTATION(CSinkAsync)
+    CSinkAsync(ISink::TSharedPtr const &sink);
     void initialize() override;
     void finalize() override;
     void log(TEvent const &event) override;
 
 private:
-    TEvent::TLevel const m_level;
+    class CWorkerHandler: public threading::IWorkerPusher<TEvent>::IHandler {
+    public:
+        DEFINE_IMPLEMENTATION(CWorkerHandler)
+        CWorkerHandler(ISink::TSharedPtr const &sink);
+
+        void initialize() override;
+        void finalize() override;
+
+        typedef threading::IWorkerPusher<TEvent>::TInputItems TInputItems;
+        void handle(TInputItems const &e) override;
+
+    private:
+        ISink::TSharedPtr m_sink;
+    };
+    
     threading::IWorkerPusher<TEvent>::TSharedPtr m_worker;
 };
 

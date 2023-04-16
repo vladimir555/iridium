@@ -21,12 +21,6 @@ namespace implementation {
 
 CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 :
-    CSink(level, CWorkerHandler::create(level, file_name))
-{}
-
-
-CSinkFile::CWorkerHandler::CWorkerHandler(TEvent::TLevel const &, std::string const &file_name)
-:
     m_file_name                 (file_name),
     m_file_name_original        (file_name),
     m_is_rotation_by_day        (true), // todo: rotation time 1h, 1d, 1w ...
@@ -35,7 +29,7 @@ CSinkFile::CWorkerHandler::CWorkerHandler(TEvent::TLevel const &, std::string co
 {}
 
 
-void CSinkFile::CWorkerHandler::initialize() {
+void CSinkFile::initialize() {
     if (m_file_writer)
         return; // ----->
     
@@ -46,9 +40,9 @@ void CSinkFile::CWorkerHandler::initialize() {
         m_file_name = m_file_name_original;
         auto file_ext_position = m_file_name.find_last_of('.');
         if  (file_ext_position > 0)
-            m_file_name.replace(m_file_name.find_last_of('.'), 1, "-" + date + ".");
+            m_file_name.replace (m_file_name.find_last_of('.'), 1, "-" + date + ".");
         else
-            m_file_name.replace(m_file_name.find_last_of('.'), 1, date + ".");
+            m_file_name.replace (m_file_name.find_last_of('.'), 1, date + ".");
     }
 
     m_file_writer = CFileStreamWriter::create(m_file_name);
@@ -56,7 +50,7 @@ void CSinkFile::CWorkerHandler::initialize() {
 }
 
 
-void CSinkFile::CWorkerHandler::finalize() {
+void CSinkFile::finalize() {
     if (m_file_writer) {
         m_file_writer->finalize();
         m_file_writer.reset();
@@ -64,8 +58,8 @@ void CSinkFile::CWorkerHandler::finalize() {
 }
 
 
-void CSinkFile::CWorkerHandler::handle(TInputItems const &events) {
-    if (!m_file_writer)
+void CSinkFile::log(TEvent const &event) {
+    if (!m_file_writer || event.level < m_level)
         return; // ----->
 
     if (m_is_rotation_by_day && system_clock::now() > m_last_initialization_time) {
@@ -73,13 +67,10 @@ void CSinkFile::CWorkerHandler::handle(TInputItems const &events) {
         initialize();
     }
 
-    for (auto const &e : events) {
-        auto line = makeLine(e);
-        line.push_back('\n');
-        m_file_writer->write(Buffer::create(line.begin(), line.end()));
-    }
-
-    m_file_writer->flush();
+    auto line = makeLine(event);
+    line.push_back('\n');
+    m_file_writer->write(Buffer::create(line.begin(), line.end()));
+//    m_file_writer->flush();
 }
 
 

@@ -389,7 +389,6 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 #define DEFINE_ATTRIBUTE_3(type, class_name, default_value) \
     struct T##class_name : public iridium::parsing::serialization::Node<type> { \
-        typedef type TType; \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::Node<type> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), default_value) {} \
