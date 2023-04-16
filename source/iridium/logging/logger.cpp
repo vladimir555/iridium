@@ -13,6 +13,7 @@
 using iridium::logging::implementation::CSinkConsole;
 using iridium::logging::implementation::CSinkFile;
 using iridium::logging::implementation::CSinkAsync;
+using iridium::convertion::convert;
 using std::string;
 
 
@@ -73,9 +74,13 @@ void Logger::setConfig(config::TLogger const &config) {
         if (sink_config.Type == config::TLogger::TSink::TSinkType::FILE)
             sink = CSinkFile::create(sink_config.Level, sink_config.Url.get());
         
+        if (!sink)
+            throw std::runtime_error(
+                "sink type '" + convert<std::string>(sink_config.Type.get()) +
+                " url '" + sink_config.Url.get() + "' error: not implemented");
+
         if (sink_config.IsAsync.get())
             sink = CSinkAsync::create(sink);
-        
         sink->initialize();
         m_sinks.push_back(sink);
     }
