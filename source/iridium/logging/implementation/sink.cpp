@@ -12,26 +12,46 @@ namespace logging {
 namespace implementation {
 
 
-CSink::CSink(TEvent::TLevel const &level, threading::IWorkerPusher<TEvent>::IHandler::TSharedPtr const &worker_handler)
+CSinkAsync::CSinkAsync(ISink::TSharedPtr const &sink)
 :
-    m_level(level),
-    m_worker(CWorkerPusher<TEvent>::create("sink", worker_handler))
+    m_worker(CWorkerPusher<TEvent>::create("sink_async", CWorkerHandler::create(sink)))
 {}
 
 
-void CSink::initialize() {
+void CSinkAsync::initialize() {
     m_worker->initialize();
 }
 
 
-void CSink::finalize() {
+void CSinkAsync::finalize() {
     m_worker->finalize();
 }
 
 
-void CSink::log(TEvent const &e) {
-    if (e.level >= m_level)
-        m_worker->push(e);
+void CSinkAsync::log(TEvent const &e) {
+    m_worker->push(e);
+}
+
+
+CSinkAsync::CWorkerHandler::CWorkerHandler(ISink::TSharedPtr const &sink)
+:
+    m_sink(sink)
+{}
+
+
+void CSinkAsync::CWorkerHandler::initialize() {
+    m_sink->initialize();
+}
+
+
+void CSinkAsync::CWorkerHandler::finalize() {
+    m_sink->finalize();
+}
+
+
+void CSinkAsync::CWorkerHandler::handle(TInputItems const &logger_events) {
+    for (auto const &e: logger_events)
+        m_sink->log(e);
 }
 
 

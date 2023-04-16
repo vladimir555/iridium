@@ -4,6 +4,7 @@
 #include "implementation/channel.h"
 #include "implementation/sink_console.h"
 #include "implementation/sink_file.h"
+#include "implementation/sink.h"
 
 #include "iridium/threading/thread.h"
 #include "iridium/assert.h"
@@ -11,6 +12,7 @@
 
 using iridium::logging::implementation::CSinkConsole;
 using iridium::logging::implementation::CSinkFile;
+using iridium::logging::implementation::CSinkAsync;
 using std::string;
 
 
@@ -39,23 +41,41 @@ void Logger::setConfig(config::TLogger const &config) {
     
     m_sinks.clear();
     
-    // console sink
-    if (config.ConsoleSink.size() > 0) {
-        auto const &sink_config = *assertOne(config.ConsoleSink, "only one console sink can be").begin();
-        auto level = sink_config.Level;
-        if (level == TEvent::TLevel::UNKNOWN)
-            level  = config.Level;
-        auto sink = CSinkConsole::create(sink_config.Level);
-        sink->initialize();
-        m_sinks.push_back(sink);
-    }
+//    // console sink
+//    if (config.ConsoleSink.size() > 0) {
+//        auto const &sink_config = *assertOne(config.ConsoleSink, "only one console sink can be").begin();
+//        auto level = sink_config.Level;
+//        if (level == TEvent::TLevel::UNKNOWN)
+//            level  = config.Level;
+//        auto sink = CSinkConsole::create(sink_config.Level);
+//        sink->initialize();
+//        m_sinks.push_back(sink);
+//    }
 
     // file sinks
-    for (auto const &sink_config: config.FileSink) {
+    bool is_console_sink_initialized = false;
+    for (auto const &sink_config: config.Sink) {
         auto level = sink_config.Level;
+        
         if (level == TEvent::TLevel::UNKNOWN)
             level  = config.Level;
-        auto sink = CSinkFile::create(sink_config.Level, sink_config.FileName);
+        
+        ISink::TSharedPtr sink;
+        
+        if (sink_config.Type == config::TLogger::TSink::TSinkType::CONSOLE) {
+            if (is_console_sink_initialized)
+                throw std::runtime_error("only one console sink can be"); // ----->
+            is_console_sink_initialized = true;
+            
+            sink = CSinkConsole::create(sink_config.Level);
+        }
+        
+        if (sink_config.Type == config::TLogger::TSink::TSinkType::FILE)
+            sink = CSinkFile::create(sink_config.Level, sink_config.Url.get());
+        
+        if (sink_config.IsAsync.get())
+            sink = CSinkAsync::create(sink);
+        
         sink->initialize();
         m_sinks.push_back(sink);
     }
