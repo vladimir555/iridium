@@ -101,7 +101,7 @@ CWorkerPusherRunnable<TItem>::CWorkerPusherRunnable(
 template<typename TItem>
 void CWorkerPusherRunnable<TItem>::run(std::atomic<bool> &is_running) {
     while (is_running) {
-        auto items = m_queue->pop();
+        auto items = m_queue->pop(is_running);
         if (!items.empty())
             m_handler->handle(items);
     }
@@ -164,7 +164,7 @@ CWorkerRunnable<TInputItem, TOutputItem>::CWorkerRunnable(
 template<typename TInputItem, typename TOutputItem>
 void CWorkerRunnable<TInputItem, TOutputItem>::run(std::atomic<bool> &is_running) {
     while (is_running)
-        m_output_queue->push(m_handler->handle(m_input_queue->pop()));
+        m_output_queue->push(m_handler->handle(m_input_queue->pop(is_running)));
 }
 
 
