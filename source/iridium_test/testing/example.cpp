@@ -23,14 +23,15 @@
 //}
 
 
-//TEST(OK) {
+TEST(OK) {
+    LOGT << "trace log";
 //    //ASSERT(true);
 //    //ASSERT(1, equal, 1);
 //    //ASSERT("asd", equal, string("asd"));
 //    //ASSERT(2, greater, 1);
 //    double d = 5.5;
 //    ASSERT(5.5, equal, d);
-//}
+}
 
 
 // todo: move to /system/process

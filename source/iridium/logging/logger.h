@@ -6,11 +6,10 @@
 #define HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9
 
 
-#include "iridium/pattern/initializable.h"
 #include "iridium/pattern/singleton.h"
 
 #include "iridium/threading/synchronized.h"
-#include "iridium/strings.h"
+#include "iridium/platform.h"
 
 #include <mutex>
 
@@ -51,7 +50,12 @@ private:
 };
 
 
-// todo: logger by pattern parameter
+struct LogStreamDummy {
+    template<typename TValue>
+    LogStreamDummy const & operator << (TValue v) const;
+};
+
+
 ///
 struct LogStream {
     ///
@@ -80,7 +84,12 @@ private:
 };
 
 
-//todo: thread safe
+template<typename TValue>
+LogStreamDummy const &LogStreamDummy::operator << (TValue) const {
+    return *this;
+}
+
+
 template<typename TValue>
 LogStream const &LogStream::operator << (TValue const &v) const {
     m_event.line += convertion::convert<std::string>(v);
@@ -126,9 +135,14 @@ std::string extractFileNameToLog(std::string const &path);
 #endif // _MSC_VER
 
 
+#ifdef BUILD_TYPE_DEBUG
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
 iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
+#else
+#define LOGT \
+iridium::logging::LogStreamDummy()
+#endif // NDEBUG
 
 
 /*

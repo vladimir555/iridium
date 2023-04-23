@@ -86,11 +86,29 @@
 
 // Check GCC
 #if __GNUC__
-    #if defined(__x86_64__) || defined(__ppc64__)
+    #if defined(__x86_64__) || defined(__ppc64__) || defined (__arm64__)
         #define PLATFORM_CPU64
     #else
         #define PLATFORM_CPU32
     #endif
+#endif
+
+
+// Visual Studio
+#if defined(_MSC_VER)
+#ifdef NDEBUG
+#else
+#define BUILD_TYPE_DEBUG
+#endif
+// GCC and Clang
+#elif defined(__GNUC__) || defined(__clang__)
+#ifdef NDEBUG
+#else
+#define BUILD_TYPE_DEBUG
+#endif
+// Unknown compiler
+#else
+// #define BUILD_TYPE_UNKNOWN
 #endif
 
 
