@@ -25,6 +25,8 @@
 
 TEST(OK) {
     LOGT << "trace log";
+    LOGD << "debug log";
+    LOGI << "info  log";
 //    //ASSERT(true);
 //    //ASSERT(1, equal, 1);
 //    //ASSERT("asd", equal, string("asd"));

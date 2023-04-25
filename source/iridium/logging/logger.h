@@ -130,6 +130,7 @@ std::string extractFileNameToLog(std::string const &path);
 } // logging
 } // iridium
 
+
 #ifdef _MSC_VER
 #define __PRETTY_FUNCTION__ __FUNCSIG__
 #endif // _MSC_VER
@@ -142,40 +143,25 @@ iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_str
 #else
 #define LOGT \
 iridium::logging::LogStreamDummy()
-#endif // NDEBUG
+#endif // BUILD_TYPE_DEBUG
 
-
-/*
-#define LOGT \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-std::string(__FILE__).substr(std::string(__FILE__).find_last_of('/') + 1, std::string::npos) << ":" << __LINE__ << " "
-*/
-
-
-/*
-#define LOGT \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
-*/
-
-
-/*
-#define LOGT \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-iridium::logging::convertFunctionNameToLogFunctionName(__PRETTY_FUNCTION__) << " "
-#define LOGT \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
-iridium::split(iridium::split(__PRETTY_FUNCTION__, "(").front(), " ").back() << "\n"
-*/
-
+#ifdef BUILD_TYPE_DEBUG
 #define LOGD \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG_LEVEL)
+#else
+#define LOGD \
+iridium::logging::LogStreamDummy()
+#endif // BUILD_TYPE_DEBUG
+
 #define LOGI \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::INFO_LEVEL)
+
 #define LOGW \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::WARNING_LEVEL)
+
 #define LOGE \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::ERROR_LEVEL)
+
 #define LOGF \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::FATAL_LEVEL)
 
