@@ -21,7 +21,7 @@
 using iridium::io::Buffer;
 using iridium::io::IStream;
 using iridium::convertion::convert;
-using iridium::io::URL;
+using iridium::io::URI;
 using std::string;
 using std::vector;
 
@@ -37,10 +37,10 @@ namespace platform {
 namespace unix_ {
 
 
-CSocketBase::CSocketBase(URL const &url)
+CSocketBase::CSocketBase(URI const &uri)
 :
     m_socket        (0),
-    m_url           (URL::create(url)),
+    m_uri           (URI::create(uri)),
     m_is_opened     (false),
     m_address       ({})
 {}
@@ -64,17 +64,18 @@ int const CSocketBase::YES = CSocketBase::initSignal();
 
 
 void CSocketBase::open() {
-    assertExists(m_url, "socket opening error: url is not set");
+    assertExists(m_uri, "socket opening error: uri is not set");
 
     if (m_is_opened)
-        throw std::runtime_error("socket open error: already opened " + convert<string>(*m_url)); // ----->
+        throw std::runtime_error("socket open error: already opened " + convert<string>(*m_uri)); // ----->
 
-    auto ipv4       = *assertExists(m_url->getIPv4(), "socket opening error, wrong url " + convert<string>(*m_url));
-    auto port       = *assertExists(m_url->getPort(), "socket opening error, wrong url " + convert<string>(*m_url));
-    auto protocol   = m_url->getProtocol() == URL::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;
+    auto ipv4       = assertComplete(m_uri->getIPv4(), "socket opening error, wrong uri " + convert<string>(*m_uri));
+//    auto port       = assertComplete(m_uri->getPort(), "socket opening error, wrong uri " + convert<string>(*m_uri));
+    auto port       = m_uri->getPort();
+    auto protocol   = m_uri->getProtocol() == URI::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;
     auto &address   = m_address = {};
 
-    m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket opening error " + convert<string>(*m_url));
+    m_socket        = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket opening error " + convert<string>(*m_uri));
 
     LOGT << "fd " << m_socket;
 
@@ -91,7 +92,7 @@ void CSocketBase::open() {
 
 void CSocketBase::close() {
     if (!m_is_opened)
-        throw std::runtime_error("socket close error: already closed " + convert<string>(*m_url)); // ----->
+        throw std::runtime_error("socket close error: already closed " + convert<string>(*m_uri)); // ----->
 
     LOGT << "fd " << m_socket;
     ::shutdown(m_socket, 2);
@@ -133,7 +134,7 @@ int CSocketBase::accept() {
 }
 
 
-URL CSocketBase::getSocketURL(URL::TProtocol const &protocol) {
+URI CSocketBase::getSocketURI(URI::TProtocol const &protocol) {
     struct sockaddr_in   peer;
     unsigned int         peer_len = sizeof(peer);
 
@@ -141,7 +142,7 @@ URL CSocketBase::getSocketURL(URL::TProtocol const &protocol) {
         throw std::runtime_error("socket geting peer ip error for socket fd " +
             convert<string>(m_socket)); // ----->
 
-    return URL(
+    return URI(
         convert<string>(protocol) + "://" + inet_ntoa(peer.sin_addr) + ":" +
         convert<string>(ntohs(peer.sin_port))); // ----->
 }
@@ -202,11 +203,8 @@ void CSocketBase::setBlockingMode(int const &socket, bool const &is_blocking) {
 }
 
 
-URL CSocketBase::getURL() const {
-    if (m_url)
-        return *m_url; // ----->
-    else
-        return URL(""); // ----->
+URI::TSharedPtr CSocketBase::getURI() const {
+    return m_uri; // ----->
 }
 
 

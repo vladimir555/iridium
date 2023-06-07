@@ -5,8 +5,13 @@
 
 #include "iridium/convertion/convert.h"
 #include "iridium/platform.h"
-
 #include "iridium/logging/logger.h"
+
+#include "iridium/platform.h"
+
+#ifdef WINDOWS_PLATFORM
+#include <io.h>
+#endif // WINDOWS_PLATFORM
 
 
 using std::string;
@@ -55,7 +60,8 @@ namespace implementation {
 CFileStream::CFileStream(string const &file_name, TOpenMode const &open_mode)
 :
     m_file_name(file_name),
-    m_open_mode(open_mode)
+    m_open_mode(open_mode),
+    m_uri      (URI::create("file://" + file_name))
 {}
 
 
@@ -123,7 +129,7 @@ TFileStatus CFileStream::getStatus() {
     TFileStatus file_status = {};
     struct stat result      = {};
 
-    assertOK(::fstat(getID(), &result),
+    assertOK(::fstat(getIDInternal(), &result),
          "get stat file '"  + m_file_name + "'" +
          " error: "         + strerrorInternal(errno));
 
@@ -188,7 +194,7 @@ void CFileStream::finalize() {
 }
 
 
-int CFileStream::getID() const {
+int CFileStream::getIDInternal() const {
     // todo: move to separate headers
     if (m_file) {
 #ifdef  LINUX_PLATFORM
@@ -203,6 +209,21 @@ int CFileStream::getID() const {
     }
     throw std::runtime_error("file stream '" + m_file_name + "' get id error: not initialized"); // ----->
 }
+
+
+IStream::TID CFileStream::getID() const {
+#ifdef  WINDOWS_PLATFORM
+    return reinterpret_cast<TID>(_get_osfhandle(getIDInternal())); // ----->
+#else
+    return getIDInternal();
+#endif
+}
+
+
+URI::TSharedPtr CFileStream::getURI() const {
+    return m_uri;
+}
+
     
     
 size_t CFileStream::getSize() const {

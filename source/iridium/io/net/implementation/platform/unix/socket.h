@@ -12,7 +12,7 @@
 #ifdef UNIX_PLATFORM
 
 
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 #include "iridium/io/net/socket.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/pattern/non_copyable.h"
@@ -32,7 +32,7 @@ namespace unix_ {
 
 class CSocketBase: public ISocket, public pattern::NonCopyable {
 protected:
-    CSocketBase(URL const &url);
+    CSocketBase(URI const &uri);
     CSocketBase(int const &socket);
     virtual ~CSocketBase() = default;
 
@@ -43,7 +43,7 @@ protected:
     void    connect();
 
     int     accept();
-    URL     getSocketURL(URL::TProtocol const &protocol);
+    URI     getSocketURI(URI::TProtocol const &protocol);
 
     size_t  write(Buffer::TSharedPtr const &buffer);
     Buffer::TSharedPtr read(size_t const &size);
@@ -51,11 +51,11 @@ protected:
     // todo: rename non-blocking -> overlapped
     void    setBlockingMode(int const &socket, bool const &is_blocking);
 
-    URL     getURL() const override;
+    URI::TSharedPtr getURI() const override;
     int     getID()  const override;
 
     int             m_socket;
-    URL::TSharedPtr m_url;
+    URI::TSharedPtr m_uri;
     bool            m_is_opened;
 
 private:
@@ -75,8 +75,8 @@ T CSocketBase::assertOK(T const &result, std::string const &message) {
     using convertion::convert;
     using std::string;
     if (result < 0) {
-        if (m_url)
-            throw std::runtime_error(message + ": url " + convert<string>(*m_url) +
+        if (m_uri)
+            throw std::runtime_error(message + ": uri " + convert<string>(*m_uri) +
                 ", " + std::strerror(errno) + ", code " + convert<string>(errno)); // ----->
         else
             throw std::runtime_error(message +

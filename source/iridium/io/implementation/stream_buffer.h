@@ -21,7 +21,8 @@ public:
     
     void    initialize() override;
     void    finalize() override;
-    int     getID() const override;
+    TID     getID() const override;
+    URI::TSharedPtr getURI() const override;
     
     Buffer::TSharedPtr read(size_t const &size) override;
 
@@ -39,7 +40,8 @@ public:
     
     void    initialize() override;
     void    finalize() override;
-    int     getID() const override;
+    TID     getID() const override;
+    URI::TSharedPtr getURI() const override;
 
     size_t  write(Buffer::TSharedPtr const &buffer) override;
 

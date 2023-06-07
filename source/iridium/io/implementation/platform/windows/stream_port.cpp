@@ -10,7 +10,7 @@ namespace implementation {
 namespace platform {
 
 
-CStreamPort::CStreamPort(URL const& url) {}
+CStreamPort::CStreamPort(URI const& uri) {}
 
 
 void CStreamPort::initialize() {

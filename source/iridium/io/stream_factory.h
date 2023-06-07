@@ -7,7 +7,7 @@
 
 
 #include "iridium/io/stream.h"
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 
 
 namespace iridium {
@@ -17,8 +17,8 @@ namespace io {
 class IStreamFactory {
 public:
     DEFINE_INTERFACE(IStreamFactory)
-    virtual IStreamPort::TSharedPtr createClientSocket(URL const &url) = 0;
-    virtual IStreamPort::TSharedPtr createServerSocket(URL const &url) = 0;
+    virtual IStreamPort::TSharedPtr createClientSocket(URI const &uri) = 0;
+    virtual IStreamPort::TSharedPtr createServerSocket(URI const &uri) = 0;
 };
 
 

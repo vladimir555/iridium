@@ -28,8 +28,13 @@ void CFileStreamReader::finalize() {
 };
 
 
-int CFileStreamReader::getID() const {
+IStream::TID CFileStreamReader::getID() const {
     return CFileStream::getID(); // ----->
+}
+
+
+URI::TSharedPtr CFileStreamReader::getURI() const {
+    return CFileStream::getURI();
 }
 
 

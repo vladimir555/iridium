@@ -46,15 +46,15 @@ void CPipe::set(
 {
     string from, to;
 
-    if (m_reader)
-        from += convert<string>(m_reader->getID()) + " ";
-    else
-        from += "null ";
+    //if (m_reader)
+    //    from += convert<string>(uint64_t(m_reader->getID())) + " ";
+    //else
+    //    from += "null ";
 
-    if (m_writer)
-        from += convert<string>(m_writer->getID()) + " ";
-    else
-        from += "null ";
+    //if (m_writer)
+    //    from += convert<string>(uint64_t(m_writer->getID())) + " ";
+    //else
+    //    from += "null ";
 
 //    LOGT << "from: " << from;
 
@@ -81,64 +81,64 @@ void CPipe::set(
     m_reader = reader;
     m_writer = writer;
 
-    if (m_reader)
-        to += convert<string>(m_reader->getID()) + " ";
-    else
-        to += "null ";
+    //if (m_reader)
+    //    to += convert<string>(uint64_t(m_reader->getID())) + " ";
+    //else
+    //    to += "null ";
 
-    if (m_writer)
-        to += convert<string>(m_writer->getID()) + " ";
-    else
-        to += "null ";
+    //if (m_writer)
+    //    to += convert<string>(uint64_t(m_writer->getID())) + " ";
+    //else
+    //    to += "null ";
 
 //    LOGT << "to  : " << to;
 }
 
 
-IStreamReader::TConstSharedPtr CPipe::getReader() const {
+IStreamReader::TSharedPtr CPipe::getReader() const {
     return m_reader; // ----->
 }
 
 
-IStreamWriter::TConstSharedPtr CPipe::getWriter() const {
+IStreamWriter::TSharedPtr CPipe::getWriter() const {
     return m_writer; // ----->
 }
 
 
-bool CPipe::transmit(IEvent::TConstSharedPtr const &event) {
+bool CPipe::transmit(Event::TConstSharedPtr const &event) {
     // todo: pipe for unix
     // todo: openssl pipe https://linux.die.net/man/3/bio_s_bio
 
     assertExists(m_reader, "pipe: reader does not exists");
     assertExists(m_writer, "pipe: writer does not exists");
 
-//    LOGT << "fd " << event->getStream()->getID() << " event " << event->getType()
-//         << " "   << m_reader->getID()      << " -> "    << m_writer->getID();
+    LOGT << "pipe transmit, " << event->status << " " << event->operation << " " << event->stream->getID()
+         << ": " << m_reader->getID() << " -> " << m_writer->getID();
 
     bool result = false;
 
-    if  (m_buffers.size()  <  m_buffer_count &&
-        (m_reader->getID() == 0 ||
-        (m_reader->getID() == event->getStream()->getID() &&
-        (event->getType() == IEvent::TType::READ))))
+    if  (m_buffers.size()    < m_buffer_count &&
+       (!m_reader->getURI() ||
+        (m_reader->getID()  == event->stream->getID() &&
+        (checkOneOf(event->operation, Event::TOperation::READ, Event::TOperation::CLOSE, Event::TOperation::TIMEOUT)))))
     {
-//        LOGT << "do read";
+        LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
 
-//        LOGT << buffer->size();
+        LOGT << "read buffer size: " << buffer->size();
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
             result |= true;
-//            LOGT << "read " << buffer->size();
+            LOGT << "read " << buffer->size();
         } else {
-//            LOGT << "read EOF";
+            LOGT << "read EOF";
         }
     }
 
     if  (!m_buffers.empty() &&
-         (m_writer->getID() == 0 ||
-        ((m_writer->getID() == event->getStream()->getID() &&
-         (event->getType() == IEvent::TType::WRITE)))))
+        (!m_writer->getURI() ||
+        ((m_writer->getID()  == event->stream->getID() &&
+         (checkOneOf(event->operation, Event::TOperation::WRITE, Event::TOperation::TIMEOUT))))))
     {
 //        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());

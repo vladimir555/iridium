@@ -6,7 +6,6 @@
 #define HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
 
 
-#include "iridium/smart_ptr.h"
 #include "iridium/io/stream.h"
 #include "iridium/io/event.h"
 
@@ -18,8 +17,8 @@ namespace io {
 class IPipeStreams {
 public:
     DEFINE_INTERFACE(IPipeStreams)
-    virtual IStreamReader::TConstSharedPtr getReader() const = 0;
-    virtual IStreamWriter::TConstSharedPtr getWriter() const = 0;
+    virtual IStreamReader::TSharedPtr getReader() const = 0;
+    virtual IStreamWriter::TSharedPtr getWriter() const = 0;
 
     // todo:
 //    virtual IStreamReader::TConstSharedPtr setReader(IStreamReader::TSharedPtr const &reader) const = 0;
@@ -36,7 +35,7 @@ class IPipeTransmitter {
 public:
     DEFINE_INTERFACE(IPipeTransmitter)
     // false - buffers are empty
-    virtual bool transmit(IEvent::TConstSharedPtr const &event) = 0;
+    virtual bool transmit(Event::TConstSharedPtr const &event) = 0;
 };
 
 

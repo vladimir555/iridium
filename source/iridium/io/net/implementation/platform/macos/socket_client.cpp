@@ -11,9 +11,9 @@ namespace implementation {
 namespace platform {
 
 
-CSocketClient::CSocketClient(URL const &url)
+CSocketClient::CSocketClient(URI const &uri)
 :
-    unix_::CSocketBase(url)
+    unix_::CSocketBase(uri)
 {}
 
 
@@ -23,8 +23,8 @@ void CSocketClient::initialize() {}
 void CSocketClient::finalize() {}
 
 
-URL CSocketClient::getURL() const {
-    return *m_url;
+URI::TSharedPtr CSocketClient::getURI() const {
+    return m_uri;
 }
 
 

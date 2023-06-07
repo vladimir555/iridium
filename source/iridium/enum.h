@@ -12,7 +12,7 @@
 #include <list>
 #include <map>
 #include <iostream>
-#include <limits>
+#include <limits.h>
 
 
 #ifdef _MSC_VER        

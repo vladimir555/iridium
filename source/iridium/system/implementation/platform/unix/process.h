@@ -10,6 +10,7 @@
 
 #include "iridium/io/implementation/stream_port.h"
 #include "iridium/system/process.h"
+#include "iridium/threading/synchronized.h"
 
 #include <string>
 #include <sched.h>
@@ -22,7 +23,11 @@ namespace platform {
 namespace unix_ {
 
 
-class CProcessStream: public IProcess, public io::implementation::CStreamPort {
+class CProcessStream:
+    public IProcess,
+    public io::implementation::CStreamPort,
+    public threading::Synchronized<std::mutex>
+{
 public:
     DEFINE_IMPLEMENTATION(CProcessStream)
     CProcessStream(

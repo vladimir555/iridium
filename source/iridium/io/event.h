@@ -15,13 +15,16 @@ namespace iridium {
 namespace io {
 
 
-class IEvent {
-public:
-    DEFINE_INTERFACE(IEvent)
-    DEFINE_ENUM(TType, NONE, OPEN, CLOSE, READ, WRITE, TIMEOUT, EOF_, ERROR)
-    virtual void                setType(TType const &type) = 0;
-    virtual TType               getType()   const = 0;
-    virtual IStream::TSharedPtr getStream() const = 0;
+struct Event {
+    DEFINE_CREATE(Event)
+    DEFINE_ENUM(TOperation, OPEN, CLOSE, READ, WRITE, TIMEOUT, EOF_, ERROR_)
+    DEFINE_ENUM(TStatus, BEGIN, END)
+    
+    Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
+    
+    IStream::TSharedPtr stream;
+    TOperation          operation;
+    TStatus             status;
 };
 
 

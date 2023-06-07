@@ -10,28 +10,36 @@
 
 #include "iridium/io/multiplexer.h"
 
+#include "iridium/threading/synchronized.h"
+
+#include <unordered_map>
+
 
 namespace iridium {
 namespace io {
 namespace implementation {
 namespace platform {
 
-class CMultiplexer : public IMultiplexer {
- public:
-	CMultiplexer() = default;
-	DEFINE_IMPLEMENTATION(CMultiplexer)
+class CMultiplexer : public IMultiplexer, public threading::Synchronized<std::mutex> {
+public:
+    CMultiplexer();
+    DEFINE_IMPLEMENTATION(CMultiplexer)
 
     void initialize() override;
     void finalize() override;
     std::list<IEvent::TSharedPtr> waitEvents() override;
-	void subscribe(IStream::TConstSharedPtr const &stream) override;
-	void unsubscribe(IStream::TConstSharedPtr const &stream) override;
+    void subscribe(IStream::TConstSharedPtr const &stream) override;
+    void unsubscribe(IStream::TConstSharedPtr const &stream) override;
+
+private:
+    HANDLE m_iocp;
+    std::unordered_map<IStream::TID, IStream::TSharedPtr> m_map_id_stream;
 };
 
 
-}  // namespace platform
-}  // namespace implementation
-}  // namespace io
+} // namespace platform
+} // namespace implementation
+} // namespace io
 } // iridium
 
 

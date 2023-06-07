@@ -19,9 +19,9 @@
 //namespace unix {
 
 
-//CSocketAcceptor::CSocketAcceptor(URL const &url, IListenerStreams::TSharedPtr const &listener)
+//CSocketAcceptor::CSocketAcceptor(URI const &uri, IListenerStreams::TSharedPtr const &listener)
 //:
-//    CSocketBase     (url, listener),
+//    CSocketBase     (uri, listener),
 //    m_context       (nullptr)
 //{}
 
@@ -29,7 +29,7 @@
 //void CSocketAcceptor::initialize() {
 //    open();
 
-//    if (m_url->getProtocol() == URL::TProtocol::HTTPS) {
+//    if (m_uri->getProtocol() == URI::TProtocol::HTTPS) {
 //        throw std::runtime_error("ssl socket is not implemented"); // ----->
 ////        m_context = OpenSSL::instance().createContext(true);
 
@@ -59,8 +59,8 @@
 //}
 
 
-//URL CSocketAcceptor::getURL() const {
-//    return CSocketBase::getURL();
+//URI CSocketAcceptor::getURI() const {
+//    return CSocketBase::getURI();
 //}
 
 
@@ -75,9 +75,9 @@
 //        if (m_context) {
 //            auto ssl = OpenSSL::instance().createSSL(m_context, fd);
 //            OpenSSL::instance().acceptSSL(ssl, !static_cast<bool>(m_listener));
-//            return CSocketPeer::create(fd, m_url->getProtocol(), ssl, m_listener); // ----->
+//            return CSocketPeer::create(fd, m_uri->getProtocol(), ssl, m_listener); // ----->
 //        } else
-//            return CSocketPeer::create(fd, m_url->getProtocol(), m_listener); // ----->
+//            return CSocketPeer::create(fd, m_uri->getProtocol(), m_listener); // ----->
 //    } else
 //        return nullptr; // ----->
 //}

@@ -1,4 +1,5 @@
 #include "client.h"
+
 #include "iridium/io/implementation/session_manager.h"
 #include "iridium/io/implementation/stream_port.h"
 
@@ -8,7 +9,7 @@ namespace io {
 namespace implementation {
 
 
-CClient::CClient(URL const &url, IProtocol::TSharedPtr const &protocol)
+CClient::CClient(URI const &uri, IProtocol::TSharedPtr const &protocol)
 :
     m_stream            (),
     m_protocol          (protocol),

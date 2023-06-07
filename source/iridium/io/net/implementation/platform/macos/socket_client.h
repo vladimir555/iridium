@@ -37,12 +37,12 @@ class CSocketClient:
 {
 public:
     DEFINE_IMPLEMENTATION(CSocketClient)
-    CSocketClient(URL const &url);
+    CSocketClient(URI const &uri);
 
     void initialize() override;
     void finalize() override;
 
-    URL getURL() const override;
+    URI::TSharedPtr getURI() const override;
     int getID() const override;
     Buffer::TSharedPtr read(size_t const &size) override;
     size_t write(Buffer::TSharedPtr const &buffer) override;

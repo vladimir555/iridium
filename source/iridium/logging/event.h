@@ -18,12 +18,12 @@ namespace logging {
 struct TEvent {
     DEFINE_ENUM(
         TLevel,
-        TRACE_LEVEL,
-        DEBUG_LEVEL,
-        INFO_LEVEL,
-        WARNING_LEVEL,
-        ERROR_LEVEL,
-        FATAL_LEVEL
+        TRACE,
+        DEBUG,
+        INFO,
+        WARNING,
+        ERROR_,
+        FATAL
     )
     ///
     TLevel      level;

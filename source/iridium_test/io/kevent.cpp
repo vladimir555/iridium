@@ -8,7 +8,7 @@
 
 //#include <gtest/gtest.h>
 //#include <iridium/logging/logger.h>
-//#include <iridium/io/net/url.h>
+//#include <iridium/io/net/uri.h>
 
 //#include <vector>
 //#include <list>
@@ -28,7 +28,7 @@
 
 //using iridium::logging::update;
 //using iridium::logging::config::createDefaultConsoleLoggerConfig;
-//using iridium::io::net::URL;
+//using iridium::io::net::URI;
 //using iridium::convertion::convert;
 
 
@@ -51,7 +51,7 @@
 //    FLAG1           = EV_FLAG1,
 
 //    EOF_            = EV_EOF,
-//    ERROR           = EV_ERROR
+//    ERROR_          = EV_ERROR
 //)
 
 
@@ -250,7 +250,7 @@
     
 //    LOGT << "begin";
     
-//    URL m_url("http://127.0.0.1:55555");
+//    URI m_uri("http://127.0.0.1:55555");
     
 //    size_t const MAX_EVENT_COUNT            = 3;
 //    int    const KEVENT_TIMIOUT_MS          = 1000;
@@ -263,7 +263,7 @@
 
 //    LOGT << "open";
 //    auto protocol   = IPPROTO_TCP;
-//    if (m_url.getProtocol() == URL::TProtocol::UDP)
+//    if (m_uri.getProtocol() == URI::TProtocol::UDP)
 //        protocol    = IPPROTO_UDP;
     
 //    m_socket_fd     = assertOK(::socket(AF_INET, SOCK_STREAM, protocol), "socket open error");
@@ -274,11 +274,11 @@
 //    struct sockaddr_in server_address = { 0 };
     
 //    server_address.sin_family       = AF_INET;
-//    auto ipv4                       = *m_url.getIPv4();
+//    auto ipv4                       = *m_uri.getIPv4();
 //    server_address.sin_addr.s_addr  = htonl(
 //        ( ipv4[0] << 24 ) | ( ipv4[1] << 16 ) |
 //        ( ipv4[2] << 8  ) |   ipv4[3]);
-//    server_address.sin_port         = htons(*m_url.getPort());
+//    server_address.sin_port         = htons(*m_uri.getPort());
     
 //    int yes = 1;
 //    setsockopt(m_socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
@@ -334,7 +334,7 @@
 //                " filter " << TEvenFilterFlag(m_events[i].filter).convertToFlagsString();
             
 //            if (m_events[i].flags & EV_EOF) {
-//                //            LOGT << getPeerURL(m_events[i].ident) << "EOF";
+//                //            LOGT << getPeerURI(m_events[i].ident) << "EOF";
 //                if (m_monitor_events_used_count >= m_monitor_events.size())
 //                    continue; // <---
 //                m_monitor_events[m_monitor_events_used_count] =

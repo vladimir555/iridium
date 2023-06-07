@@ -391,7 +391,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
 
             value += ch;
         } else {
-            if (ch == ' ' || ch == '\n')
+            if (checkOneOf(ch, ' ', '\n', '\r'))
                 continue; // <---
 
             if (ch == '"') {

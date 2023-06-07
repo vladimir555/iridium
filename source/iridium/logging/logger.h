@@ -138,7 +138,7 @@ std::string extractFileNameToLog(std::string const &path);
 
 #ifdef BUILD_TYPE_DEBUG
 #define LOGT \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE_LEVEL) << \
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE) << \
 iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
 #else
 #define LOGT \
@@ -147,23 +147,23 @@ iridium::logging::LogStreamDummy()
 
 #ifdef BUILD_TYPE_DEBUG
 #define LOGD \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG_LEVEL)
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG)
 #else
 #define LOGD \
 iridium::logging::LogStreamDummy()
 #endif // BUILD_TYPE_DEBUG
 
 #define LOGI \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::INFO_LEVEL)
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::INFO)
 
 #define LOGW \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::WARNING_LEVEL)
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::WARNING)
 
 #define LOGE \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::ERROR_LEVEL)
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::ERROR_)
 
 #define LOGF \
-iridium::logging::LogStream(iridium::logging::TEvent::TLevel::FATAL_LEVEL)
+iridium::logging::LogStream(iridium::logging::TEvent::TLevel::FATAL)
 
 
 #endif // HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9

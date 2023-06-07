@@ -28,7 +28,8 @@ public:
     void    initialize() override;
     void    finalize() override;
 
-    int     getID() const override;
+    TID     getID() const override;
+    URI::TSharedPtr getURI() const override;
     
     size_t  getSize() const;
     
@@ -45,10 +46,13 @@ protected:
     explicit CFileStream(std::string const &file_name, TOpenMode const &open_mode);
     virtual ~CFileStream() override;
 
+    int      getIDInternal() const;
+
 private:
     std::string     m_file_name;
     ::FILE         *m_file = nullptr;
     TOpenMode       m_open_mode;
+    URI::TSharedPtr m_uri;
 };
 
 

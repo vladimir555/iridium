@@ -35,11 +35,19 @@ Buffer::TSharedPtr CStreamReaderList::read(size_t const &size) {
 }
     
     
-int CStreamReaderList::getID() const {
+IStream::TID CStreamReaderList::getID() const {
     if (m_streams.empty() || m_stream == m_streams.end())
         return {}; // ----->
     else
         return m_stream->get()->getID(); // ----->
+}
+
+
+URI::TSharedPtr CStreamReaderList::getURI() const {
+    if (m_streams.empty() || m_stream == m_streams.end())
+        return {}; // ----->
+    else
+        return m_stream->get()->getURI(); // ----->
 }
 
 

@@ -21,6 +21,7 @@ class Buffer: public std::vector<unsigned char> {
 public:
     DEFINE_CREATE(Buffer)
     Buffer() = default;
+    Buffer(char const * const str);
     Buffer(std::string const &str);
     Buffer(std::list<Buffer::TSharedPtr> const &buffers);
     template<typename ... TArgs>

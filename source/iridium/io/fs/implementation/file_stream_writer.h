@@ -24,7 +24,8 @@ public:
     void    initialize()  override;
     void    finalize()    override;
     
-    int     getID() const override;
+    TID     getID() const override;
+    URI::TSharedPtr getURI() const override;
     
     size_t  write(Buffer::TSharedPtr const &buffer) override;
     void    flush() override;

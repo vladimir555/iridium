@@ -13,7 +13,7 @@
 
 
 #include "iridium/pattern/singleton.h"
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 #include "iridium/io/buffer.h"
 #include "iridium/smart_ptr.h"
 
@@ -39,8 +39,8 @@ public:
     Buffer read(SOCKET const &socket, size_t const &size);
     size_t  write(SOCKET const &socket, Buffer const &packet);
     void    close(SOCKET const &socket);
-    SOCKET  connect(URL const &url);
-    SOCKET  listen(URL const &url);
+    SOCKET  connect(URI const &uri);
+    SOCKET  listen(URI const &uri);
     SOCKET  accept(SOCKET const &socket);
     void    shutdown(SOCKET const &socket);
     void    setBlockingMode(SOCKET const &socket, bool const &is_blocking);

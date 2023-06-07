@@ -79,7 +79,7 @@ int Command::run(std::string &output) {
         for (auto const &event: m_event_provider->waitEvents()) {
 //            LOGT << event->getStream()->getID() << " " << event->getType();
 
-            if (event->getStream() == m_process && event->getType() == io::IEvent::TType::WRITE) {
+            if (event->stream == m_process && event->operation == io::Event::TOperation::WRITE) {
                 for (;;) {
                     auto buffer = m_process->read();
 

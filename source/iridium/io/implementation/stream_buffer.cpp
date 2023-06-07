@@ -22,10 +22,15 @@ void CStreamReaderBuffer::initialize() {}
 void CStreamReaderBuffer::finalize() {}
 
 
-int CStreamReaderBuffer::getID() const {
+IStream::TID CStreamReaderBuffer::getID() const {
     return {}; // ----->
 }
-    
+
+
+URI::TSharedPtr CStreamReaderBuffer::getURI() const {
+    return {}; // ----->
+}
+
 
 Buffer::TSharedPtr CStreamReaderBuffer::read(size_t const &size) {
     if (m_pos < m_buffer->size() && size > 0) {
@@ -51,8 +56,13 @@ void CStreamWriterBuffer::initialize() {}
 void CStreamWriterBuffer::finalize() {}
 
 
-int CStreamWriterBuffer::getID() const {
+IStream::TID CStreamWriterBuffer::getID() const {
     return {}; //----->
+}
+
+
+URI::TSharedPtr CStreamWriterBuffer::getURI() const {
+    return {}; // ----->
 }
 
 

@@ -10,6 +10,8 @@
 #include "iridium/threading/async_queue.h"
 #include "iridium/threading/synchronized.h"
 
+#include <atomic>
+
 
 namespace iridium {
 namespace threading {

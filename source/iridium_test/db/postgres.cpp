@@ -10,7 +10,7 @@
 
 
 using iridium::db::implementation::CPostgresConnector;
-using iridium::io::net::URL;
+using iridium::io::net::URI;
 using iridium::db::config::TDatebaseConnector;
 
 
@@ -20,7 +20,7 @@ namespace db {
 
 TEST(postgres) {
     IConnector::TSharedPtr connector = CPostgresConnector::create(
-        URL("postgres://localhost"), "postgres", "postgres", "postgres");
+        URI("postgres://localhost"), "postgres", "postgres", "postgres");
     connector->initialize();
     auto rows = connector->sendQuery("select * from pg_database;");
     connector->finalize();

@@ -19,20 +19,20 @@
 //namespace unix {
 
 
-//CSocketClient::CSocketClient(URL const &url, IListener::TSharedPtr const &listener)
+//CSocketClient::CSocketClient(URI const &uri, IListener::TSharedPtr const &listener)
 //:
-//    CSocketBase             (url, listener),
+//    CSocketBase             (uri, listener),
 //    m_ssl                   (nullptr),
 //    m_is_ssl_handshake_done (false)
 //{}
 
 
 //void CSocketClient::initialize() {
-//    LOGT << *m_url;
+//    LOGT << *m_uri;
 //    open();
 //    connect();
 
-//    if (m_url->getProtocol() == URL::TProtocol::HTTPS) {
+//    if (m_uri->getProtocol() == URI::TProtocol::HTTPS) {
 //        m_context   = OpenSSL::instance().createContext(false);
 //        m_ssl       = OpenSSL::instance().createSSL(m_context, m_socket);
 //        auto code   = OpenSSL::instance().setConnectState(m_ssl);
@@ -66,8 +66,8 @@
 //}
 
 
-//URL CSocketClient::getURL() const {
-//    return CSocketBase::getURL();
+//URI CSocketClient::getURI() const {
+//    return CSocketBase::getURI();
 //}
 
 
