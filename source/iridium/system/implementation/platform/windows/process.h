@@ -11,6 +11,9 @@
 #include "iridium/system/process.h"
 #include "iridium/io/implementation/stream_port.h"
 
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 
 namespace iridium {
 namespace system {
@@ -36,6 +39,19 @@ public:
     size_t write(io::Buffer::TSharedPtr const &buffer) override;
     
     TState getState()   override;
+private:
+    std::string         m_app;
+    std::string         m_args;
+    std::string         m_command_line;
+    std::string         m_pipe_name;
+    //HANDLE              m_file_stdin_reader;
+    HANDLE              m_file_stdout_writer;
+    HANDLE              m_pipe_stdout_reader;
+    //HANDLE              m_pipe_stdout_writer;
+    PROCESS_INFORMATION m_process;
+    OVERLAPPED mutable  m_overlapped;
+
+    static std::atomic<uint64_t> m_process_counter;
 };
 
 

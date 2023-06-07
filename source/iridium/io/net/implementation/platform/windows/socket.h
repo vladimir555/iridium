@@ -12,7 +12,7 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 #include "iridium/io/net/socket.h"
 
 
@@ -26,13 +26,13 @@ namespace platform {
 class CSocket : public ISocket {
 public:
 	DEFINE_IMPLEMENTATION(CSocket)
-	CSocket(URL const &url, bool const &is_server_mode);
+	CSocket(URI const &uri, bool const &is_server_mode);
 
 	void    initialize() override;
 	void    finalize() override;
 
 	//ISocket::TSharedPtr accept() override;
-	//URL     getURL() const override;
+	//URI     getURI() const override;
 
 	//int     getID() const override;
 
@@ -42,14 +42,14 @@ public:
 	//    void    flush() override;
 
 //private:
-//	CSocket(URL const &url, int const &fd);
+//	CSocket(URI const &uri, int const &fd);
 //
-//	URL     getPeerURL(int const &fd);
+//	URI     getPeerURI(int const &fd);
 //	void    setBlockingMode(bool const &is_blocking);
 //
 //	bool    m_is_blocking;
 //	bool    m_is_server_mode;
-//	URL     m_url;
+//	URI     m_uri;
 //	int     m_socket;
 };
 

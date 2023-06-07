@@ -7,6 +7,12 @@ namespace iridium {
 namespace io {
 
 
+Buffer::Buffer(char const * const str)
+:
+    Buffer(std::string(str))
+{}
+
+
 Buffer::Buffer(std::string const &str)
 :
     std::vector<unsigned char>(str.begin(), str.end())

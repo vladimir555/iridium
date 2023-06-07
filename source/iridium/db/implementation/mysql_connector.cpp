@@ -12,7 +12,7 @@
 
 using std::string;
 using std::vector;
-using iridium::net::URL;
+using iridium::net::URI;
 using iridium::convertion::convert;
 
 
@@ -59,9 +59,9 @@ namespace db {
 namespace implementation {
 
 
-CMySQLConnector::CMySQLConnector(URL const &url, string const &user, string const &password, string const &database)
+CMySQLConnector::CMySQLConnector(URI const &uri, string const &user, string const &password, string const &database)
 :
-    m_url       (url),
+    m_uri       (uri),
     m_user      (user),
     m_password  (password),
     m_database  (database)
@@ -80,12 +80,12 @@ CMySQLConnector::~CMySQLConnector() {
 
 void CMySQLConnector::initialize() {
     string host;
-    if (m_url.getHost())
-        host = *m_url.getHost();
+    if (m_uri.getHost())
+        host = *m_uri.getHost();
     else
-        host = m_url.getIPv4AsString();
+        host = m_uri.getIPv4AsString();
 
-    auto port = *m_url.getPort();
+    auto port = *m_uri.getPort();
 
     auto result = mysql_real_connect(
        &m_connection, 
@@ -100,7 +100,7 @@ void CMySQLConnector::initialize() {
         mysql_close(&m_connection);
         throw DBException("connect to mysql host error: " + string(mysql_error(&m_connection))); // ----->
     }
-    LOGI << "initialization MYSQL '" << m_url << "' database '" << m_database << "' done";
+    LOGI << "initialization MYSQL '" << m_uri << "' database '" << m_database << "' done";
 }
 
 

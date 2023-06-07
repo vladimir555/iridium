@@ -181,7 +181,11 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 
 
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
-    logging::setConfig(logging::config::createDefault());
+    {
+        auto config = logging::config::createDefault();
+        config.Sink.begin()->IsAsync = true;
+        logging::setConfig(config);
+    }
     
     try {
         auto args = parseCommandLine(argc, argv);

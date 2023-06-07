@@ -34,7 +34,7 @@
 //    void initialize() override;
 //    void finalize() override;
 
-//    URL getURL() const override;
+//    URI getURI() const override;
 //    int getID() const override;
 //    Buffer::TSharedPtr read(size_t const &size) override;
 //    size_t write(Buffer::TSharedPtr const &buffer) override;
@@ -46,7 +46,7 @@
 ////    CSocketPeer(int const &fd, encryption::OpenSSL::TSSL *ssl, IListenerStreams::TSharedPtr const &listener);
 
 //private:
-//    URL::TProtocol              m_protocol;
+//    URI::TProtocol              m_protocol;
 ////    encryption::OpenSSL::TSSL  *m_ssl;
 //};
 

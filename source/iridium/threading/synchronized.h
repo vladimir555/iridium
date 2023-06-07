@@ -11,6 +11,7 @@
 #include "iridium/pattern/non_movable.h"
 
 #include <mutex>
+#include <condition_variable>
 
 
 namespace iridium {

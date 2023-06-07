@@ -1,0 +1,111 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+#ifndef HEADER_URI_F2F08356_C16A_4981_92C6_32E1B85D4384
+#define HEADER_URI_F2F08356_C16A_4981_92C6_32E1B85D4384
+
+
+#include "iridium/enum.h"
+#include "iridium/smart_ptr.h"
+
+#include <memory>
+#include <vector>
+#include <array>
+#include <unordered_map>
+#include <set>
+
+#include "iridium/convertion/convert.h"
+#include "net/types.h"
+
+
+namespace iridium {
+namespace io {
+
+
+//    [FILE]://[/usr/bin]/[ls]                                  - protocol + path + host
+// [PROCESS]://[/usr/bin]/[ls] [dir1] [dir2]                    - protocol + path + host + arguments
+//   [HTTPS]://[hostname.com][/dir1/dir2][?arg1=1&arg2=2]       - protocol + host + path + arguments
+//   [HTTPS]://[hostname.com][:80][/dir1/dir2][?arg1=1&arg2=2]  - protocol + host + port + path + arguments
+
+// host + port + path   = address
+// host + path          = address
+// path + host          = address
+
+// todo: make URI
+class URI {
+public:
+    DEFINE_ENUM(
+        TProtocol, 
+        TCP         = -2,
+        UDP         = -3,
+        WS          = -4,
+        WSS         = -5,
+        FILE        = -6,
+        PROCESS     = -7,
+        HTTP        = 80,
+        HTTPS       = 443,
+        SSH         = 22,
+        Telnet      = 23,
+        RTSP        = 554,
+        MYSQL       = 3306,
+        POSTGRES    = 5432
+    )
+
+    DEFINE_CREATE(URI)
+
+    URI(std::string const &source);
+   ~URI() = default;
+
+    struct TIPv4: public std::array<uint8_t , 4> {
+        TIPv4() = default;
+        TIPv4(TIPv4 const &) = default;
+        TIPv4 &operator = (TIPv4 const &) = default;
+        TIPv4 &operator = (std::array<uint8_t , 4> const &);
+//        TIPv4(std::array<uint8_t , 4> const &ipv4);
+    };
+    struct TIPv6: public std::array<uint16_t, 8> {};
+    
+    typedef uint16_t    TPort;
+    typedef std::unordered_map<std::string, std::string>
+                        TMapNameValue;
+
+    TIPv4           getIPv4()       const;
+    TIPv6           getIPv6()       const;
+    TPort           getPort()       const;
+    std::string     getHost()       const;
+    std::string     getPath()       const;
+//    TMapNameValue   getArguments()  const;
+    TProtocol       getProtocol()   const;
+    std::string     getAddress()    const;
+    std::string     getSource()     const;
+
+    bool operator == (URI const &uri) const;
+    bool operator <  (URI const &uri) const;
+
+private:
+    std::string     m_source;
+    TProtocol       m_protocol;
+    std::string     m_host;
+    std::string     m_path;
+    std::string     m_address;
+    std::string     m_arguments;
+    std::shared_ptr<TIPv4> mutable m_ipv4;
+    std::shared_ptr<TIPv6> m_ipv6;
+    TPort           m_port;
+    TMapNameValue   m_map_name_value;
+};
+
+
+} // io
+} // iridium
+
+
+DEFINE_CONVERT(iridium::io::URI::TIPv4, std::string)
+DEFINE_CONVERT(std::string, iridium::io::URI::TIPv4)
+
+DEFINE_CONVERT(iridium::io::URI, std::string)
+DEFINE_CONVERT(std::string, iridium::io::URI)
+
+
+#endif // HEADER_URI_F2F08356_C16A_4981_92C6_32E1B85D4384

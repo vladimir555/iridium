@@ -13,7 +13,7 @@
 
 using std::string;
 using std::vector;
-using iridium::io::net::URL;
+using iridium::io::net::URI;
 using iridium::convertion::convert;
 using iridium::convertion::convertPtr;
 
@@ -23,10 +23,10 @@ namespace db {
 namespace implementation {
 
 
-CPostgresConnector::CPostgresConnector(URL const &url, string const &user, string const &password, string const &database)
+CPostgresConnector::CPostgresConnector(URI const &uri, string const &user, string const &password, string const &database)
 :
     m_connection(nullptr),
-    m_url       (url),
+    m_uri       (uri),
     m_user      (user),
     m_password  (password),
     m_database  (database)
@@ -39,7 +39,7 @@ CPostgresConnector::~CPostgresConnector() {
 
 void CPostgresConnector::initialize() {
 //    m_connection = std::make_shared<pqxx::connection>(
-//         "host="        + convert<string>(m_url)    +
+//         "host="        + convert<string>(m_uri)    +
 //        " user="        + m_user                    +
 //        " password="    + m_password                +
 //        " dbname="      + m_database);
@@ -48,8 +48,8 @@ void CPostgresConnector::initialize() {
 //        throw DBException("connect to mysql host error: " + e.what())); // ----->
 //    }
     m_connection = assertExists(PQconnectdb(string(
-        "host='"        + convertPtr(m_url.getHost())   + "'" +
-       " port='"        + convertPtr(m_url.getPort())   + "'" +
+        "host='"        + convertPtr(m_uri.getHost())   + "'" +
+       " port='"        + convertPtr(m_uri.getPort())   + "'" +
        " user='"        + m_user                        + "'" +
        " password='"    + m_password                    + "'" +
        " dbname='"      + m_database                    + "'").c_str()), "connect to postgresql host error: null connector");
@@ -57,10 +57,10 @@ void CPostgresConnector::initialize() {
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
         PQfinish(m_connection);
-        throw Exception("connect to postgresql '" + convert<string>(m_url) + "' error: " + error); // ----->
+        throw Exception("connect to postgresql '" + convert<string>(m_uri) + "' error: " + error); // ----->
     }
 
-//    LOGI << "initialization Postgres '" << m_url << "' database '" << m_database << "' done";
+//    LOGI << "initialization Postgres '" << m_uri << "' database '" << m_database << "' done";
 }
 
 

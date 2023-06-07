@@ -18,14 +18,14 @@
 
 
 using iridium::io::implementation::CStreamPort;
-using iridium::io::URL;
+using iridium::io::URI;
 using iridium::convertion::convert;
 using std::string;
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
 
 
-milliseconds DEFAULT_PROCESS_TIMEOUT        (1000);
+milliseconds DEFAULT_PROCESS_TIMEOUT        (5000);
 milliseconds DEFAULT_PROCESS_TIMEOUT_STEP   (100);
 
 
@@ -43,7 +43,7 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::string const &args)
 :
-    CStreamPort(URL("file://" + app)),
+    CStreamPort(URI("process://" + app + " " + args)),
     m_state_internal    ({}),
     m_app               (app),
     m_args              (assign(split(args, " "))),
@@ -56,11 +56,12 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::vector<std::string> const &args)
 :
-    CStreamPort(URL("file://" + app)),
-    m_state_internal    ({}),
+    CStreamPort         (URI("file://" + app)),
+    m_state_internal    {},
     m_app               (app),
     m_args              (args),
     m_command_line      (app),
+    m_pid               (0),
     m_pipe_out          (0)
 {
     for (auto const &arg: args)
@@ -69,144 +70,169 @@ CProcessStream::CProcessStream(
 
 
 void CProcessStream::initialize() {
-    if (m_fd) {
-        LOGW << "initializing process stream '" + m_command_line + "' error: already initialized";
-        return;
+//    LOGT << "CProcessStream::initialize";
+    try {
+//        if (m_fd) {
+//            LOGW << "initializing process stream '" + m_command_line + "' error: already initialized";
+//            return;
+//        }
+        if (m_fd)
+            throw std::runtime_error("not finalized"); // ----->
+        
+        int cout_pipe[2] = { 0 };
+        int cerr_pipe[2] = { 0 };
+        
+        assertOK(pipe(cout_pipe), "pipe");
+        assertOK(pipe(cerr_pipe), "pipe");
+        
+        posix_spawn_file_actions_t actions;
+        assertOK(
+            posix_spawn_file_actions_init(&actions),
+           "posix_spawn_file_actions_init"
+        );
+        
+        assertOK(
+            posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
+           "posix_spawn_file_actions_addclose"
+        );
+        
+        assertOK(
+            posix_spawn_file_actions_addclose(&actions, cerr_pipe[0]),
+           "posix_spawn_file_actions_addclose"
+        );
+        
+        assertOK(
+            posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
+           "posix_spawn_file_actions_adddup2"
+        );
+        
+        assertOK(
+            posix_spawn_file_actions_adddup2(&actions, cerr_pipe[1], 2),
+           "posix_spawn_file_actions_adddup2"
+        );
+    
+        assertOK(
+            posix_spawn_file_actions_adddup2(&actions, 1, 2),
+           "posix_spawn_file_actions_adddup2"
+        );
+        
+        assertOK(
+            posix_spawn_file_actions_addclose(&actions, cout_pipe[1]),
+           "posix_spawn_file_actions_addclose"
+        );
+        
+        assertOK(
+            posix_spawn_file_actions_addclose(&actions, cerr_pipe[1]),
+           "posix_spawn_file_actions_addclose"
+        );
+        
+        char *argv[1 + m_args.size() + 1];
+        argv[0] = (char *)m_app.data();
+        for (size_t i = 0; i < m_args.size(); i++)
+            argv[i + 1] = (char *)m_args[i].data();
+        
+        argv[1 + m_args.size()] = nullptr;
+        
+        //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
+        
+        //#ifdef POSIX_SPAWN_SETSID
+        //    posix_spawnattr_t attr = { 0 };
+        //    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
+        //#elif defined(POSIX_SPAWN_SETSID_NP)
+        //    posix_spawnattr_t attr = { 0 };
+        //    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
+        //#else
+        ////    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
+        ////    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+        //#endif
+        
+        pid_t pid = m_pid;
+        
+        assertOK(
+            //        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
+            posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv, environ),
+           "posix_spawnp"
+        );
+        
+        m_pid = pid;
+        
+        //    auto r =
+        //    posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ);
+        //    LOGT << "posix_spawnp: " << r << " " << m_pid;
+        //    assertOK(r, "posix_spawnp");
+        
+        close(cout_pipe[1]);
+        close(cerr_pipe[1]);
+        
+        m_fd = m_pipe_out = cout_pipe[0];
+        
+        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd;
+        
+        setBlockingMode(m_fd, false);
+        
+        m_exit_code.reset();
+        
+        auto state = getState();
+        if  (!checkOneOf(state.condition, TState::TCondition::RUNNING, TState::TCondition::DONE))
+            throw std::runtime_error("process is not running, condition: " + convert<string>(state.condition)); // ----->
+    } catch (std::exception const &e) {
+        throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
-//    if (m_fd)
-//        throw std::runtime_error("initializing process stream '" + m_command_line + "' error: already initialized"); // ----->
-
-    int cout_pipe[2] = { 0 };
-    int cerr_pipe[2] = { 0 };
-
-    assertOK(pipe(cout_pipe), "pipe");
-    assertOK(pipe(cerr_pipe), "pipe");
-
-    posix_spawn_file_actions_t actions;
-    assertOK(
-        posix_spawn_file_actions_init(&actions),
-       "posix_spawn_file_actions_init"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
-       "posix_spawn_file_actions_addclose"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_addclose(&actions, cerr_pipe[0]),
-       "posix_spawn_file_actions_addclose"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
-       "posix_spawn_file_actions_adddup2"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_adddup2(&actions, cerr_pipe[1], 2),
-       "posix_spawn_file_actions_adddup2"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_adddup2(&actions, 1, 2),
-       "posix_spawn_file_actions_adddup2"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_addclose(&actions, cout_pipe[1]),
-       "posix_spawn_file_actions_addclose"
-    );
-
-    assertOK(
-        posix_spawn_file_actions_addclose(&actions, cerr_pipe[1]),
-       "posix_spawn_file_actions_addclose"
-    );
-
-    char *argv[1 + m_args.size() + 1];
-    argv[0] = (char *)m_app.data();
-    for (size_t i = 0; i < m_args.size(); i++)
-        argv[i + 1] = (char *)m_args[i].data();
-
-    argv[1 + m_args.size()] = nullptr;
-
-//    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-
-//#ifdef POSIX_SPAWN_SETSID
-//    posix_spawnattr_t attr = { 0 };
-//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
-//#elif defined(POSIX_SPAWN_SETSID_NP)
-//    posix_spawnattr_t attr = { 0 };
-//    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
-//#else
-////    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
-////    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
-//#endif
-
-    pid_t pid = m_pid;
-    
-    assertOK(
-//        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
-        posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv, environ),
-       "posix_spawnp"
-    );
-    
-    m_pid = pid;
-
-//    auto r =
-//    posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ);
-//    LOGT << "posix_spawnp: " << r << " " << m_pid;
-//    assertOK(r, "posix_spawnp");
-
-    close(cout_pipe[1]);
-    close(cerr_pipe[1]);
-
-    m_fd = m_pipe_out = cout_pipe[0];
-
-    setBlockingMode(m_fd, false);
-
-    m_exit_code.reset();
-
-    auto state = getState();
-    if  (!checkOneOf(state.condition, TState::TCondition::RUNNING, TState::TCondition::DONE))
-        throw std::runtime_error(
-            "process " + m_command_line +
-            " is not running, process condition: " + convert<string>(state.condition)); // ----->
 }
 
 
 void CProcessStream::finalize() {
-    if (m_pid == 0)
-        return;
+    try {
+        if (m_pid == 0)
+            throw std::runtime_error("not initialized"); // ----->
+        
+        LOGT << "finalize   process '" << m_command_line << "', id: " << m_fd;
+        
+        //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
+        //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
 
-//    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-
-//    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
-    auto timeout = system_clock::now() + DEFAULT_PROCESS_TIMEOUT;
-    while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING)
-        std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
-//    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " DONE";
-
-    if (getState().condition == TState::TCondition::RUNNING) {
-        LOGW << "kill pid " << m_pid << " " << m_command_line;
-        kill(m_pid, SIGKILL);
-//        m_state_internal.is_signaled = true;
-        //todo: timeout condition
+        {
+            io::Buffer::TSharedPtr b;
+            do {
+                b = read();
+            } while (b && !b->empty());
+        }
+        
+//        auto start   = system_clock::now();
+//        auto timeout = start + DEFAULT_PROCESS_TIMEOUT;
+//        while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING) {
+//            LOGT << "\n" << m_command_line << "\n"
+//                 << system_clock::now() << " < " << timeout << " " << getState().condition << " " << timeout - system_clock::now();
+//            std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
+//        }
+        
+        //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " DONE";
+        
+        if (getState().condition == TState::TCondition::RUNNING) {
+            LOGW << "finalization: kill pid " << m_pid << " " << m_command_line;
+//                 << ", timeout: " << system_clock::now() - start;
+            assertOK(kill(m_pid, SIGKILL), "kill");
+            //        m_state_internal.is_signaled = true;
+            //todo: timeout condition
+        }
+        
+        if (m_pipe_out) {
+            close(m_pipe_out);
+            m_pipe_out  = 0;
+            m_fd        = 0;
+        }
+        
+        //    m_state_internal = { 0 };
+        //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " done";
+    } catch (std::exception const &e) {
+        throw std::runtime_error("finalization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
-
-    if (m_pipe_out) {
-        close(m_pipe_out);
-        m_pipe_out  = 0;
-        m_fd        = 0;
-    }
-
-//    m_state_internal = { 0 };
-    m_pid = 0;
-//    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " done";
 }
 
 
 IProcess::TState CProcessStream::getState() {
+    LOCK_SCOPE();
+    
     TState::TCondition condition = TState::TCondition::UNKNOWN;
 
     if (m_pid != 0) {
@@ -255,7 +281,7 @@ IProcess::TState CProcessStream::getState() {
         process_state_str += " continued";
 
 //    if (!process_state_str.empty())
-//        LOGT << "process '" << m_app << " " << m_args.back() << "' state: " << process_state_str;
+//        LOGT << "process '" << m_command_line << "' state: " << process_state_str;
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);

@@ -68,7 +68,9 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     // TODO: exception handling
     while (paths_left > 0) {
+//        LOGT << "wait, paths_left: " << paths_left << " ...";
         auto results = process_result_queue->pop(m_timeout);
+//        LOGT << "wait, paths_left: " << paths_left << " OK";
 
         if  (results.empty())
             break; // --->
@@ -96,7 +98,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 LOGI << result->path << ":\n"
                      << result->output;
             } else {
-                for (auto const &node: *assertOne(node_test->slice(result->path), "not expected few paths by handler").back()) {
+                for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
                     TResult::TTests test;
                     test.Path   = result->path + "/" + node->getName();
                     test.Error  = convert<string>(result->state.condition);
@@ -168,75 +170,108 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
 
 
 bool CTestRunnerFork::CTestProtocolHandler::control(
-    io::IEvent::TSharedPtr          const &event,
+    io::Event::TSharedPtr           const &event,
     io::IPipeManager::TSharedPtr    const &pipe_manager)
 {
-    if (m_process_result->output)
+    if (m_process_result->output) {
+        LOGT << "return false";
         return false; // ----->
+    }
 
-//    LOGT << "\nevent: " <<  event->getType()
-//         << "\nfd: "    << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID())
-//         << "\nprocess_state: " << m_state.condition
-//         << "\nbuffer:\n" << m_buffer_output;
+//    LOGT << "\nevent:           "   <<  event->getType()
+//         << "\nfd:              "   << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID())
+//         << "\nprocess_state:   "   << m_process_result->state.condition
+//         << "\nbuffer:\n"           << m_buffer_output;
 
     m_process_result->state = m_process->getState();
 
-    if (event->getType() == io::IEvent::TType::OPEN) {
-        pipe_manager->createPipe("process");
-        pipe_manager->updateReader("process", std::dynamic_pointer_cast<io::IStreamReader>(event->getStream()));
-        pipe_manager->updateWriter("process", CStreamWriterBuffer::create(m_buffer_output));
+    if (event->operation == io::Event::TOperation::OPEN) {
+        static std::string const DEFAULT_PIPE_NAME = "process";
+        pipe_manager->createPipe(DEFAULT_PIPE_NAME);
+        pipe_manager->updatePipe(DEFAULT_PIPE_NAME, std::dynamic_pointer_cast<io::IStreamReader>(event->stream), CStreamWriterBuffer::create(m_buffer_output));
+//        LOGT << "return true";
         return true; // ----->
     }
 
     try {
-        if (checkOneOf(event->getType(),
-            io::IEvent::TType::READ,
-            io::IEvent::TType::CLOSE,
-            io::IEvent::TType::TIMEOUT) &&
+        if (
+//            m_process_result->state.condition != IProcess::TState::TCondition::RUNNING &&
+            checkOneOf(event->operation,
+            io::Event::TOperation::EOF_,
+            io::Event::TOperation::CLOSE,
+            io::Event::TOperation::TIMEOUT) &&
             m_buffer_output             &&
             m_buffer_output->size() > 4 &&
             m_buffer_output->back() == '\n')
         {
             size_t right = m_buffer_output->size() - 1;
+            while (right > 0 &&  checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r')))
+                right--;
+
             size_t left  = right;
 
-            while (left > 0 && m_buffer_output->at(left - 1) != '\n')
+            while (left  > 0 && !checkOneOf(m_buffer_output->at(left),  uint8_t('\n'), uint8_t('\r')))
                 left--;
 
-            string size_str(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+            string size_str(m_buffer_output->begin() + left + 1, m_buffer_output->begin() + right + 1);
 
-            if (size_str.find_first_not_of("0123456789") != string::npos)
-                return true; // ----->
+            //LOGT << "size_str: '" << size_str << "'";
 
-            auto size = convert<uint64_t>(size_str);
-
-            if (m_buffer_output->at(--left) == '\n' &&
-                m_buffer_output->at(--left) == '\n' &&
-                m_buffer_output->at(--left) == '}'  &&
-                m_buffer_output->at(left - size + 2) == '{')
-            {
-                right   = left + 1;
-                left    = left - size + 2;
-            } else
-                return true; // ----->
-
-            string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
-            auto    node = m_parser->parse(json);
-
-            m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
-            m_process_result->node      = node;
-            m_process_result->output    = m_buffer_output;
+            if (size_str.find_first_not_of("0123456789") == string::npos) {
+                auto    size = convert<uint64_t>(size_str);
+                size_t  endlines_count = 0;
+                
+                while (left > 0) {
+                    if (m_buffer_output->at(left) == '\n')
+                        endlines_count++;
+                    else
+                        if (m_buffer_output->at(left) != '\r')
+                            break;
+                    left--;
+                }
+                
+                if (endlines_count == 2 && m_buffer_output->at(left) == '}') {
+                    right = left + 2;
+                    
+                    size_t brackets_count = 1;
+                    while (brackets_count > 0 && --left > 0) {
+                        if (m_buffer_output->at(left) == '}')
+                            brackets_count++;
+                        
+                        if (m_buffer_output->at(left) == '{')
+                            brackets_count--;
+                        
+                        if (m_buffer_output->at(left) == '\r')
+                            size++;
+                    }
+                    
+                    if (right - left == size) {
+                        string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+                        auto    node = m_parser->parse(json);
+                        
+                        m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
+                        m_process_result->node      = node;
+                        m_process_result->output    = m_buffer_output;
+                        
+//                        LOGT << "node:\n"   << node;
+//                        LOGT << "output:\n" << m_buffer_output;
+                    }
+                }
+            }
         }
     } catch (std::exception const &e) {
         LOGF << e.what();
         if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
-            m_process_result->output = m_buffer_output;;
+            m_process_result->output = m_buffer_output;
     } catch (...) {
         if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
-            m_process_result->output = m_buffer_output;;
+            m_process_result->output = m_buffer_output;
     }
+    
+//    LOGT << "output:\n" << m_buffer_output;
 
     // detect crash
+    LOGT << "process state: " << m_process_result->state.condition;
     if (!checkOneOf(m_process_result->state.condition,
         IProcess::TState::TCondition::DONE,
         IProcess::TState::TCondition::RUNNING))
@@ -244,10 +279,28 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         m_process_result->output = m_buffer_output;
     }
 
+    if(!m_process_result->output &&
+        event->operation == io::Event::TOperation::CLOSE
+//        && m_process_result->state.condition == IProcess::TState::TCondition::CRASHED
+       )
+    {
+        LOGT << "empty output, close, m_process_result->state.condition: "
+             << m_process_result->state.condition;
+        m_process_result->output    = io::Buffer::create("empty process output");
+        m_process_result->state     = m_process->getState();
+    }
+    
+//    LOGT << "return " << bool(!m_process_result->output);
+//    if (!m_process_result->output)
+//        LOGT << "buffer:\n" << m_buffer_output
+//             << "\ncond:  " << m_process_result->state.condition
+//             << "\nevent: " << event->getType();
+    
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
-
-    return !m_process_result->output; // ----->
+    
+    LOGT << "protocol return: " << !m_process_result->output;
+    return !m_process_result->output;
 }
 
 

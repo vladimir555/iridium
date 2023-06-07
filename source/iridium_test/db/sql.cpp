@@ -214,7 +214,7 @@ TEST(query) {
 
 //    TDatebaseConnector config;
 //    config.Type     = TDatebaseConnector::TDBType::POSTGRES;
-//    config.Url      = URL("postgres://localhost");
+//    config.Url      = URI("postgres://localhost");
 //    config.User     = "postgres";
 //    config.Password = "postgres";
 //    config.Database = "postgres";

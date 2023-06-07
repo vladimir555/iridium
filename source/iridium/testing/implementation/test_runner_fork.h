@@ -7,7 +7,8 @@
 
 
 #include "iridium/testing/test_runner.h"
-#include "iridium/io/session.h"
+#include "iridium/io/protocol.h"
+#include "iridium/io/session_manager.h"
 #include "iridium/system/process.h"
 #include "iridium/threading/async_queue.h"
 #include "iridium/parsing/parser.h"
@@ -41,14 +42,18 @@ private:
     public:
         DEFINE_IMPLEMENTATION(CTestProtocolHandler)
         CTestProtocolHandler(
-            system::IProcess::TSharedPtr    const &process,
-            std::string                     const &path,
+            system::IProcess::TSharedPtr
+                const &process,
+            std::string
+                const &path,
             threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
-                                            const &process_result_queue);
+                const &process_result_queue);
 
         bool control(
-            io::IEvent::TSharedPtr          const &event,
-            io::IPipeManager::TSharedPtr    const &pipe_manager) override;
+            io::Event::TSharedPtr
+                const &event,
+            io::IPipeManager::TSharedPtr
+                const &pipe_manager) override;
 
         io::Buffer::TSharedPtr      getBuffer() const;
         system::IProcess::TState    getExitState() const;

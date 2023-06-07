@@ -30,12 +30,12 @@
 //class CSocketAcceptor: public CSocketBase, public ISocketAcceptor {
 //public:
 //    DEFINE_IMPLEMENTATION(CSocketAcceptor)
-//    CSocketAcceptor(URL const &url);
+//    CSocketAcceptor(URI const &uri);
 
 //    void initialize() override;
 //    void finalize() override;
 
-//    URL getURL() const override;
+//    URI getURI() const override;
 //    int getID() const override;
 
 //    ISocketStream::TSharedPtr accept() override;

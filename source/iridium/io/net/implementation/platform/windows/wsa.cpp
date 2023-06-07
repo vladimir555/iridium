@@ -103,42 +103,42 @@ void WSA::close(SOCKET const &socket) {
 }
 
 
-SOCKET WSA::connect(URL const &url) {
+SOCKET WSA::connect(URI const &uri) {
     sockaddr_in address = { 0 };
 
-    auto ipv4 = *url.getIPv4();
+    auto ipv4 = *uri.getIPv4();
 
     address.sin_family  = AF_INET;
     auto a = (ipv4[0] << 24) | (ipv4[1] << 16) | (ipv4[2] << 8) | ipv4[3];
     address.sin_addr    = *(struct in_addr *)&a;
-    address.sin_port    = *url.getPort();
+    address.sin_port    = *uri.getPort();
 
-    //if (url.getProtocol() && *m_url.getProtocol() == URL::TProtocol::UDP)
+    //if (uri.getProtocol() && *m_uri.getProtocol() == URI::TProtocol::UDP)
     //    address.ai_protocol   = IPPROTO_UDP;
     //else
     //    address.ai_protocol   = IPPROTO_TCP;
 
     struct addrinfo *address_result = nullptr;
     // resolve the server address and port
-    assertEQ(::getaddrinfo(nullptr, convert<string>(*url.getPort()).c_str(), reinterpret_cast<ADDRINFOA *>(&address), &address_result), 0, "socket getaddrinfo error");
+    assertEQ(::getaddrinfo(nullptr, convert<string>(*uri.getPort()).c_str(), reinterpret_cast<ADDRINFOA *>(&address), &address_result), 0, "socket getaddrinfo error");
     // create a SOCKET for connecting to server
     auto socket = assertNE(::socket(address_result->ai_family, address_result->ai_socktype, address_result->ai_protocol), INVALID_SOCKET, "socket error");
 
-    LOGT << url << " connect";
+    LOGT << uri << " connect";
     assertNE(::connect(socket, (struct sockaddr *)&address, sizeof(address)), SOCKET_ERROR, "socket connect error:");
 
     return socket; // ----->
 }
 
 
-SOCKET WSA::listen(URL const &url) {
+SOCKET WSA::listen(URI const &uri) {
     auto listen_socket  = assertNE(WSASocket(AF_INET, SOCK_STREAM, 0, nullptr, 0, WSA_FLAG_OVERLAPPED), INVALID_SOCKET, "create listen socket error");
 
     SOCKADDR_IN address = { 0 };
 
     address.sin_family      = AF_INET;
     address.sin_addr.s_addr = htonl(INADDR_ANY);
-    address.sin_port        = htons(*url.getPort());
+    address.sin_port        = htons(*uri.getPort());
 
     assertNE(::bind  (listen_socket, (PSOCKADDR)&address, sizeof(address)), SOCKET_ERROR, "wsa socket bind error");
     assertEQ(::listen(listen_socket, SOMAXCONN), 0, "socket listen error");

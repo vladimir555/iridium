@@ -9,8 +9,10 @@
 
 
 #include "iridium/io/stream.h"
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 #include "iridium/pattern/non_copyable.h"
+
+//#include <wsa>
 
 
 namespace iridium {
@@ -22,7 +24,7 @@ namespace platform {
 class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
  public:
 	DEFINE_IMPLEMENTATION(CStreamPort)
-	CStreamPort(URL const &url);
+	CStreamPort(URI const &uri);
 
 	void initialize() override;
     void finalize() override;
@@ -30,6 +32,8 @@ class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
 	TID getID() const override;
 	Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
     size_t write(Buffer::TSharedPtr const &buffer) override;
+private:
+	HANDLE m_handle;
 };
 
 

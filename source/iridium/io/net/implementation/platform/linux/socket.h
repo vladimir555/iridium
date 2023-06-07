@@ -28,9 +28,9 @@
 ////class CSocket: public unix::CSocket {
 ////public:
 ////    DEFINE_IMPLEMENTATION(CSocket)
-////    CSocket(URL const &url, TMode const &mode);
+////    CSocket(URI const &uri, TMode const &mode);
 ////    // peer
-////    CSocket(URL const &url, int const &fd, encryption::OpenSSL::TSSL *ssl);
+////    CSocket(URI const &uri, int const &fd, encryption::OpenSSL::TSSL *ssl);
 
 ////    void initialize() override;
 ////    void finalize() override;

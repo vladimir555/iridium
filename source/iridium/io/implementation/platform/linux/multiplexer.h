@@ -28,7 +28,7 @@ namespace platform {
 
 class CMultiplexer:
     public IMultiplexer,
-    public threading::Synchronized
+    public threading::Synchronized<std::mutex>
 {
 public:
     DEFINE_IMPLEMENTATION(CMultiplexer)
@@ -37,8 +37,8 @@ public:
     void    initialize()   override;
     void    finalize()     override;
 
-    void    subscribe(IStream::TConstSharedPtr const &stream) override;
-    void  unsubscribe(IStream::TConstSharedPtr const &stream) override;
+    void    subscribe(IStream::TSharedPtr const &stream) override;
+    void  unsubscribe(IStream::TSharedPtr const &stream) override;
 
     std::list<IEvent::TSharedPtr> waitEvents() override;
 
@@ -47,15 +47,17 @@ private:
 
     static int assertOK(int const &result, std::string const &message);
 
-    void    addInternal(IStream::TConstSharedPtr const &stream);
-    void    delInternal(IStream::TConstSharedPtr const &stream);
+    void    addInternal(IStream::TSharedPtr const &stream);
+    void    delInternal(IStream::TSharedPtr const &stream);
 
-    std::unordered_map<uintptr_t, IStream::TConstSharedPtr>
-            m_map_fd_stream;
+    std::unordered_map<uintptr_t, IStream::TSharedPtr>
+                        m_map_fd_stream;
     std::atomic<int>    m_epoll_fd;
-    int     m_event_fd;
-    threading::IAsyncQueue<IStream::TConstSharedPtr>::TSharedPtr m_streams_to_add;
-    threading::IAsyncQueue<IStream::TConstSharedPtr>::TSharedPtr m_streams_to_del;
+    int                 m_event_fd;
+    
+    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_add;
+    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_del;
+    
     std::atomic<bool> m_is_closing;
 };
 

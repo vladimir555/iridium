@@ -11,7 +11,7 @@ namespace implementation {
 namespace platform {
 
 
-CSocket::CSocket(URL const &url, bool const &is_server_mode) {
+CSocket::CSocket(URI const &uri, bool const &is_server_mode) {
     throw std::runtime_error("windows socket not implemented");
 }
 
@@ -31,7 +31,7 @@ void CSocket::finalize() {
 //}
 //
 //
-//URL CSocket::getURL() const {
+//URI CSocket::getURI() const {
 //    throw std::runtime_error("windows socket not implemented");
 //}
 //

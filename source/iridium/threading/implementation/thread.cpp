@@ -37,7 +37,7 @@ CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std:
 
 CThread::~CThread() {
     if (m_is_running) {
-        std::cerr << "FATAL: destroying thread '" << m_name << "' without finalizing" << std::endl;
+        std::cerr << "FATAL: destroying thread '" << m_name << "' without finalization" << std::endl;
         finalize();
     }
 }
@@ -66,7 +66,7 @@ void CThread::initialize() {
 
 void CThread::finalize() {
     if (!m_thread || !m_thread->joinable())
-        throw std::runtime_error("thread '" + m_name + "' finalizing error: not initialized"); // ----->
+        throw std::runtime_error("thread '" + m_name + "' finalization error: not initialized"); // ----->
 
     m_is_running = false;
 
@@ -87,7 +87,7 @@ void CThread::finalize() {
     }
 
     if (!error.empty())
-        throw std::runtime_error("thread '" + m_name + "' finalizing error: " + error); // ----->
+        throw std::runtime_error("thread '" + m_name + "' finalization error: " + error); // ----->
 }
 
 

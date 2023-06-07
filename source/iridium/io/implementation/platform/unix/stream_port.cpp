@@ -7,8 +7,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "iridium/logging/logger.h"
-
 
 namespace iridium {
 namespace io {
@@ -17,10 +15,10 @@ namespace platform {
 namespace unix_ {
 
 
-CStreamPort::CStreamPort(URL const &url)
+CStreamPort::CStreamPort(URI const &uri)
 :
     m_fd            (0),
-    m_url           (URL::create(url)),
+    m_uri           (URI::create(uri)),
     m_is_opened     (false)
 {}
 
@@ -94,8 +92,14 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 int CStreamPort::getID() const {
     if (m_fd)
         return m_fd; // ----->
+    
+    throw std::runtime_error(
+        "stream port get id error: '" + (m_uri ? m_uri->getSource() : "") + "' not initialized"); // ----->
+}
 
-    throw std::runtime_error("stream port get id error: not initialized"); // ----->
+
+URI::TSharedPtr CStreamPort::getURI() const {
+    return m_uri; // ----->
 }
 
 

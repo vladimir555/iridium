@@ -12,7 +12,7 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/db/connector.h"
-#include "iridium/net/url.h"
+#include "iridium/net/uri.h"
 
 #include "connector.h"
 
@@ -32,7 +32,7 @@ class CMySQLConnector:
 public:
     DEFINE_CREATE(CMySQLConnector)
     ///
-    CMySQLConnector(net::URL const &url, std::string const &user, std::string const &password, std::string const &database = "");
+    CMySQLConnector(net::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
     ///
     virtual        ~CMySQLConnector();
     ///
@@ -46,7 +46,7 @@ private:
     ///
     ::MYSQL         m_connection;
     ///
-    net::URL m_url;
+    net::URI m_uri;
     ///
     std::string     m_user;
     ///

@@ -7,7 +7,7 @@
 
 
 //#include "iridium/io/protocol/session.h"
-//#include "iridium/io/url.h"
+//#include "iridium/io/uri.h"
 //#include "iridium/io/buffer.h"
 
 
@@ -22,14 +22,14 @@
 //class CClientSession: public ISession {
 //public:
 //    DEFINE_IMPLEMENTATION(CClientSession)
-//    CClientSession(URL const &url);
+//    CClientSession(URI const &uri);
 //    IStream::TSharedPtr getStream   (IListener::TSharedPtr const &listener) override;
 //    IPipe::TSharedPtr   getPipe     (IListener::Event::TConstSharedPtr const &event) override;
 //private:
 //    IListener::Event::TConstSharedPtr   m_event;
 //    IStreamPort::TSharedPtr             m_socket;
 //    IPipe::TSharedPtr                   m_pipe;
-//    URL                                 m_url;
+//    URI                                 m_uri;
 
 //    IStreamReader::TSharedPtr           m_request_stream;
 //    IStreamWriter::TSharedPtr           m_response_stream;

@@ -8,6 +8,7 @@
 
 #include "iridium/threading/thread.h"
 #include "iridium/assert.h"
+#include "iridium/strings.h"
 
 
 using iridium::logging::implementation::CSinkConsole;
@@ -77,7 +78,7 @@ void Logger::setConfig(config::TLogger const &config) {
         if (!sink)
             throw std::runtime_error(
                 "sink type '" + convert<std::string>(sink_config.Type.get()) +
-                " url '" + sink_config.Url.get() + "' error: not implemented");
+                " uri '" + sink_config.Url.get() + "' error: not implemented");
 
         if (sink_config.IsAsync.get())
             sink = CSinkAsync::create(sink);
@@ -116,7 +117,7 @@ void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
 
 LogStream::LogStream(TEvent::TLevel const &level)
 :
-    m_event({ level, threading::getThreadID() + " " })
+    m_event({ level, rjust(threading::getThreadID(), 5, ' ') + " "})
 {}
 
 

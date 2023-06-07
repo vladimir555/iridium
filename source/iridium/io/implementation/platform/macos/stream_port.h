@@ -15,7 +15,7 @@
 #include "../unix/stream_port.h"
 
 
-#include <Security/SecureTransport.h>
+//#include <Security/SecureTransport.h>
 
 
 namespace iridium {
@@ -30,7 +30,7 @@ typedef platform::unix_::CStreamPort CStreamPort;
 class CStreamPortSSL: public platform::unix_::CStreamPort {
 public:
     DEFINE_IMPLEMENTATION(CStreamPortSSL)
-    CStreamPortSSL(URL const &url);
+    CStreamPortSSL(URI const &uri);
     
     void initialize() override;
     void finalize() override;

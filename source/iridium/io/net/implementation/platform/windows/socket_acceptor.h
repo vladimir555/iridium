@@ -24,12 +24,12 @@
 //class CSocketAcceptor : public ISocketAcceptor {
 //public:
 //    DEFINE_IMPLEMENTATION(CSocketAcceptor)
-//    CSocketAcceptor(URL const& url, IListenerStreams::TSharedPtr const& listener = nullptr);
+//    CSocketAcceptor(URI const& uri, IListenerStreams::TSharedPtr const& listener = nullptr);
 //
 //    void initialize() override;
 //    void finalize() override;
 //
-//    URL getURL() const override;
+//    URI getURI() const override;
 //    int getID() const override;
 //
 //    ISocketStream::TSharedPtr accept() override;

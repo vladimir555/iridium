@@ -17,7 +17,7 @@
 //namespace unix {
 
 
-//CSocketPeer::CSocketPeer(int const &fd, URL::TProtocol const &protocol, IListenerStreams::TSharedPtr const &listener)
+//CSocketPeer::CSocketPeer(int const &fd, URI::TProtocol const &protocol, IListenerStreams::TSharedPtr const &listener)
 //:
 //    CSocketBase (fd, listener),
 //    m_protocol  (protocol),
@@ -27,7 +27,7 @@
 
 //CSocketPeer::CSocketPeer(
 //    int const &fd,
-//    URL::TProtocol const &protocol,
+//    URI::TProtocol const &protocol,
 //    encryption::OpenSSL::TSSL *ssl,
 //    IListenerStreams::TSharedPtr const &listener)
 //:
@@ -38,7 +38,7 @@
 
 
 //void CSocketPeer::initialize() {
-//    m_url = URL::create(getSocketURL(m_protocol));
+//    m_uri = URI::create(getSocketURI(m_protocol));
 
 //    if (m_listener && m_is_opened)
 //        m_listener->add(shared_from_this());
@@ -56,8 +56,8 @@
 //}
 
 
-//URL CSocketPeer::getURL() const {
-//    return CSocketBase::getURL();
+//URI CSocketPeer::getURI() const {
+//    return CSocketBase::getURI();
 //}
 
 

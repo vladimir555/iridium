@@ -11,7 +11,7 @@
 //namespace platform {
 //
 //
-//CSocketClient::CSocketClient(URL const& url, IListener::TSharedPtr const& listener) {
+//CSocketClient::CSocketClient(URI const& uri, IListener::TSharedPtr const& listener) {
 //    throw std::runtime_error("not implemented");
 //}
 //
@@ -23,8 +23,8 @@
 //}
 //
 //
-//URL CSocketClient::getURL() const {
-//	return URL("");
+//URI CSocketClient::getURI() const {
+//	return URI("");
 //}
 //
 //

@@ -38,7 +38,7 @@ DEFINE_ENUM(
     ONESHOT     = EV_ONESHOT,
     CLEAR       = EV_CLEAR,
     EOF_        = EV_EOF,
-    ERROR       = EV_ERROR
+    ERROR_      = EV_ERROR
 )
 
 
@@ -155,18 +155,14 @@ void CMultiplexer::finalize() {
 }
 
 
-void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
+void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer subscribing error: kqueue is not initialized"); // ----->
 
     if (!stream)
         return; // ----->
 
-    int64_t fd = 0;
-
-    std::const_pointer_cast<IStream>(stream)->initialize();
-
-    fd = stream->getID();
+    int64_t fd = stream->getID();
 
     if (fd <= 0)
         return;
@@ -177,7 +173,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
 //        LOGT << "!   map fd: " << fd;
     }
 
-//    LOGT << __FUNCTION__ << ", id: " << fd;
+    LOGT << __FUNCTION__ << "  , fd: " << fd;
     // todo: optimize uintptr_t
     auto result = write(m_pipe_add[1], &fd, 8);
 
@@ -187,15 +183,22 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
 }
 
 
-void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
+void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
+
+    if (!stream ||
+        !stream->getID())
+    {
+//        LOGW << "unsubscribe stream with null id";
+        return; // ----->
+    }
 
     int64_t fd = stream->getID();
     if (fd <= 0)
         return;
 
-//    LOGT << __FUNCTION__ << ", id: " << fd;
+    LOGT << __FUNCTION__ << ", fd: " << fd;
     auto result = write(m_pipe_del[1], &fd, 8);
 
     if (result < 0)
@@ -203,27 +206,29 @@ void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
 }
 
 
-std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
+std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     if (!m_kqueue)
         return {};
 
-    std::list<IEvent::TSharedPtr> events;
+    std::list<Event::TSharedPtr> events;
 
     auto triggered_event_count = assertOK(
          kevent(m_kqueue,
              nullptr, 0,
              m_triggered_events.data(),
              m_triggered_events.size() & std::numeric_limits<int>::max(),
-             &m_timeout),
+            &m_timeout),
          "kevent waiting event error");
 
+//    LOGT << "triggered_event_count: " << triggered_event_count;
+    
     LOCK_SCOPE();
 
     bool is_finalized = false;
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
 
-//        LOGT << "triggered_event: ident " << triggered_event.ident
+//        LOGT << __FUNCTION__ << ", id: " << triggered_event.ident << ", flags: " << TEventFlag(triggered_event.flags).convertToFlagsString();
 //             << ", flags " << TEventFlag(triggered_event.flags).convertToFlagsString()
 //             << ", filter " << (int16_t)triggered_event.filter
 //             << ", filter " << TEventFilter(triggered_event.filter)
@@ -233,12 +238,12 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
         uint16_t flags = 0;
         if (triggered_event.ident == m_pipe_add[0])
-            flags = EV_ADD | EV_CLEAR | EV_EOF;
+            flags = EV_ADD | EV_CLEAR | EV_EOF | EV_ERROR;// | EV_ONESHOT;
 
         if (triggered_event.ident == m_pipe_del[0])
             flags = EV_DELETE | EV_DISABLE;
 
-        // if flags are set theb update fds and continue
+        // if flags are set then update fds and continue
         if (flags/* && triggered_event.filter & EVFILT_WRITE*/) {
             auto    byte_count  = triggered_event.data;
 //            LOGT << "byte_count: " << byte_count;
@@ -263,60 +268,79 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
 //                LOGT << "kevent update: " << fd << " " << TEventFlag(flags).convertToFlagsString();
 
-                monitored.push_back(
-                    {
-                        .ident  = static_cast<uintptr_t>(fd),
-                        .filter = EVFILT_READ | EVFILT_WRITE,
-                        .flags  = flags,
-                        .fflags = 0,
-                        .data   = 0,
-                        .udata  = nullptr
+                if (flags & EV_DELETE) {
+//                    LOGT << "kevent monitored remove, fd: " << fd;
+                    auto stream = m_map_fd_stream[fd];
+                    if  (stream) {
+//                        LOGT << "kevent monitored remove map, fd: " << fd;
+                        m_map_fd_stream.erase(fd);
+                        events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
                     }
-                );
+                } else {
+                    monitored.push_back(
+                        {
+                            .ident  = static_cast<uintptr_t>(fd),
+                            .filter = EVFILT_READ | EVFILT_WRITE,
+                            .flags  = flags,
+                            .fflags = 0,
+                            .data   = 0,
+                            .udata  = nullptr
+                        }
+                    );
+                    auto stream = m_map_fd_stream[fd];
+                    events.push_back(Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
+                }
             }
 
             if (is_finalized)
                 break; // --->
 
+            if (monitored.empty())
+                continue; // <---
+            
             assertOK(kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr),
                 "kevent update monitored events error");
 
-            for (auto const &i: monitored) {
-                if (i.flags == (EV_DELETE | EV_DISABLE)) {
-//                    std::const_pointer_cast<IStream>(m_map_fd_stream[i.ident])->finalize();
-                    m_map_fd_stream[i.ident] = nullptr;
-    //                    LOGT << "! unmap fd: " << fd << " by event from fd: " << triggered_event.ident;
-                }
-            }
+//            for (auto const &i: monitored) {
+//                if (i.flags & EV_DELETE) {
+//                    LOGT << "kevent monitored remove, fd: " << i.ident;
+//                    auto stream = m_map_fd_stream[i.ident];
+//                    if  (stream) {
+//                        LOGT << "kevent monitored remove map, fd: " << i.ident;
+//                        m_map_fd_stream.erase(i.ident);
+//                        events.push_back(CEvent::create(stream, IEvent::TType::CLOSE));
+//                    }
+//                }
+//            }
 
 //            continue; // <---
         } else {
 //            LOGT << "get from map fd: " << triggered_event.ident;
-            auto const stream = std::const_pointer_cast<IStream>(m_map_fd_stream[triggered_event.ident]);
+            auto const stream = m_map_fd_stream[triggered_event.ident];
             if  (stream) {
-                if (triggered_event.filter == EVFILT_READ)
-                    events.push_back(CEvent::create(stream, IEvent::TType::READ));
-
-                if (triggered_event.filter == EVFILT_WRITE)
-                    events.push_back(CEvent::create(stream, IEvent::TType::WRITE));
-
-                if (triggered_event.flags & EV_ERROR)
-                    events.push_back(CEvent::create(stream, IEvent::TType::ERROR));
-
                 if (triggered_event.flags & EV_EOF) {
 //                    LOGT << "! EOF, id: " << stream->getID();
-                    events.push_back(CEvent::create(stream, IEvent::TType::CLOSE));
+//                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
+                    events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+                    continue; // <---
                 }
+
+                if (triggered_event.filter == EVFILT_READ)
+                    events.push_back(Event::create(stream, Event::TOperation::READ, Event::TStatus::BEGIN));
+
+                if (triggered_event.filter == EVFILT_WRITE)
+                    events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
+
+                if (triggered_event.flags & EV_ERROR)
+                    events.push_back(Event::create(stream, Event::TOperation::ERROR_));
+
             } else {
                 // freebsd bug
-//#ifdef FREEBSD_PLATFORM
                 LOGW << "multiplexer waiting events error: kevent not mapped event, fd: "
                      << convert<string>(triggered_event.ident);
-//#else
 //                throw std::runtime_error(
 //                    "multiplexer waiting events error: kevent not mapped event, fd: " +
 //                    convert<string>(triggered_event.ident)); // ----->
-//#endif
             }
         }
     }

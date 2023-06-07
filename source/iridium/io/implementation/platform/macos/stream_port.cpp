@@ -10,9 +10,9 @@ namespace implementation {
 namespace platform {
 
 
-CStreamPortSSL::CStreamPortSSL(URL const &url)
+CStreamPortSSL::CStreamPortSSL(URI const &uri)
 :
-    platform::unix_::CStreamPort(url)
+    platform::unix_::CStreamPort(uri)
 {}
 
 

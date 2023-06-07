@@ -12,7 +12,7 @@
 #ifdef UNIX_PLATFORM
 
 
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 #include "iridium/io/stream.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/pattern/non_copyable.h"
@@ -30,21 +30,22 @@ namespace unix_ {
 
 class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
 protected:
-    CStreamPort(URL const &url);
+    CStreamPort(URI const &uri);
     virtual ~CStreamPort() = default;
 
 public:
-    virtual void        initialize()                            override = 0;
-    virtual void        finalize()                              override = 0;
+    virtual void        initialize() override = 0;
+    virtual void        finalize() override = 0;
     size_t              write(Buffer::TSharedPtr const &buffer) override;
     Buffer::TSharedPtr  read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
-    int                 getID() const                           override;
+    int                 getID() const override;
+    URI::TSharedPtr     getURI() const override;
 
 protected:
     void                setBlockingMode(int const &socket, bool const &is_blocking);
 
     int             m_fd;
-    URL::TSharedPtr m_url;
+    URI::TSharedPtr m_uri;
     bool            m_is_opened;
     bool            m_is_blocking_mode;
 
@@ -61,8 +62,8 @@ T CStreamPort::assertOK(T const &result, std::string const &message) {
     using convertion::convert;
     using std::string;
     if (result < 0) {
-        if (m_url)
-            throw std::runtime_error(message + ": url " + convert<string>(*m_url) +
+        if (m_uri)
+            throw std::runtime_error(message + ": uri " + convert<string>(*m_uri) +
                 ", " + std::strerror(errno) + ", code " + convert<string>(errno)); // ----->
         else
             throw std::runtime_error(message +

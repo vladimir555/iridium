@@ -23,10 +23,10 @@
 //namespace implementation {
 
 
-//CClientSession::CClientSession(URL const &url)
+//CClientSession::CClientSession(URI const &uri)
 //:
 //    m_pipe  (CPipe::create()),
-//    m_url   (url)
+//    m_uri   (uri)
 //{}
 
 
@@ -34,7 +34,7 @@
 //    if (m_socket)
 //        return m_socket;
 //    else
-//        return m_socket = CSocketClient::create(m_url, listener);
+//        return m_socket = CSocketClient::create(m_uri, listener);
 //}
 
 
@@ -45,7 +45,7 @@
 ////        auto            parser = parsing::implementation::CHTTPParser::create();
 ////        request::THttp  http;
 
-////        http.Headers.Host      = *assertExists(m_url.getHost(), "url does not contain hostname");
+////        http.Headers.Host      = *assertExists(m_uri.getHost(), "uri does not contain hostname");
 ////        http.Headers.UserAgent = "iridium";
 ////        m_request_buffer       = Buffer::create(parser->compose(http.getNode()));
 //        LOGT << "create request socket";
@@ -53,21 +53,21 @@
 ////        std::string request = ""
 ////            "GET / HTTP/1.1\r\n"
 ////            "Host: example.com:443\r\n"
-////            "User-Agent: curl/7.58.0\r\n"
+////            "User-Agent: curi/7.58.0\r\n"
 ////            "Accept: */*"
 ////            "\r\n"
 ////            "\r\n";
 
 //        std::string path = "/";
-//        if (m_url.getPath())
-//            path = *m_url.getPath();
-//        std::string host = *m_url.getHost();
-//        std::string port = convertion::convert<std::string>(*m_url.getPort());
+//        if (m_uri.getPath())
+//            path = *m_uri.getPath();
+//        std::string host = *m_uri.getHost();
+//        std::string port = convertion::convert<std::string>(*m_uri.getPort());
 
 //        std::string request = ""
 //            "GET " + path + " HTTP/1.1\r\n"
 //            "Host: " + host + ":" + port + "\r\n"
-//            "User-Agent: curl/7.58.0\r\n"
+//            "User-Agent: curi/7.58.0\r\n"
 //            "Accept: */*"
 //            "\r\n"
 //            "\r\n";

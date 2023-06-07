@@ -7,8 +7,8 @@
 
 
 #include "iridium/io/client.h"
-#include "iridium/io/url.h"
-#include "iridium/io/session.h"
+#include "iridium/io/uri.h"
+#include "iridium/io/session_manager.h"
 
 
 namespace iridium {
@@ -19,7 +19,8 @@ namespace implementation {
 class CClient: public IClient {
 public:
     DEFINE_IMPLEMENTATION(CClient)
-    CClient(URL const &url, IProtocol::TSharedPtr const &protocol);
+    CClient(URI const &uri, IProtocol::TSharedPtr const &protocol);
+    
     void initialize()   override;
     void finalize()     override;
 

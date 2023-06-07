@@ -2,7 +2,7 @@
 
 #include <iridium/convertion/convert.h>
 #include <iridium/io/net/dns.h>
-#include <iridium/io/url.h>
+#include <iridium/io/uri.h>
 #include <iridium/io/protocol/http/implementation/client_session.h>
 
 
@@ -19,7 +19,7 @@ namespace test {
 
 
 //TEST(https_server) {
-//    IServer::TSharedPtr server = CServer::create(URL("http://127.0.0.1:55555"), CHTTPPeerSessionFactory::create());
+//    IServer::TSharedPtr server = CServer::create(URI("http://127.0.0.1:55555"), CHTTPPeerSessionFactory::create());
 //    server->initialize();
 //    threading::sleep(500000);
 //    server->finalize();
@@ -27,7 +27,7 @@ namespace test {
 
 
 //TEST(https_client) {
-//    IClient::TSharedPtr client = CClient::create(CClientSession::create(URL("https://example.com")));
+//    IClient::TSharedPtr client = CClient::create(CClientSession::create(URI("https://example.com")));
 //    client->initialize();
 //    threading::sleep(10000);
 //    client->finalize();
@@ -42,38 +42,37 @@ TEST(dns) {
 }
 
 
-TEST(url) {
-    using iridium::io::URL;
-    ASSERT(URL("")            , std::exception);
-    ASSERT(URL("172.16.0.64") , std::exception);
-    ASSERT(URL("55555")       , std::exception);
-    ASSERT(URL(":55555")      , std::exception);
-    ASSERT(URL("::")          , std::exception);
+TEST(uri) {
+    using iridium::io::URI;
+    ASSERT(URI("")            , std::exception);
+    ASSERT(URI("172.16.0.64") , std::exception);
+    ASSERT(URI("55555")       , std::exception);
+    ASSERT(URI(":55555")      , std::exception);
+    ASSERT(URI("::")          , std::exception);
 
-    URL url("https://172.16.0.64:55555");
+    URI uri("https://172.16.0.64:55555");
 
-    ASSERT(static_cast<bool>(url.getHost()));
-    ASSERT(static_cast<bool>(url.getIPv4()));
-    ASSERT(static_cast<bool>(url.getPort()));
-    ASSERT(static_cast<bool>(url.getProtocol()));
+    ASSERT(!uri.getHost().empty());
+    ASSERT(!uri.getIPv4().empty());
+    ASSERT( uri.getPort());
 
-    ASSERT(URL::TProtocol::HTTPS, equal, url.getProtocol());
-    ASSERT(std::vector<uint8_t>({ 172, 16, 0, 64 }), equal, *url.getIPv4());
-    ASSERT("172.16.0.64", equal, url.getIPv4AsString());
-    ASSERT(55555, equal, *url.getPort());
+    ASSERT(URI::TProtocol::HTTPS, equal, uri.getProtocol());
+//    ASSERT({ 172, 16, 0, 64 }, equal, uri.getIPv4());
+    ASSERT("172.16.0.64", equal, convert<string>(uri.getIPv4()));
+    ASSERT(55555, equal, uri.getPort());
 
-    url = convert<URL>(string("http://hostname.ru"));
-    ASSERT(static_cast<bool>(url.getHost()));
-    ASSERT("hostname.ru", equal, *url.getHost());
+    uri = convert<URI>(string("http://hostname.ru"));
+    ASSERT(!uri.getHost().empty());
+    ASSERT("hostname.ru", equal, uri.getHost());
 
-    auto path = URL("https://www.bitmex.com/api/v1").getPath();
-    ASSERT(static_cast<bool>(path));
-    ASSERT("/api/v1", equal, *path);
+    auto path = URI("https://www.bitmex.com/api/v1").getPath();
+    ASSERT(path.empty());
+    ASSERT("/api/v1", equal, path);
 
     // test dns resolver
-    ASSERT(static_cast<bool>(URL("http://ya.ru").getIPv4()));
-    ASSERT(static_cast<size_t>(7), less, URL("http://ya.ru").getIPv4AsString().size());
-    ASSERT(URL("http://ya.rur").getIPv4AsString(), std::exception);
+    ASSERT(!URI("http://ya.ru").getIPv4().empty());
+    ASSERT( static_cast<size_t>(7), less, URI("http://ya.ru").getIPv4().size());
+    ASSERT( URI("http://ya.rur").getIPv4(), std::exception);
 }
 
 

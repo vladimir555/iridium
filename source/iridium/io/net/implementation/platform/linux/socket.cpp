@@ -32,17 +32,17 @@ namespace platform {
 //// CSocketAcceptor
 //// CSocketClient
 //// CSocketPeer
-//CSocket::CSocket(URL const &url, TMode const &mode)
+//CSocket::CSocket(URI const &uri, TMode const &mode)
 //:
-//    unix::CSocket   (url, mode),
+//    unix::CSocket   (uri, mode),
 //    m_ssl           (nullptr),
 //    m_ssl_init_step (0)
 //{}
 
 
-//CSocket::CSocket(URL const &url, int const &fd, encryption::OpenSSL::TSSL *ssl)
+//CSocket::CSocket(URI const &uri, int const &fd, encryption::OpenSSL::TSSL *ssl)
 //:
-//    unix::CSocket   (url, fd),
+//    unix::CSocket   (uri, fd),
 //    m_ssl_init_step (4)
 //{
 //    m_mode  = TMode::PEER;
@@ -54,7 +54,7 @@ namespace platform {
 //    if (m_mode != TMode::PEER)
 //        unix::CSocket::initialize();
 
-//    if (m_url.getProtocol() == URL::TProtocol::HTTPS && m_mode == TMode::SERVER) {
+//    if (m_uri.getProtocol() == URI::TProtocol::HTTPS && m_mode == TMode::SERVER) {
 //        m_context   = OpenSSL::instance().createContext(true);
 
 //        OpenSSL::instance().configureContext(m_context,
@@ -66,7 +66,7 @@ namespace platform {
 
 
 //void CSocket::finalize() {
-//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
+//    if (m_uri.getProtocol() == URI::TProtocol::HTTPS) {
 //        if (m_ssl)
 //            OpenSSL::instance().releaseSSL(m_ssl);
 //        OpenSSL::instance().releaseContext(m_context);
@@ -76,7 +76,7 @@ namespace platform {
 
 
 //ISocket::TSharedPtr CSocket::accept() {
-//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
+//    if (m_uri.getProtocol() == URI::TProtocol::HTTPS) {
 //        auto socket = unix::CSocket::accept();
 //        if (!socket)
 //            return nullptr; // ----->
@@ -84,7 +84,7 @@ namespace platform {
 //        LOGT << "! " << m_is_blocking;
 //        OpenSSL::instance().acceptSSL(ssl, m_is_blocking);
 
-//        return CSocket::create(socket->getURL(), socket->getID(), ssl);
+//        return CSocket::create(socket->getURI(), socket->getID(), ssl);
 //    } else {
 //        return unix::CSocket::accept();
 //    }
@@ -93,7 +93,7 @@ namespace platform {
 
 
 //size_t CSocket::write(Buffer::TSharedPtr const &buffer) {
-//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
+//    if (m_uri.getProtocol() == URI::TProtocol::HTTPS) {
 //        if (initializeSSLAsync()) {
 //            assertExists(buffer, "write error: buffer is null");
 //            assertExists(m_ssl,  "write error: ssl is null");
@@ -107,7 +107,7 @@ namespace platform {
 
 
 //Buffer::TSharedPtr CSocket::read(size_t const &size) {
-//    if (m_url.getProtocol() == URL::TProtocol::HTTPS) {
+//    if (m_uri.getProtocol() == URI::TProtocol::HTTPS) {
 //        if (initializeSSLAsync()) {
 //            auto result = OpenSSL::instance().read(m_ssl, size);
 //            LOGT << "ssl read: " << *result;

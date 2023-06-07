@@ -11,9 +11,9 @@ namespace implementation {
 namespace platform {
 
 
-CSocketAcceptor::CSocketAcceptor(URL const &url)
+CSocketAcceptor::CSocketAcceptor(URI const &uri)
 :
-    unix_::CSocketBase(url)
+    unix_::CSocketBase(uri)
 {}
 
 
@@ -25,8 +25,8 @@ void CSocketAcceptor::finalize() {
 }
 
 
-URL CSocketAcceptor::getURL() const {
-    return *m_url;
+URI CSocketAcceptor::getURI() const {
+    return *m_uri;
 }
 
 

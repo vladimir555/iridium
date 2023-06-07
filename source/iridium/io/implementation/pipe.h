@@ -30,10 +30,10 @@ public:
         IStreamWriter::TSharedPtr const &writer
     ) override;
 
-    IStreamReader::TConstSharedPtr getReader() const override;
-    IStreamWriter::TConstSharedPtr getWriter() const override;
+    IStreamReader::TSharedPtr getReader() const override;
+    IStreamWriter::TSharedPtr getWriter() const override;
 
-    bool transmit(IEvent::TConstSharedPtr const &event) override;
+    bool transmit(Event::TConstSharedPtr const &event) override;
 
 private:
     IStreamReader::TSharedPtr       m_reader;

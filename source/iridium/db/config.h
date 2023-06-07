@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include "iridium/io/url.h"
+#include "iridium/io/uri.h"
 #include "iridium/parsing/serialization/node.h"
 #include "iridium/db/connector.h"
 
@@ -23,7 +23,7 @@ DEFINE_ROOT_NODE_BEGIN(DatebaseConnector)
         MYSQL,
         POSTGRES
     )
-    DEFINE_ATTRIBUTE(io::URL    , Url)
+    DEFINE_ATTRIBUTE(io::URI    , Url)
     DEFINE_ATTRIBUTE(TDBType    , Type)
     DEFINE_ATTRIBUTE(std::string, User)
     DEFINE_ATTRIBUTE(std::string, Password)
