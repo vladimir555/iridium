@@ -4,6 +4,7 @@
 #include "iridium/assert.h"
 
 #include "pipe.h"
+#include <algorithm>
 
 
 using iridium::threading::implementation::CAsyncQueue;

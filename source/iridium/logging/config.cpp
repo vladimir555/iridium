@@ -1,5 +1,7 @@
 #include "config.h"
 
+#include <mutex>
+
 
 using iridium::parsing::implementation::CNode;
 

@@ -41,7 +41,8 @@ public:
     void removePipe(std::string const &name) override;
     void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader) override;
     void updatePipe(std::string const &name, IStreamWriter::TSharedPtr const &writer) override;
-    void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader, IStreamWriter::TSharedPtr const &writer) override;
+    void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader,
+                                             IStreamWriter::TSharedPtr const &writer) override;
     void remove() override;
 
 private:

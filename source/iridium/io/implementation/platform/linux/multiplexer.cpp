@@ -125,7 +125,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 }
 
 
-std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
+std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     if (!m_epoll_fd)
         return {}; // ----->
 
@@ -140,11 +140,19 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
     struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
-    for (auto const &stream: m_streams_to_add->pop(false))
-        addInternal(stream);
+    std::list<Event::TSharedPtr> events;
 
-    for (auto const &stream: m_streams_to_del->pop(false))
+    for (auto const &stream: m_streams_to_add->pop(false)) {
+        addInternal(stream);
+        events.push_back(
+            Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
+    }
+
+    for (auto const &stream: m_streams_to_del->pop(false)) {
         delInternal(stream);
+        events.push_back(
+            Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
+    }
 
 //    LOGT << "wait epoll ...";
 
@@ -156,7 +164,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
 //    LOGT << "wait epoll OK: " << m_epoll_fd << " epoll count " << count;
 
-    std::list<IEvent::TSharedPtr> events;
+    
 
     for (auto i = 0; i < count; i++) {
 //        LOGT << m_epoll_fd << " epoll event: fd " << epoll_events[i].data.fd << " code " <<
@@ -169,15 +177,15 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 
         if (epoll_events[i].events & EPOLLHUP)
             events.push_back(
-                CEvent::create(m_map_fd_stream[epoll_events[i].data.fd], IEvent::TType::CLOSE));
+                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::EOF_, Event::TStatus::BEGIN));
 
         if (epoll_events[i].events & EPOLLIN)
             events.push_back(
-                CEvent::create(m_map_fd_stream[epoll_events[i].data.fd], IEvent::TType::READ));
+                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::READ, Event::TStatus::BEGIN));
 
         if (epoll_events[i].events & EPOLLOUT)
             events.push_back(
-                CEvent::create(m_map_fd_stream[epoll_events[i].data.fd], IEvent::TType::WRITE));
+                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::WRITE, Event::TStatus::BEGIN));
     }
 
     return events; // ----->

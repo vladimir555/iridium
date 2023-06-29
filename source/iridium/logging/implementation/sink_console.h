@@ -24,7 +24,7 @@ public:
 
     void initialize() override;
     void finalize() override;
-    void log(TEvent const &event) override;
+    void log(TEvent::TConstSharedPtr const &event) override;
 
 private:
     TEvent::TLevel m_level;

@@ -17,18 +17,16 @@ CSinkConsole::CSinkConsole(TEvent::TLevel const &level)
 {}
 
 
-void CSinkConsole::log(TEvent const &event) {
-    if (event.level >= m_level)
+void CSinkConsole::log(TEvent::TConstSharedPtr const &event) {
+    if (event->level >= m_level)
         cout << makeLine(event) << endl;
 }
 
 
-void CSinkConsole::initialize() {
-}
+void CSinkConsole::initialize() {}
 
 
-void CSinkConsole::finalize() {
-}
+void CSinkConsole::finalize() {}
 
 
 } // implementation
