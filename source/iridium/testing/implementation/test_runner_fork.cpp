@@ -68,9 +68,9 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     // TODO: exception handling
     while (paths_left > 0) {
-//        LOGT << "wait, paths_left: " << paths_left << " ...";
+        LOGT << "wait, paths_left: " << paths_left << " ...";
         auto results = process_result_queue->pop(m_timeout);
-//        LOGT << "wait, paths_left: " << paths_left << " OK";
+        LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 
         if  (results.empty())
             break; // --->
@@ -178,10 +178,11 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         return false; // ----->
     }
 
-//    LOGT << "\nevent:           "   <<  event->getType()
-//         << "\nfd:              "   << (event->getType() == io::IEvent::TType::OPEN ? 0 : event->getStream()->getID())
-//         << "\nprocess_state:   "   << m_process_result->state.condition
-//         << "\nbuffer:\n"           << m_buffer_output;
+    LOGT << "\nevent:           "   <<  event->operation
+         << "\nfd:              "   << (event->operation == io::Event::TOperation::OPEN ? 0 :
+                                        event->stream->getID())
+         << "\nprocess_state:   "   << m_process_result->state.condition
+         << "\nbuffer:\n"           << m_buffer_output;
 
     m_process_result->state = m_process->getState();
 
@@ -195,7 +196,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     try {
         if (
-//            m_process_result->state.condition != IProcess::TState::TCondition::RUNNING &&
+            //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
             checkOneOf(event->operation,
             io::Event::TOperation::EOF_,
             io::Event::TOperation::CLOSE,

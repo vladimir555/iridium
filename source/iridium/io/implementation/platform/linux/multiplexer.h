@@ -40,7 +40,7 @@ public:
     void    subscribe(IStream::TSharedPtr const &stream) override;
     void  unsubscribe(IStream::TSharedPtr const &stream) override;
 
-    std::list<IEvent::TSharedPtr> waitEvents() override;
+    std::list<Event::TSharedPtr> waitEvents() override;
 
 private:
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;

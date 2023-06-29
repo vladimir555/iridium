@@ -1,7 +1,6 @@
 #include "logger.h"
 
 
-#include "implementation/channel.h"
 #include "implementation/sink_console.h"
 #include "implementation/sink_file.h"
 #include "implementation/sink.h"
@@ -75,7 +74,7 @@ void Logger::setConfig(config::TLogger const &config) {
         if (sink_config.Type == config::TLogger::TSink::TSinkType::FILE)
             sink = CSinkFile::create(sink_config.Level, sink_config.Url.get());
         
-        if (!sink)
+        if(!sink)
             throw std::runtime_error(
                 "sink type '" + convert<std::string>(sink_config.Type.get()) +
                 " uri '" + sink_config.Url.get() + "' error: not implemented");
@@ -91,6 +90,7 @@ void Logger::setConfig(config::TLogger const &config) {
 
 
 config::TLogger Logger::getConfig() {
+    LOCK_SCOPE();
     if (m_config)
         return config::TLogger(m_config);
     else
@@ -98,7 +98,7 @@ config::TLogger Logger::getConfig() {
 }
 
 
-void Logger::log(TEvent const &e) {
+void Logger::log(TEvent::TConstSharedPtr const &e) {
     LOCK_SCOPE();
     for (auto const &sink: m_sinks)
         sink->log(e);
@@ -117,23 +117,23 @@ void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
 
 LogStream::LogStream(TEvent::TLevel const &level)
 :
-    m_event({ level, rjust(threading::getThreadID(), 5, ' ') + " "})
+    m_event(TEvent::create(level, rjust(threading::getThreadID(), 5, ' ') + " "))
 {}
 
 
 LogStream::~LogStream() {
-    Logger::instance().log(std::move(m_event));
+    Logger::instance().log(m_event);
 }
 
 
 LogStream const &LogStream::operator << (char const * const s) const {
-    m_event.line = m_event.line + s;
+    m_event->line += s;
     return std::move(*this); // ----->
 }
 
 
 LogStream const &LogStream::operator << (char * s) const {
-    m_event.line = m_event.line + s;
+    m_event->line += s;
     return std::move(*this); // ----->
 }
 

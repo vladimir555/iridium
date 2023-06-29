@@ -58,27 +58,28 @@ public:
    ~URI() = default;
 
     struct TIPv4: public std::array<uint8_t , 4> {
-        TIPv4() = default;
-        TIPv4(TIPv4 const &) = default;
-        TIPv4 &operator = (TIPv4 const &) = default;
-        TIPv4 &operator = (std::array<uint8_t , 4> const &);
-//        TIPv4(std::array<uint8_t , 4> const &ipv4);
+        DEFINE_CREATE(TIPv4)
     };
-    struct TIPv6: public std::array<uint16_t, 8> {};
+    struct TIPv6: public std::array<uint16_t, 8> {
+        DEFINE_CREATE(TIPv6)
+    };
     
-    typedef uint16_t    TPort;
+    typedef uint16_t
+                TPort;
     typedef std::unordered_map<std::string, std::string>
-                        TMapNameValue;
+                TMapNameValue;
 
-    TIPv4           getIPv4()       const;
-    TIPv6           getIPv6()       const;
-    TPort           getPort()       const;
-    std::string     getHost()       const;
-    std::string     getPath()       const;
-//    TMapNameValue   getArguments()  const;
-    TProtocol       getProtocol()   const;
-    std::string     getAddress()    const;
-    std::string     getSource()     const;
+    TIPv4::TConstSharedPtr
+                getIPv4()       const;
+    TIPv6::TConstSharedPtr
+                getIPv6()       const;
+    TPort       getPort()       const;
+    std::string getHost()       const;
+    std::string getPath()       const;
+    TProtocol   getProtocol()   const;
+    std::string getAddress()    const;
+    std::string getSource()     const;
+    // todo: url arguments
 
     bool operator == (URI const &uri) const;
     bool operator <  (URI const &uri) const;
@@ -91,9 +92,8 @@ private:
     std::string     m_address;
     std::string     m_arguments;
     std::shared_ptr<TIPv4> mutable m_ipv4;
-    std::shared_ptr<TIPv6> m_ipv6;
+    std::shared_ptr<TIPv6> mutable m_ipv6;
     TPort           m_port;
-    TMapNameValue   m_map_name_value;
 };
 
 

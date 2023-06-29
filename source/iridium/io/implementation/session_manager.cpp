@@ -90,7 +90,9 @@ void CSessionManager::CMultiplexerThreadHandler::finalize() {}
 
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
+        LOGT << "multiplexer wait ...";
         auto events = m_multiplexer->waitEvents();
+        LOGT << "multiplexer wait OK, events: " << events.size();
 //        m_context_worker->push(m_multiplexer->waitEvents());
         for (auto const &event: events)
             LOGT << "multiplexer event: " << event->operation << " " << event->status << " " << event->stream->getID();
@@ -193,6 +195,8 @@ CSessionManager::CContextWorkerHandler::handle(
                                      << event->operation    << " "
                                      << event->status       << " "
                                      << event->stream->getURI();
+                                event->status = Event::TStatus::END;
+                                events_to_repeat.push_back(event);
                                 break;
                         }
                         

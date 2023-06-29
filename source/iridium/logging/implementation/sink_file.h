@@ -24,17 +24,17 @@ public:
 
     void initialize() override;
     void finalize() override;
-    void log(TEvent const &event) override;
+    void log(TEvent::TConstSharedPtr const &event) override;
 
 private:
-    TEvent::TLevel m_level;
-    std::string m_file_name;
-    std::string m_file_name_original;
-    bool        m_is_rotation_by_day;
+    TEvent::TLevel  m_level;
+    std::string     m_file_name;
+    std::string     m_file_name_original;
+    bool            m_is_rotation_by_day;
     std::chrono::system_clock::time_point
-                m_last_initialization_time;
+                    m_last_initialization_time;
     io::fs::IFileStreamWriter::TSharedPtr
-                m_file_writer;
+                    m_file_writer;
 };
 
 

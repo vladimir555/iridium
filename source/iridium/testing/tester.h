@@ -65,6 +65,7 @@ void Test_##name::run()
 
 #define ASSERT_3(left, condition, right) \
 condition(left, right, std::string(#left) + " " + #condition + " " + #right, \
+iridium::convertion::convert<std::string, std::string>(__FILE__) + ":" + \
 iridium::convertion::convert<std::string, uint32_t>(__LINE__));
 
 #define ASSERT_2(func, exception) \
@@ -75,7 +76,8 @@ iridium::convertion::convert<std::string, uint32_t>(__LINE__)); }
 
 #define ASSERT_1(is_true) \
 assert_(is_true, std::string(#is_true), \
-iridium::convertion::convert<std::string, std::string>(__FILE__));
+iridium::convertion::convert<std::string, std::string>(__FILE__) + ":" + \
+iridium::convertion::convert<std::string, uint32_t>(__LINE__));
 
 #define ASSERT(...) \
     dMACRO_CHOOSER(ASSERT, __VA_ARGS__)(__VA_ARGS__)

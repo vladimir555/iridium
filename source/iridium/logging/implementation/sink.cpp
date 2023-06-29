@@ -14,7 +14,7 @@ namespace implementation {
 
 CSinkAsync::CSinkAsync(ISink::TSharedPtr const &sink)
 :
-    m_worker(CWorkerPusher<TEvent>::create("sink_async", CWorkerHandler::create(sink)))
+    m_worker(CWorkerPusher<TEvent::TConstSharedPtr>::create("sink_async", CWorkerHandler::create(sink)))
 {}
 
 
@@ -28,7 +28,7 @@ void CSinkAsync::finalize() {
 }
 
 
-void CSinkAsync::log(TEvent const &e) {
+void CSinkAsync::log(TEvent::TConstSharedPtr const &e) {
     m_worker->push(e);
 }
 

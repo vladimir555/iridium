@@ -24,10 +24,11 @@ public:
     CSinkAsync(ISink::TSharedPtr const &sink);
     void initialize() override;
     void finalize() override;
-    void log(TEvent const &event) override;
+    void log(TEvent::TConstSharedPtr const &event) override;
 
 private:
-    class CWorkerHandler: public threading::IWorkerPusher<TEvent>::IHandler {
+    typedef threading::IWorkerPusher<TEvent::TConstSharedPtr> IWorkerPusher;
+    class CWorkerHandler: public IWorkerPusher::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CWorkerHandler)
         CWorkerHandler(ISink::TSharedPtr const &sink);
@@ -35,14 +36,14 @@ private:
         void initialize() override;
         void finalize() override;
 
-        typedef threading::IWorkerPusher<TEvent>::TInputItems TInputItems;
+        typedef IWorkerPusher::TInputItems TInputItems;
         void handle(TInputItems const &e) override;
 
     private:
         ISink::TSharedPtr m_sink;
     };
     
-    threading::IWorkerPusher<TEvent>::TSharedPtr m_worker;
+    IWorkerPusher::TSharedPtr m_worker;
 };
 
 

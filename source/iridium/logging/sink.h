@@ -31,9 +31,9 @@ public:
     ///
     virtual ~ISink() = default;
     ///
-    virtual void log(TEvent const &e) = 0;
+    virtual void log(TEvent::TConstSharedPtr const &e) = 0;
     ///
-    static std::string makeLine(TEvent const &e);
+    static std::string makeLine(TEvent::TConstSharedPtr const &e);
 };
 
 

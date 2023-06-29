@@ -23,7 +23,7 @@ namespace iridium {
 /// \~english @param max_items maximum number of splits
 /// \~russian @param max_items максимальное количество разделений
 /// \~english @return string split result
-/// \~russian @return результат ращделения строки
+/// \~russian @return результат разделения строки
 std::list<std::string> split(std::string const &source, std::string const &delimiter, size_t const &max_items);
 /// \~english @brief split string to list of strings by delimeter string
 /// \~russian @brief split разделить строку на список строк при помощи строки резделителя
@@ -32,7 +32,7 @@ std::list<std::string> split(std::string const &source, std::string const &delim
 /// \~english @param delimiter delimeter string
 /// \~russian @param delimiter строка разделитель
 /// \~english @return string split result
-/// \~russian @return результат ращделения строки
+/// \~russian @return результат разделения строки
 std::list<std::string> split(std::string const &source, std::string const &delimiter);
 ///
 std::string lowerCase(std::string const &source);

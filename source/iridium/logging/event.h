@@ -9,6 +9,7 @@
 #include <string>
 
 #include "iridium/enum.h"
+#include "iridium/smart_ptr.h"
 
 
 namespace iridium {
@@ -16,6 +17,7 @@ namespace logging {
 
 
 struct TEvent {
+    DEFINE_CREATE(TEvent)
     DEFINE_ENUM(
         TLevel,
         TRACE,
@@ -25,6 +27,7 @@ struct TEvent {
         ERROR_,
         FATAL
     )
+    TEvent(TLevel const &level, std::string const &line);
     ///
     TLevel      level;
     ///

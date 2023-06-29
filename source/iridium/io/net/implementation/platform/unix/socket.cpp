@@ -69,7 +69,7 @@ void CSocketBase::open() {
     if (m_is_opened)
         throw std::runtime_error("socket open error: already opened " + convert<string>(*m_uri)); // ----->
 
-    auto ipv4       = assertComplete(m_uri->getIPv4(), "socket opening error, wrong uri " + convert<string>(*m_uri));
+    auto ipv4       = *assertExists(m_uri->getIPv4(), "socket opening error, wrong uri " + convert<string>(*m_uri));
 //    auto port       = assertComplete(m_uri->getPort(), "socket opening error, wrong uri " + convert<string>(*m_uri));
     auto port       = m_uri->getPort();
     auto protocol   = m_uri->getProtocol() == URI::TProtocol::UDP ? IPPROTO_UDP : IPPROTO_TCP;

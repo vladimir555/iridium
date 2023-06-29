@@ -143,7 +143,6 @@ void CMultiplexer::initialize() {
 
 
 void CMultiplexer::finalize() {
-//    LOGT << __FUNCTION__;
     if (!m_kqueue)
         throw std::runtime_error("multiplexer finalization error: not initialized"); // ----->
 
@@ -228,7 +227,8 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
 
-//        LOGT << __FUNCTION__ << ", id: " << triggered_event.ident << ", flags: " << TEventFlag(triggered_event.flags).convertToFlagsString();
+//        LOGT << __FUNCTION__ << ", id: " << triggered_event.ident << ", flags: "
+//             << TEventFlag(triggered_event.flags).convertToFlagsString();
 //             << ", flags " << TEventFlag(triggered_event.flags).convertToFlagsString()
 //             << ", filter " << (int16_t)triggered_event.filter
 //             << ", filter " << TEventFilter(triggered_event.filter)

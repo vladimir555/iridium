@@ -19,10 +19,10 @@ namespace iridium {
 namespace logging {
 
 
-std::string ISink::makeLine(TEvent const &e) {
+std::string ISink::makeLine(TEvent::TConstSharedPtr const &e) {
     return
         convert<string>(system_clock::now()).substr(11, string::npos) + " " +
-        convert<string>(e.level).substr(0, 1) + " " + e.line; // ----->
+        convert<string>(e->level).substr(0, 1) + " " + e->line; // ----->
 }
 
 

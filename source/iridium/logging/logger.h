@@ -13,7 +13,6 @@
 
 #include <mutex>
 
-#include "channel.h"
 #include "event.h"
 #include "sink.h"
 #include "config.h"
@@ -35,7 +34,7 @@ public:
     ///
     config::TLogger getConfig();
     ///
-    void log(TEvent const &event);
+    void log(TEvent::TConstSharedPtr const &event);
     ///
     void addCustomSink(ISink::TSharedPtr const &sink);
 
@@ -80,7 +79,7 @@ struct LogStream {
 
 private:
     ///
-    mutable TEvent m_event;
+    mutable TEvent::TSharedPtr m_event;
 };
 
 
@@ -92,28 +91,28 @@ LogStreamDummy const &LogStreamDummy::operator << (TValue) const {
 
 template<typename TValue>
 LogStream const &LogStream::operator << (TValue const &v) const {
-    m_event.line += convertion::convert<std::string>(v);
+    m_event->line += convertion::convert<std::string>(v);
     return std::move(*this); // ----->
 }
 
 
 template<typename TValue>
 LogStream const &LogStream::operator << (std::atomic<TValue> const &v) const {
-    m_event.line += convertion::convert<std::string>(static_cast<TValue>(v));
+    m_event->line += convertion::convert<std::string>(static_cast<TValue>(v));
     return std::move(*this); // ----->
 }
 
 
 template<typename TValue>
 LogStream const &LogStream::operator << (TValue * const * v) const {
-    m_event.line += v ? convertion::convert<std::string>(*v) : "nullptr";
+    m_event->line += v ? convertion::convert<std::string>(*v) : "nullptr";
     return std::move(*this); // ----->
 }
 
 
 template<typename TValue>
 LogStream const &LogStream::operator << (std::shared_ptr<TValue> const &v) const {
-    m_event.line += v ? convertion::convert<std::string>(*v) : "nullptr";
+    m_event->line += v ? convertion::convert<std::string>(*v) : "nullptr";
     return std::move(*this); // ----->
 }
 
