@@ -19,6 +19,12 @@ namespace iridium {
 namespace io {
 
 
+URI::TIPv4::TIPv4()
+:
+    std::array<uint8_t , 4>{ 0 }
+{}
+
+
 URI::URI(std::string const &source)
 :
     m_source(source)

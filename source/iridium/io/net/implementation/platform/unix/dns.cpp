@@ -24,12 +24,13 @@ namespace platform {
 
 
 URI::TIPv4 getIPv4ByHost(string const &host) {
-    auto host_entry = reinterpret_cast<in_addr const * const>(assertExists(
+    auto host_entry = assertExists(
         gethostbyname(host.c_str()),
-        "get ip by host name '" + host + "' error"));
+        "get ip by host name '" + host + "' error");
     
-    uint64_t ipv4_value = host_entry->s_addr;
-//        reinterpret_cast<in_addr const * const>((void *)host_entry->h_addr_list[0])->s_addr;
+    uint64_t ipv4_value =
+        reinterpret_cast<struct in_addr *>(
+        host_entry->h_addr_list[0])->s_addr;
 
     URI::TIPv4 ipv4;
 
