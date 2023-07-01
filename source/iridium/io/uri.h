@@ -58,6 +58,7 @@ public:
    ~URI() = default;
 
     struct TIPv4: public std::array<uint8_t , 4> {
+        TIPv4();
         DEFINE_CREATE(TIPv4)
     };
     struct TIPv6: public std::array<uint16_t, 8> {

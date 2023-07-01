@@ -63,21 +63,21 @@ TEST(uri) {
     ASSERT(55555, equal, uri.getPort());
 
     uri = convert<URI>(string("http://hostname.ru"));
-//    ASSERT(!uri.getHost().empty());
-//    ASSERT("hostname.ru", equal, uri.getHost());
+    ASSERT(!uri.getHost().empty());
+    ASSERT("hostname.ru", equal, uri.getHost());
 
-//    auto path = URI("https://www.bitmex.com/api/v1").getPath();
-//    ASSERT(path.empty());
-//    ASSERT("/api/v1", equal, path);
-//
-//    // test dns resolver
-//    auto ya_ru_ipv4             = URI("http://ya.ru").getIPv4();
-//    auto ya_ru_ipv4_expected    = URI("http://77.88.55.242").getIPv4();
-//    ASSERT(!ya_ru_ipv4);
-//    ASSERT(!ya_ru_ipv4_expected);
-//    ASSERT(*ya_ru_ipv4_expected, equal, *ya_ru_ipv4);
-//
-//    ASSERT( URI("http://ya.rur").getIPv4(), std::exception);
+    auto path = URI("https://www.bitmex.com/api/v1").getPath();
+    ASSERT(!path.empty());
+    ASSERT("/api/v1", equal, path);
+
+    // test dns resolver
+    auto ya_ru_ipv4             = URI("http://ya.ru").getIPv4();
+    auto ya_ru_ipv4_expected    = URI("http://77.88.55.242").getIPv4();
+    
+    ASSERT(static_cast<bool>(ya_ru_ipv4));
+    ASSERT(static_cast<bool>(ya_ru_ipv4_expected));
+    ASSERT(*ya_ru_ipv4_expected, equal, *ya_ru_ipv4);
+    ASSERT( URI("http://ya.rur").getIPv4(), std::exception);
 }
 
 
