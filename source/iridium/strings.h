@@ -42,6 +42,8 @@ std::string upperCase(std::string const &source);
 std::string replace(std::string const &source, std::string const &from, std::string const &to);
 ///
 std::string rjust(std::string const &source, size_t const &width, char const &symbol);
+///
+std::string ljust(std::string const &source, size_t const &width, char const &symbol);
 /// \~english @brief remove symbols from begin and end of string
 std::string trim(std::string const &source, std::string const &symbols);
 /// \~english @brief symbols ' \t\\n\r' from begin and end of string

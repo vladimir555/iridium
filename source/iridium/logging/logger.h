@@ -39,6 +39,7 @@ public:
     void addCustomSink(ISink::TSharedPtr const &sink);
 
 private:
+    ///
     friend class pattern::Singleton<Logger>;
     ///
     Logger() = default;

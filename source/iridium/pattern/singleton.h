@@ -9,28 +9,22 @@
 #include "non_copyable.h"
 #include "non_movable.h"
 
+#include <memory>
+#include <list>
+
 
 namespace iridium {
 namespace pattern {
 
 
-class Instance {
-protected:
-    static void *m_instance;
-};
-
-
-///
-/// \brief The Meyers singleton class, thread safe
-///
 template<typename TClass>
 class Singleton:
-    public Instance,
     public NonCopyable,
     public NonMovable
 {
 public:
-    virtual ~Singleton();
+    ///
+    virtual ~Singleton() = default;
     ///
     static TClass &instance();
 };
@@ -38,14 +32,12 @@ public:
 
 template<typename TClass>
 TClass &Singleton<TClass>::instance() {
-    static TClass * const instance = reinterpret_cast<TClass * const>(m_instance = new TClass());
+    static std::shared_ptr<TClass> instance;
+    
+    if (!instance)
+        instance = std::shared_ptr<TClass>(new TClass());
+
     return *instance; // ----->
-}
-
-
-template<typename TClass>
-Singleton<TClass>::~Singleton() {
-    delete reinterpret_cast<TClass *>(m_instance);
 }
 
 

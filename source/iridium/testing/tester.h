@@ -25,13 +25,14 @@ namespace testing {
 
 class Tester final: public pattern::Singleton<Tester> {
 public:
+    Tester() = default;
     virtual ~Tester() = default;
     typedef parsing::INodeType<ITest *> INodeTest;
     void add(ITest * const test, std::string const &path);
     int  run(int argc, char* argv[], std::string const &main_cpp_path);
 
 private:
-    Tester() = default;
+    
     friend class pattern::Singleton<Tester>;
     typedef std::map< std::string, ITest * > TTestList;
 

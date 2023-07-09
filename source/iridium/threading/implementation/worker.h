@@ -111,7 +111,7 @@ template<typename TItem>
 void CWorkerPusher<TItem>::finalize() {
     m_queue->interrupt();
     m_thread->finalize();
-    m_queue->interrupt();
+//    m_queue->interrupt();
 }
 
 
@@ -145,7 +145,7 @@ template<typename TItem>
 void CWorkerPopper<TItem>::finalize() {
     m_queue->interrupt();
     m_thread->finalize();
-    m_queue->interrupt();
+//    m_queue->interrupt();
 }
 
 
@@ -183,8 +183,8 @@ void CWorker<TInputItem, TOutputItem>::finalize() {
     m_input_queue->interrupt();
     m_output_queue->interrupt();
     m_thread->finalize();
-    m_output_queue->interrupt();
-    m_input_queue->interrupt();
+//    m_output_queue->interrupt();
+//    m_input_queue->interrupt();
 }
 
 

@@ -5,7 +5,7 @@ namespace iridium {
 namespace pattern {
 
 
-void *Instance::m_instance = nullptr;
+//std::list<std::shared_ptr<Instance> > Instance::m_instances;
 
 
 } // pattern

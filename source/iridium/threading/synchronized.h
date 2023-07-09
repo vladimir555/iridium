@@ -9,9 +9,18 @@
 #include "thread.h"
 #include "iridium/pattern/non_copyable.h"
 #include "iridium/pattern/non_movable.h"
+#include "iridium/convertion/convert.h"
+#include "iridium/strings.h"
+#include "iridium/platform.h"
 
 #include <mutex>
 #include <condition_variable>
+#include <iostream>
+#include <atomic>
+#include <cstdio>
+
+
+using iridium::convertion::convert;
 
 
 namespace iridium {
@@ -21,121 +30,199 @@ namespace threading {
 // ----- class definitions
 
 
-// todo: SyncFast, SyncTimedFast, SyncDebug, SyncTimedDebug with templates
-
-
-template<typename TMutex>
+template<typename TMutex, bool const is_tracing = false>
 class Synchronized {
-public:
+protected:
     Synchronized() = default;
     virtual ~Synchronized() = default;
+
     
-protected:
-    class LockedScope:
-        private pattern::NonCopyable,
-        private pattern::NonMovable
-    {
-    public:
-        LockedScope(Synchronized<TMutex> const * const sync, std::string const &path);
-        virtual ~LockedScope() = default;
-    protected:
-        std::unique_ptr< std::unique_lock<TMutex> > m_lock;
-    };
-    friend class LockedScope;
-private:
-    std::string mutable m_locked_path;
-    TMutex      mutable m_mutex;
-};
-
-
-template<typename TMutex>
-class SynchronizedTimed: public Synchronized<TMutex> {
-public:
-    SynchronizedTimed() = default;
-    virtual ~SynchronizedTimed();
     void interrupt();
-protected:
     
-    class LockedScope: public Synchronized<TMutex>::LockedScope {
-    public:
-        LockedScope(SynchronizedTimed<TMutex> const * const sync, std::string const &path);
-        LockedScope(SynchronizedTimed<TMutex> const * const sync, std::string const &path, bool);
-        virtual ~LockedScope();
-        auto getWaitingMethodLambda();
-    private:
-        SynchronizedTimed const * const m_synchronized_timed;
-        bool                            m_is_necessay_notify;
-    };
-    friend class LockedScope;
+
+    std::shared_ptr<std::unique_lock<TMutex> >
+    wait(std::string const &file, std::string const &line,
+         std::chrono::nanoseconds const &timeout = std::chrono::nanoseconds(0));
+
+
+    std::shared_ptr< std::lock_guard<TMutex> >
+    lock(std::string const &file, std::string const &line);
+    
+
 private:
-    std::condition_variable mutable m_cv;
+#ifdef BUILD_TYPE_DEBUG
+    struct TLockedPath {
+        DEFINE_CREATE(TLockedPath)
+        
+        TLockedPath(std::string const &line_, Synchronized const &sync);
+        
+        void log(std::string const &action) const;
+        
+        std::string const thread_name;
+        std::string const mutex_name;
+        std::string const line;
+    };
+    typename TLockedPath::TConstSharedPtr
+        m_locked_path;
+#endif
+    TMutex
+        m_mutex;
+    std::condition_variable
+        m_cv;
 };
 
 
-// ----- class method implementations
+// methods implementation
 
 
-template<typename TMutex>
-Synchronized<TMutex>::LockedScope::LockedScope(Synchronized<TMutex> const * const synchronized, std::string const &path) {
-    std::string lock_path = IThread::getNameStatic() + ":" + path;
-    try {
-        m_lock = std::make_unique< std::unique_lock<TMutex> >(synchronized->m_mutex);
-        synchronized->m_locked_path = std::move(lock_path);
-    } catch (std::exception const &e) {
-        throw std::runtime_error("mutex deadlock '" + synchronized->m_locked_path + "' with '" + lock_path + "': " + e.what()); // ----->
-    } catch (...) {
-        throw std::runtime_error("mutex deadlock '" + synchronized->m_locked_path + "' with '" + lock_path + "'"); // ----->
-    }
-}
-
-
-template<typename TMutex>
-SynchronizedTimed<TMutex>::~SynchronizedTimed() {
-    interrupt();
-}
-
-
-template<typename TMutex>
-void SynchronizedTimed<TMutex>::interrupt() {
+template<typename TMutex, bool const is_tracing>
+void Synchronized<TMutex, is_tracing>::interrupt() {
     m_cv.notify_all();
 }
 
 
-template<typename TMutex>
-SynchronizedTimed<TMutex>::LockedScope::LockedScope(SynchronizedTimed<TMutex> const * const synchronized, std::string const &path)
-:
-    Synchronized<TMutex>::LockedScope(synchronized, path), m_synchronized_timed(synchronized), m_is_necessay_notify(true)
-{}
+template<typename TMutex, bool const is_tracing>
+std::shared_ptr<std::unique_lock<TMutex> >
+Synchronized<TMutex, is_tracing>::wait(
+    std::string const &file, std::string const &line,
+    std::chrono::nanoseconds const &timeout)
+{
+#ifdef BUILD_TYPE_DEBUG
+    auto locked_path = TLockedPath::create(file + ":" + line, *this);
+    locked_path->log("WT");
+#endif
 
+    std::unique_lock<TMutex> *l;
+    
+    try {
+        l = new std::unique_lock<TMutex>(m_mutex);
+    } catch (std::exception const &e) {
+#ifdef BUILD_TYPE_DEBUG
+        locked_path->log("ET");
+#endif
+        throw std::runtime_error(
+            std::string("mutex lock error: ") + e.what()
+#ifdef BUILD_TYPE_DEBUG
+            + ", at\n" + locked_path->line
+#endif
+        );
+    }
 
-template<typename TMutex>
-SynchronizedTimed<TMutex>::LockedScope::LockedScope(SynchronizedTimed<TMutex> const * const synchronized, std::string const &path, bool)
-:
-    Synchronized<TMutex>::LockedScope(synchronized, path), m_synchronized_timed(synchronized), m_is_necessay_notify(false)
-{}
-
-
-template<typename TMutex>
-SynchronizedTimed<TMutex>::LockedScope::~LockedScope() {
-    if (m_is_necessay_notify)
-        m_synchronized_timed->m_cv.notify_one();
-}
-
-
-template<typename TMutex>
-auto SynchronizedTimed<TMutex>::LockedScope::getWaitingMethodLambda() {
-    return [&] (std::chrono::nanoseconds const &timeout = std::chrono::nanoseconds(0)) {
-        if (m_is_necessay_notify) {
-            return false; // ----->
-        } else {
-            if (timeout == std::chrono::nanoseconds(0)) {
-                m_synchronized_timed->m_cv.wait(*Synchronized<TMutex>::LockedScope::m_lock);
-                return true; // ----->
-            } else
-                return m_synchronized_timed->m_cv.wait_for(*Synchronized<TMutex>::LockedScope::m_lock, timeout) == std::cv_status::no_timeout; // ----->
+    std::shared_ptr< std::unique_lock<TMutex> > locker(
+        l,
+        [&] (auto locker) {
+#ifdef BUILD_TYPE_DEBUG
+            if (m_locked_path) {
+                m_locked_path->log("UT");
+                m_locked_path.reset();
+            }
+#endif
+            delete locker;
         }
-    };
+    );
+
+    bool is_locked = false;
+    
+    if (timeout == std::chrono::nanoseconds(0)) {
+        m_cv.wait(*locker);
+        is_locked = true;
+    } else {
+        is_locked = m_cv.wait_for(*locker, timeout) == std::cv_status::no_timeout;
+    }
+    
+    if (is_locked) {
+#ifdef BUILD_TYPE_DEBUG
+        if (m_locked_path)
+            throw std::runtime_error("lock mutex error:\ndeadlock\n"
+                +   locked_path->line + "\n"
+                + m_locked_path->line);
+        
+        m_locked_path = locked_path;
+        m_locked_path->log("LT");
+#endif
+        return locker;
+    }
+#ifdef BUILD_TYPE_DEBUG
+    // skip locking
+    locked_path->log("ST");
+#endif
+    return nullptr;
 }
+
+
+template<typename TMutex, bool const is_tracing>
+std::shared_ptr< std::lock_guard<TMutex> >
+Synchronized<TMutex, is_tracing>::lock(
+    std::string const &file, std::string const &line)
+{
+#ifdef BUILD_TYPE_DEBUG
+    auto locked_path = TLockedPath::create(file + ":" + line, *this);
+    locked_path->log("WM");
+#endif
+    std::lock_guard<TMutex> *l;
+    
+    try {
+        l = new std::lock_guard<TMutex>(m_mutex);
+    } catch (std::exception const &e) {
+#ifdef BUILD_TYPE_DEBUG
+        locked_path->log("EM");
+#endif
+        throw std::runtime_error(
+            std::string("mutex lock error: ") + e.what()
+#ifdef BUILD_TYPE_DEBUG
+            + ", at\n" + locked_path->line
+#endif
+        );
+    }
+
+    std::shared_ptr< std::lock_guard<TMutex> > locker(
+        l,
+        [this] (auto locker) {
+#ifdef BUILD_TYPE_DEBUG
+            m_locked_path->log("UM");
+            m_locked_path.reset();
+#endif
+            m_cv.notify_one();
+            delete locker;
+        }
+    );
+#ifdef BUILD_TYPE_DEBUG
+    if (m_locked_path)
+        throw std::runtime_error("lock mutex error:\ndeadlock\n"
+            +   locked_path->line + "\n"
+            + m_locked_path->line);
+    m_locked_path = locked_path;
+    m_locked_path->log("LM");
+#endif
+    return locker;
+}
+
+
+#ifdef BUILD_TYPE_DEBUG
+template<typename TMutex, bool const is_tracing>
+Synchronized<TMutex, is_tracing>::TLockedPath::TLockedPath(std::string const &line_, Synchronized const &sync)
+:
+    thread_name (IThread::getNameStatic()),
+    mutex_name  (8, ' '),
+    line        (line_)
+{
+    std::snprintf(const_cast<char *>(mutex_name.c_str()), mutex_name.size(), "%p", &sync.m_mutex);
+}
+
+
+template<typename TMutex, bool const is_tracing>
+void Synchronized<TMutex, is_tracing>::TLockedPath::log(std::string const &action) const {
+    if (is_tracing) {
+        std::printf("%s %s %s %s\n%s\n",
+            mutex_name.c_str(),
+            action.c_str(),
+            ljust(IThread::getNameStatic(), 32, ' ').c_str(),
+            ljust(thread_name, 32, ' ').c_str(),
+            line.c_str()
+        );
+    }
+}
+#endif
 
 
 } // threading
@@ -143,12 +230,24 @@ auto SynchronizedTimed<TMutex>::LockedScope::getWaitingMethodLambda() {
 
 
 #define LOCK_SCOPE() \
-    LockedScope _____locked_scope_____(this, __FUNCTION__)
+auto _____locked_scope_____ = this->lock(__FILE__, std::to_string(__LINE__));
 
 
-#define LOCK_SCOPE_TIMED(wait_method_name) \
-    LockedScope _____locked_scope_____(this, __FUNCTION__, true); \
-    auto wait_method_name = _____locked_scope_____.getWaitingMethodLambda()
+#define LOCK_SCOPE_WAIT(timeout) LOCK_SCOPE_WAIT_ ## timeout
+#define LOCK_SCOPE_WAIT_ \
+this->wait(__FILE__, std::to_string(__LINE__))
+#define LOCK_SCOPE_WAIT_timeout \
+this->wait(__FILE__, std::to_string(__LINE__), timeout)
+
+
+//#define WAIT2(timeout) \
+//this->wait(__FILE__, std::to_string(__LINE__), timeout)
+
+
+//#define LOCK_SCOPE_TIMED(wait_method_name) \
+//    LockedScope _____locked_scope_____(this, std::string(__FILE__) + ":" + \
+//    iridium::convertion::convert<std::string>(__LINE__), true); \
+//    auto wait_method_name = _____locked_scope_____.getWaitingMethodLambda()
 
 
 #endif // HEADER_PROTOCOL_FACTORY_BA993AE8_B05D_4A20_A8C6_38E965E820DD
