@@ -1,13 +1,10 @@
 #include <iridium/testing/tester.h>
-#include <iostream>
 #include <iridium/parsing/node.h>
 #include <iridium/parsing/implementation/node.h>
 
 
 using iridium::convertion::convert;
 using std::string;
-using std::cout;
-using std::endl;
 using iridium::parsing::implementation::CNode;
 
 

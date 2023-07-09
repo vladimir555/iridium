@@ -58,9 +58,9 @@ std::string IThread::getNameStatic() {
 
 void IThread::setNameStatic(std::string const &name) {
     if (thread_name_static.empty())
-        thread_name_static = name;
+        thread_name_static = convert<string>(std::this_thread::get_id()) + ":" + name;
     else
-        throw std::runtime_error("double set tread_name_static: '" +
+        throw std::runtime_error("static tread name setting error: twice set '" +
             thread_name_static + "' = '" + name + "'"); // ----->
 }
 

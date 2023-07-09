@@ -11,8 +11,6 @@
 
 
 using std::string;
-using std::cout;
-using std::endl;
 
 using iridium::convertion::convert;
 using iridium::parsing::implementation::CNode;

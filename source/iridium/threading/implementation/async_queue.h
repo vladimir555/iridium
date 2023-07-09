@@ -24,7 +24,7 @@ namespace implementation {
 template<typename TItem>
 class CAsyncQueue:
     public  IAsyncQueue<TItem>,
-    private SynchronizedTimed<std::mutex>,
+    private Synchronized<std::mutex, true>,
     private pattern::NonCopyable
 {
 public:
@@ -112,13 +112,20 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
-    LOCK_SCOPE_TIMED(wait);
+    if (m_is_waiting && m_is_empty && is_waiting && LOCK_SCOPE_WAIT()) {
+        m_is_empty = true;
+        return std::move(m_items); // ----->
+    }
+    return {}; // ----->
+
     
-    if (m_is_waiting && m_is_empty && is_waiting)
-        wait();
-    
-    m_is_empty = true;
-    return std::move(m_items); // ----->
+//    LOCK_SCOPE_TIMED(wait);
+//
+//    if (m_is_waiting && m_is_empty && is_waiting)
+//        wait();
+//
+//    m_is_empty = true;
+//    return std::move(m_items); // ----->
 
 //    {
 //        std::unique_lock<std::mutex> l(m_mutex);
@@ -133,13 +140,11 @@ std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
 
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout) {
-    LOCK_SCOPE_TIMED(wait);
-    
-    if (m_is_waiting && m_is_empty)
-        wait(timeout);
-    
-    m_is_empty = true;
-    return std::move(m_items); // ----->
+    if (m_is_waiting && m_is_empty && LOCK_SCOPE_WAIT(timeout)) {
+        m_is_empty = true;
+        return std::move(m_items); // ----->
+    }
+    return {}; // ----->
 
 //    {
 //        std::unique_lock<std::mutex> l(m_mutex);
@@ -157,7 +162,7 @@ std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout
 template<typename TItem>
 void CAsyncQueue<TItem>::interrupt() {
     m_is_waiting = false;
-    SynchronizedTimed::interrupt();
+    Synchronized::interrupt();
 
 //    {
 //        m_is_waiting = false;
