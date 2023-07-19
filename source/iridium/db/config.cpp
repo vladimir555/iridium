@@ -32,7 +32,7 @@ IConnector::TSharedPtr createConnector(TDatebaseConnector const &config) {
     case TDatebaseConnector::TDBType::UNKNOWN:
         throw std::runtime_error("wrong config: unknown db type"); // ----->
 #ifdef BUILD_FLAG_MYSQL
-    case TDatebaseConnector::TDBType::TType::MYSQL:
+    case TDatebaseConnector::TDBType::MYSQL:
         return CMySQLConnector::create(config.Url, config.User, config.Password, config.Database); // ----->
 #endif // BUILD_FLAG_MYSQL
 #ifdef BUILD_FLAG_POSTGRES

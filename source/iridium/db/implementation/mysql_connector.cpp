@@ -12,7 +12,7 @@
 
 using std::string;
 using std::vector;
-using iridium::net::URI;
+using iridium::io::URI;
 using iridium::convertion::convert;
 
 
@@ -79,13 +79,12 @@ CMySQLConnector::~CMySQLConnector() {
 
 
 void CMySQLConnector::initialize() {
-    string host;
-    if (m_uri.getHost())
-        host = *m_uri.getHost();
-    else
-        host = m_uri.getIPv4AsString();
+    string host = m_uri.getHost();
 
-    auto port = *m_uri.getPort();
+    if (host.empty())
+        host = m_uri.getAddress();
+
+    auto port = m_uri.getPort();
 
     auto result = mysql_real_connect(
        &m_connection, 
@@ -98,7 +97,7 @@ void CMySQLConnector::initialize() {
 
     if (!result) {
         mysql_close(&m_connection);
-        throw DBException("connect to mysql host error: " + string(mysql_error(&m_connection))); // ----->
+        throw Exception("connect to mysql host error: " + string(mysql_error(&m_connection))); // ----->
     }
     LOGI << "initialization MYSQL '" << m_uri << "' database '" << m_database << "' done";
 }
@@ -113,7 +112,7 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
     LOGD << "send sql query: " << query;
     TRows rows;
     if (mysql_query(&m_connection, query.c_str())) {
-        throw DBException("failed to send query: " + string(mysql_error(&m_connection))); // ----->
+        throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->
     } else {
         if (mysql_warning_count(&m_connection))
             LOGW << "mysql warnings:\n" << displayWarnings(&m_connection);
@@ -149,7 +148,7 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
                 rows.push_back(row);
             } else {
                 // mysql_store_result() should have returned data
-                throw DBException("failed to send query: " + string(mysql_error(&m_connection))); // ----->
+                throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->
             }
         }
     }

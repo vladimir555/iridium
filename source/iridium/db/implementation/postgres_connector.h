@@ -12,7 +12,7 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/db/connector.h"
-#include "iridium/io/net/uri.h"
+#include "iridium/io/uri.h"
 
 #include "connector.h"
 
@@ -32,7 +32,7 @@ class CPostgresConnector:
 public:
     DEFINE_CREATE(CPostgresConnector)
     ///
-    CPostgresConnector(io::net::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
+    CPostgresConnector(io::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
     ///
     virtual        ~CPostgresConnector() override;
     ///
@@ -48,7 +48,7 @@ private:
     ///
     PGconn         *m_connection;
     ///
-    io::net::URI    m_uri;
+    io::URI         m_uri;
     ///
     std::string     m_user;
     ///

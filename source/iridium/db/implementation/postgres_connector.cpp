@@ -13,7 +13,7 @@
 
 using std::string;
 using std::vector;
-using iridium::io::net::URI;
+using iridium::io::URI;
 using iridium::convertion::convert;
 using iridium::convertion::convertPtr;
 
@@ -48,11 +48,12 @@ void CPostgresConnector::initialize() {
 //        throw DBException("connect to mysql host error: " + e.what())); // ----->
 //    }
     m_connection = assertExists(PQconnectdb(string(
-        "host='"        + convertPtr(m_uri.getHost())   + "'" +
-       " port='"        + convertPtr(m_uri.getPort())   + "'" +
-       " user='"        + m_user                        + "'" +
-       " password='"    + m_password                    + "'" +
-       " dbname='"      + m_database                    + "'").c_str()), "connect to postgresql host error: null connector");
+        "host='"        + m_uri.getHost() + "'" +
+       " port='"        + convert<std::string>(m_uri.getPort()) + "'" +
+       " user='"        + m_user          + "'" +
+       " password='"    + m_password      + "'" +
+       " dbname='"      + m_database      + "'").c_str()), 
+        "connect to postgresql host error: null connector");
 
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
