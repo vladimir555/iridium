@@ -198,9 +198,6 @@
     <ClInclude Include="io\net\types.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="io\net\url.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="io\protocol\http\content_storage.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -450,9 +447,6 @@
     <ClInclude Include="io\stream_pool.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="io\url.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="io\protocol\peer_session_factory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -648,6 +642,30 @@
     <ClInclude Include="testing\test_runner.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="io\net\uri.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\uri.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\implementation\context.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\implementation\context_manager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\context.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\context_manager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\protocol.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\session_manager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp">
@@ -743,9 +761,6 @@
     <ClCompile Include="logging\event.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="logging\implementation\channel.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="logging\implementation\sink.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -831,9 +846,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\stream_factory.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="io\url.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\net\implementation\platform\windows\socket_acceptor.cpp">
@@ -960,6 +972,15 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="pattern\singleton.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\uri.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\implementation\context.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\implementation\context_manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

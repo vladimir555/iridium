@@ -10,6 +10,8 @@
 
 #include "iridium/system/process.h"
 #include "iridium/io/implementation/stream_port.h"
+#include "iridium/io/uri.h"
+
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -35,6 +37,7 @@ public:
     void finalize()     override;
 
     TID getID() const override;
+    io::URI::TSharedPtr getURI() const override;
     io::Buffer::TSharedPtr read(size_t const &size) override;
     size_t write(io::Buffer::TSharedPtr const &buffer) override;
     
@@ -50,6 +53,7 @@ private:
     //HANDLE              m_pipe_stdout_writer;
     PROCESS_INFORMATION m_process;
     OVERLAPPED mutable  m_overlapped;
+    io::URI::TSharedPtr m_uri;
 
     static std::atomic<uint64_t> m_process_counter;
 };

@@ -32,7 +32,6 @@ namespace io {
 // host + path          = address
 // path + host          = address
 
-// todo: make URI
 class URI {
 public:
     DEFINE_ENUM(

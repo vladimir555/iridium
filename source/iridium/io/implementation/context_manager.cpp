@@ -21,10 +21,10 @@ void CContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol
 IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &event) {
     LOCK_SCOPE();
 
-    if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN)
-        LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getURI();
-    else
-        LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getID();
+    //if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN)
+    //    LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getURI();
+    //else
+    //    LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getID();
     
     auto stream_context  = m_map_stream_context.find(event->stream);
     if  (stream_context != m_map_stream_context.end()) {

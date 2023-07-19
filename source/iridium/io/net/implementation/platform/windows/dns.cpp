@@ -17,7 +17,7 @@ namespace implementation {
 namespace platform {
 
 
-TIPv4 getIPv4ByHost(string const &host) {
+URI::TIPv4 getIPv4ByHost(string const &host) {
     return WSA::instance().getIPv4ByName(host); // ----->
 }
 

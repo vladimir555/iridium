@@ -34,9 +34,9 @@ class WSA: public iridium::pattern::Singleton<WSA> {
 public:
     virtual ~WSA();
 
-    TIPv4   getIPv4ByName(std::string const &name);
+    URI::TIPv4   getIPv4ByName(std::string const &name);
 
-    Buffer read(SOCKET const &socket, size_t const &size);
+    Buffer  read(SOCKET const &socket, size_t const &size);
     size_t  write(SOCKET const &socket, Buffer const &packet);
     void    close(SOCKET const &socket);
     SOCKET  connect(URI const &uri);
