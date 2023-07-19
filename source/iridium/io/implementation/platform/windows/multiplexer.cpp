@@ -69,8 +69,8 @@ void CMultiplexer::finalize() {
 }
 
 
-std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
-    std::list<IEvent::TSharedPtr> result;
+std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
+    std::list<Event::TSharedPtr> result;
 
     try {
         OVERLAPPED *overlapped                  = nullptr;
@@ -89,8 +89,8 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
                 if  (i != m_map_id_stream.end()) {
                     auto stream = i->second;
                     // todo: unknown type
-                    result.push_back(CEvent::create(stream, IEvent::TType::READ));
-                    result.push_back(CEvent::create(stream, IEvent::TType::WRITE));
+                    result.push_back(Event::create(stream, Event::TOperation::READ , Event::TStatus::END));
+                    result.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::END));
                 } else {
                     //LOGW << "wait event got unsubscribed id: " << uint64_t(completion_key);
                 }
@@ -110,7 +110,7 @@ std::list<IEvent::TSharedPtr> CMultiplexer::waitEvents() {
 }
 
 
-void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
+void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
     if (!stream) {
         //LOGW << "subscribe stream with null id";
@@ -144,7 +144,7 @@ void CMultiplexer::subscribe(IStream::TConstSharedPtr const &stream) {
 }
 
 
-void CMultiplexer::unsubscribe(IStream::TConstSharedPtr const &stream) {
+void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 
     if (!stream || !stream->getID()) {
         //LOGW << "unsubscribe stream with null id";

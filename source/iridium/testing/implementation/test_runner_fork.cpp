@@ -178,11 +178,11 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         return false; // ----->
     }
 
-    LOGT << "\nevent:           "   <<  event->operation
-         << "\nfd:              "   << (event->operation == io::Event::TOperation::OPEN ? 0 :
-                                        event->stream->getID())
-         << "\nprocess_state:   "   << m_process_result->state.condition
-         << "\nbuffer:\n"           << m_buffer_output;
+    //LOGT << "\nevent:           "   <<  event->operation
+    //     << "\nfd:              "   << (event->operation == io::Event::TOperation::OPEN ? 0 :
+    //                                    event->stream->getID())
+    //     << "\nprocess_state:   "   << m_process_result->state.condition
+    //     << "\nbuffer:\n"           << m_buffer_output;
 
     m_process_result->state = m_process->getState();
 

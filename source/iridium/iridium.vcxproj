@@ -55,6 +55,8 @@
     <ClInclude Include="enum.h" />
     <ClInclude Include="io\buffer.h" />
     <ClInclude Include="io\client.h" />
+    <ClInclude Include="io\context.h" />
+    <ClInclude Include="io\context_manager.h" />
     <ClInclude Include="io\event.h" />
     <ClInclude Include="io\fs\cache.h" />
     <ClInclude Include="io\fs\files.h" />
@@ -65,6 +67,8 @@
     <ClInclude Include="io\fs\implementation\file_stream_reader.h" />
     <ClInclude Include="io\fs\implementation\file_stream_writer.h" />
     <ClInclude Include="io\implementation\client.h" />
+    <ClInclude Include="io\implementation\context.h" />
+    <ClInclude Include="io\implementation\context_manager.h" />
     <ClInclude Include="io\implementation\event.h" />
     <ClInclude Include="io\implementation\listener.h" />
     <ClInclude Include="io\implementation\multiplexer.h" />
@@ -134,8 +138,9 @@
     <ClInclude Include="io\net\implementation\socket_server_acceptor.h" />
     <ClInclude Include="io\net\socket.h" />
     <ClInclude Include="io\net\types.h" />
-    <ClInclude Include="io\net\url.h" />
+    <ClInclude Include="io\net\uri.h" />
     <ClInclude Include="io\pipe.h" />
+    <ClInclude Include="io\protocol.h" />
     <ClInclude Include="io\protocol\http\content_storage.h" />
     <ClInclude Include="io\protocol\http\implementation\acceptor_session.h" />
     <ClInclude Include="io\protocol\http\implementation\client_session.h" />
@@ -153,12 +158,13 @@
     <ClInclude Include="io\protocol\session.h" />
     <ClInclude Include="io\server.h" />
     <ClInclude Include="io\session.h" />
+    <ClInclude Include="io\session_manager.h" />
     <ClInclude Include="io\stream.h" />
     <ClInclude Include="io\stream_factory.h" />
     <ClInclude Include="io\stream_pool.h" />
     <ClInclude Include="io\stream_splitter.h" />
     <ClInclude Include="io\transmitter.h" />
-    <ClInclude Include="io\url.h" />
+    <ClInclude Include="io\uri.h" />
     <ClInclude Include="iridium\framework.h" />
     <ClInclude Include="iridium\pch.h" />
     <ClInclude Include="items.h" />
@@ -262,6 +268,8 @@
     <ClCompile Include="io\fs\implementation\file_stream_reader.cpp" />
     <ClCompile Include="io\fs\implementation\file_stream_writer.cpp" />
     <ClCompile Include="io\implementation\client.cpp" />
+    <ClCompile Include="io\implementation\context.cpp" />
+    <ClCompile Include="io\implementation\context_manager.cpp" />
     <ClCompile Include="io\implementation\event.cpp" />
     <ClCompile Include="io\implementation\pipe.cpp" />
     <ClCompile Include="io\implementation\platform\freebsd\multiplexer.cpp" />
@@ -300,10 +308,9 @@
     <ClCompile Include="io\protocol\http\response.cpp" />
     <ClCompile Include="io\stream.cpp" />
     <ClCompile Include="io\stream_factory.cpp" />
-    <ClCompile Include="io\url.cpp" />
+    <ClCompile Include="io\uri.cpp" />
     <ClCompile Include="logging\config.cpp" />
     <ClCompile Include="logging\event.cpp" />
-    <ClCompile Include="logging\implementation\channel.cpp" />
     <ClCompile Include="logging\implementation\sink.cpp" />
     <ClCompile Include="logging\implementation\sink_console.cpp" />
     <ClCompile Include="logging\implementation\sink_file.cpp" />
@@ -324,13 +331,8 @@
     <ClCompile Include="pattern\observer.cpp" />
     <ClCompile Include="pattern\singleton.cpp" />
     <ClCompile Include="strings.cpp" />
-    <ClCompile Include="system\implementation\platform\emscripten\process.cpp" />
-    <ClCompile Include="system\implementation\platform\freebsd\process.cpp" />
-    <ClCompile Include="system\implementation\platform\linux\process.cpp" />
-    <ClCompile Include="system\implementation\platform\macos\process.cpp" />
     <ClCompile Include="system\implementation\platform\unix\process.cpp" />
     <ClCompile Include="system\implementation\platform\windows\process.cpp" />
-    <ClCompile Include="system\implementation\process.cpp" />
     <ClCompile Include="system\process.cpp" />
     <ClCompile Include="system\shell.cpp" />
     <ClCompile Include="system\terminator.cpp" />
@@ -342,7 +344,6 @@
     <ClCompile Include="threading\implementation\thread.cpp" />
     <ClCompile Include="threading\implementation\worker.cpp" />
     <ClCompile Include="threading\implementation\worker_pool.cpp" />
-    <ClCompile Include="threading\synchronized.cpp" />
     <ClCompile Include="threading\thread.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

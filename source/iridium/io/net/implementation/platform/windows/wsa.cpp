@@ -41,9 +41,9 @@ namespace implementation {
 namespace platform {
 
 
-TIPv4 WSA::getIPv4ByName(std::string const &name) {
+URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
     struct addrinfo hints = { 0 }, *servinfo = nullptr;
-    TIPv4           ipv4;
+    URI::TIPv4      ipv4;
 
     hints.ai_family     = AF_UNSPEC;    // use AF_INET6 to force IPv6
     hints.ai_socktype   = SOCK_STREAM;
@@ -55,13 +55,13 @@ TIPv4 WSA::getIPv4ByName(std::string const &name) {
             static_cast<in_addr>(reinterpret_cast<struct sockaddr_in *>
             (servinfo->ai_addr)->sin_addr).s_addr;
 
-        ipv4.push_back(ipv4_value & 0xFF);
-        ipv4_value = ipv4_value >> 8;
-        ipv4.push_back(ipv4_value & 0xFF);
-        ipv4_value = ipv4_value >> 8;
-        ipv4.push_back(ipv4_value & 0xFF);
-        ipv4_value = ipv4_value >> 8;
-        ipv4.push_back(ipv4_value & 0xFF);
+        ipv4[0]     = ipv4_value &  0xFF;
+        ipv4_value  = ipv4_value >> 8;
+        ipv4[1]     = ipv4_value &  0xFF;
+        ipv4_value  = ipv4_value >> 8;
+        ipv4[2]     = ipv4_value &  0xFF;
+        ipv4_value  = ipv4_value >> 8;
+        ipv4[3]     = ipv4_value &  0xFF;
 
         freeaddrinfo(servinfo);
     };
@@ -111,7 +111,7 @@ SOCKET WSA::connect(URI const &uri) {
     address.sin_family  = AF_INET;
     auto a = (ipv4[0] << 24) | (ipv4[1] << 16) | (ipv4[2] << 8) | ipv4[3];
     address.sin_addr    = *(struct in_addr *)&a;
-    address.sin_port    = *uri.getPort();
+    address.sin_port    = uri.getPort();
 
     //if (uri.getProtocol() && *m_uri.getProtocol() == URI::TProtocol::UDP)
     //    address.ai_protocol   = IPPROTO_UDP;
@@ -120,7 +120,7 @@ SOCKET WSA::connect(URI const &uri) {
 
     struct addrinfo *address_result = nullptr;
     // resolve the server address and port
-    assertEQ(::getaddrinfo(nullptr, convert<string>(*uri.getPort()).c_str(), reinterpret_cast<ADDRINFOA *>(&address), &address_result), 0, "socket getaddrinfo error");
+    assertEQ(::getaddrinfo(nullptr, convert<string>(uri.getPort()).c_str(), reinterpret_cast<ADDRINFOA *>(&address), &address_result), 0, "socket getaddrinfo error");
     // create a SOCKET for connecting to server
     auto socket = assertNE(::socket(address_result->ai_family, address_result->ai_socktype, address_result->ai_protocol), INVALID_SOCKET, "socket error");
 
@@ -138,7 +138,7 @@ SOCKET WSA::listen(URI const &uri) {
 
     address.sin_family      = AF_INET;
     address.sin_addr.s_addr = htonl(INADDR_ANY);
-    address.sin_port        = htons(*uri.getPort());
+    address.sin_port        = htons(uri.getPort());
 
     assertNE(::bind  (listen_socket, (PSOCKADDR)&address, sizeof(address)), SOCKET_ERROR, "wsa socket bind error");
     assertEQ(::listen(listen_socket, SOMAXCONN), 0, "socket listen error");

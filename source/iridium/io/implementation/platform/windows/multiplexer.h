@@ -27,9 +27,9 @@ public:
 
     void initialize() override;
     void finalize() override;
-    std::list<IEvent::TSharedPtr> waitEvents() override;
-    void subscribe(IStream::TConstSharedPtr const &stream) override;
-    void unsubscribe(IStream::TConstSharedPtr const &stream) override;
+    std::list<Event::TSharedPtr> waitEvents() override;
+    void   subscribe(IStream::TSharedPtr const &stream) override;
+    void unsubscribe(IStream::TSharedPtr const &stream) override;
 
 private:
     HANDLE m_iocp;

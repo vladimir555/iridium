@@ -112,8 +112,8 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
     assertExists(m_reader, "pipe: reader does not exists");
     assertExists(m_writer, "pipe: writer does not exists");
 
-    LOGT << "pipe transmit, " << event->status << " " << event->operation << " " << event->stream->getID()
-         << ": " << m_reader->getID() << " -> " << m_writer->getID();
+    //LOGT << "pipe transmit, " << event->status << " " << event->operation << " " << event->stream->getID()
+    //     << ": " << m_reader->getID() << " -> " << m_writer->getID();
 
     bool result = false;
 

@@ -72,7 +72,7 @@ std::list<Event::TSharedPtr> CContext::checkOutdatedStreams() {
 bool CContext::update(Event::TSharedPtr const &event) {
     if (!m_protocol)
         return true; // ----->
-    LOGT << "context::update, event: " << event->operation << " " << event->status << " " << event->stream->getID();
+    //LOGT << "context::update, event: " << event->operation << " " << event->status << " " << event->stream->getID();
     
     if (event->operation == Event::TOperation::OPEN)
         m_map_stream_pipe[event->stream];
@@ -82,7 +82,7 @@ bool CContext::update(Event::TSharedPtr const &event) {
     if (event->operation    == Event::TOperation::CLOSE &&
         event->status       == Event::TStatus::END)
     {
-        LOGT << "auto remove pipe";
+        //LOGT << "auto remove pipe";
         removeStream(event->stream, false);
         if (auto pipe = m_map_stream_pipe[event->stream])
             removePipe(pipe);
@@ -95,7 +95,7 @@ bool CContext::update(Event::TSharedPtr const &event) {
 bool CContext::transmit(Event::TSharedPtr const &event) {
     if (!m_protocol)
         return false; // ----->
-    LOGT << "context::transmit, event: " << event->operation << " " << event->status << " " << event->stream->getID();
+    //LOGT << "context::transmit, event: " << event->operation << " " << event->status << " " << event->stream->getID();
     return assertExists(m_map_stream_pipe[event->stream], "context transmitting error: pipe not found")->transmit(event);
 }
 
@@ -176,25 +176,25 @@ void CContext::updatePipe(
     
     if (m_map_stream_pipe.find(reader) == m_map_stream_pipe.end() && reader && reader->getURI()) {
         m_events->push(Event::create(reader, Event::TOperation::OPEN, Event::TStatus::BEGIN));
-        LOGT << "update pipe: event open, id: " << reader->getID();
+        //LOGT << "update pipe: event open, id: " << reader->getID();
     }
     
     else
         
     if (reader && reader->getURI()) {
-        LOGT << "update pipe: event read, id: " << reader->getID();
+        //LOGT << "update pipe: event read, id: " << reader->getID();
         m_events->push(Event::create(reader, Event::TOperation::READ, Event::TStatus::BEGIN));
     }
 
     if (m_map_stream_pipe.find(writer) == m_map_stream_pipe.end() && writer && writer->getURI()) {
         m_events->push(Event::create(writer, Event::TOperation::OPEN,  Event::TStatus::BEGIN));
-        LOGT << "update pipe: event open, id: " << writer->getID();
+        //LOGT << "update pipe: event open, id: " << writer->getID();
     }
     
     else
     
     if (writer && writer->getURI()) {
-        LOGT << "update pipe: event write, id: " << writer->getID();
+        //LOGT << "update pipe: event write, id: " << writer->getID();
         m_events->push(Event::create(writer, Event::TOperation::WRITE, Event::TStatus::BEGIN));
     }
 

@@ -57,7 +57,8 @@ CProcessStream::CProcessStream(
     m_file_stdout_writer    (nullptr),
     m_pipe_stdout_reader    (nullptr),
     m_process               { 0 },
-    m_overlapped            { 0 }
+    m_overlapped            { 0 },
+    m_uri                   (io::URI::create("process://" + m_app + " " + m_args))
 {}
 
 
@@ -213,6 +214,11 @@ IProcess::TState CProcessStream::getState() {
     } catch (std::exception const& e) {
         throw std::runtime_error("process '" + m_command_line + "' get state error: " + e.what()); // ----->
     }
+}
+
+
+io::URI::TSharedPtr CProcessStream::getURI() const {
+    return m_uri;
 }
 
 

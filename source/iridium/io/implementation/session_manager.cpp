@@ -94,8 +94,8 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
         auto events = m_multiplexer->waitEvents();
         LOGT << "multiplexer wait OK, events: " << events.size();
 //        m_context_worker->push(m_multiplexer->waitEvents());
-        for (auto const &event: events)
-            LOGT << "multiplexer event: " << event->operation << " " << event->status << " " << event->stream->getID();
+        //for (auto const &event: events)
+        //    LOGT << "multiplexer event: " << event->operation << " " << event->status << " " << event->stream->getID();
         m_context_worker->push(events);
         m_context_worker->push(m_context_manager->checkOutdatedStreams());
     }
@@ -224,10 +224,10 @@ CSessionManager::CContextWorkerHandler::handle(
                                 case Event::TOperation::EOF_:
                                     break;
                                 default:
-                                    LOGT << "unhandled event: "
-                                         << event->operation    << " "
-                                         << event->status       << " "
-                                         << event->stream->getURI();
+                                    //LOGT << "unhandled event: "
+                                    //     << event->operation    << " "
+                                    //     << event->status       << " "
+                                    //     << event->stream->getURI();
                                     break;
                             }
                         else {
