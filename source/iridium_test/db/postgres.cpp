@@ -10,7 +10,7 @@
 
 
 using iridium::db::implementation::CPostgresConnector;
-using iridium::io::net::URI;
+using iridium::io::URI;
 using iridium::db::config::TDatebaseConnector;
 
 

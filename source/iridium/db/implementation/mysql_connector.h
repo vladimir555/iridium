@@ -12,7 +12,7 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/db/connector.h"
-#include "iridium/net/uri.h"
+#include "iridium/io/uri.h"
 
 #include "connector.h"
 
@@ -26,13 +26,13 @@ namespace implementation {
 
 
 class CMySQLConnector: 
-    public IDBConnector,
+    public IConnector,
     public CConnector
 {
 public:
     DEFINE_CREATE(CMySQLConnector)
     ///
-    CMySQLConnector(net::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
+    CMySQLConnector(io::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
     ///
     virtual        ~CMySQLConnector();
     ///
@@ -46,7 +46,7 @@ private:
     ///
     ::MYSQL         m_connection;
     ///
-    net::URI m_uri;
+    io::URI         m_uri;
     ///
     std::string     m_user;
     ///
