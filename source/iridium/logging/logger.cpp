@@ -81,6 +81,7 @@ void Logger::setConfig(config::TLogger const &config) {
 
         if (sink_config.IsAsync.get())
             sink = CSinkAsync::create(sink);
+        
         sink->initialize();
         m_sinks.push_back(sink);
     }

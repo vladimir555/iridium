@@ -85,6 +85,7 @@ iridium::convertion::convert<std::string, uint32_t>(__LINE__));
 
 #define IMPLEMENT_TEST_MAIN() \
 int main(int argc, char* argv[]) { \
+    std::printf("main thread: %s\n", iridium::threading::IThread::getNameStatic().c_str()); \
     return iridium::testing::Tester::instance().run(argc, argv, std::string(__FILE__)); \
 }
 

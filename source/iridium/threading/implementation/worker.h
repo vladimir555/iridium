@@ -27,7 +27,7 @@ public:
     typedef typename IAsyncQueuePusher<TItem>::TItems   TItems;
     typedef typename IWorkerPusher<TItem>::IHandler     IHandler;
 
-    CWorkerPusher(std::string const &name, typename IWorkerPusher<TItem>::IHandler::TSharedPtr const &handler);
+    CWorkerPusher(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;
@@ -36,8 +36,10 @@ public:
     size_t push(TItems const &items) override;
 
 private:
-    typename IAsyncQueue<TItem>::TSharedPtr m_queue;
-    IThread::TSharedPtr                     m_thread;
+    typename IAsyncQueue<TItem>::TSharedPtr
+        m_queue;
+    IThread::TSharedPtr
+        m_thread;
 };
 
 
@@ -49,7 +51,7 @@ public:
     typedef typename IAsyncQueuePopper<TItem>::TItems   TItems;
     typedef typename IWorkerPopper<TItem>::IHandler     IHandler;
 
-    CWorkerPopper(std::string const &name, typename IWorkerPopper<TItem>::IHandler::TSharedPtr const &handler);
+    CWorkerPopper(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;
@@ -58,8 +60,10 @@ public:
     TItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:
-    typename IAsyncQueue<TItem>::TSharedPtr m_queue;
-    IThread::TSharedPtr                     m_thread;
+    typename IAsyncQueue<TItem>::TSharedPtr
+        m_queue;
+    IThread::TSharedPtr
+        m_thread;
 };
 
 
@@ -72,21 +76,24 @@ public:
     typedef typename IAsyncQueuePusher<TOutputItem>::TItems     TOutputItems;
     typedef typename IWorker<TInputItem, TOutputItem>::IHandler IHandler;
 
-    CWorker(std::string const &name, typename IWorker<TInputItem, TOutputItem>::IHandler::TSharedPtr const &handler);
+    CWorker(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
     void initialize() override;
     void finalize() override;
 
-    size_t push(TInputItem  const &item)  override;
+    size_t push(TInputItem  const &item) override;
     size_t push(TInputItems const &items) override;
 
     TOutputItems pop(bool const &is_do_wait) override;
     TOutputItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:
-    typename IAsyncQueue<TInputItem>::TSharedPtr    m_input_queue;
-    typename IAsyncQueue<TOutputItem>::TSharedPtr   m_output_queue;
-    IThread::TSharedPtr                             m_thread;
+    typename IAsyncQueue<TInputItem>::TSharedPtr
+        m_input_queue;
+    typename IAsyncQueue<TOutputItem>::TSharedPtr
+        m_output_queue;
+    IThread::TSharedPtr
+        m_thread;
 };
 
 
@@ -94,7 +101,7 @@ private:
 
 
 template<typename TItem>
-CWorkerPusher<TItem>::CWorkerPusher(std::string const &name, typename IWorkerPusher<TItem>::IHandler::TSharedPtr const &handler)
+CWorkerPusher<TItem>::CWorkerPusher(std::string const &name, typename IHandler::TSharedPtr const &handler)
 :
     m_queue     (CAsyncQueue<TItem>::create()),
     m_thread    (CThread::create(name, CWorkerPusherRunnable<TItem>::create(handler, m_queue)))
@@ -111,7 +118,7 @@ template<typename TItem>
 void CWorkerPusher<TItem>::finalize() {
     m_queue->interrupt();
     m_thread->finalize();
-//    m_queue->interrupt();
+    m_queue->interrupt();
 }
 
 
@@ -128,7 +135,7 @@ size_t CWorkerPusher<TItem>::push(TItems const &items) {
 
 
 template<typename TItem>
-CWorkerPopper<TItem>::CWorkerPopper(std::string const &name, typename IWorkerPopper<TItem>::IHandler::TSharedPtr const &handler)
+CWorkerPopper<TItem>::CWorkerPopper(std::string const &name, typename IHandler::TSharedPtr const &handler)
 :
     m_queue     (CAsyncQueue<TItem>::create()),
     m_thread    (CThread::create(name, CWorkerPopperRunnable<TItem>::create(handler, m_queue)))
@@ -145,7 +152,7 @@ template<typename TItem>
 void CWorkerPopper<TItem>::finalize() {
     m_queue->interrupt();
     m_thread->finalize();
-//    m_queue->interrupt();
+    m_queue->interrupt();
 }
 
 
@@ -164,7 +171,7 @@ typename CWorkerPopper<TItem>::TItems CWorkerPopper<TItem>::pop(std::chrono::nan
 template<typename TInputItem, typename TOutputItem>
 CWorker<TInputItem, TOutputItem>::CWorker(
     std::string const &name,
-    typename IWorker<TInputItem, TOutputItem>::IHandler::TSharedPtr const &handler)
+    typename IHandler::TSharedPtr const &handler)
 :
     m_input_queue   (CAsyncQueue<TInputItem>::create()),
     m_output_queue  (CAsyncQueue<TOutputItem>::create()),
@@ -183,32 +190,48 @@ void CWorker<TInputItem, TOutputItem>::finalize() {
     m_input_queue->interrupt();
     m_output_queue->interrupt();
     m_thread->finalize();
-//    m_output_queue->interrupt();
-//    m_input_queue->interrupt();
+    m_output_queue->interrupt();
+    m_input_queue->interrupt();
 }
 
 
 template<typename TInputItem, typename TOutputItem>
 size_t CWorker<TInputItem, TOutputItem>::push(TInputItem const &item) {
-    return m_input_queue->push(item);
+//    return m_input_queue->push(item);
+//    std::printf("worker push item ...\n");
+    auto result = m_input_queue->push(item);
+//    std::printf("worker push item OK\n");
+    return result;
 }
 
 
 template<typename TInputItem, typename TOutputItem>
 size_t CWorker<TInputItem, TOutputItem>::push(TInputItems const &items) {
-    return m_input_queue->push(items);
+//    return m_input_queue->push(items);
+//    std::printf("worker push items ...\n");
+    auto result = m_input_queue->push(items);
+//    std::printf("worker push items OK\n");
+    return result;
 }
 
 
 template<typename TInputItem, typename TOutputItem>
 typename CWorker<TInputItem, TOutputItem>::TOutputItems CWorker<TInputItem, TOutputItem>::pop(bool const &is_do_wait) {
-    return m_output_queue->pop(is_do_wait);
+//    return m_output_queue->pop(is_do_wait);
+//    std::printf("worker pop wait ...\n");
+    auto result = m_input_queue->pop(is_do_wait);
+//    std::printf("worker pop wait OK\n");
+    return result;
 }
 
 
 template<typename TInputItem, typename TOutputItem>
 typename CWorker<TInputItem, TOutputItem>::TOutputItems CWorker<TInputItem, TOutputItem>::pop(std::chrono::nanoseconds const &timeout) {
-    return m_output_queue->pop(timeout);
+//    return m_output_queue->pop(timeout);
+//    std::printf("worker pop timeout ...\n");
+    auto result = m_input_queue->pop(timeout);
+//    std::printf("worker pop timeout OK\n");
+    return result;
 }
 
 
