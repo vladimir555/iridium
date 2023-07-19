@@ -102,7 +102,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
             //}
             TCmdArgs {
                 TCmdArgs::TCommand::RUN,
-                TCmdArgs::TMode::PARALLEL,
+                TCmdArgs::TMode::RAW,
                 TCmdArgs::TPrintResult::UNKNOWN,
                 std::chrono::minutes(1),
                 args[0],
@@ -183,7 +183,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     {
         auto config = logging::config::createDefault();
-        config.Sink.begin()->IsAsync = true;
+        config.Sink.begin()->IsAsync = false;
         logging::setConfig(config);
     }
     

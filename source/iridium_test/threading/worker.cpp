@@ -40,13 +40,13 @@ private:
             processed++;
             sum += i;
             result.push_back(sum);
-            sleep(1);
+            sleep(10);
         }
         return result;
     }
 
     void initialize() override {}
-    void finalize() override {}
+    void finalize()   override {}
 };
 
 
@@ -60,21 +60,27 @@ namespace threading {
 TEST(worker) {
     IWorker<int>::TSharedPtr worker = CWorker<int>::create("worker", CWorkerHandler::create());
 
-    processed = 0;
-    sum = 0;
-    int const count = 100;
+    processed           = 0;
+    sum                 = 0;
+    int const count     = 100;
     int const count_sum = 4950;
 
     worker->initialize();
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < count; i++) {
+//        std::printf("worker->push, i = %i ...", i);
+//        LOGT << "push i = " << i;
         worker->push(i);
+    }
 
-    for (int i = 0; i < 10 && processed < count; i++)
+    for (int i = 0; i < count && processed < count; i++) {
+//        LOGT << "processed = " << i;
         sleep(100);
+    }
 
     worker->finalize();
 
+//    LOGT << processed << " equal " << count;
     ASSERT(processed, equal, count);
     ASSERT(sum, equal, count_sum);
 
@@ -92,7 +98,7 @@ TEST(worker_pool) {
     // global vars
     processed = 0;
     sum = 0;
-    
+
     int const count = 100;
     int const count_sum = 4950;
 
@@ -112,7 +118,7 @@ TEST(worker_pool) {
         result.splice(result.end(), items);
     }
 //    LOGT << "stop";
-    
+
     worker->finalize();
 
     ASSERT(processed, equal     , result.size());

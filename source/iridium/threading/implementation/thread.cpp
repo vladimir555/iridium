@@ -122,9 +122,9 @@ void CThread::run(
         is_started = false;
         status_stop->push("");
     } catch (std::exception &e) {
-        error = "thread '" + name + "' stopped by error: " + e.what();
+        error = "thread '" + IThread::getNameStatic() + "' stopped by error: " + e.what();
     } catch (...) {
-        error = "thread '" + name + "' stopped by error: unknown";
+        error = "thread '" + IThread::getNameStatic() + "' stopped by error: unknown";
     }
     if (!error.empty()) {
         if (is_started)
