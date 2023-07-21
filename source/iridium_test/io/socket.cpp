@@ -44,7 +44,9 @@ TEST(dns) {
 
 TEST(uri) {
     using iridium::io::URI;
-    ASSERT(URI("")            , std::exception);
+    ASSERT("localhost", equal, URI("localhost").getPath());
+
+    ASSERT(URI("")                  , std::exception);
 //    ASSERT(URI("172.16.0.64") , std::exception); // default type is file
 //    ASSERT(URI("55555")       , std::exception);
     ASSERT(URI("htp://:55555")      , std::exception);
