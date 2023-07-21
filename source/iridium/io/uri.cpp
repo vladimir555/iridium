@@ -77,7 +77,14 @@ URI::URI(std::string const &source)
         if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE)) {
             // path/host + args
             m_arguments = extractTokens(source, PROCESS_ARGUMENT_DELIMITER, m_address);
-            m_host      = split(m_address, PROCESS_ARGUMENT_DELIMITER).back();
+            if (m_address.empty())
+                m_address = std::move(m_arguments);
+            auto tokens = split(m_address, PROCESS_ARGUMENT_DELIMITER);
+            m_path = m_address = tokens.front();
+            if (tokens.size() == 2)
+                m_arguments = tokens.back();
+            
+            m_host = split(m_path, PATH_DELIMITER).back();
         } else {
             string login;
             // user:pass + host:port/path?args
