@@ -418,7 +418,7 @@ template<>
 uint16_t convert(string const &value) {
     auto result = convert<uint32_t>(value);
     if (result > UINT16_MAX)
-        throw runtime_error("convert '" + value + "' to uint8 error"); // ----->
+        throw runtime_error("convert '" + value + "' to uint16 error"); // ----->
     return static_cast<uint16_t>(result); // ----->
 }
 

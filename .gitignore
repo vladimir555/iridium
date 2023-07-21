@@ -19,3 +19,4 @@ CMakeLists.txt.*
 /html
 .DS_Store
 .vscode
+cpp.hint

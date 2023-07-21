@@ -666,6 +666,9 @@
     <ClInclude Include="io\session_manager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="db\factory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp">
@@ -824,9 +827,6 @@
     <ClCompile Include="threading\implementation\worker.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="threading\synchronized.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="threading\thread.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -935,25 +935,10 @@
     <ClCompile Include="pattern\container.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="system\implementation\platform\emscripten\process.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="system\implementation\platform\freebsd\process.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="system\implementation\platform\linux\process.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="system\implementation\platform\macos\process.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="system\implementation\platform\unix\process.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="system\implementation\platform\windows\process.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="system\implementation\process.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="system\process.cpp">
@@ -983,5 +968,11 @@
     <ClCompile Include="io\implementation\context_manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="db\factory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

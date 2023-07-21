@@ -7,6 +7,7 @@
 
 
 #include "iridium/pattern/non_copyable.h"
+#include "iridium/db/config.h"
 
 
 namespace iridium {
@@ -16,8 +17,11 @@ namespace implementation {
 
 class CConnector : public pattern::NonCopyable {
 public:
-    CConnector() = default;
+    CConnector(config::TDatebase const &config);
     virtual ~CConnector() = default;
+
+protected:
+    config::TDatebase m_config;
 };
 
 

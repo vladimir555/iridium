@@ -32,7 +32,7 @@ class CPostgresConnector:
 public:
     DEFINE_CREATE(CPostgresConnector)
     ///
-    CPostgresConnector(io::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
+    CPostgresConnector(config::TDatebase const &config);
     ///
     virtual        ~CPostgresConnector() override;
     ///
@@ -47,14 +47,6 @@ private:
     void            executeCommand(std::string const &command);
     ///
     PGconn         *m_connection;
-    ///
-    io::URI         m_uri;
-    ///
-    std::string     m_user;
-    ///
-    std::string     m_password;
-    ///
-    std::string     m_database;
 };
 
 

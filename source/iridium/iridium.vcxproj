@@ -53,6 +53,7 @@
     <ClInclude Include="encryption\openssl.h" />
     <ClInclude Include="encryption\ssl.h" />
     <ClInclude Include="enum.h" />
+    <ClInclude Include="db\factory.h" />
     <ClInclude Include="io\buffer.h" />
     <ClInclude Include="io\client.h" />
     <ClInclude Include="io\context.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="db\sql\query.cpp" />
     <ClCompile Include="encryption\implementation\ssl.cpp" />
     <ClCompile Include="encryption\openssl.cpp" />
+    <ClCompile Include="db\factory.cpp" />
     <ClCompile Include="io\buffer.cpp" />
     <ClCompile Include="io\client.cpp" />
     <ClCompile Include="io\event.cpp" />
@@ -345,6 +347,9 @@
     <ClCompile Include="threading\implementation\worker.cpp" />
     <ClCompile Include="threading\implementation\worker_pool.cpp" />
     <ClCompile Include="threading\thread.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

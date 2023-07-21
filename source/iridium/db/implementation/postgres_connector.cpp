@@ -23,13 +23,10 @@ namespace db {
 namespace implementation {
 
 
-CPostgresConnector::CPostgresConnector(URI const &uri, string const &user, string const &password, string const &database)
+CPostgresConnector::CPostgresConnector(config::TDatebase const &config)
 :
-    m_connection(nullptr),
-    m_uri       (uri),
-    m_user      (user),
-    m_password  (password),
-    m_database  (database)
+    CConnector  (config),
+    m_connection(nullptr)
 {}
 
 
@@ -48,20 +45,20 @@ void CPostgresConnector::initialize() {
 //        throw DBException("connect to mysql host error: " + e.what())); // ----->
 //    }
     m_connection = assertExists(PQconnectdb(string(
-        "host='"        + m_uri.getHost() + "'" +
-       " port='"        + convert<std::string>(m_uri.getPort()) + "'" +
-       " user='"        + m_user          + "'" +
-       " password='"    + m_password      + "'" +
-       " dbname='"      + m_database      + "'").c_str()), 
+        "host='"        + m_config.Host.get()       + "'" +
+       " port='"        + convert<std::string>(m_config.Port.get()) + "'" +
+       " user='"        + m_config.User.get()       + "'" +
+       " password='"    + m_config.Password.get()   + "'" +
+       " dbname='"      + m_config.Database.get()   + "'").c_str()),
         "connect to postgresql host error: null connector");
 
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
         PQfinish(m_connection);
-        throw Exception("connect to postgresql '" + convert<string>(m_uri) + "' error: " + error); // ----->
+        throw Exception("connect to postgresql '" + m_config.Host.get() + "' error: " + error); // ----->
     }
 
-//    LOGI << "initialization Postgres '" << m_uri << "' database '" << m_database << "' done";
+    LOGI << "initialization postgres '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
 
 
