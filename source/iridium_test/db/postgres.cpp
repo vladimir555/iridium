@@ -5,13 +5,7 @@
 #ifdef BUILD_FLAG_POSTGRES
 
 
-#include <iridium/db/implementation/postgres_connector.h>
-#include <iridium/db/config.h>
-
-
-using iridium::db::implementation::CPostgresConnector;
-using iridium::io::URI;
-using iridium::db::config::TDatebaseConnector;
+#include <iridium/db/factory.h>
 
 
 namespace iridium {
@@ -19,8 +13,7 @@ namespace db {
 
 
 TEST(postgres) {
-    IConnector::TSharedPtr connector = CPostgresConnector::create(
-        URI("postgres://localhost"), "postgres", "postgres", "postgres");
+    auto connector = createConnector(io::URI("postgres://postgres:postgres@localhost/postgres"));
     connector->initialize();
     auto rows = connector->sendQuery("select * from pg_database;");
     connector->finalize();

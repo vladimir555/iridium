@@ -26,7 +26,7 @@ DEFINE_ROOT_NODE_BEGIN(Logger)
         DEFINE_ENUM(TSinkType, CONSOLE, FILE) // todo: db
         DEFINE_ATTRIBUTE(TSinkType      , Type      , TSinkType::UNKNOWN)
         DEFINE_ATTRIBUTE(bool           , IsAsync   , false)
-        DEFINE_ATTRIBUTE(std::string    , Url       , "")
+        DEFINE_ATTRIBUTE(std::string    , Uri       , "")
         DEFINE_ATTRIBUTE(TEvent::TLevel , Level     , TEvent::TLevel::TRACE)
     DEFINE_NODE_LIST_END(Sink)
 DEFINE_ROOT_NODE_END()

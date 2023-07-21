@@ -6,6 +6,10 @@ using std::vector;
 using std::string;
 
 
+namespace iridium {
+namespace db {
+
+
 string const iridium::db::IConnector::FIELD_NAME_AFFECTED_ROWS = "affected_rows";
 
 
@@ -24,3 +28,7 @@ vector<string> IConnector::makeFields(TRows const &rows) {
 
     return fields; // ----->
 }
+
+
+} // db
+} // iridium

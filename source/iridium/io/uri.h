@@ -27,6 +27,7 @@ namespace io {
 // [PROCESS]://[/usr/bin]/[ls] [dir1] [dir2]                    - protocol + path + host + arguments
 //   [HTTPS]://[hostname.com][/dir1/dir2][?arg1=1&arg2=2]       - protocol + host + path + arguments
 //   [HTTPS]://[hostname.com][:80][/dir1/dir2][?arg1=1&arg2=2]  - protocol + host + port + path + arguments
+//   [MYSQL]://[user:password]@[hostname.com][:80][/db_name]    - protocol + user + password + host + port + path
 
 // host + port + path   = address
 // host + path          = address
@@ -73,10 +74,13 @@ public:
                 getIPv4()       const;
     TIPv6::TConstSharedPtr
                 getIPv6()       const;
-    TPort       getPort()       const;
-    std::string getHost()       const;
-    std::string getPath()       const;
+
     TProtocol   getProtocol()   const;
+    std::string getUser()       const;
+    std::string getPassword()   const;
+    std::string getHost()       const;
+    TPort       getPort()       const;
+    std::string getPath()       const;
     std::string getAddress()    const;
     std::string getSource()     const;
     // todo: url arguments
@@ -87,6 +91,8 @@ public:
 private:
     std::string     m_source;
     TProtocol       m_protocol;
+    std::string     m_user;
+    std::string     m_password;
     std::string     m_host;
     std::string     m_path;
     std::string     m_address;

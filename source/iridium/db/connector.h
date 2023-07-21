@@ -6,10 +6,9 @@
 #define HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C
 
 
-#include "iridium/enum.h"
-#include "iridium/smart_ptr.h"
 #include "iridium/pattern/initializable.h"
 
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include <map>

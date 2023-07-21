@@ -72,12 +72,12 @@ void Logger::setConfig(config::TLogger const &config) {
         }
         
         if (sink_config.Type == config::TLogger::TSink::TSinkType::FILE)
-            sink = CSinkFile::create(sink_config.Level, sink_config.Url.get());
+            sink = CSinkFile::create(sink_config.Level, sink_config.Uri.get());
         
         if(!sink)
             throw std::runtime_error(
                 "sink type '" + convert<std::string>(sink_config.Type.get()) +
-                " uri '" + sink_config.Url.get() + "' error: not implemented");
+                " uri '" + sink_config.Uri.get() + "' error: not implemented");
 
         if (sink_config.IsAsync.get())
             sink = CSinkAsync::create(sink);

@@ -32,7 +32,7 @@ class CMySQLConnector:
 public:
     DEFINE_CREATE(CMySQLConnector)
     ///
-    CMySQLConnector(io::URI const &uri, std::string const &user, std::string const &password, std::string const &database = "");
+    CMySQLConnector(config::TDatebase const &config);
     ///
     virtual        ~CMySQLConnector();
     ///
@@ -45,14 +45,6 @@ public:
 private:
     ///
     ::MYSQL         m_connection;
-    ///
-    io::URI         m_uri;
-    ///
-    std::string     m_user;
-    ///
-    std::string     m_password;
-    ///
-    std::string     m_database;
 };
 
 

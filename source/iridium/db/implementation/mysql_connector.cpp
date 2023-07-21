@@ -59,12 +59,9 @@ namespace db {
 namespace implementation {
 
 
-CMySQLConnector::CMySQLConnector(URI const &uri, string const &user, string const &password, string const &database)
+CMySQLConnector::CMySQLConnector(config::TDatebase const &config)
 :
-    m_uri       (uri),
-    m_user      (user),
-    m_password  (password),
-    m_database  (database)
+    CConnector(config)
 {
     mysql_library_init(0, nullptr, nullptr);
     mysql_init(&m_connection);
@@ -79,27 +76,20 @@ CMySQLConnector::~CMySQLConnector() {
 
 
 void CMySQLConnector::initialize() {
-    string host = m_uri.getHost();
-
-    if (host.empty())
-        host = m_uri.getAddress();
-
-    auto port = m_uri.getPort();
-
     auto result = mysql_real_connect(
        &m_connection, 
-        host.c_str(), 
-        m_user.c_str(), 
-        m_password.c_str(), 
-        m_database.empty() ? nullptr : m_database.c_str(), 
-        port, 
+        m_config.Host.get().c_str(),
+        m_config.User.get().c_str(),
+        m_config.Password.get().c_str(),
+        m_config.Database.get().empty() ? nullptr : m_config.Database.get().c_str(),
+        m_config.Port.get() ? 3306 : m_config.Port.get(),
         nullptr, 0);
 
     if (!result) {
         mysql_close(&m_connection);
         throw Exception("connect to mysql host error: " + string(mysql_error(&m_connection))); // ----->
     }
-    LOGI << "initialization MYSQL '" << m_uri << "' database '" << m_database << "' done";
+    LOGI << "initialization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
 
 

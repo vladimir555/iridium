@@ -5,13 +5,7 @@
 #ifdef BUILD_FLAG_MYSQL
 
 
-#include <iridium/db/implementation/mysql_connector.h>
-#include <iridium/db/config.h>
-
-
-using iridium::db::implementation::CMySQLConnector;
-using iridium::io::URI;
-using iridium::db::config::TDatebaseConnector;
+#include <iridium/db/factory.h>
 
 
 namespace iridium {
@@ -19,8 +13,7 @@ namespace db {
 
 
 TEST(mysql) {
-    IConnector::TSharedPtr connector = CMySQLConnector::create(
-        URI("mysql://localhost"), "root", "1Tx6WyT@tgp", "information_schema");
+    auto connector = createConnector(io::URI("mysql://root:root@localhost/information_schema"));
     connector->initialize();
     auto rows = connector->sendQuery("select * from ENGINES;");
     connector->finalize();
