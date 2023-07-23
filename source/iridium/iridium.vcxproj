@@ -348,9 +348,6 @@
     <ClCompile Include="threading\implementation\worker_pool.cpp" />
     <ClCompile Include="threading\thread.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{93465FDF-FB97-43B6-AFBC-EF3831327242}</ProjectGuid>
@@ -523,6 +520,8 @@
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -545,6 +544,8 @@
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -567,6 +568,8 @@
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

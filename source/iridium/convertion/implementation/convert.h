@@ -195,6 +195,7 @@ template<>
 uint8_t convert(std::string const &value);
 
 
+//todo: string -> uint with base
 template<>
 uint64_t convert(std::string const &value);
 
@@ -209,6 +210,8 @@ std::string convert(std::wstring const &value);
 
 template<>
 std::wstring convert(std::string const &value);
+
+
 
 
 } // implementation

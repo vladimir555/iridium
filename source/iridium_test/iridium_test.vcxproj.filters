@@ -66,6 +66,9 @@
     <ClCompile Include="db\mysql.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="io\uri.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pattern\fsm_switch.h">
