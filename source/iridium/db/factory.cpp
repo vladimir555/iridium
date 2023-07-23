@@ -21,7 +21,6 @@ using iridium::db::implementation::CPostgresConnector;
 #endif // BUILD_FLAG_POSTGRES
 
 
-#include "iridium/logging/logger.h"
 namespace iridium {
 namespace db {
 
@@ -58,13 +57,15 @@ IConnector::TSharedPtr createConnector(io::URI const &uri) {
             convert<string>(uri.getProtocol())); // ----->
     }
 
+    auto path = uri.getPath();
+    if (!path.empty())
+         path = path.substr(1);
+
     config.User     = uri.getUser();
     config.Password = uri.getPassword();
     config.Host     = uri.getHost();
     config.Port     = uri.getPort();
-    config.Database = uri.getPath();
-
-    LOGT << "db config:\n" << config.getNode();
+    config.Database = path;
 
     return createConnector(config); // ----->
 }

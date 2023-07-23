@@ -81,6 +81,8 @@ public:
     std::string getHost()       const;
     TPort       getPort()       const;
     std::string getPath()       const;
+    // todo: map
+    std::string getArguments()  const;
     std::string getAddress()    const;
     std::string getSource()     const;
     // todo: url arguments

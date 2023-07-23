@@ -21,27 +21,64 @@ namespace io {
 
 URI::TIPv4::TIPv4()
 :
-    std::array<uint8_t , 4>{ 0 }
+    std::array<uint8_t, 4>{ 0 }
 {}
 
 
-string extractTokens(
-    std::string const &source,
+string unmask(string const &source) {
+    string  result;
+    uint8_t code = 0;
+    uint8_t masked_symbol_count = 0;
+
+    for (auto const &ch : source) {
+        static char const MASK_SYMBOL = '%';
+
+        if (masked_symbol_count == 0) {
+            if (ch == MASK_SYMBOL)
+                masked_symbol_count++;
+            else
+                result += ch;
+        } else {
+            if (masked_symbol_count < 3) {
+                code = (code << 4) + ch - '0';
+                masked_symbol_count++;
+            } else {
+                result += code;
+                code = 0;
+                masked_symbol_count = 0;
+                result += ch;
+            }
+        }
+    }
+
+    if(masked_symbol_count > 0)
+        result += code;
+
+    return result;
+}
+
+
+void extractTokens(
     std::string const &delimiter,
+    std::string       &source,
     std::string       &argument) 
 {
     if (source.empty())
-        return {};
+        return;
 
-    auto tokens = split(source, delimiter);
+    auto pos =  source.find(delimiter);
+    if  (pos == string::npos)
+        return;
 
-    if (tokens.size() >  2)
+    if (source.find(delimiter, pos + delimiter.size()) != string::npos)
         throw std::runtime_error("too many '" + delimiter + "' found in '" + source + "'"); // ----->
 
-    if (tokens.size() == 2)
-        argument = tokens.front();
+    argument = source.substr(0, pos);
 
-    return tokens.back();
+    if (argument.empty())
+        throw std::runtime_error("empty argument in '" + source + "'"); // ----->
+
+    source   = source.substr(pos + delimiter.size());
 }
 
 
@@ -49,7 +86,7 @@ URI::URI(std::string const &source)
 :
     m_source(source)
 {
-    //string const IPv4_REGEX                = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
+    // string const IPv4_REGEX = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
     static string const LOGIN_DELIMITER             = "@";
     static string const USER_DELIMITER              = ":";
     static string const PROTOCOL_DELIMITER          = "://";
@@ -63,69 +100,85 @@ URI::URI(std::string const &source)
             "' parsing error: empty"); // ----->
 
     try {
-        string source;
+        string source = m_source;
         string protocol;
 
         // protocol + user:pass@host:port/path?args
         // protocol + path/host args
-        source = extractTokens(m_source, PROTOCOL_DELIMITER, protocol);
+        extractTokens(PROTOCOL_DELIMITER, source, protocol);
         if (protocol.empty())
             m_protocol = TProtocol::FILE;
         else
             m_protocol = convert<TProtocol>(protocol);
 
         if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE)) {
-            // path/host + args
-            m_arguments = extractTokens(source, PROCESS_ARGUMENT_DELIMITER, m_address);
+            // todo: windows path delimeter
+            // address=path/host + args
+            extractTokens(PROCESS_ARGUMENT_DELIMITER, source, m_address);
             if (m_address.empty())
-                m_address = std::move(m_arguments);
-            auto tokens = split(m_address, PROCESS_ARGUMENT_DELIMITER);
-            m_path = m_address = tokens.front();
-            if (tokens.size() == 2)
-                m_arguments = tokens.back();
-            
-            m_host = split(m_path, PATH_DELIMITER).back();
+                m_address = unmask(source);
+            else
+                m_address = unmask(m_address);
+
+            // todo: check file or dir
+            auto pos = m_address.find_last_of(PATH_DELIMITER);
+
+            if (pos == string::npos)
+                m_host = m_address;
+            else
+                m_host = m_address.substr(pos);
+
+            m_path = m_address;
         } else {
             string login;
             // user:pass + host:port/path?args
-            source = extractTokens(source, LOGIN_DELIMITER, login);
+            extractTokens(LOGIN_DELIMITER, source, login);
+
             if (!login.empty()) {
-                // user + pass
-                m_password = extractTokens(login, USER_DELIMITER, m_user);
+                // user + password
+                extractTokens(USER_DELIMITER, login, m_user);
                 if (m_user.empty())
-                    m_user = std::move(m_password);
+                    m_user      = unmask(login);
+                else {
+                    m_user      = unmask(m_user);
+                    m_password  = unmask(login);
+                }
             }
 
             // host:port + path?args
-            {
-                auto tokens = split(source, PATH_DELIMITER, 2);
-                m_address   = tokens.front();
-                if (tokens.size() == 2)
-                    source  = "/" + tokens.back();
+            auto pos = source.find(PATH_DELIMITER);
+            if (pos == string::npos) {
+                m_address   = unmask(source);
+            } else {
+                m_address   = unmask(source.substr(0, pos));
+                source      = source.substr(pos);
+                // path + args
+
+                extractTokens(WEB_ARGUMENT_DELIMITER, source, m_path);
+                if (m_path.empty())
+                    m_path      = unmask(source);
+                else {
+                    m_path      = unmask(m_path);
+                    m_arguments = unmask(source);
+                }
             }
 
             if (m_address.empty())
                 throw std::runtime_error("address is empty");
-            else {
-                // host + port
-                string port = extractTokens(m_address, PORT_DELIMITER, m_host);
-                if (m_host.empty()) {
-                    m_port = m_protocol;
-                    m_host = port;
-                } else
-                    m_port = convert<uint16_t>(port);
-            }
-            
-            // path + args
-            m_arguments = extractTokens(source, WEB_ARGUMENT_DELIMITER, m_path);
-            if (m_path.empty())
-                m_path = std::move(m_arguments);
+
+            // host + port
+            auto address = m_address;
+            extractTokens(PORT_DELIMITER, address, m_host);
+            if (m_host.empty()) {
+                m_host = unmask(address);
+                m_port = m_protocol;
+            } else
+                m_port = convert<uint16_t>(address);
         }
 
     } catch (std::exception const &e) {
         throw std::runtime_error("uri '" + m_source + "' parsing error: " + e.what());
     }
-
 }
 
 
@@ -170,6 +223,11 @@ URI::TPort URI::getPort() const {
 
 std::string URI::getPath() const {
     return m_path; // ----->
+}
+
+
+std::string URI::getArguments() const {
+    return m_arguments;
 }
 
 

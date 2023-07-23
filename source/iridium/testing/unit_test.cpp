@@ -26,7 +26,87 @@ void UnitTest::fail(
     std::string const &condition_source,
     std::string const &line)
 {
-    throw Exception("'" + condition_source + "' at line " + line); // ----->
+    throw Exception("'" + condition_source + "'\n" + line); // ----->
+}
+
+
+template<>
+void UnitTest::fail<std::string>(
+    std::string const &left,
+    std::string const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line) 
+{
+    throw Exception(
+        "'"      + condition_source + "'\n" + line + "\n"
+        + "L: '" + left     + "'\n"
+        + "R: '" + right    + "'\n"
+    ); // ----->
+}
+
+
+template<>
+void UnitTest::fail<uint64_t>(
+    uint64_t    const &left,
+    uint64_t    const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line) 
+{
+    throw Exception(
+        "'"      + condition_source + "'\n" + line + "\n"
+        + "L: '" + convertion::convert<std::string>(left) + "'\n"
+        + "R: '" + convertion::convert<std::string>(right) + "'\n"
+    ); // ----->
+}
+
+
+template<>
+void UnitTest::fail<int64_t>(
+    int64_t    const &left,
+    int64_t    const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line) 
+{
+    throw Exception(
+        "'"      + condition_source + "'\n" + line + "\n"
+        + "L: '" + convertion::convert<std::string>(left) + "'\n"
+        + "R: '" + convertion::convert<std::string>(right) + "'\n"
+    ); // ----->
+}
+
+
+template<>
+void UnitTest::fail<double>(
+    double      const &left,
+    double      const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line) 
+{
+    throw Exception(
+        "'"      + condition_source + "'\n" + line + "\n"
+        + "L: '" + convertion::convert<std::string>(left) + "'\n"
+        + "R: '" + convertion::convert<std::string>(right) + "'\n"
+    ); // ----->
+}
+
+
+template<>
+void UnitTest::fail<std::chrono::system_clock::time_point>(
+    std::chrono::system_clock::time_point const &left,
+    std::chrono::system_clock::time_point const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line) 
+{
+    throw Exception(
+        "'"      + condition_source + "'\n" + line + "\n"
+        + "L: '" + convertion::convert<std::string>(left)   + "'\n"
+        + "R: '" + convertion::convert<std::string>(right)  + "'\n"
+    ); // ----->
 }
 
 
