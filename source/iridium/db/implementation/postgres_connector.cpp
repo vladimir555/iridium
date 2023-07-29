@@ -6,9 +6,10 @@
 
 #include "postgres_connector.h"
 
-#include <iridium/convertion/convert.h>
-#include <iridium/logging/logger.h>
-#include <iridium/assert.h>
+#include "iridium/convertion/convert.h"
+#include "iridium/logging/logger.h"
+#include "iridium/assert.h"
+#include "iridium/items.h"
 
 
 using std::string;
@@ -55,6 +56,7 @@ void CPostgresConnector::initialize() {
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
         PQfinish(m_connection);
+        m_connection = nullptr;
         throw Exception("connect to postgresql '" + m_config.Host.get() + "' error: " + error); // ----->
     }
 
@@ -63,7 +65,11 @@ void CPostgresConnector::initialize() {
 
 
 void CPostgresConnector::finalize() {
-    PQfinish(m_connection);
+    if (m_connection) {
+        PQfinish(m_connection);
+        m_connection = nullptr;
+        LOGI << "finalization postgres '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
+    }
 }
 
 
@@ -73,35 +79,29 @@ void CPostgresConnector::executeCommand(std::string const &command) {
 
 
 CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
-//    LOGT << "send sql query: " << query;
+    LOGT << "send sql query: " << query;
     TRows rows;
 
     auto result = PQexec(m_connection, query.c_str());
-//    LOGT << "status: " << int(PQresultStatus(result));
-    if (PQresultStatus(result) == PGRES_TUPLES_OK) {
+    auto status = PQresultStatus(result);
+
+    if (status == PGRES_TUPLES_OK) {
         for (int row_index = 0; row_index < PQntuples(result); row_index++) {
             TRow row;
             for (int field_index = 0; field_index < PQnfields(result); field_index++)
                 row[PQfname(result, field_index)] = PQgetvalue(result, row_index, field_index);
             rows.push_back(row);
         }
+    } else
+    if (checkOneOf(status, PGRES_COMMAND_OK, PGRES_EMPTY_QUERY)) {
+        return {};
     } else {
         string error = PQerrorMessage(m_connection);
         PQclear(result);
-        PQfinish(m_connection);
+        //PQfinish(m_connection);
         throw Exception("query to postgresql host error: " + error); // ----->
     }
     PQclear(result);
-
-
-//    pqxx::work      action(*assertExists(m_connection, "postgres not connected"), "postgres action");
-//    pqxx::result    result = action.exec(query);
-//    for (auto const &line: result) {
-//        TRow row;
-//        for (auto const field: line)
-//            row[field.name()] = field.c_str();
-//        rows.push_back(row);
-//    }
 
     return rows; // ----->
 }

@@ -8,7 +8,7 @@
 
 #include <memory>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 
 namespace iridium {
@@ -35,13 +35,15 @@ public:
     ///
     operator TValue() const;
     ///
-    bool operator < (CachedValue const &cached_value) const;
+    bool operator == (CachedValue const &cached_value) const;
+    ///
+    bool operator <  (CachedValue const &cached_value) const;
 
 private:
+    //friend struct std::equal_to< iridium::caching::CachedValue<TValue> >;
+    friend struct std::hash    < iridium::caching::CachedValue<TValue> >;
     ///
-    static thread_local std::map<CachedValue, std::shared_ptr<TValue> > m;
-    ///
-//    static threading::IMutex::TConstSharedPtr m_mutex;
+    static thread_local std::unordered_map<CachedValue, std::shared_ptr<TValue> > m;
     ///
     mutable std::shared_ptr<TValue> m_value;
 };
@@ -51,11 +53,8 @@ private:
 
 
 template<typename TValue>
-thread_local std::map<CachedValue<TValue>, std::shared_ptr<TValue> > CachedValue<TValue>::m = std::map<CachedValue<TValue>, std::shared_ptr<TValue> >();
-
-
-//template<typename TValue>
-//threading::IMutex::TConstSharedPtr CachedValue<TValue>::m_mutex = std::make_shared<threading::implementation::CMutex>();
+thread_local std::unordered_map<CachedValue<TValue>, std::shared_ptr<TValue> > CachedValue<TValue>::m = 
+std::unordered_map<CachedValue<TValue>, std::shared_ptr<TValue> >();
 
 
 template<typename TValue>
@@ -68,13 +67,11 @@ template<typename TValue>
 template<typename TParam>
 CachedValue<TValue>::CachedValue(TParam const &value) {
     m_value = std::make_shared<TValue>(value);
-//    m_mutex->lock();
     m_value = m[*this];
-    if (!m_value) {
+    if(!m_value) {
         m_value     = std::make_shared<TValue>(value);
         m[*this]    = m_value;
     }
-//    m_mutex->unlock();
 }
 
 
@@ -94,7 +91,13 @@ CachedValue<TValue>::operator TValue() const {
 
 
 template<typename TValue>
-bool CachedValue<TValue>::operator < (CachedValue const &cached_value) const {
+bool CachedValue<TValue>::operator == (CachedValue const &cached_value) const {
+    return m_value && cached_value.m_value && *m_value == *cached_value.m_value; // ----->
+}
+
+
+template<typename TValue>
+bool CachedValue<TValue>::operator <  (CachedValue const &cached_value) const {
     return m_value && cached_value.m_value && *m_value < *cached_value.m_value; // ----->
 }
 
@@ -104,6 +107,22 @@ typedef CachedValue<std::string> CachedString;
 
 } // caching
 } // iridium
+
+
+//template<typename TValue>
+//struct std::equal_to<iridium::caching::CachedValue<TValue> > {
+//    std::size_t operator()(iridium::caching::CachedValue<TValue> const &k) const {
+//        return std::hash<TValue>()(*k.m_value);
+//    }
+//};
+
+
+template<typename TValue>
+struct std::hash<iridium::caching::CachedValue<TValue> > {
+    std::size_t operator()(iridium::caching::CachedValue<TValue> const &k) const {
+        return std::hash<TValue>()(*k.m_value);
+    }
+};
 
 
 #endif // HEADER_CACHED_VALUE_589D8C09_61B8_4639_9F01_493EC80EE2D8

@@ -23,7 +23,7 @@ namespace fs {
 template<typename TValue>
 class FileValue {
 public:
-    FileValue(std::string const &file_name, TValue const &default_value);
+    FileValue(std::string const &file_name, TValue const &default_value = {});
     ///
     ~FileValue() = default;
     ///
