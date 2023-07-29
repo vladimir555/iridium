@@ -17,7 +17,7 @@
 #include "connector.h"
 
 #include <string>
-#include <mysql/mysql.h>
+#include <mysql.h>
 
 
 namespace iridium {

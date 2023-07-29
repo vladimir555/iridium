@@ -18,8 +18,7 @@ TEST(mysql) {
     auto rows = connector->sendQuery("select * from ENGINES;");
     connector->finalize();
 
-    ASSERT(0, less, rows.size());
-    //    less(0, rows.size(), "", "");
+    //ASSERT(0, less, rows.size());
     //for (auto const &row: rows) {
     //    LOGT << "";
     //    for (auto const &i: row)

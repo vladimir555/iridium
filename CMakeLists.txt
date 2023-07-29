@@ -25,7 +25,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thre
 #remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
 
 # components
-# set(CONFIG_POSTGRES 1)
+set(CONFIG_POSTGRES 1)
+set(CONFIG_MYSQL 1)
 set(CONFIG_OPENSSL 0)
 #if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 #    set(CONFIG_OPENSSL 1)
@@ -33,8 +34,21 @@ set(CONFIG_OPENSSL 0)
 
 if (CONFIG_POSTGRES)
     add_definitions(-DBUILD_FLAG_POSTGRES)
-    set(PostgreSQL_TYPE_INCLUDE_DIR "/usr/include")
+    #set(PostgreSQL_TYPE_INCLUDE_DIR "/usr/include")
     find_package(PostgreSQL REQUIRED)
+    message(${PostgreSQL_INCLUDE_DIR})
+endif()
+
+if (CONFIG_MYSQL)
+    add_definitions(-DBUILD_FLAG_MYSQL)
+    #set(MYSQL_TYPE_INCLUDE_DIR "/usr/include")
+    include(FindPkgConfig)
+    pkg_check_modules(LIBMYSQLCLIENT REQUIRED mysqlclient)
+    foreach(FLAG ${LIBMYSQLCLIENT_CFLAGS_OTHER})
+      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAG}")
+    endforeach()
+    set(MySQL_INCLUDE_DIR ${LIBMYSQLCLIENT_INCLUDE_DIRS})
+    link_directories(${LIBMYSQLCLIENT_LIBRARY_DIRS})
 endif()
 
 if (CONFIG_OPENSSL)
@@ -54,6 +68,8 @@ source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOURCE})
 #set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 include_directories(
+    ${PostgreSQL_INCLUDE_DIR}
+    ${MySQL_INCLUDE_DIR}
     /usr/local/include
     /usr/local/ssl/include
     ${CMAKE_SOURCE_DIR}/source
@@ -99,5 +115,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     ${OPENSSL_LIBRARIES}
     ${PostgreSQL_LIBRARIES}
+    ${MySQL_LIBRARIES}
+    ${LIBMYSQLCLIENT_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
 )
