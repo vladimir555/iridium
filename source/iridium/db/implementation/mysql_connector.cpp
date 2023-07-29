@@ -95,6 +95,7 @@ void CMySQLConnector::initialize() {
 
 void CMySQLConnector::finalize() {
     mysql_close(&m_connection);
+    LOGI << "finalization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
 
 
@@ -121,8 +122,12 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
             auto row_ = mysql_fetch_row(result);
             while (row_) {
                 TRow row;
-                for (unsigned int i = 0; i < field_count; i++)
-                    row[fields[i]] = row_[i];
+                for (unsigned int i = 0; i < field_count; i++) {
+                    if (row_[i])
+                        row[fields[i]] = row_[i];
+                    else
+                        row[fields[i]] = "";
+                }
                 rows.push_back(row);
                 row_ = mysql_fetch_row(result);
             }

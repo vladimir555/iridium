@@ -27,7 +27,7 @@ public:
     TID     getID() const override;
     URI::TSharedPtr getURI() const override;
 
-    Buffer::TSharedPtr read(size_t const &size) override;
+    Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
     size_t  getSize() override;
     TFileStatus getStatus() override;
 };

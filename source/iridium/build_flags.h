@@ -7,8 +7,8 @@
 
 
 // build macroses defined in CMakeList.txt
-//#define BUILD_FLAG_MYSQL
-//#define BUILD_FLAG_POSTGRES
+#define BUILD_FLAG_MYSQL
+#define BUILD_FLAG_POSTGRES
 //#define BUILD_FLAG_OPENSSL
 //#undef NANO_PREALLOCATE_BAND_VM
 

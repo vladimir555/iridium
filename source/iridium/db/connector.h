@@ -7,11 +7,12 @@
 
 
 #include "iridium/pattern/initializable.h"
+#include "iridium/caching/cached_value.h"
 
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 
 namespace iridium {
@@ -29,7 +30,8 @@ class IConnector: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IConnector)
     ///
-    typedef std::map<std::string, std::string> TRow;
+    //typedef std::unordered_map<caching::CachedString, std::string> TRow;
+    typedef std::unordered_map<std::string, std::string> TRow;
     ///
     typedef std::vector< TRow > TRows;
     ///

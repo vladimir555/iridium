@@ -25,6 +25,35 @@ namespace iridium {
 namespace db {
 
 
+config::TDatebase makeConfig(io::URI const &uri) {
+    config::TDatebase config;
+
+    switch (uri.getProtocol()) {
+    case URI::TProtocol::POSTGRES:
+        config.Type = TDatebase::TDBType::POSTGRES;
+        break;
+    case URI::TProtocol::MYSQL:
+        config.Type = TDatebase::TDBType::MYSQL;
+        break;
+    default:
+        throw std::runtime_error("creating db connector error: unknown db type " +
+            convert<string>(uri.getProtocol())); // ----->
+    }
+
+    auto path = uri.getPath();
+    if (!path.empty())
+        path = path.substr(1);
+
+    config.User = uri.getUser();
+    config.Password = uri.getPassword();
+    config.Host = uri.getHost();
+    config.Port = uri.getPort();
+    config.Database = path;
+
+    return config; // ----->
+}
+
+
 IConnector::TSharedPtr createConnector(TDatebase const &config) {
     switch (config.Type.get()) {
 #ifdef BUILD_FLAG_MYSQL
@@ -43,31 +72,7 @@ IConnector::TSharedPtr createConnector(TDatebase const &config) {
 
 
 IConnector::TSharedPtr createConnector(io::URI const &uri) {
-    TDatebase config;
-
-    switch (uri.getProtocol()) {
-    case URI::TProtocol::POSTGRES:
-        config.Type = TDatebase::TDBType::POSTGRES;
-        break;
-    case URI::TProtocol::MYSQL:
-        config.Type = TDatebase::TDBType::MYSQL;
-        break;
-    default:
-        throw std::runtime_error("creating db connector error: unknown db type " +
-            convert<string>(uri.getProtocol())); // ----->
-    }
-
-    auto path = uri.getPath();
-    if (!path.empty())
-         path = path.substr(1);
-
-    config.User     = uri.getUser();
-    config.Password = uri.getPassword();
-    config.Host     = uri.getHost();
-    config.Port     = uri.getPort();
-    config.Database = path;
-
-    return createConnector(config); // ----->
+    return createConnector(makeConfig(uri)); // ----->
 }
 
 
