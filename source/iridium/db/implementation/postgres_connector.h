@@ -17,7 +17,7 @@
 #include "connector.h"
 
 #include <string>
-#include <postgresql/libpq-fe.h>
+#include <libpq-fe.h>
 
 
 namespace iridium {

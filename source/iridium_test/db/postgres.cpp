@@ -19,7 +19,6 @@ TEST(postgres) {
     connector->finalize();
 
     ASSERT(0, less, rows.size());
-//    less(0, rows.size(), "", "");
 //    for (auto const &row: rows) {
 //        LOGT << "";
 //        for (auto const &i: row)
