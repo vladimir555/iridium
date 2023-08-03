@@ -8,6 +8,7 @@
 
 #include <iridium/convertion/convert.h>
 #include <iridium/logging/logger.h>
+#include <iridium/items.h>
 
 
 using std::string;
@@ -100,7 +101,7 @@ void CMySQLConnector::finalize() {
 
 
 CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
-    LOGD << "send sql query: " << query;
+    LOGT << "send sql query: " << query;
     TRows rows;
     if (mysql_query(&m_connection, query.c_str())) {
         throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->
@@ -115,21 +116,28 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
             auto field_count    = mysql_num_fields(result);
             auto fields_        = mysql_fetch_fields(result);
 
-            vector<string> fields;
-            for (unsigned int i = 0; i < field_count; i++)
-                fields.push_back(fields_[i].name);
+//            vector<string> fields;
+//            for (unsigned int i = 0; i < field_count; i++)
+//                fields.push_back(fields_[i].name);
 
-            auto row_ = mysql_fetch_row(result);
-            while (row_) {
+//            auto row_ = mysql_fetch_row(result);
+            while (auto row_ = mysql_fetch_row(result)) {
                 TRow row;
                 for (unsigned int i = 0; i < field_count; i++) {
-                    if (row_[i])
-                        row[fields[i]] = row_[i];
+//                    LOGT << "field: name '" << fields_[i].name << "', type: '" << (int)fields_[i].type;
+                    if (fields_[i].type == MYSQL_TYPE_BIT) {
+                        row[fields_[i].name] = row_[i] ? "1" : "0";
+                    }
+
                     else
-                        row[fields[i]] = "";
+
+                    if (row_[i])
+                        row[fields_[i].name] = row_[i];
+                    else
+                        row[fields_[i].name] = "null";
                 }
                 rows.push_back(row);
-                row_ = mysql_fetch_row(result);
+//                row_ = mysql_fetch_row(result);
             }
             mysql_free_result(result);
         } else {

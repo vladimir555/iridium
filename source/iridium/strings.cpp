@@ -62,7 +62,7 @@ string replace(string const &source, string const &from, string const &to) {
     string result;
 
     while (rpos != string::npos) {
-        rpos = source.find(from, lpos + from.size());
+        rpos = source.find(from, lpos);
         if (rpos == string::npos)
             result += source.substr(lpos, string::npos);
         else {
