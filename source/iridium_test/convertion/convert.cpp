@@ -252,5 +252,12 @@ TEST(enum_) {
 }
 
 
+TEST(strings) {
+    ASSERT("''1''2''3''",   equal, replace("'1'2'3'", "'", "''"));
+    ASSERT(".1.2.3.",       equal, replace("0102030", "0", "."));
+    ASSERT(".1.2.3.",       equal, replace("00100200300", "00", "."));
+}
+
+
 } // convertion
 } // iridium

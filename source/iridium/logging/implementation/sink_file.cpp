@@ -37,6 +37,7 @@ void CSinkFile::initialize() {
         auto date                   = convert<string>(system_clock::now()).substr(0, 10);
         m_last_initialization_time  = convert<system_clock::time_point>(date + " 00:00:00.000");
 
+        // todo: bugfix for path "./"
         m_file_name = m_file_name_original;
         auto file_ext_position = m_file_name.find_last_of('.');
         if  (file_ext_position > 0)
