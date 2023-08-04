@@ -115,7 +115,6 @@ target_link_libraries(
     ${PROJECT_NAME}
     ${OPENSSL_LIBRARIES}
     ${PostgreSQL_LIBRARIES}
-    ${MySQL_LIBRARIES}
     ${LIBMYSQLCLIENT_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
 )

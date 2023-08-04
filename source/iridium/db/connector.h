@@ -12,7 +12,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
 
 
 namespace iridium {
@@ -31,7 +31,7 @@ public:
     DEFINE_INTERFACE(IConnector)
     ///
     //typedef std::unordered_map<caching::CachedString, std::string> TRow;
-    typedef std::unordered_map<std::string, std::string> TRow;
+    typedef std::map<std::string, std::string> TRow;
     ///
     typedef std::vector< TRow > TRows;
     ///
