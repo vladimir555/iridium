@@ -9,6 +9,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <iridium/convertion/convert.h>
 
 
 namespace iridium {
@@ -41,7 +42,7 @@ public:
 
 private:
     //friend struct std::equal_to< iridium::caching::CachedValue<TValue> >;
-    friend struct std::hash    < iridium::caching::CachedValue<TValue> >;
+    friend struct std::hash < iridium::caching::CachedValue<TValue> >;
     ///
     static thread_local std::unordered_map<CachedValue, std::shared_ptr<TValue> > m;
     ///
@@ -105,6 +106,9 @@ bool CachedValue<TValue>::operator <  (CachedValue const &cached_value) const {
 typedef CachedValue<std::string> CachedString;
 
 
+std::string convertToString(iridium::caching::CachedString const &source);
+
+
 } // caching
 } // iridium
 
@@ -123,6 +127,21 @@ struct std::hash<iridium::caching::CachedValue<TValue> > {
         return std::hash<TValue>()(*k.m_value);
     }
 };
+
+
+template<typename TLValue, typename TRValue>
+TRValue operator + (TLValue const &l, iridium::caching::CachedValue<TRValue> const &r) {
+    return static_cast<TRValue>(l) + static_cast<TRValue>(r);
+}
+
+
+template<typename TLValue, typename TRValue>
+bool operator != (TLValue const &l, iridium::caching::CachedValue<TRValue> const &r) {
+    return static_cast<TRValue>(r) != static_cast<TRValue>(l);
+}
+
+
+DEFINE_CONVERT(std::string, iridium::caching::CachedString);
 
 
 #endif // HEADER_CACHED_VALUE_589D8C09_61B8_4639_9F01_493EC80EE2D8
