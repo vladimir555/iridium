@@ -30,8 +30,8 @@ class IConnector: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IConnector)
     ///
-    //typedef std::unordered_map<caching::CachedString, std::string> TRow;
-    typedef std::map<std::string, std::string> TRow;
+    typedef std::map<caching::CachedString, std::string> TRow;
+//    typedef std::map<std::string, std::string> TRow;
     ///
     typedef std::vector< TRow > TRows;
     ///
