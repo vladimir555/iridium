@@ -21,6 +21,7 @@ namespace implementation {
 
 CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &file_name)
 :
+    m_level                     (level),
     m_file_name                 (file_name),
     m_file_name_original        (file_name),
     m_is_rotation_by_day        (true), // todo: rotation time 1h, 1d, 1w ...
