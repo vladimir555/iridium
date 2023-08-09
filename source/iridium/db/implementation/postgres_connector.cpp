@@ -79,7 +79,7 @@ void CPostgresConnector::executeCommand(std::string const &command) {
 
 
 CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
-    LOGT << "send sql query: " << query;
+    LOGT << "send sql query:\n" << query;
     TRows rows;
 
     auto result = PQexec(m_connection, query.c_str());
@@ -92,7 +92,10 @@ CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
                 row[PQfname(result, field_index)] = PQgetvalue(result, row_index, field_index);
             rows.push_back(row);
         }
-    } else
+    }
+
+    else
+
     if (checkOneOf(status, PGRES_COMMAND_OK, PGRES_EMPTY_QUERY)) {
         return {};
     } else {

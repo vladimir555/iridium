@@ -101,7 +101,7 @@ void CMySQLConnector::finalize() {
 
 
 CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
-    LOGT << "send sql query: " << query;
+    LOGT << "send sql query:\n" << query;
     TRows rows;
     if (mysql_query(&m_connection, query.c_str())) {
         throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->

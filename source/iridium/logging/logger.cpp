@@ -58,7 +58,7 @@ void Logger::setConfig(config::TLogger const &config) {
     for (auto const &sink_config: config.Sink) {
         auto level = sink_config.Level;
         
-        if (level == TEvent::TLevel::UNKNOWN)
+        if (level.isDefault())
             level  = config.Level;
         
         ISink::TSharedPtr sink;
@@ -68,11 +68,11 @@ void Logger::setConfig(config::TLogger const &config) {
                 throw std::runtime_error("only one console sink can be"); // ----->
             is_console_sink_initialized = true;
             
-            sink = CSinkConsole::create(sink_config.Level);
+            sink = CSinkConsole::create(level);
         }
         
         if (sink_config.Type == config::TLogger::TSink::TSinkType::FILE)
-            sink = CSinkFile::create(sink_config.Level, sink_config.Uri.get());
+            sink = CSinkFile::create(level, sink_config.Uri.get());
         
         if(!sink)
             throw std::runtime_error(
