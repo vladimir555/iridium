@@ -19,8 +19,14 @@ namespace implementation {
 
 class CSinkFile: public ISink {
 public:
+    DEFINE_ENUM(
+        TRotation,
+        DAILY,
+        TIMELY
+    );
+
     DEFINE_IMPLEMENTATION(CSinkFile)
-    CSinkFile(TEvent::TLevel const &level, std::string const &file_name);
+    CSinkFile(TEvent::TLevel const &level, std::string const &path, TRotation const &rotation = TRotation::UNKNOWN);
 
     void initialize() override;
     void finalize() override;
@@ -28,9 +34,9 @@ public:
 
 private:
     TEvent::TLevel  m_level;
-    std::string     m_file_name;
-    std::string     m_file_name_original;
-    bool            m_is_rotation_by_day;
+    std::string     m_path;
+    std::string     m_path_original;
+    TRotation       m_rotation;
     std::chrono::system_clock::time_point
                     m_last_initialization_time;
     io::fs::IFileStreamWriter::TSharedPtr

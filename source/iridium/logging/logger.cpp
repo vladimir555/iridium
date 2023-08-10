@@ -42,18 +42,6 @@ void Logger::setConfig(config::TLogger const &config) {
     
     m_sinks.clear();
     
-//    // console sink
-//    if (config.ConsoleSink.size() > 0) {
-//        auto const &sink_config = *assertOne(config.ConsoleSink, "only one console sink can be").begin();
-//        auto level = sink_config.Level;
-//        if (level == TEvent::TLevel::UNKNOWN)
-//            level  = config.Level;
-//        auto sink = CSinkConsole::create(sink_config.Level);
-//        sink->initialize();
-//        m_sinks.push_back(sink);
-//    }
-
-    // file sinks
     bool is_console_sink_initialized = false;
     for (auto const &sink_config: config.Sink) {
         auto level = sink_config.Level;
@@ -63,16 +51,29 @@ void Logger::setConfig(config::TLogger const &config) {
         
         ISink::TSharedPtr sink;
         
-        if (sink_config.Type == config::TLogger::TSink::TSinkType::CONSOLE) {
+        switch (sink_config.Type.get()) {
+        case config::TLogger::TSink::TSinkType::CONSOLE:
+
             if (is_console_sink_initialized)
                 throw std::runtime_error("only one console sink can be"); // ----->
-            is_console_sink_initialized = true;
-            
+            else
+                is_console_sink_initialized = true;
+
             sink = CSinkConsole::create(level);
-        }
-        
-        if (sink_config.Type == config::TLogger::TSink::TSinkType::FILE)
+
+            break; // --->
+        case config::TLogger::TSink::TSinkType::FILE:
             sink = CSinkFile::create(level, sink_config.Uri.get());
+            break; // --->
+        case config::TLogger::TSink::TSinkType::FILE_DAILY:
+            sink = CSinkFile::create(level, sink_config.Uri.get(), CSinkFile::TRotation::DAILY);
+            break; // --->
+        case config::TLogger::TSink::TSinkType::FILE_TIMELY:
+            sink = CSinkFile::create(level, sink_config.Uri.get(), CSinkFile::TRotation::TIMELY);
+            break; // --->
+        default:
+            break; // --->
+        };
         
         if(!sink)
             throw std::runtime_error(
