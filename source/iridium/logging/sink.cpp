@@ -19,9 +19,12 @@ namespace iridium {
 namespace logging {
 
 
+std::atomic<bool> ISink::is_gmt_time(false);
+
+
 std::string ISink::makeLine(TEvent::TConstSharedPtr const &e) {
     return
-        convert<string>(system_clock::now()).substr(11, string::npos) + " " +
+        convert<string>(system_clock::now(), static_cast<bool>(is_gmt_time)).substr(11, string::npos) + " " +
         convert<string>(e->level).substr(0, 1) + " " + e->line; // ----->
 }
 
