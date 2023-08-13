@@ -51,13 +51,13 @@ void CPostgresConnector::initialize() {
        " user='"        + m_config.User.get()       + "'" +
        " password='"    + m_config.Password.get()   + "'" +
        " dbname='"      + m_config.Database.get()   + "'").c_str()),
-        "connect to postgresql host error: null connector");
+        "connection to postgresql host error: null connector");
 
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
         PQfinish(m_connection);
         m_connection = nullptr;
-        throw Exception("connect to postgresql '" + m_config.Host.get() + "' error: " + error); // ----->
+        throw Exception("connection to postgresql '" + m_config.Host.get() + "' error: " + error); // ----->
     }
 
     LOGI << "initialization postgres '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
@@ -79,7 +79,7 @@ void CPostgresConnector::executeCommand(std::string const &command) {
 
 
 CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
-    LOGT << "send sql query:\n" << query;
+    LOGD << "send postgres sql query:\n" << query;
     TRows rows;
 
     auto result = PQexec(m_connection, query.c_str());
@@ -104,6 +104,7 @@ CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
         //PQfinish(m_connection);
         throw Exception("query to postgresql host error: " + error); // ----->
     }
+
     PQclear(result);
 
     return rows; // ----->
