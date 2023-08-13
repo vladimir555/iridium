@@ -83,13 +83,16 @@ std::atomic<int> config::double_precission(5);
 // typedef std::chrono::duration<int, std::ratio_multiply< minutes::period, std::ratio<5> >::type> _5minutes;
 // tt = floor<_5minutes>(t);
 template<>
-string convert(system_clock::time_point const &value) {
+string convert(system_clock::time_point const &value, bool const &is_gmt_time) {
     auto  value_ms  = duration_cast<milliseconds>(value.time_since_epoch()).count();
     uint32_t    ms  = value_ms % 1000;
     time_t      t   = system_clock::to_time_t(value);
     struct tm   tm_ = {};
 
-    platform::gmtime_r(&t, &tm_);
+    if (is_gmt_time)
+        platform::gmtime_r(&t, &tm_);
+    else
+        platform::localtime_r(&t, &tm_);
 
     char buffer[time_to_string_buffer_size];
     strftime(buffer, time_to_string_buffer_size, time_format_unix, &tm_);
@@ -98,8 +101,14 @@ string convert(system_clock::time_point const &value) {
 
 
 template<>
+string convert(system_clock::time_point const &value) {
+    return convert<string>(value, true); // ----->
+}
+
+
+template<>
 string convert(hours const &value) {
-    return convert<string, hours::rep>(static_cast<uint32_t>(value.count())) + " hours";
+    return convert<string, hours::rep>(static_cast<uint32_t>(value.count())) + " hours"; // ----->
 }
 
 

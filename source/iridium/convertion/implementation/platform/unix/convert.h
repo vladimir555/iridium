@@ -61,6 +61,12 @@ void gmtime_r(TArgs ... args) {
 
 
 template<typename ... TArgs>
+void localtime_r(TArgs ... args) {
+    ::localtime_r(args ...); // ----->
+}
+
+
+template<typename ... TArgs>
 int snprintf(TArgs ... args) {
     return ::snprintf(args ...); // ----->
 }

@@ -55,6 +55,11 @@ void gmtime_r(time_t* t, struct tm* tm_) {
 }
 
 
+void localtime_r(time_t *t, struct tm *tm_) {
+    ::localtime_s(tm_, t); // ----->
+}
+
+
 #ifdef PLATFORM_CPU32
 __time32_t mkgmtime(struct tm * const tm_) {
     return ::_mkgmtime32(tm_); // ----->

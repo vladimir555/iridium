@@ -76,6 +76,10 @@ std::string convertPtr(std::shared_ptr<TValue> const &value, TFormat const &form
 
 
 template<>
+std::string convert(std::chrono::system_clock::time_point const &value, bool const &is_gmt_time);
+
+
+template<>
 std::string convert(std::chrono::system_clock::time_point const &value);
 
 
