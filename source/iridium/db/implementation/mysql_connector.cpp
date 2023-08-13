@@ -88,7 +88,7 @@ void CMySQLConnector::initialize() {
 
     if (!result) {
         mysql_close(&m_connection);
-        throw Exception("connect to mysql host error: " + string(mysql_error(&m_connection))); // ----->
+        throw Exception("connection to mysql host error: " + string(mysql_error(&m_connection))); // ----->
     }
     LOGI << "initialization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
@@ -101,7 +101,7 @@ void CMySQLConnector::finalize() {
 
 
 CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
-    LOGT << "send sql query:\n" << query;
+    LOGD << "send mysql sql query:\n" << query;
     TRows rows;
     if (mysql_query(&m_connection, query.c_str())) {
         throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->
@@ -120,11 +120,25 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
                 TRow r;
                 for (unsigned int i = 0; i < fields_size; i++) {
                     switch (fields[i].type) {
+                    case MYSQL_TYPE_BOOL:
                     case MYSQL_TYPE_BIT:
                         r[fields[i].name] = row[i] ? "1" : "0";
-                        break;
+                        break; // --->
+                    case MYSQL_TYPE_TINY:
+                    case MYSQL_TYPE_SHORT:
+                    case MYSQL_TYPE_LONG:
+                    case MYSQL_TYPE_LONGLONG:
+                    case MYSQL_TYPE_INT24:
+                        if(IS_NOT_NULL(fields[i].flags))
+                            r[fields[i].name] = row[i] ? row[i] : "0";
+                        else
+                            r[fields[i].name] = row[i] ? row[i] : "null";
+                        break; // --->
                     default:
-                        r[fields[i].name] = row[i] ? row[i] : "null";
+                        if (IS_NOT_NULL(fields[i].flags))
+                            r[fields[i].name] = row[i] ? row[i] : "";
+                        else
+                            r[fields[i].name] = row[i] ? row[i] : "null";
                     }
                 }
 
