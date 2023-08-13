@@ -44,13 +44,14 @@ void CSinkFile::initialize() {
         string date;
 
         if (m_rotation == TRotation::DAILY) {
-            date = convert<string>(system_clock::now()).substr(0, 10);
-            m_last_initialization_time = convert<system_clock::time_point>(date + " 00:00:00.000");
+            date = convert<string>(system_clock::now(), static_cast<bool>(is_gmt_time)).substr(0, 10);
+            m_last_initialization_time =
+                convert<system_clock::time_point>(date + " 00:00:00.000");
         }
 
         if (m_rotation == TRotation::TIMELY) {
             auto now    = system_clock::now();
-            date        = convert<string>(now);
+            date        = convert<string>(now, static_cast<bool>(is_gmt_time));
             date[10]    = '_';
             date[13]    = '-';
             date[16]    = '-';
