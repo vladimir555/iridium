@@ -41,6 +41,7 @@ void Logger::setConfig(config::TLogger const &config) {
         sink->finalize();
     
     m_sinks.clear();
+    ISink::is_gmt_time = config.IsGmtTime;
     
     bool is_console_sink_initialized = false;
     for (auto const &sink_config: config.Sink) {
@@ -154,7 +155,7 @@ string convertFunctionNameToLogFunctionName(string const &name) {
     if (lpos == string::npos)
         lpos = 0;
 
-    while ( !std::isalpha(name[lpos]) && lpos < name.size())
+    while (!std::isalpha(name[lpos]) && lpos < name.size())
         lpos++;
 
     string result = name.substr(lpos, rpos - lpos);

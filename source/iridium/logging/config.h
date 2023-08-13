@@ -21,6 +21,7 @@ namespace config {
 
 
 DEFINE_ROOT_NODE_BEGIN(Logger)
+    DEFINE_ATTRIBUTE(bool, IsGmtTime, false)
     DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE)
     DEFINE_NODE_LIST_BEGIN(Sink)
         DEFINE_ENUM(
