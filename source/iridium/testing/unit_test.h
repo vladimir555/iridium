@@ -58,47 +58,6 @@ public:
         std::string const &condition_source,
         std::string const &line);
 
-    template<>
-    void fail<std::string>(
-        std::string const &left,
-        std::string const &right,
-        std::string const &condition_name,
-        std::string const &condition_source,
-        std::string const &line);
-
-    template<>
-    void fail<uint64_t>(
-        uint64_t    const &left,
-        uint64_t    const &right,
-        std::string const &condition_name,
-        std::string const &condition_source,
-        std::string const &line);
-
-    template<>
-    void fail<int64_t>(
-        int64_t     const &left,
-        int64_t     const &right,
-        std::string const &condition_name,
-        std::string const &condition_source,
-        std::string const &line);
-
-
-    template<>
-    void fail<double>(
-        double      const &left,
-        double      const &right,
-        std::string const &condition_name,
-        std::string const &condition_source,
-        std::string const &line);
-
-    template<>
-    void fail<std::chrono::system_clock::time_point>(
-        std::chrono::system_clock::time_point const &left,
-        std::chrono::system_clock::time_point const &right,
-        std::string const &condition_name,
-        std::string const &condition_source,
-        std::string const &line);
-
     void fail(
         std::string const &condition_source,
         std::string const &line);
@@ -133,6 +92,48 @@ public:
 
 
 // -----
+
+
+template<>
+void UnitTest::fail<std::string>(
+    std::string const &left,
+    std::string const &right,
+    std::string const &condition_name,
+    std::string const &condition_source,
+    std::string const &line);
+
+template<>
+void UnitTest::fail<uint64_t>(
+    uint64_t    const &left,
+    uint64_t    const &right,
+    std::string const &condition_name,
+    std::string const &condition_source,
+    std::string const &line);
+
+template<>
+void UnitTest::fail<int64_t>(
+    int64_t     const &left,
+    int64_t     const &right,
+    std::string const &condition_name,
+    std::string const &condition_source,
+    std::string const &line);
+
+
+template<>
+void UnitTest::fail<double>(
+    double      const &left,
+    double      const &right,
+    std::string const &condition_name,
+    std::string const &condition_source,
+    std::string const &line);
+
+template<>
+void UnitTest::fail<std::chrono::system_clock::time_point>(
+    std::chrono::system_clock::time_point const &left,
+    std::chrono::system_clock::time_point const &right,
+    std::string const &condition_name,
+    std::string const &condition_source,
+    std::string const &line);
 
 
 template<>

@@ -57,6 +57,11 @@ TEST(uri) {
     ASSERT(static_cast<bool>(ya_ru_ipv4_expected));
     ASSERT(*ya_ru_ipv4_expected, equal, *ya_ru_ipv4);
     ASSERT(URI("http://ya.rur").getIPv4(), std::exception);
+
+    string value =
+        "/1/2/Debug/iridium_test "
+        "run --mode=raw --print-result=json /parsing/node.cpp";
+    LOGT << URI(value).getHost();
 }
 
 

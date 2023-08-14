@@ -56,7 +56,7 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::vector<std::string> const &args)
 :
-    CStreamPort         (URI("file://" + app)),
+    CStreamPort         (URI("process://" + app)),
     m_state_internal    {},
     m_app               (app),
     m_args              (args),

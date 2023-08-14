@@ -21,12 +21,12 @@ namespace implementation {
 
 class CTestRunnerFork: public ITestRunner {
 public:
+    DEFINE_IMPLEMENTATION(CTestRunnerFork)
     static std::chrono::seconds const DEFAULT_TIMEOUT;
     CTestRunnerFork(
         std::string                 const &app_name,
         std::chrono::milliseconds   const &timeout = DEFAULT_TIMEOUT
     );
-    DEFINE_IMPLEMENTATION(CTestRunnerFork)
 
     TResult run(INodeTest::TSharedPtr const &node_test) override;
 private:
