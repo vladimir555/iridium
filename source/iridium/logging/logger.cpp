@@ -120,7 +120,15 @@ void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
 
 LogStream::LogStream(TEvent::TLevel const &level)
 :
-    m_event(TEvent::create(level, rjust(threading::getThreadID(), 5, ' ') + " "))
+    m_event(
+        TEvent::create(
+            TEvent {
+                std::chrono::system_clock::now(),
+                level,
+                std::this_thread::get_id()
+            }
+        )
+    )
 {}
 
 

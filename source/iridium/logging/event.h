@@ -27,11 +27,14 @@ struct TEvent {
         ERROR_,
         FATAL
     )
-    TEvent(TLevel const &level, std::string const &line);
-    ///
-    TLevel      level;
-    ///
-    std::string line;
+    std::chrono::system_clock::time_point const
+        time;
+    TLevel const
+        level;
+    std::thread::id const
+        thread_id;
+    std::string
+        line;
 };
 
 

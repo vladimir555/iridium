@@ -34,20 +34,20 @@ set(CONFIG_OPENSSL 0)
 
 if (CONFIG_POSTGRES)
     add_definitions(-DBUILD_FLAG_POSTGRES)
-    #set(PostgreSQL_TYPE_INCLUDE_DIR "/usr/include")
     find_package(PostgreSQL REQUIRED)
-    message(${PostgreSQL_INCLUDE_DIR})
 endif()
 
 if (CONFIG_MYSQL)
     add_definitions(-DBUILD_FLAG_MYSQL)
-    #set(MYSQL_TYPE_INCLUDE_DIR "/usr/include")
     include(FindPkgConfig)
     pkg_check_modules(LIBMYSQLCLIENT REQUIRED mysqlclient)
-    foreach(FLAG ${LIBMYSQLCLIENT_CFLAGS_OTHER})
-      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAG}")
-    endforeach()
     set(MySQL_INCLUDE_DIR ${LIBMYSQLCLIENT_INCLUDE_DIRS})
+
+#    foreach(FLAG ${LIBMYSQLCLIENT_CFLAGS_OTHER})
+#      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FLAG}")
+#    endforeach()
+
+#    message(${LIBMYSQLCLIENT_LIBRARY_DIRS})
     link_directories(${LIBMYSQLCLIENT_LIBRARY_DIRS})
 endif()
 

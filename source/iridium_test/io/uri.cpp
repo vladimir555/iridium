@@ -58,10 +58,16 @@ TEST(uri) {
     ASSERT(*ya_ru_ipv4_expected, equal, *ya_ru_ipv4);
     ASSERT(URI("http://ya.rur").getIPv4(), std::exception);
 
-    string value =
-        "/1/2/Debug/iridium_test "
-        "run --mode=raw --print-result=json /parsing/node.cpp";
-    LOGT << URI(value).getHost();
+    {
+        string source =
+            "process:///1/2/Debug/iridium_test "
+            "run --mode=raw --print-result=json /parsing/node.cpp";
+        URI uri(source);
+
+        ASSERT("/1/2/Debug/iridium_test", equal, uri.getAddress());
+        ASSERT("iridium_test", equal, uri.getHost());
+        ASSERT("run --mode=raw --print-result=json /parsing/node.cpp", equal, uri.getArguments());
+    }
 }
 
 

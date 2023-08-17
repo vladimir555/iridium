@@ -3,7 +3,7 @@
 #include <cstring>
 #include <sys/stat.h>
 
-#include "iridium/convertion/convert.h"
+#include "iridium/items.h"
 #include "iridium/platform.h"
 #include "iridium/logging/logger.h"
 
@@ -179,11 +179,20 @@ void CFileStream::initialize() {
          "initialize file '" + m_file_name + "'" +
          " mode "   + convert<string>(m_open_mode) +
          " error: " + strerrorInternal(errno)); // ----->
+
+    if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
+        assertOK(ftrylockfile(m_file),
+         "initialize file '" + m_file_name + "'" +
+         " mode "   + convert<string>(m_open_mode) +
+         " error: " + strerrorInternal(errno)); // ----->
 }
 
 
 void CFileStream::finalize() {
     if (m_file) {
+        if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
+            funlockfile(m_file);
+
         auto result = fcloseInternal(m_file);
         assertOK(result,
             "finalize file '" + m_file_name + "'" +

@@ -112,21 +112,30 @@ URI::URI(std::string const &source)
             m_protocol = convert<TProtocol>(protocol);
 
         if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE)) {
+            auto tokens = split(source, PROCESS_ARGUMENT_DELIMITER, 2);
+
+            if (m_protocol == TProtocol::FILE && tokens.size() > 1)
+                throw std::runtime_error("wrong file path format");
+
+            if (!tokens.empty())
+                m_address   = tokens.front();
+
+            if (!tokens.empty())
+                m_arguments = tokens.back();
+
             // todo: windows path delimeter
             // address=path/host + args
-            extractTokens(PROCESS_ARGUMENT_DELIMITER, source, m_address);
             if (m_address.empty())
                 m_address = unmask(source);
             else
                 m_address = unmask(m_address);
 
             // todo: check file or dir
-            auto pos = m_address.find_last_of(PATH_DELIMITER);
-
-            if (pos == string::npos)
+            auto pos =   m_address.find_last_of(PATH_DELIMITER);
+            if  (pos == string::npos)
                 m_host = m_address;
             else
-                m_host = m_address.substr(pos);
+                m_host = m_address.substr(pos + PATH_DELIMITER.size());
 
             m_path = m_address;
         } else {
