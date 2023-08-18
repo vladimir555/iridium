@@ -2,7 +2,6 @@
 
 #include <cstring>
 #include <sys/stat.h>
-#include <sys/file.h>
 
 #include "iridium/items.h"
 #include "iridium/platform.h"
@@ -12,6 +11,8 @@
 
 #ifdef WINDOWS_PLATFORM
 #include <io.h>
+#else
+#include <sys/file.h>
 #endif // WINDOWS_PLATFORM
 
 
@@ -182,18 +183,39 @@ void CFileStream::initialize() {
          " error: " + strerrorInternal(errno)); // ----->
 
     if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
+#ifdef WINDOWS_PLATFORM
+        OVERLAPPED o { 0 };
+        auto result = LockFileEx(
+            reinterpret_cast<HANDLE>(_get_osfhandle(getIDInternal())),
+            LOCKFILE_EXCLUSIVE_LOCK |
+            LOCKFILE_FAIL_IMMEDIATELY, 
+            0, MAXDWORD, MAXDWORD, &o);
+        if (!result)
+            throw std::runtime_error(
+                "initialization file '" + m_file_name + "'" +
+                " mode " + convert<string>(m_open_mode) +
+                " error: file is locked"); // ----->
+#else
         assertOK(flock(getIDInternal(), LOCK_EX | LOCK_NB),
             "initialization file '" + m_file_name + "'" +
             " mode "   + convert<string>(m_open_mode) +
             " error: " + strerrorInternal(errno)); // ----->
+#endif
     }
 }
 
 
 void CFileStream::finalize() {
     if (m_file) {
-        if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
+        if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
+#ifdef WINDOWS_PLATFORM
+            UnlockFile(
+                reinterpret_cast<HANDLE>(_get_osfhandle(getIDInternal())),
+                0, 0, MAXDWORD, MAXDWORD);
+#else
             flock(getIDInternal(), LOCK_UN);
+#endif
+        }
 
         assertOK(fcloseInternal(m_file),
             "finalization file '" + m_file_name + "'" +
