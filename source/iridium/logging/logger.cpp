@@ -103,8 +103,13 @@ config::TLogger Logger::getConfig() {
 
 void Logger::log(TEvent::TConstSharedPtr const &e) {
     LOCK_SCOPE();
-    for (auto const &sink: m_sinks)
-        sink->log(e);
+    try {
+        for (auto const &sink: m_sinks)
+            sink->log(e);
+    } catch (std::exception const &e) {
+        std::cerr << e.what() << std::endl;
+        throw;
+    }
 }
 
 
