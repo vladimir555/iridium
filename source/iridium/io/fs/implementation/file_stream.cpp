@@ -2,6 +2,7 @@
 
 #include <cstring>
 #include <sys/stat.h>
+#include <sys/file.h>
 
 #include "iridium/items.h"
 #include "iridium/platform.h"
@@ -176,26 +177,26 @@ void CFileStream::initialize() {
 
     m_file = fopenInternal(m_file_name.c_str(), open_mode.c_str());
     assertOK(m_file,
-         "initialize file '" + m_file_name + "'" +
+         "initialization file '" + m_file_name + "'" +
          " mode "   + convert<string>(m_open_mode) +
          " error: " + strerrorInternal(errno)); // ----->
 
-    if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
-        assertOK(ftrylockfile(m_file),
-         "initialize file '" + m_file_name + "'" +
-         " mode "   + convert<string>(m_open_mode) +
-         " error: " + strerrorInternal(errno)); // ----->
+    if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
+        assertOK(flock(getIDInternal(), LOCK_EX | LOCK_NB),
+            "initialization file '" + m_file_name + "'" +
+            " mode "   + convert<string>(m_open_mode) +
+            " error: " + strerrorInternal(errno)); // ----->
+    }
 }
 
 
 void CFileStream::finalize() {
     if (m_file) {
         if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
-            funlockfile(m_file);
+            flock(getIDInternal(), LOCK_UN);
 
-        auto result = fcloseInternal(m_file);
-        assertOK(result,
-            "finalize file '" + m_file_name + "'" +
+        assertOK(fcloseInternal(m_file),
+            "finalization file '" + m_file_name + "'" +
             " mode "   + convert<string>(m_open_mode) +
             " error: " + strerrorInternal(errno)); // ----->
         m_file = nullptr;
