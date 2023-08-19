@@ -79,7 +79,7 @@ void Logger::setConfig(config::TLogger const &config) {
         if(!sink)
             throw std::runtime_error(
                 "sink type '" + convert<std::string>(sink_config.Type.get()) +
-                " uri '" + sink_config.Uri.get() + "' error: not implemented");
+                " uri '" + sink_config.Uri.get() + "' error: not implemented"); // ----->
 
         if (sink_config.IsAsync.get())
             sink = CSinkAsync::create(sink);
@@ -95,20 +95,22 @@ void Logger::setConfig(config::TLogger const &config) {
 config::TLogger Logger::getConfig() {
     LOCK_SCOPE();
     if (m_config)
-        return config::TLogger(m_config);
+        return config::TLogger(m_config); // ----->
     else
-        throw std::runtime_error("logger config is empty");
+        throw std::runtime_error("logger config is empty"); // ----->
 }
 
 
 void Logger::log(TEvent::TConstSharedPtr const &e) {
     LOCK_SCOPE();
     try {
-        for (auto const &sink: m_sinks)
+        for (auto const &sink: m_sinks) {
             sink->log(e);
+            sink->flush();
+        }
     } catch (std::exception const &e) {
         std::cerr << e.what() << std::endl;
-        throw;
+        throw; // ----->
     }
 }
 

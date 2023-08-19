@@ -33,6 +33,9 @@ void CSinkAsync::log(TEvent::TConstSharedPtr const &e) {
 }
 
 
+void CSinkAsync::flush() {}
+
+
 CSinkAsync::CWorkerHandler::CWorkerHandler(ISink::TSharedPtr const &sink)
 :
     m_sink(sink)
@@ -52,6 +55,7 @@ void CSinkAsync::CWorkerHandler::finalize() {
 void CSinkAsync::CWorkerHandler::handle(TInputItems const &logger_events) {
     for (auto const &e: logger_events)
         m_sink->log(e);
+    m_sink->flush();
 }
 
 

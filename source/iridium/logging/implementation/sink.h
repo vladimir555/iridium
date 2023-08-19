@@ -25,6 +25,7 @@ public:
     void initialize() override;
     void finalize() override;
     void log(TEvent::TConstSharedPtr const &event) override;
+    void flush() override;
 
 private:
     typedef threading::IWorkerPusher<TEvent::TConstSharedPtr> IWorkerPusher;

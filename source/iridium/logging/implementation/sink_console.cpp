@@ -23,6 +23,11 @@ void CSinkConsole::log(TEvent::TConstSharedPtr const &event) {
 }
 
 
+void CSinkConsole::flush() {
+    cout << std::flush;
+}
+
+
 void CSinkConsole::initialize() {}
 
 
