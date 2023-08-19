@@ -23,6 +23,7 @@ using iridium::convertion::convert;
 namespace {
 
 
+// todo: refactor, move to platform
 #include <iridium/macros/disable_warnings.h>
 auto fopenInternal      = ::fopen;
 auto fcloseInternal     = ::fclose;
@@ -176,26 +177,19 @@ void CFileStream::initialize() {
 //    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ, TOpenMode::WRITE})
 //        open_mode = "rb+";
 
-    m_file = fopenInternal(m_file_name.c_str(), open_mode.c_str());
-    assertOK(m_file,
-         "initialization file '" + m_file_name + "'" +
-         " mode "   + convert<string>(m_open_mode) +
-         " error: " + strerrorInternal(errno)); // ----->
-
     if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
 #ifdef WINDOWS_PLATFORM
-        OVERLAPPED o { 0 };
-        auto result = LockFileEx(
-            reinterpret_cast<HANDLE>(_get_osfhandle(getIDInternal())),
-            LOCKFILE_EXCLUSIVE_LOCK |
-            LOCKFILE_FAIL_IMMEDIATELY, 
-            0, MAXDWORD, MAXDWORD, &o);
-        if (!result)
-            throw std::runtime_error(
-                "initialization file '" + m_file_name + "'" +
-                " mode " + convert<string>(m_open_mode) +
-                " error: file is locked"); // ----->
+        m_file = _fsopen(m_file_name.c_str(), open_mode.c_str(), _SH_DENYWR);
+        assertOK(m_file,
+            "initialization file '" + m_file_name + "'" +
+            " mode " + convert<string>(m_open_mode) +
+            " error: " + strerrorInternal(errno)); // ----->
 #else
+        m_file = fopenInternal(m_file_name.c_str(), open_mode.c_str());
+        assertOK(m_file,
+            "initialization file '" + m_file_name + "'" +
+            " mode " + convert<string>(m_open_mode) +
+            " error: " + strerrorInternal(errno)); // ----->
         assertOK(flock(getIDInternal(), LOCK_EX | LOCK_NB),
             "initialization file '" + m_file_name + "'" +
             " mode "   + convert<string>(m_open_mode) +
@@ -209,9 +203,6 @@ void CFileStream::finalize() {
     if (m_file) {
         if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
 #ifdef WINDOWS_PLATFORM
-            UnlockFile(
-                reinterpret_cast<HANDLE>(_get_osfhandle(getIDInternal())),
-                0, 0, MAXDWORD, MAXDWORD);
 #else
             flock(getIDInternal(), LOCK_UN);
 #endif
