@@ -35,6 +35,8 @@ public:
     ///
     virtual void log(TEvent::TConstSharedPtr const &e) = 0;
     ///
+    virtual void flush() = 0;
+    ///
     static std::string makeLine(TEvent::TConstSharedPtr const &e);
     ///
     static std::atomic<bool> is_gmt_time;

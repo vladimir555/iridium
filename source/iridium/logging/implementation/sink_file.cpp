@@ -113,8 +113,13 @@ void CSinkFile::log(TEvent::TConstSharedPtr const &event) {
     auto line = makeLine(event);
     line.push_back('\n');
     m_file_writer->write(Buffer::create(line.begin(), line.end()));
-//    m_file_writer->flush();
 }
+
+
+void CSinkFile::flush() {
+    m_file_writer->flush();
+}
+
 
 
 } // implementation
