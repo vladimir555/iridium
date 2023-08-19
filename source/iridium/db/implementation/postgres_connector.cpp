@@ -35,6 +35,11 @@ CPostgresConnector::~CPostgresConnector() {
 }
 
 
+void handlePostgresMessage(void *arg, PGresult const *result) {
+    LOGD << PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY);
+}
+
+
 void CPostgresConnector::initialize() {
 //    m_connection = std::make_shared<pqxx::connection>(
 //         "host="        + convert<string>(m_uri)    +
@@ -59,6 +64,8 @@ void CPostgresConnector::initialize() {
         m_connection = nullptr;
         throw Exception("connection to postgresql '" + m_config.Host.get() + "' error: " + error); // ----->
     }
+
+    PQsetNoticeReceiver(m_connection, handlePostgresMessage, nullptr);
 
     LOGI << "initialization postgres '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
