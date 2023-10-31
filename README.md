@@ -1,3 +1,7 @@
+Donat
+XLM address: GDP34WXZRCSHVUDQLGKJKOBMS5LOQPHCIADZU5POEF3IICZ7XNQJ65Y6
+XLM tag: 1752484
+
 # iridium
 Lightweight C ++ Framework (Public License):
   - multiplatform (windows, linux, macos, freebsd)
