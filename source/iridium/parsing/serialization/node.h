@@ -224,6 +224,7 @@ TValue Node<TValue>::get() const {
 template<typename TValue>
 void Node<TValue>::set(TValue const &value) {
     m_node_destination->setValue(convertion::convert<std::string>(value));
+    m_is_default = false;
 }
 
 

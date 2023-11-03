@@ -24,7 +24,7 @@ std::atomic<bool> ISink::is_gmt_time(false);
 
 std::string ISink::makeLine(TEvent::TConstSharedPtr const &e) {
     return
-        convert<string>(e->time, static_cast<bool>(is_gmt_time)).substr(11, string::npos) + " " +
+        convert<string>(e->time, static_cast<bool>(is_gmt_time)) + " " +
         convert<string>(e->level).substr(0, 1) + " " +
   rjust(convert<string>(e->thread_id), 5, ' ') + " " +
         e->line; // ----->

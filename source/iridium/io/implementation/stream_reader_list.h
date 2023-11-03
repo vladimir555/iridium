@@ -24,9 +24,9 @@ public:
     void    initialize()    override;
     void    finalize()      override;
     
-    Buffer::TSharedPtr read(size_t const &size) override;
-    TID     getID() const override;
-    URI::TSharedPtr getURI() const override;
+    Buffer::TSharedPtr      read(size_t const &size) override;
+    std::list<uintptr_t>    getHandles() const override;
+    URI::TSharedPtr         getURI() const override;
 
     void    add(IStreamReader::TSharedPtr const &stream_reader);
 

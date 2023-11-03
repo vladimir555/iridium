@@ -29,11 +29,11 @@ class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
 	void initialize() override;
     void finalize() override;
 
-	TID getID() const override;
+	std::list<uintptr_t> getHandles() const override;
 	Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
     size_t write(Buffer::TSharedPtr const &buffer) override;
 private:
-	HANDLE m_handle;
+	//HANDLE m_handle;
 };
 
 

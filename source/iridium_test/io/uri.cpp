@@ -68,6 +68,7 @@ TEST(uri) {
         ASSERT("iridium_test", equal, uri.getHost());
         ASSERT("run --mode=raw --print-result=json /parsing/node.cpp", equal, uri.getArguments());
     }
+    ASSERT(URI("postgres://user:").getHost(), std::exception);
 }
 
 

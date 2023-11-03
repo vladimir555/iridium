@@ -85,7 +85,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
                 LOCK_SCOPE();
 
-                auto i  = m_map_id_stream.find(reinterpret_cast<IStream::TID>(completion_key));
+                auto i  = m_map_id_stream.find(static_cast<uintptr_t>(completion_key));
                 if  (i != m_map_id_stream.end()) {
                     auto stream = i->second;
                     // todo: unknown type
@@ -119,24 +119,26 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
     try {
         std::const_pointer_cast<IStream>(stream)->initialize();
+        
+        for (auto const &handle: stream->getHandles()) {
+            if (handle)
+                break; // ----->
 
-        if (!stream->getID())
-            return; // ----->
+            ULONG_PTR completion_key = static_cast<ULONG_PTR>(handle);
+            LOGT << "subscribe id: " << uint64_t(handle);
+            assertOK(m_iocp == CreateIoCompletionPort(reinterpret_cast<HANDLE>(handle), m_iocp, completion_key, 0), "CreateIoCompletionPort");
+            //LOGT << "subscribe OK";
 
-        ULONG_PTR completion_key = reinterpret_cast<ULONG_PTR>(stream->getID());
-        LOGT << "subscribe id: " << uint64_t(stream->getID());
-        assertOK(m_iocp == CreateIoCompletionPort(stream->getID(), m_iocp, completion_key, 0), "CreateIoCompletionPort");
-        //LOGT << "subscribe OK";
+            {
+                LOCK_SCOPE();
+                m_map_id_stream[handle] = std::const_pointer_cast<IStream>(stream);
+            }
 
-        {
-            LOCK_SCOPE();
-            m_map_id_stream[stream->getID()] = std::const_pointer_cast<IStream>(stream);
+            OVERLAPPED overlapped {};
+            overlapped.hEvent = CreateEvent(nullptr, false, false, nullptr);
+            assertOK(ReadFile(reinterpret_cast<HANDLE>(handle), nullptr, 0, nullptr, &overlapped), "ReadFile");
+            assertOK(WaitForSingleObject(overlapped.hEvent, 1000) == WAIT_OBJECT_0, "WaitForSingleObject");
         }
-
-        OVERLAPPED overlapped {};
-        overlapped.hEvent = CreateEvent(nullptr, false, false, nullptr);
-        assertOK(ReadFile(stream->getID(), nullptr, 0, nullptr, &overlapped), "ReadFile");
-        assertOK(WaitForSingleObject(overlapped.hEvent, 1000) == WAIT_OBJECT_0, "WaitForSingleObject");
 
     } catch (std::exception const &e) {
         throw std::runtime_error("multiplexer subscribing error: " + std::string(e.what())); // ----->
@@ -145,20 +147,21 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
+    for (auto const &handle : stream->getHandles()) {
+        if (!stream || handle) {
+            //LOGW << "unsubscribe stream with null id";
+            return; // ----->
+        }
+        try {
+            LOGT << "unsubscribe id: " << uint64_t(handle);
+            CancelIo(reinterpret_cast<HANDLE>(handle));
+            //LOGT << "unsubscribe OK";
 
-    if (!stream || !stream->getID()) {
-        //LOGW << "unsubscribe stream with null id";
-        return; // ----->
-    }
-    try {
-        LOGT << "unsubscribe id: " << uint64_t(stream->getID());
-        CancelIo(stream->getID());
-        //LOGT << "unsubscribe OK";
-
-        LOCK_SCOPE();
-        m_map_id_stream.erase(stream->getID());
-    } catch (std::exception const &e) {
-        throw std::runtime_error("multiplexer unsubscribing error: " + std::string(e.what())); // ----->
+            LOCK_SCOPE();
+            m_map_id_stream.erase(handle);
+        } catch (std::exception const &e) {
+            throw std::runtime_error("multiplexer unsubscribing error: " + std::string(e.what())); // ----->
+        }
     }
 }
 

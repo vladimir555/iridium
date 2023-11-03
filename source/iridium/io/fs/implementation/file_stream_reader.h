@@ -6,7 +6,6 @@
 #define HEADER_FILE_STREAM_READER_2BC903C8_78B1_420B_A0B8_30FFF66CC371
 
 
-#include "iridium/io/fs/file_stream.h"
 #include "file_stream.h"
 
 
@@ -16,20 +15,10 @@ namespace fs {
 namespace implementation {
 
 
-class CFileStreamReader: public CFileStream, public IFileStreamReader {
+class CFileStreamReader: public virtual CFileStream {
 public:
     DEFINE_IMPLEMENTATION(CFileStreamReader)
     CFileStreamReader(std::string const &path);
-    
-    void    initialize()  override;
-    void    finalize()    override;
-
-    TID     getID() const override;
-    URI::TSharedPtr getURI() const override;
-
-    Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
-    size_t  getSize() override;
-    TFileStatus getStatus() override;
 };
 
 

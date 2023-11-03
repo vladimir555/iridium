@@ -208,9 +208,9 @@ URI::TSharedPtr CSocketBase::getURI() const {
 }
 
 
-int CSocketBase::getID() const {
-    return m_socket;
-}
+//int CSocketBase::getID() const {
+//    return m_socket;
+//}
 
 
 } // unix_

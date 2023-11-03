@@ -669,6 +669,15 @@
     <ClInclude Include="db\factory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="io\fs\implementation\file_api.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\fs\implementation\file_api_assert.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="io\fs\implementation\platform\windows\file_api.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp">
@@ -969,6 +978,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="db\factory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\fs\implementation\file_api_assert.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\fs\implementation\platform\windows\file_api.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

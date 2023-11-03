@@ -69,6 +69,8 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     // TODO: exception handling
     while (paths_left > 0) {
         LOGT << "wait, paths_left: " << paths_left << " ...";
+        for (auto const &i: map_path_handler)
+            LOGT << "path left: " << i.first;
         auto results = process_result_queue->pop(m_timeout);
         LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 

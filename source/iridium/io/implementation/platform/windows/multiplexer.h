@@ -14,6 +14,8 @@
 
 #include <unordered_map>
 
+#include <Windows.h>
+
 
 namespace iridium {
 namespace io {
@@ -33,7 +35,7 @@ public:
 
 private:
     HANDLE m_iocp;
-    std::unordered_map<IStream::TID, IStream::TSharedPtr> m_map_id_stream;
+    std::unordered_map<uintptr_t, IStream::TSharedPtr> m_map_id_stream;
 };
 
 

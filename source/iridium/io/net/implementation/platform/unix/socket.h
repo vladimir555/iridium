@@ -52,7 +52,7 @@ protected:
     void    setBlockingMode(int const &socket, bool const &is_blocking);
 
     URI::TSharedPtr getURI() const override;
-    int     getID()  const override;
+//    int     getID()  const override;
 
     int             m_socket;
     URI::TSharedPtr m_uri;

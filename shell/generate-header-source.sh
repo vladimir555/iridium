@@ -19,6 +19,11 @@ for ARG in ${@:2}; do
 done;
 HEADER_PATH="${FILE_PATH}/$1.h"
 
+if [ -f "${HEADER_PATH}" ]; then
+    echo "${HEADER_PATH} exists."
+    return 1
+fi
+
 echo "${HEADER_MACRO_BEGIN}${NAMESPACE_BEGIN}${NAMESPACE_END}${HEADER_MACRO_END}" > ${HEADER_PATH}
 
 SOURCE_PATH="${FILE_PATH}/$1.cpp"

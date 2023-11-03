@@ -20,3 +20,8 @@ CMakeLists.txt.*
 .DS_Store
 .vscode
 cpp.hint
+.qtc_clangd
+.qtc
+.ninja_deps
+.ninja_log
+.cmake

@@ -34,17 +34,18 @@ protected:
     virtual ~CStreamPort() = default;
 
 public:
-    virtual void        initialize() override = 0;
-    virtual void        finalize() override = 0;
-    size_t              write(Buffer::TSharedPtr const &buffer) override;
-    Buffer::TSharedPtr  read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
-    int                 getID() const override;
-    URI::TSharedPtr     getURI() const override;
+    virtual void            initialize() override = 0;
+    virtual void            finalize() override = 0;
+    size_t                  write(Buffer::TSharedPtr const &buffer) override;
+    Buffer::TSharedPtr      read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
+    std::list<uintptr_t>    getHandles() const override;
+    URI::TSharedPtr         getURI() const override;
 
 protected:
-    void                setBlockingMode(int const &socket, bool const &is_blocking);
+    void            setBlockingMode(bool const &is_blocking);
 
-    int             m_fd;
+    int             m_fd_reader;
+    int             m_fd_writer;
     URI::TSharedPtr m_uri;
     bool            m_is_opened;
     bool            m_is_blocking_mode;
