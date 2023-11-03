@@ -23,7 +23,7 @@ void CStreamPort::finalize() {
 }
 
 
-IStreamPort::TID CStreamPort::getID() const {
+std::list<uintptr_t> CStreamPort::getHandles() const {
     throw std::runtime_error("stream port is not implemented");
 }
 

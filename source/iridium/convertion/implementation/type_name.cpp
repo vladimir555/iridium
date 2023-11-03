@@ -1,5 +1,6 @@
 #include "type_name.h"
 
+#include <stdint.h>
 
 IMPLEMENT_TYPE_NAME(std::string)
 IMPLEMENT_TYPE_NAME(std::wstring)

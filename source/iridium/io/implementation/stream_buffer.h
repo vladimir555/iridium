@@ -14,39 +14,45 @@ namespace io {
 namespace implementation {
 
 
-class CStreamReaderBuffer: public IStreamReader {
+class CStreamBuffer: public virtual IStream {
+protected:
+    explicit CStreamBuffer(Buffer::TSharedPtr const &buffer);
+    
+    void initialize() override;
+    void finalize()   override;
+    
+    std::list<uintptr_t>    getHandles()    const override;
+    URI::TSharedPtr         getURI()        const override;
+
+    Buffer::TSharedPtr m_buffer;
+};
+
+
+class CStreamReaderBuffer: 
+    public CStreamBuffer,
+    public IStreamReader
+{
 public:
     DEFINE_IMPLEMENTATION(CStreamReaderBuffer)
-    CStreamReaderBuffer(Buffer::TSharedPtr const &buffer);
-    
-    void    initialize() override;
-    void    finalize() override;
-    TID     getID() const override;
-    URI::TSharedPtr getURI() const override;
+    explicit CStreamReaderBuffer(Buffer::TSharedPtr const &buffer);
     
     Buffer::TSharedPtr read(size_t const &size) override;
 
 private:
-    Buffer::TSharedPtr  m_buffer;
-    size_t              m_pos;
+    size_t m_pos;
 };
 
 
 // todo: interface with getBuffer
-class CStreamWriterBuffer: public IStreamWriter {
+class CStreamWriterBuffer: 
+    public CStreamBuffer,
+    public IStreamWriter
+{
 public:
     DEFINE_IMPLEMENTATION(CStreamWriterBuffer)
-    CStreamWriterBuffer(Buffer::TSharedPtr const &buffer);
-    
-    void    initialize() override;
-    void    finalize() override;
-    TID     getID() const override;
-    URI::TSharedPtr getURI() const override;
+    explicit CStreamWriterBuffer(Buffer::TSharedPtr const &buffer);
 
-    size_t  write(Buffer::TSharedPtr const &buffer) override;
-
-private:
-    Buffer::TSharedPtr  m_buffer;
+    size_t write(Buffer::TSharedPtr const &buffer) override;
 };
 
 

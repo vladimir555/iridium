@@ -47,8 +47,7 @@ CProcessStream::CProcessStream(
     m_state_internal    ({}),
     m_app               (app),
     m_args              (assign(split(args, " "))),
-    m_command_line      (app + " " + args),
-    m_pipe_out          (0)
+    m_command_line      (app + " " + args)
 {}
 
 
@@ -61,8 +60,7 @@ CProcessStream::CProcessStream(
     m_app               (app),
     m_args              (args),
     m_command_line      (app),
-    m_pid               (0),
-    m_pipe_out          (0)
+    m_pid               (0)
 {
     for (auto const &arg: args)
         m_command_line  += " " + arg;
@@ -76,7 +74,7 @@ void CProcessStream::initialize() {
 //            LOGW << "initializing process stream '" + m_command_line + "' error: already initialized";
 //            return;
 //        }
-        if (m_fd)
+        if (m_fd_reader)
             throw std::runtime_error("not finalized"); // ----->
         
         int cout_pipe[2] = { 0 };
@@ -164,11 +162,12 @@ void CProcessStream::initialize() {
         close(cout_pipe[1]);
         close(cerr_pipe[1]);
         
-        m_fd = m_pipe_out = cout_pipe[0];
+        // todo: pipe_in -> m_fd_writer
+        m_fd_reader = cout_pipe[0];
         
-        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd;
+        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
         
-        setBlockingMode(m_fd, false);
+        setBlockingMode(false);
         
         m_exit_code.reset();
         
@@ -186,7 +185,7 @@ void CProcessStream::finalize() {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
         
-        LOGT << "finalize   process '" << m_command_line << "', id: " << m_fd;
+        LOGT << "finalize   process '" << m_command_line << "', id: " << m_fd_reader;
         
         //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
         //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
@@ -216,10 +215,9 @@ void CProcessStream::finalize() {
             //todo: timeout condition
         }
         
-        if (m_pipe_out) {
-            close(m_pipe_out);
-            m_pipe_out  = 0;
-            m_fd        = 0;
+        if (m_fd_reader) {
+            close(m_fd_reader);
+            m_fd_reader = 0;
         }
         
         //    m_state_internal = { 0 };
@@ -281,7 +279,7 @@ IProcess::TState CProcessStream::getState() {
         process_state_str += " continued";
 
     if (!process_state_str.empty())
-        LOGT << "process '" << m_command_line << "' state: " << process_state_str;
+        LOGT << "process '" << m_command_line << "' state: " << process_state_str << " fd: " << m_fd_reader;
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);

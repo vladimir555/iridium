@@ -33,16 +33,13 @@ Buffer::TSharedPtr CStreamReaderList::read(size_t const &size) {
     }
     return {}; // ----->
 }
-    
-    
-IStream::TID CStreamReaderList::getID() const {
-    if (m_streams.empty() || m_stream == m_streams.end())
-        return {}; // ----->
-    else
-        return m_stream->get()->getID(); // ----->
+
+
+std::list<uintptr_t> CStreamReaderList::getHandles() const {
+    return m_stream->get()->getHandles(); // ----->
 }
 
-
+    
 URI::TSharedPtr CStreamReaderList::getURI() const {
     if (m_streams.empty() || m_stream == m_streams.end())
         return {}; // ----->

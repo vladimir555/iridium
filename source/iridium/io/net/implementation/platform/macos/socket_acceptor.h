@@ -37,7 +37,7 @@ public:
     void finalize() override;
 
     URI::TSharedPtr getURI() const override;
-    int getID() const override;
+//    int getID() const override;
 
     ISocketStream::TSharedPtr accept() override;
 

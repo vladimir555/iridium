@@ -102,7 +102,7 @@ void CSinkFile::finalize() {
 
 
 void CSinkFile::log(TEvent::TConstSharedPtr const &event) {
-    if (!m_file_writer || event->level < m_level)
+    if (!m_file_writer || event->level > m_level)
         return; // ----->
 
     if (m_rotation == TRotation::DAILY && system_clock::now() > m_last_initialization_time) {

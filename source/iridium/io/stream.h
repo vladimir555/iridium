@@ -13,14 +13,14 @@
 #include "buffer.h"
 #include "uri.h"
 
-#include <vector>
-#include <functional>
+#include <list>
+//#include <functional>
 
 
-#ifdef WINDOWS_PLATFORM
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#endif
+//#ifdef WINDOWS_PLATFORM
+//#define WIN32_LEAN_AND_MEAN
+//#include <Windows.h>
+//#endif
 
 
 namespace iridium {
@@ -30,21 +30,11 @@ namespace io {
 static size_t const DEFAULT_BUFFER_SIZE = 65535;
 
 
-class IStream: public pattern::IInitializable {
+class IStream: public virtual pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)
-
-#ifdef WINDOWS_PLATFORM
-    typedef HANDLE TID;
-#else
-    typedef int TID;
-#endif
-
-    // todo: for windows int &getID() const;
-    // todo: std::list<int&>
-    // todo: getURI, file:// ; memory:// ... ; sort by URI
-    virtual TID getID() const = 0;
-    virtual URI::TSharedPtr getURI() const = 0;
+    virtual std::list<uintptr_t>    getHandles()    const = 0;
+    virtual URI::TSharedPtr         getURI()        const = 0;
 };
 
     
@@ -66,8 +56,8 @@ public:
 
     
 class IStreamPort:
-    public IStreamReader,
-    public IStreamWriter
+    public virtual IStreamReader,
+    public virtual IStreamWriter
 {
 public:
     DEFINE_INTERFACE(IStreamPort)

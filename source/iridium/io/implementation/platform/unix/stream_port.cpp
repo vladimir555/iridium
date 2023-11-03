@@ -7,6 +7,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include "iridium/convertion/convert.h"
+
+
+using iridium::convertion::convert;
+
 
 namespace iridium {
 namespace io {
@@ -17,15 +22,16 @@ namespace unix_ {
 
 CStreamPort::CStreamPort(URI const &uri)
 :
-    m_fd            (0),
+    m_fd_reader     (0),
+    m_fd_writer     (0),
     m_uri           (URI::create(uri)),
     m_is_opened     (false)
 {}
 
 
 size_t CStreamPort::write(Buffer::TSharedPtr const &buffer_) {
-    if (!m_fd)
-        throw std::runtime_error("stream port read error: not initialized"); // ----->
+    if (!m_fd_writer)
+        throw std::runtime_error("stream port write error: not initialized"); // ----->
 
     auto buffer = static_cast<void const *>(buffer_->data());
     auto size   = DEFAULT_BUFFER_SIZE;
@@ -33,7 +39,7 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer_) {
     if (size > buffer_->size())
         size = buffer_->size();
 
-    auto result = ::write(m_fd, buffer, size);
+    auto result = ::write(m_fd_writer, buffer, size);
 
 //    LOGT << __FUNCTION__ << " fd: " << m_fd << ", size: " << size << ", buffer:\n"
 //         << static_cast<char const *>(buffer);
@@ -60,12 +66,12 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer_) {
 
 
 Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
-    if (!m_fd)
+    if (!m_fd_reader)
         throw std::runtime_error("stream port read error: not initialized"); // ----->
 
     auto const size = size_ == 0 ? DEFAULT_BUFFER_SIZE : size_;
     char buffer[size];
-    auto result = ::read(m_fd, buffer, size - 1);
+    auto result = ::read(m_fd_reader, buffer, size - 1);
 
     if (result < 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK)
@@ -89,12 +95,22 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 }
 
 
-int CStreamPort::getID() const {
-    if (m_fd)
-        return m_fd; // ----->
+std::list<uintptr_t> CStreamPort::getHandles() const {
+    std::list<uintptr_t> handles;
     
-    throw std::runtime_error(
-        "stream port get id error: '" + (m_uri ? m_uri->getSource() : "") + "' not initialized"); // ----->
+    if (m_fd_reader)
+        handles.push_back(m_fd_reader);
+    
+    if (m_fd_writer)
+        handles.push_back(m_fd_writer);
+    
+    if (handles.empty())
+        throw std::runtime_error(
+            "stream port get handles error: '" +
+            (m_uri ? m_uri->getSource() : "") +
+            "' not initialized"); // ----->
+
+    return handles; // ----->
 }
 
 
@@ -103,13 +119,17 @@ URI::TSharedPtr CStreamPort::getURI() const {
 }
 
 
-void CStreamPort::setBlockingMode(int const &socket, bool const &is_blocking) {
-    auto flags = assertOK(fcntl(socket, F_GETFL, 0), "get flag error");
-    if (is_blocking)
-        flags &= !O_NONBLOCK;
-    else
-        flags |=  O_NONBLOCK;
-    assertOK(fcntl(socket, F_SETFL, flags), "set flag error");
+void CStreamPort::setBlockingMode(bool const &is_blocking) {
+    for (auto const &fd: { m_fd_reader, m_fd_writer }) {
+        if (!fd)
+            continue; // <---
+        auto flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
+        if (is_blocking)
+            flags &= !O_NONBLOCK;
+        else
+            flags |=  O_NONBLOCK;
+        assertOK(fcntl(fd, F_SETFL, flags), "set flag error, fd " + convert<std::string>(fd));
+    }
     m_is_blocking_mode = is_blocking;
 }
 

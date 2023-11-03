@@ -222,14 +222,14 @@ io::URI::TSharedPtr CProcessStream::getURI() const {
 }
 
 
-IProcess::TID CProcessStream::getID() const {
+std::list<uintptr_t> CProcessStream::getHandles() const {
     try {
         if (!m_pipe_stdout_reader)
-            return nullptr;
+            return {};
             //throw std::runtime_error("not initialized"); // ----->
 
         //return m_overlapped.hEvent; // waitformultipleobjects----->
-        return m_pipe_stdout_reader; // ----->
+        return std::list<uintptr_t>{ reinterpret_cast<uintptr_t>(m_pipe_stdout_reader) }; // ----->
 
     } catch (std::exception const& e) {
         throw std::runtime_error("process '" + m_command_line + "' get id error: " + e.what()); // ----->

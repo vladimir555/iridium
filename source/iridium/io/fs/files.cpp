@@ -54,7 +54,7 @@ string readFile(string const &file_name) {
     reader->initialize();
 
     // todo: read timeout checking
-    auto    file_size = reader->getSize();
+    auto    file_size = reader->getStatus().size;
     while  (file_size > result.size()) {
         auto buffer = reader->read(DEFAULT_BUFFER_SIZE);
         if (buffer)

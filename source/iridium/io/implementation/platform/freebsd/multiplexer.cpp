@@ -158,27 +158,26 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer subscribing error: kqueue is not initialized"); // ----->
 
-    if (!stream)
+    if (!stream || stream->getHandles().empty())
         return; // ----->
 
-    int64_t fd = stream->getID();
-
-    if (fd <= 0)
-        return;
-
-    {
-        LOCK_SCOPE();
-        m_map_fd_stream[fd] = stream;
-//        LOGT << "!   map fd: " << fd;
+    for (auto const &fd: stream->getHandles()) {
+        if (fd <= 0)
+            return;
+        
+        {
+            LOCK_SCOPE();
+            m_map_fd_stream[fd] = stream;
+            //        LOGT << "!   map fd: " << fd;
+        }
+        
+        LOGT << __FUNCTION__ << "  , fd: " << fd;
+        // todo: optimize uintptr_t
+        auto result = write(m_pipe_add[1], &fd, 8);
+        
+        if (result < 0)
+            throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
     }
-
-    LOGT << __FUNCTION__ << "  , fd: " << fd;
-    // todo: optimize uintptr_t
-    auto result = write(m_pipe_add[1], &fd, 8);
-
-    if (result < 0)
-        throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
-
 }
 
 
@@ -186,22 +185,21 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
 
-    if (!stream ||
-        !stream->getID())
-    {
+    if (!stream || stream->getHandles().empty()) {
 //        LOGW << "unsubscribe stream with null id";
         return; // ----->
     }
 
-    int64_t fd = stream->getID();
-    if (fd <= 0)
-        return;
-
-    LOGT << __FUNCTION__ << ", fd: " << fd;
-    auto result = write(m_pipe_del[1], &fd, 8);
-
-    if (result < 0)
-        throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
+    for (auto const &fd: stream->getHandles()) {
+        if (fd <= 0)
+            return; // ----->
+        
+        LOGT << __FUNCTION__ << ", fd: " << fd;
+        auto result = write(m_pipe_del[1], &fd, 8);
+        
+        if (result < 0)
+            throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
+    }
 }
 
 

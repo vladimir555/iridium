@@ -6,7 +6,6 @@
 #define HEADER_FILE_STREAM_WRITER_06F9B4BF_E655_4FB7_8EA0_185306B7C2A3
 
 
-#include "iridium/io/fs/file_stream.h"
 #include "file_stream.h"
 
 
@@ -16,19 +15,10 @@ namespace fs {
 namespace implementation {
     
     
-class CFileStreamWriter: public CFileStream, public IFileStreamWriter {
+class CFileStreamWriter: public virtual CFileStream {
 public:
     DEFINE_IMPLEMENTATION(CFileStreamWriter)
     CFileStreamWriter(std::string const &path, bool const &is_rewrite = false);
-    
-    void    initialize()  override;
-    void    finalize()    override;
-    
-    TID     getID() const override;
-    URI::TSharedPtr getURI() const override;
-    
-    size_t  write(Buffer::TSharedPtr const &buffer) override;
-    void    flush() override;
 };
     
     

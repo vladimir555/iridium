@@ -125,7 +125,7 @@ namespace convertion {
 //}
 
 
-//TEST(convertion, benchmark) {
+//TEST(benchmark) {
 //    runBenchmark<int    , string>();
 //    runBenchmark<double , string>();
 //    runBenchmark<string , int>();

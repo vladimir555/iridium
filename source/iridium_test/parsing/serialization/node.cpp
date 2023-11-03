@@ -6,6 +6,7 @@
 #include <iridium/parsing/implementation/parser_json.h>
 #include <iridium/io/fs/files.h>
 #include <iridium/enum.h>
+#include <iridium/assert.h>
 
 #include <iostream>
 
@@ -14,6 +15,7 @@ using std::string;
 
 using iridium::convertion::convert;
 using iridium::parsing::implementation::CNode;
+using iridium::assertExists;
 
     
 namespace iridium {
@@ -152,10 +154,24 @@ TEST(serialization) {
     ASSERT("55" , equal, root.ThirdItem.ThirdItem_ptr.get()->Value.get())
 
     ASSERT("defaultValue1", equal, static_cast<string>   (root.FirstItem.AttributeOne));
+    ASSERT(root.FirstItem.AttributeOne.isDefault())
     ASSERT(55             , equal, static_cast<int>      (root.FirstItem.AttributeTwo));
     ASSERT(C::TEnum::ENUM2, equal,                        root.FirstItem.Enum.get());
     ASSERT("defaultValue1", equal, root.getNode()->getChild("first-item")->getChild("attribute-one")->getValue());
 
+    {
+//        LOGT << root.getNode();
+        root.FirstItem.AttributeOne.set("defaultValue11");
+//        LOGT << root.getNode();
+        ASSERT("defaultValue11", equal, static_cast<string>(root.FirstItem.AttributeOne));
+        
+        string value = assertComplete(
+            root.getNode()->slice("/first-item/attribute-one"),
+            "expected value does not exists").front()->getValue();
+        ASSERT("defaultValue11", equal, value);
+        ASSERT(!root.FirstItem.AttributeOne.isDefault())
+    }
+    
     ASSERT(2, equal, root.Item1.size());
     auto i = root.Item1.begin();
     i++++;

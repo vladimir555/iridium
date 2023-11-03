@@ -63,10 +63,13 @@
     <ClInclude Include="io\fs\files.h" />
     <ClInclude Include="io\fs\file_stream.h" />
     <ClInclude Include="io\fs\file_value.h" />
+    <ClInclude Include="io\fs\implementation\file_api.h" />
+    <ClInclude Include="io\fs\implementation\file_api_assert.h" />
     <ClInclude Include="io\fs\implementation\file_cache.h" />
     <ClInclude Include="io\fs\implementation\file_stream.h" />
     <ClInclude Include="io\fs\implementation\file_stream_reader.h" />
     <ClInclude Include="io\fs\implementation\file_stream_writer.h" />
+    <ClInclude Include="io\fs\implementation\platform\windows\file_api.h" />
     <ClInclude Include="io\implementation\client.h" />
     <ClInclude Include="io\implementation\context.h" />
     <ClInclude Include="io\implementation\context_manager.h" />
@@ -265,10 +268,12 @@
     <ClCompile Include="io\client.cpp" />
     <ClCompile Include="io\event.cpp" />
     <ClCompile Include="io\fs\files.cpp" />
+    <ClCompile Include="io\fs\implementation\file_api_assert.cpp" />
     <ClCompile Include="io\fs\implementation\file_cache.cpp" />
     <ClCompile Include="io\fs\implementation\file_stream.cpp" />
     <ClCompile Include="io\fs\implementation\file_stream_reader.cpp" />
     <ClCompile Include="io\fs\implementation\file_stream_writer.cpp" />
+    <ClCompile Include="io\fs\implementation\platform\windows\file_api.cpp" />
     <ClCompile Include="io\implementation\client.cpp" />
     <ClCompile Include="io\implementation\context.cpp" />
     <ClCompile Include="io\implementation\context_manager.cpp" />

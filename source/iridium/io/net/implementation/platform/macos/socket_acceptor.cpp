@@ -30,9 +30,9 @@ URI::TSharedPtr CSocketAcceptor::getURI() const {
 }
 
 
-int CSocketAcceptor::getID() const {
-    return 0;
-}
+//int CSocketAcceptor::getID() const {
+//    return 0;
+//}
 
 
 ISocketStream::TSharedPtr CSocketAcceptor::accept() {

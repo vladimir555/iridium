@@ -169,19 +169,25 @@ CSessionManager::CContextWorkerHandler::handle(
                             case Event::TOperation::OPEN:
                                 event->stream->initialize();
                                 m_multiplexer->subscribe(event->stream);
-                                break;
+                                break; // --->
                             case Event::TOperation::CLOSE:
                                 m_multiplexer->unsubscribe(event->stream);
-                                break;
+                                break; // --->
                             case Event::TOperation::READ:
                             case Event::TOperation::WRITE:
-                                if (context->transmit(event)) {
-                                    LOGT << "transmit: true";
-                                } else {
-                                    event->operation = Event::TOperation::EOF_;
-                                    LOGT << "transmit: false";
+                                try {
+                                    if (context->transmit(event)) {
+                                        LOGT << "transmit: true";
+                                    } else {
+                                        event->operation = Event::TOperation::EOF_;
+                                        LOGT << "transmit: false";
+                                        event->status = Event::TStatus::END;
+                                    }
+                                } catch (std::exception const &e) {
+                                    LOGE << e.what();
+                                    event->operation = Event::TOperation::ERROR_;
                                 }
-                                event->status = Event::TStatus::END;
+                                
                                 events_to_repeat.push_back(event);
 
 //                                // ----- for unix only
@@ -189,7 +195,16 @@ CSessionManager::CContextWorkerHandler::handle(
 //                                events_to_repeat.push_back(event);
 //                                // ----- for unix only
 
-                                break;
+                                break; // --->
+                            case Event::TOperation::EOF_:
+                                if (context->transmit(event))
+                                    events_to_repeat.push_back(event);
+                                else
+                                    event->status = Event::TStatus::END;
+                                break; // --->
+                            case Event::TOperation::ERROR_:
+                                event->status = Event::TStatus::END;
+                                break; // --->
                             default:
                                 LOGT << "unhandled event: "
                                      << event->operation    << " "
@@ -197,45 +212,45 @@ CSessionManager::CContextWorkerHandler::handle(
                                      << event->stream->getURI();
                                 event->status = Event::TStatus::END;
                                 events_to_repeat.push_back(event);
-                                break;
+                                break; // --->
                         }
                         
-                        break;
+                        break; // --->
                         
                     case Event::TStatus::END:
                         if (context->update(event))
                             switch (event->operation) {
                                 case Event::TOperation::OPEN:
-                                    break;
+                                    break; // --->
                                 case Event::TOperation::CLOSE:
                                     event->stream->finalize();
 //                                    if (context->transmit(event))
 //                                        events_to_repeat.push_back(event);
 //                                    else
 //                                        event->stream->finalize();
-                                    break;
+                                    break; // --->
                                 case Event::TOperation::READ:
                                 case Event::TOperation::WRITE:
 //                                    if (context->transmit(event)) {
 //                                    event->status = Event::TStatus::BEGIN;
 //                                    events_to_repeat.push_back(event);
 //                                    }
-                                    break;
+                                    break; // --->
                                 case Event::TOperation::EOF_:
-                                    break;
+                                    break; // --->
                                 default:
-                                    //LOGT << "unhandled event: "
-                                    //     << event->operation    << " "
-                                    //     << event->status       << " "
-                                    //     << event->stream->getURI();
-                                    break;
+                                    LOGT << "unhandled event: "
+                                         << event->operation    << " "
+                                         << event->status       << " "
+                                         << event->stream->getURI();
+                                    break; // --->
                             }
                         else {
                             m_context_manager->removeContext(context);
-                            continue;
+                            continue; // <---
                         }
                         
-                        break;
+                        break; // --->
                     default:
                         if (event->operation == Event::TOperation::TIMEOUT)
                             context->transmit(event);
@@ -245,11 +260,11 @@ CSessionManager::CContextWorkerHandler::handle(
                 };
             }
                 
-//            for (auto const &event: events_to_repeat)
-//                LOGT << "repeat 1: "
-//                     << event->operation    << " "
-//                     << event->status       << " "
-//                     << event->stream->getID();
+            for (auto const &event: events_to_repeat)
+                LOGT << "repeat 1: "
+                     << event->operation    << " "
+                     << event->status       << " "
+                     << event->stream->getURI();
             
             events_to_repeat.splice(events_to_repeat.end(), m_context_manager->releaseContext(context));
         }

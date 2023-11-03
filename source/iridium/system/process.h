@@ -14,7 +14,7 @@ namespace iridium {
 namespace system {
 
 
-class IProcess: virtual public io::IStreamPort {
+class IProcess: public virtual io::IStreamPort {
 public:
     DEFINE_INTERFACE(IProcess)
 

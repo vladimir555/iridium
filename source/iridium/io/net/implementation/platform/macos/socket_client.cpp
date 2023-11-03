@@ -28,9 +28,9 @@ URI::TSharedPtr CSocketClient::getURI() const {
 }
 
 
-int CSocketClient::getID() const {
-    return 0;
-}
+//int CSocketClient::getID() const {
+//    return 0;
+//}
 
 
 Buffer::TSharedPtr CSocketClient::read(size_t const &size) {

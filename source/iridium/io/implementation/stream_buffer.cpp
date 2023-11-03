@@ -9,27 +9,33 @@ namespace io {
 namespace implementation {
 
 
-CStreamReaderBuffer::CStreamReaderBuffer(Buffer::TSharedPtr const &buffer)
+CStreamBuffer::CStreamBuffer(Buffer::TSharedPtr const &buffer)
 :
-    m_buffer    (assertExists(buffer, "buffer is null")),
-    m_pos       (0)
+    m_buffer(assertExists(buffer, "buffer is null"))
 {}
 
-    
-void CStreamReaderBuffer::initialize() {}
+
+void CStreamBuffer::initialize() {}
 
 
-void CStreamReaderBuffer::finalize() {}
+void CStreamBuffer::finalize() {}
 
 
-IStream::TID CStreamReaderBuffer::getID() const {
+std::list<uintptr_t> CStreamBuffer::getHandles() const {
     return {}; // ----->
 }
 
 
-URI::TSharedPtr CStreamReaderBuffer::getURI() const {
-    return {}; // ----->
+URI::TSharedPtr CStreamBuffer::getURI() const {
+    return nullptr; // ----->
 }
+
+
+CStreamReaderBuffer::CStreamReaderBuffer(Buffer::TSharedPtr const &buffer)
+:
+    CStreamBuffer   (buffer),
+    m_pos           (0)
+{}
 
 
 Buffer::TSharedPtr CStreamReaderBuffer::read(size_t const &size) {
@@ -46,24 +52,8 @@ Buffer::TSharedPtr CStreamReaderBuffer::read(size_t const &size) {
 
 CStreamWriterBuffer::CStreamWriterBuffer(Buffer::TSharedPtr const &buffer)
 :
-    m_buffer(assertExists(buffer, "buffer is null"))
+    CStreamBuffer(buffer)
 {}
-
-    
-void CStreamWriterBuffer::initialize() {}
-
-
-void CStreamWriterBuffer::finalize() {}
-
-
-IStream::TID CStreamWriterBuffer::getID() const {
-    return {}; //----->
-}
-
-
-URI::TSharedPtr CStreamWriterBuffer::getURI() const {
-    return {}; // ----->
-}
 
 
 size_t CStreamWriterBuffer::write(Buffer::TSharedPtr const &buffer) {

@@ -25,9 +25,9 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thre
 #remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
 
 # components
-set(CONFIG_POSTGRES 1)
-set(CONFIG_MYSQL 1)
-set(CONFIG_OPENSSL 0)
+set(CONFIG_POSTGRES 0)
+set(CONFIG_MYSQL    0)
+set(CONFIG_OPENSSL  0)
 #if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 #    set(CONFIG_OPENSSL 1)
 #endif()
@@ -49,6 +49,7 @@ if (CONFIG_MYSQL)
 
 #    message(${LIBMYSQLCLIENT_LIBRARY_DIRS})
     link_directories(${LIBMYSQLCLIENT_LIBRARY_DIRS})
+
 endif()
 
 if (CONFIG_OPENSSL)
@@ -115,6 +116,6 @@ target_link_libraries(
     ${PROJECT_NAME}
     ${OPENSSL_LIBRARIES}
     ${PostgreSQL_LIBRARIES}
-    ${LIBMYSQLCLIENT_LIBRARIES}
+    ${LIBOAMYSQLCLIENT_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
 )

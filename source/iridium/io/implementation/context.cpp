@@ -42,10 +42,11 @@ std::list<Event::TSharedPtr> CContext::popEvents() {
     auto i = std::unique(events.begin(), events.end(),
         [] (auto const &l, auto const &r) {
             return
-                l && r &&
-                l->stream->getID()  == r->stream->getID() &&
-                l->operation        == r->operation &&
-                l->status           == r->status;
+                l               && r            &&
+                l->stream       && r->stream    &&
+                l->stream       == r->stream    &&
+                l->operation    == r->operation &&
+                l->status       == r->status;
         }
     );
     events.erase(i, events.end());

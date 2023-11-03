@@ -117,11 +117,20 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
 
     bool result = false;
 
-    if  (m_buffers.size()    < m_buffer_count &&
-       (!m_reader->getURI() ||
-        (m_reader->getID()  == event->stream->getID() &&
-        (checkOneOf(event->operation, Event::TOperation::READ, Event::TOperation::CLOSE, Event::TOperation::TIMEOUT)))))
-    {
+//    if  (m_buffers.size()    < m_buffer_count &&
+//       (!m_reader->getURI() ||
+//        (m_reader->getID()  == event->stream->getID() &&
+//        (checkOneOf(event->operation, Event::TOperation::READ, Event::TOperation::CLOSE, Event::TOperation::TIMEOUT)))))
+    if ( m_buffers.size() < m_buffer_count &&
+        (m_reader->getHandles().empty() ||
+        (m_reader == event->stream &&
+        checkOneOf(
+            event->operation,
+            Event::TOperation::READ,
+            Event::TOperation::CLOSE,
+            Event::TOperation::EOF_,
+            Event::TOperation::TIMEOUT)))
+    ) {
         LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
 
@@ -135,11 +144,18 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
         }
     }
 
-    if  (!m_buffers.empty() &&
-        (!m_writer->getURI() ||
-        ((m_writer->getID()  == event->stream->getID() &&
-         (checkOneOf(event->operation, Event::TOperation::WRITE, Event::TOperation::TIMEOUT))))))
-    {
+//    if  (!m_buffers.empty() &&
+//        (!m_writer->getURI() ||
+//        ((m_writer->getID()  == event->stream->getID() &&
+//         (checkOneOf(event->operation, Event::TOperation::WRITE, Event::TOperation::TIMEOUT))))))
+    if (!m_buffers.empty() &&
+        (m_writer->getHandles().empty() ||
+        (m_writer == event->stream &&
+        checkOneOf(
+            event->operation,
+            Event::TOperation::WRITE,
+            Event::TOperation::TIMEOUT)))
+    ) {
 //        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
         result |= size > 0;

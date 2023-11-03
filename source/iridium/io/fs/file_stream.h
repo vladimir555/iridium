@@ -16,38 +16,39 @@ namespace io {
 namespace fs {
 
 
-// todo: refactoring interfaces
-
-
 struct TFileStatus {
-    std::chrono::system_clock::time_point last_modified;
+    std::chrono::system_clock::time_point   
+        last_modified;
+    size_t                                  
+        size;
 };
 
 
-class IFileStreamWriter: public IStreamWriter {
+class IFileStream: public virtual IStream {
+public:
+    DEFINE_INTERFACE(IFileStream)
+    virtual TFileStatus getStatus() const = 0;
+};
+
+
+class IFileStreamWriter: public virtual IFileStream, public virtual IStreamWriter {
 public:
     DEFINE_INTERFACE(IFileStreamWriter)
     virtual void flush() = 0;
 };
 
 
-class IFileStreamReader: public IStreamReader {
+class IFileStreamReader: public virtual IFileStream, public virtual IStreamReader {
 public:
     DEFINE_INTERFACE(IFileStreamReader)
-    virtual size_t getSize() = 0;
-    // todo: move to IFileStream
-    virtual TFileStatus getStatus() = 0;
 };
-    
-    
-//class IFileStream:
-//    public IStream,
-//    public IFileStreamReader,
-//    public IFileStreamWriter
-//{
+
+
+// todo: maybe
+//class IFileStreamPort: public IFileStreamReader, public IFileStreamWriter {
 //public:
-//    DEFINE_INTERFACE(IFileStream)
-//};
+//    virtual void seek(...) = 0;
+//}
 
 
 } // fs

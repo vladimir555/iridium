@@ -6,13 +6,12 @@
 #define HEADER_FILE_STREAM_6A05934B_514A_4E85_97E7_69A721D4ED29
 
 
-#include <string>
-#include <stdio.h>
-
 #include "iridium/enum.h"
-#include "iridium/io/stream.h"
 #include "iridium/io/fs/file_stream.h"
 #include "iridium/pattern/non_copyable.h"
+
+#include <string>
+#include <stdio.h>
 
 
 namespace iridium {
@@ -21,32 +20,30 @@ namespace fs {
 namespace implementation {
 
 
-class CFileStream: public IStream, public pattern::NonCopyable {
+class CFileStream:
+    public virtual pattern::NonCopyable,
+    public virtual IFileStreamReader,
+    public virtual IFileStreamWriter
+{
 public:
     DEFINE_ENUM(TOpenMode, READ, WRITE, REWRITE)
 
-    void    initialize() override;
-    void    finalize() override;
+    virtual ~CFileStream();
 
-    TID     getID() const override;
-    URI::TSharedPtr getURI() const override;
-    
-    size_t  getSize() const;
-    
-    Buffer::TSharedPtr read (size_t const &size);
-    size_t  write(Buffer::TSharedPtr const &buffer);
+    void initialize()   override;
+    void finalize()     override;
 
-    void    flush();
+    std::list<uintptr_t>    getHandles()    const override;
+    URI::TSharedPtr         getURI()        const override;
+    TFileStatus             getStatus()     const override;
 
-    TFileStatus getStatus();
+    Buffer::TSharedPtr      read(size_t const &size) override;
+    size_t                  write(Buffer::TSharedPtr const &buffer) override;
+    void                    flush() override;
 
 protected:
-    DEFINE_CREATE(CFileStream)
 
     explicit CFileStream(std::string const &file_name, TOpenMode const &open_mode);
-    virtual ~CFileStream() override;
-
-    int      getIDInternal() const;
 
 private:
     std::string     m_file_name;

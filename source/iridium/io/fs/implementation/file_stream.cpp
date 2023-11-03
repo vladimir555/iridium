@@ -1,54 +1,13 @@
 #include "file_stream.h"
 
-#include <cstring>
-#include <sys/stat.h>
-
 #include "iridium/items.h"
-#include "iridium/platform.h"
-#include "iridium/logging/logger.h"
 
-#include "iridium/platform.h"
-
-#ifdef WINDOWS_PLATFORM
-#include <io.h>
-#else
-#include <sys/file.h>
-#endif // WINDOWS_PLATFORM
+#include "file_api.h"
+#include "file_api_assert.h"
 
 
 using std::string;
 using iridium::convertion::convert;
-
-
-namespace {
-
-
-// todo: refactor, move to platform
-#include <iridium/macros/disable_warnings.h>
-auto fopenInternal      = ::fopen;
-auto fcloseInternal     = ::fclose;
-auto fwriteInternal     = ::fwrite;
-auto freadInternal      = ::fread;
-auto fflushInternal     = ::fflush;
-auto ferrorInternal     = ::ferror;
-auto strerrorInternal   = ::strerror;
-auto filenoInternal     = ::fileno;
-#include <iridium/macros/enable_warnings.h>
-
-
-void assertOK(const int &result, const string &message) {
-    if (result != 0)
-        throw std::runtime_error(message); // ----->
-}
-
-
-void assertOK(::FILE const * const result, const string &message) {
-    if (result == nullptr)
-        throw std::runtime_error(message); // ----->
-}
-
-
-} // unnamed
 
 
 IMPLEMENT_ENUM(iridium::io::fs::implementation::CFileStream::TOpenMode)
@@ -70,7 +29,7 @@ CFileStream::CFileStream(string const &file_name, TOpenMode const &open_mode)
 
 CFileStream::~CFileStream() {
     if (m_file)
-        fcloseInternal(m_file);
+        close(m_file);
 }
 
     
@@ -79,18 +38,14 @@ Buffer::TSharedPtr CFileStream::read(size_t const &size) {
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
     
     auto buffer = Buffer::create(size, 0);
+    auto count  = freadInternal(buffer->data(), 1, buffer->size(), m_file);
     
-    auto count = freadInternal(buffer->data(), 1, buffer->size(), m_file);
-    
-//    LOGT << "read size = " << count;
-    if (count == 0) {
-//        LOGT << "fd " << getID() << " empty read";
-        return {}; // ----->
-    } else {
+    if (count == 0)
+        return nullptr; // ----->
+    else
         buffer->resize(count);
-    }
     
-    if (ferrorInternal(m_file))
+    if (::ferror(m_file))
         throw std::runtime_error(
             "read file '"       + m_file_name + "'" +
             " mode "            + convert<string>(m_open_mode) +
@@ -128,39 +83,15 @@ void CFileStream::flush() {
 }
 
 
-TFileStatus CFileStream::getStatus() {
-    TFileStatus file_status = {};
-    struct stat result      = {};
-
-    assertOK(::fstat(getIDInternal(), &result),
-         "get stat file '"  + m_file_name + "'" +
-         " error: "         + strerrorInternal(errno));
-
-#ifdef WINDOWS_PLATFORM
-    auto tp = std::chrono::system_clock::from_time_t( result.st_mtime );
-#endif
-#ifdef FREEBSD_LIKE_PLATFORM
-//#if defined(MACOS_PLATFORM) || defined(EMSCRIPTEN_PLATFORM)
-    std::chrono::system_clock::time_point tp {
-        std::chrono::duration_cast<std::chrono::system_clock::duration>(
-            std::chrono::seconds       {result.st_mtimespec.tv_sec} +
-            std::chrono::nanoseconds   {result.st_mtimespec.tv_nsec}
-        )
-    };
-#endif
-//#ifdef LINUX_PLATFORM
-#if defined(LINUX_PLATFORM) || defined(EMSCRIPTEN_PLATFORM)
-    std::chrono::system_clock::time_point tp {
-        std::chrono::duration_cast<std::chrono::system_clock::duration>(
-            std::chrono::seconds       {result.st_mtim.tv_sec} +
-            std::chrono::nanoseconds   {result.st_mtim.tv_nsec}
-        ) 
-    };
-#endif
-
-    file_status.last_modified = tp;
-
-    return file_status; // ----->
+TFileStatus CFileStream::getStatus() const {
+    try {
+        return getFileStatus(m_file); // ----->
+    } catch (std::exception const &e) {
+        throw std::runtime_error(
+            "get status file '"  + m_file_name + "'" +
+            " mode " + convert<string>(m_open_mode) +
+            " error: " + e.what()); // ----->
+    }
 }
 
 
@@ -177,100 +108,40 @@ void CFileStream::initialize() {
 //    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ, TOpenMode::WRITE})
 //        open_mode = "rb+";
 
-    if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
-#ifdef WINDOWS_PLATFORM
-        m_file = _fsopen(m_file_name.c_str(), open_mode.c_str(), _SH_DENYWR);
-        assertOK(m_file,
-            "initialization file '" + m_file_name + "'" +
-            " mode " + convert<string>(m_open_mode) +
-            " error: " + strerrorInternal(errno)); // ----->
-#else
-        m_file = fopenInternal(m_file_name.c_str(), open_mode.c_str());
-        assertOK(m_file,
-            "initialization file '" + m_file_name + "'" +
-            " mode " + convert<string>(m_open_mode) +
-            " error: " + strerrorInternal(errno)); // ----->
-        assertOK(flock(getIDInternal(), LOCK_EX | LOCK_NB),
-            "initialization file '" + m_file_name + "'" +
-            " mode "   + convert<string>(m_open_mode) +
-            " error: " + strerrorInternal(errno)); // ----->
-#endif
+    try {
+        m_file = open(m_file_name, open_mode);
+    } catch (std::exception const &e) {
+        throw std::runtime_error(
+            "initialization file '" + m_file_name + "' mode " + convert<string>(m_open_mode) +
+            " error: " + e.what()); // ----->
     }
 }
 
 
 void CFileStream::finalize() {
-    if (m_file) {
-        if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE)) {
-#ifdef WINDOWS_PLATFORM
-#else
-            flock(getIDInternal(), LOCK_UN);
-#endif
-        }
-
-        assertOK(fcloseInternal(m_file),
+    try {
+        if (m_file)
+            close(m_file);
+        m_file = nullptr;
+    } catch (std::exception const &e) {
+        throw std::runtime_error(
             "finalization file '" + m_file_name + "'" +
             " mode "   + convert<string>(m_open_mode) +
-            " error: " + strerrorInternal(errno)); // ----->
-        m_file = nullptr;
+            " error: " + e.what()); // ----->
     }
 }
 
 
-int CFileStream::getIDInternal() const {
-    // todo: move to separate headers
-    if (m_file) {
-#ifdef  LINUX_PLATFORM
-        return fileno(m_file); // ----->
-#endif
-#ifdef  FREEBSD_LIKE_PLATFORM
-        return m_file->_file; // ----->
-#endif
-#ifdef  WINDOWS_PLATFORM
-        return filenoInternal(m_file); // ----->
-#endif
-    }
-    throw std::runtime_error("file stream '" + m_file_name + "' get id error: not initialized"); // ----->
-}
-
-
-IStream::TID CFileStream::getID() const {
-#ifdef  WINDOWS_PLATFORM
-    return reinterpret_cast<TID>(_get_osfhandle(getIDInternal())); // ----->
-#else
-    return getIDInternal();
-#endif
+std::list<uintptr_t> CFileStream::getHandles() const {
+    if (m_file)
+        return std::list<uintptr_t>{ static_cast<uintptr_t>(getFD(m_file)) }; // ----->
+    else
+        return {}; // ----->
 }
 
 
 URI::TSharedPtr CFileStream::getURI() const {
-    return m_uri;
-}
-
-    
-    
-size_t CFileStream::getSize() const {
-#ifdef FREEBSD_LIKE_PLATFORM
-    struct stat   file_stat = {};
-#elif defined(WINDOWS_PLATFORM)
-    struct stat   file_stat = {};
-#else
-    struct stat64 file_stat = {};
-#endif
-
-#ifdef FREEBSD_LIKE_PLATFORM
-    auto result = fstat(filenoInternal(m_file), &file_stat);
-#elif defined(WINDOWS_PLATFORM)
-    auto result = fstat(filenoInternal(m_file), &file_stat);
-#else
-    auto result = fstat64(filenoInternal(m_file), &file_stat);
-#endif
-    assertOK(result,
-        "get size file '" + m_file_name + "'" +
-        " mode "   + convert<string>(m_open_mode) +
-        " error: " + strerrorInternal(errno)); // ----->
-
-    return static_cast<size_t>(file_stat.st_size); // ----->
+    return m_uri; // ----->
 }
 
 
