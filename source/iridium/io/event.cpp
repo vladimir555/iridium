@@ -1,4 +1,5 @@
 #include "event.h"
+#include <unordered_set>
 
 
 IMPLEMENT_ENUM(iridium::io::Event::TOperation)
@@ -19,3 +20,32 @@ Event::Event(IStream::TSharedPtr const &stream_, TOperation const &operation_, T
 
 } // io
 } // iridium
+
+
+size_t std::hash<iridium::io::Event>::operator()
+    (iridium::io::Event const &e) const 
+{
+    size_t hash = 0;
+
+    if (e.stream) {
+        for (auto const &handle: e.stream->getHandles())
+            hash ^= static_cast<size_t>(handle) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+    }
+
+    hash ^= static_cast<size_t>(e.operation) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+    hash ^= static_cast<size_t>(e.status)    + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+
+    return hash; // ----->
+}
+
+
+size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
+    (iridium::io::Event::TSharedPtr const &e) const 
+{
+    size_t hash = 0;
+
+    if (e)
+        return std::hash<iridium::io::Event>()(*e);
+
+    return hash; // ----->
+}

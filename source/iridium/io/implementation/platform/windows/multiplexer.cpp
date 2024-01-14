@@ -6,6 +6,8 @@
 
 #include "iridium/io/implementation/event.h"
 
+#include <stdint.h>
+
 
 #include <iridium/logging/logger.h>
 namespace iridium {
@@ -77,26 +79,37 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         DWORD       number_of_bytes_transfered  = 0;
         ULONG_PTR   completion_key              = 0;
     
-        bool is_ok = GetQueuedCompletionStatus(m_iocp, &number_of_bytes_transfered, &completion_key, &overlapped, 1000);
+        bool is_ok = GetQueuedCompletionStatus(
+            m_iocp, 
+            &number_of_bytes_transfered, 
+            &completion_key, 
+            &overlapped, 1000);
         //LOGT << "GetQueuedCompletionStatus: " << is_ok << " " << number_of_bytes_transfered << " " << completion_key << " " << (overlapped != nullptr);
         if  (is_ok) {
             if (completion_key) {
-                LOGT << "waitEvents: id: " << uint64_t(completion_key);
+                //LOGT << "waitEvents: id: " << uint64_t(completion_key);
 
                 LOCK_SCOPE();
 
-                auto i  = m_map_id_stream.find(static_cast<uintptr_t>(completion_key));
+                auto i  = m_map_id_stream.find(reinterpret_cast<HANDLE>(completion_key));
                 if  (i != m_map_id_stream.end()) {
                     auto stream = i->second;
-                    // todo: unknown type
-                    result.push_back(Event::create(stream, Event::TOperation::READ , Event::TStatus::END));
-                    result.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::END));
+
+                    io::Event::TOperation o = static_cast<io::Event::TOperation>(
+                        reinterpret_cast<intptr_t>(overlapped->Pointer));
+
+                    //LOGT << "overlapped operation: "  << (intptr_t)overlapped->Pointer << " " << o;
+
+                    result.push_back(
+                        Event::create(
+                            stream, o, 
+                            Event::TStatus::END));
                 } else {
-                    //LOGW << "wait event got unsubscribed id: " << uint64_t(completion_key);
+                    LOGW << "wait event got unsubscribed id: " << uint64_t(completion_key);
                 }
             }
         } else {
-            LOGT << "waitEvents: timeout";
+            //LOGT << "waitEvents: timeout";
             auto code  = GetLastError();
             if  (code != ERROR_TIMEOUT)
                 assertOK(code, "GetQueuedCompletionStatus");
@@ -105,39 +118,76 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         throw std::runtime_error("multiplexer waiting events error: " + std::string(e.what())); // ----->
     }
     
+    //{
+    //    std::string events;
+    //    for (auto const &ev : result) {
+    //        events += "\n" 
+    //            + convert<std::string>(ev->operation) + " "
+    //            + convert<std::string>(ev->status) + " "
+    //            + convert<std::string>(ev->stream->getHandles().front());
+    //    }
+    //    LOGT << "events:" << events;
+
+    //}
     //LOGT << "result: size = " << result.size();
     return result; // ----->
 }
 
 
 void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
+    //LOGT << "subscribe ...";
 
-    if (!stream) {
-        //LOGW << "subscribe stream with null id";
+    if(!stream) {
+        LOGW << "subscribe stream null";
+        return; // ----->
+    }
+
+    auto handles = stream->getHandles();
+
+    if (handles.empty()) {
+        LOGW << "subscribe stream with empty handles";
         return; // ----->
     }
 
     try {
-        std::const_pointer_cast<IStream>(stream)->initialize();
-        
-        for (auto const &handle: stream->getHandles()) {
-            if (handle)
-                break; // ----->
+        for (auto const &handle_: handles) {
+            if (!handle_)
+                continue; // <---
 
-            ULONG_PTR completion_key = static_cast<ULONG_PTR>(handle);
-            LOGT << "subscribe id: " << uint64_t(handle);
-            assertOK(m_iocp == CreateIoCompletionPort(reinterpret_cast<HANDLE>(handle), m_iocp, completion_key, 0), "CreateIoCompletionPort");
+            HANDLE      handle          = reinterpret_cast<HANDLE>      (handle_);
+            ULONG_PTR   completion_key  = reinterpret_cast<ULONG_PTR>   (handle);
+
+            //LOGT << "subscribe fd: " << uint64_t(handle);
+            assertOK(m_iocp == CreateIoCompletionPort(handle, m_iocp, completion_key, 0), "CreateIoCompletionPort");
             //LOGT << "subscribe OK";
 
             {
                 LOCK_SCOPE();
-                m_map_id_stream[handle] = std::const_pointer_cast<IStream>(stream);
+                m_map_id_stream[handle] = stream;
             }
 
-            OVERLAPPED overlapped {};
-            overlapped.hEvent = CreateEvent(nullptr, false, false, nullptr);
-            assertOK(ReadFile(reinterpret_cast<HANDLE>(handle), nullptr, 0, nullptr, &overlapped), "ReadFile");
-            assertOK(WaitForSingleObject(overlapped.hEvent, 1000) == WAIT_OBJECT_0, "WaitForSingleObject");
+            auto overlapped     = new OVERLAPPED{ 0 };
+            overlapped->Pointer = reinterpret_cast<PVOID>(static_cast<intptr_t>(Event::TOperation::OPEN));
+            overlapped->hEvent  = CreateEvent(nullptr, false, false, nullptr);
+
+            assertOK(
+                PostQueuedCompletionStatus(
+                    m_iocp, 0, 
+                    completion_key, 
+                    overlapped),
+                "send event OPEN END");
+
+            // todo: catch -> close handle event
+
+            //assertOK(
+            //    CreateIoCompletionPort(
+            //        handle, 
+            //        m_iocp, 
+            //        reinterpret_cast<ULONG_PTR>(overlapped), 0), 
+            //    "create event OPEN END");
+
+            //assertOK(ReadFile(handle, nullptr, 0, nullptr, &overlapped), "ReadFile");
+            //assertOK(WaitForSingleObject(overlapped.hEvent, 1000) == WAIT_OBJECT_0, "WaitForSingleObject");
         }
 
     } catch (std::exception const &e) {
@@ -147,14 +197,16 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
-    for (auto const &handle : stream->getHandles()) {
+    for (auto const &handle_ : stream->getHandles()) {
+        HANDLE handle = reinterpret_cast<HANDLE>(handle_);
         if (!stream || handle) {
             //LOGW << "unsubscribe stream with null id";
             return; // ----->
         }
         try {
-            LOGT << "unsubscribe id: " << uint64_t(handle);
-            CancelIo(reinterpret_cast<HANDLE>(handle));
+            //LOGT << "unsubscribe id: " << uint64_t(handle);
+            if (handle)
+                CancelIo(handle);
             //LOGT << "unsubscribe OK";
 
             LOCK_SCOPE();

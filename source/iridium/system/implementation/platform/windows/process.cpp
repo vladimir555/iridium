@@ -4,7 +4,7 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/logging/logger.h"
+#include "iridium/io/event.h"
 
 
 using std::chrono::milliseconds;
@@ -15,6 +15,7 @@ milliseconds DEFAULT_PROCESS_TIMEOUT        (1000);
 milliseconds DEFAULT_PROCESS_TIMEOUT_STEP   (100);
 
 
+#include "iridium/logging/logger.h"
 namespace iridium {
 namespace system {
 namespace implementation {
@@ -39,7 +40,8 @@ TResult assertOK(TResult const &result, std::string const &method) {
 
         std::string message(buffer, size);
         LocalFree(buffer);
-        throw std::runtime_error(method + " error: 0x" + convertion::convert<std::string, uint64_t>(error_message_code, 16) + " " + message); // ----->
+        throw std::runtime_error(method + " error: 0x" + 
+            convertion::convert<std::string, uint64_t>(error_message_code, 16) + " " + message); // ----->
     }
 }
 
@@ -57,7 +59,7 @@ CProcessStream::CProcessStream(
     m_file_stdout_writer    (nullptr),
     m_pipe_stdout_reader    (nullptr),
     m_process               { 0 },
-    m_overlapped            { 0 },
+    //m_overlapped            { 0 },
     m_uri                   (io::URI::create("process://" + m_app + " " + m_args))
 {}
 
@@ -70,7 +72,8 @@ CProcessStream::CProcessStream(
     m_file_stdout_writer(nullptr),
     m_pipe_stdout_reader(nullptr),
     m_process           { 0 },
-    m_overlapped        { 0 }
+    //m_overlapped        { 0 },
+    m_buffer            (io::Buffer::create())
 {
     for (auto const &arg: args)
         m_args += arg + " ";
@@ -79,15 +82,16 @@ CProcessStream::CProcessStream(
 
 void CProcessStream::initialize() {
     try {
+        //LOGT << "start process ...\n" << m_command_line;
+
         if (m_pipe_stdout_reader)
             throw std::runtime_error("not finalized"); // ----->
-
-        //LOGT << "start process '" << m_command_line << "' ...";
 
         STARTUPINFOA startup_info{};
         startup_info.dwFlags |= STARTF_USESTDHANDLES;
 
-        SECURITY_ATTRIBUTES security_attributes{ 0 };
+        SECURITY_ATTRIBUTES &security_attributes = m_security_attributes;
+        security_attributes = { 0 };
         security_attributes.bInheritHandle  = true;
         security_attributes.nLength         = sizeof(SECURITY_ATTRIBUTES);
 
@@ -110,33 +114,48 @@ void CProcessStream::initialize() {
            "CreateNamedPipe");
 
         m_file_stdout_writer = assertOK(
-            CreateFileA(m_pipe_name.c_str(), FILE_GENERIC_WRITE, 0, &security_attributes, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr),
+            CreateFileA(
+                m_pipe_name.c_str(), 
+                FILE_GENERIC_WRITE, 0, 
+                &security_attributes, 
+                OPEN_EXISTING, 
+                FILE_ATTRIBUTE_NORMAL, 
+                nullptr),
            "CreateFile");
 
         startup_info.hStdOutput = m_file_stdout_writer;
         startup_info.hStdError  = m_file_stdout_writer;
 
         assertOK(
-            CreateProcessA(nullptr, const_cast<LPSTR>(m_command_line.c_str()), nullptr, nullptr, true, 0, nullptr, nullptr, &startup_info, &m_process),
+            CreateProcessA(
+                nullptr, 
+                const_cast<LPSTR>(m_command_line.c_str()), 
+                nullptr, 
+                nullptr, 
+                true, 0, 
+                nullptr, 
+                nullptr, 
+                &startup_info, 
+                &m_process),
            "CreateProcess"
         );
 
-        m_overlapped = { 0 };
-        m_overlapped.hEvent = assertOK(CreateEvent(&security_attributes, true, false, nullptr), "CreateEvent");
-        ConnectNamedPipe(m_pipe_stdout_reader, &m_overlapped);
+        //m_overlapped = { 0 };
+        //m_overlapped.hEvent = assertOK(CreateEvent(&security_attributes, true, false, nullptr), "CreateEvent");
+        //ConnectNamedPipe(m_pipe_stdout_reader, &m_overlapped);
 
-        {
-            auto result  = WaitForSingleObject(m_overlapped.hEvent, 1000);
-            if  (result != WAIT_OBJECT_0)
-                assertOK(result, "WaitForSingleObject");
-        }
+        //{
+        //    auto result  = WaitForSingleObject(m_overlapped.hEvent, 1000);
+        //    if  (result != WAIT_OBJECT_0)
+        //        assertOK(result, "WaitForSingleObject");
+        //}
 
-        ResetEvent(m_overlapped.hEvent);
+        //ResetEvent(m_overlapped.hEvent);
 
         //m_overlapped.hEvent = assertOK(CreateEvent(&security_attributes, true, false, nullptr), "CreateEvent");
         //read(0);
 
-        //LOGT << "start process '" << m_app << "' OK";
+        //LOGT << "start process OK\n" << m_app;
     } catch (std::exception const &e) {
         throw std::runtime_error("process '" + m_command_line + "' initialization error: " + e.what()); // ----->
     }
@@ -209,7 +228,7 @@ IProcess::TState CProcessStream::getState() {
                 break;
         }
 
-        LOGT << "process: id: " << uint64_t(m_pipe_stdout_reader) << ", state: " << result.condition;
+        //LOGT << "process: fd: " << uint64_t(m_pipe_stdout_reader) << ", state: " << result.condition;
         return result; // ----->
     } catch (std::exception const& e) {
         throw std::runtime_error("process '" + m_command_line + "' get state error: " + e.what()); // ----->
@@ -223,17 +242,16 @@ io::URI::TSharedPtr CProcessStream::getURI() const {
 
 
 std::list<uintptr_t> CProcessStream::getHandles() const {
-    try {
-        if (!m_pipe_stdout_reader)
-            return {};
-            //throw std::runtime_error("not initialized"); // ----->
+    //try {
+        //LOGT << "get process fd: " << (uint64_t)m_pipe_stdout_reader;
+        if (m_pipe_stdout_reader)
+            return std::list<uintptr_t>{ reinterpret_cast<uintptr_t>(m_pipe_stdout_reader) }; // ----->
+        else
+            return {}; // ----->
 
-        //return m_overlapped.hEvent; // waitformultipleobjects----->
-        return std::list<uintptr_t>{ reinterpret_cast<uintptr_t>(m_pipe_stdout_reader) }; // ----->
-
-    } catch (std::exception const& e) {
-        throw std::runtime_error("process '" + m_command_line + "' get id error: " + e.what()); // ----->
-    }
+    //} catch (std::exception const& e) {
+    //    throw std::runtime_error("process '" + m_command_line + "' get id error: " + e.what()); // ----->
+    //}
 }
 
 
@@ -242,39 +260,113 @@ io::Buffer::TSharedPtr CProcessStream::read(size_t const &size) {
         if (!m_pipe_stdout_reader)
             throw std::runtime_error("not initialized"); // ----->
 
-        auto buffer = io::Buffer::create(size, 0);
+        if (m_overlapped && m_buffer) {
+            DWORD      size        = 0;
+            //OVERLAPPED overlapped  = { 0 };
 
-        //LOGT << "read ...";
-        auto result = ReadFile(m_pipe_stdout_reader, buffer->data(), static_cast<DWORD>(buffer->size()), nullptr, &m_overlapped);
-        if  (result) {
+            auto result = GetOverlappedResult(m_pipe_stdout_reader, m_overlapped.get(), &size, false);
+            //LOGT << "GetOverlappedResult, result: " << result;
+
+            //if (result) {
+            //    LOGT    
+            //        <<  "overlapped offset  : "
+            //        << m_overlapped->OffsetHigh << ":" 
+            //        << m_overlapped->Offset;
+            //    LOGT 
+            //        <<  "overlapped interlal: "
+            //        << m_overlapped->InternalHigh << ":" 
+            //        << m_overlapped->Internal;
+            //    LOGT 
+            //        <<  "overlapped pointer : "
+            //        << io::Event::TOperation(reinterpret_cast<intptr_t>(m_overlapped->Pointer));
+            //}
+
+            if (result) {
+                //LOGT << "GetOverlappedResult, size: " << size;
+                m_buffer->resize(size);
+
+                //LOGT
+                //    << "read, fd: " << reinterpret_cast<uintptr_t>(m_pipe_stdout_reader)
+                //    << ", pending, buffer:\n'" << m_buffer
+                //    << "'\nsize: " << (m_buffer ? m_buffer->size() : 0);
+            } else {
+                return io::Buffer::create();
+            }
+        }
+
+        auto buffer = m_buffer;
+        // new buffer for next reading
+        m_buffer = io::Buffer::create(size, 0);
+
+        //LOGT
+        //    << "read, fd: " << reinterpret_cast<uintptr_t>(m_pipe_stdout_reader)
+        //    << ", ReadFile ...";
+
+        //auto overlapped = new OVERLAPPED { 0 };
+        m_overlapped = std::make_shared<OVERLAPPED>();
+        m_overlapped->Pointer = reinterpret_cast<PVOID>(static_cast<intptr_t>(io::Event::TOperation::READ));
+        //LOGT << "overlapped->Pointer: " << 
+        //    static_cast<io::Event::TOperation>(
+        //    reinterpret_cast<intptr_t>(m_overlapped->Pointer));
+
+        DWORD size_ = 0;
+        auto result = ReadFile(
+            m_pipe_stdout_reader, 
+            m_buffer->data(), 
+            static_cast<DWORD>(m_buffer->size()), 
+            &size_, 
+            m_overlapped.get());
+
+        //LOGT
+        //    << "read, fd: " << reinterpret_cast<uintptr_t>(m_pipe_stdout_reader)
+        //    << ", ReadFile size: " << size_;
+
+        if (result) {
             assertOK(result, "ReadFile");
-            DWORD size = 0;
-            GetOverlappedResult(m_pipe_stdout_reader, &m_overlapped, &size, true);
-            buffer->resize(size);
-            //LOGT << "read, size: " << size;
         } else {
             auto code = GetLastError();
+            //LOGT << "code: " << code;
             if (code == ERROR_IO_PENDING) {
-                //buffer->clear();
-                DWORD size = 0;
-                GetOverlappedResult(m_pipe_stdout_reader, &m_overlapped, &size, true);
-                buffer->resize(size);
-                //LOGT << "read, pending, size: " << size;
-            } else
+                //if (size_ == 0)
+                //    m_buffer.reset();
+            } else {
                 assertOK(result, "ReadFile");
-        }
-        //LOGT << "overlapped: " << m_overlapped.Offset << " " << m_overlapped.OffsetHigh << " " << (uintptr_t)m_overlapped.Pointer;
-        //LOGT << "read OK, size: " << buffer->size();
+                if (size_ == 0) {
+                    m_buffer.reset();
 
+                    //auto overlapped = new OVERLAPPED{ 0 };
+                    //overlapped->Pointer = reinterpret_cast<PVOID>(static_cast<intptr_t>(Event::TOperation::OPEN));
+                    //overlapped->hEvent = CreateEvent(nullptr, false, false, nullptr);
+
+                    //assertOK(
+                    //    PostQueuedCompletionStatus(
+                    //        m_iocp, 0,
+                    //        m_pipe_stdout_reader,
+                    //        overlapped),
+                    //    "send event OPEN END");
+
+                }
+            }
+        }
+
+        //LOGT 
+        //    << "read, fd: " << reinterpret_cast<uintptr_t>(m_pipe_stdout_reader)
+        //    << ", return pending buffer:\n'" << buffer
+        //    << "'\nsize: " << (buffer ? buffer->size() : 0);
+
+        //threading::sleep(1000);
+        //if (buffer->empty() && m_buffer->empty())
+        //    return nullptr;
+        //else
         return buffer; // ----->
-    } catch (std::exception const& e) {
+    } catch (std::exception const &e) {
         throw std::runtime_error("process '" + m_command_line + "' stdout read error: " + e.what()); // ----->
     }
 }
 
 
 size_t CProcessStream::write(io::Buffer::TSharedPtr const &buffer) {
-    throw std::runtime_error("process stream is not implemented"); // ----->
+    throw std::runtime_error("process stream write is not implemented"); // ----->
 }
 
 

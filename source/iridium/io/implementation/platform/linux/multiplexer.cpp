@@ -167,8 +167,8 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     
 
     for (auto i = 0; i < count; i++) {
-        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " <<
-            TEpollEvent(epoll_events[i].events).convertToFlagsString();
+//        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " <<
+//            TEpollEvent(epoll_events[i].events).convertToFlagsString();
 
 //        LOGT << __FUNCTION__ << ",  id: " << epoll_events[i].data.fd << ", flags: " << TEpollEvent(epoll_events[i].events).convertToFlagsString();
         

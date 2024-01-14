@@ -29,7 +29,7 @@ void CContext::pushEvent(Event::TSharedPtr const &event) {
 
 
 std::list<Event::TSharedPtr> CContext::popEvents() {
-    auto events = m_events->pop(false); // ----->
+    auto events = m_events->pop(false);
     auto now    = std::chrono::system_clock::now();
     
     {
@@ -37,21 +37,8 @@ std::list<Event::TSharedPtr> CContext::popEvents() {
         for (auto const &event: events)
             m_map_stream_timestamp[event->stream] = now;
     }
-    
-    // remove duplicates
-    auto i = std::unique(events.begin(), events.end(),
-        [] (auto const &l, auto const &r) {
-            return
-                l               && r            &&
-                l->stream       && r->stream    &&
-                l->stream       == r->stream    &&
-                l->operation    == r->operation &&
-                l->status       == r->status;
-        }
-    );
-    events.erase(i, events.end());
 
-    return events;
+    return events; // ----->
 }
 
 
@@ -64,16 +51,25 @@ std::list<Event::TSharedPtr> CContext::checkOutdatedStreams() {
     LOCK_SCOPE(); // timestamp
     for (auto const &stream_timestamp: m_map_stream_timestamp)
         if (now - stream_timestamp.second > DEFAULT_STREAM_TIMEOUT)
-            result.push_back(Event::create(stream_timestamp.first, Event::TOperation::TIMEOUT));
+            result.push_back(
+                Event::create(
+                    stream_timestamp.first, 
+                    Event::TOperation::TIMEOUT, 
+                    Event::TStatus::BEGIN));
     
     return result; // ----->
 }
 
 
 bool CContext::update(Event::TSharedPtr const &event) {
+    //LOGT 
+    //    << "context update: " 
+    //    << event->stream->getHandles().front() << " "
+    //    << event->operation << " " 
+    //    << event->status;
+
     if (!m_protocol)
         return true; // ----->
-    //LOGT << "context::update, event: " << event->operation << " " << event->status << " " << event->stream->getID();
     
     if (event->operation == Event::TOperation::OPEN)
         m_map_stream_pipe[event->stream];
@@ -96,8 +92,10 @@ bool CContext::update(Event::TSharedPtr const &event) {
 bool CContext::transmit(Event::TSharedPtr const &event) {
     if (!m_protocol)
         return false; // ----->
-    //LOGT << "context::transmit, event: " << event->operation << " " << event->status << " " << event->stream->getID();
-    return assertExists(m_map_stream_pipe[event->stream], "context transmitting error: pipe not found")->transmit(event);
+
+    return assertExists(
+        m_map_stream_pipe[event->stream], 
+        "context transmitting error: pipe not found")->transmit(event); // ----->
 }
 
 
@@ -123,46 +121,12 @@ void CContext::removePipe(std::string const &name) {
 
 
 void CContext::updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader) {
-    throw std::runtime_error("not implemented");
-//    auto pipe = m_map_name_pipe[name];
-//    if (!pipe)
-//        throw std::runtime_error("context pipe update error: pipe '" + name + "' not found"); // ----->
-//
-//    if (m_map_stream_pipe.find(reader) == m_map_stream_pipe.end() && reader && reader->getURI()) {
-//        m_events->push(Event::create(reader, Event::TOperation::OPEN, Event::TStatus::BEGIN));
-//        LOGT << "update pipe: event open, id: " << reader->getID();
-//    }
-//
-//    if (reader && reader->getURI()) {
-//        LOGT << "update pipe: event read, id: " << reader->getID();
-//        m_events->push(Event::create(reader, Event::TOperation::READ, Event::TStatus::BEGIN));
-//    }
-//
-//    m_map_stream_pipe[reader] = pipe;
-//
-//    pipe->set(reader, pipe->getWriter());
+    updatePipe(name, reader, nullptr);
 }
 
 
 void CContext::updatePipe(std::string const &name, IStreamWriter::TSharedPtr const &writer) {
-    throw std::runtime_error("not implemented");
-//    auto pipe = m_map_name_pipe[name];
-//    if (!pipe)
-//        throw std::runtime_error("context pipe update error: pipe '" + name + "' not found"); // ----->
-//
-//    if (m_map_stream_pipe.find(writer) == m_map_stream_pipe.end() && writer && writer->getURI()) {
-//        m_events->push(Event::create(writer, Event::TOperation::OPEN,  Event::TStatus::BEGIN));
-//        LOGT << "update pipe: event open, id: " << writer->getID();
-//    }
-//
-//    if (writer && writer->getURI()) {
-//        LOGT << "update pipe: event write, id: " << writer->getID();
-//        m_events->push(Event::create(writer, Event::TOperation::WRITE, Event::TStatus::BEGIN));
-//    }
-//
-//    m_map_stream_pipe[writer] = pipe;
-//
-//    pipe->set(pipe->getReader(), writer);
+    updatePipe(name, nullptr, writer);
 }
 
 
@@ -175,27 +139,38 @@ void CContext::updatePipe(
     if (!pipe)
         throw std::runtime_error("context pipe update error: pipe '" + name + "' not found"); // ----->
     
-    if (m_map_stream_pipe.find(reader) == m_map_stream_pipe.end() && reader && reader->getURI()) {
+    if (reader && reader->getURI() && m_map_stream_pipe.find(reader) == m_map_stream_pipe.end()) {
         m_events->push(Event::create(reader, Event::TOperation::OPEN, Event::TStatus::BEGIN));
-        //LOGT << "update pipe: event open, id: " << reader->getID();
-    }
-    
-    else
-        
+        //LOGT
+        //    << "update pipe, event: "
+        //    << Event::TOperation::OPEN << " "
+        //    << Event::TStatus::BEGIN << " "
+        //    << reader->getHandles().front();
+    } else
     if (reader && reader->getURI()) {
-        //LOGT << "update pipe: event read, id: " << reader->getID();
+        //LOGT
+        //    << "update pipe, event: "
+        //    << Event::TOperation::READ << " "
+        //    << Event::TStatus::BEGIN << " "
+        //    << reader->getHandles().front();
         m_events->push(Event::create(reader, Event::TOperation::READ, Event::TStatus::BEGIN));
     }
 
-    if (m_map_stream_pipe.find(writer) == m_map_stream_pipe.end() && writer && writer->getURI()) {
+    if (writer && writer->getURI() && m_map_stream_pipe.find(writer) == m_map_stream_pipe.end()) {
         m_events->push(Event::create(writer, Event::TOperation::OPEN,  Event::TStatus::BEGIN));
-        //LOGT << "update pipe: event open, id: " << writer->getID();
-    }
-    
-    else
-    
+        //LOGT
+        //    << "update pipe, event: "
+        //    << Event::TOperation::OPEN << " "
+        //    << Event::TStatus::BEGIN << " "
+        //    << writer->getHandles().front();
+    } else
     if (writer && writer->getURI()) {
-        //LOGT << "update pipe: event write, id: " << writer->getID();
+        //LOGT 
+        //    << "update pipe, event: " 
+        //    << Event::TOperation::WRITE << " " 
+        //    << Event::TStatus::BEGIN << " "
+        //    << writer->getHandles().front();
+
         m_events->push(Event::create(writer, Event::TOperation::WRITE, Event::TStatus::BEGIN));
     }
 
