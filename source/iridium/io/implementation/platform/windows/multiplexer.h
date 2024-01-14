@@ -35,7 +35,7 @@ public:
 
 private:
     HANDLE m_iocp;
-    std::unordered_map<uintptr_t, IStream::TSharedPtr> m_map_id_stream;
+    std::unordered_map<HANDLE, IStream::TSharedPtr> m_map_id_stream;
 };
 
 

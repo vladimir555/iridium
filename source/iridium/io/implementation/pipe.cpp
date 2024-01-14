@@ -131,16 +131,16 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
             Event::TOperation::EOF_,
             Event::TOperation::TIMEOUT)))
     ) {
-        LOGT << "do read";
+        //LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
 
-        LOGT << "read buffer size: " << buffer->size();
+        //LOGT << "read buffer size: " << buffer->size();
         if  (buffer && buffer->size() > 0) {
             m_buffers.push_back(buffer);
             result |= true;
-            LOGT << "read " << buffer->size();
+            //LOGT << "read " << buffer->size();
         } else {
-            LOGT << "read EOF";
+            //LOGT << "read EOF";
         }
     }
 

@@ -165,7 +165,7 @@ void CProcessStream::initialize() {
         // todo: pipe_in -> m_fd_writer
         m_fd_reader = cout_pipe[0];
         
-        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
+//        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
         
         setBlockingMode(false);
         
@@ -185,7 +185,7 @@ void CProcessStream::finalize() {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
         
-        LOGT << "finalize   process '" << m_command_line << "', id: " << m_fd_reader;
+//        LOGT << "finalize   process '" << m_command_line << "', id: " << m_fd_reader;
         
         //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
         //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
@@ -278,8 +278,8 @@ IProcess::TState CProcessStream::getState() {
     if (m_state_internal.is_continued)
         process_state_str += " continued";
 
-    if (!process_state_str.empty())
-        LOGT << "process '" << m_command_line << "' state: " << process_state_str << " fd: " << m_fd_reader;
+//    if (!process_state_str.empty())
+//        LOGT << "process '" << m_command_line << "' state: " << process_state_str << " fd: " << m_fd_reader;
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);

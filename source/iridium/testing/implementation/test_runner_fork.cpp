@@ -68,11 +68,11 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     // TODO: exception handling
     while (paths_left > 0) {
-        LOGT << "wait, paths_left: " << paths_left << " ...";
-        for (auto const &i: map_path_handler)
-            LOGT << "path left: " << i.first;
+        //LOGT << "wait, paths_left: " << paths_left << " ...";
+        //for (auto const &i: map_path_handler)
+        //    LOGT << "path left: " << i.first;
         auto results = process_result_queue->pop(m_timeout);
-        LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
+        //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 
         if  (results.empty())
             break; // --->
@@ -176,44 +176,54 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IPipeManager::TSharedPtr    const &pipe_manager)
 {
     if (m_process_result->output) {
-        LOGT << "return false";
+        //LOGT << "return false";
         return false; // ----->
     }
 
+    m_process_result->state = m_process->getState();
+
     //LOGT << "\nevent:           "   <<  event->operation
     //     << "\nfd:              "   << (event->operation == io::Event::TOperation::OPEN ? 0 :
-    //                                    event->stream->getID())
+    //                                    event->stream->getHandles().front())
     //     << "\nprocess_state:   "   << m_process_result->state.condition
     //     << "\nbuffer:\n"           << m_buffer_output;
 
-    m_process_result->state = m_process->getState();
+    //if (m_process_result->state.condition == IProcess::TState::TCondition::DONE) {
+    //    LOGT << "DONE";
+    //}
 
     if (event->operation == io::Event::TOperation::OPEN) {
         static std::string const DEFAULT_PIPE_NAME = "process";
         pipe_manager->createPipe(DEFAULT_PIPE_NAME);
-        pipe_manager->updatePipe(DEFAULT_PIPE_NAME, std::dynamic_pointer_cast<io::IStreamReader>(event->stream), CStreamWriterBuffer::create(m_buffer_output));
+        pipe_manager->updatePipe(DEFAULT_PIPE_NAME, 
+            std::dynamic_pointer_cast<io::IStreamReader>(event->stream), 
+            CStreamWriterBuffer::create(m_buffer_output));
 //        LOGT << "return true";
         return true; // ----->
     }
+
+    //if (m_buffer_output && !m_buffer_output->empty())
+    //    LOGT << "back: " << (int)m_buffer_output->back();
 
     try {
         if (
             //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
             checkOneOf(event->operation,
-            io::Event::TOperation::EOF_,
-            io::Event::TOperation::CLOSE,
-            io::Event::TOperation::TIMEOUT) &&
-            m_buffer_output             &&
-            m_buffer_output->size() > 4 &&
-            m_buffer_output->back() == '\n')
+                //io::Event::TOperation::READ,
+                io::Event::TOperation::EOF_,
+                io::Event::TOperation::CLOSE,
+                io::Event::TOperation::TIMEOUT) &&
+                m_buffer_output             &&
+                m_buffer_output->size() > 4 &&
+                checkOneOf(m_buffer_output->back(), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
         {
             size_t right = m_buffer_output->size() - 1;
-            while (right > 0 &&  checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r')))
+            while (right > 0 &&  checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
                 right--;
 
             size_t left  = right;
 
-            while (left  > 0 && !checkOneOf(m_buffer_output->at(left),  uint8_t('\n'), uint8_t('\r')))
+            while (left  > 0 && !checkOneOf(m_buffer_output->at(left),  uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
                 left--;
 
             string size_str(m_buffer_output->begin() + left + 1, m_buffer_output->begin() + right + 1);
@@ -232,6 +242,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                             break;
                     left--;
                 }
+                //LOGT << "endlines_count: " << endlines_count;
                 
                 if (endlines_count == 2 && m_buffer_output->at(left) == '}') {
                     right = left + 2;
@@ -247,7 +258,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                         if (m_buffer_output->at(left) == '\r')
                             size++;
                     }
-                    
+
+                    //LOGT << "right - left = " << right - left << ", size = " << size;
                     if (right - left == size) {
                         string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
                         auto    node = m_parser->parse(json);
@@ -256,8 +268,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                         m_process_result->node      = node;
                         m_process_result->output    = m_buffer_output;
                         
-//                        LOGT << "node:\n"   << node;
-//                        LOGT << "output:\n" << m_buffer_output;
+                        //LOGT << "node:\n"   << node;
+                        //LOGT << "output:\n" << m_buffer_output;
                     }
                 }
             }
@@ -274,7 +286,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //    LOGT << "output:\n" << m_buffer_output;
 
     // detect crash
-    LOGT << "process state: " << m_process_result->state.condition;
+    //LOGT << "process state: " << m_process_result->state.condition;
     if (!checkOneOf(m_process_result->state.condition,
         IProcess::TState::TCondition::DONE,
         IProcess::TState::TCondition::RUNNING))
@@ -287,8 +299,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //        && m_process_result->state.condition == IProcess::TState::TCondition::CRASHED
        )
     {
-        LOGT << "empty output, close, m_process_result->state.condition: "
-             << m_process_result->state.condition;
+        //LOGT << "empty output, close, m_process_result->state.condition: "
+        //     << m_process_result->state.condition;
         m_process_result->output    = io::Buffer::create("empty process output");
         m_process_result->state     = m_process->getState();
     }
@@ -302,7 +314,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
     
-    LOGT << "protocol return: " << !m_process_result->output;
+    //LOGT << "protocol return: " << !m_process_result->output;
     return !m_process_result->output;
 }
 

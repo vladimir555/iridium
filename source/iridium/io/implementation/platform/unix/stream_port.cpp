@@ -104,11 +104,11 @@ std::list<uintptr_t> CStreamPort::getHandles() const {
     if (m_fd_writer)
         handles.push_back(m_fd_writer);
     
-    if (handles.empty())
-        throw std::runtime_error(
-            "stream port get handles error: '" +
-            (m_uri ? m_uri->getSource() : "") +
-            "' not initialized"); // ----->
+//    if (handles.empty())
+//        throw std::runtime_error(
+//            "stream port get handles error: '" +
+//            (m_uri ? m_uri->getSource() : "") +
+//            "' not initialized"); // ----->
 
     return handles; // ----->
 }

@@ -43,19 +43,21 @@ public:
     
     TState getState()   override;
 private:
-    std::string         m_app;
-    std::string         m_args;
-    std::string         m_command_line;
-    std::string         m_pipe_name;
+    std::string                     m_app;
+    std::string                     m_args;
+    std::string                     m_command_line;
+    std::string                     m_pipe_name;
+    HANDLE                          m_file_stdout_writer;
+    HANDLE                          m_pipe_stdout_reader;
     //HANDLE              m_file_stdin_reader;
-    HANDLE              m_file_stdout_writer;
-    HANDLE              m_pipe_stdout_reader;
     //HANDLE              m_pipe_stdout_writer;
-    PROCESS_INFORMATION m_process;
-    OVERLAPPED mutable  m_overlapped;
-    io::URI::TSharedPtr m_uri;
+    PROCESS_INFORMATION             m_process;
+    std::shared_ptr<OVERLAPPED>     m_overlapped;
+    io::URI::TSharedPtr             m_uri;
+    SECURITY_ATTRIBUTES             m_security_attributes;
+    io::Buffer::TSharedPtr          m_buffer;
 
-    static std::atomic<uint64_t> m_process_counter;
+    static std::atomic<uint64_t>    m_process_counter;
 };
 
 

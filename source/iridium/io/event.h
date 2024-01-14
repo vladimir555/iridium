@@ -17,8 +17,19 @@ namespace io {
 
 struct Event {
     DEFINE_CREATE(Event)
-    DEFINE_ENUM(TOperation, OPEN, CLOSE, READ, WRITE, TIMEOUT, EOF_, ERROR_)
-    DEFINE_ENUM(TStatus, BEGIN, END)
+    DEFINE_ENUM(
+        TOperation, 
+        OPEN, 
+        CLOSE, 
+        READ, 
+        WRITE, 
+        TIMEOUT, 
+        EOF_, 
+        ERROR_)
+    DEFINE_ENUM(
+        TStatus, 
+        BEGIN, 
+        END)
     
     Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
     
@@ -30,6 +41,18 @@ struct Event {
 
 } // io
 } // iridium
+
+
+template<>
+struct std::hash<iridium::io::Event> {
+    size_t operator()(iridium::io::Event const &e) const;
+};
+
+
+template<>
+struct std::hash<iridium::io::Event::TSharedPtr> {
+    size_t operator()(iridium::io::Event::TSharedPtr const &e) const;
+};
 
 
 #endif // HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347

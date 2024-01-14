@@ -59,7 +59,7 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
         
         m_contexts.erase(context);
         m_contexts_to_remove.erase(context);
-        LOGT << "manager::release, remove";
+        //LOGT << "manager::release, remove";
     }
     
     return events; // ----->
@@ -69,7 +69,7 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 void CContextManager::removeContext(IContext::TSharedPtr const &context) {
     LOCK_SCOPE();
     
-    LOGT << "manager::remove";
+    //LOGT << "manager::remove";
     if (m_contexts_to_remove.count(context) == 0) {
         context->remove();
         m_contexts_to_remove.insert(context);
