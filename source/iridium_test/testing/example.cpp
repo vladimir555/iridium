@@ -45,7 +45,7 @@ TEST(OK) {
 //TEST(sleep) {
 //    using iridium::threading::sleep;
 //
-//    for (uint32_t i = 0; i < 10; i++) {
+//    for (uint32_t i = 0; i < 100; i++) {
 //        LOGT << i;
 //        sleep(1000);
 //    }
@@ -152,7 +152,7 @@ TEST(OK) {
 //}
 
 
-//TEST(crash) {
-//    int *a = nullptr;
-//    *a = 5;
-//}
+TEST(crash) {
+    int *a = nullptr;
+    *a = 5;
+}

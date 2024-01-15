@@ -36,10 +36,12 @@ std::chrono::seconds const CTestRunnerFork::DEFAULT_TIMEOUT(10);
 
 CTestRunnerFork::CTestRunnerFork(
     std::string     const &app_path,
-    milliseconds    const &timeout)
+    milliseconds    const &timeout,
+    bool            const &is_serial)
 :
     m_app_path          (app_path),
     m_timeout           (timeout),
+    m_is_serial         (is_serial),
     m_session_manager   (CSessionManager::create())
 {}
 
@@ -51,26 +53,37 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     list<string> paths;
     scan(node_test, "", paths);
 
-    std::unordered_map<std::string, CTestProtocolHandler::TSharedPtr> map_path_handler;
+    struct TFork {
+        CTestProtocolHandler::TSharedPtr handler;
+        CProcessStream::TSharedPtr       process;
+    };
+
+    std::unordered_map<std::string, TFork> map_path_fork;
     auto process_result_queue = CAsyncQueue<TProcessResult::TConstSharedPtr>::create();
 
     for (auto const &path: paths) {
         auto process = CProcessStream::create(m_app_path, "run --mode=raw --print-result=json " + path);
         auto handler = CTestProtocolHandler::create(process, path, process_result_queue);
 
-        map_path_handler[path] = handler;
-        m_session_manager->manage(process, handler);
-    }
+        map_path_fork[path] = TFork { handler, process };
 
-    int64_t paths_left = paths.size();
+        if (!m_is_serial)
+            m_session_manager->manage(process, handler);
+    }
 
     std::list<TProcessResult::TConstSharedPtr> interrupted;
 
     // TODO: exception handling
-    while (paths_left > 0) {
+    while (!map_path_fork.empty()) {
         //LOGT << "wait, paths_left: " << paths_left << " ...";
         //for (auto const &i: map_path_handler)
         //    LOGT << "path left: " << i.first;
+
+        if (m_is_serial && !map_path_fork.empty()) {
+            auto fork = map_path_fork.begin()->second;
+            m_session_manager->manage(fork.process, fork.handler);
+        }
+
         auto results = process_result_queue->pop(m_timeout);
         //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 
@@ -78,7 +91,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             break; // --->
 
         for (auto const &result: results) {
-            paths_left--;
             if (result->node) {
 //                LOGT << result->node;
                 TResult test_results_fork(result->node);
@@ -89,9 +101,9 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             auto state = result->state;
 
             if (state.condition == IProcess::TState::TCondition::RUNNING)
-                state = map_path_handler[result->path]->getExitState();
+                state = map_path_fork[result->path].handler->getExitState();
 
-            map_path_handler.erase(result->path);
+            map_path_fork.erase(result->path);
 
             if (checkOneOf(state.condition,
                 IProcess::TState::TCondition::DONE,
@@ -124,19 +136,19 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                  << process_result->output;
     }
 
-    if (!map_path_handler.empty()) {
+    if (!map_path_fork.empty()) {
         LOGF << "\nTIMEOUT:\n";
-        for (auto const &path_handler: map_path_handler) {
-            for (auto const &node: *node_test->slice(path_handler.first).back()) {
+        for (auto const &path_fork: map_path_fork) {
+            for (auto const &node: *node_test->slice(path_fork.first).back()) {
                 TResult::TTests test;
-                test.Path   = path_handler.first + "/" + node->getName();
+                test.Path   = path_fork.first + "/" + node->getName();
                 // TODO: getExitState() thread sync
-                test.Error  = "TIMEOUT: process status " + convert<string>(path_handler.second->getExitState().condition);
+                test.Error  = "TIMEOUT: process status " + convert<string>(path_fork.second.handler->getExitState().condition);
                 test_results.Tests.add(test);
             }
             LOGF << "TIMEOUT "
-                 << path_handler.first << ":\n\n"
-                 << path_handler.second->getBuffer();
+                 << path_fork.first << ":\n\n"
+                 << path_fork.second.handler->getBuffer();
         }
     }
 

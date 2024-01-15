@@ -120,7 +120,7 @@ URI::TSharedPtr CStreamPort::getURI() const {
 
 
 void CStreamPort::setBlockingMode(bool const &is_blocking) {
-    for (auto const &fd: { m_fd_reader, m_fd_writer }) {
+    for (auto const &fd: { static_cast<int>(m_fd_reader), static_cast<int>(m_fd_writer) }) {
         if (!fd)
             continue; // <---
         auto flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));

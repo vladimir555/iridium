@@ -7,6 +7,7 @@ http client
 freebsd kevent async socket
 jsonrcp
 rtsp
+yaml parser
 
 video codec wrapper: libaom + libopus
 or
