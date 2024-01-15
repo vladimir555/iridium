@@ -25,7 +25,8 @@ public:
     static std::chrono::seconds const DEFAULT_TIMEOUT;
     CTestRunnerFork(
         std::string                 const &app_name,
-        std::chrono::milliseconds   const &timeout = DEFAULT_TIMEOUT
+        std::chrono::milliseconds   const &timeout      = DEFAULT_TIMEOUT,
+        bool                        const &is_serial    = false
     );
 
     TResult run(INodeTest::TSharedPtr const &node_test) override;
@@ -74,6 +75,7 @@ private:
 
     std::string                     m_app_path;
     std::chrono::milliseconds       m_timeout;
+    bool                            m_is_serial;
     io::ISessionManager::TSharedPtr m_session_manager;
 };
 

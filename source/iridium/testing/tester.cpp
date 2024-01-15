@@ -221,7 +221,8 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             if (args->mode == TCmdArgs::TMode::RAW)
                 test_runner = CTestRunnerRaw::create();
             else
-                test_runner = CTestRunnerFork::create(args->app_name, args->timeout);
+                test_runner = CTestRunnerFork::create
+                    (args->app_name, args->timeout, args->mode == TCmdArgs::TMode::SERIAL);
 
             auto root   = getTestTree(main_cpp_path, args->include_path, args->exclude_paths);
             auto result = test_runner->run(root);

@@ -44,11 +44,11 @@ public:
 protected:
     void            setBlockingMode(bool const &is_blocking);
 
-    int             m_fd_reader;
-    int             m_fd_writer;
-    URI::TSharedPtr m_uri;
-    bool            m_is_opened;
-    bool            m_is_blocking_mode;
+    std::atomic<int>    m_fd_reader;
+    std::atomic<int>    m_fd_writer;
+    URI::TSharedPtr     m_uri;
+    bool                m_is_opened;
+    bool                m_is_blocking_mode;
 
 protected:
     template<typename T>
