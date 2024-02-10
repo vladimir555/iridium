@@ -20,7 +20,10 @@ namespace {
 string convertNodeToString(iridium::parsing::INode const &node, string const &tab = "") {
     string result = "\n" + tab + "'" + node.getName() + "'" + " = " + "'" + node.getValue() + "'";
     for (auto const &i : node)
-        result += convertNodeToString(*i, tab + "  ");
+        if (i)
+            result += convertNodeToString(*i, tab + "  ");
+        else
+            result += "\n" + tab + "  [nullptr]";
     return result; // ----->
 }
 

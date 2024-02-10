@@ -15,71 +15,91 @@ namespace serialization {
 
 
 Node<void>::Node(std::string const &name){
-    m_path              = "/" + name;
-    m_node_destination  = CNode::create(name);
-}
-
-
-Node<void>::Node(INode::TConstSharedPtr const &node, std::string const &name) {
     m_path = "/" + name;
-
-    if (node && node->getName() == name)
-        m_node_source  = node;
-    else
-        throw std::runtime_error("node '" + m_path + "' not found"); // ----->
-
-    m_node_destination = CNode::create(name);
+    m_node = CNode::create(name);
 }
 
 
 Node<void>::Node(
-    INode::TConstSharedPtr  const &node_source,
-    INode::TSharedPtr       const &node_destination,
-    std::string             const &name,
-    std::string             const &path)
+    INode::TSharedPtr   const &node,
+    std::string         const &name)
+{
+    m_path = "/" + name;
+
+    if (node && node->getName() == name)
+        m_node = node;
+    else
+        m_node = CNode::create(name);
+}
+
+
+Node<void>::Node(
+    INode::TSharedPtr   const &node,
+    std::string         const &name,
+    std::string         const &path)
 {
     m_path = path + "/" + name;
 
-    if (node_source && node_source->getName() == name)
-        m_node_source       = node_source;
+    if (node && node->getName() == name)
+        m_node = node;
     else
         throw std::runtime_error("node '" + m_path + "' not found"); // ----->
-
-    m_node_destination = node_destination;
 }
 
 
 Node<void>::Node(Node<void> const &parent, std::string const &name) {
     m_path = parent.m_path + "/" + name;
 
-    if (parent.m_node_source)
-        m_node_source       = parent.m_node_source->getChild(name);
+    if (parent.m_node)
+        m_node = parent.m_node->getChild(name);
 
-    if (parent.m_node_destination)
-        m_node_destination  = parent.m_node_destination->addChild(name);
+    // add empty node for child nodes with default values
+    if(!m_node)
+        m_node = parent.m_node->addChild(name);
 }
 
 
 INode::TSharedPtr Node<void>::getNode() const {
-    return m_node_destination; // ----->
+    return m_node; // ----->
 }
 
 
-string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimeter_symbol) {
-    //todo: optimize
-    string result = camel;
+//string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimeter_symbol) {
+//    //todo: optimize
+//    string result = camel;
+//
+//    if (!result.empty())
+//        result[0] = static_cast<char>(tolower(result[0]));
+//
+//    size_t i = 1;
+//    while (i < result.size()) {
+//        char lo_ch = static_cast<char>(tolower(result[i]));
+//        if (result[i] != lo_ch) {
+//            result[i] = static_cast<char>(lo_ch);
+//            result.insert(i, string() + delimeter_symbol);
+//        }
+//        i++;
+//    }
+//
+//    return result; // ----->
+//}
 
-    if (!result.empty())
-        result[0] = static_cast<char>(tolower(result[0]));
 
-    size_t i = 1;
-    while (i < result.size()) {
-        char lo_ch = static_cast<char>(tolower(result[i]));
-        if (result[i] != lo_ch) {
-            result[i] = static_cast<char>(lo_ch);
-            result.insert(i, string() + delimeter_symbol);
-        }
-        i++;
+std::string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimiter_symbol) {
+    if (camel.empty())
+        return camel;
+
+    std::string result;
+
+    result.reserve(camel.size() * 2);
+    result += static_cast<char>(std::tolower(camel[0]));
+
+    for (size_t i = 1; i < camel.size(); ++i) {
+        if (std::isupper(camel[i])) {
+            result += delimiter_symbol;
+            result += static_cast<char>(std::tolower(camel[i]));
+        } else
+            result += camel[i];
     }
 
     return result; // ----->

@@ -177,16 +177,17 @@ void CProcessStream::initialize() {
     } catch (std::exception const &e) {
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
+
+    LOGT << "initialize process '" << m_command_line << "', id: " << static_cast<int>(m_fd_reader);
 }
 
 
 void CProcessStream::finalize() {
+    LOGT << "finalize   process '" << m_command_line << "', id: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
-        
-//        LOGT << "finalize   process '" << m_command_line << "', id: " << m_fd_reader;
-        
+
         //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
         //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
 

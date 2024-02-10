@@ -13,14 +13,14 @@ project(iridium)
 set(CMAKE_CXX_STANDARD 14)
 
 # release
-# set(CMAKE_BUILD_TYPE "Release")
-# set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
+set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
 
 # debug
-set(CMAKE_BUILD_TYPE "Debug")
+#set(CMAKE_BUILD_TYPE "Debug")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
   
 #remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
 
@@ -79,12 +79,12 @@ include_directories(
 # deb package
 # todo: dependencies postgres deb
 # postgresql-all openssl libssl-dev
-set(CPACK_GENERATOR "DEB")
-set(CPACK_PACKAGE_NAME lib${PROJECT_NAME})
-set(CPACK_DEBIAN_PACKAGE_DESCRIPTION    "${PROJECT_NAME} C++ lightweight framework")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER     "Bulaev Vladimir <bulaev_vladimir@mail.ru>")
+#set(CPACK_GENERATOR "DEB")
+#set(CPACK_PACKAGE_NAME lib${PROJECT_NAME})
+#set(CPACK_DEBIAN_PACKAGE_DESCRIPTION    "${PROJECT_NAME} C++ lightweight framework")
+#set(CPACK_DEBIAN_PACKAGE_MAINTAINER     "Bulaev Vladimir <bulaev_vladimir@mail.ru>")
 #set(CPACK_DEBIAN_PACKAGE_DEBUG "YES")
-include(CPack)
+#include(CPack)
 
 # static or shared
 add_library(${PROJECT_NAME} STATIC ${SOURCE})
@@ -100,7 +100,10 @@ install(
 # iridium test
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
-include_directories(${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source
+#    /opt/homebrew/include
+)
 
 file(GLOB_RECURSE SOURCE_TEST
     ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.h
@@ -111,6 +114,8 @@ source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test FILES ${SOURCE
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
 
+#find_library(simdjson simdjson)
+
 target_link_libraries(
     ${PROJECT_TEST_NAME}
     ${PROJECT_NAME}
@@ -118,4 +123,5 @@ target_link_libraries(
     ${PostgreSQL_LIBRARIES}
     ${LIBOAMYSQLCLIENT_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
+#    ${simdjson}
 )

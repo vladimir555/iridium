@@ -27,8 +27,18 @@
 //    throw std::runtime_error("uncached_throw");
 //}
 
-
+#include <set>
 TEST(OK) {
+//    std::set<int> s;
+//
+//    s.insert(3);
+//    s.insert(1);
+//    s.insert(2);
+//    s.insert(1);
+//
+//    for (auto const &i: s)
+//        LOGT << i;
+
 //    LOGT << "trace log";
 //    LOGD << "debug log";
 //    LOGI << "info  log";
@@ -139,20 +149,21 @@ TEST(OK) {
 //#include "iridium/threading/thread.h"
 //#include <iridium/io/fs/implementation/file_stream_writer.h>
 //TEST(timeout) {
-////    LOGT << "sleep ...";
-////    iridium::threading::sleep(30000);
-////    LOGT << "sleep OK";
-//    auto f = iridium::io::fs::implementation::CFileStreamWriter::create("test.file");
-//    f->initialize();
-//    for (int i = 0; i < 100; i++) {
-//        f->CFileStream::write(iridium::io::Buffer::create(convert<std::string>(i) + "\n"));
-//        iridium::threading::sleep(50);
-//    }
-//    f->finalize();
+//    LOGT << "sleep ...";
+//    iridium::threading::sleep(30000);
+//    LOGT << "sleep OK";
+//
+////    auto f = iridium::io::fs::implementation::CFileStreamWriter::create("test.file");
+////    f->initialize();
+////    for (int i = 0; i < 100; i++) {
+////        f->CFileStream::write(iridium::io::Buffer::create(convert<std::string>(i) + "\n"));
+////        iridium::threading::sleep(50);
+////    }
+////    f->finalize();
 //}
 
 
-TEST(crash) {
-    int *a = nullptr;
-    *a = 5;
-}
+//TEST(crash) {
+//    int *a = nullptr;
+//    *a = 5;
+//}

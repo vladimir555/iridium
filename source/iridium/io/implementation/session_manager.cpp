@@ -9,6 +9,8 @@
 #include "iridium/items.h"
 #include "event.h"
 
+#include <set>
+
 
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CThread;
@@ -22,22 +24,70 @@ namespace io {
 namespace implementation {
 
 
-std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
-    std::unordered_map<size_t, Event::TSharedPtr>   map_hash_event;
-    std::hash<Event::TSharedPtr>                    hash;
-    std::list<Event::TSharedPtr>                    events;
+static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
+    struct TComparator {
+        bool operator()(
+                        Event::TSharedPtr const &left,
+                        Event::TSharedPtr const &right) const
+        {
+            return
+                left            &&              right                       &&
+                left->stream    &&              right->stream               &&
+               (left->stream->getHandles()  <   right->stream->getHandles() ||
+               (left->stream->getHandles()  ==  right->stream->getHandles() &&
+               (left->operation             <   right->operation ||
+               (left->operation             ==  right->operation &&
+                left->status                <   right->status))));
+        }
+    };
 
-    for (auto const &event : events_) {
-        if (event->operation == Event::TOperation::OPEN)
-            events.push_back(event);
-        else
-            map_hash_event[hash(event)] = event;
+    std::set<Event::TSharedPtr, TComparator> events;
+    for (auto const &event: events_)
+        events.insert(event);
+
+    {
+        for (auto const &event: events_)
+            LOGT 
+                << "before: "
+                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
+                << event->operation << " "
+                << event->status;
     }
 
-    for (auto const &i : map_hash_event)
-        events.push_back(i.second);
+    {
+        for (auto const &event: events)
+            LOGT
+                << "after:  "
+                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
+                << event->operation << " "
+                << event->status;
+    }
 
-    return events; // ----->
+//    {
+//        string events_str;
+//        for (auto const &event: events_)
+//            events_str +=
+//                 "\n" + (event->stream->getHandles().empty() ? "" :
+//                        convert<string>(event->stream->getHandles().front()))
+//                + " " + convert<string>(event->operation)
+//                + " " + convert<string>(event->status);
+//        if (!events_str.empty())
+//            LOGT << "before:" << events_str;
+//    }
+//
+//    {
+//        string events_str;
+//        for (auto const &event: events)
+//            events_str +=
+//                 "\n" + (event->stream->getHandles().empty() ? "" :
+//                        convert<string>(event->stream->getHandles().front()))
+//                + " " + convert<string>(event->operation)
+//                + " " + convert<string>(event->status);
+//        if (!events_str.empty())
+//            LOGT << "after:" << events_str;
+//    }
+
+    return std::list<Event::TSharedPtr>(events.begin(), events.end()); // ----->
 }
 
 
@@ -73,12 +123,12 @@ void CSessionManager::initialize() {
 
 
 void CSessionManager::finalize() {
-//    LOGT << "CSessionManager::finalize ...";
+    LOGT << "CSessionManager::finalize ...";
     m_context_worker->finalize();
     m_event_repeater_thread->finalize();
     m_multiplexer->finalize();
     m_multiplexer_thread->finalize();
-//    LOGT << "CSessionManager::finalize OK";
+    LOGT << "CSessionManager::finalize OK";
 }
 
 
@@ -117,13 +167,13 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
         //LOGT << "multiplexer wait OK, events: " << events.size();
 //        m_context_worker->push(m_multiplexer->waitEvents());
         
-        string  events_str;
-        for (auto const &event: events)
-            events_str +=
-                    convert<string>(event->operation)
-            + " " + convert<string>(event->status)
-            + " " + convert<string>(event->stream->getHandles().front())
-            + "\n";
+//        string  events_str;
+//        for (auto const &event: events)
+//            events_str +=
+//                    convert<string>(event->operation)
+//            + " " + convert<string>(event->status)
+//            + " " + convert<string>(event->stream->getHandles().front())
+//            + "\n";
         
         //LOGT << "multiplexer events:\n" + events_str;
 
@@ -175,73 +225,88 @@ CSessionManager::CContextWorkerHandler::handle(
     //threading::sleep(1000);
     if (events_.empty())
         return {}; // ----->
-    //{
-    //    string events_str;
-    //    for (auto const &event : events_)
-    //        events_str +=
-    //            "\n"  + convert<string>(std::hash<Event::TSharedPtr>()(event))
-    //            + " " + convert<string>(event->operation)
-    //            + " " + convert<string>(event->status)
-    //            + " " + (event->stream->getHandles().empty() ? "" :
-    //                    convert<string>(event->stream->getHandles().front()));
-    //    LOGT << "handle events 1:" << events_str;
-    //}
 
-    std::list<Event::TSharedPtr> events = removeDuplicates(events_);
+//    std::list<Event::TSharedPtr> events = removeDuplicates(events_);
+//    std::list<Event::TSharedPtr> events = events_; // = removeDuplicates(events_);
 
-    {
-        string events_str;
-        for (auto const &event: events)
-            events_str +=
-                 "\n" + convert<string>(std::hash<Event::TSharedPtr>()(event))
-                + " " + (event->stream->getHandles().empty() ? "" :
-                        convert<string>(event->stream->getHandles().front()))
-                + " " + convert<string>(event->operation)
-                + " " + convert<string>(event->status);
-        //if (!events_str.empty())
-        //    LOGT << "handle events:" << events_str;
-    }
+// todo: rm logs
+//    {
+//        string events_str;
+//        for (auto const &event: events)
+//            events_str +=
+//                 "\n" + convert<string>(std::hash<Event::TSharedPtr>()(event))
+//                + " " + (event->stream->getHandles().empty() ? "" :
+//                        convert<string>(event->stream->getHandles().front()))
+//                + " " + convert<string>(event->operation)
+//                + " " + convert<string>(event->status);
+//        if (!events_str.empty())
+//            LOGT << "handle events:" << events_str;
+//    }
 
     // events to repeat handling
     IContextWorker::TOutputItems events_to_repeat;
 
-    for (auto const &worker_event: events) {
+    for (auto const &worker_event: removeDuplicates(events_)) {
+
+        LOGT
+            << "handle event 1: "
+            <<(worker_event->stream->getHandles().empty() ? 0 :
+               worker_event->stream->getHandles().front()) << " "
+            << worker_event->operation << " "
+            << worker_event->status;
+
+
+//        if (worker_event->operation == Event::TOperation::CLOSE &&
+//            worker_event->status    == Event::TStatus::BEGIN    &&
+//           !worker_event->stream->getHandles().empty()) 
+//        {
+//            m_multiplexer->unsubscribe(worker_event->stream);
+//            worker_event->stream->finalize();
+//            worker_event->status = Event::TStatus::END;
+//            events_to_repeat.push_back(worker_event);
+//            continue; // <---
+//        }
+
         if (auto context = m_context_manager->acquireContext(worker_event)) {
             bool is_context_valid = true;
             for (auto const &event: removeDuplicates(context->popEvents())) {
-                //LOGT
-                //    << "handle event: "
-                //    <<(event->stream->getHandles().empty() ? 0 :
-                //       event->stream->getHandles().front()) << " "
-                //    << event->operation << " "
-                //    << event->status;
+
+                LOGT
+                    << "handle event 2: "
+                    <<(event->stream->getHandles().empty() ? 0 :
+                       event->stream->getHandles().front()) << " "
+                    << event->operation << " "
+                    << event->status;
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
-                        if (event->operation == Event::TOperation::OPEN) {
+                        if (event->operation == Event::TOperation::OPEN) {\
+
+
+
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
-                        } else
-                        if (event->operation == Event::TOperation::CLOSE) {
-                            m_multiplexer->unsubscribe(event->stream);
-                            event->stream->finalize();
                         } else
                         if (checkOneOf(
                             event->operation, 
                             Event::TOperation::READ,
                             Event::TOperation::WRITE,
-                            Event::TOperation::TIMEOUT))
+                            Event::TOperation::TIMEOUT,
+                            Event::TOperation::CLOSE))
                         {
                             auto is_transmitted = context->transmit(event);
-                            //LOGT << "transmit: " << is_transmitted;
-                            if (!is_transmitted) {
-                                //LOGT << "eof by transmitter";
-                                event->operation = Event::TOperation::EOF_;
+
+                            if (event->operation == Event::TOperation::CLOSE) {
+                                m_multiplexer->unsubscribe(event->stream);
+                                if(!event->stream->getHandles().empty())
+                                    event->stream->finalize();
+                            } else {
+                                if (!is_transmitted)
+                                    event->operation =  Event::TOperation::EOF_;
                             }
+
                             event->status = Event::TStatus::END;
-//#ifndef WINDOWS_PLATFORM
                             events_to_repeat.push_back(event);
-//#endif // !WINDOWS_PLATFORM
                         }
 
                     } catch (std::exception const &e) {
@@ -293,25 +358,25 @@ CSessionManager::CContextWorkerHandler::handle(
             if (!is_context_valid) {
                 //LOGE << "remove context"; 
                 m_context_manager->removeContext(context);
-                continue; // <---
+//                continue; // <---
             }
             auto events_ = m_context_manager->releaseContext(context);
             events_to_repeat.insert(events_to_repeat.end(), events_.begin(), events_.end());
         }
     }
 
-    {
-        string events_str;
-        for (auto const &event : events_to_repeat)
-            events_str +=
-                 "\n" + convert<string>(std::hash<Event::TSharedPtr>()(event))
-                + " " + (event->stream->getHandles().empty() ? "" :
-                        convert<string>(event->stream->getHandles().front()))
-                + " " + convert<string>(event->operation)
-                + " " + convert<string>(event->status);
-        //if (!events_str.empty())
-        //    LOGT << "repeat events:" << events_str;
-    }
+//    {
+//        string events_str;
+//        for (auto const &event : events_to_repeat)
+//            events_str +=
+//                 "\n" + convert<string>(std::hash<Event::TSharedPtr>()(event))
+//                + " " + (event->stream->getHandles().empty() ? "" :
+//                        convert<string>(event->stream->getHandles().front()))
+//                + " " + convert<string>(event->operation)
+//                + " " + convert<string>(event->status);
+//        //if (!events_str.empty())
+//        //    LOGT << "repeat events:" << events_str;
+//    }
 
     return events_to_repeat; // ----->
 }

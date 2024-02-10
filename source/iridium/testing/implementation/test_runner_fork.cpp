@@ -54,8 +54,8 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
     scan(node_test, "", paths);
 
     struct TFork {
-        CTestProtocolHandler::TSharedPtr handler;
         CProcessStream::TSharedPtr       process;
+        CTestProtocolHandler::TSharedPtr handler;
     };
 
     std::unordered_map<std::string, TFork> map_path_fork;
@@ -63,9 +63,9 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     for (auto const &path: paths) {
         auto process = CProcessStream::create(m_app_path, "run --mode=raw --print-result=json " + path);
-        auto handler = CTestProtocolHandler::create(process, path, process_result_queue);
+        auto handler = CTestProtocolHandler::create(process, path, process_result_queue, m_timeout);
 
-        map_path_fork[path] = TFork { handler, process };
+        map_path_fork[path] = TFork { process, handler };
 
         if (!m_is_serial)
             m_session_manager->manage(process, handler);
@@ -86,9 +86,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
         auto results = process_result_queue->pop(m_timeout);
         //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
-
-        if  (results.empty())
-            break; // --->
 
         for (auto const &result: results) {
             if (result->node) {
@@ -121,7 +118,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 }
                 interrupted.push_back(result);
                 LOGF << result->path << ":\n"
-                     << result->state.condition;
+                     << result->state.condition << "\n\n";
             }
         }
     }
@@ -170,16 +167,21 @@ void CTestRunnerFork::scan(
 
 
 CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
-    IProcess::TSharedPtr    const &process,
-    string                  const &path,
+    IProcess::TSharedPtr
+        const &process,
+    string
+        const &path,
     IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
-                            const &process_result_queue)
+        const &process_result_queue,
+    std::chrono::milliseconds
+        const &timeout)
 :
     m_process               (process),
     m_process_result_queue  (process_result_queue),
     m_buffer_output         (io::Buffer::create()),
     m_parser                (CJSONParser::create()),
-    m_process_result        (TProcessResult::create( TProcessResult { path } ) )
+    m_process_result        (TProcessResult::create( TProcessResult { path } ) ),
+    m_timeout               (timeout)
 {}
 
 
@@ -210,12 +212,22 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         pipe_manager->updatePipe(DEFAULT_PIPE_NAME, 
             std::dynamic_pointer_cast<io::IStreamReader>(event->stream), 
             CStreamWriterBuffer::create(m_buffer_output));
+
+//        m_time_end = m_timeout + std::chrono::system_clock::now();
+//        LOGT << "start: " << m_process_result->path;
 //        LOGT << "return true";
         return true; // ----->
     }
 
     //if (m_buffer_output && !m_buffer_output->empty())
     //    LOGT << "back: " << (int)m_buffer_output->back();
+
+//    if (m_time_end < std::chrono::system_clock::now()) {
+//        LOGT << "stop:  " << m_process_result->path;
+//        m_process->finalize();
+//        m_process_result->state     = m_process->getState();
+////        m_process_result->output    = m_buffer_output;
+//    }
 
     try {
         if (
@@ -230,7 +242,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                 checkOneOf(m_buffer_output->back(), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
         {
             size_t right = m_buffer_output->size() - 1;
-            while (right > 0 &&  checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+            while (right > 0 && checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
                 right--;
 
             size_t left  = right;
@@ -316,13 +328,13 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         m_process_result->output    = io::Buffer::create("empty process output");
         m_process_result->state     = m_process->getState();
     }
-    
+
 //    LOGT << "return " << bool(!m_process_result->output);
 //    if (!m_process_result->output)
 //        LOGT << "buffer:\n" << m_buffer_output
 //             << "\ncond:  " << m_process_result->state.condition
 //             << "\nevent: " << event->getType();
-    
+
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
     
