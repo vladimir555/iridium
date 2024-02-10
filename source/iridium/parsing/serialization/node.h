@@ -15,6 +15,7 @@
 #include "iridium/macros/va_args.h"
 
 
+//#include <iostream>
 namespace iridium {
 namespace parsing {
 namespace serialization {
@@ -45,21 +46,21 @@ public:
     bool operator== (TValue const &value) const;
     ///
     INode::TSharedPtr getNode() const;
+
 protected:
     /// list attribute
     Node(
-        INode::TConstSharedPtr  const &node_source,
-        INode::TSharedPtr       const &node_destination,
+        INode::TSharedPtr       const &node,
         std::string             const &name,
         std::string             const &path);
+
     Node(std::string const &name);
     /// attribute
     Node(Node<void> const &parent, std::string const &name, TValue const &default_value);
     /// attribute
     Node(Node<void> const &parent, std::string const &name);
 
-    INode::TConstSharedPtr  m_node_source;
-    INode::TSharedPtr       m_node_destination;
+    INode::TSharedPtr       m_node;
     std::string             m_path;
     bool                    m_is_default = false;
 };
@@ -71,21 +72,21 @@ public:
     /// root node for desiarization only
     Node(std::string const &name);
     /// root node for serialization and desiarization
-    Node(INode::TConstSharedPtr const &node, std::string const &name);
+    Node(
+         INode::TSharedPtr  const &node,
+         std::string        const &name);
     ///
    ~Node() = default;
     ///
     INode::TSharedPtr       getNode() const;
 
-    INode::TConstSharedPtr  m_node_source;
-    INode::TSharedPtr       m_node_destination;
+    INode::TSharedPtr       m_node;
     std::string             m_path;
 
 protected:
     /// list node
     Node(
-        INode::TConstSharedPtr  const &node_source,
-        INode::TSharedPtr       const &node_destination,
+        INode::TSharedPtr       const &node,
         std::string             const &name,
         std::string             const &path);
     /// node
@@ -150,48 +151,44 @@ private:
 
 template<typename TValue>
 Node<TValue>::Node(
-    INode::TConstSharedPtr  const &node_source,
-    INode::TSharedPtr       const &node_destination,
+    INode::TSharedPtr       const &node,
     std::string             const &name,
     std::string             const &path)
 {
     m_path = path + "/" + name;
 
-    if (node_source && node_source->getName() == name)
-        m_node_source   = node_source;
+    if (node && node->getName() == name)
+        m_node   = node;
     else
         throw std::runtime_error("node '" + m_path + "' not found"); // ----->
-
-    m_node_destination  = node_destination;
 }
 
 
 template<typename TValue>
 Node<TValue>::Node(std::string const &name) {
-    m_path              = "/" + name;
-    m_node_destination  = implementation::CNode::create(name);
+    m_path = "/" + name;
+    m_node = implementation::CNode::create(name);
 }
 
 
 template<typename TValue>
 INode::TSharedPtr Node<TValue>::getNode() const {
-    return m_node_destination; // ----->
+    return m_node; // ----->
 }
 
 
 template<typename TValue>
 Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue const &default_value) {
     m_path = parent.m_path + "/" + name;
-    if (parent.m_node_source)
-        m_node_source       = parent.m_node_source->getChild(name);
-    else
-        m_node_source       = nullptr; // pvs warn
 
-    if (m_node_source) {
-        m_node_destination  = parent.m_node_destination->addChild(name, m_node_source->getValue());
-    } else {
-        m_node_destination  = parent.m_node_destination->addChild(name, convertion::convert<std::string>(default_value));
-        m_is_default        = true;
+    if (parent.m_node)
+        m_node          = parent.m_node->getChild(name);
+    else
+        m_node          = nullptr;
+
+    if(!m_node) {
+        m_node          = parent.m_node->addChild(name, convertion::convert<std::string>(default_value));
+        m_is_default    = true;
     }
 }
 
@@ -199,23 +196,23 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue con
 template<typename TValue>
 Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
     m_path = parent.m_path + "/" + name;
-    if (parent.m_node_source)
-        m_node_source       = parent.m_node_source->getChild(name);
-    else
-        m_node_source       = nullptr; // pvs warn
 
-    if (m_node_source)
-        m_node_destination  = parent.m_node_destination->addChild(name, m_node_source->getValue());
+    if (parent.m_node)
+        m_node  = parent.m_node->getChild(name);
     else
+        m_node  = nullptr; // pvs warn
+
+    if (!m_node) {
         throw std::runtime_error("node '" + m_path + "' not found"); // ----->
+    } 
 }
 
 
 template<typename TValue>
 TValue Node<TValue>::get() const {
     // todo: lazy convertion with cached value
-    if (m_node_destination)
-        return convertion::convert<TValue>(m_node_destination->getValue());
+    if (m_node)
+        return convertion::convert<TValue>(m_node->getValue());
     else
         throw std::runtime_error("value " + m_path + " not serialized"); // ----->
 }
@@ -223,7 +220,9 @@ TValue Node<TValue>::get() const {
 
 template<typename TValue>
 void Node<TValue>::set(TValue const &value) {
-    m_node_destination->setValue(convertion::convert<std::string>(value));
+    if (m_node)
+        m_node->setValue(convertion::convert<std::string>(value));
+
     m_is_default = false;
 }
 
@@ -262,10 +261,10 @@ NodeList<TNode>::NodeList(Node<void> const &parent, std::string const &name)
 :
     m_parent(parent)
 {
-    if (parent.m_node_source) {
-        for (auto const &i: *parent.m_node_source)
+    if (parent.m_node) {
+        for (auto const &i: *parent.m_node)
             if (i->getName() == name)
-                m_nodes.push_back(TNode(i, parent.m_node_destination->addChild(i->getName(), i->getValue()), parent.m_path));
+                m_nodes.push_back(TNode(i, parent.m_path));
     }
 }
 
@@ -296,13 +295,13 @@ typename NodeList<TNode>::const_iterator NodeList<TNode>::end() const {
 
 template<typename TNode>
 size_t NodeList<TNode>::size() const {
-    return m_nodes.size();
+    return m_nodes.size(); // ----->
 }
 
 
 template<typename TNode>
 void NodeList<TNode>::add(TNode const &node) {
-    m_parent.m_node_destination->addChild(node.getNode());
+    m_parent.m_node->addChild(node.getNode());
     m_nodes.push_back(node);
 }
 
@@ -346,17 +345,17 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 #define DEFINE_ROOT_NODE_BEGIN_2(class_name, name_delimeter_symbol) \
     struct T##class_name : protected iridium::parsing::serialization::Node<void> { \
         static int const NAME_DELIMETER_SYMBOL = name_delimeter_symbol; \
-        T##class_name(iridium::parsing::INode::TConstSharedPtr const &node): \
-        iridium::parsing::serialization::Node<void> \
-        (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
-        T##class_name(): iridium::parsing::serialization::Node<void> \
-        (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
-        iridium::parsing::INode::TSharedPtr getNode() const { \
-            return iridium::parsing::serialization::Node<void>::getNode(); \
-        } \
+        T##class_name(iridium::parsing::INode::TSharedPtr const &node): \
+            iridium::parsing::serialization::Node<void> \
+                (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+            T##class_name(): iridium::parsing::serialization::Node<void> \
+                (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+            iridium::parsing::INode::TSharedPtr getNode() const { \
+                return iridium::parsing::serialization::Node<void>::getNode(); \
+            } \
         T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::Node<void> \
-        (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
+            iridium::parsing::serialization::Node<void> \
+                (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
 
 
 #define DEFINE_ROOT_NODE_BEGIN_1(class_name) \
@@ -407,20 +406,19 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 // todo: bugfix node name, e g NameList instead Name
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
     struct T##class_name##List; \
-    struct T##class_name : public iridium::parsing::serialization::Node<void> { \
+    struct T##class_name: public iridium::parsing::serialization::Node<void> { \
         T##class_name( \
-        iridium::parsing::INode::TConstSharedPtr const &node_source, \
-        iridium::parsing::INode::TSharedPtr const &node_destination, \
+        iridium::parsing::INode::TSharedPtr const &node, \
         std::string const &path): \
         iridium::parsing::serialization::Node<void> \
-        (node_source, node_destination, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
+        (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
         T##class_name(): iridium::parsing::serialization::Node<void> \
         (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
 
 
 #define DEFINE_NODE_LIST_END(class_name) \
     }; \
-    struct T##class_name##List : public iridium::parsing::serialization::NodeList<T##class_name> { \
+    struct T##class_name##List: public iridium::parsing::serialization::NodeList<T##class_name> { \
         T##class_name##List(iridium::parsing::serialization::Node<void> const &parent): \
         iridium::parsing::serialization::NodeList<T##class_name> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
@@ -434,11 +432,10 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
                 (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
         using iridium::parsing::serialization::Node<type>::operator =; \
         T##class_name( \
-            iridium::parsing::INode::TConstSharedPtr const &node_source, \
-            iridium::parsing::INode::TSharedPtr const &node_destination, \
+            iridium::parsing::INode::TSharedPtr const &node, \
             std::string const &path): \
                 iridium::parsing::serialization::Node<type> \
-                    (node_source, node_destination, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
+                    (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
         T##class_name(): \
             iridium::parsing::serialization::Node<type> \
                 (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
@@ -460,6 +457,7 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
     T##class_name##Ptr class_name##_ptr = *this;
 
 
+// recursive node pointer
 #define DEFINE_NODE_LIST_PTR(class_name) \
     typedef typename iridium::parsing::serialization::NodePtr<T##class_name##List> T##class_name##ListPtr; \
     T##class_name##ListPtr class_name##_list_ptr = *this;

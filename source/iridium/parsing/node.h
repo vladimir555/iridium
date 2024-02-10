@@ -20,8 +20,6 @@ typedef INodeType<std::string> INode;
 } // iridium
 
 
-//DEFINE_CONVERT(std::string, iridium::parsing::INode::TConstSharedPtr)
-//DEFINE_CONVERT(std::string, iridium::parsing::INode::TSharedPtr)
 DEFINE_CONVERT(std::string, iridium::parsing::INode)
 
 

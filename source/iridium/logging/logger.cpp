@@ -5,8 +5,6 @@
 #include "implementation/sink_file.h"
 #include "implementation/sink.h"
 
-#include "iridium/threading/thread.h"
-#include "iridium/assert.h"
 #include "iridium/strings.h"
 
 

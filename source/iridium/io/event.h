@@ -17,15 +17,17 @@ namespace io {
 
 struct Event {
     DEFINE_CREATE(Event)
+
     DEFINE_ENUM(
         TOperation, 
         OPEN, 
-        CLOSE, 
-        READ, 
+        READ,
         WRITE, 
-        TIMEOUT, 
-        EOF_, 
+        EOF_,
+        TIMEOUT,
+        CLOSE,
         ERROR_)
+
     DEFINE_ENUM(
         TStatus, 
         BEGIN, 

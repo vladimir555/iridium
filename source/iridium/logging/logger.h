@@ -22,6 +22,7 @@ namespace iridium {
 namespace logging {
 
 
+// todo: wait for finalizing async sinks
 class Logger:
     public pattern::Singleton<Logger>,
     public threading::Synchronized<std::mutex>

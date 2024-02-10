@@ -88,9 +88,9 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
 
     m_triggered_events( DEFAULT_EVENTS_LIMIT, (struct kevent) {0} ),
 
-    m_kqueue        (0),
-    m_pipe_add      {0},
-    m_pipe_del      {0}
+    m_kqueue    (0),
+    m_pipe_add  {0},
+    m_pipe_del  {0}
 {}
 
 
@@ -171,7 +171,7 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
             //        LOGT << "!   map fd: " << fd;
         }
         
-//        LOGT << __FUNCTION__ << "  , fd: " << fd;
+        LOGT << __FUNCTION__ << ", fd: " << fd;
         // todo: optimize uintptr_t
         auto result = write(m_pipe_add[1], &fd, 8);
         
@@ -194,7 +194,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
         if (fd <= 0)
             return; // ----->
         
-//        LOGT << __FUNCTION__ << ", fd: " << fd;
+        LOGT << __FUNCTION__ << ", fd: " << fd;
         auto result = write(m_pipe_del[1], &fd, 8);
         
         if (result < 0)

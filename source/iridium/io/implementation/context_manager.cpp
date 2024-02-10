@@ -33,22 +33,27 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
         auto i  = m_acquired_contexts.find(context);
         if  (i == m_acquired_contexts.end()) {
             m_acquired_contexts.insert(context);
+
+            LOGT << "CContextManager::acquireContext: context";
             return context; // ----->
         }
     }
     // context not registered or acquired
+    LOGT << "CContextManager::acquireContext: nullptr";
     return nullptr; // ----->
 }
 
 
 std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPtr const &context) {
-    LOCK_SCOPE();
-    
-    m_acquired_contexts.erase(context);
-    
     auto events = context->popEvents();
-    
-    if (m_contexts_to_remove.count(context) && events.empty()) {
+
+    LOGT << "CContextManager::releaseContext, events count: " << events.size();
+
+    LOCK_SCOPE();
+
+    if (m_contexts_to_remove.count(context) > 0 && events.empty()) {
+        LOGT << "CContextManager::releaseContext, remove context";
+
         auto    stream_context  = m_map_stream_context.begin();
         while  (stream_context != m_map_stream_context.end()) {
             if (stream_context->second == context)
@@ -59,17 +64,20 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
         
         m_contexts.erase(context);
         m_contexts_to_remove.erase(context);
-        //LOGT << "manager::release, remove";
+
+        return {}; // ----->
+    } else {
+        m_acquired_contexts.erase(context);
+
+        return events; // ----->
     }
-    
-    return events; // ----->
 }
 
 
 void CContextManager::removeContext(IContext::TSharedPtr const &context) {
     LOCK_SCOPE();
     
-    //LOGT << "manager::remove";
+//    LOGT << "CContextManager::removeContext";
     if (m_contexts_to_remove.count(context) == 0) {
         context->remove();
         m_contexts_to_remove.insert(context);

@@ -48,7 +48,9 @@ private:
             std::string
                 const &path,
             threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
-                const &process_result_queue);
+                const &process_result_queue,
+            std::chrono::milliseconds
+                const &timeout);
 
         bool control(
             io::Event::TSharedPtr
@@ -60,12 +62,20 @@ private:
         system::IProcess::TState    getExitState() const;
 
     private:
-        system::IProcess::TSharedPtr    m_process;
+        system::IProcess::TSharedPtr
+            m_process;
         threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
-                                        m_process_result_queue;
-        io::Buffer::TSharedPtr          m_buffer_output;
-        parsing::IParser::TSharedPtr    m_parser;
-        TProcessResult::TSharedPtr      m_process_result;
+            m_process_result_queue;
+        io::Buffer::TSharedPtr
+            m_buffer_output;
+        parsing::IParser::TSharedPtr
+            m_parser;
+        TProcessResult::TSharedPtr
+            m_process_result;
+        std::chrono::milliseconds
+            m_timeout;
+        std::chrono::system_clock::time_point
+            m_time_end;
     };
 
     void scan(

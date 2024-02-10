@@ -208,12 +208,12 @@ template<>
 double convert(std::string const &value);
 
 
-template<>
-std::string convert(std::wstring const &value);
+//template<>
+//std::string convert(std::wstring const &value);
 
 
-template<>
-std::wstring convert(std::string const &value);
+//template<>
+//std::wstring convert(std::string const &value);
 
 
 
