@@ -28,7 +28,7 @@ using std::string;
 using std::wstring;
 using std::tm;
 using std::runtime_error;
-//using std::wstring_convert;
+using std::wstring_convert;
 using std::codecvt_utf8_utf16;
 using std::codecvt_utf8;
 using std::strftime;
@@ -481,18 +481,24 @@ int convert(int const &value) {
 }
 
 
-//template<>
-//string convert(wstring const &value) {
-//    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
-//    return converter.to_bytes(value); // ----->
-//}
+#if __cplusplus >= 201103L && __cplusplus < 201703L
 
 
-//template<>
-//wstring convert(string const &value) {
-//    wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-//    return converter.from_bytes(value); // ----->
-//}
+template<>
+string convert(wstring const &value) {
+    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
+    return converter.to_bytes(value); // ----->
+}
+
+
+template<>
+wstring convert(string const &value) {
+    wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+    return converter.from_bytes(value); // ----->
+}
+
+
+#endif // C++11 <= STL < C++14
 
 
 } // implementation
