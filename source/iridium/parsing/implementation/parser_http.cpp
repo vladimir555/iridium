@@ -142,7 +142,7 @@ string CHTTPParser::compose(INode::TConstSharedPtr const &node) const {
         throw std::runtime_error("http composing error: http header root node is null"); // ----->
 
     auto body   = assertExists(node->getChild(HTTP_BODY), "http composing error: node " + HTTP_BODY + " does not exists");
-    result     += "\n" + body->getValue();
+    result     += std::string("\n") + body->getValue();
 
     return result; // ----->
 }

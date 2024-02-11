@@ -109,6 +109,8 @@ void CFileStream::initialize() {
 //        open_mode = "rb+";
 
     try {
+        if (open_mode.empty())
+            throw std::runtime_error("empty open mode");
         m_file = open(m_file_name, open_mode);
     } catch (std::exception const &e) {
         throw std::runtime_error(
