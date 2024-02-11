@@ -29,13 +29,18 @@ public:
     ///
     typedef std::list<typename INodeType::TSharedPtr> TNodes;
     ///
-    typedef std::list<typename INodeType::TConstSharedPtr> TNodesConst;
-    ///
     typedef typename TNodes::iterator iterator;
     ///
-    typedef typename TNodesConst::const_iterator const_iterator;
+    typedef typename TNodes::const_iterator  const_iterator;
     ///
-    typedef typename TNodesConst::const_reference const_reference;
+    typedef typename TNodes::const_reference const_reference;
+
+//    ///
+//    typedef std::list<typename INodeType::TConstSharedPtr> TNodesConst;
+//    ///
+//    typedef typename TNodesConst::const_iterator const_iterator;
+//    ///
+//    typedef typename TNodesConst::const_reference const_reference;
 
     ///
     static std::string const PATH_DELIMITER;

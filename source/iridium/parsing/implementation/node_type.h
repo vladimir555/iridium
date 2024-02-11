@@ -26,7 +26,7 @@ namespace implementation {
 template<typename TValue>
 class CNodeType : public INodeType<TValue> {
 public:
-    DEFINE_IMPLEMENTATION(CNodeType<TValue>)
+    DEFINE_IMPLEMENTATION(CNodeType)
     ///
     explicit CNodeType(std::string const &name, TValue const &value);
     ///
@@ -51,12 +51,10 @@ public:
     size_t size() const override;
     ///
     bool hasChilds() const override;
-
     ///
     typename INodeType<TValue>::TSharedPtr getChild(std::string const &name) override;
     ///
     typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
-
     ///
     typename INodeType<TValue>::TSharedPtr addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
     ///
@@ -75,7 +73,7 @@ private:
     ///
     TValue m_value;
     ///
-    /*mutable*/ typename INodeType<TValue>::TNodes m_nodes;
+    typename INodeType<TValue>::TNodes m_nodes;
 };
 
 
@@ -161,13 +159,15 @@ typename INodeType<TValue>::iterator CNodeType<TValue>::end() {
 
 template<typename TValue>
 typename INodeType<TValue>::const_iterator CNodeType<TValue>::begin() const {
-    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).cbegin(); // ----->
+    return m_nodes.cbegin();
+//    return reinterpret_cast<typename INodeType<TValue>::TNodes const &>(m_nodes).cbegin(); // ----->
 }
 
 
 template<typename TValue>
 typename INodeType<TValue>::const_iterator CNodeType<TValue>::end() const {
-    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).cend(); // ----->
+    return m_nodes.cend();
+//    return reinterpret_cast<typename INodeType<TValue>::TNodesConst const &>(m_nodes).cend(); // ----->
 }
 
 

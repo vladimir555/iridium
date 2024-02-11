@@ -19,7 +19,7 @@ class IObservable;
 template<typename TEvent>
 class IObserver {
 public:
-	DEFINE_INTERFACE(IObserver<TEvent>)
+	DEFINE_INTERFACE(IObserver)
 	virtual void handle(TEvent const& event) = 0;
 };
 
