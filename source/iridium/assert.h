@@ -16,8 +16,17 @@ namespace iridium {
 
 
 template<typename T>
-T &assertExists(T &&value, std::string const &error) {
-    if (value)
+T assertExists(T &&value, std::string const &error) {
+    if (static_cast<bool>(value))
+        return std::forward<T>(value); // ----->
+    else
+        throw std::runtime_error(error);
+}
+
+
+template<typename T>
+T *assertExists(T *value, std::string const &error) {
+    if (static_cast<bool>(value))
         return value; // ----->
     else
         throw std::runtime_error(error);
@@ -25,9 +34,18 @@ T &assertExists(T &&value, std::string const &error) {
 
 
 template<typename T>
-T &assertSize(T &&values, size_t const &size, std::string const &error) {
+std::shared_ptr<T> assertExists(std::shared_ptr<T> const value, std::string const &error) {
+    if (static_cast<bool>(value))
+        return value; // ----->
+    else
+        throw std::runtime_error(error);
+}
+
+
+template<typename T>
+T assertSize(T &&values, size_t const &size, std::string const &error) {
     if (values.size() == size)
-        return values; // ----->
+        return std::forward<T>(values); // ----->
     else
         throw std::runtime_error(error + ", wrong items size " +
             convertion::convert<std::string>(values.size()) + ", expects " +
@@ -36,15 +54,15 @@ T &assertSize(T &&values, size_t const &size, std::string const &error) {
 
 
 template<typename T>
-T &assertOne(T &&values, std::string const &error) {
-    return assertSize(values, 1, error); // ----->
+T assertOne(T &&values, std::string const &error) {
+    return std::forward<T>(assertSize(std::move(values), 1, error)); // ----->
 }
 
 
 template<typename T>
-T &assertComplete(T &&values, std::string const &error) {
+T assertComplete(T &&values, std::string const &error) {
     if (values.size() > 0)
-        return values; // ----->
+        return std::forward<T>(values); // ----->
     else
         throw std::runtime_error(error);
 }
