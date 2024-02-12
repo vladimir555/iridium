@@ -27,7 +27,7 @@
 //    throw std::runtime_error("uncached_throw");
 //}
 
-#include <set>
+//#include <set>
 TEST(OK) {
 //    std::set<int> s;
 //
@@ -166,4 +166,16 @@ TEST(OK) {
 //TEST(crash) {
 //    int *a = nullptr;
 //    *a = 5;
+//}
+
+//#include <simd/simd.h>
+//#include <experimental/simd>
+//TEST(simd_) {
+//
+//    auto simd_vector = std::experimental::simd<uint8_t>(1);
+//
+//    simd_vector++;
+//
+////    for (auto const &i: simd_vector)
+//        
 //}

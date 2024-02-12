@@ -22,7 +22,7 @@ namespace implementation {
 // ----- interface
 
 
-///
+// todo: rename to CNodeTypeView
 template<typename TValue>
 class CNodeType : public INodeType<TValue> {
 public:
