@@ -18,6 +18,7 @@ namespace iridium {
 namespace parsing {
 
 
+// todo: rename to INodeTypeView or INodeView<typename TValue> + INodeView
 // todo: Depth-First Search, DFS) and (Breadth-First Search, BFS) methods maybe parallel
 ///
 /// \brief The INodeType class

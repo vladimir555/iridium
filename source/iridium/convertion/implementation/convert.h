@@ -219,6 +219,25 @@ template<>
 std::wstring convert(std::string const &value);
 
 
+#else
+
+
+template<>
+std::string convert(std::u16string const &value);
+
+
+template<>
+std::string convert(std::u32string const &value);
+
+
+template<>
+std::u16string convert(std::string const &value);
+
+
+template<>
+std::u32string convert(std::string const &value);
+
+
 #endif // C++11 <= STL < C++14
 
 

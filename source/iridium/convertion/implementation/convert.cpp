@@ -498,6 +498,172 @@ wstring convert(string const &value) {
 }
 
 
+#else
+
+
+template<>
+std::string convert(std::u16string const &value) {
+    // todo: test, not complete errors handling
+    std::string result;
+    size_t      length = value.length();
+
+    for (size_t i = 0; i < length; ++i) {
+        uint32_t symbol = value[i];
+
+        if (symbol >= 0xD800 && symbol <= 0xDBFF) {
+            if (i + 1 < length) {
+                uint32_t low = value[++i];
+                if (low >= 0xDC00 && low <= 0xDFFF)
+                    symbol = 0x10000 + ((symbol - 0xD800) << 10) + (low - 0xDC00);
+                else
+                    throw std::runtime_error(
+                        "convert utf16 to utf8 error: invalid surrogate pair sequence"); // ----->
+            } else
+                throw std::runtime_error(
+                    "convert utf16 to utf8 error: high surrogate without following low surrogate"); // ----->
+        } else
+        if (symbol >= 0xDC00 && symbol <= 0xDFFF)
+            throw std::runtime_error(
+                "convert utf16 to utf8 error: orphan low surrogate without preceding high surrogate"); // ----->
+
+        if (symbol <= 0x7F) {
+            result.push_back(static_cast<char>(symbol));
+        } else if (symbol <= 0x7FF) {
+            result.push_back(static_cast<char>(0xC0 | ((symbol >> 6)  & 0x1F)));
+            result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
+        } else if (symbol <= 0xFFFF) {
+            result.push_back(static_cast<char>(0xE0 | ((symbol >> 12) & 0x0F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
+        } else if (symbol <= 0x10FFFF) {
+            result.push_back(static_cast<char>(0xF0 | ((symbol >> 18) & 0x07)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >> 12) & 0x3F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
+        } else
+            throw std::runtime_error("convert utf16 to utf8 error: invalid code point"); // ----->
+    }
+    return result; // ----->
+}
+
+
+template<>
+std::string convert(std::u32string const &value) {
+    // todo: test, not complete errors handling
+    std::string result;
+
+    for (char32_t const &symbol: value) {
+        if (symbol <= 0x7F) {
+            result.push_back(static_cast<char>(symbol));
+        } else
+        if (symbol <= 0x7FF) {
+            result.push_back(static_cast<char>(0xC0 | ((symbol >> 6)  & 0x1F)));
+            result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
+        } else
+        if (symbol <= 0xFFFF) {
+            result.push_back(static_cast<char>(0xE0 | ((symbol >> 12) & 0x0F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
+        } else
+        if (symbol <= 0x10FFFF) {
+            result.push_back(static_cast<char>(0xF0 | ((symbol >> 18) & 0x07)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >> 12) & 0x3F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
+        } else
+            throw std::invalid_argument("Invalid UTF-32 code symbol: " +
+                convert<string>(static_cast<uint32_t>(symbol), 16)); // ----->
+    }
+    return result; // ----->
+}
+
+
+template<>
+std::u16string convert(std::string const &value) {
+    // todo: test, not complete errors handling
+    std::u16string result;
+    auto length = value.length();
+    size_t i = 0;
+    while (i < length) {
+        uint32_t symbol = static_cast<uint8_t>(value[i]);
+
+        if (symbol <= 0x7F) {
+            result.push_back(static_cast<char16_t>(symbol));
+        } else 
+        if (symbol >= 0xC0 && symbol <= 0xDF && i + 1 < length) {
+            symbol = ((symbol & 0x1F) << 6) |
+                 (static_cast<uint8_t>(value[i + 1]) & 0x3F);
+            i++;
+            result.push_back(static_cast<char16_t>(symbol));
+        } else 
+        if (symbol >= 0xE0 && symbol <= 0xEF && i + 2 < length) {
+            symbol = ((symbol & 0x0F) << 12) |
+                ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 6) |
+                 (static_cast<uint8_t>(value[i + 2]) & 0x3F);
+            i += 2;
+            result.push_back(static_cast<char16_t>(symbol));
+        } else 
+        if (symbol >= 0xF0 && symbol <= 0xF7 && i + 3 < length) {
+            symbol = ((symbol & 0x07) << 18) |
+                ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 12) |
+                ((static_cast<uint8_t>(value[i + 2]) & 0x3F) << 6)  |
+                 (static_cast<uint8_t>(value[i + 3]) & 0x3F);
+            i += 3;
+            symbol -= 0x10000;
+            result.push_back(static_cast<char16_t>((symbol >> 10)   + 0xD800));
+            result.push_back(static_cast<char16_t>((symbol & 0x3FF) + 0xDC00));
+        } else
+            throw std::invalid_argument("Invalid UTF-8 code point at position " +
+                convert<string>(i)); // ----->
+
+        i++;
+    }
+    return result; // ----->
+}
+
+
+template<>
+std::u32string convert(std::string const &value) {
+    // todo: test, not complete errors handling
+    std::u32string result;
+    size_t length = value.length();
+    size_t i = 0;
+    while (i < length) {
+        uint32_t symbol = static_cast<uint8_t>(value[i]);
+
+        if (symbol <= 0x7F) {
+            result.push_back(symbol);
+        } else
+        if (symbol >= 0xC0 && symbol <= 0xDF && i + 1 < length) {
+            symbol = ((symbol & 0x1F) << 6) |
+                 (static_cast<uint8_t>(value[i + 1]) & 0x3F);
+            i += 1;
+            result.push_back(symbol);
+        } else
+        if (symbol >= 0xE0 && symbol <= 0xEF && i + 2 < length) {
+            symbol = ((symbol & 0x0F) << 12) |
+                ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 6) |
+                 (static_cast<uint8_t>(value[i + 2]) & 0x3F);
+            i += 2;
+            result.push_back(symbol);
+        } else 
+        if (symbol >= 0xF0 && symbol <= 0xF7 && i + 3 < length) {
+            symbol = ((symbol & 0x07) << 18) |
+                ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 12) |
+                ((static_cast<uint8_t>(value[i + 2]) & 0x3F) << 6) |
+                 (static_cast<uint8_t>(value[i + 3]) & 0x3F);
+            i += 3;
+            result.push_back(symbol);
+        } else
+            throw std::invalid_argument("Invalid UTF-8 code point at position " +
+                convert<string>(i)); // ----->
+
+        i++;
+    }
+    return result; // ----->
+}
+
+
 #endif // C++11 <= STL < C++14
 
 
