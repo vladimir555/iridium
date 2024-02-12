@@ -498,7 +498,7 @@ wstring convert(string const &value) {
 }
 
 
-#else
+#else // C++11 <= STL < C++14
 
 
 template<>
@@ -589,20 +589,20 @@ std::u16string convert(std::string const &value) {
 
         if (symbol <= 0x7F) {
             result.push_back(static_cast<char16_t>(symbol));
-        } else 
+        } else
         if (symbol >= 0xC0 && symbol <= 0xDF && i + 1 < length) {
             symbol = ((symbol & 0x1F) << 6) |
                  (static_cast<uint8_t>(value[i + 1]) & 0x3F);
             i++;
             result.push_back(static_cast<char16_t>(symbol));
-        } else 
+        } else
         if (symbol >= 0xE0 && symbol <= 0xEF && i + 2 < length) {
             symbol = ((symbol & 0x0F) << 12) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 6) |
                  (static_cast<uint8_t>(value[i + 2]) & 0x3F);
             i += 2;
             result.push_back(static_cast<char16_t>(symbol));
-        } else 
+        } else
         if (symbol >= 0xF0 && symbol <= 0xF7 && i + 3 < length) {
             symbol = ((symbol & 0x07) << 18) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 12) |
@@ -664,7 +664,7 @@ std::u32string convert(std::string const &value) {
 }
 
 
-#endif // C++11 <= STL < C++14
+#endif // STL > C++14
 
 
 } // implementation
