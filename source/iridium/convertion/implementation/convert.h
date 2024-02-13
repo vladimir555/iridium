@@ -208,18 +208,12 @@ template<>
 double convert(std::string const &value);
 
 
-#if __cplusplus >= 201103L && __cplusplus < 201703L
-
-
 template<>
 std::string convert(std::wstring const &value);
 
 
 template<>
 std::wstring convert(std::string const &value);
-
-
-#else // C++11 < STL < C++14
 
 
 template<>
@@ -236,9 +230,6 @@ std::u16string convert(std::string const &value);
 
 template<>
 std::u32string convert(std::string const &value);
-
-
-#endif // STL > C++14
 
 
 } // implementation

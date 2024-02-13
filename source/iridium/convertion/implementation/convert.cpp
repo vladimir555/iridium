@@ -26,6 +26,8 @@ using std::stringstream;
 using std::time_t;
 using std::string;
 using std::wstring;
+using std::u16string;
+using std::u32string;
 using std::tm;
 using std::runtime_error;
 using std::wstring_convert;
@@ -499,6 +501,34 @@ wstring convert(string const &value) {
 
 
 #else // C++11 <= STL < C++14
+
+
+// todo: check wchar_t size by template with compilation message
+template<>
+string convert(wstring const &value) {
+    if (sizeof(wchar_t) == 2)
+        return convert<string>(u16string(value.begin(), value.end())); // ----->
+    if (sizeof(wchar_t) == 4)
+        return convert<string>(u32string(value.begin(), value.end())); // ----->
+    throw std::runtime_error("convertion wstring to string error: wrong wchar_t size "
+        + convert<string>(sizeof(wchar_t))); // ----->
+}
+
+
+// todo: check wchar_t size by template with compilation message
+template<>
+wstring convert(string const &value) {
+    if (sizeof(wchar_t) == 2) {
+        auto result = convert<u16string>(value);
+        return wstring(result.begin(), result.end()); // ----->
+    }
+    if (sizeof(wchar_t) == 4) {
+        auto result = convert<u32string>(value);
+        return wstring(result.begin(), result.end()); // ----->
+    }
+    throw std::runtime_error("convertion string to wstring error: wrong wchar_t size "
+        + convert<string>(sizeof(wchar_t))); // ----->
+}
 
 
 template<>

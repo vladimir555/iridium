@@ -196,15 +196,15 @@ TEST(types) {
 
 // deprecated C++17
 //#ifndef _WIN32
-//    ASSERT(string(u8"ħëłlö"), equal, convert<string>(wstring(L"ħëłlö")));
+    ASSERT(string("ħëłlö"), equal, convert<string>(wstring(L"ħëłlö")));
 //#endif // !_WIN32
-    //uint8_t  const hello_s[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
-    //uint32_t const hello_w[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
-    //wstring hello_wstr(hello_w, hello_w + sizeof(hello_w[0]) * 9);
-    //string  hello_str (hello_s, hello_s + sizeof(hello_s[0]) * 9);
-    //LOGT << hello_str;
-    //LOGT << convert<string>(hello_wstr);
-    //ASSERT(hello_str, equal, convert<string>(hello_wstr));
+//    uint8_t  const hello_s[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
+//    uint32_t const hello_w[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
+//    wstring hello_wstr(hello_w, hello_w + sizeof(hello_w) / sizeof(hello_w[0]));
+//    string  hello_str (hello_s, hello_s + sizeof(hello_s) / sizeof(hello_s[0]));
+//    LOGT << hello_str;
+//    LOGT << convert<string>(hello_wstr);
+//    ASSERT(hello_str, equal, convert<string>(hello_wstr));
 }
 
 
