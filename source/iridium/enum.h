@@ -15,20 +15,26 @@
 #include <limits.h>
 
 
-#ifdef _MSC_VER        
+#ifdef _MSC_VER
 #define UNUSED
+#define DISABLE_C26827 __pragma(warning(push)) __pragma(warning(suppress: 26827))
+#define ENABLE_C26827  __pragma(warning(pop))
 #else
 #define UNUSED __attribute__((unused))
-#endif
+#define DISABLE_C26827
+#define ENABLE_C26827
+#endif // _MSC_VER
 
 
 #define DEFINE_ENUM(TEnum, ...) \
 class TEnum { \
 public: \
+    DISABLE_C26827 \
     enum TEnumInternal { \
         __VA_ARGS__, \
         UNKNOWN = INT_MIN \
     }; \
+    ENABLE_C26827 \
     TEnum(): m_value(TEnumInternal::UNKNOWN) {} \
     TEnum(TEnum const &e) = default; \
     TEnum(TEnumInternal const &e): m_value(e) {} \

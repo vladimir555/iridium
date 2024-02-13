@@ -14,6 +14,12 @@ namespace io {
 namespace implementation {
 
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4250)
+#endif // _MSC_VER
+
+
 class CStreamBuffer: public virtual IStream {
 protected:
     explicit CStreamBuffer(Buffer::TSharedPtr const &buffer);
@@ -54,6 +60,11 @@ public:
 
     size_t write(Buffer::TSharedPtr const &buffer) override;
 };
+
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif // _MSC_VER
 
 
 } // implementation
