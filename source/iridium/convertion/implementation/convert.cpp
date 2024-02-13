@@ -30,9 +30,9 @@ using std::u16string;
 using std::u32string;
 using std::tm;
 using std::runtime_error;
-using std::wstring_convert;
-using std::codecvt_utf8_utf16;
-using std::codecvt_utf8;
+//using std::wstring_convert;
+//using std::codecvt_utf8_utf16;
+//using std::codecvt_utf8;
 using std::strftime;
 using std::transform;
 using std::shared_ptr;
@@ -488,14 +488,14 @@ int convert(int const &value) {
 
 template<>
 string convert(wstring const &value) {
-    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
+    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
     return converter.to_bytes(value); // ----->
 }
 
 
 template<>
 wstring convert(string const &value) {
-    wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     return converter.from_bytes(value); // ----->
 }
 
@@ -503,31 +503,54 @@ wstring convert(string const &value) {
 #else // C++11 <= STL < C++14
 
 
-// todo: check wchar_t size by template with compilation message
-template<>
-string convert(wstring const &value) {
-    if (sizeof(wchar_t) == 2)
-        return convert<string>(u16string(value.begin(), value.end())); // ----->
-    if (sizeof(wchar_t) == 4)
-        return convert<string>(u32string(value.begin(), value.end())); // ----->
-    throw std::runtime_error("convertion wstring to string error: wrong wchar_t size "
-        + convert<string>(sizeof(wchar_t))); // ----->
+template<typename TResult, typename TArg, size_t size>
+TResult convertInternal(TArg const &) {
+    static_assert(sizeof(wchar_t) == 2 || sizeof(wchar_t) == 4,
+        "convertion from/to wstring wchar_t size not 2 or 4 is not implemented");
 }
 
 
-// todo: check wchar_t size by template with compilation message
+template<>
+string convertInternal<string, wstring, 2>(wstring const &value) {
+    return convert<string>(u16string(value.begin(), value.end())); // ----->
+}
+
+
+template<>
+wstring convertInternal<wstring, string, 2>(string const &value) {
+    auto result = convert<u16string>(value);
+    return wstring(result.begin(), result.end());
+}
+
+
+#ifndef WINDOWS_PLATFORM
+
+
+template<>
+string convertInternal<string, wstring, 4>(wstring const &value) {
+    return convert<string>(u32string(value.begin(), value.end())); // ----->
+}
+
+
+template<>
+wstring convertInternal<wstring, string, 4>(string const &value) {
+    auto result = convert<u32string>(value);
+    return wstring(result.begin(), result.end());
+}
+
+
+#endif // !WINDOWS_PLATFORM
+
+
+template<>
+string convert(wstring const &value) {
+    return convertInternal<string, wstring, sizeof(wchar_t)>(value); // ----->
+}
+
+
 template<>
 wstring convert(string const &value) {
-    if (sizeof(wchar_t) == 2) {
-        auto result = convert<u16string>(value);
-        return wstring(result.begin(), result.end()); // ----->
-    }
-    if (sizeof(wchar_t) == 4) {
-        auto result = convert<u32string>(value);
-        return wstring(result.begin(), result.end()); // ----->
-    }
-    throw std::runtime_error("convertion string to wstring error: wrong wchar_t size "
-        + convert<string>(sizeof(wchar_t))); // ----->
+    return convertInternal<wstring, string, sizeof(wchar_t)>(value); // ----->
 }
 
 

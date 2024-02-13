@@ -462,7 +462,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -481,7 +481,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -500,7 +500,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -521,7 +521,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -545,7 +545,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -569,7 +569,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)</ObjectFileName>
       <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(LIBS)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
