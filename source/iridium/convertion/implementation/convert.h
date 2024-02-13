@@ -219,7 +219,7 @@ template<>
 std::wstring convert(std::string const &value);
 
 
-#else
+#else // C++11 < STL < C++14
 
 
 template<>
@@ -238,7 +238,7 @@ template<>
 std::u32string convert(std::string const &value);
 
 
-#endif // C++11 <= STL < C++14
+#endif // STL > C++14
 
 
 } // implementation
