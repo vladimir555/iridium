@@ -52,17 +52,17 @@ public:
     ///
     bool hasChilds() const override;
     ///
-    typename INodeType<TValue>::TSharedPtr getChild(std::string const &name) override;
+    typename INodeType<TValue>::TSharedPtr      getChild(std::string const &name) override;
     ///
     typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
     ///
-    typename INodeType<TValue>::TSharedPtr addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
+    typename INodeType<TValue>::TSharedPtr      addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
     ///
-    typename INodeType<TValue>::TSharedPtr addChild(std::string const &name) override;
+    typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name) override;
     ///
-    typename INodeType<TValue>::TSharedPtr addChild(std::string const &name, TValue const &value) override;
+    typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name, TValue const &value) override;
     ///
-    typename INodeType<TValue>::TSharedPtr clone() const override;
+    typename INodeType<TValue>::TSharedPtr      clone() const override;
 
 
 private:
