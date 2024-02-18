@@ -26,15 +26,18 @@ namespace parsing {
 template<typename TValue>
 class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
-    DEFINE_SMART_PTR(INodeType<TValue>)
+    DEFINE_INTERFACE(INodeType)
+    ///
+    static std::string const PATH_DELIMITER;
+
     ///
     typedef std::list<typename INodeType::TSharedPtr> TNodes;
     ///
-    typedef typename TNodes::iterator iterator;
+    typedef typename TNodes::iterator           iterator;
     ///
-    typedef typename TNodes::const_iterator  const_iterator;
+    typedef typename TNodes::const_iterator     const_iterator;
     ///
-    typedef typename TNodes::const_reference const_reference;
+    typedef typename TNodes::const_reference    const_reference;
 
 //    ///
 //    typedef std::list<typename INodeType::TConstSharedPtr> TNodesConst;
@@ -44,15 +47,11 @@ public:
 //    typedef typename TNodesConst::const_reference const_reference;
 
     ///
-    static std::string const PATH_DELIMITER;
+    virtual std::string     getName() const = 0;
     ///
-    virtual ~INodeType() = default;
+    virtual TValue          getValue() const = 0;
     ///
-    virtual std::string getName() const = 0;
-    ///
-    virtual TValue getValue() const = 0;
-    ///
-    virtual void setValue(TValue const &value) = 0;
+    virtual void            setValue(TValue const &value) = 0;
     /// todo: multithread, parallel execution, work pool
     /// todo: return full sub tree with childs
     virtual typename INodeType::TNodes slice(std::string const &path) = 0;
@@ -60,29 +59,28 @@ public:
     //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
 
     ///
-    virtual iterator begin() = 0;
+    virtual iterator        begin() = 0;
     ///
-    virtual iterator end() = 0;
+    virtual iterator        end() = 0;
     ///
-    virtual const_iterator begin() const = 0;
+    virtual const_iterator  begin()     const = 0;
     ///
-    virtual const_iterator end() const = 0;
+    virtual const_iterator  end()       const = 0;
     ///
-    virtual size_t size() const = 0;
+    virtual size_t          size()      const = 0;
     ///
-    virtual bool hasChilds() const = 0;
+    virtual bool            hasChilds() const = 0;
 
-    /// get first child by name
-    virtual typename INodeType<TValue>::TSharedPtr getChild(std::string const &name) = 0;
+    ///
+    virtual typename INodeType<TValue>::TSharedPtr      getChild(std::string const &name) = 0;
     ///
     virtual typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const = 0;
-
     ///
-    virtual typename INodeType::TSharedPtr addChild(typename INodeType::TSharedPtr const &child_node) = 0;
+    virtual typename INodeType::TSharedPtr              addChild(typename INodeType::TSharedPtr const &child_node) = 0;
     ///
-    virtual typename INodeType::TSharedPtr addChild(std::string const &name) = 0;
+    virtual typename INodeType::TSharedPtr              addChild(std::string const &name) = 0;
     ///
-    virtual typename INodeType::TSharedPtr addChild(std::string const &name, TValue const &value) = 0;
+    virtual typename INodeType::TSharedPtr              addChild(std::string const &name, TValue const &value) = 0;
 };
 
 
