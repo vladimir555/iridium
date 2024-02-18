@@ -28,10 +28,10 @@ namespace serialization {
 
 
 template<typename TValue>
-class Node {
+class NodeView {
 public:
     ///
-   ~Node() = default;
+   ~NodeView() = default;
     /// todo: lazy convertion
     TValue get() const;
     ///
@@ -41,7 +41,7 @@ public:
     ///
     operator TValue() const;
     ///
-    Node &operator= (TValue const &value);
+    NodeView &operator= (TValue const &value);
     ///
     bool operator== (TValue const &value) const;
     ///
@@ -49,16 +49,16 @@ public:
 
 protected:
     /// list attribute
-    Node(
+    NodeView(
         INode::TSharedPtr       const &node,
         std::string             const &name,
         std::string             const &path);
 
-    Node(std::string const &name);
+    NodeView(std::string const &name);
     /// attribute
-    Node(Node<void> const &parent, std::string const &name, TValue const &default_value);
+    NodeView(NodeView<void> const &parent, std::string const &name, TValue const &default_value);
     /// attribute
-    Node(Node<void> const &parent, std::string const &name);
+    NodeView(NodeView<void> const &parent, std::string const &name);
 
     INode::TSharedPtr       m_node;
     std::string             m_path;
@@ -67,16 +67,16 @@ protected:
 
 
 template<>
-class Node<void> {
+class NodeView<void> {
 public:
     /// root node for desiarization only
-    Node(std::string const &name);
+    NodeView(std::string const &name);
     /// root node for serialization and desiarization
-    Node(
+    NodeView(
          INode::TSharedPtr  const &node,
          std::string        const &name);
     ///
-   ~Node() = default;
+   ~NodeView() = default;
     ///
     INode::TSharedPtr       getNode() const;
 
@@ -85,24 +85,24 @@ public:
 
 protected:
     /// list node
-    Node(
+    NodeView(
         INode::TSharedPtr       const &node,
         std::string             const &name,
         std::string             const &path);
     /// node
-    Node(Node<void> const &parent, std::string const &name);
+    NodeView(NodeView<void> const &parent, std::string const &name);
 };
 
 
-template<typename TNode>
-class NodeList {
+template<typename TNodeView>
+class NodeViewList {
 public:
     ///
-   ~NodeList() = default;
+   ~NodeViewList() = default;
     ///
-    typedef typename std::list<TNode> TNodes;
-    typedef typename std::list<TNode>::iterator iterator;
-    typedef typename std::list<TNode>::const_iterator const_iterator;
+    typedef typename std::list<TNodeView> TNodes;
+    typedef typename std::list<TNodeView>::iterator iterator;
+    typedef typename std::list<TNodeView>::const_iterator const_iterator;
     ///
     iterator begin();
     ///
@@ -114,32 +114,32 @@ public:
     ///
     size_t size() const;
     ///
-    void add(TNode const &node);
+    void add(TNodeView const &node);
     ///
     template<typename TValue>
     void add(TValue const &node);
 
 protected:
     ///
-    NodeList(Node<void> const &parent, std::string const &name);
+    NodeViewList(NodeView<void> const &parent, std::string const &name);
 
 private:
     ///
-    Node<void> const &m_parent;
+    NodeView<void> const &m_parent;
     ///
-    std::list<TNode> m_nodes;
+    std::list<TNodeView> m_nodes;
 };
 
 
-template<typename TNode>
-class NodePtr {
+template<typename TNodeView>
+class NodeViewPtr {
 public:
-    NodePtr(Node<void> const &parent);
-   ~NodePtr() = default;
-    std::shared_ptr<TNode> get() const;
+    NodeViewPtr(NodeView<void> const &parent);
+   ~NodeViewPtr() = default;
+    std::shared_ptr<TNodeView> get() const;
 
 private:
-    typename std::shared_ptr<TNode> m_node;
+    typename std::shared_ptr<TNodeView> m_node_view;
 };
 
 
@@ -150,7 +150,7 @@ private:
 
 
 template<typename TValue>
-Node<TValue>::Node(
+NodeView<TValue>::NodeView(
     INode::TSharedPtr       const &node,
     std::string             const &name,
     std::string             const &path)
@@ -165,20 +165,20 @@ Node<TValue>::Node(
 
 
 template<typename TValue>
-Node<TValue>::Node(std::string const &name) {
+NodeView<TValue>::NodeView(std::string const &name) {
     m_path = "/" + name;
     m_node = implementation::CNode::create(name);
 }
 
 
 template<typename TValue>
-INode::TSharedPtr Node<TValue>::getNode() const {
+INode::TSharedPtr NodeView<TValue>::getNode() const {
     return m_node; // ----->
 }
 
 
 template<typename TValue>
-Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue const &default_value) {
+NodeView<TValue>::NodeView(NodeView<void> const &parent, std::string const &name, TValue const &default_value) {
     m_path = parent.m_path + "/" + name;
 
     if (parent.m_node)
@@ -194,7 +194,7 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name, TValue con
 
 
 template<typename TValue>
-Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
+NodeView<TValue>::NodeView(NodeView<void> const &parent, std::string const &name) {
     m_path = parent.m_path + "/" + name;
 
     if (parent.m_node)
@@ -209,7 +209,7 @@ Node<TValue>::Node(Node<void> const &parent, std::string const &name) {
 
 
 template<typename TValue>
-TValue Node<TValue>::get() const {
+TValue NodeView<TValue>::get() const {
     // todo: lazy convertion with cached value
     if (m_node)
         return convertion::convert<TValue>(m_node->getValue());
@@ -219,7 +219,7 @@ TValue Node<TValue>::get() const {
 
 
 template<typename TValue>
-void Node<TValue>::set(TValue const &value) {
+void NodeView<TValue>::set(TValue const &value) {
     if (m_node)
         m_node->setValue(convertion::convert<std::string>(value));
 
@@ -228,90 +228,90 @@ void Node<TValue>::set(TValue const &value) {
 
 
 template<typename TValue>
-bool Node<TValue>::isDefault() const {
+bool NodeView<TValue>::isDefault() const {
     return m_is_default;
 }
 
 
 template<typename TValue>
-Node<TValue>::operator TValue() const {
+NodeView<TValue>::operator TValue() const {
     return get(); // ----->
 }
 
 
 template<typename TValue>
-Node<TValue> &Node<TValue>::operator= (TValue const &value) {
+NodeView<TValue> &NodeView<TValue>::operator= (TValue const &value) {
     set(value);
     return *this; // ----->
 }
 
 
 template<typename TValue>
-bool Node<TValue>::operator== (TValue const &value) const {
+bool NodeView<TValue>::operator== (TValue const &value) const {
     return get() == value; // ----->
 }
 // -----
 
 
-// ----- NodeList
+// ----- NodeViewList
 
 
-template<typename TNode>
-NodeList<TNode>::NodeList(Node<void> const &parent, std::string const &name)
+template<typename TNodeView>
+NodeViewList<TNodeView>::NodeViewList(NodeView<void> const &parent, std::string const &name)
 :
     m_parent(parent)
 {
     if (parent.m_node) {
         for (auto const &i: *parent.m_node)
             if (i->getName() == name)
-                m_nodes.push_back(TNode(i, parent.m_path));
+                m_nodes.push_back(TNodeView(i, parent.m_path));
     }
 }
 
 
-template<typename TNode>
-typename NodeList<TNode>::iterator NodeList<TNode>::begin() {
+template<typename TNodeView>
+typename NodeViewList<TNodeView>::iterator NodeViewList<TNodeView>::begin() {
     return m_nodes.begin(); // ----->
 }
 
 
-template<typename TNode>
-typename NodeList<TNode>::iterator NodeList<TNode>::end() {
+template<typename TNodeView>
+typename NodeViewList<TNodeView>::iterator NodeViewList<TNodeView>::end() {
     return m_nodes.end(); // ----->
 }
 
 
-template<typename TNode>
-typename NodeList<TNode>::const_iterator NodeList<TNode>::begin() const {
+template<typename TNodeView>
+typename NodeViewList<TNodeView>::const_iterator NodeViewList<TNodeView>::begin() const {
     return m_nodes.begin(); // ----->
 }
 
 
-template<typename TNode>
-typename NodeList<TNode>::const_iterator NodeList<TNode>::end() const {
+template<typename TNodeView>
+typename NodeViewList<TNodeView>::const_iterator NodeViewList<TNodeView>::end() const {
     return m_nodes.end(); // ----->
 }
 
 
-template<typename TNode>
-size_t NodeList<TNode>::size() const {
+template<typename TNodeView>
+size_t NodeViewList<TNodeView>::size() const {
     return m_nodes.size(); // ----->
 }
 
 
-template<typename TNode>
-void NodeList<TNode>::add(TNode const &node) {
+template<typename TNodeView>
+void NodeViewList<TNodeView>::add(TNodeView const &node) {
     m_parent.m_node->addChild(node.getNode());
     m_nodes.push_back(node);
 }
 
 
-template<typename TNode>
+template<typename TNodeView>
 template<typename TValue>
-void NodeList<TNode>::add(TValue const &value) {
-    TNode node;
-    node.set(value);
-    add(node);
+void NodeViewList<TNodeView>::add(TValue const &value) {
+    TNodeView node_view;
+    node_view.set(value);
+    add(node_view);
 }
 // -----
 
@@ -319,17 +319,17 @@ void NodeList<TNode>::add(TValue const &value) {
 // ----- NodeList
 
 
-template<typename TNode>
-NodePtr<TNode>::NodePtr(Node<void> const &parent) {
+template<typename TNodeView>
+NodeViewPtr<TNodeView>::NodeViewPtr(NodeView<void> const &parent) {
     try {
-        m_node = std::make_shared<TNode>(parent);
+        m_node_view = std::make_shared<TNodeView>(parent);
     } catch (...) {}
 }
 
 
-template<typename TNode>
-std::shared_ptr<TNode> NodePtr<TNode>::get() const {
-    return m_node; // ----->
+template<typename TNodeView>
+std::shared_ptr<TNodeView> NodeViewPtr<TNodeView>::get() const {
+    return m_node_view; // ----->
 }
 // -----
 
@@ -343,18 +343,18 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 
 #define DEFINE_ROOT_NODE_BEGIN_2(class_name, name_delimeter_symbol) \
-    struct T##class_name : protected iridium::parsing::serialization::Node<void> { \
+    struct T##class_name : protected iridium::parsing::serialization::NodeView<void> { \
         static int const NAME_DELIMETER_SYMBOL = name_delimeter_symbol; \
         T##class_name(iridium::parsing::INode::TSharedPtr const &node): \
-            iridium::parsing::serialization::Node<void> \
+            iridium::parsing::serialization::NodeView<void> \
                 (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
-            T##class_name(): iridium::parsing::serialization::Node<void> \
+            T##class_name(): iridium::parsing::serialization::NodeView<void> \
                 (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
             iridium::parsing::INode::TSharedPtr getNode() const { \
-                return iridium::parsing::serialization::Node<void>::getNode(); \
+                return iridium::parsing::serialization::NodeView<void>::getNode(); \
             } \
-        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-            iridium::parsing::serialization::Node<void> \
+        T##class_name(iridium::parsing::serialization::NodeView<void> const &parent): \
+            iridium::parsing::serialization::NodeView<void> \
                 (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
 
 
@@ -371,9 +371,9 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 
 #define DEFINE_NODE_BEGIN(class_name) \
-    struct T##class_name : protected iridium::parsing::serialization::Node<void> { \
-        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::Node<void> \
+    struct T##class_name : protected iridium::parsing::serialization::NodeView<void> { \
+        T##class_name(iridium::parsing::serialization::NodeView<void> const &parent): \
+        iridium::parsing::serialization::NodeView<void> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
 
 
@@ -382,20 +382,20 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 
 #define DEFINE_ATTRIBUTE_2(type, class_name) \
-    struct T##class_name : public iridium::parsing::serialization::Node<type> { \
-        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::Node<type> \
+    struct T##class_name : public iridium::parsing::serialization::NodeView<type> { \
+        T##class_name(iridium::parsing::serialization::NodeView<void> const &parent): \
+        iridium::parsing::serialization::NodeView<type> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
-        using iridium::parsing::serialization::Node<type>::operator =; \
+        using iridium::parsing::serialization::NodeView<type>::operator =; \
     } class_name = *this;
 
 
 #define DEFINE_ATTRIBUTE_3(type, class_name, default_value) \
-    struct T##class_name : public iridium::parsing::serialization::Node<type> { \
-        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::Node<type> \
+    struct T##class_name : public iridium::parsing::serialization::NodeView<type> { \
+        T##class_name(iridium::parsing::serialization::NodeView<void> const &parent): \
+        iridium::parsing::serialization::NodeView<type> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), default_value) {} \
-        using iridium::parsing::serialization::Node<type>::operator =; \
+        using iridium::parsing::serialization::NodeView<type>::operator =; \
     } class_name = *this;
 
 
@@ -406,43 +406,43 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 // todo: bugfix node name, e g NameList instead Name
 #define DEFINE_NODE_LIST_BEGIN(class_name) \
     struct T##class_name##List; \
-    struct T##class_name: public iridium::parsing::serialization::Node<void> { \
+    struct T##class_name: public iridium::parsing::serialization::NodeView<void> { \
         T##class_name( \
         iridium::parsing::INode::TSharedPtr const &node, \
         std::string const &path): \
-        iridium::parsing::serialization::Node<void> \
+        iridium::parsing::serialization::NodeView<void> \
         (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
-        T##class_name(): iridium::parsing::serialization::Node<void> \
+        T##class_name(): iridium::parsing::serialization::NodeView<void> \
         (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
 
 
 #define DEFINE_NODE_LIST_END(class_name) \
     }; \
-    struct T##class_name##List: public iridium::parsing::serialization::NodeList<T##class_name> { \
-        T##class_name##List(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::NodeList<T##class_name> \
+    struct T##class_name##List: public iridium::parsing::serialization::NodeViewList<T##class_name> { \
+        T##class_name##List(iridium::parsing::serialization::NodeView<void> const &parent): \
+        iridium::parsing::serialization::NodeViewList<T##class_name> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
     } class_name = *this;
 
 
 #define DEFINE_ATTRIBUTE_LIST(type, class_name) \
-    struct T##class_name : public iridium::parsing::serialization::Node<type> { \
-        T##class_name(iridium::parsing::serialization::Node<void> const &parent): \
-            iridium::parsing::serialization::Node<type> \
+    struct T##class_name : public iridium::parsing::serialization::NodeView<type> { \
+        T##class_name(iridium::parsing::serialization::NodeView<void> const &parent): \
+            iridium::parsing::serialization::NodeView<type> \
                 (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
-        using iridium::parsing::serialization::Node<type>::operator =; \
+        using iridium::parsing::serialization::NodeView<type>::operator =; \
         T##class_name( \
             iridium::parsing::INode::TSharedPtr const &node, \
             std::string const &path): \
-                iridium::parsing::serialization::Node<type> \
+                iridium::parsing::serialization::NodeView<type> \
                     (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
         T##class_name(): \
-            iridium::parsing::serialization::Node<type> \
+            iridium::parsing::serialization::NodeView<type> \
                 (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
     }; \
-    struct T##class_name##List : public iridium::parsing::serialization::NodeList<T##class_name> { \
-        T##class_name##List(iridium::parsing::serialization::Node<void> const &parent): \
-        iridium::parsing::serialization::NodeList<T##class_name> \
+    struct T##class_name##List : public iridium::parsing::serialization::NodeViewList<T##class_name> { \
+        T##class_name##List(iridium::parsing::serialization::NodeView<void> const &parent): \
+        iridium::parsing::serialization::NodeViewList<T##class_name> \
         (parent, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
     } class_name = *this;
 
@@ -453,13 +453,13 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 // recursive node
 #define DEFINE_NODE_PTR(class_name) \
-    typedef typename iridium::parsing::serialization::NodePtr<T##class_name> T##class_name##Ptr; \
+    typedef typename iridium::parsing::serialization::NodeViewPtr<T##class_name> T##class_name##Ptr; \
     T##class_name##Ptr class_name##_ptr = *this;
 
 
 // recursive node pointer
 #define DEFINE_NODE_LIST_PTR(class_name) \
-    typedef typename iridium::parsing::serialization::NodePtr<T##class_name##List> T##class_name##ListPtr; \
+    typedef typename iridium::parsing::serialization::NodeViewPtr<T##class_name##List> T##class_name##ListPtr; \
     T##class_name##ListPtr class_name##_list_ptr = *this;
 
 
