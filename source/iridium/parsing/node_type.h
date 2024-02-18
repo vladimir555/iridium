@@ -18,7 +18,6 @@ namespace iridium {
 namespace parsing {
 
 
-// todo: rename to INodeTypeView or INodeView<typename TValue> + INodeView
 // todo: Depth-First Search, DFS) and (Breadth-First Search, BFS) methods maybe parallel
 ///
 /// \brief The INodeType class
@@ -30,6 +29,7 @@ public:
     ///
     static std::string const PATH_DELIMITER;
 
+    // todo: typedef unordered_map<name, INodeType> TNodes;
     ///
     typedef std::list<typename INodeType::TSharedPtr> TNodes;
     ///
@@ -38,13 +38,6 @@ public:
     typedef typename TNodes::const_iterator     const_iterator;
     ///
     typedef typename TNodes::const_reference    const_reference;
-
-//    ///
-//    typedef std::list<typename INodeType::TConstSharedPtr> TNodesConst;
-//    ///
-//    typedef typename TNodesConst::const_iterator const_iterator;
-//    ///
-//    typedef typename TNodesConst::const_reference const_reference;
 
     ///
     virtual std::string     getName() const = 0;

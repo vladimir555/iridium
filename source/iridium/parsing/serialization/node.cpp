@@ -14,13 +14,13 @@ namespace parsing {
 namespace serialization {
 
 
-Node<void>::Node(std::string const &name){
+NodeView<void>::NodeView(std::string const &name){
     m_path = "/" + name;
     m_node = CNode::create(name);
 }
 
 
-Node<void>::Node(
+NodeView<void>::NodeView(
     INode::TSharedPtr   const &node,
     std::string         const &name)
 {
@@ -33,7 +33,7 @@ Node<void>::Node(
 }
 
 
-Node<void>::Node(
+NodeView<void>::NodeView(
     INode::TSharedPtr   const &node,
     std::string         const &name,
     std::string         const &path)
@@ -47,7 +47,7 @@ Node<void>::Node(
 }
 
 
-Node<void>::Node(Node<void> const &parent, std::string const &name) {
+NodeView<void>::NodeView(NodeView<void> const &parent, std::string const &name) {
     m_path = parent.m_path + "/" + name;
 
     if (parent.m_node)
@@ -59,7 +59,7 @@ Node<void>::Node(Node<void> const &parent, std::string const &name) {
 }
 
 
-INode::TSharedPtr Node<void>::getNode() const {
+INode::TSharedPtr NodeView<void>::getNode() const {
     return m_node; // ----->
 }
 
