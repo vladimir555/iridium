@@ -280,10 +280,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
-                        if (event->operation == Event::TOperation::OPEN) {\
-
-
-
+                        if (event->operation == Event::TOperation::OPEN) {
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
                         } else

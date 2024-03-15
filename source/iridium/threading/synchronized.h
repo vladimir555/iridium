@@ -27,70 +27,118 @@ namespace iridium {
 namespace threading {
 
 
-// ----- class definitions
+// ----- class definition
 
 
-// TODO: mutex cv tracing with log level
-// todo: log level instead is_tracing
-template<typename TMutex, bool const is_tracing = false>
+template<typename TMutex, bool const is_tracable = false>
 class Synchronized {
 protected:
-    Synchronized();
-    virtual ~Synchronized();
+    Synchronized() = default;
+    virtual ~Synchronized() = default;
 
-//private:
+    void interrupt();
+
+    class Locker:
+        public pattern::NonCopyable,
+        public pattern::NonMovable
+    {
+    public:
+        Locker(Synchronized const * const, char const *, int);
+       ~Locker();
+
+        bool wait();
+        bool wait(std::chrono::nanoseconds const &timeout);
+    private:
+        Synchronized const * const
+            m_s;
+        std::unique_lock<TMutex>
+            m_l;
+        char const *
+            m_file = nullptr;
+        int m_line = 0;
+    };
+private:
+    friend class Locker;
+
     TMutex mutable
         m_mutex;
     std::condition_variable mutable
         m_cv;
+    std::atomic<bool> mutable
+        m_is_waitable = true;
 };
 
 
-// methods implementation
+// class implementation
 
 
-template<typename TMutex, bool const is_tracing>
-Synchronized<TMutex, is_tracing>::Synchronized() {}
+template<typename TMutex, bool const is_tracable>
+void Synchronized<TMutex, is_tracable>::interrupt() {
+    m_is_waitable = false;
+    m_cv.notify_all();
+}
 
 
-template<typename TMutex, bool const is_tracing>
-Synchronized<TMutex, is_tracing>::~Synchronized() {}
+template<typename TMutex, bool const is_tracable>
+Synchronized<TMutex, is_tracable>::Locker::Locker(
+    Synchronized const * const s,
+    char const *file, int line)
+:
+    m_s         (s),
+    m_l         (s->m_mutex)
+{
+    if (is_tracable) {
+        m_file = file;
+        m_line = line;
+        printf("LM %s:%i\n", file, line);
+    }
+}
+
+
+template<typename TMutex, bool const is_tracable>
+Synchronized<TMutex, is_tracable>::Locker::~Locker() {
+    if (is_tracable)
+        printf("UM %s:%i\n", m_file, m_line);
+
+    m_l.unlock();
+    m_s->m_cv.notify_one();
+}
+
+
+template<typename TMutex, bool const is_tracable>
+bool Synchronized<TMutex, is_tracable>::Locker::wait() {
+    if (m_s->m_is_waitable)
+        m_s->m_cv.wait(m_l);
+
+    if (is_tracable)
+        printf("WM %s:%i -> %s\n", m_file, m_line, m_s->m_is_waitable ? "OK" : "interrupted");
+
+    return m_s->m_is_waitable; // ----->
+}
+
+
+template<typename TMutex, bool const is_tracable>
+bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds const &timeout) {
+    bool result =
+        m_s->m_is_waitable &&
+        m_s->m_cv.wait_for(m_l, timeout) == std::cv_status::no_timeout;
+    if (is_tracable)
+        printf("WM %s:%i -> %s\n", m_file, m_line,
+           result ? "OK" : m_s->m_is_waitable ? "timeout" : "interrupted");
+    return result; // ----->
+}
 
 
 } // threading
 } // iridium
 
 
-
 #define LOCK_SCOPE() \
-std::lock_guard<std::mutex> l(m_mutex)
+Synchronized::Locker _____locked_scope_____(this, __FILE__, __LINE__)
 
 
-// TODO:
-/*
-//#define LOCK_SCOPE() \
-//Locker _____locked_scope_____(*this, __FILE__, __LINE__)
+#define LOCK_SCOPE_TRY_WAIT(timeout) \
+_____locked_scope_____.wait(timeout)
 
-
-//#define LOCK_SCOPE_WAIT_0() \
-//Waiter _____locked_scope_____(*this, __FILE__, __LINE__); \
-//if (_____locked_scope_____.wait())
-//
-//
-//#define LOCK_SCOPE_WAIT_1(timeout) \
-//Waiter _____locked_scope_____(*this, __FILE__, __LINE__, timeout); \
-//if (_____locked_scope_____.wait())
-//
-//
-//#define LOCK_SCOPE_WAIT_X(x,A,LOCK_SCOPE_WAIT_FUNC, ...) \
-//LOCK_SCOPE_WAIT_FUNC
-//
-//
-//#define LOCK_SCOPE_WAIT(...) \
-//LOCK_SCOPE_WAIT_X(,##__VA_ARGS__, \
-//LOCK_SCOPE_WAIT_1(__VA_ARGS__), \
-//LOCK_SCOPE_WAIT_0(__VA_ARGS__) \
-//)
-*/
 
 #endif // HEADER_PROTOCOL_FACTORY_BA993AE8_B05D_4A20_A8C6_38E965E820DD

@@ -28,8 +28,76 @@
 //}
 
 //#include <set>
-TEST(OK) {
-//    std::set<int> s;
+
+//#define MAX(a, b) (a > b ? a : b)
+
+
+struct Group {
+    std::string name;
+    int start;
+    int end;
+};
+
+
+//std::unordered_map<std::string, std::shared_ptr<S> > m;
+//std::list<S> l;
+//bool has(std::string const &group_name, int id) {
+//    // 1 fast
+//    auto i = m.at(name);
+//    return i != m.end() && id >= i->start && id <= i->stop;
+//
+//    // 2 slow
+//    for (auto const &i: l)
+//        if (i.name == group_name && id >= i.start && id <= i.stop)
+//            return true;
+//
+//    // 3
+//    
+//
+//    return false;
+//}
+
+
+//std::map<int, std::shared_ptr<Group> > m;
+//std::shared_ptr<Group> has(int id) {
+//    auto i =  m.lower_bound(id);
+//    if  (i != m.end() && i->second && i->second->start <= id && i->second->end >= id)
+//        return i->second;
+//
+//    return {};
+//}
+//bool testHas(int id) {
+//    auto g = has(id);
+//    LOGT << id << " " << (g ? g->name : "none");
+//    return static_cast<bool>(g);
+//}
+//TEST(OK) {
+//    auto g1 = std::make_shared<Group>(Group{"name1", 5 , 10});
+//    auto g2 = std::make_shared<Group>(Group{"name2", 12, 19});
+//
+//    m[g1->start]    = g1;
+//    m[g1->end]      = g1;
+//
+//    m[g2->start]    = g2;
+//    m[g2->end]      = g2;
+//
+//    ASSERT(!testHas(3));
+//
+//    ASSERT(testHas(5));
+//    ASSERT(testHas(6));
+//    ASSERT(testHas(9));
+//
+//    ASSERT(!testHas(11));
+//
+//    ASSERT(testHas(12));
+//    ASSERT(testHas(15));
+//    ASSERT(testHas(19));
+//
+//    ASSERT(!testHas(20));
+//}
+
+
+//TEST(OK) {    std::set<int> s;
 //
 //    s.insert(3);
 //    s.insert(1);
@@ -49,7 +117,8 @@ TEST(OK) {
 //    //ASSERT(2, greater, 1);
 //    double d = 5.5;
 //    ASSERT(5.5, equal, d);
-}
+//}
+
 
 
 //TEST(sleep) {
