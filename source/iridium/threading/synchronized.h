@@ -90,7 +90,9 @@ Synchronized<TMutex, is_tracable>::Locker::Locker(
     if (is_tracable) {
         m_file = file;
         m_line = line;
-        printf("LM %s:%i\n", file, line);
+        printf("%s LM\n%s:%i\n",
+            threading::IThread::getNameStatic().c_str(),
+            file, line);
     }
 }
 
@@ -98,7 +100,9 @@ Synchronized<TMutex, is_tracable>::Locker::Locker(
 template<typename TMutex, bool const is_tracable>
 Synchronized<TMutex, is_tracable>::Locker::~Locker() {
     if (is_tracable)
-        printf("UM %s:%i\n", m_file, m_line);
+        printf("%s UM\n%s:%i\n",
+            threading::IThread::getNameStatic().c_str(),
+            m_file, m_line);
 
     m_l.unlock();
     m_s->m_cv.notify_one();
@@ -111,7 +115,10 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait() {
         m_s->m_cv.wait(m_l);
 
     if (is_tracable)
-        printf("WM %s:%i -> %s\n", m_file, m_line, m_s->m_is_waitable ? "OK" : "interrupted");
+        printf("%s WM -> %s\n%s:%i\n",
+            threading::IThread::getNameStatic().c_str(),
+            m_s->m_is_waitable ? "OK" : "interrupted",
+            m_file, m_line);
 
     return m_s->m_is_waitable; // ----->
 }
@@ -123,8 +130,10 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds co
         m_s->m_is_waitable &&
         m_s->m_cv.wait_for(m_l, timeout) == std::cv_status::no_timeout;
     if (is_tracable)
-        printf("WM %s:%i -> %s\n", m_file, m_line,
-           result ? "OK" : m_s->m_is_waitable ? "timeout" : "interrupted");
+        printf("%s WM -> %s\n%s:%i\n",
+            threading::IThread::getNameStatic().c_str(),
+            result ? "OK" : m_s->m_is_waitable ? "timeout" : "interrupted",
+            m_file, m_line);
     return result; // ----->
 }
 

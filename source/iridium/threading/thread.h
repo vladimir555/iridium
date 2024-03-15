@@ -31,7 +31,7 @@ public:
     ///
     virtual std::string getName() const = 0;
     ///
-    static std::string getNameStatic();
+    static std::string const &getNameStatic();
 protected:
     ///
     static void setNameStatic(std::string const &name);

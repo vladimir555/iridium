@@ -48,20 +48,19 @@ std::string getThreadID() {
 }
 
 
-std::string IThread::getNameStatic() {
+std::string const &IThread::getNameStatic() {
     if (thread_name_static.empty())
-        return convert<string>(std::this_thread::get_id()); // ----->
-    else
-        return thread_name_static;
+        thread_name_static = convert<string>(std::this_thread::get_id());
+    return thread_name_static; // ----->
 }
 
 
 void IThread::setNameStatic(std::string const &name) {
-    if (thread_name_static.empty())
-        thread_name_static = convert<string>(std::this_thread::get_id()) + ":" + name;
-    else
-        throw std::runtime_error("static tread name setting error: twice set '" +
-            thread_name_static + "' = '" + name + "'"); // ----->
+//    if (thread_name_static.empty())
+    thread_name_static = convert<string>(std::this_thread::get_id()) + ":" + name;
+//    else
+//        throw std::runtime_error("static tread name setting error: twice set '" +
+//            thread_name_static + "' = '" + name + "'"); // ----->
 }
 
 
