@@ -50,7 +50,7 @@ void CTestRunnerRaw::run(
             }
 
             if (!tests.Error.get().empty()) {
-                LOGE << tests.Error.get();
+                LOGE << "\n"    << tests.Error.get();
                 LOGE << "FAIL " << run_path;
             }
 
