@@ -8,6 +8,7 @@
 
 #include <string>
 #include <stdexcept>
+#include <typeinfo>
 
 #include "iridium/convertion/convert.h"
 
@@ -25,32 +26,21 @@ private:
     std::string m_what;
 };
 
-//template <class T, std::size_t = sizeof(T)>
-//std::true_type  is_complete_impl(T *);
-//std::false_type is_complete_impl(...);
-//
-//template <class T>
-//using is_complete = decltype(is_complete_impl(std::declval<T*>()));
-//
-//template<typename TValue, is_complete<iridium::convertion::convert<std::string(TValue const &value)> >
-//std::string convert(TValue const &value) {
-//
-//}
 
 class UnitTest {
 public:
     UnitTest() = default;
    ~UnitTest() = default;
 
+    template<typename TValue, typename std::enable_if<std::is_arithmetic<TValue>::value, TValue>::type* = nullptr>
+    void fail(
+        TValue      const &left,
+        TValue      const &right,
+        std::string const &condition_name,
+        std::string const &condition_source,
+        std::string const &line);
 
-//    template<typename TValue>
-//    std::string convert(TValue value) {
-//
-//    }
-
-    // todo: refactor fail template specifications based on convertion templates and based on (void *) specification
-
-    template<typename TValue>
+    template<typename TValue, typename std::enable_if<!std::is_arithmetic<TValue>::value, TValue>::type* = nullptr>
     void fail(
         TValue      const &left,
         TValue      const &right,
@@ -102,30 +92,6 @@ void UnitTest::fail<std::string>(
     std::string const &condition_source,
     std::string const &line);
 
-template<>
-void UnitTest::fail<uint64_t>(
-    uint64_t    const &left,
-    uint64_t    const &right,
-    std::string const &condition_name,
-    std::string const &condition_source,
-    std::string const &line);
-
-template<>
-void UnitTest::fail<int64_t>(
-    int64_t     const &left,
-    int64_t     const &right,
-    std::string const &condition_name,
-    std::string const &condition_source,
-    std::string const &line);
-
-
-template<>
-void UnitTest::fail<double>(
-    double      const &left,
-    double      const &right,
-    std::string const &condition_name,
-    std::string const &condition_source,
-    std::string const &line);
 
 template<>
 void UnitTest::fail<std::chrono::system_clock::time_point>(
@@ -162,7 +128,23 @@ void UnitTest::greaterEqual(double const &left, double const &right,
     std::string const &condition_source, std::string const &line);
 
 
-template<typename TValue>
+template<typename TValue, typename std::enable_if<std::is_arithmetic<TValue>::value, TValue>::type*>
+void UnitTest::fail(
+    TValue      const &left,
+    TValue      const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line)
+{
+    throw Exception(line
+        +   "\n'" + condition_source + "'\n"
+        +   "L: " + convertion::convert<std::string>(TValue(left))
+        + "\nR: " + convertion::convert<std::string>(TValue(right))
+    ); // ----->
+}
+
+
+template<typename TValue, typename std::enable_if<!std::is_arithmetic<TValue>::value, TValue>::type*>
 void UnitTest::fail(
     TValue      const &,
     TValue      const &,
@@ -170,7 +152,10 @@ void UnitTest::fail(
     std::string const &condition_source,
     std::string const &line)
 {
-    throw Exception("'" + condition_source + "'\n" + line); // ----->
+    throw Exception(line
+        + "\n'"         + condition_source
+        +"'\ntype: '"   + typeid(TValue).name()
+        +"'\nsize: "    + convertion::convert<std::string>(sizeof(TValue))); // ----->
 }
 
 

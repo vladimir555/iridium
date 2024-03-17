@@ -32,11 +32,11 @@
 //#define MAX(a, b) (a > b ? a : b)
 
 
-struct Group {
-    std::string name;
-    int start;
-    int end;
-};
+//struct Group {
+//    std::string name;
+//    int start;
+//    int end;
+//};
 
 
 //std::unordered_map<std::string, std::shared_ptr<S> > m;
@@ -97,7 +97,8 @@ struct Group {
 //}
 
 
-//TEST(OK) {    std::set<int> s;
+//TEST(OK) {
+//  std::set<int> s;
 //
 //    s.insert(3);
 //    s.insert(1);
