@@ -27,8 +27,8 @@ namespace implementation {
 static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
     struct TComparator {
         bool operator()(
-                        Event::TSharedPtr const &left,
-                        Event::TSharedPtr const &right) const
+            Event::TSharedPtr const &left,
+            Event::TSharedPtr const &right) const
         {
             return
                 left            &&              right                       &&
@@ -45,23 +45,23 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     for (auto const &event: events_)
         events.insert(event);
 
-    {
-        for (auto const &event: events_)
-            LOGT 
-                << "before: "
-                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
-                << event->operation << " "
-                << event->status;
-    }
-
-    {
-        for (auto const &event: events)
-            LOGT
-                << "after:  "
-                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
-                << event->operation << " "
-                << event->status;
-    }
+//    {
+//        for (auto const &event: events_)
+//            LOGT 
+//                << "before: "
+//                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
+//                << event->operation << " "
+//                << event->status;
+//    }
+//
+//    {
+//        for (auto const &event: events)
+//            LOGT
+//                << "after:  "
+//                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
+//                << event->operation << " "
+//                << event->status;
+//    }
 
 //    {
 //        string events_str;
@@ -248,12 +248,12 @@ CSessionManager::CContextWorkerHandler::handle(
 
     for (auto const &worker_event: removeDuplicates(events_)) {
 
-        LOGT
-            << "handle event 1: "
-            <<(worker_event->stream->getHandles().empty() ? 0 :
-               worker_event->stream->getHandles().front()) << " "
-            << worker_event->operation << " "
-            << worker_event->status;
+//        LOGT
+//            << "handle event 1: "
+//            <<(worker_event->stream->getHandles().empty() ? 0 :
+//               worker_event->stream->getHandles().front()) << " "
+//            << worker_event->operation << " "
+//            << worker_event->status;
 
 
 //        if (worker_event->operation == Event::TOperation::CLOSE &&
@@ -277,6 +277,12 @@ CSessionManager::CContextWorkerHandler::handle(
                        event->stream->getHandles().front()) << " "
                     << event->operation << " "
                     << event->status;
+
+                if (event->stream->getHandles().empty() && !checkOneOf(
+                    event->operation,
+                    Event::TOperation::OPEN,
+                    Event::TOperation::TIMEOUT))
+                    continue; // <---
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
@@ -327,11 +333,11 @@ CSessionManager::CContextWorkerHandler::handle(
                         {
                             event->status = Event::TStatus::BEGIN;
                             events_to_repeat.push_back(event);
-                            //LOGT
-                            //    << "repeat by context: "
-                            //    << event->stream->getHandles().front() << " "
-                            //    << event->operation << " "
-                            //    << event->status;
+                            LOGT
+                                << "repeat by context: "
+                                << event->stream->getHandles().front() << " "
+                                << event->operation << " "
+                                << event->status;
                         } else {
 
                         }
