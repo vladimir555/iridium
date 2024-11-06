@@ -50,12 +50,12 @@ TEST(uri) {
 //    auto ya_ru_ipv4             = URI("http://ya.ru").getIPv4();
 //    auto ya_ru_ipv4_expected    = URI("http://77.88.55.242").getIPv4();
 
-    auto ya_ru_ipv4 = URI("http://example.com").getIPv4();
-    auto ya_ru_ipv4_expected = URI("http://93.184.216.34").getIPv4();
+    auto ipv4 = URI("http://example.com").getIPv4();
+    auto ipv4_expected = URI("http://93.184.215.14").getIPv4();
 
-    ASSERT(static_cast<bool>(ya_ru_ipv4));
-    ASSERT(static_cast<bool>(ya_ru_ipv4_expected));
-    ASSERT(*ya_ru_ipv4_expected, equal, *ya_ru_ipv4);
+    ASSERT(static_cast<bool>(ipv4));
+    ASSERT(static_cast<bool>(ipv4_expected));
+    ASSERT(*ipv4_expected, equal, *ipv4);
     ASSERT(URI("http://ya.rur").getIPv4(), std::exception);
 
     {

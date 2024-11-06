@@ -26,9 +26,11 @@ int getFD(::FILE *file) {
 
 
 iridium::io::fs::TFileStatus getFileStatus(::FILE *file) {
-    struct stat64 file_stat = {};
+//    struct stat64 file_stat = {};
+    struct stat file_stat = {};
 
-    auto result = fstat64(getFD(file), &file_stat);
+//    auto result = fstat64(getFD(file), &file_stat);
+    auto result = fstat(getFD(file), &file_stat);
     assertOK(result, ::strerror(errno));
 
     std::chrono::system_clock::time_point tp {

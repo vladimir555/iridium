@@ -155,7 +155,9 @@ CSessionManager::CMultiplexerThreadHandler::CMultiplexerThreadHandler(
 void CSessionManager::CMultiplexerThreadHandler::initialize() {}
 
 
-void CSessionManager::CMultiplexerThreadHandler::finalize() {}
+void CSessionManager::CMultiplexerThreadHandler::finalize() {
+    LOGT << __func__;
+}
 
 
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
@@ -192,7 +194,9 @@ CSessionManager::CEventRepeaterHandler::CEventRepeaterHandler(IContextWorker::TS
 void CSessionManager::CEventRepeaterHandler::initialize() {}
 
 
-void CSessionManager::CEventRepeaterHandler::finalize() {}
+void CSessionManager::CEventRepeaterHandler::finalize() {
+    LOGT << __func__;
+}
 
 
 void CSessionManager::CEventRepeaterHandler::run(std::atomic<bool> &is_running) {
@@ -215,7 +219,9 @@ CSessionManager::CContextWorkerHandler::CContextWorkerHandler(
 void CSessionManager::CContextWorkerHandler::initialize() {}
 
 
-void CSessionManager::CContextWorkerHandler::finalize() {}
+void CSessionManager::CContextWorkerHandler::finalize() {
+    LOGT << __func__;
+}
 
 
 CSessionManager::IContextWorker::TOutputItems
@@ -278,6 +284,13 @@ CSessionManager::CContextWorkerHandler::handle(
                     << event->operation << " "
                     << event->status;
 
+                if (event->stream->getHandles().empty() &&
+                    event->operation != Event::TOperation::OPEN)
+                {
+                    LOGT << "skip";
+                    continue;
+                }
+
                 if (event->stream->getHandles().empty() && !checkOneOf(
                     event->operation,
                     Event::TOperation::OPEN,
@@ -301,11 +314,14 @@ CSessionManager::CContextWorkerHandler::handle(
 
                             if (event->operation == Event::TOperation::CLOSE) {
                                 m_multiplexer->unsubscribe(event->stream);
-                                if(!event->stream->getHandles().empty())
+                                if(!event->stream->getHandles().empty()) {
                                     event->stream->finalize();
+
+                                    is_context_valid = false;
+                                }
                             } else {
                                 if (!is_transmitted)
-                                    event->operation =  Event::TOperation::EOF_;
+                                    event->operation = Event::TOperation::EOF_;
                             }
 
                             event->status = Event::TStatus::END;
@@ -359,7 +375,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
             if (!is_context_valid) {
-                //LOGE << "remove context"; 
+                LOGT << "remove context"; 
                 m_context_manager->removeContext(context);
 //                continue; // <---
             }

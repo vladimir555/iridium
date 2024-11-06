@@ -1,6 +1,7 @@
 simd json parser
 yaml parser
-sql constructor based on serializator
+sql constructor based on serialization
+command line parser with serialization
 finish socket server
 linux kernel based socket ssl connection
 websocket client

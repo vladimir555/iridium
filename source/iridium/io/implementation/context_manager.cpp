@@ -77,7 +77,7 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 void CContextManager::removeContext(IContext::TSharedPtr const &context) {
     LOCK_SCOPE();
     
-//    LOGT << "CContextManager::removeContext";
+    LOGT << "CContextManager::removeContext";
     if (m_contexts_to_remove.count(context) == 0) {
         context->remove();
         m_contexts_to_remove.insert(context);

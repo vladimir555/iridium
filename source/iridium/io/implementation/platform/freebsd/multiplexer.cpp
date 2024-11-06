@@ -352,10 +352,10 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         std::string msg;
         for (auto const &event: events)
             msg += event->stream->getHandles().empty() ? 
-                  "0" : convert<std::string>(event->stream->getHandles().front())
+                   "" : convert<std::string>(event->stream->getHandles().front())
                 + " " + convert<std::string>(event->operation)
                 + " " + convert<std::string>(event->status);
-        LOGT << "multiplexer:    " << msg;
+        LOGT << __func__ << ":\n" << msg << "\nmap size: " << m_map_fd_stream.size();
     }
 
     return events; // ----->

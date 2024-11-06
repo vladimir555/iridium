@@ -339,6 +339,44 @@ namespace implementation {
 //    return node; // ----->
 //}
 
+//INode::TSharedPtr convertJSONStringToNode2(string const &source) {
+//    enum class TContext {
+//        UNKNOWN,
+//        SPACE,
+//        KEY,
+//        VALUE,
+//        ARRAY,
+//        OBJECT
+//    };
+//
+//    struct TState {
+//        TContext context;
+//        struct TNext {
+//            TContext context;
+//            size_t   index;
+//        }
+//    };
+//
+//    //                                  0123456789012
+//    static std::string const symbols = " \n\t{}[]:,\"";
+//
+//    std::vector< TState > states = {
+//        { TContext::SPACE, TContext::SPACE },
+//    };
+//
+//    auto state_index    = 0;
+//    auto context        = TContext::SPACE;
+//
+//    for (auto const &ch: source) {
+//        if (context == TContext::SPACE && checkOneOf(ch, ' ', '\t', '\n'))
+//            continue; // <---
+//
+//        if (ch == states[state_index]) {
+//            context =
+//        }
+//    }
+//}
+
 
 INode::TSharedPtr convertJSONStringToNode(string const &source) {
     static string const DEFAULT_NODE_NAME_TEXT   = "#text"; // xml node without node name
@@ -358,6 +396,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
 
     string  name;
     string  value;
+    bool    is_comma        = false;
     bool    is_quotes       = false;
     bool    is_quoted_value = false;
     bool    is_masked       = false;
@@ -401,6 +440,12 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
             }
 
             if (ch == ':') {
+                if (value.empty()) {
+                    throw std::runtime_error(
+                        string("json parsing error: missing key before ':' at ") +
+                        convert<string>(line) + ':' + convert<string>(index));
+                }
+
                 name = std::move(value);
                 value.clear();
 
@@ -432,7 +477,30 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                 continue; // <---
             }
 
-            if (ch == '}' || ch == ',' || ch == ']') {
+            if (checkOneOf(ch, '}', ']', ',')) {
+//                LOGT << "is_comma = " << is_comma << "; ch = '" << string() + ch << "' " << line << ":" << index;
+                if (is_comma && value.empty()) {
+                    throw std::runtime_error(
+                        string("json parsing error: missing value after ',' at ") +
+                        convert<string>(line) + ':' +
+                        convert<string>(index)
+                    );
+                }
+
+                if (ch == ',') {
+                    is_comma = true;
+                } else {
+                    if (!checkOneOf(ch, ' ', '\t', '\n', '\r'))
+                        is_comma = false;
+                }
+
+//            if (ch == '}' || ch == ',' || ch == ']') {
+                // AI
+//                if (ch == ',' && !expect_value) {
+//                    throw std::runtime_error(
+//                        string("json parsing error: unexpected comma before closing bracket at ") +
+//                        convert<string>(line) + ':' + convert<string>(index));
+//                }
                 if (!value.empty()) {
                     static string const TRUE_   = "true";
                     static string const FALSE_  = "false";

@@ -8,7 +8,7 @@
 #ifdef LINUX_PLATFORM
 
 
-#include <linux/tls.h>
+//#include <linux/tls.h>
 #include <netinet/tcp.h>
 #include <string.h>
 
