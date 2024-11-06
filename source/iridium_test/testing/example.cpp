@@ -6,21 +6,40 @@
 #include <iridium/items.h>
 
 
-//TEST(bool_) {
-//    ASSERT(1 == 2);
-//    ASSERT(true);
-//}
+TEST(bool_) {
+    ASSERT(1 == 1);
+    ASSERT(true);
+}
 
 
-//TEST(throw_) {
-//    std::string s;
-//    ASSERT(s.empty(), std::exception);
-//}
+TEST(exception) {
+    ASSERT(throw std::runtime_error("exception"), std::exception);
+}
 
 
-//TEST(comparing) {
-//    ASSERT(7, less, 5);
-//}
+TEST(comparing_equal) {
+    ASSERT(5, equal, 5);
+}
+
+
+TEST(comparing_less) {
+    ASSERT(5, less, 7);
+}
+
+
+TEST(comparing_less_equal) {
+    ASSERT(5, lessEqual, 5);
+}
+
+
+TEST(comparing_greater) {
+    ASSERT(7, greater, 5);
+}
+
+
+TEST(comparing_greater_equal) {
+    ASSERT(5, greaterEqual, 5);
+}
 
 
 //TEST(uncached_throw) {

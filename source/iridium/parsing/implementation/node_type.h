@@ -3,7 +3,7 @@
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
 #ifndef HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
-#define HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
+#define  HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
 
 
 #include <string>
@@ -202,8 +202,11 @@ typename INodeType<TValue>::TConstSharedPtr CNodeType<TValue>::getChild(std::str
 
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(typename INodeType<TValue>::TSharedPtr const &child_node) {
-    m_nodes.push_back(child_node);
-    return m_nodes.back(); // ----->
+    if (child_node) {
+        m_nodes.push_back(child_node);
+        return m_nodes.back(); // ----->
+    } else
+        return {}; // ----->
 }
 
 

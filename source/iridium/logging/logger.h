@@ -137,6 +137,7 @@ std::string extractFileNameToLog(std::string const &path);
 #endif // _MSC_VER
 
 
+// macros: __func__
 #if defined(BUILD_TYPE_DEBUG) || defined(BUILD_FLAG_FORCE_DEBUG_LOG)
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE) << \

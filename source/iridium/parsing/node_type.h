@@ -3,7 +3,7 @@
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
 #ifndef HEADER_NODE_96BF1757_0A3E_46F0_94CB_A7AFC4877775
-#define HEADER_NODE_96BF1757_0A3E_46F0_94CB_A7AFC4877775
+#define  HEADER_NODE_96BF1757_0A3E_46F0_94CB_A7AFC4877775
 
 
 #include <string>
