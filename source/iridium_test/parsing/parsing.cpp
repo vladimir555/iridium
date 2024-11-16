@@ -333,7 +333,28 @@ TEST(parse_json) {
     ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2"),   std::exception);
     ASSERT(parser->parse("[ {\"value\": 1,  {\"value\": 2 }]"),std::exception);
 //    ASSERT(parser->parse("{\"value\" 1 }"),                    std::exception);
+//    LOGT << "BEGIN";
     ASSERT(parser->parse("{\"value\": 1,}"),                   std::exception);
+//    LOGT << "END";
+    node = parser->parse(
+"{\n"
+"      \"result\": {\n"
+"          \"tests\": [\n"
+"              {\n"
+"                  \"path\": \"/parsing/serialization/http.cpp/http_request\",\n"
+"                  \"error\": \"\",\n"
+"                  \"output\": \"\"\n"
+"              },\n"
+"              {\n"
+"                  \"path\": \"/parsing/serialization/http.cpp/http_response\",\n"
+"                  \"error\": \"\",\n"
+"                  \"output\": \"\"\n"
+"              }\n"
+"          ]\n"
+"      }\n"
+"}\n");
+
+//    LOGT << node;
 }
 
 
