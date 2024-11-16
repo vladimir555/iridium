@@ -335,7 +335,8 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             } else {
                 // freebsd bug
                 LOGW << "multiplexer waiting events error: kevent not mapped event, fd: "
-                     << convert<string>(triggered_event.ident);
+                     << convert<string>(triggered_event.ident) << " "
+                     << TEventFlag(flags).convertToFlagsString();
 //                throw std::runtime_error(
 //                    "multiplexer waiting events error: kevent not mapped event, fd: " +
 //                    convert<string>(triggered_event.ident)); // ----->

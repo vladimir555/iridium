@@ -379,6 +379,7 @@ namespace implementation {
 
 
 INode::TSharedPtr convertJSONStringToNode(string const &source) {
+//    LOGT << source;
     static string const DEFAULT_NODE_NAME_TEXT   = "#text"; // xml node without node name
     static string const DEFAULT_NODE_NAME_ROOT   = "root";
     static string const DEFAULT_NODE_NAME_ARRAY  = "array";
@@ -396,12 +397,12 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
 
     string  name;
     string  value;
-    bool    is_comma        = false;
     bool    is_quotes       = false;
     bool    is_quoted_value = false;
     bool    is_masked       = false;
     size_t  line            = 0;
     size_t  index           = 0;
+    bool    is_expect_value = false;
 
     for (auto const &ch: source) {
         index++;
@@ -457,6 +458,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
             }
 
             if (ch == '{') {
+                is_expect_value = false;
                 if (name.empty())
                     name = DEFAULT_NODE_NAME_ROOT;
 //                LOGT << "push  node: " << node->getName() << " -> " << name;
@@ -468,6 +470,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
             }
 
             if (ch == '[') {
+                is_expect_value = false;
                 if (name.empty())
                     name = DEFAULT_NODE_NAME_ARRAY;
 //                LOGT << "push array: " << node->getName() << " -> " << name;
@@ -477,40 +480,31 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                 continue; // <---
             }
 
+
             if (checkOneOf(ch, '}', ']', ',')) {
-//                LOGT << "is_comma = " << is_comma << "; ch = '" << string() + ch << "' " << line << ":" << index;
-                if (is_comma && value.empty()) {
-                    throw std::runtime_error(
-                        string("json parsing error: missing value after ',' at ") +
-                        convert<string>(line) + ':' +
-                        convert<string>(index)
-                    );
-                }
+//                LOGT
+//                    << line << ":" << index
+//                    << "; ch = '" << string() + ch << "' "
+//                    << "; name = '" << name << "' "
+//                    << "; value = '" << value << "' "
+//                    << "; is_quotes = '" << is_quoted_value << "' ";
 
-                if (ch == ',') {
-                    is_comma = true;
+                if (value.empty()) {
+                    if (is_expect_value && !is_quoted_value) {
+                        throw std::runtime_error(
+                            string("json parsing error: missing value after ',' at ") +
+                            convert<string>(line) + ':' +
+                            convert<string>(index)
+                        );
+                    }
                 } else {
-                    if (!checkOneOf(ch, ' ', '\t', '\n', '\r'))
-                        is_comma = false;
-                }
-
-//            if (ch == '}' || ch == ',' || ch == ']') {
-                // AI
-//                if (ch == ',' && !expect_value) {
-//                    throw std::runtime_error(
-//                        string("json parsing error: unexpected comma before closing bracket at ") +
-//                        convert<string>(line) + ':' + convert<string>(index));
-//                }
-                if (!value.empty()) {
                     static string const TRUE_   = "true";
                     static string const FALSE_  = "false";
                     static string const NULL_   = "null";
 
                     // true, false, int, float allowed without quotes
                     if (!is_quoted_value &&
-                        value != TRUE_  &&
-                        value != FALSE_ &&
-                        value != NULL_ &&
+                        !checkOneOf(value, TRUE_, FALSE_, NULL_) &&
                         value.find_first_not_of("0.123456789") != string::npos)
                     {
                         throw std::runtime_error(
@@ -520,8 +514,9 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                     }
 
                     node->addChild(name, value);
+                    value.clear();
                 }
-                value.clear();
+                is_expect_value = ch == ',';
 
                 bool is_expected_bracket = false;
                 if (!expected_brackets.empty() &&
@@ -531,7 +526,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                     expected_brackets.pop_back();
 //                    LOGT << "close: " << string() + ch << " , brackets: '" << expected_brackets << "'";
                 }
-                
+
                 if ((ch == '}' && (stack.empty()        || !is_expected_bracket)) ||
                     (ch == ']' && (stack_array.empty()  || !is_expected_bracket)))
                 {
