@@ -98,7 +98,7 @@ public: \
     static TEnum convert(std::string const &s) { \
         TEnum e(s); \
         if (e == UNKNOWN) { \
-            auto message = "convert enum string '" + s + "' to enum " + std::string(#TEnum) + " error: valid enum keys is"; \
+            auto message = "convert enum string '" + s + "' to enum " + std::string(#TEnum) + " error: valid enum keys:"; \
             for (auto const &i: getEnums()) \
                 message += std::string(" ") + static_cast<std::string>(TEnum(i)) + " = " + iridium::convertion::convert<std::string>(static_cast<int>(i)); \
             throw std::runtime_error(message); \

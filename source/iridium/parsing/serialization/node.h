@@ -11,7 +11,7 @@
 
 #include "iridium/parsing/node.h"
 #include "iridium/parsing/implementation/node.h"
-#include "iridium/convertion/implementation/convert.h"
+// #include "iridium/convertion/implementation/convert.h"
 #include "iridium/macros/va_args.h"
 
 
@@ -341,7 +341,7 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 } // parsing
 } // iridium
 
-
+// todo: name_delimeter_symbol -> name_convertion_method
 #define DEFINE_ROOT_NODE_BEGIN_2(class_name, name_delimeter_symbol) \
     struct T##class_name : protected iridium::parsing::serialization::NodeView<void> { \
         static int const NAME_DELIMETER_SYMBOL = name_delimeter_symbol; \

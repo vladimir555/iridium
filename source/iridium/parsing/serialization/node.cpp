@@ -86,7 +86,7 @@ INode::TSharedPtr NodeView<void>::getNode() const {
 
 
 std::string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimiter_symbol) {
-    if (camel.empty())
+    if (camel.empty() || delimiter_symbol == 0)
         return camel;
 
     std::string result;

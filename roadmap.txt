@@ -1,19 +1,19 @@
-simd json parser
+finish socket server
+json schema validator generation by serializator
+generating schema from serializator structure
 yaml parser
 sql constructor based on serialization
-command line parser with serialization
-finish socket server
+command line arguments parser with serialization
 linux kernel based socket ssl connection
 websocket client
 http client
 freebsd kevent async socket
 jsonrcp
 rtsp
-yaml parser
+simd json parser
 
 video codec wrapper: libaom + libopus
 or
 ffmpeg wrapper
-
 
 wrk -d 10m -t 4 -c 20 http://10.0.1.11:8X8X/blog

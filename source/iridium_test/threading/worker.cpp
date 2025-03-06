@@ -34,7 +34,7 @@ private:
     typedef typename IWorker<int>::TInputItems  TInputItems;
     typedef typename IWorker<int>::TOutputItems TOutputItems;
 
-    TInputItems handle(TOutputItems const &items) override {
+    TOutputItems handle(TInputItems const &items) override {
         TInputItems result;
         for (auto const &i: items) {
             processed++;

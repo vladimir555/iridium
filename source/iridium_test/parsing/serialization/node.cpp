@@ -85,7 +85,7 @@ DEFINE_ROOT_NODE_BEGIN(Root2)
 DEFINE_ROOT_NODE_END()
 
 
-TEST(serialization) {
+TEST(node_to_struct) {
 //    {
 //        INode::TSharedPtr node = CNode::create("root");
 //        TRoot root(node);
@@ -232,54 +232,54 @@ TEST(serialization) {
 }
 
 
-//namespace benchmark {
+namespace benchmark {
+
+
+//struct S1 {
+//    struct S2 {
+//        S2(S1 const * const s1) {};
+//    } s2 = this;
 //
-//
-////struct S1 {
-////    struct S2 {
-////        S2(S1 const * const s1) {};
-////    } s2 = this;
-////
-////} s1;
-//
-//
-//DEFINE_ROOT_NODE_BEGIN(Root, '_')
-//    DEFINE_NODE_LIST_BEGIN(Array)
-//        DEFINE_ATTRIBUTE(uint64_t, Id)
-//        DEFINE_ATTRIBUTE(string, Type)
-//        DEFINE_NODE_BEGIN(Actor)
-//            DEFINE_ATTRIBUTE(uint64_t, Id)
-//            DEFINE_ATTRIBUTE(string, Login)
-//            DEFINE_ATTRIBUTE(string, Url)
-//            DEFINE_ATTRIBUTE(string, AvatarUrl)
-//        DEFINE_NODE_END(Actor)
-//        DEFINE_NODE_BEGIN(Repo)
-//            DEFINE_ATTRIBUTE(uint64_t, Id)
-//            DEFINE_ATTRIBUTE(string, Name)
-//            DEFINE_ATTRIBUTE(string, Url)
-//        DEFINE_NODE_END(Repo)
-//        DEFINE_NODE_BEGIN(Payload)
-//            DEFINE_ATTRIBUTE(uint64_t, PushId, 0)
-//            DEFINE_ATTRIBUTE(uint64_t, Size, 0)
-//            DEFINE_ATTRIBUTE(uint64_t, DistinctSize, 0)
-//            DEFINE_ATTRIBUTE(string, Ref, "")
-//            DEFINE_ATTRIBUTE(string, RefType, "")
-//            DEFINE_ATTRIBUTE(string, MasterBranch, "")
-//            DEFINE_ATTRIBUTE(string, PusherType, "")
-//            DEFINE_NODE_LIST_BEGIN(Commits)
-//                DEFINE_ATTRIBUTE(string, Sha)
-//                DEFINE_NODE_BEGIN(Author)
-//                    DEFINE_ATTRIBUTE(string, Name, "")
-//                    DEFINE_ATTRIBUTE(string, Email)
-//                DEFINE_NODE_END(Author)
-//            DEFINE_NODE_LIST_END(Commits)
-//        DEFINE_NODE_END(Payload)
-////        DEFINE_ATTRIBUTE(std::chrono::system_clock::time_point, CreatedAt)
-//    DEFINE_NODE_LIST_END(Array)
-//DEFINE_ROOT_NODE_END();
-//
-//
-//} // benchmark
+//} s1;
+
+
+DEFINE_ROOT_NODE_BEGIN(Root, '_')
+    DEFINE_NODE_LIST_BEGIN(Array)
+        DEFINE_ATTRIBUTE(uint64_t, Id)
+        DEFINE_ATTRIBUTE(string, Type)
+        DEFINE_NODE_BEGIN(Actor)
+            DEFINE_ATTRIBUTE(uint64_t, Id)
+            DEFINE_ATTRIBUTE(string, Login)
+            DEFINE_ATTRIBUTE(string, Url)
+            DEFINE_ATTRIBUTE(string, AvatarUrl)
+        DEFINE_NODE_END(Actor)
+        DEFINE_NODE_BEGIN(Repo)
+            DEFINE_ATTRIBUTE(uint64_t, Id)
+            DEFINE_ATTRIBUTE(string, Name)
+            DEFINE_ATTRIBUTE(string, Url)
+        DEFINE_NODE_END(Repo)
+        DEFINE_NODE_BEGIN(Payload)
+            DEFINE_ATTRIBUTE(uint64_t, PushId, 0)
+            DEFINE_ATTRIBUTE(uint64_t, Size, 0)
+            DEFINE_ATTRIBUTE(uint64_t, DistinctSize, 0)
+            DEFINE_ATTRIBUTE(string, Ref, "")
+            DEFINE_ATTRIBUTE(string, RefType, "")
+            DEFINE_ATTRIBUTE(string, MasterBranch, "")
+            DEFINE_ATTRIBUTE(string, PusherType, "")
+            DEFINE_NODE_LIST_BEGIN(Commits)
+                DEFINE_ATTRIBUTE(string, Sha)
+                DEFINE_NODE_BEGIN(Author)
+                    DEFINE_ATTRIBUTE(string, Name, "")
+                    DEFINE_ATTRIBUTE(string, Email)
+                DEFINE_NODE_END(Author)
+            DEFINE_NODE_LIST_END(Commits)
+        DEFINE_NODE_END(Payload)
+//        DEFINE_ATTRIBUTE(std::chrono::system_clock::time_point, CreatedAt)
+    DEFINE_NODE_LIST_END(Array)
+DEFINE_ROOT_NODE_END();
+
+
+} // benchmark
 
 
 // apple m1, input json 42 MB
