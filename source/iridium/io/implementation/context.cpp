@@ -194,7 +194,11 @@ void CContext::remove() {
 //    LOGT << "CContext::remove";
     for (auto const &stream_pipe: m_map_stream_pipe) {
         if (!stream_pipe.first->getHandles().empty()) {
-            LOGT << "push event: " << stream_pipe.first->getHandles().front() << " " << Event::TOperation::CLOSE << " " << Event::TStatus::BEGIN;
+            LOGT
+                << "CContext::remove push event: "
+                << stream_pipe.first->getHandles()
+                << " " << Event::TOperation::CLOSE
+                << " " << Event::TStatus::BEGIN;
             m_events->push(Event::create(stream_pipe.first, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
         }
     }
@@ -217,6 +221,7 @@ void CContext::removeStream(IStream::TSharedPtr const &stream, bool const &is_se
             m_map_stream_pipe.erase(i);
             if (is_send_close_event) {
 //                LOGT << "remove stream: event close, id: " << stream->getID();
+                LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
                 m_events->push(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
             }
         }

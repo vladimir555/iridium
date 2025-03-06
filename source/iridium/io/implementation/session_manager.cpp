@@ -91,7 +91,6 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
 }
 
 
-
 CSessionManager::CSessionManager()
 :
     m_multiplexer(
@@ -254,13 +253,12 @@ CSessionManager::CContextWorkerHandler::handle(
 
     for (auto const &worker_event: removeDuplicates(events_)) {
 
-//        LOGT
-//            << "handle event 1: "
-//            <<(worker_event->stream->getHandles().empty() ? 0 :
-//               worker_event->stream->getHandles().front()) << " "
-//            << worker_event->operation << " "
-//            << worker_event->status;
-
+        LOGT
+            << "handle event 1: "
+            <<(worker_event->stream->getHandles().empty() ? 0 :
+               worker_event->stream->getHandles().front()) << " "
+            << worker_event->operation << " "
+            << worker_event->status;
 
 //        if (worker_event->operation == Event::TOperation::CLOSE &&
 //            worker_event->status    == Event::TStatus::BEGIN    &&
@@ -287,7 +285,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 if (event->stream->getHandles().empty() &&
                     event->operation != Event::TOperation::OPEN)
                 {
-                    LOGT << "skip";
+                    LOGT << "skip empty fd: " << event->operation;
                     continue;
                 }
 
@@ -313,12 +311,9 @@ CSessionManager::CContextWorkerHandler::handle(
                             auto is_transmitted = context->transmit(event);
 
                             if (event->operation == Event::TOperation::CLOSE) {
+                                LOGT << "unsubscribe on close begin";
                                 m_multiplexer->unsubscribe(event->stream);
-                                if(!event->stream->getHandles().empty()) {
-                                    event->stream->finalize();
-
-                                    is_context_valid = false;
-                                }
+                                is_context_valid = false;
                             } else {
                                 if (!is_transmitted)
                                     event->operation = Event::TOperation::EOF_;
@@ -347,15 +342,31 @@ CSessionManager::CContextWorkerHandler::handle(
                                 Event::TOperation::READ,
                                 Event::TOperation::WRITE)) 
                         {
+                            // repeat rw
                             event->status = Event::TStatus::BEGIN;
                             events_to_repeat.push_back(event);
                             LOGT
                                 << "repeat by context: "
-                                << event->stream->getHandles().front() << " "
+                                << event->stream->getHandles() << " "
                                 << event->operation << " "
                                 << event->status;
                         } else {
 
+                        }
+                        if (event->operation == Event::TOperation::CLOSE) {
+                            LOGT
+                                << "finalize on close end: "
+                                << event->stream->getHandles() << " "
+                                << event->operation << " "
+                                << event->status;
+
+                            event->stream->finalize();
+//                            LOGT
+//                                << "unsubscribe on close end: "
+//                                << event->stream->getHandles() << " "
+//                                << event->operation << " "
+//                                << event->status;
+//                            m_multiplexer->unsubscribe(event->stream);
                         }
                         //if (event->operation == Event::TOperation::CLOSE) {
                         //    // todo: rm stream from context
@@ -379,6 +390,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 m_context_manager->removeContext(context);
 //                continue; // <---
             }
+
             auto events_ = m_context_manager->releaseContext(context);
             events_to_repeat.insert(events_to_repeat.end(), events_.begin(), events_.end());
         }

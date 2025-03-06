@@ -12,6 +12,14 @@
 #include "iridium/platform.h"
 
 #include <mutex>
+#include <list>
+#include <vector>
+#include <deque>
+#include <array>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
 
 #include "event.h"
 #include "sink.h"
@@ -65,19 +73,44 @@ struct LogStream {
     ~LogStream();
     ///
     LogStream const & operator << (char const * const s) const;
+    ///
     LogStream const & operator << (char       *       s) const;
     ///
     template<typename TValue>
     LogStream const & operator << (TValue const &v) const;
     ///
     template<typename TValue>
-    LogStream const & operator << (std::atomic<TValue> const &v) const;
-    ///
-    template<typename TValue>
     LogStream const & operator << (TValue * const * v) const;
     ///
     template<typename TValue>
+    LogStream const & operator << (std::atomic<TValue> const &v) const;
+    ///
+    template<typename TValue>
     LogStream const & operator << (std::shared_ptr<TValue> const &v) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::list<TValue> const &values) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::vector<TValue> const &values) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::deque<TValue> const &values) const;
+    ///
+    template<typename TValue, std::size_t size>
+    LogStream const & operator << (std::array<TValue, size> const &values) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::set<TValue> const &values) const;
+    ///
+    template<typename TKey, typename TValue>
+    LogStream const & operator << (std::map<TKey, TValue> const &values) const;
+    ///
+    template<typename TValue>
+    LogStream const & operator << (std::unordered_set<TValue> const &values) const;
+    ///
+    template<typename TKey, typename TValue>
+    LogStream const & operator << (std::unordered_map<TKey, TValue> const &values) const;
 
 private:
     ///
@@ -116,6 +149,86 @@ template<typename TValue>
 LogStream const &LogStream::operator << (std::shared_ptr<TValue> const &v) const {
     m_event->line += v ? convertion::convert<std::string>(*v) : "nullptr";
     return std::move(*this); // ----->
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (std::list<TValue> const &values) const {
+    *this << "[ ";
+    for (auto const &value: values)
+        *this << value << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (std::vector<TValue> const &values) const {
+    *this << "[ ";
+    for (auto const &value: values)
+        *this << value << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (std::deque<TValue> const &values) const {
+    *this << "[ ";
+    for (auto const &value: values)
+        *this << value << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TValue, std::size_t size>
+LogStream const &LogStream::operator << (std::array<TValue, size> const &values) const {
+    *this << "[ ";
+    for (auto const &value: values)
+        *this << value << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (std::set<TValue> const &values) const {
+    *this << "[ ";
+    for (auto const &value: values)
+        *this << value << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TKey, typename TValue>
+LogStream const &LogStream::operator << (std::map<TKey, TValue> const &m) const {
+    *this << "[ ";
+    for (auto const &item: m)
+        *this << item.first << ": " << item.second << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TValue>
+LogStream const &LogStream::operator << (std::unordered_set<TValue> const &values) const {
+    *this << "[ ";
+    for (auto const &value: values)
+        *this << value << " ";
+    *this << "]";
+    return *this;
+}
+
+
+template<typename TKey, typename TValue>
+LogStream const &LogStream::operator << (std::unordered_map<TKey, TValue> const &m) const {
+    *this << "[ ";
+    for (auto const &item: m)
+        *this << item.first << ": " << item.second << " ";
+    *this << "]";
+    return *this;
 }
 
 

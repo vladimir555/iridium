@@ -50,8 +50,11 @@ TEST(uri) {
 //    auto ya_ru_ipv4             = URI("http://ya.ru").getIPv4();
 //    auto ya_ru_ipv4_expected    = URI("http://77.88.55.242").getIPv4();
 
-    auto ipv4 = URI("http://example.com").getIPv4();
-    auto ipv4_expected = URI("http://93.184.215.14").getIPv4();
+//    auto ipv4 = URI("http://example.org").getIPv4();
+//    auto ipv4_expected = URI("http://23.215.0.132").getIPv4();
+
+    auto ipv4 = URI("http://localhost").getIPv4();
+    auto ipv4_expected = URI("http://127.0.0.1").getIPv4();
 
     ASSERT(static_cast<bool>(ipv4));
     ASSERT(static_cast<bool>(ipv4_expected));

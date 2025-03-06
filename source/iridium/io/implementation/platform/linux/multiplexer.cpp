@@ -150,6 +150,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
     for (auto const &stream: m_streams_to_del->pop(false)) {
         delInternal(stream);
+        LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
         events.push_back(
             Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
     }

@@ -78,7 +78,9 @@ void CThread::finalize() {
         m_thread.reset();
         m_runnuble->finalize();
     } catch (std::exception const &e) {
-        // todo: pthread_cancel & widows teminate thread
+        // todo: teminate thread, auto unlock all mutexes before thread canceling
+        // pthread_cancel, pthread_cleanup_push, pthread_cleanup_pop
+        // TerminateThread, DeleteCriticalSection
         if (m_thread) {
             m_thread->detach();
             m_thread.reset();

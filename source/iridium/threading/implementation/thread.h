@@ -10,6 +10,7 @@
 #include "iridium/threading/thread.h"
 #include "iridium/threading/runnable.h"
 #include "iridium/pattern/non_copyable.h"
+#include "iridium/pattern/non_movable.h"
 
 #include "async_queue.h"
 
@@ -25,8 +26,9 @@ namespace implementation {
 
 
 class CThread: 
-    public IThread, 
-    public pattern::NonCopyable
+    public IThread,
+    public pattern::NonCopyable,
+    public pattern::NonMovable
 {
 public:
     DEFINE_CREATE(CThread)

@@ -306,7 +306,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
             m_process_result->output = m_buffer_output;
     }
-    
+
 //    LOGT << "output:\n" << m_buffer_output;
 
     // detect crash
@@ -329,16 +329,19 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         m_process_result->state     = m_process->getState();
     }
 
-//    LOGT << "return " << bool(!m_process_result->output);
-//    if (!m_process_result->output)
-//        LOGT << "buffer:\n" << m_buffer_output
-//             << "\ncond:  " << m_process_result->state.condition
-//             << "\nevent: " << event->getType();
+    LOGT << "return " << bool(!m_process_result->output);
+    if (!m_process_result->output)
+        LOGT
+            << "\ncond:  "              << m_process_result->state.condition
+            << "\nevent fd: "           << event->stream->getHandles()
+            << "\nevent operation: "    << event->operation
+            << "\nevent status   : "    << event->status
+            << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
 
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
     
-    //LOGT << "protocol return: " << !m_process_result->output;
+    LOGT << "protocol return: " << !m_process_result->output;
     return !m_process_result->output;
 }
 
