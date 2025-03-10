@@ -378,6 +378,8 @@ namespace implementation {
 //}
 
 
+
+// todo: optimize with string_view
 INode::TSharedPtr convertJSONStringToNode(string const &source) {
 //    LOGT << source;
     static string const DEFAULT_NODE_NAME_TEXT   = "#text"; // xml node without node name

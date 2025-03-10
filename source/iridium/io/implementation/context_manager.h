@@ -26,7 +26,7 @@ public:
     void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) override;
     void    removeContext (IContext::TSharedPtr const &context) override;
     IContext::TSharedPtr
-            acquireContext(Event::TSharedPtr    const &event) override;
+            acquireContext(Event::TSharedPtr    const &event, IMultiplexer::TSharedPtr const &multiplexer) override;
     std::list<Event::TSharedPtr>
             releaseContext(IContext::TSharedPtr const &context) override;
     std::list<Event::TSharedPtr>

@@ -255,8 +255,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
         LOGT
             << "handle event 1: "
-            <<(worker_event->stream->getHandles().empty() ? 0 :
-               worker_event->stream->getHandles().front()) << " "
+            << worker_event->stream->getHandles() << " "
             << worker_event->operation << " "
             << worker_event->status;
 
@@ -271,14 +270,13 @@ CSessionManager::CContextWorkerHandler::handle(
 //            continue; // <---
 //        }
 
-        if (auto context = m_context_manager->acquireContext(worker_event)) {
+        if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
             bool is_context_valid = true;
             for (auto const &event: removeDuplicates(context->popEvents())) {
 
                 LOGT
                     << "handle event 2: "
-                    <<(event->stream->getHandles().empty() ? 0 :
-                       event->stream->getHandles().front()) << " "
+                    << event->stream->getHandles() << " "
                     << event->operation << " "
                     << event->status;
 
@@ -393,6 +391,33 @@ CSessionManager::CContextWorkerHandler::handle(
 
             auto events_ = m_context_manager->releaseContext(context);
             events_to_repeat.insert(events_to_repeat.end(), events_.begin(), events_.end());
+        } else {
+            if (worker_event->status    == Event::TStatus::BEGIN &&
+                worker_event->operation == Event::TOperation::CLOSE)
+            {
+                LOGT
+                    << "unhandled event unsubscribe: "
+                    << worker_event->status << " "
+                    << worker_event->operation << " "
+                    << worker_event->stream->getHandles();
+                m_multiplexer->unsubscribe(worker_event->stream);
+            }
+
+            if (worker_event->status == Event::TStatus::BEGIN &&
+                checkOneOf(worker_event->operation,
+                   Event::TOperation::READ,
+                   Event::TOperation::WRITE))
+            {
+                LOGT
+                    << "unhandled event unsubscribe: "
+                    << worker_event->status << " "
+                    << worker_event->operation << " "
+                    << worker_event->stream->getHandles();
+//                events_to_repeat.push_back(worker_event);
+                m_multiplexer->unsubscribe(worker_event->stream);
+            }
+//            m_multiplexer->unsubscribe(worker_event->stream);
+//            events_to_repeat.push_back(worker_event);
         }
     }
 

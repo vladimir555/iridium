@@ -75,9 +75,8 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     // TODO: exception handling
     while (!map_path_fork.empty()) {
-        //LOGT << "wait, paths_left: " << paths_left << " ...";
-        //for (auto const &i: map_path_handler)
-        //    LOGT << "path left: " << i.first;
+        for (auto const &i: map_path_fork)
+            LOGT << "path left: " << i.first;
 
         if (m_is_serial && !map_path_fork.empty()) {
             auto fork = map_path_fork.begin()->second;
