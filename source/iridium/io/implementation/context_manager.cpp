@@ -18,11 +18,14 @@ void CContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol
 }
 
 
-IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &event) {
+IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &event, IMultiplexer::TSharedPtr const &multiplexer) {
     LOCK_SCOPE();
 
     //if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN)
-    //    LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getURI();
+    LOGT << "manager::acquire: "
+    << event->operation << " "
+    << event->status << " "
+    << event->stream->getHandles();
     //else
     //    LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getID();
     
@@ -36,7 +39,7 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
 
             LOGT
                 << "CContextManager::acquireContext: "
-                << (event->stream->getHandles().empty() ? 0 : event->stream->getHandles().front())
+                << event->stream->getHandles()
                 << " return context";
 
             return context; // ----->
@@ -44,16 +47,21 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
             // context acquired
             LOGT
                 << "CContextManager::acquireContext: "
-                << (event->stream->getHandles().empty() ? 0 : event->stream->getHandles().front())
+                << event->stream->getHandles()
                 << " return nullptr, acquired";
             return nullptr; // ----->
         }
     }
 
     // context not registered
+    if (event->operation == Event::TOperation::CLOSE && event->status == Event::TStatus::BEGIN) {
+        LOGT << "unsubscribe orphan fd: " << event->stream->getHandles();
+        multiplexer->unsubscribe(event->stream);
+    }
+
     LOGT
         << "CContextManager::acquireContext: "
-        << (event->stream->getHandles().empty() ? 0 : event->stream->getHandles().front())
+        << event->stream->getHandles()
         << " return nullptr";
 
     return nullptr; // ----->

@@ -8,11 +8,10 @@
 
 #include <string>
 #include <list>
-#include <unordered_map>
+#include <unordered_set>
 
 #include "iridium/smart_ptr.h"
 #include "iridium/parsing/node_type.h"
-//#include "iridium/caching/cached_value.h"
 
 
 namespace iridium {
@@ -32,7 +31,7 @@ public:
     ///
     explicit CNodeType(std::string const &name);
     ///
-    std::string getName()  const override final;
+    std::string getName() const override final;
     ///
     TValue      getValue() const override;
     ///
@@ -66,23 +65,21 @@ public:
 
 private:
     ///
-    typedef std::unordered_map<std::string, std::string const *> TMapStringPtr;
+    typedef std::unordered_set<std::string> TStrings;
     ///
-    explicit CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TMapStringPtr> const &map_name_ptr);
-public:
+    explicit CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings);
     ///
-    explicit CNodeType(std::string const &name, std::shared_ptr<TMapStringPtr> const &map_name_ptr);
-private:
+    explicit CNodeType(std::string const &name, std::shared_ptr<TStrings> const &strings);
     ///
     std::string const *makeName(std::string const &name);
     ///
-    std::shared_ptr<TMapStringPtr>      m_map_name_ptr;
+    std::shared_ptr<TStrings> m_strings;
     ///
-    std::string const * const           m_name = nullptr;
+    std::string const * const m_name = nullptr;
     ///
-    TValue                              m_value;
+    TValue m_value;
     ///
-    typename INodeType<TValue>::TNodes  m_nodes;
+    typename INodeType<TValue>::TNodes m_nodes;
 };
 
 
@@ -91,49 +88,43 @@ private:
 
 template<typename TValue>
 std::string const * CNodeType<TValue>::makeName(std::string const& name) {
-    auto it = m_map_name_ptr->find(name);
-    if (it == m_map_name_ptr->end()) {
-        auto inserted = m_map_name_ptr->insert({name, nullptr}); // Вставляем новый элемент
-        inserted.first->second = &inserted.first->first;
-        return inserted.first->second;
-    }
-    return it->second;
+    return &*m_strings->insert(name).first;
 }
 
 
 template<typename TValue>
 CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value)
 :
-    m_map_name_ptr  (std::make_shared<TMapStringPtr>()),
-    m_name          (makeName(name)),
-    m_value         (value)
+    m_strings   (std::make_shared<TStrings>()),
+    m_name      (makeName(name)),
+    m_value     (value)
 {}
 
 
 template<typename TValue>
 CNodeType<TValue>::CNodeType(std::string const &name)
 :
-    m_map_name_ptr  (std::make_shared<TMapStringPtr>()),
-    m_name          (makeName(name)),
-    m_value         ()
+    m_strings   (std::make_shared<TStrings>()),
+    m_name      (makeName(name)),
+    m_value     ()
 {}
 
 
 template<typename TValue>
-CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TMapStringPtr> const &map_name_ptr)
+CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings)
 :
-    m_map_name_ptr  (map_name_ptr),
-    m_name          (makeName(name)),
-    m_value         (value)
+    m_strings   (strings),
+    m_name      (makeName(name)),
+    m_value     (value)
 {}
 
 
 template<typename TValue>
-CNodeType<TValue>::CNodeType(std::string const &name, std::shared_ptr<TMapStringPtr> const &map_name_ptr)
+CNodeType<TValue>::CNodeType(std::string const &name, std::shared_ptr<TStrings> const &strings)
 :
-    m_map_name_ptr  (map_name_ptr),
-    m_name          (makeName(name)),
-    m_value         ()
+    m_strings   (strings),
+    m_name      (makeName(name)),
+    m_value     ()
 {}
 
 
@@ -255,13 +246,13 @@ typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(typename INod
 
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(std::string const &name) {
-    return addChild(CNodeType<TValue>::TSharedPtr(new CNodeType<TValue>(name, m_map_name_ptr))); // ----->
+    return addChild(CNodeType<TValue>::TSharedPtr(new CNodeType<TValue>(name, m_strings))); // ----->
 }
 
 
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(std::string const &name, TValue const &value) {
-    return addChild(CNodeType<TValue>::TSharedPtr(new CNodeType<TValue>(name, value, m_map_name_ptr))); // ----->
+    return addChild(CNodeType<TValue>::TSharedPtr(new CNodeType<TValue>(name, value, m_strings))); // ----->
 }
 
 

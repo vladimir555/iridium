@@ -102,7 +102,7 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source
-#    /opt/homebrew/include
+    /opt/homebrew/include
 )
 
 file(GLOB_RECURSE SOURCE_TEST

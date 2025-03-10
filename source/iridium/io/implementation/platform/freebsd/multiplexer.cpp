@@ -323,7 +323,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 if (triggered_event.flags & EV_EOF) {
 //                    LOGT << "! EOF, id: " << stream->getID();
 //                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
-                    LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
+                    LOGT << "push Event::TOperation::EOF, fd: " << stream->getHandles();
                     events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::BEGIN));
                     continue; // <---
                 }

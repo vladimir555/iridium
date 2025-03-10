@@ -5,6 +5,7 @@
 #include "context.h"
 #include "protocol.h"
 #include "event.h"
+#include "multiplexer.h"
 
 
 namespace iridium {
@@ -18,7 +19,7 @@ public:
     virtual void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) = 0;
     virtual void    removeContext (IContext::TSharedPtr const &context) = 0;
     virtual IContext::TSharedPtr
-                    acquireContext(Event::TSharedPtr    const &event) = 0;
+    acquireContext(Event::TSharedPtr    const &event, IMultiplexer::TSharedPtr const &multiplexer) = 0;
     virtual std::list<Event::TSharedPtr>
                     releaseContext(IContext::TSharedPtr const &context) = 0;
     virtual std::list<Event::TSharedPtr>

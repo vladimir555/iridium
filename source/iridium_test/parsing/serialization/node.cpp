@@ -17,7 +17,7 @@ using iridium::assertExists;
 
 
 //#include <simdjson.h>
-//#include <nlohmann/json.hpp>
+#include <nlohmann/json.hpp>
 namespace iridium {
 namespace parsing {
 namespace serialization {
@@ -282,99 +282,58 @@ DEFINE_ROOT_NODE_END();
 } // benchmark
 
 
-// apple m1, input json 42 MB
-// C++
-// reading   time is 26333 microseconds
-// parsing   time is 236776 microseconds
-// composing time is 245826 microseconds
-// serialize time is 63970 microseconds
-// total serizliztion time is 300746 microseconds
-// Swift 5
-// 0.769556 seconds = 769556 microseconds
-// (~x2,5 slower)
-// simdjson (x5 faster)
-// nlohmann (x1.11 faster)
-// UPDATE: iridium json parsing + serialization time is 192965 microseconds
-//TEST(benchmark_iridium) {
-//    using implementation::CJSONParser;
-//    using iridium::io::fs::readFile;
-//    using iridium::io::fs::writeFile;
-//
-//    auto now        = std::chrono::system_clock::now();
-//    auto parser     = CJSONParser::create();
-//    auto json_text  = readFile("sample.json");
-//    LOGI << "reading   time is " << std::chrono::system_clock::now() - now;
-//
-//    now = std::chrono::system_clock::now();
-//    auto node = parser->parse(json_text);
-//    benchmark::TRoot json_serialized(node);
-//    LOGI << "parsing   time is " << std::chrono::system_clock::now() - now;
-//    LOGI << "array size: " << json_serialized.Array.size();
-//
-////    now = std::chrono::system_clock::now();
-////    auto json_string = parser->compose(node);
-////    LOGI << "composing time is " << std::chrono::system_clock::now() - now;
-//
-////    now = std::chrono::system_clock::now();
-////    benchmark::TRoot json_serialized(node);
-////    LOGI << "serialize time is " << std::chrono::system_clock::now() - now;
-//
-////    writeFile("sample.composed.json", json_string);
-//}
+namespace benchmark {
 
 
-//namespace benchmark {
-//
-//
-//struct TJsonRoot {
-//    struct TItem {
-//        uint64_t    Id;
-//        string      Type;
-//
-//        struct TActor {
-//            uint64_t    Id;
-//            string      Login;
-//            string      Url;
-//            string      AvatarUrl;
-//        };
-//        TActor Actor;
-//
-//        struct TRepo {
-//            uint64_t    Id;
-//            string      Name;
-//            string      Url;
-//        };
-//        TRepo Repo;
-//
-//        struct TPayload {
-//            uint64_t    PushId;
-//            uint64_t    Size;
-//            uint64_t    DistinctSize;
-//            string      Ref;
-//            string      RefType;
-//            string      MasterBranch;
-//            string      PusherType;
-//
-//            struct TCommit {
-//                string Sha;
-//
-//                struct TAuthor {
-//                    string Name;
-//                    string Email;
-//                };
-//                TAuthor Author;
-//            };
-//            std::list<TCommit> Commits;
-//        };
-//        TPayload    Payload;
-//        std::chrono::system_clock::time_point
-//                    CreatedAt;
-//    };
-//    std::list<TItem> Array;
-//};
-//
-//
-//} // benchmark
+struct TJsonRoot {
+    struct TItem {
+        uint64_t    Id;
+        string      Type;
+
+        struct TActor {
+            uint64_t    Id;
+            string      Login;
+            string      Url;
+            string      AvatarUrl;
+        };
+        TActor Actor;
+
+        struct TRepo {
+            uint64_t    Id;
+            string      Name;
+            string      Url;
+        };
+        TRepo Repo;
+
+        struct TPayload {
+            uint64_t    PushId;
+            uint64_t    Size;
+            uint64_t    DistinctSize;
+            string      Ref;
+            string      RefType;
+            string      MasterBranch;
+            string      PusherType;
+
+            struct TCommit {
+                string Sha;
+
+                struct TAuthor {
+                    string Name;
+                    string Email;
+                };
+                TAuthor Author;
+            };
+            std::list<TCommit> Commits;
+        };
+        TPayload    Payload;
+        std::chrono::system_clock::time_point
+                    CreatedAt;
+    };
+    std::list<TItem> Array;
+};
+
+
+} // benchmark
 
 
 
@@ -536,6 +495,51 @@ DEFINE_ROOT_NODE_END();
 //
 //    LOGI << "parsing   time is " << std::chrono::system_clock::now() - now;
 //    LOGI << "array size: " << root.Array.size();
+//}
+
+
+//// apple m1, input json 25 MB
+//// C++
+////2025-03-10 17:03:38.084 I 0x1ee6d8840 RUN  /parsing/serialization/node.cpp/benchmark_iridium
+////2025-03-10 17:03:38.099 I 0x1ee6d8840 reading   time is 15042 microseconds
+////2025-03-10 17:03:38.243 I 0x1ee6d8840 parsing   time is 143888 microseconds
+////2025-03-10 17:03:38.488 I 0x1ee6d8840 composing time is 244827 microseconds
+////2025-03-10 17:03:38.516 I 0x1ee6d8840 serialize time is 27635 microseconds
+////2025-03-10 17:03:38.516 I 0x1ee6d8840 array size: 11351
+////2025-03-10 17:03:38.558 I 0x1ee6d8840 OK   /parsing/serialization/node.cpp/benchmark_iridium
+////2025-03-10 17:03:38.558 I 0x1ee6d8840 RUN  /parsing/serialization/node.cpp/benchmark_nlohmann
+////2025-03-10 17:03:38.572 I 0x1ee6d8840 reading   time is 13727 microseconds
+////2025-03-10 17:03:38.735 I 0x1ee6d8840 parsing   time is 162845 microseconds
+////2025-03-10 17:03:38.735 I 0x1ee6d8840 array size: 11351
+////2025-03-10 17:03:38.769 I 0x1ee6d8840 OK   /parsing/serialization/node.cpp/benchmark_nlohmann
+////2025-03-10 17:03:38.769 I 0x1ee6d8840
+//TEST(benchmark_iridium) {
+//    using implementation::CJSONParser;
+//    using iridium::io::fs::readFile;
+//    using iridium::io::fs::writeFile;
+//
+//    auto now        = std::chrono::system_clock::now();
+//    auto parser     = CJSONParser::create();
+//    auto json_text  = readFile("sample.json");
+//    LOGI << "reading   time is " << std::chrono::system_clock::now() - now;
+//
+//    now = std::chrono::system_clock::now();
+//    auto node = parser->parse(json_text);
+//////    benchmark::TRoot json_serialized(node);
+//    LOGI << "parsing   time is " << std::chrono::system_clock::now() - now;
+//
+//    now = std::chrono::system_clock::now();
+//    auto json_string = parser->compose(node);
+//    LOGI << "composing time is " << std::chrono::system_clock::now() - now;
+//
+//    now = std::chrono::system_clock::now();
+//    benchmark::TRoot json_serialized(node);
+//    LOGI << "serialize time is " << std::chrono::system_clock::now() - now;
+//    LOGI << "array size: " << json_serialized.Array.size();
+//
+////    now = std::chrono::system_clock::now();
+////    writeFile("sample.composed.json", json_string);
+////    LOGI << "reading   time is " << std::chrono::system_clock::now() - now;
 //}
 
 
