@@ -353,8 +353,6 @@ TEST(parse_json) {
 "          ]\n"
 "      }\n"
 "}\n");
-
-//    LOGT << node;
 }
 
 

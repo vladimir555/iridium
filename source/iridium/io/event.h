@@ -25,8 +25,8 @@ struct Event {
         WRITE, 
         EOF_,
         TIMEOUT,
-        CLOSE,
-        ERROR_)
+        ERROR_,
+        CLOSE)
 
     DEFINE_ENUM(
         TStatus, 

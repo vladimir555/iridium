@@ -113,8 +113,8 @@ TEST(worker_pool) {
 //    LOGT << "start";
     while (result.size() < count) {
         auto items = worker->pop(std::chrono::seconds(5));
-        if (items.empty())
-            break; // --->
+//        if (items.empty())
+//            break; // --->
         result.splice(result.end(), items);
     }
 //    LOGT << "stop";

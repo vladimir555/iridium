@@ -155,7 +155,7 @@ void CSessionManager::CMultiplexerThreadHandler::initialize() {}
 
 
 void CSessionManager::CMultiplexerThreadHandler::finalize() {
-    LOGT << __func__;
+    LOGT << "CMultiplexerThreadHandler::finalize";
 }
 
 
@@ -194,7 +194,7 @@ void CSessionManager::CEventRepeaterHandler::initialize() {}
 
 
 void CSessionManager::CEventRepeaterHandler::finalize() {
-    LOGT << __func__;
+    LOGT << "CEventRepeaterHandler::finalize";
 }
 
 
@@ -219,7 +219,7 @@ void CSessionManager::CContextWorkerHandler::initialize() {}
 
 
 void CSessionManager::CContextWorkerHandler::finalize() {
-    LOGT << __func__;
+    LOGT << "CContextWorkerHandler::finalize";
 }
 
 
@@ -254,7 +254,7 @@ CSessionManager::CContextWorkerHandler::handle(
     for (auto const &worker_event: removeDuplicates(events_)) {
 
         LOGT
-            << "handle event 1: "
+            << "handle event (worker):   "
             << worker_event->stream->getHandles() << " "
             << worker_event->operation << " "
             << worker_event->status;
@@ -272,10 +272,11 @@ CSessionManager::CContextWorkerHandler::handle(
 
         if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
             bool is_context_valid = true;
+
             for (auto const &event: removeDuplicates(context->popEvents())) {
 
                 LOGT
-                    << "handle event 2: "
+                    << "handle event (acquired): "
                     << event->stream->getHandles() << " "
                     << event->operation << " "
                     << event->status;
@@ -358,6 +359,7 @@ CSessionManager::CContextWorkerHandler::handle(
                                 << event->operation << " "
                                 << event->status;
 
+                            LOGT << "finalize stream: " << event->stream->getHandles();
                             event->stream->finalize();
 //                            LOGT
 //                                << "unsubscribe on close end: "
@@ -392,32 +394,20 @@ CSessionManager::CContextWorkerHandler::handle(
             auto events_ = m_context_manager->releaseContext(context);
             events_to_repeat.insert(events_to_repeat.end(), events_.begin(), events_.end());
         } else {
-            if (worker_event->status    == Event::TStatus::BEGIN &&
-                worker_event->operation == Event::TOperation::CLOSE)
-            {
-                LOGT
-                    << "unhandled event unsubscribe: "
-                    << worker_event->status << " "
-                    << worker_event->operation << " "
-                    << worker_event->stream->getHandles();
-                m_multiplexer->unsubscribe(worker_event->stream);
-            }
-
-            if (worker_event->status == Event::TStatus::BEGIN &&
-                checkOneOf(worker_event->operation,
-                   Event::TOperation::READ,
-                   Event::TOperation::WRITE))
-            {
-                LOGT
-                    << "unhandled event unsubscribe: "
-                    << worker_event->status << " "
-                    << worker_event->operation << " "
-                    << worker_event->stream->getHandles();
-//                events_to_repeat.push_back(worker_event);
-                m_multiplexer->unsubscribe(worker_event->stream);
-            }
-//            m_multiplexer->unsubscribe(worker_event->stream);
-//            events_to_repeat.push_back(worker_event);
+//            if (worker_event->operation == Event::TOperation::CLOSE) {
+//                if (worker_event->status == Event::TStatus::BEGIN) {
+//                    LOGT
+//                        << "unsubscribe orphan close event: "
+//                        << worker_event->operation << " "
+//                        << worker_event->status << " "
+//                        << worker_event->stream->getHandles();
+//                    m_multiplexer->unsubscribe(worker_event->stream);
+//                }
+//                if (worker_event->status == Event::TStatus::END) {
+//                    LOGT << "finalize orphan stream: " << worker_event->stream->getHandles();
+//                    worker_event->stream->finalize();
+//                }
+//            }
         }
     }
 

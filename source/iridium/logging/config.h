@@ -24,12 +24,13 @@ DEFINE_ROOT_NODE_BEGIN(Logger)
     DEFINE_ATTRIBUTE(bool, IsGmtTime, false)
     DEFINE_ATTRIBUTE(TEvent::TLevel, Level, TEvent::TLevel::TRACE)
     DEFINE_NODE_LIST_BEGIN(Sink)
+        // todo: ratate (none, hourly, dayly, weekly, onstart, continuously) + url (file://...  , postgres:// ...)
         DEFINE_ENUM(
             TSinkType,
             CONSOLE,
             FILE,
-            FILE_DAILY,
-            FILE_TIMELY) // todo: db
+            FILE_DAILY, // rotate daily
+            FILE_TIMELY) // new file every logger starting
         DEFINE_ATTRIBUTE(TSinkType      , Type      , TSinkType::UNKNOWN)
         DEFINE_ATTRIBUTE(bool           , IsAsync   , false)
         DEFINE_ATTRIBUTE(std::string    , Uri       , "")

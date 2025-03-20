@@ -7,17 +7,17 @@ cmake_minimum_required(VERSION 3.21)
 #set(CMAKE_C_COMPILER "/usr/bin/gcc")
 #set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
-project(iridium)
+project(iridium LANGUAGES CXX)
 
 
 set(CMAKE_CXX_STANDARD 17)
 
 # release
-set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
+# set(CMAKE_BUILD_TYPE "Release")
+# set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
 
 # debug
-#set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
@@ -61,11 +61,11 @@ find_package(Threads)
 
 # iridium library
 file(GLOB_RECURSE SOURCE 
-    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}/*.h
-    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}/*.cpp
 )
 
-source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOURCE})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOURCE})
 #set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 include_directories(
@@ -73,8 +73,8 @@ include_directories(
     ${MySQL_INCLUDE_DIR}
     /usr/local/include
     /usr/local/ssl/include
-    ${CMAKE_SOURCE_DIR}/source
-    ${CMAKE_SOURCE_DIR}/include)
+    ${CMAKE_CURRENT_SOURCE_DIR}/source
+    ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # deb package
 # todo: dependencies postgres deb
@@ -87,12 +87,12 @@ include_directories(
 #include(CPack)
 
 # static or shared
-add_library(${PROJECT_NAME} STATIC ${SOURCE})
-#add_library(${PROJECT_NAME} SHARED ${SOURCE})
+#add_library(${PROJECT_NAME} STATIC ${SOURCE})
+add_library(${PROJECT_NAME} SHARED ${SOURCE})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
 install(
-    DIRECTORY "${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}"
+    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}"
     DESTINATION "include"
     FILES_MATCHING PATTERN "*.h"
 )
@@ -101,16 +101,16 @@ install(
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/source
+    ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}/source
     /opt/homebrew/include
 )
 
 file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.h
-    ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.cpp
 )
 
-source_group(TREE ${CMAKE_SOURCE_DIR}/source/${PROJECT_NAME}_test FILES ${SOURCE_TEST})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}_test FILES ${SOURCE_TEST})
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
 

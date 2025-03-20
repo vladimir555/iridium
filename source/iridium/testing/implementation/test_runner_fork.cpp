@@ -228,11 +228,13 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 ////        m_process_result->output    = m_buffer_output;
 //    }
 
+    bool result = true;
+
     try {
         if (
             //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
             checkOneOf(event->operation,
-                //io::Event::TOperation::READ,
+                io::Event::TOperation::READ,
                 io::Event::TOperation::EOF_,
                 io::Event::TOperation::CLOSE,
                 io::Event::TOperation::TIMEOUT) &&
@@ -290,13 +292,20 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                         m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
                         m_process_result->node      = node;
                         m_process_result->output    = m_buffer_output;
-                        
-                        //LOGT << "node:\n"   << node;
+
+                        LOGT << "json:\n"   << json;
+                        LOGT << "node:\n"   << node;
                         //LOGT << "output:\n" << m_buffer_output;
+                        LOGT << "set result = false";
+                        result = false;
                     }
                 }
             }
         }
+
+//        if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE)
+//            throw std::runtime_error("unexpected closing console pipe");
+
     } catch (std::exception const &e) {
         LOGF << e.what();
         if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
@@ -328,20 +337,23 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         m_process_result->state     = m_process->getState();
     }
 
-    LOGT << "return " << bool(!m_process_result->output);
-    if (!m_process_result->output)
-        LOGT
-            << "\ncond:  "              << m_process_result->state.condition
-            << "\nevent fd: "           << event->stream->getHandles()
-            << "\nevent operation: "    << event->operation
-            << "\nevent status   : "    << event->status
-            << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
+//        || (event->operation   == io::Event::TOperation::CLOSE &&
+//            event->status      == io::Event::TStatus::END));
+
+    LOGT
+        << "\nresult:   "           << result
+        << "\ncond:     "           << m_process_result->state.condition
+        << "\nevent fd: "           << event->stream->getHandles()
+        << "\nevent operation: "    << event->operation
+        << "\nevent status   : "    << event->status
+        << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
 
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
     
-    LOGT << "protocol return: " << !m_process_result->output;
-    return !m_process_result->output;
+    LOGT << "protocol return: " << result;
+
+    return result; // ----->
 }
 
 

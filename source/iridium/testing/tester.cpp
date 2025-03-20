@@ -174,7 +174,8 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
         << args[0] << " help\n"
         << args[0] << " list\n"
         << args[0] << " run [ --mode=raw|serial|parallel ] [ --print-result=json ]"
-        << " [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]\n";
+        << " [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]\n"
+        << "example:\n" << args[0] << " run / \n";
 
     return nullptr; // ----->
 }
