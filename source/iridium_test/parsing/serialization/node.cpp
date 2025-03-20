@@ -17,7 +17,7 @@ using iridium::assertExists;
 
 
 //#include <simdjson.h>
-#include <nlohmann/json.hpp>
+//#include <nlohmann/json.hpp>
 namespace iridium {
 namespace parsing {
 namespace serialization {

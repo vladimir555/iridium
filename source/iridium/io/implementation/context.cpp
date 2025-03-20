@@ -24,20 +24,26 @@ CContext::CContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr cons
 
 
 void CContext::pushEvent(Event::TSharedPtr const &event) {
-    m_events->push(event);
+    LOCK_SCOPE();
+
+    auto size = m_events->push(event);
+    LOGT << "push event, size: " << size;
 }
 
 
 std::list<Event::TSharedPtr> CContext::popEvents() {
+    LOCK_SCOPE();
+
     auto events = m_events->pop(false);
     auto now    = std::chrono::system_clock::now();
     
     {
-        LOCK_SCOPE(); // timestamp
+//        LOCK_SCOPE(); // timestamp
         for (auto const &event: events)
             m_map_stream_timestamp[event->stream] = now;
     }
 
+    LOGT << "pop  event, size: " << events.size();
     return events; // ----->
 }
 
@@ -202,7 +208,6 @@ void CContext::remove() {
             m_events->push(Event::create(stream_pipe.first, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
         }
     }
-
 //    for (auto const &stream_pipe: m_map_stream_pipe)
 //        stream_pipe.first->finalize();
 

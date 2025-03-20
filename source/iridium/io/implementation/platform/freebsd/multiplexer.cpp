@@ -115,6 +115,7 @@ std::array<int, 2> CMultiplexer::registerPipe() {
 
 
 void CMultiplexer::initialize() {
+    LOGT << __FUNCTION__ << " ...";
     if (m_kqueue)
         throw std::runtime_error("initialization error: kqueue is not finalized"); // ----->
 
@@ -139,11 +140,13 @@ void CMultiplexer::initialize() {
     } catch (std::exception const &e) {
         throw std::runtime_error("multiplexer initialization error: " + string(e.what())); // ----->
     }
+
+    LOGT << __FUNCTION__ << " OK";
 }
 
 
 void CMultiplexer::finalize() {
-    LOGT << __FUNCTION__ << " 1";
+    LOGT << __FUNCTION__ << " ...";
     if (!m_kqueue)
         throw std::runtime_error("multiplexer finalization error: not initialized"); // ----->
 
@@ -152,13 +155,15 @@ void CMultiplexer::finalize() {
 
     if (result < 0)
         throw std::runtime_error("multiplexer finalization error: " + string(std::strerror(errno))); // ----->
-    LOGT << __FUNCTION__ << " 2";
+    LOGT << __FUNCTION__ << " OK";
 }
 
 
 void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer subscribing error: kqueue is not initialized"); // ----->
+
+    LOGT << "subscribe: " << stream->getHandles();
 
     if (!stream || stream->getHandles().empty())
         return; // ----->
@@ -173,7 +178,6 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
             //        LOGT << "!   map fd: " << fd;
         }
         
-        LOGT << __FUNCTION__ << ", fd: " << fd;
         // todo: optimize uintptr_t
         auto result = write(m_pipe_add[1], &fd, 8);
         
@@ -187,16 +191,15 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
 
-    if (!stream || stream->getHandles().empty()) {
-//        LOGW << "unsubscribe stream with null id";
+    LOGT << "unsubscribe: " << stream->getHandles();
+
+    if (!stream || stream->getHandles().empty())
         return; // ----->
-    }
 
     for (auto const &fd: stream->getHandles()) {
         if (fd <= 0)
             continue; // <---
 
-        LOGT << __FUNCTION__ << ", fd: " << fd;
         auto result = write(m_pipe_del[1], &fd, 8);
         
         if (result < 0)
@@ -220,7 +223,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
          "kevent waiting event error");
 
 //    LOGT << "triggered_event_count: " << triggered_event_count;
-    
+
     LOCK_SCOPE();
 
     bool is_finalized = false;
@@ -238,10 +241,10 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
         uint16_t flags = 0;
         if (triggered_event.ident == m_pipe_add[0])
-            flags = EV_ADD | EV_CLEAR | EV_EOF | EV_ERROR;// | EV_ONESHOT;
+            flags = EV_ADD | EV_CLEAR | EV_EOF | EV_ERROR;
 
         if (triggered_event.ident == m_pipe_del[0])
-            flags = EV_DELETE;// | EV_DISABLE;
+            flags = EV_DELETE | EV_DISABLE;
 
         // if flags are set then update fds and continue
         if (flags/* && triggered_event.filter & EVFILT_WRITE*/) {
@@ -263,6 +266,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
                 if (fd == -1) {
                     is_finalized = true;
+                    LOGT << "is_finalized = " << is_finalized;
                     break; // --->
                 }
 
@@ -299,9 +303,18 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
             if (monitored.empty())
                 continue; // <---
-            
-            assertOK(kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr),
-                "kevent update monitored events error");
+            try {
+                if (!is_finalized)
+                    assertOK(kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr),
+                             "kevent update monitored events error");
+            } catch (...) {
+                LOGT << "m_kqueue  = " << (int64_t)m_kqueue;
+                string s;
+                for (auto const &i: monitored)
+                    s += convert<string>(i.ident) + " ";
+                LOGT << "monitored = " << s;
+                throw;
+            }
 
 //            for (auto const &i: monitored) {
 //                if (i.flags & EV_DELETE) {
@@ -324,7 +337,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 //                    LOGT << "! EOF, id: " << stream->getID();
 //                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
                     LOGT << "push Event::TOperation::EOF, fd: " << stream->getHandles();
-                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::BEGIN));
+                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
                     continue; // <---
                 }
 
@@ -347,25 +360,31 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 //                    convert<string>(triggered_event.ident)); // ----->
             }
         }
+        if (is_finalized)
+            break;
     }
 
     if (is_finalized) {
         close(m_kqueue);
         m_kqueue = 0;
+//        for (auto const &fd_stream: m_map_fd_stream)
+//            events.push_back(Event::create(fd_stream.second, Event::TOperation::CLOSE, Event::TStatus::END));
     }
 
     {
         std::string msg;
-        for (auto const &event: events)
-            msg += event->stream->getHandles().empty() ? 
-                   "" : convert<std::string>(event->stream->getHandles().front())
-                + " " + convert<std::string>(event->operation)
-                + " " + convert<std::string>(event->status);
+        for (auto const &event: events) {
+            msg += "[ ";
+            for (auto const &handle: event->stream->getHandles())
+                msg += convert<std::string>(handle);
+            msg += " ]";
+            msg += " " + convert<std::string>(event->operation)
+                +  " " + convert<std::string>(event->status) + "\n";
+        }
         string fds;
         for (auto const &i: m_map_fd_stream)
             fds += convert<string>(i.first) + " ";
-        LOGT << __func__ << ", size: " << m_map_fd_stream.size() << ", map fds: " << fds;
-//        LOGT << __func__ << ":\n" << msg << "\nmap size: " << m_map_fd_stream.size();
+        LOGT << __func__ << " return events:\n" << msg << "\nevents map: [ " << fds << "]";
     }
 
     return events; // ----->
