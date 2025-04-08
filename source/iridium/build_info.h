@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 
-inline const char* getBuildInfoInline() {
+inline char const *getBuildInfoInline() {
     // Статический буфер
     static char buffer[2048] = {0};
     // Текущая позиция в буфере
