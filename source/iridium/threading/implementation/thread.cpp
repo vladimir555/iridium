@@ -27,6 +27,7 @@ std::chrono::seconds const CThread::DEFAULT_TIMEOUT(30);
 
 CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout)
 :
+    m_is_running        (false),
     m_name              (name),
     m_runnuble          (assertExists(runnuble, "thread '" + name + "' creation error: runnuble is null")),
     m_error_queue_start (CAsyncQueue<string>::create()),
