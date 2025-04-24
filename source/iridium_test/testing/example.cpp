@@ -1,4 +1,5 @@
 #include <iridium/testing/tester.h>
+#include <iridium/testing/mock.h>
 
 
 #include <iridium/system/implementation/process.h>
@@ -42,14 +43,6 @@ TEST(comparing_greater_equal) {
 }
 
 
-//class MockDatabase : public iridium::testing::implementation::CMock, public IDatabase {
-//public:
-//    std::string getUser(int const &id) override {
-//        MOCK_METHOD(this, getUser);
-//        return "Alice";
-//    }
-//};
-
 // This file implements the following syntax:
 //
 //   ON_CALL(mock_object, Method(...))
@@ -70,147 +63,27 @@ TEST(comparing_greater_equal) {
 // where all clauses are optional and WillOnce() can be repeated.
 
 
-#include <tuple>
-#include <functional>
-#include <stdexcept>
-#include <string>
-#include <unordered_map>
-#include <any>
-
-#include "iridium/macros/va_args.h"
-
-
-//class IDatabase {
-//public:
-//    DEFINE_INTERFACE(IDatabase)
-//    virtual std::string getUserName(int const &group_id, int const &user_id) = 0;
-//};
-
-//#define DEFINE_MOCK_CLASS_BEGIN(ClassName) \
-//class Mock##ClassName: public CMock, public ClassName { \
-//public: \
-//    Mock##ClassName() = default; \
-//    virtual ~Mock##ClassName() = default;
-//#define DEFINE_MOCK_CLASS_END() };
-//
-//DEFINE_MOCK_CLASS_BEGIN(IDatabase)
-//    MOCK_METHOD(std::string, getUserName, (int const &group_id, int const &user_id), (override))
-//DEFINE_MOCK_CLASS_END()
-
-
-class CMock {
-public:
-    virtual ~CMock() = default;
-
-    template <typename Signature>
-    void setBehavior(const std::string& name, std::function<Signature> fn) {
-        behaviors_[name] = fn;
-    }
-
-    template <typename Signature, typename... Args>
-    auto call(const std::string& name, Args&&... args) const {
-        auto it = behaviors_.find(name);
-        if (it == behaviors_.end()) throw std::runtime_error("Unexpected call: " + name);
-        return std::any_cast<std::function<Signature>>(it->second)(std::forward<Args>(args)...);
-    }
-
-    template <typename Signature>
-    class Behavior {
-    public:
-        Behavior(CMock& mock, std::string name)
-            : mock_(mock), name_(std::move(name)) {}
-
-        Behavior& operator=(std::function<Signature> fn) {
-            mock_.setBehavior<Signature>(name_, std::move(fn));
-            return *this;
-        }
-
-        template <typename Lambda>
-        Behavior& operator=(Lambda&& lambda) {
-            std::function<Signature> fn = std::forward<Lambda>(lambda);
-            mock_.setBehavior<Signature>(name_, std::move(fn));
-            return *this;
-        }
-
-    private:
-        CMock& mock_;
-        std::string name_;
-    };
-
-private:
-    mutable std::unordered_map<std::string, std::any> behaviors_;
-};
-
-
-#define DEFINE_MOCK_METHOD_3(ReturnType, MethodName, Spec) \
-    ReturnType MethodName() Spec override { \
-        return this->call<ReturnType()>(#MethodName); \
-    }
-
-#define DEFINE_MOCK_METHOD_4(ReturnType, MethodName, A1, Spec) \
-    ReturnType MethodName(A1 a1) Spec override { \
-        return this->call<ReturnType(A1)>(#MethodName, a1); \
-    }
-
-#define DEFINE_MOCK_METHOD_5(ReturnType, MethodName, A1, A2, Spec) \
-public: \
-    ReturnType MethodName(A1 a1, A2 a2) Spec override { \
-        return this->call<ReturnType(A1, A2)>(#MethodName, a1, a2); \
-    }
-
-#define DEFINE_MOCK_METHOD_6(ReturnType, MethodName, A1, A2, A3, Spec) \
-    ReturnType MethodName(A1 a1, A2 a2, A3 a3) Spec override { \
-        return this->call<ReturnType(A1, A2, A3)>(#MethodName, a1, a2, a3); \
-    }
-
-#define DEFINE_MOCK_METHOD_7(ReturnType, MethodName, A1, A2, A3, A4, Spec) \
-    ReturnType MethodName(A1 a1, A2 a2, A3 a3, A4 a4) Spec override { \
-        return this->call<ReturnType(A1, A2, A3, A4)>(#MethodName, a1, a2, a3, a4); \
-    }
-
-#define DEFINE_MOCK_METHOD(...) \
-    dMACRO_CHOOSER(DEFINE_MOCK_METHOD, __VA_ARGS__)(__VA_ARGS__)
-
-
-#define DEFINE_MOCK_CLASS(Interface) \
-class Mock##Interface: public CMock, public Interface
-
-
 class IDatabase {
 public:
     virtual ~IDatabase() = default;
     virtual std::string getUserName(int const &group_id, int const &user_id) = 0;
 };
 
-//class MockIDatabase : public CMock, public IDatabase
 DEFINE_MOCK_CLASS(IDatabase) {
-    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &, );
+    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
 };
 
 
-//#define DEFINE_MOCK_BEHAVIOR(mock_object, mockMethod, TResult, ...) \
-//mock_object.setBehavior<TResult(__VA_ARGS__)>(#mockMethod, [] (__VA_ARGS__)
-
-#define DEFINE_MOCK_BEHAVIOR(mock_object, mockMethod, TResult, ...) \
-    CMock::Behavior<TResult(__VA_ARGS__)>((mock_object), #mockMethod) = [&] (__VA_ARGS__)
-
-
 TEST(mock) {
-    MockIDatabase mock;
-//    mock.setBehavior<std::string(int const &group_id, int const &user_id)>("getUserName",
-//        [] (int const &group_id, int const &user_id) {
-//            return "Alice";
-//        }
-//    );
-    DEFINE_MOCK_BEHAVIOR(mock, getUserName, std::string, int const &group_id, int const &user_id) {
+    MockIDatabase mock_db;
+    DEFINE_MOCK_BEHAVIOR(std::string, getUserName, mock_db, int const &group_id, int const &user_id) {
         return "Alice";
     };
 
-    auto result = mock.getUserName(2, 3);
-    LOGT << result;
+    auto result = mock_db.getUserName(2, 3);
+
+    ASSERT("Alice", equal, result);
 }
-
-
 
 
 //TEST(uncached_throw) {

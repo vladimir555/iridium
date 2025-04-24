@@ -21,7 +21,7 @@ namespace io {
 
 URI::TIPv4::TIPv4()
 :
-std::array<uint8_t, 4>{ 0 }
+    std::array<uint8_t, 4>{ 0 }
 {}
 
 
@@ -59,9 +59,9 @@ string unmask(string const &source) {
 
 
 void extractTokens(
-                   std::string const &delimiter,
-                   std::string       &source,
-                   std::string       &argument)
+   std::string const &delimiter,
+   std::string       &source,
+   std::string       &argument)
 {
     if (source.empty())
         return;
