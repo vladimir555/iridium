@@ -327,7 +327,7 @@ TEST(parse_json) {
         ASSERT("array"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
-    
+
     ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 ]"), std::exception);
     ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 }"), std::exception);
     ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2"),   std::exception);
@@ -353,6 +353,12 @@ TEST(parse_json) {
 "          ]\n"
 "      }\n"
 "}\n");
+
+    node = parser->parse(
+"{ \"value\":"
+"2110\t"
+"}");
+
 }
 
 

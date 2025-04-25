@@ -433,7 +433,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
 
             value += ch;
         } else {
-            if (checkOneOf(ch, ' ', '\n', '\r'))
+            if (checkOneOf(ch, ' ', '\n', '\r', '\t'))
                 continue; // <---
 
             if (ch == '"') {
@@ -507,7 +507,8 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                     // true, false, int, float allowed without quotes
                     if (!is_quoted_value &&
                         !checkOneOf(value, TRUE_, FALSE_, NULL_) &&
-                        value.find_first_not_of("0.123456789") != string::npos)
+                        // todo: check '-' on first symbol only
+                        value.find_first_not_of("-0.123456789") != string::npos)
                     {
                         throw std::runtime_error(
                             string("json parsing error: unquoted value '") + value + "' at " +

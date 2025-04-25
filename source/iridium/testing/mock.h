@@ -77,8 +77,6 @@ public:
         ///
         template<typename TLambda>
         Behavior &operator = (TLambda const &&l);
-        ///
-//        Behavior &operator , (Expectation const &) { return *this; };
 
     private:
         Mock               &m_mock;
