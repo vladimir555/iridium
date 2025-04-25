@@ -43,29 +43,9 @@ TEST(comparing_greater_equal) {
 }
 
 
-// This file implements the following syntax:
-//
-//   ON_CALL(mock_object, Method(...))
-//     .With(...) ?
-//     .WillByDefault(...);
-//
-// where With() is optional and WillByDefault() must appear exactly
-// once.
-//
-//   EXPECT_CALL(mock_object, Method(...))
-//     .With(...) ?
-//     .Times(...) ?
-//     .InSequence(...) *
-//     .WillOnce(...) *
-//     .WillRepeatedly(...) ?
-//     .RetiresOnSaturation() ? ;
-//
-// where all clauses are optional and WillOnce() can be repeated.
-
-
 class IDatabase {
 public:
-    virtual ~IDatabase() = default;
+    DEFINE_INTERFACE(IDatabase)
     virtual std::string getUserName(int const &group_id, int const &user_id) = 0;
 };
 
@@ -74,15 +54,32 @@ DEFINE_MOCK_CLASS(IDatabase) {
 };
 
 
+class CAbstractDatabase: public IDatabase {
+public:
+    DEFINE_IMPLEMENTATION(CAbstractDatabase)
+    CAbstractDatabase(std::string const &s) {}
+    std::string getUserName(int const &group_id, int const &user_id) override {
+        return "usrt: " + convert<std::string>(group_id) + " " + convert<std::string>(user_id) + " " + getProprty();
+    }
+    virtual std::string getProprty() = 0;
+};
+
+
+DEFINE_MOCK_CLASS(CAbstractDatabase) {
+    DEFINE_MOCK_CONSTRUCTOR(CAbstractDatabase)
+    DEFINE_MOCK_METHOD(std::string, getProprty);
+};
+
+
 TEST(mock) {
     MockIDatabase mock_db;
     DEFINE_MOCK_BEHAVIOR(std::string, getUserName, mock_db, int const &group_id, int const &user_id) {
         return "Alice";
     };
-
     auto result = mock_db.getUserName(2, 3);
-
     ASSERT("Alice", equal, result);
+
+    MockCAbstractDatabase mock_adb("aaa");
 }
 
 
