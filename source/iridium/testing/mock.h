@@ -16,43 +16,79 @@ namespace iridium {
 namespace testing {
 
 
-//class IMock {
-//public:
-//    DEFINE_INTERFACE(IMock);
+// This file implements the following syntax:
 //
-//    virtual void setupBehavior  (std::string const &method_name, std::function<void()> const &behavior) = 0;
-//    virtual void callMethod     (std::string const &method_name) = 0;
-//    virtual void verifyCall     (std::string const &method_name, int const &expected_calls = 1) const = 0;
-//};
+//   ON_CALL(mock_object, Method(...))
+//     .With(...) ?
+//     .WillByDefault(...);
+//
+// where With() is optional and WillByDefault() must appear exactly
+// once.
+//
+//   EXPECT_CALL(mock_object, Method(...))
+//     .With(...) ?
+//     .Times(...) ?
+//     .InSequence(...) *
+//     .WillOnce(...) *
+//     .WillRepeatedly(...) ?
+//     .RetiresOnSaturation() ? ;
+//
+// where all clauses are optional and WillOnce() can be repeated.
 
 
 class Mock {
 public:
     virtual ~Mock() = default;
-//    DEFINE_IMPLEMENTATION(Mock)
 
     template<typename TSignature, typename ... TArgs>
     auto call(std::string const &name, TArgs && ... args) const;
 
-    template<typename TSignature>
-    void setBehavior(std::string const &name, std::function<TSignature> const &&f);
+//    class Expectation {
+//    public:
+//        Expectation() = default;
+//        virtual ~Expectation() = default;
 
+//        Expectation &with(std::function<bool(std::vector<std::any> const&)> pred);
+//        Expectation &times(int expected_count = 1);
+//        Expectation &inSequence();
+//        Expectation &willOnce(std::function<std::any(std::vector<std::any>)> f);
+//        Expectation &willRepeatedly(std::function<std::any(std::vector<std::any>)> f);
+//        Expectation &retiresOnSaturation();
+
+//        bool  checkCall(std::vector<std::any> const& args) const;
+//        std::any invoke(std::vector<std::any> const& args);
+//
+//    private:
+//        friend class Mock;
+//        mutable int     actual_calls = 0;
+//        int             expected_calls = -1;
+//        bool            retire = false;
+//
+//        std::function<bool(std::vector<std::any> const&)>           arg_matcher;
+//        std::vector<std::function<std::any(std::vector<std::any>)>> actions_once;
+//        std::function<std::any(std::vector<std::any>)>              action_repeated;
+//    };
+
+    friend class Behavior;
     template<typename TSignature>
     class Behavior {
     public:
         Behavior(Mock &mock, std::string const &name);
-
-        Behavior &operator = (std::function<TSignature> const &&f);
-
+        ///
         template<typename TLambda>
         Behavior &operator = (TLambda const &&l);
+        ///
+//        Behavior &operator , (Expectation const &) { return *this; };
 
     private:
-        Mock              &m_mock;
+        Mock               &m_mock;
         std::string const  &m_name;
     };
 
 private:
+    template<typename TSignature>
+    void setBehavior(std::string const &name, std::function<TSignature> const &&f);
+
     mutable std::unordered_map<std::string, std::any> m_map_name_behavior;
 };
 
@@ -85,20 +121,39 @@ Mock::Behavior<TSignature>::Behavior(Mock &mock, std::string const &name)
 {}
 
 
-template<typename TSignature>
-Mock::Behavior<TSignature> &Mock::Behavior<TSignature>::operator = (std::function<TSignature> const &&f)
-{
-//            mock_.setBehavior<TSignature>(name_, std::move(f));
-    m_mock.setBehavior<TSignature>(m_name, f);
-    return *this;
-}
+//Mock::Expectation &Mock::Expectation::with() {
+//    return *this;
+//}
+//
+//
+//Mock::Expectation &Mock::Expectation::times() {
+//    return *this;
+//}
+//
+//
+//Mock::Expectation &Mock::Expectation::inSequence() {
+//    return *this;
+//}
+//
+//
+//Mock::Expectation &Mock::Expectation::willOnce() {
+//    return *this;
+//}
+//
+//
+//Mock::Expectation &Mock::Expectation::willRepeatedly() {
+//    return *this;
+//}
+
+
+//Mock::Expectation &Mock::Expectation::retiresOnSaturation() {
+//    return *this;
+//}
 
 
 template<typename TSignature>
 template<typename TLambda>
 Mock::Behavior<TSignature> &Mock::Behavior<TSignature>::operator = (TLambda const &&l) {
-//            std::function<TSignature> f = std::forward<TLambda>(l);
-//            m_mock.setBehavior<TSignature>(m_name, std::move(f));
     m_mock.setBehavior<TSignature>(m_name, l);
     return *this;
 }
@@ -172,8 +227,16 @@ public: \
 #define DEFINE_MOCK_CLASS(Interface) \
 class Mock##Interface: public ::iridium::testing::Mock, public Interface
 
+#define DEFINE_MOCK_CONSTRUCTOR(Interface) \
+public: \
+template<typename ... TArgs> \
+Mock##Interface(TArgs ... args): Interface(args ...) {};
+
 #define DEFINE_MOCK_BEHAVIOR(TResult, mockMethod, mock_object, ...) \
     ::iridium::testing::Mock::Behavior<TResult(__VA_ARGS__)>(mock_object, #mockMethod) = [&] (__VA_ARGS__)
+
+#define DEFINE_MOCK_EXPECTATION() \
+    , ::iridium::testing::Mock::Expectation()
 
 
 #endif // HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2
