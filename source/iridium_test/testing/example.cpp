@@ -72,14 +72,14 @@ DEFINE_MOCK_CLASS(CAbstractDatabase) {
 
 
 TEST(mock) {
-    MockIDatabase mock_db;
-    DEFINE_MOCK_BEHAVIOR(std::string, getUserName, mock_db, int const &group_id, int const &user_id) {
+    IDatabaseMock db_mock;
+    DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
         return "Alice";
     };
-    auto result = mock_db.getUserName(2, 3);
+    auto result = db_mock.getUserName(2, 3);
     ASSERT("Alice", equal, result);
 
-    MockCAbstractDatabase mock_adb("aaa");
+    CAbstractDatabaseMock adb_mock("aaa");
 }
 
 

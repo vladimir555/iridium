@@ -223,18 +223,18 @@ public: \
     dMACRO_CHOOSER(DEFINE_MOCK_METHOD_CONST, __VA_ARGS__)(__VA_ARGS__)
 
 #define DEFINE_MOCK_CLASS(Interface) \
-class Mock##Interface: public ::iridium::testing::Mock, public Interface
+class Interface##Mock: public ::iridium::testing::Mock, public Interface
 
 #define DEFINE_MOCK_CONSTRUCTOR(Interface) \
 public: \
 template<typename ... TArgs> \
-Mock##Interface(TArgs ... args): Interface(args ...) {};
+Interface##Mock(TArgs ... args): Interface(args ...) {};
 
 #define DEFINE_MOCK_BEHAVIOR(TResult, mockMethod, mock_object, ...) \
     ::iridium::testing::Mock::Behavior<TResult(__VA_ARGS__)>(mock_object, #mockMethod) = [&] (__VA_ARGS__)
 
-#define DEFINE_MOCK_EXPECTATION() \
-    , ::iridium::testing::Mock::Expectation()
+//#define DEFINE_MOCK_EXPECTATION() \
+//    , ::iridium::testing::Mock::Expectation()
 
 
 #endif // HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2
