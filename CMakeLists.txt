@@ -90,15 +90,15 @@ include_directories(
 #add_library(${PROJECT_NAME} STATIC ${SOURCE})
 add_library(${PROJECT_NAME} SHARED ${SOURCE})
 
-install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
-install(
-    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}"
-    DESTINATION "include"
-    FILES_MATCHING PATTERN "*.h"
-)
+#install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/lib)
+#install(
+#    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}"
+#    DESTINATION "include"
+#    FILES_MATCHING PATTERN "*.h"
+#)
 
 # iridium test
-set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
+set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}/source
@@ -106,11 +106,11 @@ include_directories(
 )
 
 file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}_test/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.cpp
 )
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}_test FILES ${SOURCE_TEST})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test FILES ${SOURCE_TEST})
 
 add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
 
