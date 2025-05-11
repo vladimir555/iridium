@@ -13,16 +13,16 @@ namespace macros {
 
 
 // --- поддержка до 7 аргументов включительно
-#define dFUNC_CHOOSER_7(_f1, _f2, _f3, _f4, _f5, _f6, _f7, N, ... ) N
+#define DEFINE_FUNC_CHOOSER_7(_f1, _f2, _f3, _f4, _f5, _f6, _f7, N, ... ) N
 
-#define dFUNC_RECOMPOSER(argsWithParentheses)\
-    dFUNC_CHOOSER_7 argsWithParentheses
+#define DEFINE_FUNC_RECOMPOSER(argsWithParentheses)\
+DEFINE_FUNC_CHOOSER_7 argsWithParentheses
 
-#define dMACRO_CHOOSER(target_, ...)\
-    dCHOOSE_FROM_ARG_COUNT(target_, target_##_NO_ARG_EXPANDER __VA_ARGS__ ())
+#define DEFINE_MACRO_CHOOSER(target_, ...)\
+DEFINE_CHOOSE_FROM_ARG_COUNT(target_, target_##_NO_ARG_EXPANDER __VA_ARGS__ ())
 
-#define dCHOOSE_FROM_ARG_COUNT(arg_, ...) \
-    dFUNC_RECOMPOSER((__VA_ARGS__, arg_##_7, arg_##_6, arg_##_5, arg_##_4, arg_##_3, arg_##_2, arg_##_1, ))
+#define DEFINE_CHOOSE_FROM_ARG_COUNT(arg_, ...) \
+DEFINE_FUNC_RECOMPOSER((__VA_ARGS__, arg_##_7, arg_##_6, arg_##_5, arg_##_4, arg_##_3, arg_##_2, arg_##_1, ))
 
 // -----
 

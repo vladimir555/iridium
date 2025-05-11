@@ -1,3 +1,4 @@
+#define DEFINE_MOCK_CREATE
 #include <iridium/testing/tester.h>
 #include <iridium/testing/mock.h>
 
@@ -46,40 +47,125 @@ TEST(comparing_greater_equal) {
 class IDatabase {
 public:
     DEFINE_INTERFACE(IDatabase)
-    virtual std::string getUserName(int const &group_id, int const &user_id) = 0;
-};
-
-DEFINE_MOCK_CLASS(IDatabase) {
-    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
+    virtual std::string getUserName(int const &group_id, int   const &user_id) = 0;
+    virtual std::string getUserName(int const &group_id, float const &user_id) = 0;
 };
 
 
-class CAbstractDatabase: public IDatabase {
+namespace some_namespace {
+class CDatabase: public IDatabase {
 public:
-    DEFINE_IMPLEMENTATION(CAbstractDatabase)
-    CAbstractDatabase(std::string const &s) {}
+    CDatabase() = default;
+    DEFINE_IMPLEMENTATION(CDatabase)
+//    virtual ~CDatabase() override = default;
+//    template<typename... Args>
+//    static auto create(Args&&... args) {
+//        return ::iridium::testing::MockFactory<CDatabase>::create(std::forward<Args>(args)...);
+//    }
     std::string getUserName(int const &group_id, int const &user_id) override {
-        return "usrt: " + convert<std::string>(group_id) + " " + convert<std::string>(user_id) + " " + getProprty();
+        return "CDatabase: getUserName " +
+            convert<std::string>(group_id) + " " +
+            convert<std::string>(user_id);
     }
-    virtual std::string getProprty() = 0;
+    std::string getUserName(int const &group_id, float const &user_id) override {
+        return getUserName(group_id, static_cast<int>(user_id)) + " f";
+    }
+};
+}
+
+
+DEFINE_MOCK_CLASS_BEGIN(IDatabase)
+    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
+    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, float const &);
+DEFINE_MOCK_CLASS_END(IDatabase)
+
+
+using CDatabase = some_namespace::CDatabase;
+
+
+DEFINE_MOCK_CLASS_BEGIN(CDatabase)
+    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
+DEFINE_MOCK_CLASS_END(CDatabase)
+
+
+class CDatabaseAdapter: public IDatabase {
+public:
+    DEFINE_IMPLEMENTATION(CDatabaseAdapter)
+    CDatabaseAdapter(std::string const &name)
+    :
+        m_name      (name),
+        m_database  (some_namespace::CDatabase::create())
+    {}
+    std::string getUserName(int const &group_id, int const &user_id) override {
+        return "adapted by '" + m_name + "': " + m_database->getUserName(group_id, user_id) + " ";// + getProperty();
+    }
+
+    std::string getUserName(int const &group_id, float const &user_id) override {
+        return getUserName(group_id, static_cast<int>(user_id));
+    }
+
+//    virtual std::string getProperty() = 0;
+private:
+    std::string           m_name;
+    IDatabase::TSharedPtr m_database;
 };
 
 
-DEFINE_MOCK_CLASS(CAbstractDatabase) {
-    DEFINE_MOCK_CONSTRUCTOR(CAbstractDatabase)
-    DEFINE_MOCK_METHOD(std::string, getProprty);
-};
+//DEFINE_MOCK_CLASS_BEGIN(CDatabaseAdapter)
+//    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
+//DEFINE_MOCK_CLASS_END(CDatabaseAdapter)
 
 
 TEST(mock) {
+    {
+        CDatabaseMock db_mock;
+//        CDatabaseMock::create();
+//        ASSERT(CDatabaseMock::create(), std::exception);
+    }
     IDatabaseMock db_mock;
     DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
-        return "Alice";
+        return "Alice int";
     };
-    auto result = db_mock.getUserName(2, 3);
-    ASSERT("Alice", equal, result);
+    DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, float const &user_id) {
+        return "Alice float";
+    };
 
-    CAbstractDatabaseMock adb_mock("aaa");
+//    LOGT << typeid(std::string (IDatabase::*)(int const &, int const &)).name();
+//    LOGT << typeid(std::string (IDatabase::*)(int const &, float const &)).name();
+
+    auto result_int = db_mock.getUserName(1, 2);
+    ASSERT("Alice int", equal, result_int);
+
+    auto result_float = db_mock.getUserName(1, 2.0f);
+    ASSERT("Alice float", equal, result_float);
+
+    {
+        CDatabaseMock db_mock;
+
+        DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
+            return "Alice int";
+        };
+
+        CDatabaseAdapter dba("aaa");
+        auto result = dba.getUserName(3, 4);
+        LOGT << result;
+    }
+
+//
+//    DEFINE_MOCK_BEHAVIOR(std::string, getProperty, mock_adb) {
+//        return "property";
+//    };
+//
+//    mock_adb.getProperty();
+//
+//    DEFINE_MOCK_SEQUENCE(1);
+//    DEFINE_MOCK_SEQUENCE_EXPECTATION(1, mock_adb, getProperty);
+////    sequence_1.addExpectation(&CAbstractDatabaseMock::getProperty, "CAbstractDatabaseMock::getProperty", __FILE__, __LINE__);
+//
+//    using method_type = decltype(&CAbstractDatabaseMock::getProperty);
+//
+//    mock_adb.getProperty();
+//    mock_adb.getUserName(1, 2);
 }
 
 

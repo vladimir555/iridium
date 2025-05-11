@@ -363,7 +363,7 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 
 #define DEFINE_ROOT_NODE_BEGIN(...) \
-    dMACRO_CHOOSER(DEFINE_ROOT_NODE_BEGIN, __VA_ARGS__)(__VA_ARGS__)
+    DEFINE_MACRO_CHOOSER(DEFINE_ROOT_NODE_BEGIN, __VA_ARGS__)(__VA_ARGS__)
 
 
 #define DEFINE_ROOT_NODE_END() \
@@ -400,7 +400,7 @@ std::string convertCamelToSplittedBySymbol(std::string const &camel, char const 
 
 
 #define DEFINE_ATTRIBUTE(...) \
-    dMACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
+DEFINE_MACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
 
 
 // todo: bugfix node name, e g NameList instead Name
