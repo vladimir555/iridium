@@ -119,7 +119,8 @@ private:
 TEST(mock) {
     {
         CDatabaseMock db_mock;
-//        CDatabaseMock::create();
+        CDatabaseMock::create();
+        CDatabaseMock::create();
 //        ASSERT(CDatabaseMock::create(), std::exception);
     }
     IDatabaseMock db_mock;
