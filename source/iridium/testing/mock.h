@@ -311,14 +311,16 @@ public: \
 #define DEFINE_MOCK_METHOD_CONST(...) \
     DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD_CONST, __VA_ARGS__)(__VA_ARGS__)
 
-#define DEFINE_MOCK_CONSTRUCTOR(Interface) \
-public: \
-template<typename ... TArgs> \
-Interface##Mock(TArgs ... args): Interface(args ...) {};
+//#define DEFINE_MOCK_CONSTRUCTOR(Interface) \
+//public: \
+//template<typename ... TArgs> \
+//Interface##Mock(TArgs ... args): Interface(args ...) {};
 
 #define DEFINE_MOCK_CLASS_BEGIN(Interface) \
 class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interface> { \
-DEFINE_MOCK_CONSTRUCTOR(Interface)
+public: \
+template<typename ... TArgs> \
+Interface##Mock(TArgs ... args): Interface(args ...) {};
 
 #define DEFINE_MOCK_CLASS_END(Interface) \
 }; \
