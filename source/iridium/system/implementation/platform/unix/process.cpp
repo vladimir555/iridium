@@ -124,13 +124,22 @@ void CProcessStream::initialize() {
            "posix_spawn_file_actions_addclose"
         );
         
-        char *argv[1 + m_args.size() + 1];
+//        char *argv[1 + m_args.size() + 1];
+//        argv[0] = (char *)m_app.data();
+//        for (size_t i = 0; i < m_args.size(); i++)
+//            argv[i + 1] = (char *)m_args[i].data();
+//
+//        argv[1 + m_args.size()] = nullptr;
+
+
+        std::vector<char *> argv(1 + m_args.size() + 1);
         argv[0] = (char *)m_app.data();
         for (size_t i = 0; i < m_args.size(); i++)
             argv[i + 1] = (char *)m_args[i].data();
-        
+
         argv[1 + m_args.size()] = nullptr;
-        
+
+
         //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
         
         //#ifdef POSIX_SPAWN_SETSID
@@ -148,7 +157,7 @@ void CProcessStream::initialize() {
         
         assertOK(
             //        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
-            posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv, environ),
+            posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv.data(), environ),
            "posix_spawnp"
         );
         
