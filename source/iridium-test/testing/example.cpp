@@ -70,6 +70,7 @@ public:
     std::string getUserName(int const &group_id, float const &user_id) override {
         return getUserName(group_id, static_cast<int>(user_id)) + " f";
     }
+    void method() const {}
 };
 }
 
@@ -85,6 +86,7 @@ using CDatabase = some_namespace::CDatabase;
 
 DEFINE_MOCK_CLASS_BEGIN(CDatabase)
     DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
+    DEFINE_MOCK_METHOD_CONST(void, method);
 DEFINE_MOCK_CLASS_END(CDatabase)
 
 
