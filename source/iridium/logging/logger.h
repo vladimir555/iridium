@@ -177,7 +177,7 @@ LogStream const & LogStream::operator << (std::list<TValue> const &values) const
     bool is_first = true;
     for (auto const &value: values)
         *this << (is_first ? "" : ", ") << value, is_first = false;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -188,7 +188,7 @@ LogStream const &LogStream::operator << (std::vector<TValue> const &values) cons
     bool is_first = true;
     for (auto const &value: values)
         *this << (is_first ? "" : ", ") << value, is_first = false;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -199,7 +199,7 @@ LogStream const &LogStream::operator << (std::deque<TValue> const &values) const
     bool is_first = true;
     for (auto const &value: values)
         *this << (is_first ? "" : ", ") << value, is_first = false;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -210,7 +210,7 @@ LogStream const &LogStream::operator << (std::array<TValue, size> const &values)
     bool is_first = true;
     for (auto const &value: values)
         *this << (is_first ? "" : ", ") << value, is_first = false;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -221,7 +221,7 @@ LogStream const &LogStream::operator << (std::set<TValue> const &values) const {
     bool is_first = true;
     for (auto const &value: values)
         *this << (is_first ? "" : ", ") << value, is_first = false;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -232,7 +232,7 @@ LogStream const &LogStream::operator << (std::unordered_set<TValue> const &value
     bool is_first = true;
     for (auto const &value: values)
         *this << (is_first ? "" : ", ") << value, is_first = false;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -243,7 +243,7 @@ LogStream const &LogStream::operator << (std::map<TKey, TValue> const &m) const 
     bool is_first = true;
     for (auto const &item: m)
         *this << (is_first ? "" : ", ") << item.first << ": " << item.second << " ", is_first = false;;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 
@@ -254,7 +254,7 @@ LogStream const &LogStream::operator << (std::unordered_map<TKey, TValue> const 
     bool is_first = true;
     for (auto const &item: m)
         *this << (is_first ? "" : ", ") << item.first << ": " << item.second << " ", is_first = false;;
-    *this << "]";
+    *this << " ]";
     return *this;
 }
 

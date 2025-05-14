@@ -119,6 +119,8 @@ private:
 
 
 TEST(mock) {
+    std::vector<double> v{1.1, 1.2};
+    LOGT << v;
     {
         CDatabaseMock db_mock;
         CDatabaseMock::create();
