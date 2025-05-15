@@ -70,7 +70,9 @@ public:
     std::string getUserName(int const &group_id, float const &user_id) override {
         return getUserName(group_id, static_cast<int>(user_id)) + " f";
     }
-    void method() const {}
+    virtual std::string doSomething() {
+        return getUserName(5, 55) + " soSomething";
+    }
 };
 }
 
@@ -86,7 +88,7 @@ using CDatabase = some_namespace::CDatabase;
 
 DEFINE_MOCK_CLASS_BEGIN(CDatabase)
     DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
-    DEFINE_MOCK_METHOD_CONST(void, method);
+    DEFINE_MOCK_METHOD(std::string, doSomething);
 DEFINE_MOCK_CLASS_END(CDatabase)
 
 
@@ -119,13 +121,23 @@ private:
 
 
 TEST(mock) {
-    std::vector<double> v{1.1, 1.2};
-    LOGT << v;
     {
         CDatabaseMock db_mock;
-        CDatabaseMock::create();
-        CDatabaseMock::create();
+
+        DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
+            return "Alice int";
+        };
+
+        DEFINE_MOCK_BEHAVIOR(std::string, doSomething, db_mock) {
+            return db_mock.getUserName(5, 55) + " doSomething";
+        };
+
+        LOGT << db_mock.getUserName(1, 2);
+        LOGT << db_mock.doSomething();
+
 //        ASSERT(CDatabaseMock::create(), std::exception);
+
+        return;
     }
     IDatabaseMock db_mock;
     DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
@@ -147,9 +159,9 @@ TEST(mock) {
     {
         CDatabaseMock db_mock;
 
-        DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
-            return "Alice int";
-        };
+//        DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &group_id, int const &user_id) {
+//            return "Alice int";
+//        };
 
         CDatabaseAdapter dba("aaa");
         auto result = dba.getUserName(3, 4);

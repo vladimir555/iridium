@@ -153,37 +153,39 @@ namespace testing {
 //    void setBehavior(std::string const &name, std::function<TSignature> const &&f) {}
 //};
 
-
 template<typename TClass>
 class Mock {
 public:
-    Mock() {
-        MockRegistry<TClass>::add(dynamic_cast<TClass * const>(this));
-    }
+    Mock();
     virtual ~Mock() = default;
 
+    using TOriginalClass = TClass;
+
     friend class Behavior;
-    template<typename TSignature>
-    class Behavior {
+
+    template<typename TResult, typename ... TArgs>
+    class Behavior;
+
+    template<typename TResult, typename ... TArgs>
+    class Behavior<TResult(TOriginalClass::*)(TArgs...)> {
     public:
         Behavior(Mock &mock, std::type_info const *method);
+
         template<typename TLambda>
-        Behavior &operator = (TLambda const &&l);
+        Behavior &operator=(TLambda &&l);
 
     private:
-        Mock                   &m_mock;
-        std::type_info const   *m_method;
+        Mock &m_mock;
+        std::type_info const *m_method;
     };
 
 public:
     template<typename TSignature, typename ... TArgs>
     auto call(std::type_info const *method, TArgs && ... args) const;
 
-    using TClassInternal = TClass;
-
 private:
-    template<typename TSignature>
-    void setBehavior(std::type_info const *method, std::function<TSignature> const &&f);
+    template<typename TResult, typename ... TArgs>
+    void setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f);
 
     mutable std::unordered_map<std::type_info const *, std::any>   m_map_name_behavior;
     mutable std::unordered_map<void *, std::type_info const *>     m_map_behavior_name;
@@ -195,13 +197,18 @@ private:
 
 
 template<typename TClass>
+Mock<TClass>::Mock() {
+    MockRegistry<TClass>::add(dynamic_cast<TClass * const>(this));
+}
+
+
+template<typename TClass>
 template<typename TSignature, typename ... TArgs>
 auto Mock<TClass>::call(std::type_info const *method, TArgs && ... args) const {
 //    LOGT << "call: " << method->name();
     auto i = m_map_name_behavior.find(method);
-    if (i == m_map_name_behavior.end()) {
+    if (i == m_map_name_behavior.end())
         throw std::runtime_error("mock calling error: unexpected call '" + std::string(method->name()) + "'");
-    }
 
     using TMethod = std::function<TSignature>;
 
@@ -215,28 +222,26 @@ auto Mock<TClass>::call(std::type_info const *method, TArgs && ... args) const {
 
 
 template<typename TClass>
-template<typename TSignature>
-void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TSignature> const &&f) {
+template<typename TResult, typename ... TArgs>
+void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f) {
     m_map_name_behavior[method] = f;
 }
 
 
 template<typename TClass>
-template<typename TSignature>
-Mock<TClass>::Behavior<TSignature>::Behavior(Mock &mock, std::type_info const *method)
+template<typename TResult, typename ... TArgs>
+Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::Behavior(Mock &mock, std::type_info const *method)
 :
     m_mock  (mock),
     m_method(method)
-{
-//    LOGT << "add behavior: " << method->name();
-}
+{}
 
 
 template<typename TClass>
-template<typename TSignature>
+template<typename TResult, typename ... TArgs>
 template<typename TLambda>
-typename Mock<TClass>::template Behavior<TSignature> &Mock<TClass>::Behavior<TSignature>::operator = (TLambda const &&l) {
-    m_mock.setBehavior<TSignature>(m_method, l);
+typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)> &Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::operator = (TLambda &&l) {
+    m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
 }
 
@@ -245,54 +250,40 @@ typename Mock<TClass>::template Behavior<TSignature> &Mock<TClass>::Behavior<TSi
 } // iridium
 
 
+//static_assert(std::is_same< \
+//    decltype(static_cast<TResult (TOriginalClass::*)(A1, A2)>(&TOriginalClass::methodName)), \
+//    TResult (TOriginalClass::*)(A1, A2) \
+//>::value, "Method does not override base class method!");
+
+
 #define DEFINE_MOCK_METHOD_2(TResult, methodName) \
 public: \
-    TResult methodName() { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)()>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)() \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult()>(&typeid(TResult (TClassInternal::*)())); \
+    TResult methodName() override { \
+        return this->call<TResult()>(&typeid(TResult (TOriginalClass::*)())); \
     }
 
 #define DEFINE_MOCK_METHOD_3(TResult, methodName, A1) \
 public: \
-    TResult methodName(A1 a1) { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1)>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1) \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1)>(&typeid(TResult (TClassInternal::*)(A1)), a1); \
+    TResult methodName(A1 a1) override { \
+        return this->call<TResult(A1)>(&typeid(TResult (TOriginalClass::*)(A1)), a1); \
     }
 
 #define DEFINE_MOCK_METHOD_4(TResult, methodName, A1, A2) \
 public: \
-    TResult methodName(A1 a1, A2 a2) { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1, A2)>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1, A2) \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1, A2)>(&typeid(TResult (TClassInternal::*)(A1, A2)), a1, a2); \
+    TResult methodName(A1 a1, A2 a2) override { \
+        return this->call<TResult(A1, A2)>(&typeid(TResult (TOriginalClass::*)(A1, A2)), a1, a2); \
     }
 
 #define DEFINE_MOCK_METHOD_5(TResult, methodName, A1, A2, A3) \
 public: \
-    TResult methodName(A1 a1, A2 a2, A3 a3) { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1, A2, A3)>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1, A2, A3) \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TClassInternal::*)(A1, A2, A3)), a1, a2, a3); \
+    TResult methodName(A1 a1, A2 a2, A3 a3) override { \
+        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3)), a1, a2, a3); \
     }
 
 #define DEFINE_MOCK_METHOD_6(TResult, methodName, A1, A2, A3, A4) \
 public: \
-    TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1, A2, A3, A4)>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1, A2, A3, A4) \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TClassInternal::*)(A1, A2, A3, A4)), a1, a2, a3, a4); \
+    TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) override { \
+        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3, A4)), a1, a2, a3, a4); \
     }
 
 #define DEFINE_MOCK_METHOD(...) \
@@ -300,61 +291,36 @@ public: \
 
 #define DEFINE_MOCK_METHOD_CONST_2(TResult, methodName) \
 public: \
-    TResult methodName() const { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)() const>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)() const \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult()>(&typeid(TResult (TClassInternal::*)())); \
+    TResult methodName() const override { \
+        return this->call<TResult()>(&typeid(TResult (TOriginalClass::*)())); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_3(TResult, methodName, A1) \
 public: \
-    TResult methodName(A1 a1) const { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1) const>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1) const \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1)>(&typeid(TResult (TClassInternal::*)(A1)), a1); \
+    TResult methodName(A1 a1) const override { \
+        return this->call<TResult(A1)>(&typeid(TResult (TOriginalClass::*)(A1)), a1); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_4(TResult, methodName, A1, A2) \
 public: \
     TResult methodName(A1 a1, A2 a2) const override { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1, A2) const>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1, A2) const \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1, A2)>(&typeid(TResult (TClassInternal::*)(A1, A2)), a1, a2); \
+        return this->call<TResult(A1, A2)>(&typeid(TResult (TOriginalClass::*)(A1, A2)), a1, a2); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_5(TResult, methodName, A1, A2, A3) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3) const override { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1, A2, A3) const>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1, A2, A3) const \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TClassInternal::*)(A1, A2, A3)), a1, a2, a3); \
+        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3)), a1, a2, a3); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_6(TResult, methodName, A1, A2, A3, A4) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) const override { \
-        static_assert(std::is_same< \
-            decltype(static_cast<TResult (TClassInternal::*)(A1, A2, A3, A4) const>(&TClassInternal::methodName)), \
-            TResult (TClassInternal::*)(A1, A2, A3, A4) const \
-        >::value, "Method does not override base class method!"); \
-        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TClassInternal::*)(A1, A2, A3, A4)), a1, a2, a3, a4); \
+        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3, A4)), a1, a2, a3, a4); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST(...) \
     DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD_CONST, __VA_ARGS__)(__VA_ARGS__)
-
-//#define DEFINE_MOCK_CONSTRUCTOR(Interface) \
-//public: \
-//template<typename ... TArgs> \
-//Interface##Mock(TArgs ... args): Interface(args ...) {};
 
 #define DEFINE_MOCK_CLASS_BEGIN(Interface) \
 class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interface> { \
@@ -374,10 +340,13 @@ public: \
     } \
 };
 
-#define STRINGIFY(...) #__VA_ARGS__
-#define DEFINE_MOCK_BEHAVIOR(TResult, mock_method, mock_object, ...) \
-    decltype(mock_object)::Behavior<TResult(__VA_ARGS__)>( \
-        mock_object, &typeid(TResult (decltype(mock_object)::TClassInternal::*)(__VA_ARGS__)) \
+#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...) \
+decltype(mock_object)::Behavior< decltype(static_cast< \
+        result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*)(__VA_ARGS__) \
+        >(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name))> ( \
+        mock_object, &typeid(decltype(static_cast< \
+        result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*)(__VA_ARGS__) \
+        >(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name))) \
     ) = [&](__VA_ARGS__)
 
 #define DEFINE_MOCK_SEQUENCE(name) \
