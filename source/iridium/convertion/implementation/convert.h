@@ -169,6 +169,14 @@ std::string convert(double const &value);
 
 
 template<>
+std::string convert(float const &value, int const &precision);
+
+
+template<>
+std::string convert(float const &value);
+
+
+template<>
 std::string convert(std::thread::id const &value);
 
 
@@ -211,6 +219,10 @@ uint64_t convert(std::string const &value);
 
 template<>
 double convert(std::string const &value);
+
+
+template<>
+float convert(std::string const &value);
 
 
 template<>
