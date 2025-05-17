@@ -253,17 +253,21 @@ std::string convert(uint8_t const &value) {
 }
 
 
-template<>
-string convert(double const &value, int const &precision) {
+template<typename TValue>
+string convertRealToString(TValue const &value, std::string const &format) {
     if (std::isnan(value))
         return "NAN"; // ----->
 
-    string p = string("%0.") + convert<string>(precision) + "lf";
     char buffer[double_to_string_buffer_size];
-    platform::snprintf(buffer, double_to_string_buffer_size, p.c_str(), value);
+    platform::snprintf(buffer, double_to_string_buffer_size, format.c_str(), value);
     return buffer; // ----->
 }
 
+
+template<>
+string convert(double const &value, int const &precision) {
+    return convertRealToString(value, "%0." + convert<string>(precision) + "lf");
+}
 
 
 template<>
@@ -273,7 +277,19 @@ string convert(double const &value) {
 
 
 template<>
-std::string convert(std::thread::id const &value) {
+string convert(float const &value, int const &precision) {
+    return convertRealToString(value, "%0." + convert<string>(precision) + "f");
+}
+
+
+template<>
+string convert(float const &value) {
+    return convert<string>(value, static_cast<int>(config::double_precission)); // ----->
+}
+
+
+template<>
+string convert(std::thread::id const &value) {
     stringstream ss;
     ss << value;
     return ss.str();
@@ -449,10 +465,10 @@ uint64_t convert(string const &value) {
 }
 
 
-template<>
-double convert(string const &value) {
+template<typename TResult>
+TResult convertStringToReal(string const &value, std::string const &format) {
     if (value == "NAN")
-        return std::numeric_limits<double>::quiet_NaN(); // ----->
+        return std::numeric_limits<TResult>::quiet_NaN(); // ----->
 
     for (auto const &ch: value)
         if ((ch < '0' || ch > '9') && ch != '.' && ch != '-')
@@ -460,14 +476,27 @@ double convert(string const &value) {
 
     auto d = ::atof(value.c_str());
 
+    // "%lf", "%f"
     if (d == 0.0) {
-        int result = platform::sscanf(value.c_str(), "%lf", &d);
+        int result = platform::sscanf(value.c_str(), format.c_str(), &d);
         if (result == 1)
             return d; // ----->
         else
             throw runtime_error("convert '" + value + "' to double error"); // ----->
     } else
         return d; // ----->
+}
+
+
+template<>
+double convert(string const &value) {
+    return convertStringToReal<double>(value, "%lf");
+}
+
+
+template<>
+float convert(string const &value) {
+    return convertStringToReal<float>(value, "%f");
 }
 
 

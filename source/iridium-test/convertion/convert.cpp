@@ -169,6 +169,7 @@ TEST(types) {
     ASSERT(convert<int32_t>(string("5 wrong")), std::exception);
     ASSERT(convert<int32_t>(string(""))       , std::exception);
 
+    // double
     ASSERT(5.5      , equal, convert<double>(string("5.5")));
     ASSERT(-5.5     , equal, convert<double>(string("-5.5")));
 
@@ -177,6 +178,16 @@ TEST(types) {
     ASSERT(convert<double>(string("5.5 wrong")) , std::exception);
     ASSERT(convert<double>(string(""))          , std::exception);
 
+    // float
+    ASSERT(5.5      , equal, convert<float>(string("5.5")));
+    ASSERT(-5.5     , equal, convert<float>(string("-5.5")));
+
+    ASSERT(static_cast<float>(525.1), equal, convert<float>(string("525.1")));
+
+    ASSERT(convert<float>(string("5.5 wrong")) , std::exception);
+    ASSERT(convert<float>(string(""))          , std::exception);
+
+    // time_point
     typedef system_clock::time_point TTime;
     using std::chrono::seconds;
     auto to_time_t = [] (TTime const &t) {
