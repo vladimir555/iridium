@@ -11,6 +11,7 @@
 #include <thread>
 #include <memory>
 #include <atomic>
+//#include <stdexcept>
 
 
 namespace iridium {
@@ -178,6 +179,18 @@ std::string convert(float const &value);
 
 template<>
 std::string convert(std::thread::id const &value);
+
+
+template<>
+std::string convert(std::exception const &value);
+
+
+template<>
+std::string convert(std::exception const &value);
+
+
+template<>
+std::string convert(std::nested_exception const &value);
 
 
 //template<>

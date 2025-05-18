@@ -296,6 +296,28 @@ string convert(std::thread::id const &value) {
 }
 
 
+template<>
+string convert(std::exception const &value) {
+    return value.what();
+}
+
+
+template<>
+string convert(std::nested_exception const &value) {
+    string result;
+
+    try {
+        value.rethrow_nested();
+    } catch (std::exception const &e) {
+        result += convert<string>(e) += "\n";
+    } catch (...) {
+        result += "unknown exception\n";
+    }
+
+    return result; // ----->
+}
+
+
 //template<>
 //high_resolution_clock::time_point convert(string const &value) {
 //    if (value.size() != time_scan_format_size)
