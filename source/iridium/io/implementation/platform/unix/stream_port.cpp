@@ -80,7 +80,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
             assertOK(result, "write error");
     }
 
-    return buffer;
+    return buffer; // ----->
 
 //    LOGT << __FUNCTION__ << " fd: " << m_fd << ", result: " << result << ", buffer:\n---\n"
 //         << std::string(buffer, buffer + result) << "\n---\nerrno: " << std::strerror(errno);
