@@ -70,8 +70,8 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
         throw std::runtime_error("stream port read error: not initialized"); // ----->
 
     auto const size = size_ == 0 ? DEFAULT_BUFFER_SIZE : size_;
-    char buffer[size];
-    auto result = ::read(m_fd_reader, buffer, size - 1);
+    auto buffer = Buffer::create(size);
+    auto result = ::read(m_fd_reader, buffer->data(), size - 1);
 
     if (result < 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK)
@@ -79,6 +79,8 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
         else
             assertOK(result, "write error");
     }
+
+    return buffer;
 
 //    LOGT << __FUNCTION__ << " fd: " << m_fd << ", result: " << result << ", buffer:\n---\n"
 //         << std::string(buffer, buffer + result) << "\n---\nerrno: " << std::strerror(errno);
@@ -90,8 +92,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 //            assertOK(received_size, "read error");
 //    } else
 //        received_size = 0;
-
-    return Buffer::create(Buffer(buffer, buffer + result)); // ----->
+//    return Buffer::create(Buffer(buffer, buffer + result)); // ----->
 }
 
 
