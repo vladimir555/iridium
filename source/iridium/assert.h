@@ -15,56 +15,107 @@
 namespace iridium {
 
 
-template<typename T>
-T assertExists(T &&value, std::string const &error) {
+template<typename T, typename TException>
+T &&assertExists(T &&value, TException const &exception) {
     if (static_cast<bool>(value))
         return std::forward<T>(value); // ----->
     else
-        throw std::runtime_error(error);
+        throw exception; // ----->
+}
+
+
+template<typename T>
+T &&assertExists(T &&value, std::string const &error) {
+    return assertExists(std::forward<T>(value), std::runtime_error(error)); // ----->
+}
+
+
+template<typename T, typename TException>
+T *assertExists(T *value, TException const &exception) {
+    if (static_cast<bool>(value))
+        return value; // ----->
+    else
+        throw exception; // ----->
 }
 
 
 template<typename T>
 T *assertExists(T *value, std::string const &error) {
+    return assertExists(value, std::runtime_error(error)); // ----->
+}
+
+
+template<typename T, typename TException>
+std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, TException const &exception) {
     if (static_cast<bool>(value))
         return value; // ----->
     else
-        throw std::runtime_error(error);
+        throw exception; // ----->
 }
 
 
 template<typename T>
-std::shared_ptr<T> assertExists(std::shared_ptr<T> const value, std::string const &error) {
-    if (static_cast<bool>(value))
-        return value; // ----->
-    else
-        throw std::runtime_error(error);
+std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, std::string const &error) {
+    return assertExists(value, std::runtime_error(error)); // ----->
 }
 
 
+template<typename T, typename = void>
+struct TContainerHasSizeMethod: std::false_type {};
+
+
 template<typename T>
-T assertSize(T &&values, size_t const &size, std::string const &error) {
-    if (values.size() == size)
+struct TContainerHasSizeMethod<T, std::void_t<decltype(std::declval<T>().size())>> : std::true_type {};
+
+
+template<typename T, typename TException>
+T &&assertSize(T &&values, size_t const &size, TException const &exception) {
+    static_assert(TContainerHasSizeMethod< std::decay_t<T> >::value, "Type T must have a size() method");
+    auto values_size = values.size();
+    if (values_size == size)
         return std::forward<T>(values); // ----->
     else
-        throw std::runtime_error(error + ", wrong items size " +
-            convertion::convert<std::string>(values.size()) + ", expects " +
-            convertion::convert<std::string>(size));
+        throw exception; // ----->
 }
 
 
 template<typename T>
-T assertOne(T &&values, std::string const &error) {
-    return std::forward<T>(assertSize(std::move(values), 1, error)); // ----->
+T &&assertSize(T &&values, size_t const &size, std::string const &error) {
+    static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
+    auto values_size = values.size();
+    if (values_size == size)
+        return std::forward<T>(values);
+    throw std::runtime_error(
+        error + ", wrong items size " +
+        convertion::convert<std::string>(values_size) + ", expected " +
+        convertion::convert<std::string>(size));
+}
+
+
+template<typename T, typename TException>
+T &&assertOne(T &&values, TException const &exception) {
+    return assertSize(std::forward<T>(values), 1, exception);
 }
 
 
 template<typename T>
-T assertComplete(T &&values, std::string const &error) {
+T &&assertOne(T &&values, std::string const &error) {
+    return assertOne(std::forward<T>(values), std::runtime_error(error));
+}
+
+
+template<typename T, typename TException>
+T &&assertComplete(T &&values, TException const &exception) {
     if (values.size() > 0)
-        return std::forward<T>(values); // ----->
+        return std::forward<T>(values);
     else
-        throw std::runtime_error(error);
+        throw exception;
+}
+
+
+template<typename T>
+T &&assertComplete(T &&values, std::string const &error) {
+    return assertComplete(std::forward<T>(values), std::runtime_error(error));
 }
 
 
