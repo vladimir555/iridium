@@ -9,11 +9,6 @@
 #include <memory>
 
 
-#ifdef DEFINE_MOCK_CREATE
-#include "iridium/testing/mock_registry.h"
-#endif // DEFINE_MOCK_CREATE
-
-
 #define DEFINE_SMART_PTR(TClass) \
 typedef ::std::shared_ptr<TClass>         TSharedPtr; \
 typedef ::std::weak_ptr  <TClass>         TWeakPtr; \
@@ -24,13 +19,18 @@ typedef ::std::unique_ptr<TClass const>   TConstUniquePtr;
 
 
 #ifdef DEFINE_MOCK_CREATE
+#include "iridium/testing/mock.h"
+#endif // DEFINE_MOCK_CREATE
+
+
+#ifdef DEFINE_MOCK_CREATE
 
 #define DEFINE_CREATE(Interface) \
 DEFINE_SMART_PTR(Interface) \
-template<typename... Args> \
-static auto create(Args && ... args) { \
-    return ::iridium::testing::MockRegistry<Interface>::take(std::forward<Args>(args)...); \
-}
+template<typename ... TArgs> \
+static auto create(TArgs && ... args) { \
+return ::iridium::testing::Mock<Interface>::create(std::forward<TArgs>(args) ...); \
+};
 
 #else
 
@@ -38,10 +38,11 @@ static auto create(Args && ... args) { \
 DEFINE_SMART_PTR(TClass) \
 template<typename ... TArgs> \
 static ::std::shared_ptr<TClass> create(TArgs && ... args) { \
-    return ::std::make_shared<TClass>(std::forward<TArgs>(args)...); \
-}
+    return ::std::make_shared<TClass>(std::forward<TArgs>(args) ...); \
+};
 
 #endif // DEFINE_MOCK_CREATE
+
 
 #define DEFINE_INTERFACE(TClass) \
 DEFINE_SMART_PTR(TClass) \
