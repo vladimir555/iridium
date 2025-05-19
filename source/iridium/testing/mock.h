@@ -150,17 +150,17 @@ private:
     mutable std::unordered_map<std::type_info const *, std::any>   m_map_name_behavior;
     mutable std::unordered_map<void *, std::type_info const *>     m_map_behavior_name;
 
-    static std::unordered_map<std::type_info const *, std::list<Mock<TClass> *> > m_map_name_mock;
-    static std::unordered_set<std::type_info const *> m_mocked_class_names;
+    static std::list<Mock<TClass> *>    m_mock_objects;
+    static bool                         m_is_mocked;
 };
 
 
 template<typename TClass>
-std::unordered_map< std::type_info const *, std::list<Mock<TClass> *> > Mock<TClass>::m_map_name_mock;
+std::list<Mock<TClass> *> Mock<TClass>::m_mock_objects;
 
 
 template<typename TClass>
-std::unordered_set< std::type_info const *> Mock<TClass>::m_mocked_class_names;
+bool Mock<TClass>::m_is_mocked = false;
 
 
 // implementation
@@ -168,23 +168,22 @@ std::unordered_set< std::type_info const *> Mock<TClass>::m_mocked_class_names;
 
 template<typename TClass>
 Mock<TClass>::Mock() {
-    m_map_name_mock[&typeid(TClass)].push_back(dynamic_cast<Mock<TClass> *>(this));
-    m_mocked_class_names.insert(&typeid(TClass));
+    m_is_mocked = true;
+    m_mock_objects.push_back(dynamic_cast<Mock<TClass> *>(this));
 }
 
 
 template<typename TClass>
 template<typename ... TArgs>
 ::std::shared_ptr<TClass> Mock<TClass>::create(TArgs && ... args) {
-    if (m_mocked_class_names.count(&typeid(TClass))) {
-        auto name_mock = m_map_name_mock.find(&typeid(TClass));
-        if (name_mock == m_map_name_mock.end() || name_mock->second.empty()) {
+    if (m_is_mocked) {
+        if (m_mock_objects.empty()) {
             throw std::runtime_error(
                 "getting regeistered mock of class '" + std::string(typeid(TClass).name()) +
                 "' object error: not enough such registered mock objects");
         } else {
-            auto mock = *name_mock->second.begin();
-            name_mock->second.pop_front();
+            auto mock = m_mock_objects.front();
+            m_mock_objects.pop_front();
             // shared_ptr without destructor
             return std::shared_ptr<TClass>(dynamic_cast<TClass *>(mock), [] (TClass *) {});
         }
