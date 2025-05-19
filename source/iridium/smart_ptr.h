@@ -43,7 +43,6 @@ static ::std::shared_ptr<TClass> create(TArgs && ... args) { \
 
 #endif // DEFINE_MOCK_CREATE
 
-
 #define DEFINE_INTERFACE(TClass) \
 DEFINE_SMART_PTR(TClass) \
 virtual ~TClass() = default;
