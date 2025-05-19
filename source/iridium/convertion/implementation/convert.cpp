@@ -335,23 +335,6 @@ string convert(const std::nested_exception& e) {
 
 
 //template<>
-//string convert(const std::nested_exception& e) {
-//    try {
-//        e.rethrow_nested();
-//    } catch (const std::exception &nested) {
-//        auto* nested_exc = dynamic_cast<const std::nested_exception*>(&nested);
-//        if (nested_exc)
-//            return string(nested.what()) + ": " + convert<string>(*nested_exc);
-//        else
-//            return string(nested.what());
-//    } catch (...) {
-//        return "unknown exception";
-//    }
-//    return "";
-//}
-
-
-//template<>
 //high_resolution_clock::time_point convert(string const &value) {
 //    if (value.size() != time_scan_format_size)
 //        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->

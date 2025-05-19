@@ -280,7 +280,6 @@ void middleFunction() {
     try {
         innerFunction();
     } catch (...) {
-        // Оборачиваем исключение из innerFunction
         std::throw_with_nested(std::runtime_error("Middle exception"));
     }
 }
