@@ -271,5 +271,38 @@ TEST(strings) {
 }
 
 
+void innerFunction() {
+    throw std::runtime_error("Inner exception");
+}
+
+
+void middleFunction() {
+    try {
+        innerFunction();
+    } catch (...) {
+        // Оборачиваем исключение из innerFunction
+        std::throw_with_nested(std::runtime_error("Middle exception"));
+    }
+}
+
+
+void outerFunction() {
+    try {
+        middleFunction();
+    } catch (...) {
+        std::throw_with_nested(std::runtime_error("Outer exception"));
+    }
+}
+
+
+TEST(exception) {
+    try {
+        outerFunction();
+    } catch (const std::exception &e) {
+        ASSERT("Outer exception: Middle exception: Inner exception", equal, convert<string>(e));
+    }
+}
+
+
 } // convertion
 } // iridium

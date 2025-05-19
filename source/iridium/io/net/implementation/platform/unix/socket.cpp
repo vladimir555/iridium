@@ -180,15 +180,18 @@ size_t CSocketBase::write(Buffer::TSharedPtr const &buffer_) {
 
 Buffer::TSharedPtr CSocketBase::read(size_t const &size_) {
     auto const size = size_ > 0 ? size_: DEFAULT_SOCKET_BUFFER_SIZE;
-    char buffer[size];
-    auto received_size  = ::recv(m_socket, buffer, size - 1, 0);
+    auto buffer = Buffer::create(size);
+    auto received_size  = ::recv(m_socket, buffer->data(), size - 1, 0);
 
     if(received_size == EOF)
         assertOK(received_size, "socket read error");
     else
         received_size = 0;
 
-    return Buffer::create(Buffer(buffer, buffer + received_size)); // ----->
+    // todo: check perfomance
+    buffer->resize(received_size);
+
+    return buffer; // ----->
 }
 
 

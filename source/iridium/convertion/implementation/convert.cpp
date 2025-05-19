@@ -266,7 +266,7 @@ string convertRealToString(TValue const &value, std::string const &format) {
 
 template<>
 string convert(double const &value, int const &precision) {
-    return convertRealToString(value, "%0." + convert<string>(precision) + "lf");
+    return convertRealToString(value, "%0." + convert<string>(precision) + "lf"); // ----->
 }
 
 
@@ -278,7 +278,7 @@ string convert(double const &value) {
 
 template<>
 string convert(float const &value, int const &precision) {
-    return convertRealToString(value, "%0." + convert<string>(precision) + "f");
+    return convertRealToString(value, "%0." + convert<string>(precision) + "f"); // ----->
 }
 
 
@@ -292,30 +292,63 @@ template<>
 string convert(std::thread::id const &value) {
     stringstream ss;
     ss << value;
-    return ss.str();
+    return ss.str(); // ----->
 }
 
 
-template<>
-string convert(std::exception const &value) {
-    return value.what();
-}
+inline string formatException(const std::exception& e) {
+    std::string result = e.what();
 
-
-template<>
-string convert(std::nested_exception const &value) {
-    string result;
-
-    try {
-        value.rethrow_nested();
-    } catch (std::exception const &e) {
-        result += convert<string>(e) += "\n";
-    } catch (...) {
-        result += "unknown exception\n";
+    const auto* nested = dynamic_cast<const std::nested_exception*>(&e);
+    if (nested) {
+        try {
+            nested->rethrow_nested();  // пробуем извлечь следующее исключение
+        } catch (const std::exception& inner) {
+            result += ": " + formatException(inner);  // рекурсия
+        } catch (...) {
+            result += ": unknown exception";
+        }
     }
 
-    return result; // ----->
+    return result;
 }
+
+
+template<>
+string convert(const std::exception& e) {
+    return formatException(e);
+}
+
+
+template<>
+string convert(const std::nested_exception& e) {
+    try {
+        e.rethrow_nested();
+    } catch (const std::exception& inner) {
+        return formatException(inner);
+    } catch (...) {
+        return "unknown exception";
+    }
+
+    return "";
+}
+
+
+//template<>
+//string convert(const std::nested_exception& e) {
+//    try {
+//        e.rethrow_nested();
+//    } catch (const std::exception &nested) {
+//        auto* nested_exc = dynamic_cast<const std::nested_exception*>(&nested);
+//        if (nested_exc)
+//            return string(nested.what()) + ": " + convert<string>(*nested_exc);
+//        else
+//            return string(nested.what());
+//    } catch (...) {
+//        return "unknown exception";
+//    }
+//    return "";
+//}
 
 
 //template<>
