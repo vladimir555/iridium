@@ -302,9 +302,9 @@ inline string formatException(const std::exception& e) {
     const auto* nested = dynamic_cast<const std::nested_exception*>(&e);
     if (nested) {
         try {
-            nested->rethrow_nested();  // пробуем извлечь следующее исключение
+            nested->rethrow_nested();
         } catch (const std::exception& inner) {
-            result += ": " + formatException(inner);  // рекурсия
+            result += ": " + formatException(inner);
         } catch (...) {
             result += ": unknown exception";
         }
