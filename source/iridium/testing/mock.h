@@ -2,19 +2,19 @@
 #define HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2
 
 
-#include "mock_registry.h"
+//#include "mock_registry.h"
 
-
-//#include "iridium/smart_ptr.h"
 #include "iridium/macros/va_args.h"
 #include "iridium/items.h"
-#include "iridium/logging/logger.h"
 
+#include <typeinfo>
 #include <functional>
+#include <any>
 #include <stdexcept>
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
-#include <any>
+
 
 
 namespace iridium {
@@ -159,6 +159,25 @@ public:
     Mock();
     virtual ~Mock() = default;
 
+    template<typename ... TArgs>
+    static ::std::shared_ptr<TClass> create(TArgs && ... args) {
+        if (m_mocked_class_names.count(&typeid(TClass))) {
+            auto name_mock = m_map_name_mock.find(&typeid(TClass));
+            if (name_mock == m_map_name_mock.end() || name_mock->second.empty()) {
+                throw std::runtime_error(
+                    "getting regeistered mock of class '" + std::string(typeid(TClass).name()) +
+                    "' object error: not enough such registered mock objects");
+            } else {
+                auto mock = *name_mock->second.begin();
+                name_mock->second.pop_front();
+                // shared_ptr without destructor
+                return std::shared_ptr<TClass>(dynamic_cast<TClass *>(mock), [] (TClass *) {});
+            }
+        } else {
+            return ::std::make_shared<TClass>(std::forward<TArgs>(args)...);
+        }
+    }
+
     using TOriginalClass = TClass;
 
     friend class Behavior;
@@ -189,8 +208,18 @@ private:
 
     mutable std::unordered_map<std::type_info const *, std::any>   m_map_name_behavior;
     mutable std::unordered_map<void *, std::type_info const *>     m_map_behavior_name;
-//    mutable std::vector<class MockSequence *> m_sequences;
+
+    static std::unordered_map<std::type_info const *, std::list<Mock<TClass> *> > m_map_name_mock;
+    static std::unordered_set<std::type_info const *> m_mocked_class_names;
 };
+
+
+template<typename TClass>
+std::unordered_map< std::type_info const *, std::list<Mock<TClass> *> > Mock<TClass>::m_map_name_mock;
+
+
+template<typename TClass>
+std::unordered_set< std::type_info const *> Mock<TClass>::m_mocked_class_names;
 
 
 // implementation
@@ -198,14 +227,14 @@ private:
 
 template<typename TClass>
 Mock<TClass>::Mock() {
-    MockRegistry<TClass>::add(dynamic_cast<TClass * const>(this));
+    m_map_name_mock[&typeid(TClass)].push_back(dynamic_cast<Mock<TClass> *>(this));
+    m_mocked_class_names.insert(&typeid(TClass));
 }
 
 
 template<typename TClass>
 template<typename TSignature, typename ... TArgs>
 auto Mock<TClass>::call(std::type_info const *method, TArgs && ... args) const {
-//    LOGT << "call: " << method->name();
     auto i = m_map_name_behavior.find(method);
     if (i == m_map_name_behavior.end())
         throw std::runtime_error("mock calling error: unexpected call '" + std::string(method->name()) + "'");
@@ -248,12 +277,6 @@ typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)> &Mock<TCl
 
 } // testing
 } // iridium
-
-
-//static_assert(std::is_same< \
-//    decltype(static_cast<TResult (TOriginalClass::*)(A1, A2)>(&TOriginalClass::methodName)), \
-//    TResult (TOriginalClass::*)(A1, A2) \
-//>::value, "Method does not override base class method!");
 
 
 #define DEFINE_MOCK_METHOD_2(TResult, methodName) \
@@ -322,23 +345,13 @@ public: \
 #define DEFINE_MOCK_METHOD_CONST(...) \
     DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD_CONST, __VA_ARGS__)(__VA_ARGS__)
 
-#define DEFINE_MOCK_CLASS_BEGIN(Interface) \
-class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interface> { \
+#define DEFINE_MOCK_CLASS(Interface) \
+class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interface>
+
+#define DEFINE_MOCK_CONSTRUCTOR(Interface) \
 public: \
 template<typename ... TArgs> \
 Interface##Mock(TArgs ... args): Interface(args ...) {};
-
-#define DEFINE_MOCK_CLASS_END(Interface) \
-}; \
-template<> \
-class ::iridium::testing::MockRegistry<Interface##Mock>: \
-    public MockRegistryBase<Interface> { \
-public: \
-    template<typename ... TArgs> \
-    static auto take(TArgs&& ...) { \
-        return MockRegistryBase<Interface>::take<Interface##Mock>(); \
-    } \
-};
 
 #define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...) \
 decltype(mock_object)::Behavior< decltype(static_cast< \
