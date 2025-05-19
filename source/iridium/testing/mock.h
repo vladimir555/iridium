@@ -41,12 +41,6 @@ namespace testing {
 // where all clauses are optional and WillOnce() can be repeated.
 
 
-//class MockBase {
-//public:
-//
-//}
-
-
 //class MockSequence {
 //public:
 //    MockSequence(const char *file, const char *line, std::string const &name)
@@ -116,43 +110,6 @@ namespace testing {
 //};
 
 
-//class IMock {
-//public:
-//    DEFINE_INTERFACE(IMock)
-//    virtual std::string getName() const = 0;
-//};
-
-
-//template<typename TClass>
-//class MockFactory {
-//public:
-//    template<typename ... TArgs>
-//    static std::shared_ptr<TClass> create(TArgs&& ... args) {
-//        return std::make_shared<TClass>(std::forward<TArgs>(args)...);
-//    }
-//};
-
-
-//class Mock {
-//public:
-//    friend class Behavior;
-//    template<typename TSignature>
-//    class Behavior {
-//    public:
-//        Behavior(Mock &mock, std::string const &name_method_arguments);
-//        template<typename TLambda>
-//        Behavior &operator = (TLambda const &&l) {}
-//    };
-//
-//protected:
-//    template<typename TSignature, typename ... TArgs>
-//    auto call(std::string const &name, TArgs && ... args) const {}
-//
-//private:
-//    template<typename TSignature>
-//    void setBehavior(std::string const &name, std::function<TSignature> const &&f) {}
-//};
-
 template<typename TClass>
 class Mock {
 public:
@@ -160,23 +117,7 @@ public:
     virtual ~Mock() = default;
 
     template<typename ... TArgs>
-    static ::std::shared_ptr<TClass> create(TArgs && ... args) {
-        if (m_mocked_class_names.count(&typeid(TClass))) {
-            auto name_mock = m_map_name_mock.find(&typeid(TClass));
-            if (name_mock == m_map_name_mock.end() || name_mock->second.empty()) {
-                throw std::runtime_error(
-                    "getting regeistered mock of class '" + std::string(typeid(TClass).name()) +
-                    "' object error: not enough such registered mock objects");
-            } else {
-                auto mock = *name_mock->second.begin();
-                name_mock->second.pop_front();
-                // shared_ptr without destructor
-                return std::shared_ptr<TClass>(dynamic_cast<TClass *>(mock), [] (TClass *) {});
-            }
-        } else {
-            return ::std::make_shared<TClass>(std::forward<TArgs>(args)...);
-        }
-    }
+    static ::std::shared_ptr<TClass> create(TArgs && ... args);
 
     using TOriginalClass = TClass;
 
@@ -229,6 +170,27 @@ template<typename TClass>
 Mock<TClass>::Mock() {
     m_map_name_mock[&typeid(TClass)].push_back(dynamic_cast<Mock<TClass> *>(this));
     m_mocked_class_names.insert(&typeid(TClass));
+}
+
+
+template<typename TClass>
+template<typename ... TArgs>
+::std::shared_ptr<TClass> Mock<TClass>::create(TArgs && ... args) {
+    if (m_mocked_class_names.count(&typeid(TClass))) {
+        auto name_mock = m_map_name_mock.find(&typeid(TClass));
+        if (name_mock == m_map_name_mock.end() || name_mock->second.empty()) {
+            throw std::runtime_error(
+                "getting regeistered mock of class '" + std::string(typeid(TClass).name()) +
+                "' object error: not enough such registered mock objects");
+        } else {
+            auto mock = *name_mock->second.begin();
+            name_mock->second.pop_front();
+            // shared_ptr without destructor
+            return std::shared_ptr<TClass>(dynamic_cast<TClass *>(mock), [] (TClass *) {});
+        }
+    } else {
+        return ::std::make_shared<TClass>(std::forward<TArgs>(args)...);
+    }
 }
 
 
