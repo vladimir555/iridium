@@ -134,6 +134,13 @@ TEST(mock) {
     ASSERT("Alice int",             equal, db_mock.getUserName(1, 2));
     ASSERT("Alice int doSomething", equal, db_mock.doSomething());
 
+    ::iridium::testing::MockSequence<CDatabaseMock> sequence(db_mock, "file_1");
+    sequence
+        .addExpectation("file_2", 1, 1, &CDatabaseMock::getUserName, 2, 2)
+        .addExpectation("file_3", 1, 1, &CDatabaseMock::getUserName, 3, 3);
+
+    sequence.step(&CDatabaseMock::getUserName, 2, 2);
+
     CDatabaseAdapter dba("CDatabaseAdapter");
     ASSERT("adapted by 'CDatabaseAdapter': Alice int ", equal, dba.getUserName(1, 2));
 

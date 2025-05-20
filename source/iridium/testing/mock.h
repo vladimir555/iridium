@@ -41,88 +41,22 @@ namespace testing {
 // where all clauses are optional and WillOnce() can be repeated.
 
 
-//class MockSequence {
-//public:
-//    MockSequence(const char *file, const char *line, std::string const &name)
-//    :
-//        m_origin(std::string(file) + ":" + line),
-//        m_name  (name)
-//    {}
-//
-//    template<typename TMock, typename TClass, typename TResult, typename... TArgs>
-//    void step(TMock const * const mock, TResult(TClass::*method)(TArgs...)) {
-//        if (m_expectation_index >= m_expectations.size()) {
-//            throw std::runtime_error(
-//                "mock sequence '" + m_name + "' at " + m_origin +
-//                " error: too many calls, unexpected call to '" + mock->getName(method) + "'"
-//            );
-//        }
-//
-//        auto const &expectation = m_expectations[m_expectation_index];
-//
-//        if (expectation.mock != mock || expectation.method_ptr != getMethodPointer(method)) {
-//            throw std::runtime_error(
-//                "mock sequence '" + m_name + "' at " + m_origin +
-//                " error: expected call to '" + expectation.method_name +
-//                "' at " + expectation.file_line +
-//                ", but got call to '" + mock->getName(method) + "'"
-//            );
-//        }
-//
-//        ++m_expectation_index;
-//    }
-//
-//    template<typename TMock, typename TClass, typename TResult, typename... TArgs>
-//    void addExpectation(TMock* mock, TResult(TClass::*method)(TArgs...), const char* method_name, const char* file, const char* line) {
-//        m_expectations.push_back(
-//            Expectation{
-//                reinterpret_cast<void*>(mock),
-//                getMethodPointer(method),
-//                method_name,
-//                std::string(file) + line
-//            }
-//        );
-//    }
-//
-//private:
-//    size_t m_expectation_index = 0;
-//    std::string m_origin;
-//    std::string m_name;
-//
-//    struct Expectation {
-//        void* mock;
-//        void* method_ptr;
-//        std::string method_name;
-//        std::string file_line;
-//    };
-//
-//    std::vector<Expectation> m_expectations;
-//
-//    // Приводим любой метод к типу void*
-//    template<typename TClass, typename TResult, typename... TArgs>
-//    void* getMethodPointer(TResult(TClass::*method)(TArgs...)) const {
-//        union {
-//            TResult(TClass::*m)(TArgs...);
-//            void* ptr;
-//        } u = { method };
-//        return u.ptr;
-//    }
-//};
+template<typename TClassMock>
+class MockSequence;
 
 
 template<typename TClass>
 class Mock {
 public:
+    using TOriginalClass = TClass;
+
     Mock();
     virtual ~Mock() = default;
 
     template<typename ... TArgs>
     static ::std::shared_ptr<TClass> create(TArgs && ... args);
 
-    using TOriginalClass = TClass;
-
     friend class Behavior;
-
     template<typename TResult, typename ... TArgs>
     class Behavior;
 
@@ -139,7 +73,7 @@ public:
         std::type_info const *m_method;
     };
 
-public:
+protected:
     template<typename TSignature, typename ... TArgs>
     auto call(std::type_info const *method, TArgs && ... args) const;
 
@@ -155,15 +89,114 @@ private:
 };
 
 
+template<typename TClassMock>
+class MockSequence {
+public:
+    MockSequence(TClassMock &mock, std::string const &file_line)
+    :
+        m_mock      (mock),
+        m_file_line (file_line)
+    {}
+
+    template<typename TResult, typename ... TMethodArgs, typename... TCallArgs>
+    MockSequence &addExpectation(
+        std::string const &file_line,
+        size_t      const &call_count_max,
+        size_t      const &call_count_min,
+        TResult (TClassMock::*method)(TMethodArgs...),
+        TCallArgs && ... args)
+    {
+        TExpectation expectation(
+            file_line,
+            call_count_min,
+            call_count_max,
+           &typeid(static_cast<TResult (TClassMock::TOriginalClass::*)(TMethodArgs...)>(method)),
+            std::tuple<std::decay_t<TMethodArgs> ...>(std::forward<TCallArgs>(args) ...));
+        m_expectations.push_back(expectation);
+        return *this;
+    }
+
+    template<typename TResult, typename... TMethodArgs, typename... TCallArgs>
+    MockSequence &addExpectation(
+        std::string const &file_line,
+        size_t      const &call_count_max,
+        size_t      const &call_count_min,
+        TResult (TClassMock::*method)(TMethodArgs...) const,
+        TCallArgs && ... args)
+    {
+        TExpectation expectation(
+            file_line,
+            call_count_min,
+            call_count_max,
+           &typeid(static_cast<TResult (TClassMock::TOriginalClass::*)(TMethodArgs...)>(method)),
+            std::tuple<std::decay_t<TMethodArgs> ...>(std::forward<TCallArgs>(args) ...));
+        m_expectations.push_back(expectation);
+        return *this;
+    }
+
+    template<typename TClass, typename TResult, typename... TMethodArgs, typename... TCallArgs>
+    void step(
+        TResult (TClass::*method)(TMethodArgs...),
+        TCallArgs && ... args)
+    {
+        if (m_expectations.empty()) {
+            throw std::runtime_error(std::string("sequence at '") + m_file_line + "' expectation '" +
+                typeid(TClass).name() + "' error: unexpected call '" +
+                typeid(method).name() + ", sequence is empty");
+        }
+        auto expectation = m_expectations.front();
+//        if (expectation.arguments.has_value() &&
+//            expectation.arguments != std::any(std::tuple<std::decay_t<TMethodArgs> ...>(std::forward<TCallArgs>(args) ...)))
+//        {
+//            throw std::runtime_error(std::string("sequence at '") + expectation.m_file_line + "' expectation '" +
+//                typeid(TClass).name() + "' error: unexpected call '" +
+//                typeid(method).name() + "' arguments");
+//        }
+        if (expectation.call_count > 0)
+            expectation.call_count--;
+        else
+            m_expectations.pop_front();
+    }
+
+private:
+    struct TExpectation {
+        TExpectation(
+            std::string     const file_line,
+            size_t          const &call_count_min,
+            size_t          const &call_count_max,
+            std::type_info  const *method_name,
+            std::any        const &arguments)
+        :
+            file_line       (file_line),
+            call_count_min  (call_count_min),
+            call_count_max  (call_count_max),
+            method_name     (method_name),
+            arguments       (arguments),
+            call_count      (0)
+        {}
+        std::string             const file_line;
+        size_t                  const call_count_min;
+        size_t                  const call_count_max;
+        std::type_info  const * const method_name;
+        std::any                const arguments;
+        size_t                        call_count;
+    };
+
+    TClassMock             &m_mock;
+    std::string             m_file_line;
+    std::list<TExpectation> m_expectations;
+};
+
+
+// implementation
+
+
 template<typename TClass>
 std::list<Mock<TClass> *> Mock<TClass>::m_mock_objects;
 
 
 template<typename TClass>
 bool Mock<TClass>::m_is_mocked = false;
-
-
-// implementation
 
 
 template<typename TClass>
@@ -230,7 +263,9 @@ Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::Behavior(Mock &mock, std::
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 template<typename TLambda>
-typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)> &Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::operator = (TLambda &&l) {
+typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)>
+&Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::operator = (TLambda &&l)
+{
     m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
 }
