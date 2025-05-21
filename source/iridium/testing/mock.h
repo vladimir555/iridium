@@ -57,7 +57,6 @@ public:
     template<typename ... TArgs>
     static ::std::shared_ptr<TClass> create(TArgs && ... args);
 
-    friend class Behavior;
     template<typename TResult, typename ... TArgs>
     class Behavior;
 
@@ -406,26 +405,25 @@ Interface##Mock(TArgs ... args): Interface(args ...) {};
 #define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                        \
 decltype(mock_object)::Behavior<                                                                \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
 >(                                                                                              \
     mock_object,                                                                                \
     &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
 ) = [&](__VA_ARGS__)
 
 #define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                  \
 decltype(mock_object)::Behavior<                                                                \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
 >(                                                                                              \
     mock_object,                                                                                \
     &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
 ) = [&](__VA_ARGS__)
 
 #define DEFINE_MOCK_SEQUENCE(name) \
 ::iridium::testing::MockSequence sequence_##name(__FILE__, __LINE__, #name)
-
 
 #define DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method) \
 sequence_##sequence_name.addExpectation(mock, &method, #method, __FILE__, __LINE__)
