@@ -73,8 +73,11 @@ public:
     std::string getUserName(int const &group_id, float const &user_id) override {
         return getUserName(group_id, static_cast<int>(user_id)) + " f";
     }
+    virtual std::string doSomething() const {
+        return "soSomething const";
+    }
     virtual std::string doSomething() {
-        return getUserName(5, 55) + " soSomething";
+        return "soSomething";
     }
 };
 
@@ -88,6 +91,7 @@ DEFINE_MOCK_CLASS(CDatabase) {
     DEFINE_MOCK_CONSTRUCTOR(CDatabase)
     DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
     DEFINE_MOCK_METHOD(std::string, doSomething);
+    DEFINE_MOCK_METHOD_CONST(std::string, doSomething);
 };
 
 
@@ -107,7 +111,6 @@ public:
         return getUserName(group_id, static_cast<int>(user_id));
     }
 
-//    virtual std::string getProperty() = 0;
 private:
     std::string           m_name;
     IDatabase::TSharedPtr m_database;
@@ -116,7 +119,7 @@ private:
 
 DEFINE_MOCK_CLASS(CDatabaseAdapter) {
     DEFINE_MOCK_CONSTRUCTOR(CDatabaseAdapter)
-    DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
+    DEFINE_MOCK_METHOD     (std::string, getUserName, int const &, int const &);
 };
 
 
@@ -127,17 +130,25 @@ TEST(mock) {
         return "Alice int";
     };
 
+    ASSERT("Alice int",   equal, db_mock.getUserName(1, 2));
+
     DEFINE_MOCK_BEHAVIOR(std::string, doSomething, db_mock) {
-        return db_mock.getUserName(5, 55) + " doSomething";
+        return "doSomething";
     };
 
-    ASSERT("Alice int",             equal, db_mock.getUserName(1, 2));
-    ASSERT("Alice int doSomething", equal, db_mock.doSomething());
+    ASSERT("doSomething", equal, db_mock.doSomething());
 
-    ::iridium::testing::MockSequence<CDatabaseMock> sequence(db_mock, "file_1");
+    DEFINE_MOCK_BEHAVIOR_CONST(std::string, doSomething, db_mock) {
+        return "doSomething const";
+    };
+
+    const auto &db_mock_const = db_mock;
+    ASSERT("doSomething const", equal, db_mock_const.doSomething());
+
+    ::iridium::testing::MockSequence<CDatabaseMock> sequence(db_mock, "file_line_1");
     sequence
-        .addExpectation("file_2", 1, 1, &CDatabaseMock::getUserName, 2, 2)
-        .addExpectation("file_3", 1, 1, &CDatabaseMock::getUserName, 3, 3);
+        .addExpectation("file_line_2", 1, 1, &CDatabaseMock::getUserName, 2, 2)
+        .addExpectation("file_line_3", 1, 1, &CDatabaseMock::getUserName, 3, 3);
 
     sequence.step(&CDatabaseMock::getUserName, 2, 2);
 
