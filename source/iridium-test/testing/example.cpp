@@ -76,6 +76,7 @@ public:
     virtual std::string doSomething() const {
         return "soSomething const";
     }
+private:
     virtual std::string doSomething() {
         return "soSomething";
     }
@@ -87,8 +88,14 @@ public:
 using CDatabase = some_namespace::CDatabase;
 
 
-DEFINE_MOCK_CLASS(CDatabase) {
+//DEFINE_MOCK_CLASS(CDatabase) {
+class BehaviorFriend {
+public:
+};
+class CDatabaseMock: public CDatabase, public ::iridium::testing::Mock<CDatabase>, public BehaviorFriend {
+public:
     DEFINE_MOCK_CONSTRUCTOR(CDatabase)
+
     DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
     DEFINE_MOCK_METHOD(std::string, doSomething);
     DEFINE_MOCK_METHOD_CONST(std::string, doSomething);
