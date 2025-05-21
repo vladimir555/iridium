@@ -14,7 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
-
+#include "iridium/pattern/non_copyable.h"
+#include "iridium/pattern/non_movable.h"
 
 
 namespace iridium {
@@ -61,9 +62,26 @@ public:
     class Behavior;
 
     template<typename TResult, typename ... TArgs>
-    class Behavior<TResult(TOriginalClass::*)(TArgs...)> {
+    class Behavior<TResult(TClass::*)(TArgs...)>:
+        public pattern::NonCopyable, public pattern::NonMovable
+    {
     public:
-        Behavior(Mock &mock, std::type_info const *method);
+        explicit Behavior(Mock &mock, std::type_info const *method);
+
+        template<typename TLambda>
+        Behavior &operator=(TLambda &&l);
+
+    private:
+        Mock &m_mock;
+        std::type_info const *m_method;
+    };
+
+    template<typename TResult, typename ... TArgs>
+    class Behavior<TResult(TClass::*)(TArgs...) const>:
+        public pattern::NonCopyable, public pattern::NonMovable
+    {
+    public:
+        explicit Behavior(Mock &mock, std::type_info const *method);
 
         template<typename TLambda>
         Behavior &operator=(TLambda &&l);
@@ -80,6 +98,9 @@ protected:
 private:
     template<typename TResult, typename ... TArgs>
     void setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f);
+
+    template<typename TResult, typename ... TArgs>
+    void setBehavior(std::type_info const *method, std::function<TResult(TArgs...) const> const &&f);
 
     mutable std::unordered_map<std::type_info const *, std::any>   m_map_name_behavior;
     mutable std::unordered_map<void *, std::type_info const *>     m_map_behavior_name;
@@ -247,6 +268,15 @@ auto Mock<TClass>::call(std::type_info const *method, TArgs && ... args) const {
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f) {
+//    printf("set behavior: %s\t[%p]\n", method->name(), static_cast<const void*>(method));
+    m_map_name_behavior[method] = f;
+}
+
+
+template<typename TClass>
+template<typename TResult, typename ... TArgs>
+void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...) const> const &&f) {
+//    printf("set behavior const: %s\t[%p]\n", method->name(), static_cast<const void*>(method));
     m_map_name_behavior[method] = f;
 }
 
@@ -257,7 +287,9 @@ Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::Behavior(Mock &mock, std::
 :
     m_mock  (mock),
     m_method(method)
-{}
+{
+//    printf("behavior constructor      : %s\t[%p]\n", method->name(), static_cast<const void*>(method));
+}
 
 
 template<typename TClass>
@@ -265,6 +297,28 @@ template<typename TResult, typename ... TArgs>
 template<typename TLambda>
 typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)>
 &Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::operator = (TLambda &&l)
+{
+    m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
+    return *this;
+}
+
+
+template<typename TClass>
+template<typename TResult, typename ... TArgs>
+Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::Behavior(Mock &mock, std::type_info const *method)
+:
+    m_mock  (mock),
+    m_method(method)
+{
+//    printf("behavior constructor const: %s\t[%p]\n", method->name(), static_cast<const void*>(method));
+}
+
+
+template<typename TClass>
+template<typename TResult, typename ... TArgs>
+template<typename TLambda>
+typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...) const>
+&Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::operator = (TLambda &&l)
 {
     m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
@@ -311,31 +365,31 @@ public: \
 #define DEFINE_MOCK_METHOD_CONST_2(TResult, methodName) \
 public: \
     TResult methodName() const override { \
-        return this->call<TResult()>(&typeid(TResult (TOriginalClass::*)())); \
+        return this->call<TResult()>(&typeid(TResult (TOriginalClass::*)() const)); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_3(TResult, methodName, A1) \
 public: \
     TResult methodName(A1 a1) const override { \
-        return this->call<TResult(A1)>(&typeid(TResult (TOriginalClass::*)(A1)), a1); \
+        return this->call<TResult(A1)>(&typeid(TResult (TOriginalClass::*)(A1) const), a1); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_4(TResult, methodName, A1, A2) \
 public: \
     TResult methodName(A1 a1, A2 a2) const override { \
-        return this->call<TResult(A1, A2)>(&typeid(TResult (TOriginalClass::*)(A1, A2)), a1, a2); \
+        return this->call<TResult(A1, A2)>(&typeid(TResult (TOriginalClass::*)(A1, A2) const), a1, a2); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_5(TResult, methodName, A1, A2, A3) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3) const override { \
-        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3)), a1, a2, a3); \
+        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3) const), a1, a2, a3); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_6(TResult, methodName, A1, A2, A3, A4) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) const override { \
-        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3, A4)), a1, a2, a3, a4); \
+        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3, A4) const), a1, a2, a3, a4); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST(...) \
@@ -349,17 +403,29 @@ public: \
 template<typename ... TArgs> \
 Interface##Mock(TArgs ... args): Interface(args ...) {};
 
-#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...) \
-decltype(mock_object)::Behavior< decltype(static_cast< \
-        result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*)(__VA_ARGS__) \
-        >(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name))> ( \
-        mock_object, &typeid(decltype(static_cast< \
-        result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*)(__VA_ARGS__) \
-        >(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name))) \
-    ) = [&](__VA_ARGS__)
+#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                        \
+decltype(mock_object)::Behavior<                                                                \
+    decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+>(                                                                                              \
+    mock_object,                                                                                \
+    &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+) = [&](__VA_ARGS__)
+
+#define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                  \
+decltype(mock_object)::Behavior<                                                                \
+    decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+>(                                                                                              \
+    mock_object,                                                                                \
+    &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::TOriginalClass::method_name)) \
+) = [&](__VA_ARGS__)
 
 #define DEFINE_MOCK_SEQUENCE(name) \
 ::iridium::testing::MockSequence sequence_##name(__FILE__, __LINE__, #name)
+
 
 #define DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method) \
 sequence_##sequence_name.addExpectation(mock, &method, #method, __FILE__, __LINE__)
