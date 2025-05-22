@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+#include <memory>
+
 #include "iridium/pattern/non_copyable.h"
 #include "iridium/pattern/non_movable.h"
 
