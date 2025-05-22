@@ -115,7 +115,8 @@ public:
     MockSequence(TClassMock &mock, std::string const &file_line)
     :
         m_mock      (mock),
-        m_file_line (file_line)
+        m_file_line (file_line),
+        m_call_count(0)
     {}
 
     template<typename TResult, typename ... TMethodArgs, typename... TCallArgs>
@@ -154,28 +155,49 @@ public:
         return *this;
     }
 
+    template<typename ... TCallArgs>
+    bool isEqual(const std::any &stored_any, TCallArgs &&... args) {
+        using TTuple = std::tuple<std::decay_t<TCallArgs>...>;
+
+        if (stored_any.type() != typeid(TTuple)) {
+            return false;
+        }
+
+        const TTuple &stored_tuple = std::any_cast<const TTuple&>(stored_any);
+        TTuple current_tuple(std::forward<TCallArgs>(args)...);
+
+        return stored_tuple == current_tuple;
+    }
+
+    template<typename TClass, typename TMethod>
+    void throwException(TMethod const &method, std::string const &file_line, std::string const &error) {
+        throw std::runtime_error(std::string("sequence at '") + file_line + "' mock '" +
+            typeid(TClass).name() + "' expectation error: unexpected call '" +
+            typeid(method).name() + ", " + error);
+    }
+
     template<typename TClass, typename TResult, typename... TMethodArgs, typename... TCallArgs>
     void step(
         TResult (TClass::*method)(TMethodArgs...),
         TCallArgs && ... args)
     {
-        if (m_expectations.empty()) {
-            throw std::runtime_error(std::string("sequence at '") + m_file_line + "' expectation '" +
-                typeid(TClass).name() + "' error: unexpected call '" +
-                typeid(method).name() + ", sequence is empty");
-        }
+        if (m_expectations.empty())
+            throwException<TClass>(method, m_file_line, "sequence is empty");
+
         auto expectation = m_expectations.front();
-//        if (expectation.arguments.has_value() &&
-//            expectation.arguments != std::any(std::tuple<std::decay_t<TMethodArgs> ...>(std::forward<TCallArgs>(args) ...)))
-//        {
-//            throw std::runtime_error(std::string("sequence at '") + expectation.m_file_line + "' expectation '" +
-//                typeid(TClass).name() + "' error: unexpected call '" +
-//                typeid(method).name() + "' arguments");
-//        }
-        if (expectation.call_count > 0)
-            expectation.call_count--;
-        else
-            m_expectations.pop_front();
+        if (expectation.arguments.has_value() && !isEqual(expectation.arguments, args ...))
+            throwException<TClass>(method, expectation.file_line, "not equal arguments");
+
+//        if (m_call_count > expectation.call_count_max)
+//            throwException<TClass>(method, expectation.file_line, "calls count more then max " +
+//                convertion::convert<std::string>(expectation.call_count_max));
+//
+//        if (m_call_count < expectation.call_count_min)
+//            throwException<TClass>(method, expectation.file_line, "calls count less then min " +
+//                convertion::convert<std::string>(expectation.call_count_max));
+
+        m_call_count = 0;
+        m_expectations.pop_front();
     }
 
 private:
@@ -185,26 +207,25 @@ private:
             size_t          const &call_count_min,
             size_t          const &call_count_max,
             std::type_info  const *method_name,
-            std::any        const &arguments)
+            std::any        const &arguments = {})
         :
             file_line       (file_line),
             call_count_min  (call_count_min),
             call_count_max  (call_count_max),
             method_name     (method_name),
-            arguments       (arguments),
-            call_count      (0)
+            arguments       (arguments)
         {}
         std::string             const file_line;
         size_t                  const call_count_min;
         size_t                  const call_count_max;
         std::type_info  const * const method_name;
         std::any                const arguments;
-        size_t                        call_count;
     };
 
     TClassMock             &m_mock;
     std::string             m_file_line;
     std::list<TExpectation> m_expectations;
+    size_t                  m_call_count;
 };
 
 

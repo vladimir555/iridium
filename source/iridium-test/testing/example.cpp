@@ -152,12 +152,47 @@ TEST(mock) {
     const auto &db_mock_const = db_mock;
     ASSERT("doSomething const", equal, db_mock_const.doSomething());
 
-    ::iridium::testing::MockSequence<CDatabaseMock> sequence(db_mock, "file_line_1");
-    sequence
+
+//    Количество вызовов
+//
+//    Определяет, сколько раз метод должен (или может) быть вызван:
+//        Times(n)              — ровно n раз.
+//        Times(AtLeast(n))     — минимум n раз.
+//        Times(AtMost(n))      — максимум n раз.
+//        Times(AnyNumber())    — любое число раз.
+//        Times(0)              — не должен быть вызван.
+//
+//    Сравнение аргументов
+//
+//    Определяет, с какими аргументами должен быть вызван метод:
+//        With(ArgsAre(42, "test"))                 — точное совпадение по значению.
+//        With(Truly(predicate))                    — кастомная функция для сравнения.
+//        With(Field(&MyStruct::id, Eq(123)))       — сравнение определённого поля.
+//        With(Pointwise(predicate, expected_args)) — сравнение нескольких аргументов с использованием предиката.
+//
+//    Порядок вызовов
+//
+//    Определяет в каком порядке должны вызываться методы:
+//        InSequence(seq)   — вызовы идут строго в порядке.
+//        After(other_call) — вызов происходит после другого.
+//
+//    Поведение/результат вызова
+//
+//    Определяет, что должно произойти при вызове:
+//        WillOnce(Return(value))       — вернуть значение.
+//        WillRepeatedly(Return(value)) — вернуть значение при каждом вызове.
+//        WillOnce(Throw(exception))    — выбросить исключение.
+//        WillOnce(Invoke(lambda))      — вызвать пользовательскую функцию.
+//        WillOnce([](...) { ... })     — вернуть значение через лямбду.
+
+
+    auto sequence = ::iridium::testing::MockSequence<CDatabaseMock>(db_mock, "file_line_1")
         .addExpectation("file_line_2", 1, 1, &CDatabaseMock::getUserName, 2, 2)
         .addExpectation("file_line_3", 1, 1, &CDatabaseMock::getUserName, 3, 3);
 
     sequence.step(&CDatabaseMock::getUserName, 2, 2);
+    sequence.step(&CDatabaseMock::getUserName, 3, 3);
+    ASSERT(sequence.step(&CDatabaseMock::getUserName, 3, 3), std::exception);
 
     CDatabaseAdapter dba("CDatabaseAdapter");
     ASSERT("adapted by 'CDatabaseAdapter': Alice int ", equal, dba.getUserName(1, 2));
