@@ -106,7 +106,8 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
                 TCmdArgs::TPrintResult::UNKNOWN,
                 std::chrono::minutes(1),
                 args[0],
-                "/"
+                "/",
+                {}
             }
         );
 
