@@ -105,13 +105,13 @@ std::decay_t<T> assertOne(T &&values, TException const &exception) {
 
 
 template<typename T>
-T &&assertOne(T &&values, std::string const &error) {
-    return assertOne(std::forward<T>(values), std::runtime_error(error));
+std::decay_t<T> assertOne(T &&values, std::string const &error) {
+    return std::forward<T>(assertOne(std::forward<T>(values), std::runtime_error(error)));
 }
 
 
 template<typename T, typename TException>
-T &&assertComplete(T &&values, TException const &exception) {
+std::decay_t<T> assertComplete(T &&values, TException const &exception) {
     if (values.size() > 0)
         return std::forward<T>(values);
     else
@@ -120,8 +120,8 @@ T &&assertComplete(T &&values, TException const &exception) {
 
 
 template<typename T>
-T &&assertComplete(T &&values, std::string const &error) {
-    return assertComplete(std::forward<T>(values), std::runtime_error(error));
+std::decay_t<T> assertComplete(T &&values, std::string const &error) {
+    return std::forward<T>(assertComplete(std::forward<T>(values), std::runtime_error(error)));
 }
 
 
