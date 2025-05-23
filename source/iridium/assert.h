@@ -74,46 +74,39 @@ std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exc
 
     auto values_size = values.size();
     if (values_size == size) {
-        return std::forward<T>(values); // Перемещаем или копируем объект
+        return std::move(values);
     } else {
-        throw exception; // Выбрасываем исключение
+        throw exception;
     }
 }
 
 
 template<typename T>
 std::decay_t<T> assertSize(T &&values, size_t const &size, std::string const &error) {
-    static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
-
-    auto values_size = values.size();
-    if (values_size == size) {
-        return std::forward<T>(values); // Перемещаем или копируем объект
-    }
-
-    throw std::runtime_error(
+    return assertSize(std::forward<T>(values), size, std::runtime_error(
         error + ", wrong items size " +
-        convertion::convert<std::string>(values_size) + ", expected " +
+        convertion::convert<std::string>(values.size()) + ", expected " +
         convertion::convert<std::string>(size)
-    );
+    ));
 }
 
 
 template<typename T, typename TException>
 std::decay_t<T> assertOne(T &&values, TException const &exception) {
-    return std::forward<T>(assertSize(std::forward<T>(values), 1, exception));
+    return assertSize(std::forward<T>(values), 1, exception);
 }
 
 
 template<typename T>
 std::decay_t<T> assertOne(T &&values, std::string const &error) {
-    return std::forward<T>(assertOne(std::forward<T>(values), std::runtime_error(error)));
+    return assertOne(std::forward<T>(values), std::runtime_error(error));
 }
 
 
 template<typename T, typename TException>
 std::decay_t<T> assertComplete(T &&values, TException const &exception) {
     if (values.size() > 0)
-        return std::forward<T>(values);
+        return std::move(values);
     else
         throw exception;
 }
@@ -121,7 +114,7 @@ std::decay_t<T> assertComplete(T &&values, TException const &exception) {
 
 template<typename T>
 std::decay_t<T> assertComplete(T &&values, std::string const &error) {
-    return std::forward<T>(assertComplete(std::forward<T>(values), std::runtime_error(error)));
+    return assertComplete(std::forward<T>(values), std::runtime_error(error));
 }
 
 
