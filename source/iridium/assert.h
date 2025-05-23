@@ -69,32 +69,38 @@ struct TContainerHasSizeMethod<T, std::void_t<decltype(std::declval<T>().size())
 
 
 template<typename T, typename TException>
-T &&assertSize(T &&values, size_t const &size, TException const &exception) {
-    static_assert(TContainerHasSizeMethod< std::decay_t<T> >::value, "Type T must have a size() method");
+std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exception) {
+    static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
+
     auto values_size = values.size();
-    if (values_size == size)
-        return std::forward<T>(values); // ----->
-    else
-        throw exception; // ----->
+    if (values_size == size) {
+        return std::forward<T>(values); // Перемещаем или копируем объект
+    } else {
+        throw exception; // Выбрасываем исключение
+    }
 }
 
 
 template<typename T>
-T &&assertSize(T &&values, size_t const &size, std::string const &error) {
+std::decay_t<T> assertSize(T &&values, size_t const &size, std::string const &error) {
     static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
+
     auto values_size = values.size();
-    if (values_size == size)
-        return std::forward<T>(values);
+    if (values_size == size) {
+        return std::forward<T>(values); // Перемещаем или копируем объект
+    }
+
     throw std::runtime_error(
         error + ", wrong items size " +
         convertion::convert<std::string>(values_size) + ", expected " +
-        convertion::convert<std::string>(size));
+        convertion::convert<std::string>(size)
+    );
 }
 
 
 template<typename T, typename TException>
-T &&assertOne(T &&values, TException const &exception) {
-    return assertSize(std::forward<T>(values), 1, exception);
+std::decay_t<T> assertOne(T &&values, TException const &exception) {
+    return std::forward<T>(assertSize(std::forward<T>(values), 1, exception));
 }
 
 
