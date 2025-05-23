@@ -79,7 +79,7 @@ string rjust(string const &source, size_t const &width, char const &symbol) {
     if (width > source.size())
         return string(width - source.size(), symbol) + source; // ----->
     else
-        return std::move(source); // ----->
+        return source; // ----->
 }
 
 
@@ -87,7 +87,7 @@ string ljust(string const &source, size_t const &width, char const &symbol) {
     if (width > source.size())
         return source + string(width - source.size(), symbol); // ----->
     else
-        return std::move(source); // ----->
+        return source; // ----->
 }
 
 

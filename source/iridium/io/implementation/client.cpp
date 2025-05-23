@@ -9,9 +9,9 @@ namespace io {
 namespace implementation {
 
 
-CClient::CClient(URI const &uri, IProtocol::TSharedPtr const &protocol)
+CClient::CClient(URI const &, IProtocol::TSharedPtr const &protocol)
 :
-    m_stream            (),
+//    m_stream            (),
     m_protocol          (protocol),
     m_session_manager   (CSessionManager::create())
 {}

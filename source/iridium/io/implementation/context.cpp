@@ -16,7 +16,7 @@ namespace io {
 namespace implementation {
 
 
-CContext::CContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol)
+CContext::CContext(IStream::TSharedPtr const &, IProtocol::TSharedPtr const &protocol)
 :
     m_events    (CAsyncQueue<Event::TSharedPtr>::create()),
     m_protocol  (protocol)

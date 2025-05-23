@@ -88,11 +88,7 @@ private:
 using CDatabase = some_namespace::CDatabase;
 
 
-//DEFINE_MOCK_CLASS(CDatabase) {
-class BehaviorFriend {
-public:
-};
-class CDatabaseMock: public CDatabase, public ::iridium::testing::Mock<CDatabase>, public BehaviorFriend {
+class CDatabaseMock: public CDatabase, public ::iridium::testing::Mock<CDatabase> {
 public:
     DEFINE_MOCK_CONSTRUCTOR(CDatabase)
 
