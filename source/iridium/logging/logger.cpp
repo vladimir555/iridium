@@ -130,7 +130,8 @@ LogStream::LogStream(TEvent::TLevel const &level)
             TEvent {
                 std::chrono::system_clock::now(),
                 level,
-                std::this_thread::get_id()
+                std::this_thread::get_id(),
+                ""
             }
         )
     )
