@@ -173,7 +173,7 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
     IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
         const &process_result_queue,
     std::chrono::milliseconds
-        const &timeout)
+        const &)
 :
     m_process               (process),
     m_process_result_queue  (process_result_queue),
