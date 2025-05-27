@@ -99,6 +99,19 @@ TEST(get_child) {
 }
 
 
+TEST(del_child) {
+    INode::TSharedPtr node = CNode::create("parent_node");
+    node->addChild("child_node", "child_value1");
+    node->addChild("child_node", "child_value2");
+    node->addChild("child_node_next", "child_value2");
+    auto child = node->getChild("child_node");
+    ASSERT(child != nullptr);
+    node->delChild("child_node");
+    child = node->getChild("child_node");
+    ASSERT(child == nullptr);
+}
+
+
 TEST(clone) {
     CNode node("root_node", "root_value");
     node.addChild("child1", "value1");
