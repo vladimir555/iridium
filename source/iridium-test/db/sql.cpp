@@ -144,7 +144,7 @@ struct Where: Group {
 
 struct Select {
     template<typename ... TColumns>
-    Where select(TColumns const & ... columns) {
+    Where select(TColumns const & ... /*columns*/) {
         return Where();
     }
     Where select() {
@@ -154,7 +154,7 @@ struct Select {
 
 
 template<typename ... TTables>
-Select from(TTables const & ... tables) {
+Select from(TTables const & ... /*tables*/) {
     return Select();
 }
 
