@@ -99,6 +99,33 @@ TEST(get_child) {
 }
 
 
+TEST(get_childs) {
+    CNode node("parent_node");
+    node.addChild("child_node_", "child_value");
+    node.addChild("child_node", "child_value1");
+    node.addChild("child_node", "child_value2");
+    node.addChild("child_node__", "child_value");
+
+    auto child = node.getChild("child_node_");
+    ASSERT(child != nullptr);
+    ASSERT("child_node_", equal, child->getName());
+    ASSERT("child_value", equal, child->getValue());
+
+    auto childs = node.getChilds("child_node_");
+    ASSERT(1, equal, childs.size());
+
+    childs = node.getChilds("child_node__");
+    ASSERT(1, equal, childs.size());
+
+    childs = node.getChilds("child_node");
+    ASSERT(2, equal, childs.size());
+    ASSERT("child_value1", equal, childs.front()->getValue());
+    ASSERT("child_value2", equal, childs.back()->getValue());
+    ASSERT("child_node",   equal, childs.front()->getName());
+    ASSERT("child_node",   equal, childs.back()->getName());
+}
+
+
 TEST(del_child) {
     INode::TSharedPtr node = CNode::create("parent_node");
     node->addChild("child_node", "child_value1");

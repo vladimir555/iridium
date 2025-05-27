@@ -69,6 +69,8 @@ public:
     ///
     virtual typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const = 0;
     ///
+    virtual          TNodes                             getChilds(std::string const &name) const = 0;
+    ///
     virtual typename INodeType::TSharedPtr              addChild(typename INodeType::TSharedPtr const &child_node) = 0;
     ///
     virtual typename INodeType::TSharedPtr              addChild(std::string const &name) = 0;
