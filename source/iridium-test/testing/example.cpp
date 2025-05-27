@@ -88,10 +88,10 @@ private:
 using CDatabase = some_namespace::CDatabase;
 
 
-class CDatabaseMock: public CDatabase, public ::iridium::testing::Mock<CDatabase> {
-public:
+//class CDatabaseMock: public CDatabase, public ::iridium::testing::Mock<CDatabase> {
+//public:
+DEFINE_MOCK_CLASS(CDatabase) {
     DEFINE_MOCK_CONSTRUCTOR(CDatabase)
-
     DEFINE_MOCK_METHOD(std::string, getUserName, int const &, int const &);
     DEFINE_MOCK_METHOD(std::string, doSomething);
     DEFINE_MOCK_METHOD_CONST(std::string, doSomething);
