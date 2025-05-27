@@ -55,6 +55,8 @@ public:
     ///
     typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
     ///
+    typename INodeType<TValue>::TNodes          getChilds(std::string const &name) const override;
+    ///
     typename INodeType<TValue>::TSharedPtr      addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
     ///
     typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name) override;
@@ -232,6 +234,18 @@ typename INodeType<TValue>::TConstSharedPtr CNodeType<TValue>::getChild(std::str
         if (i->getName() == name)
             return i; // ----->
     return nullptr; // ----->
+}
+
+
+template<typename TValue>
+typename INodeType<TValue>::TNodes CNodeType<TValue>::getChilds(std::string const &name) const {
+    typename INodeType<TValue>::TNodes nodes;
+
+    for (auto const &node: m_nodes)
+        if (node->getName() == name)
+            nodes.push_back(node);
+
+    return nodes; // ----->
 }
 
 
