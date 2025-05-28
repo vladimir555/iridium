@@ -788,9 +788,6 @@
     <ClCompile Include="logging\sink.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="macros\va_args.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="parsing\file_parser.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
