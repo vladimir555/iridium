@@ -122,7 +122,7 @@ std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_waiting) {
     {
         LOCK_SCOPE();
         if (m_is_empty && is_waiting)
-            LOCK_SCOPE_TRY_WAIT();
+            LOCK_SCOPE_TRY_WAIT({});
 
         m_is_empty = true;
         return std::move(m_items); // ----->

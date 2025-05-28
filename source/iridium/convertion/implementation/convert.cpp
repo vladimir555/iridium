@@ -518,11 +518,11 @@ TResult convertStringToReal(string const &value, std::string const &format) {
     if (d == 0.0) {
         int result = platform::sscanf(value.c_str(), format.c_str(), &d);
         if (result == 1)
-            return d; // ----->
+            return static_cast<TResult>(d); // ----->
         else
             throw runtime_error("convert '" + value + "' to double error"); // ----->
     } else
-        return d; // ----->
+        return static_cast<TResult>(d); // ----->
 }
 
 
