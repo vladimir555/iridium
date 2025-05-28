@@ -425,24 +425,26 @@ public: \
 template<typename ... TArgs> \
 Interface##Mock(TArgs ... args): Interface(args ...) {};
 
-#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                        \
-decltype(mock_object)::Behavior<                                                                \
+#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                         \
+::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
->(                                                                                              \
-    mock_object,                                                                                \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))                \
+>                                                                                                \
+(                                                                                                \
+    mock_object,                                                                                 \
     &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))                \
 ) = [&](__VA_ARGS__)
 
-#define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                  \
-decltype(mock_object)::Behavior<                                                                \
+#define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                   \
+::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
->(                                                                                              \
-    mock_object,                                                                                \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))          \
+>                                                                                                \
+(                                                                                                \
+    mock_object,                                                                                 \
     &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name)) \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))          \
 ) = [&](__VA_ARGS__)
 
 #define DEFINE_MOCK_SEQUENCE(name) \
