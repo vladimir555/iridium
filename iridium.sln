@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium", "source\iridium\iridium.vcxproj", "{93465FDF-FB97-43B6-AFBC-EF3831327242}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium_test", "source\iridium_test\iridium_test.vcxproj", "{68C40E02-4887-44F7-BDC0-BD00B617BA38}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iridium-test", "source\iridium_test\iridium-test.vcxproj", "{68C40E02-4887-44F7-BDC0-BD00B617BA38}"
 	ProjectSection(ProjectDependencies) = postProject
 		{93465FDF-FB97-43B6-AFBC-EF3831327242} = {93465FDF-FB97-43B6-AFBC-EF3831327242}
 	EndProjectSection
