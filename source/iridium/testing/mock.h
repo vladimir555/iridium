@@ -93,8 +93,10 @@ public:
     };
 
 protected:
-    template<typename TSignature, typename ... TArgs>
-    auto call(std::type_info const *method, TArgs && ... args) const;
+    template<typename TResult, typename ... TArgs>
+    auto call(TArgs && ... args);
+    template<typename TResult, typename ... TArgs>
+    auto call(TArgs && ... args) const;
 
 private:
     template<typename TResult, typename ... TArgs>
@@ -270,19 +272,37 @@ template<typename ... TArgs>
 
 
 template<typename TClass>
-template<typename TSignature, typename ... TArgs>
-auto Mock<TClass>::call(std::type_info const *method, TArgs && ... args) const {
-    auto i = m_map_name_behavior.find(method);
+template<typename TResult, typename ... TArgs>
+auto Mock<TClass>::call(TArgs && ... args) {
+    auto method_type_info = &typeid(TResult (TOriginalClass::*)(TArgs ...));
+    auto i = m_map_name_behavior.find(method_type_info);
     if (i == m_map_name_behavior.end())
-        throw std::runtime_error("mock calling error: unexpected call '" + std::string(method->name()) + "'");
-
-    using TMethod = std::function<TSignature>;
+        throw std::runtime_error("mock calling error: unexpected call '" + std::string(method_type_info->name()) + "'");
 
     try {
+        using TMethod = std::function<TResult (TArgs ...)>;
+        auto method = std::any_cast<TMethod>(i->second);
+        return method(std::forward<TArgs>(args)...);
+    } catch (const std::bad_any_cast&) {
+        throw std::runtime_error("mock calling error: type mismatch for method '" + std::string(method_type_info->name()) + "'");
+    }
+}
+
+
+template<typename TClass>
+template<typename TResult, typename ... TArgs>
+auto Mock<TClass>::call(TArgs && ... args) const {
+    auto method_type_info = &typeid(TResult (TOriginalClass::*)(TArgs ...) const);
+    auto i = m_map_name_behavior.find(method_type_info);
+    if (i == m_map_name_behavior.end())
+        throw std::runtime_error("mock calling error: unexpected call '" + std::string(method_type_info->name()) + "'");
+
+    try {
+        using TMethod = std::function<TResult (TArgs ...)>;
         const auto& method = std::any_cast<const TMethod&>(i->second);
         return method(std::forward<TArgs>(args)...);
     } catch (const std::bad_any_cast&) {
-        throw std::runtime_error("mock calling error: type mismatch for method '" + std::string(method->name()) + "'");
+        throw std::runtime_error("mock calling error: type mismatch for method '" + std::string(method_type_info->name()) + "'");
     }
 }
 
@@ -354,31 +374,31 @@ typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...) const>
 #define DEFINE_MOCK_METHOD_2(TResult, methodName) \
 public: \
     TResult methodName() override { \
-        return this->call<TResult()>(&typeid(TResult (TOriginalClass::*)())); \
+        return this->call<TResult>(); \
     }
 
 #define DEFINE_MOCK_METHOD_3(TResult, methodName, A1) \
 public: \
     TResult methodName(A1 a1) override { \
-        return this->call<TResult(A1)>(&typeid(TResult (TOriginalClass::*)(A1)), a1); \
+        return this->call<TResult>(a1); \
     }
 
 #define DEFINE_MOCK_METHOD_4(TResult, methodName, A1, A2) \
 public: \
     TResult methodName(A1 a1, A2 a2) override { \
-        return this->call<TResult(A1, A2)>(&typeid(TResult (TOriginalClass::*)(A1, A2)), a1, a2); \
+        return this->call<TResult>(a1, a2); \
     }
 
 #define DEFINE_MOCK_METHOD_5(TResult, methodName, A1, A2, A3) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3) override { \
-        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3)), a1, a2, a3); \
+        return this->call<TResult>(a1, a2, a3); \
     }
 
 #define DEFINE_MOCK_METHOD_6(TResult, methodName, A1, A2, A3, A4) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) override { \
-        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3, A4)), a1, a2, a3, a4); \
+        return this->call<TResult>(a1, a2, a3, a4); \
     }
 
 #define DEFINE_MOCK_METHOD(...) \
@@ -387,31 +407,31 @@ public: \
 #define DEFINE_MOCK_METHOD_CONST_2(TResult, methodName) \
 public: \
     TResult methodName() const override { \
-        return this->call<TResult()>(&typeid(TResult (TOriginalClass::*)() const)); \
+        return this->call<TResult>(); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_3(TResult, methodName, A1) \
 public: \
     TResult methodName(A1 a1) const override { \
-        return this->call<TResult(A1)>(&typeid(TResult (TOriginalClass::*)(A1) const), a1); \
+        return this->call<TResult>(a1); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_4(TResult, methodName, A1, A2) \
 public: \
     TResult methodName(A1 a1, A2 a2) const override { \
-        return this->call<TResult(A1, A2)>(&typeid(TResult (TOriginalClass::*)(A1, A2) const), a1, a2); \
+        return this->call<TResult>(a1, a2); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_5(TResult, methodName, A1, A2, A3) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3) const override { \
-        return this->call<TResult(A1, A2, A3)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3) const), a1, a2, a3); \
+        return this->call<TResult>(a1, a2, a3); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST_6(TResult, methodName, A1, A2, A3, A4) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) const override { \
-        return this->call<TResult(A1, A2, A3, A4)>(&typeid(TResult (TOriginalClass::*)(A1, A2, A3, A4) const), a1, a2, a3, a4); \
+        return this->call<TResult>(a1, a2, a3, a4); \
     }
 
 #define DEFINE_MOCK_METHOD_CONST(...) \
@@ -428,8 +448,7 @@ Interface##Mock(TArgs ... args): Interface(args ...) {};
 #define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                         \
 ::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))                \
->                                                                                                \
+    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))>               \
 (                                                                                                \
     mock_object,                                                                                 \
     &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
@@ -439,8 +458,7 @@ Interface##Mock(TArgs ... args): Interface(args ...) {};
 #define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                   \
 ::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))          \
->                                                                                                \
+    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))>         \
 (                                                                                                \
     mock_object,                                                                                 \
     &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
