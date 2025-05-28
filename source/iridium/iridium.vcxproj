@@ -323,7 +323,6 @@
     <ClCompile Include="logging\implementation\sink_file.cpp" />
     <ClCompile Include="logging\logger.cpp" />
     <ClCompile Include="logging\sink.cpp" />
-    <ClCompile Include="macros\va_args.cpp" />
     <ClCompile Include="parsing\file_parser.cpp" />
     <ClCompile Include="parsing\implementation\parser_command_line.cpp" />
     <ClCompile Include="parsing\implementation\parser_http.cpp" />
