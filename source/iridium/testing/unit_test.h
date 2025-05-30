@@ -13,6 +13,28 @@
 #include "iridium/convertion/convert.h"
 
 
+namespace iridium::convertion::implementation {
+
+
+template<typename T, typename = void>
+struct has_convert_specialization
+:
+    std::false_type
+{};
+
+template<typename T>
+struct has_convert_specialization<T, std::void_t<decltype(convertion::convert<std::string>(std::declval<T>()))>>
+:
+    std::true_type
+{};
+
+template<typename T>
+constexpr bool has_convert_specialization_v = has_convert_specialization<T>::value;
+
+
+} // iridium::convertion::implementation
+
+
 namespace iridium {
 namespace testing {
 
@@ -32,19 +54,23 @@ public:
     UnitTest() = default;
    ~UnitTest() = default;
 
-    template<typename TValue, typename std::enable_if<std::is_arithmetic<TValue>::value, TValue>::type* = nullptr>
+    template<typename TValue,
+        typename std::enable_if_t
+            <!iridium::convertion::implementation::has_convert_specialization_v<decltype(sizeof(TValue))>, int>* = nullptr>
     void fail(
-        TValue      const &left,
-        TValue      const &right,
-        std::string const &condition_name,
+        TValue      const &,
+        TValue      const &,
+        std::string const &,
         std::string const &condition_source,
         std::string const &line);
 
-    template<typename TValue, typename std::enable_if<!std::is_arithmetic<TValue>::value, TValue>::type* = nullptr>
+    template<typename TValue,
+        typename std::enable_if_t
+            <iridium::convertion::implementation::has_convert_specialization_v<decltype(sizeof(TValue))>, int>* = nullptr>
     void fail(
         TValue      const &left,
         TValue      const &right,
-        std::string const &condition_name,
+        std::string const &,
         std::string const &condition_source,
         std::string const &line);
 
@@ -84,22 +110,38 @@ public:
 // -----
 
 
-template<>
-void UnitTest::fail<std::string>(
-    std::string const &left,
-    std::string const &right,
-    std::string const &condition_name,
+template<typename TValue,
+    typename std::enable_if_t
+        <!iridium::convertion::implementation::has_convert_specialization_v<decltype(sizeof(TValue))>, int>*>
+void UnitTest::fail(
+    TValue      const &,
+    TValue      const &,
+    std::string const &,
     std::string const &condition_source,
-    std::string const &line);
+    std::string const &line)
+{
+    throw Exception(line
+        + "\n'"         + condition_source
+        +"'\ntype: '"   + typeid(TValue).name()
+        +"'\nsize: "    + convertion::convert<std::string>(sizeof(TValue)));
+}
 
-
-template<>
-void UnitTest::fail<std::chrono::system_clock::time_point>(
-    std::chrono::system_clock::time_point const &left,
-    std::chrono::system_clock::time_point const &right,
-    std::string const &condition_name,
+template<typename TValue,
+    typename std::enable_if_t
+        <iridium::convertion::implementation::has_convert_specialization_v<decltype(sizeof(TValue))>, int>*>
+void UnitTest::fail(
+    TValue      const &left,
+    TValue      const &right,
+    std::string const &,
     std::string const &condition_source,
-    std::string const &line);
+    std::string const &line)
+{
+    throw Exception(line
+        +   "\n'" + condition_source + "'\n"
+        +   "L: " + convertion::convert<std::string>(TValue(left))
+        + "\nR: " + convertion::convert<std::string>(TValue(right))
+    ); // ----->
+}
 
 
 template<>
@@ -128,35 +170,35 @@ void UnitTest::greaterEqual(double const &left, double const &right,
     std::string const &condition_source, std::string const &line);
 
 
-template<typename TValue, typename std::enable_if<std::is_arithmetic<TValue>::value, TValue>::type*>
-void UnitTest::fail(
-    TValue      const &left,
-    TValue      const &right,
-    std::string const &,
-    std::string const &condition_source,
-    std::string const &line)
-{
-    throw Exception(line
-        +   "\n'" + condition_source + "'\n"
-        +   "L: " + convertion::convert<std::string>(TValue(left))
-        + "\nR: " + convertion::convert<std::string>(TValue(right))
-    ); // ----->
-}
+//template<typename TValue, typename std::enable_if<std::is_arithmetic<TValue>::value, TValue>::type*>
+//void UnitTest::fail(
+//    TValue      const &left,
+//    TValue      const &right,
+//    std::string const &,
+//    std::string const &condition_source,
+//    std::string const &line)
+//{
+//    throw Exception(line
+//        +   "\n'" + condition_source + "'\n"
+//        +   "L: " + convertion::convert<std::string>(TValue(left))
+//        + "\nR: " + convertion::convert<std::string>(TValue(right))
+//    ); // ----->
+//}
 
 
-template<typename TValue, typename std::enable_if<!std::is_arithmetic<TValue>::value, TValue>::type*>
-void UnitTest::fail(
-    TValue      const &,
-    TValue      const &,
-    std::string const &,
-    std::string const &condition_source,
-    std::string const &line)
-{
-    throw Exception(line
-        + "\n'"         + condition_source
-        +"'\ntype: '"   + typeid(TValue).name()
-        +"'\nsize: "    + convertion::convert<std::string>(sizeof(TValue))); // ----->
-}
+//template<typename TValue, typename std::enable_if<!std::is_arithmetic<TValue>::value, TValue>::type*>
+//void UnitTest::fail(
+//    TValue      const &,
+//    TValue      const &,
+//    std::string const &,
+//    std::string const &condition_source,
+//    std::string const &line)
+//{
+//    throw Exception(line
+//        + "\n'"         + condition_source
+//        +"'\ntype: '"   + typeid(TValue).name()
+//        +"'\nsize: "    + convertion::convert<std::string>(sizeof(TValue))); // ----->
+//}
 
 
 template<typename TLeft, typename TRight>

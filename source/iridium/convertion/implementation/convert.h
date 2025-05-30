@@ -11,6 +11,7 @@
 #include <thread>
 #include <memory>
 #include <atomic>
+#include <type_traits>
 //#include <stdexcept>
 
 
@@ -29,7 +30,9 @@ struct config {
 
 
 template<typename TResult, typename TValue>
-TResult convert(TValue const &value);
+TResult convert(TValue const &value) {
+    return { convert<TResult>(value) };
+}
 
 
 template<typename TResult, typename TValue, typename TFormat>
