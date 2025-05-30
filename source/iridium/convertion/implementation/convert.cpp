@@ -539,12 +539,6 @@ float convert(string const &value) {
 
 
 template<>
-string convert(string const &value) {
-    return value; // ----->
-}
-
-
-template<>
 int convert(int const &value) {
     return value; // ----->
 }
@@ -785,6 +779,12 @@ std::u32string convert(std::string const &value) {
 
 
 #endif // STL > C++14
+
+
+template<>
+string convert(string const &value) {
+    return value; // ----->
+}
 
 
 } // implementation

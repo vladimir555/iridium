@@ -264,6 +264,10 @@ template<>
 std::u32string convert(std::string const &value);
 
 
+template<>
+std::string convert(std::string const &value);
+
+
 } // implementation
 } // convertion
 } // iridium
