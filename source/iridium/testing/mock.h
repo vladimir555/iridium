@@ -443,7 +443,7 @@ class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interfa
 #define DEFINE_MOCK_CONSTRUCTOR(Interface) \
 public: \
 template<typename ... TArgs> \
-Interface##Mock(TArgs ... args): Interface(args ...) {};
+Interface##Mock(TArgs && ... args): Interface(std::forward<TArgs>(args) ...) {};
 
 #define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                         \
 ::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \

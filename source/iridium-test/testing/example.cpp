@@ -62,11 +62,14 @@ namespace some_namespace {
 
 class CDatabase: public IDatabase {
 public:
-    CDatabase() = default;
+    CDatabase(std::string const &db_name)
+    :
+        m_db_name(db_name)
+    {}
     DEFINE_IMPLEMENTATION(CDatabase)
 
     std::string getUserName(int const &group_id, int const &user_id) override {
-        return "CDatabase: getUserName " +
+        return "CDatabase: " + m_db_name + "getUserName " +
             convert<std::string>(group_id) + " " +
             convert<std::string>(user_id);
     }
@@ -74,12 +77,14 @@ public:
         return getUserName(group_id, static_cast<int>(user_id)) + " f";
     }
     virtual std::string doSomething() const {
-        return "soSomething const";
+        return m_db_name + "soSomething const";
     }
 private:
     virtual std::string doSomething() {
-        return "soSomething";
+        return m_db_name + "soSomething";
     }
+
+    std::string m_db_name;
 };
 
 } // some_namespace
@@ -104,7 +109,7 @@ public:
     CDatabaseAdapter(std::string const &name)
     :
         m_name      (name),
-        m_database  (some_namespace::CDatabase::create())
+        m_database  (some_namespace::CDatabase::create("adapted_db_name"))
     {}
     std::string getUserName(int const &group_id, int const &user_id) override {
         return "adapted by '" + m_name + "': " + m_database->getUserName(group_id, user_id) + " ";// + getProperty();
@@ -127,7 +132,7 @@ DEFINE_MOCK_CLASS(CDatabaseAdapter) {
 
 
 TEST(mock) {
-    CDatabaseMock db_mock;
+    CDatabaseMock db_mock("db_mock");
 
     DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &, int const &) {
         return "Alice int";
@@ -226,7 +231,7 @@ TEST(mock) {
 //            return true;
 //
 //    // 3
-//    
+//
 //
 //    return false;
 //}
@@ -285,7 +290,7 @@ TEST(mock) {
 //    LOGT << "trace log";
 //    LOGD << "debug log";
 //    LOGI << "info  log";
-    
+
 //    //ASSERT(true);
 //    //ASSERT(1, equal, 1);
 //    //ASSERT("asd", equal, string("asd"));
@@ -315,11 +320,11 @@ TEST(mock) {
 //        LPSTR buffer                = nullptr;
 //
 //        size_t size = FormatMessageA(
-//            FORMAT_MESSAGE_ALLOCATE_BUFFER  | 
-//            FORMAT_MESSAGE_FROM_SYSTEM      | 
+//            FORMAT_MESSAGE_ALLOCATE_BUFFER  |
+//            FORMAT_MESSAGE_FROM_SYSTEM      |
 //            FORMAT_MESSAGE_IGNORE_INSERTS,
-//            NULL, error_message_code, 
-//            MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT), 
+//            NULL, error_message_code,
+//            MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT),
 //            (LPSTR)&buffer, 0, NULL);
 //
 //        std::string message(buffer, size);
@@ -421,5 +426,5 @@ TEST(mock) {
 //    simd_vector++;
 //
 ////    for (auto const &i: simd_vector)
-//        
+//
 //}
