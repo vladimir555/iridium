@@ -32,7 +32,7 @@ public:
     DEFINE_IMPLEMENTATION(CProcessStream)
     CProcessStream(
         std::string const &app,
-        std::string const &args);
+        std::string const &args = {});
     CProcessStream(
         std::string const &app,
         std::vector<std::string> const &args);
