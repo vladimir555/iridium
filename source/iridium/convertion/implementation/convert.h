@@ -11,8 +11,7 @@
 #include <thread>
 #include <memory>
 #include <atomic>
-#include <type_traits>
-//#include <stdexcept>
+#include <stdexcept>
 
 
 namespace iridium {
