@@ -130,8 +130,28 @@ DEFINE_MOCK_CLASS(CDatabaseAdapter) {
     DEFINE_MOCK_METHOD     (std::string, getUserName, int const &, int const &);
 };
 
+struct S {
+    std::string s;
+    bool operator == (S const &s_) {
+        return s == s_.s;
+    }
+};
+
+//#include "iridium/convertion/convert.h"
+//namespace iridium::convertion::implementation {
+//template<>
+//std::string convert(S const &s) {
+//    return s.s;
+//};
+//};
+
 
 TEST(mock) {
+//    S s1 {"1"};
+//    S s2 {"2"};
+//    LOGT << s1;
+//    ASSERT(s1, equal, s2);
+
     CDatabaseMock db_mock("db_mock");
 
     DEFINE_MOCK_BEHAVIOR(std::string, getUserName, db_mock, int const &, int const &) {
