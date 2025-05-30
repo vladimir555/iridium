@@ -30,8 +30,8 @@ struct config {
 
 
 template<typename TResult, typename TValue>
-TResult convert(TValue const &value) {
-    return { convert<TResult>(value) };
+TResult convert(TValue const &) {
+    throw std::runtime_error("convertion error: no such specialization");
 }
 
 
