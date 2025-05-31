@@ -22,6 +22,22 @@ extern "C" {
 #endif
 
 
+/// \~english @brief Retrieves a string containing detailed build information.
+///     This function collects various pieces of information about the build environment
+///     at compile time. The information includes ABI, STL version, compiler details,
+///     architecture, thread support, optimization level, C++ standard version,
+///     libc version (for Unix-like systems), RTTI status, exception support status,
+///     and platform information. The information is formatted into a human-readable string.
+/// \~russian @brief Получает строку, содержащую подробную информацию о сборке.
+///     Эта функция собирает различную информацию о среде сборки
+///     во время компиляции. Информация включает ABI, версию STL, сведения о компиляторе,
+///     архитектуру, поддержку потоков, уровень оптимизации, версию стандарта C++,
+///     версию libc ( для Unix-подобных систем), статус RTTI, статус поддержки исключений
+///     и информацию о платформе. Информация форматируется в человекочитаемую строку.
+/// \~english @return A pointer to a static character buffer containing the build information.
+///     The buffer is overwritten on each call in some contexts, so it should be used or copied immediately.
+/// \~russian @return Указатель на статический символьный буфер, содержащий информацию о сборке.
+///     Буфер может перезаписываться при каждом вызове в некоторых контекстах, поэтому его следует использовать или скопировать немедленно.
 inline char const *getBuildInfoInline() {
     // Статический буфер
     static char buffer[2048] = {0};
