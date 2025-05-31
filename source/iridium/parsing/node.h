@@ -12,14 +12,26 @@
 namespace iridium {
 namespace parsing {
 
-
+/// \~english @typedef INode
+/// @brief Defines `INode` as a specialization of the `INodeType` interface with `std::string` as its value type.
+///     This typically represents a generic node within a parsed data structure (like a configuration file or XML/JSON document),
+///     where each node can have a name, attributes, child nodes, and a string value.
+/// \~russian @typedef INode
+/// @brief Определяет `INode` как специализацию интерфейса `INodeType` с `std::string` в качестве типа значения.
+///     Обычно представляет собой обобщенный узел в разобранной структуре данных (например, конфигурационный файл или документ XML/JSON),
+///     где каждый узел может иметь имя, атрибуты, дочерние узлы и строковое значение.
 typedef INodeType<std::string> INode;
 
 
 } // parsing
 } // iridium
 
-
+/// \~english @brief Declares a conversion specialization allowing an `iridium::parsing::INode` object (or rather, a shared pointer to it, as per typical usage) to be converted to a `std::string`.
+///     This conversion likely extracts the primary string value associated with the node.
+///     The actual implementation of this conversion is provided elsewhere (usually via `IMPLEMENT_CONVERT`).
+/// \~russian @brief Объявляет специализацию преобразования, позволяющую объекту `iridium::parsing::INode` (или, скорее, разделяемому указателю на него, согласно типичному использованию) быть преобразованным в `std::string`.
+///     Это преобразование, вероятно, извлекает основное строковое значение, связанное с узлом.
+///     Фактическая реализация этого преобразования предоставляется в другом месте (обычно через `IMPLEMENT_CONVERT`).
 DEFINE_CONVERT(std::string, iridium::parsing::INode)
 
 
