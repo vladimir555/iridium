@@ -324,6 +324,6 @@ TEST(exception) {
 //TEST(custom_type) {
 //    S s1 {"1"};
 //    S s2 {"2"};
-//    LOGT << s1;
+////    LOGT << s1;
 //    ASSERT(s1, equal, s2);
 //}
