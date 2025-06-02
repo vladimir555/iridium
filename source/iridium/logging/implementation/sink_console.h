@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CSinkConsole` class, a concrete implementation of `ISink` for console output.
+///     This sink logs messages to the standard output or standard error streams.
+/// \~russian @file
+/// @brief Определяет класс `CSinkConsole`, конкретную реализацию `ISink` для вывода в консоль.
+///     Этот приемник логирует сообщения в стандартные потоки вывода или ошибок.
+
 #ifndef HEADER_SINK_CONSOLE_6E4AF8A2_1104_46D6_AC9B_29A482C3FC6F
 #define HEADER_SINK_CONSOLE_6E4AF8A2_1104_46D6_AC9B_29A482C3FC6F
 
@@ -12,8 +19,13 @@
 #include "sink.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
+/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
+/// \~english @brief Contains concrete implementations of the interfaces defined in the parent `threading` namespace.
+/// \~russian @brief Содержит конкретные реализации интерфейсов, определенных в родительском пространстве имен `threading`.
 namespace implementation {
 
 /// \~english @brief A concrete sink implementation for logging messages to the standard console/terminal.

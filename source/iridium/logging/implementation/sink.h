@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CSinkAsync` class, an asynchronous wrapper for `ISink` implementations.
+///     It uses a worker thread to process log events, improving logging performance by offloading I/O.
+/// \~russian @file
+/// @brief Определяет класс `CSinkAsync`, асинхронную обертку для реализаций `ISink`.
+///     Использует рабочий поток для обработки событий журнала, улучшая производительность логирования за счет выгрузки операций ввода-вывода.
+
 #ifndef HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB
 #define HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB
 
@@ -11,7 +18,10 @@
 #include "iridium/logging/sink.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
+/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
 /// \~english @brief Contains implementation details and concrete classes for logging components.
 /// \~russian @brief Содержит детали реализации и конкретные классы для компонентов логирования.
