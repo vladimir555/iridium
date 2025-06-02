@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Public interface for retrieving string representations of type names.
+///     Provides access to the `getTypeName` function template from the Iridium conversion framework.
+/// \~russian @file
+/// @brief Публичный интерфейс для получения строковых представлений имен типов.
+///     Предоставляет доступ к шаблонной функции `getTypeName` из фреймворка преобразования Iridium.
+
 #ifndef HEADER_TYPE_NAME_2FDF250B_2F93_405F_A121_42464C5A5B00
 #define HEADER_TYPE_NAME_2FDF250B_2F93_405F_A121_42464C5A5B00
 
@@ -9,6 +16,7 @@
 #include "implementation/type_name.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for type conversion utilities.
 /// \~russian @brief Пространство имен для утилит преобразования типов.

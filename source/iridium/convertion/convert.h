@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Public interface for the Iridium type conversion framework.
+///     Provides access to conversion functions and macros for defining and implementing custom conversions.
+/// \~russian @file
+/// @brief Публичный интерфейс для фреймворка преобразования типов Iridium.
+///     Предоставляет доступ к функциям преобразования и макросам для определения и реализации пользовательских преобразований.
+
 #ifndef HEADER_CONVERT_A1637EFD_3229_474D_BFEB_E9EAD7FF0C20
 #define HEADER_CONVERT_A1637EFD_3229_474D_BFEB_E9EAD7FF0C20
 
@@ -9,6 +16,7 @@
 #include "implementation/convert.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for type conversion utilities.
 ///     Provides a framework for converting values between different types,

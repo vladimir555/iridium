@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Core implementation details for retrieving type names as strings.
+///     Defines the `getTypeName` function template declaration and the `IMPLEMENT_TYPE_NAME` macro
+///     for generating specializations. This header is typically not included directly by end-users.
+/// \~russian @file
+/// @brief Основные детали реализации для получения имен типов в виде строк.
+///     Определяет объявление шаблонной функции `getTypeName` и макрос `IMPLEMENT_TYPE_NAME`
+///     для генерации специализаций. Этот заголовочный файл обычно не включается напрямую конечными пользователями.
+
 #ifndef HEADER_TYPE_NAME_661E1CCF_1F7C_495A_A751_095975AE071E
 #define HEADER_TYPE_NAME_661E1CCF_1F7C_495A_A751_095975AE071E
 
@@ -9,7 +18,10 @@
 #include <string>
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Namespace for type conversion utilities. (Implementation details reside in `implementation` namespace)
+/// \~russian @brief Пространство имен для утилит преобразования типов. (Детали реализации находятся в пространстве имен `implementation`)
 namespace convertion {
 /// \~english @brief Contains the internal implementation details for type name retrieval.
 ///     Users should typically not use elements from this namespace directly, but rather access them

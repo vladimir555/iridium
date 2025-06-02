@@ -2,6 +2,17 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Core implementation details for the Iridium type conversion framework.
+///     Defines the primary `convert` function templates, `convertPtr` helpers,
+///     and declarations for numerous explicit conversion specializations.
+///     This header is typically not included directly by end-users.
+/// \~russian @file
+/// @brief Основные детали реализации для фреймворка преобразования типов Iridium.
+///     Определяет основные шаблонные функции `convert`, вспомогательные функции `convertPtr`
+///     и объявления для многочисленных явных специализаций преобразования.
+///     Этот заголовочный файл обычно не включается напрямую конечными пользователями.
+
 #ifndef HEADER_CONVERT_7C31FD8D_5F64_4C4D_9D38_BD994242E709
 #define HEADER_CONVERT_7C31FD8D_5F64_4C4D_9D38_BD994242E709
 
@@ -14,7 +25,10 @@
 #include <stdexcept>
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Namespace for type conversion utilities. (Implementation details reside in `implementation` namespace)
+/// \~russian @brief Пространство имен для утилит преобразования типов. (Детали реализации находятся в пространстве имен `implementation`)
 namespace convertion {
 /// \~english @brief Contains the internal implementation details for the type conversion framework.
 ///     Users should typically not use elements from this namespace directly, but rather access them
