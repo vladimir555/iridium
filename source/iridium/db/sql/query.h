@@ -2,11 +2,21 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `Query` class, intended for SQL query construction and manipulation.
+///     Currently, it serves as a placeholder for future development.
+/// \~russian @file
+/// @brief Определяет класс `Query`, предназначенный для конструирования и манипулирования SQL-запросами.
+///     В настоящее время служит заполнителем для будущей разработки.
+
 #ifndef HEADER_QUERY_4C1958F2_C417_4420_84CE_3CB635CB3A1B
 #define HEADER_QUERY_4C1958F2_C417_4420_84CE_3CB635CB3A1B
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Namespace for database related functionalities. (SQL utilities in `sql` namespace)
+/// \~russian @brief Пространство имен для функциональности, связанной с базами данных. (Утилиты SQL в пространстве имен `sql`)
 namespace db {
 /// \~english @brief Namespace for SQL-related utilities and query building.
 /// \~russian @brief Пространство имен для утилит, связанных с SQL, и построения запросов.

@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CMySQLConnector` class, a concrete implementation of `IConnector` for MySQL databases.
+///     This connector uses the MySQL C API. Content is compiled only if `BUILD_FLAG_MYSQL` is defined.
+/// \~russian @file
+/// @brief Определяет класс `CMySQLConnector`, конкретную реализацию `IConnector` для баз данных MySQL.
+///     Этот коннектор использует MySQL C API. Содержимое компилируется только если определен `BUILD_FLAG_MYSQL`.
+
 #ifndef HEADER_MYSQL_CONNECTOR_1DD931FC_0862_4845_8CB9_DF0E40666155
 #define HEADER_MYSQL_CONNECTOR_1DD931FC_0862_4845_8CB9_DF0E40666155
 
@@ -23,8 +30,13 @@
 #include <mysql.h> // MySQL C API header
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Namespace for database related functionalities. (Implementation details in `implementation` namespace)
+/// \~russian @brief Пространство имен для функциональности, связанной с базами данных. (Детали реализации в пространстве имен `implementation`)
 namespace db {
+/// \~english @brief Namespace for common implementation details of database connectors.
+/// \~russian @brief Пространство имен для общих деталей реализации коннекторов баз данных.
 namespace implementation {
 
 

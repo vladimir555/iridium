@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CConnector` base class for concrete database connector implementations.
+///     This header provides common functionality for database connectors, such as configuration storage.
+/// \~russian @file
+/// @brief Определяет базовый класс `CConnector` для конкретных реализаций коннекторов баз данных.
+///     Этот заголовочный файл предоставляет общую функциональность для коннекторов баз данных, например, хранение конфигурации.
+
 #ifndef HEADER_CONNECTOR_926752A7_A77B_4CD8_9A9E_699A4945401D
 #define HEADER_CONNECTOR_926752A7_A77B_4CD8_9A9E_699A4945401D
 
@@ -10,7 +17,10 @@
 #include "iridium/db/config.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Namespace for database related functionalities. (Implementation details in `implementation` namespace)
+/// \~russian @brief Пространство имен для функциональности, связанной с базами данных. (Детали реализации в пространстве имен `implementation`)
 namespace db {
 /// \~english @brief Namespace for common implementation details of database connectors.
 /// \~russian @brief Пространство имен для общих деталей реализации коннекторов баз данных.

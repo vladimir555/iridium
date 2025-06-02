@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `IConnector` interface for database communication and the `Exception` class for database errors.
+///     This header provides the core abstractions for sending queries to a database and handling results.
+/// \~russian @file
+/// @brief Определяет интерфейс `IConnector` для взаимодействия с базой данных и класс `Exception` для ошибок базы данных.
+///     Этот заголовочный файл предоставляет основные абстракции для отправки запросов в базу данных и обработки результатов.
+
 #ifndef HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C
 #define HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C
 
@@ -15,6 +22,7 @@
 #include <map>
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for database related functionalities such as connection and querying.
 /// \~russian @brief Пространство имен для функциональности, связанной с базами данных, такой как соединение и выполнение запросов.

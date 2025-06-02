@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines database configuration structures using a serialization framework.
+///     This header specifies the structure `Datebase` (intended as Database) for holding
+///     database connection parameters like type, host, port, credentials, and database name.
+/// \~russian @file
+/// @brief Определяет структуры конфигурации базы данных с использованием фреймворка сериализации.
+///     Этот заголовочный файл определяет структуру `Datebase` (предположительно Database) для хранения
+///     параметров подключения к базе данных, таких как тип, хост, порт, учетные данные и имя базы данных.
+
 #ifndef HEADER_CONFIG_08F54573_BC06_4817_9AE5_35A3BC49E892
 #define HEADER_CONFIG_08F54573_BC06_4817_9AE5_35A3BC49E892
 
@@ -10,6 +19,7 @@
 #include "iridium/enum.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for database related functionalities.
 /// \~russian @brief Пространство имен для функциональности, связанной с базами данных.

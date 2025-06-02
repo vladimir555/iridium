@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CPostgresConnector` class, a concrete implementation of `IConnector` for PostgreSQL databases.
+///     This connector uses the `libpq` C library. Content is compiled only if `BUILD_FLAG_POSTGRES` is defined.
+/// \~russian @file
+/// @brief Определяет класс `CPostgresConnector`, конкретную реализацию `IConnector` для баз данных PostgreSQL.
+///     Этот коннектор использует C-библиотеку `libpq`. Содержимое компилируется только если определен `BUILD_FLAG_POSTGRES`.
+
 #ifndef HEADER_POSTGRES_CONNECTOR_750EE9B7_825A_426E_91B4_C860C650CB1C
 #define HEADER_POSTGRES_CONNECTOR_750EE9B7_825A_426E_91B4_C860C650CB1C
 
@@ -23,8 +30,13 @@
 #include <libpq-fe.h> // PostgreSQL C API header
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Namespace for database related functionalities. (Implementation details in `implementation` namespace)
+/// \~russian @brief Пространство имен для функциональности, связанной с базами данных. (Детали реализации в пространстве имен `implementation`)
 namespace db {
+/// \~english @brief Namespace for common implementation details of database connectors.
+/// \~russian @brief Пространство имен для общих деталей реализации коннекторов баз данных.
 namespace implementation {
 
 
