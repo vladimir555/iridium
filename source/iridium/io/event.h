@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `Event` structure for I/O operations and related types and utilities.
+///     This includes the `Event` struct itself, enumerations for event operations and status,
+///     and specializations of `std::hash` for `Event` and `Event::TSharedPtr`.
+/// \~russian @file
+/// @brief Определяет структуру `Event` для операций ввода-вывода, а также связанные типы и утилиты.
+///     Включает саму структуру `Event`, перечисления для операций и статусов событий,
+///     а также специализации `std::hash` для `Event` и `Event::TSharedPtr`.
+
 #ifndef HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
 #define HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
 
@@ -104,41 +113,47 @@ struct Event {
 
 
 /// \~english @brief Specialization of `std::hash` for `iridium::io::Event`.
-///     Allows `iridium::io::Event` objects to be used as keys in unordered associative containers
-///     like `std::unordered_map` or `std::unordered_set`.
-///     The actual hash computation logic is expected in a corresponding .cpp file.
+///     Enables `iridium::io::Event` objects to be used as keys in unordered associative containers
+///     like `std::unordered_map` or `std::unordered_set`. The hash is typically computed
+///     based on the event's stream, operation, and status.
+///     The actual hash computation logic is implemented in the corresponding .cpp file.
 /// \~russian @brief Специализация `std::hash` для `iridium::io::Event`.
 ///     Позволяет использовать объекты `iridium::io::Event` в качестве ключей в неупорядоченных
-///     ассоциативных контейнерах, таких как `std::unordered_map` или `std::unordered_set`.
-///     Фактическая логика вычисления хэша ожидается в соответствующем .cpp файле.
+///     ассоциативных контейнерах, таких как `std::unordered_map` или `std::unordered_set`. Хэш обычно вычисляется
+///     на основе потока, операции и статуса события.
+///     Фактическая логика вычисления хэша реализована в соответствующем .cpp файле.
 template<>
 struct std::hash<iridium::io::Event> {
-    /// \~english @brief Hash function operator.
-    /// \~russian @brief Оператор хэш-функции.
-    /// \~english @param e The `Event` object to hash.
-    /// \~russian @param e Объект `Event` для хэширования.
-    /// \~english @return The computed hash value.
-    /// \~russian @return Вычисленное хэш-значение.
+    /// \~english @brief Computes the hash value for an `iridium::io::Event` object.
+    /// \~russian @brief Вычисляет хэш-значение для объекта `iridium::io::Event`.
+    /// \~english @param e The `iridium::io::Event` object to hash.
+    /// \~russian @param e Объект `iridium::io::Event` для хэширования.
+    /// \~english @return The computed hash value as `size_t`.
+    /// \~russian @return Вычисленное хэш-значение типа `size_t`.
     size_t operator()(iridium::io::Event const &e) const;
 };
 
 
 /// \~english @brief Specialization of `std::hash` for `iridium::io::Event::TSharedPtr`.
-///     Allows shared pointers to `iridium::io::Event` objects to be used as keys
-///     in unordered associative containers.
-///     The actual hash computation logic is expected in a corresponding .cpp file.
+///     Enables `iridium::io::Event::TSharedPtr` (shared pointers to Event objects) to be used as keys
+///     in unordered associative containers like `std::unordered_map` or `std::unordered_set`.
+///     The hash is typically computed based on the pointer value itself, or by dereferencing
+///     the pointer and using the hash of the pointed-to `Event` object if appropriate (though hashing the pointer is more common for `std::shared_ptr` specializations).
+///     The actual hash computation logic is implemented in the corresponding .cpp file.
 /// \~russian @brief Специализация `std::hash` для `iridium::io::Event::TSharedPtr`.
-///     Позволяет использовать умные указатели на объекты `iridium::io::Event` в качестве ключей
-///     в неупорядоченных ассоциативных контейнерах.
-///     Фактическая логика вычисления хэша ожидается в соответствующем .cpp файле.
+///     Позволяет использовать `iridium::io::Event::TSharedPtr` (умные указатели на объекты Event) в качестве ключей
+///     в неупорядоченных ассоциативных контейнерах, таких как `std::unordered_map` или `std::unordered_set`.
+///     Хэш обычно вычисляется на основе самого значения указателя или путем разыменования
+///     указателя и использования хэша объекта `Event`, на который он указывает, если это уместно (хотя хэширование указателя более распространено для специализаций `std::shared_ptr`).
+///     Фактическая логика вычисления хэша реализована в соответствующем .cpp файле.
 template<>
 struct std::hash<iridium::io::Event::TSharedPtr> {
-    /// \~english @brief Hash function operator.
-    /// \~russian @brief Оператор хэш-функции.
-    /// \~english @param e The shared pointer to an `Event` object to hash.
-    /// \~russian @param e Умный указатель на объект `Event` для хэширования.
-    /// \~english @return The computed hash value.
-    /// \~russian @return Вычисленное хэш-значение.
+    /// \~english @brief Computes the hash value for a shared pointer to an `iridium::io::Event` object.
+    /// \~russian @brief Вычисляет хэш-значение для умного указателя на объект `iridium::io::Event`.
+    /// \~english @param e The `iridium::io::Event::TSharedPtr` to hash.
+    /// \~russian @param e Умный указатель `iridium::io::Event::TSharedPtr` для хэширования.
+    /// \~english @return The computed hash value as `size_t`.
+    /// \~russian @return Вычисленное хэш-значение типа `size_t`.
     size_t operator()(iridium::io::Event::TSharedPtr const &e) const;
 };
 
