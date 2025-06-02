@@ -6,6 +6,7 @@
 #define HEADER_CONVERT_7C31FD8D_5F64_4C4D_9D38_BD994242E709
 
 
+#include <list>
 #include <string>
 #include <chrono>
 #include <thread>
@@ -29,9 +30,7 @@ struct config {
 
 
 template<typename TResult, typename TValue>
-TResult convert(TValue const &) {
-    throw std::runtime_error("convertion error: no such specialization");
-}
+TResult convert(TValue const &);
 
 
 template<typename TResult, typename TValue, typename TFormat>
@@ -266,6 +265,10 @@ std::u32string convert(std::string const &value);
 
 template<>
 std::string convert(std::string const &value);
+
+
+template<>
+std::string convert(std::list<std::string> const &values);
 
 
 } // implementation

@@ -24,6 +24,7 @@ using std::chrono::microseconds;
 using std::chrono::nanoseconds;
 using std::stringstream;
 using std::time_t;
+using std::list;
 using std::string;
 using std::wstring;
 using std::u16string;
@@ -760,7 +761,7 @@ std::u32string convert(std::string const &value) {
                  (static_cast<uint8_t>(value[i + 2]) & 0x3F);
             i += 2;
             result.push_back(symbol);
-        } else 
+        } else
         if (symbol >= 0xF0 && symbol <= 0xF7 && i + 3 < length) {
             symbol = ((symbol & 0x07) << 18) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 12) |
@@ -784,6 +785,15 @@ std::u32string convert(std::string const &value) {
 template<>
 string convert(string const &value) {
     return value; // ----->
+}
+
+
+template<>
+string convert(list<string> const &values) {
+    string result;
+    for (auto const &value: values)
+        result += value;
+    return result; // ----->
 }
 
 
