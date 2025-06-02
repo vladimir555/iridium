@@ -9,6 +9,15 @@
 #include "iridium/platform.h"
 
 
+/// \~english @file stream_port.h
+/// \~english @brief Defines the `CStreamPort` for the Linux platform.
+/// \~english This implementation currently typedefs to the Unix `CStreamPort` implementation,
+/// \~english effectively using the common Unix platform's stream port logic for Linux builds.
+/// \~russian @file stream_port.h
+/// \~russian @brief Определяет `CStreamPort` для платформы Linux.
+/// \~russian Данная реализация в настоящее время использует typedef для Unix-реализации `CStreamPort`,
+/// \~russian фактически используя общую логику потокового порта платформы Unix для сборок Linux.
+
 #ifdef LINUX_PLATFORM
 
 

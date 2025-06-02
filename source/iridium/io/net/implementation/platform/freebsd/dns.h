@@ -9,6 +9,15 @@
 #include "iridium/platform.h"
 
 
+/// \~english @file dns.h
+/// \~english @brief Provides platform-specific DNS resolution for FreeBSD.
+/// \~english This implementation includes and uses the Unix platform's DNS resolution functionality,
+/// \~english leveraging the common POSIX-based services available on FreeBSD.
+/// \~russian @file dns.h
+/// \~russian @brief Предоставляет платформо-специфичное разрешение DNS для FreeBSD.
+/// \~russian Данная реализация включает и использует функциональность разрешения DNS платформы Unix,
+/// \~russian используя общие POSIX-совместимые службы, доступные на FreeBSD.
+
 #ifdef FREEBSD_PLATFORM
 
 

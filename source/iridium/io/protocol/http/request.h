@@ -22,9 +22,17 @@ namespace request {
 
 
 DEFINE_ROOT_NODE_BEGIN(Http)
+    /// \~english @brief Represents the first line of an HTTP request, also known as the request line.
+    /// \~russian @brief Представляет первую строку HTTP-запроса, также известную как строка запроса.
     struct TMessageLine {
+        /// \~english @brief The HTTP method (e.g., GET, POST).
+        /// \~russian @brief HTTP-метод (например, GET, POST).
         TMethod     method;
+        /// \~english @brief The request URI (e.g., "/index.html", "http://example.com/path").
+        /// \~russian @brief URI запроса (например, "/index.html", "http://example.com/path").
         std::string uri;
+        /// \~english @brief The HTTP protocol version string (e.g., "HTTP/1.1").
+        /// \~russian @brief Строка версии HTTP-протокола (например, "HTTP/1.1").
         std::string protocol;
     };
     DEFINE_ATTRIBUTE(TMessageLine, Message, TMessageLine({TMethod::GET, "", ""}))
