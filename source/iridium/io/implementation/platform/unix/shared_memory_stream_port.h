@@ -14,6 +14,7 @@
 #include "iridium/pattern/non_copyable.h"
 
 #include <string>
+#include <cstring>
 
 
 namespace iridium {
