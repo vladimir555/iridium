@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CNodeType<TValue>` template class, a concrete implementation of `INodeType<TValue>`.
+///     This class provides the actual storage and logic for tree nodes used in the Iridium parsing framework,
+///     including name interning and child management.
+/// \~russian @file
+/// @brief Определяет шаблонный класс `CNodeType<TValue>`, конкретную реализацию `INodeType<TValue>`.
+///     Этот класс предоставляет фактическое хранилище и логику для узлов дерева, используемых
+///     во фреймворке разбора Iridium, включая интернирование имен и управление дочерними узлами.
+
 #ifndef HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
 #define  HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
 
@@ -14,8 +23,17 @@
 #include "iridium/parsing/node_type.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
+///     (Implementation details are in the `implementation` sub-namespace).
+/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
+///     (Детали реализации находятся в подпространстве имен `implementation`).
 namespace parsing {
+/// \~english @brief Contains concrete implementations of parsing components, such as node types and parsers.
+///     This namespace provides the actual logic for parsing and composing data structures defined by interfaces in the parent `iridium::parsing` namespace.
+/// \~russian @brief Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры.
+///     Это пространство имен предоставляет фактическую логику для разбора и формирования структур данных, определенных интерфейсами в родительском пространстве имен `iridium::parsing`.
 namespace implementation {
 
 

@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CHTTPParser` class, a concrete implementation of `IParser` for HTTP messages.
+///     This parser handles conversion between raw HTTP message strings and `INode` tree structures.
+/// \~russian @file
+/// @brief Определяет класс `CHTTPParser`, конкретную реализацию `IParser` для HTTP-сообщений.
+///     Этот парсер обрабатывает преобразование между необработанными строками HTTP-сообщений и древовидными структурами `INode`.
+
 #ifndef HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
 #define HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
 
@@ -11,8 +18,15 @@
 #include "iridium/parsing/parser.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
+///     (Implementation details are in the `implementation` sub-namespace).
+/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
+///     (Детали реализации находятся в подпространстве имен `implementation`).
 namespace parsing {
+/// \~english @brief Contains concrete implementations of parsing components, such as node types and parsers.
+/// \~russian @brief Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры.
 namespace implementation {
 
 /// \~english @brief Concrete parser implementation for HTTP messages.

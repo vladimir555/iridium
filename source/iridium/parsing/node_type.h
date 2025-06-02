@@ -2,6 +2,16 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `INodeType<TValue>` template interface for generic tree nodes.
+///     This interface is fundamental for representing hierarchical data structures within the Iridium parsing framework.
+///     It supports operations like getting/setting name and value, accessing children, and path-based slicing.
+/// \~russian @file
+/// @brief Определяет шаблонный интерфейс `INodeType<TValue>` для обобщенных узлов дерева.
+///     Этот интерфейс является фундаментальным для представления иерархических структур данных
+///     во фреймворке разбора Iridium. Он поддерживает операции, такие как получение/установка имени и значения,
+///     доступ к дочерним элементам и срезы на основе пути.
+
 #ifndef HEADER_NODE_96BF1757_0A3E_46F0_94CB_A7AFC4877775
 #define  HEADER_NODE_96BF1757_0A3E_46F0_94CB_A7AFC4877775
 
@@ -14,7 +24,12 @@
 #include "iridium/smart_ptr.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
+///     This namespace often deals with representing data as a tree of nodes (e.g., `INode`, `INodeType`).
+/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
+///     Это пространство имен часто связано с представлением данных в виде дерева узлов (например, `INode`, `INodeType`).
 namespace parsing {
 
 

@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `IParser` interface for parsing and composing structured data.
+///     This interface provides methods to convert between string representations and `INode` tree structures.
+/// \~russian @file
+/// @brief Определяет интерфейс `IParser` для разбора и формирования структурированных данных.
+///     Этот интерфейс предоставляет методы для преобразования между строковыми представлениями и древовидными структурами `INode`.
+
 #ifndef HEADER_PARSER_03279B58_63F8_4528_B88B_B391B1E43880
 #define HEADER_PARSER_03279B58_63F8_4528_B88B_B391B1E43880
 
@@ -13,7 +20,12 @@
 #include "node.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
+///     This namespace often deals with representing data as a tree of nodes (e.g., `INode`, `IParser`).
+/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
+///     Это пространство имен часто связано с представлением данных в виде дерева узлов (например, `INode`, `IParser`).
 namespace parsing {
 
 /// \~english @brief Interface for parsers and composers (serializers) of data.

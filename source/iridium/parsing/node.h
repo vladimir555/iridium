@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `INode` typedef, a specialization of `INodeType<std::string>`.
+///     This serves as the primary type for representing nodes in parsed data structures
+///     within the Iridium parsing framework. Also declares a conversion from `INode` to `std::string`.
+/// \~russian @file
+/// @brief Определяет typedef `INode`, специализацию `INodeType<std::string>`.
+///     Служит основным типом для представления узлов в разобранных структурах данных
+///     во фреймворке разбора Iridium. Также объявляет преобразование из `INode` в `std::string`.
+
 #ifndef HEADER_NODE_7F5A86D1_A48E_4F8A_9779_D7495B3528A3
 #define  HEADER_NODE_7F5A86D1_A48E_4F8A_9779_D7495B3528A3
 
@@ -9,7 +18,12 @@
 #include "node_type.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
+///     This namespace often deals with representing data as a tree of nodes (e.g., `INode`).
+/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
+///     Это пространство имен часто связано с представлением данных в виде дерева узлов (например, `INode`).
 namespace parsing {
 
 /// \~english @typedef INode
