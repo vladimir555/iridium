@@ -54,16 +54,10 @@ public:
         /// \~english @brief Open for writing. If the file exists, its contents are discarded (truncated). If it does not exist, it is created.
         /// \~russian @brief Открыть для записи. Если файл существует, его содержимое удаляется (обрезается). Если не существует, создается.
         WRITE,
-        /// \~english @brief Open for writing, appending to the end of the file if it exists. If it does not exist, it is created.
-        ///     (Note: The name REWRITE usually implies truncation. Standard C modes 'a' or 'a+' append. If this means truncate and write, 'WRITE' is more typical. If it means append, 'APPEND' would be clearer. Assuming it behaves like a typical "write, create or truncate" based on common usage of "rewrite" in some contexts, but could also mean append.)
-        ///     Based on typical fopen modes, "w" or "w+" (truncate/create for write) or "a" or "a+" (append/create for write).
-        ///     Given `WRITE` is likely "w" or "w+", `REWRITE` might be a synonym or imply a specific create/truncate behavior.
-        ///     Let's assume it's for writing, possibly creating if not existing, and truncating if it does.
-        /// \~russian @brief Открыть для записи, добавляя в конец файла, если он существует. Если не существует, создается.
-        ///     (Примечание: Имя REWRITE обычно подразумевает усечение. Стандартные режимы C 'a' или 'a+' добавляют в конец. Если это означает усечение и запись, более типично 'WRITE'. Если это означает добавление, 'APPEND' было бы понятнее. Предполагается, что он ведет себя как типичный "write, create or truncate", но может также означать добавление.)
-        ///     Основываясь на типичных режимах fopen, "w" или "w+" (усечение/создание для записи) или "a" или "a+" (добавление/создание для записи).
-        ///     Учитывая, что `WRITE`, вероятно, является "w" или "w+", `REWRITE` может быть синонимом или подразумевать определенное поведение создания/усечения.
-        ///     Будем считать, что это для записи, возможно, с созданием, если не существует, и усечением, если существует.
+        /// \~english @brief Open for writing. Creates the file if it does not exist. If the file exists, its contents are discarded (truncated).
+        ///     This mode is typically equivalent to `fopen` mode `w` or `w+b`.
+        /// \~russian @brief Открыть для записи. Создает файл, если он не существует. Если файл существует, его содержимое удаляется (обрезается).
+        ///     Этот режим обычно эквивалентен режиму `fopen` `w` или `w+b`.
         REWRITE
     )
 
@@ -150,16 +144,16 @@ public:
     void                    flush() override;
 
 protected:
-    /// \~english @brief Protected constructor to initialize a file stream.
-    ///     Typically called by derived classes or a factory. The file is not opened by this constructor;
-    ///     `initialize()` must be called to open the file.
-    /// \~russian @brief Защищенный конструктор для инициализации файлового потока.
-    ///     Обычно вызывается производными классами или фабрикой. Файл не открывается этим конструктором;
-    ///     для открытия файла необходимо вызвать `initialize()`.
-    /// \~english @param file_name The path to the file.
-    /// \~russian @param file_name Путь к файлу.
-    /// \~english @param open_mode The mode in which to open the file (Read, Write, Rewrite).
-    /// \~russian @param open_mode Режим, в котором следует открыть файл (Read, Write, Rewrite).
+    /// \~english @brief Protected constructor to set up the file stream parameters.
+    ///     This constructor stores the file name and open mode. The actual file opening
+    ///     is deferred until the `initialize()` method is called.
+    /// \~russian @brief Защищенный конструктор для настройки параметров файлового потока.
+    ///     Этот конструктор сохраняет имя файла и режим открытия. Фактическое открытие файла
+    ///     откладывается до вызова метода `initialize()`.
+    /// \~english @param file_name The path to the file that will be associated with this stream.
+    /// \~russian @param file_name Путь к файлу, который будет связан с этим потоком.
+    /// \~english @param open_mode The mode (Read, Write, Rewrite) to be used when `initialize()` is called to open the file.
+    /// \~russian @param open_mode Режим (Read, Write, Rewrite), который будет использоваться при вызове `initialize()` для открытия файла.
     explicit CFileStream(std::string const &file_name, TOpenMode const &open_mode);
 
 private:

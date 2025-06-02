@@ -114,14 +114,12 @@ public:
     virtual size_t size() const override;
 
     /// \~english @brief Checks if a string with the given ID (index) exists and is valid in the cache.
-    ///     Note: The method name "checkExistense" contains a typo and should likely be "checkExistence".
     /// \~russian @brief Проверяет, существует ли строка с данным идентификатором (индексом) и действительна ли она в кэше.
-    ///     Примечание: Имя метода "checkExistense" содержит опечатку и, вероятно, должно быть "checkExistence".
     /// \~english @param id The ID (index) to check for.
     /// \~russian @param id Идентификатор (индекс) для проверки.
-    /// \~english @return `true` if an entry with the specified ID exists and is considered valid, `false` otherwise.
-    /// \~russian @return `true`, если запись с указанным идентификатором существует и считается действительной, иначе `false`.
-    virtual bool checkExistense(size_t const &id) const override;
+    /// \~english @return `true` if an entry with the specified ID exists, is valid (not null), and the ID is within bounds; `false` otherwise (ID out of bounds, entry is null, or other error).
+    /// \~russian @return `true`, если запись с указанным идентификатором существует, действительна (не null) и идентификатор находится в допустимых пределах; `false` в противном случае (идентификатор вне пределов, запись null или другая ошибка).
+    virtual bool checkExistence(size_t const &id) const override;
 
     /// \~english @brief Flushes the current in-memory cache content to its associated backing file.
     ///     All strings currently in the cache are written to the file specified during construction.

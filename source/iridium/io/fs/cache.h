@@ -88,14 +88,12 @@ public:
     virtual size_t size() const = 0;
 
     /// \~english @brief Checks if a string with the given ID exists in the cache.
-    ///     Note: The method name "checkExistense" contains a typo and should likely be "checkExistence".
     /// \~russian @brief Проверяет, существует ли строка с данным идентификатором в кэше.
-    ///     Примечание: Имя метода "checkExistense" содержит опечатку и, вероятно, должно быть "checkExistence".
     /// \~english @param id The ID to check for.
     /// \~russian @param id Идентификатор для проверки.
-    /// \~english @return `true` if an entry with the specified ID exists, `false` otherwise.
-    /// \~russian @return `true`, если запись с указанным идентификатором существует, иначе `false`.
-    virtual bool checkExistense(size_t const &id) const = 0;
+    /// \~english @return `true` if an entry with the specified ID exists, `false` if the ID is not found or an error occurs.
+    /// \~russian @return `true`, если запись с указанным идентификатором существует, `false` если идентификатор не найден или произошла ошибка.
+    virtual bool checkExistence(size_t const &id) const = 0;
 
     /// \~english @brief Flushes any pending changes in the cache to a persistent store, if applicable.
     ///     For caches that are backed by a file or database, this would ensure all in-memory

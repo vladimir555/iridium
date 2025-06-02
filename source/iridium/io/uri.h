@@ -113,19 +113,19 @@ public:
     /// \~russian @brief Деструктор по умолчанию.
    ~URI() = default;
 
-    /// \~english @brief Represents an IPv4 address as an array of 4 bytes.
-    /// \~russian @brief Представляет IPv4-адрес как массив из 4 байт.
+    /// \~english @brief Represents an IPv4 address. This structure stores an IPv4 address as an array of 4 bytes.
+    /// \~russian @brief Представляет IPv4-адрес. Эта структура хранит IPv4-адрес в виде массива из 4 байт.
     struct TIPv4: public std::array<uint8_t , 4> {
-        /// \~english @brief Default constructor for TIPv4.
-        /// \~russian @brief Конструктор по умолчанию для TIPv4.
+        /// \~english @brief Default constructor for TIPv4. Initializes the IPv4 address to 0.0.0.0.
+        /// \~russian @brief Конструктор по умолчанию для TIPv4. Инициализирует IPv4-адрес значением 0.0.0.0.
         TIPv4();
         /// \~english @brief Macro for creating shared instances of TIPv4.
         /// \~russian @brief Макрос для создания разделяемых экземпляров TIPv4.
         DEFINE_CREATE(TIPv4)
     };
 
-    /// \~english @brief Represents an IPv6 address as an array of 8 16-bit integers.
-    /// \~russian @brief Представляет IPv6-адрес как массив из 8 16-битных целых чисел.
+    /// \~english @brief Represents an IPv6 address. This structure stores an IPv6 address as an array of 8 16-bit integers.
+    /// \~russian @brief Представляет IPv6-адрес. Эта структура хранит IPv6-адрес в виде массива из 8 16-битных целых чисел.
     struct TIPv6: public std::array<uint16_t, 8> {
         /// \~english @brief Macro for creating shared instances of TIPv6.
         /// \~russian @brief Макрос для создания разделяемых экземпляров TIPv6.

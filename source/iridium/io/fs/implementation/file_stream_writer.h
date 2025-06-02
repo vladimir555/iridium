@@ -43,12 +43,14 @@ public:
     ///     Фактическое открытие файла и выделение ресурсов происходят во время вызова `initialize()`.
     /// \~english @param path The path to the file to be opened for writing.
     /// \~russian @param path Путь к файлу, который должен быть открыт для записи.
-    /// \~english @param is_rewrite If `true`, the file is opened in a mode that truncates it if it exists (typically `CFileStream::TOpenMode::REWRITE`).
-    ///     If `false` (default), the file is opened in the default write mode (`CFileStream::TOpenMode::WRITE`), which might append or truncate
-    ///     depending on the specific implementation of `CFileStream::initialize()` for that mode.
-    /// \~russian @param is_rewrite Если `true`, файл открывается в режиме, который усекает его, если он существует (обычно `CFileStream::TOpenMode::REWRITE`).
-    ///     Если `false` (по умолчанию), файл открывается в режиме записи по умолчанию (`CFileStream::TOpenMode::WRITE`), который может добавлять или усекать
-    ///     в зависимости от конкретной реализации `CFileStream::initialize()` для этого режима.
+    /// \~english @param is_rewrite Determines the open mode.
+    ///     If `true`, the stream is initialized with `CFileStream::TOpenMode::REWRITE`, meaning the file will be created if it doesn't exist, or truncated to zero length if it does exist.
+    ///     If `false` (default), the stream is initialized with `CFileStream::TOpenMode::WRITE`, which also creates the file if it doesn't exist or truncates it if it does.
+    ///     Note: In the current `CFileStream` enum, both `WRITE` and `REWRITE` imply truncation/creation. If append behavior is needed, a different mode (e.g., `APPEND`) would be required in `CFileStream::TOpenMode`.
+    /// \~russian @param is_rewrite Определяет режим открытия.
+    ///     Если `true`, поток инициализируется с `CFileStream::TOpenMode::REWRITE`, что означает, что файл будет создан, если не существует, или усечен до нулевой длины, если существует.
+    ///     Если `false` (по умолчанию), поток инициализируется с `CFileStream::TOpenMode::WRITE`, который также создает файл, если он не существует, или усекает его, если существует.
+    ///     Примечание: В текущем перечислении `CFileStream::TOpenMode` и `WRITE`, и `REWRITE` подразумевают усечение/создание. Если необходимо поведение добавления, потребуется другой режим (например, `APPEND`) в `CFileStream::TOpenMode`.
     explicit CFileStreamWriter(std::string const &path, bool const &is_rewrite = false);
 };
 

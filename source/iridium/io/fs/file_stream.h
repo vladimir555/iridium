@@ -80,19 +80,22 @@ public:
 
 /// \~english @brief Interface for readable file streams.
 ///     Combines file-specific stream properties from `IFileStream` with generic stream reading capabilities from `IStreamReader`.
+///     Concrete implementations of this interface will provide the actual logic for reading data from a specific file source.
 /// \~russian @brief Интерфейс для читаемых файловых потоков.
 ///     Объединяет специфичные для файлов свойства потока из `IFileStream` с общими возможностями чтения потока из `IStreamReader`.
+///     Конкретные реализации этого интерфейса будут предоставлять фактическую логику для чтения данных из определенного файлового источника.
 class IFileStreamReader: public virtual IFileStream, public virtual IStreamReader {
 public:
     /// \~english @brief Macro used to define common interface elements.
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса.
     DEFINE_INTERFACE(IFileStreamReader)
     // This interface currently adds no new methods beyond those inherited from IFileStream and IStreamReader.
-    // Concrete implementations will provide file-specific reading logic.
 };
 
 
 // todo: maybe (This section for a combined read/write file stream port is commented out in the source)
+/// \~english @brief Potential interface for a duplex file stream port, combining reading, writing, and seeking capabilities.
+/// \~russian @brief Потенциальный интерфейс для дуплексного файлового потока, объединяющий возможности чтения, записи и поиска.
 //class IFileStreamPort: public IFileStreamReader, public IFileStreamWriter {
 //public:
 //    virtual void seek(...) = 0;
