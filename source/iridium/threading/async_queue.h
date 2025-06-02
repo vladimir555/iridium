@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines interfaces for asynchronous queues, including pusher, popper, and combined queue functionality.
+///     This header provides `IAsyncQueuePusher<TItem>`, `IAsyncQueuePopper<TItem>`, and `IAsyncQueue<TItem>`
+///     template interfaces for thread-safe item queuing operations.
+/// \~russian @file
+/// @brief Определяет интерфейсы для асинхронных очередей, включая функциональность добавления, извлечения и комбинированной очереди.
+///     Этот заголовочный файл предоставляет шаблонные интерфейсы `IAsyncQueuePusher<TItem>`, `IAsyncQueuePopper<TItem>`
+///     и `IAsyncQueue<TItem>` для потокобезопасных операций с очередями элементов.
+
 #ifndef HEADER_ASYNC_QUEUE_BC5EFE5F_A8A1_40A2_85B5_065C05F9F9EE
 #define HEADER_ASYNC_QUEUE_BC5EFE5F_A8A1_40A2_85B5_065C05F9F9EE
 
