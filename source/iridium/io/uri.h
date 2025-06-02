@@ -23,6 +23,7 @@ namespace iridium {
 namespace io {
 
 
+//     [IPC]://[/usr/bin]/[ls]                                  - protocol + path
 //    [FILE]://[/usr/bin]/[ls]                                  - protocol + path + host
 // [PROCESS]://[/usr/bin]/[ls] [dir1] [dir2]                    - protocol + path + host + arguments
 //   [HTTPS]://[hostname.com][/dir1/dir2][?arg1=1&arg2=2]       - protocol + host + path + arguments
@@ -43,6 +44,7 @@ public:
         WSS         = -5,
         FILE        = -6,
         PROCESS     = -7,
+        IPC         = -8,
         HTTP        = 80,
         HTTPS       = 443,
         SSH         = 22,
