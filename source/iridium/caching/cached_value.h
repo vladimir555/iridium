@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `CachedValue<TValue>` template class for interning and caching values.
+///     This header provides mechanisms to reduce memory usage by sharing identical immutable values.
+///     It also includes a `CachedString` typedef and related `std::hash` specializations.
+/// \~russian @file
+/// @brief Определяет шаблонный класс `CachedValue<TValue>` для интернирования и кэширования значений.
+///     Этот заголовочный файл предоставляет механизмы для уменьшения использования памяти путем совместного использования идентичных неизменяемых значений.
+///     Также включает typedef `CachedString` и связанные специализации `std::hash`.
+
 #ifndef HEADER_CACHED_VALUE_589D8C09_61B8_4639_9F01_493EC80EE2D8
 #define HEADER_CACHED_VALUE_589D8C09_61B8_4639_9F01_493EC80EE2D8
 
@@ -12,7 +21,10 @@
 #include <iridium/convertion/convert.h>
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes and utilities related to caching and value interning.
+/// \~russian @brief Содержит классы и утилиты, связанные с кэшированием и интернированием значений.
 namespace caching {
 
 

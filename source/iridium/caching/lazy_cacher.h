@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `LazyCacher<TResult, TArgs...>` template class for memoizing function calls.
+///     Provides a simple mechanism to cache the results of functions based on their arguments.
+///     Note: The implementation has known issues mentioned in the class documentation (e.g., potential dangling references with `std::tuple<TArgs const & ...>` keys).
+/// \~russian @file
+/// @brief Определяет шаблонный класс `LazyCacher<TResult, TArgs...>` для мемоизации вызовов функций.
+///     Предоставляет простой механизм для кэширования результатов функций на основе их аргументов.
+///     Примечание: Реализация имеет известные проблемы, упомянутые в документации класса (например, потенциальные висячие ссылки с ключами `std::tuple<TArgs const & ...>`).
+
 #ifndef HEADER_LAZY_CACHER_472B28A6_2137_4B4F_9C63_BAA8C459D633
 #define HEADER_LAZY_CACHER_472B28A6_2137_4B4F_9C63_BAA8C459D633
 
@@ -19,7 +28,10 @@
 using namespace std;
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes and utilities related to caching and value interning.
+/// \~russian @brief Содержит классы и утилиты, связанные с кэшированием и интернированием значений.
 namespace caching {
 
 
