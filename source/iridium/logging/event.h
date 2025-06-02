@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `TEvent` structure for log messages within the Iridium logging framework.
+///     This structure encapsulates log event data such as timestamp, level, thread ID, and message content.
+/// \~russian @file
+/// @brief Определяет структуру `TEvent` для сообщений журнала во фреймворке логирования Iridium.
+///     Эта структура инкапсулирует данные события журнала, такие как временная метка, уровень, идентификатор потока и содержимое сообщения.
+
 #ifndef HEADER_EVENT_7923AB72_4A05_48BD_8490_D2C40F047299
 #define HEADER_EVENT_7923AB72_4A05_48BD_8490_D2C40F047299
 
@@ -12,7 +19,10 @@
 #include "iridium/smart_ptr.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
+/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
 
 /// \~english @brief Represents a single log event or message.

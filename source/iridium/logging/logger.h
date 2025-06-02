@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the main `Logger` singleton class, `LogStream` and `LogStreamDummy` helper structs,
+///     and logging macros (LOGT, LOGD, etc.).
+///     This is the central header for using the Iridium logging facility.
+/// \~russian @file
+/// @brief Определяет основной класс-одиночку `Logger`, вспомогательные структуры `LogStream` и `LogStreamDummy`,
+///     а также макросы логирования (LOGT, LOGD и т.д.).
+///     Это центральный заголовочный файл для использования механизма логирования Iridium.
+
 #ifndef HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9
 #define HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9
 
@@ -26,7 +35,10 @@
 #include "config.h"
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
+/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
 
 

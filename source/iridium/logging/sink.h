@@ -2,6 +2,13 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `ISink` interface for log event consumers (appenders).
+///     This includes the interface itself, an enumeration for sink types, and helper utilities.
+/// \~russian @file
+/// @brief Определяет интерфейс `ISink` для потребителей событий журнала (аппендеров).
+///     Включает сам интерфейс, перечисление типов приемников и вспомогательные утилиты.
+
 #ifndef HEADER_SINK_3A3CF594_E847_4869_B666_7DF6E46ADCCA
 #define HEADER_SINK_3A3CF594_E847_4869_B666_7DF6E46ADCCA
 
@@ -16,7 +23,10 @@
 #include <atomic>
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
+/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
+/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
 
 /// \~english @brief Interface for log event sinks, also known as appenders.
