@@ -15,6 +15,7 @@
 
 #include <string>
 #include <cstring>
+#include <atomic>
 
 
 namespace iridium {
@@ -38,21 +39,26 @@ public:
     URI::TSharedPtr         getURI() const override;
 
 protected:
-    void                    setBlockingMode(bool const &is_blocking);
+    void setBlockingMode(bool const &is_blocking);
+
+    template<typename T>
+    T assertOK(T result, std::string const &message);
+
+    static int initSignal();
 
     std::atomic<int>    m_shm_fd;
     void*               m_shm_ptr;
+    void*               m_data_ptr;
     size_t              m_shm_size;
     URI::TSharedPtr     m_uri;
     bool                m_is_opened;
     bool                m_is_blocking_mode;
 
-protected:
-    template<typename T>
-    T assertOK(T result, std::string const &message);
-
-    static int initSignal();
+private:
+    std::atomic<int>*   m_refcount;
+    std::string         m_shm_name;
 };
+
 
 template<typename T>
 T CSharedMemoryStreamPort::assertOK(T result, std::string const &message) {
@@ -65,12 +71,12 @@ T CSharedMemoryStreamPort::assertOK(T result, std::string const &message) {
         else
             throw std::runtime_error(message +
                 ", " + std::strerror(errno) + ", code " + convert<string>(errno));
-    } else
-        return result;
+    }
+    return result;
 }
 
 
-} // unix
+} // unix_
 } // platform
 } // implementation
 } // io
