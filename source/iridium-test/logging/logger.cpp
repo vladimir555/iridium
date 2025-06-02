@@ -36,13 +36,13 @@
 //
 //    INode::TSharedPtr root = CNode::create("logger");
 //    root->addChild("level", "TRACE_LEVEL");
-////    root->addChild("console-sink")->addChild("level", "TRACE_LEVEL");
+//    //    root->addChild("console-sink")->addChild("level", "TRACE_LEVEL");
 //    auto file_sink = root->addChild("file-sink");
 //    file_sink->addChild("level", "TRACE_LEVEL");
 //    file_sink->addChild("file-name", ".log");
 //
-//    config::TLogger logger_config(root);
-//    Logger::instance().update(logger_config);
+//    iridium::logging::config::TLogger logger_config(root);
+//    iridium::logging::setConfig(logger_config);
 //
 //    LOGT << "async log trace string via macros, int: " << 5 << " bool: " << true;
 //    LOGD << "debug";
