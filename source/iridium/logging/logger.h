@@ -59,10 +59,10 @@ private:
 };
 
 
-//struct LogStreamDummy {
-//    template<typename TValue>
-//    LogStreamDummy const & operator << (TValue v) const;
-//};
+struct LogStreamDummy {
+    template<typename TValue>
+    LogStreamDummy const & operator << (TValue v) const;
+};
 
 
 ///
@@ -135,6 +135,12 @@ private:
     ///
     mutable TEvent::TSharedPtr m_event;
 };
+
+
+template<typename TValue>
+LogStreamDummy const &LogStreamDummy::operator << (TValue) const {
+    return *this;
+}
 
 
 template<typename TValue>
@@ -277,14 +283,16 @@ std::string extractFileNameToLog(std::string const &path);
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE) << \
 iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
 #else
-#define LOGT //
+#define LOGT \
+if (false) iridium::logging::LogStreamDummy()
 #endif // BUILD_TYPE_DEBUG
 
 #if defined(BUILD_TYPE_DEBUG) || defined(BUILD_FLAG_FORCE_DEBUG_LOG)
 #define LOGD \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG)
 #else
-#define LOGD //
+#define LOGD \
+if (false) iridium::logging::LogStreamDummy()
 #endif // BUILD_TYPE_DEBUG
 
 #define LOGI \
