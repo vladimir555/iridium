@@ -84,7 +84,7 @@ void extractTokens(
 
 URI::URI(std::string const &source)
 :
-m_source(source)
+    m_source(source)
 {
     // string const IPv4_REGEX = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
     static string const LOGIN_DELIMITER             = "@";
@@ -111,12 +111,12 @@ m_source(source)
         else
             m_protocol = convert<TProtocol>(protocol);
         
-        if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE)) {
+        if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE, TProtocol::IPC)) {
             auto tokens = split(source, PROCESS_ARGUMENT_DELIMITER, 2);
             
-            if (m_protocol == TProtocol::FILE && tokens.size() > 1)
-                throw std::runtime_error("wrong file path format");
-            
+            if (checkOneOf(m_protocol, TProtocol::FILE, TProtocol::IPC) && tokens.size() > 1)
+                throw std::runtime_error("wrong '" + convert<std::string>(m_protocol) + "' path format");
+
             if (!tokens.empty())
                 m_address   = tokens.front();
             
