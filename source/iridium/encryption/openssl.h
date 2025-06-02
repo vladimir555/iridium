@@ -2,6 +2,15 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Defines the `OpenSSL` singleton class, providing a C++ wrapper for OpenSSL functionalities.
+///     This includes SSL context and session management, I/O operations, and error handling.
+///     Content is compiled only if `BUILD_FLAG_OPENSSL` is defined.
+/// \~russian @file
+/// @brief Определяет класс-одиночку `OpenSSL`, предоставляющий C++ обертку для функциональностей OpenSSL.
+///     Включает управление SSL-контекстами и сессиями, операции ввода-вывода и обработку ошибок.
+///     Содержимое компилируется только если определен `BUILD_FLAG_OPENSSL`.
+
 #ifndef HEADER_OPENSSL_356BCFD7_CD30_4EAF_BD8A_1538C082E0E8
 #define HEADER_OPENSSL_356BCFD7_CD30_4EAF_BD8A_1538C082E0E8
 
@@ -29,6 +38,7 @@
 #include <memory> // For std::shared_ptr if not covered by smart_ptr.h
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for encryption and cryptographic functionalities.
 /// \~russian @brief Пространство имен для функциональности шифрования и криптографии.

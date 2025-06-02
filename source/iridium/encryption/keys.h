@@ -11,6 +11,7 @@
 #include <string>
 
 
+// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for encryption and cryptographic functionalities.
 /// \~russian @brief Пространство имен для функциональности шифрования и криптографии.
