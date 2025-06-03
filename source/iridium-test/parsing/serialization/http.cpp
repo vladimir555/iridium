@@ -35,7 +35,7 @@ string const request_example =
 "cookie: PREF=ID=2578ccacb1ecf2aa:U=3a0a80ae418769c4:TM=1264579766:LM=1284111039:DV=sTIUytipGDoC:S=N0XC7wB0v7c6CCnH\n";
 
 
-string const responce_example =
+string const response_example =
 "HTTP/1.1 200 OK\n"
 "date: Mon, 27 Jul 2009 12:28:53 GMT\n"
 "server: Apache/2.2.14 (Win32)\n"
@@ -84,7 +84,7 @@ TEST(http_response) {
 //    logging::update(logging::config::createDefault());
 
     auto parser = CHTTPParser::create();
-    auto node   = parser->parse(responce_example);
+    auto node   = parser->parse(response_example);
 
 //    LOGT << "node:" << endl << convert<string>(node);
 
@@ -97,7 +97,7 @@ TEST(http_response) {
 
 //    LOGT << "response:" << str;
 
-// todo:   ASSERT(responce_example, equal, str);
+// todo:   ASSERT(response_example, equal, str);
 }
 
 
