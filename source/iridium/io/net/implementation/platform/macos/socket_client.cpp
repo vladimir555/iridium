@@ -33,12 +33,12 @@ URI::TSharedPtr CSocketClient::getURI() const {
 //}
 
 
-Buffer::TSharedPtr CSocketClient::read(size_t const &size) {
+Buffer::TSharedPtr CSocketClient::read(size_t const &/*size*/) {
     return {};
 }
 
 
-size_t CSocketClient::write(Buffer::TSharedPtr const &buffer) {
+size_t CSocketClient::write(Buffer::TSharedPtr const &/*buffer*/) {
     return 0;
 }
 
