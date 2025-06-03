@@ -99,11 +99,19 @@ private:
     /// \~english @brief Default constructor, private to enforce singleton pattern.
     /// \~russian @brief Конструктор по умолчанию, приватный для реализации шаблона singleton.
     Logger() = default;
-    /// \~english @brief List of active log sinks.
-    /// \~russian @brief Список активных приемников логов.
+
+    /// \~english @brief A list of shared pointers to `ISink` objects.
+    ///     These sinks are responsible for the actual output of log messages (e.g., to console, file).
+    /// \~russian @brief Список разделяемых указателей на объекты `ISink`.
+    ///     Эти приемники отвечают за фактический вывод сообщений журнала (например, в консоль, файл).
     std::list<ISink::TSharedPtr> m_sinks;
-    /// \~english @brief Shared pointer to the internal configuration node representation.
-    /// \~russian @brief Разделяемый указатель на внутреннее представление узла конфигурации.
+
+    /// \~english @brief The current logger configuration.
+    ///     This object holds settings like log levels for different sinks and formatting options.
+    ///     It is a shared pointer to an `iridium::parsing::INode` which represents the parsed configuration data.
+    /// \~russian @brief Текущая конфигурация логгера.
+    ///     Этот объект хранит настройки, такие как уровни логирования для различных приемников и параметры форматирования.
+    ///     Это разделяемый указатель на `iridium::parsing::INode`, представляющий разобранные данные конфигурации.
     parsing::INode::TSharedPtr m_config;
 };
 
@@ -145,22 +153,27 @@ struct LogStream {
     /// \~english @brief Destructor. Submits the accumulated log event to the `Logger`.
     /// \~russian @brief Деструктор. Отправляет накопленное событие журнала в `Logger`.
     ~LogStream();
+
     /// \~english @brief Appends a C-style string (const char*) to the log message.
     /// \~russian @brief Добавляет строку в стиле C (const char*) к сообщению журнала.
-    /// \~english @param s The C-style string to append.
-    /// \~russian @param s Строка в стиле C для добавления.
-    /// \~english @return A const reference to the `LogStream` object itself.
-    /// \~russian @return Константная ссылка на сам объект `LogStream`.
+    /// \~english @param s The C-style string to append. Null strings are logged as "(null)".
+    /// \~russian @param s Строка в стиле C для добавления. Нулевые строки логируются как "(null)".
+    /// \~english @return A const reference to the `LogStream` object itself, allowing for chained `<<` operations.
+    /// \~russian @return Константная ссылка на сам объект `LogStream`, позволяющая выполнять цепочечные операции `<<`.
     LogStream const & operator << (char const * const s) const;
+
     /// \~english @brief Appends a C-style string (char*) to the log message.
     /// \~russian @brief Добавляет строку в стиле C (char*) к сообщению журнала.
-    /// \~english @param s The C-style string to append.
-    /// \~russian @param s Строка в стиле C для добавления.
-    /// \~english @return A const reference to the `LogStream` object itself.
-    /// \~russian @return Константная ссылка на сам объект `LogStream`.
+    /// \~english @param s The C-style string to append. Null strings are logged as "(null)".
+    /// \~russian @param s Строка в стиле C для добавления. Нулевые строки логируются как "(null)".
+    /// \~english @return A const reference to the `LogStream` object itself, allowing for chained `<<` operations.
+    /// \~russian @return Константная ссылка на сам объект `LogStream`, позволяющая выполнять цепочечные операции `<<`.
     LogStream const & operator << (char       *       s) const;
+
     /// \~english @brief Appends a generic value to the log message, converted to a string.
+    ///     This is a template operator that handles various data types by attempting to convert them to `std::string` via `iridium::convertion::convert`.
     /// \~russian @brief Добавляет значение общего типа к сообщению журнала, преобразованное в строку.
+    ///     Это шаблонный оператор, который обрабатывает различные типы данных, пытаясь преобразовать их в `std::string` через `iridium::convertion::convert`.
     /// \~english @tparam TValue The type of the value.
     /// \~russian @tparam TValue Тип значения.
     /// \~english @param v The value to append.
@@ -312,10 +325,10 @@ struct LogStream {
 private:
     /// \~english @brief Mutable shared pointer to the log event being constructed.
     ///     `mutable` allows modification of the pointed-to `TEvent` object (e.g., its `line` member)
-    ///     within const member functions of `LogStream`.
+    ///     within const member functions of `LogStream`. This allows `operator<<` to be const while still modifying the event's content.
     /// \~russian @brief Изменяемый разделяемый указатель на конструируемое событие журнала.
     ///     `mutable` позволяет изменять объект `TEvent`, на который указывает указатель (например, его член `line`),
-    ///     внутри константных функций-членов `LogStream`.
+    ///     внутри константных функций-членов `LogStream`. Это позволяет `operator<<` быть константным, при этом изменяя содержимое события.
     mutable TEvent::TSharedPtr m_event;
 };
 
