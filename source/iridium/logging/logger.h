@@ -505,7 +505,7 @@ iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE) << \
 iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
 #else
 #define LOGT \
-iridium::logging::LogStreamDummy()
+if (false) iridium::logging::LogStreamDummy()
 #endif // BUILD_TYPE_DEBUG
 /// \~english @def LOGD
 /// @brief Logging macro for DEBUG level messages.
@@ -520,7 +520,7 @@ iridium::logging::LogStreamDummy()
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG)
 #else
 #define LOGD \
-iridium::logging::LogStreamDummy()
+if (false) iridium::logging::LogStreamDummy()
 #endif // BUILD_TYPE_DEBUG
 /// \~english @def LOGI
 /// @brief Logging macro for INFO level messages.

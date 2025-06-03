@@ -230,7 +230,7 @@ private:
         /// \~russian @param events Список событий для обработки.
         /// \~english @return A list of output events generated during handling.
         /// \~russian @return Список выходных событий, сгенерированных во время обработки.
-        IContextWorker::TOutputItems handle(IContextWorker::TInputItems const &events) override;
+        TOutputItems handle(TInputItems const &events) override;
     private:
         /// \~english @brief Context manager for acquiring and releasing contexts.
         /// \~russian @brief Менеджер контекстов для получения и освобождения контекстов.

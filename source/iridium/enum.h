@@ -138,6 +138,14 @@ public: \
     static std::string convert(TEnum::TEnumInternal const &e) { \
         return convert(TEnum(e)); \
     } \
+    static std::string convert(std::list<TEnum::TEnumInternal> const &enums_) { \
+        std::string result; \
+        for (auto const &e: enums_) \
+            result += convert(e) + ", "; \
+        if (result.size() > 2) \
+            result.resize(result.size() - 2); \
+        return result; \
+    } \
     std::string convertToFlagsString() const { \
         std::string result; \
         for (auto const &f: TEnum::getEnums()) \
@@ -168,11 +176,13 @@ std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = -1; \
 std::map<TEnum::TEnumInternal, std::string> const TEnum::map_enum_string(TEnum::generateMap()); \
 IMPLEMENT_CONVERT(TEnum, std::string, TEnum::convert) \
+IMPLEMENT_CONVERT(std::string, TEnum::TEnumInternal, TEnum::convert) \
 IMPLEMENT_CONVERT(std::string, TEnum, TEnum::convert) \
-IMPLEMENT_CONVERT(std::string, TEnum::TEnumInternal, TEnum::convert)
+IMPLEMENT_CONVERT(std::string, std::list<TEnum::TEnumInternal>, TEnum::convert)
 
 
 #endif // HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
+
 
 /*
 static std::string convert(TEnum const &e) { \

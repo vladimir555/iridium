@@ -305,3 +305,25 @@ TEST(exception) {
 
 } // convertion
 } // iridium
+
+
+//struct S {
+//    std::string s;
+//    bool operator == (S const &s_) {
+//        return s == s_.s;
+//    }
+//};
+//
+//namespace iridium::convertion::implementation {
+//template<>
+//std::string convert(S const &s) {
+//    return s.s;
+//};
+//};
+//
+//TEST(custom_type) {
+//    S s1 {"1"};
+//    S s2 {"2"};
+////    LOGT << s1;
+//    ASSERT(s1, equal, s2);
+//}

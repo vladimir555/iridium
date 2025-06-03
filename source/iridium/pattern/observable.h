@@ -12,6 +12,7 @@
 namespace iridium {
 namespace pattern {
 
+
 /// \~english @brief Interface for the 'Observable' (or 'Subject') part of the Observer design pattern.
 ///     Objects implementing this interface can be observed by `IObserver` instances. When an event
 ///     of type `TEvent` occurs, the observable is responsible for notifying its subscribed observers.
@@ -44,8 +45,9 @@ public:
     /// \~english @exception std::logic_error May be thrown if the observer was not previously subscribed or cannot be found.
     /// \~russian @exception std::logic_error Может быть выброшено, если наблюдатель не был ранее подписан или не может быть найден.
     virtual void unsubscribe(typename IObserver<TEvent>::TSharedPtr const &observer) = 0;
+    
+    virtual void notify     (TEvent const &event) = 0;
 };
-
 
 } // pattern
 } // iridium

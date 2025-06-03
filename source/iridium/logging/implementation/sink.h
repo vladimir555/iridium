@@ -82,10 +82,6 @@ private:
         /// \~english @brief Finalizes the worker handler. Calls `flush()` on the underlying sink.
         /// \~russian @brief Завершает работу обработчика рабочего потока. Вызывает `flush()` у базового приемника.
         void finalize() override;
-
-        /// \~english @brief Typedef for a collection of input items (log events) to be handled.
-        /// \~russian @brief Typedef для коллекции входных элементов (событий журнала) для обработки.
-        typedef IWorkerPusher::TInputItems TInputItems;
         /// \~english @brief Handles a batch of log events by forwarding them to the underlying sink's `log` method.
         /// \~russian @brief Обрабатывает пакет событий журнала, пересылая их методу `log` базового приемника.
         /// \~english @param e A collection of log events to handle.

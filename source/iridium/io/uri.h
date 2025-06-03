@@ -21,6 +21,7 @@
 
 
 // Examples of URI formats understood by this parser:
+//     [IPC]://[/usr/bin]/[ls]                                  - protocol + path
 //    [FILE]://[/usr/bin]/[ls]                                  - protocol + path + host
 // [PROCESS]://[/usr/bin]/[ls] [dir1] [dir2]                    - protocol + path + host + arguments
 //   [HTTPS]://[hostname.com][/dir1/dir2][?arg1=1&arg2=2]       - protocol + host + path + arguments
@@ -68,6 +69,7 @@ public:
         /// \~english @brief Local process execution.
         /// \~russian @brief Локальное выполнение процесса.
         PROCESS     = -7,
+        IPC         = -8,
         /// \~english @brief Hypertext Transfer Protocol, default port 80.
         /// \~russian @brief Протокол передачи гипертекста, порт по умолчанию 80.
         HTTP        = 80,

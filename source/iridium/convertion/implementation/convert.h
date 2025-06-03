@@ -17,6 +17,7 @@
 #define HEADER_CONVERT_7C31FD8D_5F64_4C4D_9D38_BD994242E709
 
 
+#include <list>
 #include <string>
 #include <chrono>
 #include <thread>
@@ -73,8 +74,8 @@ struct config {
 /// \~english @throws std::runtime_error Indicates that no specific conversion specialization was found.
 /// \~russian @throws std::runtime_error Указывает, что не найдена конкретная специализация преобразования.
 template<typename TResult, typename TValue>
-TResult convert(TValue const & /*value*/) { // Parameter named for clarity, though unused
-    throw std::runtime_error("convertion error: no such specialization for TResult from TValue");
+TResult convert(TValue const &) {
+    throw std::runtime_error("convertion error: no specialization exists for this type");
 }
 
 /// \~english @brief Overloaded base template for type conversion with an additional formatting parameter.
@@ -324,6 +325,10 @@ template<> std::u32string convert(std::string const &value);
 /// \~english @brief Converts `std::string` to `std::string` (identity conversion).
 /// \~russian @brief Преобразует `std::string` в `std::string` (тождественное преобразование).
 template<> std::string convert(std::string const &value);
+
+
+template<>
+std::string convert(std::list<std::string> const &values);
 
 
 } // implementation

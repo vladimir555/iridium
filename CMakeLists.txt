@@ -7,21 +7,23 @@ cmake_minimum_required(VERSION 3.21)
 #set(CMAKE_C_COMPILER "/usr/bin/gcc")
 #set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
+
 project(iridium LANGUAGES CXX)
 
 
 set(CMAKE_CXX_STANDARD 17)
 
-# release
-# set(CMAKE_BUILD_TYPE "Release")
-# set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O3")
 
-# debug
-set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
-  
+if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+#    set(CMAKE_BUILD_TYPE Release)
+#    add_compile_options(-O3 -Wall -Wextra -DNDEBUG)
+    set(CMAKE_BUILD_TYPE Debug)
+    add_compile_options(-O0 -Wall -Wextra -g)
+#    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
+#    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=thread")
+endif()
+
+
 #remove_definitions(-DNANO_PREALLOCATE_BAND_VM)
 
 # components
