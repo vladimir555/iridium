@@ -37,7 +37,6 @@ private:
         void initialize() override;
         void finalize() override;
 
-        typedef IWorkerPusher::TInputItems TInputItems;
         void handle(TInputItems const &e) override;
 
     private:

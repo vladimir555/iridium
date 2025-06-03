@@ -223,9 +223,9 @@ void CSessionManager::CContextWorkerHandler::finalize() {
 }
 
 
-CSessionManager::IContextWorker::TOutputItems
+CSessionManager::IContextWorker::IHandler::TOutputItems
 CSessionManager::CContextWorkerHandler::handle(
-    IContextWorker::TInputItems const &events_)
+    IContextWorker::IHandler::TInputItems const &events_)
 {
     //threading::sleep(1000);
     if (events_.empty())
@@ -249,7 +249,7 @@ CSessionManager::CContextWorkerHandler::handle(
 //    }
 
     // events to repeat handling
-    IContextWorker::TOutputItems events_to_repeat;
+    IContextWorker::IHandler::TOutputItems events_to_repeat;
 
     for (auto const &worker_event: removeDuplicates(events_)) {
 
