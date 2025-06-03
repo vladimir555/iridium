@@ -31,9 +31,6 @@ public:
     DEFINE_IMPLEMENTATION(CWorkerHandler)
     CWorkerHandler() = default;
 private:
-    typedef typename IWorker<int>::TInputItems  TInputItems;
-    typedef typename IWorker<int>::TOutputItems TOutputItems;
-
     TOutputItems handle(TInputItems const &items) override {
         TInputItems result;
         for (auto const &i: items) {

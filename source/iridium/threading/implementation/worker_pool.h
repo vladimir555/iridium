@@ -256,15 +256,15 @@ typename CWorkerPool<TInputItem, TOutputItem>::TOutputItems CWorkerPool<TInputIt
 }
 
 
-//    template<typename TWorkerHandler, typename ... TArgs>
-//    static TSharedPtr create(std::string const &name, size_t const &count, TArgs ... args) {
-//        typename IWorkerPool<TItem>::TWorkerHandlers handlers;
-//        for (size_t i = 0; i < count; i++) {
-//            auto handler = TWorkerHandler::create(args ...);
-//            handlers.push_back(handler);
-//        }
-//        return create(name, handlers);
-//    }
+template<typename TIWorkerHandler, typename TCWorkerHandler, typename ... TArgs>
+std::list<typename TIWorkerHandler::TSharedPtr> createHandlers(size_t const &count, TArgs ... args) {
+    std::list<typename TIWorkerHandler::TSharedPtr> handlers;
+    for (size_t i = 0; i < count; i++) {
+        typename TIWorkerHandler::TSharedPtr handler = TCWorkerHandler::create(std::forward<TArgs>(args) ...);
+        handlers.push_back(handler);
+    }
+    return handlers;
+}
 
 
 } // implementation

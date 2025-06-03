@@ -115,7 +115,7 @@ private:
         CContextWorkerHandler(IContextManager::TSharedPtr const &context_manager, IMultiplexer::TSharedPtr const &multiplexer);
         void initialize() override;
         void finalize() override;
-        IContextWorker::TOutputItems handle(IContextWorker::TInputItems const &events) override;
+        TOutputItems handle(TInputItems const &events) override;
     private:
         IContextManager::TSharedPtr
             m_context_manager;
