@@ -86,7 +86,7 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
         duration_cast<seconds>(timeout)).count()
     },
 
-    m_triggered_events( DEFAULT_EVENTS_LIMIT, (struct kevent) {0} ),
+m_triggered_events( DEFAULT_EVENTS_LIMIT, (struct kevent) { } ),
 
     m_kqueue    (0),
     m_pipe_add  {0},
@@ -240,10 +240,10 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 //             << ", udata " << (uint64_t)triggered_event.udata;
 
         uint16_t flags = 0;
-        if (triggered_event.ident == m_pipe_add[0])
+        if (static_cast<int>(triggered_event.ident) == m_pipe_add[0])
             flags = EV_ADD | EV_CLEAR | EV_EOF | EV_ERROR;
 
-        if (triggered_event.ident == m_pipe_del[0])
+        if (static_cast<int>(triggered_event.ident) == m_pipe_del[0])
             flags = EV_DELETE | EV_DISABLE;
 
         // if flags are set then update fds and continue

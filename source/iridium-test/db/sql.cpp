@@ -74,30 +74,30 @@ DEFINE_ROOT_NODE_END()
 
 template<typename TValue>
 struct Condition {
-    Condition(TValue const &value) {
+    Condition(TValue const &/*value*/) {
     }
 
-    Condition operator <  (TValue const &value) {
+    Condition operator <  (TValue const &/*value*/) {
         return *this;
     }
 
-    Condition operator <= (TValue const &value) {
+    Condition operator <= (TValue const &/*value*/) {
         return *this;
     }
 
-    Condition operator >  (TValue const &value) {
+    Condition operator >  (TValue const &/*value*/) {
         return *this;
     }
 
-    Condition operator >= (TValue const &value) {
+    Condition operator >= (TValue const &/*value*/) {
         return *this;
     }
 
-    Condition operator == (TValue const &value) {
+    Condition operator == (TValue const &/*value*/) {
         return *this;
     }
 
-    Condition operator && (TValue const &value) {
+    Condition operator && (TValue const &/*value*/) {
         return *this;
     }
 
@@ -136,7 +136,7 @@ struct Group: Having {
 
 struct Where: Group {
     template<typename TValue>
-    Group where(Condition<TValue> const &condition) {
+    Group where(Condition<TValue> const &/*condition*/) {
         return Group();
     }
 };
