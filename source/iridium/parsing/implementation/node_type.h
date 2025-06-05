@@ -152,6 +152,8 @@ void CNodeType<TValue>::setValue(TValue const &value) {
 
 template<typename TValue>
 typename INodeType<TValue>::TNodes CNodeType<TValue>::slice(std::string const &path) {
+    static std::string const DEFAULT_PATH_DELIMITER("/");
+
     // todo: depth overflow test
     typename INodeType<TValue>::TNodes nodes;
 
@@ -161,11 +163,11 @@ typename INodeType<TValue>::TNodes CNodeType<TValue>::slice(std::string const &p
     if (path == "/")
         return m_nodes; // ----->
 
-    std::string child_path = path.substr(1, path.find(INodeType<TValue>::PATH_DELIMITER, 1) - 1);
+    std::string child_path = path.substr(1, path.find(DEFAULT_PATH_DELIMITER, 1) - 1);
     std::string next_path;
 
-    if ((child_path.size() + INodeType<TValue>::PATH_DELIMITER.size()) <= path.size())
-        next_path = path.substr(child_path.size() + INodeType<TValue>::PATH_DELIMITER.size());
+    if ((child_path.size() + DEFAULT_PATH_DELIMITER.size()) <= path.size())
+        next_path = path.substr(child_path.size() + DEFAULT_PATH_DELIMITER.size());
 
     if (next_path.empty()) {
         for (auto &node: m_nodes)
