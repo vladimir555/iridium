@@ -27,10 +27,6 @@ class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
     DEFINE_INTERFACE(INodeType)
     ///
-    static std::string const PATH_DELIMITER;
-
-    // todo: typedef unordered_map<name, INodeType> TNodes;
-    ///
     typedef std::list<typename INodeType::TSharedPtr> TNodes;
     ///
     typedef typename TNodes::iterator           iterator;
@@ -38,19 +34,16 @@ public:
     typedef typename TNodes::const_iterator     const_iterator;
     ///
     typedef typename TNodes::const_reference    const_reference;
-
     ///
     virtual std::string     getName() const = 0;
     ///
     virtual TValue          getValue() const = 0;
     ///
     virtual void            setValue(TValue const &value) = 0;
-    /// todo: multithread, parallel execution, work pool
-    /// todo: return full sub tree with childs
+    ///
     virtual typename INodeType::TNodes slice(std::string const &path) = 0;
     ///// todo:
     //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
-
     ///
     virtual iterator        begin() = 0;
     ///
@@ -79,10 +72,6 @@ public:
     ///
     virtual void                                        delChild(std::string const &name) = 0;
 };
-
-
-template<typename TValue>
-std::string const INodeType<TValue>::PATH_DELIMITER("/");
 
 
 } // parsing
