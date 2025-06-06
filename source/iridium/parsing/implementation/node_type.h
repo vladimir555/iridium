@@ -37,7 +37,7 @@ public:
     ///
     void        setValue(TValue const &value) override;
     ///
-    typename INodeType<TValue>::TNodes          slice(std::string const &path) override;
+    typename INodeType<TValue>::TNodes          slice(std::string const &path) const override;
     ///
     typename INodeType<TValue>::iterator        begin() override;
     ///
@@ -151,7 +151,7 @@ void CNodeType<TValue>::setValue(TValue const &value) {
 
 
 template<typename TValue>
-typename INodeType<TValue>::TNodes CNodeType<TValue>::slice(std::string const &path) {
+typename INodeType<TValue>::TNodes CNodeType<TValue>::slice(std::string const &path) const {
     static std::string const DEFAULT_PATH_DELIMITER("/");
 
     // todo: depth overflow test

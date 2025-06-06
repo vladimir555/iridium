@@ -41,7 +41,7 @@ public:
     ///
     virtual void            setValue(TValue const &value) = 0;
     ///
-    virtual typename INodeType::TNodes slice(std::string const &path) = 0;
+    virtual typename INodeType::TNodes slice(std::string const &path) const = 0;
     ///// todo:
     //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
     ///
