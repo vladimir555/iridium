@@ -37,7 +37,7 @@ public:
     ///
     void        setValue(TValue const &value) override;
     ///
-    typename INodeType<TValue>::TNodes          slice(std::string const &path) const override;
+    typename INodeType<TValue>::TNodesSharedPtr slice(std::string const &path) const override;
     ///
     typename INodeType<TValue>::iterator        begin() override;
     ///
@@ -55,7 +55,7 @@ public:
     ///
     typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
     ///
-    typename INodeType<TValue>::TNodes          getChilds(std::string const &name) const override;
+    typename INodeType<TValue>::TNodesSharedPtr getChilds(std::string const &name) const override;
     ///
     typename INodeType<TValue>::TSharedPtr      addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
     ///
@@ -83,7 +83,7 @@ private:
     ///
     TValue m_value;
     ///
-    typename INodeType<TValue>::TNodes m_nodes;
+    typename INodeType<TValue>::TNodesSharedPtr m_nodes;
 };
 
 
@@ -151,11 +151,11 @@ void CNodeType<TValue>::setValue(TValue const &value) {
 
 
 template<typename TValue>
-typename INodeType<TValue>::TNodes CNodeType<TValue>::slice(std::string const &path) const {
+typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::slice(std::string const &path) const {
     static std::string const DEFAULT_PATH_DELIMITER("/");
 
     // todo: depth overflow test
-    typename INodeType<TValue>::TNodes nodes;
+    typename INodeType<TValue>::TNodesSharedPtr nodes;
 
     if (path.empty())
         return nodes; // ----->
@@ -240,8 +240,8 @@ typename INodeType<TValue>::TConstSharedPtr CNodeType<TValue>::getChild(std::str
 
 
 template<typename TValue>
-typename INodeType<TValue>::TNodes CNodeType<TValue>::getChilds(std::string const &name) const {
-    typename INodeType<TValue>::TNodes nodes;
+typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::getChilds(std::string const &name) const {
+    typename INodeType<TValue>::TNodesSharedPtr nodes;
 
     for (auto const &node: m_nodes)
         if (node->getName() == name)

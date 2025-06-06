@@ -27,13 +27,13 @@ class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
     DEFINE_INTERFACE(INodeType)
     ///
-    typedef std::list<typename INodeType::TSharedPtr> TNodes;
+    typedef std::list<typename INodeType::TSharedPtr> TNodesSharedPtr;
     ///
-    typedef typename TNodes::iterator           iterator;
+    typedef typename TNodesSharedPtr::iterator           iterator;
     ///
-    typedef typename TNodes::const_iterator     const_iterator;
+    typedef typename TNodesSharedPtr::const_iterator     const_iterator;
     ///
-    typedef typename TNodes::const_reference    const_reference;
+    typedef typename TNodesSharedPtr::const_reference    const_reference;
     ///
     virtual std::string     getName() const = 0;
     ///
@@ -41,7 +41,7 @@ public:
     ///
     virtual void            setValue(TValue const &value) = 0;
     ///
-    virtual typename INodeType::TNodes slice(std::string const &path) const = 0;
+    virtual typename INodeType::TNodesSharedPtr slice(std::string const &path) const = 0;
     ///// todo:
     //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
     ///
@@ -62,7 +62,7 @@ public:
     ///
     virtual typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const = 0;
     ///
-    virtual          TNodes                             getChilds(std::string const &name) const = 0;
+    virtual          TNodesSharedPtr                    getChilds(std::string const &name) const = 0;
     ///
     virtual typename INodeType::TSharedPtr              addChild(typename INodeType::TSharedPtr const &child_node) = 0;
     ///
