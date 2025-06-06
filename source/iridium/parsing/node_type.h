@@ -27,13 +27,17 @@ class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
     DEFINE_INTERFACE(INodeType)
     ///
-    typedef std::list<typename INodeType::TSharedPtr> TNodesSharedPtr;
+    typedef std::list<typename INodeType::TSharedPtr>   TNodesSharedPtr;
     ///
-    typedef typename TNodesSharedPtr::iterator           iterator;
+    typedef std::list<INodeType<TValue> *>              TNodesPtr;
     ///
-    typedef typename TNodesSharedPtr::const_iterator     const_iterator;
+    typedef typename TNodesSharedPtr::iterator          iterator;
     ///
-    typedef typename TNodesSharedPtr::const_reference    const_reference;
+    typedef typename TNodesSharedPtr::const_iterator    const_iterator;
+    ///
+    typedef typename TNodesSharedPtr::const_reference   const_reference;
+    ///
+    virtual typename INodeType::TNodesPtr getParents() const = 0;
     ///
     virtual std::string     getName() const = 0;
     ///
