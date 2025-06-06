@@ -25,11 +25,15 @@ namespace implementation {
 template<typename TValue>
 class CNodeType : public INodeType<TValue> {
 public:
-    DEFINE_IMPLEMENTATION(CNodeType)
+    DEFINE_CREATE(CNodeType)
     ///
     explicit CNodeType(std::string const &name, TValue const &value);
     ///
     explicit CNodeType(std::string const &name);
+    ///
+    virtual ~CNodeType();
+    ///
+    virtual typename INodeType<TValue>::TNodesPtr getParents() const override;
     ///
     std::string getName() const override final;
     ///
@@ -84,6 +88,8 @@ private:
     TValue m_value;
     ///
     typename INodeType<TValue>::TNodesSharedPtr m_nodes;
+    ///
+    typename INodeType<TValue>::TNodesPtr       m_parent_nodes;
 };
 
 
@@ -115,6 +121,23 @@ CNodeType<TValue>::CNodeType(std::string const &name)
 
 
 template<typename TValue>
+CNodeType<TValue>::~CNodeType() {
+    for (auto const &node: m_nodes) {
+        auto &parents = std::dynamic_pointer_cast< CNodeType<TValue> >(node)->m_parent_nodes;
+        parents.erase(
+            std::remove_if(
+                parents.begin(),
+                parents.end(),
+                    [&](auto const &node) {
+                       return node == this;
+                    }
+            )
+        );
+    }
+}
+
+
+template<typename TValue>
 CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings)
 :
     m_strings   (strings),
@@ -130,6 +153,12 @@ CNodeType<TValue>::CNodeType(std::string const &name, std::shared_ptr<TStrings> 
     m_name      (makeName(name)),
     m_value     ()
 {}
+
+
+template<typename TValue>
+typename INodeType<TValue>::TNodesPtr CNodeType<TValue>::getParents() const {
+    return m_parent_nodes;
+}
 
 
 template<typename TValue>
@@ -254,6 +283,7 @@ typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::getChilds(std::st
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(typename INodeType<TValue>::TSharedPtr const &child_node) {
     if (child_node) {
+        std::dynamic_pointer_cast< CNodeType<TValue> >(child_node)->m_parent_nodes.push_back(this);
         // todo: merge name map
         m_nodes.push_back(child_node);
         return m_nodes.back(); // ----->
