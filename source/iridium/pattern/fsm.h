@@ -34,9 +34,9 @@ public:
     FSM(TState const &initial_state);
     ///
     void addTransition(
-        TEvent  const &event,
-        TState  const &from,
-        TState  const &to,
+        TEvent   const &event,
+        TState   const &from,
+        TState   const &to,
         THandler const &handler = {});
     ///
     TState doAction(TEvent const &event);
@@ -63,9 +63,9 @@ FSM<TState, TEvent>::FSM(TState const &initial_state)
 
 template<typename TState, typename TEvent>
 void FSM<TState, TEvent>::addTransition(
-    TEvent const &event,
-    TState const &from,
-    TState const &to,
+    TEvent   const &event,
+    TState   const &from,
+    TState   const &to,
     THandler const &handler)
 {
     auto key = std::make_pair(from, event);
