@@ -132,6 +132,17 @@ public: \
 //DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
 
 
+#define DEFINE_ENUM_HASH(TEnum) \
+namespace std { \
+    template<> \
+    struct hash<TEnum> { \
+        std::size_t operator()(TEnum const &e) const noexcept { \
+            return std::hash<int>()(static_cast<int>(static_cast<TEnum::TEnumInternal>(e))); \
+        } \
+    }; \
+}
+
+
 /// use not in namespace, todo: private enum
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
