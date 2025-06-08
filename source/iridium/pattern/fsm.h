@@ -70,7 +70,6 @@ void FSM<TState, TEvent>::addTransition(
 {
     auto key = std::make_pair(from, event);
 
-    // Проверка на существующий переход
     if (m_table.find(key) != m_table.end()) {
         throw std::runtime_error(
             "fsm adding transition error: duplicate transition for state '" +
