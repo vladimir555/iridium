@@ -25,9 +25,9 @@ public:
     using THandler = std::function<void()>;
     ///
     struct TTransition {
-        TState from;
-        TEvent event;
-        TState to;
+        TState   from;
+        TEvent   event;
+        TState   to;
         THandler handler;
     };
     ///
