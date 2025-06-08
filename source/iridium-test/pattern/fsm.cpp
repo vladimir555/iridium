@@ -1,22 +1,11 @@
 #include <iridium/testing/tester.h>
-#include <iostream>
-#include <map>
-#include <functional>
-#include <tuple>
-#include <list>
 
-
-#include <iridium/convertion/convert.h>
 #include <iridium/enum.h>
-#include <iridium/smart_ptr.h>
 #include <iridium/logging/logger.h>
-#include <iridium/pattern/implementation/fsm_map.h>
-
-#include "fsm_switch.h"
+#include <iridium/pattern/fsm.h>
 
 
 using namespace std;
-
 
 
 namespace iridium {
@@ -49,110 +38,64 @@ DEFINE_ENUM(
 )
 
 
-class ILight: public IFSM<TEvent, TState> {
+class Light {
 public:
-    DEFINE_INTERFACE(ILight)
-};
+    Light() {
+        using namespace std::placeholders;
+        m_fsm.addTransition(TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON,
+            std::bind(&Light::onEnable, this));
+        m_fsm.addTransition(TEvent::PUSH_BUTTON, TState::LIGHT_ON, TState::LIGHT_OFF,
+            std::bind(&Light::onDisable, this));
+    }
 
+    void doAction(TEvent const &event) {
+        m_fsm.doAction(event);
+    }
 
-class Light: public implementation::CFSM<TEvent, TState> {
-public:
-    Light();
-    virtual ~Light() = default;
-
-    list<string> getLastActions() const;
-
-// todo:
-//    template<TEvent::TEnumInternal, TState::TEnumInternal, TState::TEnumInternal>
-//    class Handler {
-//    public:
-//        Handler(Light *parent): m_parent(parent) {}
-//       ~Handler() = default;
-//        void handle();
-//    private:
-//        Light *m_parent;
-//    };
-//    Handler<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON> h = this;
+    std::list<std::string> getLastActions() const {
+        return m_actions;
+    }
 
 private:
-    template<TEvent::TEnumInternal, TState::TEnumInternal, TState::TEnumInternal>
-    void handle();
+    void onEnable() {
+        m_actions.push_back("enable  " + std::to_string(m_counter++));
+    }
 
-    int             m_i = 0;
-    list<string>    m_actions;
+    void onDisable() {
+        m_actions.push_back("disable " + std::to_string(m_counter++));
+    }
+
+    FSM<TState, TEvent> m_fsm { TState::LIGHT_OFF };
+    std::list<std::string> m_actions;
+    int m_counter = 0;
 };
-
-
-//template<>
-//void Light::Handler<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON>::handle() {
-//}
-
-
-template<>
-void Light::handle<TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON>() {
-    m_actions.push_back("enable  " + convertion::convert<string>(m_i));
-    m_i++;
-}
-
-
-template<>
-void Light::handle<TEvent::PUSH_BUTTON, TState::LIGHT_ON, TState::LIGHT_OFF>() {
-    m_actions.push_back("disable " + convertion::convert<string>(m_i));
-    m_i++;
-}
-
-
-Light::Light()
-:
-    implementation::CFSM<TEvent, TState>(TState::LIGHT_OFF, 5,
-    implementation::CFSM<TEvent, TState>::TTransitions({
-        DEFINE_FSM_MAP_TRANSITION(TEvent::PUSH_BUTTON, TState::LIGHT_OFF, TState::LIGHT_ON),
-        DEFINE_FSM_MAP_TRANSITION(TEvent::PUSH_BUTTON, TState::LIGHT_ON , TState::LIGHT_OFF)
-    }))
-{}
-
-
-std::list<string> Light::getLastActions() const {
-    return m_actions;
-}
 
 
 TEST(fsm_map) {
     Light light;
 
-    light.doAction(test::Light::TEvent::PUSH_BUTTON);
-    light.doAction(test::Light::TEvent::PUSH_BUTTON);
-    light.doAction(test::Light::TEvent::PUSH_BUTTON);
+    light.doAction(TEvent::PUSH_BUTTON);
+    light.doAction(TEvent::PUSH_BUTTON);
+    light.doAction(TEvent::PUSH_BUTTON);
 
     ASSERT(
-        list<string>({
-            string("enable  0"),
-            string("disable 1"),
-            string("enable  2"),
-        }), equal, light.getLastActions()
-    );
-}
-
-
-TEST(fsm_switch) {
-    test::Light light;
-
-    light.doAction(test::Light::TEvent::PUSH_BUTTON);
-    light.doAction(test::Light::TEvent::PUSH_BUTTON);
-    light.doAction(test::Light::TEvent::PUSH_BUTTON);
-
-    ASSERT(
-        list<string>({
-            string("enable  0"),
-            string("disable 1"),
-            string("enable  2"),
-        }), equal, light.actions
+        std::list<std::string>({
+            "enable  0",
+            "disable 1",
+            "enable  2"
+        }),
+        equal,
+        light.getLastActions()
     );
 }
 
 
 } // pattern
 } // iridium
+
+
+DEFINE_ENUM_HASH(iridium::pattern::TState)
+DEFINE_ENUM_HASH(iridium::pattern::TEvent)
 
 
 IMPLEMENT_ENUM(iridium::pattern::TState)
