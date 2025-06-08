@@ -16,26 +16,28 @@ namespace iridium {
 namespace pattern {
 
 
+///
 template<typename TState, typename TEvent>
 class FSM {
 public:
     DEFINE_CREATE(FSM)
-    using Handler = std::function<void()>;
-
+    ///
+    using THandler = std::function<void()>;
+    ///
     struct TTransition {
         TState from;
         TEvent event;
         TState to;
-        Handler handler;
+        THandler handler;
     };
     ///
-    FSM(TState initial);
+    FSM(TState const &initial_state);
     ///
     void addTransition(
         TEvent  const &event,
         TState  const &from,
         TState  const &to,
-        Handler const &handler = {});
+        THandler const &handler = {});
     ///
     TState doAction(TEvent const &event);
 
@@ -53,9 +55,9 @@ private:
 
 
 template<typename TState, typename TEvent>
-FSM<TState, TEvent>::FSM(TState initial)
+FSM<TState, TEvent>::FSM(TState const &initial_state)
 :
-    m_state(initial)
+    m_state(initial_state)
 {}
 
 
@@ -64,7 +66,7 @@ void FSM<TState, TEvent>::addTransition(
     TEvent const &event,
     TState const &from,
     TState const &to,
-    Handler const &handler)
+    THandler const &handler)
 {
     auto key = std::make_pair(from, event);
 
