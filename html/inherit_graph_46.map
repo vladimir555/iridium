@@ -1,0 +1,9 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,92,113,118"/>
+<area shape="rect" id="Node000001" href="$structiridium_1_1_t_container_has_size_method_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d3b8610498e5b86d4cfe251817e736f71.html" title="Метафункция для проверки наличия у контейнерного типа T метода size(). Специализация для типов,..." alt="" coords="161,5,342,76"/>
+<area shape="poly" id="edge149_Node000000_Node000001" title=" " alt="" coords="114,84,159,68,161,73,115,89"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1_t_container_has_size_method.html" title="Метафункция для проверки наличия у контейнерного типа T метода size(). По умолчанию std::false_type." alt="" coords="161,100,342,141"/>
+<area shape="poly" id="edge150_Node000000_Node000003" title=" " alt="" coords="129,108,160,110,160,116,128,113"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="8,28,110,54"/>
+<area shape="poly" id="edge151_Node000002_Node000001" title=" " alt="" coords="125,38,160,38,160,43,125,43"/>
+</map>

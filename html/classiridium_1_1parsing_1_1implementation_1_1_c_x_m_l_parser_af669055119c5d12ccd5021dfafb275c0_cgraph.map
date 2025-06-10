@@ -1,0 +1,8 @@
+<map id="iridium::parsing::implementation::CXMLParser::parse" name="iridium::parsing::implementation::CXMLParser::parse">
+<area shape="rect" id="Node000001" title="Разбирает строку XML в древовидную структуру узлов. Результирующее дерево представляет элементы XML к..." alt="" coords="5,39,211,80"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Проверяет существование значения (не false, не null, не пустое) и выбрасывает пользовательское исключ..." alt="" coords="291,5,432,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,40,276,29,276,35,212,45"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing_1_1implementation.html#a988edd6f090ffa2ca64dbead47872439" title=" " alt="" coords="259,79,464,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,73,244,78,243,83,211,78"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="314,79,312,69,319,60,336,55,361,53,389,55,405,61,403,66,387,60,361,58,337,60,322,65,317,70,319,78"/>
+</map>

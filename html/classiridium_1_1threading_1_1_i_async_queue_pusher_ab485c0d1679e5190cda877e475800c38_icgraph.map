@@ -1,0 +1,7 @@
+<map id="iridium::threading::IAsyncQueuePusher::push" name="iridium::threading::IAsyncQueuePusher::push">
+<area shape="rect" id="Node000001" title="Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди." alt="" coords="478,13,663,54"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title="Статическая функция, выполняемая std::thread. Устанавливает имя потока, вызывает метод run() объекта ..." alt="" coords="229,13,430,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,36,430,36,430,30,462,30"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Инициализирует поток, что включает запуск базового std::thread и ожидание сигнала об успешном запуске..." alt="" coords="5,5,181,61"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="213,36,181,36,181,30,213,30"/>
+</map>

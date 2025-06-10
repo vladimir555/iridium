@@ -1,0 +1,5 @@
+<map id="iridium::system::Command::Exception" name="iridium::system::Command::Exception">
+<area shape="rect" id="Node000001" title="Пользовательский класс исключений для ошибок, возникающих во время выполнения команды...." alt="" coords="5,79,184,120"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="43,5,146,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,46,97,79,92,79,92,46"/>
+</map>

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::implementation::CClient</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_client.html">CClient</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1implementation_1_1_c_client-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::implementation::CClient</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1io_1_1_i_client.html" title="Интерфейс для обобщенного клиента. Определяет базовый контракт для клиентских объектов,...">IClient</a></code>. Этот класс управляет клиентским подключением к серверу, указанному <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>, используя заданный протокол для обмена данными и менеджер сессий для управления жизненным циклом подключения.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="implementation_2client_8h_source.html">client.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::implementation::CClient:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_client__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_client_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_client_inherit__map" id="airidium_1_1io_1_1implementation_1_1_c_client_inherit__map">
+<area shape="rect" title="Конкретная реализация интерфейса IClient. Этот класс управляет клиентским подключением к серверу,..." alt="" coords="11,153,184,193"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_client.html" title="Интерфейс для обобщенного клиента. Определяет базовый контракт для клиентских объектов,..." alt="" coords="36,79,159,105"/>
+<area shape="poly" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::io::implementation::CClient:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_client__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_client_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_client_coll__map" id="airidium_1_1io_1_1implementation_1_1_c_client_coll__map">
+<area shape="rect" title="Конкретная реализация интерфейса IClient. Этот класс управляет клиентским подключением к серверу,..." alt="" coords="11,153,184,193"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_client.html" title="Интерфейс для обобщенного клиента. Определяет базовый контракт для клиентских объектов,..." alt="" coords="36,79,159,105"/>
+<area shape="poly" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a89163c3334d8a10284407db11e1d992c" id="r_a89163c3334d8a10284407db11e1d992c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89163c3334d8a10284407db11e1d992c">CClient</a> (<a class="el" href="classiridium_1_1io_1_1_u_r_i.html">URI</a> const &amp;uri, IProtocol::TSharedPtr const &amp;protocol)</td></tr>
+<tr class="memdesc:a89163c3334d8a10284407db11e1d992c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует экземпляр <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_client.html" title="Конкретная реализация интерфейса IClient. Этот класс управляет клиентским подключением к серверу,...">CClient</a></code>. Настраивает клиент с целевым <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> и протоколом обмена данными. Фактическое подключение и управление сессией обычно инициируются в методе <code><a class="el" href="#a2fa929081269d44efdd71b2abc52f565" title="Инициализирует клиентское подключение. Обычно это включает создание потока (например,...">initialize()</a></code>.  <br /></td></tr>
+<tr class="separator:a89163c3334d8a10284407db11e1d992c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fa929081269d44efdd71b2abc52f565" id="r_a2fa929081269d44efdd71b2abc52f565"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fa929081269d44efdd71b2abc52f565">initialize</a> () override</td></tr>
+<tr class="memdesc:a2fa929081269d44efdd71b2abc52f565"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует клиентское подключение. Обычно это включает создание потока (например, TCP-сокета) на основе <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>, а затем создание и инициализацию менеджера сессий для обработки потока и протокола.  <br /></td></tr>
+<tr class="separator:a2fa929081269d44efdd71b2abc52f565"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57377bff45ea3be41f78d05cc0af253b" id="r_a57377bff45ea3be41f78d05cc0af253b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57377bff45ea3be41f78d05cc0af253b">finalize</a> () override</td></tr>
+<tr class="memdesc:a57377bff45ea3be41f78d05cc0af253b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает клиентское подключение. Обычно это включает завершение работы и уничтожение менеджера сессий, который, в свою очередь, должен закрыть поток и очистить ресурсы.  <br /></td></tr>
+<tr class="separator:a57377bff45ea3be41f78d05cc0af253b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1io_1_1_i_client.html" title="Интерфейс для обобщенного клиента. Определяет базовый контракт для клиентских объектов,...">IClient</a></code>. Этот класс управляет клиентским подключением к серверу, указанному <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>, используя заданный протокол для обмена данными и менеджер сессий для управления жизненным циклом подключения. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a89163c3334d8a10284407db11e1d992c" name="a89163c3334d8a10284407db11e1d992c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89163c3334d8a10284407db11e1d992c">&#9670;&#160;</a></span>CClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::implementation::CClient::CClient </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1io_1_1_u_r_i.html">URI</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>uri</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IProtocol::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>protocol</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует экземпляр <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_client.html" title="Конкретная реализация интерфейса IClient. Этот класс управляет клиентским подключением к серверу,...">CClient</a></code>. Настраивает клиент с целевым <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> и протоколом обмена данными. Фактическое подключение и управление сессией обычно инициируются в методе <code><a class="el" href="#a2fa929081269d44efdd71b2abc52f565" title="Инициализирует клиентское подключение. Обычно это включает создание потока (например,...">initialize()</a></code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uri</td><td><a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> сервера для подключения. </td></tr>
+    <tr><td class="paramname">protocol</td><td>Экземпляр протокола, который будет использоваться для обмена данными через установленный поток. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a57377bff45ea3be41f78d05cc0af253b" name="a57377bff45ea3be41f78d05cc0af253b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57377bff45ea3be41f78d05cc0af253b">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CClient::finalize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Завершает клиентское подключение. Обычно это включает завершение работы и уничтожение менеджера сессий, который, в свою очередь, должен закрыть поток и очистить ресурсы. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или производные классы при ошибках во время завершения работы. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="a2fa929081269d44efdd71b2abc52f565" name="a2fa929081269d44efdd71b2abc52f565"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fa929081269d44efdd71b2abc52f565">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CClient::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Инициализирует клиентское подключение. Обычно это включает создание потока (например, TCP-сокета) на основе <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>, а затем создание и инициализацию менеджера сессий для обработки потока и протокола. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или производные классы при ошибках (например, сбой подключения, сбой инициализации менеджера сессий). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/io/implementation/<a class="el" href="implementation_2client_8h_source.html">client.h</a></li>
+<li>source/iridium/io/implementation/<a class="el" href="implementation_2client_8cpp.html">client.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

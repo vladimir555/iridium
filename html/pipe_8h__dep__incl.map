@@ -1,0 +1,16 @@
+<map id="source/iridium/io/pipe.h" name="source/iridium/io/pipe.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="380,5,535,31"/>
+<area shape="rect" id="Node000002" href="$implementation_2context_8h.html" title=" " alt="" coords="237,79,446,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="429,42,372,81,369,76,426,38"/>
+<area shape="rect" id="Node000005" href="$implementation_2pipe_8h.html" title=" " alt="" coords="469,79,678,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="489,38,546,76,543,81,486,42"/>
+<area shape="rect" id="Node000003" href="$context_8cpp.html" title=" " alt="" coords="237,175,446,216"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,135,344,175,339,175,339,135"/>
+<area shape="rect" id="Node000004" href="$context__manager_8cpp.html" title=" " alt="" coords="5,175,214,216"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="280,128,159,177,157,172,278,123"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="512,128,391,177,389,172,510,123"/>
+<area shape="rect" id="Node000006" href="$implementation_2pipe_8cpp.html" title=" " alt="" coords="469,175,678,216"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="576,135,576,175,571,175,571,135"/>
+<area shape="rect" id="Node000007" href="$test__runner__fork_8cpp.html" title=" " alt="" coords="702,168,885,223"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="635,124,731,165,729,170,633,129"/>
+</map>

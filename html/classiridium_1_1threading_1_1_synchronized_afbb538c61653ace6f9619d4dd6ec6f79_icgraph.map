@@ -1,0 +1,5 @@
+<map id="iridium::threading::Synchronized::Synchronized" name="iridium::threading::Synchronized::Synchronized">
+<area shape="rect" id="Node000001" title="Конструктор по умолчанию. Инициализирует примитивы синхронизации." alt="" coords="209,13,404,54"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html#a60ffd18120547a96cace64d482bedcfc" title="Конструирует Locker и захватывает мьютекс связанного объекта Synchronized. Если is_tracable истинно д..." alt="" coords="5,5,161,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,36,161,36,161,30,193,30"/>
+</map>

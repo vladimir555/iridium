@@ -1,0 +1,15 @@
+<map id="source/iridium/io/net/implementation/platform" name="source/iridium/io/net/implementation/platform">
+<area shape="rect" id="node2" href="dir_ee7b6963e7a4ba62de26ac7160c9fa02.html" title="emscripten" alt="" coords="131,63,216,89"/>
+<area shape="rect" id="node3" href="dir_7c09a94e779f0080ba660bf89a2af684.html" title="freebsd" alt="" coords="240,63,304,89"/>
+<area shape="rect" id="node4" href="dir_9e375519ed92010dbed19af6deee728d.html" title="linux" alt="" coords="413,63,462,89"/>
+<area shape="rect" id="node8" href="dir_bd04c2bcd27267b7c30d257e93c7a128.html" title="logging" alt="" coords="589,137,651,162"/>
+<area shape="poly" id="edge1" href="dir_000034_000036.html" alt="" coords="463,84,576,128,574,133,461,89"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000034_000036.html" title="1" alt="" coords="572,114,579,129"/>
+<area shape="rect" id="node5" href="dir_75c2b054d256d56740f93128e62f1b1e.html" title="macos" alt="" coords="328,63,389,89"/>
+<area shape="rect" id="node6" href="dir_1f5928476a731551e2089fb3a70d882c.html" title="unix" alt="" coords="336,137,381,162"/>
+<area shape="poly" id="edge2" href="dir_000040_000060.html" alt="" coords="361,89,361,121,356,121,356,89"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000040_000060.html" title="1" alt="" coords="364,111,371,126"/>
+<area shape="rect" id="node7" href="dir_9ba4853d1130ef41ed861d235e7a2a79.html" title="windows" alt="" coords="485,63,558,89"/>
+<area shape="rect" id="clust2" href="dir_6aaf6846131ca556dfc3164da8a1ef54.html" alt="" coords="27,52,568,173"/>
+<area shape="rect" id="clust1" href="dir_f09d666ac2322d4206b2ed85cb0b7cf4.html" title="implementation" alt="" coords="16,16,579,184"/>
+</map>

@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/caching/cached_value.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_4c9f94772b4f59f677e72ac7f6f1b592.html">caching</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#typedef-members">Определения типов</a> &#124;
+<a href="#func-members">Функции</a> &#124;
+<a href="#var-members">Переменные</a>  </div>
+  <div class="headertitle"><div class="title">Файл cached_value.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Определяет шаблонный класс <code>CachedValue&lt;TValue&gt;</code> для интернирования и кэширования значений. Этот заголовочный файл предоставляет механизмы для уменьшения использования памяти путем совместного использования идентичных неизменяемых значений. Также включает typedef <code>CachedString</code> и связанные специализации <code>std::hash</code>.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;<a class="el" href="convert_8h_source.html">iridium/convertion/convert.h</a>&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для cached_value.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="cached__value_8h__incl.png" border="0" usemap="#asource_2iridium_2caching_2cached__value_8h" alt=""/></div>
+<map name="asource_2iridium_2caching_2cached__value_8h" id="asource_2iridium_2caching_2cached__value_8h">
+<area shape="rect" title="Определяет шаблонный класс CachedValue&lt;TValue&gt; для интернирования и кэширования значений...." alt="" coords="98,5,250,46"/>
+<area shape="rect" title=" " alt="" coords="5,256,74,282"/>
+<area shape="poly" title=" " alt="" coords="166,48,56,244,51,241,161,45"/>
+<area shape="rect" title=" " alt="" coords="98,256,152,282"/>
+<area shape="poly" title=" " alt="" coords="168,47,153,95,138,174,130,241,124,241,132,173,148,93,163,46"/>
+<area shape="rect" title=" " alt="" coords="310,102,420,127"/>
+<area shape="poly" title=" " alt="" coords="219,44,325,92,323,97,216,49"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="162,94,285,135"/>
+<area shape="poly" title=" " alt="" coords="188,45,207,79,202,82,183,48"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="184,183,351,208"/>
+<area shape="poly" title=" " alt="" coords="237,134,256,168,251,170,232,136"/>
+<area shape="poly" title=" " alt="" coords="230,211,90,255,88,250,228,206"/>
+<area shape="poly" title=" " alt="" coords="244,211,164,251,162,247,242,206"/>
+<area shape="rect" title=" " alt="" coords="528,256,567,282"/>
+<area shape="poly" title=" " alt="" coords="327,206,411,226,514,253,513,259,410,231,326,212"/>
+<area shape="rect" title=" " alt="" coords="176,256,236,282"/>
+<area shape="poly" title=" " alt="" coords="259,210,228,246,224,243,255,207"/>
+<area shape="rect" title=" " alt="" coords="260,256,318,282"/>
+<area shape="poly" title=" " alt="" coords="274,208,283,241,278,242,268,209"/>
+<area shape="rect" title=" " alt="" coords="341,256,402,282"/>
+<area shape="poly" title=" " alt="" coords="287,207,343,245,340,250,284,211"/>
+<area shape="rect" title=" " alt="" coords="426,256,504,282"/>
+<area shape="poly" title=" " alt="" coords="302,206,418,248,416,253,300,211"/>
+</map>
+</div>
+</div>
+<p><a href="cached__value_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1caching_1_1_cached_value.html">iridium::caching::CachedValue&lt; TValue &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет кэшированное, потенциально разделяемое значение типа TValue. Этот класс предназначен для уменьшения использования памяти путем интернирования одинаковых значений. Каждое уникальное значение хранится один раз для каждого потока и разделяется через std::shared_ptr. Примечание: В исходном коде есть комментарии TODO относительно потенциальных проблем с контролем памяти и потокобезопасностью инициализации карты кэширования между единицами трансляции.  <a href="classiridium_1_1caching_1_1_cached_value.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01iridium_1_1caching_1_1_cached_value_3_01_t_value_01_4_01_4.html">std::hash&lt; iridium::caching::CachedValue&lt; TValue &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Специализация std::hash для <a class="el" href="classiridium_1_1caching_1_1_cached_value.html" title="Представляет кэшированное, потенциально разделяемое значение типа TValue. Этот класс предназначен для...">iridium::caching::CachedValue</a>. Позволяет использовать объекты CachedValue в качестве ключей в неупорядоченных ассоциативных контейнерах, таких как std::unordered_map. Хэш вычисляется на основе базового TValue.  <a href="structstd_1_1hash_3_01iridium_1_1caching_1_1_cached_value_3_01_t_value_01_4_01_4.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных. Этот заголовочный файл объявляет служебные функции для упрощения процесса получения экземпляров коннекторов баз данных на основе конфигурации или <a class="el" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1caching.html">iridium::caching</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1caching"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит классы и утилиты, связанные с кэшированием и интернированием значений. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Определения типов</h2></td></tr>
+<tr class="memitem:aca0f1a27b6cc60148569afc9ecae5254" id="r_aca0f1a27b6cc60148569afc9ecae5254"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1caching_1_1_cached_value.html">CachedValue</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1caching.html#aca0f1a27b6cc60148569afc9ecae5254">iridium::caching::CachedString</a></td></tr>
+<tr class="memdesc:aca0f1a27b6cc60148569afc9ecae5254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef для <a class="el" href="classiridium_1_1caching_1_1_cached_value.html" title="Представляет кэшированное, потенциально разделяемое значение типа TValue. Этот класс предназначен для...">CachedValue</a>, специализирующегося на std::string. Предоставляет удобный псевдоним для часто используемых кэшированных строк.  <br /></td></tr>
+<tr class="separator:aca0f1a27b6cc60148569afc9ecae5254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a7b0e04fbaa5206ea5b4d792ee867e456" id="r_a7b0e04fbaa5206ea5b4d792ee867e456"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1caching.html#a7b0e04fbaa5206ea5b4d792ee867e456">iridium::caching::convertToString</a> (<a class="el" href="namespaceiridium_1_1caching.html#aca0f1a27b6cc60148569afc9ecae5254">iridium::caching::CachedString</a> const &amp;source)</td></tr>
+<tr class="memdesc:a7b0e04fbaa5206ea5b4d792ee867e456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Преобразует <a class="el" href="namespaceiridium_1_1caching.html#aca0f1a27b6cc60148569afc9ecae5254" title="Typedef для CachedValue, специализирующегося на std::string. Предоставляет удобный псевдоним для част...">CachedString</a> в std::string. Эта функция, вероятно, является частью фреймворка преобразования Iridium.  <br /></td></tr>
+<tr class="separator:a7b0e04fbaa5206ea5b4d792ee867e456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d5dbe713697cc4e4407e03c0c7445c8" id="r_a7d5dbe713697cc4e4407e03c0c7445c8"><td class="memTemplParams" colspan="2">template&lt;typename TLValue, typename TRValue&gt; </td></tr>
+<tr class="memitem:a7d5dbe713697cc4e4407e03c0c7445c8"><td class="memTemplItemLeft" align="right" valign="top">TRValue&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7d5dbe713697cc4e4407e03c0c7445c8">operator+</a> (TLValue const &amp;l, <a class="el" href="classiridium_1_1caching_1_1_cached_value.html">iridium::caching::CachedValue</a>&lt; TRValue &gt; const &amp;r)</td></tr>
+<tr class="memdesc:a7d5dbe713697cc4e4407e03c0c7445c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перегружает оператор сложения для CachedValue. Позволяет складывать TLValue с CachedValue&lt;TRValue&gt;, предполагая, что TRValue может быть сконструирован из TLValue или они совместимы.  <br /></td></tr>
+<tr class="separator:a7d5dbe713697cc4e4407e03c0c7445c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f83f11cfa05049ce8b610a81102147" id="r_ae1f83f11cfa05049ce8b610a81102147"><td class="memTemplParams" colspan="2">template&lt;typename TLValue, typename TRValue&gt; </td></tr>
+<tr class="memitem:ae1f83f11cfa05049ce8b610a81102147"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae1f83f11cfa05049ce8b610a81102147">operator!=</a> (TLValue const &amp;l, <a class="el" href="classiridium_1_1caching_1_1_cached_value.html">iridium::caching::CachedValue</a>&lt; TRValue &gt; const &amp;r)</td></tr>
+<tr class="memdesc:ae1f83f11cfa05049ce8b610a81102147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перегружает оператор неравенства для CachedValue. Сравнивает TLValue с CachedValue&lt;TRValue&gt; на неравенство.  <br /></td></tr>
+<tr class="separator:ae1f83f11cfa05049ce8b610a81102147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ec5e2af5322c55a857861677a3c326b" id="r_a2ec5e2af5322c55a857861677a3c326b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ec5e2af5322c55a857861677a3c326b">DEFINE_CONVERT</a> (std::string, <a class="el" href="namespaceiridium_1_1caching.html#aca0f1a27b6cc60148569afc9ecae5254">iridium::caching::CachedString</a>)</td></tr>
+<tr class="separator:a2ec5e2af5322c55a857861677a3c326b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Переменные</h2></td></tr>
+<tr class="memitem:a11a731f2b2a5b7c809542dbd6e6c588b" id="r_a11a731f2b2a5b7c809542dbd6e6c588b"><td class="memTemplParams" colspan="2">template&lt;typename TValue&gt; </td></tr>
+<tr class="memitem:a11a731f2b2a5b7c809542dbd6e6c588b"><td class="memTemplItemLeft" align="right" valign="top">thread_local std::unordered_map&lt; <a class="el" href="classiridium_1_1caching_1_1_cached_value.html">CachedValue</a>&lt; TValue &gt;, std::shared_ptr&lt; TValue &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1caching.html#a11a731f2b2a5b7c809542dbd6e6c588b">iridium::caching::CachedValue&lt; TValue &gt;::m</a></td></tr>
+<tr class="separator:a11a731f2b2a5b7c809542dbd6e6c588b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Определяет шаблонный класс <code>CachedValue&lt;TValue&gt;</code> для интернирования и кэширования значений. Этот заголовочный файл предоставляет механизмы для уменьшения использования памяти путем совместного использования идентичных неизменяемых значений. Также включает typedef <code>CachedString</code> и связанные специализации <code>std::hash</code>. </p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a2ec5e2af5322c55a857861677a3c326b" name="a2ec5e2af5322c55a857861677a3c326b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ec5e2af5322c55a857861677a3c326b">&#9670;&#160;</a></span>DEFINE_CONVERT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DEFINE_CONVERT </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceiridium_1_1caching.html#aca0f1a27b6cc60148569afc9ecae5254">iridium::caching::CachedString</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1f83f11cfa05049ce8b610a81102147" name="ae1f83f11cfa05049ce8b610a81102147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f83f11cfa05049ce8b610a81102147">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLValue, typename TRValue&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator!= </td>
+          <td>(</td>
+          <td class="paramtype">TLValue const &amp;</td>          <td class="paramname"><span class="paramname"><em>l</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1caching_1_1_cached_value.html">iridium::caching::CachedValue</a>&lt; TRValue &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>r</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Перегружает оператор неравенства для CachedValue. Сравнивает TLValue с CachedValue&lt;TRValue&gt; на неравенство. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Левый операнд. </td></tr>
+    <tr><td class="paramname">r</td><td>Правый операнд типа CachedValue. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>True, если значения не равны, иначе false. </dd></dl>
+
+</div>
+</div>
+<a id="a7d5dbe713697cc4e4407e03c0c7445c8" name="a7d5dbe713697cc4e4407e03c0c7445c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d5dbe713697cc4e4407e03c0c7445c8">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLValue, typename TRValue&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">TRValue operator+ </td>
+          <td>(</td>
+          <td class="paramtype">TLValue const &amp;</td>          <td class="paramname"><span class="paramname"><em>l</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1caching_1_1_cached_value.html">iridium::caching::CachedValue</a>&lt; TRValue &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>r</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Перегружает оператор сложения для CachedValue. Позволяет складывать TLValue с CachedValue&lt;TRValue&gt;, предполагая, что TRValue может быть сконструирован из TLValue или они совместимы. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Левый операнд. </td></tr>
+    <tr><td class="paramname">r</td><td>Правый операнд типа CachedValue. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Результат сложения, обычно типа TRValue. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

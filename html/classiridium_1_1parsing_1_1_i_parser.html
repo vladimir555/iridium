@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::parsing::IParser</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing.html">parsing</a></li><li class="navelem"><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html">IParser</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1parsing_1_1_i_parser-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::parsing::IParser<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование строкового представления данных (например, XML, JSON, пользовательский формат) в дерево объектов <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>. Компоновщики выполняют обратную операцию, преобразуя дерево объектов <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> обратно в строковое представление.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="parser_8h_source.html">parser.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::parsing::IParser:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1parsing_1_1_i_parser__inherit__graph.png" border="0" usemap="#airidium_1_1parsing_1_1_i_parser_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1parsing_1_1_i_parser_inherit__map" id="airidium_1_1parsing_1_1_i_parser_inherit__map">
+<area shape="rect" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст..." alt="" coords="5,78,165,104"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html" title="Конкретная реализация парсера для HTTP&#45;сообщений. Этот класс предоставляет функциональность для разбо..." alt="" coords="213,5,418,46"/>
+<area shape="poly" title=" " alt="" coords="147,71,240,44,242,49,148,76"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html" title="Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation)...." alt="" coords="213,71,418,111"/>
+<area shape="poly" title=" " alt="" coords="180,88,212,88,212,94,180,94"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html" title="Конкретная реализация парсера для данных в формате XML (eXtensible Markup Language)...." alt="" coords="213,136,418,177"/>
+<area shape="poly" title=" " alt="" coords="148,106,242,133,240,138,147,111"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ac63eb70c8bc7664f7ddf24acbe23a3da" id="r_ac63eb70c8bc7664f7ddf24acbe23a3da"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac63eb70c8bc7664f7ddf24acbe23a3da">~IParser</a> ()=default</td></tr>
+<tr class="memdesc:ac63eb70c8bc7664f7ddf24acbe23a3da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст...">IParser</a></code>.  <br /></td></tr>
+<tr class="separator:ac63eb70c8bc7664f7ddf24acbe23a3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45eb174bece5cdd6c5e231a439e0a109" id="r_a45eb174bece5cdd6c5e231a439e0a109"><td class="memItemLeft" align="right" valign="top">virtual INode::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45eb174bece5cdd6c5e231a439e0a109">parse</a> (std::string const &amp;source) const =0</td></tr>
+<tr class="memdesc:a45eb174bece5cdd6c5e231a439e0a109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает исходную строку и строит дерево узлов, представляющее ее содержимое.  <br /></td></tr>
+<tr class="separator:a45eb174bece5cdd6c5e231a439e0a109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc0fec4abb9d92da3b0da239fbb05834" id="r_adc0fec4abb9d92da3b0da239fbb05834"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc0fec4abb9d92da3b0da239fbb05834">compose</a> (INode::TConstSharedPtr const &amp;root_node) const =0</td></tr>
+<tr class="memdesc:adc0fec4abb9d92da3b0da239fbb05834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в строковое представление.  <br /></td></tr>
+<tr class="separator:adc0fec4abb9d92da3b0da239fbb05834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование строкового представления данных (например, XML, JSON, пользовательский формат) в дерево объектов <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>. Компоновщики выполняют обратную операцию, преобразуя дерево объектов <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> обратно в строковое представление. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ac63eb70c8bc7664f7ddf24acbe23a3da" name="ac63eb70c8bc7664f7ddf24acbe23a3da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63eb70c8bc7664f7ddf24acbe23a3da">&#9670;&#160;</a></span>~IParser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual iridium::parsing::IParser::~IParser </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст...">IParser</a></code>. </p>
+<p>Виртуальный деструктор для обеспечения корректного освобождения ресурсов производного класса. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="adc0fec4abb9d92da3b0da239fbb05834" name="adc0fec4abb9d92da3b0da239fbb05834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc0fec4abb9d92da3b0da239fbb05834">&#9670;&#160;</a></span>compose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string iridium::parsing::IParser::compose </td>
+          <td>(</td>
+          <td class="paramtype">INode::TConstSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>root_node</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в строковое представление. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root_node</td><td>Константный разделяемый указатель на корневой узел <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> структуры, которую необходимо сформировать. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Строка, содержащая сериализованное представление дерева узлов. </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Может быть выброшено, если структура узлов недействительна или не может быть сериализована. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="class_c_j_s_o_n_parser.html#ad691506f7b57bedaa856b9cc2e81a9b6">CJSONParser</a>, <a class="el" href="class_c_x_m_l_parser.html#a3f27e8e947cc8fbfe245e3452ba3771f">CXMLParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#a2a519b5468ea6f08c81f90e01f5c3cf4">iridium::parsing::implementation::CHTTPParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#ad691506f7b57bedaa856b9cc2e81a9b6">iridium::parsing::implementation::CJSONParser</a> и <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#a3f27e8e947cc8fbfe245e3452ba3771f">iridium::parsing::implementation::CXMLParser</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_cgraph" id="aclassiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_cgraph">
+<area shape="rect" title="Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в строковое представление." alt="" coords="5,29,165,70"/>
+<area shape="poly" title=" " alt="" coords="54,29,53,19,58,11,69,5,85,3,103,5,113,11,110,16,101,10,85,8,70,10,61,14,58,20,59,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_icgraph" id="aclassiridium_1_1parsing_1_1_i_parser_adc0fec4abb9d92da3b0da239fbb05834_icgraph">
+<area shape="rect" title="Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в строковое представление." alt="" coords="5,29,165,70"/>
+<area shape="poly" title=" " alt="" coords="110,16,101,10,85,8,70,10,61,14,58,20,59,28,54,29,53,19,58,11,69,5,85,3,103,5,113,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a45eb174bece5cdd6c5e231a439e0a109" name="a45eb174bece5cdd6c5e231a439e0a109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45eb174bece5cdd6c5e231a439e0a109">&#9670;&#160;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual INode::TSharedPtr iridium::parsing::IParser::parse </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>source</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Разбирает исходную строку и строит дерево узлов, представляющее ее содержимое. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>Строковые данные для разбора. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Разделяемый указатель на корневой узел <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> разобранной структуры узлов. Возвращает <code>nullptr</code> или выбрасывает исключение в случае сбоя разбора (например, ошибка формата). </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Может быть выброшено при возникновении ошибки разбора. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="class_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e">CJSONParser</a>, <a class="el" href="class_c_x_m_l_parser.html#af669055119c5d12ccd5021dfafb275c0">CXMLParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ac1fb6e1887342ca64f9da42ba9897ed2">iridium::parsing::implementation::CHTTPParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e">iridium::parsing::implementation::CJSONParser</a> и <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#af669055119c5d12ccd5021dfafb275c0">iridium::parsing::implementation::CXMLParser</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_cgraph" id="aclassiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_cgraph">
+<area shape="rect" title="Разбирает исходную строку и строит дерево узлов, представляющее ее содержимое." alt="" coords="5,29,165,70"/>
+<area shape="poly" title=" " alt="" coords="54,29,53,19,58,11,69,5,85,3,103,5,113,11,110,16,101,10,85,8,70,10,61,14,58,20,59,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_icgraph" id="aclassiridium_1_1parsing_1_1_i_parser_a45eb174bece5cdd6c5e231a439e0a109_icgraph">
+<area shape="rect" title="Разбирает исходную строку и строит дерево узлов, представляющее ее содержимое." alt="" coords="5,29,165,70"/>
+<area shape="poly" title=" " alt="" coords="110,16,101,10,85,8,70,10,61,14,58,20,59,28,54,29,53,19,58,11,69,5,85,3,103,5,113,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/parsing/<a class="el" href="parser_8h_source.html">parser.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

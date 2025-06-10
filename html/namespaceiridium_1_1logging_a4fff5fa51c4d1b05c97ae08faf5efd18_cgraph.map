@@ -1,0 +1,9 @@
+<map id="iridium::logging::setConfig" name="iridium::logging::setConfig">
+<area shape="rect" id="Node000001" title="Устанавливает глобальную конфигурацию логгера. Это свободная функция&#45;обертка вокруг Logger::instance(..." alt="" coords="5,46,178,72"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_singleton.html#adc6c21483a831662989c44acc08f4dd8" title=" " alt="" coords="226,5,395,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,43,210,38,211,44,179,48"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1logging_1_1_logger.html#af25063f18941996adb58d049a228e0fe" title="Устанавливает конфигурацию логгера. Это переконфигурирует логгер, потенциально очищая существующие пр..." alt="" coords="233,71,388,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,69,218,75,217,80,178,74"/>
+<area shape="rect" id="Node000004" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="443,78,507,104"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="388,88,427,88,427,94,388,94"/>
+</map>

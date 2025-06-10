@@ -1,0 +1,6 @@
+<map id="iridium::logging::setConfig" name="iridium::logging::setConfig">
+<area shape="rect" id="Node000001" title="Устанавливает глобальную конфигурацию логгера. Это свободная функция&#45;обертка вокруг Logger::instance(..." alt="" coords="230,29,402,55"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Запускает зарегистрированные тесты, возможно, отфильтрованные аргументами командной строки...." alt="" coords="5,29,182,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,45,182,45,182,40,214,40"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="132,17,119,10,93,8,70,10,57,15,55,20,61,27,57,31,49,21,54,11,69,5,94,3,121,5,135,12"/>
+</map>

@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::pattern::IInitializable</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">IInitializable</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1pattern_1_1_i_initializable-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::pattern::IInitializable<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле. Этот шаблон полезен для объектов, чья настройка или демонтаж включают сложные операции, которые не должны выполняться в конструкторе или деструкторе, такие как выделение/освобождение ресурсов, которые могут завершиться неудачно или требуют определенного порядка.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="initializable_8h_source.html">initializable.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::pattern::IInitializable:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_i_initializable__inherit__graph.png" border="0" usemap="#airidium_1_1pattern_1_1_i_initializable_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1pattern_1_1_i_initializable_inherit__map" id="airidium_1_1pattern_1_1_i_initializable_inherit__map">
+<area shape="rect" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,887,190,913"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="271,72,408,112"/>
+<area shape="poly" title=" " alt="" coords="97,872,107,719,131,495,149,379,172,272,201,184,217,150,236,123,251,110,270,101,272,105,254,114,240,127,222,153,206,186,177,274,154,380,136,495,113,719,103,872"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="238,137,440,178"/>
+<area shape="poly" title=" " alt="" coords="98,871,111,731,137,529,155,425,178,330,204,251,219,220,236,195,260,176,263,180,240,199,224,222,209,253,183,331,161,426,142,530,116,731,104,872"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="255,579,424,634"/>
+<area shape="poly" title=" " alt="" coords="104,871,122,823,149,763,187,700,210,671,236,644,253,632,256,637,239,649,214,674,191,703,154,765,127,825,109,873"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="271,658,408,699"/>
+<area shape="poly" title=" " alt="" coords="109,872,129,836,158,792,194,748,236,710,270,692,272,697,239,714,198,752,162,795,134,838,114,874"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="275,724,404,764"/>
+<area shape="poly" title=" " alt="" coords="118,874,169,823,201,797,236,773,274,757,276,762,239,778,205,801,172,827,122,877"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="238,209,440,250"/>
+<area shape="poly" title=" " alt="" coords="101,871,118,789,146,670,185,533,235,396,279,313,321,248,325,251,284,315,240,398,190,534,151,671,123,790,106,872"/>
+<area shape="rect" href="classiridium_1_1db_1_1_i_connector.html" title="Интерфейс для коннектора базы данных. Определяет контракт для классов, обеспечивающих подключение к б..." alt="" coords="263,788,416,814"/>
+<area shape="poly" title=" " alt="" coords="131,876,180,849,237,823,271,812,272,817,239,828,182,853,134,881"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_client.html" title="Интерфейс для обобщенного клиента. Определяет базовый контракт для клиентских объектов,..." alt="" coords="278,838,401,863"/>
+<area shape="poly" title=" " alt="" coords="179,881,277,860,278,866,180,886"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_multiplexer.html" title="Интерфейс для мультиплексора событий ввода&#45;вывода. Мультиплексор ввода&#45;вывода позволяет одному потоку..." alt="" coords="263,887,416,913"/>
+<area shape="poly" title=" " alt="" coords="206,897,263,897,263,902,206,902"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_session_manager.html" title="Интерфейс для управления сессиями обмена данными. Менеджер сессий отвечает за контроль жизненного цик..." alt="" coords="246,936,432,962"/>
+<area shape="poly" title=" " alt="" coords="179,914,273,933,272,938,178,919"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="274,986,405,1011"/>
+<area shape="poly" title=" " alt="" coords="134,919,182,946,239,972,274,983,272,988,237,977,180,951,131,923"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_cache.html" title="Интерфейс для кэша, который хранит строки и извлекает их с использованием числовых идентификаторов...." alt="" coords="266,1063,412,1089"/>
+<area shape="poly" title=" " alt="" coords="124,922,175,970,239,1022,309,1060,306,1065,236,1026,171,974,120,926"/>
+<area shape="rect" href="classiridium_1_1logging_1_1_i_sink.html" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас..." alt="" coords="266,1168,412,1194"/>
+<area shape="poly" title=" " alt="" coords="116,925,167,1006,201,1054,240,1099,281,1137,319,1166,316,1170,277,1141,236,1103,197,1057,162,1009,111,927"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable...." alt="" coords="238,1218,441,1259"/>
+<area shape="poly" title=" " alt="" coords="106,928,120,985,145,1060,163,1099,184,1138,210,1173,239,1204,255,1215,252,1220,236,1209,206,1177,180,1140,158,1102,140,1062,115,987,101,929"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_runnable.html" title=" " alt="" coords="279,1284,400,1324"/>
+<area shape="poly" title=" " alt="" coords="104,928,114,997,137,1088,155,1137,177,1185,205,1229,239,1269,258,1282,280,1291,277,1296,255,1287,236,1272,201,1232,173,1187,150,1139,132,1090,109,998,99,929"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html" title="Интерфейс для объекта потока. Предоставляет базу для реализаций потоков, включая инициализацию,..." alt="" coords="279,1349,400,1390"/>
+<area shape="poly" title=" " alt="" coords="102,928,109,1007,129,1116,146,1174,170,1232,201,1286,240,1334,258,1348,280,1357,278,1362,255,1352,236,1338,196,1289,165,1234,141,1176,124,1117,103,1008,97,928"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_1_1_i_handler.html" title=" " alt="" coords="256,1413,423,1469"/>
+<area shape="poly" title=" " alt="" coords="101,928,105,1017,112,1077,123,1142,140,1211,165,1278,198,1342,240,1399,257,1414,254,1418,236,1403,193,1345,160,1280,135,1212,118,1144,106,1078,100,1018,96,928"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="253,514,426,555"/>
+<area shape="poly" title=" " alt="" coords="100,871,112,808,137,726,154,682,177,640,204,600,236,565,251,553,254,558,239,568,208,603,181,642,159,684,142,728,117,809,105,872"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper_1_1_i_handler.html" title=" " alt="" coords="259,1493,420,1549"/>
+<area shape="poly" title=" " alt="" coords="105,928,121,1046,150,1211,168,1296,190,1373,213,1436,240,1479,260,1496,256,1500,236,1483,209,1438,184,1374,163,1297,144,1212,116,1047,100,929"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="253,409,426,450"/>
+<area shape="poly" title=" " alt="" coords="100,871,113,801,139,705,178,600,205,548,236,501,265,471,297,448,300,452,268,475,240,504,209,551,183,602,144,707,119,802,105,872"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher_1_1_i_handler.html" title=" " alt="" coords="259,1573,420,1629"/>
+<area shape="poly" title=" " alt="" coords="104,928,118,1061,145,1250,163,1347,185,1436,211,1509,225,1538,240,1559,260,1576,257,1581,236,1563,220,1540,206,1511,180,1437,158,1348,139,1250,112,1061,99,928"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="528,45,681,101"/>
+<area shape="poly" title=" " alt="" coords="420,129,527,95,528,100,421,134"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="528,125,681,181"/>
+<area shape="poly" title=" " alt="" coords="456,153,527,152,528,157,456,158"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html" title="Реализует IWorker для обработки элементов из входной очереди и помещения результатов в выходную очере..." alt="" coords="775,85,964,141"/>
+<area shape="poly" title=" " alt="" coords="697,84,775,96,774,101,696,90"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html" title=" " alt="" coords="768,5,971,61"/>
+<area shape="poly" title=" " alt="" coords="696,57,768,46,769,51,697,62"/>
+<area shape="poly" title=" " alt="" coords="422,199,439,187,455,169,462,150,470,131,487,111,526,89,529,94,491,115,475,133,467,152,459,171,443,191,425,204"/>
+<area shape="poly" title=" " alt="" coords="427,201,527,173,528,178,428,207"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="526,205,683,261"/>
+<area shape="poly" title=" " alt="" coords="456,228,525,229,525,235,456,234"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_client.html" title="Конкретная реализация интерфейса IClient. Этот класс управляет клиентским подключением к серверу,..." alt="" coords="518,669,691,710"/>
+<area shape="poly" title=" " alt="" coords="415,838,439,824,451,813,457,800,463,774,468,747,475,734,487,720,516,703,519,708,491,725,480,737,473,749,468,775,462,802,455,816,443,829,417,843"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html" title="Заглушечная реализация IMultiplexer для платформы Emscripten. Все методы в настоящее время выбрасываю..." alt="" coords="518,734,691,775"/>
+<area shape="poly" title=" " alt="" coords="428,881,439,874,456,853,463,831,469,808,487,786,516,769,519,773,491,790,474,811,468,833,461,856,443,878,431,886"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html" title="Конкретная реализация ISessionManager. Управляет сеансами ввода&#45;вывода, обычно для сетевых подключени..." alt="" coords="518,800,691,840"/>
+<area shape="poly" title=" " alt="" coords="433,927,439,923,455,906,463,888,471,869,487,851,516,835,519,840,491,855,475,872,468,890,460,909,443,927,436,931"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="518,979,691,1005"/>
+<area shape="poly" title=" " alt="" coords="421,994,517,991,517,997,421,999"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="522,1028,687,1054"/>
+<area shape="poly" title=" " alt="" coords="421,1009,522,1025,521,1031,420,1014"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title="Базовый интерфейс для файловых потоков. Расширяет общий интерфейс IStream специфичными для файлов опе..." alt="" coords="519,1078,690,1103"/>
+<area shape="poly" title=" " alt="" coords="380,1016,431,1041,490,1064,528,1075,527,1080,488,1069,429,1046,377,1021"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="518,865,691,906"/>
+<area shape="poly" title=" " alt="" coords="419,982,440,972,454,959,463,945,472,930,487,915,517,901,519,905,491,919,476,933,467,947,459,962,442,977,421,987"/>
+<area shape="rect" href="classiridium_1_1io_1_1net_1_1_i_socket.html" title="Базовый интерфейс для потоков, связанных с сокетами. Наследуется от IStream и служит общей основой дл..." alt="" coords="526,930,683,955"/>
+<area shape="poly" title=" " alt="" coords="417,979,488,964,539,953,540,959,490,969,418,984"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода&#45;вывода, объединяющий возможности чтения и записи...." alt="" coords="792,1003,947,1029"/>
+<area shape="poly" title=" " alt="" coords="707,998,792,1006,791,1011,707,1004"/>
+<area shape="poly" title=" " alt="" coords="703,1029,791,1021,792,1026,703,1034"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html" title="Реализация кэша строк с файловым хранилищем. Этот класс реализует интерфейс ICache,..." alt="" coords="508,1128,701,1168"/>
+<area shape="poly" title=" " alt="" coords="405,1091,528,1124,526,1129,403,1096"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title="Предоставляет асинхронную обертку вокруг реализации ISink. Использует рабочий поток для обработки соб..." alt="" coords="502,1193,707,1234"/>
+<area shape="poly" title=" " alt="" coords="429,1189,502,1198,502,1203,428,1194"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title="Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал...." alt="" coords="502,1258,707,1299"/>
+<area shape="poly" title=" " alt="" coords="426,1197,442,1204,457,1214,467,1224,476,1233,490,1243,519,1255,517,1260,488,1248,473,1238,463,1228,454,1218,440,1209,423,1202"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html" title="Конкретная реализация приемника для вывода сообщений журнала в файл, с поддержкой ротации файлов...." alt="" coords="502,1324,707,1364"/>
+<area shape="poly" title=" " alt="" coords="428,1195,443,1204,455,1217,462,1231,468,1258,473,1284,480,1296,491,1308,509,1321,506,1325,487,1313,475,1299,468,1286,463,1259,457,1233,451,1220,439,1209,425,1199"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper_runnable.html" title=" " alt="" coords="496,1388,713,1444"/>
+<area shape="poly" title=" " alt="" coords="415,1323,442,1335,467,1354,490,1374,514,1385,512,1390,488,1378,463,1359,440,1339,413,1327"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher_runnable.html" title=" " alt="" coords="496,1468,713,1524"/>
+<area shape="poly" title=" " alt="" coords="416,1318,443,1335,456,1350,463,1366,468,1396,473,1425,479,1440,491,1454,506,1465,502,1470,487,1458,475,1442,467,1427,462,1397,458,1367,451,1353,439,1339,413,1322"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_runnable.html" title=" " alt="" coords="489,1548,720,1604"/>
+<area shape="poly" title=" " alt="" coords="416,1316,443,1335,461,1361,468,1386,470,1412,468,1437,466,1461,467,1485,474,1510,491,1534,504,1546,500,1550,487,1538,470,1512,462,1486,461,1461,463,1436,464,1412,463,1387,456,1363,439,1339,413,1321"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title="Конкретная реализация интерфейса IThread. Управляет фактическим std::thread для выполнения задачи IRu..." alt="" coords="517,1628,692,1668"/>
+<area shape="poly" title=" " alt="" coords="416,1380,443,1399,462,1427,470,1455,470,1482,467,1509,464,1536,465,1562,473,1588,491,1614,518,1632,515,1637,487,1618,468,1590,460,1563,459,1536,462,1509,465,1482,464,1456,457,1429,439,1403,413,1385"/>
+<area shape="poly" title=" " alt="" coords="392,504,417,484,439,460,452,434,458,410,459,364,461,319,470,295,487,271,504,257,524,246,527,251,507,261,491,275,475,298,466,320,464,364,463,411,457,436,443,463,421,488,395,508"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="502,445,708,486"/>
+<area shape="poly" title=" " alt="" coords="434,507,523,484,525,489,435,512"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html" title=" " alt="" coords="504,509,706,565"/>
+<area shape="poly" title=" " alt="" coords="442,533,503,533,503,539,442,538"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html" title="Реализует IWorkerPopper для извлечения элементов, обработанных выделенным рабочим потоком,..." alt="" coords="496,589,713,645"/>
+<area shape="poly" title=" " alt="" coords="422,557,514,586,512,591,421,563"/>
+<area shape="poly" title=" " alt="" coords="441,440,501,448,501,454,441,446"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title=" " alt="" coords="504,285,706,341"/>
+<area shape="poly" title=" " alt="" coords="390,399,488,351,517,339,519,344,490,356,392,404"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title="Реализует IWorkerPusher для добавления элементов во внутреннюю очередь, обрабатываемую выделенным раб..." alt="" coords="496,365,713,421"/>
+<area shape="poly" title=" " alt="" coords="441,413,495,405,496,411,441,418"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8c613423cd12e98327a9279d8b9d64" id="r_a5b8c613423cd12e98327a9279d8b9d64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b8c613423cd12e98327a9279d8b9d64">initialize</a> ()=0</td></tr>
+<tr class="memdesc:a5b8c613423cd12e98327a9279d8b9d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова.  <br /></td></tr>
+<tr class="separator:a5b8c613423cd12e98327a9279d8b9d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a1fb6f89e1e1f125455a8682e9ae59" id="r_a93a1fb6f89e1e1f125455a8682e9ae59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93a1fb6f89e1e1f125455a8682e9ae59">finalize</a> ()=0</td></tr>
+<tr class="memdesc:a93a1fb6f89e1e1f125455a8682e9ae59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы.  <br /></td></tr>
+<tr class="separator:a93a1fb6f89e1e1f125455a8682e9ae59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле. Этот шаблон полезен для объектов, чья настройка или демонтаж включают сложные операции, которые не должны выполняться в конструкторе или деструкторе, такие как выделение/освобождение ресурсов, которые могут завершиться неудачно или требуют определенного порядка. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a17aec45cd4eaf36af9adc81375ee039f" name="a17aec45cd4eaf36af9adc81375ee039f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17aec45cd4eaf36af9adc81375ee039f">&#9670;&#160;</a></span>~IInitializable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual iridium::pattern::IInitializable::~IInitializable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>. </p>
+<p>Виртуальный деструктор для обеспечения корректного освобождения ресурсов в производных классах. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a93a1fb6f89e1e1f125455a8682e9ae59" name="a93a1fb6f89e1e1f125455a8682e9ae59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a1fb6f89e1e1f125455a8682e9ae59">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::pattern::IInitializable::finalize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может быть выброшено, если финализация завершается неудачно, хотя это обычно не рекомендуется для методов очистки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="class_c_session_manager.html#a61bdf570ff5046cb79d20aeb1fd75cb0">CSessionManager</a>, <a class="el" href="class_c_sink_async.html#aac102aede2dc280cc7aeef7996fd10a9">CSinkAsync</a>, <a class="el" href="class_c_sink_console.html#a68fc4bdb4958cee87231d5d7c7ba75a3">CSinkConsole</a>, <a class="el" href="class_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9">CSinkFile</a>, <a class="el" href="class_c_thread.html#a66a1d7c2cba19611a23b645843b61474">CThread</a>, <a class="el" href="class_c_worker.html#a838d8487c8a4b63c34f4c5ac4816855f">CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pool.html#ab7d09bc11cc084dd9b5f25265d59c5eb">CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pusher.html#a31259f6babe201cd1732700f978d49de">CWorkerPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#ac892effc2c48adac42d817fcf970d489">iridium::io::fs::implementation::CFileCache</a>, <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056">iridium::io::fs::implementation::CFileStream</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_client.html#a57377bff45ea3be41f78d05cc0af253b">iridium::io::implementation::CClient</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a61bdf570ff5046cb79d20aeb1fd75cb0">iridium::io::implementation::CSessionManager</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#ad5b20046e1b187148945c332a3467e8a">iridium::io::implementation::CStreamBuffer</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html#a17c9db1a6e56904f0bd4c7b49ade960c">iridium::io::implementation::CStreamReaderList</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a34274381816f6478ee4f1875aa15908d">iridium::io::implementation::platform::CMultiplexer</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html#aac102aede2dc280cc7aeef7996fd10a9">iridium::logging::implementation::CSinkAsync</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a68fc4bdb4958cee87231d5d7c7ba75a3">iridium::logging::implementation::CSinkConsole</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9">iridium::logging::implementation::CSinkFile</a>, <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html#a0c260a8a6cae6d5d9e53268eef797f1a">iridium::pattern::implementation::CInitializer</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a66a1d7c2cba19611a23b645843b61474">iridium::threading::implementation::CThread</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html#a838d8487c8a4b63c34f4c5ac4816855f">iridium::threading::implementation::CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#ab7d09bc11cc084dd9b5f25265d59c5eb">iridium::threading::implementation::CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#af629c51708c4378a425ef4a3f5ee40d0">iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#acf212dfe4bc1c616399f557f67eb0b10">iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html#a0d9725348656a4916b9acf041dbb736d">iridium::threading::implementation::CWorkerPopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper_runnable.html#a26343934a4854cae742009c2e061ef96">iridium::threading::implementation::CWorkerPopperRunnable&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html#a31259f6babe201cd1732700f978d49de">iridium::threading::implementation::CWorkerPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher_runnable.html#a9bcbf7b3da22b44a66da22174d47c93e">iridium::threading::implementation::CWorkerPusherRunnable&lt; TItem &gt;</a> и <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_runnable.html#affeb5fdf77efaf2340cf611f3c31b818">iridium::threading::implementation::CWorkerRunnable&lt; TInputItem, TOutputItem &gt;</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_cgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_cgraph" id="aclassiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_cgraph">
+<area shape="rect" title="Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нуже..." alt="" coords="5,29,190,70"/>
+<area shape="poly" title=" " alt="" coords="62,29,61,19,66,10,79,5,98,3,118,5,130,11,127,16,116,10,97,8,80,10,70,14,66,20,67,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_icgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_icgraph" id="aclassiridium_1_1pattern_1_1_i_initializable_a93a1fb6f89e1e1f125455a8682e9ae59_icgraph">
+<area shape="rect" title="Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нуже..." alt="" coords="5,29,190,70"/>
+<area shape="poly" title=" " alt="" coords="127,16,116,10,97,8,80,10,70,14,66,20,67,28,62,29,61,19,66,10,79,5,98,3,118,5,130,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5b8c613423cd12e98327a9279d8b9d64" name="a5b8c613423cd12e98327a9279d8b9d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b8c613423cd12e98327a9279d8b9d64">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::pattern::IInitializable::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может быть выброшено, если инициализация завершается неудачно. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="class_c_session_manager.html#a4fe1caa2fcab0505523ffe96b18ad474">CSessionManager</a>, <a class="el" href="class_c_sink_async.html#a1a51f381175482e7d88a1a35fbbba286">CSinkAsync</a>, <a class="el" href="class_c_sink_console.html#a4f7a53a667d3b71d8d68555ed669bfd9">CSinkConsole</a>, <a class="el" href="class_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748">CSinkFile</a>, <a class="el" href="class_c_thread.html#a39b985df9f70f9502198035353b1eedc">CThread</a>, <a class="el" href="class_c_worker.html#a216fd64ba6b959a0a7a84ee6e253d26f">CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pool.html#a9d09789568b3d19f8ed44d96ef39c250">CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pusher.html#adad738bfb734dbbc93b4e7ed98b908b1">CWorkerPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aae27c3a7c44506fa0452f16c0168d4b5">iridium::io::fs::implementation::CFileCache</a>, <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84">iridium::io::fs::implementation::CFileStream</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_client.html#a2fa929081269d44efdd71b2abc52f565">iridium::io::implementation::CClient</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a4fe1caa2fcab0505523ffe96b18ad474">iridium::io::implementation::CSessionManager</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a41eebf92f04c32cc403e724ed8a7dc96">iridium::io::implementation::CStreamBuffer</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html#a2f99e54567d0331d1bc30d6f0260815f">iridium::io::implementation::CStreamReaderList</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a0a14eb16b1f7f5b18106ef29bc52f71e">iridium::io::implementation::platform::CMultiplexer</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html#a1a51f381175482e7d88a1a35fbbba286">iridium::logging::implementation::CSinkAsync</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a4f7a53a667d3b71d8d68555ed669bfd9">iridium::logging::implementation::CSinkConsole</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748">iridium::logging::implementation::CSinkFile</a>, <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html#a619c260e1d7628293c111dd94378937f">iridium::pattern::implementation::CInitializer</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc">iridium::threading::implementation::CThread</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html#a216fd64ba6b959a0a7a84ee6e253d26f">iridium::threading::implementation::CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#a9d09789568b3d19f8ed44d96ef39c250">iridium::threading::implementation::CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#a4581c80d53fa874eace91f2473955b76">iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#a474dc549609bdbb7c565070d07fa58c7">iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html#ae4ee2980f4fe61c5c7762504ba0ad30c">iridium::threading::implementation::CWorkerPopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper_runnable.html#aca4209948c8fd0f3b89104433b41c80f">iridium::threading::implementation::CWorkerPopperRunnable&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html#adad738bfb734dbbc93b4e7ed98b908b1">iridium::threading::implementation::CWorkerPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher_runnable.html#a657abf9936db3474ed81abd5de168de1">iridium::threading::implementation::CWorkerPusherRunnable&lt; TItem &gt;</a> и <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_runnable.html#a2a4a7a787db79230e120d5d990f26ad8">iridium::threading::implementation::CWorkerRunnable&lt; TInputItem, TOutputItem &gt;</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_cgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_cgraph" id="aclassiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_cgraph">
+<area shape="rect" title="Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед ..." alt="" coords="5,29,190,70"/>
+<area shape="poly" title=" " alt="" coords="62,29,61,19,66,10,79,5,98,3,118,5,130,11,127,16,116,10,97,8,80,10,70,14,66,20,67,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_icgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_icgraph" id="aclassiridium_1_1pattern_1_1_i_initializable_a5b8c613423cd12e98327a9279d8b9d64_icgraph">
+<area shape="rect" title="Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед ..." alt="" coords="5,29,190,70"/>
+<area shape="poly" title=" " alt="" coords="127,16,116,10,97,8,80,10,70,14,66,20,67,28,62,29,61,19,66,10,79,5,98,3,118,5,130,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/pattern/<a class="el" href="initializable_8h_source.html">initializable.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

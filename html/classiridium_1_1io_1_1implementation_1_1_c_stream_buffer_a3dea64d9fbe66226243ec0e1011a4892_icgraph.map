@@ -1,0 +1,7 @@
+<map id="iridium::io::implementation::CStreamBuffer::CStreamBuffer" name="iridium::io::implementation::CStreamBuffer::CStreamBuffer">
+<area shape="rect" id="Node000001" title="Конструирует CStreamBuffer с заданным буфером." alt="" coords="314,53,525,94"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a847fe94ca7103ed745892a9bc385edc0" title="Конструирует CStreamReaderBuffer, который читает из предоставленного буфера." alt="" coords="5,5,266,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="298,59,266,54,266,49,299,53"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c" title="Конструирует CStreamWriterBuffer, который пишет в предоставленный буфер." alt="" coords="13,85,258,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="299,93,259,99,258,93,298,88"/>
+</map>

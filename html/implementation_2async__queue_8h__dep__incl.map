@@ -1,0 +1,29 @@
+<map id="source/iridium/threading/implementation/async_queue.h" name="source/iridium/threading/implementation/async_queue.h">
+<area shape="rect" id="Node000001" title="Определяет класс CAsyncQueue&lt;TItem&gt;, реализацию интерфейса IAsyncQueue&lt;TItem&gt;. Этот класс предоставля..." alt="" coords="415,5,620,46"/>
+<area shape="rect" id="Node000002" href="$context_8cpp.html" title=" " alt="" coords="5,102,214,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="418,53,196,103,195,98,417,47"/>
+<area shape="rect" id="Node000003" href="$test__runner__fork_8cpp.html" title=" " alt="" coords="238,94,421,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="466,56,385,96,383,91,463,51"/>
+<area shape="rect" id="Node000004" href="$implementation_2thread_8cpp.html" title=" " alt="" coords="260,198,439,238"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="501,61,471,105,434,152,379,199,376,195,430,148,467,102,496,58"/>
+<area shape="rect" id="Node000005" href="$implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="495,102,660,142"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="540,58,567,100,563,103,536,60"/>
+<area shape="rect" id="Node000007" href="$implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="690,198,857,238"/>
+<area shape="poly" id="edge14_Node000001_Node000007" title=" " alt="" coords="596,50,636,68,674,92,702,117,727,145,764,196,760,199,723,148,698,121,671,96,633,73,594,55"/>
+<area shape="rect" id="Node000011" href="$worker__pool_8h.html" title=" " alt="" coords="1122,286,1321,327"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="596,49,720,92,982,197,1179,283,1177,288,980,202,718,96,594,54"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="517,151,398,200,396,195,515,146"/>
+<area shape="rect" id="Node000006" href="$session__manager_8cpp.html" title=" " alt="" coords="641,382,850,423"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="551,155,523,192,499,237,492,260,490,283,493,305,504,325,531,353,565,373,603,386,641,395,640,400,601,392,563,378,528,357,499,329,488,307,484,283,487,259,495,235,519,190,547,152"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="633,147,734,195,731,199,631,152"/>
+<area shape="rect" id="Node000008" href="$implementation_2sink_8cpp.html" title=" " alt="" coords="513,286,679,327"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="721,248,637,288,635,283,719,243"/>
+<area shape="rect" id="Node000009" href="$sink__file_8cpp.html" title=" " alt="" coords="704,286,894,327"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="786,253,796,285,791,287,781,254"/>
+<area shape="rect" id="Node000010" href="$worker_8cpp.html" title=" " alt="" coords="918,286,1098,327"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="842,241,956,283,954,288,840,246"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="873,236,1122,284,1121,289,872,241"/>
+<area shape="poly" id="edge12_Node000011_Node000006" title=" " alt="" coords="1108,333,846,384,845,379,1107,328"/>
+<area shape="rect" id="Node000012" href="$worker__pool_8cpp.html" title=" " alt="" coords="1142,375,1301,431"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="1224,342,1224,374,1219,374,1219,342"/>
+</map>

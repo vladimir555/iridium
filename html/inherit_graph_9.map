@@ -1,0 +1,9 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$classiridium_1_1io_1_1_i_pipe_streams.html" title="Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для по..." alt="" coords="14,5,178,31"/>
+<area shape="rect" id="Node000001" href="$classiridium_1_1io_1_1_i_pipe.html" title="Интерфейс, представляющий канал, объединяющий возможности доступа к потокам и передачи данных...." alt="" coords="235,31,350,56"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="194,28,235,33,234,39,193,33"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п..." alt="" coords="398,23,571,64"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="366,41,397,41,397,46,366,46"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_pipe_transmitter.html" title="Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент,..." alt="" coords="5,55,187,80"/>
+<area shape="poly" id="edge3_Node000003_Node000001" title=" " alt="" coords="202,52,234,48,234,53,202,57"/>
+</map>

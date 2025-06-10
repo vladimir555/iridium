@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">IAsyncQueuePusher</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1threading_1_1_i_async_queue_pusher-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::threading::IAsyncQueuePusher&lt; TItem &gt;<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для добавления одного или нескольких элементов в очередь, которые могут обрабатываться другим потоком.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="async__queue_8h_source.html">async_queue.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::threading::IAsyncQueuePusher&lt; TItem &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_i_async_queue_pusher__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_pusher_3_01_t_item_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1threading_1_1_i_async_queue_pusher_3_01_t_item_01_4_inherit__map" id="airidium_1_1threading_1_1_i_async_queue_pusher_3_01_t_item_01_4_inherit__map">
+<area shape="rect" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="5,143,155,198"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="205,5,374,61"/>
+<area shape="poly" title=" " alt="" coords="122,131,159,100,201,71,222,59,225,64,204,75,163,104,125,135"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="221,85,358,126"/>
+<area shape="poly" title=" " alt="" coords="169,140,221,124,222,129,170,145"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="225,150,354,191"/>
+<area shape="poly" title=" " alt="" coords="170,168,225,168,225,173,170,173"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди, предоставляющий операции добавления и извлечения...." alt="" coords="206,216,372,256"/>
+<area shape="poly" title=" " alt="" coords="170,196,222,212,221,217,169,201"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="203,302,376,343"/>
+<area shape="poly" title=" " alt="" coords="127,206,204,266,255,299,252,304,201,270,124,210"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,..." alt="" coords="428,187,638,242"/>
+<area shape="poly" title=" " alt="" coords="388,225,427,221,427,226,389,230"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="430,266,636,307"/>
+<area shape="poly" title=" " alt="" coords="391,305,429,299,429,304,392,310"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title=" " alt="" coords="432,331,634,386"/>
+<area shape="poly" title=" " alt="" coords="392,335,432,341,431,346,391,340"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title="Реализует IWorkerPusher для добавления элементов во внутреннюю очередь, обрабатываемую выделенным раб..." alt="" coords="424,411,641,466"/>
+<area shape="poly" title=" " alt="" coords="338,349,425,396,452,408,450,413,423,401,335,354"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a29daf8cead8ce6fd44d4e26d20708dab" id="r_a29daf8cead8ce6fd44d4e26d20708dab"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29daf8cead8ce6fd44d4e26d20708dab">TItems</a></td></tr>
+<tr class="memdesc:a29daf8cead8ce6fd44d4e26d20708dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов для обработки очередью.  <br /></td></tr>
+<tr class="separator:a29daf8cead8ce6fd44d4e26d20708dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ab485c0d1679e5190cda877e475800c38" id="r_ab485c0d1679e5190cda877e475800c38"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab485c0d1679e5190cda877e475800c38">push</a> (TItem const &amp;item)=0</td></tr>
+<tr class="memdesc:ab485c0d1679e5190cda877e475800c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди.  <br /></td></tr>
+<tr class="separator:ab485c0d1679e5190cda877e475800c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea94c8568922887c524dfd501435d519" id="r_aea94c8568922887c524dfd501435d519"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea94c8568922887c524dfd501435d519">push</a> (<a class="el" href="#a29daf8cead8ce6fd44d4e26d20708dab">TItems</a> const &amp;items)=0</td></tr>
+<tr class="memdesc:aea94c8568922887c524dfd501435d519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет несколько элементов в очередь. Добавляет все элементы из предоставленного списка в конец очереди.  <br /></td></tr>
+<tr class="separator:aea94c8568922887c524dfd501435d519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TItem&gt;<br />
+class iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</div><p>Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для добавления одного или нескольких элементов в очередь, которые могут обрабатываться другим потоком. </p>
+</div><h2 class="groupheader">Определения типов</h2>
+<a id="a29daf8cead8ce6fd44d4e26d20708dab" name="a29daf8cead8ce6fd44d4e26d20708dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29daf8cead8ce6fd44d4e26d20708dab">&#9670;&#160;</a></span>TItems</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::list&lt;TItem&gt; <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">iridium::threading::IAsyncQueuePusher</a>&lt; TItem &gt;::TItems</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Список элементов для обработки очередью. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="ab485c0d1679e5190cda877e475800c38" name="ab485c0d1679e5190cda877e475800c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab485c0d1679e5190cda877e475800c38">&#9670;&#160;</a></span>push() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">iridium::threading::IAsyncQueuePusher</a>&lt; TItem &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">TItem const &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>Элемент для добавления в очередь. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Новый размер очереди после добавления элемента. </dd></dl>
+
+<p>Замещается в <a class="el" href="class_c_async_queue.html#a31f260b13a421f29138e90947b4fd0b7">CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="class_c_worker.html#a2993e13ae6dc153b379980942ea412a4">CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pool.html#ab338dc7d69468140ebf30ffb6ec988fd">CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pusher.html#a4617e912dddfbb3b6ea20dbeaad09070">CWorkerPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html#a31f260b13a421f29138e90947b4fd0b7">iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html#a2993e13ae6dc153b379980942ea412a4">iridium::threading::implementation::CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#ab338dc7d69468140ebf30ffb6ec988fd">iridium::threading::implementation::CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#a8d0975df3242df6e82fcaedaed69ed12">iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;</a> и <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html#a4617e912dddfbb3b6ea20dbeaad09070">iridium::threading::implementation::CWorkerPusher&lt; TItem &gt;</a>.</p>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_i_async_queue_pusher_ab485c0d1679e5190cda877e475800c38_icgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_i_async_queue_pusher_ab485c0d1679e5190cda877e475800c38_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1_i_async_queue_pusher_ab485c0d1679e5190cda877e475800c38_icgraph" id="aclassiridium_1_1threading_1_1_i_async_queue_pusher_ab485c0d1679e5190cda877e475800c38_icgraph">
+<area shape="rect" title="Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди." alt="" coords="478,13,663,54"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title="Статическая функция, выполняемая std::thread. Устанавливает имя потока, вызывает метод run() объекта ..." alt="" coords="229,13,430,54"/>
+<area shape="poly" title=" " alt="" coords="462,36,430,36,430,30,462,30"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Инициализирует поток, что включает запуск базового std::thread и ожидание сигнала об успешном запуске..." alt="" coords="5,5,181,61"/>
+<area shape="poly" title=" " alt="" coords="213,36,181,36,181,30,213,30"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aea94c8568922887c524dfd501435d519" name="aea94c8568922887c524dfd501435d519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea94c8568922887c524dfd501435d519">&#9670;&#160;</a></span>push() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">iridium::threading::IAsyncQueuePusher</a>&lt; TItem &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a29daf8cead8ce6fd44d4e26d20708dab">TItems</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>items</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Добавляет несколько элементов в очередь. Добавляет все элементы из предоставленного списка в конец очереди. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>Список элементов для добавления в очередь. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Новый размер очереди после добавления элементов. </dd></dl>
+
+<p>Замещается в <a class="el" href="class_c_async_queue.html#a16e711fc66bd480d4f509f3ddf220507">CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="class_c_worker_pusher.html#a1f79cad62df2e32f4357d3e39c65005b">CWorkerPusher&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html#a16e711fc66bd480d4f509f3ddf220507">iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#ad6831fb48c5e653f92b8ae653650d2e5">iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;</a> и <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html#a1f79cad62df2e32f4357d3e39c65005b">iridium::threading::implementation::CWorkerPusher&lt; TItem &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/threading/<a class="el" href="async__queue_8h_source.html">async_queue.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

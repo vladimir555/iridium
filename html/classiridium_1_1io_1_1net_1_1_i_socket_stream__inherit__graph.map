@@ -1,0 +1,17 @@
+<map id="iridium::io::net::ISocketStream" name="iridium::io::net::ISocketStream">
+<area shape="rect" id="Node000001" title="Интерфейс для сокетного потока, поддерживающего дуплексную связь (чтение и запись)...." alt="" coords="95,300,251,341"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1net_1_1_i_socket.html" title="Базовый интерфейс для потоков, связанных с сокетами. Наследуется от IStream и служит общей основой дл..." alt="" coords="5,226,162,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,260,153,298,149,302,107,264"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="142,79,273,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,114,135,131,111,154,100,172,93,192,87,227,82,226,88,190,96,170,107,151,132,127,160,110"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="121,153,294,178"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="210,120,210,152,205,152,205,120"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="318,153,484,178"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="255,108,369,150,367,155,254,113"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="115,5,300,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="210,46,210,79,205,79,205,46"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода&#45;вывода, объединяющий возможности чтения и записи...." alt="" coords="186,226,341,252"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="240,264,197,302,193,298,237,260"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="228,189,256,224,252,228,224,192"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="365,188,288,228,286,223,363,183"/>
+</map>

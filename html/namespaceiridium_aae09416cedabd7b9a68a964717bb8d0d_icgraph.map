@@ -1,0 +1,7 @@
+<map id="iridium::createObjects" name="iridium::createObjects">
+<area shape="rect" id="Node000001" title="Создает список разделяемых указателей на объекты типа TObject." alt="" coords="547,20,695,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a105de3e1c94e02af4831d7baf22c9455" title="Конструирует экземпляр CSessionManager. Инициализирует внутренние компоненты, такие как мультиплексор..." alt="" coords="248,13,499,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="532,36,500,36,500,30,532,30"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a85f5ecfd02189d481b71f99fec0729c6" title=" " alt="" coords="5,5,200,61"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="232,36,200,36,200,30,232,30"/>
+</map>

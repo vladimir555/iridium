@@ -1,0 +1,7 @@
+<map id="iridium::assertOne" name="iridium::assertOne">
+<area shape="rect" id="Node000001" title="Эта функция computes assertOne. Russian detailed description (if any)." alt="" coords="256,35,383,60"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a403ddf07385b8a321b11ec9199c573c6" title="Эта функция computes assertOne. Russian detailed description (if any)." alt="" coords="43,5,170,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,39,170,30,171,24,241,34"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#abcb566ede47ac555310567589a30d952" title="Запускает тесты, определенные в предоставленной структуре узлов или под ней." alt="" coords="5,55,208,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="241,60,209,65,208,59,240,55"/>
+</map>

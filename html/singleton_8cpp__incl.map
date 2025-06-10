@@ -1,0 +1,13 @@
+<map id="source/iridium/pattern/singleton.cpp" name="source/iridium/pattern/singleton.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="179,5,325,46"/>
+<area shape="rect" id="Node000002" href="$singleton_8h.html" title=" " alt="" coords="210,94,294,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="255,46,255,78,250,78,250,46"/>
+<area shape="rect" id="Node000003" href="$non__copyable_8h.html" title=" " alt="" coords="5,168,118,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,123,109,164,107,159,219,118"/>
+<area shape="rect" id="Node000004" href="$non__movable_8h.html" title=" " alt="" coords="142,168,251,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="245,122,217,157,213,154,241,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="275,168,344,193"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="264,118,292,154,288,157,260,122"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="368,168,406,193"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="276,118,355,160,353,164,274,123"/>
+</map>

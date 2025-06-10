@@ -1,0 +1,12 @@
+<map id="iridium::io::implementation::CStreamReaderBuffer" name="iridium::io::implementation::CStreamReaderBuffer">
+<area shape="rect" id="Node000001" title="Реализует читаемый поток (IStreamReader), который читает из Buffer. Чтение не разрушает исходный буфе..." alt="" coords="104,241,277,282"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="5,153,179,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,202,170,239,167,243,124,206"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="125,79,256,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="165,117,118,154,115,150,162,113"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="203,160,376,186"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="219,112,276,158,273,162,216,116"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="98,5,283,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="193,46,193,79,188,79,188,46"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="266,198,215,243,211,239,262,194"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="source/iridium/convertion/implementation/type_name.h" name="source/iridium/convertion/implementation/type_name.h">
+<area shape="rect" id="Node000001" title="Основные детали реализации для получения имен типов в виде строк. Определяет объявление шаблонной фун..." alt="" coords="118,5,310,46"/>
+<area shape="rect" id="Node000002" href="$type__name_8cpp.html" title=" " alt="" coords="5,94,212,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,58,134,96,131,91,177,54"/>
+<area shape="rect" id="Node000003" href="$type__name_8h.html" title="Публичный интерфейс для получения строковых представлений имен типов. Предоставляет доступ к шаблонно..." alt="" coords="236,94,402,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="251,54,297,91,294,96,248,58"/>
+<area shape="rect" id="Node000004" href="$parser__json_8cpp.html" title=" " alt="" coords="242,183,396,238"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="322,150,322,182,316,182,316,150"/>
+</map>

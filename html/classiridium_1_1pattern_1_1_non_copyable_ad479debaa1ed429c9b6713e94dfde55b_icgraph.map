@@ -1,0 +1,7 @@
+<map id="iridium::pattern::NonCopyable::NonCopyable" name="iridium::pattern::NonCopyable::NonCopyable">
+<area shape="rect" id="Node000001" title="Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчан..." alt="" coords="248,39,442,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_copyable.html#a74879a308ee2096241f553f69c8c5f3b" title="Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных кл..." alt="" coords="5,5,200,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,46,200,42,200,36,232,41"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_non_copyable.html#a35c13b2ae7a0356e0360bb2b9e06b17a" title="Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием э..." alt="" coords="5,71,200,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,77,200,81,200,76,232,71"/>
+</map>

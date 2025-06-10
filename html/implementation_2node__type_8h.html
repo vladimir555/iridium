@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/parsing/implementation/node_type.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_3598e8d03f058449899ac524faf1a451.html">parsing</a></li><li class="navelem"><a class="el" href="dir_5a23d1bf9befbd4f2e2beb9407a1c7ef.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a>  </div>
+  <div class="headertitle"><div class="title">Файл node_type.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Определяет шаблонный класс <code><a class="el" href="class_c_node_type.html" title="Конкретная реализация интерфейса INodeType. Этот шаблон класса предоставляет полную реализацию для уз...">CNodeType</a>&lt;TValue&gt;</code>, конкретную реализацию <code><a class="el" href="class_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a>&lt;TValue&gt;</code>. Этот класс предоставляет фактическое хранилище и логику для узлов дерева, используемых во фреймворке разбора Iridium, включая интернирование имен и управление дочерними узлами.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;unordered_set&gt;</code><br />
+<code>#include &quot;<a class="el" href="smart__ptr_8h_source.html">iridium/smart_ptr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="node__type_8h_source.html">iridium/parsing/node_type.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для node_type.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="implementation_2node__type_8h__incl.png" border="0" usemap="#asource_2iridium_2parsing_2implementation_2node__type_8h" alt=""/></div>
+<map name="asource_2iridium_2parsing_2implementation_2node__type_8h" id="asource_2iridium_2parsing_2implementation_2node__type_8h">
+<area shape="rect" title="Определяет шаблонный класс CNodeType&lt;TValue&gt;, конкретную реализацию INodeType&lt;TValue&gt;...." alt="" coords="148,5,337,46"/>
+<area shape="rect" title=" " alt="" coords="5,345,59,371"/>
+<area shape="poly" title=" " alt="" coords="200,49,167,69,138,96,117,124,99,156,70,221,51,283,39,331,34,329,46,281,65,219,94,153,113,121,134,92,164,65,197,44"/>
+<area shape="rect" title=" " alt="" coords="82,345,121,371"/>
+<area shape="poly" title=" " alt="" coords="213,49,187,69,165,96,149,125,135,156,117,221,108,282,104,329,99,329,103,281,112,220,130,154,144,122,160,92,184,66,210,44"/>
+<area shape="rect" title=" " alt="" coords="627,102,730,127"/>
+<area shape="poly" title=" " alt="" coords="338,40,467,62,609,91,622,94,620,100,607,97,466,68,337,45"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="473,271,602,297"/>
+<area shape="poly" title=" " alt="" coords="333,44,389,64,448,92,502,131,525,154,545,181,552,200,554,220,549,257,544,256,549,220,547,201,540,184,521,158,499,135,445,97,387,69,331,49"/>
+<area shape="rect" href="node__type_8h.html" title="Определяет шаблонный интерфейс INodeType&lt;TValue&gt; для обобщенных узлов дерева. Этот интерфейс является..." alt="" coords="174,94,311,135"/>
+<area shape="poly" title=" " alt="" coords="245,47,245,78,240,78,240,47"/>
+<area shape="rect" title=" " alt="" coords="502,345,570,371"/>
+<area shape="poly" title=" " alt="" coords="540,297,539,329,534,329,534,297"/>
+<area shape="poly" title=" " alt="" coords="208,137,175,158,145,185,113,222,86,262,46,332,42,330,81,259,109,218,141,181,172,154,205,133"/>
+<area shape="poly" title=" " alt="" coords="217,137,193,159,172,184,150,222,132,262,110,331,105,329,127,260,145,219,167,181,190,155,214,133"/>
+<area shape="poly" title=" " alt="" coords="312,122,429,144,481,161,515,181,527,198,535,217,541,256,536,256,530,219,523,200,512,185,479,166,428,150,311,127"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="181,183,304,223"/>
+<area shape="poly" title=" " alt="" coords="245,135,245,167,240,167,240,135"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="328,190,501,216"/>
+<area shape="poly" title=" " alt="" coords="283,133,378,180,376,185,281,138"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="191,271,358,297"/>
+<area shape="poly" title=" " alt="" coords="253,223,267,256,262,258,248,225"/>
+<area shape="poly" title=" " alt="" coords="234,300,74,347,73,342,232,295"/>
+<area shape="poly" title=" " alt="" coords="246,300,136,345,134,340,244,295"/>
+<area shape="poly" title=" " alt="" coords="320,295,487,341,486,346,318,300"/>
+<area shape="rect" title=" " alt="" coords="247,345,308,371"/>
+<area shape="poly" title=" " alt="" coords="278,297,279,329,274,330,272,297"/>
+<area shape="rect" title=" " alt="" coords="331,345,389,371"/>
+<area shape="poly" title=" " alt="" coords="291,295,336,333,333,337,287,300"/>
+<area shape="rect" title=" " alt="" coords="412,345,473,371"/>
+<area shape="poly" title=" " alt="" coords="304,295,401,336,399,341,302,300"/>
+<area shape="rect" title=" " alt="" coords="145,345,223,371"/>
+<area shape="poly" title=" " alt="" coords="261,300,213,338,209,333,258,295"/>
+<area shape="poly" title=" " alt="" coords="435,214,507,261,505,265,432,219"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="implementation_2node__type_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2parsing_2implementation_2node__type_8hdep" alt=""/></div>
+<map name="asource_2iridium_2parsing_2implementation_2node__type_8hdep" id="asource_2iridium_2parsing_2implementation_2node__type_8hdep">
+<area shape="rect" title="Определяет шаблонный класс CNodeType&lt;TValue&gt;, конкретную реализацию INodeType&lt;TValue&gt;...." alt="" coords="1162,5,1351,46"/>
+<area shape="rect" href="implementation_2node_8h.html" title="Определяет typedef CNode, конкретную реализацию узла на основе CNodeType&lt;std::string&gt;...." alt="" coords="1178,94,1335,135"/>
+<area shape="poly" title=" " alt="" coords="1259,62,1259,94,1254,94,1254,62"/>
+<area shape="rect" href="parser__http_8cpp.html" title=" " alt="" coords="951,183,1104,238"/>
+<area shape="poly" title=" " alt="" coords="1196,143,1095,185,1093,180,1194,138"/>
+<area shape="rect" href="parser__json_8cpp.html" title=" " alt="" coords="5,464,159,519"/>
+<area shape="poly" title=" " alt="" coords="1218,146,1171,185,1146,214,1135,228,1118,241,1050,278,987,308,871,352,764,378,661,393,443,415,317,433,172,466,160,470,158,464,171,461,316,428,442,409,660,388,763,373,869,347,985,303,1048,273,1115,236,1132,224,1142,211,1167,181,1215,142"/>
+<area shape="rect" href="parser__xml_8cpp.html" title=" " alt="" coords="1180,183,1333,238"/>
+<area shape="poly" title=" " alt="" coords="1259,150,1259,182,1254,182,1254,150"/>
+<area shape="rect" href="serialization_2node_8cpp.html" title=" " alt="" coords="1296,286,1447,327"/>
+<area shape="poly" title=" " alt="" coords="1309,142,1330,159,1348,181,1361,208,1369,236,1374,286,1369,286,1363,237,1356,210,1344,184,1326,163,1305,146"/>
+<area shape="rect" href="serialization_2node_8h.html" title=" " alt="" coords="1661,190,1810,231"/>
+<area shape="poly" title=" " alt="" coords="1350,131,1661,192,1660,197,1349,136"/>
+<area shape="poly" title=" " alt="" coords="1647,237,1448,288,1447,283,1645,232"/>
+<area shape="rect" href="db_2config_8h.html" title="Определяет структуры конфигурации базы данных с использованием фреймворка сериализации...." alt="" coords="2834,294,3004,320"/>
+<area shape="poly" title=" " alt="" coords="1825,216,2834,296,2833,301,1824,222"/>
+<area shape="rect" href="request_8h.html" title=" " alt="" coords="3248,286,3414,327"/>
+<area shape="poly" title=" " alt="" coords="1825,214,3017,284,3248,298,3248,303,3017,289,1825,220"/>
+<area shape="rect" href="response_8h.html" title=" " alt="" coords="1471,286,1637,327"/>
+<area shape="poly" title=" " alt="" coords="1685,241,1593,288,1591,283,1683,236"/>
+<area shape="rect" href="logging_2config_8h.html" title=" " alt="" coords="1662,286,1809,327"/>
+<area shape="poly" title=" " alt="" coords="1738,246,1738,286,1733,286,1733,246"/>
+<area shape="rect" href="test__runner_8h.html" title=" " alt="" coords="2416,375,2561,416"/>
+<area shape="poly" title=" " alt="" coords="1825,231,2416,374,2415,379,1824,236"/>
+<area shape="rect" href="db_2config_8cpp.html" title=" " alt="" coords="2726,382,2910,408"/>
+<area shape="poly" title=" " alt="" coords="2896,331,2834,384,2830,380,2892,327"/>
+<area shape="rect" href="factory_8h.html" title=" " alt="" coords="2934,382,3107,408"/>
+<area shape="poly" title=" " alt="" coords="2946,327,3008,380,3005,384,2943,331"/>
+<area shape="rect" href="implementation_2connector_8h.html" title="Определяет базовый класс CConnector для конкретных реализаций коннекторов баз данных...." alt="" coords="3132,375,3344,416"/>
+<area shape="poly" title=" " alt="" coords="2980,321,3166,372,3165,377,2978,327"/>
+<area shape="rect" href="factory_8cpp.html" title=" " alt="" coords="2998,479,3185,504"/>
+<area shape="poly" title=" " alt="" coords="3041,419,3084,477,3080,480,3037,422"/>
+<area shape="rect" href="implementation_2connector_8cpp.html" title=" " alt="" coords="3209,471,3422,512"/>
+<area shape="poly" title=" " alt="" coords="3266,426,3301,469,3297,473,3262,430"/>
+<area shape="rect" href="request_8cpp.html" title=" " alt="" coords="3368,375,3534,416"/>
+<area shape="poly" title=" " alt="" coords="3372,334,3426,372,3423,377,3369,338"/>
+<area shape="rect" href="response_8cpp.html" title=" " alt="" coords="1239,375,1405,416"/>
+<area shape="poly" title=" " alt="" coords="1488,335,1376,377,1374,372,1486,330"/>
+<area shape="rect" href="logging_2config_8cpp.html" title=" " alt="" coords="1662,375,1809,416"/>
+<area shape="poly" title=" " alt="" coords="1738,343,1738,375,1733,375,1733,343"/>
+<area shape="rect" href="logger_8h.html" title="Определяет основной класс&#45;одиночку Logger, вспомогательные структуры LogStream и LogStreamDummy,..." alt="" coords="1430,375,1577,416"/>
+<area shape="poly" title=" " alt="" coords="1669,335,1557,377,1555,372,1667,330"/>
+<area shape="poly" title=" " alt="" coords="1414,418,1225,436,1064,442,922,440,790,434,658,430,517,431,358,441,172,466,160,469,159,463,171,461,357,436,517,425,658,425,790,429,922,435,1064,437,1225,431,1414,413"/>
+<area shape="rect" href="context_8cpp.html" title=" " alt="" coords="896,575,1105,616"/>
+<area shape="poly" title=" " alt="" coords="1415,419,1199,466,1184,478,1174,492,1164,506,1149,521,1100,553,1051,577,1049,572,1097,548,1146,517,1160,503,1170,489,1180,475,1197,461,1414,414"/>
+<area shape="rect" href="context__manager_8cpp.html" title=" " alt="" coords="1540,471,1749,512"/>
+<area shape="poly" title=" " alt="" coords="1547,422,1617,468,1614,473,1544,427"/>
+<area shape="rect" href="implementation_2pipe_8cpp.html" title=" " alt="" coords="1823,471,2032,512"/>
+<area shape="poly" title=" " alt="" coords="1593,414,1839,468,1838,473,1592,419"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="1458,856,1666,896"/>
+<area shape="poly" title=" " alt="" coords="1593,407,1650,413,2213,424,2580,437,2706,448,2746,454,2766,461,2790,491,2797,521,2793,594,2793,693,2790,704,2783,715,2755,735,2713,752,2657,769,2513,797,2340,821,2153,840,1968,855,1667,873,1667,868,1967,850,2152,835,2339,816,2512,792,2656,764,2711,747,2753,730,2779,711,2785,702,2787,692,2787,594,2791,521,2785,493,2763,466,2744,459,2705,453,2579,443,2213,429,1650,418,1592,412"/>
+<area shape="rect" href="stream__buffer_8cpp.html" title=" " alt="" coords="183,471,392,512"/>
+<area shape="poly" title=" " alt="" coords="1415,418,1261,434,1130,442,907,441,800,440,685,441,556,449,404,466,365,473,364,468,403,461,555,444,685,436,800,434,907,436,1130,436,1261,429,1414,413"/>
+<area shape="rect" href="linux_2socket_8cpp.html" title=" " alt="" coords="416,464,580,519"/>
+<area shape="poly" title=" " alt="" coords="1415,418,1290,432,1183,438,1001,438,821,440,716,449,593,466,581,469,580,463,592,461,715,444,820,435,1001,433,1183,433,1289,427,1414,413"/>
+<area shape="rect" href="content__storage_8cpp.html" title=" " alt="" coords="605,464,791,519"/>
+<area shape="poly" title=" " alt="" coords="1414,418,1321,430,1242,436,1107,441,973,446,895,453,804,466,792,468,791,463,803,461,894,448,972,441,1106,435,1242,431,1321,425,1414,413"/>
+<area shape="rect" href="logger_8cpp.html" title=" " alt="" coords="815,471,962,512"/>
+<area shape="poly" title=" " alt="" coords="1415,419,1290,433,1192,439,1095,447,975,466,947,473,946,468,973,461,1095,441,1191,434,1289,428,1414,413"/>
+<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="986,471,1135,512"/>
+<area shape="poly" title=" " alt="" coords="1415,419,1283,441,1155,466,1127,473,1126,468,1153,461,1282,436,1414,413"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="1470,567,1652,623"/>
+<area shape="poly" title=" " alt="" coords="1491,431,1482,474,1482,497,1487,518,1503,544,1524,565,1520,569,1499,547,1482,520,1476,497,1476,473,1486,430"/>
+<area shape="rect" href="test__runner__raw_8cpp.html" title=" " alt="" coords="1788,567,1970,623"/>
+<area shape="poly" title=" " alt="" coords="1593,404,1678,425,1721,441,1762,461,1779,474,1790,487,1813,518,1857,565,1853,569,1809,521,1786,490,1776,478,1759,466,1719,446,1676,430,1592,410"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2251,575,2396,616"/>
+<area shape="poly" title=" " alt="" coords="1593,406,1650,413,1717,418,1775,419,1875,415,1922,416,1972,422,2026,436,2089,461,2108,474,2120,488,2131,503,2148,517,2205,548,2263,572,2261,577,2203,553,2144,522,2127,506,2116,491,2104,478,2086,466,2025,441,1971,427,1922,421,1875,420,1775,424,1717,424,1650,418,1592,411"/>
+<area shape="rect" href="tester_8h.html" title=" " alt="" coords="2157,471,2303,512"/>
+<area shape="poly" title=" " alt="" coords="1593,406,1650,413,1788,425,1895,431,2002,440,2139,461,2168,468,2167,473,2137,466,2002,445,1895,436,1787,430,1650,418,1592,411"/>
+<area shape="rect" href="implementation_2async__queue_8h.html" title="Определяет класс CAsyncQueue&lt;TItem&gt;, реализацию интерфейса IAsyncQueue&lt;TItem&gt;. Этот класс предоставля..." alt="" coords="1210,471,1415,512"/>
+<area shape="poly" title=" " alt="" coords="1451,425,1354,473,1351,468,1449,421"/>
+<area shape="rect" href="implementation_2thread_8cpp.html" title=" " alt="" coords="1600,671,1778,712"/>
+<area shape="poly" title=" " alt="" coords="1504,431,1510,476,1518,498,1531,518,1546,531,1562,538,1596,541,1631,544,1649,551,1665,566,1681,591,1689,619,1693,670,1687,671,1684,620,1676,593,1661,569,1646,556,1630,549,1596,546,1561,543,1543,535,1527,521,1513,500,1505,477,1499,432"/>
+<area shape="rect" href="worker_8cpp.html" title=" " alt="" coords="1789,760,1970,800"/>
+<area shape="poly" title=" " alt="" coords="1593,406,1650,413,1740,416,1858,416,1917,420,1970,427,2014,441,2032,450,2045,462,2059,481,2067,501,2070,522,2069,543,2056,587,2032,629,2000,670,1966,706,1906,761,1902,757,1963,703,1996,666,2027,626,2051,584,2064,542,2065,522,2062,502,2054,483,2041,465,2029,455,2012,446,1969,433,1916,425,1857,422,1740,421,1650,418,1592,411"/>
+<area shape="poly" title=" " alt="" coords="2260,521,2307,573,2303,576,2256,525"/>
+<area shape="poly" title=" " alt="" coords="1239,520,1062,577,1060,572,1237,515"/>
+<area shape="poly" title=" " alt="" coords="1375,516,1495,564,1493,569,1373,520"/>
+<area shape="poly" title=" " alt="" coords="1354,519,1409,565,1433,595,1443,608,1459,621,1520,645,1604,668,1603,673,1519,650,1457,625,1440,612,1429,599,1405,569,1350,523"/>
+<area shape="rect" href="implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="1230,575,1395,616"/>
+<area shape="poly" title=" " alt="" coords="1315,528,1315,574,1310,574,1310,528"/>
+<area shape="rect" href="implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="1204,671,1370,712"/>
+<area shape="poly" title=" " alt="" coords="1263,523,1239,543,1220,568,1213,595,1220,622,1237,648,1260,669,1256,672,1233,651,1216,624,1208,595,1216,566,1235,540,1259,519"/>
+<area shape="rect" href="worker__pool_8h.html" title=" " alt="" coords="922,760,1120,800"/>
+<area shape="poly" title=" " alt="" coords="1269,523,1206,569,1154,620,1106,674,1037,761,1033,757,1102,671,1150,617,1203,565,1266,518"/>
+<area shape="poly" title=" " alt="" coords="1371,620,1413,644,1459,676,1502,714,1539,758,1551,783,1559,809,1564,855,1559,856,1553,810,1546,785,1534,761,1498,717,1455,680,1410,649,1368,625"/>
+<area shape="poly" title=" " alt="" coords="1402,617,1415,620,1607,668,1606,673,1413,626,1401,622"/>
+<area shape="poly" title=" " alt="" coords="1306,631,1295,671,1290,670,1301,630"/>
+<area shape="rect" href="implementation_2sink_8cpp.html" title=" " alt="" coords="1144,760,1310,800"/>
+<area shape="poly" title=" " alt="" coords="1267,726,1243,761,1239,758,1263,723"/>
+<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="1335,760,1525,800"/>
+<area shape="poly" title=" " alt="" coords="1334,718,1399,757,1396,762,1331,722"/>
+<area shape="poly" title=" " alt="" coords="1386,704,1789,763,1789,768,1386,710"/>
+<area shape="poly" title=" " alt="" coords="1213,719,1082,762,1080,757,1211,714"/>
+<area shape="poly" title=" " alt="" coords="1135,798,1458,854,1457,859,1134,804"/>
+<area shape="rect" href="worker__pool_8cpp.html" title=" " alt="" coords="941,848,1100,904"/>
+<area shape="poly" title=" " alt="" coords="1023,816,1023,848,1018,848,1018,816"/>
+<area shape="rect" href="test__runner__fork_8h.html" title=" " alt="" coords="2327,464,2509,519"/>
+<area shape="poly" title=" " alt="" coords="2467,430,2441,465,2436,461,2463,426"/>
+<area shape="rect" href="test__runner__raw_8h.html" title=" " alt="" coords="2534,471,2753,512"/>
+<area shape="poly" title=" " alt="" coords="2536,422,2612,468,2610,473,2533,426"/>
+<area shape="rect" href="test__runner_8cpp.html" title=" " alt="" coords="2828,471,2973,512"/>
+<area shape="poly" title=" " alt="" coords="2577,411,2809,461,2836,468,2834,473,2808,466,2576,416"/>
+<area shape="poly" title=" " alt="" coords="2312,522,2162,543,2044,552,1926,558,1777,570,1652,585,1652,579,1776,565,1926,552,2043,546,2161,538,2311,517"/>
+<area shape="poly" title=" " alt="" coords="2384,533,2343,577,2339,573,2380,529"/>
+<area shape="poly" title=" " alt="" coords="2544,518,2521,522,2371,544,2220,563,1971,589,1971,583,2219,558,2370,539,2520,517,2543,513"/>
+<area shape="poly" title=" " alt="" coords="2568,520,2386,577,2384,572,2566,514"/>
+</map>
+</div>
+</div>
+<p><a href="implementation_2node__type_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html">iridium::parsing::implementation::CNodeType&lt; TValue &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a></code>. Этот шаблон класса предоставляет полную реализацию для узла в древовидной структуре. Он управляет именем узла (используя интернирование строк для эффективности), его основным значением типа <code>TValue</code> и списком дочерних узлов. Класс спроектирован для поддержки клонирования через интерфейс <code>IPrototype</code>.  <a href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных. Этот заголовочный файл объявляет служебные функции для упрощения процесса получения экземпляров коннекторов баз данных на основе конфигурации или <a class="el" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing.html">iridium::parsing</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html">iridium::parsing::implementation</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing_1_1implementation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры. Это пространство имен предоставляет фактическую логику для разбора и формирования структур данных, определенных интерфейсами в родительском пространстве имен <code><a class="el" href="namespaceiridium_1_1parsing.html" title="Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных да...">iridium::parsing</a></code>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Определяет шаблонный класс <code><a class="el" href="class_c_node_type.html" title="Конкретная реализация интерфейса INodeType. Этот шаблон класса предоставляет полную реализацию для уз...">CNodeType</a>&lt;TValue&gt;</code>, конкретную реализацию <code><a class="el" href="class_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a>&lt;TValue&gt;</code>. Этот класс предоставляет фактическое хранилище и логику для узлов дерева, используемых во фреймворке разбора Iridium, включая интернирование имен и управление дочерними узлами. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

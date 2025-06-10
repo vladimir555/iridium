@@ -1,0 +1,7 @@
+<map id="iridium::threading::Synchronized::Locker::wait" name="iridium::threading::Synchronized::Locker::wait">
+<area shape="rect" id="Node000001" title="Ожидает на условной переменной объекта Synchronized в течение указанного времени, или до уведомления,..." alt="" coords="5,5,193,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="241,5,409,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,23,225,23,225,28,193,28"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="457,13,521,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="409,23,442,23,442,28,409,28"/>
+</map>

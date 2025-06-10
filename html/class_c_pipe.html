@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс CPipe</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-static-attribs">Статические открытые данные</a> &#124;
+<a href="class_c_pipe-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс CPipe</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Конкретная реализация интерфейса <code>IPipe</code>. <code><a class="el" href="class_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п...">CPipe</a></code> действует как канал, обычно между логическим потоком (представленным его читателем/писателем) и физическим или мультиплексированным потоком (представленным читателем/писателем, установленным через метод <code>set</code>). Он может буферизировать данные и обрабатывает передачу данных на основе событий.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="implementation_2pipe_8h_source.html">pipe.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:CPipe:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_c_pipe__inherit__graph.png" border="0" usemap="#a_c_pipe_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_c_pipe_inherit__map" id="a_c_pipe_inherit__map">
+<area shape="rect" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п..." alt="" coords="158,153,215,178"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe.html" title="Интерфейс, представляющий канал, объединяющий возможности доступа к потокам и передачи данных...." alt="" coords="128,79,244,105"/>
+<area shape="poly" title=" " alt="" coords="189,120,189,152,184,152,184,120"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_streams.html" title="Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для по..." alt="" coords="5,5,170,31"/>
+<area shape="poly" title=" " alt="" coords="118,38,171,76,168,81,115,43"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_transmitter.html" title="Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент,..." alt="" coords="194,5,376,31"/>
+<area shape="poly" title=" " alt="" coords="257,43,204,81,201,76,254,38"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса CPipe:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_c_pipe__coll__graph.png" border="0" usemap="#a_c_pipe_coll__map" alt="Collaboration graph"/></div>
+<map name="a_c_pipe_coll__map" id="a_c_pipe_coll__map">
+<area shape="rect" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п..." alt="" coords="158,153,215,178"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe.html" title="Интерфейс, представляющий канал, объединяющий возможности доступа к потокам и передачи данных...." alt="" coords="128,79,244,105"/>
+<area shape="poly" title=" " alt="" coords="189,120,189,152,184,152,184,120"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_streams.html" title="Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для по..." alt="" coords="5,5,170,31"/>
+<area shape="poly" title=" " alt="" coords="118,38,171,76,168,81,115,43"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_transmitter.html" title="Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент,..." alt="" coords="194,5,376,31"/>
+<area shape="poly" title=" " alt="" coords="257,43,204,81,201,76,254,38"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ae8d6c76deb56476534459e84215b28bd" id="r_ae8d6c76deb56476534459e84215b28bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8d6c76deb56476534459e84215b28bd">CPipe</a> ()</td></tr>
+<tr class="memdesc:ae8d6c76deb56476534459e84215b28bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует экземпляр <code><a class="el" href="class_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п...">CPipe</a></code> с настройками буфера по умолчанию. Инициализирует внутренние параметры управления буфером.  <br /></td></tr>
+<tr class="separator:ae8d6c76deb56476534459e84215b28bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac99ff21b04f54757caa603d929fc408" id="r_aac99ff21b04f54757caa603d929fc408"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac99ff21b04f54757caa603d929fc408">~CPipe</a> ()</td></tr>
+<tr class="memdesc:aac99ff21b04f54757caa603d929fc408"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор.  <br /></td></tr>
+<tr class="separator:aac99ff21b04f54757caa603d929fc408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace201b2cdef3f94ddc29801849589979" id="r_ace201b2cdef3f94ddc29801849589979"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace201b2cdef3f94ddc29801849589979">set</a> (IStreamReader::TSharedPtr const &amp;reader, IStreamWriter::TSharedPtr const &amp;writer) override</td></tr>
+<tr class="memdesc:ace201b2cdef3f94ddc29801849589979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Устанавливает базовые читателя и писателя для этого канала. Обычно это конечные точки фактического канала связи (например, сокетного потока или мультиплексированного подпотока), в которые должны записываться данные от логического читателя канала и из которых должны читаться данные для логического писателя канала.  <br /></td></tr>
+<tr class="separator:ace201b2cdef3f94ddc29801849589979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accaeba2f5d945dcf75fb1038ed0536c1" id="r_accaeba2f5d945dcf75fb1038ed0536c1"><td class="memItemLeft" align="right" valign="top">IStreamReader::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accaeba2f5d945dcf75fb1038ed0536c1">getReader</a> () const override</td></tr>
+<tr class="memdesc:accaeba2f5d945dcf75fb1038ed0536c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает логического читателя потока, связанного с этим каналом. Этот читатель используется приложением для чтения данных, которые были получены и буферизованы каналом.  <br /></td></tr>
+<tr class="separator:accaeba2f5d945dcf75fb1038ed0536c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3375a07312c25b53b0eb5cef17220369" id="r_a3375a07312c25b53b0eb5cef17220369"><td class="memItemLeft" align="right" valign="top">IStreamWriter::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3375a07312c25b53b0eb5cef17220369">getWriter</a> () const override</td></tr>
+<tr class="memdesc:a3375a07312c25b53b0eb5cef17220369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает логического писателя потока, связанного с этим каналом. Этот писатель используется приложением для записи данных, которые должны быть переданы через канал.  <br /></td></tr>
+<tr class="separator:a3375a07312c25b53b0eb5cef17220369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28abc2674c0d7a8cbbe6ee6a9d5a6f9d" id="r_a28abc2674c0d7a8cbbe6ee6a9d5a6f9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28abc2674c0d7a8cbbe6ee6a9d5a6f9d">transmit</a> (Event::TConstSharedPtr const &amp;event) override</td></tr>
+<tr class="memdesc:a28abc2674c0d7a8cbbe6ee6a9d5a6f9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Передает данные на основе предоставленного события. Если событие указывает, что данные доступны в логическом читателе канала (<code>m_reader</code>), этот метод читает из него, буферизирует данные и пытается записать их в базовый писатель потока (<code>m_writer</code>). Он управляет внутренними буферами для этого процесса.  <br /></td></tr>
+<tr class="separator:a28abc2674c0d7a8cbbe6ee6a9d5a6f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Статические открытые данные</h2></td></tr>
+<tr class="memitem:a9c13b418954aae055a5fb7c3db3d4e01" id="r_a9c13b418954aae055a5fb7c3db3d4e01"><td class="memItemLeft" align="right" valign="top">static size_t const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c13b418954aae055a5fb7c3db3d4e01">DEFAULT_BUFFER_SIZE</a> = 248</td></tr>
+<tr class="memdesc:a9c13b418954aae055a5fb7c3db3d4e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Размер по умолчанию для отдельных буферов, используемых в канале, в байтах.  <br /></td></tr>
+<tr class="separator:a9c13b418954aae055a5fb7c3db3d4e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ecb80f1b6f3db102257a349af8d8f96" id="r_a2ecb80f1b6f3db102257a349af8d8f96"><td class="memItemLeft" align="right" valign="top">static size_t const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ecb80f1b6f3db102257a349af8d8f96">DEFAULT_BUFFER_COUNT</a> = 8</td></tr>
+<tr class="memdesc:a2ecb80f1b6f3db102257a349af8d8f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Количество буферов по умолчанию для предварительного выделения или управления в канале.  <br /></td></tr>
+<tr class="separator:a2ecb80f1b6f3db102257a349af8d8f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Конкретная реализация интерфейса <code>IPipe</code>. <code><a class="el" href="class_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п...">CPipe</a></code> действует как канал, обычно между логическим потоком (представленным его читателем/писателем) и физическим или мультиплексированным потоком (представленным читателем/писателем, установленным через метод <code>set</code>). Он может буферизировать данные и обрабатывает передачу данных на основе событий. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ae8d6c76deb56476534459e84215b28bd" name="ae8d6c76deb56476534459e84215b28bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d6c76deb56476534459e84215b28bd">&#9670;&#160;</a></span>CPipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::implementation::CPipe::CPipe </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует экземпляр <code><a class="el" href="class_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п...">CPipe</a></code> с настройками буфера по умолчанию. Инициализирует внутренние параметры управления буфером. </p>
+
+</div>
+</div>
+<a id="aac99ff21b04f54757caa603d929fc408" name="aac99ff21b04f54757caa603d929fc408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac99ff21b04f54757caa603d929fc408">&#9670;&#160;</a></span>~CPipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::implementation::CPipe::~CPipe </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Виртуальный деструктор. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="accaeba2f5d945dcf75fb1038ed0536c1" name="accaeba2f5d945dcf75fb1038ed0536c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accaeba2f5d945dcf75fb1038ed0536c1">&#9670;&#160;</a></span>getReader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IStreamReader::TSharedPtr iridium::io::implementation::CPipe::getReader </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получает логического читателя потока, связанного с этим каналом. Этот читатель используется приложением для чтения данных, которые были получены и буферизованы каналом. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Умный указатель на <code>IStreamReader</code> канала. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_pipe_streams.html#a35eb6ec8c5767e29d117fa5f43907ce5">iridium::io::IPipeStreams</a>.</p>
+
+</div>
+</div>
+<a id="a3375a07312c25b53b0eb5cef17220369" name="a3375a07312c25b53b0eb5cef17220369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3375a07312c25b53b0eb5cef17220369">&#9670;&#160;</a></span>getWriter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IStreamWriter::TSharedPtr iridium::io::implementation::CPipe::getWriter </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получает логического писателя потока, связанного с этим каналом. Этот писатель используется приложением для записи данных, которые должны быть переданы через канал. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Умный указатель на <code>IStreamWriter</code> канала. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_pipe_streams.html#a491e576832a408ebcda0923b7ab45411">iridium::io::IPipeStreams</a>.</p>
+
+</div>
+</div>
+<a id="ace201b2cdef3f94ddc29801849589979" name="ace201b2cdef3f94ddc29801849589979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace201b2cdef3f94ddc29801849589979">&#9670;&#160;</a></span>set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CPipe::set </td>
+          <td>(</td>
+          <td class="paramtype">IStreamReader::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IStreamWriter::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>writer</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Устанавливает базовые читателя и писателя для этого канала. Обычно это конечные точки фактического канала связи (например, сокетного потока или мультиплексированного подпотока), в которые должны записываться данные от логического читателя канала и из которых должны читаться данные для логического писателя канала. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reader</td><td>Читатель потока, из которого будут читаться данные (источник для писателя канала). </td></tr>
+    <tr><td class="paramname">writer</td><td>Писатель потока, в который будут записываться данные (получатель для читателя канала). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_pipe_streams.html#a13447a7d608c985064f894fb5c21f1d8">iridium::io::IPipeStreams</a>.</p>
+
+</div>
+</div>
+<a id="a28abc2674c0d7a8cbbe6ee6a9d5a6f9d" name="a28abc2674c0d7a8cbbe6ee6a9d5a6f9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28abc2674c0d7a8cbbe6ee6a9d5a6f9d">&#9670;&#160;</a></span>transmit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool iridium::io::implementation::CPipe::transmit </td>
+          <td>(</td>
+          <td class="paramtype">Event::TConstSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Передает данные на основе предоставленного события. Если событие указывает, что данные доступны в логическом читателе канала (<code>m_reader</code>), этот метод читает из него, буферизирует данные и пытается записать их в базовый писатель потока (<code>m_writer</code>). Он управляет внутренними буферами для этого процесса. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Событие, инициирующее передачу (например, <code>Event::READ_STREAM</code> на читателе канала). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd><code>true</code>, если данные были успешно прочитаны и поставлены в очередь на запись (или записаны), <code>false</code> в случае ошибки или если никаких действий не было предпринято. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_pipe_transmitter.html#a7f95a46f7fdf6a480b17f9fdfb074b29">iridium::io::IPipeTransmitter</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a id="a2ecb80f1b6f3db102257a349af8d8f96" name="a2ecb80f1b6f3db102257a349af8d8f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ecb80f1b6f3db102257a349af8d8f96">&#9670;&#160;</a></span>DEFAULT_BUFFER_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t const iridium::io::implementation::CPipe::DEFAULT_BUFFER_COUNT = 8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Количество буферов по умолчанию для предварительного выделения или управления в канале. </p>
+
+</div>
+</div>
+<a id="a9c13b418954aae055a5fb7c3db3d4e01" name="a9c13b418954aae055a5fb7c3db3d4e01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c13b418954aae055a5fb7c3db3d4e01">&#9670;&#160;</a></span>DEFAULT_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t const iridium::io::implementation::CPipe::DEFAULT_BUFFER_SIZE = 248</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Размер по умолчанию для отдельных буферов, используемых в канале, в байтах. </p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/io/implementation/<a class="el" href="implementation_2pipe_8h_source.html">pipe.h</a></li>
+<li>source/iridium/io/implementation/<a class="el" href="implementation_2pipe_8cpp.html">pipe.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

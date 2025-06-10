@@ -1,0 +1,11 @@
+<map id="iridium::parsing::composeFile" name="iridium::parsing::composeFile">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,59,197,84"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="245,22,398,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,56,229,52,230,57,198,61"/>
+<area shape="rect" id="Node000005" href="$file__parser_8cpp.html#a3591cb9769f0fd00dd9411edaa5520be" title=" " alt="" coords="286,87,356,112"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="198,81,271,91,271,96,197,86"/>
+<area shape="rect" id="Node000003" href="$file__parser_8cpp.html#a649954a8bbebb18edb2d02ec6ad1d971" title=" " alt="" coords="446,5,621,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="398,31,430,27,431,33,399,36"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium.html#a5e9267b1ead0c871d0655be654802298" title=" " alt="" coords="468,55,599,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="399,49,454,55,453,61,398,54"/>
+</map>

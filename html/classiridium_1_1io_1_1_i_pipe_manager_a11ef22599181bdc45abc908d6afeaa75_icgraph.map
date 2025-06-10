@@ -1,0 +1,8 @@
+<map id="iridium::io::IPipeManager::updatePipe" name="iridium::io::IPipeManager::updatePipe">
+<area shape="rect" id="Node000001" title="Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоста..." alt="" coords="219,39,384,79"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="336,25,323,20,301,17,281,19,269,24,264,30,266,37,261,39,259,29,266,20,280,14,301,12,324,14,338,21"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_pipe_manager.html#abd49619dc6316bd10ff4f2e10fc5664a" title="Связывает как читателя, так и писателя потока с именованным каналом. Это позволяет осуществлять двуна..." alt="" coords="5,5,171,46"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="203,46,171,41,172,36,204,41"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_pipe_manager.html#af05aa53fe2ea41ddbc6b0b3e3fb3fe35" title="Связывает писателя потока с именованным каналом. Это позволяет записывать данные в канал через предос..." alt="" coords="5,71,171,111"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="204,76,172,81,171,76,203,71"/>
+</map>

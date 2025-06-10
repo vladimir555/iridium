@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/threading/runnable.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_6ab154fa523b6af8f2233db6708e09f0.html">threading</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a>  </div>
+  <div class="headertitle"><div class="title">Файл runnable.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="smart__ptr_8h_source.html">iridium/smart_ptr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="initializable_8h_source.html">iridium/pattern/initializable.h</a>&quot;</code><br />
+<code>#include &lt;atomic&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для runnable.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="runnable_8h__incl.png" border="0" usemap="#asource_2iridium_2threading_2runnable_8h" alt=""/></div>
+<map name="asource_2iridium_2threading_2runnable_8h" id="asource_2iridium_2threading_2runnable_8h">
+<area shape="rect" title=" " alt="" coords="54,5,213,46"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="5,168,134,193"/>
+<area shape="poly" title=" " alt="" coords="85,49,56,68,33,95,29,110,32,125,49,155,45,157,27,127,24,110,28,93,52,64,82,44"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="42,94,225,120"/>
+<area shape="poly" title=" " alt="" coords="136,46,136,78,131,78,131,46"/>
+<area shape="rect" title=" " alt="" coords="249,94,309,120"/>
+<area shape="poly" title=" " alt="" coords="171,44,245,84,242,89,169,49"/>
+<area shape="rect" title=" " alt="" coords="35,241,104,267"/>
+<area shape="poly" title=" " alt="" coords="72,194,72,226,67,226,67,194"/>
+<area shape="poly" title=" " alt="" coords="125,122,92,158,88,154,121,118"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="runnable_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2threading_2runnable_8hdep" alt=""/></div>
+<map name="asource_2iridium_2threading_2runnable_8hdep" id="asource_2iridium_2threading_2runnable_8hdep">
+<area shape="rect" title=" " alt="" coords="554,5,713,46"/>
+<area shape="rect" href="implementation_2session__manager_8h.html" title=" " alt="" coords="211,102,419,142"/>
+<area shape="poly" title=" " alt="" coords="553,53,382,103,381,98,551,48"/>
+<area shape="rect" href="implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="551,102,716,142"/>
+<area shape="poly" title=" " alt="" coords="636,62,636,101,631,101,631,62"/>
+<area shape="rect" href="worker__handler_8h.html" title=" " alt="" coords="744,94,904,150"/>
+<area shape="poly" title=" " alt="" coords="688,51,770,91,768,96,686,56"/>
+<area shape="rect" href="implementation_2client_8cpp.html" title=" " alt="" coords="5,205,214,246"/>
+<area shape="poly" title=" " alt="" coords="263,152,150,207,148,202,261,147"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="403,398,611,438"/>
+<area shape="poly" title=" " alt="" coords="295,156,283,179,275,203,272,228,279,252,294,278,314,301,360,341,410,372,456,395,454,399,408,377,357,345,310,305,290,281,274,254,267,229,269,202,278,176,290,154"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="288,198,470,253"/>
+<area shape="poly" title=" " alt="" coords="337,154,364,196,359,199,333,157"/>
+<area shape="poly" title=" " alt="" coords="582,153,555,173,534,199,522,224,514,251,505,307,504,358,507,397,502,398,499,358,500,307,509,250,517,222,530,196,552,170,578,149"/>
+<area shape="rect" href="implementation_2thread_8cpp.html" title=" " alt="" coords="544,205,723,246"/>
+<area shape="poly" title=" " alt="" coords="636,158,636,205,631,205,631,158"/>
+<area shape="rect" href="implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="746,205,913,246"/>
+<area shape="poly" title=" " alt="" coords="686,147,793,202,790,207,683,152"/>
+<area shape="rect" href="implementation_2sink_8cpp.html" title=" " alt="" coords="544,301,710,342"/>
+<area shape="poly" title=" " alt="" coords="775,255,670,303,668,298,772,250"/>
+<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="734,301,925,342"/>
+<area shape="poly" title=" " alt="" coords="832,261,832,301,827,301,827,261"/>
+<area shape="rect" href="worker_8cpp.html" title=" " alt="" coords="949,301,1129,342"/>
+<area shape="poly" title=" " alt="" coords="888,250,996,298,994,303,886,255"/>
+<area shape="rect" href="worker__pool_8h.html" title=" " alt="" coords="1153,301,1351,342"/>
+<area shape="poly" title=" " alt="" coords="928,246,1164,298,1163,303,927,251"/>
+<area shape="poly" title=" " alt="" coords="1138,345,848,382,612,409,611,403,848,377,1137,340"/>
+<area shape="rect" href="worker__pool_8cpp.html" title=" " alt="" coords="1172,390,1332,446"/>
+<area shape="poly" title=" " alt="" coords="1255,357,1255,389,1250,389,1250,357"/>
+<area shape="poly" title=" " alt="" coords="829,165,831,205,826,205,824,165"/>
+</map>
+</div>
+</div>
+<p><a href="runnable_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_runnable.html">iridium::threading::IRunnable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных. Этот заголовочный файл объявляет служебные функции для упрощения процесса получения экземпляров коннекторов баз данных на основе конфигурации или <a class="el" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1threading.html">iridium::threading</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1threading"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит классы и функции, связанные с многопоточностью и синхронизацией. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

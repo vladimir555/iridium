@@ -1,0 +1,5 @@
+<map id="iridium::logging::implementation::CSinkFile::finalize" name="iridium::logging::implementation::CSinkFile::finalize">
+<area shape="rect" id="Node000001" title="Завершает работу файлового приемника, обеспечивая сброс всех буферизованных сообщений и закрытие лог&#45;..." alt="" coords="258,5,462,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро..." alt="" coords="5,5,210,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,28,210,28,210,23,242,23"/>
+</map>

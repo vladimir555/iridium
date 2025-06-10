@@ -1,0 +1,7 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,82,56"/>
+<area shape="rect" id="Node000001" href="$structiridium_1_1io_1_1_u_r_i_1_1_t_i_pv4.html" title="Представляет IPv4&#45;адрес. Эта структура хранит IPv4&#45;адрес в виде массива из 4 байт." alt="" coords="130,5,282,31"/>
+<area shape="poly" id="edge24_Node000000_Node000001" title=" " alt="" coords="97,33,129,27,130,33,98,38"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1io_1_1_u_r_i_1_1_t_i_pv6.html" title="Представляет IPv6&#45;адрес. Эта структура хранит IPv6&#45;адрес в виде массива из 8 16&#45;битных целых чисел." alt="" coords="130,55,282,80"/>
+<area shape="poly" id="edge25_Node000000_Node000002" title=" " alt="" coords="98,49,130,54,129,59,97,54"/>
+</map>

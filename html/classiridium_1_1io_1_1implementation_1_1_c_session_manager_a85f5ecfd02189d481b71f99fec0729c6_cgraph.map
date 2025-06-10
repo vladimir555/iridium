@@ -1,0 +1,11 @@
+<map id="iridium::io::implementation::CSessionManager::DEFINE_IMPLEMENTATION" name="iridium::io::implementation::CSessionManager::DEFINE_IMPLEMENTATION">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,200,119"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a105de3e1c94e02af4831d7baf22c9455" title="Конструирует экземпляр CSessionManager. Инициализирует внутренние компоненты, такие как мультиплексор..." alt="" coords="248,5,499,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,65,271,47,272,53,201,70"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a61bdf570ff5046cb79d20aeb1fd75cb0" title="Завершает работу менеджера сессий и его компонентов. Обычно это останавливает рабочие потоки и очищае..." alt="" coords="281,71,466,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="200,88,265,88,265,94,200,94"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a4fe1caa2fcab0505523ffe96b18ad474" title="Инициализирует менеджер сессий и его компоненты. Обычно это запускает рабочие потоки для обработки со..." alt="" coords="278,136,469,177"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="201,112,272,129,271,135,200,117"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d" title="Создает список разделяемых указателей на объекты типа TObject." alt="" coords="547,13,695,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="499,23,531,23,531,28,499,28"/>
+</map>

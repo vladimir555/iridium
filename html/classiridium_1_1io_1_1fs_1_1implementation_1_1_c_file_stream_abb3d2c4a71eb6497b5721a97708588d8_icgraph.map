@@ -1,0 +1,9 @@
+<map id="iridium::io::fs::implementation::CFileStream::CFileStream" name="iridium::io::fs::implementation::CFileStream::CFileStream">
+<area shape="rect" id="Node000001" title="Защищенный конструктор для настройки параметров файлового потока. Этот конструктор сохраняет имя файл..." alt="" coords="321,71,513,111"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html#a09872b927835337fe5bcdeeb464beb82" title="Макрос для определения деталей реализации, возможно, для регистрации типов или фабричных систем." alt="" coords="5,5,273,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="312,69,228,49,229,44,313,64"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html#a08c30a2997655b4db644939c7ce95350" title="Макрос для определения деталей реализации, возможно, для регистрации типов или фабричных систем." alt="" coords="13,71,265,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="305,94,265,94,265,88,305,88"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1" title="Перечисляет режимы, в которых файл может быть открыт." alt="" coords="35,136,243,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="313,118,229,138,228,133,312,113"/>
+</map>

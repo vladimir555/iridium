@@ -1,0 +1,11 @@
+<map id="source/iridium/pattern/singleton.h" name="source/iridium/pattern/singleton.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="179,5,325,46"/>
+<area shape="rect" id="Node000002" href="$non__copyable_8h.html" title=" " alt="" coords="5,94,118,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,49,106,90,104,85,204,44"/>
+<area shape="rect" id="Node000003" href="$non__movable_8h.html" title=" " alt="" coords="142,94,251,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,48,216,83,211,79,236,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="275,94,344,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,45,294,79,289,83,264,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="368,94,406,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="287,44,355,84,352,89,284,49"/>
+</map>

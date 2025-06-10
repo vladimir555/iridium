@@ -1,0 +1,5 @@
+<map id="iridium::io::implementation::CContext::transmit" name="iridium::io::implementation::CContext::transmit">
+<area shape="rect" id="Node000001" title="Передает событие, обычно кодируя его с помощью протокола и записывая в поток события." alt="" coords="5,5,179,46"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Проверяет существование значения (не false, не null, не пустое) и выбрасывает пользовательское исключ..." alt="" coords="227,13,367,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,23,211,23,211,28,179,28"/>
+</map>

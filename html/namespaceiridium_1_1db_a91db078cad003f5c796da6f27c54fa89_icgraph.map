@@ -1,0 +1,5 @@
+<map id="iridium::db::makeConfig" name="iridium::db::makeConfig">
+<area shape="rect" id="Node000001" title="Создает объект конфигурации базы данных из URI. Разбирает данный URI и извлекает параметры подключени..." alt="" coords="239,5,398,31"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1db.html#afacc46a55b26a30d286cde5c849d9253" title="Создает экземпляр коннектора базы данных из URI. Это вспомогательная функция, которая сначала вызывае..." alt="" coords="5,5,191,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,21,191,21,191,16,223,16"/>
+</map>

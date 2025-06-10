@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/testing/tester.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_f3814060eef6af8b02d090af68c25924.html">testing</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#define-members">Макросы</a>  </div>
+  <div class="headertitle"><div class="title">Файл tester.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="singleton_8h_source.html">iridium/pattern/singleton.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="node__type_8h_source.html">iridium/parsing/node_type.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="smart__ptr_8h_source.html">iridium/smart_ptr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="logger_8h_source.html">iridium/logging/logger.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="convert_8h_source.html">iridium/convertion/convert.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="va__args_8h_source.html">iridium/macros/va_args.h</a>&quot;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &quot;<a class="el" href="test_8h_source.html">test.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="unit__test_8h_source.html">unit_test.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для tester.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="tester_8h__incl.png" border="0" usemap="#asource_2iridium_2testing_2tester_8h" alt=""/></div>
+<map name="asource_2iridium_2testing_2tester_8h" id="asource_2iridium_2testing_2tester_8h">
+<area shape="rect" title=" " alt="" coords="2046,5,2191,46"/>
+<area shape="rect" href="singleton_8h.html" title=" " alt="" coords="343,419,513,444"/>
+<area shape="poly" title=" " alt="" coords="2045,32,1630,47,1048,78,767,98,530,122,437,136,367,150,322,165,311,173,308,180,308,263,310,286,317,307,340,347,370,381,400,407,397,411,367,385,336,350,312,309,305,287,303,263,303,179,307,169,320,161,365,145,436,131,529,117,766,93,1048,72,1630,42,2045,27"/>
+<area shape="rect" href="node__type_8h.html" title="Определяет шаблонный интерфейс INodeType&lt;TValue&gt; для обобщенных узлов дерева. Этот интерфейс является..." alt="" coords="2349,492,2486,533"/>
+<area shape="poly" title=" " alt="" coords="2192,25,2362,33,2463,42,2564,56,2657,75,2733,101,2763,117,2785,135,2800,156,2805,179,2805,263,2806,323,2798,347,2779,373,2754,393,2729,404,2704,409,2680,409,2627,408,2599,412,2568,421,2508,452,2457,485,2454,481,2505,447,2566,416,2598,406,2627,403,2680,404,2704,403,2727,399,2751,388,2775,369,2794,345,2800,322,2800,263,2800,179,2795,158,2782,139,2760,122,2731,106,2655,80,2563,61,2462,48,2361,39,2192,31"/>
+<area shape="rect" title=" " alt="" coords="2672,743,2725,769"/>
+<area shape="poly" title=" " alt="" coords="2192,27,2393,35,2646,49,2876,68,2958,79,3006,91,3038,107,3064,124,3081,146,3087,179,3087,603,3080,637,3063,661,3038,679,3005,698,2972,714,2937,728,2864,746,2796,755,2741,758,2741,752,2796,749,2863,740,2935,723,2970,709,3003,693,3035,675,3060,657,3076,635,3081,602,3081,179,3076,148,3060,128,3036,112,3004,97,2957,84,2875,73,2646,54,2393,40,2192,32"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="794,581,918,622"/>
+<area shape="poly" title=" " alt="" coords="2046,31,1742,36,1313,48,880,67,699,81,563,97,509,101,455,99,356,94,316,98,284,111,273,122,264,137,259,156,257,179,257,433,262,467,276,492,300,511,332,531,367,545,415,558,535,577,666,588,779,595,778,600,665,594,535,582,414,563,365,550,329,535,297,516,272,495,257,469,252,433,252,179,254,155,260,135,269,119,281,107,314,93,356,89,455,94,509,96,562,91,699,75,879,62,1313,43,1742,31,2046,25"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="2234,670,2363,695"/>
+<area shape="poly" title=" " alt="" coords="2192,25,2302,29,2444,40,2601,59,2680,74,2756,91,2791,98,2826,101,2891,107,2917,114,2938,127,2952,148,2957,179,2957,263,2950,343,2941,377,2929,408,2913,436,2895,461,2850,505,2794,540,2729,571,2577,624,2474,652,2378,671,2377,666,2473,647,2575,619,2727,566,2791,536,2846,500,2891,458,2909,433,2924,406,2936,375,2945,342,2952,263,2952,179,2947,150,2935,131,2915,119,2890,112,2826,107,2791,103,2755,97,2679,79,2600,65,2443,45,2302,34,2191,30"/>
+<area shape="rect" href="logger_8h.html" title="Определяет основной класс&#45;одиночку Logger, вспомогательные структуры LogStream и LogStreamDummy,..." alt="" coords="1441,94,1594,120"/>
+<area shape="poly" title=" " alt="" coords="2046,39,1609,96,1609,91,2045,34"/>
+<area shape="rect" title=" " alt="" coords="1215,500,1262,526"/>
+<area shape="poly" title=" " alt="" coords="2046,34,1814,51,1516,80,1373,99,1249,120,1158,144,1128,156,1111,169,1099,189,1091,209,1086,253,1095,298,1113,343,1138,387,1166,426,1218,487,1214,490,1162,429,1134,389,1109,345,1090,299,1081,253,1086,208,1094,186,1107,166,1126,152,1156,139,1248,115,1372,93,1516,75,1813,46,2045,29"/>
+<area shape="rect" href="va__args_8h.html" title="Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основ..." alt="" coords="2598,338,2765,363"/>
+<area shape="poly" title=" " alt="" coords="2154,44,2649,327,2646,332,2152,49"/>
+<area shape="rect" href="test_8h.html" title=" " alt="" coords="2993,588,3047,614"/>
+<area shape="poly" title=" " alt="" coords="2192,26,2387,32,2632,44,2852,63,2930,76,2975,92,2996,110,3009,129,3014,151,3016,179,3016,433,3021,572,3015,573,3011,433,3011,179,3009,152,3004,131,2992,113,2972,96,2929,81,2851,69,2632,49,2387,37,2192,31"/>
+<area shape="rect" href="unit__test_8h.html" title=" " alt="" coords="84,500,166,526"/>
+<area shape="poly" title=" " alt="" coords="2046,31,1632,37,1045,50,506,70,324,82,267,89,237,96,208,112,186,128,173,149,168,179,168,352,165,389,158,425,139,486,133,484,152,424,160,388,163,352,163,179,168,147,182,124,205,107,235,92,266,84,323,77,506,65,1045,45,1632,32,2045,25"/>
+<area shape="rect" href="non__copyable_8h.html" title=" " alt="" coords="342,500,455,526"/>
+<area shape="poly" title=" " alt="" coords="426,446,411,486,406,484,421,444"/>
+<area shape="rect" href="non__movable_8h.html" title=" " alt="" coords="479,500,588,526"/>
+<area shape="poly" title=" " alt="" coords="445,443,507,488,504,493,442,447"/>
+<area shape="rect" title=" " alt="" coords="1676,743,1745,769"/>
+<area shape="poly" title=" " alt="" coords="392,447,359,466,344,478,333,494,325,514,327,522,332,531,355,547,389,558,430,565,476,569,568,572,639,578,711,600,742,610,783,619,925,639,1037,646,1149,651,1292,667,1499,704,1662,740,1661,746,1498,710,1292,672,1149,657,1037,651,925,645,782,624,741,615,710,605,638,584,568,577,476,574,430,570,388,563,353,552,329,535,322,524,320,513,328,491,340,475,356,461,390,443"/>
+<area shape="rect" title=" " alt="" coords="1485,743,1523,769"/>
+<area shape="poly" title=" " alt="" coords="360,447,320,465,303,478,289,494,281,513,283,522,288,531,310,540,361,552,510,581,739,619,875,634,981,639,1088,646,1223,667,1293,683,1362,703,1471,740,1469,745,1360,708,1292,689,1222,672,1087,651,981,644,874,639,738,624,509,586,360,557,309,545,285,535,278,524,276,513,284,491,299,474,317,460,358,442"/>
+<area shape="poly" title=" " alt="" coords="2369,536,2254,579,2115,624,1947,668,1781,705,1539,751,1538,746,1780,700,1946,663,2114,619,2253,574,2368,531"/>
+<area shape="poly" title=" " alt="" coords="2467,531,2507,552,2546,579,2574,608,2591,635,2607,662,2631,694,2673,732,2669,736,2627,697,2602,665,2586,638,2569,611,2542,583,2504,557,2465,536"/>
+<area shape="poly" title=" " alt="" coords="2348,520,934,598,933,593,2348,515"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="2336,588,2509,614"/>
+<area shape="poly" title=" " alt="" coords="2421,533,2424,573,2418,573,2416,534"/>
+<area shape="poly" title=" " alt="" coords="2469,531,2499,551,2524,580,2531,602,2523,623,2501,640,2465,654,2378,673,2377,668,2463,648,2498,635,2519,620,2526,602,2519,582,2496,555,2466,536"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="1043,670,1210,695"/>
+<area shape="poly" title=" " alt="" coords="919,618,1071,662,1070,667,917,623"/>
+<area shape="poly" title=" " alt="" coords="1211,691,1662,746,1661,752,1211,697"/>
+<area shape="poly" title=" " alt="" coords="1191,693,1470,746,1469,751,1190,699"/>
+<area shape="poly" title=" " alt="" coords="1211,685,2656,750,2656,756,1210,690"/>
+<area shape="rect" title=" " alt="" coords="988,743,1049,769"/>
+<area shape="poly" title=" " alt="" coords="1110,698,1051,737,1048,732,1107,694"/>
+<area shape="rect" title=" " alt="" coords="891,743,949,769"/>
+<area shape="poly" title=" " alt="" coords="1092,698,964,742,962,737,1091,693"/>
+<area shape="rect" title=" " alt="" coords="16,743,77,769"/>
+<area shape="poly" title=" " alt="" coords="1042,692,92,754,92,749,1042,687"/>
+<area shape="rect" title=" " alt="" coords="1087,743,1166,769"/>
+<area shape="poly" title=" " alt="" coords="1129,696,1129,728,1124,728,1124,696"/>
+<area shape="poly" title=" " alt="" coords="2405,617,2332,663,2329,659,2402,612"/>
+<area shape="poly" title=" " alt="" coords="2234,694,1761,751,1760,746,2234,689"/>
+<area shape="poly" title=" " alt="" coords="1440,114,1256,130,1147,146,1039,170,953,196,866,227,700,296,561,363,464,413,462,408,558,358,698,292,864,222,951,191,1038,165,1146,141,1255,125,1440,108"/>
+<area shape="poly" title=" " alt="" coords="1498,122,1466,144,1431,176,1403,215,1395,237,1392,261,1392,352,1395,408,1404,464,1432,572,1465,664,1494,729,1489,731,1461,666,1427,574,1398,465,1390,408,1387,352,1387,260,1390,236,1398,213,1427,172,1462,140,1495,118"/>
+<area shape="rect" href="synchronized_8h.html" title="Определяет шаблон класса Synchronized для создания синхронизированных блоков кода и связанные вспомог..." alt="" coords="913,419,1121,444"/>
+<area shape="poly" title=" " alt="" coords="1440,115,1359,121,1272,132,1193,148,1163,158,1141,170,1115,194,1092,223,1073,255,1057,288,1035,353,1024,404,1019,403,1030,351,1052,286,1068,253,1087,220,1111,191,1138,165,1161,153,1192,143,1271,126,1359,116,1440,109"/>
+<area shape="rect" title=" " alt="" coords="1745,588,1802,614"/>
+<area shape="poly" title=" " alt="" coords="1516,121,1502,181,1496,220,1493,260,1493,352,1494,403,1501,422,1518,442,1547,462,1577,470,1608,469,1639,464,1670,459,1701,459,1731,468,1761,491,1773,509,1779,531,1780,573,1775,573,1774,532,1768,512,1757,494,1729,473,1700,464,1670,464,1640,469,1608,474,1577,475,1545,467,1514,446,1496,425,1489,404,1488,352,1488,260,1490,219,1497,180,1511,120"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="613,500,734,526"/>
+<area shape="poly" title=" " alt="" coords="1440,110,1368,114,1284,124,1195,142,1110,170,1042,204,976,244,914,289,856,336,759,424,696,490,692,486,756,420,853,332,911,285,973,240,1040,199,1108,165,1194,136,1283,118,1368,109,1440,105"/>
+<area shape="rect" title=" " alt="" coords="1039,500,1097,526"/>
+<area shape="poly" title=" " alt="" coords="1441,111,1352,120,1305,129,1261,143,1221,162,1190,188,1169,220,1163,239,1161,260,1161,352,1156,401,1136,446,1117,470,1097,491,1093,487,1113,467,1131,443,1151,399,1156,352,1156,260,1158,238,1164,218,1186,184,1218,158,1259,138,1304,124,1351,114,1440,106"/>
+<area shape="rect" title=" " alt="" coords="1245,168,1301,193"/>
+<area shape="poly" title=" " alt="" coords="1477,123,1317,169,1315,164,1475,118"/>
+<area shape="rect" title=" " alt="" coords="2109,419,2160,444"/>
+<area shape="poly" title=" " alt="" coords="1538,118,1717,226,1847,299,1984,368,2096,414,2094,419,1981,373,1845,303,1714,230,1535,122"/>
+<area shape="rect" title=" " alt="" coords="1528,419,1568,444"/>
+<area shape="poly" title=" " alt="" coords="1521,120,1548,403,1543,403,1516,120"/>
+<area shape="poly" title=" " alt="" coords="1458,123,1412,141,1391,153,1372,170,1355,191,1346,210,1342,232,1341,260,1341,352,1334,394,1315,432,1290,465,1266,491,1262,487,1286,462,1310,429,1329,392,1336,351,1336,260,1337,232,1341,209,1351,188,1369,166,1388,149,1410,136,1456,118"/>
+<area shape="rect" title=" " alt="" coords="2663,500,2766,526"/>
+<area shape="poly" title=" " alt="" coords="1594,106,1865,116,2041,128,2226,148,2406,176,2490,193,2567,214,2637,237,2696,264,2744,294,2779,328,2790,348,2793,370,2791,392,2784,414,2762,456,2738,490,2733,486,2758,453,2779,412,2786,391,2788,370,2785,350,2775,332,2741,299,2694,269,2635,242,2566,219,2488,198,2405,181,2225,153,2040,134,1865,121,1594,112"/>
+<area shape="rect" title=" " alt="" coords="1591,419,1702,444"/>
+<area shape="poly" title=" " alt="" coords="1525,119,1545,167,1639,403,1634,405,1540,169,1520,121"/>
+<area shape="rect" href="logging_2event_8h.html" title="Определяет структуру TEvent для сообщений журнала во фреймворке логирования Iridium...." alt="" coords="2064,338,2128,363"/>
+<area shape="poly" title=" " alt="" coords="1595,109,1691,115,1799,126,1899,142,1938,153,1968,165,2011,199,2045,242,2071,285,2088,322,2083,324,2066,287,2041,245,2007,203,1965,170,1937,158,1897,147,1799,131,1691,120,1594,114"/>
+<area shape="rect" href="sink_8h.html" title="Определяет интерфейс ISink для потребителей событий журнала (аппендеров). Включает сам интерфейс,..." alt="" coords="1956,249,2012,274"/>
+<area shape="poly" title=" " alt="" coords="1594,108,1685,114,1786,124,1877,141,1912,152,1939,165,1954,180,1966,197,1980,233,1975,235,1961,200,1950,183,1936,170,1910,157,1875,146,1785,129,1685,119,1594,113"/>
+<area shape="rect" href="logging_2config_8h.html" title=" " alt="" coords="2086,168,2154,193"/>
+<area shape="poly" title=" " alt="" coords="1594,111,1808,131,1938,146,2068,165,2072,166,2071,171,2067,170,1938,151,1808,136,1594,116"/>
+<area shape="poly" title=" " alt="" coords="913,442,706,460,586,475,467,495,453,498,452,493,466,490,585,470,705,455,912,436"/>
+<area shape="poly" title=" " alt="" coords="913,447,765,466,602,495,588,498,587,493,601,490,764,461,912,441"/>
+<area shape="poly" title=" " alt="" coords="933,448,851,467,819,479,799,494,793,512,797,531,808,551,824,569,819,572,804,554,792,533,787,511,795,491,816,475,850,462,932,442"/>
+<area shape="poly" title=" " alt="" coords="913,438,414,459,182,475,107,485,73,495,54,520,40,549,33,581,29,614,33,678,42,728,37,729,27,678,24,614,27,580,35,547,49,517,70,490,106,479,182,470,413,453,913,433"/>
+<area shape="rect" href="thread_8h.html" title="Определяет интерфейс IThread и связанные служебные функции для работы с потоками. Включает основной и..." alt="" coords="1438,500,1506,526"/>
+<area shape="poly" title=" " alt="" coords="1088,442,1423,500,1422,505,1087,448"/>
+<area shape="rect" href="strings_8h.html" title=" " alt="" coords="1633,500,1746,526"/>
+<area shape="poly" title=" " alt="" coords="1121,442,1618,500,1617,506,1121,448"/>
+<area shape="poly" title=" " alt="" coords="963,448,754,495,739,498,738,493,753,490,962,442"/>
+<area shape="poly" title=" " alt="" coords="1027,443,1054,485,1050,488,1023,446"/>
+<area shape="rect" title=" " alt="" coords="809,500,935,526"/>
+<area shape="poly" title=" " alt="" coords="996,447,909,494,906,490,994,442"/>
+<area shape="rect" title=" " alt="" coords="1120,500,1192,526"/>
+<area shape="poly" title=" " alt="" coords="1040,442,1123,490,1120,494,1037,447"/>
+<area shape="rect" title=" " alt="" coords="958,500,1015,526"/>
+<area shape="poly" title=" " alt="" coords="1015,446,999,486,994,484,1010,444"/>
+<area shape="poly" title=" " alt="" coords="1486,524,1538,570,1574,596,1612,619,1671,649,1719,667,1835,693,1954,713,2077,728,2315,746,2518,753,2656,753,2656,758,2518,758,2315,752,2076,733,1954,718,1834,698,1718,672,1669,654,1609,624,1571,600,1535,574,1482,528"/>
+<area shape="poly" title=" " alt="" coords="1438,526,1207,598,1092,639,1053,657,1033,671,1021,699,1018,728,1013,728,1016,698,1028,668,1050,653,1090,634,1206,592,1436,521"/>
+<area shape="poly" title=" " alt="" coords="1438,525,1391,536,1316,547,1256,550,1198,559,1128,583,1070,616,1017,657,974,699,941,733,938,730,970,695,1014,653,1067,612,1125,579,1197,554,1255,545,1315,541,1390,530,1437,520"/>
+<area shape="poly" title=" " alt="" coords="1496,524,1597,571,1664,598,1734,619,1865,646,1998,663,2120,673,2219,677,2219,683,2120,678,1998,668,1864,651,1733,624,1663,603,1595,576,1494,529"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="1877,588,2059,614"/>
+<area shape="poly" title=" " alt="" coords="1507,517,1883,583,1883,588,1506,523"/>
+<area shape="poly" title=" " alt="" coords="2019,612,2233,663,2232,668,2018,617"/>
+<area shape="poly" title=" " alt="" coords="1682,527,1524,732,1520,729,1678,524"/>
+<area shape="poly" title=" " alt="" coords="1693,525,1704,572,1716,598,1735,620,1767,640,1809,658,1916,688,2046,711,2187,728,2330,739,2462,746,2656,752,2656,757,2462,752,2329,745,2187,733,2045,716,1915,693,1807,663,1765,644,1731,624,1712,601,1699,574,1688,527"/>
+<area shape="poly" title=" " alt="" coords="1703,524,1753,575,1749,579,1699,528"/>
+<area shape="poly" title=" " alt="" coords="2121,361,2141,368,2222,384,2292,388,2356,386,2415,381,2474,378,2537,380,2606,391,2685,416,2730,432,2769,447,2784,457,2796,470,2804,488,2807,511,2807,603,2799,643,2779,680,2753,711,2728,735,2724,732,2749,708,2774,677,2794,642,2801,602,2801,511,2799,490,2792,473,2781,461,2766,451,2728,437,2683,421,2605,396,2536,385,2475,383,2416,387,2356,391,2292,394,2221,389,2139,373,2119,366"/>
+<area shape="poly" title=" " alt="" coords="2124,361,2141,368,2179,378,2211,383,2240,392,2254,402,2269,417,2287,445,2299,477,2307,510,2311,543,2312,605,2306,654,2301,654,2306,605,2306,543,2302,511,2294,478,2282,448,2264,420,2251,406,2238,397,2210,388,2177,384,2139,373,2122,366"/>
+<area shape="rect" href="enum_8h.html" title="Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,..." alt="" coords="1776,419,1882,444"/>
+<area shape="poly" title=" " alt="" coords="2064,364,1886,416,1884,411,2062,359"/>
+<area shape="poly" title=" " alt="" coords="1776,445,1688,467,1649,480,1623,494,1598,520,1576,550,1543,615,1522,678,1511,728,1506,727,1517,677,1539,613,1572,547,1594,517,1620,490,1646,475,1686,462,1775,440"/>
+<area shape="poly" title=" " alt="" coords="1776,444,1758,447,1664,459,1590,465,1518,475,1426,495,1395,505,1372,515,1349,526,1318,536,1212,556,1128,564,1043,569,936,584,934,584,933,579,935,578,1043,564,1127,558,1211,551,1317,530,1347,521,1370,510,1393,500,1425,490,1517,470,1590,460,1663,453,1757,442,1775,439"/>
+<area shape="poly" title=" " alt="" coords="1809,447,1725,494,1723,490,1807,442"/>
+<area shape="poly" title=" " alt="" coords="1776,441,1713,447,1569,456,1457,459,1345,468,1280,479,1205,495,1197,497,1196,492,1203,490,1279,473,1345,463,1456,454,1569,451,1713,442,1775,436"/>
+<area shape="poly" title=" " alt="" coords="1776,441,1544,468,1331,495,1277,505,1276,500,1330,490,1543,462,1775,436"/>
+<area shape="rect" title=" " alt="" coords="1822,500,1885,526"/>
+<area shape="poly" title=" " alt="" coords="1835,444,1848,484,1843,486,1830,446"/>
+<area shape="poly" title=" " alt="" coords="1955,267,1725,278,1327,304,1089,325,837,351,581,383,331,421,284,427,243,429,171,431,138,435,107,446,75,465,42,494,23,520,13,550,9,582,9,615,21,678,38,728,33,730,16,679,4,615,3,581,8,548,19,518,38,491,72,460,105,441,137,430,170,425,243,424,284,422,330,416,581,377,837,345,1088,319,1327,299,1725,272,1955,261"/>
+<area shape="poly" title=" " alt="" coords="1991,274,2013,320,2031,346,2054,369,2072,380,2090,386,2124,390,2159,395,2177,403,2195,417,2219,444,2240,475,2270,540,2288,604,2298,654,2293,655,2283,605,2265,542,2235,477,2215,447,2191,421,2174,407,2157,400,2124,396,2089,392,2070,385,2050,373,2027,349,2009,323,1986,276"/>
+<area shape="poly" title=" " alt="" coords="1986,275,1988,321,1996,346,2010,369,2033,385,2063,394,2125,401,2152,403,2172,410,2181,423,2174,446,2157,466,2137,475,2116,482,2092,495,2037,539,1992,580,1989,576,2034,535,2089,490,2114,477,2135,470,2154,462,2170,443,2176,424,2169,414,2151,409,2125,406,2062,400,2031,390,2006,373,1991,349,1983,322,1980,275"/>
+<area shape="poly" title=" " alt="" coords="2001,273,2070,326,2067,330,1998,277"/>
+<area shape="poly" title=" " alt="" coords="1955,265,1914,268,1864,278,1815,298,1794,313,1777,331,1771,350,1776,370,1789,389,1805,406,1801,410,1785,392,1771,372,1765,350,1772,329,1791,309,1813,293,1862,272,1913,263,1955,260"/>
+<area shape="poly" title=" " alt="" coords="2155,185,2281,207,2440,239,2535,256,2627,268,2715,281,2793,298,2829,310,2861,325,2889,343,2913,366,2932,394,2947,427,2956,466,2959,511,2959,603,2952,638,2935,667,2909,692,2877,711,2842,726,2806,738,2741,752,2740,747,2804,733,2840,721,2874,706,2905,687,2930,664,2947,636,2953,602,2953,511,2950,467,2942,429,2928,396,2909,370,2885,348,2858,329,2827,315,2792,303,2714,286,2627,274,2534,261,2439,244,2280,212,2154,190"/>
+<area shape="poly" title=" " alt="" coords="2121,194,2102,323,2097,322,2116,193"/>
+<area shape="poly" title=" " alt="" coords="2101,196,2019,243,2017,238,2098,191"/>
+<area shape="rect" href="serialization_2node_8h.html" title=" " alt="" coords="2249,241,2428,282"/>
+<area shape="poly" title=" " alt="" coords="2154,191,2270,233,2269,238,2153,196"/>
+<area shape="rect" href="uri_8h.html" title=" " alt="" coords="1786,338,1888,363"/>
+<area shape="poly" title=" " alt="" coords="2086,191,2019,210,1981,225,1945,244,1919,263,1895,284,1857,327,1853,323,1892,281,1916,258,1942,239,1979,220,2017,205,2085,186"/>
+<area shape="poly" title=" " alt="" coords="2416,280,2476,300,2536,328,2561,348,2587,368,2639,389,2693,399,2797,408,2841,415,2876,432,2890,445,2900,463,2906,484,2908,511,2908,603,2903,632,2890,658,2871,680,2847,699,2793,729,2741,747,2739,742,2790,724,2844,695,2867,677,2886,655,2898,631,2903,602,2903,511,2901,485,2895,465,2885,449,2873,436,2839,420,2796,413,2693,404,2638,394,2584,373,2558,353,2533,332,2474,305,2415,285"/>
+<area shape="poly" title=" " alt="" coords="2249,270,2032,290,1903,308,1775,333,1694,344,1628,350,1598,357,1571,369,1544,390,1518,420,1511,434,1510,448,1518,474,1527,502,1527,518,1521,534,1489,579,1449,618,1404,651,1356,679,1261,720,1181,745,1180,740,1259,715,1354,674,1401,647,1445,614,1484,576,1516,532,1522,517,1522,503,1513,476,1505,448,1506,433,1514,417,1541,386,1568,365,1597,352,1627,345,1694,339,1774,327,1902,303,2031,285,2249,265"/>
+<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="2152,338,2301,363"/>
+<area shape="poly" title=" " alt="" coords="2315,285,2256,330,2252,326,2312,280"/>
+<area shape="rect" href="implementation_2node_8h.html" title="Определяет typedef CNode, конкретную реализацию узла на основе CNodeType&lt;std::string&gt;...." alt="" coords="2325,330,2523,371"/>
+<area shape="poly" title=" " alt="" coords="2360,281,2396,317,2392,321,2356,284"/>
+<area shape="poly" title=" " alt="" coords="2417,280,2619,331,2618,336,2416,285"/>
+<area shape="poly" title=" " alt="" coords="2246,362,2319,417,2389,480,2385,484,2316,421,2242,366"/>
+<area shape="rect" href="implementation_2node__type_8h.html" title="Определяет шаблонный класс CNodeType&lt;TValue&gt;, конкретную реализацию INodeType&lt;TValue&gt;...." alt="" coords="2579,419,2671,444"/>
+<area shape="poly" title=" " alt="" coords="2475,369,2581,410,2579,415,2473,374"/>
+<area shape="poly" title=" " alt="" coords="2579,442,2468,463,2338,495,2222,529,2174,550,2116,583,2103,594,2095,604,2086,614,2072,624,2035,640,2003,650,1946,658,1887,661,1814,672,1660,712,1539,747,1538,742,1659,707,1813,667,1886,656,1945,653,2002,645,2033,635,2069,619,2083,610,2091,600,2100,590,2113,579,2172,545,2221,524,2337,490,2467,458,2578,437"/>
+<area shape="poly" title=" " alt="" coords="2594,447,2484,489,2482,484,2592,442"/>
+<area shape="poly" title=" " alt="" coords="2631,444,2695,727,2690,729,2625,445"/>
+<area shape="poly" title=" " alt="" coords="2624,446,2592,539,2569,590,2546,624,2507,649,2464,666,2420,677,2378,682,2378,677,2419,671,2463,661,2505,644,2542,620,2564,588,2587,537,2619,444"/>
+<area shape="poly" title=" " alt="" coords="2641,443,2691,487,2688,491,2637,447"/>
+<area shape="poly" title=" " alt="" coords="1861,362,1893,384,1908,400,1920,417,1934,448,1940,475,1938,503,1926,534,1914,552,1900,562,1884,570,1867,583,1790,664,1732,733,1727,730,1786,660,1863,579,1881,566,1897,557,1910,548,1922,532,1933,501,1935,476,1929,450,1915,420,1903,403,1889,388,1858,366"/>
+<area shape="poly" title=" " alt="" coords="1871,361,2098,442,2158,452,2211,455,2303,450,2348,449,2393,453,2443,466,2500,490,2536,513,2569,541,2599,574,2625,608,2665,674,2691,728,2686,730,2660,677,2620,611,2595,577,2566,545,2533,517,2497,495,2442,471,2393,459,2347,455,2304,456,2211,460,2158,457,2097,447,1870,366"/>
+<area shape="poly" title=" " alt="" coords="1827,366,1781,407,1749,429,1714,447,1656,465,1605,472,1558,472,1514,468,1470,464,1424,465,1374,474,1318,495,1305,504,1297,514,1289,525,1274,535,1210,556,1120,572,933,596,932,590,1119,567,1209,550,1272,531,1285,521,1293,511,1302,500,1316,490,1373,469,1424,460,1470,459,1514,462,1558,466,1604,467,1655,460,1712,442,1746,424,1778,403,1824,362"/>
+<area shape="poly" title=" " alt="" coords="1873,361,1929,384,1991,416,2275,657,2271,661,1988,421,1927,389,1871,366"/>
+<area shape="poly" title=" " alt="" coords="1854,362,1877,386,1897,417,1909,450,1915,477,1913,504,1899,534,1887,547,1867,561,1817,585,1815,580,1864,556,1883,543,1895,532,1908,503,1910,477,1904,451,1892,420,1873,389,1850,366"/>
+<area shape="poly" title=" " alt="" coords="1882,361,1907,368,2091,416,2095,417,2094,422,2090,421,1906,373,1881,366"/>
+<area shape="poly" title=" " alt="" coords="1786,366,1695,389,1583,421,1582,416,1694,384,1785,361"/>
+<area shape="poly" title=" " alt="" coords="1809,366,1691,415,1689,410,1807,361"/>
+<area shape="poly" title=" " alt="" coords="1839,364,1835,404,1829,403,1833,363"/>
+<area shape="poly" title=" " alt="" coords="3020,615,3007,656,2994,678,2976,697,2933,717,2870,733,2741,753,2740,748,2869,728,2931,712,2973,693,2990,675,3002,653,3015,614"/>
+<area shape="poly" title=" " alt="" coords="2993,609,2874,624,2379,676,2378,671,2873,619,2992,604"/>
+<area shape="poly" title=" " alt="" coords="167,515,331,530,630,552,761,561,930,578,1151,608,1323,637,1494,665,1716,693,1997,717,2271,734,2657,751,2656,756,2271,739,1997,722,1716,698,1494,670,1322,642,1150,613,929,584,761,567,630,557,330,536,167,521"/>
+<area shape="poly" title=" " alt="" coords="167,519,236,530,779,589,778,595,236,536,166,524"/>
+<area shape="poly" title=" " alt="" coords="163,524,186,530,445,598,700,659,1073,741,1071,746,699,664,444,603,185,536,161,529"/>
+<area shape="rect" title=" " alt="" coords="92,588,159,614"/>
+<area shape="poly" title=" " alt="" coords="128,526,128,573,123,573,123,526"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="tester_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2testing_2tester_8hdep" alt=""/></div>
+<map name="asource_2iridium_2testing_2tester_8hdep" id="asource_2iridium_2testing_2tester_8hdep">
+<area shape="rect" title=" " alt="" coords="5,5,151,46"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="5,94,151,135"/>
+<area shape="poly" title=" " alt="" coords="81,62,81,94,75,94,75,62"/>
+</map>
+</div>
+</div>
+<p><a href="tester_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1testing_1_1_tester.html">iridium::testing::Tester</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс-одиночка, отвечающий за регистрацию, управление и запуск всех тестов в рамках фреймворка. Он собирает тестовые случаи, определенные с помощью макроса <code>TEST</code>, и предоставляет метод <code>run</code>, обычно вызываемый функцией <code>main</code>, сгенерированной <code>IMPLEMENT_TEST_MAIN</code>. <code><a class="el" href="classiridium_1_1testing_1_1_tester.html" title="Класс-одиночка, отвечающий за регистрацию, управление и запуск всех тестов в рамках фреймворка....">Tester</a></code> может фильтровать тесты на основе аргументов командной строки и организует тесты, возможно, в древовидную структуру для выполнения.  <a href="classiridium_1_1testing_1_1_tester.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных. Этот заголовочный файл объявляет служебные функции для упрощения процесса получения экземпляров коннекторов баз данных на основе конфигурации или <a class="el" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1testing.html">iridium::testing</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Макросы</h2></td></tr>
+<tr class="memitem:a1a31e7e398f6a2fa20e41c0b5a02cdc4" id="r_a1a31e7e398f6a2fa20e41c0b5a02cdc4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a31e7e398f6a2fa20e41c0b5a02cdc4">CONCAT_IMPL</a>(x,  y)</td></tr>
+<tr class="memdesc:a1a31e7e398f6a2fa20e41c0b5a02cdc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Внутренний макрос для прямого склеивания токенов с использованием оператора препроцессора <code>##</code>. Это служебный макрос, аналогичный макросам в <code><a class="el" href="concat_8h.html" title="Предоставляет макросы препроцессора для конкатенации токенов. Эти макросы являются служебными инструм...">concat.h</a></code>, но определенный локально для макросов этого файла. Он не раскрывает свои аргументы перед конкатенацией.  <br /></td></tr>
+<tr class="separator:a1a31e7e398f6a2fa20e41c0b5a02cdc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2871b6acf202f2cf27bc36d11e8ddef2" id="r_a2871b6acf202f2cf27bc36d11e8ddef2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2871b6acf202f2cf27bc36d11e8ddef2">MACRO_CONCAT</a>(x,  y)</td></tr>
+<tr class="memdesc:a2871b6acf202f2cf27bc36d11e8ddef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, выполняющий конкатенацию токенов с предварительным раскрытием своих аргументов, используя <code>CONCAT_IMPL</code>. Гарантирует, что если <code>x</code> или <code>y</code> сами являются макросами, они будут раскрыты перед склеиванием их результатов.  <br /></td></tr>
+<tr class="separator:a2871b6acf202f2cf27bc36d11e8ddef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45feb1f37ce559e49baf8655d769ef85" id="r_a45feb1f37ce559e49baf8655d769ef85"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45feb1f37ce559e49baf8655d769ef85">TEST</a>(name)</td></tr>
+<tr class="memdesc:a45feb1f37ce559e49baf8655d769ef85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет тестовый случай и регистрирует его в <code>Tester</code> singleton. Этот макрос генерирует уникальный класс с именем <code>Test_##name</code>, который наследует от <code><a class="el" href="classiridium_1_1testing_1_1_i_test.html" title="Интерфейс для запускаемого тестового случая. Конкретные тестовые классы должны реализовывать этот инт...">iridium::testing::ITest</a></code> и <code><a class="el" href="classiridium_1_1testing_1_1_unit_test.html">iridium::testing::UnitTest</a></code>. Экземпляр этого класса создается автоматически, и его конструктор регистрирует тест в <code>Tester::instance()</code>. Пользователь должен предоставить тело метода <code>void Test_##name::run()</code> сразу после вызова этого макроса.  <br /></td></tr>
+<tr class="separator:a45feb1f37ce559e49baf8655d769ef85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add09cced0f90a8f1b3f5af6bb20c423e" id="r_add09cced0f90a8f1b3f5af6bb20c423e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add09cced0f90a8f1b3f5af6bb20c423e">ASSERT_3</a>(left,  condition,  right)</td></tr>
+<tr class="memdesc:add09cced0f90a8f1b3f5af6bb20c423e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос утверждения для бинарных условий (например, равенство, неравенство, меньше чем). Он вычисляет <code>condition(left, right)</code> и, если результат ложный, сообщает о провале теста, используя функциональность базового класса <code>UnitTest</code>, включая выражение и номер файла/строки.  <br /></td></tr>
+<tr class="separator:add09cced0f90a8f1b3f5af6bb20c423e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9c4ab6285fc7229020bdeb3c10d50d" id="r_aca9c4ab6285fc7229020bdeb3c10d50d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca9c4ab6285fc7229020bdeb3c10d50d">ASSERT_2</a>(func,  exception)</td></tr>
+<tr class="memdesc:aca9c4ab6285fc7229020bdeb3c10d50d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос утверждения для проверки того, выбрасывает ли данный вызов функции определенное исключение. Он выполняет <code>func</code> в контексте, который перехватывает исключения типа <code>exception</code>. Если ожидаемое исключение не выброшено или выброшено другое исключение, сообщается о провале.  <br /></td></tr>
+<tr class="separator:aca9c4ab6285fc7229020bdeb3c10d50d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a284fe1499ac88d714195dfd772372c44" id="r_a284fe1499ac88d714195dfd772372c44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a284fe1499ac88d714195dfd772372c44">ASSERT_1</a>(is_true)</td></tr>
+<tr class="memdesc:a284fe1499ac88d714195dfd772372c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос утверждения для проверки истинности булева условия. Если <code>is_true</code> вычисляется как ложь, сообщается о провале теста.  <br /></td></tr>
+<tr class="separator:a284fe1499ac88d714195dfd772372c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a821326052e3e2bf1fb2d678e9e9a6004" id="r_a821326052e3e2bf1fb2d678e9e9a6004"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a821326052e3e2bf1fb2d678e9e9a6004">ASSERT</a>(...)</td></tr>
+<tr class="memdesc:a821326052e3e2bf1fb2d678e9e9a6004"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос-переключатель, который диспетчеризует вызов в <code>ASSERT_1</code>, <code>ASSERT_2</code> или <code>ASSERT_3</code> на основе количества предоставленных аргументов. Это позволяет использовать единое имя <code>ASSERT</code> для различных типов утверждений.  <br /></td></tr>
+<tr class="separator:a821326052e3e2bf1fb2d678e9e9a6004"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18dbf9ed64402b9c94239f90547eceb" id="r_ae18dbf9ed64402b9c94239f90547eceb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18dbf9ed64402b9c94239f90547eceb">IMPLEMENT_TEST_MAIN</a>()</td></tr>
+<tr class="memdesc:ae18dbf9ed64402b9c94239f90547eceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Генерирует функцию <code>main()</code> для исполняемого файла тестов. Эта функция <code>main</code> инициализирует <code>Tester</code> singleton и вызывает его метод <code>run()</code>, передавая аргументы командной строки. Это вспомогательный макрос для быстрой настройки исполняемого файла средства запуска тестов.  <br /></td></tr>
+<tr class="separator:ae18dbf9ed64402b9c94239f90547eceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Макросы</h2>
+<a id="a821326052e3e2bf1fb2d678e9e9a6004" name="a821326052e3e2bf1fb2d678e9e9a6004"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a821326052e3e2bf1fb2d678e9e9a6004">&#9670;&#160;</a></span>ASSERT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="va__args_8h.html#a273c1a8de1c0ca2ed53c521bf0cd5744">DEFINE_MACRO_CHOOSER</a>(<a class="code hl_define" href="#a821326052e3e2bf1fb2d678e9e9a6004">ASSERT</a>, __VA_ARGS__)(__VA_ARGS__)</div>
+<div class="ttc" id="atester_8h_html_a821326052e3e2bf1fb2d678e9e9a6004"><div class="ttname"><a href="#a821326052e3e2bf1fb2d678e9e9a6004">ASSERT</a></div><div class="ttdeci">#define ASSERT(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в ASSERT_1, ASSERT_2 или ASSERT_3 на основе количе...</div><div class="ttdef"><b>Определения</b> tester.h:218</div></div>
+<div class="ttc" id="ava__args_8h_html_a273c1a8de1c0ca2ed53c521bf0cd5744"><div class="ttname"><a href="va__args_8h.html#a273c1a8de1c0ca2ed53c521bf0cd5744">DEFINE_MACRO_CHOOSER</a></div><div class="ttdeci">#define DEFINE_MACRO_CHOOSER(target_,...)</div><div class="ttdoc">Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...</div><div class="ttdef"><b>Определения</b> va_args.h:114</div></div>
+</div><!-- fragment -->
+<p>Макрос-переключатель, который диспетчеризует вызов в <code>ASSERT_1</code>, <code>ASSERT_2</code> или <code>ASSERT_3</code> на основе количества предоставленных аргументов. Это позволяет использовать единое имя <code>ASSERT</code> для различных типов утверждений. </p>
+
+</div>
+</div>
+<a id="a284fe1499ac88d714195dfd772372c44" name="a284fe1499ac88d714195dfd772372c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a284fe1499ac88d714195dfd772372c44">&#9670;&#160;</a></span>ASSERT_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_1</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>is_true</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">assert_(is_true, std::string(#is_true), \</div>
+<div class="line"><a class="code hl_function" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert&lt;std::string, std::string&gt;</a>(__FILE__) + <span class="stringliteral">&quot;:&quot;</span> + \</div>
+<div class="line"><a class="code hl_function" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert&lt;std::string, uint32_t&gt;</a>(__LINE__));</div>
+<div class="ttc" id="anamespaceiridium_1_1convertion_html_a5afe4d5e065e8b085dcd6b8b391f2c2d"><div class="ttname"><a href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert</a></div><div class="ttdeci">string convert(system_clock::time_point const &amp;value, bool const &amp;is_gmt_time)</div><div class="ttdoc">Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....</div><div class="ttdef"><b>Определения</b> convert.cpp:89</div></div>
+</div><!-- fragment -->
+<p>Макрос утверждения для проверки истинности булева условия. Если <code>is_true</code> вычисляется как ложь, сообщается о провале теста. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_true</td><td>Булево выражение для проверки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aca9c4ab6285fc7229020bdeb3c10d50d" name="aca9c4ab6285fc7229020bdeb3c10d50d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9c4ab6285fc7229020bdeb3c10d50d">&#9670;&#160;</a></span>ASSERT_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_2</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>exception</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">{ <span class="keyword">auto</span> <span class="keyword">const</span> l = [&amp;](){func;}; assert_&lt;<span class="keyword">decltype</span>(l), exception&gt; \</div>
+<div class="line">(l, std::string(#func) + <span class="stringliteral">&quot; doesn&#39;t throw &quot;</span> + #exception, \</div>
+<div class="line"><a class="code hl_function" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert&lt;std::string, std::string&gt;</a>(__FILE__) + <span class="stringliteral">&quot;:&quot;</span> + \</div>
+<div class="line"><a class="code hl_function" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert&lt;std::string, uint32_t&gt;</a>(__LINE__)); }</div>
+</div><!-- fragment -->
+<p>Макрос утверждения для проверки того, выбрасывает ли данный вызов функции определенное исключение. Он выполняет <code>func</code> в контексте, который перехватывает исключения типа <code>exception</code>. Если ожидаемое исключение не выброшено или выброшено другое исключение, сообщается о провале. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Вызов функции или лямбда-выражение для выполнения. </td></tr>
+    <tr><td class="paramname">exception</td><td>Тип ожидаемого исключения. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="add09cced0f90a8f1b3f5af6bb20c423e" name="add09cced0f90a8f1b3f5af6bb20c423e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add09cced0f90a8f1b3f5af6bb20c423e">&#9670;&#160;</a></span>ASSERT_3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_3</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>condition</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>right</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">condition(left, right, std::string(#left) + <span class="stringliteral">&quot; &quot;</span> + #condition + <span class="stringliteral">&quot; &quot;</span> + #right, \</div>
+<div class="line"><a class="code hl_function" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert&lt;std::string, std::string&gt;</a>(__FILE__) + <span class="stringliteral">&quot;:&quot;</span> + \</div>
+<div class="line"><a class="code hl_function" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d">iridium::convertion::convert&lt;std::string, uint32_t&gt;</a>(__LINE__));</div>
+</div><!-- fragment -->
+<p>Макрос утверждения для бинарных условий (например, равенство, неравенство, меньше чем). Он вычисляет <code>condition(left, right)</code> и, если результат ложный, сообщает о провале теста, используя функциональность базового класса <code>UnitTest</code>, включая выражение и номер файла/строки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">left</td><td>Левый операнд утверждения. </td></tr>
+    <tr><td class="paramname">condition</td><td>Функция или макрос, выполняющий сравнение (например, <code>ASSERT_EQ</code> будет использовать проверку на равенство). </td></tr>
+    <tr><td class="paramname">right</td><td>Правый операнд утверждения. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1a31e7e398f6a2fa20e41c0b5a02cdc4" name="a1a31e7e398f6a2fa20e41c0b5a02cdc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a31e7e398f6a2fa20e41c0b5a02cdc4">&#9670;&#160;</a></span>CONCAT_IMPL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONCAT_IMPL</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">x##y</div>
+</div><!-- fragment -->
+<p>Внутренний макрос для прямого склеивания токенов с использованием оператора препроцессора <code>##</code>. Это служебный макрос, аналогичный макросам в <code><a class="el" href="concat_8h.html" title="Предоставляет макросы препроцессора для конкатенации токенов. Эти макросы являются служебными инструм...">concat.h</a></code>, но определенный локально для макросов этого файла. Он не раскрывает свои аргументы перед конкатенацией. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Первый токен. </td></tr>
+    <tr><td class="paramname">y</td><td>Второй токен. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae18dbf9ed64402b9c94239f90547eceb" name="ae18dbf9ed64402b9c94239f90547eceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18dbf9ed64402b9c94239f90547eceb">&#9670;&#160;</a></span>IMPLEMENT_TEST_MAIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IMPLEMENT_TEST_MAIN</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) { \</div>
+<div class="line">    std::printf(<span class="stringliteral">&quot;main thread: %s\n&quot;</span>, <a class="code hl_function" href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285">iridium::threading::IThread::getNameStatic</a>().c_str()); \</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_singleton.html#adc6c21483a831662989c44acc08f4dd8">iridium::testing::Tester::instance</a>().run(argc, argv, std::string(__FILE__)); \</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_singleton_html_adc6c21483a831662989c44acc08f4dd8"><div class="ttname"><a href="classiridium_1_1pattern_1_1_singleton.html#adc6c21483a831662989c44acc08f4dd8">iridium::pattern::Singleton&lt; Tester &gt;::instance</a></div><div class="ttdeci">static Tester &amp; instance()</div><div class="ttdef"><b>Определения</b> singleton.h:68</div></div>
+<div class="ttc" id="aclassiridium_1_1threading_1_1_i_thread_html_aebf89ec3258e418ee6141cb9a5adb285"><div class="ttname"><a href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285">iridium::threading::IThread::getNameStatic</a></div><div class="ttdeci">static std::string const &amp; getNameStatic()</div><div class="ttdoc">Получает имя текущего выполняющегося потока (статически, из локального хранилища потока).</div><div class="ttdef"><b>Определения</b> thread.cpp:51</div></div>
+</div><!-- fragment -->
+<p>Генерирует функцию <code>main()</code> для исполняемого файла тестов. Эта функция <code>main</code> инициализирует <code>Tester</code> singleton и вызывает его метод <code>run()</code>, передавая аргументы командной строки. Это вспомогательный макрос для быстрой настройки исполняемого файла средства запуска тестов. </p>
+
+</div>
+</div>
+<a id="a2871b6acf202f2cf27bc36d11e8ddef2" name="a2871b6acf202f2cf27bc36d11e8ddef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2871b6acf202f2cf27bc36d11e8ddef2">&#9670;&#160;</a></span>MACRO_CONCAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MACRO_CONCAT</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a1a31e7e398f6a2fa20e41c0b5a02cdc4">CONCAT_IMPL</a>( x, y )</div>
+<div class="ttc" id="atester_8h_html_a1a31e7e398f6a2fa20e41c0b5a02cdc4"><div class="ttname"><a href="#a1a31e7e398f6a2fa20e41c0b5a02cdc4">CONCAT_IMPL</a></div><div class="ttdeci">#define CONCAT_IMPL(x, y)</div><div class="ttdoc">Внутренний макрос для прямого склеивания токенов с использованием оператора препроцессора ##....</div><div class="ttdef"><b>Определения</b> tester.h:125</div></div>
+</div><!-- fragment -->
+<p>Макрос, выполняющий конкатенацию токенов с предварительным раскрытием своих аргументов, используя <code>CONCAT_IMPL</code>. Гарантирует, что если <code>x</code> или <code>y</code> сами являются макросами, они будут раскрыты перед склеиванием их результатов. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Первый токен или макрос, раскрывающийся в токен. </td></tr>
+    <tr><td class="paramname">y</td><td>Второй токен или макрос, раскрывающийся в токен. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a45feb1f37ce559e49baf8655d769ef85" name="a45feb1f37ce559e49baf8655d769ef85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45feb1f37ce559e49baf8655d769ef85">&#9670;&#160;</a></span>TEST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TEST</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line"><span class="keyword">class </span>Test_##name final: <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1testing_1_1_i_test.html">::iridium::testing::ITest</a>, <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1testing_1_1_unit_test.html">::iridium::testing::UnitTest</a> { \</div>
+<div class="line"><span class="keyword">public</span>: \</div>
+<div class="line">    DEFINE_IMPLEMENTATION(Test_##name) \</div>
+<div class="line">    Test_##name() { <a class="code hl_function" href="classiridium_1_1pattern_1_1_singleton.html#adc6c21483a831662989c44acc08f4dd8">iridium::testing::Tester::instance</a>().add(<span class="keyword">this</span>, std::string(__FILE__) + <span class="stringliteral">&quot;/&quot;</span> + #name); } \</div>
+<div class="line">    <span class="keywordtype">void</span> run() <span class="keyword">override</span>; \</div>
+<div class="line">} test_##name; \</div>
+<div class="line"><span class="keywordtype">void</span> Test_##name::run()</div>
+<div class="ttc" id="aclassiridium_1_1testing_1_1_i_test_html"><div class="ttname"><a href="classiridium_1_1testing_1_1_i_test.html">iridium::testing::ITest</a></div><div class="ttdoc">Интерфейс для запускаемого тестового случая. Конкретные тестовые классы должны реализовывать этот инт...</div><div class="ttdef"><b>Определения</b> test.h:24</div></div>
+<div class="ttc" id="aclassiridium_1_1testing_1_1_unit_test_html"><div class="ttname"><a href="classiridium_1_1testing_1_1_unit_test.html">iridium::testing::UnitTest</a></div><div class="ttdef"><b>Определения</b> unit_test.h:30</div></div>
+</div><!-- fragment -->
+<p>Определяет тестовый случай и регистрирует его в <code>Tester</code> singleton. Этот макрос генерирует уникальный класс с именем <code>Test_##name</code>, который наследует от <code><a class="el" href="classiridium_1_1testing_1_1_i_test.html" title="Интерфейс для запускаемого тестового случая. Конкретные тестовые классы должны реализовывать этот инт...">iridium::testing::ITest</a></code> и <code><a class="el" href="classiridium_1_1testing_1_1_unit_test.html">iridium::testing::UnitTest</a></code>. Экземпляр этого класса создается автоматически, и его конструктор регистрирует тест в <code>Tester::instance()</code>. Пользователь должен предоставить тело метода <code>void Test_##name::run()</code> сразу после вызова этого макроса. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Символическое имя тестового случая. Это имя используется для генерации имени класса и для регистрации. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

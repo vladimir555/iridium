@@ -1,0 +1,5 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$classiridium_1_1pattern_1_1_i_f_s_m.html" title="Интерфейс для Конечного Автомата (Finite State Machine, FSM). Этот шаблон класса определяет основную ..." alt="" coords="5,5,153,46"/>
+<area shape="rect" id="Node000001" href="$classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html" title="Конкретная реализация интерфейса IFSM, использующая список переходов (поведение, подобное карте)...." alt="" coords="201,5,404,46"/>
+<area shape="poly" id="edge8_Node000000_Node000001" title=" " alt="" coords="168,23,200,23,200,28,168,28"/>
+</map>

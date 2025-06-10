@@ -1,0 +1,9 @@
+<map id="iridium::io::IPipe" name="iridium::io::IPipe">
+<area shape="rect" id="Node000001" title="Интерфейс, представляющий канал, объединяющий возможности доступа к потокам и передачи данных...." alt="" coords="128,79,244,105"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п..." alt="" coords="100,153,273,193"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="189,120,189,152,184,152,184,120"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_pipe_streams.html" title="Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для по..." alt="" coords="5,5,170,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,38,171,76,168,81,115,43"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_pipe_transmitter.html" title="Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент,..." alt="" coords="194,5,376,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,43,204,81,201,76,254,38"/>
+</map>

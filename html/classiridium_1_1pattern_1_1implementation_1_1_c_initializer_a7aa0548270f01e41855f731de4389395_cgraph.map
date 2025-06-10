@@ -1,0 +1,5 @@
+<map id="iridium::pattern::implementation::CInitializer::~CInitializer" name="iridium::pattern::implementation::CInitializer::~CInitializer">
+<area shape="rect" id="Node000001" title="Деструктор. Гарантирует вызов finalize(), если элементы были инициализированы и еще не финализированы..." alt="" coords="5,5,209,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html#a0c260a8a6cae6d5d9e53268eef797f1a" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления...." alt="" coords="257,5,460,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,23,241,23,241,28,209,28"/>
+</map>

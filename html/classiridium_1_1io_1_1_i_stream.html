@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::IStream</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1_i_stream.html">IStream</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1_i_stream-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::IStream<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех типов потоков, такие как доступ к базовым системным дескрипторам и получение связанного <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. Он также наследуется от <code>IInitializable</code>, подразумевая, что потоки могут требовать шага инициализации. Этот интерфейс использует виртуальное наследование, чтобы позволить производным интерфейсам, таким как <code><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода-вывода, объединяющий возможности чтения и записи....">IStreamPort</a></code>, наследовать от нескольких интерфейсов, связанных с потоками (<code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>, <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>), без неоднозначности.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="stream_8h_source.html">stream.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::IStream:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_stream__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_stream_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1_i_stream_inherit__map" id="airidium_1_1io_1_1_i_stream_inherit__map">
+<area shape="rect" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="238,201,369,226"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="417,152,590,177"/>
+<area shape="poly" title=" " alt="" coords="373,194,448,175,449,180,374,199"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="421,201,586,226"/>
+<area shape="poly" title=" " alt="" coords="385,211,421,211,421,216,385,216"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title="Базовый интерфейс для файловых потоков. Расширяет общий интерфейс IStream специфичными для файлов опе..." alt="" coords="418,78,589,104"/>
+<area shape="poly" title=" " alt="" coords="334,190,416,137,476,102,479,107,418,141,337,194"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="417,251,590,291"/>
+<area shape="poly" title=" " alt="" coords="366,229,431,247,429,253,365,234"/>
+<area shape="rect" href="classiridium_1_1io_1_1net_1_1_i_socket.html" title="Базовый интерфейс для потоков, связанных с сокетами. Наследуется от IStream и служит общей основой дл..." alt="" coords="426,381,582,406"/>
+<area shape="poly" title=" " alt="" coords="332,235,490,378,486,382,328,239"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,201,190,226"/>
+<area shape="poly" title=" " alt="" coords="206,211,237,211,237,216,206,216"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода&#45;вывода, объединяющий возможности чтения и записи...." alt="" coords="647,201,803,226"/>
+<area shape="poly" title=" " alt="" coords="580,179,665,198,663,203,579,184"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title="Интерфейс для читаемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFileSt..." alt="" coords="639,5,811,46"/>
+<area shape="poly" title=" " alt="" coords="547,142,589,114,603,100,612,86,621,71,637,57,658,44,661,49,640,61,625,75,616,88,607,103,592,118,550,146"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title="Реализует читаемый поток (IStreamReader), который читает из Buffer. Чтение не разрушает исходный буфе..." alt="" coords="638,251,812,291"/>
+<area shape="poly" title=" " alt="" coords="583,181,592,186,607,199,617,212,626,224,640,237,660,248,657,252,637,241,622,228,612,215,603,202,589,191,580,186"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title="Реализует IStreamReader путем композиции списка других экземпляров IStreamReader. Он последовательно ..." alt="" coords="638,136,812,177"/>
+<area shape="poly" title=" " alt="" coords="606,158,638,157,638,162,606,163"/>
+<area shape="rect" href="classiridium_1_1io_1_1net_1_1_i_socket_stream.html" title="Интерфейс для сокетного потока, поддерживающего дуплексную связь (чтение и запись)...." alt="" coords="878,312,1034,353"/>
+<area shape="poly" title=" " alt="" coords="796,230,813,237,877,273,929,309,926,314,874,277,811,241,794,235"/>
+<area shape="rect" href="classiridium_1_1system_1_1_i_process.html" title="Интерфейс для взаимодействия с системным процессом. Определяет методы для получения состояния процесс..." alt="" coords="871,201,1041,226"/>
+<area shape="poly" title=" " alt="" coords="818,211,870,211,870,216,818,216"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Конкретная реализация файлового потока, предоставляющая возможности чтения, записи и позиционирования..." alt="" coords="860,39,1052,79"/>
+<area shape="poly" title=" " alt="" coords="827,38,859,42,859,48,826,43"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="Конкретная реализация файлового потока, специализированная для чтения. Этот класс наследуется от CFil..." alt="" coords="1100,7,1292,47"/>
+<area shape="poly" title=" " alt="" coords="1067,42,1099,37,1100,42,1068,47"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title="Конкретная реализация файлового потока, специализированная для записи. Этот класс наследуется от CFil..." alt="" coords="1100,72,1292,113"/>
+<area shape="poly" title=" " alt="" coords="1068,72,1100,76,1099,82,1067,77"/>
+<area shape="poly" title=" " alt="" coords="601,211,647,211,647,216,601,216"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title="Интерфейс для записываемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFi..." alt="" coords="639,71,811,111"/>
+<area shape="poly" title=" " alt="" coords="582,191,589,188,604,172,612,156,621,139,637,122,657,110,660,114,640,126,625,142,617,159,608,175,592,192,585,196"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец..." alt="" coords="638,316,812,357"/>
+<area shape="poly" title=" " alt="" coords="582,231,592,237,608,253,617,269,625,285,640,301,660,313,657,318,637,305,621,288,612,272,604,256,589,241,580,236"/>
+<area shape="poly" title=" " alt="" coords="826,74,859,70,859,75,827,80"/>
+<area shape="poly" title=" " alt="" coords="564,71,653,44,654,49,565,76"/>
+<area shape="poly" title=" " alt="" coords="605,88,639,88,639,94,605,94"/>
+<area shape="poly" title=" " alt="" coords="606,268,638,268,638,274,606,274"/>
+<area shape="poly" title=" " alt="" coords="590,294,654,313,653,318,588,299"/>
+<area shape="poly" title=" " alt="" coords="597,387,700,380,811,366,881,351,882,356,812,371,701,385,598,393"/>
+<area shape="rect" href="classiridium_1_1io_1_1net_1_1_i_socket_acceptor.html" title="Интерфейс для принимающего сокета, обычно слушающего серверного сокета. Отвечает за прием входящих кл..." alt="" coords="647,431,803,471"/>
+<area shape="poly" title=" " alt="" coords="572,408,647,428,646,433,570,414"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::io::IStream:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_stream__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_stream_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1io_1_1_i_stream_coll__map" id="airidium_1_1io_1_1_i_stream_coll__map">
+<area shape="rect" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="32,79,163,105"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a189bab2ada3736b00468b9f8cbe1e884" id="r_a189bab2ada3736b00468b9f8cbe1e884"><td class="memItemLeft" align="right" valign="top">virtual std::list&lt; uintptr_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a189bab2ada3736b00468b9f8cbe1e884">getHandles</a> () const =0</td></tr>
+<tr class="memdesc:a189bab2ada3736b00468b9f8cbe1e884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).  <br /></td></tr>
+<tr class="separator:a189bab2ada3736b00468b9f8cbe1e884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdb45661c8cf05eb9a4cc46134947416" id="r_abdb45661c8cf05eb9a4cc46134947416"><td class="memItemLeft" align="right" valign="top">virtual URI::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdb45661c8cf05eb9a4cc46134947416">getURI</a> () const =0</td></tr>
+<tr class="memdesc:abdb45661c8cf05eb9a4cc46134947416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>, связанный с этим потоком, если таковой имеется. Может использоваться для идентификации источника или назначения потока (например, путь к файлу, сетевой адрес).  <br /></td></tr>
+<tr class="separator:abdb45661c8cf05eb9a4cc46134947416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a5b8c613423cd12e98327a9279d8b9d64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">initialize</a> ()=0</td></tr>
+<tr class="memdesc:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова.  <br /></td></tr>
+<tr class="separator:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a93a1fb6f89e1e1f125455a8682e9ae59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">finalize</a> ()=0</td></tr>
+<tr class="memdesc:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы.  <br /></td></tr>
+<tr class="separator:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех типов потоков, такие как доступ к базовым системным дескрипторам и получение связанного <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. Он также наследуется от <code>IInitializable</code>, подразумевая, что потоки могут требовать шага инициализации. Этот интерфейс использует виртуальное наследование, чтобы позволить производным интерфейсам, таким как <code><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода-вывода, объединяющий возможности чтения и записи....">IStreamPort</a></code>, наследовать от нескольких интерфейсов, связанных с потоками (<code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>, <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>), без неоднозначности. </p>
+</div><h2 class="groupheader">Методы</h2>
+<a id="a189bab2ada3736b00468b9f8cbe1e884" name="a189bab2ada3736b00468b9f8cbe1e884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a189bab2ada3736b00468b9f8cbe1e884">&#9670;&#160;</a></span>getHandles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::list&lt; uintptr_t &gt; iridium::io::IStream::getHandles </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора). </p>
+<p>Получает список базовых дескрипторов операционной системы, связанных с этим потоком. Например, для сокетного потока это может вернуть файловый дескриптор сокета. Для других типов потоков это могут быть файловые дескрипторы или другие специфичные для ОС идентификаторы. </p><dl class="section return"><dt>Возвращает</dt><dd>Список <code>uintptr_t</code>, представляющих дескрипторы ОС. Список может быть пустым, если дескрипторы отсутствуют. </dd></dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a738a65ff967c5924d11de16e20adba09">iridium::io::fs::implementation::CFileStream</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a8343ff3ed6a120d0d8f1261443e08b0b">iridium::io::implementation::CStreamBuffer</a> и <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html#a36a309170f0f6c73640a7ee21388f997">iridium::io::implementation::CStreamReaderList</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_cgraph" id="aclassiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_cgraph">
+<area shape="rect" title="Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора)." alt="" coords="5,29,137,70"/>
+<area shape="poly" title=" " alt="" coords="45,29,44,20,48,11,57,5,71,3,86,5,95,12,91,16,84,10,71,8,59,10,52,14,49,20,50,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_icgraph" id="aclassiridium_1_1io_1_1_i_stream_a189bab2ada3736b00468b9f8cbe1e884_icgraph">
+<area shape="rect" title="Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора)." alt="" coords="5,29,137,70"/>
+<area shape="poly" title=" " alt="" coords="91,16,84,10,71,8,59,10,52,14,49,20,50,28,45,29,44,20,48,11,57,5,71,3,86,5,95,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abdb45661c8cf05eb9a4cc46134947416" name="abdb45661c8cf05eb9a4cc46134947416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdb45661c8cf05eb9a4cc46134947416">&#9670;&#160;</a></span>getURI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual URI::TSharedPtr iridium::io::IStream::getURI </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получает <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>, связанный с этим потоком, если таковой имеется. Может использоваться для идентификации источника или назначения потока (например, путь к файлу, сетевой адрес). </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Умный указатель на объект <code><a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a></code> или <code>nullptr</code>, если с потоком не связан <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. </dd></dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8c282834b2b906ab440e579e1e59cf03">iridium::io::fs::implementation::CFileStream</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a897262cfa382df0aeb6619e112db6e00">iridium::io::implementation::CStreamBuffer</a> и <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html#ae3d9c6952d77a80388b3611d5deb91a9">iridium::io::implementation::CStreamReaderList</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_cgraph" id="aclassiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_cgraph">
+<area shape="rect" title="Получает URI, связанный с этим потоком, если таковой имеется. Может использоваться для идентификации ..." alt="" coords="5,29,137,70"/>
+<area shape="poly" title=" " alt="" coords="45,29,44,20,48,11,57,5,71,3,86,5,95,12,91,16,84,10,71,8,59,10,52,14,49,20,50,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_icgraph" id="aclassiridium_1_1io_1_1_i_stream_abdb45661c8cf05eb9a4cc46134947416_icgraph">
+<area shape="rect" title="Получает URI, связанный с этим потоком, если таковой имеется. Может использоваться для идентификации ..." alt="" coords="5,29,137,70"/>
+<area shape="poly" title=" " alt="" coords="91,16,84,10,71,8,59,10,52,14,49,20,50,28,45,29,44,20,48,11,57,5,71,3,86,5,95,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/io/<a class="el" href="stream_8h_source.html">stream.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::caching::LazyCacher&lt; TResult, TArgs &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1caching.html">caching</a></li><li class="navelem"><a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">LazyCacher</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-static-methods">Открытые статические члены</a> &#124;
+<a href="classiridium_1_1caching_1_1_lazy_cacher-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::caching::LazyCacher&lt; TResult, TArgs &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Предоставляет механизм для кэширования результатов вызовов функций. Этот класс является шаблоном, принимающим тип результата и типы аргументов функции. Он сохраняет результаты предыдущих вызовов функций в статической карте и возвращает кэшированный результат, если те же аргументы предоставляются снова. ПРИМЕЧАНИЕ: Исходный код содержит комментарий "todo: not work !", указывающий на потенциальные проблемы с текущей реализацией, в частности, с использованием <code>std::tuple&lt;TArgs const &amp; ...&gt;</code> в качестве ключей карты, что может привести к висячим ссылкам, если аргументы являются временными объектами. Кэш (<code>m</code>) является статическим для каждой инстанции шаблона.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="lazy__cacher_8h_source.html">lazy_cacher.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:acc7ae9815cd573542e16464bf723829b" id="r_acc7ae9815cd573542e16464bf723829b"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; TResult(TArgs ...)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc7ae9815cd573542e16464bf723829b">TFunc</a></td></tr>
+<tr class="memdesc:acc7ae9815cd573542e16464bf723829b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет сигнатуру функции для кэшируемых функций.  <br /></td></tr>
+<tr class="separator:acc7ae9815cd573542e16464bf723829b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Открытые статические члены</h2></td></tr>
+<tr class="memitem:a4555d2859d94e558322ae4b9723f2de5" id="r_a4555d2859d94e558322ae4b9723f2de5"><td class="memItemLeft" align="right" valign="top">static TResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4555d2859d94e558322ae4b9723f2de5">cacheFunc</a> (<a class="el" href="#acc7ae9815cd573542e16464bf723829b">TFunc</a> func, TArgs ... args)</td></tr>
+<tr class="memdesc:a4555d2859d94e558322ae4b9723f2de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Кэширует результат вызова функции или возвращает ранее кэшированный результат. Если функция <code>func</code> ранее вызывалась с теми же <code>args</code>, возвращается кэшированный результат. В противном случае, <code>func</code> вызывается с <code>args</code>, ее результат кэшируется, а затем возвращается.  <br /></td></tr>
+<tr class="separator:a4555d2859d94e558322ae4b9723f2de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d51e461a117947b64d78a93c41562fe" id="r_a7d51e461a117947b64d78a93c41562fe"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d51e461a117947b64d78a93c41562fe">clean</a> ()</td></tr>
+<tr class="memdesc:a7d51e461a117947b64d78a93c41562fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Очищает весь кэш для данной конкретной инстанциации <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html" title="Предоставляет механизм для кэширования результатов вызовов функций. Этот класс является шаблоном,...">LazyCacher</a>. Удаляет все сохраненные результаты функций для конкретной комбинации <code>TResult</code> и <code>TArgs...</code>.  <br /></td></tr>
+<tr class="separator:a7d51e461a117947b64d78a93c41562fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a308c88151237f55be5b20a626d898189" id="r_a308c88151237f55be5b20a626d898189"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a308c88151237f55be5b20a626d898189">clean</a> (TArgs const &amp;... args)</td></tr>
+<tr class="memdesc:a308c88151237f55be5b20a626d898189"><td class="mdescLeft">&#160;</td><td class="mdescRight">Очищает кэшированный результат для определенного набора аргументов. Если результат для данных <code>args</code> существует в кэше, он удаляется.  <br /></td></tr>
+<tr class="separator:a308c88151237f55be5b20a626d898189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a202f461251465c9a516a83692a1f1274" id="r_a202f461251465c9a516a83692a1f1274"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a202f461251465c9a516a83692a1f1274">clean</a> (TResult const &amp;result)</td></tr>
+<tr class="memdesc:a202f461251465c9a516a83692a1f1274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Очищает все записи кэша, имеющие определенный результат. Итерирует по кэшу и удаляет любые записи, сохраненный результат которых совпадает с предоставленным <code>result</code>.  <br /></td></tr>
+<tr class="separator:a202f461251465c9a516a83692a1f1274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TResult, typename ... TArgs&gt;<br />
+class iridium::caching::LazyCacher&lt; TResult, TArgs &gt;</div><p>Предоставляет механизм для кэширования результатов вызовов функций. Этот класс является шаблоном, принимающим тип результата и типы аргументов функции. Он сохраняет результаты предыдущих вызовов функций в статической карте и возвращает кэшированный результат, если те же аргументы предоставляются снова. ПРИМЕЧАНИЕ: Исходный код содержит комментарий "todo: not work !", указывающий на потенциальные проблемы с текущей реализацией, в частности, с использованием <code>std::tuple&lt;TArgs const &amp; ...&gt;</code> в качестве ключей карты, что может привести к висячим ссылкам, если аргументы являются временными объектами. Кэш (<code>m</code>) является статическим для каждой инстанции шаблона. </p>
+</div><h2 class="groupheader">Определения типов</h2>
+<a id="acc7ae9815cd573542e16464bf723829b" name="acc7ae9815cd573542e16464bf723829b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7ae9815cd573542e16464bf723829b">&#9670;&#160;</a></span>TFunc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TResult, typename ... TArgs&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::function&lt;TResult(TArgs ...)&gt; <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">iridium::caching::LazyCacher</a>&lt; TResult, TArgs &gt;::TFunc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Определяет сигнатуру функции для кэшируемых функций. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a4555d2859d94e558322ae4b9723f2de5" name="a4555d2859d94e558322ae4b9723f2de5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4555d2859d94e558322ae4b9723f2de5">&#9670;&#160;</a></span>cacheFunc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TResult, typename ... TArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TResult <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">iridium::caching::LazyCacher</a>&lt; TResult, TArgs &gt;::cacheFunc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#acc7ae9815cd573542e16464bf723829b">TFunc</a></td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TArgs ...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Кэширует результат вызова функции или возвращает ранее кэшированный результат. Если функция <code>func</code> ранее вызывалась с теми же <code>args</code>, возвращается кэшированный результат. В противном случае, <code>func</code> вызывается с <code>args</code>, ее результат кэшируется, а затем возвращается. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Функция, которая будет вызвана и результат которой будет кэширован. </td></tr>
+    <tr><td class="paramname">args</td><td>Аргументы для передачи в функцию <code>func</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Результат вызова функции (новый или кэшированный). </dd></dl>
+
+</div>
+</div>
+<a id="a7d51e461a117947b64d78a93c41562fe" name="a7d51e461a117947b64d78a93c41562fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d51e461a117947b64d78a93c41562fe">&#9670;&#160;</a></span>clean() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TResult, typename ... TArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">iridium::caching::LazyCacher</a>&lt; TResult, TArgs &gt;::clean </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Очищает весь кэш для данной конкретной инстанциации <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html" title="Предоставляет механизм для кэширования результатов вызовов функций. Этот класс является шаблоном,...">LazyCacher</a>. Удаляет все сохраненные результаты функций для конкретной комбинации <code>TResult</code> и <code>TArgs...</code>. </p>
+
+</div>
+</div>
+<a id="a308c88151237f55be5b20a626d898189" name="a308c88151237f55be5b20a626d898189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a308c88151237f55be5b20a626d898189">&#9670;&#160;</a></span>clean() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TResult, typename ... TArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">iridium::caching::LazyCacher</a>&lt; TResult, TArgs &gt;::clean </td>
+          <td>(</td>
+          <td class="paramtype">TArgs const &amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Очищает кэшированный результат для определенного набора аргументов. Если результат для данных <code>args</code> существует в кэше, он удаляется. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Аргументы, кэшированный результат для которых следует очистить. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a202f461251465c9a516a83692a1f1274" name="a202f461251465c9a516a83692a1f1274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a202f461251465c9a516a83692a1f1274">&#9670;&#160;</a></span>clean() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TResult, typename ... TArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">iridium::caching::LazyCacher</a>&lt; TResult, TArgs &gt;::clean </td>
+          <td>(</td>
+          <td class="paramtype">TResult const &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Очищает все записи кэша, имеющие определенный результат. Итерирует по кэшу и удаляет любые записи, сохраненный результат которых совпадает с предоставленным <code>result</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>Значение результата для поиска и удаления из кэша. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/caching/<a class="el" href="lazy__cacher_8h_source.html">lazy_cacher.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

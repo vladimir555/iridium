@@ -1,0 +1,6 @@
+<map id="iridium::caching::CachedValue::operator TValue" name="iridium::caching::CachedValue::operator TValue">
+<area shape="rect" id="Node000001" title="Оператор преобразования к TValue. Позволяет неявное преобразование объекта CachedValue к его базовому..." alt="" coords="5,29,171,70"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1caching_1_1_cached_value.html#a8789274174cbf5c2435157deb869079d" title="Конструктор по умолчанию. Инициализирует кэшированное значение значением TValue, созданным по умолчан..." alt="" coords="219,29,384,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,47,203,47,203,52,171,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="261,29,259,19,266,10,280,5,301,3,324,5,338,11,336,16,323,10,301,8,281,10,269,15,264,20,266,28"/>
+</map>

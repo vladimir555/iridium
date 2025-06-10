@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/caching/lazy_cacher.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_4c9f94772b4f59f677e72ac7f6f1b592.html">caching</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#var-members">Переменные</a>  </div>
+  <div class="headertitle"><div class="title">Файл lazy_cacher.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Определяет шаблонный класс <code>LazyCacher&lt;TResult, TArgs...&gt;</code> для мемоизации вызовов функций. Предоставляет простой механизм для кэширования результатов функций на основе их аргументов. Примечание: Реализация имеет известные проблемы, упомянутые в документации класса (например, потенциальные висячие ссылки с ключами <code>std::tuple&lt;TArgs const &amp; ...&gt;</code>).  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;map&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;tuple&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для lazy_cacher.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="lazy__cacher_8h__incl.png" border="0" usemap="#asource_2iridium_2caching_2lazy__cacher_8h" alt=""/></div>
+<map name="asource_2iridium_2caching_2lazy__cacher_8h" id="asource_2iridium_2caching_2lazy__cacher_8h">
+<area shape="rect" title="Определяет шаблонный класс LazyCacher&lt;TResult, TArgs...&gt; для мемоизации вызовов функций...." alt="" coords="126,5,278,46"/>
+<area shape="rect" title=" " alt="" coords="5,94,52,120"/>
+<area shape="poly" title=" " alt="" coords="160,49,67,91,65,86,157,44"/>
+<area shape="rect" title=" " alt="" coords="75,94,152,120"/>
+<area shape="poly" title=" " alt="" coords="182,48,141,85,137,81,178,44"/>
+<area shape="rect" title=" " alt="" coords="177,94,226,120"/>
+<area shape="poly" title=" " alt="" coords="204,46,204,78,199,78,199,46"/>
+<area shape="rect" title=" " alt="" coords="251,94,289,120"/>
+<area shape="poly" title=" " alt="" coords="221,45,252,80,248,84,217,48"/>
+<area shape="rect" title=" " alt="" coords="313,94,384,120"/>
+<area shape="poly" title=" " alt="" coords="240,44,314,84,312,89,237,49"/>
+</map>
+</div>
+</div>
+<p><a href="lazy__cacher_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">iridium::caching::LazyCacher&lt; TResult, TArgs &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет механизм для кэширования результатов вызовов функций. Этот класс является шаблоном, принимающим тип результата и типы аргументов функции. Он сохраняет результаты предыдущих вызовов функций в статической карте и возвращает кэшированный результат, если те же аргументы предоставляются снова. ПРИМЕЧАНИЕ: Исходный код содержит комментарий "todo: not work !", указывающий на потенциальные проблемы с текущей реализацией, в частности, с использованием <code>std::tuple&lt;TArgs const &amp; ...&gt;</code> в качестве ключей карты, что может привести к висячим ссылкам, если аргументы являются временными объектами. Кэш (<code>m</code>) является статическим для каждой инстанции шаблона.  <a href="classiridium_1_1caching_1_1_lazy_cacher.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных. Этот заголовочный файл объявляет служебные функции для упрощения процесса получения экземпляров коннекторов баз данных на основе конфигурации или <a class="el" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1caching.html">iridium::caching</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1caching"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит классы и утилиты, связанные с кэшированием и интернированием значений. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Переменные</h2></td></tr>
+<tr class="memitem:aee23ef078e7cb0bc8ab10bc5a4b0ffca" id="r_aee23ef078e7cb0bc8ab10bc5a4b0ffca"><td class="memTemplParams" colspan="2">template&lt;typename TResult, typename ... TArgs&gt; </td></tr>
+<tr class="memitem:aee23ef078e7cb0bc8ab10bc5a4b0ffca"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">LazyCacher</a>&lt; TResult, TArgs... &gt;::TArgsTupleResultMap&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1caching.html#aee23ef078e7cb0bc8ab10bc5a4b0ffca">iridium::caching::LazyCacher&lt; TResult, TArgs... &gt;::m</a> = typename <a class="el" href="classiridium_1_1caching_1_1_lazy_cacher.html">LazyCacher</a>&lt;TResult, TArgs ... &gt;::TArgsTupleResultMap()</td></tr>
+<tr class="separator:aee23ef078e7cb0bc8ab10bc5a4b0ffca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Определяет шаблонный класс <code>LazyCacher&lt;TResult, TArgs...&gt;</code> для мемоизации вызовов функций. Предоставляет простой механизм для кэширования результатов функций на основе их аргументов. Примечание: Реализация имеет известные проблемы, упомянутые в документации класса (например, потенциальные висячие ссылки с ключами <code>std::tuple&lt;TArgs const &amp; ...&gt;</code>). </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

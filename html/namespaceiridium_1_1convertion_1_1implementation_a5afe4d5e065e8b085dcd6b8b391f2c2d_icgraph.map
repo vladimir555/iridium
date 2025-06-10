@@ -1,0 +1,62 @@
+<map id="iridium::convertion::implementation::convert" name="iridium::convertion::implementation::convert">
+<area shape="rect" id="Node000001" title=" " alt="" coords="265,920,433,961"/>
+<area shape="poly" id="edge18_Node000001_Node000001" title=" " alt="" coords="388,907,373,901,349,899,326,901,312,905,307,911,309,919,304,920,302,910,309,901,325,895,349,893,374,896,390,902"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion_1_1implementation.html#a32d05936e6f0630f3085a7b8f7adbbf9" title="Преобразует double в std::string (используя точность по умолчанию или настроенную)." alt="" coords="27,5,195,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="344,904,339,728,331,606,320,475,303,345,281,226,252,128,234,90,215,61,194,44,197,40,219,57,239,87,257,126,286,225,309,344,325,474,337,605,344,727,350,904"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion_1_1implementation.html#a9be175d39216df753323d83a9c9c49a1" title="Преобразует double в std::string с указанной точностью." alt="" coords="27,71,195,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="344,905,336,740,316,507,299,387,277,278,249,187,233,153,215,126,194,110,197,106,219,123,237,150,254,186,282,276,305,386,321,506,342,740,349,904"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1convertion_1_1implementation.html#a47b28ad281eefe0ac9399e2d92ff9e87" title="Преобразует float в std::string (используя точность по умолчанию или настроенную)." alt="" coords="27,136,195,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="343,905,334,752,312,538,295,429,274,329,247,247,231,216,215,191,194,175,197,171,219,188,236,213,252,245,279,328,300,428,317,537,339,751,349,904"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1convertion_1_1implementation.html#a29316e536aa44fb4e2ac0b40d6a3a74f" title="Преобразует float в std::string с указанной точностью." alt="" coords="27,201,195,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="343,905,331,763,308,569,291,471,270,381,244,307,230,278,215,257,194,241,197,237,219,253,235,276,249,305,275,379,296,470,313,569,337,763,348,904"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1convertion_1_1implementation.html#a5a0c84515ed1d30c3595ad9d7d390a8c" title=" " alt="" coords="27,267,195,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="342,905,329,776,304,601,287,513,266,433,242,367,229,341,215,322,194,306,197,302,219,318,233,339,247,365,271,431,292,512,309,601,334,775,347,904"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium_1_1convertion_1_1implementation.html#a65406f5e492e882407df2cfb81cca1ad" title="Преобразует int16_t в std::string." alt="" coords="27,332,195,373"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="341,905,326,788,300,633,282,555,262,485,240,427,215,387,194,372,197,368,219,384,244,424,267,483,288,554,305,632,331,787,346,904"/>
+<area shape="rect" id="Node000008" href="$namespaceiridium_1_1convertion_1_1implementation.html#aaa1fa7e00238d7822d62d83f2d90f023" title="Преобразует int32_t в std::string (обычно по основанию 10)." alt="" coords="27,397,195,438"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="340,905,323,801,295,666,278,598,259,537,237,487,215,453,194,438,197,433,219,449,242,484,264,535,283,597,300,664,328,800,345,904"/>
+<area shape="rect" id="Node000009" href="$namespaceiridium_1_1convertion_1_1implementation.html#a9057676852e4500c4aa4ce7005c7b694" title="Преобразует int64_t в std::string (обычно по основанию 10)." alt="" coords="27,463,195,503"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="344,905,338,826,319,722,302,667,280,613,251,563,215,518,194,503,197,499,218,514,256,560,285,611,307,665,324,721,343,825,350,905"/>
+<area shape="rect" id="Node000010" href="$namespaceiridium_1_1convertion_1_1implementation.html#af8cba30dc9e8c71c48aeab36e14c40f1" title=" " alt="" coords="27,528,195,569"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="342,905,332,837,310,751,294,705,273,661,247,620,215,584,194,569,197,565,218,580,251,617,277,659,299,703,315,749,337,836,347,904"/>
+<area shape="rect" id="Node000011" href="$namespaceiridium_1_1convertion_1_1implementation.html#a6239c253a546127e351078be7446b937" title=" " alt="" coords="27,593,195,634"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="339,905,325,849,301,780,265,710,242,677,215,649,194,635,197,631,218,645,246,674,270,707,306,778,330,848,344,904"/>
+<area shape="rect" id="Node000012" href="$namespaceiridium_1_1convertion_1_1implementation.html#a86f14cd2c1180bba88498b976e4835c1" title=" " alt="" coords="27,659,195,699"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="334,907,317,863,292,811,258,759,215,714,194,701,197,697,218,710,262,756,296,808,322,860,339,905"/>
+<area shape="rect" id="Node000013" href="$namespaceiridium_1_1convertion_1_1implementation.html#a40f339f93b9858688007d104f78cf615" title=" " alt="" coords="27,724,195,765"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="326,908,281,843,250,809,215,780,193,768,196,763,218,775,254,805,285,839,331,905"/>
+<area shape="rect" id="Node000014" href="$namespaceiridium_1_1convertion_1_1implementation.html#a64b450a775e4d4dc1faba4ecb646328c" title=" " alt="" coords="27,789,195,830"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="311,912,267,877,215,845,187,833,189,828,218,841,270,873,315,908"/>
+<area shape="rect" id="Node000015" href="$namespaceiridium_1_1convertion_1_1implementation.html#a613de0b1b8d001cd80b63f7a1787a3fc" title="Преобразует std::string в std::chrono::system_clock::time_point." alt="" coords="27,855,195,895"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="258,918,187,899,189,893,259,913"/>
+<area shape="rect" id="Node000016" href="$namespaceiridium_1_1convertion_1_1implementation.html#a43b78d959a93597b33e84130d92b0358" title="Преобразует std::u32string в std::string." alt="" coords="27,920,195,961"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="250,943,196,943,196,938,250,938"/>
+<area shape="rect" id="Node000017" href="$namespaceiridium_1_1convertion_1_1implementation.html#aa291a74fcf8a4dbfd7bf096bb38d0f66" title=" " alt="" coords="27,985,195,1026"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="259,968,189,987,187,982,258,963"/>
+<area shape="rect" id="Node000018" href="$namespaceiridium_1_1convertion_1_1implementation.html#a709cc247c27f84116dab41e5aac023b6" title=" " alt="" coords="27,1051,195,1091"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="315,973,270,1008,218,1040,189,1052,187,1048,215,1035,267,1003,311,969"/>
+<area shape="rect" id="Node000019" href="$namespaceiridium_1_1convertion_1_1implementation.html#adc962333a0dad0ba6ddac4e531148584" title="Преобразует uint16_t в std::string." alt="" coords="27,1116,195,1157"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="331,976,285,1041,254,1076,218,1105,196,1118,193,1113,215,1101,250,1072,281,1038,326,972"/>
+<area shape="rect" id="Node000020" href="$namespaceiridium_1_1convertion_1_1implementation.html#a7829811d0e2d3ad8d6a53c75047f4972" title="Преобразует uint32_t в std::string (обычно по основанию 10)." alt="" coords="27,1181,195,1222"/>
+<area shape="poly" id="edge20_Node000001_Node000020" title=" " alt="" coords="339,976,322,1020,296,1072,262,1125,218,1170,197,1184,194,1179,215,1166,258,1122,292,1070,317,1018,334,974"/>
+<area shape="rect" id="Node000021" href="$namespaceiridium_1_1convertion_1_1implementation.html#a1b90435c3bd205c4fc54bcdf2e132451" title="Преобразует uint64_t в std::string (обычно по основанию 10)." alt="" coords="27,1247,195,1287"/>
+<area shape="poly" id="edge21_Node000001_Node000021" title=" " alt="" coords="344,977,330,1033,306,1103,270,1174,246,1207,218,1236,197,1250,194,1246,215,1232,242,1203,265,1171,301,1101,325,1032,339,975"/>
+<area shape="rect" id="Node000022" href="$namespaceiridium_1_1convertion_1_1implementation.html#a0f98c14ddb8d7bdf71503eb8f4cc7379" title="Преобразует uint8_t (часто символьный тип) в std::string." alt="" coords="27,1312,195,1353"/>
+<area shape="poly" id="edge22_Node000001_Node000022" title=" " alt="" coords="347,977,337,1045,315,1132,299,1177,277,1222,251,1264,218,1301,197,1316,194,1312,215,1297,247,1261,273,1220,294,1175,310,1130,332,1044,342,976"/>
+<area shape="rect" id="Node000023" href="$namespaceiridium_1_1convertion_1_1implementation.html#ab2732619da7d2880cfb9e633ca8c03ac" title=" " alt="" coords="5,1376,217,1432"/>
+<area shape="poly" id="edge23_Node000001_Node000023" title=" " alt="" coords="349,977,342,1055,322,1159,305,1214,283,1269,254,1320,219,1366,205,1378,201,1374,215,1362,250,1317,278,1266,300,1212,317,1158,337,1055,344,976"/>
+<area shape="rect" id="Node000024" href="$namespaceiridium_1_1convertion_1_1implementation.html#a9bb21da49033888dff94470bba215087" title=" " alt="" coords="5,1456,217,1512"/>
+<area shape="poly" id="edge24_Node000001_Node000024" title=" " alt="" coords="351,976,349,1068,343,1128,332,1193,315,1260,292,1327,260,1390,219,1446,205,1458,202,1454,215,1443,256,1387,287,1325,310,1259,327,1192,337,1127,343,1068,346,976"/>
+<area shape="rect" id="Node000025" href="$namespaceiridium_1_1convertion_1_1implementation.html#a12c331fff1e3ac409068cf249476298b" title=" " alt="" coords="5,1536,217,1592"/>
+<area shape="poly" id="edge25_Node000001_Node000025" title=" " alt="" coords="347,977,332,1099,306,1262,288,1345,268,1420,245,1483,219,1526,206,1538,202,1534,215,1523,240,1480,263,1419,283,1343,300,1261,326,1098,341,976"/>
+<area shape="rect" id="Node000026" href="$namespaceiridium_1_1convertion_1_1implementation.html#a7b34e41579376ca7be562d91aaab3f3b" title=" " alt="" coords="5,1616,217,1672"/>
+<area shape="poly" id="edge26_Node000001_Node000026" title=" " alt="" coords="348,976,335,1113,311,1300,293,1396,273,1483,248,1555,234,1584,219,1606,206,1618,203,1614,215,1603,229,1581,243,1553,267,1482,288,1395,305,1299,330,1112,342,976"/>
+<area shape="rect" id="Node000027" href="$namespaceiridium_1_1convertion_1_1implementation.html#af066b78adad47850301bdde15cf404e8" title="Преобразует std::shared_ptr&lt;TValue&gt; в его строковое представление. Если shared_ptr равен null,..." alt="" coords="18,1696,204,1737"/>
+<area shape="poly" id="edge27_Node000001_Node000027" title=" " alt="" coords="349,977,339,1129,317,1341,300,1449,279,1548,252,1630,236,1662,219,1686,206,1698,202,1694,215,1683,231,1659,247,1628,273,1547,295,1448,312,1340,334,1128,343,976"/>
+<area shape="rect" id="Node000028" href="$namespaceiridium_1_1convertion_1_1implementation.html#a58dcc43d77c19af3f984940f45865985" title="Преобразует std::shared_ptr&lt;TValue&gt; в его строковое представление с использованием спецификатора форм..." alt="" coords="18,1761,204,1802"/>
+<area shape="poly" id="edge28_Node000001_Node000028" title=" " alt="" coords="349,976,341,1140,321,1371,304,1489,282,1598,254,1688,237,1723,219,1750,204,1763,201,1759,215,1747,233,1720,249,1686,277,1597,299,1489,316,1370,336,1139,344,976"/>
+<area shape="rect" id="Node000029" href="$namespaceiridium_1_1convertion_1_1implementation.html#a73e0ed4639ecba458efb0e0cd58e4dcb" title="Преобразует std::string в std::shared_ptr&lt;TResult&gt;. Если входная строка равна &quot;NULL&quot;,..." alt="" coords="18,1827,204,1867"/>
+<area shape="poly" id="edge29_Node000001_Node000029" title=" " alt="" coords="350,976,344,1151,325,1402,308,1531,286,1650,256,1748,239,1786,219,1815,204,1828,201,1824,215,1812,234,1783,251,1746,281,1648,303,1530,319,1402,338,1151,344,976"/>
+<area shape="rect" id="Node000030" href="$namespaceiridium_1_1convertion_1_1implementation.html#a7ce03c96592d1378cf871e564b077f90" title="Преобразует значение в std::shared_ptr&lt;TResult&gt;. Этот шаблон, вероятно, сначала преобразует входное v..." alt="" coords="18,1892,204,1933"/>
+<area shape="poly" id="edge30_Node000001_Node000030" title=" " alt="" coords="350,976,346,1163,339,1293,329,1433,312,1573,289,1701,275,1758,259,1807,240,1849,219,1881,204,1893,201,1889,215,1877,235,1846,254,1805,270,1756,284,1700,307,1572,323,1433,334,1293,341,1163,345,976"/>
+</map>

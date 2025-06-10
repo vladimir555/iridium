@@ -1,0 +1,5 @@
+<map id="iridium::io::URI::TIPv6" name="iridium::io::URI::TIPv6">
+<area shape="rect" id="Node000001" title="Представляет IPv6&#45;адрес. Эта структура хранит IPv6&#45;адрес в виде массива из 8 16&#45;битных целых чисел." alt="" coords="5,94,158,120"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="20,5,143,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,62,84,93,79,93,79,62"/>
+</map>

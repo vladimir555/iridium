@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::implementation::CContextManager</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context_manager.html">CContextManager</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1implementation_1_1_c_context_manager-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::implementation::CContextManager</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1io_1_1_i_context_manager.html" title="Интерфейс для управления коллекцией контекстов ввода-вывода (IContext). Менеджер контекстов отвечает ...">IContextManager</a></code>. Управляет жизненным циклом множества экземпляров <code><a class="el" href="classiridium_1_1io_1_1_i_context.html" title="Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывод...">IContext</a></code>, связывая их с потоками и обрабатывая их создание, получение, освобождение и удаление. Использует мьютекс для потокобезопасных операций со своими внутренними коллекциями.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="implementation_2context__manager_8h_source.html">context_manager.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::implementation::CContextManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_context_manager__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_context_manager_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_context_manager_inherit__map" id="airidium_1_1io_1_1implementation_1_1_c_context_manager_inherit__map">
+<area shape="rect" title="Конкретная реализация интерфейса IContextManager. Управляет жизненным циклом множества экземпляров IC..." alt="" coords="103,109,277,150"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_context_manager.html" title="Интерфейс для управления коллекцией контекстов ввода&#45;вывода (IContext). Менеджер контекстов отвечает ..." alt="" coords="5,20,191,46"/>
+<area shape="poly" title=" " alt="" coords="122,55,173,107,169,110,118,59"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="214,5,352,61"/>
+<area shape="poly" title=" " alt="" coords="248,74,211,111,207,107,244,70"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::io::implementation::CContextManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_context_manager__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_context_manager_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_context_manager_coll__map" id="airidium_1_1io_1_1implementation_1_1_c_context_manager_coll__map">
+<area shape="rect" title="Конкретная реализация интерфейса IContextManager. Управляет жизненным циклом множества экземпляров IC..." alt="" coords="103,109,277,150"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_context_manager.html" title="Интерфейс для управления коллекцией контекстов ввода&#45;вывода (IContext). Менеджер контекстов отвечает ..." alt="" coords="5,20,191,46"/>
+<area shape="poly" title=" " alt="" coords="122,55,173,107,169,110,118,59"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="214,5,352,61"/>
+<area shape="poly" title=" " alt="" coords="248,74,211,111,207,107,244,70"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a69fcbbad57c828f1dad9a210f353d8db" id="r_a69fcbbad57c828f1dad9a210f353d8db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69fcbbad57c828f1dad9a210f353d8db">createContext</a> (IStream::TSharedPtr const &amp;stream, IProtocol::TSharedPtr const &amp;protocol) override</td></tr>
+<tr class="memdesc:a69fcbbad57c828f1dad9a210f353d8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает новый контекст обмена данными для указанного потока и протокола. Новый контекст сохраняется внутри и связывается с потоком.  <br /></td></tr>
+<tr class="separator:a69fcbbad57c828f1dad9a210f353d8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dffb9addfffca2f2769047c5c977d18" id="r_a0dffb9addfffca2f2769047c5c977d18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0dffb9addfffca2f2769047c5c977d18">removeContext</a> (IContext::TSharedPtr const &amp;context) override</td></tr>
+<tr class="memdesc:a0dffb9addfffca2f2769047c5c977d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Помечает контекст для удаления. Фактическое удаление и очистка могут быть отложены. Этот метод добавляет контекст во внутренний список контекстов для удаления.  <br /></td></tr>
+<tr class="separator:a0dffb9addfffca2f2769047c5c977d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7af3df817829fff7f3595567e0631e78" id="r_a7af3df817829fff7f3595567e0631e78"><td class="memItemLeft" align="right" valign="top">IContext::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7af3df817829fff7f3595567e0631e78">acquireContext</a> (Event::TSharedPtr const &amp;event, IMultiplexer::TSharedPtr const &amp;multiplexer) override</td></tr>
+<tr class="memdesc:a7af3df817829fff7f3595567e0631e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает контекст, связанный с потоком события, потенциально создавая его, если он не существует. Если контекст для потока события существует, он возвращается. В противном случае, и если событие является <code>Event::NEW_STREAM</code>, создается новый контекст с использованием потока и протокола события. Полученный контекст помечается как "полученный" для предотвращения одновременного изменения или преждевременного удаления.  <br /></td></tr>
+<tr class="separator:a7af3df817829fff7f3595567e0631e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47056efc3bd5360cc56843166284136e" id="r_a47056efc3bd5360cc56843166284136e"><td class="memItemLeft" align="right" valign="top">std::list&lt; Event::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47056efc3bd5360cc56843166284136e">releaseContext</a> (IContext::TSharedPtr const &amp;context) override</td></tr>
+<tr class="memdesc:a47056efc3bd5360cc56843166284136e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Освобождает ранее полученный контекст. Удаляет контекст из набора "полученных" контекстов. Если контекст был помечен для удаления, это может инициировать его фактическое удаление и генерацию событий <code>Event::CLOSE_STREAM</code> для связанных потоков.  <br /></td></tr>
+<tr class="separator:a47056efc3bd5360cc56843166284136e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38c78e9bacee1fb6709f93272149eb20" id="r_a38c78e9bacee1fb6709f93272149eb20"><td class="memItemLeft" align="right" valign="top">std::list&lt; Event::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38c78e9bacee1fb6709f93272149eb20">checkOutdatedStreams</a> () override</td></tr>
+<tr class="memdesc:a38c78e9bacee1fb6709f93272149eb20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет все управляемые контексты на наличие устаревших потоков и собирает все результирующие события закрытия.  <br /></td></tr>
+<tr class="separator:a38c78e9bacee1fb6709f93272149eb20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Дополнительные унаследованные члены</h2></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1_synchronized"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1threading_1_1_synchronized')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized&lt; std::mutex &gt;</a></td></tr>
+<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
+<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
+<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
+<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
+<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
+<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
+<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
+<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
+<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
+<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1io_1_1_i_context_manager.html" title="Интерфейс для управления коллекцией контекстов ввода-вывода (IContext). Менеджер контекстов отвечает ...">IContextManager</a></code>. Управляет жизненным циклом множества экземпляров <code><a class="el" href="classiridium_1_1io_1_1_i_context.html" title="Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывод...">IContext</a></code>, связывая их с потоками и обрабатывая их создание, получение, освобождение и удаление. Использует мьютекс для потокобезопасных операций со своими внутренними коллекциями. </p>
+</div><h2 class="groupheader">Методы</h2>
+<a id="a7af3df817829fff7f3595567e0631e78" name="a7af3df817829fff7f3595567e0631e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7af3df817829fff7f3595567e0631e78">&#9670;&#160;</a></span>acquireContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IContext::TSharedPtr iridium::io::implementation::CContextManager::acquireContext </td>
+          <td>(</td>
+          <td class="paramtype">Event::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IMultiplexer::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>multiplexer</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получает контекст, связанный с потоком события, потенциально создавая его, если он не существует. Если контекст для потока события существует, он возвращается. В противном случае, и если событие является <code>Event::NEW_STREAM</code>, создается новый контекст с использованием потока и протокола события. Полученный контекст помечается как "полученный" для предотвращения одновременного изменения или преждевременного удаления. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Событие, поток которого используется для поиска или создания контекста. </td></tr>
+    <tr><td class="paramname">multiplexer</td><td>Мультиплексор для связи с потоком, если создается новый контекст и поток нуждается в управлении. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Умный указатель на полученный или вновь созданный контекст, или <code>nullptr</code>, если контекст не удалось связать или создать. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_context_manager.html#a9812f13e2660903883df7fdc9d78bf2e">iridium::io::IContextManager</a>.</p>
+
+</div>
+</div>
+<a id="a38c78e9bacee1fb6709f93272149eb20" name="a38c78e9bacee1fb6709f93272149eb20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38c78e9bacee1fb6709f93272149eb20">&#9670;&#160;</a></span>checkOutdatedStreams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt; Event::TSharedPtr &gt; iridium::io::implementation::CContextManager::checkOutdatedStreams </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Проверяет все управляемые контексты на наличие устаревших потоков и собирает все результирующие события закрытия. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Список событий <code>Event::CLOSE_STREAM</code> из всех контекстов, в которых были устаревшие потоки. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_context_manager.html#a659f983ff6e2b3962093c19bb5426253">iridium::io::IContextManager</a>.</p>
+
+</div>
+</div>
+<a id="a69fcbbad57c828f1dad9a210f353d8db" name="a69fcbbad57c828f1dad9a210f353d8db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fcbbad57c828f1dad9a210f353d8db">&#9670;&#160;</a></span>createContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CContextManager::createContext </td>
+          <td>(</td>
+          <td class="paramtype">IStream::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IProtocol::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>protocol</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Создает новый контекст обмена данными для указанного потока и протокола. Новый контекст сохраняется внутри и связывается с потоком. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>Поток, для которого создается контекст. </td></tr>
+    <tr><td class="paramname">protocol</td><td>Протокол, который будет использоваться новым контекстом. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception,если</td><td>контекст для данного потока уже существует или если создание контекста не удалось. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_context_manager.html#a72941d63a9c82755c4bcda86f8f229c1">iridium::io::IContextManager</a>.</p>
+
+</div>
+</div>
+<a id="a47056efc3bd5360cc56843166284136e" name="a47056efc3bd5360cc56843166284136e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47056efc3bd5360cc56843166284136e">&#9670;&#160;</a></span>releaseContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt; Event::TSharedPtr &gt; iridium::io::implementation::CContextManager::releaseContext </td>
+          <td>(</td>
+          <td class="paramtype">IContext::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Освобождает ранее полученный контекст. Удаляет контекст из набора "полученных" контекстов. Если контекст был помечен для удаления, это может инициировать его фактическое удаление и генерацию событий <code>Event::CLOSE_STREAM</code> для связанных потоков. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>Контекст для освобождения. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Список событий (например, <code>Event::CLOSE_STREAM</code>), сгенерированных в результате освобождения и потенциальной очистки контекста. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_context_manager.html#abf1f39c6be36e6b51d76fdc5f98419be">iridium::io::IContextManager</a>.</p>
+
+</div>
+</div>
+<a id="a0dffb9addfffca2f2769047c5c977d18" name="a0dffb9addfffca2f2769047c5c977d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dffb9addfffca2f2769047c5c977d18">&#9670;&#160;</a></span>removeContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CContextManager::removeContext </td>
+          <td>(</td>
+          <td class="paramtype">IContext::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Помечает контекст для удаления. Фактическое удаление и очистка могут быть отложены. Этот метод добавляет контекст во внутренний список контекстов для удаления. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>Контекст, который должен быть помечен для удаления. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_context_manager.html#a8fdd4cb9195a4d6ce4675a0cba45eb5d">iridium::io::IContextManager</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/io/implementation/<a class="el" href="implementation_2context__manager_8h_source.html">context_manager.h</a></li>
+<li>source/iridium/io/implementation/<a class="el" href="context__manager_8cpp.html">context_manager.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

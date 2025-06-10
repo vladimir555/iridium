@@ -1,0 +1,21 @@
+<map id="iridium::pattern::NonMovable" name="iridium::pattern::NonMovable">
+<area shape="rect" id="Node000001" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="5,177,194,202"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="245,5,414,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,163,172,110,205,82,240,57,264,44,267,49,243,61,208,86,175,114,124,167"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="245,71,414,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,167,241,122,271,110,273,114,243,127,143,172"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="245,136,414,177"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="207,171,244,166,245,171,208,177"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1pattern_1_1_singleton.html" title="Шаблон класса для реализации шаблона проектирования &quot;Одиночка&quot; (Singleton). Этот шаблон гарантирует,..." alt="" coords="245,201,414,242"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="209,202,245,207,244,213,208,208"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании..." alt="" coords="245,266,414,322"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="145,207,267,263,265,268,143,212"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title="Конкретная реализация интерфейса IThread. Управляет фактическим std::thread для выполнения задачи IRu..." alt="" coords="242,345,417,386"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="122,213,173,272,207,304,243,331,263,342,261,347,240,336,203,308,169,276,118,217"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html" title="Класс&#45;одиночка для управления и поиска MIME&#45;типов на основе расширений файлов. Он предварительно загр..." alt="" coords="465,5,655,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="429,23,464,23,464,28,429,28"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1logging_1_1_logger.html" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton..." alt="" coords="482,78,638,104"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="430,88,482,88,482,94,430,94"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_tester.html" title="Класс&#45;одиночка, отвечающий за регистрацию, управление и запуск всех тестов в рамках фреймворка...." alt="" coords="485,144,635,169"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="430,154,485,154,485,159,430,159"/>
+</map>

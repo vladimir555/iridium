@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/encryption/openssl.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_0289eded5411848b694e583751a14422.html">encryption</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">openssl.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="openssl_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef HEADER_OPENSSL_356BCFD7_CD30_4EAF_BD8A_1538C082E0E8</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define HEADER_OPENSSL_356BCFD7_CD30_4EAF_BD8A_1538C082E0E8</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="build__flags_8h.html">iridium/build_flags.h</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifdef BUILD_FLAG_OPENSSL</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="singleton_8h.html">iridium/pattern/singleton.h</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="socket_8h.html">iridium/io/net/socket.h</a>&quot;</span> <span class="comment">// Likely for file_descriptor type or related constants</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="smart__ptr_8h.html">iridium/smart_ptr.h</a>&quot;</span>    <span class="comment">// For TSharedPtr</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">iridium/enum.h</a>&quot;</span>         <span class="comment">// For DEFINE_ENUM</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="keys_8h.html">iridium/encryption/keys.h</a>&quot;</span> <span class="comment">// For default key/cert filenames</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">//#include &quot;iridium/encryption/ssl.h&quot; // Commented out</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;openssl/ssl.h&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &lt;openssl/err.h&gt;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;memory&gt;</span> <span class="comment">// For std::shared_ptr if not covered by smart_ptr.h</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// No specific Doxygen for iridium namespace itself here.</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1encryption.html">encryption</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">//namespace implementation { // Original code had this commented out</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">// todo: rename ...::openssl::API to ...::external::OpenSSL</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">//namespace openssl { // Original code had this commented out</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">class </span>OpenSSL: <span class="keyword">public</span> pattern::Singleton&lt;OpenSSL&gt; {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">typedef</span> SSL_CTX TContext;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">typedef</span> SSL     TSSL;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">virtual</span> ~OpenSSL();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_define" href="enum_8h.html#acf1825d3b8e6ea6b7e5f4dbc5bacae6d">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        TErrorCode,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        ERROR_CODE_R_SYS_LIB    = ERR_R_SYS_LIB,</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        ERROR_CODE_R_BN_LIB     = ERR_R_BN_LIB,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        ERROR_CODE_R_RSA_LIB    = ERR_R_RSA_LIB,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        ERROR_CODE_R_DH_LIB     = ERR_R_DH_LIB,</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        ERROR_CODE_R_EVP_LIB    = ERR_R_EVP_LIB,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        ERROR_CODE_R_BUF_LIB    = ERR_R_BUF_LIB,</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        ERROR_CODE_R_OBJ_LIB    = ERR_R_OBJ_LIB,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        ERROR_CODE_R_PEM_LIB    = ERR_R_PEM_LIB,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        ERROR_CODE_R_DSA_LIB    = ERR_R_DSA_LIB,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        ERROR_CODE_R_X509_LIB   = ERR_R_X509_LIB,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        ERROR_CODE_R_ASN1_LIB   = ERR_R_ASN1_LIB,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        ERROR_CODE_R_EC_LIB     = ERR_R_EC_LIB,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        ERROR_CODE_R_BIO_LIB    = ERR_R_BIO_LIB,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        ERROR_CODE_R_PKCS7_LIB  = ERR_R_PKCS7_LIB,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        ERROR_CODE_R_X509V3_LIB = ERR_R_X509V3_LIB,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        ERROR_CODE_R_ENGINE_LIB = ERR_R_ENGINE_LIB,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        ERROR_CODE_R_UI_LIB     = ERR_R_UI_LIB,</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        ERROR_CODE_R_ECDSA_LIB  = ERR_R_ECDSA_LIB,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        ERROR_CODE_R_NESTED_ASN1_ERROR          = ERR_R_NESTED_ASN1_ERROR,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        ERROR_CODE_R_MISSING_ASN1_EOS           = ERR_R_MISSING_ASN1_EOS,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        ERROR_CODE_R_FATAL                          = ERR_R_FATAL,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        ERROR_CODE_R_MALLOC_FAILURE                 = ERR_R_MALLOC_FAILURE,</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        ERROR_CODE_R_SHOULD_NOT_HAVE_BEEN_CALLED    = ERR_R_SHOULD_NOT_HAVE_BEEN_CALLED,</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        ERROR_CODE_R_PASSED_NULL_PARAMETER          = ERR_R_PASSED_NULL_PARAMETER,</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        ERROR_CODE_R_INTERNAL_ERROR                 = ERR_R_INTERNAL_ERROR,</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        ERROR_CODE_R_DISABLED                       = ERR_R_DISABLED</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    )</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <a class="code hl_define" href="enum_8h.html#acf1825d3b8e6ea6b7e5f4dbc5bacae6d">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        TSSLErrorCode,</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        SSL_ERROR_CODE_NONE             = SSL_ERROR_NONE,</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        SSL_ERROR_CODE_SSL              = SSL_ERROR_SSL,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        SSL_ERROR_CODE_WANT_READ        = SSL_ERROR_WANT_READ,</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        SSL_ERROR_CODE_WANT_WRITE       = SSL_ERROR_WANT_WRITE,</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        SSL_ERROR_CODE_WANT_X509_LOOKUP = SSL_ERROR_WANT_X509_LOOKUP,</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        SSL_ERROR_CODE_SYSCALL          = SSL_ERROR_SYSCALL,</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        SSL_ERROR_CODE_ZERO_RETURN      = SSL_ERROR_ZERO_RETURN,</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        SSL_ERROR_CODE_WANT_CONNECT     = SSL_ERROR_WANT_CONNECT,</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        SSL_ERROR_CODE_WANT_ACCEPT      = SSL_ERROR_WANT_ACCEPT</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    )</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    TContext *createContext(<span class="keywordtype">bool</span> <span class="keyword">const</span> &amp;is_server_method);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordtype">void</span> configureContext(</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        TContext  * <span class="keyword">const</span>  context,</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        std::string <span class="keyword">const</span> &amp;file_name_private_key,</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        std::string <span class="keyword">const</span> &amp;file_name_certificate);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordtype">void</span> releaseContext(TContext *context);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    TSSL *createSSL(TContext *context, <span class="keywordtype">int</span> <span class="keyword">const</span> &amp;file_descriptor);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordtype">void</span> releaseSSL(TSSL *ssl);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordtype">void</span> acceptSSL(TSSL *ssl, <span class="keywordtype">bool</span> <span class="keyword">const</span> &amp;is_blocking_mode);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    TSSLErrorCode connectSSL(TSSL *ssl);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    TSSLErrorCode setConnectState(TSSL *ssl);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    TSSLErrorCode setAcceptState(TSSL *ssl);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    TSSLErrorCode doHandshake(TSSL *ssl);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordtype">size_t</span> write(TSSL *ssl, io::Buffer::TSharedPtr <span class="keyword">const</span> &amp;packet);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    io::Buffer::TSharedPtr read(TSSL *ssl, <span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp;size);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    std::string getErrorString();</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span></div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    std::string getErrorString(<span class="keywordtype">int</span> <span class="keyword">const</span> &amp;code);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    std::string getSSLErrorString(TSSL *ssl, <span class="keywordtype">int</span> <span class="keyword">const</span> &amp;code);</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    TSSLErrorCode getSSLErrorCode(TSSL *ssl, <span class="keywordtype">int</span> <span class="keyword">const</span> &amp;code);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keyword">friend</span> <span class="keyword">class </span>pattern::Singleton&lt;OpenSSL&gt;;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    OpenSSL();</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>};</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>} <span class="comment">// encryption</span></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="preprocessor">#endif </span><span class="comment">// BUILD_FLAG_OPENSSL</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_OPENSSL_356BCFD7_CD30_4EAF_BD8A_1538C082E0E8</span></div>
+<div class="ttc" id="abuild__flags_8h_html"><div class="ttname"><a href="build__flags_8h.html">build_flags.h</a></div></div>
+<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,...</div></div>
+<div class="ttc" id="aenum_8h_html_acf1825d3b8e6ea6b7e5f4dbc5bacae6d"><div class="ttname"><a href="enum_8h.html#acf1825d3b8e6ea6b7e5f4dbc5bacae6d">DEFINE_ENUM</a></div><div class="ttdeci">#define DEFINE_ENUM(TEnum,...)</div><div class="ttdoc">Определяет расширенный класс перечисления. Этот макрос генерирует класс, который оборачивает стандарт...</div><div class="ttdef"><b>Определения</b> enum.h:56</div></div>
+<div class="ttc" id="akeys_8h_html"><div class="ttname"><a href="keys_8h.html">keys.h</a></div></div>
+<div class="ttc" id="anamespaceiridium_1_1encryption_html"><div class="ttname"><a href="namespaceiridium_1_1encryption.html">iridium::encryption</a></div><div class="ttdoc">Пространство имен для функциональности шифрования и криптографии.</div><div class="ttdef"><b>Определения</b> keys.h:18</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных....</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="asingleton_8h_html"><div class="ttname"><a href="singleton_8h.html">singleton.h</a></div></div>
+<div class="ttc" id="asmart__ptr_8h_html"><div class="ttname"><a href="smart__ptr_8h.html">smart_ptr.h</a></div><div class="ttdoc">Предоставляет вспомогательные макросы для определения стандартных typedef-ов умных указателей и стати...</div></div>
+<div class="ttc" id="asocket_8h_html"><div class="ttname"><a href="socket_8h.html">socket.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

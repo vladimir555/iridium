@@ -1,0 +1,7 @@
+<map id="iridium::parsing::implementation::CNodeType::addChild" name="iridium::parsing::implementation::CNodeType::addChild">
+<area shape="rect" id="Node000001" title="Добавляет существующий узел в качестве дочернего." alt="" coords="259,39,464,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad2864ef93988a4628aea30800b26b99c" title="Создает и добавляет новый дочерний узел с указанным именем и значением, созданным по умолчанию...." alt="" coords="5,5,211,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,46,211,42,212,37,243,41"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#aeb1a5a87e59aaca98761199b1d42e6c4" title="Создает и добавляет новый дочерний узел с указанными именем и значением. Новый дочерний узел будет ис..." alt="" coords="5,71,211,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,77,212,81,211,75,243,71"/>
+</map>

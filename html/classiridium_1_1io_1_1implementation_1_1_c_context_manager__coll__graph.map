@@ -1,0 +1,7 @@
+<map id="iridium::io::implementation::CContextManager" name="iridium::io::implementation::CContextManager">
+<area shape="rect" id="Node000001" title="Конкретная реализация интерфейса IContextManager. Управляет жизненным циклом множества экземпляров IC..." alt="" coords="103,109,277,150"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_context_manager.html" title="Интерфейс для управления коллекцией контекстов ввода&#45;вывода (IContext). Менеджер контекстов отвечает ..." alt="" coords="5,20,191,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,55,173,107,169,110,118,59"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="214,5,352,61"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,74,211,111,207,107,244,70"/>
+</map>

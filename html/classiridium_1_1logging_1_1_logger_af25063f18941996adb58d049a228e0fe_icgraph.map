@@ -1,0 +1,8 @@
+<map id="iridium::logging::Logger::setConfig" name="iridium::logging::Logger::setConfig">
+<area shape="rect" id="Node000001" title="Устанавливает конфигурацию логгера. Это переконфигурирует логгер, потенциально очищая существующие пр..." alt="" coords="450,22,605,62"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging.html#a4fff5fa51c4d1b05c97ae08faf5efd18" title="Устанавливает глобальную конфигурацию логгера. Это свободная функция&#45;обертка вокруг Logger::instance(..." alt="" coords="230,29,402,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="435,45,402,45,402,40,435,40"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Запускает зарегистрированные тесты, возможно, отфильтрованные аргументами командной строки...." alt="" coords="5,29,182,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,45,182,45,182,40,214,40"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="132,17,119,10,93,8,70,10,57,15,55,20,61,27,57,31,49,21,54,11,69,5,94,3,121,5,135,12"/>
+</map>

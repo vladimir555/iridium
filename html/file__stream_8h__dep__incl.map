@@ -1,0 +1,37 @@
+<map id="source/iridium/io/fs/file_stream.h" name="source/iridium/io/fs/file_stream.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="415,5,546,46"/>
+<area shape="rect" id="Node000002" href="$file__cache_8h.html" title=" " alt="" coords="113,94,248,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="404,54,249,102,247,97,402,49"/>
+<area shape="rect" id="Node000004" href="$implementation_2file__stream_8h.html" title=" " alt="" coords="324,94,458,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="453,59,419,95,415,92,450,55"/>
+<area shape="rect" id="Node000013" href="$content__storage_8h.html" title=" " alt="" coords="777,102,944,142"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="562,44,781,98,780,103,561,49"/>
+<area shape="rect" id="Node000015" href="$sink__file_8h.html" title="Определяет класс CSinkFile, конкретную реализацию ISink для логирования в файлы, включая поддержку ро..." alt="" coords="483,102,659,142"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="512,55,554,99,550,103,508,59"/>
+<area shape="rect" id="Node000003" href="$file__cache_8cpp.html" title=" " alt="" coords="5,301,140,357"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="162,165,89,302,84,300,157,162"/>
+<area shape="rect" id="Node000005" href="$file__stream_8cpp.html" title=" " alt="" coords="165,198,300,253"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="337,161,277,199,274,195,334,156"/>
+<area shape="rect" id="Node000006" href="$file__stream__reader_8h.html" title=" " alt="" coords="532,198,666,253"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="462,154,544,195,542,199,459,159"/>
+<area shape="rect" id="Node000010" href="$file__stream__writer_8h.html" title=" " alt="" coords="324,198,458,253"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="394,165,394,197,388,197,388,165"/>
+<area shape="rect" id="Node000007" href="$files_8cpp.html" title=" " alt="" coords="538,309,669,350"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="603,269,605,309,600,309,598,269"/>
+<area shape="rect" id="Node000008" href="$file__stream__reader_8cpp.html" title=" " alt="" coords="693,301,828,357"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="657,260,719,298,716,303,654,264"/>
+<area shape="rect" id="Node000009" href="$content__storage_8cpp.html" title=" " alt="" coords="859,301,1046,357"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="682,251,860,301,858,306,681,256"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="310,256,153,304,141,308,139,303,152,299,308,251"/>
+<area shape="poly" id="edge10_Node000010_Node000007" title=" " alt="" coords="463,258,563,306,561,311,460,263"/>
+<area shape="rect" id="Node000011" href="$file__stream__writer_8cpp.html" title=" " alt="" coords="164,301,298,357"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="337,264,276,303,273,298,334,260"/>
+<area shape="rect" id="Node000012" href="$sink__file_8cpp.html" title=" " alt="" coords="323,309,513,350"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="405,268,415,308,410,309,400,269"/>
+<area shape="rect" id="Node000014" href="$implementation_2content__storage_8h.html" title=" " alt="" coords="862,198,1048,253"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="891,152,932,195,928,199,887,155"/>
+<area shape="poly" id="edge16_Node000014_Node000009" title=" " alt="" coords="957,269,956,301,951,301,951,269"/>
+<area shape="poly" id="edge18_Node000015_Node000012" title=" " alt="" coords="549,157,434,310,430,307,545,153"/>
+<area shape="rect" id="Node000016" href="$logger_8cpp.html" title=" " alt="" coords="691,205,838,246"/>
+<area shape="poly" id="edge19_Node000015_Node000016" title=" " alt="" coords="623,147,729,202,726,207,621,152"/>
+</map>

@@ -1,0 +1,815 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/parsing/serialization/node.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_3598e8d03f058449899ac524faf1a451.html">parsing</a></li><li class="navelem"><a class="el" href="dir_9060e3896eb62ee73102da690e7293ec.html">serialization</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#define-members">Макросы</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл node.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &quot;<a class="el" href="node_8h_source.html">iridium/parsing/node.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="implementation_2node_8h_source.html">iridium/parsing/implementation/node.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="va__args_8h_source.html">iridium/macros/va_args.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для node.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="serialization_2node_8h__incl.png" border="0" usemap="#asource_2iridium_2parsing_2serialization_2node_8h" alt=""/></div>
+<map name="asource_2iridium_2parsing_2serialization_2node_8h" id="asource_2iridium_2parsing_2serialization_2node_8h">
+<area shape="rect" title=" " alt="" coords="316,5,465,46"/>
+<area shape="rect" title=" " alt="" coords="55,492,108,518"/>
+<area shape="poly" title=" " alt="" coords="316,30,221,39,169,50,120,65,75,86,40,114,27,131,17,150,10,171,8,194,8,351,13,388,27,423,45,453,63,478,59,482,40,456,22,425,8,389,3,352,3,194,5,170,12,148,22,128,36,110,73,82,118,60,168,44,220,34,316,25"/>
+<area shape="rect" title=" " alt="" coords="660,492,738,518"/>
+<area shape="poly" title=" " alt="" coords="466,32,542,47,583,60,621,77,655,98,682,124,700,156,707,194,707,352,703,477,698,477,701,352,701,194,695,158,678,127,651,102,618,81,581,65,541,52,465,37"/>
+<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="316,183,465,208"/>
+<area shape="poly" title=" " alt="" coords="393,46,393,167,388,167,388,46"/>
+<area shape="rect" href="implementation_2node_8h.html" title="Определяет typedef CNode, конкретную реализацию узла на основе CNodeType&lt;std::string&gt;...." alt="" coords="152,94,349,135"/>
+<area shape="poly" title=" " alt="" coords="360,49,297,88,294,83,358,44"/>
+<area shape="rect" href="va__args_8h.html" title="Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основ..." alt="" coords="742,102,909,127"/>
+<area shape="poly" title=" " alt="" coords="466,39,750,95,748,101,465,44"/>
+<area shape="rect" href="node__type_8h.html" title="Определяет шаблонный интерфейс INodeType&lt;TValue&gt; для обобщенных узлов дерева. Этот интерфейс является..." alt="" coords="322,256,414,282"/>
+<area shape="poly" title=" " alt="" coords="389,209,379,242,374,240,384,208"/>
+<area shape="poly" title=" " alt="" coords="322,284,270,303,218,332,179,367,145,407,97,480,93,477,141,404,175,364,214,328,267,298,320,279"/>
+<area shape="rect" title=" " alt="" coords="587,492,626,518"/>
+<area shape="poly" title=" " alt="" coords="415,268,455,271,499,281,543,299,579,328,601,364,611,404,614,444,613,477,608,477,609,444,606,405,596,366,575,332,540,304,498,286,454,277,414,273"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="442,330,566,371"/>
+<area shape="poly" title=" " alt="" coords="390,280,459,320,456,324,387,285"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="246,338,418,363"/>
+<area shape="poly" title=" " alt="" coords="365,284,346,325,341,322,360,281"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="165,419,294,444"/>
+<area shape="poly" title=" " alt="" coords="330,285,273,307,250,319,235,332,228,348,224,367,226,404,221,404,219,367,223,347,231,328,247,315,271,302,328,280"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="382,419,549,444"/>
+<area shape="poly" title=" " alt="" coords="497,372,480,406,476,403,492,370"/>
+<area shape="poly" title=" " alt="" coords="400,448,124,499,123,493,399,442"/>
+<area shape="poly" title=" " alt="" coords="506,442,645,485,644,490,504,447"/>
+<area shape="poly" title=" " alt="" coords="491,442,575,485,572,490,488,447"/>
+<area shape="rect" title=" " alt="" coords="503,492,564,518"/>
+<area shape="poly" title=" " alt="" coords="478,443,514,479,510,483,475,446"/>
+<area shape="rect" title=" " alt="" coords="338,492,395,518"/>
+<area shape="poly" title=" " alt="" coords="450,447,397,485,394,481,447,443"/>
+<area shape="rect" title=" " alt="" coords="212,492,281,518"/>
+<area shape="poly" title=" " alt="" coords="429,447,297,490,295,485,427,442"/>
+<area shape="rect" title=" " alt="" coords="419,492,480,518"/>
+<area shape="poly" title=" " alt="" coords="465,445,458,477,453,476,460,444"/>
+<area shape="poly" title=" " alt="" coords="318,366,259,411,256,407,315,361"/>
+<area shape="poly" title=" " alt="" coords="235,444,243,477,238,478,230,445"/>
+<area shape="rect" href="implementation_2node__type_8h.html" title="Определяет шаблонный класс CNodeType&lt;TValue&gt;, конкретную реализацию INodeType&lt;TValue&gt;...." alt="" coords="200,183,293,208"/>
+<area shape="poly" title=" " alt="" coords="252,135,251,167,245,167,247,135"/>
+<area shape="poly" title=" " alt="" coords="227,211,199,231,173,258,140,315,115,376,98,433,88,478,83,477,93,432,110,374,135,313,169,255,195,227,224,207"/>
+<area shape="poly" title=" " alt="" coords="269,207,336,246,333,250,266,211"/>
+<area shape="poly" title=" " alt="" coords="294,205,374,227,469,256,555,291,587,309,610,328,629,356,637,382,637,411,632,445,621,479,616,477,627,444,632,410,632,383,624,358,606,332,584,314,552,296,467,261,373,232,293,211"/>
+<area shape="poly" title=" " alt="" coords="229,211,204,231,185,258,179,276,178,296,184,336,198,374,215,404,210,407,194,376,179,338,172,296,174,275,180,255,200,227,225,207"/>
+<area shape="rect" title=" " alt="" coords="195,256,298,282"/>
+<area shape="poly" title=" " alt="" coords="249,209,249,241,244,241,244,209"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="serialization_2node_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2parsing_2serialization_2node_8hdep" alt=""/></div>
+<map name="asource_2iridium_2parsing_2serialization_2node_8hdep" id="asource_2iridium_2parsing_2serialization_2node_8hdep">
+<area shape="rect" title=" " alt="" coords="1611,5,1760,46"/>
+<area shape="rect" href="db_2config_8h.html" title="Определяет структуры конфигурации базы данных с использованием фреймворка сериализации...." alt="" coords="324,102,495,127"/>
+<area shape="poly" title=" " alt="" coords="1596,36,495,110,495,105,1595,30"/>
+<area shape="rect" href="request_8h.html" title=" " alt="" coords="1321,94,1487,135"/>
+<area shape="poly" title=" " alt="" coords="1608,54,1469,96,1467,91,1606,48"/>
+<area shape="rect" href="response_8h.html" title=" " alt="" coords="1512,94,1678,135"/>
+<area shape="poly" title=" " alt="" coords="1656,59,1617,95,1613,92,1652,55"/>
+<area shape="rect" href="logging_2config_8h.html" title=" " alt="" coords="1702,94,1850,135"/>
+<area shape="poly" title=" " alt="" coords="1719,55,1758,92,1754,95,1715,59"/>
+<area shape="rect" href="serialization_2node_8cpp.html" title=" " alt="" coords="1924,94,2076,135"/>
+<area shape="poly" title=" " alt="" coords="1772,48,1929,91,1928,96,1771,53"/>
+<area shape="rect" href="test__runner_8h.html" title=" " alt="" coords="2990,183,3136,223"/>
+<area shape="poly" title=" " alt="" coords="1767,49,1815,68,1863,92,1878,103,1888,114,1898,124,1913,132,1978,146,2090,158,2400,177,2735,190,2990,197,2990,203,2735,195,2399,182,2089,163,1977,151,1911,137,1895,128,1884,118,1874,107,1860,96,1813,73,1765,54"/>
+<area shape="rect" href="db_2config_8cpp.html" title=" " alt="" coords="5,190,190,216"/>
+<area shape="poly" title=" " alt="" coords="351,134,142,192,141,187,350,129"/>
+<area shape="rect" href="factory_8h.html" title=" " alt="" coords="214,190,387,216"/>
+<area shape="poly" title=" " alt="" coords="384,139,317,192,314,187,381,135"/>
+<area shape="rect" href="implementation_2connector_8h.html" title="Определяет базовый класс CConnector для конкретных реализаций коннекторов баз данных...." alt="" coords="411,183,624,223"/>
+<area shape="poly" title=" " alt="" coords="438,135,495,180,491,184,434,139"/>
+<area shape="rect" href="factory_8cpp.html" title=" " alt="" coords="200,286,387,312"/>
+<area shape="poly" title=" " alt="" coords="301,231,297,286,292,286,296,231"/>
+<area shape="rect" href="implementation_2connector_8cpp.html" title=" " alt="" coords="411,279,624,320"/>
+<area shape="poly" title=" " alt="" coords="520,239,520,278,515,278,515,239"/>
+<area shape="rect" href="request_8cpp.html" title=" " alt="" coords="1321,183,1487,223"/>
+<area shape="poly" title=" " alt="" coords="1407,150,1407,182,1402,182,1402,150"/>
+<area shape="rect" href="response_8cpp.html" title=" " alt="" coords="1512,183,1678,223"/>
+<area shape="poly" title=" " alt="" coords="1598,150,1598,182,1592,182,1592,150"/>
+<area shape="rect" href="logging_2config_8cpp.html" title=" " alt="" coords="1874,183,2022,223"/>
+<area shape="poly" title=" " alt="" coords="1830,140,1910,180,1908,185,1827,144"/>
+<area shape="rect" href="logger_8h.html" title="Определяет основной класс&#45;одиночку Logger, вспомогательные структуры LogStream и LogStreamDummy,..." alt="" coords="1702,183,1850,223"/>
+<area shape="poly" title=" " alt="" coords="1779,150,1779,182,1774,182,1774,150"/>
+<area shape="rect" href="context_8cpp.html" title=" " alt="" coords="1019,382,1227,423"/>
+<area shape="poly" title=" " alt="" coords="1687,226,1609,235,1547,237,1489,246,1457,256,1422,274,1406,286,1397,300,1387,315,1371,329,1342,343,1300,358,1205,384,1204,379,1298,353,1340,338,1368,325,1383,311,1392,297,1402,283,1419,269,1455,251,1487,240,1547,231,1609,229,1687,221"/>
+<area shape="rect" href="context__manager_8cpp.html" title=" " alt="" coords="1864,279,2072,320"/>
+<area shape="poly" title=" " alt="" coords="1831,228,1929,276,1927,281,1829,233"/>
+<area shape="rect" href="implementation_2pipe_8cpp.html" title=" " alt="" coords="2096,279,2304,320"/>
+<area shape="poly" title=" " alt="" coords="1865,221,2085,269,2115,276,2114,281,2084,274,1864,226"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="1400,664,1608,704"/>
+<area shape="poly" title=" " alt="" coords="1865,220,2120,225,2529,231,2919,244,3052,255,3094,261,3115,269,3130,284,3139,299,3146,328,3141,402,3141,501,3138,516,3127,530,3089,555,3029,577,2951,596,2857,613,2750,627,2509,650,2252,666,2000,676,1609,685,1609,679,2000,671,2251,661,2509,645,2750,622,2856,608,2950,591,3028,572,3087,550,3124,526,3133,513,3136,500,3136,401,3140,329,3134,301,3125,287,3112,274,3092,266,3051,260,2919,249,2529,237,2120,231,1865,225"/>
+<area shape="rect" href="stream__buffer_8cpp.html" title=" " alt="" coords="2328,279,2536,320"/>
+<area shape="poly" title=" " alt="" coords="1865,221,1993,237,2093,244,2192,252,2317,269,2352,276,2351,281,2316,274,2191,257,2092,250,1992,242,1865,226"/>
+<area shape="rect" href="linux_2socket_8cpp.html" title=" " alt="" coords="2561,271,2725,327"/>
+<area shape="poly" title=" " alt="" coords="1866,221,1970,233,2058,239,2209,241,2359,245,2447,254,2549,269,2561,271,2560,276,2548,274,2446,259,2359,251,2209,247,2058,244,1969,238,1865,226"/>
+<area shape="rect" href="content__storage_8cpp.html" title=" " alt="" coords="648,271,835,327"/>
+<area shape="poly" title=" " alt="" coords="1687,226,1559,240,1450,247,1265,248,1080,250,973,258,847,274,835,276,834,271,846,269,972,253,1080,245,1265,242,1450,241,1559,235,1687,221"/>
+<area shape="rect" href="logger_8cpp.html" title=" " alt="" coords="858,279,1006,320"/>
+<area shape="poly" title=" " alt="" coords="1687,226,1585,238,1498,243,1350,245,1204,250,1119,258,1019,274,991,281,989,276,1018,269,1118,253,1203,244,1350,240,1498,238,1585,232,1687,221"/>
+<area shape="rect" href="parser__json_8cpp.html" title=" " alt="" coords="1030,271,1184,327"/>
+<area shape="poly" title=" " alt="" coords="1688,226,1549,242,1439,247,1332,254,1197,274,1185,277,1184,271,1196,269,1331,248,1439,242,1548,236,1687,221"/>
+<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="1208,279,1358,320"/>
+<area shape="poly" title=" " alt="" coords="1687,226,1530,249,1462,258,1377,274,1348,281,1347,276,1376,269,1461,253,1529,243,1687,221"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="1762,375,1945,431"/>
+<area shape="poly" title=" " alt="" coords="1785,238,1795,281,1811,326,1837,373,1832,376,1806,328,1790,282,1780,239"/>
+<area shape="rect" href="test__runner__raw_8cpp.html" title=" " alt="" coords="3268,375,3450,431"/>
+<area shape="poly" title=" " alt="" coords="1865,220,2174,223,2682,226,2941,230,3167,237,3332,250,3383,259,3409,269,3417,282,3421,295,3417,324,3403,352,3385,376,3381,373,3398,349,3412,322,3415,296,3412,284,3405,273,3381,264,3331,255,3167,243,2941,235,2682,231,2174,229,1865,225"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2861,382,3006,423"/>
+<area shape="poly" title=" " alt="" coords="1794,236,1824,289,1840,311,1854,325,1876,334,1911,342,2014,357,2149,369,2303,379,2618,392,2860,398,2860,403,2618,397,2302,384,2148,374,2013,362,1910,347,1874,339,1851,329,1836,315,1820,292,1790,238"/>
+<area shape="rect" href="tester_8h.html" title=" " alt="" coords="2956,279,3101,320"/>
+<area shape="poly" title=" " alt="" coords="1865,221,2029,237,2169,242,2292,241,2407,237,2522,233,2644,235,2782,246,2943,269,2973,276,2972,281,2942,274,2781,251,2644,241,2522,239,2407,242,2292,246,2169,247,2029,242,1865,226"/>
+<area shape="rect" href="implementation_2async__queue_8h.html" title="Определяет класс CAsyncQueue&lt;TItem&gt;, реализацию интерфейса IAsyncQueue&lt;TItem&gt;. Этот класс предоставля..." alt="" coords="1432,279,1638,320"/>
+<area shape="poly" title=" " alt="" coords="1712,232,1586,281,1584,276,1711,227"/>
+<area shape="rect" href="implementation_2thread_8cpp.html" title=" " alt="" coords="1542,479,1720,519"/>
+<area shape="poly" title=" " alt="" coords="1741,236,1709,273,1681,328,1660,386,1637,479,1632,478,1654,384,1676,326,1705,270,1737,232"/>
+<area shape="rect" href="worker_8cpp.html" title=" " alt="" coords="1605,567,1785,608"/>
+<area shape="poly" title=" " alt="" coords="1774,239,1753,375,1748,448,1745,480,1735,520,1711,568,1706,566,1730,518,1740,479,1743,448,1748,375,1768,238"/>
+<area shape="poly" title=" " alt="" coords="3002,333,2954,384,2950,380,2998,329"/>
+<area shape="poly" title=" " alt="" coords="1441,326,1204,384,1202,379,1439,321"/>
+<area shape="poly" title=" " alt="" coords="1612,322,1769,372,1768,377,1610,327"/>
+<area shape="poly" title=" " alt="" coords="1569,329,1586,350,1601,374,1622,429,1631,478,1626,479,1616,431,1596,376,1582,353,1564,333"/>
+<area shape="rect" href="implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="1422,382,1586,423"/>
+<area shape="poly" title=" " alt="" coords="1527,335,1513,383,1508,381,1522,333"/>
+<area shape="rect" href="implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="1301,479,1467,519"/>
+<area shape="poly" title=" " alt="" coords="1470,329,1438,350,1412,377,1399,402,1391,429,1386,479,1381,478,1386,428,1394,400,1407,373,1435,345,1467,325"/>
+<area shape="rect" href="worker__pool_8h.html" title=" " alt="" coords="864,567,1062,608"/>
+<area shape="poly" title=" " alt="" coords="1482,329,1384,377,1003,569,1000,564,1382,373,1480,324"/>
+<area shape="poly" title=" " alt="" coords="1507,439,1507,663,1502,663,1502,439"/>
+<area shape="poly" title=" " alt="" coords="1544,430,1606,476,1603,480,1541,434"/>
+<area shape="poly" title=" " alt="" coords="1469,435,1411,480,1407,476,1466,431"/>
+<area shape="rect" href="implementation_2sink_8cpp.html" title=" " alt="" coords="1301,567,1467,608"/>
+<area shape="poly" title=" " alt="" coords="1387,535,1387,567,1382,567,1382,535"/>
+<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="1086,567,1277,608"/>
+<area shape="poly" title=" " alt="" coords="1326,528,1229,569,1227,564,1323,523"/>
+<area shape="poly" title=" " alt="" coords="1470,521,1625,564,1624,569,1469,527"/>
+<area shape="poly" title=" " alt="" coords="1286,523,1059,569,1058,564,1285,518"/>
+<area shape="poly" title=" " alt="" coords="1078,606,1400,662,1399,667,1077,611"/>
+<area shape="rect" href="worker__pool_8cpp.html" title=" " alt="" coords="883,656,1042,712"/>
+<area shape="poly" title=" " alt="" coords="966,623,966,655,960,655,960,623"/>
+<area shape="rect" href="test__runner__fork_8h.html" title=" " alt="" coords="2749,271,2931,327"/>
+<area shape="poly" title=" " alt="" coords="3003,232,2906,273,2903,268,3001,227"/>
+<area shape="rect" href="test__runner__raw_8h.html" title=" " alt="" coords="3176,279,3395,320"/>
+<area shape="poly" title=" " alt="" coords="3124,227,3240,276,3238,281,3122,232"/>
+<area shape="rect" href="test__runner_8cpp.html" title=" " alt="" coords="3470,279,3616,320"/>
+<area shape="poly" title=" " alt="" coords="3151,214,3293,237,3451,269,3479,276,3478,281,3450,274,3292,242,3150,219"/>
+<area shape="poly" title=" " alt="" coords="2734,330,2509,361,2289,382,2094,395,1945,402,1945,396,2094,390,2288,377,2508,356,2733,325"/>
+<area shape="poly" title=" " alt="" coords="2877,337,2918,381,2914,384,2873,340"/>
+<area shape="poly" title=" " alt="" coords="3311,331,3341,373,3337,376,3306,334"/>
+<area shape="poly" title=" " alt="" coords="3203,327,3002,385,3001,379,3202,322"/>
+</map>
+</div>
+</div>
+<p><a href="serialization_2node_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView&lt; TValue &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет типизированное представление или обертку над базовым объектом <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>. Этот шаблон класса облегчает типизированный доступ (получение/установка) к значению узла и управляет его связью в рамках более крупной структуры узлов (через путь и родителя). Является фундаментальным строительным блоком для атрибутов и простых узлов, содержащих значения, определяемых с помощью макросов сериализации.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html">iridium::parsing::serialization::NodeView&lt; void &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Специализация <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> для безузловых узлов (тип значения <code>void</code>). Обычно используется как базовый класс для структурированных узлов, определенных <code>DEFINE_NODE_BEGIN</code> или <code>DEFINE_ROOT_NODE_BEGIN</code>, или для представления родительского узла, конкретный тип которого не нужен для построения пути. В основном управляет указателем <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> и его путем.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html">iridium::parsing::serialization::NodeViewList&lt; TNodeView &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет список объектов <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> определенного типа <code>TNodeView</code>. Этот класс предоставляет интерфейс для итерации и изменения списка сложных дочерних узлов или списка атрибутов в структуре данных, определенной макросами сериализации.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr&lt; TNodeView &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обертка для лениво инициализируемого разделяемого указателя на <code>TNodeView</code>. Используется для опциональных или рекурсивных определений узлов в структурах данных, определенных макросами сериализации (например, <code>DEFINE_NODE_PTR</code>). Фактический <code>TNodeView</code> обычно создается только при вызове <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html#a3859d99c5505ade8c5d2e951240f1690" title="Получает разделяемый указатель на TNodeView. Если TNodeView еще не был создан (например,...">get()</a></code> и если существует базовый узел.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных. Этот заголовочный файл объявляет служебные функции для упрощения процесса получения экземпляров коннекторов баз данных на основе конфигурации или <a class="el" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing.html">iridium::parsing</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1serialization.html">iridium::parsing::serialization</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing_1_1serialization"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет классы, макросы и утилиты для определения сериализуемых/десериализуемых структур данных. Это пространство имен фокусируется на представлении данных на основе узлов, где структуры данных определяются как иерархия узлов, каждый из которых потенциально может иметь атрибуты, значения и дочерние узлы или списки узлов. Система использует классы <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> в качестве оберток над базовым деревом <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> для обеспечения типизированного доступа и модификации, а также применяет набор макросов (<code>DEFINE_ROOT_NODE_BEGIN</code>, <code>DEFINE_ATTRIBUTE</code> и т.д.) для декларативного определения этих структур. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Макросы</h2></td></tr>
+<tr class="memitem:a7f018fdfb6121484592a761b4ab9eb18" id="r_a7f018fdfb6121484592a761b4ab9eb18"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f018fdfb6121484592a761b4ab9eb18">DEFINE_ROOT_NODE_BEGIN_2</a>(class_name,  name_delimeter_symbol)</td></tr>
+<tr class="memdesc:a7f018fdfb6121484592a761b4ab9eb18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Начинает определение структуры корневого узла для сериализации/десериализации. Генерирует структуру <code>T##class_name</code>, наследующую от <code>NodeView&lt;void&gt;</code>. Включает конструкторы для создания нового узла или обертывания существующего <code>INode::TSharedPtr</code>. Имя узла автоматически выводится из <code>class_name</code> с помощью <code>convertCamelToSplittedBySymbol</code>.  <br /></td></tr>
+<tr class="separator:a7f018fdfb6121484592a761b4ab9eb18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d4794eb438b9b61fcf728aa00f7fd2" id="r_ac0d4794eb438b9b61fcf728aa00f7fd2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0d4794eb438b9b61fcf728aa00f7fd2">DEFINE_ROOT_NODE_BEGIN_1</a>(class_name)</td></tr>
+<tr class="separator:ac0d4794eb438b9b61fcf728aa00f7fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8f5e72dee27b1c9479d82a20f96f62" id="r_aac8f5e72dee27b1c9479d82a20f96f62"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a>(...)</td></tr>
+<tr class="memdesc:aac8f5e72dee27b1c9479d82a20f96f62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос-переключатель, который диспетчеризует вызов в <code>DEFINE_ROOT_NODE_BEGIN_1</code> или <code>DEFINE_ROOT_NODE_BEGIN_2</code> в зависимости от количества предоставленных аргументов. Позволяет определить корневой узел либо с разделителем имени по умолчанию, либо с пользовательским.  <br /></td></tr>
+<tr class="separator:aac8f5e72dee27b1c9479d82a20f96f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b4e724573d774904e29ede08ef7b17a" id="r_a7b4e724573d774904e29ede08ef7b17a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a>()</td></tr>
+<tr class="memdesc:a7b4e724573d774904e29ede08ef7b17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает определение структуры корневого узла, начатое <code>DEFINE_ROOT_NODE_BEGIN</code>. Просто предоставляет закрывающую фигурную скобку для генерируемой структуры.  <br /></td></tr>
+<tr class="separator:a7b4e724573d774904e29ede08ef7b17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad47703aa4ae66d8d0699aa10e8cbe314" id="r_ad47703aa4ae66d8d0699aa10e8cbe314"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad47703aa4ae66d8d0699aa10e8cbe314">DEFINE_NODE_BEGIN</a>(class_name)</td></tr>
+<tr class="memdesc:ad47703aa4ae66d8d0699aa10e8cbe314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Начинает определение вложенного структурированного узла внутри родительской структуры узла. Генерирует структуру <code>T##class_name</code>, наследующую от <code>NodeView&lt;void&gt;</code>. Эта структура инициализируется ссылкой на ее родительский <code>NodeView&lt;void&gt;</code>. Имя узла выводится из <code>class_name</code> с использованием <code>NAME_DELIMETER_SYMBOL</code> родителя.  <br /></td></tr>
+<tr class="separator:ad47703aa4ae66d8d0699aa10e8cbe314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac524ec1b1c08d1e9ec08f6231d693e85" id="r_ac524ec1b1c08d1e9ec08f6231d693e85"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac524ec1b1c08d1e9ec08f6231d693e85">DEFINE_NODE_END</a>(class_name)</td></tr>
+<tr class="memdesc:ac524ec1b1c08d1e9ec08f6231d693e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает определение вложенного структурированного узла и объявляет его экземпляр. Предоставляет закрывающую фигурную скобку для структуры, определенной <code>DEFINE_NODE_BEGIN</code>, и объявляет переменную-член этого типа структуры с именем <code>class_name</code>, инициализированную <code>*this</code> (родителем).  <br /></td></tr>
+<tr class="separator:ac524ec1b1c08d1e9ec08f6231d693e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a255a5c50208823b8aa86af76d4f4a161" id="r_a255a5c50208823b8aa86af76d4f4a161"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a255a5c50208823b8aa86af76d4f4a161">DEFINE_ATTRIBUTE_2</a>(type,  class_name)</td></tr>
+<tr class="memdesc:a255a5c50208823b8aa86af76d4f4a161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет обязательный атрибут (простой узел-значение) внутри родительской структуры узла. Генерирует структуру <code>T##class_name</code>, наследующую от <code>NodeView&lt;type&gt;</code>, и объявляет член-переменную <code>class_name</code> этого типа структуры. Имя атрибута выводится из <code>class_name</code>.  <br /></td></tr>
+<tr class="separator:a255a5c50208823b8aa86af76d4f4a161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be6ba3083277ace59f6fb019fb10b06" id="r_a3be6ba3083277ace59f6fb019fb10b06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3be6ba3083277ace59f6fb019fb10b06">DEFINE_ATTRIBUTE_3</a>(type,  class_name,  default_value)</td></tr>
+<tr class="memdesc:a3be6ba3083277ace59f6fb019fb10b06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет опциональный атрибут со значением по умолчанию внутри родительской структуры узла. Аналогичен <code>DEFINE_ATTRIBUTE_2</code>, но предоставляет значение по умолчанию, если атрибут отсутствует в источнике.  <br /></td></tr>
+<tr class="separator:a3be6ba3083277ace59f6fb019fb10b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ae6809e071cbeb286389a6ea722e126" id="r_a6ae6809e071cbeb286389a6ea722e126"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(...)</td></tr>
+<tr class="memdesc:a6ae6809e071cbeb286389a6ea722e126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос-переключатель, который диспетчеризует вызов в <code>DEFINE_ATTRIBUTE_2</code> или <code>DEFINE_ATTRIBUTE_3</code> в зависимости от количества аргументов. Позволяет определять атрибуты либо как обязательные, либо со значением по умолчанию.  <br /></td></tr>
+<tr class="separator:a6ae6809e071cbeb286389a6ea722e126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c49dbc67050d59e4b5e7d095067a81a" id="r_a1c49dbc67050d59e4b5e7d095067a81a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c49dbc67050d59e4b5e7d095067a81a">DEFINE_NODE_LIST_BEGIN</a>(class_name)</td></tr>
+<tr class="memdesc:a1c49dbc67050d59e4b5e7d095067a81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Начинает определение списка сложных дочерних узлов. Генерирует две структуры: <code>T##class_name</code> (для отдельных элементов списка, наследуя <code>NodeView&lt;void&gt;</code>) и <code>T##class_name##List</code> (для самого списка, наследуя <code>NodeViewList&lt;T##class_name&gt;</code>). Внутренняя структура <code>T##class_name</code> затем определяется последующими вызовами <code>DEFINE_ATTRIBUTE</code> или <code>DEFINE_NODE_BEGIN/END</code> перед <code>DEFINE_NODE_LIST_END</code>. Примечание: <code>todo</code> в исходном коде упоминает потенциальную ошибку с именованием узлов для списков (например, "NameList" вместо "Name").  <br /></td></tr>
+<tr class="separator:a1c49dbc67050d59e4b5e7d095067a81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1547f0c86e3c410b26dcf1d13d1fcec7" id="r_a1547f0c86e3c410b26dcf1d13d1fcec7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1547f0c86e3c410b26dcf1d13d1fcec7">DEFINE_NODE_LIST_END</a>(class_name)</td></tr>
+<tr class="memdesc:a1547f0c86e3c410b26dcf1d13d1fcec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает определение списка сложных дочерних узлов и объявляет экземпляр списка. Закрывает определение структуры <code>T##class_name</code> и определяет структуру <code>T##class_name##List</code>, затем объявляет переменную-член <code>class_name</code> типа <code>T##class_name##List</code>.  <br /></td></tr>
+<tr class="separator:a1547f0c86e3c410b26dcf1d13d1fcec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39e63d356bdf5ea6b486ecf63c2c3b5a" id="r_a39e63d356bdf5ea6b486ecf63c2c3b5a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(type,  class_name)</td></tr>
+<tr class="memdesc:a39e63d356bdf5ea6b486ecf63c2c3b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет список простых атрибутов (узлов-значений) внутри родительской структуры узла. Генерирует <code>T##class_name</code> (наследуя <code>NodeView&lt;type&gt;</code>) для элементов списка и <code>T##class_name##List</code> (наследуя <code>NodeViewList&lt;T##class_name&gt;</code>) для самого списка, затем объявляет член <code>class_name</code> типа списка.  <br /></td></tr>
+<tr class="separator:a39e63d356bdf5ea6b486ecf63c2c3b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac671d110728b8a4bd1ea52fc352c9120" id="r_ac671d110728b8a4bd1ea52fc352c9120"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac671d110728b8a4bd1ea52fc352c9120">DEFINE_NODE_EXTERNAL</a>(class_name)</td></tr>
+<tr class="memdesc:ac671d110728b8a4bd1ea52fc352c9120"><td class="mdescLeft">&#160;</td><td class="mdescRight">Объявляет член, являющийся экземпляром внешне определенной структуры корневого узла. Это позволяет компоновать отдельно определенные сериализуемые структуры. Член <code>class_name</code> будет иметь тип <code>T##class_name</code>, который, как ожидается, определен в другом месте с использованием <code>DEFINE_ROOT_NODE_BEGIN/END</code>.  <br /></td></tr>
+<tr class="separator:ac671d110728b8a4bd1ea52fc352c9120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedcb3ac4bd4064c6b5bcc1014dd33080" id="r_aedcb3ac4bd4064c6b5bcc1014dd33080"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aedcb3ac4bd4064c6b5bcc1014dd33080">DEFINE_NODE_PTR</a>(class_name)</td></tr>
+<tr class="memdesc:aedcb3ac4bd4064c6b5bcc1014dd33080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет член, являющийся лениво инициализируемым указателем (<code>NodeViewPtr</code>) на вложенный структурированный узел. Полезно для опциональных или рекурсивных определений узлов. Генерирует typedef <code>T##class_name##Ptr</code> и член <code>class_name##_ptr</code> этого типа указателя. Ожидается, что <code>T##class_name</code> определен с использованием <code>DEFINE_NODE_BEGIN/END</code> или <code>DEFINE_ROOT_NODE_BEGIN/END</code> (если ссылается на другой корневой тип).  <br /></td></tr>
+<tr class="separator:aedcb3ac4bd4064c6b5bcc1014dd33080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39aa0a9c796142dba37f95ea182326e8" id="r_a39aa0a9c796142dba37f95ea182326e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39aa0a9c796142dba37f95ea182326e8">DEFINE_NODE_LIST_PTR</a>(class_name)</td></tr>
+<tr class="memdesc:a39aa0a9c796142dba37f95ea182326e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет член, являющийся лениво инициализируемым указателем (<code>NodeViewPtr</code>) на список сложных дочерних узлов. Полезно для опциональных или рекурсивных списков узлов. Генерирует typedef <code>T##class_name##ListPtr</code> и член <code>class_name##_list_ptr</code>. Ожидается, что <code>T##class_name##List</code> сгенерирован <code>DEFINE_NODE_LIST_BEGIN/END</code>.  <br /></td></tr>
+<tr class="separator:a39aa0a9c796142dba37f95ea182326e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:aa7e1b949f3364983dc8f7442fea0fc7d" id="r_aa7e1b949f3364983dc8f7442fea0fc7d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1serialization.html#aa7e1b949f3364983dc8f7442fea0fc7d">iridium::parsing::serialization::convertCamelToSplittedBySymbol</a> (std::string const &amp;camel, char const &amp;delimiter_symbol)</td></tr>
+<tr class="separator:aa7e1b949f3364983dc8f7442fea0fc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Макросы</h2>
+<a id="a6ae6809e071cbeb286389a6ea722e126" name="a6ae6809e071cbeb286389a6ea722e126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ae6809e071cbeb286389a6ea722e126">&#9670;&#160;</a></span>DEFINE_ATTRIBUTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ATTRIBUTE</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line"><a class="code hl_define" href="va__args_8h.html#a273c1a8de1c0ca2ed53c521bf0cd5744">DEFINE_MACRO_CHOOSER</a>(<a class="code hl_define" href="#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>, __VA_ARGS__)(__VA_ARGS__)</div>
+<div class="ttc" id="aserialization_2node_8h_html_a6ae6809e071cbeb286389a6ea722e126"><div class="ttname"><a href="#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a></div><div class="ttdeci">#define DEFINE_ATTRIBUTE(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в DEFINE_ATTRIBUTE_2 или DEFINE_ATTRIBUTE_3 в зави...</div><div class="ttdef"><b>Определения</b> node.h:686</div></div>
+<div class="ttc" id="ava__args_8h_html_a273c1a8de1c0ca2ed53c521bf0cd5744"><div class="ttname"><a href="va__args_8h.html#a273c1a8de1c0ca2ed53c521bf0cd5744">DEFINE_MACRO_CHOOSER</a></div><div class="ttdeci">#define DEFINE_MACRO_CHOOSER(target_,...)</div><div class="ttdoc">Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...</div><div class="ttdef"><b>Определения</b> va_args.h:114</div></div>
+</div><!-- fragment -->
+<p>Макрос-переключатель, который диспетчеризует вызов в <code>DEFINE_ATTRIBUTE_2</code> или <code>DEFINE_ATTRIBUTE_3</code> в зависимости от количества аргументов. Позволяет определять атрибуты либо как обязательные, либо со значением по умолчанию. </p>
+
+</div>
+</div>
+<a id="a255a5c50208823b8aa86af76d4f4a161" name="a255a5c50208823b8aa86af76d4f4a161"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a255a5c50208823b8aa86af76d4f4a161">&#9670;&#160;</a></span>DEFINE_ATTRIBUTE_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ATTRIBUTE_2</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>T##class_name : <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;type&gt; { \</div>
+<div class="line">        T##class_name(<a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView&lt;void&gt;</a> <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">        <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;type&gt; \</div>
+<div class="line">        (parent, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;type&gt;::operator =; \</div>
+<div class="line">    } class_name = *<span class="keyword">this</span>;</div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1serialization_1_1_node_view_html"><div class="ttname"><a href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a></div><div class="ttdoc">Предоставляет типизированное представление или обертку над базовым объектом INode....</div><div class="ttdef"><b>Определения</b> node.h:54</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных....</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+</div><!-- fragment -->
+<p>Определяет обязательный атрибут (простой узел-значение) внутри родительской структуры узла. Генерирует структуру <code>T##class_name</code>, наследующую от <code>NodeView&lt;type&gt;</code>, и объявляет член-переменную <code>class_name</code> этого типа структуры. Имя атрибута выводится из <code>class_name</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Тип данных атрибута (например, <code>std::string</code>, <code>int</code>, <code>bool</code>). </td></tr>
+    <tr><td class="paramname">class_name</td><td>Имя переменной-члена и база для имени узла атрибута. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3be6ba3083277ace59f6fb019fb10b06" name="a3be6ba3083277ace59f6fb019fb10b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3be6ba3083277ace59f6fb019fb10b06">&#9670;&#160;</a></span>DEFINE_ATTRIBUTE_3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ATTRIBUTE_3</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>default_value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>T##class_name : <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;type&gt; { \</div>
+<div class="line">        T##class_name(<a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView&lt;void&gt;</a> <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">        <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;type&gt; \</div>
+<div class="line">        (parent, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), default_value) {} \</div>
+<div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;type&gt;::operator =; \</div>
+<div class="line">    } class_name = *<span class="keyword">this</span>;</div>
+</div><!-- fragment -->
+<p>Определяет опциональный атрибут со значением по умолчанию внутри родительской структуры узла. Аналогичен <code>DEFINE_ATTRIBUTE_2</code>, но предоставляет значение по умолчанию, если атрибут отсутствует в источнике. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Тип данных атрибута. </td></tr>
+    <tr><td class="paramname">class_name</td><td>Имя переменной-члена и база для имени узла атрибута. </td></tr>
+    <tr><td class="paramname">default_value</td><td>Значение по умолчанию для атрибута. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a39e63d356bdf5ea6b486ecf63c2c3b5a" name="a39e63d356bdf5ea6b486ecf63c2c3b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e63d356bdf5ea6b486ecf63c2c3b5a">&#9670;&#160;</a></span>DEFINE_ATTRIBUTE_LIST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ATTRIBUTE_LIST</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>T##class_name : <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;type&gt; { \</div>
+<div class="line">        T##class_name(<a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView&lt;void&gt;</a> <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">            <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;type&gt; \</div>
+<div class="line">                (parent, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;type&gt;::operator =; \</div>
+<div class="line">        T##class_name( \</div>
+<div class="line">            iridium::parsing::INode::TSharedPtr <span class="keyword">const</span> &amp;node, \</div>
+<div class="line">            std::string <span class="keyword">const</span> &amp;path): \</div>
+<div class="line">                <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;type&gt; \</div>
+<div class="line">                    (node, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \</div>
+<div class="line">        T##class_name(): \</div>
+<div class="line">            iridium::parsing::serialization::NodeView&lt;type&gt; \</div>
+<div class="line">                (iridium::parsing::serialization::<a class="code hl_function" href="namespaceiridium_1_1parsing_1_1serialization.html#aa7e1b949f3364983dc8f7442fea0fc7d">convertCamelToSplittedBySymbol</a>(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">    }; \</div>
+<div class="line">    <span class="keyword">struct </span>T##class_name##List : <span class="keyword">public</span> iridium::parsing::serialization::NodeViewList&lt;T##class_name&gt; { \</div>
+<div class="line">        T##class_name##List(iridium::parsing::serialization::NodeView&lt;void&gt; <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">        iridium::parsing::serialization::NodeViewList&lt;T##class_name&gt; \</div>
+<div class="line">        (parent, iridium::parsing::serialization::<a class="code hl_function" href="namespaceiridium_1_1parsing_1_1serialization.html#aa7e1b949f3364983dc8f7442fea0fc7d">convertCamelToSplittedBySymbol</a>(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">    } class_name = *<span class="keyword">this</span>;</div>
+<div class="ttc" id="anamespaceiridium_1_1parsing_1_1serialization_html_aa7e1b949f3364983dc8f7442fea0fc7d"><div class="ttname"><a href="namespaceiridium_1_1parsing_1_1serialization.html#aa7e1b949f3364983dc8f7442fea0fc7d">iridium::parsing::serialization::convertCamelToSplittedBySymbol</a></div><div class="ttdeci">std::string convertCamelToSplittedBySymbol(std::string const &amp;camel, char const &amp;delimiter_symbol)</div><div class="ttdef"><b>Определения</b> node.cpp:88</div></div>
+</div><!-- fragment -->
+<p>Определяет список простых атрибутов (узлов-значений) внутри родительской структуры узла. Генерирует <code>T##class_name</code> (наследуя <code>NodeView&lt;type&gt;</code>) для элементов списка и <code>T##class_name##List</code> (наследуя <code>NodeViewList&lt;T##class_name&gt;</code>) для самого списка, затем объявляет член <code>class_name</code> типа списка. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Тип данных атрибутов в списке. </td></tr>
+    <tr><td class="paramname">class_name</td><td>Имя переменной-члена для списка и база для имен узлов атрибутов. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad47703aa4ae66d8d0699aa10e8cbe314" name="ad47703aa4ae66d8d0699aa10e8cbe314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad47703aa4ae66d8d0699aa10e8cbe314">&#9670;&#160;</a></span>DEFINE_NODE_BEGIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_BEGIN</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>T##class_name : <span class="keyword">protected</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;void&gt; { \</div>
+<div class="line">        T##class_name(<a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView&lt;void&gt;</a> <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">        <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;void&gt; \</div>
+<div class="line">        (parent, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}</div>
+</div><!-- fragment -->
+<p>Начинает определение вложенного структурированного узла внутри родительской структуры узла. Генерирует структуру <code>T##class_name</code>, наследующую от <code>NodeView&lt;void&gt;</code>. Эта структура инициализируется ссылкой на ее родительский <code>NodeView&lt;void&gt;</code>. Имя узла выводится из <code>class_name</code> с использованием <code>NAME_DELIMETER_SYMBOL</code> родителя. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Базовое имя для генерируемого члена структуры (например, <code>NestedData</code> приведет к <code>TNestedData NestedData;</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac524ec1b1c08d1e9ec08f6231d693e85" name="ac524ec1b1c08d1e9ec08f6231d693e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac524ec1b1c08d1e9ec08f6231d693e85">&#9670;&#160;</a></span>DEFINE_NODE_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_END</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    } class_name = *<span class="keyword">this</span>;</div>
+</div><!-- fragment -->
+<p>Завершает определение вложенного структурированного узла и объявляет его экземпляр. Предоставляет закрывающую фигурную скобку для структуры, определенной <code>DEFINE_NODE_BEGIN</code>, и объявляет переменную-член этого типа структуры с именем <code>class_name</code>, инициализированную <code>*this</code> (родителем). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Имя объявляемой переменной-члена (должно совпадать с <code>class_name</code> в <code>DEFINE_NODE_BEGIN</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac671d110728b8a4bd1ea52fc352c9120" name="ac671d110728b8a4bd1ea52fc352c9120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac671d110728b8a4bd1ea52fc352c9120">&#9670;&#160;</a></span>DEFINE_NODE_EXTERNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_EXTERNAL</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    T##class_name class_name = *<span class="keyword">this</span>;</div>
+</div><!-- fragment -->
+<p>Объявляет член, являющийся экземпляром внешне определенной структуры корневого узла. Это позволяет компоновать отдельно определенные сериализуемые структуры. Член <code>class_name</code> будет иметь тип <code>T##class_name</code>, который, как ожидается, определен в другом месте с использованием <code>DEFINE_ROOT_NODE_BEGIN/END</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Имя переменной-члена и базовое имя ее типа (например, <code>OtherConfig</code> подразумевает тип <code>TOtherConfig</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1c49dbc67050d59e4b5e7d095067a81a" name="a1c49dbc67050d59e4b5e7d095067a81a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c49dbc67050d59e4b5e7d095067a81a">&#9670;&#160;</a></span>DEFINE_NODE_LIST_BEGIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_LIST_BEGIN</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>T##class_name##List; \</div>
+<div class="line">    <span class="keyword">struct </span>T##class_name: <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;void&gt; { \</div>
+<div class="line">        T##class_name( \</div>
+<div class="line">        iridium::parsing::INode::TSharedPtr <span class="keyword">const</span> &amp;node, \</div>
+<div class="line">        std::string <span class="keyword">const</span> &amp;path): \</div>
+<div class="line">        <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;void&gt; \</div>
+<div class="line">        (node, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \</div>
+<div class="line">        T##class_name(): <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;void&gt; \</div>
+<div class="line">        (<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+</div><!-- fragment -->
+<p>Начинает определение списка сложных дочерних узлов. Генерирует две структуры: <code>T##class_name</code> (для отдельных элементов списка, наследуя <code>NodeView&lt;void&gt;</code>) и <code>T##class_name##List</code> (для самого списка, наследуя <code>NodeViewList&lt;T##class_name&gt;</code>). Внутренняя структура <code>T##class_name</code> затем определяется последующими вызовами <code>DEFINE_ATTRIBUTE</code> или <code>DEFINE_NODE_BEGIN/END</code> перед <code>DEFINE_NODE_LIST_END</code>. Примечание: <code>todo</code> в исходном коде упоминает потенциальную ошибку с именованием узлов для списков (например, "NameList" вместо "Name"). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Базовое имя для элементов списка и самого члена-списка (например, <code>Item</code> приводит к <code>TItem</code> и <code>TItemList Item;</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1547f0c86e3c410b26dcf1d13d1fcec7" name="a1547f0c86e3c410b26dcf1d13d1fcec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1547f0c86e3c410b26dcf1d13d1fcec7">&#9670;&#160;</a></span>DEFINE_NODE_LIST_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_LIST_END</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    }; \</div>
+<div class="line">    <span class="keyword">struct </span>T##class_name##List: <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html">iridium::parsing::serialization::NodeViewList</a>&lt;T##class_name&gt; { \</div>
+<div class="line">        T##class_name##List(<a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView&lt;void&gt;</a> <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">        <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::<a class="code hl_function" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html#a4399b2754b3fbb51c83122b222aec249">NodeViewList</a>&lt;T##class_name&gt; \</div>
+<div class="line">        (parent, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::<a class="code hl_function" href="namespaceiridium_1_1parsing_1_1serialization.html#aa7e1b949f3364983dc8f7442fea0fc7d">convertCamelToSplittedBySymbol</a>(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">    } class_name = *<span class="keyword">this</span>;</div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1serialization_1_1_node_view_list_html"><div class="ttname"><a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html">iridium::parsing::serialization::NodeViewList</a></div><div class="ttdoc">Представляет список объектов NodeView определенного типа TNodeView. Этот класс предоставляет интерфей...</div><div class="ttdef"><b>Определения</b> node.h:228</div></div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1serialization_1_1_node_view_list_html_a4399b2754b3fbb51c83122b222aec249"><div class="ttname"><a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html#a4399b2754b3fbb51c83122b222aec249">iridium::parsing::serialization::NodeViewList::NodeViewList</a></div><div class="ttdeci">NodeViewList(NodeView&lt; void &gt; const &amp;parent, std::string const &amp;name)</div><div class="ttdoc">Конструктор для NodeViewList. Инициализируется путем поиска всех дочерних узлов parent,...</div><div class="ttdef"><b>Определения</b> node.h:452</div></div>
+</div><!-- fragment -->
+<p>Завершает определение списка сложных дочерних узлов и объявляет экземпляр списка. Закрывает определение структуры <code>T##class_name</code> и определяет структуру <code>T##class_name##List</code>, затем объявляет переменную-член <code>class_name</code> типа <code>T##class_name##List</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Имя переменной-члена для списка (должно совпадать с <code>class_name</code> в <code>DEFINE_NODE_LIST_BEGIN</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a39aa0a9c796142dba37f95ea182326e8" name="a39aa0a9c796142dba37f95ea182326e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39aa0a9c796142dba37f95ea182326e8">&#9670;&#160;</a></span>DEFINE_NODE_LIST_PTR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_LIST_PTR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr&lt;T##class_name##List&gt;</a> T##class_name##ListPtr; \</div>
+<div class="line">    T##class_name##ListPtr class_name##_list_ptr = *<span class="keyword">this</span>;</div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1serialization_1_1_node_view_ptr_html"><div class="ttname"><a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr</a></div><div class="ttdoc">Обертка для лениво инициализируемого разделяемого указателя на TNodeView. Используется для опциональн...</div><div class="ttdef"><b>Определения</b> node.h:313</div></div>
+</div><!-- fragment -->
+<p>Определяет член, являющийся лениво инициализируемым указателем (<code>NodeViewPtr</code>) на список сложных дочерних узлов. Полезно для опциональных или рекурсивных списков узлов. Генерирует typedef <code>T##class_name##ListPtr</code> и член <code>class_name##_list_ptr</code>. Ожидается, что <code>T##class_name##List</code> сгенерирован <code>DEFINE_NODE_LIST_BEGIN/END</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Базовое имя для типа списка узлов (<code>T##class_name##List</code>) и члена-указателя. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aedcb3ac4bd4064c6b5bcc1014dd33080" name="aedcb3ac4bd4064c6b5bcc1014dd33080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedcb3ac4bd4064c6b5bcc1014dd33080">&#9670;&#160;</a></span>DEFINE_NODE_PTR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_NODE_PTR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr&lt;T##class_name&gt;</a> T##class_name##Ptr; \</div>
+<div class="line">    T##class_name##Ptr class_name##_ptr = *<span class="keyword">this</span>;</div>
+</div><!-- fragment -->
+<p>Определяет член, являющийся лениво инициализируемым указателем (<code>NodeViewPtr</code>) на вложенный структурированный узел. Полезно для опциональных или рекурсивных определений узлов. Генерирует typedef <code>T##class_name##Ptr</code> и член <code>class_name##_ptr</code> этого типа указателя. Ожидается, что <code>T##class_name</code> определен с использованием <code>DEFINE_NODE_BEGIN/END</code> или <code>DEFINE_ROOT_NODE_BEGIN/END</code> (если ссылается на другой корневой тип). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Базовое имя для типа узла (<code>T##class_name</code>) и члена-указателя. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aac8f5e72dee27b1c9479d82a20f96f62" name="aac8f5e72dee27b1c9479d82a20f96f62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8f5e72dee27b1c9479d82a20f96f62">&#9670;&#160;</a></span>DEFINE_ROOT_NODE_BEGIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ROOT_NODE_BEGIN</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="va__args_8h.html#a273c1a8de1c0ca2ed53c521bf0cd5744">DEFINE_MACRO_CHOOSER</a>(<a class="code hl_define" href="#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a>, __VA_ARGS__)(__VA_ARGS__)</div>
+<div class="ttc" id="aserialization_2node_8h_html_aac8f5e72dee27b1c9479d82a20f96f62"><div class="ttname"><a href="#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_BEGIN(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в DEFINE_ROOT_NODE_BEGIN_1 или DEFINE_ROOT_NODE_BE...</div><div class="ttdef"><b>Определения</b> node.h:597</div></div>
+</div><!-- fragment -->
+<p>Макрос-переключатель, который диспетчеризует вызов в <code>DEFINE_ROOT_NODE_BEGIN_1</code> или <code>DEFINE_ROOT_NODE_BEGIN_2</code> в зависимости от количества предоставленных аргументов. Позволяет определить корневой узел либо с разделителем имени по умолчанию, либо с пользовательским. </p>
+
+</div>
+</div>
+<a id="ac0d4794eb438b9b61fcf728aa00f7fd2" name="ac0d4794eb438b9b61fcf728aa00f7fd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d4794eb438b9b61fcf728aa00f7fd2">&#9670;&#160;</a></span>DEFINE_ROOT_NODE_BEGIN_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ROOT_NODE_BEGIN_1</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="#a7f018fdfb6121484592a761b4ab9eb18">DEFINE_ROOT_NODE_BEGIN_2</a>(class_name, <span class="charliteral">&#39;-&#39;</span>)</div>
+<div class="ttc" id="aserialization_2node_8h_html_a7f018fdfb6121484592a761b4ab9eb18"><div class="ttname"><a href="#a7f018fdfb6121484592a761b4ab9eb18">DEFINE_ROOT_NODE_BEGIN_2</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_BEGIN_2(class_name, name_delimeter_symbol)</div><div class="ttdoc">Начинает определение структуры корневого узла для сериализации/десериализации. Генерирует структуру T...</div><div class="ttdef"><b>Определения</b> node.h:563</div></div>
+</div><!-- fragment --><p>@def <a class="el" href="#ac0d4794eb438b9b61fcf728aa00f7fd2">DEFINE_ROOT_NODE_BEGIN_1(class_name)</a> @brief Начинает определение структуры корневого узла с разделителем имени по умолчанию (-<code>). Это вспомогательный макрос, который вызывает</code>DEFINE_ROOT_NODE_BEGIN_2<code>с</code>'-'` в качестве разделителя. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Базовое имя для генерируемой структуры. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7f018fdfb6121484592a761b4ab9eb18" name="a7f018fdfb6121484592a761b4ab9eb18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f018fdfb6121484592a761b4ab9eb18">&#9670;&#160;</a></span>DEFINE_ROOT_NODE_BEGIN_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ROOT_NODE_BEGIN_2</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>class_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name_delimeter_symbol</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>T##class_name : <span class="keyword">protected</span> <a class="code hl_class" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">iridium::parsing::serialization::NodeView</a>&lt;void&gt; { \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keywordtype">int</span> <span class="keyword">const</span> NAME_DELIMETER_SYMBOL = name_delimeter_symbol; \</div>
+<div class="line">        T##class_name(iridium::parsing::INode::TSharedPtr <span class="keyword">const</span> &amp;node): \</div>
+<div class="line">            <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;void&gt; \</div>
+<div class="line">                (node, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">            T##class_name(): <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::NodeView&lt;void&gt; \</div>
+<div class="line">                (<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \</div>
+<div class="line">            iridium::parsing::INode::TSharedPtr getNode()<span class="keyword"> const </span>{ \</div>
+<div class="line">                <span class="keywordflow">return</span> <a class="code hl_function" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a73d0a8cf0b3dcc5ab8ca22f36e084983">iridium::parsing::serialization::NodeView&lt;void&gt;::getNode</a>(); \</div>
+<div class="line">            } \</div>
+<div class="line">        T##class_name(iridium::parsing::serialization::NodeView&lt;void&gt; <span class="keyword">const</span> &amp;parent): \</div>
+<div class="line">            iridium::parsing::serialization::NodeView&lt;void&gt; \</div>
+<div class="line">                (parent, iridium::parsing::serialization::<a class="code hl_function" href="namespaceiridium_1_1parsing_1_1serialization.html#aa7e1b949f3364983dc8f7442fea0fc7d">convertCamelToSplittedBySymbol</a>(#class_name, NAME_DELIMETER_SYMBOL)) {}</div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1serialization_1_1_node_view_html_a73d0a8cf0b3dcc5ab8ca22f36e084983"><div class="ttname"><a href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a73d0a8cf0b3dcc5ab8ca22f36e084983">iridium::parsing::serialization::NodeView::getNode</a></div><div class="ttdeci">INode::TSharedPtr getNode() const</div><div class="ttdoc">Получает базовый разделяемый указатель INode.</div><div class="ttdef"><b>Определения</b> node.h:367</div></div>
+</div><!-- fragment -->
+<p>Начинает определение структуры корневого узла для сериализации/десериализации. Генерирует структуру <code>T##class_name</code>, наследующую от <code>NodeView&lt;void&gt;</code>. Включает конструкторы для создания нового узла или обертывания существующего <code>INode::TSharedPtr</code>. Имя узла автоматически выводится из <code>class_name</code> с помощью <code>convertCamelToSplittedBySymbol</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_name</td><td>Базовое имя для генерируемой структуры (например, <code>MyConfig</code> приведет к <code>TMyConfig</code>). </td></tr>
+    <tr><td class="paramname">name_delimeter_symbol</td><td>Символ-разделитель, используемый для преобразования <code>class_name</code> из CamelCase в фактическое имя узла. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7b4e724573d774904e29ede08ef7b17a" name="a7b4e724573d774904e29ede08ef7b17a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b4e724573d774904e29ede08ef7b17a">&#9670;&#160;</a></span>DEFINE_ROOT_NODE_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFINE_ROOT_NODE_END</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Макроопределение:</b><div class="fragment"><div class="line">    };</div>
+</div><!-- fragment -->
+<p>Завершает определение структуры корневого узла, начатое <code>DEFINE_ROOT_NODE_BEGIN</code>. Просто предоставляет закрывающую фигурную скобку для генерируемой структуры. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

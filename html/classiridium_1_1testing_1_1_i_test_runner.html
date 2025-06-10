@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::testing::ITestRunner</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1testing.html">testing</a></li><li class="navelem"><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html">ITestRunner</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1testing_1_1_i_test_runner-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::testing::ITestRunner<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из файла (например, XML, JSON) и содержит список результатов для отдельных тестовых случаев.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="test__runner_8h_source.html">test_runner.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::testing::ITestRunner:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_i_test_runner__inherit__graph.png" border="0" usemap="#airidium_1_1testing_1_1_i_test_runner_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1testing_1_1_i_test_runner_inherit__map" id="airidium_1_1testing_1_1_i_test_runner_inherit__map">
+<area shape="rect" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа..." alt="" coords="5,46,191,72"/>
+<area shape="rect" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html" title=" " alt="" coords="239,5,441,46"/>
+<area shape="poly" title=" " alt="" coords="206,41,238,37,239,42,206,47"/>
+<area shape="rect" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_raw.html" title=" " alt="" coords="239,71,441,111"/>
+<area shape="poly" title=" " alt="" coords="206,71,239,75,238,80,206,76"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a6f76411f51c9be0b444368e536828c22" id="r_a6f76411f51c9be0b444368e536828c22"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">parsing::INodeType</a>&lt; <a class="el" href="classiridium_1_1testing_1_1_i_test.html">ITest</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f76411f51c9be0b444368e536828c22">INodeTest</a></td></tr>
+<tr class="memdesc:a6f76411f51c9be0b444368e536828c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет общие элементы интерфейса для <code><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа...">ITestRunner</a></code>, такие как typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.).  <br /></td></tr>
+<tr class="separator:a6f76411f51c9be0b444368e536828c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a7930c1697aa7258320e85f9923fb7f95" id="r_a7930c1697aa7258320e85f9923fb7f95"><td class="memItemLeft" align="right" valign="top">virtual TResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7930c1697aa7258320e85f9923fb7f95">run</a> (INodeTest::TSharedPtr const &amp;node_test)=0</td></tr>
+<tr class="memdesc:a7930c1697aa7258320e85f9923fb7f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запускает тесты, определенные в предоставленной структуре узлов или под ней.  <br /></td></tr>
+<tr class="separator:a7930c1697aa7258320e85f9923fb7f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из файла (например, XML, JSON) и содержит список результатов для отдельных тестовых случаев. </p>
+<p>Представляет результат отдельного тестового случая в рамках общих результатов тестирования. Каждый элемент в этом списке соответствует одному выполненному тесту.</p>
+<p>Путь или уникальный идентификатор тестового случая.</p>
+<p>Сообщение об ошибке, если тест не пройден. Эта строка обычно пуста, если тест пройден.</p>
+<p>Любой стандартный вывод, захваченный от тестового случая во время его выполнения.</p>
+<p>Интерфейс для средства запуска тестов. Средство запуска тестов отвечает за обнаружение, выполнение тестов (которые организованы в древовидной структуре) и формирование отчета о результатах. </p>
+</div><h2 class="groupheader">Определения типов</h2>
+<a id="a6f76411f51c9be0b444368e536828c22" name="a6f76411f51c9be0b444368e536828c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f76411f51c9be0b444368e536828c22">&#9670;&#160;</a></span>INodeTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">parsing::INodeType</a>&lt;<a class="el" href="classiridium_1_1testing_1_1_i_test.html">ITest</a> *&gt; <a class="el" href="#a6f76411f51c9be0b444368e536828c22">iridium::testing::ITestRunner::INodeTest</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Определяет общие элементы интерфейса для <code><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа...">ITestRunner</a></code>, такие как typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.). </p>
+<p>Псевдоним типа для специализированного <code><a class="el" href="class_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a></code>, который хранит сырой указатель на экземпляр <code><a class="el" href="classiridium_1_1testing_1_1_i_test.html" title="Интерфейс для запускаемого тестового случая. Конкретные тестовые классы должны реализовывать этот инт...">ITest</a></code> в качестве своего значения. Используется для представления тестового случая или набора тестов в иерархической структуре узлов, которую средство запуска тестов может обходить и выполнять. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a7930c1697aa7258320e85f9923fb7f95" name="a7930c1697aa7258320e85f9923fb7f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7930c1697aa7258320e85f9923fb7f95">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual TResult iridium::testing::ITestRunner::run </td>
+          <td>(</td>
+          <td class="paramtype">INodeTest::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>node_test</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Запускает тесты, определенные в предоставленной структуре узлов или под ней. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_test</td><td>Разделяемый указатель на корневой узел набора тестов или структуры отдельного тестового случая. Средство запуска обычно обходит это дерево узлов для поиска и выполнения экземпляров <code><a class="el" href="classiridium_1_1testing_1_1_i_test.html" title="Интерфейс для запускаемого тестового случая. Конкретные тестовые классы должны реализовывать этот инт...">ITest</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Объект <code>TResult</code>, содержащий результаты всех выполненных тестов. </dd></dl>
+
+<p>Замещается в <a class="el" href="class_c_test_runner_fork.html#abcb566ede47ac555310567589a30d952">CTestRunnerFork</a>, <a class="el" href="class_c_test_runner_raw.html#a2031938520135a6971741b7835335f0d">CTestRunnerRaw</a>, <a class="el" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#abcb566ede47ac555310567589a30d952">iridium::testing::implementation::CTestRunnerFork</a> и <a class="el" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_raw.html#a2031938520135a6971741b7835335f0d">iridium::testing::implementation::CTestRunnerRaw</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_cgraph" id="aclassiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_cgraph">
+<area shape="rect" title="Запускает тесты, определенные в предоставленной структуре узлов или под ней." alt="" coords="5,29,217,55"/>
+<area shape="poly" title=" " alt="" coords="76,31,69,21,73,11,87,5,111,3,137,5,150,12,148,17,135,10,111,8,89,10,77,15,74,20,80,27"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_icgraph" id="aclassiridium_1_1testing_1_1_i_test_runner_a7930c1697aa7258320e85f9923fb7f95_icgraph">
+<area shape="rect" title="Запускает тесты, определенные в предоставленной структуре узлов или под ней." alt="" coords="5,29,217,55"/>
+<area shape="poly" title=" " alt="" coords="148,17,135,10,111,8,89,10,77,15,74,20,80,27,76,31,69,21,73,11,87,5,111,3,137,5,150,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/testing/<a class="el" href="test__runner_8h_source.html">test_runner.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

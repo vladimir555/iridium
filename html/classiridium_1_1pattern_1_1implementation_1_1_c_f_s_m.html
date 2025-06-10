@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">CFSM</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_f_s_m.html" title="Интерфейс для Конечного Автомата (Finite State Machine, FSM). Этот шаблон класса определяет основную ...">IFSM</a></code>, использующая список переходов (поведение, подобное карте). Этот Конечный Автомат управляет состояниями и переходами на основе предопределенного списка объектов <code><a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html" title="Представляет одно правило перехода в Конечном Автомате.">TTransition</a></code>. Он поддерживает связывание обработчиков событий с конкретными переходами и может вести историю переходов.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="fsm__map_8h_source.html">fsm_map.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m__inherit__graph.png" border="0" usemap="#airidium_1_1pattern_1_1implementation_1_1_c_f_s_m_3_01_t_event_00_01_t_state_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1pattern_1_1implementation_1_1_c_f_s_m_3_01_t_event_00_01_t_state_01_4_inherit__map" id="airidium_1_1pattern_1_1implementation_1_1_c_f_s_m_3_01_t_event_00_01_t_state_01_4_inherit__map">
+<area shape="rect" title="Конкретная реализация интерфейса IFSM, использующая список переходов (поведение, подобное карте)...." alt="" coords="5,94,209,135"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_f_s_m.html" title="Интерфейс для Конечного Автомата (Finite State Machine, FSM). Этот шаблон класса определяет основную ..." alt="" coords="33,5,181,46"/>
+<area shape="poly" title=" " alt="" coords="110,62,110,94,104,94,104,62"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m__coll__graph.png" border="0" usemap="#airidium_1_1pattern_1_1implementation_1_1_c_f_s_m_3_01_t_event_00_01_t_state_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1pattern_1_1implementation_1_1_c_f_s_m_3_01_t_event_00_01_t_state_01_4_coll__map" id="airidium_1_1pattern_1_1implementation_1_1_c_f_s_m_3_01_t_event_00_01_t_state_01_4_coll__map">
+<area shape="rect" title="Конкретная реализация интерфейса IFSM, использующая список переходов (поведение, подобное карте)...." alt="" coords="5,94,209,135"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_f_s_m.html" title="Интерфейс для Конечного Автомата (Finite State Machine, FSM). Этот шаблон класса определяет основную ..." alt="" coords="33,5,181,46"/>
+<area shape="poly" title=" " alt="" coords="110,62,110,94,104,94,104,62"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html">TTransition</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет одно правило перехода в Конечном Автомате.  <a href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a58370601d2676fc692ac6dec672ef5ab" id="r_a58370601d2676fc692ac6dec672ef5ab"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58370601d2676fc692ac6dec672ef5ab">THandler</a></td></tr>
+<tr class="memdesc:a58370601d2676fc692ac6dec672ef5ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обертка функции для обработчиков событий перехода. Обработчики - это функции void без параметров.  <br /></td></tr>
+<tr class="separator:a58370601d2676fc692ac6dec672ef5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba1195aacf96bf22af21c47b3019a33d" id="r_aba1195aacf96bf22af21c47b3019a33d"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; <a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html">TTransition</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba1195aacf96bf22af21c47b3019a33d">TTransitions</a></td></tr>
+<tr class="memdesc:aba1195aacf96bf22af21c47b3019a33d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список объектов <code><a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html" title="Представляет одно правило перехода в Конечном Автомате.">TTransition</a></code>, определяющий все возможные переходы состояний для КА.  <br /></td></tr>
+<tr class="separator:aba1195aacf96bf22af21c47b3019a33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a6fd5699ef603e473bd80fd5683a89144" id="r_a6fd5699ef603e473bd80fd5683a89144"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fd5699ef603e473bd80fd5683a89144">CFSM</a> (TState const &amp;start_state, size_t const &amp;history_size, <a class="el" href="#aba1195aacf96bf22af21c47b3019a33d">TTransitions</a> const &amp;transitions)</td></tr>
+<tr class="memdesc:a6fd5699ef603e473bd80fd5683a89144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные вспомогательные средства реализации для <code><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html" title="Конкретная реализация интерфейса IFSM, использующая список переходов (поведение, подобное карте)....">CFSM</a></code>, такие как typedef-ы умных указателей и статический метод <code>create</code>.  <br /></td></tr>
+<tr class="separator:a6fd5699ef603e473bd80fd5683a89144"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2657f9b3dbd714377e3548ec80edb0eb" id="r_a2657f9b3dbd714377e3548ec80edb0eb"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2657f9b3dbd714377e3548ec80edb0eb">~CFSM</a> ()=default</td></tr>
+<tr class="memdesc:a2657f9b3dbd714377e3548ec80edb0eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:a2657f9b3dbd714377e3548ec80edb0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a84c2dc9eb9d5311c66d19383557aea" id="r_a0a84c2dc9eb9d5311c66d19383557aea"><td class="memItemLeft" align="right" valign="top">TState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a84c2dc9eb9d5311c66d19383557aea">doAction</a> (TEvent const &amp;event) override</td></tr>
+<tr class="memdesc:a0a84c2dc9eb9d5311c66d19383557aea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обрабатывает событие, пытается найти соответствующий переход и обновляет состояние КА. Если найден допустимый переход (соответствующий текущему состоянию и событию), выполняется связанный обработчик (если есть), состояние обновляется, и переход записывается в историю.  <br /></td></tr>
+<tr class="separator:a0a84c2dc9eb9d5311c66d19383557aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca548d6425ae3da1533a10cdbe1883e1" id="r_aca548d6425ae3da1533a10cdbe1883e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aba1195aacf96bf22af21c47b3019a33d">TTransitions</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca548d6425ae3da1533a10cdbe1883e1">getHistory</a> () const</td></tr>
+<tr class="memdesc:aca548d6425ae3da1533a10cdbe1883e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает историю переходов.  <br /></td></tr>
+<tr class="separator:aca548d6425ae3da1533a10cdbe1883e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TEvent, typename TState&gt;<br />
+class iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;</div><p>Конкретная реализация интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_f_s_m.html" title="Интерфейс для Конечного Автомата (Finite State Machine, FSM). Этот шаблон класса определяет основную ...">IFSM</a></code>, использующая список переходов (поведение, подобное карте). Этот Конечный Автомат управляет состояниями и переходами на основе предопределенного списка объектов <code><a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html" title="Представляет одно правило перехода в Конечном Автомате.">TTransition</a></code>. Он поддерживает связывание обработчиков событий с конкретными переходами и может вести историю переходов. </p>
+<dl class="tparams"><dt>Параметры шаблона</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TEvent</td><td>Тип, представляющий события, которые могут вызывать переходы состояний. Должен быть сравним на равенство. </td></tr>
+    <tr><td class="paramname">TState</td><td>Тип, представляющий состояния КА. Должен быть сравним на равенство. Обычно это перечисление (enum). </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Определения типов</h2>
+<a id="a58370601d2676fc692ac6dec672ef5ab" name="a58370601d2676fc692ac6dec672ef5ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58370601d2676fc692ac6dec672ef5ab">&#9670;&#160;</a></span>THandler</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEvent, typename TState&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::function&lt;void()&gt; <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">iridium::pattern::implementation::CFSM</a>&lt; TEvent, TState &gt;::THandler</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Обертка функции для обработчиков событий перехода. Обработчики - это функции void без параметров. </p>
+
+</div>
+</div>
+<a id="aba1195aacf96bf22af21c47b3019a33d" name="aba1195aacf96bf22af21c47b3019a33d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1195aacf96bf22af21c47b3019a33d">&#9670;&#160;</a></span>TTransitions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEvent, typename TState&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::list&lt;<a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html">TTransition</a>&gt; <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">iridium::pattern::implementation::CFSM</a>&lt; TEvent, TState &gt;::TTransitions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Список объектов <code><a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html" title="Представляет одно правило перехода в Конечном Автомате.">TTransition</a></code>, определяющий все возможные переходы состояний для КА. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a6fd5699ef603e473bd80fd5683a89144" name="a6fd5699ef603e473bd80fd5683a89144"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fd5699ef603e473bd80fd5683a89144">&#9670;&#160;</a></span>CFSM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEvent, typename TState&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">iridium::pattern::implementation::CFSM</a>&lt; TEvent, TState &gt;::CFSM </td>
+          <td>(</td>
+          <td class="paramtype">TState const &amp;</td>          <td class="paramname"><span class="paramname"><em>start_state</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>history_size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aba1195aacf96bf22af21c47b3019a33d">TTransitions</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>transitions</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Определяет стандартные вспомогательные средства реализации для <code><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html" title="Конкретная реализация интерфейса IFSM, использующая список переходов (поведение, подобное карте)....">CFSM</a></code>, такие как typedef-ы умных указателей и статический метод <code>create</code>. </p>
+<p>Конструирует Конечный Автомат. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_state</td><td>Начальное состояние КА. </td></tr>
+    <tr><td class="paramname">history_size</td><td>Максимальное количество переходов для хранения в истории. </td></tr>
+    <tr><td class="paramname">transitions</td><td>Список всех допустимых переходов для этого КА. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2657f9b3dbd714377e3548ec80edb0eb" name="a2657f9b3dbd714377e3548ec80edb0eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2657f9b3dbd714377e3548ec80edb0eb">&#9670;&#160;</a></span>~CFSM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEvent, typename TState&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">iridium::pattern::implementation::CFSM</a>&lt; TEvent, TState &gt;::~<a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">CFSM</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Виртуальный деструктор по умолчанию. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a0a84c2dc9eb9d5311c66d19383557aea" name="a0a84c2dc9eb9d5311c66d19383557aea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a84c2dc9eb9d5311c66d19383557aea">&#9670;&#160;</a></span>doAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEvent, typename TState&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TState <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">iridium::pattern::implementation::CFSM</a>&lt; TEvent, TState &gt;::doAction </td>
+          <td>(</td>
+          <td class="paramtype">TEvent const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обрабатывает событие, пытается найти соответствующий переход и обновляет состояние КА. Если найден допустимый переход (соответствующий текущему состоянию и событию), выполняется связанный обработчик (если есть), состояние обновляется, и переход записывается в историю. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Событие для обработки. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Новое состояние КА после обработки события. </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>если не найден переход для текущего состояния и данного события. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_f_s_m.html#a81a8891e1b2932618b392ef83872cf37">iridium::pattern::IFSM&lt; TEvent, TState &gt;</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_a0a84c2dc9eb9d5311c66d19383557aea_cgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_a0a84c2dc9eb9d5311c66d19383557aea_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_a0a84c2dc9eb9d5311c66d19383557aea_cgraph" id="aclassiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_a0a84c2dc9eb9d5311c66d19383557aea_cgraph">
+<area shape="rect" title="Обрабатывает событие, пытается найти соответствующий переход и обновляет состояние КА...." alt="" coords="5,5,209,46"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="257,5,384,46"/>
+<area shape="poly" title=" " alt="" coords="209,23,241,23,241,28,209,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aca548d6425ae3da1533a10cdbe1883e1" name="aca548d6425ae3da1533a10cdbe1883e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca548d6425ae3da1533a10cdbe1883e1">&#9670;&#160;</a></span>getHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TEvent, typename TState&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">CFSM</a>&lt; TEvent, TState &gt;<a class="el" href="#aba1195aacf96bf22af21c47b3019a33d">::TTransitions</a> <a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html">iridium::pattern::implementation::CFSM</a>&lt; TEvent, TState &gt;::getHistory </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получает историю переходов. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Список объектов <code><a class="el" href="structiridium_1_1pattern_1_1implementation_1_1_c_f_s_m_1_1_t_transition.html" title="Представляет одно правило перехода в Конечном Автомате.">TTransition</a></code>, представляющий записанную историю, размером до <code>history_size</code>. </dd></dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/pattern/implementation/<a class="el" href="fsm__map_8h_source.html">fsm_map.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/threading/thread.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_6ab154fa523b6af8f2233db6708e09f0.html">threading</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">thread.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="thread_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef HEADER_THREAD_EC50D1AB_7469_400A_90D9_4977B01B0A71</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define HEADER_THREAD_EC50D1AB_7469_400A_90D9_4977B01B0A71</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="initializable_8h.html">iridium/pattern/initializable.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="smart__ptr_8h.html">iridium/smart_ptr.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// No specific Doxygen for iridium namespace itself here, usually documented at a higher level.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1threading.html">threading</a> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classiridium_1_1threading_1_1_i_thread.html">   37</a></span><span class="keyword">class </span><a class="code hl_class" href="classiridium_1_1threading_1_1_i_thread.html">IThread</a>: </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1pattern_1_1_i_initializable.html">pattern::IInitializable</a></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_define" href="smart__ptr_8h.html#a1a04d783d36160af9cbb6c9496eae0c2">DEFINE_SMART_PTR</a>(<a class="code hl_class" href="classiridium_1_1threading_1_1_i_thread.html">IThread</a>)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classiridium_1_1threading_1_1_i_thread.html#ad8561dd4d5a9845366541fa9ad8de5a5">   47</a></span>    virtual ~<a class="code hl_class" href="classiridium_1_1threading_1_1_i_thread.html">IThread</a>() = default;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classiridium_1_1threading_1_1_i_thread.html#ab2b4c154a676e73a4b6ce5f6ebae1cda">   57</a></span>    virtual <span class="keywordtype">bool</span> operator &lt; (<a class="code hl_class" href="classiridium_1_1threading_1_1_i_thread.html">IThread</a> const &amp;thread) const = 0;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609">   65</a></span>    virtual std::<span class="keywordtype">string</span> <a class="code hl_function" href="classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609">getName</a>() const = 0;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    static std::<span class="keywordtype">string</span> const &amp;<a class="code hl_function" href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285">getNameStatic</a>();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>protected:</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    static <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d">setNameStatic</a>(std::<span class="keywordtype">string</span> const &amp;name);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>private:</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    static thread_local std::<span class="keywordtype">string</span> thread_name_static;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">//    static std::__thread_id const thread_main_id;</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">//    static std::__thread_id initMainThreadID();</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>};</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceiridium_1_1threading.html#a77efc83dba79715684b3890184b31992">sleep</a>(<span class="keywordtype">int</span> const &amp;milliseconds);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>std::<span class="keywordtype">string</span> <a class="code hl_function" href="namespaceiridium_1_1threading.html#aa7810b8b619a3d83f8b843b3e746eadd">getThreadID</a>();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>} <span class="comment">// threading</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_THREAD_EC50D1AB_7469_400A_90D9_4977B01B0A71</span></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_initializable_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></div><div class="ttdoc">Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....</div><div class="ttdef"><b>Определения</b> initializable.h:23</div></div>
+<div class="ttc" id="aclassiridium_1_1threading_1_1_i_thread_html"><div class="ttname"><a href="classiridium_1_1threading_1_1_i_thread.html">iridium::threading::IThread</a></div><div class="ttdoc">Интерфейс для объекта потока. Предоставляет базу для реализаций потоков, включая инициализацию,...</div><div class="ttdef"><b>Определения</b> thread.h:39</div></div>
+<div class="ttc" id="aclassiridium_1_1threading_1_1_i_thread_html_a065f967a26a86efde891ec209094560d"><div class="ttname"><a href="classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d">iridium::threading::IThread::setNameStatic</a></div><div class="ttdeci">static void setNameStatic(std::string const &amp;name)</div><div class="ttdoc">Устанавливает имя для текущего выполняющегося потока (статически, в локальном хранилище потока)....</div><div class="ttdef"><b>Определения</b> thread.cpp:58</div></div>
+<div class="ttc" id="aclassiridium_1_1threading_1_1_i_thread_html_ac77515331f681e6107fc2d4e42110609"><div class="ttname"><a href="classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609">iridium::threading::IThread::getName</a></div><div class="ttdeci">virtual std::string getName() const =0</div><div class="ttdoc">Получает имя этого конкретного экземпляра потока. Имя может быть присвоено во время создания или иниц...</div></div>
+<div class="ttc" id="aclassiridium_1_1threading_1_1_i_thread_html_aebf89ec3258e418ee6141cb9a5adb285"><div class="ttname"><a href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285">iridium::threading::IThread::getNameStatic</a></div><div class="ttdeci">static std::string const &amp; getNameStatic()</div><div class="ttdoc">Получает имя текущего выполняющегося потока (статически, из локального хранилища потока).</div><div class="ttdef"><b>Определения</b> thread.cpp:51</div></div>
+<div class="ttc" id="ainitializable_8h_html"><div class="ttname"><a href="initializable_8h.html">initializable.h</a></div></div>
+<div class="ttc" id="anamespaceiridium_1_1threading_html"><div class="ttname"><a href="namespaceiridium_1_1threading.html">iridium::threading</a></div><div class="ttdoc">Содержит классы и функции, связанные с многопоточностью и синхронизацией.</div><div class="ttdef"><b>Определения</b> async_queue.h:24</div></div>
+<div class="ttc" id="anamespaceiridium_1_1threading_html_a77efc83dba79715684b3890184b31992"><div class="ttname"><a href="namespaceiridium_1_1threading.html#a77efc83dba79715684b3890184b31992">iridium::threading::sleep</a></div><div class="ttdeci">void sleep(int const &amp;milliseconds)</div><div class="ttdoc">Приостанавливает выполнение текущего потока на указанную продолжительность.</div><div class="ttdef"><b>Определения</b> thread.cpp:41</div></div>
+<div class="ttc" id="anamespaceiridium_1_1threading_html_aa7810b8b619a3d83f8b843b3e746eadd"><div class="ttname"><a href="namespaceiridium_1_1threading.html#aa7810b8b619a3d83f8b843b3e746eadd">iridium::threading::getThreadID</a></div><div class="ttdeci">std::string getThreadID()</div><div class="ttdoc">Получает строковое представление уникального идентификатора текущего потока.</div><div class="ttdef"><b>Определения</b> thread.cpp:46</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных....</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="asmart__ptr_8h_html"><div class="ttname"><a href="smart__ptr_8h.html">smart_ptr.h</a></div><div class="ttdoc">Предоставляет вспомогательные макросы для определения стандартных typedef-ов умных указателей и стати...</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_a1a04d783d36160af9cbb6c9496eae0c2"><div class="ttname"><a href="smart__ptr_8h.html#a1a04d783d36160af9cbb6c9496eae0c2">DEFINE_SMART_PTR</a></div><div class="ttdeci">#define DEFINE_SMART_PTR(TClass)</div><div class="ttdoc">Определяет стандартные typedef-ы умных указателей для заданного класса TClass. Включает TSharedPtr,...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:26</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

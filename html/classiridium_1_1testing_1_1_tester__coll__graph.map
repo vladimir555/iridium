@@ -1,0 +1,9 @@
+<map id="iridium::testing::Tester" name="iridium::testing::Tester">
+<area shape="rect" id="Node000001" title="Класс&#45;одиночка, отвечающий за регистрацию, управление и запуск всех тестов в рамках фреймворка...." alt="" coords="135,168,286,193"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="126,79,295,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,135,213,167,208,167,208,135"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="5,5,200,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,38,185,76,182,81,129,42"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="224,5,413,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="292,42,239,81,236,76,288,38"/>
+</map>

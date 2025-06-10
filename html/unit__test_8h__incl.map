@@ -1,0 +1,25 @@
+<map id="source/iridium/testing/unit_test.h" name="source/iridium/testing/unit_test.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="98,5,243,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,256,59,282"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,48,49,244,44,241,157,45"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="82,256,160,282"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,47,149,95,134,174,126,241,121,241,129,173,144,93,160,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="306,102,374,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="210,44,304,92,302,97,208,49"/>
+<area shape="rect" id="Node000005" href="$convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="158,94,282,135"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="184,45,204,79,199,82,180,48"/>
+<area shape="rect" id="Node000006" href="$implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="186,183,353,208"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="234,134,256,168,251,171,230,136"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="230,211,74,258,73,253,228,206"/>
+<area shape="poly" id="edge12_Node000006_Node000003" title=" " alt="" coords="245,211,162,252,159,247,243,206"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="526,256,565,282"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="328,206,412,226,512,253,511,258,411,231,327,212"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="184,256,245,282"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="262,210,235,246,231,242,258,207"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="269,256,326,282"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="276,208,289,241,285,243,271,210"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="350,256,418,282"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="290,207,353,245,350,250,287,211"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="442,256,502,282"/>
+<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="305,206,428,250,426,255,303,211"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="iridium::threading::getThreadID" name="iridium::threading::getThreadID">
+<area shape="rect" id="Node000001" title="Получает строковое представление уникального идентификатора текущего потока." alt="" coords="5,5,126,46"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="174,13,238,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,23,158,23,158,28,126,28"/>
+</map>

@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::pattern::NonCopyable</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pro-methods">Защищенные члены</a> &#124;
+<a href="classiridium_1_1pattern_1_1_non_copyable-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::pattern::NonCopyable</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> (обычно приватного или защищенного), класс автоматически удаляет свой конструктор копирования и оператор присваивания копированием, тем самым предотвращая копирование или присваивание экземпляров этого класса.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="non__copyable_8h_source.html">non_copyable.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::pattern::NonCopyable:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_non_copyable__inherit__graph.png" border="0" usemap="#airidium_1_1pattern_1_1_non_copyable_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1pattern_1_1_non_copyable_inherit__map" id="airidium_1_1pattern_1_1_non_copyable_inherit__map">
+<area shape="rect" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="5,340,200,365"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="268,5,438,46"/>
+<area shape="poly" title=" " alt="" coords="107,323,123,268,150,196,190,122,216,87,246,57,266,43,269,48,249,61,220,91,195,124,155,198,128,269,112,325"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="268,71,438,111"/>
+<area shape="poly" title=" " alt="" coords="111,324,130,280,159,226,198,170,221,145,246,122,266,110,269,114,249,126,224,149,202,174,164,229,135,283,116,326"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="268,136,438,177"/>
+<area shape="poly" title=" " alt="" coords="118,325,170,257,206,220,246,187,270,175,272,180,249,192,209,224,174,260,122,328"/>
+<area shape="rect" href="classiridium_1_1db_1_1implementation_1_1_c_connector.html" title="Базовый класс для реализаций коннекторов баз данных. Этот класс предоставляет общую функциональность,..." alt="" coords="264,201,442,242"/>
+<area shape="poly" title=" " alt="" coords="131,327,183,290,246,253,276,240,278,245,249,257,186,294,134,332"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Конкретная реализация файлового потока, предоставляющая возможности чтения, записи и позиционирования..." alt="" coords="257,267,449,307"/>
+<area shape="poly" title=" " alt="" coords="168,333,271,305,273,311,170,338"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title="Предоставляет асинхронную обертку вокруг реализации ISink. Использует рабочий поток для обработки соб..." alt="" coords="251,332,455,373"/>
+<area shape="poly" title=" " alt="" coords="215,350,250,350,250,355,215,355"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title="Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал...." alt="" coords="251,397,455,438"/>
+<area shape="poly" title=" " alt="" coords="170,367,273,394,271,399,168,372"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title="Шаблон класса для реализации шаблона проектирования &quot;Одиночка&quot; (Singleton). Этот шаблон гарантирует,..." alt="" coords="268,463,438,503"/>
+<area shape="poly" title=" " alt="" coords="134,373,186,410,249,447,278,460,276,465,246,452,183,415,131,377"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании..." alt="" coords="269,527,437,583"/>
+<area shape="poly" title=" " alt="" coords="123,376,175,444,210,481,249,513,269,525,267,529,246,517,206,484,171,447,119,380"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,..." alt="" coords="248,607,458,663"/>
+<area shape="poly" title=" " alt="" coords="116,378,134,424,163,482,201,541,224,569,249,593,266,605,263,609,246,597,220,572,197,544,158,484,129,427,111,380"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title="Конкретная реализация интерфейса IThread. Управляет фактическим std::thread для выполнения задачи IRu..." alt="" coords="265,687,440,727"/>
+<area shape="poly" title=" " alt="" coords="111,380,125,441,150,520,169,561,191,602,218,640,249,673,266,685,263,689,246,677,214,643,187,605,164,564,145,522,119,442,106,381"/>
+<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html" title="Класс&#45;одиночка для управления и поиска MIME&#45;типов на основе расширений файлов. Он предварительно загр..." alt="" coords="507,5,697,46"/>
+<area shape="poly" title=" " alt="" coords="453,23,507,23,507,28,453,28"/>
+<area shape="rect" href="classiridium_1_1logging_1_1_logger.html" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton..." alt="" coords="524,78,680,104"/>
+<area shape="poly" title=" " alt="" coords="453,88,524,88,524,94,453,94"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_tester.html" title="Класс&#45;одиночка, отвечающий за регистрацию, управление и запуск всех тестов в рамках фреймворка...." alt="" coords="527,144,677,169"/>
+<area shape="poly" title=" " alt="" coords="453,154,527,154,527,159,453,159"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="Конкретная реализация файлового потока, специализированная для чтения. Этот класс наследуется от CFil..." alt="" coords="506,235,698,275"/>
+<area shape="poly" title=" " alt="" coords="464,270,505,265,506,270,465,275"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title="Конкретная реализация файлового потока, специализированная для записи. Этот класс наследуется от CFil..." alt="" coords="506,300,698,341"/>
+<area shape="poly" title=" " alt="" coords="465,299,506,305,505,310,464,305"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ae3c2afe37346ea92307157d57b73773e" id="r_ae3c2afe37346ea92307157d57b73773e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3c2afe37346ea92307157d57b73773e">~NonCopyable</a> ()=default</td></tr>
+<tr class="memdesc:ae3c2afe37346ea92307157d57b73773e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов через указатель на базовый класс, если <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> когда-либо использовался как полиморфная база, хотя его основное назначение - семантика предотвращения копирования.  <br /></td></tr>
+<tr class="separator:ae3c2afe37346ea92307157d57b73773e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Защищенные члены</h2></td></tr>
+<tr class="memitem:ad479debaa1ed429c9b6713e94dfde55b" id="r_ad479debaa1ed429c9b6713e94dfde55b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad479debaa1ed429c9b6713e94dfde55b">NonCopyable</a> ()=default</td></tr>
+<tr class="memdesc:ad479debaa1ed429c9b6713e94dfde55b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчанию, оставаясь при этом некопируемыми.  <br /></td></tr>
+<tr class="separator:ad479debaa1ed429c9b6713e94dfde55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74879a308ee2096241f553f69c8c5f3b" id="r_a74879a308ee2096241f553f69c8c5f3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74879a308ee2096241f553f69c8c5f3b">NonCopyable</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;)=delete</td></tr>
+<tr class="memdesc:a74879a308ee2096241f553f69c8c5f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных классов через конструктор копирования.  <br /></td></tr>
+<tr class="separator:a74879a308ee2096241f553f69c8c5f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c13b2ae7a0356e0360bb2b9e06b17a" id="r_a35c13b2ae7a0356e0360bb2b9e06b17a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35c13b2ae7a0356e0360bb2b9e06b17a">operator=</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;) const =delete</td></tr>
+<tr class="memdesc:a35c13b2ae7a0356e0360bb2b9e06b17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием экземпляров производных классов. Квалификатор <code>const</code> у самого оператора необычен и, вероятно, является опечаткой; стандартная практика: <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> &amp;operator=(<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> const &amp;) = delete;</code>.  <br /></td></tr>
+<tr class="separator:a35c13b2ae7a0356e0360bb2b9e06b17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> (обычно приватного или защищенного), класс автоматически удаляет свой конструктор копирования и оператор присваивания копированием, тем самым предотвращая копирование или присваивание экземпляров этого класса. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ae3c2afe37346ea92307157d57b73773e" name="ae3c2afe37346ea92307157d57b73773e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3c2afe37346ea92307157d57b73773e">&#9670;&#160;</a></span>~NonCopyable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual iridium::pattern::NonCopyable::~NonCopyable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов через указатель на базовый класс, если <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> когда-либо использовался как полиморфная база, хотя его основное назначение - семантика предотвращения копирования. </p>
+
+</div>
+</div>
+<a id="ad479debaa1ed429c9b6713e94dfde55b" name="ad479debaa1ed429c9b6713e94dfde55b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad479debaa1ed429c9b6713e94dfde55b">&#9670;&#160;</a></span>NonCopyable() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::pattern::NonCopyable::NonCopyable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчанию, оставаясь при этом некопируемыми. </p>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_non_copyable_ad479debaa1ed429c9b6713e94dfde55b_icgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_non_copyable_ad479debaa1ed429c9b6713e94dfde55b_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_non_copyable_ad479debaa1ed429c9b6713e94dfde55b_icgraph" id="aclassiridium_1_1pattern_1_1_non_copyable_ad479debaa1ed429c9b6713e94dfde55b_icgraph">
+<area shape="rect" title="Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчан..." alt="" coords="248,39,442,79"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html#a74879a308ee2096241f553f69c8c5f3b" title="Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных кл..." alt="" coords="5,5,200,46"/>
+<area shape="poly" title=" " alt="" coords="232,46,200,42,200,36,232,41"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html#a35c13b2ae7a0356e0360bb2b9e06b17a" title="Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием э..." alt="" coords="5,71,200,111"/>
+<area shape="poly" title=" " alt="" coords="232,77,200,81,200,76,232,71"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a74879a308ee2096241f553f69c8c5f3b" name="a74879a308ee2096241f553f69c8c5f3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74879a308ee2096241f553f69c8c5f3b">&#9670;&#160;</a></span>NonCopyable() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::pattern::NonCopyable::NonCopyable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных классов через конструктор копирования. </p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_non_copyable_a74879a308ee2096241f553f69c8c5f3b_cgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_non_copyable_a74879a308ee2096241f553f69c8c5f3b_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_non_copyable_a74879a308ee2096241f553f69c8c5f3b_cgraph" id="aclassiridium_1_1pattern_1_1_non_copyable_a74879a308ee2096241f553f69c8c5f3b_cgraph">
+<area shape="rect" title="Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных кл..." alt="" coords="5,5,200,46"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b" title="Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчан..." alt="" coords="248,5,442,46"/>
+<area shape="poly" title=" " alt="" coords="200,23,232,23,232,28,200,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a35c13b2ae7a0356e0360bb2b9e06b17a" name="a35c13b2ae7a0356e0360bb2b9e06b17a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c13b2ae7a0356e0360bb2b9e06b17a">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> &amp; iridium::pattern::NonCopyable::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием экземпляров производных классов. Квалификатор <code>const</code> у самого оператора необычен и, вероятно, является опечаткой; стандартная практика: <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> &amp;operator=(<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> const &amp;) = delete;</code>. </p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1_non_copyable_a35c13b2ae7a0356e0360bb2b9e06b17a_cgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1_non_copyable_a35c13b2ae7a0356e0360bb2b9e06b17a_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1_non_copyable_a35c13b2ae7a0356e0360bb2b9e06b17a_cgraph" id="aclassiridium_1_1pattern_1_1_non_copyable_a35c13b2ae7a0356e0360bb2b9e06b17a_cgraph">
+<area shape="rect" title="Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием э..." alt="" coords="5,5,200,46"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b" title="Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчан..." alt="" coords="248,5,442,46"/>
+<area shape="poly" title=" " alt="" coords="200,23,232,23,232,28,200,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/pattern/<a class="el" href="non__copyable_8h_source.html">non_copyable.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

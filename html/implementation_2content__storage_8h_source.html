@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/io/protocol/http/implementation/content_storage.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_db5936b4365bac870ea8c99be6a14c8d.html">protocol</a></li><li class="navelem"><a class="el" href="dir_f72d43b0f4cd77a79549de9d5188642d.html">http</a></li><li class="navelem"><a class="el" href="dir_1e33c1bf65d7a9fc38ad38ef2c5e5747.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">content_storage.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="implementation_2content__storage_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_CONTENT_STORAGE_C92EBD57_DA63_4A76_8A56_343A9E6FEFCB</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_CONTENT_STORAGE_C92EBD57_DA63_4A76_8A56_343A9E6FEFCB</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="content__storage_8h.html">iridium/io/protocol/http/content_storage.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1implementation.html">implementation</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html">   21</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2951bcd16e58923c93a659da83008f83">CContentStorage</a>: <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1io_1_1protocol_1_1http_1_1_i_content_storage.html">IContentStorage</a> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2951bcd16e58923c93a659da83008f83">CContentStorage</a>)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2951bcd16e58923c93a659da83008f83">CContentStorage</a>(std::string <span class="keyword">const</span> &amp;root_path);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    fs::IFileStreamReader::TSharedPtr <a class="code hl_function" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2552e7585477468dd29685558fe34267">getContent</a>(std::string <span class="keyword">const</span> &amp;path) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    std::string m_root_path;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>} <span class="comment">// implementation</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>} <span class="comment">// http</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <span class="comment">// protocol</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// io</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_CONTENT_STORAGE_C92EBD57_DA63_4A76_8A56_343A9E6FEFCB</span></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1protocol_1_1http_1_1_i_content_storage_html"><div class="ttname"><a href="classiridium_1_1io_1_1protocol_1_1http_1_1_i_content_storage.html">iridium::io::protocol::http::IContentStorage</a></div><div class="ttdoc">Интерфейс для системы хранения контента, используемый для получения HTTP-контента (например,...</div><div class="ttdef"><b>Определения</b> content_storage.h:23</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage_html_a2552e7585477468dd29685558fe34267"><div class="ttname"><a href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2552e7585477468dd29685558fe34267">iridium::io::protocol::http::implementation::CContentStorage::getContent</a></div><div class="ttdeci">fs::IFileStreamReader::TSharedPtr getContent(std::string const &amp;path) override</div><div class="ttdoc">Получает контент в виде читаемого файлового потока из настроенного корневого пути....</div><div class="ttdef"><b>Определения</b> content_storage.cpp:28</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage_html_a2951bcd16e58923c93a659da83008f83"><div class="ttname"><a href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2951bcd16e58923c93a659da83008f83">iridium::io::protocol::http::implementation::CContentStorage::CContentStorage</a></div><div class="ttdeci">CContentStorage(std::string const &amp;root_path)</div><div class="ttdoc">Конструирует экземпляр CContentStorage.</div><div class="ttdef"><b>Определения</b> content_storage.cpp:22</div></div>
+<div class="ttc" id="acontent__storage_8h_html"><div class="ttname"><a href="content__storage_8h.html">content_storage.h</a></div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1implementation.html">iridium::io::protocol::http::implementation</a></div><div class="ttdef"><b>Определения</b> content_storage.cpp:19</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_1_1http_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol_1_1http.html">iridium::io::protocol::http</a></div><div class="ttdef"><b>Определения</b> content_storage.h:18</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol.html">iridium::io::protocol</a></div><div class="ttdef"><b>Определения</b> content_storage.h:17</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с вводом-выводом.</div><div class="ttdef"><b>Определения</b> buffer.cpp:7</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных....</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_ad4d8992039d0faf9ae66c4f596277280"><div class="ttname"><a href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a></div><div class="ttdeci">#define DEFINE_IMPLEMENTATION(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения классов реализации. Объединяет DEFINE_CREATE(TClass) для объяв...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:110</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

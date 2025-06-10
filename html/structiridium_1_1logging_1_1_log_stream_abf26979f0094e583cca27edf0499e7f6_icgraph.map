@@ -1,0 +1,35 @@
+<map id="iridium::logging::LogStream::LogStream" name="iridium::logging::LogStream::LogStream">
+<area shape="rect" id="Node000001" title="Конструирует LogStream для определенного уровня логирования." alt="" coords="233,496,412,537"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1logging_1_1_log_stream.html#accc1dfdb816b6022a06b6b8fb10ec7ea" title="Добавляет строку в стиле C (char*) к сообщению журнала." alt="" coords="5,5,185,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="318,480,312,396,292,284,275,225,251,166,221,110,183,61,168,49,171,44,187,57,225,107,256,163,280,223,297,283,317,396,323,480"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1logging_1_1_log_stream.html#afed24420eccb158c2fcce923febf97dd" title="Добавляет строку в стиле C (const char*) к сообщению журнала." alt="" coords="5,71,185,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="316,481,306,408,284,313,266,263,244,214,217,167,183,126,167,114,170,110,187,122,221,164,249,211,271,261,289,312,311,407,321,480"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1logging_1_1_log_stream.html#a07908bc5adb4dac6367167eeece391b8" title="Добавляет содержимое std::array к сообщению журнала, отформатированное как &quot;[ item1,..." alt="" coords="5,136,185,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="313,481,300,420,275,342,258,302,237,262,212,225,183,192,166,179,170,175,186,188,216,221,242,259,263,299,280,340,305,418,318,480"/>
+<area shape="rect" id="Node000005" href="$structiridium_1_1logging_1_1_log_stream.html#a977593421571e7a837989a778d07edc9" title="Добавляет атомарное значение к сообщению журнала, преобразованное к его базовому типу,..." alt="" coords="5,201,185,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="309,482,292,432,266,372,230,310,208,282,183,257,165,245,168,240,186,253,212,279,234,307,271,369,297,430,314,480"/>
+<area shape="rect" id="Node000006" href="$structiridium_1_1logging_1_1_log_stream.html#adca64683be7d89de633c502e69c55822" title="Добавляет содержимое std::deque к сообщению журнала, отформатированное как &quot;[ item1,..." alt="" coords="5,267,185,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="303,483,283,446,256,403,222,360,183,322,163,310,166,306,186,318,226,356,260,400,288,443,308,481"/>
+<area shape="rect" id="Node000007" href="$structiridium_1_1logging_1_1_log_stream.html#a6581d29fe6e906795f6fa6ca664fd951" title="Добавляет содержимое std::list к сообщению журнала, отформатированное как &quot;[ item1,..." alt="" coords="5,332,185,373"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="292,486,244,436,215,410,183,388,160,376,162,371,186,383,218,406,248,432,296,482"/>
+<area shape="rect" id="Node000008" href="$structiridium_1_1logging_1_1_log_stream.html#a3267fc6504c46f0de36c679b96a41047" title=" " alt="" coords="5,397,185,438"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="265,491,184,453,153,441,155,436,186,449,267,486"/>
+<area shape="rect" id="Node000009" href="$structiridium_1_1logging_1_1_log_stream.html#a223bc0ff678e2c77fb5221a4a9465630" title="Добавляет содержимое std::map к сообщению журнала, отформатированное как &quot;[ ключ1: значение1,..." alt="" coords="5,463,185,503"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="217,504,185,499,186,494,218,498"/>
+<area shape="rect" id="Node000010" href="$structiridium_1_1logging_1_1_log_stream.html#a78acab43749c4d67e6359c9d082c3736" title="Добавляет содержимое std::set к сообщению журнала, отформатированное как &quot;[ item1,..." alt="" coords="5,528,185,569"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="218,534,186,538,185,533,217,528"/>
+<area shape="rect" id="Node000011" href="$structiridium_1_1logging_1_1_log_stream.html#af8db86f0e8edbad2379502a6d6f7eadd" title="Добавляет значение, на которое указывает shared_ptr, к сообщению журнала. Логирует &quot;nullptr&quot;,..." alt="" coords="5,593,185,634"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="266,546,186,583,155,595,153,590,184,578,264,541"/>
+<area shape="rect" id="Node000012" href="$structiridium_1_1logging_1_1_log_stream.html#aabb6476d630b2a62ad236212b4c12ce4" title=" " alt="" coords="5,659,185,699"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="296,550,248,600,186,648,162,660,160,656,183,643,244,596,292,547"/>
+<area shape="rect" id="Node000013" href="$structiridium_1_1logging_1_1_log_stream.html#a81d58d74603d1b4d33df6eaa8e3038ca" title="Добавляет содержимое std::unordered_map к сообщению журнала, отформатированное как &quot;[ ключ1: значение..." alt="" coords="5,724,185,765"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="308,552,288,589,260,632,226,675,186,713,166,726,163,721,183,709,222,672,256,629,283,586,303,549"/>
+<area shape="rect" id="Node000014" href="$structiridium_1_1logging_1_1_log_stream.html#a98b2f4c6422d6549016f5d6b4b0f96be" title="Добавляет содержимое std::unordered_set к сообщению журнала, отформатированное как &quot;[ item1,..." alt="" coords="5,789,185,830"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="314,552,297,602,271,663,234,724,212,753,186,778,168,791,165,787,183,774,208,749,230,721,266,660,292,600,309,551"/>
+<area shape="rect" id="Node000015" href="$structiridium_1_1logging_1_1_log_stream.html#a1f89f967d79d27feaee0c227cc13aae0" title="Добавляет содержимое std::vector к сообщению журнала, отформатированное как &quot;[ item1,..." alt="" coords="5,855,185,895"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="318,553,304,614,280,692,262,733,241,773,216,810,186,844,170,856,166,852,183,840,212,807,237,770,258,731,275,690,299,613,313,552"/>
+<area shape="rect" id="Node000016" href="$structiridium_1_1logging_1_1_log_stream.html#ae194fc0228faab62753197fd74029daa" title="Добавляет значение, на которое указывает указатель на указатель, к сообщению журнала...." alt="" coords="5,920,185,961"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="321,553,311,626,288,721,271,771,249,821,221,867,187,909,170,922,167,917,183,905,216,864,244,818,266,769,283,719,306,625,316,552"/>
+<area shape="rect" id="Node000017" href="$structiridium_1_1logging_1_1_log_stream.html#a79968757f8080ca364b6f26d9f48dc8e" title="Добавляет значение общего типа к сообщению журнала, преобразованное в строку. Это шаблонный оператор,..." alt="" coords="5,985,185,1026"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="323,553,317,637,297,749,279,809,256,868,225,924,187,974,171,987,168,983,183,970,221,921,251,866,274,807,292,748,311,636,318,552"/>
+</map>

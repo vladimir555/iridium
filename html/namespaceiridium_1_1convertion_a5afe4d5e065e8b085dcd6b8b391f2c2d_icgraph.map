@@ -1,0 +1,75 @@
+<map id="iridium::convertion::convert" name="iridium::convertion::convert">
+<area shape="rect" id="Node000001" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="493,623,620,663"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#adb00915216ee59183bed00c98e9fe9f3" title="Эта функция computes assertSize. Russian detailed description (if any)." alt="" coords="279,74,408,100"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="550,608,539,496,519,348,505,273,487,206,467,151,443,114,427,102,407,94,409,89,429,97,447,111,472,149,492,204,510,272,524,347,545,495,555,608"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a27065c46a3da323c165b2667a95dee93" title=" " alt="" coords="267,124,420,165"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="549,608,535,508,513,380,482,259,464,212,443,179,419,162,422,158,447,176,468,209,487,257,518,379,541,508,554,607"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a368121d025b8edc6cd9c9fa9b41baea7" title=" " alt="" coords="267,189,420,230"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="553,608,548,534,533,439,519,389,500,339,475,292,443,250,419,232,422,228,447,246,479,289,504,337,524,387,538,438,554,534,558,607"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a831c3b3bed429d5aa3acf087aef17b46" title=" " alt="" coords="18,5,181,46"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="552,607,547,540,530,456,516,412,498,369,473,329,443,294,418,277,393,269,368,268,343,270,317,272,291,271,265,262,240,244,222,221,214,197,213,174,214,151,214,106,207,83,192,61,177,49,180,45,196,57,212,81,219,105,219,152,218,174,220,196,227,218,244,240,268,258,292,266,317,267,343,265,368,263,394,264,421,272,447,290,478,326,502,366,521,410,535,454,552,540,558,607"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a7e8b7dc60e9085869e6d013856fa86b3" title=" " alt="" coords="262,304,425,345"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="549,608,539,553,520,486,489,417,468,386,443,358,424,345,427,341,447,354,472,383,494,415,525,484,544,552,554,607"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a96285e07f4342f950a7600384e2dc9be" title=" " alt="" coords="255,368,432,424"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="542,609,528,570,507,524,479,478,443,438,428,427,431,423,447,434,483,475,512,522,533,568,547,607"/>
+<area shape="rect" id="Node000008" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a1654d91fa56fed0ee6ce0a0f3d7ca914" title=" " alt="" coords="255,448,432,504"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="531,612,493,564,469,540,443,519,424,507,427,502,447,514,473,536,497,560,535,608"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1pattern_1_1implementation_1_1_c_f_s_m.html#a0a84c2dc9eb9d5311c66d19383557aea" title="Обрабатывает событие, пытается найти соответствующий переход и обновляет состояние КА...." alt="" coords="242,528,445,569"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="508,617,444,584,412,572,414,567,446,579,510,612"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1testing_1_1_unit_test.html#a63e487f944b7e9c72d2c0b5c9c021368" title=" " alt="" coords="262,593,425,634"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="478,635,425,628,426,622,478,630"/>
+<area shape="rect" id="Node000023" href="$namespaceiridium_1_1testing.html#a84272c02d8811ada69cf7d8dab840f93" title=" " alt="" coords="25,919,174,975"/>
+<area shape="poly" id="edge37_Node000001_Node000023" title=" " alt="" coords="478,649,411,655,342,664,282,679,259,688,243,698,224,723,216,747,215,772,217,798,220,825,220,853,213,880,196,909,176,926,173,921,192,905,208,878,215,852,215,825,212,799,209,773,211,746,220,720,240,694,257,683,280,674,341,659,410,650,477,644"/>
+<area shape="rect" id="Node000025" href="$classiridium_1_1io_1_1fs_1_1_file_value.html#a92caacb4448f71076c46a8d26f01fe7e" title="Конструирует объект FileValue, загружая его начальное значение из файла. Пытается прочитать содержимо..." alt="" coords="265,708,422,749"/>
+<area shape="poly" id="edge25_Node000001_Node000025" title=" " alt="" coords="494,672,446,692,401,710,399,705,444,687,492,667"/>
+<area shape="rect" id="Node000027" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a582b2b6b1bba052ca52d6046a44e40bf" title="Получает значение узла, преобразуя его к типу TValue. Примечание: todo в исходном коде предполагает в..." alt="" coords="250,773,436,814"/>
+<area shape="poly" id="edge27_Node000001_Node000027" title=" " alt="" coords="534,678,496,721,446,763,422,775,420,770,444,758,492,718,530,674"/>
+<area shape="rect" id="Node000030" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#ae802275b9aa57bcde8f409e0165a6312" title="Конструктор для атрибута NodeView со значением по умолчанию, связанного с родительским узлом." alt="" coords="250,839,436,879"/>
+<area shape="poly" id="edge30_Node000001_Node000030" title=" " alt="" coords="545,679,530,714,508,754,481,794,447,828,427,840,424,836,443,824,477,790,504,751,525,712,540,677"/>
+<area shape="rect" id="Node000031" href="$structiridium_1_1logging_1_1_log_stream.html#a977593421571e7a837989a778d07edc9" title=" " alt="" coords="254,904,433,945"/>
+<area shape="poly" id="edge31_Node000001_Node000031" title=" " alt="" coords="551,680,539,727,519,785,489,843,469,869,447,893,429,906,426,901,443,889,465,866,484,840,514,782,534,726,546,678"/>
+<area shape="rect" id="Node000032" href="$structiridium_1_1logging_1_1_log_stream.html#af8db86f0e8edbad2379502a6d6f7eadd" title=" " alt="" coords="254,969,433,1010"/>
+<area shape="poly" id="edge32_Node000001_Node000032" title=" " alt="" coords="555,679,547,739,528,814,514,853,496,891,474,927,447,958,430,971,427,967,443,954,470,923,492,888,509,851,523,812,542,738,550,679"/>
+<area shape="rect" id="Node000033" href="$structiridium_1_1logging_1_1_log_stream.html#ae194fc0228faab62753197fd74029daa" title=" " alt="" coords="254,1035,433,1075"/>
+<area shape="poly" id="edge33_Node000001_Node000033" title=" " alt="" coords="558,679,553,751,537,842,523,891,504,939,479,984,447,1024,431,1036,428,1032,443,1020,474,981,499,937,518,889,532,841,548,750,553,679"/>
+<area shape="rect" id="Node000034" href="$structiridium_1_1logging_1_1_log_stream.html#a79968757f8080ca364b6f26d9f48dc8e" title=" " alt="" coords="254,1100,433,1141"/>
+<area shape="poly" id="edge34_Node000001_Node000034" title=" " alt="" coords="554,679,540,774,517,896,486,1012,467,1057,447,1089,431,1102,428,1097,443,1085,463,1055,481,1010,512,895,534,773,548,678"/>
+<area shape="rect" id="Node000035" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#af444adc796116de2727601b3e5294fe2" title="Устанавливает значение узла, преобразуя из TValue в строку для хранения." alt="" coords="250,1180,436,1221"/>
+<area shape="poly" id="edge35_Node000001_Node000035" title=" " alt="" coords="554,679,541,786,519,927,488,1062,468,1116,447,1154,431,1170,412,1182,409,1177,427,1166,443,1151,464,1114,482,1061,514,926,536,786,549,679"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="249,297,240,287,221,258,213,228,212,200,215,172,218,144,218,117,210,89,192,61,178,49,181,45,196,57,215,87,223,116,224,144,221,172,218,200,218,228,226,256,244,284,253,293"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1testing_1_1_unit_test.html#aa3a8e80406d26e00f0e1e27d310f1cad" title=" " alt="" coords="18,71,181,111"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="247,590,240,582,219,552,206,523,198,493,195,465,201,408,214,352,228,297,234,241,231,213,224,184,211,155,192,126,178,114,182,110,196,123,216,153,229,183,237,212,239,241,233,298,220,354,206,409,201,465,203,493,211,521,224,549,244,579,251,586"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1testing_1_1_unit_test.html#a66f215a2707abef925322dd95014eb4d" title=" " alt="" coords="18,136,181,177"/>
+<area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="247,590,240,582,222,556,210,531,203,506,200,481,204,433,214,385,225,337,229,289,227,265,220,241,209,216,192,191,178,179,182,175,196,188,213,214,225,239,232,264,234,289,230,338,220,386,209,434,205,481,208,505,215,529,226,554,244,579,251,586"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1testing_1_1_unit_test.html#a7d0ed95d87270f537db1fe8a3b05d413" title=" " alt="" coords="18,201,181,242"/>
+<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="247,589,240,582,224,561,214,540,205,498,207,458,215,418,222,378,224,338,216,298,206,277,192,257,178,245,182,241,196,253,211,275,221,296,230,338,227,378,220,419,212,458,210,498,219,538,229,558,244,579,251,586"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1testing_1_1_unit_test.html#a309245439f38d46ba94959d3ec251707" title=" " alt="" coords="18,267,181,307"/>
+<area shape="poly" id="edge14_Node000010_Node000014" title=" " alt="" coords="247,589,240,582,218,548,210,515,210,483,215,450,219,418,220,387,212,355,192,322,178,310,181,306,196,319,217,353,225,386,225,419,220,451,215,483,215,515,223,546,244,579,251,586"/>
+<area shape="rect" id="Node000015" href="$classiridium_1_1testing_1_1_unit_test.html#abc619e4f60ee6e4f6ebea053b9143e07" title=" " alt="" coords="18,332,181,373"/>
+<area shape="poly" id="edge15_Node000010_Node000015" title=" " alt="" coords="247,589,240,582,222,557,214,532,213,507,215,483,216,459,215,435,208,411,192,387,177,375,180,371,196,384,213,409,220,434,222,459,220,483,218,507,220,531,227,555,244,579,251,585"/>
+<area shape="rect" id="Node000016" href="$classiridium_1_1testing_1_1_unit_test.html#af5e7143fdaf34561c9361efddcde049b" title=" " alt="" coords="18,397,181,438"/>
+<area shape="poly" id="edge16_Node000010_Node000016" title=" " alt="" coords="247,588,240,582,226,566,219,549,215,516,211,484,204,469,192,453,176,441,179,436,196,449,209,466,216,483,220,516,224,548,231,563,244,578,250,584"/>
+<area shape="rect" id="Node000017" href="$classiridium_1_1testing_1_1_unit_test.html#a4739b8fdd5b249460e13ac45931cea5c" title=" " alt="" coords="18,463,181,503"/>
+<area shape="poly" id="edge17_Node000010_Node000017" title=" " alt="" coords="249,588,240,582,224,566,215,550,207,534,192,518,171,506,174,502,195,514,211,531,220,547,228,563,243,578,252,584"/>
+<area shape="rect" id="Node000018" href="$classiridium_1_1testing_1_1_unit_test.html#a2c37c76646874d3a88d2400daf198283" title=" " alt="" coords="18,528,181,569"/>
+<area shape="poly" id="edge18_Node000010_Node000018" title=" " alt="" coords="250,591,178,572,179,567,251,586"/>
+<area shape="rect" id="Node000019" href="$classiridium_1_1testing_1_1_unit_test.html#aaf32d7ce9d6e95ec13b5cc609484bf73" title=" " alt="" coords="18,593,181,634"/>
+<area shape="poly" id="edge19_Node000010_Node000019" title=" " alt="" coords="246,616,182,616,182,611,246,611"/>
+<area shape="rect" id="Node000020" href="$classiridium_1_1testing_1_1_unit_test.html#a68d9237c9e11ce6faa1157fbdf4a5ab4" title=" " alt="" coords="18,659,181,699"/>
+<area shape="poly" id="edge20_Node000010_Node000020" title=" " alt="" coords="251,641,179,661,178,655,250,636"/>
+<area shape="rect" id="Node000021" href="$classiridium_1_1testing_1_1_unit_test.html#a336e3326a935b176773eba24a8acb8bb" title=" " alt="" coords="18,724,181,765"/>
+<area shape="poly" id="edge21_Node000010_Node000021" title=" " alt="" coords="262,643,243,654,229,669,220,683,211,698,195,713,173,726,170,721,192,709,207,695,215,680,224,665,240,650,259,639"/>
+<area shape="rect" id="Node000022" href="$classiridium_1_1testing_1_1_unit_test.html#aa902f8d206dd0f04f8f3f0e42bcc4011" title=" " alt="" coords="18,789,181,830"/>
+<area shape="poly" id="edge22_Node000010_Node000022" title=" " alt="" coords="255,644,244,654,232,669,225,684,220,715,216,746,208,762,196,778,179,791,176,787,192,774,204,759,211,745,215,714,220,683,227,667,240,650,252,640"/>
+<area shape="poly" id="edge23_Node000010_Node000023" title=" " alt="" coords="253,645,244,654,224,686,216,717,216,748,220,779,224,810,224,842,216,875,196,909,176,926,173,922,192,905,211,873,219,841,218,810,214,779,210,748,211,716,219,684,240,651,249,641"/>
+<area shape="rect" id="Node000024" href="$namespaceiridium_1_1testing.html#a32786ff1c004da0674e4ab336fe8c450" title=" " alt="" coords="34,855,165,895"/>
+<area shape="poly" id="edge24_Node000010_Node000024" title=" " alt="" coords="253,645,244,654,228,678,221,701,221,747,220,795,213,819,196,844,167,863,164,859,192,840,208,817,215,794,215,747,215,700,223,675,240,651,250,641"/>
+<area shape="rect" id="Node000026" href="$classiridium_1_1io_1_1fs_1_1_file_value.html#adf3daca3e86d4813cbe13b5e76a0027d" title="Неявно преобразует объект FileValue к его базовому типу TValue. Позволяет читать текущее значение Fil..." alt="" coords="21,999,178,1039"/>
+<area shape="poly" id="edge26_Node000025_Node000026" title=" " alt="" coords="253,755,244,763,225,791,218,819,217,846,220,874,223,902,223,931,215,960,196,989,181,1002,177,997,192,985,210,957,218,930,218,902,215,874,212,846,212,818,220,789,240,760,250,751"/>
+<area shape="rect" id="Node000028" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a2e09ecf3411abf3e76eb80c310ec84fc" title="Оператор преобразования для получения значения узла. Эквивалентен вызову get()." alt="" coords="5,1064,194,1105"/>
+<area shape="poly" id="edge28_Node000027_Node000028" title=" " alt="" coords="247,826,244,829,225,856,218,884,217,911,220,938,223,966,223,995,215,1024,196,1053,181,1065,178,1061,192,1049,210,1021,217,994,218,967,215,939,212,911,212,883,220,854,240,825,243,822"/>
+<area shape="rect" id="Node000029" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#ac482a6d34171304051b840a870ff0e9e" title="Оператор сравнения на равенство. Сравнивает значение узла с заданным значением." alt="" coords="6,1129,193,1170"/>
+<area shape="poly" id="edge29_Node000027_Node000029" title=" " alt="" coords="246,826,244,829,221,865,213,900,214,935,220,971,226,1007,227,1043,219,1080,196,1118,181,1131,178,1127,192,1115,214,1078,222,1043,221,1007,215,972,209,936,208,900,216,863,240,825,243,822"/>
+<area shape="rect" id="Node000036" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title="Оператор присваивания для установки значения узла. Эквивалентен вызову set()." alt="" coords="6,1195,193,1235"/>
+<area shape="poly" id="edge36_Node000035_Node000036" title=" " alt="" coords="235,1210,193,1212,193,1207,235,1204"/>
+</map>

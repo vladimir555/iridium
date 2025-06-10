@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::IPipeManager</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1_i_pipe_manager.html">IPipeManager</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1_i_pipe_manager-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::IPipeManager<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс для управления именованными каналами. Предоставляет методы для создания, удаления и обновления именованных каналов путем связывания их с интерфейсами чтения и/или записи потоков. Это предполагает механизм межпроцессного или внутрипроцессного взаимодействия с использованием абстракций именованных каналов.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="context_8h_source.html">context.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::IPipeManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_pipe_manager_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1_i_pipe_manager_inherit__map" id="airidium_1_1io_1_1_i_pipe_manager_inherit__map">
+<area shape="rect" title="Интерфейс для управления именованными каналами. Предоставляет методы для создания,..." alt="" coords="9,5,175,31"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context.html" title="Конкретная реализация IContext и IPipeManager. Этот класс управляет состоянием и событиями для контек..." alt="" coords="5,79,179,120"/>
+<area shape="poly" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:acb974fb7adf77c72f677b3f28de6dfa9" id="r_acb974fb7adf77c72f677b3f28de6dfa9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb974fb7adf77c72f677b3f28de6dfa9">createPipe</a> (std::string const &amp;name)=0</td></tr>
+<tr class="memdesc:acb974fb7adf77c72f677b3f28de6dfa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).  <br /></td></tr>
+<tr class="separator:acb974fb7adf77c72f677b3f28de6dfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ec90ca08a78dd1f41b45a797e30205" id="r_a45ec90ca08a78dd1f41b45a797e30205"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45ec90ca08a78dd1f41b45a797e30205">removePipe</a> (std::string const &amp;name)=0</td></tr>
+<tr class="memdesc:a45ec90ca08a78dd1f41b45a797e30205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаляет существующий именованный канал.  <br /></td></tr>
+<tr class="separator:a45ec90ca08a78dd1f41b45a797e30205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11ef22599181bdc45abc908d6afeaa75" id="r_a11ef22599181bdc45abc908d6afeaa75"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11ef22599181bdc45abc908d6afeaa75">updatePipe</a> (std::string const &amp;name, IStreamReader::TSharedPtr const &amp;reader)=0</td></tr>
+<tr class="memdesc:a11ef22599181bdc45abc908d6afeaa75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоставленный интерфейс <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>.  <br /></td></tr>
+<tr class="separator:a11ef22599181bdc45abc908d6afeaa75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05aa53fe2ea41ddbc6b0b3e3fb3fe35" id="r_af05aa53fe2ea41ddbc6b0b3e3fb3fe35"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af05aa53fe2ea41ddbc6b0b3e3fb3fe35">updatePipe</a> (std::string const &amp;name, IStreamWriter::TSharedPtr const &amp;writer)=0</td></tr>
+<tr class="memdesc:af05aa53fe2ea41ddbc6b0b3e3fb3fe35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Связывает писателя потока с именованным каналом. Это позволяет записывать данные в канал через предоставленный интерфейс <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>.  <br /></td></tr>
+<tr class="separator:af05aa53fe2ea41ddbc6b0b3e3fb3fe35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd49619dc6316bd10ff4f2e10fc5664a" id="r_abd49619dc6316bd10ff4f2e10fc5664a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd49619dc6316bd10ff4f2e10fc5664a">updatePipe</a> (std::string const &amp;name, IStreamReader::TSharedPtr const &amp;reader, IStreamWriter::TSharedPtr const &amp;writer)=0</td></tr>
+<tr class="memdesc:abd49619dc6316bd10ff4f2e10fc5664a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Связывает как читателя, так и писателя потока с именованным каналом. Это позволяет осуществлять двунаправленную связь через канал с использованием предоставленных интерфейсов.  <br /></td></tr>
+<tr class="separator:abd49619dc6316bd10ff4f2e10fc5664a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс для управления именованными каналами. Предоставляет методы для создания, удаления и обновления именованных каналов путем связывания их с интерфейсами чтения и/или записи потоков. Это предполагает механизм межпроцессного или внутрипроцессного взаимодействия с использованием абстракций именованных каналов. </p>
+</div><h2 class="groupheader">Методы</h2>
+<a id="acb974fb7adf77c72f677b3f28de6dfa9" name="acb974fb7adf77c72f677b3f28de6dfa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb974fb7adf77c72f677b3f28de6dfa9">&#9670;&#160;</a></span>createPipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IPipeManager::createPipe </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора). </p>
+<p>Создает именованный канал с указанным именем. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Уникальное имя для идентификации канала. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или аналогичное, если создание канала не удалось (например, конфликт имен, системная ошибка). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a8e99ebab00a290a2865acc707d0523dd">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_cgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_cgraph">
+<area shape="rect" title="Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора)." alt="" coords="5,29,171,70"/>
+<area shape="poly" title=" " alt="" coords="56,29,55,19,60,11,71,5,88,3,106,5,117,11,114,16,105,10,88,8,73,10,63,14,60,20,61,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_icgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_acb974fb7adf77c72f677b3f28de6dfa9_icgraph">
+<area shape="rect" title="Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора)." alt="" coords="5,29,171,70"/>
+<area shape="poly" title=" " alt="" coords="114,16,105,10,88,8,73,10,63,14,60,20,61,28,56,29,55,19,60,11,71,5,88,3,106,5,117,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a45ec90ca08a78dd1f41b45a797e30205" name="a45ec90ca08a78dd1f41b45a797e30205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ec90ca08a78dd1f41b45a797e30205">&#9670;&#160;</a></span>removePipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IPipeManager::removePipe </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Удаляет существующий именованный канал. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя удаляемого канала. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или аналогичное, если удаление не удалось (например, канал не найден, проблемы с разрешениями). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a3b110bb719f76b6f0d94331c0fcb28fd">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_cgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_cgraph">
+<area shape="rect" title="Удаляет существующий именованный канал." alt="" coords="5,29,171,70"/>
+<area shape="poly" title=" " alt="" coords="56,29,55,19,60,11,71,5,88,3,106,5,117,11,114,16,105,10,88,8,73,10,63,14,60,20,61,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_icgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_a45ec90ca08a78dd1f41b45a797e30205_icgraph">
+<area shape="rect" title="Удаляет существующий именованный канал." alt="" coords="5,29,171,70"/>
+<area shape="poly" title=" " alt="" coords="114,16,105,10,88,8,73,10,63,14,60,20,61,28,56,29,55,19,60,11,71,5,88,3,106,5,117,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a11ef22599181bdc45abc908d6afeaa75" name="a11ef22599181bdc45abc908d6afeaa75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11ef22599181bdc45abc908d6afeaa75">&#9670;&#160;</a></span>updatePipe() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IPipeManager::updatePipe </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IStreamReader::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоставленный интерфейс <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя обновляемого канала. </td></tr>
+    <tr><td class="paramname">reader</td><td>Умный указатель на реализацию <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или аналогичное, если обновление не удалось (например, канал не найден). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#ac3f56463d0ec731dbd0d1b6d992958f2">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_cgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_cgraph">
+<area shape="rect" title="Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоста..." alt="" coords="5,29,171,70"/>
+<area shape="poly" title=" " alt="" coords="56,29,55,19,60,11,71,5,88,3,106,5,117,11,114,16,105,10,88,8,73,10,63,14,60,20,61,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_icgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_a11ef22599181bdc45abc908d6afeaa75_icgraph">
+<area shape="rect" title="Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоста..." alt="" coords="219,39,384,79"/>
+<area shape="poly" title=" " alt="" coords="336,25,323,20,301,17,281,19,269,24,264,30,266,37,261,39,259,29,266,20,280,14,301,12,324,14,338,21"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_manager.html#abd49619dc6316bd10ff4f2e10fc5664a" title="Связывает как читателя, так и писателя потока с именованным каналом. Это позволяет осуществлять двуна..." alt="" coords="5,5,171,46"/>
+<area shape="poly" title=" " alt="" coords="203,46,171,41,172,36,204,41"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_manager.html#af05aa53fe2ea41ddbc6b0b3e3fb3fe35" title="Связывает писателя потока с именованным каналом. Это позволяет записывать данные в канал через предос..." alt="" coords="5,71,171,111"/>
+<area shape="poly" title=" " alt="" coords="204,76,172,81,171,76,203,71"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abd49619dc6316bd10ff4f2e10fc5664a" name="abd49619dc6316bd10ff4f2e10fc5664a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd49619dc6316bd10ff4f2e10fc5664a">&#9670;&#160;</a></span>updatePipe() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IPipeManager::updatePipe </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IStreamReader::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IStreamWriter::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>writer</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Связывает как читателя, так и писателя потока с именованным каналом. Это позволяет осуществлять двунаправленную связь через канал с использованием предоставленных интерфейсов. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя обновляемого канала. </td></tr>
+    <tr><td class="paramname">reader</td><td>Умный указатель на реализацию <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>. </td></tr>
+    <tr><td class="paramname">writer</td><td>Умный указатель на реализацию <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или аналогичное, если обновление не удалось (например, канал не найден). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a6d9e2484ea9f83e9edf0bc22f46a5d35">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_abd49619dc6316bd10ff4f2e10fc5664a_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_abd49619dc6316bd10ff4f2e10fc5664a_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_abd49619dc6316bd10ff4f2e10fc5664a_cgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_abd49619dc6316bd10ff4f2e10fc5664a_cgraph">
+<area shape="rect" title="Связывает как читателя, так и писателя потока с именованным каналом. Это позволяет осуществлять двуна..." alt="" coords="5,29,171,70"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_manager.html#a11ef22599181bdc45abc908d6afeaa75" title="Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоста..." alt="" coords="219,29,384,70"/>
+<area shape="poly" title=" " alt="" coords="171,47,203,47,203,52,171,52"/>
+<area shape="poly" title=" " alt="" coords="261,29,259,19,266,10,280,5,301,3,324,5,338,11,336,16,323,10,301,8,281,10,269,15,264,20,266,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af05aa53fe2ea41ddbc6b0b3e3fb3fe35" name="af05aa53fe2ea41ddbc6b0b3e3fb3fe35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05aa53fe2ea41ddbc6b0b3e3fb3fe35">&#9670;&#160;</a></span>updatePipe() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IPipeManager::updatePipe </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IStreamWriter::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>writer</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Связывает писателя потока с именованным каналом. Это позволяет записывать данные в канал через предоставленный интерфейс <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя обновляемого канала. </td></tr>
+    <tr><td class="paramname">writer</td><td>Умный указатель на реализацию <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или аналогичное, если обновление не удалось (например, канал не найден). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a7dc96224c1742946d2220e1579c4bd43">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_pipe_manager_af05aa53fe2ea41ddbc6b0b3e3fb3fe35_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_pipe_manager_af05aa53fe2ea41ddbc6b0b3e3fb3fe35_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_pipe_manager_af05aa53fe2ea41ddbc6b0b3e3fb3fe35_cgraph" id="aclassiridium_1_1io_1_1_i_pipe_manager_af05aa53fe2ea41ddbc6b0b3e3fb3fe35_cgraph">
+<area shape="rect" title="Связывает писателя потока с именованным каналом. Это позволяет записывать данные в канал через предос..." alt="" coords="5,29,171,70"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_manager.html#a11ef22599181bdc45abc908d6afeaa75" title="Связывает читателя потока с именованным каналом. Это позволяет читать данные из канала через предоста..." alt="" coords="219,29,384,70"/>
+<area shape="poly" title=" " alt="" coords="171,47,203,47,203,52,171,52"/>
+<area shape="poly" title=" " alt="" coords="261,29,259,19,266,10,280,5,301,3,324,5,338,11,336,16,323,10,301,8,281,10,269,15,264,20,266,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/io/<a class="el" href="context_8h_source.html">context.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

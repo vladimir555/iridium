@@ -1,0 +1,70 @@
+<map id="source/iridium/threading/async_queue.h" name="source/iridium/threading/async_queue.h">
+<area shape="rect" id="Node000001" title="Определяет интерфейсы для асинхронных очередей, включая функциональность добавления,..." alt="" coords="966,5,1126,46"/>
+<area shape="rect" id="Node000002" href="$implementation_2context_8h.html" title=" " alt="" coords="458,102,666,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="952,48,664,104,663,98,951,43"/>
+<area shape="rect" id="Node000005" href="$test__runner__fork_8h.html" title=" " alt="" coords="98,94,280,150"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="951,40,280,113,280,108,950,35"/>
+<area shape="rect" id="Node000008" href="$implementation_2async__queue_8h.html" title="Определяет класс CAsyncQueue&lt;TItem&gt;, реализацию интерфейса IAsyncQueue&lt;TItem&gt;. Этот класс предоставля..." alt="" coords="943,102,1149,142"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1049,62,1049,101,1043,101,1043,62"/>
+<area shape="rect" id="Node000018" href="$worker__handler_8h.html" title=" " alt="" coords="1314,198,1474,253"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="1095,52,1348,195,1345,199,1093,57"/>
+<area shape="rect" id="Node000019" href="$worker_8h.html" title=" " alt="" coords="1432,102,1591,142"/>
+<area shape="poly" id="edge25_Node000001_Node000019" title=" " alt="" coords="1141,43,1432,102,1431,107,1140,49"/>
+<area shape="rect" id="Node000003" href="$context_8cpp.html" title=" " alt="" coords="458,205,666,246"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="565,158,565,205,559,205,559,158"/>
+<area shape="rect" id="Node000004" href="$context__manager_8cpp.html" title=" " alt="" coords="226,205,434,246"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="505,151,376,207,374,202,503,146"/>
+<area shape="rect" id="Node000006" href="$test__runner__fork_8cpp.html" title=" " alt="" coords="408,301,590,357"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="189,165,195,211,203,233,216,251,246,271,294,287,408,312,407,317,293,292,244,275,212,255,198,235,189,212,183,166"/>
+<area shape="rect" id="Node000007" href="$tester_8cpp.html" title=" " alt="" coords="5,205,151,246"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="150,162,101,207,98,203,146,158"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="935,148,685,200,653,207,652,202,684,195,934,143"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="928,136,828,159,777,177,730,200,714,213,705,226,695,241,680,255,634,282,586,303,584,298,631,278,676,251,691,237,701,223,710,209,727,195,775,172,827,154,927,131"/>
+<area shape="rect" id="Node000009" href="$implementation_2thread_8cpp.html" title=" " alt="" coords="897,309,1075,350"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="1031,157,1014,199,999,258,991,309,986,308,994,257,1009,197,1026,155"/>
+<area shape="rect" id="Node000010" href="$implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="1024,205,1188,246"/>
+<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="1067,154,1097,203,1092,206,1063,157"/>
+<area shape="rect" id="Node000012" href="$implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="1311,309,1477,350"/>
+<area shape="poly" id="edge21_Node000008_Node000012" title=" " alt="" coords="1135,145,1191,167,1246,195,1264,209,1277,222,1304,251,1370,306,1367,310,1300,255,1273,226,1261,213,1243,200,1189,172,1133,150"/>
+<area shape="rect" id="Node000016" href="$worker__pool_8h.html" title=" " alt="" coords="1295,405,1493,446"/>
+<area shape="poly" id="edge22_Node000008_Node000016" title=" " alt="" coords="1121,146,1163,167,1202,196,1222,216,1236,236,1254,274,1271,313,1283,333,1301,355,1331,381,1361,402,1358,407,1327,385,1297,359,1279,337,1266,316,1249,277,1232,239,1218,220,1199,200,1160,172,1119,151"/>
+<area shape="poly" id="edge13_Node000010_Node000009" title=" " alt="" coords="1073,258,1011,310,1007,306,1070,254"/>
+<area shape="rect" id="Node000011" href="$session__manager_8cpp.html" title=" " alt="" coords="948,501,1157,542"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="1104,262,1090,357,1060,502,1054,500,1085,357,1099,261"/>
+<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="1177,249,1339,306,1337,311,1175,254"/>
+<area shape="rect" id="Node000013" href="$implementation_2sink_8cpp.html" title=" " alt="" coords="1732,405,1898,446"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="1493,350,1732,403,1731,408,1492,355"/>
+<area shape="rect" id="Node000014" href="$sink__file_8cpp.html" title=" " alt="" coords="1518,405,1708,446"/>
+<area shape="poly" id="edge16_Node000012_Node000014" title=" " alt="" coords="1455,354,1568,402,1566,407,1452,358"/>
+<area shape="rect" id="Node000015" href="$worker_8cpp.html" title=" " alt="" coords="1090,405,1271,446"/>
+<area shape="poly" id="edge17_Node000012_Node000015" title=" " alt="" coords="1337,359,1226,407,1224,402,1334,354"/>
+<area shape="poly" id="edge18_Node000012_Node000016" title=" " alt="" coords="1397,365,1397,405,1391,405,1391,365"/>
+<area shape="poly" id="edge19_Node000016_Node000011" title=" " alt="" coords="1308,453,1125,503,1123,498,1307,448"/>
+<area shape="rect" id="Node000017" href="$worker__pool_8cpp.html" title=" " alt="" coords="1314,494,1474,549"/>
+<area shape="poly" id="edge20_Node000016_Node000017" title=" " alt="" coords="1397,461,1397,493,1391,493,1391,461"/>
+<area shape="poly" id="edge24_Node000018_Node000012" title=" " alt="" coords="1397,269,1397,309,1391,309,1391,269"/>
+<area shape="poly" id="edge40_Node000019_Node000012" title=" " alt="" coords="1514,158,1507,206,1500,231,1488,255,1461,287,1430,311,1427,306,1458,283,1484,252,1495,229,1502,205,1508,158"/>
+<area shape="poly" id="edge42_Node000019_Node000016" title=" " alt="" coords="1520,157,1524,201,1524,253,1514,308,1504,334,1491,359,1465,386,1435,407,1432,402,1462,382,1487,355,1500,332,1509,307,1518,253,1519,201,1515,158"/>
+<area shape="poly" id="edge41_Node000019_Node000018" title=" " alt="" coords="1479,154,1427,199,1424,195,1476,150"/>
+<area shape="rect" id="Node000020" href="$implementation_2session__manager_8h.html" title=" " alt="" coords="740,205,949,246"/>
+<area shape="poly" id="edge26_Node000019_Node000020" title=" " alt="" coords="1417,140,1012,200,950,210,949,205,1011,195,1416,134"/>
+<area shape="rect" id="Node000022" href="$implementation_2sink_8h.html" title="Определяет класс CSinkAsync, асинхронную обертку для реализаций ISink. Использует рабочий поток для о..." alt="" coords="1739,205,1892,246"/>
+<area shape="poly" id="edge30_Node000019_Node000022" title=" " alt="" coords="1586,145,1757,202,1756,207,1584,150"/>
+<area shape="rect" id="Node000026" href="$sink__file_8h.html" title="Определяет класс CSinkFile, конкретную реализацию ISink для логирования в файлы, включая поддержку ро..." alt="" coords="1600,309,1777,350"/>
+<area shape="poly" id="edge39_Node000019_Node000026" title=" " alt="" coords="1542,152,1583,196,1675,307,1671,310,1579,199,1538,155"/>
+<area shape="poly" id="edge29_Node000020_Node000006" title=" " alt="" coords="764,253,592,304,590,298,763,248"/>
+<area shape="poly" id="edge28_Node000020_Node000011" title=" " alt="" coords="757,253,694,277,669,290,655,303,647,317,645,329,647,342,655,356,682,389,715,418,751,442,790,461,872,490,949,507,947,512,870,495,788,466,749,446,711,422,678,393,650,358,642,343,640,329,642,315,651,300,666,285,691,272,755,248"/>
+<area shape="rect" id="Node000021" href="$implementation_2client_8cpp.html" title=" " alt="" coords="664,309,873,350"/>
+<area shape="poly" id="edge27_Node000020_Node000021" title=" " alt="" coords="823,260,785,310,781,307,819,257"/>
+<area shape="poly" id="edge31_Node000022_Node000013" title=" " alt="" coords="1818,261,1818,404,1813,404,1813,261"/>
+<area shape="rect" id="Node000023" href="$sink__console_8h.html" title="Определяет класс CSinkConsole, конкретную реализацию ISink для вывода в консоль. Этот приемник логиру..." alt="" coords="1904,309,2108,350"/>
+<area shape="poly" id="edge32_Node000022_Node000023" title=" " alt="" coords="1867,251,1971,306,1968,311,1864,256"/>
+<area shape="rect" id="Node000025" href="$logger_8cpp.html" title=" " alt="" coords="1923,405,2070,446"/>
+<area shape="poly" id="edge38_Node000022_Node000025" title=" " alt="" coords="1832,259,1857,307,1893,355,1924,381,1958,402,1955,407,1921,386,1889,359,1853,310,1827,262"/>
+<area shape="poly" id="edge35_Node000022_Node000026" title=" " alt="" coords="1781,258,1715,311,1711,306,1777,254"/>
+<area shape="rect" id="Node000024" href="$sink__console_8cpp.html" title=" " alt="" coords="2094,405,2312,446"/>
+<area shape="poly" id="edge33_Node000023_Node000024" title=" " alt="" coords="2062,354,2163,402,2161,407,2060,359"/>
+<area shape="poly" id="edge34_Node000023_Node000025" title=" " alt="" coords="2005,365,2001,405,1996,404,2000,365"/>
+<area shape="poly" id="edge36_Node000026_Node000014" title=" " alt="" coords="1665,363,1630,406,1626,403,1661,360"/>
+<area shape="poly" id="edge37_Node000026_Node000025" title=" " alt="" coords="1769,352,1933,402,1931,407,1767,357"/>
+</map>

@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/pattern/broadcaster.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_cdfd7661423c378c73c58f7f8812c6ce.html">pattern</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">broadcaster.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="broadcaster_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_BROADCASTER_843F1FB7_7A80_4BAF_8C67_457F4D84B287</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_BROADCASTER_843F1FB7_7A80_4BAF_8C67_457F4D84B287</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;unordered_set&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1pattern.html">   16</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1pattern.html">pattern</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// ----- interface</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TReceiver&gt;</div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_broadcaster.html">   36</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#a881970aa848c7e5f6700b3c2336b9af8">Broadcaster</a> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_broadcaster.html#a881970aa848c7e5f6700b3c2336b9af8">   40</a></span>    <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#a881970aa848c7e5f6700b3c2336b9af8">Broadcaster</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_broadcaster.html#acadc803c68a9c0cabd6e4a1dad92537a">   43</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#acadc803c68a9c0cabd6e4a1dad92537a">~Broadcaster</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#a663026e569c99f3304b373e05d1b839c">attach</a>(<span class="keyword">typename</span> TReceiver::TSharedPtr <span class="keyword">const</span> &amp;receiver);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#a88ac7fed367b9a652de41b7758057c87">detach</a>(<span class="keyword">typename</span> TReceiver::TSharedPtr <span class="keyword">const</span> &amp;receiver);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> TReceiver_, <span class="keyword">typename</span> ... TArgs&gt;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#adf612bbfc30cc8156c59e7818131744d">broadcast</a>(<span class="keywordtype">void</span>(TReceiver_::*f)(TArgs <span class="keyword">const</span> &amp; ...), TArgs <span class="keyword">const</span> &amp; ... args);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::unordered_set&lt;typename TReceiver::TSharedPtr&gt; m_receivers;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>};</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">// ----- implementation</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TReceiver&gt;</div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_broadcaster.html#a663026e569c99f3304b373e05d1b839c">   94</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#a663026e569c99f3304b373e05d1b839c">Broadcaster&lt;TReceiver&gt;::attach</a>(<span class="keyword">typename</span> TReceiver::TSharedPtr <span class="keyword">const</span> &amp;receiver) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">if</span> (!m_receivers.insert(receiver).second)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;attach duplicate receiver&quot;</span>); <span class="comment">// -----&gt;</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TReceiver&gt;</div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_broadcaster.html#a88ac7fed367b9a652de41b7758057c87">  101</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#a88ac7fed367b9a652de41b7758057c87">Broadcaster&lt;TReceiver&gt;::detach</a>(<span class="keyword">typename</span> TReceiver::TSharedPtr <span class="keyword">const</span> &amp;receiver) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span> (m_receivers.erase(receiver) == 0)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;detach unatached receiver&quot;</span>); <span class="comment">// -----&gt;</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TReceiver&gt;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TReceiver_, <span class="keyword">typename</span> ... TArgs&gt;</div>
+<div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_broadcaster.html#adf612bbfc30cc8156c59e7818131744d">  109</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_broadcaster.html#adf612bbfc30cc8156c59e7818131744d">Broadcaster&lt;TReceiver&gt;::broadcast</a>(<span class="keywordtype">void</span>(TReceiver_::*f)(TArgs <span class="keyword">const</span> &amp; ...), TArgs <span class="keyword">const</span> &amp; ... args) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i: m_receivers) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        (i.get()-&gt;*f)(args ...);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
+</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>} <span class="comment">// pattern</span></div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_BROADCASTER_843F1FB7_7A80_4BAF_8C67_457F4D84B287</span></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_broadcaster_html_a663026e569c99f3304b373e05d1b839c"><div class="ttname"><a href="classiridium_1_1pattern_1_1_broadcaster.html#a663026e569c99f3304b373e05d1b839c">iridium::pattern::Broadcaster::attach</a></div><div class="ttdeci">void attach(typename TReceiver::TSharedPtr const &amp;receiver)</div><div class="ttdoc">Присоединяет получателя к этому вещателю. После этого получатель будет уведомляться о последующих тра...</div><div class="ttdef"><b>Определения</b> broadcaster.h:94</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_broadcaster_html_a881970aa848c7e5f6700b3c2336b9af8"><div class="ttname"><a href="classiridium_1_1pattern_1_1_broadcaster.html#a881970aa848c7e5f6700b3c2336b9af8">iridium::pattern::Broadcaster::Broadcaster</a></div><div class="ttdeci">Broadcaster()=default</div><div class="ttdoc">Конструктор по умолчанию.</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_broadcaster_html_a88ac7fed367b9a652de41b7758057c87"><div class="ttname"><a href="classiridium_1_1pattern_1_1_broadcaster.html#a88ac7fed367b9a652de41b7758057c87">iridium::pattern::Broadcaster::detach</a></div><div class="ttdeci">void detach(typename TReceiver::TSharedPtr const &amp;receiver)</div><div class="ttdoc">Отсоединяет получателя от этого вещателя. Получатель больше не будет уведомляться о трансляциях.</div><div class="ttdef"><b>Определения</b> broadcaster.h:101</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_broadcaster_html_acadc803c68a9c0cabd6e4a1dad92537a"><div class="ttname"><a href="classiridium_1_1pattern_1_1_broadcaster.html#acadc803c68a9c0cabd6e4a1dad92537a">iridium::pattern::Broadcaster::~Broadcaster</a></div><div class="ttdeci">virtual ~Broadcaster()=default</div><div class="ttdoc">Виртуальный деструктор по умолчанию.</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_broadcaster_html_adf612bbfc30cc8156c59e7818131744d"><div class="ttname"><a href="classiridium_1_1pattern_1_1_broadcaster.html#adf612bbfc30cc8156c59e7818131744d">iridium::pattern::Broadcaster::broadcast</a></div><div class="ttdeci">void broadcast(void(TReceiver_::*f)(TArgs const &amp;...), TArgs const &amp;... args)</div><div class="ttdoc">Транслирует вызов определенной функции-члена каждому присоединенному получателю. У всех присоединенны...</div><div class="ttdef"><b>Определения</b> broadcaster.h:109</div></div>
+<div class="ttc" id="anamespaceiridium_1_1pattern_html"><div class="ttname"><a href="namespaceiridium_1_1pattern.html">iridium::pattern</a></div><div class="ttdoc">Содержит реализации распространенных шаблонов проектирования программного обеспечения.</div><div class="ttdef"><b>Определения</b> broadcaster.h:16</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных....</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::implementation::CStreamReaderList</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html">CStreamReaderList</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::implementation::CStreamReaderList</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Реализует <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code> путем композиции списка других экземпляров <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>. Он последовательно читает из потоков в списке. Когда один поток достигает EOF, он автоматически переключается на следующий.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="stream__reader__list_8h_source.html">stream_reader_list.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::implementation::CStreamReaderList:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_stream_reader_list_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_stream_reader_list_inherit__map" id="airidium_1_1io_1_1implementation_1_1_c_stream_reader_list_inherit__map">
+<area shape="rect" title="Реализует IStreamReader путем композиции списка других экземпляров IStreamReader. Он последовательно ..." alt="" coords="11,226,184,267"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="11,153,184,178"/>
+<area shape="poly" title=" " alt="" coords="100,194,100,226,95,226,95,194"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="32,79,163,105"/>
+<area shape="poly" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::io::implementation::CStreamReaderList:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_stream_reader_list_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_stream_reader_list_coll__map" id="airidium_1_1io_1_1implementation_1_1_c_stream_reader_list_coll__map">
+<area shape="rect" title="Реализует IStreamReader путем композиции списка других экземпляров IStreamReader. Он последовательно ..." alt="" coords="11,226,184,267"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="11,153,184,178"/>
+<area shape="poly" title=" " alt="" coords="100,194,100,226,95,226,95,194"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="32,79,163,105"/>
+<area shape="poly" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ae4f4ba2b8bc7133a42fd5360cc1824f9" id="r_ae4f4ba2b8bc7133a42fd5360cc1824f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4f4ba2b8bc7133a42fd5360cc1824f9">CStreamReaderList</a> ()</td></tr>
+<tr class="memdesc:ae4f4ba2b8bc7133a42fd5360cc1824f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует пустой <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title="Реализует IStreamReader путем композиции списка других экземпляров IStreamReader. Он последовательно ...">CStreamReaderList</a></code>. Потоки должны быть добавлены с помощью метода <code><a class="el" href="#ae7d883f7eb1bda4731429c497b066a77" title="Добавляет читателя потока в конец списка потоков для чтения.">add()</a></code>.  <br /></td></tr>
+<tr class="separator:ae4f4ba2b8bc7133a42fd5360cc1824f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f99e54567d0331d1bc30d6f0260815f" id="r_a2f99e54567d0331d1bc30d6f0260815f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f99e54567d0331d1bc30d6f0260815f">initialize</a> () override</td></tr>
+<tr class="memdesc:a2f99e54567d0331d1bc30d6f0260815f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует все управляемые читатели потоков.  <br /></td></tr>
+<tr class="separator:a2f99e54567d0331d1bc30d6f0260815f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c9db1a6e56904f0bd4c7b49ade960c" id="r_a17c9db1a6e56904f0bd4c7b49ade960c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17c9db1a6e56904f0bd4c7b49ade960c">finalize</a> () override</td></tr>
+<tr class="memdesc:a17c9db1a6e56904f0bd4c7b49ade960c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает работу всех управляемых читателей потоков.  <br /></td></tr>
+<tr class="separator:a17c9db1a6e56904f0bd4c7b49ade960c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d7f2d62bdc979db8acfeb6af7dc54b" id="r_ac4d7f2d62bdc979db8acfeb6af7dc54b"><td class="memItemLeft" align="right" valign="top">Buffer::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4d7f2d62bdc979db8acfeb6af7dc54b">read</a> (size_t const &amp;size) override</td></tr>
+<tr class="memdesc:ac4d7f2d62bdc979db8acfeb6af7dc54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Последовательно читает данные из списка управляемых потоков. Если текущий поток достигает EOF, он пытается читать из следующего потока в списке.  <br /></td></tr>
+<tr class="separator:ac4d7f2d62bdc979db8acfeb6af7dc54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36a309170f0f6c73640a7ee21388f997" id="r_a36a309170f0f6c73640a7ee21388f997"><td class="memItemLeft" align="right" valign="top">std::list&lt; uintptr_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36a309170f0f6c73640a7ee21388f997">getHandles</a> () const override</td></tr>
+<tr class="memdesc:a36a309170f0f6c73640a7ee21388f997"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает дескрипторы ОС текущего активного читателя потока.  <br /></td></tr>
+<tr class="separator:a36a309170f0f6c73640a7ee21388f997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d9c6952d77a80388b3611d5deb91a9" id="r_ae3d9c6952d77a80388b3611d5deb91a9"><td class="memItemLeft" align="right" valign="top">URI::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3d9c6952d77a80388b3611d5deb91a9">getURI</a> () const override</td></tr>
+<tr class="memdesc:ae3d9c6952d77a80388b3611d5deb91a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> текущего активного читателя потока.  <br /></td></tr>
+<tr class="separator:ae3d9c6952d77a80388b3611d5deb91a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d883f7eb1bda4731429c497b066a77" id="r_ae7d883f7eb1bda4731429c497b066a77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7d883f7eb1bda4731429c497b066a77">add</a> (IStreamReader::TSharedPtr const &amp;stream_reader)</td></tr>
+<tr class="memdesc:ae7d883f7eb1bda4731429c497b066a77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет читателя потока в конец списка потоков для чтения.  <br /></td></tr>
+<tr class="separator:ae7d883f7eb1bda4731429c497b066a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Реализует <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code> путем композиции списка других экземпляров <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>. Он последовательно читает из потоков в списке. Когда один поток достигает EOF, он автоматически переключается на следующий. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ae4f4ba2b8bc7133a42fd5360cc1824f9" name="ae4f4ba2b8bc7133a42fd5360cc1824f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f4ba2b8bc7133a42fd5360cc1824f9">&#9670;&#160;</a></span>CStreamReaderList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::implementation::CStreamReaderList::CStreamReaderList </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует пустой <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title="Реализует IStreamReader путем композиции списка других экземпляров IStreamReader. Он последовательно ...">CStreamReaderList</a></code>. Потоки должны быть добавлены с помощью метода <code><a class="el" href="#ae7d883f7eb1bda4731429c497b066a77" title="Добавляет читателя потока в конец списка потоков для чтения.">add()</a></code>. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="ae7d883f7eb1bda4731429c497b066a77" name="ae7d883f7eb1bda4731429c497b066a77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d883f7eb1bda4731429c497b066a77">&#9670;&#160;</a></span>add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CStreamReaderList::add </td>
+          <td>(</td>
+          <td class="paramtype">IStreamReader::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>stream_reader</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляет читателя потока в конец списка потоков для чтения. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream_reader</td><td>Читатель потока для добавления. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a17c9db1a6e56904f0bd4c7b49ade960c" name="a17c9db1a6e56904f0bd4c7b49ade960c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17c9db1a6e56904f0bd4c7b49ade960c">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CStreamReaderList::finalize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Завершает работу всех управляемых читателей потоков. </p>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="a36a309170f0f6c73640a7ee21388f997" name="a36a309170f0f6c73640a7ee21388f997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36a309170f0f6c73640a7ee21388f997">&#9670;&#160;</a></span>getHandles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt; uintptr_t &gt; iridium::io::implementation::CStreamReaderList::getHandles </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получает дескрипторы ОС текущего активного читателя потока. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Список дескрипторов ОС из текущего потока или пустой список, если ни один поток не активен или текущий поток не имеет дескрипторов. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_stream.html#a189bab2ada3736b00468b9f8cbe1e884">iridium::io::IStream</a>.</p>
+
+</div>
+</div>
+<a id="ae3d9c6952d77a80388b3611d5deb91a9" name="ae3d9c6952d77a80388b3611d5deb91a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d9c6952d77a80388b3611d5deb91a9">&#9670;&#160;</a></span>getURI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">URI::TSharedPtr iridium::io::implementation::CStreamReaderList::getURI </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получает <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> текущего активного читателя потока. </p>
+<dl class="section return"><dt>Возвращает</dt><dd><a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> текущего потока или <code>nullptr</code>, если ни один поток не активен или текущий поток не имеет <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_stream.html#abdb45661c8cf05eb9a4cc46134947416">iridium::io::IStream</a>.</p>
+
+</div>
+</div>
+<a id="a2f99e54567d0331d1bc30d6f0260815f" name="a2f99e54567d0331d1bc30d6f0260815f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f99e54567d0331d1bc30d6f0260815f">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::io::implementation::CStreamReaderList::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Инициализирует все управляемые читатели потоков. </p>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="ac4d7f2d62bdc979db8acfeb6af7dc54b" name="ac4d7f2d62bdc979db8acfeb6af7dc54b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d7f2d62bdc979db8acfeb6af7dc54b">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Buffer::TSharedPtr iridium::io::implementation::CStreamReaderList::read </td>
+          <td>(</td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Последовательно читает данные из списка управляемых потоков. Если текущий поток достигает EOF, он пытается читать из следующего потока в списке. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Максимальное количество байт для чтения. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Буфер, содержащий прочитанные данные, или <code>nullptr</code>, если все потоки достигли EOF. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html#adb60ed45b6a3944f39be4231605cf969">iridium::io::IStreamReader</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/io/implementation/<a class="el" href="stream__reader__list_8h_source.html">stream_reader_list.h</a></li>
+<li>source/iridium/io/implementation/<a class="el" href="stream__reader__list_8cpp.html">stream_reader_list.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

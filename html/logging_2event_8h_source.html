@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/logging/event.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bd04c2bcd27267b7c30d257e93c7a128.html">logging</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">event.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="logging_2event_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef HEADER_EVENT_7923AB72_4A05_48BD_8490_D2C40F047299</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define HEADER_EVENT_7923AB72_4A05_48BD_8490_D2C40F047299</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">iridium/enum.h</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="smart__ptr_8h.html">iridium/smart_ptr.h</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// No specific Doxygen for iridium namespace itself here.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1logging.html">logging</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structiridium_1_1logging_1_1_t_event.html">   34</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1logging_1_1_t_event.html">TEvent</a> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_define" href="smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f">DEFINE_CREATE</a>(<a class="code hl_struct" href="structiridium_1_1logging_1_1_t_event.html">TEvent</a>)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_define" href="enum_8h.html#acf1825d3b8e6ea6b7e5f4dbc5bacae6d">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        TLevel,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        TRACE,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        DEBUG,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        INFO,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        WARNING,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        ERROR_,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        FATAL</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    )</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    std::chrono::system_clock::time_point <span class="keyword">const</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        time;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    TLevel <span class="keyword">const</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structiridium_1_1logging_1_1_t_event.html#a8c36b78dfc6850c63b75305b2c497895">   68</a></span>        <a class="code hl_variable" href="structiridium_1_1logging_1_1_t_event.html#a8c36b78dfc6850c63b75305b2c497895">level</a>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::thread::id <span class="keyword">const</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structiridium_1_1logging_1_1_t_event.html#a5ae055fd4826abc91d19146f0bea3d64">   72</a></span>        <a class="code hl_variable" href="structiridium_1_1logging_1_1_t_event.html#a5ae055fd4826abc91d19146f0bea3d64">thread_id</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    std::string</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="structiridium_1_1logging_1_1_t_event.html#af23131dc9c3a5827fa007b1fd3cc2dc3">   76</a></span>        <a class="code hl_variable" href="structiridium_1_1logging_1_1_t_event.html#af23131dc9c3a5827fa007b1fd3cc2dc3">line</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>} <span class="comment">// logging</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><a class="code hl_define" href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a>(std::string, iridium::logging::TEvent::TLevel)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_EVENT_7923AB72_4A05_48BD_8490_D2C40F047299</span></div>
+<div class="ttc" id="aconvert_8h_html_ab6323540b384b64371e62ea6e910317b"><div class="ttname"><a href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a></div><div class="ttdeci">#define DEFINE_CONVERT(TTo, TFrom)</div><div class="ttdoc">Определяет (объявляет) специализацию для шаблонной функции iridium::convertion::implementation::conve...</div><div class="ttdef"><b>Определения</b> convert.h:69</div></div>
+<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,...</div></div>
+<div class="ttc" id="aenum_8h_html_acf1825d3b8e6ea6b7e5f4dbc5bacae6d"><div class="ttname"><a href="enum_8h.html#acf1825d3b8e6ea6b7e5f4dbc5bacae6d">DEFINE_ENUM</a></div><div class="ttdeci">#define DEFINE_ENUM(TEnum,...)</div><div class="ttdoc">Определяет расширенный класс перечисления. Этот макрос генерирует класс, который оборачивает стандарт...</div><div class="ttdef"><b>Определения</b> enum.h:56</div></div>
+<div class="ttc" id="anamespaceiridium_1_1logging_html"><div class="ttname"><a href="namespaceiridium_1_1logging.html">iridium::logging</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с логированием.</div><div class="ttdef"><b>Определения</b> config.cpp:13</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных....</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="asmart__ptr_8h_html"><div class="ttname"><a href="smart__ptr_8h.html">smart_ptr.h</a></div><div class="ttdoc">Предоставляет вспомогательные макросы для определения стандартных typedef-ов умных указателей и стати...</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_a7b255e639c04a37d3f29607a6b35422f"><div class="ttname"><a href="smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f">DEFINE_CREATE</a></div><div class="ttdeci">#define DEFINE_CREATE(TClass)</div><div class="ttdoc">Определяет статический фабричный метод create для класса TClass. Если DEFINE_MOCK_CREATE не определен...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:77</div></div>
+<div class="ttc" id="astructiridium_1_1logging_1_1_t_event_html"><div class="ttname"><a href="structiridium_1_1logging_1_1_t_event.html">iridium::logging::TEvent</a></div><div class="ttdoc">Представляет одно событие или сообщение журнала. Эта структура инкапсулирует всю информацию,...</div><div class="ttdef"><b>Определения</b> event.h:34</div></div>
+<div class="ttc" id="astructiridium_1_1logging_1_1_t_event_html_a5ae055fd4826abc91d19146f0bea3d64"><div class="ttname"><a href="structiridium_1_1logging_1_1_t_event.html#a5ae055fd4826abc91d19146f0bea3d64">iridium::logging::TEvent::thread_id</a></div><div class="ttdeci">std::thread::id const thread_id</div><div class="ttdoc">Идентификатор потока, который сгенерировал это событие журнала.</div><div class="ttdef"><b>Определения</b> event.h:72</div></div>
+<div class="ttc" id="astructiridium_1_1logging_1_1_t_event_html_a8c36b78dfc6850c63b75305b2c497895"><div class="ttname"><a href="structiridium_1_1logging_1_1_t_event.html#a8c36b78dfc6850c63b75305b2c497895">iridium::logging::TEvent::level</a></div><div class="ttdeci">DEFINE_ENUM(TLevel, TRACE, DEBUG, INFO, WARNING, ERROR_, FATAL) std TLevel const level</div><div class="ttdoc">Вызов макроса для определения статического метода create для TEvent, обеспечивающего создание экземпл...</div><div class="ttdef"><b>Определения</b> event.h:40</div></div>
+<div class="ttc" id="astructiridium_1_1logging_1_1_t_event_html_af23131dc9c3a5827fa007b1fd3cc2dc3"><div class="ttname"><a href="structiridium_1_1logging_1_1_t_event.html#af23131dc9c3a5827fa007b1fd3cc2dc3">iridium::logging::TEvent::line</a></div><div class="ttdeci">std::string line</div><div class="ttdoc">Фактическое содержание сообщения журнала.</div><div class="ttdef"><b>Определения</b> event.h:76</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>
