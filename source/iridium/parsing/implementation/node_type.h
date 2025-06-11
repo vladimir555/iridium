@@ -9,6 +9,7 @@
 #include <string>
 #include <list>
 #include <unordered_set>
+#include <algorithm>
 
 #include "iridium/smart_ptr.h"
 #include "iridium/parsing/node_type.h"
