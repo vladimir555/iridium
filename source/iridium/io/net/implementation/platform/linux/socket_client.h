@@ -12,6 +12,15 @@
 #ifdef LINUX_PLATFORM
 
 
+/// \~english @file socket_client.h
+/// \~english @brief Defines the client socket implementation for the Linux platform.
+/// \~english This implementation typedefs to the common Unix `CSocketClient` implementation,
+/// \~english leveraging POSIX socket APIs available on Linux.
+/// \~russian @file socket_client.h
+/// \~russian @brief Определяет реализацию клиентского сокета для платформы Linux.
+/// \~russian Данная реализация использует typedef для общей Unix-реализации `CSocketClient`,
+/// \~russian используя POSIX API сокетов, доступные на Linux.
+
 #include "../unix/socket_client.h"
 
 

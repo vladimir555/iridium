@@ -12,6 +12,15 @@
 #ifdef LINUX_PLATFORM
 
 
+/// \~english @file socket_acceptor.h
+/// \~english @brief Defines the socket acceptor implementation for the Linux platform.
+/// \~english This implementation typedefs to the common Unix `CSocketAcceptor` implementation,
+/// \~english leveraging POSIX socket APIs available on Linux.
+/// \~russian @file socket_acceptor.h
+/// \~russian @brief Определяет реализацию принимающего сокета для платформы Linux.
+/// \~russian Данная реализация использует typedef для общей Unix-реализации `CSocketAcceptor`,
+/// \~russian используя POSIX API сокетов, доступные на Linux.
+
 #include "../unix/socket_acceptor.h"
 
 

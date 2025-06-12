@@ -9,6 +9,15 @@
 #include "iridium/platform.h"
 
 
+/// \~english @file dns.h
+/// \~english @brief Provides platform-specific DNS resolution for macOS.
+/// \~english This implementation includes and uses the Unix platform's DNS resolution functionality,
+/// \~english as macOS is a Unix-based system and shares common POSIX APIs.
+/// \~russian @file dns.h
+/// \~russian @brief Предоставляет платформо-специфичное разрешение DNS для macOS.
+/// \~russian Данная реализация включает и использует функциональность разрешения DNS платформы Unix,
+/// \~russian поскольку macOS является Unix-подобной системой и разделяет общие POSIX API.
+
 #ifdef MACOS_PLATFORM
 
 

@@ -2,6 +2,11 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Provides macros for creating enhanced C++ enumerations with features like string conversion and iteration.
+/// \~russian @file
+/// @brief Предоставляет макросы для создания расширенных перечислений C++ с такими функциями, как преобразование в строку и итерация.
+
 #ifndef HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
 #define HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
 
@@ -26,6 +31,28 @@
 #endif // _MSC_VER
 
 
+/// \~english @brief Defines an enhanced enumeration class.
+///     This macro generates a class that wraps a standard C++ enum, providing
+///     additional functionalities such as conversion to/from std::string, iteration
+///     over enum values, and construction from integer or string representations.
+///     It automatically creates an internal enum `TEnumInternal`, constructors,
+///     conversion operators, `getEnums()` static method to retrieve all enum values,
+///     `convert()` static methods for string/enum conversion, and
+///     `convertToFlagsString()` for bitmask enums.
+/// \~russian @brief Определяет расширенный класс перечисления.
+///     Этот макрос генерирует класс, который оборачивает стандартное перечисление C++,
+///     предоставляя дополнительные функции, такие как преобразование в/из std::string,
+///     итерацию по значениям перечисления и конструирование из целочисленного или строкового представления.
+///     Он автоматически создает внутреннее перечисление `TEnumInternal`, конструкторы,
+///     операторы преобразования, статический метод `getEnums()` для получения всех значений перечисления,
+///     статические методы `convert()` для преобразования строка/перечисление и
+///     `convertToFlagsString()` для битовых масок перечислений.
+/// \~english @param TEnum The name of the enum class to be generated.
+/// \~russian @param TEnum Имя генерируемого класса перечисления.
+/// \~english @param ... A variadic argument list representing the enumerators of the enum
+///     (e.g., `VAL1, VAL2, VAL3=10, VAL4`). An additional `UNKNOWN` enumerator with value `INT_MIN` is automatically added.
+/// \~russian @param ... Список аргументов переменной длины, представляющий перечислители
+///     (например, `VAL1, VAL2, VAL3=10, VAL4`). Дополнительный перечислитель `UNKNOWN` со значением `INT_MIN` добавляется автоматически.
 #define DEFINE_ENUM(TEnum, ...) \
 class TEnum { \
 public: \
@@ -132,18 +159,18 @@ public: \
 //DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
 
 
-#define DEFINE_ENUM_HASH(TEnum) \
-namespace std { \
-    template<> \
-    struct hash<TEnum> { \
-        std::size_t operator()(TEnum const &e) const noexcept { \
-            return std::hash<int>()(static_cast<int>(static_cast<TEnum::TEnumInternal>(e))); \
-        } \
-    }; \
-}
-
-
-/// use not in namespace, todo: private enum
+/// \~english @brief Implements the static members and conversion functions for an enhanced enum class.
+///     This macro provides the definitions for the static members (like the map for string conversion
+///     and the list of enum values) and helper functions that were declared by the `DEFINE_ENUM` macro.
+///     It should typically be placed in a .cpp file to avoid multiple definitions.
+/// \~russian @brief Реализует статические члены и функции преобразования для расширенного класса перечисления.
+///     Этот макрос предоставляет определения для статических членов (таких как карта для преобразования строк
+///     и список значений перечисления) и вспомогательных функций, которые были объявлены макросом `DEFINE_ENUM`.
+///     Обычно его следует размещать в файле .cpp, чтобы избежать множественных определений.
+/// \~english @param TEnum The name of the enum class that was previously defined using `DEFINE_ENUM`.
+/// \~russian @param TEnum Имя класса перечисления, который был ранее определен с помощью `DEFINE_ENUM`.
+/// \~english @note This macro should be used outside of any namespace.
+/// \~russian @note Этот макрос должен использоваться вне каких-либо пространств имен.
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = -1; \

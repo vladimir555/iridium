@@ -9,6 +9,15 @@
 #include "iridium/platform.h"
 
 
+/// \~english @file stream_port.h
+/// \~english @brief Defines the `CStreamPort` for the Emscripten platform.
+/// \~english This implementation currently typedefs to the Unix `CStreamPort` implementation,
+/// \~english effectively using the Unix platform's stream port logic for Emscripten builds.
+/// \~russian @file stream_port.h
+/// \~russian @brief Определяет `CStreamPort` для платформы Emscripten.
+/// \~russian Данная реализация в настоящее время использует typedef для Unix-реализации `CStreamPort`,
+/// \~russian фактически используя логику потокового порта платформы Unix для сборок Emscripten.
+
 #ifdef EMSCRIPTEN_PLATFORM
 
 
