@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Documentation</title>
+  <script>
+    // Определяем язык браузера
+    const userLang = navigator.language || navigator.userLanguage;
+
+    // Переводим на нужную страницу в зависимости от языка
+    if (userLang.startsWith('ru')) {
+      location.href = 'ru/html/index.html'; // Перенаправление на русскую версию
+    } else {
+      location.href = 'en/html/index.html'; // Перенаправление на английскую версию
+    }
+  </script>
+  <style>
+    body { font-family: sans-serif; margin: 40px; }
+  </style>
+</head>
+<body>
+  <p>Redirecting based on your browser language...</p>
+</body>
+</html>
