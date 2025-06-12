@@ -987,3 +987,546 @@ void demo_cworkerpool() {
 The `CWorkerPool` is effective for parallelizing independent tasks. The order of results from `pop` may not strictly match the `push` order.
 
 These primitives provide foundational tools for building concurrent and parallel applications with Iridium.
+
+@section sec_testing Testing with Iridium
+
+The Iridium library provides a built-in framework for writing and running unit tests, as well as for creating mock objects to isolate the code under test. This framework helps ensure the quality and reliability of code developed using Iridium.
+
+@subsection subsec_testing_core_concepts Core Concepts
+
+The foundation of the Iridium testing system consists of two key interfaces/classes:
+
+-   `iridium::testing::ITest` (defined in `iridium/testing/test.h`): This is the base interface for any runnable test case. Each class representing a test must implement the `virtual void run() = 0;` method. This method contains the logic of the test itself, including calls to the code under test and assertion checks.
+
+-   `iridium::testing::UnitTest` (defined in `iridium/testing/unit_test.h`): This class serves as the base class for your tests (usually implicitly via the `TEST` macro). It provides a set of methods for performing various assertions, such as checking equality, comparisons, truthiness of conditions, or the throwing of expected exceptions. If an assertion fails, these methods generate a special exception that signals the test failure.
+
+@subsection subsec_testing_writing_tests Writing Tests
+
+The primary tool for creating test cases in Iridium is the `TEST` macro.
+
+@subsubsection subsubsec_testing_test_macro The TEST Macro
+
+The `TEST(TestCaseName)` macro (defined in `iridium/testing/tester.h`) is used to define a test case. `TestCaseName` must be a unique identifier for your test. This macro automatically creates a class that inherits from `iridium::testing::ITest` and `iridium::testing::UnitTest`, and registers it with the testing system. You only need to provide the body for the `run()` method, which will contain the test logic.
+
+Example:
+@code{.cpp}
+#include "iridium/testing/tester.h" // For TEST and ASSERT macro
+#include <string>                   // For std::string in example
+#include <stdexcept>                // For std::runtime_error in example
+#include "iridium/convertion/convert.h" // For iridium::convertion::convert (if custom types are needed in ASSERT)
+
+// Example custom type to demonstrate output in ASSERT
+struct MyCustomType {
+    int id;
+    std::string value;
+
+    // For comparison in tests
+    bool operator==(const MyCustomType& other) const {
+        return id == other.id && value == other.value;
+    }
+};
+
+// Specialization of convert for MyCustomType, so ASSERT can print it
+template<>
+std::string iridium::convertion::convert(MyCustomType const &obj) {
+    return "MyCustomType(id=" + iridium::convertion::convert<std::string>(obj.id) + ", value=\"" + obj.value + "\")";
+}
+
+// Example class to be tested (replace with your own)
+class MyClassToTest {
+    std::string param_;
+public:
+    MyClassToTest(const std::string& p = "") : param_(p) {}
+    std::string getParameter() const { return param_; }
+    int add(int a, int b) { return a + b; }
+    MyCustomType getCustomType(int id, const std::string& val) { return {id, val}; }
+    void doSomethingThatThrows() { throw std::runtime_error("Expected exception"); }
+    void doSomethingThatDoesNotThrow() { /* No-op */ }
+};
+
+TEST(MyClassConstruction) {
+    MyClassToTest obj("test_param");
+    ASSERT(obj.getParameter(), equal, "test_param"); 
+}
+
+TEST(MyClassAddsNumbers) {
+    MyClassToTest obj;
+    ASSERT(obj.add(2, 3), equal, 5);
+    ASSERT(obj.add(1, 1), greaterEqual, 2);
+    ASSERT(obj.add(1, 1), lessEqual, 2);
+    ASSERT(obj.add(5, 5), greater, 9);
+    ASSERT(obj.add(1, 1), less, 3);
+}
+
+TEST(MyCustomTypeAssertion) {
+    MyClassToTest obj;
+    MyCustomType expected = {1, "hello"};
+    ASSERT(obj.getCustomType(1, "hello"), equal, expected);
+}
+
+TEST(BooleanAssertions) {
+    ASSERT(true); // Check for truth
+    bool my_flag = false;
+    ASSERT(!my_flag); // Check for falsehood via negation
+}
+
+TEST(MyClassThrowsException) {
+    MyClassToTest obj;
+    ASSERT(obj.doSomethingThatThrows(), std::runtime_error);
+}
+
+TEST(MyClassDoesNotThrowException) {
+    MyClassToTest obj;
+    bool did_not_throw = true;
+    try {
+        obj.doSomethingThatDoesNotThrow();
+    } catch (...) {
+        did_not_throw = false;
+    }
+    ASSERT(did_not_throw);
+}
+@endcode
+
+@subsubsection subsubsec_testing_assertions The ASSERT Macro
+
+The `iridium::testing::UnitTest` class (from which tests created by the `TEST` macro implicitly inherit) provides various methods for checking conditions. The primary way to use them in tests is the `ASSERT(...)` macro (defined in `iridium/testing/tester.h`). If an assertion fails, an exception is thrown, and the test is marked as failed.
+
+The `ASSERT` macro is variadic (accepts a variable number of arguments) and is used as follows:
+
+1.  **Checking a boolean condition: `ASSERT(condition)`**
+    -   Used to check for truth (`ASSERT(true_condition);`) or falsehood (`ASSERT(!false_condition);`).
+    -   Technically, this is a call to `ASSERT_1`, which passes `condition` to the `UnitTest::assert_()` method.
+    -   Example: `ASSERT(x > 5);`
+
+2.  **Checking for comparison: `ASSERT(value1, comparison_symbol, value2)`**
+    -   Used for various types of comparisons. `comparison_symbol` is the name of a comparison method from the `UnitTest` class.
+    -   Technically, this is a call to `ASSERT_3`, which calls `UnitTest::comparison_symbol(value1, value2, "value1 symbol value2", "file:line")`.
+    -   Available `comparison_symbol`s:
+        -   `equal`: Checks that `value1 == value2`.
+        -   `less`: Checks that `value1 < value2`.
+        -   `lessEqual`: Checks that `value1 <= value2`.
+        -   `greater`: Checks that `value1 > value2`.
+        -   `greaterEqual`: Checks that `value1 >= value2`.
+    -   Examples:
+        @code{.cpp}
+        ASSERT(sum, equal, 10);
+        ASSERT(count, less, max_count);
+        ASSERT(actual_value, greaterEqual, expected_minimum);
+        @endcode
+    -   Note: Although you can also write `ASSERT(value1 == value2);` (using `ASSERT_1`), using `ASSERT(value1, equal, value2);` is preferable for comparisons, as it allows the framework to potentially output the values of `value1` and `value2` more informatively upon failure.
+
+3.  **Checking for exception throwing: `ASSERT(expression, ExpectedExceptionType)`**
+    -   Technically, this is a call to `ASSERT_2`, which passes a lambda function with `expression` and `ExpectedExceptionType` to the `UnitTest::assert_<TFunction, TException>()` method.
+    -   Checks that executing `expression` results in an exception of type `ExpectedExceptionType` (or its descendant) being thrown.
+    -   Example: `ASSERT(myObject.methodThatThrows(), std::runtime_error);`
+
+4.  **Unconditional test failure:**
+    -   There is no direct `FAIL(message)` macro. To unconditionally fail a test, use `ASSERT(false);`. You can add a comment to explain the reason.
+        @code{.cpp}
+        ASSERT(false); // Test failed because condition X was not met
+        @endcode
+
+**Outputting values on errors and `iridium::convertion::convert`:**
+A very important feature of the `ASSERT` macro (especially for comparisons) is how it displays values when an assertion fails. To output `value1` and `value2` (or the value from `condition` for `ASSERT_1`) in a readable format, the testing system uses `iridium::convertion::convert<std::string>(your_value)`.
+If you use custom types in `ASSERT`, ensure that a specialization of `iridium::convertion::convert` to `std::string` exists for them. Otherwise, you might see uninformative output (e.g., just the type name or address). For more details on creating `convert` specializations, see section @ref sec_custom_type_conversion.
+
+The `ASSERT` macro automatically includes the file name and line number in the error information, which helps to quickly locate the point of test failure.
+
+@subsection subsec_testing_running_tests Running Tests
+
+After writing tests, they need to be compiled and run. The Iridium framework simplifies this process.
+
+@subsubsection subsubsec_testing_main The IMPLEMENT_TEST_MAIN Macro
+
+To create an executable file that will run all defined tests, the `IMPLEMENT_TEST_MAIN()` macro (defined in `iridium/testing/tester.h`) is used. This macro generates a standard `main()` function that initializes and runs the testing framework.
+
+Typically, you create a separate `.cpp` file (e.g., `tests_main.cpp`) that includes all your test files (or headers, if tests are defined in them) and then calls `IMPLEMENT_TEST_MAIN()`.
+
+Example (`tests_main.cpp`):
+@code{.cpp}
+#include "iridium/testing/tester.h" // For IMPLEMENT_TEST_MAIN
+
+// Include your test files here or files where TEST(...) tests are defined
+// For example:
+// #include "my_class_tests.cpp" 
+// #include "another_module_tests.cpp"
+
+IMPLEMENT_TEST_MAIN()
+@endcode
+When you compile this file along with your tests and the Iridium library, you will get an executable file that, when run, will execute all detected tests.
+
+@subsubsection subsubsec_testing_tester Role of the Tester Class
+
+The `iridium::testing::Tester` class (defined in `iridium/testing/tester.h`) is the central component of the testing system. It is a singleton that:
+-   Registers all test cases defined using the `TEST` macro.
+-   Manages the execution of tests. The `Tester::run(argc, argv, main_cpp_path)` method is called from the generated `main()` function.
+-   Allows filtering of tests based on command-line arguments (this functionality may not be fully detailed here, but `Tester` provides for it).
+-   Collects test results.
+
+@subsubsection subsubsec_testing_itestrunner The ITestRunner Interface (for advanced scenarios)
+
+For more flexible control over the test execution process, there is the `iridium::testing::ITestRunner` interface (defined in `iridium/testing/test_runner.h`). This interface abstracts the way tests are run. The Iridium library provides at least two implementations of it:
+-   `iridium::testing::implementation::TestRunnerRaw`: Runs tests in the same process.
+-   `iridium::testing::implementation::TestRunnerFork`: Can run tests in separate processes (forks), which provides better isolation (typically on POSIX systems).
+
+Although direct interaction with `ITestRunner` is usually not required for writing and running tests, knowing about its existence is useful for understanding the framework's architecture and for possible extensions or customization of the testing process. The `Tester` class uses an `ITestRunner` implementation to actually execute the tests.
+
+@subsubsection subsubsec_testing_cli Command-Line Arguments
+
+The test executable created with `IMPLEMENT_TEST_MAIN()` supports the following command-line arguments to control the testing process. Assume your test application is named `your_test_app`.
+
+1.  **`help`**: Displays help information on usage.
+    @code{.sh}
+    ./your_test_app help
+    @endcode
+    Example output:
+    @code{.txt}
+    main thread: 281473424756000
+    2025-06-06 10:30:56.839 I 281473424756000 
+    usage:
+    ./your_test_app help
+    ./your_test_app list
+    ./your_test_app run [ --mode=raw|serial|parallel ] [ --print-result=json ] [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]
+    example:
+    ./your_test_app run / 
+    @endcode
+    (Note: The actual thread number and timestamp in your output will differ.)
+
+2.  **`list`**: Displays a hierarchical list (tree) of all test cases discovered by the framework. Tests are grouped by file path and then by the test name defined in the `TEST()` macro.
+    @code{.sh}
+    ./your_test_app list
+    @endcode
+    This is useful for viewing the structure of tests and their full paths, which can be used as `include_path` or `exclude_path` for the `run` command. Example output:
+    @code{.txt}
+    main thread: 281473794346272
+    2025-06-06 10:30:22.166 I 281473794346272 
+    'root'
+      'convertion'
+        'convert.cpp'
+          'enum_'
+          'exception'
+          'strings'
+          'types'
+      'testing'
+        'example.cpp'
+          'bool_'
+          'comparing_equal'
+          'exception'
+          'mock'
+      # ... (and so on for other modules and tests)
+    @endcode
+    (Note: The actual thread number, timestamp, and full list of tests in your output will differ.)
+
+3.  **`run`**: Runs the tests. This is the default command if no other is specified.
+    @code{.sh}
+    ./your_test_app run [options] [include_path] [exclude_path_1] [exclude_path_2] ...
+    @endcode
+    Standard output when running tests (without `--print-result=json`) includes logging for each test being run and its result:
+    @code{.txt}
+    main thread: 281473243745568
+    2025-06-06 10:30:39.744 I 281473243745568 RUN  /testing/example.cpp/bool_
+    2025-06-06 10:30:39.745 I 281473243745568 OK   /testing/example.cpp/bool_
+    2025-06-06 10:30:39.745 I 281473243745568 RUN  /testing/example.cpp/comparing_equal
+    2025-06-06 10:30:39.745 I 281473243745568 OK   /testing/example.cpp/comparing_equal
+    # ... (and so on for other tests)
+    # ... (in case of failure, FAILED will appear instead of OK, along with an error message)
+    2025-06-06 10:30:39.747 I 281473243745568 
+    passed: 8
+    failed: 0
+    total:  51 
+    @endcode
+    (Note: Actual thread numbers, timestamps, and results in your output will differ.)
+
+    Available options for the `run` command:
+    -   `--mode=MODE`: Defines the test execution mode. Possible values for `MODE`:
+        -   `raw` (default): Tests are run in the same process.
+        -   `serial`: Tests are run sequentially, each in a separate process.
+        -   `parallel`: Tests are run in parallel in separate processes.
+    -   `--print-result=FORMAT`: Controls the output format of results.
+        -   If not specified, the standard text format is used (see example above).
+        -   `json`: Results are output in JSON format.
+    -   `--timeout=SECONDS`: Sets the maximum timeout for tests in seconds (default is 60).
+
+    Parameters for the `run` command:
+    -   `include_path` (optional): If specified, only tests whose path (as in the `list` output) starts with `include_path` are run. Defaults to `/` (all tests).
+    -   `exclude_path_...` (optional): One or more paths to exclude. Tests whose path starts with one of these paths will not be run.
+
+Examples of using the `run` command:
+
+-   Run all tests:
+    @code{.sh}
+    ./your_test_app run
+    @endcode
+    (or just `./your_test_app`)
+
+-   Run all tests in parallel mode with a timeout of 120 seconds:
+    @code{.sh}
+    ./your_test_app run --mode=parallel --timeout=120
+    @endcode
+
+-   Run only tests from the `testing` module and `example.cpp` file:
+    @code{.sh}
+    ./your_test_app run /testing/example.cpp/
+    @endcode
+
+-   Run all tests from the `parsing` module, but exclude those in `node.cpp` within `parsing`:
+    @code{.sh}
+    ./your_test_app run /parsing/ /parsing/node.cpp/
+    @endcode
+
+-   Run all tests and output the result in JSON format:
+    @code{.sh}
+    ./your_test_app run --print-result=json
+    @endcode
+
+@subsection subsec_testing_mocking Mocking Dependencies
+
+Mocking is the process of creating substitute objects (mocks or mock objects) to simulate the behavior of real dependencies of the component under test. This allows isolating the code under test and making tests more predictable and stable. The Iridium testing framework provides tools for creating mocks (defined in `iridium/testing/mock.h`).
+
+@subsubsection subsubsec_testing_defining_mocks Defining Mock Classes
+
+To create a mock for an interface or class, the `DEFINE_MOCK_CLASS(InterfaceName)` macro is used. This macro creates a new class named `InterfaceNameMock` that inherits your `InterfaceName` and `iridium::testing::Mock<InterfaceName>`.
+
+Inside this mock class, you declare which methods of the interface you want to mock using the `DEFINE_MOCK_METHOD` (for non-const methods) and `DEFINE_MOCK_METHOD_CONST` (for const methods) macros.
+
+Example:
+@code{.cpp}
+#include "iridium/testing/mock.h"
+#include <string>
+#include <vector>
+
+// Assume this is the interface we want to mock
+class IMyDependency {
+public:
+    virtual ~IMyDependency() = default;
+    virtual int getValue(int key) = 0;
+    virtual std::string getName() const = 0;
+    virtual void processData(const std::vector<int>& data) = 0;
+    // Constructor with arguments to demonstrate DEFINE_MOCK_CONSTRUCTOR
+    IMyDependency(const std::string& /* initial_config */) {} 
+    IMyDependency() = default; // Add a default constructor if it's also needed
+};
+
+// Define the mock class for IMyDependency
+DEFINE_MOCK_CLASS(IMyDependency) {
+public:
+    // If the base class IMyDependency has a constructor with arguments
+    // and you want to call it from the mock:
+    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
+    
+    // Mocking interface methods
+    DEFINE_MOCK_METHOD(int, getValue, (int key))                  // int getValue(int key)
+    DEFINE_MOCK_METHOD_CONST(std::string, getName)                // std::string getName() const
+    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data)) // void processData(const std::vector<int>& data)
+};
+@endcode
+The `DEFINE_MOCK_METHOD` macros take the return type, method name, and in parentheses, the types of the method's arguments (without variable names).
+
+@subsubsection subsubsec_testing_mock_behavior Defining Mock Behavior
+
+After creating an instance of a mock object, you can define its behavior using the `DEFINE_MOCK_BEHAVIOR` (for non-const methods) or `DEFINE_MOCK_BEHAVIOR_CONST` (for const methods) macro. This macro allows you to assign a lambda function that will be called when the mocked method is accessed.
+
+Example:
+@code{.cpp}
+#include "iridium/testing/tester.h" // For ASSERT
+#include "iridium/testing/mock.h"   // For mocking macros
+#include <string>
+#include <vector>
+#include <stdexcept> // For std::runtime_error
+
+// For completeness, copy IMyDependency and IMyDependencyMock definitions here
+// In real code, they would be in header files
+class IMyDependency {
+public:
+    virtual ~IMyDependency() = default;
+    virtual int getValue(int key) = 0;
+    virtual std::string getName() const = 0;
+    virtual void processData(const std::vector<int>& data) = 0;
+    IMyDependency(const std::string& /* initial_config */) {} 
+    IMyDependency() = default; 
+};
+
+DEFINE_MOCK_CLASS(IMyDependency) {
+public:
+    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
+    DEFINE_MOCK_METHOD(int, getValue, (int key))
+    DEFINE_MOCK_METHOD_CONST(std::string, getName)
+    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data))
+};
+// End of copied definitions
+
+
+// Class that uses IMyDependency
+class MyClassUsesDependency {
+    IMyDependency* dependency_;
+public:
+    MyClassUsesDependency(IMyDependency* dep) : dependency_(dep) {}
+
+    int fetchValue(int key) {
+        if (key < 0) {
+            throw std::runtime_error("Key cannot be negative");
+        }
+        return dependency_->getValue(key);
+    }
+
+    std::string getDepName() const {
+        return dependency_->getName();
+    }
+
+    void sendData(const std::vector<int>& data) {
+        dependency_->processData(data);
+    }
+};
+
+
+TEST(MyClassUsesDependency_Behavior) {
+    IMyDependencyMock mockDep; // Create a mock instance
+
+    // Define behavior for getValue
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) {
+        // This is a lambda function: [=](int key_param) -> int { ... }
+        // Parameter names in the lambda can be anything, but types must match those declared in DEFINE_MOCK_METHOD
+        if (key == 1) return 100;
+        if (key == 42) return 420;
+        return -1;
+    };
+
+    // Define behavior for getName (const method)
+    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep, ()) {
+        // Lambda for a method with no arguments: [=]() -> std::string { ... }
+        return "MockedName";
+    };
+    
+    // Define behavior for processData (void method)
+    std::vector<int> received_data;
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {
+        // Lambda for a void method: [=](const std::vector<int>& data_param) -> void { ... }
+        received_data = data; // Copy data for verification
+    };
+
+    MyClassUsesDependency mainObj(&mockDep);
+
+    ASSERT(mainObj.fetchValue(1),   equal, 100);
+    ASSERT(mainObj.fetchValue(42),  equal, 420);
+    ASSERT(mainObj.fetchValue(10),  equal, -1);
+    ASSERT(mainObj.getDepName(),    equal, "MockedName");
+
+    std::vector<int> data_to_send = {1, 2, 3};
+    mainObj.sendData(data_to_send);
+    ASSERT(received_data.size(),    equal, 3);
+    ASSERT(received_data[0],        equal, 1);
+    
+    // Check exception throwing from the main class, not the mock
+    ASSERT(mainObj.fetchValue(-1), std::runtime_error);
+}
+@endcode
+In the lambda function defining the behavior, you can access the arguments with which the mocked method was called and return an appropriate value or perform necessary actions. The argument types in the lambda must match the types specified in `DEFINE_MOCK_METHOD`.
+
+Using `DEFINE_MOCK_CONSTRUCTOR` is necessary if your original interface/class has constructors with parameters that you want to call when creating the mock object (e.g., if the mock inherits from a class rather than a pure interface, and the base class constructor needs to be called).
+
+@subsection subsec_testing_sequences Testing Call Sequences
+
+Sometimes it's important not only which methods of a mock object are called, but also in what order. The Iridium mocking framework provides means to define and verify call sequences.
+
+@subsubsection subsubsec_testing_defining_sequences Defining a Sequence (DEFINE_MOCK_SEQUENCE)
+
+The `DEFINE_MOCK_SEQUENCE(sequence_name, mock_object)` macro is used to create a sequence object.
+-   `sequence_name`: The name you give to this sequence (a variable `sequence_<sequence_name>` will be created).
+-   `mock_object`: The instance of the mock object for which you are defining the call sequence.
+
+This macro should be called at the beginning of your test where you want to define expectations for the order of calls.
+
+@subsubsection subsubsec_testing_sequence_expectations Expectations in a Sequence (DEFINE_MOCK_SEQUENCE_EXPECTATION)
+
+After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, (arg1, arg2, ...))` macro.
+-   `sequence_name`: The name of the previously defined sequence.
+-   `mock_object`: The same mock object.
+-   `method_name`: The name of the mocked method that is expected to be called.
+-   `(arg1, arg2, ...)`: The expected arguments for this call, enclosed in parentheses. If there are no arguments, empty parentheses `()` are used.
+
+Each call to `DEFINE_MOCK_SEQUENCE_EXPECTATION` adds one expectation to the specified sequence. The order of these macros defines the expected order of method calls.
+
+Example:
+@code{.cpp}
+#include "iridium/testing/tester.h"
+#include "iridium/testing/mock.h"
+#include <string>
+#include <vector> 
+
+// For completeness, define IMyDependency and its mock here.
+// In real code, they would be in header files.
+class IMyDependency {
+public:
+    virtual ~IMyDependency() = default;
+    virtual int getValue(int key) = 0;
+    virtual std::string getName() const = 0;
+    virtual void processData(const std::vector<int>& data) = 0;
+    virtual void setup() = 0; // New method to demonstrate sequence
+    IMyDependency(const std::string& /* initial_config */) {} 
+    IMyDependency() = default;
+};
+
+DEFINE_MOCK_CLASS(IMyDependency) {
+public:
+    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
+    DEFINE_MOCK_METHOD(int, getValue, (int key))
+    DEFINE_MOCK_METHOD_CONST(std::string, getName)
+    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data))
+    DEFINE_MOCK_METHOD(void, setup) // Mock for the new method
+};
+// End of IMyDependency and mock definitions
+
+// Class demonstrating calls in a specific sequence
+class ServiceWithOrderedCalls {
+    IMyDependency* dep_;
+public:
+    ServiceWithOrderedCalls(IMyDependency* dep) : dep_(dep) {}
+
+    void initializeAndGetData(int val_key) {
+        dep_->setup(); // First expected call
+        std::vector<int> data_vec = {val_key, val_key * 2};
+        dep_->processData(data_vec); // Second expected call
+        dep_->getValue(val_key); // Third expected call
+    }
+};
+
+TEST(ServiceOrderedTest) {
+    IMyDependencyMock mockDep;
+
+    // Define behavior for methods so they just work
+    // (for sequence testing, it's important that calls happen,
+    // not what they return, unless it's part of the test logic)
+    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep, ()) {};
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {};
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) { return key + 1; };
+
+    // Define sequence 's1' for object 'mockDep'
+    // The sequence object name will be sequence_s1
+    DEFINE_MOCK_SEQUENCE(s1, mockDep); 
+
+    // Add expectations to sequence s1
+    // Expect mockDep.setup() to be called with no arguments
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup, ()); 
+    // Expect mockDep.processData() to be called with a specific vector
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, ({10, 20})); 
+    // Expect mockDep.getValue() to be called with argument 10
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, (10)); 
+
+    ServiceWithOrderedCalls service(&mockDep);
+    service.initializeAndGetData(10); // This method should call mockDep methods in the specified order
+
+    // Sequence verification happens automatically. If the order is violated,
+    // or one of the expected calls did not occur in the right place,
+    // or undeclared methods of the mock in the sequence were called,
+    // MockSequence::step will throw an exception, and the test will fail.
+    // If all calls occurred in the correct order with the correct arguments, the test will pass.
+}
+@endcode
+
+**Important Notes:**
+-   If a method is called with arguments different from those specified in `DEFINE_MOCK_SEQUENCE_EXPECTATION`, it is considered a sequence violation.
+-   If, during code execution, calls to mocked methods occur that are not part of the current expected step in the sequence (or are not expected at all within any active sequence), this may also lead to an error, depending on the strictness of the mock framework implementation. Exact matching is usually expected.
+-   Sequence verification is performed at each step (`step` inside `MockSequence`). If the order is violated, an exception will be thrown immediately.
+
+Using sequences is particularly useful for testing interaction protocols or complex scenarios where the order of operations is critical.
+```
