@@ -35,7 +35,7 @@ public:
     /// \~russian @param observer Разделяемый указатель на экземпляр `IObserver<TEvent>`, который желает получать обновления.
     /// \~english @exception std::logic_error May be thrown if the observer is already subscribed or if subscription is not possible for some reason.
     /// \~russian @exception std::logic_error Может быть выброшено, если наблюдатель уже подписан или если подписка невозможна по какой-либо причине.
-    virtual void subscribe	(typename IObserver<TEvent>::TSharedPtr const &observer) = 0;
+    virtual void subscribe  (typename IObserver<TEvent>::TWeakPtr const &observer) = 0;
     /// \~english @brief Unsubscribes an observer from this observable object.
     ///     The observer will no longer receive notifications from this observable.
     /// \~russian @brief Отписывает наблюдателя от этого наблюдаемого объекта.
@@ -44,8 +44,8 @@ public:
     /// \~russian @param observer Разделяемый указатель на экземпляр `IObserver<TEvent>`, который должен быть отписан.
     /// \~english @exception std::logic_error May be thrown if the observer was not previously subscribed or cannot be found.
     /// \~russian @exception std::logic_error Может быть выброшено, если наблюдатель не был ранее подписан или не может быть найден.
-    virtual void unsubscribe(typename IObserver<TEvent>::TSharedPtr const &observer) = 0;
-    
+    virtual void unsubscribe(typename IObserver<TEvent>::TWeakPtr const &observer) = 0;
+    ///
     virtual void notify     (TEvent const &event) = 0;
 };
 

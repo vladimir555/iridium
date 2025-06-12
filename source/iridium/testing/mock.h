@@ -2,51 +2,6 @@
 #define HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2
 
 
-//#include "mock_registry.h"
-
-#include "iridium/macros/va_args.h"
-#include "iridium/items.h"
-
-#include <typeinfo>
-#include <functional>
-#include <any>
-#include <stdexcept>
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
-#include <memory>
-
-#include "iridium/pattern/non_copyable.h"
-#include "iridium/pattern/non_movable.h"
-
-
-/// \~english @file
-/// @brief Provides a C++ mocking framework for unit testing.
-///     This framework allows creating mock objects that simulate the behavior of real objects,
-///     enabling isolated testing of components. It supports defining expectations for method calls,
-///     specifying return values or actions, and verifying call sequences.
-///     The primary user-facing macros for defining mock behavior and expectations are typically
-///     `DEFINE_MOCK_CLASS`, `DEFINE_MOCK_METHOD` (and its const versions), `DEFINE_MOCK_BEHAVIOR`,
-///     and sequence-related macros like `DEFINE_MOCK_SEQUENCE` and `DEFINE_MOCK_SEQUENCE_EXPECTATION`.
-///     The syntax mentioned in the original file comments (e.g., `ON_CALL`, `EXPECT_CALL`)
-///     would be built upon these foundational macros.
-/// \~russian @file
-/// @brief Предоставляет C++ фреймворк для создания мок-объектов при модульном тестировании.
-///     Этот фреймворк позволяет создавать мок-объекты, имитирующие поведение реальных объектов,
-///     что обеспечивает изолированное тестирование компонентов. Он поддерживает определение ожиданий
-///     для вызовов методов, указание возвращаемых значений или действий, а также проверку последовательностей вызовов.
-///     Основные макросы, видимые пользователю, для определения поведения моков и ожиданий, это обычно
-///     `DEFINE_MOCK_CLASS`, `DEFINE_MOCK_METHOD` (и его const-версии), `DEFINE_MOCK_BEHAVIOR`,
-///     а также макросы, связанные с последовательностями, такие как `DEFINE_MOCK_SEQUENCE` и `DEFINE_MOCK_SEQUENCE_EXPECTATION`.
-///     Синтаксис, упомянутый в оригинальных комментариях файла (например, `ON_CALL`, `EXPECT_CALL`),
-///     строился бы на основе этих фундаментальных макросов.
-
-#ifndef HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2
-#define HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2
-
-
-//#include "mock_registry.h"
-
 #include "iridium/macros/va_args.h"
 #include "iridium/items.h"
 
@@ -64,29 +19,8 @@
 
 
 namespace iridium {
-/// \~english @brief Provides classes, interfaces, and macros for unit testing and mocking.
-/// \~russian @brief Предоставляет классы, интерфейсы и макросы для модульного тестирования и создания мок-объектов.
 namespace testing {
 
-
-// This file implements the following syntax:
-//
-//   ON_CALL(mock_object, Method(...))
-//     .With(...) ?
-//     .WillByDefault(...);
-//
-// where With() is optional and WillByDefault() must appear exactly
-// once.
-//
-//   EXPECT_CALL(mock_object, Method(...))
-//     .With(...) ?
-//     .Times(...) ?
-//     .InSequence(...) *
-//     .WillOnce(...) *
-//     .WillRepeatedly(...) ?
-//     .RetiresOnSaturation() ? ;
-//
-// where all clauses are optional and WillOnce() can be repeated.
 
 /// \~english @brief Forward declaration for the `MockSequence` class template.
 /// \~russian @brief Предварительное объявление для шаблонного класса `MockSequence`.

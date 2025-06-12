@@ -44,7 +44,7 @@ void CObservable<TEvent>::subscribe(typename IObserver<TEvent>::TWeakPtr const &
     m_observers.push_back(observer);
 }
 
-template <typename TEvent>
+template<typename TEvent>
 void CObservable<TEvent>::unsubscribe(typename IObserver<TEvent>::TWeakPtr const &observer) {
     LOCK_SCOPE();
     auto target = observer.lock();

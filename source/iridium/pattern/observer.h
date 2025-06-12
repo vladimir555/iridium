@@ -23,7 +23,7 @@ namespace pattern {
 ///     вызовет метод `handle` своих подписанных наблюдателей.
 /// \~english @tparam TEvent The type of event data that this observer is designed to handle.
 /// \~russian @tparam TEvent Тип данных события, для обработки которого предназначен этот наблюдатель.
-template <typename TEvent>
+template<typename TEvent>
 class IObserver {
 public:
     /// \~english @brief Defines common interface elements for `IObserver`, such as smart pointer typedefs (`TSharedPtr`, `TWeakPtr`, etc.).

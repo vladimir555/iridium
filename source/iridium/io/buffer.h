@@ -7,7 +7,7 @@
 
 
 #include "iridium/convertion/convert.h" // For DEFINE_CONVERT
-#include "iridium/smart_ptr.h"       // For TSharedPtr and DEFINE_CREATE
+#include "iridium/smart_ptr.h"          // For TSharedPtr and DEFINE_CREATE
 #include <vector>
 #include <string>
 #include <list>
@@ -27,7 +27,7 @@ namespace io {
 ///     Этот класс расширяет `std::vector<unsigned char>`, наследуя его методы для управления памятью,
 ///     доступа к элементам и итерации. Он предоставляет дополнительные конструкторы для удобной
 ///     инициализации из строк и списков других буферов.
-class Buffer: public std::vector<unsigned char> {
+class Buffer: public std::vector<uint8_t> {
 public:
     /// \~english @brief Macro likely defining a static `create` method or similar factory functionality
     ///     for creating shared pointers (`Buffer::TSharedPtr`) to `Buffer` instances.

@@ -53,17 +53,7 @@ public:
     /// \~english @brief Defines common interface elements for `INodeType`, such as smart pointer typedefs (`TSharedPtr`, `TWeakPtr`, etc.).
     /// \~russian @brief Определяет общие элементы интерфейса для `INodeType`, такие как typedef-ы умных указателей (`TSharedPtr`, `TWeakPtr` и т.д.).
     DEFINE_INTERFACE(INodeType)
-<<<<<<< HEAD
-    /// \~english @brief Default delimiter character used for constructing and interpreting paths to navigate or access child nodes. Typically '/'.
-    /// \~russian @brief Символ-разделитель по умолчанию, используемый для построения и интерпретации путей для навигации или доступа к дочерним узлам. Обычно '/'.
-    static std::string const PATH_DELIMITER;
-
-    // todo: typedef unordered_map<name, INodeType> TNodes;
-    /// \~english @brief A list of shared pointers to child nodes.
-    /// \~russian @brief Список разделяемых указателей на дочерние узлы.
-=======
     ///
->>>>>>> 85fcd15 ( - parsing: node bugfix for musl)
     typedef std::list<typename INodeType::TSharedPtr> TNodes;
     /// \~english @brief Iterator for traversing child nodes.
     /// \~russian @brief Итератор для обхода дочерних узлов.
@@ -74,15 +64,10 @@ public:
     /// \~english @brief Const reference to a child node (typically a shared pointer).
     /// \~russian @brief Константная ссылка на дочерний узел (обычно разделяемый указатель).
     typedef typename TNodes::const_reference    const_reference;
-<<<<<<< HEAD
-
     /// \~english @brief Gets the name of this node.
     /// \~russian @brief Получает имя этого узла.
     /// \~english @return The name of the node as a string.
     /// \~russian @return Имя узла в виде строки.
-=======
-    ///
->>>>>>> 85fcd15 ( - parsing: node bugfix for musl)
     virtual std::string     getName() const = 0;
     /// \~english @brief Gets the primary value of this node.
     /// \~russian @brief Получает основное значение этого узла.
@@ -94,8 +79,6 @@ public:
     /// \~english @param value The new value to set for the node.
     /// \~russian @param value Новое значение для установки узлу.
     virtual void            setValue(TValue const &value) = 0;
-<<<<<<< HEAD
-
     /// \~english @brief Retrieves a list of child nodes matching a given path.
     ///     The path can specify a sequence of child names, typically delimited by `PATH_DELIMITER`.
     ///     Note: Source comments suggest this might return a full subtree and could be parallelized.
@@ -107,20 +90,14 @@ public:
     /// \~english @return A `TNodes` list containing shared pointers to the matching child nodes. May be empty if no nodes match.
     /// \~russian @return Список `TNodes`, содержащий разделяемые указатели на соответствующие дочерние узлы. Может быть пустым, если узлы не найдены.
     virtual typename INodeType::TNodes slice(std::string const &path) = 0;
-    ///// todo:
+
+    //todo:
     //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
 
     /// \~english @brief Returns an iterator to the beginning of the child node list.
     /// \~russian @brief Возвращает итератор на начало списка дочерних узлов.
     /// \~english @return An `iterator` pointing to the first child node.
     /// \~russian @return Итератор `iterator`, указывающий на первый дочерний узел.
-=======
-    ///
-    virtual typename INodeType::TNodes slice(std::string const &path) = 0;
-    ///// todo:
-    //virtual typename INodeType::TNodesConst findChilds(std::string const &path) const = 0;
-    ///
->>>>>>> 85fcd15 ( - parsing: node bugfix for musl)
     virtual iterator        begin() = 0;
     /// \~english @brief Returns an iterator to the end of the child node list.
     /// \~russian @brief Возвращает итератор на конец списка дочерних узлов.
@@ -147,7 +124,6 @@ public:
     /// \~english @return `true` if the node has one or more children, `false` otherwise.
     /// \~russian @return `true`, если узел имеет одного или более дочерних узлов, иначе `false`.
     virtual bool            hasChilds() const = 0;
-
     /// \~english @brief Gets the first child node with the specified name.
     /// \~russian @brief Получает первый дочерний узел с указанным именем.
     /// \~english @param name The name of the child node to find.
@@ -201,14 +177,6 @@ public:
     virtual void                                        delChild(std::string const &name) = 0;
 };
 
-<<<<<<< HEAD
-/// \~english @brief Definition of the default path delimiter constant.
-/// \~russian @brief Определение константы разделителя пути по умолчанию.
-template<typename TValue>
-std::string const INodeType<TValue>::PATH_DELIMITER("/");
-
-=======
->>>>>>> 85fcd15 ( - parsing: node bugfix for musl)
 
 } // parsing
 } // iridium

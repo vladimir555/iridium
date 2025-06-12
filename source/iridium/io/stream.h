@@ -156,7 +156,7 @@ public:
 
 
 // Commented out std::hash specialization in the source:
-//template <>
+//template<>
 //struct std::hash<iridium::io::IStream::TSharedPtr> {
 //    std::size_t operator()(iridium::io::IStream::TSharedPtr const &stream) const;
 //};

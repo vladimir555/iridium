@@ -159,6 +159,17 @@ public: \
 //DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
 
 
+#define DEFINE_ENUM_HASH(TEnum) \
+namespace std { \
+    template<> \
+    struct hash<TEnum> { \
+        std::size_t operator()(TEnum const &e) const noexcept { \
+            return std::hash<int>()(static_cast<int>(static_cast<TEnum::TEnumInternal>(e))); \
+        } \
+    }; \
+}
+
+
 /// \~english @brief Implements the static members and conversion functions for an enhanced enum class.
 ///     This macro provides the definitions for the static members (like the map for string conversion
 ///     and the list of enum values) and helper functions that were declared by the `DEFINE_ENUM` macro.

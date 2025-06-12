@@ -151,7 +151,7 @@ size_t CFileCache::size() const {
 }
 
 
-bool CFileCache::checkExistense(size_t const &id) const {
+bool CFileCache::checkExistence(size_t const &id) const {
     return id < m_lines.size() && m_lines[id]; // ----->
 }
 

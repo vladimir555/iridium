@@ -55,7 +55,7 @@ public:
     /// \~english @throws iridium::Exception or similar if the manager is unable to start managing the session.
     /// \~russian @throws iridium::Exception или аналогичное, если менеджер не может начать управление сессией.
     virtual void manage(
-        IStream::TSharedPtr const &streamPort, // Assuming IStreamPort might be a typedef or compatible with IStream
+        IStreamPort::TSharedPtr const &stream_port,
         IProtocol::TSharedPtr   const &protocol
     ) = 0;
 };

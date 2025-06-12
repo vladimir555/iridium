@@ -1,4 +1,5 @@
 #define DEFINE_MOCK_CREATE
+
 #include <iridium/testing/tester.h>
 #include <iridium/testing/mock.h>
 
