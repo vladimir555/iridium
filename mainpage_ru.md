@@ -1492,28 +1492,146 @@ TEST(MyClassUsesDependency_Behavior) {
 
 Использование `DEFINE_MOCK_CONSTRUCTOR` необходимо, если ваш исходный интерфейс/класс имеет конструкторы с параметрами, которые вы хотите вызывать при создании мок-объекта (например, если мок наследует от класса, а не чистого интерфейса, и конструктор базового класса должен быть вызван).
 
-@subsubsection subsubsec_testing_mock_auto_creation Автоматическое создание и предоставление мок-объектов через create()
+@subsubsection subsubsec_testing_mock_auto_creation Автоматическое создание и предоставление мок-объектов через `create()`
 
 Фреймворк мокирования Iridium предлагает механизм для автоматического предоставления мок-объектов вместо реальных объектов во время тестирования. Это особенно полезно, когда тестируемый класс создает свои зависимости внутри, используя статический метод `create()`.
 
-Механизм работает следующим образом:
-
+Механизм включает следующие аспекты:
 1.  **Установка флага мокирования**: Когда создается экземпляр мок-класса (например, `MyClassMock`, который наследует от `iridium::testing::Mock<MyClass>`), его конструктор устанавливает статический флаг `iridium::testing::Mock<MyClass>::m_is_mocked = true;`. Этот флаг специфичен для каждого класса `MyClass`, для которого может существовать мок.
+2.  **Поведение `iridium::testing::Mock<TClass>::create()`**:
+    *   Если флаг `m_is_mocked` для `TClass` установлен в `true`, вызов `iridium::testing::Mock<TClass>::create(...)` попытается вернуть ранее зарегистрированный экземпляр мока из статического списка (`Mock<TClass>::m_mocks`). Если список пуст, будет выброшено исключение `std::runtime_error`.
+    *   Если флаг `m_is_mocked` для `TClass` равен `false`, `iridium::testing::Mock<TClass>::create(...)` попытается создать реальный экземпляр `TClass` через `std::make_shared<TClass>(...)`, передав предоставленные аргументы.
 
-2.  **Перехват вызова `create()`**: Если флаг `m_is_mocked` для `MyClass` установлен в `true`, любой последующий вызов статического метода `iridium::testing::Mock<MyClass>::create(...)` попытается вернуть ранее зарегистрированный экземпляр `MyClassMock`.
-    *   Экземпляры мок-объектов регистрируются в статическом списке (например, `Mock<MyClass>::m_mocks`) при их создании.
-    *   Метод `create()` извлекает следующий доступный мок-объект из этого списка.
-    *   Если список зарегистрированных мок-объектов пуст, но флаг `m_is_mocked` все еще `true` (что означает, что мок-объекты ожидались, но закончились), будет выброшено исключение времени выполнения (`std::runtime_error`), сигнализирующее о нехватке предоставленных моков.
+Далее объясняется более тонкий момент при работе с интерфейсами:
 
-3.  **Возврат реального объекта**: Если экземпляр `MyClassMock` никогда не создавался для `MyClass` (и, следовательно, флаг `Mock<MyClass>::m_is_mocked` остается `false`), то вызов `iridium::testing::Mock<MyClass>::create(...)` поведет себя стандартно: он создаст и вернет экземпляр реального класса `MyClass`, используя предоставленные аргументы.
+Важно понимать, что `iridium::testing::Mock<Interface>::create()` сам по себе не знает, как создать экземпляр *конкретной реализации* этого интерфейса (например, `CRealImplementation` для `IInterface`). Если `Mock<Interface>::m_is_mocked` установлен в `false` (т.е. мок-объект для `IInterface` еще не был создан), то `iridium::testing::Mock<Interface>::create()` попытается выполнить `std::make_shared<IInterface>(...)`. Для абстрактного класса `IInterface` это приведет к ошибке компиляции.
 
-4.  **Соглашение о макросе `DEFINE_MOCK_CREATE`**: Для упрощения использования этого механизма, особенно когда класс зависимости (`MyClass`) должен сам предоставлять метод `create()`, может использоваться пользовательское соглашение, такое как макрос `DEFINE_MOCK_CREATE`. Этот макрос обычно определяет статический метод `create()` внутри самого класса `MyClass` (или его базового интерфейса), который внутри делегирует вызов `iridium::testing::Mock<MyClass>::create(...)`. Это позволяет коду приложения единообразно вызывать `MyClass::create(...)` как для реальных объектов, так и для моков в тестах. Важно понимать, что основная логика перехвата и предоставления моков находится в реализации `iridium::testing::Mock<TClass>::create()` и конструкторе `iridium::testing::Mock<TClass>`, а не в самом макросе `DEFINE_MOCK_CREATE`.
+Следовательно, для эффективного использования этого механизма с интерфейсами, **код пользователя должен предоставлять логику выбора**: создавать ли реальный объект конкретной реализации или запрашивать мок у системы Iridium. Эта логика обычно размещается в статическом методе `createInstance()` самого интерфейса или в отдельной фабрике. Для переключения поведения между обычной сборкой и тестовой часто используются макросы препроцессора, определенные пользователем (например, `USER_DEFINED_TEST_BUILD_FLAG` в примере ниже).
 
-5.  **Практические примеры**:
-    *   Реализацию этого механизма можно найти в заголовочном файле `source/iridium/testing/mock.h` (в частности, в классе `iridium::testing::Mock<TClass>`).
-    *   Пример использования можно увидеть в `iridium-test/testing/example.cpp`. Например, класс `CDatabaseAdapter` в своих тестах использует моки для `some_namespace::CDatabase`, где конструктор `CDatabaseAdapter` может вызывать `some_namespace::CDatabase::create(...)` для получения экземпляра, который в тестовом окружении оказывается моком.
+Упомянутый в первоначальном запросе макрос `DEFINE_MOCK_CREATE` следует рассматривать как **пользовательское соглашение или макрос**, который разработчик может определить в своем проекте для управления этой логикой переключения в методах `createInstance()`, а не как встроенный макрос Iridium, который автоматически изменяет поведение `iridium::testing::Mock`.
 
-Этот механизм позволяет легко подменять реальные зависимости моками без изменения кода тестируемого класса, который создает эти зависимости, при условии, что он использует шаблон `ClassName::create(...)`.
+**Пример:**
+
+@code{.cpp}
+// --- Начало примера кода ---
+// Файл: IDataFetcher.h
+#include <string>
+#include <memory>
+// Для доступа к iridium::testing::Mock<IDataFetcher>::create в тестовом режиме
+#include "iridium/testing/mock.h"
+
+// ВАЖНО: USER_DEFINED_TEST_BUILD_FLAG - это макрос, который пользователь должен определить
+// в своей системе сборки для тестовых конфигураций (например, через CMake -DUSER_DEFINED_TEST_BUILD_FLAG)
+// #ifndef USER_DEFINED_TEST_BUILD_FLAG
+// // Можно определить его по умолчанию, если не задан, для обычного поведения
+// #endif
+
+class IDataFetcher {
+public:
+    virtual ~IDataFetcher() = default;
+    virtual std::string fetchData(int id) = 0;
+
+    // Пользовательский статический метод createInstance
+    static std::shared_ptr<IDataFetcher> createInstance(const std::string& source_name);
+
+protected:
+    IDataFetcher() = default;
+};
+
+// Файл: CRealDataFetcher.h (или .cpp)
+// #include "IDataFetcher.h" // Уже включен выше
+class CRealDataFetcher : public IDataFetcher {
+public:
+    CRealDataFetcher(const std::string& source) : m_source(source) {}
+    std::string fetchData(int id) override {
+        return "Real data for " + std::to_string(id) + " from " + m_source;
+    }
+private:
+    std::string m_source;
+};
+
+// Файл: IDataFetcher.cpp (или где реализуется createInstance)
+// #include "IDataFetcher.h"
+// #include "CRealDataFetcher.h"
+// #include "iridium/testing/mock.h" // Уже включен для объявления Mock<IDataFetcher>
+
+std::shared_ptr<IDataFetcher> IDataFetcher::createInstance(const std::string& source_name) {
+#ifdef USER_DEFINED_TEST_BUILD_FLAG
+    // В тестовой сборке, где мы хотим использовать моки,
+    // мы вызываем iridium::testing::Mock<IDataFetcher>::create().
+    // Этот вызов вернет мок, если он был зарегистрирован (см. ниже в тесте).
+    // Если мок не зарегистрирован, а Mock<IDataFetcher>::m_is_mocked == true, будет ошибка "not enough such registered mock objects".
+    // Аргументы, переданные в Mock<IDataFetcher>::create(), должны соответствовать конструктору мока, если он есть,
+    // или конструктору TOriginalClass, если m_is_mocked == false и TOriginalClass - конкретный.
+    // Для мока интерфейса, обычно аргументы не передаются в create(), если только мок сам их не ожидает.
+    return iridium::testing::Mock<IDataFetcher>::create();
+#else
+    // В обычной сборке создаем реальный экземпляр.
+    return std::make_shared<CRealDataFetcher>(source_name);
+#endif
+}
+
+// Файл: DataFetcherMock.h (или в .cpp файле теста)
+// #include "IDataFetcher.h"
+// #include "iridium/testing/mock.h"
+
+DEFINE_MOCK_CLASS(IDataFetcher) { // Создает IDataFetcherMock
+public:
+    DEFINE_MOCK_METHOD(std::string, fetchData, (int id));
+};
+
+// Файл: DataProcessor.h
+// #include "IDataFetcher.h"
+#include <memory>
+#include <string>
+
+class DataProcessor {
+    std::shared_ptr<IDataFetcher> m_fetcher;
+public:
+    DataProcessor() {
+        m_fetcher = IDataFetcher::createInstance("DefaultSource");
+    }
+
+    std::string process(int recordId) {
+        return "Processed: " + m_fetcher->fetchData(recordId);
+    }
+};
+
+// Файл: test_data_processor.cpp
+#include "iridium/testing/tester.h"
+// #include "DataProcessor.h" // и другие нужные заголовки
+
+// Пользователь определяет этот макрос для тестовых сборок (например, через CMake)
+#define USER_DEFINED_TEST_BUILD_FLAG
+
+TEST(DataProcessor_UsesMockFetcher) {
+    // 1. Создаем экземпляр мока IDataFetcherMock.
+    //    Это действие установит Mock<IDataFetcher>::m_is_mocked = true;
+    //    и зарегистрирует данный mockFetcher в списке доступных моков для IDataFetcher.
+    IDataFetcherMock mockFetcher;
+
+    // 2. Задаем поведение для мок-метода fetchData
+    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockFetcher, (int id)) {
+        if (id == 42) {
+            return "mocked_data_for_42";
+        }
+        return "default_mock_data";
+    };
+
+    // 3. Создаем DataProcessor. Его конструктор вызовет IDataFetcher::createInstance().
+    //    Поскольку USER_DEFINED_TEST_BUILD_FLAG активен, createInstance вызовет
+    //    iridium::testing::Mock<IDataFetcher>::create().
+    //    Так как mockFetcher был создан и зарегистрирован, он будет возвращен.
+    DataProcessor processor;
+
+    // 4. Проверяем, что DataProcessor получил и использует мокированные данные
+    ASSERT(processor.process(42), equal, "Processed: mocked_data_for_42");
+    ASSERT(processor.process(10), equal, "Processed: default_mock_data");
+}
+// --- Конец примера кода ---
+@endcode
+
+Этот пример демонстрирует, как пользовательский код (в данном случае `IDataFetcher::createInstance` вместе с `USER_DEFINED_TEST_BUILD_FLAG`) является ключевым для того, чтобы `iridium::testing::Mock<Interface>::create()` был вызван и мог предоставить мок-объект в тестовом окружении.
 
 @subsection subsec_testing_sequences Тестирование последовательностей вызовов
 
