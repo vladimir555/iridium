@@ -1099,7 +1099,8 @@ The `ASSERT` macro is variadic (accepts a variable number of arguments) and is u
     -   Example: `ASSERT(x > 5);`
 
 2.  **Checking for comparison: `ASSERT(value1, comparison_symbol, value2)`**
-    -   Used for various types of comparisons. `comparison_symbol` is the name of a comparison method from the `UnitTest` class.
+    -   Used for various types of comparisons. `comparison_symbol` is the name of a comparison method from the `UnitTest` class. `value1` represents the expected value, and `value2` the actual (received) value.
+    -   When performing a comparison (`ASSERT(value1, comparison_symbol, value2)`), the expected value (`value1`) is converted to the type of the actual value (`value2`). For instance, in the template methods of `iridium::testing::UnitTest` (see `iridium/testing/unit_test.h`), a construct like `TRight left_(left);` or `static_cast<TRight>(left)` is used, where `left` is `value1` (expected), and `TRight` is the type of `value2` (actual). Thus, the actual comparison (`left_ == right`, `left_ < right`, etc.) occurs between values of the same type—the type `TRight`. For converting values to strings for display in error messages, `iridium::convertion::convert` is used.
     -   Technically, this is a call to `ASSERT_3`, which calls `UnitTest::comparison_symbol(value1, value2, "value1 symbol value2", "file:line")`.
     -   Available `comparison_symbol`s:
         -   `equal`: Checks that `value1 == value2`.
@@ -1423,6 +1424,178 @@ TEST(MyClassUsesDependency_Behavior) {
 In the lambda function defining the behavior, you can access the arguments with which the mocked method was called and return an appropriate value or perform necessary actions. The argument types in the lambda must match the types specified in `DEFINE_MOCK_METHOD`.
 
 Using `DEFINE_MOCK_CONSTRUCTOR` is necessary if your original interface/class has constructors with parameters that you want to call when creating the mock object (e.g., if the mock inherits from a class rather than a pure interface, and the base class constructor needs to be called).
+
+@subsubsection subsubsec_testing_mock_auto_creation Automatic Mock Object Creation and Provisioning via `create()`
+
+The Iridium framework provides a mechanism that allows static `create()` methods to return mock objects instead of real ones during testing. This is particularly useful when the class under test creates its dependencies internally. Understanding this mechanism requires looking at several macros and user conventions.
+
+**Key Macros and Their Interaction:**
+
+1.  **`DEFINE_MOCK_CREATE` (Preprocessor Symbol):**
+    *   This is a **preprocessor symbol** that users should define for their test builds. This can be done, for example, by adding `#define DEFINE_MOCK_CREATE` at the top of a test file (before including Iridium headers like `iridium/smart_ptr.h`) or via a compiler option (e.g., `-DDEFINE_MOCK_CREATE`).
+    *   The Iridium macro `DEFINE_CREATE(TClass)` (located in `iridium/smart_ptr.h`) uses the preprocessor directive `#ifdef DEFINE_MOCK_CREATE` to conditionally compile the static `TClass::create(...)` method.
+
+2.  **`DEFINE_CREATE(TClass)` (Iridium Macro from `iridium/smart_ptr.h`):**
+    *   This macro generates the static `TClass::create(...)` method.
+    *   Due to the `#ifdef DEFINE_MOCK_CREATE` check within `DEFINE_CREATE`:
+        *   If `DEFINE_MOCK_CREATE` is defined when `DEFINE_CREATE(TClass)` is processed, the resulting `TClass::create(...)` method will call `iridium::testing::Mock<TClass>::create(...)`.
+        *   If `DEFINE_MOCK_CREATE` is *not* defined, then `TClass::create(...)` will call `std::make_shared<TClass>(...)` to create a real object.
+
+3.  **`iridium::testing::Mock<TClass>::create(...)` (from `iridium/testing/mock.h`):**
+    *   This method is called when `TClass::create(...)` has been generated in "mock mode" (due to `DEFINE_MOCK_CREATE`).
+    *   It checks an internal static flag, `Mock<TClass>::m_is_mocked`.
+    *   If `m_is_mocked == true` (this flag is set when an instance of a mock class, e.g., `TClassMock`, is created), then `Mock<TClass>::create(...)` attempts to return a previously registered instance of `TClassMock`. If no suitable mocks are available, an exception is thrown.
+    *   If `m_is_mocked == false`, then `Mock<TClass>::create(...)` attempts to create a real object via `std::make_shared<TClass>(...)`. **Important:** If `TClass` is an abstract interface, this attempt will result in a compile-time error.
+
+4.  **`DEFINE_IMPLEMENTATION(TClass)` (from `iridium/smart_ptr.h`):**
+    *   This Iridium macro is used for concrete classes. It internally calls `DEFINE_CREATE(TClass)`.
+    *   Consequently, the static `create()` method for classes defined with `DEFINE_IMPLEMENTATION` will automatically support switching between real and mock creation based on the presence of `DEFINE_MOCK_CREATE`.
+
+5.  **`DEFINE_INTERFACE(Interface)` (from `iridium/smart_ptr.h`):**
+    *   This Iridium macro is used for defining interfaces. It defines typedefs for smart pointers and a virtual destructor.
+    *   **Important:** `DEFINE_INTERFACE` does **not** use `DEFINE_CREATE`. Thus, interfaces defined solely with `DEFINE_INTERFACE` do not automatically get a static `create()` method that is managed by `DEFINE_MOCK_CREATE`.
+
+**Usage Scenarios:**
+
+*   **Mocking a Concrete Class:** If you have a concrete class `CMyImpl` defined with `DEFINE_IMPLEMENTATION(CMyImpl)`, and you define `DEFINE_MOCK_CREATE` in your test setup, then calls to `CMyImpl::create(...)` will automatically be routed to `iridium::testing::Mock<CMyImpl>::create(...)`. If you've instantiated a `CMyImplMock`, it will then be provided.
+
+*   **Mocking via an Interface:** If you want `IMyInterface::create(...)` to return a mock, and `IMyInterface` is defined only with `DEFINE_INTERFACE`, you must **manually implement** the static `IMyInterface::create(...)` method. In your implementation, you can use `DEFINE_MOCK_CREATE` (or another flag of your choosing) to decide whether to call `std::make_shared<CMyRealImpl>(...)` or `iridium::testing::Mock<IMyInterface>::create(...)`.
+
+**Example (Mocking a concrete implementation, similar to `iridium-test/testing/example.cpp`):**
+
+@code{.cpp}
+// --- Start of Code Example ---
+
+// Include Iridium headers. Order can be important if DEFINE_MOCK_CREATE affects them.
+// DEFINE_MOCK_CREATE should be defined before smart_ptr.h, where DEFINE_CREATE resides.
+// For this example, we'll place DEFINE_MOCK_CREATE directly in the "test file".
+
+// File: IDataService.h
+#pragma once
+#include "iridium/smart_ptr.h" // For DEFINE_INTERFACE
+#include <string>
+#include <memory>
+
+class IDataService {
+public:
+    DEFINE_INTERFACE(IDataService); // Does not create IDataService::create()
+    virtual std::string fetchData(int id) = 0;
+};
+
+// File: CDataServiceImpl.h
+#pragma once
+#include "IDataService.h"
+#include "iridium/smart_ptr.h" // For DEFINE_IMPLEMENTATION
+
+class CDataServiceImpl : public IDataService {
+    std::string m_serviceName;
+public:
+    // Constructor for the real implementation
+    CDataServiceImpl(const std::string& name) : m_serviceName(name) {}
+
+    // DEFINE_IMPLEMENTATION includes DEFINE_CREATE, which will respect DEFINE_MOCK_CREATE
+    DEFINE_IMPLEMENTATION(CDataServiceImpl);
+
+    std::string fetchData(int id) override {
+        return "Real data for id " + std::to_string(id) + " from " + m_serviceName;
+    }
+};
+
+// File: CDataServiceImplMock.h (or directly in the test .cpp)
+#pragma once
+#include "CDataServiceImpl.h" // We are mocking the concrete class
+#include "iridium/testing/mock.h"
+
+DEFINE_MOCK_CLASS(CDataServiceImpl) { // Creates CDataServiceImplMock
+public:
+    // Since CDataServiceImpl has a constructor with parameters,
+    // the mock must call it via DEFINE_MOCK_CONSTRUCTOR.
+    DEFINE_MOCK_CONSTRUCTOR(CDataServiceImpl)
+
+    DEFINE_MOCK_METHOD(std::string, fetchData, (int id));
+};
+
+// File: DataConsumer.h
+#pragma once
+#include "CDataServiceImpl.h" // Depends on the concrete implementation to call CDataServiceImpl::create()
+#include <memory>
+#include <string>
+
+class DataConsumer {
+    std::shared_ptr<CDataServiceImpl> m_dataService; // Uses the concrete class
+public:
+    DataConsumer() {
+        // Call CDataServiceImpl::create(), which will be governed by DEFINE_MOCK_CREATE
+        m_dataService = CDataServiceImpl::create("MyRealService");
+    }
+
+    std::string processData(int recordId) {
+        if (!m_dataService) return "Error: Service not created";
+        return "Consumed: " + m_dataService->fetchData(recordId);
+    }
+};
+
+// File: test_main.cpp (or your test file)
+// THIS IS KEY: DEFINE_MOCK_CREATE should be defined BEFORE including
+// iridium/smart_ptr.h if it's to affect DEFINE_CREATE within it.
+// For simplicity here, we assume CDataServiceImpl.h (which pulls in smart_ptr.h)
+// will be processed by the compiler after this define.
+#define DEFINE_MOCK_CREATE
+
+#include "iridium/testing/tester.h"
+// #include "DataConsumer.h"       // Conceptually included above
+// #include "CDataServiceImplMock.h"
+
+TEST(DataConsumer_UsesMockService) {
+    // 1. Create an instance of the CDataServiceImplMock mock.
+    //    This action sets Mock<CDataServiceImpl>::m_is_mocked = true;
+    //    and registers this mockService in the list of available mocks.
+    //    Pass constructor arguments as for the real CDataServiceImpl.
+    CDataServiceImplMock mockService("MockedServiceInstance");
+
+    // 2. Define behavior for the fetchData mock method
+    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, (int id)) {
+        if (id == 101) {
+            return "mocked_payload_for_101";
+        }
+        return "generic_mock_payload";
+    };
+
+    // 3. Create DataConsumer. Its constructor will call CDataServiceImpl::create("MyRealService").
+    //    Because DEFINE_MOCK_CREATE is active, CDataServiceImpl::create() was generated
+    //    to call iridium::testing::Mock<CDataServiceImpl>::create(...).
+    //    Since mockService (of type CDataServiceImplMock) was created and registered,
+    //    it will be returned. (The "MyRealService" argument would be used by the mock's constructor
+    //    if it accepts it, or ignored if Mock<T>::create decides so for mocks).
+    DataConsumer consumer;
+
+    // 4. Verify that DataConsumer received and uses the mocked data
+    ASSERT(consumer.processData(101), equal, "Consumed: mocked_payload_for_101");
+    ASSERT(consumer.processData(200), equal, "Consumed: generic_mock_payload");
+}
+// --- End of Code Example ---
+@endcode
+
+**Summary for Interfaces:**
+
+If you want to get a mock for an interface `IExample` via a call to `IExample::create()`, then, because `DEFINE_INTERFACE` does not provide `create()`, you must write this method yourself. For example:
+
+@code{.cpp}
+// In IExample.h or IExample.cpp
+// #include "CRealExampleImpl.h" // Your real implementation
+// #include "iridium/testing/mock.h" // For Mock<IExample>::create()
+
+// std::shared_ptr<IExample> IExample::create() { // Assuming you declared static create() in IExample
+// #ifdef USER_TEST_FLAG_FOR_IEXAMPLE_MOCK // User-defined flag
+//     return iridium::testing::Mock<IExample>::create();
+// #else
+//     return std::make_shared<CRealExampleImpl>();
+// #endif
+// }
+@endcode
+In this scenario, `DEFINE_MOCK_CREATE` is not directly used by Iridium for `IExample::create()`, but you could use it (or a similar flag like `USER_TEST_FLAG_FOR_IEXAMPLE_MOCK`) in your own implementation of `IExample::create()`.
+
+This detailed information should correctly reflect the mocking mechanism when using `create()` in Iridium.
 
 @subsection subsec_testing_sequences Testing Call Sequences
 
