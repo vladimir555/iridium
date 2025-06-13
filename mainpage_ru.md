@@ -1167,7 +1167,7 @@ TEST(MyClassDoesNotThrowException) {
 
 2.  **Проверка на сравнение: `ASSERT(value1, comparison_symbol, value2)`**
     -   Используется для различных видов сравнений, где `value1` представляет ожидаемое значение, а `value2` — фактическое (полученное) значение. `comparison_symbol` — это имя метода сравнения из класса `UnitTest`.
-    -   При сравнении важно понимать, как происходит приведение типов. Ожидаемое значение (`value1`, которое соответствует аргументу `left` в шаблонных методах `UnitTest`, например, `UnitTest::equal(TLeft const &left, TRight const &right, ...)`) приводится к типу фактического значения (`value2`, которое соответствует аргументу `right`). Таким образом, сравнение (например, `left_ == right`) выполняется с использованием типа `TRight` (типа фактического значения `value2`). Это видно из использования `TRight left_(left);` или `static_cast<TRight>(left)` в реализации шаблонных методов сравнения в `iridium::testing::UnitTest` (см. `iridium/testing/unit_test.h`). Функция `iridium::convertion::convert` используется в основном для отображения этих значений в читаемом виде при выводе сообщения об ошибке, а не для приведения типов в самой логике сравнения в этих шаблонных функциях. Для логики сравнения используется явное приведение типов (`static_cast` или прямая инициализация `TRight(left)`).
+    -   При сравнении (`ASSERT(value1, comparison_symbol, value2)`), ожидаемое значение (`value1`) приводится к типу фактического значения (`value2`). Например, в шаблонных методах `iridium::testing::UnitTest` (см. `iridium/testing/unit_test.h`) используется конструкция вида `TRight left_(left);` или `static_cast<TRight>(left)`, где `left` — это `value1` (ожидаемое), а `TRight` — это тип `value2` (фактическое). Таким образом, фактическое сравнение (`left_ == right`, `left_ < right` и т.д.) происходит между значениями одного типа — типа `TRight`. Для преобразования значений в строки при выводе сообщений об ошибках используется `iridium::convertion::convert`.
     -   Технически, это вызов `ASSERT_3`, который вызывает `UnitTest::comparison_symbol(value1, value2, "value1 symbol value2", "file:line")`.
     -   Доступные `comparison_symbol`:
         -   `equal`: Проверяет, что `value1 == value2`.
@@ -1498,14 +1498,15 @@ TEST(MyClassUsesDependency_Behavior) {
 
 **Ключевые макросы и их взаимодействие:**
 
-1.  **`DEFINE_MOCK_CREATE` (пользовательский макрос):**
-    *   Это макрос, который **определяется пользователем** (обычно глобально для тестовой сборки или в начале тестового `.cpp` файла, *перед* включением заголовочных файлов Iridium, которые используют `DEFINE_CREATE`).
-    *   Сам по себе он не является частью библиотеки Iridium, но он действует как флаг, изменяющий поведение макроса `DEFINE_CREATE` из Iridium.
+1.  **`DEFINE_MOCK_CREATE` (символ препроцессора):**
+    *   Это **символ препроцессора**, который пользователи должны определять для своих тестовых сборок. Это можно сделать, например, добавив `#define DEFINE_MOCK_CREATE` в начале тестового файла (до включения заголовочных файлов Iridium, таких как `iridium/smart_ptr.h`) или через опцию компилятора (например, `-DDEFINE_MOCK_CREATE`).
+    *   Макрос Iridium `DEFINE_CREATE(TClass)` (находящийся в `iridium/smart_ptr.h`) использует директиву препроцессора `#ifdef DEFINE_MOCK_CREATE` для условной компиляции статического метода `TClass::create(...)`.
 
-2.  **`DEFINE_CREATE(TClass)` (из `iridium/smart_ptr.h`):**
-    *   Этот макрос Iridium отвечает за генерацию статического метода `TClass::create(...)`.
-    *   **Если `DEFINE_MOCK_CREATE` был определен пользователем**, то `DEFINE_CREATE(TClass)` генерирует `TClass::create(...)` таким образом, что он вызывает `iridium::testing::Mock<TClass>::create(...)`.
-    *   **Если `DEFINE_MOCK_CREATE` не определен**, то `DEFINE_CREATE(TClass)` генерирует `TClass::create(...)` так, что он вызывает `std::make_shared<TClass>(...)` для создания реального объекта.
+2.  **`DEFINE_CREATE(TClass)` (макрос Iridium из `iridium/smart_ptr.h`):**
+    *   Этот макрос генерирует статический метод `TClass::create(...)`.
+    *   Благодаря проверке `#ifdef DEFINE_MOCK_CREATE` внутри `DEFINE_CREATE`:
+        *   Если `DEFINE_MOCK_CREATE` определен на момент обработки `DEFINE_CREATE(TClass)`, то результирующий метод `TClass::create(...)` будет вызывать `iridium::testing::Mock<TClass>::create(...)`.
+        *   Если `DEFINE_MOCK_CREATE` *не* определен, то `TClass::create(...)` будет вызывать `std::make_shared<TClass>(...)` для создания реального объекта.
 
 3.  **`iridium::testing::Mock<TClass>::create(...)` (из `iridium/testing/mock.h`):**
     *   Этот метод вызывается, когда `TClass::create(...)` был сгенерирован в "мок-режиме" (благодаря `DEFINE_MOCK_CREATE`).
