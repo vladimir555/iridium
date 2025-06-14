@@ -21,6 +21,8 @@ class Command {
 public:
     typedef std::chrono::seconds TTimeDuration;
 
+    DEFINE_CREATE(Command)
+
     static TTimeDuration const DEFAULT_TIMEOUT;
 
     Command(

@@ -77,13 +77,13 @@ int Command::run(std::string &output) {
 
     for (;;) {
         for (auto const &event: m_event_provider->waitEvents()) {
-//            LOGT << event->getStream()->getID() << " " << event->getType();
+//            LOGT << event->stream->getURI() << " " << event->status;
 
             if (event->stream == m_process && event->operation == io::Event::TOperation::WRITE) {
                 for (;;) {
                     auto buffer = m_process->read();
 
-//                    LOGT << "buffer: " << *buffer;// << " size: " << buffer->size();
+                    LOGT << "buffer: " << *buffer;// << " size: " << buffer->size();
 
                     now = std::chrono::system_clock::now();
 
