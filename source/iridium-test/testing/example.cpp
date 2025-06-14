@@ -298,14 +298,14 @@ TEST(MockSequence_WillOnceReturn_Success) {
     ISequenceTesterMock mock;
     iridium::testing::MockSequence<ISequenceTesterMock> seq(mock, MAKE_SEQ_NAME("WillOnceReturn_Success"));
     seq.ExpectObj(&ISequenceTesterMock::GetValue).With(ArgsAre(1)).WillOnce(Return(100));
-    ASSERT(mock.GetValue(1), iridium::testing::equal, 100);
+    ASSERT(mock.GetValue(1), equal, 100);
 }
 
 TEST(MockSequence_WillOnceReturn_SecondCallError) {
     ISequenceTesterMock mock;
     iridium::testing::MockSequence<ISequenceTesterMock> seq(mock, MAKE_SEQ_NAME("WillOnceReturn_SecondCallError"));
     seq.ExpectObj(&ISequenceTesterMock::GetValue).With(ArgsAre(1)).Times(1).WillOnce(Return(100));
-    ASSERT(mock.GetValue(1), iridium::testing::equal, 100);
+    ASSERT(mock.GetValue(1), equal, 100);
     // Second call should fail as sequence is exhausted or next expectation doesn't match
     ASSERT(mock.GetValue(1), std::runtime_error);
 }
@@ -314,9 +314,9 @@ TEST(MockSequence_WillRepeatedlyReturn_Success) {
     ISequenceTesterMock mock;
     iridium::testing::MockSequence<ISequenceTesterMock> seq(mock, MAKE_SEQ_NAME("WillRepeatedlyReturn_Success"));
     seq.ExpectObj(&ISequenceTesterMock::GetValue).With(ArgsAre(5)).Times(3).WillRepeatedly(Return(55));
-    ASSERT(mock.GetValue(5), iridium::testing::equal, 55);
-    ASSERT(mock.GetValue(5), iridium::testing::equal, 55);
-    ASSERT(mock.GetValue(5), iridium::testing::equal, 55);
+    ASSERT(mock.GetValue(5), equal, 55);
+    ASSERT(mock.GetValue(5), equal, 55);
+    ASSERT(mock.GetValue(5), equal, 55);
 }
 
 TEST(MockSequence_WillOnceThrow_Success) {
@@ -342,7 +342,7 @@ TEST(MockSequence_WillOnceInvoke_Success) {
         .With(ArgsAre(123))
         .WillOnce(Invoke([&](int val){ invoked_val = val; }));
     mock.VoidMethodForInvoke(123);
-    ASSERT(invoked_val, iridium::testing::equal, 123);
+    ASSERT(invoked_val, equal, 123);
 }
 
 TEST(MockSequence_WillOnceInvoke_Return) {
@@ -351,7 +351,7 @@ TEST(MockSequence_WillOnceInvoke_Return) {
     seq.ExpectObj(&ISequenceTesterMock::MethodForInvoke)
         .With(ArgsAre(10))
         .WillOnce(Invoke([](int val){ return val * 2; }));
-    ASSERT(mock.MethodForInvoke(10), iridium::testing::equal, 20);
+    ASSERT(mock.MethodForInvoke(10), equal, 20);
 }
 
 TEST(MockSequence_WillRepeatedlyInvoke_Success) {
@@ -364,7 +364,7 @@ TEST(MockSequence_WillRepeatedlyInvoke_Success) {
     mock.NoArgsMethod();
     mock.NoArgsMethod();
     mock.NoArgsMethod();
-    ASSERT(call_count, iridium::testing::equal, 3);
+    ASSERT(call_count, equal, 3);
 }
 
 TEST(MockSequence_Combined) {
@@ -392,11 +392,11 @@ TEST(MockSequence_Combined) {
         .Times(Times::Never());
 
 
-    ASSERT(mock.GetValue(1), iridium::testing::equal, 10);
-    ASSERT(mock.GetValue(1), iridium::testing::equal, 10);
+    ASSERT(mock.GetValue(1), equal, 10);
+    ASSERT(mock.GetValue(1), equal, 10);
     mock.DoSomething(5, "hello");
-    ASSERT(invoke_count, iridium::testing::equal, 1);
-    ASSERT(mock.GetValue(2), iridium::testing::equal, 20);
+    ASSERT(invoke_count, equal, 1);
+    ASSERT(mock.GetValue(2), equal, 20);
     // Destructor verifies MethodForThrow was not called and other counts.
 }
 
