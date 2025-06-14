@@ -82,9 +82,10 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
     }
 
     // todo: optimize
-    if (result > 0)
+    if (result > 0) {
+        buffer->resize(result);
         return buffer;  // ----->
-    else
+    } else
         return nullptr; // ----->
 
 //    LOGT << __FUNCTION__ << " fd: " << m_fd << ", result: " << result << ", buffer:\n---\n"

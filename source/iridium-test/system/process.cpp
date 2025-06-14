@@ -6,18 +6,16 @@
 
 
 using iridium::system::implementation::CProcessStream;
-using iridium::system::Command;
+using iridium::system::Shell;
 using iridium::threading::sleep;
 
 
-TEST(call) {
-//    auto process = CProcessStream::create("ls");
-//    process->initialize();
-//    sleep(500);
-//    process->initialize();
-    auto command = Command::create("pwd");
-    std::string output;
-    command->run(output);
-    sleep(500);
-    LOGT << "'" << output << "'";
+TEST(shell) {
+    auto shell  = Shell::create();
+    shell->initialize();
+    // todo: unix / windows test string
+    auto result = shell->run("echo 1 && sleep 0.1 && echo 2");
+    shell->finalize();
+    ASSERT("1\n2\n", equal, result.output);
+    ASSERT(0,        equal, result.code);
 }
