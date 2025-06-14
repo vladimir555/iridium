@@ -121,7 +121,7 @@ void CProcessStream::initialize() {
         );
 
         assertOK(
-            posix_spawn_file_actions_addclose(&actions, cin_pipe[0]),
+            posix_spawn_file_actions_addclose(&actions, cin_pipe[1]),
            "posix_spawn_file_actions_addclose(stdin_read_end)");
 
         assertOK(
@@ -174,7 +174,7 @@ void CProcessStream::initialize() {
         close(cout_pipe[1]);
         close(cerr_pipe[1]);
 
-        m_fd_writer = cin_pipe[1];
+        m_fd_writer = cin_pipe[0];
         m_fd_reader = cout_pipe[0];
         
 //        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
