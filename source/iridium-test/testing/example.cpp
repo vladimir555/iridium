@@ -181,13 +181,13 @@ public:
 
 DEFINE_MOCK_CLASS(ISequenceTester) {
 public:
-    DEFINE_MOCK_METHOD(void, DoSomething, (int x, std::string y));
-    DEFINE_MOCK_METHOD(int, GetValue, (int key));
-    DEFINE_MOCK_METHOD(void, NoArgsMethod, ());
-    DEFINE_MOCK_METHOD(std::string, ReturnsString, ());
-    DEFINE_MOCK_METHOD(void, MethodForThrow, ());
-    DEFINE_MOCK_METHOD(int, MethodForInvoke, (int val));
-    DEFINE_MOCK_METHOD(void, VoidMethodForInvoke, (int val));
+    DEFINE_MOCK_METHOD(void, DoSomething, int, std::string);
+    DEFINE_MOCK_METHOD(int, GetValue, int);
+    DEFINE_MOCK_METHOD(void, NoArgsMethod);
+    DEFINE_MOCK_METHOD(std::string, ReturnsString);
+    DEFINE_MOCK_METHOD(void, MethodForThrow);
+    DEFINE_MOCK_METHOD(int, MethodForInvoke, int);
+    DEFINE_MOCK_METHOD(void, VoidMethodForInvoke, int);
 };
 
 using iridium::testing::ArgsAre;
