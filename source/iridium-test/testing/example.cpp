@@ -169,7 +169,6 @@ TEST(mock) {
 class ISequenceTester {
 public:
     DEFINE_INTERFACE(ISequenceTester);
-    virtual ~ISequenceTester() = default;
     virtual void DoSomething(int x, std::string y) = 0;
     virtual int GetValue(int key) = 0;
     virtual void NoArgsMethod() = 0;
