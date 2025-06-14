@@ -10,50 +10,33 @@
 
 #include "iridium/io/multiplexer.h"
 
-#include "process.h"
-
 
 namespace iridium {
 namespace system {
 
 
-class Command {
+class Shell: public pattern::IInitializable {
 public:
+    DEFINE_IMPLEMENTATION(Shell)
+    ///
+    Shell();
+    ///
     typedef std::chrono::seconds TTimeDuration;
-
-    DEFINE_CREATE(Command)
-
+    ///
     static TTimeDuration const DEFAULT_TIMEOUT;
 
-    Command(
-        std::string     const &application_path,
-        std::string     const &arguments,
-        TTimeDuration   const &timeout = DEFAULT_TIMEOUT
-    );
-    Command(
-        std::string     const &application_path,
-        TTimeDuration   const &timeout = DEFAULT_TIMEOUT
-    );
-    ~Command();
-
-    class Exception: public std::exception {
-    public:
-        Exception(std::string const &what, IProcess::TState const &state);
-        char const *what() const noexcept override;
-        IProcess::TState getState() const;
-    private:
-        std::string         m_what;
-        IProcess::TState    m_state;
+    struct TResult {
+        std::string output;
+        int         code;
     };
 
-    int run();
-    int run(std::string &output);
+    void initialize() override;
+    void finalize()   override;
+
+    TResult run(std::string const &command_line, TTimeDuration const &timeout = DEFAULT_TIMEOUT);
 
 private:
-    io::IMultiplexer::TSharedPtr    m_event_provider;
-    IProcess::TSharedPtr            m_process;
-    TTimeDuration                   m_timeout;
-    std::string                     m_command_line;
+    io::IMultiplexer::TSharedPtr    m_multiplexer;
 };
 
 
