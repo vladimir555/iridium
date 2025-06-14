@@ -1709,9 +1709,9 @@ public:
 DEFINE_MOCK_CLASS(IMyDependency) {
 public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, (int key))
+    DEFINE_MOCK_METHOD(int, getValue, int)
     DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data))
+    DEFINE_MOCK_METHOD(void, processData, const std::vector<int>&)
     DEFINE_MOCK_METHOD(void, setup) // Мок для нового метода
 };
 // Конец определений IMyDependency и мока

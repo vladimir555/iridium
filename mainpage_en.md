@@ -1642,9 +1642,9 @@ public:
 DEFINE_MOCK_CLASS(IMyDependency) {
 public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, (int key))
+    DEFINE_MOCK_METHOD(int, getValue, int)
     DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data))
+    DEFINE_MOCK_METHOD(void, processData, const std::vector<int>&)
     DEFINE_MOCK_METHOD(void, setup) // Mock for the new method
 };
 // End of IMyDependency and mock definitions
@@ -1669,9 +1669,9 @@ TEST(ServiceOrderedTest) {
     // Define behavior for methods so they just work
     // (for sequence testing, it's important that calls happen,
     // not what they return, unless it's part of the test logic)
-    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep, ()) {};
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {};
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) { return key + 1; };
+    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep) {};
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int>& data) {};
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) { return key + 1; };
 
     // Define sequence 's1' for object 'mockDep'
     // The sequence object name will be sequence_s1
