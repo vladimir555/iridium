@@ -187,18 +187,18 @@ void CProcessStream::initialize() {
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
 
-    LOGT << "initialize process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
+//    LOGT << "initialize process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
 }
 
 
 void CProcessStream::finalize() {
-    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
+//    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
 
-        //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-        //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
+//            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader;
+//            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " ...";
 
         {
             io::Buffer::TSharedPtr b;
@@ -215,8 +215,8 @@ void CProcessStream::finalize() {
 //            std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
 //        }
         
-        //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " DONE";
-        
+//            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
+
         if (getState().condition == TState::TCondition::RUNNING) {
             LOGW << "finalization: kill pid " << m_pid << " " << m_command_line;
 //                 << ", timeout: " << system_clock::now() - start;
@@ -231,7 +231,7 @@ void CProcessStream::finalize() {
         }
         
         //    m_state_internal = { 0 };
-        //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " done";
+//            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " done";
     } catch (std::exception const &e) {
         throw std::runtime_error("finalization process '" + m_command_line + "' error: " + e.what()); // ----->
     }

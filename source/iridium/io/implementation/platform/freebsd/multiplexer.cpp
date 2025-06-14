@@ -115,7 +115,7 @@ std::array<int, 2> CMultiplexer::registerPipe() {
 
 
 void CMultiplexer::initialize() {
-    LOGT << __FUNCTION__ << " ...";
+//    LOGT << __FUNCTION__ << " ...";
     if (m_kqueue)
         throw std::runtime_error("initialization error: kqueue is not finalized"); // ----->
 
@@ -141,12 +141,12 @@ void CMultiplexer::initialize() {
         throw std::runtime_error("multiplexer initialization error: " + string(e.what())); // ----->
     }
 
-    LOGT << __FUNCTION__ << " OK";
+//    LOGT << __FUNCTION__ << " OK";
 }
 
 
 void CMultiplexer::finalize() {
-    LOGT << __FUNCTION__ << " ...";
+//    LOGT << __FUNCTION__ << " ...";
     if (!m_kqueue)
         throw std::runtime_error("multiplexer finalization error: not initialized"); // ----->
 
@@ -155,7 +155,7 @@ void CMultiplexer::finalize() {
 
     if (result < 0)
         throw std::runtime_error("multiplexer finalization error: " + string(std::strerror(errno))); // ----->
-    LOGT << __FUNCTION__ << " OK";
+//    LOGT << __FUNCTION__ << " OK";
 }
 
 
@@ -163,7 +163,7 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer subscribing error: kqueue is not initialized"); // ----->
 
-    LOGT << "subscribe: " << stream->getHandles();
+//    LOGT << "subscribe: " << stream->getHandles();
 
     if (!stream || stream->getHandles().empty())
         return; // ----->
@@ -191,7 +191,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
     if (!m_kqueue)
         throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
 
-    LOGT << "unsubscribe: " << stream->getHandles();
+//    LOGT << "unsubscribe: " << stream->getHandles();
 
     if (!stream || stream->getHandles().empty())
         return; // ----->
@@ -336,7 +336,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 if (triggered_event.flags & EV_EOF) {
 //                    LOGT << "! EOF, id: " << stream->getID();
 //                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
-                    LOGT << "push Event::TOperation::EOF, fd: " << stream->getHandles();
+//                    LOGT << "push Event::TOperation::EOF, fd: " << stream->getHandles();
                     events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
                     continue; // <---
                 }
@@ -384,7 +384,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         string fds;
         for (auto const &i: m_map_fd_stream)
             fds += convert<string>(i.first) + " ";
-        LOGT << __func__ << " return events:\n" << msg << "\nevents map: [ " << fds << "]";
+//        LOGT << __func__ << " return events:\n" << msg << "\nevents map: [ " << fds << "]";
     }
 
     return events; // ----->
