@@ -108,14 +108,23 @@ struct ReturnAction {
     explicit ReturnAction(R val) : value(std::move(val)) {}
 };
 
+template<>
+struct ReturnAction<void> {
+    explicit ReturnAction() = default;
+};
+
 template<typename R>
-ReturnAction<R> Return(R&& val) {
-    return ReturnAction<R>(std::forward<R>(val));
+auto Return(R&& val) -> std::enable_if_t<!std::is_void_v<std::decay_t<R>>, ReturnAction<std::decay_t<R>>> {
+    return ReturnAction<std::decay_t<R>>(std::forward<R>(val));
 }
+
 template<typename R>
-ReturnAction<R> Return(const R& val) {
-    return ReturnAction<R>(val);
+auto Return(const R& val) -> std::enable_if_t<!std::is_void_v<std::decay_t<R>>, ReturnAction<std::decay_t<R>>> {
+    return ReturnAction<std::decay_t<R>>(val);
 }
+// Optional: For explicit Return() for void methods, if desired for syntax consistency.
+// inline ReturnAction<void> Return() { return ReturnAction<void>(); }
+
 
 struct ThrowAction {
     std::function<void()> throw_lambda;
@@ -227,18 +236,44 @@ public:
         return *this;
     }
 
-    ExpectationBuilder& WillOnce(ReturnAction<MethodReturnType>&& action) {
-        static_assert(!std::is_void_v<MethodReturnType>, "Cannot use Return(value) with void-returning methods. Use WillOnce(Invoke(...)) or no explicit action for default return.");
+    template<typename ActualReturnType = MethodReturnType>
+    auto WillOnce(ReturnAction<ActualReturnType>&& action) ->
+        std::enable_if_t<!std::is_void_v<ActualReturnType> &&
+                         std::is_same_v<ActualReturnType, MethodReturnType>, ExpectationBuilder&>
+    {
         m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::RETURN;
         m_expectation.m_return_value = std::move(action.value);
         m_expectation.m_is_action_will_once = true;
         return *this;
     }
 
-    ExpectationBuilder& WillRepeatedly(ReturnAction<MethodReturnType>&& action) {
-        static_assert(!std::is_void_v<MethodReturnType>, "Cannot use Return(value) with void-returning methods. Use WillRepeatedly(Invoke(...)) or no explicit action for default return.");
+    template<typename ActualReturnType = MethodReturnType>
+    auto WillRepeatedly(ReturnAction<ActualReturnType>&& action) ->
+        std::enable_if_t<!std::is_void_v<ActualReturnType> &&
+                         std::is_same_v<ActualReturnType, MethodReturnType>, ExpectationBuilder&>
+    {
         m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::RETURN;
         m_expectation.m_return_value = std::move(action.value);
+        m_expectation.m_is_action_will_once = false;
+        return *this;
+    }
+
+    // Overloads for void methods (no ReturnAction value)
+    // This allows .WillOnce() or .WillRepeatedly() without arguments for void methods.
+    template<typename ActualReturnType = MethodReturnType>
+    auto WillOnce() -> std::enable_if_t<std::is_void_v<ActualReturnType> &&
+                                      std::is_same_v<ActualReturnType, MethodReturnType>, ExpectationBuilder&> {
+        m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::RETURN; // Still a RETURN action, but Mock::call handles void.
+        m_expectation.m_return_value.reset(); // Ensure no value is stored for void return.
+        m_expectation.m_is_action_will_once = true;
+        return *this;
+    }
+
+    template<typename ActualReturnType = MethodReturnType>
+    auto WillRepeatedly() -> std::enable_if_t<std::is_void_v<ActualReturnType> &&
+                                            std::is_same_v<ActualReturnType, MethodReturnType>, ExpectationBuilder&> {
+        m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::RETURN;
+        m_expectation.m_return_value.reset();
         m_expectation.m_is_action_will_once = false;
         return *this;
     }
@@ -350,14 +385,16 @@ public:
 
     template<typename R, typename... MArgs>
     auto ExpectObj(R (TClassMock::* /* method_ptr_for_type_deduction */ )(MArgs...)) -> ExpectationBuilder<TClassMock, R, MArgs...> {
-        const auto* method_signature_type_info = &typeid(R (typename TClassMock::TOriginalClass::*)(MArgs...));
+        R (typename TClassMock::TOriginalClass::*temp_original_method_ptr)(MArgs...) = nullptr;
+        const auto* method_signature_type_info = &typeid(decltype(temp_original_method_ptr));
         m_expectations.emplace_back(m_file_line, method_signature_type_info);
         return ExpectationBuilder<TClassMock, R, MArgs...>(*this, m_expectations.back());
     }
 
     template<typename R, typename... MArgs>
     auto ExpectObj(R (TClassMock::* /* method_ptr_for_type_deduction */)(MArgs...) const) -> ExpectationBuilder<TClassMock, R, MArgs...> {
-        const auto* method_signature_type_info = &typeid(R (typename TClassMock::TOriginalClass::*)(MArgs...) const);
+        R (typename TClassMock::TOriginalClass::*temp_original_const_method_ptr)(MArgs...) const = nullptr;
+        const auto* method_signature_type_info = &typeid(decltype(temp_original_const_method_ptr));
         m_expectations.emplace_back(m_file_line, method_signature_type_info);
         return ExpectationBuilder<TClassMock, R, MArgs...>(*this, m_expectations.back());
     }
@@ -371,7 +408,7 @@ public:
         return stored_tuple == current_tuple;
     }
 
-    template<typename TMethodTypePtr> // No TTargetClass needed if using TClassMock::TOriginalClass
+    template<typename TMethodTypePtr>
     void throwException(TMethodTypePtr /*method_ptr*/, std::string const &expectation_file_line, std::string const &error_msg) {
         throw std::runtime_error(std::string("sequence at '") + m_file_line +
             "' mock '" + typeid(typename TClassMock::TOriginalClass).name() +
@@ -390,7 +427,8 @@ public:
 
         TExpectation& current_exp = m_expectations.front();
 
-        const auto* called_method_type_info = &typeid(TResult (typename TClassMock::TOriginalClass::*)(TMethodArgs...));
+        TResult (typename TClassMock::TOriginalClass::*temp_original_method_ptr)(TMethodArgs...) = nullptr;
+        const auto* called_method_type_info = &typeid(decltype(temp_original_method_ptr));
 
         if (*(current_exp.m_method_type_info) != *called_method_type_info) {
              throwException(
@@ -479,10 +517,12 @@ public:
 
         TExpectation& current_exp = m_expectations.front();
 
-        const auto* called_method_type_info = &typeid(TResult (typename TClassMock::TOriginalClass::*)(TMethodArgs...) const);
+        TResult (typename TClassMock::TOriginalClass::*temp_original_const_method_ptr)(TMethodArgs...) const = nullptr;
+        const auto* called_method_type_info = &typeid(decltype(temp_original_const_method_ptr));
+
 
         if (*(current_exp.m_method_type_info) != *called_method_type_info) {
-             throwException<typename TClassMock::TOriginalClass>(
+             throwException(
                 method_ptr, current_exp.file_line,
                 "unexpected const method call. Expected: " + std::string(current_exp.m_method_type_info->name()) +
                 ", Got: " + std::string(called_method_type_info->name()));
@@ -490,7 +530,7 @@ public:
 
         if (current_exp.m_expected_args_tuple.has_value()) {
             if (!isEqual(current_exp.m_expected_args_tuple, args ...)) {
-                throwException<typename TClassMock::TOriginalClass>(
+                throwException(
                     method_ptr, current_exp.file_line,
                     "arguments do not match for const method " + std::string(current_exp.m_method_type_info->name()));
             }
@@ -606,12 +646,14 @@ auto Mock<TClass>::call(TArgs && ... args) {
             int* count_ptr_copy = current_action_info.action_invocation_count_ptr;
             bool is_once_copy = current_action_info.is_action_will_once;
 
-            // Increment first, then clear if it was a WillOnce action.
             if (count_ptr_copy) { (*count_ptr_copy)++; }
             if(is_once_copy) { current_action_info.clear(); }
-            // For WillRepeatedly, g_active_sequence_action_info is cleared by the next call to step() or sequence destruction.
 
             if constexpr (!std::is_void_v<TResult>) {
+                if (!return_val_copy.has_value() && !std::is_default_constructible_v<TResult>) { // Check if value was set for non-void
+                     internal::g_active_sequence_action_info.clear(); // Ensure clear on error
+                     throw std::runtime_error(std::string("Mock::call: Sequence RETURN action for non-void method '") + typeid(TResult (TOriginalClass::*)(TArgs ...)).name() + "' but no value was provided via Return(value).");
+                }
                 try { return std::any_cast<TResult>(return_val_copy); }
                 catch (const std::bad_any_cast& e) {
                      internal::g_active_sequence_action_info.clear();
@@ -624,7 +666,7 @@ auto Mock<TClass>::call(TArgs && ... args) {
             bool is_once_copy = current_action_info.is_action_will_once;
 
             if (count_ptr_copy) { (*count_ptr_copy)++; }
-            if(is_once_copy) { current_action_info.clear(); } // Clear global state
+            if(is_once_copy) { current_action_info.clear(); }
 
             if (throw_lambda_copy) { throw_lambda_copy(); }
             else { throw std::runtime_error("Misconfigured THROW action in mock sequence (null lambda).");}
@@ -682,6 +724,10 @@ auto Mock<TClass>::call(TArgs && ... args) const {
             if (count_ptr_copy) { (*count_ptr_copy)++; }
             if(is_once_copy) { current_action_info.clear(); }
             if constexpr (!std::is_void_v<TResult>) {
+                 if (!return_val_copy.has_value() && !std::is_default_constructible_v<TResult>) {
+                     internal::g_active_sequence_action_info.clear();
+                     throw std::runtime_error(std::string("Mock::call const: Sequence RETURN action for non-void method '") + typeid(TResult (TOriginalClass::*)(TArgs ...) const).name() + "' but no value was provided via Return(value).");
+                 }
                 try { return std::any_cast<TResult>(return_val_copy); }
                 catch (const std::bad_any_cast& e) { internal::g_active_sequence_action_info.clear(); throw std::runtime_error(std::string("Mock::call const: Sequence RETURN action: Bad any_cast. Expected ") + typeid(TResult).name() + ". what(): " + e.what()); }
             } else { return; }
