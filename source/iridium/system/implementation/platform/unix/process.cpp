@@ -144,13 +144,13 @@ void CProcessStream::initialize() {
         //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
         
 #ifdef POSIX_SPAWN_SETSID
-        posix_spawnattr_t attr = { 0 };
+        posix_spawnattr_t attr = {};
         posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
 #elif defined(POSIX_SPAWN_SETSID_NP)
-        posix_spawnattr_t attr = { 0 };
+        posix_spawnattr_t attr = {};
         posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
 #else
-        posix_spawnattr_t attr = { 0 };
+        posix_spawnattr_t attr = {};
 //            posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
 //            throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
 #endif
