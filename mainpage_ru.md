@@ -1166,8 +1166,7 @@ TEST(MyClassDoesNotThrowException) {
     -   Пример: `ASSERT(x > 5);`
 
 2.  **Проверка на сравнение: `ASSERT(value1, comparison_symbol, value2)`**
-    -   Используется для различных видов сравнений, где `value1` представляет ожидаемое значение, а `value2` — фактическое (полученное) значение. `comparison_symbol` — это имя метода сравнения из класса `UnitTest`.
-    -   При сравнении (`ASSERT(value1, comparison_symbol, value2)`), ожидаемое значение (`value1`) приводится к типу фактического значения (`value2`). Например, в шаблонных методах `iridium::testing::UnitTest` (см. `iridium/testing/unit_test.h`) используется конструкция вида `TRight left_(left);` или `static_cast<TRight>(left)`, где `left` — это `value1` (ожидаемое), а `TRight` — это тип `value2` (фактическое). Таким образом, фактическое сравнение (`left_ == right`, `left_ < right` и т.д.) происходит между значениями одного типа — типа `TRight`. Для преобразования значений в строки при выводе сообщений об ошибках используется `iridium::convertion::convert`.
+    -   Используется для различных видов сравнений, где `value1` представляет ожидаемое значение, а `value2` — фактическое (полученное) значение. Для сравнения, фактическое значение (`value2`) может быть приведено к типу ожидаемого значения (`value1`); это преобразование типов облегчается с помощью `iridium::convertion::convert`. `comparison_symbol` — это имя метода сравнения из класса `UnitTest`. Для преобразования значений в строки при выводе сообщений об ошибках также используется `iridium::convertion::convert`.
     -   Технически, это вызов `ASSERT_3`, который вызывает `UnitTest::comparison_symbol(value1, value2, "value1 symbol value2", "file:line")`.
     -   Доступные `comparison_symbol`:
         -   `equal`: Проверяет, что `value1 == value2`.
