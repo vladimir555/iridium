@@ -15,9 +15,6 @@
 #include "../unix/stream_port.h"
 
 
-//#include <Security/SecureTransport.h>
-
-
 namespace iridium {
 namespace io {
 namespace implementation {

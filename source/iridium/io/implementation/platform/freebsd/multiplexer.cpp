@@ -5,7 +5,6 @@
 
 
 #include "iridium/logging/logger.h"
-#include "iridium/io/implementation/event.h"
 #include "iridium/threading/implementation/async_queue.h"
 #include "iridium/threading/implementation/worker.h"
 #include "iridium/items.h"

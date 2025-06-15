@@ -12,8 +12,6 @@
 #include "iridium/io/uri.h"
 #include "iridium/pattern/non_copyable.h"
 
-//#include <wsa>
-
 
 namespace iridium {
 namespace io {

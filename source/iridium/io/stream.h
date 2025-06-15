@@ -14,7 +14,6 @@
 #include "uri.h"
 
 #include <list>
-//#include <functional>
 
 
 //#ifdef WINDOWS_PLATFORM

@@ -1,2 +1,0 @@
-#ifdef WINDOWS_PLATFORM
-#endif // WINDOWS_PLATFORM

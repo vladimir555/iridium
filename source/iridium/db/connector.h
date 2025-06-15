@@ -7,7 +7,6 @@
 
 
 #include "iridium/pattern/initializable.h"
-//#include "iridium/caching/cached_value.h"
 
 #include <stdexcept>
 #include <string>
