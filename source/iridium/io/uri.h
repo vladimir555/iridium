@@ -16,7 +16,6 @@
 #include <set>
 
 #include "iridium/convertion/convert.h"
-#include "net/types.h"
 
 
 namespace iridium {
