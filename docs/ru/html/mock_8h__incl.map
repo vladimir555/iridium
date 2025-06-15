@@ -1,0 +1,33 @@
+<map id="source/iridium/testing/mock.h" name="source/iridium/testing/mock.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="611,5,756,46"/>
+<area shape="rect" id="Node000002" href="$va__args_8h.html" title="Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основ..." alt="" coords="5,102,173,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="611,38,418,62,185,97,163,101,162,95,185,91,417,57,610,33"/>
+<area shape="rect" id="Node000003" href="$items_8h.html" title=" " alt="" coords="197,102,304,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="611,41,474,64,316,97,305,99,304,94,315,91,473,59,610,35"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="327,102,395,127"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="611,44,513,66,407,97,403,98,401,93,406,91,512,61,610,39"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="418,102,496,127"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="633,49,504,98,502,93,631,44"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="520,102,562,127"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="653,49,575,96,572,91,650,44"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="586,102,664,127"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="673,48,644,90,639,87,668,45"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="688,102,799,127"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="699,45,729,87,725,90,695,48"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="823,102,926,127"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="728,44,835,92,833,97,726,49"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="950,102,1004,127"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="757,40,845,62,939,91,942,92,940,97,937,97,844,67,756,45"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1028,102,1096,127"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="757,35,879,57,1016,91,1022,93,1020,98,1015,97,878,63,756,40"/>
+<area shape="rect" id="Node000015" href="$non__copyable_8h.html" title=" " alt="" coords="1121,94,1249,135"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="757,34,913,57,1106,91,1105,96,913,62,756,39"/>
+<area shape="rect" id="Node000016" href="$non__movable_8h.html" title=" " alt="" coords="1273,94,1401,135"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="757,30,977,51,1116,69,1258,91,1257,96,1115,74,977,56,756,35"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="133,183,208,208"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="240,129,195,173,191,170,236,126"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="231,183,270,208"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="253,128,253,167,248,167,248,128"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="294,183,351,208"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="263,126,303,169,299,173,259,129"/>
+</map>

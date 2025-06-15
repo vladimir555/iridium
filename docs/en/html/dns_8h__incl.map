@@ -1,0 +1,7 @@
+<map id="source/iridium/io/net/dns.h" name="source/iridium/io/net/dns.h">
+<area shape="rect" id="Node000001" title="Provides access to DNS resolution functionality. This header includes platform&#45;specific DNS implement..." alt="" coords="9,5,147,46"/>
+<area shape="rect" id="Node000002" href="$implementation_2dns_8h.html" title=" " alt="" coords="5,94,151,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,78,75,78,75,46"/>
+<area shape="rect" id="Node000003" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="17,168,139,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,120,81,152,75,152,75,120"/>
+</map>

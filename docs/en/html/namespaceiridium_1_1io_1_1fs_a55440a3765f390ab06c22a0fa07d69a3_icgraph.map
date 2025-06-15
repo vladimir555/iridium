@@ -1,0 +1,7 @@
+<map id="iridium::io::fs::remove" name="iridium::io::fs::remove">
+<area shape="rect" id="Node000001" title=" " alt="" coords="246,46,393,72"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a3f322d9f6b1587338fd743a8aea8919f" title="Removes all entries from the in&#45;memory cache and potentially from the backing file if flush is implie..." alt="" coords="5,5,198,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,48,198,43,199,38,230,43"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aae27c3a7c44506fa0452f16c0168d4b5" title="Initializes the cache, potentially loading its content from the associated file. This method is calle..." alt="" coords="5,71,198,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="230,75,199,79,198,74,230,69"/>
+</map>

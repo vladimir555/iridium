@@ -1,0 +1,7 @@
+<map id="iridium::parsing::implementation::CHTTPParser::compose" name="iridium::parsing::implementation::CHTTPParser::compose">
+<area shape="rect" id="Node000001" title="Composes a node tree structure representing an HTTP message into a raw HTTP message string." alt="" coords="5,23,211,64"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a20e1b5ded3a601ff15ba1d7236cca92a" title="Adds an item to a container if it is not already present." alt="" coords="264,5,394,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,29,248,25,249,30,211,34"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="259,55,399,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,52,243,56,243,61,210,57"/>
+</map>

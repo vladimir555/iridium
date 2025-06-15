@@ -1,0 +1,11 @@
+<map id="iridium::io::extractTokens" name="iridium::io::extractTokens">
+<area shape="rect" id="Node000001" title=" " alt="" coords="457,55,624,80"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_u_r_i.html#adf0ba8afa5964c537a254a917da49e1d" title="Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл..." alt="" coords="268,55,409,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="441,70,409,70,409,65,441,65"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_u_r_i.html#a104cf25efdd090f56305aa229e83927a" title="Перечисление известных схем/протоколов URI и их типичных портов по умолчанию или идентификаторов...." alt="" coords="5,5,220,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="261,53,174,34,175,29,262,48"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_u_r_i.html#a7980fedcc7286b2f760a9e69f10ce09f" title="Оператор сравнения &quot;меньше чем&quot;. Сравнивает этот URI с другим URI. Обеспечивает строгий слабый порядо..." alt="" coords="26,55,199,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="252,70,199,70,199,65,252,65"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_u_r_i.html#adddf5538ee40a90ff03f33517de0056a" title="Оператор сравнения на равенство. Сравнивает этот URI с другим URI. Сравнение, вероятно,..." alt="" coords="22,104,203,130"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="262,87,175,106,174,101,261,82"/>
+</map>

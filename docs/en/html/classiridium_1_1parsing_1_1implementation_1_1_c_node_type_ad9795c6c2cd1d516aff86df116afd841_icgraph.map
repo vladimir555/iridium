@@ -1,0 +1,9 @@
+<map id="iridium::parsing::implementation::CNodeType::CNodeType" name="iridium::parsing::implementation::CNodeType::CNodeType">
+<area shape="rect" id="Node000001" title="Defines standard implementation helpers for CNodeType, such as smart pointer typedefs and a static cr..." alt="" coords="259,71,464,111"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad2864ef93988a4628aea30800b26b99c" title="Creates and adds a new child node with the specified name and a default&#45;constructed value...." alt="" coords="5,5,211,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,69,189,49,190,44,266,64"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#aeb1a5a87e59aaca98761199b1d42e6c4" title="Creates and adds a new child node with the specified name and value. The new child will share the sam..." alt="" coords="5,71,211,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,94,211,94,211,88,243,88"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9d1d1669306974a10e7ecaa71064838" title="Creates a deep copy (clone) of this node and its entire subtree. The cloned nodes will share the same..." alt="" coords="5,136,211,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,118,190,138,189,133,264,113"/>
+</map>

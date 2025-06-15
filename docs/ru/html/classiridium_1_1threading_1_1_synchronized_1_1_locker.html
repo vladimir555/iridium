@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::threading::Synchronized&lt; TMutex, is_tracable &gt;::Locker</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html">Synchronized</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html">Locker</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1threading_1_1_synchronized_1_1_locker-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::threading::Synchronized&lt; TMutex, is_tracable &gt;::Locker</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Класс для области видимости блокировки, который захватывает мьютекс объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code> при создании и освобождает его при уничтожении. Также предоставляет методы для ожидания на условной переменной. Наследует от <code>NonCopyable</code> и <code>NonMovable</code> для предотвращения случайного неправильного использования.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="synchronized_8h_source.html">synchronized.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::threading::Synchronized&lt; TMutex, is_tracable &gt;::Locker:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_1_1_locker__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4_1_1_locker_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4_1_1_locker_inherit__map" id="airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4_1_1_locker_inherit__map">
+<area shape="rect" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании..." alt="" coords="126,79,295,135"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="5,5,200,31"/>
+<area shape="poly" title=" " alt="" coords="131,39,178,76,175,81,128,43"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="224,5,413,31"/>
+<area shape="poly" title=" " alt="" coords="293,43,246,81,243,76,290,39"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::threading::Synchronized&lt; TMutex, is_tracable &gt;::Locker:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_1_1_locker__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4_1_1_locker_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4_1_1_locker_coll__map" id="airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4_1_1_locker_coll__map">
+<area shape="rect" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании..." alt="" coords="126,79,295,135"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="5,5,200,31"/>
+<area shape="poly" title=" " alt="" coords="131,39,178,76,175,81,128,43"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="224,5,413,31"/>
+<area shape="poly" title=" " alt="" coords="293,43,246,81,243,76,290,39"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a60ffd18120547a96cace64d482bedcfc" id="r_a60ffd18120547a96cace64d482bedcfc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60ffd18120547a96cace64d482bedcfc">Locker</a> (<a class="el" href="classiridium_1_1threading_1_1_synchronized.html">Synchronized</a> const *const s, char const *file, int line)</td></tr>
+<tr class="memdesc:a60ffd18120547a96cace64d482bedcfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> и захватывает мьютекс связанного объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Если <code>is_tracable</code> истинно для родительского объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>, логирует попытку блокировки.  <br /></td></tr>
+<tr class="separator:a60ffd18120547a96cace64d482bedcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd147e3a7d3ca89d1d92c7acd1e0dca" id="r_a7bd147e3a7d3ca89d1d92c7acd1e0dca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7bd147e3a7d3ca89d1d92c7acd1e0dca">~Locker</a> ()</td></tr>
+<tr class="memdesc:a7bd147e3a7d3ca89d1d92c7acd1e0dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уничтожает <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> и освобождает захваченный мьютекс. Уведомляет один ожидающий поток на условной переменной. Если <code>is_tracable</code> истинно для родительского объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>, логирует событие разблокировки.  <br /></td></tr>
+<tr class="separator:a7bd147e3a7d3ca89d1d92c7acd1e0dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c7e37d754ec672ca10c565a97f6d27" id="r_a97c7e37d754ec672ca10c565a97f6d27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97c7e37d754ec672ca10c565a97f6d27">wait</a> ()</td></tr>
+<tr class="memdesc:a97c7e37d754ec672ca10c565a97f6d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ожидает на условной переменной объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code> до уведомления или прерывания. Мьютекс должен быть заблокирован этим <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> перед вызовом <code><a class="el" href="#a97c7e37d754ec672ca10c565a97f6d27" title="Ожидает на условной переменной объекта Synchronized до уведомления или прерывания....">wait()</a></code>.  <br /></td></tr>
+<tr class="separator:a97c7e37d754ec672ca10c565a97f6d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6dad2b293465b48338dd21d3abea727" id="r_ab6dad2b293465b48338dd21d3abea727"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6dad2b293465b48338dd21d3abea727">wait</a> (std::chrono::nanoseconds const &amp;timeout)</td></tr>
+<tr class="memdesc:ab6dad2b293465b48338dd21d3abea727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ожидает на условной переменной объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code> в течение указанного времени, или до уведомления, или прерывания. Мьютекс должен быть заблокирован этим <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> перед вызовом <code><a class="el" href="#a97c7e37d754ec672ca10c565a97f6d27" title="Ожидает на условной переменной объекта Synchronized до уведомления или прерывания....">wait()</a></code>.  <br /></td></tr>
+<tr class="separator:ab6dad2b293465b48338dd21d3abea727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_non_copyable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></td></tr>
+<tr class="memitem:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_ae3c2afe37346ea92307157d57b73773e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#ae3c2afe37346ea92307157d57b73773e">~NonCopyable</a> ()=default</td></tr>
+<tr class="memdesc:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов через указатель на базовый класс, если <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> когда-либо использовался как полиморфная база, хотя его основное назначение - семантика предотвращения копирования.  <br /></td></tr>
+<tr class="separator:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_non_movable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_non_movable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">iridium::pattern::NonMovable</a></td></tr>
+<tr class="memitem:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable" id="r_aba2105fd94fdc498bb299f53b3401702"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#aba2105fd94fdc498bb299f53b3401702">~NonMovable</a> ()=default</td></tr>
+<tr class="memdesc:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов, если <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a></code> используется как полиморфная база.  <br /></td></tr>
+<tr class="separator:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Дополнительные унаследованные члены</h2></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1pattern_1_1_non_copyable')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></td></tr>
+<tr class="memitem:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_ad479debaa1ed429c9b6713e94dfde55b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b">NonCopyable</a> ()=default</td></tr>
+<tr class="memdesc:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчанию, оставаясь при этом некопируемыми.  <br /></td></tr>
+<tr class="separator:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_a74879a308ee2096241f553f69c8c5f3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#a74879a308ee2096241f553f69c8c5f3b">NonCopyable</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;)=delete</td></tr>
+<tr class="memdesc:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных классов через конструктор копирования.  <br /></td></tr>
+<tr class="separator:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_a35c13b2ae7a0356e0360bb2b9e06b17a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#a35c13b2ae7a0356e0360bb2b9e06b17a">operator=</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;) const =delete</td></tr>
+<tr class="memdesc:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием экземпляров производных классов. Квалификатор <code>const</code> у самого оператора необычен и, вероятно, является опечаткой; стандартная практика: <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> &amp;operator=(<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> const &amp;) = delete;</code>.  <br /></td></tr>
+<tr class="separator:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1pattern_1_1_non_movable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1pattern_1_1_non_movable')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">iridium::pattern::NonMovable</a></td></tr>
+<tr class="memitem:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable" id="r_a092ab25c7ed88d0c0a899cf1173a590f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a092ab25c7ed88d0c0a899cf1173a590f">NonMovable</a> ()=default</td></tr>
+<tr class="memdesc:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчанию, оставаясь при этом неперемещаемыми (частично, в данном случае).  <br /></td></tr>
+<tr class="separator:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable" id="r_a00961d9171ac1e8a64b2cf92bc83495a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a00961d9171ac1e8a64b2cf92bc83495a">NonMovable</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">NonMovable</a> const &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор перемещения (защищенный). Пытается предотвратить конструирование перемещением экземпляров производных классов. Примечание: Сигнатура <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a>(<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a> const &amp;&amp;)</code> является необычной. Стандартный удаленный конструктор перемещения обычно выглядит так: <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a>(<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a> &amp;&amp;) = delete;</code>. Rvalue-ссылка на константу (<code>const &amp;&amp;</code>) — редкая конструкция и может не обеспечивать предполагаемую семантику неперемещаемости так же надежно, как rvalue-ссылка на неконстантный объект.  <br /></td></tr>
+<tr class="separator:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TMutex, bool const is_tracable = false&gt;<br />
+class iridium::threading::Synchronized&lt; TMutex, is_tracable &gt;::Locker</div><p>Класс для области видимости блокировки, который захватывает мьютекс объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code> при создании и освобождает его при уничтожении. Также предоставляет методы для ожидания на условной переменной. Наследует от <code>NonCopyable</code> и <code>NonMovable</code> для предотвращения случайного неправильного использования. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a60ffd18120547a96cace64d482bedcfc" name="a60ffd18120547a96cace64d482bedcfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ffd18120547a96cace64d482bedcfc">&#9670;&#160;</a></span>Locker()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TMutex, bool const is_tracable&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized</a>&lt; TMutex, is_tracable &gt;::Locker::Locker </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html">Synchronized</a> const *const</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char const *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> и захватывает мьютекс связанного объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Если <code>is_tracable</code> истинно для родительского объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>, логирует попытку блокировки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Указатель на объект <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>, мьютекс которого должен быть заблокирован. </td></tr>
+    <tr><td class="paramname">file</td><td>Имя исходного файла (используется для трассировки, если <code>is_tracable</code> истинно). </td></tr>
+    <tr><td class="paramname">line</td><td>Номер строки в исходном файле (используется для трассировки, если <code>is_tracable</code> истинно). </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_1_1_locker_a60ffd18120547a96cace64d482bedcfc_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a60ffd18120547a96cace64d482bedcfc_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a60ffd18120547a96cace64d482bedcfc_cgraph" id="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a60ffd18120547a96cace64d482bedcfc_cgraph">
+<area shape="rect" title="Конструирует Locker и захватывает мьютекс связанного объекта Synchronized. Если is_tracable истинно д..." alt="" coords="5,31,161,87"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="222,5,390,46"/>
+<area shape="poly" title=" " alt="" coords="160,45,207,38,207,43,161,50"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79" title="Конструктор по умолчанию. Инициализирует примитивы синхронизации." alt="" coords="209,71,404,111"/>
+<area shape="poly" title=" " alt="" coords="161,67,194,72,193,77,161,73"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="452,13,516,38"/>
+<area shape="poly" title=" " alt="" coords="391,23,437,23,437,28,391,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7bd147e3a7d3ca89d1d92c7acd1e0dca" name="a7bd147e3a7d3ca89d1d92c7acd1e0dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bd147e3a7d3ca89d1d92c7acd1e0dca">&#9670;&#160;</a></span>~Locker()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TMutex, bool const is_tracable&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized</a>&lt; TMutex, is_tracable &gt;::Locker::~Locker </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Уничтожает <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> и освобождает захваченный мьютекс. Уведомляет один ожидающий поток на условной переменной. Если <code>is_tracable</code> истинно для родительского объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>, логирует событие разблокировки. </p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_1_1_locker_a7bd147e3a7d3ca89d1d92c7acd1e0dca_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a7bd147e3a7d3ca89d1d92c7acd1e0dca_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a7bd147e3a7d3ca89d1d92c7acd1e0dca_cgraph" id="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a7bd147e3a7d3ca89d1d92c7acd1e0dca_cgraph">
+<area shape="rect" title="Уничтожает Locker и освобождает захваченный мьютекс. Уведомляет один ожидающий поток на условной пере..." alt="" coords="5,5,161,61"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="209,13,377,54"/>
+<area shape="poly" title=" " alt="" coords="161,30,193,30,193,36,161,36"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="425,20,489,46"/>
+<area shape="poly" title=" " alt="" coords="377,30,410,30,410,36,377,36"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a97c7e37d754ec672ca10c565a97f6d27" name="a97c7e37d754ec672ca10c565a97f6d27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c7e37d754ec672ca10c565a97f6d27">&#9670;&#160;</a></span>wait() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TMutex, bool const is_tracable&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized</a>&lt; TMutex, is_tracable &gt;::Locker::wait </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ожидает на условной переменной объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code> до уведомления или прерывания. Мьютекс должен быть заблокирован этим <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> перед вызовом <code><a class="el" href="#a97c7e37d754ec672ca10c565a97f6d27" title="Ожидает на условной переменной объекта Synchronized до уведомления или прерывания....">wait()</a></code>. </p>
+<dl class="section return"><dt>Возвращает</dt><dd><code>true</code>, если ожидание прошло успешно и не было прервано, <code>false</code> в случае прерывания. </dd></dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_1_1_locker_a97c7e37d754ec672ca10c565a97f6d27_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a97c7e37d754ec672ca10c565a97f6d27_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a97c7e37d754ec672ca10c565a97f6d27_cgraph" id="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_a97c7e37d754ec672ca10c565a97f6d27_cgraph">
+<area shape="rect" title="Ожидает на условной переменной объекта Synchronized до уведомления или прерывания...." alt="" coords="5,5,193,46"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="241,5,409,46"/>
+<area shape="poly" title=" " alt="" coords="193,23,225,23,225,28,193,28"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="457,13,521,38"/>
+<area shape="poly" title=" " alt="" coords="409,23,442,23,442,28,409,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab6dad2b293465b48338dd21d3abea727" name="ab6dad2b293465b48338dd21d3abea727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6dad2b293465b48338dd21d3abea727">&#9670;&#160;</a></span>wait() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TMutex, bool const is_tracable&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized</a>&lt; TMutex, is_tracable &gt;::Locker::wait </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds const &amp;</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ожидает на условной переменной объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code> в течение указанного времени, или до уведомления, или прерывания. Мьютекс должен быть заблокирован этим <code><a class="el" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании...">Locker</a></code> перед вызовом <code><a class="el" href="#a97c7e37d754ec672ca10c565a97f6d27" title="Ожидает на условной переменной объекта Synchronized до уведомления или прерывания....">wait()</a></code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>Максимальная продолжительность ожидания. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd><code>true</code>, если ожидание прошло успешно (не по тайм-ауту и не прервано), <code>false</code> в случае тайм-аута или прерывания. </dd></dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_1_1_locker_ab6dad2b293465b48338dd21d3abea727_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_synchronized_1_1_locker_ab6dad2b293465b48338dd21d3abea727_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_ab6dad2b293465b48338dd21d3abea727_cgraph" id="aclassiridium_1_1threading_1_1_synchronized_1_1_locker_ab6dad2b293465b48338dd21d3abea727_cgraph">
+<area shape="rect" title="Ожидает на условной переменной объекта Synchronized в течение указанного времени, или до уведомления,..." alt="" coords="5,5,193,46"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="241,5,409,46"/>
+<area shape="poly" title=" " alt="" coords="193,23,225,23,225,28,193,28"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="457,13,521,38"/>
+<area shape="poly" title=" " alt="" coords="409,23,442,23,442,28,409,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/threading/<a class="el" href="synchronized_8h_source.html">synchronized.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

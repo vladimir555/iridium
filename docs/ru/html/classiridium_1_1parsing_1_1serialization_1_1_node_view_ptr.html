@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::parsing::serialization::NodeViewPtr&lt; TNodeView &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing.html">parsing</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing_1_1serialization.html">serialization</a></li><li class="navelem"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">NodeViewPtr</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::parsing::serialization::NodeViewPtr&lt; TNodeView &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Обертка для лениво инициализируемого разделяемого указателя на <code>TNodeView</code>. Используется для опциональных или рекурсивных определений узлов в структурах данных, определенных макросами сериализации (например, <code>DEFINE_NODE_PTR</code>). Фактический <code>TNodeView</code> обычно создается только при вызове <code><a class="el" href="#a3859d99c5505ade8c5d2e951240f1690" title="Получает разделяемый указатель на TNodeView. Если TNodeView еще не был создан (например,...">get()</a></code> и если существует базовый узел.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="serialization_2node_8h_source.html">node.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ab9d79a4226e2f68736d2658cd1885729" id="r_ab9d79a4226e2f68736d2658cd1885729"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9d79a4226e2f68736d2658cd1885729">NodeViewPtr</a> (<a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">NodeView</a>&lt; void &gt; const &amp;parent)</td></tr>
+<tr class="memdesc:ab9d79a4226e2f68736d2658cd1885729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html" title="Обертка для лениво инициализируемого разделяемого указателя на TNodeView. Используется для опциональн...">NodeViewPtr</a></code>. Пытается инициализировать внутренний <code>TNodeView</code>, если соответствующий узел существует в <code>parent</code>.  <br /></td></tr>
+<tr class="separator:ab9d79a4226e2f68736d2658cd1885729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b658034e43660784076a7368fb63c92" id="r_a6b658034e43660784076a7368fb63c92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b658034e43660784076a7368fb63c92">~NodeViewPtr</a> ()=default</td></tr>
+<tr class="memdesc:a6b658034e43660784076a7368fb63c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:a6b658034e43660784076a7368fb63c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3859d99c5505ade8c5d2e951240f1690" id="r_a3859d99c5505ade8c5d2e951240f1690"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; TNodeView &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3859d99c5505ade8c5d2e951240f1690">get</a> () const</td></tr>
+<tr class="memdesc:a3859d99c5505ade8c5d2e951240f1690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает разделяемый указатель на <code>TNodeView</code>. Если <code>TNodeView</code> еще не был создан (например, потому что базовый узел не существовал при конструировании), вернет нулевой указатель.  <br /></td></tr>
+<tr class="separator:a3859d99c5505ade8c5d2e951240f1690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TNodeView&gt;<br />
+class iridium::parsing::serialization::NodeViewPtr&lt; TNodeView &gt;</div><p>Обертка для лениво инициализируемого разделяемого указателя на <code>TNodeView</code>. Используется для опциональных или рекурсивных определений узлов в структурах данных, определенных макросами сериализации (например, <code>DEFINE_NODE_PTR</code>). Фактический <code>TNodeView</code> обычно создается только при вызове <code><a class="el" href="#a3859d99c5505ade8c5d2e951240f1690" title="Получает разделяемый указатель на TNodeView. Если TNodeView еще не был создан (например,...">get()</a></code> и если существует базовый узел. </p>
+<dl class="tparams"><dt>Параметры шаблона</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TNodeView</td><td>Тип <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code>, которым управляет эта обертка указателя. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ab9d79a4226e2f68736d2658cd1885729" name="ab9d79a4226e2f68736d2658cd1885729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9d79a4226e2f68736d2658cd1885729">&#9670;&#160;</a></span>NodeViewPtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TNodeView&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr</a>&lt; TNodeView &gt;::NodeViewPtr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">NodeView</a>&lt; void &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html" title="Обертка для лениво инициализируемого разделяемого указателя на TNodeView. Используется для опциональн...">NodeViewPtr</a></code>. Пытается инициализировать внутренний <code>TNodeView</code>, если соответствующий узел существует в <code>parent</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>Родительский <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a>&lt;void&gt;</code>, в котором производится поиск узла. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6b658034e43660784076a7368fb63c92" name="a6b658034e43660784076a7368fb63c92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b658034e43660784076a7368fb63c92">&#9670;&#160;</a></span>~NodeViewPtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TNodeView&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr</a>&lt; TNodeView &gt;::~<a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">NodeViewPtr</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Деструктор по умолчанию. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a3859d99c5505ade8c5d2e951240f1690" name="a3859d99c5505ade8c5d2e951240f1690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3859d99c5505ade8c5d2e951240f1690">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TNodeView&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; TNodeView &gt; <a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">iridium::parsing::serialization::NodeViewPtr</a>&lt; TNodeView &gt;::get </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получает разделяемый указатель на <code>TNodeView</code>. Если <code>TNodeView</code> еще не был создан (например, потому что базовый узел не существовал при конструировании), вернет нулевой указатель. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Разделяемый указатель на <code>TNodeView</code> или nullptr, если он недоступен/не инициализирован. </dd></dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/parsing/serialization/<a class="el" href="serialization_2node_8h_source.html">node.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

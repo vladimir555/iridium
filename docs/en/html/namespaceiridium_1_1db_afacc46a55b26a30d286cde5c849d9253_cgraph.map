@@ -1,0 +1,22 @@
+<map id="iridium::db::createConnector" name="iridium::db::createConnector">
+<area shape="rect" id="Node000001" title="Creates a database connector instance from a URI. This is a convenience function that first calls mak..." alt="" coords="5,105,191,131"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1db.html#a5ff13d523076158415990aa954dfc8f4" title=" " alt="" coords="239,43,424,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,102,265,70,267,75,150,107"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1db.html#a91db078cad003f5c796da6f27c54fa89" title="Creates a database configuration object from a URI. Parses the given URI and extracts database connec..." alt="" coords="252,129,411,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,125,236,130,236,135,191,130"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="536,5,601,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="417,39,521,23,521,28,418,45"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="352,127,422,79,445,58,471,40,520,23,522,28,473,45,449,62,426,83,355,131"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_u_r_i.html#ada065803f65326203750385f9502f90e" title="Gets the host component of the URI (e.g., domain name or IP address)." alt="" coords="487,55,650,80"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="366,126,471,89,495,82,496,87,473,94,368,131"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1_u_r_i.html#af76919ad94a3b888c4828abe75fb892a" title="Gets the password part of the URI (e.g., password in user:password@host)." alt="" coords="472,104,665,130"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="411,131,456,126,457,131,412,136"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1_u_r_i.html#a0e737b99d5a33ef5f3b2720b5e61e5af" title="Gets the path component of the URI (e.g., /path/to/resource)." alt="" coords="488,153,650,179"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="412,148,472,154,472,159,411,153"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1_u_r_i.html#a2e2c91876ebf8710af57810c8b65e466" title="Gets the port number component of the URI. If the port is not explicitly specified in the URI string,..." alt="" coords="489,203,648,228"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="369,153,473,189,496,196,495,201,471,194,367,158"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1_u_r_i.html#a1d680484ab27a092438b80f8fc133c77" title="Gets the protocol (scheme) of the URI." alt="" coords="477,252,660,278"/>
+<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="349,153,402,195,436,219,473,238,487,244,485,249,471,243,434,223,399,200,346,158"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1_u_r_i.html#a07c13f94f61bd56817c63f8059a3ef23" title="Gets the user information part of the URI (e.g., username in user:password@host)." alt="" coords="487,301,650,327"/>
+<area shape="poly" id="edge10_Node000004_Node000010" title=" " alt="" coords="343,154,393,219,431,256,473,288,482,293,480,297,471,292,427,260,389,222,339,157"/>
+</map>

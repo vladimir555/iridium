@@ -1,0 +1,5 @@
+<map id="iridium::io::implementation::CSessionManager::finalize" name="iridium::io::implementation::CSessionManager::finalize">
+<area shape="rect" id="Node000001" title="Finalizes the session manager and its components. This typically stops worker threads and cleans up r..." alt="" coords="248,13,433,54"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a85f5ecfd02189d481b71f99fec0729c6" title=" " alt="" coords="5,5,200,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,36,200,36,200,30,232,30"/>
+</map>

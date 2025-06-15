@@ -1,0 +1,5 @@
+<map id="iridium::threading::IWorker&lt; TInputItem, TOutputItem &gt;::IHandler" name="iridium::threading::IWorker&lt; TInputItem, TOutputItem &gt;::IHandler">
+<area shape="rect" id="Node000001" title=" " alt="" coords="14,79,181,135"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="5,5,190,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,47,100,78,95,78,95,47"/>
+</map>

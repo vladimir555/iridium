@@ -1,0 +1,19 @@
+<map id="source/iridium/threading/worker.h" name="source/iridium/threading/worker.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="132,5,291,46"/>
+<area shape="rect" id="Node000002" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="51,183,180,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,35,100,42,67,54,38,72,15,95,8,114,15,133,36,157,63,174,61,178,33,161,11,136,3,114,11,93,35,67,65,49,98,37,131,30"/>
+<area shape="rect" id="Node000004" href="$async__queue_8h.html" title="Defines interfaces for asynchronous queues, including pusher, popper, and combined queue functionalit..." alt="" coords="231,94,387,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="235,45,278,82,274,86,232,49"/>
+<area shape="rect" id="Node000007" href="$initializable_8h.html" title=" " alt="" coords="24,102,207,127"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="192,49,142,93,138,89,188,45"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="410,102,464,127"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="272,44,399,92,401,92,399,97,397,96,271,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="81,256,150,282"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,209,118,241,113,241,113,209"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="262,138,160,179,158,174,260,133"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="252,183,291,208"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="302,136,286,169,281,167,297,134"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="315,183,375,208"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="320,134,335,167,331,169,315,136"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="118,128,118,167,113,167,113,128"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="iridium::io::fs::IFileStream" name="iridium::io::fs::IFileStream">
+<area shape="rect" id="Node000001" title="Base interface for file&#45;specific streams. Extends the generic IStream interface with file&#45;specific op..." alt="" coords="417,46,588,72"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title="Interface for readable file streams. Combines file&#45;specific stream properties from IFileStream with g..." alt="" coords="636,5,808,46"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="603,41,635,36,636,41,604,46"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title="Interface for writable file streams. Combines file&#45;specific stream properties from IFileStream with g..." alt="" coords="636,71,808,111"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="604,71,636,76,635,81,603,76"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_stream.html" title="Base interface for I/O streams. Provides common functionalities for all stream types,..." alt="" coords="238,46,369,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="385,56,416,56,416,62,385,62"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="5,46,190,72"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="206,56,237,56,237,62,206,62"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Concrete implementation of a file stream providing read, write, and seeking capabilities...." alt="" coords="856,39,1048,79"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="823,38,856,42,855,48,823,43"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="A concrete file stream implementation specialized for reading. This class derives from CFileStream an..." alt="" coords="1096,5,1288,46"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1063,41,1095,36,1096,42,1064,46"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title="A concrete file stream implementation specialized for writing. This class derives from CFileStream an..." alt="" coords="1096,71,1288,111"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="1064,71,1096,76,1095,81,1063,76"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="823,74,855,70,856,75,823,80"/>
+</map>

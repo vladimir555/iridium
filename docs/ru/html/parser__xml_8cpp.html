@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/parsing/implementation/parser_xml.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_3598e8d03f058449899ac524faf1a451.html">parsing</a></li><li class="navelem"><a class="el" href="dir_5a23d1bf9befbd4f2e2beb9407a1c7ef.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#typedef-members">Определения типов</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл parser_xml.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="parser__xml_8h_source.html">parser_xml.h</a>&quot;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;rapidxml/rapidxml.hpp&gt;</code><br />
+<code>#include &lt;rapidxml/rapidxml_print.hpp&gt;</code><br />
+<code>#include &quot;<a class="el" href="implementation_2node_8h_source.html">node.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="assert_8h_source.html">iridium/assert.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="items_8h_source.html">iridium/items.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="strings_8h_source.html">iridium/strings.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для parser_xml.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="parser__xml_8cpp__incl.png" border="0" usemap="#asource_2iridium_2parsing_2implementation_2parser__xml_8cpp" alt=""/></div>
+<map name="asource_2iridium_2parsing_2implementation_2parser__xml_8cpp" id="asource_2iridium_2parsing_2implementation_2parser__xml_8cpp">
+<area shape="rect" title=" " alt="" coords="626,5,780,61"/>
+<area shape="rect" href="parser__xml_8h.html" title=" " alt="" coords="127,109,223,135"/>
+<area shape="poly" title=" " alt="" coords="627,50,239,113,238,107,626,44"/>
+<area shape="rect" title=" " alt="" coords="1020,566,1058,592"/>
+<area shape="poly" title=" " alt="" coords="780,31,914,34,1072,44,1148,53,1217,67,1274,84,1314,107,1331,126,1339,146,1340,194,1340,425,1338,447,1332,466,1309,499,1276,525,1236,545,1192,559,1149,569,1074,578,1073,573,1148,563,1191,554,1234,540,1273,521,1305,496,1327,464,1333,446,1335,425,1335,194,1334,147,1327,129,1311,111,1272,89,1216,72,1147,59,1071,49,913,39,780,36"/>
+<area shape="rect" title=" " alt="" coords="351,109,420,135"/>
+<area shape="poly" title=" " alt="" coords="626,58,435,110,434,105,625,53"/>
+<area shape="rect" title=" " alt="" coords="1093,183,1150,208"/>
+<area shape="poly" title=" " alt="" coords="780,34,876,40,981,52,1030,62,1074,74,1109,89,1133,107,1141,122,1143,138,1136,169,1131,168,1137,138,1135,123,1129,111,1106,93,1072,79,1029,67,980,57,875,45,780,39"/>
+<area shape="rect" title=" " alt="" coords="494,109,605,135"/>
+<area shape="poly" title=" " alt="" coords="656,64,586,103,583,99,654,59"/>
+<area shape="rect" title=" " alt="" coords="629,109,777,135"/>
+<area shape="poly" title=" " alt="" coords="706,61,706,93,700,93,700,61"/>
+<area shape="rect" title=" " alt="" coords="801,109,981,135"/>
+<area shape="poly" title=" " alt="" coords="763,59,852,100,850,105,761,64"/>
+<area shape="rect" href="implementation_2node_8h.html" title="Определяет typedef CNode, конкретную реализацию узла на основе CNodeType&lt;std::string&gt;...." alt="" coords="314,183,374,208"/>
+<area shape="poly" title=" " alt="" coords="626,42,546,50,460,63,386,83,359,96,341,111,334,123,332,138,337,167,331,168,327,138,329,122,337,107,356,92,384,78,459,58,545,45,625,36"/>
+<area shape="rect" href="assert_8h.html" title=" " alt="" coords="696,330,806,356"/>
+<area shape="poly" title=" " alt="" coords="626,43,568,53,516,70,497,82,484,96,480,113,485,134,506,167,531,198,560,227,591,252,654,293,709,321,706,326,651,297,588,256,556,231,527,202,501,170,480,136,475,113,480,94,493,78,514,65,567,48,625,38"/>
+<area shape="rect" href="items_8h.html" title=" " alt="" coords="1194,109,1300,135"/>
+<area shape="poly" title=" " alt="" coords="781,44,1175,106,1179,107,1178,112,1175,112,780,49"/>
+<area shape="rect" href="strings_8h.html" title=" " alt="" coords="1005,109,1118,135"/>
+<area shape="poly" title=" " alt="" coords="781,50,997,102,996,107,779,56"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="155,492,283,518"/>
+<area shape="poly" title=" " alt="" coords="127,135,77,153,53,166,33,184,18,204,11,222,8,268,8,344,12,371,23,395,39,416,60,434,110,464,160,485,158,490,107,469,57,439,36,419,18,397,7,372,3,344,3,268,6,221,14,201,29,181,50,162,75,148,125,130"/>
+<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="157,256,305,282"/>
+<area shape="poly" title=" " alt="" coords="186,134,212,182,229,240,224,242,207,184,181,136"/>
+<area shape="rect" href="parser_8h.html" title="Определяет интерфейс IParser для разбора и формирования структурированных данных. Этот интерфейс пред..." alt="" coords="43,183,198,208"/>
+<area shape="poly" title=" " alt="" coords="168,137,141,172,137,169,164,133"/>
+<area shape="rect" title=" " alt="" coords="558,566,626,592"/>
+<area shape="poly" title=" " alt="" coords="284,514,544,563,543,568,283,520"/>
+<area shape="rect" href="node__type_8h.html" title="Определяет шаблонный интерфейс INodeType&lt;TValue&gt; для обобщенных узлов дерева. Этот интерфейс является..." alt="" coords="342,330,434,356"/>
+<area shape="poly" title=" " alt="" coords="259,280,349,321,346,326,257,285"/>
+<area shape="poly" title=" " alt="" coords="394,356,397,398,393,423,382,446,365,464,345,478,299,496,297,491,342,473,362,460,378,443,388,422,392,398,388,356"/>
+<area shape="rect" title=" " alt="" coords="480,566,534,592"/>
+<area shape="poly" title=" " alt="" coords="397,355,496,551,492,553,392,357"/>
+<area shape="poly" title=" " alt="" coords="422,354,538,395,685,442,739,455,782,463,824,473,877,490,948,522,1008,555,1005,560,946,527,875,495,823,478,781,469,738,460,684,447,536,400,420,359"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="696,404,819,444"/>
+<area shape="poly" title=" " alt="" coords="436,352,682,404,681,409,435,357"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="195,411,368,437"/>
+<area shape="poly" title=" " alt="" coords="374,358,312,404,308,400,370,354"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="697,492,864,518"/>
+<area shape="poly" title=" " alt="" coords="766,444,775,476,770,478,761,445"/>
+<area shape="poly" title=" " alt="" coords="749,521,640,562,638,557,747,516"/>
+<area shape="poly" title=" " alt="" coords="731,521,549,568,548,563,730,516"/>
+<area shape="poly" title=" " alt="" coords="825,516,1006,566,1004,571,823,521"/>
+<area shape="rect" title=" " alt="" coords="815,566,876,592"/>
+<area shape="poly" title=" " alt="" coords="793,516,826,553,822,556,789,520"/>
+<area shape="rect" title=" " alt="" coords="650,566,708,592"/>
+<area shape="poly" title=" " alt="" coords="765,521,710,559,707,554,762,516"/>
+<area shape="rect" title=" " alt="" coords="731,566,792,592"/>
+<area shape="poly" title=" " alt="" coords="780,519,771,552,766,550,775,518"/>
+<area shape="rect" title=" " alt="" coords="900,566,978,592"/>
+<area shape="poly" title=" " alt="" coords="808,516,899,557,897,562,806,521"/>
+<area shape="poly" title=" " alt="" coords="274,439,240,482,236,478,270,436"/>
+<area shape="poly" title=" " alt="" coords="124,208,135,308,151,376,175,443,199,479,194,482,170,446,145,378,130,309,118,209"/>
+<area shape="poly" title=" " alt="" coords="140,207,201,245,198,250,138,211"/>
+<area shape="poly" title=" " alt="" coords="119,209,106,264,96,347,97,392,105,437,120,479,145,516,167,531,200,544,288,561,384,571,465,574,465,580,384,576,287,567,198,549,164,536,141,520,115,482,99,439,92,393,91,347,101,263,114,208"/>
+<area shape="rect" href="implementation_2node__type_8h.html" title="Определяет шаблонный класс CNodeType&lt;TValue&gt;, конкретную реализацию INodeType&lt;TValue&gt;...." alt="" coords="329,256,421,282"/>
+<area shape="poly" title=" " alt="" coords="352,208,366,241,361,243,347,210"/>
+<area shape="poly" title=" " alt="" coords="342,285,303,303,259,328,217,362,200,383,185,405,181,423,183,442,202,478,197,481,178,444,175,423,180,403,195,379,213,359,256,324,300,298,340,280"/>
+<area shape="poly" title=" " alt="" coords="380,282,386,314,381,315,375,283"/>
+<area shape="poly" title=" " alt="" coords="397,280,424,301,449,329,477,387,495,448,505,505,509,550,503,551,499,506,490,449,472,389,445,331,421,305,394,285"/>
+<area shape="poly" title=" " alt="" coords="422,270,516,276,632,287,742,304,786,315,819,328,856,350,890,378,949,440,996,502,1027,551,1023,554,992,505,945,443,886,382,852,355,816,332,784,320,740,309,631,292,516,281,421,275"/>
+<area shape="rect" title=" " alt="" coords="510,330,613,356"/>
+<area shape="poly" title=" " alt="" coords="408,280,517,321,515,326,406,285"/>
+<area shape="poly" title=" " alt="" coords="736,358,711,379,686,405,669,436,660,464,650,491,629,520,590,548,549,567,547,562,587,544,625,516,646,488,655,462,664,434,682,402,708,375,733,354"/>
+<area shape="poly" title=" " alt="" coords="755,356,757,388,752,389,749,356"/>
+<area shape="poly" title=" " alt="" coords="773,354,803,375,833,402,864,440,891,480,929,550,924,553,886,483,859,443,829,406,799,379,770,358"/>
+<area shape="poly" title=" " alt="" coords="1255,134,1276,191,1285,229,1288,268,1288,426,1282,460,1264,490,1238,514,1206,534,1171,549,1136,561,1074,575,1073,570,1135,556,1169,544,1204,529,1235,510,1260,487,1277,459,1283,425,1283,268,1279,230,1271,192,1250,136"/>
+<area shape="poly" title=" " alt="" coords="1227,138,1157,177,1155,172,1224,133"/>
+<area shape="rect" title=" " alt="" coords="1174,183,1248,208"/>
+<area shape="poly" title=" " alt="" coords="1243,136,1226,170,1221,168,1239,134"/>
+<area shape="poly" title=" " alt="" coords="1030,138,962,166,873,208,776,264,730,297,686,332,632,388,585,450,548,508,522,554,518,551,544,505,581,447,628,385,682,328,726,293,773,260,871,204,960,161,1028,133"/>
+<area shape="poly" title=" " alt="" coords="1063,135,1058,268,1058,425,1054,494,1046,551,1041,550,1048,493,1052,425,1052,268,1058,135"/>
+<area shape="poly" title=" " alt="" coords="1074,133,1104,169,1100,172,1069,137"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing.html">iridium::parsing</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html">iridium::parsing::implementation</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing_1_1implementation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры. Это пространство имен предоставляет фактическую логику для разбора и формирования структур данных, определенных интерфейсами в родительском пространстве имен <code><a class="el" href="namespaceiridium_1_1parsing.html" title="Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных да...">iridium::parsing</a></code>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Определения типов</h2></td></tr>
+<tr class="memitem:aae6830454191d9498677d55eef138309" id="r_aae6830454191d9498677d55eef138309"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae6830454191d9498677d55eef138309">TXMLDocument</a> = rapidxml::xml_document&lt;&gt;</td></tr>
+<tr class="separator:aae6830454191d9498677d55eef138309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6baecaed0be1bc556ea532ba04bb7bcd" id="r_a6baecaed0be1bc556ea532ba04bb7bcd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6baecaed0be1bc556ea532ba04bb7bcd">TXMLNode</a> = rapidxml::xml_node&lt;&gt;</td></tr>
+<tr class="separator:a6baecaed0be1bc556ea532ba04bb7bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada29a43e727a6cc9a506f0273775987" id="r_aada29a43e727a6cc9a506f0273775987"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aada29a43e727a6cc9a506f0273775987">TXMLAttribute</a> = rapidxml::xml_attribute&lt;&gt;</td></tr>
+<tr class="separator:aada29a43e727a6cc9a506f0273775987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a988edd6f090ffa2ca64dbead47872439" id="r_a988edd6f090ffa2ca64dbead47872439"><td class="memItemLeft" align="right" valign="top">INode::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html#a988edd6f090ffa2ca64dbead47872439">iridium::parsing::implementation::convertXMLNodeToNode</a> (<a class="el" href="#a6baecaed0be1bc556ea532ba04bb7bcd">TXMLNode</a> const *const xml_node)</td></tr>
+<tr class="separator:a988edd6f090ffa2ca64dbead47872439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc4eac333cfa9a870c1ea90067b54733" id="r_afc4eac333cfa9a870c1ea90067b54733"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6baecaed0be1bc556ea532ba04bb7bcd">TXMLNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html#afc4eac333cfa9a870c1ea90067b54733">iridium::parsing::implementation::convertNodeToXMLNode</a> (INode::TConstSharedPtr const &amp;node, <a class="el" href="#a6baecaed0be1bc556ea532ba04bb7bcd">TXMLNode</a> *xml_node_, <a class="el" href="#aae6830454191d9498677d55eef138309">TXMLDocument</a> &amp;xml_document)</td></tr>
+<tr class="separator:afc4eac333cfa9a870c1ea90067b54733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Типы</h2>
+<a id="aada29a43e727a6cc9a506f0273775987" name="aada29a43e727a6cc9a506f0273775987"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada29a43e727a6cc9a506f0273775987">&#9670;&#160;</a></span>TXMLAttribute</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aada29a43e727a6cc9a506f0273775987">TXMLAttribute</a> = rapidxml::xml_attribute&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae6830454191d9498677d55eef138309" name="aae6830454191d9498677d55eef138309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae6830454191d9498677d55eef138309">&#9670;&#160;</a></span>TXMLDocument</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aae6830454191d9498677d55eef138309">TXMLDocument</a> = rapidxml::xml_document&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6baecaed0be1bc556ea532ba04bb7bcd" name="a6baecaed0be1bc556ea532ba04bb7bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6baecaed0be1bc556ea532ba04bb7bcd">&#9670;&#160;</a></span>TXMLNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a6baecaed0be1bc556ea532ba04bb7bcd">TXMLNode</a> = rapidxml::xml_node&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

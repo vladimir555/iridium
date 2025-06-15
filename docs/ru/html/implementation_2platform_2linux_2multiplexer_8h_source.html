@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/io/implementation/platform/linux/multiplexer.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_b4cca597089861bcab89c3831a70b3d7.html">implementation</a></li><li class="navelem"><a class="el" href="dir_e667047e970e2accddcc8c7cfabce1dd.html">platform</a></li><li class="navelem"><a class="el" href="dir_b4220212f34f9d21bd9b69e5e740ee95.html">linux</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">multiplexer.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="implementation_2platform_2linux_2multiplexer_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_LISTENER_4F88765B_9F8A_4F8A_8622_061022685F80</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_LISTENER_4F88765B_9F8A_4F8A_8622_061022685F80</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="platform_8h.html">iridium/platform.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef LINUX_PLATFORM</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="multiplexer_8h.html">iridium/io/multiplexer.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="synchronized_8h.html">iridium/threading/synchronized.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="async__queue_8h.html">iridium/threading/async_queue.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;sys/epoll.h&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1implementation_1_1platform.html">platform</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">class </span><a class="code hl_class" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html">CMultiplexer</a>:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">public</span> IMultiplexer,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">public</span> threading::Synchronized&lt;std::mutex&gt;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a99b6ae110102ac707a48cea5a46ac4bc">CMultiplexer</a>)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_typedef" href="namespaceiridium_1_1io_1_1implementation.html#aba3f403e780ef382b1e393d8197f9cda">CMultiplexer</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span>    <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a0a14eb16b1f7f5b18106ef29bc52f71e">initialize</a>()   <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span>    <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a34274381816f6478ee4f1875aa15908d">finalize</a>()     <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span>    <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#accc6babca1fbc8e5cbdf1f4b0cd0bcf1">subscribe</a>(IStream::TSharedPtr <span class="keyword">const</span> &amp;stream) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span>  <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a84a7317dce51cf9b2af5ea3ba83f6d60">unsubscribe</a>(IStream::TSharedPtr <span class="keyword">const</span> &amp;stream) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    std::list&lt;Event::TSharedPtr&gt; <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a3a0224a267e05ce27635a2538aa6b51d">waitEvents</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">static</span> <span class="keywordtype">size_t</span> <span class="keyword">const</span> DEFAULT_EVENTS_COUNT_LIMIT = 2;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html#a8e237a5ad76c558edf5a997c2ba4cd19">assertOK</a>(<span class="keywordtype">int</span> <span class="keyword">const</span> &amp;result, std::string <span class="keyword">const</span> &amp;message);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">void</span>    addInternal(IStream::TSharedPtr <span class="keyword">const</span> &amp;stream);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">void</span>    delInternal(IStream::TSharedPtr <span class="keyword">const</span> &amp;stream);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    std::unordered_map&lt;uintptr_t, IStream::TSharedPtr&gt;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                        m_map_fd_stream;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    std::atomic&lt;int&gt;    m_epoll_fd;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordtype">int</span>                 m_event_fd;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    threading::IAsyncQueue&lt;IStream::TSharedPtr&gt;::TSharedPtr m_streams_to_add;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    threading::IAsyncQueue&lt;IStream::TSharedPtr&gt;::TSharedPtr m_streams_to_del;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    std::atomic&lt;bool&gt; m_is_closing;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>};</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>} <span class="comment">// platform</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>} <span class="comment">// implementation</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>} <span class="comment">// io</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#endif </span><span class="comment">// LINUX_PLATFORM</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_LISTENER_4F88765B_9F8A_4F8A_8622_061022685F80</span></div>
+<div class="ttc" id="aasync__queue_8h_html"><div class="ttname"><a href="async__queue_8h.html">async_queue.h</a></div><div class="ttdoc">Определяет интерфейсы для асинхронных очередей, включая функциональность добавления,...</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html">iridium::io::implementation::platform::CMultiplexer</a></div><div class="ttdoc">Заглушечная реализация IMultiplexer для платформы Emscripten. Все методы в настоящее время выбрасываю...</div><div class="ttdef"><b>Определения</b> multiplexer.h:34</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html_a0a14eb16b1f7f5b18106ef29bc52f71e"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a0a14eb16b1f7f5b18106ef29bc52f71e">iridium::io::implementation::platform::CMultiplexer::initialize</a></div><div class="ttdeci">void initialize() override</div><div class="ttdoc">Инициализирует мультиплексор (заглушка).</div><div class="ttdef"><b>Определения</b> multiplexer.h:49</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html_a34274381816f6478ee4f1875aa15908d"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a34274381816f6478ee4f1875aa15908d">iridium::io::implementation::platform::CMultiplexer::finalize</a></div><div class="ttdeci">void finalize() override</div><div class="ttdoc">Завершает работу мультиплексора (заглушка).</div><div class="ttdef"><b>Определения</b> multiplexer.h:56</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html_a3a0224a267e05ce27635a2538aa6b51d"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a3a0224a267e05ce27635a2538aa6b51d">iridium::io::implementation::platform::CMultiplexer::waitEvents</a></div><div class="ttdeci">std::list&lt; IEvent::TSharedPtr &gt; waitEvents() override</div><div class="ttdoc">Ожидает событий ввода-вывода (заглушка).</div><div class="ttdef"><b>Определения</b> multiplexer.h:66</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html_a84a7317dce51cf9b2af5ea3ba83f6d60"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a84a7317dce51cf9b2af5ea3ba83f6d60">iridium::io::implementation::platform::CMultiplexer::unsubscribe</a></div><div class="ttdeci">void unsubscribe(IStream::TConstSharedPtr const &amp;stream) override</div><div class="ttdoc">Отписывает поток (заглушка).</div><div class="ttdef"><b>Определения</b> multiplexer.h:81</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html_a99b6ae110102ac707a48cea5a46ac4bc"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a99b6ae110102ac707a48cea5a46ac4bc">iridium::io::implementation::platform::CMultiplexer::CMultiplexer</a></div><div class="ttdeci">CMultiplexer(std::chrono::microseconds const &amp;timeout=DEFAULT_WAITING_TIMEOUT)</div><div class="ttdoc">Конструирует CMultiplexer (заглушка).</div><div class="ttdef"><b>Определения</b> multiplexer.h:41</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer_html_accc6babca1fbc8e5cbdf1f4b0cd0bcf1"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#accc6babca1fbc8e5cbdf1f4b0cd0bcf1">iridium::io::implementation::platform::CMultiplexer::subscribe</a></div><div class="ttdeci">void subscribe(IStream::TConstSharedPtr const &amp;stream) override</div><div class="ttdoc">Подписывает поток (заглушка).</div><div class="ttdef"><b>Определения</b> multiplexer.h:74</div></div>
+<div class="ttc" id="amultiplexer_8h_html"><div class="ttname"><a href="multiplexer_8h.html">multiplexer.h</a></div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1fs_1_1implementation_html_a8e237a5ad76c558edf5a997c2ba4cd19"><div class="ttname"><a href="namespaceiridium_1_1io_1_1fs_1_1implementation.html#a8e237a5ad76c558edf5a997c2ba4cd19">iridium::io::fs::implementation::assertOK</a></div><div class="ttdeci">int assertOK(const int &amp;result, const string &amp;message)</div><div class="ttdef"><b>Определения</b> file_api_assert.cpp:16</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1implementation_1_1platform_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1implementation_1_1platform.html">iridium::io::implementation::platform</a></div><div class="ttdef"><b>Определения</b> multiplexer.h:26</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1implementation.html">iridium::io::implementation</a></div><div class="ttdef"><b>Определения</b> context.cpp:16</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1implementation_html_aba3f403e780ef382b1e393d8197f9cda"><div class="ttname"><a href="namespaceiridium_1_1io_1_1implementation.html#aba3f403e780ef382b1e393d8197f9cda">iridium::io::implementation::CMultiplexer</a></div><div class="ttdeci">platform::CMultiplexer CMultiplexer</div><div class="ttdef"><b>Определения</b> multiplexer.h:21</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с вводом-выводом.</div><div class="ttdef"><b>Определения</b> buffer.cpp:7</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="aplatform_8h_html"><div class="ttname"><a href="platform_8h.html">platform.h</a></div><div class="ttdoc">Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей...</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_ad4d8992039d0faf9ae66c4f596277280"><div class="ttname"><a href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a></div><div class="ttdeci">#define DEFINE_IMPLEMENTATION(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения классов реализации. Объединяет DEFINE_CREATE(TClass) для объяв...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:110</div></div>
+<div class="ttc" id="asynchronized_8h_html"><div class="ttname"><a href="synchronized_8h.html">synchronized.h</a></div><div class="ttdoc">Определяет шаблон класса Synchronized для создания синхронизированных блоков кода и связанные вспомог...</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

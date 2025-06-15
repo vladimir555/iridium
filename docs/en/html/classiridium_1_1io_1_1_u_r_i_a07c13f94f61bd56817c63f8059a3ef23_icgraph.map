@@ -1,0 +1,7 @@
+<map id="iridium::io::URI::getUser" name="iridium::io::URI::getUser">
+<area shape="rect" id="Node000001" title="Gets the user information part of the URI (e.g., username in user:password@host)." alt="" coords="446,5,609,31"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1db.html#a91db078cad003f5c796da6f27c54fa89" title="Creates a database configuration object from a URI. Parses the given URI and extracts database connec..." alt="" coords="239,5,398,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="431,21,399,21,399,16,431,16"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1db.html#afacc46a55b26a30d286cde5c849d9253" title="Creates a database connector instance from a URI. This is a convenience function that first calls mak..." alt="" coords="5,5,191,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="223,21,191,21,191,16,223,16"/>
+</map>

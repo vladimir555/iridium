@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">CWorkerPoolPopper</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="worker__pool_8h_source.html">worker_pool.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_3_01_t_item_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_3_01_t_item_01_4_inherit__map" id="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_3_01_t_item_01_4_inherit__map">
+<area shape="rect" title=" " alt="" coords="508,71,710,126"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="262,45,436,86"/>
+<area shape="poly" title=" " alt="" coords="451,76,508,83,507,88,450,81"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди. Этот интерфейс определяет операции для изв..." alt="" coords="23,5,172,61"/>
+<area shape="poly" title=" " alt="" coords="188,42,262,51,261,57,187,47"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,86,190,111"/>
+<area shape="poly" title=" " alt="" coords="205,82,261,74,262,79,205,87"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html" title=" " alt="" coords="238,110,460,151"/>
+<area shape="poly" title=" " alt="" coords="475,112,507,108,508,114,476,118"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_3_01_t_item_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_3_01_t_item_01_4_coll__map" id="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_3_01_t_item_01_4_coll__map">
+<area shape="rect" title=" " alt="" coords="508,71,710,126"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="262,45,436,86"/>
+<area shape="poly" title=" " alt="" coords="451,76,508,83,507,88,450,81"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди. Этот интерфейс определяет операции для изв..." alt="" coords="23,5,172,61"/>
+<area shape="poly" title=" " alt="" coords="188,42,262,51,261,57,187,47"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,86,190,111"/>
+<area shape="poly" title=" " alt="" coords="205,82,261,74,262,79,205,87"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html" title=" " alt="" coords="238,110,460,151"/>
+<area shape="poly" title=" " alt="" coords="475,112,507,108,508,114,476,118"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a7cd43c720d21e2a7afc118fb84830bb5" id="r_a7cd43c720d21e2a7afc118fb84830bb5"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html">IAsyncQueuePopper</a>&lt; TItem &gt;::TItems&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cd43c720d21e2a7afc118fb84830bb5">TItems</a></td></tr>
+<tr class="separator:a7cd43c720d21e2a7afc118fb84830bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3cc54416b7c52bd3626313d32f86199" id="r_ae3cc54416b7c52bd3626313d32f86199"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; typename <a class="el" href="classiridium_1_1threading_1_1_i_worker_popper.html">IWorkerPopper</a>&lt; TItem &gt;::IHandler::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3cc54416b7c52bd3626313d32f86199">THandlers</a></td></tr>
+<tr class="separator:ae3cc54416b7c52bd3626313d32f86199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue_popper')"><img src="closed.png" alt="-"/>&#160;Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a></td></tr>
+<tr class="memitem:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper" id="r_af8d9442b3b07e681f9f6a1fa4c0a7dcc"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#af8d9442b3b07e681f9f6a1fa4c0a7dcc">TItems</a></td></tr>
+<tr class="memdesc:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов, извлеченных из очереди.  <br /></td></tr>
+<tr class="separator:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a1560106229b6d338739bc2e06ed0ff4b" id="r_a1560106229b6d338739bc2e06ed0ff4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1560106229b6d338739bc2e06ed0ff4b">CWorkerPoolPopper</a> (std::string const &amp;name, <a class="el" href="#ae3cc54416b7c52bd3626313d32f86199">THandlers</a> const &amp;handlers)</td></tr>
+<tr class="separator:a1560106229b6d338739bc2e06ed0ff4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4581c80d53fa874eace91f2473955b76" id="r_a4581c80d53fa874eace91f2473955b76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4581c80d53fa874eace91f2473955b76">initialize</a> () override</td></tr>
+<tr class="memdesc:a4581c80d53fa874eace91f2473955b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова.  <br /></td></tr>
+<tr class="separator:a4581c80d53fa874eace91f2473955b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af629c51708c4378a425ef4a3f5ee40d0" id="r_af629c51708c4378a425ef4a3f5ee40d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af629c51708c4378a425ef4a3f5ee40d0">finalize</a> () override</td></tr>
+<tr class="memdesc:af629c51708c4378a425ef4a3f5ee40d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы.  <br /></td></tr>
+<tr class="separator:af629c51708c4378a425ef4a3f5ee40d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9db06f4c06672f7516e0bbb43a74c244" id="r_a9db06f4c06672f7516e0bbb43a74c244"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7cd43c720d21e2a7afc118fb84830bb5">TItems</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9db06f4c06672f7516e0bbb43a74c244">pop</a> (bool const &amp;is_do_wait) override</td></tr>
+<tr class="memdesc:a9db06f4c06672f7516e0bbb43a74c244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает элементы из очереди. Извлекает один или несколько элементов из начала очереди. Поведение относительно ожидания зависит от реализации и флага <code>is_do_wait</code>.  <br /></td></tr>
+<tr class="separator:a9db06f4c06672f7516e0bbb43a74c244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabdd65e415f87f0423e8a0bdd833a868" id="r_aabdd65e415f87f0423e8a0bdd833a868"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7cd43c720d21e2a7afc118fb84830bb5">TItems</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabdd65e415f87f0423e8a0bdd833a868">pop</a> (std::chrono::nanoseconds const &amp;timeout) override</td></tr>
+<tr class="memdesc:aabdd65e415f87f0423e8a0bdd833a868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает элементы из очереди с тайм-аутом. Пытается извлечь элементы из начала очереди, ожидая в течение указанного периода времени.  <br /></td></tr>
+<tr class="separator:aabdd65e415f87f0423e8a0bdd833a868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html">iridium::threading::implementation::WorkerPoolBase</a></td></tr>
+<tr class="memitem:a6c381323cead34199ada9a99b24f3f77 inherit pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_a6c381323cead34199ada9a99b24f3f77"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#a6c381323cead34199ada9a99b24f3f77">~WorkerPoolBase</a> ()=default</td></tr>
+<tr class="separator:a6c381323cead34199ada9a99b24f3f77 inherit pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Дополнительные унаследованные члены</h2></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html">iridium::threading::implementation::WorkerPoolBase</a></td></tr>
+<tr class="memitem:acd2d2ac09fc6ed31f63978af0426c95b inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_acd2d2ac09fc6ed31f63978af0426c95b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#acd2d2ac09fc6ed31f63978af0426c95b">WorkerPoolBase</a> (std::string const &amp;name)</td></tr>
+<tr class="separator:acd2d2ac09fc6ed31f63978af0426c95b inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affad4d37118bafe1b1e0971f179d5c27 inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_affad4d37118bafe1b1e0971f179d5c27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#affad4d37118bafe1b1e0971f179d5c27">waitForMultipleStatus</a> (bool const &amp;status)</td></tr>
+<tr class="separator:affad4d37118bafe1b1e0971f179d5c27 inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base')"><img src="closed.png" alt="-"/>&#160;Защищенные данные унаследованные от <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html">iridium::threading::implementation::WorkerPoolBase</a></td></tr>
+<tr class="memitem:a52ebb228031a6697074c16ca820bea6c inherit pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_a52ebb228031a6697074c16ca820bea6c"><td class="memItemLeft" align="right" valign="top">std::list&lt; IThread::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#a52ebb228031a6697074c16ca820bea6c">m_threads</a></td></tr>
+<tr class="separator:a52ebb228031a6697074c16ca820bea6c inherit pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Определения типов</h2>
+<a id="ae3cc54416b7c52bd3626313d32f86199" name="ae3cc54416b7c52bd3626313d32f86199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3cc54416b7c52bd3626313d32f86199">&#9670;&#160;</a></span>THandlers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::list&lt;typename <a class="el" href="classiridium_1_1threading_1_1_i_worker_popper.html">IWorkerPopper</a>&lt;TItem&gt;::IHandler::TSharedPtr&gt; <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::THandlers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cd43c720d21e2a7afc118fb84830bb5" name="a7cd43c720d21e2a7afc118fb84830bb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cd43c720d21e2a7afc118fb84830bb5">&#9670;&#160;</a></span>TItems</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html">IAsyncQueuePopper</a>&lt;TItem&gt;::TItems <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::TItems</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a1560106229b6d338739bc2e06ed0ff4b" name="a1560106229b6d338739bc2e06ed0ff4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1560106229b6d338739bc2e06ed0ff4b">&#9670;&#160;</a></span>CWorkerPoolPopper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::CWorkerPoolPopper </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ae3cc54416b7c52bd3626313d32f86199">THandlers</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>handlers</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_a1560106229b6d338739bc2e06ed0ff4b_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_a1560106229b6d338739bc2e06ed0ff4b_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_a1560106229b6d338739bc2e06ed0ff4b_cgraph" id="aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper_a1560106229b6d338739bc2e06ed0ff4b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,24,208,79"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="320,5,384,31"/>
+<area shape="poly" title=" " alt="" coords="208,35,304,22,305,27,209,40"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#acd2d2ac09fc6ed31f63978af0426c95b" title=" " alt="" coords="256,56,448,111"/>
+<area shape="poly" title=" " alt="" coords="209,62,241,66,240,72,208,67"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="af629c51708c4378a425ef4a3f5ee40d0" name="af629c51708c4378a425ef4a3f5ee40d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af629c51708c4378a425ef4a3f5ee40d0">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::finalize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может быть выброшено, если финализация завершается неудачно, хотя это обычно не рекомендуется для методов очистки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="a4581c80d53fa874eace91f2473955b76" name="a4581c80d53fa874eace91f2473955b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4581c80d53fa874eace91f2473955b76">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может быть выброшено, если инициализация завершается неудачно. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="a9db06f4c06672f7516e0bbb43a74c244" name="a9db06f4c06672f7516e0bbb43a74c244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9db06f4c06672f7516e0bbb43a74c244">&#9670;&#160;</a></span>pop() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">CWorkerPoolPopper</a>&lt; TItem &gt;<a class="el" href="#a7cd43c720d21e2a7afc118fb84830bb5">::TItems</a> <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::pop </td>
+          <td>(</td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>is_do_wait</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Извлекает элементы из очереди. Извлекает один или несколько элементов из начала очереди. Поведение относительно ожидания зависит от реализации и флага <code>is_do_wait</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_do_wait</td><td>Если true, метод может блокироваться до появления элементов. Если false, он может немедленно вернуться, если очередь пуста. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Список элементов, извлеченных из очереди. Список может быть пустым в зависимости от <code>is_do_wait</code> и состояния очереди. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#a69e6f12074937e6f482f8e688df03d2e">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aabdd65e415f87f0423e8a0bdd833a868" name="aabdd65e415f87f0423e8a0bdd833a868"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabdd65e415f87f0423e8a0bdd833a868">&#9670;&#160;</a></span>pop() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">CWorkerPoolPopper</a>&lt; TItem &gt;<a class="el" href="#a7cd43c720d21e2a7afc118fb84830bb5">::TItems</a> <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html">iridium::threading::implementation::CWorkerPoolPopper</a>&lt; TItem &gt;::pop </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds const &amp;</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Извлекает элементы из очереди с тайм-аутом. Пытается извлечь элементы из начала очереди, ожидая в течение указанного периода времени. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>Максимальная продолжительность ожидания появления элементов. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Список элементов, извлеченных из очереди. Список может быть пустым, если элементы не появятся в течение тайм-аута. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#a79c56eab51f222c7ec06e405395dcb61">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/threading/implementation/<a class="el" href="worker__pool_8h_source.html">worker_pool.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

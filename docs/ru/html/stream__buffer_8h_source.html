@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/io/implementation/stream_buffer.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_b4cca597089861bcab89c3831a70b3d7.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">stream_buffer.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="stream__buffer_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8h.html">iridium/io/stream.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#pragma warning(push)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#pragma warning(disable: 4250)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#endif </span><span class="comment">// _MSC_VER</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html">   27</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892">CStreamBuffer</a>: <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1io_1_1_i_stream.html">IStream</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892">CStreamBuffer</a>(Buffer::TSharedPtr <span class="keyword">const</span> &amp;buffer);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a41eebf92f04c32cc403e724ed8a7dc96">initialize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#ad5b20046e1b187148945c332a3467e8a">finalize</a>()   <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    std::list&lt;uintptr_t&gt;    <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a8343ff3ed6a120d0d8f1261443e08b0b">getHandles</a>()    <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    URI::TSharedPtr         <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a897262cfa382df0aeb6619e112db6e00">getURI</a>()        <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a0da932b846188308fc96980349bb2bd5">   55</a></span>    Buffer::TSharedPtr <a class="code hl_variable" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a0da932b846188308fc96980349bb2bd5">m_buffer</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html">   63</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a847fe94ca7103ed745892a9bc385edc0">CStreamReaderBuffer</a>: </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">public</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892">CStreamBuffer</a>,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">public</span> <a class="code hl_class" href="classiridium_1_1io_1_1_i_stream_reader.html">IStreamReader</a></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a847fe94ca7103ed745892a9bc385edc0">CStreamReaderBuffer</a>)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a847fe94ca7103ed745892a9bc385edc0">CStreamReaderBuffer</a>(Buffer::TSharedPtr <span class="keyword">const</span> &amp;buffer);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    Buffer::TSharedPtr <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a522397d459fbd67bed3634e8f387e752">read</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp;size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">size_t</span> m_pos;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">// todo: interface with getBuffer</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="};">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_c_stream_writer_buffer.html">   97</a></span><span class="keyword">class </span><a class="code hl_function" href="class_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c">CStreamWriterBuffer</a>: </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">public</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892">CStreamBuffer</a>,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keyword">public</span> IStreamWriter</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>{</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="class_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c">CStreamWriterBuffer</a>)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c">CStreamWriterBuffer</a>(Buffer::TSharedPtr <span class="keyword">const</span> &amp;buffer);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html#a113dd46b00b6908286274fb29cfe29a4">write</a>(Buffer::TSharedPtr <span class="keyword">const</span> &amp;buffer) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#pragma warning(pop)</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#endif </span><span class="comment">// _MSC_VER</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>} <span class="comment">// implementation</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>} <span class="comment">// io</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB</span></div>
+<div class="ttc" id="aclass_c_stream_writer_buffer_html_a295a830284c2c787bb46bbd85024103c"><div class="ttname"><a href="class_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c">CStreamWriterBuffer::CStreamWriterBuffer</a></div><div class="ttdeci">CStreamWriterBuffer(Buffer::TSharedPtr const &amp;buffer)</div><div class="ttdoc">Конструирует CStreamWriterBuffer, который пишет в предоставленный буфер.</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:53</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1_i_stream_html"><div class="ttname"><a href="classiridium_1_1io_1_1_i_stream.html">iridium::io::IStream</a></div><div class="ttdoc">Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...</div><div class="ttdef"><b>Определения</b> stream.h:43</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1_i_stream_reader_html"><div class="ttname"><a href="classiridium_1_1io_1_1_i_stream_reader.html">iridium::io::IStreamReader</a></div><div class="ttdoc">Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...</div><div class="ttdef"><b>Определения</b> stream.h:75</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_buffer_html_a0da932b846188308fc96980349bb2bd5"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a0da932b846188308fc96980349bb2bd5">iridium::io::implementation::CStreamBuffer::m_buffer</a></div><div class="ttdeci">Buffer::TSharedPtr m_buffer</div><div class="ttdoc">Нижележащий разделяемый буфер памяти, используемый этим потоком.</div><div class="ttdef"><b>Определения</b> stream_buffer.h:55</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_buffer_html_a3dea64d9fbe66226243ec0e1011a4892"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892">iridium::io::implementation::CStreamBuffer::CStreamBuffer</a></div><div class="ttdeci">CStreamBuffer(Buffer::TSharedPtr const &amp;buffer)</div><div class="ttdoc">Конструирует CStreamBuffer с заданным буфером.</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:12</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_buffer_html_a41eebf92f04c32cc403e724ed8a7dc96"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a41eebf92f04c32cc403e724ed8a7dc96">iridium::io::implementation::CStreamBuffer::initialize</a></div><div class="ttdeci">void initialize() override</div><div class="ttdoc">Инициализирует поток. (В настоящее время не выполняет никаких действий для потоков на основе буфера).</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:18</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_buffer_html_a8343ff3ed6a120d0d8f1261443e08b0b"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a8343ff3ed6a120d0d8f1261443e08b0b">iridium::io::implementation::CStreamBuffer::getHandles</a></div><div class="ttdeci">std::list&lt; uintptr_t &gt; getHandles() const override</div><div class="ttdoc">Получает базовые дескрипторы ОС. Неприменимо для буферных потоков.</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:24</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_buffer_html_a897262cfa382df0aeb6619e112db6e00"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a897262cfa382df0aeb6619e112db6e00">iridium::io::implementation::CStreamBuffer::getURI</a></div><div class="ttdeci">URI::TSharedPtr getURI() const override</div><div class="ttdoc">Получает URI для этого потока. Обычно неприменимо для потоков буфера памяти.</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:29</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_buffer_html_ad5b20046e1b187148945c332a3467e8a"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#ad5b20046e1b187148945c332a3467e8a">iridium::io::implementation::CStreamBuffer::finalize</a></div><div class="ttdeci">void finalize() override</div><div class="ttdoc">Завершает работу потока. (В настоящее время не выполняет никаких действий для потоков на основе буфер...</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:21</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer_html_a522397d459fbd67bed3634e8f387e752"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a522397d459fbd67bed3634e8f387e752">iridium::io::implementation::CStreamReaderBuffer::read</a></div><div class="ttdeci">Buffer::TSharedPtr read(size_t const &amp;size) override</div><div class="ttdoc">Читает до size байт из текущей позиции в буфере. Сдвигает внутреннюю позицию чтения на количество про...</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:41</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer_html_a847fe94ca7103ed745892a9bc385edc0"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a847fe94ca7103ed745892a9bc385edc0">iridium::io::implementation::CStreamReaderBuffer::CStreamReaderBuffer</a></div><div class="ttdeci">CStreamReaderBuffer(Buffer::TSharedPtr const &amp;buffer)</div><div class="ttdoc">Конструирует CStreamReaderBuffer, который читает из предоставленного буфера.</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:34</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_html_a113dd46b00b6908286274fb29cfe29a4"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html#a113dd46b00b6908286274fb29cfe29a4">iridium::io::implementation::CStreamWriterBuffer::write</a></div><div class="ttdeci">size_t write(Buffer::TSharedPtr const &amp;buffer) override</div><div class="ttdoc">Записывает содержимое данного buffer в нижележащий буфер этого потока. Данные добавляются в конец буф...</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:59</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_html_a295a830284c2c787bb46bbd85024103c"><div class="ttname"><a href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c">iridium::io::implementation::CStreamWriterBuffer::CStreamWriterBuffer</a></div><div class="ttdeci">CStreamWriterBuffer(Buffer::TSharedPtr const &amp;buffer)</div><div class="ttdoc">Конструирует CStreamWriterBuffer, который пишет в предоставленный буфер.</div><div class="ttdef"><b>Определения</b> stream_buffer.cpp:53</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1implementation.html">iridium::io::implementation</a></div><div class="ttdef"><b>Определения</b> context.cpp:16</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с вводом-выводом.</div><div class="ttdef"><b>Определения</b> buffer.cpp:7</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_ad4d8992039d0faf9ae66c4f596277280"><div class="ttname"><a href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a></div><div class="ttdeci">#define DEFINE_IMPLEMENTATION(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения классов реализации. Объединяет DEFINE_CREATE(TClass) для объяв...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:110</div></div>
+<div class="ttc" id="astream_8h_html"><div class="ttname"><a href="stream_8h.html">stream.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

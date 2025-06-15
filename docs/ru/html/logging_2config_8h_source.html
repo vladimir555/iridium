@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/logging/config.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bd04c2bcd27267b7c30d257e93c7a128.html">logging</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">config.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="logging_2config_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_CONFIG_004DD24D_1205_412D_8CEF_618368AB483A</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_CONFIG_004DD24D_1205_412D_8CEF_618368AB483A</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="logging_2event_8h.html">event.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="sink_8h.html">sink.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="serialization_2node_8h.html">iridium/parsing/serialization/node.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="uri_8h.html">iridium/io/uri.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1logging.html">logging</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1logging_1_1config.html">config</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><a class="code hl_define" href="serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a>(Logger)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(<span class="keywordtype">bool</span>, IsGmtTime, <span class="keyword">false</span>)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(TEvent::TLevel, Level, TEvent::TLevel::TRACE)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_define" href="serialization_2node_8h.html#a1c49dbc67050d59e4b5e7d095067a81a">DEFINE_NODE_LIST_BEGIN</a>(Sink)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="comment">// todo: ratate (none, hourly, dayly, weekly, onstart, continuously) + url (file://...  , postgres:// ...)</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1logging_1_1config.html#a6c826c2af8be4cb4de30e04f52cc1d56">   46</a></span>        <a class="code hl_function" href="namespaceiridium_1_1logging_1_1config.html#a6c826c2af8be4cb4de30e04f52cc1d56">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            TSinkType,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            CONSOLE,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            FILE,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            FILE_DAILY, <span class="comment">// rotate daily</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            FILE_TIMELY) <span class="comment">// new file every logger starting</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(TSinkType      , Type      , TSinkType::UNKNOWN)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(<span class="keywordtype">bool</span>           , IsAsync   , false)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>    , Uri       , <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(<a class="code hl_struct" href="structiridium_1_1logging_1_1_t_event.html">TEvent</a>::TLevel , Level     , <a class="code hl_struct" href="structiridium_1_1logging_1_1_t_event.html">TEvent</a>::TLevel::UNKNOWN)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_define" href="serialization_2node_8h.html#a1547f0c86e3c410b26dcf1d13d1fcec7">DEFINE_NODE_LIST_END</a>(Sink)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><a class="code hl_define" href="serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a>()</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>TLogger <a class="code hl_function" href="namespaceiridium_1_1logging_1_1config.html#a57a36466c8a3545a48ab706922b86672">createDefault</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>} <span class="comment">// config</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>} <span class="comment">// logging</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_CONFIG_004DD24D_1205_412D_8CEF_618368AB483A</span></div>
+<div class="ttc" id="alogging_2event_8h_html"><div class="ttname"><a href="logging_2event_8h.html">event.h</a></div><div class="ttdoc">Определяет структуру TEvent для сообщений журнала во фреймворке логирования Iridium....</div></div>
+<div class="ttc" id="anamespaceiridium_1_1logging_1_1config_html"><div class="ttname"><a href="namespaceiridium_1_1logging_1_1config.html">iridium::logging::config</a></div><div class="ttdoc">Пространство имен для структур конфигурации и настроек логирования.</div><div class="ttdef"><b>Определения</b> config.cpp:14</div></div>
+<div class="ttc" id="anamespaceiridium_1_1logging_1_1config_html_a57a36466c8a3545a48ab706922b86672"><div class="ttname"><a href="namespaceiridium_1_1logging_1_1config.html#a57a36466c8a3545a48ab706922b86672">iridium::logging::config::createDefault</a></div><div class="ttdeci">TLogger createDefault()</div><div class="ttdef"><b>Определения</b> config.cpp:17</div></div>
+<div class="ttc" id="anamespaceiridium_1_1logging_1_1config_html_a6c826c2af8be4cb4de30e04f52cc1d56"><div class="ttname"><a href="namespaceiridium_1_1logging_1_1config.html#a6c826c2af8be4cb4de30e04f52cc1d56">iridium::logging::config::DEFINE_ENUM</a></div><div class="ttdeci">DEFINE_ENUM(TSinkType, CONSOLE, FILE, FILE_DAILY, FILE_TIMELY) TLogger createDefault()</div><div class="ttdoc">Определяет корневую структуру для конфигурации логгера. Эта структура инкапсулирует все настройки для...</div></div>
+<div class="ttc" id="anamespaceiridium_1_1logging_html"><div class="ttname"><a href="namespaceiridium_1_1logging.html">iridium::logging</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с логированием.</div><div class="ttdef"><b>Определения</b> config.cpp:13</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="aserialization_2node_8h_html"><div class="ttname"><a href="serialization_2node_8h.html">node.h</a></div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a1547f0c86e3c410b26dcf1d13d1fcec7"><div class="ttname"><a href="serialization_2node_8h.html#a1547f0c86e3c410b26dcf1d13d1fcec7">DEFINE_NODE_LIST_END</a></div><div class="ttdeci">#define DEFINE_NODE_LIST_END(class_name)</div><div class="ttdoc">Завершает определение списка сложных дочерних узлов и объявляет экземпляр списка. Закрывает определен...</div><div class="ttdef"><b>Определения</b> node.h:725</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a1c49dbc67050d59e4b5e7d095067a81a"><div class="ttname"><a href="serialization_2node_8h.html#a1c49dbc67050d59e4b5e7d095067a81a">DEFINE_NODE_LIST_BEGIN</a></div><div class="ttdeci">#define DEFINE_NODE_LIST_BEGIN(class_name)</div><div class="ttdoc">Начинает определение списка сложных дочерних узлов. Генерирует две структуры: T##class_name (для отде...</div><div class="ttdef"><b>Определения</b> node.h:704</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a6ae6809e071cbeb286389a6ea722e126"><div class="ttname"><a href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a></div><div class="ttdeci">#define DEFINE_ATTRIBUTE(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в DEFINE_ATTRIBUTE_2 или DEFINE_ATTRIBUTE_3 в зави...</div><div class="ttdef"><b>Определения</b> node.h:684</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a7b4e724573d774904e29ede08ef7b17a"><div class="ttname"><a href="serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_END()</div><div class="ttdoc">Завершает определение структуры корневого узла, начатое DEFINE_ROOT_NODE_BEGIN. Просто предоставляет ...</div><div class="ttdef"><b>Определения</b> node.h:604</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_aac8f5e72dee27b1c9479d82a20f96f62"><div class="ttname"><a href="serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_BEGIN(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в DEFINE_ROOT_NODE_BEGIN_1 или DEFINE_ROOT_NODE_BE...</div><div class="ttdef"><b>Определения</b> node.h:595</div></div>
+<div class="ttc" id="asink_8h_html"><div class="ttname"><a href="sink_8h.html">sink.h</a></div><div class="ttdoc">Определяет интерфейс ISink для потребителей событий журнала (аппендеров). Включает сам интерфейс,...</div></div>
+<div class="ttc" id="astructiridium_1_1logging_1_1_t_event_html"><div class="ttname"><a href="structiridium_1_1logging_1_1_t_event.html">iridium::logging::TEvent</a></div><div class="ttdoc">Представляет одно событие или сообщение журнала. Эта структура инкапсулирует всю информацию,...</div><div class="ttdef"><b>Определения</b> event.h:34</div></div>
+<div class="ttc" id="auri_8h_html"><div class="ttname"><a href="uri_8h.html">uri.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

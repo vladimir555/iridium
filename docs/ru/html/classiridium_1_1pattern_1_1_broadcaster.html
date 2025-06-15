@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::pattern::Broadcaster&lt; TReceiver &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">Broadcaster</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1pattern_1_1_broadcaster-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::pattern::Broadcaster&lt; TReceiver &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Шаблон класса, реализующий роль вещателя (или субъекта) в шаблоне, подобном "Наблюдателю". Управляет коллекцией объектов-получателей (наблюдателей) и предоставляет механизм для трансляции вызова определенного метода всем зарегистрированным получателям. Это позволяет отделить вещателя от его получателей.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="broadcaster_8h_source.html">broadcaster.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a881970aa848c7e5f6700b3c2336b9af8" id="r_a881970aa848c7e5f6700b3c2336b9af8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a881970aa848c7e5f6700b3c2336b9af8">Broadcaster</a> ()=default</td></tr>
+<tr class="memdesc:a881970aa848c7e5f6700b3c2336b9af8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:a881970aa848c7e5f6700b3c2336b9af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acadc803c68a9c0cabd6e4a1dad92537a" id="r_acadc803c68a9c0cabd6e4a1dad92537a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acadc803c68a9c0cabd6e4a1dad92537a">~Broadcaster</a> ()=default</td></tr>
+<tr class="memdesc:acadc803c68a9c0cabd6e4a1dad92537a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
+<tr class="separator:acadc803c68a9c0cabd6e4a1dad92537a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663026e569c99f3304b373e05d1b839c" id="r_a663026e569c99f3304b373e05d1b839c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a663026e569c99f3304b373e05d1b839c">attach</a> (typename TReceiver::TSharedPtr const &amp;receiver)</td></tr>
+<tr class="memdesc:a663026e569c99f3304b373e05d1b839c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Присоединяет получателя к этому вещателю. После этого получатель будет уведомляться о последующих трансляциях.  <br /></td></tr>
+<tr class="separator:a663026e569c99f3304b373e05d1b839c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ac7fed367b9a652de41b7758057c87" id="r_a88ac7fed367b9a652de41b7758057c87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88ac7fed367b9a652de41b7758057c87">detach</a> (typename TReceiver::TSharedPtr const &amp;receiver)</td></tr>
+<tr class="memdesc:a88ac7fed367b9a652de41b7758057c87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отсоединяет получателя от этого вещателя. Получатель больше не будет уведомляться о трансляциях.  <br /></td></tr>
+<tr class="separator:a88ac7fed367b9a652de41b7758057c87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf612bbfc30cc8156c59e7818131744d" id="r_adf612bbfc30cc8156c59e7818131744d"><td class="memTemplParams" colspan="2">template&lt;typename TReceiver_, typename ... TArgs&gt; </td></tr>
+<tr class="memitem:adf612bbfc30cc8156c59e7818131744d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#adf612bbfc30cc8156c59e7818131744d">broadcast</a> (void(TReceiver_::*f)(TArgs const &amp;...), TArgs const &amp;... args)</td></tr>
+<tr class="memdesc:adf612bbfc30cc8156c59e7818131744d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Транслирует вызов определенной функции-члена каждому присоединенному получателю. У всех присоединенных получателей, совместимых с <code>TReceiver_</code>, будет вызвана их функция-член <code>f</code> с предоставленными аргументами.  <br /></td></tr>
+<tr class="separator:adf612bbfc30cc8156c59e7818131744d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TReceiver&gt;<br />
+class iridium::pattern::Broadcaster&lt; TReceiver &gt;</div><p>Шаблон класса, реализующий роль вещателя (или субъекта) в шаблоне, подобном "Наблюдателю". Управляет коллекцией объектов-получателей (наблюдателей) и предоставляет механизм для трансляции вызова определенного метода всем зарегистрированным получателям. Это позволяет отделить вещателя от его получателей. </p>
+<dl class="tparams"><dt>Параметры шаблона</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TReceiver</td><td>Тип объектов-получателей. Этот тип должен предоставлять typedef <code>TSharedPtr</code> (например, <code>typedef std::shared_ptr&lt;MyReceiverType&gt; TSharedPtr;</code>) для своего типа разделяемого указателя, который используется для управления экземплярами получателей. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a881970aa848c7e5f6700b3c2336b9af8" name="a881970aa848c7e5f6700b3c2336b9af8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a881970aa848c7e5f6700b3c2336b9af8">&#9670;&#160;</a></span>Broadcaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TReceiver&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">iridium::pattern::Broadcaster</a>&lt; TReceiver &gt;::Broadcaster </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Конструктор по умолчанию. </p>
+
+</div>
+</div>
+<a id="acadc803c68a9c0cabd6e4a1dad92537a" name="acadc803c68a9c0cabd6e4a1dad92537a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acadc803c68a9c0cabd6e4a1dad92537a">&#9670;&#160;</a></span>~Broadcaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TReceiver&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">iridium::pattern::Broadcaster</a>&lt; TReceiver &gt;::~<a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">Broadcaster</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Виртуальный деструктор по умолчанию. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a663026e569c99f3304b373e05d1b839c" name="a663026e569c99f3304b373e05d1b839c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663026e569c99f3304b373e05d1b839c">&#9670;&#160;</a></span>attach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TReceiver&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">iridium::pattern::Broadcaster</a>&lt; TReceiver &gt;::attach </td>
+          <td>(</td>
+          <td class="paramtype">typename TReceiver::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>receiver</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Присоединяет получателя к этому вещателю. После этого получатель будет уведомляться о последующих трансляциях. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">receiver</td><td>Разделяемый указатель на объект-получатель для присоединения. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::logic_error</td><td>если получатель уже присоединен (дубликат). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf612bbfc30cc8156c59e7818131744d" name="adf612bbfc30cc8156c59e7818131744d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf612bbfc30cc8156c59e7818131744d">&#9670;&#160;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TReceiver&gt; </div>
+<div class="memtemplate">
+template&lt;typename TReceiver_, typename ... TArgs&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">iridium::pattern::Broadcaster</a>&lt; TReceiver &gt;::broadcast </td>
+          <td>(</td>
+          <td class="paramtype">void(TReceiver_::*</td>          <td class="paramname"><span class="paramname"><em>f&#160;</em></span>)(TArgs const &amp;...), </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TArgs const &amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Транслирует вызов определенной функции-члена каждому присоединенному получателю. У всех присоединенных получателей, совместимых с <code>TReceiver_</code>, будет вызвана их функция-член <code>f</code> с предоставленными аргументами. </p>
+<dl class="tparams"><dt>Параметры шаблона</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TReceiver_</td><td>Фактический тип получателя, у которого существует функция-член. Должен быть <code>TReceiver</code> или тип, производный/совместимый с ним. </td></tr>
+    <tr><td class="paramname">TArgs</td><td>Вариативный пакет шаблонных параметров для аргументов функции-члена. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Указатель на функцию-член, которая будет вызвана у каждого получателя. </td></tr>
+    <tr><td class="paramname">args</td><td>Аргументы, которые будут переданы в функцию-член. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a88ac7fed367b9a652de41b7758057c87" name="a88ac7fed367b9a652de41b7758057c87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ac7fed367b9a652de41b7758057c87">&#9670;&#160;</a></span>detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TReceiver&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html">iridium::pattern::Broadcaster</a>&lt; TReceiver &gt;::detach </td>
+          <td>(</td>
+          <td class="paramtype">typename TReceiver::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>receiver</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Отсоединяет получателя от этого вещателя. Получатель больше не будет уведомляться о трансляциях. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">receiver</td><td>Разделяемый указатель на объект-получатель для отсоединения. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::logic_error</td><td>если получатель не был ранее присоединен. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/pattern/<a class="el" href="broadcaster_8h_source.html">broadcaster.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

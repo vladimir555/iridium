@@ -1,0 +1,9 @@
+<map id="source/iridium/items.h" name="source/iridium/items.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="48,5,197,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,80,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,34,69,71,65,67,107,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="103,79,142,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,31,125,63,120,63,120,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="166,79,223,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="136,29,173,66,170,70,133,33"/>
+</map>

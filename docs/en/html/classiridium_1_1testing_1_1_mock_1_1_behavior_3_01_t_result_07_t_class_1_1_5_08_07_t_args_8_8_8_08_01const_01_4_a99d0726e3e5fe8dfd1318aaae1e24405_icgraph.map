@@ -1,0 +1,6 @@
+<map id="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...) const &gt;::Behavior" name="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...) const &gt;::Behavior">
+<area shape="rect" id="Node000001" title="Constructs a Behavior object for a const method." alt="" coords="257,29,456,85"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="396,17,381,10,356,8,334,10,320,15,313,21,313,29,308,29,308,19,317,10,333,5,356,3,382,5,398,12"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html#a4f55d40199eff6b9a8001f07663fde08" title="Assigns a lambda function as the action for this const method behavior." alt="" coords="5,29,209,85"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="241,60,209,60,209,54,241,54"/>
+</map>

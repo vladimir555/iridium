@@ -1,0 +1,7 @@
+<map id="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;::Behavior" name="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;::Behavior">
+<area shape="rect" id="Node000001" title="Constructs a Behavior object." alt="" coords="5,29,190,85"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="55,29,56,19,64,10,78,5,98,3,120,5,134,12,131,17,119,10,97,8,79,10,67,15,61,21,61,29"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock.html#a44001174664c564d8b8ef34e4c3149bc" title="Default constructor. Registers the mock object instance." alt="" coords="238,37,384,78"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="190,54,222,54,222,60,190,60"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="270,37,268,27,275,18,289,12,311,10,334,13,348,19,346,24,333,18,311,15,291,17,278,22,274,28,276,36"/>
+</map>

@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/logging/implementation/sink_console.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bd04c2bcd27267b7c30d257e93c7a128.html">logging</a></li><li class="navelem"><a class="el" href="dir_ef240e8b579a8fdd4ffcdff116a5157d.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a>  </div>
+  <div class="headertitle"><div class="title">Файл sink_console.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Определяет класс <code><a class="el" href="class_c_sink_console.html" title="Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал....">CSinkConsole</a></code>, конкретную реализацию <code>ISink</code> для вывода в консоль. Этот приемник логирует сообщения в стандартные потоки вывода или ошибок.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="smart__ptr_8h_source.html">iridium/smart_ptr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="logging_2event_8h_source.html">iridium/logging/event.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="implementation_2sink_8h_source.html">sink.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для sink_console.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="sink__console_8h__incl.png" border="0" usemap="#asource_2iridium_2logging_2implementation_2sink__console_8h" alt=""/></div>
+<map name="asource_2iridium_2logging_2implementation_2sink__console_8h" id="asource_2iridium_2logging_2implementation_2sink__console_8h">
+<area shape="rect" title="Определяет класс CSinkConsole, конкретную реализацию ISink для вывода в консоль. Этот приемник логиру..." alt="" coords="370,5,574,46"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="328,345,456,371"/>
+<area shape="poly" title=" " alt="" coords="399,49,352,67,304,93,260,127,241,147,225,169,217,187,213,204,213,220,217,235,235,264,262,295,295,320,331,337,329,342,292,324,259,299,230,268,212,237,208,220,208,203,212,185,221,166,237,143,256,123,301,88,350,63,397,44"/>
+<area shape="rect" href="logging_2event_8h.html" title="Определяет структуру TEvent для сообщений журнала во фреймворке логирования Iridium...." alt="" coords="694,264,845,290"/>
+<area shape="poly" title=" " alt="" coords="541,44,590,63,643,89,694,124,738,166,751,185,760,207,770,248,764,249,755,209,746,188,734,169,691,128,640,94,587,68,539,49"/>
+<area shape="rect" href="implementation_2sink_8h.html" title="Определяет класс CSinkAsync, асинхронную обертку для реализаций ISink. Использует рабочий поток для о..." alt="" coords="444,94,500,120"/>
+<area shape="poly" title=" " alt="" coords="475,46,475,78,470,78,470,46"/>
+<area shape="rect" title=" " alt="" coords="222,581,290,607"/>
+<area shape="poly" title=" " alt="" coords="382,373,341,420,318,459,297,499,268,567,263,565,292,496,313,456,337,417,378,369"/>
+<area shape="poly" title=" " alt="" coords="712,293,466,344,465,339,711,287"/>
+<area shape="rect" title=" " alt="" coords="644,581,698,607"/>
+<area shape="poly" title=" " alt="" coords="793,288,836,316,881,356,900,380,912,406,916,433,909,460,893,488,874,506,822,535,766,563,714,582,712,577,764,558,819,531,870,501,889,485,905,458,911,433,907,407,895,383,877,360,832,320,790,292"/>
+<area shape="rect" href="enum_8h.html" title="Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,..." alt="" coords="672,345,779,371"/>
+<area shape="poly" title=" " alt="" coords="765,291,742,333,737,330,761,289"/>
+<area shape="rect" href="strings_8h.html" title=" " alt="" coords="694,507,808,533"/>
+<area shape="poly" title=" " alt="" coords="780,361,809,368,838,379,865,395,887,417,895,439,887,461,874,476,858,489,824,506,821,501,856,484,870,472,882,458,889,439,882,420,861,399,836,383,807,373,779,366"/>
+<area shape="rect" title=" " alt="" coords="582,581,621,607"/>
+<area shape="poly" title=" " alt="" coords="695,374,661,392,646,405,633,420,616,456,606,496,602,534,602,566,597,566,597,534,601,495,611,455,629,417,642,401,658,388,692,369"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="395,419,518,459"/>
+<area shape="poly" title=" " alt="" coords="685,374,533,418,532,413,683,369"/>
+<area shape="rect" title=" " alt="" coords="730,426,777,452"/>
+<area shape="poly" title=" " alt="" coords="732,370,747,410,742,412,727,372"/>
+<area shape="rect" title=" " alt="" coords="801,426,872,452"/>
+<area shape="poly" title=" " alt="" coords="744,369,808,415,805,419,741,373"/>
+<area shape="rect" title=" " alt="" coords="643,426,707,452"/>
+<area shape="poly" title=" " alt="" coords="720,373,693,414,689,411,716,370"/>
+<area shape="poly" title=" " alt="" coords="739,536,697,573,694,569,736,532"/>
+<area shape="rect" title=" " alt="" coords="722,581,780,607"/>
+<area shape="poly" title=" " alt="" coords="754,533,754,565,748,565,748,533"/>
+<area shape="poly" title=" " alt="" coords="727,536,636,579,634,574,725,531"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="350,507,517,533"/>
+<area shape="poly" title=" " alt="" coords="453,460,444,493,439,491,448,459"/>
+<area shape="poly" title=" " alt="" coords="405,536,301,577,300,572,403,531"/>
+<area shape="poly" title=" " alt="" coords="475,531,630,578,629,583,473,536"/>
+<area shape="poly" title=" " alt="" coords="463,531,569,576,567,581,461,536"/>
+<area shape="rect" title=" " alt="" coords="117,581,177,607"/>
+<area shape="poly" title=" " alt="" coords="386,536,193,584,192,579,384,531"/>
+<area shape="rect" title=" " alt="" coords="398,581,456,607"/>
+<area shape="poly" title=" " alt="" coords="435,533,432,566,427,565,430,533"/>
+<area shape="rect" title=" " alt="" coords="314,581,374,607"/>
+<area shape="poly" title=" " alt="" coords="420,536,373,573,370,569,417,531"/>
+<area shape="rect" title=" " alt="" coords="480,581,558,607"/>
+<area shape="poly" title=" " alt="" coords="450,531,495,569,492,573,446,536"/>
+<area shape="rect" href="non__copyable_8h.html" title=" " alt="" coords="235,168,363,208"/>
+<area shape="poly" title=" " alt="" coords="447,123,357,163,355,158,445,118"/>
+<area shape="rect" href="worker_8h.html" title=" " alt="" coords="388,175,557,201"/>
+<area shape="poly" title=" " alt="" coords="475,120,475,159,470,159,470,120"/>
+<area shape="rect" href="sink_8h.html" title="Определяет интерфейс ISink для потребителей событий журнала (аппендеров). Включает сам интерфейс,..." alt="" coords="581,175,724,201"/>
+<area shape="poly" title=" " alt="" coords="501,118,612,166,610,171,499,123"/>
+<area shape="poly" title=" " alt="" coords="413,204,331,227,296,242,276,258,269,276,276,296,299,320,329,337,326,341,296,324,271,298,263,276,272,255,294,237,329,222,412,199"/>
+<area shape="poly" title=" " alt="" coords="481,200,661,566,656,568,476,203"/>
+<area shape="rect" href="async__queue_8h.html" title="Определяет интерфейсы для асинхронных очередей, включая функциональность добавления,..." alt="" coords="5,256,161,297"/>
+<area shape="poly" title=" " alt="" coords="418,204,176,257,175,252,417,199"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="285,264,468,290"/>
+<area shape="poly" title=" " alt="" coords="461,203,402,256,399,252,457,199"/>
+<area shape="poly" title=" " alt="" coords="161,295,331,338,329,343,160,300"/>
+<area shape="poly" title=" " alt="" coords="112,295,228,371,304,416,384,457,425,471,459,477,492,485,531,505,564,535,589,567,585,570,560,539,528,510,491,490,458,482,424,476,382,462,302,421,225,376,109,300"/>
+<area shape="poly" title=" " alt="" coords="90,297,144,565,139,566,84,298"/>
+<area shape="poly" title=" " alt="" coords="381,289,389,329,384,330,376,290"/>
+<area shape="poly" title=" " alt="" coords="635,204,425,338,422,334,632,199"/>
+<area shape="poly" title=" " alt="" coords="670,199,742,252,739,256,667,203"/>
+<area shape="poly" title=" " alt="" coords="657,201,666,244,684,296,707,331,703,334,679,298,661,245,651,202"/>
+<area shape="poly" title=" " alt="" coords="644,203,575,279,525,327,470,373,446,387,425,395,406,404,385,421,362,447,347,471,341,498,340,533,343,566,338,566,335,533,335,497,343,469,357,444,381,417,403,399,423,390,443,382,467,368,521,323,571,275,640,200"/>
+<area shape="poly" title=" " alt="" coords="614,204,430,261,429,256,613,199"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="sink__console_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2logging_2implementation_2sink__console_8hdep" alt=""/></div>
+<map name="asource_2iridium_2logging_2implementation_2sink__console_8hdep" id="asource_2iridium_2logging_2implementation_2sink__console_8hdep">
+<area shape="rect" title="Определяет класс CSinkConsole, конкретную реализацию ISink для вывода в консоль. Этот приемник логиру..." alt="" coords="115,5,319,46"/>
+<area shape="rect" href="sink__console_8cpp.html" title=" " alt="" coords="5,94,224,135"/>
+<area shape="poly" title=" " alt="" coords="184,58,139,96,136,92,180,54"/>
+<area shape="rect" href="logger_8cpp.html" title=" " alt="" coords="248,94,395,135"/>
+<area shape="poly" title=" " alt="" coords="254,54,299,92,296,96,251,58"/>
+</map>
+</div>
+</div>
+<p><a href="sink__console_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html">iridium::logging::implementation::CSinkConsole</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал. Этот приемник записывает отформатированные сообщения журнала в <code>stdout</code> или <code>stderr</code> (обычно <code>stdout</code>).  <a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1logging.html">iridium::logging</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1logging"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с логированием. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1logging_1_1implementation.html">iridium::logging::implementation</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1logging_1_1implementation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит детали реализации и конкретные классы для компонентов логирования. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Определяет класс <code><a class="el" href="class_c_sink_console.html" title="Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал....">CSinkConsole</a></code>, конкретную реализацию <code>ISink</code> для вывода в консоль. Этот приемник логирует сообщения в стандартные потоки вывода или ошибок. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,6 @@
+<map id="iridium::db::IConnector::sendQuery" name="iridium::db::IConnector::sendQuery">
+<area shape="rect" id="Node000001" title="Sends a query string to the database for execution. This is a pure virtual method that must be implem..." alt="" coords="5,29,159,70"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="44,29,42,19,48,10,62,5,82,3,104,5,117,11,115,16,102,10,82,8,63,10,51,15,47,20,49,28"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1db_1_1_i_connector.html#a0badeb64cf1214b7b17c07514b3d972b" title="A utility function to extract unique field (column) names from a dataset. It iterates through the fir..." alt="" coords="207,29,360,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,47,191,47,191,52,159,52"/>
+</map>

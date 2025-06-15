@@ -1,0 +1,19 @@
+<map id="source/iridium/convertion/convert.h" name="source/iridium/convertion/convert.h">
+<area shape="rect" id="Node000001" title="Public interface for the Iridium type conversion framework. Provides access to conversion functions a..." alt="" coords="175,5,341,46"/>
+<area shape="rect" id="Node000002" href="$implementation_2convert_8h.html" title="Core implementation details for the Iridium type conversion framework. Defines the primary convert fu..." alt="" coords="174,94,342,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,46,261,78,255,78,255,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,44,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,123,59,169,58,164,213,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="67,168,121,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="231,123,136,164,133,159,229,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="145,168,205,193"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="246,122,202,159,199,155,242,118"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="229,168,287,193"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="261,120,261,152,255,152,255,120"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="310,168,379,193"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="274,118,320,156,317,160,271,122"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="402,168,463,193"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="289,118,390,159,388,164,286,123"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="487,168,565,193"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="304,118,472,162,471,167,303,123"/>
+</map>

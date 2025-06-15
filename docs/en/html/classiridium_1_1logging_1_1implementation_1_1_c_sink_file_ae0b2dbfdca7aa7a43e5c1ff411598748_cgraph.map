@@ -1,0 +1,7 @@
+<map id="iridium::logging::implementation::CSinkFile::initialize" name="iridium::logging::implementation::CSinkFile::initialize">
+<area shape="rect" id="Node000001" title="Initializes the file sink. This involves opening/creating the log file according to the path and rota..." alt="" coords="5,23,210,64"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Checks if a source item is equal to any of the specified items." alt="" coords="258,5,398,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,29,242,25,242,31,210,34"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="296,55,360,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,52,281,60,280,65,210,57"/>
+</map>

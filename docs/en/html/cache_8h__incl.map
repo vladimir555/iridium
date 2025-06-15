@@ -1,0 +1,16 @@
+<map id="source/iridium/io/fs/cache.h" name="source/iridium/io/fs/cache.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="209,5,340,46"/>
+<area shape="rect" id="Node000002" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="5,168,134,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,39,105,61,60,77,44,86,33,96,28,109,30,124,49,155,44,157,25,126,22,109,29,92,40,82,58,72,103,56,208,33"/>
+<area shape="rect" id="Node000004" href="$initializable_8h.html" title=" " alt="" coords="42,94,225,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,49,170,88,167,84,238,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="248,94,302,120"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="278,46,278,78,272,78,272,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="325,94,363,120"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="294,45,326,80,322,84,290,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="388,94,452,120"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="312,44,386,84,384,89,310,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="35,241,104,267"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="72,194,72,226,67,226,67,194"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="125,122,92,158,88,154,121,118"/>
+</map>

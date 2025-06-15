@@ -1,0 +1,75 @@
+<map id="iridium::rjust" name="iridium::rjust">
+<area shape="rect" id="Node000001" title=" " alt="" coords="490,1524,582,1549"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion_1_1implementation.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title=" " alt="" coords="269,953,438,994"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="524,1510,359,995,364,994,529,1508"/>
+<area shape="rect" id="Node000032" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a96285e07f4342f950a7600384e2dc9be" title=" " alt="" coords="265,1508,442,1564"/>
+<area shape="poly" id="edge32_Node000001_Node000032" title=" " alt="" coords="474,1539,443,1539,443,1534,474,1534"/>
+<area shape="rect" id="Node000033" href="$classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title="Formats a log event into a standardized string line. This static utility method can be used by sink i..." alt="" coords="280,2013,426,2054"/>
+<area shape="poly" id="edge33_Node000001_Node000033" title=" " alt="" coords="527,1565,365,2014,360,2012,522,1563"/>
+<area shape="poly" id="edge19_Node000002_Node000002" title=" " alt="" coords="383,940,372,934,353,932,336,934,326,938,322,944,324,952,318,953,317,943,322,934,335,929,353,927,373,929,385,935"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion_1_1implementation.html#a32d05936e6f0630f3085a7b8f7adbbf9" title="Converts double to std::string (using default or configured precision)." alt="" coords="27,5,195,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,938,343,755,336,629,324,492,307,357,284,233,253,130,235,91,215,61,194,44,197,40,219,57,240,88,258,129,289,232,312,356,329,492,341,628,348,755,354,938"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1convertion_1_1implementation.html#a9be175d39216df753323d83a9c9c49a1" title="Converts double to std::string with specified precision." alt="" coords="27,71,195,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="348,938,341,767,320,524,303,399,280,285,251,190,234,154,215,126,194,110,197,106,219,123,238,151,256,188,285,283,308,398,325,523,346,767,354,938"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1convertion_1_1implementation.html#a47b28ad281eefe0ac9399e2d92ff9e87" title="Converts float to std::string (using default or configured precision)." alt="" coords="27,136,195,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="348,938,339,779,316,555,299,441,276,336,248,250,232,217,215,191,194,175,197,171,219,188,237,214,253,248,281,335,304,440,321,555,344,779,353,938"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1convertion_1_1implementation.html#a29316e536aa44fb4e2ac0b40d6a3a74f" title="Converts float to std::string with specified precision." alt="" coords="27,201,195,242"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="347,938,336,791,312,587,294,483,273,388,246,310,231,280,215,257,194,241,197,237,219,253,235,277,251,308,278,386,300,482,317,586,341,791,353,938"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium_1_1convertion_1_1implementation.html#a5a0c84515ed1d30c3595ad9d7d390a8c" title=" " alt="" coords="27,267,195,307"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="347,938,333,803,308,618,290,525,269,440,244,370,230,343,215,322,194,306,197,302,219,318,234,340,248,367,274,438,295,524,313,617,339,802,352,937"/>
+<area shape="rect" id="Node000008" href="$namespaceiridium_1_1convertion_1_1implementation.html#a65406f5e492e882407df2cfb81cca1ad" title="Converts int16_t to std::string." alt="" coords="27,332,195,373"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="346,938,331,815,304,650,286,567,265,491,241,430,215,387,194,372,197,368,219,384,246,427,270,490,291,566,309,649,336,815,351,938"/>
+<area shape="rect" id="Node000009" href="$namespaceiridium_1_1convertion_1_1implementation.html#aaa1fa7e00238d7822d62d83f2d90f023" title="Converts int32_t to std::string (typically base 10)." alt="" coords="27,397,195,438"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="345,938,328,828,299,682,281,609,261,543,239,489,215,453,194,437,197,433,219,449,244,487,266,542,287,608,305,681,333,827,350,937"/>
+<area shape="rect" id="Node000010" href="$namespaceiridium_1_1convertion_1_1implementation.html#a9057676852e4500c4aa4ce7005c7b694" title="Converts int64_t to std::string (typically base 10)." alt="" coords="27,463,195,503"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="349,938,344,853,337,799,325,741,308,681,285,622,254,567,215,518,194,503,197,499,219,514,258,564,289,620,313,679,330,739,342,798,349,853,355,938"/>
+<area shape="rect" id="Node000011" href="$namespaceiridium_1_1convertion_1_1implementation.html#af8cba30dc9e8c71c48aeab36e14c40f1" title=" " alt="" coords="27,528,195,569"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="347,938,338,864,317,769,300,719,277,670,249,624,215,584,194,569,197,565,218,580,254,621,282,667,305,717,322,768,344,863,353,937"/>
+<area shape="rect" id="Node000012" href="$namespaceiridium_1_1convertion_1_1implementation.html#a6239c253a546127e351078be7446b937" title=" " alt="" coords="27,593,195,634"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="345,939,332,877,308,799,291,758,270,718,245,681,215,649,194,635,197,631,218,645,249,678,275,716,296,756,313,797,337,875,350,938"/>
+<area shape="rect" id="Node000013" href="$namespaceiridium_1_1convertion_1_1implementation.html#a86f14cd2c1180bba88498b976e4835c1" title=" " alt="" coords="27,659,195,699"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="341,939,324,889,299,828,262,767,240,739,215,714,194,701,197,696,218,710,244,735,267,764,303,826,329,887,346,937"/>
+<area shape="rect" id="Node000014" href="$namespaceiridium_1_1convertion_1_1implementation.html#a40f339f93b9858688007d104f78cf615" title=" " alt="" coords="27,724,195,765"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="335,941,315,903,289,860,255,817,215,780,194,768,197,763,218,776,259,813,293,857,320,901,340,938"/>
+<area shape="rect" id="Node000015" href="$namespaceiridium_1_1convertion_1_1implementation.html#a64b450a775e4d4dc1faba4ecb646328c" title=" " alt="" coords="27,789,195,830"/>
+<area shape="poly" id="edge14_Node000002_Node000015" title=" " alt="" coords="324,943,276,893,247,867,215,845,190,833,193,828,218,841,250,863,280,889,328,939"/>
+<area shape="rect" id="Node000016" href="$namespaceiridium_1_1convertion_1_1implementation.html#a613de0b1b8d001cd80b63f7a1787a3fc" title="Converts std::string to std::chrono::system_clock::time_point." alt="" coords="27,855,195,895"/>
+<area shape="poly" id="edge15_Node000002_Node000016" title=" " alt="" coords="298,948,216,911,181,898,183,893,218,906,300,943"/>
+<area shape="rect" id="Node000017" href="$namespaceiridium_1_1convertion_1_1implementation.html#a43b78d959a93597b33e84130d92b0358" title="Converts std::u32string to std::string." alt="" coords="27,920,195,961"/>
+<area shape="poly" id="edge16_Node000002_Node000017" title=" " alt="" coords="253,963,195,955,196,949,254,957"/>
+<area shape="rect" id="Node000018" href="$namespaceiridium_1_1convertion_1_1implementation.html#aa291a74fcf8a4dbfd7bf096bb38d0f66" title=" " alt="" coords="27,985,195,1026"/>
+<area shape="poly" id="edge17_Node000002_Node000018" title=" " alt="" coords="254,989,196,997,195,992,253,984"/>
+<area shape="rect" id="Node000019" href="$namespaceiridium_1_1convertion_1_1implementation.html#a709cc247c27f84116dab41e5aac023b6" title=" " alt="" coords="27,1051,195,1091"/>
+<area shape="poly" id="edge18_Node000002_Node000019" title=" " alt="" coords="299,1003,218,1040,183,1053,181,1048,216,1035,297,999"/>
+<area shape="rect" id="Node000020" href="$namespaceiridium_1_1convertion_1_1implementation.html#adc962333a0dad0ba6ddac4e531148584" title="Converts uint16_t to std::string." alt="" coords="27,1116,195,1157"/>
+<area shape="poly" id="edge20_Node000002_Node000020" title=" " alt="" coords="328,1008,280,1058,250,1083,218,1105,192,1118,190,1113,215,1101,247,1079,276,1054,324,1004"/>
+<area shape="rect" id="Node000021" href="$namespaceiridium_1_1convertion_1_1implementation.html#a7829811d0e2d3ad8d6a53c75047f4972" title="Converts uint32_t to std::string (typically base 10)." alt="" coords="27,1181,195,1222"/>
+<area shape="poly" id="edge21_Node000002_Node000021" title=" " alt="" coords="339,1009,320,1047,293,1090,259,1133,218,1170,197,1183,194,1178,215,1166,255,1130,288,1087,315,1044,334,1007"/>
+<area shape="rect" id="Node000022" href="$namespaceiridium_1_1convertion_1_1implementation.html#a1b90435c3bd205c4fc54bcdf2e132451" title="Converts uint64_t to std::string (typically base 10)." alt="" coords="27,1247,195,1287"/>
+<area shape="poly" id="edge22_Node000002_Node000022" title=" " alt="" coords="345,1010,329,1060,303,1121,267,1182,244,1211,218,1236,197,1250,194,1245,215,1232,240,1207,262,1179,298,1119,324,1058,340,1008"/>
+<area shape="rect" id="Node000023" href="$namespaceiridium_1_1convertion_1_1implementation.html#a0f98c14ddb8d7bdf71503eb8f4cc7379" title="Converts uint8_t (often a character type) to std::string." alt="" coords="27,1312,195,1353"/>
+<area shape="poly" id="edge23_Node000002_Node000023" title=" " alt="" coords="350,1010,337,1072,313,1150,295,1191,274,1231,249,1268,218,1301,197,1315,194,1311,215,1297,245,1265,270,1228,291,1189,308,1148,332,1071,344,1009"/>
+<area shape="rect" id="Node000024" href="$namespaceiridium_1_1convertion_1_1implementation.html#ab2732619da7d2880cfb9e633ca8c03ac" title=" " alt="" coords="5,1376,217,1432"/>
+<area shape="poly" id="edge24_Node000002_Node000024" title=" " alt="" coords="352,1010,342,1083,320,1178,303,1228,280,1278,253,1324,219,1366,204,1378,201,1374,215,1362,248,1321,276,1275,298,1226,315,1176,337,1082,347,1009"/>
+<area shape="rect" id="Node000025" href="$namespaceiridium_1_1convertion_1_1implementation.html#a9bb21da49033888dff94470bba215087" title=" " alt="" coords="5,1456,217,1512"/>
+<area shape="poly" id="edge25_Node000002_Node000025" title=" " alt="" coords="355,1010,349,1096,342,1152,330,1212,313,1274,289,1336,258,1394,219,1446,205,1458,202,1454,215,1443,254,1391,284,1334,308,1273,325,1211,336,1151,344,1096,349,1009"/>
+<area shape="rect" id="Node000026" href="$namespaceiridium_1_1convertion_1_1implementation.html#a12c331fff1e3ac409068cf249476298b" title=" " alt="" coords="5,1536,217,1592"/>
+<area shape="poly" id="edge26_Node000002_Node000026" title=" " alt="" coords="350,1010,333,1126,305,1279,287,1357,267,1427,244,1485,219,1526,205,1538,202,1534,215,1523,239,1483,262,1425,282,1355,300,1278,328,1125,345,1009"/>
+<area shape="rect" id="Node000027" href="$namespaceiridium_1_1convertion_1_1implementation.html#a7b34e41579376ca7be562d91aaab3f3b" title=" " alt="" coords="5,1616,217,1672"/>
+<area shape="poly" id="edge27_Node000002_Node000027" title=" " alt="" coords="349,1010,291,1338,253,1510,235,1572,219,1606,206,1618,203,1614,215,1603,230,1570,248,1509,286,1337,344,1009"/>
+<area shape="rect" id="Node000028" href="$namespaceiridium_1_1convertion_1_1implementation.html#af066b78adad47850301bdde15cf404e8" title="Converts a std::shared_ptr&lt;TValue&gt; to its string representation. If the shared_ptr is null,..." alt="" coords="18,1696,204,1737"/>
+<area shape="poly" id="edge28_Node000002_Node000028" title=" " alt="" coords="349,1010,284,1390,246,1588,230,1654,219,1686,206,1697,202,1693,214,1683,225,1653,241,1587,279,1389,344,1009"/>
+<area shape="rect" id="Node000029" href="$namespaceiridium_1_1convertion_1_1implementation.html#a58dcc43d77c19af3f984940f45865985" title="Converts a std::shared_ptr&lt;TValue&gt; to its string representation using a format specifier...." alt="" coords="18,1761,204,1802"/>
+<area shape="poly" id="edge29_Node000002_Node000029" title=" " alt="" coords="349,1010,277,1433,219,1750,204,1763,200,1759,214,1747,272,1432,343,1009"/>
+<area shape="rect" id="Node000030" href="$namespaceiridium_1_1convertion_1_1implementation.html#a73e0ed4639ecba458efb0e0cd58e4dcb" title="Converts a std::string to a std::shared_ptr&lt;TResult&gt;. If the input string is &quot;NULL&quot;,..." alt="" coords="18,1827,204,1867"/>
+<area shape="poly" id="edge30_Node000002_Node000030" title=" " alt="" coords="348,1010,267,1497,262,1568,256,1661,245,1752,234,1788,219,1815,204,1828,201,1824,215,1812,229,1786,239,1751,251,1661,256,1568,262,1496,343,1009"/>
+<area shape="rect" id="Node000031" href="$namespaceiridium_1_1convertion_1_1implementation.html#a7ce03c96592d1378cf871e564b077f90" title="Converts a value to a std::shared_ptr&lt;TResult&gt;. This template likely first converts the input value t..." alt="" coords="18,1892,204,1933"/>
+<area shape="poly" id="edge31_Node000002_Node000031" title=" " alt="" coords="348,1010,312,1216,267,1497,262,1583,259,1695,255,1752,248,1804,236,1848,219,1881,205,1893,201,1890,215,1877,231,1846,243,1803,250,1751,254,1695,257,1583,262,1496,307,1215,343,1009"/>
+<area shape="rect" id="Node000034" href="$classiridium_1_1logging_1_1_i_sink.html#abe33a6ec156c70486582c2100f18c24a" title="Flushes any buffered log messages to the underlying storage or output stream. This is a pure virtual ..." alt="" coords="38,1981,184,2022"/>
+<area shape="poly" id="edge34_Node000033_Node000034" title=" " alt="" coords="265,2025,184,2014,185,2009,265,2019"/>
+<area shape="rect" id="Node000035" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a8ddcb9bbf59aa7764a6b49488d830d91" title="Logs a single event to the console if its level is sufficient. The event is formatted into a string l..." alt="" coords="9,2047,213,2087"/>
+<area shape="poly" id="edge36_Node000033_Node000035" title=" " alt="" coords="265,2048,214,2056,213,2050,265,2043"/>
+<area shape="rect" id="Node000036" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Logs a single event to the file if its level is sufficient and the file is open. The event is formatt..." alt="" coords="9,2112,213,2153"/>
+<area shape="poly" id="edge37_Node000033_Node000036" title=" " alt="" coords="300,2064,218,2101,183,2114,181,2109,216,2097,298,2059"/>
+<area shape="poly" id="edge35_Node000034_Node000034" title=" " alt="" coords="151,1968,136,1962,111,1960,88,1962,74,1967,68,1973,71,1980,65,1981,63,1971,71,1962,87,1957,111,1955,137,1957,153,1963"/>
+</map>

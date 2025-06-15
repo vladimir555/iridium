@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::pattern::implementation::CInitializer</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html">CInitializer</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::pattern::implementation::CInitializer</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Конкретная реализация <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>, управляющая коллекцией других объектов <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>. Этот класс позволяет группировать несколько инициализируемых компонентов и управлять их жизненным циклом (инициализация и финализация) как единым целым. Он гарантирует, что все управляемые объекты инициализируются в порядке их предоставления и финализируются в обратном порядке.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="initializer_8h_source.html">initializer.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::pattern::implementation::CInitializer:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_initializer__inherit__graph.png" border="0" usemap="#airidium_1_1pattern_1_1implementation_1_1_c_initializer_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1pattern_1_1implementation_1_1_c_initializer_inherit__map" id="airidium_1_1pattern_1_1implementation_1_1_c_initializer_inherit__map">
+<area shape="rect" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable...." alt="" coords="5,79,209,120"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="15,5,199,31"/>
+<area shape="poly" title=" " alt="" coords="110,46,110,79,104,79,104,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::pattern::implementation::CInitializer:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_initializer__coll__graph.png" border="0" usemap="#airidium_1_1pattern_1_1implementation_1_1_c_initializer_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1pattern_1_1implementation_1_1_c_initializer_coll__map" id="airidium_1_1pattern_1_1implementation_1_1_c_initializer_coll__map">
+<area shape="rect" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable...." alt="" coords="5,79,209,120"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="15,5,199,31"/>
+<area shape="poly" title=" " alt="" coords="110,46,110,79,104,79,104,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a41e947226c7e93fc42493390ec856804" id="r_a41e947226c7e93fc42493390ec856804"><td class="memTemplParams" colspan="2">template&lt;typename ... TArgs&gt; </td></tr>
+<tr class="memitem:a41e947226c7e93fc42493390ec856804"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a41e947226c7e93fc42493390ec856804">CInitializer</a> (TArgs const &amp;... items)</td></tr>
+<tr class="memdesc:a41e947226c7e93fc42493390ec856804"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные вспомогательные средства реализации для <code><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable....">CInitializer</a></code>, такие как статический метод <code>create</code> для создания экземпляров через разделяемые указатели.  <br /></td></tr>
+<tr class="separator:a41e947226c7e93fc42493390ec856804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa0548270f01e41855f731de4389395" id="r_a7aa0548270f01e41855f731de4389395"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7aa0548270f01e41855f731de4389395">~CInitializer</a> ()</td></tr>
+<tr class="memdesc:a7aa0548270f01e41855f731de4389395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор. Гарантирует вызов <code><a class="el" href="#a0c260a8a6cae6d5d9e53268eef797f1a" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления....">finalize()</a></code>, если элементы были инициализированы и еще не финализированы. Это помогает предотвратить утечки ресурсов, если <code><a class="el" href="#a0c260a8a6cae6d5d9e53268eef797f1a" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления....">finalize()</a></code> не был вызван явно.  <br /></td></tr>
+<tr class="separator:a7aa0548270f01e41855f731de4389395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a619c260e1d7628293c111dd94378937f" id="r_a619c260e1d7628293c111dd94378937f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a619c260e1d7628293c111dd94378937f">initialize</a> () override</td></tr>
+<tr class="memdesc:a619c260e1d7628293c111dd94378937f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует все управляемые объекты <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code> в порядке их добавления. Если инициализация какого-либо объекта завершается неудачей (выбрасывает исключение), последующие объекты не будут инициализированы. Устанавливает внутренний флаг, указывающий, что инициализация была выполнена.  <br /></td></tr>
+<tr class="separator:a619c260e1d7628293c111dd94378937f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c260a8a6cae6d5d9e53268eef797f1a" id="r_a0c260a8a6cae6d5d9e53268eef797f1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c260a8a6cae6d5d9e53268eef797f1a">finalize</a> () override</td></tr>
+<tr class="memdesc:a0c260a8a6cae6d5d9e53268eef797f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Финализирует все управляемые объекты <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code> в обратном порядке их добавления. Пытается финализировать все элементы, даже если некоторые финализации завершаются неудачей (исключения из одного вызова <code>finalize</code> не предотвращают последующие вызовы <code>finalize</code>, хотя первое исключение может быть распространено после всех попыток). Сбрасывает внутренний флаг, указывающий, что финализация была выполнена.  <br /></td></tr>
+<tr class="separator:a0c260a8a6cae6d5d9e53268eef797f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Конкретная реализация <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>, управляющая коллекцией других объектов <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>. Этот класс позволяет группировать несколько инициализируемых компонентов и управлять их жизненным циклом (инициализация и финализация) как единым целым. Он гарантирует, что все управляемые объекты инициализируются в порядке их предоставления и финализируются в обратном порядке. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a41e947226c7e93fc42493390ec856804" name="a41e947226c7e93fc42493390ec856804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41e947226c7e93fc42493390ec856804">&#9670;&#160;</a></span>CInitializer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ... TArgs&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::pattern::implementation::CInitializer::CInitializer </td>
+          <td>(</td>
+          <td class="paramtype">TArgs const &amp;...</td>          <td class="paramname"><span class="paramname"><em>items</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Определяет стандартные вспомогательные средства реализации для <code><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable....">CInitializer</a></code>, такие как статический метод <code>create</code> для создания экземпляров через разделяемые указатели. </p>
+<p>Конструирует <code><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable....">CInitializer</a></code> с переменным количеством элементов <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>. Элементы сохраняются внутри и будут инициализированы и финализированы этим экземпляром <code><a class="el" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable....">CInitializer</a></code>. </p><dl class="tparams"><dt>Параметры шаблона</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TArgs</td><td>Вариативный пакет шаблонных параметров, где каждый тип в <code>TArgs</code> должен быть преобразуем в <code>IInitializable::TSharedPtr</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>Пакет параметров разделяемых указателей на объекты <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>если какой-либо из предоставленных `items` является nullptr.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Инициализирует список <code>m_items</code> предоставленным пакетом разделяемых указателей на объекты <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>. Итерирует по элементам, чтобы убедиться, что ни один из них не является null, выбрасывая <code>std::runtime_error</code> при обнаружении null-элемента. </p>
+
+</div>
+</div>
+<a id="a7aa0548270f01e41855f731de4389395" name="a7aa0548270f01e41855f731de4389395"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa0548270f01e41855f731de4389395">&#9670;&#160;</a></span>~CInitializer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::pattern::implementation::CInitializer::~CInitializer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Деструктор. Гарантирует вызов <code><a class="el" href="#a0c260a8a6cae6d5d9e53268eef797f1a" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления....">finalize()</a></code>, если элементы были инициализированы и еще не финализированы. Это помогает предотвратить утечки ресурсов, если <code><a class="el" href="#a0c260a8a6cae6d5d9e53268eef797f1a" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления....">finalize()</a></code> не был вызван явно. </p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_initializer_a7aa0548270f01e41855f731de4389395_cgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1implementation_1_1_c_initializer_a7aa0548270f01e41855f731de4389395_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1implementation_1_1_c_initializer_a7aa0548270f01e41855f731de4389395_cgraph" id="aclassiridium_1_1pattern_1_1implementation_1_1_c_initializer_a7aa0548270f01e41855f731de4389395_cgraph">
+<area shape="rect" title="Деструктор. Гарантирует вызов finalize(), если элементы были инициализированы и еще не финализированы..." alt="" coords="5,5,209,46"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html#a0c260a8a6cae6d5d9e53268eef797f1a" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления...." alt="" coords="257,5,460,46"/>
+<area shape="poly" title=" " alt="" coords="209,23,241,23,241,28,209,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a0c260a8a6cae6d5d9e53268eef797f1a" name="a0c260a8a6cae6d5d9e53268eef797f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c260a8a6cae6d5d9e53268eef797f1a">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::pattern::implementation::CInitializer::finalize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Финализирует все управляемые объекты <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code> в обратном порядке их добавления. Пытается финализировать все элементы, даже если некоторые финализации завершаются неудачей (исключения из одного вызова <code>finalize</code> не предотвращают последующие вызовы <code>finalize</code>, хотя первое исключение может быть распространено после всех попыток). Сбрасывает внутренний флаг, указывающий, что финализация была выполнена. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может распространять исключение, если один или несколько вызовов `finalize()` завершаются неудачей. Обычно первое встреченное. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">iridium::pattern::IInitializable</a>.</p>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1pattern_1_1implementation_1_1_c_initializer_a0c260a8a6cae6d5d9e53268eef797f1a_icgraph.png" border="0" usemap="#aclassiridium_1_1pattern_1_1implementation_1_1_c_initializer_a0c260a8a6cae6d5d9e53268eef797f1a_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1pattern_1_1implementation_1_1_c_initializer_a0c260a8a6cae6d5d9e53268eef797f1a_icgraph" id="aclassiridium_1_1pattern_1_1implementation_1_1_c_initializer_a0c260a8a6cae6d5d9e53268eef797f1a_icgraph">
+<area shape="rect" title="Финализирует все управляемые объекты IInitializable в обратном порядке их добавления...." alt="" coords="257,5,460,46"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html#a7aa0548270f01e41855f731de4389395" title="Деструктор. Гарантирует вызов finalize(), если элементы были инициализированы и еще не финализированы..." alt="" coords="5,5,209,46"/>
+<area shape="poly" title=" " alt="" coords="241,28,209,28,209,23,241,23"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a619c260e1d7628293c111dd94378937f" name="a619c260e1d7628293c111dd94378937f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a619c260e1d7628293c111dd94378937f">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::pattern::implementation::CInitializer::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Инициализирует все управляемые объекты <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code> в порядке их добавления. Если инициализация какого-либо объекта завершается неудачей (выбрасывает исключение), последующие объекты не будут инициализированы. Устанавливает внутренний флаг, указывающий, что инициализация была выполнена. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Распространяет исключения, выброшенные методом `initialize()` любого управляемого элемента. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/pattern/implementation/<a class="el" href="initializer_8h_source.html">initializer.h</a></li>
+<li>source/iridium/pattern/implementation/<a class="el" href="initializer_8cpp.html">initializer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

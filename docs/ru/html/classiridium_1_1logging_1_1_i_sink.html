@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::logging::ISink</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1logging.html">logging</a></li><li class="navelem"><a class="el" href="classiridium_1_1logging_1_1_i_sink.html">ISink</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-static-methods">Открытые статические члены</a> &#124;
+<a href="#pub-static-attribs">Статические открытые данные</a> &#124;
+<a href="classiridium_1_1logging_1_1_i_sink-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::logging::ISink<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для классов, которые потребляют события журнала и выводят их в определенное место назначения (например, консоль, файл, сеть).  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sink_8h_source.html">sink.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::logging::ISink:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink__inherit__graph.png" border="0" usemap="#airidium_1_1logging_1_1_i_sink_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1logging_1_1_i_sink_inherit__map" id="airidium_1_1logging_1_1_i_sink_inherit__map">
+<area shape="rect" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас..." alt="" coords="238,78,384,104"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title="Предоставляет асинхронную обертку вокруг реализации ISink. Использует рабочий поток для обработки соб..." alt="" coords="432,5,636,46"/>
+<area shape="poly" title=" " alt="" coords="371,71,461,44,463,49,373,76"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title="Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал...." alt="" coords="432,71,636,111"/>
+<area shape="poly" title=" " alt="" coords="400,88,432,88,432,94,400,94"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html" title="Конкретная реализация приемника для вывода сообщений журнала в файл, с поддержкой ротации файлов...." alt="" coords="432,136,636,177"/>
+<area shape="poly" title=" " alt="" coords="373,106,463,133,461,138,371,111"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,78,190,104"/>
+<area shape="poly" title=" " alt="" coords="205,88,237,88,237,94,205,94"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::logging::ISink:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink__coll__graph.png" border="0" usemap="#airidium_1_1logging_1_1_i_sink_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1logging_1_1_i_sink_coll__map" id="airidium_1_1logging_1_1_i_sink_coll__map">
+<area shape="rect" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас..." alt="" coords="24,79,171,105"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a456f55d89d7db23e23885f2543aed84f" id="r_a456f55d89d7db23e23885f2543aed84f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a456f55d89d7db23e23885f2543aed84f">DEFINE_ENUM</a> (TType, FILE, CONSOLE) virtual ~<a class="el" href="classiridium_1_1logging_1_1_i_sink.html">ISink</a>()=default</td></tr>
+<tr class="memdesc:a456f55d89d7db23e23885f2543aed84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <a class="el" href="classiridium_1_1logging_1_1_i_sink.html" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас...">ISink</a>.  <br /></td></tr>
+<tr class="separator:a456f55d89d7db23e23885f2543aed84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1686219c1b80e56e250585107ce0f1c6" id="r_a1686219c1b80e56e250585107ce0f1c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1686219c1b80e56e250585107ce0f1c6">log</a> (TEvent::TConstSharedPtr const &amp;e)=0</td></tr>
+<tr class="memdesc:a1686219c1b80e56e250585107ce0f1c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обрабатывает и логирует одно событие журнала. Это чисто виртуальная функция, которая должна быть реализована производными классами приемников.  <br /></td></tr>
+<tr class="separator:a1686219c1b80e56e250585107ce0f1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe33a6ec156c70486582c2100f18c24a" id="r_abe33a6ec156c70486582c2100f18c24a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe33a6ec156c70486582c2100f18c24a">flush</a> ()=0</td></tr>
+<tr class="memdesc:abe33a6ec156c70486582c2100f18c24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сбрасывает все буферизованные сообщения журнала в базовое хранилище или выходной поток. Это чисто виртуальная функция, которая должна быть реализована производными классами приемников.  <br /></td></tr>
+<tr class="separator:abe33a6ec156c70486582c2100f18c24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a5b8c613423cd12e98327a9279d8b9d64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">initialize</a> ()=0</td></tr>
+<tr class="memdesc:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова.  <br /></td></tr>
+<tr class="separator:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a93a1fb6f89e1e1f125455a8682e9ae59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">finalize</a> ()=0</td></tr>
+<tr class="memdesc:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы.  <br /></td></tr>
+<tr class="separator:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Открытые статические члены</h2></td></tr>
+<tr class="memitem:a6e93ea7f4f088ce7a14fb1207d3ca67e" id="r_a6e93ea7f4f088ce7a14fb1207d3ca67e"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e93ea7f4f088ce7a14fb1207d3ca67e">makeLine</a> (TEvent::TConstSharedPtr const &amp;e)</td></tr>
+<tr class="memdesc:a6e93ea7f4f088ce7a14fb1207d3ca67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Форматирует событие журнала в стандартизированную строковую запись. Этот статический служебный метод может использоваться реализациями приемников для создания согласованного формата сообщений журнала.  <br /></td></tr>
+<tr class="separator:a6e93ea7f4f088ce7a14fb1207d3ca67e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Статические открытые данные</h2></td></tr>
+<tr class="memitem:ae271d6aaf7d2c056ce7482dd9f9f4d5f" id="r_ae271d6aaf7d2c056ce7482dd9f9f4d5f"><td class="memItemLeft" align="right" valign="top">static std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae271d6aaf7d2c056ce7482dd9f9f4d5f">is_gmt_time</a></td></tr>
+<tr class="memdesc:ae271d6aaf7d2c056ce7482dd9f9f4d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Глобальный атомарный флаг, указывающий, должны ли временные метки в сообщениях журнала быть в GMT/UTC. Если true, используется время GMT/UTC; в противном случае используется локальное время. Этот флаг влияет на вывод <code>makeLine</code>.  <br /></td></tr>
+<tr class="separator:ae271d6aaf7d2c056ce7482dd9f9f4d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для классов, которые потребляют события журнала и выводят их в определенное место назначения (например, консоль, файл, сеть). </p>
+</div><h2 class="groupheader">Методы</h2>
+<a id="a456f55d89d7db23e23885f2543aed84f" name="a456f55d89d7db23e23885f2543aed84f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456f55d89d7db23e23885f2543aed84f">&#9670;&#160;</a></span>DEFINE_ENUM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::logging::ISink::DEFINE_ENUM </td>
+          <td>(</td>
+          <td class="paramtype">TType</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CONSOLE</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <a class="el" href="classiridium_1_1logging_1_1_i_sink.html" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас...">ISink</a>. </p>
+<p>Перечисляет общие типы приемников логов.</p>
+<p>Виртуальный деструктор для обеспечения корректного освобождения ресурсов производного класса. </p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_cgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_cgraph" id="aclassiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_cgraph">
+<area shape="rect" title="Определяет стандартные typedef&#45;ы умных указателей (TSharedPtr, TWeakPtr и т.д.) для интерфейса ISink." alt="" coords="5,29,152,70"/>
+<area shape="poly" title=" " alt="" coords="50,29,49,20,53,11,63,5,79,3,95,5,105,12,102,16,93,10,78,8,65,10,57,14,54,20,55,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_icgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_icgraph" id="aclassiridium_1_1logging_1_1_i_sink_a456f55d89d7db23e23885f2543aed84f_icgraph">
+<area shape="rect" title="Определяет стандартные typedef&#45;ы умных указателей (TSharedPtr, TWeakPtr и т.д.) для интерфейса ISink." alt="" coords="5,29,152,70"/>
+<area shape="poly" title=" " alt="" coords="102,16,93,10,78,8,65,10,57,14,54,20,55,28,50,29,49,20,53,11,63,5,79,3,95,5,105,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abe33a6ec156c70486582c2100f18c24a" name="abe33a6ec156c70486582c2100f18c24a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe33a6ec156c70486582c2100f18c24a">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::logging::ISink::flush </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Сбрасывает все буферизованные сообщения журнала в базовое хранилище или выходной поток. Это чисто виртуальная функция, которая должна быть реализована производными классами приемников. </p>
+
+<p>Замещается в <a class="el" href="class_c_sink_async.html#a09622534ee05c468ee455a0644c08b73">CSinkAsync</a>, <a class="el" href="class_c_sink_console.html#a67c942af7a6297e8d3f092ff785bc2f4">CSinkConsole</a>, <a class="el" href="class_c_sink_file.html#adb7420a5c388283284293cab77552943">CSinkFile</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html#a09622534ee05c468ee455a0644c08b73">iridium::logging::implementation::CSinkAsync</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a67c942af7a6297e8d3f092ff785bc2f4">iridium::logging::implementation::CSinkConsole</a> и <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#adb7420a5c388283284293cab77552943">iridium::logging::implementation::CSinkFile</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_cgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_cgraph" id="aclassiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_cgraph">
+<area shape="rect" title="Сбрасывает все буферизованные сообщения журнала в базовое хранилище или выходной поток...." alt="" coords="5,29,152,70"/>
+<area shape="poly" title=" " alt="" coords="41,29,40,19,46,10,59,5,79,3,100,5,112,11,110,16,98,10,78,8,60,10,49,15,45,20,47,28"/>
+<area shape="rect" href="classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title="Форматирует событие журнала в стандартизированную строковую запись. Этот статический служебный метод ..." alt="" coords="200,29,346,70"/>
+<area shape="poly" title=" " alt="" coords="152,47,185,47,185,52,152,52"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="408,12,472,37"/>
+<area shape="poly" title=" " alt="" coords="346,36,392,29,393,34,347,41"/>
+<area shape="rect" href="namespaceiridium.html#a627d2f2ec5720695a4e72cc1a16491c4" title=" " alt="" coords="394,61,486,86"/>
+<area shape="poly" title=" " alt="" coords="347,58,379,62,378,68,346,63"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_icgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_icgraph" id="aclassiridium_1_1logging_1_1_i_sink_abe33a6ec156c70486582c2100f18c24a_icgraph">
+<area shape="rect" title="Сбрасывает все буферизованные сообщения журнала в базовое хранилище или выходной поток...." alt="" coords="5,29,152,70"/>
+<area shape="poly" title=" " alt="" coords="102,16,93,10,78,8,65,10,57,14,54,20,55,28,50,29,49,20,53,11,63,5,79,3,95,5,105,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1686219c1b80e56e250585107ce0f1c6" name="a1686219c1b80e56e250585107ce0f1c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1686219c1b80e56e250585107ce0f1c6">&#9670;&#160;</a></span>log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::logging::ISink::log </td>
+          <td>(</td>
+          <td class="paramtype">TEvent::TConstSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обрабатывает и логирует одно событие журнала. Это чисто виртуальная функция, которая должна быть реализована производными классами приемников. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>Константный разделяемый указатель на событие журнала для обработки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="class_c_sink_async.html#af29628ebf26aff205cd88c2ab95de0d0">CSinkAsync</a>, <a class="el" href="class_c_sink_console.html#a8ddcb9bbf59aa7764a6b49488d830d91">CSinkConsole</a>, <a class="el" href="class_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d">CSinkFile</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html#af29628ebf26aff205cd88c2ab95de0d0">iridium::logging::implementation::CSinkAsync</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a8ddcb9bbf59aa7764a6b49488d830d91">iridium::logging::implementation::CSinkConsole</a> и <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d">iridium::logging::implementation::CSinkFile</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_cgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_cgraph" id="aclassiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_cgraph">
+<area shape="rect" title="Обрабатывает и логирует одно событие журнала. Это чисто виртуальная функция, которая должна быть реал..." alt="" coords="5,29,177,55"/>
+<area shape="poly" title=" " alt="" coords="62,30,56,21,60,11,72,5,91,3,112,5,123,12,120,16,110,10,91,8,73,10,64,15,62,20,66,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_icgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_icgraph" id="aclassiridium_1_1logging_1_1_i_sink_a1686219c1b80e56e250585107ce0f1c6_icgraph">
+<area shape="rect" title="Обрабатывает и логирует одно событие журнала. Это чисто виртуальная функция, которая должна быть реал..." alt="" coords="5,29,177,55"/>
+<area shape="poly" title=" " alt="" coords="120,16,110,10,91,8,73,10,64,15,62,20,66,28,62,30,56,21,60,11,72,5,91,3,112,5,123,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6e93ea7f4f088ce7a14fb1207d3ca67e" name="a6e93ea7f4f088ce7a14fb1207d3ca67e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e93ea7f4f088ce7a14fb1207d3ca67e">&#9670;&#160;</a></span>makeLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string iridium::logging::ISink::makeLine </td>
+          <td>(</td>
+          <td class="paramtype">TEvent::TConstSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Форматирует событие журнала в стандартизированную строковую запись. Этот статический служебный метод может использоваться реализациями приемников для создания согласованного формата сообщений журнала. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>Константный разделяемый указатель на событие журнала для форматирования. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Строка, представляющая отформатированную запись журнала. </dd></dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_cgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_cgraph" id="aclassiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_cgraph">
+<area shape="rect" title="Форматирует событие журнала в стандартизированную строковую запись. Этот статический служебный метод ..." alt="" coords="5,23,152,64"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="214,5,278,31"/>
+<area shape="poly" title=" " alt="" coords="152,30,198,23,199,28,152,35"/>
+<area shape="rect" href="namespaceiridium.html#a627d2f2ec5720695a4e72cc1a16491c4" title=" " alt="" coords="200,55,292,80"/>
+<area shape="poly" title=" " alt="" coords="152,51,185,56,184,61,152,57"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_icgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_icgraph" id="aclassiridium_1_1logging_1_1_i_sink_a6e93ea7f4f088ce7a14fb1207d3ca67e_icgraph">
+<area shape="rect" title="Форматирует событие журнала в стандартизированную строковую запись. Этот статический служебный метод ..." alt="" coords="258,95,404,135"/>
+<area shape="rect" href="classiridium_1_1logging_1_1_i_sink.html#abe33a6ec156c70486582c2100f18c24a" title="Сбрасывает все буферизованные сообщения журнала в базовое хранилище или выходной поток...." alt="" coords="34,29,181,70"/>
+<area shape="poly" title=" " alt="" coords="244,92,179,73,180,68,245,87"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a8ddcb9bbf59aa7764a6b49488d830d91" title="Логирует одно событие в консоль, если его уровень достаточен. Событие форматируется в строковую запис..." alt="" coords="5,95,210,135"/>
+<area shape="poly" title=" " alt="" coords="242,118,210,118,210,112,242,112"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро..." alt="" coords="5,160,210,201"/>
+<area shape="poly" title=" " alt="" coords="245,143,180,162,179,157,244,138"/>
+<area shape="poly" title=" " alt="" coords="144,16,130,10,107,8,86,10,73,15,68,21,71,28,65,29,63,19,70,10,85,5,108,3,132,5,146,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a id="ae271d6aaf7d2c056ce7482dd9f9f4d5f" name="ae271d6aaf7d2c056ce7482dd9f9f4d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae271d6aaf7d2c056ce7482dd9f9f4d5f">&#9670;&#160;</a></span>is_gmt_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt; bool &gt; iridium::logging::ISink::is_gmt_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Глобальный атомарный флаг, указывающий, должны ли временные метки в сообщениях журнала быть в GMT/UTC. Если true, используется время GMT/UTC; в противном случае используется локальное время. Этот флаг влияет на вывод <code>makeLine</code>. </p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/logging/<a class="el" href="sink_8h_source.html">sink.h</a></li>
+<li>source/iridium/logging/<a class="el" href="sink_8cpp.html">sink.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,5 +1,0 @@
-<map id="convertPtr" name="convertPtr">
-<area shape="rect" id="Node000001" title="Предоставляет доступ к шаблонной функции преобразования указателей из пространства имен реализации...." alt="" coords="258,5,339,31"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1system_1_1_command.html#ac095db11e0b75e74593211ef99dae03b" title="Запускает сконфигурированную команду, ожидает ее завершения или истечения тайм&#45;аута и захватывает ее ..." alt="" coords="5,5,210,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,21,210,21,210,16,242,16"/>
-</map>

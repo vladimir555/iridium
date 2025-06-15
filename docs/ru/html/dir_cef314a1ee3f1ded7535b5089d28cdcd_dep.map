@@ -1,0 +1,10 @@
+<map id="source/iridium/system/implementation/platform" name="source/iridium/system/implementation/platform">
+<area shape="rect" id="node2" href="dir_c087262401f1c730f55287b834b9e4c7.html" title="emscripten" alt="" coords="131,63,216,89"/>
+<area shape="rect" id="node3" href="dir_ce028e1bb18dd581e0f4108ec2935cd1.html" title="freebsd" alt="" coords="240,63,304,89"/>
+<area shape="rect" id="node4" href="dir_adf996c1d4bcfe801d9dde29c7dddd9d.html" title="linux" alt="" coords="328,63,376,89"/>
+<area shape="rect" id="node5" href="dir_75ba15ae0c16ed8362db66a09d4384ba.html" title="macos" alt="" coords="400,63,461,89"/>
+<area shape="rect" id="node6" href="dir_028d8cb7e7f37f93360d45a21502dbd8.html" title="unix" alt="" coords="485,63,531,89"/>
+<area shape="rect" id="node7" href="dir_3bfe14dcac0421a433a5f7098814f7b0.html" title="windows" alt="" coords="554,63,627,89"/>
+<area shape="rect" id="clust2" href="dir_cef314a1ee3f1ded7535b5089d28cdcd.html" alt="" coords="27,52,637,99"/>
+<area shape="rect" id="clust1" href="dir_095de106d2641024b67f330eb2ed94e0.html" title="implementation" alt="" coords="16,16,648,110"/>
+</map>

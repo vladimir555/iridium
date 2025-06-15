@@ -1,0 +1,7 @@
+<map id="iridium::threading::implementation::CWorkerPopperRunnable&lt; TItem &gt;" name="iridium::threading::implementation::CWorkerPopperRunnable&lt; TItem &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,168,223,223"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_runnable.html" title=" " alt="" coords="54,79,174,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,135,117,167,111,167,111,135"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="22,5,206,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,46,117,79,111,79,111,46"/>
+</map>

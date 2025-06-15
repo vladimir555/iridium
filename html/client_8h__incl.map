@@ -1,9 +1,0 @@
-<map id="source/iridium/io/client.h" name="source/iridium/io/client.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="15,5,178,31"/>
-<area shape="rect" id="Node000002" href="$initializable_8h.html" title=" " alt="" coords="5,79,188,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,31,99,63,94,63,94,31"/>
-<area shape="rect" id="Node000003" href="$smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="32,153,161,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,105,99,137,94,137,94,105"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="62,226,131,252"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,179,99,211,94,211,94,179"/>
-</map>

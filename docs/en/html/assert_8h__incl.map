@@ -1,0 +1,23 @@
+<map id="source/iridium/assert.h" name="source/iridium/assert.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="57,5,210,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,241,84,267"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,32,57,227,52,226,127,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="107,241,160,267"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,31,136,226,131,226,131,31"/>
+<area shape="rect" id="Node000004" href="$convert_8h.html" title="Public interface for the Iridium type conversion framework. Provides access to conversion functions a..." alt="" coords="182,79,305,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="152,29,206,68,202,72,149,34"/>
+<area shape="rect" id="Node000005" href="$implementation_2convert_8h.html" title="Core implementation details for the Iridium type conversion framework. Defines the primary convert fu..." alt="" coords="193,168,360,193"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="254,119,268,152,263,154,249,121"/>
+<area shape="poly" id="edge11_Node000005_Node000002" title=" " alt="" coords="238,196,99,239,98,234,236,191"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="253,196,173,236,171,232,251,191"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="527,241,565,267"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="334,191,415,211,513,238,511,243,413,216,332,197"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="185,241,245,267"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="268,195,237,231,233,228,264,192"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="269,241,326,267"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="283,193,292,226,287,227,277,194"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="350,241,419,267"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="296,192,355,230,352,235,293,196"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="442,241,503,267"/>
+<area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="311,191,429,234,427,239,309,196"/>
+</map>

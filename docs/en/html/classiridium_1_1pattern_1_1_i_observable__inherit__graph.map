@@ -1,0 +1,5 @@
+<map id="iridium::pattern::IObservable&lt; TEvent &gt;" name="iridium::pattern::IObservable&lt; TEvent &gt;">
+<area shape="rect" id="Node000001" title="Interface for the &#39;Observable&#39; (or &#39;Subject&#39;) part of the Observer design pattern...." alt="" coords="14,5,200,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1implementation_1_1_c_observable.html" title=" " alt="" coords="5,94,209,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,62,110,94,104,94,104,62"/>
+</map>

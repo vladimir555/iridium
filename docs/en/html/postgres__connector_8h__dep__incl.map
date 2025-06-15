@@ -1,0 +1,5 @@
+<map id="source/iridium/db/implementation/postgres_connector.h" name="source/iridium/db/implementation/postgres_connector.h">
+<area shape="rect" id="Node000001" title="Defines the CPostgresConnector class, a concrete implementation of IConnector for PostgreSQL database..." alt="" coords="5,5,218,46"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html" title=" " alt="" coords="18,94,205,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,62,114,93,109,93,109,62"/>
+</map>

@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Пространство имен iridium::parsing</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing.html">parsing</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#typedef-members">Определения типов</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Пространство имен iridium::parsing</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>).  
+<a href="#details">Подробнее...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html">implementation</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing_1_1implementation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры. Это пространство имен предоставляет фактическую логику для разбора и формирования структур данных, определенных интерфейсами в родительском пространстве имен <code><a class="el" href="namespaceiridium_1_1parsing.html" title="Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных да...">iridium::parsing</a></code>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing_1_1serialization.html">serialization</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1parsing_1_1serialization"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет классы, макросы и утилиты для определения сериализуемых/десериализуемых структур данных. Это пространство имен фокусируется на представлении данных на основе узлов, где структуры данных определяются как иерархия узлов, каждый из которых потенциально может иметь атрибуты, значения и дочерние узлы или списки узлов. Система использует классы <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> в качестве оберток над базовым деревом <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> для обеспечения типизированного доступа и модификации, а также применяет набор макросов (<code>DEFINE_ROOT_NODE_BEGIN</code>, <code>DEFINE_ATTRIBUTE</code> и т.д.) для декларативного определения этих структур. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">INodeType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения. Представляет элементы в разобранных структурах данных, таких как XML, JSON или конфигурационные файлы. Узел может иметь имя, основное значение типа <code>TValue</code>, атрибуты (обычно управляемые конкретными реализациями) и список дочерних узлов. Этот шаблон класса наследуется от <code><a class="el" href="classiridium_1_1pattern_1_1_i_prototype.html" title="Интерфейс для шаблона проектирования &quot;Прототип&quot;. Этот шаблон позволяет создавать новые объекты путем ...">iridium::pattern::IPrototype</a></code>, что предполагает поддержку клонирования.  <a href="classiridium_1_1parsing_1_1_i_node_type.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html">IParser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование строкового представления данных (например, XML, JSON, пользовательский формат) в дерево объектов <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>. Компоновщики выполняют обратную операцию, преобразуя дерево объектов <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> обратно в строковое представление.  <a href="classiridium_1_1parsing_1_1_i_parser.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Определения типов</h2></td></tr>
+<tr class="memitem:a88d6a61f1143b2f33166598a41993b7e" id="r_a88d6a61f1143b2f33166598a41993b7e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">INodeType</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e">INode</a></td></tr>
+<tr class="memdesc:a88d6a61f1143b2f33166598a41993b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> как специализацию интерфейса <code><a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a></code> с <code>std::string</code> в качестве типа значения. Обычно представляет собой обобщенный узел в разобранной структуре данных (например, конфигурационный файл или документ XML/JSON), где каждый узел может иметь имя, атрибуты, дочерние узлы и строковое значение.  <br /></td></tr>
+<tr class="separator:a88d6a61f1143b2f33166598a41993b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a5627b457369870b42028a84bd05bc8b4" id="r_a5627b457369870b42028a84bd05bc8b4"><td class="memItemLeft" align="right" valign="top">IParser::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5627b457369870b42028a84bd05bc8b4">createParserByExtension</a> (string const &amp;file_name)</td></tr>
+<tr class="separator:a5627b457369870b42028a84bd05bc8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5867486cd60924f7e4bff6acd74fc37" id="r_ab5867486cd60924f7e4bff6acd74fc37"><td class="memItemLeft" align="right" valign="top">INode::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5867486cd60924f7e4bff6acd74fc37">parseFile</a> (string const &amp;file_name)</td></tr>
+<tr class="separator:ab5867486cd60924f7e4bff6acd74fc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8712a6719913defc4a55db045852136" id="r_aa8712a6719913defc4a55db045852136"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8712a6719913defc4a55db045852136">composeFile</a> (string const &amp;file_name, INode::TSharedPtr const &amp;root_node)</td></tr>
+<tr class="separator:aa8712a6719913defc4a55db045852136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61415abe931f9a6feca5e4ef7a519fb" id="r_ab61415abe931f9a6feca5e4ef7a519fb"><td class="memItemLeft" align="right" valign="top">INode::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab61415abe931f9a6feca5e4ef7a519fb">parseFile</a> (std::string const &amp;file_name)</td></tr>
+<tr class="memdesc:ab61415abe931f9a6feca5e4ef7a519fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает файл и строит дерево узлов, представляющее его содержимое. Конкретная логика разбора (например, для XML, JSON, пользовательских форматов) определяется базовой реализацией, которая здесь не детализируется, но ожидается, что она будет обрабатывать файловый ввод-вывод и интерпретацию формата.  <br /></td></tr>
+<tr class="separator:ab61415abe931f9a6feca5e4ef7a519fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad50094a37c8790f71aee13cc754ccdea" id="r_ad50094a37c8790f71aee13cc754ccdea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad50094a37c8790f71aee13cc754ccdea">composeFile</a> (std::string const &amp;file_name, INode::TSharedPtr const &amp;root_node)</td></tr>
+<tr class="memdesc:ad50094a37c8790f71aee13cc754ccdea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в файл. Конкретная логика формирования (например, в XML, JSON, пользовательские форматы) определяется базовой реализацией.  <br /></td></tr>
+<tr class="separator:ad50094a37c8790f71aee13cc754ccdea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>). </p>
+<p>Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>, <code><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст...">IParser</a></code>).</p>
+<p>Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>, <code><a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a></code>).</p>
+<p>Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. (Детали реализации находятся в подпространстве имен <code>implementation</code>). </p>
+</div><h2 class="groupheader">Типы</h2>
+<a id="a88d6a61f1143b2f33166598a41993b7e" name="a88d6a61f1143b2f33166598a41993b7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88d6a61f1143b2f33166598a41993b7e">&#9670;&#160;</a></span>INode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">INodeType</a>&lt;std::string&gt; <a class="el" href="#a88d6a61f1143b2f33166598a41993b7e">iridium::parsing::INode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Определяет <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> как специализацию интерфейса <code><a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения....">INodeType</a></code> с <code>std::string</code> в качестве типа значения. Обычно представляет собой обобщенный узел в разобранной структуре данных (например, конфигурационный файл или документ XML/JSON), где каждый узел может иметь имя, атрибуты, дочерние узлы и строковое значение. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Функции</h2>
+<a id="ad50094a37c8790f71aee13cc754ccdea" name="ad50094a37c8790f71aee13cc754ccdea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50094a37c8790f71aee13cc754ccdea">&#9670;&#160;</a></span>composeFile() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::parsing::composeFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INode::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>root_node</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в файл. Конкретная логика формирования (например, в XML, JSON, пользовательские форматы) определяется базовой реализацией. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>Путь к файлу, в который будет записана структура узлов. </td></tr>
+    <tr><td class="paramname">root_node</td><td>Разделяемый указатель на корневой узел <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> структуры, которую необходимо сформировать. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Может быть выброшено, если файл не может быть записан (например, проблемы с правами доступа) или если структура узлов недействительна или не может быть сериализована в целевой формат. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa8712a6719913defc4a55db045852136" name="aa8712a6719913defc4a55db045852136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8712a6719913defc4a55db045852136">&#9670;&#160;</a></span>composeFile() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::parsing::composeFile </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INode::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>root_node</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1parsing_aa8712a6719913defc4a55db045852136_cgraph.png" border="0" usemap="#anamespaceiridium_1_1parsing_aa8712a6719913defc4a55db045852136_cgraph" alt=""/></div>
+<map name="anamespaceiridium_1_1parsing_aa8712a6719913defc4a55db045852136_cgraph" id="anamespaceiridium_1_1parsing_aa8712a6719913defc4a55db045852136_cgraph">
+<area shape="rect" title=" " alt="" coords="5,59,197,84"/>
+<area shape="rect" href="namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="245,22,398,62"/>
+<area shape="poly" title=" " alt="" coords="197,56,229,52,230,57,198,61"/>
+<area shape="rect" href="file__parser_8cpp.html#a3591cb9769f0fd00dd9411edaa5520be" title=" " alt="" coords="286,87,356,112"/>
+<area shape="poly" title=" " alt="" coords="198,81,271,91,271,96,197,86"/>
+<area shape="rect" href="file__parser_8cpp.html#a649954a8bbebb18edb2d02ec6ad1d971" title=" " alt="" coords="446,5,621,31"/>
+<area shape="poly" title=" " alt="" coords="398,31,430,27,431,33,399,36"/>
+<area shape="rect" href="namespaceiridium.html#a5e9267b1ead0c871d0655be654802298" title=" " alt="" coords="468,55,599,80"/>
+<area shape="poly" title=" " alt="" coords="399,49,454,55,453,61,398,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5627b457369870b42028a84bd05bc8b4" name="a5627b457369870b42028a84bd05bc8b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5627b457369870b42028a84bd05bc8b4">&#9670;&#160;</a></span>createParserByExtension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IParser::TSharedPtr iridium::parsing::createParserByExtension </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_cgraph.png" border="0" usemap="#anamespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_cgraph" alt=""/></div>
+<map name="anamespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_cgraph" id="anamespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_cgraph">
+<area shape="rect" title=" " alt="" coords="5,23,159,64"/>
+<area shape="rect" href="file__parser_8cpp.html#a649954a8bbebb18edb2d02ec6ad1d971" title=" " alt="" coords="207,5,382,31"/>
+<area shape="poly" title=" " alt="" coords="159,32,191,28,191,33,159,37"/>
+<area shape="rect" href="namespaceiridium.html#a5e9267b1ead0c871d0655be654802298" title=" " alt="" coords="229,55,360,80"/>
+<area shape="poly" title=" " alt="" coords="159,50,214,56,214,61,159,55"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_icgraph.png" border="0" usemap="#anamespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_icgraph" alt=""/></div>
+<map name="anamespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_icgraph" id="anamespaceiridium_1_1parsing_a5627b457369870b42028a84bd05bc8b4_icgraph">
+<area shape="rect" title=" " alt="" coords="245,23,398,64"/>
+<area shape="rect" href="namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="5,5,197,31"/>
+<area shape="poly" title=" " alt="" coords="229,36,197,32,198,27,230,30"/>
+<area shape="rect" href="namespaceiridium_1_1parsing.html#ab5867486cd60924f7e4bff6acd74fc37" title=" " alt="" coords="16,55,186,80"/>
+<area shape="poly" title=" " alt="" coords="230,56,187,61,186,56,229,51"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab61415abe931f9a6feca5e4ef7a519fb" name="ab61415abe931f9a6feca5e4ef7a519fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab61415abe931f9a6feca5e4ef7a519fb">&#9670;&#160;</a></span>parseFile() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INode::TSharedPtr iridium::parsing::parseFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Разбирает файл и строит дерево узлов, представляющее его содержимое. Конкретная логика разбора (например, для XML, JSON, пользовательских форматов) определяется базовой реализацией, которая здесь не детализируется, но ожидается, что она будет обрабатывать файловый ввод-вывод и интерпретацию формата. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>Путь к файлу, который необходимо разобрать. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Разделяемый указатель на корневой узел <code><a class="el" href="#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> разобранной структуры узлов. Возвращает <code>nullptr</code> или выбрасывает исключение в случае сбоя разбора (например, файл не найден, ошибка формата). </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Может быть выброшено, если файл не может быть открыт или происходит ошибка разбора. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab5867486cd60924f7e4bff6acd74fc37" name="ab5867486cd60924f7e4bff6acd74fc37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5867486cd60924f7e4bff6acd74fc37">&#9670;&#160;</a></span>parseFile() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INode::TSharedPtr iridium::parsing::parseFile </td>
+          <td>(</td>
+          <td class="paramtype">string const &amp;</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1parsing_ab5867486cd60924f7e4bff6acd74fc37_cgraph.png" border="0" usemap="#anamespaceiridium_1_1parsing_ab5867486cd60924f7e4bff6acd74fc37_cgraph" alt=""/></div>
+<map name="anamespaceiridium_1_1parsing_ab5867486cd60924f7e4bff6acd74fc37_cgraph" id="anamespaceiridium_1_1parsing_ab5867486cd60924f7e4bff6acd74fc37_cgraph">
+<area shape="rect" title=" " alt="" coords="5,59,176,84"/>
+<area shape="rect" href="namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="224,22,377,62"/>
+<area shape="poly" title=" " alt="" coords="176,57,208,52,209,58,176,62"/>
+<area shape="rect" href="file__parser_8cpp.html#afe69d76950814a6204c79e45f5f94a7d" title=" " alt="" coords="267,87,334,112"/>
+<area shape="poly" title=" " alt="" coords="176,80,252,90,251,96,176,86"/>
+<area shape="rect" href="file__parser_8cpp.html#a649954a8bbebb18edb2d02ec6ad1d971" title=" " alt="" coords="425,5,600,31"/>
+<area shape="poly" title=" " alt="" coords="377,31,409,27,410,33,378,36"/>
+<area shape="rect" href="namespaceiridium.html#a5e9267b1ead0c871d0655be654802298" title=" " alt="" coords="448,55,578,80"/>
+<area shape="poly" title=" " alt="" coords="378,49,433,55,432,61,377,54"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

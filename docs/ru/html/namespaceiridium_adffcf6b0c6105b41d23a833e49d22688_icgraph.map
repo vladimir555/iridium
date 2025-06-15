@@ -1,0 +1,20 @@
+<map id="iridium::checkOneOf" name="iridium::checkOneOf">
+<area shape="rect" id="Node000001" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="765,160,906,185"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="512,29,717,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="807,151,766,118,716,85,688,73,690,68,719,81,769,113,811,147"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748" title="Инициализирует файловый приемник. Это включает открытие/создание лог&#45;файла в соответствии с путем и с..." alt="" coords="512,95,717,135"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="768,158,695,139,697,133,769,152"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1system_1_1_shell.html#a691a3bb067e04c11bd278cd7063017c3" title=" " alt="" coords="528,160,701,185"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="750,175,702,175,702,170,750,170"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#abcb566ede47ac555310567589a30d952" title="Запускает тесты, определенные в предоставленной структуре узлов или под ней." alt="" coords="514,209,716,250"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="769,192,697,211,695,206,768,187"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1implementation_1_1_c_pipe.html#a28abc2674c0d7a8cbbe6ee6a9d5a6f9d" title="Передает данные на основе предоставленного события. Если событие указывает, что данные доступны в лог..." alt="" coords="528,275,701,315"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="811,198,769,231,719,264,690,277,688,272,716,259,766,227,807,194"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e" title="Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты,..." alt="" coords="259,29,464,70"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="496,52,465,52,465,47,496,47"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975" title="Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef&#45;ы умных..." alt="" coords="5,29,211,70"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="243,52,211,52,211,47,243,47"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="150,16,134,10,108,8,84,10,69,15,63,21,66,28,61,29,58,19,66,10,83,5,108,3,135,5,151,11"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро..." alt="" coords="259,95,464,135"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="497,118,464,118,464,112,497,112"/>
+</map>

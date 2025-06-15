@@ -1,0 +1,5 @@
+<map id="source/iridium/io/implementation/platform/emscripten/stream_port.h" name="source/iridium/io/implementation/platform/emscripten/stream_port.h">
+<area shape="rect" id="Node000001" title="Defines the CStreamPort for the Emscripten platform. This implementation currently typedefs to the Un..." alt="" coords="5,5,230,46"/>
+<area shape="rect" id="Node000002" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="57,94,178,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,46,120,78,115,78,115,46"/>
+</map>

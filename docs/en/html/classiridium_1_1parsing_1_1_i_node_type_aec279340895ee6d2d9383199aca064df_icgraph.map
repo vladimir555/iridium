@@ -1,0 +1,5 @@
+<map id="iridium::parsing::INodeType::end" name="iridium::parsing::INodeType::end">
+<area shape="rect" id="Node000001" title="Returns an iterator to the end of the child node list." alt="" coords="259,13,468,38"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ae56a7622f45206fad26267b0a1fa3561" title="Retrieves child nodes matching a given path. Implements path traversal." alt="" coords="5,5,211,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,28,211,28,211,23,243,23"/>
+</map>

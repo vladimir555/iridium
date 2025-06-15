@@ -1,0 +1,7 @@
+<map id="iridium::testing::Mock&lt; TClass &gt;::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;" name="iridium::testing::Mock&lt; TClass &gt;::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;">
+<area shape="rect" id="Node000001" title="Specialization of Behavior for non&#45;const member functions." alt="" coords="112,79,309,135"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_copyable.html" title="A utility base class that makes derived classes non&#45;copyable. By inheriting from NonCopyable (typical..." alt="" coords="5,5,200,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,39,178,76,175,81,128,43"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_non_movable.html" title="A utility base class intended to make derived classes non&#45;movable. By inheriting from NonMovable (typ..." alt="" coords="224,5,413,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="293,43,246,81,243,76,290,39"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="iridium::io::IPipeStreams" name="iridium::io::IPipeStreams">
+<area shape="rect" id="Node000001" title="Interface for accessing the reader and writer streams of a pipe&#45;like structure. Provides methods to g..." alt="" coords="10,5,174,31"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_pipe.html" title="Interface representing a pipe, combining stream access and data transmission capabilities...." alt="" coords="34,79,150,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1implementation_1_1_c_pipe.html" title="Concrete implementation of the IPipe interface. A CPipe acts as a conduit, typically between a logica..." alt="" coords="5,153,179,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,120,95,152,89,152,89,120"/>
+</map>

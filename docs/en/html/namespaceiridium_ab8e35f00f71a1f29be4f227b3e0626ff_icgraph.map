@@ -1,0 +1,5 @@
+<map id="iridium::assign" name="iridium::assign">
+<area shape="rect" id="Node000001" title="Converts a std::list&lt;T&gt; to a std::vector&lt;T&gt;." alt="" coords="231,20,336,46"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a96285e07f4342f950a7600384e2dc9be" title=" " alt="" coords="5,5,183,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,36,183,36,183,30,215,30"/>
+</map>

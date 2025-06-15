@@ -1,0 +1,5 @@
+<map id="iridium::testing::MockSequence::addExpectation" name="iridium::testing::MockSequence::addExpectation">
+<area shape="rect" id="Node000001" title="Добавляет ожидание вызова неконстантного метода в последовательность." alt="" coords="5,5,210,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#af0db4cc8e8503b175558ea48030d567e" title="Конструирует MockSequence." alt="" coords="258,5,462,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,23,242,23,242,28,210,28"/>
+</map>

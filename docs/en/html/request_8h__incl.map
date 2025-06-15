@@ -1,0 +1,70 @@
+<map id="source/iridium/io/protocol/http/request.h" name="source/iridium/io/protocol/http/request.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="748,5,914,46"/>
+<area shape="rect" id="Node000002" href="$serialization_2node_8h.html" title=" " alt="" coords="380,94,558,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="749,49,567,93,566,87,748,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="665,581,719,607"/>
+<area shape="poly" id="edge39_Node000001_Node000003" title=" " alt="" coords="826,47,807,115,799,158,796,202,796,359,794,391,787,422,765,481,738,532,712,570,708,567,733,529,760,479,782,420,788,390,791,359,791,202,794,157,802,114,821,46"/>
+<area shape="rect" id="Node000020" href="$enum_8h.html" title="Provides macros for creating enhanced C++ enumerations with features like string conversion and itera..." alt="" coords="922,345,1028,371"/>
+<area shape="poly" id="edge29_Node000001_Node000020" title=" " alt="" coords="843,45,865,93,966,330,962,332,860,95,838,47"/>
+<area shape="rect" id="Node000026" href="$method_8h.html" title=" " alt="" coords="830,271,906,297"/>
+<area shape="poly" id="edge40_Node000001_Node000026" title=" " alt="" coords="836,46,867,256,861,256,831,47"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="560,129,622,149,682,180,707,200,727,224,741,251,745,283,745,359,741,418,730,476,704,567,699,566,725,475,736,418,740,359,740,283,735,253,723,226,704,204,679,184,620,154,558,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="10,581,88,607"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="380,119,315,124,243,136,169,155,100,185,63,204,34,223,15,247,10,263,8,283,8,440,11,475,19,509,40,566,35,568,14,510,6,476,3,440,3,283,5,262,10,244,30,219,60,200,98,180,168,150,242,130,315,119,380,114"/>
+<area shape="rect" id="Node000005" href="$node_8h.html" title="Defines the INode typedef, a specialization of INodeType&lt;std::string&gt;. This serves as the primary typ..." alt="" coords="463,271,612,297"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="486,134,514,182,527,220,535,255,530,256,522,221,510,184,482,137"/>
+<area shape="rect" id="Node000016" href="$implementation_2node_8h.html" title="Defines the CNode typedef, a concrete node implementation based on CNodeType&lt;std::string&gt;...." alt="" coords="303,183,500,223"/>
+<area shape="poly" id="edge21_Node000002_Node000016" title=" " alt="" coords="456,137,428,172,424,169,452,134"/>
+<area shape="rect" id="Node000019" href="$va__args_8h.html" title="Provides a set of preprocessor macros to emulate variadic macro dispatch based on argument count...." alt="" coords="111,190,278,216"/>
+<area shape="poly" id="edge28_Node000002_Node000019" title=" " alt="" coords="407,138,249,188,247,182,406,133"/>
+<area shape="rect" id="Node000006" href="$node__type_8h.html" title="Defines the INodeType&lt;TValue&gt; template interface for generic tree nodes. This interface is fundamenta..." alt="" coords="448,345,541,371"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="533,299,512,333,507,330,528,296"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="499,371,508,412,517,435,529,458,558,493,592,524,659,571,656,575,589,528,554,497,524,461,512,438,503,413,494,372"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="875,581,914,607"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="503,370,530,412,550,436,572,457,608,482,647,504,727,540,802,566,861,582,860,587,801,571,725,545,645,509,606,487,569,461,546,440,526,415,499,373"/>
+<area shape="rect" id="Node000008" href="$convert_8h.html" title="Public interface for the Iridium type conversion framework. Provides access to conversion functions a..." alt="" coords="582,419,706,459"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="519,369,595,409,592,414,516,373"/>
+<area shape="rect" id="Node000014" href="$prototype_8h.html" title=" " alt="" coords="183,426,356,452"/>
+<area shape="poly" id="edge17_Node000006_Node000014" title=" " alt="" coords="461,374,319,423,318,418,459,369"/>
+<area shape="rect" id="Node000015" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="84,507,212,533"/>
+<area shape="poly" id="edge20_Node000006_Node000015" title=" " alt="" coords="485,373,437,416,404,441,369,462,298,490,228,508,227,503,297,485,367,457,401,436,434,412,481,369"/>
+<area shape="rect" id="Node000009" href="$implementation_2convert_8h.html" title="Core implementation details for the Iridium type conversion framework. Defines the primary convert fu..." alt="" coords="236,507,404,533"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="583,458,386,506,384,501,581,453"/>
+<area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="384,531,650,582,649,587,383,536"/>
+<area shape="poly" id="edge16_Node000009_Node000004" title=" " alt="" coords="275,536,104,581,103,576,273,531"/>
+<area shape="poly" id="edge10_Node000009_Node000007" title=" " alt="" coords="405,529,860,586,860,591,404,535"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="207,581,268,607"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="308,536,264,573,261,569,304,532"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="291,581,349,607"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="323,533,323,565,317,565,317,533"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="114,581,182,607"/>
+<area shape="poly" id="edge14_Node000009_Node000012" title=" " alt="" coords="292,536,192,577,190,572,290,531"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="372,581,433,607"/>
+<area shape="poly" id="edge15_Node000009_Node000013" title=" " alt="" coords="336,532,379,569,376,573,332,536"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="252,454,180,501,178,497,249,450"/>
+<area shape="poly" id="edge19_Node000015_Node000012" title=" " alt="" coords="151,533,151,565,145,565,145,533"/>
+<area shape="rect" id="Node000017" href="$implementation_2node__type_8h.html" title="Defines the CNodeType&lt;TValue&gt; template class, a concrete implementation of INodeType&lt;TValue&gt;...." alt="" coords="347,271,440,297"/>
+<area shape="poly" id="edge22_Node000016_Node000017" title=" " alt="" coords="402,224,399,256,393,255,397,223"/>
+<area shape="poly" id="edge23_Node000017_Node000003" title=" " alt="" coords="401,296,421,340,457,403,506,471,535,503,567,531,609,557,652,576,650,581,607,562,564,535,531,507,502,475,452,406,417,342,396,298"/>
+<area shape="poly" id="edge27_Node000017_Node000006" title=" " alt="" coords="412,295,466,333,463,338,409,300"/>
+<area shape="poly" id="edge24_Node000017_Node000007" title=" " alt="" coords="429,295,554,343,639,374,676,390,719,416,767,454,811,495,877,567,873,571,807,499,763,458,716,421,673,395,637,379,552,347,427,300"/>
+<area shape="poly" id="edge26_Node000017_Node000015" title=" " alt="" coords="356,300,313,318,263,343,214,377,173,420,163,437,157,456,151,492,146,492,152,455,158,435,169,417,210,373,260,339,311,313,354,295"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="43,345,146,371"/>
+<area shape="poly" id="edge25_Node000017_Node000018" title=" " alt="" coords="347,299,161,343,160,338,346,294"/>
+<area shape="poly" id="edge35_Node000020_Node000007" title=" " alt="" coords="973,372,906,567,901,565,968,370"/>
+<area shape="poly" id="edge34_Node000020_Node000008" title=" " alt="" coords="924,374,722,422,721,417,923,369"/>
+<area shape="rect" id="Node000021" href="$strings_8h.html" title=" " alt="" coords="983,507,1097,533"/>
+<area shape="poly" id="edge30_Node000020_Node000021" title=" " alt="" coords="1029,362,1142,380,1194,396,1213,406,1226,417,1235,435,1234,451,1224,465,1208,477,1163,496,1113,509,1111,504,1161,491,1205,472,1220,461,1229,449,1230,436,1222,420,1210,410,1192,401,1141,386,1028,367"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="982,426,1028,452"/>
+<area shape="poly" id="edge36_Node000020_Node000023" title=" " alt="" coords="982,370,998,411,993,413,977,372"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="1052,426,1124,452"/>
+<area shape="poly" id="edge37_Node000020_Node000024" title=" " alt="" coords="993,369,1060,415,1057,419,990,373"/>
+<area shape="rect" id="Node000025" title=" " alt="" coords="1148,426,1212,452"/>
+<area shape="poly" id="edge38_Node000020_Node000025" title=" " alt="" coords="1010,369,1137,416,1140,417,1138,422,1135,421,1008,374"/>
+<area shape="poly" id="edge31_Node000021_Node000003" title=" " alt="" coords="983,536,735,587,734,581,982,531"/>
+<area shape="poly" id="edge33_Node000021_Node000007" title=" " alt="" coords="1017,536,929,579,927,574,1014,531"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="1011,581,1069,607"/>
+<area shape="poly" id="edge32_Node000021_Node000022" title=" " alt="" coords="1043,533,1043,565,1037,565,1037,533"/>
+<area shape="poly" id="edge42_Node000026_Node000003" title=" " alt="" coords="868,298,850,368,834,415,814,461,792,500,763,535,722,573,718,569,759,531,788,497,810,458,829,413,844,367,863,297"/>
+<area shape="poly" id="edge41_Node000026_Node000020" title=" " alt="" coords="888,295,945,334,942,338,885,300"/>
+</map>

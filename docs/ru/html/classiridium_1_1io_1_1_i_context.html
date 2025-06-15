@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::IContext</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1_i_context.html">IContext</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1_i_context-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::IContext<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывода. Контекст ввода-вывода обычно обрабатывает асинхронные операции, уведомления о событиях и управление ресурсами ввода-вывода, такими как потоки или сокеты.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="context_8h_source.html">context.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::IContext:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_context_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1_i_context_inherit__map" id="airidium_1_1io_1_1_i_context_inherit__map">
+<area shape="rect" title="Интерфейс для контекста ввода&#45;вывода, отвечающего за управление и диспетчеризацию событий ввода&#45;вывод..." alt="" coords="24,5,160,31"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context.html" title="Конкретная реализация IContext и IPipeManager. Этот класс управляет состоянием и событиями для контек..." alt="" coords="5,79,179,120"/>
+<area shape="poly" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ae4372b35cd3b2ea07a2d383b10eda5cf" id="r_ae4372b35cd3b2ea07a2d383b10eda5cf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4372b35cd3b2ea07a2d383b10eda5cf">pushEvent</a> (Event::TSharedPtr const &amp;event)=0</td></tr>
+<tr class="memdesc:ae4372b35cd3b2ea07a2d383b10eda5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).  <br /></td></tr>
+<tr class="separator:ae4372b35cd3b2ea07a2d383b10eda5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde072caf3295af0a615a9078b17d7d7" id="r_acde072caf3295af0a615a9078b17d7d7"><td class="memItemLeft" align="right" valign="top">virtual std::list&lt; Event::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acde072caf3295af0a615a9078b17d7d7">popEvents</a> ()=0</td></tr>
+<tr class="memdesc:acde072caf3295af0a615a9078b17d7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает (получает и удаляет) события из очереди событий контекста. Этот метод обычно вызывается циклом событий для получения ожидающих событий для диспетчеризации.  <br /></td></tr>
+<tr class="separator:acde072caf3295af0a615a9078b17d7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58e45a795a2286ca8b469aeb255643f2" id="r_a58e45a795a2286ca8b469aeb255643f2"><td class="memItemLeft" align="right" valign="top">virtual std::list&lt; Event::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58e45a795a2286ca8b469aeb255643f2">checkOutdatedStreams</a> ()=0</td></tr>
+<tr class="memdesc:a58e45a795a2286ca8b469aeb255643f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет и извлекает события, связанные с устаревшими или просроченными потоками ввода-вывода. Может использоваться для управления жизненным циклом потоков, обнаружения неактивных соединений или обработки тайм-аутов.  <br /></td></tr>
+<tr class="separator:a58e45a795a2286ca8b469aeb255643f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f055057ddb5c24c9ce6f0c27abc0721" id="r_a1f055057ddb5c24c9ce6f0c27abc0721"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f055057ddb5c24c9ce6f0c27abc0721">update</a> (Event::TSharedPtr const &amp;event)=0</td></tr>
+<tr class="memdesc:a1f055057ddb5c24c9ce6f0c27abc0721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обновляет обработку источника ввода-вывода контекстом на основе события. Это может включать перерегистрацию файлового дескриптора в мультиплексоре событий (например, epoll, kqueue) с новыми флагами интереса (например, чтение, запись) на основе содержимого или типа события.  <br /></td></tr>
+<tr class="separator:a1f055057ddb5c24c9ce6f0c27abc0721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ebcd04cb854fbb71684d54a87e6b5c9" id="r_a2ebcd04cb854fbb71684d54a87e6b5c9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ebcd04cb854fbb71684d54a87e6b5c9">transmit</a> (Event::TSharedPtr const &amp;event)=0</td></tr>
+<tr class="memdesc:a2ebcd04cb854fbb71684d54a87e6b5c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Передает данные или обрабатывает операции ввода-вывода на основе события. Этот метод, вероятно, инициирует или продолжает передачу данных (чтение/запись) для источника ввода-вывода, связанного с событием, или выполняет другие операции ввода-вывода, указанные событием.  <br /></td></tr>
+<tr class="separator:a2ebcd04cb854fbb71684d54a87e6b5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d953832e3f2b8cbf0d58eb18c99066" id="r_a86d953832e3f2b8cbf0d58eb18c99066"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86d953832e3f2b8cbf0d58eb18c99066">remove</a> ()=0</td></tr>
+<tr class="memdesc:a86d953832e3f2b8cbf0d58eb18c99066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаляет или очищает ресурсы, связанные с этим контекстом или его источниками ввода-вывода. Точный объем удаления (например, конкретный поток, все потоки или сам контекст из менеджера более высокого уровня) зависит от конкретной реализации. Учитывая отсутствие аргументов, это может сигнализировать контексту об очистке всех управляемых им ресурсов или о снятии с регистрации самого себя.  <br /></td></tr>
+<tr class="separator:a86d953832e3f2b8cbf0d58eb18c99066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывода. Контекст ввода-вывода обычно обрабатывает асинхронные операции, уведомления о событиях и управление ресурсами ввода-вывода, такими как потоки или сокеты. </p>
+</div><h2 class="groupheader">Методы</h2>
+<a id="a58e45a795a2286ca8b469aeb255643f2" name="a58e45a795a2286ca8b469aeb255643f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58e45a795a2286ca8b469aeb255643f2">&#9670;&#160;</a></span>checkOutdatedStreams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::list&lt; Event::TSharedPtr &gt; iridium::io::IContext::checkOutdatedStreams </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Проверяет и извлекает события, связанные с устаревшими или просроченными потоками ввода-вывода. Может использоваться для управления жизненным циклом потоков, обнаружения неактивных соединений или обработки тайм-аутов. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Список умных указателей на события, представляющие устаревшие потоки или уведомления о тайм-ауте. </dd></dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#acb646d23e056ad9a81e792083f1ecd94">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_cgraph" id="aclassiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_cgraph">
+<area shape="rect" title="Проверяет и извлекает события, связанные с устаревшими или просроченными потоками ввода&#45;вывода...." alt="" coords="5,29,172,70"/>
+<area shape="poly" title=" " alt="" coords="56,29,55,19,60,11,71,5,89,3,107,5,118,11,115,16,105,10,88,8,73,10,64,14,60,20,62,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_icgraph" id="aclassiridium_1_1io_1_1_i_context_a58e45a795a2286ca8b469aeb255643f2_icgraph">
+<area shape="rect" title="Проверяет и извлекает события, связанные с устаревшими или просроченными потоками ввода&#45;вывода...." alt="" coords="5,29,172,70"/>
+<area shape="poly" title=" " alt="" coords="115,16,105,10,88,8,73,10,64,14,60,20,62,28,56,29,55,19,60,11,71,5,89,3,107,5,118,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="acde072caf3295af0a615a9078b17d7d7" name="acde072caf3295af0a615a9078b17d7d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acde072caf3295af0a615a9078b17d7d7">&#9670;&#160;</a></span>popEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::list&lt; Event::TSharedPtr &gt; iridium::io::IContext::popEvents </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Извлекает (получает и удаляет) события из очереди событий контекста. Этот метод обычно вызывается циклом событий для получения ожидающих событий для диспетчеризации. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Список умных указателей на события, извлеченные из очереди. Список может быть пустым, если нет ожидающих событий. </dd></dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a722e705f52d435f3d0305d2b923540a4">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_cgraph" id="aclassiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_cgraph">
+<area shape="rect" title="Извлекает (получает и удаляет) события из очереди событий контекста. Этот метод обычно вызывается цик..." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="46,29,45,20,49,11,59,5,73,3,88,5,97,12,94,16,86,10,73,8,61,10,53,14,50,20,52,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_icgraph" id="aclassiridium_1_1io_1_1_i_context_acde072caf3295af0a615a9078b17d7d7_icgraph">
+<area shape="rect" title="Извлекает (получает и удаляет) события из очереди событий контекста. Этот метод обычно вызывается цик..." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="94,16,86,10,73,8,61,10,53,14,50,20,52,28,46,29,45,20,49,11,59,5,73,3,88,5,97,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae4372b35cd3b2ea07a2d383b10eda5cf" name="ae4372b35cd3b2ea07a2d383b10eda5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4372b35cd3b2ea07a2d383b10eda5cf">&#9670;&#160;</a></span>pushEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IContext::pushEvent </td>
+          <td>(</td>
+          <td class="paramtype">Event::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора). </p>
+<p>Помещает событие в контекст для обработки. Этот метод, вероятно, используется для постановки в очередь событий, которые будут обработаны циклом событий или переданы соответствующим обработчикам, связанным с этим контекстом. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Умный указатель на событие, которое необходимо поместить в очередь. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a3f83d0ab5d40ec79b2f235d0a7a2c12a">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_cgraph" id="aclassiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_cgraph">
+<area shape="rect" title="Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора)." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="46,29,45,20,49,11,59,5,73,3,88,5,97,12,94,16,86,10,73,8,61,10,53,14,50,20,52,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_icgraph" id="aclassiridium_1_1io_1_1_i_context_ae4372b35cd3b2ea07a2d383b10eda5cf_icgraph">
+<area shape="rect" title="Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора)." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="94,16,86,10,73,8,61,10,53,14,50,20,52,28,46,29,45,20,49,11,59,5,73,3,88,5,97,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a86d953832e3f2b8cbf0d58eb18c99066" name="a86d953832e3f2b8cbf0d58eb18c99066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d953832e3f2b8cbf0d58eb18c99066">&#9670;&#160;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IContext::remove </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Удаляет или очищает ресурсы, связанные с этим контекстом или его источниками ввода-вывода. Точный объем удаления (например, конкретный поток, все потоки или сам контекст из менеджера более высокого уровня) зависит от конкретной реализации. Учитывая отсутствие аргументов, это может сигнализировать контексту об очистке всех управляемых им ресурсов или о снятии с регистрации самого себя. </p>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a30ea245b86923c3fc741270f77fcad25">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_cgraph" id="aclassiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_cgraph">
+<area shape="rect" title="Удаляет или очищает ресурсы, связанные с этим контекстом или его источниками ввода&#45;вывода...." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="46,29,45,20,49,11,59,5,73,3,88,5,97,12,94,16,86,10,73,8,61,10,53,14,50,20,52,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_icgraph" id="aclassiridium_1_1io_1_1_i_context_a86d953832e3f2b8cbf0d58eb18c99066_icgraph">
+<area shape="rect" title="Удаляет или очищает ресурсы, связанные с этим контекстом или его источниками ввода&#45;вывода...." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="94,16,86,10,73,8,61,10,53,14,50,20,52,28,46,29,45,20,49,11,59,5,73,3,88,5,97,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2ebcd04cb854fbb71684d54a87e6b5c9" name="a2ebcd04cb854fbb71684d54a87e6b5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ebcd04cb854fbb71684d54a87e6b5c9">&#9670;&#160;</a></span>transmit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool iridium::io::IContext::transmit </td>
+          <td>(</td>
+          <td class="paramtype">Event::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Передает данные или обрабатывает операции ввода-вывода на основе события. Этот метод, вероятно, инициирует или продолжает передачу данных (чтение/запись) для источника ввода-вывода, связанного с событием, или выполняет другие операции ввода-вывода, указанные событием. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Умный указатель на событие, инициирующее передачу. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>True, если передача прошла успешно или была успешно инициирована, иначе false. </dd></dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#ae80e904906032a58e21b6f4e49c18fd8">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_cgraph" id="aclassiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_cgraph">
+<area shape="rect" title="Передает данные или обрабатывает операции ввода&#45;вывода на основе события. Этот метод,..." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="46,29,45,20,49,11,59,5,73,3,88,5,97,12,94,16,86,10,73,8,61,10,53,14,50,20,52,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_icgraph" id="aclassiridium_1_1io_1_1_i_context_a2ebcd04cb854fbb71684d54a87e6b5c9_icgraph">
+<area shape="rect" title="Передает данные или обрабатывает операции ввода&#45;вывода на основе события. Этот метод,..." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="94,16,86,10,73,8,61,10,53,14,50,20,52,28,46,29,45,20,49,11,59,5,73,3,88,5,97,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1f055057ddb5c24c9ce6f0c27abc0721" name="a1f055057ddb5c24c9ce6f0c27abc0721"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f055057ddb5c24c9ce6f0c27abc0721">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool iridium::io::IContext::update </td>
+          <td>(</td>
+          <td class="paramtype">Event::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обновляет обработку источника ввода-вывода контекстом на основе события. Это может включать перерегистрацию файлового дескриптора в мультиплексоре событий (например, epoll, kqueue) с новыми флагами интереса (например, чтение, запись) на основе содержимого или типа события. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Умный указатель на событие, инициирующее обновление. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>True, если обновление прошло успешно, иначе false. </dd></dl>
+
+<p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#ac2517809803d994a5b4b69e452936dc6">iridium::io::implementation::CContext</a>.</p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_cgraph" id="aclassiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_cgraph">
+<area shape="rect" title="Обновляет обработку источника ввода&#45;вывода контекстом на основе события. Это может включать перерегис..." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="46,29,45,20,49,11,59,5,73,3,88,5,97,12,94,16,86,10,73,8,61,10,53,14,50,20,52,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_icgraph" id="aclassiridium_1_1io_1_1_i_context_a1f055057ddb5c24c9ce6f0c27abc0721_icgraph">
+<area shape="rect" title="Обновляет обработку источника ввода&#45;вывода контекстом на основе события. Это может включать перерегис..." alt="" coords="5,29,141,70"/>
+<area shape="poly" title=" " alt="" coords="94,16,86,10,73,8,61,10,53,14,50,20,52,28,46,29,45,20,49,11,59,5,73,3,88,5,97,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/io/<a class="el" href="context_8h_source.html">context.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

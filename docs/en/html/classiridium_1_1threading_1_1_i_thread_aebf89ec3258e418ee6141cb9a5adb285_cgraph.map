@@ -1,0 +1,5 @@
+<map id="iridium::threading::IThread::getNameStatic" name="iridium::threading::IThread::getNameStatic">
+<area shape="rect" id="Node000001" title="Gets the name of the currently executing thread (statically, from thread&#45;local storage)." alt="" coords="5,5,174,46"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="222,13,286,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,23,206,23,206,28,174,28"/>
+</map>

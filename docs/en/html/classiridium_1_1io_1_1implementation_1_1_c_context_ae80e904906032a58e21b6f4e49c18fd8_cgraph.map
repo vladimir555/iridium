@@ -1,0 +1,5 @@
+<map id="iridium::io::implementation::CContext::transmit" name="iridium::io::implementation::CContext::transmit">
+<area shape="rect" id="Node000001" title="Transmits an event, typically by encoding it with the protocol and writing it to the event&#39;s stream." alt="" coords="5,5,179,46"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="227,13,367,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,23,211,23,211,28,179,28"/>
+</map>

@@ -1,7 +1,0 @@
-<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,89,31"/>
-<area shape="rect" id="Node000001" href="$classiridium_1_1io_1_1_buffer.html" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="137,31,257,56"/>
-<area shape="poly" id="edge152_Node000000_Node000001" title=" " alt="" coords="105,25,136,31,136,36,104,30"/>
-<area shape="rect" id="Node000002" href="$classvector.html" title=" " alt="" coords="18,55,76,80"/>
-<area shape="poly" id="edge153_Node000002_Node000001" title=" " alt="" coords="91,58,136,51,137,56,91,63"/>
-</map>

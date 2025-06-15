@@ -1,0 +1,5 @@
+<map id="runtime_error" name="runtime_error">
+<area shape="rect" id="Node000001" title=" " alt="" coords="30,5,128,31"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1db_1_1_exception.html" title="Custom exception class for database&#45;related errors. Derives from std::runtime_error to provide a stan..." alt="" coords="5,79,153,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,46,82,79,76,79,76,46"/>
+</map>

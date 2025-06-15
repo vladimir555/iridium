@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/logging/sink.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bd04c2bcd27267b7c30d257e93c7a128.html">logging</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл sink.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="sink_8h_source.html">sink.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="convert_8h_source.html">iridium/convertion/convert.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="thread_8h_source.html">iridium/threading/thread.h</a>&quot;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для sink.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="sink_8cpp__incl.png" border="0" usemap="#asource_2iridium_2logging_2sink_8cpp" alt=""/></div>
+<map name="asource_2iridium_2logging_2sink_8cpp" id="asource_2iridium_2logging_2sink_8cpp">
+<area shape="rect" title=" " alt="" coords="624,5,772,46"/>
+<area shape="rect" href="sink_8h.html" title="Определяет интерфейс ISink для потребителей событий журнала (аппендеров). Включает сам интерфейс,..." alt="" coords="516,94,573,120"/>
+<area shape="poly" title=" " alt="" coords="661,49,582,89,580,84,658,44"/>
+<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="359,315,482,356"/>
+<area shape="poly" title=" " alt="" coords="625,40,566,55,504,80,475,97,449,117,426,141,408,169,398,202,397,237,402,271,410,300,405,301,397,272,392,237,393,201,404,167,422,138,445,113,472,92,502,75,564,50,623,35"/>
+<area shape="rect" title=" " alt="" coords="964,477,1024,503"/>
+<area shape="poly" title=" " alt="" coords="773,27,854,38,897,48,938,63,975,82,1004,108,1024,140,1031,179,1031,337,1029,371,1023,406,1006,463,1001,462,1017,405,1024,371,1026,337,1026,179,1019,142,1000,111,972,87,936,68,895,53,853,43,772,32"/>
+<area shape="rect" href="thread_8h.html" title="Определяет интерфейс IThread и связанные служебные функции для работы с потоками. Включает основной и..." alt="" coords="768,94,935,120"/>
+<area shape="poly" title=" " alt="" coords="738,44,816,84,814,89,735,49"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="634,241,762,267"/>
+<area shape="poly" title=" " alt="" coords="545,120,542,155,545,174,554,192,567,206,583,218,620,236,618,241,580,223,563,210,549,195,540,176,537,155,539,120"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="607,168,789,193"/>
+<area shape="poly" title=" " alt="" coords="572,118,659,158,657,163,570,123"/>
+<area shape="rect" href="enum_8h.html" title="Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,..." alt="" coords="176,241,282,267"/>
+<area shape="poly" title=" " alt="" coords="517,122,407,170,267,237,265,232,405,165,515,117"/>
+<area shape="rect" title=" " alt="" coords="798,477,859,503"/>
+<area shape="poly" title=" " alt="" coords="551,119,567,155,580,175,597,191,621,205,643,211,688,211,710,210,732,213,754,222,776,239,796,265,810,294,828,355,834,415,834,462,828,462,829,415,823,356,806,295,791,268,772,243,751,227,731,218,710,216,688,216,643,216,618,210,594,195,576,178,563,158,546,121"/>
+<area shape="rect" href="logging_2event_8h.html" title="Определяет структуру TEvent для сообщений журнала во фреймворке логирования Iridium...." alt="" coords="418,168,482,193"/>
+<area shape="poly" title=" " alt="" coords="530,122,480,160,476,156,527,118"/>
+<area shape="rect" title=" " alt="" coords="706,477,775,503"/>
+<area shape="poly" title=" " alt="" coords="711,266,752,322,774,361,790,403,793,417,790,430,780,450,767,467,763,464,775,447,785,428,787,417,785,404,769,363,747,325,706,269"/>
+<area shape="poly" title=" " alt="" coords="701,194,701,226,695,226,695,194"/>
+<area shape="rect" href="strings_8h.html" title=" " alt="" coords="5,404,119,429"/>
+<area shape="poly" title=" " alt="" coords="175,259,141,264,105,274,72,291,46,317,38,333,38,352,50,389,45,391,33,353,33,332,41,313,69,287,103,269,140,259,175,254"/>
+<area shape="rect" title=" " alt="" coords="137,477,176,503"/>
+<area shape="poly" title=" " alt="" coords="218,269,200,290,184,316,172,354,164,394,159,462,154,461,159,393,167,353,180,314,196,287,214,266"/>
+<area shape="poly" title=" " alt="" coords="259,265,360,306,358,311,257,270"/>
+<area shape="rect" title=" " alt="" coords="194,322,240,348"/>
+<area shape="poly" title=" " alt="" coords="229,268,223,307,218,307,224,267"/>
+<area shape="rect" title=" " alt="" coords="264,322,335,348"/>
+<area shape="poly" title=" " alt="" coords="241,266,280,309,276,312,237,269"/>
+<area shape="rect" title=" " alt="" coords="56,322,119,348"/>
+<area shape="poly" title=" " alt="" coords="208,270,124,317,121,312,206,265"/>
+<area shape="rect" title=" " alt="" coords="502,477,555,503"/>
+<area shape="poly" title=" " alt="" coords="120,424,487,480,486,485,119,429"/>
+<area shape="rect" title=" " alt="" coords="33,477,91,503"/>
+<area shape="poly" title=" " alt="" coords="65,430,65,462,59,462,59,430"/>
+<area shape="poly" title=" " alt="" coords="80,428,130,466,127,470,76,432"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="608,404,775,429"/>
+<area shape="poly" title=" " alt="" coords="484,352,636,396,635,401,482,357"/>
+<area shape="poly" title=" " alt="" coords="702,428,726,463,722,466,697,431"/>
+<area shape="poly" title=" " alt="" coords="665,432,571,473,569,468,663,427"/>
+<area shape="poly" title=" " alt="" coords="608,432,192,487,191,482,607,426"/>
+<area shape="poly" title=" " alt="" coords="749,427,949,474,948,479,748,433"/>
+<area shape="rect" title=" " alt="" coords="883,477,940,503"/>
+<area shape="poly" title=" " alt="" coords="729,427,869,472,867,477,728,432"/>
+<area shape="poly" title=" " alt="" coords="716,428,793,467,791,472,713,432"/>
+<area shape="rect" title=" " alt="" coords="604,477,682,503"/>
+<area shape="poly" title=" " alt="" coords="686,431,662,466,658,463,681,428"/>
+<area shape="poly" title=" " alt="" coords="483,189,642,234,640,239,482,194"/>
+<area shape="poly" title=" " alt="" coords="418,195,281,239,280,234,417,190"/>
+<area shape="poly" title=" " alt="" coords="457,193,476,245,497,314,515,394,527,462,522,462,510,395,491,316,470,247,452,195"/>
+<area shape="poly" title=" " alt="" coords="849,121,831,156,803,195,773,219,742,236,740,232,770,214,799,191,827,154,844,119"/>
+<area shape="poly" title=" " alt="" coords="826,123,739,163,737,158,824,118"/>
+<area shape="poly" title=" " alt="" coords="852,121,846,155,832,194,809,236,784,267,757,291,729,311,667,349,633,374,597,406,570,436,547,467,543,463,566,433,593,402,630,369,664,345,726,307,754,287,780,264,804,233,828,192,841,153,847,120"/>
+<area shape="poly" title=" " alt="" coords="875,118,907,139,941,169,969,207,978,229,981,253,981,337,985,404,992,462,987,462,979,405,975,337,975,253,972,231,964,210,937,173,903,143,872,122"/>
+<area shape="poly" title=" " alt="" coords="865,118,884,142,905,173,923,212,930,253,930,337,926,405,918,462,913,462,921,404,925,337,925,253,918,213,901,176,880,145,861,122"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1logging.html">iridium::logging</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1logging"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с логированием. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a5afe4d5e065e8b085dcd6b8b391f2c2d" id="r_a5afe4d5e065e8b085dcd6b8b391f2c2d"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a5afe4d5e065e8b085dcd6b8b391f2c2d"><td class="memTemplItemLeft" align="right" valign="top">string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a5afe4d5e065e8b085dcd6b8b391f2c2d">convert</a> (system_clock::time_point const &amp;value, bool const &amp;is_gmt_time)</td></tr>
+<tr class="memdesc:a5afe4d5e065e8b085dcd6b8b391f2c2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации. Эта функция является основным способом выполнения преобразований типов. Обычно она полагается на специализации шаблонной структуры <code>Convert</code>. Использование: <code><a class="el" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....">iridium::convertion::convert</a>&lt;ЦелевойТип&gt;(исходноеЗначение);</code>  <br /></td></tr>
+<tr class="separator:a5afe4d5e065e8b085dcd6b8b391f2c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7810b8b619a3d83f8b843b3e746eadd" id="r_aa7810b8b619a3d83f8b843b3e746eadd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7810b8b619a3d83f8b843b3e746eadd">getThreadID</a> ()</td></tr>
+<tr class="memdesc:aa7810b8b619a3d83f8b843b3e746eadd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает строковое представление уникального идентификатора текущего потока.  <br /></td></tr>
+<tr class="separator:aa7810b8b619a3d83f8b843b3e746eadd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Функции</h2>
+<a id="a5afe4d5e065e8b085dcd6b8b391f2c2d" name="a5afe4d5e065e8b085dcd6b8b391f2c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5afe4d5e065e8b085dcd6b8b391f2c2d">&#9670;&#160;</a></span>convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">string iridium::convertion::implementation::convert </td>
+          <td>(</td>
+          <td class="paramtype">system_clock::time_point const &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>is_gmt_time</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации. Эта функция является основным способом выполнения преобразований типов. Обычно она полагается на специализации шаблонной структуры <code>Convert</code>. Использование: <code><a class="el" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....">iridium::convertion::convert</a>&lt;ЦелевойТип&gt;(исходноеЗначение);</code> </p>
+
+</div>
+</div>
+<a id="aa7810b8b619a3d83f8b843b3e746eadd" name="aa7810b8b619a3d83f8b843b3e746eadd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7810b8b619a3d83f8b843b3e746eadd">&#9670;&#160;</a></span>getThreadID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string iridium::threading::getThreadID </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получает строковое представление уникального идентификатора текущего потока. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Строка, представляющая идентификатор потока. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

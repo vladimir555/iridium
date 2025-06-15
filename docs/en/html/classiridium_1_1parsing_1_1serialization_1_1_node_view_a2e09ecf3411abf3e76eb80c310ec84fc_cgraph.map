@@ -1,0 +1,9 @@
+<map id="iridium::parsing::serialization::NodeView::operator TValue" name="iridium::parsing::serialization::NodeView::operator TValue">
+<area shape="rect" id="Node000001" title="Conversion operator to get the node&#39;s value. Equivalent to calling get()." alt="" coords="5,39,194,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a582b2b6b1bba052ca52d6046a44e40bf" title="Gets the value of the node, converting it to TValue. Note: A todo in the source suggests lazy convers..." alt="" coords="242,5,428,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,43,226,38,227,44,195,48"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#abac7929c78b789e54779bd5b7dfad5de" title="Constructor for NodeView representing an attribute within a list item. Used by DEFINE_ATTRIBUTE_LIST." alt="" coords="242,71,428,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,69,227,74,226,79,194,74"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="476,5,603,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,23,461,23,461,28,428,28"/>
+</map>

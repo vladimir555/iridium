@@ -1,0 +1,5 @@
+<map id="iridium::threading::implementation::CThread::CThread" name="iridium::threading::implementation::CThread::CThread">
+<area shape="rect" id="Node000001" title="Constructs a CThread object. The actual OS thread is not started until initialize() is called." alt="" coords="5,5,181,61"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="229,20,369,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,30,213,30,213,36,181,36"/>
+</map>

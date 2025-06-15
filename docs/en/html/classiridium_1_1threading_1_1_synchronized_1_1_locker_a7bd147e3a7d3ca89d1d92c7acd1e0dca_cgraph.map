@@ -1,0 +1,7 @@
+<map id="iridium::threading::Synchronized::Locker::~Locker" name="iridium::threading::Synchronized::Locker::~Locker">
+<area shape="rect" id="Node000001" title="Destroys the Locker and releases the acquired mutex. Notifies one waiting thread on the condition var..." alt="" coords="5,5,161,61"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Gets the name of the currently executing thread (statically, from thread&#45;local storage)." alt="" coords="209,13,377,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,30,193,30,193,36,161,36"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="425,20,489,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="377,30,410,30,410,36,377,36"/>
+</map>

@@ -1,0 +1,39 @@
+<map id="iridium::pattern::NonCopyable" name="iridium::pattern::NonCopyable">
+<area shape="rect" id="Node000001" title="A utility base class that makes derived classes non&#45;copyable. By inheriting from NonCopyable (typical..." alt="" coords="5,405,200,430"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="268,5,438,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,389,116,322,141,233,159,185,183,139,211,95,246,57,266,43,269,47,249,61,216,99,187,142,164,187,146,234,121,323,110,390"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="268,71,438,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="107,389,123,333,150,261,190,187,216,153,246,122,266,109,269,113,249,126,220,156,195,190,155,263,128,334,112,390"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="268,136,438,177"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="111,389,130,346,159,291,198,236,221,210,246,188,266,175,269,180,249,192,224,214,202,239,164,294,135,348,116,392"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1db_1_1implementation_1_1_c_connector.html" title="Base class for database connector implementations. This class provides common functionality,..." alt="" coords="264,201,442,242"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="118,390,170,322,206,285,246,253,270,240,272,245,249,257,209,289,174,326,122,394"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Concrete implementation of a file stream providing read, write, and seeking capabilities...." alt="" coords="257,267,449,307"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="131,393,183,355,246,318,276,305,278,310,249,323,186,360,134,397"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title="Provides an asynchronous wrapper around an ISink implementation. It uses a worker thread to process l..." alt="" coords="251,332,455,373"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="168,398,271,371,273,376,170,403"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title="A concrete sink implementation for logging messages to the standard console/terminal...." alt="" coords="251,397,455,438"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="215,415,250,415,250,420,215,420"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1pattern_1_1_singleton.html" title="A class template for implementing the Singleton design pattern. This pattern ensures that only one in..." alt="" coords="268,463,438,503"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="170,432,273,459,271,465,168,437"/>
+<area shape="rect" id="Node000015" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html" title="Specialization of Behavior for const member functions." alt="" coords="259,528,447,598"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="135,438,187,474,249,513,272,525,269,529,246,517,184,479,132,442"/>
+<area shape="rect" id="Node000016" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html" title="Specialization of Behavior for non&#45;const member functions." alt="" coords="255,622,451,678"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="120,443,170,523,207,568,249,608,267,619,265,624,246,612,203,572,166,526,115,445"/>
+<area shape="rect" id="Node000017" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="A scoped locker class that acquires the Synchronized object&#39;s mutex on construction and releases it o..." alt="" coords="269,702,437,758"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="114,445,131,496,159,561,198,629,222,660,249,688,270,702,267,706,246,692,218,663,194,632,154,564,126,498,109,447"/>
+<area shape="rect" id="Node000018" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="A concrete implementation of IAsyncQueue&lt;TItem&gt;. This class provides a thread&#45;safe queue using a std:..." alt="" coords="248,782,458,838"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="110,446,123,511,148,597,167,643,189,688,217,730,250,768,264,779,261,783,246,772,213,733,185,690,162,645,143,599,118,512,105,447"/>
+<area shape="rect" id="Node000019" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title="Concrete implementation of the IThread interface. Manages an actual std::thread to execute an IRunnab..." alt="" coords="265,861,440,902"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="107,446,115,525,136,633,155,691,179,748,210,801,249,848,266,860,263,864,246,852,206,804,174,750,150,693,131,634,110,526,102,446"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html" title="Singleton class for managing and looking up MIME types based on file extensions. It preloads a list o..." alt="" coords="507,5,697,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="453,23,507,23,507,28,453,28"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1logging_1_1_logger.html" title="Central logging facility for the application. This class is implemented as a thread&#45;safe singleton an..." alt="" coords="524,78,680,104"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="453,88,524,88,524,94,453,94"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_tester.html" title="Singleton class responsible for registering, managing, and running all tests within the framework...." alt="" coords="527,144,677,169"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="453,154,527,154,527,159,453,159"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="A concrete file stream implementation specialized for reading. This class derives from CFileStream an..." alt="" coords="506,235,698,275"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="464,270,505,265,506,270,465,275"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title="A concrete file stream implementation specialized for writing. This class derives from CFileStream an..." alt="" coords="506,300,698,341"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="465,299,506,305,505,310,464,305"/>
+</map>

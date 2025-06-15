@@ -1,0 +1,6 @@
+<map id="iridium::logging::config::DEFINE_ENUM" name="iridium::logging::config::DEFINE_ENUM">
+<area shape="rect" id="Node000001" title="Defines the root structure for logger configuration. This structure encapsulates all settings for the..." alt="" coords="5,29,157,70"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="43,29,41,19,47,10,61,5,81,3,103,5,116,11,113,16,101,10,81,8,62,10,51,15,46,20,48,28"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging_1_1config.html#a57a36466c8a3545a48ab706922b86672" title=" " alt="" coords="205,29,356,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,47,189,47,189,52,157,52"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="iridium::io::fs::implementation::CFileStream::initialize" name="iridium::io::fs::implementation::CFileStream::initialize">
+<area shape="rect" id="Node000001" title="Initializes the file stream by opening the file. This method is part of the IInitializable interface...." alt="" coords="5,5,198,46"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="486,13,550,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,20,438,19,471,20,470,26,438,24,198,25"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056" title="Finalizes the file stream by closing the file if it is open. This method is part of the IInitializabl..." alt="" coords="246,33,438,74"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,34,230,38,230,43,198,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="438,36,470,31,471,36,439,41"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="iridium::io::implementation::CContext::updatePipe" name="iridium::io::implementation::CContext::updatePipe">
+<area shape="rect" id="Node000001" title="Updates the reader endpoint of a named pipe." alt="" coords="227,29,400,70"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="349,16,336,10,313,8,292,10,279,15,275,21,277,28,272,29,269,19,276,10,291,5,313,3,337,5,352,11"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a7dc96224c1742946d2220e1579c4bd43" title="Updates the writer endpoint of a named pipe." alt="" coords="5,29,179,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="211,52,179,52,179,47,211,47"/>
+</map>

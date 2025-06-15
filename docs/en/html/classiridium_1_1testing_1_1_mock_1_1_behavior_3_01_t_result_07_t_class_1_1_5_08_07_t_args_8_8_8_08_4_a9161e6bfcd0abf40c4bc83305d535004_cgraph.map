@@ -1,0 +1,10 @@
+<map id="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;::operator=" name="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;::operator=">
+<area shape="rect" id="Node000001" title="Assigns a lambda function as the action for this behavior." alt="" coords="5,63,190,118"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html#af8d72216817b683197fa8a8d40f006a9" title="Constructs a Behavior object." alt="" coords="238,29,422,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,75,222,70,222,75,191,80"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock.html#a44001174664c564d8b8ef34e4c3149bc" title="Default constructor. Registers the mock object instance." alt="" coords="470,70,616,111"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="190,93,238,95,422,95,454,93,454,99,422,100,238,100,190,98"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="288,29,288,19,296,10,310,5,330,3,352,5,366,12,364,17,351,10,330,8,311,10,299,15,293,21,293,29"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="423,69,455,74,454,79,422,74"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="503,70,501,60,507,51,522,46,543,44,566,46,580,52,578,57,565,51,543,49,523,51,511,55,506,61,508,69"/>
+</map>

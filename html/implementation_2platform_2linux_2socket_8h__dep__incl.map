@@ -1,5 +1,0 @@
-<map id="source/iridium/io/net/implementation/platform/linux/socket.h" name="source/iridium/io/net/implementation/platform/linux/socket.h">
-<area shape="rect" id="Node000001" title="Определяет реализации сокетов для платформы Linux. Поведение этого файла зависит от макроса BUILD_FLA..." alt="" coords="5,5,170,61"/>
-<area shape="rect" id="Node000002" href="$linux_2socket_8cpp.html" title=" " alt="" coords="5,109,170,165"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,77,90,108,85,108,85,77"/>
-</map>

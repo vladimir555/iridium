@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл source/iridium/pattern/singleton.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_cdfd7661423c378c73c58f7f8812c6ce.html">pattern</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#namespaces">Пространства имен</a>  </div>
+  <div class="headertitle"><div class="title">Файл singleton.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="non__copyable_8h_source.html">non_copyable.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="non__movable_8h_source.html">non_movable.h</a>&quot;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для singleton.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="singleton_8h__incl.png" border="0" usemap="#asource_2iridium_2pattern_2singleton_8h" alt=""/></div>
+<map name="asource_2iridium_2pattern_2singleton_8h" id="asource_2iridium_2pattern_2singleton_8h">
+<area shape="rect" title=" " alt="" coords="179,5,325,46"/>
+<area shape="rect" href="non__copyable_8h.html" title=" " alt="" coords="5,94,118,120"/>
+<area shape="poly" title=" " alt="" coords="206,49,106,90,104,85,204,44"/>
+<area shape="rect" href="non__movable_8h.html" title=" " alt="" coords="142,94,251,120"/>
+<area shape="poly" title=" " alt="" coords="240,48,216,83,211,79,236,45"/>
+<area shape="rect" title=" " alt="" coords="275,94,344,120"/>
+<area shape="poly" title=" " alt="" coords="268,45,294,79,289,83,264,48"/>
+<area shape="rect" title=" " alt="" coords="368,94,406,120"/>
+<area shape="poly" title=" " alt="" coords="287,44,355,84,352,89,284,49"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="singleton_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2pattern_2singleton_8hdep" alt=""/></div>
+<map name="asource_2iridium_2pattern_2singleton_8hdep" id="asource_2iridium_2pattern_2singleton_8hdep">
+<area shape="rect" title=" " alt="" coords="1263,5,1409,46"/>
+<area shape="rect" href="mime_8h.html" title=" " alt="" coords="540,94,727,135"/>
+<area shape="poly" title=" " alt="" coords="1248,40,727,104,727,99,1248,35"/>
+<area shape="rect" href="logger_8h.html" title="Определяет основной класс&#45;одиночку Logger, вспомогательные структуры LogStream и LogStreamDummy,..." alt="" coords="1208,94,1355,135"/>
+<area shape="poly" title=" " alt="" coords="1318,61,1296,95,1292,92,1313,58"/>
+<area shape="rect" href="tester_8h.html" title=" " alt="" coords="2398,190,2544,231"/>
+<area shape="poly" title=" " alt="" coords="1353,58,1380,99,1398,118,1419,132,1443,141,1482,148,1593,158,1894,168,2197,172,2311,175,2379,180,2411,187,2410,192,2378,185,2311,180,2197,177,1894,174,1593,163,1481,153,1442,146,1416,137,1394,122,1376,102,1349,61"/>
+<area shape="rect" href="singleton_8cpp.html" title=" " alt="" coords="1430,94,1576,135"/>
+<area shape="poly" title=" " alt="" coords="1389,51,1466,91,1464,96,1386,56"/>
+<area shape="rect" href="mime_8cpp.html" title=" " alt="" coords="5,190,206,231"/>
+<area shape="poly" title=" " alt="" coords="525,134,379,156,218,185,185,192,184,187,217,180,378,151,525,128"/>
+<area shape="rect" href="context_8cpp.html" title=" " alt="" coords="897,294,1106,334"/>
+<area shape="poly" title=" " alt="" coords="1194,139,1145,158,1099,185,1071,211,1047,240,1013,295,1009,292,1043,237,1067,207,1096,181,1142,153,1192,134"/>
+<area shape="rect" href="context__manager_8cpp.html" title=" " alt="" coords="1389,190,1598,231"/>
+<area shape="poly" title=" " alt="" coords="1341,139,1450,187,1448,192,1339,144"/>
+<area shape="rect" href="implementation_2pipe_8cpp.html" title=" " alt="" coords="1672,190,1880,231"/>
+<area shape="poly" title=" " alt="" coords="1371,132,1374,132,1514,156,1654,180,1688,187,1687,192,1653,185,1513,161,1373,137,1370,137"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="755,575,963,616"/>
+<area shape="poly" title=" " alt="" coords="1192,123,1088,131,972,144,866,162,823,173,792,185,776,197,766,209,756,224,742,240,723,254,707,262,693,271,681,288,673,308,670,329,673,372,689,413,713,453,743,490,776,523,834,572,830,576,772,527,739,494,709,456,684,416,668,373,664,329,668,307,676,285,689,267,704,257,721,249,738,236,752,221,761,206,772,193,790,180,822,168,864,156,971,139,1087,126,1192,118"/>
+<area shape="rect" href="stream__buffer_8cpp.html" title=" " alt="" coords="1904,190,2112,231"/>
+<area shape="poly" title=" " alt="" coords="1371,132,1374,132,1519,149,1633,155,1747,162,1893,180,1929,187,1928,192,1892,185,1747,167,1633,160,1519,154,1373,137,1370,137"/>
+<area shape="rect" href="content__storage_8cpp.html" title=" " alt="" coords="2136,183,2323,238"/>
+<area shape="poly" title=" " alt="" coords="1371,132,1374,132,1488,145,1584,151,1749,153,1914,157,2011,165,2125,180,2137,182,2136,187,2124,185,2010,170,1914,162,1749,159,1584,156,1487,150,1373,137,1370,137"/>
+<area shape="rect" href="logger_8cpp.html" title=" " alt="" coords="229,190,376,231"/>
+<area shape="poly" title=" " alt="" coords="1192,118,1039,122,839,132,614,152,500,167,389,185,360,192,359,187,388,180,499,161,613,146,838,126,1039,116,1192,113"/>
+<area shape="rect" href="parser__json_8cpp.html" title=" " alt="" coords="401,183,554,238"/>
+<area shape="poly" title=" " alt="" coords="1192,121,1068,127,912,139,740,158,567,185,555,188,554,183,566,180,739,153,912,134,1068,122,1192,116"/>
+<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="579,190,728,231"/>
+<area shape="poly" title=" " alt="" coords="1193,125,988,147,867,164,747,185,718,192,717,187,746,180,866,159,987,142,1192,120"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="690,286,873,342"/>
+<area shape="poly" title=" " alt="" coords="1193,130,1117,150,1079,165,1043,185,1029,198,1021,212,1013,226,998,241,946,265,874,289,872,284,944,260,995,236,1008,223,1016,209,1025,194,1040,181,1076,160,1115,145,1192,125"/>
+<area shape="rect" href="test__runner__raw_8cpp.html" title=" " alt="" coords="802,183,985,238"/>
+<area shape="poly" title=" " alt="" coords="1194,140,1003,185,985,190,984,184,1002,180,1192,134"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2342,294,2488,334"/>
+<area shape="poly" title=" " alt="" coords="1371,132,1374,132,1556,138,1859,141,2018,144,2161,151,2272,163,2311,171,2336,180,2365,205,2387,235,2402,266,2412,293,2407,295,2397,268,2382,238,2361,208,2333,185,2309,176,2271,168,2161,157,2018,150,1859,146,1555,143,1373,137,1370,137"/>
+<area shape="poly" title=" " alt="" coords="1371,132,1374,132,1526,147,1656,153,1877,150,1984,147,2098,150,2227,159,2379,180,2411,187,2410,192,2378,185,2227,165,2098,155,1984,153,1877,155,1656,158,1526,152,1373,137,1370,137"/>
+<area shape="rect" href="implementation_2async__queue_8h.html" title="Определяет класс CAsyncQueue&lt;TItem&gt;, реализацию интерфейса IAsyncQueue&lt;TItem&gt;. Этот класс предоставля..." alt="" coords="1110,190,1315,231"/>
+<area shape="poly" title=" " alt="" coords="1260,149,1229,191,1224,188,1256,146"/>
+<area shape="rect" href="implementation_2thread_8cpp.html" title=" " alt="" coords="1419,390,1597,431"/>
+<area shape="poly" title=" " alt="" coords="1304,146,1338,191,1379,236,1398,250,1416,259,1433,268,1451,285,1470,311,1486,339,1505,389,1500,391,1481,341,1466,314,1448,288,1430,272,1413,264,1396,255,1376,240,1333,194,1300,149"/>
+<area shape="rect" href="worker_8cpp.html" title=" " alt="" coords="1534,479,1714,519"/>
+<area shape="poly" title=" " alt="" coords="1371,132,1410,136,1445,136,1506,133,1534,135,1560,142,1586,156,1612,181,1635,217,1649,257,1656,300,1657,343,1647,422,1633,479,1628,477,1642,421,1651,342,1650,300,1644,258,1630,219,1607,184,1583,161,1558,147,1533,140,1506,138,1445,141,1410,141,1370,137"/>
+<area shape="poly" title=" " alt="" coords="2455,246,2428,295,2423,292,2450,243"/>
+<area shape="poly" title=" " alt="" coords="1159,240,1044,296,1041,291,1157,235"/>
+<area shape="poly" title=" " alt="" coords="1109,237,886,289,873,292,872,287,885,284,1108,232"/>
+<area shape="poly" title=" " alt="" coords="1300,234,1353,255,1403,284,1433,309,1459,337,1498,388,1493,391,1455,340,1429,313,1400,289,1350,260,1298,239"/>
+<area shape="rect" href="implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="1130,294,1294,334"/>
+<area shape="poly" title=" " alt="" coords="1215,247,1215,293,1210,293,1210,247"/>
+<area shape="rect" href="implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="1153,390,1319,431"/>
+<area shape="poly" title=" " alt="" coords="1266,238,1290,259,1309,285,1317,314,1309,343,1291,370,1268,392,1264,388,1287,367,1304,341,1312,314,1304,287,1286,262,1262,242"/>
+<area shape="rect" href="worker__pool_8h.html" title=" " alt="" coords="1301,479,1499,519"/>
+<area shape="poly" title=" " alt="" coords="1273,237,1304,258,1332,285,1362,335,1382,389,1394,439,1401,478,1395,479,1389,440,1377,390,1357,337,1327,288,1301,262,1270,241"/>
+<area shape="poly" title=" " alt="" coords="1147,343,1075,373,997,408,929,446,903,464,886,480,873,503,866,528,861,574,856,574,860,527,869,501,882,477,900,459,926,441,994,403,1072,368,1145,338"/>
+<area shape="poly" title=" " alt="" coords="1289,337,1447,387,1445,392,1287,342"/>
+<area shape="poly" title=" " alt="" coords="1224,349,1234,389,1229,390,1218,350"/>
+<area shape="rect" href="implementation_2sink_8cpp.html" title=" " alt="" coords="1110,479,1277,519"/>
+<area shape="poly" title=" " alt="" coords="1222,446,1206,479,1201,477,1217,444"/>
+<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="896,479,1086,519"/>
+<area shape="poly" title=" " alt="" coords="1167,439,1048,481,1046,476,1166,434"/>
+<area shape="poly" title=" " alt="" coords="1335,431,1536,475,1535,481,1334,436"/>
+<area shape="poly" title=" " alt="" coords="1288,436,1364,476,1362,481,1286,441"/>
+<area shape="poly" title=" " alt="" coords="1286,523,964,578,963,573,1285,517"/>
+<area shape="rect" href="worker__pool_8cpp.html" title=" " alt="" coords="1320,567,1480,623"/>
+<area shape="poly" title=" " alt="" coords="1403,535,1403,567,1398,567,1398,535"/>
+</map>
+</div>
+</div>
+<p><a href="singleton_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_singleton.html">iridium::pattern::Singleton&lt; TClass &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Шаблон класса для реализации шаблона проектирования "Одиночка" (<a class="el" href="classiridium_1_1pattern_1_1_singleton.html" title="Шаблон класса для реализации шаблона проектирования &quot;Одиночка&quot; (Singleton). Этот шаблон гарантирует,...">Singleton</a>). Этот шаблон гарантирует, что в приложении может существовать только один экземпляр <code>TClass</code>. Экземпляр-одиночка создается при первом доступе через метод <code><a class="el" href="classiridium_1_1pattern_1_1_singleton.html#adc6c21483a831662989c44acc08f4dd8" title="Предоставляет доступ к экземпляру-одиночке TClass. Экземпляр создается при первом вызове этого метода...">instance()</a></code>. Инициализация является потокобезопасной в C++11 и более поздних версиях благодаря гарантиям инициализации статических локальных переменных. Класс наследует от <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> и <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a></code> для предотвращения копирования и перемещения самого менеджера одиночки, хотя семантика копирования/перемещения управляемого экземпляра <code>TClass</code> независима. Для использования <code>TClass</code> обычно должен объявить <code><a class="el" href="classiridium_1_1pattern_1_1_singleton.html" title="Шаблон класса для реализации шаблона проектирования &quot;Одиночка&quot; (Singleton). Этот шаблон гарантирует,...">Singleton</a>&lt;TClass&gt;</code> другом или иметь публичный конструктор по умолчанию.  <a href="classiridium_1_1pattern_1_1_singleton.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1pattern.html">iridium::pattern</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1pattern"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит реализации распространенных шаблонов проектирования программного обеспечения. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

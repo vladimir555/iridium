@@ -1,0 +1,5 @@
+<map id="iridium::io::fs::implementation::CFileStream::DEFINE_ENUM" name="iridium::io::fs::implementation::CFileStream::DEFINE_ENUM">
+<area shape="rect" id="Node000001" title="Enumerates the modes in which a file can be opened." alt="" coords="5,5,213,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8" title="Protected constructor to set up the file stream parameters. This constructor stores the file name and..." alt="" coords="261,5,453,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,23,245,23,245,28,213,28"/>
+</map>

@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::io::implementation::CStreamWriterBuffer</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html">CStreamWriterBuffer</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс iridium::io::implementation::CStreamWriterBuffer</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Реализует записываемый поток (<code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>), который пишет в <code><a class="el" href="classiridium_1_1io_1_1_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a></code>. Запись добавляет данные в конец предоставленного буфера.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="stream__buffer_8h_source.html">stream_buffer.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::io::implementation::CStreamWriterBuffer:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_inherit__map" id="airidium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_inherit__map">
+<area shape="rect" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец..." alt="" coords="101,241,275,282"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="5,153,179,193"/>
+<area shape="poly" title=" " alt="" coords="127,202,168,239,165,243,123,206"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="122,79,254,105"/>
+<area shape="poly" title=" " alt="" coords="163,117,117,154,114,150,160,113"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="203,160,368,186"/>
+<area shape="poly" title=" " alt="" coords="216,112,272,158,269,162,213,116"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="96,5,280,31"/>
+<area shape="poly" title=" " alt="" coords="191,46,191,79,185,79,185,46"/>
+<area shape="poly" title=" " alt="" coords="262,198,212,243,208,239,259,194"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::io::implementation::CStreamWriterBuffer:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_coll__map" id="airidium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_coll__map">
+<area shape="rect" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец..." alt="" coords="101,241,275,282"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="5,153,179,193"/>
+<area shape="poly" title=" " alt="" coords="127,202,168,239,165,243,123,206"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="122,79,254,105"/>
+<area shape="poly" title=" " alt="" coords="163,117,117,154,114,150,160,113"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="203,160,368,186"/>
+<area shape="poly" title=" " alt="" coords="216,112,272,158,269,162,213,116"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="96,5,280,31"/>
+<area shape="poly" title=" " alt="" coords="191,46,191,79,185,79,185,46"/>
+<area shape="poly" title=" " alt="" coords="262,198,212,243,208,239,259,194"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a295a830284c2c787bb46bbd85024103c" id="r_a295a830284c2c787bb46bbd85024103c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a295a830284c2c787bb46bbd85024103c">CStreamWriterBuffer</a> (Buffer::TSharedPtr const &amp;buffer)</td></tr>
+<tr class="memdesc:a295a830284c2c787bb46bbd85024103c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец...">CStreamWriterBuffer</a></code>, который пишет в предоставленный буфер.  <br /></td></tr>
+<tr class="separator:a295a830284c2c787bb46bbd85024103c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a113dd46b00b6908286274fb29cfe29a4" id="r_a113dd46b00b6908286274fb29cfe29a4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a113dd46b00b6908286274fb29cfe29a4">write</a> (Buffer::TSharedPtr const &amp;buffer) override</td></tr>
+<tr class="memdesc:a113dd46b00b6908286274fb29cfe29a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Записывает содержимое данного <code>buffer</code> в нижележащий буфер этого потока. Данные добавляются в конец буфера потока.  <br /></td></tr>
+<tr class="separator:a113dd46b00b6908286274fb29cfe29a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Дополнительные унаследованные члены</h2></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html">iridium::io::implementation::CStreamBuffer</a></td></tr>
+<tr class="memitem:a3dea64d9fbe66226243ec0e1011a4892 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer" id="r_a3dea64d9fbe66226243ec0e1011a4892"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892">CStreamBuffer</a> (Buffer::TSharedPtr const &amp;buffer)</td></tr>
+<tr class="memdesc:a3dea64d9fbe66226243ec0e1011a4892 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы...">CStreamBuffer</a></code> с заданным буфером.  <br /></td></tr>
+<tr class="separator:a3dea64d9fbe66226243ec0e1011a4892 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41eebf92f04c32cc403e724ed8a7dc96 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer" id="r_a41eebf92f04c32cc403e724ed8a7dc96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a41eebf92f04c32cc403e724ed8a7dc96">initialize</a> () override</td></tr>
+<tr class="memdesc:a41eebf92f04c32cc403e724ed8a7dc96 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует поток. (В настоящее время не выполняет никаких действий для потоков на основе буфера).  <br /></td></tr>
+<tr class="separator:a41eebf92f04c32cc403e724ed8a7dc96 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b20046e1b187148945c332a3467e8a inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer" id="r_ad5b20046e1b187148945c332a3467e8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#ad5b20046e1b187148945c332a3467e8a">finalize</a> () override</td></tr>
+<tr class="memdesc:ad5b20046e1b187148945c332a3467e8a inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает работу потока. (В настоящее время не выполняет никаких действий для потоков на основе буфера).  <br /></td></tr>
+<tr class="separator:ad5b20046e1b187148945c332a3467e8a inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8343ff3ed6a120d0d8f1261443e08b0b inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer" id="r_a8343ff3ed6a120d0d8f1261443e08b0b"><td class="memItemLeft" align="right" valign="top">std::list&lt; uintptr_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a8343ff3ed6a120d0d8f1261443e08b0b">getHandles</a> () const override</td></tr>
+<tr class="memdesc:a8343ff3ed6a120d0d8f1261443e08b0b inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает базовые дескрипторы ОС. Неприменимо для буферных потоков.  <br /></td></tr>
+<tr class="separator:a8343ff3ed6a120d0d8f1261443e08b0b inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a897262cfa382df0aeb6619e112db6e00 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer" id="r_a897262cfa382df0aeb6619e112db6e00"><td class="memItemLeft" align="right" valign="top">URI::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a897262cfa382df0aeb6619e112db6e00">getURI</a> () const override</td></tr>
+<tr class="memdesc:a897262cfa382df0aeb6619e112db6e00 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> для этого потока. Обычно неприменимо для потоков буфера памяти.  <br /></td></tr>
+<tr class="separator:a897262cfa382df0aeb6619e112db6e00 inherit pro_methods_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer')"><img src="closed.png" alt="-"/>&#160;Защищенные данные унаследованные от <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html">iridium::io::implementation::CStreamBuffer</a></td></tr>
+<tr class="memitem:a0da932b846188308fc96980349bb2bd5 inherit pro_attribs_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer" id="r_a0da932b846188308fc96980349bb2bd5"><td class="memItemLeft" align="right" valign="top">Buffer::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a0da932b846188308fc96980349bb2bd5">m_buffer</a></td></tr>
+<tr class="memdesc:a0da932b846188308fc96980349bb2bd5 inherit pro_attribs_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Нижележащий разделяемый буфер памяти, используемый этим потоком.  <br /></td></tr>
+<tr class="separator:a0da932b846188308fc96980349bb2bd5 inherit pro_attribs_classiridium_1_1io_1_1implementation_1_1_c_stream_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Реализует записываемый поток (<code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>), который пишет в <code><a class="el" href="classiridium_1_1io_1_1_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a></code>. Запись добавляет данные в конец предоставленного буфера. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a295a830284c2c787bb46bbd85024103c" name="a295a830284c2c787bb46bbd85024103c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a295a830284c2c787bb46bbd85024103c">&#9670;&#160;</a></span>CStreamWriterBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::implementation::CStreamWriterBuffer::CStreamWriterBuffer </td>
+          <td>(</td>
+          <td class="paramtype">Buffer::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Конструирует <code><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец...">CStreamWriterBuffer</a></code>, который пишет в предоставленный буфер. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Буфер для записи данных. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_a295a830284c2c787bb46bbd85024103c_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_a295a830284c2c787bb46bbd85024103c_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_a295a830284c2c787bb46bbd85024103c_cgraph" id="aclassiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer_a295a830284c2c787bb46bbd85024103c_cgraph">
+<area shape="rect" title="Конструирует CStreamWriterBuffer, который пишет в предоставленный буфер." alt="" coords="5,5,250,61"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892" title="Конструирует CStreamBuffer с заданным буфером." alt="" coords="298,13,509,54"/>
+<area shape="poly" title=" " alt="" coords="250,30,282,30,282,36,250,36"/>
+<area shape="rect" href="namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Проверяет существование значения (не false, не null, не пустое) и выбрасывает пользовательское исключ..." alt="" coords="557,20,697,46"/>
+<area shape="poly" title=" " alt="" coords="509,30,542,30,542,36,509,36"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a113dd46b00b6908286274fb29cfe29a4" name="a113dd46b00b6908286274fb29cfe29a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a113dd46b00b6908286274fb29cfe29a4">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t iridium::io::implementation::CStreamWriterBuffer::write </td>
+          <td>(</td>
+          <td class="paramtype">Buffer::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Записывает содержимое данного <code>buffer</code> в нижележащий буфер этого потока. Данные добавляются в конец буфера потока. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Буфер, содержащий данные для записи. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Количество записанных байт (равное размеру входного буфера). </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc,если</td><td>не удалось изменить размер внутреннего буфера. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html#a833419472d42008a7c22a7c765075d8d">iridium::io::IStreamWriter</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/io/implementation/<a class="el" href="stream__buffer_8h_source.html">stream_buffer.h</a></li>
+<li>source/iridium/io/implementation/<a class="el" href="stream__buffer_8cpp.html">stream_buffer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

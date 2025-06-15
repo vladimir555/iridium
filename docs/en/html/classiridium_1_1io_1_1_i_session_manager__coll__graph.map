@@ -1,0 +1,5 @@
+<map id="iridium::io::ISessionManager" name="iridium::io::ISessionManager">
+<area shape="rect" id="Node000001" title="Interface for managing communication sessions. A session manager is responsible for overseeing the li..." alt="" coords="5,79,192,105"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="6,5,191,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,46,101,79,96,79,96,46"/>
+</map>

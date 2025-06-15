@@ -1,0 +1,5 @@
+<map id="iridium::io::implementation::CStreamBuffer::CStreamBuffer" name="iridium::io::implementation::CStreamBuffer::CStreamBuffer">
+<area shape="rect" id="Node000001" title="Constructs a CStreamBuffer with a given backing buffer." alt="" coords="5,5,217,46"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="265,13,405,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,23,249,23,249,28,217,28"/>
+</map>

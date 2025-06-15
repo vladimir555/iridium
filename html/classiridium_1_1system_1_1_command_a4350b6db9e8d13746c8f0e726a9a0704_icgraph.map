@@ -1,5 +1,0 @@
-<map id="iridium::system::Command::Command" name="iridium::system::Command::Command">
-<area shape="rect" id="Node000001" title="Конструирует команду с путем к приложению, аргументами и опциональным тайм&#45;аутом." alt="" coords="232,5,410,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1system_1_1_command.html#a3bd05e0e12ef076b925c0a2f39527ea7" title="Конструирует команду с путем к приложению и опциональным тайм&#45;аутом (без аргументов)." alt="" coords="5,5,184,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,28,184,28,184,23,216,23"/>
-</map>

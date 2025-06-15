@@ -1,0 +1,7 @@
+<map id="iridium::io::implementation::CPipe::transmit" name="iridium::io::implementation::CPipe::transmit">
+<area shape="rect" id="Node000001" title="Transmits data based on the provided event. If the event indicates data is available on the pipe&#39;s lo..." alt="" coords="5,23,179,64"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="227,5,367,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,30,211,26,211,31,179,35"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Checks if a source item is equal to any of the specified items." alt="" coords="227,55,367,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,51,211,55,211,60,179,56"/>
+</map>

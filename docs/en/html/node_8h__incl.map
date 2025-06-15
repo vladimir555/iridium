@@ -1,0 +1,31 @@
+<map id="source/iridium/parsing/node.h" name="source/iridium/parsing/node.h">
+<area shape="rect" id="Node000001" title="Defines the INode typedef, a specialization of INodeType&lt;std::string&gt;. This serves as the primary typ..." alt="" coords="151,5,300,46"/>
+<area shape="rect" id="Node000002" href="$node__type_8h.html" title="Defines the INodeType&lt;TValue&gt; template interface for generic tree nodes. This interface is fundamenta..." alt="" coords="179,94,272,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,46,228,78,223,78,223,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,330,59,356"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,123,162,142,127,170,98,206,75,246,43,317,38,314,70,243,94,203,123,166,159,138,195,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="82,330,121,356"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="206,122,179,142,154,169,135,206,121,246,107,315,101,314,116,244,130,204,150,166,175,138,203,118"/>
+<area shape="rect" id="Node000005" href="$convert_8h.html" title="Public interface for the Iridium type conversion framework. Provides access to conversion functions a..." alt="" coords="164,168,287,208"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="228,120,228,152,223,152,223,120"/>
+<area shape="rect" id="Node000012" href="$prototype_8h.html" title=" " alt="" coords="311,175,484,201"/>
+<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="253,118,358,166,356,171,251,123"/>
+<area shape="rect" id="Node000013" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="457,256,586,282"/>
+<area shape="poly" id="edge16_Node000002_Node000013" title=" " alt="" coords="272,110,398,129,458,145,481,154,498,166,510,182,518,202,524,240,519,241,513,203,506,185,494,170,479,159,456,150,397,134,271,115"/>
+<area shape="rect" id="Node000006" href="$implementation_2convert_8h.html" title="Core implementation details for the Iridium type conversion framework. Defines the primary convert fu..." alt="" coords="156,256,324,282"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="232,208,238,240,232,241,226,209"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="206,285,74,330,72,325,204,280"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="218,285,135,327,133,322,215,280"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="412,330,473,356"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="275,280,399,323,397,328,273,285"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="145,330,202,356"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="231,284,197,320,193,317,227,280"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="496,330,565,356"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="291,280,482,326,481,332,290,285"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="226,330,286,356"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="245,282,253,314,247,315,240,283"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="310,330,388,356"/>
+<area shape="poly" id="edge12_Node000006_Node000011" title=" " alt="" coords="260,280,320,319,317,324,257,285"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="418,199,491,246,488,250,415,204"/>
+<area shape="poly" id="edge15_Node000013_Node000009" title=" " alt="" coords="526,282,530,314,524,315,520,283"/>
+</map>

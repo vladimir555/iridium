@@ -1,5 +1,0 @@
-<map id="iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;" name="iridium::pattern::implementation::CFSM&lt; TEvent, TState &gt;">
-<area shape="rect" id="Node000001" title="Конкретная реализация интерфейса IFSM, использующая список переходов (поведение, подобное карте)...." alt="" coords="5,94,209,135"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_f_s_m.html" title="Интерфейс для Конечного Автомата (Finite State Machine, FSM). Этот шаблон класса определяет основную ..." alt="" coords="33,5,181,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,62,110,94,104,94,104,62"/>
-</map>

@@ -1,0 +1,6 @@
+<map id="iridium::io::IPipeManager::updatePipe" name="iridium::io::IPipeManager::updatePipe">
+<area shape="rect" id="Node000001" title="Associates both a stream reader and a stream writer with the named pipe. This allows bidirectional co..." alt="" coords="5,29,171,70"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_pipe_manager.html#a11ef22599181bdc45abc908d6afeaa75" title="Associates a stream reader with the named pipe. This allows data to be read from the pipe via the pro..." alt="" coords="219,29,384,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,47,203,47,203,52,171,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="261,29,259,19,266,10,280,5,301,3,324,5,338,11,336,16,323,10,301,8,281,10,269,15,264,20,266,28"/>
+</map>

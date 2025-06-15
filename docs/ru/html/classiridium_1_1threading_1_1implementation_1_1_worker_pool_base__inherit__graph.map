@@ -1,0 +1,9 @@
+<map id="iridium::threading::implementation::WorkerPoolBase" name="iridium::threading::implementation::WorkerPoolBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,93,228,134"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html" title=" " alt="" coords="276,5,478,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,85,283,59,285,64,200,90"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html" title=" " alt="" coords="276,85,478,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,110,275,110,275,116,243,116"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title=" " alt="" coords="276,165,478,221"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="200,136,285,162,283,167,199,141"/>
+</map>

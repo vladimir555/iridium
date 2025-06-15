@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">CWorkerPoolPusher</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="worker__pool_8h_source.html">worker_pool.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_3_01_t_item_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_3_01_t_item_01_4_inherit__map" id="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_3_01_t_item_01_4_inherit__map">
+<area shape="rect" title=" " alt="" coords="508,71,710,126"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="262,45,436,86"/>
+<area shape="poly" title=" " alt="" coords="451,76,508,83,507,88,450,81"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="23,5,172,61"/>
+<area shape="poly" title=" " alt="" coords="188,42,262,51,261,57,187,47"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,86,190,111"/>
+<area shape="poly" title=" " alt="" coords="205,82,261,74,262,79,205,87"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html" title=" " alt="" coords="238,110,460,151"/>
+<area shape="poly" title=" " alt="" coords="475,112,507,108,508,114,476,118"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса iridium::threading::implementation::CWorkerPoolPusher&lt; TItem &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_3_01_t_item_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_3_01_t_item_01_4_coll__map" id="airidium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_3_01_t_item_01_4_coll__map">
+<area shape="rect" title=" " alt="" coords="508,71,710,126"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="262,45,436,86"/>
+<area shape="poly" title=" " alt="" coords="451,76,508,83,507,88,450,81"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="23,5,172,61"/>
+<area shape="poly" title=" " alt="" coords="188,42,262,51,261,57,187,47"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,86,190,111"/>
+<area shape="poly" title=" " alt="" coords="205,82,261,74,262,79,205,87"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html" title=" " alt="" coords="238,110,460,151"/>
+<area shape="poly" title=" " alt="" coords="475,112,507,108,508,114,476,118"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a2278a12b6e3f34813691c4e2ccd0835c" id="r_a2278a12b6e3f34813691c4e2ccd0835c"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html">IWorkerPusher</a>&lt; TItem &gt;::TItems&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2278a12b6e3f34813691c4e2ccd0835c">TItems</a></td></tr>
+<tr class="separator:a2278a12b6e3f34813691c4e2ccd0835c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97dba58842169d039211c207cdeaa5a3" id="r_a97dba58842169d039211c207cdeaa5a3"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; typename <a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html">IWorkerPusher</a>&lt; TItem &gt;::IHandler::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97dba58842169d039211c207cdeaa5a3">THandlers</a></td></tr>
+<tr class="separator:a97dba58842169d039211c207cdeaa5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher')"><img src="closed.png" alt="-"/>&#160;Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a></td></tr>
+<tr class="memitem:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher" id="r_a29daf8cead8ce6fd44d4e26d20708dab"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html#a29daf8cead8ce6fd44d4e26d20708dab">TItems</a></td></tr>
+<tr class="memdesc:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов для обработки очередью.  <br /></td></tr>
+<tr class="separator:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a69ed165ba5efd6613889a52afce84cbc" id="r_a69ed165ba5efd6613889a52afce84cbc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69ed165ba5efd6613889a52afce84cbc">CWorkerPoolPusher</a> (std::string const &amp;name, <a class="el" href="#a97dba58842169d039211c207cdeaa5a3">THandlers</a> const &amp;handlers)</td></tr>
+<tr class="separator:a69ed165ba5efd6613889a52afce84cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474dc549609bdbb7c565070d07fa58c7" id="r_a474dc549609bdbb7c565070d07fa58c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a474dc549609bdbb7c565070d07fa58c7">initialize</a> () override</td></tr>
+<tr class="memdesc:a474dc549609bdbb7c565070d07fa58c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова.  <br /></td></tr>
+<tr class="separator:a474dc549609bdbb7c565070d07fa58c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf212dfe4bc1c616399f557f67eb0b10" id="r_acf212dfe4bc1c616399f557f67eb0b10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf212dfe4bc1c616399f557f67eb0b10">finalize</a> () override</td></tr>
+<tr class="memdesc:acf212dfe4bc1c616399f557f67eb0b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы.  <br /></td></tr>
+<tr class="separator:acf212dfe4bc1c616399f557f67eb0b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d0975df3242df6e82fcaedaed69ed12" id="r_a8d0975df3242df6e82fcaedaed69ed12"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d0975df3242df6e82fcaedaed69ed12">push</a> (TItem const &amp;item) override</td></tr>
+<tr class="memdesc:a8d0975df3242df6e82fcaedaed69ed12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди.  <br /></td></tr>
+<tr class="separator:a8d0975df3242df6e82fcaedaed69ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6831fb48c5e653f92b8ae653650d2e5" id="r_ad6831fb48c5e653f92b8ae653650d2e5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6831fb48c5e653f92b8ae653650d2e5">push</a> (<a class="el" href="#a2278a12b6e3f34813691c4e2ccd0835c">TItems</a> const &amp;items) override</td></tr>
+<tr class="memdesc:ad6831fb48c5e653f92b8ae653650d2e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет несколько элементов в очередь. Добавляет все элементы из предоставленного списка в конец очереди.  <br /></td></tr>
+<tr class="separator:ad6831fb48c5e653f92b8ae653650d2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1threading_1_1_i_worker_pusher"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1threading_1_1_i_worker_pusher')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html">iridium::threading::IWorkerPusher&lt; TItem &gt;</a></td></tr>
+<tr class="memitem:a0e7e14d07c6fcf06a06b228a7069b32d inherit pub_methods_classiridium_1_1threading_1_1_i_worker_pusher" id="r_a0e7e14d07c6fcf06a06b228a7069b32d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html#a0e7e14d07c6fcf06a06b228a7069b32d">DEFINE_INTERFACE</a> (<a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html">IWorkerPusher</a>)</td></tr>
+<tr class="separator:a0e7e14d07c6fcf06a06b228a7069b32d inherit pub_methods_classiridium_1_1threading_1_1_i_worker_pusher"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
+<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html">iridium::threading::implementation::WorkerPoolBase</a></td></tr>
+<tr class="memitem:a6c381323cead34199ada9a99b24f3f77 inherit pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_a6c381323cead34199ada9a99b24f3f77"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#a6c381323cead34199ada9a99b24f3f77">~WorkerPoolBase</a> ()=default</td></tr>
+<tr class="separator:a6c381323cead34199ada9a99b24f3f77 inherit pub_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Дополнительные унаследованные члены</h2></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html">iridium::threading::implementation::WorkerPoolBase</a></td></tr>
+<tr class="memitem:acd2d2ac09fc6ed31f63978af0426c95b inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_acd2d2ac09fc6ed31f63978af0426c95b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#acd2d2ac09fc6ed31f63978af0426c95b">WorkerPoolBase</a> (std::string const &amp;name)</td></tr>
+<tr class="separator:acd2d2ac09fc6ed31f63978af0426c95b inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affad4d37118bafe1b1e0971f179d5c27 inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_affad4d37118bafe1b1e0971f179d5c27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#affad4d37118bafe1b1e0971f179d5c27">waitForMultipleStatus</a> (bool const &amp;status)</td></tr>
+<tr class="separator:affad4d37118bafe1b1e0971f179d5c27 inherit pro_methods_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base')"><img src="closed.png" alt="-"/>&#160;Защищенные данные унаследованные от <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html">iridium::threading::implementation::WorkerPoolBase</a></td></tr>
+<tr class="memitem:a52ebb228031a6697074c16ca820bea6c inherit pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base" id="r_a52ebb228031a6697074c16ca820bea6c"><td class="memItemLeft" align="right" valign="top">std::list&lt; IThread::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#a52ebb228031a6697074c16ca820bea6c">m_threads</a></td></tr>
+<tr class="separator:a52ebb228031a6697074c16ca820bea6c inherit pro_attribs_classiridium_1_1threading_1_1implementation_1_1_worker_pool_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Определения типов</h2>
+<a id="a97dba58842169d039211c207cdeaa5a3" name="a97dba58842169d039211c207cdeaa5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97dba58842169d039211c207cdeaa5a3">&#9670;&#160;</a></span>THandlers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::list&lt;typename <a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html">IWorkerPusher</a>&lt;TItem&gt;::IHandler::TSharedPtr&gt; <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::THandlers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2278a12b6e3f34813691c4e2ccd0835c" name="a2278a12b6e3f34813691c4e2ccd0835c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2278a12b6e3f34813691c4e2ccd0835c">&#9670;&#160;</a></span>TItems</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html">IWorkerPusher</a>&lt;TItem&gt;::TItems <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::TItems</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a69ed165ba5efd6613889a52afce84cbc" name="a69ed165ba5efd6613889a52afce84cbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69ed165ba5efd6613889a52afce84cbc">&#9670;&#160;</a></span>CWorkerPoolPusher()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::CWorkerPoolPusher </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a97dba58842169d039211c207cdeaa5a3">THandlers</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>handlers</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_cgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_cgraph" id="aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,208,85"/>
+<area shape="poly" title=" " alt="" coords="59,29,59,19,68,10,84,5,107,3,132,5,148,12,146,17,131,10,106,8,85,10,71,15,64,21,64,29"/>
+<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="320,11,384,37"/>
+<area shape="poly" title=" " alt="" coords="208,41,304,28,305,33,209,46"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#acd2d2ac09fc6ed31f63978af0426c95b" title=" " alt="" coords="256,61,448,117"/>
+<area shape="poly" title=" " alt="" coords="209,68,241,72,240,77,208,73"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_icgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_icgraph" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_icgraph" id="aclassiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher_a69ed165ba5efd6613889a52afce84cbc_icgraph">
+<area shape="rect" title=" " alt="" coords="5,29,208,85"/>
+<area shape="poly" title=" " alt="" coords="139,17,126,10,106,8,89,10,77,15,72,21,72,29,66,29,67,19,74,10,88,5,107,3,128,5,141,12"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="acf212dfe4bc1c616399f557f67eb0b10" name="acf212dfe4bc1c616399f557f67eb0b10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf212dfe4bc1c616399f557f67eb0b10">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::finalize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может быть выброшено, если финализация завершается неудачно, хотя это обычно не рекомендуется для методов очистки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="a474dc549609bdbb7c565070d07fa58c7" name="a474dc549609bdbb7c565070d07fa58c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a474dc549609bdbb7c565070d07fa58c7">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова. </p>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Может быть выброшено, если инициализация завершается неудачно. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">iridium::pattern::IInitializable</a>.</p>
+
+</div>
+</div>
+<a id="a8d0975df3242df6e82fcaedaed69ed12" name="a8d0975df3242df6e82fcaedaed69ed12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0975df3242df6e82fcaedaed69ed12">&#9670;&#160;</a></span>push() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">TItem const &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>Элемент для добавления в очередь. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Новый размер очереди после добавления элемента. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html#ab485c0d1679e5190cda877e475800c38">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ad6831fb48c5e653f92b8ae653650d2e5" name="ad6831fb48c5e653f92b8ae653650d2e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6831fb48c5e653f92b8ae653650d2e5">&#9670;&#160;</a></span>push() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TItem&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html">iridium::threading::implementation::CWorkerPoolPusher</a>&lt; TItem &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a2278a12b6e3f34813691c4e2ccd0835c">TItems</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>items</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Добавляет несколько элементов в очередь. Добавляет все элементы из предоставленного списка в конец очереди. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>Список элементов для добавления в очередь. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Новый размер очереди после добавления элементов. </dd></dl>
+
+<p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html#aea94c8568922887c524dfd501435d519">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>source/iridium/threading/implementation/<a class="el" href="worker__pool_8h_source.html">worker_pool.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

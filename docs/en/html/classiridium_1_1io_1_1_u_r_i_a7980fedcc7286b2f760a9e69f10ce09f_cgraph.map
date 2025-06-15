@@ -1,0 +1,11 @@
+<map id="iridium::io::URI::operator&lt;" name="iridium::io::URI::operator&lt;">
+<area shape="rect" id="Node000001" title="Less&#45;than comparison operator. Compares this URI with another URI. Provides a strict weak ordering,..." alt="" coords="5,55,178,80"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_u_r_i.html#adf0ba8afa5964c537a254a917da49e1d" title="Macro likely defining a static create method or similar factory functionality for creating shared poi..." alt="" coords="226,55,367,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,65,210,65,210,70,178,70"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="466,5,531,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,51,451,27,452,32,353,57"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io.html#a2f34538bf3cd6c9d1c0ad61dd76b7812" title=" " alt="" coords="415,55,582,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="368,65,399,65,399,70,368,70"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1io.html#a0a9644a0328194eef5271f0734c31f0c" title=" " alt="" coords="433,104,564,130"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="353,78,429,97,428,102,352,84"/>
+</map>

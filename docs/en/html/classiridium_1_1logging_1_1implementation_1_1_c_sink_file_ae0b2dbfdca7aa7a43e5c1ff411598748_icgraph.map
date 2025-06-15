@@ -1,0 +1,5 @@
+<map id="iridium::logging::implementation::CSinkFile::initialize" name="iridium::logging::implementation::CSinkFile::initialize">
+<area shape="rect" id="Node000001" title="Initializes the file sink. This involves opening/creating the log file according to the path and rota..." alt="" coords="258,5,462,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Logs a single event to the file if its level is sufficient and the file is open. The event is formatt..." alt="" coords="5,5,210,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,28,210,28,210,23,242,23"/>
+</map>

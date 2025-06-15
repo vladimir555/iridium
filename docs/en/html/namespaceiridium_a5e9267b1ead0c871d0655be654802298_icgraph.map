@@ -1,0 +1,13 @@
+<map id="iridium::upperCase" name="iridium::upperCase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="461,78,591,104"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion_1_1implementation.html#a37724dcf9f954b0851af5a13222821b3" title="Converts int32_t to std::string using a specific base." alt="" coords="245,5,413,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="470,75,392,49,393,44,471,70"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion_1_1implementation.html#a50a35cd79960728dd1007b3ce3f84f12" title="Converts uint64_t to std::string using a specific base." alt="" coords="245,71,413,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="445,94,413,94,413,88,445,88"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="252,136,406,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="471,112,393,138,392,133,470,107"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="5,118,197,144"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="236,149,197,144,197,139,237,143"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1parsing.html#ab5867486cd60924f7e4bff6acd74fc37" title=" " alt="" coords="16,168,186,193"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="237,169,187,174,186,169,237,163"/>
+</map>

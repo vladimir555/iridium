@@ -1,5 +1,0 @@
-<map id="iridium::pattern::implementation::CFSM::doAction" name="iridium::pattern::implementation::CFSM::doAction">
-<area shape="rect" id="Node000001" title="Обрабатывает событие, пытается найти соответствующий переход и обновляет состояние КА...." alt="" coords="5,5,209,46"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="257,5,384,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,23,241,23,241,28,209,28"/>
-</map>

@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс Buffer</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_buffer-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс Buffer</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Динамический буфер памяти для операций ввода-вывода, унаследованный от <code>std::vector&lt;unsigned char&gt;</code>. Этот класс расширяет <code>std::vector&lt;unsigned char&gt;</code>, наследуя его методы для управления памятью, доступа к элементам и итерации. Он предоставляет дополнительные конструкторы для удобной инициализации из строк и списков других буферов.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="buffer_8h_source.html">buffer.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:Buffer:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_buffer__inherit__graph.png" border="0" usemap="#a_buffer_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_buffer_inherit__map" id="a_buffer_inherit__map">
+<area shape="rect" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="50,79,107,105"/>
+<area shape="rect" title=" " alt="" coords="5,5,152,31"/>
+<area shape="poly" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса Buffer:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_buffer__coll__graph.png" border="0" usemap="#a_buffer_coll__map" alt="Collaboration graph"/></div>
+<map name="a_buffer_coll__map" id="a_buffer_coll__map">
+<area shape="rect" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="50,79,107,105"/>
+<area shape="rect" title=" " alt="" coords="5,5,152,31"/>
+<area shape="poly" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a4669adf0b8a958180850edcf11713705" id="r_a4669adf0b8a958180850edcf11713705"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4669adf0b8a958180850edcf11713705">Buffer</a> ()=default</td></tr>
+<tr class="memdesc:a4669adf0b8a958180850edcf11713705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, вероятно, определяющий статический метод <code>create</code> или аналогичную фабричную функциональность для создания умных указателей (<code>Buffer::TSharedPtr</code>) на экземпляры <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a></code>.  <br /></td></tr>
+<tr class="separator:a4669adf0b8a958180850edcf11713705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa42fbefe176a94e58a1373de1aef5fe8" id="r_aa42fbefe176a94e58a1373de1aef5fe8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa42fbefe176a94e58a1373de1aef5fe8">Buffer</a> (char const *const str)</td></tr>
+<tr class="memdesc:aa42fbefe176a94e58a1373de1aef5fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из C-строки, завершающейся нулевым символом. Буфер инициализируется копией символов из C-строки, включая нулевой терминатор, если он учитывается strlen. Длина определяется с помощью <code>strlen</code>.  <br /></td></tr>
+<tr class="separator:aa42fbefe176a94e58a1373de1aef5fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51d0b85d61c74e6f5d414d2c268953e3" id="r_a51d0b85d61c74e6f5d414d2c268953e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51d0b85d61c74e6f5d414d2c268953e3">Buffer</a> (std::string const &amp;str)</td></tr>
+<tr class="memdesc:a51d0b85d61c74e6f5d414d2c268953e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из <code>std::string</code>. Буфер инициализируется копией символов из строки.  <br /></td></tr>
+<tr class="separator:a51d0b85d61c74e6f5d414d2c268953e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002c084b75bcff6325923f65812ed216" id="r_a002c084b75bcff6325923f65812ed216"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a002c084b75bcff6325923f65812ed216">Buffer</a> (std::list&lt; Buffer::TSharedPtr &gt; const &amp;buffers)</td></tr>
+<tr class="memdesc:a002c084b75bcff6325923f65812ed216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> путем конкатенации списка умных указателей на другие <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a>. Содержимое нового буфера формируется путем добавления данных из каждого буфера в предоставленном списке. Общая емкость резервируется заранее, чтобы избежать многократных перераспределений памяти.  <br /></td></tr>
+<tr class="separator:a002c084b75bcff6325923f65812ed216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addea15640d3fd8f123b4396e42814394" id="r_addea15640d3fd8f123b4396e42814394"><td class="memTemplParams" colspan="2">template&lt;typename ... TArgs&gt; </td></tr>
+<tr class="memitem:addea15640d3fd8f123b4396e42814394"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#addea15640d3fd8f123b4396e42814394">Buffer</a> (TArgs ... args)</td></tr>
+<tr class="memdesc:addea15640d3fd8f123b4396e42814394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вариативный шаблонный конструктор, перенаправляющий аргументы в <code>std::vector&lt;unsigned char&gt;</code>. Позволяет инициализацию с использованием любого конструктора <code>std::vector&lt;unsigned char&gt;</code>, такого как <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer(size_t count, unsigned char value)</a></code> или конструирование из итераторов.  <br /></td></tr>
+<tr class="separator:addea15640d3fd8f123b4396e42814394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Динамический буфер памяти для операций ввода-вывода, унаследованный от <code>std::vector&lt;unsigned char&gt;</code>. Этот класс расширяет <code>std::vector&lt;unsigned char&gt;</code>, наследуя его методы для управления памятью, доступа к элементам и итерации. Он предоставляет дополнительные конструкторы для удобной инициализации из строк и списков других буферов. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a4669adf0b8a958180850edcf11713705" name="a4669adf0b8a958180850edcf11713705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4669adf0b8a958180850edcf11713705">&#9670;&#160;</a></span>Buffer() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Макрос, вероятно, определяющий статический метод <code>create</code> или аналогичную фабричную функциональность для создания умных указателей (<code>Buffer::TSharedPtr</code>) на экземпляры <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a></code>. </p>
+<p>Конструктор по умолчанию. Создает пустой буфер. Наследует поведение от конструктора по умолчанию <code>std::vector&lt;unsigned char&gt;</code>. </p>
+
+</div>
+</div>
+<a id="aa42fbefe176a94e58a1373de1aef5fe8" name="aa42fbefe176a94e58a1373de1aef5fe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa42fbefe176a94e58a1373de1aef5fe8">&#9670;&#160;</a></span>Buffer() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td>(</td>
+          <td class="paramtype">char const *const</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из C-строки, завершающейся нулевым символом. Буфер инициализируется копией символов из C-строки, включая нулевой терминатор, если он учитывается strlen. Длина определяется с помощью <code>strlen</code>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Указатель на константный символьный массив, завершающийся нулевым символом. Не должен быть null. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a51d0b85d61c74e6f5d414d2c268953e3" name="a51d0b85d61c74e6f5d414d2c268953e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51d0b85d61c74e6f5d414d2c268953e3">&#9670;&#160;</a></span>Buffer() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из <code>std::string</code>. Буфер инициализируется копией символов из строки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td><code>std::string</code>, из которой копируются данные. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a002c084b75bcff6325923f65812ed216" name="a002c084b75bcff6325923f65812ed216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a002c084b75bcff6325923f65812ed216">&#9670;&#160;</a></span>Buffer() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; Buffer::TSharedPtr &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>buffers</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> путем конкатенации списка умных указателей на другие <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a>. Содержимое нового буфера формируется путем добавления данных из каждого буфера в предоставленном списке. Общая емкость резервируется заранее, чтобы избежать многократных перераспределений памяти. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffers</td><td>Список <code>Buffer::TSharedPtr</code> (умных указателей на объекты <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a>), содержимое которых будет объединено. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="addea15640d3fd8f123b4396e42814394" name="addea15640d3fd8f123b4396e42814394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addea15640d3fd8f123b4396e42814394">&#9670;&#160;</a></span>Buffer() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ... TArgs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td>(</td>
+          <td class="paramtype">TArgs ...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Вариативный шаблонный конструктор, перенаправляющий аргументы в <code>std::vector&lt;unsigned char&gt;</code>. Позволяет инициализацию с использованием любого конструктора <code>std::vector&lt;unsigned char&gt;</code>, такого как <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer(size_t count, unsigned char value)</a></code> или конструирование из итераторов. </p>
+<dl class="tparams"><dt>Параметры шаблона</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TArgs</td><td>Типы аргументов для перенаправления в конструктор <code>std::vector</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Аргументы для перенаправления. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>source/iridium/io/<a class="el" href="buffer_8h_source.html">buffer.h</a></li>
+<li>source/iridium/io/<a class="el" href="buffer_8cpp.html">buffer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

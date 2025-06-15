@@ -1,0 +1,9 @@
+<map id="iridium::logging::implementation::CSinkConsole::log" name="iridium::logging::implementation::CSinkConsole::log">
+<area shape="rect" id="Node000001" title="Logs a single event to the console if its level is sufficient. The event is formatted into a string l..." alt="" coords="5,23,210,64"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title="Formats a log event into a standardized string line. This static utility method can be used by sink i..." alt="" coords="258,23,404,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,41,242,41,242,46,210,46"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="466,5,530,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="404,30,450,23,451,28,405,35"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium.html#a627d2f2ec5720695a4e72cc1a16491c4" title=" " alt="" coords="452,55,544,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="405,51,437,56,436,61,404,57"/>
+</map>

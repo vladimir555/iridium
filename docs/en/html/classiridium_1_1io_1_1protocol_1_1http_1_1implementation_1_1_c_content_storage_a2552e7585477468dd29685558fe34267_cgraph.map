@@ -1,0 +1,5 @@
+<map id="iridium::io::protocol::http::implementation::CContentStorage::getContent" name="iridium::io::protocol::http::implementation::CContentStorage::getContent">
+<area shape="rect" id="Node000001" title="Retrieves content as a readable file stream from the configured root path. The requested path is appe..." alt="" coords="5,5,208,61"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="256,13,416,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,30,240,30,240,36,208,36"/>
+</map>

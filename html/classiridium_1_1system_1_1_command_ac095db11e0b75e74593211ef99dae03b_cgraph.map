@@ -1,7 +1,0 @@
-<map id="iridium::system::Command::run" name="iridium::system::Command::run">
-<area shape="rect" id="Node000001" title="Запускает сконфигурированную команду, ожидает ее завершения или истечения тайм&#45;аута и захватывает ее ..." alt="" coords="5,31,210,56"/>
-<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="266,5,330,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,27,251,22,251,27,209,33"/>
-<area shape="rect" id="Node000003" href="$uri_8cpp.html#a7ce03c96592d1378cf871e564b077f90" title="Предоставляет доступ к шаблонной функции преобразования указателей из пространства имен реализации...." alt="" coords="258,55,339,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,54,242,58,242,63,210,59"/>
-</map>

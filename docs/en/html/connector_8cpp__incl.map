@@ -1,0 +1,19 @@
+<map id="source/iridium/db/connector.cpp" name="source/iridium/db/connector.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="238,5,443,31"/>
+<area shape="rect" id="Node000002" href="$connector_8h.html" title="Defines the IConnector interface for database communication and the Exception class for database erro..." alt="" coords="296,79,385,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="343,31,343,63,338,63,338,31"/>
+<area shape="rect" id="Node000003" href="$initializable_8h.html" title=" " alt="" coords="5,153,188,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="300,108,153,150,152,145,298,103"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="212,153,290,178"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="327,107,280,145,276,141,324,103"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="314,153,367,178"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="343,105,343,137,338,137,338,105"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="392,153,449,178"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="356,103,398,140,394,144,352,107"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="473,153,520,178"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="368,103,460,145,458,150,366,108"/>
+<area shape="rect" id="Node000004" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="32,226,161,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,179,99,211,94,211,94,179"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="62,300,131,326"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="99,252,99,284,94,284,94,252"/>
+</map>
