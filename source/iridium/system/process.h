@@ -32,4 +32,7 @@ public:
 } // iridium
 
 
+DEFINE_CONVERT(std::string, iridium::system::IProcess::TState::TCondition)
+
+
 #endif // HEADER_PROCESS_70CE2A25_38CC_4D60_A1A7_B14F33DB94CF
