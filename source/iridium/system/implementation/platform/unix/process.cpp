@@ -74,12 +74,14 @@ void CProcessStream::initialize() {
 //            LOGW << "initializing process stream '" + m_command_line + "' error: already initialized";
 //            return;
 //        }
-        if (m_fd_reader)
+        if (m_fd_reader || m_fd_writer)
             throw std::runtime_error("not finalized"); // ----->
-        
+
+        int cin_pipe[2]  = { 0 };
         int cout_pipe[2] = { 0 };
         int cerr_pipe[2] = { 0 };
-        
+
+        assertOK(pipe(cin_pipe),  "pipe");
         assertOK(pipe(cout_pipe), "pipe");
         assertOK(pipe(cerr_pipe), "pipe");
         
@@ -90,30 +92,38 @@ void CProcessStream::initialize() {
         );
         
         assertOK(
+            posix_spawn_file_actions_adddup2(&actions,  cin_pipe[0], 0),
+           "posix_spawn_file_actions_adddup2, stdin");
+
+        assertOK(
             posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
-           "posix_spawn_file_actions_addclose"
+           "posix_spawn_file_actions_addclose, cout_pipe"
         );
         
         assertOK(
             posix_spawn_file_actions_addclose(&actions, cerr_pipe[0]),
-           "posix_spawn_file_actions_addclose"
+           "posix_spawn_file_actions_addclose, cerr_pipe"
         );
         
         assertOK(
             posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
-           "posix_spawn_file_actions_adddup2"
+           "posix_spawn_file_actions_adddup2, cout_pipe"
         );
         
         assertOK(
             posix_spawn_file_actions_adddup2(&actions, cerr_pipe[1], 2),
-           "posix_spawn_file_actions_adddup2"
+           "posix_spawn_file_actions_adddup2, cerr_pipe"
         );
     
         assertOK(
             posix_spawn_file_actions_adddup2(&actions, 1, 2),
            "posix_spawn_file_actions_adddup2"
         );
-        
+
+        assertOK(
+            posix_spawn_file_actions_addclose(&actions, cin_pipe[1]),
+           "posix_spawn_file_actions_addclose(stdin_read_end)");
+
         assertOK(
             posix_spawn_file_actions_addclose(&actions, cout_pipe[1]),
            "posix_spawn_file_actions_addclose"
@@ -124,14 +134,6 @@ void CProcessStream::initialize() {
            "posix_spawn_file_actions_addclose"
         );
         
-//        char *argv[1 + m_args.size() + 1];
-//        argv[0] = (char *)m_app.data();
-//        for (size_t i = 0; i < m_args.size(); i++)
-//            argv[i + 1] = (char *)m_args[i].data();
-//
-//        argv[1 + m_args.size()] = nullptr;
-
-
         std::vector<char *> argv(1 + m_args.size() + 1);
         argv[0] = (char *)m_app.data();
         for (size_t i = 0; i < m_args.size(); i++)
@@ -139,24 +141,24 @@ void CProcessStream::initialize() {
 
         argv[1 + m_args.size()] = nullptr;
 
-
         //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
         
-        //#ifdef POSIX_SPAWN_SETSID
-        //    posix_spawnattr_t attr = { 0 };
-        //    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
-        //#elif defined(POSIX_SPAWN_SETSID_NP)
-        //    posix_spawnattr_t attr = { 0 };
-        //    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
-        //#else
-        ////    posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
-        ////    throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
-        //#endif
+#ifdef POSIX_SPAWN_SETSID
+        posix_spawnattr_t attr = {};
+        posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
+#elif defined(POSIX_SPAWN_SETSID_NP)
+        posix_spawnattr_t attr = {};
+        posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
+#else
+        posix_spawnattr_t attr = {};
+//            posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
+//            throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+#endif
         
         pid_t pid = m_pid;
         
         assertOK(
-            //        posix_spawnp(&m_pid, m_app.c_str(), &actions, &attr, argv, environ),
+//            posix_spawnp(&pid, m_app.c_str(), &actions, &attr, argv, environ),
             posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv.data(), environ),
            "posix_spawnp"
         );
@@ -167,11 +169,12 @@ void CProcessStream::initialize() {
         //    posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ);
         //    LOGT << "posix_spawnp: " << r << " " << m_pid;
         //    assertOK(r, "posix_spawnp");
-        
+
+        close(cin_pipe[1]);
         close(cout_pipe[1]);
         close(cerr_pipe[1]);
-        
-        // todo: pipe_in -> m_fd_writer
+
+        m_fd_writer = cin_pipe[0];
         m_fd_reader = cout_pipe[0];
         
 //        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
@@ -187,18 +190,18 @@ void CProcessStream::initialize() {
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
 
-    LOGT << "initialize process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
+//    LOGT << "initialize process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
 }
 
 
 void CProcessStream::finalize() {
-    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
+//    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
 
-        //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-        //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " ...";
+//            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader;
+//            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " ...";
 
         {
             io::Buffer::TSharedPtr b;
@@ -215,8 +218,8 @@ void CProcessStream::finalize() {
 //            std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
 //        }
         
-        //    LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " DONE";
-        
+//            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
+
         if (getState().condition == TState::TCondition::RUNNING) {
             LOGW << "finalization: kill pid " << m_pid << " " << m_command_line;
 //                 << ", timeout: " << system_clock::now() - start;
@@ -229,9 +232,14 @@ void CProcessStream::finalize() {
             close(m_fd_reader);
             m_fd_reader = 0;
         }
-        
+
+        if (m_fd_writer) {
+            close(m_fd_writer);
+            m_fd_writer = 0;
+        }
+
         //    m_state_internal = { 0 };
-        //    LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd << " done";
+//            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " done";
     } catch (std::exception const &e) {
         throw std::runtime_error("finalization process '" + m_command_line + "' error: " + e.what()); // ----->
     }

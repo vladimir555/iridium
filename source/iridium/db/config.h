@@ -19,7 +19,6 @@
 #include "iridium/enum.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
 /// \~english @brief Namespace for database related functionalities.
 /// \~russian @brief Пространство имен для функциональности, связанной с базами данных.
@@ -48,7 +47,7 @@ DEFINE_ROOT_NODE_BEGIN(Datebase)
         /// \~english @brief Represents a PostgreSQL database type.
         /// \~russian @brief Представляет тип базы данных PostgreSQL.
         POSTGRES
-    )
+    );
     /// \~english @brief The type of the database (e.g., MYSQL, POSTGRES).
     /// \~russian @brief Тип базы данных (например, MYSQL, POSTGRES).
     DEFINE_ATTRIBUTE(TDBType    , Type, {})

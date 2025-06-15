@@ -12,10 +12,7 @@
 #include "iridium/io/uri.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Namespace for database related functionalities.
-/// \~russian @brief Пространство имен для функциональности, связанной с базами данных.
 namespace db {
 
 

@@ -13,7 +13,6 @@
 
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/implementation/async_queue.h"
-#include "iridium/io/implementation/event.h"
 
 
 using iridium::convertion::convert;

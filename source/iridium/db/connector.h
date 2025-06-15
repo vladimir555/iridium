@@ -14,7 +14,6 @@
 
 
 #include "iridium/pattern/initializable.h"
-//#include "iridium/caching/cached_value.h" // Commented out include
 
 #include <stdexcept>
 #include <string>

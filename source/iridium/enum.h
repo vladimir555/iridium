@@ -68,7 +68,7 @@ public: \
     TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
         for (auto const &i: map_enum_string) \
-            if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) { \
+            if (::iridium::lowerCase(i.second) == ::iridium::lowerCase(s)) { \
                 m_value = i.first; \
                 break; \
             } \
@@ -109,8 +109,8 @@ private: \
         auto m = std::map<TEnumInternal, std::string>(); \
         Enums UNUSED __VA_ARGS__; \
         auto i = Enums::enums.begin(); \
-        for (auto const &arg:  iridium::split(#__VA_ARGS__, ",")) { \
-            std::string name = iridium::trim(iridium::split(arg, "=").front()); \
+        for (auto const &arg:  ::iridium::split(#__VA_ARGS__, ",")) { \
+            std::string name = ::iridium::trim(::iridium::split(arg, "=").front()); \
             if (m.find(*i) == m.end()) \
                 (m)[*i++] = name; \
             else \
@@ -127,7 +127,7 @@ public: \
         if (e == UNKNOWN) { \
             auto message = "convert enum string '" + s + "' to enum " + std::string(#TEnum) + " error: valid enum keys:"; \
             for (auto const &i: getEnums()) \
-                message += std::string(" ") + static_cast<std::string>(TEnum(i)) + " = " + iridium::convertion::convert<std::string>(static_cast<int>(i)); \
+                message += std::string(" ") + static_cast<std::string>(TEnum(i)) + " = " + ::iridium::convertion::convert<std::string>(static_cast<int>(i)); \
             throw std::runtime_error(message); \
         } else \
             return e; \

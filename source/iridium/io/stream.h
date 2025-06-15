@@ -18,7 +18,6 @@
 #include <list>       // For std::list
 #include <cstddef>    // For size_t
 #include <cstdint>    // For uintptr_t
-//#include <functional> // Commented out in source
 
 
 namespace iridium {

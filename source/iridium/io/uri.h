@@ -8,16 +8,15 @@
 #define HEADER_URI_F2F08356_C16A_4981_92C6_32E1B85D4384
 
 
-#include "iridium/enum.h"        // For DEFINE_ENUM
-#include "iridium/smart_ptr.h"   // For DEFINE_CREATE, TSharedPtr, TConstSharedPtr
+#include "iridium/enum.h"               // For DEFINE_ENUM
+#include "iridium/smart_ptr.h"          // For DEFINE_CREATE, TSharedPtr, TConstSharedPtr
 #include "iridium/convertion/convert.h" // For DEFINE_CONVERT
 
-#include <memory>       // For std::shared_ptr
-#include <vector>       // Not directly used, but common utility
-#include <array>        // For TIPv4, TIPv6
-#include <unordered_map>// For TMapNameValue
-#include <set>          // Not directly used, but common utility
-#include <string>       // For std::string
+#include <memory>
+#include <vector>
+#include <array>
+#include <unordered_map>
+#include <set>
 
 
 // Examples of URI formats understood by this parser:
@@ -69,6 +68,8 @@ public:
         /// \~english @brief Local process execution.
         /// \~russian @brief Локальное выполнение процесса.
         PROCESS     = -7,
+        /// \~english @brief Shared memory stream.
+        /// \~russian @brief Межпроцессный обмен.
         IPC         = -8,
         /// \~english @brief Hypertext Transfer Protocol, default port 80.
         /// \~russian @brief Протокол передачи гипертекста, порт по умолчанию 80.
@@ -91,7 +92,7 @@ public:
         /// \~english @brief PostgreSQL database protocol, default port 5432.
         /// \~russian @brief Протокол базы данных PostgreSQL, порт по умолчанию 5432.
         POSTGRES    = 5432
-    )
+    );
 
     /// \~english @brief Macro likely defining a static `create` method or similar factory functionality
     ///     for creating shared pointers (`URI::TSharedPtr`) to `URI` instances.
