@@ -1316,9 +1316,9 @@ public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
     
     // Mocking interface methods
-    DEFINE_MOCK_METHOD(int, getValue, (int key))                  // int getValue(int key)
+    DEFINE_MOCK_METHOD(int, getValue, int))                  // int getValue(int key)
     DEFINE_MOCK_METHOD_CONST(std::string, getName)                // std::string getName() const
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data)) // void processData(const std::vector<int>& data)
+    DEFINE_MOCK_METHOD(void, processData, const std::vector<int> &) // void processData(const std::vector<int>& data)
 };
 @endcode
 The `DEFINE_MOCK_METHOD` macros take the return type, method name, and in parentheses, the types of the method's arguments (without variable names).
@@ -1350,9 +1350,9 @@ public:
 DEFINE_MOCK_CLASS(IMyDependency) {
 public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, (int key))
+    DEFINE_MOCK_METHOD(int, getValue, int)
     DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data))
+    DEFINE_MOCK_METHOD(void, processData, const std::vector<int> &)
 };
 // End of copied definitions
 
@@ -1384,7 +1384,7 @@ TEST(MyClassUsesDependency_Behavior) {
     IMyDependencyMock mockDep; // Create a mock instance
 
     // Define behavior for getValue
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) {
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) {
         // This is a lambda function: [=](int key_param) -> int { ... }
         // Parameter names in the lambda can be anything, but types must match those declared in DEFINE_MOCK_METHOD
         if (key == 1) return 100;
@@ -1393,14 +1393,14 @@ TEST(MyClassUsesDependency_Behavior) {
     };
 
     // Define behavior for getName (const method)
-    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep, ()) {
+    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep) {
         // Lambda for a method with no arguments: [=]() -> std::string { ... }
         return "MockedName";
     };
     
     // Define behavior for processData (void method)
     std::vector<int> received_data;
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {
         // Lambda for a void method: [=](const std::vector<int>& data_param) -> void { ... }
         received_data = data; // Copy data for verification
     };
@@ -1512,7 +1512,7 @@ public:
     // the mock must call it via DEFINE_MOCK_CONSTRUCTOR.
     DEFINE_MOCK_CONSTRUCTOR(CDataServiceImpl)
 
-    DEFINE_MOCK_METHOD(std::string, fetchData, (int id));
+    DEFINE_MOCK_METHOD(std::string, fetchData, int);
 };
 
 // File: DataConsumer.h
@@ -1554,7 +1554,7 @@ TEST(DataConsumer_UsesMockService) {
     CDataServiceImplMock mockService("MockedServiceInstance");
 
     // 2. Define behavior for the fetchData mock method
-    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, (int id)) {
+    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, int id) {
         if (id == 101) {
             return "mocked_payload_for_101";
         }
@@ -1611,11 +1611,11 @@ This macro should be called at the beginning of your test where you want to defi
 
 @subsubsection subsubsec_testing_sequence_expectations Expectations in a Sequence (DEFINE_MOCK_SEQUENCE_EXPECTATION)
 
-After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, (arg1, arg2, ...))` macro.
+After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, arg1, arg2, ...)` macro.
 -   `sequence_name`: The name of the previously defined sequence.
 -   `mock_object`: The same mock object.
 -   `method_name`: The name of the mocked method that is expected to be called.
--   `(arg1, arg2, ...)`: The expected arguments for this call, enclosed in parentheses. If there are no arguments, empty parentheses `()` are used.
+-   `(arg1, arg2, ...)`: The expected arguments for this call, enclosed in parentheses.
 
 Each call to `DEFINE_MOCK_SEQUENCE_EXPECTATION` adds one expectation to the specified sequence. The order of these macros defines the expected order of method calls.
 
@@ -1679,11 +1679,11 @@ TEST(ServiceOrderedTest) {
 
     // Add expectations to sequence s1
     // Expect mockDep.setup() to be called with no arguments
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup, ()); 
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup); 
     // Expect mockDep.processData() to be called with a specific vector
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, ({10, 20})); 
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, {10, 20}); 
     // Expect mockDep.getValue() to be called with argument 10
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, (10)); 
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, 10); 
 
     ServiceWithOrderedCalls service(&mockDep);
     service.initializeAndGetData(10); // This method should call mockDep methods in the specified order

@@ -1383,9 +1383,9 @@ public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
     
     // Мокирование методов интерфейса
-    DEFINE_MOCK_METHOD(int, getValue, (int key))                  // int getValue(int key)
-    DEFINE_MOCK_METHOD_CONST(std::string, getName)                // std::string getName() const
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data)) // void processData(const std::vector<int>& data)
+    DEFINE_MOCK_METHOD(int, getValue, int)          // int getValue(int key)
+    DEFINE_MOCK_METHOD_CONST(std::string, getName)  // std::string getName() const
+    DEFINE_MOCK_METHOD(void, processData, const std::vector<int> &) // void processData(const std::vector<int>& data)
 };
 @endcode
 Макросы `DEFINE_MOCK_METHOD` принимают тип возвращаемого значения, имя метода и в круглых скобках типы аргументов метода (без имен переменных).
@@ -1417,9 +1417,9 @@ public:
 DEFINE_MOCK_CLASS(IMyDependency) {
 public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, (int key))
+    DEFINE_MOCK_METHOD(int, getValue, int)
     DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>& data))
+    DEFINE_MOCK_METHOD(void, processData, const std::vector<int> &)
 };
 // Конец скопированных определений
 
@@ -1451,7 +1451,7 @@ TEST(MyClassUsesDependency_Behavior) {
     IMyDependencyMock mockDep; // Создаем экземпляр мока
 
     // Определяем поведение для getValue
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) {
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) {
         // Это лямбда-функция: [=](int key_param) -> int { ... }
         // Имена параметров в лямбде могут быть любыми, но типы должны совпадать с объявленными в DEFINE_MOCK_METHOD
         if (key == 1) return 100;
@@ -1460,14 +1460,14 @@ TEST(MyClassUsesDependency_Behavior) {
     };
 
     // Определяем поведение для getName (константный метод)
-    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep, ()) {
+    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep) {
         // Лямбда для метода без аргументов: [=]() -> std::string { ... }
         return "MockedName";
     };
     
     // Определяем поведение для processData (void метод)
     std::vector<int> received_data;
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {
         // Лямбда для void метода: [=](const std::vector<int>& data_param) -> void { ... }
         received_data = data; // Копируем данные для проверки
     };
@@ -1579,7 +1579,7 @@ public:
     // мок должен его вызвать через DEFINE_MOCK_CONSTRUCTOR.
     DEFINE_MOCK_CONSTRUCTOR(CDataServiceImpl)
 
-    DEFINE_MOCK_METHOD(std::string, fetchData, (int id));
+    DEFINE_MOCK_METHOD(std::string, fetchData, int);
 };
 
 // Файл: DataConsumer.h
@@ -1621,7 +1621,7 @@ TEST(DataConsumer_UsesMockService) {
     CDataServiceImplMock mockService("MockedServiceInstance");
 
     // 2. Задаем поведение для мок-метода fetchData
-    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, (int id)) {
+    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, int id) {
         if (id == 101) {
             return "mocked_payload_for_101";
         }
@@ -1678,11 +1678,11 @@ TEST(DataConsumer_UsesMockService) {
 
 @subsubsection subsubsec_testing_sequence_expectations Ожидания в последовательности (DEFINE_MOCK_SEQUENCE_EXPECTATION)
 
-После определения объекта последовательности, вы добавляете в нее ожидаемые вызовы с помощью макроса `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, (arg1, arg2, ...))`.
+После определения объекта последовательности, вы добавляете в нее ожидаемые вызовы с помощью макроса `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, arg1, arg2, ...)`.
 -   `sequence_name`: Имя ранее определенной последовательности.
 -   `mock_object`: Тот же мок-объект.
 -   `method_name`: Имя мокированного метода, который должен быть вызван.
--   `(arg1, arg2, ...)`: Ожидаемые аргументы для этого вызова, заключенные в круглые скобки. Если аргументов нет, используются пустые скобки `()`.
+-   `(arg1, arg2, ...)`: Ожидаемые аргументы для этого вызова, заключенные в круглые скобки.
 
 Каждый вызов `DEFINE_MOCK_SEQUENCE_EXPECTATION` добавляет одно ожидание в указанную последовательность. Порядок этих макросов определяет ожидаемый порядок вызовов методов.
 
@@ -1736,9 +1736,9 @@ TEST(ServiceOrderedTest) {
     // Определяем поведение для методов, чтобы они просто работали
     // (для проверки последовательности важно, чтобы вызовы происходили,
     // а не что они возвращают, если это не часть логики теста)
-    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep, ()) {};
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {};
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) { return key + 1; };
+    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep) {};
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {};
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) { return key + 1; };
 
     // Определяем последовательность 's1' для объекта 'mockDep'
     // Имя объекта последовательности будет sequence_s1
@@ -1746,11 +1746,11 @@ TEST(ServiceOrderedTest) {
 
     // Добавляем ожидания в последовательность s1
     // Ожидается вызов mockDep.setup() без аргументов
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup, ()); 
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup); 
     // Ожидается вызов mockDep.processData() с конкретным вектором
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, ({10, 20})); 
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, {10, 20}); 
     // Ожидается вызов mockDep.getValue() с аргументом 10
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, (10)); 
+    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, 10); 
 
     ServiceWithOrderedCalls service(&mockDep);
     service.initializeAndGetData(10); // Этот метод должен вызвать методы mockDep в указанном порядке

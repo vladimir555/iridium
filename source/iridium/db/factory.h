@@ -1,9 +1,3 @@
-/// \~english @brief Provides factory functions for creating database configurations and connectors.
-///     This header declares utility functions to simplify the process of obtaining
-///     database connector instances based on configuration or URI.
-/// \~russian @brief Предоставляет фабричные функции для создания конфигураций и коннекторов баз данных.
-///     Этот заголовочный файл объявляет служебные функции для упрощения процесса получения
-///     экземпляров коннекторов баз данных на основе конфигурации или URI.
 #pragma once
 
 
