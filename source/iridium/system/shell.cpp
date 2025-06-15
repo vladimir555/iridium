@@ -63,10 +63,11 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
                 // LOGT << event->stream->getURI() << " " << event->status;
 
                 if (event->stream == process &&
-                    checkOneOf(event->operation,
-                               io::Event::TOperation::WRITE,
-                               io::Event::TOperation::EOF_,
-                               io::Event::TOperation::TIMEOUT))
+                    checkOneOf(
+                        event->operation,
+                        io::Event::TOperation::READ,
+                        io::Event::TOperation::EOF_,
+                        io::Event::TOperation::TIMEOUT))
                 {
                     for (;;) {
                         auto buffer = process->read();
