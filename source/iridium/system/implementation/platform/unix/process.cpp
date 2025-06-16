@@ -115,10 +115,10 @@ void CProcessStream::initialize() {
            "posix_spawn_file_actions_adddup2, cerr_pipe"
         );
     
-        assertOK(
-            posix_spawn_file_actions_adddup2(&actions, 1, 2),
-           "posix_spawn_file_actions_adddup2"
-        );
+//        assertOK(
+//            posix_spawn_file_actions_adddup2(&actions, 1, 2),
+//           "posix_spawn_file_actions_adddup2"
+//        );
 
         assertOK(
             posix_spawn_file_actions_addclose(&actions, cin_pipe[1]),
@@ -162,7 +162,14 @@ void CProcessStream::initialize() {
             posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv.data(), environ),
            "posix_spawnp"
         );
-        
+
+        assertOK(
+             posix_spawn_file_actions_destroy(&actions),
+            "posix_spawn_file_actions_destroy");
+        assertOK(
+             posix_spawnattr_destroy(&attr),
+            "posix_spawnattr_destroy");
+
         m_pid = pid;
         
         //    auto r =
@@ -170,11 +177,11 @@ void CProcessStream::initialize() {
         //    LOGT << "posix_spawnp: " << r << " " << m_pid;
         //    assertOK(r, "posix_spawnp");
 
-        close(cin_pipe[1]);
+        close(cin_pipe[0]);
         close(cout_pipe[1]);
         close(cerr_pipe[1]);
 
-        m_fd_writer = cin_pipe[0];
+        m_fd_writer = cin_pipe[1];
         m_fd_reader = cout_pipe[0];
         
 //        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
@@ -313,6 +320,32 @@ IProcess::TState CProcessStream::getState() {
         .condition = condition,
         .exit_code = m_exit_code
     };
+}
+
+
+void CProcessStream::sendSignal(TSignal const &signal) {
+    pid_t pid = m_pid.load();
+    if (pid <= 0) {
+        throw std::runtime_error("sendSignal error: invalid or not running process");
+    }
+
+    int sig;
+
+    switch (signal) {
+        case TSignal::INTERRUPT:
+            sig = SIGINT;
+            break;
+        case TSignal::TERMINATE:
+            sig = SIGTERM;
+            break;
+        case TSignal::KILL:
+            sig = SIGKILL;
+            break;
+        default:
+            throw std::runtime_error("sendSignal error: unknown signal type '" + convert<std::string>(signal) + "'");
+    }
+
+    assertOK(kill(m_pid, sig), "kill");
 }
 
 

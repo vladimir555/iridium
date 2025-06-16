@@ -24,7 +24,15 @@ public:
         std::shared_ptr<int>    exit_code;
     };
 
-    virtual TState getState() = 0;
+    DEFINE_ENUM(
+        TSignal,
+        INTERRUPT,
+        TERMINATE,
+        KILL
+    );
+
+    virtual TState getState()   = 0;
+    virtual void   sendSignal(TSignal const &signal) = 0;
 };
 
 
@@ -33,6 +41,7 @@ public:
 
 
 DEFINE_CONVERT(std::string, iridium::system::IProcess::TState::TCondition)
+DEFINE_CONVERT(std::string, iridium::system::IProcess::TSignal)
 
 
 #endif // HEADER_PROCESS_70CE2A25_38CC_4D60_A1A7_B14F33DB94CF
