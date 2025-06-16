@@ -41,6 +41,7 @@ public:
     void finalize()     override;
 
     TState getState()   override;
+    void   sendSignal(TSignal const &signal) override;
 
 private:
     struct TStateInternal {
