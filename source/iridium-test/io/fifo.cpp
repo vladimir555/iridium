@@ -10,17 +10,17 @@ using iridium::io::implementation::CStreamPortFIFO;
 
 TEST(stream_port_fifo) {
     URI uri("fifo:///var/tmp/test_fifo");
-    auto ipcss = CStreamPortFIFO::create(uri, true);
-    auto ipcsc = CStreamPortFIFO::create(uri);
+    auto fifo_server = CStreamPortFIFO::create(uri, true);
+    auto fifo_client = CStreamPortFIFO::create(uri);
 
-    ipcss->initialize();
-    ipcsc->initialize();
+    fifo_server->initialize();
+    fifo_client->initialize();
 
-    ipcsc->write(Buffer::create("message"));
-    auto buffer = ipcss->read();
+    fifo_client->write(Buffer::create("message"));
+    auto buffer = fifo_server->read();
 
-    ipcsc->finalize();
-    ipcss->finalize();
+    fifo_client->finalize();
+    fifo_server->finalize();
 
     ASSERT(Buffer("message"), equal, *buffer);
 }
