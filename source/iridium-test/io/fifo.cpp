@@ -1,17 +1,17 @@
 #include <iridium/testing/tester.h>
 
-#include <iridium/system/implementation/ipc_stream.h>
+#include <iridium/io/implementation/stream_port_fifo.h>
 
 
 using iridium::io::URI;
 using iridium::io::Buffer;
-using iridium::system::implementation::CIPCStream;
+using iridium::io::implementation::CStreamPortFIFO;
 
 
-TEST(fifo) {
-    URI uri("ipc:///var/tmp/test_fifo");
-    auto ipcss = CIPCStream::create(uri, true);
-    auto ipcsc = CIPCStream::create(uri);
+TEST(stream_port_fifo) {
+    URI uri("fifo:///var/tmp/test_fifo");
+    auto ipcss = CStreamPortFIFO::create(uri, true);
+    auto ipcsc = CStreamPortFIFO::create(uri);
 
     ipcss->initialize();
     ipcsc->initialize();

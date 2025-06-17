@@ -17,7 +17,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CIPCStream CIPCStream;
+typedef platform::unix_::CStreamPortFIFO CStreamPortFIFO;
 
 
 } // platform

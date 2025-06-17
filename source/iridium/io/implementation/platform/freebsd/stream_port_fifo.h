@@ -12,7 +12,7 @@
 #ifdef FREEBSD_PLATFORM
 
 
-#include "../unix/shared_memory_stream_port.h"
+#include "../unix/stream_port_fifo.h"
 
 
 namespace iridium {
@@ -21,7 +21,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CIPCStream CIPCStream;
+typedef platform::unix_::CStreamPortFIFO CStreamPortFIFO;
 
 
 } // platform

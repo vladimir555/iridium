@@ -111,10 +111,10 @@ URI::URI(std::string const &source)
         else
             m_protocol = convert<TProtocol>(protocol);
         
-        if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE, TProtocol::IPC)) {
+        if (checkOneOf(m_protocol, TProtocol::PROCESS, TProtocol::FILE, TProtocol::FIFO)) {
             auto tokens = split(source, PROCESS_ARGUMENT_DELIMITER, 2);
             
-            if (checkOneOf(m_protocol, TProtocol::FILE, TProtocol::IPC) && tokens.size() > 1)
+            if (checkOneOf(m_protocol, TProtocol::FILE, TProtocol::FIFO) && tokens.size() > 1)
                 throw std::runtime_error("wrong '" + convert<std::string>(m_protocol) + "' path format");
 
             if (!tokens.empty())

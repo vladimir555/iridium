@@ -1,4 +1,4 @@
-#include "ipc_stream.h"
+#include "stream_port_fifo.h"
 
 
 #ifdef UNIX_PLATFORM
@@ -21,20 +21,20 @@ using std::string;
 
 
 namespace iridium {
-namespace system {
+namespace io {
 namespace implementation {
 namespace platform {
 namespace unix_ {
 
 
-CIPCStream::CIPCStream(io::URI const &uri, bool const &is_server)
+CStreamPortFIFO::CStreamPortFIFO(io::URI const &uri, bool const &is_server)
 :
     CStreamPort (uri),
     m_is_server (is_server)
 {}
 
 
-void CIPCStream::initialize() {
+void CStreamPortFIFO::initialize() {
     try {
         if (m_fd_reader || m_fd_writer)
             throw std::runtime_error("already initialized or not finalized");
@@ -62,7 +62,7 @@ void CIPCStream::initialize() {
 }
 
 
-void CIPCStream::finalize() {
+void CStreamPortFIFO::finalize() {
     if (m_fd_writer) {
         close(m_fd_writer);
         m_fd_writer = 0;
@@ -78,7 +78,7 @@ void CIPCStream::finalize() {
 } // unix_
 } // platform
 } // implementation
-} // system
+} // io
 } // iridium
 
 

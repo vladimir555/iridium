@@ -43,7 +43,7 @@ public:
         WSS         = -5,
         FILE        = -6,
         PROCESS     = -7,
-        IPC         = -8,
+        FIFO        = -8,
         HTTP        = 80,
         HTTPS       = 443,
         SSH         = 22,
