@@ -21,7 +21,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CSharedMemoryStreamPort CSharedMemoryStreamPort;
+typedef platform::unix_::CIPCStream CIPCStream;
 
 
 } // platform

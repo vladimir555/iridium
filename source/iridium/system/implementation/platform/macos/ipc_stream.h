@@ -8,21 +8,21 @@
 #ifdef MACOS_PLATFORM
 
 
-#include "../unix/shared_memory_stream_port.h"
+#include "../unix/ipc_stream.h"
 
 
 namespace iridium {
-namespace io {
+namespace system {
 namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CSharedMemoryStreamPort CSharedMemoryStreamPort;
+typedef platform::unix_::CIPCStream CIPCStream;
 
 
 } // platform
 } // implementation
-} // io
+} // system
 } // iridium
 
 
