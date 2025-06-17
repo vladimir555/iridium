@@ -13,10 +13,10 @@ project(iridium LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
+#set(CMAKE_BUILD_TYPE Release)
+#add_compile_options(-O3 -Wall -Wextra -DNDEBUG)
 
 if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
-#    set(CMAKE_BUILD_TYPE Release)
-#    add_compile_options(-O3 -Wall -Wextra -DNDEBUG)
     set(CMAKE_BUILD_TYPE Debug)
     add_compile_options(-O0 -Wall -Wextra -g)
 #    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -g -O0 -fsanitize=address")
