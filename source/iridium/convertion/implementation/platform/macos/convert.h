@@ -15,6 +15,14 @@
 #include "../unix/convert.h"
 
 
+template<>
+std::string iridium::convertion::implementation::convert(long const &value);
+
+
+template<>
+std::string iridium::convertion::implementation::convert(unsigned long const &value);
+
+
 #endif // MACOS_PLATFORM
 
 
