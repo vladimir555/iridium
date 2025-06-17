@@ -43,7 +43,7 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::string const &args)
 :
-    CStreamPort(URI("process://" + app + " " + args)),
+    CStreamPort         (URI("process://" + app + " " + args)),
     m_state_internal    ({}),
     m_app               (app),
     m_args              (assign(split(args, " "))),
@@ -342,7 +342,8 @@ void CProcessStream::sendSignal(TSignal const &signal) {
             sig = SIGKILL;
             break;
         default:
-            throw std::runtime_error("sendSignal error: unknown signal type '" + convert<std::string>(signal) + "'");
+            throw std::runtime_error("sendSignal error: unknown signal type '" +
+                convert<std::string>(signal) + "'");
     }
 
     assertOK(kill(m_pid, sig), "kill");

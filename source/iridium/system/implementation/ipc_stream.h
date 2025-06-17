@@ -3,19 +3,21 @@
 
 
 #include "iridium/platform.h"
-#include PLATFORM_HEADER(shared_memory_stream_port.h)
+
+
+#include PLATFORM_HEADER(ipc_stream.h)
 
 
 namespace iridium {
-namespace io {
+namespace system {
 namespace implementation {
 
 
-typedef platform::CSharedMemoryStreamPort CSharedMemoryStreamPort;
+typedef platform::CIPCStream CIPCStream;
 
 
 } // implementation
-} // io
+} // system
 } // iridium
 
 
