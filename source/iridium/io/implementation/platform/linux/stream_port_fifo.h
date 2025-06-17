@@ -8,11 +8,11 @@
 #ifdef LINUX_PLATFORM
 
 
-#include "../unix/ipc_stream.h"
+#include "../unix/stream_port_fifo.h"
 
 
 namespace iridium {
-namespace system {
+namespace io {
 namespace implementation {
 namespace platform {
 
@@ -22,7 +22,7 @@ typedef platform::unix_::CStreamPortFIFO CStreamPortFIFO;
 
 } // platform
 } // implementation
-} // system
+} // io
 } // iridium
 
 
