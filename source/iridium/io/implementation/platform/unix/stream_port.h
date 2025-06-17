@@ -42,7 +42,7 @@ public:
     URI::TSharedPtr         getURI() const override;
 
 protected:
-    void            setBlockingMode(bool const &is_blocking);
+    void setBlockingMode(bool const &is_blocking);
 
     std::atomic<int>    m_fd_reader;
     std::atomic<int>    m_fd_writer;

@@ -22,17 +22,17 @@
 
 
 namespace iridium {
-namespace system {
+namespace io {
 namespace implementation {
 namespace platform {
 namespace unix_ {
 
 
-class CIPCStream: public io::implementation::CStreamPort {
+class CStreamPortFIFO: public io::implementation::CStreamPort {
 public:
-    DEFINE_CREATE(CIPCStream)
-    CIPCStream(io::URI const &uri, bool const &is_server = false);
-    virtual ~CIPCStream() = default;
+    DEFINE_CREATE(CStreamPortFIFO)
+    CStreamPortFIFO(io::URI const &uri, bool const &is_server = false);
+    virtual ~CStreamPortFIFO() = default;
 
     void    initialize() override;
     void    finalize() override;
@@ -41,12 +41,12 @@ private:
     template<typename TResult>
     TResult assertOK(TResult const &&result, std::string const &message);
 
-    bool        m_is_server;
+    bool    m_is_server;
 };
 
 
 template<typename TResult>
-TResult CIPCStream::assertOK(TResult const &&result, std::string const &message) {
+TResult CStreamPortFIFO::assertOK(TResult const &&result, std::string const &message) {
     using convertion::convert;
     using std::string;
     if (reinterpret_cast<int>(result) < 0) {
@@ -64,7 +64,7 @@ TResult CIPCStream::assertOK(TResult const &&result, std::string const &message)
 } // unix_
 } // platform
 } // implementation
-} // system
+} // io
 } // iridium
 
 

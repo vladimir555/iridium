@@ -32,7 +32,7 @@ public:
     Buffer(std::list<Buffer::TSharedPtr> const &buffers);
     /// @brief
     /// @tparam ...TArgs
-    /// @param ...args
+    /// @param ... args
     template<typename ... TArgs>
     Buffer(TArgs ... args);
     /// @brief
