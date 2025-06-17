@@ -25,13 +25,25 @@ Buffer::Buffer(std::list<Buffer::TSharedPtr> const &buffers) {
 }
 
 
-//size_t Buffer::findLast(std::string const &str) {
-//    auto i = std::find_end(begin(), end(), str.begin(), str.end());
-//    if (i == end())
-//        return std::string::npos;
+bool Buffer::checkSuffixEqual(std::string const &suffix) const {
+    return
+        size() >= suffix.size() &&
+        std::equal(suffix.rbegin(), suffix.rend(), this->rbegin());
+}
 
-//    return i - begin();
-//}
+
+bool Buffer::checkSuffixEqual(uint8_t const * const suffix, size_t const &size) const {
+    return
+        this->size() >= size &&
+        std::equal(suffix, suffix + size, this->data() + (this->size() - size));
+}
+
+
+bool Buffer::checkSuffixEqual(std::vector<uint8_t> const &suffix) const {
+    return
+        size() >= suffix.size() &&
+        std::equal(suffix.begin(), suffix.end(), this->end() - suffix.size());
+}
 
 
 } // io

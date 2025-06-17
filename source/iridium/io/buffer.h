@@ -17,20 +17,44 @@ namespace iridium {
 namespace io {
 
 
-class Buffer: public std::vector<unsigned char> {
+class Buffer: public std::vector<uint8_t> {
 public:
     DEFINE_CREATE(Buffer)
     Buffer() = default;
+    /// @brief
+    /// @param str
     Buffer(char const * const str);
+    /// @brief
+    /// @param str
     Buffer(std::string const &str);
+    /// @brief
+    /// @param buffers
     Buffer(std::list<Buffer::TSharedPtr> const &buffers);
+    /// @brief
+    /// @tparam ...TArgs
+    /// @param ...args
     template<typename ... TArgs>
-    Buffer(TArgs ... args)
-    :
-        std::vector<unsigned char>(args ...)
-    {}
-//    size_t findLast(std::string const &str);
+    Buffer(TArgs ... args);
+    /// @brief
+    /// @param suffix
+    /// @return
+    bool checkSuffixEqual(std::string const &suffix) const;
+    /// @brief
+    /// @param suffix
+    /// @return
+    bool checkSuffixEqual(uint8_t const * const suffix, size_t const &size) const;
+    /// @brief
+    /// @param suffix
+    /// @return
+    bool checkSuffixEqual(std::vector<uint8_t> const &suffix) const;
 };
+
+
+template<typename ... TArgs>
+Buffer::Buffer(TArgs ... args)
+:
+    std::vector<unsigned char>(args ...)
+{}
 
 
 } // io
