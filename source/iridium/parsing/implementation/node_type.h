@@ -68,7 +68,7 @@ public:
     ///
     typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name, TValue const &value) override;
     ///
-    void                                        delChild(std::string const &name) override;
+    void                                        delChilds(std::string const &name) override;
     ///
     typename INodeType<TValue>::TSharedPtr      clone() const override;
 
@@ -306,7 +306,7 @@ typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(std::string c
 
 
 template<typename TValue>
-void CNodeType<TValue>::delChild(std::string const &name) {
+void CNodeType<TValue>::delChilds(std::string const &name) {
     m_nodes.remove_if(
         [&] (auto const &node) {
             return node->getName() == name;

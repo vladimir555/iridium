@@ -74,7 +74,7 @@ public:
     ///
     virtual typename INodeType::TSharedPtr              addChild(std::string const &name, TValue const &value) = 0;
     ///
-    virtual void                                        delChild(std::string const &name) = 0;
+    virtual void                                        delChilds(std::string const &name) = 0;
 };
 
 
