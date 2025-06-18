@@ -411,7 +411,7 @@ DEFINE_MACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
         iridium::parsing::serialization::NodeView<void> \
         (node, iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
         T##class_name(): iridium::parsing::serialization::NodeView<void> \
-        (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+        (iridium::parsing::serialization::convertCamelToSplittedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
 
 
 #define DEFINE_NODE_LIST_END(class_name) \
