@@ -23,35 +23,16 @@ using implementation::config;
 
 
 #define DEFINE_CONVERT(TTo, TFrom) \
-namespace iridium { \
-namespace convertion { \
-namespace implementation { \
 template<> \
-TTo convert(TFrom const &value); \
-} } }
+TTo iridium::convertion::implementation::convert(TFrom const &value);
 
 
 
-#define IMPLEMENT_CONVERT(TTo, TFrom, TFunc) \
-namespace iridium { \
-namespace convertion { \
-namespace implementation { \
-template<> \
-TTo convert(TFrom const &from) { \
-    return TFunc(from); \
-} \
-} } }
-
-
-
-/*
 #define IMPLEMENT_CONVERT(TTo, TFrom, TFunc) \
 template<> \
 TTo iridium::convertion::implementation::convert(TFrom const &from) { \
     return TFunc(from); \
 }
-*/
-
 
 
 #endif // HEADER_CONVERT_A1637EFD_3229_474D_BFEB_E9EAD7FF0C20

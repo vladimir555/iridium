@@ -35,7 +35,7 @@ TResult convert(TValue const &) {
 //    throw std::runtime_error("convertion error: no specialization exists for this type");
     throw std::runtime_error(
         std::string("convertion error: no specialization exists for types TValue(") +
-        typeid(TValue).name() + "), TResult(" + typeid(TValue).name() + ")"
+        typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
     );
 }
 
