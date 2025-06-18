@@ -57,7 +57,10 @@ void CStreamPortFIFO::initialize() {
         setBlockingMode(false);
     } catch (std::exception const &e) {
         finalize();
-        throw std::runtime_error(std::string("ipc stream initialization error: ") + e.what());
+        throw std::runtime_error(
+            std::string("fifo ") + (m_is_server ? "server" : "client")
+             + " stream initialization error: " + e.what());
+
     }
 }
 
