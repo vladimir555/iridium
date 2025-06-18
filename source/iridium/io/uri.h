@@ -111,11 +111,14 @@ private:
 } // iridium
 
 
-DEFINE_CONVERT(iridium::io::URI::TIPv4, std::string)
-DEFINE_CONVERT(std::string, iridium::io::URI::TIPv4)
+DEFINE_CONVERT(std::string, iridium::io::URI::TProtocol)
+DEFINE_CONVERT(iridium::io::URI::TProtocol, std::string)
 
-DEFINE_CONVERT(iridium::io::URI, std::string)
+DEFINE_CONVERT(std::string, iridium::io::URI::TIPv4)
+DEFINE_CONVERT(iridium::io::URI::TIPv4, std::string)
+
 DEFINE_CONVERT(std::string, iridium::io::URI)
+DEFINE_CONVERT(iridium::io::URI, std::string)
 
 
 #endif // HEADER_URI_F2F08356_C16A_4981_92C6_32E1B85D4384
