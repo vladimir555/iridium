@@ -26,7 +26,7 @@ typedef platform::unix_::CStreamPortClient CStreamPortClient;
 } // iridium
 
 
-#endif // LINUX_PLATFORM
+#endif // MACOS_PLATFORM
 
 
 #endif // HEADER_SHARED_MEMORY_STREAM_PORT_D7938B4E_10F9_41ED_B249_C8402B16E0BF
