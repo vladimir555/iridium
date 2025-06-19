@@ -13,7 +13,7 @@ namespace io {
 namespace implementation {
 
 
-typedef platform::StreamPortClient StreamPortClient;
+typedef platform::CStreamPortClient CStreamPortClient;
 
 
 } // implementation

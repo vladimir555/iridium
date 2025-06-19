@@ -27,18 +27,22 @@ namespace platform {
 namespace unix_ {
 
 
-StreamPortClient::StreamPortClient(io::URI const &uri)
+CStreamPortClient::CStreamPortClient(io::URI const &uri)
 :
     CStreamPort (uri)
 {}
 
 
-void StreamPortClient::initialize() {
+void CStreamPortClient::initialize() {
     try {
         if (m_fd_reader != -1 || m_fd_writer != -1)
             throw std::runtime_error("already initialized or not finalized");
 
-        std::string path = "\0" + m_uri->getPath(); // abstract namespace
+        std::string path;
+        if (m_uri->getProtocol() == URI::TProtocol::IPC)
+            path = "\0" + m_uri->getPath(); // abstract namespace
+        else
+            throw std::runtime_error("protocol '" + convert<string>(m_uri->getProtocol()) + "' not implemented");
 
         struct sockaddr_un addr;
         memset(&addr, 0, sizeof(addr));
@@ -64,7 +68,7 @@ void StreamPortClient::initialize() {
         setBlockingMode(false);
 
     } catch (const std::exception& e) {
-        finalize();
+        closeFDs();
         throw std::runtime_error(
             std::string("unix socket client initialization error: ") + e.what()
         );
@@ -72,16 +76,8 @@ void StreamPortClient::initialize() {
 }
 
 
-void StreamPortClient::finalize() {
-    if (m_fd_writer) {
-        close(m_fd_writer);
-        m_fd_writer = 0;
-    }
-
-    if (m_fd_reader) {
-        close(m_fd_reader);
-        m_fd_reader = 0;
-    }
+void CStreamPortClient::finalize() {
+    closeFDs();
 }
 
 

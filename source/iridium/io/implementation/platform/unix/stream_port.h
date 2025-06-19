@@ -43,6 +43,7 @@ public:
 
 protected:
     void setBlockingMode(bool const &is_blocking);
+    void closeFDs();
 
     std::atomic<int>    m_fd_reader;
     std::atomic<int>    m_fd_writer;
