@@ -12,7 +12,7 @@
 #ifdef FREEBSD_PLATFORM
 
 
-#include "../unix/stream_port_ipc_client.h"
+#include "../unix/stream_port_client.h"
 
 
 namespace iridium {
@@ -21,7 +21,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CStreamPortIPCClient CStreamPortIPCClient;
+typedef platform::unix_::StreamPortClient StreamPortClient;
 
 
 } // platform
