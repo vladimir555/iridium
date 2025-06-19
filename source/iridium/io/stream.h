@@ -36,7 +36,7 @@ public:
     virtual URI::TSharedPtr         getURI()        const = 0;
 };
 
-    
+
 class IStreamReader: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamReader)
@@ -63,22 +63,11 @@ public:
 };
 
 
-//bool operator < (IStream::TSharedPtr        const &l, IStream::TSharedPtr       const &r);
-//bool operator < (IStream::TSharedPtr        const &l, IStream::TConstSharedPtr  const &r);
-//bool operator < (IStream::TSharedPtr        const &l, IStream::TWeakPtr         const &r);
-//bool operator < (IStream::TSharedPtr        const &l, IStream::TConstWeakPtr    const &r);
-//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TSharedPtr       const &r);
-//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TConstSharedPtr  const &r);
-//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TWeakPtr         const &r);
-//bool operator < (IStream::TConstSharedPtr   const &l, IStream::TConstWeakPtr    const &r);
-//bool operator < (IStream::TWeakPtr          const &l, IStream::TSharedPtr       const &r);
-//bool operator < (IStream::TWeakPtr          const &l, IStream::TConstSharedPtr  const &r);
-//bool operator < (IStream::TWeakPtr          const &l, IStream::TWeakPtr         const &r);
-//bool operator < (IStream::TWeakPtr          const &l, IStream::TConstWeakPtr    const &r);
-//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TSharedPtr       const &r);
-//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TConstSharedPtr  const &r);
-//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TWeakPtr         const &r);
-//bool operator < (IStream::TConstWeakPtr     const &l, IStream::TConstWeakPtr    const &r);
+class IStreamAcceptor: public virtual IStream {
+public:
+    DEFINE_INTERFACE(IStreamAcceptor)
+    virtual std::list<IStreamPort::TSharedPtr> accept() = 0;
+};
 
 
 } // io
