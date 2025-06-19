@@ -57,4 +57,12 @@ struct std::hash<iridium::io::Event::TSharedPtr> {
 };
 
 
+DEFINE_CONVERT(std::string, iridium::io::Event::TOperation)
+DEFINE_CONVERT(iridium::io::Event::TOperation, std::string)
+
+
+DEFINE_CONVERT(std::string, iridium::io::Event::TStatus)
+DEFINE_CONVERT(iridium::io::Event::TStatus, std::string)
+
+
 #endif // HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
