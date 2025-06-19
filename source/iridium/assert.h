@@ -45,6 +45,12 @@ T *assertExists(T *value, std::string const &error) {
 }
 
 
+template<typename T>
+T *assertExists(T *value, char const *error) {
+    return assertExists(value, std::runtime_error(error)); // ----->
+}
+
+
 template<typename T, typename TException>
 std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, TException const &exception) {
     if (static_cast<bool>(value))
@@ -56,6 +62,12 @@ std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, TException cons
 
 template<typename T>
 std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, std::string const &error) {
+    return assertExists(value, std::runtime_error(error)); // ----->
+}
+
+
+template<typename T>
+std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, char const *error) {
     return assertExists(value, std::runtime_error(error)); // ----->
 }
 
