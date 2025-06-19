@@ -35,7 +35,7 @@ CStreamPortClient::CStreamPortClient(io::URI const &uri)
 
 void CStreamPortClient::initialize() {
     try {
-        if (m_fd_reader != -1 || m_fd_writer != -1)
+        if (m_fd_reader || m_fd_writer)
             throw std::runtime_error("already initialized or not finalized");
 
         std::string path;
