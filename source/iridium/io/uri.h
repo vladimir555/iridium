@@ -43,8 +43,7 @@ public:
         WSS         = -5,
         FILE        = -6,
         PROCESS     = -7,
-        FIFO        = -8,
-        IPC         = -9, // unix:// or windows named pipe
+        IPC         = -8, // unix:// or windows named pipe
         HTTP        = 80,
         HTTPS       = 443,
         SSH         = 22,
