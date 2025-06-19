@@ -19,9 +19,9 @@ namespace implementation {
 namespace platform {
 
 
-class CStreamPortIPCClient: virtual public IStreamPort, public pattern::NonCopyable {
+class StreamPortClient: virtual public IStreamPort, public pattern::NonCopyable {
 protected:
-    CStreamPortIPCClient(URI const &) {
+    StreamPortClient(URI const &) {
         throw std::runtime_error("not implemented for emscripten");
     }
     virtual ~CSharedMemoryPort();

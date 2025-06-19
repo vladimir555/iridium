@@ -28,11 +28,11 @@ namespace platform {
 namespace unix_ {
 
 
-class CStreamPortIPCClient: public io::implementation::CStreamPort {
+class StreamPortClient: public io::implementation::CStreamPort {
 public:
-    DEFINE_CREATE(CStreamPortIPCClient)
-    CStreamPortIPCClient(io::URI const &uri);
-    virtual ~CStreamPortIPCClient() = default;
+    DEFINE_CREATE(StreamPortClient)
+    StreamPortClient(io::URI const &uri);
+    virtual ~StreamPortClient() = default;
 
     void    initialize() override;
     void    finalize() override;
@@ -44,7 +44,7 @@ private:
 
 
 template<typename TResult>
-TResult CStreamPortIPCClient::assertOK(TResult const &&result, std::string const &message) {
+TResult StreamPortClient::assertOK(TResult const &&result, std::string const &message) {
     using convertion::convert;
     using std::string;
     if (reinterpret_cast<int>(result) < 0) {

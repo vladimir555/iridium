@@ -1,4 +1,4 @@
-#include "stream_port_ipc_client.h"
+#include "stream_port_client.h"
 
 
 #ifdef UNIX_PLATFORM
@@ -27,13 +27,13 @@ namespace platform {
 namespace unix_ {
 
 
-CStreamPortIPCClient::CStreamPortIPCClient(io::URI const &uri)
+StreamPortClient::StreamPortClient(io::URI const &uri)
 :
     CStreamPort (uri)
 {}
 
 
-void CStreamPortIPCClient::initialize() {
+void StreamPortClient::initialize() {
     try {
         if (m_fd_reader != -1 || m_fd_writer != -1)
             throw std::runtime_error("already initialized or not finalized");
@@ -72,7 +72,7 @@ void CStreamPortIPCClient::initialize() {
 }
 
 
-void CStreamPortIPCClient::finalize() {
+void StreamPortClient::finalize() {
     if (m_fd_writer) {
         close(m_fd_writer);
         m_fd_writer = 0;
