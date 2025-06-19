@@ -39,9 +39,9 @@ private:
 };
 
 
-} // namespace platform
-} // namespace implementation
-} // namespace io
+} // platform
+} // implementation
+} // io
 } // iridium
 
 
