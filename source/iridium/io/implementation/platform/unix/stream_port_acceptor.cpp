@@ -105,9 +105,8 @@ std::list<IStreamPort::TSharedPtr> CStreamPortAcceptor::accept() {
                     break;
                 else
                     assertOK(peer_fd, "accept");
-
-                peers.push_back(CStreamPortPeer::create(*m_uri, peer_fd));
             }
+            peers.push_back(CStreamPortPeer::create(*m_uri, peer_fd));
         }
     } catch (std::exception const &e) {
         throw std::runtime_error(string("stream port accepting error: ") + e.what());
