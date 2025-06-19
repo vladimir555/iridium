@@ -5,7 +5,7 @@
 #include "iridium/platform.h"
 
 
-#include PLATFORM_HEADER(stream_port_fifo.h)
+#include PLATFORM_HEADER(stream_port_ipc_client.h)
 
 
 namespace iridium {
@@ -13,7 +13,7 @@ namespace io {
 namespace implementation {
 
 
-typedef platform::CStreamPortFIFO CStreamPortFIFO;
+typedef platform::CStreamPortIPCClient CStreamPortIPCClient;
 
 
 } // implementation

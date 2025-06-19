@@ -8,7 +8,7 @@
 #ifdef MACOS_PLATFORM
 
 
-#include "../unix/stream_port_fifo.h"
+#include "../unix/stream_port_ipc_client.h"
 
 
 namespace iridium {
@@ -17,7 +17,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CStreamPortFIFO CStreamPortFIFO;
+typedef platform::unix_::CStreamPortIPCClient CStreamPortIPCClient;
 
 
 } // platform
