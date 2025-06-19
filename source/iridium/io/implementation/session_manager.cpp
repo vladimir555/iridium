@@ -7,7 +7,6 @@
 #include "iridium/threading/implementation/worker_pool.h"
 #include "iridium/io/implementation/context_manager.h"
 #include "iridium/items.h"
-#include "event.h"
 
 #include <set>
 
