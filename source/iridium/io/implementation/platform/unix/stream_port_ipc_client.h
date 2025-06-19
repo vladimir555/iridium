@@ -28,11 +28,11 @@ namespace platform {
 namespace unix_ {
 
 
-class CStreamPortFIFO: public io::implementation::CStreamPort {
+class CStreamPortIPCClient: public io::implementation::CStreamPort {
 public:
-    DEFINE_CREATE(CStreamPortFIFO)
-    CStreamPortFIFO(io::URI const &uri, bool const &is_server = false);
-    virtual ~CStreamPortFIFO() = default;
+    DEFINE_CREATE(CStreamPortIPCClient)
+    CStreamPortIPCClient(io::URI const &uri);
+    virtual ~CStreamPortIPCClient() = default;
 
     void    initialize() override;
     void    finalize() override;
@@ -40,13 +40,11 @@ public:
 private:
     template<typename TResult>
     TResult assertOK(TResult const &&result, std::string const &message);
-
-    bool    m_is_server;
 };
 
 
 template<typename TResult>
-TResult CStreamPortFIFO::assertOK(TResult const &&result, std::string const &message) {
+TResult CStreamPortIPCClient::assertOK(TResult const &&result, std::string const &message) {
     using convertion::convert;
     using std::string;
     if (reinterpret_cast<int>(result) < 0) {
