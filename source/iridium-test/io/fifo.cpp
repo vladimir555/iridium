@@ -5,13 +5,13 @@
 
 using iridium::io::URI;
 using iridium::io::Buffer;
-//using iridium::io::implementation::StreamPortClient;
+using iridium::io::implementation::CStreamPortClient;
 
 
 TEST(stream_port_fifo) {
-//    URI uri("fifo:///var/tmp/test_fifo");
-//    auto fifo_server = StreamPortClient::create(uri);
-//    auto fifo_client = StreamPortClient::create(uri);
+    URI uri("ipc://test_unix_socket");
+    auto client_stream = CStreamPortClient::create(uri);
+//    auto fifo_client = CStreamPortClient::create(uri);
 //
 //    fifo_server->initialize();
 //    fifo_client->initialize();

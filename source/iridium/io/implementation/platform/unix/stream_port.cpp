@@ -141,6 +141,19 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
 }
 
 
+void CStreamPort::closeFDs() {
+    if (m_fd_writer) {
+        close(m_fd_writer);
+        m_fd_writer = 0;
+    }
+
+    if (m_fd_reader) {
+        close(m_fd_reader);
+        m_fd_reader = 0;
+    }
+}
+
+
 } // unix_
 } // platform
 } // implementation

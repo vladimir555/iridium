@@ -1,0 +1,13 @@
+#ifndef HEADER_STREAM_PORT_ACCEPTOR_E1B65061_BBD4_4F84_A97C_089ABAF85787
+#define HEADER_STREAM_PORT_ACCEPTOR_E1B65061_BBD4_4F84_A97C_089ABAF85787
+
+
+namespace iridium {
+namespace io {
+namespace implementation {
+} // implementation
+} // io
+} // iridium
+
+
+#endif // HEADER_STREAM_PORT_ACCEPTOR_E1B65061_BBD4_4F84_A97C_089ABAF85787

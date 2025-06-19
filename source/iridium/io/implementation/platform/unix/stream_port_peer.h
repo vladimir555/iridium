@@ -1,6 +1,5 @@
-// Файл: shared_memory_stream_port.h
-#ifndef HEADER_SHARED_MEMORY_STREAM_PORT_6B6C3504_F50F_4B5E_AC0E_A0363F259C2F
-#define HEADER_SHARED_MEMORY_STREAM_PORT_6B6C3504_F50F_4B5E_AC0E_A0363F259C2F
+#ifndef HEADER_STREAM_PORT_PEER_AC935D90_653E_4C59_8ED4_07CBA37022CE
+#define HEADER_STREAM_PORT_PEER_AC935D90_653E_4C59_8ED4_07CBA37022CE
 
 
 #include "iridium/platform.h"
@@ -28,10 +27,10 @@ namespace platform {
 namespace unix_ {
 
 
-class CStreamPortClient: public io::implementation::CStreamPort {
+class CStreamPortPeer: public io::implementation::CStreamPort {
 public:
-    DEFINE_IMPLEMENTATION(CStreamPortClient)
-    CStreamPortClient(io::URI const &uri);
+    DEFINE_IMPLEMENTATION(CStreamPortPeer)
+    CStreamPortPeer(URI const &uri, int const &fd);
 
     void initialize() override;
     void finalize() override;
@@ -48,4 +47,4 @@ public:
 #endif // UNIX_PLATFORM
 
 
-#endif // HEADER_SHARED_MEMORY_STREAM_PORT_6B6C3504_F50F_4B5E_AC0E_A0363F259C2F
+#endif // HEADER_STREAM_PORT_PEER_AC935D90_653E_4C59_8ED4_07CBA37022CE
