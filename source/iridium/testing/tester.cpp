@@ -5,6 +5,7 @@
 #include "iridium/strings.h"
 #include "iridium/assert.h"
 #include "iridium/items.h"
+#include "iridium/enum.h"
 
 #include "iridium/parsing/implementation/parser_json.h"
 

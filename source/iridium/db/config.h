@@ -37,7 +37,7 @@ DEFINE_ROOT_NODE_END()
 } // iridium
 
 
-DEFINE_CONVERT(std::string, iridium::db::config::TDatebase::TDBType)
+DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)
 
 
 #endif // HEADER_CONFIG_08F54573_BC06_4817_9AE5_35A3BC49E892

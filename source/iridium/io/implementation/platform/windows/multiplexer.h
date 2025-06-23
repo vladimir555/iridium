@@ -9,10 +9,10 @@
 
 
 #include "iridium/io/multiplexer.h"
-
 #include "iridium/threading/synchronized.h"
 
 #include <unordered_map>
+#include <mutex>
 
 #include <Windows.h>
 
@@ -21,6 +21,7 @@ namespace iridium {
 namespace io {
 namespace implementation {
 namespace platform {
+
 
 class CMultiplexer : public IMultiplexer, public threading::Synchronized<std::mutex> {
 public:

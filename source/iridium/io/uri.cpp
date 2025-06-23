@@ -12,9 +12,6 @@ using iridium::convertion::convert;
 using iridium::convertion::convertPtr;
 
 
-IMPLEMENT_ENUM(iridium::io::URI::TProtocol)
-
-
 namespace iridium {
 namespace io {
 
@@ -311,5 +308,6 @@ IMPLEMENT_CONVERT(iridium::io::URI::TIPv4, std::string, convertStringToIPv4)
 IMPLEMENT_CONVERT(std::string, iridium::io::URI::TIPv4, convertIPv4ToString)
 
 
+IMPLEMENT_ENUM(iridium::io::URI::TProtocol)
 IMPLEMENT_CONVERT(iridium::io::URI, std::string, createURI)
 IMPLEMENT_CONVERT(std::string, iridium::io::URI, getAddress)

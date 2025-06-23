@@ -110,8 +110,7 @@ private:
 } // iridium
 
 
-DEFINE_CONVERT(std::string, iridium::io::URI::TProtocol)
-DEFINE_CONVERT(iridium::io::URI::TProtocol, std::string)
+DEFINE_ENUM_CONVERT(iridium::io::URI::TProtocol)
 
 DEFINE_CONVERT(std::string, iridium::io::URI::TIPv4)
 DEFINE_CONVERT(iridium::io::URI::TIPv4, std::string)

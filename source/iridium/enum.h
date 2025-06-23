@@ -111,7 +111,7 @@ public: \
     static std::string convert(TEnum::TEnumInternal const &e) { \
         return convert(TEnum(e)); \
     } \
-    static std::string convert(std::list<TEnum::TEnumInternal> const &enums_) { \
+    static std::string convert(std::list<TEnum> const &enums_) { \
         std::string result; \
         for (auto const &e: enums_) \
             result += convert(e) + ", "; \
@@ -127,6 +127,7 @@ public: \
         return result; \
     } \
 };
+
 //DEFINE_CONVERT(TEnum, std::string)
 //DEFINE_CONVERT(std::string, TEnum)
 //DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
@@ -143,16 +144,22 @@ namespace std { \
 }
 
 
+#define DEFINE_ENUM_CONVERT(TEnum) \
+DEFINE_CONVERT(TEnum, std::string) \
+DEFINE_CONVERT(std::string, TEnum) \
+DEFINE_CONVERT(std::string, std::list<TEnum>) \
+DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
+
 /// use not in namespace, todo: private enum
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = -1; \
 std::map<TEnum::TEnumInternal, std::string> const TEnum::map_enum_string(TEnum::generateMap()); \
 IMPLEMENT_CONVERT(TEnum, std::string, TEnum::convert) \
-IMPLEMENT_CONVERT(std::string, TEnum::TEnumInternal, TEnum::convert) \
 IMPLEMENT_CONVERT(std::string, TEnum, TEnum::convert) \
-IMPLEMENT_CONVERT(std::string, std::list<TEnum::TEnumInternal>, TEnum::convert)
+IMPLEMENT_CONVERT(std::string, TEnum::TEnumInternal, TEnum::convert)
 
+//IMPLEMENT_CONVERT(std::string, std::list<TEnum>, TEnum::convert)
 
 #endif // HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
 

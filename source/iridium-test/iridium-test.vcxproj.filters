@@ -27,13 +27,7 @@
     <ClCompile Include="db\postgres.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="io\kevent.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="io\socket.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="io\streams.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="logging\logger.cpp">
@@ -54,9 +48,6 @@
     <ClCompile Include="pattern\fsm.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="pattern\fsm_switch.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="testing\example.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -69,10 +60,11 @@
     <ClCompile Include="io\uri.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pattern\fsm_switch.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
+    <ClCompile Include="pattern\observer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="system\process.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
