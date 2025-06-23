@@ -8,14 +8,14 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#ifndef HEADER_SOCKET_51FA6227_172E_42DD_BF9E_98E03940D246
-#define HEADER_SOCKET_51FA6227_172E_42DD_BF9E_98E03940D246
+#ifndef HEADER_WSA_51FA6227_172E_42DD_BF9E_98E03940D246
+#define HEADER_WSA_51FA6227_172E_42DD_BF9E_98E03940D246
 
 
 #include "iridium/pattern/singleton.h"
 #include "iridium/io/uri.h"
-#include "iridium/io/buffer.h"
-#include "iridium/smart_ptr.h"
+//#include "iridium/io/buffer.h"
+//#include "iridium/smart_ptr.h"
 
 #include <string>
 #include <list>
@@ -36,14 +36,14 @@ public:
 
     URI::TIPv4   getIPv4ByName(std::string const &name);
 
-    Buffer  read(SOCKET const &socket, size_t const &size);
-    size_t  write(SOCKET const &socket, Buffer const &packet);
-    void    close(SOCKET const &socket);
-    SOCKET  connect(URI const &uri);
-    SOCKET  listen(URI const &uri);
-    SOCKET  accept(SOCKET const &socket);
-    void    shutdown(SOCKET const &socket);
-    void    setBlockingMode(SOCKET const &socket, bool const &is_blocking);
+    //Buffer  read(SOCKET const &socket, size_t const &size);
+    //size_t  write(SOCKET const &socket, Buffer const &packet);
+    //void    close(SOCKET const &socket);
+    //SOCKET  connect(URI const &uri);
+    //SOCKET  listen(URI const &uri);
+    //SOCKET  accept(SOCKET const &socket);
+    //void    shutdown(SOCKET const &socket);
+    //void    setBlockingMode(SOCKET const &socket, bool const &is_blocking);
 
 private:
     friend class iridium::pattern::Singleton<WSA>;
@@ -87,7 +87,7 @@ T &WSA::assertNE(T &&result, T const &value, std::string const &message) const {
 } // iridium
 
 
-#endif // HEADER_SOCKET_51FA6227_172E_42DD_BF9E_98E03940D246
+#endif // HEADER_WSA_51FA6227_172E_42DD_BF9E_98E03940D246
 
 
 #endif // WINDOWS_PLATFORM

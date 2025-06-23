@@ -9,6 +9,8 @@
 
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
+using std::string;
+using iridium::convertion::convert;
 
 
 milliseconds DEFAULT_PROCESS_TIMEOUT        (1000);
@@ -60,7 +62,8 @@ CProcessStream::CProcessStream(
     m_pipe_stdout_reader    (nullptr),
     m_process               { 0 },
     //m_overlapped            { 0 },
-    m_uri                   (io::URI::create("process://" + m_app + " " + m_args))
+    m_uri                   (io::URI::create("process://" + m_app + " " + m_args)),
+    m_security_attributes   ({ 0 })
 {}
 
 
@@ -169,7 +172,9 @@ void CProcessStream::finalize() {
 
         //LOGT << "stop process '" << m_command_line << "' ...";
 
-        auto result = WaitForSingleObject(m_process.hProcess, static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count()));
+        auto result = WaitForSingleObject(
+            m_process.hProcess,
+            static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count()));
         if  (result) {
             LOGW << "kill process " << m_app;
             assertOK(TerminateProcess(m_process.hProcess, 1), "TerminateProcess");
@@ -230,8 +235,69 @@ IProcess::TState CProcessStream::getState() {
 
         //LOGT << "process: fd: " << uint64_t(m_pipe_stdout_reader) << ", state: " << result.condition;
         return result; // ----->
-    } catch (std::exception const& e) {
+    } catch (std::exception const &e) {
         throw std::runtime_error("process '" + m_command_line + "' get state error: " + e.what()); // ----->
+    }
+}
+
+
+void CProcessStream::sendSignal(TSignal const& signal) {
+    try {
+        DWORD exitCode = STILL_ACTIVE;
+        assertOK(
+            GetExitCodeProcess(m_process.hProcess, &exitCode),
+            "GetExitCodeProcess"
+        );
+
+        if (exitCode != STILL_ACTIVE)
+            return;
+
+        switch (signal) {
+        case TSignal::INTERRUPT: {
+            DWORD pid = assertOK(GetProcessId(m_process.hProcess), "GetProcessId");
+
+            // CTRL+C
+            if (AttachConsole(pid)) {
+                assertOK(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
+                //Sleep(200); // даём время на обработку
+                //DetachConsole();
+                //FreeConsole(pid);
+            }
+            else {
+                throw std::runtime_error("can not send CTRL+C to non console app");
+            }
+
+            // Ждём завершения до 5 секунд
+            DWORD waitResult = assertOK(
+                WaitForSingleObject(
+                    m_process.hProcess,
+                    static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
+                "WaitForSingleObject");
+            if (waitResult == WAIT_TIMEOUT) {
+                // still working
+            }
+            break;
+        }
+
+        case TSignal::TERMINATE:
+        case TSignal::KILL:
+            assertOK(
+                TerminateProcess(
+                    m_process.hProcess, 0),
+                "TerminateProcess");
+            assertOK(
+                WaitForSingleObject(
+                    m_process.hProcess, INFINITE),
+                "WaitForSingleObject");
+            break;
+
+        default:
+            throw std::runtime_error("unknown signal type");
+        }
+    } catch (std::exception const& e) {
+        throw std::runtime_error(
+            "sending signal '" + convert<string>(signal) +
+            "' to process '" + m_app + "' error: " + e.what());
     }
 }
 

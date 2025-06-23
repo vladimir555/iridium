@@ -4,7 +4,7 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/io/implementation/event.h"
+#include "iridium/io/event.h"
 
 #include <stdint.h>
 
@@ -35,7 +35,7 @@ TResult assertOK(TResult const &result, std::string const &method) {
         std::string message(buffer, size);
         LocalFree(buffer);
         throw std::runtime_error(method + " error: " + 
-            convertion::convert<std::string>(error_message_code) + " " + message); // ----->
+            convertion::convert<std::string, uint64_t>(error_message_code) + " " + message); // ----->
     }
 }
 

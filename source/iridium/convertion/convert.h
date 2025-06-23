@@ -23,15 +23,19 @@ using implementation::config;
 
 
 #define DEFINE_CONVERT(TTo, TFrom) \
+namespace iridium::convertion::implementation { \
 template<> \
-TTo iridium::convertion::implementation::convert(TFrom const &value);
+TTo convert<TTo, TFrom>(TFrom const &value); \
+}
 
 
 
 #define IMPLEMENT_CONVERT(TTo, TFrom, TFunc) \
+namespace iridium::convertion::implementation { \
 template<> \
-TTo iridium::convertion::implementation::convert(TFrom const &from) { \
+TTo convert<TTo, TFrom>(TFrom const &from) { \
     return TFunc(from); \
+} \
 }
 
 

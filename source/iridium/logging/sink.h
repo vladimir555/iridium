@@ -47,4 +47,7 @@ public:
 } // iridium
 
 
+DEFINE_ENUM_CONVERT(iridium::logging::ISink::TType)
+
+
 #endif // HEADER_SINK_3A3CF594_E847_4869_B666_7DF6E46ADCCA

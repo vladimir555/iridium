@@ -38,10 +38,12 @@ public:
 
     std::list<uintptr_t>    getHandles() const override;
     io::URI::TSharedPtr     getURI() const override;
-    io::Buffer::TSharedPtr  read(size_t const &size) override;
+    io::Buffer::TSharedPtr  read(size_t const &size = io::DEFAULT_BUFFER_SIZE) override;
     size_t                  write(io::Buffer::TSharedPtr const &buffer) override;
     
-    TState getState()   override;
+    TState getState() override;
+    void   sendSignal(TSignal const &signal) override;
+
 private:
     std::string                     m_app;
     std::string                     m_args;

@@ -47,4 +47,7 @@ TLogger createDefault();
 } // iridium
 
 
+DEFINE_ENUM_CONVERT(iridium::logging::config::TLogger::TSink::TSinkType)
+
+
 #endif // HEADER_CONFIG_004DD24D_1205_412D_8CEF_618368AB483A

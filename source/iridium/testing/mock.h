@@ -59,36 +59,39 @@ public:
     template<typename ... TArgs>
     static ::std::shared_ptr<TClass> create(TArgs && ... args);
 
-    template<typename TResult, typename ... TArgs>
+    //template<typename TResult, typename ... TArgs>
+    //class Behavior;
+    template<typename TMethod>
     class Behavior;
 
+
     template<typename TResult, typename ... TArgs>
-    class Behavior<TResult(TClass::*)(TArgs...)>:
+    class Behavior<TResult( TClass::*)(TArgs...)>:
         public pattern::NonCopyable, public pattern::NonMovable
     {
     public:
-        explicit Behavior(Mock &mock, std::type_info const *method);
+        explicit Behavior(Mock<TClass> &mock, std::type_info const *method);
 
         template<typename TLambda>
         Behavior &operator=(TLambda &&l);
 
     private:
-        Mock &m_mock;
+        Mock<TClass> &m_mock;
         std::type_info const *m_method;
     };
 
     template<typename TResult, typename ... TArgs>
-    class Behavior<TResult(TClass::*)(TArgs...) const>:
+    class Behavior<TResult( TClass::*)(TArgs...) const>:
         public pattern::NonCopyable, public pattern::NonMovable
     {
     public:
-        explicit Behavior(Mock &mock, std::type_info const *method);
+        explicit Behavior(Mock<TClass> &mock, std::type_info const *method);
 
         template<typename TLambda>
         Behavior &operator=(TLambda &&l);
 
     private:
-        Mock &m_mock;
+        Mock<TClass> &m_mock;
         std::type_info const *m_method;
     };
 
@@ -100,10 +103,10 @@ protected:
 
 private:
     template<typename TResult, typename ... TArgs>
-    void setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f);
+    void setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> &&f);
 
     template<typename TResult, typename ... TArgs>
-    void setBehavior(std::type_info const *method, std::function<TResult(TArgs...) const> const &&f);
+    void setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f);
 
     mutable std::unordered_map<std::type_info const *, std::any>   m_map_name_behavior;
     mutable std::unordered_map<void *, std::type_info const *>     m_map_behavior_name;
@@ -128,14 +131,14 @@ public:
         std::string const &file_line,
         size_t      const &call_count_max,
         size_t      const &call_count_min,
-        TResult (TClassMock::*method)(TMethodArgs...),
+        TResult(TClassMock::*method)(TMethodArgs...),
         TCallArgs && ... args)
     {
         TExpectation expectation(
             file_line,
             call_count_min,
             call_count_max,
-           &typeid(static_cast<TResult (TClassMock::TOriginalClass::*)(TMethodArgs...)>(method)),
+           &typeid(static_cast<TResult(TClassMock::TOriginalClass::*)(TMethodArgs...)>(method)),
             std::tuple<std::decay_t<TMethodArgs> ...>(std::forward<TCallArgs>(args) ...));
         m_expectations.push_back(expectation);
         return *this;
@@ -146,14 +149,14 @@ public:
         std::string const &file_line,
         size_t      const &call_count_max,
         size_t      const &call_count_min,
-        TResult (TClassMock::*method)(TMethodArgs...) const,
+        TResult(TClassMock::*method)(TMethodArgs...) const,
         TCallArgs && ... args)
     {
         TExpectation expectation(
             file_line,
             call_count_min,
             call_count_max,
-           &typeid(static_cast<TResult (TClassMock::TOriginalClass::*)(TMethodArgs...)>(method)),
+           &typeid(static_cast<TResult(TClassMock::TOriginalClass::*)(TMethodArgs...)>(method)),
             std::tuple<std::decay_t<TMethodArgs> ...>(std::forward<TCallArgs>(args) ...));
         m_expectations.push_back(expectation);
         return *this;
@@ -274,7 +277,7 @@ template<typename ... TArgs>
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 auto Mock<TClass>::call(TArgs && ... args) {
-    auto method_type_info = &typeid(TResult (TOriginalClass::*)(TArgs ...));
+    auto method_type_info = &typeid(TResult ( TOriginalClass::*)(TArgs ...));
     auto i = m_map_name_behavior.find(method_type_info);
     if (i == m_map_name_behavior.end())
         throw std::runtime_error("mock calling error: unexpected call '" + std::string(method_type_info->name()) + "'");
@@ -292,7 +295,7 @@ auto Mock<TClass>::call(TArgs && ... args) {
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 auto Mock<TClass>::call(TArgs && ... args) const {
-    auto method_type_info = &typeid(TResult (TOriginalClass::*)(TArgs ...) const);
+    auto method_type_info = &typeid(TResult ( TOriginalClass::*)(TArgs ...) const);
     auto i = m_map_name_behavior.find(method_type_info);
     if (i == m_map_name_behavior.end())
         throw std::runtime_error("mock calling error: unexpected call '" + std::string(method_type_info->name()) + "'");
@@ -309,7 +312,7 @@ auto Mock<TClass>::call(TArgs && ... args) const {
 
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
-void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f) {
+void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> &&f) {
 //    printf("set behavior: %s\t[%p]\n", method->name(), static_cast<const void*>(method));
     m_map_name_behavior[method] = f;
 }
@@ -317,7 +320,7 @@ void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResu
 
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
-void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...) const> const &&f) {
+void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResult(TArgs...)> const &&f) {
 //    printf("set behavior const: %s\t[%p]\n", method->name(), static_cast<const void*>(method));
     m_map_name_behavior[method] = f;
 }
@@ -325,7 +328,7 @@ void Mock<TClass>::setBehavior(std::type_info const *method, std::function<TResu
 
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
-Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::Behavior(Mock &mock, std::type_info const *method)
+Mock<TClass>::Behavior<TResult( TClass::*)(TArgs...)>::Behavior(Mock &mock, std::type_info const *method)
 :
     m_mock  (mock),
     m_method(method)
@@ -337,9 +340,8 @@ Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::Behavior(Mock &mock, std::
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 template<typename TLambda>
-typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)>
-&Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...)>::operator = (TLambda &&l)
-{
+typename Mock<TClass>::template Behavior<TResult( TClass::*)(TArgs...)>
+&Mock<TClass>::Behavior<TResult( TClass::*)(TArgs...)>::operator = (TLambda &&l) {
     m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
 }
@@ -347,7 +349,7 @@ typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...)>
 
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
-Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::Behavior(Mock &mock, std::type_info const *method)
+Mock<TClass>::Behavior<TResult( TClass::*)(TArgs...) const>::Behavior(Mock &mock, std::type_info const *method)
 :
     m_mock  (mock),
     m_method(method)
@@ -359,9 +361,8 @@ Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::Behavior(Mock &mock,
 template<typename TClass>
 template<typename TResult, typename ... TArgs>
 template<typename TLambda>
-typename Mock<TClass>::template Behavior<TResult(TClass::*)(TArgs...) const>
-&Mock<TClass>::Behavior<TResult(TClass::*)(TArgs...) const>::operator = (TLambda &&l)
-{
+typename Mock<TClass>::template Behavior<TResult( TClass::*)(TArgs...) const>
+&Mock<TClass>::Behavior<TResult( TClass::*)(TArgs...) const>::operator = (TLambda &&l) {
     m_mock.setBehavior<TResult, TArgs...>(m_method, std::function<TResult(TArgs...)>(std::forward<TLambda>(l)));
     return *this;
 }
