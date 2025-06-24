@@ -317,11 +317,12 @@ void CNodeType<TValue>::delChilds(std::string const &name) {
 
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::clone() const {
-    typename INodeType<TValue>::TSharedPtr node = CNodeType<TValue>::create(*m_name, m_value);
+    auto node = CNodeType<TValue>::create(*m_name, m_value);
 
     for (auto const &i: m_nodes)
         node->addChild(i->clone());
 
+    node->m_parent_nodes.clear();
     return node; // ----->
 }
 
