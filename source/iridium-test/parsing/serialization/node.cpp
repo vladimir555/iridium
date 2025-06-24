@@ -108,9 +108,9 @@ TEST(node_to_struct) {
 //        ASSERT(2 , equal, root2.getNode()->findChilds("/list").size());
     }
 
-    ASSERT("camel5-struct-name" , equal, convertCamelToSplittedBySymbol("Camel5StructName", '-'));
-    ASSERT(""                   , equal, convertCamelToSplittedBySymbol("", '-'));
-    ASSERT("a"                  , equal, convertCamelToSplittedBySymbol("A", '-'));
+    ASSERT("camel5-struct-name" , equal, convertCamelToDelimitedBySymbol("Camel5StructName", '-'));
+    ASSERT(""                   , equal, convertCamelToDelimitedBySymbol("", '-'));
+    ASSERT("a"                  , equal, convertCamelToDelimitedBySymbol("A", '-'));
 
     INode::TSharedPtr node = CNode::create("root");
 
