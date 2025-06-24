@@ -47,15 +47,19 @@ NodeView<void>::NodeView(
 }
 
 
-NodeView<void>::NodeView(NodeView<void> const &parent, std::string const &name) {
-    m_path = parent.m_path + "/" + name;
+NodeView<void>::NodeView(NodeView<void> const * const parent, std::string const &name) {
+    if (!parent)
+        throw std::runtime_error(
+            "node name '" + name + "' add to path '" + m_path + "' error: parent is null"); // ----->
 
-    if (parent.m_node)
-        m_node = parent.m_node->getChild(name);
+    m_path = parent->m_path + "/" + name;
+
+    if (parent && parent->m_node)
+        m_node = parent->m_node->getChild(name);
 
     // add empty node for child nodes with default values
     if(!m_node)
-        m_node = parent.m_node->addChild(name);
+        m_node = parent->m_node->addChild(name);
 }
 
 
@@ -64,28 +68,7 @@ INode::TSharedPtr NodeView<void>::getNode() const {
 }
 
 
-//string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimeter_symbol) {
-//    //todo: optimize
-//    string result = camel;
-//
-//    if (!result.empty())
-//        result[0] = static_cast<char>(tolower(result[0]));
-//
-//    size_t i = 1;
-//    while (i < result.size()) {
-//        char lo_ch = static_cast<char>(tolower(result[i]));
-//        if (result[i] != lo_ch) {
-//            result[i] = static_cast<char>(lo_ch);
-//            result.insert(i, string() + delimeter_symbol);
-//        }
-//        i++;
-//    }
-//
-//    return result; // ----->
-//}
-
-
-std::string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimiter_symbol) {
+std::string convertCamelToDelimitedBySymbol(std::string const &camel, char const &delimiter_symbol) {
     if (camel.empty() || delimiter_symbol == 0)
         return camel;
 
