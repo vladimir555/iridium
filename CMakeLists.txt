@@ -76,7 +76,7 @@ include_directories(
     /usr/local/include
     /usr/local/ssl/include
     ${CMAKE_CURRENT_SOURCE_DIR}/source
-    ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    ${CMAKE_CURRENT_SOURCE_DIR}/external)
 
 # deb package
 # todo: dependencies postgres deb
