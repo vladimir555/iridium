@@ -23,8 +23,6 @@ namespace serialization {
 
 
 // todo: copy constructor; rm TType; fix List property name
-
-
 template<typename TValue>
 class NodeView {
 public:
@@ -48,9 +46,9 @@ public:
 protected:
     /// list attribute
     NodeView(
-        INode::TSharedPtr       const &node,
-        std::string             const &name,
-        std::string             const &path);
+        INode::TSharedPtr   const &node,
+        std::string         const &name,
+        std::string         const &path);
 
     NodeView(std::string const &name);
     /// attribute
@@ -337,32 +335,40 @@ std::shared_ptr<TNodeView> NodeViewPtr<TNodeView>::get() const {
 // -----
 
 
-std::string convertCamelToDelimitedBySymbol(std::string const &camel, char const &delimeter_symbol);
+enum class TNamingStrategyCPPToNode {
+    UNKNOWN = -1,
+    LOWER_CASE_TO_LOWER_KEBAB,
+    CAMEL_CASE_TO_LOWER_KEBAB
+};
+
+
+std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode const &strategy);
 
 
 } // serialization
 } // parsing
 } // iridium
 
+
 // todo: name_delimeter_symbol -> name_convertion_method
-#define DEFINE_ROOT_NODE_BEGIN_2(class_name, name_delimeter_symbol) \
-    struct T##class_name : protected iridium::parsing::serialization::NodeView<void> { \
-        static int const NAME_DELIMETER_SYMBOL = name_delimeter_symbol; \
+#define DEFINE_ROOT_NODE_BEGIN_2(class_name, naming_strategy_) \
+    struct T##class_name: protected iridium::parsing::serialization::NodeView<void> { \
+        static iridium::parsing::serialization::TNamingStrategyCPPToNode constexpr naming_strategy = naming_strategy_; \
         T##class_name(iridium::parsing::INode::TSharedPtr const &node): \
             iridium::parsing::serialization::NodeView<void> \
-                (node, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+                (node, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
             T##class_name(): iridium::parsing::serialization::NodeView<void> \
-                (iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+                (iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
             iridium::parsing::INode::TSharedPtr getNode() const { \
                 return iridium::parsing::serialization::NodeView<void>::getNode(); \
             } \
         T##class_name(iridium::parsing::serialization::NodeView<void> const * const parent): \
             iridium::parsing::serialization::NodeView<void> \
-                (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
+                (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {}
 
 
 #define DEFINE_ROOT_NODE_BEGIN_1(class_name) \
-    DEFINE_ROOT_NODE_BEGIN_2(class_name, '-')
+    DEFINE_ROOT_NODE_BEGIN_2(class_name, iridium::parsing::serialization::TNamingStrategyCPPToNode::CAMEL_CASE_TO_LOWER_KEBAB)
 
 
 #define DEFINE_ROOT_NODE_BEGIN(...) \
@@ -377,7 +383,7 @@ std::string convertCamelToDelimitedBySymbol(std::string const &camel, char const
     struct T##class_name : protected iridium::parsing::serialization::NodeView<void> { \
         T##class_name(iridium::parsing::serialization::NodeView<void> const * const parent): \
         iridium::parsing::serialization::NodeView<void> \
-        (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
+        (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {}
 
 
 #define DEFINE_NODE_END(class_name) \
@@ -388,7 +394,7 @@ std::string convertCamelToDelimitedBySymbol(std::string const &camel, char const
     struct T##class_name : public iridium::parsing::serialization::NodeView<type> { \
         T##class_name(iridium::parsing::serialization::NodeView<void> const * const parent): \
         iridium::parsing::serialization::NodeView<type> \
-        (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+        (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
         using iridium::parsing::serialization::NodeView<type>::operator =; \
     } class_name = this;
 
@@ -397,7 +403,7 @@ std::string convertCamelToDelimitedBySymbol(std::string const &camel, char const
     struct T##class_name : public iridium::parsing::serialization::NodeView<type> { \
         T##class_name(iridium::parsing::serialization::NodeView<void> const * const parent): \
         iridium::parsing::serialization::NodeView<type> \
-        (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), default_value) {} \
+        (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy), default_value) {} \
         using iridium::parsing::serialization::NodeView<type>::operator =; \
     } class_name = this;
 
@@ -414,9 +420,9 @@ DEFINE_MACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
         iridium::parsing::INode::TSharedPtr const &node, \
         std::string const &path): \
         iridium::parsing::serialization::NodeView<void> \
-        (node, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
+        (node, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy), path) {} \
         T##class_name(): iridium::parsing::serialization::NodeView<void> \
-        (iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {}
+        (iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {}
 
 
 #define DEFINE_NODE_LIST_END(class_name) \
@@ -424,7 +430,7 @@ DEFINE_MACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
     struct T##class_name##List: public iridium::parsing::serialization::NodeViewList<T##class_name> { \
         T##class_name##List(iridium::parsing::serialization::NodeView<void> const * const parent): \
         iridium::parsing::serialization::NodeViewList<T##class_name> \
-        (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+        (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
     } class_name = this;
 
 
@@ -432,21 +438,21 @@ DEFINE_MACRO_CHOOSER(DEFINE_ATTRIBUTE, __VA_ARGS__)(__VA_ARGS__)
     struct T##class_name : public iridium::parsing::serialization::NodeView<type> { \
         T##class_name(iridium::parsing::serialization::NodeView<void> const * const parent): \
             iridium::parsing::serialization::NodeView<type> \
-                (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+                (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
         using iridium::parsing::serialization::NodeView<type>::operator =; \
         T##class_name( \
             iridium::parsing::INode::TSharedPtr const &node, \
             std::string const &path): \
                 iridium::parsing::serialization::NodeView<type> \
-                    (node, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL), path) {} \
+                    (node, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy), path) {} \
         T##class_name(): \
             iridium::parsing::serialization::NodeView<type> \
-                (iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+                (iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
     }; \
     struct T##class_name##List : public iridium::parsing::serialization::NodeViewList<T##class_name> { \
         T##class_name##List(iridium::parsing::serialization::NodeView<void> const * const parent): \
         iridium::parsing::serialization::NodeViewList<T##class_name> \
-        (parent, iridium::parsing::serialization::convertCamelToDelimitedBySymbol(#class_name, NAME_DELIMETER_SYMBOL)) {} \
+        (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
     } class_name = this;
 
 
