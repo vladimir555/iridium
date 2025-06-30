@@ -19,8 +19,8 @@ protected:
     NonMovable() = default;
     ///
     NonMovable(NonMovable const &&) = delete;
-//    ///
-//    NonMovable &operator=(NonMovable const &) const = delete;
+    ///
+    NonMovable &operator=(NonMovable const &) const = delete;
 };
 
 
