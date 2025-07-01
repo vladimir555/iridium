@@ -10,6 +10,7 @@
 #include <string.h>
 #include <filesystem>
 #include <stdexcept>
+#include <signal.h>
 
 #include "iridium/convertion/convert.h"
 

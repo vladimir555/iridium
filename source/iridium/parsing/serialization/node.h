@@ -338,7 +338,8 @@ std::shared_ptr<TNodeView> NodeViewPtr<TNodeView>::get() const {
 enum class TNamingStrategyCPPToNode {
     UNKNOWN = -1,
     LOWER_CASE_TO_LOWER_KEBAB,
-    CAMEL_CASE_TO_LOWER_KEBAB
+    CAMEL_CASE_TO_LOWER_KEBAB,
+    ORIGINAL
 };
 
 

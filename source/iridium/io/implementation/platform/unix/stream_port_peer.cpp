@@ -42,6 +42,7 @@ void CStreamPortPeer::initialize() {
             throw std::runtime_error("already initialized or not finalized");
 
         setBlockingMode(false);
+
     } catch (std::exception const &e) {
         closeFDs();
         throw std::runtime_error(
