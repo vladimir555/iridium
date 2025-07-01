@@ -6,6 +6,7 @@
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <signal.h>
 
 #include "iridium/convertion/convert.h"
 
