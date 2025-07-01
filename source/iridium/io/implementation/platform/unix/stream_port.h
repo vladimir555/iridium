@@ -45,17 +45,19 @@ protected:
     void setBlockingMode(bool const &is_blocking);
     void closeFDs();
 
+    template<typename T>
+    T assertOK(T const &result, std::string const &message);
+
+    static int initSignal();
+
+    static int const    YES;
+
     std::atomic<int>    m_fd_reader;
     std::atomic<int>    m_fd_writer;
     URI::TSharedPtr     m_uri;
     bool                m_is_opened;
     bool                m_is_blocking_mode;
 
-protected:
-    template<typename T>
-    T assertOK(T const &result, std::string const &message);
-
-    static int initSignal();
 };
 
 

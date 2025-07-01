@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include <system_error>
 #include <fcntl.h>
+#include <signal.h>
 
 
 using std::string;
@@ -63,6 +64,7 @@ void CStreamPortAcceptor::initialize() {
         assertOK(::listen(m_fd, 5), "listen");
 
         setBlockingMode(false);
+
     } catch (std::exception const &e) {
         throw std::runtime_error(string("stream port acceptor initialization error: ") + e.what());
     }

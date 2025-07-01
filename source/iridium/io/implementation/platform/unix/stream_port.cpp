@@ -13,12 +13,14 @@
 using iridium::convertion::convert;
 
 
-#include <iridium/logging/logger.h>
 namespace iridium {
 namespace io {
 namespace implementation {
 namespace platform {
 namespace unix_ {
+
+
+int const CStreamPort::YES = CStreamPort::initSignal();
 
 
 CStreamPort::CStreamPort(URI const &uri)
@@ -151,6 +153,12 @@ void CStreamPort::closeFDs() {
         close(m_fd_reader);
         m_fd_reader = 0;
     }
+}
+
+
+int CStreamPort::initSignal() {
+    signal(SIGPIPE, SIG_IGN);
+    return 1; // ----->
 }
 
 
