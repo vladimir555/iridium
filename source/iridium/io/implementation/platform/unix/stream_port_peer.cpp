@@ -38,9 +38,6 @@ CStreamPortPeer::CStreamPortPeer(URI const &uri, int const &fd)
 
 void CStreamPortPeer::initialize() {
     try {
-        if (m_fd_reader != -1 || m_fd_writer != -1)
-            throw std::runtime_error("already initialized or not finalized");
-
         setBlockingMode(false);
 
     } catch (std::exception const &e) {
