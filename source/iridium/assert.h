@@ -16,6 +16,27 @@ namespace iridium {
 
 
 template<typename T, typename TException>
+T assertExists(T value, TException const &exception) {
+    if (static_cast<bool>(value))
+        return value; // ----->
+    else
+        throw exception; // ----->
+}
+
+
+template<typename T>
+T assertExists(T value, std::string const &error) {
+    return assertExists(value, std::runtime_error(error)); // ----->
+}
+
+
+template<typename T>
+T assertExists(T value, char const *error) {
+    return assertExists(value, std::runtime_error(error)); // ----->
+}
+
+
+template<typename T, typename TException>
 T *assertExists(T *value, TException const &exception) {
     if (static_cast<bool>(value))
         return value; // ----->
