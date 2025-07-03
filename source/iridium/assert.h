@@ -16,21 +16,6 @@ namespace iridium {
 
 
 template<typename T, typename TException>
-T &&assertExists(T &&value, TException const &exception) {
-    if (static_cast<bool>(value))
-        return std::forward<T>(value); // ----->
-    else
-        throw exception; // ----->
-}
-
-
-template<typename T>
-T &&assertExists(T &&value, std::string const &error) {
-    return assertExists(std::forward<T>(value), std::runtime_error(error)); // ----->
-}
-
-
-template<typename T, typename TException>
 T *assertExists(T *value, TException const &exception) {
     if (static_cast<bool>(value))
         return value; // ----->
@@ -81,7 +66,7 @@ struct TContainerHasSizeMethod<T, std::void_t<decltype(std::declval<T>().size())
 
 
 template<typename T, typename TException>
-std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exception) {
+[[nodiscard]] std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exception) {
     static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
 
     auto values_size = values.size();
@@ -94,7 +79,7 @@ std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exc
 
 
 template<typename T>
-std::decay_t<T> assertSize(T &&values, size_t const &size, std::string const &error) {
+[[nodiscard]] std::decay_t<T> assertSize(T &&values, size_t const &size, std::string const &error) {
     return assertSize(std::forward<T>(values), size, std::runtime_error(
         error + ", wrong items size " +
         convertion::convert<std::string>(values.size()) + ", expected " +
@@ -104,19 +89,19 @@ std::decay_t<T> assertSize(T &&values, size_t const &size, std::string const &er
 
 
 template<typename T, typename TException>
-std::decay_t<T> assertOne(T &&values, TException const &exception) {
+[[nodiscard]] std::decay_t<T> assertOne(T &&values, TException const &exception) {
     return assertSize(std::forward<T>(values), 1, exception);
 }
 
 
 template<typename T>
-std::decay_t<T> assertOne(T &&values, std::string const &error) {
+[[nodiscard]] std::decay_t<T> assertOne(T &&values, std::string const &error) {
     return assertOne(std::forward<T>(values), std::runtime_error(error));
 }
 
 
 template<typename T, typename TException>
-std::decay_t<T> assertComplete(T &&values, TException const &exception) {
+[[nodiscard]] std::decay_t<T> assertComplete(T &&values, TException const &exception) {
     if (values.size() > 0)
         return std::move(values);
     else
@@ -125,7 +110,7 @@ std::decay_t<T> assertComplete(T &&values, TException const &exception) {
 
 
 template<typename T>
-std::decay_t<T> assertComplete(T &&values, std::string const &error) {
+[[nodiscard]] std::decay_t<T> assertComplete(T &&values, std::string const &error) {
     return assertComplete(std::forward<T>(values), std::runtime_error(error));
 }
 
