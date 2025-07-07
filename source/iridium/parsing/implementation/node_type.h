@@ -24,7 +24,7 @@ namespace implementation {
 
 
 template<typename TValue>
-class CNodeType : public INodeType<TValue> {
+class CNodeType : virtual public INodeType<TValue> {
 public:
     DEFINE_CREATE(CNodeType)
     ///
