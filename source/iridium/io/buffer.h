@@ -8,6 +8,7 @@
 
 #include "iridium/convertion/convert.h"
 #include "iridium/smart_ptr.h"
+
 #include <vector>
 #include <string>
 #include <list>
@@ -47,13 +48,15 @@ public:
     /// @param suffix
     /// @return
     bool checkSuffixEqual(std::vector<uint8_t> const &suffix) const;
+
+    void emplace_back(TSharedPtr const &);
 };
 
 
 template<typename ... TArgs>
 Buffer::Buffer(TArgs ... args)
 :
-    std::vector<unsigned char>(args ...)
+    std::vector<uint8_t>(args ...)
 {}
 
 
