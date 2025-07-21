@@ -226,8 +226,11 @@ void CProcessStream::finalize() {
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
 
         if (getState().condition == TState::TCondition::RUNNING) {
-            LOGW << "finalization: kill pid " << m_pid << " " << m_command_line;
-//                 << ", timeout: " << system_clock::now() - start;
+            LOGW
+                << "finalization: kill pid " << m_pid << " " << m_command_line
+                << "\noutput:\n" << buffer;
+
+//                << ", timeout: " << system_clock::now() - start
             assertOK(kill(m_pid, SIGKILL), "kill");
             //        m_state_internal.is_signaled = true;
             //todo: timeout condition
