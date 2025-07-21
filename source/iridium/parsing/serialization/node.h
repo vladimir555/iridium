@@ -351,21 +351,28 @@ std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode co
 } // iridium
 
 
-// todo: name_delimeter_symbol -> name_convertion_method
+/*
+// T##class_name(iridium::parsing::INode::TSharedPtr const &node): \
+//     iridium::parsing::serialization::NodeView<void> \
+//         (node, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
+*/
+
+
 #define DEFINE_ROOT_NODE_BEGIN_2(class_name, naming_strategy_) \
     struct T##class_name: protected iridium::parsing::serialization::NodeView<void> { \
         static iridium::parsing::serialization::TNamingStrategyCPPToNode constexpr naming_strategy = naming_strategy_; \
-        T##class_name(iridium::parsing::INode::TSharedPtr const &node): \
+        T##class_name(iridium::parsing::INode::TConstSharedPtr const &node): \
             iridium::parsing::serialization::NodeView<void> \
-                (node, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
-            T##class_name(): iridium::parsing::serialization::NodeView<void> \
+                (node->clone(), iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
+        T##class_name(): \
+            iridium::parsing::serialization::NodeView<void> \
                 (iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
-            iridium::parsing::INode::TSharedPtr getNode() const { \
-                return iridium::parsing::serialization::NodeView<void>::getNode(); \
-            } \
         T##class_name(iridium::parsing::serialization::NodeView<void> const * const parent): \
             iridium::parsing::serialization::NodeView<void> \
-                (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {}
+                (parent, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
+        iridium::parsing::INode::TSharedPtr getNode() const { \
+            return iridium::parsing::serialization::NodeView<void>::getNode(); \
+        }
 
 
 #define DEFINE_ROOT_NODE_BEGIN_1(class_name) \
