@@ -64,7 +64,7 @@ NodeView<void>::NodeView(NodeView<void> const * const parent, std::string const 
 
 
 INode::TSharedPtr NodeView<void>::getNode() const {
-    return m_node; // ----->
+    return m_node->clone(); // ----->
 }
 
 
