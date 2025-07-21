@@ -46,6 +46,12 @@ bool Buffer::checkSuffixEqual(std::vector<uint8_t> const &suffix) const {
 }
 
 
+void Buffer::emplace_back(Buffer::TSharedPtr const &buffer) {
+    if (buffer && !buffer->empty())
+        insert(end(), buffer->begin(), buffer->end());
+}
+
+
 } // io
 } // iridium
 
