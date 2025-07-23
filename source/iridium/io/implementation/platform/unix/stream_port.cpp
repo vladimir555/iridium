@@ -108,12 +108,12 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 std::list<uintptr_t> CStreamPort::getHandles() const {
     std::list<uintptr_t> handles;
     
-    if (m_fd_reader)
-        handles.push_back(m_fd_reader);
-    
     if (m_fd_writer)
         handles.push_back(m_fd_writer);
-    
+
+    if (m_fd_reader && m_fd_reader != m_fd_writer)
+        handles.push_back(m_fd_reader);
+
 //    if (handles.empty())
 //        throw std::runtime_error(
 //            "stream port get handles error: '" +
