@@ -107,7 +107,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 
 std::list<uintptr_t> CStreamPort::getHandles() const {
     std::list<uintptr_t> handles;
-    
+
     if (m_fd_writer)
         handles.push_back(m_fd_writer);
 
@@ -147,13 +147,15 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
 void CStreamPort::closeFDs() {
     if (m_fd_writer) {
         close(m_fd_writer);
-        m_fd_writer = 0;
     }
 
-    if (m_fd_reader) {
+    if (m_fd_reader && m_fd_reader != m_fd_writer) {
         close(m_fd_reader);
         m_fd_reader = 0;
     }
+
+    m_fd_writer = 0;
+    m_fd_reader = 0;
 }
 
 
