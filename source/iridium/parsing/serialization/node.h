@@ -66,7 +66,8 @@ template<>
 class NodeView<void> {
 public:
     /// root node for desiarization only
-    NodeView(std::string const &name);
+    NodeView(
+        std::string         const &name);
     /// root node for serialization and desiarization
     NodeView(
          INode::TSharedPtr  const &node,
@@ -115,6 +116,8 @@ public:
     ///
     template<typename TValue>
     void add(TValue const &node);
+    ///
+    void clear();
 
 protected:
     ///
@@ -123,6 +126,8 @@ protected:
 private:
     ///
     NodeView<void> const * const m_parent;
+    ///
+    std::string m_name;
     ///
     std::list<TNodeView> m_nodes;
 };
@@ -260,7 +265,8 @@ bool NodeView<TValue>::operator== (TValue const &value) const {
 template<typename TNodeView>
 NodeViewList<TNodeView>::NodeViewList(NodeView<void> const * const parent, std::string const &name)
 :
-    m_parent(parent)
+    m_parent(parent),
+    m_name  (name)
 {
     if (parent->m_node) {
         for (auto const &i: *parent->m_node)
@@ -313,6 +319,13 @@ void NodeViewList<TNodeView>::add(TValue const &value) {
     TNodeView node_view;
     node_view.set(value);
     add(node_view);
+}
+
+
+template<typename TNodeView>
+void NodeViewList<TNodeView>::clear() {
+    m_parent->m_node->delChilds(m_name);
+    m_nodes.clear();
 }
 // -----
 
