@@ -74,7 +74,7 @@ void CMultiplexer::initialize() {
 
     struct epoll_event event = {};
 
-    event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
+    event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET | EPOLLRDHUP;
     event.data.fd   = m_event_fd;
 
     assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
@@ -164,24 +164,32 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
 //    LOGT << "wait epoll OK: " << m_epoll_fd << " epoll count " << count;
 
-    
+
 
     for (auto i = 0; i < count; i++) {
 //        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " <<
 //            TEpollEvent(epoll_events[i].events).convertToFlagsString();
 
 //        LOGT << __FUNCTION__ << ",  id: " << epoll_events[i].data.fd << ", flags: " << TEpollEvent(epoll_events[i].events).convertToFlagsString();
-        
+
         if (epoll_events[i].data.fd == m_event_fd)
             continue; // <---
 
-        if (epoll_events[i].events & EPOLLHUP)
+        if (epoll_events[i].events & EPOLLHUP) {
             events.push_back(
                 Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::EOF_, Event::TStatus::BEGIN));
+            continue; // <---
+        }
 
         if (epoll_events[i].events & EPOLLIN)
             events.push_back(
                 Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::READ, Event::TStatus::BEGIN));
+
+        if (epoll_events[i].events & EPOLLRDHUP) {
+            events.push_back(
+                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+            continue; // <---
+        }
 
         if (epoll_events[i].events & EPOLLOUT)
             events.push_back(
@@ -197,20 +205,20 @@ void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
 //        throw std::runtime_error("epoll add error: not initialized"); // ----->
 
     for (auto const &fd: stream->getHandles()) {
-        
+
         if (fd > 0 && m_map_fd_stream.find(fd) == m_map_fd_stream.end()) {
             //        LOGT << m_epoll_fd << " fd " << stream->getID();
-            
+
             struct epoll_event event = {};
-            
+
             event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
             event.data.fd   = fd;
-            
+
             //        LOGT << "add internal: " << stream->getID();
             assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event), "epoll add error");
-            
+
             m_map_fd_stream[fd] = stream;
-            
+
             //        // todo: check overflow
             //        eventfd_write(m_event_fd, 0);
         }
@@ -223,7 +231,7 @@ void CMultiplexer::delInternal(IStream::TSharedPtr const &stream) {
 //        throw std::runtime_error("epoll add error: not initialized"); // ----->
 
     for (auto const &fd: stream->getHandles()) {
-        
+
         //    LOGT << "epoll del: " << m_epoll_fd << " fd " << stream->getID();
         if (fd > 0) {
             assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr), "epoll del error");
