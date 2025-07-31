@@ -26,7 +26,7 @@ namespace iridium {
 namespace io {
 
 
-static size_t const DEFAULT_BUFFER_SIZE = 65535;
+static size_t const DEFAULT_BUFFER_SIZE = 4096;
 
 
 class IStream: public virtual pattern::IInitializable {
