@@ -38,8 +38,9 @@ public:
     Buffer(TArgs ... args);
     /// @brief
     /// @param suffix
+    /// @param skip
     /// @return
-    bool checkSuffixEqual(std::string const &suffix) const;
+    bool checkSuffixEqual(std::string const &suffix, std::string const &skip = "") const;
     /// @brief
     /// @param suffix
     /// @return
