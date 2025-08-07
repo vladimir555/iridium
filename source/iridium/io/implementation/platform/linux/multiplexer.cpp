@@ -90,6 +90,7 @@ void CMultiplexer::finalize() {
     m_is_closing = true;
     int64_t i = 0;
     assertOK(write(m_event_fd, &i, 8), "multiplexer finalization error: write event_fd error");
+    m_epoll_fd = 0;
 }
 
 
