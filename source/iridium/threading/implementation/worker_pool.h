@@ -77,7 +77,7 @@ public:
     void initialize() override;
     void finalize() override;
 
-    TItems pop(bool const &is_do_wait) override;
+    TItems pop(bool const &is_wait_required) override;
     TItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:
@@ -102,7 +102,7 @@ public:
     size_t push(TInputItem  const &item)  override;
     size_t push(TInputItems const &items) override;
 
-    TOutputItems pop(bool const &is_do_wait) override;
+    TOutputItems pop(bool const &is_wait_required) override;
     TOutputItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:
@@ -187,8 +187,8 @@ void CWorkerPoolPopper<TItem>::finalize() {
 
 
 template<typename TItem>
-typename CWorkerPoolPopper<TItem>::TItems CWorkerPoolPopper<TItem>::pop(bool const &is_do_wait) {
-    return m_queue->pop(is_do_wait); // ----->
+typename CWorkerPoolPopper<TItem>::TItems CWorkerPoolPopper<TItem>::pop(bool const &is_wait_required) {
+    return m_queue->pop(is_wait_required); // ----->
 }
 
 
@@ -245,8 +245,8 @@ size_t CWorkerPool<TInputItem, TOutputItem>::push(TInputItems const &items) {
 
 
 template<typename TInputItem, typename TOutputItem>
-typename CWorkerPool<TInputItem, TOutputItem>::TOutputItems CWorkerPool<TInputItem, TOutputItem>::pop(bool const &is_do_wait) {
-    return m_output_queue->pop(is_do_wait);
+typename CWorkerPool<TInputItem, TOutputItem>::TOutputItems CWorkerPool<TInputItem, TOutputItem>::pop(bool const &is_wait_required) {
+    return m_output_queue->pop(is_wait_required);
 }
 
 
