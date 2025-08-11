@@ -55,8 +55,12 @@ CMultiplexer::CMultiplexer()
 :
     m_epoll_fd(0),
     m_event_fd(0),
-    m_streams_to_add(CAsyncQueue<IStream::TSharedPtr>::create()),
-    m_streams_to_del(CAsyncQueue<IStream::TSharedPtr>::create())
+    m_streams_to_add
+        (CAsyncQueue<IStream::TSharedPtr>::create()),
+    m_streams_to_del
+        (CAsyncQueue<IStream::TSharedPtr>::create()),
+    m_wake_events
+        (CAsyncQueue<Event::TSharedPtr>::create())
 {}
 
 
@@ -197,7 +201,18 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::WRITE, Event::TStatus::BEGIN));
     }
 
+    events.splice(events.end(), m_wake_events->pop(false));
+
     return events; // ----->
+}
+
+
+void CMultiplexer::wake(Event::TSharedPtr const &event) {
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
+
+    m_wake_events->push(event);
+    eventfd_write(m_event_fd, 0);
 }
 
 

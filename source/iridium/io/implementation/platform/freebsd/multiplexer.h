@@ -45,6 +45,8 @@ public:
 
     std::list<Event::TSharedPtr> waitEvents() override;
 
+    void wake(Event::TSharedPtr const &event) override;
+
     void subscribe  (IStream::TSharedPtr const &stream) override;
     void unsubscribe(IStream::TSharedPtr const &stream) override;
 
@@ -66,7 +68,10 @@ private:
     std::array<int, 2>  m_pipe_add;
     std::array<int, 2>  m_pipe_del;
 
-    std::unordered_map<uintptr_t, IStream::TSharedPtr> m_map_fd_stream;
+    std::unordered_map<uintptr_t, IStream::TSharedPtr>
+        m_map_fd_stream;
+    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
+        m_wake_events;
 };
 
 

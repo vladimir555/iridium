@@ -26,6 +26,7 @@ namespace implementation {
 namespace platform {
 
 
+// todo: fix handling orphan sockets on lost connection
 class CMultiplexer:
     public IMultiplexer,
     public threading::Synchronized<std::mutex>
@@ -34,30 +35,33 @@ public:
     DEFINE_IMPLEMENTATION(CMultiplexer)
     CMultiplexer();
 
-    void    initialize()   override;
-    void    finalize()     override;
+    void initialize()   override;
+    void finalize()     override;
 
     void    subscribe(IStream::TSharedPtr const &stream) override;
     void  unsubscribe(IStream::TSharedPtr const &stream) override;
 
     std::list<Event::TSharedPtr> waitEvents() override;
 
+    void wake(Event::TSharedPtr const &event) override;
+
 private:
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;
 
     static int assertOK(int const &result, std::string const &message);
 
-    void    addInternal(IStream::TSharedPtr const &stream);
-    void    delInternal(IStream::TSharedPtr const &stream);
+    void addInternal(IStream::TSharedPtr const &stream);
+    void delInternal(IStream::TSharedPtr const &stream);
 
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
                         m_map_fd_stream;
     std::atomic<int>    m_epoll_fd;
     int                 m_event_fd;
-    
+
     threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_add;
     threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_del;
-    
+    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr   m_wake_events;
+
     std::atomic<bool> m_is_closing;
 };
 
