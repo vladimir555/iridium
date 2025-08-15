@@ -7,11 +7,11 @@
 
 
 #include "iridium/pattern/initializable.h"
+#include "iridium/parsing/node.h"
 
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <map>
 
 
 namespace iridium {
@@ -28,15 +28,11 @@ public:
 class IConnector: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IConnector)
+    using INode = parsing::INode;
     ///
-//    typedef std::map<caching::CachedString, std::string> TRow;
-    typedef std::map<std::string, std::string> TRow;
+    virtual INode::TSharedPtr sendQuery(std::string const &query) = 0;
     ///
-    typedef std::vector< TRow > TRows;
-    ///
-    virtual TRows sendQuery(std::string const &query) = 0;
-    ///
-    static std::vector<std::string> makeFields(TRows const &rows);
+    static std::vector<std::string> makeFields(parsing::INode::TSharedPtr const &rows);
     ///
     static std::string const FIELD_NAME_AFFECTED_ROWS;
 };

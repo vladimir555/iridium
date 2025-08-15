@@ -34,19 +34,20 @@ public:
     ///
     CPostgresConnector(config::TDatebase const &config);
     ///
-    virtual        ~CPostgresConnector() override;
+    virtual ~CPostgresConnector() override;
     ///
-    virtual void    initialize() override;
+    void initialize() override;
     ///
-    virtual void    finalize() override;
+    void finalize() override;
     ///
-    virtual TRows   sendQuery(std::string const &query) override;
+    virtual INode::TSharedPtr
+        sendQuery(std::string const &query) override;
 
 private:
+    // ///
+    // void executeCommand(std::string const &command);
     ///
-    void            executeCommand(std::string const &command);
-    ///
-    PGconn         *m_connection;
+    PGconn *m_connection;
 };
 
 

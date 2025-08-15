@@ -34,17 +34,18 @@ public:
     ///
     CMySQLConnector(config::TDatebase const &config);
     ///
-    virtual        ~CMySQLConnector();
+    virtual ~CMySQLConnector();
     ///
-    virtual void    initialize() override;
+    void initialize() override;
     ///
-    virtual void    finalize() override;
+    void finalize() override;
     ///
-    virtual TRows   sendQuery(std::string const &query) override;
+    INode::TSharedPtr
+        sendQuery(std::string const &query) override;
 
 private:
     ///
-    ::MYSQL         m_connection;
+    ::MYSQL m_connection;
 };
 
 
