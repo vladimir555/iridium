@@ -30,6 +30,8 @@ public:
     ///
     explicit CNodeType(std::string const &name, TValue const &value);
     ///
+    explicit CNodeType(std::string const &name, TValue const &value, std::string const &type);
+    ///
     explicit CNodeType(std::string const &name);
     ///
     virtual ~CNodeType();
@@ -41,6 +43,8 @@ public:
     TValue      getValue() const override;
     ///
     void        setValue(TValue const &value) override;
+    ///
+    std::string getType() const override;
     ///
     typename INodeType<TValue>::TNodesSharedPtr slice(std::string const &path) const override;
     ///
@@ -86,6 +90,8 @@ private:
     ///
     std::string const * const m_name = nullptr;
     ///
+    std::string const * const m_type = nullptr;
+    ///
     TValue m_value;
     ///
     typename INodeType<TValue>::TNodesSharedPtr m_nodes;
@@ -108,6 +114,16 @@ CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value)
 :
     m_strings   (std::make_shared<TStrings>()),
     m_name      (makeName(name)),
+    m_value     (value)
+{}
+
+
+template<typename TValue>
+CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value, std::string const &type)
+:
+    m_strings   (std::make_shared<TStrings>()),
+    m_name      (makeName(name)),
+    m_type      (makeName(type)),
     m_value     (value)
 {}
 
@@ -177,6 +193,15 @@ TValue CNodeType<TValue>::getValue() const {
 template<typename TValue>
 void CNodeType<TValue>::setValue(TValue const &value) {
     m_value = value;
+}
+
+
+template<typename TValue>
+std::string CNodeType<TValue>::getType() const {
+    if (m_type)
+        return *m_type; // ----->
+    else
+        return {}; // ----->
 }
 
 

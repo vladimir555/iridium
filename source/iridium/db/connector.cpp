@@ -19,12 +19,13 @@ iridium::db::Exception::Exception(std::string const &e)
 {}
 
 
-vector<string> IConnector::makeFields(TRows const &rows) {
+vector<string> IConnector::makeFields(INode::TSharedPtr const &rows) {
     vector<string> fields;
 
-    if (!rows.empty())
-        for (auto const &field : rows[0])
-            fields.push_back(field.first);
+    if (rows && rows->size() > 0) {
+        for (auto const &field: *rows)
+            fields.push_back(field->getName());
+    }
 
     return fields; // ----->
 }
