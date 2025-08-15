@@ -127,3 +127,10 @@ target_link_libraries(
     ${CMAKE_THREAD_LIBS_INIT}
 #    ${simdjson}
 )
+
+enable_testing()
+add_test(
+    NAME ${PROJECT_TEST_NAME}
+    COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_TEST_NAME}
+)
+
