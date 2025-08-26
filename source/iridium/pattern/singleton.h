@@ -11,6 +11,7 @@
 
 #include <memory>
 #include <list>
+#include <atomic>
 
 
 namespace iridium {
@@ -24,21 +25,35 @@ class Singleton:
 {
 public:
     ///
-    virtual ~Singleton() = default;
+    virtual ~Singleton();
     ///
     static TClass &instance();
+protected:
+    static std::atomic<bool> m_is_alive;
 };
 
 
 template<typename TClass>
 TClass &Singleton<TClass>::instance() {
     static std::shared_ptr<TClass> instance;
-    
-    if (!instance)
+
+    if (!instance) {
         instance = std::shared_ptr<TClass>(new TClass());
+        m_is_alive = true;
+    }
 
     return *instance; // ----->
 }
+
+
+template<typename TClass>
+Singleton<TClass>::~Singleton() {
+    m_is_alive = false;
+}
+
+
+template<typename TClass>
+std::atomic<bool> Singleton<TClass>::m_is_alive(false);
 
 
 } // pattern
