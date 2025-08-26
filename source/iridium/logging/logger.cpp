@@ -33,6 +33,9 @@ Logger::~Logger() {
 
 
 void Logger::setConfig(config::TLogger const &config) {
+    if (!m_is_alive)
+        return;
+
     LOCK_SCOPE();
 
     for (auto const &sink: m_sinks)
@@ -91,6 +94,9 @@ void Logger::setConfig(config::TLogger const &config) {
 
 
 config::TLogger Logger::getConfig() {
+    if (!m_is_alive)
+        return {};
+
     LOCK_SCOPE();
     if (m_config)
         return config::TLogger(m_config); // ----->
@@ -100,6 +106,9 @@ config::TLogger Logger::getConfig() {
 
 
 void Logger::log(TEvent::TConstSharedPtr const &e) {
+    if (!m_is_alive)
+        return;
+
     LOCK_SCOPE();
     try {
         for (auto const &sink: m_sinks) {
@@ -114,6 +123,9 @@ void Logger::log(TEvent::TConstSharedPtr const &e) {
 
 
 void Logger::addCustomSink(ISink::TSharedPtr const &sink) {
+    if (!m_is_alive)
+        return;
+
     LOCK_SCOPE();
     sink->initialize();
     m_sinks.push_back(sink);
