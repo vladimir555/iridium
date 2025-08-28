@@ -3,11 +3,12 @@ from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps
 from conan.tools.files import load
 from conan.errors import ConanException
 import os
+import re
 
 required_conan_version = ">=2.0"
 
 class IridiumConan(ConanFile):
-    name = "iridium"
+    name = None
     version = None
     license = "LGPL"
     author = "Vladimir Bulaev bulaev_vladimir@mail.ru"
@@ -15,6 +16,7 @@ class IridiumConan(ConanFile):
     description = "Iridium C++ library"
     topics = ("cpp", "network", "security")
     settings = "os", "compiler", "build_type", "arch"
+    package_type = "library"
     options = {
         "shared": [True, False],
         "fPIC": [True, False],
@@ -29,13 +31,32 @@ class IridiumConan(ConanFile):
         "with_postgres": False,
         "with_mysql": False,
     }
-    exports_sources = "CMakeLists.txt", "source/*", "external/*", "version.txt"
+
+    exports_sources = "CMakeLists.txt", "source/*", "external/*"
+
+    def set_name(self):
+        source_dir = os.path.join(self.recipe_folder, "source")
+        for d in os.listdir(source_dir):
+            if d.endswith("-test") or d.endswith("-binary"):
+                continue
+            if os.path.isfile(os.path.join(source_dir, d, "version.h")):
+                self.name = d
+                self.output.info(f"Project name: {self.name}")
+                return
+        raise ConanException("Main library folder with version.h not found")
 
     def set_version(self):
-        version_path = os.path.join(self.recipe_folder, "version.txt")
-        if not os.path.exists(version_path):
-            raise ConanException("version.txt not found!")
-        self.version = load(self, version_path).strip()
+        version_h = os.path.join(self.recipe_folder, "source", self.name, "version.h")
+        if not os.path.exists(version_h):
+            raise ConanException(f"version.h not found: {version_h}")
+        content = load(self, version_h)
+        major = re.search(r"PROJECT_VERSION_MAJOR\s*=\s*([0-9]+)", content)
+        minor = re.search(r"PROJECT_VERSION_MINOR\s*=\s*([0-9]+)", content)
+        patch = re.search(r"PROJECT_VERSION_PATCH\s*=\s*([0-9]+)", content)
+        if not all([major, minor, patch]):
+            raise ConanException("Failed to parse version from version.h")
+        self.version = f"{major.group(1)}.{minor.group(1)}.{patch.group(1)}"
+        self.output.info(f"Version: {self.version}")
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -59,20 +80,19 @@ class IridiumConan(ConanFile):
         self.folders.generators = "build/conan"
 
     def generate(self):
-        # Generate toolchain.cmake, conanfile.cmake
         tc = CMakeToolchain(self)
-        tc.variables["CONFIG_OPENSSL"]   = self.options.with_openssl
+        tc.variables["CONAN_PROJECT_NAME"] = self.name
+        tc.variables["CONFIG_OPENSSL"] = self.options.with_openssl
         tc.variables["CONFIG_POSTGRES"] = self.options.with_postgres
-        tc.variables["CONFIG_MYSQL"]    = self.options.with_mysql
+        tc.variables["CONFIG_MYSQL"] = self.options.with_mysql
         tc.generate()
 
-        # Generate find_package() configs
         deps = CMakeDeps(self)
         deps.generate()
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure()
+        cmake.configure(variables={"CONAN_PROJECT_NAME": self.name})
         cmake.build()
 
     def package(self):
@@ -80,16 +100,13 @@ class IridiumConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.set_property("cmake_file_name", "iridium")
-        self.cpp_info.set_property("cmake_target_name", "iridium")
-        self.cpp_info.libs = ["iridium"]
-
+        self.cpp_info.set_property("cmake_file_name", self.name)
+        self.cpp_info.set_property("cmake_target_name", self.name)
+        self.cpp_info.libs = [self.name]
         if self.settings.os in ["Linux", "FreeBSD"]:
             self.cpp_info.system_libs.extend(["pthread", "dl"])
         if self.settings.os == "Windows":
             self.cpp_info.system_libs.extend(["ws2_32", "iphlpapi"])
-
-        # pass defines
         if self.options.with_openssl:
             self.cpp_info.defines.append("BUILD_FLAG_OPENSSL")
         if self.options.with_postgres:
