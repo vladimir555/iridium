@@ -38,22 +38,22 @@ namespace implementation {
 //         NAME,
 //         VALUE
 //     };
-// 
+//
 //     string  name;
 //     string  value;
 //     TMarker marker      = TMarker::NAME;
-// 
+//
 //     auto clearEntry     = [&name, &value] () {
-//         name.clear();         
-//         value.clear(); 
+//         name.clear();
+//         value.clear();
 //     };
 //     auto validateName   = [&name] () {
 //         if (name.empty())
 //             return; // ----->
-// 
+//
 //         if (name[0] >= '0' && name[0] <= '9')
 //             throw std::runtime_error("json parsing error: wrong json field name: " + name); // ----->
-// 
+//
 //         for (auto const ch: name)
 //             if (ch != '.' && ispunct(static_cast<int>(ch)))
 //                 throw std::runtime_error("json parsing error: wrong json field name: " + name); // ----->
@@ -67,14 +67,14 @@ namespace implementation {
 //             value += "\"";
 //     };
 //     auto addEntry       = [
-//         &name, 
-//         &value, 
+//         &name,
+//         &value,
 //         &node,
 //         &validateName,
 //         &trimEntry,
 //         &clearEntry,
 //         &is_array_item
-//     ] () { 
+//     ] () {
 //         trimEntry();
 //         if (name.empty() || value.empty()) {
 //            // array simple item
@@ -88,37 +88,37 @@ namespace implementation {
 //         } else {
 //             if (name == "#text")
 //                 name.clear();
-// 
+//
 //             validateName();
 //             node->addChild(name, value);
 //         }
 //         clearEntry();
 //     };
-// 
+//
 //     while (index < source.size()) {
 //         auto ch  = source[index];
 //         index++;
-// 
+//
 //         if (ch == '{') {
 //             INode::TSharedPtr node_child;
-// 
+//
 //             trimEntry();
 //             validateName();
-// 
+//
 //             if (name.empty())
 //                 node_child = node;
 //             else
 //                 node_child = node->addChild(name, "");
-// 
+//
 //             convertStringToNode(source, node_child, index); // <-----
-// 
+//
 //             if (is_array_item)
 //                 return; // <-----
-// 
+//
 //             clearEntry();
 //             continue; // <---
 //         }
-// 
+//
 //         if (ch == '[') {
 //             while (ch != ']') {
 //                 trimEntry();
@@ -139,30 +139,30 @@ namespace implementation {
 //                 }
 //                 ch = source[index - 1];
 //             }
-// 
+//
 //             clearEntry();
 //             continue; // <---
 //         }
-// 
+//
 //         if (ch == ',') {
 //             addEntry();
 //             marker = TMarker::NAME;
 //             continue; // <---
 //         }
-// 
+//
 //         if (ch == '}' || ch == ']') {
 //             addEntry();
 //             return; // ----->
 //         }
-// 
+//
 //         if (ch == ':') {
 //             marker = TMarker::VALUE;
 //             continue; // <---
 //         }
-// 
+//
 //         if (marker == TMarker::NAME)
 //             name  += ch;
-// 
+//
 //         if (marker == TMarker::VALUE)
 //             value += ch;
 //     }
@@ -224,7 +224,7 @@ namespace implementation {
 //    while (index < source.size()) {
 //        char const &ch = source[index];
 //        index++;
-        
+
 //        if (ch == '\n') {
 //            line++;
 //            position = 0;
@@ -335,7 +335,7 @@ namespace implementation {
 //    if (!brackets.empty())
 //        throw std::runtime_error(string("json parsing error: expects '") +
 //            brackets.back() + "' " + getErrorPos()); // ----->
-        
+
 //    return node; // ----->
 //}
 
@@ -378,14 +378,33 @@ namespace implementation {
 //}
 
 
+constexpr char unescapeChar(char ch) {
+    switch (ch) {
+        case 'n':  return '\n';   // newline
+        case 't':  return '\t';   // tab
+        case 'r':  return '\r';   // carriage return
+        case 'b':  return '\b';   // backspace
+        case 'f':  return '\f';   // form feed
+        case 'v':  return '\v';   // vertical tab
+        case 'a':  return '\a';   // alert (bell)
+        case '\\': return '\\';   // backslash
+        case '"':  return '"';    // double quote
+        case '\'': return '\'';   // single quote
+        case '0':  return '\0';   // null character
+        default:   return ch;     // all other characters remain unchanged
+    }
+}
+
 
 // todo: optimize with string_view
 INode::TSharedPtr convertJSONStringToNode(string const &source) {
 //    LOGT << source;
-    static string const DEFAULT_NODE_NAME_TEXT   = "#text"; // xml node without node name
+
+    // xml node without node name
+    static string const DEFAULT_NODE_NAME_TEXT   = "#text";
     static string const DEFAULT_NODE_NAME_ROOT   = "root";
     static string const DEFAULT_NODE_NAME_ARRAY  = "array";
-    
+
     INode::TSharedPtr       node = CNode::create(DEFAULT_NODE_NAME_ROOT), root = node;
     list<INode::TSharedPtr> stack;
 
@@ -416,7 +435,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
         if (is_quotes) {
             if (is_masked) {
                 is_masked = false;
-                value += ch;
+                value += unescapeChar(ch);
                 continue; // <---
             } else {
                 if (ch == '\\') {
@@ -568,7 +587,7 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
                 ch + "' at " + convert<string>(line) + ':' + convert<string>(index)); // ----->
         }
     }
-    
+
     if (!expected_brackets.empty())
         throw std::runtime_error(string("json parsing error: expected symbol '") +
             expected_brackets.back() + "' at end of json"); // ----->
@@ -578,14 +597,14 @@ INode::TSharedPtr convertJSONStringToNode(string const &source) {
     else
         return root; // ----->
 }
-	
+
 
 INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 //     INode::TSharedPtr   root_node = CNode::create("root", "");
 //     size_t              index = 0;
-// 
+//
 //     convertStringToNode(source, root_node, index);
-// 
+//
 //     if (root_node->size() == 1)
 //         root_node = *root_node->begin();
 //     else {
@@ -593,9 +612,9 @@ INode::TSharedPtr CJSONParser::parse(std::string const &source) const {
 //         root_node = CNode::create("root");
 //         root_node->addChild(childs);
 //     }
-// 
+//
 //     return root_node; // ----->
-    
+
     auto node = convertJSONStringToNode(source);
     if  (node) {
         if (node->size() == 1)
@@ -650,7 +669,7 @@ void convertNodeToJSONString(INode::TConstSharedPtr const &node, string &result,
 
                 if (name.empty())
                     name = "#text";
-                    
+
                 result += tab;
                 if (tab.empty())
                     result += DEFAULT_TAB;
