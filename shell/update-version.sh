@@ -1,33 +1,68 @@
 #!/bin/sh
 
-PROJECT_NAME=$(basename "$(pwd)")
-echo "Project name detected: $PROJECT_NAME"
+# -----------------------------------------------------------------------------
+# Auto-detect project name from source/ directory structure
+# Looks for the first folder in source/ that:
+#   - is a directory
+#   - does not end with -test or -binary
+#   - contains version.h
+# This ensures consistency with CMake and Conan
+# -----------------------------------------------------------------------------
+PROJECT_NAME=""
+SOURCE_DIR="source"
 
-VERSION_HEADER="source/${PROJECT_NAME}/version.h"
-mkdir -p "source/${PROJECT_NAME}"
-MAJOR=0
+if [ ! -d "$SOURCE_DIR" ]; then
+    echo "Error: directory 'source/' not found"
+    exit 1
+fi
 
-# Проверка: в git-репозитории?
+for dir in "$SOURCE_DIR"/*/; do
+    dir=${dir%/}                # Remove trailing slash
+    dir_name=${dir##*/}         # Get basename
+
+    # Skip test and binary modules
+    case "$dir_name" in
+        *-test|*-binary)
+            continue
+            ;;
+        *)
+            if [ -f "$dir/version.h" ]; then
+                PROJECT_NAME="$dir_name"
+                break
+            fi
+            ;;
+    esac
+done
+
+if [ -z "$PROJECT_NAME" ]; then
+    echo "Error: no main library folder found in 'source/'"
+    echo "Expected: source/<name>/version.h (e.g. source/iridium/version.h)"
+    exit 1
+fi
+
+echo "Project name auto-detected: $PROJECT_NAME"
+
+# -----------------------------------------------------------------------------
+# Verify we are in a git repository
+# -----------------------------------------------------------------------------
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
     echo "Error: not in a git repository"
     exit 1
 fi
 
-# ----------------------------
-# Автоопределение главной ветки: main или master
-# ----------------------------
+# -----------------------------------------------------------------------------
+# Detect primary branch: main or master
+# -----------------------------------------------------------------------------
 PRIMARY_BRANCH=""
-if git show-ref --quiet refs/heads/main; then
-    # Проверим, есть ли main и активен ли он в истории
-    if git log -n 1 main --oneline > /dev/null 2>&1; then
-        PRIMARY_BRANCH="main"
-    fi
+if git show-ref --quiet refs/heads/main > /dev/null 2>&1 && \
+   git log -n 1 main --oneline > /dev/null 2>&1; then
+    PRIMARY_BRANCH="main"
 fi
 
-if [ -z "$PRIMARY_BRANCH" ] && git show-ref --quiet refs/heads/master; then
-    if git log -n 1 master --oneline > /dev/null 2>&1; then
-        PRIMARY_BRANCH="master"
-    fi
+if [ -z "$PRIMARY_BRANCH" ] && \
+   git show-ref --quiet refs/heads/master > /dev/null 2>&1 && \
+   git log -n 1 master --oneline > /dev/null 2>&1; then
+    PRIMARY_BRANCH="master"
 fi
 
 if [ -z "$PRIMARY_BRANCH" ]; then
@@ -37,34 +72,45 @@ fi
 
 echo "Primary branch detected: $PRIMARY_BRANCH"
 
-# ----------------------------
-# MINOR: количество слияний develop → PRIMARY_BRANCH
-# ----------------------------
+# -----------------------------------------------------------------------------
+# MINOR version: count merges from develop -> primary branch
+# Uses --first-parent to follow mainline
+# -----------------------------------------------------------------------------
 MERGE_LOG=$(git log "$PRIMARY_BRANCH" --merges --oneline --first-parent 2>/dev/null)
-MINOR=0
-echo "$MERGE_LOG" | grep -i "develop" | while read line; do
-    MINOR=$((MINOR + 1))
-done
+MINOR=$(echo "$MERGE_LOG" | grep -i "develop" | wc -l | tr -d ' ')
 
-# ----------------------------
-# PATCH: количество коммитов в ветке develop
-# ----------------------------
-if git show-ref --quiet refs/heads/develop; then
+# -----------------------------------------------------------------------------
+# PATCH version: number of commits in develop
+# Fallback to primary branch if develop does not exist
+# -----------------------------------------------------------------------------
+if git show-ref --quiet refs/heads/develop > /dev/null 2>&1; then
     PATCH=$(git rev-list develop --count 2>/dev/null)
 else
-    # Если develop нет — используем PRIMARY_BRANCH
     PATCH=$(git rev-list "$PRIMARY_BRANCH" --count 2>/dev/null)
 fi
 
-# ----------------------------
-# Fallback
-# ----------------------------
+# -----------------------------------------------------------------------------
+# Fallback in case values are empty
+# -----------------------------------------------------------------------------
 [ -z "$MINOR" ] && MINOR=0
 [ -z "$PATCH" ] && PATCH=0
 
-# ----------------------------
-# Генерируем version.h
-# ----------------------------
+# -----------------------------------------------------------------------------
+# Path to version.h and directory creation
+# -----------------------------------------------------------------------------
+VERSION_HEADER="source/${PROJECT_NAME}/version.h"
+mkdir -p "source/${PROJECT_NAME}"
+
+# -----------------------------------------------------------------------------
+# Generate version.h
+# Format:
+#   namespace iridium {
+#   constexpr auto PROJECT_NAME = "iridium";
+#   constexpr auto PROJECT_VERSION_MAJOR = 0;
+#   constexpr auto PROJECT_VERSION_MINOR = 5;
+#   constexpr auto PROJECT_VERSION_PATCH = 397;
+#   }
+# -----------------------------------------------------------------------------
 cat > "$VERSION_HEADER" << EOF
 // AUTOGENERATED — DO NOT EDIT
 // Generated by shell/update-version.sh
@@ -72,11 +118,11 @@ cat > "$VERSION_HEADER" << EOF
 
 namespace ${PROJECT_NAME} {
 constexpr auto PROJECT_NAME = "${PROJECT_NAME}";
-constexpr auto PROJECT_VERSION_MAJOR = $MAJOR;
+constexpr auto PROJECT_VERSION_MAJOR = 0;
 constexpr auto PROJECT_VERSION_MINOR = $MINOR;
 constexpr auto PROJECT_VERSION_PATCH = $PATCH;
 } // namespace ${PROJECT_NAME}
 EOF
 
-echo "Version updated: $MAJOR.$MINOR.$PATCH"
+echo "Version updated: 0.$MINOR.$PATCH"
 git add "$VERSION_HEADER"
