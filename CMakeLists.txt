@@ -5,9 +5,7 @@ cmake_minimum_required(VERSION 3.25)
 if(DEFINED CONAN_PROJECT_NAME)
     set(PROJECT_NAME "${CONAN_PROJECT_NAME}")
     message(STATUS "Project name set from Conan: ${PROJECT_NAME}")
-endif()
-
-if(NOT PROJECT_NAME)
+else()
     file(GLOB SUBDIRS LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/source/*")
     foreach(dir ${SUBDIRS})
         get_filename_component(name "${dir}" NAME)
@@ -15,7 +13,6 @@ if(NOT PROJECT_NAME)
             AND NOT name MATCHES "-test$" 
             AND NOT name MATCHES "-binary$")
             set(PROJECT_NAME "${name}")
-            message(STATUS "Project name auto-detected: ${PROJECT_NAME}")
             break()
         endif()
     endforeach()
@@ -24,7 +21,6 @@ if(NOT PROJECT_NAME)
         message(FATAL_ERROR "No source/<name>/ folder found (not ending with -test or -binary)")
     endif()
 endif()
-message(STATUS "Project: ${PROJECT_NAME}")
 
 # -----
 # Read version from source/iridium/version.h
