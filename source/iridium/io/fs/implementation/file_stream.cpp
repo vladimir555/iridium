@@ -102,7 +102,7 @@ void CFileStream::initialize() {
     if (m_open_mode == TOpenMode::READ)
         open_mode = "rb";
     if (m_open_mode == TOpenMode::WRITE)
-        open_mode = "abx";
+        open_mode = "ab";
     if (m_open_mode == TOpenMode::REWRITE)
         open_mode = "wbx";
 //    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ, TOpenMode::WRITE})
