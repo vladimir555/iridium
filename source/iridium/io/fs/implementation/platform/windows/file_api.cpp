@@ -4,7 +4,8 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "../../file_api_assert.h"
+#include "iridium/items.h"
+#include "iridium/io/fs/implementation/file_api_assert.h"
 
 #include <cstring>
 #include <sys/stat.h>

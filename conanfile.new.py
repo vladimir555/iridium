@@ -94,6 +94,7 @@ class IridiumConan(ConanFile):
         cmake = CMake(self)
         cmake.configure(variables={"CONAN_PROJECT_NAME": self.name})
         cmake.build()
+        cmake.test()
 
     def package(self):
         cmake = CMake(self)

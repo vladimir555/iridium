@@ -77,7 +77,7 @@ T CStreamPort::assertOK(T const &result, std::string const &message) {
 }
 
 
-} // _unix
+} // unix_
 } // platform
 } // implementation
 } // io
