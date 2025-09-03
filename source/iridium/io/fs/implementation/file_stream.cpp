@@ -32,30 +32,30 @@ CFileStream::~CFileStream() {
         close(m_file);
 }
 
-    
+
 Buffer::TSharedPtr CFileStream::read(size_t const &size) {
     if (!m_file)
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
-    
+
     auto buffer = Buffer::create(size, 0);
     auto count  = freadInternal(buffer->data(), 1, buffer->size(), m_file);
-    
+
     if (count == 0)
         return nullptr; // ----->
     else
         buffer->resize(count);
-    
+
     if (::ferror(m_file))
         throw std::runtime_error(
             "read file '"       + m_file_name + "'" +
             " mode "            + convert<string>(m_open_mode) +
             " error: was read " + convert<string>(count) +
             " bytes, "          + strerrorInternal(errno)); // ----->
-    
+
     return buffer; // ----->
 }
 
-    
+
 size_t CFileStream::write(Buffer::TSharedPtr const &line) {
     if (!m_file)
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
@@ -97,14 +97,14 @@ TFileStatus CFileStream::getStatus() const {
 
 void CFileStream::initialize() {
     finalize();
-    
+
     string open_mode;
     if (m_open_mode == TOpenMode::READ)
         open_mode = "rb";
     if (m_open_mode == TOpenMode::WRITE)
-        open_mode = "ab";
+        open_mode = "abx";
     if (m_open_mode == TOpenMode::REWRITE)
-        open_mode = "wb";
+        open_mode = "wbx";
 //    if (m_open_mode.getEnums() == std::list<TOpenMode>{TOpenMode::READ, TOpenMode::WRITE})
 //        open_mode = "rb+";
 

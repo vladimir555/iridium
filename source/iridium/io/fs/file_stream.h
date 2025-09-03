@@ -7,21 +7,12 @@
 
 
 #include "iridium/io/stream.h"
-
-#include <chrono>
+#include "iridium/io/fs/file_status.h"
 
 
 namespace iridium {
 namespace io {
 namespace fs {
-
-
-struct TFileStatus {
-    std::chrono::system_clock::time_point   
-        last_modified;
-    size_t                                  
-        size;
-};
 
 
 class IFileStream: public virtual IStream {

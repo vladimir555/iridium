@@ -8,7 +8,8 @@
 #ifdef FREEBSD_LIKE_PLATFORM
 
 
-#include "iridium/io/fs/file_stream.h"
+#include "iridium/io/fs/file_status.h"
+#include "../unix/file_api.h"
 
 #include <string.h>
 
@@ -24,14 +25,16 @@ auto const fwriteInternal     = ::fwrite;
 auto const freadInternal      = ::fread;
 auto const fflushInternal     = ::fflush;
 auto const strerrorInternal   = ::strerror;
-    
+
+
 int getFD(::FILE *file);
+
 
 iridium::io::fs::TFileStatus getFileStatus(::FILE *file);
 
-::FILE *open(std::string const &file_name, std::string const &open_mode);
 
-void close(::FILE *file);
+using unix_::open;
+using unix_::close;
 
 
 } // platform
