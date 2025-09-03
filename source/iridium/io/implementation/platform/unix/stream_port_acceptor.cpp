@@ -52,11 +52,13 @@ void CStreamPortAcceptor::initialize() {
         memset(&addr, 0, sizeof(addr));
         addr.sun_family = AF_UNIX;
 
-        strncpy(addr.sun_path + 1, path.c_str() + 1, sizeof(addr.sun_path) - 2);
+        snprintf(addr.sun_path + 1, sizeof(addr.sun_path) - 1, "%s", path.c_str() + 1);
 
         socklen_t addr_len = static_cast<socklen_t>(
-            offsetof(struct sockaddr_un, sun_path) + strlen(path.c_str() + 1) + 1
+            offsetof(struct sockaddr_un, sun_path) +
+            strnlen(path.c_str() + 1, sizeof(addr.sun_path) - 2) + 1
         );
+
         m_fd = assertOK(::socket(AF_UNIX, SOCK_STREAM, 0), "socket");
         static int const YES = 1;
         ::setsockopt(m_fd, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES));
