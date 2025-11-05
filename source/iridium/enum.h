@@ -40,11 +40,12 @@ public: \
     TEnum(TEnumInternal const &e): m_value(e) {} \
     TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
-        for (auto const &i: map_enum_string) \
+        for (auto const &i: map_enum_string) { \
             if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) { \
                 m_value = i.first; \
                 break; \
             } \
+        } \
     } \
    ~TEnum() = default; \
     operator std::string() const { \
@@ -128,51 +129,76 @@ public: \
     } \
 };
 
-//DEFINE_CONVERT(TEnum, std::string)
-//DEFINE_CONVERT(std::string, TEnum)
-//DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
 
-
-#define DEFINE_ENUM_HASH(TEnum) \
+#define DEFINE_ENUM_CONVERT(TEnum) \
+template<> \
+struct iridium::convertion::implementation::TConvert<std::string, TEnum::TEnumInternal> { \
+    static std::string convert(TEnum::TEnumInternal const &e) { \
+        return TEnum::convert(TEnum(e)); \
+    } \
+}; \
+template<> \
+struct iridium::convertion::implementation::TConvert<TEnum::TEnumInternal, std::string> { \
+    static TEnum::TEnumInternal convert(std::string const &e) { \
+        return TEnum::convert(e); \
+    } \
+}; \
 namespace std { \
-    template<> \
-    struct hash<TEnum> { \
-        std::size_t operator()(TEnum const &e) const noexcept { \
-            return std::hash<int>()(static_cast<int>(static_cast<TEnum::TEnumInternal>(e))); \
-        } \
-    }; \
+template<> \
+struct hash<TEnum> { \
+    size_t operator()(TEnum const &value) const noexcept { \
+        return std::hash<int>()(static_cast<int>(static_cast<TEnum::TEnumInternal>(value))); \
+    } \
+}; \
 }
 
 
-#define DEFINE_ENUM_CONVERT(TEnum) \
-DEFINE_CONVERT(TEnum, std::string) \
-DEFINE_CONVERT(std::string, TEnum) \
-DEFINE_CONVERT(std::string, std::list<TEnum>) \
-DEFINE_CONVERT(std::string, TEnum::TEnumInternal)
-
-/// use not in namespace, todo: private enum
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = -1; \
-std::map<TEnum::TEnumInternal, std::string> const TEnum::map_enum_string(TEnum::generateMap()); \
-IMPLEMENT_CONVERT(TEnum, std::string, TEnum::convert) \
-IMPLEMENT_CONVERT(std::string, TEnum, TEnum::convert) \
-IMPLEMENT_CONVERT(std::string, TEnum::TEnumInternal, TEnum::convert)
+std::map<TEnum::TEnumInternal, std::string> const TEnum::map_enum_string(TEnum::generateMap());
 
-//IMPLEMENT_CONVERT(std::string, std::list<TEnum>, TEnum::convert)
+
+namespace iridium::convertion::implementation {
+
+
+namespace detail {
+
+
+template<typename T, typename = void>
+struct TIsIridiumEnum: std::false_type {};
+template<typename T>
+struct TIsIridiumEnum<T, std::void_t<typename T::TEnumInternal> > : std::true_type {};
+
+
+} // detail
+
+
+template<typename TEnum>
+struct TConvert<
+    std::string,
+    TEnum,
+    std::enable_if_t<!std::is_enum_v<TEnum> && detail::TIsIridiumEnum<TEnum>::value> >
+{
+    static std::string convert(TEnum const &value) {
+        return TEnum::convert(value);
+    }
+};
+
+
+template<typename TEnum>
+struct TConvert<
+    TEnum,
+    std::string,
+    std::enable_if_t<detail::TIsIridiumEnum<TEnum>::value> >
+{
+    static TEnum convert(std::string const &value) {
+        return TEnum::convert(value);
+    }
+};
+
+
+} // iridium::convertion::implementation
+
 
 #endif // HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
-
-
-/*
-static std::string convert(TEnum const &e) { \
-    auto result = static_cast<std::string>(e); \
-    if (result == "UNKNOWN") { \
-        auto message = "convert enum " + std::string(#TEnum) + " int " + iridium::convertion::convert<std::string>(static_cast<int>(static_cast<TEnumInternal>(e))) + " to string error: valid enum keys is"; \
-        for (auto const &i: getEnums()) \
-            message += " " + static_cast<std::string>(TEnum(i)) + " = " + iridium::convertion::convert<std::string>(static_cast<int>(i)); \
-        throw std::runtime_error(message); \
-    } \
-    return result; \
-} \
-*/

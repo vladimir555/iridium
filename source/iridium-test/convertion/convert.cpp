@@ -26,6 +26,7 @@ enum TAnotherEnum {
 
 
 DEFINE_ENUM(TEnum, E1, E2, E3 = 5, E4 = AE1, E5)
+DEFINE_ENUM_CONVERT(TEnum)
 IMPLEMENT_ENUM(TEnum)
 
 
@@ -207,7 +208,8 @@ TEST(types) {
 
 
 //#ifndef _WIN32
-    ASSERT(string("ħëłlö"), equal, convert<string>(wstring(L"ħëłlö")));
+//    ASSERT(string("ħëłlö"), equal, convert<string>(wstring(L"ħëłlö")));
+    ASSERT(std::string(u8"ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));
 //#endif // !_WIN32
 //    uint8_t  const hello_s[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
 //    uint32_t const hello_w[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
@@ -253,6 +255,8 @@ TEST(enum_) {
         ASSERT("E2", equal, convert<string>(e));
     }
 
+
+//    LOGI << "'" << convert<TEnum>(string("E55")) << "'";
     ASSERT(convert<TEnum>(string("E55")), std::runtime_error);
     ASSERT("UNKNOWN", equal, convert<string>(TEnum(static_cast<TEnum::TEnumInternal>(10))));
 

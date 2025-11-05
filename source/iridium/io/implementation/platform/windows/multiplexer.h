@@ -33,6 +33,7 @@ public:
     std::list<Event::TSharedPtr> waitEvents() override;
     void   subscribe(IStream::TSharedPtr const &stream) override;
     void unsubscribe(IStream::TSharedPtr const &stream) override;
+    void wake(Event::TSharedPtr const &event) override;
 
 private:
     HANDLE m_iocp;

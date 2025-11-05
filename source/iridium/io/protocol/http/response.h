@@ -51,6 +51,9 @@ DEFINE_ROOT_NODE_END()
 } // iridium
 
 
+DEFINE_CONVERT(iridium::io::protocol::http::response::THttp::TMessageLine, std::string)
+DEFINE_CONVERT(std::string, iridium::io::protocol::http::response::THttp::TMessageLine)
+
 DEFINE_CONVERT(iridium::io::protocol::http::response::THttp::TMessage, std::string)
 DEFINE_CONVERT(std::string, iridium::io::protocol::http::response::THttp::TMessage)
 

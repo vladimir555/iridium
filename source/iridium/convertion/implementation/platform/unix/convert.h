@@ -2,16 +2,17 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-#include "iridium/platform.h"
+#ifndef HEADER_CONVERT_0B3F9A65_12EC_4018_A94C_D2DE013D2411
+#define HEADER_CONVERT_0B3F9A65_12EC_4018_A94C_D2DE013D2411
 
+
+#include "iridium/platform.h"
 
 
 #ifdef UNIX_PLATFORM
 
 
-#ifndef HEADER_CONVERT_0B3F9A65_12EC_4018_A94C_D2DE013D2411
-#define HEADER_CONVERT_0B3F9A65_12EC_4018_A94C_D2DE013D2411
-
+#include "iridium/convertion/implementation/common.h"
 
 #include <time.h>
 #include <stdint.h>
@@ -19,22 +20,19 @@
 #include <algorithm>
 
 
-namespace iridium {
-namespace convertion {
-namespace implementation {
-namespace platform {
+namespace iridium::convertion::implementation::platform {
 
 
-void itoa(int32_t const &value, char *buffer, int const &base);
+void itoa(int32_t const &value, char *buffer, uint8_t const &base);
 
 
-void itoa(uint32_t const &value, char *buffer, int const &base);
+void itoa(uint32_t const &value, char *buffer, uint8_t const &base);
 
 
-void itoa(int64_t const &value, char *buffer, int const &base);
+void itoa(int64_t const &value, char *buffer, uint8_t const &base);
 
 
-void itoa(uint64_t const &value, char *buffer, int const &base);
+void itoa(uint64_t const &value, char *buffer, uint8_t const &base);
 
 
 template<typename ... TArgs>
@@ -78,10 +76,7 @@ time_t mkgmtime(TArgs ... args) {
 }
 
 
-} // platform
-} // implementation
-} // convertuin 
-} // iridium
+} // iridium::convert::implementation
 
 
 #endif // HEADER_CONVERT_0B3F9A65_12EC_4018_A94C_D2DE013D2411

@@ -218,6 +218,11 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 }
 
 
+void CMultiplexer::wake(Event::TSharedPtr const &) {
+    // todo:
+}
+
+
 } // platform
 } // implementation
 } // io

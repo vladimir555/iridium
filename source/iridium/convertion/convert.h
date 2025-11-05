@@ -9,32 +9,40 @@
 #include "implementation/convert.h"
 
 
-namespace iridium {
-namespace convertion {
+namespace iridium::convertion {
 
 
-using implementation::convert;
-using implementation::convertPtr;
 using implementation::config;
 
 
-} // convertion
-} // iridium
+template<typename TResult, typename TValue, bool is_throwable = false>
+TResult convert(TValue const &value) {
+    return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value);
+}
+
+
+template<typename TResult, typename TValue, typename TFormat, bool is_throwable = false>
+TResult convert(TValue const &value, TFormat const &format) {
+    return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value, format);
+}
+
+
+} // iridium::convertion
 
 
 #define DEFINE_CONVERT(TTo, TFrom) \
 namespace iridium::convertion::implementation { \
 template<> \
-TTo convert<TTo, TFrom>(TFrom const &value); \
+struct TConvert<TTo, TFrom> { \
+    static TTo convert(TFrom const &value); \
+}; \
 }
-
 
 
 #define IMPLEMENT_CONVERT(TTo, TFrom, TFunc) \
 namespace iridium::convertion::implementation { \
-template<> \
-TTo convert<TTo, TFrom>(TFrom const &from) { \
-    return TFunc(from); \
+TTo TConvert<TTo, TFrom>::convert(TFrom const &value) { \
+    return TFunc(value); \
 } \
 }
 

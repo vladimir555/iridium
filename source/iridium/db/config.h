@@ -20,7 +20,7 @@ DEFINE_ROOT_NODE_BEGIN(Datebase)
         TDBType,
         MYSQL,
         POSTGRES
-    )
+    );
     DEFINE_ATTRIBUTE(TDBType    , Type, {})
     DEFINE_ATTRIBUTE(std::string, Host, {})
     DEFINE_ATTRIBUTE(uint16_t   , Port, {})
@@ -37,7 +37,7 @@ DEFINE_ROOT_NODE_END()
 } // iridium
 
 
-DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)
+//DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)
 
 
 #endif // HEADER_CONFIG_08F54573_BC06_4817_9AE5_35A3BC49E892

@@ -1,16 +1,15 @@
-#include <string>
-
-#include "iridium/convertion/convert.h"
-
 #include "convert.h"
 
 
 #ifdef WINDOWS_PLATFORM
 
 
+#include "iridium/convertion/convert.h"
+
 #include <stdlib.h>
 #include <ctime>
 #include <stdio.h>
+#include <string>
 
 
 using std::string;
@@ -78,12 +77,6 @@ __time64_t mkgmtime(struct tm * const tm_) {
 } // implementation
 } // convertuin
 } // iridium
-
-
-template<>
-std::string iridium::convertion::implementation::convert(unsigned long const &value) {
-    return convert<string>(static_cast<uint64_t>(value)); // ----->
-}
 
 
 #endif // WINDOWS_PLATFORM

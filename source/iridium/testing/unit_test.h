@@ -115,19 +115,37 @@ void UnitTest::fail(
     try {
         message = line
             +   "\n'" + condition_source + "'\n"
-            +   "L: " + convertion::convert<std::string>(left)
-            + "\nR: " + convertion::convert<std::string>(right);
+            +   "L: " + convertion::convert<std::string, TValue, true>(left)
+            + "\nR: " + convertion::convert<std::string, TValue, true>(right);
     } catch (std::exception const &) {}
 
     if (message.empty()) {
         message = line
             + "\n'"         + condition_source
-            +"'\ntype: '"   + typeid(TValue).name()
-            +"'\nsize: "    + convertion::convert<std::string>(sizeof(TValue));
+            +"'\ntype: "   + typeid(TValue).name()
+            + "\nsize: "    + convertion::convert<std::string>(sizeof(TValue));
     }
 
     throw Exception(message);
 }
+
+
+template<>
+void UnitTest::fail<std::string>(
+    std::string const &left,
+    std::string const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line);
+
+
+template<>
+void UnitTest::fail<std::chrono::system_clock::time_point>(
+    std::chrono::system_clock::time_point const &left,
+    std::chrono::system_clock::time_point const &right,
+    std::string const &,
+    std::string const &condition_source,
+    std::string const &line);
 
 
 template<typename TLeft, typename TRight>

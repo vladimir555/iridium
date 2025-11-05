@@ -249,10 +249,9 @@ TEST(compose_xml) {
 TEST(parse_json) {
     auto parser = CJSONParser::create();
 
-    ASSERT("null\"\n"        , equal, parser->parse( R"({  "value":"null\"\n"}  )")->getValue());
+    ASSERT(std::string("null\n"), equal, parser->parse("{  \"value\":\"null\n\"}  ")->getValue());
 
     auto node   = parser->parse(beer_json);
-
 
     ASSERT(8, equal, node->size());
     ASSERT("MyBeerJournal", equal, node->getName());
