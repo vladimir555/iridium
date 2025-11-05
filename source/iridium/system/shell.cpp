@@ -15,7 +15,6 @@ using std::chrono::milliseconds;
 using iridium::system::implementation::CProcessStream;
 using iridium::io::implementation::CMultiplexer;
 using iridium::convertion::convert;
-using iridium::convertion::convertPtr;
 
 
 namespace iridium {
@@ -77,7 +76,7 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
                         now = std::chrono::system_clock::now();
 
                         if (buffer && !buffer->empty() && now < stop_time) {
-                            result.output += convertPtr(buffer);
+                            result.output += convert<string>(buffer);
 
                             if (buffer->size() < io::DEFAULT_BUFFER_SIZE)
                                 break; // ----->

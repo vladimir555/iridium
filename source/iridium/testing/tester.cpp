@@ -66,6 +66,10 @@ struct TCmdArgs {
 } // iridium
 
 
+//DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TCommand);
+//DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TMode);
+//DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TPrintResult);
+
 IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TCommand);
 IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TMode);
 IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TPrintResult);

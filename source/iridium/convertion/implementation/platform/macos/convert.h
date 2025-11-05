@@ -14,13 +14,25 @@
 
 #include "../unix/convert.h"
 
+#include "iridium/convertion/implementation/common.h"
+
+
+namespace iridium::convertion::implementation {
+
 
 template<>
-std::string iridium::convertion::implementation::convert(long const &value);
+struct TConvert<std::string, long> {
+    static std::string convert(long const &value);
+};
 
 
 template<>
-std::string iridium::convertion::implementation::convert(unsigned long const &value);
+struct TConvert<std::string, unsigned long> {
+    static std::string convert(unsigned long const &value);
+};
+
+
+} // iridium::convertion::implementation
 
 
 #endif // MACOS_PLATFORM

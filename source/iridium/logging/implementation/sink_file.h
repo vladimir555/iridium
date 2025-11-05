@@ -51,7 +51,7 @@ private:
 } // iridium
 
 
-DEFINE_ENUM_CONVERT(iridium::logging::implementation::CSinkFile::TRotation)
+//DEFINE_ENUM_CONVERT(iridium::logging::implementation::CSinkFile::TRotation)
 
 
 #endif // HEADER_SINK_FILE_EE36E77A_D49D_46A5_9728_AD2D5D5B6573

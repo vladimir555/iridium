@@ -1,20 +1,21 @@
-#include "iridium/platform.h"
-
+#include "convert.h"
 
 
 #ifdef UNIX_PLATFORM
 
 
-#include "convert.h"
-
 #include <algorithm>
+#include <string>
+
+
+using std::string;
 
 
 namespace {
 
 
 template<typename TUInt>
-void itoaUInt(TUInt const &value_, char *buffer, int const &base) {
+void itoaUInt(TUInt const &value_, char *buffer, uint8_t const &base) {
     TUInt value = value_;
 
     char* buffer_begin = buffer;
@@ -36,7 +37,7 @@ void itoaUInt(TUInt const &value_, char *buffer, int const &base) {
 
 
 template<typename TInt>
-void itoaInt(TInt const &value_, char *buffer, int const &base) {
+void itoaInt(TInt const &value_, char *buffer, uint8_t const &base) {
     TInt value = value_;
 
     if (value_ < 0) {
@@ -52,36 +53,30 @@ void itoaInt(TInt const &value_, char *buffer, int const &base) {
 } // unnamed
 
 
-namespace iridium {
-namespace convertion {
-namespace implementation {
-namespace platform {
+namespace iridium::convertion::implementation::platform {
 
 
-void itoa(int32_t const &value, char *buffer, int const &base) {
+void itoa(int32_t const &value, char *buffer, uint8_t const &base) {
     itoaInt(value, buffer, base);
 }
 
 
-void itoa(int64_t const &value, char *buffer, int const &base) {
+void itoa(int64_t const &value, char *buffer, uint8_t const &base) {
     itoaInt(value, buffer, base);
 }
 
 
-void itoa(uint32_t const &value, char *buffer, int const &base) {
+void itoa(uint32_t const &value, char *buffer, uint8_t const &base) {
     itoaUInt(value, buffer, base);
 }
 
 
-void itoa(uint64_t const &value, char *buffer, int const &base) {
+void itoa(uint64_t const &value, char *buffer, uint8_t const &base) {
     itoaUInt(value, buffer, base);
 }
 
 
-} // platform
-} // implementation
-} // convertuin
-} // iridium
+} // iridium::convertion::implementation::platform
 
 
 #endif // UNIX_PLATFORM

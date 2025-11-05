@@ -42,7 +42,7 @@ struct TEvent {
 } // iridium
 
 
-DEFINE_ENUM_CONVERT(iridium::logging::TEvent::TLevel)
+//DEFINE_ENUM_CONVERT(iridium::logging::TEvent::TLevel)
 
 
 #endif // HEADER_EVENT_7923AB72_4A05_48BD_8490_D2C40F047299

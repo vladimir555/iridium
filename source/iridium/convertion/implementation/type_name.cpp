@@ -1,15 +1,15 @@
-#include "type_name.h"
-
-#include <stdint.h>
-
-IMPLEMENT_TYPE_NAME(std::string)
-IMPLEMENT_TYPE_NAME(std::wstring)
-IMPLEMENT_TYPE_NAME(uint8_t)
-IMPLEMENT_TYPE_NAME(uint16_t)
-IMPLEMENT_TYPE_NAME(uint32_t)
-IMPLEMENT_TYPE_NAME(uint64_t)
-IMPLEMENT_TYPE_NAME(int8_t)
-IMPLEMENT_TYPE_NAME(int16_t)
-IMPLEMENT_TYPE_NAME(int32_t)
-IMPLEMENT_TYPE_NAME(int64_t)
-IMPLEMENT_TYPE_NAME(double)
+//#include "type_name.h"
+//
+//#include <stdint.h>
+//
+//IMPLEMENT_TYPE_NAME(std::string)
+//IMPLEMENT_TYPE_NAME(std::wstring)
+//IMPLEMENT_TYPE_NAME(uint8_t)
+//IMPLEMENT_TYPE_NAME(uint16_t)
+//IMPLEMENT_TYPE_NAME(uint32_t)
+//IMPLEMENT_TYPE_NAME(uint64_t)
+//IMPLEMENT_TYPE_NAME(int8_t)
+//IMPLEMENT_TYPE_NAME(int16_t)
+//IMPLEMENT_TYPE_NAME(int32_t)
+//IMPLEMENT_TYPE_NAME(int64_t)
+//IMPLEMENT_TYPE_NAME(double)

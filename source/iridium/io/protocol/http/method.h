@@ -36,7 +36,7 @@ DEFINE_ENUM(
 } // iridium
 
 
-DEFINE_ENUM_CONVERT(iridium::io::protocol::http::TMethod)
+//DEFINE_ENUM_CONVERT(iridium::io::protocol::http::TMethod)
 
 
 #endif // HEADER_METHOD_C791FE23_9B73_46FE_9B6F_F7CE6E978E77

@@ -17,7 +17,6 @@ using std::string;
 using std::vector;
 using iridium::io::URI;
 using iridium::convertion::convert;
-using iridium::convertion::convertPtr;
 using iridium::parsing::implementation::CNode;
 
 
