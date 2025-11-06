@@ -5,8 +5,8 @@
 
 
 #include "iridium/logging/logger.h"
-#include "iridium/threading/implementation/async_queue.h"
 #include "iridium/threading/implementation/worker.h"
+#include "iridium/threading/implementation/async_queue.h"
 #include "iridium/items.h"
 
 #include <signal.h>
@@ -24,6 +24,7 @@ using std::chrono::nanoseconds;
 using iridium::convertion::convert;
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CWorker;
+using iridium::threading::implementation::CAsyncQueue;
 
 
 DEFINE_ENUM(
@@ -85,11 +86,15 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
         duration_cast<seconds>(timeout)).count()
     },
 
-m_triggered_events( DEFAULT_EVENTS_LIMIT, (struct kevent) { } ),
+    m_triggered_events
+        ( DEFAULT_EVENTS_LIMIT, (struct kevent) { } ),
 
     m_kqueue    (0),
     m_pipe_add  {0},
-    m_pipe_del  {0}
+    m_pipe_del  {0},
+
+    m_wake_events
+        (CAsyncQueue<Event::TSharedPtr>::create())
 {}
 
 
@@ -263,6 +268,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             for (size_t i = 0; i < fds.size(); i++) {
                 auto const fd = fds[i];
 
+                // wake event
+                if (fd == 0) {
+                    continue;
+                }
+
                 if (fd == -1) {
                     is_finalized = true;
                     LOGT << "is_finalized = " << is_finalized;
@@ -386,7 +396,23 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 //        LOGT << __func__ << " return events:\n" << msg << "\nevents map: [ " << fds << "]";
     }
 
+    events.splice(events.end(), m_wake_events->pop(false));
+
     return events; // ----->
+}
+
+
+void CMultiplexer::wake(Event::TSharedPtr const &event) {
+    if (!m_kqueue)
+        throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
+
+    m_wake_events->push(event);
+
+    int64_t fd      = 0;
+    auto    result  = write(m_pipe_add[1], &fd, 8);
+
+    if (result < 0)
+        throw std::runtime_error("multiplexer wake error: " + string(strerror(errno))); // ----->
 }
 
 

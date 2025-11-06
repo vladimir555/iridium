@@ -94,8 +94,8 @@ TEST(fsm_map) {
 } // iridium
 
 
-DEFINE_ENUM_HASH(iridium::pattern::TState)
-DEFINE_ENUM_HASH(iridium::pattern::TEvent)
+DEFINE_ENUM_CONVERT(iridium::pattern::TState)
+DEFINE_ENUM_CONVERT(iridium::pattern::TEvent)
 
 
 IMPLEMENT_ENUM(iridium::pattern::TState)

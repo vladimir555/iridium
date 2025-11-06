@@ -3,7 +3,9 @@
 
 
 #include "iridium/platform.h"
-#include PLATFORM_HEADER(shared_memory_stream_port.h)
+
+
+#include PLATFORM_HEADER(stream_port_client.h)
 
 
 namespace iridium {
@@ -11,7 +13,7 @@ namespace io {
 namespace implementation {
 
 
-typedef platform::CSharedMemoryStreamPort CSharedMemoryStreamPort;
+typedef platform::CStreamPortClient CStreamPortClient;
 
 
 } // implementation

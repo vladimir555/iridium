@@ -108,9 +108,10 @@ TEST(node_to_struct) {
 //        ASSERT(2 , equal, root2.getNode()->findChilds("/list").size());
     }
 
-    ASSERT("camel5-struct-name" , equal, convertCamelToSplittedBySymbol("Camel5StructName", '-'));
-    ASSERT(""                   , equal, convertCamelToSplittedBySymbol("", '-'));
-    ASSERT("a"                  , equal, convertCamelToSplittedBySymbol("A", '-'));
+    using iridium::parsing::serialization::TNamingStrategyCPPToNode;
+    ASSERT("camel5-struct-name" , equal, convertNameCPPToNode("Camel5StructName", TNamingStrategyCPPToNode::CAMEL_CASE_TO_LOWER_KEBAB));
+    ASSERT(""                   , equal, convertNameCPPToNode("",  TNamingStrategyCPPToNode::CAMEL_CASE_TO_LOWER_KEBAB));
+    ASSERT("a"                  , equal, convertNameCPPToNode("A", TNamingStrategyCPPToNode::CAMEL_CASE_TO_LOWER_KEBAB));
 
     INode::TSharedPtr node = CNode::create("root");
 
@@ -232,109 +233,108 @@ TEST(node_to_struct) {
 }
 
 
-namespace benchmark {
-
-
-//struct S1 {
-//    struct S2 {
-//        S2(S1 const * const s1) {};
-//    } s2 = this;
+//namespace benchmark {
 //
-//} s1;
-
-
-DEFINE_ROOT_NODE_BEGIN(Root, '_')
-    DEFINE_NODE_LIST_BEGIN(Array)
-        DEFINE_ATTRIBUTE(uint64_t, Id)
-        DEFINE_ATTRIBUTE(string, Type)
-        DEFINE_NODE_BEGIN(Actor)
-            DEFINE_ATTRIBUTE(uint64_t, Id)
-            DEFINE_ATTRIBUTE(string, Login)
-            DEFINE_ATTRIBUTE(string, Url)
-            DEFINE_ATTRIBUTE(string, AvatarUrl)
-        DEFINE_NODE_END(Actor)
-        DEFINE_NODE_BEGIN(Repo)
-            DEFINE_ATTRIBUTE(uint64_t, Id)
-            DEFINE_ATTRIBUTE(string, Name)
-            DEFINE_ATTRIBUTE(string, Url)
-        DEFINE_NODE_END(Repo)
-        DEFINE_NODE_BEGIN(Payload)
-            DEFINE_ATTRIBUTE(uint64_t, PushId, 0)
-            DEFINE_ATTRIBUTE(uint64_t, Size, 0)
-            DEFINE_ATTRIBUTE(uint64_t, DistinctSize, 0)
-            DEFINE_ATTRIBUTE(string, Ref, "")
-            DEFINE_ATTRIBUTE(string, RefType, "")
-            DEFINE_ATTRIBUTE(string, MasterBranch, "")
-            DEFINE_ATTRIBUTE(string, PusherType, "")
-            DEFINE_NODE_LIST_BEGIN(Commits)
-                DEFINE_ATTRIBUTE(string, Sha)
-                DEFINE_NODE_BEGIN(Author)
-                    DEFINE_ATTRIBUTE(string, Name, "")
-                    DEFINE_ATTRIBUTE(string, Email)
-                DEFINE_NODE_END(Author)
-            DEFINE_NODE_LIST_END(Commits)
-        DEFINE_NODE_END(Payload)
-//        DEFINE_ATTRIBUTE(std::chrono::system_clock::time_point, CreatedAt)
-    DEFINE_NODE_LIST_END(Array)
-DEFINE_ROOT_NODE_END();
-
-
-} // benchmark
-
-
-namespace benchmark {
-
-
-struct TJsonRoot {
-    struct TItem {
-        uint64_t    Id;
-        string      Type;
-
-        struct TActor {
-            uint64_t    Id;
-            string      Login;
-            string      Url;
-            string      AvatarUrl;
-        };
-        TActor Actor;
-
-        struct TRepo {
-            uint64_t    Id;
-            string      Name;
-            string      Url;
-        };
-        TRepo Repo;
-
-        struct TPayload {
-            uint64_t    PushId;
-            uint64_t    Size;
-            uint64_t    DistinctSize;
-            string      Ref;
-            string      RefType;
-            string      MasterBranch;
-            string      PusherType;
-
-            struct TCommit {
-                string Sha;
-
-                struct TAuthor {
-                    string Name;
-                    string Email;
-                };
-                TAuthor Author;
-            };
-            std::list<TCommit> Commits;
-        };
-        TPayload    Payload;
-        std::chrono::system_clock::time_point
-                    CreatedAt;
-    };
-    std::list<TItem> Array;
-};
-
-
-} // benchmark
-
+//
+////struct S1 {
+////    struct S2 {
+////        S2(S1 const * const s1) {};
+////    } s2 = this;
+////
+////} s1;
+//
+//
+//DEFINE_ROOT_NODE_BEGIN(Root, iridium::parsing::serialization::TNamingStrategyCPPToNode::CAMEL_CASE_TO_LOWER_KEBAB)
+//    DEFINE_NODE_LIST_BEGIN(Array)
+//        DEFINE_ATTRIBUTE(uint64_t, Id)
+//        DEFINE_ATTRIBUTE(string, Type)
+//        DEFINE_NODE_BEGIN(Actor)
+//            DEFINE_ATTRIBUTE(uint64_t, Id)
+//            DEFINE_ATTRIBUTE(string, Login)
+//            DEFINE_ATTRIBUTE(string, Url)
+//            DEFINE_ATTRIBUTE(string, AvatarUrl)
+//        DEFINE_NODE_END(Actor)
+//        DEFINE_NODE_BEGIN(Repo)
+//            DEFINE_ATTRIBUTE(uint64_t, Id)
+//            DEFINE_ATTRIBUTE(string, Name)
+//            DEFINE_ATTRIBUTE(string, Url)
+//        DEFINE_NODE_END(Repo)
+//        DEFINE_NODE_BEGIN(Payload)
+//            DEFINE_ATTRIBUTE(uint64_t, PushId, 0)
+//            DEFINE_ATTRIBUTE(uint64_t, Size, 0)
+//            DEFINE_ATTRIBUTE(uint64_t, DistinctSize, 0)
+//            DEFINE_ATTRIBUTE(string, Ref, "")
+//            DEFINE_ATTRIBUTE(string, RefType, "")
+//            DEFINE_ATTRIBUTE(string, MasterBranch, "")
+//            DEFINE_ATTRIBUTE(string, PusherType, "")
+//            DEFINE_NODE_LIST_BEGIN(Commits)
+//                DEFINE_ATTRIBUTE(string, Sha)
+//                DEFINE_NODE_BEGIN(Author)
+//                    DEFINE_ATTRIBUTE(string, Name, "")
+//                    DEFINE_ATTRIBUTE(string, Email)
+//                DEFINE_NODE_END(Author)
+//            DEFINE_NODE_LIST_END(Commits)
+//        DEFINE_NODE_END(Payload)
+////        DEFINE_ATTRIBUTE(std::chrono::system_clock::time_point, CreatedAt)
+//    DEFINE_NODE_LIST_END(Array)
+//DEFINE_ROOT_NODE_END();
+//
+//
+//} // benchmark
+//
+//
+//namespace benchmark {
+//
+//
+//struct TJsonRoot {
+//    struct TItem {
+//        uint64_t    Id;
+//        string      Type;
+//
+//        struct TActor {
+//            uint64_t    Id;
+//            string      Login;
+//            string      Url;
+//            string      AvatarUrl;
+//        };
+//        TActor Actor;
+//
+//        struct TRepo {
+//            uint64_t    Id;
+//            string      Name;
+//            string      Url;
+//        };
+//        TRepo Repo;
+//
+//        struct TPayload {
+//            uint64_t    PushId;
+//            uint64_t    Size;
+//            uint64_t    DistinctSize;
+//            string      Ref;
+//            string      RefType;
+//            string      MasterBranch;
+//            string      PusherType;
+//
+//            struct TCommit {
+//                string Sha;
+//
+//                struct TAuthor {
+//                    string Name;
+//                    string Email;
+//                };
+//                TAuthor Author;
+//            };
+//            std::list<TCommit> Commits;
+//        };
+//        TPayload    Payload;
+//        std::chrono::system_clock::time_point
+//                    CreatedAt;
+//    };
+//    std::list<TItem> Array;
+//};
+//
+//
+//} // benchmark
 
 
 // todo: simdjson library memory leak on macos M1 arm !

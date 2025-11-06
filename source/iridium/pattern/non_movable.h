@@ -43,8 +43,8 @@ protected:
     ///     Стандартный удаленный конструктор перемещения обычно выглядит так: `NonMovable(NonMovable &&) = delete;`.
     ///     Rvalue-ссылка на константу (`const &&`) — редкая конструкция и может не обеспечивать предполагаемую семантику неперемещаемости так же надежно, как rvalue-ссылка на неконстантный объект.
     NonMovable(NonMovable const &&) = delete;
-//    ///
-//    NonMovable &operator=(NonMovable const &) const = delete;
+    ///
+    NonMovable &operator=(NonMovable const &) const = delete;
 };
 
 

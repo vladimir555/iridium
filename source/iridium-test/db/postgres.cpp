@@ -18,7 +18,8 @@ TEST(postgres) {
     auto rows = connector->sendQuery("select * from pg_database;");
     connector->finalize();
 
-    ASSERT(0, less, rows.size());
+    ASSERT(0, less, rows->size());
+    LOGT << rows;
 //    for (auto const &row: rows) {
 //        LOGT << "";
 //        for (auto const &i: row)

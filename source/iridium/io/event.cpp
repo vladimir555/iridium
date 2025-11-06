@@ -2,10 +2,6 @@
 #include <unordered_set>
 
 
-IMPLEMENT_ENUM(iridium::io::Event::TOperation)
-IMPLEMENT_ENUM(iridium::io::Event::TStatus)
-
-
 namespace iridium {
 namespace io {
 
@@ -61,3 +57,7 @@ size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
 
     return hash; // ----->
 }
+
+
+IMPLEMENT_ENUM(iridium::io::Event::TOperation)
+IMPLEMENT_ENUM(iridium::io::Event::TStatus)

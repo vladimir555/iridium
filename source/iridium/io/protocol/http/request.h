@@ -58,8 +58,8 @@ DEFINE_ROOT_NODE_END()
 } // iridium
 
 
-DEFINE_CONVERT(iridium::io::protocol::http::request::THttp::TMessageLine, std::string)
 DEFINE_CONVERT(std::string, iridium::io::protocol::http::request::THttp::TMessageLine)
+DEFINE_CONVERT(iridium::io::protocol::http::request::THttp::TMessageLine, std::string)
 
 
 #endif // HEADER_REQUEST_E86B18F8_93B2_4E65_B812_2A46EF802DC6

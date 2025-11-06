@@ -5,6 +5,7 @@
 #include "iridium/strings.h"
 #include "iridium/assert.h"
 #include "iridium/items.h"
+#include "iridium/enum.h"
 
 #include "iridium/parsing/implementation/parser_json.h"
 
@@ -64,6 +65,10 @@ struct TCmdArgs {
 } // testing
 } // iridium
 
+
+//DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TCommand);
+//DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TMode);
+//DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TPrintResult);
 
 IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TCommand);
 IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TMode);

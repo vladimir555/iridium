@@ -1,0 +1,5 @@
+#!/bin/bash
+# Always update version before committing
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+"$REPO_ROOT/shell/update-version.sh"

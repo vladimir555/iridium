@@ -15,6 +15,7 @@
 
 #include "iridium/threading/worker.h"
 #include "iridium/io/fs/file_stream.h"
+#include "iridium/enum.h"
 
 #include "sink.h"
 
@@ -107,6 +108,9 @@ private:
 } // implementation
 } // logging
 } // iridium
+
+
+//DEFINE_ENUM_CONVERT(iridium::logging::implementation::CSinkFile::TRotation)
 
 
 #endif // HEADER_SINK_FILE_EE36E77A_D49D_46A5_9728_AD2D5D5B6573

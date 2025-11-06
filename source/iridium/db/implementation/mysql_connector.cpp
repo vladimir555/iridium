@@ -6,9 +6,10 @@
 
 #include "mysql_connector.h"
 
-#include <iridium/convertion/convert.h>
-#include <iridium/logging/logger.h>
-#include <iridium/items.h>
+#include "iridium/convertion/convert.h"
+#include "iridium/parsing/implementation/node.h"
+#include "iridium/logging/logger.h"
+#include "iridium/items.h"
 
 
 using std::string;
@@ -43,7 +44,10 @@ string displayWarnings(MYSQL *connection) {
     string result;
     do {
         // Format: "message [Type: number]"
-        result += static_cast<char const * const>(row[2]) + string("[") + static_cast<char const * const>(row[0]) + ":" + static_cast<char const * const>(row[1]) + "]\n";
+        result +=
+            static_cast<char const * const>(row[2]) + string("[") +
+            static_cast<char const * const>(row[0]) + ":" +
+            static_cast<char const * const>(row[1]) + "]\n";
         row = mysql_fetch_row(sql_result);
     } while (row);
     mysql_free_result(sql_result);
@@ -100,9 +104,11 @@ void CMySQLConnector::finalize() {
 }
 
 
-CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
+CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &query) {
     LOGD << "send mysql sql query:\n" << query;
-    TRows rows;
+
+    auto table = CNode::create(m_config.Database.get());
+
     if (mysql_query(&m_connection, query.c_str())) {
         throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->
     } else {
@@ -117,12 +123,13 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
         if (result) {
             // there are rows
             while (auto row = mysql_fetch_row(result)) {
-                TRow r;
                 for (unsigned int i = 0; i < fields_size; i++) {
+                    // todo: node type
                     switch (fields[i].type) {
                     case MYSQL_TYPE_BOOL:
                     case MYSQL_TYPE_BIT:
-                        r[fields[i].name] = row[i] ? "1" : "0";
+                        table->addChild(fields[i].name, row[i] ? "1" : "0");
+//                        r[fields[i].name] = row[i] ? "1" : "0";
                         break; // --->
                     case MYSQL_TYPE_TINY:
                     case MYSQL_TYPE_SHORT:
@@ -130,19 +137,23 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
                     case MYSQL_TYPE_LONGLONG:
                     case MYSQL_TYPE_INT24:
                         if(IS_NOT_NULL(fields[i].flags))
-                            r[fields[i].name] = row[i] ? row[i] : "0";
+                            table->addChild(fields[i].name, row[i] ? row[i] : "0");
+//                            r[fields[i].name] = row[i] ? row[i] : "0";
                         else
-                            r[fields[i].name] = row[i] ? row[i] : "null";
+                            table->addChild(fields[i].name, row[i] ? row[i] : "null");
+//                            r[fields[i].name] = row[i] ? row[i] : "null";
                         break; // --->
                     default:
                         if (IS_NOT_NULL(fields[i].flags))
-                            r[fields[i].name] = row[i] ? row[i] : "";
+                            table->addChild(fields[i].name, row[i] ? row[i] : "");
+//                            r[fields[i].name] = row[i] ? row[i] : "";
                         else
-                            r[fields[i].name] = row[i] ? row[i] : "null";
+                            table->addChild(fields[i].name, row[i] ? row[i] : "null");
+//                            r[fields[i].name] = row[i] ? row[i] : "null";
                     }
                 }
 
-                rows.push_back(r);
+//                rows.push_back(r);
             }
             mysql_free_result(result);
         } else {
@@ -151,9 +162,10 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
                 // query does not return data
                 // (it was not a SELECT)
                 auto rows_size = mysql_affected_rows(&m_connection);
-                TRow row;
-                row[FIELD_NAME_AFFECTED_ROWS] = convert<string>(rows_size);
-                rows.push_back(row);
+                table->addChild(FIELD_NAME_AFFECTED_ROWS, convert<string>(rows_size));
+//                TRow row;
+//                row[FIELD_NAME_AFFECTED_ROWS] = convert<string>(rows_size);
+//                rows.push_back(row);
             } else {
                 // mysql_store_result() should have returned data
                 throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->
@@ -161,7 +173,8 @@ CMySQLConnector::TRows CMySQLConnector::sendQuery(string const &query) {
         }
     }
 
-    return rows; // ----->
+    return table;
+//    return rows;  ----->
 }
 
 

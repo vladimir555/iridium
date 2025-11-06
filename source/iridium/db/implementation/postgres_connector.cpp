@@ -10,13 +10,14 @@
 #include "iridium/logging/logger.h"
 #include "iridium/assert.h"
 #include "iridium/items.h"
+#include "iridium/parsing/implementation/node.h"
 
 
 using std::string;
 using std::vector;
 using iridium::io::URI;
 using iridium::convertion::convert;
-using iridium::convertion::convertPtr;
+using iridium::parsing::implementation::CNode;
 
 
 namespace iridium {
@@ -35,7 +36,7 @@ CPostgresConnector::~CPostgresConnector() {
 }
 
 
-void handlePostgresMessage(void *arg, PGresult const *result) {
+void handlePostgresMessage(void *, PGresult const *result) {
     LOGD << PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY);
 }
 
@@ -80,24 +81,23 @@ void CPostgresConnector::finalize() {
 }
 
 
-void CPostgresConnector::executeCommand(std::string const &command) {
-
-}
+// void CPostgresConnector::executeCommand(std::string const &command) {}
 
 
-CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
+CPostgresConnector::INode::TSharedPtr CPostgresConnector::sendQuery(string const &query) {
     LOGD << "send postgres sql query:\n" << query;
-    TRows rows;
-
+//    TRows rows;
+    auto table  = CNode::create(m_config.Database.get());
     auto result = PQexec(m_connection, query.c_str());
     auto status = PQresultStatus(result);
 
     if (status == PGRES_TUPLES_OK) {
         for (int row_index = 0; row_index < PQntuples(result); row_index++) {
-            TRow row;
+//            TRow row;
             for (int field_index = 0; field_index < PQnfields(result); field_index++)
-                row[PQfname(result, field_index)] = PQgetvalue(result, row_index, field_index);
-            rows.push_back(row);
+                table->addChild(PQfname(result, field_index), PQgetvalue(result, row_index, field_index));
+//                row[PQfname(result, field_index)] = PQgetvalue(result, row_index, field_index);
+//            rows.push_back(row);
         }
     }
 
@@ -114,7 +114,8 @@ CPostgresConnector::TRows CPostgresConnector::sendQuery(string const &query) {
 
     PQclear(result);
 
-    return rows; // ----->
+    return table;
+//    return rows; // ----->
 }
 
 

@@ -4,7 +4,7 @@
 
 using std::string;
 
-
+#include <vector>
 namespace iridium {
 namespace io {
 

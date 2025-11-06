@@ -5,7 +5,7 @@
 #include "iridium/platform.h"
 
 
-#ifdef EMSCRIPTEN_PLATFORM
+#ifdef WINDOWS_PLATFORM
 
 
 #include "iridium/io/uri.h"
@@ -19,9 +19,9 @@ namespace implementation {
 namespace platform {
 
 
-class CSharedMemoryPort: virtual public IStreamPort, public pattern::NonCopyable {
+class CStreamPortClient: virtual public IStreamPort, public pattern::NonCopyable {
 protected:
-    CSharedMemoryPort(URI const &) {
+    CStreamPortClient(URI const &) {
         throw std::runtime_error("not implemented for emscripten");
     }
     virtual ~CSharedMemoryPort();
@@ -32,6 +32,9 @@ protected:
 } // implementation
 } // io
 } // iridium
+
+
+#endif // WINDOWS_PLATFORM
 
 
 #endif // HEADER_SHARED_MEMORY_STREAM_PORT_19198010_6870_4A6B_A997_4F4B2E87311D

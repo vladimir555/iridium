@@ -8,7 +8,7 @@
 #ifdef LINUX_PLATFORM
 
 
-#include "../unix/shared_memory_stream_port.h"
+#include "../unix/stream_port_client.h"
 
 
 namespace iridium {
@@ -17,7 +17,7 @@ namespace implementation {
 namespace platform {
 
 
-typedef platform::unix_::CSharedMemoryStreamPort CSharedMemoryStreamPort;
+typedef platform::unix_::CStreamPortClient CStreamPortClient;
 
 
 } // platform
@@ -26,7 +26,7 @@ typedef platform::unix_::CSharedMemoryStreamPort CSharedMemoryStreamPort;
 } // iridium
 
 
-#endif // LINUX_PLATFORM
+#endif // MACOS_PLATFORM
 
 
 #endif // HEADER_SHARED_MEMORY_STREAM_PORT_D7938B4E_10F9_41ED_B249_C8402B16E0BF

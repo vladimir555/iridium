@@ -217,22 +217,22 @@ namespace parsing {
 TEST(parse_xml) {
     auto parser         = CXMLParser::create();
     auto node           = parser->parse(beer_xml);
-    
+
     ASSERT(node->hasChilds());
     ASSERT("MyBeerJournal", equal, node->getName());
-    
+
     auto value_nodes    = assertComplete(node->slice("/Brewery/Beer/name"), "slice is empty");
-    
+
     ASSERT( 3               , equal, value_nodes.size());
     ASSERT("Centennial"     , equal, std::next(value_nodes.begin(), 0)->get()->getValue());
     ASSERT("Farmhouse Ale"  , equal, std::next(value_nodes.begin(), 1)->get()->getValue());
     ASSERT("Two Hearted Ale", equal, std::next(value_nodes.begin(), 2)->get()->getValue());
-    
+
     string array;
     for (auto const &i: *node)
         if (i->getName() == "array")
             array += i->getValue();
-    
+
     ASSERT("54321", equal, array);
 }
 
@@ -241,29 +241,32 @@ TEST(compose_xml) {
     auto parser         = CXMLParser::create();
     auto node           = createTestNode();
     auto xml_str        = parser->compose(node);
-    
+
     ASSERT(xml_str_expects, equal, xml_str);
 }
 
 
 TEST(parse_json) {
     auto parser = CJSONParser::create();
+
+    ASSERT(std::string("null\n"), equal, parser->parse("{  \"value\":\"null\n\"}  ")->getValue());
+
     auto node   = parser->parse(beer_json);
 
     ASSERT(8, equal, node->size());
     ASSERT("MyBeerJournal", equal, node->getName());
-    
+
     auto value_nodes = assertComplete(node->slice("/Brewery/Beer/name"), "slice is empty");
     ASSERT( 3               , equal, value_nodes.size());
     ASSERT("Centennial"     , equal, std::next(value_nodes.begin(), 0)->get()->getValue());
     ASSERT("Farmhouse Ale"  , equal, std::next(value_nodes.begin(), 1)->get()->getValue());
     ASSERT("Two Hearted Ale", equal, std::next(value_nodes.begin(), 2)->get()->getValue());
-    
+
     string array;
     for (auto const &i: *node)
         if (i->getName() == "array")
             array += i->getValue();
-    
+
     ASSERT("54321"          , equal, array);
     ASSERT("true"           , equal, parser->parse("{ \"value\":true }")->getValue());
     ASSERT("false"          , equal, parser->parse("{ \"value\":false }")->getValue());
@@ -271,59 +274,59 @@ TEST(parse_json) {
     ASSERT("0.123456789"    , equal, parser->parse("{ \"value\":0.123456789 }")->getValue());
     ASSERT("null0"          , equal, parser->parse("{ \"value\":\"null0\" }")->getValue());
     ASSERT(parser->parse("{ \"value\":null0 }"), std::exception);
-    
+
     {
         auto slice = parser->parse("{ array: [ {\"value\": 1}, {\"value\": 2} ] }")->slice("/array/value");
-        
+
         ASSERT( 2       , equal, slice.size());
-        
+
         ASSERT("value"  , equal, slice.front()->getName());
         ASSERT("1"      , equal, slice.front()->getValue());
-        
+
         ASSERT("value"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
     {
         auto slice = parser->parse("{ value: [ \"1\", \"2\" ] }")->slice("/value");
-        
+
         ASSERT( 2       , equal, slice.size());
-        
+
         ASSERT("value"  , equal, slice.front()->getName());
         ASSERT("1"      , equal, slice.front()->getValue());
-        
+
         ASSERT("value"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
     {
         auto slice = parser->parse("[ {\"value\": 1}, {\"value\": 2} ]")->slice("/array/value");
-        
+
         ASSERT( 2       , equal, slice.size());
-        
+
         ASSERT("value"  , equal, slice.front()->getName());
         ASSERT("1"      , equal, slice.front()->getValue());
-        
+
         ASSERT("value"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
     {
         auto slice = parser->parse("[ \"1\", \"2\" ]")->slice("/array");
-        
+
         ASSERT( 2       , equal, slice.size());
-        
+
         ASSERT("array"  , equal, slice.front()->getName());
         ASSERT("1"      , equal, slice.front()->getValue());
-        
+
         ASSERT("array"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
     {
         auto slice = parser->parse("[ 1, 2 ]")->slice("/array");
-        
+
         ASSERT( 2       , equal, slice.size());
-        
+
         ASSERT("array"  , equal, slice.front()->getName());
         ASSERT("1"      , equal, slice.front()->getValue());
-        
+
         ASSERT("array"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
@@ -366,7 +369,7 @@ TEST(compose_json) {
     auto parser         = CJSONParser::create();
     auto node           = createTestNode();
     auto json_str       = parser->compose(node);
-    
+
     ASSERT(json_str_expects, equal, json_str);
 }
 
@@ -384,7 +387,7 @@ TEST(compose_http_request) {
     auto parser         = CHTTPParser::create();
     auto node           = parser->parse(http_header);
     auto http_header_   = parser->compose(node);
-    
+
     ASSERT(http_header_composed, equal, http_header_);
 }
 
@@ -392,14 +395,14 @@ TEST(compose_http_request) {
 TEST(parse_compose) {
     auto parser_json    = CJSONParser::create();
     auto parser_xml     = CXMLParser::create();
-    
+
     auto node           = parser_json->parse(beer_json);
     auto xml_str        = parser_xml->compose(node);
-    
+
     ASSERT(beer_xml, equal, xml_str);
-    
+
     auto json_str       =  parser_json->compose(node);
-    
+
     ASSERT(beer_json, equal, json_str);
 }
 

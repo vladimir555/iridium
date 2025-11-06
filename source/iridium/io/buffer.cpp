@@ -25,13 +25,44 @@ Buffer::Buffer(std::list<Buffer::TSharedPtr> const &buffers) {
 }
 
 
-//size_t Buffer::findLast(std::string const &str) {
-//    auto i = std::find_end(begin(), end(), str.begin(), str.end());
-//    if (i == end())
-//        return std::string::npos;
+bool Buffer::checkSuffixEqual(
+    std::string const &suffix,
+    std::string const &skip) const
+{
+    if (suffix.empty())
+        return true;
+    if (size() < suffix.size())
+        return false;
 
-//    return i - begin();
-//}
+    size_t i = size();
+    while (i > 0 && skip.find((*this)[i - 1]) != std::string::npos) {
+        --i;
+    }
+
+    return
+        i >= suffix.size() &&
+        std::equal(suffix.rbegin(), suffix.rend(), this->rbegin() + (size() - i));
+}
+
+
+bool Buffer::checkSuffixEqual(uint8_t const * const suffix, size_t const &size) const {
+    return
+        this->size() >= size &&
+        std::equal(suffix, suffix + size, this->data() + (this->size() - size));
+}
+
+
+bool Buffer::checkSuffixEqual(std::vector<uint8_t> const &suffix) const {
+    return
+        size() >= suffix.size() &&
+        std::equal(suffix.begin(), suffix.end(), this->end() - suffix.size());
+}
+
+
+void Buffer::emplace_back(Buffer::TSharedPtr const &buffer) {
+    if (buffer && !buffer->empty())
+        insert(end(), buffer->begin(), buffer->end());
+}
 
 
 } // io

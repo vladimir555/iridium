@@ -183,4 +183,7 @@ private:
 } // iridium
 
 
+//DEFINE_ENUM_CONVERT(iridium::io::fs::implementation::CFileStream::TOpenMode)
+
+
 #endif // HEADER_FILE_STREAM_6A05934B_514A_4E85_97E7_69A721D4ED29

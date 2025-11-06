@@ -93,6 +93,7 @@ public:
     /// \~english @return An `IProcess::TState` object representing the current condition and exit code (if terminated) of the process.
     /// \~russian @return Объект `IProcess::TState`, представляющий текущее состояние и код завершения (если завершен) процесса.
     TState getState()   override;
+    void   sendSignal(TSignal const &signal) override;
 
 private:
     /// \~english @brief Internal structure to hold detailed status information about the child process, typically populated from `waitpid()`.

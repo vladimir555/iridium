@@ -133,7 +133,7 @@ TEST(del_child) {
     node->addChild("child_node_next", "child_value2");
     auto child = node->getChild("child_node");
     ASSERT(child != nullptr);
-    node->delChild("child_node");
+    node->delChilds("child_node");
     child = node->getChild("child_node");
     ASSERT(child == nullptr);
 }

@@ -12,6 +12,7 @@
 #include "iridium/system/process.h"
 #include "iridium/threading/async_queue.h"
 #include "iridium/parsing/parser.h"
+#include "iridium/parsing/node.h"
 
 
 namespace iridium {

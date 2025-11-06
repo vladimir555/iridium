@@ -2,15 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-/// \~english @file
-/// @brief Defines the `CNodeType<TValue>` template class, a concrete implementation of `INodeType<TValue>`.
-///     This class provides the actual storage and logic for tree nodes used in the Iridium parsing framework,
-///     including name interning and child management.
-/// \~russian @file
-/// @brief Определяет шаблонный класс `CNodeType<TValue>`, конкретную реализацию `INodeType<TValue>`.
-///     Этот класс предоставляет фактическое хранилище и логику для узлов дерева, используемых
-///     во фреймворке разбора Iridium, включая интернирование имен и управление дочерними узлами.
-
 #ifndef HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
 #define  HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5
 
@@ -18,212 +9,94 @@
 #include <string>
 #include <list>
 #include <unordered_set>
+#include <algorithm>
 
 #include "iridium/smart_ptr.h"
 #include "iridium/parsing/node_type.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
-///     (Implementation details are in the `implementation` sub-namespace).
-/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
-///     (Детали реализации находятся в подпространстве имен `implementation`).
 namespace parsing {
-/// \~english @brief Contains concrete implementations of parsing components, such as node types and parsers.
-///     This namespace provides the actual logic for parsing and composing data structures defined by interfaces in the parent `iridium::parsing` namespace.
-/// \~russian @brief Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры.
-///     Это пространство имен предоставляет фактическую логику для разбора и формирования структур данных, определенных интерфейсами в родительском пространстве имен `iridium::parsing`.
 namespace implementation {
 
 
 // ----- interface
 
-/// \~english @brief Concrete implementation of the `INodeType` interface.
-///     This class template provides a full implementation for a node in a tree-like structure.
-///     It manages the node's name (using string interning for efficiency), its primary value of type `TValue`,
-///     and a list of child nodes. It is designed to be cloneable via the `IPrototype` interface.
-/// \~russian @brief Конкретная реализация интерфейса `INodeType`.
-///     Этот шаблон класса предоставляет полную реализацию для узла в древовидной структуре.
-///     Он управляет именем узла (используя интернирование строк для эффективности), его основным значением типа `TValue`
-///     и списком дочерних узлов. Класс спроектирован для поддержки клонирования через интерфейс `IPrototype`.
-/// \~english @tparam TValue The type of the primary value stored in the node.
-/// \~russian @tparam TValue Тип основного значения, хранящегося в узле.
+
 template<typename TValue>
-class CNodeType : public INodeType<TValue> {
+class CNodeType : virtual public INodeType<TValue> {
 public:
-    /// \~english @brief Defines standard implementation helpers for `CNodeType`, such as smart pointer typedefs and a static `create` method.
-    /// \~russian @brief Определяет стандартные вспомогательные средства реализации для `CNodeType`, такие как typedef-ы умных указателей и статический метод `create`.
-    DEFINE_IMPLEMENTATION(CNodeType)
-    /// \~english @brief Constructs a node with a given name and value. Initializes a new string interning pool.
-    /// \~russian @brief Конструирует узел с заданным именем и значением. Инициализирует новый пул интернирования строк.
-    /// \~english @param name The name of the node.
-    /// \~russian @param name Имя узла.
-    /// \~english @param value The primary value of the node.
-    /// \~russian @param value Основное значение узла.
+    DEFINE_CREATE(CNodeType)
+    ///
     explicit CNodeType(std::string const &name, TValue const &value);
-    /// \~english @brief Constructs a node with a given name and a default-constructed value. Initializes a new string interning pool.
-    /// \~russian @brief Конструирует узел с заданным именем и значением, созданным по умолчанию. Инициализирует новый пул интернирования строк.
-    /// \~english @param name The name of the node.
-    /// \~russian @param name Имя узла.
+    ///
+    explicit CNodeType(std::string const &name, TValue const &value, std::string const &type);
+    ///
     explicit CNodeType(std::string const &name);
-
-    /// \~english @brief Gets the name of this node. Returns the interned string.
-    /// \~russian @brief Получает имя этого узла. Возвращает интернированную строку.
-    /// \~english @return The name of the node.
-    /// \~russian @return Имя узла.
+    ///
+    virtual ~CNodeType();
+    ///
+    virtual typename INodeType<TValue>::TNodesPtr getParents() const override;
+    ///
     std::string getName() const override final;
-    /// \~english @brief Gets the primary value of this node.
-    /// \~russian @brief Получает основное значение этого узла.
-    /// \~english @return The value of the node.
-    /// \~russian @return Значение узла.
+    ///
     TValue      getValue() const override;
-    /// \~english @brief Sets the primary value of this node.
-    /// \~russian @brief Устанавливает основное значение этого узла.
-    /// \~english @param value The new value to set.
-    /// \~russian @param value Новое значение для установки.
+    ///
     void        setValue(TValue const &value) override;
-    /// \~english @brief Retrieves child nodes matching a given path. Implements path traversal.
-    /// \~russian @brief Получает дочерние узлы, соответствующие заданному пути. Реализует обход по пути.
-    /// \~english @param path The path string to locate child nodes.
-    /// \~russian @param path Строка пути для поиска дочерних узлов.
-    /// \~english @return A list of shared pointers to matching child nodes.
-    /// \~russian @return Список разделяемых указателей на соответствующие дочерние узлы.
-    typename INodeType<TValue>::TNodes          slice(std::string const &path) override;
-
-    /// \~english @brief Returns an iterator to the beginning of the child node list.
-    /// \~russian @brief Возвращает итератор на начало списка дочерних узлов.
-    /// \~english @return An iterator to the first child.
-    /// \~russian @return Итератор на первый дочерний узел.
+    ///
+    std::string getType() const override;
+    ///
+    typename INodeType<TValue>::TNodesSharedPtr slice(std::string const &path) const override;
+    ///
     typename INodeType<TValue>::iterator        begin() override;
-    /// \~english @brief Returns an iterator to the end of the child node list.
-    /// \~russian @brief Возвращает итератор на конец списка дочерних узлов.
-    /// \~english @return An iterator referring to the past-the-end element.
-    /// \~russian @return Итератор, указывающий на элемент после последнего.
+    ///
     typename INodeType<TValue>::iterator        end() override;
-    /// \~english @brief Returns a const iterator to the beginning of the child node list.
-    /// \~russian @brief Возвращает константный итератор на начало списка дочерних узлов.
-    /// \~english @return A const iterator to the first child.
-    /// \~russian @return Константный итератор на первый дочерний узел.
+    ///
     typename INodeType<TValue>::const_iterator  begin() const override;
-    /// \~english @brief Returns a const iterator to the end of the child node list.
-    /// \~russian @brief Возвращает константный итератор на конец списка дочерних узлов.
-    /// \~english @return A const iterator referring to the past-the-end element.
-    /// \~russian @return Константный итератор, указывающий на элемент после последнего.
+    ///
     typename INodeType<TValue>::const_iterator  end() const override;
-
-    /// \~english @brief Gets the number of direct child nodes.
-    /// \~russian @brief Получает количество прямых дочерних узлов.
-    /// \~english @return The number of children.
-    /// \~russian @return Количество дочерних узлов.
+    ///
     size_t size() const override;
-    /// \~english @brief Checks if this node has any child nodes.
-    /// \~russian @brief Проверяет, есть ли у этого узла дочерние узлы.
-    /// \~english @return True if there are child nodes, false otherwise.
-    /// \~russian @return True, если есть дочерние узлы, иначе false.
+    ///
     bool hasChilds() const override;
-
-    /// \~english @brief Gets the first child node with the specified name.
-    /// \~russian @brief Получает первый дочерний узел с указанным именем.
-    /// \~english @param name The name of the child to retrieve.
-    /// \~russian @param name Имя извлекаемого дочернего узла.
-    /// \~english @return A shared pointer to the child if found, otherwise nullptr.
-    /// \~russian @return Разделяемый указатель на дочерний узел, если найден, иначе nullptr.
+    ///
     typename INodeType<TValue>::TSharedPtr      getChild(std::string const &name) override;
-    /// \~english @brief Gets the first child node with the specified name (const version).
-    /// \~russian @brief Получает первый дочерний узел с указанным именем (константная версия).
-    /// \~english @param name The name of the child to retrieve.
-    /// \~russian @param name Имя извлекаемого дочернего узла.
-    /// \~english @return A const shared pointer to the child if found, otherwise nullptr.
-    /// \~russian @return Константный разделяемый указатель на дочерний узел, если найден, иначе nullptr.
+    ///
     typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
-    /// \~english @brief Gets all child nodes with the specified name.
-    /// \~russian @brief Получает все дочерние узлы с указанным именем.
-    /// \~english @param name The name of the children to retrieve.
-    /// \~russian @param name Имя извлекаемых дочерних узлов.
-    /// \~english @return A list of shared pointers to all children with the given name.
-    /// \~russian @return Список разделяемых указателей на все дочерние узлы с данным именем.
-    typename INodeType<TValue>::TNodes          getChilds(std::string const &name) const override;
-
-    /// \~english @brief Adds an existing node as a child.
-    /// \~russian @brief Добавляет существующий узел в качестве дочернего.
-    /// \~english @param child_node The node to add as a child.
-    /// \~russian @param child_node Узел для добавления в качестве дочернего.
-    /// \~english @return A shared pointer to the added child.
-    /// \~russian @return Разделяемый указатель на добавленный дочерний узел.
+    ///
+    typename INodeType<TValue>::TNodesSharedPtr getChilds(std::string const &name) const override;
+    ///
     typename INodeType<TValue>::TSharedPtr      addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
-    /// \~english @brief Creates and adds a new child node with the specified name and a default-constructed value.
-    ///     The new child will share the same string interning pool as this parent node.
-    /// \~russian @brief Создает и добавляет новый дочерний узел с указанным именем и значением, созданным по умолчанию.
-    ///     Новый дочерний узел будет использовать тот же пул интернирования строк, что и родительский узел.
-    /// \~english @param name The name for the new child node.
-    /// \~russian @param name Имя для нового дочернего узла.
-    /// \~english @return A shared pointer to the newly created child node.
-    /// \~russian @return Разделяемый указатель на вновь созданный дочерний узел.
+    ///
     typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name) override;
-    /// \~english @brief Creates and adds a new child node with the specified name and value.
-    ///     The new child will share the same string interning pool as this parent node.
-    /// \~russian @brief Создает и добавляет новый дочерний узел с указанными именем и значением.
-    ///     Новый дочерний узел будет использовать тот же пул интернирования строк, что и родительский узел.
-    /// \~english @param name The name for the new child node.
-    /// \~russian @param name Имя для нового дочернего узла.
-    /// \~english @param value The value for the new child node.
-    /// \~russian @param value Значение для нового дочернего узла.
-    /// \~english @return A shared pointer to the newly created child node.
-    /// \~russian @return Разделяемый указатель на вновь созданный дочерний узел.
+    ///
     typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name, TValue const &value) override;
-    /// \~english @brief Deletes all child nodes with the specified name.
-    /// \~russian @brief Удаляет все дочерние узлы с указанным именем.
-    /// \~english @param name The name of the child node(s) to delete.
-    /// \~russian @param name Имя удаляемого дочернего узла (узлов).
-    void                                        delChild(std::string const &name) override;
-    /// \~english @brief Creates a deep copy (clone) of this node and its entire subtree.
-    ///     The cloned nodes will share the same string interning pool.
-    /// \~russian @brief Создает глубокую копию (клон) этого узла и всего его поддерева.
-    ///     Клонированные узлы будут использовать тот же пул интернирования строк.
-    /// \~english @return A shared pointer to the new cloned node.
-    /// \~russian @return Разделяемый указатель на новый клонированный узел.
+    ///
+    void                                        delChilds(std::string const &name) override;
+    ///
     typename INodeType<TValue>::TSharedPtr      clone() const override;
 
 private:
-    /// \~english @brief Type alias for an unordered set of strings, used for interning node names to save memory.
-    /// \~russian @brief Псевдоним типа для неупорядоченного множества строк, используемый для интернирования имен узлов для экономии памяти.
+    ///
     typedef std::unordered_set<std::string> TStrings;
-    /// \~english @brief Internal constructor used for creating nodes (often children) that share an existing string interning pool.
-    /// \~russian @brief Внутренний конструктор, используемый для создания узлов (часто дочерних), которые разделяют существующий пул интернирования строк.
-    /// \~english @param name The name of the node.
-    /// \~russian @param name Имя узла.
-    /// \~english @param value The primary value of the node.
-    /// \~russian @param value Основное значение узла.
-    /// \~english @param strings A shared pointer to the string interning pool.
-    /// \~russian @param strings Разделяемый указатель на пул интернирования строк.
+    ///
     explicit CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings);
-    /// \~english @brief Internal constructor for nodes with default-constructed values, sharing an existing string interning pool.
-    /// \~russian @brief Внутренний конструктор для узлов со значениями, созданными по умолчанию, разделяющий существующий пул интернирования строк.
-    /// \~english @param name The name of the node.
-    /// \~russian @param name Имя узла.
-    /// \~english @param strings A shared pointer to the string interning pool.
-    /// \~russian @param strings Разделяемый указатель на пул интернирования строк.
+    ///
     explicit CNodeType(std::string const &name, std::shared_ptr<TStrings> const &strings);
-    /// \~english @brief Interns the given string name using the shared `m_strings` pool.
-    /// \~russian @brief Интернирует данное строковое имя, используя общий пул `m_strings`.
-    /// \~english @param name The string name to intern.
-    /// \~russian @param name Строковое имя для интернирования.
-    /// \~english @return A pointer to the interned string within the pool.
-    /// \~russian @return Указатель на интернированную строку в пуле.
+    ///
     std::string const *makeName(std::string const &name);
-    /// \~english @brief Shared pointer to the set of interned strings. This pool is shared among a node and its descendants created via `addChild`.
-    /// \~russian @brief Разделяемый указатель на множество интернированных строк. Этот пул разделяется между узлом и его потомками, созданными через `addChild`.
+    ///
     std::shared_ptr<TStrings> m_strings;
-    /// \~english @brief Pointer to the interned name of this node. The actual string data resides in `m_strings`.
-    /// \~russian @brief Указатель на интернированное имя этого узла. Фактические строковые данные находятся в `m_strings`.
+    ///
     std::string const * const m_name = nullptr;
-    /// \~english @brief The primary value of this node, of type `TValue`.
-    /// \~russian @brief Основное значение этого узла типа `TValue`.
+    ///
+    std::string const * const m_type = nullptr;
+    ///
     TValue m_value;
-    /// \~english @brief List of child nodes of this node.
-    /// \~russian @brief Список дочерних узлов этого узла.
-    typename INodeType<TValue>::TNodes m_nodes;
+    ///
+    typename INodeType<TValue>::TNodesSharedPtr m_nodes;
+    ///
+    typename INodeType<TValue>::TNodesPtr       m_parent_nodes;
 };
 
 
@@ -246,12 +119,39 @@ CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value)
 
 
 template<typename TValue>
+CNodeType<TValue>::CNodeType(std::string const &name, TValue const &value, std::string const &type)
+:
+    m_strings   (std::make_shared<TStrings>()),
+    m_name      (makeName(name)),
+    m_type      (makeName(type)),
+    m_value     (value)
+{}
+
+
+template<typename TValue>
 CNodeType<TValue>::CNodeType(std::string const &name)
 :
     m_strings   (std::make_shared<TStrings>()),
     m_name      (makeName(name)),
     m_value     ()
 {}
+
+
+template<typename TValue>
+CNodeType<TValue>::~CNodeType() {
+    for (auto const &node: m_nodes) {
+        auto &parents = std::dynamic_pointer_cast< CNodeType<TValue> >(node)->m_parent_nodes;
+        parents.erase(
+            std::remove_if(
+                parents.begin(),
+                parents.end(),
+                    [&](auto const &node) {
+                       return node == this;
+                    }
+            )
+        );
+    }
+}
 
 
 template<typename TValue>
@@ -273,6 +173,12 @@ CNodeType<TValue>::CNodeType(std::string const &name, std::shared_ptr<TStrings> 
 
 
 template<typename TValue>
+typename INodeType<TValue>::TNodesPtr CNodeType<TValue>::getParents() const {
+    return m_parent_nodes;
+}
+
+
+template<typename TValue>
 std::string CNodeType<TValue>::getName() const {
     return *m_name; // ----->
 }
@@ -291,11 +197,20 @@ void CNodeType<TValue>::setValue(TValue const &value) {
 
 
 template<typename TValue>
-typename INodeType<TValue>::TNodes CNodeType<TValue>::slice(std::string const &path) {
+std::string CNodeType<TValue>::getType() const {
+    if (m_type)
+        return *m_type; // ----->
+    else
+        return {}; // ----->
+}
+
+
+template<typename TValue>
+typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::slice(std::string const &path) const {
     static std::string const DEFAULT_PATH_DELIMITER("/");
 
     // todo: depth overflow test
-    typename INodeType<TValue>::TNodes nodes;
+    typename INodeType<TValue>::TNodesSharedPtr nodes;
 
     if (path.empty())
         return nodes; // ----->
@@ -380,8 +295,8 @@ typename INodeType<TValue>::TConstSharedPtr CNodeType<TValue>::getChild(std::str
 
 
 template<typename TValue>
-typename INodeType<TValue>::TNodes CNodeType<TValue>::getChilds(std::string const &name) const {
-    typename INodeType<TValue>::TNodes nodes;
+typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::getChilds(std::string const &name) const {
+    typename INodeType<TValue>::TNodesSharedPtr nodes;
 
     for (auto const &node: m_nodes)
         if (node->getName() == name)
@@ -394,6 +309,7 @@ typename INodeType<TValue>::TNodes CNodeType<TValue>::getChilds(std::string cons
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(typename INodeType<TValue>::TSharedPtr const &child_node) {
     if (child_node) {
+        std::dynamic_pointer_cast< CNodeType<TValue> >(child_node)->m_parent_nodes.push_back(this);
         // todo: merge name map
         m_nodes.push_back(child_node);
         return m_nodes.back(); // ----->
@@ -415,7 +331,7 @@ typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(std::string c
 
 
 template<typename TValue>
-void CNodeType<TValue>::delChild(std::string const &name) {
+void CNodeType<TValue>::delChilds(std::string const &name) {
     m_nodes.remove_if(
         [&] (auto const &node) {
             return node->getName() == name;
@@ -426,11 +342,12 @@ void CNodeType<TValue>::delChild(std::string const &name) {
 
 template<typename TValue>
 typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::clone() const {
-    typename INodeType<TValue>::TSharedPtr node = CNodeType<TValue>::create(*m_name, m_value);
+    auto node = CNodeType<TValue>::create(*m_name, m_value);
 
     for (auto const &i: m_nodes)
         node->addChild(i->clone());
 
+    node->m_parent_nodes.clear();
     return node; // ----->
 }
 

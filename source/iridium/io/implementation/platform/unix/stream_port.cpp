@@ -6,6 +6,7 @@
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <signal.h>
 
 #include "iridium/convertion/convert.h"
 
@@ -13,12 +14,14 @@
 using iridium::convertion::convert;
 
 
-#include <iridium/logging/logger.h>
 namespace iridium {
 namespace io {
 namespace implementation {
 namespace platform {
 namespace unix_ {
+
+
+int const CStreamPort::YES = CStreamPort::initSignal();
 
 
 CStreamPort::CStreamPort(URI const &uri)
@@ -104,13 +107,13 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 
 std::list<uintptr_t> CStreamPort::getHandles() const {
     std::list<uintptr_t> handles;
-    
-    if (m_fd_reader)
-        handles.push_back(m_fd_reader);
-    
+
     if (m_fd_writer)
         handles.push_back(m_fd_writer);
-    
+
+    if (m_fd_reader && m_fd_reader != m_fd_writer)
+        handles.push_back(m_fd_reader);
+
 //    if (handles.empty())
 //        throw std::runtime_error(
 //            "stream port get handles error: '" +
@@ -138,6 +141,27 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
         assertOK(fcntl(fd, F_SETFL, flags), "set flag error, fd " + convert<std::string>(fd));
     }
     m_is_blocking_mode = is_blocking;
+}
+
+
+void CStreamPort::closeFDs() {
+    if (m_fd_writer) {
+        close(m_fd_writer);
+    }
+
+    if (m_fd_reader && m_fd_reader != m_fd_writer) {
+        close(m_fd_reader);
+        m_fd_reader = 0;
+    }
+
+    m_fd_writer = 0;
+    m_fd_reader = 0;
+}
+
+
+int CStreamPort::initSignal() {
+    signal(SIGPIPE, SIG_IGN);
+    return 1; // ----->
 }
 
 

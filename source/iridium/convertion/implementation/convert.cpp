@@ -13,7 +13,7 @@
 
 
 
-using std::chrono::high_resolution_clock;
+//using std::chrono::high_resolution_clock;
 using std::chrono::system_clock;
 using std::chrono::duration_cast;
 using std::chrono::hours;
@@ -47,28 +47,20 @@ char   const time_format_unix[]             = "%Y-%m-%d %H:%M:%S";
 char   const time_scan_format[]             = "%04d-%02d-%02d %02d:%02d:%02d.%03d";
 size_t const time_scan_format_size          = 23;
 size_t const double_to_string_buffer_size   = 512;
-size_t const int_to_string_buffer_size      = 64;
 size_t const time_to_string_buffer_size     = 64;
 
 
 } // unnamed
 
 
-#include "iridium/platform.h"
-#include PLATFORM_HEADER(convert.h)
-
-
-#include <iostream>
-namespace iridium {
-namespace convertion {
-namespace implementation {
+namespace iridium::convertion::implementation {
 
 
 std::atomic<int> config::double_precission(5);
 
 
 //template<>
-//string convert(high_resolution_clock::time_point const &value) {
+//string TConvert::convert(high_resolution_clock::time_point const &value) {
 //    auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();
 //    auto ms         = value_ms % 1000;
 //    time_t t        = value_ms / 1000;
@@ -85,8 +77,12 @@ std::atomic<int> config::double_precission(5);
 
 // typedef std::chrono::duration<int, std::ratio_multiply< minutes::period, std::ratio<5> >::type> _5minutes;
 // tt = floor<_5minutes>(t);
-template<>
-string convert(system_clock::time_point const &value, bool const &is_gmt_time) {
+
+
+string TConvert<string, system_clock::time_point>::convert(
+    system_clock::time_point const &value,
+    bool const &is_gmt_time)
+{
     auto  value_ms  = duration_cast<milliseconds>(value.time_since_epoch()).count();
     uint32_t    ms  = value_ms % 1000;
     time_t      t   = system_clock::to_time_t(value);
@@ -99,158 +95,157 @@ string convert(system_clock::time_point const &value, bool const &is_gmt_time) {
 
     char buffer[time_to_string_buffer_size];
     strftime(buffer, time_to_string_buffer_size, time_format_unix, &tm_);
-    return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
+    return string(buffer) + "." + rjust(TConvert<string, uint32_t>::convert(ms), 3, '0'); // ----->
 }
 
 
-template<>
-string convert(system_clock::time_point const &value) {
-    return convert<string>(value, true); // ----->
+string TConvert<string, system_clock::time_point>::convert(
+    system_clock::time_point const &value)
+{
+    return TConvert<string, system_clock::time_point>::convert(value, true); // ----->
 }
 
 
-template<>
-string convert(hours const &value) {
-    return convert<string, hours::rep>(static_cast<uint32_t>(value.count())) + " hours"; // ----->
+string TConvert<string, hours>::convert(hours const &value) {
+    return TConvert<string, hours::rep>::convert(static_cast<uint32_t>(value.count())) + " hours"; // ----->
 }
 
 
-template<>
-string convert(minutes const &value) {
-    if ((value.count() % 60) == 0)
-        return convert<string>(std::chrono::duration_cast<hours>(value));
-    return convert<string, minutes::rep>(value.count()) + " minutes";
+string TConvert<string, minutes>::convert(minutes const &value) {
+    return TConvert<string, minutes::rep>::convert(static_cast<uint32_t>(value.count())) + " minutes";
+}
+
+string TConvert<string, seconds>::convert(seconds const &value) {
+    return TConvert<string, seconds::rep>::convert(static_cast<uint32_t>(value.count())) + " seconds";
+}
+
+string TConvert<string, milliseconds>::convert(milliseconds const &value) {
+    return TConvert<string, milliseconds::rep>::convert(static_cast<uint32_t>(value.count())) + " milliseconds";
+}
+
+string TConvert<string, microseconds>::convert(microseconds const &value) {
+    return TConvert<string, microseconds::rep>::convert(static_cast<uint32_t>(value.count())) + " microseconds";
+}
+
+string TConvert<string, nanoseconds>::convert(nanoseconds const &value) {
+    return TConvert<string, nanoseconds::rep>::convert(static_cast<uint32_t>(value.count())) + " nanoseconds";
 }
 
 
-template<>
-string convert(seconds const &value) {
-    if ((value.count() % 60) == 0)
-        return convert<string>(std::chrono::duration_cast<minutes>(value));
-    return convert<string, seconds::rep>(value.count()) + " seconds";
+string TConvert<string, bool>::convert(bool const &value) {
+    return value ? "true" : "false";
 }
 
 
-template<>
-string convert(milliseconds const &value) {
-    if ((value.count() % 1000) == 0)
-        return convert<string>(std::chrono::duration_cast<seconds>(value));
-    return convert<string, milliseconds::rep>(value.count()) + " milliseconds";
-}
-
-
-template<>
-string convert(microseconds const &value) {
-    if ((value.count() % 1000) == 0)
-        return convert<string>(std::chrono::duration_cast<milliseconds>(value));
-    return convert<string, microseconds::rep>(value.count()) + " microseconds";
-}
-
-
-template<>
-string convert(nanoseconds const &value) {
-    if ((value.count() % 1000) == 0)
-        return convert<string>(std::chrono::duration_cast<microseconds>(value));
-    return convert<string, nanoseconds::rep>(value.count()) + " nanoseconds";
-}
-
-
-template<>
-string convert(bool const &value) {
-    if (value)
-        return "true"; // ----->
-    else
-        return "false"; // ----->
-}
-
-
-template<>
-string convert(int64_t const &value, int const &base) {
+string TConvert<string, int64_t>::convert(int64_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return buffer; // ----->
+    return string(buffer);
 }
 
 
-template<>
-string convert(uint64_t const &value, int const &base) {
+string TConvert<string, int64_t>::convert(int64_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return string(buffer);
+}
+
+
+string TConvert<string, uint64_t>::convert(uint64_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return upperCase(buffer); // ----->
+    return upperCase(string(buffer));
 }
 
 
-template<>
-string convert(int32_t const &value, int const &base) {
+string TConvert<string, uint64_t>::convert(uint64_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return upperCase(string(buffer));
+}
+
+
+string TConvert<string, int32_t>::convert(int32_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return upperCase(buffer); // ----->
+    return upperCase(string(buffer));
 }
 
 
-template<>
-string convert(uint32_t const &value, int const &base) {
+string TConvert<string, int32_t>::convert(int32_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return upperCase(string(buffer));
+}
+
+
+string TConvert<string, uint32_t>::convert(uint32_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return buffer; // ----->
+    return string(buffer);
 }
 
 
-template<>
-string convert(uint16_t const &value, int const &base) {
+string TConvert<string, uint32_t>::convert(uint32_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return string(buffer);
+}
+
+
+string TConvert<string, int16_t>::convert(int16_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return buffer; // ----->
+    return string(buffer);
 }
 
 
-template<>
-string convert(uint8_t const &value, int const &base) {
+string TConvert<string, int16_t>::convert(int16_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return string(buffer);
+}
+
+
+string TConvert<string, uint16_t>::convert(uint16_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return buffer; // ----->
+    return string(buffer);
 }
 
 
-template<>
-string convert(int64_t const &value) {
-    return convert<string>(value, 10); // ----->
+string TConvert<string, uint16_t>::convert(uint16_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return string(buffer);
 }
 
 
-template<>
-string convert(uint64_t const &value) {
-    return convert<string>(value, 10); // ----->
+string TConvert<string, int8_t>::convert(int8_t const &value, uint8_t const &base) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, base);
+    return string(buffer);
 }
 
 
-template<>
-string convert(int32_t const &value) {
-    return convert<string>(value, 10); // ----->
+string TConvert<string, int8_t>::convert(int8_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return string(buffer);
 }
 
 
-template<>
-string convert(uint32_t const &value) {
-    return convert<string>(value, 10); // ----->
+string TConvert<string, uint8_t>::convert(uint8_t const &value, uint8_t const &base) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, base);
+    return string(buffer);
 }
 
 
-template<>
-std::string convert(int16_t const &value) {
-    return convert<string>(static_cast<int32_t>(value)); // ----->
-}
-
-
-template<>
-std::string convert(uint16_t const &value) {
-    return convert<string>(static_cast<uint32_t>(value)); // ----->
-}
-
-
-template<>
-std::string convert(uint8_t const &value) {
-    return convert<string>(static_cast<uint32_t>(value)); // ----->
+string TConvert<string, uint8_t>::convert(uint8_t const &value) {
+    char buffer[int_to_string_buffer_size];
+    platform::itoa(value, buffer, 10);
+    return string(buffer);
 }
 
 
@@ -265,46 +260,41 @@ string convertRealToString(TValue const &value, std::string const &format) {
 }
 
 
-template<>
-string convert(double const &value, int const &precision) {
-    return convertRealToString(value, "%0." + convert<string>(precision) + "lf"); // ----->
+string TConvert<string, double>::convert(double const &value, uint8_t const &precision) {
+    return convertRealToString(value, "%0." + TConvert<string, uint8_t>::convert(precision) + "lf");
 }
 
 
-template<>
-string convert(double const &value) {
-    return convert<string>(value, static_cast<int>(config::double_precission)); // ----->
+string TConvert<string, double>::convert(double const &value) {
+    return TConvert<string, double>::convert(value, static_cast<uint8_t>(config::double_precission));
 }
 
 
-template<>
-string convert(float const &value, int const &precision) {
-    return convertRealToString(value, "%0." + convert<string>(precision) + "f"); // ----->
+string TConvert<string, float>::convert(float const &value, uint8_t const &precision) {
+    return convertRealToString(value, "%0." + TConvert<string, uint8_t>::convert(precision) + "f");
 }
 
 
-template<>
-string convert(float const &value) {
-    return convert<string>(value, static_cast<int>(config::double_precission)); // ----->
+string TConvert<string, float>::convert(float const &value) {
+    return TConvert<string, float>::convert(value, static_cast<uint8_t>(config::double_precission));
 }
 
 
-template<>
-string convert(std::thread::id const &value) {
+string TConvert<string, std::thread::id>::convert(std::thread::id const &value) {
     stringstream ss;
     ss << value;
-    return ss.str(); // ----->
+    return ss.str();
 }
 
 
-inline string formatException(const std::exception& e) {
+inline string formatException(std::exception const &e) {
     std::string result = e.what();
+    const auto* nested = dynamic_cast<std::nested_exception const *>(&e);
 
-    const auto* nested = dynamic_cast<const std::nested_exception*>(&e);
     if (nested) {
         try {
             nested->rethrow_nested();
-        } catch (const std::exception& inner) {
+        } catch (std::exception const &inner) {
             result += ": " + formatException(inner);
         } catch (...) {
             result += ": unknown exception";
@@ -315,17 +305,15 @@ inline string formatException(const std::exception& e) {
 }
 
 
-template<>
-string convert(const std::exception& e) {
+string TConvert<string, std::exception>::convert(std::exception const &e) {
     return formatException(e);
 }
 
 
-template<>
-string convert(const std::nested_exception& e) {
+string TConvert<string, std::nested_exception>::convert(std::nested_exception const &e) {
     try {
         e.rethrow_nested();
-    } catch (const std::exception& inner) {
+    } catch (std::exception const &inner) {
         return formatException(inner);
     } catch (...) {
         return "unknown exception";
@@ -335,39 +323,7 @@ string convert(const std::nested_exception& e) {
 }
 
 
-//template<>
-//high_resolution_clock::time_point convert(string const &value) {
-//    if (value.size() != time_scan_format_size)
-//        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
-//
-//    struct std::tm  tm_ = {};
-//    int ms      = 0;
-//    int result  = platform::sscanf(value.c_str(), time_scan_format.c_str(),
-//        &tm_.tm_year,
-//        &tm_.tm_mon,
-//        &tm_.tm_mday,
-//        &tm_.tm_hour,
-//        &tm_.tm_min,
-//        &tm_.tm_sec,
-//        &ms);
-//
-//    tm_.tm_year -= 1900;
-//    tm_.tm_mon  -= 1;
-//
-//    if (result == 7) {
-//        auto time = platform::mkgmtime(&tm_);
-//
-//        if (time < 0)
-//            throw runtime_error("convert '" + value + "' to time_t error, mkgmtime error"); // ----->
-//
-//        return high_resolution_clock::time_point(std::chrono::seconds(time)) + std::chrono::milliseconds(ms); // ----->
-//    } else
-//        throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
-//}
-
-
-template<>
-system_clock::time_point convert(string const &value) {
+system_clock::time_point TConvert<system_clock::time_point, string>::convert(string const &value) {
     if (value.size() != time_scan_format_size)
         throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
 
@@ -398,28 +354,7 @@ system_clock::time_point convert(string const &value) {
 }
 
 
-//// default format: "%Y-%m-%d %H:%M:%S%z %Z"
-//template<>
-//std::chrono::system_clock::time_point convert(std::string const &source, std::string const &format) {
-//    std::tm tm_ = {};
-//    std::istringstream ss(source);
-//    ss >> std::get_time(&tm_, format.c_str());
-//    return std::chrono::system_clock::from_time_t(mktime(&tm_));
-//}
-//std::string dateTimeToString(date_time time) {
-//    std::time_t now_c = std::chrono::system_clock::to_time_t(time);
-//    auto tm = std::localtime(&now_c);
-//    char buffer[32];
-//    std::strftime(buffer, 32, "%Y-%m-%d %H:%M:%S%z %Z", tm);
-//    return std::string(buffer);
-//}
-
-
-
-
-
-template<>
-bool convert(string const &value_) {
+bool TConvert<bool, string>::convert(string const &value_) {
     string value = value_;
 
     transform(value.begin(), value.end(), value.begin(), ::tolower);
@@ -433,8 +368,7 @@ bool convert(string const &value_) {
 }
 
 
-template<>
-int32_t convert(string const &value) {
+int32_t TConvert<int32_t, string>::convert(string const &value) {
     for (auto const ch: value)
         if ((ch < '0' || ch > '9') && ch != '-')
             throw runtime_error("convert '" + value + "' to int32 error"); // ----->
@@ -453,8 +387,7 @@ int32_t convert(string const &value) {
 }
 
 
-template<>
-int64_t convert(string const &value) {
+int64_t TConvert<int64_t, string>::convert(string const &value) {
     for (auto const ch : value)
         if ((ch < '0' || ch > '9') && ch != '-')
             throw runtime_error("convert '" + value + "' to int64 error"); // ----->
@@ -473,34 +406,33 @@ int64_t convert(string const &value) {
 }
 
 
-template<>
-uint32_t convert(string const &value) {
+uint32_t TConvert<uint32_t, string>::convert(string const &value) {
     // todo: int test
-    return convert<int32_t>(value); // ----->
+    auto result = TConvert<uint64_t, string>::convert(value);
+    if (result > UINT32_MAX)
+        throw runtime_error("convert '" + value + "' to uint32 error"); // ----->
+    return static_cast<uint32_t>(result); // ----->
 }
 
 
-template<>
-uint16_t convert(string const &value) {
-    auto result = convert<uint32_t>(value);
+uint16_t TConvert<uint16_t, string>::convert(string const &value) {
+    auto result = TConvert<uint64_t, string>::convert(value);
     if (result > UINT16_MAX)
         throw runtime_error("convert '" + value + "' to uint16 error"); // ----->
     return static_cast<uint16_t>(result); // ----->
 }
 
 
-template<>
-uint8_t convert(string const &value) {
-    auto result = convert<uint32_t>(value);
+uint8_t TConvert<uint8_t, string>::convert(string const &value) {
+    auto result = TConvert<uint64_t, string>::convert(value);
     if (result > UINT8_MAX)
         throw runtime_error("convert '" + value + "' to uint8 error"); // ----->
     return static_cast<uint8_t>(result); // ----->
 }
 
 
-template<>
-uint64_t convert(string const &value) {
-    return convert<int64_t>(value); // ----->
+uint64_t TConvert<uint64_t, string>::convert(string const &value) {
+    return TConvert<int64_t, string>::convert(value); // ----->
 }
 
 
@@ -527,20 +459,17 @@ TResult convertStringToReal(string const &value, std::string const &format) {
 }
 
 
-template<>
-double convert(string const &value) {
+double TConvert<double, string>::convert(string const &value) {
     return convertStringToReal<double>(value, "%lf");
 }
 
 
-template<>
-float convert(string const &value) {
+float TConvert<float, string>::convert(string const &value) {
     return convertStringToReal<float>(value, "%f");
 }
 
 
-template<>
-int convert(int const &value) {
+int TConvert<int, int>::convert(int const &value) {
     return value; // ----->
 }
 
@@ -548,15 +477,14 @@ int convert(int const &value) {
 #if __cplusplus >= 201103L && __cplusplus < 201703L
 
 
-template<>
-string convert(wstring const &value) {
+string TConvert<string, wstring>::convert(wstring const &value) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
     return converter.to_bytes(value); // ----->
 }
 
 
 template<>
-wstring convert(string const &value) {
+wstring TConvert<wstring, string>::convert(string const &value) {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     return converter.from_bytes(value); // ----->
 }
@@ -574,13 +502,13 @@ TResult convertInternal(TArg const &) {
 
 template<>
 string convertInternal<string, wstring, 2>(wstring const &value) {
-    return convert<string>(u16string(value.begin(), value.end())); // ----->
+    return TConvert<string, u16string>::convert(u16string(value.begin(), value.end())); // ----->
 }
 
 
 template<>
 wstring convertInternal<wstring, string, 2>(string const &value) {
-    auto result = convert<u16string>(value);
+    auto result = TConvert<u16string, string>::convert(value);
     return wstring(result.begin(), result.end());
 }
 
@@ -590,13 +518,13 @@ wstring convertInternal<wstring, string, 2>(string const &value) {
 
 template<>
 string convertInternal<string, wstring, 4>(wstring const &value) {
-    return convert<string>(u32string(value.begin(), value.end())); // ----->
+    return TConvert<string, u32string>::convert(u32string(value.begin(), value.end())); // ----->
 }
 
 
 template<>
 wstring convertInternal<wstring, string, 4>(string const &value) {
-    auto result = convert<u32string>(value);
+    auto result = TConvert<u32string, string>::convert(value);
     return wstring(result.begin(), result.end());
 }
 
@@ -604,20 +532,17 @@ wstring convertInternal<wstring, string, 4>(string const &value) {
 #endif // !WINDOWS_PLATFORM
 
 
-template<>
-string convert(wstring const &value) {
+string TConvert<string, wstring>::convert(wstring const &value) {
     return convertInternal<string, wstring, sizeof(wchar_t)>(value); // ----->
 }
 
 
-template<>
-wstring convert(string const &value) {
+wstring TConvert<wstring, string>::convert(string const &value) {
     return convertInternal<wstring, string, sizeof(wchar_t)>(value); // ----->
 }
 
 
-template<>
-std::string convert(std::u16string const &value) {
+string TConvert<string, u16string>::convert(u16string const &value) {
     // todo: test, not complete errors handling
     std::string result;
     size_t      length = value.length();
@@ -656,14 +581,14 @@ std::string convert(std::u16string const &value) {
             result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
         } else
-            throw std::runtime_error("convert utf16 to utf8 error: invalid code point"); // ----->
+            throw std::invalid_argument("convertion utf16 to utf8 error: invalid code point on position " +
+                TConvert<string, uint64_t>::convert(i)); // ----->
     }
     return result; // ----->
 }
 
 
-template<>
-std::string convert(std::u32string const &value) {
+string TConvert<string, u32string>::convert(u32string const &value) {
     // todo: test, not complete errors handling
     std::string result;
 
@@ -687,14 +612,13 @@ std::string convert(std::u32string const &value) {
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
         } else
             throw std::invalid_argument("Invalid UTF-32 code symbol: " +
-                convert<string>(static_cast<uint32_t>(symbol), 16)); // ----->
+                TConvert<string, uint32_t>::convert(symbol, 16)); // ----->
     }
     return result; // ----->
 }
 
 
-template<>
-std::u16string convert(std::string const &value) {
+u16string TConvert<u16string, string>::convert(string const &value) {
     // todo: test, not complete errors handling
     std::u16string result;
     auto length = value.length();
@@ -728,17 +652,15 @@ std::u16string convert(std::string const &value) {
             result.push_back(static_cast<char16_t>((symbol >> 10)   + 0xD800));
             result.push_back(static_cast<char16_t>((symbol & 0x3FF) + 0xDC00));
         } else
-            throw std::invalid_argument("Invalid UTF-8 code point at position " +
-                convert<string>(i)); // ----->
-
+            throw std::invalid_argument("convertion utf8 to utf16 error: invalid code point on position " +
+                TConvert<string, uint64_t>::convert(i)); // ----->
         i++;
     }
     return result; // ----->
 }
 
 
-template<>
-std::u32string convert(std::string const &value) {
+u32string TConvert<u32string, string>::convert(string const &value) {
     // todo: test, not complete errors handling
     std::u32string result;
     size_t length = value.length();
@@ -770,9 +692,8 @@ std::u32string convert(std::string const &value) {
             i += 3;
             result.push_back(symbol);
         } else
-            throw std::invalid_argument("Invalid UTF-8 code point at position " +
-                convert<string>(i)); // ----->
-
+            throw std::invalid_argument("convertion utf8 to utf32 error: invalid code point on position " +
+                TConvert<string, uint64_t>::convert(i)); // ----->
         i++;
     }
     return result; // ----->
@@ -782,21 +703,57 @@ std::u32string convert(std::string const &value) {
 #endif // STL > C++14
 
 
-template<>
-string convert(string const &value) {
+string TConvert<string, string>::convert(string const &value) {
     return value; // ----->
 }
 
 
-template<>
-string convert(list<string> const &values) {
-    string result;
-    for (auto const &value: values)
-        result += value;
-    return result; // ----->
-}
+} // iridium::convertion::implementation
 
 
-} // implementation
-} // convertion
-} // iridium
+//template<>
+//high_resolution_clock::time_point TConvert::convert(string const &value) {
+//    if (value.size() != time_scan_format_size)
+//        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
+//
+//    struct std::tm  tm_ = {};
+//    int ms      = 0;
+//    int result  = platform::sscanf(value.c_str(), time_scan_format.c_str(),
+//        &tm_.tm_year,
+//        &tm_.tm_mon,
+//        &tm_.tm_mday,
+//        &tm_.tm_hour,
+//        &tm_.tm_min,
+//        &tm_.tm_sec,
+//        &ms);
+//
+//    tm_.tm_year -= 1900;
+//    tm_.tm_mon  -= 1;
+//
+//    if (result == 7) {
+//        auto time = platform::mkgmtime(&tm_);
+//
+//        if (time < 0)
+//            throw runtime_error("convert '" + value + "' to time_t error, mkgmtime error"); // ----->
+//
+//        return high_resolution_clock::time_point(std::chrono::seconds(time)) + std::chrono::milliseconds(ms); // ----->
+//    } else
+//        throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
+//}
+
+
+//// default format: "%Y-%m-%d %H:%M:%S%z %Z"
+//template<>
+//std::chrono::system_clock::time_point TConvert::convert(std::string const &source, std::string const &format) {
+//    std::tm tm_ = {};
+//    std::istringstream ss(source);
+//    ss >> std::get_time(&tm_, format.c_str());
+//    return std::chrono::system_clock::from_time_t(mktime(&tm_));
+//}
+//std::string dateTimeToString(date_time time) {
+//    std::time_t now_c = std::chrono::system_clock::to_time_t(time);
+//    auto tm = std::localtime(&now_c);
+//    char buffer[32];
+//    std::strftime(buffer, 32, "%Y-%m-%d %H:%M:%S%z %Z", tm);
+//    return std::string(buffer);
+//}

@@ -9,10 +9,6 @@
 using std::string;
 using std::vector;
 using iridium::convertion::convert;
-using iridium::convertion::convertPtr;
-
-
-IMPLEMENT_ENUM(iridium::io::URI::TProtocol)
 
 
 namespace iridium {
@@ -293,10 +289,15 @@ iridium::io::URI::TIPv4 convertStringToIPv4(string const &ipv4) {
 
     try {
         iridium::io::URI::TIPv4 result;
-        auto const bytes = iridium::split(ipv4, ".");
-        size_t i = 0;
-        for (auto const &byte: assertSize(bytes, 4, "convertion string '" + ipv4 + "' to ipv4 error: expected 4 numbers"))
-            result[i++] = convert<uint8_t>(byte);
+        auto const bytes = assertSize(iridium::split(ipv4, "."), 4, "convertion string '" + ipv4 + "' to ipv4 error: expected 4 numbers");
+
+        std::transform(
+            bytes.begin(),
+            bytes.end(),
+            result.begin(),
+            convert<uint8_t, std::string>
+        );
+
         return result; // ----->
     } catch (std::exception const &e) {
         throw std::runtime_error("ipv4 '" + ipv4 + "' parsing error: " + e.what()); // ----->
@@ -311,5 +312,6 @@ IMPLEMENT_CONVERT(iridium::io::URI::TIPv4, std::string, convertStringToIPv4)
 IMPLEMENT_CONVERT(std::string, iridium::io::URI::TIPv4, convertIPv4ToString)
 
 
+IMPLEMENT_ENUM(iridium::io::URI::TProtocol)
 IMPLEMENT_CONVERT(iridium::io::URI, std::string, createURI)
 IMPLEMENT_CONVERT(std::string, iridium::io::URI, getAddress)

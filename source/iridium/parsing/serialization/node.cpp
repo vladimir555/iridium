@@ -47,65 +47,66 @@ NodeView<void>::NodeView(
 }
 
 
-NodeView<void>::NodeView(NodeView<void> const &parent, std::string const &name) {
-    m_path = parent.m_path + "/" + name;
+NodeView<void>::NodeView(NodeView<void> const * const parent, std::string const &name) {
+    if (!parent)
+        throw std::runtime_error(
+            "node name '" + name + "' add to path '" + m_path + "' error: parent is null"); // ----->
 
-    if (parent.m_node)
-        m_node = parent.m_node->getChild(name);
+    m_path = parent->m_path + "/" + name;
+
+    if (parent && parent->m_node)
+        m_node = parent->m_node->getChild(name);
 
     // add empty node for child nodes with default values
     if(!m_node)
-        m_node = parent.m_node->addChild(name);
+        m_node = parent->m_node->addChild(name);
 }
 
 
 INode::TSharedPtr NodeView<void>::getNode() const {
-    return m_node; // ----->
+    return m_node->clone(); // ----->
 }
 
 
-//string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimeter_symbol) {
-//    //todo: optimize
-//    string result = camel;
-//
-//    if (!result.empty())
-//        result[0] = static_cast<char>(tolower(result[0]));
-//
-//    size_t i = 1;
-//    while (i < result.size()) {
-//        char lo_ch = static_cast<char>(tolower(result[i]));
-//        if (result[i] != lo_ch) {
-//            result[i] = static_cast<char>(lo_ch);
-//            result.insert(i, string() + delimeter_symbol);
-//        }
-//        i++;
-//    }
-//
-//    return result; // ----->
-//}
-
-
-std::string convertCamelToSplittedBySymbol(std::string const &camel, char const &delimiter_symbol) {
-    if (camel.empty() || delimiter_symbol == 0)
-        return camel;
+std::string convertCamelToDelimitedBySymbol(std::string &&camel, char delimiter_symbol) {
+    if (camel.empty() || delimiter_symbol == '\0') {
+        return std::move(camel);
+    }
 
     std::string result;
-
-    result.reserve(camel.size() * 2);
-    result += static_cast<char>(std::tolower(camel[0]));
+    result.reserve(camel.size() + 16);
+    result.push_back(static_cast<char>(std::tolower(camel[0])));
 
     for (size_t i = 1; i < camel.size(); ++i) {
         if (std::isupper(camel[i])) {
-            result += delimiter_symbol;
-            result += static_cast<char>(std::tolower(camel[i]));
-        } else
-            result += camel[i];
+            result.push_back(delimiter_symbol);
+            result.push_back(static_cast<char>(std::tolower(camel[i])));
+        } else {
+            result.push_back(camel[i]);
+        }
     }
 
     return result; // ----->
 }
 
 
+std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode const &strategy) {
+    switch (strategy) {
+        case TNamingStrategyCPPToNode::CAMEL_CASE_TO_LOWER_KEBAB:
+            return convertCamelToDelimitedBySymbol(std::move(name), '-');
+        case TNamingStrategyCPPToNode::LOWER_CASE_TO_LOWER_KEBAB:
+            std::replace(name.begin(), name.end(), '_', '-');
+            return std::move(name);
+        default:
+            break;
+    }
+    return std::move(name); // ----->
+}
+
+
 } // serialization
 } // parsing
 } // iridium
+
+
+//IMPLEMENT_ENUM(iridium::parsing::serialization::TNamingStrategyCPPToNode)

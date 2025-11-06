@@ -32,6 +32,26 @@
 ///     на реализациях, предоставленных для Unix-подобных систем, используя ее Unix-основу.
 #include "../unix/convert.h"
 
+#include "iridium/convertion/implementation/common.h"
+
+
+namespace iridium::convertion::implementation {
+
+
+template<>
+struct TConvert<std::string, long> {
+    static std::string convert(long const &value);
+};
+
+
+template<>
+struct TConvert<std::string, unsigned long> {
+    static std::string convert(unsigned long const &value);
+};
+
+
+} // iridium::convertion::implementation
+
 
 #endif // MACOS_PLATFORM
 
