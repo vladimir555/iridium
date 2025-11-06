@@ -6,5 +6,5 @@ namespace iridium {
 constexpr auto PROJECT_NAME = "iridium";
 constexpr auto PROJECT_VERSION_MAJOR = 0;
 constexpr auto PROJECT_VERSION_MINOR = 0;
-constexpr auto PROJECT_VERSION_PATCH = 408;
+constexpr auto PROJECT_VERSION_PATCH = 410;
 } // namespace iridium
