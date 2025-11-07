@@ -42,10 +42,10 @@ protected:
     ///     Примечание: Сигнатура `NonMovable(NonMovable const &&)` является необычной.
     ///     Стандартный удаленный конструктор перемещения обычно выглядит так: `NonMovable(NonMovable &&) = delete;`.
     ///     Rvalue-ссылка на константу (`const &&`) — редкая конструкция и может не обеспечивать предполагаемую семантику неперемещаемости так же надежно, как rvalue-ссылка на неконстантный объект.
-    NonMovable(NonMovable const &&) = delete;
+    NonMovable(NonMovable&&) = delete;
     /// \~english @brief Deleted copy assignment operator (protected).
     /// \~russian @brief Удаленный оператор присваивания копированием (защищенный).
-    NonMovable &operator=(NonMovable const &) const = delete;
+    NonMovable& operator=(NonMovable const&) = delete;
 };
 
 

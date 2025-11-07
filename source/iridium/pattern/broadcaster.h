@@ -11,8 +11,6 @@
 
 
 namespace iridium {
-/// \~english @brief Contains implementations of common software design patterns.
-/// \~russian @brief Содержит реализации распространенных шаблонов проектирования программного обеспечения.
 namespace pattern {
 
 
@@ -91,24 +89,29 @@ private:
 
 
 template<typename TReceiver>
-void Broadcaster<TReceiver>::attach(typename TReceiver::TSharedPtr const &receiver) {
-    if (!m_receivers.insert(receiver).second)
+void Broadcaster<TReceiver>::attach(typename TReceiver::TSharedPtr const& receiver)
+{
+    if (!m_receivers.insert(receiver).second) {
         throw std::logic_error("attach duplicate receiver"); // ----->
+    }
 }
 
 
 template<typename TReceiver>
-void Broadcaster<TReceiver>::detach(typename TReceiver::TSharedPtr const &receiver) {
-    if (m_receivers.erase(receiver) == 0)
+void Broadcaster<TReceiver>::detach(typename TReceiver::TSharedPtr const& receiver)
+{
+    if (m_receivers.erase(receiver) == 0) {
         throw std::logic_error("detach unatached receiver"); // ----->
+    }
 }
 
 
 template<typename TReceiver>
-template<typename TReceiver_, typename ... TArgs>
-void Broadcaster<TReceiver>::broadcast(void(TReceiver_::*f)(TArgs const & ...), TArgs const & ... args) {
-    for (auto i: m_receivers) {
-        (i.get()->*f)(args ...);
+template<typename TReceiver_, typename... TArgs>
+void Broadcaster<TReceiver>::broadcast(void (TReceiver_::*f)(TArgs const&...), TArgs const&... args)
+{
+    for (auto i : m_receivers) {
+        (i.get()->*f)(args...);
     }
 }
 

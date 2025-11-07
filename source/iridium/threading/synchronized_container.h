@@ -18,12 +18,13 @@ namespace threading {
 /// \~english @brief A thread-safe container based on std::unordered_map.
 /// \~russian @brief Потокобезопасный контейнер на основе std::unordered_map.
 template<typename TKey, typename TValue>
-class SynchronizedContainer: public Synchronized<std::mutex> {
+class SynchronizedContainer : public Synchronized<std::recursive_mutex>
+{
 public:
     DEFINE_IMPLEMENTATION(SynchronizedContainer)
     /// \~english @brief Constructor.
     /// \~russian @brief Конструктор.
-    SynchronizedContainer();
+    SynchronizedContainer() = default;
 
     /// \~english @brief Sets a key-value pair in the container.
     /// \~russian @brief Устанавливает пару "ключ-значение" в контейнере.
@@ -42,11 +43,6 @@ private:
 };
 
     
-template<typename TKey, typename TValue>
-SynchronizedContainer<TKey, TValue>::SynchronizedContainer()
-:
-    Synchronized(implementation::CRecursiveMutex::create())
-{}
     
     
 template<typename TKey, typename TValue>

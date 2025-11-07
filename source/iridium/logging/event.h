@@ -21,8 +21,6 @@
 
 // No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
-/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
 
 /// \~english @brief Represents a single log event or message.
@@ -60,16 +58,13 @@ struct TEvent {
     )
     /// \~english @brief The exact time at which the log event occurred.
     /// \~russian @brief Точное время, когда произошло событие журнала.
-    std::chrono::system_clock::time_point const
-        time;
+    std::chrono::system_clock::time_point const time;
     /// \~english @brief The severity level of this log event (e.g., TRACE, INFO, ERROR_).
     /// \~russian @brief Уровень серьезности этого события журнала (например, TRACE, INFO, ERROR_).
-    TLevel const
-        level;
+    TLevel const level;
     /// \~english @brief The identifier of the thread that generated this log event.
     /// \~russian @brief Идентификатор потока, который сгенерировал это событие журнала.
-    std::thread::id const
-        thread_id;
+    std::thread::id const thread_id;
     /// \~english @brief The actual content of the log message.
     /// \~russian @brief Фактическое содержание сообщения журнала.
     std::string

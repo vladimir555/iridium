@@ -176,13 +176,17 @@ private:
 
 
 template<typename TValue>
-LogStreamDummy const &LogStreamDummy::operator << (TValue) const {
+LogStreamDummy const&
+LogStreamDummy::operator<<(TValue) const
+{
     return *this;
 }
 
 
 template<typename TValue>
-LogStream const &LogStream::operator << (TValue const &v) const {
+LogStream const&
+LogStream::operator<<(TValue const& v) const
+{
     m_event->line += convertion::convert<std::string>(v);
     return std::move(*this); // ----->
 }
@@ -196,7 +200,9 @@ LogStream const &LogStream::operator << (TValue const &v) const {
 
 
 template<typename TValue>
-LogStream const &LogStream::operator << (TValue * const * v) const {
+LogStream const&
+LogStream::operator<<(TValue* const* v) const
+{
     m_event->line += v ? convertion::convert<std::string>(*v) : "nullptr";
     return std::move(*this); // ----->
 }

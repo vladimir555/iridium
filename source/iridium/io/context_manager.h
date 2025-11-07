@@ -72,8 +72,7 @@ public:
     ///     May return `nullptr` or throw if no suitable context can be acquired.
     /// \~russian @return Умный указатель на `IContext`, считающийся подходящим для обработки события.
     ///     Может вернуть `nullptr` или выбросить исключение, если подходящий контекст не может быть получен.
-    virtual IContext::TSharedPtr
-    acquireContext(Event::TSharedPtr    const &event, IMultiplexer::TSharedPtr const &multiplexer) = 0;
+    virtual IContext::TSharedPtr acquireContext(Event::TSharedPtr    const &event, IMultiplexer::TSharedPtr const &multiplexer) = 0;
 
     /// \~english @brief Releases an I/O context, possibly after it has finished its primary tasks.
     ///     This might not immediately destroy the context but could transition it to an inactive state
@@ -85,8 +84,7 @@ public:
     /// \~russian @param context Умный указатель на `IContext`, который необходимо освободить.
     /// \~english @return A list of `Event::TSharedPtr` which might be pending or unprocessed events from the released context.
     /// \~russian @return Список `Event::TSharedPtr`, который может содержать ожидающие или необработанные события из освобожденного контекста.
-    virtual std::list<Event::TSharedPtr>
-                    releaseContext(IContext::TSharedPtr const &context) = 0;
+    virtual std::list<Event::TSharedPtr> releaseContext(IContext::TSharedPtr const &context) = 0;
 
     /// \~english @brief Checks for and retrieves events related to outdated streams across all managed contexts.
     ///     This method likely iterates through its managed contexts, calling a similar method on each,
@@ -98,8 +96,7 @@ public:
     ///     from any of the managed contexts.
     /// \~russian @return Список умных указателей на события, представляющие устаревшие потоки или уведомления о тайм-ауте
     ///     из любого из управляемых контекстов.
-    virtual std::list<Event::TSharedPtr>
-                    checkOutdatedStreams() = 0;
+    virtual std::list<Event::TSharedPtr> checkOutdatedStreams() = 0;
 };
 
 

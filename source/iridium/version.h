@@ -3,8 +3,16 @@
 #pragma once
 
 namespace iridium {
+/// \~english @brief The name of the project.
+/// \~russian @brief Имя проекта.
 constexpr auto PROJECT_NAME = "iridium";
+/// \~english @brief The major version of the project.
+/// \~russian @brief Основная версия проекта.
 constexpr auto PROJECT_VERSION_MAJOR = 0;
+/// \~english @brief The minor version of the project.
+/// \~russian @brief Минорная версия проекта.
 constexpr auto PROJECT_VERSION_MINOR = 0;
+/// \~english @brief The patch version of the project.
+/// \~russian @brief Патч-версия проекта.
 constexpr auto PROJECT_VERSION_PATCH = 411;
 } // namespace iridium

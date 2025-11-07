@@ -40,7 +40,9 @@ protected:
 
 
 template<typename TClass>
-TClass &Singleton<TClass>::instance() {
+TClass&
+Singleton<TClass>::instance()
+{
     static std::shared_ptr<TClass> instance;
 
     if (!instance) {
@@ -53,7 +55,8 @@ TClass &Singleton<TClass>::instance() {
 
 
 template<typename TClass>
-Singleton<TClass>::~Singleton() {
+Singleton<TClass>::~Singleton()
+{
     m_is_alive = false;
 }
 

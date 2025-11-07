@@ -25,6 +25,7 @@ namespace io {
 class Buffer: public std::vector<uint8_t> {
 public:
     DEFINE_CREATE(Buffer)
+
     Buffer() = default;
 
     /// \~english @brief Constructs a Buffer from a null-terminated C-style string.
