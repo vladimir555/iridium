@@ -1702,4 +1702,3 @@ TEST(ServiceOrderedTest) {
 -   Sequence verification is performed at each step (`step` inside `MockSequence`). If the order is violated, an exception will be thrown immediately.
 
 Using sequences is particularly useful for testing interaction protocols or complex scenarios where the order of operations is critical.
-```
