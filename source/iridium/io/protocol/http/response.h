@@ -38,7 +38,11 @@ DEFINE_ROOT_NODE_BEGIN(Http)
         /// \~russian @brief Фраза-причина, связанная с кодом состояния (например, "OK", "Not Found").
         std::string reason;
     };
+    /// \~english @brief The message line of the HTTP response.
+    /// \~russian @brief Строка сообщения HTTP-ответа.
     DEFINE_ATTRIBUTE(TMessageLine, Message, TMessageLine( {"HTTP/1.1", 200, "OK"} ))
+    /// \~english @brief The headers of the HTTP response.
+    /// \~russian @brief Заголовки HTTP-ответа.
     DEFINE_NODE_BEGIN(Headers)
         /// \~english @brief Represents an HTTP date and time, typically for headers like "Date" or "Last-Modified".
         /// \~russian @brief Представляет дату и время HTTP, обычно для заголовков типа "Date" или "Last-Modified".
@@ -47,13 +51,25 @@ DEFINE_ROOT_NODE_BEGIN(Http)
             /// \~russian @brief Момент времени и дата.
             std::chrono::system_clock::time_point date;
         };
+        /// \~english @brief The Date header, representing the time the response was generated.
+        /// \~russian @brief Заголовок Date, представляющий время создания ответа.
         DEFINE_ATTRIBUTE(THTTPDate, Date, THTTPDate())
+        /// \~english @brief The Server header, containing information about the software used by the origin server.
+        /// \~russian @brief Заголовок Server, содержащий информацию о программном обеспечении, используемом исходным сервером.
         DEFINE_ATTRIBUTE(std::string, server, DEFAULT_SERVER_NAME)
+        /// \~english @brief The Last-Modified header, indicating the last modification date of the resource.
+        /// \~russian @brief Заголовок Last-Modified, указывающий дату последнего изменения ресурса.
         DEFINE_ATTRIBUTE(THTTPDate, LastModified, THTTPDate())
+        /// \~english @brief The Content-Length header, indicating the size of the response body in bytes.
+        /// \~russian @brief Заголовок Content-Length, указывающий размер тела ответа в байтах.
         DEFINE_ATTRIBUTE(size_t, ContentLength, 0)
+        /// \~english @brief The Content-Type header, indicating the media type of the resource.
+        /// \~russian @brief Заголовок Content-Type, указывающий медиатип ресурса.
         DEFINE_ATTRIBUTE(std::string, ContentType, "text/html")
 //        DEFINE_ATTRIBUTE(std::string, Connection, "")
     DEFINE_NODE_END(Headers)
+    /// \~english @brief The body of the HTTP response.
+    /// \~russian @brief Тело HTTP-ответа.
     DEFINE_ATTRIBUTE(Buffer, Body, Buffer())
 DEFINE_ROOT_NODE_END()
 

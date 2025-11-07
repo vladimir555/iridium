@@ -1668,104 +1668,18 @@ TEST(DataConsumer_UsesMockService) {
 
 Иногда важно не только то, какие методы мок-объекта вызываются, но и в каком порядке это происходит. Фреймворк мокирования Iridium предоставляет средства для определения и проверки последовательностей вызовов.
 
+***Примечание:** Эта функциональность может быть неполной или находиться в разработке. Макросы, представленные в коде, могут не соответствовать полной реализации класса `MockSequence`.*
+
 @subsubsection subsubsec_testing_defining_sequences Определение последовательности (DEFINE_MOCK_SEQUENCE)
 
-Макрос `DEFINE_MOCK_SEQUENCE(sequence_name, mock_object)` используется для создания объекта последовательности.
--   `sequence_name`: Имя, которое вы даете этой последовательности (будет создана переменная `sequence_<sequence_name>`).
--   `mock_object`: Экземпляр мок-объекта, для которого вы определяете последовательность вызовов.
-
-Этот макрос должен вызываться в начале вашего теста, где вы хотите определить ожидания по порядку вызовов.
+Макрос `DEFINE_MOCK_SEQUENCE(name)` используется для создания объекта последовательности.
+-   `name`: Имя, которое вы даете этой последовательности (будет создана переменная `sequence_<name>`).
 
 @subsubsection subsubsec_testing_sequence_expectations Ожидания в последовательности (DEFINE_MOCK_SEQUENCE_EXPECTATION)
 
-После определения объекта последовательности, вы добавляете в нее ожидаемые вызовы с помощью макроса `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, arg1, arg2, ...)`.
+После определения объекта последовательности, вы добавляете в нее ожидаемые вызовы с помощью макроса `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method)`.
 -   `sequence_name`: Имя ранее определенной последовательности.
--   `mock_object`: Тот же мок-объект.
--   `method_name`: Имя мокированного метода, который должен быть вызван.
--   `(arg1, arg2, ...)`: Ожидаемые аргументы для этого вызова, заключенные в круглые скобки.
+-   `mock`: Мок-объект.
+-   `method`: Имя мокированного метода, который должен быть вызван.
 
-Каждый вызов `DEFINE_MOCK_SEQUENCE_EXPECTATION` добавляет одно ожидание в указанную последовательность. Порядок этих макросов определяет ожидаемый порядок вызовов методов.
-
-Пример:
-@code{.cpp}
-#include "iridium/testing/tester.h"
-#include "iridium/testing/mock.h"
-#include <string>
-#include <vector> 
-
-// Для полноты примера, определим IMyDependency и его мок здесь же.
-// В реальном коде они были бы в заголовочных файлах.
-class IMyDependency {
-public:
-    virtual ~IMyDependency() = default;
-    virtual int getValue(int key) = 0;
-    virtual std::string getName() const = 0;
-    virtual void processData(const std::vector<int>& data) = 0;
-    virtual void setup() = 0; // Новый метод для демонстрации последовательности
-    IMyDependency(const std::string& /* initial_config */) {} 
-    IMyDependency() = default;
-};
-
-DEFINE_MOCK_CLASS(IMyDependency) {
-public:
-    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, int)
-    DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, const std::vector<int>&)
-    DEFINE_MOCK_METHOD(void, setup) // Мок для нового метода
-};
-// Конец определений IMyDependency и мока
-
-// Класс, демонстрирующий вызовы в определенной последовательности
-class ServiceWithOrderedCalls {
-    IMyDependency* dep_;
-public:
-    ServiceWithOrderedCalls(IMyDependency* dep) : dep_(dep) {}
-
-    void initializeAndGetData(int val_key) {
-        dep_->setup(); // Первый ожидаемый вызов
-        std::vector<int> data_vec = {val_key, val_key * 2};
-        dep_->processData(data_vec); // Второй ожидаемый вызов
-        dep_->getValue(val_key); // Третий ожидаемый вызов
-    }
-};
-
-TEST(ServiceOrderedTest) {
-    IMyDependencyMock mockDep;
-
-    // Определяем поведение для методов, чтобы они просто работали
-    // (для проверки последовательности важно, чтобы вызовы происходили,
-    // а не что они возвращают, если это не часть логики теста)
-    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep) {};
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {};
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) { return key + 1; };
-
-    // Определяем последовательность 's1' для объекта 'mockDep'
-    // Имя объекта последовательности будет sequence_s1
-    DEFINE_MOCK_SEQUENCE(s1, mockDep); 
-
-    // Добавляем ожидания в последовательность s1
-    // Ожидается вызов mockDep.setup() без аргументов
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup); 
-    // Ожидается вызов mockDep.processData() с конкретным вектором
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, {10, 20}); 
-    // Ожидается вызов mockDep.getValue() с аргументом 10
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, 10); 
-
-    ServiceWithOrderedCalls service(&mockDep);
-    service.initializeAndGetData(10); // Этот метод должен вызвать методы mockDep в указанном порядке
-
-    // Проверка последовательности происходит автоматически. Если порядок нарушен,
-    // или один из ожидаемых вызовов не произошел в нужном месте,
-    // или были вызваны незадекларированные в последовательности методы мока,
-    // MockSequence::step выбросит исключение, и тест провалится.
-    // Если все вызовы произошли в правильном порядке с правильными аргументами, тест пройдет.
-}
-@endcode
-
-**Важные замечания:**
--   Если метод вызывается с аргументами, отличными от тех, что указаны в `DEFINE_MOCK_SEQUENCE_EXPECTATION`, это считается нарушением последовательности.
--   Если в ходе выполнения кода происходят вызовы мокированных методов, которые не являются частью текущего ожидаемого шага в последовательности (или вообще не ожидаются в рамках какой-либо активной последовательности), это также может привести к ошибке, в зависимости от строгости реализации мок-фреймворка. Обычно ожидается точное совпадение.
--   Проверка последовательности выполняется на каждом шаге (`step` внутри `MockSequence`). Если порядок нарушается, исключение будет выброшено немедленно.
-
-Использование последовательностей особенно полезно для тестирования протоколов взаимодействия или сложных сценариев, где порядок операций критичен.
+В текущей реализации этот макрос не позволяет указывать ожидаемые аргументы для вызова метода.

@@ -25,29 +25,44 @@ namespace db {
 namespace implementation {
 
 
-class CPostgresConnector:
+class CPostgresConnector :
     public IConnector,
     public CConnector
 {
 public:
     DEFINE_CREATE(CPostgresConnector)
-    ///
-    CPostgresConnector(config::TDatebase const &config);
-    ///
+
+    /// \~english @brief Constructs a PostgreSQL connector.
+    /// \~russian @brief Конструктор коннектора PostgreSQL.
+    /// \~english @param config The database configuration.
+    /// \~russian @param config Конфигурация базы данных.
+    CPostgresConnector(config::TDatebase const& config);
+
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
     virtual ~CPostgresConnector() override;
-    ///
+
+    /// \~english @brief Initializes the connection to the PostgreSQL database.
+    /// \~russian @brief Инициализирует соединение с базой данных PostgreSQL.
     void initialize() override;
-    ///
+
+    /// \~english @brief Finalizes the connection to the PostgreSQL database.
+    /// \~russian @brief Завершает соединение с базой данных PostgreSQL.
     void finalize() override;
-    ///
+
+    /// \~english @brief Sends a query to the PostgreSQL database.
+    /// \~russian @brief Отправляет запрос к базе данных PostgreSQL.
+    /// \~english @param query The SQL query to execute.
+    /// \~russian @param query SQL-запрос для выполнения.
+    /// \~english @return The result of the query as a tree of nodes.
+    /// \~russian @return Результат запроса в виде дерева узлов.
     virtual INode::TSharedPtr
-        sendQuery(std::string const &query) override;
+        sendQuery(std::string const& query) override;
 
 private:
-    // ///
-    // void executeCommand(std::string const &command);
-    ///
-    PGconn *m_connection;
+    /// \~english @brief The PostgreSQL connection handle.
+    /// \~russian @brief Указатель на соединение PostgreSQL.
+    PGconn* m_connection;
 };
 
 

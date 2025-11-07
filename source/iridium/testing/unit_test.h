@@ -17,21 +17,36 @@ namespace iridium {
 namespace testing {
 
 
+/// \~english @brief A custom exception class for test failures.
+/// \~russian @brief Пользовательский класс исключений для неудачных тестов.
 class Exception {
 public:
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     Exception(std::string const &what);
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
    ~Exception() = default;
+    /// \~english @brief Gets the exception message.
+    /// \~russian @brief Возвращает сообщение об исключении.
     std::string what() const;
 private:
     std::string m_what;
 };
 
-
+/// \~english @brief A base class for unit tests, providing assertion methods.
+/// \~russian @brief Базовый класс для модульных тестов, предоставляющий методы утверждений.
 class UnitTest {
 public:
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     UnitTest() = default;
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
    ~UnitTest() = default;
 
+    /// \~english @brief Fails a test with a message.
+    /// \~russian @brief "Проваливает" тест с сообщением.
     template<typename TValue>
     void fail(
         TValue      const &left,
@@ -40,34 +55,50 @@ public:
         std::string const &condition_source,
         std::string const &line);
 
+    /// \~english @brief Fails a test with a message.
+    /// \~russian @brief "Проваливает" тест с сообщением.
     void fail(
         std::string const &condition_source,
         std::string const &line);
 
+    /// \~english @brief Asserts that the left value is less than the right value.
+    /// \~russian @brief Утверждает, что левое значение меньше правого.
     template<typename TLeft, typename TRight>
     void less(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
+    /// \~english @brief Asserts that the left value is less than or equal to the right value.
+    /// \~russian @brief Утверждает, что левое значение меньше или равно правому.
     template<typename TLeft, typename TRight>
     void lessEqual(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
+    /// \~english @brief Asserts that the left value is equal to the right value.
+    /// \~russian @brief Утверждает, что левое значение равно правому.
     template<typename TLeft, typename TRight>
     void equal(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
+    /// \~english @brief Asserts that the left value is greater than the right value.
+    /// \~russian @brief Утверждает, что левое значение больше правого.
     template<typename TLeft, typename TRight>
     void greater(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
+    /// \~english @brief Asserts that the left value is greater than or equal to the right value.
+    /// \~russian @brief Утверждает, что левое значение больше или равно правому.
     template<typename TLeft, typename TRight>
     void greaterEqual(TLeft const &left, TRight const &right,
         std::string const &condition_source, std::string const &line);
 
+    /// \~english @brief Asserts that a function throws a specific exception.
+    /// \~russian @brief Утверждает, что функция выбрасывает определенное исключение.
     template<typename TFunction, typename TException>
     void assert_(TFunction const &func,
         std::string const &condition_source, std::string const &line);
 
+    /// \~english @brief Asserts that a condition is true.
+    /// \~russian @brief Утверждает, что условие истинно.
     void assert_(bool const &is_true,
         std::string const &condition_source, std::string const &line);
 };

@@ -93,6 +93,8 @@ public:
     /// \~english @return An `IProcess::TState` object representing the current condition and exit code (if terminated) of the process.
     /// \~russian @return Объект `IProcess::TState`, представляющий текущее состояние и код завершения (если завершен) процесса.
     TState getState()   override;
+    /// \~english @brief Sends a signal to the process.
+    /// \~russian @brief Отправляет сигнал процессу.
     void   sendSignal(TSignal const &signal) override;
 
 private:

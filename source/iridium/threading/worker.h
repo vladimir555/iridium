@@ -18,6 +18,8 @@ namespace iridium {
 namespace threading {
 
 
+/// \~english @brief An interface for a worker that pushes items to a queue.
+/// \~russian @brief Интерфейс для "работника", который добавляет элементы в очередь.
 template<typename TItem>
 class IWorkerPusher:
     public virtual IAsyncQueuePusher<TItem>,
@@ -25,16 +27,23 @@ class IWorkerPusher:
 {
 public:
     DEFINE_INTERFACE(IWorkerPusher);
+    /// \~english @brief An interface for a handler that processes items.
+    /// \~russian @brief Интерфейс для обработчика, который обрабатывает элементы.
     class IHandler: public pattern::IInitializable {
     public:
+        /// \~english @brief A list of input items.
+        /// \~russian @brief Список входных элементов.
         using TInputItems = typename IAsyncQueuePusher<TItem>::TItems;
 
         DEFINE_INTERFACE(IHandler)
+        /// \~english @brief Handles a list of items.
+        /// \~russian @brief Обрабатывает список элементов.
         virtual void handle(TInputItems const &items) = 0;
     };
 };
 
-
+/// \~english @brief An interface for a worker that pops items from a queue.
+/// \~russian @brief Интерфейс для "работника", который извлекает элементы из очереди.
 template<typename TItem>
 class IWorkerPopper:
     public virtual IAsyncQueuePopper<TItem>,
@@ -42,16 +51,23 @@ class IWorkerPopper:
 {
 public:
     DEFINE_INTERFACE(IWorkerPopper)
+    /// \~english @brief An interface for a handler that provides items.
+    /// \~russian @brief Интерфейс для обработчика, который предоставляет элементы.
     class IHandler: public pattern::IInitializable {
     public:
+        /// \~english @brief A list of output items.
+        /// \~russian @brief Список выходных элементов.
         using TOutputItems = typename IAsyncQueuePopper<TItem>::TItems;
 
         DEFINE_INTERFACE(IHandler)
+        /// \~english @brief Handles the provision of items.
+        /// \~russian @brief Обрабатывает предоставление элементов.
         virtual TOutputItems handle() = 0;
     };
 };
 
-
+/// \~english @brief An interface for a worker that processes items, taking input and producing output.
+/// \~russian @brief Интерфейс для "работника", который обрабатывает элементы, принимая входные данные и производя выходные.
 template<typename TInputItem, typename TOutputItem = TInputItem>
 class IWorker:
     public IWorkerPusher<TInputItem>,
@@ -59,12 +75,20 @@ class IWorker:
 {
 public:
     DEFINE_INTERFACE(IWorker)
+    /// \~english @brief An interface for a handler that processes items.
+    /// \~russian @brief Интерфейс для обработчика, который обрабатывает элементы.
     class IHandler: public pattern::IInitializable {
     public:
+        /// \~english @brief A list of input items.
+        /// \~russian @brief Список входных элементов.
         using TInputItems   = typename IWorkerPusher<TInputItem>::IHandler::TInputItems;
+        /// \~english @brief A list of output items.
+        /// \~russian @brief Список выходных элементов.
         using TOutputItems  = typename IWorkerPopper<TOutputItem>::IHandler::TOutputItems;
 
         DEFINE_INTERFACE(IHandler)
+        /// \~english @brief Handles a list of input items and returns a list of output items.
+        /// \~russian @brief Обрабатывает список входных элементов и возвращает список выходных элементов.
         virtual TOutputItems handle(TInputItems const &items) = 0;
     };
 };

@@ -27,22 +27,32 @@ namespace implementation {
 
 // ----- interface
 
-
+/// \~english @brief A base class for worker pools.
+/// \~russian @brief Базовый класс для пулов "работников".
 class WorkerPoolBase {
 public:
+    /// \~english @brief Virtual destructor.
+    /// \~russian @brief Виртуальный деструктор.
     virtual ~WorkerPoolBase() = default;
 
 protected:
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     WorkerPoolBase(std::string const &name);
+    /// \~english @brief Waits for multiple statuses.
+    /// \~russian @brief Ожидает несколько статусов.
     void waitForMultipleStatus(bool const &status);
 
+    /// \~english @brief A list of threads in the pool.
+    /// \~russian @brief Список потоков в пуле.
     std::list<IThread::TSharedPtr>  m_threads;
 
 private:
     std::string m_name;
 };
 
-
+/// \~english @brief A worker pool that pushes items to a queue.
+/// \~russian @brief Пул "работников", который добавляет элементы в очередь.
 template<typename TItem>
 class CWorkerPoolPusher: public IWorkerPusher<TItem>, public WorkerPoolBase {
 public:
@@ -51,19 +61,30 @@ public:
     typedef typename IWorkerPusher<TItem>::TItems                           TItems;
     typedef std::list<typename IWorkerPusher<TItem>::IHandler::TSharedPtr>  THandlers;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPoolPusher(std::string const &name, THandlers const &handlers);
 
+    /// \~english @brief Initializes the worker pool.
+    /// \~russian @brief Инициализирует пул "работников".
     void initialize() override;
+    /// \~english @brief Finalizes the worker pool.
+    /// \~russian @brief Финализирует пул "работников".
     void finalize() override;
 
+    /// \~english @brief Pushes an item to the queue.
+    /// \~russian @brief Добавляет элемент в очередь.
     size_t push(TItem  const &item)  override;
+    /// \~english @brief Pushes a list of items to the queue.
+    /// \~russian @brief Добавляет список элементов в очередь.
     size_t push(TItems const &items) override;
 
 private:
     typename IAsyncQueue<TItem>::TSharedPtr m_queue;
 };
 
-
+/// \~english @brief A worker pool that pops items from a queue.
+/// \~russian @brief Пул "работников", который извлекает элементы из очереди.
 template<typename TItem>
 class CWorkerPoolPopper: public IWorkerPopper<TItem>, public WorkerPoolBase {
 public:
@@ -72,19 +93,30 @@ public:
     typedef typename IAsyncQueuePopper<TItem>::TItems                       TItems;
     typedef std::list<typename IWorkerPopper<TItem>::IHandler::TSharedPtr>  THandlers;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPoolPopper(std::string const &name, THandlers const &handlers);
 
+    /// \~english @brief Initializes the worker pool.
+    /// \~russian @brief Инициализирует пул "работников".
     void initialize() override;
+    /// \~english @brief Finalizes the worker pool.
+    /// \~russian @brief Финализирует пул "работников".
     void finalize() override;
 
+    /// \~english @brief Pops items from the queue.
+    /// \~russian @brief Извлекает элементы из очереди.
     TItems pop(bool const &is_wait_required) override;
+    /// \~english @brief Pops items from the queue with a timeout.
+    /// \~russian @brief Извлекает элементы из очереди с тайм-аутом.
     TItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:
     typename IAsyncQueue<TItem>::TSharedPtr m_queue;
 };
 
-
+/// \~english @brief A worker pool that processes items from an input queue and pushes them to an output queue.
+/// \~russian @brief Пул "работников", который обрабатывает элементы из входной очереди и добавляет их в выходную очередь.
 template<typename TInputItem, typename TOutputItem = TInputItem>
 class CWorkerPool: public IWorker<TInputItem, TOutputItem>, public WorkerPoolBase {
 public:
@@ -94,15 +126,29 @@ public:
     typedef typename IAsyncQueuePusher<TOutputItem>::TItems                             TOutputItems;
     typedef std::list<typename IWorker<TInputItem, TOutputItem>::IHandler::TSharedPtr>  THandlers;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPool(std::string const &name, THandlers const &handlers);
 
+    /// \~english @brief Initializes the worker pool.
+    /// \~russian @brief Инициализирует пул "работников".
     void initialize() override;
+    /// \~english @brief Finalizes the worker pool.
+    /// \~russian @brief Финализирует пул "работников".
     void finalize() override;
 
+    /// \~english @brief Pushes an item to the input queue.
+    /// \~russian @brief Добавляет элемент во входную очередь.
     size_t push(TInputItem  const &item)  override;
+    /// \~english @brief Pushes a list of items to the input queue.
+    /// \~russian @brief Добавляет список элементов во входную очередь.
     size_t push(TInputItems const &items) override;
 
+    /// \~english @brief Pops items from the output queue.
+    /// \~russian @brief Извлекает элементы из выходной очереди.
     TOutputItems pop(bool const &is_wait_required) override;
+    /// \~english @brief Pops items from the output queue with a timeout.
+    /// \~russian @brief Извлекает элементы из выходной очереди с тайм-аутом.
     TOutputItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:

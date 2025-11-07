@@ -48,14 +48,22 @@ template<typename TClassMock>
 class MockSequence;
 
 
+/// \~english @brief A base class for mock objects.
+/// \~russian @brief Базовый класс для "мок"-объектов.
 template<typename TClass>
 class Mock {
 public:
     using TOriginalClass = TClass;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     Mock();
+    /// \~english @brief Virtual destructor.
+    /// \~russian @brief Виртуальный деструктор.
     virtual ~Mock() = default;
 
+    /// \~english @brief Creates a shared pointer to a mock object.
+    /// \~russian @brief Создает разделяемый указатель на "мок"-объект.
     template<typename ... TArgs>
     static ::std::shared_ptr<TClass> create(TArgs && ... args);
 

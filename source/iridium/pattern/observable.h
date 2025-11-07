@@ -45,7 +45,8 @@ public:
     /// \~english @exception std::logic_error May be thrown if the observer was not previously subscribed or cannot be found.
     /// \~russian @exception std::logic_error Может быть выброшено, если наблюдатель не был ранее подписан или не может быть найден.
     virtual void unsubscribe(typename IObserver<TEvent>::TWeakPtr const &observer) = 0;
-    ///
+    /// \~english @brief Notifies all subscribed observers of a new event.
+    /// \~russian @brief Уведомляет всех подписанных наблюдателей о новом событии.
     virtual void notify     (TEvent const &event) = 0;
 };
 

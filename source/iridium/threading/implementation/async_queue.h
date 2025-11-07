@@ -22,6 +22,8 @@ namespace implementation {
 // ----- class definidion
 
 
+/// \~english @brief A thread-safe asynchronous queue implementation.
+/// \~russian @brief Потокобезопасная реализация асинхронной очереди.
 template<typename TItem>
 class CAsyncQueue:
     public  IAsyncQueue<TItem>,
@@ -30,24 +32,35 @@ class CAsyncQueue:
 {
 public:
     DEFINE_IMPLEMENTATION(CAsyncQueue)
-    ///
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CAsyncQueue();
-    ///
+    /// \~english @brief Pushes a single item to the queue.
+    /// \~russian @brief Добавляет один элемент в очередь.
     size_t push(TItem const &item) override;
-    ///
+    /// \~english @brief Pushes a list of items to the queue.
+    /// \~russian @brief Добавляет список элементов в очередь.
     size_t push(std::list<TItem> const &items) override;
-    ///
+    /// \~english @brief Pops items from the queue.
+    /// \~russian @brief Извлекает элементы из очереди.
     std::list<TItem> pop(bool const &is_wait_required = true) override;
-    ///
+    /// \~english @brief Pops items from the queue with a timeout.
+    /// \~russian @brief Извлекает элементы из очереди с тайм-аутом.
     std::list<TItem> pop(std::chrono::nanoseconds const &timeout) override;
-    ///
+    /// \~english @brief Interrupts the queue operations.
+    /// \~russian @brief Прерывает операции с очередью.
     void interrupt() override;
-    ///
+    /// \~english @brief Checks if the queue is empty.
+    /// \~russian @brief Проверяет, пуста ли очередь.
     bool empty() const override;
     
 private:
+    /// \~english @brief The underlying list of items.
+    /// \~russian @brief Базовый список элементов.
     std::list<TItem>    m_items;
 //    std::atomic<bool>   m_is_waiting;
+    /// \~english @brief A flag indicating if the queue is empty.
+    /// \~russian @brief Флаг, указывающий, пуста ли очередь.
     std::atomic<bool>   m_is_empty;
 };
 

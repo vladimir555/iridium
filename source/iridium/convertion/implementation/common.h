@@ -67,29 +67,44 @@ struct TIsSTLAssociativeContainer<
 // ----- interface
 
 
+/// \~english @brief Default conversion implementation that causes a compile-time or run-time error.
+/// \~russian @brief Реализация преобразования по умолчанию, которая вызывает ошибку во время компиляции или выполнения.
 template<typename TResult, typename TValue, typename TIsEnabled = void, bool is_throwable = false>
-struct TConvert {
-    static TResult convert(TValue const &) {
-        if constexpr (is_throwable) {
+struct TConvert
+{
+    /// \~english @brief Default conversion function that is called when no specialization is found.
+    /// \~russian @brief Функция преобразования по умолчанию, которая вызывается, если не найдена специализация.
+    static TResult convert(TValue const&)
+    {
+        if constexpr (is_throwable)
+        {
             throw std::runtime_error(
                 std::string("conversion error: no specialization exists for TValue(") +
                 typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
             );
-        } else {
+        }
+        else
+        {
             static_assert(
                 sizeof(TResult) == 0 || sizeof(TValue) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
         }
         return {};
     }
+    /// \~english @brief Default conversion function with format that is called when no specialization is found.
+    /// \~russian @brief Функция преобразования по умолчанию с форматом, которая вызывается, если не найдена специализация.
     template<typename TFormat>
-    static TResult convert(TValue const &, TFormat const &) {
-        if constexpr (is_throwable) {
+    static TResult convert(TValue const&, TFormat const&)
+    {
+        if constexpr (is_throwable)
+        {
             throw std::runtime_error(
                 std::string("conversion error: no specialization exists for TValue(") +
                 typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
             );
-        } else {
+        }
+        else
+        {
             static_assert(
                 sizeof(TResult) == 0 || sizeof(TValue) == 0 || sizeof(TFormat) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
@@ -98,13 +113,21 @@ struct TConvert {
     }
 };
 
-
+/// \~english @brief Specialization for converting a shared pointer to a string.
+/// \~russian @brief Специализация для преобразования умного указателя в строку.
 template<typename TValue>
-struct TConvert<std::string, std::shared_ptr<TValue> > {
-    static std::string convert(std::shared_ptr<TValue> const &ptr) {
-        if (ptr) {
+struct TConvert<std::string, std::shared_ptr<TValue>>
+{
+    /// \~english @brief Converts a shared pointer to a string.
+    /// \~russian @brief Преобразует умный указатель в строку.
+    static std::string convert(std::shared_ptr<TValue> const& ptr)
+    {
+        if (ptr)
+        {
             return TConvert<std::string, TValue>::convert(*ptr);
-        } else {
+        }
+        else
+        {
             return "null";
         }
     }

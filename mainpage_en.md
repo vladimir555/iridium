@@ -1599,107 +1599,21 @@ This detailed information should correctly reflect the mocking mechanism when us
 
 @subsection subsec_testing_sequences Testing Call Sequences
 
-Sometimes it's important not only which methods of a mock object are called, but also in what order. The Iridium mocking framework provides means to define and verify call sequences.
+Sometimes, it's important not only *which* methods of a mock object are called, but also the *order* in which they are called. The Iridium mocking framework provides tools to define and verify call sequences.
+
+***Note:** This functionality may be incomplete or under development. The macros present in the code may not align with a full implementation of the `MockSequence` class.*
 
 @subsubsection subsubsec_testing_defining_sequences Defining a Sequence (DEFINE_MOCK_SEQUENCE)
 
-The `DEFINE_MOCK_SEQUENCE(sequence_name, mock_object)` macro is used to create a sequence object.
--   `sequence_name`: The name you give to this sequence (a variable `sequence_<sequence_name>` will be created).
--   `mock_object`: The instance of the mock object for which you are defining the call sequence.
-
-This macro should be called at the beginning of your test where you want to define expectations for the order of calls.
+The `DEFINE_MOCK_SEQUENCE(name)` macro is used to create a sequence object.
+-   `name`: The name you give to this sequence (a variable `sequence_<name>` will be created).
 
 @subsubsection subsubsec_testing_sequence_expectations Expectations in a Sequence (DEFINE_MOCK_SEQUENCE_EXPECTATION)
 
-After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, (arg1, arg2, ...))` macro.
+After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method)` macro.
 -   `sequence_name`: The name of the previously defined sequence.
--   `mock_object`: The same mock object.
--   `method_name`: The name of the mocked method that is expected to be called.
--   `(arg1, arg2, ...)`: The expected arguments for this call, enclosed in parentheses.
+-   `mock`: The mock object.
+-   `method`: The name of the mocked method that is expected to be called.
 
-Each call to `DEFINE_MOCK_SEQUENCE_EXPECTATION` adds one expectation to the specified sequence. The order of these macros defines the expected order of method calls.
-
-Example:
-@code{.cpp}
-#include "iridium/testing/tester.h"
-#include "iridium/testing/mock.h"
-#include <string>
-#include <vector> 
-
-// For completeness, define IMyDependency and its mock here.
-// In real code, they would be in header files.
-class IMyDependency {
-public:
-    virtual ~IMyDependency() = default;
-    virtual int getValue(int key) = 0;
-    virtual std::string getName() const = 0;
-    virtual void processData(const std::vector<int>& data) = 0;
-    virtual void setup() = 0; // New method to demonstrate sequence
-    IMyDependency(const std::string& /* initial_config */) {} 
-    IMyDependency() = default;
-};
-
-DEFINE_MOCK_CLASS(IMyDependency) {
-public:
-    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, (int))
-    DEFINE_MOCK_METHOD_CONST(std::string, getName, ())
-    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int>&))
-    DEFINE_MOCK_METHOD(void, setup, ()) // Mock for the new method
-};
-// End of IMyDependency and mock definitions
-
-// Class demonstrating calls in a specific sequence
-class ServiceWithOrderedCalls {
-    IMyDependency* dep_;
-public:
-    ServiceWithOrderedCalls(IMyDependency* dep) : dep_(dep) {}
-
-    void initializeAndGetData(int val_key) {
-        dep_->setup(); // First expected call
-        std::vector<int> data_vec = {val_key, val_key * 2};
-        dep_->processData(data_vec); // Second expected call
-        dep_->getValue(val_key); // Third expected call
-    }
-};
-
-TEST(ServiceOrderedTest) {
-    IMyDependencyMock mockDep;
-
-    // Define behavior for methods so they just work
-    // (for sequence testing, it's important that calls happen,
-    // not what they return, unless it's part of the test logic)
-    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep, ()) {};
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int>& data)) {};
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) { return key + 1; };
-
-    // Define sequence 's1' for object 'mockDep'
-    // The sequence object name will be sequence_s1
-    DEFINE_MOCK_SEQUENCE(s1, mockDep); 
-
-    // Add expectations to sequence s1
-    // Expect mockDep.setup() to be called with no arguments
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup, ());
-    // Expect mockDep.processData() to be called with a specific vector
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, ({10, 20}));
-    // Expect mockDep.getValue() to be called with argument 10
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, (10));
-
-    ServiceWithOrderedCalls service(&mockDep);
-    service.initializeAndGetData(10); // This method should call mockDep methods in the specified order
-
-    // Sequence verification happens automatically. If the order is violated,
-    // or one of the expected calls did not occur in the right place,
-    // or undeclared methods of the mock in the sequence were called,
-    // MockSequence::step will throw an exception, and the test will fail.
-    // If all calls occurred in the correct order with the correct arguments, the test will pass.
-}
-@endcode
-
-**Important Notes:**
--   If a method is called with arguments different from those specified in `DEFINE_MOCK_SEQUENCE_EXPECTATION`, it is considered a sequence violation.
--   If, during code execution, calls to mocked methods occur that are not part of the current expected step in the sequence (or are not expected at all within any active sequence), this may also lead to an error, depending on the strictness of the mock framework implementation. Exact matching is usually expected.
--   Sequence verification is performed at each step (`step` inside `MockSequence`). If the order is violated, an exception will be thrown immediately.
-
-Using sequences is particularly useful for testing interaction protocols or complex scenarios where the order of operations is critical.
+In the current implementation, this macro does not allow specifying the expected arguments for the method call.
 ```
