@@ -29,11 +29,7 @@
 
 // No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Contains classes and functions related to threading and synchronization.
-/// \~russian @brief Содержит классы и функции, связанные с многопоточностью и синхронизацией.
 namespace threading {
-/// \~english @brief Contains concrete implementations of the interfaces defined in the parent `threading` namespace.
-/// \~russian @brief Содержит конкретные реализации интерфейсов, определенных в родительском пространстве имен `threading`.
 namespace implementation {
 
 

@@ -58,10 +58,10 @@ int main() {
         return 1;
     }
 
-    std::string json_string = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
+    std::string jsonString = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
 
     try {
-        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(json_string);
+        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(jsonString);
 
         if (rootNode) {
             std::cout << "JSON parsed successfully!" << std::endl;
@@ -109,8 +109,8 @@ int main() {
     subNode->addChild("retries", "3");
 
     try {
-        std::string composed_json = jsonParser->compose(root);
-        std::cout << "Composed JSON: " << composed_json << std::endl;
+        std::string composedJson = jsonParser->compose(root);
+        std::cout << "Composed JSON: " << composedJson << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Composition failed: " << e.what() << std::endl;
     }
@@ -459,15 +459,15 @@ int main_custom_convert_demo() { // Renamed to avoid collision if mainpage.md is
     // So, after defining the conversion, this should work:
     // LOGI << "My custom point: " << p1;
     // For this example, we'll demonstrate the conversion explicitly:
-    std::string p1_as_string = iridium::convertion::convert<std::string>(p1);
-    std::cout << "Point p1 converted to string: " << p1_as_string << std::endl;
+    std::string p1AsString = iridium::convertion::convert<std::string>(p1);
+    std::cout << "Point p1 converted to string: " << p1AsString << std::endl;
 
 
     // Deserialization Example (e.g., from a configuration string):
-    std::string input_string = "(100,-200)";
+    std::string inputString = "(100,-200)";
     try {
-        Point p2 = iridium::convertion::convert<Point>(input_string);
-        std::cout << "String '" << input_string << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
+        Point p2 = iridium::convertion::convert<Point>(inputString);
+        std::cout << "String '" << inputString << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error converting string to Point: " << e.what() << std::endl;
     }
@@ -768,7 +768,7 @@ public:
         LOCK_SCOPE();
         // std::cout << "waitUntilItemCountReaches: Waiting for item count " << target_count << std::endl;
         while (items_.size() < target_count) {
-            if (!_____locked_scope_____.wait(timeout)) {
+            if (!LOCK_SCOPE_TRY_WAIT(timeout)) {
                 // std::cout << "waitUntilItemCountReaches: Wait timed out or was interrupted." << std::endl;
                 break;
             }
@@ -798,8 +798,8 @@ void demo_synchronized() {
     container.addItem("Apple");
     container.addItem("Banana");
 
-    std::vector<std::string> current_items = container.getItems();
-    for (const auto& item : current_items) {
+    std::vector<std::string> currentItems = container.getItems();
+    for (const auto& item : currentItems) {
         std::cout << "Item: " << item << std::endl;
     }
     std::cout << "Access count: " << container.getAccessCount() << std::endl;
@@ -957,10 +957,10 @@ public:
         TOutputItems results;
         // std::cout << "Handler: Received " << items.size() << " items to process." << std::endl;
         for (const auto& item : items) {
-            std::string upper_item = item;
-            std::transform(upper_item.begin(), upper_item.end(), upper_item.begin(),
+            std::string upperItem = item;
+            std::transform(upperItem.begin(), upperItem.end(), upperItem.begin(),
                            [](unsigned char c){ return static_cast<char>(std::toupper(c)); }); // Ensure char cast
-            results.push_back(upper_item + "_processed_by_worker");
+            results.push_back(upperItem + "_processed_by_worker");
         }
         return results;
     }
@@ -978,7 +978,7 @@ void demo_cworker() {
         worker->push("alpha");
         worker->push(std::vector<std::string>{"beta", "gamma"});
 
-        iridium::threading::IWorker<std::string, std::string>::TOutputItems processed_batch;
+        iridium::threading::IWorker<std::string, std::string>::TOutputItems processedBatch;
 
         // The CWorkerRunnable processes one item at a time from the input queue,
         // calls handler (which receives a list of 1 item),
@@ -986,20 +986,20 @@ void demo_cworker() {
         // So, each pop() call will retrieve the results from one handle() call.
 
         // Results for "alpha"
-        processed_batch = worker->pop(true); // true means wait
-        for (const auto& item : processed_batch) {
+        processedBatch = worker->pop(true); // true means wait
+        for (const auto& item : processedBatch) {
             std::cout << "Main: Popped CWorker result: " << item << std::endl;
         }
 
         // Results for "beta"
-        processed_batch = worker->pop(true);
-        for (const auto& item : processed_batch) {
+        processedBatch = worker->pop(true);
+        for (const auto& item : processedBatch) {
             std::cout << "Main: Popped CWorker result: " << item << std::endl;
         }
 
         // Results for "gamma"
-        processed_batch = worker->pop(true);
-        for (const auto& item : processed_batch) {
+        processedBatch = worker->pop(true);
+        for (const auto& item : processedBatch) {
             std::cout << "Main: Popped CWorker result: " << item << std::endl;
         }
 
@@ -1037,18 +1037,18 @@ void demo_cworker() {
 #define TOUPPERSTRINGHANDLER_DEFINED_FOR_POOL_DEMO
 class ToUpperStringHandlerForPool : public iridium::threading::IWorker<std::string, std::string>::IHandler {
 public:
-    std::string handler_id_;
-    ToUpperStringHandlerForPool(const std::string& id) : handler_id_(id) {}
-    void initialize() override { /*std::cout << handler_id_ << ": Init" << std::endl;*/ }
-    void finalize() override { /*std::cout << handler_id_ << ": Final" << std::endl;*/ }
+    std::string handlerId_;
+    ToUpperStringHandlerForPool(const std::string& id) : handlerId_(id) {}
+    void initialize() override { /*std::cout << handlerId_ << ": Init" << std::endl;*/ }
+    void finalize() override { /*std::cout << handlerId_ << ": Final" << std::endl;*/ }
     TOutputItems handle(const TInputItems& items) override {
         TOutputItems results;
-        // std::cout << handler_id_ << ": Handling " << items.size() << " items." << std::endl;
+        // std::cout << handlerId_ << ": Handling " << items.size() << " items." << std::endl;
         for (const auto& item : items) {
-            std::string upper_item = item;
-            std::transform(upper_item.begin(), upper_item.end(), upper_item.begin(),
+            std::string upperItem = item;
+            std::transform(upperItem.begin(), upperItem.end(), upperItem.begin(),
                            [](unsigned char c){ return static_cast<char>(std::toupper(c)); });
-            results.push_back(upper_item + "_processed_by_pool_" + handler_id_);
+            results.push_back(upperItem + "_processed_by_pool_" + handlerId_);
         }
         return results;
     }
@@ -1056,28 +1056,28 @@ public:
 #endif
 
 void demo_cworkerpool() {
-    int num_pool_threads = 2;
-    std::list<iridium::threading::IWorker<std::string, std::string>::IHandler::TSharedPtr> handlers_list;
-    for (int i = 0; i < num_pool_threads; ++i) {
-        handlers_list.push_back(std::make_shared<ToUpperStringHandlerForPool>("H" + std::to_string(i)));
+    int numPoolThreads = 2;
+    std::list<iridium::threading::IWorker<std::string, std::string>::IHandler::TSharedPtr> handlersList;
+    for (int i = 0; i < numPoolThreads; ++i) {
+        handlersList.push_back(std::make_shared<ToUpperStringHandlerForPool>("H" + std::to_string(i)));
     }
 
-    auto pool = iridium::threading::implementation::CWorkerPool<std::string, std::string>::create("MyDemoPool", handlers_list);
+    auto pool = iridium::threading::implementation::CWorkerPool<std::string, std::string>::create("MyDemoPool", handlersList);
 
     try {
         // std::cout << "Main: Initializing worker pool..." << std::endl;
         pool->initialize();
 
-        std::vector<std::string> all_tasks = {"task1", "task2", "task3", "task4", "task5"};
-        // std::cout << "Main: Pushing " << all_tasks.size() << " tasks to the pool." << std::endl;
-        pool->push(all_tasks); // Push a batch. These will be added to the shared input queue.
+        std::vector<std::string> allTasks = {"task1", "task2", "task3", "task4", "task5"};
+        // std::cout << "Main: Pushing " << allTasks.size() << " tasks to the pool." << std::endl;
+        pool->push(allTasks); // Push a batch. These will be added to the shared input queue.
 
         // Collect results. Each worker thread processes one item from the input queue at a time,
         // its handler produces a list of output items, which are added to the pool's output queue.
-        // So, we expect to pop 'all_tasks.size()' lists of results.
-        for (size_t i = 0; i < all_tasks.size(); ++i) {
-            auto results_batch = pool->pop(true); // Wait for a batch of results from one handler call
-            for (const auto& res : results_batch) {
+        // So, we expect to pop 'allTasks.size()' lists of results.
+        for (size_t i = 0; i < allTasks.size(); ++i) {
+            auto resultsBatch = pool->pop(true); // Wait for a batch of results from one handler call
+            for (const auto& res : resultsBatch) {
                 std::cout << "Main: Pool result: " << res << std::endl;
             }
         }
@@ -1141,10 +1141,10 @@ std::string iridium::convertion::convert(MyCustomType const &obj) {
 
 // Example class to be tested (replace with your own)
 class MyClassToTest {
-    std::string param_;
+    std::string param;
 public:
-    MyClassToTest(const std::string& p = "") : param_(p) {}
-    std::string getParameter() const { return param_; }
+    MyClassToTest(const std::string& p = "") : param(p) {}
+    std::string getParameter() const { return param; }
     int add(int a, int b) { return a + b; }
     MyCustomType getCustomType(int id, const std::string& val) { return {id, val}; }
     void doSomethingThatThrows() { throw std::runtime_error("Expected exception"); }
@@ -1173,8 +1173,8 @@ TEST(MyCustomTypeAssertion) {
 
 TEST(BooleanAssertions) {
     ASSERT(true); // Check for truth
-    bool my_flag = false;
-    ASSERT(!my_flag); // Check for falsehood via negation
+    bool myFlag = false;
+    ASSERT(!myFlag); // Check for falsehood via negation
 }
 
 TEST(MyClassThrowsException) {
@@ -1184,13 +1184,13 @@ TEST(MyClassThrowsException) {
 
 TEST(MyClassDoesNotThrowException) {
     MyClassToTest obj;
-    bool did_not_throw = true;
+    bool didNotThrow = true;
     try {
         obj.doSomethingThatDoesNotThrow();
     } catch (...) {
-        did_not_throw = false;
+        didNotThrow = false;
     }
-    ASSERT(did_not_throw);
+    ASSERT(didNotThrow);
 }
 @endcode
 
@@ -1466,23 +1466,23 @@ public:
 
 // Class that uses IMyDependency
 class MyClassUsesDependency {
-    IMyDependency* dependency_;
+    IMyDependency* dependency;
 public:
-    MyClassUsesDependency(IMyDependency* dep) : dependency_(dep) {}
+    MyClassUsesDependency(IMyDependency* dep) : dependency(dep) {}
 
     int fetchValue(int key) {
         if (key < 0) {
             throw std::runtime_error("Key cannot be negative");
         }
-        return dependency_->getValue(key);
+        return dependency->getValue(key);
     }
 
     std::string getDepName() const {
-        return dependency_->getName();
+        return dependency->getName();
     }
 
     void sendData(const std::vector<int>& data) {
-        dependency_->processData(data);
+        dependency->processData(data);
     }
 };
 
@@ -1506,10 +1506,10 @@ TEST(MyClassUsesDependency_Behavior) {
     };
     
     // Define behavior for processData (void method)
-    std::vector<int> received_data;
+    std::vector<int> receivedData;
     DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int> &data)) {
         // Lambda for a void method: [=](const std::vector<int>& data_param) -> void { ... }
-        received_data = data; // Copy data for verification
+        receivedData = data; // Copy data for verification
     };
 
     MyClassUsesDependency mainObj(&mockDep);
@@ -1519,10 +1519,10 @@ TEST(MyClassUsesDependency_Behavior) {
     ASSERT(mainObj.fetchValue(10),  equal, -1);
     ASSERT(mainObj.getDepName(),    equal, "MockedName");
 
-    std::vector<int> data_to_send = {1, 2, 3};
-    mainObj.sendData(data_to_send);
-    ASSERT(received_data.size(),    equal, 3);
-    ASSERT(received_data[0],        equal, 1);
+    std::vector<int> dataToSend = {1, 2, 3};
+    mainObj.sendData(dataToSend);
+    ASSERT(receivedData.size(),    equal, 3);
+    ASSERT(receivedData[0],        equal, 1);
     
     // Check exception throwing from the main class, not the mock
     ASSERT(mainObj.fetchValue(-1), std::runtime_error);
@@ -1595,16 +1595,16 @@ public:
 #include "iridium/smart_ptr.h" // For DEFINE_IMPLEMENTATION
 
 class CDataServiceImpl : public IDataService {
-    std::string m_serviceName;
+    std::string mServiceName;
 public:
     // Constructor for the real implementation
-    CDataServiceImpl(const std::string& name) : m_serviceName(name) {}
+    CDataServiceImpl(const std::string& name) : mServiceName(name) {}
 
     // DEFINE_IMPLEMENTATION includes DEFINE_CREATE, which will respect DEFINE_MOCK_CREATE
     DEFINE_IMPLEMENTATION(CDataServiceImpl);
 
     std::string fetchData(int id) override {
-        return "Real data for id " + std::to_string(id) + " from " + m_serviceName;
+        return "Real data for id " + std::to_string(id) + " from " + mServiceName;
     }
 };
 
@@ -1629,16 +1629,16 @@ public:
 #include <string>
 
 class DataConsumer {
-    std::shared_ptr<CDataServiceImpl> m_dataService; // Uses the concrete class
+    std::shared_ptr<CDataServiceImpl> mDataService; // Uses the concrete class
 public:
     DataConsumer() {
         // Call CDataServiceImpl::create(), which will be governed by DEFINE_MOCK_CREATE
-        m_dataService = CDataServiceImpl::create("MyRealService");
+        mDataService = CDataServiceImpl::create("MyRealService");
     }
 
     std::string processData(int recordId) {
-        if (!m_dataService) return "Error: Service not created";
-        return "Consumed: " + m_dataService->fetchData(recordId);
+        if (!mDataService) return "Error: Service not created";
+        return "Consumed: " + mDataService->fetchData(recordId);
     }
 };
 
@@ -1723,4 +1723,3 @@ After defining a sequence object, you add expected calls to it using the `DEFINE
 -   `method`: The name of the mocked method that is expected to be called.
 
 In the current implementation, this macro does not allow specifying the expected arguments for the method call.
-```

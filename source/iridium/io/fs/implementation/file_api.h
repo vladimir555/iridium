@@ -28,19 +28,9 @@
 namespace iridium {
 namespace io {
 namespace fs {
-/// \~english @brief Namespace for internal implementation details of file system functionalities.
-/// \~russian @brief Пространство имен для внутренних деталей реализации функциональностей файловой системы.
 namespace implementation {
 
 
-/// \~english @brief Brings symbols from the platform-specific `file_api.h` (which are in the nested `platform` namespace)
-///     into the current `iridium::io::fs::implementation` namespace.
-///     This makes functions like `open`, `read`, `write`, `close`, etc., defined in the
-///     platform-specific header, directly accessible within this namespace.
-/// \~russian @brief Переносит символы из платформо-специфичного `file_api.h` (которые находятся во вложенном пространстве имен `platform`)
-///     в текущее пространство имен `iridium::io::fs::implementation`.
-///     Это делает функции, такие как `open`, `read`, `write`, `close` и т.д., определенные в
-///     платформо-специфичном заголовочном файле, напрямую доступными в этом пространстве имен.
 using namespace platform;
 
 

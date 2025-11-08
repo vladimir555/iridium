@@ -19,11 +19,7 @@
 
 // No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Namespace for database related functionalities. (Implementation details in `implementation` namespace)
-/// \~russian @brief Пространство имен для функциональности, связанной с базами данных. (Детали реализации в пространстве имен `implementation`)
 namespace db {
-/// \~english @brief Namespace for common implementation details of database connectors.
-/// \~russian @brief Пространство имен для общих деталей реализации коннекторов баз данных.
 namespace implementation {
 
 

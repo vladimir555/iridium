@@ -32,10 +32,6 @@ namespace iridium {
 namespace system {
 namespace implementation {
 namespace platform {
-/// \~english @brief Contains Unix-specific implementations of system components, particularly for process stream management.
-///     This namespace is aliased by specific Unix-like platforms (Linux, macOS, FreeBSD) to reuse this common implementation.
-/// \~russian @brief Содержит Unix-специфичные реализации системных компонентов, в частности для управления потоками процессов.
-///     Это пространство имен используется через псевдонимы специфичными Unix-подобными платформами (Linux, macOS, FreeBSD) для повторного использования этой общей реализации.
 namespace unix_ {
 
 /// \~english @brief Concrete Unix implementation of `IProcess` and `io::implementation::CStreamPort`.

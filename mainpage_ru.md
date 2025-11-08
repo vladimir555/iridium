@@ -58,10 +58,10 @@ int main() {
         return 1;
     }
 
-    std::string json_string = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
+    std::string jsonString = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
 
     try {
-        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(json_string);
+        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(jsonString);
 
         if (rootNode) {
             std::cout << "JSON parsed successfully!" << std::endl;
@@ -109,8 +109,8 @@ int main() {
     subNode->addChild("retries", "3");
 
     try {
-        std::string composed_json = jsonParser->compose(root);
-        std::cout << "Composed JSON: " << composed_json << std::endl;
+        std::string composedJson = jsonParser->compose(root);
+        std::cout << "Composed JSON: " << composedJson << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Composition failed: " << e.what() << std::endl;
     }
@@ -420,18 +420,18 @@ static Point localStringToPoint(const std::string& s) {
         throw std::invalid_argument("Invalid Point string format: Missing parentheses. Input: " + s);
     }
     std::string content = s.substr(1, s.length() - 2); // Удаление скобок
-    size_t comma_pos = content.find(',');
-    if (comma_pos == std::string::npos) {
+    size_t commaPos = content.find(',');
+    if (commaPos == std::string::npos) {
         throw std::invalid_argument("Invalid Point string format: Missing comma. Input: " + s);
     }
     try {
-        int x_val = std::stoi(content.substr(0, comma_pos));
-        int y_val = std::stoi(content.substr(comma_pos + 1));
-        return {x_val, y_val};
-    } catch (const std::invalid_argument& e_ia) {
-        throw std::invalid_argument("Invalid integer in Point string: " + std::string(e_ia.what()) + ". Input: " + s);
-    } catch (const std::out_of_range& e_oor) {
-        throw std::out_of_range("Integer out of range in Point string: " + std::string(e_oor.what()) + ". Input: " + s);
+        int xVal = std::stoi(content.substr(0, commaPos));
+        int yVal = std::stoi(content.substr(commaPos + 1));
+        return {xVal, yVal};
+    } catch (const std::invalid_argument& eIa) {
+        throw std::invalid_argument("Invalid integer in Point string: " + std::string(eIa.what()) + ". Input: " + s);
+    } catch (const std::out_of_range& eOor) {
+        throw std::out_of_range("Integer out of range in Point string: " + std::string(eOor.what()) + ". Input: " + s);
     }
 }
 
@@ -459,15 +459,15 @@ int main_custom_convert_demo() { // Переименовано, чтобы из�
     // Таким образом, после определения преобразования это должно работать:
     // LOGI << "My custom point: " << p1;
     // Для этого примера мы продемонстрируем преобразование явно:
-    std::string p1_as_string = iridium::convertion::convert<std::string>(p1);
-    std::cout << "Point p1 converted to string: " << p1_as_string << std::endl;
+    std::string p1AsString = iridium::convertion::convert<std::string>(p1);
+    std::cout << "Point p1 converted to string: " << p1AsString << std::endl;
 
 
     // Пример десериализации (например, из строки конфигурации):
-    std::string input_string = "(100,-200)";
+    std::string inputString = "(100,-200)";
     try {
-        Point p2 = iridium::convertion::convert<Point>(input_string);
-        std::cout << "String '" << input_string << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
+        Point p2 = iridium::convertion::convert<Point>(inputString);
+        std::cout << "String '" << inputString << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error converting string to Point: " << e.what() << std::endl;
     }
@@ -691,17 +691,17 @@ void demo_cthread() {
 
     // 3. Создание и управление CThread
     // CThread::create принимает (имя, IRunnable::TSharedPtr)
-    auto thread_obj = iridium::threading::implementation::CThread::create("MyWorker1", task);
+    auto threadObj = iridium::threading::implementation::CThread::create("MyWorker1", task);
 
     try {
         std::cout << "Main: Initializing thread..." << std::endl;
-        thread_obj->initialize(); // Запускает поток и ожидает его запуска
+        threadObj->initialize(); // Запускает поток и ожидает его запуска
 
         std::cout << "Main: Sleeping for 3 seconds while thread runs..." << std::endl;
         iridium::threading::sleep(3000);
 
         std::cout << "Main: Finalizing thread..." << std::endl;
-        thread_obj->finalize(); // Сигнализирует потоку остановиться и ожидает его присоединения
+        threadObj->finalize(); // Сигнализирует потоку остановиться и ожидает его присоединения
 
         std::cout << "Main: Thread finished." << std::endl;
     } catch (const std::exception& e) {
@@ -731,24 +731,24 @@ void demo_cthread() {
 // Класс, методы которого будут синхронизированы
 class SafeDataContainer : public iridium::threading::Synchronized<std::mutex> {
 private:
-    std::vector<std::string> items_;
-    int access_count_ = 0;
+    std::vector<std::string> mItems;
+    int mAccessCount = 0;
 
 public:
     void addItem(const std::string& item) {
         LOCK_SCOPE(); // Блокировка захвачена для этой области
-        items_.push_back(item);
-        access_count_++;
+        mItems.push_back(item);
+        mAccessCount++;
         // std::cout << "addItem: Added '" << item << "'. Lock released upon exiting scope." << std::endl;
         // Мьютекс автоматически освобождается здесь деструктором _____locked_scope_____
     }
 
-    void addItems(const std::vector<std::string>& items_to_add) {
+    void addItems(const std::vector<std::string>& itemsToAdd) {
         LOCK_SCOPE();
-        for(const auto& item_to_add : items_to_add) { // Исправлено имя переменной
-            items_.push_back(item_to_add);
+        for(const auto& itemToAdd : itemsToAdd) { // Исправлено имя переменной
+            mItems.push_back(itemToAdd);
         }
-        access_count_++;
+        mAccessCount++;
         // std::cout << "addItems: Added multiple items. Lock released upon exiting scope." << std::endl;
     }
 
@@ -756,25 +756,25 @@ public:
         LOCK_SCOPE();
         // Возврат по значению гарантирует, что копия будет сделана, пока блокировка удерживается.
         // std::cout << "getItems: Returning copy of items. Lock released upon exiting scope." << std::endl;
-        return items_;
+        return mItems;
     }
 
     int getAccessCount() {
         LOCK_SCOPE();
-        return access_count_;
+        return mAccessCount;
     }
 
-    void waitUntilItemCountReaches(size_t target_count, std::chrono::milliseconds timeout) {
+    void waitUntilItemCountReaches(size_t targetCount, std::chrono::milliseconds timeout) {
         LOCK_SCOPE();
         // std::cout << "waitUntilItemCountReaches: Waiting for item count " << target_count << std::endl;
-        while (items_.size() < target_count) {
-            if (!_____locked_scope_____.wait(timeout)) {
+        while (mItems.size() < targetCount) {
+            if (!LOCK_SCOPE_TRY_WAIT(timeout)) {
                 // std::cout << "waitUntilItemCountReaches: Wait timed out or was interrupted." << std::endl;
                 break;
             }
-            // std::cout << "waitUntilItemCountReaches: Woke up, current count " << items_.size() << std::endl;
+            // std::cout << "waitUntilItemCountReaches: Woke up, current count " << mItems.size() << std::endl;
         }
-        // if (items_.size() >= target_count) {
+        // if (mItems.size() >= targetCount) {
         //     std::cout << "waitUntilItemCountReaches: Target count reached." << std::endl;
         // }
     }
@@ -798,8 +798,8 @@ void demo_synchronized() {
     container.addItem("Apple");
     container.addItem("Banana");
 
-    std::vector<std::string> current_items = container.getItems();
-    for (const auto& item : current_items) {
+    std::vector<std::string> currentItems = container.getItems();
+    for (const auto& item : currentItems) {
         std::cout << "Item: " << item << std::endl;
     }
     std::cout << "Access count: " << container.getAccessCount() << std::endl;
@@ -844,21 +844,21 @@ void demo_synchronized() {
 // Потокобезопасная очередь для сценария "производитель-потребитель"
 class SafeMessageQueue : public iridium::threading::Synchronized<std::mutex> {
 private:
-    std::queue<std::string> m_queue;
-    bool m_is_finished = false;
+    std::queue<std::string> mQueue;
+    bool mIsFinished = false;
 
 public:
     // Производитель добавляет сообщение в очередь
     void push(const std::string& msg) {
         LOCK_SCOPE(); // Блокировка освобождается в конце области видимости, уведомляя одного ожидающего
-        m_queue.push(msg);
+        mQueue.push(msg);
         std::cout << "Производитель: Добавлено сообщение '" << msg << "'" << std::endl;
     }
 
     // Потребитель пытается получить сообщение, ожидая, если очередь пуста
     bool pop(std::string& msg, std::chrono::milliseconds timeout) {
         LOCK_SCOPE(); // Захват блокировки
-        while (m_queue.empty() && !m_is_finished) {
+        while (mQueue.empty() && !mIsFinished) {
             std::cout << "Потребитель: Очередь пуста, ожидание..." << std::endl;
             if (!_____locked_scope_____.wait(timeout)) {
                 // Время ожидания истекло или произошло прерывание
@@ -867,9 +867,9 @@ public:
             }
         }
 
-        if (!m_queue.empty()) {
-            msg = m_queue.front();
-            m_queue.pop();
+        if (!mQueue.empty()) {
+            msg = mQueue.front();
+            mQueue.pop();
             return true;
         }
 
@@ -879,7 +879,7 @@ public:
     // Сигнал о том, что больше элементы добавляться не будут
     void finish() {
         LOCK_SCOPE();
-        m_is_finished = true;
+        mIsFinished = true;
         // Примечание: уничтожение locker'а уведомит один поток.
         // Чтобы разбудить все потоки, лучше использовать явное прерывание.
         std::cout << "Производитель: Сигнал о завершении." << std::endl;
@@ -915,9 +915,9 @@ void demo_synchronized_wait() {
     SafeMessageQueue queue;
 
     // Запуск потока-потребителя
-    auto consumer_runnable = std::make_shared<ConsumerTask>(queue);
-    auto consumer_thread = iridium::threading::implementation::CThread::create("Consumer", consumer_runnable);
-    consumer_thread->initialize();
+    auto consumerRunnable = std::make_shared<ConsumerTask>(queue);
+    auto consumerThread = iridium::threading::implementation::CThread::create("Consumer", consumerRunnable);
+    consumerThread->initialize();
 
     // Логика производителя (в основном потоке)
     iridium::threading::sleep(100); // Даем потребителю время запуститься и начать ожидание
@@ -934,7 +934,7 @@ void demo_synchronized_wait() {
     // и pop() в конечном итоге выйдет по таймауту или будет разблокирован, увидит флаг и завершится.
     // для более немедленного завершения мы могли бы вызвать queue.interrupt().
     std::cout << "Main: Завершение потока потребителя." << std::endl;
-    consumer_thread->finalize();
+    consumerThread->finalize();
     std::cout << "Main: Демонстрация завершена." << std::endl;
 }
 

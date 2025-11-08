@@ -18,15 +18,7 @@
 
 // No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
-///     (Implementation details are in the `implementation` sub-namespace).
-/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
-///     (Детали реализации находятся в подпространстве имен `implementation`).
 namespace parsing {
-/// \~english @brief Contains concrete implementations of parsing components, such as node types and parsers.
-///     This namespace provides the actual logic for parsing and composing data structures defined by interfaces in the parent `iridium::parsing` namespace.
-/// \~russian @brief Содержит конкретные реализации компонентов разбора, таких как типы узлов и парсеры.
-///     Это пространство имен предоставляет фактическую логику для разбора и формирования структур данных, определенных интерфейсами в родительском пространстве имен `iridium::parsing`.
 namespace implementation {
 
 /// \~english @typedef CNode
