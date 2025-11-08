@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс IStream</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_i_stream.html','','class_i_stream-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс IStream<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="stream_8h_source.html">iridium/io/stream.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:IStream:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_i_stream__inherit__graph.png" border="0" usemap="#a_i_stream_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="a_i_stream_inherit__map" id="a_i_stream_inherit__map">
+<area shape="rect" title=" " alt="" coords="238,146,305,172"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_acceptor.html" title=" " alt="" coords="353,38,536,64"/>
+<area shape="poly" title=" " alt="" coords="288,132,316,101,352,73,378,63,374,66,354,77,319,105,292,136"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title=" " alt="" coords="358,146,531,172"/>
+<area shape="poly" title=" " alt="" coords="320,156,360,158,355,160,321,162"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title=" " alt="" coords="362,197,527,222"/>
+<area shape="poly" title=" " alt="" coords="320,171,354,182,397,196,392,197,352,187,320,177"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title=" " alt="" coords="359,88,530,113"/>
+<area shape="poly" title=" " alt="" coords="319,140,407,112,402,115,321,145"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title=" " alt="" coords="358,251,531,291"/>
+<area shape="poly" title=" " alt="" coords="295,181,323,208,354,233,384,250,379,250,352,237,319,212,294,186"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих инициализации и финализации." alt="" coords="5,146,190,172"/>
+<area shape="poly" title=" " alt="" coords="204,156,240,158,235,160,206,162"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_port.html" title=" " alt="" coords="593,201,749,226"/>
+<area shape="poly" title=" " alt="" coords="516,173,617,200,612,201,515,179"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title=" " alt="" coords="585,5,757,46"/>
+<area shape="poly" title=" " alt="" coords="511,138,535,124,550,108,558,91,567,74,583,57,602,48,606,45,586,61,571,77,563,94,554,111,538,128,513,142"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title=" " alt="" coords="584,251,758,291"/>
+<area shape="poly" title=" " alt="" coords="525,175,538,182,554,196,563,210,572,223,586,237,606,250,601,250,583,241,567,227,558,213,550,199,535,187,525,181"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title=" " alt="" coords="584,136,758,177"/>
+<area shape="poly" title=" " alt="" coords="547,155,586,157,581,158,548,160"/>
+<area shape="rect" href="classiridium_1_1system_1_1_i_process.html" title=" " alt="" coords="817,201,987,226"/>
+<area shape="poly" title=" " alt="" coords="764,211,819,213,814,214,764,216"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Конкретная реализация файлового потока, предоставляющая возможности чтения, записи и позиционирования..." alt="" coords="806,39,998,79"/>
+<area shape="poly" title=" " alt="" coords="772,38,808,45,802,45,773,43"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="Конкретная реализация файлового потока, специализированная для чтения. Этот класс наследуется от CFil..." alt="" coords="1046,7,1238,47"/>
+<area shape="poly" title=" " alt="" coords="1013,42,1048,39,1043,40,1014,47"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title=" " alt="" coords="1046,72,1238,113"/>
+<area shape="poly" title=" " alt="" coords="1013,72,1048,79,1043,79,1014,77"/>
+<area shape="poly" title=" " alt="" coords="542,209,595,212,590,213,543,214"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title=" " alt="" coords="585,71,757,111"/>
+<area shape="poly" title=" " alt="" coords="525,188,535,182,550,168,558,154,567,138,583,122,603,113,608,111,586,126,571,141,563,156,554,172,538,186,527,193"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title=" " alt="" coords="584,316,758,357"/>
+<area shape="poly" title=" " alt="" coords="520,227,538,237,554,253,563,269,571,285,586,301,607,316,602,315,583,305,567,288,558,272,550,256,535,241,519,232"/>
+<area shape="poly" title=" " alt="" coords="772,74,808,72,803,73,773,80"/>
+<area shape="poly" title=" " alt="" coords="514,80,535,74,619,45,614,48,537,79,516,85"/>
+<area shape="poly" title=" " alt="" coords="545,94,588,94,582,95,546,99"/>
+<area shape="poly" title=" " alt="" coords="547,268,586,271,581,271,547,274"/>
+<area shape="poly" title=" " alt="" coords="532,293,600,315,595,315,531,299"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса IStream:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_i_stream__coll__graph.png" border="0" usemap="#a_i_stream_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_i_stream_coll__map" id="a_i_stream_coll__map">
+<area shape="rect" title=" " alt="" coords="64,79,131,105"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих инициализации и финализации." alt="" coords="5,5,190,31"/>
+<area shape="poly" title=" " alt="" coords="99,45,100,80,95,77,96,48"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a5efd5cff2dd69cd5bfceb849752689b2" id="r_a5efd5cff2dd69cd5bfceb849752689b2"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a5efd5cff2dd69cd5bfceb849752689b2">TMapHandleTypeIdent</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a7dc95ea6d4e70b449e03d875b8472333" id="r_a7dc95ea6d4e70b449e03d875b8472333"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7dc95ea6d4e70b449e03d875b8472333">DEFINE_ENUM</a> (THandleType, READER=0x01, WRITER=0x02, PID=0x04)</td></tr>
+<tr class="memitem:ab74652a6a202b1889d2d84d08755e03e" id="r_ab74652a6a202b1889d2d84d08755e03e"><td class="memItemLeft">virtual <a class="el" href="#a5efd5cff2dd69cd5bfceb849752689b2">TMapHandleTypeIdent</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab74652a6a202b1889d2d84d08755e03e">getHandles</a> () const=0</td></tr>
+<tr class="memitem:a549acdd059c8193419c92d8d8586660b" id="r_a549acdd059c8193419c92d8d8586660b"><td class="memItemLeft">virtual URI::TSharedPtr&#160;</td><td class="memItemRight"><a class="el" href="#a549acdd059c8193419c92d8d8586660b">getURI</a> () const=0</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2">Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
+<tr class="memitem:a5b8c613423cd12e98327a9279d8b9d64 pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a5b8c613423cd12e98327a9279d8b9d64"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">initialize</a> ()=0</td></tr>
+<tr class="memdesc:a5b8c613423cd12e98327a9279d8b9d64 pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует объект.  <br /></td></tr>
+<tr class="memitem:a93a1fb6f89e1e1f125455a8682e9ae59 pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a93a1fb6f89e1e1f125455a8682e9ae59"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">finalize</a> ()=0</td></tr>
+<tr class="memdesc:a93a1fb6f89e1e1f125455a8682e9ae59 pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает работу объекта.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000020">Уст.</a></b></dt><dd>todo: rm, deprecated </dd></dl>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Определения типов</h2>
+<a id="a5efd5cff2dd69cd5bfceb849752689b2" name="a5efd5cff2dd69cd5bfceb849752689b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5efd5cff2dd69cd5bfceb849752689b2">&#9670;&#160;</a></span>TMapHandleTypeIdent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classiridium_1_1io_1_1_i_stream.html#a5efd5cff2dd69cd5bfceb849752689b2">iridium::io::IStream::TMapHandleTypeIdent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Инициализатор</b><div class="fragment"><div class="line"> </div>
+<div class="line">std::unordered_map&lt;THandleType, uintptr_t&gt;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a7dc95ea6d4e70b449e03d875b8472333" name="a7dc95ea6d4e70b449e03d875b8472333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dc95ea6d4e70b449e03d875b8472333">&#9670;&#160;</a></span>DEFINE_ENUM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1_i_stream.html#a7dc95ea6d4e70b449e03d875b8472333">iridium::io::IStream::DEFINE_ENUM</a> </td>
+          <td>(</td>
+          <td class="paramtype">THandleType</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">READER</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">0x01</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WRITER</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">0x02</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PID</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">0x04</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab74652a6a202b1889d2d84d08755e03e" name="ab74652a6a202b1889d2d84d08755e03e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab74652a6a202b1889d2d84d08755e03e">&#9670;&#160;</a></span>getHandles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="#a5efd5cff2dd69cd5bfceb849752689b2">TMapHandleTypeIdent</a> <a class="el" href="classiridium_1_1io_1_1_i_stream.html#aec61aae5bce1a07ecbfa8da5a3268d9a">iridium::io::IStream::getHandles</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a549acdd059c8193419c92d8d8586660b" name="a549acdd059c8193419c92d8d8586660b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a549acdd059c8193419c92d8d8586660b">&#9670;&#160;</a></span>getURI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual URI::TSharedPtr <a class="el" href="classiridium_1_1io_1_1_i_stream.html#abdb45661c8cf05eb9a4cc46134947416">iridium::io::IStream::getURI</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>iridium/io/<a class="el" href="stream_8h_source.html">stream.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_i_stream.html">IStream</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Iridium: Файл source/iridium/items.h</title>
+<title>Iridium: Файл iridium/items.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,33 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('items_8h.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,107 +115,107 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a> &#124;
-<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Файл items.h</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами.  
+<a href="#details">Подробнее...</a></p>
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;list&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для items.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="items_8h__incl.png" border="0" usemap="#asource_2iridium_2items_8h" alt=""/></div>
-<map name="asource_2iridium_2items_8h" id="asource_2iridium_2items_8h">
-<area shape="rect" title=" " alt="" coords="48,5,197,31"/>
+<div class="center"><img src="items_8h__incl.png" border="0" usemap="#airidium_2items_8h" loading="lazy" alt=""/></div>
+<map name="airidium_2items_8h" id="airidium_2items_8h">
+<area shape="rect" title="Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами." alt="" coords="69,5,176,31"/>
 <area shape="rect" title=" " alt="" coords="5,79,80,105"/>
-<area shape="poly" title=" " alt="" coords="111,34,69,71,65,67,107,30"/>
+<area shape="poly" title=" " alt="" coords="111,31,69,71,65,67,106,32"/>
 <area shape="rect" title=" " alt="" coords="103,79,142,105"/>
-<area shape="poly" title=" " alt="" coords="125,31,125,63,120,63,120,31"/>
+<area shape="poly" title=" " alt="" coords="124,29,125,64,120,62,121,33"/>
 <area shape="rect" title=" " alt="" coords="166,79,223,105"/>
-<area shape="poly" title=" " alt="" coords="136,29,173,66,170,70,133,33"/>
+<area shape="poly" title=" " alt="" coords="135,29,174,68,169,68,133,34"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 Граф файлов, в которые включается этот файл:</div>
 <div class="dyncontent">
-<div class="center"><img src="items_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2items_8hdep" alt=""/></div>
-<map name="asource_2iridium_2items_8hdep" id="asource_2iridium_2items_8hdep">
-<area shape="rect" title=" " alt="" coords="1219,5,1368,31"/>
-<area shape="rect" href="file__stream_8cpp.html" title=" " alt="" coords="5,79,140,135"/>
-<area shape="poly" title=" " alt="" coords="1204,24,969,29,666,40,369,57,246,68,153,82,141,84,140,79,152,76,246,63,369,52,666,35,969,24,1204,18"/>
-<area shape="rect" href="implementation_2pipe_8cpp.html" title=" " alt="" coords="164,86,373,127"/>
-<area shape="poly" title=" " alt="" coords="1203,23,1048,28,844,37,615,55,385,82,347,88,346,83,384,76,615,49,844,32,1048,22,1203,18"/>
-<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="396,86,605,127"/>
-<area shape="poly" title=" " alt="" coords="1204,26,940,44,779,60,618,82,581,89,580,83,617,76,779,55,940,39,1203,21"/>
-<area shape="rect" href="response_8cpp.html" title=" " alt="" coords="629,86,796,127"/>
-<area shape="poly" title=" " alt="" coords="1204,29,1020,48,913,63,808,82,778,89,777,83,807,76,913,58,1019,43,1203,24"/>
-<area shape="rect" href="uri_8cpp.html" title=" " alt="" coords="820,94,979,120"/>
-<area shape="poly" title=" " alt="" coords="1209,37,992,82,939,96,938,91,991,76,1208,32"/>
-<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="1003,86,1193,127"/>
-<area shape="poly" title=" " alt="" coords="1253,40,1143,88,1141,84,1251,35"/>
-<area shape="rect" href="parser__http_8cpp.html" title=" " alt="" coords="1217,79,1370,135"/>
-<area shape="poly" title=" " alt="" coords="1296,47,1296,78,1291,78,1291,47"/>
-<area shape="rect" href="parser__json_8cpp.html" title=" " alt="" coords="1394,79,1548,135"/>
-<area shape="poly" title=" " alt="" coords="1334,36,1416,76,1414,81,1331,41"/>
-<area shape="rect" href="parser__xml_8cpp.html" title=" " alt="" coords="1572,79,1725,135"/>
-<area shape="poly" title=" " alt="" coords="1369,32,1561,76,1572,79,1571,84,1560,82,1368,37"/>
-<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="1750,86,1899,127"/>
-<area shape="poly" title=" " alt="" coords="1385,25,1550,44,1645,58,1738,76,1766,83,1765,89,1737,82,1644,64,1549,49,1384,30"/>
-<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="1923,79,2105,135"/>
-<area shape="poly" title=" " alt="" coords="1384,21,1624,39,1768,55,1912,76,1923,78,1922,84,1911,82,1767,60,1623,44,1384,26"/>
-<area shape="rect" href="mock_8h.html" title=" " alt="" coords="2129,86,2274,127"/>
-<area shape="poly" title=" " alt="" coords="1384,17,1526,19,1709,28,1913,46,2016,60,2117,76,2146,83,2144,88,2116,82,2015,65,1912,52,1709,34,1526,25,1384,22"/>
-<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2298,86,2444,127"/>
-<area shape="poly" title=" " alt="" coords="1384,19,1851,38,2104,55,2208,65,2288,76,2316,83,2315,88,2287,82,2207,70,2103,60,1850,44,1384,25"/>
+<div class="center"><img src="items_8h__dep__incl.png" border="0" usemap="#airidium_2items_8hdep" loading="lazy" alt=""/></div>
+<map name="airidium_2items_8hdep" id="airidium_2items_8hdep">
+<area shape="rect" title="Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами." alt="" coords="1149,5,1255,31"/>
+<area shape="rect" href="file__stream_8cpp.html" title=" " alt="" coords="5,79,186,120"/>
+<area shape="poly" title=" " alt="" coords="1131,21,968,28,736,38,469,55,198,82,187,83,186,78,198,76,469,50,736,32,968,23,1136,20"/>
+<area shape="rect" href="implementation_2pipe_8cpp.html" title=" " alt="" coords="210,79,376,120"/>
+<area shape="poly" title=" " alt="" coords="1131,22,811,41,601,58,388,82,376,83,376,78,387,76,600,52,811,35,1136,21"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="400,79,565,120"/>
+<area shape="poly" title=" " alt="" coords="1131,24,887,46,733,62,577,82,566,83,565,78,576,76,732,56,887,40,1136,23"/>
+<area shape="rect" href="response_8cpp.html" title=" " alt="" coords="590,79,719,120"/>
+<area shape="poly" title=" " alt="" coords="1136,25,951,48,731,82,719,84,719,79,730,76,950,43,1131,26"/>
+<area shape="rect" href="uri_8cpp.html" title=" " alt="" coords="743,86,859,112"/>
+<area shape="poly" title=" " alt="" coords="1136,30,1011,53,871,82,843,88,842,83,870,76,1010,48,1131,30"/>
+<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="883,79,1079,120"/>
+<area shape="poly" title=" " alt="" coords="1157,36,1037,81,1035,76,1151,37"/>
+<area shape="rect" href="http__parser_8cpp.html" title=" " alt="" coords="1104,79,1301,120"/>
+<area shape="poly" title=" " alt="" coords="1204,45,1204,80,1200,77,1200,48"/>
+<area shape="rect" href="json__parser_8cpp.html" title=" " alt="" coords="1325,79,1522,120"/>
+<area shape="poly" title=" " alt="" coords="1251,34,1371,79,1366,78,1250,39"/>
+<area shape="rect" href="xml__parser_8cpp.html" title=" " alt="" coords="1546,79,1744,120"/>
+<area shape="poly" title=" " alt="" coords="1271,29,1549,81,1543,80,1270,34"/>
+<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="1768,86,1930,112"/>
+<area shape="poly" title=" " alt="" coords="1271,22,1487,42,1756,76,1796,86,1791,86,1755,82,1487,48,1270,27"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="1954,79,2149,120"/>
+<area shape="poly" title=" " alt="" coords="1271,20,1564,39,1752,55,1942,76,1956,81,1951,80,1942,82,1752,61,1563,45,1271,26"/>
+<area shape="rect" href="mock_8h.html" title=" " alt="" coords="2173,86,2322,112"/>
+<area shape="poly" title=" " alt="" coords="1271,17,1430,21,1651,30,1905,48,2161,76,2201,86,2196,86,2160,82,1904,53,1651,36,1430,26,1271,23"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2346,86,2509,112"/>
+<area shape="poly" title=" " alt="" coords="1271,17,1455,19,1718,28,2024,46,2181,59,2335,76,2378,86,2372,86,2334,82,2180,64,2024,51,1718,33,1455,25,1271,22"/>
 </map>
 </div>
 </div>
 <p><a href="items_8h_source.html">См. исходные тексты.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
 <tr class="memitem:a20e1b5ded3a601ff15ba1d7236cca92a" id="r_a20e1b5ded3a601ff15ba1d7236cca92a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:a20e1b5ded3a601ff15ba1d7236cca92a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium.html#a20e1b5ded3a601ff15ba1d7236cca92a">iridium::addUnique</a> (typename T::value_type const &amp;i, T &amp;t)</td></tr>
+<tr class="memitem:a20e1b5ded3a601ff15ba1d7236cca92a template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html#a20e1b5ded3a601ff15ba1d7236cca92a">iridium::addUnique</a> (typename T::value_type const &amp;i, T &amp;t)</td></tr>
 <tr class="memdesc:a20e1b5ded3a601ff15ba1d7236cca92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет элемент в контейнер, если он там еще не присутствует.  <br /></td></tr>
-<tr class="separator:a20e1b5ded3a601ff15ba1d7236cca92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8e35f00f71a1f29be4f227b3e0626ff" id="r_ab8e35f00f71a1f29be4f227b3e0626ff"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ab8e35f00f71a1f29be4f227b3e0626ff"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium.html#ab8e35f00f71a1f29be4f227b3e0626ff">iridium::assign</a> (std::list&lt; T &gt; const &amp;source)</td></tr>
-<tr class="memdesc:ab8e35f00f71a1f29be4f227b3e0626ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Преобразует <code>std::list&lt;T&gt;</code> в <code>std::vector&lt;T&gt;</code>.  <br /></td></tr>
-<tr class="separator:ab8e35f00f71a1f29be4f227b3e0626ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e35f00f71a1f29be4f227b3e0626ff template"><td class="memItemLeft">std::vector&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html#ab8e35f00f71a1f29be4f227b3e0626ff">iridium::assign</a> (std::list&lt; T &gt; const &amp;source)</td></tr>
+<tr class="memdesc:ab8e35f00f71a1f29be4f227b3e0626ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Преобразует <span class="tt">std::list&lt;T&gt;</span> в <span class="tt">std::vector&lt;T&gt;</span>.  <br /></td></tr>
 <tr class="memitem:adffcf6b0c6105b41d23a833e49d22688" id="r_adffcf6b0c6105b41d23a833e49d22688"><td class="memTemplParams" colspan="2">template&lt;typename T, typename ... TItems&gt; </td></tr>
-<tr class="memitem:adffcf6b0c6105b41d23a833e49d22688"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688">iridium::checkOneOf</a> (T const &amp;source, TItems const &amp;... items_)</td></tr>
+<tr class="memitem:adffcf6b0c6105b41d23a833e49d22688 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688">iridium::checkOneOf</a> (T const &amp;source, TItems const &amp;... items_)</td></tr>
 <tr class="memdesc:adffcf6b0c6105b41d23a833e49d22688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, равен ли исходный элемент любому из указанных элементов.  <br /></td></tr>
-<tr class="separator:adffcf6b0c6105b41d23a833e49d22688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae09416cedabd7b9a68a964717bb8d0d" id="r_aae09416cedabd7b9a68a964717bb8d0d"><td class="memTemplParams" colspan="2">template&lt;typename TObject, typename ... TArgs&gt; </td></tr>
-<tr class="memitem:aae09416cedabd7b9a68a964717bb8d0d"><td class="memTemplItemLeft" align="right" valign="top">std::list&lt; typename TObject::TSharedPtr &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d">iridium::createObjects</a> (size_t const &amp;count, TArgs ... args)</td></tr>
-<tr class="memdesc:aae09416cedabd7b9a68a964717bb8d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает список разделяемых указателей на объекты типа <code>TObject</code>.  <br /></td></tr>
-<tr class="separator:aae09416cedabd7b9a68a964717bb8d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae09416cedabd7b9a68a964717bb8d0d template"><td class="memItemLeft">std::list&lt; typename TObject::TSharedPtr &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d">iridium::createObjects</a> (size_t const &amp;count, TArgs ... args)</td></tr>
+<tr class="memdesc:aae09416cedabd7b9a68a964717bb8d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает список разделяемых указателей на объекты типа <span class="tt">TObject</span>.  <br /></td></tr>
 <tr class="memitem:a83ea20585a78e0a026e2f3edc9e6f0fd" id="r_a83ea20585a78e0a026e2f3edc9e6f0fd"><td class="memTemplParams" colspan="2">template&lt;typename TInterface, typename TObject, typename ... TArgs&gt; </td></tr>
-<tr class="memitem:a83ea20585a78e0a026e2f3edc9e6f0fd"><td class="memTemplItemLeft" align="right" valign="top">std::list&lt; typename TInterface::TSharedPtr &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceiridium.html#a83ea20585a78e0a026e2f3edc9e6f0fd">iridium::createObjects</a> (size_t const &amp;count, TArgs ... args)</td></tr>
-<tr class="memdesc:a83ea20585a78e0a026e2f3edc9e6f0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает список разделяемых указателей на интерфейс <code>TInterface</code>, с объектами конкретного типа <code>TObject</code>.  <br /></td></tr>
-<tr class="separator:a83ea20585a78e0a026e2f3edc9e6f0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ea20585a78e0a026e2f3edc9e6f0fd template"><td class="memItemLeft">std::list&lt; typename TInterface::TSharedPtr &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html#a83ea20585a78e0a026e2f3edc9e6f0fd">iridium::createObjects</a> (size_t const &amp;count, TArgs ... args)</td></tr>
+<tr class="memdesc:a83ea20585a78e0a026e2f3edc9e6f0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает список разделяемых указателей на интерфейс <span class="tt">TInterface</span>, с объектами конкретного типа <span class="tt">TObject</span>.  <br /></td></tr>
 </table>
-</div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="items_8h.html">items.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

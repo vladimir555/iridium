@@ -1,22 +1,24 @@
-<map id="source/iridium/io/protocol/http/implementation/mime.cpp" name="source/iridium/io/protocol/http/implementation/mime.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="82,5,282,46"/>
-<area shape="rect" id="Node000002" href="$mime_8h.html" title=" " alt="" coords="56,94,121,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,48,116,86,113,82,157,44"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="145,94,219,120"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="185,46,185,78,179,78,179,46"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="243,94,321,120"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="208,44,256,82,253,86,205,49"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,241,44,267"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,122,52,169,33,227,28,226,47,167,77,119"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="62,168,115,193"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="91,120,91,152,86,152,86,120"/>
-<area shape="rect" id="Node000005" href="$singleton_8h.html" title=" " alt="" coords="139,168,310,193"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="113,118,189,158,187,162,110,123"/>
-<area shape="poly" id="edge8_Node000005_Node000003" title=" " alt="" coords="191,196,59,243,58,238,190,191"/>
-<area shape="rect" id="Node000006" href="$non__copyable_8h.html" title=" " alt="" coords="68,241,181,267"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="209,196,156,234,152,230,206,192"/>
-<area shape="rect" id="Node000007" href="$non__movable_8h.html" title=" " alt="" coords="205,241,314,267"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="233,192,249,226,244,228,228,195"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="338,241,407,267"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="251,191,335,232,332,237,248,196"/>
+<map id="iridium/io/protocol/http/implementation/mime.cpp" name="iridium/io/protocol/http/implementation/mime.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="138,5,277,61"/>
+<area shape="rect" id="Node000002" href="$mime_8h.html" title=" " alt="" coords="82,109,146,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,63,140,100,136,96,180,59"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="170,109,244,135"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="208,59,210,94,205,93,206,64"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="268,109,346,135"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="239,59,284,98,279,99,238,64"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,256,44,282"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,133,77,184,41,244,37,242,73,181,104,137"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="87,183,141,208"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="115,132,116,168,111,166,113,137"/>
+<area shape="rect" id="Node000005" href="$singleton_8h.html" title=" " alt="" coords="169,183,339,208"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="138,133,219,174,214,176,137,138"/>
+<area shape="poly" id="edge8_Node000005_Node000003" title=" " alt="" coords="212,212,59,258,58,253,211,206"/>
+<area shape="rect" id="Node000006" href="$non__copyable_8h.html" title=" " alt="" coords="68,256,181,282"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="235,208,161,251,159,246,229,209"/>
+<area shape="rect" id="Node000007" href="$non__movable_8h.html" title=" " alt="" coords="205,256,314,282"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="257,207,259,242,255,240,253,211"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="338,256,407,282"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="275,206,342,248,337,248,273,211"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="430,256,491,282"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="289,206,418,252,413,253,288,212"/>
 </map>

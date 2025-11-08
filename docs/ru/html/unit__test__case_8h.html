@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл iridium/testing/unit_test_case.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('unit__test__case_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл unit_test_case.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;typeinfo&gt;</code><br />
+<code>#include &quot;<a class="el" href="convert_8h_source.html">iridium/convertion/convert.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для unit_test_case.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="unit__test__case_8h__incl.png" border="0" usemap="#airidium_2testing_2unit__test__case_8h" loading="lazy" alt=""/></div>
+<map name="airidium_2testing_2unit__test__case_8h" id="airidium_2testing_2unit__test__case_8h">
+<area shape="rect" title=" " alt="" coords="665,5,792,46"/>
+<area shape="rect" title=" " alt="" coords="659,330,712,356"/>
+<area shape="poly" title=" " alt="" coords="738,44,753,90,766,150,769,217,764,251,754,283,739,305,719,323,717,318,735,302,749,281,759,250,764,217,761,151,748,91,735,49"/>
+<area shape="rect" title=" " alt="" coords="5,256,84,282"/>
+<area shape="poly" title=" " alt="" coords="662,43,579,68,484,97,370,137,258,180,87,252,84,247,256,176,368,132,482,91,577,63,667,41"/>
+<area shape="rect" title=" " alt="" coords="814,102,881,127"/>
+<area shape="poly" title=" " alt="" coords="756,44,821,92,816,92,755,49"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="495,94,618,135"/>
+<area shape="poly" title=" " alt="" coords="692,45,610,89,608,84,687,48"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="388,183,555,208"/>
+<area shape="poly" title=" " alt="" coords="538,134,497,174,494,170,533,136"/>
+<area shape="poly" title=" " alt="" coords="501,206,546,227,593,254,632,285,666,319,661,318,629,289,590,259,543,232,501,212"/>
+<area shape="poly" title=" " alt="" coords="384,210,256,231,100,258,99,253,255,226,389,207"/>
+<area shape="rect" href="common_8h.html" title="Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов." alt="" coords="470,256,552,282"/>
+<area shape="poly" title=" " alt="" coords="479,206,500,244,495,242,477,211"/>
+<area shape="rect" title=" " alt="" coords="566,330,635,356"/>
+<area shape="poly" title=" " alt="" coords="499,206,534,226,567,255,585,284,596,317,592,314,580,287,562,258,531,231,498,212"/>
+<area shape="rect" title=" " alt="" coords="366,330,435,356"/>
+<area shape="poly" title=" " alt="" coords="468,207,415,318,411,314,463,210"/>
+<area shape="rect" title=" " alt="" coords="678,256,739,282"/>
+<area shape="poly" title=" " alt="" coords="512,206,666,254,661,255,511,212"/>
+<area shape="rect" title=" " alt="" coords="108,256,165,282"/>
+<area shape="poly" title=" " alt="" coords="402,212,181,258,179,253,404,206"/>
+<area shape="rect" title=" " alt="" coords="189,256,249,282"/>
+<area shape="poly" title=" " alt="" coords="426,210,265,258,264,252,431,208"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="273,256,394,282"/>
+<area shape="poly" title=" " alt="" coords="450,208,372,251,370,246,445,210"/>
+<area shape="poly" title=" " alt="" coords="541,280,647,325,642,325,540,285"/>
+<area shape="rect" title=" " alt="" coords="459,330,542,356"/>
+<area shape="poly" title=" " alt="" coords="511,280,506,316,503,313,507,284"/>
+<area shape="poly" title=" " alt="" coords="527,280,576,321,571,320,525,285"/>
+<area shape="poly" title=" " alt="" coords="495,282,433,324,431,319,490,283"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="unit__test__case_8h__dep__incl.png" border="0" usemap="#airidium_2testing_2unit__test__case_8hdep" loading="lazy" alt=""/></div>
+<map name="airidium_2testing_2unit__test__case_8hdep" id="airidium_2testing_2unit__test__case_8hdep">
+<area shape="rect" title=" " alt="" coords="235,5,362,46"/>
+<area shape="rect" href="test__runner__raw_8cpp.html" title=" " alt="" coords="5,94,200,135"/>
+<area shape="poly" title=" " alt="" coords="238,54,148,96,146,91,242,51"/>
+<area shape="rect" href="tester_8h.html" title=" " alt="" coords="224,102,373,127"/>
+<area shape="poly" title=" " alt="" coords="300,59,301,103,296,100,297,64"/>
+<area shape="rect" href="unit__test__case_8cpp.html" title=" " alt="" coords="398,94,525,135"/>
+<area shape="poly" title=" " alt="" coords="349,51,427,93,422,94,348,56"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="217,183,380,208"/>
+<area shape="poly" title=" " alt="" coords="300,141,301,184,296,181,297,145"/>
+</map>
+</div>
+</div>
+<p><a href="unit__test__case_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:iridium_3A_3Atesting_3A_3AException" id="r_iridium_3A_3Atesting_3A_3AException"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1testing_1_1_exception.html">iridium::testing::Exception</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пользовательский класс исключений для неудачных тестов.  <a href="classiridium_1_1testing_1_1_exception.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:iridium_3A_3Atesting_3A_3AUnitTestCase" id="r_iridium_3A_3Atesting_3A_3AUnitTestCase"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1testing_1_1_unit_test_case.html">iridium::testing::UnitTestCase</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Atesting" id="r_iridium_3A_3Atesting"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1testing.html">iridium::testing</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:ae72cd522c70451a9faa842c7485d6ec6" id="r_ae72cd522c70451a9faa842c7485d6ec6"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ae72cd522c70451a9faa842c7485d6ec6 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1testing.html#ae72cd522c70451a9faa842c7485d6ec6">iridium::testing::UnitTestCase::fail&lt; std::string &gt;</a> (std::string const &amp;left, std::string const &amp;right, std::string const &amp;, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a0adba9967a0a036c182420638083eda7" id="r_a0adba9967a0a036c182420638083eda7"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a0adba9967a0a036c182420638083eda7 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1testing.html#a0adba9967a0a036c182420638083eda7">iridium::testing::UnitTestCase::fail&lt; std::chrono::system_clock::time_point &gt;</a> (std::chrono::system_clock::time_point const &amp;left, std::chrono::system_clock::time_point const &amp;right, std::string const &amp;, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_ff03279bce533da27dd281e3b36e1b44.html">testing</a></li><li class="navelem"><a href="unit__test__case_8h.html">unit_test_case.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

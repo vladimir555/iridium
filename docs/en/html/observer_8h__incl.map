@@ -1,7 +1,7 @@
-<map id="source/iridium/pattern/observer.h" name="source/iridium/pattern/observer.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,152,46"/>
-<area shape="rect" id="Node000002" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="14,94,143,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,78,76,78,76,46"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="44,168,113,193"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,120,81,152,76,152,76,120"/>
+<map id="iridium/pattern/observer.h" name="iridium/pattern/observer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,173,31"/>
+<area shape="rect" id="Node000002" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="25,79,153,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,29,92,64,86,63,88,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="55,153,123,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,103,92,138,86,136,87,107"/>
 </map>

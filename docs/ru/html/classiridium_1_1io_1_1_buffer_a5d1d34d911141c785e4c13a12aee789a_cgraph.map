@@ -1,0 +1,10 @@
+<map id="iridium::io::Buffer::Buffer" name="iridium::io::Buffer::Buffer">
+<area shape="rect" id="Node000001" title="Конструирует буфер из вариативного списка аргументов." alt="" coords="5,39,126,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705" title=" " alt="" coords="174,39,294,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,56,160,58,155,60,127,62"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="202,37,200,29,205,20,217,14,234,12,252,14,265,23,259,23,251,20,234,17,218,19,209,24,205,30,206,39"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#a34c2cef05d183956ff6fe364b85549af" title="Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы." alt="" coords="342,5,473,46"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="294,45,330,41,324,42,295,50"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_buffer.html#af5036953f0834aff960b3889870a02ea" title=" " alt="" coords="348,71,468,111"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="295,67,335,77,329,77,294,73"/>
+</map>

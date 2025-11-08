@@ -1,0 +1,10 @@
+<map id="iridium::io::Buffer::emplace_back" name="iridium::io::Buffer::emplace_back">
+<area shape="rect" id="Node000001" title=" " alt="" coords="342,39,462,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705" title=" " alt="" coords="174,39,294,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="324,59,295,62,294,56,329,59"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="259,23,251,20,234,17,218,19,209,24,205,30,206,39,202,37,200,29,205,20,217,14,234,12,252,14,265,23"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#a84cbd63661692d4e81266e620f2e6880" title=" " alt="" coords="5,5,126,46"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="156,45,126,40,126,35,161,43"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_buffer.html#a5d1d34d911141c785e4c13a12aee789a" title="Конструирует буфер из вариативного списка аргументов." alt="" coords="5,71,126,111"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="156,74,127,82,126,77,161,73"/>
+</map>

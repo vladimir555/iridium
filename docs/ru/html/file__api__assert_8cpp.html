@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Iridium: Файл source/iridium/io/fs/implementation/file_api_assert.cpp</title>
+<title>Iridium: Файл iridium/io/fs/implementation/file_api_assert.cpp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,33 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('file__api__assert_8cpp.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,16 +115,7 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_5705b813285e54309934c93cc9191ba4.html">fs</a></li><li class="navelem"><a class="el" href="dir_efecabb4eb0fcb8df6194a24944bd3f0.html">implementation</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a> &#124;
-<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Файл file_api_assert.cpp</div></div>
 </div><!--header-->
 <div class="contents">
@@ -101,49 +125,53 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для file_api_assert.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="file__api__assert_8cpp__incl.png" border="0" usemap="#asource_2iridium_2io_2fs_2implementation_2file__api__assert_8cpp" alt=""/></div>
-<map name="asource_2iridium_2io_2fs_2implementation_2file__api__assert_8cpp" id="asource_2iridium_2io_2fs_2implementation_2file__api__assert_8cpp">
-<area shape="rect" title=" " alt="" coords="53,5,187,61"/>
-<area shape="rect" href="file__api__assert_8h.html" title=" " alt="" coords="62,109,178,135"/>
-<area shape="poly" title=" " alt="" coords="123,61,123,93,117,93,117,61"/>
-<area shape="rect" title=" " alt="" coords="5,183,59,208"/>
-<area shape="poly" title=" " alt="" coords="89,63,69,85,52,110,41,139,36,168,31,167,36,138,47,108,65,82,85,60"/>
-<area shape="rect" title=" " alt="" coords="176,183,254,208"/>
-<area shape="poly" title=" " alt="" coords="154,60,175,82,193,108,206,138,213,167,208,168,201,139,188,110,171,85,150,63"/>
-<area shape="rect" title=" " alt="" coords="90,183,150,208"/>
-<area shape="poly" title=" " alt="" coords="123,135,123,167,117,167,117,135"/>
-<area shape="poly" title=" " alt="" coords="107,137,60,175,57,171,103,133"/>
-<area shape="poly" title=" " alt="" coords="138,133,188,171,185,175,134,137"/>
+<div class="center"><img src="file__api__assert_8cpp__incl.png" border="0" usemap="#airidium_2io_2fs_2implementation_2file__api__assert_8cpp" loading="lazy" alt=""/></div>
+<map name="airidium_2io_2fs_2implementation_2file__api__assert_8cpp" id="airidium_2io_2fs_2implementation_2file__api__assert_8cpp">
+<area shape="rect" title=" " alt="" coords="30,5,210,46"/>
+<area shape="rect" href="file__api__assert_8h.html" title=" " alt="" coords="62,94,178,120"/>
+<area shape="poly" title=" " alt="" coords="121,44,123,79,117,78,119,49"/>
+<area shape="rect" title=" " alt="" coords="5,168,59,193"/>
+<area shape="poly" title=" " alt="" coords="91,49,71,70,52,95,41,124,36,153,31,152,36,123,47,93,67,66,94,44"/>
+<area shape="rect" title=" " alt="" coords="176,168,254,193"/>
+<area shape="poly" title=" " alt="" coords="147,44,172,66,193,93,206,123,213,154,209,151,201,124,188,95,168,70,147,49"/>
+<area shape="rect" title=" " alt="" coords="90,168,150,193"/>
+<area shape="poly" title=" " alt="" coords="122,118,122,153,118,151,118,122"/>
+<area shape="poly" title=" " alt="" coords="108,120,60,160,57,156,102,121"/>
+<area shape="poly" title=" " alt="" coords="137,118,189,158,184,159,135,123"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с вводом-выводом. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io_1_1fs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности ввода-вывода, связанной с файловой системой. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html">iridium::io::fs::implementation</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io_1_1fs_1_1implementation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для внутренних деталей реализации функциональностей файловой системы. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aio" id="r_iridium_3A_3Aio"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1io"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейс для обработчика обобщенного протокола ввода-вывода. <br /></td></tr>
+<tr class="memitem:iridium_3A_3Aio_3A_3Afs" id="r_iridium_3A_3Aio_3A_3Afs"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1io_1_1fs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейс для обобщенного кэша строк. <br /></td></tr>
+<tr class="memitem:iridium_3A_3Aio_3A_3Afs_3A_3Aimplementation" id="r_iridium_3A_3Aio_3A_3Afs_3A_3Aimplementation"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html">iridium::io::fs::implementation</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1io_1_1fs_1_1implementation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Платформо-независимый диспетчер подключения для низкоуровневых реализаций файлового API. Этот заголовочный файл использует макрос (<span class="tt"><a class="el" href="platform_8h.html#a5cb7d9f7b6bfa00dc85ca4779ef9c7b0" title="Создает строковый литерал для включения заголовочного файла, специфичного для платформы....">PLATFORM_HEADER</a></span>) для подключения соответствующего платформо-специфичного заголовочного файла <span class="tt">file_api.h</span> (например, для Unix, Windows), который содержит фактические объявления низкоуровневых операций файловой системы. <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:a8e237a5ad76c558edf5a997c2ba4cd19" id="r_a8e237a5ad76c558edf5a997c2ba4cd19"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html#a8e237a5ad76c558edf5a997c2ba4cd19">iridium::io::fs::implementation::assertOK</a> (const int &amp;result, const string &amp;message)</td></tr>
-<tr class="separator:a8e237a5ad76c558edf5a997c2ba4cd19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08d44ea93407628f0d12df4a5d54d1ca" id="r_a08d44ea93407628f0d12df4a5d54d1ca"><td class="memItemLeft" align="right" valign="top">::FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html#a08d44ea93407628f0d12df4a5d54d1ca">iridium::io::fs::implementation::assertOK</a> (::FILE *result, const string &amp;message)</td></tr>
-<tr class="separator:a08d44ea93407628f0d12df4a5d54d1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e237a5ad76c558edf5a997c2ba4cd19" id="r_a8e237a5ad76c558edf5a997c2ba4cd19"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html#a8e237a5ad76c558edf5a997c2ba4cd19">iridium::io::fs::implementation::assertOK</a> (const int &amp;result, const string &amp;message)</td></tr>
+<tr class="memitem:a08d44ea93407628f0d12df4a5d54d1ca" id="r_a08d44ea93407628f0d12df4a5d54d1ca"><td class="memItemLeft">::FILE *&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html#a08d44ea93407628f0d12df4a5d54d1ca">iridium::io::fs::implementation::assertOK</a> (::FILE *result, const string &amp;message)</td></tr>
 </table>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_8c6393cb1db31ac16803acf12e6d112e.html">io</a></li><li class="navelem"><a href="dir_3f5a814022cc2dc49c15bc4286d87188.html">fs</a></li><li class="navelem"><a href="dir_40514520fda7293e7da9626da8d3833a.html">implementation</a></li><li class="navelem"><a href="file__api__assert_8cpp.html">file_api_assert.cpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Iridium: Файл source/iridium/parsing/file_parser.h</title>
+<title>Iridium: Файл iridium/parsing/file_parser.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,33 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('file__parser_8h.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,21 +115,12 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_3598e8d03f058449899ac524faf1a451.html">parsing</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a> &#124;
-<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Файл file_parser.h</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл. Эти функции предоставляют высокоуровневый файловый ввод-вывод для структурированных данных, представленных объектами <code>INode</code>.  
+<p>Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл. Эти функции предоставляют высокоуровневый файловый ввод-вывод для структурированных данных, представленных объектами <span class="tt">INode</span>.  
 <a href="#details">Подробнее...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &quot;<a class="el" href="node_8h_source.html">node.h</a>&quot;</code><br />
@@ -104,81 +128,96 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для file_parser.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="file__parser_8h__incl.png" border="0" usemap="#asource_2iridium_2parsing_2file__parser_8h" alt=""/></div>
-<map name="asource_2iridium_2parsing_2file__parser_8h" id="asource_2iridium_2parsing_2file__parser_8h">
-<area shape="rect" title="Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл...." alt="" coords="234,5,382,46"/>
-<area shape="rect" title=" " alt="" coords="568,404,622,429"/>
-<area shape="poly" title=" " alt="" coords="383,32,452,46,488,58,522,73,552,93,576,116,592,145,597,179,598,263,598,388,592,388,592,263,592,179,587,147,572,119,548,97,519,78,486,63,451,52,382,37"/>
-<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="278,94,338,120"/>
-<area shape="poly" title=" " alt="" coords="311,46,311,78,306,78,306,46"/>
-<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="5,330,134,356"/>
-<area shape="poly" title=" " alt="" coords="271,49,221,79,162,123,107,177,84,209,65,242,60,260,59,279,64,315,58,315,53,279,55,259,60,240,79,206,103,174,159,119,218,75,268,44"/>
-<area shape="rect" href="node__type_8h.html" title="Определяет шаблонный интерфейс INodeType&lt;TValue&gt; для обобщенных узлов дерева. Этот интерфейс является..." alt="" coords="262,168,354,193"/>
-<area shape="poly" title=" " alt="" coords="311,120,311,152,306,152,306,120"/>
-<area shape="poly" title=" " alt="" coords="356,185,424,203,460,218,493,239,527,274,554,314,574,354,588,388,583,390,570,356,549,317,523,277,489,243,457,223,422,208,354,190"/>
-<area shape="rect" title=" " alt="" coords="153,404,191,429"/>
-<area shape="poly" title=" " alt="" coords="310,194,302,235,285,283,266,316,243,346,198,395,194,391,239,343,261,313,280,281,297,233,304,193"/>
-<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="356,241,479,282"/>
-<area shape="poly" title=" " alt="" coords="326,192,380,230,377,234,323,196"/>
-<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="98,249,270,274"/>
-<area shape="poly" title=" " alt="" coords="291,196,217,243,214,238,288,192"/>
-<area shape="poly" title=" " alt="" coords="262,191,161,211,116,226,87,243,77,259,71,278,69,315,64,315,66,277,72,257,84,239,114,221,160,206,261,186"/>
-<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="339,330,506,356"/>
-<area shape="poly" title=" " alt="" coords="421,282,424,314,418,315,416,283"/>
-<area shape="poly" title=" " alt="" coords="453,354,555,396,553,401,451,359"/>
-<area shape="poly" title=" " alt="" coords="373,359,207,405,205,400,372,354"/>
-<area shape="rect" title=" " alt="" coords="402,404,462,429"/>
-<area shape="poly" title=" " alt="" coords="427,356,431,388,426,389,422,356"/>
-<area shape="rect" title=" " alt="" coords="486,404,544,429"/>
-<area shape="poly" title=" " alt="" coords="440,354,489,392,486,396,437,358"/>
-<area shape="rect" title=" " alt="" coords="51,404,120,429"/>
-<area shape="poly" title=" " alt="" coords="366,359,136,407,135,402,365,354"/>
-<area shape="rect" title=" " alt="" coords="215,404,276,429"/>
-<area shape="poly" title=" " alt="" coords="394,359,291,400,289,395,392,354"/>
-<area shape="rect" title=" " alt="" coords="300,404,378,429"/>
-<area shape="poly" title=" " alt="" coords="410,358,366,395,363,391,407,354"/>
-<area shape="poly" title=" " alt="" coords="168,277,101,323,98,319,165,273"/>
-<area shape="poly" title=" " alt="" coords="75,355,82,388,77,389,70,356"/>
+<div class="center"><img src="file__parser_8h__incl.png" border="0" usemap="#airidium_2parsing_2file__parser_8h" loading="lazy" alt=""/></div>
+<map name="airidium_2parsing_2file__parser_8h" id="airidium_2parsing_2file__parser_8h">
+<area shape="rect" title="Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл...." alt="" coords="532,5,659,46"/>
+<area shape="rect" title=" " alt="" coords="720,477,773,503"/>
+<area shape="poly" title=" " alt="" coords="659,34,721,51,783,79,809,98,831,121,845,148,850,179,850,344,843,382,824,417,800,446,775,470,773,465,796,443,820,414,838,381,845,344,845,179,840,149,826,124,806,102,780,83,719,56,659,40"/>
+<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="565,94,626,120"/>
+<area shape="poly" title=" " alt="" coords="597,44,598,80,593,77,594,49"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="210,330,338,356"/>
+<area shape="poly" title=" " alt="" coords="543,48,486,78,415,120,347,175,317,208,291,243,278,279,275,315,270,313,273,277,286,240,312,204,343,171,412,116,483,74,548,45"/>
+<area shape="rect" href="node__type_8h.html" title=" " alt="" coords="549,168,642,193"/>
+<area shape="poly" title=" " alt="" coords="597,118,598,153,593,151,594,122"/>
+<area shape="poly" title=" " alt="" coords="642,188,691,207,714,221,734,240,766,285,781,328,783,374,774,430,761,466,758,461,769,429,778,374,776,329,761,288,729,243,711,225,688,212,642,194"/>
+<area shape="rect" title=" " alt="" coords="682,249,720,274"/>
+<area shape="poly" title=" " alt="" coords="612,191,675,240,670,239,611,196"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="534,241,657,282"/>
+<area shape="poly" title=" " alt="" coords="597,192,598,227,593,225,594,196"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="337,249,510,274"/>
+<area shape="poly" title=" " alt="" coords="567,195,465,244,463,240,571,193"/>
+<area shape="poly" title=" " alt="" coords="546,188,425,210,366,225,326,244,311,259,299,278,283,316,279,313,294,275,307,256,323,239,364,220,424,205,551,186"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="405,330,572,356"/>
+<area shape="poly" title=" " alt="" coords="572,281,519,323,516,318,567,284"/>
+<area shape="poly" title=" " alt="" coords="516,354,611,401,719,469,713,468,609,406,515,359"/>
+<area shape="rect" href="common_8h.html" title="Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов." alt="" coords="490,404,573,429"/>
+<area shape="poly" title=" " alt="" coords="497,353,519,391,514,389,495,358"/>
+<area shape="rect" title=" " alt="" coords="576,477,644,503"/>
+<area shape="poly" title=" " alt="" coords="520,354,556,373,587,402,602,432,610,464,605,461,597,434,583,405,552,378,519,359"/>
+<area shape="rect" title=" " alt="" coords="5,477,74,503"/>
+<area shape="poly" title=" " alt="" coords="403,353,201,376,113,390,83,398,66,406,56,418,50,432,43,463,38,461,45,430,52,415,63,402,81,393,112,385,200,370,406,349"/>
+<area shape="rect" title=" " alt="" coords="699,404,759,429"/>
+<area shape="poly" title=" " alt="" coords="530,354,686,402,681,402,529,359"/>
+<area shape="rect" title=" " alt="" coords="78,404,135,429"/>
+<area shape="poly" title=" " alt="" coords="402,357,288,378,150,406,149,401,287,373,407,355"/>
+<area shape="rect" title=" " alt="" coords="159,404,219,429"/>
+<area shape="poly" title=" " alt="" coords="432,358,235,406,234,400,436,355"/>
+<area shape="rect" title=" " alt="" coords="243,404,321,429"/>
+<area shape="poly" title=" " alt="" coords="456,355,332,401,331,396,451,357"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="346,404,467,429"/>
+<area shape="poly" title=" " alt="" coords="477,355,433,396,430,391,472,357"/>
+<area shape="poly" title=" " alt="" coords="568,427,708,475,702,475,567,433"/>
+<area shape="rect" title=" " alt="" coords="469,477,551,503"/>
+<area shape="poly" title=" " alt="" coords="530,428,520,464,516,460,526,431"/>
+<area shape="poly" title=" " alt="" coords="546,427,588,467,583,466,544,432"/>
+<area shape="poly" title=" " alt="" coords="493,427,479,432,262,465,90,486,89,481,262,459,478,427,488,428"/>
+<area shape="poly" title=" " alt="" coords="399,276,312,325,309,320,403,274"/>
+<area shape="poly" title=" " alt="" coords="208,352,99,372,52,387,34,396,23,405,17,418,17,433,27,463,21,464,11,434,12,417,19,402,31,391,50,382,98,366,211,348"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 Граф файлов, в которые включается этот файл:</div>
 <div class="dyncontent">
-<div class="center"><img src="file__parser_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2parsing_2file__parser_8hdep" alt=""/></div>
-<map name="asource_2iridium_2parsing_2file__parser_8hdep" id="asource_2iridium_2parsing_2file__parser_8hdep">
-<area shape="rect" title="Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл...." alt="" coords="5,5,154,46"/>
-<area shape="rect" href="file__parser_8cpp.html" title=" " alt="" coords="5,94,154,135"/>
-<area shape="poly" title=" " alt="" coords="82,62,82,94,77,94,77,62"/>
+<div class="center"><img src="file__parser_8h__dep__incl.png" border="0" usemap="#airidium_2parsing_2file__parser_8hdep" loading="lazy" alt=""/></div>
+<map name="airidium_2parsing_2file__parser_8hdep" id="airidium_2parsing_2file__parser_8hdep">
+<area shape="rect" title="Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл...." alt="" coords="5,5,132,46"/>
+<area shape="rect" href="file__parser_8cpp.html" title=" " alt="" coords="5,94,132,135"/>
+<area shape="poly" title=" " alt="" coords="70,60,71,94,66,93,67,64"/>
 </map>
 </div>
 </div>
 <p><a href="file__parser_8h_source.html">См. исходные тексты.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing.html">iridium::parsing</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1parsing"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных. Это пространство имен часто связано с представлением данных в виде дерева узлов (например, <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>). <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aparsing" id="r_iridium_3A_3Aparsing"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1parsing.html">iridium::parsing</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:ab61415abe931f9a6feca5e4ef7a519fb" id="r_ab61415abe931f9a6feca5e4ef7a519fb"><td class="memItemLeft" align="right" valign="top">INode::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing.html#ab61415abe931f9a6feca5e4ef7a519fb">iridium::parsing::parseFile</a> (std::string const &amp;file_name)</td></tr>
-<tr class="memdesc:ab61415abe931f9a6feca5e4ef7a519fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает файл и строит дерево узлов, представляющее его содержимое. Конкретная логика разбора (например, для XML, JSON, пользовательских форматов) определяется базовой реализацией, которая здесь не детализируется, но ожидается, что она будет обрабатывать файловый ввод-вывод и интерпретацию формата.  <br /></td></tr>
-<tr class="separator:ab61415abe931f9a6feca5e4ef7a519fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad50094a37c8790f71aee13cc754ccdea" id="r_ad50094a37c8790f71aee13cc754ccdea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1parsing.html#ad50094a37c8790f71aee13cc754ccdea">iridium::parsing::composeFile</a> (std::string const &amp;file_name, INode::TSharedPtr const &amp;root_node)</td></tr>
-<tr class="memdesc:ad50094a37c8790f71aee13cc754ccdea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формирует (сериализует) дерево узлов, начиная с заданного корневого узла, в файл. Конкретная логика формирования (например, в XML, JSON, пользовательские форматы) определяется базовой реализацией.  <br /></td></tr>
-<tr class="separator:ad50094a37c8790f71aee13cc754ccdea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61415abe931f9a6feca5e4ef7a519fb" id="r_ab61415abe931f9a6feca5e4ef7a519fb"><td class="memItemLeft">INode::TSharedPtr&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1parsing.html#ab61415abe931f9a6feca5e4ef7a519fb">iridium::parsing::parseFile</a> (std::string const &amp;file_name)</td></tr>
+<tr class="memdesc:ab61415abe931f9a6feca5e4ef7a519fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает файл и строит дерево объектов <span class="tt"><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></span>, представляющее его структуру.  <br /></td></tr>
+<tr class="memitem:ad50094a37c8790f71aee13cc754ccdea" id="r_ad50094a37c8790f71aee13cc754ccdea"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1parsing.html#ad50094a37c8790f71aee13cc754ccdea">iridium::parsing::composeFile</a> (std::string const &amp;file_name, INode::TSharedPtr const &amp;root_node)</td></tr>
+<tr class="memdesc:ad50094a37c8790f71aee13cc754ccdea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формирует дерево объектов <span class="tt"><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></span> в файл, сериализуя его структуру.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл. Эти функции предоставляют высокоуровневый файловый ввод-вывод для структурированных данных, представленных объектами <code>INode</code>. </p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Объявляет функции для разбора файлов в дерево узлов и формирования дерева узлов в файл. Эти функции предоставляют высокоуровневый файловый ввод-вывод для структурированных данных, представленных объектами <span class="tt">INode</span>. </p>
 </div></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_c1a02bf2f7e6f2e1d7a358f7fab9ab18.html">parsing</a></li><li class="navelem"><a href="file__parser_8h.html">file_parser.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

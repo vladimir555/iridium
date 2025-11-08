@@ -1,0 +1,109 @@
+<map id="convert" name="convert">
+<area shape="rect" id="Node000001" title="Converts a value from one type to another using standard policy." alt="" coords="790,968,855,994"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1testing.html#aafb239aa469a9ae2db9f39562ad2c860" title=" " alt="" coords="560,134,719,175"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="818,952,810,785,795,543,772,314,757,233,749,206,740,189,720,172,718,167,744,186,754,204,762,232,777,314,800,542,815,785,823,953"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1testing.html#aa72cd6418653662c222966cdbf7fdcfe" title=" " alt="" coords="259,113,489,139"/>
+<area shape="poly" id="edge44_Node000001_Node000003" title=" " alt="" coords="818,952,814,771,802,506,791,373,778,257,761,169,751,141,740,124,703,99,660,84,614,78,567,78,521,84,478,94,410,115,406,111,477,89,520,79,567,73,615,72,661,79,705,94,744,120,756,138,766,168,783,256,797,373,807,506,819,771,823,953"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title=" " alt="" coords="20,113,196,139"/>
+<area shape="poly" id="edge50_Node000001_Node000004" title=" " alt="" coords="818,952,815,762,803,483,793,344,780,221,762,129,752,99,740,81,706,55,668,35,628,21,585,12,542,9,497,9,408,20,322,41,245,68,137,115,133,111,244,63,321,36,407,15,497,4,542,3,586,7,629,16,670,30,709,50,744,78,756,97,767,128,785,220,798,343,808,483,820,762,823,953"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="537,265,742,305"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="819,952,819,819,811,629,801,532,787,443,767,369,754,340,740,319,731,308,730,303,744,315,759,338,772,367,792,441,806,531,816,629,824,819,824,953"/>
+<area shape="rect" id="Node000008" href="$namespaceiridium_1_1db.html#a5ff13d523076158415990aa954dfc8f4" title=" " alt="" coords="547,329,732,355"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="819,952,818,827,809,652,800,562,786,480,766,413,754,388,740,368,730,358,729,353,744,365,759,385,771,411,791,479,805,561,815,651,824,827,824,953"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#aed6ec48ad6676c9d3b31056cb85ff221" title="Constructor." alt="" coords="538,429,741,485"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="818,952,812,853,799,717,788,649,776,586,760,534,740,499,731,488,730,483,744,495,764,532,781,585,794,648,804,717,817,852,823,953"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#a1560106229b6d338739bc2e06ed0ff4b" title="Constructor." alt="" coords="538,509,741,565"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="817,952,809,868,794,756,771,649,757,607,740,579,730,568,730,563,744,575,762,605,776,648,799,755,814,867,822,953"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#a69ed165ba5efd6613889a52afce84cbc" title="Constructor." alt="" coords="538,613,741,669"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="819,951,815,898,803,829,780,755,762,721,740,689,721,672,721,667,744,686,767,718,785,753,809,827,820,898,824,953"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056" title="Finalizes the object." alt="" coords="544,743,736,784"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="814,952,805,918,791,877,770,835,741,799,725,787,724,782,744,795,774,832,796,875,811,917,819,953"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84" title="Initializes the object." alt="" coords="278,714,470,755"/>
+<area shape="poly" id="edge34_Node000001_Node000014" title=" " alt="" coords="819,952,817,903,806,842,796,811,782,782,764,756,741,734,706,714,667,701,627,694,586,692,506,700,439,715,435,711,505,695,586,687,628,689,669,695,708,709,744,730,768,752,787,779,801,809,811,841,822,902,825,953"/>
+<area shape="rect" id="Node000015" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c" title=" " alt="" coords="544,809,736,849"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="807,954,781,909,762,885,741,864,722,852,721,847,744,860,766,881,785,906,812,954"/>
+<area shape="rect" id="Node000016" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aeee0b058d084e5d12dbe22c63a48d37d" title="Retrieves a string from the cache by its ID." alt="" coords="544,874,736,915"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="786,960,741,935,702,918,701,913,744,931,791,959"/>
+<area shape="rect" id="Node000017" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#ac21f1d3c5467791bc729cedf2e2b2567" title="Returns the name of the thread." alt="" coords="286,870,462,926"/>
+<area shape="poly" id="edge18_Node000001_Node000017" title=" " alt="" coords="773,974,462,917,461,912,777,971"/>
+<area shape="rect" id="Node000019" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Returns the name of the current thread (static)." alt="" coords="556,1119,724,1160"/>
+<area shape="poly" id="edge20_Node000001_Node000019" title=" " alt="" coords="812,1006,786,1060,767,1086,744,1108,724,1121,721,1117,741,1104,763,1082,782,1057,809,1011"/>
+<area shape="rect" id="Node000027" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#aac7a829f9511351588cad4169188d46b" title=" " alt="" coords="544,1185,736,1225"/>
+<area shape="poly" id="edge30_Node000001_Node000027" title=" " alt="" coords="818,1007,811,1046,797,1090,775,1135,744,1174,727,1186,723,1182,740,1170,771,1132,792,1088,806,1045,816,1011"/>
+<area shape="rect" id="Node000028" href="$namespaceiridium_1_1threading.html#aa7810b8b619a3d83f8b843b3e746eadd" title="Returns a string representation of the current thread ID." alt="" coords="580,989,700,1029"/>
+<area shape="poly" id="edge31_Node000001_Node000028" title=" " alt="" coords="773,990,702,1002,699,997,777,987"/>
+<area shape="rect" id="Node000029" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aae27c3a7c44506fa0452f16c0168d4b5" title="Initializes the object." alt="" coords="544,1250,736,1291"/>
+<area shape="poly" id="edge33_Node000001_Node000029" title=" " alt="" coords="822,1007,819,1059,806,1120,783,1183,766,1213,744,1239,728,1251,725,1247,740,1235,761,1210,778,1181,801,1118,813,1058,819,1012"/>
+<area shape="rect" id="Node000030" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748" title="Initializes the file sink. This involves opening/creating the log file according to the path and rota..." alt="" coords="538,1315,742,1356"/>
+<area shape="poly" id="edge35_Node000001_Node000030" title=" " alt="" coords="819,1007,810,1079,794,1167,772,1249,759,1281,744,1304,729,1317,726,1313,740,1301,754,1279,767,1247,789,1165,805,1078,816,1012"/>
+<area shape="rect" id="Node000032" href="$namespaceiridium_1_1db.html#a91db078cad003f5c796da6f27c54fa89" title="Creates a database configuration object from a URI. Parses the given URI and extracts database connec..." alt="" coords="560,379,719,404"/>
+<area shape="poly" id="edge37_Node000001_Node000032" title=" " alt="" coords="819,952,816,837,806,676,796,595,782,521,764,460,753,436,740,419,721,404,719,399,744,415,757,434,769,458,788,519,801,594,811,676,822,837,824,953"/>
+<area shape="rect" id="Node000033" href="$classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title="Formats a log event into a string line." alt="" coords="566,1381,713,1421"/>
+<area shape="poly" id="edge39_Node000001_Node000033" title=" " alt="" coords="820,1007,814,1092,799,1199,776,1301,761,1341,744,1369,730,1381,715,1390,712,1386,727,1377,740,1366,757,1339,771,1299,794,1198,808,1091,818,1012"/>
+<area shape="rect" id="Node000036" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8fd3e17fb1dbaf9767253771d2d08790" title=" " alt="" coords="544,1446,736,1487"/>
+<area shape="poly" id="edge45_Node000001_Node000036" title=" " alt="" coords="821,1007,816,1105,803,1231,793,1295,780,1353,764,1401,744,1435,730,1447,727,1443,740,1431,759,1399,775,1352,787,1294,798,1230,811,1104,819,1012"/>
+<area shape="rect" id="Node000037" href="$namespaceiridium_1_1io_1_1fs.html#afe69d76950814a6204c79e45f5f94a7d" title=" " alt="" coords="564,1511,715,1536"/>
+<area shape="poly" id="edge46_Node000001_Node000037" title=" " alt="" coords="822,1007,820,1117,808,1264,798,1338,785,1406,767,1462,744,1500,731,1511,717,1518,714,1514,728,1506,740,1497,762,1459,780,1404,793,1337,803,1263,814,1117,820,1012"/>
+<area shape="rect" id="Node000038" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a27f9c59ddcfe79efa32f8bb1cd2b9147" title="Removes a string from the cache by its ID." alt="" coords="544,1561,736,1601"/>
+<area shape="poly" id="edge47_Node000001_Node000038" title=" " alt="" coords="822,1007,821,1126,810,1287,800,1370,787,1445,768,1507,757,1532,744,1551,732,1562,729,1558,740,1547,752,1529,763,1505,781,1444,795,1369,805,1287,816,1126,820,1012"/>
+<area shape="rect" id="Node000039" href="$classiridium_1_1system_1_1_shell.html#af0cb0d7688e15d1a8cd9bb4c7d2f9d01" title=" " alt="" coords="553,1625,726,1651"/>
+<area shape="poly" id="edge48_Node000001_Node000039" title=" " alt="" coords="823,1007,824,1137,816,1319,806,1411,792,1496,771,1566,759,1594,744,1615,728,1628,726,1623,740,1611,754,1591,766,1564,786,1495,801,1411,810,1318,819,1137,821,1012"/>
+<area shape="rect" id="Node000040" href="$classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#a7c3d69476754367f65cacb76ce726e09" title=" " alt="" coords="538,1675,741,1716"/>
+<area shape="poly" id="edge49_Node000001_Node000040" title=" " alt="" coords="821,1007,813,1156,797,1363,774,1557,760,1627,745,1665,732,1677,729,1673,740,1662,755,1625,769,1556,792,1363,808,1156,818,1011"/>
+<area shape="rect" id="Node000041" href="$classiridium_1_1logging_1_1_logger.html#af25063f18941996adb58d049a228e0fe" title="Sets the logger configuration." alt="" coords="562,199,717,240"/>
+<area shape="poly" id="edge51_Node000001_Node000041" title=" " alt="" coords="817,952,809,797,793,576,770,368,756,294,748,270,740,255,719,237,717,232,744,251,753,268,761,293,775,367,798,576,814,797,822,953"/>
+<area shape="rect" id="Node000043" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Sets the name of the current thread (static)." alt="" coords="556,1054,724,1095"/>
+<area shape="poly" id="edge54_Node000001_Node000043" title=" " alt="" coords="794,1006,772,1025,744,1043,716,1056,713,1051,741,1039,769,1021,798,1002"/>
+<area shape="rect" id="Node000044" href="$process_8cpp.html#a5f668d3c33ec17c99a446cb90f404681" title=" " alt="" coords="606,1740,673,1766"/>
+<area shape="poly" id="edge57_Node000001_Node000044" title=" " alt="" coords="821,1007,815,1169,800,1397,777,1611,762,1687,754,1713,744,1729,729,1742,711,1750,674,1757,673,1751,709,1745,726,1738,740,1726,749,1711,757,1686,771,1610,795,1396,810,1168,819,1012"/>
+<area shape="rect" id="Node000046" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a033b7810aa416594ea166891bdc70d87" title="return 0 &#45; socket/fd not ready" alt="" coords="544,1790,736,1831"/>
+<area shape="poly" id="edge59_Node000001_Node000046" title=" " alt="" coords="821,1007,816,1178,801,1422,790,1544,777,1652,762,1734,754,1762,744,1780,731,1792,729,1787,740,1777,749,1760,757,1733,772,1651,785,1544,795,1422,810,1178,819,1012"/>
+<area shape="rect" id="Node000047" href="$namespaceiridium_1_1io_1_1fs.html#a3591cb9769f0fd00dd9411edaa5520be" title=" " alt="" coords="563,1855,716,1880"/>
+<area shape="poly" id="edge60_Node000001_Node000047" title=" " alt="" coords="822,1007,817,1190,804,1455,793,1588,780,1705,764,1794,755,1825,744,1844,732,1855,718,1863,716,1857,729,1850,740,1841,750,1823,759,1793,775,1704,788,1587,798,1454,812,1190,819,1011"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="543,146,491,141,488,136,547,143"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="241,128,198,128,195,124,245,125"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e" title="Parses a string into a node tree." alt="" coords="271,265,476,305"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="519,287,479,287,476,283,523,283"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975" title="Defines standard implementation helpers for CJSONParser, such as smart pointer typedefs and a static ..." alt="" coords="5,265,211,305"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="254,287,213,287,210,283,257,283"/>
+<area shape="poly" id="edge7_Node000007_Node000007" title=" " alt="" coords="150,251,135,246,108,243,82,245,67,250,61,256,64,264,58,264,56,255,64,246,81,240,108,238,137,240,155,248"/>
+<area shape="rect" id="Node000009" href="$namespaceiridium_1_1db.html#afacc46a55b26a30d286cde5c849d9253" title="Creates a database connector instance from a URI. This is a convenience function that first calls mak..." alt="" coords="281,355,466,380"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="530,354,469,361,465,357,534,351"/>
+<area shape="poly" id="edge13_Node000012_Node000012" title=" " alt="" coords="667,599,657,594,640,592,624,594,614,598,609,605,609,613,603,612,604,603,610,594,622,588,640,586,659,589,672,598"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="526,753,472,747,469,743,530,750"/>
+<area shape="rect" id="Node000018" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Comparison operator for std::map caching." alt="" coords="20,912,196,967"/>
+<area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="269,916,198,928,194,924,272,912"/>
+<area shape="rect" id="Node000020" href="$classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609" title="Returns the name of the thread." alt="" coords="307,974,441,1015"/>
+<area shape="poly" id="edge21_Node000019_Node000020" title=" " alt="" coords="542,1112,535,1108,518,1088,511,1068,503,1048,487,1030,465,1017,442,1007,440,1002,467,1012,491,1026,508,1046,516,1066,523,1085,539,1104,547,1111"/>
+<area shape="rect" id="Node000021" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html#a60ffd18120547a96cace64d482bedcfc" title="Constructs a Locker and acquires the mutex of the associated Synchronized object. If is_tracable is t..." alt="" coords="296,1314,452,1370"/>
+<area shape="poly" id="edge24_Node000019_Node000021" title=" " alt="" coords="541,1170,539,1175,526,1190,520,1206,515,1238,511,1271,504,1288,491,1304,473,1318,454,1328,450,1324,470,1313,487,1300,500,1285,506,1269,510,1237,514,1204,522,1188,535,1171,545,1166"/>
+<area shape="rect" id="Node000022" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title=" " alt="" coords="273,1039,474,1080"/>
+<area shape="poly" id="edge25_Node000019_Node000022" title=" " alt="" coords="555,1115,488,1096,448,1083,447,1078,490,1090,560,1113"/>
+<area shape="rect" id="Node000024" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html#a97c7e37d754ec672ca10c565a97f6d27" title="Waits on the Synchronized object&#39;s condition variable until notified or interrupted...." alt="" coords="280,1105,468,1145"/>
+<area shape="poly" id="edge27_Node000019_Node000024" title=" " alt="" coords="538,1135,469,1133,467,1128,542,1133"/>
+<area shape="rect" id="Node000025" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html#ab2f9a9b0c06c0f664950dca479dc61af" title=" " alt="" coords="280,1170,468,1211"/>
+<area shape="poly" id="edge28_Node000019_Node000025" title=" " alt="" coords="538,1160,469,1175,467,1170,542,1157"/>
+<area shape="rect" id="Node000026" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html#a7bd147e3a7d3ca89d1d92c7acd1e0dca" title="Destroys the Locker and releases the acquired mutex. Notifies one waiting thread on the condition var..." alt="" coords="296,1234,452,1290"/>
+<area shape="poly" id="edge29_Node000019_Node000026" title=" " alt="" coords="546,1169,539,1175,524,1187,515,1199,506,1212,490,1225,454,1243,450,1239,488,1220,502,1208,511,1196,520,1183,535,1171,550,1165"/>
+<area shape="poly" id="edge23_Node000020_Node000018" title=" " alt="" coords="289,979,197,960,195,955,293,976"/>
+<area shape="poly" id="edge22_Node000020_Node000020" title=" " alt="" coords="416,959,401,955,374,953,348,955,333,959,327,965,329,973,324,973,322,964,330,955,347,949,374,947,402,950,421,957"/>
+<area shape="rect" id="Node000023" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Initializes the object." alt="" coords="20,1032,196,1087"/>
+<area shape="poly" id="edge26_Node000022_Node000023" title=" " alt="" coords="256,1061,198,1062,195,1057,260,1058"/>
+<area shape="poly" id="edge32_Node000028_Node000020" title=" " alt="" coords="562,1006,443,1000,440,996,567,1003"/>
+<area shape="rect" id="Node000031" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Logs a single event to the file if its level is sufficient and the file is open. The event is formatt..." alt="" coords="272,1394,476,1435"/>
+<area shape="poly" id="edge36_Node000030_Node000031" title=" " alt="" coords="556,1363,490,1385,452,1396,449,1391,488,1380,561,1360"/>
+<area shape="poly" id="edge38_Node000032_Node000009" title=" " alt="" coords="542,385,468,378,466,374,547,382"/>
+<area shape="poly" id="edge43_Node000033_Node000031" title=" " alt="" coords="548,1407,477,1412,475,1407,553,1404"/>
+<area shape="rect" id="Node000034" href="$classiridium_1_1logging_1_1_i_sink.html#abe33a6ec156c70486582c2100f18c24a" title="Flushes any buffered log messages to the destination." alt="" coords="301,1549,447,1589"/>
+<area shape="poly" id="edge40_Node000033_Node000034" title=" " alt="" coords="550,1426,539,1436,523,1455,515,1473,507,1493,491,1514,463,1534,433,1551,430,1546,460,1530,487,1510,502,1490,510,1471,518,1452,535,1432,554,1423"/>
+<area shape="rect" id="Node000035" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a8ddcb9bbf59aa7764a6b49488d830d91" title="Logs a single event to the console if its level is sufficient. The event is formatted into a string l..." alt="" coords="272,1459,476,1500"/>
+<area shape="poly" id="edge42_Node000033_Node000035" title=" " alt="" coords="553,1428,490,1449,448,1461,446,1456,488,1444,558,1425"/>
+<area shape="poly" id="edge41_Node000034_Node000034" title=" " alt="" coords="416,1534,401,1530,374,1527,348,1529,333,1534,327,1540,329,1549,324,1547,322,1539,330,1530,347,1524,374,1522,402,1524,421,1533"/>
+<area shape="rect" id="Node000042" href="$namespaceiridium_1_1logging.html#a4fff5fa51c4d1b05c97ae08faf5efd18" title="Globally sets the logger configuration." alt="" coords="288,185,460,211"/>
+<area shape="poly" id="edge52_Node000041_Node000042" title=" " alt="" coords="544,214,462,207,459,203,548,211"/>
+<area shape="poly" id="edge53_Node000042_Node000004" title=" " alt="" coords="307,183,160,142,157,137,311,179"/>
+<area shape="poly" id="edge55_Node000043_Node000020" title=" " alt="" coords="555,1050,488,1030,442,1016,441,1011,490,1025,560,1048"/>
+<area shape="poly" id="edge56_Node000043_Node000022" title=" " alt="" coords="538,1070,476,1068,474,1063,542,1067"/>
+<area shape="rect" id="Node000045" href="$process_8cpp.html#a9a98f5ef95647794f328088a7bd44b11" title=" " alt="" coords="288,1740,460,1766"/>
+<area shape="poly" id="edge58_Node000044_Node000045" title=" " alt="" coords="588,1753,461,1756,460,1750,594,1752"/>
+</map>

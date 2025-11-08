@@ -1,0 +1,13 @@
+<map id="iridium/io/protocol/http/implementation" name="iridium/io/protocol/http/implementation">
+<area shape="rect" id="node1" href="dir_5dbf1b17ada5aea14156edb0ce827336.html" title="implementation" alt="" coords="67,52,176,78"/>
+<area shape="rect" id="node2" href="dir_2112f30c4275b9e020eb1eddb74d362a.html" title="pattern" alt="" coords="5,126,67,152"/>
+<area shape="poly" id="edge1" href="dir_000019_000042.html" alt="" coords="109,78,63,118,60,114,104,79"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000019_000042.html" title="1" alt="" coords="66,113,73,128"/>
+<area shape="rect" id="node3" href="dir_2c51a477a00b1ad8ba8aec06d2e2f7fe.html" title="logging" alt="" coords="90,126,152,152"/>
+<area shape="poly" id="edge2" href="dir_000019_000033.html" alt="" coords="123,76,124,111,119,109,120,80"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000019_000033.html" title="1" alt="" coords="126,100,133,115"/>
+<area shape="rect" id="node4" href="dir_3f5a814022cc2dc49c15bc4286d87188.html" title="fs" alt="" coords="177,126,215,152"/>
+<area shape="poly" id="edge3" href="dir_000019_000012.html" alt="" coords="135,76,175,115,170,116,133,81"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000019_000012.html" title="2" alt="" coords="173,100,180,115"/>
+<area shape="rect" id="clust1" href="dir_e3ab535bdc681a8045746c94424579e5.html" title="http" alt="" coords="56,16,187,89"/>
+</map>

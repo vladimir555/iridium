@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Шаблон класса iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,33 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classiridium_1_1threading_1_1_synchronized_container.html','','classiridium_1_1threading_1_1_synchronized_container-members'); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,92 +115,72 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1_synchronized_container.html">SynchronizedContainer</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Открытые члены</a> &#124;
-<a href="classiridium_1_1threading_1_1_synchronized_container-members.html">Полный список членов класса</a>  </div>
   <div class="headertitle"><div class="title">Шаблон класса iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="synchronized__container_8h_source.html">synchronized_container.h</a>&gt;</code></p>
+<p>Потокобезопасный контейнер на основе std::unordered_map.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="synchronized__container_8h_source.html">iridium/threading/synchronized_container.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_container__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_container__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_inherit__map" id="airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,109,170,165"/>
+<area shape="rect" title="Потокобезопасный контейнер на основе std::unordered_map." alt="" coords="5,109,170,165"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="18,5,157,61"/>
-<area shape="poly" title=" " alt="" coords="90,77,90,108,85,108,85,77"/>
+<area shape="poly" title=" " alt="" coords="89,75,90,109,85,108,86,79"/>
 </map>
-<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">см. легенду</a>]</span></center></div>
 <div class="dynheader">
 Граф связей класса iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_container__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_container__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_coll__map" id="airidium_1_1threading_1_1_synchronized_container_3_01_t_key_00_01_t_value_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="5,109,170,165"/>
+<area shape="rect" title="Потокобезопасный контейнер на основе std::unordered_map." alt="" coords="5,109,170,165"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="18,5,157,61"/>
-<area shape="poly" title=" " alt="" coords="90,77,90,108,85,108,85,77"/>
+<area shape="poly" title=" " alt="" coords="89,75,90,109,85,108,86,79"/>
 </map>
-<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:af7b05a5957f1f561068e985203ff0ced" id="r_af7b05a5957f1f561068e985203ff0ced"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7b05a5957f1f561068e985203ff0ced">SynchronizedContainer</a> ()</td></tr>
-<tr class="separator:af7b05a5957f1f561068e985203ff0ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa50fced51de2378e4e0c34e30bade36a" id="r_aa50fced51de2378e4e0c34e30bade36a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa50fced51de2378e4e0c34e30bade36a">set</a> (TKey const &amp;key, TValue const &amp;value)</td></tr>
-<tr class="separator:aa50fced51de2378e4e0c34e30bade36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a347ec71e46eda22c5ce4c4c60ebec678" id="r_a347ec71e46eda22c5ce4c4c60ebec678"><td class="memItemLeft" align="right" valign="top">TValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a347ec71e46eda22c5ce4c4c60ebec678">get</a> (TKey const &amp;key) const</td></tr>
-<tr class="separator:a347ec71e46eda22c5ce4c4c60ebec678"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0a1f60fad1ef3cf8bc46a53dd1bcf5d" id="r_ab0a1f60fad1ef3cf8bc46a53dd1bcf5d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0a1f60fad1ef3cf8bc46a53dd1bcf5d">del</a> (TKey const &amp;key)</td></tr>
-<tr class="separator:ab0a1f60fad1ef3cf8bc46a53dd1bcf5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09492b76c7666c230970f3282e0859f4" id="r_a09492b76c7666c230970f3282e0859f4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a09492b76c7666c230970f3282e0859f4">SynchronizedContainer</a> ()=default</td></tr>
+<tr class="memdesc:a09492b76c7666c230970f3282e0859f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор.  <br /></td></tr>
+<tr class="memitem:aa50fced51de2378e4e0c34e30bade36a" id="r_aa50fced51de2378e4e0c34e30bade36a"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#aa50fced51de2378e4e0c34e30bade36a">set</a> (TKey const &amp;key, TValue const &amp;value)</td></tr>
+<tr class="memdesc:aa50fced51de2378e4e0c34e30bade36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Устанавливает пару "ключ-значение" в контейнере.  <br /></td></tr>
+<tr class="memitem:a347ec71e46eda22c5ce4c4c60ebec678" id="r_a347ec71e46eda22c5ce4c4c60ebec678"><td class="memItemLeft">TValue&#160;</td><td class="memItemRight"><a class="el" href="#a347ec71e46eda22c5ce4c4c60ebec678">get</a> (TKey const &amp;key) const</td></tr>
+<tr class="memdesc:a347ec71e46eda22c5ce4c4c60ebec678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает значение по ключу из контейнера.  <br /></td></tr>
+<tr class="memitem:ab0a1f60fad1ef3cf8bc46a53dd1bcf5d" id="r_ab0a1f60fad1ef3cf8bc46a53dd1bcf5d"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ab0a1f60fad1ef3cf8bc46a53dd1bcf5d">del</a> (TKey const &amp;key)</td></tr>
+<tr class="memdesc:ab0a1f60fad1ef3cf8bc46a53dd1bcf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаляет пару "ключ-значение" из контейнера.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Дополнительные унаследованные члены</h2></td></tr>
-<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1_synchronized"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1threading_1_1_synchronized')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized&lt; std::mutex &gt;</a></td></tr>
-<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
-<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
-<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
-<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
-<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
-<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
-<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
-<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
-<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
-<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1_synchronized"><td colspan="2">Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized&lt; std::recursive_mutex &gt;</a></td></tr>
+<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
+<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
+<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
+<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
+<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <span class="tt"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html">Synchronized</a></span>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
+<tr class="memitem:a62717cfdb74077719b43df8bb8e163b0 pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a62717cfdb74077719b43df8bb8e163b0"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="class_synchronized.html#a62717cfdb74077719b43df8bb8e163b0">checkWaitingPredicate</a> () const</td></tr>
 </table>
-<h2 class="groupheader">Конструктор(ы)</h2>
-<a id="af7b05a5957f1f561068e985203ff0ced" name="af7b05a5957f1f561068e985203ff0ced"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7b05a5957f1f561068e985203ff0ced">&#9670;&#160;</a></span>SynchronizedContainer()</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TKey, typename TValue&gt;<br />
+class iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;</div><p>Потокобезопасный контейнер на основе std::unordered_map. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a09492b76c7666c230970f3282e0859f4" name="a09492b76c7666c230970f3282e0859f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09492b76c7666c230970f3282e0859f4">&#9670;&#160;</a></span>SynchronizedContainer()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename TKey, typename TValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classiridium_1_1threading_1_1_synchronized_container.html">iridium::threading::SynchronizedContainer</a>&lt; TKey, TValue &gt;::SynchronizedContainer </td>
@@ -176,21 +189,28 @@ template&lt;typename TKey, typename TValue&gt; </div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Конструктор. </p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_container_af7b05a5957f1f561068e985203ff0ced_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_synchronized_container_af7b05a5957f1f561068e985203ff0ced_cgraph" alt=""/></div>
-<map name="aclassiridium_1_1threading_1_1_synchronized_container_af7b05a5957f1f561068e985203ff0ced_cgraph" id="aclassiridium_1_1threading_1_1_synchronized_container_af7b05a5957f1f561068e985203ff0ced_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,170,61"/>
-<area shape="rect" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79" title=" " alt="" coords="218,5,382,61"/>
-<area shape="poly" title=" " alt="" coords="170,30,202,30,202,36,170,36"/>
+<div class="center"><img src="classiridium_1_1threading_1_1_synchronized_container_a09492b76c7666c230970f3282e0859f4_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1_synchronized_container_a09492b76c7666c230970f3282e0859f4_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1threading_1_1_synchronized_container_a09492b76c7666c230970f3282e0859f4_cgraph" id="aclassiridium_1_1threading_1_1_synchronized_container_a09492b76c7666c230970f3282e0859f4_cgraph">
+<area shape="rect" title="Конструктор." alt="" coords="5,13,170,68"/>
+<area shape="rect" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79" title=" " alt="" coords="218,5,363,76"/>
+<area shape="poly" title=" " alt="" coords="170,38,205,40,199,41,170,43"/>
 </map>
 </div>
 
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="ab0a1f60fad1ef3cf8bc46a53dd1bcf5d" name="ab0a1f60fad1ef3cf8bc46a53dd1bcf5d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab0a1f60fad1ef3cf8bc46a53dd1bcf5d">&#9670;&#160;</a></span>del()</h2>
 
@@ -207,6 +227,8 @@ template&lt;typename TKey, typename TValue&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Удаляет пару "ключ-значение" из контейнера. </p>
 
 </div>
 </div>
@@ -226,6 +248,8 @@ template&lt;typename TKey, typename TValue&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Возвращает значение по ключу из контейнера. </p>
 
 </div>
 </div>
@@ -250,16 +274,29 @@ template&lt;typename TKey, typename TValue&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Устанавливает пару "ключ-значение" в контейнере. </p>
+
 </div>
 </div>
 <hr/>Объявления и описания членов класса находятся в файле:<ul>
-<li>source/iridium/threading/<a class="el" href="synchronized__container_8h_source.html">synchronized_container.h</a></li>
+<li>iridium/threading/<a class="el" href="synchronized__container_8h_source.html">synchronized_container.h</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a href="classiridium_1_1threading_1_1_synchronized_container.html">SynchronizedContainer</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

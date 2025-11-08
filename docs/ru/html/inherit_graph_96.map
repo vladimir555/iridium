@@ -1,0 +1,33 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,646,113,672"/>
+<area shape="rect" id="Node000001" href="$structiridium_1_1_t_container_has_size_method_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d3b8610498e5b86d4cfe251817e736f71.html" title="типаж для проверки наличия метода size() у типа T. Специализация для случая, когда size() существует." alt="" coords="200,256,382,327"/>
+<area shape="poly" id="edge151_Node000000_Node000001" title=" " alt="" coords="58,631,64,571,79,492,92,450,109,409,131,371,159,336,177,321,201,309,198,314,180,325,163,340,136,374,114,412,97,452,85,494,69,571,64,631"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_has_convert_3_01_t_to_00_01_t_from6793cb355db87b20a7719fdad53e7929.html" title=" " alt="" coords="184,350,398,451"/>
+<area shape="poly" id="edge152_Node000000_Node000003" title=" " alt="" coords="66,631,79,594,98,549,125,503,159,461,185,442,182,447,163,465,129,506,103,551,84,596,71,632"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum_3_01_t_00_01std_1_a22352c967e61128065a7bcf54823e30.html" title="типаж для проверки, является ли тип T перечислением, определенным с помощью DEFINE_ENUM...." alt="" coords="161,475,421,545"/>
+<area shape="poly" id="edge153_Node000000_Node000004" title=" " alt="" coords="77,633,113,594,159,556,184,544,181,548,162,560,117,598,82,636"/>
+<area shape="rect" id="Node000005" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_pair_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4.html" title=" " alt="" coords="210,5,372,76"/>
+<area shape="poly" id="edge154_Node000000_Node000005" title=" " alt="" coords="62,631,110,326,138,166,150,113,158,87,181,67,211,54,208,58,184,72,163,90,155,114,143,167,115,327,67,632"/>
+<area shape="rect" id="Node000007" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_05aa78a1002c3c759e047fa0efcd41687.html" title=" " alt="" coords="179,664,402,764"/>
+<area shape="poly" id="edge155_Node000000_Node000007" title=" " alt="" coords="127,673,181,686,177,689,129,678"/>
+<area shape="rect" id="Node000006" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container_3_01fec33ec6a8916ef75c312c88953d79fe.html" title="Метафункция для определения, является ли тип T последовательным контейнером STL." alt="" coords="188,101,394,231"/>
+<area shape="poly" id="edge156_Node000000_Node000006" title=" " alt="" coords="57,630,61,557,74,455,87,400,105,344,128,291,159,242,188,214,186,219,163,245,133,293,110,346,92,401,79,456,66,557,63,631"/>
+<area shape="rect" id="Node000008" href="$structiridium_1_1_t_container_has_size_method.html" title="типаж для проверки наличия метода size() у типа T." alt="" coords="200,788,382,829"/>
+<area shape="poly" id="edge157_Node000000_Node000008" title=" " alt="" coords="75,683,113,731,136,755,162,774,202,793,197,795,159,779,132,759,109,734,76,688"/>
+<area shape="rect" id="Node000009" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_has_convert.html" title=" " alt="" coords="201,853,381,924"/>
+<area shape="poly" id="edge158_Node000000_Node000009" title=" " alt="" coords="69,684,84,721,104,762,130,803,162,839,203,864,198,866,159,843,125,806,99,764,79,723,69,690"/>
+<area shape="rect" id="Node000010" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum.html" title="типаж для проверки, является ли тип T перечислением, определенным с помощью DEFINE_ENUM." alt="" coords="183,948,399,1003"/>
+<area shape="poly" id="edge159_Node000000_Node000010" title=" " alt="" coords="62,685,72,740,89,806,118,875,138,907,162,935,185,952,180,953,159,939,134,910,113,878,84,808,67,741,62,690"/>
+<area shape="rect" id="Node000011" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_pair.html" title=" " alt="" coords="213,1028,369,1083"/>
+<area shape="poly" id="edge160_Node000000_Node000011" title=" " alt="" coords="60,685,66,754,79,841,92,888,109,933,133,976,163,1013,186,1031,215,1044,209,1045,183,1035,159,1017,128,979,104,935,87,889,74,842,60,754,60,691"/>
+<area shape="rect" id="Node000012" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html" title="Метафункция для определения, является ли тип T ассоциативным контейнером STL." alt="" coords="193,1107,389,1177"/>
+<area shape="poly" id="edge161_Node000000_Node000012" title=" " alt="" coords="63,685,78,779,98,900,126,1017,144,1062,163,1094,177,1107,195,1119,190,1119,174,1111,159,1097,139,1065,121,1019,93,901,72,780,63,690"/>
+<area shape="rect" id="Node000013" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html" title="Метафункция для определения, является ли тип T последовательным контейнером STL." alt="" coords="196,569,386,640"/>
+<area shape="poly" id="edge162_Node000000_Node000013" title=" " alt="" coords="126,641,198,625,194,629,129,645"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="8,278,110,304"/>
+<area shape="poly" id="edge163_Node000002_Node000001" title=" " alt="" coords="123,289,202,289,198,293,126,293"/>
+<area shape="poly" id="edge164_Node000002_Node000003" title=" " alt="" coords="101,309,186,349,181,352,103,314"/>
+<area shape="poly" id="edge165_Node000002_Node000004" title=" " alt="" coords="69,316,105,389,131,428,162,461,178,473,173,475,159,465,126,431,100,392,70,321"/>
+<area shape="poly" id="edge166_Node000002_Node000005" title=" " alt="" coords="64,263,77,224,96,177,123,129,159,87,182,70,211,58,208,62,185,74,162,91,127,132,101,179,82,226,70,264"/>
+<area shape="poly" id="edge167_Node000002_Node000006" title=" " alt="" coords="96,269,189,220,186,224,100,272"/>
+</map>

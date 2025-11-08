@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Члены классов</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,35 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
 </div><!-- top -->
-<div id="doc-content">
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('functions_p.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -85,14 +116,16 @@ $(function(){ initResizable(false); });
 </div>
 
 <div class="contents">
-<div class="textblock">Список всех членов классов со ссылками на классы, к которым они принадлежат.</div>
+<div class="textblock">Список всех членов классов со ссылками на классы, к которым они принадлежат.</div><br/>
+<div class="qindex"><a class="qindex" href="functions.html#index_a">A</a><div class="alphasepar"></div><a class="qindex" href="functions_b.html#index_b">B</a><div class="alphasepar"></div><a class="qindex" href="functions_c.html#index_c">C</a><div class="alphasepar"></div><a class="qindex" href="functions_d.html#index_d">D</a><div class="alphasepar"></div><a class="qindex" href="functions_e.html#index_e">E</a><div class="alphasepar"></div><a class="qindex" href="functions_f.html#index_f">F</a><div class="alphasepar"></div><a class="qindex" href="functions_g.html#index_g">G</a><div class="alphasepar"></div><a class="qindex" href="functions_h.html#index_h">H</a><div class="alphasepar"></div><a class="qindex" href="functions_i.html#index_i">I</a><div class="alphasepar"></div><a class="qindex" href="functions_l.html#index_l">L</a><div class="alphasepar"></div><a class="qindex" href="functions_m.html#index_m">M</a><div class="alphasepar"></div><a class="qindex" href="functions_n.html#index_n">N</a><div class="alphasepar"></div><a class="qindex" href="functions_o.html#index_o">O</a><div class="alphasepar"></div><a class="qindex" href="functions_p.html#index_p">P</a><div class="alphasepar"></div><a class="qindex" href="functions_r.html#index_r">R</a><div class="alphasepar"></div><a class="qindex" href="functions_s.html#index_s">S</a><div class="alphasepar"></div><a class="qindex" href="functions_t.html#index_t">T</a><div class="alphasepar"></div><a class="qindex" href="functions_u.html#index_u">U</a><div class="alphasepar"></div><a class="qindex" href="functions_v.html#index_v">V</a><div class="alphasepar"></div><a class="qindex" href="functions_w.html#index_w">W</a><div class="alphasepar"></div><a class="qindex" href="functions_~.html#index_~">~</a></div>
 
-<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+
+<h3 class="doxsection"><a id="index_p" name="index_p"></a>- p -</h3><ul>
 <li>parse()&#160;:&#160;<a class="el" href="class_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e">CJSONParser</a>, <a class="el" href="class_c_x_m_l_parser.html#af669055119c5d12ccd5021dfafb275c0">CXMLParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ac1fb6e1887342ca64f9da42ba9897ed2">iridium::parsing::implementation::CHTTPParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e">iridium::parsing::implementation::CJSONParser</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#af669055119c5d12ccd5021dfafb275c0">iridium::parsing::implementation::CXMLParser</a>, <a class="el" href="classiridium_1_1parsing_1_1_i_parser.html#a45eb174bece5cdd6c5e231a439e0a109">iridium::parsing::IParser</a></li>
 <li>pattern::Singleton&lt; Logger &gt;&#160;:&#160;<a class="el" href="classiridium_1_1logging_1_1_logger.html#a2f71b1348565d2731ca9a0f8ff35a786">iridium::logging::Logger</a></li>
 <li>pattern::Singleton&lt; MIME &gt;&#160;:&#160;<a class="el" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html#a2d0c6f4fd3122c61779037ff7f917123">iridium::io::protocol::http::implementation::MIME</a></li>
 <li>pattern::Singleton&lt; Tester &gt;&#160;:&#160;<a class="el" href="classiridium_1_1testing_1_1_tester.html#a782c036188c1a547ba9974b1139f3bc2">iridium::testing::Tester</a></li>
-<li>pop()&#160;:&#160;<a class="el" href="class_c_async_queue.html#ad245928ad3300f5e32a441ce172e98fe">CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="class_c_worker.html#acfc148093eb34bc2e61070d8951c5eb2">CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pool.html#ad9db436340b01882fe115b4bf0f62e33">CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#a69e6f12074937e6f482f8e688df03d2e">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html#ad245928ad3300f5e32a441ce172e98fe">iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html#acfc148093eb34bc2e61070d8951c5eb2">iridium::threading::implementation::CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#ad9db436340b01882fe115b4bf0f62e33">iridium::threading::implementation::CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#a9db06f4c06672f7516e0bbb43a74c244">iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html#a99cf0ddd4e66931645f2e4bc993f7279">iridium::threading::implementation::CWorkerPopper&lt; TItem &gt;</a></li>
+<li>pop()&#160;:&#160;<a class="el" href="class_c_async_queue.html#a5adbda2058b4457cb3956ef593f0bdfc">CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="class_c_worker.html#aff3659883efcfd36d7fcf8b371d2fe16">CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="class_c_worker_pool.html#ac31b2760f623d103dc1ba8a4fa2e47fa">CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#aa693ab6107a6faca36d0db9a5a30a044">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html#a5adbda2058b4457cb3956ef593f0bdfc">iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html#aff3659883efcfd36d7fcf8b371d2fe16">iridium::threading::implementation::CWorker&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#ac31b2760f623d103dc1ba8a4fa2e47fa">iridium::threading::implementation::CWorkerPool&lt; TInputItem, TOutputItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#adb3b009b6ebd46f20e9c1f3d2ea10f9d">iridium::threading::implementation::CWorkerPoolPopper&lt; TItem &gt;</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html#a1b78e1df6cd75af95811a999e5ea92f4">iridium::threading::implementation::CWorkerPopper&lt; TItem &gt;</a></li>
 <li>popEvents()&#160;:&#160;<a class="el" href="classiridium_1_1io_1_1_i_context.html#acde072caf3295af0a615a9078b17d7d7">iridium::io::IContext</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a722e705f52d435f3d0305d2b923540a4">iridium::io::implementation::CContext</a></li>
 <li>print_result&#160;:&#160;<a class="el" href="structiridium_1_1testing_1_1_t_cmd_args.html#a75b7aa213293d43696b86efa24d7f027">iridium::testing::TCmdArgs</a></li>
 <li>protocol&#160;:&#160;<a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">iridium::io::protocol::http::request::TMessageLine</a>, <a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line.html#ac6ebd4d58f0e980cbf5f8ce7753f7126">iridium::io::protocol::http::response::TMessageLine</a></li>
@@ -100,10 +133,13 @@ $(function(){ initResizable(false); });
 <li>pushEvent()&#160;:&#160;<a class="el" href="classiridium_1_1io_1_1_i_context.html#ae4372b35cd3b2ea07a2d383b10eda5cf">iridium::io::IContext</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#a3f83d0ab5d40ec79b2f235d0a7a2c12a">iridium::io::implementation::CContext</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

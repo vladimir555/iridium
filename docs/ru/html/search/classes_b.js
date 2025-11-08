@@ -7,5 +7,6 @@ var searchData=
   ['singleton_3c_20tester_20_3e_4',['Singleton&lt; Tester &gt;',['../classiridium_1_1pattern_1_1_singleton.html',1,'iridium::pattern']]],
   ['synchronized_5',['Synchronized',['../classiridium_1_1threading_1_1_synchronized.html',1,'iridium::threading::Synchronized&lt; TMutex, is_tracable &gt;'],['../class_synchronized.html',1,'Synchronized&lt; TMutex, is_tracable &gt;']]],
   ['synchronized_3c_20std_3a_3amutex_20_3e_6',['Synchronized&lt; std::mutex &gt;',['../classiridium_1_1threading_1_1_synchronized.html',1,'iridium::threading']]],
-  ['synchronizedcontainer_7',['SynchronizedContainer',['../classiridium_1_1threading_1_1_synchronized_container.html',1,'iridium::threading']]]
+  ['synchronized_3c_20std_3a_3arecursive_5fmutex_20_3e_7',['Synchronized&lt; std::recursive_mutex &gt;',['../classiridium_1_1threading_1_1_synchronized.html',1,'iridium::threading']]],
+  ['synchronizedcontainer_8',['SynchronizedContainer',['../classiridium_1_1threading_1_1_synchronized_container.html',1,'iridium::threading']]]
 ];

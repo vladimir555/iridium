@@ -1,11 +1,11 @@
-<map id="source/iridium/threading/async_queue.h" name="source/iridium/threading/async_queue.h">
-<area shape="rect" id="Node000001" title="Определяет интерфейсы для асинхронных очередей, включая функциональность добавления,..." alt="" coords="18,5,178,46"/>
+<map id="iridium/threading/async_queue.h" name="iridium/threading/async_queue.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,5,176,46"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,94,44,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,48,48,84,44,81,78,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,49,48,84,44,81,81,44"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="68,94,128,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,46,101,78,95,78,95,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="99,44,100,79,95,78,97,49"/>
 <area shape="rect" id="Node000004" href="$smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="152,94,281,120"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,44,187,83,184,87,126,49"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="128,44,188,84,183,86,127,49"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="182,168,251,193"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="219,120,219,152,214,152,214,120"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="218,118,219,153,214,150,215,122"/>
 </map>

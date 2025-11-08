@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Класс CTestRunnerRaw</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,33 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_c_test_runner_raw.html','','class_c_test_runner_raw-members'); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,54 +115,45 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Открытые члены</a> &#124;
-<a href="class_c_test_runner_raw-members.html">Полный список членов класса</a>  </div>
   <div class="headertitle"><div class="title">Класс CTestRunnerRaw</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="test__runner__raw_8h_source.html">test_runner_raw.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="test__runner__raw_8h_source.html">iridium/testing/implementation/test_runner_raw.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:CTestRunnerRaw:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_c_test_runner_raw__inherit__graph.png" border="0" usemap="#a_c_test_runner_raw_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="class_c_test_runner_raw__inherit__graph.png" border="0" usemap="#a_c_test_runner_raw_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="a_c_test_runner_raw_inherit__map" id="a_c_test_runner_raw_inherit__map">
 <area shape="rect" title=" " alt="" coords="35,79,161,105"/>
-<area shape="rect" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа..." alt="" coords="5,5,191,31"/>
-<area shape="poly" title=" " alt="" coords="101,46,101,79,95,79,95,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Любой стандартный вывод, захваченный от тестового случая во время его выполнения." alt="" coords="5,5,191,31"/>
+<area shape="poly" title=" " alt="" coords="100,45,100,80,96,77,96,48"/>
 </map>
-<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">см. легенду</a>]</span></center></div>
 <div class="dynheader">
 Граф связей класса CTestRunnerRaw:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_c_test_runner_raw__coll__graph.png" border="0" usemap="#a_c_test_runner_raw_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="class_c_test_runner_raw__coll__graph.png" border="0" usemap="#a_c_test_runner_raw_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_c_test_runner_raw_coll__map" id="a_c_test_runner_raw_coll__map">
 <area shape="rect" title=" " alt="" coords="35,79,161,105"/>
-<area shape="rect" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа..." alt="" coords="5,5,191,31"/>
-<area shape="poly" title=" " alt="" coords="101,46,101,79,95,79,95,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Любой стандартный вывод, захваченный от тестового случая во время его выполнения." alt="" coords="5,5,191,31"/>
+<area shape="poly" title=" " alt="" coords="100,45,100,80,96,77,96,48"/>
 </map>
-<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:aa5b349e0c704f3c502e04b8039c5e5a5" id="r_aa5b349e0c704f3c502e04b8039c5e5a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa5b349e0c704f3c502e04b8039c5e5a5">CTestRunnerRaw</a> ()=default</td></tr>
-<tr class="separator:aa5b349e0c704f3c502e04b8039c5e5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2031938520135a6971741b7835335f0d" id="r_a2031938520135a6971741b7835335f0d"><td class="memItemLeft" align="right" valign="top">TResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2031938520135a6971741b7835335f0d">run</a> (INodeTest::TSharedPtr const &amp;node_test) override</td></tr>
-<tr class="memdesc:a2031938520135a6971741b7835335f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запускает тесты, определенные в предоставленной структуре узлов или под ней.  <br /></td></tr>
-<tr class="separator:a2031938520135a6971741b7835335f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b349e0c704f3c502e04b8039c5e5a5" id="r_aa5b349e0c704f3c502e04b8039c5e5a5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa5b349e0c704f3c502e04b8039c5e5a5">CTestRunnerRaw</a> ()=default</td></tr>
+<tr class="memitem:ab059a70f1b076a36b25eb681cf05ce33" id="r_ab059a70f1b076a36b25eb681cf05ce33"><td class="memItemLeft">TTestRunResult&#160;</td><td class="memItemRight"><a class="el" href="#ab059a70f1b076a36b25eb681cf05ce33">run</a> (IUnitTestCaseNode::TSharedPtr const &amp;node_test) override</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Дополнительные унаследованные члены</h2></td></tr>
-<tr class="inherit_header pub_types_classiridium_1_1testing_1_1_i_test_runner"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1testing_1_1_i_test_runner')"><img src="closed.png" alt="-"/>&#160;Открытые типы унаследованные от <a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html">iridium::testing::ITestRunner</a></td></tr>
-<tr class="memitem:a6f76411f51c9be0b444368e536828c22 inherit pub_types_classiridium_1_1testing_1_1_i_test_runner" id="r_a6f76411f51c9be0b444368e536828c22"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">parsing::INodeType</a>&lt; <a class="el" href="classiridium_1_1testing_1_1_i_test.html">ITest</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html#a6f76411f51c9be0b444368e536828c22">INodeTest</a></td></tr>
-<tr class="memdesc:a6f76411f51c9be0b444368e536828c22 inherit pub_types_classiridium_1_1testing_1_1_i_test_runner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет общие элементы интерфейса для <code><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа...">ITestRunner</a></code>, такие как typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.).  <br /></td></tr>
-<tr class="separator:a6f76411f51c9be0b444368e536828c22 inherit pub_types_classiridium_1_1testing_1_1_i_test_runner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classiridium_1_1testing_1_1_i_test_runner"><td colspan="2">Открытые типы унаследованные от <a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html">iridium::testing::ITestRunner</a></td></tr>
+<tr class="memitem:ac36bf7b4a038226f01a6487876e5f7b7 pub_types_classiridium_1_1testing_1_1_i_test_runner" id="r_ac36bf7b4a038226f01a6487876e5f7b7"><td class="memItemLeft">typedef <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html">parsing::INodeType</a>&lt; <a class="el" href="classiridium_1_1testing_1_1_i_unit_test_case.html">IUnitTestCase</a> * &gt;&#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html#ac36bf7b4a038226f01a6487876e5f7b7">IUnitTestCaseNode</a></td></tr>
+<tr class="memdesc:ac36bf7b4a038226f01a6487876e5f7b7 pub_types_classiridium_1_1testing_1_1_i_test_runner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет общие элементы интерфейса для <span class="tt"><a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Любой стандартный вывод, захваченный от тестового случая во время его выполнения.">ITestRunner</a></span>, такие как typedef-ы умных указателей (<span class="tt">TSharedPtr</span>, <span class="tt">TWeakPtr</span> и т.д.).  <br /></td></tr>
 </table>
-<h2 class="groupheader">Конструктор(ы)</h2>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="aa5b349e0c704f3c502e04b8039c5e5a5" name="aa5b349e0c704f3c502e04b8039c5e5a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5b349e0c704f3c502e04b8039c5e5a5">&#9670;&#160;</a></span>CTestRunnerRaw()</h2>
 
@@ -140,7 +164,7 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::testing::implementation::CTestRunnerRaw::CTestRunnerRaw </td>
+          <td class="memname"><a class="el" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_raw.html#aa5b349e0c704f3c502e04b8039c5e5a5">iridium::testing::implementation::CTestRunnerRaw::CTestRunnerRaw</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -155,9 +179,9 @@ $(function(){ initResizable(false); });
 
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
-<a id="a2031938520135a6971741b7835335f0d" name="a2031938520135a6971741b7835335f0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2031938520135a6971741b7835335f0d">&#9670;&#160;</a></span>run()</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="ab059a70f1b076a36b25eb681cf05ce33" name="ab059a70f1b076a36b25eb681cf05ce33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab059a70f1b076a36b25eb681cf05ce33">&#9670;&#160;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,9 +190,9 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TResult iridium::testing::implementation::CTestRunnerRaw::run </td>
+          <td class="memname">TTestRunResult <a class="el" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_raw.html#ab059a70f1b076a36b25eb681cf05ce33">iridium::testing::implementation::CTestRunnerRaw::run</a> </td>
           <td>(</td>
-          <td class="paramtype">INodeTest::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>node_test</em></span></td><td>)</td>
+          <td class="paramtype">IUnitTestCaseNode::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>node_test</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -179,28 +203,30 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Запускает тесты, определенные в предоставленной структуре узлов или под ней. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">node_test</td><td>Разделяемый указатель на корневой узел набора тестов или структуры отдельного тестового случая. Средство запуска обычно обходит это дерево узлов для поиска и выполнения экземпляров <code>ITest</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Объект <code>TResult</code>, содержащий результаты всех выполненных тестов. </dd></dl>
-
-<p>Замещает <a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html#a7930c1697aa7258320e85f9923fb7f95">iridium::testing::ITestRunner</a>.</p>
+<p>Замещает <a class="el" href="classiridium_1_1testing_1_1_i_test_runner.html#a3416045547448bd6be4408bb3f862836">iridium::testing::ITestRunner</a>.</p>
 
 </div>
 </div>
 <hr/>Объявления и описания членов классов находятся в файлах:<ul>
-<li>source/iridium/testing/implementation/<a class="el" href="test__runner__raw_8h_source.html">test_runner_raw.h</a></li>
-<li>source/iridium/testing/implementation/<a class="el" href="test__runner__raw_8cpp.html">test_runner_raw.cpp</a></li>
+<li>iridium/testing/implementation/<a class="el" href="test__runner__raw_8h_source.html">test_runner_raw.h</a></li>
+<li>iridium/testing/implementation/<a class="el" href="test__runner__raw_8cpp.html">test_runner_raw.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_c_test_runner_raw.html">CTestRunnerRaw</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

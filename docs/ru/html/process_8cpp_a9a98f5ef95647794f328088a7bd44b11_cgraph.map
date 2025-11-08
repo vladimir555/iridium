@@ -1,0 +1,7 @@
+<map id="IMPLEMENT_CONVERT" name="IMPLEMENT_CONVERT">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,178,31"/>
+<area shape="rect" id="Node000002" href="$process_8cpp.html#a5f668d3c33ec17c99a446cb90f404681" title=" " alt="" coords="226,5,292,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,16,213,18,207,18,178,21"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="340,5,404,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="292,16,327,18,322,18,292,21"/>
+</map>

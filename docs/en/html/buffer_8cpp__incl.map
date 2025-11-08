@@ -1,31 +1,43 @@
-<map id="source/iridium/io/buffer.cpp" name="source/iridium/io/buffer.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,183,31"/>
-<area shape="rect" id="Node000002" href="$buffer_8h.html" title=" " alt="" coords="184,79,249,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,29,184,69,182,73,113,34"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="6,315,59,341"/>
-<area shape="poly" id="edge16_Node000001_Node000006" title=" " alt="" coords="94,32,41,300,35,299,89,31"/>
-<area shape="rect" id="Node000003" href="$convert_8h.html" title="Public interface for the Iridium type conversion framework. Provides access to conversion functions a..." alt="" coords="212,153,336,193"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="228,104,253,138,249,142,223,107"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="528,315,567,341"/>
-<area shape="poly" id="edge15_Node000002_Node000005" title=" " alt="" coords="250,96,310,111,385,138,424,157,461,180,495,207,524,240,539,269,547,299,542,300,534,271,520,243,491,211,458,184,421,161,383,143,308,116,249,101"/>
-<area shape="poly" id="edge14_Node000002_Node000006" title=" " alt="" coords="189,108,155,127,121,154,103,181,82,221,46,302,41,300,78,219,99,178,117,151,152,123,187,103"/>
-<area shape="rect" id="Node000012" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="382,241,510,267"/>
-<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="250,102,298,122,349,150,394,189,429,228,425,231,390,193,346,155,296,127,248,107"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="131,160,188,186"/>
-<area shape="poly" id="edge13_Node000002_Node000013" title=" " alt="" coords="210,107,179,149,175,146,206,104"/>
-<area shape="rect" id="Node000004" href="$implementation_2convert_8h.html" title="Core implementation details for the Iridium type conversion framework. Defines the primary convert fu..." alt="" coords="190,241,358,267"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="277,194,277,226,271,226,271,194"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="332,265,415,284,514,312,513,317,413,290,331,270"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="233,270,75,317,74,312,232,265"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="84,315,144,341"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="248,270,156,311,154,306,246,265"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="168,315,225,341"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="263,270,223,306,219,302,259,266"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="436,315,504,341"/>
-<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="308,265,424,307,422,312,306,270"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="249,315,310,341"/>
-<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="278,267,280,299,275,300,272,267"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="334,315,412,341"/>
-<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="292,265,346,304,342,308,289,270"/>
-<area shape="poly" id="edge12_Node000012_Node000009" title=" " alt="" coords="452,266,464,299,459,301,447,268"/>
+<map id="iridium/io/buffer.cpp" name="iridium/io/buffer.cpp">
+<area shape="rect" id="Node000001" title="Implements the Buffer class." alt="" coords="217,5,351,31"/>
+<area shape="rect" id="Node000002" href="$buffer_8h.html" title="Defines the Buffer class for handling raw binary data." alt="" coords="252,79,316,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,29,287,64,281,62,283,34"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="37,389,91,414"/>
+<area shape="poly" id="edge22_Node000001_Node000007" title=" " alt="" coords="214,29,149,44,114,56,81,71,52,89,29,112,14,139,8,172,8,255,12,289,22,321,50,375,45,376,17,323,7,290,3,256,3,171,8,138,25,109,49,85,79,66,112,51,148,39,218,25"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="340,79,404,105"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="299,29,348,69,343,70,299,34"/>
+<area shape="rect" id="Node000003" href="$convert_8h.html" title=" " alt="" coords="173,153,296,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="278,103,257,141,253,138,275,107"/>
+<area shape="poly" id="edge20_Node000002_Node000007" title=" " alt="" coords="249,104,206,123,183,137,163,155,143,180,125,209,98,270,80,328,70,374,66,372,75,326,93,268,120,206,138,177,159,151,180,133,204,118,253,100"/>
+<area shape="rect" id="Node000015" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="644,241,772,267"/>
+<area shape="poly" id="edge17_Node000002_Node000015" title=" " alt="" coords="290,102,317,148,337,172,361,191,409,209,478,224,631,245,626,247,477,229,407,214,359,196,333,175,313,151,289,108"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="371,160,429,186"/>
+<area shape="poly" id="edge19_Node000002_Node000016" title=" " alt="" coords="302,102,372,151,367,152,301,108"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="453,160,491,186"/>
+<area shape="poly" id="edge21_Node000002_Node000017" title=" " alt="" coords="316,101,372,121,443,153,438,154,370,126,317,106"/>
+<area shape="rect" id="Node000004" href="$implementation_2convert_8h.html" title="Declares specializations of the TConvert template for various types." alt="" coords="264,241,432,267"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="263,191,321,232,316,233,262,196"/>
+<area shape="rect" id="Node000005" href="$common_8h.html" title="Provides common metafunctions and conversion implementations for the type conversion framework." alt="" coords="144,315,226,341"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="318,269,228,311,226,306,323,266"/>
+<area shape="poly" id="edge9_Node000004_Node000007" title=" " alt="" coords="262,267,198,286,164,300,134,317,103,345,80,377,76,373,99,342,130,313,162,295,196,281,266,265"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="226,389,294,414"/>
+<area shape="poly" id="edge15_Node000004_Node000008" title=" " alt="" coords="343,266,277,377,273,374,338,268"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="318,389,386,414"/>
+<area shape="poly" id="edge12_Node000004_Node000009" title=" " alt="" coords="347,266,343,301,343,340,348,375,343,372,337,341,338,300,344,270"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="352,315,413,341"/>
+<area shape="poly" id="edge10_Node000004_Node000010" title=" " alt="" coords="355,265,373,302,368,300,353,270"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="437,315,494,341"/>
+<area shape="poly" id="edge11_Node000004_Node000011" title=" " alt="" coords="368,265,435,307,430,307,367,270"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="518,315,578,341"/>
+<area shape="poly" id="edge13_Node000004_Node000012" title=" " alt="" coords="382,265,506,310,500,311,382,270"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="602,315,680,341"/>
+<area shape="poly" id="edge14_Node000004_Node000013" title=" " alt="" coords="398,265,589,313,584,314,398,270"/>
+<area shape="rect" id="Node000014" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="705,315,826,341"/>
+<area shape="poly" id="edge16_Node000004_Node000014" title=" " alt="" coords="419,265,692,313,687,315,419,270"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="119,389,201,414"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="183,339,171,376,167,372,179,342"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="167,341,99,383,97,378,162,342"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="199,339,239,378,234,378,197,344"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="214,339,312,382,307,383,213,344"/>
+<area shape="poly" id="edge18_Node000015_Node000009" title=" " alt="" coords="758,265,796,278,829,295,841,305,848,316,848,329,841,343,817,355,775,365,654,382,516,393,402,400,402,395,516,388,654,376,774,360,816,350,837,339,843,328,843,318,837,308,826,299,794,283,757,270"/>
 </map>

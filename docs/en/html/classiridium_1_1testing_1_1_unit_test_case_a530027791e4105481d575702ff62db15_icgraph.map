@@ -1,0 +1,31 @@
+<map id="iridium::testing::UnitTestCase::fail" name="iridium::testing::UnitTestCase::fail">
+<area shape="rect" id="Node000001" title=" " alt="" coords="217,431,380,471"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test_case.html#a9370155b417fe376069cb269aebb0364" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,415,284,343,263,248,247,198,226,149,199,102,167,61,154,49,153,44,171,57,204,100,230,147,252,196,268,247,289,342,298,416"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_unit_test_case.html#aa618442ce7e12a8ac2f52771e2a69339" title=" " alt="" coords="5,71,169,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,415,277,354,255,277,219,197,195,160,167,126,154,114,152,109,171,122,199,157,223,194,260,275,283,353,295,416"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1testing_1_1_unit_test_case.html#aade590db062fd09cd25425524c9798c7" title=" " alt="" coords="5,136,169,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="286,415,270,367,246,307,212,245,191,217,167,192,152,180,151,175,170,188,195,214,216,243,251,305,275,365,291,416"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1testing_1_1_unit_test_case.html#a87495df1df7e5c61c59824539690a902" title=" " alt="" coords="5,201,169,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="280,417,236,338,204,295,167,257,151,245,149,240,170,253,208,291,240,335,285,416"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1testing_1_1_unit_test_case.html#ad7ac197067845ef5d0bd8c97d774017e" title=" " alt="" coords="5,267,169,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="269,419,224,371,167,323,148,310,146,306,170,318,228,367,274,418"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_unit_test_case.html#a69288471d33daed738d4265c75cfc9e6" title=" " alt="" coords="5,332,169,373"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="243,425,168,388,141,376,139,371,170,383,247,422"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1testing_1_1_unit_test_case.html#a1f9170f4c5aaf159df5057ba9e6dfb31" title=" " alt="" coords="5,397,169,438"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="199,437,170,433,168,428,204,434"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_unit_test_case.html#a526d7eaad07a38339c210e9f98a0f5fa" title=" " alt="" coords="5,463,169,503"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="199,467,171,473,168,468,203,464"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1testing_1_1_unit_test_case.html#ad6fa5749ccda763364769965e80d9931" title=" " alt="" coords="5,528,169,569"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="242,481,170,517,142,529,139,525,168,513,245,477"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1testing_1_1_unit_test_case.html#a92213ebbfeee2cb12e29e2b5d7fea929" title=" " alt="" coords="5,593,169,634"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="270,486,228,535,170,583,148,595,144,591,167,578,224,531,273,482"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1testing_1_1_unit_test_case.html#a988e9485970d0db2f964c09b0fd58ad3" title=" " alt="" coords="5,659,169,699"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="284,483,240,566,208,610,170,648,152,660,148,656,167,644,204,606,236,563,281,488"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1testing_1_1_unit_test_case.html#abaea5257ce99169b593c70559270adc4" title=" " alt="" coords="5,724,169,765"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="289,484,275,537,250,597,216,659,195,687,170,713,153,725,150,721,167,709,190,684,211,656,245,595,270,535,287,489"/>
+<area shape="rect" id="Node000014" href="$namespaceiridium_1_1testing.html#a0adba9967a0a036c182420638083eda7" title=" " alt="" coords="12,788,162,844"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="293,484,281,548,258,625,222,705,198,744,171,778,157,790,154,786,167,774,194,740,217,703,253,623,276,546,290,489"/>
+<area shape="rect" id="Node000015" href="$namespaceiridium_1_1testing.html#ae72cd522c70451a9faa842c7485d6ec6" title=" " alt="" coords="21,868,153,909"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="297,485,290,563,270,661,254,714,232,765,205,814,171,858,154,871,152,866,167,854,200,811,227,763,249,712,265,660,285,562,294,489"/>
+</map>

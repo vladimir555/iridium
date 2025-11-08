@@ -1,15 +1,17 @@
-<map id="source/iridium/strings.cpp" name="source/iridium/strings.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="124,5,294,31"/>
-<area shape="rect" id="Node000002" href="$strings_8h.html" title=" " alt="" coords="76,79,148,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,34,142,72,139,68,191,29"/>
+<map id="iridium/strings.cpp" name="iridium/strings.cpp">
+<area shape="rect" id="Node000001" title="Implements a set of utility functions for string manipulation." alt="" coords="190,5,317,31"/>
+<area shape="rect" id="Node000002" href="$strings_8h.html" title="Provides a set of utility functions for string manipulation." alt="" coords="76,79,148,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,33,151,74,148,69,232,30"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="172,79,246,105"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="212,31,212,63,207,63,207,31"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="248,30,227,67,223,64,244,33"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="271,79,326,105"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="226,29,273,67,270,71,223,34"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="262,29,286,66,280,65,260,34"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="351,79,428,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="277,29,355,71,350,72,276,34"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,153,59,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,107,58,144,55,140,97,103"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,104,58,144,55,140,96,106"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="83,153,141,178"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="115,105,115,137,109,137,109,105"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="114,103,114,138,110,136,110,107"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="165,153,203,178"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="126,103,163,140,159,143,122,107"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="125,102,164,141,158,142,123,107"/>
 </map>

@@ -3,19 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Iridium: Файл source/iridium/parsing/node.cpp</title>
+<title>Iridium: Файл iridium/parsing/node.cpp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +30,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,33 +39,61 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.17.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
 });
-/* @license-end */
 </script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('node_8cpp.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,12 +115,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_3598e8d03f058449899ac524faf1a451.html">parsing</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">Файл node.cpp</div></div>
 </div><!--header-->
@@ -96,46 +123,67 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для node.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="node_8cpp__incl.png" border="0" usemap="#asource_2iridium_2parsing_2node_8cpp" alt=""/></div>
-<map name="asource_2iridium_2parsing_2node_8cpp" id="asource_2iridium_2parsing_2node_8cpp">
-<area shape="rect" title=" " alt="" coords="151,5,300,46"/>
-<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="195,94,256,120"/>
-<area shape="poly" title=" " alt="" coords="228,46,228,78,223,78,223,46"/>
-<area shape="rect" href="node__type_8h.html" title="Определяет шаблонный интерфейс INodeType&lt;TValue&gt; для обобщенных узлов дерева. Этот интерфейс является..." alt="" coords="179,168,272,193"/>
-<area shape="poly" title=" " alt="" coords="228,120,228,152,223,152,223,120"/>
-<area shape="rect" title=" " alt="" coords="5,404,59,429"/>
-<area shape="poly" title=" " alt="" coords="197,196,162,216,127,243,98,279,75,319,43,390,38,388,70,317,94,276,123,239,159,211,195,192"/>
-<area shape="rect" title=" " alt="" coords="82,404,121,429"/>
-<area shape="poly" title=" " alt="" coords="206,196,179,216,154,243,135,280,121,319,107,389,101,388,116,318,130,278,150,240,175,212,203,192"/>
-<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="164,241,287,282"/>
-<area shape="poly" title=" " alt="" coords="228,194,228,226,223,226,223,194"/>
-<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="311,249,484,274"/>
-<area shape="poly" title=" " alt="" coords="253,192,358,240,356,244,251,196"/>
-<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="457,330,586,356"/>
-<area shape="poly" title=" " alt="" coords="272,184,398,202,458,218,481,228,498,239,510,256,518,276,524,314,519,315,513,277,506,259,494,243,479,233,456,223,397,208,271,189"/>
-<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="156,330,324,356"/>
-<area shape="poly" title=" " alt="" coords="232,282,238,314,232,315,226,283"/>
-<area shape="poly" title=" " alt="" coords="206,359,74,404,72,399,204,354"/>
-<area shape="poly" title=" " alt="" coords="218,359,135,401,133,396,215,354"/>
-<area shape="rect" title=" " alt="" coords="412,404,473,429"/>
-<area shape="poly" title=" " alt="" coords="275,354,399,397,397,402,273,359"/>
-<area shape="rect" title=" " alt="" coords="145,404,202,429"/>
-<area shape="poly" title=" " alt="" coords="231,358,197,394,193,390,227,354"/>
-<area shape="rect" title=" " alt="" coords="496,404,565,429"/>
-<area shape="poly" title=" " alt="" coords="291,354,482,400,481,405,290,359"/>
-<area shape="rect" title=" " alt="" coords="226,404,286,429"/>
-<area shape="poly" title=" " alt="" coords="245,355,253,388,247,389,240,356"/>
-<area shape="rect" title=" " alt="" coords="310,404,388,429"/>
-<area shape="poly" title=" " alt="" coords="260,354,320,393,317,397,257,358"/>
-<area shape="poly" title=" " alt="" coords="418,273,491,319,488,324,415,277"/>
-<area shape="poly" title=" " alt="" coords="526,356,530,388,524,389,520,356"/>
+<div class="center"><img src="node_8cpp__incl.png" border="0" usemap="#airidium_2parsing_2node_8cpp" loading="lazy" alt=""/></div>
+<map name="airidium_2parsing_2node_8cpp" id="airidium_2parsing_2node_8cpp">
+<area shape="rect" title=" " alt="" coords="526,5,688,31"/>
+<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="577,79,637,105"/>
+<area shape="poly" title=" " alt="" coords="608,29,610,64,605,62,606,34"/>
+<area shape="rect" href="node__type_8h.html" title=" " alt="" coords="561,153,653,178"/>
+<area shape="poly" title=" " alt="" coords="609,103,610,138,605,136,606,107"/>
+<area shape="rect" title=" " alt="" coords="473,462,526,488"/>
+<area shape="poly" title=" " alt="" coords="558,168,442,179,367,191,288,210,208,238,132,276,98,300,66,326,37,356,12,390,8,402,12,413,23,423,42,432,97,447,167,457,326,469,459,474,454,474,326,474,167,463,95,452,40,437,20,427,7,416,3,402,7,387,33,353,62,322,94,295,130,272,206,233,286,205,366,186,442,173,563,166"/>
+<area shape="rect" title=" " alt="" coords="768,234,806,260"/>
+<area shape="poly" title=" " alt="" coords="638,176,751,224,757,229,752,228,749,229,638,182"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="374,226,497,267"/>
+<area shape="poly" title=" " alt="" coords="578,180,493,222,491,217,583,178"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="521,234,693,260"/>
+<area shape="poly" title=" " alt="" coords="609,177,610,219,605,217,606,181"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="667,315,795,341"/>
+<area shape="poly" title=" " alt="" coords="640,176,677,196,708,225,726,262,732,301,728,298,720,264,704,228,674,200,640,182"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="352,315,519,341"/>
+<area shape="poly" title=" " alt="" coords="437,265,438,301,433,298,434,270"/>
+<area shape="poly" title=" " alt="" coords="460,339,488,359,511,387,516,403,517,419,511,450,507,446,511,419,510,404,506,390,485,363,459,344"/>
+<area shape="rect" href="common_8h.html" title="Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов." alt="" coords="571,389,654,414"/>
+<area shape="poly" title=" " alt="" coords="466,339,571,382,566,383,465,344"/>
+<area shape="rect" title=" " alt="" coords="657,462,725,488"/>
+<area shape="poly" title=" " alt="" coords="519,328,558,334,597,345,635,362,668,387,678,400,685,415,692,448,688,445,680,417,674,403,664,391,632,367,595,350,557,340,519,334"/>
+<area shape="rect" title=" " alt="" coords="749,462,817,488"/>
+<area shape="poly" title=" " alt="" coords="519,335,606,353,651,367,694,386,735,416,767,451,762,449,731,420,691,391,649,372,605,358,519,340"/>
+<area shape="rect" title=" " alt="" coords="22,389,83,414"/>
+<area shape="poly" title=" " alt="" coords="350,343,236,363,99,390,97,385,235,358,354,340"/>
+<area shape="rect" title=" " alt="" coords="107,389,164,414"/>
+<area shape="poly" title=" " alt="" coords="377,344,180,390,178,385,379,339"/>
+<area shape="rect" title=" " alt="" coords="188,389,248,414"/>
+<area shape="poly" title=" " alt="" coords="396,342,264,388,262,383,401,340"/>
+<area shape="rect" title=" " alt="" coords="272,389,350,414"/>
+<area shape="poly" title=" " alt="" coords="417,340,346,383,344,378,412,342"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="375,389,496,414"/>
+<area shape="poly" title=" " alt="" coords="437,339,437,374,433,371,434,343"/>
+<area shape="poly" title=" " alt="" coords="596,414,532,456,530,451,591,416"/>
+<area shape="rect" title=" " alt="" coords="550,462,632,488"/>
+<area shape="poly" title=" " alt="" coords="611,413,601,449,597,445,607,416"/>
+<area shape="poly" title=" " alt="" coords="627,412,669,452,664,451,625,417"/>
+<area shape="poly" title=" " alt="" coords="642,412,743,456,738,456,641,417"/>
+<area shape="poly" title=" " alt="" coords="627,257,702,307,697,306,626,263"/>
+<area shape="poly" title=" " alt="" coords="739,339,763,388,780,448,775,446,758,390,737,343"/>
 </map>
 </div>
 </div></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_c1a02bf2f7e6f2e1d7a358f7fab9ab18.html">parsing</a></li><li class="navelem"><a href="node_8cpp.html">node.cpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
 </body>
 </html>

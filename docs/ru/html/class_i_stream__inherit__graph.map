@@ -1,0 +1,41 @@
+<map id="IStream" name="IStream">
+<area shape="rect" id="Node000001" title=" " alt="" coords="238,146,305,172"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream_acceptor.html" title=" " alt="" coords="353,38,536,64"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="288,132,316,101,352,73,378,63,374,66,354,77,319,105,292,136"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_i_stream_reader.html" title=" " alt="" coords="358,146,531,172"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="320,156,360,158,355,160,321,162"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1io_1_1_i_stream_writer.html" title=" " alt="" coords="362,197,527,222"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="320,171,354,182,397,196,392,197,352,187,320,177"/>
+<area shape="rect" id="Node000016" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title=" " alt="" coords="359,88,530,113"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="319,140,407,112,402,115,321,145"/>
+<area shape="rect" id="Node000017" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title=" " alt="" coords="358,251,531,291"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="295,181,323,208,354,233,384,250,379,250,352,237,319,212,294,186"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих инициализации и финализации." alt="" coords="5,146,190,172"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,156,240,158,235,160,206,162"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_i_stream_port.html" title=" " alt="" coords="593,201,749,226"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="516,173,617,200,612,201,515,179"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title=" " alt="" coords="585,5,757,46"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="511,138,535,124,550,108,558,91,567,74,583,57,602,48,606,45,586,61,571,77,563,94,554,111,538,128,513,142"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title=" " alt="" coords="584,251,758,291"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="525,175,538,182,554,196,563,210,572,223,586,237,606,250,601,250,583,241,567,227,558,213,550,199,535,187,525,181"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title=" " alt="" coords="584,136,758,177"/>
+<area shape="poly" id="edge11_Node000004_Node000012" title=" " alt="" coords="547,155,586,157,581,158,548,160"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1system_1_1_i_process.html" title=" " alt="" coords="817,201,987,226"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="764,211,819,213,814,214,764,216"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Конкретная реализация файлового потока, предоставляющая возможности чтения, записи и позиционирования..." alt="" coords="806,39,998,79"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="772,38,808,45,802,45,773,43"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="Конкретная реализация файлового потока, специализированная для чтения. Этот класс наследуется от CFil..." alt="" coords="1046,7,1238,47"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1013,42,1048,39,1043,40,1014,47"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title=" " alt="" coords="1046,72,1238,113"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="1013,72,1048,79,1043,79,1014,77"/>
+<area shape="poly" id="edge13_Node000013_Node000005" title=" " alt="" coords="542,209,595,212,590,213,543,214"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title=" " alt="" coords="585,71,757,111"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="525,188,535,182,550,168,558,154,567,138,583,122,603,113,608,111,586,126,571,141,563,156,554,172,538,186,527,193"/>
+<area shape="rect" id="Node000015" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title=" " alt="" coords="584,316,758,357"/>
+<area shape="poly" id="edge16_Node000013_Node000015" title=" " alt="" coords="520,227,538,237,554,253,563,269,571,285,586,301,607,316,602,315,583,305,567,288,558,272,550,256,535,241,519,232"/>
+<area shape="poly" id="edge15_Node000014_Node000008" title=" " alt="" coords="772,74,808,72,803,73,773,80"/>
+<area shape="poly" id="edge18_Node000016_Node000007" title=" " alt="" coords="514,80,535,74,619,45,614,48,537,79,516,85"/>
+<area shape="poly" id="edge19_Node000016_Node000014" title=" " alt="" coords="545,94,588,94,582,95,546,99"/>
+<area shape="poly" id="edge21_Node000017_Node000011" title=" " alt="" coords="547,268,586,271,581,271,547,274"/>
+<area shape="poly" id="edge22_Node000017_Node000015" title=" " alt="" coords="532,293,600,315,595,315,531,299"/>
+</map>

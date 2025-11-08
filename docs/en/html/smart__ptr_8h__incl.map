@@ -1,5 +1,5 @@
-<map id="source/iridium/smart_ptr.h" name="source/iridium/smart_ptr.h">
-<area shape="rect" id="Node000001" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="5,5,145,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="41,94,109,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,46,78,78,72,78,72,46"/>
+<map id="iridium/smart_ptr.h" name="iridium/smart_ptr.h">
+<area shape="rect" id="Node000001" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="5,5,134,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="35,79,104,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,29,72,64,67,62,68,33"/>
 </map>

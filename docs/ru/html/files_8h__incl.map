@@ -1,7 +1,7 @@
-<map id="source/iridium/io/fs/files.h" name="source/iridium/io/fs/files.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="6,5,138,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,59,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,48,47,81,43,79,60,45"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="83,94,141,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="84,45,101,79,97,81,80,48"/>
+<map id="iridium/io/fs/files.h" name="iridium/io/fs/files.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="8,5,136,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,59,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,30,48,67,44,64,63,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="83,79,141,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="80,29,101,65,95,66,77,34"/>
 </map>

@@ -1,0 +1,30 @@
+<map id="iridium/logging" name="iridium/logging">
+<area shape="rect" id="node1" href="dir_17bcfc9cc91f519fc5db809db2af96d4.html" title="threading" alt="" coords="27,210,101,236"/>
+<area shape="rect" id="node2" href="dir_faf958cc4344700559ae9861ea5683ee.html" title="convertion" alt="" coords="125,210,206,236"/>
+<area shape="rect" id="node3" href="dir_c1a02bf2f7e6f2e1d7a358f7fab9ab18.html" title="parsing" alt="" coords="236,137,300,162"/>
+<area shape="rect" id="node4" href="dir_2112f30c4275b9e020eb1eddb74d362a.html" title="pattern" alt="" coords="231,210,292,236"/>
+<area shape="rect" id="node5" href="dir_8c6393cb1db31ac16803acf12e6d112e.html" title="io" alt="" coords="315,210,354,236"/>
+<area shape="poly" id="edge1" href="dir_000033_000053.html" alt="" coords="140,90,110,110,82,138,71,166,66,195,61,194,65,165,78,135,107,106,143,87"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000033_000053.html" title="6" alt="" coords="69,184,76,199"/>
+<area shape="poly" id="edge6" href="dir_000033_000000.html" alt="" coords="142,90,116,110,103,123,93,138,88,155,93,172,105,188,123,202,118,203,102,191,88,174,82,155,88,136,99,119,113,106,146,87"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000033_000000.html" title="2" alt="" coords="118,186,125,201"/>
+<area shape="poly" id="edge5" href="dir_000033_000041.html" alt="" coords="186,86,241,127,236,128,185,91"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000033_000041.html" title="1" alt="" coords="238,111,245,126"/>
+<area shape="poly" id="edge2" href="dir_000033_000042.html" alt="" coords="200,78,229,83,261,94,290,111,314,135,320,154,314,174,305,189,293,203,290,198,301,186,310,172,315,154,310,138,287,115,258,99,228,89,201,83"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000033_000042.html" title="3" alt="" coords="296,197,303,212"/>
+<area shape="poly" id="edge4" href="dir_000033_000026.html" alt="" coords="200,78,230,83,264,94,296,111,323,135,337,164,339,196,335,194,332,166,319,138,293,115,262,99,229,89,201,83"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000033_000026.html" title="3" alt="" coords="342,185,349,200"/>
+<area shape="rect" id="node7" href="dir_2b0d15a5acf16099180219b9137faaa4.html" title="implementation" alt="" coords="103,137,212,162"/>
+<area shape="poly" id="edge3" href="dir_000033_000020.html" alt="" coords="169,86,164,123,159,120,166,91"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000033_000020.html" title="3" alt="" coords="167,112,174,127"/>
+<area shape="poly" id="edge7" href="dir_000020_000053.html" alt="" coords="144,161,93,203,90,199,139,164"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000020_000053.html" title="4" alt="" coords="96,198,103,213"/>
+<area shape="poly" id="edge10" href="dir_000020_000000.html" alt="" coords="160,160,165,196,160,194,157,165"/>
+<area shape="rect" id="edge10-headlabel" href="dir_000020_000000.html" title="1" alt="" coords="167,183,174,198"/>
+<area shape="poly" id="edge8" href="dir_000020_000042.html" alt="" coords="176,160,234,201,229,202,174,165"/>
+<area shape="rect" id="edge8-headlabel" href="dir_000020_000042.html" title="1" alt="" coords="230,185,237,200"/>
+<area shape="poly" id="edge9" href="dir_000020_000026.html" alt="" coords="188,160,303,207,298,209,187,165"/>
+<area shape="rect" id="edge9-headlabel" href="dir_000020_000026.html" title="2" alt="" coords="298,192,305,207"/>
+<area shape="rect" id="clust2" href="dir_2c51a477a00b1ad8ba8aec06d2e2f7fe.html" alt="" coords="92,52,223,173"/>
+<area shape="rect" id="clust1" href="dir_7cd3eaa654d669bf9310c145d0239157.html" title="iridium" alt="" coords="16,16,364,247"/>
+</map>

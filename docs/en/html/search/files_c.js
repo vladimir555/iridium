@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['query_2ecpp_0',['query.cpp',['../query_8cpp.html',1,'']]],
-  ['query_2eh_1',['query.h',['../query_8h.html',1,'']]]
+  ['observable_2eh_0',['observable.h',['../implementation_2observable_8h.html',1,'(Global Namespace)'],['../observable_8h.html',1,'(Global Namespace)']]],
+  ['observer_2eh_1',['observer.h',['../observer_8h.html',1,'']]]
 ];
