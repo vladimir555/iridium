@@ -80,7 +80,8 @@ struct TConvert {
                 std::string("conversion error: no specialization exists for TValue(") +
                 typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
             );
-        } else {
+        }
+        else {
             static_assert(
                 sizeof(TResult) == 0 || sizeof(TValue) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
@@ -96,11 +97,10 @@ struct TConvert {
                 std::string("conversion error: no specialization exists for TValue(") +
                 typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
             );
-        } else {
+        }
+        else {
             static_assert(
-                sizeof(TResult) == 0 ||
-                sizeof(TValue)  == 0 ||
-                sizeof(TFormat) == 0,
+                sizeof(TResult) == 0 || sizeof(TValue) == 0 || sizeof(TFormat) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
         }
         return {};
@@ -116,7 +116,8 @@ struct TConvert<std::string, std::shared_ptr<TValue>> {
     static std::string convert(std::shared_ptr<TValue> const & ptr) {
         if (ptr) {
             return TConvert<std::string, TValue>::convert(*ptr);
-        } else {
+        }
+        else {
             return "null";
         }
     }
@@ -145,7 +146,7 @@ struct TConvert<
     TContainer,
     std::enable_if_t<
         detail::TIsSTLSequentialContainer<TContainer>::value &&
-       !detail::TIsSTLAssociativeContainer<TContainer>::value>,
+        !detail::TIsSTLAssociativeContainer<TContainer>::value>,
     is_throwable> {
     /// \~english @brief Converts an STL sequential container to a string.
     /// \~russian @brief Преобразует последовательный контейнер STL в строку.
@@ -158,7 +159,8 @@ struct TConvert<
         for (auto const & item : container) {
             if (!first) {
                 result += ", ";
-            } else {
+            }
+            else {
                 first = false;
             }
             result += TConvert<std::string, std::decay_t<decltype(item)>>::convert(item);
@@ -176,23 +178,22 @@ struct TConvert<
     std::string,
     TContainer,
     std::enable_if_t<
-       !detail::TIsSTLSequentialContainer<TContainer>::value &&
+        !detail::TIsSTLSequentialContainer<TContainer>::value &&
         detail::TIsSTLAssociativeContainer<TContainer>::value>,
-    is_throwable>
-{
+    is_throwable> {
     /// \~english @brief Converts an STL associative container to a string.
     /// \~russian @brief Преобразует ассоциативный контейнер STL в строку.
     static std::string convert(TContainer const & container) {
         std::string result;
         result.reserve(container.size() * 8 + 4);
         result = "[ ";
-        
         bool first = true;
 
         for (auto const & pair : container) {
             if (!first) {
                 result += ", ";
-            } else {
+            }
+            else {
                 first = false;
             }
             result += TConvert<std::string, typename TContainer::key_type>::convert(pair.first);

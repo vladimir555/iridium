@@ -821,6 +821,113 @@ void demo_synchronized() {
 @endcode
 The `Synchronized` class makes methods of `SafeDataContainer` thread-safe. The `Locker`'s destructor also calls `notify_one()` on an internal condition variable, which can be used with `Locker::wait()` methods.
 
+@subsubsection subsubsec_synchronized_wait Waiting on Conditions
+
+The `Synchronized::Locker` object, created by `LOCK_SCOPE()`, provides methods to wait on a condition variable, allowing threads to pause execution until notified or a timeout occurs. This is essential for building producer-consumer patterns or waiting for a specific state change.
+
+-   `_____locked_scope_____.wait()`: Waits indefinitely until another thread issues a notification. It returns `true` if woken by a notification and `false` if the wait was interrupted by `interrupt()`.
+-   `_____locked_scope_____.wait(timeout)` or `LOCK_SCOPE_TRY_WAIT(timeout)`: Waits for a specific duration. It returns `true` only if woken by a notification before the timeout expires. It returns `false` if the timeout is reached or if the wait is interrupted.
+
+It is crucial to use these wait methods inside a loop that checks the condition you are waiting for. This is because a thread can wake up spuriously (without a notification) or after a notification for a different condition.
+
+@subsubsection subsubsec_synchronized_interrupt Interrupting Waits
+
+The `Synchronized` class provides an `interrupt()` method to unblock all threads currently waiting on its condition variable. When `interrupt()` is called:
+1.  An internal `m_is_waitable` flag is set to `false`.
+2.  `notify_all()` is called on the condition variable.
+3.  All waiting threads wake up. Their `wait()` calls will immediately return `false`.
+4.  Any subsequent calls to `wait()` will also return `false` immediately without actually waiting, until the `Synchronized` object is destroyed.
+
+This mechanism is a clean way to signal threads to shut down gracefully.
+
+@subsubsection subsubsec_synchronized_wait_example Example of Wait, Notify, and Interrupt
+
+This example demonstrates a simple producer-consumer scenario where a consumer thread waits for data to be added to a queue by a producer thread. It also shows how to interrupt the waiting thread.
+
+@code{.cpp}
+#include "iridium/threading/synchronized.hh"
+#include "iridium/threading/thread.h"
+#include <iostream>
+#include <queue>
+#include <thread>
+#include <chrono>
+
+class DataQueue : public iridium::threading::Synchronized<std::mutex> {
+private:
+    std::queue<std::string> m_queue;
+
+public:
+    // Producer method
+    void push(const std::string& item) {
+        LOCK_SCOPE(); // Lock is acquired
+        m_queue.push(item);
+        std::cout << "Producer: Pushed '" << item << "'. Notifying one waiter." << std::endl;
+        // Lock is released at end of scope, and notify_one() is called automatically
+    }
+
+    // Consumer method
+    void consume() {
+        iridium::threading::IThread::setNameStatic("Consumer");
+        std::cout << "Consumer: Waiting for data..." << std::endl;
+        LOCK_SCOPE(); // Lock is acquired for the whole loop
+
+        while (m_queue.empty()) {
+            // Atomically releases the lock and waits.
+            // Re-acquires the lock upon waking up.
+            if (!_____locked_scope_____.wait()) {
+                // wait() returned false, meaning it was interrupted
+                std::cout << "Consumer: Wait was interrupted. Exiting." << std::endl;
+                return;
+            }
+            // Spurious wakeup check: if queue is still empty, loop again to wait.
+            std::cout << "Consumer: Woke up. Checking queue..." << std::endl;
+        }
+
+        // At this point, the lock is held and m_queue is not empty.
+        std::string item = m_queue.front();
+        m_queue.pop();
+        std::cout << "Consumer: Popped '" << item << "'." << std::endl;
+    }
+
+    // Method to demonstrate interruption
+    void stop() {
+        std::cout << "Main: Interrupting all waiters." << std::endl;
+        interrupt(); // This will cause wait() to return false
+    }
+};
+
+void demo_wait_interrupt() {
+    DataQueue queue;
+
+    // Start a consumer thread that will wait for data
+    std::thread consumer_thread(&DataQueue::consume, &queue);
+
+    // Give the consumer a moment to start waiting
+    iridium::threading::sleep(100);
+
+    // Start a producer thread
+    std::thread producer_thread([&](){
+        iridium::threading::IThread::setNameStatic("Producer");
+        iridium::threading::sleep(500); // Simulate some work
+        queue.push("Hello");
+    });
+
+    producer_thread.join();
+    consumer_thread.join();
+
+    std::cout << "\n--- Interrupt Demo ---" << std::endl;
+
+    // Start another consumer that will be interrupted
+    std::thread interrupted_consumer(&DataQueue::consume, &queue);
+
+    iridium::threading::sleep(100); // Let it start waiting
+    queue.stop(); // Interrupt the wait
+
+    interrupted_consumer.join();
+    std::cout << "Main: Demo finished." << std::endl;
+}
+@endcode
+
 @subsection subsec_cworker Using CWorker for Task Processing
 
 `iridium::threading::implementation::CWorker<TInputItem, TOutputItem>` provides a single worker thread that processes items from an input queue and can place results in an output queue.

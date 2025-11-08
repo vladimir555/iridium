@@ -820,6 +820,132 @@ void demo_synchronized() {
 }
 @endcode
 
+@subsection subsec_synchronized_wait Ожидание по условию и прерывание
+
+Помимо простого взаимного исключения, `iridium::threading::Synchronized` предоставляет механизм, позволяющий потокам ожидать выполнения определенного условия, используя комбинацию блокировки и `std::condition_variable`. Это крайне важно для сценариев "производитель-потребитель", где потоку-потребителю необходимо дождаться появления данных.
+
+-   **Ожидание**: Объект `Synchronized::Locker` (создаваемый макросом `LOCK_SCOPE()`) имеет метод `wait()`. При его вызове он атомарно освобождает мьютекс и переводит поток в спящий режим. Поток проснётся только тогда, когда другой поток уведомит его (обычно после изменения условия) или если он будет прерван. После пробуждения он автоматически снова захватывает блокировку. В `wait(timeout)` можно передать таймаут, чтобы избежать бесконечного ожидания.
+
+-   **Уведомление**: Когда поток-производитель изменяет общее состояние (например, добавляет элемент в очередь), уничтожение его `Synchronized::Locker` в конце области видимости автоматически вызывает `notify_one()` для условной переменной. Это пробуждает *один* из ожидающих потоков.
+
+-   **Прерывание**: Базовый класс `Synchronized` предоставляет метод `interrupt()`. Его вызов пробуждает *все* ожидающие потоки. Когда ожидающий поток пробуждается из-за прерывания, его вызов `wait()` или `wait(timeout)` вернёт `false`, позволяя потоку понять, что он был прерван, а не уведомлен должным образом. Это чистый способ сигнализировать потокам о необходимости завершить работу.
+
+Макрос `LOCK_SCOPE_TRY_WAIT(timeout)` является удобным помощником. Он захватывает блокировку и немедленно начинает ожидать по условию, возвращая `true` при уведомлении и `false`, если время ожидания истекло или произошло прерывание.
+
+@code{.cpp}
+// mainpage_example_synchronized_wait.cpp
+#include "iridium/threading/synchronized.h"
+#include "iridium/threading/implementation/thread.h"
+#include <iostream>
+#include <queue>
+#include <string>
+#include <chrono>
+
+// Потокобезопасная очередь для сценария "производитель-потребитель"
+class SafeMessageQueue : public iridium::threading::Synchronized<std::mutex> {
+private:
+    std::queue<std::string> m_queue;
+    bool m_is_finished = false;
+
+public:
+    // Производитель добавляет сообщение в очередь
+    void push(const std::string& msg) {
+        LOCK_SCOPE(); // Блокировка освобождается в конце области видимости, уведомляя одного ожидающего
+        m_queue.push(msg);
+        std::cout << "Производитель: Добавлено сообщение '" << msg << "'" << std::endl;
+    }
+
+    // Потребитель пытается получить сообщение, ожидая, если очередь пуста
+    bool pop(std::string& msg, std::chrono::milliseconds timeout) {
+        LOCK_SCOPE(); // Захват блокировки
+        while (m_queue.empty() && !m_is_finished) {
+            std::cout << "Потребитель: Очередь пуста, ожидание..." << std::endl;
+            if (!_____locked_scope_____.wait(timeout)) {
+                // Время ожидания истекло или произошло прерывание
+                std::cout << "Потребитель: Ожидание завершено. Прервано: " << isInterrupted() << ", Истекло время: " << !isInterrupted() << std::endl;
+                return false;
+            }
+        }
+
+        if (!m_queue.empty()) {
+            msg = m_queue.front();
+            m_queue.pop();
+            return true;
+        }
+
+        return false; // Очередь пуста и работа завершена
+    }
+
+    // Сигнал о том, что больше элементы добавляться не будут
+    void finish() {
+        LOCK_SCOPE();
+        m_is_finished = true;
+        // Примечание: уничтожение locker'а уведомит один поток.
+        // Чтобы разбудить все потоки, лучше использовать явное прерывание.
+        std::cout << "Производитель: Сигнал о завершении." << std::endl;
+    }
+};
+
+// --- Runnable для потока-потребителя ---
+class ConsumerTask : public iridium::threading::IRunnable {
+public:
+    explicit ConsumerTask(SafeMessageQueue& queue) : m_queue(queue) {}
+
+    void run(std::atomic<bool>& is_running) override {
+        while (is_running) {
+            std::string msg;
+            if (m_queue.pop(msg, std::chrono::milliseconds(500))) {
+                std::cout << "Потребитель: Получено сообщение '" << msg << "'" << std::endl;
+            } else {
+                // Если pop возвращает false, это может быть таймаут, прерывание,
+                // или завершение работы очереди. Проверяем is_running, чтобы решить, нужно ли выходить.
+                if (!is_running) {
+                    std::cout << "Потребитель: Завершение работы." << std::endl;
+                    break;
+                }
+            }
+        }
+    }
+private:
+    SafeMessageQueue& m_queue;
+};
+
+
+void demo_synchronized_wait() {
+    SafeMessageQueue queue;
+
+    // Запуск потока-потребителя
+    auto consumer_runnable = std::make_shared<ConsumerTask>(queue);
+    auto consumer_thread = iridium::threading::implementation::CThread::create("Consumer", consumer_runnable);
+    consumer_thread->initialize();
+
+    // Логика производителя (в основном потоке)
+    iridium::threading::sleep(100); // Даем потребителю время запуститься и начать ожидание
+    queue.push("Привет");
+    iridium::threading::sleep(100);
+    queue.push("Мир");
+    iridium::threading::sleep(800); // Позволяем потребителю один раз выйти по таймауту
+    queue.push("И доброй ночи");
+
+    iridium::threading::sleep(200);
+
+    // Остановка потока-потребителя
+    // CThread::finalize() установит atomic<bool> в false,
+    // и pop() в конечном итоге выйдет по таймауту или будет разблокирован, увидит флаг и завершится.
+    // для более немедленного завершения мы могли бы вызвать queue.interrupt().
+    std::cout << "Main: Завершение потока потребителя." << std::endl;
+    consumer_thread->finalize();
+    std::cout << "Main: Демонстрация завершена." << std::endl;
+}
+
+/*
+int main() {
+    demo_synchronized_wait();
+    return 0;
+}
+*/
+@endcode
+
 @subsection subsec_synchronized_logging Логирование операций мьютекса
 
 Второй шаблонный параметр `is_tracable` в `Synchronized<TMutex, bool is_tracable = false>` можно установить в `true` для включения диагностического логирования операций мьютекса. Это может быть полезно для отладки проблем, связанных с блокировками, или для понимания поведения синхронизации в вашем приложении.
