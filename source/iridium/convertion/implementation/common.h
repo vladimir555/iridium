@@ -50,13 +50,14 @@ template<typename, typename = void>
 struct TIsSTLAssociativeContainer: std::false_type {};
 
 
+/// \~english @brief Metafunction to determine if a type `T` is an STL associative container.
+/// \~russian @brief Метафункция для определения, является ли тип `T` ассоциативным контейнером STL.
 template<typename T>
 struct TIsSTLAssociativeContainer<
     T,
     std::void_t<
         typename T::key_type,
-        typename T::mapped_type > >
-{
+        typename T::mapped_type > > {
     static constexpr bool value = TIsSTLType<T>::value;
 };
 
@@ -70,21 +71,17 @@ struct TIsSTLAssociativeContainer<
 /// \~english @brief Default conversion implementation that causes a compile-time or run-time error.
 /// \~russian @brief Реализация преобразования по умолчанию, которая вызывает ошибку во время компиляции или выполнения.
 template<typename TResult, typename TValue, typename TIsEnabled = void, bool is_throwable = false>
-struct TConvert
-{
+struct TConvert {
     /// \~english @brief Default conversion function that is called when no specialization is found.
     /// \~russian @brief Функция преобразования по умолчанию, которая вызывается, если не найдена специализация.
-    static TResult convert(TValue const&)
-    {
-        if constexpr (is_throwable)
-        {
+    static TResult convert(TValue const &) {
+        if constexpr (is_throwable) {
             throw std::runtime_error(
                 std::string("conversion error: no specialization exists for TValue(") +
                 typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
             );
         }
-        else
-        {
+        else {
             static_assert(
                 sizeof(TResult) == 0 || sizeof(TValue) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
@@ -94,17 +91,14 @@ struct TConvert
     /// \~english @brief Default conversion function with format that is called when no specialization is found.
     /// \~russian @brief Функция преобразования по умолчанию с форматом, которая вызывается, если не найдена специализация.
     template<typename TFormat>
-    static TResult convert(TValue const&, TFormat const&)
-    {
-        if constexpr (is_throwable)
-        {
+    static TResult convert(TValue const &, TFormat const &) {
+        if constexpr (is_throwable) {
             throw std::runtime_error(
                 std::string("conversion error: no specialization exists for TValue(") +
                 typeid(TValue).name() + "), TResult(" + typeid(TResult).name() + ")"
             );
         }
-        else
-        {
+        else {
             static_assert(
                 sizeof(TResult) == 0 || sizeof(TValue) == 0 || sizeof(TFormat) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
@@ -116,34 +110,36 @@ struct TConvert
 /// \~english @brief Specialization for converting a shared pointer to a string.
 /// \~russian @brief Специализация для преобразования умного указателя в строку.
 template<typename TValue>
-struct TConvert<std::string, std::shared_ptr<TValue>>
-{
+struct TConvert<std::string, std::shared_ptr<TValue>> {
     /// \~english @brief Converts a shared pointer to a string.
     /// \~russian @brief Преобразует умный указатель в строку.
-    static std::string convert(std::shared_ptr<TValue> const& ptr)
-    {
-        if (ptr)
-        {
+    static std::string convert(std::shared_ptr<TValue> const & ptr) {
+        if (ptr) {
             return TConvert<std::string, TValue>::convert(*ptr);
         }
-        else
-        {
+        else {
             return "null";
         }
     }
 };
 
 
+/// \~english @brief Specialization for converting an atomic value to a string.
+/// \~russian @brief Специализация для преобразования атомарного значения в строку.
 template<typename TValue>
-struct TConvert<std::string, std::atomic<TValue>>
-{
-    static std::string convert(std::atomic<TValue> const& value)
-    {
+struct TConvert<std::string, std::atomic<TValue>> {
+    /// \~english @brief Converts an atomic value to a string.
+    /// \~russian @brief Преобразует атомарное значение в строку.
+    static std::string convert(std::atomic<TValue> const & value) {
         return TConvert<std::string, TValue>::convert(value.load());
     }
 };
 
 
+/// \~english @brief Specialization for converting an STL sequential container to a string.
+/// \~russian @brief Специализация для преобразования последовательного контейнера STL в строку.
+/// \~english @brief Specialization for converting an STL associative container to a string.
+/// \~russian @brief Специализация для преобразования ассоциативного контейнера STL в строку.
 template<typename TContainer, bool is_throwable>
 struct TConvert<
     std::string,
@@ -151,23 +147,20 @@ struct TConvert<
     std::enable_if_t<
         detail::TIsSTLSequentialContainer<TContainer>::value &&
         !detail::TIsSTLAssociativeContainer<TContainer>::value>,
-    is_throwable>
-{
-    static std::string convert(TContainer const& container)
-    {
+    is_throwable> {
+    /// \~english @brief Converts an STL sequential container to a string.
+    /// \~russian @brief Преобразует последовательный контейнер STL в строку.
+    static std::string convert(TContainer const & container) {
         std::string result;
         result.reserve(container.size() * 8 + 4);
         result = "[ ";
         bool first = true;
 
-        for (auto const& item : container)
-        {
-            if (!first)
-            {
+        for (auto const & item : container) {
+            if (!first) {
                 result += ", ";
             }
-            else
-            {
+            else {
                 first = false;
             }
             result += TConvert<std::string, std::decay_t<decltype(item)>>::convert(item);
@@ -187,23 +180,20 @@ struct TConvert<
     std::enable_if_t<
         !detail::TIsSTLSequentialContainer<TContainer>::value &&
         detail::TIsSTLAssociativeContainer<TContainer>::value>,
-    is_throwable>
-{
-    static std::string convert(TContainer const& container)
-    {
+    is_throwable> {
+    /// \~english @brief Converts an STL associative container to a string.
+    /// \~russian @brief Преобразует ассоциативный контейнер STL в строку.
+    static std::string convert(TContainer const & container) {
         std::string result;
         result.reserve(container.size() * 8 + 4);
         result = "[ ";
         bool first = true;
 
-        for (auto const& pair : container)
-        {
-            if (!first)
-            {
+        for (auto const & pair : container) {
+            if (!first) {
                 result += ", ";
             }
-            else
-            {
+            else {
                 first = false;
             }
             result += TConvert<std::string, typename TContainer::key_type>::convert(pair.first);

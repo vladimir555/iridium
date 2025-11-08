@@ -26,7 +26,7 @@ using implementation::config;
 /// \~english @return The converted value.
 /// \~russian @return Преобразованное значение.
 template<typename TResult, typename TValue, bool is_throwable = false>
-TResult convert(TValue const& value) {
+TResult convert(TValue const & value) {
     return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value);
 }
 
@@ -47,7 +47,7 @@ TResult convert(TValue const& value) {
 /// \~english @return The converted value.
 /// \~russian @return Преобразованное значение.
 template<typename TResult, typename TValue, typename TFormat, bool is_throwable = false>
-TResult convert(TValue const& value, TFormat const& format) {
+TResult convert(TValue const & value, TFormat const & format) {
     return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value, format);
 }
 

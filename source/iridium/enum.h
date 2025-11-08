@@ -53,7 +53,7 @@ public: \
     TEnum(TEnum const &e) = default; \
     TEnum(TEnumInternal const &e): m_value(e) {} \
     TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
-    TEnum(std::string const &s): m_value(UNKNOWN) { \
+    TEnum(std::string const & s): m_value(UNKNOWN) { \
         for (auto const &i: map_enum_string) { \
             if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) { \
                 m_value = i.first; \

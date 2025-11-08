@@ -36,7 +36,7 @@ public:
     /// \~russian @brief Конструктор коннектора MySQL.
     /// \~english @param config The database configuration.
     /// \~russian @param config Конфигурация базы данных.
-    CMySQLConnector(config::TDatebase const& config);
+    CMySQLConnector(config::TDatebase const & config);
 
     /// \~english @brief Destructor.
     /// \~russian @brief Деструктор.
@@ -57,7 +57,7 @@ public:
     /// \~english @return The result of the query as a tree of nodes.
     /// \~russian @return Результат запроса в виде дерева узлов.
     INode::TSharedPtr
-        sendQuery(std::string const& query) override;
+        sendQuery(std::string const & query) override;
 
 private:
     /// \~english @brief The MySQL connection handle.
