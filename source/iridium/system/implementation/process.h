@@ -21,12 +21,6 @@
 
 namespace iridium {
 namespace system {
-/// \~english @brief Contains concrete platform-dependent and platform-independent implementations for system components.
-///     This namespace provides the actual logic for interfaces defined in the parent `iridium::system` namespace,
-///     often bridging to platform-specific code.
-/// \~russian @brief Содержит конкретные платформо-зависимые и платформо-независимые реализации для системных компонентов.
-///     Это пространство имен предоставляет фактическую логику для интерфейсов, определенных в родительском пространстве имен `iridium::system`,
-///     часто служа мостом к платформо-специфичному коду.
 namespace implementation {
 
 /// \~english @typedef CProcessStream

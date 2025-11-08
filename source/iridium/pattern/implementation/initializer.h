@@ -41,7 +41,7 @@ public:
     /// \~english @exception std::runtime_error if any of the provided `items` is a nullptr.
     /// \~russian @exception std::runtime_error если какой-либо из предоставленных `items` является nullptr.
     template<typename ... TArgs>
-    CInitializer(TArgs const & ... items);
+    CInitializer(TArgs const &... items);
     /// \~english @brief Destructor. Ensures that `finalize()` is called if the items were initialized and not yet finalized.
     ///     This helps prevent resource leaks if `finalize()` was not explicitly called.
     /// \~russian @brief Деструктор. Гарантирует вызов `finalize()`, если элементы были инициализированы и еще не финализированы.
@@ -83,7 +83,7 @@ private:
 /// \~russian @details Инициализирует список `m_items` предоставленным пакетом разделяемых указателей на объекты `IInitializable`.
 ///     Итерирует по элементам, чтобы убедиться, что ни один из них не является null, выбрасывая `std::runtime_error` при обнаружении null-элемента.
 template<typename ... TArgs>
-CInitializer::CInitializer(TArgs const & ... items)
+CInitializer::CInitializer(TArgs const &... items)
 :
     m_is_initialized    (false),
     m_items             {items ...}

@@ -32,8 +32,6 @@ using iridium::convertion::convert;
 
 // No specific Doxygen for iridium namespace itself here, usually documented at a higher level.
 namespace iridium {
-/// \~english @brief Contains classes and functions related to threading and synchronization.
-/// \~russian @brief Содержит классы и функции, связанные с многопоточностью и синхронизацией.
 namespace threading {
 
 

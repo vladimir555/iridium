@@ -59,7 +59,7 @@ std::vector<T> assign(std::list<T> const &source) {
 /// \~english @return `true` if the source item matches any of the items in the pack, `false` otherwise.
 /// \~russian @return `true`, если исходный элемент совпадает с любым из элементов в пакете, иначе `false`.
 template<typename T, typename ... TItems>
-bool checkOneOf(T const &source, TItems const & ... items_) {
+bool checkOneOf(T const &source, TItems const &... items_) {
     std::initializer_list<T const> const &items{items_ ...};
 
     for (auto const &item: items)

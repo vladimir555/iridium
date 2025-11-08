@@ -58,10 +58,10 @@ int main() {
         return 1;
     }
 
-    std::string json_string = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
+    std::string jsonString = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
 
     try {
-        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(json_string);
+        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(jsonString);
 
         if (rootNode) {
             std::cout << "JSON parsed successfully!" << std::endl;
@@ -109,8 +109,8 @@ int main() {
     subNode->addChild("retries", "3");
 
     try {
-        std::string composed_json = jsonParser->compose(root);
-        std::cout << "Composed JSON: " << composed_json << std::endl;
+        std::string composedJson = jsonParser->compose(root);
+        std::cout << "Composed JSON: " << composedJson << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Composition failed: " << e.what() << std::endl;
     }
@@ -420,18 +420,18 @@ static Point localStringToPoint(const std::string& s) {
         throw std::invalid_argument("Invalid Point string format: Missing parentheses. Input: " + s);
     }
     std::string content = s.substr(1, s.length() - 2); // Удаление скобок
-    size_t comma_pos = content.find(',');
-    if (comma_pos == std::string::npos) {
+    size_t commaPos = content.find(',');
+    if (commaPos == std::string::npos) {
         throw std::invalid_argument("Invalid Point string format: Missing comma. Input: " + s);
     }
     try {
-        int x_val = std::stoi(content.substr(0, comma_pos));
-        int y_val = std::stoi(content.substr(comma_pos + 1));
-        return {x_val, y_val};
-    } catch (const std::invalid_argument& e_ia) {
-        throw std::invalid_argument("Invalid integer in Point string: " + std::string(e_ia.what()) + ". Input: " + s);
-    } catch (const std::out_of_range& e_oor) {
-        throw std::out_of_range("Integer out of range in Point string: " + std::string(e_oor.what()) + ". Input: " + s);
+        int xVal = std::stoi(content.substr(0, commaPos));
+        int yVal = std::stoi(content.substr(commaPos + 1));
+        return {xVal, yVal};
+    } catch (const std::invalid_argument& eIa) {
+        throw std::invalid_argument("Invalid integer in Point string: " + std::string(eIa.what()) + ". Input: " + s);
+    } catch (const std::out_of_range& eOor) {
+        throw std::out_of_range("Integer out of range in Point string: " + std::string(eOor.what()) + ". Input: " + s);
     }
 }
 
@@ -459,15 +459,15 @@ int main_custom_convert_demo() { // Переименовано, чтобы из�
     // Таким образом, после определения преобразования это должно работать:
     // LOGI << "My custom point: " << p1;
     // Для этого примера мы продемонстрируем преобразование явно:
-    std::string p1_as_string = iridium::convertion::convert<std::string>(p1);
-    std::cout << "Point p1 converted to string: " << p1_as_string << std::endl;
+    std::string p1AsString = iridium::convertion::convert<std::string>(p1);
+    std::cout << "Point p1 converted to string: " << p1AsString << std::endl;
 
 
     // Пример десериализации (например, из строки конфигурации):
-    std::string input_string = "(100,-200)";
+    std::string inputString = "(100,-200)";
     try {
-        Point p2 = iridium::convertion::convert<Point>(input_string);
-        std::cout << "String '" << input_string << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
+        Point p2 = iridium::convertion::convert<Point>(inputString);
+        std::cout << "String '" << inputString << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error converting string to Point: " << e.what() << std::endl;
     }
@@ -691,17 +691,17 @@ void demo_cthread() {
 
     // 3. Создание и управление CThread
     // CThread::create принимает (имя, IRunnable::TSharedPtr)
-    auto thread_obj = iridium::threading::implementation::CThread::create("MyWorker1", task);
+    auto threadObj = iridium::threading::implementation::CThread::create("MyWorker1", task);
 
     try {
         std::cout << "Main: Initializing thread..." << std::endl;
-        thread_obj->initialize(); // Запускает поток и ожидает его запуска
+        threadObj->initialize(); // Запускает поток и ожидает его запуска
 
         std::cout << "Main: Sleeping for 3 seconds while thread runs..." << std::endl;
         iridium::threading::sleep(3000);
 
         std::cout << "Main: Finalizing thread..." << std::endl;
-        thread_obj->finalize(); // Сигнализирует потоку остановиться и ожидает его присоединения
+        threadObj->finalize(); // Сигнализирует потоку остановиться и ожидает его присоединения
 
         std::cout << "Main: Thread finished." << std::endl;
     } catch (const std::exception& e) {
@@ -731,24 +731,24 @@ void demo_cthread() {
 // Класс, методы которого будут синхронизированы
 class SafeDataContainer : public iridium::threading::Synchronized<std::mutex> {
 private:
-    std::vector<std::string> items_;
-    int access_count_ = 0;
+    std::vector<std::string> mItems;
+    int mAccessCount = 0;
 
 public:
     void addItem(const std::string& item) {
         LOCK_SCOPE(); // Блокировка захвачена для этой области
-        items_.push_back(item);
-        access_count_++;
+        mItems.push_back(item);
+        mAccessCount++;
         // std::cout << "addItem: Added '" << item << "'. Lock released upon exiting scope." << std::endl;
         // Мьютекс автоматически освобождается здесь деструктором _____locked_scope_____
     }
 
-    void addItems(const std::vector<std::string>& items_to_add) {
+    void addItems(const std::vector<std::string>& itemsToAdd) {
         LOCK_SCOPE();
-        for(const auto& item_to_add : items_to_add) { // Исправлено имя переменной
-            items_.push_back(item_to_add);
+        for(const auto& itemToAdd : itemsToAdd) { // Исправлено имя переменной
+            mItems.push_back(itemToAdd);
         }
-        access_count_++;
+        mAccessCount++;
         // std::cout << "addItems: Added multiple items. Lock released upon exiting scope." << std::endl;
     }
 
@@ -756,25 +756,25 @@ public:
         LOCK_SCOPE();
         // Возврат по значению гарантирует, что копия будет сделана, пока блокировка удерживается.
         // std::cout << "getItems: Returning copy of items. Lock released upon exiting scope." << std::endl;
-        return items_;
+        return mItems;
     }
 
     int getAccessCount() {
         LOCK_SCOPE();
-        return access_count_;
+        return mAccessCount;
     }
 
-    void waitUntilItemCountReaches(size_t target_count, std::chrono::milliseconds timeout) {
+    void waitUntilItemCountReaches(size_t targetCount, std::chrono::milliseconds timeout) {
         LOCK_SCOPE();
         // std::cout << "waitUntilItemCountReaches: Waiting for item count " << target_count << std::endl;
-        while (items_.size() < target_count) {
-            if (!_____locked_scope_____.wait(timeout)) {
+        while (mItems.size() < targetCount) {
+            if (!LOCK_SCOPE_TRY_WAIT(timeout)) {
                 // std::cout << "waitUntilItemCountReaches: Wait timed out or was interrupted." << std::endl;
                 break;
             }
-            // std::cout << "waitUntilItemCountReaches: Woke up, current count " << items_.size() << std::endl;
+            // std::cout << "waitUntilItemCountReaches: Woke up, current count " << mItems.size() << std::endl;
         }
-        // if (items_.size() >= target_count) {
+        // if (mItems.size() >= targetCount) {
         //     std::cout << "waitUntilItemCountReaches: Target count reached." << std::endl;
         // }
     }
@@ -798,8 +798,8 @@ void demo_synchronized() {
     container.addItem("Apple");
     container.addItem("Banana");
 
-    std::vector<std::string> current_items = container.getItems();
-    for (const auto& item : current_items) {
+    std::vector<std::string> currentItems = container.getItems();
+    for (const auto& item : currentItems) {
         std::cout << "Item: " << item << std::endl;
     }
     std::cout << "Access count: " << container.getAccessCount() << std::endl;
@@ -818,6 +818,132 @@ void demo_synchronized() {
     // adder.join();
     // waiter.join();
 }
+@endcode
+
+@subsection subsec_synchronized_wait Ожидание по условию и прерывание
+
+Помимо простого взаимного исключения, `iridium::threading::Synchronized` предоставляет механизм, позволяющий потокам ожидать выполнения определенного условия, используя комбинацию блокировки и `std::condition_variable`. Это крайне важно для сценариев "производитель-потребитель", где потоку-потребителю необходимо дождаться появления данных.
+
+-   **Ожидание**: Объект `Synchronized::Locker` (создаваемый макросом `LOCK_SCOPE()`) имеет метод `wait()`. При его вызове он атомарно освобождает мьютекс и переводит поток в спящий режим. Поток проснётся только тогда, когда другой поток уведомит его (обычно после изменения условия) или если он будет прерван. После пробуждения он автоматически снова захватывает блокировку. В `wait(timeout)` можно передать таймаут, чтобы избежать бесконечного ожидания.
+
+-   **Уведомление**: Когда поток-производитель изменяет общее состояние (например, добавляет элемент в очередь), уничтожение его `Synchronized::Locker` в конце области видимости автоматически вызывает `notify_one()` для условной переменной. Это пробуждает *один* из ожидающих потоков.
+
+-   **Прерывание**: Базовый класс `Synchronized` предоставляет метод `interrupt()`. Его вызов пробуждает *все* ожидающие потоки. Когда ожидающий поток пробуждается из-за прерывания, его вызов `wait()` или `wait(timeout)` вернёт `false`, позволяя потоку понять, что он был прерван, а не уведомлен должным образом. Это чистый способ сигнализировать потокам о необходимости завершить работу.
+
+Макрос `LOCK_SCOPE_TRY_WAIT(timeout)` является удобным помощником. Он захватывает блокировку и немедленно начинает ожидать по условию, возвращая `true` при уведомлении и `false`, если время ожидания истекло или произошло прерывание.
+
+@code{.cpp}
+// mainpage_example_synchronized_wait.cpp
+#include "iridium/threading/synchronized.h"
+#include "iridium/threading/implementation/thread.h"
+#include <iostream>
+#include <queue>
+#include <string>
+#include <chrono>
+
+// Потокобезопасная очередь для сценария "производитель-потребитель"
+class SafeMessageQueue : public iridium::threading::Synchronized<std::mutex> {
+private:
+    std::queue<std::string> mQueue;
+    bool mIsFinished = false;
+
+public:
+    // Производитель добавляет сообщение в очередь
+    void push(const std::string& msg) {
+        LOCK_SCOPE(); // Блокировка освобождается в конце области видимости, уведомляя одного ожидающего
+        mQueue.push(msg);
+        std::cout << "Производитель: Добавлено сообщение '" << msg << "'" << std::endl;
+    }
+
+    // Потребитель пытается получить сообщение, ожидая, если очередь пуста
+    bool pop(std::string& msg, std::chrono::milliseconds timeout) {
+        LOCK_SCOPE(); // Захват блокировки
+        while (mQueue.empty() && !mIsFinished) {
+            std::cout << "Потребитель: Очередь пуста, ожидание..." << std::endl;
+            if (!_____locked_scope_____.wait(timeout)) {
+                // Время ожидания истекло или произошло прерывание
+                std::cout << "Потребитель: Ожидание завершено. Прервано: " << isInterrupted() << ", Истекло время: " << !isInterrupted() << std::endl;
+                return false;
+            }
+        }
+
+        if (!mQueue.empty()) {
+            msg = mQueue.front();
+            mQueue.pop();
+            return true;
+        }
+
+        return false; // Очередь пуста и работа завершена
+    }
+
+    // Сигнал о том, что больше элементы добавляться не будут
+    void finish() {
+        LOCK_SCOPE();
+        mIsFinished = true;
+        // Примечание: уничтожение locker'а уведомит один поток.
+        // Чтобы разбудить все потоки, лучше использовать явное прерывание.
+        std::cout << "Производитель: Сигнал о завершении." << std::endl;
+    }
+};
+
+// --- Runnable для потока-потребителя ---
+class ConsumerTask : public iridium::threading::IRunnable {
+public:
+    explicit ConsumerTask(SafeMessageQueue& queue) : m_queue(queue) {}
+
+    void run(std::atomic<bool>& is_running) override {
+        while (is_running) {
+            std::string msg;
+            if (m_queue.pop(msg, std::chrono::milliseconds(500))) {
+                std::cout << "Потребитель: Получено сообщение '" << msg << "'" << std::endl;
+            } else {
+                // Если pop возвращает false, это может быть таймаут, прерывание,
+                // или завершение работы очереди. Проверяем is_running, чтобы решить, нужно ли выходить.
+                if (!is_running) {
+                    std::cout << "Потребитель: Завершение работы." << std::endl;
+                    break;
+                }
+            }
+        }
+    }
+private:
+    SafeMessageQueue& m_queue;
+};
+
+
+void demo_synchronized_wait() {
+    SafeMessageQueue queue;
+
+    // Запуск потока-потребителя
+    auto consumerRunnable = std::make_shared<ConsumerTask>(queue);
+    auto consumerThread = iridium::threading::implementation::CThread::create("Consumer", consumerRunnable);
+    consumerThread->initialize();
+
+    // Логика производителя (в основном потоке)
+    iridium::threading::sleep(100); // Даем потребителю время запуститься и начать ожидание
+    queue.push("Привет");
+    iridium::threading::sleep(100);
+    queue.push("Мир");
+    iridium::threading::sleep(800); // Позволяем потребителю один раз выйти по таймауту
+    queue.push("И доброй ночи");
+
+    iridium::threading::sleep(200);
+
+    // Остановка потока-потребителя
+    // CThread::finalize() установит atomic<bool> в false,
+    // и pop() в конечном итоге выйдет по таймауту или будет разблокирован, увидит флаг и завершится.
+    // для более немедленного завершения мы могли бы вызвать queue.interrupt().
+    std::cout << "Main: Завершение потока потребителя." << std::endl;
+    consumerThread->finalize();
+    std::cout << "Main: Демонстрация завершена." << std::endl;
+}
+
+/*
+int main() {
+    demo_synchronized_wait();
+    return 0;
+}
+*/
 @endcode
 
 @subsection subsec_synchronized_logging Логирование операций мьютекса
@@ -1668,104 +1794,18 @@ TEST(DataConsumer_UsesMockService) {
 
 Иногда важно не только то, какие методы мок-объекта вызываются, но и в каком порядке это происходит. Фреймворк мокирования Iridium предоставляет средства для определения и проверки последовательностей вызовов.
 
+***Примечание:** Эта функциональность может быть неполной или находиться в разработке. Макросы, представленные в коде, могут не соответствовать полной реализации класса `MockSequence`.*
+
 @subsubsection subsubsec_testing_defining_sequences Определение последовательности (DEFINE_MOCK_SEQUENCE)
 
-Макрос `DEFINE_MOCK_SEQUENCE(sequence_name, mock_object)` используется для создания объекта последовательности.
--   `sequence_name`: Имя, которое вы даете этой последовательности (будет создана переменная `sequence_<sequence_name>`).
--   `mock_object`: Экземпляр мок-объекта, для которого вы определяете последовательность вызовов.
-
-Этот макрос должен вызываться в начале вашего теста, где вы хотите определить ожидания по порядку вызовов.
+Макрос `DEFINE_MOCK_SEQUENCE(name)` используется для создания объекта последовательности.
+-   `name`: Имя, которое вы даете этой последовательности (будет создана переменная `sequence_<name>`).
 
 @subsubsection subsubsec_testing_sequence_expectations Ожидания в последовательности (DEFINE_MOCK_SEQUENCE_EXPECTATION)
 
-После определения объекта последовательности, вы добавляете в нее ожидаемые вызовы с помощью макроса `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, arg1, arg2, ...)`.
+После определения объекта последовательности, вы добавляете в нее ожидаемые вызовы с помощью макроса `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method)`.
 -   `sequence_name`: Имя ранее определенной последовательности.
--   `mock_object`: Тот же мок-объект.
--   `method_name`: Имя мокированного метода, который должен быть вызван.
--   `(arg1, arg2, ...)`: Ожидаемые аргументы для этого вызова, заключенные в круглые скобки.
+-   `mock`: Мок-объект.
+-   `method`: Имя мокированного метода, который должен быть вызван.
 
-Каждый вызов `DEFINE_MOCK_SEQUENCE_EXPECTATION` добавляет одно ожидание в указанную последовательность. Порядок этих макросов определяет ожидаемый порядок вызовов методов.
-
-Пример:
-@code{.cpp}
-#include "iridium/testing/tester.h"
-#include "iridium/testing/mock.h"
-#include <string>
-#include <vector> 
-
-// Для полноты примера, определим IMyDependency и его мок здесь же.
-// В реальном коде они были бы в заголовочных файлах.
-class IMyDependency {
-public:
-    virtual ~IMyDependency() = default;
-    virtual int getValue(int key) = 0;
-    virtual std::string getName() const = 0;
-    virtual void processData(const std::vector<int>& data) = 0;
-    virtual void setup() = 0; // Новый метод для демонстрации последовательности
-    IMyDependency(const std::string& /* initial_config */) {} 
-    IMyDependency() = default;
-};
-
-DEFINE_MOCK_CLASS(IMyDependency) {
-public:
-    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, int)
-    DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, const std::vector<int>&)
-    DEFINE_MOCK_METHOD(void, setup) // Мок для нового метода
-};
-// Конец определений IMyDependency и мока
-
-// Класс, демонстрирующий вызовы в определенной последовательности
-class ServiceWithOrderedCalls {
-    IMyDependency* dep_;
-public:
-    ServiceWithOrderedCalls(IMyDependency* dep) : dep_(dep) {}
-
-    void initializeAndGetData(int val_key) {
-        dep_->setup(); // Первый ожидаемый вызов
-        std::vector<int> data_vec = {val_key, val_key * 2};
-        dep_->processData(data_vec); // Второй ожидаемый вызов
-        dep_->getValue(val_key); // Третий ожидаемый вызов
-    }
-};
-
-TEST(ServiceOrderedTest) {
-    IMyDependencyMock mockDep;
-
-    // Определяем поведение для методов, чтобы они просто работали
-    // (для проверки последовательности важно, чтобы вызовы происходили,
-    // а не что они возвращают, если это не часть логики теста)
-    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep) {};
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {};
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) { return key + 1; };
-
-    // Определяем последовательность 's1' для объекта 'mockDep'
-    // Имя объекта последовательности будет sequence_s1
-    DEFINE_MOCK_SEQUENCE(s1, mockDep); 
-
-    // Добавляем ожидания в последовательность s1
-    // Ожидается вызов mockDep.setup() без аргументов
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup); 
-    // Ожидается вызов mockDep.processData() с конкретным вектором
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, {10, 20}); 
-    // Ожидается вызов mockDep.getValue() с аргументом 10
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, 10); 
-
-    ServiceWithOrderedCalls service(&mockDep);
-    service.initializeAndGetData(10); // Этот метод должен вызвать методы mockDep в указанном порядке
-
-    // Проверка последовательности происходит автоматически. Если порядок нарушен,
-    // или один из ожидаемых вызовов не произошел в нужном месте,
-    // или были вызваны незадекларированные в последовательности методы мока,
-    // MockSequence::step выбросит исключение, и тест провалится.
-    // Если все вызовы произошли в правильном порядке с правильными аргументами, тест пройдет.
-}
-@endcode
-
-**Важные замечания:**
--   Если метод вызывается с аргументами, отличными от тех, что указаны в `DEFINE_MOCK_SEQUENCE_EXPECTATION`, это считается нарушением последовательности.
--   Если в ходе выполнения кода происходят вызовы мокированных методов, которые не являются частью текущего ожидаемого шага в последовательности (или вообще не ожидаются в рамках какой-либо активной последовательности), это также может привести к ошибке, в зависимости от строгости реализации мок-фреймворка. Обычно ожидается точное совпадение.
--   Проверка последовательности выполняется на каждом шаге (`step` внутри `MockSequence`). Если порядок нарушается, исключение будет выброшено немедленно.
-
-Использование последовательностей особенно полезно для тестирования протоколов взаимодействия или сложных сценариев, где порядок операций критичен.
+В текущей реализации этот макрос не позволяет указывать ожидаемые аргументы для вызова метода.

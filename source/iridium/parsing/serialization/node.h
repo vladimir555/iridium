@@ -23,124 +23,183 @@ namespace serialization {
 
 
 // todo: copy constructor; rm TType; fix List property name
+/// \~english @brief A view class for a node with a specific value type. Provides a convenient way to access and modify node values.
+/// \~russian @brief Класс-представление для узла с определенным типом значения. Предоставляет удобный способ доступа и изменения значений узла.
 template<typename TValue>
 class NodeView {
 public:
-    ///
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
    ~NodeView() = default;
+    /// \~english @brief Gets the value of the node.
+    /// \~russian @brief Возвращает значение узла.
     /// todo: lazy convertion
     TValue get() const;
-    ///
+    /// \~english @brief Sets the value of the node.
+    /// \~russian @brief Устанавливает значение узла.
     void set(TValue const &value);
-    ///
+    /// \~english @brief Checks if the node has a default value.
+    /// \~russian @brief Проверяет, имеет ли узел значение по умолчанию.
     bool isDefault() const;
-    ///
+    /// \~english @brief Conversion operator to the node's value type.
+    /// \~russian @brief Оператор преобразования к типу значения узла.
     operator TValue() const;
-    ///
+    /// \~english @brief Assignment operator.
+    /// \~russian @brief Оператор присваивания.
     NodeView &operator= (TValue const &value);
-    ///
+    /// \~english @brief Equality comparison operator.
+    /// \~russian @brief Оператор сравнения на равенство.
     bool operator== (TValue const &value) const;
-    ///
+    /// \~english @brief Gets the underlying node.
+    /// \~russian @brief Возвращает базовый узел.
     INode::TSharedPtr getNode() const;
 
 protected:
-    /// list attribute
+    /// \~english @brief Constructor for a list attribute.
+    /// \~russian @brief Конструктор для атрибута-списка.
     NodeView(
         INode::TSharedPtr   const &node,
         std::string         const &name,
         std::string         const &path);
 
+    /// \~english @brief Constructor with node name.
+    /// \~russian @brief Конструктор с именем узла.
     NodeView(std::string const &name);
-    /// attribute
+    /// \~english @brief Constructor for an attribute with a default value.
+    /// \~russian @brief Конструктор для атрибута со значением по умолчанию.
     NodeView(NodeView<void> const * const parent, std::string const &name, TValue const &default_value);
-    /// attribute
+    /// \~english @brief Constructor for an attribute.
+    /// \~russian @brief Конструктор для атрибута.
     NodeView(NodeView<void> const * const parent, std::string const &name);
 
+    /// \~english @brief The underlying node.
+    /// \~russian @brief Базовый узел.
     INode::TSharedPtr       m_node;
+    /// \~english @brief The path to the node.
+    /// \~russian @brief Путь к узлу.
     std::string             m_path;
+    /// \~english @brief Flag indicating if the node has a default value.
+    /// \~russian @brief Флаг, указывающий, имеет ли узел значение по умолчанию.
     bool                    m_is_default = false;
 };
 
-
+/// \~english @brief A specialization of NodeView for nodes without a specific value type (e.g., parent nodes).
+/// \~russian @brief Специализация NodeView для узлов без определенного типа значения (например, родительских узлов).
 template<>
 class NodeView<void> {
 public:
-    /// root node for desiarization only
+    /// \~english @brief Constructor for a root node (deserialization only).
+    /// \~russian @brief Конструктор для корневого узла (только десериализация).
     NodeView(
         std::string         const &name);
-    /// root node for serialization and desiarization
+    /// \~english @brief Constructor for a root node (serialization and deserialization).
+    /// \~russian @brief Конструктор для корневого узла (сериализация и десериализация).
     NodeView(
          INode::TSharedPtr  const &node,
          std::string        const &name);
-    ///
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
    ~NodeView() = default;
-    ///
+    /// \~english @brief Gets the underlying node.
+    /// \~russian @brief Возвращает базовый узел.
     INode::TSharedPtr       getNode() const;
-    ///
+    /// \~english @brief The underlying node.
+    /// \~russian @brief Базовый узел.
     INode::TSharedPtr       m_node;
-    ///
+    /// \~english @brief The path to the node.
+    /// \~russian @brief Путь к узлу.
     std::string             m_path;
 
 protected:
-    /// list node
+    /// \~english @brief Constructor for a list node.
+    /// \~russian @brief Конструктор для узла-списка.
     NodeView(
         INode::TSharedPtr   const &node,
         std::string         const &name,
         std::string         const &path);
-    /// node
+    /// \~english @brief Constructor for a child node.
+    /// \~russian @brief Конструктор для дочернего узла.
     NodeView(NodeView<void> const * const parent, std::string const &name);
 };
 
-
+/// \~english @brief A view class for a list of nodes.
+/// \~russian @brief Класс-представление для списка узлов.
 template<typename TNodeView>
 class NodeViewList {
 public:
-    ///
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
    ~NodeViewList() = default;
-    ///
+    /// \~english @brief A list of node views.
+    /// \~russian @brief Список представлений узлов.
     typedef typename std::list<TNodeView> TNodes;
+    /// \~english @brief Iterator for the list of node views.
+    /// \~russian @brief Итератор для списка представлений узлов.
     typedef typename std::list<TNodeView>::iterator iterator;
+    /// \~english @brief Constant iterator for the list of node views.
+    /// \~russian @brief Константный итератор для списка представлений узлов.
     typedef typename std::list<TNodeView>::const_iterator const_iterator;
-    ///
+    /// \~english @brief Returns an iterator to the beginning of the list.
+    /// \~russian @brief Возвращает итератор на начало списка.
     iterator begin();
-    ///
+    /// \~english @brief Returns an iterator to the end of the list.
+    /// \~russian @brief Возвращает итератор на конец списка.
     iterator end();
-    ///
+    /// \~english @brief Returns a constant iterator to the beginning of the list.
+    /// \~russian @brief Возвращает константный итератор на начало списка.
     const_iterator begin() const;
-    ///
+    /// \~english @brief Returns a constant iterator to the end of the list.
+    /// \~russian @brief Возвращает константный итератор на конец списка.
     const_iterator end() const;
-    ///
+    /// \~english @brief Gets the number of nodes in the list.
+    /// \~russian @brief Возвращает количество узлов в списке.
     size_t size() const;
-    ///
+    /// \~english @brief Adds a node to the list.
+    /// \~russian @brief Добавляет узел в список.
     void add(TNodeView const &node);
-    ///
+    /// \~english @brief Adds a node with a specific value to the list.
+    /// \~russian @brief Добавляет узел с определенным значением в список.
     template<typename TValue>
     void add(TValue const &node);
-    ///
+    /// \~english @brief Clears the list of nodes.
+    /// \~russian @brief Очищает список узлов.
     void clear();
 
 protected:
-    ///
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     NodeViewList(NodeView<void> const * const parent, std::string const &name);
 
 private:
-    ///
+    /// \~english @brief The parent node view.
+    /// \~russian @brief Представление родительского узла.
     NodeView<void> const * const m_parent;
-    ///
+    /// \~english @brief The name of the nodes in the list.
+    /// \~russian @brief Имя узлов в списке.
     std::string m_name;
-    ///
+    /// \~english @brief The list of node views.
+    /// \~russian @brief Список представлений узлов.
     std::list<TNodeView> m_nodes;
 };
 
-
+/// \~english @brief A smart pointer-like class for a node view. Useful for recursive node structures.
+/// \~russian @brief Класс, подобный умному указателю, для представления узла. Полезен для рекурсивных структур узлов.
 template<typename TNodeView>
 class NodeViewPtr {
 public:
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     NodeViewPtr(NodeView<void> const * const parent);
+    /// \~english @brief Destructor.
+    /// \~russian @brief Деструктор.
    ~NodeViewPtr() = default;
+    /// \~english @brief Gets the shared pointer to the node view.
+    /// \~russian @brief Возвращает разделяемый указатель на представление узла.
     std::shared_ptr<TNodeView> get() const;
 
 private:
+    /// \~english @brief The shared pointer to the node view.
+    /// \~russian @brief Разделяемый указатель на представление узла.
     typename std::shared_ptr<TNodeView> m_node_view;
 };
 
@@ -347,15 +406,25 @@ std::shared_ptr<TNodeView> NodeViewPtr<TNodeView>::get() const {
 }
 // -----
 
-
+/// \~english @brief Naming strategy for converting C++ identifiers to node names.
+/// \~russian @brief Стратегия именования для преобразования идентификаторов C++ в имена узлов.
 enum class TNamingStrategyCPPToNode {
+    /// \~english @brief Unknown strategy.
+    /// \~russian @brief Неизвестная стратегия.
     UNKNOWN = -1,
+    /// \~english @brief lower_case to lower-kebab.
+    /// \~russian @brief lower_case в lower-kebab.
     LOWER_CASE_TO_LOWER_KEBAB,
+    /// \~english @brief CamelCase to lower-kebab.
+    /// \~russian @brief CamelCase в lower-kebab.
     CAMEL_CASE_TO_LOWER_KEBAB,
+    /// \~english @brief Keep the original name.
+    /// \~russian @brief Сохранить исходное имя.
     ORIGINAL
 };
 
-
+/// \~english @brief Converts a C++ identifier to a node name based on a naming strategy.
+/// \~russian @brief Преобразует идентификатор C++ в имя узла на основе стратегии именования.
 std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode const &strategy);
 
 

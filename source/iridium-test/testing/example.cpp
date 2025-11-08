@@ -360,7 +360,7 @@ TEST(mock) {
 //        auto events = multiplexer->waitEvents();
 //        LOGT << "wait events OK";
 //
-//        for (auto const& event_: events) {
+//        for (auto const &event_: events) {
 //            LOGT << event_->getType();
 //            if (checkOneOf(event_->getType(), IEvent::TType::READ, IEvent::TType::UNKNOWN)) {
 //                auto buffer = process->read(1024);

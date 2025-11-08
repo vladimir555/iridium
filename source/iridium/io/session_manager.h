@@ -15,7 +15,7 @@
 // Assuming IStreamPort::TSharedPtr is a valid type, likely defined in a header included transitively
 // or in a common types header for iridium::io. It represents an I/O channel endpoint.
 // For example, it could be a typedef for IStream::TSharedPtr or a specific stream port class.
-#include "stream.h" // Assuming IStreamPort might be related to or a typedef of IStream
+#include "stream.h" // For IStreamPort
 
 
 namespace iridium {

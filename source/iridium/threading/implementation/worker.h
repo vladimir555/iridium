@@ -19,6 +19,8 @@ namespace threading {
 namespace implementation {
 
 
+/// \~english @brief A worker that pushes items to a queue.
+/// \~russian @brief "Работник", который добавляет элементы в очередь.
 template<typename TItem>
 class CWorkerPusher: public IWorkerPusher<TItem> {
 public:
@@ -27,12 +29,22 @@ public:
     typedef typename IAsyncQueuePusher<TItem>::TItems   TItems;
     typedef typename IWorkerPusher<TItem>::IHandler     IHandler;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPusher(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
+    /// \~english @brief Initializes the worker.
+    /// \~russian @brief Инициализирует "работника".
     void initialize() override;
+    /// \~english @brief Finalizes the worker.
+    /// \~russian @brief Финализирует "работника".
     void finalize() override;
 
+    /// \~english @brief Pushes an item to the queue.
+    /// \~russian @brief Добавляет элемент в очередь.
     size_t push(TItem  const &item)  override;
+    /// \~english @brief Pushes a list of items to the queue.
+    /// \~russian @brief Добавляет список элементов в очередь.
     size_t push(TItems const &items) override;
 
 private:
@@ -42,7 +54,8 @@ private:
         m_thread;
 };
 
-
+/// \~english @brief A worker that pops items from a queue.
+/// \~russian @brief "Работник", который извлекает элементы из очереди.
 template<typename TItem>
 class CWorkerPopper: public IWorkerPopper<TItem> {
 public:
@@ -51,12 +64,22 @@ public:
     typedef typename IAsyncQueuePopper<TItem>::TItems   TItems;
     typedef typename IWorkerPopper<TItem>::IHandler     IHandler;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPopper(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
+    /// \~english @brief Initializes the worker.
+    /// \~russian @brief Инициализирует "работника".
     void initialize() override;
+    /// \~english @brief Finalizes the worker.
+    /// \~russian @brief Финализирует "работника".
     void finalize() override;
 
+    /// \~english @brief Pops items from the queue.
+    /// \~russian @brief Извлекает элементы из очереди.
     TItems pop(bool const &is_wait_required) override;
+    /// \~english @brief Pops items from the queue with a timeout.
+    /// \~russian @brief Извлекает элементы из очереди с тайм-аутом.
     TItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:
@@ -66,7 +89,8 @@ private:
         m_thread;
 };
 
-
+/// \~english @brief A worker that processes items from an input queue and pushes them to an output queue.
+/// \~russian @brief "Работник", который обрабатывает элементы из входной очереди и добавляет их в выходную очередь.
 template<typename TInputItem, typename TOutputItem = TInputItem>
 class CWorker: public IWorker<TInputItem, TOutputItem> {
 public:
@@ -76,15 +100,29 @@ public:
     typedef typename IAsyncQueuePusher<TOutputItem>::TItems     TOutputItems;
     typedef typename IWorker<TInputItem, TOutputItem>::IHandler IHandler;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorker(std::string const &name, typename IHandler::TSharedPtr const &handler);
 
+    /// \~english @brief Initializes the worker.
+    /// \~russian @brief Инициализирует "работника".
     void initialize() override;
+    /// \~english @brief Finalizes the worker.
+    /// \~russian @brief Финализирует "работника".
     void finalize() override;
 
+    /// \~english @brief Pushes an item to the input queue.
+    /// \~russian @brief Добавляет элемент во входную очередь.
     size_t push(TInputItem  const &item) override;
+    /// \~english @brief Pushes a list of items to the input queue.
+    /// \~russian @brief Добавляет список элементов во входную очередь.
     size_t push(TInputItems const &items) override;
 
+    /// \~english @brief Pops items from the output queue.
+    /// \~russian @brief Извлекает элементы из выходной очереди.
     TOutputItems pop(bool const &is_wait_required) override;
+    /// \~english @brief Pops items from the output queue with a timeout.
+    /// \~russian @brief Извлекает элементы из выходной очереди с тайм-аутом.
     TOutputItems pop(std::chrono::nanoseconds const &timeout) override;
 
 private:

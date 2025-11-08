@@ -25,8 +25,6 @@
 
 // No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
-/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
 namespace logging {
 
 /// \~english @brief Interface for log event sinks, also known as appenders.

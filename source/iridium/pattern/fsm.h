@@ -17,37 +17,63 @@ namespace iridium {
 namespace pattern {
 
 
-///
+/// \~english @brief A generic Finite State Machine (FSM) implementation.
+/// \~russian @brief Обобщенная реализация Конечного Автомата (Finite State Machine, FSM).
 template<typename TState, typename TEvent>
 class FSM {
 public:
     DEFINE_CREATE(FSM)
-    ///
+    /// \~english @brief A handler for a state transition.
+    /// \~russian @brief Обработчик для перехода состояния.
     using THandler = std::function<void()>;
-    ///
+    /// \~english @brief Represents a state transition.
+    /// \~russian @brief Представляет переход состояния.
     struct TTransition {
-        TState   from;
-        TEvent   event;
-        TState   to;
-        THandler handler;
+        TState   from; ///< \~english The source state. \~russian Исходное состояние.
+        TEvent   event; ///< \~english The event that triggers the transition. \~russian Событие, которое вызывает переход.
+        TState   to; ///< \~english The destination state. \~russian Конечное состояние.
+        THandler handler; ///< \~english The handler to be executed on transition. \~russian Обработчик, который будет выполнен при переходе.
     };
-    ///
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
+    /// \~english @param initial_state The initial state of the FSM.
+    /// \~russian @param initial_state Начальное состояние FSM.
     FSM(TState const &initial_state);
-    ///
+    /// \~english @brief Adds a transition to the FSM.
+    /// \~russian @brief Добавляет переход в FSM.
+    /// \~english @param event The event that triggers the transition.
+    /// \~russian @param event Событие, которое вызывает переход.
+    /// \~english @param from The source state.
+    /// \~russian @param from Исходное состояние.
+    /// \~english @param to The destination state.
+    /// \~russian @param to Конечное состояние.
+    /// \~english @param handler The handler to be executed on transition.
+    /// \~russian @param handler Обработчик, который будет выполнен при переходе.
     void addTransition(
         TEvent   const &event,
         TState   const &from,
         TState   const &to,
         THandler const &handler = {});
-    ///
+    /// \~english @brief Processes an event and triggers a state transition.
+    /// \~russian @brief Обрабатывает событие и вызывает переход состояния.
+    /// \~english @param event The event to process.
+    /// \~russian @param event Событие для обработки.
+    /// \~english @return The new state of the FSM.
+    /// \~russian @return Новое состояние FSM.
     TState doAction(TEvent const &event);
 
 private:
+    /// \~english @brief A hash function for a pair of state and event.
+    /// \~russian @brief Хеш-функция для пары состояния и события.
     struct TPairStateEventHash {
         size_t operator()(std::pair<TState, TEvent> const &p) const;
     };
 
+    /// \~english @brief The current state of the FSM.
+    /// \~russian @brief Текущее состояние FSM.
     TState m_state;
+    /// \~english @brief The transition table of the FSM.
+    /// \~russian @brief Таблица переходов FSM.
     std::unordered_map<std::pair<TState, TEvent>, TTransition, TPairStateEventHash> m_table;
 };
 

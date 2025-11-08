@@ -51,8 +51,6 @@
 
 
 namespace iridium {
-/// \~english @brief Contains utility preprocessor macros used throughout the Iridium project.
-/// \~russian @brief Содержит служебные макросы препроцессора, используемые в проекте Iridium.
 namespace macros {
 } // macros
 } // iridium

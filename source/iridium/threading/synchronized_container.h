@@ -15,26 +15,34 @@ namespace iridium {
 namespace threading {
 
 
+/// \~english @brief A thread-safe container based on std::unordered_map.
+/// \~russian @brief Потокобезопасный контейнер на основе std::unordered_map.
 template<typename TKey, typename TValue>
-class SynchronizedContainer: public Synchronized<std::mutex> {
+class SynchronizedContainer : public Synchronized<std::recursive_mutex>
+{
 public:
     DEFINE_IMPLEMENTATION(SynchronizedContainer)
-    SynchronizedContainer();
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
+    SynchronizedContainer() = default;
 
+    /// \~english @brief Sets a key-value pair in the container.
+    /// \~russian @brief Устанавливает пару "ключ-значение" в контейнере.
     size_t  set(TKey const &key, TValue const &value);
+    /// \~english @brief Gets a value by key from the container.
+    /// \~russian @brief Возвращает значение по ключу из контейнера.
     TValue  get(TKey const &key) const;
+    /// \~english @brief Deletes a key-value pair from the container.
+    /// \~russian @brief Удаляет пару "ключ-значение" из контейнера.
     size_t  del(TKey const &key);
     
 private:
+    /// \~english @brief The underlying unordered_map.
+    /// \~russian @brief Базовый unordered_map.
     std::unordered_map<TKey, TValue> m_map_key_value;
 };
 
     
-template<typename TKey, typename TValue>
-SynchronizedContainer<TKey, TValue>::SynchronizedContainer()
-:
-    Synchronized(implementation::CRecursiveMutex::create())
-{}
     
     
 template<typename TKey, typename TValue>

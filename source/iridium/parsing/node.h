@@ -20,10 +20,6 @@
 
 // No specific Doxygen for iridium namespace itself here.
 namespace iridium {
-/// \~english @brief Provides interfaces, utilities, and concrete classes for parsing and composing structured data.
-///     This namespace often deals with representing data as a tree of nodes (e.g., `INode`).
-/// \~russian @brief Предоставляет интерфейсы, утилиты и конкретные классы для разбора и формирования структурированных данных.
-///     Это пространство имен часто связано с представлением данных в виде дерева узлов (например, `INode`).
 namespace parsing {
 
 /// \~english @typedef INode

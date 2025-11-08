@@ -16,6 +16,8 @@ namespace threading {
 namespace implementation {
 
 
+/// \~english @brief A runnable for a worker that pushes items to a queue.
+/// \~russian @brief "Runnable" для "работника", который добавляет элементы в очередь.
 template<typename TItem>
 class CWorkerPusherRunnable: public IRunnable {
 public:
@@ -24,12 +26,20 @@ public:
     typedef typename IAsyncQueuePusher<TItem>::TItems   TItems;
     typedef typename IWorkerPusher<TItem>::IHandler     IHandler;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPusherRunnable(
         typename IHandler::TSharedPtr const &handler,
         typename IAsyncQueue<TItem>::TSharedPtr const &queue);
 
+    /// \~english @brief The main execution loop for the worker.
+    /// \~russian @brief Основной цикл выполнения для "работника".
     void run(std::atomic<bool> &is_running) override;
+    /// \~english @brief Initializes the worker.
+    /// \~russian @brief Инициализирует "работника".
     void initialize() override;
+    /// \~english @brief Finalizes the worker.
+    /// \~russian @brief Финализирует "работника".
     void finalize() override;
 
 private:
@@ -37,7 +47,8 @@ private:
     typename IHandler::TSharedPtr                   m_handler;
 };
 
-
+/// \~english @brief A runnable for a worker that pops items from a queue.
+/// \~russian @brief "Runnable" для "работника", который извлекает элементы из очереди.
 template<typename TItem>
 class CWorkerPopperRunnable: public IRunnable {
 public:
@@ -46,12 +57,20 @@ public:
     typedef typename IAsyncQueuePopper<TItem>::TItems   TItems;
     typedef typename IWorkerPopper<TItem>::IHandler     IHandler;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerPopperRunnable(
         typename IHandler::TSharedPtr           const &handler,
         typename IAsyncQueue<TItem>::TSharedPtr const &queue);
 
+    /// \~english @brief The main execution loop for the worker.
+    /// \~russian @brief Основной цикл выполнения для "работника".
     void run(std::atomic<bool> &is_running) override;
+    /// \~english @brief Initializes the worker.
+    /// \~russian @brief Инициализирует "работника".
     void initialize() override;
+    /// \~english @brief Finalizes the worker.
+    /// \~russian @brief Финализирует "работника".
     void finalize() override;
 
 private:
@@ -59,7 +78,8 @@ private:
     typename IHandler::TSharedPtr                   m_handler;
 };
 
-
+/// \~english @brief A runnable for a worker that processes items.
+/// \~russian @brief "Runnable" для "работника", который обрабатывает элементы.
 template<typename TInputItem, typename TOutputItem = TInputItem>
 class CWorkerRunnable: public IRunnable {
 public:
@@ -69,13 +89,21 @@ public:
     typedef typename IAsyncQueuePusher<TOutputItem>::TItems     TOutputItems;
     typedef typename IWorker<TInputItem, TOutputItem>::IHandler IHandler;
 
+    /// \~english @brief Constructor.
+    /// \~russian @brief Конструктор.
     CWorkerRunnable(
         typename IHandler::TSharedPtr                   const &handler,
         typename IAsyncQueue<TInputItem>::TSharedPtr    const &m_input_queue,
         typename IAsyncQueue<TOutputItem>::TSharedPtr   const &m_output_queue);
 
+    /// \~english @brief The main execution loop for the worker.
+    /// \~russian @brief Основной цикл выполнения для "работника".
     void run(std::atomic<bool> &is_running) override;
+    /// \~english @brief Initializes the worker.
+    /// \~russian @brief Инициализирует "работника".
     void initialize() override;
+    /// \~english @brief Finalizes the worker.
+    /// \~russian @brief Финализирует "работника".
     void finalize() override;
 
 private:

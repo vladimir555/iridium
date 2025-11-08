@@ -58,10 +58,10 @@ int main() {
         return 1;
     }
 
-    std::string json_string = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
+    std::string jsonString = R"({ "name": "IridiumApp", "version": 1.0, "modules": ["parsing", "logging"] })";
 
     try {
-        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(json_string);
+        iridium::parsing::INode::TSharedPtr rootNode = jsonParser->parse(jsonString);
 
         if (rootNode) {
             std::cout << "JSON parsed successfully!" << std::endl;
@@ -109,8 +109,8 @@ int main() {
     subNode->addChild("retries", "3");
 
     try {
-        std::string composed_json = jsonParser->compose(root);
-        std::cout << "Composed JSON: " << composed_json << std::endl;
+        std::string composedJson = jsonParser->compose(root);
+        std::cout << "Composed JSON: " << composedJson << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Composition failed: " << e.what() << std::endl;
     }
@@ -459,15 +459,15 @@ int main_custom_convert_demo() { // Renamed to avoid collision if mainpage.md is
     // So, after defining the conversion, this should work:
     // LOGI << "My custom point: " << p1;
     // For this example, we'll demonstrate the conversion explicitly:
-    std::string p1_as_string = iridium::convertion::convert<std::string>(p1);
-    std::cout << "Point p1 converted to string: " << p1_as_string << std::endl;
+    std::string p1AsString = iridium::convertion::convert<std::string>(p1);
+    std::cout << "Point p1 converted to string: " << p1AsString << std::endl;
 
 
     // Deserialization Example (e.g., from a configuration string):
-    std::string input_string = "(100,-200)";
+    std::string inputString = "(100,-200)";
     try {
-        Point p2 = iridium::convertion::convert<Point>(input_string);
-        std::cout << "String '" << input_string << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
+        Point p2 = iridium::convertion::convert<Point>(inputString);
+        std::cout << "String '" << inputString << "' converted to Point: (" << p2.x << "," << p2.y << ")" << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error converting string to Point: " << e.what() << std::endl;
     }
@@ -768,7 +768,7 @@ public:
         LOCK_SCOPE();
         // std::cout << "waitUntilItemCountReaches: Waiting for item count " << target_count << std::endl;
         while (items_.size() < target_count) {
-            if (!_____locked_scope_____.wait(timeout)) {
+            if (!LOCK_SCOPE_TRY_WAIT(timeout)) {
                 // std::cout << "waitUntilItemCountReaches: Wait timed out or was interrupted." << std::endl;
                 break;
             }
@@ -798,8 +798,8 @@ void demo_synchronized() {
     container.addItem("Apple");
     container.addItem("Banana");
 
-    std::vector<std::string> current_items = container.getItems();
-    for (const auto& item : current_items) {
+    std::vector<std::string> currentItems = container.getItems();
+    for (const auto& item : currentItems) {
         std::cout << "Item: " << item << std::endl;
     }
     std::cout << "Access count: " << container.getAccessCount() << std::endl;
@@ -820,6 +820,113 @@ void demo_synchronized() {
 }
 @endcode
 The `Synchronized` class makes methods of `SafeDataContainer` thread-safe. The `Locker`'s destructor also calls `notify_one()` on an internal condition variable, which can be used with `Locker::wait()` methods.
+
+@subsubsection subsubsec_synchronized_wait Waiting on Conditions
+
+The `Synchronized::Locker` object, created by `LOCK_SCOPE()`, provides methods to wait on a condition variable, allowing threads to pause execution until notified or a timeout occurs. This is essential for building producer-consumer patterns or waiting for a specific state change.
+
+-   `_____locked_scope_____.wait()`: Waits indefinitely until another thread issues a notification. It returns `true` if woken by a notification and `false` if the wait was interrupted by `interrupt()`.
+-   `_____locked_scope_____.wait(timeout)` or `LOCK_SCOPE_TRY_WAIT(timeout)`: Waits for a specific duration. It returns `true` only if woken by a notification before the timeout expires. It returns `false` if the timeout is reached or if the wait is interrupted.
+
+It is crucial to use these wait methods inside a loop that checks the condition you are waiting for. This is because a thread can wake up spuriously (without a notification) or after a notification for a different condition.
+
+@subsubsection subsubsec_synchronized_interrupt Interrupting Waits
+
+The `Synchronized` class provides an `interrupt()` method to unblock all threads currently waiting on its condition variable. When `interrupt()` is called:
+1.  An internal `m_is_waitable` flag is set to `false`.
+2.  `notify_all()` is called on the condition variable.
+3.  All waiting threads wake up. Their `wait()` calls will immediately return `false`.
+4.  Any subsequent calls to `wait()` will also return `false` immediately without actually waiting, until the `Synchronized` object is destroyed.
+
+This mechanism is a clean way to signal threads to shut down gracefully.
+
+@subsubsection subsubsec_synchronized_wait_example Example of Wait, Notify, and Interrupt
+
+This example demonstrates a simple producer-consumer scenario where a consumer thread waits for data to be added to a queue by a producer thread. It also shows how to interrupt the waiting thread.
+
+@code{.cpp}
+#include "iridium/threading/synchronized.hh"
+#include "iridium/threading/thread.h"
+#include <iostream>
+#include <queue>
+#include <thread>
+#include <chrono>
+
+class DataQueue : public iridium::threading::Synchronized<std::mutex> {
+private:
+    std::queue<std::string> m_queue;
+
+public:
+    // Producer method
+    void push(const std::string& item) {
+        LOCK_SCOPE(); // Lock is acquired
+        m_queue.push(item);
+        std::cout << "Producer: Pushed '" << item << "'. Notifying one waiter." << std::endl;
+        // Lock is released at end of scope, and notify_one() is called automatically
+    }
+
+    // Consumer method
+    void consume() {
+        iridium::threading::IThread::setNameStatic("Consumer");
+        std::cout << "Consumer: Waiting for data..." << std::endl;
+        LOCK_SCOPE(); // Lock is acquired for the whole loop
+
+        while (m_queue.empty()) {
+            // Atomically releases the lock and waits.
+            // Re-acquires the lock upon waking up.
+            if (!_____locked_scope_____.wait()) {
+                // wait() returned false, meaning it was interrupted
+                std::cout << "Consumer: Wait was interrupted. Exiting." << std::endl;
+                return;
+            }
+            // Spurious wakeup check: if queue is still empty, loop again to wait.
+            std::cout << "Consumer: Woke up. Checking queue..." << std::endl;
+        }
+
+        // At this point, the lock is held and m_queue is not empty.
+        std::string item = m_queue.front();
+        m_queue.pop();
+        std::cout << "Consumer: Popped '" << item << "'." << std::endl;
+    }
+
+    // Method to demonstrate interruption
+    void stop() {
+        std::cout << "Main: Interrupting all waiters." << std::endl;
+        interrupt(); // This will cause wait() to return false
+    }
+};
+
+void demo_wait_interrupt() {
+    DataQueue queue;
+
+    // Start a consumer thread that will wait for data
+    std::thread consumer_thread(&DataQueue::consume, &queue);
+
+    // Give the consumer a moment to start waiting
+    iridium::threading::sleep(100);
+
+    // Start a producer thread
+    std::thread producer_thread([&](){
+        iridium::threading::IThread::setNameStatic("Producer");
+        iridium::threading::sleep(500); // Simulate some work
+        queue.push("Hello");
+    });
+
+    producer_thread.join();
+    consumer_thread.join();
+
+    std::cout << "\n--- Interrupt Demo ---" << std::endl;
+
+    // Start another consumer that will be interrupted
+    std::thread interrupted_consumer(&DataQueue::consume, &queue);
+
+    iridium::threading::sleep(100); // Let it start waiting
+    queue.stop(); // Interrupt the wait
+
+    interrupted_consumer.join();
+    std::cout << "Main: Demo finished." << std::endl;
+}
+@endcode
 
 @subsection subsec_cworker Using CWorker for Task Processing
 
@@ -850,10 +957,10 @@ public:
         TOutputItems results;
         // std::cout << "Handler: Received " << items.size() << " items to process." << std::endl;
         for (const auto& item : items) {
-            std::string upper_item = item;
-            std::transform(upper_item.begin(), upper_item.end(), upper_item.begin(),
+            std::string upperItem = item;
+            std::transform(upperItem.begin(), upperItem.end(), upperItem.begin(),
                            [](unsigned char c){ return static_cast<char>(std::toupper(c)); }); // Ensure char cast
-            results.push_back(upper_item + "_processed_by_worker");
+            results.push_back(upperItem + "_processed_by_worker");
         }
         return results;
     }
@@ -871,7 +978,7 @@ void demo_cworker() {
         worker->push("alpha");
         worker->push(std::vector<std::string>{"beta", "gamma"});
 
-        iridium::threading::IWorker<std::string, std::string>::TOutputItems processed_batch;
+        iridium::threading::IWorker<std::string, std::string>::TOutputItems processedBatch;
 
         // The CWorkerRunnable processes one item at a time from the input queue,
         // calls handler (which receives a list of 1 item),
@@ -879,20 +986,20 @@ void demo_cworker() {
         // So, each pop() call will retrieve the results from one handle() call.
 
         // Results for "alpha"
-        processed_batch = worker->pop(true); // true means wait
-        for (const auto& item : processed_batch) {
+        processedBatch = worker->pop(true); // true means wait
+        for (const auto& item : processedBatch) {
             std::cout << "Main: Popped CWorker result: " << item << std::endl;
         }
 
         // Results for "beta"
-        processed_batch = worker->pop(true);
-        for (const auto& item : processed_batch) {
+        processedBatch = worker->pop(true);
+        for (const auto& item : processedBatch) {
             std::cout << "Main: Popped CWorker result: " << item << std::endl;
         }
 
         // Results for "gamma"
-        processed_batch = worker->pop(true);
-        for (const auto& item : processed_batch) {
+        processedBatch = worker->pop(true);
+        for (const auto& item : processedBatch) {
             std::cout << "Main: Popped CWorker result: " << item << std::endl;
         }
 
@@ -930,18 +1037,18 @@ void demo_cworker() {
 #define TOUPPERSTRINGHANDLER_DEFINED_FOR_POOL_DEMO
 class ToUpperStringHandlerForPool : public iridium::threading::IWorker<std::string, std::string>::IHandler {
 public:
-    std::string handler_id_;
-    ToUpperStringHandlerForPool(const std::string& id) : handler_id_(id) {}
-    void initialize() override { /*std::cout << handler_id_ << ": Init" << std::endl;*/ }
-    void finalize() override { /*std::cout << handler_id_ << ": Final" << std::endl;*/ }
+    std::string handlerId_;
+    ToUpperStringHandlerForPool(const std::string& id) : handlerId_(id) {}
+    void initialize() override { /*std::cout << handlerId_ << ": Init" << std::endl;*/ }
+    void finalize() override { /*std::cout << handlerId_ << ": Final" << std::endl;*/ }
     TOutputItems handle(const TInputItems& items) override {
         TOutputItems results;
-        // std::cout << handler_id_ << ": Handling " << items.size() << " items." << std::endl;
+        // std::cout << handlerId_ << ": Handling " << items.size() << " items." << std::endl;
         for (const auto& item : items) {
-            std::string upper_item = item;
-            std::transform(upper_item.begin(), upper_item.end(), upper_item.begin(),
+            std::string upperItem = item;
+            std::transform(upperItem.begin(), upperItem.end(), upperItem.begin(),
                            [](unsigned char c){ return static_cast<char>(std::toupper(c)); });
-            results.push_back(upper_item + "_processed_by_pool_" + handler_id_);
+            results.push_back(upperItem + "_processed_by_pool_" + handlerId_);
         }
         return results;
     }
@@ -949,28 +1056,28 @@ public:
 #endif
 
 void demo_cworkerpool() {
-    int num_pool_threads = 2;
-    std::list<iridium::threading::IWorker<std::string, std::string>::IHandler::TSharedPtr> handlers_list;
-    for (int i = 0; i < num_pool_threads; ++i) {
-        handlers_list.push_back(std::make_shared<ToUpperStringHandlerForPool>("H" + std::to_string(i)));
+    int numPoolThreads = 2;
+    std::list<iridium::threading::IWorker<std::string, std::string>::IHandler::TSharedPtr> handlersList;
+    for (int i = 0; i < numPoolThreads; ++i) {
+        handlersList.push_back(std::make_shared<ToUpperStringHandlerForPool>("H" + std::to_string(i)));
     }
 
-    auto pool = iridium::threading::implementation::CWorkerPool<std::string, std::string>::create("MyDemoPool", handlers_list);
+    auto pool = iridium::threading::implementation::CWorkerPool<std::string, std::string>::create("MyDemoPool", handlersList);
 
     try {
         // std::cout << "Main: Initializing worker pool..." << std::endl;
         pool->initialize();
 
-        std::vector<std::string> all_tasks = {"task1", "task2", "task3", "task4", "task5"};
-        // std::cout << "Main: Pushing " << all_tasks.size() << " tasks to the pool." << std::endl;
-        pool->push(all_tasks); // Push a batch. These will be added to the shared input queue.
+        std::vector<std::string> allTasks = {"task1", "task2", "task3", "task4", "task5"};
+        // std::cout << "Main: Pushing " << allTasks.size() << " tasks to the pool." << std::endl;
+        pool->push(allTasks); // Push a batch. These will be added to the shared input queue.
 
         // Collect results. Each worker thread processes one item from the input queue at a time,
         // its handler produces a list of output items, which are added to the pool's output queue.
-        // So, we expect to pop 'all_tasks.size()' lists of results.
-        for (size_t i = 0; i < all_tasks.size(); ++i) {
-            auto results_batch = pool->pop(true); // Wait for a batch of results from one handler call
-            for (const auto& res : results_batch) {
+        // So, we expect to pop 'allTasks.size()' lists of results.
+        for (size_t i = 0; i < allTasks.size(); ++i) {
+            auto resultsBatch = pool->pop(true); // Wait for a batch of results from one handler call
+            for (const auto& res : resultsBatch) {
                 std::cout << "Main: Pool result: " << res << std::endl;
             }
         }
@@ -1034,10 +1141,10 @@ std::string iridium::convertion::convert(MyCustomType const &obj) {
 
 // Example class to be tested (replace with your own)
 class MyClassToTest {
-    std::string param_;
+    std::string param;
 public:
-    MyClassToTest(const std::string& p = "") : param_(p) {}
-    std::string getParameter() const { return param_; }
+    MyClassToTest(const std::string& p = "") : param(p) {}
+    std::string getParameter() const { return param; }
     int add(int a, int b) { return a + b; }
     MyCustomType getCustomType(int id, const std::string& val) { return {id, val}; }
     void doSomethingThatThrows() { throw std::runtime_error("Expected exception"); }
@@ -1066,8 +1173,8 @@ TEST(MyCustomTypeAssertion) {
 
 TEST(BooleanAssertions) {
     ASSERT(true); // Check for truth
-    bool my_flag = false;
-    ASSERT(!my_flag); // Check for falsehood via negation
+    bool myFlag = false;
+    ASSERT(!myFlag); // Check for falsehood via negation
 }
 
 TEST(MyClassThrowsException) {
@@ -1077,13 +1184,13 @@ TEST(MyClassThrowsException) {
 
 TEST(MyClassDoesNotThrowException) {
     MyClassToTest obj;
-    bool did_not_throw = true;
+    bool didNotThrow = true;
     try {
         obj.doSomethingThatDoesNotThrow();
     } catch (...) {
-        did_not_throw = false;
+        didNotThrow = false;
     }
-    ASSERT(did_not_throw);
+    ASSERT(didNotThrow);
 }
 @endcode
 
@@ -1316,9 +1423,9 @@ public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
     
     // Mocking interface methods
-    DEFINE_MOCK_METHOD(int, getValue, int))                  // int getValue(int key)
-    DEFINE_MOCK_METHOD_CONST(std::string, getName)                // std::string getName() const
-    DEFINE_MOCK_METHOD(void, processData, const std::vector<int> &) // void processData(const std::vector<int>& data)
+    DEFINE_MOCK_METHOD(int, getValue, (int))                  // int getValue(int key)
+    DEFINE_MOCK_METHOD_CONST(std::string, getName, ())        // std::string getName() const
+    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int> &)) // void processData(const std::vector<int>& data)
 };
 @endcode
 The `DEFINE_MOCK_METHOD` macros take the return type, method name, and in parentheses, the types of the method's arguments (without variable names).
@@ -1350,32 +1457,32 @@ public:
 DEFINE_MOCK_CLASS(IMyDependency) {
 public:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, int)
-    DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, const std::vector<int> &)
+    DEFINE_MOCK_METHOD(int, getValue, (int))
+    DEFINE_MOCK_METHOD_CONST(std::string, getName, ())
+    DEFINE_MOCK_METHOD(void, processData, (const std::vector<int> &))
 };
 // End of copied definitions
 
 
 // Class that uses IMyDependency
 class MyClassUsesDependency {
-    IMyDependency* dependency_;
+    IMyDependency* dependency;
 public:
-    MyClassUsesDependency(IMyDependency* dep) : dependency_(dep) {}
+    MyClassUsesDependency(IMyDependency* dep) : dependency(dep) {}
 
     int fetchValue(int key) {
         if (key < 0) {
             throw std::runtime_error("Key cannot be negative");
         }
-        return dependency_->getValue(key);
+        return dependency->getValue(key);
     }
 
     std::string getDepName() const {
-        return dependency_->getName();
+        return dependency->getName();
     }
 
     void sendData(const std::vector<int>& data) {
-        dependency_->processData(data);
+        dependency->processData(data);
     }
 };
 
@@ -1384,7 +1491,7 @@ TEST(MyClassUsesDependency_Behavior) {
     IMyDependencyMock mockDep; // Create a mock instance
 
     // Define behavior for getValue
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) {
+    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, (int key)) {
         // This is a lambda function: [=](int key_param) -> int { ... }
         // Parameter names in the lambda can be anything, but types must match those declared in DEFINE_MOCK_METHOD
         if (key == 1) return 100;
@@ -1393,16 +1500,16 @@ TEST(MyClassUsesDependency_Behavior) {
     };
 
     // Define behavior for getName (const method)
-    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep) {
+    DEFINE_MOCK_BEHAVIOR_CONST(std::string, getName, mockDep, ()) {
         // Lambda for a method with no arguments: [=]() -> std::string { ... }
         return "MockedName";
     };
     
     // Define behavior for processData (void method)
-    std::vector<int> received_data;
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {
+    std::vector<int> receivedData;
+    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int> &data)) {
         // Lambda for a void method: [=](const std::vector<int>& data_param) -> void { ... }
-        received_data = data; // Copy data for verification
+        receivedData = data; // Copy data for verification
     };
 
     MyClassUsesDependency mainObj(&mockDep);
@@ -1412,10 +1519,10 @@ TEST(MyClassUsesDependency_Behavior) {
     ASSERT(mainObj.fetchValue(10),  equal, -1);
     ASSERT(mainObj.getDepName(),    equal, "MockedName");
 
-    std::vector<int> data_to_send = {1, 2, 3};
-    mainObj.sendData(data_to_send);
-    ASSERT(received_data.size(),    equal, 3);
-    ASSERT(received_data[0],        equal, 1);
+    std::vector<int> dataToSend = {1, 2, 3};
+    mainObj.sendData(dataToSend);
+    ASSERT(receivedData.size(),    equal, 3);
+    ASSERT(receivedData[0],        equal, 1);
     
     // Check exception throwing from the main class, not the mock
     ASSERT(mainObj.fetchValue(-1), std::runtime_error);
@@ -1488,16 +1595,16 @@ public:
 #include "iridium/smart_ptr.h" // For DEFINE_IMPLEMENTATION
 
 class CDataServiceImpl : public IDataService {
-    std::string m_serviceName;
+    std::string mServiceName;
 public:
     // Constructor for the real implementation
-    CDataServiceImpl(const std::string& name) : m_serviceName(name) {}
+    CDataServiceImpl(const std::string& name) : mServiceName(name) {}
 
     // DEFINE_IMPLEMENTATION includes DEFINE_CREATE, which will respect DEFINE_MOCK_CREATE
     DEFINE_IMPLEMENTATION(CDataServiceImpl);
 
     std::string fetchData(int id) override {
-        return "Real data for id " + std::to_string(id) + " from " + m_serviceName;
+        return "Real data for id " + std::to_string(id) + " from " + mServiceName;
     }
 };
 
@@ -1512,7 +1619,7 @@ public:
     // the mock must call it via DEFINE_MOCK_CONSTRUCTOR.
     DEFINE_MOCK_CONSTRUCTOR(CDataServiceImpl)
 
-    DEFINE_MOCK_METHOD(std::string, fetchData, int);
+    DEFINE_MOCK_METHOD(std::string, fetchData, (int));
 };
 
 // File: DataConsumer.h
@@ -1522,16 +1629,16 @@ public:
 #include <string>
 
 class DataConsumer {
-    std::shared_ptr<CDataServiceImpl> m_dataService; // Uses the concrete class
+    std::shared_ptr<CDataServiceImpl> mDataService; // Uses the concrete class
 public:
     DataConsumer() {
         // Call CDataServiceImpl::create(), which will be governed by DEFINE_MOCK_CREATE
-        m_dataService = CDataServiceImpl::create("MyRealService");
+        mDataService = CDataServiceImpl::create("MyRealService");
     }
 
     std::string processData(int recordId) {
-        if (!m_dataService) return "Error: Service not created";
-        return "Consumed: " + m_dataService->fetchData(recordId);
+        if (!mDataService) return "Error: Service not created";
+        return "Consumed: " + mDataService->fetchData(recordId);
     }
 };
 
@@ -1554,7 +1661,7 @@ TEST(DataConsumer_UsesMockService) {
     CDataServiceImplMock mockService("MockedServiceInstance");
 
     // 2. Define behavior for the fetchData mock method
-    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, int id) {
+    DEFINE_MOCK_BEHAVIOR(std::string, fetchData, mockService, (int id)) {
         if (id == 101) {
             return "mocked_payload_for_101";
         }
@@ -1599,107 +1706,20 @@ This detailed information should correctly reflect the mocking mechanism when us
 
 @subsection subsec_testing_sequences Testing Call Sequences
 
-Sometimes it's important not only which methods of a mock object are called, but also in what order. The Iridium mocking framework provides means to define and verify call sequences.
+Sometimes, it's important not only *which* methods of a mock object are called, but also the *order* in which they are called. The Iridium mocking framework provides tools to define and verify call sequences.
+
+***Note:** This functionality may be incomplete or under development. The macros present in the code may not align with a full implementation of the `MockSequence` class.*
 
 @subsubsection subsubsec_testing_defining_sequences Defining a Sequence (DEFINE_MOCK_SEQUENCE)
 
-The `DEFINE_MOCK_SEQUENCE(sequence_name, mock_object)` macro is used to create a sequence object.
--   `sequence_name`: The name you give to this sequence (a variable `sequence_<sequence_name>` will be created).
--   `mock_object`: The instance of the mock object for which you are defining the call sequence.
-
-This macro should be called at the beginning of your test where you want to define expectations for the order of calls.
+The `DEFINE_MOCK_SEQUENCE(name)` macro is used to create a sequence object.
+-   `name`: The name you give to this sequence (a variable `sequence_<name>` will be created).
 
 @subsubsection subsubsec_testing_sequence_expectations Expectations in a Sequence (DEFINE_MOCK_SEQUENCE_EXPECTATION)
 
-After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock_object, method_name, arg1, arg2, ...)` macro.
+After defining a sequence object, you add expected calls to it using the `DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method)` macro.
 -   `sequence_name`: The name of the previously defined sequence.
--   `mock_object`: The same mock object.
--   `method_name`: The name of the mocked method that is expected to be called.
--   `(arg1, arg2, ...)`: The expected arguments for this call, enclosed in parentheses.
+-   `mock`: The mock object.
+-   `method`: The name of the mocked method that is expected to be called.
 
-Each call to `DEFINE_MOCK_SEQUENCE_EXPECTATION` adds one expectation to the specified sequence. The order of these macros defines the expected order of method calls.
-
-Example:
-@code{.cpp}
-#include "iridium/testing/tester.h"
-#include "iridium/testing/mock.h"
-#include <string>
-#include <vector> 
-
-// For completeness, define IMyDependency and its mock here.
-// In real code, they would be in header files.
-class IMyDependency {
-public:
-    virtual ~IMyDependency() = default;
-    virtual int getValue(int key) = 0;
-    virtual std::string getName() const = 0;
-    virtual void processData(const std::vector<int>& data) = 0;
-    virtual void setup() = 0; // New method to demonstrate sequence
-    IMyDependency(const std::string& /* initial_config */) {} 
-    IMyDependency() = default;
-};
-
-DEFINE_MOCK_CLASS(IMyDependency) {
-public:
-    DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    DEFINE_MOCK_METHOD(int, getValue, int)
-    DEFINE_MOCK_METHOD_CONST(std::string, getName)
-    DEFINE_MOCK_METHOD(void, processData, const std::vector<int>&)
-    DEFINE_MOCK_METHOD(void, setup) // Mock for the new method
-};
-// End of IMyDependency and mock definitions
-
-// Class demonstrating calls in a specific sequence
-class ServiceWithOrderedCalls {
-    IMyDependency* dep_;
-public:
-    ServiceWithOrderedCalls(IMyDependency* dep) : dep_(dep) {}
-
-    void initializeAndGetData(int val_key) {
-        dep_->setup(); // First expected call
-        std::vector<int> data_vec = {val_key, val_key * 2};
-        dep_->processData(data_vec); // Second expected call
-        dep_->getValue(val_key); // Third expected call
-    }
-};
-
-TEST(ServiceOrderedTest) {
-    IMyDependencyMock mockDep;
-
-    // Define behavior for methods so they just work
-    // (for sequence testing, it's important that calls happen,
-    // not what they return, unless it's part of the test logic)
-    DEFINE_MOCK_BEHAVIOR(void, setup, mockDep) {};
-    DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int>& data) {};
-    DEFINE_MOCK_BEHAVIOR(int, getValue, mockDep, int key) { return key + 1; };
-
-    // Define sequence 's1' for object 'mockDep'
-    // The sequence object name will be sequence_s1
-    DEFINE_MOCK_SEQUENCE(s1, mockDep); 
-
-    // Add expectations to sequence s1
-    // Expect mockDep.setup() to be called with no arguments
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, setup); 
-    // Expect mockDep.processData() to be called with a specific vector
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, processData, {10, 20}); 
-    // Expect mockDep.getValue() to be called with argument 10
-    DEFINE_MOCK_SEQUENCE_EXPECTATION(s1, mockDep, getValue, 10); 
-
-    ServiceWithOrderedCalls service(&mockDep);
-    service.initializeAndGetData(10); // This method should call mockDep methods in the specified order
-
-    // Sequence verification happens automatically. If the order is violated,
-    // or one of the expected calls did not occur in the right place,
-    // or undeclared methods of the mock in the sequence were called,
-    // MockSequence::step will throw an exception, and the test will fail.
-    // If all calls occurred in the correct order with the correct arguments, the test will pass.
-}
-@endcode
-
-**Important Notes:**
--   If a method is called with arguments different from those specified in `DEFINE_MOCK_SEQUENCE_EXPECTATION`, it is considered a sequence violation.
--   If, during code execution, calls to mocked methods occur that are not part of the current expected step in the sequence (or are not expected at all within any active sequence), this may also lead to an error, depending on the strictness of the mock framework implementation. Exact matching is usually expected.
--   Sequence verification is performed at each step (`step` inside `MockSequence`). If the order is violated, an exception will be thrown immediately.
-
-Using sequences is particularly useful for testing interaction protocols or complex scenarios where the order of operations is critical.
-```
+In the current implementation, this macro does not allow specifying the expected arguments for the method call.

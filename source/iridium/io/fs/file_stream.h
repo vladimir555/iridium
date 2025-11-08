@@ -15,21 +15,34 @@ namespace io {
 namespace fs {
 
 
-class IFileStream: public virtual IStream {
+/// \~english @brief Base interface for file streams, extending IStream with file-specific operations.
+/// \~russian @brief Базовый интерфейс для файловых потоков, расширяющий IStream специфичными для файлов операциями.
+class IFileStream : public virtual IStream
+{
 public:
     DEFINE_INTERFACE(IFileStream)
+    /// \~english @brief Gets the status of the file.
+    /// \~russian @brief Возвращает статус файла.
+    /// \~english @return A TFileStatus object containing information like last modification time and size.
+    /// \~russian @return Объект TFileStatus, содержащий информацию, такую как время последнего изменения и размер.
     virtual TFileStatus getStatus() const = 0;
 };
 
-
-class IFileStreamWriter: public virtual IFileStream, public virtual IStreamWriter {
+/// \~english @brief Interface for a writable file stream.
+/// \~russian @brief Интерфейс для файлового потока, доступного для записи.
+class IFileStreamWriter : public virtual IFileStream, public virtual IStreamWriter
+{
 public:
     DEFINE_INTERFACE(IFileStreamWriter)
+    /// \~english @brief Flushes any buffered data to the underlying file.
+    /// \~russian @brief Сбрасывает все буферизованные данные в нижележащий файл.
     virtual void flush() = 0;
 };
 
-
-class IFileStreamReader: public virtual IFileStream, public virtual IStreamReader {
+/// \~english @brief Interface for a readable file stream.
+/// \~russian @brief Интерфейс для файлового потока, доступного для чтения.
+class IFileStreamReader : public virtual IFileStream, public virtual IStreamReader
+{
 public:
     DEFINE_INTERFACE(IFileStreamReader)
 };

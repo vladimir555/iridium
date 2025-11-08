@@ -46,7 +46,7 @@ protected:
     ///     Явно запрещает присваивание копированием экземпляров производных классов.
     ///     Квалификатор `const` у самого оператора необычен и, вероятно, является опечаткой;
     ///     стандартная практика: `NonCopyable &operator=(NonCopyable const &) = delete;`.
-    NonCopyable &operator=(NonCopyable const &) const = delete;
+    NonCopyable& operator=(NonCopyable const &) = delete;
 };
 
 

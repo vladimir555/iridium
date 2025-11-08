@@ -9,15 +9,6 @@
 #include "iridium/platform.h"
 
 
-/// \~english @file dns.h
-/// \~english @brief Provides platform-specific DNS resolution for Linux.
-/// \~english This implementation includes and uses the Unix platform's DNS resolution functionality,
-/// \~english leveraging the common POSIX-based services available on Linux.
-/// \~russian @file dns.h
-/// \~russian @brief Предоставляет платформо-специфичное разрешение DNS для Linux.
-/// \~russian Данная реализация включает и использует функциональность разрешения DNS платформы Unix,
-/// \~russian используя общие POSIX-совместимые службы, доступные на Linux.
-
 #ifdef LINUX_PLATFORM
 
 

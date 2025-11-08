@@ -18,8 +18,6 @@
 
 namespace iridium {
 namespace io {
-/// \~english @brief Namespace for file system related I/O functionalities.
-/// \~russian @brief Пространство имен для функциональности ввода-вывода, связанной с файловой системой.
 namespace fs {
 
 

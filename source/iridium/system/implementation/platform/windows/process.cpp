@@ -204,7 +204,7 @@ void CProcessStream::finalize() {
         //}
 
         //LOGT << "stop process '" << m_app << "' OK";
-    } catch (std::exception const& e) {
+    } catch (std::exception const &e) {
         throw std::runtime_error("process '" + m_command_line + "' finalization error: " + e.what()); // ----->
     }
 }
@@ -241,7 +241,7 @@ IProcess::TState CProcessStream::getState() {
 }
 
 
-void CProcessStream::sendSignal(TSignal const& signal) {
+void CProcessStream::sendSignal(TSignal const &signal) {
     try {
         DWORD exitCode = STILL_ACTIVE;
         assertOK(
@@ -294,7 +294,7 @@ void CProcessStream::sendSignal(TSignal const& signal) {
         default:
             throw std::runtime_error("unknown signal type");
         }
-    } catch (std::exception const& e) {
+    } catch (std::exception const &e) {
         throw std::runtime_error(
             "sending signal '" + convert<string>(signal) +
             "' to process '" + m_app + "' error: " + e.what());
@@ -315,7 +315,7 @@ std::list<uintptr_t> CProcessStream::getHandles() const {
         else
             return {}; // ----->
 
-    //} catch (std::exception const& e) {
+    //} catch (std::exception const &e) {
     //    throw std::runtime_error("process '" + m_command_line + "' get id error: " + e.what()); // ----->
     //}
 }

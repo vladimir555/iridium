@@ -18,23 +18,31 @@ namespace iridium {
 namespace pattern {
 
 
+/// \~english @brief A template class for creating thread-safe singletons.
+/// \~russian @brief Шаблонный класс для создания потокобезопасных одиночек.
 template<typename TClass>
 class Singleton:
     public NonCopyable,
     public NonMovable
 {
 public:
-    ///
+    /// \~english @brief Virtual destructor.
+    /// \~russian @brief Виртуальный деструктор.
     virtual ~Singleton();
-    ///
+    /// \~english @brief Gets the singleton instance.
+    /// \~russian @brief Возвращает экземпляр одиночки.
     static TClass &instance();
 protected:
+    /// \~english @brief A flag indicating if the singleton instance is alive.
+    /// \~russian @brief Флаг, указывающий, "жив" ли экземпляр одиночки.
     static std::atomic<bool> m_is_alive;
 };
 
 
 template<typename TClass>
-TClass &Singleton<TClass>::instance() {
+TClass&
+Singleton<TClass>::instance()
+{
     static std::shared_ptr<TClass> instance;
 
     if (!instance) {
@@ -47,7 +55,8 @@ TClass &Singleton<TClass>::instance() {
 
 
 template<typename TClass>
-Singleton<TClass>::~Singleton() {
+Singleton<TClass>::~Singleton()
+{
     m_is_alive = false;
 }
 

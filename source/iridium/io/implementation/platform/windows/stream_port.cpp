@@ -10,7 +10,7 @@ namespace implementation {
 namespace platform {
 
 
-CStreamPort::CStreamPort(URI const& uri) {}
+CStreamPort::CStreamPort(URI const &uri) {}
 
 
 void CStreamPort::initialize() {
@@ -33,7 +33,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
 }
 
 
-size_t CStreamPort::write(Buffer::TSharedPtr const& buffer) {
+size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
     throw std::runtime_error("stream port is not implemented");
 }
 
