@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Исходный файл source/iridium/pattern/observable.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_cdfd7661423c378c73c58f7f8812c6ce.html">pattern</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_cdfd7661423c378c73c58f7f8812c6ce.html">pattern</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -103,39 +90,36 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="observer_8h.html">observer.h</a>&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1pattern.html">pattern</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TEvent&gt;</div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observable.html">IObservable</a> {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_define" href="smart__ptr_8h.html#a5314379c214998b38c9b5d50b1e1ac9d">DEFINE_INTERFACE</a>(<a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observable.html">IObservable</a>)</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html#a628ea1edab5e7fb16e91948cad264b14">   38</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_i_observable.html#a628ea1edab5e7fb16e91948cad264b14">subscribe</a>  (typename <a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observer.html">IObserver</a>&lt;TEvent&gt;::TWeakPtr const &amp;observer) = 0;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html#ae3f33d326387017d3f6c3ee71bfe7701">   47</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_i_observable.html#ae3f33d326387017d3f6c3ee71bfe7701">unsubscribe</a>(typename <a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observer.html">IObserver</a>&lt;TEvent&gt;::TWeakPtr const &amp;observer) = 0;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1pattern.html">iridium::pattern</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TEvent&gt;</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observable.html">IObservable</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_define" href="smart__ptr_8h.html#a5314379c214998b38c9b5d50b1e1ac9d">DEFINE_INTERFACE</a>(<a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observable.html">IObservable</a>)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html#a628ea1edab5e7fb16e91948cad264b14">   37</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_i_observable.html#a628ea1edab5e7fb16e91948cad264b14">subscribe</a>  (typename <a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observer.html">IObserver</a>&lt;TEvent&gt;::TWeakPtr const &amp;observer) = 0;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html#ae3f33d326387017d3f6c3ee71bfe7701">   46</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_i_observable.html#ae3f33d326387017d3f6c3ee71bfe7701">unsubscribe</a>(typename <a class="code hl_class" href="classiridium_1_1pattern_1_1_i_observer.html">IObserver</a>&lt;TEvent&gt;::TWeakPtr const &amp;observer) = 0;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classiridium_1_1pattern_1_1_i_observable.html#aceade1ee74aff6c02f5419b0ec6508cc">   49</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1pattern_1_1_i_observable.html#aceade1ee74aff6c02f5419b0ec6508cc">notify</a>     (TEvent const &amp;event) = 0;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
 </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// pattern</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>} <span class="comment">// iridium</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace iridium::pattern</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_OBSERVABLE_EDD92C20_D8E9_491E_B074_1B31B94F754C</span></div>
-<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observable_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observable.html">iridium::pattern::IObservable</a></div><div class="ttdoc">Интерфейс для &#39;Наблюдаемого объекта&#39; (или &#39;Субъекта&#39;) в рамках шаблона проектирования &quot;Наблюдатель&quot;....</div><div class="ttdef"><b>Определения</b> observable.h:25</div></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_OBSERVABLE_EDD92C20_D8E9_491E_B074_1B31B94F754C</span></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observable_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observable.html">iridium::pattern::IObservable</a></div><div class="ttdoc">Интерфейс для &#39;Наблюдаемого объекта&#39; (или &#39;Субъекта&#39;) в рамках шаблона проектирования &quot;Наблюдатель&quot;....</div><div class="ttdef"><b>Определения</b> observable.h:24</div></div>
 <div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observable_html_a628ea1edab5e7fb16e91948cad264b14"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observable.html#a628ea1edab5e7fb16e91948cad264b14">iridium::pattern::IObservable::subscribe</a></div><div class="ttdeci">virtual void subscribe(typename IObserver&lt; TEvent &gt;::TWeakPtr const &amp;observer)=0</div><div class="ttdoc">Определяет общие элементы интерфейса для IObservable, такие как typedef-ы умных указателей (TSharedPt...</div></div>
-<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observable_html_aceade1ee74aff6c02f5419b0ec6508cc"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observable.html#aceade1ee74aff6c02f5419b0ec6508cc">iridium::pattern::IObservable::notify</a></div><div class="ttdeci">virtual void notify(TEvent const &amp;event)=0</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observable_html_aceade1ee74aff6c02f5419b0ec6508cc"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observable.html#aceade1ee74aff6c02f5419b0ec6508cc">iridium::pattern::IObservable::notify</a></div><div class="ttdeci">virtual void notify(TEvent const &amp;event)=0</div><div class="ttdoc">Уведомляет всех подписанных наблюдателей о новом событии.</div></div>
 <div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observable_html_ae3f33d326387017d3f6c3ee71bfe7701"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observable.html#ae3f33d326387017d3f6c3ee71bfe7701">iridium::pattern::IObservable::unsubscribe</a></div><div class="ttdeci">virtual void unsubscribe(typename IObserver&lt; TEvent &gt;::TWeakPtr const &amp;observer)=0</div><div class="ttdoc">Отписывает наблюдателя от этого наблюдаемого объекта. Наблюдатель больше не будет получать уведомлени...</div></div>
-<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observer_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observer.html">iridium::pattern::IObserver</a></div><div class="ttdoc">Интерфейс для &#39;Наблюдателя&#39; в рамках шаблона проектирования &quot;Наблюдатель&quot;. Объекты,...</div><div class="ttdef"><b>Определения</b> observer.h:27</div></div>
-<div class="ttc" id="anamespaceiridium_1_1pattern_html"><div class="ttname"><a href="namespaceiridium_1_1pattern.html">iridium::pattern</a></div><div class="ttdoc">Содержит реализации распространенных шаблонов проектирования программного обеспечения.</div><div class="ttdef"><b>Определения</b> broadcaster.h:16</div></div>
-<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_i_observer_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_i_observer.html">iridium::pattern::IObserver</a></div><div class="ttdoc">Интерфейс для &#39;Наблюдателя&#39; в рамках шаблона проектирования &quot;Наблюдатель&quot;. Объекты,...</div><div class="ttdef"><b>Определения</b> observer.h:26</div></div>
+<div class="ttc" id="anamespaceiridium_1_1pattern_html"><div class="ttname"><a href="namespaceiridium_1_1pattern.html">iridium::pattern</a></div><div class="ttdef"><b>Определения</b> broadcaster.h:13</div></div>
 <div class="ttc" id="aobserver_8h_html"><div class="ttname"><a href="observer_8h.html">observer.h</a></div></div>
 <div class="ttc" id="asmart__ptr_8h_html_a5314379c214998b38c9b5d50b1e1ac9d"><div class="ttname"><a href="smart__ptr_8h.html#a5314379c214998b38c9b5d50b1e1ac9d">DEFINE_INTERFACE</a></div><div class="ttdeci">#define DEFINE_INTERFACE(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения интерфейсов. Объединяет DEFINE_SMART_PTR(TClass) для объявлени...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:96</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

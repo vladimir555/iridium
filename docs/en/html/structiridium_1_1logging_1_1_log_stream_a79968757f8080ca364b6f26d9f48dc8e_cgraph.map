@@ -1,7 +1,5 @@
 <map id="iridium::logging::LogStream::operator&lt;&lt;" name="iridium::logging::LogStream::operator&lt;&lt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,185,79"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="259,5,386,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,43,243,35,244,40,186,48"/>
-<area shape="rect" id="Node000003" href="$structiridium_1_1logging_1_1_log_stream.html#abf26979f0094e583cca27edf0499e7f6" title="Constructs a LogStream for a specific logging level." alt="" coords="233,71,412,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,69,217,74,217,79,185,74"/>
+<area shape="rect" id="Node000001" title="Appends a value of any type to the log message." alt="" coords="5,5,185,46"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1logging_1_1_log_stream.html#abf26979f0094e583cca27edf0499e7f6" title="Constructs a LogStream for a specific log level." alt="" coords="233,5,412,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,23,217,23,217,28,185,28"/>
 </map>

@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Файл source/iridium/io/context_manager.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -95,6 +82,9 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Файл context_manager.h</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Определяет интерфейс <span class="tt">IContextManager</span> для управления контекстами ввода-вывода.  
+<a href="#details">Подробнее...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="context_8h_source.html">context.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="protocol_8h_source.html">protocol.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="io_2event_8h_source.html">event.h</a>&quot;</code><br />
@@ -102,104 +92,106 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для context_manager.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="context__manager_8h__incl.png" border="0" usemap="#asource_2iridium_2io_2context__manager_8h" alt=""/></div>
+<div class="center"><img src="context__manager_8h__incl.png" border="0" usemap="#asource_2iridium_2io_2context__manager_8h" loading="lazy" alt=""/></div>
 <map name="asource_2iridium_2io_2context__manager_8h" id="asource_2iridium_2io_2context__manager_8h">
-<area shape="rect" title=" " alt="" coords="558,5,722,46"/>
-<area shape="rect" href="context_8h.html" title=" " alt="" coords="566,168,642,193"/>
-<area shape="poly" title=" " alt="" coords="638,47,613,153,608,152,633,46"/>
-<area shape="rect" href="io_2event_8h.html" title="Определяет структуру Event для операций ввода&#45;вывода, а также связанные типы и утилиты...." alt="" coords="522,241,587,267"/>
-<area shape="poly" title=" " alt="" coords="626,48,589,100,571,133,557,168,553,198,554,226,548,226,548,197,552,167,566,131,584,97,621,45"/>
-<area shape="rect" href="protocol_8h.html" title=" " alt="" coords="640,94,718,120"/>
-<area shape="poly" title=" " alt="" coords="652,45,668,79,664,81,647,48"/>
-<area shape="rect" href="multiplexer_8h.html" title=" " alt="" coords="716,168,810,193"/>
-<area shape="poly" title=" " alt="" coords="676,44,705,65,731,92,748,122,759,152,754,154,743,124,727,96,702,69,673,49"/>
-<area shape="poly" title=" " alt="" coords="598,195,574,230,569,227,594,192"/>
-<area shape="rect" href="enum_8h.html" title="Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,..." alt="" coords="332,462,438,488"/>
-<area shape="poly" title=" " alt="" coords="538,270,476,318,442,352,413,390,400,419,392,448,387,446,395,417,408,387,438,348,473,314,535,265"/>
-<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="988,462,1116,488"/>
-<area shape="poly" title=" " alt="" coords="558,267,563,297,573,337,592,378,605,397,622,412,651,427,690,438,789,450,891,454,970,460,973,460,972,465,969,465,891,460,789,455,689,443,649,432,618,417,601,400,588,381,568,339,558,298,553,268"/>
-<area shape="rect" href="stream_8h.html" title=" " alt="" coords="686,315,759,341"/>
-<area shape="poly" title=" " alt="" coords="584,265,681,306,679,311,582,270"/>
-<area shape="rect" href="strings_8h.html" title=" " alt="" coords="499,544,613,569"/>
-<area shape="poly" title=" " alt="" coords="413,486,517,534,515,539,411,491"/>
-<area shape="rect" title=" " alt="" coords="126,698,165,724"/>
-<area shape="poly" title=" " alt="" coords="333,490,282,508,257,521,235,538,205,573,182,612,166,651,155,684,150,683,161,649,178,610,201,569,232,534,254,517,280,503,331,485"/>
-<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="738,536,862,577"/>
-<area shape="poly" title=" " alt="" coords="440,484,723,538,723,543,439,489"/>
-<area shape="rect" title=" " alt="" coords="429,544,475,569"/>
-<area shape="poly" title=" " alt="" coords="397,487,434,530,430,533,393,490"/>
-<area shape="rect" title=" " alt="" coords="246,544,317,569"/>
-<area shape="poly" title=" " alt="" coords="371,491,311,536,307,532,368,486"/>
-<area shape="rect" title=" " alt="" coords="342,544,405,569"/>
-<area shape="poly" title=" " alt="" coords="386,489,380,528,375,528,381,488"/>
-<area shape="rect" title=" " alt="" coords="529,698,583,724"/>
-<area shape="poly" title=" " alt="" coords="559,570,559,683,553,683,553,570"/>
-<area shape="rect" title=" " alt="" coords="622,625,679,650"/>
-<area shape="poly" title=" " alt="" coords="572,568,626,612,623,616,569,572"/>
-<area shape="poly" title=" " alt="" coords="524,572,180,700,178,695,523,567"/>
-<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="710,625,877,650"/>
-<area shape="poly" title=" " alt="" coords="801,577,798,609,793,609,796,577"/>
-<area shape="poly" title=" " alt="" coords="754,653,598,700,597,695,752,648"/>
-<area shape="poly" title=" " alt="" coords="710,651,692,653,180,709,180,703,692,648,709,646"/>
-<area shape="rect" title=" " alt="" coords="1156,698,1217,724"/>
-<area shape="poly" title=" " alt="" coords="861,648,1141,699,1141,704,860,654"/>
-<area shape="rect" title=" " alt="" coords="758,698,815,724"/>
-<area shape="poly" title=" " alt="" coords="795,651,792,683,787,683,790,650"/>
-<area shape="rect" title=" " alt="" coords="923,698,992,724"/>
-<area shape="poly" title=" " alt="" coords="822,648,917,689,915,694,820,653"/>
-<area shape="rect" title=" " alt="" coords="839,698,900,724"/>
-<area shape="poly" title=" " alt="" coords="808,649,847,686,844,690,804,653"/>
-<area shape="rect" title=" " alt="" coords="656,698,734,724"/>
-<area shape="poly" title=" " alt="" coords="778,653,725,691,722,687,775,649"/>
-<area shape="poly" title=" " alt="" coords="1050,489,970,685,966,682,1045,487"/>
-<area shape="poly" title=" " alt="" coords="686,332,529,337,425,344,319,356,219,374,136,399,104,415,79,432,64,452,59,474,59,557,65,595,81,630,102,661,123,685,119,689,98,664,76,633,60,597,53,558,53,474,59,450,75,428,101,410,134,394,218,369,318,351,425,339,528,331,686,327"/>
-<area shape="poly" title=" " alt="" coords="760,332,844,351,893,367,940,386,990,417,1030,450,1027,454,987,422,937,391,891,372,843,356,759,338"/>
-<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="717,389,838,414"/>
-<area shape="poly" title=" " alt="" coords="734,339,761,375,757,378,730,343"/>
-<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="1001,389,1183,414"/>
-<area shape="poly" title=" " alt="" coords="760,334,1015,383,1014,388,759,339"/>
-<area shape="rect" href="buffer_8h.html" title=" " alt="" coords="422,389,487,414"/>
-<area shape="poly" title=" " alt="" coords="687,341,502,390,501,385,685,336"/>
-<area shape="rect" href="uri_8h.html" title=" " alt="" coords="512,389,558,414"/>
-<area shape="poly" title=" " alt="" coords="692,344,574,388,572,383,690,339"/>
-<area shape="rect" title=" " alt="" coords="862,389,927,414"/>
-<area shape="poly" title=" " alt="" coords="753,339,852,380,850,385,751,344"/>
-<area shape="rect" title=" " alt="" coords="632,389,693,414"/>
-<area shape="poly" title=" " alt="" coords="715,343,685,378,680,375,711,339"/>
-<area shape="poly" title=" " alt="" coords="1088,416,1068,450,1064,448,1083,413"/>
-<area shape="poly" title=" " alt="" coords="423,414,355,438,316,454,281,474,251,496,232,521,227,533,225,547,228,561,236,575,263,607,295,634,332,655,371,672,449,694,514,704,514,709,448,699,370,677,330,660,292,638,259,611,231,578,223,562,220,547,221,532,227,518,248,492,278,469,314,450,353,433,421,409"/>
-<area shape="poly" title=" " alt="" coords="468,413,503,447,548,486,570,499,590,506,609,516,628,534,645,572,652,609,647,610,640,573,623,538,606,520,588,511,568,504,545,490,499,451,464,417"/>
-<area shape="poly" title=" " alt="" coords="422,408,384,413,340,423,294,439,252,464,215,500,193,535,178,574,161,625,154,655,150,683,144,683,148,654,156,624,173,573,188,532,211,497,249,460,292,435,338,418,383,407,422,402"/>
-<area shape="poly" title=" " alt="" coords="474,413,531,447,604,486,665,510,724,530,723,535,663,515,602,490,528,452,471,417"/>
-<area shape="poly" title=" " alt="" coords="488,409,500,412,629,432,758,447,972,466,972,471,758,453,629,437,500,417,487,414"/>
-<area shape="poly" title=" " alt="" coords="512,416,425,458,423,453,510,412"/>
-<area shape="poly" title=" " alt="" coords="545,413,570,447,604,486,623,499,641,507,657,516,672,535,677,554,677,575,666,612,661,610,672,574,672,555,667,537,654,520,638,512,621,504,601,490,566,451,540,416"/>
-<area shape="poly" title=" " alt="" coords="559,407,576,412,644,418,734,422,819,433,853,444,877,461,884,479,879,497,866,514,848,529,845,525,862,510,874,494,879,479,873,464,851,449,818,438,733,427,644,423,576,417,558,412"/>
-<area shape="poly" title=" " alt="" coords="559,405,592,412,661,418,751,423,838,434,874,445,899,460,920,485,936,513,948,543,956,574,963,634,962,683,957,683,957,635,950,575,943,545,931,515,916,488,896,464,871,450,837,440,751,428,661,423,592,417,558,410"/>
-<area shape="poly" title=" " alt="" coords="559,407,577,412,686,430,772,440,859,447,970,460,973,460,972,465,969,465,858,453,772,445,685,436,575,417,558,413"/>
-<area shape="rect" title=" " alt="" coords="615,462,665,488"/>
-<area shape="poly" title=" " alt="" coords="554,413,611,451,608,456,551,417"/>
-<area shape="rect" title=" " alt="" coords="689,462,799,488"/>
-<area shape="poly" title=" " alt="" coords="559,408,695,454,693,459,557,413"/>
-<area shape="rect" title=" " alt="" coords="823,462,862,488"/>
-<area shape="poly" title=" " alt="" coords="559,407,577,412,691,434,743,444,809,460,808,465,742,449,690,439,575,417,558,412"/>
-<area shape="poly" title=" " alt="" coords="668,122,629,159,625,155,664,118"/>
-<area shape="poly" title=" " alt="" coords="680,120,674,156,667,176,655,195,631,219,602,236,599,232,627,215,651,192,662,174,669,154,675,119"/>
-<area shape="poly" title=" " alt="" coords="719,113,807,134,924,173,987,199,1050,231,1109,269,1163,313,1191,337,1215,360,1224,373,1227,386,1226,400,1218,416,1201,435,1180,449,1132,467,1130,462,1177,445,1197,431,1214,413,1221,399,1222,387,1219,375,1211,364,1188,341,1160,317,1106,273,1047,236,985,204,922,178,806,139,717,118"/>
-<area shape="poly" title=" " alt="" coords="728,196,603,239,601,234,727,191"/>
-<area shape="poly" title=" " alt="" coords="745,196,681,232,600,269,550,285,498,295,396,304,204,305,125,314,91,324,63,340,40,361,23,390,12,427,8,474,8,557,11,580,19,601,46,638,80,669,114,691,111,695,77,673,42,642,14,603,6,581,3,558,3,474,7,426,18,388,36,358,60,335,89,319,124,309,204,300,395,299,498,290,548,280,598,265,679,227,742,192"/>
-<area shape="poly" title=" " alt="" coords="811,182,871,188,948,199,1032,217,1117,244,1197,282,1232,305,1262,331,1288,361,1307,395,1320,432,1324,474,1324,558,1321,580,1314,601,1289,639,1256,669,1224,692,1221,688,1253,665,1285,635,1309,599,1316,579,1319,558,1319,474,1314,433,1302,397,1284,364,1259,335,1228,309,1194,286,1116,249,1031,223,947,204,871,193,810,187"/>
-<area shape="poly" title=" " alt="" coords="811,186,898,204,951,220,1006,240,1061,267,1113,299,1159,339,1197,387,1202,400,1202,413,1188,433,1162,449,1129,460,1127,455,1159,444,1184,429,1197,411,1197,401,1192,390,1155,343,1110,304,1059,271,1004,245,949,225,897,209,810,191"/>
-<area shape="poly" title=" " alt="" coords="762,194,733,301,727,299,757,193"/>
-<area shape="poly" title=" " alt="" coords="782,192,1063,378,1060,382,779,196"/>
+<area shape="rect" title="Определяет интерфейс IContextManager для управления контекстами ввода&#45;вывода." alt="" coords="1062,5,1225,46"/>
+<area shape="rect" href="context_8h.html" title="Определяет интерфейсы для управления контекстом ввода&#45;вывода и каналами." alt="" coords="1070,168,1145,193"/>
+<area shape="poly" title=" " alt="" coords="1142,47,1117,153,1111,152,1136,46"/>
+<area shape="rect" href="io_2event_8h.html" title="Определяет структуру Event для операций ввода&#45;вывода, а также связанные типы и утилиты...." alt="" coords="1075,241,1140,267"/>
+<area shape="poly" title=" " alt="" coords="1129,48,1092,100,1074,133,1061,168,1058,181,1061,192,1071,212,1085,229,1080,232,1066,215,1056,194,1053,181,1056,167,1069,131,1088,97,1125,45"/>
+<area shape="rect" href="protocol_8h.html" title=" " alt="" coords="1143,94,1221,120"/>
+<area shape="poly" title=" " alt="" coords="1156,45,1172,79,1167,81,1151,48"/>
+<area shape="rect" href="multiplexer_8h.html" title=" " alt="" coords="1270,168,1364,193"/>
+<area shape="poly" title=" " alt="" coords="1173,44,1235,92,1298,154,1294,158,1231,96,1170,49"/>
+<area shape="poly" title=" " alt="" coords="1110,194,1110,226,1105,226,1105,194"/>
+<area shape="rect" href="enum_8h.html" title="Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек..." alt="" coords="292,462,398,488"/>
+<area shape="poly" title=" " alt="" coords="1075,260,970,270,817,293,730,310,641,332,552,359,467,391,414,421,371,454,368,450,411,417,465,386,551,354,640,327,729,305,816,288,969,265,1075,255"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="1194,462,1322,488"/>
+<area shape="poly" title=" " alt="" coords="1118,266,1244,448,1240,451,1114,269"/>
+<area shape="rect" href="stream_8h.html" title=" " alt="" coords="858,315,930,341"/>
+<area shape="poly" title=" " alt="" coords="1076,269,946,312,944,307,1074,264"/>
+<area shape="rect" href="strings_8h.html" title="Предоставляет набор вспомогательных функций для работы со строками." alt="" coords="384,544,498,569"/>
+<area shape="poly" title=" " alt="" coords="361,486,416,531,413,535,358,490"/>
+<area shape="rect" title=" " alt="" coords="292,625,331,650"/>
+<area shape="poly" title=" " alt="" coords="344,489,330,537,318,610,312,609,325,535,338,488"/>
+<area shape="rect" href="convert_8h.html" title="Предоставляет обобщенный фреймворк для преобразования типов." alt="" coords="623,536,747,577"/>
+<area shape="poly" title=" " alt="" coords="398,486,608,535,607,540,397,491"/>
+<area shape="rect" title=" " alt="" coords="28,544,75,569"/>
+<area shape="poly" title=" " alt="" coords="292,487,195,506,140,521,87,539,86,539,84,534,85,533,139,516,194,501,291,482"/>
+<area shape="rect" title=" " alt="" coords="99,544,170,569"/>
+<area shape="poly" title=" " alt="" coords="312,491,183,538,179,540,177,535,181,534,310,486"/>
+<area shape="rect" title=" " alt="" coords="195,544,258,569"/>
+<area shape="poly" title=" " alt="" coords="328,491,259,537,256,532,325,486"/>
+<area shape="rect" title=" " alt="" coords="584,772,637,798"/>
+<area shape="poly" title=" " alt="" coords="436,571,422,600,409,640,405,684,409,704,419,722,433,738,450,751,489,768,531,778,568,781,568,787,530,783,488,773,447,755,430,742,415,726,404,706,400,684,404,639,417,598,432,568"/>
+<area shape="rect" title=" " alt="" coords="850,625,907,650"/>
+<area shape="poly" title=" " alt="" coords="498,563,647,585,835,621,834,627,646,591,498,568"/>
+<area shape="poly" title=" " alt="" coords="423,572,346,619,343,614,420,567"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="659,625,826,650"/>
+<area shape="poly" title=" " alt="" coords="701,575,727,610,722,613,697,579"/>
+<area shape="poly" title=" " alt="" coords="760,649,777,664,793,683,801,704,800,715,795,726,765,754,728,771,688,781,652,786,652,780,687,776,726,766,762,749,791,722,795,714,795,705,788,686,773,668,757,653"/>
+<area shape="rect" href="common_8h.html" title="Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов." alt="" coords="856,698,938,724"/>
+<area shape="poly" title=" " alt="" coords="770,648,858,689,856,694,767,653"/>
+<area shape="rect" title=" " alt="" coords="941,772,1010,798"/>
+<area shape="poly" title=" " alt="" coords="811,648,893,669,929,682,952,696,970,725,977,756,972,757,965,727,948,700,926,686,892,674,809,653"/>
+<area shape="rect" title=" " alt="" coords="1100,772,1168,798"/>
+<area shape="poly" title=" " alt="" coords="827,647,983,671,1049,684,1085,696,1100,709,1112,724,1128,756,1123,759,1107,727,1096,713,1082,701,1047,689,982,676,826,652"/>
+<area shape="rect" title=" " alt="" coords="1205,698,1266,724"/>
+<area shape="poly" title=" " alt="" coords="827,648,1191,701,1190,706,826,654"/>
+<area shape="rect" title=" " alt="" coords="1014,698,1071,724"/>
+<area shape="poly" title=" " alt="" coords="795,648,995,696,1000,697,998,702,994,701,793,654"/>
+<area shape="rect" title=" " alt="" coords="619,698,679,724"/>
+<area shape="poly" title=" " alt="" coords="728,653,678,691,675,687,725,649"/>
+<area shape="rect" title=" " alt="" coords="703,698,781,724"/>
+<area shape="poly" title=" " alt="" coords="745,651,745,683,740,683,740,651"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="474,698,595,724"/>
+<area shape="poly" title=" " alt="" coords="708,653,585,695,583,690,706,648"/>
+<area shape="poly" title=" " alt="" coords="856,725,653,776,652,771,855,720"/>
+<area shape="rect" title=" " alt="" coords="834,772,917,798"/>
+<area shape="poly" title=" " alt="" coords="896,725,886,758,881,756,891,723"/>
+<area shape="poly" title=" " alt="" coords="912,723,953,759,949,763,908,727"/>
+<area shape="poly" title=" " alt="" coords="938,722,1086,766,1084,771,936,727"/>
+<area shape="poly" title=" " alt="" coords="1267,488,1283,530,1300,592,1303,626,1303,661,1296,694,1280,726,1261,747,1237,762,1185,780,1183,775,1234,757,1258,742,1276,722,1291,693,1297,660,1298,626,1294,593,1278,532,1262,490"/>
+<area shape="poly" title=" " alt="" coords="858,334,677,351,552,367,419,388,288,415,171,449,120,468,77,490,43,513,19,538,11,553,8,566,11,578,19,588,47,605,89,618,138,626,189,631,277,634,277,639,188,636,137,631,87,623,45,610,15,592,6,580,3,566,6,551,15,534,40,509,75,485,118,463,169,444,287,410,418,383,551,362,676,346,858,329"/>
+<area shape="poly" title=" " alt="" coords="858,336,778,354,733,370,690,391,654,419,624,455,599,495,579,537,553,620,540,683,535,682,548,618,574,535,594,492,619,452,650,416,688,386,731,365,777,349,857,331"/>
+<area shape="poly" title=" " alt="" coords="905,340,936,376,957,396,981,412,1016,425,1066,438,1179,459,1178,465,1065,443,1014,430,978,417,954,400,932,380,901,343"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="991,389,1173,414"/>
+<area shape="poly" title=" " alt="" coords="927,339,1037,380,1035,385,925,344"/>
+<area shape="rect" href="buffer_8h.html" title="Определяет класс Buffer для работы с сырыми двоичными данными." alt="" coords="701,389,765,414"/>
+<area shape="poly" title=" " alt="" coords="868,344,775,384,773,380,866,339"/>
+<area shape="rect" href="uri_8h.html" title=" " alt="" coords="871,389,917,414"/>
+<area shape="poly" title=" " alt="" coords="897,341,897,373,892,373,892,341"/>
+<area shape="poly" title=" " alt="" coords="1113,412,1215,454,1213,459,1111,417"/>
+<area shape="poly" title=" " alt="" coords="716,417,663,457,590,521,553,560,518,603,487,650,463,699,461,715,465,729,475,740,490,750,528,766,569,775,568,780,527,771,487,755,472,744,460,731,455,715,458,698,483,647,514,600,549,556,587,517,659,453,713,413"/>
+<area shape="poly" title=" " alt="" coords="743,413,865,610,860,613,738,416"/>
+<area shape="poly" title=" " alt="" coords="701,410,635,423,549,447,457,484,413,509,373,538,357,555,343,574,323,612,319,610,339,571,353,551,370,534,411,504,455,479,547,442,634,418,700,405"/>
+<area shape="poly" title=" " alt="" coords="732,416,698,522,693,521,727,414"/>
+<area shape="poly" title=" " alt="" coords="766,405,1179,460,1178,466,765,410"/>
+<area shape="poly" title=" " alt="" coords="871,409,414,468,413,462,870,403"/>
+<area shape="poly" title=" " alt="" coords="887,416,873,437,862,463,857,502,858,542,872,609,867,610,853,542,851,502,857,462,868,435,883,413"/>
+<area shape="poly" title=" " alt="" coords="879,417,726,529,723,524,876,413"/>
+<area shape="poly" title=" " alt="" coords="918,406,940,412,970,417,998,419,1047,418,1070,420,1092,426,1113,439,1134,461,1155,497,1168,537,1174,579,1174,621,1162,699,1146,758,1141,757,1157,698,1168,621,1168,579,1163,538,1150,499,1129,464,1110,443,1090,431,1069,425,1047,423,998,424,970,422,939,417,917,411"/>
+<area shape="poly" title=" " alt="" coords="918,407,936,412,1064,438,1179,459,1178,464,1063,443,935,417,917,412"/>
+<area shape="rect" title=" " alt="" coords="872,462,922,488"/>
+<area shape="poly" title=" " alt="" coords="897,414,899,447,893,447,892,415"/>
+<area shape="rect" title=" " alt="" coords="946,462,1056,488"/>
+<area shape="poly" title=" " alt="" coords="914,413,972,451,969,456,911,417"/>
+<area shape="rect" title=" " alt="" coords="1080,462,1119,488"/>
+<area shape="poly" title=" " alt="" coords="919,408,1066,459,1064,464,917,413"/>
+<area shape="poly" title=" " alt="" coords="1171,122,1133,159,1129,155,1168,118"/>
+<area shape="poly" title=" " alt="" coords="1183,121,1175,155,1159,195,1133,231,1128,228,1155,192,1170,153,1178,120"/>
+<area shape="poly" title=" " alt="" coords="1187,120,1255,446,1250,448,1182,121"/>
+<area shape="poly" title=" " alt="" coords="1282,196,1155,239,1154,234,1281,191"/>
+<area shape="poly" title=" " alt="" coords="1326,193,1348,249,1358,287,1362,326,1362,477,1359,509,1351,541,1324,600,1291,651,1260,688,1256,685,1287,648,1320,598,1346,539,1354,508,1357,476,1357,327,1353,288,1343,251,1321,195"/>
+<area shape="poly" title=" " alt="" coords="1306,196,1108,380,1104,376,1302,192"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 Граф файлов, в которые включается этот файл:</div>
 <div class="dyncontent">
-<div class="center"><img src="context__manager_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2io_2context__manager_8hdep" alt=""/></div>
+<div class="center"><img src="context__manager_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2io_2context__manager_8hdep" loading="lazy" alt=""/></div>
 <map name="asource_2iridium_2io_2context__manager_8hdep" id="asource_2iridium_2io_2context__manager_8hdep">
-<area shape="rect" title=" " alt="" coords="253,5,416,46"/>
+<area shape="rect" title="Определяет интерфейс IContextManager для управления контекстами ввода&#45;вывода." alt="" coords="253,5,416,46"/>
 <area shape="rect" href="implementation_2context__manager_8h.html" title=" " alt="" coords="115,94,323,135"/>
 <area shape="poly" title=" " alt="" coords="298,58,247,96,243,91,295,53"/>
 <area shape="rect" href="implementation_2session__manager_8h.html" title=" " alt="" coords="347,94,555,135"/>
@@ -216,25 +208,23 @@ $(function(){ initResizable(false); });
 </div>
 <p><a href="context__manager_8h_source.html">См. исходные тексты.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_context_manager.html">iridium::io::IContextManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для управления коллекцией контекстов ввода-вывода (<code><a class="el" href="classiridium_1_1io_1_1_i_context.html" title="Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывод...">IContext</a></code>). Менеджер контекстов отвечает за создание, уничтожение и, возможно, распределение операций ввода-вывода или потоков между несколькими контекстами. Это может использоваться для управления ресурсами, балансировки нагрузки или обработки различных типов задач ввода-вывода в отдельных контекстах.  <a href="classiridium_1_1io_1_1_i_context_manager.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium_3A_3Aio_3A_3AIContextManager" id="r_iridium_3A_3Aio_3A_3AIContextManager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_context_manager.html">iridium::io::IContextManager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для управления коллекцией контекстов ввода-вывода (<span class="tt"><a class="el" href="classiridium_1_1io_1_1_i_context.html" title="Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывод...">IContext</a></span>). Менеджер контекстов отвечает за создание, уничтожение и, возможно, распределение операций ввода-вывода или потоков между несколькими контекстами. Это может использоваться для управления ресурсами, балансировки нагрузки или обработки различных типов задач ввода-вывода в отдельных контекстах.  <a href="classiridium_1_1io_1_1_i_context_manager.html#details">Подробнее...</a><br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с вводом-выводом. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aio" id="r_iridium_3A_3Aio"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1io"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейс для обработчика обобщенного протокола ввода-вывода. <br /></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Определяет интерфейс <span class="tt">IContextManager</span> для управления контекстами ввода-вывода. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

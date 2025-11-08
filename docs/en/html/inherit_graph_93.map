@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,393,113,419"/>
+<area shape="rect" id="Node000001" href="$structiridium_1_1_t_container_has_size_method_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d3b8610498e5b86d4cfe251817e736f71.html" title="A trait to check if a type T has a size() method. Specialization for when size() exists." alt="" coords="200,5,382,76"/>
+<area shape="poly" id="edge147_Node000000_Node000001" title=" " alt="" coords="63,377,101,222,128,140,143,108,159,86,177,70,199,59,201,63,180,75,163,89,148,111,133,142,106,223,68,378"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum_3_01_t_00_01std_1_a22352c967e61128065a7bcf54823e30.html" title="A trait to check if a type T is an enum defined with DEFINE_ENUM. Specialization for when it is." alt="" coords="161,100,421,171"/>
+<area shape="poly" id="edge148_Node000000_Node000003" title=" " alt="" coords="63,377,74,335,93,282,121,229,138,204,159,181,174,169,178,173,162,185,142,207,125,231,98,285,79,336,68,379"/>
+<area shape="rect" id="Node000005" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_07157961f16a0f42ca821c947e5f7b355.html" title="Metafunction to determine if a type T is an STL associative container." alt="" coords="180,682,402,783"/>
+<area shape="poly" id="edge149_Node000000_Node000005" title=" " alt="" coords="67,434,76,484,94,546,122,611,141,642,163,670,182,686,178,690,159,673,136,645,117,614,89,548,71,485,61,435"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container_3_01fec33ec6a8916ef75c312c88953d79fe.html" title="Metafunction to determine if a type T is an STL sequential container." alt="" coords="188,195,394,326"/>
+<area shape="poly" id="edge150_Node000000_Node000004" title=" " alt="" coords="90,382,159,336,186,319,189,324,162,340,93,386"/>
+<area shape="rect" id="Node000006" href="$structiridium_1_1_t_container_has_size_method.html" title="A trait to check if a type T has a size() method." alt="" coords="200,350,382,390"/>
+<area shape="poly" id="edge151_Node000000_Node000006" title=" " alt="" coords="128,393,199,381,200,387,128,398"/>
+<area shape="rect" id="Node000007" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum.html" title="A trait to check if a type T is an enum defined with DEFINE_ENUM." alt="" coords="183,414,399,470"/>
+<area shape="poly" id="edge152_Node000000_Node000007" title=" " alt="" coords="128,414,183,423,182,428,127,419"/>
+<area shape="rect" id="Node000008" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html" title="Metafunction to determine if a type T is an STL associative container." alt="" coords="193,493,389,564"/>
+<area shape="poly" id="edge153_Node000000_Node000008" title=" " alt="" coords="88,427,122,454,162,480,193,495,191,499,159,484,119,458,85,431"/>
+<area shape="rect" id="Node000009" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html" title="Metafunction to determine if a type T is an STL sequential container." alt="" coords="196,588,386,659"/>
+<area shape="poly" id="edge154_Node000000_Node000009" title=" " alt="" coords="72,432,105,503,131,541,162,575,197,596,194,601,159,579,127,545,100,506,67,434"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="8,122,110,148"/>
+<area shape="poly" id="edge155_Node000002_Node000001" title=" " alt="" coords="99,113,160,85,199,69,201,74,162,90,101,118"/>
+<area shape="poly" id="edge156_Node000002_Node000003" title=" " alt="" coords="125,133,160,133,160,138,125,138"/>
+<area shape="poly" id="edge157_Node000002_Node000004" title=" " alt="" coords="99,154,189,202,186,207,97,158"/>
+</map>

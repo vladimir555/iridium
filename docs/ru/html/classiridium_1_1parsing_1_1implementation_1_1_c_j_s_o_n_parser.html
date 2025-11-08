@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Класс iridium::parsing::implementation::CJSONParser</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing.html">parsing</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html">CJSONParser</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1parsing.html">parsing</a></li><li class="navelem"><a href="namespaceiridium_1_1parsing_1_1implementation.html">implementation</a></li><li class="navelem"><a href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html">CJSONParser</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,50 +83,41 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation). Этот класс предоставляет функциональность для разбора строки JSON в структурированное дерево <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>, а также для формирования (компоновки) дерева <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>, представляющего данные JSON, обратно в его строковый формат.  
- <a href="#details">Подробнее...</a></p>
-
-<p><code>#include &lt;<a class="el" href="parser__json_8h_source.html">parser_json.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="json__parser_8h_source.html">json_parser.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:iridium::parsing::implementation::CJSONParser:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser__inherit__graph.png" border="0" usemap="#airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser__inherit__graph.png" border="0" usemap="#airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_inherit__map" id="airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_inherit__map">
-<area shape="rect" title="Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation)...." alt="" coords="5,79,211,120"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст..." alt="" coords="28,5,188,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,211,120"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для обобщенного парсера." alt="" coords="28,5,188,31"/>
 <area shape="poly" title=" " alt="" coords="111,46,111,79,105,79,105,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <div class="dynheader">
 Граф связей класса iridium::parsing::implementation::CJSONParser:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser__coll__graph.png" border="0" usemap="#airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser__coll__graph.png" border="0" usemap="#airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_coll__map" id="airidium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_coll__map">
-<area shape="rect" title="Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation)...." alt="" coords="5,79,211,120"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст..." alt="" coords="28,5,188,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,211,120"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для обобщенного парсера." alt="" coords="28,5,188,31"/>
 <area shape="poly" title=" " alt="" coords="111,46,111,79,105,79,105,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:a9f44cd971717939e3f5c4af23a904975" id="r_a9f44cd971717939e3f5c4af23a904975"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f44cd971717939e3f5c4af23a904975">CJSONParser</a> ()=default</td></tr>
-<tr class="memdesc:a9f44cd971717939e3f5c4af23a904975"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные вспомогательные средства реализации для <code><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html" title="Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation)....">CJSONParser</a></code>, такие как typedef-ы умных указателей и статический метод <code>create</code>.  <br /></td></tr>
-<tr class="separator:a9f44cd971717939e3f5c4af23a904975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a9f44cd971717939e3f5c4af23a904975"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные вспомогательные средства реализации для <span class="tt"><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html">CJSONParser</a></span>, такие как typedef-ы умных указателей и статический метод <span class="tt">create</span>.  <br /></td></tr>
 <tr class="memitem:a46e6a1cb92a3570e535faa31cf0e892e" id="r_a46e6a1cb92a3570e535faa31cf0e892e"><td class="memItemLeft" align="right" valign="top">INode::TSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46e6a1cb92a3570e535faa31cf0e892e">parse</a> (std::string const &amp;source) const override</td></tr>
-<tr class="memdesc:a46e6a1cb92a3570e535faa31cf0e892e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты, массивы и значения JSON в виде узлов.  <br /></td></tr>
-<tr class="separator:a46e6a1cb92a3570e535faa31cf0e892e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a46e6a1cb92a3570e535faa31cf0e892e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает строку в дерево узлов.  <br /></td></tr>
 <tr class="memitem:ad691506f7b57bedaa856b9cc2e81a9b6" id="r_ad691506f7b57bedaa856b9cc2e81a9b6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad691506f7b57bedaa856b9cc2e81a9b6">compose</a> (INode::TConstSharedPtr const &amp;root_node) const override</td></tr>
-<tr class="memdesc:ad691506f7b57bedaa856b9cc2e81a9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формирует (компонует) древовидную структуру узлов, представляющую данные JSON, в строку JSON.  <br /></td></tr>
-<tr class="separator:ad691506f7b57bedaa856b9cc2e81a9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classiridium_1_1parsing_1_1_i_parser"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1parsing_1_1_i_parser')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1parsing_1_1_i_parser.html">iridium::parsing::IParser</a></td></tr>
+<tr class="memdesc:ad691506f7b57bedaa856b9cc2e81a9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формирует дерево узлов в строку.  <br /></td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1parsing_1_1_i_parser"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1parsing_1_1_i_parser')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые члены унаследованные от <a class="el" href="classiridium_1_1parsing_1_1_i_parser.html">iridium::parsing::IParser</a></td></tr>
 <tr class="memitem:ac63eb70c8bc7664f7ddf24acbe23a3da inherit pub_methods_classiridium_1_1parsing_1_1_i_parser" id="r_ac63eb70c8bc7664f7ddf24acbe23a3da"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html#ac63eb70c8bc7664f7ddf24acbe23a3da">~IParser</a> ()=default</td></tr>
-<tr class="memdesc:ac63eb70c8bc7664f7ddf24acbe23a3da inherit pub_methods_classiridium_1_1parsing_1_1_i_parser"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст...">IParser</a></code>.  <br /></td></tr>
-<tr class="separator:ac63eb70c8bc7664f7ddf24acbe23a3da inherit pub_methods_classiridium_1_1parsing_1_1_i_parser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ac63eb70c8bc7664f7ddf24acbe23a3da inherit pub_methods_classiridium_1_1parsing_1_1_i_parser"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<span class="tt">TSharedPtr</span>, <span class="tt">TWeakPtr</span> и т.д.) для интерфейса <span class="tt"><a class="el" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для обобщенного парсера.">IParser</a></span>.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation). Этот класс предоставляет функциональность для разбора строки JSON в структурированное дерево <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>, а также для формирования (компоновки) дерева <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>, представляющего данные JSON, обратно в его строковый формат. </p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="a9f44cd971717939e3f5c4af23a904975" name="a9f44cd971717939e3f5c4af23a904975"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f44cd971717939e3f5c4af23a904975">&#9670;&#160;</a></span>CJSONParser()</h2>
 
@@ -163,38 +141,39 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Определяет стандартные вспомогательные средства реализации для <code><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html" title="Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation)....">CJSONParser</a></code>, такие как typedef-ы умных указателей и статический метод <code>create</code>. </p>
-<p>Конструктор по умолчанию. </p>
+<p>Определяет стандартные вспомогательные средства реализации для <span class="tt"><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html">CJSONParser</a></span>, такие как typedef-ы умных указателей и статический метод <span class="tt">create</span>. </p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_cgraph" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_cgraph">
-<area shape="rect" title="Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef&#45;ы умных..." alt="" coords="5,87,211,128"/>
-<area shape="poly" title=" " alt="" coords="61,87,58,77,66,68,83,63,108,61,135,63,151,69,150,74,134,68,108,66,84,68,69,73,63,78,66,86"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#ad691506f7b57bedaa856b9cc2e81a9b6" title="Формирует (компонует) древовидную структуру узлов, представляющую данные JSON, в строку JSON." alt="" coords="259,54,464,94"/>
-<area shape="poly" title=" " alt="" coords="211,91,243,87,244,92,212,97"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e" title="Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты,..." alt="" coords="259,119,464,160"/>
-<area shape="poly" title=" " alt="" coords="212,118,244,122,243,127,211,123"/>
-<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a77aef8e153fb6c036a689e03f66782e0" title=" " alt="" coords="512,54,717,94"/>
-<area shape="poly" title=" " alt="" coords="465,72,496,72,496,77,465,77"/>
-<area shape="poly" title=" " alt="" coords="567,54,565,44,573,35,589,29,615,27,642,30,658,36,656,41,641,35,615,32,590,34,576,39,570,45,572,52"/>
+<area shape="rect" title="Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef&#45;ы умных..." alt="" coords="5,108,211,149"/>
+<area shape="poly" title=" " alt="" coords="61,109,58,98,66,89,83,84,108,82,135,84,151,90,150,95,134,89,108,87,84,89,69,94,63,100,66,107"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#ad691506f7b57bedaa856b9cc2e81a9b6" title="Формирует дерево узлов в строку." alt="" coords="259,75,464,116"/>
+<area shape="poly" title=" " alt="" coords="211,113,243,108,244,114,212,118"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e" title="Разбирает строку в дерево узлов." alt="" coords="259,140,464,181"/>
+<area shape="poly" title=" " alt="" coords="212,139,244,143,243,149,211,144"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a77aef8e153fb6c036a689e03f66782e0" title=" " alt="" coords="512,55,717,96"/>
+<area shape="poly" title=" " alt="" coords="464,85,496,82,497,87,465,90"/>
+<area shape="poly" title=" " alt="" coords="567,55,565,45,573,36,589,31,615,29,642,31,658,37,656,42,641,36,615,34,590,36,576,41,570,46,572,54"/>
 <area shape="rect" href="namespaceiridium.html#a20e1b5ded3a601ff15ba1d7236cca92a" title="Добавляет элемент в контейнер, если он там еще не присутствует." alt="" coords="803,5,933,31"/>
-<area shape="poly" title=" " alt="" coords="709,51,791,32,792,38,710,56"/>
+<area shape="poly" title=" " alt="" coords="707,52,792,32,793,38,708,57"/>
 <area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a956307484fc1fc909fda072a211d5e0f" title=" " alt="" coords="765,55,971,96"/>
-<area shape="poly" title=" " alt="" coords="718,72,749,72,749,78,718,77"/>
-<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="512,119,717,160"/>
-<area shape="poly" title=" " alt="" coords="465,137,496,137,496,142,465,142"/>
-<area shape="rect" href="namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="798,124,938,150"/>
-<area shape="poly" title=" " alt="" coords="718,136,783,135,783,140,718,141"/>
-<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="836,173,900,199"/>
-<area shape="poly" title=" " alt="" coords="718,156,821,175,820,180,717,161"/>
+<area shape="poly" title=" " alt="" coords="718,73,749,73,749,78,718,78"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="512,140,717,181"/>
+<area shape="poly" title=" " alt="" coords="465,158,496,158,496,164,465,164"/>
+<area shape="rect" href="namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="798,120,938,146"/>
+<area shape="poly" title=" " alt="" coords="718,147,782,140,783,145,718,152"/>
+<area shape="rect" href="factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="836,169,900,195"/>
+<area shape="poly" title=" " alt="" coords="718,167,821,176,821,181,718,172"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#abeab93db6b3366dff9867eadc998ba5a" title=" " alt="" coords="765,219,971,260"/>
+<area shape="poly" title=" " alt="" coords="683,179,786,211,785,217,682,184"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_icgraph" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a9f44cd971717939e3f5c4af23a904975_icgraph">
 <area shape="rect" title="Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef&#45;ы умных..." alt="" coords="5,29,211,70"/>
 <area shape="poly" title=" " alt="" coords="141,16,129,10,108,8,89,10,77,15,72,20,74,28,69,29,67,19,73,10,87,5,108,3,130,5,144,11"/>
@@ -203,7 +182,7 @@ $(function(){ initResizable(false); });
 
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="ad691506f7b57bedaa856b9cc2e81a9b6" name="ad691506f7b57bedaa856b9cc2e81a9b6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad691506f7b57bedaa856b9cc2e81a9b6">&#9670;&#160;</a></span>compose()</h2>
 
@@ -227,28 +206,22 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Формирует (компонует) древовидную структуру узлов, представляющую данные JSON, в строку JSON. </p>
+<p>Формирует дерево узлов в строку. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">root_node</td><td>Константный разделяемый указатель на корневой узел <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> структуры JSON для компоновки. </td></tr>
+    <tr><td class="paramname">root_node</td><td>Корневой узел дерева для формирования. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Строка, содержащая представление дерева узлов в формате JSON. </dd></dl>
-<dl class="exception"><dt>Исключения</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>Может быть выброшено, если структура узлов недействительна для компоновки в строку JSON. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Строковое представление дерева узлов. </dd></dl>
 
 <p>Замещает <a class="el" href="classiridium_1_1parsing_1_1_i_parser.html#adc0fec4abb9d92da3b0da239fbb05834">iridium::parsing::IParser</a>.</p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_cgraph" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_cgraph">
-<area shape="rect" title="Формирует (компонует) древовидную структуру узлов, представляющую данные JSON, в строку JSON." alt="" coords="5,29,211,70"/>
+<area shape="rect" title="Формирует дерево узлов в строку." alt="" coords="5,29,211,70"/>
 <area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a77aef8e153fb6c036a689e03f66782e0" title=" " alt="" coords="259,29,464,70"/>
 <area shape="poly" title=" " alt="" coords="211,47,243,47,243,52,211,52"/>
 <area shape="poly" title=" " alt="" coords="314,29,312,19,319,10,336,5,361,3,389,5,405,11,403,16,387,10,361,8,337,10,322,15,317,21,319,28"/>
@@ -261,9 +234,9 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_icgraph" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_ad691506f7b57bedaa856b9cc2e81a9b6_icgraph">
-<area shape="rect" title="Формирует (компонует) древовидную структуру узлов, представляющую данные JSON, в строку JSON." alt="" coords="259,29,464,70"/>
+<area shape="rect" title="Формирует дерево узлов в строку." alt="" coords="259,29,464,70"/>
 <area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975" title="Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef&#45;ы умных..." alt="" coords="5,29,211,70"/>
 <area shape="poly" title=" " alt="" coords="243,52,211,52,211,47,243,47"/>
 <area shape="poly" title=" " alt="" coords="150,16,134,10,108,8,84,10,69,15,63,21,66,28,61,29,58,19,66,10,83,5,108,3,135,5,151,11"/>
@@ -295,42 +268,38 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты, массивы и значения JSON в виде узлов. </p>
+<p>Разбирает строку в дерево узлов. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">source</td><td>Строка JSON для разбора. </td></tr>
+    <tr><td class="paramname">source</td><td>Строка для разбора. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Разделяемый указатель на корневой узел <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> разобранной структуры JSON. </dd></dl>
-<dl class="exception"><dt>Исключения</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>Может быть выброшено, если строка JSON некорректна или происходит ошибка разбора. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Умный указатель на корневой узел разобранного дерева. </dd></dl>
 
 <p>Замещает <a class="el" href="classiridium_1_1parsing_1_1_i_parser.html#a45eb174bece5cdd6c5e231a439e0a109">iridium::parsing::IParser</a>.</p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_cgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_cgraph" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_cgraph">
-<area shape="rect" title="Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты,..." alt="" coords="5,23,211,64"/>
-<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="259,23,464,64"/>
-<area shape="poly" title=" " alt="" coords="211,41,243,41,243,46,211,46"/>
-<area shape="rect" href="namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="512,5,652,31"/>
-<area shape="poly" title=" " alt="" coords="464,29,496,25,497,31,464,34"/>
-<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="550,55,614,80"/>
-<area shape="poly" title=" " alt="" coords="464,52,535,60,534,65,464,57"/>
+<area shape="rect" title="Разбирает строку в дерево узлов." alt="" coords="5,47,211,88"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="259,47,464,88"/>
+<area shape="poly" title=" " alt="" coords="211,65,243,65,243,70,211,70"/>
+<area shape="rect" href="namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="544,5,685,31"/>
+<area shape="poly" title=" " alt="" coords="464,45,529,32,530,37,465,50"/>
+<area shape="rect" href="factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="582,55,647,80"/>
+<area shape="poly" title=" " alt="" coords="465,65,567,65,567,70,465,70"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1implementation.html#abeab93db6b3366dff9867eadc998ba5a" title=" " alt="" coords="512,104,717,145"/>
+<area shape="poly" title=" " alt="" coords="455,86,508,98,506,103,454,91"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_icgraph.png" border="0" usemap="#aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_icgraph" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_a46e6a1cb92a3570e535faa31cf0e892e_icgraph">
-<area shape="rect" title="Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты,..." alt="" coords="259,29,464,70"/>
+<area shape="rect" title="Разбирает строку в дерево узлов." alt="" coords="259,29,464,70"/>
 <area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975" title="Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef&#45;ы умных..." alt="" coords="5,29,211,70"/>
 <area shape="poly" title=" " alt="" coords="243,52,211,52,211,47,243,47"/>
 <area shape="poly" title=" " alt="" coords="150,16,134,10,108,8,84,10,69,15,63,21,66,28,61,29,58,19,66,10,83,5,108,3,135,5,151,11"/>
@@ -340,13 +309,13 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 <hr/>Объявления и описания членов классов находятся в файлах:<ul>
-<li>source/iridium/parsing/implementation/<a class="el" href="parser__json_8h_source.html">parser_json.h</a></li>
-<li>source/iridium/parsing/implementation/<a class="el" href="parser__json_8cpp.html">parser_json.cpp</a></li>
+<li>source/iridium/parsing/implementation/<a class="el" href="json__parser_8h_source.html">json_parser.h</a></li>
+<li>source/iridium/parsing/implementation/<a class="el" href="json__parser_8cpp.html">json_parser.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

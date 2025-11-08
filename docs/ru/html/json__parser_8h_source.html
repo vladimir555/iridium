@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/parsing/implementation/json_parser.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_3598e8d03f058449899ac524faf1a451.html">parsing</a></li><li class="navelem"><a href="dir_5a23d1bf9befbd4f2e2beb9407a1c7ef.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">json_parser.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="json__parser_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_JSON_PARSER_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_JSON_PARSER_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="smart__ptr_8h.html">iridium/smart_ptr.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="node_8h.html">iridium/parsing/node.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="parser_8h.html">iridium/parsing/parser.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1parsing_1_1implementation.html">iridium::parsing::implementation</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_c_j_s_o_n_parser.html">   17</a></span><span class="keyword">class </span><a class="code hl_function" href="class_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975">CJSONParser</a> : <span class="keyword">public</span> IParser {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="class_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975">CJSONParser</a>)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975">   22</a></span>    <a class="code hl_function" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975">CJSONParser</a>() = default;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_typedef" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e">INode</a>::TSharedPtr <a class="code hl_function" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e">parse</a>(std::<span class="keywordtype">string</span> const &amp;source) const override;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::<span class="keywordtype">string</span> <a class="code hl_function" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#ad691506f7b57bedaa856b9cc2e81a9b6">compose</a>(<a class="code hl_typedef" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e">INode</a>::TConstSharedPtr const &amp;root_node) const override;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>} <span class="comment">// iridium::parsing::implementation</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_JSON_PARSER_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88</span></div>
+<div class="ttc" id="aclass_c_j_s_o_n_parser_html_a9f44cd971717939e3f5c4af23a904975"><div class="ttname"><a href="class_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975">CJSONParser::CJSONParser</a></div><div class="ttdeci">CJSONParser()=default</div><div class="ttdoc">Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef-ы умных...</div></div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_html_a46e6a1cb92a3570e535faa31cf0e892e"><div class="ttname"><a href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e">iridium::parsing::implementation::CJSONParser::parse</a></div><div class="ttdeci">INode::TSharedPtr parse(std::string const &amp;source) const override</div><div class="ttdoc">Разбирает строку в дерево узлов.</div><div class="ttdef"><b>Определения</b> json_parser.cpp:599</div></div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_html_a9f44cd971717939e3f5c4af23a904975"><div class="ttname"><a href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975">iridium::parsing::implementation::CJSONParser::CJSONParser</a></div><div class="ttdeci">CJSONParser()=default</div><div class="ttdoc">Определяет стандартные вспомогательные средства реализации для CJSONParser, такие как typedef-ы умных...</div></div>
+<div class="ttc" id="aclassiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser_html_ad691506f7b57bedaa856b9cc2e81a9b6"><div class="ttname"><a href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#ad691506f7b57bedaa856b9cc2e81a9b6">iridium::parsing::implementation::CJSONParser::compose</a></div><div class="ttdeci">std::string compose(INode::TConstSharedPtr const &amp;root_node) const override</div><div class="ttdoc">Формирует дерево узлов в строку.</div><div class="ttdef"><b>Определения</b> json_parser.cpp:700</div></div>
+<div class="ttc" id="anamespaceiridium_1_1parsing_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1parsing_1_1implementation.html">iridium::parsing::implementation</a></div><div class="ttdef"><b>Определения</b> http_parser.cpp:57</div></div>
+<div class="ttc" id="anamespaceiridium_1_1parsing_html_a88d6a61f1143b2f33166598a41993b7e"><div class="ttname"><a href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e">iridium::parsing::INode</a></div><div class="ttdeci">INodeType&lt; std::string &gt; INode</div><div class="ttdoc">Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....</div><div class="ttdef"><b>Определения</b> node.h:31</div></div>
+<div class="ttc" id="anode_8h_html"><div class="ttname"><a href="node_8h.html">node.h</a></div><div class="ttdoc">Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен...</div></div>
+<div class="ttc" id="aparser_8h_html"><div class="ttname"><a href="parser_8h.html">parser.h</a></div><div class="ttdoc">Определяет интерфейс IParser для разбора и формирования структурированных данных. Этот интерфейс пред...</div></div>
+<div class="ttc" id="asmart__ptr_8h_html"><div class="ttname"><a href="smart__ptr_8h.html">smart_ptr.h</a></div><div class="ttdoc">Предоставляет вспомогательные макросы для определения стандартных typedef-ов умных указателей и стати...</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_ad4d8992039d0faf9ae66c4f596277280"><div class="ttname"><a href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a></div><div class="ttdeci">#define DEFINE_IMPLEMENTATION(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения классов реализации. Объединяет DEFINE_CREATE(TClass) для объяв...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:110</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

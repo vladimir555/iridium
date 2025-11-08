@@ -1,6 +1,6 @@
 <map id="iridium::io::fs::implementation::CFileStream::initialize" name="iridium::io::fs::implementation::CFileStream::initialize">
 <area shape="rect" id="Node000001" title="Инициализирует файловый поток, открывая файл. Этот метод является частью интерфейса IInitializable...." alt="" coords="5,5,198,46"/>
-<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="486,13,550,38"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="486,13,550,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,20,438,19,471,20,470,26,438,24,198,25"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056" title="Финализирует файловый поток, закрывая файл, если он открыт. Этот метод является частью интерфейса IIn..." alt="" coords="246,33,438,74"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,34,230,38,230,43,198,40"/>

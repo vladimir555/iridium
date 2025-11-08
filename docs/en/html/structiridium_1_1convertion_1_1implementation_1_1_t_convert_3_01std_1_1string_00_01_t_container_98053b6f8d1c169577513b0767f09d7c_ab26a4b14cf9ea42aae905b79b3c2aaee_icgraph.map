@@ -1,0 +1,4 @@
+<map id="iridium::convertion::implementation::TConvert&lt; std::string, TContainer, std::enable_if_t&lt; detail::TIsSTLSequentialContainer&lt; TContainer &gt;::value &amp;&amp;!detail::TIsSTLAssociativeContainer&lt; TContainer &gt;::value &gt;, is_throwable &gt;::convert" name="iridium::convertion::implementation::TConvert&lt; std::string, TContainer, std::enable_if_t&lt; detail::TIsSTLSequentialContainer&lt; TContainer &gt;::value &amp;&amp;!detail::TIsSTLAssociativeContainer&lt; TContainer &gt;::value &gt;, is_throwable &gt;::convert">
+<area shape="rect" id="Node000001" title="Converts an STL sequential container to a string." alt="" coords="5,29,278,160"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="181,19,165,11,141,8,123,10,110,14,100,21,94,30,90,27,96,18,107,10,122,4,142,3,166,6,183,14"/>
+</map>

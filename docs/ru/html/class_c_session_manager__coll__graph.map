@@ -2,6 +2,6 @@
 <area shape="rect" id="Node000001" title="Конкретная реализация ISessionManager. Управляет сеансами ввода&#45;вывода, обычно для сетевых подключени..." alt="" coords="34,153,163,178"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_session_manager.html" title="Интерфейс для управления сессиями обмена данными. Менеджер сессий отвечает за контроль жизненного цик..." alt="" coords="5,79,192,105"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,120,101,152,96,152,96,120"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="6,5,191,31"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="6,5,191,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,46,101,79,96,79,96,46"/>
 </map>

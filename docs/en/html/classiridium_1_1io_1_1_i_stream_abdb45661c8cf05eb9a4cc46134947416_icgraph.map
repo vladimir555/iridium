@@ -1,4 +1,4 @@
 <map id="iridium::io::IStream::getURI" name="iridium::io::IStream::getURI">
-<area shape="rect" id="Node000001" title="Retrieves the URI associated with this stream, if any. This can be used to identify the source or des..." alt="" coords="5,29,137,70"/>
+<area shape="rect" id="Node000001" title="Get the URI associated with the stream." alt="" coords="5,29,137,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="91,16,84,10,71,8,59,10,52,14,49,20,50,28,45,29,44,20,48,11,57,5,71,3,86,5,95,12"/>
 </map>

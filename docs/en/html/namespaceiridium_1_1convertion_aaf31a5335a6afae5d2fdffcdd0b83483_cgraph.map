@@ -1,0 +1,5 @@
+<map id="iridium::convertion::convert" name="iridium::convertion::convert">
+<area shape="rect" id="Node000001" title="Converts a value from a source type to a target type." alt="" coords="5,13,133,54"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Default conversion function that is called when no specialization is found." alt="" coords="181,5,360,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,30,165,30,165,36,133,36"/>
+</map>

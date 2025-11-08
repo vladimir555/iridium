@@ -1,7 +1,9 @@
 <map id="iridium::assertSize" name="iridium::assertSize">
-<area shape="rect" id="Node000001" title="This function computes assertSize. English detailed description (if any)." alt="" coords="5,35,135,60"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="This function computes assertSize. English detailed description (if any)." alt="" coords="183,5,312,31"/>
+<area shape="rect" id="Node000001" title="Asserts that a container has a specific size, throwing a std::runtime_error with a detailed message i..." alt="" coords="5,35,135,60"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Asserts that a container has a specific size, throwing a custom exception if it does not." alt="" coords="183,5,312,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,34,167,29,168,34,135,39"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="184,55,311,96"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from a source type to a target type." alt="" coords="184,55,311,96"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,55,169,60,168,66,134,60"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Default conversion function that is called when no specialization is found." alt="" coords="360,48,539,103"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="311,73,344,73,344,78,311,78"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="iridium::TContainerHasSizeMethod&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().size())&gt; &gt;" name="iridium::TContainerHasSizeMethod&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().size())&gt; &gt;">
-<area shape="rect" id="Node000001" title="Type trait to check if a container type T has a size() method. Specialization for types that have siz..." alt="" coords="32,79,214,150"/>
+<area shape="rect" id="Node000001" title="A trait to check if a type T has a size() method. Specialization for when size() exists." alt="" coords="32,79,214,150"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,113,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,42,101,77,97,80,73,45"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="136,5,238,31"/>

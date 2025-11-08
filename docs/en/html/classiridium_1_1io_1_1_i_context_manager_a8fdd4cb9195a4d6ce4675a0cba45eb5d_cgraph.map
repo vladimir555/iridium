@@ -1,4 +1,4 @@
 <map id="iridium::io::IContextManager::removeContext" name="iridium::io::IContextManager::removeContext">
-<area shape="rect" id="Node000001" title="Removes (destroys or releases) an existing I/O context. This function is responsible for cleaning up ..." alt="" coords="5,29,191,70"/>
+<area shape="rect" id="Node000001" title="Removes an I/O context." alt="" coords="5,29,191,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="63,29,61,19,67,10,79,5,98,3,118,5,130,11,128,16,117,10,98,8,81,10,70,15,66,20,68,28"/>
 </map>

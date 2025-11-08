@@ -1,8 +1,8 @@
 <map id="iridium::parsing::implementation::CHTTPParser::parse" name="iridium::parsing::implementation::CHTTPParser::parse">
-<area shape="rect" id="Node000001" title="Разбирает строку HTTP&#45;сообщения в древовидную структуру узлов. Результирующее дерево обычно представл..." alt="" coords="5,96,211,137"/>
+<area shape="rect" id="Node000001" title="Разбирает строку в дерево узлов." alt="" coords="5,96,211,137"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium.html#a20e1b5ded3a601ff15ba1d7236cca92a" title="Добавляет элемент в контейнер, если он там еще не присутствует." alt="" coords="259,5,388,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,94,258,40,270,35,272,40,260,45,149,98"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Эта функция computes assertSize. Russian detailed description (if any)." alt="" coords="259,55,388,80"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Утверждает, что контейнер имеет определенный размер, и выбрасывает пользовательское исключение,..." alt="" coords="259,55,388,80"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,93,249,82,250,87,200,99"/>
 <area shape="rect" id="Node000004" href="$namespaceiridium.html#a5a1825c250f8ba5bcc7f3caab48e0cb9" title=" " alt="" coords="259,104,388,130"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="211,114,243,114,243,120,211,120"/>

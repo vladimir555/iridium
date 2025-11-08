@@ -1,6 +1,6 @@
 <map id="iridium::parsing::implementation::CXMLParser::compose" name="iridium::parsing::implementation::CXMLParser::compose">
-<area shape="rect" id="Node000001" title="Composes a node tree structure representing XML data into an XML string." alt="" coords="5,27,211,68"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="544,5,685,31"/>
+<area shape="rect" id="Node000001" title="Composes a tree of nodes into a string." alt="" coords="5,27,211,68"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a1315b3a96f6964943359e40747b8df37" title="Asserts that a value (e.g., a boolean, integer, or other type convertible to bool) is &quot;truthy&quot;,..." alt="" coords="544,5,685,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,33,258,29,529,17,529,22,259,34,211,38"/>
 <area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing_1_1implementation.html#afc4eac333cfa9a870c1ea90067b54733" title=" " alt="" coords="259,67,464,108"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,61,244,66,243,71,211,66"/>

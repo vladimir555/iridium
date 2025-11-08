@@ -1,7 +1,7 @@
 <map id="iridium::threading::implementation::CWorkerPusherRunnable&lt; TItem &gt;" name="iridium::threading::implementation::CWorkerPusherRunnable&lt; TItem &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,168,223,223"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_runnable.html" title=" " alt="" coords="54,79,174,120"/>
+<area shape="rect" id="Node000001" title="&quot;Runnable&quot; для &quot;работника&quot;, который добавляет элементы в очередь." alt="" coords="5,168,223,223"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_runnable.html" title="Интерфейс для объектов, которые могут быть запущены в отдельном потоке." alt="" coords="54,79,174,120"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,135,117,167,111,167,111,135"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="22,5,206,31"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="22,5,206,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,46,117,79,111,79,111,46"/>
 </map>

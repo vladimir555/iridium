@@ -1,8 +1,8 @@
 <map id="iridium::threading::implementation::CWorkerPoolPusher::CWorkerPoolPusher" name="iridium::threading::implementation::CWorkerPoolPusher::CWorkerPoolPusher">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,208,85"/>
+<area shape="rect" id="Node000001" title="Constructor." alt="" coords="5,29,208,85"/>
 <area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="59,29,59,19,68,10,84,5,107,3,132,5,148,12,146,17,131,10,106,8,85,10,71,15,64,21,64,29"/>
-<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="320,11,384,37"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from a source type to a target type." alt="" coords="320,11,384,37"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,41,304,28,305,33,209,46"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#acd2d2ac09fc6ed31f63978af0426c95b" title=" " alt="" coords="256,61,448,117"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html#acd2d2ac09fc6ed31f63978af0426c95b" title="Constructor." alt="" coords="256,61,448,117"/>
 <area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="209,68,241,72,240,77,208,73"/>
 </map>

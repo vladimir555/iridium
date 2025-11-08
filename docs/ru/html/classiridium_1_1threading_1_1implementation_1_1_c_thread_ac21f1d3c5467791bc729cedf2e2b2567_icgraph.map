@@ -1,5 +1,5 @@
 <map id="iridium::threading::implementation::CThread::getName" name="iridium::threading::implementation::CThread::getName">
-<area shape="rect" id="Node000001" title="Получает имя этого потока." alt="" coords="229,5,404,61"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Сравнивает этот объект CThread с другим объектом IThread. Сравнение основано на имени потока." alt="" coords="5,5,181,61"/>
+<area shape="rect" id="Node000001" title="Возвращает имя потока." alt="" coords="229,5,404,61"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Оператор сравнения для сортировки потоков." alt="" coords="5,5,181,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,36,181,36,181,30,213,30"/>
 </map>

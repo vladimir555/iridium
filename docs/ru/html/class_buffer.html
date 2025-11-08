@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Класс Buffer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -92,16 +79,16 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Динамический буфер памяти для операций ввода-вывода, унаследованный от <code>std::vector&lt;unsigned char&gt;</code>. Этот класс расширяет <code>std::vector&lt;unsigned char&gt;</code>, наследуя его методы для управления памятью, доступа к элементам и итерации. Он предоставляет дополнительные конструкторы для удобной инициализации из строк и списков других буферов.  
+<p>Класс <a class="el" href="class_buffer.html" title="Класс Buffer для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;.">Buffer</a> для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="buffer_8h_source.html">buffer.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:Buffer:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_buffer__inherit__graph.png" border="0" usemap="#a_buffer_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="class_buffer__inherit__graph.png" border="0" usemap="#a_buffer_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="a_buffer_inherit__map" id="a_buffer_inherit__map">
-<area shape="rect" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="50,79,107,105"/>
+<area shape="rect" title="Класс Buffer для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;." alt="" coords="50,79,107,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,152,31"/>
 <area shape="poly" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
 </map>
@@ -109,36 +96,40 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Граф связей класса Buffer:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_buffer__coll__graph.png" border="0" usemap="#a_buffer_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="class_buffer__coll__graph.png" border="0" usemap="#a_buffer_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_buffer_coll__map" id="a_buffer_coll__map">
-<area shape="rect" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="50,79,107,105"/>
+<area shape="rect" title="Класс Buffer для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;." alt="" coords="50,79,107,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,152,31"/>
 <area shape="poly" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:a4669adf0b8a958180850edcf11713705" id="r_a4669adf0b8a958180850edcf11713705"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4669adf0b8a958180850edcf11713705">Buffer</a> ()=default</td></tr>
-<tr class="memdesc:a4669adf0b8a958180850edcf11713705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, вероятно, определяющий статический метод <code>create</code> или аналогичную фабричную функциональность для создания умных указателей (<code>Buffer::TSharedPtr</code>) на экземпляры <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a></code>.  <br /></td></tr>
-<tr class="separator:a4669adf0b8a958180850edcf11713705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a4669adf0b8a958180850edcf11713705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию.  <br /></td></tr>
 <tr class="memitem:aa42fbefe176a94e58a1373de1aef5fe8" id="r_aa42fbefe176a94e58a1373de1aef5fe8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa42fbefe176a94e58a1373de1aef5fe8">Buffer</a> (char const *const str)</td></tr>
-<tr class="memdesc:aa42fbefe176a94e58a1373de1aef5fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из C-строки, завершающейся нулевым символом. Буфер инициализируется копией символов из C-строки, включая нулевой терминатор, если он учитывается strlen. Длина определяется с помощью <code>strlen</code>.  <br /></td></tr>
-<tr class="separator:aa42fbefe176a94e58a1373de1aef5fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aa42fbefe176a94e58a1373de1aef5fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует буфер из строки в стиле C.  <br /></td></tr>
 <tr class="memitem:a51d0b85d61c74e6f5d414d2c268953e3" id="r_a51d0b85d61c74e6f5d414d2c268953e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51d0b85d61c74e6f5d414d2c268953e3">Buffer</a> (std::string const &amp;str)</td></tr>
-<tr class="memdesc:a51d0b85d61c74e6f5d414d2c268953e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из <code>std::string</code>. Буфер инициализируется копией символов из строки.  <br /></td></tr>
-<tr class="separator:a51d0b85d61c74e6f5d414d2c268953e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a51d0b85d61c74e6f5d414d2c268953e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует буфер из <span class="tt">std::string</span>.  <br /></td></tr>
 <tr class="memitem:a002c084b75bcff6325923f65812ed216" id="r_a002c084b75bcff6325923f65812ed216"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a002c084b75bcff6325923f65812ed216">Buffer</a> (std::list&lt; Buffer::TSharedPtr &gt; const &amp;buffers)</td></tr>
-<tr class="memdesc:a002c084b75bcff6325923f65812ed216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> путем конкатенации списка умных указателей на другие <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a>. Содержимое нового буфера формируется путем добавления данных из каждого буфера в предоставленном списке. Общая емкость резервируется заранее, чтобы избежать многократных перераспределений памяти.  <br /></td></tr>
-<tr class="separator:a002c084b75bcff6325923f65812ed216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a002c084b75bcff6325923f65812ed216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует буфер из списка умных указателей на другие буферы.  <br /></td></tr>
 <tr class="memitem:addea15640d3fd8f123b4396e42814394" id="r_addea15640d3fd8f123b4396e42814394"><td class="memTemplParams" colspan="2">template&lt;typename ... TArgs&gt; </td></tr>
-<tr class="memitem:addea15640d3fd8f123b4396e42814394"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#addea15640d3fd8f123b4396e42814394">Buffer</a> (TArgs ... args)</td></tr>
-<tr class="memdesc:addea15640d3fd8f123b4396e42814394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вариативный шаблонный конструктор, перенаправляющий аргументы в <code>std::vector&lt;unsigned char&gt;</code>. Позволяет инициализацию с использованием любого конструктора <code>std::vector&lt;unsigned char&gt;</code>, такого как <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer(size_t count, unsigned char value)</a></code> или конструирование из итераторов.  <br /></td></tr>
-<tr class="separator:addea15640d3fd8f123b4396e42814394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addea15640d3fd8f123b4396e42814394 template"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addea15640d3fd8f123b4396e42814394">Buffer</a> (TArgs ... args)</td></tr>
+<tr class="memdesc:addea15640d3fd8f123b4396e42814394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует буфер из вариативного списка аргументов.  <br /></td></tr>
+<tr class="memitem:a34c2cef05d183956ff6fe364b85549af" id="r_a34c2cef05d183956ff6fe364b85549af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34c2cef05d183956ff6fe364b85549af">checkSuffixEqual</a> (std::string const &amp;suffix, std::string const &amp;skip=&quot;&quot;) const</td></tr>
+<tr class="memdesc:a34c2cef05d183956ff6fe364b85549af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы.  <br /></td></tr>
+<tr class="memitem:a2355a01c6705560a9fcdb697f31bf376" id="r_a2355a01c6705560a9fcdb697f31bf376"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2355a01c6705560a9fcdb697f31bf376">checkSuffixEqual</a> (uint8_t const *const suffix, size_t const &amp;size) const</td></tr>
+<tr class="memdesc:a2355a01c6705560a9fcdb697f31bf376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, заканчивается ли буфер заданным суффиксом.  <br /></td></tr>
+<tr class="memitem:a24f7f09e5a8d525cf10206ba6e542dc9" id="r_a24f7f09e5a8d525cf10206ba6e542dc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a24f7f09e5a8d525cf10206ba6e542dc9">checkSuffixEqual</a> (std::vector&lt; uint8_t &gt; const &amp;suffix) const</td></tr>
+<tr class="memdesc:a24f7f09e5a8d525cf10206ba6e542dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, заканчивается ли буфер заданным суффиксом.  <br /></td></tr>
+<tr class="memitem:a8ba6e909213fd936823ffc3e59dcb324" id="r_a8ba6e909213fd936823ffc3e59dcb324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ba6e909213fd936823ffc3e59dcb324">emplace_back</a> (TSharedPtr const &amp;)</td></tr>
+<tr class="memdesc:a8ba6e909213fd936823ffc3e59dcb324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет другой буфер в конец этого.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Динамический буфер памяти для операций ввода-вывода, унаследованный от <code>std::vector&lt;unsigned char&gt;</code>. Этот класс расширяет <code>std::vector&lt;unsigned char&gt;</code>, наследуя его методы для управления памятью, доступа к элементам и итерации. Он предоставляет дополнительные конструкторы для удобной инициализации из строк и списков других буферов. </p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Класс <a class="el" href="class_buffer.html" title="Класс Buffer для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;.">Buffer</a> для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;. </p>
+<p>Предоставляет различные конструкторы для создания буферов из строк или других буферов, а также вспомогательные функции для манипулирования данными, например, для проверки суффиксов. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="a4669adf0b8a958180850edcf11713705" name="a4669adf0b8a958180850edcf11713705"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4669adf0b8a958180850edcf11713705">&#9670;&#160;</a></span>Buffer() <span class="overload">[1/5]</span></h2>
 
@@ -149,7 +140,7 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705">iridium::io::Buffer::Buffer</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -162,8 +153,7 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Макрос, вероятно, определяющий статический метод <code>create</code> или аналогичную фабричную функциональность для создания умных указателей (<code>Buffer::TSharedPtr</code>) на экземпляры <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a></code>. </p>
-<p>Конструктор по умолчанию. Создает пустой буфер. Наследует поведение от конструктора по умолчанию <code>std::vector&lt;unsigned char&gt;</code>. </p>
+<p>Конструктор по умолчанию. </p>
 
 </div>
 </div>
@@ -174,7 +164,7 @@ $(function(){ initResizable(false); });
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705">iridium::io::Buffer::Buffer</a> </td>
           <td>(</td>
           <td class="paramtype">char const *const</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
           <td></td>
@@ -182,13 +172,7 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из C-строки, завершающейся нулевым символом. Буфер инициализируется копией символов из C-строки, включая нулевой терминатор, если он учитывается strlen. Длина определяется с помощью <code>strlen</code>. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td>Указатель на константный символьный массив, завершающийся нулевым символом. Не должен быть null. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Конструирует буфер из строки в стиле C. </p>
 
 </div>
 </div>
@@ -199,7 +183,7 @@ $(function(){ initResizable(false); });
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705">iridium::io::Buffer::Buffer</a> </td>
           <td>(</td>
           <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
           <td></td>
@@ -207,13 +191,7 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> из <code>std::string</code>. Буфер инициализируется копией символов из строки. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td><code>std::string</code>, из которой копируются данные. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Конструирует буфер из <span class="tt">std::string</span>. </p>
 
 </div>
 </div>
@@ -224,7 +202,7 @@ $(function(){ initResizable(false); });
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705">iridium::io::Buffer::Buffer</a> </td>
           <td>(</td>
           <td class="paramtype">std::list&lt; Buffer::TSharedPtr &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>buffers</em></span></td><td>)</td>
           <td></td>
@@ -232,13 +210,7 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Конструирует <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a> путем конкатенации списка умных указателей на другие <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a>. Содержимое нового буфера формируется путем добавления данных из каждого буфера в предоставленном списке. Общая емкость резервируется заранее, чтобы избежать многократных перераспределений памяти. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buffers</td><td>Список <code>Buffer::TSharedPtr</code> (умных указателей на объекты <a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer</a>), содержимое которых будет объединено. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Конструирует буфер из списка умных указателей на другие буферы. </p>
 
 </div>
 </div>
@@ -249,37 +221,102 @@ $(function(){ initResizable(false); });
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename ... TArgs&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::Buffer::Buffer </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705">iridium::io::Buffer::Buffer</a> </td>
           <td>(</td>
           <td class="paramtype">TArgs ...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Вариативный шаблонный конструктор, перенаправляющий аргументы в <code>std::vector&lt;unsigned char&gt;</code>. Позволяет инициализацию с использованием любого конструктора <code>std::vector&lt;unsigned char&gt;</code>, такого как <code><a class="el" href="class_buffer.html" title="Динамический буфер памяти для операций ввода-вывода, унаследованный от std::vector&lt;unsigned char&gt;....">Buffer(size_t count, unsigned char value)</a></code> или конструирование из итераторов. </p>
-<dl class="tparams"><dt>Параметры шаблона</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">TArgs</td><td>Типы аргументов для перенаправления в конструктор <code>std::vector</code>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Аргументы для перенаправления. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Конструирует буфер из вариативного списка аргументов. </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a34c2cef05d183956ff6fe364b85549af" name="a34c2cef05d183956ff6fe364b85549af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34c2cef05d183956ff6fe364b85549af">&#9670;&#160;</a></span>checkSuffixEqual() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classiridium_1_1io_1_1_buffer.html#a34c2cef05d183956ff6fe364b85549af">iridium::io::Buffer::checkSuffixEqual</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>suffix</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>skip</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы. </p>
+
+</div>
+</div>
+<a id="a24f7f09e5a8d525cf10206ba6e542dc9" name="a24f7f09e5a8d525cf10206ba6e542dc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24f7f09e5a8d525cf10206ba6e542dc9">&#9670;&#160;</a></span>checkSuffixEqual() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classiridium_1_1io_1_1_buffer.html#a34c2cef05d183956ff6fe364b85549af">iridium::io::Buffer::checkSuffixEqual</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>suffix</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет, заканчивается ли буфер заданным суффиксом. </p>
+
+</div>
+</div>
+<a id="a2355a01c6705560a9fcdb697f31bf376" name="a2355a01c6705560a9fcdb697f31bf376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2355a01c6705560a9fcdb697f31bf376">&#9670;&#160;</a></span>checkSuffixEqual() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classiridium_1_1io_1_1_buffer.html#a34c2cef05d183956ff6fe364b85549af">iridium::io::Buffer::checkSuffixEqual</a> </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t const *const</td>          <td class="paramname"><span class="paramname"><em>suffix</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет, заканчивается ли буфер заданным суффиксом. </p>
+
+</div>
+</div>
+<a id="a8ba6e909213fd936823ffc3e59dcb324" name="a8ba6e909213fd936823ffc3e59dcb324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ba6e909213fd936823ffc3e59dcb324">&#9670;&#160;</a></span>emplace_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1io_1_1_buffer.html#a8ba6e909213fd936823ffc3e59dcb324">iridium::io::Buffer::emplace_back</a> </td>
+          <td>(</td>
+          <td class="paramtype">TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляет другой буфер в конец этого. </p>
 
 </div>
 </div>
@@ -290,7 +327,7 @@ template&lt;typename ... TArgs&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

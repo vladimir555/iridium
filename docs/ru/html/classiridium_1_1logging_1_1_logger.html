@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Класс iridium::logging::Logger</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1logging.html">logging</a></li><li class="navelem"><a class="el" href="classiridium_1_1logging_1_1_logger.html">Logger</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1logging.html">logging</a></li><li class="navelem"><a href="classiridium_1_1logging_1_1_logger.html">Logger</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -97,21 +84,21 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton и управляет коллекцией приемников логов на основе предоставленной конфигурации. Он отвечает за отправку событий журнала соответствующим приемникам.  
+<p>Основной класс логгера, реализованный как потокобезопасный синглтон.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="logger_8h_source.html">logger.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:iridium::logging::Logger:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1logging_1_1_logger__inherit__graph.png" border="0" usemap="#airidium_1_1logging_1_1_logger_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="classiridium_1_1logging_1_1_logger__inherit__graph.png" border="0" usemap="#airidium_1_1logging_1_1_logger_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="airidium_1_1logging_1_1_logger_inherit__map" id="airidium_1_1logging_1_1_logger_inherit__map">
-<area shape="rect" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton..." alt="" coords="465,65,620,91"/>
+<area shape="rect" title="Основной класс логгера, реализованный как потокобезопасный синглтон." alt="" coords="465,65,620,91"/>
 <area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="248,22,417,62"/>
 <area shape="poly" title=" " alt="" coords="433,57,465,62,464,67,432,62"/>
 <area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="5,5,200,31"/>
 <area shape="poly" title=" " alt="" coords="216,27,247,31,247,36,215,33"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="8,55,197,80"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, делающий производные классы неперемещаемыми." alt="" coords="8,55,197,80"/>
 <area shape="poly" title=" " alt="" coords="212,53,247,49,248,54,212,58"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="263,86,402,142"/>
 <area shape="poly" title=" " alt="" coords="416,97,464,89,465,94,417,102"/>
@@ -120,111 +107,79 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Граф связей класса iridium::logging::Logger:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1logging_1_1_logger__coll__graph.png" border="0" usemap="#airidium_1_1logging_1_1_logger_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classiridium_1_1logging_1_1_logger__coll__graph.png" border="0" usemap="#airidium_1_1logging_1_1_logger_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="airidium_1_1logging_1_1_logger_coll__map" id="airidium_1_1logging_1_1_logger_coll__map">
-<area shape="rect" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton..." alt="" coords="465,65,620,91"/>
+<area shape="rect" title="Основной класс логгера, реализованный как потокобезопасный синглтон." alt="" coords="465,65,620,91"/>
 <area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="248,22,417,62"/>
 <area shape="poly" title=" " alt="" coords="433,57,465,62,464,67,432,62"/>
 <area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="5,5,200,31"/>
 <area shape="poly" title=" " alt="" coords="216,27,247,31,247,36,215,33"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="8,55,197,80"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, делающий производные классы неперемещаемыми." alt="" coords="8,55,197,80"/>
 <area shape="poly" title=" " alt="" coords="212,53,247,49,248,54,212,58"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="263,86,402,142"/>
 <area shape="poly" title=" " alt="" coords="416,97,464,89,465,94,417,102"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:a4d10130778cff9606aa3a9d971844926" id="r_a4d10130778cff9606aa3a9d971844926"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d10130778cff9606aa3a9d971844926">~Logger</a> ()</td></tr>
-<tr class="memdesc:a4d10130778cff9606aa3a9d971844926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор. Обрабатывает освобождение ресурсов, если таковые имеются.  <br /></td></tr>
-<tr class="separator:a4d10130778cff9606aa3a9d971844926"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af25063f18941996adb58d049a228e0fe" id="r_af25063f18941996adb58d049a228e0fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af25063f18941996adb58d049a228e0fe">setConfig</a> (config::TLogger const &amp;config)</td></tr>
-<tr class="memdesc:af25063f18941996adb58d049a228e0fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Устанавливает конфигурацию логгера. Это переконфигурирует логгер, потенциально очищая существующие приемники и инициализируя новые на основе предоставленного объекта конфигурации.  <br /></td></tr>
-<tr class="separator:af25063f18941996adb58d049a228e0fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25063f18941996adb58d049a228e0fe" id="r_af25063f18941996adb58d049a228e0fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af25063f18941996adb58d049a228e0fe">setConfig</a> (config::TLogger const &amp;<a class="el" href="namespaceiridium_1_1logging_1_1config.html">config</a>)</td></tr>
+<tr class="memdesc:af25063f18941996adb58d049a228e0fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Устанавливает конфигурацию логгера.  <br /></td></tr>
 <tr class="memitem:a6125f420a24dacf2296ecabeba6200d3" id="r_a6125f420a24dacf2296ecabeba6200d3"><td class="memItemLeft" align="right" valign="top">config::TLogger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6125f420a24dacf2296ecabeba6200d3">getConfig</a> ()</td></tr>
-<tr class="memdesc:a6125f420a24dacf2296ecabeba6200d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получает текущую конфигурацию логгера.  <br /></td></tr>
-<tr class="separator:a6125f420a24dacf2296ecabeba6200d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a6125f420a24dacf2296ecabeba6200d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает текущую конфигурацию логгера.  <br /></td></tr>
 <tr class="memitem:ace041d5716d98a8b250e64b075733d31" id="r_ace041d5716d98a8b250e64b075733d31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace041d5716d98a8b250e64b075733d31">log</a> (TEvent::TConstSharedPtr const &amp;event)</td></tr>
-<tr class="memdesc:ace041d5716d98a8b250e64b075733d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Логирует предварительно отформатированное событие. Этот метод обычно вызывается <code><a class="el" href="structiridium_1_1logging_1_1_log_stream.html" title="Представляет активный поток для конструирования сообщения журнала. Объект этого типа обычно создается...">LogStream</a></code> при его уничтожении, или может использоваться для логирования событий, созданных извне.  <br /></td></tr>
-<tr class="separator:ace041d5716d98a8b250e64b075733d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ace041d5716d98a8b250e64b075733d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Логирует событие журнала.  <br /></td></tr>
 <tr class="memitem:a9ec1d80894e9b815b7cf9d3678f5b60a" id="r_a9ec1d80894e9b815b7cf9d3678f5b60a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ec1d80894e9b815b7cf9d3678f5b60a">addCustomSink</a> (ISink::TSharedPtr const &amp;sink)</td></tr>
-<tr class="memdesc:a9ec1d80894e9b815b7cf9d3678f5b60a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет пользовательский приемник в логгер. Это позволяет программно добавлять приемники, которые не определены в конфигурационном файле.  <br /></td></tr>
-<tr class="separator:a9ec1d80894e9b815b7cf9d3678f5b60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_singleton"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_singleton')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">iridium::pattern::Singleton&lt; Logger &gt;</a></td></tr>
-<tr class="memitem:a33e11b0f9635f46b1653f59ba8fcdf11 inherit pub_methods_classiridium_1_1pattern_1_1_singleton" id="r_a33e11b0f9635f46b1653f59ba8fcdf11"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_singleton.html#a33e11b0f9635f46b1653f59ba8fcdf11">~Singleton</a> ()=default</td></tr>
-<tr class="memdesc:a33e11b0f9635f46b1653f59ba8fcdf11 inherit pub_methods_classiridium_1_1pattern_1_1_singleton"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное удаление, если <code>TClass</code> имеет виртуальный деструктор и <code><a class="el" href="classiridium_1_1pattern_1_1_singleton.html" title="Шаблон класса для реализации шаблона проектирования &quot;Одиночка&quot; (Singleton). Этот шаблон гарантирует,...">Singleton</a></code> управляется полиморфно (хотя это редко для одиночек).  <br /></td></tr>
-<tr class="separator:a33e11b0f9635f46b1653f59ba8fcdf11 inherit pub_methods_classiridium_1_1pattern_1_1_singleton"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_non_copyable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></td></tr>
+<tr class="memdesc:a9ec1d80894e9b815b7cf9d3678f5b60a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет пользовательский приемник в логгер.  <br /></td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_singleton"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_singleton')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">iridium::pattern::Singleton&lt; Logger &gt;</a></td></tr>
+<tr class="memitem:a380d041d28705d65a2366a194c9beefa inherit pub_methods_classiridium_1_1pattern_1_1_singleton" id="r_a380d041d28705d65a2366a194c9beefa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_singleton.html#a380d041d28705d65a2366a194c9beefa">~Singleton</a> ()</td></tr>
+<tr class="memdesc:a380d041d28705d65a2366a194c9beefa inherit pub_methods_classiridium_1_1pattern_1_1_singleton"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор.  <br /></td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_non_copyable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></td></tr>
 <tr class="memitem:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_ae3c2afe37346ea92307157d57b73773e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#ae3c2afe37346ea92307157d57b73773e">~NonCopyable</a> ()=default</td></tr>
-<tr class="memdesc:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов через указатель на базовый класс, если <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></code> когда-либо использовался как полиморфная база, хотя его основное назначение - семантика предотвращения копирования.  <br /></td></tr>
-<tr class="separator:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_non_movable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_non_movable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">iridium::pattern::NonMovable</a></td></tr>
+<tr class="memdesc:ae3c2afe37346ea92307157d57b73773e inherit pub_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов через указатель на базовый класс, если <span class="tt"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a></span> когда-либо использовался как полиморфная база, хотя его основное назначение - семантика предотвращения копирования.  <br /></td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_non_movable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_non_movable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">iridium::pattern::NonMovable</a></td></tr>
 <tr class="memitem:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable" id="r_aba2105fd94fdc498bb299f53b3401702"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#aba2105fd94fdc498bb299f53b3401702">~NonMovable</a> ()=default</td></tr>
-<tr class="memdesc:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов, если <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a></code> используется как полиморфная база.  <br /></td></tr>
-<tr class="separator:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aba2105fd94fdc498bb299f53b3401702 inherit pub_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию. Обеспечивает правильное уничтожение производных классов, если <span class="tt"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, делающий производные классы неперемещаемыми.">NonMovable</a></span> используется как полиморфная база.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Друзья</h2></td></tr>
 <tr class="memitem:a2f71b1348565d2731ca9a0f8ff35a786" id="r_a2f71b1348565d2731ca9a0f8ff35a786"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f71b1348565d2731ca9a0f8ff35a786">pattern::Singleton&lt; Logger &gt;</a></td></tr>
-<tr class="memdesc:a2f71b1348565d2731ca9a0f8ff35a786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Дружественное объявление, позволяющее <code>Singleton</code> управлять жизненным циклом <code><a class="el" href="classiridium_1_1logging_1_1_logger.html" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton...">Logger</a></code>.  <br /></td></tr>
-<tr class="separator:a2f71b1348565d2731ca9a0f8ff35a786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Дополнительные унаследованные члены</h2></td></tr>
-<tr class="inherit_header pub_static_methods_classiridium_1_1pattern_1_1_singleton"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classiridium_1_1pattern_1_1_singleton')"><img src="closed.png" alt="-"/>&#160;Открытые статические члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">iridium::pattern::Singleton&lt; Logger &gt;</a></td></tr>
+<tr class="inherit_header pub_static_methods_classiridium_1_1pattern_1_1_singleton"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classiridium_1_1pattern_1_1_singleton')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые статические члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">iridium::pattern::Singleton&lt; Logger &gt;</a></td></tr>
 <tr class="memitem:adc6c21483a831662989c44acc08f4dd8 inherit pub_static_methods_classiridium_1_1pattern_1_1_singleton" id="r_adc6c21483a831662989c44acc08f4dd8"><td class="memItemLeft" align="right" valign="top">static Logger &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_singleton.html#adc6c21483a831662989c44acc08f4dd8">instance</a> ()</td></tr>
-<tr class="memdesc:adc6c21483a831662989c44acc08f4dd8 inherit pub_static_methods_classiridium_1_1pattern_1_1_singleton"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет доступ к экземпляру-одиночке <code>TClass</code>. Экземпляр создается при первом вызове этого метода.  <br /></td></tr>
-<tr class="separator:adc6c21483a831662989c44acc08f4dd8 inherit pub_static_methods_classiridium_1_1pattern_1_1_singleton"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1pattern_1_1_non_copyable')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></td></tr>
+<tr class="memdesc:adc6c21483a831662989c44acc08f4dd8 inherit pub_static_methods_classiridium_1_1pattern_1_1_singleton"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает экземпляр одиночки.  <br /></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1pattern_1_1_non_copyable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Защищенные члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></td></tr>
 <tr class="memitem:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_ad479debaa1ed429c9b6713e94dfde55b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b">NonCopyable</a> ()=default</td></tr>
-<tr class="memdesc:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчанию, оставаясь при этом некопируемыми.  <br /></td></tr>
-<tr class="separator:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_a74879a308ee2096241f553f69c8c5f3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#a74879a308ee2096241f553f69c8c5f3b">NonCopyable</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;)=delete</td></tr>
-<tr class="memdesc:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных классов через конструктор копирования.  <br /></td></tr>
-<tr class="separator:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_a35c13b2ae7a0356e0360bb2b9e06b17a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#a35c13b2ae7a0356e0360bb2b9e06b17a">operator=</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html">NonCopyable</a> const &amp;) const =delete</td></tr>
-<tr class="memdesc:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный оператор присваивания копированием (защищенный). Явно запрещает присваивание копированием экземпляров производных классов. Квалификатор <code>const</code> у самого оператора необычен и, вероятно, является опечаткой; стандартная практика: <code><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> &amp;operator=(<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...">NonCopyable</a> const &amp;) = delete;</code>.  <br /></td></tr>
-<tr class="separator:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classiridium_1_1pattern_1_1_non_movable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1pattern_1_1_non_movable')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">iridium::pattern::NonMovable</a></td></tr>
+<tr class="memdesc:ad479debaa1ed429c9b6713e94dfde55b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию.  <br /></td></tr>
+<tr class="memitem:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_a74879a308ee2096241f553f69c8c5f3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#a74879a308ee2096241f553f69c8c5f3b">NonCopyable</a> (NonCopyable const &amp;)=delete</td></tr>
+<tr class="memdesc:a74879a308ee2096241f553f69c8c5f3b inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор копирования.  <br /></td></tr>
+<tr class="memitem:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable" id="r_a35c13b2ae7a0356e0360bb2b9e06b17a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#a35c13b2ae7a0356e0360bb2b9e06b17a">operator=</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b">NonCopyable</a> const &amp;) const =delete</td></tr>
+<tr class="memdesc:a35c13b2ae7a0356e0360bb2b9e06b17a inherit pro_methods_classiridium_1_1pattern_1_1_non_copyable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный оператор присваивания копированием.  <br /></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1pattern_1_1_non_movable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1pattern_1_1_non_movable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Защищенные члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">iridium::pattern::NonMovable</a></td></tr>
 <tr class="memitem:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable" id="r_a092ab25c7ed88d0c0a899cf1173a590f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a092ab25c7ed88d0c0a899cf1173a590f">NonMovable</a> ()=default</td></tr>
-<tr class="memdesc:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчанию, оставаясь при этом неперемещаемыми (частично, в данном случае).  <br /></td></tr>
-<tr class="separator:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable" id="r_a00961d9171ac1e8a64b2cf92bc83495a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a00961d9171ac1e8a64b2cf92bc83495a">NonMovable</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html">NonMovable</a> const &amp;&amp;)=delete</td></tr>
-<tr class="memdesc:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор перемещения (защищенный). Пытается предотвратить конструирование перемещением экземпляров производных классов. Примечание: Сигнатура <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a>(<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a> const &amp;&amp;)</code> является необычной. Стандартный удаленный конструктор перемещения обычно выглядит так: <code><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a>(<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми....">NonMovable</a> &amp;&amp;) = delete;</code>. Rvalue-ссылка на константу (<code>const &amp;&amp;</code>) — редкая конструкция и может не обеспечивать предполагаемую семантику неперемещаемости так же надежно, как rvalue-ссылка на неконстантный объект.  <br /></td></tr>
-<tr class="separator:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1_synchronized"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1threading_1_1_synchronized')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized&lt; std::mutex &gt;</a></td></tr>
+<tr class="memdesc:a092ab25c7ed88d0c0a899cf1173a590f inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию.  <br /></td></tr>
+<tr class="memitem:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable" id="r_a00961d9171ac1e8a64b2cf92bc83495a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a00961d9171ac1e8a64b2cf92bc83495a">NonMovable</a> (NonMovable const &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a00961d9171ac1e8a64b2cf92bc83495a inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный конструктор перемещения.  <br /></td></tr>
+<tr class="memitem:acfc77bcb84bb0cc8b74bc96d182f4b5c inherit pro_methods_classiridium_1_1pattern_1_1_non_movable" id="r_acfc77bcb84bb0cc8b74bc96d182f4b5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a092ab25c7ed88d0c0a899cf1173a590f">NonMovable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#acfc77bcb84bb0cc8b74bc96d182f4b5c">operator=</a> (<a class="el" href="classiridium_1_1pattern_1_1_non_movable.html#a092ab25c7ed88d0c0a899cf1173a590f">NonMovable</a> const &amp;) const =delete</td></tr>
+<tr class="memdesc:acfc77bcb84bb0cc8b74bc96d182f4b5c inherit pro_methods_classiridium_1_1pattern_1_1_non_movable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаленный оператор присваивания перемещением.  <br /></td></tr>
+<tr class="inherit_header pro_methods_classiridium_1_1threading_1_1_synchronized"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classiridium_1_1threading_1_1_synchronized')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Защищенные члены унаследованные от <a class="el" href="classiridium_1_1threading_1_1_synchronized.html">iridium::threading::Synchronized&lt; std::mutex &gt;</a></td></tr>
 <tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
 <tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
-<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
 <tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
-<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
-<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
-<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
-<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
-<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_afbb538c61653ace6f9619d4dd6ec6f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#afbb538c61653ace6f9619d4dd6ec6f79">Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию. Инициализирует примитивы синхронизации.  <br /></td></tr>
-<tr class="separator:afbb538c61653ace6f9619d4dd6ec6f79 inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a26b9fc61b7fc190f77a7b51be770745e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a26b9fc61b7fc190f77a7b51be770745e">~Synchronized</a> ()=default</td></tr>
-<tr class="memdesc:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Виртуальный деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:a26b9fc61b7fc190f77a7b51be770745e inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized" id="r_a79202da1c3b89c390b86848f1b17a50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_synchronized.html#a79202da1c3b89c390b86848f1b17a50d">interrupt</a> ()</td></tr>
-<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></code>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
-<tr class="separator:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a79202da1c3b89c390b86848f1b17a50d inherit pro_methods_classiridium_1_1threading_1_1_synchronized"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает все потоки, ожидающие на условной переменной этого объекта <span class="tt"><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">Synchronized</a></span>. Устанавливает внутренний флаг для предотвращения дальнейших ожиданий и уведомляет все ожидающие потоки.  <br /></td></tr>
+<tr class="inherit_header pro_static_attribs_classiridium_1_1pattern_1_1_singleton"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_static_attribs_classiridium_1_1pattern_1_1_singleton')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Статические защищенные данные унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">iridium::pattern::Singleton&lt; Logger &gt;</a></td></tr>
+<tr class="memitem:a21c969b330c07194e9b25a57664f7214 inherit pro_static_attribs_classiridium_1_1pattern_1_1_singleton" id="r_a21c969b330c07194e9b25a57664f7214"><td class="memItemLeft" align="right" valign="top">static std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_singleton.html#a21c969b330c07194e9b25a57664f7214">m_is_alive</a></td></tr>
+<tr class="memdesc:a21c969b330c07194e9b25a57664f7214 inherit pro_static_attribs_classiridium_1_1pattern_1_1_singleton"><td class="mdescLeft">&#160;</td><td class="mdescRight">Флаг, указывающий, "жив" ли экземпляр одиночки.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton и управляет коллекцией приемников логов на основе предоставленной конфигурации. Он отвечает за отправку событий журнала соответствующим приемникам. </p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Основной класс логгера, реализованный как потокобезопасный синглтон. </p>
+<p>Этот класс управляет конфигурацией логирования, коллекцией приемников и предоставляет центральную точку для отправки лог-сообщений. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="a4d10130778cff9606aa3a9d971844926" name="a4d10130778cff9606aa3a9d971844926"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d10130778cff9606aa3a9d971844926">&#9670;&#160;</a></span>~Logger()</h2>
 
@@ -248,11 +203,9 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Виртуальный деструктор. Обрабатывает освобождение ресурсов, если таковые имеются. </p>
-
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="a9ec1d80894e9b815b7cf9d3678f5b60a" name="a9ec1d80894e9b815b7cf9d3678f5b60a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ec1d80894e9b815b7cf9d3678f5b60a">&#9670;&#160;</a></span>addCustomSink()</h2>
 
@@ -268,10 +221,10 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Добавляет пользовательский приемник в логгер. Это позволяет программно добавлять приемники, которые не определены в конфигурационном файле. </p>
+<p>Добавляет пользовательский приемник в логгер. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sink</td><td>Разделяемый указатель на объект, реализующий интерфейс <a class="el" href="classiridium_1_1logging_1_1_i_sink.html" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас...">ISink</a>. </td></tr>
+    <tr><td class="paramname">sink</td><td>Приемник для добавления. </td></tr>
   </table>
   </dd>
 </dl>
@@ -293,8 +246,8 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Получает текущую конфигурацию логгера. </p>
-<dl class="section return"><dt>Возвращает</dt><dd>Текущий объект конфигурации логгера. </dd></dl>
+<p>Возвращает текущую конфигурацию логгера. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Текущая конфигурация. </dd></dl>
 
 </div>
 </div>
@@ -313,10 +266,10 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Логирует предварительно отформатированное событие. Этот метод обычно вызывается <code><a class="el" href="structiridium_1_1logging_1_1_log_stream.html" title="Представляет активный поток для конструирования сообщения журнала. Объект этого типа обычно создается...">LogStream</a></code> при его уничтожении, или может использоваться для логирования событий, созданных извне. </p>
+<p>Логирует событие журнала. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>Разделяемый указатель на константное событие журнала. </td></tr>
+    <tr><td class="paramname">event</td><td>Событие журнала для обработки. </td></tr>
   </table>
   </dd>
 </dl>
@@ -338,40 +291,39 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Устанавливает конфигурацию логгера. Это переконфигурирует логгер, потенциально очищая существующие приемники и инициализируя новые на основе предоставленного объекта конфигурации. </p>
+<p>Устанавливает конфигурацию логгера. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">config</td><td>Объект конфигурации логгера. </td></tr>
+    <tr><td class="paramname">config</td><td>Конфигурация для применения. </td></tr>
   </table>
   </dd>
 </dl>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_cgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_cgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_cgraph" id="aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_cgraph">
-<area shape="rect" title="Устанавливает конфигурацию логгера. Это переконфигурирует логгер, потенциально очищая существующие пр..." alt="" coords="5,5,161,46"/>
-<area shape="rect" href="factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="209,13,273,38"/>
+<area shape="rect" title="Устанавливает конфигурацию логгера." alt="" coords="5,5,161,46"/>
+<area shape="rect" href="factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="209,13,273,38"/>
 <area shape="poly" title=" " alt="" coords="161,23,193,23,193,28,161,28"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_icgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_icgraph.png" border="0" usemap="#aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_icgraph" id="aclassiridium_1_1logging_1_1_logger_af25063f18941996adb58d049a228e0fe_icgraph">
-<area shape="rect" title="Устанавливает конфигурацию логгера. Это переконфигурирует логгер, потенциально очищая существующие пр..." alt="" coords="450,22,605,62"/>
-<area shape="rect" href="namespaceiridium_1_1logging.html#a4fff5fa51c4d1b05c97ae08faf5efd18" title="Устанавливает глобальную конфигурацию логгера. Это свободная функция&#45;обертка вокруг Logger::instance(..." alt="" coords="230,29,402,55"/>
-<area shape="poly" title=" " alt="" coords="435,45,402,45,402,40,435,40"/>
-<area shape="rect" href="classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Запускает зарегистрированные тесты, возможно, отфильтрованные аргументами командной строки...." alt="" coords="5,29,182,55"/>
-<area shape="poly" title=" " alt="" coords="214,45,182,45,182,40,214,40"/>
-<area shape="poly" title=" " alt="" coords="132,17,119,10,93,8,70,10,57,15,55,20,61,27,57,31,49,21,54,11,69,5,94,3,121,5,135,12"/>
+<area shape="rect" title="Устанавливает конфигурацию логгера." alt="" coords="450,5,605,46"/>
+<area shape="rect" href="namespaceiridium_1_1logging.html#a4fff5fa51c4d1b05c97ae08faf5efd18" title="Устанавливает глобальную конфигурацию логгера." alt="" coords="230,13,402,38"/>
+<area shape="poly" title=" " alt="" coords="435,28,402,28,402,23,435,23"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Запускает зарегистрированные тесты, возможно, отфильтрованные аргументами командной строки...." alt="" coords="5,13,182,38"/>
+<area shape="poly" title=" " alt="" coords="214,28,182,28,182,23,214,23"/>
 </map>
 </div>
 
 </div>
 </div>
-<h2 class="groupheader">Друзья класса и относящимся к классу обозначения</h2>
+<a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Друзья класса и относящимся к классу обозначения</h2>
 <a id="a2f71b1348565d2731ca9a0f8ff35a786" name="a2f71b1348565d2731ca9a0f8ff35a786"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f71b1348565d2731ca9a0f8ff35a786">&#9670;&#160;</a></span>pattern::Singleton&lt; Logger &gt;</h2>
 
@@ -382,7 +334,7 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">friend class <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">pattern::Singleton</a>&lt; <a class="el" href="classiridium_1_1logging_1_1_logger.html">Logger</a> &gt;</td>
+          <td class="memname">friend class <a class="el" href="classiridium_1_1pattern_1_1_singleton.html">pattern::Singleton</a>&lt; Logger &gt;</td>
         </tr>
       </table>
   </td>
@@ -391,8 +343,6 @@ $(function(){ initResizable(false); });
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Дружественное объявление, позволяющее <code>Singleton</code> управлять жизненным циклом <code><a class="el" href="classiridium_1_1logging_1_1_logger.html" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton...">Logger</a></code>. </p>
 
 </div>
 </div>
@@ -403,7 +353,7 @@ $(function(){ initResizable(false); });
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Шаблон класса iridium::io::fs::FileValue&lt; TValue &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">fs</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html">FileValue</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a href="namespaceiridium_1_1io_1_1fs.html">fs</a></li><li class="navelem"><a href="classiridium_1_1io_1_1fs_1_1_file_value.html">FileValue</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,36 +83,31 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного файла при конструировании. Когда объекту <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> присваивается новое значение, он обновляет свое внутреннее состояние и записывает новое значение обратно в файл. Преобразования между <code>TValue</code> и <code>std::string</code> (для файлового ввода-вывода) обрабатываются фреймворком <code><a class="el" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....">iridium::convertion::convert</a></code>.  
+<p>Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного файла при конструировании. Когда объекту <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span> присваивается новое значение, он обновляет свое внутреннее состояние и записывает новое значение обратно в файл. Преобразования между <span class="tt">TValue</span> и <span class="tt">std::string</span> (для файлового ввода-вывода) обрабатываются фреймворком <span class="tt"><a class="el" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой.">iridium::convertion::convert</a></span>.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="file__value_8h_source.html">file_value.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:a92caacb4448f71076c46a8d26f01fe7e" id="r_a92caacb4448f71076c46a8d26f01fe7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92caacb4448f71076c46a8d26f01fe7e">FileValue</a> (std::string const &amp;file_name, TValue const &amp;default_value={})</td></tr>
-<tr class="memdesc:a92caacb4448f71076c46a8d26f01fe7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует объект <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code>, загружая его начальное значение из файла. Пытается прочитать содержимое указанного файла, преобразует его в <code>TValue</code> и сохраняет. Если файл не существует, не может быть открыт или если преобразование не удалось, используется <code>default_value</code>.  <br /></td></tr>
-<tr class="separator:a92caacb4448f71076c46a8d26f01fe7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a92caacb4448f71076c46a8d26f01fe7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует объект <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span>, загружая его начальное значение из файла. Пытается прочитать содержимое указанного файла, преобразует его в <span class="tt">TValue</span> и сохраняет. Если файл не существует, не может быть открыт или если преобразование не удалось, используется <span class="tt">default_value</span>.  <br /></td></tr>
 <tr class="memitem:af54ba4bdac91758c035be8061216f1cd" id="r_af54ba4bdac91758c035be8061216f1cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af54ba4bdac91758c035be8061216f1cd">~FileValue</a> ()=default</td></tr>
-<tr class="memdesc:af54ba4bdac91758c035be8061216f1cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор по умолчанию.  <br /></td></tr>
-<tr class="separator:af54ba4bdac91758c035be8061216f1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e3f1bac1a0d4b1f2da85aa116c95bde" id="r_a1e3f1bac1a0d4b1f2da85aa116c95bde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e3f1bac1a0d4b1f2da85aa116c95bde">operator=</a> (TValue const &amp;value)</td></tr>
-<tr class="memdesc:a1e3f1bac1a0d4b1f2da85aa116c95bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Присваивает новое значение объекту <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> и сохраняет его в связанный файл. Внутреннее значение обновляется, а затем это новое значение преобразуется в <code>std::string</code> и записывается в файл, указанный при конструировании, перезаписывая его предыдущее содержимое.  <br /></td></tr>
-<tr class="separator:a1e3f1bac1a0d4b1f2da85aa116c95bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a1e3f1bac1a0d4b1f2da85aa116c95bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Присваивает новое значение, обновляя внутреннее состояние и связанный файл.  <br /></td></tr>
 <tr class="memitem:adf3daca3e86d4813cbe13b5e76a0027d" id="r_adf3daca3e86d4813cbe13b5e76a0027d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf3daca3e86d4813cbe13b5e76a0027d">operator TValue</a> () const</td></tr>
-<tr class="memdesc:adf3daca3e86d4813cbe13b5e76a0027d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Неявно преобразует объект <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> к его базовому типу <code>TValue</code>. Позволяет читать текущее значение <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code>, находящееся в памяти, как если бы это было обычное <code>TValue</code>.  <br /></td></tr>
-<tr class="separator:adf3daca3e86d4813cbe13b5e76a0027d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:adf3daca3e86d4813cbe13b5e76a0027d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Неявно преобразует объект <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span> в его базовый тип <span class="tt">TValue</span>.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename TValue&gt;<br />
-class iridium::io::fs::FileValue&lt; TValue &gt;</div><p>Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного файла при конструировании. Когда объекту <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> присваивается новое значение, он обновляет свое внутреннее состояние и записывает новое значение обратно в файл. Преобразования между <code>TValue</code> и <code>std::string</code> (для файлового ввода-вывода) обрабатываются фреймворком <code><a class="el" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....">iridium::convertion::convert</a></code>. </p>
+class iridium::io::fs::FileValue&lt; TValue &gt;</div><p>Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного файла при конструировании. Когда объекту <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span> присваивается новое значение, он обновляет свое внутреннее состояние и записывает новое значение обратно в файл. Преобразования между <span class="tt">TValue</span> и <span class="tt">std::string</span> (для файлового ввода-вывода) обрабатываются фреймворком <span class="tt"><a class="el" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой.">iridium::convertion::convert</a></span>. </p>
 <dl class="tparams"><dt>Параметры шаблона</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">TValue</td><td>Тип сохраняемого и управляемого значения. Для этого типа должны существовать соответствующие специализации <code><a class="el" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....">iridium::convertion::convert</a></code> для преобразования в <code>std::string</code> и из него. </td></tr>
+    <tr><td class="paramname">TValue</td><td>Тип сохраняемого и управляемого значения. Для этого типа должны существовать соответствующие специализации <span class="tt"><a class="el" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой.">iridium::convertion::convert</a></span> для преобразования в <span class="tt">std::string</span> и из него. </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="a92caacb4448f71076c46a8d26f01fe7e" name="a92caacb4448f71076c46a8d26f01fe7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a92caacb4448f71076c46a8d26f01fe7e">&#9670;&#160;</a></span>FileValue()</h2>
 
@@ -147,37 +129,39 @@ template&lt;typename TValue&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Конструирует объект <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code>, загружая его начальное значение из файла. Пытается прочитать содержимое указанного файла, преобразует его в <code>TValue</code> и сохраняет. Если файл не существует, не может быть открыт или если преобразование не удалось, используется <code>default_value</code>. </p>
+<p>Конструирует объект <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span>, загружая его начальное значение из файла. Пытается прочитать содержимое указанного файла, преобразует его в <span class="tt">TValue</span> и сохраняет. Если файл не существует, не может быть открыт или если преобразование не удалось, используется <span class="tt">default_value</span>. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">file_name</td><td>Путь к файлу, из которого загружается и в который сохраняется значение. </td></tr>
-    <tr><td class="paramname">default_value</td><td>Значение, используемое, если файл не может быть прочитан или его содержимое некорректно. По умолчанию используется значение <code>TValue</code>, сконструированное по умолчанию, если не предоставлено. </td></tr>
+    <tr><td class="paramname">default_value</td><td>Значение, используемое, если файл не может быть прочитан или его содержимое некорректно. По умолчанию используется значение <span class="tt">TValue</span>, сконструированное по умолчанию, если не предоставлено. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Исключения</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>если чтение файла или начальное преобразование из строки в <code>TValue</code> завершается катастрофической ошибкой (хотя некоторые ошибки могут привести к использованию default_value). </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>если чтение файла или начальное преобразование из строки в <span class="tt">TValue</span> завершается катастрофической ошибкой (хотя некоторые ошибки могут привести к использованию default_value). </td></tr>
   </table>
   </dd>
 </dl>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_cgraph" id="aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_cgraph">
-<area shape="rect" title="Конструирует объект FileValue, загружая его начальное значение из файла. Пытается прочитать содержимо..." alt="" coords="5,5,163,46"/>
-<area shape="rect" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="211,5,338,46"/>
-<area shape="poly" title=" " alt="" coords="163,23,195,23,195,28,163,28"/>
+<area shape="rect" title="Конструирует объект FileValue, загружая его начальное значение из файла. Пытается прочитать содержимо..." alt="" coords="5,13,163,54"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="211,13,338,54"/>
+<area shape="poly" title=" " alt="" coords="163,30,195,30,195,36,163,36"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Функция преобразования по умолчанию, которая вызывается, если не найдена специализация." alt="" coords="386,5,565,61"/>
+<area shape="poly" title=" " alt="" coords="339,30,370,30,370,36,339,36"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_icgraph" id="aclassiridium_1_1io_1_1fs_1_1_file_value_a92caacb4448f71076c46a8d26f01fe7e_icgraph">
 <area shape="rect" title="Конструирует объект FileValue, загружая его начальное значение из файла. Пытается прочитать содержимо..." alt="" coords="211,5,368,46"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_file_value.html#adf3daca3e86d4813cbe13b5e76a0027d" title="Неявно преобразует объект FileValue к его базовому типу TValue. Позволяет читать текущее значение Fil..." alt="" coords="5,5,163,46"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_file_value.html#adf3daca3e86d4813cbe13b5e76a0027d" title="Неявно преобразует объект FileValue в его базовый тип TValue." alt="" coords="5,5,163,46"/>
 <area shape="poly" title=" " alt="" coords="195,28,163,28,163,23,195,23"/>
 </map>
 </div>
@@ -196,7 +180,7 @@ template&lt;typename TValue&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html">iridium::io::fs::FileValue</a>&lt; TValue &gt;::~<a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html">FileValue</a> </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html">iridium::io::fs::FileValue</a>&lt; TValue &gt;::~<a class="el" href="#a92caacb4448f71076c46a8d26f01fe7e">FileValue</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -209,11 +193,9 @@ template&lt;typename TValue&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Деструктор по умолчанию. </p>
-
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="adf3daca3e86d4813cbe13b5e76a0027d" name="adf3daca3e86d4813cbe13b5e76a0027d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf3daca3e86d4813cbe13b5e76a0027d">&#9670;&#160;</a></span>operator TValue()</h2>
 
@@ -231,18 +213,20 @@ template&lt;typename TValue&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Неявно преобразует объект <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> к его базовому типу <code>TValue</code>. Позволяет читать текущее значение <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code>, находящееся в памяти, как если бы это было обычное <code>TValue</code>. </p>
-<dl class="section return"><dt>Возвращает</dt><dd>Текущее значение в памяти типа <code>TValue</code>. </dd></dl>
+<p>Неявно преобразует объект <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span> в его базовый тип <span class="tt">TValue</span>. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Текущее значение. </dd></dl>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1fs_1_1_file_value_adf3daca3e86d4813cbe13b5e76a0027d_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1fs_1_1_file_value_adf3daca3e86d4813cbe13b5e76a0027d_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1fs_1_1_file_value_adf3daca3e86d4813cbe13b5e76a0027d_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1fs_1_1_file_value_adf3daca3e86d4813cbe13b5e76a0027d_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1fs_1_1_file_value_adf3daca3e86d4813cbe13b5e76a0027d_cgraph" id="aclassiridium_1_1io_1_1fs_1_1_file_value_adf3daca3e86d4813cbe13b5e76a0027d_cgraph">
-<area shape="rect" title="Неявно преобразует объект FileValue к его базовому типу TValue. Позволяет читать текущее значение Fil..." alt="" coords="5,5,163,46"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_file_value.html#a92caacb4448f71076c46a8d26f01fe7e" title="Конструирует объект FileValue, загружая его начальное значение из файла. Пытается прочитать содержимо..." alt="" coords="211,5,368,46"/>
-<area shape="poly" title=" " alt="" coords="163,23,195,23,195,28,163,28"/>
-<area shape="rect" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="416,5,543,46"/>
-<area shape="poly" title=" " alt="" coords="369,23,401,23,401,28,369,28"/>
+<area shape="rect" title="Неявно преобразует объект FileValue в его базовый тип TValue." alt="" coords="5,13,163,54"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_file_value.html#a92caacb4448f71076c46a8d26f01fe7e" title="Конструирует объект FileValue, загружая его начальное значение из файла. Пытается прочитать содержимо..." alt="" coords="211,13,368,54"/>
+<area shape="poly" title=" " alt="" coords="163,30,195,30,195,36,163,36"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="416,13,543,54"/>
+<area shape="poly" title=" " alt="" coords="369,30,401,30,401,36,369,36"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Функция преобразования по умолчанию, которая вызывается, если не найдена специализация." alt="" coords="591,5,771,61"/>
+<area shape="poly" title=" " alt="" coords="544,30,575,30,575,36,544,36"/>
 </map>
 </div>
 
@@ -265,16 +249,16 @@ template&lt;typename TValue&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Присваивает новое значение объекту <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> и сохраняет его в связанный файл. Внутреннее значение обновляется, а затем это новое значение преобразуется в <code>std::string</code> и записывается в файл, указанный при конструировании, перезаписывая его предыдущее содержимое. </p>
+<p>Присваивает новое значение, обновляя внутреннее состояние и связанный файл. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>Новое значение типа <code>TValue</code> для присваивания и сохранения. </td></tr>
+    <tr><td class="paramname">value</td><td>Новое значение для присваивания. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Исключения</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>если запись в файл или преобразование из <code>TValue</code> в строку завершается ошибкой. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>если файл не может быть открыт для записи или если операция записи завершается неудачей. </td></tr>
   </table>
   </dd>
 </dl>
@@ -287,7 +271,7 @@ template&lt;typename TValue&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -1,0 +1,5 @@
+<map id="iridium::assertExists" name="iridium::assertExists">
+<area shape="rect" id="Node000001" title="Asserts that a value is &quot;truthy&quot;, throwing a std::runtime_error with a specified message if it is not..." alt="" coords="5,5,146,31"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a1315b3a96f6964943359e40747b8df37" title="Asserts that a value (e.g., a boolean, integer, or other type convertible to bool) is &quot;truthy&quot;,..." alt="" coords="194,5,334,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,16,178,16,178,21,146,21"/>
+</map>

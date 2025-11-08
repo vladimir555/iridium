@@ -1,29 +1,29 @@
 <map id="source/iridium/parsing/parser.h" name="source/iridium/parsing/parser.h">
-<area shape="rect" id="Node000001" title="Определяет интерфейс IParser для разбора и формирования структурированных данных. Этот интерфейс пред..." alt="" coords="564,5,712,46"/>
+<area shape="rect" id="Node000001" title="Определяет интерфейс IParser для разбора и формирования структурированных данных. Этот интерфейс пред..." alt="" coords="640,5,788,46"/>
 <area shape="rect" id="Node000002" href="$file__parser_8cpp.html" title=" " alt="" coords="5,205,154,246"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="549,46,456,67,358,97,289,123,223,153,116,207,114,202,220,148,287,118,356,91,455,62,548,41"/>
-<area shape="rect" id="Node000003" href="$parser__http_8h.html" title="Определяет класс CHTTPParser, конкретную реализацию IParser для HTTP&#45;сообщений. Этот парсер обрабатыв..." alt="" coords="1043,94,1196,150"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="728,42,1043,103,1042,108,727,47"/>
-<area shape="rect" id="Node000005" href="$parser__json_8h.html" title=" " alt="" coords="370,94,523,150"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="585,56,503,96,500,91,583,51"/>
-<area shape="rect" id="Node000010" href="$parser__xml_8h.html" title=" " alt="" coords="754,102,946,142"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="697,50,807,98,805,103,695,55"/>
-<area shape="rect" id="Node000012" href="$test__runner__fork_8h.html" title=" " alt="" coords="547,94,729,150"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="641,61,641,93,636,93,636,61"/>
-<area shape="rect" id="Node000004" href="$parser__http_8cpp.html" title=" " alt="" coords="1115,198,1268,253"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1150,161,1174,195,1170,199,1146,164"/>
-<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="355,149,166,200,142,207,141,202,164,195,353,144"/>
-<area shape="rect" id="Node000006" href="$parser__json_8cpp.html" title=" " alt="" coords="178,198,331,253"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="383,160,307,199,305,195,380,155"/>
-<area shape="rect" id="Node000007" href="$test__runner__fork_8cpp.html" title=" " alt="" coords="731,198,913,253"/>
-<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="539,148,731,198,730,203,537,153"/>
-<area shape="rect" id="Node000008" href="$test__runner__raw_8cpp.html" title=" " alt="" coords="355,198,537,253"/>
-<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="449,165,449,197,444,197,444,165"/>
-<area shape="rect" id="Node000009" href="$tester_8cpp.html" title=" " alt="" coords="562,205,707,246"/>
-<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="511,155,599,202,597,207,508,160"/>
-<area shape="poly" id="edge11_Node000010_Node000002" title=" " alt="" coords="761,149,741,152,654,164,579,170,452,173,326,178,252,186,165,200,137,207,136,202,164,195,251,181,325,173,452,168,579,165,653,159,740,147,760,143"/>
-<area shape="rect" id="Node000011" href="$parser__xml_8cpp.html" title=" " alt="" coords="938,198,1091,253"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="896,148,972,195,969,199,893,153"/>
-<area shape="poly" id="edge14_Node000012_Node000007" title=" " alt="" coords="702,155,774,195,771,199,700,160"/>
-<area shape="poly" id="edge15_Node000012_Node000009" title=" " alt="" coords="639,165,638,205,632,205,634,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="626,44,514,65,394,97,317,123,241,153,121,207,119,202,239,148,315,118,392,91,513,60,625,38"/>
+<area shape="rect" id="Node000003" href="$http__parser_8h.html" title=" " alt="" coords="1137,102,1329,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="804,40,1137,100,1136,106,803,46"/>
+<area shape="rect" id="Node000005" href="$json__parser_8h.html" title=" " alt="" coords="405,102,599,142"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="657,55,548,103,545,98,655,50"/>
+<area shape="rect" id="Node000010" href="$xml__parser_8h.html" title=" " alt="" coords="829,102,1020,142"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="773,50,882,98,880,103,771,55"/>
+<area shape="rect" id="Node000012" href="$test__runner__fork_8h.html" title=" " alt="" coords="623,94,805,150"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="717,61,717,93,712,93,712,61"/>
+<area shape="rect" id="Node000004" href="$http__parser_8cpp.html" title=" " alt="" coords="1222,205,1428,246"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1263,152,1309,203,1305,207,1259,156"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="390,148,167,200,142,207,141,202,166,195,389,143"/>
+<area shape="rect" id="Node000006" href="$json__parser_8cpp.html" title=" " alt="" coords="178,205,386,246"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="447,151,326,207,324,202,445,147"/>
+<area shape="rect" id="Node000007" href="$test__runner__fork_8cpp.html" title=" " alt="" coords="787,198,969,253"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="590,144,787,197,786,202,589,149"/>
+<area shape="rect" id="Node000008" href="$test__runner__raw_8cpp.html" title=" " alt="" coords="411,198,593,253"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="505,158,505,197,500,197,500,158"/>
+<area shape="rect" id="Node000009" href="$tester_8cpp.html" title=" " alt="" coords="618,205,763,246"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="553,147,655,202,653,207,550,152"/>
+<area shape="poly" id="edge11_Node000010_Node000002" title=" " alt="" coords="838,149,817,152,719,165,635,171,491,173,348,177,265,185,167,200,138,207,137,202,166,195,264,179,348,171,491,168,634,166,718,160,816,147,837,143"/>
+<area shape="rect" id="Node000011" href="$xml__parser_8cpp.html" title=" " alt="" coords="993,205,1198,246"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="972,148,1064,202,1061,207,970,153"/>
+<area shape="poly" id="edge14_Node000012_Node000007" title=" " alt="" coords="772,156,835,195,833,199,769,160"/>
+<area shape="poly" id="edge15_Node000012_Node000009" title=" " alt="" coords="707,165,697,206,692,204,702,164"/>
 </map>

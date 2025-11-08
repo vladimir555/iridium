@@ -2,11 +2,11 @@
 <area shape="rect" id="Node000001" title=" " alt="" coords="496,78,656,119"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html#a2552e7585477468dd29685558fe34267" title="Получает контент в виде читаемого файлового потока из настроенного корневого пути...." alt="" coords="246,5,448,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="487,76,446,64,447,59,489,71"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aae27c3a7c44506fa0452f16c0168d4b5" title="Инициализирует кэш, потенциально загружая его содержимое из связанного файла. Этот метод вызывается к..." alt="" coords="5,78,198,119"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aae27c3a7c44506fa0452f16c0168d4b5" title="Выполняет логику инициализации объекта." alt="" coords="5,78,198,119"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="481,101,198,101,198,96,481,96"/>
 <area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1fs.html#a55440a3765f390ab06c22a0fa07d69a3" title=" " alt="" coords="273,136,420,162"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="481,122,409,138,408,133,480,117"/>
 <area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="266,135,198,121,199,116,267,130"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a3f322d9f6b1587338fd743a8aea8919f" title="Удаляет все записи из кэша в памяти и, возможно, из файла хранения, если подразумевается flush." alt="" coords="5,144,198,184"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a3f322d9f6b1587338fd743a8aea8919f" title="Очищает все записи в кэше." alt="" coords="5,144,198,184"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="258,157,198,161,198,155,257,152"/>
 </map>

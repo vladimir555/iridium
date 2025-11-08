@@ -1,7 +1,5 @@
 <map id="iridium::testing::parseCommandLine" name="iridium::testing::parseCommandLine">
-<area shape="rect" id="Node000001" title=" " alt="" coords="230,29,460,55"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="389,17,375,11,345,8,318,10,304,15,300,20,307,27,303,31,295,21,300,11,317,5,345,3,376,5,391,13"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Runs the registered tests, potentially filtered by command&#45;line arguments. This method is the main en..." alt="" coords="5,29,182,55"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="214,45,182,45,182,40,214,40"/>
-<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="138,17,123,11,93,8,67,10,52,15,49,20,56,27,52,31,44,21,49,11,66,5,94,3,125,5,140,13"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="230,5,460,31"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Runs the registered tests, potentially filtered by command&#45;line arguments. This method is the main en..." alt="" coords="5,5,182,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,21,182,21,182,16,214,16"/>
 </map>

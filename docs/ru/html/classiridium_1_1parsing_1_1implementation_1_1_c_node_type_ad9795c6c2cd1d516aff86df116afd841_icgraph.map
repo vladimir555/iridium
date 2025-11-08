@@ -1,9 +1,9 @@
 <map id="iridium::parsing::implementation::CNodeType::CNodeType" name="iridium::parsing::implementation::CNodeType::CNodeType">
-<area shape="rect" id="Node000001" title="Определяет стандартные вспомогательные средства реализации для CNodeType, такие как typedef&#45;ы умных у..." alt="" coords="259,71,464,111"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad2864ef93988a4628aea30800b26b99c" title="Создает и добавляет новый дочерний узел с указанным именем и значением, созданным по умолчанию...." alt="" coords="5,5,211,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="259,71,464,111"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad2864ef93988a4628aea30800b26b99c" title="Добавляет дочерний узел с указанным именем." alt="" coords="5,5,211,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,69,189,49,190,44,266,64"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#aeb1a5a87e59aaca98761199b1d42e6c4" title="Создает и добавляет новый дочерний узел с указанными именем и значением. Новый дочерний узел будет ис..." alt="" coords="5,71,211,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#aeb1a5a87e59aaca98761199b1d42e6c4" title="Добавляет дочерний узел с указанным именем и значением." alt="" coords="5,71,211,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,94,211,94,211,88,243,88"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9d1d1669306974a10e7ecaa71064838" title="Создает глубокую копию (клон) этого узла и всего его поддерева. Клонированные узлы будут использовать..." alt="" coords="5,136,211,177"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9d1d1669306974a10e7ecaa71064838" title="Создает клон объекта." alt="" coords="5,136,211,177"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,118,190,138,189,133,264,113"/>
 </map>

@@ -1,24 +1,24 @@
 <map id="iridium::pattern::NonMovable" name="iridium::pattern::NonMovable">
-<area shape="rect" id="Node000001" title="A utility base class intended to make derived classes non&#45;movable. By inheriting from NonMovable (typ..." alt="" coords="5,249,194,274"/>
+<area shape="rect" id="Node000001" title="A utility base class that makes derived classes non&#45;movable." alt="" coords="5,249,194,274"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="255,5,424,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,234,130,195,159,147,196,99,240,57,261,44,264,49,243,61,200,102,163,150,135,197,115,236"/>
 <area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="255,71,424,111"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="118,235,170,179,204,148,240,122,265,110,267,114,243,127,207,153,174,183,122,238"/>
 <area shape="rect" id="Node000006" href="$classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="255,136,424,177"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="136,239,241,187,272,175,274,180,243,192,139,244"/>
-<area shape="rect" id="Node000008" href="$classiridium_1_1pattern_1_1_singleton.html" title="A class template for implementing the Singleton design pattern. This pattern ensures that only one in..." alt="" coords="255,201,424,242"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1pattern_1_1_singleton.html" title="A template class for creating thread&#45;safe singletons." alt="" coords="255,201,424,242"/>
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="195,243,254,233,255,238,196,248"/>
-<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html" title="Specialization of Behavior for const member functions." alt="" coords="246,266,434,337"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html" title=" " alt="" coords="246,266,434,337"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="196,275,246,283,245,289,195,280"/>
-<area shape="rect" id="Node000010" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html" title="Specialization of Behavior for non&#45;const member functions." alt="" coords="242,360,438,416"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html" title=" " alt="" coords="242,360,438,416"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="134,281,185,313,243,346,267,357,265,362,240,351,182,318,131,286"/>
 <area shape="rect" id="Node000011" href="$classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="A scoped locker class that acquires the Synchronized object&#39;s mutex on construction and releases it o..." alt="" coords="256,440,424,496"/>
 <area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="119,286,170,355,204,393,243,426,261,438,259,442,240,430,201,396,165,358,115,289"/>
-<area shape="rect" id="Node000012" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title="Concrete implementation of the IThread interface. Manages an actual std::thread to execute an IRunnab..." alt="" coords="252,520,428,561"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title=" " alt="" coords="252,520,428,561"/>
 <area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="112,289,129,336,157,394,195,455,218,482,243,506,260,517,257,522,240,510,214,486,190,458,152,397,124,338,107,290"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html" title="Singleton class for managing and looking up MIME types based on file extensions. It preloads a list o..." alt="" coords="486,5,676,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="440,23,486,23,486,28,440,28"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1logging_1_1_logger.html" title="Central logging facility for the application. This class is implemented as a thread&#45;safe singleton an..." alt="" coords="504,78,659,104"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1logging_1_1_logger.html" title="Main logger class, implemented as a thread&#45;safe singleton." alt="" coords="504,78,659,104"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="440,88,503,88,503,94,440,94"/>
 <area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_tester.html" title="Singleton class responsible for registering, managing, and running all tests within the framework...." alt="" coords="506,144,656,169"/>
 <area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="440,154,505,154,505,159,440,159"/>

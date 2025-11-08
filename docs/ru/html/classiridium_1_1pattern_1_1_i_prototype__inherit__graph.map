@@ -1,5 +1,5 @@
 <map id="iridium::pattern::IPrototype&lt; TSubject &gt;" name="iridium::pattern::IPrototype&lt; TSubject &gt;">
-<area shape="rect" id="Node000001" title="Интерфейс для шаблона проектирования &quot;Прототип&quot;. Этот шаблон позволяет создавать новые объекты путем ..." alt="" coords="122,5,297,46"/>
+<area shape="rect" id="Node000001" title="Интерфейс для паттерна проектирования &quot;Прототип&quot;." alt="" coords="122,5,297,46"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="18,94,198,135"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,58,133,96,129,92,173,54"/>
 <area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="222,94,402,135"/>

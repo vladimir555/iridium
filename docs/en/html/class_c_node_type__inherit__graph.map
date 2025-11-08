@@ -1,6 +1,6 @@
 <map id="CNodeType&lt; TValue &gt;" name="CNodeType&lt; TValue &gt;">
-<area shape="rect" id="Node000001" title="Concrete implementation of the INodeType interface. This class template provides a full implementatio..." alt="" coords="18,183,173,208"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_node_type.html" title="Interface for a generic node in a tree&#45;like structure, templated on its value type...." alt="" coords="5,94,186,135"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="18,183,173,208"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_node_type.html" title="Generic interface for a node in a tree&#45;like data structure." alt="" coords="5,94,186,135"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,150,98,182,93,182,93,150"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_prototype.html" title=" " alt="" coords="8,5,183,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,62,98,94,93,94,93,62"/>

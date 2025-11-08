@@ -1,8 +1,8 @@
 <map id="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...) const &gt;::operator=" name="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...) const &gt;::operator=">
-<area shape="rect" id="Node000001" title="Assigns a lambda function as the action for this const method behavior." alt="" coords="5,63,209,118"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html#a99d0726e3e5fe8dfd1318aaae1e24405" title="Constructs a Behavior object for a const method." alt="" coords="257,29,456,85"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,209,118"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html#a252863f2a20775acba5c8b3727fa52e4" title=" " alt="" coords="257,29,456,85"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,74,241,70,242,75,209,80"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock.html#a44001174664c564d8b8ef34e4c3149bc" title="Default constructor. Registers the mock object instance." alt="" coords="504,70,650,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock.html#a44001174664c564d8b8ef34e4c3149bc" title="Constructor." alt="" coords="504,70,650,111"/>
 <area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="209,93,257,95,456,95,488,93,488,99,456,100,257,100,209,98"/>
 <area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="313,29,313,19,321,10,336,5,356,3,380,5,394,12,392,17,378,10,356,8,337,10,324,15,318,21,318,29"/>
 <area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="457,70,489,74,488,80,456,75"/>

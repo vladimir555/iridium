@@ -4,7 +4,7 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,56,48,73,31,95,15,130,8,160,13,190,31,222,59,249,93,269,130,283,169,291,167,296,129,288,90,274,55,254,27,225,8,192,3,160,10,128,27,93,44,70,67,52"/>
 <area shape="rect" id="Node000003" href="$implementation_2thread_8cpp.html" title=" " alt="" coords="41,94,219,135"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,62,133,94,127,94,127,62"/>
-<area shape="rect" id="Node000004" href="$implementation_2worker_8h.html" title="Defines worker class implementations (CWorkerPusher, CWorkerPopper, CWorker) that manage a thread to ..." alt="" coords="243,94,409,135"/>
+<area shape="rect" id="Node000004" href="$implementation_2worker_8h.html" title=" " alt="" coords="243,94,409,135"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="189,50,283,91,280,96,187,55"/>
 <area shape="rect" id="Node000005" href="$implementation_2sink_8cpp.html" title=" " alt="" coords="40,183,207,223"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="267,143,171,185,169,180,265,139"/>

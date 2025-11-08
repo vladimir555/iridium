@@ -1,0 +1,44 @@
+<map id="iridium::assertExists" name="iridium::assertExists">
+<area shape="rect" id="Node000001" title="Asserts that a value (e.g., a boolean, integer, or other type convertible to bool) is &quot;truthy&quot;,..." alt="" coords="826,339,967,364"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a681462aaacf7796e63fe75e8e144bb85" title="Asserts that a std::shared_ptr is not empty, throwing a std::runtime_error if it is." alt="" coords="602,5,743,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="891,324,882,265,863,189,848,149,829,111,806,75,777,44,761,34,742,27,744,22,763,29,780,40,810,72,834,108,853,147,868,187,887,264,896,323"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#a6467c698c7e176344ec9b923bcc8d9a2" title="Asserts that a std::shared_ptr is not empty, throwing a std::runtime_error if it is." alt="" coords="602,55,743,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="888,324,877,273,856,211,823,147,802,118,777,94,761,83,742,77,744,72,763,79,780,89,806,115,828,144,861,209,882,272,893,323"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium.html#a9ce8a7dd5c1da1e4b559f4b739f1bddd" title="Asserts that a raw pointer is not null, throwing a std::runtime_error if it is." alt="" coords="602,104,743,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="885,324,871,283,849,234,818,184,798,162,777,143,742,127,744,122,780,139,802,158,822,181,854,231,876,281,890,323"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium.html#a298f5010100b407bb66d26ecd0bee779" title="Asserts that a raw pointer is not null, throwing a std::runtime_error if it is." alt="" coords="602,153,743,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="881,326,864,294,841,258,812,222,777,192,742,177,744,172,780,188,816,218,845,255,869,291,886,323"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium.html#aec409f579463ae0d7395d766975d065a" title="Asserts that a value is &quot;truthy&quot;, throwing a std::runtime_error with a specified message if it is not..." alt="" coords="602,203,743,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="874,328,832,283,806,261,777,242,742,228,744,223,780,237,809,256,836,279,878,324"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium.html#afbad86db2f94665e9b97acb200450f38" title="Asserts that a value is &quot;truthy&quot;, throwing a std::runtime_error with a specified message if it is not..." alt="" coords="602,252,743,278"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="859,333,821,312,777,293,739,281,741,276,779,288,823,307,862,328"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#a2a519b5468ea6f08c81f90e01f5c3cf4" title="Composes a tree of nodes into a string." alt="" coords="570,302,775,342"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="810,343,776,338,776,333,811,338"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#a3f27e8e947cc8fbfe245e3452ba3771f" title="Composes a tree of nodes into a string." alt="" coords="286,419,492,460"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="811,367,567,407,492,422,491,416,567,402,811,362"/>
+<area shape="rect" id="Node000012" href="$namespaceiridium_1_1parsing_1_1implementation.html#afc4eac333cfa9a870c1ea90067b54733" title=" " alt="" coords="570,440,775,481"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="856,374,717,442,715,438,853,369"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892" title="Constructs a CStreamBuffer with a given backing buffer." alt="" coords="567,506,778,546"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="882,379,841,438,812,468,780,495,757,508,754,503,777,491,809,465,837,434,878,376"/>
+<area shape="rect" id="Node000016" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#ad1c09e9bf2dbb34bf0946b3277f9b386" title=" " alt="" coords="585,570,760,626"/>
+<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="889,380,874,419,851,467,820,517,780,560,762,573,759,569,777,556,815,514,846,465,869,417,884,378"/>
+<area shape="rect" id="Node000017" href="$classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#af669055119c5d12ccd5021dfafb275c0" title="Parses a string into a tree of nodes." alt="" coords="286,643,492,684"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="896,380,887,437,868,509,853,546,834,581,810,613,780,640,758,651,729,659,656,669,572,672,492,671,492,666,572,667,656,664,728,654,756,646,777,636,806,610,830,579,849,544,863,507,882,436,891,379"/>
+<area shape="rect" id="Node000018" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#ae80e904906032a58e21b6f4e49c18fd8" title="Transmits an event, typically by encoding it with the protocol and writing it to the event&#39;s stream." alt="" coords="586,700,759,741"/>
+<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="896,380,887,442,868,523,853,566,834,608,810,648,780,684,755,702,752,698,777,680,805,645,829,606,848,564,863,521,882,441,890,380"/>
+<area shape="rect" id="Node000019" href="$classiridium_1_1io_1_1implementation_1_1_c_pipe.html#a28abc2674c0d7a8cbbe6ee6a9d5a6f9d" title="Transmits data based on the provided event. If the event indicates data is available on the pipe&#39;s lo..." alt="" coords="586,766,759,806"/>
+<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="898,380,894,454,878,554,863,608,843,661,815,711,780,755,761,769,758,765,776,751,811,708,838,659,858,606,873,553,889,453,893,380"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ab8f8ea6a73bf37a20a4ce7b9db47def9" title="Defines standard implementation helpers for CHTTPParser, such as smart pointer typedefs and a static ..." alt="" coords="286,302,492,342"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="554,325,492,325,492,320,554,320"/>
+<area shape="poly" id="edge9_Node000009_Node000009" title=" " alt="" coords="435,289,418,283,389,280,362,282,345,287,339,293,342,300,337,302,334,292,343,283,361,277,389,275,419,278,437,284"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#abfb5c879d589d23c6905ce50388caf83" title="Defines standard implementation helpers for CXMLParser, such as smart pointer typedefs and a static c..." alt="" coords="5,531,211,572"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="278,467,260,474,197,503,144,533,141,528,195,498,258,469,277,462"/>
+<area shape="poly" id="edge12_Node000011_Node000011" title=" " alt="" coords="154,518,137,512,108,510,81,512,64,517,58,522,61,530,56,531,53,521,62,512,80,506,108,505,138,507,156,513"/>
+<area shape="poly" id="edge14_Node000012_Node000010" title=" " alt="" coords="554,455,492,450,492,445,555,449"/>
+<area shape="poly" id="edge15_Node000012_Node000012" title=" " alt="" coords="709,427,696,421,673,419,651,421,638,426,634,432,636,439,630,440,628,431,635,421,650,416,673,414,697,416,711,422"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html#a847fe94ca7103ed745892a9bc385edc0" title="Constructs a CStreamReaderBuffer that reads from the provided buffer." alt="" coords="259,484,519,539"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="551,523,519,521,519,516,552,517"/>
+<area shape="rect" id="Node000015" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html#a295a830284c2c787bb46bbd85024103c" title="Constructs a CStreamWriterBuffer that writes to the provided buffer." alt="" coords="267,564,511,619"/>
+<area shape="poly" id="edge18_Node000013_Node000015" title=" " alt="" coords="567,553,512,566,511,561,566,548"/>
+<area shape="poly" id="edge21_Node000017_Node000011" title=" " alt="" coords="277,641,258,634,195,605,141,575,144,570,197,600,260,629,278,636"/>
+</map>

@@ -1,11 +1,13 @@
 <map id="source/iridium/build_info.h" name="source/iridium/build_info.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="112,5,245,46"/>
+<area shape="rect" id="Node000001" title="Предоставляет функцию для получения подробной информации о сборке и окружении." alt="" coords="154,5,288,46"/>
 <area shape="rect" id="Node000002" href="$platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="5,94,85,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,49,80,88,77,83,144,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,49,87,90,85,85,176,44"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="109,94,165,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,48,153,81,148,79,166,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="202,48,163,85,159,81,198,44"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="189,94,253,120"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,45,209,79,205,81,187,48"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="224,46,224,78,218,78,218,46"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="278,94,338,120"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="212,44,276,83,274,88,209,49"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="244,44,285,81,281,85,241,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="362,94,430,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="266,44,356,85,354,90,264,49"/>
 </map>

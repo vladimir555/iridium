@@ -1,6 +1,10 @@
 <map id="iridium::io::Buffer::Buffer" name="iridium::io::Buffer::Buffer">
-<area shape="rect" id="Node000001" title="Вариативный шаблонный конструктор, перенаправляющий аргументы в std::vector&lt;unsigned char&gt;...." alt="" coords="5,29,126,70"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705" title="Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл..." alt="" coords="174,29,294,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,47,158,47,158,52,126,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="201,29,200,19,205,11,217,5,234,3,252,5,263,11,261,16,251,10,234,8,218,10,209,14,205,20,207,28"/>
+<area shape="rect" id="Node000001" title="Конструирует буфер из вариативного списка аргументов." alt="" coords="5,39,126,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705" title="Конструктор по умолчанию." alt="" coords="174,39,294,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,56,158,56,158,62,126,62"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="201,38,200,29,205,20,217,14,234,12,252,14,263,21,261,25,251,20,234,17,218,19,209,24,205,30,207,38"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#a34c2cef05d183956ff6fe364b85549af" title="Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы." alt="" coords="342,5,473,46"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="294,45,327,38,328,44,295,50"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_buffer.html#a8ba6e909213fd936823ffc3e59dcb324" title="Добавляет другой буфер в конец этого." alt="" coords="348,71,468,111"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="295,67,333,74,332,80,294,73"/>
 </map>

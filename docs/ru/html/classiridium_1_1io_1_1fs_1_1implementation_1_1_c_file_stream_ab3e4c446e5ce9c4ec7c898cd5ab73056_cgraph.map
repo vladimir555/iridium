@@ -1,5 +1,5 @@
 <map id="iridium::io::fs::implementation::CFileStream::finalize" name="iridium::io::fs::implementation::CFileStream::finalize">
 <area shape="rect" id="Node000001" title="Финализирует файловый поток, закрывая файл, если он открыт. Этот метод является частью интерфейса IIn..." alt="" coords="5,5,198,46"/>
-<area shape="rect" id="Node000002" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="246,13,310,38"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="246,13,310,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,23,230,23,230,28,198,28"/>
 </map>

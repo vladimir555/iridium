@@ -1,8 +1,8 @@
 <map id="iridium::io::Buffer::Buffer" name="iridium::io::Buffer::Buffer">
-<area shape="rect" id="Node000001" title="Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл..." alt="" coords="174,39,294,79"/>
+<area shape="rect" id="Node000001" title="Конструктор по умолчанию." alt="" coords="174,39,294,79"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="261,25,251,20,234,17,218,19,209,24,205,30,207,38,201,38,200,29,205,20,217,14,234,12,252,14,263,21"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#aa42fbefe176a94e58a1373de1aef5fe8" title="Конструирует Buffer из C&#45;строки, завершающейся нулевым символом. Буфер инициализируется копией символ..." alt="" coords="5,5,126,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#aa42fbefe176a94e58a1373de1aef5fe8" title="Конструирует буфер из строки в стиле C." alt="" coords="5,5,126,46"/>
 <area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="158,47,126,40,127,35,159,41"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#addea15640d3fd8f123b4396e42814394" title="Вариативный шаблонный конструктор, перенаправляющий аргументы в std::vector&lt;unsigned char&gt;...." alt="" coords="5,71,126,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#addea15640d3fd8f123b4396e42814394" title="Конструирует буфер из вариативного списка аргументов." alt="" coords="5,71,126,111"/>
 <area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="159,76,127,82,126,77,158,71"/>
 </map>

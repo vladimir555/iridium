@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Структура iridium::logging::LogStreamDummy</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1logging.html">logging</a></li><li class="navelem"><a class="el" href="structiridium_1_1logging_1_1_log_stream_dummy.html">LogStreamDummy</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1logging.html">logging</a></li><li class="navelem"><a href="structiridium_1_1logging_1_1_log_stream_dummy.html">LogStreamDummy</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,24 +83,22 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Потоковый объект-пустышка для логирования. Эта структура используется для уровней логирования, которые в данный момент отключены. Ее <code>operator&lt;&lt;</code> ничего не делает, фактически отбрасывая любые данные, направленные в поток.  
+<p>"Пустой" поток лога, который ничего не делает. Используется для отключения логирования на этапе компиляции.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="logger_8h_source.html">logger.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:acd936e3565f56943f0a25a2c84419846" id="r_acd936e3565f56943f0a25a2c84419846"><td class="memTemplParams" colspan="2">template&lt;typename TValue&gt; </td></tr>
-<tr class="memitem:acd936e3565f56943f0a25a2c84419846"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structiridium_1_1logging_1_1_log_stream_dummy.html">LogStreamDummy</a> const &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#acd936e3565f56943f0a25a2c84419846">operator&lt;&lt;</a> (TValue v) const</td></tr>
-<tr class="memdesc:acd936e3565f56943f0a25a2c84419846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор потокового вывода, не выполняющий никаких действий. Отбрасывает значение <code>v</code>.  <br /></td></tr>
-<tr class="separator:acd936e3565f56943f0a25a2c84419846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd936e3565f56943f0a25a2c84419846 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structiridium_1_1logging_1_1_log_stream_dummy.html">LogStreamDummy</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd936e3565f56943f0a25a2c84419846">operator&lt;&lt;</a> (TValue v) const</td></tr>
+<tr class="memdesc:acd936e3565f56943f0a25a2c84419846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Игнорирует любое значение, направленное в поток.  <br /></td></tr>
 <tr class="memitem:ad86d3126b8d895cfba43cab4490a9cd7" id="r_ad86d3126b8d895cfba43cab4490a9cd7"><td class="memTemplParams" colspan="2">template&lt;typename TValue&gt; </td></tr>
-<tr class="memitem:ad86d3126b8d895cfba43cab4490a9cd7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structiridium_1_1logging_1_1_log_stream_dummy.html">LogStreamDummy</a> const &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad86d3126b8d895cfba43cab4490a9cd7">operator&lt;&lt;</a> (TValue) const</td></tr>
-<tr class="separator:ad86d3126b8d895cfba43cab4490a9cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad86d3126b8d895cfba43cab4490a9cd7 template"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structiridium_1_1logging_1_1_log_stream_dummy.html">LogStreamDummy</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad86d3126b8d895cfba43cab4490a9cd7">operator&lt;&lt;</a> (TValue) const</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Потоковый объект-пустышка для логирования. Эта структура используется для уровней логирования, которые в данный момент отключены. Ее <code>operator&lt;&lt;</code> ничего не делает, фактически отбрасывая любые данные, направленные в поток. </p>
-</div><h2 class="groupheader">Методы</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>"Пустой" поток лога, который ничего не делает. Используется для отключения логирования на этапе компиляции. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="acd936e3565f56943f0a25a2c84419846" name="acd936e3565f56943f0a25a2c84419846"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd936e3565f56943f0a25a2c84419846">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[1/2]</span></h2>
 
@@ -131,20 +116,7 @@ template&lt;typename TValue&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Оператор потокового вывода, не выполняющий никаких действий. Отбрасывает значение <code>v</code>. </p>
-<dl class="tparams"><dt>Параметры шаблона</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">TValue</td><td>Тип "логируемого" (и отбрасываемого) значения. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>Значение, которое будет отброшено. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Константная ссылка на сам объект <code><a class="el" href="structiridium_1_1logging_1_1_log_stream_dummy.html" title="Потоковый объект-пустышка для логирования. Эта структура используется для уровней логирования,...">LogStreamDummy</a></code>. </dd></dl>
+<p>Игнорирует любое значение, направленное в поток. </p>
 
 </div>
 </div>
@@ -173,7 +145,7 @@ template&lt;typename TValue&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

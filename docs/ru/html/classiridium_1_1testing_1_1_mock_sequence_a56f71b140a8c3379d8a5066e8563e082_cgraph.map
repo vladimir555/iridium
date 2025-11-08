@@ -1,7 +1,7 @@
 <map id="iridium::testing::MockSequence::step" name="iridium::testing::MockSequence::step">
-<area shape="rect" id="Node000001" title="Продвигает проверку последовательности для вызова метода. Проверяет, соответствует ли текущий вызов м..." alt="" coords="5,39,210,79"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#ae0535eeb1101e1cbc986418c6e32e698" title="Сравнивает сохраненные аргументы (в std::any) с текущими аргументами вызова." alt="" coords="258,5,462,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,210,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#ae0535eeb1101e1cbc986418c6e32e698" title=" " alt="" coords="258,5,462,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,43,242,39,242,44,210,48"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock_sequence.html#ac18320b72ccf8096a074c0cda2084eff" title="Выбрасывает исключение std::runtime_error при нарушениях последовательности." alt="" coords="258,71,462,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock_sequence.html#ac18320b72ccf8096a074c0cda2084eff" title=" " alt="" coords="258,71,462,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,69,242,73,242,79,210,75"/>
 </map>

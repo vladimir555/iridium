@@ -1,8 +1,8 @@
 <map id="iridium::testing::TCmdArgs::DEFINE_ENUM" name="iridium::testing::TCmdArgs::DEFINE_ENUM">
-<area shape="rect" id="Node000001" title=" " alt="" coords="231,39,408,79"/>
+<area shape="rect" id="Node000001" title="Перечисляет основные команды, которые может выполнять средство запуска тестов." alt="" coords="231,39,408,79"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="356,26,342,20,319,17,298,19,285,24,280,30,282,37,277,39,275,29,282,20,297,14,319,12,344,14,358,21"/>
-<area shape="rect" id="Node000002" href="$structiridium_1_1testing_1_1_t_cmd_args.html#a0be6d767908876fd68214d00f7e69c21" title=" " alt="" coords="5,5,183,46"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1testing_1_1_t_cmd_args.html#a0be6d767908876fd68214d00f7e69c21" title="Перечисляет режимы выполнения тестов." alt="" coords="5,5,183,46"/>
 <area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="215,46,183,41,184,36,216,41"/>
-<area shape="rect" id="Node000003" href="$structiridium_1_1testing_1_1_t_cmd_args.html#a408dd5c3179e66b6269f885f6aa2a286" title=" " alt="" coords="5,71,183,111"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1testing_1_1_t_cmd_args.html#a408dd5c3179e66b6269f885f6aa2a286" title="Перечисляет форматы для вывода результатов тестов." alt="" coords="5,71,183,111"/>
 <area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="216,76,184,81,183,76,215,71"/>
 </map>

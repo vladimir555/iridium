@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title=" " alt="" coords="132,5,291,46"/>
 <area shape="rect" id="Node000002" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="51,183,180,208"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,35,100,42,67,54,38,72,15,95,8,114,15,133,36,157,63,174,61,178,33,161,11,136,3,114,11,93,35,67,65,49,98,37,131,30"/>
-<area shape="rect" id="Node000004" href="$async__queue_8h.html" title="Defines interfaces for asynchronous queues, including pusher, popper, and combined queue functionalit..." alt="" coords="231,94,387,135"/>
+<area shape="rect" id="Node000004" href="$async__queue_8h.html" title=" " alt="" coords="231,94,387,135"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="235,45,278,82,274,86,232,49"/>
 <area shape="rect" id="Node000007" href="$initializable_8h.html" title=" " alt="" coords="24,102,207,127"/>
 <area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="192,49,142,93,138,89,188,45"/>

@@ -1,0 +1,5 @@
+<map id="iridium::convertion::implementation::TConvert&lt; std::string, std::shared_ptr&lt; TValue &gt; &gt;::convert" name="iridium::convertion::implementation::TConvert&lt; std::string, std::shared_ptr&lt; TValue &gt; &gt;::convert">
+<area shape="rect" id="Node000001" title="Преобразует умный указатель в строку." alt="" coords="5,5,185,76"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Функция преобразования по умолчанию, которая вызывается, если не найдена специализация." alt="" coords="233,13,412,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,38,217,38,217,43,185,43"/>
+</map>

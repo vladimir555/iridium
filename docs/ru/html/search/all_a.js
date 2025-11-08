@@ -21,5 +21,6 @@ var searchData=
   ['logstreamdummy_18',['LogStreamDummy',['../structiridium_1_1logging_1_1_log_stream_dummy.html',1,'iridium::logging']]],
   ['logt_19',['LOGT',['../logger_8h.html#a4f7814d1bd32cecccb2f3fafbb3ade58',1,'logger.h']]],
   ['logw_20',['LOGW',['../logger_8h.html#ac6f0b43ab85743ce5de50d53bda6de62',1,'logger.h']]],
-  ['lowercase_21',['lowerCase',['../namespaceiridium.html#a5a1825c250f8ba5bcc7f3caab48e0cb9',1,'iridium::lowerCase(string const &amp;source)'],['../namespaceiridium.html#adbe7f8328834318bdd5cf21099e9d0ff',1,'iridium::lowerCase(std::string const &amp;source)']]]
+  ['lower_5fcase_5fto_5flower_5fkebab_21',['LOWER_CASE_TO_LOWER_KEBAB',['../namespaceiridium_1_1parsing_1_1serialization.html#a93cc0056dcf422e3caf0b8668532c470ae14f4d5e29a1871c506305ea1f21100e',1,'iridium::parsing::serialization']]],
+  ['lowercase_22',['lowerCase',['../namespaceiridium.html#a5a1825c250f8ba5bcc7f3caab48e0cb9',1,'iridium::lowerCase(string const &amp;source)'],['../namespaceiridium.html#adbe7f8328834318bdd5cf21099e9d0ff',1,'iridium::lowerCase(std::string const &amp;source)']]]
 ];

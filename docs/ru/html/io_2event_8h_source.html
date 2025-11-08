@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Исходный файл source/iridium/io/event.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -107,87 +94,86 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8h.html">stream.h</a>&quot;</span>           <span class="comment">// For IStream::TSharedPtr</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a> {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html">   34</a></span><span class="keyword">struct </span><a class="code hl_function" href="structiridium_1_1io_1_1_event.html#af3eb3e8d57db019d172a5d7246372f99">Event</a> {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_define" href="smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f">DEFINE_CREATE</a>(<a class="code hl_function" href="structiridium_1_1io_1_1_event.html#af3eb3e8d57db019d172a5d7246372f99">Event</a>)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">   43</a></span>    <a class="code hl_function" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">DEFINE_ENUM</a>(</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        TOperation,</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        OPEN,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        READ,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        WRITE,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        EOF_,</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        TIMEOUT,</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        ERROR_,</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        CLOSE</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    )</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_function" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">DEFINE_ENUM</a>(</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        TStatus,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#a32359dce0f6cec08773492b0b45bf51e">   76</a></span>        <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#a32359dce0f6cec08773492b0b45bf51e">BEGIN</a>,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        END</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="comment">// Note: The constructor uses TStatus::UNKNOWN as a default,</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="comment">// which implies UNKNOWN should ideally be part of this enum.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="comment">// However, it&#39;s not explicitly defined by DEFINE_ENUM here.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    )</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_function" href="structiridium_1_1io_1_1_event.html#af3eb3e8d57db019d172a5d7246372f99">Event</a>(<a class="code hl_class" href="classiridium_1_1io_1_1_i_stream.html">IStream</a>::TSharedPtr const &amp;stream_, TOperation const &amp;operation_, TStatus const &amp;status_ = TStatus::UNKNOWN);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">   99</a></span>    <a class="code hl_class" href="classiridium_1_1io_1_1_i_stream.html">IStream</a>::TSharedPtr <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">stream</a>;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">  103</a></span>    TOperation          <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">operation</a>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">  107</a></span>    TStatus             <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">status</a>;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">iridium::io</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html">   33</a></span><span class="keyword">struct </span><a class="code hl_function" href="structiridium_1_1io_1_1_event.html#a4d8cde96ac19d64c11dc2042fcf789db">Event</a> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_define" href="smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f">DEFINE_CREATE</a>(<a class="code hl_function" href="structiridium_1_1io_1_1_event.html#a4d8cde96ac19d64c11dc2042fcf789db">Event</a>)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">   42</a></span>    <a class="code hl_function" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        TOperation,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        OPEN,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        READ,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        WRITE,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        EOF_,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        TIMEOUT,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        ERROR_,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        CLOSE</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    )</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_function" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        TStatus,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#a32359dce0f6cec08773492b0b45bf51e">   75</a></span>        <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#a32359dce0f6cec08773492b0b45bf51e">BEGIN</a>,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        END)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_function" href="structiridium_1_1io_1_1_event.html#a4d8cde96ac19d64c11dc2042fcf789db">Event</a>(<a class="code hl_class" href="classiridium_1_1io_1_1_i_stream.html">IStream</a>::TSharedPtr const &amp;<a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">stream</a>, TOperation const &amp;<a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">operation</a>, TStatus const &amp;<a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">status</a> = TStatus::UNKNOWN);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">   92</a></span>    <a class="code hl_class" href="classiridium_1_1io_1_1_i_stream.html">IStream</a>::TSharedPtr <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">stream</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">   96</a></span>    TOperation          <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">operation</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">  100</a></span>    TStatus             <a class="code hl_variable" href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">status</a>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>};</div>
 </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>} <span class="comment">// io</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>} <span class="comment">// iridium</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>template&lt;&gt;</div>
-<div class="foldopen" id="foldopen00126" data-start="{" data-end="};">
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html">  126</a></span>struct std::hash&lt;<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::io::<a class="code hl_function" href="structiridium_1_1io_1_1_event.html#af3eb3e8d57db019d172a5d7246372f99">Event</a>&gt; {</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html#ab310454c4d7dc4416eb44ede1a78f11e">operator()</a>(<a class="code hl_struct" href="structiridium_1_1io_1_1_event.html">iridium::io::Event</a> <span class="keyword">const</span> &amp;e) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>} <span class="comment">// namespace iridium::io</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>template&lt;&gt;</div>
+<div class="foldopen" id="foldopen00118" data-start="{" data-end="};">
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html">  118</a></span>struct std::hash&lt;<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::io::<a class="code hl_function" href="structiridium_1_1io_1_1_event.html#a4d8cde96ac19d64c11dc2042fcf789db">Event</a>&gt; {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html#ab310454c4d7dc4416eb44ede1a78f11e">operator()</a>(<a class="code hl_struct" href="structiridium_1_1io_1_1_event.html">iridium::io::Event</a> <span class="keyword">const</span> &amp;e) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>};</div>
 </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="foldopen" id="foldopen00150" data-start="{" data-end="};">
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html">  150</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::io::Event::TSharedPtr&gt; {</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html#a936efa1b73cb7c44e3606c74bc7f82a2">operator()</a>(iridium::io::Event::TSharedPtr <span class="keyword">const</span> &amp;e) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>};</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword">template</span>&lt;&gt;</div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="};">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html">  142</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::io::Event::TSharedPtr&gt; {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html#a936efa1b73cb7c44e3606c74bc7f82a2">operator()</a>(iridium::io::Event::TSharedPtr <span class="keyword">const</span> &amp;e) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>};</div>
 </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347</span></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1_i_stream_html"><div class="ttname"><a href="classiridium_1_1io_1_1_i_stream.html">iridium::io::IStream</a></div><div class="ttdoc">Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...</div><div class="ttdef"><b>Определения</b> stream.h:43</div></div>
-<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,...</div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с вводом-выводом.</div><div class="ttdef"><b>Определения</b> buffer.cpp:7</div></div>
-<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><a class="code hl_define" href="enum_8h.html#a725b5a389a0ab2c44e8fdfa18534c50d">DEFINE_ENUM_CONVERT</a>(iridium::io::Event::TOperation)</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><a class="code hl_define" href="enum_8h.html#a725b5a389a0ab2c44e8fdfa18534c50d">DEFINE_ENUM_CONVERT</a>(iridium::io::Event::TStatus)</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347</span></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1_i_stream_html"><div class="ttname"><a href="classiridium_1_1io_1_1_i_stream.html">iridium::io::IStream</a></div><div class="ttdoc">Базовый интерфейс для всех типов потоков.</div><div class="ttdef"><b>Определения</b> stream.h:29</div></div>
+<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек...</div></div>
+<div class="ttc" id="aenum_8h_html_a725b5a389a0ab2c44e8fdfa18534c50d"><div class="ttname"><a href="enum_8h.html#a725b5a389a0ab2c44e8fdfa18534c50d">DEFINE_ENUM_CONVERT</a></div><div class="ttdeci">#define DEFINE_ENUM_CONVERT(TEnum)</div><div class="ttdoc">Специализирует фреймворк iridium::convertion и std::hash для перечисления, созданного с помощью DEFIN...</div><div class="ttdef"><b>Определения</b> enum.h:171</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Определяет интерфейс для обработчика обобщенного протокола ввода-вывода.</div><div class="ttdef"><b>Определения</b> buffer.cpp:16</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdef"><b>Определения</b> assert.h:15</div></div>
 <div class="ttc" id="asmart__ptr_8h_html"><div class="ttname"><a href="smart__ptr_8h.html">smart_ptr.h</a></div><div class="ttdoc">Предоставляет вспомогательные макросы для определения стандартных typedef-ов умных указателей и стати...</div></div>
-<div class="ttc" id="asmart__ptr_8h_html_a7b255e639c04a37d3f29607a6b35422f"><div class="ttname"><a href="smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f">DEFINE_CREATE</a></div><div class="ttdeci">#define DEFINE_CREATE(TClass)</div><div class="ttdoc">Определяет статический фабричный метод create для класса TClass. Если DEFINE_MOCK_CREATE не определен...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:77</div></div>
+<div class="ttc" id="asmart__ptr_8h_html_a7b255e639c04a37d3f29607a6b35422f"><div class="ttname"><a href="smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f">DEFINE_CREATE</a></div><div class="ttdeci">#define DEFINE_CREATE(TClass)</div><div class="ttdoc">Определяет статический фабричный метод create для класса. Если DEFINE_MOCK_CREATE не определен,...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:77</div></div>
 <div class="ttc" id="astream_8h_html"><div class="ttname"><a href="stream_8h.html">stream.h</a></div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1_event_html"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html">iridium::io::Event</a></div><div class="ttdoc">Представляет событие ввода-вывода, связанное с потоком. Эта структура инкапсулирует информацию о собы...</div><div class="ttdef"><b>Определения</b> event.h:34</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1_event_html_a32359dce0f6cec08773492b0b45bf51e"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#a32359dce0f6cec08773492b0b45bf51e">iridium::io::Event::BEGIN</a></div><div class="ttdeci">BEGIN</div><div class="ttdoc">Указывает на начальную фазу операции.</div><div class="ttdef"><b>Определения</b> event.h:76</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1_event_html_a6179a0154a52caa6e1d688a4c4f252a6"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">iridium::io::Event::stream</a></div><div class="ttdeci">IStream::TSharedPtr stream</div><div class="ttdoc">Умный указатель на поток ввода-вывода, на котором произошло это событие или к которому оно относится.</div><div class="ttdef"><b>Определения</b> event.h:99</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1_event_html"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html">iridium::io::Event</a></div><div class="ttdoc">Представляет событие ввода-вывода, связанное с потоком. Эта структура инкапсулирует информацию о собы...</div><div class="ttdef"><b>Определения</b> event.h:33</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1_event_html_a32359dce0f6cec08773492b0b45bf51e"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#a32359dce0f6cec08773492b0b45bf51e">iridium::io::Event::BEGIN</a></div><div class="ttdeci">BEGIN</div><div class="ttdoc">Указывает на начало операции.</div><div class="ttdef"><b>Определения</b> event.h:75</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1_event_html_a4d8cde96ac19d64c11dc2042fcf789db"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#a4d8cde96ac19d64c11dc2042fcf789db">iridium::io::Event::Event</a></div><div class="ttdeci">END Event(IStream::TSharedPtr const &amp;stream, TOperation const &amp;operation, TStatus const &amp;status=TStatus::UNKNOWN)</div><div class="ttdoc">Указывает на конец операции.</div><div class="ttdef"><b>Определения</b> event.cpp:18</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1_event_html_a6179a0154a52caa6e1d688a4c4f252a6"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#a6179a0154a52caa6e1d688a4c4f252a6">iridium::io::Event::stream</a></div><div class="ttdeci">IStream::TSharedPtr stream</div><div class="ttdoc">Умный указатель на поток, в котором произошло событие.</div><div class="ttdef"><b>Определения</b> event.h:92</div></div>
 <div class="ttc" id="astructiridium_1_1io_1_1_event_html_aa0cad7d38c9fd2f30ea12ee5d464277f"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">iridium::io::Event::DEFINE_ENUM</a></div><div class="ttdeci">DEFINE_ENUM(TOperation, OPEN, READ, WRITE, EOF_, TIMEOUT, ERROR_, CLOSE) DEFINE_ENUM(TStatus</div><div class="ttdoc">Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл...</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1_event_html_ab78d03f3259e9521acfbc1b872826ff8"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">iridium::io::Event::operation</a></div><div class="ttdeci">TOperation operation</div><div class="ttdoc">Тип операции ввода-вывода или события, которое представляет это событие (например,...</div><div class="ttdef"><b>Определения</b> event.h:103</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1_event_html_ad5f8abb5d6fde87bbcdb9976abfcfffc"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">iridium::io::Event::status</a></div><div class="ttdeci">TStatus status</div><div class="ttdoc">Статус операции, связанной с этим событием (например, BEGIN, END).</div><div class="ttdef"><b>Определения</b> event.h:107</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1_event_html_af3eb3e8d57db019d172a5d7246372f99"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#af3eb3e8d57db019d172a5d7246372f99">iridium::io::Event::Event</a></div><div class="ttdeci">END Event(IStream::TSharedPtr const &amp;stream_, TOperation const &amp;operation_, TStatus const &amp;status_=TStatus::UNKNOWN)</div><div class="ttdoc">Указывает на конечную фазу операции.</div><div class="ttdef"><b>Определения</b> event.cpp:13</div></div>
-<div class="ttc" id="astructstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4_html_ab310454c4d7dc4416eb44ede1a78f11e"><div class="ttname"><a href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html#ab310454c4d7dc4416eb44ede1a78f11e">std::hash&lt; iridium::io::Event &gt;::operator()</a></div><div class="ttdeci">size_t operator()(iridium::io::Event const &amp;e) const</div><div class="ttdoc">Вычисляет хэш-значение для объекта iridium::io::Event.</div><div class="ttdef"><b>Определения</b> event.cpp:26</div></div>
-<div class="ttc" id="astructstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4_html_a936efa1b73cb7c44e3606c74bc7f82a2"><div class="ttname"><a href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html#a936efa1b73cb7c44e3606c74bc7f82a2">std::hash&lt; iridium::io::Event::TSharedPtr &gt;::operator()</a></div><div class="ttdeci">size_t operator()(iridium::io::Event::TSharedPtr const &amp;e) const</div><div class="ttdoc">Вычисляет хэш-значение для умного указателя на объект iridium::io::Event.</div><div class="ttdef"><b>Определения</b> event.cpp:55</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1_event_html_ab78d03f3259e9521acfbc1b872826ff8"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#ab78d03f3259e9521acfbc1b872826ff8">iridium::io::Event::operation</a></div><div class="ttdeci">TOperation operation</div><div class="ttdoc">Тип операции ввода-вывода или события, которое представляет это событие (например,...</div><div class="ttdef"><b>Определения</b> event.h:96</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1_event_html_ad5f8abb5d6fde87bbcdb9976abfcfffc"><div class="ttname"><a href="structiridium_1_1io_1_1_event.html#ad5f8abb5d6fde87bbcdb9976abfcfffc">iridium::io::Event::status</a></div><div class="ttdeci">TStatus status</div><div class="ttdoc">Статус операции, связанной с этим событием (например, BEGIN, END).</div><div class="ttdef"><b>Определения</b> event.h:100</div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4_html_ab310454c4d7dc4416eb44ede1a78f11e"><div class="ttname"><a href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html#ab310454c4d7dc4416eb44ede1a78f11e">std::hash&lt; iridium::io::Event &gt;::operator()</a></div><div class="ttdeci">size_t operator()(iridium::io::Event const &amp;e) const</div><div class="ttdoc">Вычисляет хэш-значение для объекта iridium::io::Event.</div><div class="ttdef"><b>Определения</b> event.cpp:29</div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4_html_a936efa1b73cb7c44e3606c74bc7f82a2"><div class="ttname"><a href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html#a936efa1b73cb7c44e3606c74bc7f82a2">std::hash&lt; iridium::io::Event::TSharedPtr &gt;::operator()</a></div><div class="ttdeci">size_t operator()(iridium::io::Event::TSharedPtr const &amp;e) const</div><div class="ttdoc">Вычисляет хэш-значение для умного указателя на объект iridium::io::Event.</div><div class="ttdef"><b>Определения</b> event.cpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

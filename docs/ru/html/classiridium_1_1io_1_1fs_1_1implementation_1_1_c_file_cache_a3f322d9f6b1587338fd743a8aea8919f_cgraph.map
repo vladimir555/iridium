@@ -1,5 +1,5 @@
 <map id="iridium::io::fs::implementation::CFileCache::clean" name="iridium::io::fs::implementation::CFileCache::clean">
-<area shape="rect" id="Node000001" title="Удаляет все записи из кэша в памяти и, возможно, из файла хранения, если подразумевается flush." alt="" coords="5,5,198,46"/>
+<area shape="rect" id="Node000001" title="Очищает все записи в кэше." alt="" coords="5,5,198,46"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#a55440a3765f390ab06c22a0fa07d69a3" title=" " alt="" coords="246,13,393,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,23,231,23,231,28,198,28"/>
 <area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="441,5,601,46"/>

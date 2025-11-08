@@ -1,5 +1,5 @@
 <map id="iridium::parsing::serialization::NodeView::set" name="iridium::parsing::serialization::NodeView::set">
-<area shape="rect" id="Node000001" title="Устанавливает значение узла, преобразуя из TValue в строку для хранения." alt="" coords="240,5,426,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title="Оператор присваивания для установки значения узла. Эквивалентен вызову set()." alt="" coords="5,5,192,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="240,5,426,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title=" " alt="" coords="5,5,192,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,28,192,28,192,23,224,23"/>
 </map>

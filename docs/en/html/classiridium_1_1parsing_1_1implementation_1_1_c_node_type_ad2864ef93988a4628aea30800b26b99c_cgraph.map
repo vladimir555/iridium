@@ -1,7 +1,7 @@
 <map id="iridium::parsing::implementation::CNodeType::addChild" name="iridium::parsing::implementation::CNodeType::addChild">
-<area shape="rect" id="Node000001" title="Creates and adds a new child node with the specified name and a default&#45;constructed value...." alt="" coords="5,39,211,79"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a1bb75f649b9443791d4079a98f63b178" title="Adds an existing node as a child." alt="" coords="259,5,464,46"/>
+<area shape="rect" id="Node000001" title="Adds a child node with the specified name." alt="" coords="5,39,211,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a1bb75f649b9443791d4079a98f63b178" title=" " alt="" coords="259,5,464,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,43,243,39,244,44,212,48"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9795c6c2cd1d516aff86df116afd841" title="Defines standard implementation helpers for CNodeType, such as smart pointer typedefs and a static cr..." alt="" coords="259,71,464,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9795c6c2cd1d516aff86df116afd841" title=" " alt="" coords="259,71,464,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,69,244,73,243,79,211,75"/>
 </map>

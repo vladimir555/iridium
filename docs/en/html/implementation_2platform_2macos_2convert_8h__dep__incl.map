@@ -1,5 +1,5 @@
 <map id="source/iridium/convertion/implementation/platform/macos/convert.h" name="source/iridium/convertion/implementation/platform/macos/convert.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,172,61"/>
-<area shape="rect" id="Node000002" href="$platform_2macos_2convert_8cpp.html" title=" " alt="" coords="5,109,172,165"/>
+<area shape="rect" id="Node000001" title="Declares macOS&#45;specific type conversion specializations." alt="" coords="5,5,172,61"/>
+<area shape="rect" id="Node000002" href="$platform_2macos_2convert_8cpp.html" title="Implements macOS&#45;specific type conversion specializations." alt="" coords="5,109,172,165"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,77,91,108,86,108,86,77"/>
 </map>

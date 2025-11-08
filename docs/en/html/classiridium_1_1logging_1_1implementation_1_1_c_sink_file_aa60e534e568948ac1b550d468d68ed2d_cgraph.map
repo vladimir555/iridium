@@ -4,11 +4,11 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,67,263,48,264,53,190,73"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748" title="Initializes the file sink. This involves opening/creating the log file according to the path and rota..." alt="" coords="258,71,462,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,88,242,88,242,94,210,94"/>
-<area shape="rect" id="Node000006" href="$classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title="Formats a log event into a standardized string line. This static utility method can be used by sink i..." alt="" coords="287,136,433,177"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title="Formats a log event into a string line." alt="" coords="287,136,433,177"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="190,109,272,131,271,136,188,115"/>
 <area shape="rect" id="Node000004" href="$namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Checks if a source item is equal to any of the specified items." alt="" coords="510,61,650,86"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="462,80,494,78,495,83,463,86"/>
-<area shape="rect" id="Node000005" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="548,110,612,136"/>
+<area shape="rect" id="Node000005" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from a source type to a target type." alt="" coords="548,110,612,136"/>
 <area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="463,103,533,114,532,119,462,109"/>
 <area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="433,143,532,127,533,133,434,148"/>
 <area shape="rect" id="Node000007" href="$namespaceiridium.html#a627d2f2ec5720695a4e72cc1a16491c4" title=" " alt="" coords="534,160,626,185"/>

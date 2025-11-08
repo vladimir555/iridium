@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Исходный файл source/iridium/io/fs/implementation/file_stream.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_5705b813285e54309934c93cc9191ba4.html">fs</a></li><li class="navelem"><a class="el" href="dir_efecabb4eb0fcb8df6194a24944bd3f0.html">implementation</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a href="dir_5705b813285e54309934c93cc9191ba4.html">fs</a></li><li class="navelem"><a href="dir_efecabb4eb0fcb8df6194a24944bd3f0.html">implementation</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -114,95 +101,89 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;vector&gt;</span>  <span class="comment">// For IStream (though not directly, Buffer inherits from it)</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a> {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1fs.html">fs</a> {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html">implementation</a> {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
-<div class="foldopen" id="foldopen00041" data-start="{" data-end="};">
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html">   41</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">CFileStream</a>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1pattern_1_1_non_copyable.html">pattern::NonCopyable</a>,    <span class="comment">// Ensures instances of CFileStream are not copyable</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html">IFileStreamReader</a>,       <span class="comment">// Implements readable file stream interface</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html">IFileStreamWriter</a>      <span class="comment">// Implements writable file stream interface</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>{</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1">   49</a></span>    <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1">DEFINE_ENUM</a>(</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        TOpenMode,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        READ,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        WRITE,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        REWRITE</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    )</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">~CFileStream</a>();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84">initialize</a>()   <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056">finalize</a>()     <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    std::list&lt;uintptr_t&gt;    <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a738a65ff967c5924d11de16e20adba09">getHandles</a>()    <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    URI::TSharedPtr         <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8c282834b2b906ab440e579e1e59cf03">getURI</a>()        <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <a class="code hl_struct" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">TFileStatus</a>             <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#aac7a829f9511351588cad4169188d46b">getStatus</a>()     <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    Buffer::TSharedPtr      <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8fd3e17fb1dbaf9767253771d2d08790">read</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp;size) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">size_t</span>                  <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a033b7810aa416594ea166891bdc70d87">write</a>(Buffer::TSharedPtr <span class="keyword">const</span> &amp;buffer) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">void</span>                    <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c">flush</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">CFileStream</a>(std::string <span class="keyword">const</span> &amp;file_name, TOpenMode <span class="keyword">const</span> &amp;open_mode);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    std::string     m_file_name;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    ::FILE         *m_file = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span></div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    TOpenMode       m_open_mode;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    URI::TSharedPtr m_uri;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1fs_1_1implementation.html">iridium::io::fs::implementation</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html">   36</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">CFileStream</a>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1pattern_1_1_non_copyable.html">pattern::NonCopyable</a>,    <span class="comment">// Ensures instances of CFileStream are not copyable</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html">IFileStreamReader</a>,       <span class="comment">// Implements readable file stream interface</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html">IFileStreamWriter</a>      <span class="comment">// Implements writable file stream interface</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1">   44</a></span>    <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        TOpenMode,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        READ,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        WRITE,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        REWRITE</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    )</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">~CFileStream</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84">initialize</a>()   <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056">finalize</a>()     <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::list&lt;uintptr_t&gt;    <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a738a65ff967c5924d11de16e20adba09">getHandles</a>()    <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    URI::TSharedPtr         <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8c282834b2b906ab440e579e1e59cf03">getURI</a>()        <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_struct" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">TFileStatus</a>             <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#aac7a829f9511351588cad4169188d46b">getStatus</a>()     <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    Buffer::TSharedPtr      <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8fd3e17fb1dbaf9767253771d2d08790">read</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> &amp;size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">size_t</span>                  <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a033b7810aa416594ea166891bdc70d87">write</a>(Buffer::TSharedPtr <span class="keyword">const</span> &amp;buffer) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordtype">void</span>                    <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c">flush</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">CFileStream</a>(std::string <span class="keyword">const</span> &amp;file_name, TOpenMode <span class="keyword">const</span> &amp;open_mode);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    std::string     m_file_name;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    ::FILE         *m_file = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    TOpenMode       m_open_mode;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    URI::TSharedPtr m_uri;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>};</div>
 </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>} <span class="comment">// iridium::io::fs::implementation</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">//DEFINE_ENUM_CONVERT(iridium::io::fs::implementation::CFileStream::TOpenMode)</span></div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>} <span class="comment">// implementation</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>} <span class="comment">// fs</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>} <span class="comment">// io</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>} <span class="comment">// iridium</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_FILE_STREAM_6A05934B_514A_4E85_97E7_69A721D4ED29</span></div>
-<div class="ttc" id="abuffer_8h_html"><div class="ttname"><a href="buffer_8h.html">buffer.h</a></div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1_i_file_stream_reader_html"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html">iridium::io::fs::IFileStreamReader</a></div><div class="ttdoc">Интерфейс для читаемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFileSt...</div><div class="ttdef"><b>Определения</b> file_stream.h:87</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1_i_file_stream_writer_html"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html">iridium::io::fs::IFileStreamWriter</a></div><div class="ttdoc">Интерфейс для записываемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFi...</div><div class="ttdef"><b>Определения</b> file_stream.h:65</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a033b7810aa416594ea166891bdc70d87"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a033b7810aa416594ea166891bdc70d87">iridium::io::fs::implementation::CFileStream::write</a></div><div class="ttdeci">size_t write(Buffer::TSharedPtr const &amp;buffer) override</div><div class="ttdoc">Записывает данные из буфера в файловый поток. Реализует метод IStreamWriter::write.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:59</div></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_FILE_STREAM_6A05934B_514A_4E85_97E7_69A721D4ED29</span></div>
+<div class="ttc" id="abuffer_8h_html"><div class="ttname"><a href="buffer_8h.html">buffer.h</a></div><div class="ttdoc">Определяет класс Buffer для работы с сырыми двоичными данными.</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1_i_file_stream_reader_html"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html">iridium::io::fs::IFileStreamReader</a></div><div class="ttdoc">Интерфейс для файлового потока, доступного для чтения.</div><div class="ttdef"><b>Определения</b> file_stream.h:43</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1_i_file_stream_writer_html"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html">iridium::io::fs::IFileStreamWriter</a></div><div class="ttdoc">Интерфейс для файлового потока, доступного для записи.</div><div class="ttdef"><b>Определения</b> file_stream.h:32</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a033b7810aa416594ea166891bdc70d87"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a033b7810aa416594ea166891bdc70d87">iridium::io::fs::implementation::CFileStream::write</a></div><div class="ttdeci">size_t write(Buffer::TSharedPtr const &amp;buffer) override</div><div class="ttdoc">Записывает данные из буфера в файловый поток. Реализует метод IStreamWriter::write.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:56</div></div>
 <div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a29be7789c1f60eb09cea4750a8bc17d1"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1">iridium::io::fs::implementation::CFileStream::DEFINE_ENUM</a></div><div class="ttdeci">DEFINE_ENUM(TOpenMode, READ, WRITE, REWRITE) virtual ~CFileStream()</div><div class="ttdoc">Перечисляет режимы, в которых файл может быть открыт.</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a662aab47ff28a850bf1bb3d0b161c30c"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c">iridium::io::fs::implementation::CFileStream::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Сбрасывает все буферизованные данные, связанные с файловым потоком, в базовый файл....</div><div class="ttdef"><b>Определения</b> file_stream.cpp:77</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a738a65ff967c5924d11de16e20adba09"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a738a65ff967c5924d11de16e20adba09">iridium::io::fs::implementation::CFileStream::getHandles</a></div><div class="ttdeci">std::list&lt; uintptr_t &gt; getHandles() const override</div><div class="ttdoc">Получает базовый(е) дескриптор(ы) ОС, связанный(е) с этим потоком. Для CFileStream это обычно возвращ...</div><div class="ttdef"><b>Определения</b> file_stream.cpp:137</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a8c282834b2b906ab440e579e1e59cf03"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8c282834b2b906ab440e579e1e59cf03">iridium::io::fs::implementation::CFileStream::getURI</a></div><div class="ttdeci">URI::TSharedPtr getURI() const override</div><div class="ttdoc">Получает URI, связанный с этим файловым потоком. URI обычно будет иметь схему &quot;file://&quot;.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:145</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a8fd3e17fb1dbaf9767253771d2d08790"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8fd3e17fb1dbaf9767253771d2d08790">iridium::io::fs::implementation::CFileStream::read</a></div><div class="ttdeci">Buffer::TSharedPtr read(size_t const &amp;size) override</div><div class="ttdoc">Читает до size байт данных из файлового потока в буфер. Реализует метод IStreamReader::read.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:36</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_aac7a829f9511351588cad4169188d46b"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#aac7a829f9511351588cad4169188d46b">iridium::io::fs::implementation::CFileStream::getStatus</a></div><div class="ttdeci">TFileStatus getStatus() const override</div><div class="ttdoc">Получает информацию о состоянии (размер и время изменения) открытого файла.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:86</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_ab3e4c446e5ce9c4ec7c898cd5ab73056"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056">iridium::io::fs::implementation::CFileStream::finalize</a></div><div class="ttdeci">void finalize() override</div><div class="ttdoc">Финализирует файловый поток, закрывая файл, если он открыт. Этот метод является частью интерфейса IIn...</div><div class="ttdef"><b>Определения</b> file_stream.cpp:123</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_abb3d2c4a71eb6497b5721a97708588d8"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">iridium::io::fs::implementation::CFileStream::CFileStream</a></div><div class="ttdeci">CFileStream(std::string const &amp;file_name, TOpenMode const &amp;open_mode)</div><div class="ttdoc">Защищенный конструктор для настройки параметров файлового потока. Этот конструктор сохраняет имя файл...</div><div class="ttdef"><b>Определения</b> file_stream.cpp:22</div></div>
-<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_af1de0e8276f3374d1142f7ece3941d84"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84">iridium::io::fs::implementation::CFileStream::initialize</a></div><div class="ttdeci">void initialize() override</div><div class="ttdoc">Инициализирует файловый поток, открывая файл. Этот метод является частью интерфейса IInitializable....</div><div class="ttdef"><b>Определения</b> file_stream.cpp:98</div></div>
-<div class="ttc" id="aclassiridium_1_1pattern_1_1_non_copyable_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></div><div class="ttdoc">Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...</div><div class="ttdef"><b>Определения</b> non_copyable.h:20</div></div>
-<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,...</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a662aab47ff28a850bf1bb3d0b161c30c"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c">iridium::io::fs::implementation::CFileStream::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Сбрасывает все буферизованные данные, связанные с файловым потоком, в базовый файл....</div><div class="ttdef"><b>Определения</b> file_stream.cpp:74</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a738a65ff967c5924d11de16e20adba09"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a738a65ff967c5924d11de16e20adba09">iridium::io::fs::implementation::CFileStream::getHandles</a></div><div class="ttdeci">std::list&lt; uintptr_t &gt; getHandles() const override</div><div class="ttdoc">Получает базовый(е) дескриптор(ы) ОС, связанный(е) с этим потоком. Для CFileStream это обычно возвращ...</div><div class="ttdef"><b>Определения</b> file_stream.cpp:134</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a8c282834b2b906ab440e579e1e59cf03"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8c282834b2b906ab440e579e1e59cf03">iridium::io::fs::implementation::CFileStream::getURI</a></div><div class="ttdeci">URI::TSharedPtr getURI() const override</div><div class="ttdoc">Получает URI, связанный с этим файловым потоком. URI обычно будет иметь схему &quot;file://&quot;.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:142</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_a8fd3e17fb1dbaf9767253771d2d08790"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a8fd3e17fb1dbaf9767253771d2d08790">iridium::io::fs::implementation::CFileStream::read</a></div><div class="ttdeci">Buffer::TSharedPtr read(size_t const &amp;size) override</div><div class="ttdoc">Читает до size байт данных из файлового потока в буфер. Реализует метод IStreamReader::read.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:33</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_aac7a829f9511351588cad4169188d46b"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#aac7a829f9511351588cad4169188d46b">iridium::io::fs::implementation::CFileStream::getStatus</a></div><div class="ttdeci">TFileStatus getStatus() const override</div><div class="ttdoc">Получает информацию о состоянии (размер и время изменения) открытого файла.</div><div class="ttdef"><b>Определения</b> file_stream.cpp:83</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_ab3e4c446e5ce9c4ec7c898cd5ab73056"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#ab3e4c446e5ce9c4ec7c898cd5ab73056">iridium::io::fs::implementation::CFileStream::finalize</a></div><div class="ttdeci">void finalize() override</div><div class="ttdoc">Финализирует файловый поток, закрывая файл, если он открыт. Этот метод является частью интерфейса IIn...</div><div class="ttdef"><b>Определения</b> file_stream.cpp:120</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_abb3d2c4a71eb6497b5721a97708588d8"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#abb3d2c4a71eb6497b5721a97708588d8">iridium::io::fs::implementation::CFileStream::CFileStream</a></div><div class="ttdeci">CFileStream(std::string const &amp;file_name, TOpenMode const &amp;open_mode)</div><div class="ttdoc">Защищенный конструктор для настройки параметров файлового потока. Этот конструктор сохраняет имя файл...</div><div class="ttdef"><b>Определения</b> file_stream.cpp:19</div></div>
+<div class="ttc" id="aclassiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_html_af1de0e8276f3374d1142f7ece3941d84"><div class="ttname"><a href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84">iridium::io::fs::implementation::CFileStream::initialize</a></div><div class="ttdeci">void initialize() override</div><div class="ttdoc">Инициализирует файловый поток, открывая файл. Этот метод является частью интерфейса IInitializable....</div><div class="ttdef"><b>Определения</b> file_stream.cpp:95</div></div>
+<div class="ttc" id="aclassiridium_1_1pattern_1_1_non_copyable_html"><div class="ttname"><a href="classiridium_1_1pattern_1_1_non_copyable.html">iridium::pattern::NonCopyable</a></div><div class="ttdoc">Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable...</div><div class="ttdef"><b>Определения</b> non_copyable.h:19</div></div>
+<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек...</div></div>
 <div class="ttc" id="afile__stream_8h_html"><div class="ttname"><a href="file__stream_8h.html">file_stream.h</a></div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_1_1fs_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1fs_1_1implementation.html">iridium::io::fs::implementation</a></div><div class="ttdoc">Пространство имен для внутренних деталей реализации функциональностей файловой системы.</div><div class="ttdef"><b>Определения</b> file_api.h:33</div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_1_1fs_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a></div><div class="ttdoc">Пространство имен для функциональности ввода-вывода, связанной с файловой системой.</div><div class="ttdef"><b>Определения</b> cache.h:23</div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с вводом-выводом.</div><div class="ttdef"><b>Определения</b> buffer.cpp:7</div></div>
-<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1fs_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1fs_1_1implementation.html">iridium::io::fs::implementation</a></div><div class="ttdoc">Платформо-независимый диспетчер подключения для низкоуровневых реализаций файлового API....</div><div class="ttdef"><b>Определения</b> file_api.h:28</div></div>
 <div class="ttc" id="anon__copyable_8h_html"><div class="ttname"><a href="non__copyable_8h.html">non_copyable.h</a></div></div>
 <div class="ttc" id="asmart__ptr_8h_html"><div class="ttname"><a href="smart__ptr_8h.html">smart_ptr.h</a></div><div class="ttdoc">Предоставляет вспомогательные макросы для определения стандартных typedef-ов умных указателей и стати...</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1fs_1_1_t_file_status_html"><div class="ttname"><a href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">iridium::io::fs::TFileStatus</a></div><div class="ttdoc">Структура, содержащая информацию о состоянии файла. Включает время последнего изменения и размер файл...</div><div class="ttdef"><b>Определения</b> file_stream.h:27</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1fs_1_1_t_file_status_html"><div class="ttname"><a href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">iridium::io::fs::TFileStatus</a></div><div class="ttdoc">Представляет статус файла, включая время последнего изменения и размер.</div><div class="ttdef"><b>Определения</b> file_status.h:13</div></div>
 <div class="ttc" id="auri_8h_html"><div class="ttname"><a href="uri_8h.html">uri.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

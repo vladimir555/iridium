@@ -1,5 +1,5 @@
 <map id="iridium::parsing::INodeType&lt; TValue &gt;" name="iridium::parsing::INodeType&lt; TValue &gt;">
-<area shape="rect" id="Node000001" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения...." alt="" coords="5,94,186,135"/>
+<area shape="rect" id="Node000001" title="Обобщенный интерфейс для узла в древовидной структуре данных." alt="" coords="5,94,186,135"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_prototype.html" title=" " alt="" coords="8,5,183,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,62,98,94,93,94,93,62"/>
 </map>

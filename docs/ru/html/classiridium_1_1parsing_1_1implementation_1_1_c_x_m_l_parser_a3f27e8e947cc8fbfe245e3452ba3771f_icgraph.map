@@ -1,5 +1,5 @@
 <map id="iridium::parsing::implementation::CXMLParser::compose" name="iridium::parsing::implementation::CXMLParser::compose">
-<area shape="rect" id="Node000001" title="Формирует (компонует) древовидную структуру узлов, представляющую данные XML, в строку XML." alt="" coords="259,29,464,70"/>
+<area shape="rect" id="Node000001" title="Формирует дерево узлов в строку." alt="" coords="259,29,464,70"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html#abfb5c879d589d23c6905ce50388caf83" title="Определяет стандартные вспомогательные средства реализации для CXMLParser, такие как typedef&#45;ы умных ..." alt="" coords="5,29,211,70"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,52,211,52,211,47,243,47"/>
 <area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="150,16,134,10,108,8,84,10,69,15,63,21,66,28,61,29,58,19,66,10,83,5,108,3,135,5,151,11"/>

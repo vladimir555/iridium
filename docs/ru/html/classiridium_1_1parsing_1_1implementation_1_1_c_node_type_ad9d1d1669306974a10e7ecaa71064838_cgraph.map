@@ -1,7 +1,5 @@
 <map id="iridium::parsing::implementation::CNodeType::clone" name="iridium::parsing::implementation::CNodeType::clone">
-<area shape="rect" id="Node000001" title="Создает глубокую копию (клон) этого узла и всего его поддерева. Клонированные узлы будут использовать..." alt="" coords="5,39,211,79"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_node_type.html#aee0e2a2fef88fa2faf813cfb6799a089" title="Добавляет существующий узел в качестве дочернего к этому узлу." alt="" coords="271,5,452,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,43,255,37,256,42,212,48"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9795c6c2cd1d516aff86df116afd841" title="Определяет стандартные вспомогательные средства реализации для CNodeType, такие как typedef&#45;ы умных у..." alt="" coords="259,71,464,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,69,244,73,243,79,211,75"/>
+<area shape="rect" id="Node000001" title="Создает клон объекта." alt="" coords="5,5,211,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9795c6c2cd1d516aff86df116afd841" title=" " alt="" coords="259,5,464,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,23,243,23,243,28,211,28"/>
 </map>

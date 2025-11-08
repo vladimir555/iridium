@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Исходный файл source/iridium/io/protocol/http/request.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_db5936b4365bac870ea8c99be6a14c8d.html">protocol</a></li><li class="navelem"><a class="el" href="dir_f72d43b0f4cd77a79549de9d5188642d.html">http</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a href="dir_db5936b4365bac870ea8c99be6a14c8d.html">protocol</a></li><li class="navelem"><a href="dir_f72d43b0f4cd77a79549de9d5188642d.html">http</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -108,72 +95,65 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="method_8h.html">method.h</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a> {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a> {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><a class="code hl_define" href="serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a>(Http)</div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">   27</a></span>    struct <a class="code hl_struct" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a> {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a6d95b0225eb7a9e5cf43815c07443b19">   30</a></span>        TMethod     <a class="code hl_variable" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a6d95b0225eb7a9e5cf43815c07443b19">method</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a32367e9de0782d4a42ce6bbf8d7345e6">   33</a></span>        std::string <a class="code hl_variable" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a32367e9de0782d4a42ce6bbf8d7345e6">uri</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">   36</a></span>        std::string <a class="code hl_variable" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">protocol</a>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    };</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">iridium::io::protocol::http::request</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><a class="code hl_define" href="serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a>(Http)</div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">   23</a></span>    struct <a class="code hl_struct" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a6d95b0225eb7a9e5cf43815c07443b19">   26</a></span>        TMethod     <a class="code hl_variable" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a6d95b0225eb7a9e5cf43815c07443b19">method</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a32367e9de0782d4a42ce6bbf8d7345e6">   29</a></span>        std::string <a class="code hl_variable" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a32367e9de0782d4a42ce6bbf8d7345e6">uri</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">   32</a></span>        std::string <a class="code hl_variable" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">protocol</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    };</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(<a class="code hl_struct" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a>, Message, <a class="code hl_struct" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a>({TMethod::GET, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}))</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(<a class="code hl_struct" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a>, Message, <a class="code hl_struct" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a>({TMethod::GET, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}))</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_define" href="serialization_2node_8h.html#ad47703aa4ae66d8d0699aa10e8cbe314">DEFINE_NODE_BEGIN</a>(Headers)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::string, Host, <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>, UserAgent, <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>, Connection, <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, Accept)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, AcceptLanguage)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, AcceptEncoding)</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, AcceptCharset)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, Cookie)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// todo: Keep-Alive: timeout=5, max=1000</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_define" href="serialization_2node_8h.html#ac524ec1b1c08d1e9ec08f6231d693e85">DEFINE_NODE_END</a>(Headers)</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>, Body, <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><a class="code hl_define" href="serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a>()</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>} <span class="comment">// request</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>} <span class="comment">// http</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>} <span class="comment">// protocol</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>} <span class="comment">// io</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>} <span class="comment">// iridium</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><a class="code hl_define" href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a>(<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a>::THttp::TMessageLine, std::<span class="keywordtype">string</span>)</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><a class="code hl_define" href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a>(std::<span class="keywordtype">string</span>, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a>::THttp::TMessageLine)</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_REQUEST_E86B18F8_93B2_4E65_B812_2A46EF802DC6</span></div>
-<div class="ttc" id="aconvert_8h_html_ab6323540b384b64371e62ea6e910317b"><div class="ttname"><a href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a></div><div class="ttdeci">#define DEFINE_CONVERT(TTo, TFrom)</div><div class="ttdoc">Определяет (объявляет) специализацию для шаблонной функции iridium::convertion::implementation::conve...</div><div class="ttdef"><b>Определения</b> convert.h:69</div></div>
-<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,...</div></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::string, Host, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>, UserAgent, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>, Connection, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, Accept)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, AcceptLanguage)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, AcceptEncoding)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, AcceptCharset)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_define" href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a>(std::<span class="keywordtype">string</span>, Cookie)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="comment">// todo: Keep-Alive: timeout=5, max=1000</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_define" href="serialization_2node_8h.html#ac524ec1b1c08d1e9ec08f6231d693e85">DEFINE_NODE_END</a>(Headers)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_define" href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a>(std::<span class="keywordtype">string</span>, Body, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><a class="code hl_define" href="serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a>()</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>} <span class="comment">// iridium::io::protocol::http::request</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><a class="code hl_define" href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a>(std::<span class="keywordtype">string</span>, <a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a>::THttp::TMessageLine)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><a class="code hl_define" href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a>(<a class="code hl_namespace" href="namespaceiridium.html">iridium</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io.html">io</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a>::<a class="code hl_namespace" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a>::THttp::TMessageLine, std::<span class="keywordtype">string</span>)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_REQUEST_E86B18F8_93B2_4E65_B812_2A46EF802DC6</span></div>
+<div class="ttc" id="aconvert_8h_html_ab6323540b384b64371e62ea6e910317b"><div class="ttname"><a href="convert_8h.html#ab6323540b384b64371e62ea6e910317b">DEFINE_CONVERT</a></div><div class="ttdeci">#define DEFINE_CONVERT(TTo, TFrom)</div><div class="ttdoc">Макрос для определения преобразования между двумя типами.</div><div class="ttdef"><b>Определения</b> convert.h:67</div></div>
+<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек...</div></div>
 <div class="ttc" id="amethod_8h_html"><div class="ttname"><a href="method_8h.html">method.h</a></div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">iridium::io::protocol::http::request</a></div><div class="ttdef"><b>Определения</b> request.cpp:18</div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_1_1http_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol_1_1http.html">iridium::io::protocol::http</a></div><div class="ttdef"><b>Определения</b> content_storage.h:18</div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol.html">iridium::io::protocol</a></div><div class="ttdef"><b>Определения</b> content_storage.h:17</div></div>
-<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с вводом-выводом.</div><div class="ttdef"><b>Определения</b> buffer.cpp:7</div></div>
-<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">iridium::io::protocol::http::request</a></div><div class="ttdef"><b>Определения</b> request.cpp:14</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_1_1http_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol_1_1http.html">iridium::io::protocol::http</a></div><div class="ttdef"><b>Определения</b> content_storage.h:15</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1protocol_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1protocol.html">iridium::io::protocol</a></div><div class="ttdef"><b>Определения</b> content_storage.h:15</div></div>
+<div class="ttc" id="anamespaceiridium_1_1io_html"><div class="ttname"><a href="namespaceiridium_1_1io.html">iridium::io</a></div><div class="ttdoc">Определяет интерфейс для обработчика обобщенного протокола ввода-вывода.</div><div class="ttdef"><b>Определения</b> buffer.cpp:16</div></div>
+<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdef"><b>Определения</b> assert.h:15</div></div>
 <div class="ttc" id="aserialization_2node_8h_html"><div class="ttname"><a href="serialization_2node_8h.html">node.h</a></div></div>
-<div class="ttc" id="aserialization_2node_8h_html_a39e63d356bdf5ea6b486ecf63c2c3b5a"><div class="ttname"><a href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a></div><div class="ttdeci">#define DEFINE_ATTRIBUTE_LIST(type, class_name)</div><div class="ttdoc">Определяет список простых атрибутов (узлов-значений) внутри родительской структуры узла....</div><div class="ttdef"><b>Определения</b> node.h:745</div></div>
-<div class="ttc" id="aserialization_2node_8h_html_a6ae6809e071cbeb286389a6ea722e126"><div class="ttname"><a href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a></div><div class="ttdeci">#define DEFINE_ATTRIBUTE(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в DEFINE_ATTRIBUTE_2 или DEFINE_ATTRIBUTE_3 в зави...</div><div class="ttdef"><b>Определения</b> node.h:684</div></div>
-<div class="ttc" id="aserialization_2node_8h_html_a7b4e724573d774904e29ede08ef7b17a"><div class="ttname"><a href="serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_END()</div><div class="ttdoc">Завершает определение структуры корневого узла, начатое DEFINE_ROOT_NODE_BEGIN. Просто предоставляет ...</div><div class="ttdef"><b>Определения</b> node.h:604</div></div>
-<div class="ttc" id="aserialization_2node_8h_html_aac8f5e72dee27b1c9479d82a20f96f62"><div class="ttname"><a href="serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_BEGIN(...)</div><div class="ttdoc">Макрос-переключатель, который диспетчеризует вызов в DEFINE_ROOT_NODE_BEGIN_1 или DEFINE_ROOT_NODE_BE...</div><div class="ttdef"><b>Определения</b> node.h:595</div></div>
-<div class="ttc" id="aserialization_2node_8h_html_ac524ec1b1c08d1e9ec08f6231d693e85"><div class="ttname"><a href="serialization_2node_8h.html#ac524ec1b1c08d1e9ec08f6231d693e85">DEFINE_NODE_END</a></div><div class="ttdeci">#define DEFINE_NODE_END(class_name)</div><div class="ttdoc">Завершает определение вложенного структурированного узла и объявляет его экземпляр....</div><div class="ttdef"><b>Определения</b> node.h:635</div></div>
-<div class="ttc" id="aserialization_2node_8h_html_ad47703aa4ae66d8d0699aa10e8cbe314"><div class="ttname"><a href="serialization_2node_8h.html#ad47703aa4ae66d8d0699aa10e8cbe314">DEFINE_NODE_BEGIN</a></div><div class="ttdeci">#define DEFINE_NODE_BEGIN(class_name)</div><div class="ttdoc">Начинает определение вложенного структурированного узла внутри родительской структуры узла....</div><div class="ttdef"><b>Определения</b> node.h:619</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">iridium::io::protocol::http::request::TMessageLine</a></div><div class="ttdoc">Представляет первую строку HTTP-запроса, также известную как строка запроса.</div><div class="ttdef"><b>Определения</b> request.h:27</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html_a32367e9de0782d4a42ce6bbf8d7345e6"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a32367e9de0782d4a42ce6bbf8d7345e6">iridium::io::protocol::http::request::TMessageLine::uri</a></div><div class="ttdeci">std::string uri</div><div class="ttdoc">URI запроса (например, &quot;/index.html&quot;, &quot;http://example.com/path&quot;).</div><div class="ttdef"><b>Определения</b> request.h:33</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html_a6d95b0225eb7a9e5cf43815c07443b19"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a6d95b0225eb7a9e5cf43815c07443b19">iridium::io::protocol::http::request::TMessageLine::method</a></div><div class="ttdeci">TMethod method</div><div class="ttdoc">HTTP-метод (например, GET, POST).</div><div class="ttdef"><b>Определения</b> request.h:30</div></div>
-<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html_a9384d43efcd331783fdc7d3a9f3647b2"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">iridium::io::protocol::http::request::TMessageLine::protocol</a></div><div class="ttdeci">std::string protocol</div><div class="ttdoc">Строка версии HTTP-протокола (например, &quot;HTTP/1.1&quot;).</div><div class="ttdef"><b>Определения</b> request.h:36</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a39e63d356bdf5ea6b486ecf63c2c3b5a"><div class="ttname"><a href="serialization_2node_8h.html#a39e63d356bdf5ea6b486ecf63c2c3b5a">DEFINE_ATTRIBUTE_LIST</a></div><div class="ttdeci">#define DEFINE_ATTRIBUTE_LIST(type, class_name)</div><div class="ttdef"><b>Определения</b> node.h:473</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a6ae6809e071cbeb286389a6ea722e126"><div class="ttname"><a href="serialization_2node_8h.html#a6ae6809e071cbeb286389a6ea722e126">DEFINE_ATTRIBUTE</a></div><div class="ttdeci">#define DEFINE_ATTRIBUTE(...)</div><div class="ttdef"><b>Определения</b> node.h:447</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_a7b4e724573d774904e29ede08ef7b17a"><div class="ttname"><a href="serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a">DEFINE_ROOT_NODE_END</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_END()</div><div class="ttdef"><b>Определения</b> node.h:414</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_aac8f5e72dee27b1c9479d82a20f96f62"><div class="ttname"><a href="serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62">DEFINE_ROOT_NODE_BEGIN</a></div><div class="ttdeci">#define DEFINE_ROOT_NODE_BEGIN(...)</div><div class="ttdef"><b>Определения</b> node.h:410</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_ac524ec1b1c08d1e9ec08f6231d693e85"><div class="ttname"><a href="serialization_2node_8h.html#ac524ec1b1c08d1e9ec08f6231d693e85">DEFINE_NODE_END</a></div><div class="ttdeci">#define DEFINE_NODE_END(class_name)</div><div class="ttdef"><b>Определения</b> node.h:425</div></div>
+<div class="ttc" id="aserialization_2node_8h_html_ad47703aa4ae66d8d0699aa10e8cbe314"><div class="ttname"><a href="serialization_2node_8h.html#ad47703aa4ae66d8d0699aa10e8cbe314">DEFINE_NODE_BEGIN</a></div><div class="ttdeci">#define DEFINE_NODE_BEGIN(class_name)</div><div class="ttdef"><b>Определения</b> node.h:418</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">iridium::io::protocol::http::request::TMessageLine</a></div><div class="ttdoc">Представляет первую строку HTTP-запроса, также известную как строка запроса.</div><div class="ttdef"><b>Определения</b> request.h:23</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html_a32367e9de0782d4a42ce6bbf8d7345e6"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a32367e9de0782d4a42ce6bbf8d7345e6">iridium::io::protocol::http::request::TMessageLine::uri</a></div><div class="ttdeci">std::string uri</div><div class="ttdoc">URI запроса (например, &quot;/index.html&quot;, &quot;http://example.com/path&quot;).</div><div class="ttdef"><b>Определения</b> request.h:29</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html_a6d95b0225eb7a9e5cf43815c07443b19"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a6d95b0225eb7a9e5cf43815c07443b19">iridium::io::protocol::http::request::TMessageLine::method</a></div><div class="ttdeci">TMethod method</div><div class="ttdoc">HTTP-метод (например, GET, POST).</div><div class="ttdef"><b>Определения</b> request.h:26</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line_html_a9384d43efcd331783fdc7d3a9f3647b2"><div class="ttname"><a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#a9384d43efcd331783fdc7d3a9f3647b2">iridium::io::protocol::http::request::TMessageLine::protocol</a></div><div class="ttdeci">std::string protocol</div><div class="ttdoc">Строка версии HTTP-протокола (например, &quot;HTTP/1.1&quot;).</div><div class="ttdef"><b>Определения</b> request.h:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

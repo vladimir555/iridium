@@ -1,6 +1,6 @@
 <map id="source/iridium/threading/implementation/worker_handler.h" name="source/iridium/threading/implementation/worker_handler.h">
 <area shape="rect" id="Node000001" title=" " alt="" coords="316,5,475,61"/>
-<area shape="rect" id="Node000002" href="$implementation_2worker_8h.html" title="Defines worker class implementations (CWorkerPusher, CWorkerPopper, CWorker) that manage a thread to ..." alt="" coords="312,109,478,150"/>
+<area shape="rect" id="Node000002" href="$implementation_2worker_8h.html" title=" " alt="" coords="312,109,478,150"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="398,77,398,109,392,109,392,77"/>
 <area shape="rect" id="Node000003" href="$implementation_2sink_8cpp.html" title=" " alt="" coords="5,198,172,238"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="311,157,159,200,157,195,310,152"/>

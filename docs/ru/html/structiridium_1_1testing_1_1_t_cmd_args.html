@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Структура iridium::testing::TCmdArgs</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1testing.html">testing</a></li><li class="navelem"><a class="el" href="structiridium_1_1testing_1_1_t_cmd_args.html">TCmdArgs</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1testing.html">testing</a></li><li class="navelem"><a href="structiridium_1_1testing_1_1_t_cmd_args.html">TCmdArgs</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,34 +83,39 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Структура iridium::testing::TCmdArgs</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Хранит разобранные аргументы командной строки для запуска тестов.  
+ <a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:abb65c6c213e0e128622dbc66f1d80ce2" id="r_abb65c6c213e0e128622dbc66f1d80ce2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb65c6c213e0e128622dbc66f1d80ce2">DEFINE_ENUM</a> (TCommand, HELP, RUN, LIST)</td></tr>
-<tr class="separator:abb65c6c213e0e128622dbc66f1d80ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:abb65c6c213e0e128622dbc66f1d80ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перечисляет основные команды, которые может выполнять средство запуска тестов.  <br /></td></tr>
 <tr class="memitem:a0be6d767908876fd68214d00f7e69c21" id="r_a0be6d767908876fd68214d00f7e69c21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0be6d767908876fd68214d00f7e69c21">DEFINE_ENUM</a> (TMode, PARALLEL, SERIAL, RAW)</td></tr>
-<tr class="separator:a0be6d767908876fd68214d00f7e69c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a0be6d767908876fd68214d00f7e69c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перечисляет режимы выполнения тестов.  <br /></td></tr>
 <tr class="memitem:a408dd5c3179e66b6269f885f6aa2a286" id="r_a408dd5c3179e66b6269f885f6aa2a286"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a408dd5c3179e66b6269f885f6aa2a286">DEFINE_ENUM</a> (TPrintResult, JSON)</td></tr>
-<tr class="separator:a408dd5c3179e66b6269f885f6aa2a286"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a408dd5c3179e66b6269f885f6aa2a286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перечисляет форматы для вывода результатов тестов.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Открытые атрибуты</h2></td></tr>
 <tr class="memitem:a8d528ca3c1f63b43e66a0f48b02e1199" id="r_a8d528ca3c1f63b43e66a0f48b02e1199"><td class="memItemLeft" align="right" valign="top">TCommand&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d528ca3c1f63b43e66a0f48b02e1199">command</a></td></tr>
-<tr class="separator:a8d528ca3c1f63b43e66a0f48b02e1199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a8d528ca3c1f63b43e66a0f48b02e1199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Команда для выполнения.  <br /></td></tr>
 <tr class="memitem:a0db769599f87ecf6b813d9a94504e8af" id="r_a0db769599f87ecf6b813d9a94504e8af"><td class="memItemLeft" align="right" valign="top">TMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0db769599f87ecf6b813d9a94504e8af">mode</a></td></tr>
-<tr class="separator:a0db769599f87ecf6b813d9a94504e8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a0db769599f87ecf6b813d9a94504e8af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Режим выполнения тестов.  <br /></td></tr>
 <tr class="memitem:a75b7aa213293d43696b86efa24d7f027" id="r_a75b7aa213293d43696b86efa24d7f027"><td class="memItemLeft" align="right" valign="top">TPrintResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75b7aa213293d43696b86efa24d7f027">print_result</a></td></tr>
-<tr class="separator:a75b7aa213293d43696b86efa24d7f027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a75b7aa213293d43696b86efa24d7f027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Формат для вывода результатов.  <br /></td></tr>
 <tr class="memitem:adfe853ee1fcde1cae832df69131b5ced" id="r_adfe853ee1fcde1cae832df69131b5ced"><td class="memItemLeft" align="right" valign="top">std::chrono::seconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfe853ee1fcde1cae832df69131b5ced">timeout</a></td></tr>
-<tr class="separator:adfe853ee1fcde1cae832df69131b5ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:adfe853ee1fcde1cae832df69131b5ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Тайм-аут для каждого теста.  <br /></td></tr>
 <tr class="memitem:aeb77f2521bfe1edf2221fa3b9ec9f174" id="r_aeb77f2521bfe1edf2221fa3b9ec9f174"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb77f2521bfe1edf2221fa3b9ec9f174">app_name</a></td></tr>
-<tr class="separator:aeb77f2521bfe1edf2221fa3b9ec9f174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aeb77f2521bfe1edf2221fa3b9ec9f174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Имя исполняемого файла тестового приложения.  <br /></td></tr>
 <tr class="memitem:a3825717f3fc94d3f98b141ca1bc23401" id="r_a3825717f3fc94d3f98b141ca1bc23401"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3825717f3fc94d3f98b141ca1bc23401">include_path</a></td></tr>
-<tr class="separator:a3825717f3fc94d3f98b141ca1bc23401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a3825717f3fc94d3f98b141ca1bc23401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Фильтр путей для включения тестов.  <br /></td></tr>
 <tr class="memitem:a611510d9f6bd4ffc68a3c9ecf94f873e" id="r_a611510d9f6bd4ffc68a3c9ecf94f873e"><td class="memItemLeft" align="right" valign="top">list&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a611510d9f6bd4ffc68a3c9ecf94f873e">exclude_paths</a></td></tr>
-<tr class="separator:a611510d9f6bd4ffc68a3c9ecf94f873e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a611510d9f6bd4ffc68a3c9ecf94f873e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список фильтров путей для исключения тестов.  <br /></td></tr>
 </table>
-<h2 class="groupheader">Методы</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Хранит разобранные аргументы командной строки для запуска тестов. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="abb65c6c213e0e128622dbc66f1d80ce2" name="abb65c6c213e0e128622dbc66f1d80ce2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb65c6c213e0e128622dbc66f1d80ce2">&#9670;&#160;</a></span>DEFINE_ENUM() <span class="overload">[1/3]</span></h2>
 
@@ -152,25 +144,27 @@ $(function(){ initResizable(false); });
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Перечисляет основные команды, которые может выполнять средство запуска тестов. </p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_cgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_cgraph" alt=""/></div>
+<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_cgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_cgraph" loading="lazy" alt=""/></div>
 <map name="astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_cgraph" id="astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_cgraph">
-<area shape="rect" title=" " alt="" coords="5,29,183,70"/>
+<area shape="rect" title="Перечисляет основные команды, которые может выполнять средство запуска тестов." alt="" coords="5,29,183,70"/>
 <area shape="poly" title=" " alt="" coords="60,29,58,19,64,10,76,5,94,3,113,5,125,11,122,16,112,10,94,8,77,10,67,14,64,20,65,28"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_icgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_icgraph" alt=""/></div>
+<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_icgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_icgraph" loading="lazy" alt=""/></div>
 <map name="astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_icgraph" id="astructiridium_1_1testing_1_1_t_cmd_args_abb65c6c213e0e128622dbc66f1d80ce2_icgraph">
-<area shape="rect" title=" " alt="" coords="231,39,408,79"/>
+<area shape="rect" title="Перечисляет основные команды, которые может выполнять средство запуска тестов." alt="" coords="231,39,408,79"/>
 <area shape="poly" title=" " alt="" coords="356,26,342,20,319,17,298,19,285,24,280,30,282,37,277,39,275,29,282,20,297,14,319,12,344,14,358,21"/>
-<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#a0be6d767908876fd68214d00f7e69c21" title=" " alt="" coords="5,5,183,46"/>
+<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#a0be6d767908876fd68214d00f7e69c21" title="Перечисляет режимы выполнения тестов." alt="" coords="5,5,183,46"/>
 <area shape="poly" title=" " alt="" coords="215,46,183,41,184,36,216,41"/>
-<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#a408dd5c3179e66b6269f885f6aa2a286" title=" " alt="" coords="5,71,183,111"/>
+<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#a408dd5c3179e66b6269f885f6aa2a286" title="Перечисляет форматы для вывода результатов тестов." alt="" coords="5,71,183,111"/>
 <area shape="poly" title=" " alt="" coords="216,76,184,81,183,76,215,71"/>
 </map>
 </div>
@@ -205,13 +199,15 @@ $(function(){ initResizable(false); });
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Перечисляет режимы выполнения тестов. </p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_a0be6d767908876fd68214d00f7e69c21_cgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_a0be6d767908876fd68214d00f7e69c21_cgraph" alt=""/></div>
+<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_a0be6d767908876fd68214d00f7e69c21_cgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_a0be6d767908876fd68214d00f7e69c21_cgraph" loading="lazy" alt=""/></div>
 <map name="astructiridium_1_1testing_1_1_t_cmd_args_a0be6d767908876fd68214d00f7e69c21_cgraph" id="astructiridium_1_1testing_1_1_t_cmd_args_a0be6d767908876fd68214d00f7e69c21_cgraph">
-<area shape="rect" title=" " alt="" coords="5,29,183,70"/>
-<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2" title=" " alt="" coords="231,29,408,70"/>
+<area shape="rect" title="Перечисляет режимы выполнения тестов." alt="" coords="5,29,183,70"/>
+<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2" title="Перечисляет основные команды, которые может выполнять средство запуска тестов." alt="" coords="231,29,408,70"/>
 <area shape="poly" title=" " alt="" coords="183,47,215,47,215,52,183,52"/>
 <area shape="poly" title=" " alt="" coords="277,29,275,19,282,10,297,5,319,3,344,5,358,11,356,16,342,10,319,8,298,10,285,15,280,21,282,28"/>
 </map>
@@ -237,13 +233,15 @@ $(function(){ initResizable(false); });
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Перечисляет форматы для вывода результатов тестов. </p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_a408dd5c3179e66b6269f885f6aa2a286_cgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_a408dd5c3179e66b6269f885f6aa2a286_cgraph" alt=""/></div>
+<div class="center"><img src="structiridium_1_1testing_1_1_t_cmd_args_a408dd5c3179e66b6269f885f6aa2a286_cgraph.png" border="0" usemap="#astructiridium_1_1testing_1_1_t_cmd_args_a408dd5c3179e66b6269f885f6aa2a286_cgraph" loading="lazy" alt=""/></div>
 <map name="astructiridium_1_1testing_1_1_t_cmd_args_a408dd5c3179e66b6269f885f6aa2a286_cgraph" id="astructiridium_1_1testing_1_1_t_cmd_args_a408dd5c3179e66b6269f885f6aa2a286_cgraph">
-<area shape="rect" title=" " alt="" coords="5,29,183,70"/>
-<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2" title=" " alt="" coords="231,29,408,70"/>
+<area shape="rect" title="Перечисляет форматы для вывода результатов тестов." alt="" coords="5,29,183,70"/>
+<area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2" title="Перечисляет основные команды, которые может выполнять средство запуска тестов." alt="" coords="231,29,408,70"/>
 <area shape="poly" title=" " alt="" coords="183,47,215,47,215,52,183,52"/>
 <area shape="poly" title=" " alt="" coords="277,29,275,19,282,10,297,5,319,3,344,5,358,11,356,16,342,10,319,8,298,10,285,15,280,21,282,28"/>
 </map>
@@ -251,7 +249,7 @@ $(function(){ initResizable(false); });
 
 </div>
 </div>
-<h2 class="groupheader">Данные класса</h2>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Данные класса</h2>
 <a id="aeb77f2521bfe1edf2221fa3b9ec9f174" name="aeb77f2521bfe1edf2221fa3b9ec9f174"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb77f2521bfe1edf2221fa3b9ec9f174">&#9670;&#160;</a></span>app_name</h2>
 
@@ -263,6 +261,8 @@ $(function(){ initResizable(false); });
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Имя исполняемого файла тестового приложения. </p>
 
 </div>
 </div>
@@ -278,6 +278,8 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
+<p>Команда для выполнения. </p>
+
 </div>
 </div>
 <a id="a611510d9f6bd4ffc68a3c9ecf94f873e" name="a611510d9f6bd4ffc68a3c9ecf94f873e"></a>
@@ -291,6 +293,8 @@ $(function(){ initResizable(false); });
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Список фильтров путей для исключения тестов. </p>
 
 </div>
 </div>
@@ -306,6 +310,8 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
+<p>Фильтр путей для включения тестов. </p>
+
 </div>
 </div>
 <a id="a0db769599f87ecf6b813d9a94504e8af" name="a0db769599f87ecf6b813d9a94504e8af"></a>
@@ -319,6 +325,8 @@ $(function(){ initResizable(false); });
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Режим выполнения тестов. </p>
 
 </div>
 </div>
@@ -334,6 +342,8 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
+<p>Формат для вывода результатов. </p>
+
 </div>
 </div>
 <a id="adfe853ee1fcde1cae832df69131b5ced" name="adfe853ee1fcde1cae832df69131b5ced"></a>
@@ -348,6 +358,8 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
+<p>Тайм-аут для каждого теста. </p>
+
 </div>
 </div>
 <hr/>Объявления и описания членов структуры находятся в файле:<ul>
@@ -356,7 +368,7 @@ $(function(){ initResizable(false); });
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Исходный файл source/iridium/logging/implementation/sink_file.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bd04c2bcd27267b7c30d257e93c7a128.html">logging</a></li><li class="navelem"><a class="el" href="dir_ef240e8b579a8fdd4ffcdff116a5157d.html">implementation</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_bd04c2bcd27267b7c30d257e93c7a128.html">logging</a></li><li class="navelem"><a href="dir_ef240e8b579a8fdd4ffcdff116a5157d.html">implementation</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -103,69 +90,67 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="worker_8h.html">iridium/threading/worker.h</a>&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="file__stream_8h.html">iridium/io/fs/file_stream.h</a>&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="implementation_2sink_8h.html">sink.h</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">iridium/enum.h</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="implementation_2sink_8h.html">sink.h</a>&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// No specific Doxygen for iridium namespace itself here.</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1logging.html">logging</a> {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1logging_1_1implementation.html">implementation</a> {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_c_sink_file.html">   37</a></span><span class="keyword">class </span><a class="code hl_function" href="class_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile</a>: <span class="keyword">public</span> ISink {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">   41</a></span>    <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">DEFINE_ENUM</a>(</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        TRotation,</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        DAILY,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        TIMELY</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    );</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile</a>)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile</a>(TEvent::TLevel <span class="keyword">const</span> &amp;level, std::string <span class="keyword">const</span> &amp;path, TRotation <span class="keyword">const</span> &amp;rotation = TRotation::UNKNOWN);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748">initialize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9">finalize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d">log</a>(TEvent::TConstSharedPtr <span class="keyword">const</span> &amp;event) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#adb7420a5c388283284293cab77552943">flush</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    TEvent::TLevel  m_level;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::string     m_path;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    std::string     m_path_original;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    TRotation       m_rotation;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    std::chrono::system_clock::time_point</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    m_last_initialization_time;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    io::fs::IFileStreamWriter::TSharedPtr</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    m_file_writer;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1logging_1_1implementation.html">iridium::logging::implementation</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_c_sink_file.html">   31</a></span><span class="keyword">class </span><a class="code hl_function" href="class_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile</a>: <span class="keyword">public</span> ISink {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">   35</a></span>    <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">DEFINE_ENUM</a>(</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        TRotation,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        DAILY,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        TIMELY</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    );</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_define" href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a>(<a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile</a>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile</a>(TEvent::TLevel <span class="keyword">const</span> &amp;level, std::string <span class="keyword">const</span> &amp;path, TRotation <span class="keyword">const</span> &amp;rotation = TRotation::UNKNOWN);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748">initialize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9">finalize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d">log</a>(TEvent::TConstSharedPtr <span class="keyword">const</span> &amp;event) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#adb7420a5c388283284293cab77552943">flush</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    TEvent::TLevel  m_level;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    std::string     m_path;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::string     m_path_original;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    TRotation       m_rotation;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    std::chrono::system_clock::time_point</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    m_last_initialization_time;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    io::fs::IFileStreamWriter::TSharedPtr</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    m_file_writer;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>};</div>
 </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>} <span class="comment">// iridium::logging::implementation</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">//DEFINE_ENUM_CONVERT(iridium::logging::implementation::CSinkFile::TRotation)</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>} <span class="comment">// implementation</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>} <span class="comment">// logging</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>} <span class="comment">// iridium</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_SINK_FILE_EE36E77A_D49D_46A5_9728_AD2D5D5B6573</span></div>
-<div class="ttc" id="aclass_c_sink_file_html_ab5e0fe663ecfaf05836156d0b15ae8ef"><div class="ttname"><a href="class_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile::CSinkFile</a></div><div class="ttdeci">CSinkFile(TEvent::TLevel const &amp;level, std::string const &amp;path, TRotation const &amp;rotation=TRotation::UNKNOWN)</div><div class="ttdoc">Определяет стандартные вспомогательные средства реализации для CSinkFile, такие как typedef-ы умных у...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:28</div></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_SINK_FILE_EE36E77A_D49D_46A5_9728_AD2D5D5B6573</span></div>
+<div class="ttc" id="aclass_c_sink_file_html_ab5e0fe663ecfaf05836156d0b15ae8ef"><div class="ttname"><a href="class_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">CSinkFile::CSinkFile</a></div><div class="ttdeci">CSinkFile(TEvent::TLevel const &amp;level, std::string const &amp;path, TRotation const &amp;rotation=TRotation::UNKNOWN)</div><div class="ttdoc">Определяет стандартные вспомогательные средства реализации для CSinkFile, такие как typedef-ы умных у...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:26</div></div>
 <div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_a264320e5ebaa3d6cfd24e5c95a1f96d0"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">iridium::logging::implementation::CSinkFile::DEFINE_ENUM</a></div><div class="ttdeci">DEFINE_ENUM(TRotation, DAILY, TIMELY)</div><div class="ttdoc">Перечисляет доступные стратегии ротации лог-файлов.</div></div>
-<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_a36f940debb2a5e9346d07b75f92f2bc9"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9">iridium::logging::implementation::CSinkFile::finalize</a></div><div class="ttdeci">void finalize() override</div><div class="ttdoc">Завершает работу файлового приемника, обеспечивая сброс всех буферизованных сообщений и закрытие лог-...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:92</div></div>
-<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_aa60e534e568948ac1b550d468d68ed2d"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d">iridium::logging::implementation::CSinkFile::log</a></div><div class="ttdeci">void log(TEvent::TConstSharedPtr const &amp;event) override</div><div class="ttdoc">Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:104</div></div>
-<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_ab5e0fe663ecfaf05836156d0b15ae8ef"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">iridium::logging::implementation::CSinkFile::CSinkFile</a></div><div class="ttdeci">CSinkFile(TEvent::TLevel const &amp;level, std::string const &amp;path, TRotation const &amp;rotation=TRotation::UNKNOWN)</div><div class="ttdoc">Определяет стандартные вспомогательные средства реализации для CSinkFile, такие как typedef-ы умных у...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:28</div></div>
-<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_adb7420a5c388283284293cab77552943"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#adb7420a5c388283284293cab77552943">iridium::logging::implementation::CSinkFile::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Сбрасывает все буферизованные сообщения в лог-файл.</div><div class="ttdef"><b>Определения</b> sink_file.cpp:119</div></div>
-<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_ae0b2dbfdca7aa7a43e5c1ff411598748"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748">iridium::logging::implementation::CSinkFile::initialize</a></div><div class="ttdeci">void initialize() override</div><div class="ttdoc">Инициализирует файловый приемник. Это включает открытие/создание лог-файла в соответствии с путем и с...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:39</div></div>
+<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_a36f940debb2a5e9346d07b75f92f2bc9"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9">iridium::logging::implementation::CSinkFile::finalize</a></div><div class="ttdeci">void finalize() override</div><div class="ttdoc">Завершает работу файлового приемника, обеспечивая сброс всех буферизованных сообщений и закрытие лог-...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:90</div></div>
+<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_aa60e534e568948ac1b550d468d68ed2d"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d">iridium::logging::implementation::CSinkFile::log</a></div><div class="ttdeci">void log(TEvent::TConstSharedPtr const &amp;event) override</div><div class="ttdoc">Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:102</div></div>
+<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_ab5e0fe663ecfaf05836156d0b15ae8ef"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef">iridium::logging::implementation::CSinkFile::CSinkFile</a></div><div class="ttdeci">CSinkFile(TEvent::TLevel const &amp;level, std::string const &amp;path, TRotation const &amp;rotation=TRotation::UNKNOWN)</div><div class="ttdoc">Определяет стандартные вспомогательные средства реализации для CSinkFile, такие как typedef-ы умных у...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:26</div></div>
+<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_adb7420a5c388283284293cab77552943"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#adb7420a5c388283284293cab77552943">iridium::logging::implementation::CSinkFile::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Сбрасывает все буферизованные сообщения в лог-файл.</div><div class="ttdef"><b>Определения</b> sink_file.cpp:117</div></div>
+<div class="ttc" id="aclassiridium_1_1logging_1_1implementation_1_1_c_sink_file_html_ae0b2dbfdca7aa7a43e5c1ff411598748"><div class="ttname"><a href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748">iridium::logging::implementation::CSinkFile::initialize</a></div><div class="ttdeci">void initialize() override</div><div class="ttdoc">Инициализирует файловый приемник. Это включает открытие/создание лог-файла в соответствии с путем и с...</div><div class="ttdef"><b>Определения</b> sink_file.cpp:37</div></div>
+<div class="ttc" id="aenum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div><div class="ttdoc">Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек...</div></div>
 <div class="ttc" id="afile__stream_8h_html"><div class="ttname"><a href="file__stream_8h.html">file_stream.h</a></div></div>
 <div class="ttc" id="aimplementation_2sink_8h_html"><div class="ttname"><a href="implementation_2sink_8h.html">sink.h</a></div><div class="ttdoc">Определяет класс CSinkAsync, асинхронную обертку для реализаций ISink. Использует рабочий поток для о...</div></div>
-<div class="ttc" id="anamespaceiridium_1_1logging_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1logging_1_1implementation.html">iridium::logging::implementation</a></div><div class="ttdoc">Содержит детали реализации и конкретные классы для компонентов логирования.</div><div class="ttdef"><b>Определения</b> sink.cpp:12</div></div>
-<div class="ttc" id="anamespaceiridium_1_1logging_html"><div class="ttname"><a href="namespaceiridium_1_1logging.html">iridium::logging</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с логированием.</div><div class="ttdef"><b>Определения</b> config.cpp:13</div></div>
-<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="anamespaceiridium_1_1logging_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1logging_1_1implementation.html">iridium::logging::implementation</a></div><div class="ttdef"><b>Определения</b> sink.cpp:10</div></div>
 <div class="ttc" id="asmart__ptr_8h_html_ad4d8992039d0faf9ae66c4f596277280"><div class="ttname"><a href="smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280">DEFINE_IMPLEMENTATION</a></div><div class="ttdeci">#define DEFINE_IMPLEMENTATION(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения классов реализации. Объединяет DEFINE_CREATE(TClass) для объяв...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:110</div></div>
 <div class="ttc" id="aworker_8h_html"><div class="ttname"><a href="worker_8h.html">worker.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

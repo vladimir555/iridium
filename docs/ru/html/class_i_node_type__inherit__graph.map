@@ -1,6 +1,6 @@
 <map id="INodeType&lt; TValue &gt;" name="INodeType&lt; TValue &gt;">
-<area shape="rect" id="Node000001" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения...." alt="" coords="34,94,182,120"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title="Конкретная реализация интерфейса INodeType. Этот шаблон класса предоставляет полную реализацию для уз..." alt="" coords="5,168,211,208"/>
+<area shape="rect" id="Node000001" title="Обобщенный интерфейс для узла в древовидной структуре данных." alt="" coords="34,94,182,120"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title=" " alt="" coords="5,168,211,208"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="111,135,111,167,105,167,105,135"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_prototype.html" title=" " alt="" coords="20,5,196,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,62,111,93,105,93,105,62"/>

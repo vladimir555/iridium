@@ -1,5 +1,5 @@
 <map id="source/iridium/items.h" name="source/iridium/items.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="48,5,197,31"/>
+<area shape="rect" id="Node000001" title="Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами." alt="" coords="48,5,197,31"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,79,80,105"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,34,69,71,65,67,107,30"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="103,79,142,105"/>

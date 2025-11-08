@@ -1,24 +1,20 @@
 <map id="iridium::split" name="iridium::split">
-<area shape="rect" id="Node000001" title=" " alt="" coords="537,230,628,256"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a27065c46a3da323c165b2667a95dee93" title=" " alt="" coords="297,5,450,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="572,216,561,180,544,138,520,97,487,61,470,49,450,41,452,36,472,45,491,57,524,94,549,136,566,178,577,214"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1logging.html#ab286e889ca942075409b8181341fbed1" title=" " alt="" coords="261,71,487,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="565,218,534,170,512,146,487,125,467,114,470,110,491,121,516,142,538,167,570,215"/>
-<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a96285e07f4342f950a7600384e2dc9be" title=" " alt="" coords="285,135,462,191"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="537,226,488,205,457,194,459,189,490,201,539,221"/>
-<area shape="rect" id="Node000005" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a1654d91fa56fed0ee6ce0a0f3d7ca914" title=" " alt="" coords="285,215,462,271"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="522,246,463,246,463,240,522,240"/>
-<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ac1fb6e1887342ca64f9da42ba9897ed2" title="Parses an HTTP message string into a node tree structure. The resulting tree typically represents hea..." alt="" coords="271,295,476,335"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="540,265,490,286,455,297,454,292,488,280,538,260"/>
-<area shape="rect" id="Node000008" href="$namespaceiridium_1_1testing.html#aa72cd6418653662c222966cdbf7fdcfe" title=" " alt="" coords="259,384,489,409"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="566,270,533,310,491,349,455,370,419,385,416,381,452,365,487,345,530,306,562,267"/>
-<area shape="rect" id="Node000010" href="$namespaceiridium.html#afef87790945fdbd91f4aba5556f735aa" title=" " alt="" coords="328,433,420,458"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="578,271,567,307,549,348,524,389,491,424,456,441,420,448,419,442,455,436,487,420,520,386,544,346,562,305,572,270"/>
-<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ab8f8ea6a73bf37a20a4ce7b9db47def9" title="Defines standard implementation helpers for CHTTPParser, such as smart pointer typedefs and a static ..." alt="" coords="5,295,211,335"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="255,318,211,318,211,312,255,312"/>
-<area shape="poly" id="edge7_Node000007_Node000007" title=" " alt="" coords="152,282,135,276,108,273,82,275,67,280,61,286,63,293,58,295,56,285,64,276,81,270,108,268,137,270,153,277"/>
-<area shape="poly" id="edge9_Node000008_Node000008" title=" " alt="" coords="410,371,398,365,374,362,352,364,340,369,337,374,343,382,339,385,332,375,336,365,350,359,374,357,399,360,413,366"/>
-<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Runs the registered tests, potentially filtered by command&#45;line arguments. This method is the main en..." alt="" coords="20,384,196,409"/>
-<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="243,399,197,399,197,394,243,394"/>
-<area shape="poly" id="edge11_Node000009_Node000009" title=" " alt="" coords="155,372,140,365,108,362,80,364,64,369,61,374,68,381,64,385,56,375,61,365,79,359,108,357,142,360,158,367"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="537,201,628,226"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging.html#ab286e889ca942075409b8181341fbed1" title=" " alt="" coords="261,5,487,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="570,187,540,123,517,89,487,60,470,49,472,44,491,56,521,85,545,120,575,185"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a96285e07f4342f950a7600384e2dc9be" title=" " alt="" coords="285,70,462,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="556,192,525,165,488,140,462,127,464,123,490,135,528,161,559,188"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a1654d91fa56fed0ee6ce0a0f3d7ca914" title=" " alt="" coords="285,150,462,206"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="521,206,463,196,464,190,522,201"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ac1fb6e1887342ca64f9da42ba9897ed2" title="Parses a string into a tree of nodes." alt="" coords="271,229,476,270"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="522,227,477,235,476,229,521,221"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium_1_1testing.html#aa72cd6418653662c222966cdbf7fdcfe" title=" " alt="" coords="259,294,489,320"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="558,239,527,263,490,284,456,296,455,291,488,279,524,258,554,235"/>
+<area shape="rect" id="Node000009" href="$namespaceiridium.html#afef87790945fdbd91f4aba5556f735aa" title=" " alt="" coords="328,344,420,369"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="570,242,539,290,516,314,490,335,456,350,421,357,419,351,454,344,488,330,513,310,534,286,566,239"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ab8f8ea6a73bf37a20a4ce7b9db47def9" title="Defines standard implementation helpers for CHTTPParser, such as smart pointer typedefs and a static ..." alt="" coords="5,229,211,270"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="255,252,211,252,211,247,255,247"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="152,216,135,210,108,208,82,210,67,215,61,221,63,228,58,229,56,219,64,210,81,205,108,203,137,205,153,211"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Runs the registered tests, potentially filtered by command&#45;line arguments. This method is the main en..." alt="" coords="20,294,196,320"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="243,310,197,310,197,304,243,304"/>
 </map>

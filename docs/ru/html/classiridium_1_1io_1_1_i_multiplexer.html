@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Класс iridium::io::IMultiplexer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="classiridium_1_1io_1_1_i_multiplexer.html">IMultiplexer</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a href="classiridium_1_1io_1_1_i_multiplexer.html">IMultiplexer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -97,64 +84,55 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Интерфейс для мультиплексора событий ввода-вывода. Мультиплексор ввода-вывода позволяет одному потоку отслеживать несколько потоков ввода-вывода (например, сокеты, каналы) на предмет событий, таких как готовность к чтению или записи. Это фундаментальный компонент для создания масштабируемых неблокирующих приложений ввода-вывода. Наследуется от <code>IInitializable</code>, что предполагает, что экземпляры мультиплексора могут требовать фазы инициализации. Комментарий <code>todo: public IAsyncQueuePopper&lt;IEvent::TSharedPtr&gt;</code> предполагает потенциальное проектное решение, чтобы этот интерфейс также выступал в роли очереди, из которой можно извлекать события.  
+<p>Интерфейс для мультиплексора ввода-вывода.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="multiplexer_8h_source.html">multiplexer.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:iridium::io::IMultiplexer:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_multiplexer_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer__inherit__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_multiplexer_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="airidium_1_1io_1_1_i_multiplexer_inherit__map" id="airidium_1_1io_1_1_i_multiplexer_inherit__map">
-<area shape="rect" title="Интерфейс для мультиплексора событий ввода&#45;вывода. Мультиплексор ввода&#45;вывода позволяет одному потоку..." alt="" coords="21,79,174,105"/>
+<area shape="rect" title="Интерфейс для мультиплексора ввода&#45;вывода." alt="" coords="21,79,174,105"/>
 <area shape="rect" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html" title="Заглушечная реализация IMultiplexer для платформы Emscripten. Все методы в настоящее время выбрасываю..." alt="" coords="11,153,184,193"/>
 <area shape="poly" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,5,190,31"/>
 <area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <div class="dynheader">
 Граф связей класса iridium::io::IMultiplexer:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_multiplexer_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer__coll__graph.png" border="0" usemap="#airidium_1_1io_1_1_i_multiplexer_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="airidium_1_1io_1_1_i_multiplexer_coll__map" id="airidium_1_1io_1_1_i_multiplexer_coll__map">
-<area shape="rect" title="Интерфейс для мультиплексора событий ввода&#45;вывода. Мультиплексор ввода&#45;вывода позволяет одному потоку..." alt="" coords="21,79,174,105"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="rect" title="Интерфейс для мультиплексора ввода&#45;вывода." alt="" coords="21,79,174,105"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,5,190,31"/>
 <area shape="poly" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:ac504aeac3dcbdf83dcb9520a9f7e5e84" id="r_ac504aeac3dcbdf83dcb9520a9f7e5e84"><td class="memItemLeft" align="right" valign="top">virtual std::list&lt; Event::TSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac504aeac3dcbdf83dcb9520a9f7e5e84">waitEvents</a> ()=0</td></tr>
-<tr class="memdesc:ac504aeac3dcbdf83dcb9520a9f7e5e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ожидает возникновения событий ввода-вывода на любом из подписанных потоков. Этот метод обычно блокируется до тех пор, пока не произойдет хотя бы одно событие или не истечет тайм-аут (хотя параметр тайм-аута в настоящее время не указан). Гарантированно не выбрасывает исключений (<code>no throw</code>).  <br /></td></tr>
-<tr class="separator:ac504aeac3dcbdf83dcb9520a9f7e5e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7fdd5662bd86891ead8a159cd664df5" id="r_af7fdd5662bd86891ead8a159cd664df5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7fdd5662bd86891ead8a159cd664df5">subscribe</a> (IStream::TSharedPtr const &amp;stream)=0</td></tr>
-<tr class="memdesc:af7fdd5662bd86891ead8a159cd664df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Подписывает поток ввода-вывода на этот мультиплексор для отслеживания событий. После подписки потока мультиплексор будет отслеживать события ввода-вывода на нем (например, доступность данных для чтения). Комментарий <code>todo: subscribe for <a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a> and <a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code> предполагает, что будущие улучшения могут включать более гранулированные подписки на основе возможностей чтения/записи.  <br /></td></tr>
-<tr class="separator:af7fdd5662bd86891ead8a159cd664df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94963c6cf79e4815724695edb2201809" id="r_a94963c6cf79e4815724695edb2201809"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94963c6cf79e4815724695edb2201809">unsubscribe</a> (IStream::TSharedPtr const &amp;stream)=0</td></tr>
-<tr class="memdesc:a94963c6cf79e4815724695edb2201809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отписывает поток ввода-вывода от этого мультиплексора. Мультиплексор прекратит отслеживание событий для этого потока. Комментарий "finalize and unsubscribe stream" предполагает, что это также может инициировать очистку или финализацию самого потока.  <br /></td></tr>
-<tr class="separator:a94963c6cf79e4815724695edb2201809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memitem:a2749d201efed6206fb197a7221bc2d61" id="r_a2749d201efed6206fb197a7221bc2d61"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2749d201efed6206fb197a7221bc2d61">wake</a> (Event::TSharedPtr const &amp;event)=0</td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
 <tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
-<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
-<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<span class="tt">TSharedPtr</span>, <span class="tt">TWeakPtr</span> и т.д.) для интерфейса <span class="tt"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации.">IInitializable</a></span>.  <br /></td></tr>
 <tr class="memitem:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a5b8c613423cd12e98327a9279d8b9d64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a5b8c613423cd12e98327a9279d8b9d64">initialize</a> ()=0</td></tr>
-<tr class="memdesc:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет инициализацию объекта. Этот метод должен быть вызван после конструирования объекта и перед его использованием. Реализации должны гарантировать, что объект находится в действительном и пригодном для использования состоянии после этого вызова.  <br /></td></tr>
-<tr class="separator:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a5b8c613423cd12e98327a9279d8b9d64 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет логику инициализации объекта.  <br /></td></tr>
 <tr class="memitem:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a93a1fb6f89e1e1f125455a8682e9ae59"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a93a1fb6f89e1e1f125455a8682e9ae59">finalize</a> ()=0</td></tr>
-<tr class="memdesc:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет финализацию или очистку объекта. Этот метод должен быть вызван, когда объект больше не нужен, обычно перед его уничтожением. Он должен освободить любые ресурсы, полученные во время инициализации или работы.  <br /></td></tr>
-<tr class="separator:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a93a1fb6f89e1e1f125455a8682e9ae59 inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет логику финализации объекта.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Статические открытые данные</h2></td></tr>
 <tr class="memitem:a517f4358d3d59d304ab04c9657c37e80" id="r_a517f4358d3d59d304ab04c9657c37e80"><td class="memItemLeft" align="right" valign="top">static std::chrono::seconds const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a517f4358d3d59d304ab04c9657c37e80">DEFAULT_WAITING_TIMEOUT</a></td></tr>
-<tr class="memdesc:a517f4358d3d59d304ab04c9657c37e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).  <br /></td></tr>
-<tr class="separator:a517f4358d3d59d304ab04c9657c37e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Интерфейс для мультиплексора событий ввода-вывода. Мультиплексор ввода-вывода позволяет одному потоку отслеживать несколько потоков ввода-вывода (например, сокеты, каналы) на предмет событий, таких как готовность к чтению или записи. Это фундаментальный компонент для создания масштабируемых неблокирующих приложений ввода-вывода. Наследуется от <code>IInitializable</code>, что предполагает, что экземпляры мультиплексора могут требовать фазы инициализации. Комментарий <code>todo: public IAsyncQueuePopper&lt;IEvent::TSharedPtr&gt;</code> предполагает потенциальное проектное решение, чтобы этот интерфейс также выступал в роли очереди, из которой можно извлекать события. </p>
-</div><h2 class="groupheader">Методы</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс для мультиплексора ввода-вывода. </p>
+<p>Мультиплексор ввода-вывода отслеживает несколько потоков ввода-вывода (например, сокеты, файловые дескрипторы) и ожидает, пока один или несколько из них станут готовы для выполнения операций ввода-вывода (например, чтения или записи). Это центральный компонент в масштабируемых, неблокирующих архитектурах ввода-вывода. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="af7fdd5662bd86891ead8a159cd664df5" name="af7fdd5662bd86891ead8a159cd664df5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af7fdd5662bd86891ead8a159cd664df5">&#9670;&#160;</a></span>subscribe()</h2>
 
@@ -177,29 +155,21 @@ $(function(){ initResizable(false); });
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Подписывает поток ввода-вывода на этот мультиплексор для отслеживания событий. После подписки потока мультиплексор будет отслеживать события ввода-вывода на нем (например, доступность данных для чтения). Комментарий <code>todo: subscribe for <a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a> and <a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code> предполагает, что будущие улучшения могут включать более гранулированные подписки на основе возможностей чтения/записи. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">stream</td><td>Умный указатель на <code><a class="el" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...">IStream</a></code>, который необходимо отслеживать. </td></tr>
-  </table>
-  </dd>
-</dl>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_cgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_cgraph">
-<area shape="rect" title="Подписывает поток ввода&#45;вывода на этот мультиплексор для отслеживания событий. После подписки потока ..." alt="" coords="5,29,158,70"/>
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
 <area shape="poly" title=" " alt="" coords="52,29,50,19,55,11,66,5,82,3,98,5,108,11,106,16,97,10,81,8,67,10,59,14,56,20,57,28"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_icgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_af7fdd5662bd86891ead8a159cd664df5_icgraph">
-<area shape="rect" title="Подписывает поток ввода&#45;вывода на этот мультиплексор для отслеживания событий. После подписки потока ..." alt="" coords="5,29,158,70"/>
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
 <area shape="poly" title=" " alt="" coords="106,16,97,10,81,8,67,10,59,14,56,20,57,28,52,29,50,19,55,11,66,5,82,3,98,5,108,11"/>
 </map>
 </div>
@@ -228,29 +198,21 @@ $(function(){ initResizable(false); });
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Отписывает поток ввода-вывода от этого мультиплексора. Мультиплексор прекратит отслеживание событий для этого потока. Комментарий "finalize and unsubscribe stream" предполагает, что это также может инициировать очистку или финализацию самого потока. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">stream</td><td>Умный указатель на <code><a class="el" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...">IStream</a></code>, который необходимо удалить из отслеживания. </td></tr>
-  </table>
-  </dd>
-</dl>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_cgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_cgraph">
-<area shape="rect" title="Отписывает поток ввода&#45;вывода от этого мультиплексора. Мультиплексор прекратит отслеживание событий д..." alt="" coords="5,29,158,70"/>
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
 <area shape="poly" title=" " alt="" coords="52,29,50,19,55,11,66,5,82,3,98,5,108,11,106,16,97,10,81,8,67,10,59,14,56,20,57,28"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_icgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_a94963c6cf79e4815724695edb2201809_icgraph">
-<area shape="rect" title="Отписывает поток ввода&#45;вывода от этого мультиплексора. Мультиплексор прекратит отслеживание событий д..." alt="" coords="5,29,158,70"/>
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
 <area shape="poly" title=" " alt="" coords="106,16,97,10,81,8,67,10,59,14,56,20,57,28,52,29,50,19,55,11,66,5,82,3,98,5,108,11"/>
 </map>
 </div>
@@ -280,32 +242,72 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Ожидает возникновения событий ввода-вывода на любом из подписанных потоков. Этот метод обычно блокируется до тех пор, пока не произойдет хотя бы одно событие или не истечет тайм-аут (хотя параметр тайм-аута в настоящее время не указан). Гарантированно не выбрасывает исключений (<code>no throw</code>). </p>
-<dl class="section return"><dt>Возвращает</dt><dd>Список умных указателей на объекты <code><a class="el" href="structiridium_1_1io_1_1_event.html" title="Представляет событие ввода-вывода, связанное с потоком. Эта структура инкапсулирует информацию о собы...">Event</a></code>, представляющие произошедшие события ввода-вывода. Список может быть пустым, если ожидание завершилось по тайм-ауту без каких-либо событий. </dd></dl>
-
 <p>Замещается в <a class="el" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html#a3a0224a267e05ce27635a2538aa6b51d">iridium::io::implementation::platform::CMultiplexer</a>.</p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_cgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_cgraph">
-<area shape="rect" title="Ожидает возникновения событий ввода&#45;вывода на любом из подписанных потоков. Этот метод обычно блокиру..." alt="" coords="5,29,158,70"/>
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
 <area shape="poly" title=" " alt="" coords="52,29,50,19,55,11,66,5,82,3,98,5,108,11,106,16,97,10,81,8,67,10,59,14,56,20,57,28"/>
 </map>
 </div>
 <div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_icgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_icgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_icgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_ac504aeac3dcbdf83dcb9520a9f7e5e84_icgraph">
-<area shape="rect" title="Ожидает возникновения событий ввода&#45;вывода на любом из подписанных потоков. Этот метод обычно блокиру..." alt="" coords="5,29,158,70"/>
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
 <area shape="poly" title=" " alt="" coords="106,16,97,10,81,8,67,10,59,14,56,20,57,28,52,29,50,19,55,11,66,5,82,3,98,5,108,11"/>
 </map>
 </div>
 
 </div>
 </div>
-<h2 class="groupheader">Данные класса</h2>
+<a id="a2749d201efed6206fb197a7221bc2d61" name="a2749d201efed6206fb197a7221bc2d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2749d201efed6206fb197a7221bc2d61">&#9670;&#160;</a></span>wake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iridium::io::IMultiplexer::wake </td>
+          <td>(</td>
+          <td class="paramtype">Event::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_cgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_cgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
+<area shape="poly" title=" " alt="" coords="52,29,50,19,55,11,66,5,82,3,98,5,108,11,106,16,97,10,81,8,67,10,59,14,56,20,57,28"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_icgraph.png" border="0" usemap="#aclassiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_icgraph" id="aclassiridium_1_1io_1_1_i_multiplexer_a2749d201efed6206fb197a7221bc2d61_icgraph">
+<area shape="rect" title=" " alt="" coords="5,29,158,70"/>
+<area shape="poly" title=" " alt="" coords="106,16,97,10,81,8,67,10,59,14,56,20,57,28,52,29,50,19,55,11,66,5,82,3,98,5,108,11"/>
+</map>
+</div>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Данные класса</h2>
 <a id="a517f4358d3d59d304ab04c9657c37e80" name="a517f4358d3d59d304ab04c9657c37e80"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a517f4358d3d59d304ab04c9657c37e80">&#9670;&#160;</a></span>DEFAULT_WAITING_TIMEOUT</h2>
 
@@ -326,9 +328,6 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора). </p>
-<p>Значение тайм-аута по умолчанию для ожидания событий, в секундах. Реализации могут использовать это значение по умолчанию, если в <code>waitEvents</code> не указан конкретный тайм-аут (хотя текущая сигнатура <code>waitEvents</code> не принимает тайм-аут). </p>
-
 </div>
 </div>
 <hr/>Объявления и описания членов классов находятся в файлах:<ul>
@@ -338,7 +337,7 @@ $(function(){ initResizable(false); });
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

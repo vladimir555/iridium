@@ -1,8 +1,7 @@
 <map id="iridium::logging::Logger::setConfig" name="iridium::logging::Logger::setConfig">
-<area shape="rect" id="Node000001" title="Sets the logger configuration. This will reconfigure the logger, potentially clearing existing sinks ..." alt="" coords="450,22,605,62"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging.html#a4fff5fa51c4d1b05c97ae08faf5efd18" title="Sets the global logger configuration. This is a free function wrapper around Logger::instance()...." alt="" coords="230,29,402,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="435,45,402,45,402,40,435,40"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Runs the registered tests, potentially filtered by command&#45;line arguments. This method is the main en..." alt="" coords="5,29,182,55"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,45,182,45,182,40,214,40"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="132,17,119,10,93,8,70,10,57,15,55,20,61,27,57,31,49,21,54,11,69,5,94,3,121,5,135,12"/>
+<area shape="rect" id="Node000001" title="Sets the logger&#39;s configuration." alt="" coords="450,5,605,46"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging.html#a4fff5fa51c4d1b05c97ae08faf5efd18" title="Sets the global logger configuration." alt="" coords="230,13,402,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="435,28,402,28,402,23,435,23"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title="Runs the registered tests, potentially filtered by command&#45;line arguments. This method is the main en..." alt="" coords="5,13,182,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,28,182,28,182,23,214,23"/>
 </map>

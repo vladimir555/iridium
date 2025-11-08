@@ -1,5 +1,5 @@
 <map id="source/iridium/io/net/dns.h" name="source/iridium/io/net/dns.h">
-<area shape="rect" id="Node000001" title="Предоставляет доступ к функциональности разрешения DNS. Этот заголовочный файл включает платформо&#45;спе..." alt="" coords="9,5,147,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="9,5,147,46"/>
 <area shape="rect" id="Node000002" href="$implementation_2dns_8h.html" title=" " alt="" coords="5,94,151,120"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,78,75,78,75,46"/>
 <area shape="rect" id="Node000003" href="$platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="17,168,139,193"/>

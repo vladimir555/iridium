@@ -1,8 +1,10 @@
 <map id="iridium::io::protocol::http::response::convert" name="iridium::io::protocol::http::response::convert">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,169,46"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="428,5,555,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,20,217,19,380,19,413,20,413,25,380,24,217,24,169,25"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a7e8b7dc60e9085869e6d013856fa86b3" title=" " alt="" coords="217,33,380,74"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,34,201,38,201,43,169,39"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="380,39,413,34,413,40,381,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,169,54"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="428,13,555,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,28,217,27,380,27,413,27,413,33,380,32,217,32,169,33"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a7e8b7dc60e9085869e6d013856fa86b3" title=" " alt="" coords="217,41,380,82"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="169,41,201,46,201,51,169,47"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Функция преобразования по умолчанию, которая вызывается, если не найдена специализация." alt="" coords="603,5,783,61"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="556,30,587,30,587,36,556,36"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="380,47,413,42,413,47,381,52"/>
 </map>

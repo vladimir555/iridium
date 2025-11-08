@@ -1,4 +1,4 @@
 <map id="iridium::threading::IRunnable::run" name="iridium::threading::IRunnable::run">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,126,70"/>
+<area shape="rect" id="Node000001" title="Основная функция, которая будет выполняться в отдельном потоке." alt="" coords="5,29,126,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="42,29,40,20,44,11,53,5,66,3,79,5,87,12,84,16,77,10,65,8,55,10,48,14,46,20,47,28"/>
 </map>

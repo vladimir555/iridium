@@ -1,5 +1,5 @@
 <map id="iridium::assertOne" name="iridium::assertOne">
-<area shape="rect" id="Node000001" title="Эта функция computes assertOne. Russian detailed description (if any)." alt="" coords="5,5,133,31"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Эта функция computes assertSize. Russian detailed description (if any)." alt="" coords="181,5,310,31"/>
+<area shape="rect" id="Node000001" title="Утверждает, что контейнер содержит ровно один элемент, и выбрасывает пользовательское исключение,..." alt="" coords="5,5,133,31"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Утверждает, что контейнер имеет определенный размер, и выбрасывает пользовательское исключение,..." alt="" coords="181,5,310,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,16,165,16,165,21,133,21"/>
 </map>

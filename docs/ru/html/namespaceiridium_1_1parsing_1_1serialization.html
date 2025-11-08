@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Пространство имен iridium::parsing::serialization</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,77 +71,149 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing.html">parsing</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1parsing_1_1serialization.html">serialization</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1parsing.html">parsing</a></li><li class="navelem"><a href="namespaceiridium_1_1parsing_1_1serialization.html">serialization</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Классы</a> &#124;
+<a href="#enum-members">Перечисления</a> &#124;
 <a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Пространство имен iridium::parsing::serialization</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Предоставляет классы, макросы и утилиты для определения сериализуемых/десериализуемых структур данных. Это пространство имен фокусируется на представлении данных на основе узлов, где структуры данных определяются как иерархия узлов, каждый из которых потенциально может иметь атрибуты, значения и дочерние узлы или списки узлов. Система использует классы <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> в качестве оберток над базовым деревом <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> для обеспечения типизированного доступа и модификации, а также применяет набор макросов (<code>DEFINE_ROOT_NODE_BEGIN</code>, <code>DEFINE_ATTRIBUTE</code> и т.д.) для декларативного определения этих структур.  
-<a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">NodeView</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Предоставляет типизированное представление или обертку над базовым объектом <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code>. Этот шаблон класса облегчает типизированный доступ (получение/установка) к значению узла и управляет его связью в рамках более крупной структуры узлов (через путь и родителя). Является фундаментальным строительным блоком для атрибутов и простых узлов, содержащих значения, определяемых с помощью макросов сериализации.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html">NodeView&lt; void &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Специализация <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> для безузловых узлов (тип значения <code>void</code>). Обычно используется как базовый класс для структурированных узлов, определенных <code>DEFINE_NODE_BEGIN</code> или <code>DEFINE_ROOT_NODE_BEGIN</code>, или для представления родительского узла, конкретный тип которого не нужен для построения пути. В основном управляет указателем <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> и его путем.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html">NodeViewList</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет список объектов <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> определенного типа <code>TNodeView</code>. Этот класс предоставляет интерфейс для итерации и изменения списка сложных дочерних узлов или списка атрибутов в структуре данных, определенной макросами сериализации.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">NodeViewPtr</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обертка для лениво инициализируемого разделяемого указателя на <code>TNodeView</code>. Используется для опциональных или рекурсивных определений узлов в структурах данных, определенных макросами сериализации (например, <code>DEFINE_NODE_PTR</code>). Фактический <code>TNodeView</code> обычно создается только при вызове <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html#a3859d99c5505ade8c5d2e951240f1690" title="Получает разделяемый указатель на TNodeView. Если TNodeView еще не был создан (например,...">get()</a></code> и если существует базовый узел.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:NodeView" id="r_NodeView"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html">NodeView</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс-представление для узла с определенным типом значения. Предоставляет удобный способ доступа и изменения значений узла.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:NodeView_3C_20void_20_3E" id="r_NodeView_3C_20void_20_3E"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html">NodeView&lt; void &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Специализация <a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Класс-представление для узла с определенным типом значения. Предоставляет удобный способ доступа и из...">NodeView</a> для узлов без определенного типа значения (например, родительских узлов).  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:NodeViewList" id="r_NodeViewList"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html">NodeViewList</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс-представление для списка узлов.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:NodeViewPtr" id="r_NodeViewPtr"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html">NodeViewPtr</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс, подобный умному указателю, для представления узла. Полезен для рекурсивных структур узлов.  <a href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html#details">Подробнее...</a><br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Перечисления</h2></td></tr>
+<tr class="memitem:a93cc0056dcf422e3caf0b8668532c470" id="r_a93cc0056dcf422e3caf0b8668532c470"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93cc0056dcf422e3caf0b8668532c470">TNamingStrategyCPPToNode</a> { <a class="el" href="#a93cc0056dcf422e3caf0b8668532c470a696b031073e74bf2cb98e5ef201d4aa3">UNKNOWN</a> = -1
+, <a class="el" href="#a93cc0056dcf422e3caf0b8668532c470ae14f4d5e29a1871c506305ea1f21100e">LOWER_CASE_TO_LOWER_KEBAB</a>
+, <a class="el" href="#a93cc0056dcf422e3caf0b8668532c470a53a08f340682440ed8e1da96c5d1f1dd">CAMEL_CASE_TO_LOWER_KEBAB</a>
+, <a class="el" href="#a93cc0056dcf422e3caf0b8668532c470aa87d5006e1de1bfc07d5c56086ad20f1">ORIGINAL</a>
+ }</td></tr>
+<tr class="memdesc:a93cc0056dcf422e3caf0b8668532c470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стратегия именования для преобразования идентификаторов C++ в имена узлов.  <a href="#a93cc0056dcf422e3caf0b8668532c470">Подробнее...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:aa7e1b949f3364983dc8f7442fea0fc7d" id="r_aa7e1b949f3364983dc8f7442fea0fc7d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7e1b949f3364983dc8f7442fea0fc7d">convertCamelToSplittedBySymbol</a> (std::string const &amp;camel, char const &amp;delimiter_symbol)</td></tr>
-<tr class="separator:aa7e1b949f3364983dc8f7442fea0fc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaef1f258bb58340256ca32f4e5f15b7" id="r_aaaef1f258bb58340256ca32f4e5f15b7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaef1f258bb58340256ca32f4e5f15b7">convertCamelToDelimitedBySymbol</a> (std::string &amp;&amp;camel, char delimiter_symbol)</td></tr>
+<tr class="memitem:a341ca1c94a238c9d985a73fbb4c08f06" id="r_a341ca1c94a238c9d985a73fbb4c08f06"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a341ca1c94a238c9d985a73fbb4c08f06">convertNameCPPToNode</a> (std::string &amp;&amp;name, <a class="el" href="#a93cc0056dcf422e3caf0b8668532c470">TNamingStrategyCPPToNode</a> const &amp;strategy)</td></tr>
+<tr class="memdesc:a341ca1c94a238c9d985a73fbb4c08f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Преобразует идентификатор C++ в имя узла на основе стратегии именования.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Предоставляет классы, макросы и утилиты для определения сериализуемых/десериализуемых структур данных. Это пространство имен фокусируется на представлении данных на основе узлов, где структуры данных определяются как иерархия узлов, каждый из которых потенциально может иметь атрибуты, значения и дочерние узлы или списки узлов. Система использует классы <code><a class="el" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode....">NodeView</a></code> в качестве оберток над базовым деревом <code><a class="el" href="namespaceiridium_1_1parsing.html#a88d6a61f1143b2f33166598a41993b7e" title="Определяет INode как специализацию интерфейса INodeType с std::string в качестве типа значения....">INode</a></code> для обеспечения типизированного доступа и модификации, а также применяет набор макросов (<code>DEFINE_ROOT_NODE_BEGIN</code>, <code>DEFINE_ATTRIBUTE</code> и т.д.) для декларативного определения этих структур. </p>
-</div><h2 class="groupheader">Функции</h2>
-<a id="aa7e1b949f3364983dc8f7442fea0fc7d" name="aa7e1b949f3364983dc8f7442fea0fc7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7e1b949f3364983dc8f7442fea0fc7d">&#9670;&#160;</a></span>convertCamelToSplittedBySymbol()</h2>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Перечисления</h2>
+<a id="a93cc0056dcf422e3caf0b8668532c470" name="a93cc0056dcf422e3caf0b8668532c470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93cc0056dcf422e3caf0b8668532c470">&#9670;&#160;</a></span>TNamingStrategyCPPToNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a93cc0056dcf422e3caf0b8668532c470">iridium::parsing::serialization::TNamingStrategyCPPToNode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Стратегия именования для преобразования идентификаторов C++ в имена узлов. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a93cc0056dcf422e3caf0b8668532c470a696b031073e74bf2cb98e5ef201d4aa3" name="a93cc0056dcf422e3caf0b8668532c470a696b031073e74bf2cb98e5ef201d4aa3"></a>UNKNOWN&#160;</td><td class="fielddoc"><p>Неизвестная стратегия. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a93cc0056dcf422e3caf0b8668532c470ae14f4d5e29a1871c506305ea1f21100e" name="a93cc0056dcf422e3caf0b8668532c470ae14f4d5e29a1871c506305ea1f21100e"></a>LOWER_CASE_TO_LOWER_KEBAB&#160;</td><td class="fielddoc"><p>lower_case в lower-kebab. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a93cc0056dcf422e3caf0b8668532c470a53a08f340682440ed8e1da96c5d1f1dd" name="a93cc0056dcf422e3caf0b8668532c470a53a08f340682440ed8e1da96c5d1f1dd"></a>CAMEL_CASE_TO_LOWER_KEBAB&#160;</td><td class="fielddoc"><p>CamelCase в lower-kebab. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a93cc0056dcf422e3caf0b8668532c470aa87d5006e1de1bfc07d5c56086ad20f1" name="a93cc0056dcf422e3caf0b8668532c470aa87d5006e1de1bfc07d5c56086ad20f1"></a>ORIGINAL&#160;</td><td class="fielddoc"><p>Сохранить исходное имя. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="aaaef1f258bb58340256ca32f4e5f15b7" name="aaaef1f258bb58340256ca32f4e5f15b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaef1f258bb58340256ca32f4e5f15b7">&#9670;&#160;</a></span>convertCamelToDelimitedBySymbol()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string iridium::parsing::serialization::convertCamelToSplittedBySymbol </td>
+          <td class="memname">std::string iridium::parsing::serialization::convertCamelToDelimitedBySymbol </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>camel</em></span>, </td>
+          <td class="paramtype">std::string &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>camel</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char const &amp;</td>          <td class="paramname"><span class="paramname"><em>delimeter_symbol</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter_symbol</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>@brief Преобразует строку из CamelCase в формат с разделителями (например, snake_case или kebab-case). Используется макросами сериализации для автоматической генерации имен узлов из имен членов класса/структуры. Например,MySettingName<code>с разделителем</code>'-'<code>превращается в</code>"my-setting-name"`. </p><dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">camel</td><td>Входная строка в CamelCase. </td></tr>
-    <tr><td class="paramname">delimeter_symbol</td><td>Символ, используемый в качестве разделителя между словами. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Преобразованная строка со словами, разделенными разделителем. </dd></dl>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1parsing_1_1serialization_aaaef1f258bb58340256ca32f4e5f15b7_icgraph.png" border="0" usemap="#anamespaceiridium_1_1parsing_1_1serialization_aaaef1f258bb58340256ca32f4e5f15b7_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1parsing_1_1serialization_aaaef1f258bb58340256ca32f4e5f15b7_icgraph" id="anamespaceiridium_1_1parsing_1_1serialization_aaaef1f258bb58340256ca32f4e5f15b7_icgraph">
+<area shape="rect" title=" " alt="" coords="240,5,479,46"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1serialization.html#a341ca1c94a238c9d985a73fbb4c08f06" title="Преобразует идентификатор C++ в имя узла на основе стратегии именования." alt="" coords="5,5,192,46"/>
+<area shape="poly" title=" " alt="" coords="224,28,192,28,192,23,224,23"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a341ca1c94a238c9d985a73fbb4c08f06" name="a341ca1c94a238c9d985a73fbb4c08f06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a341ca1c94a238c9d985a73fbb4c08f06">&#9670;&#160;</a></span>convertNameCPPToNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string iridium::parsing::serialization::convertNameCPPToNode </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a93cc0056dcf422e3caf0b8668532c470">TNamingStrategyCPPToNode</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>strategy</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Преобразует идентификатор C++ в имя узла на основе стратегии именования. </p>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1parsing_1_1serialization_a341ca1c94a238c9d985a73fbb4c08f06_cgraph.png" border="0" usemap="#anamespaceiridium_1_1parsing_1_1serialization_a341ca1c94a238c9d985a73fbb4c08f06_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1parsing_1_1serialization_a341ca1c94a238c9d985a73fbb4c08f06_cgraph" id="anamespaceiridium_1_1parsing_1_1serialization_a341ca1c94a238c9d985a73fbb4c08f06_cgraph">
+<area shape="rect" title="Преобразует идентификатор C++ в имя узла на основе стратегии именования." alt="" coords="5,5,192,46"/>
+<area shape="rect" href="namespaceiridium_1_1parsing_1_1serialization.html#aaaef1f258bb58340256ca32f4e5f15b7" title=" " alt="" coords="240,5,479,46"/>
+<area shape="poly" title=" " alt="" coords="192,23,224,23,224,28,192,28"/>
+</map>
+</div>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

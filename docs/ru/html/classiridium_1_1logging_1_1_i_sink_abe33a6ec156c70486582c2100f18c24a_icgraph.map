@@ -1,4 +1,4 @@
 <map id="iridium::logging::ISink::flush" name="iridium::logging::ISink::flush">
-<area shape="rect" id="Node000001" title="Сбрасывает все буферизованные сообщения журнала в базовое хранилище или выходной поток...." alt="" coords="5,29,152,70"/>
+<area shape="rect" id="Node000001" title="Сбрасывает все буферизованные лог&#45;сообщения в место назначения." alt="" coords="5,29,152,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="102,16,93,10,78,8,65,10,57,14,54,20,55,28,50,29,49,20,53,11,63,5,79,3,95,5,105,12"/>
 </map>

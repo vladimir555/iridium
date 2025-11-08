@@ -2,6 +2,6 @@
 <area shape="rect" id="Node000001" title="Интерфейс для кэша, который хранит строки и извлекает их с использованием числовых идентификаторов...." alt="" coords="28,79,175,105"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html" title="Реализация кэша строк с файловым хранилищем. Этот класс реализует интерфейс ICache,..." alt="" coords="5,153,198,193"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="104,120,104,152,99,152,99,120"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="9,5,194,31"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="9,5,194,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,46,104,79,99,79,99,46"/>
 </map>

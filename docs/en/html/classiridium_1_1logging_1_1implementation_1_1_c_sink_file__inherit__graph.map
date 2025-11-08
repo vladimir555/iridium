@@ -1,7 +1,7 @@
 <map id="iridium::logging::implementation::CSinkFile" name="iridium::logging::implementation::CSinkFile">
 <area shape="rect" id="Node000001" title="A concrete sink implementation for logging messages to a file, with support for file rotation...." alt="" coords="5,153,210,193"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1_i_sink.html" title="Interface for log event sinks, also known as appenders. Defines the contract for classes that consume..." alt="" coords="34,79,181,105"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1_i_sink.html" title=" " alt="" coords="34,79,181,105"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,120,110,152,105,152,105,120"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="15,5,200,31"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps." alt="" coords="15,5,200,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,46,110,79,105,79,105,46"/>
 </map>

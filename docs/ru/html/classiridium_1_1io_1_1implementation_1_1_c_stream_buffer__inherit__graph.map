@@ -1,11 +1,11 @@
 <map id="iridium::io::implementation::CStreamBuffer" name="iridium::io::implementation::CStreamBuffer">
 <area shape="rect" id="Node000001" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="417,39,590,79"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title="Реализует читаемый поток (IStreamReader), который читает из Buffer. Чтение не разрушает исходный буфе..." alt="" coords="638,5,812,46"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title=" " alt="" coords="638,5,812,46"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="605,41,637,36,638,41,606,46"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец..." alt="" coords="638,71,812,111"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title=" " alt="" coords="638,71,812,111"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="606,71,638,76,637,81,605,76"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="238,46,369,72"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для всех типов потоков." alt="" coords="238,46,369,72"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="385,56,417,56,417,62,385,62"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,46,190,72"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,46,190,72"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="206,56,237,56,237,62,206,62"/>
 </map>

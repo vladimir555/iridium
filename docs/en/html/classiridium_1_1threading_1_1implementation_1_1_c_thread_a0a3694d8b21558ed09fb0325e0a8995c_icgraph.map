@@ -1,5 +1,5 @@
 <map id="iridium::threading::implementation::CThread::run" name="iridium::threading::implementation::CThread::run">
-<area shape="rect" id="Node000001" title="The static function executed by the std::thread. It sets the thread name, calls the run() method of t..." alt="" coords="229,13,430,54"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Initializes the thread, which includes starting the underlying std::thread and waiting for it to sign..." alt="" coords="5,5,181,61"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="229,13,430,54"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Performs the initialization logic for the object." alt="" coords="5,5,181,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,36,181,36,181,30,213,30"/>
 </map>

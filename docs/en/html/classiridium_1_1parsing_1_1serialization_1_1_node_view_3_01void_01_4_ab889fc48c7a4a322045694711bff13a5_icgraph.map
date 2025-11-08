@@ -1,9 +1,9 @@
 <map id="iridium::parsing::serialization::NodeView&lt; void &gt;::NodeView" name="iridium::parsing::serialization::NodeView&lt; void &gt;::NodeView">
-<area shape="rect" id="Node000001" title="Constructor for a root node view, intended primarily for deserialization where the node is yet to be ..." alt="" coords="259,71,464,111"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#a05f6306ed6d212053be6a25ccba8f2fd" title="Constructor for a nested NodeView&lt;void&gt; (a structured child node) associated with a parent...." alt="" coords="5,5,211,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,69,189,49,190,44,266,64"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#ae802275b9aa57bcde8f409e0165a6312" title=" " alt="" coords="5,71,211,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,94,211,94,211,88,243,88"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title=" " alt="" coords="8,136,208,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,118,190,138,189,133,264,113"/>
+<area shape="rect" id="Node000001" title="Constructor for a root node (deserialization only)." alt="" coords="262,71,467,111"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#a11a7371cd498dcede9ee6879afa3e687" title="Constructor for a child node." alt="" coords="7,5,212,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,69,191,49,192,44,268,64"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title=" " alt="" coords="9,71,210,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="246,94,210,94,210,88,246,88"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#ac482a6d34171304051b840a870ff0e9e" title=" " alt="" coords="5,136,214,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,118,192,138,191,133,267,113"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="iridium::threading::IWorkerPusher&lt; TItem &gt;::IHandler" name="iridium::threading::IWorkerPusher&lt; TItem &gt;::IHandler">
-<area shape="rect" id="Node000001" title=" " alt="" coords="17,79,178,135"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="rect" id="Node000001" title="Интерфейс для обработчика, который обрабатывает элементы." alt="" coords="17,79,178,135"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,5,190,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,47,100,78,95,78,95,47"/>
 </map>

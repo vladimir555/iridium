@@ -1,5 +1,5 @@
 <map id="iridium::io::URI::getPassword" name="iridium::io::URI::getPassword">
-<area shape="rect" id="Node000001" title="Получает часть URI с паролем (например, пароль в user:password@host)." alt="" coords="446,5,639,31"/>
+<area shape="rect" id="Node000001" title="Возвращает пароль." alt="" coords="446,5,639,31"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium_1_1db.html#a91db078cad003f5c796da6f27c54fa89" title="Создает объект конфигурации базы данных из URI. Разбирает данный URI и извлекает параметры подключени..." alt="" coords="239,5,398,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,21,398,21,398,16,430,16"/>
 <area shape="rect" id="Node000003" href="$namespaceiridium_1_1db.html#afacc46a55b26a30d286cde5c849d9253" title="Создает экземпляр коннектора базы данных из URI. Это вспомогательная функция, которая сначала вызывае..." alt="" coords="5,5,191,31"/>

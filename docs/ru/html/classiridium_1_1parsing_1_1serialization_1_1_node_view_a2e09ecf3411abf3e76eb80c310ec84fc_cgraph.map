@@ -1,9 +1,11 @@
 <map id="iridium::parsing::serialization::NodeView::operator TValue" name="iridium::parsing::serialization::NodeView::operator TValue">
-<area shape="rect" id="Node000001" title="Оператор преобразования для получения значения узла. Эквивалентен вызову get()." alt="" coords="5,39,194,79"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a582b2b6b1bba052ca52d6046a44e40bf" title="Получает значение узла, преобразуя его к типу TValue. Примечание: todo в исходном коде предполагает в..." alt="" coords="242,5,428,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,43,226,38,227,44,195,48"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#abac7929c78b789e54779bd5b7dfad5de" title="Конструктор для NodeView, представляющего атрибут элемента списка. Используется DEFINE_ATTRIBUTE_LIST..." alt="" coords="242,71,428,111"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,69,227,74,226,79,194,74"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="476,5,603,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,23,461,23,461,28,428,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,46,194,87"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a582b2b6b1bba052ca52d6046a44e40bf" title=" " alt="" coords="242,13,428,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,50,226,46,227,51,195,56"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#abac7929c78b789e54779bd5b7dfad5de" title="Конструктор для атрибута&#45;списка." alt="" coords="242,78,428,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="194,77,227,81,226,86,194,82"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="476,13,603,54"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,30,461,30,461,36,428,36"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Функция преобразования по умолчанию, которая вызывается, если не найдена специализация." alt="" coords="651,5,831,61"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="604,30,635,30,635,36,604,36"/>
 </map>

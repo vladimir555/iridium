@@ -1,7 +1,7 @@
 <map id="iridium::io::IMultiplexer" name="iridium::io::IMultiplexer">
-<area shape="rect" id="Node000001" title="Интерфейс для мультиплексора событий ввода&#45;вывода. Мультиплексор ввода&#45;вывода позволяет одному потоку..." alt="" coords="21,79,174,105"/>
+<area shape="rect" id="Node000001" title="Интерфейс для мультиплексора ввода&#45;вывода." alt="" coords="21,79,174,105"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html" title="Заглушечная реализация IMultiplexer для платформы Emscripten. Все методы в настоящее время выбрасываю..." alt="" coords="11,153,184,193"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,120,100,152,95,152,95,120"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,5,190,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
 </map>

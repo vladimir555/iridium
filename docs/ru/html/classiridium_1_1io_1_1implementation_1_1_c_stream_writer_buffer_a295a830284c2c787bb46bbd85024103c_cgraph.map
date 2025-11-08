@@ -2,6 +2,6 @@
 <area shape="rect" id="Node000001" title="Конструирует CStreamWriterBuffer, который пишет в предоставленный буфер." alt="" coords="5,5,250,61"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html#a3dea64d9fbe66226243ec0e1011a4892" title="Конструирует CStreamBuffer с заданным буфером." alt="" coords="298,13,509,54"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,30,282,30,282,36,250,36"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Проверяет существование значения (не false, не null, не пустое) и выбрасывает пользовательское исключ..." alt="" coords="557,20,697,46"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#a1315b3a96f6964943359e40747b8df37" title="Утверждает, что значение (например, булево, целочисленное или другого типа, приводимого к bool) являе..." alt="" coords="557,20,697,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="509,30,542,30,542,36,509,36"/>
 </map>

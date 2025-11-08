@@ -1,40 +1,50 @@
 <map id="source/iridium/logging/event.h" name="source/iridium/logging/event.h">
-<area shape="rect" id="Node000001" title="Определяет структуру TEvent для сообщений журнала во фреймворке логирования Iridium...." alt="" coords="176,5,323,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="61,330,115,356"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,49,139,68,93,93,50,127,32,147,17,169,10,188,8,208,12,228,20,249,42,286,67,317,63,320,38,289,15,251,7,230,3,208,5,187,12,166,28,144,46,123,90,89,137,63,182,44"/>
-<area shape="rect" id="Node000003" href="$enum_8h.html" title="Предоставляет макросы для создания расширенных перечислений C++ с такими функциями,..." alt="" coords="196,94,302,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="252,46,252,78,247,78,247,46"/>
-<area shape="rect" id="Node000017" href="$smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="414,94,543,120"/>
-<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="307,44,430,86,428,91,306,49"/>
-<area shape="rect" id="Node000004" href="$strings_8h.html" title=" " alt="" coords="118,256,231,282"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="246,121,189,243,184,241,241,119"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="221,330,259,356"/>
-<area shape="poly" id="edge16_Node000003_Node000006" title=" " alt="" coords="252,120,245,282,244,315,239,314,240,282,246,120"/>
-<area shape="rect" id="Node000007" href="$convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="312,168,435,208"/>
-<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="270,118,331,157,329,162,267,122"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="459,175,506,201"/>
-<area shape="poly" id="edge17_Node000003_Node000014" title=" " alt="" coords="300,118,370,138,448,165,449,166,446,171,446,170,369,143,298,123"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="27,175,98,201"/>
-<area shape="poly" id="edge18_Node000003_Node000015" title=" " alt="" coords="222,123,106,171,104,166,219,118"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="123,175,186,201"/>
-<area shape="poly" id="edge19_Node000003_Node000016" title=" " alt="" coords="237,122,182,167,179,163,233,118"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="162,285,116,322,112,318,158,280"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="139,330,197,356"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="176,282,173,315,168,314,171,282"/>
-<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="187,280,221,317,217,320,183,284"/>
-<area shape="rect" id="Node000008" href="$implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="312,256,480,282"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="381,208,391,240,386,242,376,209"/>
-<area shape="poly" id="edge10_Node000008_Node000002" title=" " alt="" coords="336,285,130,332,129,327,335,280"/>
-<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="371,285,274,329,272,324,368,280"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="283,330,343,356"/>
-<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="384,285,340,322,337,318,380,281"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="367,330,425,356"/>
-<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="399,282,399,314,393,314,393,282"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="635,330,703,356"/>
-<area shape="poly" id="edge13_Node000008_Node000011" title=" " alt="" coords="443,280,621,326,619,331,442,285"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="448,330,509,356"/>
-<area shape="poly" id="edge14_Node000008_Node000012" title=" " alt="" coords="412,281,455,318,452,322,408,285"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="533,330,611,356"/>
-<area shape="poly" id="edge15_Node000008_Node000013" title=" " alt="" coords="427,280,529,321,527,326,425,285"/>
-<area shape="poly" id="edge21_Node000017_Node000011" title=" " alt="" coords="490,118,652,316,648,319,486,122"/>
+<area shape="rect" id="Node000001" title="Определяет структуру TEvent для сообщений журнала во фреймворке логирования Iridium...." alt="" coords="313,5,460,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="120,404,173,429"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="313,29,218,37,167,47,118,61,75,81,40,108,26,125,16,143,10,164,8,187,8,270,11,291,18,310,43,345,75,373,109,394,106,398,72,377,39,348,13,313,5,292,3,271,3,187,5,163,12,141,22,122,36,105,72,77,116,56,166,41,218,32,312,24"/>
+<area shape="rect" id="Node000003" href="$enum_8h.html" title="Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек..." alt="" coords="334,94,440,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="389,46,389,78,384,78,384,46"/>
+<area shape="rect" id="Node000021" href="$smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="700,94,828,120"/>
+<area shape="poly" id="edge26_Node000001_Node000021" title=" " alt="" coords="461,40,691,88,690,93,460,45"/>
+<area shape="rect" id="Node000004" href="$strings_8h.html" title="Предоставляет набор вспомогательных функций для работы со строками." alt="" coords="82,175,195,201"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="349,123,192,173,191,167,348,118"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="195,256,234,282"/>
+<area shape="poly" id="edge22_Node000003_Node000006" title=" " alt="" coords="343,123,300,141,279,154,261,169,237,205,223,242,218,240,232,202,257,166,276,150,297,136,341,118"/>
+<area shape="rect" id="Node000007" href="$convert_8h.html" title="Предоставляет обобщенный фреймворк для преобразования типов." alt="" coords="270,168,394,208"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="381,122,356,157,352,154,376,119"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="418,175,464,201"/>
+<area shape="poly" id="edge23_Node000003_Node000018" title=" " alt="" coords="397,119,427,161,422,164,393,122"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="488,175,560,201"/>
+<area shape="poly" id="edge24_Node000003_Node000019" title=" " alt="" coords="409,118,491,165,488,169,406,122"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="584,175,648,201"/>
+<area shape="poly" id="edge25_Node000003_Node000020" title=" " alt="" coords="429,118,573,165,576,166,574,171,571,170,427,123"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="142,201,148,389,143,389,136,202"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="43,256,101,282"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="131,203,94,246,90,243,127,200"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="152,199,194,243,190,247,148,203"/>
+<area shape="rect" id="Node000008" href="$implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="348,256,516,282"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="358,207,407,245,403,249,355,211"/>
+<area shape="poly" id="edge14_Node000008_Node000002" title=" " alt="" coords="373,285,310,304,245,332,203,363,169,395,165,391,200,358,243,328,308,299,372,280"/>
+<area shape="rect" id="Node000009" href="$common_8h.html" title="Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов." alt="" coords="278,330,360,356"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="414,285,352,324,349,319,411,280"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="202,404,270,429"/>
+<area shape="poly" id="edge20_Node000008_Node000011" title=" " alt="" coords="357,285,309,303,287,316,267,332,250,359,242,389,237,387,245,357,263,328,284,311,307,298,355,280"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="402,404,470,429"/>
+<area shape="poly" id="edge17_Node000008_Node000012" title=" " alt="" coords="432,283,426,316,425,355,431,388,426,389,420,356,421,315,426,282"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="435,330,496,356"/>
+<area shape="poly" id="edge15_Node000008_Node000013" title=" " alt="" coords="440,281,456,315,451,317,435,283"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="519,330,577,356"/>
+<area shape="poly" id="edge16_Node000008_Node000014" title=" " alt="" coords="453,280,517,319,514,324,450,285"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="600,330,661,356"/>
+<area shape="poly" id="edge18_Node000008_Node000015" title=" " alt="" coords="467,280,587,323,585,328,465,285"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="685,330,763,356"/>
+<area shape="poly" id="edge19_Node000008_Node000016" title=" " alt="" coords="482,280,670,326,669,331,481,285"/>
+<area shape="rect" id="Node000017" href="$platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="787,330,909,356"/>
+<area shape="poly" id="edge21_Node000008_Node000017" title=" " alt="" coords="503,280,772,326,772,331,503,285"/>
+<area shape="poly" id="edge11_Node000009_Node000002" title=" " alt="" coords="291,359,189,401,187,396,288,354"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="295,404,377,429"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="324,355,332,388,327,389,319,357"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="306,358,263,395,260,391,303,354"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="340,354,405,393,402,398,337,358"/>
+<area shape="poly" id="edge27_Node000021_Node000012" title=" " alt="" coords="784,118,839,159,871,188,901,220,926,254,940,289,943,307,941,324,935,341,923,358,900,370,858,380,737,397,600,408,486,415,486,410,599,403,737,391,857,375,898,365,920,354,930,339,936,323,937,307,935,291,921,257,897,223,868,192,836,163,781,122"/>
 </map>

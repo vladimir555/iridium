@@ -1,6 +1,6 @@
 <map id="iridium::parsing::implementation::CNodeType&lt; TValue &gt;" name="iridium::parsing::implementation::CNodeType&lt; TValue &gt;">
-<area shape="rect" id="Node000001" title="Конкретная реализация интерфейса INodeType. Этот шаблон класса предоставляет полную реализацию для уз..." alt="" coords="5,183,211,223"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения...." alt="" coords="18,94,198,135"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,183,211,223"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_node_type.html" title="Обобщенный интерфейс для узла в древовидной структуре данных." alt="" coords="18,94,198,135"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,150,111,182,105,182,105,150"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_i_prototype.html" title=" " alt="" coords="20,5,196,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,62,111,94,105,94,105,62"/>

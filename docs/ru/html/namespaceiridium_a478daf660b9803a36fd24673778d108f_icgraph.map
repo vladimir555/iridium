@@ -1,6 +1,6 @@
 <map id="iridium::trim" name="iridium::trim">
 <area shape="rect" id="Node000001" title=" " alt="" coords="512,66,601,92"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ac1fb6e1887342ca64f9da42ba9897ed2" title="Разбирает строку HTTP&#45;сообщения в древовидную структуру узлов. Результирующее дерево обычно представл..." alt="" coords="259,29,464,70"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html#ac1fb6e1887342ca64f9da42ba9897ed2" title="Разбирает строку в дерево узлов." alt="" coords="259,29,464,70"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="496,73,464,68,465,63,497,67"/>
 <area shape="rect" id="Node000004" href="$namespaceiridium.html#a68c00569d42f2e9baaac7e3d384e6c14" title=" " alt="" coords="317,94,406,120"/>
 <area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="497,90,407,103,406,98,496,85"/>

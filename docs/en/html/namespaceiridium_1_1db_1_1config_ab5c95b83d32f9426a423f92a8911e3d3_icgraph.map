@@ -1,4 +1,4 @@
 <map id="iridium::db::config::DEFINE_ENUM" name="iridium::db::config::DEFINE_ENUM">
-<area shape="rect" id="Node000001" title="Defines the root structure for database configuration parameters. This structure encapsulates all nec..." alt="" coords="5,29,132,70"/>
+<area shape="rect" id="Node000001" title="Defines the structure for database configuration. This structure is designed to be serialized from/to..." alt="" coords="5,29,132,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="88,16,81,10,68,8,57,10,50,14,48,20,49,28,43,29,42,20,46,11,55,5,69,3,83,5,91,12"/>
 </map>

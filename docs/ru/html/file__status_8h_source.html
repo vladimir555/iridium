@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/io/fs/file_status.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a href="dir_5705b813285e54309934c93cc9191ba4.html">fs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">file_status.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="file__status_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef HEADER_FILE_STATUS_DB277AFC_11F0_4FB7_847B_6EB05C1C786F</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define HEADER_FILE_STATUS_DB277AFC_11F0_4FB7_847B_6EB05C1C786F</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span></div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">   13</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">TFileStatus</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::chrono::system_clock::time_point</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html#ae691655be7efa7593ad509c1e9695725">   17</a></span>        <a class="code hl_variable" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html#ae691655be7efa7593ad509c1e9695725">last_modified</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">size_t</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html#aaf3cb614ba2e9109827c7dc2bddde43f">   21</a></span>        <a class="code hl_variable" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html#aaf3cb614ba2e9109827c7dc2bddde43f">size</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
+</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>} <span class="comment">// iridium::io::fs</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_FILE_STATUS_DB277AFC_11F0_4FB7_847B_6EB05C1C786F</span></div>
+<div class="ttc" id="anamespaceiridium_1_1io_1_1fs_html"><div class="ttname"><a href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a></div><div class="ttdoc">Определяет интерфейс для обобщенного кэша строк.</div><div class="ttdef"><b>Определения</b> cache.h:19</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1fs_1_1_t_file_status_html"><div class="ttname"><a href="structiridium_1_1io_1_1fs_1_1_t_file_status.html">iridium::io::fs::TFileStatus</a></div><div class="ttdoc">Представляет статус файла, включая время последнего изменения и размер.</div><div class="ttdef"><b>Определения</b> file_status.h:13</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1fs_1_1_t_file_status_html_aaf3cb614ba2e9109827c7dc2bddde43f"><div class="ttname"><a href="structiridium_1_1io_1_1fs_1_1_t_file_status.html#aaf3cb614ba2e9109827c7dc2bddde43f">iridium::io::fs::TFileStatus::size</a></div><div class="ttdeci">size_t size</div><div class="ttdoc">Размер файла в байтах.</div><div class="ttdef"><b>Определения</b> file_status.h:21</div></div>
+<div class="ttc" id="astructiridium_1_1io_1_1fs_1_1_t_file_status_html_ae691655be7efa7593ad509c1e9695725"><div class="ttname"><a href="structiridium_1_1io_1_1fs_1_1_t_file_status.html#ae691655be7efa7593ad509c1e9695725">iridium::io::fs::TFileStatus::last_modified</a></div><div class="ttdeci">std::chrono::system_clock::time_point last_modified</div><div class="ttdoc">Момент времени последнего изменения файла.</div><div class="ttdef"><b>Определения</b> file_status.h:17</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

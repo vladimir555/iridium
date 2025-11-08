@@ -1,6 +1,6 @@
 <map id="iridium::logging::ISink::makeLine" name="iridium::logging::ISink::makeLine">
-<area shape="rect" id="Node000001" title="Formats a log event into a standardized string line. This static utility method can be used by sink i..." alt="" coords="258,95,404,135"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1_i_sink.html#abe33a6ec156c70486582c2100f18c24a" title="Flushes any buffered log messages to the underlying storage or output stream. This is a pure virtual ..." alt="" coords="34,29,181,70"/>
+<area shape="rect" id="Node000001" title="Formats a log event into a string line." alt="" coords="258,95,404,135"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1_i_sink.html#abe33a6ec156c70486582c2100f18c24a" title="Flushes any buffered log messages to the destination." alt="" coords="34,29,181,70"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,92,179,73,180,68,245,87"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html#a8ddcb9bbf59aa7764a6b49488d830d91" title="Logs a single event to the console if its level is sufficient. The event is formatted into a string l..." alt="" coords="5,95,210,135"/>
 <area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="242,118,210,118,210,112,242,112"/>

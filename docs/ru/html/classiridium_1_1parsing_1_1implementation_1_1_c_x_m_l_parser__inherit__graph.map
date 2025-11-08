@@ -1,5 +1,5 @@
 <map id="iridium::parsing::implementation::CXMLParser" name="iridium::parsing::implementation::CXMLParser">
-<area shape="rect" id="Node000001" title="Конкретная реализация парсера для данных в формате XML (eXtensible Markup Language)...." alt="" coords="5,79,211,120"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст..." alt="" coords="28,5,188,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,211,120"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для обобщенного парсера." alt="" coords="28,5,188,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,46,111,79,105,79,105,46"/>
 </map>

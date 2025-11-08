@@ -1,17 +1,17 @@
 <map id="iridium::threading::implementation::CThread::operator&lt;" name="iridium::threading::implementation::CThread::operator&lt;">
-<area shape="rect" id="Node000001" title="Сравнивает этот объект CThread с другим объектом IThread. Сравнение основано на имени потока." alt="" coords="5,67,181,122"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#ac21f1d3c5467791bc729cedf2e2b2567" title="Получает имя этого потока." alt="" coords="229,5,404,61"/>
+<area shape="rect" id="Node000001" title="Оператор сравнения для сортировки потоков." alt="" coords="5,67,181,122"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#ac21f1d3c5467791bc729cedf2e2b2567" title="Возвращает имя потока." alt="" coords="229,5,404,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,68,213,59,214,64,182,73"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609" title="Получает имя этого конкретного экземпляра потока. Имя может быть присвоено во время создания или иниц..." alt="" coords="249,122,384,163"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609" title="Возвращает имя потока." alt="" coords="249,122,384,163"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,111,235,122,233,127,180,116"/>
-<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="668,98,733,123"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="668,98,733,123"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="404,20,454,17,510,19,567,27,621,43,654,61,680,85,676,88,651,66,619,48,566,32,509,25,454,23,404,25"/>
 <area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="275,122,273,112,280,103,294,98,316,96,340,98,354,104,352,109,339,103,316,101,295,103,283,107,278,113,280,121"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="452,57,620,98"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Возвращает имя текущего потока." alt="" coords="452,57,620,98"/>
 <area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="383,120,450,100,452,105,385,125"/>
 <area shape="rect" id="Node000006" href="$namespaceiridium_1_1threading.html#aa7810b8b619a3d83f8b843b3e746eadd" title="Получает строковое представление уникального идентификатора текущего потока." alt="" coords="476,122,596,163"/>
 <area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="384,140,460,140,460,145,384,145"/>
-<area shape="rect" id="Node000007" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Устанавливает имя для текущего выполняющегося потока (статически, в локальном хранилище потока)...." alt="" coords="452,188,620,228"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Устанавливает имя текущего потока." alt="" coords="452,188,620,228"/>
 <area shape="poly" id="edge9_Node000004_Node000007" title=" " alt="" coords="385,160,452,180,450,185,383,165"/>
 <area shape="rect" id="Node000008" href="$namespaceiridium_1_1threading.html#a77efc83dba79715684b3890184b31992" title="Приостанавливает выполнение текущего потока на указанную продолжительность." alt="" coords="476,253,596,294"/>
 <area shape="poly" id="edge11_Node000004_Node000008" title=" " alt="" coords="344,161,393,199,453,238,465,243,462,248,451,242,390,203,341,166"/>

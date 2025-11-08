@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classiridium_1_1pattern_1_1_i_prototype.html" title=" " alt="" coords="5,5,181,46"/>
+<area shape="rect" id="Node000001" href="$classiridium_1_1parsing_1_1_i_node_type.html" title="Generic interface for a node in a tree&#45;like data structure." alt="" coords="229,5,409,46"/>
+<area shape="poly" id="edge8_Node000000_Node000001" title=" " alt="" coords="197,23,228,23,228,28,197,28"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title=" " alt="" coords="457,5,662,46"/>
+<area shape="poly" id="edge9_Node000001_Node000002" title=" " alt="" coords="425,23,456,23,456,28,425,28"/>
+</map>

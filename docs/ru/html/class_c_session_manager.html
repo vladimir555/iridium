@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Класс CSessionManager</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -92,59 +79,52 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Конкретная реализация <code>ISessionManager</code>. Управляет сеансами ввода-вывода, обычно для сетевых подключений. Интегрирует мультиплексор для обработки нескольких потоков, менеджер контекстов для связывания состояния с потоками и рабочие потоки для обработки событий и операций ввода-вывода.  
+<p>Конкретная реализация <span class="tt">ISessionManager</span>. Управляет сеансами ввода-вывода, обычно для сетевых подключений. Интегрирует мультиплексор для обработки нескольких потоков, менеджер контекстов для связывания состояния с потоками и рабочие потоки для обработки событий и операций ввода-вывода.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="implementation_2session__manager_8h_source.html">session_manager.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:CSessionManager:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_c_session_manager__inherit__graph.png" border="0" usemap="#a_c_session_manager_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="class_c_session_manager__inherit__graph.png" border="0" usemap="#a_c_session_manager_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="a_c_session_manager_inherit__map" id="a_c_session_manager_inherit__map">
 <area shape="rect" title="Конкретная реализация ISessionManager. Управляет сеансами ввода&#45;вывода, обычно для сетевых подключени..." alt="" coords="34,153,163,178"/>
 <area shape="rect" href="classiridium_1_1io_1_1_i_session_manager.html" title="Интерфейс для управления сессиями обмена данными. Менеджер сессий отвечает за контроль жизненного цик..." alt="" coords="5,79,192,105"/>
 <area shape="poly" title=" " alt="" coords="101,120,101,152,96,152,96,120"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="6,5,191,31"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="6,5,191,31"/>
 <area shape="poly" title=" " alt="" coords="101,46,101,79,96,79,96,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <div class="dynheader">
 Граф связей класса CSessionManager:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_c_session_manager__coll__graph.png" border="0" usemap="#a_c_session_manager_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="class_c_session_manager__coll__graph.png" border="0" usemap="#a_c_session_manager_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="a_c_session_manager_coll__map" id="a_c_session_manager_coll__map">
 <area shape="rect" title="Конкретная реализация ISessionManager. Управляет сеансами ввода&#45;вывода, обычно для сетевых подключени..." alt="" coords="34,153,163,178"/>
 <area shape="rect" href="classiridium_1_1io_1_1_i_session_manager.html" title="Интерфейс для управления сессиями обмена данными. Менеджер сессий отвечает за контроль жизненного цик..." alt="" coords="5,79,192,105"/>
 <area shape="poly" title=" " alt="" coords="101,120,101,152,96,152,96,120"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="6,5,191,31"/>
+<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="6,5,191,31"/>
 <area shape="poly" title=" " alt="" coords="101,46,101,79,96,79,96,46"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:a85f5ecfd02189d481b71f99fec0729c6" id="r_a85f5ecfd02189d481b71f99fec0729c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85f5ecfd02189d481b71f99fec0729c6">DEFINE_IMPLEMENTATION</a> (<a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html">CSessionManager</a>)</td></tr>
-<tr class="separator:a85f5ecfd02189d481b71f99fec0729c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f5ecfd02189d481b71f99fec0729c6" id="r_a85f5ecfd02189d481b71f99fec0729c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85f5ecfd02189d481b71f99fec0729c6">DEFINE_IMPLEMENTATION</a> (<a class="el" href="class_c_session_manager.html">CSessionManager</a>)</td></tr>
 <tr class="memitem:a105de3e1c94e02af4831d7baf22c9455" id="r_a105de3e1c94e02af4831d7baf22c9455"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a105de3e1c94e02af4831d7baf22c9455">CSessionManager</a> ()</td></tr>
-<tr class="memdesc:a105de3e1c94e02af4831d7baf22c9455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует экземпляр <code><a class="el" href="class_c_session_manager.html" title="Конкретная реализация ISessionManager. Управляет сеансами ввода-вывода, обычно для сетевых подключени...">CSessionManager</a></code>. Инициализирует внутренние компоненты, такие как мультиплексор, менеджер контекстов и обработчик контекстов.  <br /></td></tr>
-<tr class="separator:a105de3e1c94e02af4831d7baf22c9455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe1caa2fcab0505523ffe96b18ad474" id="r_a4fe1caa2fcab0505523ffe96b18ad474"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fe1caa2fcab0505523ffe96b18ad474">initialize</a> () override</td></tr>
 <tr class="memdesc:a4fe1caa2fcab0505523ffe96b18ad474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Инициализирует менеджер сессий и его компоненты. Обычно это запускает рабочие потоки для обработки событий и мультиплексирования.  <br /></td></tr>
-<tr class="separator:a4fe1caa2fcab0505523ffe96b18ad474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61bdf570ff5046cb79d20aeb1fd75cb0" id="r_a61bdf570ff5046cb79d20aeb1fd75cb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61bdf570ff5046cb79d20aeb1fd75cb0">finalize</a> () override</td></tr>
 <tr class="memdesc:a61bdf570ff5046cb79d20aeb1fd75cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Завершает работу менеджера сессий и его компонентов. Обычно это останавливает рабочие потоки и очищает ресурсы.  <br /></td></tr>
-<tr class="separator:a61bdf570ff5046cb79d20aeb1fd75cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa986cdbdee1166dcea4b009bf4a183ae" id="r_aa986cdbdee1166dcea4b009bf4a183ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa986cdbdee1166dcea4b009bf4a183ae">manage</a> (IStreamPort::TSharedPtr const &amp;stream, IProtocol::TSharedPtr const &amp;protocol) override</td></tr>
-<tr class="memdesc:aa986cdbdee1166dcea4b009bf4a183ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Начинает управление новым потоком с заданным протоколом. Создает контекст для потока и протокола через менеджер контекстов, затем помещает <code>Event::NEW_STREAM</code> в обработчик контекстов для начала обработки.  <br /></td></tr>
-<tr class="separator:aa986cdbdee1166dcea4b009bf4a183ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
+<tr class="memdesc:aa986cdbdee1166dcea4b009bf4a183ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).  <br /></td></tr>
+<tr class="inherit_header pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classiridium_1_1pattern_1_1_i_initializable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые члены унаследованные от <a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html">iridium::pattern::IInitializable</a></td></tr>
 <tr class="memitem:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable" id="r_a17aec45cd4eaf36af9adc81375ee039f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html#a17aec45cd4eaf36af9adc81375ee039f">~IInitializable</a> ()=default</td></tr>
-<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<code>TSharedPtr</code>, <code>TWeakPtr</code> и т.д.) для интерфейса <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">IInitializable</a></code>.  <br /></td></tr>
-<tr class="separator:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a17aec45cd4eaf36af9adc81375ee039f inherit pub_methods_classiridium_1_1pattern_1_1_i_initializable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные typedef-ы умных указателей (<span class="tt">TSharedPtr</span>, <span class="tt">TWeakPtr</span> и т.д.) для интерфейса <span class="tt"><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации.">IInitializable</a></span>.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Конкретная реализация <code>ISessionManager</code>. Управляет сеансами ввода-вывода, обычно для сетевых подключений. Интегрирует мультиплексор для обработки нескольких потоков, менеджер контекстов для связывания состояния с потоками и рабочие потоки для обработки событий и операций ввода-вывода. </p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Конкретная реализация <span class="tt">ISessionManager</span>. Управляет сеансами ввода-вывода, обычно для сетевых подключений. Интегрирует мультиплексор для обработки нескольких потоков, менеджер контекстов для связывания состояния с потоками и рабочие потоки для обработки событий и операций ввода-вывода. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="a105de3e1c94e02af4831d7baf22c9455" name="a105de3e1c94e02af4831d7baf22c9455"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a105de3e1c94e02af4831d7baf22c9455">&#9670;&#160;</a></span>CSessionManager()</h2>
 
@@ -152,7 +132,7 @@ $(function(){ initResizable(false); });
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::implementation::CSessionManager::CSessionManager </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a105de3e1c94e02af4831d7baf22c9455">iridium::io::implementation::CSessionManager::CSessionManager</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -160,11 +140,9 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 
-<p>Конструирует экземпляр <code><a class="el" href="class_c_session_manager.html" title="Конкретная реализация ISessionManager. Управляет сеансами ввода-вывода, обычно для сетевых подключени...">CSessionManager</a></code>. Инициализирует внутренние компоненты, такие как мультиплексор, менеджер контекстов и обработчик контекстов. </p>
-
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="a85f5ecfd02189d481b71f99fec0729c6" name="a85f5ecfd02189d481b71f99fec0729c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85f5ecfd02189d481b71f99fec0729c6">&#9670;&#160;</a></span>DEFINE_IMPLEMENTATION()</h2>
 
@@ -172,9 +150,9 @@ $(function(){ initResizable(false); });
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">iridium::io::implementation::CSessionManager::DEFINE_IMPLEMENTATION </td>
+          <td class="memname"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a85f5ecfd02189d481b71f99fec0729c6">iridium::io::implementation::CSessionManager::DEFINE_IMPLEMENTATION</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html">CSessionManager</a></td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_c_session_manager.html">CSessionManager</a></td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -192,7 +170,7 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void iridium::io::implementation::CSessionManager::finalize </td>
+          <td class="memname">void <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a61bdf570ff5046cb79d20aeb1fd75cb0">iridium::io::implementation::CSessionManager::finalize</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -227,7 +205,7 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void iridium::io::implementation::CSessionManager::initialize </td>
+          <td class="memname">void <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a4fe1caa2fcab0505523ffe96b18ad474">iridium::io::implementation::CSessionManager::initialize</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -262,9 +240,9 @@ $(function(){ initResizable(false); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void iridium::io::implementation::CSessionManager::manage </td>
+          <td class="memname">void <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#aa986cdbdee1166dcea4b009bf4a183ae">iridium::io::implementation::CSessionManager::manage</a> </td>
           <td>(</td>
-          <td class="paramtype">IStreamPort::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em></span>, </td>
+          <td class="paramtype">IStreamPort::TSharedPtr const &amp;</td>          <td class="paramname"><span class="paramname"><em>stream_port</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -279,11 +257,17 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Начинает управление новым потоком с заданным протоколом. Создает контекст для потока и протокола через менеджер контекстов, затем помещает <code>Event::NEW_STREAM</code> в обработчик контекстов для начала обработки. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора). </p>
+<p>Указывает менеджеру сессий начать управление новой сессией на основе предоставленного потока/порта и протокола. Этот метод обычно вызывается при принятии нового соединения или установлении нового канала связи. Менеджер затем будет отвечать за жизненный цикл этой сессии, включая обработку событий и данных, как определено протоколом для данного потока/порта. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stream</td><td>Порт потока для управления. </td></tr>
-    <tr><td class="paramname">protocol</td><td>Протокол, используемый для обмена данными через поток. </td></tr>
+    <tr><td class="paramname">streamPort</td><td>Умный указатель на <span class="tt">IStreamPort</span> (или аналогичную абстракцию канала ввода-вывода, такую как <span class="tt">IStream</span>), представляющий конечную точку связи для сессии. </td></tr>
+    <tr><td class="paramname">protocol</td><td>Умный указатель на <span class="tt">IProtocol</span>, который будет обрабатывать логику обмена данными для этой сессии. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">iridium::Exception</td><td>или аналогичное, если менеджер не может начать управление сессией. </td></tr>
   </table>
   </dd>
 </dl>
@@ -299,7 +283,7 @@ $(function(){ initResizable(false); });
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

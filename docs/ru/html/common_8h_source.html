@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Исходный файл source/iridium/convertion/implementation/common.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_2c87a23e8265e12c50040e40ee490676.html">convertion</a></li><li class="navelem"><a href="dir_e9054e40829eb7f5e91d8da4771defa3.html">implementation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">common.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="common_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_COMMON_BAC2AFE8_4236_4301_A650_E60876F56E15</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_COMMON_BAC2AFE8_4236_4301_A650_E60876F56E15</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1convertion_1_1implementation.html">   21</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1convertion_1_1implementation.html">iridium::convertion::implementation</a> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1convertion_1_1implementation.html#a22b17a0a7db7b2e29762fa1520ae56f5">   26</a></span><span class="keywordtype">size_t</span> <span class="keyword">const</span> <a class="code hl_variable" href="namespaceiridium_1_1convertion_1_1implementation.html#a22b17a0a7db7b2e29762fa1520ae56f5">int_to_string_buffer_size</a> = 64;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html">   31</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html">detail</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation.html">   37</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation.html">TIsInSTDNamespaceImplementation</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html#a9ea1413b4faaa668d1d6199aa75fe17e">   43</a></span><span class="keyword">auto</span> <a class="code hl_function" href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html#a9ea1413b4faaa668d1d6199aa75fe17e">testIsSTD</a>(<span class="keywordtype">int</span>) -&gt; <span class="keyword">decltype</span>(<a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation.html">TIsInSTDNamespaceImplementation&lt;T&gt;</a>{}, std::true_type{});</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html#aa365a5de8811cdd91c0b4c1abbf41205">   49</a></span><span class="keyword">auto</span> <a class="code hl_function" href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html#a9ea1413b4faaa668d1d6199aa75fe17e">testIsSTD</a>(...) -&gt; std::false_type;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type.html">   55</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type.html">TIsSTLType</a>: decltype(detail::testIsSTD&lt;T&gt;(0)) {};</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span>, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html">   61</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html">TIsSTLSequentialContainer</a>: std::false_type {};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="};">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container_3_01fec33ec6a8916ef75c312c88953d79fe.html">   67</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html">TIsSTLSequentialContainer</a>&lt;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    T,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    std::enable_if_t&lt;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        std::is_class_v&lt;T&gt; &amp;&amp;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        std::is_same_v&lt;decltype(std::declval&lt;T&gt;().begin()), decltype(std::declval&lt;T&gt;().end())&gt; &gt;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>&gt;: std::true_type {};</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span>, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html">   78</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html">TIsSTLAssociativeContainer</a>: std::false_type {};</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="};">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_07157961f16a0f42ca821c947e5f7b355.html">   84</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html">TIsSTLAssociativeContainer</a>&lt;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    T,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::void_t&lt;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        typename T::key_type,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        typename T::mapped_type &gt; &gt; {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_07157961f16a0f42ca821c947e5f7b355.html#a353d8e8b75314c867ebb459c2ef17f73">   89</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_07157961f16a0f42ca821c947e5f7b355.html#a353d8e8b75314c867ebb459c2ef17f73">value</a> = <a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type.html">TIsSTLType&lt;T&gt;::value</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>};</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>} <span class="comment">// namespace detail</span></div>
+</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">// ----- interface</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TResult, <span class="keyword">typename</span> TValue, <span class="keyword">typename</span> TIsEnabled = <span class="keywordtype">void</span>, <span class="keywordtype">bool</span> is_throwable = false&gt;</div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="};">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">  102</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">TConvert</a> {</div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">  105</a></span>    <span class="keyword">static</span> TResult <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">convert</a>(TValue <span class="keyword">const</span> &amp;) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_throwable) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="keywordflow">throw</span> std::runtime_error(</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                std::string(<span class="stringliteral">&quot;conversion error: no specialization exists for TValue(&quot;</span>) +</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keyword">typeid</span>(TValue).name() + <span class="stringliteral">&quot;), TResult(&quot;</span> + <span class="keyword">typeid</span>(TResult).name() + <span class="stringliteral">&quot;)&quot;</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            );</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <span class="keyword">sizeof</span>(TResult) == 0 || <span class="keyword">sizeof</span>(TValue) == 0,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                <span class="stringliteral">&quot;TConvert specialization is missing for the given TResult and TValue types&quot;</span>);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> TFormat&gt;</div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a0ca3d0efc63e0130e368b68da21a9a4c">  122</a></span>    <span class="keyword">static</span> TResult <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a0ca3d0efc63e0130e368b68da21a9a4c">convert</a>(TValue <span class="keyword">const</span> &amp;, TFormat <span class="keyword">const</span> &amp;) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_throwable) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">throw</span> std::runtime_error(</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                std::string(<span class="stringliteral">&quot;conversion error: no specialization exists for TValue(&quot;</span>) +</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <span class="keyword">typeid</span>(TValue).name() + <span class="stringliteral">&quot;), TResult(&quot;</span> + <span class="keyword">typeid</span>(TResult).name() + <span class="stringliteral">&quot;)&quot;</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            );</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keyword">static_assert</span>(</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                <span class="keyword">sizeof</span>(TResult) == 0 || <span class="keyword">sizeof</span>(TValue) == 0 || <span class="keyword">sizeof</span>(TFormat) == 0,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                <span class="stringliteral">&quot;TConvert specialization is missing for the given TResult and TValue types&quot;</span>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>};</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TValue&gt;</div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="};">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4.html">  141</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">TConvert</a>&lt;std::string, std::shared_ptr&lt;TValue&gt;&gt; {</div>
+<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4.html#a96d04827b559d898093ca921cf86201f">  144</a></span>    <span class="keyword">static</span> std::string <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4.html#a96d04827b559d898093ca921cf86201f">convert</a>(std::shared_ptr&lt;TValue&gt; <span class="keyword">const</span> &amp; ptr) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">if</span> (ptr) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">TConvert&lt;std::string, TValue&gt;::convert</a>(*ptr);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;null&quot;</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>};</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TValue&gt;</div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="};">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4.html">  158</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">TConvert</a>&lt;std::string, std::atomic&lt;TValue&gt;&gt; {</div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4.html#a74cb15a4562242c9fab59763e0403131">  161</a></span>    <span class="keyword">static</span> std::string <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4.html#a74cb15a4562242c9fab59763e0403131">convert</a>(std::atomic&lt;TValue&gt; <span class="keyword">const</span> &amp; value) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">TConvert&lt;std::string, TValue&gt;::convert</a>(value.load());</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>};</div>
+</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TContainer, <span class="keywordtype">bool</span> is_throwable&gt;</div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="};">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c.html">  170</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">TConvert</a>&lt;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    std::string,</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    TContainer,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    std::enable_if_t&lt;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        detail::TIsSTLSequentialContainer&lt;TContainer&gt;::value &amp;&amp;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        !detail::TIsSTLAssociativeContainer&lt;TContainer&gt;::value&gt;,</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    is_throwable&gt; {</div>
+<div class="foldopen" id="foldopen00179" data-start="{" data-end="}">
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c.html#ab26a4b14cf9ea42aae905b79b3c2aaee">  179</a></span>    <span class="keyword">static</span> std::string <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c.html#ab26a4b14cf9ea42aae905b79b3c2aaee">convert</a>(TContainer <span class="keyword">const</span> &amp; container) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        std::string result;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        result.reserve(container.size() * 8 + 4);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        result = <span class="stringliteral">&quot;[ &quot;</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; item : container) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <span class="keywordflow">if</span> (!first) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                result += <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            result += <a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">TConvert</a>&lt;std::string, std::decay_t&lt;<span class="keyword">decltype</span>(item)&gt;&gt;<a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c.html#ab26a4b14cf9ea42aae905b79b3c2aaee">::convert</a>(item);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        result += <span class="stringliteral">&quot; ]&quot;</span>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
+</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>};</div>
+</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TContainer, <span class="keywordtype">bool</span> is_throwable&gt;</div>
+<div class="foldopen" id="foldopen00205" data-start="{" data-end="};">
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_0b1284d49a82103fd24e99641529949d.html">  205</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">TConvert</a>&lt;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    std::string,</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    TContainer,</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    std::enable_if_t&lt;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        !detail::TIsSTLSequentialContainer&lt;TContainer&gt;::value &amp;&amp;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        detail::TIsSTLAssociativeContainer&lt;TContainer&gt;::value&gt;,</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    is_throwable&gt; {</div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_0b1284d49a82103fd24e99641529949d.html#ab60395414d96138de45186474023974e">  214</a></span>    <span class="keyword">static</span> std::string <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_0b1284d49a82103fd24e99641529949d.html#ab60395414d96138de45186474023974e">convert</a>(TContainer <span class="keyword">const</span> &amp; container) {</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        std::string result;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        result.reserve(container.size() * 8 + 4);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        result = <span class="stringliteral">&quot;[ &quot;</span>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; pair : container) {</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="keywordflow">if</span> (!first) {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                result += <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            }</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            result += <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">TConvert&lt;std::string, typename TContainer::key_type&gt;::convert</a>(pair.first);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            result += <span class="stringliteral">&quot;: &quot;</span>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            result += <a class="code hl_function" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">TConvert&lt;std::string, typename TContainer::mapped_type&gt;::convert</a>(pair.second);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        result += <span class="stringliteral">&quot; ]&quot;</span>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
+</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>};</div>
+</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>} <span class="comment">// iridium::convertion::implementation</span></div>
+</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_COMMON_BAC2AFE8_4236_4301_A650_E60876F56E15</span></div>
+<div class="ttc" id="anamespaceiridium_1_1convertion_1_1implementation_1_1detail_html"><div class="ttname"><a href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html">iridium::convertion::implementation::detail</a></div><div class="ttdoc">Содержит вспомогательные средства метапрограммирования для типажей.</div><div class="ttdef"><b>Определения</b> common.h:31</div></div>
+<div class="ttc" id="anamespaceiridium_1_1convertion_1_1implementation_1_1detail_html_a9ea1413b4faaa668d1d6199aa75fe17e"><div class="ttname"><a href="namespaceiridium_1_1convertion_1_1implementation_1_1detail.html#a9ea1413b4faaa668d1d6199aa75fe17e">iridium::convertion::implementation::detail::testIsSTD</a></div><div class="ttdeci">auto testIsSTD(int) -&gt; decltype(TIsInSTDNamespaceImplementation&lt; T &gt;{}, std::true_type{})</div><div class="ttdoc">Вспомогательная функция SFINAE для проверки, находится ли тип в пространстве имен std.</div></div>
+<div class="ttc" id="anamespaceiridium_1_1convertion_1_1implementation_html"><div class="ttname"><a href="namespaceiridium_1_1convertion_1_1implementation.html">iridium::convertion::implementation</a></div><div class="ttdef"><b>Определения</b> common.h:21</div></div>
+<div class="ttc" id="anamespaceiridium_1_1convertion_1_1implementation_html_a22b17a0a7db7b2e29762fa1520ae56f5"><div class="ttname"><a href="namespaceiridium_1_1convertion_1_1implementation.html#a22b17a0a7db7b2e29762fa1520ae56f5">iridium::convertion::implementation::int_to_string_buffer_size</a></div><div class="ttdeci">size_t const int_to_string_buffer_size</div><div class="ttdoc">Размер буфера для преобразования целых чисел в строку.</div><div class="ttdef"><b>Определения</b> common.h:26</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_0b1284d49a82103fd24e99641529949d_html_ab60395414d96138de45186474023974e"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_0b1284d49a82103fd24e99641529949d.html#ab60395414d96138de45186474023974e">iridium::convertion::implementation::TConvert&lt; std::string, TContainer, std::enable_if_t&lt; !detail::TIsSTLSequentialContainer&lt; TContainer &gt;::value &amp;&amp;detail::TIsSTLAssociativeContainer&lt; TContainer &gt;::value &gt;, is_throwable &gt;::convert</a></div><div class="ttdeci">static std::string convert(TContainer const &amp;container)</div><div class="ttdoc">Преобразует ассоциативный контейнер STL в строку.</div><div class="ttdef"><b>Определения</b> common.h:214</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c_html_ab26a4b14cf9ea42aae905b79b3c2aaee"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c.html#ab26a4b14cf9ea42aae905b79b3c2aaee">iridium::convertion::implementation::TConvert&lt; std::string, TContainer, std::enable_if_t&lt; detail::TIsSTLSequentialContainer&lt; TContainer &gt;::value &amp;&amp;!detail::TIsSTLAssociativeContainer&lt; TContainer &gt;::value &gt;, is_throwable &gt;::convert</a></div><div class="ttdeci">static std::string convert(TContainer const &amp;container)</div><div class="ttdoc">Преобразует последовательный контейнер STL в строку.</div><div class="ttdef"><b>Определения</b> common.h:179</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4_html_a74cb15a4562242c9fab59763e0403131"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4.html#a74cb15a4562242c9fab59763e0403131">iridium::convertion::implementation::TConvert&lt; std::string, std::atomic&lt; TValue &gt; &gt;::convert</a></div><div class="ttdeci">static std::string convert(std::atomic&lt; TValue &gt; const &amp;value)</div><div class="ttdoc">Преобразует атомарное значение в строку.</div><div class="ttdef"><b>Определения</b> common.h:161</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4_html_a96d04827b559d898093ca921cf86201f"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4.html#a96d04827b559d898093ca921cf86201f">iridium::convertion::implementation::TConvert&lt; std::string, std::shared_ptr&lt; TValue &gt; &gt;::convert</a></div><div class="ttdeci">static std::string convert(std::shared_ptr&lt; TValue &gt; const &amp;ptr)</div><div class="ttdoc">Преобразует умный указатель в строку.</div><div class="ttdef"><b>Определения</b> common.h:144</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_html"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html">iridium::convertion::implementation::TConvert</a></div><div class="ttdoc">Реализация преобразования по умолчанию, которая вызывает ошибку во время компиляции или выполнения.</div><div class="ttdef"><b>Определения</b> common.h:102</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_html_a0ca3d0efc63e0130e368b68da21a9a4c"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a0ca3d0efc63e0130e368b68da21a9a4c">iridium::convertion::implementation::TConvert::convert</a></div><div class="ttdeci">static TResult convert(TValue const &amp;, TFormat const &amp;)</div><div class="ttdoc">Функция преобразования по умолчанию с форматом, которая вызывается, если не найдена специализация.</div><div class="ttdef"><b>Определения</b> common.h:122</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1_t_convert_html_a216f6c89724432b93e8d4b3c0beca7e0"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0">iridium::convertion::implementation::TConvert::convert</a></div><div class="ttdeci">static TResult convert(TValue const &amp;)</div><div class="ttdoc">Функция преобразования по умолчанию, которая вызывается, если не найдена специализация.</div><div class="ttdef"><b>Определения</b> common.h:105</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation_html"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation.html">iridium::convertion::implementation::detail::TIsInSTDNamespaceImplementation</a></div><div class="ttdoc">Метафункция для определения, находится ли тип T в пространстве имен std.</div><div class="ttdef"><b>Определения</b> common.h:37</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_07157961f16a0f42ca821c947e5f7b355_html_a353d8e8b75314c867ebb459c2ef17f73"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_07157961f16a0f42ca821c947e5f7b355.html#a353d8e8b75314c867ebb459c2ef17f73">iridium::convertion::implementation::detail::TIsSTLAssociativeContainer&lt; T, std::void_t&lt; typename T::key_type, typename T::mapped_type &gt; &gt;::value</a></div><div class="ttdeci">static constexpr bool value</div><div class="ttdef"><b>Определения</b> common.h:89</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_html"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html">iridium::convertion::implementation::detail::TIsSTLAssociativeContainer</a></div><div class="ttdoc">Метафункция для определения, является ли тип T ассоциативным контейнером STL.</div><div class="ttdef"><b>Определения</b> common.h:78</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container_html"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html">iridium::convertion::implementation::detail::TIsSTLSequentialContainer</a></div><div class="ttdoc">Метафункция для определения, является ли тип T последовательным контейнером STL.</div><div class="ttdef"><b>Определения</b> common.h:61</div></div>
+<div class="ttc" id="astructiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type_html"><div class="ttname"><a href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type.html">iridium::convertion::implementation::detail::TIsSTLType</a></div><div class="ttdoc">Метафункция для определения, является ли тип T типом STL.</div><div class="ttdef"><b>Определения</b> common.h:55</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

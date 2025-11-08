@@ -1,28 +1,28 @@
 <map id="iridium::testing::UnitTest::fail" name="iridium::testing::UnitTest::fail">
-<area shape="rect" id="Node000001" title=" " alt="" coords="217,431,380,471"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test.html#aa3a8e80406d26e00f0e1e27d310f1cad" title=" " alt="" coords="5,5,169,46"/>
+<area shape="rect" id="Node000001" title="Fails a test with a message." alt="" coords="217,431,380,471"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test.html#aa3a8e80406d26e00f0e1e27d310f1cad" title="Asserts that a condition is true." alt="" coords="5,5,169,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,416,284,343,263,248,247,198,226,149,199,102,167,61,152,49,155,45,171,57,204,100,230,147,252,196,268,247,289,342,298,415"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_unit_test.html#a66f215a2707abef925322dd95014eb4d" title=" " alt="" coords="5,71,169,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_unit_test.html#a66f215a2707abef925322dd95014eb4d" title="Asserts that a function throws a specific exception." alt="" coords="5,71,169,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,416,277,354,255,277,219,197,195,160,167,126,151,114,154,110,171,122,199,157,223,194,260,275,283,353,295,415"/>
 <area shape="rect" id="Node000004" href="$classiridium_1_1testing_1_1_unit_test.html#a7d0ed95d87270f537db1fe8a3b05d413" title=" " alt="" coords="5,136,169,177"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="286,416,270,367,246,307,212,245,191,217,167,192,150,179,153,175,170,188,195,214,216,243,251,305,275,365,291,415"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1testing_1_1_unit_test.html#a309245439f38d46ba94959d3ec251707" title=" " alt="" coords="5,201,169,242"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1testing_1_1_unit_test.html#a309245439f38d46ba94959d3ec251707" title="Asserts that the left value is equal to the right value." alt="" coords="5,201,169,242"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="280,418,236,338,204,295,167,257,148,245,151,240,170,253,208,291,240,335,285,415"/>
 <area shape="rect" id="Node000006" href="$classiridium_1_1testing_1_1_unit_test.html#abc619e4f60ee6e4f6ebea053b9143e07" title=" " alt="" coords="5,267,169,307"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="270,420,224,371,167,323,146,310,148,306,170,318,228,367,274,417"/>
-<area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_unit_test.html#af5e7143fdaf34561c9361efddcde049b" title=" " alt="" coords="5,332,169,373"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_unit_test.html#af5e7143fdaf34561c9361efddcde049b" title="Asserts that the left value is greater than the right value." alt="" coords="5,332,169,373"/>
 <area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="244,426,168,388,139,376,142,371,170,383,246,421"/>
 <area shape="rect" id="Node000008" href="$classiridium_1_1testing_1_1_unit_test.html#a4739b8fdd5b249460e13ac45931cea5c" title=" " alt="" coords="5,397,169,438"/>
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="201,438,169,433,170,428,202,433"/>
-<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_unit_test.html#a2c37c76646874d3a88d2400daf198283" title=" " alt="" coords="5,463,169,503"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_unit_test.html#a2c37c76646874d3a88d2400daf198283" title="Asserts that the left value is greater than or equal to the right value." alt="" coords="5,463,169,503"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="202,468,170,473,169,468,201,463"/>
 <area shape="rect" id="Node000010" href="$classiridium_1_1testing_1_1_unit_test.html#aaf32d7ce9d6e95ec13b5cc609484bf73" title=" " alt="" coords="5,528,169,569"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="244,481,170,517,141,530,139,525,168,513,242,476"/>
-<area shape="rect" id="Node000011" href="$classiridium_1_1testing_1_1_unit_test.html#a68d9237c9e11ce6faa1157fbdf4a5ab4" title=" " alt="" coords="5,593,169,634"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1testing_1_1_unit_test.html#a68d9237c9e11ce6faa1157fbdf4a5ab4" title="Asserts that the left value is less than the right value." alt="" coords="5,593,169,634"/>
 <area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="273,485,228,535,170,583,148,595,145,591,167,578,224,531,269,482"/>
 <area shape="rect" id="Node000012" href="$classiridium_1_1testing_1_1_unit_test.html#a336e3326a935b176773eba24a8acb8bb" title=" " alt="" coords="5,659,169,699"/>
 <area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="285,487,240,566,208,610,170,648,151,660,148,656,167,644,204,606,236,563,280,484"/>
-<area shape="rect" id="Node000013" href="$classiridium_1_1testing_1_1_unit_test.html#aa902f8d206dd0f04f8f3f0e42bcc4011" title=" " alt="" coords="5,724,169,765"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1testing_1_1_unit_test.html#aa902f8d206dd0f04f8f3f0e42bcc4011" title="Asserts that the left value is less than or equal to the right value." alt="" coords="5,724,169,765"/>
 <area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="291,487,275,537,250,597,216,659,195,687,170,713,153,726,150,721,167,709,190,684,211,656,245,595,270,535,286,486"/>
 <area shape="rect" id="Node000014" href="$namespaceiridium_1_1testing.html#a84272c02d8811ada69cf7d8dab840f93" title=" " alt="" coords="12,788,162,844"/>
 <area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="294,487,281,548,258,625,222,705,198,744,171,778,157,790,154,786,167,774,194,740,217,703,253,623,276,546,289,486"/>

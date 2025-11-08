@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Файл source/iridium/macros/va_args.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_49ec14854bbcc0d9ea1279f62334a187.html">macros</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_49ec14854bbcc0d9ea1279f62334a187.html">macros</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,151 +83,143 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основе количества аргументов. Эта система позволяет определить базовое имя макроса, которое может быть эффективно "перегружено" для вызова различных базовых макросов (например, <code>MY_MACRO_0</code>, <code>MY_MACRO_1</code>, ..., <code>MY_MACRO_7</code>) в зависимости от количества переданных ему аргументов (поддерживается от 0 до 7 аргументов).  
+<p>Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основе количества аргументов. Эта система позволяет определить базовое имя макроса, которое может быть эффективно "перегружено" для вызова различных базовых макросов (например, <span class="tt">MY_MACRO_0</span>, <span class="tt">MY_MACRO_1</span>, ..., <span class="tt">MY_MACRO_7</span>) в зависимости от количества переданных ему аргументов (поддерживается от 0 до 7 аргументов).  
 <a href="#details">Подробнее...</a></p>
 <div class="textblock"><div class="dynheader">
 Граф файлов, в которые включается этот файл:</div>
 <div class="dyncontent">
-<div class="center"><img src="va__args_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2macros_2va__args_8hdep" alt=""/></div>
+<div class="center"><img src="va__args_8h__dep__incl.png" border="0" usemap="#asource_2iridium_2macros_2va__args_8hdep" loading="lazy" alt=""/></div>
 <map name="asource_2iridium_2macros_2va__args_8hdep" id="asource_2iridium_2macros_2va__args_8hdep">
-<area shape="rect" title="Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основ..." alt="" coords="3028,5,3178,46"/>
-<area shape="rect" href="serialization_2node_8h.html" title=" " alt="" coords="1825,94,1973,135"/>
-<area shape="poly" title=" " alt="" coords="3013,36,1974,110,1973,105,3012,31"/>
-<area shape="rect" href="tester_8h.html" title=" " alt="" coords="3112,368,3257,408"/>
-<area shape="poly" title=" " alt="" coords="3113,60,3182,366,3177,368,3108,62"/>
-<area shape="rect" href="mock_8h.html" title=" " alt="" coords="3141,94,3286,135"/>
-<area shape="poly" title=" " alt="" coords="3141,54,3190,91,3187,96,3138,58"/>
-<area shape="rect" href="db_2config_8h.html" title="Определяет структуры конфигурации базы данных с использованием фреймворка сериализации...." alt="" coords="324,190,495,216"/>
-<area shape="poly" title=" " alt="" coords="1809,124,495,199,495,194,1809,118"/>
-<area shape="rect" href="request_8h.html" title=" " alt="" coords="1625,183,1791,223"/>
-<area shape="poly" title=" " alt="" coords="1843,144,1752,185,1750,180,1841,139"/>
-<area shape="rect" href="response_8h.html" title=" " alt="" coords="1816,183,1982,223"/>
-<area shape="poly" title=" " alt="" coords="1902,150,1902,182,1896,182,1896,150"/>
-<area shape="rect" href="logging_2config_8h.html" title=" " alt="" coords="2006,183,2154,223"/>
-<area shape="poly" title=" " alt="" coords="1955,139,2040,180,2038,185,1953,144"/>
-<area shape="rect" href="serialization_2node_8cpp.html" title=" " alt="" coords="1450,183,1601,223"/>
-<area shape="poly" title=" " alt="" coords="1810,139,1602,187,1601,182,1809,134"/>
-<area shape="rect" href="test__runner_8h.html" title=" " alt="" coords="2760,271,2905,312"/>
-<area shape="poly" title=" " alt="" coords="1989,130,2759,274,2758,279,1988,135"/>
-<area shape="rect" href="db_2config_8cpp.html" title=" " alt="" coords="5,279,190,304"/>
+<area shape="rect" title="Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основ..." alt="" coords="3082,5,3231,46"/>
+<area shape="rect" href="serialization_2node_8h.html" title=" " alt="" coords="1878,94,2026,135"/>
+<area shape="poly" title=" " alt="" coords="3066,36,2027,110,2026,105,3065,31"/>
+<area shape="rect" href="tester_8h.html" title=" " alt="" coords="3165,368,3310,408"/>
+<area shape="poly" title=" " alt="" coords="3166,60,3236,366,3231,368,3161,62"/>
+<area shape="rect" href="mock_8h.html" title=" " alt="" coords="3194,94,3340,135"/>
+<area shape="poly" title=" " alt="" coords="3195,54,3243,91,3240,96,3191,58"/>
+<area shape="rect" href="db_2config_8h.html" title="Определяет структуру конфигурации базы данных." alt="" coords="324,190,495,216"/>
+<area shape="poly" title=" " alt="" coords="1863,123,495,200,495,194,1863,118"/>
+<area shape="rect" href="request_8h.html" title=" " alt="" coords="1678,183,1845,223"/>
+<area shape="poly" title=" " alt="" coords="1896,144,1806,185,1803,180,1894,139"/>
+<area shape="rect" href="response_8h.html" title=" " alt="" coords="1869,183,2035,223"/>
+<area shape="poly" title=" " alt="" coords="1955,150,1955,182,1950,182,1950,150"/>
+<area shape="rect" href="logging_2config_8h.html" title=" " alt="" coords="2060,183,2207,223"/>
+<area shape="poly" title=" " alt="" coords="2008,139,2094,180,2091,185,2006,144"/>
+<area shape="rect" href="serialization_2node_8cpp.html" title=" " alt="" coords="1503,183,1654,223"/>
+<area shape="poly" title=" " alt="" coords="1863,139,1655,187,1654,182,1862,134"/>
+<area shape="rect" href="test__runner_8h.html" title=" " alt="" coords="2813,271,2958,312"/>
+<area shape="poly" title=" " alt="" coords="2042,130,2813,274,2812,279,2041,135"/>
+<area shape="rect" href="db_2config_8cpp.html" title="Реализует перечисление TDBType." alt="" coords="5,279,190,304"/>
 <area shape="poly" title=" " alt="" coords="351,223,142,281,141,276,350,218"/>
-<area shape="rect" href="factory_8h.html" title=" " alt="" coords="214,279,387,304"/>
+<area shape="rect" href="factory_8h.html" title="Определяет фабричные функции для создания коннекторов к базам данных." alt="" coords="214,279,387,304"/>
 <area shape="poly" title=" " alt="" coords="384,228,317,280,314,276,381,224"/>
-<area shape="rect" href="implementation_2connector_8h.html" title="Определяет базовый класс CConnector для конкретных реализаций коннекторов баз данных...." alt="" coords="411,271,624,312"/>
+<area shape="rect" href="implementation_2connector_8h.html" title="Определяет базовый класс CConnector для конкретных реализаций коннекторов баз данных." alt="" coords="411,271,624,312"/>
 <area shape="poly" title=" " alt="" coords="438,223,495,269,491,273,434,228"/>
-<area shape="rect" href="factory_8cpp.html" title=" " alt="" coords="200,375,387,401"/>
+<area shape="rect" href="factory_8cpp.html" title="Реализует функции фабрики для коннекторов к базам данных." alt="" coords="200,375,387,401"/>
 <area shape="poly" title=" " alt="" coords="301,320,297,375,292,374,296,319"/>
-<area shape="rect" href="implementation_2connector_8cpp.html" title=" " alt="" coords="411,368,624,408"/>
+<area shape="rect" href="implementation_2connector_8cpp.html" title="Реализует класс CConnector." alt="" coords="411,368,624,408"/>
 <area shape="poly" title=" " alt="" coords="520,328,520,367,515,367,515,328"/>
-<area shape="rect" href="request_8cpp.html" title=" " alt="" coords="1625,271,1791,312"/>
-<area shape="poly" title=" " alt="" coords="1711,239,1711,271,1706,271,1706,239"/>
-<area shape="rect" href="response_8cpp.html" title=" " alt="" coords="1816,271,1982,312"/>
-<area shape="poly" title=" " alt="" coords="1902,239,1902,271,1896,271,1896,239"/>
-<area shape="rect" href="logging_2config_8cpp.html" title=" " alt="" coords="2178,271,2326,312"/>
-<area shape="poly" title=" " alt="" coords="2134,228,2214,269,2212,273,2131,233"/>
-<area shape="rect" href="logger_8h.html" title="Определяет основной класс&#45;одиночку Logger, вспомогательные структуры LogStream и LogStreamDummy,..." alt="" coords="2006,271,2154,312"/>
-<area shape="poly" title=" " alt="" coords="2083,239,2083,271,2078,271,2078,239"/>
-<area shape="rect" href="context_8cpp.html" title=" " alt="" coords="1849,471,2058,512"/>
-<area shape="poly" title=" " alt="" coords="2134,319,2154,337,2169,359,2179,388,2177,402,2169,417,2149,434,2118,449,2041,473,2040,468,2116,444,2146,429,2165,414,2172,401,2174,389,2164,361,2150,340,2130,323"/>
+<area shape="rect" href="request_8cpp.html" title=" " alt="" coords="1678,271,1845,312"/>
+<area shape="poly" title=" " alt="" coords="1764,239,1764,271,1759,271,1759,239"/>
+<area shape="rect" href="response_8cpp.html" title=" " alt="" coords="1869,271,2035,312"/>
+<area shape="poly" title=" " alt="" coords="1955,239,1955,271,1950,271,1950,239"/>
+<area shape="rect" href="logging_2config_8cpp.html" title=" " alt="" coords="2232,271,2379,312"/>
+<area shape="poly" title=" " alt="" coords="2187,228,2268,269,2265,273,2185,233"/>
+<area shape="rect" href="logger_8h.html" title=" " alt="" coords="2060,271,2207,312"/>
+<area shape="poly" title=" " alt="" coords="2136,239,2136,271,2131,271,2131,239"/>
+<area shape="rect" href="context_8cpp.html" title=" " alt="" coords="1903,471,2111,512"/>
+<area shape="poly" title=" " alt="" coords="2187,319,2207,337,2223,359,2232,388,2230,402,2222,417,2203,434,2172,449,2095,473,2093,468,2170,444,2200,429,2218,414,2225,401,2227,389,2218,361,2203,340,2183,323"/>
 <area shape="rect" href="context__manager_8cpp.html" title=" " alt="" coords="648,368,856,408"/>
-<area shape="poly" title=" " alt="" coords="1991,315,1820,332,1675,339,1547,340,1427,337,1308,335,1181,336,1037,344,869,363,830,369,829,364,868,357,1037,339,1181,331,1308,330,1428,332,1547,335,1675,334,1820,327,1991,309"/>
+<area shape="poly" title=" " alt="" coords="2045,315,1866,333,1714,340,1579,340,1454,337,1329,335,1196,335,1045,344,869,363,829,370,828,364,868,357,1045,338,1196,330,1329,329,1454,332,1579,335,1713,335,1865,327,2044,309"/>
 <area shape="rect" href="implementation_2pipe_8cpp.html" title=" " alt="" coords="880,368,1088,408"/>
-<area shape="poly" title=" " alt="" coords="1992,315,1857,329,1742,337,1547,339,1353,341,1240,348,1107,363,1067,370,1066,364,1106,357,1239,343,1353,335,1547,333,1742,331,1857,324,1991,309"/>
-<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="2080,752,2288,793"/>
-<area shape="poly" title=" " alt="" coords="1991,314,1809,318,1543,320,1409,324,1291,332,1201,344,1171,352,1153,362,1131,390,1124,418,1128,490,1128,588,1135,605,1157,621,1192,637,1238,652,1358,679,1503,703,1661,723,1818,739,2080,761,2080,767,1818,745,1660,728,1502,708,1356,684,1236,657,1190,642,1154,626,1131,608,1123,590,1123,490,1119,417,1126,387,1149,358,1169,347,1200,339,1290,326,1409,319,1543,315,1809,313,1991,309"/>
+<area shape="poly" title=" " alt="" coords="2045,315,1902,330,1781,337,1574,339,1368,340,1248,347,1107,363,1067,369,1066,364,1106,357,1248,342,1368,335,1574,333,1781,332,1902,325,2044,309"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="2133,752,2342,793"/>
+<area shape="poly" title=" " alt="" coords="2045,314,1852,318,1569,319,1426,323,1300,330,1204,343,1172,352,1153,362,1131,390,1124,418,1128,490,1128,588,1136,606,1159,623,1196,639,1245,654,1372,682,1526,706,1693,726,1859,742,2133,762,2133,768,1858,747,1692,731,1525,711,1371,687,1243,659,1194,644,1156,627,1132,609,1123,590,1123,490,1119,417,1126,387,1149,358,1170,347,1203,338,1300,325,1426,317,1569,314,1852,313,2045,309"/>
 <area shape="rect" href="stream__buffer_8cpp.html" title=" " alt="" coords="1163,368,1371,408"/>
-<area shape="poly" title=" " alt="" coords="1991,315,1820,333,1685,338,1552,344,1383,363,1346,369,1345,364,1382,357,1551,338,1685,333,1819,328,1991,309"/>
+<area shape="poly" title=" " alt="" coords="2045,315,1944,327,1858,334,1712,338,1567,343,1482,350,1383,363,1346,370,1345,364,1382,357,1482,345,1566,337,1712,333,1858,328,1943,322,2044,309"/>
 <area shape="rect" href="content__storage_8cpp.html" title=" " alt="" coords="1395,360,1581,416"/>
-<area shape="poly" title=" " alt="" coords="1992,315,1879,330,1791,338,1703,346,1594,363,1582,365,1581,360,1593,357,1703,341,1790,332,1878,325,1991,310"/>
+<area shape="poly" title=" " alt="" coords="2045,315,1917,331,1817,338,1718,345,1594,363,1582,365,1581,360,1593,357,1718,340,1817,332,1917,325,2044,310"/>
 <area shape="rect" href="logger_8cpp.html" title=" " alt="" coords="1605,368,1752,408"/>
-<area shape="poly" title=" " alt="" coords="1992,315,1877,338,1766,363,1741,369,1740,364,1765,357,1876,332,1991,310"/>
-<area shape="rect" href="parser__json_8cpp.html" title=" " alt="" coords="1777,360,1930,416"/>
-<area shape="poly" title=" " alt="" coords="2020,321,1920,362,1918,357,2018,316"/>
-<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="2006,368,2155,408"/>
-<area shape="poly" title=" " alt="" coords="2083,328,2083,367,2078,367,2078,328"/>
-<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="2422,464,2605,519"/>
-<area shape="poly" title=" " alt="" coords="2169,310,2213,314,2252,315,2318,314,2349,316,2381,322,2413,336,2448,358,2472,381,2489,408,2510,462,2505,464,2484,411,2467,384,2445,362,2411,340,2379,328,2349,321,2318,319,2252,321,2213,320,2169,315"/>
-<area shape="rect" href="test__runner__raw_8cpp.html" title=" " alt="" coords="2689,464,2871,519"/>
-<area shape="poly" title=" " alt="" coords="2169,309,2227,316,2277,318,2362,318,2402,320,2444,325,2490,337,2543,358,2563,370,2576,384,2589,399,2607,413,2655,439,2703,461,2701,465,2652,444,2604,418,2585,403,2572,388,2560,374,2540,362,2489,342,2443,331,2402,325,2362,323,2277,324,2227,322,2169,315"/>
-<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2901,471,3046,512"/>
-<area shape="poly" title=" " alt="" coords="2170,309,2235,316,2291,318,2389,314,2435,315,2482,320,2534,334,2593,358,2612,371,2623,386,2634,400,2651,413,2683,428,2712,438,2763,446,2817,450,2883,461,2909,468,2908,473,2882,466,2816,455,2762,451,2710,443,2681,433,2648,418,2630,404,2619,389,2608,375,2591,362,2533,339,2481,326,2434,320,2389,319,2291,323,2235,322,2169,315"/>
-<area shape="poly" title=" " alt="" coords="2169,309,2311,324,2431,329,2637,326,2736,325,2841,327,2960,337,3099,357,3129,364,3128,370,3098,363,2960,342,2841,332,2736,330,2637,332,2431,335,2310,329,2169,315"/>
-<area shape="rect" href="implementation_2async__queue_8h.html" title="Определяет класс CAsyncQueue&lt;TItem&gt;, реализацию интерфейса IAsyncQueue&lt;TItem&gt;. Этот класс предоставля..." alt="" coords="2230,368,2435,408"/>
-<area shape="poly" title=" " alt="" coords="2148,315,2280,364,2278,369,2146,320"/>
-<area shape="rect" href="implementation_2thread_8cpp.html" title=" " alt="" coords="2372,567,2551,608"/>
-<area shape="poly" title=" " alt="" coords="2170,310,2262,318,2335,318,2370,321,2406,327,2444,338,2488,358,2506,370,2518,384,2528,398,2543,414,2565,426,2584,434,2603,443,2618,462,2628,492,2626,506,2618,521,2605,537,2589,550,2552,570,2550,565,2586,546,2601,533,2614,518,2621,504,2623,492,2614,465,2599,447,2582,438,2562,431,2540,418,2524,402,2514,387,2503,374,2486,362,2443,343,2404,332,2369,326,2335,324,2261,323,2169,315"/>
-<area shape="rect" href="worker_8cpp.html" title=" " alt="" coords="1598,656,1778,697"/>
-<area shape="poly" title=" " alt="" coords="2042,324,1995,362,1971,391,1961,404,1944,418,1915,434,1890,441,1866,449,1839,466,1792,513,1752,567,1721,618,1700,657,1695,654,1716,615,1747,564,1788,510,1836,462,1864,444,1889,436,1913,429,1941,413,1957,400,1967,387,1992,358,2038,320"/>
-<area shape="poly" title=" " alt="" coords="3131,418,3016,473,3013,468,3129,413"/>
-<area shape="poly" title=" " alt="" coords="2245,415,2027,473,2026,468,2243,410"/>
-<area shape="poly" title=" " alt="" coords="2381,414,2466,461,2464,465,2379,418"/>
-<area shape="poly" title=" " alt="" coords="2353,420,2413,518,2448,565,2444,568,2409,521,2348,423"/>
-<area shape="rect" href="implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="2133,471,2297,512"/>
-<area shape="poly" title=" " alt="" coords="2300,421,2239,473,2236,469,2296,417"/>
-<area shape="rect" href="implementation_2worker_8h.html" title="Определяет реализации рабочих классов (CWorkerPusher, CWorkerPopper, CWorker), которые управляют пото..." alt="" coords="2008,567,2174,608"/>
-<area shape="poly" title=" " alt="" coords="2216,410,2165,432,2142,447,2122,465,2107,489,2098,517,2093,567,2087,566,2093,515,2102,487,2118,462,2139,443,2163,427,2214,406"/>
-<area shape="rect" href="worker__pool_8h.html" title=" " alt="" coords="2257,656,2455,697"/>
-<area shape="poly" title=" " alt="" coords="2338,424,2357,655,2352,656,2332,424"/>
-<area shape="poly" title=" " alt="" coords="2215,527,2197,697,2190,752,2185,751,2192,696,2209,527"/>
-<area shape="poly" title=" " alt="" coords="2281,515,2411,564,2409,569,2279,520"/>
-<area shape="poly" title=" " alt="" coords="2179,524,2118,569,2115,565,2175,519"/>
-<area shape="rect" href="implementation_2sink_8cpp.html" title=" " alt="" coords="1802,656,1969,697"/>
-<area shape="poly" title=" " alt="" coords="2031,617,1933,658,1931,653,2029,612"/>
-<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="1993,656,2183,697"/>
-<area shape="poly" title=" " alt="" coords="2092,624,2091,656,2086,655,2087,624"/>
-<area shape="poly" title=" " alt="" coords="1993,613,1779,658,1778,653,1992,607"/>
-<area shape="poly" title=" " alt="" coords="2166,611,2297,653,2295,658,2164,616"/>
-<area shape="poly" title=" " alt="" coords="2308,707,2221,754,2219,749,2305,702"/>
-<area shape="rect" href="worker__pool_8cpp.html" title=" " alt="" coords="2312,745,2472,800"/>
-<area shape="poly" title=" " alt="" coords="2372,710,2384,743,2379,745,2367,712"/>
-<area shape="rect" href="test__runner__fork_8h.html" title=" " alt="" coords="2661,360,2843,416"/>
-<area shape="poly" title=" " alt="" coords="2808,325,2777,361,2773,358,2804,322"/>
-<area shape="rect" href="test__runner__raw_8h.html" title=" " alt="" coords="2868,368,3087,408"/>
-<area shape="poly" title=" " alt="" coords="2876,318,2949,365,2946,369,2873,323"/>
-<area shape="rect" href="test__runner_8cpp.html" title=" " alt="" coords="3281,368,3426,408"/>
-<area shape="poly" title=" " alt="" coords="2920,300,3084,322,3270,357,3296,364,3295,370,3269,363,3083,327,2920,305"/>
-<area shape="poly" title=" " alt="" coords="2675,425,2579,465,2577,461,2673,420"/>
-<area shape="poly" title=" " alt="" coords="2826,420,2932,468,2929,473,2824,425"/>
-<area shape="poly" title=" " alt="" coords="2927,418,2834,465,2832,461,2925,413"/>
-<area shape="poly" title=" " alt="" coords="2979,424,2977,471,2972,471,2973,424"/>
+<area shape="poly" title=" " alt="" coords="2045,315,1902,337,1841,346,1765,363,1739,370,1738,364,1764,357,1840,341,1902,332,2044,310"/>
+<area shape="rect" href="json__parser_8cpp.html" title=" " alt="" coords="1776,368,1984,408"/>
+<area shape="poly" title=" " alt="" coords="2067,320,1934,369,1932,364,2065,315"/>
+<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="2059,368,2208,408"/>
+<area shape="poly" title=" " alt="" coords="2136,328,2136,367,2131,367,2131,328"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="2476,464,2658,519"/>
+<area shape="poly" title=" " alt="" coords="2223,310,2267,314,2305,315,2372,314,2403,316,2434,322,2466,336,2502,358,2525,381,2542,408,2563,462,2558,464,2538,411,2521,384,2499,362,2464,340,2432,328,2402,321,2372,319,2305,321,2266,320,2222,315"/>
+<area shape="rect" href="test__runner__raw_8cpp.html" title=" " alt="" coords="2742,464,2925,519"/>
+<area shape="poly" title=" " alt="" coords="2223,309,2280,316,2330,318,2415,318,2456,320,2498,325,2544,337,2596,358,2617,370,2630,384,2642,399,2660,413,2708,439,2757,461,2755,465,2706,444,2657,418,2638,403,2626,388,2613,374,2594,362,2542,342,2497,331,2455,325,2415,323,2330,324,2280,322,2222,315"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="2954,471,3100,512"/>
+<area shape="poly" title=" " alt="" coords="2223,309,2288,316,2345,318,2442,314,2488,315,2536,320,2588,334,2647,358,2665,371,2677,386,2687,400,2704,413,2736,428,2765,438,2816,446,2870,450,2937,461,2963,468,2961,473,2936,466,2869,455,2816,451,2764,443,2735,433,2701,418,2683,404,2672,389,2662,375,2644,362,2586,339,2535,326,2488,320,2442,319,2345,323,2288,322,2222,315"/>
+<area shape="poly" title=" " alt="" coords="2223,309,2364,324,2485,329,2690,326,2789,325,2895,327,3014,337,3153,357,3182,364,3181,370,3152,363,3013,342,2894,332,2789,330,2690,332,2484,335,2364,329,2222,315"/>
+<area shape="rect" href="implementation_2async__queue_8h.html" title=" " alt="" coords="2283,368,2488,408"/>
+<area shape="poly" title=" " alt="" coords="2201,315,2334,364,2332,369,2200,320"/>
+<area shape="rect" href="implementation_2thread_8cpp.html" title=" " alt="" coords="2426,567,2604,608"/>
+<area shape="poly" title=" " alt="" coords="2223,310,2315,318,2388,318,2423,321,2459,327,2498,338,2541,358,2560,370,2571,384,2581,398,2596,414,2618,426,2638,434,2656,443,2672,462,2682,492,2679,506,2672,521,2658,537,2642,550,2606,570,2603,565,2639,546,2655,533,2667,518,2674,504,2676,492,2667,465,2652,447,2635,438,2616,431,2593,418,2577,402,2567,387,2556,374,2539,362,2496,343,2458,332,2423,326,2388,324,2315,323,2222,315"/>
+<area shape="rect" href="worker_8cpp.html" title=" " alt="" coords="1651,656,1832,697"/>
+<area shape="poly" title=" " alt="" coords="2095,324,2049,362,2024,391,2014,404,1998,418,1969,434,1944,441,1919,449,1892,466,1845,513,1805,567,1774,618,1753,657,1748,654,1769,615,1801,564,1841,510,1889,462,1917,444,1942,436,1967,429,1995,413,2010,400,2020,387,2045,358,2092,320"/>
+<area shape="poly" title=" " alt="" coords="3184,418,3069,473,3067,468,3182,413"/>
+<area shape="poly" title=" " alt="" coords="2298,415,2081,473,2079,468,2297,410"/>
+<area shape="poly" title=" " alt="" coords="2435,414,2520,461,2517,465,2432,418"/>
+<area shape="poly" title=" " alt="" coords="2406,420,2466,518,2501,565,2497,568,2462,521,2402,423"/>
+<area shape="rect" href="implementation_2thread_8h.html" title="Определяет класс CThread, конкретную реализацию интерфейса IThread. Этот класс управляет std::thread ..." alt="" coords="2186,471,2350,512"/>
+<area shape="poly" title=" " alt="" coords="2353,421,2292,473,2289,469,2350,417"/>
+<area shape="rect" href="implementation_2worker_8h.html" title=" " alt="" coords="2061,567,2227,608"/>
+<area shape="poly" title=" " alt="" coords="2269,410,2218,432,2195,447,2176,465,2160,489,2151,517,2146,567,2141,566,2146,515,2155,487,2171,462,2192,443,2216,427,2267,406"/>
+<area shape="rect" href="worker__pool_8h.html" title=" " alt="" coords="2310,656,2509,697"/>
+<area shape="poly" title=" " alt="" coords="2391,424,2411,655,2405,656,2386,424"/>
+<area shape="poly" title=" " alt="" coords="2268,527,2251,697,2243,752,2238,751,2246,696,2263,527"/>
+<area shape="poly" title=" " alt="" coords="2335,515,2464,564,2462,569,2333,520"/>
+<area shape="poly" title=" " alt="" coords="2232,524,2171,569,2168,565,2229,519"/>
+<area shape="rect" href="implementation_2sink_8cpp.html" title=" " alt="" coords="1856,656,2022,697"/>
+<area shape="poly" title=" " alt="" coords="2085,617,1987,658,1985,653,2083,612"/>
+<area shape="rect" href="sink__file_8cpp.html" title=" " alt="" coords="2046,656,2237,697"/>
+<area shape="poly" title=" " alt="" coords="2146,624,2145,656,2139,655,2140,624"/>
+<area shape="poly" title=" " alt="" coords="2046,613,1833,658,1832,653,2045,607"/>
+<area shape="poly" title=" " alt="" coords="2219,611,2350,653,2348,658,2218,616"/>
+<area shape="poly" title=" " alt="" coords="2361,707,2275,754,2272,749,2359,702"/>
+<area shape="rect" href="worker__pool_8cpp.html" title=" " alt="" coords="2366,745,2525,800"/>
+<area shape="poly" title=" " alt="" coords="2425,710,2438,743,2433,745,2420,712"/>
+<area shape="rect" href="test__runner__fork_8h.html" title=" " alt="" coords="2714,360,2897,416"/>
+<area shape="poly" title=" " alt="" coords="2861,325,2831,361,2827,358,2857,322"/>
+<area shape="rect" href="test__runner__raw_8h.html" title=" " alt="" coords="2921,368,3140,408"/>
+<area shape="poly" title=" " alt="" coords="2930,318,3002,365,2999,369,2927,323"/>
+<area shape="rect" href="test__runner_8cpp.html" title=" " alt="" coords="3334,368,3480,408"/>
+<area shape="poly" title=" " alt="" coords="2974,300,3137,322,3323,357,3350,364,3348,370,3322,363,3136,327,2973,305"/>
+<area shape="poly" title=" " alt="" coords="2729,425,2632,465,2630,461,2726,420"/>
+<area shape="poly" title=" " alt="" coords="2879,420,2985,468,2983,473,2877,425"/>
+<area shape="poly" title=" " alt="" coords="2981,418,2888,465,2885,461,2978,413"/>
+<area shape="poly" title=" " alt="" coords="3032,424,3030,471,3025,471,3027,424"/>
 </map>
 </div>
 </div>
 <p><a href="va__args_8h_source.html">См. исходные тексты.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1macros.html">iridium::macros</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1macros"><td class="mdescLeft">&#160;</td><td class="mdescRight">Содержит служебные макросы препроцессора, используемые в проекте Iridium. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Amacros" id="r_iridium_3A_3Amacros"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1macros.html">iridium::macros</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Макросы</h2></td></tr>
 <tr class="memitem:a4ffca670f54b97934a2f84ad3ec95277" id="r_a4ffca670f54b97934a2f84ad3ec95277"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277">DEFINE_FUNC_CHOOSER_7</a>(_f1,  _f2,  _f3,  _f4,  _f5,  _f6,  _f7,  N, ...)</td></tr>
-<tr class="memdesc:a4ffca670f54b97934a2f84ad3ec95277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов. Это ключевой компонент в механизме подсчета аргументов. Он эффективно сдвигает аргументы таким образом, что желаемый аргумент (который является одним из <code>_f1</code>...<code>_f7</code> в контексте <code>DEFINE_CHOOSE_FROM_ARG_COUNT</code>) становится параметром <code>N</code>, который затем возвращается.  <br /></td></tr>
-<tr class="separator:a4ffca670f54b97934a2f84ad3ec95277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a4ffca670f54b97934a2f84ad3ec95277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов. Это ключевой компонент в механизме подсчета аргументов. Он эффективно сдвигает аргументы таким образом, что желаемый аргумент (который является одним из <span class="tt">_f1</span>...<span class="tt">_f7</span> в контексте <span class="tt"><a class="el" href="#a78b009d490c9c1a85bead12393e7a052" title="Вспомогательный макрос, используемый DEFINE_MACRO_CHOOSER для конструирования вызова макроса,...">DEFINE_CHOOSE_FROM_ARG_COUNT</a></span>) становится параметром <span class="tt">N</span>, который затем возвращается.  <br /></td></tr>
 <tr class="memitem:af5e34cf96b6035dd3cd1dc9dfa6476a7" id="r_af5e34cf96b6035dd3cd1dc9dfa6476a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5e34cf96b6035dd3cd1dc9dfa6476a7">DEFINE_FUNC_RECOMPOSER</a>(argsWithParentheses)</td></tr>
-<tr class="memdesc:af5e34cf96b6035dd3cd1dc9dfa6476a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки) в <code>DEFINE_FUNC_CHOOSER_7</code>. Этот макрос по сути удаляет один уровень обработки макрорасширения, позволяя <code>DEFINE_FUNC_CHOOSER_7</code> правильно интерпретировать свои аргументы.  <br /></td></tr>
-<tr class="separator:af5e34cf96b6035dd3cd1dc9dfa6476a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:af5e34cf96b6035dd3cd1dc9dfa6476a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки) в <span class="tt"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277" title="Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....">DEFINE_FUNC_CHOOSER_7</a></span>. Этот макрос по сути удаляет один уровень обработки макрорасширения, позволяя <span class="tt"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277" title="Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....">DEFINE_FUNC_CHOOSER_7</a></span> правильно интерпретировать свои аргументы.  <br /></td></tr>
 <tr class="memitem:a273c1a8de1c0ca2ed53c521bf0cd5744" id="r_a273c1a8de1c0ca2ed53c521bf0cd5744"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a273c1a8de1c0ca2ed53c521bf0cd5744">DEFINE_MACRO_CHOOSER</a>(target_, ...)</td></tr>
-<tr class="memdesc:a273c1a8de1c0ca2ed53c521bf0cd5744"><td class="mdescLeft">&#160;</td><td class="mdescRight">Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например, <code>target_1</code>, <code>target_2</code>) на основе количества предоставленных вариативных аргументов. Он полагается на вспомогательный макрос с именем <code>target_##_NO_ARG_EXPANDER</code>, который должен быть определен пользователем. Этот макрос <code>_NO_ARG_EXPANDER</code> предоставляет необходимое заполнение и имя версии макроса <code>target_</code> для 0 аргументов.  <br /></td></tr>
-<tr class="separator:a273c1a8de1c0ca2ed53c521bf0cd5744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a273c1a8de1c0ca2ed53c521bf0cd5744"><td class="mdescLeft">&#160;</td><td class="mdescRight">Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например, <span class="tt">target_1</span>, <span class="tt">target_2</span>) на основе количества предоставленных вариативных аргументов. Он полагается на вспомогательный макрос с именем <span class="tt">target_##_NO_ARG_EXPANDER</span>, который должен быть определен пользователем. Этот макрос <span class="tt">_NO_ARG_EXPANDER</span> предоставляет необходимое заполнение и имя версии макроса <span class="tt">target_</span> для 0 аргументов.  <br /></td></tr>
 <tr class="memitem:a78b009d490c9c1a85bead12393e7a052" id="r_a78b009d490c9c1a85bead12393e7a052"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78b009d490c9c1a85bead12393e7a052">DEFINE_CHOOSE_FROM_ARG_COUNT</a>(arg_, ...)</td></tr>
-<tr class="memdesc:a78b009d490c9c1a85bead12393e7a052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вспомогательный макрос, используемый <code>DEFINE_MACRO_CHOOSER</code> для конструирования вызова макроса, специфичного для количества аргументов. Он принимает базовое имя (<code>arg_</code>) и список вариативных аргументов (который включает вывод <code>_NO_ARG_EXPANDER</code>) и использует <code>DEFINE_FUNC_RECOMPOSER</code> (и, следовательно, <code>DEFINE_FUNC_CHOOSER_7</code>) для выбора правильного имени макроса с суффиксом (например, <code>arg_1</code>, <code>arg_0</code>).  <br /></td></tr>
-<tr class="separator:a78b009d490c9c1a85bead12393e7a052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a78b009d490c9c1a85bead12393e7a052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вспомогательный макрос, используемый <span class="tt"><a class="el" href="#a273c1a8de1c0ca2ed53c521bf0cd5744" title="Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...">DEFINE_MACRO_CHOOSER</a></span> для конструирования вызова макроса, специфичного для количества аргументов. Он принимает базовое имя (<span class="tt">arg_</span>) и список вариативных аргументов (который включает вывод <span class="tt">_NO_ARG_EXPANDER</span>) и использует <span class="tt"><a class="el" href="#af5e34cf96b6035dd3cd1dc9dfa6476a7" title="Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки)...">DEFINE_FUNC_RECOMPOSER</a></span> (и, следовательно, <span class="tt"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277" title="Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....">DEFINE_FUNC_CHOOSER_7</a></span>) для выбора правильного имени макроса с суффиксом (например, <span class="tt">arg_1</span>, <span class="tt">arg_0</span>).  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основе количества аргументов. Эта система позволяет определить базовое имя макроса, которое может быть эффективно "перегружено" для вызова различных базовых макросов (например, <code>MY_MACRO_0</code>, <code>MY_MACRO_1</code>, ..., <code>MY_MACRO_7</code>) в зависимости от количества переданных ему аргументов (поддерживается от 0 до 7 аргументов). </p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основе количества аргументов. Эта система позволяет определить базовое имя макроса, которое может быть эффективно "перегружено" для вызова различных базовых макросов (например, <span class="tt">MY_MACRO_0</span>, <span class="tt">MY_MACRO_1</span>, ..., <span class="tt">MY_MACRO_7</span>) в зависимости от количества переданных ему аргументов (поддерживается от 0 до 7 аргументов). </p>
 <p><b>Пример использования:</b> Для использования этой системы обычно необходимо определить:</p><ol type="1">
-<li>Серию макросов для каждого количества аргументов: <code>#define MY_MACRO_0()</code> <code>#define MY_MACRO_1(a1)</code> <code>#define MY_MACRO_2(a1, a2)</code> ... <code>#define MY_MACRO_7(a1, ..., a7)</code></li>
-<li>Специальный макрос-"расширитель без аргументов", который предоставляет значение по умолчанию (например, для 0 аргументов) и заполнение для счетчика аргументов: <code>#define MY_MACRO_NO_ARG_EXPANDER() ,,,,,,,MY_MACRO_0</code> (Примечание: количество запятых важно для механизма подсчета).</li>
-<li>Основной макрос, использующий <code>DEFINE_MACRO_CHOOSER</code>: <code>#define MY_MACRO(...) <a class="el" href="#a273c1a8de1c0ca2ed53c521bf0cd5744" title="Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...">DEFINE_MACRO_CHOOSER(MY_MACRO, __VA_ARGS__)</a>(__VA_ARGS__)</code></li>
+<li>Серию макросов для каждого количества аргументов: <span class="tt">#define MY_MACRO_0()</span> <span class="tt">#define MY_MACRO_1(a1)</span> <span class="tt">#define MY_MACRO_2(a1, a2)</span> ... <span class="tt">#define MY_MACRO_7(a1, ..., a7)</span></li>
+<li>Специальный макрос-"расширитель без аргументов", который предоставляет значение по умолчанию (например, для 0 аргументов) и заполнение для счетчика аргументов: <span class="tt">#define MY_MACRO_NO_ARG_EXPANDER() ,,,,,,,MY_MACRO_0</span> (Примечание: количество запятых важно для механизма подсчета).</li>
+<li>Основной макрос, использующий <span class="tt"><a class="el" href="#a273c1a8de1c0ca2ed53c521bf0cd5744" title="Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...">DEFINE_MACRO_CHOOSER</a></span>: <span class="tt">#define MY_MACRO(...) <a class="el" href="#a273c1a8de1c0ca2ed53c521bf0cd5744" title="Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...">DEFINE_MACRO_CHOOSER(MY_MACRO, __VA_ARGS__)</a>(__VA_ARGS__)</span></li>
 </ol>
-<p>Теперь вызов <code>MY_MACRO()</code> будет диспетчеризован в <code>MY_MACRO_0()</code>, <code>MY_MACRO(x)</code> в <code>MY_MACRO_1(x)</code> и так далее. Закомментированные определения макроса <code>ACTION</code> в этом файле служат концептуальной иллюстрацией. </p>
-</div><h2 class="groupheader">Макросы</h2>
+<p>Теперь вызов <span class="tt">MY_MACRO()</span> будет диспетчеризован в <span class="tt">MY_MACRO_0()</span>, <span class="tt">MY_MACRO(x)</span> в <span class="tt">MY_MACRO_1(x)</span> и так далее. Закомментированные определения макроса <span class="tt">ACTION</span> в этом файле служат концептуальной иллюстрацией. </p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Макросы</h2>
 <a id="a78b009d490c9c1a85bead12393e7a052" name="a78b009d490c9c1a85bead12393e7a052"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78b009d490c9c1a85bead12393e7a052">&#9670;&#160;</a></span>DEFINE_CHOOSE_FROM_ARG_COUNT</h2>
 
@@ -260,13 +239,13 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 <b>Макроопределение:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#af5e34cf96b6035dd3cd1dc9dfa6476a7">DEFINE_FUNC_RECOMPOSER</a>((__VA_ARGS__, arg_##_7, arg_##_6, arg_##_5, arg_##_4, arg_##_3, arg_##_2, arg_##_1, ))</div>
-<div class="ttc" id="ava__args_8h_html_af5e34cf96b6035dd3cd1dc9dfa6476a7"><div class="ttname"><a href="#af5e34cf96b6035dd3cd1dc9dfa6476a7">DEFINE_FUNC_RECOMPOSER</a></div><div class="ttdeci">#define DEFINE_FUNC_RECOMPOSER(argsWithParentheses)</div><div class="ttdoc">Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки)...</div><div class="ttdef"><b>Определения</b> va_args.h:99</div></div>
+<div class="ttc" id="ava__args_8h_html_af5e34cf96b6035dd3cd1dc9dfa6476a7"><div class="ttname"><a href="#af5e34cf96b6035dd3cd1dc9dfa6476a7">DEFINE_FUNC_RECOMPOSER</a></div><div class="ttdeci">#define DEFINE_FUNC_RECOMPOSER(argsWithParentheses)</div><div class="ttdoc">Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки)...</div><div class="ttdef"><b>Определения</b> va_args.h:95</div></div>
 </div><!-- fragment -->
-<p>Вспомогательный макрос, используемый <code>DEFINE_MACRO_CHOOSER</code> для конструирования вызова макроса, специфичного для количества аргументов. Он принимает базовое имя (<code>arg_</code>) и список вариативных аргументов (который включает вывод <code>_NO_ARG_EXPANDER</code>) и использует <code>DEFINE_FUNC_RECOMPOSER</code> (и, следовательно, <code>DEFINE_FUNC_CHOOSER_7</code>) для выбора правильного имени макроса с суффиксом (например, <code>arg_1</code>, <code>arg_0</code>). </p>
+<p>Вспомогательный макрос, используемый <span class="tt"><a class="el" href="#a273c1a8de1c0ca2ed53c521bf0cd5744" title="Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например,...">DEFINE_MACRO_CHOOSER</a></span> для конструирования вызова макроса, специфичного для количества аргументов. Он принимает базовое имя (<span class="tt">arg_</span>) и список вариативных аргументов (который включает вывод <span class="tt">_NO_ARG_EXPANDER</span>) и использует <span class="tt"><a class="el" href="#af5e34cf96b6035dd3cd1dc9dfa6476a7" title="Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки)...">DEFINE_FUNC_RECOMPOSER</a></span> (и, следовательно, <span class="tt"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277" title="Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....">DEFINE_FUNC_CHOOSER_7</a></span>) для выбора правильного имени макроса с суффиксом (например, <span class="tt">arg_1</span>, <span class="tt">arg_0</span>). </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">arg_</td><td>Базовое имя целевого макроса. </td></tr>
-    <tr><td class="paramname">...</td><td>Вариативные аргументы, которые обязательно начинаются с раскрытия <code>target_##_NO_ARG_EXPANDER</code>, за которым следуют пользовательские аргументы. </td></tr>
+    <tr><td class="paramname">...</td><td>Вариативные аргументы, которые обязательно начинаются с раскрытия <span class="tt">target_##_NO_ARG_EXPANDER</span>, за которым следуют пользовательские аргументы. </td></tr>
   </table>
   </dd>
 </dl>
@@ -328,7 +307,7 @@ $(function(){ initResizable(false); });
 </div><div class="memdoc">
 <b>Макроопределение:</b><div class="fragment"><div class="line">N</div>
 </div><!-- fragment -->
-<p>Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов. Это ключевой компонент в механизме подсчета аргументов. Он эффективно сдвигает аргументы таким образом, что желаемый аргумент (который является одним из <code>_f1</code>...<code>_f7</code> в контексте <code>DEFINE_CHOOSE_FROM_ARG_COUNT</code>) становится параметром <code>N</code>, который затем возвращается. </p>
+<p>Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов. Это ключевой компонент в механизме подсчета аргументов. Он эффективно сдвигает аргументы таким образом, что желаемый аргумент (который является одним из <span class="tt">_f1</span>...<span class="tt">_f7</span> в контексте <span class="tt"><a class="el" href="#a78b009d490c9c1a85bead12393e7a052" title="Вспомогательный макрос, используемый DEFINE_MACRO_CHOOSER для конструирования вызова макроса,...">DEFINE_CHOOSE_FROM_ARG_COUNT</a></span>) становится параметром <span class="tt">N</span>, который затем возвращается. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">_f1</td><td>Заполнитель для версии имени макроса с 7 аргументами. </td></tr>
@@ -339,7 +318,7 @@ $(function(){ initResizable(false); });
     <tr><td class="paramname">_f6</td><td>Заполнитель для версии с 2 аргументами. </td></tr>
     <tr><td class="paramname">_f7</td><td>Заполнитель для версии с 1 аргументом (или с 0 аргументов в некоторых конструкциях). </td></tr>
     <tr><td class="paramname">N</td><td>Аргумент, который выбирается и возвращается макросом. </td></tr>
-    <tr><td class="paramname">...</td><td>Вариативные аргументы, которые фактически отбрасываются после выбора <code>N</code>. </td></tr>
+    <tr><td class="paramname">...</td><td>Вариативные аргументы, которые фактически отбрасываются после выбора <span class="tt">N</span>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -361,9 +340,9 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 <b>Макроопределение:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a4ffca670f54b97934a2f84ad3ec95277">DEFINE_FUNC_CHOOSER_7</a> argsWithParentheses</div>
-<div class="ttc" id="ava__args_8h_html_a4ffca670f54b97934a2f84ad3ec95277"><div class="ttname"><a href="#a4ffca670f54b97934a2f84ad3ec95277">DEFINE_FUNC_CHOOSER_7</a></div><div class="ttdeci">#define DEFINE_FUNC_CHOOSER_7(_f1, _f2, _f3, _f4, _f5, _f6, _f7, N,...)</div><div class="ttdoc">Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....</div><div class="ttdef"><b>Определения</b> va_args.h:89</div></div>
+<div class="ttc" id="ava__args_8h_html_a4ffca670f54b97934a2f84ad3ec95277"><div class="ttname"><a href="#a4ffca670f54b97934a2f84ad3ec95277">DEFINE_FUNC_CHOOSER_7</a></div><div class="ttdeci">#define DEFINE_FUNC_CHOOSER_7(_f1, _f2, _f3, _f4, _f5, _f6, _f7, N,...)</div><div class="ttdoc">Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....</div><div class="ttdef"><b>Определения</b> va_args.h:85</div></div>
 </div><!-- fragment -->
-<p>Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки) в <code>DEFINE_FUNC_CHOOSER_7</code>. Этот макрос по сути удаляет один уровень обработки макрорасширения, позволяя <code>DEFINE_FUNC_CHOOSER_7</code> правильно интерпретировать свои аргументы. </p>
+<p>Вспомогательный макрос, предназначенный для корректной передачи аргументов (уже заключенных в скобки) в <span class="tt"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277" title="Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....">DEFINE_FUNC_CHOOSER_7</a></span>. Этот макрос по сути удаляет один уровень обработки макрорасширения, позволяя <span class="tt"><a class="el" href="#a4ffca670f54b97934a2f84ad3ec95277" title="Вспомогательный макрос, используемый для выбора N-го аргумента из списка аргументов....">DEFINE_FUNC_CHOOSER_7</a></span> правильно интерпретировать свои аргументы. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">argsWithParentheses</td><td>Список аргументов, уже заключенный в одну пару скобок. </td></tr>
@@ -392,12 +371,12 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 <b>Макроопределение:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a78b009d490c9c1a85bead12393e7a052">DEFINE_CHOOSE_FROM_ARG_COUNT</a>(target_, target_##_NO_ARG_EXPANDER __VA_ARGS__ ())</div>
-<div class="ttc" id="ava__args_8h_html_a78b009d490c9c1a85bead12393e7a052"><div class="ttname"><a href="#a78b009d490c9c1a85bead12393e7a052">DEFINE_CHOOSE_FROM_ARG_COUNT</a></div><div class="ttdeci">#define DEFINE_CHOOSE_FROM_ARG_COUNT(arg_,...)</div><div class="ttdoc">Вспомогательный макрос, используемый DEFINE_MACRO_CHOOSER для конструирования вызова макроса,...</div><div class="ttdef"><b>Определения</b> va_args.h:129</div></div>
+<div class="ttc" id="ava__args_8h_html_a78b009d490c9c1a85bead12393e7a052"><div class="ttname"><a href="#a78b009d490c9c1a85bead12393e7a052">DEFINE_CHOOSE_FROM_ARG_COUNT</a></div><div class="ttdeci">#define DEFINE_CHOOSE_FROM_ARG_COUNT(arg_,...)</div><div class="ttdoc">Вспомогательный макрос, используемый DEFINE_MACRO_CHOOSER для конструирования вызова макроса,...</div><div class="ttdef"><b>Определения</b> va_args.h:125</div></div>
 </div><!-- fragment -->
-<p>Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например, <code>target_1</code>, <code>target_2</code>) на основе количества предоставленных вариативных аргументов. Он полагается на вспомогательный макрос с именем <code>target_##_NO_ARG_EXPANDER</code>, который должен быть определен пользователем. Этот макрос <code>_NO_ARG_EXPANDER</code> предоставляет необходимое заполнение и имя версии макроса <code>target_</code> для 0 аргументов. </p>
+<p>Основной макрос диспетчеризации, который выбирает конкретную реализацию макроса (например, <span class="tt">target_1</span>, <span class="tt">target_2</span>) на основе количества предоставленных вариативных аргументов. Он полагается на вспомогательный макрос с именем <span class="tt">target_##_NO_ARG_EXPANDER</span>, который должен быть определен пользователем. Этот макрос <span class="tt">_NO_ARG_EXPANDER</span> предоставляет необходимое заполнение и имя версии макроса <span class="tt">target_</span> для 0 аргументов. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target_</td><td>Базовое имя для набора "перегруженных" макросов (например, если <code>MY_MACRO</code>, то ожидаются реализации <code>MY_MACRO_1</code>, <code>MY_MACRO_2</code> и т.д.). </td></tr>
+    <tr><td class="paramname">target_</td><td>Базовое имя для набора "перегруженных" макросов (например, если <span class="tt">MY_MACRO</span>, то ожидаются реализации <span class="tt">MY_MACRO_1</span>, <span class="tt">MY_MACRO_2</span> и т.д.). </td></tr>
     <tr><td class="paramname">...</td><td>Вариативные аргументы, переданные в макрос, видимый пользователю. </td></tr>
   </table>
   </dd>
@@ -408,7 +387,7 @@ $(function(){ initResizable(false); });
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -1,0 +1,9 @@
+<map id="iridium::parsing::serialization::NodeView::NodeView" name="iridium::parsing::serialization::NodeView::NodeView">
+<area shape="rect" id="Node000001" title="Constructor for an attribute with a default value." alt="" coords="5,46,192,87"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from a source type to a target type." alt="" coords="269,13,396,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,51,254,42,254,47,192,56"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#abac7929c78b789e54779bd5b7dfad5de" title="Constructor for a list attribute." alt="" coords="240,78,426,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,77,225,81,224,86,192,82"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Default conversion function that is called when no specialization is found." alt="" coords="474,5,653,61"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,30,458,30,458,36,397,36"/>
+</map>

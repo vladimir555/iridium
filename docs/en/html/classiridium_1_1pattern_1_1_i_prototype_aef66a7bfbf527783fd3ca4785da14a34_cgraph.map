@@ -1,4 +1,4 @@
 <map id="iridium::pattern::IPrototype::clone" name="iridium::pattern::IPrototype::clone">
-<area shape="rect" id="Node000001" title="Creates a clone (a new instance that is a copy) of the current object. The exact nature of the copy (..." alt="" coords="5,29,181,70"/>
+<area shape="rect" id="Node000001" title="Creates a clone of the object." alt="" coords="5,29,181,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="59,29,58,19,63,10,75,5,93,3,112,5,124,11,121,16,111,10,93,8,77,10,67,14,63,20,65,28"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="iridium::testing::MockSequence::MockSequence" name="iridium::testing::MockSequence::MockSequence">
-<area shape="rect" id="Node000001" title="Constructs a MockSequence." alt="" coords="258,39,462,79"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#a436baea89315fbfb243acd40675b0d58" title="Adds an expectation for a const method call to the sequence." alt="" coords="5,5,210,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="258,39,462,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#a436baea89315fbfb243acd40675b0d58" title=" " alt="" coords="5,5,210,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,46,210,42,211,37,243,41"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock_sequence.html#a990a46bcc58c07ff5daf9a066ef64751" title="Adds an expectation for a non&#45;const method call to the sequence." alt="" coords="5,71,210,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_mock_sequence.html#a990a46bcc58c07ff5daf9a066ef64751" title=" " alt="" coords="5,71,210,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,77,211,81,210,75,242,71"/>
 </map>

@@ -1,6 +1,6 @@
 <map id="iridium::testing::TCmdArgs::DEFINE_ENUM" name="iridium::testing::TCmdArgs::DEFINE_ENUM">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,183,70"/>
-<area shape="rect" id="Node000002" href="$structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2" title=" " alt="" coords="231,29,408,70"/>
+<area shape="rect" id="Node000001" title="Перечисляет режимы выполнения тестов." alt="" coords="5,29,183,70"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2" title="Перечисляет основные команды, которые может выполнять средство запуска тестов." alt="" coords="231,29,408,70"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,47,215,47,215,52,183,52"/>
 <area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="277,29,275,19,282,10,297,5,319,3,344,5,358,11,356,16,342,10,319,8,298,10,285,15,280,21,282,28"/>
 </map>

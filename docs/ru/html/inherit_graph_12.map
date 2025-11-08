@@ -1,3 +1,3 @@
 <map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
-<area shape="rect" id="Node000000" href="$structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line.html" title="Представляет первую строку HTTP&#45;ответа, также известную как строка состояния." alt="" coords="5,5,211,46"/>
+<area shape="rect" id="Node000000" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01bool_01_4.html" title="Специализация для преобразования bool в std::string." alt="" coords="5,5,185,61"/>
 </map>

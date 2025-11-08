@@ -1,5 +1,5 @@
 <map id="iridium::io::Buffer" name="iridium::io::Buffer">
-<area shape="rect" id="Node000001" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="18,79,139,105"/>
+<area shape="rect" id="Node000001" title="Класс Buffer для работы с сырыми двоичными данными, унаследованный от std::vector&lt;uint8_t&gt;." alt="" coords="18,79,139,105"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,152,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
 </map>

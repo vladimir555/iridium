@@ -1,7 +1,5 @@
-<map id="iridium::parsing::serialization::NodeView::operator==" name="iridium::parsing::serialization::NodeView::operator==">
-<area shape="rect" id="Node000001" title="Оператор сравнения на равенство. Сравнивает значение узла с заданным значением." alt="" coords="5,5,192,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a582b2b6b1bba052ca52d6046a44e40bf" title="Получает значение узла, преобразуя его к типу TValue. Примечание: todo в исходном коде предполагает в..." alt="" coords="240,5,426,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,23,224,23,224,28,192,28"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="474,5,601,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="426,23,459,23,459,28,426,28"/>
+<map id="iridium::parsing::serialization::NodeView&lt; void &gt;::operator==" name="iridium::parsing::serialization::NodeView&lt; void &gt;::operator==">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,214,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#ab889fc48c7a4a322045694711bff13a5" title="Конструктор для корневого узла (только десериализация)." alt="" coords="262,5,467,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,23,246,23,246,28,214,28"/>
 </map>

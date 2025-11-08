@@ -1,5 +1,7 @@
 <map id="iridium::io::protocol::http::response::convert" name="iridium::io::protocol::http::response::convert">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,169,46"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="217,5,344,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,23,201,23,201,28,169,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,169,54"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="217,13,344,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,30,201,30,201,36,169,36"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Функция преобразования по умолчанию, которая вызывается, если не найдена специализация." alt="" coords="392,5,571,61"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="345,30,376,30,376,36,345,36"/>
 </map>

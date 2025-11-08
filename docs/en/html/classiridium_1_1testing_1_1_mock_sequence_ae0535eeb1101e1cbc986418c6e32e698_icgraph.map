@@ -1,5 +1,5 @@
 <map id="iridium::testing::MockSequence::isEqual" name="iridium::testing::MockSequence::isEqual">
-<area shape="rect" id="Node000001" title="Compares stored arguments (in std::any) with current call arguments." alt="" coords="258,5,462,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#a56f71b140a8c3379d8a5066e8563e082" title="Advances the sequence check for a method call. Verifies if the current method call matches the next e..." alt="" coords="5,5,210,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="258,5,462,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_sequence.html#a56f71b140a8c3379d8a5066e8563e082" title=" " alt="" coords="5,5,210,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,28,210,28,210,23,242,23"/>
 </map>

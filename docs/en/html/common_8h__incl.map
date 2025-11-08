@@ -1,0 +1,11 @@
+<map id="source/iridium/convertion/implementation/common.h" name="source/iridium/convertion/implementation/common.h">
+<area shape="rect" id="Node000001" title="Provides common metafunctions and conversion implementations for the type conversion framework." alt="" coords="92,5,270,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,88,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,49,82,88,79,83,146,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="112,94,165,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,48,155,81,150,79,168,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,94,258,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,45,212,79,208,81,189,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="282,94,350,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="216,44,283,83,281,88,213,49"/>
+</map>

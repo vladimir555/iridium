@@ -1,5 +1,7 @@
 <map id="iridium::pattern::NonMovable::NonMovable" name="iridium::pattern::NonMovable::NonMovable">
-<area shape="rect" id="Node000001" title="Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчан..." alt="" coords="242,5,430,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_movable.html#a00961d9171ac1e8a64b2cf92bc83495a" title="Удаленный конструктор перемещения (защищенный). Пытается предотвратить конструирование перемещением э..." alt="" coords="5,5,194,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,28,194,28,194,23,226,23"/>
+<area shape="rect" id="Node000001" title="Конструктор по умолчанию." alt="" coords="242,39,430,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_movable.html#a00961d9171ac1e8a64b2cf92bc83495a" title="Удаленный конструктор перемещения." alt="" coords="5,5,194,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,46,194,42,194,36,226,41"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_non_movable.html#acfc77bcb84bb0cc8b74bc96d182f4b5c" title="Удаленный оператор присваивания перемещением." alt="" coords="5,71,194,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="226,76,194,81,194,76,226,71"/>
 </map>

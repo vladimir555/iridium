@@ -1,5 +1,5 @@
 <map id="iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;" name="iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,109,170,165"/>
+<area shape="rect" id="Node000001" title="Потокобезопасный контейнер на основе std::unordered_map." alt="" coords="5,109,170,165"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="18,5,157,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,77,90,108,85,108,85,77"/>
 </map>

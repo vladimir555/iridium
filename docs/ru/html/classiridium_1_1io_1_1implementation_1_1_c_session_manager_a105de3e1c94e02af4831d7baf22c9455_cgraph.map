@@ -1,5 +1,5 @@
 <map id="iridium::io::implementation::CSessionManager::CSessionManager" name="iridium::io::implementation::CSessionManager::CSessionManager">
-<area shape="rect" id="Node000001" title="Конструирует экземпляр CSessionManager. Инициализирует внутренние компоненты, такие как мультиплексор..." alt="" coords="5,5,257,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,257,46"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d" title="Создает список разделяемых указателей на объекты типа TObject." alt="" coords="305,13,453,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,23,289,23,289,28,257,28"/>
 </map>

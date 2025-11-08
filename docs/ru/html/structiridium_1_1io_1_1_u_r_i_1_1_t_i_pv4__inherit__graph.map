@@ -1,5 +1,5 @@
 <map id="iridium::io::URI::TIPv4" name="iridium::io::URI::TIPv4">
-<area shape="rect" id="Node000001" title="Представляет IPv4&#45;адрес. Эта структура хранит IPv4&#45;адрес в виде массива из 4 байт." alt="" coords="6,79,159,105"/>
+<area shape="rect" id="Node000001" title="Представляет IPv4&#45;адрес." alt="" coords="6,79,159,105"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,160,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,46,85,79,80,79,80,46"/>
 </map>

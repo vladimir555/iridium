@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classruntime__error.html" title=" " alt="" coords="18,5,116,31"/>
+<area shape="rect" id="Node000001" href="$classiridium_1_1db_1_1_exception.html" title="Represents an exception specific to database operations." alt="" coords="177,31,324,56"/>
+<area shape="poly" id="edge22_Node000000_Node000001" title=" " alt="" coords="131,24,177,31,176,36,131,30"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,55,129,80"/>
+<area shape="poly" id="edge23_Node000002_Node000001" title=" " alt="" coords="144,55,176,51,177,56,144,60"/>
+</map>

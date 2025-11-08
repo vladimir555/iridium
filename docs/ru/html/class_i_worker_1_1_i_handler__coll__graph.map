@@ -1,5 +1,5 @@
 <map id="IWorker&lt; TInputItem, TOutputItem &gt;::IHandler" name="IWorker&lt; TInputItem, TOutputItem &gt;::IHandler">
-<area shape="rect" id="Node000001" title=" " alt="" coords="14,79,181,120"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,5,190,31"/>
+<area shape="rect" id="Node000001" title="Интерфейс для обработчика, который обрабатывает элементы." alt="" coords="14,79,181,120"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,5,190,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,46,100,79,95,79,95,46"/>
 </map>

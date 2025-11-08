@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title=" " alt="" coords="611,5,756,46"/>
 <area shape="rect" id="Node000002" href="$va__args_8h.html" title="Предоставляет набор макросов препроцессора для эмуляции диспетчеризации вариативных макросов на основ..." alt="" coords="5,102,173,127"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="611,38,418,62,185,97,163,101,162,95,185,91,417,57,610,33"/>
-<area shape="rect" id="Node000003" href="$items_8h.html" title=" " alt="" coords="197,102,304,127"/>
+<area shape="rect" id="Node000003" href="$items_8h.html" title="Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами." alt="" coords="197,102,304,127"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="611,41,474,64,316,97,305,99,304,94,315,91,473,59,610,35"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="327,102,395,127"/>
 <area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="611,44,513,66,407,97,403,98,401,93,406,91,512,61,610,39"/>

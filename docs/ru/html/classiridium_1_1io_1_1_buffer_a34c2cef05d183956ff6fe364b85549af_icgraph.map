@@ -1,0 +1,10 @@
+<map id="iridium::io::Buffer::checkSuffixEqual" name="iridium::io::Buffer::checkSuffixEqual">
+<area shape="rect" id="Node000001" title="Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы." alt="" coords="342,39,473,79"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705" title="Конструктор по умолчанию." alt="" coords="174,39,294,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="326,62,294,62,294,56,326,56"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="261,25,251,20,234,17,218,19,209,24,205,30,207,38,201,38,200,29,205,20,217,14,234,12,252,14,263,21"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#aa42fbefe176a94e58a1373de1aef5fe8" title="Конструирует буфер из строки в стиле C." alt="" coords="5,5,126,46"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="158,47,126,40,127,35,159,41"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_buffer.html#addea15640d3fd8f123b4396e42814394" title="Конструирует буфер из вариативного списка аргументов." alt="" coords="5,71,126,111"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="159,76,127,82,126,77,158,71"/>
+</map>

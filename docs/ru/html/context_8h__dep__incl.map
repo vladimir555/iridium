@@ -1,6 +1,6 @@
 <map id="source/iridium/io/context.h" name="source/iridium/io/context.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="391,5,565,31"/>
-<area shape="rect" id="Node000002" href="$context__manager_8h.html" title=" " alt="" coords="423,153,586,193"/>
+<area shape="rect" id="Node000001" title="Определяет интерфейсы для управления контекстом ввода&#45;вывода и каналами." alt="" coords="391,5,565,31"/>
+<area shape="rect" id="Node000002" href="$context__manager_8h.html" title="Определяет интерфейс IContextManager для управления контекстами ввода&#45;вывода." alt="" coords="423,153,586,193"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,44,444,73,442,89,444,104,460,129,481,151,477,154,456,133,439,106,436,89,439,72,455,42"/>
 <area shape="rect" id="Node000006" href="$implementation_2session__manager_8h.html" title=" " alt="" coords="212,249,421,290"/>
 <area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="405,38,357,55,306,79,260,111,241,131,224,154,219,167,219,179,232,204,255,227,282,246,279,251,252,231,228,208,214,181,214,166,219,151,236,128,257,107,304,74,355,50,404,33"/>

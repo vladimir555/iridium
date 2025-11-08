@@ -10,7 +10,7 @@ var searchData=
   ['define_5fconvert_7',['DEFINE_CONVERT',['../convert_8h.html#ab6323540b384b64371e62ea6e910317b',1,'convert.h']]],
   ['define_5fcreate_8',['DEFINE_CREATE',['../smart__ptr_8h.html#a7b255e639c04a37d3f29607a6b35422f',1,'smart_ptr.h']]],
   ['define_5fenum_9',['DEFINE_ENUM',['../enum_8h.html#acf1825d3b8e6ea6b7e5f4dbc5bacae6d',1,'enum.h']]],
-  ['define_5fenum_5fhash_10',['DEFINE_ENUM_HASH',['../enum_8h.html#a7151ea67f21b2554c01c830d398cf46a',1,'enum.h']]],
+  ['define_5fenum_5fconvert_10',['DEFINE_ENUM_CONVERT',['../enum_8h.html#a725b5a389a0ab2c44e8fdfa18534c50d',1,'enum.h']]],
   ['define_5ffunc_5fchooser_5f7_11',['DEFINE_FUNC_CHOOSER_7',['../va__args_8h.html#a4ffca670f54b97934a2f84ad3ec95277',1,'va_args.h']]],
   ['define_5ffunc_5frecomposer_12',['DEFINE_FUNC_RECOMPOSER',['../va__args_8h.html#af5e34cf96b6035dd3cd1dc9dfa6476a7',1,'va_args.h']]],
   ['define_5fimplementation_13',['DEFINE_IMPLEMENTATION',['../smart__ptr_8h.html#ad4d8992039d0faf9ae66c4f596277280',1,'smart_ptr.h']]],
@@ -43,7 +43,7 @@ var searchData=
   ['define_5fnode_5fptr_40',['DEFINE_NODE_PTR',['../serialization_2node_8h.html#aedcb3ac4bd4064c6b5bcc1014dd33080',1,'node.h']]],
   ['define_5froot_5fnode_5fbegin_41',['DEFINE_ROOT_NODE_BEGIN',['../serialization_2node_8h.html#aac8f5e72dee27b1c9479d82a20f96f62',1,'node.h']]],
   ['define_5froot_5fnode_5fbegin_5f1_42',['DEFINE_ROOT_NODE_BEGIN_1',['../serialization_2node_8h.html#ac0d4794eb438b9b61fcf728aa00f7fd2',1,'node.h']]],
-  ['define_5froot_5fnode_5fbegin_5f2_43',['DEFINE_ROOT_NODE_BEGIN_2',['../serialization_2node_8h.html#a7f018fdfb6121484592a761b4ab9eb18',1,'node.h']]],
+  ['define_5froot_5fnode_5fbegin_5f2_43',['DEFINE_ROOT_NODE_BEGIN_2',['../serialization_2node_8h.html#a0128699a9a0013cbd3be6218e02d3efc',1,'node.h']]],
   ['define_5froot_5fnode_5fend_44',['DEFINE_ROOT_NODE_END',['../serialization_2node_8h.html#a7b4e724573d774904e29ede08ef7b17a',1,'node.h']]],
   ['define_5fsmart_5fptr_45',['DEFINE_SMART_PTR',['../smart__ptr_8h.html#a1a04d783d36160af9cbb6c9496eae0c2',1,'smart_ptr.h']]],
   ['disable_5fc26827_46',['DISABLE_C26827',['../enum_8h.html#a32df6871bb7c7df666953fc61342710d',1,'enum.h']]]

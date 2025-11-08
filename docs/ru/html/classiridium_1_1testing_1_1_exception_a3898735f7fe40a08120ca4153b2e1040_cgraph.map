@@ -1,5 +1,5 @@
 <map id="iridium::testing::Exception::Exception" name="iridium::testing::Exception::Exception">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,178,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title=" " alt="" coords="226,5,398,46"/>
+<area shape="rect" id="Node000001" title="Конструктор." alt="" coords="5,5,178,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="226,5,398,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,23,210,23,210,28,178,28"/>
 </map>

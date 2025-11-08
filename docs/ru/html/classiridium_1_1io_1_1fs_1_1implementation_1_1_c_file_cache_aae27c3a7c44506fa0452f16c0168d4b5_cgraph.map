@@ -1,10 +1,10 @@
 <map id="iridium::io::fs::implementation::CFileCache::initialize" name="iridium::io::fs::implementation::CFileCache::initialize">
-<area shape="rect" id="Node000001" title="Инициализирует кэш, потенциально загружая его содержимое из связанного файла. Этот метод вызывается к..." alt="" coords="5,85,198,126"/>
+<area shape="rect" id="Node000001" title="Выполняет логику инициализации объекта." alt="" coords="5,85,198,126"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="486,85,646,126"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,83,179,48,211,32,245,20,299,8,342,3,385,7,439,20,490,43,532,73,529,77,487,48,437,25,385,12,342,8,299,13,246,25,214,37,182,53,130,87"/>
-<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="310,35,374,61"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="310,35,374,61"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,82,294,57,296,62,190,87"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#af98955e86becccc7cf8416aaceb43950" title="Добавляет строку в кэш и возвращает присвоенный ей идентификатор (индекс). Строка сохраняется внутри,..." alt="" coords="246,85,438,126"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#af98955e86becccc7cf8416aaceb43950" title="Добавляет строку в кэш." alt="" coords="246,85,438,126"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="198,103,230,103,230,108,198,108"/>
 <area shape="rect" id="Node000005" href="$namespaceiridium_1_1io_1_1fs.html#a055a5bef61c863eb58873ce80e37851f" title=" " alt="" coords="254,150,430,176"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="190,124,270,143,269,148,189,129"/>

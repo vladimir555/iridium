@@ -1,14 +1,14 @@
 <map id="IProcess" name="IProcess">
-<area shape="rect" id="Node000001" title="Interface for interacting with a system process. It defines methods to get the state of a process and..." alt="" coords="151,300,225,326"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_stream_port.html" title="Interface for a duplex I/O stream port, combining reading and writing capabilities...." alt="" coords="110,226,266,252"/>
+<area shape="rect" id="Node000001" title="An interface for controlling and interacting with a system process." alt="" coords="151,300,225,326"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_i_stream_port.html" title="Interface for a stream that supports both reading and writing." alt="" coords="110,226,266,252"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,267,191,300,185,300,185,267"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream_reader.html" title="Interface for readable I/O streams. Defines the contract for streams from which data can be read...." alt="" coords="5,153,179,178"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream_reader.html" title="Interface for a readable stream." alt="" coords="5,153,179,178"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,186,174,224,170,228,119,190"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_i_stream.html" title="Base interface for I/O streams. Provides common functionalities for all stream types,..." alt="" coords="122,79,254,105"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1_i_stream.html" title="Base interface for all stream types." alt="" coords="122,79,254,105"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="161,116,110,154,106,150,158,112"/>
-<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Interface for writable I/O streams. Defines the contract for streams to which data can be written...." alt="" coords="203,153,368,178"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Interface for a writable stream." alt="" coords="203,153,368,178"/>
 <area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="218,112,271,150,267,154,215,116"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="96,5,280,31"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps." alt="" coords="96,5,280,31"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="191,46,191,79,185,79,185,46"/>
 <area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="258,190,206,228,203,224,255,186"/>
 </map>

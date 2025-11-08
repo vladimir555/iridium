@@ -1,5 +1,7 @@
 <map id="iridium::parsing::serialization::NodeView::get" name="iridium::parsing::serialization::NodeView::get">
-<area shape="rect" id="Node000001" title="Gets the value of the node, converting it to TValue. Note: A todo in the source suggests lazy convers..." alt="" coords="5,5,192,46"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="240,5,367,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,23,224,23,224,28,192,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,192,54"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from a source type to a target type." alt="" coords="240,13,367,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,30,224,30,224,36,192,36"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert.html#a216f6c89724432b93e8d4b3c0beca7e0" title="Default conversion function that is called when no specialization is found." alt="" coords="415,5,594,61"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="368,30,399,30,399,36,368,36"/>
 </map>

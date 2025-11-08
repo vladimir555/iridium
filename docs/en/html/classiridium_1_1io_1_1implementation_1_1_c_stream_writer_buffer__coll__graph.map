@@ -1,12 +1,12 @@
 <map id="iridium::io::implementation::CStreamWriterBuffer" name="iridium::io::implementation::CStreamWriterBuffer">
-<area shape="rect" id="Node000001" title="Implements a writable stream (IStreamWriter) that writes to a Buffer. The writing appends data to the..." alt="" coords="101,241,275,282"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="101,241,275,282"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Base class for stream implementations that operate on an underlying memory buffer...." alt="" coords="5,153,179,193"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,202,168,239,165,243,123,206"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream.html" title="Base interface for I/O streams. Provides common functionalities for all stream types,..." alt="" coords="122,79,254,105"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_i_stream.html" title="Base interface for all stream types." alt="" coords="122,79,254,105"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,117,117,154,114,150,160,113"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Interface for writable I/O streams. Defines the contract for streams to which data can be written...." alt="" coords="203,160,368,186"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Interface for a writable stream." alt="" coords="203,160,368,186"/>
 <area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="216,112,272,158,269,162,213,116"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps in their lifecycle...." alt="" coords="96,5,280,31"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Interface for objects that require explicit initialization and finalization steps." alt="" coords="96,5,280,31"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="191,46,191,79,185,79,185,46"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="262,198,212,243,208,239,259,194"/>
 </map>

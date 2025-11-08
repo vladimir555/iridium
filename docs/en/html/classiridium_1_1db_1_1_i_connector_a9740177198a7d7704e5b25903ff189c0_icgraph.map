@@ -1,0 +1,6 @@
+<map id="iridium::db::IConnector::makeFields" name="iridium::db::IConnector::makeFields">
+<area shape="rect" id="Node000001" title="Extracts the field names from a result set." alt="" coords="207,29,360,70"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1db_1_1_i_connector.html#a939daf8ceefd0b643b0db17dc867acbd" title="Sends a query to the database." alt="" coords="5,29,159,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,52,159,52,159,47,191,47"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="115,16,102,10,82,8,63,10,51,15,47,20,49,28,44,29,42,19,48,10,62,5,82,3,104,5,117,11"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="iridium::threading::Synchronized::interrupt" name="iridium::threading::Synchronized::interrupt">
 <area shape="rect" id="Node000001" title="Прерывает все потоки, ожидающие на условной переменной этого объекта Synchronized...." alt="" coords="264,13,427,54"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html#aff67e2bca4429e477f7a3f72979c6688" title="Прерывает любые потоки, ожидающие выполнения операций pop(). Это приводит к тому, что ожидающие вызов..." alt="" coords="5,5,216,61"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html#aff67e2bca4429e477f7a3f72979c6688" title="Прерывает операции с очередью." alt="" coords="5,5,216,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,36,216,36,216,30,248,30"/>
 </map>

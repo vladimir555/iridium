@@ -4,19 +4,19 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1088,73,1121,73,1121,78,1088,78"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="638,5,833,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="808,33,889,52,888,57,807,38"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title="Интерфейс для читаемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFileSt..." alt="" coords="650,55,821,96"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title="Интерфейс для файлового потока, доступного для чтения." alt="" coords="650,55,821,96"/>
 <area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="837,73,880,73,880,78,837,78"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title="Базовый интерфейс для файловых потоков. Расширяет общий интерфейс IStream специфичными для файлов опе..." alt="" coords="418,95,589,120"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title="Базовый интерфейс для файловых потоков, расширяющий IStream специфичными для файлов операциями." alt="" coords="418,95,589,120"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="604,91,649,85,650,90,605,96"/>
-<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title="Интерфейс для записываемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFi..." alt="" coords="650,120,821,161"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title="Интерфейс для файлового потока, доступного для записи." alt="" coords="650,120,821,161"/>
 <area shape="poly" id="edge10_Node000009_Node000005" title=" " alt="" coords="605,119,650,126,649,131,604,125"/>
-<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="238,95,369,120"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для всех типов потоков." alt="" coords="238,95,369,120"/>
 <area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="385,105,418,105,418,110,385,110"/>
-<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="417,45,590,71"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для потока, доступного для чтения." alt="" coords="417,45,590,71"/>
 <area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="373,88,448,69,449,74,374,93"/>
-<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="421,144,586,170"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для потока, доступного для записи." alt="" coords="421,144,586,170"/>
 <area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="374,122,449,141,448,146,373,127"/>
-<area shape="rect" id="Node000007" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,95,190,120"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации." alt="" coords="5,95,190,120"/>
 <area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="206,105,237,105,237,110,206,110"/>
 <area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="606,63,649,66,649,72,606,68"/>
 <area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="827,113,898,94,900,99,828,119"/>

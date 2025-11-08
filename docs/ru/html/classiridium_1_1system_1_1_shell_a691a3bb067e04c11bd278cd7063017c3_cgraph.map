@@ -1,9 +1,7 @@
 <map id="iridium::system::Shell::run" name="iridium::system::Shell::run">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,179,80"/>
+<area shape="rect" id="Node000001" title="Выполняет команду оболочки." alt="" coords="5,31,179,56"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="227,5,367,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,51,225,33,226,38,149,57"/>
-<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="265,55,329,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,65,249,65,249,70,179,70"/>
-<area shape="rect" id="Node000004" href="$uri_8cpp.html#a7ce03c96592d1378cf871e564b077f90" title="Предоставляет доступ к шаблонной функции преобразования указателей из пространства имен реализации...." alt="" coords="256,104,338,130"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,78,242,101,240,106,148,84"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,30,211,26,211,31,179,35"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="265,55,329,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,51,249,59,249,65,179,56"/>
 </map>

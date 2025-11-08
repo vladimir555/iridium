@@ -1,5 +1,5 @@
 <map id="iridium::threading::implementation::CThread::getName" name="iridium::threading::implementation::CThread::getName">
-<area shape="rect" id="Node000001" title="Gets the name of this thread." alt="" coords="229,5,404,61"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Compares this CThread object with another IThread object. The comparison is based on the thread name." alt="" coords="5,5,181,61"/>
+<area shape="rect" id="Node000001" title="Gets the name of the thread." alt="" coords="229,5,404,61"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Comparison operator for sorting threads." alt="" coords="5,5,181,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,36,181,36,181,30,213,30"/>
 </map>

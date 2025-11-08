@@ -1,4 +1,4 @@
 <map id="iridium::io::fs::IFileStream::getStatus" name="iridium::io::fs::IFileStream::getStatus">
-<area shape="rect" id="Node000001" title="Macro used to define common interface elements (e.g., virtual destructor)." alt="" coords="5,29,177,70"/>
+<area shape="rect" id="Node000001" title="Gets the status of the file." alt="" coords="5,29,177,70"/>
 <area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="58,29,56,19,62,11,73,5,91,3,110,5,121,11,118,16,108,10,91,8,75,10,65,14,62,20,63,28"/>
 </map>

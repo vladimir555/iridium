@@ -1,5 +1,5 @@
 <map id="source/iridium/db/implementation/mysql_connector.h" name="source/iridium/db/implementation/mysql_connector.h">
-<area shape="rect" id="Node000001" title="Определяет класс CMySQLConnector, конкретную реализацию IConnector для баз данных MySQL...." alt="" coords="5,5,218,46"/>
-<area shape="rect" id="Node000002" href="$build__flags_8h.html" title=" " alt="" coords="43,94,180,120"/>
+<area shape="rect" id="Node000001" title="Определяет класс CMySQLConnector для подключения к базе данных MySQL." alt="" coords="5,5,218,46"/>
+<area shape="rect" id="Node000002" href="$build__flags_8h.html" title="Определяет флаги препроцессора для условной компиляции. Эти флаги устанавливаются системой сборки (на..." alt="" coords="43,94,180,120"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,46,114,78,109,78,109,46"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="URI::TIPv6" name="URI::TIPv6">
-<area shape="rect" id="Node000001" title="Represents an IPv6 address. This structure stores an IPv6 address as an array of 8 16&#45;bit integers." alt="" coords="23,94,111,120"/>
+<area shape="rect" id="Node000001" title="Represents an IPv6 address." alt="" coords="23,94,111,120"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,129,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,62,70,93,64,93,64,62"/>
 </map>

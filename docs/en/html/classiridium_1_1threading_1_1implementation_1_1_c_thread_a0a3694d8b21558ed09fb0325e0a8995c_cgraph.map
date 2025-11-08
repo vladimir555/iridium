@@ -1,12 +1,12 @@
 <map id="iridium::threading::implementation::CThread::run" name="iridium::threading::implementation::CThread::run">
-<area shape="rect" id="Node000001" title="The static function executed by the std::thread. It sets the thread name, calls the run() method of t..." alt="" coords="5,71,207,111"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Gets the name of the currently executing thread (statically, from thread&#45;local storage)." alt="" coords="263,5,432,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,71,207,111"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Gets the name of the current thread." alt="" coords="263,5,432,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,68,254,48,255,53,184,73"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1_i_async_queue_pusher.html#ab485c0d1679e5190cda877e475800c38" title="Pushes a single item into the queue. Adds the specified item to the end of the queue." alt="" coords="255,71,440,111"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1_i_async_queue_pusher.html#ab485c0d1679e5190cda877e475800c38" title="Pushes a single item to the queue." alt="" coords="255,71,440,111"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,88,239,88,239,94,207,94"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Sets the name for the currently executing thread (statically, in thread&#45;local storage)...." alt="" coords="263,136,432,177"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Sets the name of the current thread." alt="" coords="263,136,432,177"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="184,109,255,129,254,134,183,114"/>
-<area shape="rect" id="Node000003" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="488,78,552,104"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from a source type to a target type." alt="" coords="488,78,552,104"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="408,44,441,57,475,70,473,75,439,61,406,49"/>
 <area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="406,133,439,121,473,107,475,112,441,125,408,138"/>
 </map>

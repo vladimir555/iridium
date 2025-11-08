@@ -1,5 +1,5 @@
 <map id="iridium::assertComplete" name="iridium::assertComplete">
-<area shape="rect" id="Node000001" title="Эта функция computes assertComplete. Russian detailed description (if any)." alt="" coords="213,5,372,31"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#af5615899b0c7912b55caa6b7bc7eb0a2" title="Эта функция computes assertComplete. Russian detailed description (if any)." alt="" coords="5,5,165,31"/>
+<area shape="rect" id="Node000001" title="Утверждает, что контейнер не пуст, и выбрасывает пользовательское исключение, если это так." alt="" coords="213,5,372,31"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#af5615899b0c7912b55caa6b7bc7eb0a2" title="Утверждает, что контейнер не пуст, и выбрасывает std::runtime_error, если это так." alt="" coords="5,5,165,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,21,165,21,165,16,197,16"/>
 </map>

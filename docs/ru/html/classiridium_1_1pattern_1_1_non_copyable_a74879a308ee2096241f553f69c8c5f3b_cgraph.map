@@ -1,5 +1,5 @@
 <map id="iridium::pattern::NonCopyable::NonCopyable" name="iridium::pattern::NonCopyable::NonCopyable">
-<area shape="rect" id="Node000001" title="Удаленный конструктор копирования (защищенный). Явно запрещает копирование экземпляров производных кл..." alt="" coords="5,5,200,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b" title="Защищенный конструктор по умолчанию. Позволяет производным классам быть сконструированными по умолчан..." alt="" coords="248,5,442,46"/>
+<area shape="rect" id="Node000001" title="Удаленный конструктор копирования." alt="" coords="5,5,200,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_copyable.html#ad479debaa1ed429c9b6713e94dfde55b" title="Конструктор по умолчанию." alt="" coords="248,5,442,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,23,232,23,232,28,200,28"/>
 </map>

@@ -1,16 +1,18 @@
 <map id="source/iridium/io/protocol/http/implementation/mime.h" name="source/iridium/io/protocol/http/implementation/mime.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,192,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="15,168,54,193"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,48,62,95,43,154,38,152,57,93,83,45"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="72,94,125,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,46,101,78,96,78,96,46"/>
-<area shape="rect" id="Node000004" href="$singleton_8h.html" title=" " alt="" coords="149,94,320,120"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="134,44,202,84,200,88,131,49"/>
-<area shape="poly" id="edge7_Node000004_Node000002" title=" " alt="" coords="201,123,69,169,68,164,199,118"/>
-<area shape="rect" id="Node000005" href="$non__copyable_8h.html" title=" " alt="" coords="78,168,191,193"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="219,122,165,160,162,156,216,118"/>
-<area shape="rect" id="Node000006" href="$non__movable_8h.html" title=" " alt="" coords="214,168,324,193"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="243,119,259,152,254,155,238,121"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="348,168,417,193"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="261,118,345,158,342,163,258,123"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="21,5,207,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,168,44,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,48,42,155,37,153,100,45"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="87,94,141,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="117,46,117,78,111,78,111,46"/>
+<area shape="rect" id="Node000004" href="$singleton_8h.html" title=" " alt="" coords="169,94,339,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,44,221,84,218,88,148,49"/>
+<area shape="poly" id="edge7_Node000004_Node000002" title=" " alt="" coords="212,123,59,170,58,165,211,118"/>
+<area shape="rect" id="Node000005" href="$non__copyable_8h.html" title=" " alt="" coords="68,168,181,193"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="233,123,161,162,159,157,231,118"/>
+<area shape="rect" id="Node000006" href="$non__movable_8h.html" title=" " alt="" coords="205,168,314,193"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="257,120,260,152,255,152,252,120"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="338,168,407,193"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="275,118,341,157,338,162,273,122"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="430,168,491,193"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="290,118,417,161,415,166,288,123"/>
 </map>

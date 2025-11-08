@@ -1,0 +1,5 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$classiridium_1_1io_1_1protocol_1_1http_1_1_i_content_storage.html" title="Интерфейс для системы хранения контента, используемый для получения HTTP&#45;контента (например,..." alt="" coords="5,13,160,54"/>
+<area shape="rect" id="Node000001" href="$classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html" title="Конкретная реализация IContentStorage, которая обслуживает контент из локального каталога файловой си..." alt="" coords="208,5,355,61"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="175,30,207,30,207,36,175,36"/>
+</map>

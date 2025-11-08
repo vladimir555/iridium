@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Структура iridium::pattern::FSM&lt; TState, TEvent &gt;::TTransition</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a class="el" href="classiridium_1_1pattern_1_1_f_s_m.html">FSM</a></li><li class="navelem"><a class="el" href="structiridium_1_1pattern_1_1_f_s_m_1_1_t_transition.html">TTransition</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1pattern.html">pattern</a></li><li class="navelem"><a href="classiridium_1_1pattern_1_1_f_s_m.html">FSM</a></li><li class="navelem"><a href="structiridium_1_1pattern_1_1_f_s_m_1_1_t_transition.html">TTransition</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,20 +83,26 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>Представляет переход в <a class="el" href="classiridium_1_1pattern_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>.  
+ <a href="#details">Подробнее...</a></p>
+
 <p><code>#include &lt;<a class="el" href="fsm_8h_source.html">fsm.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Открытые атрибуты</h2></td></tr>
 <tr class="memitem:a60ee103ca3f2cbf51727cd71703796de" id="r_a60ee103ca3f2cbf51727cd71703796de"><td class="memItemLeft" align="right" valign="top">TState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60ee103ca3f2cbf51727cd71703796de">from</a></td></tr>
-<tr class="separator:a60ee103ca3f2cbf51727cd71703796de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a60ee103ca3f2cbf51727cd71703796de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Исходное состояние.  <br /></td></tr>
 <tr class="memitem:afbc96fbd65828c50b39b67e42ff8c945" id="r_afbc96fbd65828c50b39b67e42ff8c945"><td class="memItemLeft" align="right" valign="top">TEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbc96fbd65828c50b39b67e42ff8c945">event</a></td></tr>
-<tr class="separator:afbc96fbd65828c50b39b67e42ff8c945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:afbc96fbd65828c50b39b67e42ff8c945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Событие, которое вызывает переход.  <br /></td></tr>
 <tr class="memitem:aeaf88ed709a570de70f624aec5e207be" id="r_aeaf88ed709a570de70f624aec5e207be"><td class="memItemLeft" align="right" valign="top">TState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaf88ed709a570de70f624aec5e207be">to</a></td></tr>
-<tr class="separator:aeaf88ed709a570de70f624aec5e207be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aeaf88ed709a570de70f624aec5e207be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конечное состояние.  <br /></td></tr>
 <tr class="memitem:a3da2e6f734ae18e505319e316f3d59ac" id="r_a3da2e6f734ae18e505319e316f3d59ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiridium_1_1pattern_1_1_f_s_m.html#a1ef8590cd39f89124d69e87dc14a706e">THandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3da2e6f734ae18e505319e316f3d59ac">handler</a></td></tr>
-<tr class="separator:a3da2e6f734ae18e505319e316f3d59ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a3da2e6f734ae18e505319e316f3d59ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик, который будет выполнен при переходе.  <br /></td></tr>
 </table>
-<h2 class="groupheader">Данные класса</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TState, typename TEvent&gt;<br />
+struct iridium::pattern::FSM&lt; TState, TEvent &gt;::TTransition</div><p>Представляет переход в <a class="el" href="classiridium_1_1pattern_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>. </p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Данные класса</h2>
 <a id="afbc96fbd65828c50b39b67e42ff8c945" name="afbc96fbd65828c50b39b67e42ff8c945"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afbc96fbd65828c50b39b67e42ff8c945">&#9670;&#160;</a></span>event</h2>
 
@@ -123,6 +116,8 @@ template&lt;typename TState, typename TEvent&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Событие, которое вызывает переход. </p>
 
 </div>
 </div>
@@ -140,6 +135,8 @@ template&lt;typename TState, typename TEvent&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Исходное состояние. </p>
+
 </div>
 </div>
 <a id="a3da2e6f734ae18e505319e316f3d59ac" name="a3da2e6f734ae18e505319e316f3d59ac"></a>
@@ -155,6 +152,8 @@ template&lt;typename TState, typename TEvent&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Обработчик, который будет выполнен при переходе. </p>
 
 </div>
 </div>
@@ -172,6 +171,8 @@ template&lt;typename TState, typename TEvent&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Конечное состояние. </p>
+
 </div>
 </div>
 <hr/>Объявления и описания членов структуры находятся в файле:<ul>
@@ -180,7 +181,7 @@ template&lt;typename TState, typename TEvent&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

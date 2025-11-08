@@ -1,12 +1,12 @@
 <map id="iridium::threading::IThread::setNameStatic" name="iridium::threading::IThread::setNameStatic">
-<area shape="rect" id="Node000001" title="Устанавливает имя для текущего выполняющегося потока (статически, в локальном хранилище потока)...." alt="" coords="478,67,646,107"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609" title="Получает имя этого конкретного экземпляра потока. Имя может быть присвоено во время создания или иниц..." alt="" coords="262,29,396,70"/>
+<area shape="rect" id="Node000001" title="Устанавливает имя текущего потока." alt="" coords="478,67,646,107"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_thread.html#ac77515331f681e6107fc2d4e42110609" title="Возвращает имя потока." alt="" coords="262,29,396,70"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,74,397,63,397,58,463,68"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title="Статическая функция, выполняемая std::thread. Устанавливает имя потока, вызывает метод run() объекта ..." alt="" coords="229,99,430,139"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title=" " alt="" coords="229,99,430,139"/>
 <area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="463,103,431,108,430,102,462,98"/>
 <area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="367,16,353,10,329,8,307,10,294,15,289,21,291,28,285,29,283,19,291,10,306,5,329,3,354,5,369,11"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Сравнивает этот объект CThread с другим объектом IThread. Сравнение основано на имени потока." alt="" coords="5,18,181,74"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a62060c91912eeff54a4a9c063a2645ae" title="Оператор сравнения для сортировки потоков." alt="" coords="5,18,181,74"/>
 <area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="247,51,181,50,181,44,247,46"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Инициализирует поток, что включает запуск базового std::thread и ожидание сигнала об успешном запуске..." alt="" coords="5,98,181,154"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a39b985df9f70f9502198035353b1eedc" title="Выполняет логику инициализации объекта." alt="" coords="5,98,181,154"/>
 <area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="213,125,181,126,181,121,213,120"/>
 </map>

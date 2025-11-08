@@ -1,5 +1,5 @@
 <map id="source/iridium/strings.h" name="source/iridium/strings.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="34,5,190,31"/>
+<area shape="rect" id="Node000001" title="Предоставляет набор вспомогательных функций для работы со строками." alt="" coords="34,5,190,31"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,79,59,105"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,34,58,71,55,67,97,30"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="83,79,141,105"/>

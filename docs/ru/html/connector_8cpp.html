@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Файл source/iridium/db/connector.cpp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_4490cffa6fbf901f1112b93bd5ef4d44.html">db</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_4490cffa6fbf901f1112b93bd5ef4d44.html">db</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -95,53 +82,85 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Файл connector.cpp</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Реализует интерфейс <span class="tt"><a class="el" href="class_i_connector.html" title="Интерфейс для коннектора к базе данных. Этот интерфейс определяет контракт для классов,...">IConnector</a></span>.  
+<a href="#details">Подробнее...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="connector_8h_source.html">connector.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для connector.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="connector_8cpp__incl.png" border="0" usemap="#asource_2iridium_2db_2connector_8cpp" alt=""/></div>
+<div class="center"><img src="connector_8cpp__incl.png" border="0" usemap="#asource_2iridium_2db_2connector_8cpp" loading="lazy" alt=""/></div>
 <map name="asource_2iridium_2db_2connector_8cpp" id="asource_2iridium_2db_2connector_8cpp">
-<area shape="rect" title=" " alt="" coords="238,5,443,31"/>
-<area shape="rect" href="connector_8h.html" title="Определяет интерфейс IConnector для взаимодействия с базой данных и класс Exception для ошибок базы д..." alt="" coords="296,79,385,105"/>
-<area shape="poly" title=" " alt="" coords="343,31,343,63,338,63,338,31"/>
-<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="5,153,188,178"/>
-<area shape="poly" title=" " alt="" coords="300,108,153,150,152,145,298,103"/>
-<area shape="rect" title=" " alt="" coords="212,153,290,178"/>
-<area shape="poly" title=" " alt="" coords="327,107,280,145,276,141,324,103"/>
-<area shape="rect" title=" " alt="" coords="314,153,367,178"/>
-<area shape="poly" title=" " alt="" coords="343,105,343,137,338,137,338,105"/>
-<area shape="rect" title=" " alt="" coords="392,153,449,178"/>
-<area shape="poly" title=" " alt="" coords="356,103,398,140,394,144,352,107"/>
-<area shape="rect" title=" " alt="" coords="473,153,520,178"/>
-<area shape="poly" title=" " alt="" coords="368,103,460,145,458,150,366,108"/>
-<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="32,226,161,252"/>
-<area shape="poly" title=" " alt="" coords="99,179,99,211,94,211,94,179"/>
-<area shape="rect" title=" " alt="" coords="62,300,131,326"/>
-<area shape="poly" title=" " alt="" coords="99,252,99,284,94,284,94,252"/>
+<area shape="rect" title="Реализует интерфейс IConnector." alt="" coords="666,5,872,31"/>
+<area shape="rect" href="connector_8h.html" title="Определяет интерфейс IConnector и специфичные для баз данных исключения." alt="" coords="725,79,813,105"/>
+<area shape="poly" title=" " alt="" coords="772,31,772,63,766,63,766,31"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="166,226,348,252"/>
+<area shape="poly" title=" " alt="" coords="725,107,543,155,311,224,310,219,541,150,724,102"/>
+<area shape="rect" href="node_8h.html" title="Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен..." alt="" coords="555,153,703,178"/>
+<area shape="poly" title=" " alt="" coords="746,108,667,148,665,143,744,103"/>
+<area shape="rect" title=" " alt="" coords="648,536,701,562"/>
+<area shape="poly" title=" " alt="" coords="782,103,802,127,823,158,840,197,847,238,847,403,845,450,837,469,821,490,798,510,771,525,717,543,715,538,769,520,795,505,818,486,832,467,840,449,842,403,842,238,835,198,818,161,797,130,778,107"/>
+<area shape="rect" title=" " alt="" coords="730,462,808,488"/>
+<area shape="poly" title=" " alt="" coords="772,105,772,238,772,322,772,447,766,447,766,322,766,238,766,105"/>
+<area shape="rect" title=" " alt="" coords="883,153,940,178"/>
+<area shape="poly" title=" " alt="" coords="794,103,875,143,872,148,792,108"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="141,389,269,414"/>
+<area shape="poly" title=" " alt="" coords="246,254,228,275,213,301,205,338,205,373,199,373,200,338,208,299,223,272,242,251"/>
+<area shape="rect" title=" " alt="" coords="5,536,74,562"/>
+<area shape="poly" title=" " alt="" coords="141,408,108,414,76,424,47,441,23,464,17,477,17,492,27,522,22,524,12,493,12,476,19,461,43,436,74,419,107,409,140,403"/>
+<area shape="rect" href="node__type_8h.html" title=" " alt="" coords="496,226,588,252"/>
+<area shape="poly" title=" " alt="" coords="616,181,570,218,567,214,612,177"/>
+<area shape="poly" title=" " alt="" coords="526,255,460,302,435,324,409,343,346,369,284,387,283,382,345,364,406,338,432,320,456,298,523,250"/>
+<area shape="poly" title=" " alt="" coords="589,247,633,265,653,280,670,299,684,326,693,356,699,418,694,476,684,521,679,520,688,475,693,418,688,357,679,328,665,301,650,284,631,270,587,252"/>
+<area shape="rect" title=" " alt="" coords="470,308,508,333"/>
+<area shape="poly" title=" " alt="" coords="536,254,508,296,503,293,532,251"/>
+<area shape="rect" href="convert_8h.html" title="Предоставляет обобщенный фреймворк для преобразования типов." alt="" coords="532,300,656,341"/>
+<area shape="poly" title=" " alt="" coords="552,251,575,286,571,288,548,254"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="223,308,395,333"/>
+<area shape="poly" title=" " alt="" coords="507,255,360,305,358,300,505,250"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="333,389,500,414"/>
+<area shape="poly" title=" " alt="" coords="551,344,459,384,457,380,549,339"/>
+<area shape="poly" title=" " alt="" coords="333,414,201,434,143,448,102,465,73,492,53,523,49,521,69,489,99,460,141,443,200,429,332,409"/>
+<area shape="poly" title=" " alt="" coords="502,412,561,430,591,443,619,460,646,489,665,521,661,523,642,492,615,464,589,448,560,435,500,417"/>
+<area shape="rect" href="common_8h.html" title="Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов." alt="" coords="522,462,605,488"/>
+<area shape="poly" title=" " alt="" coords="443,412,526,453,524,457,441,417"/>
+<area shape="rect" title=" " alt="" coords="264,536,332,562"/>
+<area shape="poly" title=" " alt="" coords="333,417,198,439,144,452,117,464,110,480,112,493,124,504,143,515,194,530,249,540,248,545,193,535,141,520,121,509,108,495,104,479,114,460,143,447,197,434,332,411"/>
+<area shape="rect" title=" " alt="" coords="128,462,188,488"/>
+<area shape="poly" title=" " alt="" coords="373,418,204,464,203,459,372,412"/>
+<area shape="rect" title=" " alt="" coords="212,462,270,488"/>
+<area shape="poly" title=" " alt="" coords="388,417,285,459,283,454,386,412"/>
+<area shape="rect" title=" " alt="" coords="293,462,354,488"/>
+<area shape="poly" title=" " alt="" coords="403,417,353,455,350,451,399,413"/>
+<area shape="poly" title=" " alt="" coords="477,412,715,460,714,465,476,418"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="378,462,499,488"/>
+<area shape="poly" title=" " alt="" coords="423,414,433,447,428,448,418,415"/>
+<area shape="poly" title=" " alt="" coords="523,488,511,491,275,525,89,545,88,540,274,519,510,485,522,483"/>
+<area shape="poly" title=" " alt="" coords="584,486,644,525,641,530,581,491"/>
+<area shape="rect" title=" " alt="" coords="522,536,605,562"/>
+<area shape="poly" title=" " alt="" coords="566,488,566,520,561,520,561,488"/>
+<area shape="poly" title=" " alt="" coords="523,490,348,537,347,532,521,485"/>
+<area shape="poly" title=" " alt="" coords="295,336,234,381,231,377,291,331"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_connector.html">IConnector</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для коннектора базы данных. Определяет контракт для классов, обеспечивающих подключение к базе данных и позволяющих выполнять запросы. Наследуется от <code><a class="el" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле....">iridium::pattern::IInitializable</a></code>, что предполагает необходимость инициализации коннекторов перед использованием (например, с конфигурацией).  <a href="class_i_connector.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvector.html">vector</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:IConnector" id="r_IConnector"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_connector.html">IConnector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для коннектора к базе данных. Этот интерфейс определяет контракт для классов, обеспечивающих подключение к базе данных. Он включает методы для отправки запросов и обработки результатов.  <a href="class_i_connector.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:vector" id="r_vector"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvector.html">vector</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1db.html">iridium::db</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с базами данных. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Adb" id="r_iridium_3A_3Adb"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1db.html">iridium::db</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Реализует интерфейс <span class="tt"><a class="el" href="class_i_connector.html" title="Интерфейс для коннектора к базе данных. Этот интерфейс определяет контракт для классов,...">IConnector</a></span>. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

@@ -1,11 +1,11 @@
 <map id="iridium::parsing::serialization::NodeView::NodeView" name="iridium::parsing::serialization::NodeView::NodeView">
-<area shape="rect" id="Node000001" title="Constructor for NodeView representing an attribute within a list item. Used by DEFINE_ATTRIBUTE_LIST." alt="" coords="242,104,428,145"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#aea61d4eebf49ea89933e06675f1ca001" title="Constructor for a mandatory attribute NodeView (no default value), associated with a parent node." alt="" coords="6,5,193,46"/>
+<area shape="rect" id="Node000001" title="Constructor for a list attribute." alt="" coords="242,104,428,145"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a8ddb93648818d512a9811fb09fe5efa8" title="Constructor for an attribute." alt="" coords="6,5,193,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="277,99,193,61,161,49,163,44,195,57,279,95"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#ae802275b9aa57bcde8f409e0165a6312" title="Constructor for an attribute NodeView with a default value, associated with a parent node." alt="" coords="6,71,193,111"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a4738bd09770d25808e50b7288e983470" title="Constructor for an attribute with a default value." alt="" coords="6,71,193,111"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="226,112,193,107,193,102,227,106"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a2e09ecf3411abf3e76eb80c310ec84fc" title="Conversion operator to get the node&#39;s value. Equivalent to calling get()." alt="" coords="5,136,194,177"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a2e09ecf3411abf3e76eb80c310ec84fc" title=" " alt="" coords="5,136,194,177"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="227,142,195,146,194,141,226,136"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title="Assignment operator to set the node&#39;s value. Equivalent to calling set()." alt="" coords="6,201,193,242"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view.html#a506b57922fc8a6697eece2ff5194010c" title=" " alt="" coords="6,201,193,242"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="278,154,195,191,162,203,161,198,193,186,276,149"/>
 </map>

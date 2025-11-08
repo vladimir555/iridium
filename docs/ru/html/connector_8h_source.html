@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Исходный файл source/iridium/db/connector.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_4490cffa6fbf901f1112b93bd5ef4d44.html">db</a></li>  </ul>
+<li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a href="dir_4490cffa6fbf901f1112b93bd5ef4d44.html">db</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -95,76 +82,68 @@ $(function(){ initResizable(false); });
 <a href="connector_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Copyright © 2019 Bulaev Vladimir.</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Contacts: &lt;bulaev_vladimir@mail.ru&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// License: https://www.gnu.org/licenses/lgpl-3.0</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="initializable_8h.html">iridium/pattern/initializable.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="initializable_8h.html">iridium/pattern/initializable.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="node_8h.html">iridium/parsing/node.h</a>&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// No specific Doxygen for iridium namespace itself here.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium.html">iridium</a> {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1db.html">db</a> {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_exception.html">   37</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1db_1_1_exception.html#a0030f4f22010d1d2663ee7af37bf35a1">Exception</a> : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1db_1_1_exception.html#a0030f4f22010d1d2663ee7af37bf35a1">Exception</a>(std::string <span class="keyword">const</span> &amp;e);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_exception.html#acfaf7148caad8e6459970b7d99ad59d1">   47</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classiridium_1_1db_1_1_exception.html#acfaf7148caad8e6459970b7d99ad59d1">~Exception</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceiridium_1_1db.html">iridium::db</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_exception.html">   28</a></span><span class="keyword">class </span><a class="code hl_function" href="classiridium_1_1db_1_1_exception.html#a0030f4f22010d1d2663ee7af37bf35a1">Exception</a> : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classiridium_1_1db_1_1_exception.html#a0030f4f22010d1d2663ee7af37bf35a1">Exception</a>(std::string <span class="keyword">const</span> &amp;e);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_exception.html#acfaf7148caad8e6459970b7d99ad59d1">   35</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classiridium_1_1db_1_1_exception.html#acfaf7148caad8e6459970b7d99ad59d1">~Exception</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
-<div class="foldopen" id="foldopen00059" data-start="{" data-end="};">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_i_connector.html">   59</a></span><span class="keyword">class </span><a class="code hl_class" href="classiridium_1_1db_1_1_i_connector.html">IConnector</a>: <span class="keyword">public</span> pattern::IInitializable {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_define" href="smart__ptr_8h.html#a5314379c214998b38c9b5d50b1e1ac9d">DEFINE_INTERFACE</a>(<a class="code hl_class" href="classiridium_1_1db_1_1_i_connector.html">IConnector</a>)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#ab2d1cdfae4b7c4883ec800dac81764a3">   71</a></span>    typedef std::map&lt;std::<span class="keywordtype">string</span>, std::<span class="keywordtype">string</span>&gt; <a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#ab2d1cdfae4b7c4883ec800dac81764a3">TRow</a>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#a0fd908df3a7d9d2fb82cc27cc6a6b31a">   77</a></span>    typedef std::<a class="code hl_class" href="classvector.html">vector</a>&lt; <a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#ab2d1cdfae4b7c4883ec800dac81764a3">TRow</a> &gt; <a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#a0fd908df3a7d9d2fb82cc27cc6a6b31a">TRows</a>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#a87a907a8ec85a0814bedc23efe488adb">   95</a></span>    virtual <a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#a0fd908df3a7d9d2fb82cc27cc6a6b31a">TRows</a> <a class="code hl_function" href="classiridium_1_1db_1_1_i_connector.html#a87a907a8ec85a0814bedc23efe488adb">sendQuery</a>(std::<span class="keywordtype">string</span> const &amp;query) = 0;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    static std::<a class="code hl_class" href="classvector.html">vector</a>&lt;std::<span class="keywordtype">string</span>&gt; <a class="code hl_function" href="classiridium_1_1db_1_1_i_connector.html#a0badeb64cf1214b7b17c07514b3d972b">makeFields</a>(<a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#a0fd908df3a7d9d2fb82cc27cc6a6b31a">TRows</a> const &amp;rows);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#abcec37680ccc610456f36953ff9ad4f1">  117</a></span>    static std::<span class="keywordtype">string</span> const <a class="code hl_variable" href="classiridium_1_1db_1_1_i_connector.html#abcec37680ccc610456f36953ff9ad4f1">FIELD_NAME_AFFECTED_ROWS</a>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_i_connector.html">   44</a></span><span class="keyword">class </span><a class="code hl_class" href="classiridium_1_1db_1_1_i_connector.html">IConnector</a>: <span class="keyword">public</span> pattern::IInitializable {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_define" href="smart__ptr_8h.html#a5314379c214998b38c9b5d50b1e1ac9d">DEFINE_INTERFACE</a>(<a class="code hl_class" href="classiridium_1_1db_1_1_i_connector.html">IConnector</a>)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#aaa0bb772fe4ebb20a8bd9820657ef186">   47</a></span>    using <a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#aaa0bb772fe4ebb20a8bd9820657ef186">INode</a> = <a class="code hl_namespace" href="namespaceiridium_1_1parsing.html">parsing</a>::<a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#aaa0bb772fe4ebb20a8bd9820657ef186">INode</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#a939daf8ceefd0b643b0db17dc867acbd">   55</a></span>    virtual <a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#aaa0bb772fe4ebb20a8bd9820657ef186">INode</a>::TSharedPtr <a class="code hl_function" href="classiridium_1_1db_1_1_i_connector.html#a939daf8ceefd0b643b0db17dc867acbd">sendQuery</a>(std::<span class="keywordtype">string</span> const &amp;query) = 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    static std::<a class="code hl_class" href="classvector.html">vector</a>&lt;std::<span class="keywordtype">string</span>&gt; <a class="code hl_function" href="classiridium_1_1db_1_1_i_connector.html#a9740177198a7d7704e5b25903ff189c0">makeFields</a>(<a class="code hl_namespace" href="namespaceiridium_1_1parsing.html">parsing</a>::<a class="code hl_typedef" href="classiridium_1_1db_1_1_i_connector.html#aaa0bb772fe4ebb20a8bd9820657ef186">INode</a>::TSharedPtr const &amp;rows);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classiridium_1_1db_1_1_i_connector.html#abcec37680ccc610456f36953ff9ad4f1">   67</a></span>    static std::<span class="keywordtype">string</span> const <a class="code hl_variable" href="classiridium_1_1db_1_1_i_connector.html#abcec37680ccc610456f36953ff9ad4f1">FIELD_NAME_AFFECTED_ROWS</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
 </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>} <span class="comment">// db</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>} <span class="comment">// iridium</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C</span></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_exception_html_a0030f4f22010d1d2663ee7af37bf35a1"><div class="ttname"><a href="classiridium_1_1db_1_1_exception.html#a0030f4f22010d1d2663ee7af37bf35a1">iridium::db::Exception::Exception</a></div><div class="ttdeci">Exception(std::string const &amp;e)</div><div class="ttdoc">Конструирует объект Exception с определенным сообщением об ошибке.</div><div class="ttdef"><b>Определения</b> connector.cpp:16</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_exception_html_acfaf7148caad8e6459970b7d99ad59d1"><div class="ttname"><a href="classiridium_1_1db_1_1_exception.html#acfaf7148caad8e6459970b7d99ad59d1">iridium::db::Exception::~Exception</a></div><div class="ttdeci">virtual ~Exception()=default</div><div class="ttdoc">Виртуальный деструктор по умолчанию.</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html">iridium::db::IConnector</a></div><div class="ttdoc">Интерфейс для коннектора базы данных. Определяет контракт для классов, обеспечивающих подключение к б...</div><div class="ttdef"><b>Определения</b> connector.h:59</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_a0badeb64cf1214b7b17c07514b3d972b"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#a0badeb64cf1214b7b17c07514b3d972b">iridium::db::IConnector::makeFields</a></div><div class="ttdeci">static std::vector&lt; std::string &gt; makeFields(TRows const &amp;rows)</div><div class="ttdoc">Вспомогательная функция для извлечения уникальных имен полей (столбцов) из набора данных....</div><div class="ttdef"><b>Определения</b> connector.cpp:22</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_a0fd908df3a7d9d2fb82cc27cc6a6b31a"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#a0fd908df3a7d9d2fb82cc27cc6a6b31a">iridium::db::IConnector::TRows</a></div><div class="ttdeci">std::vector&lt; TRow &gt; TRows</div><div class="ttdoc">Представляет коллекцию строк (набор данных), полученную из базы данных. Это вектор объектов TRow.</div><div class="ttdef"><b>Определения</b> connector.h:77</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_a87a907a8ec85a0814bedc23efe488adb"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#a87a907a8ec85a0814bedc23efe488adb">iridium::db::IConnector::sendQuery</a></div><div class="ttdeci">virtual TRows sendQuery(std::string const &amp;query)=0</div><div class="ttdoc">Отправляет строку запроса в базу данных для выполнения. Это чисто виртуальный метод,...</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_ab2d1cdfae4b7c4883ec800dac81764a3"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#ab2d1cdfae4b7c4883ec800dac81764a3">iridium::db::IConnector::TRow</a></div><div class="ttdeci">std::map&lt; std::string, std::string &gt; TRow</div><div class="ttdoc">Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).</div><div class="ttdef"><b>Определения</b> connector.h:71</div></div>
-<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_abcec37680ccc610456f36953ff9ad4f1"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#abcec37680ccc610456f36953ff9ad4f1">iridium::db::IConnector::FIELD_NAME_AFFECTED_ROWS</a></div><div class="ttdeci">static std::string const FIELD_NAME_AFFECTED_ROWS</div><div class="ttdoc">Константная строка, представляющая имя поля, используемое для сообщения о количестве затронутых строк...</div><div class="ttdef"><b>Определения</b> connector.h:117</div></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>} <span class="comment">// namespace iridium::db</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif </span><span class="comment">// HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C</span></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_exception_html_a0030f4f22010d1d2663ee7af37bf35a1"><div class="ttname"><a href="classiridium_1_1db_1_1_exception.html#a0030f4f22010d1d2663ee7af37bf35a1">iridium::db::Exception::Exception</a></div><div class="ttdeci">Exception(std::string const &amp;e)</div><div class="ttdoc">Создает новый объект исключения.</div><div class="ttdef"><b>Определения</b> connector.cpp:25</div></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_exception_html_acfaf7148caad8e6459970b7d99ad59d1"><div class="ttname"><a href="classiridium_1_1db_1_1_exception.html#acfaf7148caad8e6459970b7d99ad59d1">iridium::db::Exception::~Exception</a></div><div class="ttdeci">virtual ~Exception()=default</div></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html">iridium::db::IConnector</a></div><div class="ttdoc">Интерфейс для коннектора к базе данных. Этот интерфейс определяет контракт для классов,...</div><div class="ttdef"><b>Определения</b> connector.h:44</div></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_a939daf8ceefd0b643b0db17dc867acbd"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#a939daf8ceefd0b643b0db17dc867acbd">iridium::db::IConnector::sendQuery</a></div><div class="ttdeci">virtual INode::TSharedPtr sendQuery(std::string const &amp;query)=0</div><div class="ttdoc">Отправляет запрос к базе данных.</div></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_a9740177198a7d7704e5b25903ff189c0"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#a9740177198a7d7704e5b25903ff189c0">iridium::db::IConnector::makeFields</a></div><div class="ttdeci">static std::vector&lt; std::string &gt; makeFields(parsing::INode::TSharedPtr const &amp;rows)</div><div class="ttdoc">Извлекает имена полей из результирующего набора.</div><div class="ttdef"><b>Определения</b> connector.cpp:31</div></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_aaa0bb772fe4ebb20a8bd9820657ef186"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#aaa0bb772fe4ebb20a8bd9820657ef186">iridium::db::IConnector::INode</a></div><div class="ttdeci">parsing::INode INode</div><div class="ttdef"><b>Определения</b> connector.h:47</div></div>
+<div class="ttc" id="aclassiridium_1_1db_1_1_i_connector_html_abcec37680ccc610456f36953ff9ad4f1"><div class="ttname"><a href="classiridium_1_1db_1_1_i_connector.html#abcec37680ccc610456f36953ff9ad4f1">iridium::db::IConnector::FIELD_NAME_AFFECTED_ROWS</a></div><div class="ttdeci">static std::string const FIELD_NAME_AFFECTED_ROWS</div><div class="ttdoc">Имя поля, содержащего количество затронутых строк.</div><div class="ttdef"><b>Определения</b> connector.h:67</div></div>
 <div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div></div>
 <div class="ttc" id="ainitializable_8h_html"><div class="ttname"><a href="initializable_8h.html">initializable.h</a></div></div>
-<div class="ttc" id="anamespaceiridium_1_1db_html"><div class="ttname"><a href="namespaceiridium_1_1db.html">iridium::db</a></div><div class="ttdoc">Пространство имен для функциональности, связанной с базами данных.</div><div class="ttdef"><b>Определения</b> config.h:25</div></div>
-<div class="ttc" id="anamespaceiridium_html"><div class="ttname"><a href="namespaceiridium.html">iridium</a></div><div class="ttdoc">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.</div><div class="ttdef"><b>Определения</b> assert.h:19</div></div>
+<div class="ttc" id="anamespaceiridium_1_1db_html"><div class="ttname"><a href="namespaceiridium_1_1db.html">iridium::db</a></div><div class="ttdef"><b>Определения</b> config.h:19</div></div>
+<div class="ttc" id="anamespaceiridium_1_1parsing_html"><div class="ttname"><a href="namespaceiridium_1_1parsing.html">iridium::parsing</a></div><div class="ttdef"><b>Определения</b> file_parser.cpp:25</div></div>
+<div class="ttc" id="anode_8h_html"><div class="ttname"><a href="node_8h.html">node.h</a></div><div class="ttdoc">Определяет typedef INode, специализацию INodeType&lt;std::string&gt;. Служит основным типом для представлен...</div></div>
 <div class="ttc" id="asmart__ptr_8h_html_a5314379c214998b38c9b5d50b1e1ac9d"><div class="ttname"><a href="smart__ptr_8h.html#a5314379c214998b38c9b5d50b1e1ac9d">DEFINE_INTERFACE</a></div><div class="ttdeci">#define DEFINE_INTERFACE(TClass)</div><div class="ttdoc">Вспомогательный макрос для определения интерфейсов. Объединяет DEFINE_SMART_PTR(TClass) для объявлени...</div><div class="ttdef"><b>Определения</b> smart_ptr.h:96</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

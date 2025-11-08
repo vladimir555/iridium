@@ -1,10 +1,10 @@
 <map id="iridium::threading::implementation::WorkerPoolBase::WorkerPoolBase" name="iridium::threading::implementation::WorkerPoolBase::WorkerPoolBase">
-<area shape="rect" id="Node000001" title=" " alt="" coords="256,85,448,141"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#aed6ec48ad6676c9d3b31056cb85ff221" title=" " alt="" coords="5,5,208,61"/>
+<area shape="rect" id="Node000001" title="Конструктор." alt="" coords="256,85,448,141"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html#aed6ec48ad6676c9d3b31056cb85ff221" title="Конструктор." alt="" coords="5,5,208,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,83,193,64,195,59,251,78"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#a1560106229b6d338739bc2e06ed0ff4b" title=" " alt="" coords="5,85,208,141"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html#a1560106229b6d338739bc2e06ed0ff4b" title="Конструктор." alt="" coords="5,85,208,141"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,116,208,116,208,110,240,110"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#a69ed165ba5efd6613889a52afce84cbc" title=" " alt="" coords="5,189,208,245"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html#a69ed165ba5efd6613889a52afce84cbc" title="Конструктор." alt="" coords="5,189,208,245"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="271,150,175,191,173,186,269,145"/>
 <area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="146,177,131,170,106,168,85,170,71,175,64,181,64,189,59,189,59,179,68,170,84,165,107,163,132,165,148,172"/>
 </map>

@@ -3,15 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Шаблон класса iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -34,33 +32,22 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.15.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+$(function() { codefold.init(); });
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
   initMenu('',true,false,'search.php','Поиск',false);
   $(function() { init_search(); });
 });
-/* @license-end */
 </script>
 <div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,7 +71,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1threading_1_1implementation.html">implementation</a></li><li class="navelem"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html">CAsyncQueue</a></li>  </ul>
+<li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1threading.html">threading</a></li><li class="navelem"><a href="namespaceiridium_1_1threading_1_1implementation.html">implementation</a></li><li class="navelem"><a href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html">CAsyncQueue</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -96,21 +83,21 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Конкретная реализация <code><a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди, предоставляющий операции добавления и извлечения....">IAsyncQueue</a>&lt;TItem&gt;</code>. Этот класс предоставляет потокобезопасную очередь, используя <code>std::list</code> для хранения элементов и <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">iridium::threading::Synchronized</a>&lt;std::mutex&gt;</code> для синхронизации. Класс не является копируемым.  
+<p>Потокобезопасная реализация асинхронной очереди.  
  <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="implementation_2async__queue_8h_source.html">async_queue.h</a>&gt;</code></p>
 <div class="dynheader">
 Граф наследования:iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_async_queue__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_inherit__map" alt="Inheritance graph"/></div>
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_async_queue__inherit__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_inherit__map" id="airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_inherit__map">
-<area shape="rect" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,..." alt="" coords="445,117,655,173"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди, предоставляющий операции добавления и извлечения...." alt="" coords="217,53,383,94"/>
+<area shape="rect" title="Потокобезопасная реализация асинхронной очереди." alt="" coords="445,117,655,173"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди." alt="" coords="217,53,383,94"/>
 <area shape="poly" title=" " alt="" coords="388,96,452,114,450,119,387,101"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="5,5,155,61"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь." alt="" coords="5,5,155,61"/>
 <area shape="poly" title=" " alt="" coords="170,47,217,55,216,61,169,52"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди. Этот интерфейс определяет операции для изв..." alt="" coords="5,85,155,141"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди." alt="" coords="5,85,155,141"/>
 <area shape="poly" title=" " alt="" coords="169,94,216,86,217,91,170,99"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="231,117,369,173"/>
 <area shape="poly" title=" " alt="" coords="385,142,445,142,445,148,385,148"/>
@@ -121,14 +108,14 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Граф связей класса iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_async_queue__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_async_queue__coll__graph.png" border="0" usemap="#airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_coll__map" id="airidium_1_1threading_1_1implementation_1_1_c_async_queue_3_01_t_item_01_4_coll__map">
-<area shape="rect" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,..." alt="" coords="445,117,655,173"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди, предоставляющий операции добавления и извлечения...." alt="" coords="217,53,383,94"/>
+<area shape="rect" title="Потокобезопасная реализация асинхронной очереди." alt="" coords="445,117,655,173"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди." alt="" coords="217,53,383,94"/>
 <area shape="poly" title=" " alt="" coords="388,96,452,114,450,119,387,101"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="5,5,155,61"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь." alt="" coords="5,5,155,61"/>
 <area shape="poly" title=" " alt="" coords="170,47,217,55,216,61,169,52"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди. Этот интерфейс определяет операции для изв..." alt="" coords="5,85,155,141"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди." alt="" coords="5,85,155,141"/>
 <area shape="poly" title=" " alt="" coords="169,94,216,86,217,91,170,99"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="231,117,369,173"/>
 <area shape="poly" title=" " alt="" coords="385,142,445,142,445,148,385,148"/>
@@ -137,55 +124,38 @@ $(function(){ initResizable(false); });
 </map>
 <center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:a49d3a486f0887e5bab94375cd83742c1" id="r_a49d3a486f0887e5bab94375cd83742c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49d3a486f0887e5bab94375cd83742c1">CAsyncQueue</a> ()</td></tr>
-<tr class="memdesc:a49d3a486f0887e5bab94375cd83742c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет стандартные фабричные методы (например, <code>create()</code>) и typedef-ы умных указателей для <code><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,...">CAsyncQueue</a></code>.  <br /></td></tr>
-<tr class="separator:a49d3a486f0887e5bab94375cd83742c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31f260b13a421f29138e90947b4fd0b7" id="r_a31f260b13a421f29138e90947b4fd0b7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31f260b13a421f29138e90947b4fd0b7">push</a> (TItem const &amp;item) override</td></tr>
-<tr class="memdesc:a31f260b13a421f29138e90947b4fd0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет один элемент в конец очереди. Эта операция является потокобезопасной.  <br /></td></tr>
-<tr class="separator:a31f260b13a421f29138e90947b4fd0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a31f260b13a421f29138e90947b4fd0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет один элемент в очередь.  <br /></td></tr>
 <tr class="memitem:a16e711fc66bd480d4f509f3ddf220507" id="r_a16e711fc66bd480d4f509f3ddf220507"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16e711fc66bd480d4f509f3ddf220507">push</a> (std::list&lt; TItem &gt; const &amp;items) override</td></tr>
-<tr class="memdesc:a16e711fc66bd480d4f509f3ddf220507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет список элементов в конец очереди. Элементы добавляются в том порядке, в котором они представлены во входном списке. Эта операция является потокобезопасной.  <br /></td></tr>
-<tr class="separator:a16e711fc66bd480d4f509f3ddf220507"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad245928ad3300f5e32a441ce172e98fe" id="r_ad245928ad3300f5e32a441ce172e98fe"><td class="memItemLeft" align="right" valign="top">std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe">pop</a> (bool const &amp;is_waiting=true) override</td></tr>
-<tr class="memdesc:ad245928ad3300f5e32a441ce172e98fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает все элементы, находящиеся в данный момент в очереди. Если <code>is_waiting</code> истинно и очередь пуста, этот метод блокируется до тех пор, пока элемент не будет добавлен или не будет вызван <code><a class="el" href="#aff67e2bca4429e477f7a3f72979c6688" title="Прерывает любые потоки, ожидающие выполнения операций pop(). Это приводит к тому, что ожидающие вызов...">interrupt()</a></code>. Если <code>is_waiting</code> ложно и очередь пуста, немедленно возвращается пустой список. Эта операция является потокобезопасной.  <br /></td></tr>
-<tr class="separator:ad245928ad3300f5e32a441ce172e98fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a16e711fc66bd480d4f509f3ddf220507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет список элементов в очередь.  <br /></td></tr>
+<tr class="memitem:a5adbda2058b4457cb3956ef593f0bdfc" id="r_a5adbda2058b4457cb3956ef593f0bdfc"><td class="memItemLeft" align="right" valign="top">std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5adbda2058b4457cb3956ef593f0bdfc">pop</a> (bool const &amp;is_wait_required=true) override</td></tr>
+<tr class="memdesc:a5adbda2058b4457cb3956ef593f0bdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает элементы из очереди.  <br /></td></tr>
 <tr class="memitem:afa5f31efabc3e801c3c74d526ff3c155" id="r_afa5f31efabc3e801c3c74d526ff3c155"><td class="memItemLeft" align="right" valign="top">std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa5f31efabc3e801c3c74d526ff3c155">pop</a> (std::chrono::nanoseconds const &amp;timeout) override</td></tr>
-<tr class="memdesc:afa5f31efabc3e801c3c74d526ff3c155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает все элементы, находящиеся в данный момент в очереди, с ожиданием до указанного тайм-аута. Если очередь пуста, этот метод блокируется до тех пор, пока элемент не будет добавлен, не будет вызван <code><a class="el" href="#aff67e2bca4429e477f7a3f72979c6688" title="Прерывает любые потоки, ожидающие выполнения операций pop(). Это приводит к тому, что ожидающие вызов...">interrupt()</a></code> или не истечет тайм-аут. Эта операция является потокобезопасной.  <br /></td></tr>
-<tr class="separator:afa5f31efabc3e801c3c74d526ff3c155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:afa5f31efabc3e801c3c74d526ff3c155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Извлекает элементы из очереди с тайм-аутом.  <br /></td></tr>
 <tr class="memitem:aff67e2bca4429e477f7a3f72979c6688" id="r_aff67e2bca4429e477f7a3f72979c6688"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff67e2bca4429e477f7a3f72979c6688">interrupt</a> () override</td></tr>
-<tr class="memdesc:aff67e2bca4429e477f7a3f72979c6688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает любые потоки, ожидающие выполнения операций <code><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe" title="Извлекает все элементы, находящиеся в данный момент в очереди. Если is_waiting истинно и очередь пуст...">pop()</a></code>. Это приводит к тому, что ожидающие вызовы <code><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe" title="Извлекает все элементы, находящиеся в данный момент в очереди. Если is_waiting истинно и очередь пуст...">pop()</a></code> возвращаются, обычно с пустым списком. Это также предотвращает будущее ожидание вызовов <code><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe" title="Извлекает все элементы, находящиеся в данный момент в очереди. Если is_waiting истинно и очередь пуст...">pop()</a></code>, если очередь пуста.  <br /></td></tr>
-<tr class="separator:aff67e2bca4429e477f7a3f72979c6688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aff67e2bca4429e477f7a3f72979c6688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Прерывает операции с очередью.  <br /></td></tr>
 <tr class="memitem:aa2474c5e8d33c47af2ad02548e3b12e6" id="r_aa2474c5e8d33c47af2ad02548e3b12e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2474c5e8d33c47af2ad02548e3b12e6">empty</a> () const override</td></tr>
-<tr class="memdesc:aa2474c5e8d33c47af2ad02548e3b12e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, пуста ли очередь в данный момент. Эта проверка основана на атомарном флаге, который обновляется во время операций добавления/извлечения.  <br /></td></tr>
-<tr class="separator:aa2474c5e8d33c47af2ad02548e3b12e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aa2474c5e8d33c47af2ad02548e3b12e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, пуста ли очередь.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Дополнительные унаследованные члены</h2></td></tr>
-<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue')"><img src="closed.png" alt="-"/>&#160;Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html">iridium::threading::IAsyncQueue&lt; TItem &gt;</a></td></tr>
-<tr class="memitem:a9057f11010a12bb1ab304b517da46dae inherit pub_types_classiridium_1_1threading_1_1_i_async_queue" id="r_a9057f11010a12bb1ab304b517da46dae"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">IAsyncQueuePusher</a>&lt; TItem &gt;::TItems&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html#a9057f11010a12bb1ab304b517da46dae">TItems</a></td></tr>
-<tr class="memdesc:a9057f11010a12bb1ab304b517da46dae inherit pub_types_classiridium_1_1threading_1_1_i_async_queue"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов для обработки очередью, унаследованный от pusher/popper.  <br /></td></tr>
-<tr class="separator:a9057f11010a12bb1ab304b517da46dae inherit pub_types_classiridium_1_1threading_1_1_i_async_queue"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher')"><img src="closed.png" alt="-"/>&#160;Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a></td></tr>
+<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html">iridium::threading::IAsyncQueue&lt; TItem &gt;</a></td></tr>
+<tr class="memitem:a9057f11010a12bb1ab304b517da46dae inherit pub_types_classiridium_1_1threading_1_1_i_async_queue" id="r_a9057f11010a12bb1ab304b517da46dae"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_i_async_queue_pusher.html">IAsyncQueuePusher</a>&lt; TItem &gt;::TItems&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html#a9057f11010a12bb1ab304b517da46dae">TItems</a></td></tr>
+<tr class="memdesc:a9057f11010a12bb1ab304b517da46dae inherit pub_types_classiridium_1_1threading_1_1_i_async_queue"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов.  <br /></td></tr>
+<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a></td></tr>
 <tr class="memitem:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher" id="r_a29daf8cead8ce6fd44d4e26d20708dab"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html#a29daf8cead8ce6fd44d4e26d20708dab">TItems</a></td></tr>
-<tr class="memdesc:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов для обработки очередью.  <br /></td></tr>
-<tr class="separator:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue_popper')"><img src="closed.png" alt="-"/>&#160;Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a></td></tr>
+<tr class="memdesc:a29daf8cead8ce6fd44d4e26d20708dab inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_pusher"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов.  <br /></td></tr>
+<tr class="inherit_header pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classiridium_1_1threading_1_1_i_async_queue_popper')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Открытые типы унаследованные от <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a></td></tr>
 <tr class="memitem:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper" id="r_af8d9442b3b07e681f9f6a1fa4c0a7dcc"><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TItem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#af8d9442b3b07e681f9f6a1fa4c0a7dcc">TItems</a></td></tr>
-<tr class="memdesc:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов, извлеченных из очереди.  <br /></td></tr>
-<tr class="separator:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:af8d9442b3b07e681f9f6a1fa4c0a7dcc inherit pub_types_classiridium_1_1threading_1_1_i_async_queue_popper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Список элементов.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename TItem&gt;<br />
-class iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</div><p>Конкретная реализация <code><a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди, предоставляющий операции добавления и извлечения....">IAsyncQueue</a>&lt;TItem&gt;</code>. Этот класс предоставляет потокобезопасную очередь, используя <code>std::list</code> для хранения элементов и <code><a class="el" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о...">iridium::threading::Synchronized</a>&lt;std::mutex&gt;</code> для синхронизации. Класс не является копируемым. </p>
-<dl class="tparams"><dt>Параметры шаблона</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">TItem</td><td>Тип элементов, сохраняемых в очереди. </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
+class iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</div><p>Потокобезопасная реализация асинхронной очереди. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
 <a id="a49d3a486f0887e5bab94375cd83742c1" name="a49d3a486f0887e5bab94375cd83742c1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49d3a486f0887e5bab94375cd83742c1">&#9670;&#160;</a></span>CAsyncQueue()</h2>
 
@@ -195,7 +165,7 @@ class iridium::threading::implementation::CAsyncQueue&lt; TItem &gt;</div><p>К�
 template&lt;typename TItem&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html">iridium::threading::implementation::CAsyncQueue</a>&lt; TItem &gt;<a class="el" href="class_c_async_queue.html">::CAsyncQueue</a> </td>
+          <td class="memname"><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html">iridium::threading::implementation::CAsyncQueue</a>&lt; TItem &gt;::CAsyncQueue </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -203,12 +173,9 @@ template&lt;typename TItem&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Определяет стандартные фабричные методы (например, <code>create()</code>) и typedef-ы умных указателей для <code><a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,...">CAsyncQueue</a></code>. </p>
-<p>Конструктор по умолчанию. Инициализирует очередь как пустую. </p>
-
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
 <a id="aa2474c5e8d33c47af2ad02548e3b12e6" name="aa2474c5e8d33c47af2ad02548e3b12e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2474c5e8d33c47af2ad02548e3b12e6">&#9670;&#160;</a></span>empty()</h2>
 
@@ -234,8 +201,7 @@ template&lt;typename TItem&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Проверяет, пуста ли очередь в данный момент. Эта проверка основана на атомарном флаге, который обновляется во время операций добавления/извлечения. </p>
-<dl class="section return"><dt>Возвращает</dt><dd>True, если очередь считается пустой, иначе false. </dd></dl>
+<p>Проверяет, пуста ли очередь. </p>
 
 <p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html#aae13926a0a3cf54e37ea69a745eb1a9c">iridium::threading::IAsyncQueue&lt; TItem &gt;</a>.</p>
 
@@ -266,15 +232,15 @@ template&lt;typename TItem&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Прерывает любые потоки, ожидающие выполнения операций <code><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe" title="Извлекает все элементы, находящиеся в данный момент в очереди. Если is_waiting истинно и очередь пуст...">pop()</a></code>. Это приводит к тому, что ожидающие вызовы <code><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe" title="Извлекает все элементы, находящиеся в данный момент в очереди. Если is_waiting истинно и очередь пуст...">pop()</a></code> возвращаются, обычно с пустым списком. Это также предотвращает будущее ожидание вызовов <code><a class="el" href="#ad245928ad3300f5e32a441ce172e98fe" title="Извлекает все элементы, находящиеся в данный момент в очереди. Если is_waiting истинно и очередь пуст...">pop()</a></code>, если очередь пуста. </p>
+<p>Прерывает операции с очередью. </p>
 
 <p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue.html#a943626aa3966d03c296cb0593c99cae1">iridium::threading::IAsyncQueue&lt; TItem &gt;</a>.</p>
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_async_queue_aff67e2bca4429e477f7a3f72979c6688_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1implementation_1_1_c_async_queue_aff67e2bca4429e477f7a3f72979c6688_cgraph" alt=""/></div>
+<div class="center"><img src="classiridium_1_1threading_1_1implementation_1_1_c_async_queue_aff67e2bca4429e477f7a3f72979c6688_cgraph.png" border="0" usemap="#aclassiridium_1_1threading_1_1implementation_1_1_c_async_queue_aff67e2bca4429e477f7a3f72979c6688_cgraph" loading="lazy" alt=""/></div>
 <map name="aclassiridium_1_1threading_1_1implementation_1_1_c_async_queue_aff67e2bca4429e477f7a3f72979c6688_cgraph" id="aclassiridium_1_1threading_1_1implementation_1_1_c_async_queue_aff67e2bca4429e477f7a3f72979c6688_cgraph">
-<area shape="rect" title="Прерывает любые потоки, ожидающие выполнения операций pop(). Это приводит к тому, что ожидающие вызов..." alt="" coords="5,5,216,61"/>
+<area shape="rect" title="Прерывает операции с очередью." alt="" coords="5,5,216,61"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html#a79202da1c3b89c390b86848f1b17a50d" title="Прерывает все потоки, ожидающие на условной переменной этого объекта Synchronized...." alt="" coords="264,13,427,54"/>
 <area shape="poly" title=" " alt="" coords="216,30,248,30,248,36,216,36"/>
 </map>
@@ -282,8 +248,8 @@ template&lt;typename TItem&gt; </div>
 
 </div>
 </div>
-<a id="ad245928ad3300f5e32a441ce172e98fe" name="ad245928ad3300f5e32a441ce172e98fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad245928ad3300f5e32a441ce172e98fe">&#9670;&#160;</a></span>pop() <span class="overload">[1/2]</span></h2>
+<a id="a5adbda2058b4457cb3956ef593f0bdfc" name="a5adbda2058b4457cb3956ef593f0bdfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5adbda2058b4457cb3956ef593f0bdfc">&#9670;&#160;</a></span>pop() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +262,7 @@ template&lt;typename TItem&gt; </div>
         <tr>
           <td class="memname">std::list&lt; TItem &gt; <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html">iridium::threading::implementation::CAsyncQueue</a>&lt; TItem &gt;::pop </td>
           <td>(</td>
-          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>is_waiting</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>is_wait_required</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -307,16 +273,15 @@ template&lt;typename TItem&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Извлекает все элементы, находящиеся в данный момент в очереди. Если <code>is_waiting</code> истинно и очередь пуста, этот метод блокируется до тех пор, пока элемент не будет добавлен или не будет вызван <code><a class="el" href="#aff67e2bca4429e477f7a3f72979c6688" title="Прерывает любые потоки, ожидающие выполнения операций pop(). Это приводит к тому, что ожидающие вызов...">interrupt()</a></code>. Если <code>is_waiting</code> ложно и очередь пуста, немедленно возвращается пустой список. Эта операция является потокобезопасной. </p>
+<p>Извлекает элементы из очереди. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">is_waiting</td><td>Если true, ожидать элементы, если очередь пуста. По умолчанию true. </td></tr>
+    <tr><td class="paramname">is_wait_required</td><td>Если true, ожидает, пока элементы не станут доступны. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Список, содержащий все извлеченные из очереди элементы. Может быть пустым. </dd></dl>
 
-<p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#a69e6f12074937e6f482f8e688df03d2e">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>.</p>
+<p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#aa693ab6107a6faca36d0db9a5a30a044">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>.</p>
 
 </div>
 </div>
@@ -345,14 +310,13 @@ template&lt;typename TItem&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Извлекает все элементы, находящиеся в данный момент в очереди, с ожиданием до указанного тайм-аута. Если очередь пуста, этот метод блокируется до тех пор, пока элемент не будет добавлен, не будет вызван <code><a class="el" href="#aff67e2bca4429e477f7a3f72979c6688" title="Прерывает любые потоки, ожидающие выполнения операций pop(). Это приводит к тому, что ожидающие вызов...">interrupt()</a></code> или не истечет тайм-аут. Эта операция является потокобезопасной. </p>
+<p>Извлекает элементы из очереди с тайм-аутом. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">timeout</td><td>Максимальная продолжительность ожидания элементов. </td></tr>
+    <tr><td class="paramname">timeout</td><td>Максимальное время ожидания элементов. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Список, содержащий все извлеченные из очереди элементы. Может быть пустым, если истек тайм-аут или произошло прерывание. </dd></dl>
 
 <p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_popper.html#a79c56eab51f222c7ec06e405395dcb61">iridium::threading::IAsyncQueuePopper&lt; TItem &gt;</a>.</p>
 
@@ -383,14 +347,7 @@ template&lt;typename TItem&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Добавляет список элементов в конец очереди. Элементы добавляются в том порядке, в котором они представлены во входном списке. Эта операция является потокобезопасной. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">items</td><td>Список элементов для добавления в очередь. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Новый размер очереди после добавления элементов. </dd></dl>
+<p>Добавляет список элементов в очередь. </p>
 
 <p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html#aea94c8568922887c524dfd501435d519">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a>.</p>
 
@@ -421,14 +378,7 @@ template&lt;typename TItem&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Добавляет один элемент в конец очереди. Эта операция является потокобезопасной. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item</td><td>Элемент для добавления в очередь. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Новый размер очереди после добавления элемента. </dd></dl>
+<p>Добавляет один элемент в очередь. </p>
 
 <p>Замещает <a class="el" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html#ab485c0d1679e5190cda877e475800c38">iridium::threading::IAsyncQueuePusher&lt; TItem &gt;</a>.</p>
 
@@ -440,7 +390,7 @@ template&lt;typename TItem&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0
 </small></address>
 </div><!-- doc-content -->
 </body>

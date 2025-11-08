@@ -1,9 +1,9 @@
 <map id="iridium::threading::IAsyncQueue&lt; TItem &gt;" name="iridium::threading::IAsyncQueue&lt; TItem &gt;">
-<area shape="rect" id="Node000001" title="Interface for an asynchronous queue providing both push and pop operations. This interface combines I..." alt="" coords="203,53,369,94"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="A concrete implementation of IAsyncQueue&lt;TItem&gt;. This class provides a thread&#45;safe queue using a std:..." alt="" coords="417,45,627,101"/>
+<area shape="rect" id="Node000001" title="An interface for an asynchronous queue." alt="" coords="203,53,369,94"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="A thread&#45;safe asynchronous queue implementation." alt="" coords="417,45,627,101"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="385,70,417,70,417,76,385,76"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Interface for pushing items into an asynchronous queue. This interface defines operations for adding ..." alt="" coords="5,5,155,61"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="An interface for pushing items to an asynchronous queue." alt="" coords="5,5,155,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,48,203,54,202,60,170,53"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Interface for popping items from an asynchronous queue. This interface defines operations for retriev..." alt="" coords="5,85,155,141"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_i_async_queue_popper.html" title="An interface for popping items from an asynchronous queue." alt="" coords="5,85,155,141"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,93,202,87,203,92,171,98"/>
 </map>

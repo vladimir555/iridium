@@ -1,21 +1,21 @@
 <map id="iridium::threading::IAsyncQueuePusher&lt; TItem &gt;" name="iridium::threading::IAsyncQueuePusher&lt; TItem &gt;">
-<area shape="rect" id="Node000001" title="Interface for pushing items into an asynchronous queue. This interface defines operations for adding ..." alt="" coords="5,143,155,198"/>
+<area shape="rect" id="Node000001" title="An interface for pushing items to an asynchronous queue." alt="" coords="5,143,155,198"/>
 <area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="205,5,374,61"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,131,159,100,201,71,222,59,225,64,204,75,163,104,125,135"/>
 <area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="221,85,358,126"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,140,221,124,222,129,170,145"/>
 <area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="225,150,354,191"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="170,168,225,168,225,173,170,173"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_async_queue.html" title="Interface for an asynchronous queue providing both push and pop operations. This interface combines I..." alt="" coords="206,216,372,256"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_async_queue.html" title="An interface for an asynchronous queue." alt="" coords="206,216,372,256"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="170,196,222,212,221,217,169,201"/>
-<area shape="rect" id="Node000007" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="203,302,376,343"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title="An interface for a worker that pushes items to a queue." alt="" coords="203,302,376,343"/>
 <area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="127,206,204,266,255,299,252,304,201,270,124,210"/>
-<area shape="rect" id="Node000006" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="A concrete implementation of IAsyncQueue&lt;TItem&gt;. This class provides a thread&#45;safe queue using a std:..." alt="" coords="428,187,638,242"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="A thread&#45;safe asynchronous queue implementation." alt="" coords="428,187,638,242"/>
 <area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="388,225,427,221,427,226,389,230"/>
 <area shape="rect" id="Node000008" href="$classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="430,266,636,307"/>
 <area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="391,305,429,299,429,304,392,310"/>
-<area shape="rect" id="Node000009" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title=" " alt="" coords="432,331,634,386"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title="A worker pool that pushes items to a queue." alt="" coords="432,331,634,386"/>
 <area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="392,335,432,341,431,346,391,340"/>
-<area shape="rect" id="Node000010" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title="Implements IWorkerPusher to push items to an internal queue processed by a dedicated worker thread." alt="" coords="424,411,641,466"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title="A worker that pushes items to a queue." alt="" coords="424,411,641,466"/>
 <area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="338,349,425,396,452,408,450,413,423,401,335,354"/>
 </map>

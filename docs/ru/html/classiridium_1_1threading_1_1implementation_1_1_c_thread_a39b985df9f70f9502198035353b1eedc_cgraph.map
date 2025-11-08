@@ -1,14 +1,14 @@
 <map id="iridium::threading::implementation::CThread::initialize" name="iridium::threading::implementation::CThread::initialize">
-<area shape="rect" id="Node000001" title="Инициализирует поток, что включает запуск базового std::thread и ожидание сигнала об успешном запуске..." alt="" coords="5,63,181,119"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title="Статическая функция, выполняемая std::thread. Устанавливает имя потока, вызывает метод run() объекта ..." alt="" coords="229,71,430,111"/>
+<area shape="rect" id="Node000001" title="Выполняет логику инициализации объекта." alt="" coords="5,63,181,119"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html#a0a3694d8b21558ed09fb0325e0a8995c" title=" " alt="" coords="229,71,430,111"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,88,213,88,213,94,181,94"/>
-<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Получает имя текущего выполняющегося потока (статически, из локального хранилища потока)." alt="" coords="486,5,655,46"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_i_thread.html#aebf89ec3258e418ee6141cb9a5adb285" title="Возвращает имя текущего потока." alt="" coords="486,5,655,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="406,68,477,48,479,53,408,73"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_async_queue_pusher.html#ab485c0d1679e5190cda877e475800c38" title="Добавляет один элемент в очередь. Добавляет указанный элемент в конец очереди." alt="" coords="478,71,663,111"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1_i_async_queue_pusher.html#ab485c0d1679e5190cda877e475800c38" title="Добавляет один элемент в очередь." alt="" coords="478,71,663,111"/>
 <area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="430,88,462,88,462,94,430,94"/>
-<area shape="rect" id="Node000006" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Устанавливает имя для текущего выполняющегося потока (статически, в локальном хранилище потока)...." alt="" coords="486,136,655,177"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1threading_1_1_i_thread.html#a065f967a26a86efde891ec209094560d" title="Устанавливает имя текущего потока." alt="" coords="486,136,655,177"/>
 <area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="408,109,479,129,477,134,406,114"/>
-<area shape="rect" id="Node000004" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="711,78,776,104"/>
+<area shape="rect" id="Node000004" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из исходного типа в целевой." alt="" coords="711,78,776,104"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="631,44,664,57,698,70,696,75,662,61,629,49"/>
 <area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="629,133,662,121,696,107,698,112,664,125,631,138"/>
 </map>

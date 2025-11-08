@@ -1,4 +1,8 @@
 <map id="iridium::io::Buffer::Buffer" name="iridium::io::Buffer::Buffer">
-<area shape="rect" id="Node000001" title="Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл..." alt="" coords="5,29,126,70"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="42,29,40,20,44,11,53,5,66,3,79,5,87,12,84,16,77,10,65,8,55,10,48,14,46,20,47,28"/>
+<area shape="rect" id="Node000001" title="Конструктор по умолчанию." alt="" coords="5,39,126,79"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="32,39,30,29,36,20,48,14,66,12,85,14,96,21,93,25,83,20,65,17,49,19,39,24,36,30,37,38"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1_buffer.html#a34c2cef05d183956ff6fe364b85549af" title="Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы." alt="" coords="174,5,305,46"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="126,45,158,38,159,44,127,50"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_buffer.html#a8ba6e909213fd936823ffc3e59dcb324" title="Добавляет другой буфер в конец этого." alt="" coords="179,71,300,111"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="127,67,164,74,163,80,126,73"/>
 </map>

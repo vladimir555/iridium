@@ -1,0 +1,7 @@
+<map id="iridium::convertion::implementation::detail::TIsSTLSequentialContainer&lt; T, std::enable_if_t&lt; std::is_class_v&lt; T &gt; &amp;&amp;std::is_same_v&lt; decltype(std::declval&lt; T &gt;().begin()), decltype(std::declval&lt; T &gt;().end())&gt; &gt; &gt;" name="iridium::convertion::implementation::detail::TIsSTLSequentialContainer&lt; T, std::enable_if_t&lt; std::is_class_v&lt; T &gt; &amp;&amp;std::is_same_v&lt; decltype(std::declval&lt; T &gt;().begin()), decltype(std::declval&lt; T &gt;().end())&gt; &gt; &gt;">
+<area shape="rect" id="Node000001" title="Метафункция для определения, является ли тип T последовательным контейнером STL." alt="" coords="20,79,226,210"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,113,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,43,92,77,87,80,70,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="136,5,238,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="176,46,159,80,154,77,172,43"/>
+</map>

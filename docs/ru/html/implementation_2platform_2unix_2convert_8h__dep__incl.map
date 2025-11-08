@@ -1,0 +1,5 @@
+<map id="source/iridium/convertion/implementation/platform/unix/convert.h" name="source/iridium/convertion/implementation/platform/unix/convert.h">
+<area shape="rect" id="Node000001" title="Объявляет платформо&#45;специфичные функции преобразования для Unix." alt="" coords="5,5,172,61"/>
+<area shape="rect" id="Node000002" href="$platform_2unix_2convert_8cpp.html" title="Реализует платформо&#45;специфичные функции преобразования целых чисел в строку для Unix." alt="" coords="5,109,172,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,77,91,108,86,108,86,77"/>
+</map>

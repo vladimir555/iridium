@@ -1,5 +1,5 @@
 <map id="iridium::io::URI::getPath" name="iridium::io::URI::getPath">
-<area shape="rect" id="Node000001" title="Gets the path component of the URI (e.g., /path/to/resource)." alt="" coords="446,5,608,31"/>
+<area shape="rect" id="Node000001" title="Gets the path component." alt="" coords="446,5,608,31"/>
 <area shape="rect" id="Node000002" href="$namespaceiridium_1_1db.html#a91db078cad003f5c796da6f27c54fa89" title="Creates a database configuration object from a URI. Parses the given URI and extracts database connec..." alt="" coords="239,5,398,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,21,398,21,398,16,430,16"/>
 <area shape="rect" id="Node000003" href="$namespaceiridium_1_1db.html#afacc46a55b26a30d286cde5c849d9253" title="Creates a database connector instance from a URI. This is a convenience function that first calls mak..." alt="" coords="5,5,191,31"/>
