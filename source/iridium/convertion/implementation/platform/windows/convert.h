@@ -2,10 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-/// \~english @brief Platform-specific header for Windows to include or define appropriate conversion helper functions.
-///     The declarations within are only compiled if `WINDOWS_PLATFORM` is defined.
-/// \~russian @brief Платформо-специфичный заголовочный файл для Windows для подключения или определения соответствующих вспомогательных функций преобразования.
-///     Объявления внутри компилируются только если определен макрос `WINDOWS_PLATFORM`.
 #ifndef HEADER_CONVERT_331F2175_E59F_4DD5_A043_451816549CD0
 #define HEADER_CONVERT_331F2175_E59F_4DD5_A043_451816549CD0
 
@@ -13,10 +9,6 @@
 #include "iridium/platform.h"
 
 
-/// \~english @brief This entire header provides Windows-platform specific helper functions for type conversions.
-///     The declarations and definitions within are only compiled if `WINDOWS_PLATFORM` is defined.
-/// \~russian @brief Весь этот заголовочный файл предоставляет специфичные для Windows-платформы вспомогательные функции для преобразования типов.
-///     Объявления и определения внутри компилируются только если определен макрос `WINDOWS_PLATFORM`.
 #ifdef WINDOWS_PLATFORM
 
 

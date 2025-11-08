@@ -9,15 +9,6 @@
 #include "iridium/platform.h"
 
 
-/// \~english @file dns.h
-/// \~english @brief Provides platform-specific DNS resolution for Emscripten.
-/// \~english This implementation includes and uses the Unix platform's DNS resolution functionality,
-/// \~english as Emscripten often relies on POSIX-like features for networking.
-/// \~russian @file dns.h
-/// \~russian @brief Предоставляет платформо-специфичное разрешение DNS для Emscripten.
-/// \~russian Данная реализация включает и использует функциональность разрешения DNS платформы Unix,
-/// \~russian поскольку Emscripten часто полагается на POSIX-подобные функции для работы с сетью.
-
 #ifdef EMSCRIPTEN_PLATFORM
 
 

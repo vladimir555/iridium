@@ -1,5 +1,3 @@
-/// \~english @brief Defines an interface for managing I/O contexts.
-/// \~russian @brief Определяет интерфейс для управления контекстами ввода-вывода.
 #ifndef HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 #define HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 

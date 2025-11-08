@@ -2,8 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-/// \~english @brief Defines interfaces related to pipe-like I/O mechanisms, focusing on stream access and data transmission.
-/// \~russian @brief Определяет интерфейсы, связанные с каналоподобными механизмами ввода-вывода, с акцентом на доступ к потокам и передачу данных.
 #ifndef HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
 #define HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
 

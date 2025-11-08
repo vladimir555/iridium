@@ -135,8 +135,10 @@ struct TConvert<std::string, std::shared_ptr<TValue>>
 
 
 template<typename TValue>
-struct TConvert<std::string, std::atomic<TValue> > {
-    static std::string convert(std::atomic<TValue> const &value) {
+struct TConvert<std::string, std::atomic<TValue>>
+{
+    static std::string convert(std::atomic<TValue> const& value)
+    {
         return TConvert<std::string, TValue>::convert(value.load());
     }
 };
@@ -147,19 +149,25 @@ struct TConvert<
     std::string,
     TContainer,
     std::enable_if_t<
-        detail::TIsSTLSequentialContainer <TContainer>::value &&
-       !detail::TIsSTLAssociativeContainer<TContainer>::value>, is_throwable >
+        detail::TIsSTLSequentialContainer<TContainer>::value &&
+        !detail::TIsSTLAssociativeContainer<TContainer>::value>,
+    is_throwable>
 {
-    static std::string convert(TContainer const &container) {
+    static std::string convert(TContainer const& container)
+    {
         std::string result;
         result.reserve(container.size() * 8 + 4);
         result = "[ ";
         bool first = true;
 
-        for (auto const &item : container) {
-            if (!first) {
+        for (auto const& item : container)
+        {
+            if (!first)
+            {
                 result += ", ";
-            } else {
+            }
+            else
+            {
                 first = false;
             }
             result += TConvert<std::string, std::decay_t<decltype(item)>>::convert(item);
@@ -177,19 +185,25 @@ struct TConvert<
     std::string,
     TContainer,
     std::enable_if_t<
-       !detail::TIsSTLSequentialContainer <TContainer>::value &&
-        detail::TIsSTLAssociativeContainer<TContainer>::value>, is_throwable >
+        !detail::TIsSTLSequentialContainer<TContainer>::value &&
+        detail::TIsSTLAssociativeContainer<TContainer>::value>,
+    is_throwable>
 {
-    static std::string convert(TContainer const &container) {
+    static std::string convert(TContainer const& container)
+    {
         std::string result;
         result.reserve(container.size() * 8 + 4);
         result = "[ ";
         bool first = true;
 
-        for (auto const &pair : container) {
-            if (!first) {
+        for (auto const& pair : container)
+        {
+            if (!first)
+            {
                 result += ", ";
-            } else {
+            }
+            else
+            {
                 first = false;
             }
             result += TConvert<std::string, typename TContainer::key_type>::convert(pair.first);
