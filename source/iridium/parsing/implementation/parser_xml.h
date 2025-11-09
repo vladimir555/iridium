@@ -16,15 +16,12 @@ namespace parsing {
 namespace implementation {
 
 
-///
 class CXMLParser: public IParser {
 public:
     DEFINE_IMPLEMENTATION(CXMLParser)
-    ///
     CXMLParser() = default;
-    ///
+
     INode::TSharedPtr parse(std::string const &source) const override;
-    ///
     std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 

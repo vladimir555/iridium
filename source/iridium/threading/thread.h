@@ -18,30 +18,22 @@ namespace iridium {
 namespace threading {
 
 
-///
-class IThread: 
+class IThread:
     public pattern::IInitializable
 {
 public:
     DEFINE_SMART_PTR(IThread)
-    ///
     virtual ~IThread() = default;
+
     /// for std::map caching
     virtual bool operator < (IThread const &thread) const = 0;
-    ///
     virtual std::string getName() const = 0;
-    ///
+
     static std::string const &getNameStatic();
 protected:
-    ///
     static void setNameStatic(std::string const &name);
 private:
-    ///
     static thread_local std::string thread_name_static;
-    
-    
-//    static std::__thread_id const thread_main_id;
-//    static std::__thread_id initMainThreadID();
 };
 
 

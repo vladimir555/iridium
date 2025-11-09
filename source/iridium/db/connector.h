@@ -29,11 +29,9 @@ class IConnector: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IConnector)
     using INode = parsing::INode;
-    ///
     virtual INode::TSharedPtr sendQuery(std::string const &query) = 0;
-    ///
+
     static std::vector<std::string> makeFields(parsing::INode::TSharedPtr const &rows);
-    ///
     static std::string const FIELD_NAME_AFFECTED_ROWS;
 };
 

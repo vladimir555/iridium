@@ -407,53 +407,5 @@ TEST(parse_compose) {
 }
 
 
-//namespace test{
-//    DEFINE_ENUM(TCmdArg, A$ARG_NAME1, B$ARG_NAME2);
-//}
-//
-//TEST(command_line) {
-//    LOGT << test::TCmdArg::A$ARG_NAME1;
-//}
-
-
-// AI generated
-
-
-//TEST(invalid_json_parsing) {
-//    auto parser = CJSONParser::create();
-//
-//    // Попытка парсинга JSON с синтаксическими ошибками
-//    ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 ]"), std::exception);
-//    ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 }"), std::exception);
-//    ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2"), std::exception);
-//    ASSERT(parser->parse("[ {\"value\": 1,  {\"value\": 2 }]"), std::exception);
-//
-//    ASSERT(parser->parse("{ value: \"missing quote }"), std::exception);
-//    ASSERT(parser->parse("{ \"unclosed_object\": { \"key\": \"value\" "), std::exception);
-//    ASSERT(parser->parse("{ \"array\": [1, 2, 3 "), std::exception);
-//
-////    {
-////        INode::TSharedPtr n = parser->parse("{ \"array\": [1, 2, 3], }");
-////        LOGD << n;
-////        ASSERT(n = parser->parse("{ \"array\": [1, 2, 3], }"), std::exception);
-////    }
-//
-////    ASSERT(parser->parse("{ \"object\": { \"key\": \"value\" , } }"), std::exception);
-////    ASSERT(parser->parse("{ : \"missing key\" }"), std::exception);
-//
-//    {
-//        INode::TSharedPtr n = parser->parse("{ \"key\" \"missing colon\" }");
-//        LOGD << n;
-//        ASSERT(parser->parse("{ \"key\" \"missing colon\" }"), std::exception);
-//    }
-//    ASSERT(parser->parse("{ \"key\": null0 }"), std::exception);
-////    ASSERT(parser->parse("{ \"key\": , \"value\" }"), std::exception);
-//    ASSERT(parser->parse("{ \"key\": 123e+ }"), std::exception);
-//    ASSERT(parser->parse("{ \"key\": 123e- }"), std::exception);
-//    ASSERT(parser->parse("{ \"key\": 123e }, "), std::exception);
-//}
-
-
 } // parsing
 } // iridium
-//IMPLEMENT_ENUM(iridium::parsing::test::TCmdArg);

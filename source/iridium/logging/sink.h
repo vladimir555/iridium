@@ -20,25 +20,18 @@ namespace iridium {
 namespace logging {
 
 
-///
 class ISink : public pattern::IInitializable {
 public:
     DEFINE_SMART_PTR(ISink)
-    ///
     DEFINE_ENUM(
         TType,
         FILE,
         CONSOLE
     )
-    ///
     virtual ~ISink() = default;
-    ///
     virtual void log(TEvent::TConstSharedPtr const &e) = 0;
-    ///
     virtual void flush() = 0;
-    ///
     static std::string makeLine(TEvent::TConstSharedPtr const &e);
-    ///
     static std::atomic<bool> is_gmt_time;
 };
 
@@ -47,7 +40,7 @@ public:
 } // iridium
 
 
-//DEFINE_ENUM_CONVERT(iridium::logging::ISink::TType)
+DEFINE_ENUM_CONVERT(iridium::logging::ISink::TType)
 
 
 #endif // HEADER_SINK_3A3CF594_E847_4869_B666_7DF6E46ADCCA

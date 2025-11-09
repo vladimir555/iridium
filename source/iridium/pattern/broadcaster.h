@@ -17,19 +17,13 @@ namespace pattern {
 // ----- interface
 
 
-///
 template<typename TReceiver>
 class Broadcaster {
 public:
-    ///
     Broadcaster() = default;
-    ///
     virtual ~Broadcaster() = default;
-    ///
     void attach(typename TReceiver::TSharedPtr const &receiver);
-    ///
     void detach(typename TReceiver::TSharedPtr const &receiver);
-    ///
     template<typename TReceiver_, typename ... TArgs>
     void broadcast(void(TReceiver_::*f)(TArgs const & ...), TArgs const & ... args);
 

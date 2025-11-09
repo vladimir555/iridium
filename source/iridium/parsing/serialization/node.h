@@ -26,21 +26,13 @@ namespace serialization {
 template<typename TValue>
 class NodeView {
 public:
-    ///
    ~NodeView() = default;
-    /// todo: lazy convertion
     TValue get() const;
-    ///
     void set(TValue const &value);
-    ///
     bool isDefault() const;
-    ///
     operator TValue() const;
-    ///
     NodeView &operator= (TValue const &value);
-    ///
     bool operator== (TValue const &value) const;
-    ///
     INode::TSharedPtr getNode() const;
 
 protected:
@@ -72,13 +64,9 @@ public:
     NodeView(
          INode::TSharedPtr  const &node,
          std::string        const &name);
-    ///
    ~NodeView() = default;
-    ///
     INode::TSharedPtr       getNode() const;
-    ///
     INode::TSharedPtr       m_node;
-    ///
     std::string             m_path;
 
 protected:
@@ -95,40 +83,29 @@ protected:
 template<typename TNodeView>
 class NodeViewList {
 public:
-    ///
    ~NodeViewList() = default;
-    ///
     typedef typename std::list<TNodeView> TNodes;
     typedef typename std::list<TNodeView>::iterator iterator;
     typedef typename std::list<TNodeView>::const_iterator const_iterator;
-    ///
+
     iterator begin();
-    ///
     iterator end();
-    ///
     const_iterator begin() const;
-    ///
     const_iterator end() const;
-    ///
+
     size_t size() const;
-    ///
+
     void add(TNodeView const &node);
-    ///
     template<typename TValue>
     void add(TValue const &node);
-    ///
     void clear();
 
 protected:
-    ///
     NodeViewList(NodeView<void> const * const parent, std::string const &name);
 
 private:
-    ///
     NodeView<void> const * const m_parent;
-    ///
     std::string m_name;
-    ///
     std::list<TNodeView> m_nodes;
 };
 

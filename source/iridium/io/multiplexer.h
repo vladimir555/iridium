@@ -21,15 +21,11 @@ namespace io {
 class IMultiplexer: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IMultiplexer)
-    ///
     static std::chrono::seconds const DEFAULT_WAITING_TIMEOUT;
-    ///
+
     virtual std::list<Event::TSharedPtr> waitEvents() = 0;
-    ///
     virtual void subscribe  (IStream::TSharedPtr const &stream) = 0;
-    ///
     virtual void unsubscribe(IStream::TSharedPtr const &stream) = 0;
-    ///
     virtual void wake(Event::TSharedPtr const &event) = 0;
 };
 

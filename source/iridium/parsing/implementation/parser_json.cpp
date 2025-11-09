@@ -5,7 +5,6 @@
 
 #include "iridium/parsing/implementation/node.h"
 #include "iridium/convertion/convert.h"
-#include "iridium/convertion/type_name.h"
 #include "iridium/assert.h"
 #include "iridium/strings.h"
 #include "iridium/items.h"

@@ -27,75 +27,49 @@ template<typename TValue>
 class CNodeType : virtual public INodeType<TValue> {
 public:
     DEFINE_CREATE(CNodeType)
-    ///
     explicit CNodeType(std::string const &name, TValue const &value);
-    ///
     explicit CNodeType(std::string const &name, TValue const &value, std::string const &type);
-    ///
     explicit CNodeType(std::string const &name);
-    ///
     virtual ~CNodeType();
-    ///
+
     virtual typename INodeType<TValue>::TNodesPtr getParents() const override;
-    ///
     std::string getName() const override final;
-    ///
     TValue      getValue() const override;
-    ///
     void        setValue(TValue const &value) override;
-    ///
     std::string getType() const override;
-    ///
+
     typename INodeType<TValue>::TNodesSharedPtr slice(std::string const &path) const override;
-    ///
+
     typename INodeType<TValue>::iterator        begin() override;
-    ///
     typename INodeType<TValue>::iterator        end() override;
-    ///
     typename INodeType<TValue>::const_iterator  begin() const override;
-    ///
     typename INodeType<TValue>::const_iterator  end() const override;
-    ///
+
     size_t size() const override;
-    ///
     bool hasChilds() const override;
-    ///
+
     typename INodeType<TValue>::TSharedPtr      getChild(std::string const &name) override;
-    ///
     typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
-    ///
     typename INodeType<TValue>::TNodesSharedPtr getChilds(std::string const &name) const override;
-    ///
+
     typename INodeType<TValue>::TSharedPtr      addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
-    ///
     typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name) override;
-    ///
     typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name, TValue const &value) override;
-    ///
+
     void                                        delChilds(std::string const &name) override;
-    ///
+
     typename INodeType<TValue>::TSharedPtr      clone() const override;
 
 private:
-    ///
     typedef std::unordered_set<std::string> TStrings;
-    ///
     explicit CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings);
-    ///
     explicit CNodeType(std::string const &name, std::shared_ptr<TStrings> const &strings);
-    ///
     std::string const *makeName(std::string const &name);
-    ///
     std::shared_ptr<TStrings> m_strings;
-    ///
     std::string const * const m_name = nullptr;
-    ///
     std::string const * const m_type = nullptr;
-    ///
     TValue m_value;
-    ///
     typename INodeType<TValue>::TNodesSharedPtr m_nodes;
-    ///
     typename INodeType<TValue>::TNodesPtr       m_parent_nodes;
 };
 

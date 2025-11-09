@@ -16,15 +16,11 @@ namespace parsing {
 namespace implementation {
 
 
-///
 class CHTTPParser: public IParser {
 public:
     DEFINE_IMPLEMENTATION(CHTTPParser)
-    ///
     CHTTPParser() = default;
-    ///
     INode::TSharedPtr parse(std::string const &source) const override;
-    ///
     std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 

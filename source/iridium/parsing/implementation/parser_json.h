@@ -16,15 +16,11 @@ namespace parsing {
 namespace implementation {
 
 
-///
 class CJSONParser : public IParser {
 public:
     DEFINE_IMPLEMENTATION(CJSONParser)
-    ///
     CJSONParser() = default;
-    ///
     INode::TSharedPtr parse(std::string const &source) const override;
-    ///
     std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
 

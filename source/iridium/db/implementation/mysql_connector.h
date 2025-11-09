@@ -25,26 +25,19 @@ namespace db {
 namespace implementation {
 
 
-class CMySQLConnector: 
+class CMySQLConnector:
     public IConnector,
     public CConnector
 {
 public:
     DEFINE_CREATE(CMySQLConnector)
-    ///
     CMySQLConnector(config::TDatebase const &config);
-    ///
     virtual ~CMySQLConnector();
-    ///
     void initialize() override;
-    ///
     void finalize() override;
-    ///
-    INode::TSharedPtr
-        sendQuery(std::string const &query) override;
+    INode::TSharedPtr sendQuery(std::string const &query) override;
 
 private:
-    ///
     ::MYSQL m_connection;
 };
 
