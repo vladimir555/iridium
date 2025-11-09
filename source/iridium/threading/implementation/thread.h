@@ -25,7 +25,7 @@ namespace threading {
 namespace implementation {
 
 
-class CThread: 
+class CThread:
     public IThread,
     public pattern::NonCopyable,
     public pattern::NonMovable
@@ -33,24 +33,19 @@ class CThread:
 public:
     DEFINE_CREATE(CThread)
     static std::chrono::seconds const DEFAULT_TIMEOUT;
-    ///
     CThread(
         std::string const &name,
         IRunnable::TSharedPtr const &runnuble,
         std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
-    ///
     virtual ~CThread();
-    ///
+
     void initialize() override;
-    ///
     void finalize() override;
-    ///
+
     bool operator < (IThread const &thread) const override;
-    ///
     std::string getName() const override;
 
 protected:
-    ///
     static void run(
         std::string             const &name,
         IRunnable::TSharedPtr   const &runnuble,
@@ -58,12 +53,12 @@ protected:
         IAsyncQueuePusher<std::string>::TSharedPtr const &status_stop,
         std::atomic<bool> *     const  is_running
     );
-    ///
-    std::string const               m_name;
-    ///
-    IRunnable::TSharedPtr           m_runnuble;
-    ///
-    std::shared_ptr<std::thread>    m_thread;
+    std::string const
+        m_name;
+    IRunnable::TSharedPtr
+        m_runnuble;
+    std::shared_ptr<std::thread>
+        m_thread;
 private:
     std::string checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const &error_queue);
 

@@ -23,36 +23,26 @@ namespace implementation {
 class CFileCache : public ICache {
 public:
     DEFINE_CREATE(CFileCache)
-    ///
     explicit CFileCache(std::string const &file_name);
-    ///
     virtual ~CFileCache() = default;
-    ///
+
     virtual void initialize() override;
-    ///
     virtual void finalize() override;
-    ///
     virtual size_t push(std::string const &line) override;
-    ///
     virtual std::string get(size_t const &id) const override;
-    ///
     virtual void remove(size_t const &id) override;
-    ///
     virtual void clean() override;
-    ///
     virtual size_t size() const override;
-    ///
     virtual bool checkExistense(size_t const &id) const override;
-    ///
     virtual void flush() override;
 
 private:
-    ///
-    std::string                     m_file_name;
-    ///
-    IFileStreamWriter::TSharedPtr   m_file_writer;
-    ///
-    std::vector< std::shared_ptr<std::string> > m_lines;
+    std::string
+        m_file_name;
+    IFileStreamWriter::TSharedPtr
+        m_file_writer;
+    std::vector< std::shared_ptr<std::string> >
+        m_lines;
 };
 
 

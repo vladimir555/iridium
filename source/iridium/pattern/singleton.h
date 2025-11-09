@@ -24,9 +24,7 @@ class Singleton:
     public NonMovable
 {
 public:
-    ///
     virtual ~Singleton();
-    ///
     static TClass &instance();
 protected:
     static std::atomic<bool> m_is_alive;

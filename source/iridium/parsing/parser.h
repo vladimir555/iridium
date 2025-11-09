@@ -17,15 +17,12 @@ namespace iridium {
 namespace parsing {
 
 
-///
 class IParser {
 public:
     DEFINE_SMART_PTR(IParser)
-    ///
     virtual ~IParser() = default;
-    ///
+
     virtual INode::TSharedPtr parse(std::string const &source) const = 0;
-    ///
     virtual std::string compose(INode::TConstSharedPtr const &root_node) const = 0;
 };
 

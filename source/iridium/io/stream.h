@@ -16,12 +16,6 @@
 #include <list>
 
 
-//#ifdef WINDOWS_PLATFORM
-//#define WIN32_LEAN_AND_MEAN
-//#include <Windows.h>
-//#endif
-
-
 namespace iridium {
 namespace io {
 
@@ -53,7 +47,7 @@ public:
     virtual size_t write(Buffer::TSharedPtr const &buffer) = 0;
 };
 
-    
+
 class IStreamPort:
     public virtual IStreamReader,
     public virtual IStreamWriter
@@ -72,12 +66,6 @@ public:
 
 } // io
 } // iridium
-
-
-//template <>
-//struct std::hash<iridium::io::IStream::TSharedPtr> {
-//    std::size_t operator()(iridium::io::IStream::TSharedPtr const &stream) const;
-//};
 
 
 #endif // HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358

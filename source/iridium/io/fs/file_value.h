@@ -24,16 +24,12 @@ template<typename TValue>
 class FileValue {
 public:
     FileValue(std::string const &file_name, TValue const &default_value = {});
-    ///
     ~FileValue() = default;
-    ///
+
     void operator = (TValue const &value);
-    ///
     operator TValue() const;
 private:
-    ///
     std::string m_file_name;
-    ///
     TValue      m_value;
 };
 

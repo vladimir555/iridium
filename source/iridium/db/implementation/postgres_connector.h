@@ -31,22 +31,13 @@ class CPostgresConnector:
 {
 public:
     DEFINE_CREATE(CPostgresConnector)
-    ///
     CPostgresConnector(config::TDatebase const &config);
-    ///
     virtual ~CPostgresConnector() override;
-    ///
     void initialize() override;
-    ///
     void finalize() override;
-    ///
-    virtual INode::TSharedPtr
-        sendQuery(std::string const &query) override;
+    virtual INode::TSharedPtr sendQuery(std::string const &query) override;
 
 private:
-    // ///
-    // void executeCommand(std::string const &command);
-    ///
     PGconn *m_connection;
 };
 

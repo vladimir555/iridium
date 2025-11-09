@@ -17,9 +17,7 @@ namespace iridium {
 namespace parsing {
 
 
-///
 INode::TSharedPtr parseFile(std::string const &file_name);
-///
 void composeFile(std::string const &file_name, INode::TSharedPtr const &root_node);
 
 

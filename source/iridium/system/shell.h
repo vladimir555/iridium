@@ -18,11 +18,10 @@ namespace system {
 class Shell: public pattern::IInitializable {
 public:
     DEFINE_IMPLEMENTATION(Shell)
-    ///
     Shell();
-    ///
+
     typedef std::chrono::seconds TTimeDuration;
-    ///
+
     static TTimeDuration const DEFAULT_TIMEOUT;
 
     struct TResult {

@@ -13,14 +13,12 @@ namespace iridium {
 namespace pattern {
 
 
-///
 class IInitializable {
 public:
     DEFINE_SMART_PTR(IInitializable)
     virtual ~IInitializable() = default;
-    ///
+
     virtual void initialize() = 0;
-    ///
     virtual void finalize() = 0;
 };
 

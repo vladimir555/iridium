@@ -13,14 +13,12 @@ namespace iridium {
 namespace pattern {
 
 
-/// prototype pattern
 template<typename TSubject>
 class IPrototype {
 public:
     DEFINE_SMART_PTR(IPrototype<TSubject>)
-    /// default destructor
     virtual ~IPrototype() = default;
-    /// 
+
     virtual std::shared_ptr<TSubject> clone() const = 0;
 };
 

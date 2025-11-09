@@ -17,29 +17,23 @@ namespace iridium {
 namespace pattern {
 
 
-///
 template<typename TState, typename TEvent>
 class FSM {
 public:
     DEFINE_CREATE(FSM)
-    ///
     using THandler = std::function<void()>;
-    ///
     struct TTransition {
         TState   from;
         TEvent   event;
         TState   to;
         THandler handler;
     };
-    ///
     FSM(TState const &initial_state);
-    ///
     void addTransition(
         TEvent   const &event,
         TState   const &from,
         TState   const &to,
         THandler const &handler = {});
-    ///
     TState doAction(TEvent const &event);
 
 private:
