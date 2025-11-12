@@ -9,8 +9,8 @@ else()
     file(GLOB SUBDIRS LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/source/*")
     foreach(dir ${SUBDIRS})
         get_filename_component(name "${dir}" NAME)
-        if(IS_DIRECTORY "${dir}" 
-            AND NOT name MATCHES "-test$" 
+        if(IS_DIRECTORY "${dir}"
+            AND NOT name MATCHES "-test$"
             AND NOT name MATCHES "-binary$")
             set(PROJECT_NAME "${name}")
             break()
@@ -36,13 +36,13 @@ endif()
 file(READ "${VERSION_HEADER}" version_content)
 
 # Extract version components — robust to whitespace
-string(REGEX MATCH "PROJECT_VERSION_MAJOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME}_VERSION_MAJOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MAJOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "PROJECT_VERSION_MINOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME}_VERSION_MINOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MINOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "PROJECT_VERSION_PATCH[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME}_VERSION_PATCH[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_PATCH "${CMAKE_MATCH_1}")
 
 # Validate (0 is valid, empty is not)

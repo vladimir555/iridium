@@ -9,4 +9,4 @@
 
 #define iridium_VERSION_MAJOR = 0;
 #define iridium_VERSION_MINOR = 0;
-#define iridium_VERSION_PATCH = 412;
+#define iridium_VERSION_PATCH = 413;
