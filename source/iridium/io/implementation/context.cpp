@@ -11,9 +11,7 @@ using iridium::threading::implementation::CAsyncQueue;
 
 
 #include "iridium/logging/logger.h"
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 CContext::CContext(IStream::TSharedPtr const &, IProtocol::TSharedPtr const &protocol)
@@ -236,6 +234,4 @@ void CContext::removeStream(IStream::TSharedPtr const &stream, bool const &is_se
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // namespace iridium::io::implementation

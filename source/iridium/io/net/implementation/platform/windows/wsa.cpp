@@ -34,11 +34,7 @@ using std::wstring;
 
 //#include "iridium/logging/logger.h"
 //#include <iostream>
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
+namespace iridium::io::net::implementation::platform {
 
 
 URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
@@ -459,11 +455,7 @@ string WSA::getLastWSAErrorString() const {
 }
 
 
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+} // namespace iridium::io::net::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

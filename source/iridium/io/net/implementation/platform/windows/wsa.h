@@ -23,11 +23,7 @@
 #include <ws2tcpip.h>
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
+namespace iridium::io::net::implementation::platform {
 
 
 class WSA: public iridium::pattern::Singleton<WSA> {
@@ -80,11 +76,7 @@ T &WSA::assertNE(T &&result, T const &value, std::string const &message) const {
 }
 
 
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+} // namespace iridium::io::net::implementation::platform
 
 
 #endif // HEADER_WSA_51FA6227_172E_42DD_BF9E_98E03940D246
