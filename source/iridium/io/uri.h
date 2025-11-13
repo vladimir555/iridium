@@ -18,8 +18,7 @@
 #include "iridium/convertion/convert.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 //     [IPC]://[/usr/bin]/[ls]                                  - protocol + path
@@ -106,8 +105,7 @@ private:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 //DEFINE_ENUM_CONVERT(iridium::io::URI::TProtocol)

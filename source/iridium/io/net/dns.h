@@ -9,17 +9,13 @@
 #include "implementation/dns.h"
 
 
-namespace iridium {
-namespace io {
-namespace net {
+namespace iridium::io::net {
 
 
 using implementation::platform::getIPv4ByHost;
 
 
-} // net
-} // io
-} // iridium
+} // namespace iridium::io::net
 
 
 #endif // HEADER_DNS_60B2E420_B240_48F0_9E6E_B51284FAF8B6

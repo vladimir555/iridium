@@ -20,8 +20,7 @@
 #include "iridium/pattern/non_movable.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 // This file implements the following syntax:
@@ -368,8 +367,7 @@ typename Mock<TClass>::template Behavior<TResult( TClass::*)(TArgs...) const>
 }
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 #define DEFINE_MOCK_METHOD_2(TResult, methodName) \

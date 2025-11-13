@@ -5,8 +5,7 @@
 #include "event.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class IContext {
@@ -36,8 +35,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6

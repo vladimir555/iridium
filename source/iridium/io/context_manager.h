@@ -8,8 +8,7 @@
 #include "multiplexer.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class IContextManager {
@@ -27,8 +26,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF

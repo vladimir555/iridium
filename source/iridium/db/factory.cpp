@@ -21,8 +21,7 @@ using iridium::db::implementation::CPostgresConnector;
 #endif // BUILD_FLAG_POSTGRES
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 config::TDatebase makeConfig(io::URI const &uri) {
@@ -76,5 +75,4 @@ IConnector::TSharedPtr createConnector(io::URI const &uri) {
 }
 
 
-} // db
-} // iridium
+} // namespace iridium::db

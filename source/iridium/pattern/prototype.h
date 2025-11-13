@@ -9,8 +9,7 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 template<typename TSubject>
@@ -23,8 +22,7 @@ public:
 };
 
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern
 
 
 #endif // HEADER_PROTOTYPE_248BDC92_79E1_458D_85F8_A8E49C19564B

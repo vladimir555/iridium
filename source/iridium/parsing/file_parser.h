@@ -13,16 +13,14 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 INode::TSharedPtr parseFile(std::string const &file_name);
 void composeFile(std::string const &file_name, INode::TSharedPtr const &root_node);
 
 
-} // parser
-} // iridium
+} // namespace iridium::parsing
 
 
 #endif // HEADER_FILE_PARSER_8AEAABAE_12E8_4F2B_9880_CE659DC13896

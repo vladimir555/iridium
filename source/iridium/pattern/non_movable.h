@@ -6,8 +6,7 @@
 #define HEADER_NON_MOVABLE_8C6763E9_B57A_4D83_93DD_AF9608B7E11A
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 class NonMovable {
@@ -20,8 +19,7 @@ protected:
 };
 
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern
 
 
 #endif // HEADER_NON_MOVABLE_8C6763E9_B57A_4D83_93DD_AF9608B7E11A

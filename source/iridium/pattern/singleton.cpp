@@ -1,12 +1,10 @@
 #include "singleton.h"
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 //std::list<std::shared_ptr<Instance> > Instance::m_instances;
 
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern

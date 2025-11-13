@@ -30,8 +30,7 @@ DEFINE_ENUM_CONVERT(TEnum)
 IMPLEMENT_ENUM(TEnum)
 
 
-namespace iridium {
-namespace convertion {
+namespace iridium::convertion {
 
 
 //template<typename TValue>
@@ -307,5 +306,4 @@ TEST(exception) {
 }
 
 
-} // convertion
-} // iridium
+} // namespace iridium::convertion

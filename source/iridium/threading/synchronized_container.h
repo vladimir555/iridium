@@ -11,8 +11,7 @@
 #include "iridium/threading/synchronized.h"
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 template<typename TKey, typename TValue>
@@ -64,8 +63,7 @@ size_t SynchronizedContainer<TKey, TValue>::del(TKey const &key) {
 }
 
     
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 #endif // HEADER_SYNCHRONIZED_CONTAINER_239086AF_AB7B_403B_A1B5_7D5CB97DA8E6

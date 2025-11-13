@@ -9,9 +9,7 @@
 #include "iridium/io/stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 #ifdef _MSC_VER
@@ -67,9 +65,7 @@ public:
 #endif // _MSC_VER
 
 
-} // implementation
-} // io
-} // iridium
+} // namespace iridium::io::implementation
 
 
 #endif // HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB

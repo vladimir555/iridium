@@ -15,8 +15,7 @@ using iridium::convertion::convert;
 using std::string;
 
 
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 
 Logger::~Logger() {
@@ -215,5 +214,4 @@ string extractFileNameToLog(string const &path) {
 }
 
 
-} // logger
-} // iridium
+} // namespace iridium::logging
