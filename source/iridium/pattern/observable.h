@@ -9,8 +9,7 @@
 #include "observer.h"
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 template <typename TEvent>
@@ -22,8 +21,7 @@ public:
     virtual void notify     (TEvent const &event) = 0;
 };
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern
 
 
 #endif // HEADER_OBSERVABLE_EDD92C20_D8E9_491E_B074_1B31B94F754C

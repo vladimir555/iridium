@@ -16,8 +16,7 @@
 #include <atomic>
 
 
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 
 class ISink : public pattern::IInitializable {
@@ -36,8 +35,7 @@ public:
 };
 
 
-} // logger
-} // iridium
+} // namespace iridium::logging
 
 
 DEFINE_ENUM_CONVERT(iridium::logging::ISink::TType)

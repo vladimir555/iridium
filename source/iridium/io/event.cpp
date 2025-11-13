@@ -2,8 +2,7 @@
 #include <unordered_set>
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 Event::Event(IStream::TSharedPtr const &stream_, TOperation const &operation_, TStatus const &status_)
@@ -14,8 +13,7 @@ Event::Event(IStream::TSharedPtr const &stream_, TOperation const &operation_, T
 {}
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 size_t std::hash<iridium::io::Event>::operator()

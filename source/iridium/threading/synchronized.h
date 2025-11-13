@@ -23,8 +23,7 @@
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 // ----- class definition
@@ -138,8 +137,7 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds co
 }
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 #define LOCK_SCOPE() \

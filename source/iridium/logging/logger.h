@@ -26,8 +26,7 @@
 #include "config.h"
 
 
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 
 // todo: wait for finalizing async sinks
@@ -100,8 +99,7 @@ std::string convertFunctionNameToLogFunctionName(std::string const &name);
 std::string extractFileNameToLog(std::string const &path);
 
 
-} // logging
-} // iridium
+} // namespace iridium::logging
 
 
 #ifdef _MSC_VER

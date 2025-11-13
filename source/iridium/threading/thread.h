@@ -14,8 +14,7 @@
 #include <thread>
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 class IThread:
@@ -41,8 +40,7 @@ void sleep(int const &milliseconds);
 std::string getThreadID();
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 #endif // HEADER_THREAD_EC50D1AB_7469_400A_90D9_4977B01B0A71

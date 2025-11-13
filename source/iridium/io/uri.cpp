@@ -11,8 +11,7 @@ using std::vector;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 URI::TIPv4::TIPv4()
@@ -256,8 +255,7 @@ bool URI::operator <  (URI const &uri) const {
 }
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 namespace {

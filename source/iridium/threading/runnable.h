@@ -12,8 +12,7 @@
 #include <atomic>
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 class IRunnable: public pattern::IInitializable {
@@ -23,8 +22,7 @@ public:
 };
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 #endif // HEADER_RUNNUBLE_82187C6C_2498_4042_A14B_902FECFE4570

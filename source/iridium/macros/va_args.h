@@ -6,10 +6,8 @@
 #define HEADER_VA_ARGS_A200B22F_46BD_4D03_A488_82E71F3E5F7F
 
 
-namespace iridium {
-namespace macros {
-} // macros
-} // iridium
+namespace iridium::macros {
+} // namespace iridium::macros
 
 
 // --- поддержка до 7 аргументов включительно

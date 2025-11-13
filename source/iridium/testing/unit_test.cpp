@@ -3,8 +3,7 @@
 #include <cmath>
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 Exception::Exception(std::string const &what)
@@ -109,5 +108,4 @@ void UnitTest::assert_(bool const &is_true,
 }
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing

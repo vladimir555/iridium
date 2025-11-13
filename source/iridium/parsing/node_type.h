@@ -14,8 +14,7 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 // todo: Depth-First Search, DFS) and (Breadth-First Search, BFS) methods maybe parallel
@@ -54,8 +53,7 @@ public:
 };
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing
 
 
 #endif // HEADER_NODE_96BF1757_0A3E_46F0_94CB_A7AFC4877775

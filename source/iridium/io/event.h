@@ -11,8 +11,7 @@
 #include "stream.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 struct Event {
@@ -41,8 +40,7 @@ struct Event {
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 template<>

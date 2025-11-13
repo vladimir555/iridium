@@ -26,8 +26,7 @@ using iridium::testing::implementation::CTestRunnerFork;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 struct TCmdArgs {
@@ -62,8 +61,7 @@ struct TCmdArgs {
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 //DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TCommand);

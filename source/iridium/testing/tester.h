@@ -20,8 +20,7 @@
 #include "unit_test.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 class Tester final: public pattern::Singleton<Tester> {
@@ -48,8 +47,7 @@ private:
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 #define CONCAT_IMPL( x, y ) x##y

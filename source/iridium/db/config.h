@@ -10,9 +10,7 @@
 #include "iridium/enum.h"
 
 
-namespace iridium {
-namespace db {
-namespace config {
+namespace iridium::db::config {
 
 
 DEFINE_ROOT_NODE_BEGIN(Datebase)
@@ -30,11 +28,7 @@ DEFINE_ROOT_NODE_BEGIN(Datebase)
 DEFINE_ROOT_NODE_END()
 
 
-} // config
-
-
-} // db
-} // iridium
+} // namespace iridium::db::config
 
 
 //DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)

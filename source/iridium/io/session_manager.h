@@ -11,8 +11,7 @@
 #include "protocol.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class ISessionManager: public pattern::IInitializable {
@@ -25,8 +24,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_SESSION_MANAGER_BB5946FC_0AA1_4747_AE53_07DB1F105A72

@@ -10,8 +10,7 @@
 #include "iridium/io/event.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class IPipeStreams {
@@ -48,8 +47,7 @@ public:
 //bool operator < (IPipeStreams::TSharedPtr const &l, IPipeStreams::TSharedPtr const &r);
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B

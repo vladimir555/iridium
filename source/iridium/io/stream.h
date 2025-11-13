@@ -16,8 +16,7 @@
 #include <list>
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 static size_t const DEFAULT_BUFFER_SIZE = 4096;
@@ -64,8 +63,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358
