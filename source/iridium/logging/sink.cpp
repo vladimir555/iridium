@@ -15,8 +15,7 @@ using std::chrono::system_clock;
 using iridium::threading::getThreadID;
 
 
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 
 std::atomic<bool> ISink::is_gmt_time(false);
@@ -31,5 +30,4 @@ std::string ISink::makeLine(TEvent::TConstSharedPtr const &e) {
 }
 
 
-} // logger
-} // iridium
+} // namespace iridium::logging

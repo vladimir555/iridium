@@ -22,8 +22,7 @@ using iridium::parsing::implementation::CJSONParser;
 using iridium::parsing::implementation::CXMLParser;
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 IParser::TSharedPtr createParserByExtension(string const &file_name) {
@@ -55,5 +54,4 @@ void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
 }
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing

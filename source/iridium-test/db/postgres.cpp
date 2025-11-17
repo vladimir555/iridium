@@ -8,8 +8,7 @@
 #include <iridium/db/factory.h>
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 TEST(postgres) {
@@ -28,8 +27,7 @@ TEST(postgres) {
 }
 
 
-} // db
-} // iridium
+} // namespace iridium::db
 
 
 #endif // BUILD_FLAG_POSTGRES

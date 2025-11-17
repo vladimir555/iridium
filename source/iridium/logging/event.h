@@ -12,8 +12,7 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 
 struct TEvent {
@@ -38,8 +37,7 @@ struct TEvent {
 };
 
 
-} // logger
-} // iridium
+} // namespace iridium::logging
 
 
 //DEFINE_ENUM_CONVERT(iridium::logging::TEvent::TLevel)

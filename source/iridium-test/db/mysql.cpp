@@ -8,8 +8,7 @@
 #include <iridium/db/factory.h>
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 TEST(mysql) {
@@ -27,8 +26,7 @@ TEST(mysql) {
 }
 
 
-} // db
-} // iridium
+} // namespace iridium::db
 
 
 #endif // BUILD_FLAG_POSTGRES

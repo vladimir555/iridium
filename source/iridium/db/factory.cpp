@@ -21,8 +21,7 @@ using iridium::db::implementation::CPostgresConnector;
 #endif // BUILD_FLAG_POSTGRES
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 config::TDatebase makeConfig(io::URI const &uri) {
@@ -65,7 +64,7 @@ IConnector::TSharedPtr createConnector(TDatebase const &config) {
         return CPostgresConnector::create(config); // ----->
 #endif // BUILD_FLAG_POSTGRES
     default:
-        throw std::runtime_error("creating db connector error: unknown db type " + 
+        throw std::runtime_error("creating db connector error: unknown db type " +
             convert<string>(config.Type.get())); // ----->
     }
 }
@@ -76,5 +75,4 @@ IConnector::TSharedPtr createConnector(io::URI const &uri) {
 }
 
 
-} // db
-} // iridium
+} // namespace iridium::db

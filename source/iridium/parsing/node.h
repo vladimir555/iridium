@@ -9,15 +9,13 @@
 #include "node_type.h"
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 typedef INodeType<std::string> INode;
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing
 
 
 DEFINE_CONVERT(std::string, iridium::parsing::INode)

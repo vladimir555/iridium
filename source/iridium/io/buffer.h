@@ -14,8 +14,7 @@
 #include <list>
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class Buffer: public std::vector<uint8_t> {
@@ -43,8 +42,7 @@ Buffer::Buffer(TArgs ... args)
 {}
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 DEFINE_CONVERT(iridium::io::Buffer, std::string)

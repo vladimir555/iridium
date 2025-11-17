@@ -8,8 +8,7 @@
 using namespace std;
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 /*
@@ -90,8 +89,7 @@ TEST(fsm_map) {
 }
 
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern
 
 
 DEFINE_ENUM_CONVERT(iridium::pattern::TState)

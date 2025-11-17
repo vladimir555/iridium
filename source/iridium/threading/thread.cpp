@@ -31,8 +31,7 @@ struct VS2013_threading_fix {
 }
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 thread_local std::string IThread::thread_name_static;
@@ -70,5 +69,4 @@ void IThread::setNameStatic(std::string const &name) {
 //std::__thread_id const IThread::thread_main_id = IThread::initMainThreadID();
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading

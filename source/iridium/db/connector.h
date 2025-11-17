@@ -14,8 +14,7 @@
 #include <vector>
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 class Exception : public std::runtime_error {
@@ -36,8 +35,7 @@ public:
 };
 
 
-} // db
-} // iridium
+} // namespace iridium::db
 
 
 #endif // HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C

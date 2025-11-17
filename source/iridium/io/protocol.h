@@ -6,8 +6,7 @@
 #include "event.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class IProtocol {
@@ -17,8 +16,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_PROTOCOL_A4280CC9_7465_4C74_805A_D60B575171BB

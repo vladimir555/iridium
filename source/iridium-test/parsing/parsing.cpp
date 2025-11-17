@@ -210,8 +210,7 @@ string const http_header_composed = ""
 } // unnamed
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 TEST(parse_xml) {
@@ -407,5 +406,4 @@ TEST(parse_compose) {
 }
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing

@@ -18,8 +18,7 @@
 #include "iridium/convertion/convert.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 //     [IPC]://[/usr/bin]/[ls]                                  - protocol + path
@@ -36,7 +35,7 @@ namespace io {
 class URI {
 public:
     DEFINE_ENUM(
-        TProtocol, 
+        TProtocol,
         TCP         = -2,
         UDP         = -3,
         WS          = -4,
@@ -65,7 +64,7 @@ public:
     struct TIPv6: public std::array<uint16_t, 8> {
         DEFINE_CREATE(TIPv6)
     };
-    
+
     typedef uint16_t
                 TPort;
     typedef std::unordered_map<std::string, std::string>
@@ -106,8 +105,7 @@ private:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 //DEFINE_ENUM_CONVERT(iridium::io::URI::TProtocol)

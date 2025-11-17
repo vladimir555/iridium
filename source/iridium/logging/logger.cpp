@@ -15,8 +15,7 @@ using iridium::convertion::convert;
 using std::string;
 
 
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 
 Logger::~Logger() {
@@ -40,19 +39,19 @@ void Logger::setConfig(config::TLogger const &config) {
 
     for (auto const &sink: m_sinks)
         sink->finalize();
-    
+
     m_sinks.clear();
     ISink::is_gmt_time = config.IsGmtTime;
-    
+
     bool is_console_sink_initialized = false;
     for (auto const &sink_config: config.Sink) {
         auto level = sink_config.Level;
-        
+
         if (level.isDefault())
             level  = config.Level;
-        
+
         ISink::TSharedPtr sink;
-        
+
         switch (sink_config.Type.get()) {
         case config::TLogger::TSink::TSinkType::CONSOLE:
 
@@ -76,7 +75,7 @@ void Logger::setConfig(config::TLogger const &config) {
         default:
             break; // --->
         };
-        
+
         if(!sink)
             throw std::runtime_error(
                 "sink type '" + convert<std::string>(sink_config.Type.get()) +
@@ -84,11 +83,11 @@ void Logger::setConfig(config::TLogger const &config) {
 
         if (sink_config.IsAsync.get())
             sink = CSinkAsync::create(sink);
-        
+
         sink->initialize();
         m_sinks.push_back(sink);
     }
-    
+
     m_config = config.getNode();
 }
 
@@ -215,5 +214,4 @@ string extractFileNameToLog(string const &path) {
 }
 
 
-} // logger
-} // iridium
+} // namespace iridium::logging

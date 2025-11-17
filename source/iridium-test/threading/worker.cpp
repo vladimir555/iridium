@@ -50,8 +50,7 @@ private:
 }
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 TEST(worker) {
@@ -132,5 +131,4 @@ TEST(worker_pool) {
 }
 
 
-} // net
-} // iridium
+} // namespace iridium::threading
