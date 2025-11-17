@@ -3,8 +3,7 @@
 #include <string>
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 Buffer::Buffer(char const * const str)
@@ -65,8 +64,7 @@ void Buffer::emplace_back(Buffer::TSharedPtr const &buffer) {
 }
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 namespace {

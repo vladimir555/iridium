@@ -15,9 +15,7 @@
 #include "iridium/io/uri.h"
 
 
-namespace iridium {
-namespace logging {
-namespace config {
+namespace iridium::logging::config {
 
 
 DEFINE_ROOT_NODE_BEGIN(Logger)
@@ -42,9 +40,7 @@ DEFINE_ROOT_NODE_END()
 TLogger createDefault();
 
 
-} // config
-} // logger
-} // iridium
+} // namespace iridium::logging::config
 
 
 //DEFINE_ENUM_CONVERT(iridium::logging::config::TLogger::TSink::TSinkType)

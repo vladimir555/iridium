@@ -8,14 +8,13 @@
 #include "multiplexer.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 class IContextManager {
 public:
     DEFINE_INTERFACE(IContextManager)
-    
+
     virtual void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) = 0;
     virtual void    removeContext (IContext::TSharedPtr const &context) = 0;
     virtual IContext::TSharedPtr
@@ -27,8 +26,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF

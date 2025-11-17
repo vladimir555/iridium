@@ -13,8 +13,7 @@
 #include "node.h"
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 class IParser {
@@ -27,8 +26,7 @@ public:
 };
 
 
-} // parser
-} // iridium
+} // namespace iridium::parsing
 
 
 #endif // HEADER_PARSER_03279B58_63F8_4528_B88B_B391B1E43880

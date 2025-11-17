@@ -9,9 +9,7 @@ using iridium::parsing::implementation::CNode;
 IMPLEMENT_ENUM(iridium::logging::config::TLogger::TSink::TSinkType)
 
 
-namespace iridium {
-namespace logging {
-namespace config {
+namespace iridium::logging::config {
 
 
 TLogger createDefault() {
@@ -30,6 +28,4 @@ TLogger createDefault() {
 }
 
 
-} // config
-} // logger
-} // iridium
+} // namespace iridium::logging::config

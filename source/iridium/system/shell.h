@@ -11,8 +11,7 @@
 #include "iridium/io/multiplexer.h"
 
 
-namespace iridium {
-namespace system {
+namespace iridium::system {
 
 
 class Shell: public pattern::IInitializable {
@@ -39,8 +38,7 @@ private:
 };
 
 
-} // system
-} // iridium
+} // namespace iridium::system
 
 
 #endif // HEADER_SHELL_46F6D204_C1A7_4BCF_944F_F085BB17E1E2

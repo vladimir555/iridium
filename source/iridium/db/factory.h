@@ -6,8 +6,7 @@
 #include "iridium/io/uri.h"
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 config::TDatebase makeConfig(io::URI const &uri);
@@ -17,5 +16,4 @@ IConnector::TSharedPtr createConnector(config::TDatebase    const &config);
 IConnector::TSharedPtr createConnector(io::URI              const &uri);
 
 
-} // db
-} // iridium
+} // namespace iridium::db

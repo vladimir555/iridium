@@ -11,8 +11,7 @@
 #include "iridium/threading/synchronized.h"
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 template<typename TKey, typename TValue>
@@ -24,19 +23,19 @@ public:
     size_t  set(TKey const &key, TValue const &value);
     TValue  get(TKey const &key) const;
     size_t  del(TKey const &key);
-    
+
 private:
     std::unordered_map<TKey, TValue> m_map_key_value;
 };
 
-    
+
 template<typename TKey, typename TValue>
 SynchronizedContainer<TKey, TValue>::SynchronizedContainer()
 :
     Synchronized(implementation::CRecursiveMutex::create())
 {}
-    
-    
+
+
 template<typename TKey, typename TValue>
 size_t SynchronizedContainer<TKey, TValue>::set(TKey const &key, TValue const &value) {
     LOCK_SCOPE()
@@ -44,7 +43,7 @@ size_t SynchronizedContainer<TKey, TValue>::set(TKey const &key, TValue const &v
     return m_map_key_value.size(); // ----->
 }
 
-    
+
 template<typename TKey, typename TValue>
 TValue SynchronizedContainer<TKey, TValue>::get(TKey const &key) const {
     LOCK_SCOPE()
@@ -55,7 +54,7 @@ TValue SynchronizedContainer<TKey, TValue>::get(TKey const &key) const {
         return i->second; // ----->
 }
 
-    
+
 template<typename TKey, typename TValue>
 size_t SynchronizedContainer<TKey, TValue>::del(TKey const &key) {
     LOCK_SCOPE()
@@ -63,9 +62,8 @@ size_t SynchronizedContainer<TKey, TValue>::del(TKey const &key) {
     return m_map_key_value.size(); // ----->
 }
 
-    
-} // threading
-} // iridium
+
+} // namespace iridium::threading
 
 
 #endif // HEADER_SYNCHRONIZED_CONTAINER_239086AF_AB7B_403B_A1B5_7D5CB97DA8E6

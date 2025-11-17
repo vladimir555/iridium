@@ -87,7 +87,7 @@ private:
     std::string m_db_name;
 };
 
-} // some_namespace
+} // namespace some_namespace
 
 
 using CDatabase = some_namespace::CDatabase;

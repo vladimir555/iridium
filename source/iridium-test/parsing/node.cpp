@@ -8,8 +8,7 @@ using std::string;
 using iridium::parsing::implementation::CNode;
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 INode::TSharedPtr createTestNode() {
@@ -230,5 +229,4 @@ TEST(get_child_empty_name) {
 }
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing

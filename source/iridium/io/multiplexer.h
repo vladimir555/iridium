@@ -13,8 +13,7 @@
 #include <chrono>
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 // todo: public IAsyncQueuePopper<IEvent::TSharedPtr>
@@ -30,8 +29,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_MULTIPLEXER_CD0A061D_A439_4770_B4FD_89D8393DBA1E

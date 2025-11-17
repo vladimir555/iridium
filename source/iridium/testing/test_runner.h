@@ -12,8 +12,7 @@
 #include "iridium/parsing/serialization/node.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 DEFINE_ROOT_NODE_BEGIN(Result)
@@ -34,8 +33,7 @@ public:
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 DEFINE_CONVERT(std::string, iridium::testing::ITestRunner::INodeTest)

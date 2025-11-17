@@ -9,8 +9,7 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 class IInitializable {
@@ -23,8 +22,7 @@ public:
 };
 
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern
 
 
 #endif // HEADER_INITIALIZABLE_298C30DD_3F15_4BD7_813C_B2CF00E06F08

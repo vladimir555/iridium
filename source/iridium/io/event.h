@@ -11,38 +11,36 @@
 #include "stream.h"
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 struct Event {
     DEFINE_CREATE(Event)
 
     DEFINE_ENUM(
-        TOperation, 
-        OPEN, 
+        TOperation,
+        OPEN,
         READ,
-        WRITE, 
+        WRITE,
         EOF_,
         TIMEOUT,
         ERROR_,
         CLOSE)
 
     DEFINE_ENUM(
-        TStatus, 
-        BEGIN, 
+        TStatus,
+        BEGIN,
         END)
-    
+
     Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
-    
+
     IStream::TSharedPtr stream;
     TOperation          operation;
     TStatus             status;
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 template<>

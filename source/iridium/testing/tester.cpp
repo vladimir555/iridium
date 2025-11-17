@@ -26,8 +26,7 @@ using iridium::testing::implementation::CTestRunnerFork;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 struct TCmdArgs {
@@ -62,8 +61,7 @@ struct TCmdArgs {
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 //DEFINE_ENUM_CONVERT(iridium::testing::TCmdArgs::TCommand);
@@ -75,8 +73,7 @@ IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TMode);
 IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TPrintResult);
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 typedef CNodeType<ITest *> CNodeTest;
@@ -193,10 +190,10 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         config.Sink.begin()->IsAsync = false;
         logging::setConfig(config);
     }
-    
+
     try {
         auto args = parseCommandLine(argc, argv);
-        
+
         if (args) {
 //            {
 //                using iridium::logging::config::TLogger;
@@ -210,7 +207,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 //
 //                iridium::logging::setConfig(config);
 //            }
-            
+
 //            LOGT << "\napp          : " << args->app_name
 //                 << "\ncommand      : " << args->command
 //                 << "\nmode         : " << args->mode
@@ -219,7 +216,16 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
 //                 << "\ninclude_path : " << args->include_path;
 
             if (args->command == TCmdArgs::TCommand::LIST) {
-                LOGI << getTestTree(main_cpp_path);
+//                LOGI << getTestTree(main_cpp_path);
+
+                auto main_cpp_path_ = main_cpp_path;
+                std::replace(main_cpp_path_.begin(), main_cpp_path_.end(), '\\', '/');
+                main_cpp_path_ = main_cpp_path_.substr(0, main_cpp_path_.find_last_of('/'));
+
+                string paths;
+                for (auto const &path_test: m_map_path_test)
+                    paths += "\n" + path_test.first.substr(main_cpp_path_.size());
+                LOGI << "\n" << paths << "\n\ntotal:  " << m_map_path_test.size();
                 return 0; // ----->
             }
 
@@ -237,6 +243,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             size_t failed_count = 0;
             size_t passed_count = 0;
             string errors;
+
             for (auto const &test: result.Tests) {
                 if (test.Error.get().empty())
                     passed_count++;
@@ -318,5 +325,4 @@ Tester::INodeTest::TSharedPtr Tester::getTestTree(
 }
 
 
-} // testing
-} // iridium
+} // iridium::testing

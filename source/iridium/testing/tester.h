@@ -20,8 +20,7 @@
 #include "unit_test.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 class Tester final: public pattern::Singleton<Tester> {
@@ -33,7 +32,7 @@ public:
     int  run(int argc, char* argv[], std::string const &main_cpp_path);
 
 private:
-    
+
     friend class pattern::Singleton<Tester>;
     typedef std::map< std::string, ITest * > TTestList;
 
@@ -48,8 +47,7 @@ private:
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 #define CONCAT_IMPL( x, y ) x##y
