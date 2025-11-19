@@ -2,9 +2,9 @@
 
 #include <iridium/io/protocol/http/request.h>
 #include <iridium/io/protocol/http/response.h>
-#include <iridium/parsing/implementation/parser_http.h>
-#include <iridium/parsing/implementation/parser_json.h>
-#include <iridium/parsing/implementation/parser_xml.h>
+#include <iridium/parsing/implementation/http_parser.h>
+#include <iridium/parsing/implementation/json_parser.h>
+#include <iridium/parsing/implementation/xml_parser.h>
 #include <iridium/logging/logger.h>
 
 

@@ -2,7 +2,7 @@
 
 #include "iridium/testing/unit_test.h"
 #include "iridium/logging/logger.h"
-#include "iridium/parsing/implementation/parser_json.h"
+#include "iridium/parsing/implementation/json_parser.h"
 
 #include <string>
 

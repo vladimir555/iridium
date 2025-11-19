@@ -7,7 +7,7 @@
 #include "iridium/items.h"
 #include "iridium/enum.h"
 
-#include "iridium/parsing/implementation/parser_json.h"
+#include "iridium/parsing/implementation/json_parser.h"
 
 #include "implementation/test_runner_raw.h"
 #include "implementation/test_runner_fork.h"
