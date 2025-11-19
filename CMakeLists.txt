@@ -282,13 +282,6 @@ target_link_libraries(
     ${CMAKE_THREAD_LIBS_INIT}
 )
 
-#enable_testing()
-#add_test(
-#    NAME ${PROJECT_TEST_NAME}
-#    COMMAND ${PROJECT_TEST_NAME}
-#)
-
-
 enable_testing()
 
 set(TEST_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test")
@@ -309,12 +302,6 @@ list(REMOVE_DUPLICATES TEST_CASE_PATHS)
 set(TEST_BIN "$<TARGET_FILE:${PROJECT_TEST_NAME}>")
 
 foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
-    string(SUBSTRING "${TEST_PATH}" 1 -1 PATH_NO_SLASH)
-    string(REPLACE "/" "_" SAFE_NAME "${PATH_NO_SLASH}")
-    string(REPLACE "." "_" SAFE_NAME "${SAFE_NAME}")
-
-    message(STATUS "${TEST_BIN} run ${TEST_PATH}")
-
     add_test(
         NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
         COMMAND ${TEST_BIN} run "${TEST_PATH}"
