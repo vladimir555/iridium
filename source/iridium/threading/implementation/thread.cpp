@@ -17,9 +17,7 @@ using std::chrono::milliseconds;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 std::chrono::seconds const CThread::DEFAULT_TIMEOUT(30);
@@ -112,13 +110,13 @@ void CThread::run(
     IRunnable::TSharedPtr   const &runnuble,
     IAsyncQueuePusher<string>::TSharedPtr const &status_start,
     IAsyncQueuePusher<string>::TSharedPtr const &status_stop,
-    std::atomic<bool> *     const  is_running) 
+    std::atomic<bool> *     const  is_running)
 {
     std::string error;
     bool        is_started = true;
 
     IThread::setNameStatic(name);
-    
+
     try {
         status_start->push("");
         runnuble->run(*is_running);
@@ -155,6 +153,4 @@ string CThread::checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const
 }
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation

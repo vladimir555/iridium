@@ -20,9 +20,7 @@
 #include <mysql.h>
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
 class CMySQLConnector:
@@ -42,9 +40,7 @@ private:
 };
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation
 
 
 #endif // COMPILATION_FLAG_MYSQL

@@ -54,9 +54,7 @@ static string const HTTP_BODY      = "body";
 }
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 INode::TSharedPtr CHTTPParser::parse(string const &source) const {
@@ -148,6 +146,4 @@ string CHTTPParser::compose(INode::TConstSharedPtr const &node) const {
 }
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation

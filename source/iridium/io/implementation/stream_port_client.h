@@ -8,17 +8,13 @@
 #include PLATFORM_HEADER(stream_port_client.h)
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 typedef platform::CStreamPortClient CStreamPortClient;
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_SHARED_MEMORY_STREAM_PORT_ECC31E39_C8AE_4772_B5CC_87DE1C178066

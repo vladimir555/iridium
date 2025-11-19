@@ -9,23 +9,17 @@
 #include "file_stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
-    
-    
+namespace iridium::io::fs::implementation {
+
+
 class CFileStreamWriter: public virtual CFileStream {
 public:
     DEFINE_IMPLEMENTATION(CFileStreamWriter)
     CFileStreamWriter(std::string const &path, bool const &is_rewrite = false);
 };
-    
-    
-} // implementation
-} // fs
-} // io
-} // iridium
+
+
+} // iridium::io::fs::implementation
 
 
 #endif // HEADER_FILE_STREAM_WRITER_06F9B4BF_E655_4FB7_8EA0_185306B7C2A3

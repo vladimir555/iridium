@@ -10,9 +10,7 @@
 #include "iridium/io/stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 class CPipe: public IPipe {
@@ -42,11 +40,9 @@ private:
     size_t const                    m_buffer_count;
     std::list<Buffer::TSharedPtr>   m_buffers;
 };
-    
 
-} // implementation
-} // io
-} // iridium
+
+} // iridium::io::implementation
 
 
 #endif // HEADER_TRANSMITTER_5C67BADB_452C_4A6B_963B_63DBF32A6D5D

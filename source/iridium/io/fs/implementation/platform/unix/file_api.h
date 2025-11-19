@@ -12,11 +12,7 @@
 #include <string>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
-namespace platform {
+namespace iridium::io::fs::implementation::platform {
 
 
 int getFD (::FILE *file);
@@ -30,11 +26,9 @@ void close(::FILE *file);
 
 
 } // unix_
-} // platform
-} // implementation
-} // fs
-} // io
-} // iridium
+
+
+} // iridium::io::fs::implementation::platform
 
 
 #endif // UNIX_PLATFORM

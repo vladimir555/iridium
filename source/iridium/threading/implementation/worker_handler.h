@@ -11,9 +11,7 @@
 #include "iridium/threading/async_queue.h"
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 template<typename TItem>
@@ -180,9 +178,7 @@ void CWorkerRunnable<TInputItem, TOutputItem>::finalize() {
 }
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation
 
 
 #endif // HEADER_WORKER_HANDLER_D977DE0C_D1EF_4571_9709_FC454A816A33

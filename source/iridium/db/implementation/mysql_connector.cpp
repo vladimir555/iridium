@@ -59,9 +59,7 @@ string displayWarnings(MYSQL *connection) {
 } // unnamed
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
 CMySQLConnector::CMySQLConnector(config::TDatebase const &config)
@@ -82,7 +80,7 @@ CMySQLConnector::~CMySQLConnector() {
 
 void CMySQLConnector::initialize() {
     auto result = mysql_real_connect(
-       &m_connection, 
+       &m_connection,
         m_config.Host.get().c_str(),
         m_config.User.get().c_str(),
         m_config.Password.get().c_str(),
@@ -178,9 +176,7 @@ CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &quer
 }
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation
 
 
 #endif // COMPILATION_FLAG_MYSQL

@@ -32,11 +32,7 @@ milliseconds DEFAULT_PROCESS_TIMEOUT_STEP   (100);
 extern char **environ;
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::system::implementation::platform::unix_ {
 
 
 CProcessStream::CProcessStream(
@@ -351,11 +347,7 @@ void CProcessStream::sendSignal(TSignal const &signal) {
 }
 
 
-} // unix_
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform::unix_
 
 
 #endif  // UNIX_PLATFORM

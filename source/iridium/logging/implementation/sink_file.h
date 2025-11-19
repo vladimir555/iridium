@@ -13,9 +13,7 @@
 #include "sink.h"
 
 
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 class CSinkFile: public ISink {
@@ -46,9 +44,7 @@ private:
 };
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation
 
 
 //DEFINE_ENUM_CONVERT(iridium::logging::implementation::CSinkFile::TRotation)

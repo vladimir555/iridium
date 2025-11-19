@@ -15,9 +15,7 @@
 #include "iridium/parsing/node.h"
 
 
-namespace iridium {
-namespace testing {
-namespace implementation {
+namespace iridium::testing::implementation {
 
 
 class CTestRunnerFork: public ITestRunner {
@@ -91,9 +89,7 @@ private:
 };
 
 
-} // implementation
-} // testing
-} // iridium
+} // iridium::testing::implementation
 
 
 #endif // HEADER_TEST_RUNNER_FORK_7CD34E81_3DBC_4751_AAA2_AEC4EFBA58AA

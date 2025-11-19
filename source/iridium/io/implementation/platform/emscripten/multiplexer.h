@@ -15,10 +15,7 @@
 #include "iridium/io/multiplexer.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 // todo: rename CMultiplexer
@@ -49,10 +46,7 @@ public:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 //#endif // EMSCRIPTEN_PLATFORM

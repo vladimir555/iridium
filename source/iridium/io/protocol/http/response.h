@@ -13,11 +13,7 @@
 #include <chrono>
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace response {
+namespace iridium::io::protocol::http::response {
 
 
 DEFINE_ROOT_NODE_BEGIN(Http)
@@ -44,11 +40,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
 DEFINE_ROOT_NODE_END()
 
 
-} // response
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::response
 
 
 DEFINE_CONVERT(iridium::io::protocol::http::response::THttp::TMessageLine, std::string)

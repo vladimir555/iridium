@@ -11,9 +11,7 @@
 #include <memory>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 class CStreamReaderList: public IStreamReader {
@@ -23,7 +21,7 @@ public:
 
     void    initialize()    override;
     void    finalize()      override;
-    
+
     Buffer::TSharedPtr      read(size_t const &size) override;
     std::list<uintptr_t>    getHandles() const override;
     URI::TSharedPtr         getURI() const override;
@@ -36,9 +34,7 @@ private:
 };
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_STREAM_LIST_3E262388_342C_4EDD_9ADF_F42774DC3E9C

@@ -11,9 +11,7 @@
 #include "iridium/parsing/parser.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 class CXMLParser: public IParser {
@@ -26,9 +24,7 @@ public:
 };
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation
 
 
 #endif // HEADER_PARSER_XML_EF217266_E91A_4908_97D1_2BB5420DFF5A

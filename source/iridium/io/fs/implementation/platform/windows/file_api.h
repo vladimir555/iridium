@@ -13,11 +13,7 @@
 #include <string.h>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
-namespace platform {
+namespace iridium::io::fs::implementation::platform {
 
 
 auto const fwriteInternal     = ::fwrite;
@@ -40,11 +36,7 @@ iridium::io::fs::TFileStatus getFileStatus(::FILE *file);
 void close(::FILE *file);
 
 
-} // platform
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

@@ -20,9 +20,7 @@ using std::string;
 IMPLEMENT_ENUM(iridium::logging::implementation::CSinkFile::TRotation)
 
 
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &path, TRotation const &rotation)
@@ -39,7 +37,7 @@ CSinkFile::CSinkFile(TEvent::TLevel const &level, string const &path, TRotation 
 void CSinkFile::initialize() {
     if (m_file_writer)
         return; // ----->
-    
+
     if (checkOneOf(m_rotation, TRotation::DAILY, TRotation::TIMELY)) {
         string date;
 
@@ -122,6 +120,4 @@ void CSinkFile::flush() {
 
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation

@@ -9,18 +9,14 @@
 //#include "iridium/io/protocol/.h"
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace implementation {
-        
-    
+namespace iridium::io::protocol::http::implementation {
+
+
 //class CResponseProtocolFactory: public IProtocolFactory {
 //public:
 //    DEFINE_IMPLEMENTATION(CResponseProtocolFactory)
 //    CResponseProtocolFactory() = default;
-    
+
 //    IProtocolHandler::TSharedPtr    createProtocolHandler() override;
 //};
 
@@ -41,11 +37,7 @@ namespace implementation {
 //}
 
 
-} // implementation
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::implementation
 
 
 #endif // HEADER_PROTOCOL_FACTORY_C1D59795_4D13_4FA7_A9D7_D11A452EC2D1

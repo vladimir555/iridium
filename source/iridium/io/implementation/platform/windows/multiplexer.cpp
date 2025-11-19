@@ -10,10 +10,7 @@
 
 
 #include <iridium/logging/logger.h>
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 template<typename TResult>
@@ -25,16 +22,16 @@ TResult assertOK(TResult const &result, std::string const &method) {
         LPSTR buffer                = nullptr;
 
         size_t size = FormatMessageA(
-            FORMAT_MESSAGE_ALLOCATE_BUFFER  | 
-            FORMAT_MESSAGE_FROM_SYSTEM      | 
+            FORMAT_MESSAGE_ALLOCATE_BUFFER  |
+            FORMAT_MESSAGE_FROM_SYSTEM      |
             FORMAT_MESSAGE_IGNORE_INSERTS,
-            NULL, error_message_code, 
-            MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT), 
+            NULL, error_message_code,
+            MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT),
             (LPSTR)&buffer, 0, NULL);
 
         std::string message(buffer, size);
         LocalFree(buffer);
-        throw std::runtime_error(method + " error: " + 
+        throw std::runtime_error(method + " error: " +
             convertion::convert<std::string, uint64_t>(error_message_code) + " " + message); // ----->
     }
 }
@@ -78,11 +75,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         OVERLAPPED *overlapped                  = nullptr;
         DWORD       number_of_bytes_transfered  = 0;
         ULONG_PTR   completion_key              = 0;
-    
+
         bool is_ok = GetQueuedCompletionStatus(
-            m_iocp, 
-            &number_of_bytes_transfered, 
-            &completion_key, 
+            m_iocp,
+            &number_of_bytes_transfered,
+            &completion_key,
             &overlapped, 1000);
         //LOGT << "GetQueuedCompletionStatus: " << is_ok << " " << number_of_bytes_transfered << " " << completion_key << " " << (overlapped != nullptr);
         if  (is_ok) {
@@ -102,7 +99,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
                     result.push_back(
                         Event::create(
-                            stream, o, 
+                            stream, o,
                             Event::TStatus::END));
                 } else {
                     LOGW << "wait event got unsubscribed id: " << uint64_t(completion_key);
@@ -117,11 +114,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     } catch (std::exception const &e) {
         throw std::runtime_error("multiplexer waiting events error: " + std::string(e.what())); // ----->
     }
-    
+
     //{
     //    std::string events;
     //    for (auto const &ev : result) {
-    //        events += "\n" 
+    //        events += "\n"
     //            + convert<std::string>(ev->operation) + " "
     //            + convert<std::string>(ev->status) + " "
     //            + convert<std::string>(ev->stream->getHandles().front());
@@ -172,8 +169,8 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
             assertOK(
                 PostQueuedCompletionStatus(
-                    m_iocp, 0, 
-                    completion_key, 
+                    m_iocp, 0,
+                    completion_key,
                     overlapped),
                 "send event OPEN END");
 
@@ -181,9 +178,9 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
             //assertOK(
             //    CreateIoCompletionPort(
-            //        handle, 
-            //        m_iocp, 
-            //        reinterpret_cast<ULONG_PTR>(overlapped), 0), 
+            //        handle,
+            //        m_iocp,
+            //        reinterpret_cast<ULONG_PTR>(overlapped), 0),
             //    "create event OPEN END");
 
             //assertOK(ReadFile(handle, nullptr, 0, nullptr, &overlapped), "ReadFile");
@@ -223,10 +220,7 @@ void CMultiplexer::wake(Event::TSharedPtr const &) {
 }
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

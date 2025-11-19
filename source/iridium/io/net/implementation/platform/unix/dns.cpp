@@ -16,18 +16,14 @@
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
+namespace iridium::io::net::implementation::platform {
 
 
 URI::TIPv4 getIPv4ByHost(string const &host) {
     auto host_entry = assertExists(
         gethostbyname(host.c_str()),
         "get ip by host name '" + host + "' error");
-    
+
     uint64_t ipv4_value =
         reinterpret_cast<struct in_addr *>(
         host_entry->h_addr_list[0])->s_addr;
@@ -46,11 +42,7 @@ URI::TIPv4 getIPv4ByHost(string const &host) {
 }
 
 
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+} // iridium::io::net::implementation::platform
 
 
 #endif // UNIX_PLATFORM

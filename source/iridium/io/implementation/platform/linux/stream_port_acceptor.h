@@ -11,19 +11,13 @@
 #include "../unix/stream_port_acceptor.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 typedef platform::unix_::CStreamPortAcceptor CStreamPortAcceptor;
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // MACOS_PLATFORM

@@ -10,9 +10,7 @@
 #include "iridium/db/config.h"
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
 class CConnector : public pattern::NonCopyable {
@@ -25,9 +23,7 @@ protected:
 };
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation
 
 
 #endif // HEADER_CONNECTOR_926752A7_A77B_4CD8_9A9E_699A4945401D

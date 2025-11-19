@@ -20,9 +20,7 @@ using iridium::convertion::convert;
 using std::string;
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 // ----- interface
@@ -267,9 +265,7 @@ std::list<typename TIWorkerHandler::TSharedPtr> createHandlers(size_t const &cou
 }
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation
 
 
 #endif // HEADER_THREAD_POOL_B90973E0_2CF8_4067_99BC_8460E3B83D47

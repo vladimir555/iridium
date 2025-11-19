@@ -10,9 +10,7 @@
 #include "iridium/io/fs/file_status.h"
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 class IFileStream: public virtual IStream {
@@ -42,9 +40,7 @@ public:
 //}
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_FILE_WRITER_F3E80B53_9C20_48EC_9242_9B22CED298F0

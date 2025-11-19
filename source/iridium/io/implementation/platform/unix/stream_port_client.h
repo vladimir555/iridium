@@ -21,11 +21,7 @@
 #include <set>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 class CStreamPortClient: public io::implementation::CStreamPort {
@@ -38,11 +34,7 @@ public:
 };
 
 
-} // unix_
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform::unix_
 
 
 #endif // UNIX_PLATFORM

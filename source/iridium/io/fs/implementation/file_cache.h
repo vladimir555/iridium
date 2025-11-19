@@ -14,10 +14,7 @@
 #include "iridium/io/fs/file_stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 class CFileCache : public ICache {
@@ -46,10 +43,7 @@ private:
 };
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation
 
 
 #endif // HEADER_FILE_CACHE_8ABCB65B_D74A_48BA_80C2_E6B63B28786F

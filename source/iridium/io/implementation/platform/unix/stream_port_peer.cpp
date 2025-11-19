@@ -20,11 +20,7 @@ using iridium::io::Buffer;
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 CStreamPortPeer::CStreamPortPeer(URI const &uri, int const &fd)
@@ -54,11 +50,7 @@ void CStreamPortPeer::finalize() {
 }
 
 
-} // unix_
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform::unix_
 
 
 #endif // UNIX_PLATFORM

@@ -4,11 +4,7 @@
 #include <stdexcept>
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace implementation {
+namespace iridium::io::protocol::http::implementation {
 
 
 std::string MIME::getByFileNameExtension(std::string const &extension) const {
@@ -20,7 +16,7 @@ std::string MIME::getByFileNameExtension(std::string const &extension) const {
 }
 
 
-MIME::MIME() {    
+MIME::MIME() {
     m_mimes.push_back( { { "abw" }          , "application/x-abiword" } );
     m_mimes.push_back( { { "arc" }          , "application/octet-stream" } );
     m_mimes.push_back( { { "azw" }          , "application/vnd.amazon.ebook" } );
@@ -89,8 +85,4 @@ MIME::MIME() {
 }
 
 
-} // implementation
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::implementation

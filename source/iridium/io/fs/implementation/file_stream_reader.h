@@ -9,10 +9,7 @@
 #include "file_stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 class CFileStreamReader: public virtual CFileStream {
@@ -22,10 +19,7 @@ public:
 };
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation
 
 
 #endif // HEADER_FILE_STREAM_READER_2BC903C8_78B1_420B_A0B8_30FFF66CC371

@@ -16,10 +16,7 @@ using iridium::convertion::convert;
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace http {
+namespace iridium::io::net::http {
 
 
 string const request_example =
@@ -101,7 +98,4 @@ TEST(http_response) {
 }
 
 
-} // socket
-} // net
-} // io
-} // iridium
+} // iridium::io::net::http

@@ -14,9 +14,7 @@
 #include <atomic>
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 // ----- class definidion
@@ -115,9 +113,7 @@ bool CAsyncQueue<TItem>::empty() const {
 }
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation
 
 
 #endif // HEADER_ASYNC_QUEUE_A0382C4D_41C2_4C4F_BC6D_DD295F054258

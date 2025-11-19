@@ -20,10 +20,7 @@
 #include <sys/epoll.h>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 // todo: fix handling orphan sockets on lost connection
@@ -66,10 +63,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // LINUX_PLATFORM

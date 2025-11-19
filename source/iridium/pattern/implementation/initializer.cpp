@@ -3,9 +3,7 @@
 #include <algorithm>
 
 
-namespace iridium {
-namespace pattern {
-namespace implementation {
+namespace iridium::pattern::implementation {
 
 
 CInitializer::~CInitializer() {
@@ -31,6 +29,4 @@ void CInitializer::finalize() {
 }
 
 
-} // implementation
-} // pattern
-} // iridium
+} // iridium::pattern::implementation

@@ -7,4 +7,4 @@
 #pragma once
 #define IRIDIUM_VERSION_MAJOR = 0;
 #define IRIDIUM_VERSION_MINOR = 0;
-#define IRIDIUM_VERSION_PATCH = 416;
+#define IRIDIUM_VERSION_PATCH = 418;

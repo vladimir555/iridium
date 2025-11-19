@@ -11,9 +11,7 @@
 #include <unordered_set>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 class CContextManager:
@@ -22,7 +20,7 @@ class CContextManager:
 {
 public:
     DEFINE_IMPLEMENTATION(CContextManager)
-    
+
     void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) override;
     void    removeContext (IContext::TSharedPtr const &context) override;
     IContext::TSharedPtr
@@ -31,7 +29,7 @@ public:
             releaseContext(IContext::TSharedPtr const &context) override;
     std::list<Event::TSharedPtr>
             checkOutdatedStreams() override;
-    
+
 private:
     std::unordered_map<IStream::TSharedPtr, IContext::TSharedPtr>
         m_map_stream_context;
@@ -44,9 +42,7 @@ private:
 };
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_CONTEXT_MANAGER_741A7C4F_8CDD_47F0_9277_640033DD67AB

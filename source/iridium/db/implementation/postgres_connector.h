@@ -20,9 +20,7 @@
 #include <libpq-fe.h>
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
 class CPostgresConnector:
@@ -42,9 +40,7 @@ private:
 };
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation
 
 
 #endif // BUILD_FLAG_POSTGRES

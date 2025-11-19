@@ -17,10 +17,7 @@
 #include <Windows.h>
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
+namespace iridium::system::implementation::platform {
 
 
 class CProcessStream: public virtual IProcess {
@@ -32,7 +29,7 @@ public:
     CProcessStream(
         std::string const &app,
         std::vector<std::string> const &args);
-    
+
     void initialize()   override;
     void finalize()     override;
 
@@ -40,7 +37,7 @@ public:
     io::URI::TSharedPtr     getURI() const override;
     io::Buffer::TSharedPtr  read(size_t const &size = io::DEFAULT_BUFFER_SIZE) override;
     size_t                  write(io::Buffer::TSharedPtr const &buffer) override;
-    
+
     TState getState() override;
     void   sendSignal(TSignal const &signal) override;
 
@@ -63,10 +60,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM
