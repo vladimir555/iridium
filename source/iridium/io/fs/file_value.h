@@ -15,9 +15,7 @@
 #include "iridium/convertion/convert.h" // For iridium::convertion::convert
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 // ----- interface
@@ -56,39 +54,12 @@ public:
     /// \~english @throws std::runtime_error if file reading or initial conversion from string to `TValue` fails catastrophically (though some errors might result in using default_value).
     /// \~russian @throws std::runtime_error если чтение файла или начальное преобразование из строки в `TValue` завершается катастрофической ошибкой (хотя некоторые ошибки могут привести к использованию default_value).
     FileValue(std::string const &file_name, TValue const &default_value = {});
-
-    /// \~english @brief Default destructor.
-    /// \~russian @brief Деструктор по умолчанию.
     ~FileValue() = default;
 
-    /// \~english @brief Assigns a new value to the `FileValue` object and persists it to the associated file.
-    ///     The internal value is updated, and then this new value is converted to `std::string`
-    ///     and written to the file specified during construction, overwriting its previous content.
-    /// \~russian @brief Присваивает новое значение объекту `FileValue` и сохраняет его в связанный файл.
-    ///     Внутреннее значение обновляется, а затем это новое значение преобразуется в `std::string`
-    ///     и записывается в файл, указанный при конструировании, перезаписывая его предыдущее содержимое.
-    /// \~english @param value The new value of type `TValue` to assign and persist.
-    /// \~russian @param value Новое значение типа `TValue` для присваивания и сохранения.
-    /// \~english @throws std::runtime_error if file writing or conversion from `TValue` to string fails.
-    /// \~russian @throws std::runtime_error если запись в файл или преобразование из `TValue` в строку завершается ошибкой.
     void operator = (TValue const &value);
-
-    /// \~english @brief Implicitly converts the `FileValue` object to its underlying `TValue`.
-    ///     Allows reading the current in-memory value of the `FileValue` as if it were a plain `TValue`.
-    /// \~russian @brief Неявно преобразует объект `FileValue` к его базовому типу `TValue`.
-    ///     Позволяет читать текущее значение `FileValue`, находящееся в памяти, как если бы это было обычное `TValue`.
-    /// \~english @return The current in-memory value of type `TValue`.
-    /// \~russian @return Текущее значение в памяти типа `TValue`.
     operator TValue() const;
 private:
-    /// \~english @brief The path to the file used for storing and loading the value.
-    /// \~russian @brief Путь к файлу, используемому для хранения и загрузки значения.
     std::string m_file_name;
-
-    /// \~english @brief The in-memory representation of the value.
-    ///     This value is synchronized with the content of the file `m_file_name`.
-    /// \~russian @brief Представление значения в памяти.
-    ///     Это значение синхронизируется с содержимым файла `m_file_name`.
     TValue      m_value;
 };
 
@@ -158,9 +129,7 @@ FileValue<TValue>::operator TValue () const {
 }
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_FILE_VALUE_46471A9C_47FB_468C_9FC2_F8CB96FB573C

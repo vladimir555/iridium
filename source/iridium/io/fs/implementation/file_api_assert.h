@@ -12,12 +12,7 @@
 // Potentially: #include "iridium/Exception.h" if a custom exception is used.
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-/// \~english @brief Namespace for internal implementation details of file system functionalities, including error checking utilities.
-/// \~russian @brief Пространство имен для внутренних деталей реализации функциональностей файловой системы, включая утилиты проверки ошибок.
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 /// \~english @brief Checks an integer result code from a file operation and throws an exception on error.
@@ -58,10 +53,7 @@ int assertOK(const int &result, const std::string &message);
 ::FILE *assertOK(::FILE *result, const std::string &message);
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation
 
 
 #endif // HEADER_FILE_API_ASSERT_B07BE67D_925C_4201_92DB_A20EBE710DE1

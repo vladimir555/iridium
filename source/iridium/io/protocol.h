@@ -9,8 +9,7 @@
 #include "iridium/smart_ptr.h" // For DEFINE_INTERFACE
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 /// \~english @brief Interface for a protocol handler.
@@ -51,8 +50,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_PROTOCOL_A4280CC9_7465_4C74_805A_D60B575171BB

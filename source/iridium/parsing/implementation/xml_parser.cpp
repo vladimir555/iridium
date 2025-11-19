@@ -1,4 +1,4 @@
-#include "parser_xml.h"
+#include "xml_parser.h"
 
 #include <sstream>
 #include <vector>
@@ -45,9 +45,7 @@ string mask(string const &source) {
 }
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 INode::TSharedPtr convertXMLNodeToNode(TXMLNode const * const xml_node) {
@@ -155,6 +153,4 @@ string CXMLParser::compose(INode::TConstSharedPtr const &root_node) const {
 }
 
 
-} // implementation
-} // parsing
-} // iridium
+} // iridium::parsing::implementation

@@ -15,15 +15,7 @@
 #include "iridium/io/multiplexer.h"
 
 
-/// \~english @file multiplexer.h
-/// \~english @brief Defines a stub implementation of the `IMultiplexer` interface for the Emscripten platform.
-/// \~russian @file multiplexer.h
-/// \~russian @brief Определяет заглушечную реализацию интерфейса `IMultiplexer` для платформы Emscripten.
-
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 // todo: rename CMultiplexer
@@ -84,10 +76,7 @@ public:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 //#endif // EMSCRIPTEN_PLATFORM

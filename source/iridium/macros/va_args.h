@@ -50,10 +50,8 @@
 #define HEADER_VA_ARGS_A200B22F_46BD_4D03_A488_82E71F3E5F7F
 
 
-namespace iridium {
-namespace macros {
-} // macros
-} // iridium
+namespace iridium::macros {
+} // namespace iridium::macros
 
 /// \~english @def DEFINE_FUNC_CHOOSER_7(_f1, _f2, _f3, _f4, _f5, _f6, _f7, N, ... )
 /// @brief A helper macro used to select the Nth argument from a list of arguments.

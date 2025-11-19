@@ -3,9 +3,7 @@
 #include "iridium/logging/logger.h"
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 //void CWorkerHandler::initialize() {}
@@ -21,6 +19,4 @@ namespace implementation {
 //}
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation

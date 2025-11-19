@@ -20,10 +20,7 @@
 #include "sink.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 /// \~english @brief A concrete sink implementation for logging messages to a file, with support for file rotation.
 ///     This sink writes formatted log messages to a specified file path and can rotate the
@@ -101,9 +98,7 @@ private:
 };
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation
 
 
 //DEFINE_ENUM_CONVERT(iridium::logging::implementation::CSinkFile::TRotation)

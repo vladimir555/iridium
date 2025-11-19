@@ -1,18 +1,14 @@
 #include "connector.h"
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
-CConnector::CConnector(config::TDatebase const &config) 
+CConnector::CConnector(config::TDatebase const &config)
 :
     m_config(config)
 {}
 
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation

@@ -19,9 +19,7 @@
 #include PLATFORM_HEADER(process.h)
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
+namespace iridium::system::implementation {
 
 /// \~english @typedef CProcessStream
 /// @brief Type alias for the platform-specific process stream implementation, which is expected to be `platform::CProcessStream`.
@@ -38,9 +36,7 @@ namespace implementation {
 typedef platform::CProcessStream CProcessStream;
 
 
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation
 
 
 #endif // HEADER_PROCESS_D2A41C18_6019_439D_AFE4_2EF3834E06D0

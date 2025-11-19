@@ -88,7 +88,7 @@ private:
     std::string m_db_name;
 };
 
-} // some_namespace
+} // namespace some_namespace
 
 
 using CDatabase = some_namespace::CDatabase;
@@ -151,7 +151,7 @@ TEST(mock) {
         return "doSomething const";
     };
 
-    const auto &db_mock_const = db_mock;
+    auto const &db_mock_const = db_mock;
     ASSERT("doSomething const", equal, db_mock_const.doSomething());
 
 

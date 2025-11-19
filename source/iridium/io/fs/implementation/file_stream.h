@@ -22,12 +22,7 @@
 #include <vector>  // For IStream (though not directly, Buffer inherits from it)
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-/// \~english @brief Namespace for internal implementation details of file system functionalities.
-/// \~russian @brief Пространство имен для внутренних деталей реализации функциональностей файловой системы.
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 /// \~english @brief Concrete implementation of a file stream providing read, write, and seeking capabilities.
@@ -177,10 +172,7 @@ private:
 };
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation
 
 
 //DEFINE_ENUM_CONVERT(iridium::io::fs::implementation::CFileStream::TOpenMode)

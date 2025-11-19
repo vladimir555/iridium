@@ -20,9 +20,7 @@
 #include <libpq-fe.h>
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
 class CPostgresConnector :
@@ -31,44 +29,18 @@ class CPostgresConnector :
 {
 public:
     DEFINE_CREATE(CPostgresConnector)
-
-    /// \~english @brief Constructs a PostgreSQL connector.
-    /// \~russian @brief Конструктор коннектора PostgreSQL.
-    /// \~english @param config The database configuration.
-    /// \~russian @param config Конфигурация базы данных.
     CPostgresConnector(config::TDatebase const &config);
-
-    /// \~english @brief Destructor.
-    /// \~russian @brief Деструктор.
     virtual ~CPostgresConnector() override;
-
-    /// \~english @brief Initializes the connection to the PostgreSQL database.
-    /// \~russian @brief Инициализирует соединение с базой данных PostgreSQL.
     void initialize() override;
-
-    /// \~english @brief Finalizes the connection to the PostgreSQL database.
-    /// \~russian @brief Завершает соединение с базой данных PostgreSQL.
     void finalize() override;
-
-    /// \~english @brief Sends a query to the PostgreSQL database.
-    /// \~russian @brief Отправляет запрос к базе данных PostgreSQL.
-    /// \~english @param query The SQL query to execute.
-    /// \~russian @param query SQL-запрос для выполнения.
-    /// \~english @return The result of the query as a tree of nodes.
-    /// \~russian @return Результат запроса в виде дерева узлов.
-    virtual INode::TSharedPtr
-        sendQuery(std::string const &query) override;
+    virtual INode::TSharedPtr sendQuery(std::string const &query) override;
 
 private:
-    /// \~english @brief The PostgreSQL connection handle.
-    /// \~russian @brief Указатель на соединение PostgreSQL.
-    PGconn* m_connection;
+    PGconn *m_connection;
 };
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation
 
 
 #endif // BUILD_FLAG_POSTGRES

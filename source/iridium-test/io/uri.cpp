@@ -5,8 +5,7 @@
 using std::string;
 
 #include <vector>
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 TEST(uri) {
@@ -75,5 +74,4 @@ TEST(uri) {
 }
 
 
-} // io
-} // iridium
+} // namespace iridium::io

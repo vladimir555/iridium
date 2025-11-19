@@ -13,8 +13,7 @@
 #include "iridium/convertion/convert.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 /// \~english @brief A custom exception class for test failures.
@@ -249,8 +248,7 @@ void UnitTest::assert_(TFunction const &func,
 }
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 
 #endif // HEADER_UNIT_TEST_DA33741E_8C9F_42D4_98D8_F6FCCCD87B96

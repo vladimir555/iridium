@@ -16,10 +16,7 @@
 #include "node_type.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 /// \~english @typedef CNode
 /// @brief Defines `CNode` as a specialization of the concrete `CNodeType` class template with `std::string` as its value type.
@@ -32,9 +29,7 @@ namespace implementation {
 typedef CNodeType<std::string> CNode;
 
 
-} // implementation
-} // parsing
-} // iridium
+} // iridium::parsing::implementation
 
 
 #endif // HEADER_NODE_C3E75C97_C541_49C8_AEF6_4D6E2953B0E4

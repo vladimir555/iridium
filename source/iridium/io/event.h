@@ -21,8 +21,7 @@
 #include "stream.h"           // For IStream::TSharedPtr
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 /// \~english @brief Represents an I/O event associated with a stream.
@@ -42,17 +41,9 @@ struct Event {
     /// \~russian @brief Перечисляет типы операций ввода-вывода или значимые события для события.
     DEFINE_ENUM(
         TOperation,
-        /// \~english @brief Indicates an open operation or that a stream has been opened.
-        /// \~russian @brief Указывает на операцию открытия или на то, что поток был открыт.
         OPEN,
-        /// \~english @brief Indicates a read operation or that data is available for reading.
-        /// \~russian @brief Указывает на операцию чтения или на то, что данные доступны для чтения.
         READ,
-        /// \~english @brief Indicates a write operation or that the stream is ready for writing.
-        /// \~russian @brief Указывает на операцию записи или на то, что поток готов для записи.
         WRITE,
-        /// \~english @brief Indicates an End-Of-File condition has been reached on a stream.
-        /// \~russian @brief Указывает, что на потоке достигнуто состояние конца файла (End-Of-File).
         EOF_,
         /// \~english @brief Indicates a timeout has occurred related to a stream operation.
         /// \~russian @brief Указывает, что произошел тайм-аут, связанный с операцией потока.
@@ -71,31 +62,11 @@ struct Event {
     ///     Может использоваться для указания фазы операции, например, только что началась или уже завершилась.
     DEFINE_ENUM(
         TStatus,
-        /// \~english @brief Indicates the beginning phase of an operation.
-        /// \~russian @brief Указывает на начальную фазу операции.
         BEGIN,
-        /// \~english @brief Indicates the ending phase of an operation.
-        /// \~russian @brief Указывает на конечную фазу операции.
-        END
-        // Note: The constructor uses TStatus::UNKNOWN as a default,
-        // which implies UNKNOWN should ideally be part of this enum.
-        // However, it's not explicitly defined by DEFINE_ENUM here.
-    )
+        END)
 
-    /// \~english @brief Constructs an Event object.
-    /// \~russian @brief Конструирует объект Event.
-    /// \~english @param stream_ A shared pointer to the I/O stream associated with this event.
-    /// \~russian @param stream_ Умный указатель на поток ввода-вывода, связанный с этим событием.
-    /// \~english @param operation_ The type of I/O operation or occurrence this event represents.
-    /// \~russian @param operation_ Тип операции ввода-вывода или события, которое представляет это событие.
-    /// \~english @param status_ The status of the operation (e.g., BEGIN, END). Defaults to an unknown/unspecified status
-    ///     if not provided (assuming TStatus::UNKNOWN is implicitly available or 0 maps to a sensible default).
-    /// \~russian @param status_ Статус операции (например, BEGIN, END). По умолчанию используется неизвестный/неуказанный статус,
-    ///     если не предоставлен (предполагая, что TStatus::UNKNOWN неявно доступен или 0 сопоставляется с разумным значением по умолчанию).
-    Event(IStream::TSharedPtr const &stream_, TOperation const &operation_, TStatus const &status_ = TStatus::UNKNOWN);
+    Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
 
-    /// \~english @brief A shared pointer to the I/O stream on which this event occurred or to which it pertains.
-    /// \~russian @brief Умный указатель на поток ввода-вывода, на котором произошло это событие или к которому оно относится.
     IStream::TSharedPtr stream;
 
     /// \~english @brief The type of I/O operation or occurrence this event represents (e.g., READ, WRITE, EOF_).
@@ -108,8 +79,7 @@ struct Event {
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 /// \~english @brief Specialization of `std::hash` for `iridium::io::Event`.

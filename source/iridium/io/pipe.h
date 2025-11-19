@@ -11,8 +11,7 @@
 #include "iridium/smart_ptr.h" // For DEFINE_INTERFACE and TSharedPtr
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 /// \~english @brief Interface for accessing the reader and writer streams of a pipe-like structure.
@@ -103,8 +102,7 @@ public:
 //bool operator < (IPipeStreams::TSharedPtr const &l, IPipeStreams::TSharedPtr const &r); // Commented out in source
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B

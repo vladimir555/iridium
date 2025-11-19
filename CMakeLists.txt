@@ -9,8 +9,8 @@ else()
     file(GLOB SUBDIRS LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/source/*")
     foreach(dir ${SUBDIRS})
         get_filename_component(name "${dir}" NAME)
-        if(IS_DIRECTORY "${dir}" 
-            AND NOT name MATCHES "-test$" 
+        if(IS_DIRECTORY "${dir}"
+            AND NOT name MATCHES "-test$"
             AND NOT name MATCHES "-binary$")
             set(PROJECT_NAME "${name}")
             break()
@@ -35,14 +35,16 @@ endif()
 
 file(READ "${VERSION_HEADER}" version_content)
 
+string(TOUPPER "${PROJECT_NAME}" PROJECT_NAME_UPPER)
+
 # Extract version components — robust to whitespace
-string(REGEX MATCH "PROJECT_VERSION_MAJOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MAJOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MAJOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "PROJECT_VERSION_MINOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MINOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MINOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "PROJECT_VERSION_PATCH[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_PATCH[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_PATCH "${CMAKE_MATCH_1}")
 
 # Validate (0 is valid, empty is not)
@@ -281,7 +283,27 @@ target_link_libraries(
 )
 
 enable_testing()
-add_test(
-    NAME ${PROJECT_TEST_NAME}
-    COMMAND ${PROJECT_TEST_NAME}
+
+set(TEST_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test")
+
+file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
+    "${TEST_SOURCE_DIR}/*.cpp"
 )
+
+set(TEST_CASE_PATHS "")
+foreach(SRC IN LISTS TEST_SOURCES)
+    file(RELATIVE_PATH REL_PATH "${TEST_SOURCE_DIR}" "${SRC}")
+    string(REPLACE "\\" "/" REL_PATH "${REL_PATH}")
+    list(APPEND TEST_CASE_PATHS "/${REL_PATH}")
+endforeach()
+
+list(REMOVE_DUPLICATES TEST_CASE_PATHS)
+
+set(TEST_BIN "$<TARGET_FILE:${PROJECT_TEST_NAME}>")
+
+foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
+    add_test(
+        NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
+        COMMAND ${TEST_BIN} run "${TEST_PATH}"
+    )
+endforeach()

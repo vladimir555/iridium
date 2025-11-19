@@ -13,10 +13,7 @@ using iridium::convertion::convert;
 IMPLEMENT_ENUM(iridium::io::fs::implementation::CFileStream::TOpenMode)
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 CFileStream::CFileStream(string const &file_name, TOpenMode const &open_mode)
@@ -147,7 +144,4 @@ URI::TSharedPtr CFileStream::getURI() const {
 }
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation

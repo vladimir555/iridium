@@ -50,9 +50,10 @@ class IridiumConan(ConanFile):
         if not os.path.exists(version_h):
             raise ConanException(f"version.h not found: {version_h}")
         content = load(self, version_h)
-        major = re.search(r"PROJECT_VERSION_MAJOR\s*=\s*([0-9]+)", content)
-        minor = re.search(r"PROJECT_VERSION_MINOR\s*=\s*([0-9]+)", content)
-        patch = re.search(r"PROJECT_VERSION_PATCH\s*=\s*([0-9]+)", content)
+        name_upper = self.name.upper()
+        major = re.search(rf"{name_upper}_VERSION_MAJOR\s*=\s*([0-9]+)", content)
+        minor = re.search(rf"{name_upper}_VERSION_MINOR\s*=\s*([0-9]+)", content)
+        patch = re.search(rf"{name_upper}_VERSION_PATCH\s*=\s*([0-9]+)", content)
         if not all([major, minor, patch]):
             raise ConanException("Failed to parse version from version.h")
         self.version = f"{major.group(1)}.{minor.group(1)}.{patch.group(1)}"

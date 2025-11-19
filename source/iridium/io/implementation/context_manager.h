@@ -11,9 +11,7 @@
 #include <unordered_set>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 /// \~english @brief Concrete implementation of the `IContextManager` interface.
@@ -30,25 +28,8 @@ class CContextManager:
 {
 public:
     DEFINE_IMPLEMENTATION(CContextManager)
-    
-    /// \~english @brief Creates a new communication context for a given stream and protocol.
-    ///     The new context is stored internally and associated with the stream.
-    /// \~russian @brief Создает новый контекст обмена данными для указанного потока и протокола.
-    ///     Новый контекст сохраняется внутри и связывается с потоком.
-    /// \~english @param stream The stream for which to create the context.
-    /// \~russian @param stream Поток, для которого создается контекст.
-    /// \~english @param protocol The protocol to be used by the new context.
-    /// \~russian @param protocol Протокол, который будет использоваться новым контекстом.
-    /// \~english @throws iridium::Exception if a context for the given stream already exists or if context creation fails.
-    /// \~russian @throws iridium::Exception, если контекст для данного потока уже существует или если создание контекста не удалось.
-    void    createContext (IStream::TSharedPtr  const &stream, IProtocol::TSharedPtr const &protocol) override;
 
-    /// \~english @brief Marks a context for removal. The actual removal and cleanup might be deferred.
-    ///     This method adds the context to an internal list of contexts to be removed.
-    /// \~russian @brief Помечает контекст для удаления. Фактическое удаление и очистка могут быть отложены.
-    ///     Этот метод добавляет контекст во внутренний список контекстов для удаления.
-    /// \~english @param context The context to be marked for removal.
-    /// \~russian @param context Контекст, который должен быть помечен для удаления.
+    void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) override;
     void    removeContext (IContext::TSharedPtr const &context) override;
 
     /// \~english @brief Acquires a context associated with an event's stream, potentially creating it if it doesn't exist.
@@ -87,7 +68,7 @@ public:
     /// \~russian @return Список событий `Event::CLOSE_STREAM` из всех контекстов, в которых были устаревшие потоки.
     std::list<Event::TSharedPtr>
             checkOutdatedStreams() override;
-    
+
 private:
     /// \~english @brief Maps a stream to its associated communication context. Used for quick lookup.
     /// \~russian @brief Сопоставляет поток с связанным с ним контекстом обмена данными. Используется для быстрого поиска.
@@ -115,9 +96,7 @@ private:
 };
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_CONTEXT_MANAGER_741A7C4F_8CDD_47F0_9277_640033DD67AB

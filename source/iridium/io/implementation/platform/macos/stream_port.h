@@ -24,10 +24,7 @@
 #include "../unix/stream_port.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 /// \~english @brief Typedef for the base macOS stream port, using the Unix implementation.
@@ -49,13 +46,7 @@ public:
     /// \~english @param uri The URI, which might contain information like hostname for SSL validation.
     /// \~russian @param uri URI, который может содержать информацию, такую как имя хоста для проверки SSL.
     CStreamPortSSL(URI const &uri);
-    
-    /// \~english @brief Initializes the SSL stream port.
-    ///     Establishes the underlying connection via the parent Unix implementation and then performs SSL handshake.
-    ///     (Implementation details are expected in a .cpp file).
-    /// \~russian @brief Инициализирует SSL потоковый порт.
-    ///     Устанавливает базовое соединение через родительскую Unix-реализацию, а затем выполняет SSL-рукопожатие.
-    ///     (Детали реализации ожидаются в .cpp файле).
+
     void initialize() override;
 
     /// \~english @brief Finalizes the SSL stream port.
@@ -65,7 +56,7 @@ public:
     ///     Закрывает SSL-сессию и базовое соединение.
     ///     (Детали реализации ожидаются в .cpp файле).
     void finalize() override;
-    
+
 private:
     // \~english @brief Reference to the SSL connection/session (e.g., SecureTransport SSLContextRef).
     // \~english This member is currently commented out in the source.
@@ -75,10 +66,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // MACOS_PLATFORM

@@ -6,8 +6,7 @@ using std::vector;
 using std::string;
 
 
-namespace iridium {
-namespace db {
+namespace iridium::db {
 
 
 string const iridium::db::IConnector::FIELD_NAME_AFFECTED_ROWS = "affected_rows";
@@ -15,7 +14,7 @@ string const iridium::db::IConnector::FIELD_NAME_AFFECTED_ROWS = "affected_rows"
 
 iridium::db::Exception::Exception(std::string const &e)
 :
-    std::runtime_error(e.c_str()) 
+    std::runtime_error(e.c_str())
 {}
 
 
@@ -31,5 +30,4 @@ vector<string> IConnector::makeFields(INode::TSharedPtr const &rows) {
 }
 
 
-} // db
-} // iridium
+} // namespace iridium::db

@@ -1,6 +1,6 @@
 #include "test_runner_fork.h"
 
-#include "iridium/parsing/implementation/parser_json.h"
+#include "iridium/parsing/implementation/json_parser.h"
 #include "iridium/io/implementation/session_manager.h"
 #include "iridium/io/implementation/pipe.h"
 #include "iridium/io/implementation/stream_buffer.h"
@@ -26,9 +26,7 @@ using std::list;
 using std::chrono::milliseconds;
 
 
-namespace iridium {
-namespace testing {
-namespace implementation {
+namespace iridium::testing::implementation {
 
 
 std::chrono::seconds const CTestRunnerFork::DEFAULT_TIMEOUT(10);
@@ -208,8 +206,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     if (event->operation == io::Event::TOperation::OPEN) {
         static std::string const DEFAULT_PIPE_NAME = "process";
         pipe_manager->createPipe(DEFAULT_PIPE_NAME);
-        pipe_manager->updatePipe(DEFAULT_PIPE_NAME, 
-            std::dynamic_pointer_cast<io::IStreamReader>(event->stream), 
+        pipe_manager->updatePipe(DEFAULT_PIPE_NAME,
+            std::dynamic_pointer_cast<io::IStreamReader>(event->stream),
             CStreamWriterBuffer::create(m_buffer_output));
 
 //        m_time_end = m_timeout + std::chrono::system_clock::now();
@@ -258,7 +256,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             if (size_str.find_first_not_of("0123456789") == string::npos) {
                 auto    size = convert<uint64_t>(size_str);
                 size_t  endlines_count = 0;
-                
+
                 while (left > 0) {
                     if (m_buffer_output->at(left) == '\n')
                         endlines_count++;
@@ -268,18 +266,18 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                     left--;
                 }
                 //LOGT << "endlines_count: " << endlines_count;
-                
+
                 if (endlines_count == 2 && m_buffer_output->at(left) == '}') {
                     right = left + 2;
-                    
+
                     size_t brackets_count = 1;
                     while (brackets_count > 0 && --left > 0) {
                         if (m_buffer_output->at(left) == '}')
                             brackets_count++;
-                        
+
                         if (m_buffer_output->at(left) == '{')
                             brackets_count--;
-                        
+
                         if (m_buffer_output->at(left) == '\r')
                             size++;
                     }
@@ -288,7 +286,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                     if (right - left == size) {
                         string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
                         auto    node = m_parser->parse(json);
-                        
+
                         m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
                         m_process_result->node      = node;
                         m_process_result->output    = m_buffer_output;
@@ -350,7 +348,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
-    
+
     LOGT << "protocol return: " << result;
 
     return result; // ----->
@@ -367,6 +365,4 @@ IProcess::TState CTestRunnerFork::CTestProtocolHandler::getExitState() const {
 }
 
 
-} // implementation
-} // testing
-} // iridium
+} // iridium::testing::implementation

@@ -22,11 +22,7 @@ using iridium::convertion::convert;
 using iridium::assertExists;
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 CStreamPortAcceptor::CStreamPortAcceptor(URI const &uri)
@@ -130,8 +126,4 @@ void CStreamPortAcceptor::setBlockingMode(bool const &is_blocking) {
 }
 
 
-} // unix
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform::unix_

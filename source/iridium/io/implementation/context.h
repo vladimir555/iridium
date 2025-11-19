@@ -12,9 +12,7 @@
 #include <chrono>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 /// \~english @brief Concrete implementation of `IContext` and `IPipeManager`.
@@ -33,19 +31,9 @@ class CContext:
 {
 public:
     DEFINE_CREATE(CContext)
-    
-    /// \~english @brief Constructs a `CContext` instance.
-    /// \~russian @brief Конструирует экземпляр `CContext`.
-    /// \~english @param stream The primary stream associated with this context. Events are typically read from and written to this stream via the protocol.
-    /// \~russian @param stream Основной поток, связанный с этим контекстом. События обычно читаются из этого потока и записываются в него через протокол.
-    /// \~english @param protocol The protocol instance used to encode and decode events for the stream.
-    /// \~russian @param protocol Экземпляр протокола, используемый для кодирования и декодирования событий для потока.
+
     CContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);
-    
-    /// \~english @brief Pushes an event onto the internal event queue of this context.
-    /// \~russian @brief Помещает событие во внутреннюю очередь событий этого контекста.
-    /// \~english @param event The event to be added to the queue.
-    /// \~russian @param event Событие для добавления в очередь.
+
     void pushEvent(Event::TSharedPtr const &event) override;
 
     /// \~english @brief Pops all currently pending events from the internal event queue.
@@ -63,15 +51,7 @@ public:
     /// \~russian @return Список событий `Event::CLOSE_STREAM` для всех потоков, признанных устаревшими.
     std::list<Event::TSharedPtr>
          checkOutdatedStreams() override;
-    
-    /// \~english @brief Updates the context based on an incoming event, typically by processing it with the protocol.
-    ///     This may involve reading data from the event's stream and generating new events.
-    /// \~russian @brief Обновляет контекст на основе входящего события, обычно обрабатывая его с помощью протокола.
-    ///     Это может включать чтение данных из потока события и генерацию новых событий.
-    /// \~english @param event The event to process (e.g., `Event::READ_STREAM`).
-    /// \~russian @param event Событие для обработки (например, `Event::READ_STREAM`).
-    /// \~english @return `true` if the update was successful, `false` otherwise (e.g., protocol error, stream error).
-    /// \~russian @return `true`, если обновление прошло успешно, иначе `false` (например, ошибка протокола, ошибка потока).
+
     bool update    (Event::TSharedPtr const &event) override;
 
     /// \~english @brief Transmits an event, typically by encoding it with the protocol and writing it to the event's stream.
@@ -81,13 +61,7 @@ public:
     /// \~english @return `true` if the transmission was successful, `false` otherwise (e.g., protocol error, stream error).
     /// \~russian @return `true`, если передача прошла успешно, иначе `false` (например, ошибка протокола, ошибка потока).
     bool transmit  (Event::TSharedPtr const &event) override;
-    
-    /// \~english @brief Creates a new named pipe within this context.
-    /// \~russian @brief Создает новый именованный канал (pipe) в этом контексте.
-    /// \~english @param name The unique name for the new pipe.
-    /// \~russian @param name Уникальное имя для нового канала.
-    /// \~english @throws iridium::Exception if a pipe with the same name already exists.
-    /// \~russian @throws iridium::Exception, если канал с таким именем уже существует.
+
     void createPipe(std::string const &name) override;
 
     /// \~english @brief Removes a named pipe from this context.
@@ -151,9 +125,7 @@ private:
     /// \~english @param is_send_close_event If true, an `Event::CLOSE_STREAM` is generated for this stream.
     /// \~russian @param is_send_close_event Если true, генерируется `Event::CLOSE_STREAM` для этого потока.
     void removeStream(IStream::TSharedPtr const &stream, bool const &is_send_close_event = true);
-    
-    /// \~english @brief Asynchronous queue for storing incoming events to be processed by this context.
-    /// \~russian @brief Асинхронная очередь для хранения входящих событий, которые должны быть обработаны этим контекстом.
+
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_events;
 
@@ -183,9 +155,7 @@ private:
 };
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_CONTEXT_3763EB60_69EF_4930_9328_F8727441990E

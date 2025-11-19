@@ -14,9 +14,7 @@
 #include "iridium/macros/va_args.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace serialization {
+namespace iridium::parsing::serialization {
 
 
 // ----- interface
@@ -28,30 +26,13 @@ namespace serialization {
 template<typename TValue>
 class NodeView {
 public:
-    /// \~english @brief Destructor.
-    /// \~russian @brief Деструктор.
    ~NodeView() = default;
-    /// \~english @brief Gets the value of the node.
-    /// \~russian @brief Возвращает значение узла.
-    /// todo: lazy convertion
     TValue get() const;
-    /// \~english @brief Sets the value of the node.
-    /// \~russian @brief Устанавливает значение узла.
     void set(TValue const &value);
-    /// \~english @brief Checks if the node has a default value.
-    /// \~russian @brief Проверяет, имеет ли узел значение по умолчанию.
     bool isDefault() const;
-    /// \~english @brief Conversion operator to the node's value type.
-    /// \~russian @brief Оператор преобразования к типу значения узла.
     operator TValue() const;
-    /// \~english @brief Assignment operator.
-    /// \~russian @brief Оператор присваивания.
     NodeView &operator= (TValue const &value);
-    /// \~english @brief Equality comparison operator.
-    /// \~russian @brief Оператор сравнения на равенство.
     bool operator== (TValue const &value) const;
-    /// \~english @brief Gets the underlying node.
-    /// \~russian @brief Возвращает базовый узел.
     INode::TSharedPtr getNode() const;
 
 protected:
@@ -97,17 +78,9 @@ public:
     NodeView(
          INode::TSharedPtr  const &node,
          std::string        const &name);
-    /// \~english @brief Destructor.
-    /// \~russian @brief Деструктор.
    ~NodeView() = default;
-    /// \~english @brief Gets the underlying node.
-    /// \~russian @brief Возвращает базовый узел.
     INode::TSharedPtr       getNode() const;
-    /// \~english @brief The underlying node.
-    /// \~russian @brief Базовый узел.
     INode::TSharedPtr       m_node;
-    /// \~english @brief The path to the node.
-    /// \~russian @brief Путь к узлу.
     std::string             m_path;
 
 protected:
@@ -127,11 +100,7 @@ protected:
 template<typename TNodeView>
 class NodeViewList {
 public:
-    /// \~english @brief Destructor.
-    /// \~russian @brief Деструктор.
    ~NodeViewList() = default;
-    /// \~english @brief A list of node views.
-    /// \~russian @brief Список представлений узлов.
     typedef typename std::list<TNodeView> TNodes;
     /// \~english @brief Iterator for the list of node views.
     /// \~russian @brief Итератор для списка представлений узлов.
@@ -139,46 +108,25 @@ public:
     /// \~english @brief Constant iterator for the list of node views.
     /// \~russian @brief Константный итератор для списка представлений узлов.
     typedef typename std::list<TNodeView>::const_iterator const_iterator;
-    /// \~english @brief Returns an iterator to the beginning of the list.
-    /// \~russian @brief Возвращает итератор на начало списка.
+
     iterator begin();
-    /// \~english @brief Returns an iterator to the end of the list.
-    /// \~russian @brief Возвращает итератор на конец списка.
     iterator end();
-    /// \~english @brief Returns a constant iterator to the beginning of the list.
-    /// \~russian @brief Возвращает константный итератор на начало списка.
     const_iterator begin() const;
-    /// \~english @brief Returns a constant iterator to the end of the list.
-    /// \~russian @brief Возвращает константный итератор на конец списка.
     const_iterator end() const;
-    /// \~english @brief Gets the number of nodes in the list.
-    /// \~russian @brief Возвращает количество узлов в списке.
+
     size_t size() const;
-    /// \~english @brief Adds a node to the list.
-    /// \~russian @brief Добавляет узел в список.
+
     void add(TNodeView const &node);
-    /// \~english @brief Adds a node with a specific value to the list.
-    /// \~russian @brief Добавляет узел с определенным значением в список.
     template<typename TValue>
     void add(TValue const &node);
-    /// \~english @brief Clears the list of nodes.
-    /// \~russian @brief Очищает список узлов.
     void clear();
 
 protected:
-    /// \~english @brief Constructor.
-    /// \~russian @brief Конструктор.
     NodeViewList(NodeView<void> const * const parent, std::string const &name);
 
 private:
-    /// \~english @brief The parent node view.
-    /// \~russian @brief Представление родительского узла.
     NodeView<void> const * const m_parent;
-    /// \~english @brief The name of the nodes in the list.
-    /// \~russian @brief Имя узлов в списке.
     std::string m_name;
-    /// \~english @brief The list of node views.
-    /// \~russian @brief Список представлений узлов.
     std::list<TNodeView> m_nodes;
 };
 
@@ -428,9 +376,7 @@ enum class TNamingStrategyCPPToNode {
 std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode const &strategy);
 
 
-} // serialization
-} // parsing
-} // iridium
+} // iridium::parsing::serialization
 
 
 /*

@@ -10,11 +10,7 @@
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
+namespace iridium::io::net::implementation::platform {
 
 
 URI::TIPv4 getIPv4ByHost(string const &host) {
@@ -22,11 +18,7 @@ URI::TIPv4 getIPv4ByHost(string const &host) {
 }
 
 
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+} // iridium::io::net::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

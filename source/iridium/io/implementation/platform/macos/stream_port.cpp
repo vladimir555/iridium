@@ -4,10 +4,7 @@
 #ifdef MACOS_PLATFORM
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 CStreamPortSSL::CStreamPortSSL(URI const &uri)
@@ -17,7 +14,7 @@ CStreamPortSSL::CStreamPortSSL(URI const &uri)
 
 
 void CStreamPortSSL::initialize() {
-   
+
 }
 
 
@@ -25,10 +22,7 @@ void CStreamPortSSL::finalize() {
 }
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // MACOS_PLATFORM

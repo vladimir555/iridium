@@ -10,8 +10,7 @@
 #include "iridium/enum.h"
 
 
-namespace iridium {
-namespace system {
+namespace iridium::system {
 
 
 /// \~english @brief An interface for controlling and interacting with a system process.
@@ -48,8 +47,7 @@ public:
 };
 
 
-} // system
-} // iridium
+} // namespace iridium::system
 
 
 //DEFINE_ENUM_CONVERT(iridium::system::IProcess::TState::TCondition)

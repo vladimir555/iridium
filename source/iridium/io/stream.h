@@ -16,14 +16,7 @@
 #include <list>
 
 
-//#ifdef WINDOWS_PLATFORM
-//#define WIN32_LEAN_AND_MEAN
-//#include <Windows.h>
-//#endif
-
-
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 static size_t const DEFAULT_BUFFER_SIZE = 4096;
@@ -86,8 +79,7 @@ public:
     virtual size_t write(Buffer::TSharedPtr const &buffer) = 0;
 };
 
-/// \~english @brief Interface for a bidirectional stream port (readable and writable).
-/// \~russian @brief Интерфейс для двунаправленного потокового порта (доступного для чтения и записи).
+
 class IStreamPort:
     public virtual IStreamReader,
     public virtual IStreamWriter
@@ -112,14 +104,7 @@ public:
 };
 
 
-} // io
-} // iridium
-
-
-//template <>
-//struct std::hash<iridium::io::IStream::TSharedPtr> {
-//    std::size_t operator()(iridium::io::IStream::TSharedPtr const &stream) const;
-//};
+} // namespace iridium::io
 
 
 #endif // HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358

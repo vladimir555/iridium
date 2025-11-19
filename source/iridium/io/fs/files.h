@@ -12,11 +12,7 @@
 #include <vector>
 
 
-namespace iridium {
-namespace io {
-/// \~english @brief Namespace for file system related I/O functionalities, including file operations.
-/// \~russian @brief Пространство имен для функциональности ввода-вывода, связанной с файловой системой, включая операции с файлами.
-namespace fs {
+namespace iridium::io::fs {
 
 
 /// \~english @brief Reads all lines from a text file into a vector of strings.
@@ -93,9 +89,7 @@ void remove(std::string const &file_name);
 std::string extractFileNameExtension(std::string const &file_name);
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_FS_EC4EF5DB_F63C_4227_8830_C306F3060E07

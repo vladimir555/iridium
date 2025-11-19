@@ -21,10 +21,7 @@ using std::string;
 
 
 #include "iridium/logging/logger.h"
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 //static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
@@ -267,10 +264,7 @@ int CMultiplexer::assertOK(int const &result, std::string const &message) {
 }
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 IMPLEMENT_ENUM(iridium::io::implementation::platform::TEpollEvent)

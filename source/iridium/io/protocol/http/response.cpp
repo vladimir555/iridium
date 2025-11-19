@@ -24,11 +24,7 @@ static vector<string> const days    = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri",
 }
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace response {
+namespace iridium::io::protocol::http::response {
 
 
 std::string const THttp::DEFAULT_SERVER_NAME = "iridium";
@@ -77,11 +73,7 @@ string convert(THttp::THeaders::THTTPDate const &source) {
 }
 
 
-} // response
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::response
 
 
 IMPLEMENT_CONVERT(iridium::io::protocol::http::response::THttp::TMessageLine, std::string, iridium::io::protocol::http::response::convertToMessageLine)

@@ -28,10 +28,7 @@ bool checkMarker(string const &line, string const &marker) {
 } // unnamed
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 CFileCache::CFileCache(std::string const &file_name)
@@ -151,7 +148,7 @@ size_t CFileCache::size() const {
 }
 
 
-bool CFileCache::checkExistence(size_t const &id) const {
+bool CFileCache::checkExistense(size_t const &id) const {
     return id < m_lines.size() && m_lines[id]; // ----->
 }
 
@@ -161,7 +158,4 @@ void CFileCache::flush() {
 }
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation

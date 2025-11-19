@@ -2,7 +2,7 @@
 
 #include "iridium/testing/unit_test.h"
 #include "iridium/logging/logger.h"
-#include "iridium/parsing/implementation/parser_json.h"
+#include "iridium/parsing/implementation/json_parser.h"
 
 #include <string>
 
@@ -11,9 +11,7 @@ using std::string;
 using iridium::parsing::implementation::CJSONParser;
 
 
-namespace iridium {
-namespace testing {
-namespace implementation {
+namespace iridium::testing::implementation {
 
 
 TResult CTestRunnerRaw::run(INodeTest::TSharedPtr const &node_test) {
@@ -61,6 +59,4 @@ void CTestRunnerRaw::run(
 }
 
 
-} // implementation
-} // testing
-} // iridium
+} // iridium::testing::implementation

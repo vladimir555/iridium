@@ -2,8 +2,8 @@
 
 #include "parser.h"
 
-#include "implementation/parser_json.h"
-#include "implementation/parser_xml.h"
+#include "implementation/json_parser.h"
+#include "implementation/xml_parser.h"
 
 #include "iridium/strings.h"
 #include "iridium/io/fs/files.h"
@@ -22,8 +22,7 @@ using iridium::parsing::implementation::CJSONParser;
 using iridium::parsing::implementation::CXMLParser;
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 IParser::TSharedPtr createParserByExtension(string const &file_name) {
@@ -55,5 +54,4 @@ void composeFile(string const &file_name, INode::TSharedPtr const &root_node) {
 }
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing

@@ -18,8 +18,7 @@
 #include "stream.h" // For IStreamPort
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 /// \~english @brief Interface for managing communication sessions.
@@ -61,8 +60,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_SESSION_MANAGER_BB5946FC_0AA1_4747_AE53_07DB1F105A72

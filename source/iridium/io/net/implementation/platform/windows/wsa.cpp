@@ -34,11 +34,7 @@ using std::wstring;
 
 //#include "iridium/logging/logger.h"
 //#include <iostream>
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
+namespace iridium::io::net::implementation::platform {
 
 
 URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
@@ -92,7 +88,7 @@ URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
 
 //size_t  WSA::write(SOCKET const &socket, Buffer const &packet) {
 //    LOGT << socket;
-//    return assertNE(::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())), 
+//    return assertNE(::send(socket, static_cast<char const *>(static_cast<void const *>(packet.data())),
 //        static_cast<int>(packet.size()), 0), SOCKET_ERROR, "socket write error");
 //}
 
@@ -145,12 +141,12 @@ URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
 //
 //    auto accept_socket = assertNE(
 //        WSASocket(
-//            AF_INET, 
-//            SOCK_STREAM, 
-//            0, 
-//            nullptr, 
-//            0, 
-//            WSA_FLAG_OVERLAPPED), 
+//            AF_INET,
+//            SOCK_STREAM,
+//            0,
+//            nullptr,
+//            0,
+//            WSA_FLAG_OVERLAPPED),
 //        INVALID_SOCKET, "create accept socket error");
 //
 //    WSAOVERLAPPED   overlapped          = { 0 };
@@ -162,14 +158,14 @@ URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
 //
 //    assertEQ(
 //        AcceptEx(
-//            listen_socket, 
+//            listen_socket,
 //            accept_socket,
 //            (PVOID)(output_buffer),
 //            0,
 //            sizeof(SOCKADDR_IN) + 16, // dwLocalAddressLength
 //            sizeof(SOCKADDR_IN) + 16, // dwRemoteAddressLength
 //            &bytes_received,
-//            &overlapped), 
+//            &overlapped),
 //        FALSE, "wsa accept error");
 //
 //    LOGT << "accept ex output_buffer    " << output_buffer;
@@ -183,7 +179,7 @@ URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
 //
 //    overlapped.hEvent   = event;
 //    events[0]           = event;
-//    
+//
 //    DWORD bytes_transferred = 0;
 //    DWORD flags = 0;
 //
@@ -191,10 +187,10 @@ URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
 //        LOGT << "WSAWaitForMultipleEvents begin";
 //        auto index = assertNE(
 //            WSAWaitForMultipleEvents(
-//                events_count, 
-//                events, 
-//                false, 
-//                5000,//WSA_INFINITE, 
+//                events_count,
+//                events,
+//                false,
+//                5000,//WSA_INFINITE,
 //                false),
 //            WSA_WAIT_FAILED, "wsa event wait error");
 //
@@ -207,11 +203,11 @@ URI::TIPv4 WSA::getIPv4ByName(std::string const &name) {
 //            LOGT << "WSAGetOverlappedResult begin";
 //            assertNE(
 //                WSAGetOverlappedResult(
-//                    listen_socket, 
-//                    &overlapped, 
-//                    &bytes_transferred, 
-//                    false, 
-//                    &flags), 
+//                    listen_socket,
+//                    &overlapped,
+//                    &bytes_transferred,
+//                    false,
+//                    &flags),
 //                static_cast<BOOL>(false), "wsa get overlapped result error");
 //            LOGT << "WSAGetOverlappedResult end";
 //            LOGT << "socket connected";
@@ -459,11 +455,7 @@ string WSA::getLastWSAErrorString() const {
 }
 
 
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+} // iridium::io::net::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

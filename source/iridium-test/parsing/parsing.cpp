@@ -3,9 +3,9 @@
 #include <iridium/parsing/node.h>
 #include <iridium/parsing/implementation/node.h>
 #include <iridium/parsing/parser.h>
-#include <iridium/parsing/implementation/parser_xml.h>
-#include <iridium/parsing/implementation/parser_json.h>
-#include <iridium/parsing/implementation/parser_http.h>
+#include <iridium/parsing/implementation/xml_parser.h>
+#include <iridium/parsing/implementation/json_parser.h>
+#include <iridium/parsing/implementation/http_parser.h>
 #include <iridium/assert.h>
 
 
@@ -210,8 +210,7 @@ string const http_header_composed = ""
 } // unnamed
 
 
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 
 TEST(parse_xml) {
@@ -393,67 +392,18 @@ TEST(compose_http_request) {
 
 
 TEST(parse_compose) {
-    auto parser_json    = CJSONParser::create();
-    auto parser_xml     = CXMLParser::create();
+    auto json_parser    = CJSONParser::create();
+    auto xml_parser     = CXMLParser::create();
 
-    auto node           = parser_json->parse(beer_json);
-    auto xml_str        = parser_xml->compose(node);
+    auto node           = json_parser->parse(beer_json);
+    auto xml_str        = xml_parser->compose(node);
 
     ASSERT(beer_xml, equal, xml_str);
 
-    auto json_str       =  parser_json->compose(node);
+    auto json_str       = json_parser->compose(node);
 
     ASSERT(beer_json, equal, json_str);
 }
 
 
-//namespace test{
-//    DEFINE_ENUM(TCmdArg, A$ARG_NAME1, B$ARG_NAME2);
-//}
-//
-//TEST(command_line) {
-//    LOGT << test::TCmdArg::A$ARG_NAME1;
-//}
-
-
-// AI generated
-
-
-//TEST(invalid_json_parsing) {
-//    auto parser = CJSONParser::create();
-//
-//    // Попытка парсинга JSON с синтаксическими ошибками
-//    ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 ]"), std::exception);
-//    ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 }"), std::exception);
-//    ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2"), std::exception);
-//    ASSERT(parser->parse("[ {\"value\": 1,  {\"value\": 2 }]"), std::exception);
-//
-//    ASSERT(parser->parse("{ value: \"missing quote }"), std::exception);
-//    ASSERT(parser->parse("{ \"unclosed_object\": { \"key\": \"value\" "), std::exception);
-//    ASSERT(parser->parse("{ \"array\": [1, 2, 3 "), std::exception);
-//
-////    {
-////        INode::TSharedPtr n = parser->parse("{ \"array\": [1, 2, 3], }");
-////        LOGD << n;
-////        ASSERT(n = parser->parse("{ \"array\": [1, 2, 3], }"), std::exception);
-////    }
-//
-////    ASSERT(parser->parse("{ \"object\": { \"key\": \"value\" , } }"), std::exception);
-////    ASSERT(parser->parse("{ : \"missing key\" }"), std::exception);
-//
-//    {
-//        INode::TSharedPtr n = parser->parse("{ \"key\" \"missing colon\" }");
-//        LOGD << n;
-//        ASSERT(parser->parse("{ \"key\" \"missing colon\" }"), std::exception);
-//    }
-//    ASSERT(parser->parse("{ \"key\": null0 }"), std::exception);
-////    ASSERT(parser->parse("{ \"key\": , \"value\" }"), std::exception);
-//    ASSERT(parser->parse("{ \"key\": 123e+ }"), std::exception);
-//    ASSERT(parser->parse("{ \"key\": 123e- }"), std::exception);
-//    ASSERT(parser->parse("{ \"key\": 123e }, "), std::exception);
-//}
-
-
-} // parsing
-} // iridium
-//IMPLEMENT_ENUM(iridium::parsing::test::TCmdArg);
+} // namespace iridium::parsing

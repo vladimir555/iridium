@@ -16,12 +16,7 @@
 #include <time.h>
 
 
-namespace iridium {
-namespace convertion {
-namespace implementation {
-/// \~english @brief Namespace for platform-specific implementation details, here for Windows.
-/// \~russian @brief Пространство имен для платформо-специфичных деталей реализации, здесь для Windows.
-namespace platform {
+namespace iridium::convertion::implementation::platform {
 
 
 /// \~english @brief Converts a 32-bit signed integer to a null-terminated string using the specified base.
@@ -173,10 +168,7 @@ int snprintf(TArgs ... args) {
 __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_1_ARGLIST(int, sprintf, vsprintf_s, _Post_z_ char, _Dest, _In_z_ _Printf_format_string_ const char *, _Format);
 
 
-} // platform
-} // implementation
-} // convertion
-} // iridium
+} // iridium::convertion::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

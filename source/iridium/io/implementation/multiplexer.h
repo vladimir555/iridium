@@ -12,19 +12,13 @@
 #include PLATFORM_HEADER(multiplexer.h)
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
-// todo: factory
 typedef platform::CMultiplexer CMultiplexer;
 
 
-} // implementation
-} // io
-} // iridium§
-
+} // iridium::io::implementation
 
 
 #endif // HEADER_EVENT_PROVIDER_648A0C2B_F44D_41C8_9695_B549D964E7C4

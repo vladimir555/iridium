@@ -2,8 +2,8 @@
 
 #include <iridium/parsing/serialization/node.h>
 #include <iridium/parsing/implementation/node.h>
-#include <iridium/parsing/implementation/parser_xml.h>
-#include <iridium/parsing/implementation/parser_json.h>
+#include <iridium/parsing/implementation/xml_parser.h>
+#include <iridium/parsing/implementation/json_parser.h>
 #include <iridium/io/fs/files.h>
 #include <iridium/enum.h>
 #include <iridium/assert.h>
@@ -18,9 +18,7 @@ using iridium::assertExists;
 
 //#include <simdjson.h>
 //#include <nlohmann/json.hpp>
-namespace iridium {
-namespace parsing {
-namespace serialization {
+namespace iridium::parsing::serialization {
 
 
 struct C {
@@ -598,9 +596,7 @@ TEST(node_to_struct) {
 // }
 
 
-} // serialization
-} // parsing
-} // iridium
+} // iridium::parsing::serialization
 
 
 IMPLEMENT_ENUM(iridium::parsing::serialization::C::TEnum)

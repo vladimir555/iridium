@@ -10,9 +10,7 @@
 #include "iridium/enum.h"
 
 
-namespace iridium {
-namespace db {
-namespace config {
+namespace iridium::db::config {
 
 
     /// \~english @brief Defines the structure for database configuration.
@@ -56,11 +54,7 @@ namespace config {
     DEFINE_ROOT_NODE_END()
 
 
-} // config
-
-
-} // db
-} // iridium
+} // namespace iridium::db::config
 
 
 //DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)

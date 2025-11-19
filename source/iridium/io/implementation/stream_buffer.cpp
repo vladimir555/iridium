@@ -4,9 +4,7 @@
 #include "iridium/logging/logger.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 CStreamBuffer::CStreamBuffer(Buffer::TSharedPtr const &buffer)
@@ -63,6 +61,4 @@ size_t CStreamWriterBuffer::write(Buffer::TSharedPtr const &buffer) {
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation

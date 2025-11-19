@@ -19,9 +19,7 @@
 #include "iridium/smart_ptr.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
-namespace iridium {
-namespace logging {
+namespace iridium::logging {
 
 /// \~english @brief Represents a single log event or message.
 ///     This structure encapsulates all the information associated with a logging event,
@@ -72,8 +70,7 @@ struct TEvent {
 };
 
 
-} // logging
-} // iridium
+} // namespace iridium::logging
 
 
 //DEFINE_ENUM_CONVERT(iridium::logging::TEvent::TLevel)

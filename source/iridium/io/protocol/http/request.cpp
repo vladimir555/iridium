@@ -11,11 +11,7 @@ using std::string;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace request {
+namespace iridium::io::protocol::http::request {
 
 
 static THttp::TMessageLine convert(string const &source) {
@@ -30,11 +26,7 @@ static string convert(THttp::TMessageLine const &source) {
 }
 
 
-} // request
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::request
 
 
 IMPLEMENT_CONVERT(std::string, iridium::io::protocol::http::request::THttp::TMessageLine, iridium::io::protocol::http::request::convert)

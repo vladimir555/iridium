@@ -6,9 +6,7 @@
 
 
 #include <iostream>
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 WorkerPoolBase::WorkerPoolBase(std::string const &name)
@@ -42,6 +40,4 @@ WorkerPoolBase::WorkerPoolBase(std::string const &name)
 //}
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation

@@ -17,8 +17,7 @@ using iridium::io::implementation::CMultiplexer;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace system {
+namespace iridium::system {
 
 
 Shell::TTimeDuration const Shell::DEFAULT_TIMEOUT = std::chrono::minutes(10);
@@ -114,5 +113,4 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
 }
 
 
-} // system
-} // iridium
+} // namespace iridium::system

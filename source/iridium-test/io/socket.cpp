@@ -11,10 +11,7 @@ using iridium::io::net::getIPv4ByHost;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace test {
+namespace iridium::io::net::test {
 
 
 //TEST(https_server) {
@@ -41,7 +38,4 @@ TEST(dns) {
 }
 
 
-} // test
-} // net
-} // io
-} // iridium
+} // namespace iridium::io::net::test

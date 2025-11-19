@@ -12,9 +12,7 @@
 #include <stdexcept>
 
 
-namespace iridium {
-namespace pattern {
-namespace implementation {
+namespace iridium::pattern::implementation {
 
 /// \~english @brief A concrete implementation of `IInitializable` that manages a collection of other `IInitializable` objects.
 ///     This class allows grouping multiple initializable components and managing their lifecycle (initialization and finalization)
@@ -94,9 +92,7 @@ CInitializer::CInitializer(TArgs const &... items)
 }
 
 
-} // implementation
-} // pattern
-} // iridium
+} // iridium::pattern::implementation
 
 
 #endif // HEADER_INITIALIZER_A79AA8C7_D7C5_492D_A771_2633A8E098DA

@@ -9,11 +9,7 @@
 #include "iridium/io/protocol/http/content_storage.h"
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace implementation {
+namespace iridium::io::protocol::http::implementation {
 
 
 /// \~english @brief Concrete implementation of `IContentStorage` that serves content from a local file system directory.
@@ -38,7 +34,7 @@ public:
     /// \~russian @return Умный указатель на `IFileStreamReader` для запрошенного файла.
     /// \~russian Возвращает `nullptr`, если файл не существует или не может быть открыт (например, из-за прав доступа).
     fs::IFileStreamReader::TSharedPtr getContent(std::string const &path) override;
-    
+
 private:
     /// \~english @brief The root directory path from which files are served.
     /// \~russian @brief Корневой путь к каталогу, из которого обслуживаются файлы.
@@ -46,11 +42,7 @@ private:
 };
 
 
-} // implementation
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::implementation
 
 
 #endif // HEADER_CONTENT_STORAGE_C92EBD57_DA63_4A76_8A56_343A9E6FEFCB

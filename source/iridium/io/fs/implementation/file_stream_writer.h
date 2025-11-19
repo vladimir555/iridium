@@ -13,23 +13,10 @@
 #include <string>              // For std::string
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
-/// \~english @brief A concrete file stream implementation specialized for writing.
-///     This class derives from `CFileStream` and configures it for write operations.
-///     It provides all the functionalities of `CFileStream` (which implements `IFileStreamReader`
-///     and `IFileStreamWriter`), but its constructor allows specifying whether to rewrite (truncate)
-///     the file or use a default write mode (which might append or truncate based on `CFileStream::TOpenMode::WRITE` behavior).
-/// \~russian @brief Конкретная реализация файлового потока, специализированная для записи.
-///     Этот класс наследуется от `CFileStream` и настраивает его для операций записи.
-///     Он предоставляет все функциональные возможности `CFileStream` (который реализует `IFileStreamReader`
-///     и `IFileStreamWriter`), но его конструктор позволяет указать, следует ли перезаписывать (усекать)
-///     файл или использовать режим записи по умолчанию (который может добавлять или усекать в зависимости от поведения `CFileStream::TOpenMode::WRITE`).
-class CFileStreamWriter: public virtual CFileStream { // Virtual inheritance consistent with CFileStream's bases
+class CFileStreamWriter: public virtual CFileStream {
 public:
     /// \~english @brief Macro for defining implementation details, possibly for type registration or factory systems.
     /// \~russian @brief Макрос для определения деталей реализации, возможно, для регистрации типов или фабричных систем.
@@ -55,10 +42,7 @@ public:
 };
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation
 
 
 #endif // HEADER_FILE_STREAM_WRITER_06F9B4BF_E655_4FB7_8EA0_185306B7C2A3

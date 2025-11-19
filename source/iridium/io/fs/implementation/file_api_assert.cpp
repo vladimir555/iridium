@@ -7,10 +7,7 @@
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 int assertOK(const int &result, const string &message) {
@@ -29,7 +26,4 @@ int assertOK(const int &result, const string &message) {
 }
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation

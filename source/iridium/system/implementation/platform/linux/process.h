@@ -25,12 +25,7 @@
 #include "../unix/process.h"
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-/// \~english @brief Contains platform-specific implementations for system components, tailored for the Linux environment.
-/// \~russian @brief Содержит платформо-специфичные реализации системных компонентов, адаптированные для среды Linux.
-namespace platform {
+namespace iridium::system::implementation::platform {
 
 /// \~english @typedef CProcessStream
 /// @brief Type alias for the Linux platform, mapping `CProcessStream` to the Unix `CProcessStream` implementation.
@@ -43,10 +38,7 @@ namespace platform {
 typedef platform::unix_::CProcessStream CProcessStream;
 
 
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform
 
 
 #endif // LINUX_PLATFORM

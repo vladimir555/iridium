@@ -3,8 +3,7 @@
 #include <cmath>
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 
 Exception::Exception(std::string const &what)
@@ -32,7 +31,7 @@ void UnitTest::fail<std::string>(
     std::string const &right,
     std::string const &,
     std::string const &condition_source,
-    std::string const &line) 
+    std::string const &line)
 {
     throw Exception(line
         + "\n'"    + condition_source
@@ -47,7 +46,7 @@ void UnitTest::fail<std::chrono::system_clock::time_point>(
     std::chrono::system_clock::time_point const &right,
     std::string const &,
     std::string const &condition_source,
-    std::string const &line) 
+    std::string const &line)
 {
     throw Exception(line
         + "\n'"    + condition_source
@@ -109,5 +108,4 @@ void UnitTest::assert_(bool const &is_true,
 }
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing

@@ -10,8 +10,7 @@
 // For clarity: #include "stream.h" would typically be here if not for indirect inclusion.
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 /// \~english @brief Interface for managing a collection of I/O contexts (`IContext`).
@@ -29,30 +28,7 @@ public:
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContextManager)
 
-    /// \~english @brief Creates a new I/O context, typically associated with an initial I/O stream and a protocol.
-    ///     The `eventStream` parameter likely represents the primary stream (e.g., a new client connection)
-    ///     for which this context is being created.
-    /// \~russian @brief Создает новый контекст ввода-вывода, обычно связанный с начальным потоком ввода-вывода и протоколом.
-    ///     Параметр `eventStream`, вероятно, представляет основной поток (например, новое клиентское соединение),
-    ///     для которого создается этот контекст.
-    /// \~english @param eventStream A shared pointer to an `IStream` that is the basis for this context, or an event source.
-    ///     Despite the name "event", the type is `IStream::TSharedPtr`, suggesting it's a stream.
-    /// \~russian @param eventStream Умный указатель на `IStream`, который является основой для этого контекста, или источник событий.
-    ///     Несмотря на имя "event", тип параметра - `IStream::TSharedPtr`, что предполагает, что это поток.
-    /// \~english @param protocol A shared pointer to an `IProtocol` to be used by this context for handling the stream.
-    /// \~russian @param protocol Умный указатель на `IProtocol`, который будет использоваться этим контекстом для обработки потока.
-    /// \~english @throws iridium::Exception or similar if context creation fails.
-    /// \~russian @throws iridium::Exception или аналогичное, если создание контекста не удалось.
-    virtual void    createContext (IStream::TSharedPtr  const &eventStream, IProtocol::TSharedPtr const &protocol) = 0;
-
-    /// \~english @brief Removes (destroys or releases) an existing I/O context.
-    ///     This function is responsible for cleaning up resources associated with the specified context.
-    /// \~russian @brief Удаляет (уничтожает или освобождает) существующий контекст ввода-вывода.
-    ///     Эта функция отвечает за очистку ресурсов, связанных с указанным контекстом.
-    /// \~english @param context A shared pointer to the `IContext` to be removed.
-    /// \~russian @param context Умный указатель на `IContext`, который необходимо удалить.
-    /// \~english @throws iridium::Exception or similar if context removal fails.
-    /// \~russian @throws iridium::Exception или аналогичное, если удаление контекста не удалось.
+    virtual void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) = 0;
     virtual void    removeContext (IContext::TSharedPtr const &context) = 0;
 
     /// \~english @brief Acquires or selects an appropriate I/O context to handle a given event,
@@ -98,8 +74,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF

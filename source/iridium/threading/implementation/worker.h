@@ -14,9 +14,7 @@
 #include "worker_handler.h"
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 /// \~english @brief A worker that pushes items to a queue.
@@ -273,9 +271,7 @@ typename CWorker<TInputItem, TOutputItem>::TOutputItems CWorker<TInputItem, TOut
 }
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation
 
 
 #endif // HEADER_WORKER_62A45EF9_ADAA_4252_940F_C9952EAFD0A6

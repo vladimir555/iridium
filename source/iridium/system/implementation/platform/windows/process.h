@@ -17,10 +17,7 @@
 #include <Windows.h>
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
+namespace iridium::system::implementation::platform {
 
 
 /// \~english @brief A class for managing a process and its streams on Windows.
@@ -38,9 +35,7 @@ public:
     CProcessStream(
         std::string const &app,
         std::vector<std::string> const &args);
-    
-    /// \~english @brief Initializes the process and its streams.
-    /// \~russian @brief Инициализирует процесс и его потоки.
+
     void initialize()   override;
     /// \~english @brief Finalizes the process and its streams.
     /// \~russian @brief Финализирует процесс и его потоки.
@@ -58,9 +53,7 @@ public:
     /// \~english @brief Writes data to the process's input stream.
     /// \~russian @brief Записывает данные во входной поток процесса.
     size_t                  write(io::Buffer::TSharedPtr const &buffer) override;
-    
-    /// \~english @brief Gets the state of the process.
-    /// \~russian @brief Возвращает состояние процесса.
+
     TState getState() override;
     /// \~english @brief Sends a signal to the process.
     /// \~russian @brief Отправляет сигнал процессу.
@@ -85,10 +78,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

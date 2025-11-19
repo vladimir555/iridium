@@ -11,9 +11,7 @@
 #include <memory>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 /// \~english @brief Implements `IStreamReader` by composing a list of other `IStreamReader` instances.
@@ -37,15 +35,7 @@ public:
     /// \~english @brief Finalizes all managed stream readers.
     /// \~russian @brief Завершает работу всех управляемых читателей потоков.
     void    finalize()      override;
-    
-    /// \~english @brief Reads data sequentially from the list of managed streams.
-    ///     If the current stream reaches EOF, it attempts to read from the next stream in the list.
-    /// \~russian @brief Последовательно читает данные из списка управляемых потоков.
-    ///     Если текущий поток достигает EOF, он пытается читать из следующего потока в списке.
-    /// \~english @param size The maximum number of bytes to read.
-    /// \~russian @param size Максимальное количество байт для чтения.
-    /// \~english @return A buffer containing the data read, or `nullptr` if all streams have reached EOF.
-    /// \~russian @return Буфер, содержащий прочитанные данные, или `nullptr`, если все потоки достигли EOF.
+
     Buffer::TSharedPtr      read(size_t const &size) override;
 
     /// \~english @brief Gets the OS handles of the currently active stream reader.
@@ -76,9 +66,7 @@ private:
 };
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_STREAM_LIST_3E262388_342C_4EDD_9ADF_F42774DC3E9C

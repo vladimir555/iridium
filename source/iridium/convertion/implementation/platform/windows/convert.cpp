@@ -16,10 +16,7 @@ using std::string;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace convertion {
-namespace implementation {
-namespace platform {
+namespace iridium::convertion::implementation::platform {
 
 
 void itoa(int32_t const &value, char *buffer, int const &base) {
@@ -73,10 +70,7 @@ __time64_t mkgmtime(struct tm * const tm_) {
 #endif
 
 
-} // platform
-} // implementation
-} // convertuin
-} // iridium
+} // iridium::convertion::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

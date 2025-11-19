@@ -18,10 +18,7 @@ milliseconds DEFAULT_PROCESS_TIMEOUT_STEP   (100);
 
 
 #include "iridium/logging/logger.h"
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
+namespace iridium::system::implementation::platform {
 
 
 template<typename TResult>
@@ -33,16 +30,16 @@ TResult assertOK(TResult const &result, std::string const &method) {
         LPSTR buffer                = nullptr;
 
         size_t size = FormatMessageA(
-            FORMAT_MESSAGE_ALLOCATE_BUFFER  | 
-            FORMAT_MESSAGE_FROM_SYSTEM      | 
+            FORMAT_MESSAGE_ALLOCATE_BUFFER  |
+            FORMAT_MESSAGE_FROM_SYSTEM      |
             FORMAT_MESSAGE_IGNORE_INSERTS,
-            NULL, error_message_code, 
-            MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT), 
+            NULL, error_message_code,
+            MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT),
             (LPSTR)&buffer, 0, NULL);
 
         std::string message(buffer, size);
         LocalFree(buffer);
-        throw std::runtime_error(method + " error: 0x" + 
+        throw std::runtime_error(method + " error: 0x" +
             convertion::convert<std::string, uint64_t>(error_message_code, 16) + " " + message); // ----->
     }
 }
@@ -54,7 +51,7 @@ std::atomic<uint64_t> CProcessStream::m_process_counter{0};
 CProcessStream::CProcessStream(
     std::string const &app,
     std::string const &args)
-: 
+:
     m_app                   (app),
     m_args                  (args),
     m_command_line          (m_app + " " + m_args),
@@ -70,7 +67,7 @@ CProcessStream::CProcessStream(
 CProcessStream::CProcessStream(
     std::string const &app,
     std::vector<std::string> const &args)
-: 
+:
     m_app               (app),
     m_file_stdout_writer(nullptr),
     m_pipe_stdout_reader(nullptr),
@@ -98,7 +95,7 @@ void CProcessStream::initialize() {
         security_attributes.bInheritHandle  = true;
         security_attributes.nLength         = sizeof(SECURITY_ATTRIBUTES);
 
-        m_pipe_name = "\\\\.\\pipe\\local\\" + m_app + "." + 
+        m_pipe_name = "\\\\.\\pipe\\local\\" + m_app + "." +
             convertion::convert<std::string>(m_process_counter.fetch_add(1)) + ".stdout";
 
         m_pipe_stdout_reader = assertOK(
@@ -118,11 +115,11 @@ void CProcessStream::initialize() {
 
         m_file_stdout_writer = assertOK(
             CreateFileA(
-                m_pipe_name.c_str(), 
-                FILE_GENERIC_WRITE, 0, 
-                &security_attributes, 
-                OPEN_EXISTING, 
-                FILE_ATTRIBUTE_NORMAL, 
+                m_pipe_name.c_str(),
+                FILE_GENERIC_WRITE, 0,
+                &security_attributes,
+                OPEN_EXISTING,
+                FILE_ATTRIBUTE_NORMAL,
                 nullptr),
            "CreateFile");
 
@@ -131,14 +128,14 @@ void CProcessStream::initialize() {
 
         assertOK(
             CreateProcessA(
-                nullptr, 
-                const_cast<LPSTR>(m_command_line.c_str()), 
-                nullptr, 
-                nullptr, 
-                true, 0, 
-                nullptr, 
-                nullptr, 
-                &startup_info, 
+                nullptr,
+                const_cast<LPSTR>(m_command_line.c_str()),
+                nullptr,
+                nullptr,
+                true, 0,
+                nullptr,
+                nullptr,
+                &startup_info,
                 &m_process),
            "CreateProcess"
         );
@@ -334,15 +331,15 @@ io::Buffer::TSharedPtr CProcessStream::read(size_t const &size) {
             //LOGT << "GetOverlappedResult, result: " << result;
 
             //if (result) {
-            //    LOGT    
+            //    LOGT
             //        <<  "overlapped offset  : "
-            //        << m_overlapped->OffsetHigh << ":" 
+            //        << m_overlapped->OffsetHigh << ":"
             //        << m_overlapped->Offset;
-            //    LOGT 
+            //    LOGT
             //        <<  "overlapped interlal: "
-            //        << m_overlapped->InternalHigh << ":" 
+            //        << m_overlapped->InternalHigh << ":"
             //        << m_overlapped->Internal;
-            //    LOGT 
+            //    LOGT
             //        <<  "overlapped pointer : "
             //        << io::Event::TOperation(reinterpret_cast<intptr_t>(m_overlapped->Pointer));
             //}
@@ -371,16 +368,16 @@ io::Buffer::TSharedPtr CProcessStream::read(size_t const &size) {
         //auto overlapped = new OVERLAPPED { 0 };
         m_overlapped = std::make_shared<OVERLAPPED>();
         m_overlapped->Pointer = reinterpret_cast<PVOID>(static_cast<intptr_t>(io::Event::TOperation::READ));
-        //LOGT << "overlapped->Pointer: " << 
+        //LOGT << "overlapped->Pointer: " <<
         //    static_cast<io::Event::TOperation>(
         //    reinterpret_cast<intptr_t>(m_overlapped->Pointer));
 
         DWORD size_ = 0;
         auto result = ReadFile(
-            m_pipe_stdout_reader, 
-            m_buffer->data(), 
-            static_cast<DWORD>(m_buffer->size()), 
-            &size_, 
+            m_pipe_stdout_reader,
+            m_buffer->data(),
+            static_cast<DWORD>(m_buffer->size()),
+            &size_,
             m_overlapped.get());
 
         //LOGT
@@ -415,7 +412,7 @@ io::Buffer::TSharedPtr CProcessStream::read(size_t const &size) {
             }
         }
 
-        //LOGT 
+        //LOGT
         //    << "read, fd: " << reinterpret_cast<uintptr_t>(m_pipe_stdout_reader)
         //    << ", return pending buffer:\n'" << buffer
         //    << "'\nsize: " << (buffer ? buffer->size() : 0);
@@ -436,10 +433,7 @@ size_t CProcessStream::write(io::Buffer::TSharedPtr const &buffer) {
 }
 
 
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

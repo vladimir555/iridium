@@ -9,9 +9,7 @@
 #include "iridium/io/stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 #ifdef _MSC_VER
@@ -31,18 +29,12 @@ protected:
     /// \~english @param buffer The shared buffer that this stream will operate on.
     /// \~russian @param buffer Разделяемый буфер, с которым будет работать этот поток.
     explicit CStreamBuffer(Buffer::TSharedPtr const &buffer);
-    
-    /// \~english @brief Initializes the stream. (Currently a no-op for buffer-based streams).
-    /// \~russian @brief Инициализирует поток. (В настоящее время не выполняет никаких действий для потоков на основе буфера).
+
     void initialize() override;
     /// \~english @brief Finalizes the stream. (Currently a no-op for buffer-based streams).
     /// \~russian @brief Завершает работу потока. (В настоящее время не выполняет никаких действий для потоков на основе буфера).
     void finalize()   override;
-    
-    /// \~english @brief Gets underlying OS handles. Not applicable for buffer streams.
-    /// \~russian @brief Получает базовые дескрипторы ОС. Неприменимо для буферных потоков.
-    /// \~english @return An empty list, as buffer streams do not have OS handles.
-    /// \~russian @return Пустой список, так как буферные потоки не имеют дескрипторов ОС.
+
     std::list<uintptr_t>    getHandles()    const override;
     /// \~english @brief Gets the URI for this stream. Not typically applicable for memory buffer streams.
     /// \~russian @brief Получает URI для этого потока. Обычно неприменимо для потоков буфера памяти.
@@ -56,11 +48,7 @@ protected:
 };
 
 
-/// \~english @brief Implements a readable stream (`IStreamReader`) that reads from a `Buffer`.
-///     The reading is non-destructive to the original buffer; it maintains an internal position.
-/// \~russian @brief Реализует читаемый поток (`IStreamReader`), который читает из `Buffer`.
-///     Чтение не разрушает исходный буфер; он поддерживает внутреннюю позицию.
-class CStreamReaderBuffer: 
+class CStreamReaderBuffer:
     public CStreamBuffer,
     public IStreamReader
 {
@@ -71,15 +59,7 @@ public:
     /// \~english @param buffer The buffer to read data from.
     /// \~russian @param buffer Буфер для чтения данных.
     explicit CStreamReaderBuffer(Buffer::TSharedPtr const &buffer);
-    
-    /// \~english @brief Reads up to `size` bytes from the current position in the buffer.
-    ///     Advances the internal read position by the number of bytes read.
-    /// \~russian @brief Читает до `size` байт из текущей позиции в буфере.
-    ///     Сдвигает внутреннюю позицию чтения на количество прочитанных байт.
-    /// \~english @param size The maximum number of bytes to read.
-    /// \~russian @param size Максимальное количество байт для чтения.
-    /// \~english @return A new `Buffer` containing the data read, or `nullptr` if EOF is reached (no more data to read).
-    /// \~russian @return Новый `Buffer`, содержащий прочитанные данные, или `nullptr`, если достигнут конец файла (больше нет данных для чтения).
+
     Buffer::TSharedPtr read(size_t const &size) override;
 
 private:
@@ -90,11 +70,7 @@ private:
 
 
 // todo: interface with getBuffer
-/// \~english @brief Implements a writable stream (`IStreamWriter`) that writes to a `Buffer`.
-///     The writing appends data to the end of the provided buffer.
-/// \~russian @brief Реализует записываемый поток (`IStreamWriter`), который пишет в `Buffer`.
-///     Запись добавляет данные в конец предоставленного буфера.
-class CStreamWriterBuffer: 
+class CStreamWriterBuffer:
     public CStreamBuffer,
     public IStreamWriter
 {
@@ -125,9 +101,7 @@ public:
 #endif // _MSC_VER
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB

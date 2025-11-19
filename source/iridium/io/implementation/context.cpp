@@ -11,9 +11,7 @@ using iridium::threading::implementation::CAsyncQueue;
 
 
 #include "iridium/logging/logger.h"
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 CContext::CContext(IStream::TSharedPtr const &, IProtocol::TSharedPtr const &protocol)
@@ -36,7 +34,7 @@ std::list<Event::TSharedPtr> CContext::popEvents() {
 
     auto events = m_events->pop(false);
     auto now    = std::chrono::system_clock::now();
-    
+
     {
 //        LOCK_SCOPE(); // timestamp
         for (auto const &event: events)
@@ -53,35 +51,35 @@ std::list<Event::TSharedPtr> CContext::checkOutdatedStreams() {
 
     std::list<Event::TSharedPtr> result;
     auto now = std::chrono::system_clock::now();
-    
+
     LOCK_SCOPE(); // timestamp
     for (auto const &stream_timestamp: m_map_stream_timestamp)
         if (now - stream_timestamp.second > DEFAULT_STREAM_TIMEOUT)
             result.push_back(
                 Event::create(
-                    stream_timestamp.first, 
-                    Event::TOperation::TIMEOUT, 
+                    stream_timestamp.first,
+                    Event::TOperation::TIMEOUT,
                     Event::TStatus::BEGIN));
-    
+
     return result; // ----->
 }
 
 
 bool CContext::update(Event::TSharedPtr const &event) {
-    //LOGT 
-    //    << "context update: " 
+    //LOGT
+    //    << "context update: "
     //    << event->stream->getHandles().front() << " "
-    //    << event->operation << " " 
+    //    << event->operation << " "
     //    << event->status;
 
     if (!m_protocol)
         return true; // ----->
-    
+
     if (event->operation == Event::TOperation::OPEN)
         m_map_stream_pipe[event->stream];
-    
+
     auto result = m_protocol->control(event, shared_from_this());
-    
+
     if (event->operation    == Event::TOperation::CLOSE &&
         event->status       == Event::TStatus::END)
     {
@@ -90,7 +88,7 @@ bool CContext::update(Event::TSharedPtr const &event) {
         if (auto pipe = m_map_stream_pipe[event->stream])
             removePipe(pipe);
     }
-        
+
     return result; // ----->
 }
 
@@ -100,7 +98,7 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
         return false; // ----->
 
     return assertExists(
-        m_map_stream_pipe[event->stream], 
+        m_map_stream_pipe[event->stream],
         "context transmitting error: pipe not found")->transmit(event); // ----->
 }
 
@@ -108,7 +106,7 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
 void CContext::createPipe(std::string const &name) {
     if (m_map_name_pipe[name])
         throw std::runtime_error("pipe creating error: '" + name + "' already exists"); // ----->
-    
+
     m_map_name_pipe[name] = CPipe::create();
 }
 
@@ -121,7 +119,7 @@ void CContext::removePipe(std::string const &name) {
         throw std::runtime_error("context pipe remove error: pipe '" + name + "' not found"); // ----->
 
     removePipe(pipe);
-    
+
     m_map_name_pipe.erase(name);
 }
 
@@ -144,7 +142,7 @@ void CContext::updatePipe(
     auto pipe = m_map_name_pipe[name];
     if (!pipe)
         throw std::runtime_error("context pipe update error: pipe '" + name + "' not found"); // ----->
-    
+
     if (reader && reader->getURI() && m_map_stream_pipe.find(reader) == m_map_stream_pipe.end()) {
         m_events->push(Event::create(reader, Event::TOperation::OPEN, Event::TStatus::BEGIN));
         //LOGT
@@ -171,9 +169,9 @@ void CContext::updatePipe(
         //    << writer->getHandles().front();
     } else
     if (writer && writer->getURI()) {
-        //LOGT 
-        //    << "update pipe, event: " 
-        //    << Event::TOperation::WRITE << " " 
+        //LOGT
+        //    << "update pipe, event: "
+        //    << Event::TOperation::WRITE << " "
         //    << Event::TStatus::BEGIN << " "
         //    << writer->getHandles().front();
 
@@ -236,6 +234,4 @@ void CContext::removeStream(IStream::TSharedPtr const &stream, bool const &is_se
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation

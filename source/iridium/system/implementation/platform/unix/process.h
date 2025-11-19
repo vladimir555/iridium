@@ -28,11 +28,7 @@
 #include <sched.h> // For sched_yield, often used in process management utilities
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::system::implementation::platform::unix_ {
 
 /// \~english @brief Concrete Unix implementation of `IProcess` and `io::implementation::CStreamPort`.
 ///     Manages a child process, its I/O streams (stdin, stdout, stderr), and its state on Unix-like systems.
@@ -145,11 +141,7 @@ private:
 };
 
 
-} // unix_
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform::unix_
 
 
 #endif  // UNIX_PLATFORM

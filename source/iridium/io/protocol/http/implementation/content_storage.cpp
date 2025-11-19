@@ -12,11 +12,7 @@ using iridium::io::fs::implementation::CFileStreamReader;
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace implementation {
+namespace iridium::io::protocol::http::implementation {
 
 
 CContentStorage::CContentStorage(string const &root_path)
@@ -45,8 +41,4 @@ fs::IFileStreamReader::TSharedPtr CContentStorage::getContent(string const &path
 }
 
 
-} // implementation
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::implementation

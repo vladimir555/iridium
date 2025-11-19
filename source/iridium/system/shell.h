@@ -11,8 +11,7 @@
 #include "iridium/io/multiplexer.h"
 
 
-namespace iridium {
-namespace system {
+namespace iridium::system {
 
 
 /// \~english @brief A class for executing shell commands.
@@ -20,14 +19,10 @@ namespace system {
 class Shell: public pattern::IInitializable {
 public:
     DEFINE_IMPLEMENTATION(Shell)
-    /// \~english @brief Constructor.
-    /// \~russian @brief Конструктор.
     Shell();
-    /// \~english @brief A type for time duration in seconds.
-    /// \~russian @brief Тип для продолжительности времени в секундах.
+
     typedef std::chrono::seconds TTimeDuration;
-    /// \~english @brief The default timeout for shell commands.
-    /// \~russian @brief Тайм-аут по умолчанию для команд оболочки.
+
     static TTimeDuration const DEFAULT_TIMEOUT;
 
     /// \~english @brief The result of a shell command execution.
@@ -61,8 +56,7 @@ private:
 };
 
 
-} // system
-} // iridium
+} // namespace iridium::system
 
 
 #endif // HEADER_SHELL_46F6D204_C1A7_4BCF_944F_F085BB17E1E2

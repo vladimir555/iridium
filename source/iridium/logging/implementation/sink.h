@@ -18,14 +18,7 @@
 #include "iridium/logging/sink.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
-namespace iridium {
-/// \~english @brief Contains classes, structures, and enumerations related to the logging framework.
-/// \~russian @brief Содержит классы, структуры и перечисления, связанные с фреймворком логирования.
-namespace logging {
-/// \~english @brief Contains implementation details and concrete classes for logging components.
-/// \~russian @brief Содержит детали реализации и конкретные классы для компонентов логирования.
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 // todo: CSinkAsync(ISink::TSharedPtr ... ) wrapper
@@ -93,16 +86,12 @@ private:
         /// \~russian @brief Разделяемый указатель на базовый синхронный приемник, который оборачивает этот обработчик.
         ISink::TSharedPtr m_sink;
     };
-    
-    /// \~english @brief Shared pointer to the worker pusher, which manages the queue and worker thread.
-    /// \~russian @brief Разделяемый указатель на рабочего-отправителя, который управляет очередью и рабочим потоком.
+
     IWorkerPusher::TSharedPtr m_worker;
 };
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation
 
 
 #endif // HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB

@@ -14,8 +14,7 @@
 #include <string>
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 /// \~english @brief An interface for a worker that pushes items to a queue.
@@ -94,8 +93,7 @@ public:
 };
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 #endif // HEADER_WORKER_443BFEC7_C32B_4600_A0E9_D416C24C3F76

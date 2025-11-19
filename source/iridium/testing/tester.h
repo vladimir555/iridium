@@ -20,8 +20,7 @@
 #include "unit_test.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 /// \~english @brief Singleton class responsible for registering, managing, and running all tests within the framework.
 ///     It collects test cases defined using the `TEST` macro and provides a `run` method, typically invoked
@@ -74,8 +73,7 @@ public:
     int  run(int argc, char* argv[], std::string const &main_cpp_path);
 
 private:
-    /// \~english @brief Friend declaration to allow `Singleton` to manage `Tester`'s lifecycle.
-    /// \~russian @brief Дружественное объявление, позволяющее `Singleton` управлять жизненным циклом `Tester`.
+
     friend class pattern::Singleton<Tester>;
 
     /// \~english @brief Type alias for a map storing test cases, keyed by their unique path string.
@@ -107,8 +105,7 @@ private:
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 /// \~english @def CONCAT_IMPL(x, y)
 /// @brief Inner macro for direct token concatenation using the preprocessor `##` operator.

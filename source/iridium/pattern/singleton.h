@@ -14,8 +14,7 @@
 #include <atomic>
 
 
-namespace iridium {
-namespace pattern {
+namespace iridium::pattern {
 
 
 /// \~english @brief A template class for creating thread-safe singletons.
@@ -26,11 +25,7 @@ class Singleton:
     public NonMovable
 {
 public:
-    /// \~english @brief Virtual destructor.
-    /// \~russian @brief Виртуальный деструктор.
     virtual ~Singleton();
-    /// \~english @brief Gets the singleton instance.
-    /// \~russian @brief Возвращает экземпляр одиночки.
     static TClass &instance();
 protected:
     /// \~english @brief A flag indicating if the singleton instance is alive.
@@ -65,8 +60,7 @@ template<typename TClass>
 std::atomic<bool> Singleton<TClass>::m_is_alive(false);
 
 
-} // pattern
-} // iridium
+} // namespace iridium::pattern
 
 
 #endif // HEADER_SINGLETON_33ED8344_7855_4F54_A108_7FF9BC7D71B4

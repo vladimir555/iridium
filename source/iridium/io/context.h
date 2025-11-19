@@ -10,8 +10,7 @@
 // For clarity: #include "stream.h" would typically be here if not for indirect inclusion.
 
 
-namespace iridium {
-namespace io {
+namespace iridium::io {
 
 
 /// \~english @brief Interface for an I/O context, responsible for managing and dispatching I/O events.
@@ -26,14 +25,6 @@ public:
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContext)
 
-    /// \~english @brief Pushes an event into the context for processing.
-    ///     This method is likely used to enqueue events that will be handled by an event loop
-    ///     or dispatched to appropriate handlers associated with this context.
-    /// \~russian @brief Помещает событие в контекст для обработки.
-    ///     Этот метод, вероятно, используется для постановки в очередь событий, которые будут обработаны
-    ///     циклом событий или переданы соответствующим обработчикам, связанным с этим контекстом.
-    /// \~english @param event A shared pointer to the event to be pushed.
-    /// \~russian @param event Умный указатель на событие, которое необходимо поместить в очередь.
     virtual void pushEvent(Event::TSharedPtr const &event) = 0;
 
     /// \~english @brief Pops (retrieves and removes) events from the context's event queue.
@@ -108,12 +99,6 @@ public:
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IPipeManager)
 
-    /// \~english @brief Creates a named pipe with the specified name.
-    /// \~russian @brief Создает именованный канал с указанным именем.
-    /// \~english @param name The unique name to identify the pipe.
-    /// \~russian @param name Уникальное имя для идентификации канала.
-    /// \~english @throws iridium::Exception or similar if pipe creation fails (e.g., name conflict, system error).
-    /// \~russian @throws iridium::Exception или аналогичное, если создание канала не удалось (например, конфликт имен, системная ошибка).
     virtual void createPipe(std::string const &name) = 0;
 
     /// \~english @brief Removes an existing named pipe.
@@ -164,8 +149,7 @@ public:
 };
 
 
-} // io
-} // iridium
+} // namespace iridium::io
 
 
 #endif // HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6

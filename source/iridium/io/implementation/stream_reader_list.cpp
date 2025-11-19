@@ -3,9 +3,7 @@
 #include "iridium/assert.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 CStreamReaderList::CStreamReaderList()
@@ -13,8 +11,8 @@ CStreamReaderList::CStreamReaderList()
 
 
 void CStreamReaderList::initialize() {}
-    
-    
+
+
 void CStreamReaderList::finalize() {}
 
 
@@ -39,7 +37,7 @@ std::list<uintptr_t> CStreamReaderList::getHandles() const {
     return m_stream->get()->getHandles(); // ----->
 }
 
-    
+
 URI::TSharedPtr CStreamReaderList::getURI() const {
     if (m_streams.empty() || m_stream == m_streams.end())
         return {}; // ----->
@@ -56,6 +54,4 @@ void CStreamReaderList::add(IStreamReader::TSharedPtr const &stream_reader) {
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation

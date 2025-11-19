@@ -4,9 +4,7 @@
 
 
 #include "iridium/logging/logger.h"
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 void CContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
@@ -105,7 +103,7 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
             else
                 stream_context++;
         }
-        
+
         m_contexts.erase(context);
         m_contexts_to_remove.erase(context);
 
@@ -128,7 +126,7 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 
 void CContextManager::removeContext(IContext::TSharedPtr const &context) {
     LOCK_SCOPE();
-    
+
     LOGT << "CContextManager::removeContext: mark to remove on CLOSE END"; // rm on close end
     if (m_contexts_to_remove.count(context) == 0) {
         context->remove();
@@ -139,7 +137,7 @@ void CContextManager::removeContext(IContext::TSharedPtr const &context) {
 
 std::list<Event::TSharedPtr> CContextManager::checkOutdatedStreams() {
     LOCK_SCOPE();
-    
+
     std::list<Event::TSharedPtr> result;
     for(auto const &context: m_contexts)
         result.splice(result.end(), context->checkOutdatedStreams());
@@ -148,6 +146,4 @@ std::list<Event::TSharedPtr> CContextManager::checkOutdatedStreams() {
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation

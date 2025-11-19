@@ -15,9 +15,7 @@
 #include "iridium/io/uri.h"
 
 
-namespace iridium {
-namespace logging {
-namespace config {
+namespace iridium::logging::config {
 
 
 /// \~english @brief Defines the root structure for logger configuration.
@@ -77,9 +75,7 @@ namespace config {
 TLogger createDefault();
 
 
-} // config
-} // logging
-} // iridium
+} // namespace iridium::logging::config
 
 
 //DEFINE_ENUM_CONVERT(iridium::logging::config::TLogger::TSink::TSinkType)

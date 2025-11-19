@@ -18,9 +18,7 @@
 #include "node_type.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
-namespace iridium {
-namespace parsing {
+namespace iridium::parsing {
 
 /// \~english @typedef INode
 /// @brief Defines `INode` as a specialization of the `INodeType` interface with `std::string` as its value type.
@@ -33,8 +31,7 @@ namespace parsing {
 typedef INodeType<std::string> INode;
 
 
-} // parsing
-} // iridium
+} // namespace iridium::parsing
 
 /// \~english @brief Declares a conversion specialization allowing an `iridium::parsing::INode` object (or rather, a shared pointer to it, as per typical usage) to be converted to a `std::string`.
 ///     This conversion likely extracts the primary string value associated with the node.

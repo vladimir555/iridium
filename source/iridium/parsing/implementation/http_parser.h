@@ -1,0 +1,31 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+#ifndef HEADER_HTTP_PARSER_DD6F8041_66CA_40B5_9844_D362F29F1616
+#define HEADER_HTTP_PARSER_DD6F8041_66CA_40B5_9844_D362F29F1616
+
+
+#include "iridium/smart_ptr.h"
+#include "iridium/parsing/node.h"
+#include "iridium/parsing/parser.h"
+
+
+namespace iridium::parsing::implementation {
+
+
+class CHTTPParser: public IParser {
+public:
+    /// \~english @brief Defines standard implementation helpers for `CHTTPParser`, such as smart pointer typedefs and a static `create` method.
+    /// \~russian @brief Определяет стандартные вспомогательные средства реализации для `CHTTPParser`, такие как typedef-ы умных указателей и статический метод `create`.
+    DEFINE_IMPLEMENTATION(CHTTPParser)
+    CHTTPParser() = default;
+    INode::TSharedPtr parse(std::string const &source) const override;
+    std::string compose(INode::TConstSharedPtr const &root_node) const override;
+};
+
+
+} // iridium::parsing::implementation
+
+
+#endif // HEADER_HTTP_PARSER_DD6F8041_66CA_40B5_9844_D362F29F1616

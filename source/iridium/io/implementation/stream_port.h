@@ -10,17 +10,13 @@
 #include PLATFORM_HEADER(stream_port.h)
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 typedef platform::CStreamPort CStreamPort;
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_STREAM_PORT_982EEAD3_8439_425D_A6A3_24E436204950

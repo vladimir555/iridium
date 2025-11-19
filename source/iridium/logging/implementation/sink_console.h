@@ -19,10 +19,7 @@
 #include "sink.h"
 
 
-// No specific Doxygen for iridium namespace itself here.
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 /// \~english @brief A concrete sink implementation for logging messages to the standard console/terminal.
 ///     This sink writes formatted log messages to `stdout` or `stderr` (typically `stdout`).
@@ -63,9 +60,7 @@ private:
 };
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation
 
 
 #endif // HEADER_SINK_CONSOLE_6E4AF8A2_1104_46D6_AC9B_29A482C3FC6F

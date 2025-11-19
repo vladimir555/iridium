@@ -30,9 +30,7 @@
 using iridium::convertion::convert;
 
 
-// No specific Doxygen for iridium namespace itself here, usually documented at a higher level.
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 // ----- class definition
@@ -220,8 +218,7 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds co
 }
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 /// \~english @def LOCK_SCOPE()

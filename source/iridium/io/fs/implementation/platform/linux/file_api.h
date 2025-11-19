@@ -14,11 +14,7 @@
 #include <string.h>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
-namespace platform {
+namespace iridium::io::fs::implementation::platform {
 
 
 auto const fwriteInternal     = ::fwrite;
@@ -37,11 +33,7 @@ using unix_::open;
 using unix_::close;
 
 
-} // platform
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation::platform
 
 
 #endif // LINUX_PLATFORM

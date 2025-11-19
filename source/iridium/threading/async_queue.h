@@ -11,8 +11,7 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium {
-namespace threading {
+namespace iridium::threading {
 
 
 // todo: must be SyncQueue
@@ -87,8 +86,7 @@ public:
 };
 
 
-} // threading
-} // iridium
+} // namespace iridium::threading
 
 
 #endif // HEADER_ASYNC_QUEUE_BC5EFE5F_A8A1_40A2_85B5_065C05F9F9EE

@@ -10,9 +10,7 @@ using iridium::convertion::convert;
 using std::string;
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 size_t const CPipe::DEFAULT_BUFFER_SIZE  = 248;
@@ -178,6 +176,4 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation

@@ -4,10 +4,7 @@
 #ifdef WINDOWS_PLATFORM
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 CStreamPort::CStreamPort(URI const &uri) {}
@@ -38,10 +35,7 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
 }
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif  // WINDOWS_PLATFORM

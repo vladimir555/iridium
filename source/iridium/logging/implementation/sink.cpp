@@ -7,9 +7,7 @@ using iridium::threading::IWorker;
 using iridium::threading::implementation::CWorkerPusher;
 
 
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 CSinkAsync::CSinkAsync(ISink::TSharedPtr const &sink)
@@ -59,6 +57,4 @@ void CSinkAsync::CWorkerHandler::handle(TInputItems const &logger_events) {
 }
 
 
-} // implementation
-} // logger
-} // iridium
+} // iridium::logging::implementation

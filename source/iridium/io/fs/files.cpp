@@ -16,9 +16,7 @@ using iridium::io::fs::implementation::CFileStreamWriter;
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 vector<string> readTextFile(string const &file_name, bool const &is_throw_if_not_exists) {
@@ -103,6 +101,4 @@ string extractFileNameExtension(string const &file_name) {
 }
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs

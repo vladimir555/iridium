@@ -13,10 +13,7 @@
 #include "iridium/pattern/non_copyable.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 /// \~english @brief Windows-specific stream port implementation.
@@ -86,10 +83,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif  // WINDOWS_PLATFORM

@@ -18,9 +18,7 @@ using iridium::threading::implementation::CAsyncQueue;
 using iridium::createObjects;
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
@@ -46,7 +44,7 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
 
 //    {
 //        for (auto const &event: events_)
-//            LOGT 
+//            LOGT
 //                << "before: "
 //                << (event->stream->getHandles().empty() ? 0: event->stream->getHandles().front()) << " "
 //                << event->operation << " "
@@ -161,12 +159,12 @@ void CSessionManager::CMultiplexerThreadHandler::finalize() {
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
         //LOGT << "multiplexer wait ...";
-        
+
         auto    events = m_multiplexer->waitEvents();
-        
+
         //LOGT << "multiplexer wait OK, events: " << events.size();
 //        m_context_worker->push(m_multiplexer->waitEvents());
-        
+
 //        string  events_str;
 //        for (auto const &event: events)
 //            events_str +=
@@ -174,7 +172,7 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
 //            + " " + convert<string>(event->status)
 //            + " " + convert<string>(event->stream->getHandles().front())
 //            + "\n";
-        
+
         //LOGT << "multiplexer events:\n" + events_str;
 
         m_context_worker->push(events);
@@ -260,7 +258,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
 //        if (worker_event->operation == Event::TOperation::CLOSE &&
 //            worker_event->status    == Event::TStatus::BEGIN    &&
-//           !worker_event->stream->getHandles().empty()) 
+//           !worker_event->stream->getHandles().empty())
 //        {
 //            m_multiplexer->unsubscribe(worker_event->stream);
 //            worker_event->stream->finalize();
@@ -300,7 +298,7 @@ CSessionManager::CContextWorkerHandler::handle(
                             m_multiplexer->subscribe(event->stream);
                         } else
                         if (checkOneOf(
-                            event->operation, 
+                            event->operation,
                             Event::TOperation::READ,
                             Event::TOperation::WRITE,
                             Event::TOperation::TIMEOUT,
@@ -323,7 +321,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
                     } catch (std::exception const &e) {
                         LOGE
-                            << event->operation << " " 
+                            << event->operation << " "
                             << event->status
                             << "\n" << e.what()
                             << "\n" << event->stream->getURI();
@@ -338,7 +336,7 @@ CSessionManager::CContextWorkerHandler::handle(
                             checkOneOf(
                                 event->operation,
                                 Event::TOperation::READ,
-                                Event::TOperation::WRITE)) 
+                                Event::TOperation::WRITE))
                         {
                             // repeat rw
                             event->status = Event::TStatus::BEGIN;
@@ -371,8 +369,8 @@ CSessionManager::CContextWorkerHandler::handle(
                         //    // todo: rm stream from context
                         //}
                     } catch (std::exception const &e) {
-                        LOGE 
-                            << event->operation << " " 
+                        LOGE
+                            << event->operation << " "
                             << event->status
                             << "\n" << e.what()
                             << "\n" << event->stream->getURI();
@@ -385,7 +383,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
             if (!is_context_valid) {
-                LOGT << "remove context"; 
+                LOGT << "remove context";
                 m_context_manager->removeContext(context);
 //                continue; // <---
             }
@@ -427,6 +425,4 @@ CSessionManager::CContextWorkerHandler::handle(
 }
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation

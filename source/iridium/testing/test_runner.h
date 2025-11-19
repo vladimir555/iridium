@@ -12,8 +12,7 @@
 #include "iridium/parsing/serialization/node.h"
 
 
-namespace iridium {
-namespace testing {
+namespace iridium::testing {
 
 /// \~english @brief Represents the overall result of a test execution run.
 ///     This structure is typically serialized to/from a file (e.g., XML, JSON) and contains
@@ -72,8 +71,7 @@ public:
 };
 
 
-} // testing
-} // iridium
+} // namespace iridium::testing
 
 /// \~english @brief Declares a conversion specialization allowing an `iridium::testing::ITestRunner::INodeTest` object to be converted to a `std::string`.
 ///     This conversion likely extracts a meaningful string representation of the test node, such as its path or name, for display or logging.
