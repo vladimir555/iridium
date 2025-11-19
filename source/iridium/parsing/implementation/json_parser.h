@@ -2,8 +2,8 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-#ifndef HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
-#define HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
+#ifndef HEADER_JSON_PARSER_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88
+#define HEADER_JSON_PARSER_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88
 
 
 #include "iridium/smart_ptr.h"
@@ -14,10 +14,10 @@
 namespace iridium::parsing::implementation {
 
 
-class CHTTPParser: public IParser {
+class CJSONParser : public IParser {
 public:
-    DEFINE_IMPLEMENTATION(CHTTPParser)
-    CHTTPParser() = default;
+    DEFINE_IMPLEMENTATION(CJSONParser)
+    CJSONParser() = default;
     INode::TSharedPtr parse(std::string const &source) const override;
     std::string compose(INode::TConstSharedPtr const &root_node) const override;
 };
@@ -26,4 +26,4 @@ public:
 } // iridium::parsing::implementation
 
 
-#endif // HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
+#endif // HEADER_JSON_PARSER_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88

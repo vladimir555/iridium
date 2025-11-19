@@ -2,8 +2,8 @@
 
 #include <iridium/parsing/serialization/node.h>
 #include <iridium/parsing/implementation/node.h>
-#include <iridium/parsing/implementation/parser_xml.h>
-#include <iridium/parsing/implementation/parser_json.h>
+#include <iridium/parsing/implementation/xml_parser.h>
+#include <iridium/parsing/implementation/json_parser.h>
 #include <iridium/io/fs/files.h>
 #include <iridium/enum.h>
 #include <iridium/assert.h>

@@ -1,6 +1,6 @@
 #include "test_runner_fork.h"
 
-#include "iridium/parsing/implementation/parser_json.h"
+#include "iridium/parsing/implementation/json_parser.h"
 #include "iridium/io/implementation/session_manager.h"
 #include "iridium/io/implementation/pipe.h"
 #include "iridium/io/implementation/stream_buffer.h"

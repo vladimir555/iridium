@@ -2,8 +2,8 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-#ifndef HEADER_PARSER_XML_EF217266_E91A_4908_97D1_2BB5420DFF5A
-#define HEADER_PARSER_XML_EF217266_E91A_4908_97D1_2BB5420DFF5A
+#ifndef HEADER_XML_PARSER_EF217266_E91A_4908_97D1_2BB5420DFF5A
+#define HEADER_XML_PARSER_EF217266_E91A_4908_97D1_2BB5420DFF5A
 
 
 #include "iridium/smart_ptr.h"
@@ -27,4 +27,4 @@ public:
 } // iridium::parsing::implementation
 
 
-#endif // HEADER_PARSER_XML_EF217266_E91A_4908_97D1_2BB5420DFF5A
+#endif // HEADER_XML_PARSER_EF217266_E91A_4908_97D1_2BB5420DFF5A

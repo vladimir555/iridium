@@ -2,8 +2,8 @@
 
 #include "parser.h"
 
-#include "implementation/parser_json.h"
-#include "implementation/parser_xml.h"
+#include "implementation/json_parser.h"
+#include "implementation/xml_parser.h"
 
 #include "iridium/strings.h"
 #include "iridium/io/fs/files.h"

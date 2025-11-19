@@ -3,9 +3,9 @@
 #include <iridium/parsing/node.h>
 #include <iridium/parsing/implementation/node.h>
 #include <iridium/parsing/parser.h>
-#include <iridium/parsing/implementation/parser_xml.h>
-#include <iridium/parsing/implementation/parser_json.h>
-#include <iridium/parsing/implementation/parser_http.h>
+#include <iridium/parsing/implementation/xml_parser.h>
+#include <iridium/parsing/implementation/json_parser.h>
+#include <iridium/parsing/implementation/http_parser.h>
 #include <iridium/assert.h>
 
 
@@ -392,15 +392,15 @@ TEST(compose_http_request) {
 
 
 TEST(parse_compose) {
-    auto parser_json    = CJSONParser::create();
-    auto parser_xml     = CXMLParser::create();
+    auto json_parser    = CJSONParser::create();
+    auto xml_parser     = CXMLParser::create();
 
-    auto node           = parser_json->parse(beer_json);
-    auto xml_str        = parser_xml->compose(node);
+    auto node           = json_parser->parse(beer_json);
+    auto xml_str        = xml_parser->compose(node);
 
     ASSERT(beer_xml, equal, xml_str);
 
-    auto json_str       =  parser_json->compose(node);
+    auto json_str       = json_parser->compose(node);
 
     ASSERT(beer_json, equal, json_str);
 }
