@@ -20,9 +20,7 @@
 #include <chrono>
 
 
-namespace iridium {
-namespace threading {
-namespace implementation {
+namespace iridium::threading::implementation {
 
 
 class CThread:
@@ -73,9 +71,7 @@ private:
 };
 
 
-} // implementation
-} // threading
-} // iridium
+} // iridium::threading::implementation
 
 
 #endif // HEADER_THREAD_4164C6F4_DDC5_41FF_B701_C80679412DFA

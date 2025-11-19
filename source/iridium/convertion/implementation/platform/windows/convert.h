@@ -16,10 +16,7 @@
 #include <time.h>
 
 
-namespace iridium {
-namespace convertion {
-namespace implementation {
-namespace platform {
+namespace iridium::convertion::implementation::platform {
 
 
 void itoa(int32_t const &value, char *buffer, int const &base);
@@ -68,10 +65,7 @@ int snprintf(TArgs ... args) {
 __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_1_ARGLIST(int, sprintf, vsprintf_s, _Post_z_ char, _Dest, _In_z_ _Printf_format_string_ const char *, _Format);
 
 
-} // platform
-} // implementation
-} // convertuin 
-} // iridium
+} // iridium::convertion::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

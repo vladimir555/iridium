@@ -28,10 +28,7 @@ bool checkMarker(string const &line, string const &marker) {
 } // unnamed
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 CFileCache::CFileCache(std::string const &file_name)
@@ -161,7 +158,4 @@ void CFileCache::flush() {
 }
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation

@@ -16,11 +16,7 @@
 #include <sched.h>
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::system::implementation::platform::unix_ {
 
 
 class CProcessStream:
@@ -65,11 +61,7 @@ private:
 };
 
 
-} // unix_
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform::unix_
 
 
 #endif  // UNIX_PLATFORM

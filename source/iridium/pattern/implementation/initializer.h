@@ -12,9 +12,7 @@
 #include <stdexcept>
 
 
-namespace iridium {
-namespace pattern {
-namespace implementation {
+namespace iridium::pattern::implementation {
 
 
 class CInitializer: public IInitializable {
@@ -46,9 +44,7 @@ CInitializer::CInitializer(TArgs const & ... items)
 }
 
 
-} // implementation
-} // pattern
-} // iridium
+} // iridium::pattern::implementation
 
 
 #endif // HEADER_INITIALIZER_A79AA8C7_D7C5_492D_A771_2633A8E098DA

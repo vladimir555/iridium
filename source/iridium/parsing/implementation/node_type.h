@@ -15,9 +15,7 @@
 #include "iridium/parsing/node_type.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 // ----- interface
@@ -326,9 +324,7 @@ typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::clone() const {
 }
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation
 
 
 #endif // HEADER_NODE_0A80E93C_07DA_494B_8C4D_8D0AF4B134A5

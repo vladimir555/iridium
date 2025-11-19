@@ -14,11 +14,7 @@
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 int const CStreamPort::YES = CStreamPort::initSignal();
@@ -165,11 +161,7 @@ int CStreamPort::initSignal() {
 }
 
 
-} // unix_
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform::unix_
 
 
 #endif // UNIX_PLATFORM

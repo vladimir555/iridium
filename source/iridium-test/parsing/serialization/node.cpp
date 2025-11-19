@@ -18,9 +18,7 @@ using iridium::assertExists;
 
 //#include <simdjson.h>
 //#include <nlohmann/json.hpp>
-namespace iridium {
-namespace parsing {
-namespace serialization {
+namespace iridium::parsing::serialization {
 
 
 struct C {
@@ -598,9 +596,7 @@ TEST(node_to_struct) {
 // }
 
 
-} // serialization
-} // parsing
-} // iridium
+} // iridium::parsing::serialization
 
 
 IMPLEMENT_ENUM(iridium::parsing::serialization::C::TEnum)

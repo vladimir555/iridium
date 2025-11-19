@@ -20,11 +20,7 @@
 #include <set>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 class CStreamPortAcceptor: public IStreamAcceptor {
@@ -71,11 +67,7 @@ T CStreamPortAcceptor::assertOK(T const &result, std::string const &message) {
 }
 
 
-} // unix
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform::unix_
 
 
 #endif // UNIX_PLATFORM

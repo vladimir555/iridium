@@ -12,12 +12,7 @@
 #include <sys/file.h>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::fs::implementation::platform::unix_ {
 
 
 ::FILE *open(const std::string &file_name, const std::string &open_mode) {
@@ -37,12 +32,7 @@ void close(::FILE *file) {
 }
 
 
-} // unix_
-} // platform
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation::platform::unix_
 
 
 #endif // UNIX_PLATFORM

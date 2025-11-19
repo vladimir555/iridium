@@ -13,9 +13,7 @@
 #include <list>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 class ICache: public pattern::IInitializable {
@@ -33,9 +31,7 @@ public:
 };
 
 
-} // io
-} // fs
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_CACHE_F566D6D8_C42D_4049_9642_C600B057A128

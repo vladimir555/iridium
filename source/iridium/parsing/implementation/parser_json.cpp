@@ -27,9 +27,7 @@ static const string DEFAULT_TAB = "    ";
 
 
 #include "iridium/logging/logger.h"
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 // void convertStringToNode(string const &source, INode::TSharedPtr node, size_t &index, bool const &is_array_item = false) {
@@ -707,6 +705,4 @@ string CJSONParser::compose(INode::TConstSharedPtr const &root_node) const {
 }
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation

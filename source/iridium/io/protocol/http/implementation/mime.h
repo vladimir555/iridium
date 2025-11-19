@@ -12,11 +12,7 @@
 #include "iridium/pattern/singleton.h"
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace implementation {
+namespace iridium::io::protocol::http::implementation {
 
 
 // not synchronized - only readable
@@ -38,11 +34,7 @@ private:
 };
 
 
-} // implementation
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::implementation
 
 
 #endif // HEADER_MIME_B406ABE9_2B4C_4F52_A8E9_CA92EA867A09

@@ -17,10 +17,7 @@
 #include <Windows.h>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 class CMultiplexer : public IMultiplexer, public threading::Synchronized<std::mutex> {
@@ -41,10 +38,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // WINDOWS_PLATFORM

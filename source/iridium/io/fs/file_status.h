@@ -5,9 +5,7 @@
 #include <chrono>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 struct TFileStatus {
@@ -18,9 +16,7 @@ struct TFileStatus {
 };
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_FILE_STATUS_DB277AFC_11F0_4FB7_847B_6EB05C1C786F

@@ -12,9 +12,7 @@
 #include <chrono>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 class CContext:
@@ -25,18 +23,18 @@ class CContext:
 {
 public:
     DEFINE_CREATE(CContext)
-    
+
     CContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);
-    
+
     void pushEvent(Event::TSharedPtr const &event) override;
     std::list<Event::TSharedPtr>
          popEvents() override;
     std::list<Event::TSharedPtr>
          checkOutdatedStreams() override;
-    
+
     bool update    (Event::TSharedPtr const &event) override;
     bool transmit  (Event::TSharedPtr const &event) override;
-    
+
     void createPipe(std::string const &name) override;
     void removePipe(std::string const &name) override;
     void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader) override;
@@ -48,7 +46,7 @@ public:
 private:
     void removePipe(IPipe::TSharedPtr const &pipe);
     void removeStream(IStream::TSharedPtr const &stream, bool const &is_send_close_event = true);
-    
+
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_events;
     IProtocol::TSharedPtr
@@ -63,9 +61,7 @@ private:
 };
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_CONTEXT_3763EB60_69EF_4930_9328_F8727441990E

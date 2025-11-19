@@ -14,10 +14,7 @@
 #include <stdio.h>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
 
 class CFileStream:
@@ -53,10 +50,7 @@ private:
 };
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation
 
 
 //DEFINE_ENUM_CONVERT(iridium::io::fs::implementation::CFileStream::TOpenMode)

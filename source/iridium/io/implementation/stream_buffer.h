@@ -9,9 +9,7 @@
 #include "iridium/io/stream.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 #ifdef _MSC_VER
@@ -23,10 +21,10 @@ namespace implementation {
 class CStreamBuffer: public virtual IStream {
 protected:
     explicit CStreamBuffer(Buffer::TSharedPtr const &buffer);
-    
+
     void initialize() override;
     void finalize()   override;
-    
+
     std::list<uintptr_t>    getHandles()    const override;
     URI::TSharedPtr         getURI()        const override;
 
@@ -34,14 +32,14 @@ protected:
 };
 
 
-class CStreamReaderBuffer: 
+class CStreamReaderBuffer:
     public CStreamBuffer,
     public IStreamReader
 {
 public:
     DEFINE_IMPLEMENTATION(CStreamReaderBuffer)
     explicit CStreamReaderBuffer(Buffer::TSharedPtr const &buffer);
-    
+
     Buffer::TSharedPtr read(size_t const &size) override;
 
 private:
@@ -50,7 +48,7 @@ private:
 
 
 // todo: interface with getBuffer
-class CStreamWriterBuffer: 
+class CStreamWriterBuffer:
     public CStreamBuffer,
     public IStreamWriter
 {
@@ -67,9 +65,7 @@ public:
 #endif // _MSC_VER
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB

@@ -15,19 +15,13 @@
 #include "../unix/stream_port_client.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 typedef platform::unix_::CStreamPortClient CStreamPortClient;
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // FREEBSD_PLATFORM

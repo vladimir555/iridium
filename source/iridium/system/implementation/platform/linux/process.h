@@ -11,19 +11,13 @@
 #include "../unix/process.h"
 
 
-namespace iridium {
-namespace system {
-namespace implementation {
-namespace platform {
+namespace iridium::system::implementation::platform {
 
 
 typedef platform::unix_::CProcessStream CProcessStream;
 
 
-} // platform
-} // implementation
-} // system
-} // iridium
+} // iridium::system::implementation::platform
 
 
 #endif // LINUX_PLATFORM

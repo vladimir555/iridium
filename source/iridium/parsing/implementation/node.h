@@ -9,17 +9,13 @@
 #include "node_type.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 typedef CNodeType<std::string> CNode;
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation
 
 
 #endif // HEADER_NODE_C3E75C97_C541_49C8_AEF6_4D6E2953B0E4

@@ -13,10 +13,7 @@
 #include "iridium/pattern/non_copyable.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
@@ -35,10 +32,7 @@ private:
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif  // WINDOWS_PLATFORM

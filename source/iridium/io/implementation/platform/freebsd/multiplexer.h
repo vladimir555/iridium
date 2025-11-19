@@ -29,10 +29,7 @@
 #include <sys/event.h>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 class CMultiplexer: public IMultiplexer, public threading::Synchronized<std::mutex> {
@@ -85,10 +82,7 @@ T CMultiplexer::assertOK(T const &result, std::string const &message) {
 }
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // FREEBSD_LIKE_PLATFORM

@@ -20,9 +20,7 @@
 #include <mutex>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
+namespace iridium::io::implementation {
 
 
 // todo:
@@ -63,12 +61,12 @@ namespace implementation {
 class CSessionManager: public ISessionManager {
 public:
     DEFINE_IMPLEMENTATION(CSessionManager);
-    
+
     CSessionManager();
 
     void initialize() override;
     void finalize() override;
-    
+
     void manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) override;
 
 private:
@@ -77,7 +75,7 @@ private:
     class CMultiplexerThreadHandler: public iridium::threading::IRunnable {
     public:
         DEFINE_IMPLEMENTATION(CMultiplexerThreadHandler)
-        
+
         CMultiplexerThreadHandler(
             IContextWorker::TSharedPtr  const &context_worker,
             IContextManager::TSharedPtr const &context_manager,
@@ -97,7 +95,7 @@ private:
     class CEventRepeaterHandler: public threading::IRunnable {
     public:
         DEFINE_IMPLEMENTATION(CEventRepeaterHandler)
-        
+
         CEventRepeaterHandler(IContextWorker::TSharedPtr const &context_worker);
 
         void initialize() override;
@@ -139,9 +137,7 @@ private:
 
 
 
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation
 
 
 #endif // HEADER_SESSION_MANAGER_D7D8E1E1_DE14_43A0_AAFC_8E95DFFE4453

@@ -20,9 +20,7 @@ using iridium::convertion::convert;
 using iridium::parsing::implementation::CNode;
 
 
-namespace iridium {
-namespace db {
-namespace implementation {
+namespace iridium::db::implementation {
 
 
 CPostgresConnector::CPostgresConnector(config::TDatebase const &config)
@@ -119,9 +117,7 @@ CPostgresConnector::INode::TSharedPtr CPostgresConnector::sendQuery(string const
 }
 
 
-} // implementation
-} // db
-} // iridium
+} // iridium::db::implementation
 
 
 #endif // BUILD_FLAG_POSTGRES

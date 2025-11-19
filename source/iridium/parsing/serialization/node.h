@@ -14,9 +14,7 @@
 #include "iridium/macros/va_args.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace serialization {
+namespace iridium::parsing::serialization {
 
 
 // ----- interface
@@ -336,9 +334,7 @@ enum class TNamingStrategyCPPToNode {
 std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode const &strategy);
 
 
-} // serialization
-} // parsing
-} // iridium
+} // iridium::parsing::serialization
 
 
 /*

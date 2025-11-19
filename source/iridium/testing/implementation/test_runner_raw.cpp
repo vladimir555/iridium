@@ -11,9 +11,7 @@ using std::string;
 using iridium::parsing::implementation::CJSONParser;
 
 
-namespace iridium {
-namespace testing {
-namespace implementation {
+namespace iridium::testing::implementation {
 
 
 TResult CTestRunnerRaw::run(INodeTest::TSharedPtr const &node_test) {
@@ -61,6 +59,4 @@ void CTestRunnerRaw::run(
 }
 
 
-} // implementation
-} // testing
-} // iridium
+} // iridium::testing::implementation

@@ -11,10 +11,7 @@
 #include <string>
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
+namespace iridium::io::protocol::http {
 
 
 DEFINE_ENUM(
@@ -30,10 +27,7 @@ DEFINE_ENUM(
 )
 
 
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http
 
 
 //DEFINE_ENUM_CONVERT(iridium::io::protocol::http::TMethod)

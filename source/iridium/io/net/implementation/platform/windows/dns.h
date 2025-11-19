@@ -15,21 +15,13 @@
 #include "iridium/io/uri.h"
 
 
-namespace iridium {
-namespace io {
-namespace net {
-namespace implementation {
-namespace platform {
+namespace iridium::io::net::implementation::platform {
 
 
 URI::TIPv4 getIPv4ByHost(std::string const &host);
 
 
-} // platform
-} // implementation
-} // net
-} // io
-} // iridium
+} // iridium::io::net::implementation::platform
 
 
 #endif // HEADER_DNS_A166216A_6B6F_4336_B6BE_6E3D56AC1580

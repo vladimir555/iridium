@@ -11,9 +11,7 @@
 #include "iridium/parsing/parser.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 class CJSONParser : public IParser {
@@ -25,9 +23,7 @@ public:
 };
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation
 
 
 #endif // HEADER_PARSER_JSON_C7A205BB_CD5F_4770_86BA_7DE37F7A5F88

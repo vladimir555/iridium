@@ -10,9 +10,7 @@
 #include <algorithm>
 
 
-namespace iridium {
-namespace pattern {
-namespace implementation {
+namespace iridium::pattern::implementation {
 
 
 template<typename TEvent>
@@ -92,9 +90,7 @@ std::list<typename IObserver<TEvent>::TWeakPtr> CObservable<TEvent>::getLiveObse
 }
 
 
-} // implementation
-} // pattern
-} // iridium
+} // iridium::pattern::implementation
 
 
 #endif // HEADER_OBSERVABLE_FE9A8D01_3845_472A_8A6E_B413B9C5FB6C

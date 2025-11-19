@@ -6,9 +6,7 @@ using std::cout;
 using std::endl;
 
 
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 CSinkConsole::CSinkConsole(TEvent::TLevel const &level)
@@ -34,6 +32,4 @@ void CSinkConsole::initialize() {}
 void CSinkConsole::finalize() {}
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation

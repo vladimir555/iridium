@@ -66,10 +66,7 @@ DEFINE_ENUM(
 IMPLEMENT_ENUM(TEventFilter)
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 void CMultiplexer::handleSignal(int signal) {
@@ -181,10 +178,10 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
             m_map_fd_stream[fd] = stream;
             //        LOGT << "!   map fd: " << fd;
         }
-        
+
         // todo: optimize uintptr_t
         auto result = write(m_pipe_add[1], &fd, 8);
-        
+
         if (result < 0)
             throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
     }
@@ -205,7 +202,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
             continue; // <---
 
         auto result = write(m_pipe_del[1], &fd, 8);
-        
+
         if (result < 0)
             throw std::runtime_error("multiplexer subscribing error: " + string(strerror(errno))); // ----->
     }
@@ -416,10 +413,7 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 }
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // FREEBSD_LIKE_PLATFORM

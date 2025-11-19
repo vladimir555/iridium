@@ -14,11 +14,7 @@
 #include "method.h"
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
-namespace request {
+namespace iridium::io::protocol::http::request {
 
 
 DEFINE_ROOT_NODE_BEGIN(Http)
@@ -43,11 +39,7 @@ DEFINE_ROOT_NODE_BEGIN(Http)
 DEFINE_ROOT_NODE_END()
 
 
-} // request
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http::request
 
 
 DEFINE_CONVERT(std::string, iridium::io::protocol::http::request::THttp::TMessageLine)

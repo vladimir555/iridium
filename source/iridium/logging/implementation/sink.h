@@ -11,9 +11,7 @@
 #include "iridium/logging/sink.h"
 
 
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 // todo: CSinkAsync(ISink::TSharedPtr ... ) wrapper
@@ -42,14 +40,12 @@ private:
     private:
         ISink::TSharedPtr m_sink;
     };
-    
+
     IWorkerPusher::TSharedPtr m_worker;
 };
 
 
-} // implementation
-} // logger
-} // iridium
+} // iridium::logging::implementation
 
 
 #endif // HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB

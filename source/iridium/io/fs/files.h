@@ -10,9 +10,7 @@
 #include <vector>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 std::vector<std::string> readTextFile(std::string const &file_name, bool const &is_throw_if_not_exists = true);
@@ -33,9 +31,7 @@ void remove(std::string const &file_name);
 std::string extractFileNameExtension(std::string const &file_name);
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_FS_EC4EF5DB_F63C_4227_8830_C306F3060E07

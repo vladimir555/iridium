@@ -12,9 +12,7 @@
 #include "iridium/convertion/convert.h"
 
 
-namespace iridium {
-namespace io {
-namespace fs {
+namespace iridium::io::fs {
 
 
 // ----- interface
@@ -76,9 +74,7 @@ FileValue<TValue>::operator TValue () const {
 }
 
 
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs
 
 
 #endif // HEADER_FILE_VALUE_46471A9C_47FB_468C_9FC2_F8CB96FB573C

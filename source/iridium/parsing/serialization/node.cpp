@@ -9,9 +9,7 @@ using std::string;
 using iridium::parsing::implementation::CNode;
 
 
-namespace iridium {
-namespace parsing {
-namespace serialization {
+namespace iridium::parsing::serialization {
 
 
 NodeView<void>::NodeView(std::string const &name){
@@ -104,9 +102,7 @@ std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode co
 }
 
 
-} // serialization
-} // parsing
-} // iridium
+} // iridium::parsing::serialization
 
 
 //IMPLEMENT_ENUM(iridium::parsing::serialization::TNamingStrategyCPPToNode)

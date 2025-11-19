@@ -12,11 +12,7 @@
 #include <sys/file.h>
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
-namespace platform {
+namespace iridium::io::fs::implementation::platform {
 
 
 int getFD(::FILE *file) {
@@ -44,11 +40,7 @@ iridium::io::fs::TFileStatus getFileStatus(::FILE *file) {
 }
 
 
-} // platform
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation::platform
 
 
 #endif // LINUX_PLATFORM

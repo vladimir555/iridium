@@ -15,10 +15,7 @@
 #include "../unix/stream_port.h"
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
+namespace iridium::io::implementation::platform {
 
 
 typedef platform::unix_::CStreamPort CStreamPort;
@@ -28,19 +25,16 @@ class CStreamPortSSL: public platform::unix_::CStreamPort {
 public:
     DEFINE_IMPLEMENTATION(CStreamPortSSL)
     CStreamPortSSL(URI const &uri);
-    
+
     void initialize() override;
     void finalize() override;
-    
+
 private:
 //    SSLConnectionRef m_ssl_connection;
 };
 
 
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform
 
 
 #endif // MACOS_PLATFORM

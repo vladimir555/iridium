@@ -12,10 +12,7 @@
 #include <string>
 
 
-namespace iridium {
-namespace io {
-namespace protocol {
-namespace http {
+namespace iridium::io::protocol::http {
 
 
 class IContentStorage {
@@ -25,10 +22,7 @@ public:
 };
 
 
-} // http
-} // protocol
-} // io
-} // iridium
+} // iridium::io::protocol::http
 
 
 #endif // HEADER_CONTENT_STORAGE_357A6B8F_B845_4480_B73F_8334B28B71A6

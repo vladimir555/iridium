@@ -12,9 +12,7 @@
 #include "sink.h"
 
 
-namespace iridium {
-namespace logging {
-namespace implementation {
+namespace iridium::logging::implementation {
 
 
 class CSinkConsole: public ISink, pattern::NonCopyable {
@@ -32,9 +30,7 @@ private:
 };
 
 
-} // implementation
-} // logging
-} // iridium
+} // iridium::logging::implementation
 
 
 #endif // HEADER_SINK_CONSOLE_6E4AF8A2_1104_46D6_AC9B_29A482C3FC6F

@@ -21,11 +21,7 @@
 #include <string>
 
 
-namespace iridium {
-namespace io {
-namespace implementation {
-namespace platform {
-namespace unix_ {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
@@ -77,11 +73,7 @@ T CStreamPort::assertOK(T const &result, std::string const &message) {
 }
 
 
-} // unix_
-} // platform
-} // implementation
-} // io
-} // iridium
+} // iridium::io::implementation::platform::unix_
 
 
 #endif // UNIX_PLATFORM

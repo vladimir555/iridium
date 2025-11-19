@@ -6,19 +6,13 @@
 using iridium::convertion::convert;
 
 
-namespace iridium {
-namespace io {
-namespace fs {
-namespace implementation {
+namespace iridium::io::fs::implementation {
 
-    
+
 CFileStreamReader::CFileStreamReader(std::string const &path)
 :
     CFileStream(path, TOpenMode::READ)
 {}
 
 
-} // implementation
-} // fs
-} // io
-} // iridium
+} // iridium::io::fs::implementation

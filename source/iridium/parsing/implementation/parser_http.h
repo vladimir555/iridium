@@ -11,9 +11,7 @@
 #include "iridium/parsing/parser.h"
 
 
-namespace iridium {
-namespace parsing {
-namespace implementation {
+namespace iridium::parsing::implementation {
 
 
 class CHTTPParser: public IParser {
@@ -25,9 +23,7 @@ public:
 };
 
 
-} // implementation
-} // parser
-} // iridium
+} // iridium::parsing::implementation
 
 
 #endif // HEADER_PARSER_HTTP_DD6F8041_66CA_40B5_9844_D362F29F1616
