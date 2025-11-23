@@ -1,13 +1,17 @@
-/// \~english @brief Defines interfaces for I/O context management and named pipe management.
-/// \~russian @brief Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами.
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Defines interfaces for I/O context and pipe management.
+/// \~russian @file
+/// @brief Определяет интерфейсы для управления контекстом ввода-вывода и каналами.
+
 #ifndef HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6
 #define HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6
 
 
 #include "event.h" // For Event::TSharedPtr
-// IStreamReader and IStreamWriter are used by IPipeManager,
-// their definitions are expected to be included transitively or in files that include context.h
-// For clarity: #include "stream.h" would typically be here if not for indirect inclusion.
 
 
 namespace iridium::io {
@@ -25,6 +29,10 @@ public:
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContext)
 
+    /// \~english @brief Pushes an event into the context's event queue.
+    /// \~russian @brief Помещает событие в очередь событий контекста.
+    /// \~english @param event A shared pointer to the event to be pushed.
+    /// \~russian @param event Умный указатель на событие, которое нужно поместить в очередь.
     virtual void pushEvent(Event::TSharedPtr const &event) = 0;
 
     /// \~english @brief Pops (retrieves and removes) events from the context's event queue.
@@ -99,6 +107,10 @@ public:
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IPipeManager)
 
+    /// \~english @brief Creates a new named pipe.
+    /// \~russian @brief Создает новый именованный канал.
+    /// \~english @param name The name of the pipe to create.
+    /// \~russian @param name Имя создаваемого канала.
     virtual void createPipe(std::string const &name) = 0;
 
     /// \~english @brief Removes an existing named pipe.

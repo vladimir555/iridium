@@ -12,6 +12,10 @@
 namespace iridium::pattern {
 
 
+/// \~english @brief Interface for objects that require explicit initialization and finalization steps.
+/// \~english @details This pattern is useful for objects whose setup and teardown are complex and cannot be fully handled in the constructor or destructor alone.
+/// \~russian @brief Интерфейс для объектов, требующих явных шагов инициализации и финализации.
+/// \~russian @details Этот паттерн полезен для объектов, чья настройка и демонтаж сложны и не могут быть полностью обработаны только в конструкторе или деструкторе.
 class IInitializable {
 public:
     /// \~english @brief Defines standard smart pointer typedefs (`TSharedPtr`, `TWeakPtr`, etc.) for the `IInitializable` interface.
@@ -21,7 +25,12 @@ public:
     /// \~russian @brief Виртуальный деструктор для обеспечения корректного освобождения ресурсов в производных классах.
     virtual ~IInitializable() = default;
 
+    /// \~english @brief Performs the initialization logic for the object.
+    /// \~russian @brief Выполняет логику инициализации объекта.
     virtual void initialize() = 0;
+
+    /// \~english @brief Performs the finalization logic for the object.
+    /// \~russian @brief Выполняет логику финализации объекта.
     virtual void finalize() = 0;
 };
 

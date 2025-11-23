@@ -176,10 +176,14 @@ std::shared_ptr<T> assertExists(std::shared_ptr<T> const &value, char const *err
 }
 
 
+/// \~english @brief A trait to check if a type `T` has a `size()` method.
+/// \~russian @brief типаж для проверки наличия метода `size()` у типа `T`.
 template<typename T, typename = void>
 struct TContainerHasSizeMethod: std::false_type {};
 
 
+/// \~english @brief A trait to check if a type `T` has a `size()` method. Specialization for when `size()` exists.
+/// \~russian @brief типаж для проверки наличия метода `size()` у типа `T`. Специализация для случая, когда `size()` существует.
 template<typename T>
 struct TContainerHasSizeMethod<T, std::void_t<decltype(std::declval<T>().size())>> : std::true_type {};
 

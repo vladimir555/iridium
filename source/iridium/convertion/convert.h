@@ -6,11 +6,19 @@
 #define HEADER_CONVERT_A1637EFD_3229_474D_BFEB_E9EAD7FF0C20
 
 
+/// \~english @file
+/// @brief Provides a generic type conversion framework.
+/// \~russian @file
+/// @brief Предоставляет обобщенный фреймворк для преобразования типов.
+
+
 #include "implementation/convert.h"
 
 
 namespace iridium::convertion {
 
+/// \~english @brief Alias for the conversion configuration.
+/// \~russian @brief Псевдоним для конфигурации преобразования.
 using implementation::config;
 
 /// \~english @brief Converts a value from a source type to a target type.

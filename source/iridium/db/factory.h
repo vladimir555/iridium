@@ -1,4 +1,15 @@
-#pragma once
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+#ifndef HEADER_FACTORY_D4211A6B_FEA8_449C_9D30_6F854241610C
+#define HEADER_FACTORY_D4211A6B_FEA8_449C_9D30_6F854241610C
+
+
+/// \~english @file
+/// @brief Defines factory functions for creating database connectors.
+/// \~russian @file
+/// @brief Определяет фабричные функции для создания коннекторов к базам данных.
 
 
 #include "config.h"
@@ -62,3 +73,6 @@ IConnector::TSharedPtr createConnector(io::URI              const &uri);
 
 
 } // namespace iridium::db
+
+
+#endif // HEADER_FACTORY_D4211A6B_FEA8_449C_9D30_6F854241610C

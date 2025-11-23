@@ -36,12 +36,48 @@ public:
     DEFINE_SMART_PTR(ICache)
     virtual ~ICache() = default;
 
+    /// \~english @brief Pushes a string into the cache.
+    /// \~russian @brief Добавляет строку в кэш.
+    /// \~english @param line The string to be cached.
+    /// \~russian @param line Строка для кэширования.
+    /// \~english @return The ID assigned to the cached string.
+    /// \~russian @return Идентификатор, присвоенный кэшированной строке.
     virtual size_t push(std::string const &line) = 0;
+
+    /// \~english @brief Retrieves a string from the cache by its ID.
+    /// \~russian @brief Извлекает строку из кэша по ее идентификатору.
+    /// \~english @param id The ID of the string to retrieve.
+    /// \~russian @param id Идентификатор извлекаемой строки.
+    /// \~english @return The cached string.
+    /// \~russian @return Кэшированная строка.
     virtual std::string get(size_t const &id) const = 0;
+
+    /// \~english @brief Removes a string from the cache by its ID.
+    /// \~russian @brief Удаляет строку из кэша по ее идентификатору.
+    /// \~english @param id The ID of the string to remove.
+    /// \~russian @param id Идентификатор удаляемой строки.
     virtual void remove(size_t const &id) = 0;
+
+    /// \~english @brief Clears all entries from the cache.
+    /// \~russian @brief Очищает все записи в кэше.
     virtual void clean() = 0;
+
+    /// \~english @brief Gets the number of items currently in the cache.
+    /// \~russian @brief Возвращает количество элементов в кэше.
+    /// \~english @return The size of the cache.
+    /// \~russian @return Размер кэша.
     virtual size_t size() const = 0;
+
+    /// \~english @brief Checks if an entry with the given ID exists in the cache.
+    /// \~russian @brief Проверяет, существует ли запись с данным идентификатором в кэше.
+    /// \~english @param id The ID to check.
+    /// \~russian @param id Идентификатор для проверки.
+    /// \~english @return `true` if the entry exists, `false` otherwise.
+    /// \~russian @return `true`, если запись существует, иначе `false`.
     virtual bool checkExistense(size_t const &id) const = 0;
+
+    /// \~english @brief Flushes any pending changes to a persistent storage, if applicable.
+    /// \~russian @brief Сбрасывает все ожидающие изменения в постоянное хранилище, если это применимо.
     virtual void flush() = 0;
 };
 

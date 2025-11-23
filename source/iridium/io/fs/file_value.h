@@ -56,9 +56,22 @@ public:
     FileValue(std::string const &file_name, TValue const &default_value = {});
     ~FileValue() = default;
 
+    /// \~english @brief Assigns a new value, updating the internal state and the backing file.
+    /// \~russian @brief Присваивает новое значение, обновляя внутреннее состояние и связанный файл.
+    /// \~english @param value The new value to assign.
+    /// \~russian @param value Новое значение для присваивания.
+    /// \~english @throws std::runtime_error if the file cannot be opened for writing or if the write operation fails.
+    /// \~russian @throws std::runtime_error если файл не может быть открыт для записи или если операция записи завершается неудачей.
     void operator = (TValue const &value);
+
+    /// \~english @brief Implicitly converts the `FileValue` object to its underlying `TValue`.
+    /// \~russian @brief Неявно преобразует объект `FileValue` в его базовый тип `TValue`.
+    /// \~english @return The current value.
+    /// \~russian @return Текущее значение.
     operator TValue() const;
 private:
+    /// \~english @brief The path to the file used for persistence.
+    /// \~russian @brief Путь к файлу, используемому для сохранения.
     std::string m_file_name;
     TValue      m_value;
 };

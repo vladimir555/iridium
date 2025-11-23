@@ -1,9 +1,15 @@
 // Copyright © 2019 Bulaev Vladimir.
 // Contacts: <bulaev_vladimir@mail.ru>
-// License: https://www.gnu.org/licenses/lgpl-3.0  
+// License: https://www.gnu.org/licenses/lgpl-3.0
 
 #ifndef HEADER_BUILD_INFO_43DEDE80_1EBB_418D_AAE6_70EF2170AFE3
 #define HEADER_BUILD_INFO_43DEDE80_1EBB_418D_AAE6_70EF2170AFE3
+
+
+/// \~english @file
+/// @brief Provides a function to retrieve detailed build and environment information.
+/// \~russian @file
+/// @brief Предоставляет функцию для получения подробной информации о сборке и окружении.
 
 
 #include "platform.h"
@@ -27,18 +33,18 @@ extern "C" {
 // Justification: All snprintf calls are bounded by 'sizeof(buffer) - offset', ensuring no buffer overflow.
 // The return value is used only to advance the offset when writing succeeded and within bounds.
 // This is a false positive — the pattern is safe and widely used in build info/logging functions.
-/// \~english @brief Retrieves a string containing detailed build and environment information.
+/// \~english @brief Retrieves a string with detailed build and environment information.
 ///     This function collects various preprocessor definitions and system properties to create a
-///     comprehensive report about the build environment, including compiler, architecture, C++ standard,
-///     STL implementation, and more. The information is generated once and stored in a static buffer.
-/// \~russian @brief Получает строку, содержащую подробную информацию о сборке и окружении.
+///     report about the build environment, including compiler, architecture, C++ standard, and STL implementation.
+///     The information is generated on the first call and stored in a static buffer.
+/// \~russian @brief Получает строку с подробной информацией о сборке и окружении.
 ///     Эта функция собирает различные определения препроцессора и свойства системы для создания
-///     всеобъемлющего отчета о среде сборки, включая компилятор, архитектуру, стандарт C++,
-///     реализацию STL и многое другое. Информация генерируется один раз и сохраняется в статическом буфере.
-/// \~english @return A constant C-style string with the build information. The string is stored in a static
-///     buffer and should not be modified or freed. Subsequent calls return a pointer to the same buffer.
-/// \~russian @return Константная C-строка с информацией о сборке. Строка хранится в статическом
-///     буфере и не должна изменяться или освобождаться. Последующие вызовы возвращают указатель на тот же буфер.
+///     отчета о среде сборки, включая компилятор, архитектуру, стандарт C++ и реализацию STL.
+///     Информация генерируется при первом вызове и сохраняется в статическом буфере.
+/// \~english @return A C-style string with build information. The string is in a static buffer
+///     and should not be modified or freed. Subsequent calls return a pointer to the same buffer.
+/// \~russian @return C-строка с информацией о сборке. Строка находится в статическом буфере
+///     и не должна изменяться или освобождаться. Последующие вызовы возвращают указатель на тот же буфер.
 inline char const *getBuildInfoInline() {
     // Static buffer
     static char buffer[2048] = {0};

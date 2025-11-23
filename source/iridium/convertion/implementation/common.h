@@ -1,5 +1,15 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
 #ifndef HEADER_COMMON_BAC2AFE8_4236_4301_A650_E60876F56E15
 #define HEADER_COMMON_BAC2AFE8_4236_4301_A650_E60876F56E15
+
+
+/// \~english @file
+/// @brief Provides common metafunctions and conversion implementations for the type conversion framework.
+/// \~russian @file
+/// @brief Предоставляет общие метафункции и реализации преобразований для фреймворка преобразования типов.
 
 
 #include <type_traits>
@@ -11,32 +21,48 @@
 namespace iridium::convertion::implementation {
 
 
+/// \~english @brief The buffer size for integer to string conversions.
+/// \~russian @brief Размер буфера для преобразования целых чисел в строку.
 size_t const int_to_string_buffer_size = 64;
 
 
+/// \~english @brief Contains metaprogramming helpers for type traits.
+/// \~russian @brief Содержит вспомогательные средства метапрограммирования для типажей.
 namespace detail {
 
 
+/// \~english @brief Metafunction to determine if a type `T` is in the `std` namespace.
+/// \~russian @brief Метафункция для определения, находится ли тип `T` в пространстве имен `std`.
 template<typename T>
 struct TIsInSTDNamespaceImplementation;
 
 
+/// \~english @brief SFINAE helper to test if a type is in the `std` namespace.
+/// \~russian @brief Вспомогательная функция SFINAE для проверки, находится ли тип в пространстве имен `std`.
 template<typename T>
 auto testIsSTD(int) -> decltype(TIsInSTDNamespaceImplementation<T>{}, std::true_type{});
 
 
+/// \~english @brief SFINAE helper to test if a type is in the `std` namespace.
+/// \~russian @brief Вспомогательная функция SFINAE для проверки, находится ли тип в пространстве имен `std`.
 template<typename>
 auto testIsSTD(...) -> std::false_type;
 
 
+/// \~english @brief Metafunction to determine if a type `T` is an STL type.
+/// \~russian @brief Метафункция для определения, является ли тип `T` типом STL.
 template<typename T>
 struct TIsSTLType: decltype(detail::testIsSTD<T>(0)) {};
 
 
+/// \~english @brief Metafunction to determine if a type `T` is an STL sequential container.
+/// \~russian @brief Метафункция для определения, является ли тип `T` последовательным контейнером STL.
 template<typename, typename = void>
 struct TIsSTLSequentialContainer: std::false_type {};
 
 
+/// \~english @brief Metafunction to determine if a type `T` is an STL sequential container.
+/// \~russian @brief Метафункция для определения, является ли тип `T` последовательным контейнером STL.
 template<typename T>
 struct TIsSTLSequentialContainer<
     T,
@@ -46,6 +72,8 @@ struct TIsSTLSequentialContainer<
 >: std::true_type {};
 
 
+/// \~english @brief Metafunction to determine if a type `T` is an STL associative container.
+/// \~russian @brief Метафункция для определения, является ли тип `T` ассоциативным контейнером STL.
 template<typename, typename = void>
 struct TIsSTLAssociativeContainer: std::false_type {};
 
@@ -62,7 +90,7 @@ struct TIsSTLAssociativeContainer<
 };
 
 
-} // detail
+} // namespace detail
 
 
 // ----- interface
@@ -138,8 +166,6 @@ struct TConvert<std::string, std::atomic<TValue>> {
 
 /// \~english @brief Specialization for converting an STL sequential container to a string.
 /// \~russian @brief Специализация для преобразования последовательного контейнера STL в строку.
-/// \~english @brief Specialization for converting an STL associative container to a string.
-/// \~russian @brief Специализация для преобразования ассоциативного контейнера STL в строку.
 template<typename TContainer, bool is_throwable>
 struct TConvert<
     std::string,
@@ -173,6 +199,8 @@ struct TConvert<
 };
 
 
+/// \~english @brief Specialization for converting an STL associative container to a string.
+/// \~russian @brief Специализация для преобразования ассоциативного контейнера STL в строку.
 template<typename TContainer, bool is_throwable>
 struct TConvert<
     std::string,

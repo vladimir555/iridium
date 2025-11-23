@@ -1,17 +1,23 @@
-#include "factory.h"
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Implements the database connector factory functions.
+/// \~russian @file
+/// @brief Реализует функции фабрики для коннекторов к базам данных.
+
+#include "factory.h"
 
 #include "implementation/mysql_connector.h"
 #include "implementation/postgres_connector.h"
 
 #include "iridium/build_flags.h"
 
-
 using iridium::db::config::TDatebase;
 using iridium::io::URI;
 using iridium::convertion::convert;
 using std::string;
-
 
 #ifdef BUILD_FLAG_MYSQL
 using iridium::db::implementation::CMySQLConnector;
@@ -20,9 +26,7 @@ using iridium::db::implementation::CMySQLConnector;
 using iridium::db::implementation::CPostgresConnector;
 #endif // BUILD_FLAG_POSTGRES
 
-
 namespace iridium::db {
-
 
 config::TDatebase makeConfig(io::URI const &uri) {
     config::TDatebase config;
@@ -52,7 +56,6 @@ config::TDatebase makeConfig(io::URI const &uri) {
     return config; // ----->
 }
 
-
 IConnector::TSharedPtr createConnector(TDatebase const &config) {
     switch (config.Type.get()) {
 #ifdef BUILD_FLAG_MYSQL
@@ -69,10 +72,8 @@ IConnector::TSharedPtr createConnector(TDatebase const &config) {
     }
 }
 
-
 IConnector::TSharedPtr createConnector(io::URI const &uri) {
     return createConnector(makeConfig(uri)); // ----->
 }
-
 
 } // namespace iridium::db

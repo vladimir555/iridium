@@ -1,8 +1,15 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements the `CMySQLConnector` class.
+/// \~russian @file
+/// @brief Реализует класс `CMySQLConnector`.
+
 #include "iridium/build_flags.h"
 
-
 #ifdef BUILD_FLAG_MYSQL
-
 
 #include "mysql_connector.h"
 
@@ -11,16 +18,15 @@
 #include "iridium/logging/logger.h"
 #include "iridium/items.h"
 
-
 using std::string;
 using std::vector;
 using iridium::io::URI;
 using iridium::convertion::convert;
 
-
 namespace {
 
-
+/// \~english @brief Displays the warnings from a MySQL connection.
+/// \~russian @brief Отображает предупреждения от соединения с MySQL.
 string displayWarnings(MYSQL *connection) {
     MYSQL_RES *sql_result;
     MYSQL_ROW row;
@@ -55,12 +61,9 @@ string displayWarnings(MYSQL *connection) {
     return result;
 }
 
-
 } // unnamed
 
-
 namespace iridium::db::implementation {
-
 
 CMySQLConnector::CMySQLConnector(config::TDatebase const &config)
 :
@@ -72,11 +75,9 @@ CMySQLConnector::CMySQLConnector(config::TDatebase const &config)
     mysql_options(&m_connection, MYSQL_OPT_RECONNECT, &is_reconnect);
 }
 
-
 CMySQLConnector::~CMySQLConnector() {
     mysql_library_end();
 }
-
 
 void CMySQLConnector::initialize() {
     auto result = mysql_real_connect(
@@ -95,12 +96,10 @@ void CMySQLConnector::initialize() {
     LOGI << "initialization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
 
-
 void CMySQLConnector::finalize() {
     mysql_close(&m_connection);
     LOGI << "finalization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
 }
-
 
 CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &query) {
     LOGD << "send mysql sql query:\n" << query;
@@ -175,8 +174,6 @@ CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &quer
 //    return rows;  ----->
 }
 
-
 } // iridium::db::implementation
-
 
 #endif // COMPILATION_FLAG_MYSQL

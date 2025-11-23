@@ -6,6 +6,12 @@
 #define HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
 
 
+/// \~english @file
+/// @brief Provides macros for defining and implementing type-safe enums with reflection capabilities.
+/// \~russian @file
+/// @brief Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлексии.
+
+
 #include "iridium/strings.h"
 #include "iridium/convertion/convert.h"
 
@@ -16,10 +22,18 @@
 
 
 #ifdef _MSC_VER
+/// \~english @def UNUSED
+/// @brief A macro to mark a variable as unused, suppressing compiler warnings. Specific to MSVC.
+/// \~russian @def UNUSED
+/// @brief Макрос для пометки переменной как неиспользуемой, подавляющий предупреждения компилятора. Специфично для MSVC.
 #define UNUSED
 #define DISABLE_C26827 __pragma(warning(push)) __pragma(warning(suppress: 26827))
 #define ENABLE_C26827  __pragma(warning(pop))
 #else
+/// \~english @def UNUSED
+/// @brief A macro to mark a variable as unused, suppressing compiler warnings. Uses `__attribute__((unused))` for GCC/Clang.
+/// \~russian @def UNUSED
+/// @brief Макрос для пометки переменной как неиспользуемой, подавляющий предупреждения компилятора. Использует `__attribute__((unused))` для GCC/Clang.
 #define UNUSED __attribute__((unused))
 #define DISABLE_C26827
 #define ENABLE_C26827
@@ -27,15 +41,15 @@
 
 
 /// \~english @def DEFINE_ENUM(TEnum, ...)
-/// @brief Defines a C++ class that encapsulates a scoped enum, providing robust type safety and utility functions.
-/// This macro generates a class `TEnum` with an internal enum `TEnumInternal`. It includes constructors for creating
-/// enum instances from the internal enum type, integers, and strings. It also provides conversions to `std::string`
-/// and the internal enum type, along with static methods for introspection (e.g., getting all enum values) and conversion.
+/// @brief Defines a class that encapsulates a scoped enum, providing type safety and utility functions.
+/// This macro generates a class `TEnum` with an internal enum, providing constructors from the underlying type, integers,
+/// and strings. It also includes conversions to `std::string` and the internal enum type, along with static methods for
+/// introspection (e.g., getting all enum values) and conversion.
 /// \~russian @def DEFINE_ENUM(TEnum, ...)
-/// @brief Определяет класс C++, который инкапсулирует перечисление с областью видимости (scoped enum), обеспечивая строгую типизацию и вспомогательные функции.
-/// Этот макрос генерирует класс `TEnum` с внутренним перечислением `TEnumInternal`. Он включает конструкторы для создания
-/// экземпляров перечисления из внутреннего типа перечисления, целых чисел и строк. Он также предоставляет преобразования
-/// в `std::string` и внутренний тип перечисления, а также статические методы для интроспекции (например, получение всех значений перечисления) и преобразования.
+/// @brief Определяет класс, который инкапсулирует перечисление с областью видимости, обеспечивая строгую типизацию и вспомогательные функции.
+/// Этот макрос генерирует класс `TEnum` с внутренним перечислением, предоставляя конструкторы из базового типа, целых чисел
+/// и строк. Он также включает преобразования в `std::string` и внутренний тип перечисления, а также статические методы для
+/// интроспекции (например, получение всех значений перечисления) и преобразования.
 /// \~english @param TEnum The name of the enum class to be defined.
 /// \~russian @param TEnum Имя класса перечисления, которое будет определено.
 /// \~english @param ... A comma-separated list of enumerator definitions (e.g., `VALUE1, VALUE2, VALUE3 = 10`).
@@ -145,17 +159,15 @@ public: \
 
 
 /// \~english @def DEFINE_ENUM_CONVERT(TEnum)
-/// @brief Specializes the `iridium::convertion` framework and `std::hash` for an enum class created with `DEFINE_ENUM`.
+/// @brief Specializes the `iridium::convertion` framework and `std::hash` for an enum created with `DEFINE_ENUM`.
 /// This macro provides template specializations for `TConvert` to allow seamless conversion between the enum's internal
-/// type (`TEnum::TEnumInternal`) and `std::string`. It also provides a specialization for `std::hash<TEnum>`, enabling
-/// instances of the enum class to be used as keys in standard unordered containers like `std::unordered_map`.
+/// type and `std::string`. It also specializes `std::hash<TEnum>`, enabling enum instances to be used in unordered containers.
 /// \~russian @def DEFINE_ENUM_CONVERT(TEnum)
-/// @brief Специализирует фреймворк `iridium::convertion` и `std::hash` для класса перечисления, созданного с помощью `DEFINE_ENUM`.
-/// Этот макрос предоставляет специализации шаблона `TConvert` для обеспечения безшовного преобразования между внутренним
-/// типом перечисления (`TEnum::TEnumInternal`) и `std::string`. Он также предоставляет специализацию для `std::hash<TEnum>`,
-/// позволяя использовать экземпляры класса перечисления в качестве ключей в стандартных неупорядоченных контейнерах, таких как `std::unordered_map`.
-/// \~english @param TEnum The enum class for which to define the conversion and hashing specializations. This should be the same name used in `DEFINE_ENUM`.
-/// \~russian @param TEnum Класс перечисления, для которого определяются специализации преобразования и хеширования. Это должно быть то же имя, которое использовалось в `DEFINE_ENUM`.
+/// @brief Специализирует фреймворк `iridium::convertion` и `std::hash` для перечисления, созданного с помощью `DEFINE_ENUM`.
+/// Этот макрос предоставляет специализации шаблона `TConvert` для безшовного преобразования между внутренним
+/// типом перечисления и `std::string`. Он также специализирует `std::hash<TEnum>`, позволяя использовать экземпляры перечисления в неупорядоченных контейнерах.
+/// \~english @param TEnum The enum class for which to define the conversion and hashing specializations.
+/// \~russian @param TEnum Класс перечисления, для которого определяются специализации преобразования и хеширования.
 #define DEFINE_ENUM_CONVERT(TEnum) \
 template<> \
 struct iridium::convertion::implementation::TConvert<std::string, TEnum::TEnumInternal> { \
@@ -181,16 +193,14 @@ struct hash<TEnum> { \
 
 /// \~english @def IMPLEMENT_ENUM(TEnum)
 /// @brief Implements the static members of an enum class defined with `DEFINE_ENUM`.
-/// This macro must be placed in a source file (.cpp) to provide the definitions for the static
-/// member variables that `DEFINE_ENUM` declares. These members are used internally by the enum
-/// class to manage the list of enumerators and their string representations.
+/// This macro must be placed in a source file (.cpp) to define the static member variables
+/// that `DEFINE_ENUM` declares, which manage the list of enumerators and their string representations.
 /// \~russian @def IMPLEMENT_ENUM(TEnum)
 /// @brief Реализует статические члены класса перечисления, определенного с помощью `DEFINE_ENUM`.
-/// Этот макрос должен быть помещен в файл исходного кода (.cpp) для предоставления определений
-/// статических переменных-членов, которые объявляет `DEFINE_ENUM`. Эти члены используются
-/// внутри класса перечисления для управления списком перечислителей и их строковыми представлениями.
-/// \~english @param TEnum The enum class for which to implement the static members. This should be the same name used in `DEFINE_ENUM`.
-/// \~russian @param TEnum Класс перечисления, для которого реализуются статические члены. Это должно быть то же имя, которое использовалось в `DEFINE_ENUM`.
+/// Этот макрос должен быть помещен в файл исходного кода (.cpp) для определения статических
+/// переменных-членов, объявленных `DEFINE_ENUM`, которые управляют списком перечислителей и их строковыми представлениями.
+/// \~english @param TEnum The enum class for which to implement the static members.
+/// \~russian @param TEnum Класс перечисления, для которого реализуются статические члены.
 #define IMPLEMENT_ENUM(TEnum) \
 std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
 int TEnum::Enums::index = -1; \
@@ -203,13 +213,17 @@ namespace iridium::convertion::implementation {
 namespace detail {
 
 
+/// \~english @brief A trait to check if a type `T` is an enum defined with `DEFINE_ENUM`.
+/// \~russian @brief типаж для проверки, является ли тип `T` перечислением, определенным с помощью `DEFINE_ENUM`.
 template<typename T, typename = void>
 struct TIsIridiumEnum: std::false_type {};
+/// \~english @brief A trait to check if a type `T` is an enum defined with `DEFINE_ENUM`. Specialization for when it is.
+/// \~russian @brief типаж для проверки, является ли тип `T` перечислением, определенным с помощью `DEFINE_ENUM`. Специализация для случая, когда является.
 template<typename T>
 struct TIsIridiumEnum<T, std::void_t<typename T::TEnumInternal> > : std::true_type {};
 
 
-} // detail
+} // namespace detail
 
 
 template<typename TEnum>
@@ -236,7 +250,7 @@ struct TConvert<
 };
 
 
-} // iridium::convertion::implementation
+} // namespace iridium::convertion::implementation
 
 
 #endif // HEADER_ENUM_98631D5A_6E4E_47DF_B3BA_220D5292687C
