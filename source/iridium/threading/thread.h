@@ -33,14 +33,23 @@ public:
     DEFINE_SMART_PTR(IThread)
     virtual ~IThread() = default;
 
-    /// for std::map caching
+    /// \~english @brief Comparison operator for sorting threads.
+    /// \~russian @brief Оператор сравнения для сортировки потоков.
     virtual bool operator < (IThread const &thread) const = 0;
+    /// \~english @brief Gets the name of the thread.
+    /// \~russian @brief Возвращает имя потока.
     virtual std::string getName() const = 0;
 
+    /// \~english @brief Gets the name of the current thread.
+    /// \~russian @brief Возвращает имя текущего потока.
     static std::string const &getNameStatic();
 protected:
+    /// \~english @brief Sets the name of the current thread.
+    /// \~russian @brief Устанавливает имя текущего потока.
     static void setNameStatic(std::string const &name);
 private:
+    /// \~english @brief The name of the current thread.
+    /// \~russian @brief Имя текущего потока.
     static thread_local std::string thread_name_static;
 };
 

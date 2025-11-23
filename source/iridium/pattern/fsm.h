@@ -16,23 +16,54 @@
 namespace iridium::pattern {
 
 
+/// \~english @brief A generic Finite State Machine (FSM).
+/// \~english @details This class provides a simple implementation of an FSM, where states and events are templated types.
+/// \~russian @brief Обобщенная конечная машина состояний (FSM).
+/// \~russian @details Этот класс предоставляет простую реализацию FSM, где состояния и события являются шаблонными типами.
 template<typename TState, typename TEvent>
 class FSM {
 public:
     DEFINE_CREATE(FSM)
+    /// \~english @brief A handler function to be executed on a transition.
+    /// \~russian @brief Функция-обработчик, выполняемая при переходе.
     using THandler = std::function<void()>;
+    /// \~english @brief Represents a transition in the FSM.
+    /// \~russian @brief Представляет переход в FSM.
     struct TTransition {
         TState   from; ///< \~english The source state. \~russian Исходное состояние.
         TEvent   event; ///< \~english The event that triggers the transition. \~russian Событие, которое вызывает переход.
         TState   to; ///< \~english The destination state. \~russian Конечное состояние.
         THandler handler; ///< \~english The handler to be executed on transition. \~russian Обработчик, который будет выполнен при переходе.
     };
+
+    /// \~english @brief Constructs an FSM with an initial state.
+    /// \~russian @brief Конструирует FSM с начальным состоянием.
+    /// \~english @param initial_state The initial state of the FSM.
+    /// \~russian @param initial_state Начальное состояние FSM.
     FSM(TState const &initial_state);
+
+    /// \~english @brief Adds a transition to the FSM.
+    /// \~russian @brief Добавляет переход в FSM.
+    /// \~english @param event The event that triggers the transition.
+    /// \~russian @param event Событие, которое вызывает переход.
+    /// \~english @param from The source state.
+    /// \~russian @param from Исходное состояние.
+    /// \~english @param to The destination state.
+    /// \~russian @param to Конечное состояние.
+    /// \~english @param handler An optional handler to be executed on the transition.
+    /// \~russian @param handler Необязательный обработчик, который будет выполнен при переходе.
     void addTransition(
         TEvent   const &event,
         TState   const &from,
         TState   const &to,
         THandler const &handler = {});
+
+    /// \~english @brief Processes an event, causing a state transition.
+    /// \~russian @brief Обрабатывает событие, вызывая переход состояния.
+    /// \~english @param event The event to process.
+    /// \~russian @param event Событие для обработки.
+    /// \~english @return The new state of the FSM.
+    /// \~russian @return Новое состояние FSM.
     TState doAction(TEvent const &event);
 
 private:

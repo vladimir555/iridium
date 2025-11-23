@@ -7,15 +7,13 @@
 
 
 /// \~english @file
-/// @brief Centralizes preprocessor definitions (build flags) that control conditional compilation.
-///     These flags are typically set by the build system (e.g., CMake) to include or exclude
-///     features like database support (MySQL, PostgreSQL), OpenSSL integration, or debug logging.
-///     The definitions in this file are commented out as they are meant to be defined externally by the build configuration.
+/// @brief Defines preprocessor flags for conditional compilation.
+///     These flags are set by the build system (e.g., CMake) to enable/disable features like database support or OpenSSL.
+///     The definitions are commented out as they are meant to be defined externally by the build configuration.
 /// \~russian @file
-/// @brief Централизует определения препроцессора (флаги сборки), которые управляют условной компиляцией.
-///     Эти флаги обычно устанавливаются системой сборки (например, CMake) для включения или исключения
-///     таких функций, как поддержка баз данных (MySQL, PostgreSQL), интеграция с OpenSSL или отладочное логирование.
-///     Определения в этом файле закомментированы, так как они должны быть определены извне конфигурацией сборки.
+/// @brief Определяет флаги препроцессора для условной компиляции.
+///     Эти флаги устанавливаются системой сборки (например, CMake) для включения/отключения функций, таких как поддержка баз данных или OpenSSL.
+///     Определения закомментированы, так как они должны быть определены извне конфигурацией сборки.
 
 /// \~english @def BUILD_FLAG_MYSQL
 /// @brief If defined, enables features and code related to MySQL database connectivity.
@@ -42,10 +40,10 @@
 //#define BUILD_FLAG_FORCE_DEBUG_LOG
 
 /// \~english @def NANO_PREALLOCATE_BAND_VM
-/// @brief If defined, a specific memory preallocation strategy (related to "NANO_PREALLOCATE_BAND_VM") is enabled.
+/// @brief If defined, a specific memory preallocation strategy is enabled.
 ///     If undefined (`#undef`), this feature is disabled.
 /// \~russian @def NANO_PREALLOCATE_BAND_VM
-/// @brief Если определено, включает специфическую стратегию предварительного выделения памяти (связанную с "NANO_PREALLOCATE_BAND_VM").
+/// @brief Если определено, включает специфическую стратегию предварительного выделения памяти.
 ///     Если не определено (`#undef`), эта функция отключается.
 //#undef NANO_PREALLOCATE_BAND_VM
 

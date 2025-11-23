@@ -15,14 +15,38 @@ namespace iridium::pattern {
 
 // ----- interface
 
-
+/// \~english @brief Implements the Broadcaster pattern, allowing messages to be sent to multiple receivers.
+/// \~english @details This class manages a collection of receivers and provides a mechanism to invoke a specific member function on all of them.
+/// \~russian @brief Реализует паттерн "Вещатель", позволяя отправлять сообщения нескольким получателям.
+/// \~russian @details Этот класс управляет коллекцией получателей и предоставляет механизм для вызова определенной функции-члена у всех из них.
 template<typename TReceiver>
 class Broadcaster {
 public:
     Broadcaster() = default;
     virtual ~Broadcaster() = default;
+
+    /// \~english @brief Attaches a receiver to the broadcaster.
+    /// \~russian @brief Присоединяет получателя к вещателю.
+    /// \~english @param receiver The receiver to attach.
+    /// \~russian @param receiver Получатель для присоединения.
     void attach(typename TReceiver::TSharedPtr const &receiver);
+
+    /// \~english @brief Detaches a receiver from the broadcaster.
+    /// \~russian @brief Отсоединяет получателя от вещателя.
+    /// \~english @param receiver The receiver to detach.
+    /// \~russian @param receiver Получатель для отсоединения.
     void detach(typename TReceiver::TSharedPtr const &receiver);
+
+    /// \~english @brief Broadcasts a message by invoking a member function on all attached receivers.
+    /// \~russian @brief Отправляет сообщение, вызывая функцию-член у всех присоединенных получателей.
+    /// \~english @tparam TReceiver_ The receiver class type.
+    /// \~russian @tparam TReceiver_ Тип класса получателя.
+    /// \~english @tparam TArgs The types of the arguments for the member function.
+    /// \~russian @tparam TArgs Типы аргументов для функции-члена.
+    /// \~english @param f A pointer to the member function to be called.
+    /// \~russian @param f Указатель на функцию-член, которую нужно вызвать.
+    /// \~english @param args The arguments to be passed to the member function.
+    /// \~russian @param args Аргументы, которые будут переданы в функцию-член.
     template<typename TReceiver_, typename ... TArgs>
     void broadcast(void(TReceiver_::*f)(TArgs const &...), TArgs const &... args);
 

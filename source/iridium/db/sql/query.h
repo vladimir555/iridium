@@ -3,11 +3,9 @@
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
 /// \~english @file
-/// @brief Defines the `Query` class, intended for SQL query construction and manipulation.
-///     Currently, it serves as a placeholder for future development.
+/// @brief Defines the `Query` class for SQL query construction.
 /// \~russian @file
-/// @brief Определяет класс `Query`, предназначенный для конструирования и манипулирования SQL-запросами.
-///     В настоящее время служит заполнителем для будущей разработки.
+/// @brief Определяет класс `Query` для конструирования SQL-запросов.
 
 #ifndef HEADER_QUERY_4C1958F2_C417_4420_84CE_3CB635CB3A1B
 #define HEADER_QUERY_4C1958F2_C417_4420_84CE_3CB635CB3A1B

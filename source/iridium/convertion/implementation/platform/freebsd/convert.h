@@ -6,6 +6,12 @@
 #define HEADER_CONVERT_BCE38770_C6BD_46D5_9485_3BC1F32BC3EF
 
 
+/// \~english @file
+/// @brief Includes the Unix platform-specific conversion header for FreeBSD.
+/// \~russian @file
+/// @brief Включает заголовочный файл преобразования для платформы Unix для FreeBSD.
+
+
 #include "iridium/platform.h"
 
 

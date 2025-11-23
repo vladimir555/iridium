@@ -141,8 +141,20 @@
 #endif
 
 
+/// \~english @def PLATFORM_IDENT(x)
+/// @brief An identity macro that returns its argument unchanged. Used for macro expansion.
+/// \~russian @def PLATFORM_IDENT(x)
+/// @brief Макрос-идентификатор, который возвращает свой аргумент без изменений. Используется для расширения макросов.
 #define PLATFORM_IDENT(x) x
+/// \~english @def PLATFORM_XSTR(x)
+/// @brief A helper macro that stringifies its argument.
+/// \~russian @def PLATFORM_XSTR(x)
+/// @brief Вспомогательный макрос, который превращает свой аргумент в строку.
 #define PLATFORM_XSTR(x) #x
+/// \~english @def PLATFORM_STR(x)
+/// @brief A helper macro that stringifies its argument after expansion.
+/// \~russian @def PLATFORM_STR(x)
+/// @brief Вспомогательный макрос, который превращает свой аргумент в строку после расширения.
 #define PLATFORM_STR(x) PLATFORM_XSTR(x)
 /// \~english @def PLATFORM_HEADER(file_name)
 /// @brief Constructs a string literal for including a platform-specific header file.

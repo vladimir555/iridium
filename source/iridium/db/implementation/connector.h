@@ -4,10 +4,8 @@
 
 /// \~english @file
 /// @brief Defines the `CConnector` base class for concrete database connector implementations.
-///     This header provides common functionality for database connectors, such as configuration storage.
 /// \~russian @file
 /// @brief Определяет базовый класс `CConnector` для конкретных реализаций коннекторов баз данных.
-///     Этот заголовочный файл предоставляет общую функциональность для коннекторов баз данных, например, хранение конфигурации.
 
 #ifndef HEADER_CONNECTOR_926752A7_A77B_4CD8_9A9E_699A4945401D
 #define HEADER_CONNECTOR_926752A7_A77B_4CD8_9A9E_699A4945401D

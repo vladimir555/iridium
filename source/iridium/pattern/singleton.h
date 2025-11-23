@@ -25,7 +25,13 @@ class Singleton:
     public NonMovable
 {
 public:
+    /// \~english @brief Virtual destructor.
+    /// \~russian @brief Виртуальный деструктор.
     virtual ~Singleton();
+    /// \~english @brief Gets the singleton instance.
+    /// \~russian @brief Возвращает экземпляр одиночки.
+    /// \~english @return A reference to the singleton instance.
+    /// \~russian @return Ссылка на экземпляр одиночки.
     static TClass &instance();
 protected:
     /// \~english @brief A flag indicating if the singleton instance is alive.

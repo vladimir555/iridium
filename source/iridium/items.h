@@ -6,6 +6,12 @@
 #define HEADER_ITEMS_F019CA04_62F0_4525_996A_15F23B36F7D5
 
 
+/// \~english @file
+/// @brief Provides a collection of generic template functions for common operations on containers and items.
+/// \~russian @file
+/// @brief Предоставляет набор обобщенных шаблонных функций для общих операций с контейнерами и элементами.
+
+
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -16,8 +22,8 @@ namespace iridium {
 
 /// \~english @brief Adds an item to a container if it is not already present.
 /// \~russian @brief Добавляет элемент в контейнер, если он там еще не присутствует.
-/// \~english @tparam T The type of the container, which must have `begin()`, `end()`, and `push_back()` methods, and a `value_type` typedef.
-/// \~russian @tparam T Тип контейнера, который должен иметь методы `begin()`, `end()` и `push_back()`, а также typedef `value_type`.
+/// \~english @tparam T The container type, which must support `begin()`, `end()`, `push_back()`, and have a `value_type`.
+/// \~russian @tparam T Тип контейнера, который должен поддерживать `begin()`, `end()`, `push_back()` и иметь `value_type`.
 /// \~english @param i The item to add to the container.
 /// \~russian @param i Элемент для добавления в контейнер.
 /// \~english @param t The container to which the item will be added.
@@ -35,8 +41,8 @@ void addUnique(typename T::value_type const &i, T &t) {
 /// \~russian @tparam T Тип элементов в списке и векторе.
 /// \~english @param source The source `std::list<T>` to convert.
 /// \~russian @param source Исходный `std::list<T>` для преобразования.
-/// \~english @return A `std::vector<T>` containing the elements from the source list.
-/// \~russian @return `std::vector<T>`, содержащий элементы из исходного списка.
+/// \~english @return A `std::vector<T>` containing copies of the elements from the source list.
+/// \~russian @return `std::vector<T>`, содержащий копии элементов из исходного списка.
 template<typename T>
 std::vector<T> assign(std::list<T> const &source) {
     return std::vector<T> {
