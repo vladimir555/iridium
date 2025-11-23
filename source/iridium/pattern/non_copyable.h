@@ -27,8 +27,14 @@ public:
     ///     назначение - семантика предотвращения копирования.
     virtual ~NonCopyable() = default;
 protected:
+    /// \~english @brief Default constructor.
+    /// \~russian @brief Конструктор по умолчанию.
     NonCopyable() = default;
+    /// \~english @brief Deleted copy constructor.
+    /// \~russian @brief Удаленный конструктор копирования.
     NonCopyable(NonCopyable const &) = delete;
+    /// \~english @brief Deleted copy assignment operator.
+    /// \~russian @brief Удаленный оператор присваивания копированием.
     NonCopyable &operator=(NonCopyable const &) const = delete;
 };
 

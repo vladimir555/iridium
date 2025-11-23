@@ -6,6 +6,12 @@
 #define HEADER_CONVERT_331F2175_E59F_4DD5_A043_451816549CD0
 
 
+/// \~english @file
+/// @brief Declares Windows-specific conversion functions.
+/// \~russian @file
+/// @brief Объявляет платформо-специфичные функции преобразования для Windows.
+
+
 #include "iridium/platform.h"
 
 

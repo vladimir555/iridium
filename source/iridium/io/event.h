@@ -41,9 +41,17 @@ struct Event {
     /// \~russian @brief Перечисляет типы операций ввода-вывода или значимые события для события.
     DEFINE_ENUM(
         TOperation,
+        /// \~english @brief Indicates a stream has been opened.
+        /// \~russian @brief Указывает, что поток был открыт.
         OPEN,
+        /// \~english @brief Indicates a read operation.
+        /// \~russian @brief Указывает на операцию чтения.
         READ,
+        /// \~english @brief Indicates a write operation.
+        /// \~russian @brief Указывает на операцию записи.
         WRITE,
+        /// \~english @brief Indicates the end of a stream has been reached.
+        /// \~russian @brief Указывает, что достигнут конец потока.
         EOF_,
         /// \~english @brief Indicates a timeout has occurred related to a stream operation.
         /// \~russian @brief Указывает, что произошел тайм-аут, связанный с операцией потока.
@@ -62,11 +70,25 @@ struct Event {
     ///     Может использоваться для указания фазы операции, например, только что началась или уже завершилась.
     DEFINE_ENUM(
         TStatus,
+        /// \~english @brief Indicates the beginning of an operation.
+        /// \~russian @brief Указывает на начало операции.
         BEGIN,
+        /// \~english @brief Indicates the end of an operation.
+        /// \~russian @brief Указывает на конец операции.
         END)
 
+    /// \~english @brief Constructs an Event object.
+    /// \~russian @brief Конструирует объект Event.
+    /// \~english @param[in] stream The stream associated with the event.
+    /// \~russian @param[in] stream Поток, связанный с событием.
+    /// \~english @param[in] operation The type of operation for the event.
+    /// \~russian @param[in] operation Тип операции для события.
+    /// \~english @param[in] status The status of the operation (defaults to UNKNOWN).
+    /// \~russian @param[in] status Статус операции (по умолчанию UNKNOWN).
     Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
 
+    /// \~english @brief A shared pointer to the stream on which the event occurred.
+    /// \~russian @brief Умный указатель на поток, в котором произошло событие.
     IStream::TSharedPtr stream;
 
     /// \~english @brief The type of I/O operation or occurrence this event represents (e.g., READ, WRITE, EOF_).

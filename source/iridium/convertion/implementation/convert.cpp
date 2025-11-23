@@ -1,5 +1,13 @@
-#include "iridium/strings.h"
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
 
+/// \~english @file
+/// @brief Implements various type conversion specializations for the Iridium conversion framework.
+/// \~russian @file
+/// @brief Реализует различные специализации преобразования типов для фреймворка преобразования Iridium.
+
+#include "iridium/strings.h"
 #include "convert.h"
 
 #include <chrono>
@@ -12,8 +20,6 @@
 #include <cmath>
 
 
-
-//using std::chrono::high_resolution_clock;
 using std::chrono::system_clock;
 using std::chrono::duration_cast;
 using std::chrono::hours;
@@ -31,9 +37,6 @@ using std::u16string;
 using std::u32string;
 using std::tm;
 using std::runtime_error;
-//using std::wstring_convert;
-//using std::codecvt_utf8_utf16;
-//using std::codecvt_utf8;
 using std::strftime;
 using std::transform;
 using std::shared_ptr;
@@ -42,41 +45,32 @@ using std::shared_ptr;
 namespace {
 
 
-// 2015-05-05T05:05:05
+/// \~english @brief The format for converting time to a string (e.g., "2015-05-05 05:05:05").
+/// \~russian @brief Формат для преобразования времени в строку (например, "2015-05-05 05:05:05").
 char   const time_format_unix[]             = "%Y-%m-%d %H:%M:%S";
+/// \~english @brief The format for scanning a string to convert it to a time.
+/// \~russian @brief Формат для сканирования строки с целью преобразования ее во время.
 char   const time_scan_format[]             = "%04d-%02d-%02d %02d:%02d:%02d.%03d";
+/// \~english @brief The size of the time scan format string.
+/// \~russian @brief Размер строки формата сканирования времени.
 size_t const time_scan_format_size          = 23;
+/// \~english @brief The buffer size for double to string conversions.
+/// \~russian @brief Размер буфера для преобразования double в строку.
 size_t const double_to_string_buffer_size   = 512;
+/// \~english @brief The buffer size for time to string conversions.
+/// \~russian @brief Размер буфера для преобразования времени в строку.
 size_t const time_to_string_buffer_size     = 64;
 
 
-} // unnamed
+} // namespace
 
 
 namespace iridium::convertion::implementation {
 
 
+/// \~english @brief The precision to use for double to string conversions.
+/// \~russian @brief Точность, используемая для преобразования double в строку.
 std::atomic<int> config::double_precission(5);
-
-
-//template<>
-//string TConvert::convert(high_resolution_clock::time_point const &value) {
-//    auto value_ms   = duration_cast<milliseconds>(value.time_since_epoch()).count();
-//    auto ms         = value_ms % 1000;
-//    time_t t        = value_ms / 1000;
-//    auto tm_        = platform::gmtime(&t);
-//
-//    if (tm_) {
-//        char buffer[time_to_string_buffer_size];
-//        strftime(buffer, time_to_string_buffer_size, time_format_unix.c_str(), tm_);
-//        return string(buffer) + "." + rjust(convert<string>(ms), 3, '0'); // ----->
-//    } else
-//        throw runtime_error("convert time_t (gmtime) to string error"); // ----->
-//}
-
-
-// typedef std::chrono::duration<int, std::ratio_multiply< minutes::period, std::ratio<5> >::type> _5minutes;
-// tt = floor<_5minutes>(t);
 
 
 string TConvert<string, system_clock::time_point>::convert(
@@ -709,51 +703,3 @@ string TConvert<string, string>::convert(string const &value) {
 
 
 } // iridium::convertion::implementation
-
-
-//template<>
-//high_resolution_clock::time_point TConvert::convert(string const &value) {
-//    if (value.size() != time_scan_format_size)
-//        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
-//
-//    struct std::tm  tm_ = {};
-//    int ms      = 0;
-//    int result  = platform::sscanf(value.c_str(), time_scan_format.c_str(),
-//        &tm_.tm_year,
-//        &tm_.tm_mon,
-//        &tm_.tm_mday,
-//        &tm_.tm_hour,
-//        &tm_.tm_min,
-//        &tm_.tm_sec,
-//        &ms);
-//
-//    tm_.tm_year -= 1900;
-//    tm_.tm_mon  -= 1;
-//
-//    if (result == 7) {
-//        auto time = platform::mkgmtime(&tm_);
-//
-//        if (time < 0)
-//            throw runtime_error("convert '" + value + "' to time_t error, mkgmtime error"); // ----->
-//
-//        return high_resolution_clock::time_point(std::chrono::seconds(time)) + std::chrono::milliseconds(ms); // ----->
-//    } else
-//        throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
-//}
-
-
-//// default format: "%Y-%m-%d %H:%M:%S%z %Z"
-//template<>
-//std::chrono::system_clock::time_point TConvert::convert(std::string const &source, std::string const &format) {
-//    std::tm tm_ = {};
-//    std::istringstream ss(source);
-//    ss >> std::get_time(&tm_, format.c_str());
-//    return std::chrono::system_clock::from_time_t(mktime(&tm_));
-//}
-//std::string dateTimeToString(date_time time) {
-//    std::time_t now_c = std::chrono::system_clock::to_time_t(time);
-//    auto tm = std::localtime(&now_c);
-//    char buffer[32];
-//    std::strftime(buffer, 32, "%Y-%m-%d %H:%M:%S%z %Z", tm);
-//    return std::string(buffer);
-//}

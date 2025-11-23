@@ -80,6 +80,10 @@ public:
 };
 
 
+/// \~english @brief Interface for a stream that supports both reading and writing.
+/// \~english @details This interface combines IStreamReader and IStreamWriter, representing a bidirectional communication channel.
+/// \~russian @brief Интерфейс для потока, поддерживающего как чтение, так и запись.
+/// \~russian @details Этот интерфейс объединяет IStreamReader и IStreamWriter, представляя двунаправленный канал связи.
 class IStreamPort:
     public virtual IStreamReader,
     public virtual IStreamWriter

@@ -1,3 +1,13 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements the `CPostgresConnector` class.
+/// \~russian @file
+/// @brief Реализует класс `CPostgresConnector`.
+
+
 #include "iridium/build_flags.h"
 
 
@@ -5,6 +15,7 @@
 
 
 #include "postgres_connector.h"
+
 
 #include "iridium/convertion/convert.h"
 #include "iridium/logging/logger.h"
@@ -20,6 +31,19 @@ using iridium::convertion::convert;
 using iridium::parsing::implementation::CNode;
 
 
+namespace {
+
+
+/// \~english @brief Handles notice messages from the PostgreSQL server.
+/// \~russian @brief Обрабатывает уведомления от сервера PostgreSQL.
+void handlePostgresMessage(void *, PGresult const *result) {
+    LOGD << PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY);
+}
+
+
+} // unnamed
+
+
 namespace iridium::db::implementation {
 
 
@@ -30,25 +54,10 @@ CPostgresConnector::CPostgresConnector(config::TDatebase const &config)
 {}
 
 
-CPostgresConnector::~CPostgresConnector() {
-}
-
-
-void handlePostgresMessage(void *, PGresult const *result) {
-    LOGD << PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY);
-}
+CPostgresConnector::~CPostgresConnector() {}
 
 
 void CPostgresConnector::initialize() {
-//    m_connection = std::make_shared<pqxx::connection>(
-//         "host="        + convert<string>(m_uri)    +
-//        " user="        + m_user                    +
-//        " password="    + m_password                +
-//        " dbname="      + m_database);
-//    if (!result) {
-//        // ...
-//        throw DBException("connect to mysql host error: " + e.what())); // ----->
-//    }
     m_connection = assertExists(PQconnectdb(string(
         "host='"        + m_config.Host.get()       + "'" +
        " port='"        + convert<std::string>(m_config.Port.get()) + "'" +
@@ -79,23 +88,16 @@ void CPostgresConnector::finalize() {
 }
 
 
-// void CPostgresConnector::executeCommand(std::string const &command) {}
-
-
 CPostgresConnector::INode::TSharedPtr CPostgresConnector::sendQuery(string const &query) {
     LOGD << "send postgres sql query:\n" << query;
-//    TRows rows;
     auto table  = CNode::create(m_config.Database.get());
     auto result = PQexec(m_connection, query.c_str());
     auto status = PQresultStatus(result);
 
     if (status == PGRES_TUPLES_OK) {
         for (int row_index = 0; row_index < PQntuples(result); row_index++) {
-//            TRow row;
             for (int field_index = 0; field_index < PQnfields(result); field_index++)
                 table->addChild(PQfname(result, field_index), PQgetvalue(result, row_index, field_index));
-//                row[PQfname(result, field_index)] = PQgetvalue(result, row_index, field_index);
-//            rows.push_back(row);
         }
     }
 
@@ -106,14 +108,12 @@ CPostgresConnector::INode::TSharedPtr CPostgresConnector::sendQuery(string const
     } else {
         string error = PQerrorMessage(m_connection);
         PQclear(result);
-        //PQfinish(m_connection);
         throw Exception("query to postgresql host error: " + error); // ----->
     }
 
     PQclear(result);
 
     return table;
-//    return rows; // ----->
 }
 
 

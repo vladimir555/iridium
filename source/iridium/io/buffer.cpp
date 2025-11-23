@@ -1,3 +1,13 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements the `Buffer` class.
+/// \~russian @file
+/// @brief Реализует класс `Buffer`.
+
+
 #include "buffer.h"
 
 #include <string>
@@ -70,11 +80,15 @@ void Buffer::emplace_back(Buffer::TSharedPtr const &buffer) {
 namespace {
 
 
+/// \~english @brief Converts a `std::string` to a `iridium::io::Buffer`.
+/// \~russian @brief Преобразует `std::string` в `iridium::io::Buffer`.
 iridium::io::Buffer convert_(std::string const &source) {
     return iridium::io::Buffer(source.begin(), source.end()); // ----->
 }
 
 
+/// \~english @brief Converts a `iridium::io::Buffer` to a `std::string`.
+/// \~russian @brief Преобразует `iridium::io::Buffer` в `std::string`.
 std::string convert_(iridium::io::Buffer const &source) {
     return std::string(source.begin(), source.end()); // ----->
 }

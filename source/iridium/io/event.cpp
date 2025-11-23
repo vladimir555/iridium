@@ -1,3 +1,13 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements the `Event` class and its hash specializations.
+/// \~russian @file
+/// @brief Реализует класс `Event` и его специализации хеширования.
+
+
 #include "event.h"
 #include <unordered_set>
 
@@ -16,9 +26,7 @@ Event::Event(IStream::TSharedPtr const &stream_, TOperation const &operation_, T
 } // namespace iridium::io
 
 
-size_t std::hash<iridium::io::Event>::operator()
-    (iridium::io::Event const &e) const
-{
+size_t std::hash<iridium::io::Event>::operator() (iridium::io::Event const &e) const {
     size_t hash = 0;
 
     if (e.stream) {
@@ -30,24 +38,10 @@ size_t std::hash<iridium::io::Event>::operator()
     hash ^= static_cast<size_t>(e.status)    + 0x9e3779b9 + (hash << 6) + (hash >> 2);
 
     return hash; // ----->
-
-//    size_t hash = 17;
-//
-//    if (e.stream) {
-//        for (size_t const handle: e.stream->getHandles())
-//            hash = hash * 31 + std::hash<size_t>()(handle);
-//    }
-//
-//    hash = hash * 31 + std::hash<size_t>()(static_cast<size_t>(e.operation));
-//    hash = hash * 31 + std::hash<size_t>()(static_cast<size_t>(e.status));
-//
-//    return hash; // ----->
 }
 
 
-size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
-    (iridium::io::Event::TSharedPtr const &e) const
-{
+size_t std::hash<iridium::io::Event::TSharedPtr>::operator() (iridium::io::Event::TSharedPtr const &e) const {
     size_t hash = 0;
 
     if (e)

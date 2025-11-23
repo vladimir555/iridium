@@ -6,6 +6,12 @@
 #define HEADER_CONVERT_5FFD2726_9832_4923_A481_117BB9635596
 
 
+/// \~english @file
+/// @brief Includes the Unix platform-specific conversion header for Emscripten.
+/// \~russian @file
+/// @brief Включает заголовочный файл преобразования для платформы Unix для Emscripten.
+
+
 #include "iridium/platform.h"
 
 

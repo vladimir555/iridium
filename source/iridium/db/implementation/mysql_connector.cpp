@@ -1,3 +1,13 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements the `CMySQLConnector` class.
+/// \~russian @file
+/// @brief Реализует класс `CMySQLConnector`.
+
+
 #include "iridium/build_flags.h"
 
 
@@ -21,6 +31,8 @@ using iridium::convertion::convert;
 namespace {
 
 
+/// \~english @brief Displays the warnings from a MySQL connection.
+/// \~russian @brief Отображает предупреждения от соединения с MySQL.
 string displayWarnings(MYSQL *connection) {
     MYSQL_RES *sql_result;
     MYSQL_ROW row;

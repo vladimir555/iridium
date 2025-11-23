@@ -24,7 +24,14 @@ public:
     struct TState {
         /// \~english @brief The condition of the process.
         /// \~russian @brief Состояние процесса.
-        DEFINE_ENUM(TCondition, DONE, CRASHED, INTERRUPTED, RUNNING, TIMEOUT);
+        DEFINE_ENUM(
+            TCondition,
+            DONE, ///< \~english The process has completed successfully. \~russian Процесс успешно завершен.
+            CRASHED, ///< \~english The process has crashed. \~russian Процесс аварийно завершился.
+            INTERRUPTED, ///< \~english The process was interrupted. \~russian Процесс был прерван.
+            RUNNING, ///< \~english The process is currently running. \~russian Процесс выполняется.
+            TIMEOUT ///< \~english The process has timed out. \~russian Время ожидания процесса истекло.
+        );
         TCondition              condition; ///< \~english The current condition of the process. \~russian Текущее состояние процесса.
         std::shared_ptr<int>    exit_code; ///< \~english The exit code of the process, if it has terminated. \~russian Код завершения процесса, если он завершился.
     };

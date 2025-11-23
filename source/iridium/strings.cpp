@@ -1,3 +1,12 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements a set of utility functions for string manipulation.
+/// \~russian @file
+/// @brief Реализует набор вспомогательных функций для работы со строками.
+
 #include "strings.h"
 
 #include <algorithm>

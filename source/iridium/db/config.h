@@ -6,6 +6,12 @@
 #define HEADER_CONFIG_08F54573_BC06_4817_9AE5_35A3BC49E892
 
 
+/// \~english @file
+/// @brief Defines the database configuration structure.
+/// \~russian @file
+/// @brief Определяет структуру конфигурации базы данных.
+
+
 #include "iridium/parsing/serialization/node.h"
 #include "iridium/enum.h"
 
@@ -57,7 +63,7 @@ namespace iridium::db::config {
 } // namespace iridium::db::config
 
 
-//DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)
+DEFINE_ENUM_CONVERT(iridium::db::config::TDatebase::TDBType)
 
 
 #endif // HEADER_CONFIG_08F54573_BC06_4817_9AE5_35A3BC49E892

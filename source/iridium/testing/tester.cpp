@@ -29,35 +29,43 @@ using iridium::convertion::convert;
 namespace iridium::testing {
 
 
+/// \~english @brief Holds the parsed command-line arguments for the test runner.
+/// \~russian @brief Хранит разобранные аргументы командной строки для запуска тестов.
 struct TCmdArgs {
     DEFINE_CREATE(TCmdArgs)
 
+    /// \~english @brief Enumerates the main commands the test runner can execute.
+    /// \~russian @brief Перечисляет основные команды, которые может выполнять средство запуска тестов.
     DEFINE_ENUM(
         TCommand,
-        HELP,
-        RUN,
-        LIST
+        HELP, ///< \~english Display help information. \~russian Показать справочную информацию.
+        RUN,  ///< \~english Run the tests. \~russian Запустить тесты.
+        LIST  ///< \~english List all available tests. \~russian Показать список всех доступных тестов.
     );
 
+    /// \~english @brief Enumerates the execution modes for running tests.
+    /// \~russian @brief Перечисляет режимы выполнения тестов.
     DEFINE_ENUM(
         TMode,
-        PARALLEL,
-        SERIAL,
-        RAW
+        PARALLEL, ///< \~english Run tests in parallel (forking processes). \~russian Запускать тесты параллельно (создавая дочерние процессы).
+        SERIAL,   ///< \~english Run tests serially (forking processes). \~russian Запускать тесты последовательно (создавая дочерние процессы).
+        RAW       ///< \~english Run tests in the same process without forking. \~russian Запускать тесты в том же процессе без создания дочерних.
     );
 
+    /// \~english @brief Enumerates the formats for printing test results.
+    /// \~russian @brief Перечисляет форматы для вывода результатов тестов.
     DEFINE_ENUM(
         TPrintResult,
-        JSON
+        JSON ///< \~english Print results in JSON format. \~russian Вывести результаты в формате JSON.
     );
 
-    TCommand                command;
-    TMode                   mode;
-    TPrintResult            print_result;
-    std::chrono::seconds    timeout;
-    string                  app_name;
-    string                  include_path;
-    list<string>            exclude_paths;
+    TCommand                command;        ///< \~english The command to execute. \~russian Команда для выполнения.
+    TMode                   mode;           ///< \~english The test execution mode. \~russian Режим выполнения тестов.
+    TPrintResult            print_result;   ///< \~english The format for the output results. \~russian Формат для вывода результатов.
+    std::chrono::seconds    timeout;        ///< \~english The timeout for each test. \~russian Тайм-аут для каждого теста.
+    string                  app_name;       ///< \~english The name of the test application executable. \~russian Имя исполняемого файла тестового приложения.
+    string                  include_path;   ///< \~english The path filter to include tests. \~russian Фильтр путей для включения тестов.
+    list<string>            exclude_paths;  ///< \~english A list of path filters to exclude tests. \~russian Список фильтров путей для исключения тестов.
 };
 
 

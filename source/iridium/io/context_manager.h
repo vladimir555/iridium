@@ -1,3 +1,12 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Defines the `IContextManager` interface for managing I/O contexts.
+/// \~russian @file
+/// @brief Определяет интерфейс `IContextManager` для управления контекстами ввода-вывода.
+
 #ifndef HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 #define HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 
@@ -6,8 +15,6 @@
 #include "protocol.h"   // For IProtocol
 #include "event.h"      // For Event::TSharedPtr (explicitly, though also via context.h)
 #include "multiplexer.h"// For IMultiplexer
-// IStream is used by createContext, its definition is expected to be included transitively.
-// For clarity: #include "stream.h" would typically be here if not for indirect inclusion.
 
 
 namespace iridium::io {
@@ -28,7 +35,18 @@ public:
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContextManager)
 
-    virtual void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) = 0;
+    /// \~english @brief Creates a new I/O context for a given stream and protocol.
+    /// \~russian @brief Создает новый контекст ввода-вывода для заданного потока и протокола.
+    /// \~english @param stream A shared pointer to the `IStream` that the context will manage.
+    /// \~russian @param stream Умный указатель на `IStream`, которым будет управлять контекст.
+    /// \~english @param protocol A shared pointer to the `IProtocol` to be used for communication over the stream.
+    /// \~russian @param protocol Умный указатель на `IProtocol`, который будет использоваться для обмена данными через поток.
+    virtual void    createContext (IStream::TSharedPtr  const &stream, IProtocol::TSharedPtr const &protocol) = 0;
+
+    /// \~english @brief Removes an I/O context.
+    /// \~russian @brief Удаляет контекст ввода-вывода.
+    /// \~english @param context A shared pointer to the `IContext` to be removed.
+    /// \~russian @param context Умный указатель на `IContext`, который необходимо удалить.
     virtual void    removeContext (IContext::TSharedPtr const &context) = 0;
 
     /// \~english @brief Acquires or selects an appropriate I/O context to handle a given event,

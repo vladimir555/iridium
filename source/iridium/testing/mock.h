@@ -411,47 +411,65 @@ public: \
 #define DEFINE_MOCK_METHOD(...) \
     DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD, __VA_ARGS__)(__VA_ARGS__)
 
+/// \~english @brief Defines a mock method for a const member function with 0 arguments.
+/// \~russian @brief Определяет "мок"-метод для константной функции-члена с 0 аргументами.
 #define DEFINE_MOCK_METHOD_CONST_2(TResult, methodName) \
 public: \
     TResult methodName() const override { \
         return this->call<TResult>(); \
     }
 
+/// \~english @brief Defines a mock method for a const member function with 1 argument.
+/// \~russian @brief Определяет "мок"-метод для константной функции-члена с 1 аргументом.
 #define DEFINE_MOCK_METHOD_CONST_3(TResult, methodName, A1) \
 public: \
     TResult methodName(A1 a1) const override { \
         return this->call<TResult>(a1); \
     }
 
+/// \~english @brief Defines a mock method for a const member function with 2 arguments.
+/// \~russian @brief Определяет "мок"-метод для константной функции-члена с 2 аргументами.
 #define DEFINE_MOCK_METHOD_CONST_4(TResult, methodName, A1, A2) \
 public: \
     TResult methodName(A1 a1, A2 a2) const override { \
         return this->call<TResult>(a1, a2); \
     }
 
+/// \~english @brief Defines a mock method for a const member function with 3 arguments.
+/// \~russian @brief Определяет "мок"-метод для константной функции-члена с 3 аргументами.
 #define DEFINE_MOCK_METHOD_CONST_5(TResult, methodName, A1, A2, A3) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3) const override { \
         return this->call<TResult>(a1, a2, a3); \
     }
 
+/// \~english @brief Defines a mock method for a const member function with 4 arguments.
+/// \~russian @brief Определяет "мок"-метод для константной функции-члена с 4 аргументами.
 #define DEFINE_MOCK_METHOD_CONST_6(TResult, methodName, A1, A2, A3, A4) \
 public: \
     TResult methodName(A1 a1, A2 a2, A3 a3, A4 a4) const override { \
         return this->call<TResult>(a1, a2, a3, a4); \
     }
 
+/// \~english @brief A variadic macro to define a mock method for a const member function.
+/// \~russian @brief Вариативный макрос для определения "мок"-метода для константной функции-члена.
 #define DEFINE_MOCK_METHOD_CONST(...) \
     DEFINE_MACRO_CHOOSER(DEFINE_MOCK_METHOD_CONST, __VA_ARGS__)(__VA_ARGS__)
 
+/// \~english @brief Defines a mock class for a given interface.
+/// \~russian @brief Определяет "мок"-класс для заданного интерфейса.
 #define DEFINE_MOCK_CLASS(Interface) \
 class Interface##Mock: public Interface, public ::iridium::testing::Mock<Interface>
 
+/// \~english @brief Defines a constructor for a mock class.
+/// \~russian @brief Определяет конструктор для "мок"-класса.
 #define DEFINE_MOCK_CONSTRUCTOR(Interface) \
 public: \
 template<typename ... TArgs> \
 Interface##Mock(TArgs && ... args): Interface(std::forward<TArgs>(args) ...) {};
 
+/// \~english @brief Defines the behavior of a mock method.
+/// \~russian @brief Определяет поведение "мок"-метода.
 #define DEFINE_MOCK_BEHAVIOR(result_type, method_name, mock_object, ...)                         \
 ::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
@@ -462,6 +480,8 @@ Interface##Mock(TArgs && ... args): Interface(std::forward<TArgs>(args) ...) {};
     (__VA_ARGS__)>(&std::remove_reference_t<decltype(mock_object)>::method_name))                \
 ) = [&](__VA_ARGS__)
 
+/// \~english @brief Defines the behavior of a const mock method.
+/// \~russian @brief Определяет поведение константного "мок"-метода.
 #define DEFINE_MOCK_BEHAVIOR_CONST(result_type, method_name, mock_object, ...)                   \
 ::iridium::testing::Mock<std::remove_reference_t<decltype(mock_object)>::TOriginalClass>::Behavior<                  \
     decltype(static_cast<result_type (std::remove_reference_t<decltype(mock_object)>::TOriginalClass::*) \
@@ -472,9 +492,13 @@ Interface##Mock(TArgs && ... args): Interface(std::forward<TArgs>(args) ...) {};
     (__VA_ARGS__) const>(&std::remove_reference_t<decltype(mock_object)>::method_name))          \
 ) = [&](__VA_ARGS__)
 
+/// \~english @brief Defines a mock sequence.
+/// \~russian @brief Определяет последовательность "мок"-вызовов.
 #define DEFINE_MOCK_SEQUENCE(name) \
 ::iridium::testing::MockSequence sequence_##name(__FILE__, __LINE__, #name)
 
+/// \~english @brief Defines an expectation for a mock sequence.
+/// \~russian @brief Определяет ожидание для последовательности "мок"-вызовов.
 #define DEFINE_MOCK_SEQUENCE_EXPECTATION(sequence_name, mock, method) \
 sequence_##sequence_name.addExpectation(mock, &method, #method, __FILE__, __LINE__)
 

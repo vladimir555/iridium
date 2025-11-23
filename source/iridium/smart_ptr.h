@@ -39,17 +39,17 @@ typedef ::std::unique_ptr<TClass const>   TConstUniquePtr;
 
 #ifdef DEFINE_MOCK_CREATE
 /// \~english @def DEFINE_CREATE(Interface)
-/// @brief Defines a static `create` factory method for a class `Interface`, typically an interface type when mocking is enabled.
+/// @brief Defines a static `create` factory method for a class, supporting mocking.
 /// If `DEFINE_MOCK_CREATE` is defined, this macro generates a `create` method that forwards
 /// the call to `iridium::testing::Mock<Interface>::create(...)`, allowing for mock object instantiation.
-/// It also includes smart pointer definitions via `DEFINE_SMART_PTR(Interface)`.
+/// It also includes smart pointer definitions via `DEFINE_SMART_PTR`.
 /// \~russian @def DEFINE_CREATE(Interface)
-/// @brief Определяет статический фабричный метод `create` для класса `Interface`, обычно являющегося типом интерфейса при включенном мокировании.
+/// @brief Определяет статический фабричный метод `create` для класса с поддержкой мокирования.
 /// Если определен `DEFINE_MOCK_CREATE`, этот макрос генерирует метод `create`, который перенаправляет
 /// вызов в `iridium::testing::Mock<Interface>::create(...)`, позволяя создавать мок-объекты.
-/// Также включает определения умных указателей через `DEFINE_SMART_PTR(Interface)`.
-/// \~english @param Interface The class or interface for which to define the `create` method and smart pointers. When `DEFINE_MOCK_CREATE` is active, this is typically the interface type being mocked.
-/// \~russian @param Interface Класс или интерфейс, для которого определяется метод `create` и умные указатели. Когда активен `DEFINE_MOCK_CREATE`, это обычно тип мокируемого интерфейса.
+/// Также включает определения умных указателей через `DEFINE_SMART_PTR`.
+/// \~english @param Interface The class or interface for which to define the `create` method.
+/// \~russian @param Interface Класс или интерфейс, для которого определяется метод `create`.
 /// \~english @tparam TArgs Variadic template arguments for the constructor of the object being created.
 /// \~russian @tparam TArgs Вариативные шаблонные аргументы для конструктора создаваемого объекта.
 #define DEFINE_CREATE(Interface) \
@@ -61,17 +61,17 @@ return ::iridium::testing::Mock<Interface>::create(std::forward<TArgs>(args) ...
 
 #else
 /// \~english @def DEFINE_CREATE(TClass)
-/// @brief Defines a static `create` factory method for a class `TClass`.
+/// @brief Defines a static `create` factory method for a class.
 /// If `DEFINE_MOCK_CREATE` is not defined, this macro generates a `create` method that uses
 /// `std::make_shared<TClass>(...)` to instantiate objects.
-/// It also includes smart pointer definitions via `DEFINE_SMART_PTR(TClass)`.
+/// It also includes smart pointer definitions via `DEFINE_SMART_PTR`.
 /// \~russian @def DEFINE_CREATE(TClass)
-/// @brief Определяет статический фабричный метод `create` для класса `TClass`.
+/// @brief Определяет статический фабричный метод `create` для класса.
 /// Если `DEFINE_MOCK_CREATE` не определен, этот макрос генерирует метод `create`, который использует
 /// `std::make_shared<TClass>(...)` для создания экземпляров объектов.
-/// Также включает определения умных указателей через `DEFINE_SMART_PTR(TClass)`.
-/// \~english @param TClass The class for which to define the `create` method and smart pointers.
-/// \~russian @param TClass Класс, для которого определяется метод `create` и умные указатели.
+/// Также включает определения умных указателей через `DEFINE_SMART_PTR`.
+/// \~english @param TClass The class for which to define the `create` method.
+/// \~russian @param TClass Класс, для которого определяется метод `create`.
 /// \~english @tparam TArgs Variadic template arguments for the constructor of `TClass`.
 /// \~russian @tparam TArgs Вариативные шаблонные аргументы для конструктора `TClass`.
 #define DEFINE_CREATE(TClass) \

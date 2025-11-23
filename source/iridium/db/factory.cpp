@@ -1,3 +1,13 @@
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+/// \~english @file
+/// @brief Implements the database connector factory functions.
+/// \~russian @file
+/// @brief Реализует функции фабрики для коннекторов к базам данных.
+
+
 #include "factory.h"
 
 
@@ -14,10 +24,20 @@ using std::string;
 
 
 #ifdef BUILD_FLAG_MYSQL
+
+
 using iridium::db::implementation::CMySQLConnector;
+
+
 #endif // BUILD_FLAG_MYSQL
+
+
 #ifdef BUILD_FLAG_POSTGRES
+
+
 using iridium::db::implementation::CPostgresConnector;
+
+
 #endif // BUILD_FLAG_POSTGRES
 
 
