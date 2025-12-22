@@ -156,9 +156,9 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
     {
 //        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
-        if (size < 0)
-            return false; // ----->
         result |= size > 0;
+        if (!result)
+            return false; // ----->
         if  (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
         } else {
