@@ -196,16 +196,16 @@ void CContext::removePipe(IPipe::TSharedPtr const &pipe) {
 
 void CContext::remove() {
 //    LOGT << "CContext::remove";
-    for (auto const &stream_pipe: m_map_stream_pipe) {
-        if (!stream_pipe.first->getHandles().empty()) {
-            LOGT
-                << "CContext::remove push event: "
-                << stream_pipe.first->getHandles()
-                << " " << Event::TOperation::CLOSE
-                << " " << Event::TStatus::BEGIN;
-            m_events->push(Event::create(stream_pipe.first, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-        }
-    }
+//    for (auto const &stream_pipe: m_map_stream_pipe) {
+//        if (!stream_pipe.first->getHandles().empty()) {
+//            LOGT
+//                << "CContext::remove push event: "
+//                << stream_pipe.first->getHandles()
+//                << " " << Event::TOperation::CLOSE
+//                << " " << Event::TStatus::BEGIN;
+//            m_events->push(Event::create(stream_pipe.first, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+//        }
+//    }
 //    for (auto const &stream_pipe: m_map_stream_pipe)
 //        stream_pipe.first->finalize();
 

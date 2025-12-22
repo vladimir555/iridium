@@ -1,9 +1,34 @@
-#ifndef HEADER_STREAM_PORT_PEER_CED1FFB4_5501_4996_87FF_215A95BC6518
-#define HEADER_STREAM_PORT_PEER_CED1FFB4_5501_4996_87FF_215A95BC6518
+#ifndef HEADER_STREAM_PORT_PEER_WINDOWS_5E6F7A8B
+#define HEADER_STREAM_PORT_PEER_WINDOWS_5E6F7A8B
 
 
-namespace iridium::io::implementation::platform::windows {
-} // iridium::io::implementation::platform::windows
+#include "iridium/platform.h"
 
 
-#endif // HEADER_STREAM_PORT_PEER_CED1FFB4_5501_4996_87FF_215A95BC6518
+#ifdef WINDOWS_PLATFORM
+
+
+#include "stream_port.h"
+
+
+namespace iridium::io::implementation::platform {
+
+
+class CStreamPortPeer: public CStreamPort {
+public:
+    DEFINE_IMPLEMENTATION(CStreamPortPeer)
+    explicit CStreamPortPeer(URI const &uri);
+    CStreamPortPeer(URI const &uri, int const &fd);
+
+    void initialize() override;
+    void finalize() override;
+};
+
+
+} // namespace
+
+
+#endif // WINDOWS_PLATFORM
+
+
+#endif // HEADER_STREAM_PORT_PEER_WINDOWS_5E6F7A8B

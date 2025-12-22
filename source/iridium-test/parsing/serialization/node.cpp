@@ -195,8 +195,8 @@ TEST(node_to_struct) {
     ASSERT(55555, equal, i->SubItem.AttributeTwo.get());
 
     string result;
-    for (auto const &i: root.Array)
-        result += i.get();
+    for (auto const &i_: root.Array)
+        result += i_.get();
     ASSERT("54321", equal, result);
 
 //    LOGT << node;
@@ -205,8 +205,8 @@ TEST(node_to_struct) {
 
 
     result.clear();
-    for (auto const &i: root.Array)
-        result += i.get();
+    for (auto const &i_: root.Array)
+        result += i_.get();
 
     ASSERT("5432112345"     , equal, result);
     ASSERT("defaultValue1"  , equal, root.ExternalRoot.AttributeOne.get());
@@ -216,17 +216,17 @@ TEST(node_to_struct) {
 
     ASSERT((TRoot(nullptr)), std::exception);
     {
-        INode::TSharedPtr node = CNode::create("root_wrong");
-        ASSERT((TRoot(node)), std::exception);
-        node->addChild("first-item")->addChild("attribute-two", "55");
-        ASSERT((TRoot(node)), std::exception);
+        INode::TSharedPtr node_ = CNode::create("root_wrong");
+        ASSERT((TRoot(node_)), std::exception);
+        node_->addChild("first-item")->addChild("attribute-two", "55");
+        ASSERT((TRoot(node_)), std::exception);
     }
 
     {
-        INode::TSharedPtr node = CNode::create("root");
-        ASSERT((TRoot(node)), std::exception);
-        node->addChild("first-item")->addChild("attribute-two", "55");
-        ASSERT((TRoot(node)), std::exception);
+        INode::TSharedPtr node_ = CNode::create("root");
+        ASSERT((TRoot(node_)), std::exception);
+        node_->addChild("first-item")->addChild("attribute-two", "55");
+        ASSERT((TRoot(node_)), std::exception);
     }
 }
 

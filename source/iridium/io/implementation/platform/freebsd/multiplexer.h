@@ -43,6 +43,7 @@ public:
     std::list<Event::TSharedPtr> waitEvents() override;
 
     void wake(Event::TSharedPtr const &event) override;
+    void wake(std::list<Event::TSharedPtr> const &events) override;
 
     void subscribe  (IStream::TSharedPtr const &stream) override;
     void unsubscribe(IStream::TSharedPtr const &stream) override;

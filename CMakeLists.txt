@@ -84,18 +84,39 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_compile_options(-O0 -g -Wall -Wextra)
-    message(STATUS "Debug mode enabled: -O0 -g")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-O0 -g -Wall -Wextra)
+        message(STATUS "Debug mode enabled: -O0 -g -Wall -Wextra")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/Od /RTC1 /W4)  # /Od = отключить оптимизацию, /RTC1 = проверки времени выполнения, /W4 = максимальные предупреждения
+        message(STATUS "Debug mode enabled: /Od /RTC1 /W4")
+    endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    add_compile_options(-O3 -DNDEBUG -flto)
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-    message(STATUS "Release mode enabled: -O3 -DNDEBUG -flto")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-O3 -DNDEBUG -flto)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+        message(STATUS "Release mode enabled: -O3 -DNDEBUG -flto")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/O2 /DNDEBUG /GL)  # /O2 = максимальная оптимизация скорости, /GL = оптимизация на уровне программы (LTO аналог)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)  # включает /LTCG при линковке
+        message(STATUS "Release mode enabled: /O2 /DNDEBUG /GL")
+    endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    add_compile_options(-O2 -g -DNDEBUG)
-    message(STATUS "RelWithDebInfo mode enabled: -O2 -g -DNDEBUG")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-O2 -g -DNDEBUG)
+        message(STATUS "RelWithDebInfo mode enabled: -O2 -g -DNDEBUG")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/O2 /DNDEBUG /Zi)  # /Zi = отладочная информация
+        message(STATUS "RelWithDebInfo mode enabled: /O2 /DNDEBUG /Zi")
+    endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-    add_compile_options(-Os -DNDEBUG)
-    message(STATUS "MinSizeRel mode enabled: -Os -DNDEBUG")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-Os -DNDEBUG)
+        message(STATUS "MinSizeRel mode enabled: -Os -DNDEBUG")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/Os /DNDEBUG)  # /Os = оптимизация под размер
+        message(STATUS "MinSizeRel mode enabled: /Os /DNDEBUG")
+    endif()
 else()
     message(WARNING "Unknown CMAKE_BUILD_TYPE: '${CMAKE_BUILD_TYPE}'")
 endif()
@@ -125,7 +146,6 @@ if(CONFIG_OPENSSL)
     find_package(OpenSSL REQUIRED)
 endif()
 
-
 find_package(Threads REQUIRED)
 
 include_directories(
@@ -145,8 +165,17 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOU
 
 
 # -----
-# Build shared library
-add_library(${PROJECT_NAME} SHARED ${SOURCE})
+# # auto export symbols for windows
+# if(WIN32)
+#     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+# endif()
+# # Build shared library
+# add_library(${PROJECT_NAME} SHARED ${SOURCE})
+if(WIN32)
+    add_library(${PROJECT_NAME} STATIC ${SOURCE})
+else()
+    add_library(${PROJECT_NAME} SHARED ${SOURCE})
+endif()
 
 
 # -----

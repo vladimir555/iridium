@@ -32,6 +32,7 @@
     <ClCompile Include="db\postgres.cpp" />
     <ClCompile Include="db\sql.cpp" />
     <ClCompile Include="io\socket.cpp" />
+    <ClCompile Include="io\stream_port.cpp" />
     <ClCompile Include="io\uri.cpp" />
     <ClCompile Include="logging\logger.cpp" />
     <ClCompile Include="main.cpp" />

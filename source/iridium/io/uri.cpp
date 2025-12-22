@@ -77,9 +77,9 @@ void extractTokens(
 }
 
 
-URI::URI(std::string const &source)
+URI::URI(std::string const &source_)
 :
-    m_source(source)
+    m_source(source_)
 {
     // string const IPv4_REGEX = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
     static string const LOGIN_DELIMITER             = "@";
@@ -175,7 +175,7 @@ URI::URI(std::string const &source)
             extractTokens(PORT_DELIMITER, address, m_host);
             if (m_host.empty()) {
                 m_host = unmask(address);
-                m_port = m_protocol;
+                m_port = static_cast<uint16_t>(m_protocol);
             } else
                 m_port = convert<uint16_t>(address);
         }

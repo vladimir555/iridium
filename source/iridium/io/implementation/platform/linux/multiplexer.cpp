@@ -179,7 +179,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
         if (epoll_events[i].events & EPOLLHUP) {
             events.push_back(
-                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::EOF_, Event::TStatus::BEGIN));
+                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::CLOSE, Event::TStatus::BEGIN));
             continue; // <---
         }
 
@@ -209,6 +209,15 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
         throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
 
     m_wake_events->push(event);
+    eventfd_write(m_event_fd, 0);
+}
+
+
+void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
+    if (!m_epoll_fd)
+        throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
+
+    m_wake_events->push(events);
     eventfd_write(m_event_fd, 0);
 }
 

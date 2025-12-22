@@ -237,6 +237,14 @@ struct TConvert<int, int> {
 };
 
 
+#ifdef __OHOS__
+template<>
+struct TConvert<std::string, long long> {
+    static std::string convert(long long const &value);
+};
+#endif // __OHOS__
+
+
 template<>
 struct TConvert<std::string, std::wstring> {
     static std::string convert(std::wstring const &value);

@@ -126,7 +126,7 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
             event->operation,
             Event::TOperation::READ,
             Event::TOperation::CLOSE,
-            Event::TOperation::EOF_,
+//            Event::TOperation::EOF_,
             Event::TOperation::TIMEOUT)))
     ) {
         //LOGT << "do read";
@@ -152,16 +152,23 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
         checkOneOf(
             event->operation,
             Event::TOperation::WRITE,
-            Event::TOperation::TIMEOUT)))
-    ) {
+            Event::TOperation::TIMEOUT))))
+    {
 //        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
+        if (size < 0)
+            return false; // ----->
         result |= size > 0;
         if  (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
         } else {
-            Buffer::TSharedPtr buffer = m_buffers.front();
-            buffer->assign(buffer->begin() + size, buffer->end());
+            // todo: optimize
+            auto buffer = m_buffers.front();
+            m_buffers.pop_front();
+            if (buffer->size() > size) {
+                buffer = Buffer::create(buffer->begin() + size, buffer->end());
+                m_buffers.push_front(buffer);
+            }
         }
 
 //        LOGT << "wrote " << size;

@@ -41,6 +41,7 @@ public:
     std::list<Event::TSharedPtr> waitEvents() override;
 
     void wake(Event::TSharedPtr const &event) override;
+    void wake(std::list<Event::TSharedPtr> const &events) override;
 
 private:
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;

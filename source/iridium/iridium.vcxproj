@@ -206,7 +206,6 @@
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp" />
     <ClCompile Include="convertion\implementation\platform\windows\convert.cpp" />
-    <ClCompile Include="convertion\implementation\type_name.cpp" />
     <ClCompile Include="db\config.cpp" />
     <ClCompile Include="db\connector.cpp" />
     <ClCompile Include="db\implementation\connector.cpp" />
@@ -228,6 +227,9 @@
     <ClCompile Include="io\implementation\pipe.cpp" />
     <ClCompile Include="io\implementation\platform\windows\multiplexer.cpp" />
     <ClCompile Include="io\implementation\platform\windows\stream_port.cpp" />
+    <ClCompile Include="io\implementation\platform\windows\stream_port_acceptor.cpp" />
+    <ClCompile Include="io\implementation\platform\windows\stream_port_client.cpp" />
+    <ClCompile Include="io\implementation\platform\windows\stream_port_peer.cpp" />
     <ClCompile Include="io\implementation\session_manager.cpp" />
     <ClCompile Include="io\implementation\stream_buffer.cpp" />
     <ClCompile Include="io\implementation\stream_reader_list.cpp" />
@@ -253,9 +255,9 @@
     <ClCompile Include="logging\logger.cpp" />
     <ClCompile Include="logging\sink.cpp" />
     <ClCompile Include="parsing\file_parser.cpp" />
-    <ClCompile Include="parsing\implementation\parser_http.cpp" />
-    <ClCompile Include="parsing\implementation\parser_json.cpp" />
-    <ClCompile Include="parsing\implementation\parser_xml.cpp" />
+    <ClCompile Include="parsing\implementation\http_parser.cpp" />
+    <ClCompile Include="parsing\implementation\json_parser.cpp" />
+    <ClCompile Include="parsing\implementation\xml_parser.cpp" />
     <ClCompile Include="parsing\node.cpp" />
     <ClCompile Include="parsing\serialization\node.cpp" />
     <ClCompile Include="pattern\implementation\initializer.cpp" />

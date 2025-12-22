@@ -6,61 +6,62 @@
 namespace iridium::io {
 
 
-Buffer::Buffer(char const * const str)
+Buffer::Buffer(char const *s)
 :
-    Buffer(std::string(str))
+    Buffer(std::vector<uint8_t>(s, s + strlen(s)))
 {}
 
 
-Buffer::Buffer(std::string const &str)
+Buffer::Buffer(std::string const &s)
 :
-    std::vector<unsigned char>(str.begin(), str.end())
+    std::vector<uint8_t>(s.begin(), s.end())
 {}
 
 
 Buffer::Buffer(std::list<Buffer::TSharedPtr> const &buffers) {
-    for (auto const &buffer: buffers)
-        this->insert(end(), buffer->begin(), buffer->end());
+    for (auto const& buffer: buffers) {
+        if (buffer && !buffer->empty()) {
+            insert(end(), buffer->begin(), buffer->end());
+        }
+    }
 }
 
 
-bool Buffer::checkSuffixEqual(
-    std::string const &suffix,
-    std::string const &skip) const
-{
+bool Buffer::checkSuffixEqual(std::string const &suffix, std::string const &skip) const {
     if (suffix.empty())
         return true;
+
     if (size() < suffix.size())
         return false;
 
     size_t i = size();
+
     while (i > 0 && skip.find((*this)[i - 1]) != std::string::npos) {
         --i;
     }
 
-    return
-        i >= suffix.size() &&
-        std::equal(suffix.rbegin(), suffix.rend(), this->rbegin() + (size() - i));
+    return (i >= suffix.size()) &&
+           std::equal(suffix.rbegin(), suffix.rend(), rbegin() + (size() - i));
 }
 
 
-bool Buffer::checkSuffixEqual(uint8_t const * const suffix, size_t const &size) const {
+bool Buffer::checkSuffixEqual(uint8_t const *suffix, size_t const &size) const {
     return
-        this->size() >= size &&
-        std::equal(suffix, suffix + size, this->data() + (this->size() - size));
+        (this->size() >= size) &&
+        std::equal(suffix, suffix + size, data() + (this->size() - size));
 }
 
 
 bool Buffer::checkSuffixEqual(std::vector<uint8_t> const &suffix) const {
-    return
-        size() >= suffix.size() &&
-        std::equal(suffix.begin(), suffix.end(), this->end() - suffix.size());
+    return (size() >= suffix.size()) &&
+           std::equal(suffix.begin(), suffix.end(), end() - suffix.size());
 }
 
 
 void Buffer::emplace_back(Buffer::TSharedPtr const &buffer) {
-    if (buffer && !buffer->empty())
+    if (buffer && !buffer->empty()) {
         insert(end(), buffer->begin(), buffer->end());
+    }
 }
 
 

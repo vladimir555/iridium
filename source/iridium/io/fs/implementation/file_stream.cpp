@@ -34,7 +34,7 @@ Buffer::TSharedPtr CFileStream::read(size_t const &size) {
     if (!m_file)
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
 
-    auto buffer = Buffer::create(size, 0);
+    auto buffer = Buffer::create(size, static_cast<uint8_t>(0));
     auto count  = freadInternal(buffer->data(), 1, buffer->size(), m_file);
 
     if (count == 0)

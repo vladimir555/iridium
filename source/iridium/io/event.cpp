@@ -57,5 +57,21 @@ size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
 }
 
 
+namespace {
+
+
+std::string convertEnumToString(iridium::io::Event const &event) {
+    using iridium::convertion::convert;
+    return
+        convert<std::string>(event.stream->getHandles()) + " " +
+        convert<std::string>(event.operation) + " " +
+        convert<std::string>(event.status);
+}
+
+
+}
+
+
 IMPLEMENT_ENUM(iridium::io::Event::TOperation)
 IMPLEMENT_ENUM(iridium::io::Event::TStatus)
+IMPLEMENT_CONVERT(std::string, iridium::io::Event, convertEnumToString)

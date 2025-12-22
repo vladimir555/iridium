@@ -20,9 +20,18 @@
 namespace iridium::system::implementation::platform {
 
 
-class CProcessStream: public virtual IProcess {
+#ifdef _MSC_VER
+#pragma warning(disable : 4250)
+#endif
+
+
+class CProcessStream:
+    public IProcess,
+    public io::implementation::CStreamPort
+{
 public:
     DEFINE_IMPLEMENTATION(CProcessStream)
+
     CProcessStream(
         std::string const &app,
         std::string const &args);
@@ -33,30 +42,19 @@ public:
     void initialize()   override;
     void finalize()     override;
 
-    std::list<uintptr_t>    getHandles() const override;
-    io::URI::TSharedPtr     getURI() const override;
-    io::Buffer::TSharedPtr  read(size_t const &size = io::DEFAULT_BUFFER_SIZE) override;
-    size_t                  write(io::Buffer::TSharedPtr const &buffer) override;
-
     TState getState() override;
     void   sendSignal(TSignal const &signal) override;
 
 private:
+    static std::atomic<uint64_t>    m_process_counter;
+
+    io::URI::TSharedPtr             m_uri;
     std::string                     m_app;
     std::string                     m_args;
     std::string                     m_command_line;
-    std::string                     m_pipe_name;
-    HANDLE                          m_file_stdout_writer;
-    HANDLE                          m_pipe_stdout_reader;
-    //HANDLE              m_file_stdin_reader;
-    //HANDLE              m_pipe_stdout_writer;
     PROCESS_INFORMATION             m_process;
-    std::shared_ptr<OVERLAPPED>     m_overlapped;
-    io::URI::TSharedPtr             m_uri;
     SECURITY_ATTRIBUTES             m_security_attributes;
-    io::Buffer::TSharedPtr          m_buffer;
-
-    static std::atomic<uint64_t>    m_process_counter;
+    TState::TSharedPtr              m_finalized_state;
 };
 
 

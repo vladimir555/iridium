@@ -548,9 +548,6 @@
     <ClCompile Include="convertion\implementation\platform\windows\convert.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="convertion\implementation\type_name.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="db\config.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -636,15 +633,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="parsing\file_parser.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\implementation\parser_http.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\implementation\parser_json.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\implementation\parser_xml.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="parsing\node.cpp">
@@ -747,6 +735,24 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\fs\implementation\platform\windows\file_api.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\implementation\http_parser.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\implementation\json_parser.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\implementation\xml_parser.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\implementation\platform\windows\stream_port_acceptor.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\implementation\platform\windows\stream_port_client.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\implementation\platform\windows\stream_port_peer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

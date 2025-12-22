@@ -2,12 +2,12 @@
 
 #include <algorithm>
 #include <locale>
+#include <functional>
 
 
 using std::string;
 using std::vector;
 using std::list;
-using std::transform;
 
 
 namespace iridium {
@@ -44,14 +44,28 @@ list<string> split(string const &source, string const &delimiter) {
 
 string lowerCase(string const &source) {
     string result = source;
-    transform(result.begin(), result.end(), result.begin(), ::tolower);
+
+    std::transform(
+        result.begin(),
+        result.end(),
+        result.begin(),
+        std::bind( std::tolower<char>, std::placeholders::_1, std::locale{} )
+    );
+
     return result; // ----->
 }
 
 
 string upperCase(string const &source) {
     string result = source;
-    transform(result.begin(), result.end(), result.begin(), ::toupper);
+
+    std::transform(
+        result.begin(),
+        result.end(),
+        result.begin(),
+        std::bind( std::toupper<char>, std::placeholders::_1, std::locale{} )
+    );
+
     return result; // ----->
 }
 

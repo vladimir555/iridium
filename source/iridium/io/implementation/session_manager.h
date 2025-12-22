@@ -23,41 +23,6 @@
 namespace iridium::io::implementation {
 
 
-// todo:
-// fsm: kevent, epoll, iocp
-// session: fsm state + pipes
-// stream statuses:
-// open,    begin   -> fsm
-// open,    end     -> fsm -> protocol -> add, rm, modify pipes
-// read,    begin   -> fsm.
-// read,    end     -> fsm -> protocol
-// write,   begin   -> fsm
-// write,   end     -> fsm -> protocol
-// close,   begin   -> fsm
-// close,   end     -> fsm -> protocol
-
-// example(kevent or epoll):
-// stream -> manage -> event(open, begin) -> multiplexer(subscribe) +
-// worker(initialize) -> event(open, end) ->
-// worker(protocol) -> pipe(event(read, begin)) ->
-// worker(read) -> event(read, end) -> if read size > 0 then repeat event(read, begin) + worker(protocol) -> context still valid, no event
-// ...
-// kevent -> event(read, begin) -> repeat worker(read) or event(timeout, unknown) -> worker(protocol) ->
-// ...
-// worker(protocol) -> not valid context -> event(close, begin) ->
-// unsubscribe ->
-// kevent -> event(close, end) ->
-// worker(finalize + remove context)
-
-// example(iocp):
-// stream -> manage -> event(open, begin) ->
-// worker(initialize) -> event(open, end) ->
-// worker(protocol) -> pipe(event(read, begin)) ->
-// worker(read) -> none
-// iocp -> event(read, end) -> if size > 0 then repeat + worker(protocol) ->
-// worker(protocol) -> not valid context -> event(close, begin) ->
-
-
 class CSessionManager: public ISessionManager {
 public:
     DEFINE_IMPLEMENTATION(CSessionManager);
@@ -92,21 +57,6 @@ private:
         IMultiplexer::TSharedPtr    m_multiplexer;
     };
 
-    class CEventRepeaterHandler: public threading::IRunnable {
-    public:
-        DEFINE_IMPLEMENTATION(CEventRepeaterHandler)
-
-        CEventRepeaterHandler(IContextWorker::TSharedPtr const &context_worker);
-
-        void initialize() override;
-        void finalize() override;
-
-        void run(std::atomic<bool> &is_running) override;
-    private:
-        IContextWorker::TSharedPtr
-            m_context_worker;
-    };
-
     class CContextWorkerHandler: public IContextWorker::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CContextWorkerHandler)
@@ -131,8 +81,6 @@ private:
         m_context_worker;
     threading::IThread::TSharedPtr
         m_multiplexer_thread;
-    threading::IThread::TSharedPtr
-        m_event_repeater_thread;
 };
 
 

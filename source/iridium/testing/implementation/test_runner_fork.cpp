@@ -233,7 +233,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
             checkOneOf(event->operation,
                 io::Event::TOperation::READ,
-                io::Event::TOperation::EOF_,
+//                io::Event::TOperation::EOF_,
                 io::Event::TOperation::CLOSE,
                 io::Event::TOperation::TIMEOUT) &&
                 m_buffer_output             &&
@@ -287,7 +287,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                         string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
                         auto    node = m_parser->parse(json);
 
-                        m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
+//                        m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
+                        m_buffer_output->resize(left);
                         m_process_result->node      = node;
                         m_process_result->output    = m_buffer_output;
 

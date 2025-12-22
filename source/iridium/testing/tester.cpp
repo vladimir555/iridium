@@ -166,7 +166,7 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
         } else
             throw nullptr; // --->
 
-        return result; // ----->
+        // return result; // ----->
     } catch (std::exception const &e) {
         LOGE << e.what();
     } catch (...) {
@@ -275,7 +275,7 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
         LOGF << e.what();
         return 1;
     }
-    return 0;
+    // return 0;
 }
 
 

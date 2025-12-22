@@ -144,8 +144,8 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds co
 Synchronized::Locker _____locked_scope_____(this, __FILE__, __LINE__)
 
 
-#define LOCK_SCOPE_TRY_WAIT(timeout) \
-_____locked_scope_____.wait(timeout)
+#define LOCK_SCOPE_TRY_WAIT(...) \
+_____locked_scope_____.wait(__VA_ARGS__)
 
 
 #endif // HEADER_PROTOCOL_FACTORY_BA993AE8_B05D_4A20_A8C6_38E965E820DD

@@ -10,10 +10,12 @@
 
 #include "iridium/io/multiplexer.h"
 #include "iridium/threading/synchronized.h"
+#include "iridium/threading/async_queue.h"
 
 #include <unordered_map>
 #include <mutex>
 
+#define NOMINMAX
 #include <Windows.h>
 
 
@@ -31,10 +33,15 @@ public:
     void   subscribe(IStream::TSharedPtr const &stream) override;
     void unsubscribe(IStream::TSharedPtr const &stream) override;
     void wake(Event::TSharedPtr const &event) override;
+    void wake(std::list<Event::TSharedPtr> const &events) override;
 
 private:
+    DWORD checkResult(bool const &is_ok, std::string const &message);
+
     HANDLE m_iocp;
     std::unordered_map<HANDLE, IStream::TSharedPtr> m_map_id_stream;
+
+    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr m_wake_events;
 };
 
 

@@ -30,12 +30,20 @@ Shell::Shell()
 
 
 void Shell::initialize() {
-    m_multiplexer->initialize();
+    try {
+        m_multiplexer->initialize();
+    } catch (std::exception const &e) {
+        throw std::runtime_error(std::string("shell initialization error: ") + e.what());
+    }
 }
 
 
 void Shell::finalize() {
-    m_multiplexer->finalize();
+    try {
+        m_multiplexer->finalize();
+    } catch (std::exception const &e) {
+        throw std::runtime_error(std::string("shell finalization error: ") + e.what());
+    }
 }
 
 
@@ -43,9 +51,9 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
     Shell::TResult  result  = {};
     // todo: refactor platform::makeShellCommand
 #ifdef WINDOWS_PLATFORM
-    auto            process = CProcessStream::create("powershell", std::vector<std::string>{ "-command", command_line } );
+    auto process = CProcessStream::create("powershell", std::vector<std::string>{ "-command", command_line } );
 #else
-    auto            process = CProcessStream::create("sh", std::vector<std::string>{ "-c", command_line } );
+    auto process = CProcessStream::create("sh", std::vector<std::string>{ "-c", command_line } );
 #endif // WINDOWS_PLATFORM
 
     try {
@@ -58,29 +66,28 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
 
         for (;;) {
             for (auto const &event: m_multiplexer->waitEvents()) {
-                // LOGT << event->stream->getURI() << " " << event->status;
+                // LOGT << event;
+
+                using io::Event;
 
                 if (event->stream == process &&
                     checkOneOf(
                         event->operation,
-                        io::Event::TOperation::READ,
-                        io::Event::TOperation::EOF_,
-                        io::Event::TOperation::TIMEOUT))
+                        Event::TOperation::OPEN,
+                        Event::TOperation::READ,
+                        Event::TOperation::TIMEOUT))
                 {
                     for (;;) {
                         auto buffer = process->read();
-
-                        // LOGT << "buffer: " << buffer;// << " size: " << buffer->size();
+                        // LOGT << "buffer: '" << buffer << "'";
 
                         now = std::chrono::system_clock::now();
 
                         if (buffer && !buffer->empty() && now < stop_time) {
                             result.output += convert<string>(buffer);
-
-                            if (buffer->size() < io::DEFAULT_BUFFER_SIZE)
-                                break; // ----->
-                        } else
+                        } else {
                             break; // ----->
+                        }
                     }
                 }
             }
@@ -94,11 +101,11 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
                 break; // --->
         }
 
-        m_multiplexer->unsubscribe(process);
         process->finalize();
+        m_multiplexer->unsubscribe(process);
 
         if (state.condition == IProcess::TState::TCondition::DONE) {
-            auto state = process->getState();
+            state = process->getState();
             result.code = state.exit_code ? *state.exit_code : -1;
             return result; // ----->
         } else {
@@ -108,7 +115,8 @@ Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &
                 throw std::runtime_error("invalid process condition " + convert<string>(state.condition));
         }
     } catch (std::exception const &e) {
-        throw std::runtime_error("shell command '" + command_line + "' error: " + e.what());
+         m_multiplexer->unsubscribe(process);
+        throw std::runtime_error("shell running command '" + command_line + "' error: " + e.what());
     }
 }
 

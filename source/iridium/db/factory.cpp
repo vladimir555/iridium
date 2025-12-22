@@ -63,6 +63,7 @@ IConnector::TSharedPtr createConnector(TDatebase const &config) {
     case TDatebase::TDBType::POSTGRES:
         return CPostgresConnector::create(config); // ----->
 #endif // BUILD_FLAG_POSTGRES
+    case TDatebase::TDBType::UNKNOWN:
     default:
         throw std::runtime_error("creating db connector error: unknown db type " +
             convert<string>(config.Type.get())); // ----->
