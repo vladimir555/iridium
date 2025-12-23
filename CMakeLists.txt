@@ -37,14 +37,14 @@ file(READ "${VERSION_HEADER}" version_content)
 
 string(TOUPPER "${PROJECT_NAME}" PROJECT_NAME_UPPER)
 
-# Extract version components — robust to whitespace
-string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MAJOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+# Extract version components — robust to optional '=' and semicolon
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MAJOR[^0-9]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MAJOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MINOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MINOR[^0-9]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MINOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_PATCH[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_PATCH[^0-9]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_PATCH "${CMAKE_MATCH_1}")
 
 # Validate (0 is valid, empty is not)
