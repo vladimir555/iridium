@@ -10,12 +10,32 @@ using iridium::system::Shell;
 using iridium::threading::sleep;
 
 
+static std::string normalizeNewlines(std::string s) {
+    std::string r;
+    r.reserve(s.size());
+    for (char c : s)
+        if (c != '\r') r.push_back(c);
+    return r;
+}
+
+
 TEST(shell) {
     auto shell  = Shell::create();
     shell->initialize();
-    // todo: unix / windows test string
-    auto result = shell->run("echo 1 && sleep 0.1 && echo 2");
+    auto result = shell->run("echo 1 ; sleep 0.1 ; echo 2");
     shell->finalize();
-    ASSERT("1\n2\n", equal, result.output);
-    ASSERT(0,        equal, result.code);
+
+    // LOGT << "output: '" << result.output << "'";
+
+    auto output = normalizeNewlines(result.output);
+
+    ASSERT("1\n2\n", equal, output);
+    ASSERT(0, equal, result.code);
 }
+
+
+// TEST(value) {
+    // LOGT << convert<std::string, int32_t, false>(int{-1});
+    // // todo: fix the issue with static_assert in convert when is_throwable=false
+    // LOGT << convert<std::string, int32_t, true> (int{-1});
+// }

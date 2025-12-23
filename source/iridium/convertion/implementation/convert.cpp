@@ -8,6 +8,7 @@
 #include <codecvt>
 #include <stdexcept>
 #include <locale>
+#include <functional>
 #include <sstream>
 #include <cmath>
 
@@ -319,7 +320,7 @@ string TConvert<string, std::nested_exception>::convert(std::nested_exception co
         return "unknown exception";
     }
 
-    return "";
+    // return "";
 }
 
 
@@ -357,7 +358,13 @@ system_clock::time_point TConvert<system_clock::time_point, string>::convert(str
 bool TConvert<bool, string>::convert(string const &value_) {
     string value = value_;
 
-    transform(value.begin(), value.end(), value.begin(), ::tolower);
+    // transform(value.begin(), value.end(), value.begin(), ::tolower);
+    std::transform(
+        value.begin(),
+        value.end(),
+        value.begin(),
+        std::bind( std::tolower<char>, std::placeholders::_1, std::locale{} )
+    );
 
     if (value == "true")
         return true;  // ----->
@@ -472,6 +479,13 @@ float TConvert<float, string>::convert(string const &value) {
 int TConvert<int, int>::convert(int const &value) {
     return value; // ----->
 }
+
+
+#ifdef __OHOS__
+std::string TConvert<std::string, long long>::convert(long long const &value) {
+    return TConvert<string, int64_t>::convert(value); // ----->
+}
+#endif // __OHOS__
 
 
 #if __cplusplus >= 201103L && __cplusplus < 201703L

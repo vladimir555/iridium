@@ -662,20 +662,20 @@ void convertNodeToJSONString(INode::TConstSharedPtr const &node, string &result,
                 convertNodeToJSONString(node_child, result, tab + DEFAULT_TAB); // <-----
                 result += tab + "}" + line_end;
             } else {
-                string name = node_child->getName();
+                auto name_ = node_child->getName();
 
-                if (name.empty())
-                    name = "#text";
+                if (name_.empty())
+                    name_ = "#text";
 
                 result += tab;
                 if (tab.empty())
                     result += DEFAULT_TAB;
-                result += "\"" + name + "\"" + ": " + "\"" + mask(node_child->getValue()) + "\"" + line_end;
+                result += "\"" + name_ + "\"" + ": " + "\"" + mask(node_child->getValue()) + "\"" + line_end;
             }
         } else {
             result += tab + "\"" + name + "\"" + ": [\n";
             size_t node_number = 0;
-            for (auto const &node : nodes) {
+            for (auto const &node_ : nodes) {
                 string line_end_;
                 node_number++;
                 if (nodes.size() == 1 || node_number == nodes.size())
@@ -683,12 +683,12 @@ void convertNodeToJSONString(INode::TConstSharedPtr const &node, string &result,
                 else
                     line_end_ = ",\n";
 
-                if (node->hasChilds()) {
+                if (node_->hasChilds()) {
                     result += tab + DEFAULT_TAB + "{\n";
-                    convertNodeToJSONString(node, result, tab + DEFAULT_TAB + DEFAULT_TAB); // <-----
+                    convertNodeToJSONString(node_, result, tab + DEFAULT_TAB + DEFAULT_TAB); // <-----
                     result += tab + DEFAULT_TAB + "}" + line_end_;
                 } else {
-                    result += tab + DEFAULT_TAB + "\"" + mask(node->getValue()) + "\"" + line_end_;
+                    result += tab + DEFAULT_TAB + "\"" + mask(node_->getValue()) + "\"" + line_end_;
                 }
             }
             result += tab + "]" + line_end;

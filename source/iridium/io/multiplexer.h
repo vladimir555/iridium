@@ -26,6 +26,7 @@ public:
     virtual void subscribe  (IStream::TSharedPtr const &stream) = 0;
     virtual void unsubscribe(IStream::TSharedPtr const &stream) = 0;
     virtual void wake(Event::TSharedPtr const &event) = 0;
+    virtual void wake(std::list<Event::TSharedPtr> const &events) = 0;
 };
 
 

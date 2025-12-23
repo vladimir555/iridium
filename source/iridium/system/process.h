@@ -18,6 +18,7 @@ public:
     DEFINE_INTERFACE(IProcess)
 
     struct TState {
+        DEFINE_CREATE(TState)
         DEFINE_ENUM(TCondition, DONE, CRASHED, INTERRUPTED, RUNNING, TIMEOUT);
         TCondition              condition;
         std::shared_ptr<int>    exit_code;

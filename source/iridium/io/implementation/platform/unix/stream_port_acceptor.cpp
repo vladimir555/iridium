@@ -1,5 +1,9 @@
 #include "stream_port_acceptor.h"
 
+
+#ifdef UNIX_PLATFORM
+
+
 #include "stream_port_peer.h"
 
 #include <iridium/convertion/convert.h>
@@ -127,3 +131,6 @@ void CStreamPortAcceptor::setBlockingMode(bool const &is_blocking) {
 
 
 } // iridium::io::implementation::platform::unix_
+
+
+#endif // UNIX_PLATFORM

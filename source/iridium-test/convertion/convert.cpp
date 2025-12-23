@@ -144,15 +144,15 @@ TEST(types) {
     ASSERT("-5"     , equal, convert<string>(static_cast<int32_t>(-5)));
     ASSERT("0"      , equal, convert<string>(static_cast<int64_t>(0)));
     ASSERT("0"      , equal, convert<string>(static_cast<int32_t>(0)));
-    ASSERT("F"      , equal, convert<string>(15, 16));
+    ASSERT("F"      , equal, convert<string>(15, static_cast<uint8_t>(16)));
 
     ASSERT("5.50000", equal, convert<string>(5.5));
-    ASSERT("5.56"   , equal, convert<string>(5.556, 2));
-    ASSERT("5.55"   , equal, convert<string>(5.554, 2));
-    ASSERT("625.10" , equal, convert<string>(625.1, 2));
+    ASSERT("5.56"   , equal, convert<string>(5.556, static_cast<uint8_t>(2)));
+    ASSERT("5.55"   , equal, convert<string>(5.554, static_cast<uint8_t>(2)));
+    ASSERT("625.10" , equal, convert<string>(625.1, static_cast<uint8_t>(2)));
     ASSERT("-5.50000",equal, convert<string>(-5.5));
-    ASSERT("-5.56"  , equal, convert<string>(-5.556, 2));
-    ASSERT("-5.55"  , equal, convert<string>(-5.554, 2));
+    ASSERT("-5.56"  , equal, convert<string>(-5.556, static_cast<uint8_t>(2)));
+    ASSERT("-5.55"  , equal, convert<string>(-5.554, static_cast<uint8_t>(2)));
     ASSERT( "17976931348623157", equal, convert<string>( std::numeric_limits<double>::max()).substr(0, 17));
     ASSERT("-17976931348623157", equal, convert<string>(-std::numeric_limits<double>::max()).substr(0, 18));
 

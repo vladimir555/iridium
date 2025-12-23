@@ -80,7 +80,7 @@ struct TConvert {
                 sizeof(TResult) == 0 || sizeof(TValue) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
         }
-        return {};
+        // return {};
     }
     template<typename TFormat>
     static TResult convert(TValue const &, TFormat const &) {
@@ -94,7 +94,7 @@ struct TConvert {
                 sizeof(TResult) == 0 || sizeof(TValue) == 0 || sizeof(TFormat) == 0,
                 "TConvert specialization is missing for the given TResult and TValue types");
         }
-        return {};
+        // return {};
     }
 };
 

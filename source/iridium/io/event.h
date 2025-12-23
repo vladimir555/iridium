@@ -22,7 +22,6 @@ struct Event {
         OPEN,
         READ,
         WRITE,
-        EOF_,
         TIMEOUT,
         ERROR_,
         CLOSE)
@@ -57,6 +56,7 @@ struct std::hash<iridium::io::Event::TSharedPtr> {
 
 DEFINE_ENUM_CONVERT(iridium::io::Event::TOperation)
 DEFINE_ENUM_CONVERT(iridium::io::Event::TStatus)
+DEFINE_CONVERT(std::string, iridium::io::Event)
 
 
 #endif // HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347

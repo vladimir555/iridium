@@ -311,8 +311,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 continue; // <---
             try {
                 if (!is_finalized)
-                    assertOK(kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr),
-                             "kevent update monitored events error");
+                    assertOK(
+                        kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr),
+                        "kevent update monitored events error");
             } catch (...) {
                 LOGT << "m_kqueue  = " << (int64_t)m_kqueue;
                 string s;
@@ -338,12 +339,12 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         } else {
 //            LOGT << "get from map fd: " << triggered_event.ident;
             auto const stream = m_map_fd_stream[triggered_event.ident];
-            if  (stream) {
+            if (stream) {
                 if (triggered_event.flags & EV_EOF) {
 //                    LOGT << "! EOF, id: " << stream->getID();
 //                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
 //                    LOGT << "push Event::TOperation::EOF, fd: " << stream->getHandles();
-                    events.push_back(Event::create(stream, Event::TOperation::EOF_, Event::TStatus::END));
+                    events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
                     continue; // <---
                 }
 
@@ -354,7 +355,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
 
                 if (triggered_event.flags & EV_ERROR)
-                    events.push_back(Event::create(stream, Event::TOperation::ERROR_));
+                    events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::BEGIN));
 
             } else {
                 // freebsd bug
@@ -404,6 +405,20 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
         throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
 
     m_wake_events->push(event);
+
+    int64_t fd      = 0;
+    auto    result  = write(m_pipe_add[1], &fd, 8);
+
+    if (result < 0)
+        throw std::runtime_error("multiplexer wake error: " + string(strerror(errno))); // ----->
+}
+
+
+void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
+    if (!m_kqueue)
+        throw std::runtime_error("multiplexer unsubscribing error: kqueue is not initialized"); // ----->
+
+    m_wake_events->push(events);
 
     int64_t fd      = 0;
     auto    result  = write(m_pipe_add[1], &fd, 8);
