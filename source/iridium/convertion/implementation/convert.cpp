@@ -313,14 +313,15 @@ string TConvert<string, std::exception>::convert(std::exception const &e) {
 
 string TConvert<string, std::nested_exception>::convert(std::nested_exception const &e) {
     try {
-        e.rethrow_nested();
+        if (e.nested_ptr())
+            e.rethrow_nested();
+        else
+            return "";
     } catch (std::exception const &inner) {
         return formatException(inner);
     } catch (...) {
         return "unknown exception";
     }
-
-    // return "";
 }
 
 

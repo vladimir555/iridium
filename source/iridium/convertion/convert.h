@@ -17,13 +17,13 @@ using implementation::config;
 
 template<typename TResult, typename TValue, bool is_throwable = false>
 TResult convert(TValue const &value) {
-    return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value);
+    return implementation::TConvertPolicy<TResult, TValue, void, is_throwable>::convert(value);
 }
 
 
 template<typename TResult, typename TValue, typename TFormat, bool is_throwable = false>
 TResult convert(TValue const &value, TFormat const &format) {
-    return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value, format);
+    return implementation::TConvertPolicy<TResult, TValue, void, is_throwable>::convert(value, format);
 }
 
 

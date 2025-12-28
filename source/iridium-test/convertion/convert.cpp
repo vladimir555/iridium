@@ -133,18 +133,79 @@ namespace iridium::convertion {
 //}
 
 
+TEST(specializations) {
+    convert<std::string, std::chrono::system_clock::time_point, true>({});
+    convert<std::string, std::chrono::system_clock::time_point, true>({});
+    convert<std::string, std::chrono::hours, true>({});
+    convert<std::string, std::chrono::minutes, true>({});
+    convert<std::string, std::chrono::seconds, true>({});
+    convert<std::string, std::chrono::milliseconds, true>({});
+    convert<std::string, std::chrono::microseconds, true>({});
+    convert<std::string, std::chrono::nanoseconds, true>({});
+
+    convert<std::string, bool, true>({});
+    convert<std::string, int64_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int64_t, true>({});
+    convert<std::string, uint64_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint64_t, true>({});
+    convert<std::string, int32_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int32_t, true>({});
+    convert<std::string, uint32_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint32_t, true>({});
+    convert<std::string, int16_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int16_t, true>({});
+    convert<std::string, uint16_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint16_t, true>({});
+    convert<std::string, int8_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int8_t, true>({});
+    convert<std::string, uint8_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint8_t, true>({});
+    convert<std::string, double, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, double, true>({});
+    convert<std::string, float, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, float, true>({});
+
+    convert<std::string, std::thread::id, true>({});
+    convert<std::string, std::exception, true>({});
+    convert<std::chrono::system_clock::time_point, std::string, true>("2025-12-12 01:01:01.001");
+
+    convert<bool, std::string, true>("true");
+    convert<int32_t, std::string, true>("0");
+    convert<int64_t, std::string, true>("0");
+    convert<uint32_t, std::string, true>("0");
+    convert<uint16_t, std::string, true>("0");
+    convert<uint8_t, std::string, true>("0");
+    convert<uint64_t, std::string, true>("0");
+    convert<double, std::string, true>("0");
+    convert<float, std::string, true>("0");
+
+    convert<std::string, long long, true>({});
+    convert<std::string, std::wstring, true>({});
+    convert<std::wstring, std::string, true>({});
+    convert<std::string, std::u16string, true>({});
+    convert<std::string, std::u32string, true>({});
+    convert<std::u16string, std::string, true>({});
+    convert<std::u32string, std::string, true>({});
+
+    convert<int, int, true>({});
+    convert<std::string, std::string, true>({});
+
+    convert<std::string, std::nested_exception, true>({});
+}
+
+
 TEST(types) {
     ASSERT("true"   , equal, convert<string>(true));
     ASSERT("false"  , equal, convert<string>(false));
 
-    ASSERT("12345"  , equal, convert<string>(static_cast<uint64_t>(12345)));
-    ASSERT("5"      , equal, convert<string>(static_cast<uint64_t>(5)));
-    ASSERT("5"      , equal, convert<string>(static_cast<uint32_t>(5)));
-    ASSERT("-5"     , equal, convert<string>(static_cast<int64_t>(-5)));
-    ASSERT("-5"     , equal, convert<string>(static_cast<int32_t>(-5)));
-    ASSERT("0"      , equal, convert<string>(static_cast<int64_t>(0)));
-    ASSERT("0"      , equal, convert<string>(static_cast<int32_t>(0)));
-    ASSERT("F"      , equal, convert<string>(15, static_cast<uint8_t>(16)));
+    ASSERT("12345"  , equal, convert<string>(uint64_t{12345}));
+    ASSERT("5"      , equal, convert<string>(uint64_t{5}));
+    ASSERT("5"      , equal, convert<string>(uint32_t{5}));
+    ASSERT("-5"     , equal, convert<string>(int64_t{-5}));
+    ASSERT("-5"     , equal, convert<string>(int32_t{-5}));
+    ASSERT("0"      , equal, convert<string>(int64_t{0}));
+    ASSERT("0"      , equal, convert<string>(int32_t{0}));
+    ASSERT("F"      , equal, convert<string>(15, uint8_t{16}));
 
     ASSERT("5.50000", equal, convert<string>(5.5));
     ASSERT("5.56"   , equal, convert<string>(5.556, static_cast<uint8_t>(2)));
@@ -217,6 +278,8 @@ TEST(types) {
 //    //LOGT << hello_str;
 //    //LOGT << convert<string>(hello_wstr);
 //    ASSERT(hello_str, equal, convert<string>(hello_wstr));
+
+    ASSERT(convert<string>(0, 0), std::exception);
 }
 
 

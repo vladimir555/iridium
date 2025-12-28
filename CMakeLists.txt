@@ -86,9 +86,13 @@ endif()
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         add_compile_options(-O0 -g -Wall -Wextra)
+
+        # set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
+        # set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
+
         message(STATUS "Debug mode enabled: -O0 -g -Wall -Wextra")
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        add_compile_options(/Od /RTC1 /W4)  # /Od = отключить оптимизацию, /RTC1 = проверки времени выполнения, /W4 = максимальные предупреждения
+        add_compile_options(/Od /RTC1 /W4)  # /Od = disable optimizations, /RTC1 = runtime checks, /W4 = maximum warnings
         message(STATUS "Debug mode enabled: /Od /RTC1 /W4")
     endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -97,8 +101,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
         set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
         message(STATUS "Release mode enabled: -O3 -DNDEBUG -flto")
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        add_compile_options(/O2 /DNDEBUG /GL)  # /O2 = максимальная оптимизация скорости, /GL = оптимизация на уровне программы (LTO аналог)
-        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)  # включает /LTCG при линковке
+        add_compile_options(/O2 /DNDEBUG /GL)  # /O2 = maximum speed optimization, /GL = program-level optimization (LTO analog)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)  # enables /LTCG when linking
         message(STATUS "Release mode enabled: /O2 /DNDEBUG /GL")
     endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
@@ -106,7 +110,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
         add_compile_options(-O2 -g -DNDEBUG)
         message(STATUS "RelWithDebInfo mode enabled: -O2 -g -DNDEBUG")
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        add_compile_options(/O2 /DNDEBUG /Zi)  # /Zi = отладочная информация
+        add_compile_options(/O2 /DNDEBUG /Zi)  # /Zi = debug information
         message(STATUS "RelWithDebInfo mode enabled: /O2 /DNDEBUG /Zi")
     endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
@@ -114,7 +118,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
         add_compile_options(-Os -DNDEBUG)
         message(STATUS "MinSizeRel mode enabled: -Os -DNDEBUG")
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        add_compile_options(/Os /DNDEBUG)  # /Os = оптимизация под размер
+        add_compile_options(/Os /DNDEBUG)  # /Os = optimization for size
         message(STATUS "MinSizeRel mode enabled: /Os /DNDEBUG")
     endif()
 else()
