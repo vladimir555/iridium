@@ -57,7 +57,7 @@ size_t const time_to_string_buffer_size     = 64;
 namespace iridium::convertion::implementation {
 
 
-std::atomic<int> config::double_precission(5);
+thread_local int config::double_precission = 5;
 
 
 //template<>

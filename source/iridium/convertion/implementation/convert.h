@@ -29,7 +29,7 @@ namespace iridium::convertion::implementation {
 
 
 struct config {
-    static std::atomic<int> double_precission;
+    static thread_local int double_precission;
 };
 
 

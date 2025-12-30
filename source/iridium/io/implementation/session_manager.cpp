@@ -225,7 +225,8 @@ CSessionManager::CContextWorkerHandler::handle(
                             checkOneOf(
                                 event->operation,
                                 Event::TOperation::READ,
-                                Event::TOperation::WRITE))
+                                Event::TOperation::WRITE,
+                                Event::TOperation::CLOSE))
                         {
                             // repeat rw
                             event->status = Event::TStatus::BEGIN;
