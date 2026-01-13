@@ -11,6 +11,7 @@ freebsd kevent async socket
 jsonrcp
 rtsp
 simd json parser
+node diff for transferring
 
 video codec wrapper: libaom + libopus
 or

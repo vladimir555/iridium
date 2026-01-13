@@ -110,12 +110,9 @@ void CSessionManager::CMultiplexerThreadHandler::finalize() {
 
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
-//        m_context_worker->push(m_multiplexer->waitEvents());
+        auto events = removeDuplicates(m_multiplexer->waitEvents());
 
-        auto events = m_multiplexer->waitEvents();
-        if (!events.empty()) {
-            LOGT << "multiplexer events:\n" << events;
-        }
+        LOGT << "multiplexer events:\n" << events;
 
         m_context_worker->push(events);
         m_context_worker->push(m_context_manager->checkOutdatedStreams());
@@ -153,28 +150,16 @@ CSessionManager::CContextWorkerHandler::handle(
 
     for (auto const &worker_event: removeDuplicates(events_)) {
 
-        LOGT << "handle event (worker):   " << worker_event;
+        // LOGT << "handle event (worker):   " << worker_event;
 
+        // events for multiple contexts
         if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
             bool is_context_valid = true;
 
+            // events for one context
             for (auto const &event: removeDuplicates(context->popEvents())) {
-
-                LOGT << "handle event (acquired): " << event;
-
-                if (event->stream->getHandles().empty() &&
-                    event->operation != Event::TOperation::OPEN)
-                {
-                    LOGT << "skip empty fd: " << event;
-                    continue;
-                }
-
-                if (event->stream->getHandles().empty() &&
-                   !checkOneOf(
-                        event->operation,
-                        Event::TOperation::OPEN,
-                        Event::TOperation::TIMEOUT))
-                    continue; // <---
+                // if (!is_context_valid)
+                //     break; // --->
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
@@ -183,44 +168,37 @@ CSessionManager::CContextWorkerHandler::handle(
                             m_multiplexer->subscribe(event->stream);
                         } else
                         if (checkOneOf(
-                                event->operation,
-                                Event::TOperation::READ,
-                                Event::TOperation::WRITE,
-                                Event::TOperation::TIMEOUT,
-                                Event::TOperation::CLOSE))
+                            event->operation,
+                            Event::TOperation::READ,
+                            Event::TOperation::WRITE,
+                            Event::TOperation::TIMEOUT,
+                            Event::TOperation::CLOSE))
                         {
                             auto is_transmitted = context->transmit(event);
 
-                            if (!is_transmitted && event->operation == Event::TOperation::CLOSE) {
-                                LOGT << "unsubscribe on close begin";
-                                is_context_valid = context->update(event);
-
-                                if (is_context_valid) {
-                                    event->status = Event::TStatus::END;
-                                    events_to_repeat.push_back(event);
-                                } else {
-                                    m_multiplexer->unsubscribe(event->stream);
-                                }
-
-//                                is_context_valid = false;
-                            } else {
-//                                if (!is_transmitted)
-//                                    event->operation = Event::TOperation::EOF_;
+                            if (is_transmitted || event->operation == Event::TOperation::CLOSE) {
+                                event->status = Event::TStatus::END;
+                                events_to_repeat.push_back(event);
                             }
                         }
-
                     } catch (std::exception const &e) {
                         LOGE
                             << event
                             << "\n" << e.what()
                             << "\n" << event->stream->getURI();
-                        event->operation = Event::TOperation::ERROR_;
+
+                        event->operation    = Event::TOperation::ERROR_;
+                        event->status       = Event::TStatus::END;
+
+                        events_to_repeat.push_back(event);
                     }
                     continue; // <---
                 }
+
                 if (event->status == Event::TStatus::END) {
                     try {
                         is_context_valid = context->update(event);
+
                         if (is_context_valid &&
                             checkOneOf(
                                 event->operation,
@@ -232,16 +210,16 @@ CSessionManager::CContextWorkerHandler::handle(
                             event->status = Event::TStatus::BEGIN;
                             events_to_repeat.push_back(event);
                             LOGT << "repeat by context: " << event;
+                            continue; // <---
                         } else {
                             LOGT << "skip: " << event;
                         }
+
                         if (event->operation == Event::TOperation::CLOSE) {
                             LOGT << "finalize on close end: " << event;
                             event->stream->finalize();
+                            m_multiplexer->unsubscribe(event->stream);
                         }
-                        //if (event->operation == Event::TOperation::CLOSE) {
-                        //    // todo: rm stream from context
-                        //}
                     } catch (std::exception const &e) {
                         LOGE
                             << event
@@ -249,6 +227,7 @@ CSessionManager::CContextWorkerHandler::handle(
                             << "\n" << event->stream->getURI();
                         event->operation =  Event::TOperation::ERROR_;
                     }
+
                     if (event->operation == Event::TOperation::ERROR_)
                         is_context_valid = false;
 
@@ -256,13 +235,13 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
 
-            if (!is_context_valid) {
+            if (is_context_valid) {
+                auto events__ = m_context_manager->releaseContext(context);
+                events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
+            } else {
                 LOGT << "remove context";
 //                context->popEvents();
                 m_context_manager->removeContext(context);
-            } else {
-                auto events__ = m_context_manager->releaseContext(context);
-                events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
             }
 
         } else {

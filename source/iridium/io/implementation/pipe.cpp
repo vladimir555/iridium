@@ -119,7 +119,7 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
 //       (!m_reader->getURI() ||
 //        (m_reader->getID()  == event->stream->getID() &&
 //        (checkOneOf(event->operation, Event::TOperation::READ, Event::TOperation::CLOSE, Event::TOperation::TIMEOUT)))))
-    if ( m_buffers.size() < m_buffer_count &&
+    if  (m_buffers.size() < m_buffer_count &&
         (m_reader->getHandles().empty() ||
         (m_reader == event->stream &&
         checkOneOf(
@@ -133,7 +133,7 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
         auto buffer = m_reader->read(m_buffer_size);
 
         //LOGT << "read buffer size: " << buffer->size();
-        if  (buffer && buffer->size() > 0) {
+        if  (buffer && !buffer->empty()) {
             m_buffers.push_back(buffer);
             result |= true;
             //LOGT << "read " << buffer->size();
@@ -157,9 +157,11 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
 //        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
         result |= size > 0;
+
         if (!result)
             return false; // ----->
-        if  (size == m_buffers.front()->size()) {
+
+        if (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
         } else {
             // todo: optimize

@@ -24,8 +24,8 @@ CContext::CContext(IStream::TSharedPtr const &, IProtocol::TSharedPtr const &pro
 void CContext::pushEvent(Event::TSharedPtr const &event) {
     LOCK_SCOPE();
 
-    auto size = m_events->push(event);
-    LOGT << "push event, size: " << size;
+    m_events->push(event);
+    LOGT << "push event: " << event;
 }
 
 
@@ -41,7 +41,7 @@ std::list<Event::TSharedPtr> CContext::popEvents() {
             m_map_stream_timestamp[event->stream] = now;
     }
 
-    LOGT << "pop  event, size: " << events.size();
+    LOGT << "pop events: " << events;
     return events; // ----->
 }
 
@@ -104,6 +104,7 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
 
 
 void CContext::createPipe(std::string const &name) {
+    LOGT << "create pipe: " << name;
     if (m_map_name_pipe[name])
         throw std::runtime_error("pipe creating error: '" + name + "' already exists"); // ----->
 
@@ -186,6 +187,11 @@ void CContext::updatePipe(
 
 
 void CContext::removePipe(IPipe::TSharedPtr const &pipe) {
+    LOGT
+        << "remove pipe: "
+        << (pipe->getReader() ? pipe->getReader()->getHandles() : std::list<uintptr_t>{}) << " "
+        << (pipe->getWriter() ? pipe->getWriter()->getHandles() : std::list<uintptr_t>{});
+
     if (!pipe)
         throw std::runtime_error("context pipe remove error: pipe not found"); // ----->
 
