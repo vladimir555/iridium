@@ -290,53 +290,55 @@ cpack_add_component(${PROJECT_NAME}-dev
 
 # -----
 # Testing
-set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
+if(NOT DEFINED CONAN_PROJECT_NAME)
+    set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/source
-    /opt/homebrew/include
-)
-
-file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.cpp
-)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test FILES ${SOURCE_TEST})
-
-add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
-
-target_link_libraries(
-    ${PROJECT_TEST_NAME}
-    PRIVATE
-    ${PROJECT_NAME}
-    ${OPENSSL_LIBRARIES}
-    ${PostgreSQL_LIBRARIES}
-    ${LIBMYSQLCLIENT_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
-)
-
-enable_testing()
-
-set(TEST_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test")
-
-file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
-    "${TEST_SOURCE_DIR}/*.cpp"
-)
-
-set(TEST_CASE_PATHS "")
-foreach(SRC IN LISTS TEST_SOURCES)
-    file(RELATIVE_PATH REL_PATH "${TEST_SOURCE_DIR}" "${SRC}")
-    string(REPLACE "\\" "/" REL_PATH "${REL_PATH}")
-    list(APPEND TEST_CASE_PATHS "/${REL_PATH}")
-endforeach()
-
-list(REMOVE_DUPLICATES TEST_CASE_PATHS)
-
-set(TEST_BIN "$<TARGET_FILE:${PROJECT_TEST_NAME}>")
-
-foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
-    add_test(
-        NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
-        COMMAND ${TEST_BIN} run "${TEST_PATH}"
+    include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/source
+        /opt/homebrew/include
     )
-endforeach()
+
+    file(GLOB_RECURSE SOURCE_TEST
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.cpp
+    )
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test FILES ${SOURCE_TEST})
+
+    add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
+
+    target_link_libraries(
+        ${PROJECT_TEST_NAME}
+        PRIVATE
+        ${PROJECT_NAME}
+        ${OPENSSL_LIBRARIES}
+        ${PostgreSQL_LIBRARIES}
+        ${LIBMYSQLCLIENT_LIBRARIES}
+        ${CMAKE_THREAD_LIBS_INIT}
+    )
+
+    enable_testing()
+
+    set(TEST_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test")
+
+    file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
+        "${TEST_SOURCE_DIR}/*.cpp"
+    )
+
+    set(TEST_CASE_PATHS "")
+    foreach(SRC IN LISTS TEST_SOURCES)
+        file(RELATIVE_PATH REL_PATH "${TEST_SOURCE_DIR}" "${SRC}")
+        string(REPLACE "\\" "/" REL_PATH "${REL_PATH}")
+        list(APPEND TEST_CASE_PATHS "/${REL_PATH}")
+    endforeach()
+
+    list(REMOVE_DUPLICATES TEST_CASE_PATHS)
+
+    set(TEST_BIN "$<TARGET_FILE:${PROJECT_TEST_NAME}>")
+
+    foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
+        add_test(
+            NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
+            COMMAND ${TEST_BIN} run "${TEST_PATH}"
+        )
+    endforeach()
+endif()
