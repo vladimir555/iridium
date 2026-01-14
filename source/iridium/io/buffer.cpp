@@ -1,6 +1,7 @@
 #include "buffer.h"
 
 #include <string>
+#include <string.h>
 
 
 namespace iridium::io {
