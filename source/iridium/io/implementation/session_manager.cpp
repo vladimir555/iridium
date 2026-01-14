@@ -112,7 +112,8 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
     while (is_running) {
         auto events = removeDuplicates(m_multiplexer->waitEvents());
 
-        LOGT << "multiplexer events:\n" << events;
+        if (!events.empty())
+            LOGT << "multiplexer events:\n" << events;
 
         m_context_worker->push(events);
         m_context_worker->push(m_context_manager->checkOutdatedStreams());
