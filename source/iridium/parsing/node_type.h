@@ -23,10 +23,12 @@ class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
     DEFINE_INTERFACE(INodeType)
 
+    // list is faster then deque and vector
     typedef std::list<typename INodeType::TSharedPtr>
         TNodesSharedPtr;
     typedef std::list<INodeType<TValue> *>
         TNodesPtr;
+
     typedef typename TNodesSharedPtr::iterator
         iterator;
     typedef typename TNodesSharedPtr::const_iterator

@@ -296,6 +296,7 @@ if(NOT DEFINED CONAN_PROJECT_NAME)
     include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/source
         /opt/homebrew/include
+        /opt/homebrew/Cellar/nlohmann-json/3.12.0/include
     )
 
     file(GLOB_RECURSE SOURCE_TEST

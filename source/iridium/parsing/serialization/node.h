@@ -64,6 +64,7 @@ public:
          std::string        const &name);
    ~NodeView() = default;
     INode::TSharedPtr       getNode() const;
+
     INode::TSharedPtr       m_node;
     std::string             m_path;
 
@@ -347,9 +348,9 @@ std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode co
 #define DEFINE_ROOT_NODE_BEGIN_2(class_name, naming_strategy_) \
     struct T##class_name: protected iridium::parsing::serialization::NodeView<void> { \
         static iridium::parsing::serialization::TNamingStrategyCPPToNode constexpr naming_strategy = naming_strategy_; \
-        T##class_name(iridium::parsing::INode::TConstSharedPtr const &node): \
+        T##class_name(iridium::parsing::INode::TSharedPtr const &node_): \
             iridium::parsing::serialization::NodeView<void> \
-                (node->clone(), iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
+                (node_, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
         T##class_name(): \
             iridium::parsing::serialization::NodeView<void> \
                 (iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \

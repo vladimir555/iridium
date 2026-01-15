@@ -232,8 +232,16 @@ typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::slice(std::string
                 nodes.push_back(node);
     } else {
         for (auto &node: m_nodes)
-            if (node->getName() == child_path)
+            if (node->getName() == child_path) {
+                // this is faster
                 nodes.splice(nodes.end(), node->slice(next_path));
+                // then this
+                // auto slice = node->slice(next_path);
+                // nodes.insert(
+                //     nodes.end(),
+                //     std::make_move_iterator(slice.begin()),
+                //     std::make_move_iterator(slice.end()));
+            }
     }
 
     return nodes; // ----->
@@ -334,10 +342,12 @@ typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(std::string c
 
 template<typename TValue>
 void CNodeType<TValue>::delChilds(std::string const &name) {
-    m_nodes.remove_if(
-        [&] (auto const &node) {
-            return node->getName() == name;
-        }
+    m_nodes.erase(
+        std::remove_if(m_nodes.begin(), m_nodes.end(),
+            [&](auto const& node) {
+                return node->getName() == name;
+            }),
+        m_nodes.end()
     );
 }
 
