@@ -245,9 +245,8 @@ NodeViewList<TNodeView>::NodeViewList(NodeView<void> const * const parent, std::
     m_name  (name)
 {
     if (parent->m_node) {
-        for (auto const &i: *parent->m_node)
-            if (i->getName() == name)
-                m_nodes.push_back(TNodeView(i, parent->m_path));
+        for (auto const &i: parent->m_node->getChilds(name))
+            m_nodes.push_back(TNodeView(i, parent->m_path));
     }
 }
 
