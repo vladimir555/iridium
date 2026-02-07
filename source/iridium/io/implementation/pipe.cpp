@@ -14,7 +14,7 @@ namespace iridium::io::implementation {
 
 
 size_t const CPipe::DEFAULT_BUFFER_SIZE  = 248;
-size_t const CPipe::DEFAULT_BUFFER_COUNT = 8;
+size_t const CPipe::DEFAULT_BUFFER_COUNT = 64;  // Increased from 8 to handle larger output (248*64 = 15.8KB max)
 
 
 CPipe::CPipe()

@@ -147,7 +147,7 @@ void CMultiplexer::initialize() {
 
 
 void CMultiplexer::finalize() {
-//    LOGT << __FUNCTION__ << " ...";
+    // LOGT << __FUNCTION__ << " ...";
     if (!m_kqueue)
         throw std::runtime_error("multiplexer finalization error: not initialized"); // ----->
 
@@ -156,7 +156,7 @@ void CMultiplexer::finalize() {
 
     if (result < 0)
         throw std::runtime_error("multiplexer finalization error: " + string(std::strerror(errno))); // ----->
-//    LOGT << __FUNCTION__ << " OK";
+    // LOGT << __FUNCTION__ << " OK";
 }
 
 

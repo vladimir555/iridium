@@ -8,8 +8,6 @@
 #include "iridium/io/implementation/context_manager.h"
 #include "iridium/items.h"
 
-#include <set>
-
 
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CThread;
@@ -22,27 +20,48 @@ namespace iridium::io::implementation {
 
 
 static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
-    struct TComparator {
-        bool operator()(
-            Event::TSharedPtr const &left,
-            Event::TSharedPtr const &right) const
-        {
+    if (events_.size() <= 1)
+        return events_;
+
+    std::vector<Event::TSharedPtr> filtered;
+    filtered.reserve(events_.size());
+
+    for (auto const &event: events_) {
+        if (event && event->stream && !event->stream->getHandles().empty())
+            filtered.push_back(event);
+    }
+
+    if (filtered.empty())
+        return {};
+
+    std::sort(filtered.begin(), filtered.end(),
+        [] (auto const &a, auto const &b) {
+            auto const &ha = a->stream->getHandles();
+            auto const &hb = b->stream->getHandles();
+
             return
-                left            &&              right                       &&
-                left->stream    &&              right->stream               &&
-               (left->stream->getHandles()  <   right->stream->getHandles() ||
-               (left->stream->getHandles()  ==  right->stream->getHandles() &&
-               (left->operation             <   right->operation ||
-               (left->operation             ==  right->operation &&
-                left->status                <   right->status))));
+                std::tie(ha, a->operation, a->status) <
+                std::tie(hb, b->operation, b->status);
         }
+    );
+
+    auto last = std::unique(filtered.begin(), filtered.end(),
+        [] (auto const &a, auto const &b) {
+            auto const &ha = a->stream->getHandles();
+            auto const &hb = b->stream->getHandles();
+
+            return
+                std::tie(ha, a->operation, a->status) ==
+                std::tie(hb, b->operation, b->status);
+        }
+    );
+
+    filtered.erase(last, filtered.end());
+
+    return {
+        std::make_move_iterator(filtered.begin()),
+        std::make_move_iterator(filtered.end())
     };
-
-    std::set<Event::TSharedPtr, TComparator> events;
-    for (auto const &event: events_)
-        events.insert(event);
-
-    return std::list<Event::TSharedPtr>(events.begin(), events.end()); // ----->
 }
 
 
@@ -66,17 +85,17 @@ CSessionManager::CSessionManager()
 
 void CSessionManager::initialize() {
     m_multiplexer->initialize();
-    m_multiplexer_thread->initialize();
     m_context_worker->initialize();
+    m_multiplexer_thread->initialize();
 }
 
 
 void CSessionManager::finalize() {
-    LOGT << "CSessionManager::finalize ...";
-    m_context_worker->finalize();
-    m_multiplexer->finalize();
+    //LOGT << "CSessionManager::finalize ...";
     m_multiplexer_thread->finalize();
-    LOGT << "CSessionManager::finalize OK";
+    m_multiplexer->finalize();
+    m_context_worker->finalize();
+    //LOGT << "CSessionManager::finalize OK";
 }
 
 
@@ -103,20 +122,21 @@ CSessionManager::CMultiplexerThreadHandler::CMultiplexerThreadHandler(
 void CSessionManager::CMultiplexerThreadHandler::initialize() {}
 
 
-void CSessionManager::CMultiplexerThreadHandler::finalize() {
-    LOGT << "CMultiplexerThreadHandler::finalize";
-}
+void CSessionManager::CMultiplexerThreadHandler::finalize() {}
 
 
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
-        auto events = removeDuplicates(m_multiplexer->waitEvents());
+        auto events             = m_multiplexer->waitEvents();
+        auto events_outdated    = m_context_manager->checkOutdatedStreams();
 
-        if (!events.empty())
-            LOGT << "multiplexer events:\n" << events;
+        events.insert(events.end(), events_outdated.begin(), events_outdated.end());
+        events = removeDuplicates(events);
 
         m_context_worker->push(events);
-        m_context_worker->push(m_context_manager->checkOutdatedStreams());
+
+        if (!events.empty())
+            ;//LOGT << "multiplexer events:\n" << events;
     }
 }
 
@@ -133,9 +153,7 @@ CSessionManager::CContextWorkerHandler::CContextWorkerHandler(
 void CSessionManager::CContextWorkerHandler::initialize() {}
 
 
-void CSessionManager::CContextWorkerHandler::finalize() {
-    LOGT << "CContextWorkerHandler::finalize";
-}
+void CSessionManager::CContextWorkerHandler::finalize() {}
 
 
 CSessionManager::IContextWorker::IHandler::TOutputItems
@@ -151,14 +169,21 @@ CSessionManager::CContextWorkerHandler::handle(
 
     for (auto const &worker_event: removeDuplicates(events_)) {
 
-        // LOGT << "handle event (worker):   " << worker_event;
+        if (worker_event->stream->getHandles().empty() && worker_event->operation != Event::TOperation::OPEN)
+            continue; // <---
+
+        LOGT << "[WORKER] event: " << worker_event->operation << " status: " << worker_event->status;
 
         // events for multiple contexts
         if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
             bool is_context_valid = true;
 
+            auto context_events = removeDuplicates(context->popEvents());
+
+            // LOGT << "context_events: " << context_events;
+
             // events for one context
-            for (auto const &event: removeDuplicates(context->popEvents())) {
+            for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
                 // if (!is_context_valid)
                 //     break; // --->
 
@@ -167,26 +192,36 @@ CSessionManager::CContextWorkerHandler::handle(
                         if (event->operation == Event::TOperation::OPEN) {
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
-                        } else
-                        if (checkOneOf(
-                            event->operation,
-                            Event::TOperation::READ,
-                            Event::TOperation::WRITE,
-                            Event::TOperation::TIMEOUT,
-                            Event::TOperation::CLOSE))
-                        {
-                            auto is_transmitted = context->transmit(event);
+                        } else if (event->operation == Event::TOperation::CLOSE) {
+                            // For CLOSE BEGIN: defer processing by re-queuing it
+                            // This allows other pending READ/WRITE operations to complete first
+                            // Once most operations are done, CLOSE will be processed
+                            events_to_repeat.push_back(event);
+                        } else {
+                            // For READ/WRITE/ERROR_, call transmit
+                            auto is_transmitted =
+                                checkOneOf(
+                                    event->operation,
+                                    Event::TOperation::OPEN,
+                                    Event::TOperation::ERROR_) ||
+                                context->transmit(event);
 
-                            if (is_transmitted || event->operation == Event::TOperation::CLOSE) {
+                            // LOGT << "[TRANSMIT] op: " << event->operation << " transmitted: " << is_transmitted;
+
+                            if (!is_transmitted && event->operation == Event::TOperation::CLOSE) {
+                                event->status = Event::TStatus::END;
+                                events_to_repeat.push_back(event);
+                            }
+                            else if (is_transmitted && event->operation != Event::TOperation::OPEN) {
                                 event->status = Event::TStatus::END;
                                 events_to_repeat.push_back(event);
                             }
                         }
                     } catch (std::exception const &e) {
                         LOGE
-                            << event
-                            << "\n" << e.what()
-                            << "\n" << event->stream->getURI();
+                            << "handling event error: " << e.what()
+                            << "\n  event: " << event
+                            << " " << event->stream->getURI();
 
                         event->operation    = Event::TOperation::ERROR_;
                         event->status       = Event::TStatus::END;
@@ -199,36 +234,29 @@ CSessionManager::CContextWorkerHandler::handle(
                 if (event->status == Event::TStatus::END) {
                     try {
                         is_context_valid = context->update(event);
-
                         if (is_context_valid &&
                             checkOneOf(
                                 event->operation,
                                 Event::TOperation::READ,
-                                Event::TOperation::WRITE,
-                                Event::TOperation::CLOSE))
+                                Event::TOperation::WRITE))
                         {
-                            // repeat rw
+                            // repeat rw only if more data available
                             event->status = Event::TStatus::BEGIN;
                             events_to_repeat.push_back(event);
-                            LOGT << "repeat by context: " << event;
+                            //LOGT << "repeat by context: " << event;
                             continue; // <---
                         } else {
-                            LOGT << "skip: " << event;
-                        }
-
-                        if (event->operation == Event::TOperation::CLOSE) {
-                            LOGT << "finalize on close end: " << event;
-                            event->stream->finalize();
-                            m_multiplexer->unsubscribe(event->stream);
+                            //LOGT << \"skip: \";// << event;
                         }
                     } catch (std::exception const &e) {
                         LOGE
-                            << event
-                            << "\n" << e.what()
-                            << "\n" << event->stream->getURI();
+                            << "handling event error: " << e.what()
+                            << "\n  event: " << event
+                            << " " << event->stream->getURI();
                         event->operation =  Event::TOperation::ERROR_;
                     }
 
+                    // todo: client reconnect
                     if (event->operation == Event::TOperation::ERROR_)
                         is_context_valid = false;
 
@@ -240,19 +268,24 @@ CSessionManager::CContextWorkerHandler::handle(
                 auto events__ = m_context_manager->releaseContext(context);
                 events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
             } else {
-                LOGT << "remove context";
-//                context->popEvents();
+                //LOGT << "remove context";
+                context->popEvents();
                 m_context_manager->removeContext(context);
             }
 
         } else {
-//            // finalize orphans
-//            if (worker_event->stream && !worker_event->stream->getHandles().empty()) {
-//                LOGW << "orphan event, unsubscribing: " << worker_event;
-//                m_multiplexer->unsubscribe(worker_event->stream);
-//            }
+            // Context already acquired (occupied by another worker)
+            // Put event back to the queue for retry
+            if (worker_event->stream && !worker_event->stream->getHandles().empty()) {
+                //LOGT << "context busy, retry: " << worker_event;
+                events_to_repeat.push_back(worker_event);
+            }
         }
     }
+
+    events_to_repeat = removeDuplicates(events_to_repeat);
+
+    //LOGT << "multiplexer wake events to repeat: " << events_to_repeat;
 
     m_multiplexer->wake(events_to_repeat);
     return {};

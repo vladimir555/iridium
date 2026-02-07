@@ -12,6 +12,7 @@ jsonrcp
 rtsp
 simd json parser
 node diff for transferring
+kasperskyos io
 
 video codec wrapper: libaom + libopus
 or
