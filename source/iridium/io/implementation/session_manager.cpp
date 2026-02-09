@@ -168,87 +168,78 @@ CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::IHandler::TOutputItems events_to_repeat;
 
     for (auto const &worker_event: removeDuplicates(events_)) {
+        try {
+            if (worker_event->stream->getHandles().empty() &&
+                worker_event->operation != Event::TOperation::OPEN &&
+                worker_event->operation != Event::TOperation::CLOSE &&
+                worker_event->operation != Event::TOperation::ERROR_ &&
+                worker_event->operation != Event::TOperation::TIMEOUT)
+            {
+                continue; // <---
+            }
 
-        if (worker_event->stream->getHandles().empty() &&
-            worker_event->operation != Event::TOperation::OPEN &&
-            worker_event->operation != Event::TOperation::CLOSE &&
-            worker_event->operation != Event::TOperation::ERROR_ &&
-            worker_event->operation != Event::TOperation::TIMEOUT)
-        {
-            continue; // <---
-        }
+            // events for multiple contexts
+            if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
+                bool is_context_valid = true;
 
-        // events for multiple contexts
-        if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
-            bool is_context_valid = true;
+                auto context_events = removeDuplicates(context->popEvents());
 
-            auto context_events = removeDuplicates(context->popEvents());
+                // events for one context
+                for (auto const &event: context_events) {
+                    if (event->status == Event::TStatus::BEGIN) {
+                        try {
+                            if (event->operation == Event::TOperation::OPEN) {
+                                event->stream->initialize();
+                                m_multiplexer->subscribe(event->stream);
+                            } else {
+                                // Set operation flag and move to END for batched processing
+                                context->setOperationFlag(event->operation);
+                                event->status = Event::TStatus::END;
+                                events_to_repeat.push_back(event);
+                            }
+                        } catch (std::exception const &e) {
+                            LOGE
+                                << "handling event error: " << e.what()
+                                << "\n  event: " << event
+                                << " " << event->stream->getURI();
 
-            LOGT << "[WORKER] context events:" << context_events;
-
-            // events for one context
-            for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
-                // if (!is_context_valid)
-                //     break; // --->
-
-                if (event->status == Event::TStatus::BEGIN) {
-                    try {
-                        if (event->operation == Event::TOperation::OPEN) {
-                            event->stream->initialize();
-                            m_multiplexer->subscribe(event->stream);
-                        } else {
-                            // Set operation flag and move to END for batched processing
-                            context->setOperationFlag(event->operation);
-                            event->status = Event::TStatus::END;
+                            // Convert to ERROR_ and let END handler process it
+                            event->operation    = Event::TOperation::ERROR_;
+                            event->status       = Event::TStatus::END;
                             events_to_repeat.push_back(event);
                         }
-                    } catch (std::exception const &e) {
-                        LOGE
-                            << "handling event error: " << e.what()
-                            << "\n  event: " << event
-                            << " " << event->stream->getURI();
-
-                        // Convert to ERROR_ and let END handler process it
-                        event->operation    = Event::TOperation::ERROR_;
-                        event->status       = Event::TStatus::END;
-                        events_to_repeat.push_back(event);
                     }
-                }
 
-                else
-
-                if (event->status == Event::TStatus::END) {
-                    try {
-                        // OPEN only needs update, others use processOperationFlags
-                        if (event->operation == Event::TOperation::OPEN) {
-                            is_context_valid = context->update(event);
-                        } else {
-                            is_context_valid = context->processOperationFlags(event);
+                    else if (event->status == Event::TStatus::END) {
+                        try {
+                            // OPEN only needs update, others use processOperationFlags
+                            if (event->operation == Event::TOperation::OPEN) {
+                                is_context_valid = context->update(event);
+                            } else {
+                                is_context_valid = context->processOperationFlags(event);
+                            }
+                        } catch (std::exception const &e) {
+                            LOGE
+                                << "handling event error: " << e.what()
+                                << "\n  event:" << event;
+                            is_context_valid = false;
                         }
-                    } catch (std::exception const &e) {
-                        LOGE
-                            << "handling event error: " << e.what()
-                            << "\n  event:" << event;
-                        is_context_valid = false;
+
+                        if (event->operation == Event::TOperation::ERROR_)
+                            is_context_valid = false;
                     }
+                } // for
 
-                    if (event->operation == Event::TOperation::ERROR_)
-                        is_context_valid = false;
+                if (!is_context_valid)
+                    m_context_manager->removeContext(context);
 
-                    // todo: client reconnect
-                    if (event->operation == Event::TOperation::ERROR_)
-                        is_context_valid = false;
-                }
-            } // for
-
-            if (!is_context_valid)
-                m_context_manager->removeContext(context);
-
-            auto events__ = m_context_manager->releaseContext(context);
-            events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
-
-        } else {
-            LOGT << "event without context: " << worker_event;
+                auto events__ = m_context_manager->releaseContext(context);
+                events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
+            }
+        } catch (std::exception const &e) {
+            LOGE << "CSessionManager worker loop error: " << e.what() << "\n  event: " << worker_event;
+        } catch (...) {
+            LOGE << "CSessionManager worker loop error: unknown\n  event: " << worker_event;
         }
     }
 

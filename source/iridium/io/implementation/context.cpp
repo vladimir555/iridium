@@ -103,11 +103,7 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
     auto pipe = m_map_stream_pipe[event->stream];
     if (!pipe) {
         // Pipe not found - this can happen if context is marked for removal
-        // For CLOSE events, just return false to proceed with cleanup
-        if (event->operation == Event::TOperation::CLOSE)
-            return false;
-        // For other operations, throw error
-        throw std::runtime_error("context transmitting error: pipe not found");
+        return false; // ----->
     }
 
     return pipe->transmit(event);

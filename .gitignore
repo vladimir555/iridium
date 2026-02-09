@@ -25,3 +25,4 @@ cpp.hint
 .ninja_deps
 .ninja_log
 .cmake
+build-make/

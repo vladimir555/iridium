@@ -63,8 +63,15 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
         }
         if (event->status == Event::TStatus::END) {
             //LOGT << "finalize orphan stream: " << event;
-            if (!event->stream->getHandles().empty())
-                event->stream->finalize();
+            if (!event->stream->getHandles().empty()) {
+                try {
+                    event->stream->finalize();
+                } catch (std::exception const &e) {
+                    LOGW << "finalize orphan stream error: " << e.what() << " " << event->stream->getURI();
+                } catch (...) {
+                    LOGW << "finalize orphan stream error: unknown " << event->stream->getURI();
+                }
+            }
         }
     }
 
