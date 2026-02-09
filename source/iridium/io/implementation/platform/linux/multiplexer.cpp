@@ -213,46 +213,39 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
 
 
 void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
-//    if (m_epoll_fd == 0)
-//        throw std::runtime_error("epoll add error: not initialized"); // ----->
-
     for (auto const &fd: stream->getHandles()) {
-
-        if (fd > 0 && m_map_fd_stream.find(fd) == m_map_fd_stream.end()) {
-            //        LOGT << m_epoll_fd << " fd " << stream->getID();
-
+        if (fd > 0) {
             struct epoll_event event = {};
-
-            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLRDHUP | EPOLLET;
+            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLRDHUP;
             event.data.fd   = fd;
 
-            //        LOGT << "add internal: " << stream->getID();
-            int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);
-            if (r < 0 && errno != EEXIST)
-                assertOK(r, "epoll add error");
-
-            m_map_fd_stream[fd] = stream;
-
-            //        // todo: check overflow
-            //        eventfd_write(m_event_fd, 0);
+            auto it = m_map_fd_stream.find(fd);
+            if (it != m_map_fd_stream.end()) {
+                if (it->second != stream) {
+                    epoll_ctl(m_epoll_fd, EPOLL_CTL_MOD, fd, &event);
+                    it->second = stream;
+                }
+            } else {
+                int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);
+                if (r < 0 && errno == EEXIST)
+                    epoll_ctl(m_epoll_fd, EPOLL_CTL_MOD, fd, &event);
+                else
+                    assertOK(r, "epoll add error");
+                m_map_fd_stream[fd] = stream;
+            }
         }
     }
 }
 
 
 void CMultiplexer::delInternal(IStream::TSharedPtr const &stream) {
-//    if (m_epoll_fd == 0)
-//        throw std::runtime_error("epoll add error: not initialized"); // ----->
-
     for (auto const &fd: stream->getHandles()) {
-
-        //    LOGT << "epoll del: " << m_epoll_fd << " fd " << stream->getID();
         if (fd > 0) {
-            int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr);
-            if (r < 0 && errno != ENOENT)
-                assertOK(r, "epoll del error");
-            //        stream->finalize();
-            m_map_fd_stream.erase(fd);
+            auto it = m_map_fd_stream.find(fd);
+            if (it != m_map_fd_stream.end() && it->second == stream) {
+                epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr);
+                m_map_fd_stream.erase(it);
+            }
         }
     }
 }

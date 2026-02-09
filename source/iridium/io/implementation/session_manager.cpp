@@ -34,7 +34,7 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     if (filtered.empty())
         return {};
 
-    std::sort(filtered.begin(), filtered.end(),
+    std::stable_sort(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
             return
                 std::tie(a->stream, a->operation, a->status) <
@@ -69,7 +69,7 @@ CSessionManager::CSessionManager()
         CWorkerPool<Event::TSharedPtr>::create(
             "context",
             createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-                std::thread::hardware_concurrency(), m_context_manager, m_multiplexer))),
+                1, m_context_manager, m_multiplexer))),
     m_multiplexer_thread(
         CThread::create(
             "multiplexer",
@@ -130,9 +130,6 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
 
             for (auto const &event: events)
                 m_context_worker->push(event);
-
-            if (!events.empty())
-                ;//LOGT << "multiplexer events:\n" << events;
         } catch (std::exception const &e) {
             LOGE << "multiplexer thread error: " << e.what();
             threading::sleep(100);
@@ -212,12 +209,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
                     else if (event->status == Event::TStatus::END) {
                         try {
-                            // OPEN only needs update, others use processOperationFlags
-                            if (event->operation == Event::TOperation::OPEN) {
-                                is_context_valid = context->update(event);
-                            } else {
-                                is_context_valid = context->processOperationFlags(event);
-                            }
+                            is_context_valid = context->processOperationFlags(event);
                         } catch (std::exception const &e) {
                             LOGE
                                 << "handling event error: " << e.what()

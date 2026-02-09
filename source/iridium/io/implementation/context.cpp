@@ -268,36 +268,39 @@ void CContext::setOperationFlag(Event::TOperation op) {
 
 
 bool CContext::processOperationFlags(Event::TSharedPtr const &event) {
-    // Process flags: transmit READ/WRITE in loop while data available
-    // Then apply CLOSE if needed, then update
+    if (event->operation == Event::TOperation::OPEN) {
+        bool res = update(event);
+        if (res) {
+            m_flag_read = true;
+            m_flag_write = true;
+            bool transmit_result = true;
+            while (transmit_result) {
+                transmit_result = transmit(event);
+            }
+        }
+        return res;
+    }
 
     bool transmit_result = true;
-
-    // Step 1: Loop transmit for READ/WRITE while data is available
     while ((m_flag_read || m_flag_write) && transmit_result) {
         transmit_result = transmit(event);
         if (!transmit_result) {
-            // No more data to read/write
             m_flag_read = false;
             m_flag_write = false;
             break;
         }
     }
 
-    // Step 2: If transmit failed and CLOSE flag is set - switch to CLOSE
     if (!transmit_result && m_flag_close) {
         m_flag_close = false;
         event->operation = Event::TOperation::CLOSE;
         event->status = Event::TStatus::END;
     } else {
-        // Clear flags
         m_flag_read = false;
         m_flag_write = false;
         m_flag_close = false;
     }
 
-    // Step 3: Call update and return its result
-    // If update returns false, context will be removed
     return update(event);
 }
 

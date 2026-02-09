@@ -13,8 +13,8 @@ using std::string;
 namespace iridium::io::implementation {
 
 
-size_t const CPipe::DEFAULT_BUFFER_SIZE  = 248;
-size_t const CPipe::DEFAULT_BUFFER_COUNT = 64;  // Increased from 8 to handle larger output (248*64 = 15.8KB max)
+size_t const CPipe::DEFAULT_BUFFER_SIZE  = 16384;
+size_t const CPipe::DEFAULT_BUFFER_COUNT = 128;
 
 
 CPipe::CPipe()

@@ -107,8 +107,8 @@ void CProcessStream::initialize() {
         );
 
         assertOK(
-            posix_spawn_file_actions_adddup2(&actions, cerr_pipe[1], 2),
-           "posix_spawn_file_actions_adddup2, cerr_pipe"
+            posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 2),
+           "posix_spawn_file_actions_adddup2, cout_pipe"
         );
 
 //        assertOK(
@@ -175,6 +175,7 @@ void CProcessStream::initialize() {
 
         close(cin_pipe[0]);
         close(cout_pipe[1]);
+        close(cerr_pipe[0]);
         close(cerr_pipe[1]);
 
         m_fd_writer = cin_pipe[1];
