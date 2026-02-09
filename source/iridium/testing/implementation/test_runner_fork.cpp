@@ -82,6 +82,11 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         }
 
         auto results = process_result_queue->pop(m_timeout);
+        if (results.empty()) {
+            LOGF << "TIMEOUT: no results received for " << convert<string>(m_timeout);
+            break;
+        }
+
         //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 
         for (auto const &result: results) {

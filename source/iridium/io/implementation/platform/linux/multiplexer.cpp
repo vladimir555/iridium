@@ -75,7 +75,7 @@ void CMultiplexer::initialize() {
 
     struct epoll_event event = {};
 
-    event.events    = EPOLLIN | EPOLLET;
+    event.events    = EPOLLIN;
     event.data.fd   = m_event_fd;
 
     assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
@@ -120,78 +120,73 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 
 
 std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
-    if (!m_epoll_fd)
+    int epoll_fd = m_epoll_fd.load();
+    if (!epoll_fd)
         return {}; // ----->
-
-    LOCK_SCOPE();
-
-    if (m_is_closing) {
-//        LOGT << "close epoll";
-        ::close(m_epoll_fd);
-        m_epoll_fd = 0;
-        return {}; // ----->
-    }
-
-    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
     std::list<Event::TSharedPtr> events;
 
     for (auto const &stream: m_streams_to_add->pop(false)) {
+        LOCK_SCOPE();
         addInternal(stream);
         events.push_back(
             Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
     }
 
     for (auto const &stream: m_streams_to_del->pop(false)) {
+        LOCK_SCOPE();
         delInternal(stream);
         LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
         events.push_back(
             Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
     }
 
-//    LOGT << "wait epoll ...";
+    if (m_is_closing) {
+        LOCK_SCOPE();
+        if (m_epoll_fd) {
+            ::close(m_epoll_fd);
+            m_epoll_fd = 0;
+        }
+        return {}; // ----->
+    }
+
+    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
     auto count = epoll_wait(
-        m_epoll_fd,
+        epoll_fd,
         epoll_events,
         DEFAULT_EVENTS_COUNT_LIMIT,
         DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
 
-//    LOGT << "wait epoll OK: " << m_epoll_fd << " epoll count " << count;
+    if (count > 0) {
+        LOCK_SCOPE();
+        for (auto i = 0; i < count; i++) {
+            if (epoll_events[i].data.fd == m_event_fd) {
+                uint64_t val;
+            int r = eventfd_read(m_event_fd, &val);
+            if (r < 0 && errno != EAGAIN)
+                            assertOK(r, "eventfd_read");
+                continue; // <---
+            }
 
+            auto it = m_map_fd_stream.find(epoll_events[i].data.fd);
+            if (it == m_map_fd_stream.end())
+                continue;
 
+            auto stream = it->second;
 
-    for (auto i = 0; i < count; i++) {
-//        LOGT << "epoll event: fd " << epoll_events[i].data.fd << " code " <<
-//            TEpollEvent(epoll_events[i].events).convertToFlagsString();
+            if (epoll_events[i].events & EPOLLIN)
+                events.push_back(
+                    Event::create(stream, Event::TOperation::READ, Event::TStatus::BEGIN));
 
-//        LOGT << __FUNCTION__ << ",  id: " << epoll_events[i].data.fd << ", flags: " << TEpollEvent(epoll_events[i].events).convertToFlagsString();
+            if (epoll_events[i].events & EPOLLOUT)
+                events.push_back(
+                    Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
 
-        if (epoll_events[i].data.fd == m_event_fd) {
-            uint64_t val;
-            eventfd_read(m_event_fd, &val);
-            continue; // <---
+            if (epoll_events[i].events & (EPOLLHUP | EPOLLRDHUP))
+                events.push_back(
+                    Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
         }
-
-        if (epoll_events[i].events & EPOLLHUP) {
-            events.push_back(
-                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-            continue; // <---
-        }
-
-        if (epoll_events[i].events & EPOLLIN)
-            events.push_back(
-                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::READ, Event::TStatus::BEGIN));
-
-        if (epoll_events[i].events & EPOLLRDHUP) {
-            events.push_back(
-                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-            continue; // <---
-        }
-
-        if (epoll_events[i].events & EPOLLOUT)
-            events.push_back(
-                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::WRITE, Event::TStatus::BEGIN));
     }
 
     events.splice(events.end(), m_wake_events->pop(false));
@@ -233,9 +228,11 @@ void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
             event.data.fd   = fd;
 
             //        LOGT << "add internal: " << stream->getID();
-            assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event), "epoll add error");
+        int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);
+        if (r < 0 && errno != EEXIST)
+            assertOK(r, "epoll add error");
 
-            m_map_fd_stream[fd] = stream;
+                        m_map_fd_stream[fd] = stream;
 
             //        // todo: check overflow
             //        eventfd_write(m_event_fd, 0);
@@ -252,7 +249,9 @@ void CMultiplexer::delInternal(IStream::TSharedPtr const &stream) {
 
         //    LOGT << "epoll del: " << m_epoll_fd << " fd " << stream->getID();
         if (fd > 0) {
-            assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr), "epoll del error");
+            int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr);
+            if (r < 0 && errno != ENOENT)
+                assertOK(r, "epoll del error");
             //        stream->finalize();
             m_map_fd_stream.erase(fd);
         }

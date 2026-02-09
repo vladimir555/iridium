@@ -75,7 +75,7 @@ CSessionManager::CSessionManager()
         CWorkerPool<Event::TSharedPtr>::create(
             "context",
             createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-                std::thread::hardware_concurrency(), m_context_manager, m_multiplexer))),
+                16, m_context_manager, m_multiplexer))),
     m_multiplexer_thread(
         CThread::create(
             "multiplexer",
@@ -127,16 +127,22 @@ void CSessionManager::CMultiplexerThreadHandler::finalize() {}
 
 void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_running) {
     while (is_running) {
-        auto events             = m_multiplexer->waitEvents();
-        auto events_outdated    = m_context_manager->checkOutdatedStreams();
+        try {
+            auto events             = m_multiplexer->waitEvents();
+            auto events_outdated    = m_context_manager->checkOutdatedStreams();
 
-        events.insert(events.end(), events_outdated.begin(), events_outdated.end());
-        events = removeDuplicates(events);
+            events.insert(events.end(), events_outdated.begin(), events_outdated.end());
+            events = removeDuplicates(events);
 
-        m_context_worker->push(events);
+            for (auto const &event: events)
+                m_context_worker->push(event);
 
-        if (!events.empty())
-            ;//LOGT << "multiplexer events:\n" << events;
+            if (!events.empty())
+                ;//LOGT << "multiplexer events:\n" << events;
+        } catch (std::exception const &e) {
+            LOGE << "multiplexer thread error: " << e.what();
+            threading::sleep(100);
+        }
     }
 }
 
@@ -193,8 +199,6 @@ CSessionManager::CContextWorkerHandler::handle(
                         if (event->operation == Event::TOperation::OPEN) {
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
-                            event->status = Event::TStatus::END;
-                            events_to_repeat.push_back(event);
                         } else {
                             // Set operation flag and move to END for batched processing
                             context->setOperationFlag(event->operation);

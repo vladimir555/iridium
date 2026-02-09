@@ -37,7 +37,7 @@ public:
 
     typedef std::list<TItem> TItems;
 
-    virtual TItems pop(bool const &is_wait_required = true) = 0;
+    virtual TItems pop(bool const &is_wait_required = true, bool const &is_all = true) = 0;
     virtual TItems pop(std::chrono::nanoseconds const &timeout) = 0;
 };
 
