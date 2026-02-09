@@ -90,9 +90,9 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 
     LOCK_SCOPE();
 
-    m_acquired_contexts.erase(context);
-
     auto events = context->popEvents();
+
+    m_acquired_contexts.erase(context);
 
     // LOGT << "CContextManager::releaseContext, events: " << events;
 

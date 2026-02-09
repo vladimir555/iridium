@@ -24,7 +24,6 @@ using std::string;
 namespace iridium::io::implementation::platform {
 
 
-static size_t const DEFAULT_EVENTS_COUNT_LIMIT  = 1024;
 static size_t const DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 100;
 
 
@@ -126,19 +125,19 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
     std::list<Event::TSharedPtr> events;
 
-    for (auto const &stream: m_streams_to_add->pop(false)) {
-        LOCK_SCOPE();
-        addInternal(stream);
-        events.push_back(
-            Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
-    }
-
     for (auto const &stream: m_streams_to_del->pop(false)) {
         LOCK_SCOPE();
         delInternal(stream);
         LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
         events.push_back(
             Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
+    }
+
+    for (auto const &stream: m_streams_to_add->pop(false)) {
+        LOCK_SCOPE();
+        addInternal(stream);
+        events.push_back(
+            Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
     }
 
     if (m_is_closing) {
@@ -183,7 +182,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 events.push_back(
                     Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
 
-            if (epoll_events[i].events & (EPOLLHUP | EPOLLRDHUP))
+            if (epoll_events[i].events & (EPOLLHUP | EPOLLRDHUP | EPOLLERR))
                 events.push_back(
                     Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
         }
@@ -224,7 +223,7 @@ void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
 
             struct epoll_event event = {};
 
-            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLRDHUP;
+            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLRDHUP | EPOLLET;
             event.data.fd   = fd;
 
             //        LOGT << "add internal: " << stream->getID();
