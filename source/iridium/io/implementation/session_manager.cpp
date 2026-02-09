@@ -169,10 +169,11 @@ CSessionManager::CContextWorkerHandler::handle(
 
     for (auto const &worker_event: removeDuplicates(events_)) {
 
-        if (worker_event->stream->getHandles().empty() && worker_event->operation != Event::TOperation::OPEN)
+        if (worker_event->stream->getHandles().empty() &&
+            worker_event->operation != Event::TOperation::OPEN)
+        {
             continue; // <---
-
-        LOGT << "[WORKER] event: " << worker_event->operation << " status: " << worker_event->status;
+        }
 
         // events for multiple contexts
         if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
@@ -180,7 +181,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
             auto context_events = removeDuplicates(context->popEvents());
 
-            // LOGT << "context_events: " << context_events;
+            LOGT << "[WORKER] context events:" << context_events;
 
             // events for one context
             for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
@@ -192,30 +193,13 @@ CSessionManager::CContextWorkerHandler::handle(
                         if (event->operation == Event::TOperation::OPEN) {
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
-                        } else if (event->operation == Event::TOperation::CLOSE) {
-                            // For CLOSE BEGIN: defer processing by re-queuing it
-                            // This allows other pending READ/WRITE operations to complete first
-                            // Once most operations are done, CLOSE will be processed
+                            event->status = Event::TStatus::END;
                             events_to_repeat.push_back(event);
                         } else {
-                            // For READ/WRITE/ERROR_, call transmit
-                            auto is_transmitted =
-                                checkOneOf(
-                                    event->operation,
-                                    Event::TOperation::OPEN,
-                                    Event::TOperation::ERROR_) ||
-                                context->transmit(event);
-
-                            // LOGT << "[TRANSMIT] op: " << event->operation << " transmitted: " << is_transmitted;
-
-                            if (!is_transmitted && event->operation == Event::TOperation::CLOSE) {
-                                event->status = Event::TStatus::END;
-                                events_to_repeat.push_back(event);
-                            }
-                            else if (is_transmitted && event->operation != Event::TOperation::OPEN) {
-                                event->status = Event::TStatus::END;
-                                events_to_repeat.push_back(event);
-                            }
+                            // Set operation flag and move to END for batched processing
+                            context->setOperationFlag(event->operation);
+                            event->status = Event::TStatus::END;
+                            events_to_repeat.push_back(event);
                         }
                     } catch (std::exception const &e) {
                         LOGE
@@ -223,63 +207,48 @@ CSessionManager::CContextWorkerHandler::handle(
                             << "\n  event: " << event
                             << " " << event->stream->getURI();
 
+                        // Convert to ERROR_ and let END handler process it
                         event->operation    = Event::TOperation::ERROR_;
                         event->status       = Event::TStatus::END;
-
                         events_to_repeat.push_back(event);
                     }
-                    continue; // <---
                 }
+
+                else
 
                 if (event->status == Event::TStatus::END) {
                     try {
-                        is_context_valid = context->update(event);
-                        if (is_context_valid &&
-                            checkOneOf(
-                                event->operation,
-                                Event::TOperation::READ,
-                                Event::TOperation::WRITE))
-                        {
-                            // repeat rw only if more data available
-                            event->status = Event::TStatus::BEGIN;
-                            events_to_repeat.push_back(event);
-                            //LOGT << "repeat by context: " << event;
-                            continue; // <---
+                        // OPEN only needs update, others use processOperationFlags
+                        if (event->operation == Event::TOperation::OPEN) {
+                            is_context_valid = context->update(event);
                         } else {
-                            //LOGT << \"skip: \";// << event;
+                            is_context_valid = context->processOperationFlags(event);
                         }
                     } catch (std::exception const &e) {
                         LOGE
                             << "handling event error: " << e.what()
-                            << "\n  event: " << event
-                            << " " << event->stream->getURI();
-                        event->operation =  Event::TOperation::ERROR_;
+                            << "\n  event:" << event;
+                        is_context_valid = false;
                     }
+
+                    if (event->operation == Event::TOperation::ERROR_)
+                        is_context_valid = false;
 
                     // todo: client reconnect
                     if (event->operation == Event::TOperation::ERROR_)
                         is_context_valid = false;
-
-                    continue; // <---
                 }
-            }
+            } // for
 
             if (is_context_valid) {
                 auto events__ = m_context_manager->releaseContext(context);
                 events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
             } else {
-                //LOGT << "remove context";
-                context->popEvents();
                 m_context_manager->removeContext(context);
             }
 
         } else {
-            // Context already acquired (occupied by another worker)
-            // Put event back to the queue for retry
-            if (worker_event->stream && !worker_event->stream->getHandles().empty()) {
-                //LOGT << "context busy, retry: " << worker_event;
-                events_to_repeat.push_back(worker_event);
-            }
+            LOGT << "event without context: " << worker_event;
         }
     }
 

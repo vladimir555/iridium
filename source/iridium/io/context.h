@@ -19,6 +19,8 @@ public:
                  checkOutdatedStreams() = 0;
     virtual bool update  (Event::TSharedPtr const &event) = 0;
     virtual bool transmit(Event::TSharedPtr const &event) = 0;
+    virtual void setOperationFlag(Event::TOperation op) = 0;
+    virtual bool processOperationFlags(Event::TSharedPtr const &event) = 0;
     virtual void remove  () = 0;
 };
 

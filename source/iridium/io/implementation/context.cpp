@@ -25,7 +25,7 @@ void CContext::pushEvent(Event::TSharedPtr const &event) {
     LOCK_SCOPE();
 
     m_events->push(event);
-    // LOGT << "push event: " << event;
+    LOGT << "push event: " << event;
 }
 
 
@@ -41,7 +41,7 @@ std::list<Event::TSharedPtr> CContext::popEvents() {
             m_map_stream_timestamp[event->stream] = now;
     }
 
-    // LOGT << "pop events: " << events;
+    LOGT << "pop events: " << events;
     return events; // ----->
 }
 
@@ -251,6 +251,58 @@ void CContext::removeStream(IStream::TSharedPtr const &stream, bool const &is_se
     }
     LOCK_SCOPE();
     m_map_stream_timestamp.erase(stream);
+}
+
+
+void CContext::setOperationFlag(Event::TOperation op) {
+    switch(op) {
+        case Event::TOperation::READ:
+            m_flag_read = true;
+            break;
+        case Event::TOperation::WRITE:
+            m_flag_write = true;
+            break;
+        case Event::TOperation::CLOSE:
+            m_flag_close = true;
+            break;
+        default:
+            break;
+    }
+}
+
+
+bool CContext::processOperationFlags(Event::TSharedPtr const &event) {
+    // Process flags: transmit READ/WRITE in loop while data available
+    // Then apply CLOSE if needed, then update
+
+    bool transmit_result = true;
+
+    // Step 1: Loop transmit for READ/WRITE while data is available
+    while ((m_flag_read || m_flag_write) && transmit_result) {
+        transmit_result = transmit(event);
+        if (!transmit_result) {
+            // No more data to read/write
+            m_flag_read = false;
+            m_flag_write = false;
+            break;
+        }
+    }
+
+    // Step 2: If transmit failed and CLOSE flag is set - switch to CLOSE
+    if (!transmit_result && m_flag_close) {
+        m_flag_close = false;
+        event->operation = Event::TOperation::CLOSE;
+        event->status = Event::TStatus::END;
+    } else {
+        // Clear flags
+        m_flag_read = false;
+        m_flag_write = false;
+        m_flag_close = false;
+    }
+
+    // Step 3: Call update and return its result
+    // If update returns false, context will be removed
+    return update(event);
 }
 
 

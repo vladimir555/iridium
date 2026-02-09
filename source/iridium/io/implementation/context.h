@@ -35,6 +35,10 @@ public:
     bool update    (Event::TSharedPtr const &event) override;
     bool transmit  (Event::TSharedPtr const &event) override;
 
+    // Operation flags and processing
+    void setOperationFlag(Event::TOperation op);
+    bool processOperationFlags(Event::TSharedPtr const &event);
+
     void createPipe(std::string const &name) override;
     void removePipe(std::string const &name) override;
     void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader) override;
@@ -58,6 +62,11 @@ private:
         m_map_stream_pipe;
     std::unordered_map<IStream::TSharedPtr, std::chrono::system_clock::time_point>
         m_map_stream_timestamp;
+
+    // Operation flags for batched processing
+    bool m_flag_read = false;
+    bool m_flag_write = false;
+    bool m_flag_close = false;
 };
 
 

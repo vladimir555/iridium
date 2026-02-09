@@ -27,8 +27,10 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
 
     auto stream_context  = m_map_stream_context.find(event->stream);
     if  (stream_context != m_map_stream_context.end()) {
+
         auto context = stream_context->second;
         context->pushEvent(event);
+
         auto i  = m_acquired_contexts.find(context);
         if  (i == m_acquired_contexts.end()) {
             m_acquired_contexts.insert(context);
@@ -40,9 +42,9 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
             return context; // ----->
         } else {
             // context acquired
-            //LOGT
-                //<<"CContextManager::acquireContext end: " << event
-                //<< " return nullptr";
+            // LOGT
+            //     <<"CContextManager::acquireContext end: " << event
+            //     << " return nullptr";
             return nullptr; // ----->
         }
     }
