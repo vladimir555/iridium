@@ -93,8 +93,8 @@ void CSessionManager::initialize() {
 void CSessionManager::finalize() {
     //LOGT << "CSessionManager::finalize ...";
     m_multiplexer_thread->finalize();
-    m_multiplexer->finalize();
     m_context_worker->finalize();
+    m_multiplexer->finalize();
     //LOGT << "CSessionManager::finalize OK";
 }
 
@@ -240,12 +240,11 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             } // for
 
-            if (is_context_valid) {
-                auto events__ = m_context_manager->releaseContext(context);
-                events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
-            } else {
+            if (!is_context_valid)
                 m_context_manager->removeContext(context);
-            }
+
+            auto events__ = m_context_manager->releaseContext(context);
+            events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
 
         } else {
             LOGT << "event without context: " << worker_event;

@@ -215,21 +215,13 @@ size_t CWorker<TInputItem, TOutputItem>::push(TInputItems const &items) {
 
 template<typename TInputItem, typename TOutputItem>
 typename CWorker<TInputItem, TOutputItem>::TOutputItems CWorker<TInputItem, TOutputItem>::pop(bool const &is_wait_required) {
-//    return m_output_queue->pop(is_wait_required);
-//    std::printf("worker pop wait ...\n");
-    auto result = m_input_queue->pop(is_wait_required);
-//    std::printf("worker pop wait OK\n");
-    return result;
+    return m_output_queue->pop(is_wait_required);
 }
 
 
 template<typename TInputItem, typename TOutputItem>
 typename CWorker<TInputItem, TOutputItem>::TOutputItems CWorker<TInputItem, TOutputItem>::pop(std::chrono::nanoseconds const &timeout) {
-//    return m_output_queue->pop(timeout);
-//    std::printf("worker pop timeout ...\n");
-    auto result = m_input_queue->pop(timeout);
-//    std::printf("worker pop timeout OK\n");
-    return result;
+    return m_output_queue->pop(timeout);
 }
 
 

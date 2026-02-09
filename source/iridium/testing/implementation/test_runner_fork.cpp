@@ -156,9 +156,10 @@ void CTestRunnerFork::scan(
     list<std::string>           &paths)
 {
     for (auto const &child: *node) {
+        string child_path = path + (path.empty() || path.back() != '/' ? "/" : "") + child->getName();
         if (child->hasChilds() && !child->begin()->get()->hasChilds())
-            paths.push_back(path + "/" + child->getName());
-        scan(child, path + "/" + child->getName(), paths);
+            paths.push_back(child_path);
+        scan(child, child_path, paths);
     }
 }
 

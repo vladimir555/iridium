@@ -62,6 +62,8 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
     m_is_empty = m_items.empty();
     auto size  = m_items.size();
 
+    this->notify_one();
+
     return size; // ----->
 }
 
@@ -70,8 +72,13 @@ template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
     LOCK_SCOPE();
 
+    if (items.empty())
+        return m_items.size();
+
     m_items.insert(m_items.end(), items.begin(), items.end());
     m_is_empty = m_items.empty();
+
+    this->notify_one();
 
     return m_items.size();
 }
@@ -80,7 +87,7 @@ size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
 template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_wait_required) {
     LOCK_SCOPE();
-    if (m_is_empty && is_wait_required)
+    while (m_is_empty && is_wait_required && this->isWaitable())
         LOCK_SCOPE_TRY_WAIT();
 
     m_is_empty = true;
@@ -92,7 +99,7 @@ template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout) {
     LOCK_SCOPE();
 
-    if (m_is_empty)
+    if (m_is_empty && this->isWaitable())
         LOCK_SCOPE_TRY_WAIT(timeout);
 
     m_is_empty = true;

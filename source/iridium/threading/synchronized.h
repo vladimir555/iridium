@@ -36,6 +36,9 @@ protected:
     virtual ~Synchronized() = default;
 
     void interrupt();
+    void notify_one() const;
+    void notify_all() const;
+    bool isWaitable() const;
 
     class Locker:
         public pattern::NonCopyable,
@@ -72,6 +75,24 @@ private:
 
 
 template<typename TMutex, bool const is_tracable>
+void Synchronized<TMutex, is_tracable>::notify_one() const {
+    m_cv.notify_one();
+}
+
+
+template<typename TMutex, bool const is_tracable>
+void Synchronized<TMutex, is_tracable>::notify_all() const {
+    m_cv.notify_all();
+}
+
+
+template<typename TMutex, bool const is_tracable>
+bool Synchronized<TMutex, is_tracable>::isWaitable() const {
+    return m_is_waitable;
+}
+
+
+template<typename TMutex, bool const is_tracable>
 void Synchronized<TMutex, is_tracable>::interrupt() {
     m_is_waitable = false;
     m_cv.notify_all();
@@ -104,7 +125,6 @@ Synchronized<TMutex, is_tracable>::Locker::~Locker() {
             m_file, m_line);
 
     m_l.unlock();
-    m_s->m_cv.notify_one();
 }
 
 

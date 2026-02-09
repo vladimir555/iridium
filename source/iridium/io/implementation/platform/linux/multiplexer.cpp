@@ -24,8 +24,8 @@ using std::string;
 namespace iridium::io::implementation::platform {
 
 
-//static size_t DEFAULT_EVENTS_COUNT_LIMIT        = 2;
-static size_t DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 100;
+static size_t const DEFAULT_EVENTS_COUNT_LIMIT  = 1024;
+static size_t const DEFAULT_EVENTS_WAITING_TIMEOUT_MS = 100;
 
 
 DEFINE_ENUM(
@@ -70,12 +70,12 @@ void CMultiplexer::initialize() {
 
     m_is_closing = false;
 
-    m_epoll_fd = epoll_create(DEFAULT_EVENTS_COUNT_LIMIT);
+    m_epoll_fd = epoll_create1(0);
     m_event_fd = eventfd(0, EFD_NONBLOCK);
 
     struct epoll_event event = {};
 
-    event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET | EPOLLRDHUP;
+    event.events    = EPOLLIN | EPOLLET;
     event.data.fd   = m_event_fd;
 
     assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, m_event_fd, &event), "epoll add error");
@@ -89,40 +89,33 @@ void CMultiplexer::finalize() {
         throw std::runtime_error("multiplexer finalization error: epoll is not initialized"); // ----->
 
     m_is_closing = true;
-    int64_t i = 0;
+    uint64_t i = 1;
     assertOK(write(m_event_fd, &i, 8), "multiplexer finalization error: write event_fd error");
     m_epoll_fd = 0;
 }
 
 
 void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
-//    LOGT << "! CMultiplexer::subscribe";
     if (!stream || m_is_closing)
         return; // ----->
 
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer subscribing error: epoll is not initialized"); // ----->
 
-//    std::const_pointer_cast<IStream>(stream)->initialize();
-
-//    LOGT << __FUNCTION__ << ",   id: " << stream->getID();
-
     m_streams_to_add->push(stream);
-    eventfd_write(m_event_fd, 0);
+    eventfd_write(m_event_fd, 1);
 }
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
-    if (!stream || stream->getHandles().empty() || m_is_closing)
+    if (!stream || m_is_closing)
         return;
-
-//    LOGT << __FUNCTION__ << ", id: " << stream->getID();
 
     if (!m_epoll_fd)
         throw std::runtime_error("multiplexer unsubscribing error: epoll is not initialized"); // ----->
 
     m_streams_to_del->push(stream);
-    eventfd_write(m_event_fd, 0);
+    eventfd_write(m_event_fd, 1);
 }
 
 
@@ -174,8 +167,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
 //        LOGT << __FUNCTION__ << ",  id: " << epoll_events[i].data.fd << ", flags: " << TEpollEvent(epoll_events[i].events).convertToFlagsString();
 
-        if (epoll_events[i].data.fd == m_event_fd)
+        if (epoll_events[i].data.fd == m_event_fd) {
+            uint64_t val;
+            eventfd_read(m_event_fd, &val);
             continue; // <---
+        }
 
         if (epoll_events[i].events & EPOLLHUP) {
             events.push_back(
@@ -209,7 +205,7 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
         throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
 
     m_wake_events->push(event);
-    eventfd_write(m_event_fd, 0);
+    eventfd_write(m_event_fd, 1);
 }
 
 
@@ -218,7 +214,7 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
         throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
 
     m_wake_events->push(events);
-    eventfd_write(m_event_fd, 0);
+    eventfd_write(m_event_fd, 1);
 }
 
 
