@@ -163,9 +163,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         for (auto i = 0; i < count; i++) {
             if (epoll_events[i].data.fd == m_event_fd) {
                 uint64_t val;
-            int r = eventfd_read(m_event_fd, &val);
-            if (r < 0 && errno != EAGAIN)
-                            assertOK(r, "eventfd_read");
+                int r = eventfd_read(m_event_fd, &val);
+                if (r < 0 && errno != EAGAIN)
+                    assertOK(r, "eventfd_read");
                 continue; // <---
             }
 
@@ -224,15 +224,15 @@ void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
 
             struct epoll_event event = {};
 
-            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
+            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLRDHUP;
             event.data.fd   = fd;
 
             //        LOGT << "add internal: " << stream->getID();
-        int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);
-        if (r < 0 && errno != EEXIST)
-            assertOK(r, "epoll add error");
+            int r = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);
+            if (r < 0 && errno != EEXIST)
+                assertOK(r, "epoll add error");
 
-                        m_map_fd_stream[fd] = stream;
+            m_map_fd_stream[fd] = stream;
 
             //        // todo: check overflow
             //        eventfd_write(m_event_fd, 0);

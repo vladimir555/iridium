@@ -63,7 +63,8 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
         }
         if (event->status == Event::TStatus::END) {
             //LOGT << "finalize orphan stream: " << event;
-            event->stream->finalize();
+            if (!event->stream->getHandles().empty())
+                event->stream->finalize();
         }
     }
 
@@ -80,11 +81,13 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 //    if (!context)
 //        return {};
 
+    LOCK_SCOPE();
+
+    m_acquired_contexts.erase(context);
+
     auto events = context->popEvents();
 
     // LOGT << "CContextManager::releaseContext, events: " << events;
-
-    LOCK_SCOPE();
 
     if (m_contexts_to_remove.count(context) > 0 && events.empty()) {
 //        LOGT << "CContextManager::releaseContext, remove context";
@@ -103,7 +106,6 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
         // LOGT << "CContextManager::releaseContext: empty";
         return {}; // ----->
     } else {
-        m_acquired_contexts.erase(context);
         return events; // ----->
     }
 }

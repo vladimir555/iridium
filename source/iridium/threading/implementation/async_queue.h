@@ -32,7 +32,7 @@ public:
     size_t push(TItem const &item) override;
     size_t push(std::list<TItem> const &items) override;
 
-    std::list<TItem> pop(bool const &is_wait_required = true, bool const &is_all = true) override;
+    std::list<TItem> pop(bool const &is_wait_required = true) override;
     std::list<TItem> pop(std::chrono::nanoseconds const &timeout) override;
 
     void interrupt() override;
@@ -62,8 +62,6 @@ size_t CAsyncQueue<TItem>::push(TItem const &item) {
     m_is_empty = m_items.empty();
     auto size  = m_items.size();
 
-    this->notify_one();
-
     return size; // ----->
 }
 
@@ -72,41 +70,21 @@ template<typename TItem>
 size_t CAsyncQueue<TItem>::push(std::list<TItem> const &items) {
     LOCK_SCOPE();
 
-    if (items.empty())
-        return m_items.size();
-
     m_items.insert(m_items.end(), items.begin(), items.end());
     m_is_empty = m_items.empty();
-
-    this->notify_one();
 
     return m_items.size();
 }
 
 
 template<typename TItem>
-std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_wait_required, bool const &is_all) {
+std::list<TItem> CAsyncQueue<TItem>::pop(bool const &is_wait_required) {
     LOCK_SCOPE();
-    while (m_is_empty && is_wait_required && this->isWaitable())
+    if (m_is_empty && is_wait_required)
         LOCK_SCOPE_TRY_WAIT();
 
-    if (m_items.empty()) {
-        m_is_empty = true;
-        return {};
-    }
-
-    if (is_all) {
-        m_is_empty = true;
-        return std::move(m_items); // ----->
-    } else {
-        std::list<TItem> result;
-        result.push_back(std::move(m_items.front()));
-        m_items.pop_front();
-        m_is_empty = m_items.empty();
-        if (!m_is_empty)
-            this->notify_one();
-        return result;
-    }
+    m_is_empty = true;
+    return std::move(m_items); // ----->
 }
 
 
@@ -114,15 +92,8 @@ template<typename TItem>
 std::list<TItem> CAsyncQueue<TItem>::pop(std::chrono::nanoseconds const &timeout) {
     LOCK_SCOPE();
 
-    if (m_is_empty && this->isWaitable()) {
-        auto const start = std::chrono::steady_clock::now();
-        while (m_is_empty && this->isWaitable()) {
-            auto const elapsed = std::chrono::steady_clock::now() - start;
-            if (elapsed >= timeout)
-                break;
-            LOCK_SCOPE_TRY_WAIT(timeout - elapsed);
-        }
-    }
+    if (m_is_empty)
+        LOCK_SCOPE_TRY_WAIT(timeout);
 
     m_is_empty = true;
 

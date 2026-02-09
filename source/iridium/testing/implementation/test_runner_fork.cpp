@@ -82,11 +82,6 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         }
 
         auto results = process_result_queue->pop(m_timeout);
-        if (results.empty()) {
-            LOGF << "TIMEOUT: no results received for " << convert<string>(m_timeout);
-            break;
-        }
-
         //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 
         for (auto const &result: results) {
@@ -161,10 +156,9 @@ void CTestRunnerFork::scan(
     list<std::string>           &paths)
 {
     for (auto const &child: *node) {
-        string child_path = path + (path.empty() || path.back() != '/' ? "/" : "") + child->getName();
         if (child->hasChilds() && !child->begin()->get()->hasChilds())
-            paths.push_back(child_path);
-        scan(child, child_path, paths);
+            paths.push_back(path + "/" + child->getName());
+        scan(child, path + "/" + child->getName(), paths);
     }
 }
 
