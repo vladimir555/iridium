@@ -96,7 +96,7 @@ bool CContext::update(Event::TSharedPtr const &event) {
 
 
 bool CContext::transmit(Event::TSharedPtr const &event) {
-    LOGT << "[TRANSMIT_PIPE] op: " << event->operation << " has_protocol: " << (m_protocol != nullptr);
+    // LOGT << "[TRANSMIT_PIPE] op: " << event->operation << " has_protocol: " << (m_protocol != nullptr);
     if (!m_protocol)
         return false; // ----->
 

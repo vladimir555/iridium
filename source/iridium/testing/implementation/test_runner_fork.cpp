@@ -186,7 +186,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::Event::TSharedPtr           const &event,
     io::IPipeManager::TSharedPtr    const &pipe_manager)
 {
-    if (m_process_result->output) {
+    if (m_process_result->output || event->operation == io::Event::TOperation::ERROR_) {
         //LOGT << "return false";
         return false; // ----->
     }

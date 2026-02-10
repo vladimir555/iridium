@@ -94,6 +94,7 @@ void CSessionManager::finalize() {
     //LOGT << "CSessionManager::finalize ...";
     m_multiplexer_thread->finalize();
     m_multiplexer->finalize();
+    // todo: close event for all handlers
     m_context_worker->finalize();
     //LOGT << "CSessionManager::finalize OK";
 }
@@ -172,7 +173,7 @@ CSessionManager::CContextWorkerHandler::handle(
         if (worker_event->stream->getHandles().empty() && worker_event->operation != Event::TOperation::OPEN)
             continue; // <---
 
-        LOGT << "[WORKER] event: " << worker_event->operation << " status: " << worker_event->status;
+        //LOGT << "[WORKER] event:" << worker_event;
 
         // events for multiple contexts
         if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
@@ -187,34 +188,36 @@ CSessionManager::CContextWorkerHandler::handle(
                 // if (!is_context_valid)
                 //     break; // --->
 
+                LOGT << "context event: " << event;
+
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
                         if (event->operation == Event::TOperation::OPEN) {
+                            LOGT << "[INIT]";
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
-                        } else if (event->operation == Event::TOperation::CLOSE) {
-                            // For CLOSE BEGIN: defer processing by re-queuing it
-                            // This allows other pending READ/WRITE operations to complete first
-                            // Once most operations are done, CLOSE will be processed
-                            events_to_repeat.push_back(event);
                         } else {
-                            // For READ/WRITE/ERROR_, call transmit
-                            auto is_transmitted =
-                                checkOneOf(
-                                    event->operation,
-                                    Event::TOperation::OPEN,
-                                    Event::TOperation::ERROR_) ||
-                                context->transmit(event);
+                            if (event->operation != Event::TOperation::ERROR_) {
+                                auto is_transmitted = context->transmit(event);
 
-                            // LOGT << "[TRANSMIT] op: " << event->operation << " transmitted: " << is_transmitted;
+                                LOGT << "[TRANSMIT]: " << is_transmitted;
 
-                            if (!is_transmitted && event->operation == Event::TOperation::CLOSE) {
-                                event->status = Event::TStatus::END;
-                                events_to_repeat.push_back(event);
-                            }
-                            else if (is_transmitted && event->operation != Event::TOperation::OPEN) {
-                                event->status = Event::TStatus::END;
-                                events_to_repeat.push_back(event);
+                                if (is_transmitted) {
+                                    if (event->operation == Event::TOperation::CLOSE) {
+                                        // repeat close begin
+                                        events_to_repeat.push_back(event);
+                                    } else {
+                                        event->status = Event::TStatus::END;
+                                        events_to_repeat.push_back(event);
+                                    }
+                                } else {
+                                    if (event->operation == Event::TOperation::CLOSE) {
+                                        // LOGT << "[FINALIZE]";
+                                        // event->stream->finalize();
+                                        event->status = Event::TStatus::END;
+                                        events_to_repeat.push_back(event);
+                                    }
+                                }
                             }
                         }
                     } catch (std::exception const &e) {
@@ -226,6 +229,7 @@ CSessionManager::CContextWorkerHandler::handle(
                         event->operation    = Event::TOperation::ERROR_;
                         event->status       = Event::TStatus::END;
 
+                        // to protocol controller
                         events_to_repeat.push_back(event);
                     }
                     continue; // <---
@@ -234,6 +238,16 @@ CSessionManager::CContextWorkerHandler::handle(
                 if (event->status == Event::TStatus::END) {
                     try {
                         is_context_valid = context->update(event);
+
+                        if (event->operation == Event::TOperation::CLOSE) {
+                            LOGT << "[UNSUBSCRIBE]";
+                            m_multiplexer->unsubscribe(event->stream);
+                            LOGT << "[FINALIZE]";
+                            event->stream->finalize();
+                        }
+
+                        else
+
                         if (is_context_valid &&
                             checkOneOf(
                                 event->operation,
@@ -246,7 +260,14 @@ CSessionManager::CContextWorkerHandler::handle(
                             //LOGT << "repeat by context: " << event;
                             continue; // <---
                         } else {
-                            //LOGT << \"skip: \";// << event;
+
+                            // if (event->operation == Event::TOperation::CLOSE) {
+                            //     event->stream->finalize();
+                            //     event->status = Event::TStatus::END;
+                            //     events_to_repeat.push_back(event);
+                            // }
+
+                            LOGT << "[SKIP]";
                         }
                     } catch (std::exception const &e) {
                         LOGE
@@ -264,13 +285,9 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
 
-            if (is_context_valid) {
-                auto events__ = m_context_manager->releaseContext(context);
+            auto events__ = m_context_manager->releaseContext(context, true/*is_context_valid*/);
+            if (!events__.empty()) {
                 events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
-            } else {
-                //LOGT << "remove context";
-                context->popEvents();
-                m_context_manager->removeContext(context);
             }
 
         } else {
