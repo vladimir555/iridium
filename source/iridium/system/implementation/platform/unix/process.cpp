@@ -64,71 +64,52 @@ CProcessStream::CProcessStream(
 
 
 void CProcessStream::initialize() {
-//    LOGT << "CProcessStream::initialize";
     try {
-//        if (m_fd) {
-//            LOGW << "initializing process stream '" + m_command_line + "' error: already initialized";
-//            return;
-//        }
         if (m_fd_reader || m_fd_writer)
-            throw std::runtime_error("not finalized"); // ----->
+            throw std::runtime_error("not finalized");
 
         int cin_pipe[2]  = { 0 };
+        // The only one output pipe for stdout + stderr
         int cout_pipe[2] = { 0 };
-        int cerr_pipe[2] = { 0 };
 
-        assertOK(pipe(cin_pipe),  "pipe");
-        assertOK(pipe(cout_pipe), "pipe");
-        assertOK(pipe(cerr_pipe), "pipe");
+        assertOK(
+            pipe(cin_pipe),
+           "pipe(stdin)");
+        // one pipe instead of two
+        assertOK(
+            pipe(cout_pipe),
+           "pipe(stdout, stderr)");
 
         posix_spawn_file_actions_t actions;
+
         assertOK(
             posix_spawn_file_actions_init(&actions),
-           "posix_spawn_file_actions_init"
-        );
+           "posix_spawn_file_actions_init");
 
+        // stdin: child reads from read-end, parent writes to write-end
         assertOK(
-            posix_spawn_file_actions_adddup2(&actions,  cin_pipe[0], 0),
-           "posix_spawn_file_actions_adddup2, stdin");
-
-        assertOK(
-            posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
-           "posix_spawn_file_actions_addclose, cout_pipe"
-        );
-
-        assertOK(
-            posix_spawn_file_actions_addclose(&actions, cerr_pipe[0]),
-           "posix_spawn_file_actions_addclose, cerr_pipe"
-        );
-
-        assertOK(
-            posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
-           "posix_spawn_file_actions_adddup2, cout_pipe"
-        );
-
-        assertOK(
-            posix_spawn_file_actions_adddup2(&actions, cerr_pipe[1], 2),
-           "posix_spawn_file_actions_adddup2, cerr_pipe"
-        );
-
-//        assertOK(
-//            posix_spawn_file_actions_adddup2(&actions, 1, 2),
-//           "posix_spawn_file_actions_adddup2"
-//        );
-
+            posix_spawn_file_actions_adddup2(&actions, cin_pipe[0], 0),
+           "posix_spawn_file_actions_adddup2 (stdin)");
         assertOK(
             posix_spawn_file_actions_addclose(&actions, cin_pipe[1]),
-           "posix_spawn_file_actions_addclose(stdin_read_end)");
+           "posix_spawn_file_actions_addclose (stdin write-end)");
 
+        // stdout -> general output pipe
+        assertOK(
+            posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
+           "posix_spawn_file_actions_adddup2 (stdout)");
+        // stderr -> same output pipe (stream merging)
+        assertOK(
+            posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 2),
+           "posix_spawn_file_actions_adddup2 (stderr)");
+
+        // close both ends of the output pipe in the child process after duplication
+        assertOK(
+            posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
+           "posix_spawn_file_actions_addclose (output read-end)");
         assertOK(
             posix_spawn_file_actions_addclose(&actions, cout_pipe[1]),
-           "posix_spawn_file_actions_addclose"
-        );
-
-        assertOK(
-            posix_spawn_file_actions_addclose(&actions, cerr_pipe[1]),
-           "posix_spawn_file_actions_addclose"
-        );
+           "posix_spawn_file_actions_addclose (output write-end)");
 
         std::vector<char *> argv(1 + m_args.size() + 1);
         argv[0] = (char *)m_app.data();
@@ -152,48 +133,35 @@ void CProcessStream::initialize() {
 #endif
 
         pid_t pid = m_pid;
-
         assertOK(
-//            posix_spawnp(&pid, m_app.c_str(), &actions, &attr, argv, environ),
             posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv.data(), environ),
-           "posix_spawnp"
-        );
+           "posix_spawnp");
 
         assertOK(
-             posix_spawn_file_actions_destroy(&actions),
-            "posix_spawn_file_actions_destroy");
-        assertOK(
-             posix_spawnattr_destroy(&attr),
-            "posix_spawnattr_destroy");
+            posix_spawn_file_actions_destroy(&actions),
+           "posix_spawn_file_actions_destroy");
 
         m_pid = pid;
 
-        //    auto r =
-        //    posix_spawnp(&m_pid, m_app.c_str(), &action, &attr, argv, environ);
-        //    LOGT << "posix_spawnp: " << r << " " << m_pid;
-        //    assertOK(r, "posix_spawnp");
-
+        // read-end stdin
         close(cin_pipe[0]);
+        // write-end
         close(cout_pipe[1]);
-        close(cerr_pipe[1]);
 
         m_fd_writer = cin_pipe[1];
         m_fd_reader = cout_pipe[0];
 
-//        LOGT << "initialize process '" << m_command_line << "', fd: " << m_fd_reader;
-
         setBlockingMode(false);
-
         m_exit_code.reset();
 
         auto state = getState();
-        if  (!checkOneOf(state.condition, TState::TCondition::RUNNING, TState::TCondition::DONE))
+
+        if (!checkOneOf(state.condition, TState::TCondition::RUNNING, TState::TCondition::DONE))
             throw std::runtime_error("process is not running, condition: " + convert<string>(state.condition)); // ----->
+
     } catch (std::exception const &e) {
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
-
-//    LOGT << "initialize process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
 }
 
 
