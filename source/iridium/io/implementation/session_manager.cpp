@@ -73,7 +73,7 @@ CSessionManager::CSessionManager()
         CContextManager::create()),
     m_context_worker(
         CWorkerPool<Event::TSharedPtr>::create(
-            "context",
+            "context_handler",
             createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
                 std::thread::hardware_concurrency(), m_context_manager, m_multiplexer))),
     m_multiplexer_thread(
@@ -196,28 +196,33 @@ CSessionManager::CContextWorkerHandler::handle(
                             LOGT << "[INIT]";
                             event->stream->initialize();
                             m_multiplexer->subscribe(event->stream);
+                        }
+
+                        else
+
+                        if (event->operation == Event::TOperation::ERROR_) {
+                            // redirect to protocol control
+                            LOGT << "[REDIRECT]: to protocol";
+                            event->status = Event::TStatus::END;
+                            events_to_repeat.push_back(event);
+                            continue; // <---
+                        }
+
+                        else
+
+                        if (event->operation == Event::TOperation::CLOSE) {
+                            // read / write to end on close
+                            LOGT << "[TRANSMIT]: to end";
+                            while (context->transmit(event));
+                            event->status = Event::TStatus::END;
+                            events_to_repeat.push_back(event);
                         } else {
-                            if (event->operation != Event::TOperation::ERROR_) {
-                                auto is_transmitted = context->transmit(event);
+                            auto is_transmitted = context->transmit(event);
+                            LOGT << "[TRANSMIT]: " << is_transmitted;
 
-                                LOGT << "[TRANSMIT]: " << is_transmitted;
-
-                                if (is_transmitted) {
-                                    if (event->operation == Event::TOperation::CLOSE) {
-                                        // repeat close begin
-                                        events_to_repeat.push_back(event);
-                                    } else {
-                                        event->status = Event::TStatus::END;
-                                        events_to_repeat.push_back(event);
-                                    }
-                                } else {
-                                    if (event->operation == Event::TOperation::CLOSE) {
-                                        // LOGT << "[FINALIZE]";
-                                        // event->stream->finalize();
-                                        event->status = Event::TStatus::END;
-                                        events_to_repeat.push_back(event);
-                                    }
-                                }
+                            if (is_transmitted) {
+                                event->status = Event::TStatus::END;
+                                events_to_repeat.push_back(event);
                             }
                         }
                     } catch (std::exception const &e) {
@@ -240,10 +245,12 @@ CSessionManager::CContextWorkerHandler::handle(
                         is_context_valid = context->update(event);
 
                         if (event->operation == Event::TOperation::CLOSE) {
-                            LOGT << "[UNSUBSCRIBE]";
-                            m_multiplexer->unsubscribe(event->stream);
-                            LOGT << "[FINALIZE]";
-                            event->stream->finalize();
+                            // LOGT << "[FINALIZE]";
+                            // event->stream->finalize();
+                            // LOGT << "[UNSUBSCRIBE]";
+                            // m_multiplexer->unsubscribe(event->stream);
+                            LOGT << "[FINALIZE]: skip";
+                            LOGT << "[UNSUBSCRIBE]: skip";
                         }
 
                         else

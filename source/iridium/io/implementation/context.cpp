@@ -78,7 +78,7 @@ bool CContext::update(Event::TSharedPtr const &event) {
     if (event->operation == Event::TOperation::OPEN)
         m_map_stream_pipe[event->stream];
 
-    LOGT << "[PROTOCOL] control called with op: " << event->operation << " status: " << event->status;
+    LOGT << "[PROTOCOL] control called with: " << event->operation << " " << event->status;
     auto result = m_protocol->control(event, shared_from_this());
     LOGT << "[PROTOCOL] control returned: " << result;
 

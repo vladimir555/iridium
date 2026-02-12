@@ -231,14 +231,16 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     try {
         if (
             //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
-            checkOneOf(event->operation,
+            checkOneOf(
+                event->operation,
                 io::Event::TOperation::READ,
-//                io::Event::TOperation::EOF_,
                 io::Event::TOperation::CLOSE,
                 io::Event::TOperation::TIMEOUT) &&
-                m_buffer_output             &&
-                m_buffer_output->size() > 4 &&
-                checkOneOf(m_buffer_output->back(), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+            m_buffer_output             &&
+            m_buffer_output->size() > 4 &&
+            checkOneOf(
+                m_buffer_output->back(),
+                uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
         {
             size_t right = m_buffer_output->size() - 1;
             while (right > 0 && checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
