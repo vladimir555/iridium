@@ -137,7 +137,7 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
         m_context_worker->push(events);
 
         if (!events.empty())
-            ;//LOGT << "multiplexer events:\n" << events;
+            LOGT << "multiplexer events:\n" << events;
     }
 }
 
@@ -202,9 +202,11 @@ CSessionManager::CContextWorkerHandler::handle(
 
                         if (event->operation == Event::TOperation::ERROR_) {
                             // redirect to protocol control
-                            LOGT << "[REDIRECT]: to protocol";
-                            event->status = Event::TStatus::END;
-                            events_to_repeat.push_back(event);
+                            // LOGT << "[REDIRECT]: to protocol";
+                            // event->status = Event::TStatus::END;
+                            // events_to_repeat.push_back(event);
+                            LOGT << "[UNSUBSCRIBE]";
+                            m_multiplexer->unsubscribe(event->stream);
                             continue; // <---
                         }
 
@@ -214,8 +216,10 @@ CSessionManager::CContextWorkerHandler::handle(
                             // read / write to end on close
                             LOGT << "[TRANSMIT]: to end";
                             while (context->transmit(event));
-                            event->status = Event::TStatus::END;
-                            events_to_repeat.push_back(event);
+                            // event->status = Event::TStatus::END;
+                            // events_to_repeat.push_back(event);
+                            LOGT << "[UNSUBSCRIBE]";
+                            m_multiplexer->unsubscribe(event->stream);
                         } else {
                             auto is_transmitted = context->transmit(event);
                             LOGT << "[TRANSMIT]: " << is_transmitted;
@@ -245,12 +249,8 @@ CSessionManager::CContextWorkerHandler::handle(
                         is_context_valid = context->update(event);
 
                         if (event->operation == Event::TOperation::CLOSE) {
-                            // LOGT << "[FINALIZE]";
-                            // event->stream->finalize();
-                            // LOGT << "[UNSUBSCRIBE]";
-                            // m_multiplexer->unsubscribe(event->stream);
-                            LOGT << "[FINALIZE]: skip";
-                            LOGT << "[UNSUBSCRIBE]: skip";
+                            LOGT << "[FINALIZE]";
+                            event->stream->finalize();
                         }
 
                         else

@@ -284,8 +284,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     if  (stream) {
                         LOGT << "kevent monitored remove from map fd: " << fd;
                         m_map_fd_stream.erase(fd);
-                        LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
-                        events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
+                        auto event = Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END);
+                        LOGT << "unsubscribe event: " << event;
+                        events.push_back(event);
                     }
                 } else {
                     auto stream = m_map_fd_stream[fd];
