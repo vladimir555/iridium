@@ -34,25 +34,19 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     if (filtered.empty())
         return {};
 
-    std::sort(filtered.begin(), filtered.end(),
+    std::stable_sort(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
-            auto const &ha = a->stream->getHandles();
-            auto const &hb = b->stream->getHandles();
-
             return
-                std::tie(ha, a->operation, a->status) <
-                std::tie(hb, b->operation, b->status);
+                std::tie(a->stream, a->operation, a->status) <
+                std::tie(b->stream, b->operation, b->status);
         }
     );
 
     auto last = std::unique(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
-            auto const &ha = a->stream->getHandles();
-            auto const &hb = b->stream->getHandles();
-
             return
-                std::tie(ha, a->operation, a->status) ==
-                std::tie(hb, b->operation, b->status);
+                std::tie(a->stream, a->operation, a->status) ==
+                std::tie(b->stream, b->operation, b->status);
         }
     );
 
@@ -75,7 +69,7 @@ CSessionManager::CSessionManager()
         CWorkerPool<Event::TSharedPtr>::create(
             "context_handler",
             createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-                std::thread::hardware_concurrency(), m_context_manager, m_multiplexer))),
+                1, m_context_manager, m_multiplexer))),
     m_multiplexer_thread(
         CThread::create(
             "multiplexer",
@@ -171,7 +165,11 @@ CSessionManager::CContextWorkerHandler::handle(
     for (auto const &worker_event: removeDuplicates(events_)) {
         if(!worker_event->stream ||
            (worker_event->stream->getHandles().empty() &&
-            worker_event->operation != Event::TOperation::OPEN))
+            !checkOneOf(worker_event->operation,
+                Event::TOperation::OPEN,
+                Event::TOperation::CLOSE,
+                Event::TOperation::ERROR_,
+                Event::TOperation::TIMEOUT)))
         {
             continue; // <---
         }
