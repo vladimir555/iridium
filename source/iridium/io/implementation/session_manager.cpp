@@ -302,7 +302,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
 
-            auto events__ = m_context_manager->releaseContext(context, true/*is_context_valid*/);
+            auto events__ = m_context_manager->releaseContext(context, is_context_valid);
             if (!events__.empty()) {
                 events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
             }

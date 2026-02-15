@@ -79,11 +79,11 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 //    if (!context)
 //        return {};
 
+    LOCK_SCOPE();
+
     auto events = context->popEvents();
 
     // LOGT << "CContextManager::releaseContext, events: " << events;
-
-    LOCK_SCOPE();
 
     if (m_contexts_to_remove.count(context) > 0 && events.empty() && !is_valid_context) {
 //        LOGT << "CContextManager::releaseContext, remove context";
