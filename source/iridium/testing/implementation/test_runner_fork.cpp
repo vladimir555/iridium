@@ -85,11 +85,13 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
 
         for (auto const &result: results) {
+            bool has_results = false;
             if (result->node) {
 //                LOGT << result->node;
                 TResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
+                has_results = test_results_fork.Tests.size() > 0;
             }
 
             auto state = result->state;
@@ -105,11 +107,24 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
             {
                 LOGI << result->path << ":\n"
                      << result->output;
+                if (!has_results) {
+                    for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
+                        TResult::TTests test;
+                        test.Path   = result->path + "/" + node->getName();
+                        test.Error  = "Protocol error: missing test results (JSON not found)";
+                        if (result->output)
+                            test.Output = convert<string>(*result->output);
+
+                        test_results.Tests.add(test);
+                    }
+                }
             } else {
                 for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
                     TResult::TTests test;
                     test.Path   = result->path + "/" + node->getName();
                     test.Error  = convert<string>(result->state.condition);
+                    if (result->output)
+                        test.Output = convert<string>(*result->output);
 
                     test_results.Tests.add(test);
                 }
@@ -204,20 +219,17 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     //}
 
     if (event->operation == io::Event::TOperation::OPEN) {
-        if (event->status == io::Event::TStatus::END && !m_process_result->output) {
+        if (!m_process_result->output) {
             static std::string const DEFAULT_PIPE_NAME = "process";
             try {
                 pipe_manager->createPipe(DEFAULT_PIPE_NAME);
+            } catch (...) {}
+
+            try {
                 pipe_manager->updatePipe(DEFAULT_PIPE_NAME,
                     std::dynamic_pointer_cast<io::IStreamReader>(event->stream),
                     CStreamWriterBuffer::create(m_buffer_output));
-            } catch (...) {
-                try {
-                    pipe_manager->updatePipe(DEFAULT_PIPE_NAME,
-                        std::dynamic_pointer_cast<io::IStreamReader>(event->stream),
-                        CStreamWriterBuffer::create(m_buffer_output));
-                } catch (...) {}
-            }
+            } catch (...) {}
         }
         return true; // ----->
     }
@@ -265,25 +277,28 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
             //LOGT << "size_str: '" << size_str << "'";
 
-            if (size_str.find_first_not_of("0123456789") == string::npos) {
+            if (!size_str.empty() && size_str.find_first_not_of("0123456789") == string::npos) {
                 auto    size = convert<uint64_t>(size_str);
                 size_t  endlines_count = 0;
+                size_t  pos = left;
 
-                while (left > 0) {
-                    if (m_buffer_output->at(left) == '\n')
+                while (pos > 0) {
+                    if (m_buffer_output->at(pos) == '\n')
                         endlines_count++;
                     else
-                        if (m_buffer_output->at(left) != '\r')
+                        if (m_buffer_output->at(pos) != '\r')
                             break;
-                    left--;
+                    pos--;
                 }
                 //LOGT << "endlines_count: " << endlines_count;
 
-                if (endlines_count == 2 && m_buffer_output->at(left) == '}') {
-                    right = left + 2;
+                if (endlines_count == 2 && m_buffer_output->at(pos) == '}') {
+                    right = pos + 2;
+                    left = pos;
 
                     size_t brackets_count = 1;
-                    while (brackets_count > 0 && --left > 0) {
+                    while (brackets_count > 0 && left > 0) {
+                        left--;
                         if (m_buffer_output->at(left) == '}')
                             brackets_count++;
 
@@ -295,7 +310,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                     }
 
                     //LOGT << "right - left = " << right - left << ", size = " << size;
-                    if (right - left == size) {
+                    if (brackets_count == 0 && right - left == size) {
                         string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
                         auto    node = m_parser->parse(json);
 
