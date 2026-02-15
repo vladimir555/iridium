@@ -81,32 +81,34 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 
     LOCK_SCOPE();
 
-    auto events = context->popEvents();
-
     // LOGT << "CContextManager::releaseContext, events: " << events;
 
-    if (m_contexts_to_remove.count(context) > 0 && events.empty() && !is_valid_context) {
-//        LOGT << "CContextManager::releaseContext, remove context";
+    if (m_contexts_to_remove.count(context) > 0 && !is_valid_context) {
+        auto events = context->popEvents();
+        if (events.empty()) {
+    //        LOGT << "CContextManager::releaseContext, remove context";
 
-        context->remove();
+            context->remove();
 
-        auto    stream_context  = m_map_stream_context.begin();
-        while  (stream_context != m_map_stream_context.end()) {
-            if (stream_context->second == context)
-                stream_context  = m_map_stream_context.erase(stream_context);
-            else
-                stream_context++;
+            auto    stream_context  = m_map_stream_context.begin();
+            while  (stream_context != m_map_stream_context.end()) {
+                if (stream_context->second == context)
+                    stream_context  = m_map_stream_context.erase(stream_context);
+                else
+                    stream_context++;
+            }
+
+            m_contexts.erase(context);
+            m_contexts_to_remove.erase(context);
+            m_acquired_contexts.erase(context);
+
+            // LOGT << "CContextManager::releaseContext: empty";
+            return {}; // ----->
         }
-
-        m_contexts.erase(context);
-        m_contexts_to_remove.erase(context);
-
-        // LOGT << "CContextManager::releaseContext: empty";
-        return {}; // ----->
-    } else {
-        m_acquired_contexts.erase(context);
-        return events; // ----->
     }
+
+    m_acquired_contexts.erase(context);
+    return context->popEvents(); // ----->
 }
 
 
@@ -127,6 +129,12 @@ std::list<Event::TSharedPtr> CContextManager::checkOutdatedStreams() {
         result.splice(result.end(), context->checkOutdatedStreams());
 
     return result; // ----->
+}
+
+
+bool CContextManager::hasContext(IStream::TSharedPtr const &stream) const {
+    LOCK_SCOPE();
+    return m_map_stream_context.count(stream) > 0;
 }
 
 

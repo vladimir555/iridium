@@ -167,9 +167,10 @@ void CProcessStream::initialize() {
 
 void CProcessStream::finalize() {
 //    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
+    LOCK_SCOPE();
     try {
         if (m_pid == 0)
-            throw std::runtime_error("not initialized"); // ----->
+            return; // ----->
 
         kill(m_pid, SIGTERM);
 
@@ -191,7 +192,12 @@ void CProcessStream::finalize() {
             auto b = read();
             if (b)
                 buffer->emplace_back(b);
-            std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
+            else
+                std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
+        }
+
+        while (auto b = read()) {
+            buffer->emplace_back(b);
         }
 
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
@@ -216,6 +222,8 @@ void CProcessStream::finalize() {
             close(m_fd_writer);
             m_fd_writer = 0;
         }
+
+        m_pid = 0;
 
         //    m_state_internal = { 0 };
 //            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " done";

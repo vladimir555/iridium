@@ -181,12 +181,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             events.push_back(
                 Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::READ, Event::TStatus::BEGIN));
 
-        if (epoll_events[i].events & EPOLLHUP) {
-            events.push_back(
-                Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-        }
-
-        if (epoll_events[i].events & EPOLLRDHUP) {
+        if (epoll_events[i].events & (EPOLLHUP | EPOLLRDHUP)) {
             events.push_back(
                 Event::create(m_map_fd_stream[epoll_events[i].data.fd], Event::TOperation::CLOSE, Event::TStatus::BEGIN));
         }

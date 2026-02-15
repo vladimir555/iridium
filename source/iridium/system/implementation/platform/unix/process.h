@@ -22,7 +22,7 @@ namespace iridium::system::implementation::platform::unix_ {
 class CProcessStream:
     public IProcess,
     public io::implementation::CStreamPort,
-    public threading::Synchronized<std::mutex>
+    public threading::Synchronized<std::recursive_mutex>
 {
 public:
     DEFINE_IMPLEMENTATION(CProcessStream)
