@@ -86,9 +86,12 @@ void CSessionManager::initialize() {
 
 void CSessionManager::finalize() {
     LOGT << "CSessionManager::finalize ...";
-    m_multiplexer_thread->finalize();
-    m_context_worker->finalize();
-    m_multiplexer->finalize();
+    if (m_multiplexer)
+        m_multiplexer->finalize();
+    if (m_multiplexer_thread)
+        m_multiplexer_thread->finalize();
+    if (m_context_worker)
+        m_context_worker->finalize();
     LOGT << "CSessionManager::finalize OK";
 }
 
