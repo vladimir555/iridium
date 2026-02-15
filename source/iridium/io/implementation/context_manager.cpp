@@ -129,10 +129,6 @@ std::list<Event::TSharedPtr> CContextManager::checkOutdatedStreams() {
 }
 
 
-bool CContextManager::hasContext(IStream::TSharedPtr const &stream) const {
-    LOCK_SCOPE();
-    return m_map_stream_context.count(stream) > 0;
-}
 
 
 } // iridium::io::implementation

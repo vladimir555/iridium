@@ -31,8 +31,6 @@ public:
         releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) override;
     std::list<Event::TSharedPtr>
         checkOutdatedStreams() override;
-    bool
-        hasContext(IStream::TSharedPtr const &stream) const override;
 
 private:
     std::unordered_map<IStream::TSharedPtr, IContext::TSharedPtr>

@@ -294,12 +294,10 @@ CSessionManager::CContextWorkerHandler::handle(
             }
 
         } else {
-            // Context already acquired (occupied by another worker) or missing
-            // Put event back to the queue for retry only if context still exists
-            if (worker_event->stream && m_context_manager->hasContext(worker_event->stream)) {
-                //LOGT << "context busy, retry: " << worker_event;
-                events_to_repeat.push_back(worker_event);
-            }
+            // Context already acquired (occupied by another worker) or missing.
+            // If it was acquired, the event has already been pushed to the context
+            // by acquireContext and will be handled when the current owner releases it.
+            // No need to re-push it to the global queue here.
         }
     }
 

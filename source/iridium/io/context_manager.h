@@ -25,8 +25,6 @@ public:
         releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) = 0;
     virtual std::list<Event::TSharedPtr>
         checkOutdatedStreams() = 0;
-    virtual bool
-        hasContext(IStream::TSharedPtr const &stream) const = 0;
 };
 
 

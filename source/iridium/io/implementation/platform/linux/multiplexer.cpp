@@ -91,7 +91,7 @@ void CMultiplexer::finalize() {
     m_is_closing = true;
     eventfd_t i = 1;
     assertOK(eventfd_write(m_event_fd, i), "multiplexer finalization error: write event_fd error");
-    m_epoll_fd = 0;
+    // m_epoll_fd = 0; // Don't clear it yet, waitEvents will close it
 }
 
 

@@ -104,16 +104,9 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
     auto pipe = m_map_stream_pipe[event->stream];
     if (!pipe) {
         // Pipe not found - this can happen if context is marked for removal
-        // For lifecycle events, just return false to proceed with cleanup
-        if (checkOneOf(event->operation,
-            Event::TOperation::CLOSE,
-            Event::TOperation::TIMEOUT,
-            Event::TOperation::ERROR_))
-        {
-            return false;
-        }
-        // For other operations, throw error
-        throw std::runtime_error("context transmitting error: pipe not found");
+        // or if multiple events arrive for the same stream during cleanup.
+        // Return false to proceed with cleanup without throwing.
+        return false;
     }
 
     return pipe->transmit(event);
