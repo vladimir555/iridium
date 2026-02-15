@@ -8,6 +8,9 @@
 #include "iridium/io/implementation/context_manager.h"
 #include "iridium/items.h"
 
+#include <set>
+#include <tuple>
+
 
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CThread;
@@ -23,39 +26,19 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     if (events_.size() <= 1)
         return events_;
 
-    std::vector<Event::TSharedPtr> filtered;
-    filtered.reserve(events_.size());
+    std::list<Event::TSharedPtr> result;
+    std::set<std::tuple<IStream*, Event::TOperation, Event::TStatus>> seen;
 
     for (auto const &event: events_) {
-        if (event && event->stream)
-            filtered.push_back(event);
+        if (event && event->stream) {
+            auto key = std::make_tuple(event->stream.get(), event->operation, event->status);
+            if (seen.insert(key).second) {
+                result.push_back(event);
+            }
+        }
     }
 
-    if (filtered.empty())
-        return {};
-
-    std::stable_sort(filtered.begin(), filtered.end(),
-        [] (auto const &a, auto const &b) {
-            return
-                std::tie(a->stream, a->operation, a->status) <
-                std::tie(b->stream, b->operation, b->status);
-        }
-    );
-
-    auto last = std::unique(filtered.begin(), filtered.end(),
-        [] (auto const &a, auto const &b) {
-            return
-                std::tie(a->stream, a->operation, a->status) ==
-                std::tie(b->stream, b->operation, b->status);
-        }
-    );
-
-    filtered.erase(last, filtered.end());
-
-    return {
-        std::make_move_iterator(filtered.begin()),
-        std::make_move_iterator(filtered.end())
-    };
+    return result;
 }
 
 

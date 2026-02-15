@@ -204,11 +204,17 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     //}
 
     if (event->operation == io::Event::TOperation::OPEN) {
-        static std::string const DEFAULT_PIPE_NAME = "process";
-        pipe_manager->createPipe(DEFAULT_PIPE_NAME);
-        pipe_manager->updatePipe(DEFAULT_PIPE_NAME,
-            std::dynamic_pointer_cast<io::IStreamReader>(event->stream),
-            CStreamWriterBuffer::create(m_buffer_output));
+        if (event->status == io::Event::TStatus::END) {
+            static std::string const DEFAULT_PIPE_NAME = "process";
+            try {
+                pipe_manager->createPipe(DEFAULT_PIPE_NAME);
+                pipe_manager->updatePipe(DEFAULT_PIPE_NAME,
+                    std::dynamic_pointer_cast<io::IStreamReader>(event->stream),
+                    CStreamWriterBuffer::create(m_buffer_output));
+            } catch (std::exception const & e) {
+                LOGW << "pipe creation warning: " << e.what();
+            }
+        }
 
 //        m_time_end = m_timeout + std::chrono::system_clock::now();
 //        LOGT << "start: " << m_process_result->path;
@@ -242,9 +248,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                 io::Event::TOperation::TIMEOUT) &&
             m_buffer_output             &&
             m_buffer_output->size() > 4 &&
-            checkOneOf(
+            (checkOneOf(
                 m_buffer_output->back(),
-                uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+                uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')) ||
+             event->operation == io::Event::TOperation::CLOSE))
         {
             size_t right = m_buffer_output->size() - 1;
             while (right > 0 && checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
