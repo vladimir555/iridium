@@ -186,7 +186,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::Event::TSharedPtr           const &event,
     io::IPipeManager::TSharedPtr    const &pipe_manager)
 {
-    if (m_process_result->output || event->operation == io::Event::TOperation::ERROR_) {
+    if (m_process_result->output) {
         //LOGT << "return false";
         return false; // ----->
     }
@@ -229,6 +229,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     bool result = true;
 
     try {
+        if (event->operation == io::Event::TOperation::ERROR_) {
+            throw std::runtime_error("pipe error event");
+        }
+
         if (
             //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
             checkOneOf(

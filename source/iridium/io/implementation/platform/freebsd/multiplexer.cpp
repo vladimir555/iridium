@@ -136,7 +136,7 @@ void CMultiplexer::initialize() {
             kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
         "kevent user registration error");
 
-        m_is_initialized    = true;
+        m_is_initialized = true;
 //        LOGT << "del pipe: " << m_pipe_del[0] << ", add pipe: " << m_pipe_add[0];
     } catch (std::exception const &e) {
         throw std::runtime_error("multiplexer initialization error: " + string(e.what())); // ----->
@@ -149,6 +149,7 @@ void CMultiplexer::initialize() {
 void CMultiplexer::finalize() {
     try {
         assertExists(m_kqueue.load(), "kqueue is not initialized");
+        LOGT << "finalization begin";
         m_is_initialized = false;
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -196,11 +197,10 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 close(m_kqueue);
                 m_kqueue = 0;
 
-                LOGT << "m_is_initialized: " << m_is_initialized;
-
                 for (auto const &stream: m_streams_to_del->pop(false))
                     events.push_back(
                         Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
+
                 for (auto const &stream: m_streams_to_add->pop(false))
                     events.push_back(
                         Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
@@ -215,6 +215,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
                 m_map_fd_stream.clear();
 
+                LOGT << "finalization end";
                 return events; // ----->
             }
 
@@ -334,11 +335,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
 
 void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
-    if (!stream || stream->getHandles().empty())
+    if (!stream || stream->getHandles().empty() || !m_kqueue.load())
         return; // ----->
 
     try {
-        assertExists(m_kqueue.load(), "kqueue is not initialized");
+        // assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_streams_to_add->push(stream);
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -348,11 +349,11 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
-    if (!stream || stream->getHandles().empty())
+    if (!stream || stream->getHandles().empty() || !m_kqueue.load())
         return; // ----->
 
     try {
-        assertExists(m_kqueue.load(), "kqueue is not initialized");
+        // assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_streams_to_del->push(stream);
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -362,8 +363,11 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::wake(Event::TSharedPtr const &event) {
+    if (!m_kqueue.load())
+        return;
+
     try {
-        assertExists(m_kqueue.load(), "kqueue is not initialized");
+        // assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_wake_events->push(event);
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -373,6 +377,9 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 
 
 void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
+    if (!m_kqueue.load())
+        return;
+
     try {
         assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_wake_events->push(events);

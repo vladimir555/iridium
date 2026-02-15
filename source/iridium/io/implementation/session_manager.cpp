@@ -91,12 +91,12 @@ void CSessionManager::initialize() {
 
 
 void CSessionManager::finalize() {
-    //LOGT << "CSessionManager::finalize ...";
-    m_multiplexer_thread->finalize();
+    LOGT << "CSessionManager::finalize ...";
     m_multiplexer->finalize();
+    m_multiplexer_thread->finalize();
     // todo: close event for all handlers
     m_context_worker->finalize();
-    //LOGT << "CSessionManager::finalize OK";
+    LOGT << "CSessionManager::finalize OK";
 }
 
 
