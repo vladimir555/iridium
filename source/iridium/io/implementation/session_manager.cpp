@@ -169,9 +169,12 @@ CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::IHandler::TOutputItems events_to_repeat;
 
     for (auto const &worker_event: removeDuplicates(events_)) {
-
-        if (worker_event->stream->getHandles().empty() && worker_event->operation != Event::TOperation::OPEN)
+        if(!worker_event->stream ||
+           (worker_event->stream->getHandles().empty() &&
+            worker_event->operation != Event::TOperation::OPEN))
+        {
             continue; // <---
+        }
 
         //LOGT << "[WORKER] event:" << worker_event;
 
@@ -214,13 +217,18 @@ CSessionManager::CContextWorkerHandler::handle(
 
                         if (event->operation == Event::TOperation::CLOSE) {
                             // read / write to end on close
-                            LOGT << "[TRANSMIT]: to end";
-                            while (context->transmit(event));
+                            LOGT << "[TRANSMIT]: flush";
+                            while (context->transmit(event))
+                                LOGT << "transmit flush next";
                             // event->status = Event::TStatus::END;
                             // events_to_repeat.push_back(event);
                             LOGT << "[UNSUBSCRIBE]";
                             m_multiplexer->unsubscribe(event->stream);
-                        } else {
+                        }
+
+                        else
+
+                        {
                             auto is_transmitted = context->transmit(event);
                             LOGT << "[TRANSMIT]: " << is_transmitted;
 

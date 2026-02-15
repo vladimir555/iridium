@@ -42,11 +42,10 @@ public:
 
     std::list<Event::TSharedPtr> waitEvents() override;
 
-    void wake(Event::TSharedPtr const &event) override;
-    void wake(std::list<Event::TSharedPtr> const &events) override;
-
     void subscribe  (IStream::TSharedPtr const &stream) override;
     void unsubscribe(IStream::TSharedPtr const &stream) override;
+    void wake       (Event::TSharedPtr const &event) override;
+    void wake       (std::list<Event::TSharedPtr> const &events) override;
 
 private:
     static size_t const DEFAULT_EVENTS_LIMIT = 4;
@@ -56,20 +55,30 @@ private:
 
     static void handleSignal(int signal);
 
-    std::array<int, 2> registerPipe();
+    // std::array<int, 2> registerPipe();
 
-    struct timespec m_timeout;
+    void wakeKEvent();
 
-    std::vector<struct kevent> m_triggered_events;
+    struct timespec
+        m_timeout;
 
-    std::atomic<int>    m_kqueue;
-    std::array<int, 2>  m_pipe_add;
-    std::array<int, 2>  m_pipe_del;
+    std::vector<struct kevent>
+        m_triggered_events;
+    std::atomic<int>
+        m_kqueue;
+    // std::array<int, 2>
+    //     m_wake_event_pipe;
 
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
         m_map_fd_stream;
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_wake_events;
+    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
+        m_streams_to_add;
+    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
+        m_streams_to_del;
+    std::atomic<bool>
+        m_is_initialized;
 };
 
 
