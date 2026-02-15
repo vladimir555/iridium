@@ -206,8 +206,8 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
 
 void CMultiplexer::wake(Event::TSharedPtr const &event) {
-    if (!m_epoll_fd)
-        throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
+    if (!m_epoll_fd || m_is_closing)
+        return; // ----->
 
     m_wake_events->push(event);
     eventfd_write(m_event_fd, 1);
@@ -215,8 +215,8 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 
 
 void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
-    if (!m_epoll_fd)
-        throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
+    if (!m_epoll_fd || m_is_closing)
+        return; // ----->
 
     m_wake_events->push(events);
     eventfd_write(m_event_fd, 1);

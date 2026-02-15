@@ -69,7 +69,7 @@ CSessionManager::CSessionManager()
         CWorkerPool<Event::TSharedPtr>::create(
             "context_handler",
             createObjects<IContextWorker::IHandler, CContextWorkerHandler>(
-                1, m_context_manager, m_multiplexer))),
+                std::thread::hardware_concurrency(), m_context_manager, m_multiplexer))),
     m_multiplexer_thread(
         CThread::create(
             "multiplexer",
@@ -86,10 +86,9 @@ void CSessionManager::initialize() {
 
 void CSessionManager::finalize() {
     LOGT << "CSessionManager::finalize ...";
-    m_multiplexer->finalize();
     m_multiplexer_thread->finalize();
-    // todo: close event for all handlers
     m_context_worker->finalize();
+    m_multiplexer->finalize();
     LOGT << "CSessionManager::finalize OK";
 }
 
