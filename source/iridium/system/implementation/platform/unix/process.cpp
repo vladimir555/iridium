@@ -171,10 +171,15 @@ void CProcessStream::finalize() {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
 
+        kill(m_pid, SIGTERM);
+
 //            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader;
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " ...";
 
         auto buffer  = read();
+        if (!buffer)
+            buffer = io::Buffer::create();
+
         auto start   = system_clock::now();
         auto timeout = start + DEFAULT_PROCESS_TIMEOUT;
         while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING) {
@@ -183,7 +188,9 @@ void CProcessStream::finalize() {
         //         << " < " << timeout << " "  << getState().condition
         //         << " "   << timeout - system_clock::now()
         //         << "\n"  << read();
-            buffer->emplace_back(read());
+            auto b = read();
+            if (b)
+                buffer->emplace_back(b);
             std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
         }
 

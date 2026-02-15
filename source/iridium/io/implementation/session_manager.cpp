@@ -27,7 +27,7 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     filtered.reserve(events_.size());
 
     for (auto const &event: events_) {
-        if (event && event->stream && !event->stream->getHandles().empty())
+        if (event && event->stream)
             filtered.push_back(event);
     }
 
