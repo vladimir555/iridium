@@ -251,7 +251,12 @@ CSessionManager::CContextWorkerHandler::handle(
 
                 if (event->status == Event::TStatus::END) {
                     try {
-                        is_context_valid = context->update(event);
+                        try {
+                            is_context_valid = context->update(event);
+                        } catch (std::exception const &e) {
+                            LOGE << "protocol error: " << e;
+                            is_context_valid = false;
+                        }
 
                         if (event->operation == Event::TOperation::CLOSE) {
                             LOGT << "[FINALIZE]";
