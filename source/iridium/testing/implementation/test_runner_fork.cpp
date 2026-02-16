@@ -251,80 +251,96 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         //     throw std::runtime_error("pipe error event");
         // }
 
-        if (
-            //m_process_result->state.condition != IProcess::TState::TCondition::RUNNING ||
-            checkOneOf(
+        bool try_parse = checkOneOf(
                 event->operation,
                 io::Event::TOperation::READ,
                 io::Event::TOperation::CLOSE,
                 io::Event::TOperation::TIMEOUT) &&
-            m_buffer_output             &&
-            m_buffer_output->size() > 4 &&
-            checkOneOf(
-                m_buffer_output->back(),
-                uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+            m_buffer_output &&
+            m_buffer_output->size() > 4;
+
+        if (try_parse)
         {
-            size_t right = m_buffer_output->size() - 1;
-            while (right > 0 && checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
-                right--;
+            size_t buffer_size = m_buffer_output->size();
 
-            size_t left  = right;
-
-            while (left  > 0 && !checkOneOf(m_buffer_output->at(left),  uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
-                left--;
-
-            string size_str(m_buffer_output->begin() + left + 1, m_buffer_output->begin() + right + 1);
-
-            //LOGT << "size_str: '" << size_str << "'";
-
-            if (!size_str.empty() && size_str.find_first_not_of("0123456789") == string::npos) {
-                auto    size = convert<uint64_t>(size_str);
-                size_t  endlines_count = 0;
-                size_t  pos = left;
-
-                while (pos > 0) {
-                    if (m_buffer_output->at(pos) == '\n')
-                        endlines_count++;
-                    else
-                        if (m_buffer_output->at(pos) != '\r')
-                            break;
-                    pos--;
+            // If it's not a CLOSE event, we only look at the end of the buffer if it has a newline
+            if (event->operation != io::Event::TOperation::CLOSE) {
+                if (!checkOneOf(m_buffer_output->back(), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00'))) {
+                    try_parse = false;
                 }
-                //LOGT << "endlines_count: " << endlines_count;
+            }
 
-                if (endlines_count == 2 && m_buffer_output->at(pos) == '}') {
-                    right = pos + 2;
-                    left = pos;
+            if (try_parse) {
+                // Search for the size string from the end
+                size_t right = buffer_size - 1;
+                while (right > 0 && checkOneOf(m_buffer_output->at(right), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+                    right--;
 
-                    size_t brackets_count = 1;
-                    while (brackets_count > 0 && left > 0) {
-                        left--;
-                        if (m_buffer_output->at(left) == '}')
-                            brackets_count++;
+                size_t left_size = right;
+                while (left_size > 0 && !checkOneOf(m_buffer_output->at(left_size), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+                    left_size--;
 
-                        if (m_buffer_output->at(left) == '{')
-                            brackets_count--;
+                string size_str;
+                if (left_size < right || (left_size == 0 && !checkOneOf(m_buffer_output->at(0), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))) {
+                    size_t start = (left_size == 0 && !checkOneOf(m_buffer_output->at(0), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00'))) ? 0 : left_size + 1;
+                    size_str = string(m_buffer_output->begin() + start, m_buffer_output->begin() + right + 1);
+                }
 
-                        if (m_buffer_output->at(left) == '\r')
-                            size++;
+                if (!size_str.empty() && size_str.find_first_not_of("0123456789") == string::npos) {
+                    size_t pos = left_size;
+                    while (pos > 0 && checkOneOf(m_buffer_output->at(pos), uint8_t('\n'), uint8_t('\r'), uint8_t('\x00')))
+                        pos--;
+
+                    if (m_buffer_output->at(pos) == '}') {
+                        size_t json_right = pos + 1;
+                        size_t json_left = pos;
+                        size_t brackets_count = 1;
+                        while (brackets_count > 0 && json_left > 0) {
+                            json_left--;
+                            if (m_buffer_output->at(json_left) == '}') brackets_count++;
+                            if (m_buffer_output->at(json_left) == '{') brackets_count--;
+                        }
+
+                        if (brackets_count == 0) {
+                            string json(m_buffer_output->begin() + json_left, m_buffer_output->begin() + json_right);
+                            auto node = m_parser->parse(json);
+                            if (node) {
+                                m_buffer_output->resize(json_left);
+                                m_process_result->node = node;
+                                m_process_result->output = m_buffer_output;
+                                result = false;
+                            }
+                        }
                     }
+                }
 
-                    //LOGT << "right - left = " << right - left << ", size = " << size;
-                    if (brackets_count == 0 && right - left == size) {
-                        string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
-                        auto    node = m_parser->parse(json);
-
-//                        m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
-                        m_buffer_output->resize(left);
-                        m_process_result->node      = node;
-                        m_process_result->output    = m_buffer_output;
-
-                        LOGT << "json:\n"   << json;
-                        LOGT << "node:\n"   << node;
-                        //LOGT << "output:\n" << m_buffer_output;
-                        LOGT << "set result = false";
-                        result = false;
-                    }
+                // If we still haven't found it and it's a CLOSE event, try a more desperate search
+                if (result && event->operation == io::Event::TOperation::CLOSE) {
+                     size_t pos = buffer_size;
+                     while (pos > 0) {
+                         pos--;
+                         if (m_buffer_output->at(pos) == '}') {
+                             size_t json_right = pos + 1;
+                             size_t json_left = pos;
+                             size_t brackets_count = 1;
+                             while (brackets_count > 0 && json_left > 0) {
+                                 json_left--;
+                                 if (m_buffer_output->at(json_left) == '}') brackets_count++;
+                                 if (m_buffer_output->at(json_left) == '{') brackets_count--;
+                             }
+                             if (brackets_count == 0) {
+                                 string json(m_buffer_output->begin() + json_left, m_buffer_output->begin() + json_right);
+                                 auto node = m_parser->parse(json);
+                                 if (node) {
+                                     m_buffer_output->resize(json_left);
+                                     m_process_result->node = node;
+                                     m_process_result->output = m_buffer_output;
+                                     result = false;
+                                     break;
+                                 }
+                             }
+                         }
+                     }
                 }
             }
         }

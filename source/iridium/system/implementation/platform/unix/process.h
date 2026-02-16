@@ -36,6 +36,8 @@ public:
     void initialize()   override;
     void finalize()     override;
 
+    io::Buffer::TSharedPtr read(size_t const &size = io::DEFAULT_BUFFER_SIZE) override;
+
     TState getState()   override;
     void   sendSignal(TSignal const &signal) override;
 
@@ -57,6 +59,7 @@ private:
     std::string                 m_command_line;
     std::atomic<pid_t>          m_pid;
     std::shared_ptr<int>        m_exit_code;
+    io::Buffer::TSharedPtr      m_buffer_finalize;
 };
 
 

@@ -177,27 +177,22 @@ void CProcessStream::finalize() {
 //            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader;
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " ...";
 
-        auto buffer  = read();
-        if (!buffer)
-            buffer = io::Buffer::create();
+        if (!m_buffer_finalize)
+            m_buffer_finalize = io::Buffer::create();
 
         auto start   = system_clock::now();
         auto timeout = start + DEFAULT_PROCESS_TIMEOUT;
         while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING) {
-        //    LOGT << "\n" << m_command_line
-        //         << "\n" << system_clock::now()
-        //         << " < " << timeout << " "  << getState().condition
-        //         << " "   << timeout - system_clock::now()
-        //         << "\n"  << read();
-            auto b = read();
-            if (b)
-                buffer->emplace_back(b);
+            auto b = CStreamPort::read();
+            if (b && !b->empty())
+                m_buffer_finalize->emplace_back(b);
             else
                 std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
         }
 
-        while (auto b = read()) {
-            buffer->emplace_back(b);
+        while (auto b = CStreamPort::read()) {
+            if (!b->empty())
+                m_buffer_finalize->emplace_back(b);
         }
 
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
@@ -205,7 +200,7 @@ void CProcessStream::finalize() {
         if (getState().condition == TState::TCondition::RUNNING) {
             LOGW
                 << "finalization: kill pid " << m_pid << " " << m_command_line
-                << "\noutput:\n" << buffer;
+                << "\noutput:\n" << m_buffer_finalize;
 
 //                << ", timeout: " << system_clock::now() - start
             assertOK(kill(m_pid, SIGKILL), "kill");
@@ -230,6 +225,17 @@ void CProcessStream::finalize() {
     } catch (std::exception const &e) {
         throw std::runtime_error("finalization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
+}
+
+
+io::Buffer::TSharedPtr CProcessStream::read(size_t const &size) {
+    LOCK_SCOPE();
+    if (m_buffer_finalize && !m_buffer_finalize->empty()) {
+        auto result = m_buffer_finalize;
+        m_buffer_finalize.reset();
+        return result; // ----->
+    }
+    return CStreamPort::read(size);
 }
 
 
