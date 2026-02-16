@@ -1,0 +1,4654 @@
+main thread: 281473596337440
+2026-02-16 17:12:37.084 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.084 T 281473595157168 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.084 T 281473590205104 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.084 T 281473595013808 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.084 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.084 T 281473594862256 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473590491824 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.084 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473589918384 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 6, 7 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [ 6, 7 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.085 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473590205104 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.084 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.085 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 8, 9 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473590061744 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.085 T 281473590348464 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.085 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+,
+{
+  [ 14, 15 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595013808 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.085 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /convertion/convert.cpp
+2026-02-16 17:12:37.085 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.085 T 281473595157168 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.085 T 281473594862256 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/node.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /db/sql.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/parsing.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/benchmark.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/http.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/node.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.085 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.085 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 20, 21 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+,
+{
+  [ 12, 17 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.085 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.086 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 27, 28 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 24, 25 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.086 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.086 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.086 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.086 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 27, 28 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+ ]
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.086 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 27, 28 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.086 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.086 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.088 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+,
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+ ]
+2026-02-16 17:12:37.088 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.088 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.088 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.088 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.088 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.088 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.088 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.088 T 281473590491824 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 14, 15 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473710632224
+
+BUFFER_END
+
+2026-02-16 17:12:37.088 T 281473590491824 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.088 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.089 T 281473589918384 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 12, 17 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472898542880
+
+BUFFER_END
+
+2026-02-16 17:12:37.089 T 281473589918384 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.089 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+,
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.089 T 281473589918384 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 14, 15 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473710632224
+2026-02-16 17:12:37.089 I 281473710632224 RUN  /io/uri.cpp/uri
+
+BUFFER_END
+
+2026-02-16 17:12:37.089 T 281473589918384 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.089 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.089 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473590205104 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.089 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.089 T 281473590205104 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 27, 28 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473747615008
+
+BUFFER_END
+
+2026-02-16 17:12:37.090 T 281473590205104 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.090 T 281473590205104 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.089 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.090 T 281473590205104 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 12, 17 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472898542880
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_value
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice
+
+BUFFER_END
+
+2026-02-16 17:12:37.090 T 281473590205104 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.090 T 281473590205104 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 8, 9 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473590491824 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 12, 17 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472898542880
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_value
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_root_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_root_path
+
+BUFFER_END
+
+2026-02-16 17:12:37.090 T 281473590491824 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.090 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 6, 7 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.090 T 281473590491824 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 12, 17 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472898542880
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_value
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_root_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_root_path
+
+BUFFER_END
+
+2026-02-16 17:12:37.090 T 281473590491824 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.090 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.090 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 8, 9 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 8, 9 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+,
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 12, 17 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.090 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+ ]
+2026-02-16 17:12:37.090 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 8, 9 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.090 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.090 T 281473590205104 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.091 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.091 T 281473590491824 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 27, 28 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473747615008
+2026-02-16 17:12:37.090 I 281473747615008 RUN  /parsing/serialization/node.cpp/node_to_struct
+
+BUFFER_END
+
+2026-02-16 17:12:37.091 T 281473590491824 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.091 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.091 T 281473590205104 test_runner_fork.cpp:385
+result:   true
+cond:     DONE
+event fd: [ 8, 9 ]
+event operation: CLOSE
+event status   : END
+BUFFER_BEGIN:
+
+BUFFER_END
+
+2026-02-16 17:12:37.091 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.091 I 281473596337440 /convertion/convert.cpp:
+empty process output
+2026-02-16 17:12:37.091 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.091 T 281473590205104 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.091 T 281473590205104 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.089 T 281473589918384 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 24, 25 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473892752672
+
+BUFFER_END
+
+2026-02-16 17:12:37.091 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 12, 17 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473589918384 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.091 T 281473590205104 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.091 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590205104 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.091 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.091 T 281473590491824 test_runner_fork.cpp:385
+result:   false
+cond:     RUNNING
+event fd: [ 6, 7 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473607621920
+2026-02-16 17:12:37.090 I 281473607621920 RUN  /db/sql.cpp/query
+2026-02-16 17:12:37.090 I 281473607621920 OK   /db/sql.cpp/query
+2026-02-16 17:12:37.090 I 281473607621920
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.091 T 281473590491824 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.091 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.091 T 281473590491824 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/node.cpp
+2026-02-16 17:12:37.091 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 12, 17 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 31, 32 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [ 34, 35 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+,
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.091 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.091 T 281473590061744 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 20, 21 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473842822432
+
+BUFFER_END
+
+2026-02-16 17:12:37.091 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.091 T 281473590061744 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.091 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.091 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+,
+{
+  [ 31, 32 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [ 6, 7 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.091 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.091 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 34, 35 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+,
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+,
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 27, 28 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.091 T 281473590348464 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /db/sql.cpp
+2026-02-16 17:12:37.091 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.091 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.091 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/parsing.cpp
+2026-02-16 17:12:37.091 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/benchmark.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/http.cpp
+2026-02-16 17:12:37.091 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/node.cpp
+2026-02-16 17:12:37.092 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.091 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.091 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473595013808 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.092 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473595157168 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.092 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590491824 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 27, 28 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473747615008
+2026-02-16 17:12:37.090 I 281473747615008 RUN  /parsing/serialization/node.cpp/node_to_struct
+2026-02-16 17:12:37.090 I 281473747615008 OK   /parsing/serialization/node.cpp/node_to_struct
+2026-02-16 17:12:37.090 I 281473747615008
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.092 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.092 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 38, 39 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+,
+{
+  [ 38, 39 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+ ]
+2026-02-16 17:12:37.092 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.092 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.092 T 281473590491824 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.092 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.092 T 281473590061744 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.092 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590205104 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.092 I 281473596337440 /db/sql.cpp:
+main thread: 281473607621920
+2026-02-16 17:12:37.090 I 281473607621920 RUN  /db/sql.cpp/query
+2026-02-16 17:12:37.090 I 281473607621920 OK   /db/sql.cpp/query
+2026-02-16 17:12:37.090 I 281473607621920
+
+
+2026-02-16 17:12:37.092 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+,
+{
+  [ 18, 41 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.092 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.092 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/node.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.092 T 281473589918384 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.092 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.092 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+ ]
+2026-02-16 17:12:37.092 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590205104 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 12, 17 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472898542880
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_value
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_root_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_root_path
+2026-02-16 17:12:37.090 I 281472898542880
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.092 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.092 T 281473590205104 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.092 T 281473590205104 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.092 T 281473590205104 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/parsing.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/benchmark.cpp
+2026-02-16 17:12:37.092 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.092 T 281473590205104 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.092 T 281473590205104 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.092 T 281473590205104 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/http.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/node.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.092 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.093 I 281473596337440 /parsing/serialization/node.cpp:
+main thread: 281473747615008
+2026-02-16 17:12:37.090 I 281473747615008 RUN  /parsing/serialization/node.cpp/node_to_struct
+2026-02-16 17:12:37.090 I 281473747615008 OK   /parsing/serialization/node.cpp/node_to_struct
+2026-02-16 17:12:37.090 I 281473747615008
+
+
+2026-02-16 17:12:37.092 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.093 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.093 T 281473595013808 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.093 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.093 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.093 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.093 T 281473595013808 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.093 T 281473595013808 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.093 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [  ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /convertion/convert.cpp
+}
+
+2026-02-16 17:12:37.093 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.093 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [  ],
+  OPEN,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.093 T 281473595013808 session_manager.cpp:204  [INIT]
+2026-02-16 17:12:37.093 I 281473596337440 /parsing/node.cpp:
+main thread: 281472898542880
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/add_child_nullptr
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/clone_with_empty_children
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/del_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_empty_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_child_nonexistent
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_childs
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_name
+2026-02-16 17:12:37.089 I 281472898542880 RUN  /parsing/node.cpp/get_value
+2026-02-16 17:12:37.089 I 281472898542880 OK   /parsing/node.cpp/get_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/has_childs
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/set_value_empty_string
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_empty_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_invalid_path
+2026-02-16 17:12:37.090 I 281472898542880 RUN  /parsing/node.cpp/slice_root_path
+2026-02-16 17:12:37.090 I 281472898542880 OK   /parsing/node.cpp/slice_root_path
+2026-02-16 17:12:37.090 I 281472898542880
+
+
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/parsing.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/benchmark.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/http.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.093 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.091 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.093 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.093 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 12, 17 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/node.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.094 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.094 T 281473590348464 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.093 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 31, 32 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [ 6, 7 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [ 20, 21 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+,
+{
+  [ 24, 25 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+,
+{
+  [ 6, 7 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.094 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 10, 11 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 19, 22 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 6, 7 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [ 34, 35 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+,
+{
+  [ 31, 32 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [ 31, 32 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+ ]
+2026-02-16 17:12:37.094 T 281473590061744 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 24, 25 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473892752672
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/compose_http_request
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/compose_http_request
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/compose_json
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/compose_json
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/compose_xml
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/compose_xml
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/parse_compose
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/parse_compose
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/parse_json
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/parse_json
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/parse_xml
+2026-02-16 17:12:37.091 I 281473892752672 OK   /parsing/parsing.cpp/parse_xml
+2026-02-16 17:12:37.091 I 281473892752672
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.094 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 10, 11 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+ ]
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.094 T 281473590061744 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.094 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.094 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.094 I 281473596337440 /parsing/parsing.cpp:
+main thread: 281473892752672
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/compose_http_request
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/compose_http_request
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/compose_json
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/compose_json
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/compose_xml
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/compose_xml
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/parse_compose
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/parse_compose
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/parse_json
+2026-02-16 17:12:37.090 I 281473892752672 OK   /parsing/parsing.cpp/parse_json
+2026-02-16 17:12:37.090 I 281473892752672 RUN  /parsing/parsing.cpp/parse_xml
+2026-02-16 17:12:37.091 I 281473892752672 OK   /parsing/parsing.cpp/parse_xml
+2026-02-16 17:12:37.091 I 281473892752672
+
+
+2026-02-16 17:12:37.094 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590061744 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 20, 21 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473842822432
+2026-02-16 17:12:37.091 I 281473842822432 RUN  /io/socket.cpp/dns
+
+BUFFER_END
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.094 T 281473590061744 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/benchmark.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/http.cpp
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.094 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.094 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.094 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.094 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 6, 7 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 6, 7 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+ ]
+2026-02-16 17:12:37.094 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.094 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 6, 7 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.094 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.094 T 281473590348464 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.094 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.094 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.094 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.094 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.095 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.095 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.095 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 34, 35 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+,
+{
+  [ 31, 32 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [  ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [  ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /db/sql.cpp
+}
+,
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.095 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.095 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.095 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.095 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+,
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:37.095 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.095 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.095 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.095 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.095 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.095 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473595157168 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 38, 39 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472964410656
+
+BUFFER_END
+
+2026-02-16 17:12:37.096 T 281473595157168 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.095 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+,
+{
+  [ 38, 39 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+ ]
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.096 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.096 T 281473590061744 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 31, 32 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473349541152
+2026-02-16 17:12:37.093 I 281473349541152 RUN  /parsing/serialization/http.cpp/http_request
+2026-02-16 17:12:37.093 I 281473349541152 OK   /parsing/serialization/http.cpp/http_request
+2026-02-16 17:12:37.093 I 281473349541152 RUN  /parsing/serialization/http.cpp/http_response
+2026-02-16 17:12:37.093 I 281473349541152 OK   /parsing/serialization/http.cpp/http_response
+2026-02-16 17:12:37.093 I 281473349541152
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.096 T 281473590061744 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.096 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.096 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.096 T 281473595157168 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 18, 41 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473149013280
+
+BUFFER_END
+
+2026-02-16 17:12:37.096 T 281473595157168 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.096 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.096 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 38, 39 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+ ]
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.096 I 281473596337440 /parsing/serialization/http.cpp:
+main thread: 281473349541152
+2026-02-16 17:12:37.093 I 281473349541152 RUN  /parsing/serialization/http.cpp/http_request
+2026-02-16 17:12:37.093 I 281473349541152 OK   /parsing/serialization/http.cpp/http_request
+2026-02-16 17:12:37.093 I 281473349541152 RUN  /parsing/serialization/http.cpp/http_response
+2026-02-16 17:12:37.093 I 281473349541152 OK   /parsing/serialization/http.cpp/http_response
+2026-02-16 17:12:37.093 I 281473349541152
+
+
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/benchmark.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.096 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+,
+{
+  [ 38, 39 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+,
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+ ]
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.096 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 34, 35 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+ ]
+2026-02-16 17:12:37.096 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473594862256 context.cpp:82           [PROTOCOL] control called with: OPEN END
+2026-02-16 17:12:37.096 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.096 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.096 T 281473594862256 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.096 T 281473594862256 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.096 T 281473590061744 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 34, 35 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472949128480
+2026-02-16 17:12:37.095 I 281472949128480 RUN  /parsing/serialization/benchmark.cpp/benchmark_2_iridium
+2026-02-16 17:12:37.095 I 281472949128480 skip
+2026-02-16 17:12:37.095 I 281472949128480 OK   /parsing/serialization/benchmark.cpp/benchmark_2_iridium
+2026-02-16 17:12:37.095 I 281472949128480
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.096 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  OPEN,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+,
+{
+  [ 13, 26 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.096 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473590061744 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.096 T 281473594862256 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.096 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.096 T 281473590061744 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.096 T 281473595157168 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 38, 39 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472964410656
+2026-02-16 17:12:37.096 I 281472964410656 RUN  /pattern/observer.cpp/observer_basic_notification
+2026-02-16 17:12:37.096 I 281472964410656 OK   /pattern/observer.cpp/observer_basic_notification
+2026-02-16 17:12:37.096 I 281472964410656 RUN  /pattern/observer.cpp/observer_multiple_observers
+2026-02-16 17:12:37.096 I 281472964410656 OK   /pattern/observer.cpp/observer_multiple_observers
+2026-02-16 17:12:37.096 I 281472964410656 RUN  /pattern/observer.cpp/observer_unsubscribe_works
+2026-02-16 17:12:37.096 I 281472964410656 OK   /pattern/observer.cpp/observer_unsubscribe_works
+2026-02-16 17:12:37.096 I 281472964410656
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.096 I 281473596337440 /parsing/serialization/benchmark.cpp:
+main thread: 281472949128480
+2026-02-16 17:12:37.095 I 281472949128480 RUN  /parsing/serialization/benchmark.cpp/benchmark_2_iridium
+2026-02-16 17:12:37.095 I 281472949128480 skip
+2026-02-16 17:12:37.095 I 281472949128480 OK   /parsing/serialization/benchmark.cpp/benchmark_2_iridium
+2026-02-16 17:12:37.095 I 281472949128480
+
+
+2026-02-16 17:12:37.096 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.096 T 281473595157168 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.096 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.096 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.096 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.096 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.097 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.096 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.096 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.097 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.097 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.097 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 10, 11 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+ ]
+2026-02-16 17:12:37.097 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473595013808 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.096 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.097 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/observer.cpp
+2026-02-16 17:12:37.097 T 281473595013808 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 10, 11 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473097620768
+
+BUFFER_END
+
+2026-02-16 17:12:37.097 T 281473595013808 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.097 T 281473595157168 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 18, 41 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473149013280
+2026-02-16 17:12:37.096 I 281473149013280 RUN  /threading/worker.cpp/worker
+
+BUFFER_END
+
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.097 T 281473595157168 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.097 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.097 T 281473595013808 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.097 I 281473596337440 /pattern/observer.cpp:
+main thread: 281472964410656
+2026-02-16 17:12:37.096 I 281472964410656 RUN  /pattern/observer.cpp/observer_basic_notification
+2026-02-16 17:12:37.096 I 281472964410656 OK   /pattern/observer.cpp/observer_basic_notification
+2026-02-16 17:12:37.096 I 281472964410656 RUN  /pattern/observer.cpp/observer_multiple_observers
+2026-02-16 17:12:37.096 I 281472964410656 OK   /pattern/observer.cpp/observer_multiple_observers
+2026-02-16 17:12:37.096 I 281472964410656 RUN  /pattern/observer.cpp/observer_unsubscribe_works
+2026-02-16 17:12:37.096 I 281472964410656 OK   /pattern/observer.cpp/observer_unsubscribe_works
+2026-02-16 17:12:37.096 I 281472964410656
+
+
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /pattern/fsm.cpp
+2026-02-16 17:12:37.097 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.097 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:37.097 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.097 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 10, 11 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 44, 45 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:37.097 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.097 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.097 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473589918384 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 44, 45 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473756257568
+
+BUFFER_END
+
+2026-02-16 17:12:37.097 T 281473589918384 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.097 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.097 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.097 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.097 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 10, 11 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+ ]
+2026-02-16 17:12:37.097 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.097 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.098 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473589918384 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.098 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 44, 45 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.098 T 281473589918384 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.098 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.098 T 281473590348464 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 44, 45 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473756257568
+2026-02-16 17:12:37.097 I 281473756257568 RUN  /system/process.cpp/shell
+
+BUFFER_END
+
+2026-02-16 17:12:37.098 T 281473590348464 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.098 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 10, 11 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.098 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.098 T 281473590348464 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 19, 22 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473238723872
+
+BUFFER_END
+
+2026-02-16 17:12:37.098 T 281473590348464 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.098 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 10, 11 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 10, 11 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+,
+{
+  [ 10, 11 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+ ]
+2026-02-16 17:12:37.098 T 281473594862256 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.098 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.098 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.098 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 10, 11 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473594862256 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.098 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.098 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.098 T 281473594862256 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 10, 11 ]
+event operation: CLOSE
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473097620768
+2026-02-16 17:12:37.097 I 281473097620768 RUN  /pattern/fsm.cpp/fsm_map
+2026-02-16 17:12:37.097 I 281473097620768 OK   /pattern/fsm.cpp/fsm_map
+2026-02-16 17:12:37.097 I 281473097620768
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.098 T 281473594862256 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.098 T 281473594862256 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.098 T 281473594862256 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.098 T 281473594862256 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.098 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [  ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.098 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.098 I 281473596337440 /pattern/fsm.cpp:
+main thread: 281473097620768
+2026-02-16 17:12:37.097 I 281473097620768 RUN  /pattern/fsm.cpp/fsm_map
+2026-02-16 17:12:37.097 I 281473097620768 OK   /pattern/fsm.cpp/fsm_map
+2026-02-16 17:12:37.097 I 281473097620768
+
+
+2026-02-16 17:12:37.098 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.098 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.098 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /testing/example.cpp
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.098 T 281473594862256 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.099 T 281473594862256 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.099 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.099 T 281473594862256 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.099 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [  ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/fsm.cpp
+}
+
+2026-02-16 17:12:37.099 T 281473594862256 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.099 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.099 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 19, 22 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.099 T 281473590061744 test_runner_fork.cpp:385
+result:   false
+cond:     DONE
+event fd: [ 19, 22 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473238723872
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/bool_
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/bool_
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_equal
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_equal
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_greater
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_greater
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_greater_equal
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_greater_equal
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_less
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_less
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_less_equal
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_less_equal
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/exception
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/exception
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/mock
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/mock
+2026-02-16 17:12:37.098 I 281473238723872
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.099 T 281473590061744 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.099 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.099 T 281473590061744 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.099 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.099 I 281473596337440 /testing/example.cpp:
+main thread: 281473238723872
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/bool_
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/bool_
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_equal
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_equal
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_greater
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_greater
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_greater_equal
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_greater_equal
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_less
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_less
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/comparing_less_equal
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/comparing_less_equal
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/exception
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/exception
+2026-02-16 17:12:37.098 I 281473238723872 RUN  /testing/example.cpp/mock
+2026-02-16 17:12:37.098 I 281473238723872 OK   /testing/example.cpp/mock
+2026-02-16 17:12:37.098 I 281473238723872
+
+
+2026-02-16 17:12:37.099 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.099 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+,
+{
+  [ 19, 22 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.099 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.099 T 281473589918384 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /parsing/serialization/schema.cpp
+2026-02-16 17:12:37.099 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.099 T 281473589918384 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.099 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 19, 22 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.099 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 19, 22 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+ ]
+2026-02-16 17:12:37.099 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 19, 22 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /testing/example.cpp
+}
+
+2026-02-16 17:12:37.099 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.099 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.099 T 281473590491824 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.099 T 281473590491824 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.100 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.100 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.100 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.100 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.100 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.100 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.100 T 281473590491824 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 13, 26 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472923626784
+
+BUFFER_END
+
+2026-02-16 17:12:37.100 T 281473590491824 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:37.100 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:37.100 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.100 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.100 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.101 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.101 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.101 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.101 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.101 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.101 T 281473590061744 test_runner_fork.cpp:385
+result:   false
+cond:     RUNNING
+event fd: [ 13, 26 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281472923626784
+2026-02-16 17:12:37.101 I 281472923626784 RUN  /parsing/serialization/schema.cpp/validate
+2026-02-16 17:12:37.101 I 281472923626784 OK   /parsing/serialization/schema.cpp/validate
+2026-02-16 17:12:37.101 I 281472923626784
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.101 T 281473590061744 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.101 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.101 T 281473590061744 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.101 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.101 I 281473596337440 /parsing/serialization/schema.cpp:
+main thread: 281472923626784
+2026-02-16 17:12:37.101 I 281472923626784 RUN  /parsing/serialization/schema.cpp/validate
+2026-02-16 17:12:37.101 I 281472923626784 OK   /parsing/serialization/schema.cpp/validate
+2026-02-16 17:12:37.101 I 281472923626784
+
+
+2026-02-16 17:12:37.101 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.101 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.101 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.101 T 281473596337440 test_runner_fork.cpp:77  path left: /system/process.cpp
+2026-02-16 17:12:37.101 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.101 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.101 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+,
+{
+  [ 13, 26 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.101 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.101 T 281473590491824 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.101 T 281473590491824 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.101 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 13, 26 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.101 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 13, 26 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+ ]
+2026-02-16 17:12:37.101 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 13, 26 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/schema.cpp
+}
+
+2026-02-16 17:12:37.101 T 281473594862256 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.101 T 281473594862256 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.101 T 281473594862256 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.101 T 281473594862256 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.198 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.198 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.198 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.198 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.198 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:37.198 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.198 T 281473595013808 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.198 T 281473595013808 test_runner_fork.cpp:385
+result:   false
+cond:     RUNNING
+event fd: [ 44, 45 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473756257568
+2026-02-16 17:12:37.097 I 281473756257568 RUN  /system/process.cpp/shell
+2026-02-16 17:12:37.198 I 281473756257568 OK   /system/process.cpp/shell
+2026-02-16 17:12:37.198 I 281473756257568
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.198 T 281473595013808 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.198 T 281473595013808 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.198 T 281473595013808 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.198 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:37.198 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.198 I 281473596337440 /system/process.cpp:
+main thread: 281473756257568
+2026-02-16 17:12:37.097 I 281473756257568 RUN  /system/process.cpp/shell
+2026-02-16 17:12:37.198 I 281473756257568 OK   /system/process.cpp/shell
+2026-02-16 17:12:37.198 I 281473756257568
+
+
+2026-02-16 17:12:37.198 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.198 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.198 T 281473596337440 test_runner_fork.cpp:77  path left: /io/uri.cpp
+2026-02-16 17:12:37.355 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.355 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.355 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.355 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+,
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473594862256 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.355 T 281473594862256 test_runner_fork.cpp:385
+result:   false
+cond:     RUNNING
+event fd: [ 14, 15 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473710632224
+2026-02-16 17:12:37.089 I 281473710632224 RUN  /io/uri.cpp/uri
+2026-02-16 17:12:37.355 I 281473710632224 OK   /io/uri.cpp/uri
+2026-02-16 17:12:37.355 I 281473710632224
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.355 T 281473594862256 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.355 T 281473594862256 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.355 I 281473596337440 /io/uri.cpp:
+main thread: 281473710632224
+2026-02-16 17:12:37.089 I 281473710632224 RUN  /io/uri.cpp/uri
+2026-02-16 17:12:37.355 I 281473710632224 OK   /io/uri.cpp/uri
+2026-02-16 17:12:37.355 I 281473710632224
+
+
+2026-02-16 17:12:37.355 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.355 T 281473596337440 test_runner_fork.cpp:77  path left: /io/socket.cpp
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.355 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+,
+{
+  [ 14, 15 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.355 T 281473594862256 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.355 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 14, 15 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 14, 15 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+ ]
+2026-02-16 17:12:37.355 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 14, 15 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/uri.cpp
+}
+
+2026-02-16 17:12:37.355 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.355 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.355 T 281473589918384 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.355 T 281473589918384 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.614 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.614 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.614 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.614 T 281473590061744 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:37.614 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+,
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.614 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.614 T 281473590348464 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:37.614 T 281473590348464 test_runner_fork.cpp:385
+result:   false
+cond:     RUNNING
+event fd: [ 20, 21 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473842822432
+2026-02-16 17:12:37.091 I 281473842822432 RUN  /io/socket.cpp/dns
+2026-02-16 17:12:37.614 I 281473842822432 OK   /io/socket.cpp/dns
+2026-02-16 17:12:37.614 I 281473842822432
+
+
+BUFFER_END
+
+2026-02-16 17:12:37.614 T 281473590348464 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:37.614 T 281473590348464 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.614 T 281473590348464 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:37.614 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.614 I 281473596337440 /io/socket.cpp:
+main thread: 281473842822432
+2026-02-16 17:12:37.091 I 281473842822432 RUN  /io/socket.cpp/dns
+2026-02-16 17:12:37.614 I 281473842822432 OK   /io/socket.cpp/dns
+2026-02-16 17:12:37.614 I 281473842822432
+
+
+2026-02-16 17:12:37.614 T 281473596337440 test_runner_fork.cpp:77  path left: /threading/worker.cpp
+2026-02-16 17:12:37.615 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 38, 39 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+,
+{
+  [ 38, 39 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473590491824 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.615 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473590491824 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.615 T 281473590061744 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 34, 35 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+,
+{
+  [ 31, 32 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 38, 39 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473590061744 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.615 T 281473590491824 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.615 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473590061744 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 38, 39 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+,
+{
+  [ 31, 32 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [ 27, 28 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.615 T 281473590061744 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.615 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 31, 32 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 38, 39 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /pattern/observer.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 31, 32 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+,
+{
+  [ 24, 25 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+,
+{
+  [ 24, 25 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 34, 35 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.615 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 27, 28 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.615 T 281473595013808 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.615 T 281473595013808 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 34, 35 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+,
+{
+  [ 27, 28 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+,
+{
+  [ 20, 21 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+,
+{
+  [ 20, 21 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:199  context event:
+{
+  [ 31, 32 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/http.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473589918384 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.615 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:37.615 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595157168 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:37.615 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 24, 25 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595157168 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:37.615 T 281473589918384 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.615 T 281473589918384 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 24, 25 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 27, 28 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/node.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 24, 25 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/parsing.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473589775024 multiplexer.cpp:149      unsubscribe event:
+{
+  [ 20, 21 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.615 T 281473595013808 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.615 T 281473589918384 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.615 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.615 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 20, 21 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+ ]
+2026-02-16 17:12:37.615 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.615 T 281473595013808 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.616 T 281473595157168 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.616 T 281473590061744 session_manager.cpp:199  context event:
+{
+  [ 20, 21 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /io/socket.cpp
+}
+
+2026-02-16 17:12:37.616 T 281473590061744 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.616 T 281473590061744 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.616 T 281473595157168 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.616 T 281473595013808 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.616 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 34, 35 ],
+  CLOSE,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /parsing/serialization/benchmark.cpp
+}
+
+2026-02-16 17:12:37.616 T 281473590061744 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.616 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: CLOSE END
+2026-02-16 17:12:37.616 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:37.616 T 281473595157168 context.cpp:89           [CLEANUP] removing pipe for stream
+2026-02-16 17:12:37.616 T 281473590061744 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.616 T 281473595157168 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:37.616 T 281473595013808 session_manager.cpp:270  [FINALIZE]
+2026-02-16 17:12:38.198 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.198 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:38.198 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.198 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.198 T 281473590491824 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.198 T 281473590491824 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:38.198 T 281473590491824 test_runner_fork.cpp:385
+result:   true
+cond:     RUNNING
+event fd: [ 18, 41 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473149013280
+2026-02-16 17:12:37.096 I 281473149013280 RUN  /threading/worker.cpp/worker
+2026-02-16 17:12:38.198 I 281473149013280 OK   /threading/worker.cpp/worker
+2026-02-16 17:12:38.198 I 281473149013280 RUN  /threading/worker.cpp/worker_pool
+
+BUFFER_END
+
+2026-02-16 17:12:38.198 T 281473590491824 test_runner_fork.cpp:396 protocol return: true
+2026-02-16 17:12:38.198 T 281473590491824 context.cpp:84           [PROTOCOL] control returned: true
+2026-02-16 17:12:38.198 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.198 T 281473590348464 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.198 T 281473590348464 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:38.763 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.763 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.763 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.764 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: true
+2026-02-16 17:12:38.764 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.764 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  READ,
+  END,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+,
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.764 T 281473595157168 context.cpp:82           [PROTOCOL] control called with: READ END
+2026-02-16 17:12:38.764 T 281473595157168 test_runner_fork.cpp:385
+result:   false
+cond:     RUNNING
+event fd: [ 18, 41 ]
+event operation: READ
+event status   : END
+BUFFER_BEGIN:
+main thread: 281473149013280
+2026-02-16 17:12:37.096 I 281473149013280 RUN  /threading/worker.cpp/worker
+2026-02-16 17:12:38.198 I 281473149013280 OK   /threading/worker.cpp/worker
+2026-02-16 17:12:38.198 I 281473149013280 RUN  /threading/worker.cpp/worker_pool
+2026-02-16 17:12:38.763 I 281473149013280 OK   /threading/worker.cpp/worker_pool
+2026-02-16 17:12:38.763 I 281473149013280
+
+
+BUFFER_END
+
+2026-02-16 17:12:38.764 T 281473595157168 test_runner_fork.cpp:396 protocol return: false
+2026-02-16 17:12:38.764 T 281473595157168 context.cpp:84           [PROTOCOL] control returned: false
+2026-02-16 17:12:38.764 T 281473595157168 session_manager.cpp:295  [SKIP]
+2026-02-16 17:12:38.764 T 281473595157168 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  READ,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.764 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 44, 45 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+,
+{
+  [ 44, 45 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+ ]
+2026-02-16 17:12:38.764 T 281473595157168 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:38.764 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:38.764 T 281473595013808 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:38.764 T 281473595013808 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:38.764 I 281473596337440 /threading/worker.cpp:
+main thread: 281473149013280
+2026-02-16 17:12:37.096 I 281473149013280 RUN  /threading/worker.cpp/worker
+2026-02-16 17:12:38.198 I 281473149013280 OK   /threading/worker.cpp/worker
+2026-02-16 17:12:38.198 I 281473149013280 RUN  /threading/worker.cpp/worker_pool
+2026-02-16 17:12:38.763 I 281473149013280 OK   /threading/worker.cpp/worker_pool
+2026-02-16 17:12:38.763 I 281473149013280
+
+
+2026-02-16 17:12:38.764 T 281473596337440 session_manager.cpp:71   CSessionManager::finalize ...
+2026-02-16 17:12:38.764 T 281473595013808 session_manager.cpp:199  context event:
+{
+  [ 44, 45 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /system/process.cpp
+}
+
+2026-02-16 17:12:38.764 T 281473595013808 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:38.764 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.764 T 281473590205104 session_manager.cpp:238  [TRANSMIT]: false
+2026-02-16 17:12:38.764 T 281473589775024 session_manager.cpp:119  multiplexer events:
+[
+{
+  [ 18, 41 ],
+  WRITE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+,
+{
+  [ 18, 41 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+ ]
+2026-02-16 17:12:38.764 T 281473590205104 session_manager.cpp:199  context event:
+{
+  [ 18, 41 ],
+  CLOSE,
+  BEGIN,
+  process://./iridium-test run --mode=raw --print-result=json /threading/worker.cpp
+}
+
+2026-02-16 17:12:38.764 T 281473590205104 session_manager.cpp:225  [TRANSMIT]: flush
+2026-02-16 17:12:38.764 T 281473590205104 session_manager.cpp:230  [UNSUBSCRIBE]
+2026-02-16 17:12:38.765 T 281473596337440 session_manager.cpp:78   CSessionManager::finalize OK
+2026-02-16 17:12:38.765 E 281473596337440
+ERRORS:
+
+/convertion/convert.cpp/enum_
+Protocol error: missing test results (JSON not found)
+
+/convertion/convert.cpp/exception
+Protocol error: missing test results (JSON not found)
+
+/convertion/convert.cpp/specializations
+Protocol error: missing test results (JSON not found)
+
+/convertion/convert.cpp/strings
+Protocol error: missing test results (JSON not found)
+
+/convertion/convert.cpp/types
+Protocol error: missing test results (JSON not found)
+
+2026-02-16 17:12:38.765 I 281473596337440
+passed: 48
+failed: 5
+total:  53
