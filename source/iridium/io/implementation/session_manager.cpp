@@ -34,25 +34,19 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     if (filtered.empty())
         return {};
 
-    std::sort(filtered.begin(), filtered.end(),
+    std::stable_sort(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
-            auto const &ha = a->stream->getHandles();
-            auto const &hb = b->stream->getHandles();
-
             return
-                std::tie(ha, a->operation, a->status) <
-                std::tie(hb, b->operation, b->status);
+                std::tie(a->stream, a->operation, a->status) <
+                std::tie(b->stream, b->operation, b->status);
         }
     );
 
     auto last = std::unique(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
-            auto const &ha = a->stream->getHandles();
-            auto const &hb = b->stream->getHandles();
-
             return
-                std::tie(ha, a->operation, a->status) ==
-                std::tie(hb, b->operation, b->status);
+                std::tie(a->stream, a->operation, a->status) ==
+                std::tie(b->stream, b->operation, b->status);
         }
     );
 
