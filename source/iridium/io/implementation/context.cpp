@@ -115,8 +115,8 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
 
 void CContext::createPipe(std::string const &name) {
     //LOGT << "create pipe: " << name;
-    if (m_map_name_pipe[name])
-        throw std::runtime_error("pipe creating error: '" + name + "' already exists"); // ----->
+    if (m_map_name_pipe.find(name) != m_map_name_pipe.end())
+        return; // ----->
 
     m_map_name_pipe[name] = CPipe::create();
 }

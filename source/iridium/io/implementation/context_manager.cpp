@@ -19,12 +19,6 @@ void CContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol
 IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &event, IMultiplexer::TSharedPtr const &/*multiplexer*/) {
     LOCK_SCOPE();
 
-    //if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN)
-    // LOGT
-    //     << "CContextManager::acquireContext begin: " << event;
-    //else
-    //    LOGT << "manager::acquire: " << event->operation << " " << event->status << " " << event->stream->getID();
-
     auto stream_context  = m_map_stream_context.find(event->stream);
     if  (stream_context != m_map_stream_context.end()) {
         auto context = stream_context->second;
@@ -32,18 +26,8 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
         auto i  = m_acquired_contexts.find(context);
         if  (i == m_acquired_contexts.end()) {
             m_acquired_contexts.insert(context);
-
-            // LOGT
-            //     << "CContextManager::acquireContext end: " << event
-            //     << " return context";
-
-            // context->pushEvent(event);
             return context; // ----->
         } else {
-            // context acquired
-            //LOGT
-                //<<"CContextManager::acquireContext end: " << event
-                //<< " return nullptr";
             return nullptr; // ----->
         }
     }
@@ -74,18 +58,23 @@ IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &ev
 }
 
 
-std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) {
-//    // todo: throw
-//    if (!context)
-//        return {};
-
+IContext::TSharedPtr CContextManager::getContext(IStream::TSharedPtr const &stream) {
     LOCK_SCOPE();
+    auto it = m_map_stream_context.find(stream);
+    if (it != m_map_stream_context.end())
+        return it->second; // ----->
+    return nullptr; // ----->
+}
+
+
+std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) {
+    LOCK_SCOPE();
+
+    m_acquired_contexts.erase(context);
 
     auto events = context->popEvents();
 
     if (m_contexts_to_remove.count(context) > 0 && events.empty() && !is_valid_context) {
-    //        LOGT << "CContextManager::releaseContext, remove context";
-
         context->remove();
 
         auto    stream_context  = m_map_stream_context.begin();
@@ -98,13 +87,10 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 
         m_contexts.erase(context);
         m_contexts_to_remove.erase(context);
-        m_acquired_contexts.erase(context);
 
-        // LOGT << "CContextManager::releaseContext: empty";
         return {}; // ----->
     }
 
-    m_acquired_contexts.erase(context);
     return events; // ----->
 }
 

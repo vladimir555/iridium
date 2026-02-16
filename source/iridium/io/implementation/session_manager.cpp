@@ -147,22 +147,44 @@ CSessionManager::CContextWorkerHandler::handle(
     // events to repeat handling
     IContextWorker::IHandler::TOutputItems events_to_repeat;
 
-    for (auto const &worker_event: removeDuplicates(events_)) {
-        if(!worker_event->stream ||
-           (worker_event->stream->getHandles().empty() &&
-            !checkOneOf(worker_event->operation,
-                Event::TOperation::OPEN,
-                Event::TOperation::CLOSE,
-                Event::TOperation::ERROR_,
-                Event::TOperation::TIMEOUT)))
-        {
-            continue; // <---
+    // Group events by stream to avoid redundant acquire/release calls and double-processing
+    std::unordered_map<IStream::TSharedPtr, std::list<Event::TSharedPtr>> grouped_events;
+    for (auto const &event : removeDuplicates(events_)) {
+        if (event->stream)
+            grouped_events[event->stream].push_back(event);
+    }
+
+    for (auto const &pair : grouped_events) {
+        auto const &stream = pair.first;
+        auto const &batch_events = pair.second;
+
+        // Check if at least one event in the batch for this stream is valid for processing
+        bool has_valid_event = false;
+        for (auto const &event : batch_events) {
+            if (!(stream->getHandles().empty() &&
+                  !checkOneOf(event->operation,
+                      Event::TOperation::OPEN,
+                      Event::TOperation::CLOSE,
+                      Event::TOperation::ERROR_,
+                      Event::TOperation::TIMEOUT)))
+            {
+                has_valid_event = true;
+                break;
+            }
         }
 
-        //LOGT << "[WORKER] event:" << worker_event;
+        if (!has_valid_event)
+            continue;
 
-        // events for multiple contexts
-        if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
+        // Use the first event to acquire context
+        auto it = batch_events.begin();
+        if (auto context = m_context_manager->acquireContext(*it, m_multiplexer)) {
+
+            // Push any other events from this same batch to the context's internal queue
+            for (++it; it != batch_events.end(); ++it) {
+                context->pushEvent(*it);
+            }
+
             bool is_context_valid = true;
 
             auto context_events = removeDuplicates(context->popEvents());
@@ -170,7 +192,7 @@ CSessionManager::CContextWorkerHandler::handle(
             // LOGT << "context_events: " << context_events;
 
             // events for one context
-            for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
+            for (auto const &event: context_events) {
                 // if (!is_context_valid)
                 //     break; // --->
 
@@ -295,9 +317,13 @@ CSessionManager::CContextWorkerHandler::handle(
 
         } else {
             // Context already acquired (occupied by another worker) or missing.
-            // If it was acquired, the event has already been pushed to the context
-            // by acquireContext and will be handled when the current owner releases it.
-            // No need to re-push it to the global queue here.
+            // We already pushed the FIRST event (*it) in acquireContext call.
+            // We MUST push the rest too, so the current owner can see them.
+            if (auto ctx = m_context_manager->getContext(stream)) {
+                for (++it; it != batch_events.end(); ++it) {
+                    ctx->pushEvent(*it);
+                }
+            }
         }
     }
 

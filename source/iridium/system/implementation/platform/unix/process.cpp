@@ -190,9 +190,14 @@ void CProcessStream::finalize() {
                 std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
         }
 
-        while (auto b = CStreamPort::read()) {
-            if (!b->empty())
-                m_buffer_finalize->emplace_back(b);
+        while (m_fd_reader != 0) {
+            try {
+                auto b = CStreamPort::read();
+                if (b && !b->empty())
+                    m_buffer_finalize->emplace_back(b);
+                else
+                    break;
+            } catch (...) { break; }
         }
 
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
