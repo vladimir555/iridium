@@ -13,26 +13,23 @@
 
 
 #include "iridium/io/multiplexer.h"
+#include "iridium/io/implementation/multiplexer_base.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/synchronized.h"
-#include "iridium/threading/async_queue.h"
-#include "iridium/threading/worker.h"
 
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
-#include <cstring>
-#include <array>
-#include <atomic>
-#include <mutex>
 
 #include <sys/event.h>
+#include <cstring>
 
 
 namespace iridium::io::implementation::platform {
 
 
-class CMultiplexer: public IMultiplexer, public threading::Synchronized<std::mutex> {
+class CMultiplexer:
+    public IMultiplexer,
+    public CMultiplexerBase,
+    public threading::Synchronized<std::mutex>
+{
 public:
     DEFINE_IMPLEMENTATION(CMultiplexer)
     CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);
@@ -55,8 +52,6 @@ private:
 
     static void handleSignal(int signal);
 
-    // std::array<int, 2> registerPipe();
-
     void wakeKEvent();
 
     struct timespec
@@ -64,21 +59,10 @@ private:
 
     std::vector<struct kevent>
         m_triggered_events;
-    std::atomic<int>
-        m_kqueue;
-    // std::array<int, 2>
-    //     m_wake_event_pipe;
-
-    std::unordered_map<uintptr_t, IStream::TSharedPtr>
-        m_map_fd_stream;
-    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
-        m_wake_events;
-    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
-        m_streams_to_add;
-    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
-        m_streams_to_del;
     std::atomic<bool>
         m_is_initialized;
+    std::atomic<int>
+        m_kqueue;
 };
 
 

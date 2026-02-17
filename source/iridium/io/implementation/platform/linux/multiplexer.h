@@ -12,11 +12,10 @@
 #ifdef LINUX_PLATFORM
 
 
-#include "iridium/io/multiplexer.h"
 #include "iridium/threading/synchronized.h"
-#include "iridium/threading/async_queue.h"
+#include "iridium/io/multiplexer.h"
+#include "iridium/io/implementation/multiplexer_base.h"
 
-#include <unordered_map>
 #include <sys/epoll.h>
 
 
@@ -26,6 +25,7 @@ namespace iridium::io::implementation::platform {
 // todo: fix handling orphan sockets on lost connection
 class CMultiplexer:
     public IMultiplexer,
+    public CMultiplexerBase,
     public threading::Synchronized<std::mutex>
 {
 public:
@@ -51,16 +51,11 @@ private:
     void addInternal(IStream::TSharedPtr const &stream);
     void delInternal(IStream::TSharedPtr const &stream);
 
-    std::unordered_map<uintptr_t, IStream::TSharedPtr>
-                        m_map_fd_stream;
-    std::atomic<int>    m_epoll_fd;
-    int                 m_event_fd;
-
-    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_add;
-    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr m_streams_to_del;
-    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr   m_wake_events;
-
-    std::atomic<bool> m_is_closing;
+    std::atomic<int>
+        m_epoll_fd;
+    std::atomic<bool>
+        m_is_closing;
+    int m_event_fd;
 };
 
 

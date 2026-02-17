@@ -86,20 +86,11 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
             duration_cast<seconds>
                 (timeout)).count()
     },
-
     m_triggered_events
         ( DEFAULT_EVENTS_LIMIT, (struct kevent) { } ),
-
-    m_kqueue(0),
-
-    m_wake_events
-        (CAsyncQueue<Event::TSharedPtr>::create()),
-    m_streams_to_add
-        (CAsyncQueue<IStream::TSharedPtr>::create()),
-    m_streams_to_del
-        (CAsyncQueue<IStream::TSharedPtr>::create()),
     m_is_initialized
-        (false)
+        (false),
+    m_kqueue(0)
 {}
 
 
@@ -197,26 +188,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 close(m_kqueue);
                 m_kqueue = 0;
 
-                for (auto const &stream: m_streams_to_del->pop(false))
-                    events.push_back(
-                        Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
-
-                for (auto const &stream: m_streams_to_add->pop(false))
-                    events.push_back(
-                        Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
-
-                for (auto const &fd_stream: m_map_fd_stream) {
-                    if (fd_stream.second)
-                        events.push_back(
-                            Event::create(fd_stream.second, Event::TOperation::CLOSE, Event::TStatus::END));
-                }
-
-                events.splice(events.end(), m_wake_events->pop(false));
-
-                m_map_fd_stream.clear();
-
                 LOGT << "finalization end";
-                return events; // ----->
+
+                return finalizeAllEvents(); // ----->
             }
 
             std::vector<struct kevent>
@@ -274,7 +248,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     };
 
                     auto fd_stream  = m_map_fd_stream.find(fd);
-                    if  (fd_stream == m_map_fd_stream.end()) {
+                    if ( fd_stream == m_map_fd_stream.end()) {
                         auto event  = Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END);
 
                         m_map_fd_stream[fd] = stream;
