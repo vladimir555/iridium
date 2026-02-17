@@ -95,7 +95,6 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
 
 
 void CMultiplexer::initialize() {
-//    LOGT << __FUNCTION__ << " ...";
     if (m_kqueue)
         throw std::runtime_error("initialization error: kqueue is not finalized"); // ----->
 
@@ -128,12 +127,9 @@ void CMultiplexer::initialize() {
         "kevent user registration error");
 
         m_is_initialized = true;
-//        LOGT << "del pipe: " << m_pipe_del[0] << ", add pipe: " << m_pipe_add[0];
     } catch (std::exception const &e) {
         throw std::runtime_error("multiplexer initialization error: " + string(e.what())); // ----->
     }
-
-//    LOGT << __FUNCTION__ << " OK";
 }
 
 
@@ -269,14 +265,12 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             if (monitored.empty())
                 continue; // <---
 
-            // Игнорируем ENOENT при удалении — это нормально для уже закрытых дескрипторов
             int result = kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr);
             if (result < 0 && errno != ENOENT) {
                 throw std::runtime_error(
                     "kevent update monitored events error: " + string(strerror(errno)));
             }
         } else {
-//            LOGT << "get from map fd: " << triggered_event.ident;
             auto fd_stream  = m_map_fd_stream.find(triggered_event.ident);
             if  (fd_stream == m_map_fd_stream.end()) {
                 LOGW << "multiplexer waiting events error: kevent not mapped event, fd: "
@@ -313,7 +307,6 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
         return; // ----->
 
     try {
-        // assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_streams_to_add->push(stream);
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -327,7 +320,6 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
         return; // ----->
 
     try {
-        // assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_streams_to_del->push(stream);
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -341,7 +333,6 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
         return;
 
     try {
-        // assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_wake_events->push(event);
         wakeKEvent();
     } catch (std::exception const &e) {

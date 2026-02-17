@@ -46,10 +46,9 @@ namespace {
 std::string convertEventToString(iridium::io::Event const &event) {
     using iridium::convertion::convert;
     return
-        "\n{\n  "   + (event.stream ? convert<std::string>(event.stream->getHandles()) : "nullptr")
+        "\n{\n  "   + convert<std::string>(event.stream)
         + ",\n  "   + convert<std::string>(event.operation)
         + ",\n  "   + convert<std::string>(event.status)
-        + ",\n  "   + (event.stream ? convert<std::string>(event.stream->getURI()) : "nullptr")
         +  "\n}\n";
 }
 

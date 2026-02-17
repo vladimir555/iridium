@@ -95,6 +95,7 @@ void CSessionManager::finalize() {
 
 
 void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
+    LOGT << stream;
     if (stream && protocol) {
         m_context_manager->createContext(stream, protocol);
         m_context_worker->push(Event::create(stream, Event::TOperation::OPEN, Event::TStatus::BEGIN));

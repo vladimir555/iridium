@@ -9,11 +9,13 @@
 #include "iridium/platform.h"
 #include "iridium/smart_ptr.h"
 #include "iridium/pattern/initializable.h"
+#include "iridium/convertion/convert.h"
 
 #include "buffer.h"
 #include "uri.h"
 
 #include <list>
+#include <string>
 
 
 namespace iridium::io {
@@ -64,6 +66,12 @@ public:
 
 
 } // namespace iridium::io
+
+
+DEFINE_CONVERT(std::string, iridium::io::IStream);
+DEFINE_CONVERT(std::string, iridium::io::IStreamReader);
+DEFINE_CONVERT(std::string, iridium::io::IStreamWriter);
+DEFINE_CONVERT(std::string, iridium::io::IStreamPort);
 
 
 #endif // HEADER_STREAM_ABFAF627_623F_4585_BCB8_CCC1FADF7358
