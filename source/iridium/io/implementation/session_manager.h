@@ -71,6 +71,8 @@ private:
             m_multiplexer;
     };
 
+    threading::IAsyncQueue<int>::TSharedPtr
+        m_finalization_queue;
     IMultiplexer::TSharedPtr
         m_multiplexer;
     IContextManager::TSharedPtr
