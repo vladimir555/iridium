@@ -88,17 +88,18 @@ void CSessionManager::finalize() {
     LOGT << "CSessionManager::finalize ...";
     m_multiplexer->finalize();
     m_multiplexer_thread->finalize();
-    // todo: close event for all handlers
     m_context_worker->finalize();
     LOGT << "CSessionManager::finalize OK";
 }
 
 
 void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
-    LOGT << stream;
+    // LOGT << "\n" << stream;
     if (stream && protocol) {
         m_context_manager->createContext(stream, protocol);
-        m_context_worker->push(Event::create(stream, Event::TOperation::OPEN, Event::TStatus::BEGIN));
+        auto event = Event::create(stream, Event::TOperation::OPEN, Event::TStatus::BEGIN);
+        LOGT << "push: " << event;
+        m_context_worker->push(event);
     } else
         throw std::runtime_error("session manage error: null stream or protocol"); // ----->
 }
@@ -156,9 +157,10 @@ CSessionManager::IContextWorker::IHandler::TOutputItems
 CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::IHandler::TInputItems const &events_)
 {
-    //threading::sleep(1000);
     if (events_.empty())
         return {}; // ----->
+
+    LOGT << "handler events:" << events_;
 
     // events to repeat handling
     IContextWorker::IHandler::TOutputItems events_to_repeat;
@@ -186,7 +188,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 // if (!is_context_valid)
                 //     break; // --->
 
-                LOGT << "context event: " << event;
+                // LOGT << "context event: " << event;
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {

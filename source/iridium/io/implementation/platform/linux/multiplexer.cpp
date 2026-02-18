@@ -94,6 +94,8 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
     m_streams_to_add->push(stream);
     eventfd_write(m_event_fd, 0);
+
+    LOGT << stream;
 }
 
 
@@ -118,9 +120,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         m_epoll_fd = 0;
         m_event_fd = 0;
 
-        LOGT << "finalization end";
+        auto events = finalizeAllEvents();
+        LOGT << "finalization end: " << events;
+        return events;
 
-        return finalizeAllEvents(); // ----->
+        // return finalizeAllEvents(); // ----->
     }
 
     std::list<Event::TSharedPtr>

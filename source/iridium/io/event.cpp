@@ -49,7 +49,7 @@ std::string convertEventToString(iridium::io::Event const &event) {
         "\n{\n  "   + convert<std::string>(event.stream)
         + ",\n  "   + convert<std::string>(event.operation)
         + ",\n  "   + convert<std::string>(event.status)
-        +  "\n}\n";
+        +  "\n}";
 }
 
 

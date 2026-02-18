@@ -56,15 +56,29 @@ protected:
             m_file = nullptr;
         int m_line = 0;
     };
+
+protected:
+    virtual bool checkWaitingPredicate() const;
+
 private:
     friend class Locker;
 
+    void ensureCV() const {
+        std::call_once(m_cv_init_flag,
+            [this] {
+                m_cv = std::make_unique<std::condition_variable>();
+            }
+        );
+    }
+
     TMutex mutable
         m_mutex;
-    std::condition_variable mutable
+    std::unique_ptr<std::condition_variable> mutable
         m_cv;
+    std::once_flag mutable
+        m_cv_init_flag;
     std::atomic<bool> mutable
-        m_is_waitable = true;
+        m_is_interrupted { false };
 };
 
 
@@ -73,8 +87,15 @@ private:
 
 template<typename TMutex, bool const is_tracable>
 void Synchronized<TMutex, is_tracable>::interrupt() {
-    m_is_waitable = false;
-    m_cv.notify_all();
+    m_is_interrupted = true;
+    if (m_cv)
+        m_cv->notify_all();
+}
+
+
+template<typename TMutex, bool const is_tracable>
+bool Synchronized<TMutex, is_tracable>::checkWaitingPredicate() const {
+    return true; // ----->
 }
 
 
@@ -83,10 +104,10 @@ Synchronized<TMutex, is_tracable>::Locker::Locker(
     Synchronized const * const s,
     char const *file, int line)
 :
-    m_s         (s),
-    m_l         (s->m_mutex)
+    m_s(s),
+    m_l(s->m_mutex)
 {
-    if (is_tracable) {
+    if constexpr (is_tracable) {
         m_file = file;
         m_line = line;
         printf("%s LM\n%s:%i\n",
@@ -98,41 +119,61 @@ Synchronized<TMutex, is_tracable>::Locker::Locker(
 
 template<typename TMutex, bool const is_tracable>
 Synchronized<TMutex, is_tracable>::Locker::~Locker() {
-    if (is_tracable)
+    if constexpr (is_tracable)
         printf("%s UM\n%s:%i\n",
             threading::IThread::getNameStatic().c_str(),
             m_file, m_line);
 
     m_l.unlock();
-    m_s->m_cv.notify_one();
+    if (m_s && m_s->m_cv)
+        m_s->m_cv->notify_one();
 }
 
 
 template<typename TMutex, bool const is_tracable>
 bool Synchronized<TMutex, is_tracable>::Locker::wait() {
-    if (m_s->m_is_waitable)
-        m_s->m_cv.wait(m_l);
+    if (m_s->m_is_interrupted)
+        return false; // ----->
 
-    if (is_tracable)
+    m_s->ensureCV();
+    m_s->m_cv->wait(
+        m_l,
+        [this] () {
+            return m_s->m_is_interrupted || m_s->checkWaitingPredicate();
+        }
+    );
+
+    if constexpr (is_tracable)
         printf("%s WM -> %s\n%s:%i\n",
             threading::IThread::getNameStatic().c_str(),
-            m_s->m_is_waitable ? "OK" : "interrupted",
+            m_s->m_is_interrupted ? "interrupted" : "OK",
             m_file, m_line);
 
-    return m_s->m_is_waitable; // ----->
+    return true; // ----->
 }
 
 
 template<typename TMutex, bool const is_tracable>
 bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds const &timeout) {
-    bool result =
-        m_s->m_is_waitable &&
-        m_s->m_cv.wait_for(m_l, timeout) == std::cv_status::no_timeout;
-    if (is_tracable)
+    if (m_s->m_is_interrupted)
+        return false; // ----->
+
+    bool result = true;
+
+    m_s->ensureCV();
+    result = m_s->m_cv->wait_for(
+        m_l, timeout,
+        [this] () {
+            return m_s->m_is_interrupted || m_s->checkWaitingPredicate();
+        }
+    );
+
+    if constexpr (is_tracable)
         printf("%s WM -> %s\n%s:%i\n",
             threading::IThread::getNameStatic().c_str(),
-            result ? "OK" : m_s->m_is_waitable ? "timeout" : "interrupted",
+            result ? "OK" : m_s->m_is_interrupted ? "interrupted" : "timeout",
             m_file, m_line);
+
     return result; // ----->
 }
 
@@ -141,11 +182,11 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds co
 
 
 #define LOCK_SCOPE() \
-Synchronized::Locker _____locked_scope_____(this, __FILE__, __LINE__)
+Synchronized::Locker _____locked_scope_##__LINE__(this, __FILE__, __LINE__)
 
 
 #define LOCK_SCOPE_TRY_WAIT(...) \
-_____locked_scope_____.wait(__VA_ARGS__)
+_____locked_scope_##__LINE__.wait(__VA_ARGS__)
 
 
 #endif // HEADER_PROTOCOL_FACTORY_BA993AE8_B05D_4A20_A8C6_38E965E820DD
