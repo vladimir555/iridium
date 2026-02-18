@@ -329,12 +329,10 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::wake(Event::TSharedPtr const &event) {
-    if (!m_kqueue.load())
-        return;
-
     try {
         m_wake_events->push(event);
-        wakeKEvent();
+        if (m_kqueue.load())
+            wakeKEvent();
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer waking error: ") + e.what());
     }
@@ -342,13 +340,10 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 
 
 void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
-    if (!m_kqueue.load())
-        return;
-
     try {
-        assertExists(m_kqueue.load(), "kqueue is not initialized");
         m_wake_events->push(events);
-        wakeKEvent();
+        if (m_kqueue.load())
+            wakeKEvent();
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer waking error: ") + e.what());
     }
