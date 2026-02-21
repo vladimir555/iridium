@@ -139,8 +139,8 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
 
         m_context_worker->push(events);
 
-        if (!events.empty())
-            LOGT << "multiplexer events:\n" << events;
+        // if (!events.empty())
+        //     LOGT << "multiplexer events:\n" << events;
     }
 }
 

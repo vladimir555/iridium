@@ -147,7 +147,7 @@ void CMultiplexer::finalize() {
 
 std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     if (!m_kqueue)
-        return {};
+        return finalizeAllEvents();
 
     std::list<Event::TSharedPtr> events;
 
