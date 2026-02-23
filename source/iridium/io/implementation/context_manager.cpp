@@ -16,6 +16,13 @@ void CContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol
 }
 
 
+IContext::TSharedPtr CContextManager::getContext(IStream::TSharedPtr const &stream) {
+    LOCK_SCOPE();
+    auto i = m_map_stream_context.find(stream);
+    return i != m_map_stream_context.end() ? i->second : nullptr;
+}
+
+
 IContext::TSharedPtr CContextManager::acquireContext(Event::TSharedPtr const &event, IMultiplexer::TSharedPtr const &/*multiplexer*/) {
     LOCK_SCOPE();
 
@@ -79,11 +86,13 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 //    if (!context)
 //        return {};
 
+    LOCK_SCOPE();
+
     auto events = context->popEvents();
 
-    // LOGT << "CContextManager::releaseContext, events: " << events;
+    m_acquired_contexts.erase(context);
 
-    LOCK_SCOPE();
+    // LOGT << "CContextManager::releaseContext, events: " << events;
 
     if (m_contexts_to_remove.count(context) > 0 && events.empty() && !is_valid_context) {
 //        LOGT << "CContextManager::releaseContext, remove context";
@@ -104,7 +113,6 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
         // LOGT << "CContextManager::releaseContext: empty";
         return {}; // ----->
     } else {
-        m_acquired_contexts.erase(context);
         return events; // ----->
     }
 }

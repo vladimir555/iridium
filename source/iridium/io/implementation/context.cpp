@@ -66,6 +66,7 @@ std::list<Event::TSharedPtr> CContext::checkOutdatedStreams() {
 
 
 bool CContext::update(Event::TSharedPtr const &event) {
+    LOCK_SCOPE();
     //LOGT
     //    << "context update: "
     //    << event->stream->getHandles().front() << " "
@@ -96,6 +97,7 @@ bool CContext::update(Event::TSharedPtr const &event) {
 
 
 bool CContext::transmit(Event::TSharedPtr const &event) {
+    LOCK_SCOPE();
     // LOGT << "[TRANSMIT_PIPE] op: " << event->operation << " has_protocol: " << (m_protocol != nullptr);
     if (!m_protocol)
         return false; // ----->
@@ -104,10 +106,9 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
     if (!pipe) {
         // Pipe not found - this can happen if context is marked for removal
         // For CLOSE events, just return false to proceed with cleanup
-        if (event->operation == Event::TOperation::CLOSE)
-            return false;
-        // For other operations, throw error
-        throw std::runtime_error("context transmitting error: pipe not found");
+        // In the IO layer, CContext::transmit returns false instead of throwing
+        // an exception if a pipe is missing during finalization to ensure robust cleanup.
+        return false;
     }
 
     return pipe->transmit(event);
@@ -117,7 +118,7 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
 void CContext::createPipe(std::string const &name) {
     //LOGT << "create pipe: " << name;
     if (m_map_name_pipe[name])
-        throw std::runtime_error("pipe creating error: '" + name + "' already exists"); // ----->
+        return; // ----->
 
     m_map_name_pipe[name] = CPipe::create();
 }

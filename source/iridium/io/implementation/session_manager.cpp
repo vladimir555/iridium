@@ -8,6 +8,9 @@
 #include "iridium/io/implementation/context_manager.h"
 #include "iridium/items.h"
 
+#include <unordered_map>
+#include <unordered_set>
+
 
 using iridium::threading::Synchronized;
 using iridium::threading::implementation::CThread;
@@ -23,44 +26,47 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     if (events_.size() <= 1)
         return events_;
 
-    std::vector<Event::TSharedPtr> filtered;
-    filtered.reserve(events_.size());
+    struct EventKey {
+        IStream::TSharedPtr stream;
+        Event::TOperation   operation;
+        Event::TStatus      status;
+
+        bool operator == (EventKey const &other) const {
+            return stream == other.stream && operation == other.operation && status == other.status;
+        }
+    };
+
+    struct EventKeyHash {
+        size_t operator () (EventKey const &k) const {
+            size_t hash = std::hash<IStream::TSharedPtr>{}(k.stream);
+            hash ^= std::hash<int>{}(static_cast<int>(k.operation)) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            hash ^= std::hash<int>{}(static_cast<int>(k.status))    + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            return hash;
+        }
+    };
+
+    std::list<Event::TSharedPtr> filtered;
+    std::unordered_set<EventKey, EventKeyHash> seen;
 
     for (auto const &event: events_) {
         if (event && event->stream &&
           (!event->stream->getHandles().empty() ||
-          ( event->operation    == Event::TOperation::OPEN &&
-            event->status       == Event::TStatus::BEGIN)))
+            checkOneOf(
+                event->operation,
+                Event::TOperation::OPEN,
+                Event::TOperation::CLOSE,
+                Event::TOperation::ERROR_,
+                Event::TOperation::TIMEOUT)))
         {
-            filtered.push_back(event);
+            EventKey key { event->stream, event->operation, event->status };
+            if (seen.find(key) == seen.end()) {
+                seen.insert(key);
+                filtered.push_back(event);
+            }
         }
     }
 
-    if (filtered.empty())
-        return {};
-
-    std::sort(filtered.begin(), filtered.end(),
-        [] (auto const &a, auto const &b) {
-            return
-                std::tie(a->stream, a->operation, a->status) <
-                std::tie(b->stream, b->operation, b->status);
-        }
-    );
-
-    auto last = std::unique(filtered.begin(), filtered.end(),
-        [] (auto const &a, auto const &b) {
-            return
-                std::tie(a->stream, a->operation, a->status) ==
-                std::tie(b->stream, b->operation, b->status);
-        }
-    );
-
-    filtered.erase(last, filtered.end());
-
-    return {
-        std::make_move_iterator(filtered.begin()),
-        std::make_move_iterator(filtered.end())
-    };
+    return filtered;
 }
 
 
@@ -164,41 +170,33 @@ CSessionManager::IContextWorker::IHandler::TOutputItems
 CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::IHandler::TInputItems const &events_)
 {
-    // LOGT << "handler events:" << events_;
-
-    // if (events_.empty())
-    //     return {}; // ----->
-
-    // events to repeat handling
     IContextWorker::IHandler::TOutputItems events_to_repeat;
 
-    // LOGT << "rm duplicates 1: " << events_;
     auto events = removeDuplicates(events_);
-    // LOGT << "rm duplicates 2: " << events;
 
-    for (auto const &worker_event: events) {
-        // LOGT << "[WORKER] event: " << worker_event;
-        if(!worker_event->stream ||
-           (worker_event->stream->getHandles().empty() &&
-            worker_event->operation != Event::TOperation::OPEN))
-        {
-            LOGT << "[SKIP]";
-            continue; // <---
+    std::vector<IStream::TSharedPtr> streams_order;
+    std::unordered_map<IStream::TSharedPtr, std::list<Event::TSharedPtr>> stream_events;
+    for (auto const &event : events) {
+        if (event && event->stream) {
+            if (stream_events.find(event->stream) == stream_events.end())
+                streams_order.push_back(event->stream);
+            stream_events[event->stream].push_back(event);
         }
+    }
 
-        // events for multiple contexts
-        if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
+    for (auto const &stream : streams_order) {
+        auto &events_batch = stream_events[stream];
+
+        if (auto context = m_context_manager->acquireContext(events_batch.front(), m_multiplexer)) {
             bool is_context_valid = true;
+
+            events_batch.pop_front();
+            for (auto const &event : events_batch)
+                context->pushEvent(event);
 
             auto context_events = removeDuplicates(context->popEvents());
 
-            // LOGT << "[CONTEXT] events: " << context_events;
-
-            // events for one context
-            for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
-                // if (!is_context_valid)
-                //     break; // --->
-
+            for (auto const &event: context_events) {
                 LOGT << "context event: " << event;
 
                 if (event->status == Event::TStatus::BEGIN) {
@@ -212,10 +210,6 @@ CSessionManager::CContextWorkerHandler::handle(
                         else
 
                         if (event->operation == Event::TOperation::ERROR_) {
-                            // redirect to protocol control
-                            // LOGT << "[REDIRECT]: to protocol";
-                            // event->status = Event::TStatus::END;
-                            // events_to_repeat.push_back(event);
                             LOGT << "[UNSUBSCRIBE]";
                             m_multiplexer->unsubscribe(event->stream);
                             continue; // <---
@@ -224,20 +218,14 @@ CSessionManager::CContextWorkerHandler::handle(
                         else
 
                         if (event->operation == Event::TOperation::CLOSE) {
-                            // read / write to end on close
                             LOGT << "[TRANSMIT]: flush";
                             while (context->transmit(event))
                                 LOGT << "transmit flush next";
-                            // event->status = Event::TStatus::END;
-                            // events_to_repeat.push_back(event);
                             LOGT << "[UNSUBSCRIBE]";
                             m_multiplexer->unsubscribe(event->stream);
                         }
 
-                        else
-                        // привет, Евгения. Не против познакомиться ? )
-
-                        {
+                        else {
                             auto is_transmitted = context->transmit(event);
                             LOGT << "[TRANSMIT]: " << is_transmitted;
 
@@ -255,7 +243,6 @@ CSessionManager::CContextWorkerHandler::handle(
                         event->operation    = Event::TOperation::ERROR_;
                         event->status       = Event::TStatus::END;
 
-                        // to protocol controller
                         events_to_repeat.push_back(event);
                     }
                     continue; // <---
@@ -283,19 +270,10 @@ CSessionManager::CContextWorkerHandler::handle(
                                 Event::TOperation::READ,
                                 Event::TOperation::WRITE))
                         {
-                            // repeat rw only if more data available
                             event->status = Event::TStatus::BEGIN;
                             events_to_repeat.push_back(event);
-                            //LOGT << "repeat by context: " << event;
                             continue; // <---
                         } else {
-
-                            // if (event->operation == Event::TOperation::CLOSE) {
-                            //     event->stream->finalize();
-                            //     event->status = Event::TStatus::END;
-                            //     events_to_repeat.push_back(event);
-                            // }
-
                             LOGT << "[SKIP]";
                         }
                     } catch (std::exception const &e) {
@@ -306,7 +284,6 @@ CSessionManager::CContextWorkerHandler::handle(
                         event->operation =  Event::TOperation::ERROR_;
                     }
 
-                    // todo: client reconnect
                     if (event->operation == Event::TOperation::ERROR_)
                         is_context_valid = false;
 
@@ -314,25 +291,30 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
 
-            auto events__ = m_context_manager->releaseContext(context, true/*is_context_valid*/);
+            auto events__ = m_context_manager->releaseContext(context, is_context_valid);
             if (!events__.empty()) {
                 events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
             }
 
         } else {
-            // Context already acquired (occupied by another worker)
-            // Put event back to the queue for retry
-            if (worker_event->stream && !worker_event->stream->getHandles().empty()) {
-                //LOGT << "context busy, retry: " << worker_event;
-                events_to_repeat.push_back(worker_event);
+            // Context already acquired (occupied by another worker) or no context.
+            // Put events back to the queue for retry.
+            // Note: the first event was already pushed to the context by acquireContext
+            // if the context exists, but since we didn't acquire it, we just re-queue
+            // the whole batch. removeDuplicates will handle the redundancy.
+            if (!stream->getHandles().empty() ||
+                checkOneOf(events_batch.front()->operation,
+                           Event::TOperation::OPEN,
+                           Event::TOperation::CLOSE,
+                           Event::TOperation::ERROR_,
+                           Event::TOperation::TIMEOUT))
+            {
+                events_to_repeat.insert(events_to_repeat.end(), events_batch.begin(), events_batch.end());
             }
         }
     }
 
     events_to_repeat = removeDuplicates(events_to_repeat);
-
-    //LOGT << "multiplexer wake events to repeat: " << events_to_repeat;
-
     m_multiplexer->wake(events_to_repeat);
     return {};
 }

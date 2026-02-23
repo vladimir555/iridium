@@ -20,6 +20,8 @@ public:
     // virtual void
     //     removeContext (IContext::TSharedPtr const &context) = 0;
     virtual IContext::TSharedPtr
+        getContext(IStream::TSharedPtr const &stream) = 0;
+    virtual IContext::TSharedPtr
         acquireContext(Event::TSharedPtr const &event, IMultiplexer::TSharedPtr const &multiplexer) = 0;
     virtual std::list<Event::TSharedPtr>
         releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) = 0;

@@ -18,7 +18,7 @@ namespace iridium::io::implementation {
 class CContext:
     public IContext,
     public IPipeManager,
-    public threading::Synchronized<std::mutex>,
+    public threading::Synchronized<std::recursive_mutex>,
     public std::enable_shared_from_this<CContext>
 {
 public:
