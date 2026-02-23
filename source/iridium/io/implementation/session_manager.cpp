@@ -234,7 +234,6 @@ CSessionManager::CContextWorkerHandler::handle(
                         }
 
                         else
-                        // привет, Евгения. Не против познакомиться ? )
 
                         {
                             auto is_transmitted = context->transmit(event);
