@@ -298,18 +298,24 @@ CSessionManager::CContextWorkerHandler::handle(
 
         } else {
             // Context already acquired (occupied by another worker) or no context.
-            // Put events back to the queue for retry.
-            // Note: the first event was already pushed to the context by acquireContext
-            // if the context exists, but since we didn't acquire it, we just re-queue
-            // the whole batch. removeDuplicates will handle the redundancy.
-            if (!stream->getHandles().empty() ||
-                checkOneOf(events_batch.front()->operation,
-                           Event::TOperation::OPEN,
-                           Event::TOperation::CLOSE,
-                           Event::TOperation::ERROR_,
-                           Event::TOperation::TIMEOUT))
-            {
-                events_to_repeat.insert(events_to_repeat.end(), events_batch.begin(), events_batch.end());
+            // Push events to context. The context holder will re-queue them upon release.
+            if (auto context_to_push = m_context_manager->getContext(stream)) {
+                auto it = events_batch.begin();
+                it++; // The first event was already pushed by acquireContext
+                for (; it != events_batch.end(); ++it)
+                    context_to_push->pushEvent(*it);
+            } else {
+                // No context yet? This shouldn't happen if acquireContext was called,
+                // but just in case, re-queue.
+                if (!stream->getHandles().empty() ||
+                    checkOneOf(events_batch.front()->operation,
+                               Event::TOperation::OPEN,
+                               Event::TOperation::CLOSE,
+                               Event::TOperation::ERROR_,
+                               Event::TOperation::TIMEOUT))
+                {
+                    events_to_repeat.insert(events_to_repeat.end(), events_batch.begin(), events_batch.end());
+                }
             }
         }
     }

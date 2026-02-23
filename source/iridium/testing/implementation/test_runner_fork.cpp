@@ -90,6 +90,13 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 TResult test_results_fork(result->node);
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
+            } else {
+                TResult::TTests test;
+                test.Path = result->path;
+                test.Error = "protocol error: JSON result not found or invalid";
+                if (result->output)
+                    test.Output = convert<string>(*result->output);
+                test_results.Tests.add(test);
             }
 
             auto state = result->state;
