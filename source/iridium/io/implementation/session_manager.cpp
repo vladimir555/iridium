@@ -27,14 +27,19 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     filtered.reserve(events_.size());
 
     for (auto const &event: events_) {
-        if (event && event->stream && !event->stream->getHandles().empty())
+        if (event && event->stream &&
+          (!event->stream->getHandles().empty() ||
+          ( event->operation    == Event::TOperation::OPEN &&
+            event->status       == Event::TStatus::BEGIN)))
+        {
             filtered.push_back(event);
+        }
     }
 
     if (filtered.empty())
         return {};
 
-    std::stable_sort(filtered.begin(), filtered.end(),
+    std::sort(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
             return
                 std::tie(a->stream, a->operation, a->status) <
@@ -61,6 +66,8 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
 
 CSessionManager::CSessionManager()
 :
+    m_finalization_queue(
+        CAsyncQueue<int>::create()),
     m_multiplexer(
         CMultiplexer::create()),
     m_context_manager(
@@ -87,8 +94,8 @@ void CSessionManager::initialize() {
 void CSessionManager::finalize() {
     LOGT << "CSessionManager::finalize ...";
     m_multiplexer->finalize();
-    m_multiplexer_thread->finalize();
     m_context_worker->finalize();
+    m_multiplexer_thread->finalize();
     LOGT << "CSessionManager::finalize OK";
 }
 
@@ -132,8 +139,8 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
 
         m_context_worker->push(events);
 
-        if (!events.empty())
-            LOGT << "multiplexer events:\n" << events;
+        // if (!events.empty())
+        //     LOGT << "multiplexer events:\n" << events;
     }
 }
 
@@ -157,23 +164,27 @@ CSessionManager::IContextWorker::IHandler::TOutputItems
 CSessionManager::CContextWorkerHandler::handle(
     IContextWorker::IHandler::TInputItems const &events_)
 {
-    if (events_.empty())
-        return {}; // ----->
+    // LOGT << "handler events:" << events_;
 
-    LOGT << "handler events:" << events_;
+    // if (events_.empty())
+    //     return {}; // ----->
 
     // events to repeat handling
     IContextWorker::IHandler::TOutputItems events_to_repeat;
 
-    for (auto const &worker_event: removeDuplicates(events_)) {
+    // LOGT << "rm duplicates 1: " << events_;
+    auto events = removeDuplicates(events_);
+    // LOGT << "rm duplicates 2: " << events;
+
+    for (auto const &worker_event: events) {
+        // LOGT << "[WORKER] event: " << worker_event;
         if(!worker_event->stream ||
            (worker_event->stream->getHandles().empty() &&
             worker_event->operation != Event::TOperation::OPEN))
         {
+            LOGT << "[SKIP]";
             continue; // <---
         }
-
-        //LOGT << "[WORKER] event:" << worker_event;
 
         // events for multiple contexts
         if (auto context = m_context_manager->acquireContext(worker_event, m_multiplexer)) {
@@ -181,14 +192,14 @@ CSessionManager::CContextWorkerHandler::handle(
 
             auto context_events = removeDuplicates(context->popEvents());
 
-            // LOGT << "context_events: " << context_events;
+            // LOGT << "[CONTEXT] events: " << context_events;
 
             // events for one context
             for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
                 // if (!is_context_valid)
                 //     break; // --->
 
-                // LOGT << "context event: " << event;
+                LOGT << "context event: " << event;
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
