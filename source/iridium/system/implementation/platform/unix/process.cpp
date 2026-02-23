@@ -55,8 +55,7 @@ CProcessStream::CProcessStream(
     m_state_internal    {},
     m_app               (app),
     m_args              (args),
-    m_command_line      (app),
-    m_pid               (0)
+    m_command_line      (app)
 {
     for (auto const &arg: args)
         m_command_line  += " " + arg;
@@ -166,6 +165,7 @@ void CProcessStream::initialize() {
 
 
 void CProcessStream::finalize() {
+    LOCK_SCOPE();
 //    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
@@ -174,16 +174,19 @@ void CProcessStream::finalize() {
 //            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader;
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " ...";
 
-        auto buffer  = read();
+        kill(m_pid, SIGTERM);
+
         auto start   = system_clock::now();
         auto timeout = start + DEFAULT_PROCESS_TIMEOUT;
+
         while (system_clock::now() < timeout && getState().condition == TState::TCondition::RUNNING) {
-        //    LOGT << "\n" << m_command_line
-        //         << "\n" << system_clock::now()
-        //         << " < " << timeout << " "  << getState().condition
-        //         << " "   << timeout - system_clock::now()
-        //         << "\n"  << read();
-            buffer->emplace_back(read());
+            try {
+                if (m_fd_reader != 0) {
+                    auto b = CStreamPort::read();
+                    if (b && !b->empty())
+                        m_buffer_finalize->emplace_back(b);
+                }
+            } catch (...) {}
             std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
         }
 
@@ -192,13 +195,30 @@ void CProcessStream::finalize() {
         if (getState().condition == TState::TCondition::RUNNING) {
             LOGW
                 << "finalization: kill pid " << m_pid << " " << m_command_line
-                << "\noutput:\n" << buffer;
+                << "\noutput:\n" << m_buffer_finalize;
 
 //                << ", timeout: " << system_clock::now() - start
             assertOK(kill(m_pid, SIGKILL), "kill");
             //        m_state_internal.is_signaled = true;
             //todo: timeout condition
         }
+
+        // final drain
+        try {
+            int retries = 20;
+            while (m_fd_reader != 0 && retries > 0) {
+                auto b = CStreamPort::read();
+                if (b) {
+                    if (!b->empty()) {
+                        m_buffer_finalize->emplace_back(b);
+                        retries = 20;
+                    } else {
+                        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                        retries--;
+                    }
+                } else break;
+            }
+        } catch (...) {}
 
         if (m_fd_reader) {
             close(m_fd_reader);
@@ -215,6 +235,17 @@ void CProcessStream::finalize() {
     } catch (std::exception const &e) {
         throw std::runtime_error("finalization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
+}
+
+
+iridium::io::Buffer::TSharedPtr CProcessStream::read(size_t const &size) {
+    LOCK_SCOPE();
+    if (m_buffer_finalize && !m_buffer_finalize->empty()) {
+        auto result = m_buffer_finalize;
+        m_buffer_finalize = io::Buffer::create();
+        return result;
+    }
+    return CStreamPort::read(size);
 }
 
 

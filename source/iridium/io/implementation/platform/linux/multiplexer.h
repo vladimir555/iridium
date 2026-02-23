@@ -44,7 +44,7 @@ public:
     void wake(std::list<Event::TSharedPtr> const &events) override;
 
 private:
-    static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 2;
+    static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 1024;
 
     static int assertOK(int const &result, std::string const &message);
 

@@ -270,44 +270,43 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                 auto    size = convert<uint64_t>(size_str);
                 size_t  endlines_count = 0;
 
-                while (left > 0) {
-                    if (m_buffer_output->at(left) == '\n')
+                size_t pos = left;
+                while (pos > 0) {
+                    if (m_buffer_output->at(pos) == '\n')
                         endlines_count++;
                     else
-                        if (m_buffer_output->at(left) != '\r')
+                        if (m_buffer_output->at(pos) != '\r')
                             break;
-                    left--;
+                    pos--;
                 }
-                //LOGT << "endlines_count: " << endlines_count;
 
-                if (endlines_count == 2 && m_buffer_output->at(left) == '}') {
-                    right = left + 2;
+                if (endlines_count == 2 && m_buffer_output->at(pos) == '}') {
+                    size_t right_json = pos + 2;
+                    size_t left_json  = pos;
 
                     size_t brackets_count = 1;
-                    while (brackets_count > 0 && --left > 0) {
-                        if (m_buffer_output->at(left) == '}')
+                    while (brackets_count > 0 && left_json > 0) {
+                        left_json--;
+                        if (m_buffer_output->at(left_json) == '}')
                             brackets_count++;
 
-                        if (m_buffer_output->at(left) == '{')
+                        if (m_buffer_output->at(left_json) == '{')
                             brackets_count--;
 
-                        if (m_buffer_output->at(left) == '\r')
+                        if (m_buffer_output->at(left_json) == '\r')
                             size++;
                     }
 
-                    //LOGT << "right - left = " << right - left << ", size = " << size;
-                    if (right - left == size) {
-                        string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
+                    if (brackets_count == 0 && right_json - left_json == size) {
+                        string  json(m_buffer_output->begin() + left_json, m_buffer_output->begin() + right_json);
                         auto    node = m_parser->parse(json);
 
-//                        m_buffer_output->erase(m_buffer_output->begin() + left, m_buffer_output->end());
-                        m_buffer_output->resize(left);
+                        m_buffer_output->resize(left_json);
                         m_process_result->node      = node;
                         m_process_result->output    = m_buffer_output;
 
                         LOGT << "json:\n"   << json;
                         LOGT << "node:\n"   << node;
-                        //LOGT << "output:\n" << m_buffer_output;
                         LOGT << "set result = false";
                         result = false;
                     }
@@ -315,55 +314,54 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             }
         }
 
-//        if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE)
-//            throw std::runtime_error("unexpected closing console pipe");
+        if (result && event->operation == io::Event::TOperation::CLOSE && event->status == io::Event::TStatus::END && m_buffer_output && !m_buffer_output->empty()) {
+            string buffer_str = convert<string>(*m_buffer_output);
+            size_t last_bracket = buffer_str.find_last_of('}');
+            if (last_bracket != string::npos) {
+                size_t left_json = last_bracket;
+                int brackets_count = 1;
+                while (brackets_count > 0 && left_json > 0) {
+                    left_json--;
+                    if (buffer_str[left_json] == '}') brackets_count++;
+                    if (buffer_str[left_json] == '{') brackets_count--;
+                }
 
+                if (brackets_count == 0) {
+                    string json = buffer_str.substr(left_json, last_bracket - left_json + 1);
+                    try {
+                        auto node = m_parser->parse(json);
+                        if (node) {
+                            m_buffer_output->resize(left_json);
+                            m_process_result->node = node;
+                            m_process_result->output = m_buffer_output;
+                            result = false;
+                        }
+                    } catch (...) {}
+                }
+            }
+        }
     } catch (std::exception const &e) {
         LOGF << e.what();
-        if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
+    } catch (...) {}
+
+    if (!m_process_result->output) {
+        if (!checkOneOf(m_process_result->state.condition,
+            IProcess::TState::TCondition::DONE,
+            IProcess::TState::TCondition::RUNNING))
+        {
             m_process_result->output = m_buffer_output;
-    } catch (...) {
-        if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
+        } else if (event->operation == io::Event::TOperation::CLOSE && event->status == io::Event::TStatus::END) {
             m_process_result->output = m_buffer_output;
+            if (m_buffer_output->empty())
+                 m_process_result->output = io::Buffer::create("empty process output");
+            m_process_result->state = m_process->getState();
+        }
     }
 
-//    LOGT << "output:\n" << m_buffer_output;
-
-    // detect crash
-    //LOGT << "process state: " << m_process_result->state.condition;
-    if (!checkOneOf(m_process_result->state.condition,
-        IProcess::TState::TCondition::DONE,
-        IProcess::TState::TCondition::RUNNING))
-    {
-        m_process_result->output = m_buffer_output;
-    }
-
-    if(!m_process_result->output &&
-        event->operation == io::Event::TOperation::CLOSE
-//        && m_process_result->state.condition == IProcess::TState::TCondition::CRASHED
-       )
-    {
-        //LOGT << "empty output, close, m_process_result->state.condition: "
-        //     << m_process_result->state.condition;
-        m_process_result->output    = io::Buffer::create("empty process output");
-        m_process_result->state     = m_process->getState();
-    }
-
-//        || (event->operation   == io::Event::TOperation::CLOSE &&
-//            event->status      == io::Event::TStatus::END));
-
-    LOGT
-        << "\nresult:   "           << result
-        << "\ncond:     "           << m_process_result->state.condition
-        << "\nevent fd: "           << event->stream->getHandles()
-        << "\nevent operation: "    << event->operation
-        << "\nevent status   : "    << event->status
-        << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
-
-    if (m_process_result->output)
+    if (m_process_result->output) {
         m_process_result_queue->push(m_process_result);
-
-    LOGT << "protocol return: " << result;
+        result = false;
+    }
 
     return result; // ----->
 }

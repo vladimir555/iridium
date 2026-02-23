@@ -84,7 +84,7 @@ void CMultiplexer::finalize() {
         m_is_closing = true;
     }
 
-    eventfd_write(m_event_fd, 0);
+    eventfd_write(m_event_fd, 1);
 }
 
 
@@ -92,19 +92,17 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
     if (!stream || m_is_closing || !m_epoll_fd)
         return; // ----->
 
-    m_streams_to_add->push(stream);
-    eventfd_write(m_event_fd, 0);
-
-    LOGT << stream;
+    m_wake_events->push(Event::create(stream, Event::TOperation::OPEN, Event::TStatus::BEGIN));
+    eventfd_write(m_event_fd, 1);
 }
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
-    if (!stream || stream->getHandles().empty() || m_is_closing || !m_epoll_fd)
+    if (!stream || m_is_closing || !m_epoll_fd)
         return; // ----->
 
-    m_streams_to_del->push(stream);
-    eventfd_write(m_event_fd, 0);
+    m_wake_events->push(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+    eventfd_write(m_event_fd, 1);
 }
 
 
@@ -121,28 +119,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         m_event_fd = 0;
 
         auto events = finalizeAllEvents();
-        LOGT << "finalization end: " << events;
         return events;
-
-        // return finalizeAllEvents(); // ----->
     }
 
-    std::list<Event::TSharedPtr>
-        events;
-    struct epoll_event
-        epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
-
-    for (auto const &stream: m_streams_to_add->pop(false)) {
-        addInternal(stream);
-        events.push_back(
-            Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
-    }
-
-    for (auto const &stream: m_streams_to_del->pop(false)) {
-        delInternal(stream);
-        events.push_back(
-            Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
-    }
+    std::list<Event::TSharedPtr> events;
+    struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
     auto count = epoll_wait(
         m_epoll_fd,
@@ -151,8 +132,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         DEFAULT_EVENTS_WAITING_TIMEOUT_MS);
 
     for (auto i = 0; i < count; i++) {
-        if (epoll_events[i].data.fd == m_event_fd)
+        if (epoll_events[i].data.fd == m_event_fd) {
+            eventfd_t val;
+            eventfd_read(m_event_fd, &val);
             continue; // <---
+        }
 
         auto fd_stream  = m_map_fd_stream.find(epoll_events[i].data.fd);
         if ( fd_stream == m_map_fd_stream.end()) {
@@ -179,7 +163,19 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
     }
 
-    events.splice(events.end(), m_wake_events->pop(false));
+    for (auto const &event: m_wake_events->pop(false)) {
+        if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN) {
+            addInternal(event->stream);
+            event->status = Event::TStatus::END;
+            events.push_back(event);
+        } else if (event->operation == Event::TOperation::CLOSE && event->status == Event::TStatus::BEGIN) {
+            delInternal(event->stream);
+            event->status = Event::TStatus::END;
+            events.push_back(event);
+        } else {
+            events.push_back(event);
+        }
+    }
 
     return events; // ----->
 }
@@ -194,7 +190,7 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 
     m_wake_events->push(event);
     if (m_epoll_fd)
-        eventfd_write(m_event_fd, 0);
+        eventfd_write(m_event_fd, 1);
 }
 
 
@@ -207,7 +203,7 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
 
     m_wake_events->push(events);
     if (m_epoll_fd)
-        eventfd_write(m_event_fd, 0);
+        eventfd_write(m_event_fd, 1);
 }
 
 
@@ -219,7 +215,11 @@ void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
             event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
             event.data.fd   = fd;
 
-            assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event), "epoll add error");
+            auto result = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);
+            if (result < 0 && errno == EEXIST)
+                result = epoll_ctl(m_epoll_fd, EPOLL_CTL_MOD, fd, &event);
+
+            assertOK(result, "epoll add/mod error");
 
             m_map_fd_stream[fd] = stream;
         }

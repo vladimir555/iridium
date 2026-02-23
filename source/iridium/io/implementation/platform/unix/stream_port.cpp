@@ -67,7 +67,7 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer_) {
 
 Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
     if (!m_fd_reader)
-        throw std::runtime_error("stream port read error: not initialized"); // ----->
+        return nullptr; // ----->
 
     auto const size = size_ == 0 ? DEFAULT_BUFFER_SIZE : size_;
     auto buffer = Buffer::create(size);
@@ -131,7 +131,7 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
             continue; // <---
         auto flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
         if (is_blocking)
-            flags &= !O_NONBLOCK;
+            flags &= ~O_NONBLOCK;
         else
             flags |=  O_NONBLOCK;
         assertOK(fcntl(fd, F_SETFL, flags), "set flag error, fd " + convert<std::string>(fd));

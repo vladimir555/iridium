@@ -19,6 +19,8 @@ public:
         createContext (IStream::TSharedPtr const &event, IProtocol::TSharedPtr const &protocol) = 0;
     // virtual void
     //     removeContext (IContext::TSharedPtr const &context) = 0;
+    /// \~english Returns the context associated with the given stream.
+    /// \~russian Возвращает контекст, связанный с указанным потоком.
     virtual IContext::TSharedPtr
         getContext(IStream::TSharedPtr const &stream) = 0;
     virtual IContext::TSharedPtr
