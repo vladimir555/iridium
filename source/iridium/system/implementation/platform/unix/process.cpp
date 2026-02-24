@@ -25,7 +25,7 @@ using std::chrono::milliseconds;
 using std::chrono::system_clock;
 
 
-milliseconds DEFAULT_PROCESS_TIMEOUT        (5000);
+milliseconds DEFAULT_PROCESS_TIMEOUT        (10000);
 milliseconds DEFAULT_PROCESS_TIMEOUT_STEP   (100);
 
 
@@ -166,13 +166,9 @@ void CProcessStream::initialize() {
 
 void CProcessStream::finalize() {
     LOCK_SCOPE();
-//    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
-
-//            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader;
-//            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " ...";
 
         kill(m_pid, SIGTERM);
 
@@ -193,14 +189,7 @@ void CProcessStream::finalize() {
 //            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
 
         if (getState().condition == TState::TCondition::RUNNING) {
-            LOGW
-                << "finalization: kill pid " << m_pid << " " << m_command_line
-                << "\noutput:\n" << m_buffer_finalize;
-
-//                << ", timeout: " << system_clock::now() - start
             assertOK(kill(m_pid, SIGKILL), "kill");
-            //        m_state_internal.is_signaled = true;
-            //todo: timeout condition
         }
 
         // final drain

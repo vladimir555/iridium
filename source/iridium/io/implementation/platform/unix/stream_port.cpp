@@ -77,7 +77,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
         if (errno == EAGAIN || errno == EWOULDBLOCK)
             return Buffer::create();
         else
-            assertOK(result, "write error");
+            assertOK(result, "read error");
     }
 
     // todo: optimize

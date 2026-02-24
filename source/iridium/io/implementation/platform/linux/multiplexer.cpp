@@ -123,6 +123,22 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     }
 
     std::list<Event::TSharedPtr> events;
+
+    // Process wake events first to handle subscriptions/unsubscriptions before polling
+    for (auto const &event: m_wake_events->pop(false)) {
+        if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN) {
+            addInternal(event->stream);
+            event->status = Event::TStatus::END;
+            events.push_back(event);
+        } else if (event->operation == Event::TOperation::CLOSE && event->status == Event::TStatus::BEGIN) {
+            delInternal(event->stream);
+            event->status = Event::TStatus::END;
+            events.push_back(event);
+        } else {
+            events.push_back(event);
+        }
+    }
+
     struct epoll_event epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
     auto count = epoll_wait(
@@ -135,18 +151,12 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         if (epoll_events[i].data.fd == m_event_fd) {
             eventfd_t val;
             eventfd_read(m_event_fd, &val);
-            continue; // <---
+            continue;
         }
 
         auto fd_stream  = m_map_fd_stream.find(epoll_events[i].data.fd);
-        if ( fd_stream == m_map_fd_stream.end()) {
-            LOGW
-                << "epoll event for unmapped fd "
-                << epoll_events[i].data.fd
-                << " "
-                << TEpollEvent(epoll_events[i].events).convertToFlagsString();
-            continue; // <---
-        }
+        if ( fd_stream == m_map_fd_stream.end())
+            continue;
 
         auto stream = fd_stream->second;
 
@@ -163,31 +173,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
     }
 
-    for (auto const &event: m_wake_events->pop(false)) {
-        if (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN) {
-            addInternal(event->stream);
-            event->status = Event::TStatus::END;
-            events.push_back(event);
-        } else if (event->operation == Event::TOperation::CLOSE && event->status == Event::TStatus::BEGIN) {
-            delInternal(event->stream);
-            event->status = Event::TStatus::END;
-            events.push_back(event);
-        } else {
-            events.push_back(event);
-        }
-    }
-
     return events; // ----->
 }
 
 
 void CMultiplexer::wake(Event::TSharedPtr const &event) {
-    // if (!m_epoll_fd)
-    //     return; // ----->
-
-    // if (!m_epoll_fd)
-    //     throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
-
     m_wake_events->push(event);
     if (m_epoll_fd)
         eventfd_write(m_event_fd, 1);
@@ -195,12 +185,6 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 
 
 void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
-    // if (!m_epoll_fd)
-    //     return; // ----->
-
-    // if (!m_epoll_fd)
-    //     throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
-
     m_wake_events->push(events);
     if (m_epoll_fd)
         eventfd_write(m_event_fd, 1);
@@ -212,7 +196,7 @@ void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
         if (fd > 0 && m_map_fd_stream.find(fd) == m_map_fd_stream.end()) {
             struct epoll_event event = {};
 
-            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
+            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET | EPOLLRDHUP;
             event.data.fd   = fd;
 
             auto result = epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event);

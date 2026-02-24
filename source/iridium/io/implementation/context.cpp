@@ -23,9 +23,7 @@ CContext::CContext(IStream::TSharedPtr const &, IProtocol::TSharedPtr const &pro
 
 void CContext::pushEvent(Event::TSharedPtr const &event) {
     LOCK_SCOPE();
-
     m_events->push(event);
-    // LOGT << "push event: " << event;
 }
 
 
@@ -35,13 +33,9 @@ std::list<Event::TSharedPtr> CContext::popEvents() {
     auto events = m_events->pop(false);
     auto now    = std::chrono::system_clock::now();
 
-    {
-//        LOCK_SCOPE(); // timestamp
-        for (auto const &event: events)
-            m_map_stream_timestamp[event->stream] = now;
-    }
+    for (auto const &event: events)
+        m_map_stream_timestamp[event->stream] = now;
 
-    // LOGT << "pop events: " << events;
     return events; // ----->
 }
 
@@ -67,11 +61,6 @@ std::list<Event::TSharedPtr> CContext::checkOutdatedStreams() {
 
 bool CContext::update(Event::TSharedPtr const &event) {
     LOCK_SCOPE();
-    //LOGT
-    //    << "context update: "
-    //    << event->stream->getHandles().front() << " "
-    //    << event->operation << " "
-    //    << event->status;
 
     if (!m_protocol)
         return true; // ----->
@@ -79,14 +68,11 @@ bool CContext::update(Event::TSharedPtr const &event) {
     if (event->operation == Event::TOperation::OPEN)
         m_map_stream_pipe[event->stream];
 
-    LOGT << "[PROTOCOL] control called with: " << event->operation << " " << event->status;
     auto result = m_protocol->control(event, shared_from_this());
-    LOGT << "[PROTOCOL] control returned: " << result;
 
     if (event->operation    == Event::TOperation::CLOSE &&
         event->status       == Event::TStatus::END)
     {
-        LOGT << "[CLEANUP] removing pipe for stream";
         removeStream(event->stream, false);
         if (auto pipe = m_map_stream_pipe[event->stream])
             removePipe(pipe);
@@ -98,7 +84,6 @@ bool CContext::update(Event::TSharedPtr const &event) {
 
 bool CContext::transmit(Event::TSharedPtr const &event) {
     LOCK_SCOPE();
-    // LOGT << "[TRANSMIT_PIPE] op: " << event->operation << " has_protocol: " << (m_protocol != nullptr);
     if (!m_protocol)
         return false; // ----->
 
@@ -116,7 +101,7 @@ bool CContext::transmit(Event::TSharedPtr const &event) {
 
 
 void CContext::createPipe(std::string const &name) {
-    //LOGT << "create pipe: " << name;
+    LOCK_SCOPE();
     if (m_map_name_pipe[name])
         return; // ----->
 
@@ -125,7 +110,7 @@ void CContext::createPipe(std::string const &name) {
 
 
 void CContext::removePipe(std::string const &name) {
-    LOCK_SCOPE(); // timestamp
+    LOCK_SCOPE();
 
     auto pipe = m_map_name_pipe[name];
     if (!pipe)
@@ -152,42 +137,22 @@ void CContext::updatePipe(
     IStreamReader::TSharedPtr const &reader,
     IStreamWriter::TSharedPtr const &writer)
 {
+    LOCK_SCOPE();
     auto pipe = m_map_name_pipe[name];
     if (!pipe)
         throw std::runtime_error("context pipe update error: pipe '" + name + "' not found"); // ----->
 
     if (reader && reader->getURI() && m_map_stream_pipe.find(reader) == m_map_stream_pipe.end()) {
         m_events->push(Event::create(reader, Event::TOperation::OPEN, Event::TStatus::BEGIN));
-        //LOGT
-        //    << "update pipe, event: "
-        //    << Event::TOperation::OPEN << " "
-        //    << Event::TStatus::BEGIN << " "
-        //    << reader->getHandles().front();
     } else
     if (reader && reader->getURI()) {
-        //LOGT
-        //    << "update pipe, event: "
-        //    << Event::TOperation::READ << " "
-        //    << Event::TStatus::BEGIN << " "
-        //    << reader->getHandles().front();
         m_events->push(Event::create(reader, Event::TOperation::READ, Event::TStatus::BEGIN));
     }
 
     if (writer && writer->getURI() && m_map_stream_pipe.find(writer) == m_map_stream_pipe.end()) {
         m_events->push(Event::create(writer, Event::TOperation::OPEN,  Event::TStatus::BEGIN));
-        //LOGT
-        //    << "update pipe, event: "
-        //    << Event::TOperation::OPEN << " "
-        //    << Event::TStatus::BEGIN << " "
-        //    << writer->getHandles().front();
     } else
     if (writer && writer->getURI()) {
-        //LOGT
-        //    << "update pipe, event: "
-        //    << Event::TOperation::WRITE << " "
-        //    << Event::TStatus::BEGIN << " "
-        //    << writer->getHandles().front();
-
         m_events->push(Event::create(writer, Event::TOperation::WRITE, Event::TStatus::BEGIN));
     }
 
@@ -201,11 +166,7 @@ void CContext::updatePipe(
 
 
 void CContext::removePipe(IPipe::TSharedPtr const &pipe) {
-    //LOGT
-        //<<"remove pipe: "
-        //<< (pipe->getReader() ? pipe->getReader()->getHandles() : std::list<uintptr_t>{}) << " "
-        //<< (pipe->getWriter() ? pipe->getWriter()->getHandles() : std::list<uintptr_t>{});
-
+    LOCK_SCOPE();
     if (!pipe)
         throw std::runtime_error("context pipe remove error: pipe not found"); // ----->
 
@@ -215,42 +176,23 @@ void CContext::removePipe(IPipe::TSharedPtr const &pipe) {
 
 
 void CContext::remove() {
-//    LOGT << "CContext::remove";
-//    for (auto const &stream_pipe: m_map_stream_pipe) {
-//        if (!stream_pipe.first->getHandles().empty()) {
-//            LOGT
-//                << "CContext::remove push event: "
-//                << stream_pipe.first->getHandles()
-//                << " " << Event::TOperation::CLOSE
-//                << " " << Event::TStatus::BEGIN;
-//            m_events->push(Event::create(stream_pipe.first, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-//        }
-//    }
-//    for (auto const &stream_pipe: m_map_stream_pipe)
-//        stream_pipe.first->finalize();
-
-    // Don't clear pipes here - they may still be needed for events in queue
-    // m_map_stream_pipe.clear();
-    // m_map_name_pipe.clear();
-    m_protocol.reset();
     LOCK_SCOPE();
+    m_protocol.reset();
     m_map_stream_timestamp.clear();
 }
 
 
 void CContext::removeStream(IStream::TSharedPtr const &stream, bool const &is_send_close_event) {
+    LOCK_SCOPE();
     if (stream && !stream->getHandles().empty() &&stream->getURI()) {
         auto i  = m_map_stream_pipe.find(stream);
         if  (i != m_map_stream_pipe.end()) {
             m_map_stream_pipe.erase(i);
             if (is_send_close_event) {
-//                LOGT << "remove stream: event close, id: " << stream->getID();
-                //LOGT << "push Event::TOperation::CLOSE, fd: " << stream->getHandles();
                 m_events->push(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
             }
         }
     }
-    LOCK_SCOPE();
     m_map_stream_timestamp.erase(stream);
 }
 

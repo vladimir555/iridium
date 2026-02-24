@@ -59,6 +59,8 @@ private:
     std::string                 m_command_line;
     std::atomic<pid_t>          m_pid             = 0;
     std::shared_ptr<int>        m_exit_code;
+    /// \~english Internal buffer to store data read during finalization
+    /// \~russian Внутренний буфер для хранения данных, считанных во время финализации
     io::Buffer::TSharedPtr      m_buffer_finalize = io::Buffer::create();
 };
 
