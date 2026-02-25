@@ -82,7 +82,8 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         }
 
         auto results = process_result_queue->pop(m_timeout);
-        //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
+        if (results.empty())
+            break;
 
         for (auto const &result: results) {
             if (result->node) {
@@ -90,12 +91,26 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 for (auto const &test: test_results_fork.Tests)
                     test_results.Tests.add(test);
             } else {
-                TResult::TTests test;
-                test.Path = result->path;
-                test.Error = "protocol error: JSON result not found or invalid";
-                if (result->output)
-                    test.Output = convert<string>(*result->output);
-                test_results.Tests.add(test);
+                for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
+                    TResult::TTests test;
+                    test.Path   = result->path + "/" + node->getName();
+                    test.Error = "protocol error: JSON result not found or invalid";
+                    if (result->output) {
+                        test.Output = convert<string>(*result->output);
+                    }
+                    test_results.Tests.add(test);
+                }
+
+                if (result->output) {
+                    auto output = convert<string>(*result->output);
+                    if (!output.empty()) {
+                        LOGE << "Protocol Error for " << result->path << ". Output:\n" << output;
+                    } else {
+                        LOGE << "Protocol Error for " << result->path << ". Buffer was empty.";
+                    }
+                } else {
+                    LOGE << "Protocol Error for " << result->path << ". NO OUTPUT CAPTURED";
+                }
             }
 
             auto state = result->state;
@@ -283,7 +298,8 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                     right = left + 2;
 
                     size_t brackets_count = 1;
-                    while (brackets_count > 0 && --left > 0) {
+                    while (brackets_count > 0 && left > 0) {
+                        left--;
                         if (m_buffer_output->at(left) == '}')
                             brackets_count++;
 
@@ -295,7 +311,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                     }
 
                     //LOGT << "right - left = " << right - left << ", size = " << size;
-                    if (right - left == size) {
+                    if (brackets_count == 0 && right - left == size) {
                         string  json(m_buffer_output->begin() + left, m_buffer_output->begin() + right);
                         auto    node = m_parser->parse(json);
 
@@ -310,31 +326,35 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             }
         }
 
-        if (result && event->operation == io::Event::TOperation::CLOSE && event->status == io::Event::TStatus::END && m_buffer_output && !m_buffer_output->empty()) {
+        if (result && (event->operation == io::Event::TOperation::CLOSE || event->operation == io::Event::TOperation::TIMEOUT) && m_buffer_output && !m_buffer_output->empty()) {
             string buffer_str = convert<string>(*m_buffer_output);
             size_t last_bracket = buffer_str.find_last_of('}');
-            if (last_bracket != string::npos) {
+            while (last_bracket != string::npos && result) {
                 size_t left_json = last_bracket;
                 int brackets_count = 1;
-                while (brackets_count > 0 && left_json > 0) {
-                    left_json--;
-                    if (buffer_str[left_json] == '}') brackets_count++;
-                    if (buffer_str[left_json] == '{') brackets_count--;
-                }
+                if (buffer_str[left_json] == '}') {
+                    while (brackets_count > 0 && left_json > 0) {
+                        left_json--;
+                        if (buffer_str[left_json] == '}') brackets_count++;
+                        if (buffer_str[left_json] == '{') brackets_count--;
+                    }
 
-                if (brackets_count == 0) {
-                    string json = buffer_str.substr(left_json, last_bracket - left_json + 1);
-                    try {
-                        auto node = m_parser->parse(json);
-                        if (node) {
-                            m_buffer_output->resize(left_json);
-                            m_process_result->node = node;
-                            m_process_result->output = m_buffer_output;
-                            m_process_result_queue->push(m_process_result);
-                            return false; // ----->
-                        }
-                    } catch (...) {}
+                    if (brackets_count == 0) {
+                        string json = buffer_str.substr(left_json, last_bracket - left_json + 1);
+                        try {
+                            auto node = m_parser->parse(json);
+                            if (node && (node->getName() == "result" || node->getChild("result") || node->getChild("Tests"))) {
+                                m_buffer_output->resize(left_json);
+                                m_process_result->node = node;
+                                m_process_result->output = m_buffer_output;
+                                m_process_result_queue->push(m_process_result);
+                                return false; // ----->
+                            }
+                        } catch (...) {}
+                    }
                 }
+                if (last_bracket == 0) break;
+                last_bracket = buffer_str.find_last_of('}', last_bracket - 1);
             }
         }
 

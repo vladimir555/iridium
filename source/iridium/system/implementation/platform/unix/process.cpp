@@ -120,21 +120,24 @@ void CProcessStream::initialize() {
         //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
 
 #ifdef POSIX_SPAWN_SETSID
-        posix_spawnattr_t attr = {};
+        posix_spawnattr_t attr;
+        posix_spawnattr_init(&attr);
         posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
 #elif defined(POSIX_SPAWN_SETSID_NP)
-        posix_spawnattr_t attr = {};
+        posix_spawnattr_t attr;
+        posix_spawnattr_init(&attr);
         posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
 #else
-        posix_spawnattr_t attr = {};
-//            posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
-//            throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
+        posix_spawnattr_t attr;
+        posix_spawnattr_init(&attr);
 #endif
 
         pid_t pid = m_pid;
         assertOK(
-            posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv.data(), environ),
+            posix_spawnp(&pid, m_app.c_str(), &actions, &attr, argv.data(), environ),
            "posix_spawnp");
+
+        posix_spawnattr_destroy(&attr);
 
         assertOK(
             posix_spawn_file_actions_destroy(&actions),
@@ -149,6 +152,11 @@ void CProcessStream::initialize() {
 
         m_fd_writer = cin_pipe[1];
         m_fd_reader = cout_pipe[0];
+
+#ifdef __linux__
+        // Increase pipe size for better stability under high load
+        fcntl(m_fd_reader, F_SETPIPE_SZ, 1024 * 1024);
+#endif
 
         setBlockingMode(false);
         m_exit_code.reset();
@@ -168,9 +176,7 @@ void CProcessStream::finalize() {
     LOCK_SCOPE();
     try {
         if (m_pid == 0)
-            throw std::runtime_error("not initialized"); // ----->
-
-        kill(m_pid, SIGTERM);
+            return; // ----->
 
         auto start   = system_clock::now();
         auto timeout = start + DEFAULT_PROCESS_TIMEOUT;
@@ -179,30 +185,50 @@ void CProcessStream::finalize() {
             try {
                 if (m_fd_reader != 0) {
                     auto b = CStreamPort::read();
-                    if (b && !b->empty())
+                    if (b && !b->empty()) {
                         m_buffer_finalize->emplace_back(b);
+                        continue; // Keep reading if data is available
+                    }
                 }
             } catch (...) {}
             std::this_thread::sleep_for(DEFAULT_PROCESS_TIMEOUT_STEP);
         }
 
-//            LOGT << "WAIT: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " DONE";
+        if (getState().condition == TState::TCondition::RUNNING) {
+            kill(m_pid, SIGTERM);
+            auto graceful_timeout = system_clock::now() + std::chrono::seconds(1);
+            while (system_clock::now() < graceful_timeout && getState().condition == TState::TCondition::RUNNING) {
+                try {
+                    if (m_fd_reader != 0) {
+                        auto b = CStreamPort::read();
+                        if (b && !b->empty())
+                            m_buffer_finalize->emplace_back(b);
+                    }
+                } catch (...) {}
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        }
 
         if (getState().condition == TState::TCondition::RUNNING) {
-            assertOK(kill(m_pid, SIGKILL), "kill");
+            kill(m_pid, SIGKILL);
+            // Wait for it to be collected by getState() in the next loop or here
+            auto kill_timeout = system_clock::now() + std::chrono::seconds(1);
+            while (system_clock::now() < kill_timeout && getState().condition == TState::TCondition::RUNNING) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
         }
 
         // final drain
         try {
-            int retries = 20;
+            int retries = 100;
             while (m_fd_reader != 0 && retries > 0) {
                 auto b = CStreamPort::read();
                 if (b) {
                     if (!b->empty()) {
                         m_buffer_finalize->emplace_back(b);
-                        retries = 20;
+                        retries = 100;
                     } else {
-                        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                        std::this_thread::sleep_for(std::chrono::milliseconds(10));
                         retries--;
                     }
                 } else break;
@@ -247,16 +273,10 @@ IProcess::TState CProcessStream::getState() {
         int  pid_state = 0;
         auto result = waitpid(m_pid, &pid_state, WNOHANG);
 
-//        LOGT << "waitpid: " << m_command_line << " pid: " << m_pid << " result(pid): " << result << " state: " << pid_state;
-//        {
-//            auto result = kill(m_pid, 0);
-//            LOGT << "kill: " << m_command_line << " pid: " << m_pid << " result: " << result;
-//        }
-
-        if  (result == 0 && pid_state == 0)
+        if  (result == 0)
             condition = TState::TCondition::RUNNING;
 
-        if  (result > 0) {
+        else if  (result > 0) {
             m_state_internal.is_exited        = WIFEXITED     (pid_state);
             m_state_internal.exit_status      = WEXITSTATUS   (pid_state);
             m_state_internal.is_signaled      = WIFSIGNALED   (pid_state);
@@ -265,6 +285,12 @@ IProcess::TState CProcessStream::getState() {
             m_state_internal.is_stopped       = WIFSTOPPED    (pid_state);
             m_state_internal.stop_signal      = WSTOPSIG      (pid_state);
             m_state_internal.is_continued     = WIFCONTINUED  (pid_state);
+        }
+        else if (result == -1 && errno == ECHILD) {
+            if (!m_state_internal.is_exited && !m_state_internal.is_signaled) {
+                m_state_internal.is_exited = true;
+                m_state_internal.exit_status = 0;
+            }
         }
     }
 

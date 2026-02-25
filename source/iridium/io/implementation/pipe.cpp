@@ -14,7 +14,7 @@ namespace iridium::io::implementation {
 
 
 size_t const CPipe::DEFAULT_BUFFER_SIZE  = 64 * 1024;
-size_t const CPipe::DEFAULT_BUFFER_COUNT = 256;
+size_t const CPipe::DEFAULT_BUFFER_COUNT = 1024;
 
 
 CPipe::CPipe()
@@ -119,26 +119,23 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
 //       (!m_reader->getURI() ||
 //        (m_reader->getID()  == event->stream->getID() &&
 //        (checkOneOf(event->operation, Event::TOperation::READ, Event::TOperation::CLOSE, Event::TOperation::TIMEOUT)))))
-    if  (m_buffers.size() < m_buffer_count &&
+    bool read_more = true;
+    while (read_more && m_buffers.size() < m_buffer_count &&
         (m_reader->getHandles().empty() ||
         (m_reader == event->stream &&
         checkOneOf(
             event->operation,
             Event::TOperation::READ,
             Event::TOperation::CLOSE,
-//            Event::TOperation::EOF_,
             Event::TOperation::TIMEOUT)))
     ) {
-        //LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
 
-        //LOGT << "read buffer size: " << buffer->size();
         if  (buffer && !buffer->empty()) {
             m_buffers.push_back(buffer);
-            result |= true;
-            //LOGT << "read " << buffer->size();
+            result = true;
         } else {
-            //LOGT << "read EOF";
+            read_more = false;
         }
     }
 

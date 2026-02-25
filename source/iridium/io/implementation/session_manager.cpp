@@ -98,9 +98,9 @@ void CSessionManager::initialize() {
 
 
 void CSessionManager::finalize() {
-    m_multiplexer->finalize();
-    m_multiplexer_thread->finalize();
     m_context_worker->finalize();
+    m_multiplexer_thread->finalize();
+    m_multiplexer->finalize();
 }
 
 
@@ -184,79 +184,77 @@ CSessionManager::CContextWorkerHandler::handle(
             for (auto const &event : events_batch)
                 context->pushEvent(event);
 
-            while (true) {
-                auto context_events = context->popEvents();
-                if (context_events.empty())
-                    break;
-
-                for (auto const &event: context_events) {
-                    if (event->status == Event::TStatus::BEGIN) {
-                        try {
-                            if (event->operation == Event::TOperation::OPEN) {
-                                event->stream->initialize();
-                                m_multiplexer->subscribe(event->stream);
-                            }
-
-                            else if (event->operation == Event::TOperation::ERROR_) {
-                                m_multiplexer->unsubscribe(event->stream);
-                                continue;
-                            }
-
-                            else if (event->operation == Event::TOperation::CLOSE) {
-                                while (context->transmit(event));
-                                m_multiplexer->unsubscribe(event->stream);
-                            }
-
-                            else {
-                                auto is_transmitted = context->transmit(event);
-                                if (is_transmitted) {
-                                    event->status = Event::TStatus::END;
-                                    context->pushEvent(event);
-                                }
-                            }
-                        } catch (std::exception const &e) {
-                            LOGE << "handling event error: " << e.what() << "\n  event: " << event;
-                            event->operation    = Event::TOperation::ERROR_;
-                            event->status       = Event::TStatus::END;
-                            context->pushEvent(event);
+            auto context_events = context->popEvents();
+            for (auto const &event: context_events) {
+                if (!is_context_valid) break;
+                if (event->status == Event::TStatus::BEGIN) {
+                    try {
+                        if (event->operation == Event::TOperation::OPEN) {
+                            event->stream->initialize();
+                            m_multiplexer->subscribe(event->stream);
                         }
-                        continue;
-                    }
 
-                    if (event->status == Event::TStatus::END) {
-                        try {
-                            if (event->operation == Event::TOperation::CLOSE) {
-                                event->stream->finalize();
-                                while (context->transmit(event));
-                            }
+                        else if (event->operation == Event::TOperation::ERROR_) {
+                            m_multiplexer->unsubscribe(event->stream);
+                            continue;
+                        }
 
-                            try {
-                                is_context_valid = context->update(event);
-                            } catch (std::exception const &e) {
-                                LOGE << "protocol error: " << e.what();
-                                is_context_valid = false;
-                            }
+                        else if (event->operation == Event::TOperation::CLOSE) {
+                            while (context->transmit(event));
+                            m_multiplexer->unsubscribe(event->stream);
+                        }
 
-                            if (is_context_valid &&
-                                checkOneOf(
-                                    event->operation,
-                                    Event::TOperation::READ,
-                                    Event::TOperation::WRITE))
-                            {
-                                event->status = Event::TStatus::BEGIN;
+                        else {
+                            bool any_transmitted = false;
+                            while (context->transmit(event)) any_transmitted = true;
+                            if (any_transmitted) {
+                                event->status = Event::TStatus::END;
                                 context->pushEvent(event);
-                                continue;
                             }
-                        } catch (std::exception const &e) {
-                            LOGE << "handling event error: " << e.what() << "\n  event: " << event;
-                            event->operation =  Event::TOperation::ERROR_;
+                        }
+                    } catch (std::exception const &e) {
+                        LOGE << "handling event error: " << e.what() << "\n  event: " << event;
+                        event->operation    = Event::TOperation::ERROR_;
+                        event->status       = Event::TStatus::END;
+                        context->pushEvent(event);
+                    }
+                    continue;
+                }
+
+                if (event->status == Event::TStatus::END) {
+                    try {
+                        if (event->operation == Event::TOperation::CLOSE) {
+                            event->stream->finalize();
+                            while (context->transmit(event));
                         }
 
-                        if (event->operation == Event::TOperation::ERROR_)
+                        try {
+                            if (!context->update(event))
+                                is_context_valid = false;
+                        } catch (std::exception const &e) {
+                            LOGE << "protocol error: " << e.what();
                             is_context_valid = false;
+                        }
 
-                        continue;
+                        if (is_context_valid &&
+                            checkOneOf(
+                                event->operation,
+                                Event::TOperation::READ,
+                                Event::TOperation::WRITE))
+                        {
+                            event->status = Event::TStatus::BEGIN;
+                            context->pushEvent(event);
+                            continue;
+                        }
+                    } catch (std::exception const &e) {
+                        LOGE << "handling event error: " << e.what() << "\n  event: " << event;
+                        event->operation =  Event::TOperation::ERROR_;
                     }
+
+                    if (event->operation == Event::TOperation::ERROR_)
+                        is_context_valid = false;
+
+                    continue;
                 }
             }
 
@@ -267,10 +265,8 @@ CSessionManager::CContextWorkerHandler::handle(
 
         } else {
             if (auto context_to_push = m_context_manager->getContext(stream)) {
-                auto it = events_batch.begin();
-                it++;
-                for (; it != events_batch.end(); ++it)
-                    context_to_push->pushEvent(*it);
+                for (auto const &event : events_batch)
+                    context_to_push->pushEvent(event);
             } else {
                 if (!stream->getHandles().empty() ||
                     checkOneOf(events_batch.front()->operation,

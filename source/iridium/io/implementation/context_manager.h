@@ -16,7 +16,7 @@ namespace iridium::io::implementation {
 
 class CContextManager:
     public IContextManager,
-    public threading::Synchronized<std::mutex>
+    public threading::Synchronized<std::recursive_mutex>
 {
 public:
     DEFINE_IMPLEMENTATION(CContextManager)

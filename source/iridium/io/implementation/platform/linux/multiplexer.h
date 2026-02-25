@@ -43,6 +43,8 @@ public:
     void wake(Event::TSharedPtr const &event) override;
     void wake(std::list<Event::TSharedPtr> const &events) override;
 
+    bool isFinalized() const override;
+
 private:
     static size_t const DEFAULT_EVENTS_COUNT_LIMIT = 1024;
 

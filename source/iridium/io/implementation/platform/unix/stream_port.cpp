@@ -71,7 +71,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 
     auto const size = size_ == 0 ? DEFAULT_BUFFER_SIZE : size_;
     auto buffer = Buffer::create(size);
-    auto result = ::read(m_fd_reader, buffer->data(), size - 1);
+    auto result = ::read(m_fd_reader, buffer->data(), size);
 
     if (result < 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK)
