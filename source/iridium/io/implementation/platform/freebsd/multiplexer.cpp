@@ -283,16 +283,27 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             }
 
             auto const &stream = fd_stream->second;
-            if (triggered_event.flags & EV_EOF) {
-                m_map_fd_stream.erase(fd_stream);
-                events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-            }
 
-            if (triggered_event.filter == EVFILT_READ)
+            // Generate READ/WRITE events based on filter, regardless of EV_EOF
+            if (triggered_event.filter == EVFILT_READ) {
                 events.push_back(Event::create(stream, Event::TOperation::READ, Event::TStatus::BEGIN));
-
-            if (triggered_event.filter == EVFILT_WRITE)
+                // EV_EOF on READ means no more data coming
+                if (triggered_event.flags & EV_EOF) {
+                    m_map_fd_stream.erase(fd_stream);
+                    events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+                }
+            } else if (triggered_event.filter == EVFILT_WRITE) {
                 events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
+                // EV_EOF on WRITE means write side closed
+                if (triggered_event.flags & EV_EOF) {
+                    // Check before erasing - might already be erased by READ EOF
+                    auto it = m_map_fd_stream.find(triggered_event.ident);
+                    if (it != m_map_fd_stream.end()) {
+                        m_map_fd_stream.erase(it);
+                        events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+                    }
+                }
+            }
 
             if (triggered_event.flags & EV_ERROR)
                 events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::BEGIN));
