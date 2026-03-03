@@ -126,16 +126,19 @@ URI::TSharedPtr CStreamPort::getURI() const {
 
 
 void CStreamPort::setBlockingMode(bool const &is_blocking) {
-    for (auto const &fd: { static_cast<int>(m_fd_reader), static_cast<int>(m_fd_writer) }) {
+    auto setBlockingFlags = [this, is_blocking] (uintptr_t fd) {
         if (!fd)
-            continue; // <---
-        auto flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
-        if (is_blocking)
-            flags &= ~O_NONBLOCK;
-        else
-            flags |=  O_NONBLOCK;
+            return; // ----->
+        int flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
+        is_blocking ? (flags &= ~O_NONBLOCK) : (flags |= O_NONBLOCK);
         assertOK(fcntl(fd, F_SETFL, flags), "set flag error, fd " + convert<std::string>(fd));
-    }
+    };
+
+    setBlockingFlags(m_fd_writer);
+
+    if (m_fd_reader != m_fd_writer)
+        setBlockingFlags(m_fd_reader);
+
     m_is_blocking_mode = is_blocking;
 }
 
