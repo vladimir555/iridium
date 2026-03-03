@@ -129,6 +129,7 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
     auto setBlockingFlags = [this, is_blocking] (uintptr_t fd) {
         if (!fd)
             return; // ----->
+
         int flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
         is_blocking ? (flags &= ~O_NONBLOCK) : (flags |= O_NONBLOCK);
         assertOK(fcntl(fd, F_SETFL, flags), "set flag error, fd " + convert<std::string>(fd));

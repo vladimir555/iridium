@@ -214,13 +214,15 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     } else {
                         auto stream = fd_stream->second;
                         auto event  = Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END);
-                        m_map_fd_stream.erase(fd_stream);
                         events.push_back(event);
 
                         e.filter = EVFILT_READ,
                         monitored.push_back(e);
                         e.filter = EVFILT_WRITE;
                         monitored.push_back(e);
+
+                        // Erase from map after EV_DELETE is queued
+                        m_map_fd_stream.erase(fd_stream);
 
                         LOGT << "unsubscribe end event: " << event;
                     }
@@ -273,7 +275,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         } else {
             auto fd_stream  = m_map_fd_stream.find(triggered_event.ident);
             if  (fd_stream == m_map_fd_stream.end()) {
-                LOGW << "multiplexer waiting events error: kevent not mapped event, fd: "
+                // Race condition: fd was removed (EV_DELETE sent) but event still arrived from OS
+                // This is normal in parallel mode - safely skip
+                LOGT << "multiplexer skipping event for unmapped fd: "
                      << convert<string>(triggered_event.ident);
                 continue;
             }
@@ -282,7 +286,6 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             if (triggered_event.flags & EV_EOF) {
                 m_map_fd_stream.erase(fd_stream);
                 events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-                continue; // <---
             }
 
             if (triggered_event.filter == EVFILT_READ)
