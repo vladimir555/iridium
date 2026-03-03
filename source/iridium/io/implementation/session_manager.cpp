@@ -204,9 +204,14 @@ CSessionManager::CContextWorkerHandler::handle(
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
                         if (event->operation == Event::TOperation::OPEN) {
-                            LOGT << "[INIT]";
-                            event->stream->initialize();
-                            m_multiplexer->subscribe(event->stream);
+                            if (event->stream->getHandles().empty()) {
+                                LOGT << "[INIT]";
+                                event->stream->initialize();
+                                LOGT << "[SUBSCRIBE]";
+                                m_multiplexer->subscribe(event->stream);
+                            } else {
+                                LOGT << "[INIT SKIP]";
+                            }
                         }
 
                         else
@@ -225,23 +230,31 @@ CSessionManager::CContextWorkerHandler::handle(
 
                         if (event->operation == Event::TOperation::CLOSE) {
                             // read / write to end on close
-                            LOGT << "[TRANSMIT]: flush";
-                            while (context->transmit(event))
-                                LOGT << "transmit flush next";
-                            // event->status = Event::TStatus::END;
-                            // events_to_repeat.push_back(event);
-                            LOGT << "[UNSUBSCRIBE]";
-                            m_multiplexer->unsubscribe(event->stream);
+                            auto pipe = context->getPipe(event);
+                            if (pipe) {
+                                LOGT << "[TRANSMIT]: flush";
+                                while (pipe->transmit(event))
+                                    LOGT << "transmit flush next";
+                                // event->status = Event::TStatus::END;
+                                // events_to_repeat.push_back(event);
+                                LOGT << "[UNSUBSCRIBE]";
+                                m_multiplexer->unsubscribe(event->stream);
+                            }
                         }
 
                         else
 
                         {
-                            auto is_transmitted = context->transmit(event);
-                            LOGT << "[TRANSMIT]: " << is_transmitted;
+                            auto pipe = context->getPipe(event);
+                            if (pipe) {
+                                auto is_transmitted = pipe->transmit(event);
+                                LOGT << "[TRANSMIT]: " << is_transmitted;
 
-                            if (is_transmitted) {
-                                event->status = Event::TStatus::END;
+                                if (is_transmitted) {
+                                    event->status = Event::TStatus::END;
+                                    events_to_repeat.push_back(event);
+                                }
+                            } else {
                                 events_to_repeat.push_back(event);
                             }
                         }

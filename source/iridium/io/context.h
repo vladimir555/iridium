@@ -3,6 +3,7 @@
 
 
 #include "event.h"
+#include "pipe.h"
 
 
 namespace iridium::io {
@@ -12,14 +13,20 @@ class IContext {
 public:
     DEFINE_INTERFACE(IContext)
 
-    virtual void pushEvent(Event::TSharedPtr const &event) = 0;
+    virtual void
+        pushEvent(Event::TSharedPtr const &event) = 0;
     virtual std::list<Event::TSharedPtr>
-                 popEvents() = 0;
+        popEvents() = 0;
     virtual std::list<Event::TSharedPtr>
-                 checkOutdatedStreams() = 0;
-    virtual bool update  (Event::TSharedPtr const &event) = 0;
-    virtual bool transmit(Event::TSharedPtr const &event) = 0;
-    virtual void remove  () = 0;
+        checkOutdatedStreams() = 0;
+    virtual bool
+        update  (Event::TSharedPtr const &event) = 0;
+    virtual IPipe::TSharedPtr
+        getPipe (Event::TSharedPtr const &event) = 0;
+    virtual void
+        remove  () = 0;
+
+    // virtual bool transmit(Event::TSharedPtr const &event) = 0;
 };
 
 

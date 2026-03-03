@@ -95,22 +95,30 @@ bool CContext::update(Event::TSharedPtr const &event) {
 }
 
 
-bool CContext::transmit(Event::TSharedPtr const &event) {
-    // LOGT << "[TRANSMIT_PIPE] op: " << event->operation << " has_protocol: " << (m_protocol != nullptr);
-    if (!m_protocol)
-        return false; // ----->
+// bool CContext::transmit(Event::TSharedPtr const &event) {
+//     // LOGT << "[TRANSMIT_PIPE] op: " << event->operation << " has_protocol: " << (m_protocol != nullptr);
+//     if (!m_protocol)
+//         return false; // ----->
 
-    auto pipe = m_map_stream_pipe[event->stream];
-    if (!pipe) {
-        // Pipe not found - this can happen if context is marked for removal
-        // For CLOSE events, just return false to proceed with cleanup
-        if (event->operation == Event::TOperation::CLOSE)
-            return false;
-        // For other operations, throw error
-        throw std::runtime_error("context transmitting error: pipe not found");
+//     auto pipe = m_map_stream_pipe[event->stream];
+//     if  (pipe) {
+//         return pipe->transmit(event); // ----->
+//     } else {
+//         // if (event->operation == Event::TOperation::CLOSE)
+//             return false; // ----->
+
+//         // throw std::runtime_error("context transmitting error: pipe not found"); // ----->
+//     }
+// }
+
+
+IPipe::TSharedPtr CContext::getPipe(Event::TSharedPtr const &event) {
+    if (m_protocol) {
+        auto   stream_pipe =  m_map_stream_pipe.find(event->stream);
+        return stream_pipe == m_map_stream_pipe.end() ? nullptr : stream_pipe->second; // ----->
     }
 
-    return pipe->transmit(event);
+    return {};
 }
 
 

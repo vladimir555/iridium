@@ -193,15 +193,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     m_process_result->state = m_process->getState();
 
-    //LOGT << "\nevent:           "   <<  event->operation
-    //     << "\nfd:              "   << (event->operation == io::Event::TOperation::OPEN ? 0 :
-    //                                    event->stream->getHandles().front())
-    //     << "\nprocess_state:   "   << m_process_result->state.condition
-    //     << "\nbuffer:\n"           << m_buffer_output;
-
-    //if (m_process_result->state.condition == IProcess::TState::TCondition::DONE) {
-    //    LOGT << "DONE";
-    //}
+    LOGT << "event: " << event << "\nstate: " << m_process_result->state.condition;
 
     if (event->operation == io::Event::TOperation::OPEN) {
         static std::string const DEFAULT_PIPE_NAME = "process";
