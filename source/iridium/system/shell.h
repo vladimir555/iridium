@@ -19,9 +19,9 @@ public:
     DEFINE_IMPLEMENTATION(Shell)
     Shell();
 
-    typedef std::chrono::seconds TTimeDuration;
+    // typedef std::chrono::system_clock::duration TTimeDuration;
 
-    static TTimeDuration const DEFAULT_TIMEOUT;
+    static std::chrono::minutes const DEFAULT_TIMEOUT;
 
     struct TResult {
         std::string output;
@@ -31,7 +31,7 @@ public:
     void initialize() override;
     void finalize()   override;
 
-    TResult run(std::string const &command_line, TTimeDuration const &timeout = DEFAULT_TIMEOUT);
+    TResult run(std::string const &command_line, std::chrono::system_clock::duration const &timeout = DEFAULT_TIMEOUT);
 
 private:
     io::IMultiplexer::TSharedPtr    m_multiplexer;

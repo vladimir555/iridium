@@ -11,6 +11,7 @@
 
 #include <stdint.h>
 #include <limits>
+#include <iostream>
 
 
 using iridium::threading::implementation::CAsyncQueue;
@@ -24,7 +25,7 @@ static constexpr ULONG_PTR WAKE_COMPLETION_KEY = static_cast<ULONG_PTR>(-1);
 
 
 // todo: mv to common place
-DWORD CMultiplexer::checkResult(bool const &is_ok, std::string const &message) {
+DWORD CMultiplexer::assertOK(bool const &is_ok, std::string const &message) {
     using convertion::convert;
     using std::string;
 
@@ -72,7 +73,7 @@ void CMultiplexer::initialize() {
     // LOGT << "initialize ...";
     try {
         m_iocp = CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
-        checkResult(m_iocp, "CreateIoCompletionPort");
+        assertOK(m_iocp, "CreateIoCompletionPort");
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer initializing error: ") + e.what()); // ----->
     }
@@ -83,11 +84,14 @@ void CMultiplexer::initialize() {
 void CMultiplexer::finalize() {
     // LOGT << "finalize ...";
     try {
-        if (m_iocp)
+        if (m_iocp) {
+            // Post finalization signal to wake up any waiting threads
+            PostQueuedCompletionStatus(m_iocp, 0, FINALIZE_COMPLETION_KEY, nullptr);
             CancelIo(m_iocp);
-            checkResult(
+            assertOK(
                 CloseHandle(m_iocp),
                "CloseHandle");
+        }
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer finalization error: ") + e.what()); // ----->
     }
@@ -121,6 +125,12 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         //     << "\n  pointer: " << (overlapped ? (uint64_t)overlapped->Pointer : 0);
 
         if  (is_ok) {
+            // finalization signal: wake up the multiplexer thread to exit
+            if (completion_key == FINALIZE_COMPLETION_KEY) {
+                // LOGT << "finalization signal received";
+                return {};  // return empty list to trigger thread exit check
+            }
+
             // special wake signal
             if (completion_key == WAKE_COMPLETION_KEY) {
                 // LOGT << "wake signal";
@@ -141,7 +151,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     if (raw_o > std::numeric_limits<int>::max()) {
                         throw std::runtime_error(
                             "invalid overlapped operation code: " +
-                            convertion::convert<std::string>(raw_o));
+                            std::to_string(raw_o));
                     }
 
                     io::Event::TOperation o = static_cast<io::Event::TOperation>
@@ -163,7 +173,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             // LOGT << "waitEvents: timeout";
             auto code  = GetLastError();
             if  (code != ERROR_TIMEOUT)
-                checkResult(code, "GetQueuedCompletionStatus");
+                assertOK(code, "GetQueuedCompletionStatus");
         }
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer waiting events error: ") + e.what()); // ----->
@@ -199,7 +209,7 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
             auto completion_key  = reinterpret_cast<ULONG_PTR>   (handle);
 
             // LOGT << "subscribe handle: " << handle_;
-            checkResult(
+            assertOK(
                 CreateIoCompletionPort(handle, m_iocp, completion_key, 0),
                "CreateIoCompletionPort"
             );
@@ -216,7 +226,7 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
             );
             // hEvent is not used for PostQueuedCompletionStatus — leave it zero
 
-            checkResult(
+            assertOK(
                 PostQueuedCompletionStatus(m_iocp, 0, completion_key, overlapped),
                "PostQueuedCompletionStatus"
             );
@@ -235,7 +245,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
             auto handle_ = reinterpret_cast<HANDLE>(handle);
 
             if (handle_) {
-                checkResult(
+                assertOK(
                     CancelIo(handle_),
                    "CancelIo");
 
@@ -256,7 +266,7 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
         if (event && event->stream) {
             m_wake_events->push(event);
 
-            checkResult(
+            assertOK(
                 PostQueuedCompletionStatus(m_iocp, 0, WAKE_COMPLETION_KEY, nullptr),
                "PostQueuedCompletionStatus");
         }
@@ -273,7 +283,7 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
         if (!events.empty()) {
             m_wake_events->push(events);
 
-            checkResult(
+            assertOK(
                 PostQueuedCompletionStatus(m_iocp, 0, WAKE_COMPLETION_KEY, nullptr),
                "PostQueuedCompletionStatus");
         }

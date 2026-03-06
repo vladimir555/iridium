@@ -46,7 +46,7 @@ protected:
        ~Locker();
 
         bool wait();
-        bool wait(std::chrono::nanoseconds const &timeout);
+        bool wait(std::chrono::system_clock::duration const &timeout);
     private:
         Synchronized const * const
             m_s;
@@ -154,7 +154,7 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait() {
 
 
 template<typename TMutex, bool const is_tracable>
-bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::nanoseconds const &timeout) {
+bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::system_clock::duration const &timeout) {
     if (m_s->m_is_interrupted)
         return false; // ----->
 

@@ -135,13 +135,7 @@ namespace iridium::convertion {
 
 TEST(specializations) {
     convert<std::string, std::chrono::system_clock::time_point, true>({});
-    convert<std::string, std::chrono::system_clock::time_point, true>({});
-    convert<std::string, std::chrono::hours, true>({});
-    convert<std::string, std::chrono::minutes, true>({});
-    convert<std::string, std::chrono::seconds, true>({});
-    convert<std::string, std::chrono::milliseconds, true>({});
-    convert<std::string, std::chrono::microseconds, true>({});
-    convert<std::string, std::chrono::nanoseconds, true>({});
+    convert<std::string, std::chrono::system_clock::duration, true>(std::chrono::system_clock::duration::zero());
 
     convert<std::string, bool, true>({});
     convert<std::string, int64_t, uint8_t, true>({}, uint8_t{10});
@@ -266,18 +260,20 @@ TEST(types) {
 
     ASSERT(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
 
+    {
+        system_clock::duration d =
+            std::chrono::hours(1) +
+            std::chrono::minutes(2) +
+            std::chrono::seconds(3) +
+            std::chrono::milliseconds(4) +
+            std::chrono::microseconds(5);
+            // std::chrono::nanoseconds(6);
+        std::string s = "1h2m3s4ms5us";
+        ASSERT(s, equal, convert<string>(d));
+        ASSERT(d, equal, convert<system_clock::duration>(s));
+    }
 
-//#ifndef _WIN32
-//    ASSERT(string("ħëłlö"), equal, convert<string>(wstring(L"ħëłlö")));
     ASSERT(std::string(u8"ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));
-//#endif // !_WIN32
-//    uint8_t  const hello_s[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
-//    uint32_t const hello_w[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
-//    wstring hello_wstr(hello_w, hello_w + sizeof(hello_w) / sizeof(hello_w[0]));
-//    string  hello_str (hello_s, hello_s + sizeof(hello_s) / sizeof(hello_s[0]));
-//    //LOGT << hello_str;
-//    //LOGT << convert<string>(hello_wstr);
-//    ASSERT(hello_str, equal, convert<string>(hello_wstr));
 
     ASSERT(convert<string>(0, 0), std::exception);
 }

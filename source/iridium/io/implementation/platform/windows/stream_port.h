@@ -40,7 +40,7 @@ public:
     URI::TSharedPtr         getURI() const override;
 
 protected:
-    DWORD   checkResult     (bool const &is_ok, std::string const &message);
+    DWORD   assertOK     (bool const &is_ok, std::string const &message);
     void    setBlockingMode (bool const &is_blocking);
     void    closeFDs();
 

@@ -86,7 +86,7 @@ void CProcessStream::initialize() {
             1024 * 4,
             0,
             &sa);
-        checkResult(m_reader_fd, "CreateNamedPipe stdout reader");
+        assertOK(m_reader_fd, "CreateNamedPipe stdout reader");
 
         stdout_writer_fd = CreateFileA(
             stdout_pipe_name.c_str(),
@@ -96,7 +96,7 @@ void CProcessStream::initialize() {
             OPEN_EXISTING,
             FILE_ATTRIBUTE_NORMAL,
             nullptr);
-        checkResult(stdout_writer_fd, "CreateFile stdout writer");
+        assertOK(stdout_writer_fd, "CreateFile stdout writer");
         // -----
 
         // ----- stdin
@@ -112,7 +112,7 @@ void CProcessStream::initialize() {
             1024 * 4,
             0,
             &sa);
-        checkResult(m_writer_fd, "CreateNamedPipe stdout reader");
+        assertOK(m_writer_fd, "CreateNamedPipe stdout reader");
 
         stdin_reader_fd = CreateFileA(
             stdin_pipe_name.c_str(),
@@ -122,7 +122,7 @@ void CProcessStream::initialize() {
             OPEN_EXISTING,
             FILE_ATTRIBUTE_NORMAL,
             nullptr);
-        checkResult(stdin_reader_fd, "CreateFile stdin reader");
+        assertOK(stdin_reader_fd, "CreateFile stdin reader");
         // -----
 
         // Connect child-side handles
@@ -133,7 +133,7 @@ void CProcessStream::initialize() {
         // child reads stdin from here
         startup_info.hStdInput  = stdin_reader_fd;
 
-        checkResult(
+        assertOK(
             CreateProcessA(
                 nullptr,
                 const_cast<LPSTR>(m_command_line.c_str()),
@@ -150,10 +150,10 @@ void CProcessStream::initialize() {
         );
 
         // Close child-side handles in parent (no longer needed)
-        checkResult(
+        assertOK(
             CloseHandle(stdout_writer_fd),
            "CloseHandle stdout");
-        checkResult(
+        assertOK(
             CloseHandle(stdin_reader_fd),
            "CloseHandle stdout");
 
@@ -176,12 +176,12 @@ void CProcessStream::finalize() {
 
         if (checkOneOf<int64_t>(result, WAIT_TIMEOUT, WAIT_FAILED)) {
             LOGW << "kill process " << m_app;
-            checkResult(TerminateProcess(m_process.hProcess, 1), "TerminateProcess");
+            assertOK(TerminateProcess(m_process.hProcess, 1), "TerminateProcess");
             WaitForSingleObject(m_process.hProcess, INFINITE);
         }
 
-        checkResult(CloseHandle(m_process.hProcess), "CloseHandle");
-        checkResult(CloseHandle(m_process.hThread) , "CloseHandle");
+        assertOK(CloseHandle(m_process.hProcess), "CloseHandle");
+        assertOK(CloseHandle(m_process.hThread) , "CloseHandle");
 
         closeFDs();
 
@@ -203,7 +203,7 @@ IProcess::TState CProcessStream::getState() {
         IProcess::TState    result      {};
         DWORD               exit_code   {};
 
-        checkResult(GetExitCodeProcess(m_process.hProcess, &exit_code), "GetExitCodeProcess");
+        assertOK(GetExitCodeProcess(m_process.hProcess, &exit_code), "GetExitCodeProcess");
 
         switch (exit_code) {
             case STATUS_ACCESS_VIOLATION:
@@ -230,7 +230,7 @@ IProcess::TState CProcessStream::getState() {
 void CProcessStream::sendSignal(TSignal const& signal) {
     try {
         DWORD exitCode = STILL_ACTIVE;
-        checkResult(
+        assertOK(
             GetExitCodeProcess(m_process.hProcess, &exitCode),
             "GetExitCodeProcess"
         );
@@ -240,16 +240,16 @@ void CProcessStream::sendSignal(TSignal const& signal) {
 
         switch (signal) {
         case TSignal::INTERRUPT: {
-            DWORD pid = checkResult(GetProcessId(m_process.hProcess), "GetProcessId");
+            DWORD pid = assertOK(GetProcessId(m_process.hProcess), "GetProcessId");
 
             if (AttachConsole(pid)) {
-                checkResult(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
+                assertOK(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
             }
             else {
                 throw std::runtime_error("can not send CTRL+C to non console app");
             }
 
-            checkResult(
+            assertOK(
                 WaitForSingleObject(
                     m_process.hProcess,
                     static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
@@ -259,11 +259,11 @@ void CProcessStream::sendSignal(TSignal const& signal) {
 
         case TSignal::TERMINATE:
         case TSignal::KILL:
-            checkResult(
+            assertOK(
                 TerminateProcess(
                     m_process.hProcess, 0),
                 "TerminateProcess");
-            checkResult(
+            assertOK(
                 WaitForSingleObject(
                     m_process.hProcess, INFINITE),
                 "WaitForSingleObject");

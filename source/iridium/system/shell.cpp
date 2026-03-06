@@ -20,7 +20,7 @@ using iridium::convertion::convert;
 namespace iridium::system {
 
 
-Shell::TTimeDuration const Shell::DEFAULT_TIMEOUT = std::chrono::minutes(10);
+std::chrono::minutes const Shell::DEFAULT_TIMEOUT(10);
 
 
 Shell::Shell()
@@ -47,7 +47,7 @@ void Shell::finalize() {
 }
 
 
-Shell::TResult Shell::run(std::string const &command_line, TTimeDuration const &timeout) {
+Shell::TResult Shell::run(std::string const &command_line, std::chrono::system_clock::duration const &timeout) {
     Shell::TResult  result  = {};
     // todo: refactor platform::makeShellCommand
 #ifdef WINDOWS_PLATFORM

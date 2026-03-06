@@ -34,7 +34,7 @@ public:
     CThread(
         std::string const &name,
         IRunnable::TSharedPtr const &runnuble,
-        std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
+        std::chrono::system_clock::duration const &timeout = DEFAULT_TIMEOUT);
     virtual ~CThread();
 
     void initialize() override;
@@ -66,7 +66,7 @@ private:
         m_error_queue_start;
     IAsyncQueue<std::string>::TSharedPtr
         m_error_queue_stop;
-    std::chrono::nanoseconds const
+    std::chrono::system_clock::duration const
         m_timeout;
 };
 

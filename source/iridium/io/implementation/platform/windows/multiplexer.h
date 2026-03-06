@@ -21,6 +21,8 @@
 
 namespace iridium::io::implementation::platform {
 
+// special completion keys for internal signals
+static constexpr ULONG_PTR FINALIZE_COMPLETION_KEY = static_cast<ULONG_PTR>(-2);
 
 class CMultiplexer : public IMultiplexer, public threading::Synchronized<std::mutex> {
 public:
@@ -36,7 +38,7 @@ public:
     void wake(std::list<Event::TSharedPtr> const &events) override;
 
 private:
-    DWORD checkResult(bool const &is_ok, std::string const &message);
+    DWORD assertOK(bool const &is_ok, std::string const &message);
 
     HANDLE m_iocp;
     std::unordered_map<HANDLE, IStream::TSharedPtr> m_map_id_stream;

@@ -50,7 +50,7 @@ URI::TSharedPtr CStreamPort::getURI() const {
 }
 
 
-DWORD CStreamPort::checkResult(bool const &is_ok, std::string const &message) {
+DWORD CStreamPort::assertOK(bool const &is_ok, std::string const &message) {
     using convertion::convert;
     using std::string;
 
@@ -122,7 +122,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
         auto  buffer = Buffer::create();
         DWORD bytes_read = 0;
 
-        auto result = checkResult(
+        auto result = assertOK(
             GetOverlappedResult(m_reader_fd, &m_reader_overlapped, &bytes_read, FALSE),
            "GetOverlappedResult");
 
@@ -138,7 +138,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
         m_reader_overlapped = { 0 };
         m_reader_overlapped.Pointer = reinterpret_cast<PVOID>(Event::TOperation::READ);
 
-        checkResult(
+        assertOK(
             ReadFile(
                 m_reader_fd,
                 m_reader_buffer->data(),
@@ -164,7 +164,7 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
 
         DWORD bytes_written = 0;
 
-        auto result = checkResult(
+        auto result = assertOK(
             GetOverlappedResult(
                 m_writer_fd,
                 &m_writer_overlapped,
@@ -185,7 +185,7 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
         m_writer_overlapped = {};
         m_writer_overlapped.Pointer = reinterpret_cast<PVOID>(Event::TOperation::WRITE);
 
-        checkResult(
+        assertOK(
             WriteFile(
                 m_writer_fd,
                 buffer->data(),

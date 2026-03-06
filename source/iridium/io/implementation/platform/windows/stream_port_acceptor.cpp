@@ -16,7 +16,7 @@ using std::string;
 namespace iridium::io::implementation::platform {
 
 
-CStreamPortAcceptor::CStreamPortAcceptor(URI const &uri) {
+CStreamPortAcceptor::CStreamPortAcceptor(URI const &) {
     throw std::runtime_error("not implemented");
 }
 
