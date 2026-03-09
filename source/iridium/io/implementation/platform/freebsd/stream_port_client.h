@@ -9,7 +9,7 @@
 #include "iridium/platform.h"
 
 
-#ifdef FREEBSD_PLATFORM
+#ifdef FREEBSD_LIKE_PLATFORM
 
 
 #include "../unix/stream_port_client.h"
@@ -24,7 +24,7 @@ typedef platform::unix_::CStreamPortClient CStreamPortClient;
 } // iridium::io::implementation::platform
 
 
-#endif // FREEBSD_PLATFORM
+#endif // FREEBSD_LIKE_PLATFORM
 
 
 #endif // HEADER_SHARED_MEMORY_STREAM_PORT_1E0C9D96_3826_42B7_848B_C7D91E6E2B32

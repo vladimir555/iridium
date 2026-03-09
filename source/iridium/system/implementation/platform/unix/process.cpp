@@ -127,7 +127,7 @@ void CProcessStream::initialize() {
         posix_spawnattr_t attr = {};
         posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
 #else
-        posix_spawnattr_t attr = {};
+//        posix_spawnattr_t attr = {};
 //            posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
 //            throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
 #endif
