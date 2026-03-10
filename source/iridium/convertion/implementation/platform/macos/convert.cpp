@@ -31,4 +31,4 @@ string TConvert<string, unsigned long>::convert(unsigned long const &value) {
 } // iridium::convertion::implementation
 
 
-#endif // PLATFORM_MACOS
+#endif // MACOS_PLATFORM
