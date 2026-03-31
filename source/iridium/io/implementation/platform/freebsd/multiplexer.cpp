@@ -296,7 +296,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 continue; // <---
 
             int result = kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr);
-            if (result < 0 && errno != ENOENT && errno != ESRCH && errno != EINTR && errno != EPIPE) {
+            if (result < 0 && !checkOneOf(errno, ENOENT, ESRCH, EINTR, EPIPE)) {
                 LOGE << "kevent update monitored events error: " << string(strerror(errno)) << ", monitored events: " << monitored;
                 throw std::runtime_error(
                     "kevent update monitored events error: " + string(strerror(errno)));
