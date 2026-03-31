@@ -248,45 +248,45 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
             for (auto const &stream_to_handle: m_streams_to_handle->pop(false)) {
                 int i = 0;
-                for (auto fd: stream_to_handle.stream->getHandles()) {
+                for (auto ident: stream_to_handle.stream->getHandles()) {
                     i++;
 
-                    // zero fd on wake event
-                    if (fd == 0)
+                    // zero ident on wake event
+                    if (ident == 0)
                         continue; // <---
 
                     struct kevent e;
 
-                    auto fd_stream  = m_map_fd_stream.find(fd);
-                    auto action     = EV_ADD | EV_CLEAR;
-                    auto operation  = Event::TOperation::OPEN;
+                    auto ident_stream   = m_map_ident_stream.find(ident);
+                    auto action         = EV_ADD | EV_CLEAR;
+                    auto operation      = Event::TOperation::OPEN;
 
                     if (stream_to_handle.is_add_action) {
-                        if (fd_stream != m_map_fd_stream.end()) {
-                            LOGW <<   "subscribe: fd " << fd << " in map (already subscribed)";
+                        if (ident_stream != m_map_ident_stream.end()) {
+                            LOGW <<   "subscribe: ident " << ident << " in map (already subscribed)";
                             continue; // <---
                         } else {
-                            m_map_fd_stream[fd] = stream_to_handle.stream;
+                            m_map_ident_stream[ident] = stream_to_handle.stream;
                         }
                     } else {
-                        if (fd_stream == m_map_fd_stream.end()) {
-                            LOGW << "unsubscribe: fd " << fd << " not in map (already unsubscribed)";
+                        if (ident_stream == m_map_ident_stream.end()) {
+                            LOGW << "unsubscribe: ident " << ident << " not in map (already unsubscribed)";
                             continue; // <---
                         } else {
                             action      = EV_DELETE;
                             operation   = Event::TOperation::CLOSE;
-                            m_map_fd_stream.erase(fd_stream);
+                            m_map_ident_stream.erase(ident_stream);
                         }
                     }
 
                     events.push_back(Event::create(stream_to_handle.stream, operation, Event::TStatus::END));
 
                     if (i == 1)
-                        EV_SET(&e, fd, EVFILT_READ,  action, 0, 0, nullptr);
+                        EV_SET(&e, ident, EVFILT_READ,  action, 0, 0, nullptr);
                     if (i == 2)
-                        EV_SET(&e, fd, EVFILT_WRITE, action, 0, 0, nullptr);
-                    if (i == 3 && kill(fd, 0) != 0)
-                        EV_SET(&e, fd, EVFILT_PROC,  action, NOTE_EXIT, 0, nullptr);
+                        EV_SET(&e, ident, EVFILT_WRITE, action, 0, 0, nullptr);
+                    if (i == 3 && kill(ident, 0) != 0)
+                        EV_SET(&e, ident, EVFILT_PROC,  action, NOTE_EXIT, 0, nullptr);
 
                     monitored.push_back(e);
                 }
@@ -302,14 +302,14 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     "kevent update monitored events error: " + string(strerror(errno)));
             }
         } else {
-            auto fd_stream  = m_map_fd_stream.find(triggered_event.ident);
-            if  (fd_stream == m_map_fd_stream.end()) {
-                LOGT << "multiplexer skipping event for unmapped fd: "
+            auto ident_stream  = m_map_ident_stream.find(triggered_event.ident);
+            if  (ident_stream == m_map_ident_stream.end()) {
+                LOGT << "multiplexer skipping event for unmapped ident: "
                      << convert<string>(triggered_event.ident);
                 continue; // <---
             }
 
-            auto const &stream = fd_stream->second;
+            auto const &stream = ident_stream->second;
 
             if (triggered_event.filter == EVFILT_READ)
                 events.push_back(Event::create(stream, Event::TOperation::READ, Event::TStatus::BEGIN));

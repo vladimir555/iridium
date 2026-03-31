@@ -26,7 +26,7 @@ protected:
             is_add_action;
     };
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
-        m_map_fd_stream;
+        m_map_ident_stream;
     threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
         m_streams_to_add;
     threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr

@@ -34,7 +34,7 @@ std::list<Event::TSharedPtr> CMultiplexerBase::finalizeAllEvents() {
         events.push_back(
             Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
 
-    for (auto const &fd_stream: m_map_fd_stream) {
+    for (auto const &fd_stream: m_map_ident_stream) {
         if (fd_stream.second)
             events.push_back(
                 Event::create(fd_stream.second, Event::TOperation::CLOSE, Event::TStatus::END));
@@ -42,7 +42,7 @@ std::list<Event::TSharedPtr> CMultiplexerBase::finalizeAllEvents() {
 
     events.splice(events.end(), m_wake_events->pop(false));
 
-    m_map_fd_stream.clear();
+    m_map_ident_stream.clear();
 
     return events; // ----->
 }
