@@ -134,6 +134,9 @@ IMPLEMENT_CONVERT(std::string, struct kevent, toString);
 namespace iridium::io::implementation::platform {
 
 
+static constexpr int DEFAULT_IDENT_WAKEUP = 65535;
+
+
 void CMultiplexer::handleSignal(int signal) {
     LOGT << "signal: " << signal;
 };
@@ -179,7 +182,7 @@ void CMultiplexer::initialize() {
 
     try {
         struct kevent event;
-        EV_SET(&event, 1, EVFILT_USER, EV_ADD | EV_CLEAR, 0, 0, nullptr);
+        EV_SET(&event, DEFAULT_IDENT_WAKEUP, EVFILT_USER, EV_ADD | EV_CLEAR, 0, 0, nullptr);
 
         assertOK(
             kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
@@ -228,7 +231,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
         LOGT << triggered_event;
 
-        if (triggered_event.ident   == 1 &&
+        if (triggered_event.ident   == DEFAULT_IDENT_WAKEUP &&
             triggered_event.filter  == EVFILT_USER)
         {
             if (!m_is_initialized) {
@@ -293,7 +296,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 continue; // <---
 
             int result = kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr);
-            if (result < 0 && errno != ENOENT) {
+            if (result < 0 && errno != ENOENT && errno != ESRCH) {
                 LOGE << "kevent update monitored events error: " << string(strerror(errno)) << ", monitored events: " << monitored;
                 throw std::runtime_error(
                     "kevent update monitored events error: " + string(strerror(errno)));
@@ -382,7 +385,7 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
 
 void CMultiplexer::wakeKEvent() {
     struct kevent trigger;
-    EV_SET(&trigger, 1, EVFILT_USER, 0, NOTE_TRIGGER, 0, nullptr);
+    EV_SET(&trigger, DEFAULT_IDENT_WAKEUP, EVFILT_USER, 0, NOTE_TRIGGER, 0, nullptr);
 
     kevent(m_kqueue, &trigger, 1, nullptr, 0, nullptr);
 }
