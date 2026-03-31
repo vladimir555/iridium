@@ -55,8 +55,7 @@ CProcessStream::CProcessStream(
     m_state_internal    {},
     m_app               (app),
     m_args              (args),
-    m_command_line      (app),
-    m_pid               (0)
+    m_command_line      (app)
 {
     for (auto const &arg: args)
         m_command_line  += " " + arg;

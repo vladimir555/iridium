@@ -110,11 +110,8 @@ std::list<uintptr_t> CStreamPort::getHandles() const {
     if (m_fd_reader && m_fd_reader != m_fd_writer)
         handles.push_back(m_fd_reader);
 
-//    if (handles.empty())
-//        throw std::runtime_error(
-//            "stream port get handles error: '" +
-//            (m_uri ? m_uri->getSource() : "") +
-//            "' not initialized"); // ----->
+    if (m_pid && m_fd_reader && m_fd_reader != m_fd_writer)
+        handles.push_back(m_pid);
 
     return handles; // ----->
 }
@@ -154,8 +151,13 @@ void CStreamPort::closeFDs() {
         m_fd_reader = 0;
     }
 
+    if (m_pid) {
+        close(m_pid);
+    }
+
     m_fd_writer = 0;
     m_fd_reader = 0;
+    m_pid       = 0;
 }
 
 

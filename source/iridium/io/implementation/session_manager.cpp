@@ -182,7 +182,7 @@ CSessionManager::CContextWorkerHandler::handle(
            (worker_event->stream->getHandles().empty() &&
             worker_event->operation != Event::TOperation::OPEN))
         {
-            LOGT << "[SKIP]";
+            // LOGT << "[SKIP]";
             continue; // <---
         }
 
@@ -233,8 +233,10 @@ CSessionManager::CContextWorkerHandler::handle(
                             auto pipe = context->getPipe(event);
                             if (pipe) {
                                 LOGT << "[TRANSMIT]: flush";
+
                                 while (pipe->transmit(event))
                                     LOGT << "transmit flush next";
+
                                 // event->status = Event::TStatus::END;
                                 // events_to_repeat.push_back(event);
                                 LOGT << "[UNSUBSCRIBE]";
@@ -326,7 +328,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 }
             }
 
-            auto events__ = m_context_manager->releaseContext(context, true/*is_context_valid*/);
+            auto events__ = m_context_manager->releaseContext(context, is_context_valid);
             if (!events__.empty()) {
                 events_to_repeat.insert(events_to_repeat.end(), events__.begin(), events__.end());
             }

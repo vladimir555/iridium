@@ -16,6 +16,7 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 
 using std::string;
@@ -71,7 +72,7 @@ namespace iridium::io::implementation::platform {
 
 
 void CMultiplexer::handleSignal(int signal) {
-    LOGT << "broken pipe signal " << signal;
+    LOGT << "signal: " << signal;
 };
 
 
@@ -98,33 +99,28 @@ void CMultiplexer::initialize() {
     if (m_kqueue)
         throw std::runtime_error("initialization error: kqueue is not finalized"); // ----->
 
-    struct sigaction signal_handler;
-    struct sigaction old_signal_handler;
+    // struct sigaction signal_handler;
+    // struct sigaction old_signal_handler;
 
-    // can set to SIG_IGN
-    signal_handler.sa_handler   = &handleSignal;
-    // restart interrupted system calls
-    signal_handler.sa_flags     = SA_RESTART;
-    // block every signal during the handler
-    sigemptyset(&signal_handler.sa_mask);
+    // // can set to SIG_IGN
+    // signal_handler.sa_handler   = &handleSignal;
+    // // restart interrupted system calls
+    // signal_handler.sa_flags     = SA_RESTART;
+    // // block every signal during the handler
+    // sigemptyset(&signal_handler.sa_mask);
 
-    assertOK(sigaction(SIGPIPE, &signal_handler, &old_signal_handler), "sigaction error");
+    // assertOK(sigaction(SIGPIPE, &signal_handler, &old_signal_handler), "sigaction error");
+    // assertOK(sigaction(SIGCHLD, &signal_handler, &old_signal_handler), "sigaction error");
 
     m_kqueue = assertOK(kqueue(), "kqueue create error");
 
     try {
-        struct kevent event {
-            .ident  = static_cast<uintptr_t>(1),
-            .filter = EVFILT_USER,
-            .flags  = EV_ADD | EV_CLEAR,
-            .fflags = 0,
-            .data   = 0,
-            .udata  = nullptr
-        };
+        struct kevent event;
+        EV_SET(&event, 1, EVFILT_USER, EV_ADD | EV_CLEAR, 0, 0, nullptr);
 
         assertOK(
             kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
-        "kevent user registration error");
+           "kevent user registration error");
 
         m_is_initialized = true;
     } catch (std::exception const &e) {
@@ -156,9 +152,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             m_kqueue,
             nullptr, 0,
             m_triggered_events.data(),
-            m_triggered_events.size() & std::numeric_limits<int>::max(),
+            std::min(m_triggered_events.size(), static_cast<size_t>(std::numeric_limits<int>::max())),
            &m_timeout),
-        "kevent waiting event error");
+       "kevent waiting event error");
 
     LOGT << "triggered_event_count: " << triggered_event_count;
 
@@ -167,15 +163,16 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
 
-       LOGT << __FUNCTION__
+        LOGT
+            << __FUNCTION__
             << ", id: "     << triggered_event.ident
+            << ", flags: "  << triggered_event.flags
             << ", flags: "  << TEventFlag(triggered_event.flags).convertToFlagsString()
-            << ", flags "   << TEventFlag(triggered_event.flags).convertToFlagsString()
-            << ", filter "  << (int16_t)triggered_event.filter
-            << ", filter "  << TEventFilter(triggered_event.filter)
-            << ", data "    << triggered_event.data
-            << ", fflags "  << triggered_event.fflags
-            << ", udata "   << (uint64_t)triggered_event.udata;
+            << ", filter: " << (int16_t)triggered_event.filter
+            << ", filter: " << TEventFilter(triggered_event.filter)
+            << ", data: "   << triggered_event.data
+            << ", fflags: " << triggered_event.fflags
+            << ", udata: "  << (uint64_t)triggered_event.udata;
 
         if (triggered_event.ident   == 1 &&
             triggered_event.filter  == EVFILT_USER)
@@ -192,75 +189,49 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             std::vector<struct kevent>
                 monitored;
 
-            for (auto const &stream: m_streams_to_del->pop(false)) {
-                for (auto fd: stream->getHandles()) {
-                    // wake event
-                    if (fd == 0) {
-                        continue; // <---
-                    }
+            for (auto const &stream_to_handle: m_streams_to_handle->pop(false)) {
+                int i = 0;
+                for (auto fd: stream_to_handle.stream->getHandles()) {
+                    i++;
 
-                    struct kevent e {
-                        .ident  = static_cast<uintptr_t>(fd),
-                        .filter = 0,
-                        .flags  = EV_DELETE,
-                        .fflags = 0,
-                        .data   = 0,
-                        .udata  = nullptr
-                    };
+                    // zero fd on wake event
+                    if (fd == 0)
+                        continue; // <---
+
+                    struct kevent e;
 
                     auto fd_stream  = m_map_fd_stream.find(fd);
-                    if  (fd_stream == m_map_fd_stream.end()) {
-                        LOGW << "unsubscribe: fd " << fd << " not in map (already closed)";
+                    auto action     = EV_ADD | EV_CLEAR;
+                    auto operation  = Event::TOperation::OPEN;
+
+                    if (stream_to_handle.is_add_action) {
+                        if (fd_stream != m_map_fd_stream.end()) {
+                            LOGW <<   "subscribe: fd " << fd << " in map (already subscribed)";
+                            continue; // <---
+                        } else {
+                            m_map_fd_stream[fd] = stream_to_handle.stream;
+                        }
                     } else {
-                        auto stream = fd_stream->second;
-                        auto event  = Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END);
-                        events.push_back(event);
-
-                        e.filter = EVFILT_READ,
-                        monitored.push_back(e);
-                        e.filter = EVFILT_WRITE;
-                        monitored.push_back(e);
-
-                        // Erase from map after EV_DELETE is queued
-                        m_map_fd_stream.erase(fd_stream);
-
-                        LOGT << "unsubscribe end event: " << event;
-                    }
-                }
-            }
-
-            for (auto const &stream: m_streams_to_add->pop(false)) {
-                for (auto fd: stream->getHandles()) {
-                    // wake event
-                    if (fd == 0) {
-                        continue; // <---
+                        if (fd_stream == m_map_fd_stream.end()) {
+                            LOGW << "unsubscribe: fd " << fd << " not in map (already unsubscribed)";
+                            continue; // <---
+                        } else {
+                            action      = EV_DELETE;
+                            operation   = Event::TOperation::CLOSE;
+                            m_map_fd_stream.erase(fd_stream);
+                        }
                     }
 
-                    struct kevent e {
-                        .ident  = static_cast<uintptr_t>(fd),
-                        .filter = 0,
-                        .flags  = EV_ADD | EV_CLEAR,
-                        .fflags = 0,
-                        .data   = 0,
-                        .udata  = nullptr
-                    };
+                    events.push_back(Event::create(stream_to_handle.stream, operation, Event::TStatus::END));
 
-                    auto fd_stream  = m_map_fd_stream.find(fd);
-                    if ( fd_stream == m_map_fd_stream.end()) {
-                        auto event  = Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END);
+                    if (i == 1)
+                        EV_SET(&e, fd, EVFILT_READ,  action, 0, 0, nullptr);
+                    if (i == 2)
+                        EV_SET(&e, fd, EVFILT_WRITE, action, 0, 0, nullptr);
+                    if (i == 3)
+                        EV_SET(&e, fd, EVFILT_PROC,  action, NOTE_EXIT, 0, nullptr);
 
-                        m_map_fd_stream[fd] = stream;
-                        events.push_back(event);
-
-                        e.filter = EVFILT_READ,
-                        monitored.push_back(e);
-                        e.filter = EVFILT_WRITE;
-                        monitored.push_back(e);
-
-                        LOGT << "subscribe end event: " << event;
-                    } else {
-                        LOGW << "subscribe: fd " << fd << " already in map";
-                    }
+                    monitored.push_back(e);
                 }
             }
 
@@ -269,44 +240,35 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
             int result = kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr);
             if (result < 0 && errno != ENOENT) {
-                throw std::runtime_error(
-                    "kevent update monitored events error: " + string(strerror(errno)));
+                LOGE << "kevent update monitored events error: " + string(strerror(errno));
+                // throw std::runtime_error(
+                //     "kevent update monitored events error: " + string(strerror(errno)));
             }
         } else {
             auto fd_stream  = m_map_fd_stream.find(triggered_event.ident);
             if  (fd_stream == m_map_fd_stream.end()) {
-                // Race condition: fd was removed (EV_DELETE sent) but event still arrived from OS
-                // This is normal in parallel mode - safely skip
                 LOGT << "multiplexer skipping event for unmapped fd: "
                      << convert<string>(triggered_event.ident);
-                continue;
+                continue; // <---
             }
 
             auto const &stream = fd_stream->second;
 
-            // Generate READ/WRITE events based on filter, regardless of EV_EOF
-            if (triggered_event.filter == EVFILT_READ) {
+            if (triggered_event.filter == EVFILT_READ)
                 events.push_back(Event::create(stream, Event::TOperation::READ, Event::TStatus::BEGIN));
-                // EV_EOF on READ means no more data coming
-                if (triggered_event.flags & EV_EOF) {
-                    m_map_fd_stream.erase(fd_stream);
-                    events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-                }
-            } else if (triggered_event.filter == EVFILT_WRITE) {
+
+            if (triggered_event.filter == EVFILT_WRITE)
                 events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
-                // EV_EOF on WRITE means write side closed
-                if (triggered_event.flags & EV_EOF) {
-                    // Check before erasing - might already be erased by READ EOF
-                    auto it = m_map_fd_stream.find(triggered_event.ident);
-                    if (it != m_map_fd_stream.end()) {
-                        m_map_fd_stream.erase(it);
-                        events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-                    }
-                }
-            }
 
             if (triggered_event.flags & EV_ERROR)
-                events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::BEGIN));
+                events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::END));
+
+            if ((triggered_event.flags   & EV_EOF) ||
+                (triggered_event.filter == EVFILT_PROC &&
+                (triggered_event.fflags  & NOTE_EXIT)))
+            {
+                events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+            }
         }
     }
 
@@ -321,7 +283,7 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
         return; // ----->
 
     try {
-        m_streams_to_add->push(stream);
+        m_streams_to_handle->push(TStreamToHandle { stream, true } );
         wakeKEvent();
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer subscribing error: ") + e.what());
@@ -334,7 +296,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
         return; // ----->
 
     try {
-        m_streams_to_del->push(stream);
+        m_streams_to_handle->push(TStreamToHandle { stream, false } );
         wakeKEvent();
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer unsubscribing error: ") + e.what());
@@ -365,14 +327,8 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
 
 
 void CMultiplexer::wakeKEvent() {
-    struct kevent trigger {
-        .ident  = 1,
-        .filter = EVFILT_USER,
-        .flags  = 0,
-        .fflags = NOTE_TRIGGER,
-        .data   = 0,
-        .udata  = nullptr
-    };
+    struct kevent trigger;
+    EV_SET(&trigger, 1, EVFILT_USER, 0, NOTE_TRIGGER, 0, nullptr);
 
     kevent(m_kqueue, &trigger, 1, nullptr, 0, nullptr);
 }

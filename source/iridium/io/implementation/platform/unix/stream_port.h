@@ -50,6 +50,7 @@ protected:
 
     std::atomic<int>    m_fd_reader;
     std::atomic<int>    m_fd_writer;
+    std::atomic<int>    m_pid;
     URI::TSharedPtr     m_uri;
     bool                m_is_opened;
     bool                m_is_blocking_mode;

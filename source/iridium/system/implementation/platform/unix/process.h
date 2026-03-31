@@ -55,7 +55,7 @@ private:
     std::string                 m_app;
     std::vector<std::string>    m_args;
     std::string                 m_command_line;
-    std::atomic<pid_t>          m_pid;
+    // std::atomic<pid_t>          m_pid;
     std::shared_ptr<int>        m_exit_code;
 };
 

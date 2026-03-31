@@ -21,6 +21,7 @@ namespace iridium::parsing::implementation {
 // ----- interface
 
 
+// todo: copy-on-write (cow) + node diff
 template<typename TValue>
 class CNodeType : virtual public INodeType<TValue> {
 public:

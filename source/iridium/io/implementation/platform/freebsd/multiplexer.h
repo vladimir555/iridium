@@ -45,7 +45,7 @@ public:
     void wake       (std::list<Event::TSharedPtr> const &events) override;
 
 private:
-    static size_t const DEFAULT_EVENTS_LIMIT = 4;
+    static size_t const DEFAULT_EVENTS_LIMIT = 64;
 
     template<typename T>
     static T assertOK(T const &result, std::string const &message);
@@ -71,8 +71,8 @@ T CMultiplexer::assertOK(T const &result, std::string const &message) {
     if (result < 0)
         throw std::runtime_error(message + ": " + std::strerror(errno) +
           ", code " + iridium::convertion::convert<std::string>(errno)); // ----->
-    else
-        return result; // ----->
+
+    return result; // ----->
 }
 
 

@@ -81,7 +81,7 @@ std::list<Event::TSharedPtr> CContextManager::releaseContext(IContext::TSharedPt
 
     auto events = context->popEvents();
 
-    // LOGT << "CContextManager::releaseContext, events: " << events;
+    // LOGT << "events: " << events << ", is_valid_context: " << is_valid_context;
 
     LOCK_SCOPE();
 

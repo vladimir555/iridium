@@ -300,8 +300,11 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
             }
         }
 
-//        if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE)
-//            throw std::runtime_error("unexpected closing console pipe");
+        if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE)
+           throw std::runtime_error("unexpected closing console pipe");
+
+        if (!m_process_result->output && event->operation == io::Event::TOperation::TIMEOUT)
+           throw std::runtime_error("console pipe timeout");
 
     } catch (std::exception const &e) {
         LOGF << e.what();

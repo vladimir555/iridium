@@ -19,12 +19,20 @@ public:
     std::list<Event::TSharedPtr> finalizeAllEvents();
 
 protected:
+    struct TStreamToHandle {
+        IStream::TSharedPtr
+            stream;
+        bool
+            is_add_action;
+    };
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
         m_map_fd_stream;
     threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
         m_streams_to_add;
     threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
         m_streams_to_del;
+    threading::IAsyncQueue<TStreamToHandle>::TSharedPtr
+        m_streams_to_handle;
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_wake_events;
     std::atomic<bool>

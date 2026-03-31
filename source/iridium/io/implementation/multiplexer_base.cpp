@@ -16,6 +16,8 @@ CMultiplexerBase::CMultiplexerBase()
         (CAsyncQueue<IStream::TSharedPtr>::create()),
     m_streams_to_del
         (CAsyncQueue<IStream::TSharedPtr>::create()),
+    m_streams_to_handle
+        (CAsyncQueue<TStreamToHandle>::create()),
     m_wake_events
         (CAsyncQueue<Event::TSharedPtr>::create())
 {}

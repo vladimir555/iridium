@@ -21,6 +21,7 @@ namespace iridium::parsing::serialization {
 
 
 // todo: copy constructor; rm TType; fix List property name
+// todo: copy-on-write (cow)
 template<typename TValue>
 class NodeView {
 public:
