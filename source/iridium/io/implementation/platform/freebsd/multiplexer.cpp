@@ -29,6 +29,7 @@ using iridium::threading::implementation::CWorker;
 using iridium::threading::implementation::CAsyncQueue;
 
 
+// struct kevent.flags)
 DEFINE_ENUM(
     TEventFlag,
     ADD         = EV_ADD,
@@ -42,11 +43,9 @@ DEFINE_ENUM(
     EOF_        = EV_EOF,
     ERROR_      = EV_ERROR
 )
-
-
 IMPLEMENT_ENUM(TEventFlag)
 
-
+// struct kevent.filter
 DEFINE_ENUM(
     TEventFilter,
     READ        = EVFILT_READ,
@@ -56,16 +55,80 @@ DEFINE_ENUM(
     PROC        = EVFILT_PROC,
     SIGNAL      = EVFILT_SIGNAL,
     TIMER       = EVFILT_TIMER,
-//    MACHPORT    = EVFILT_MACHPORT,
     FS          = EVFILT_FS,
     USER        = EVFILT_USER,
-//    VM          = EVFILT_VM,
-//    EXCEPT      = EVFILT_EXCEPT,
-    SYSCOUN     = EVFILT_SYSCOUNT
+    SYSCOUNT    = EVFILT_SYSCOUNT
 )
-
-
 IMPLEMENT_ENUM(TEventFilter)
+
+// EVFILT_PROC
+DEFINE_ENUM(
+    TEventProcFFlag,
+    EXIT        = NOTE_EXIT,
+    FORK        = NOTE_FORK,
+    EXEC        = NOTE_EXEC,
+    TRACK       = NOTE_TRACK,
+    TRACKERR    = NOTE_TRACKERR
+)
+IMPLEMENT_ENUM(TEventProcFFlag)
+
+// EVFILT_VNODE
+DEFINE_ENUM(
+    TEventVnodeFFlag,
+    DELETE      = NOTE_DELETE,
+    WRITE       = NOTE_WRITE,
+    EXTEND      = NOTE_EXTEND,
+    ATTRIB      = NOTE_ATTRIB,
+    LINK        = NOTE_LINK,
+    RENAME      = NOTE_RENAME,
+    REVOKE      = NOTE_REVOKE
+)
+IMPLEMENT_ENUM(TEventVnodeFFlag)
+
+// EVFILT_USER
+DEFINE_ENUM(
+    TEventUserFFlag,
+    TRIGGER     = NOTE_TRIGGER,
+    FFNOP       = NOTE_FFNOP,
+    FFAND       = NOTE_FFAND,
+    FFOR        = NOTE_FFOR,
+    FFCOPY      = NOTE_FFCOPY,
+    // FFCTRLMASK  = NOTE_FFCTRLMASK,
+    FFLAGSMASK  = NOTE_FFLAGSMASK
+)
+IMPLEMENT_ENUM(TEventUserFFlag)
+
+std::string toString(struct kevent const &source) {
+    std::string fflags;
+
+    // enum fflags depends filter
+    switch (source.filter) {
+        case EVFILT_PROC:
+            fflags = TEventProcFFlag(source.fflags).convertToFlagsString();
+            break;
+        case EVFILT_VNODE:
+            fflags = TEventVnodeFFlag(source.fflags).convertToFlagsString();
+            break;
+        case EVFILT_USER:
+            fflags = TEventUserFFlag(source.fflags).convertToFlagsString();
+            break;
+        default:
+            fflags = convert<std::string, uint32_t>(source.fflags, 16);
+            break;
+    }
+
+    return
+        "{ ident: "     + convert<std::string>(source.ident)
+        + ", filter: "  + TEventFilter  (source.filter).convertToFlagsString()
+        + ", flags: "   + TEventFlag    (source.flags) .convertToFlagsString()
+        + ", fflags: "  + fflags
+        + ", data: "    + convert<std::string,  intptr_t>(source.data)
+        + ", udata: "   + convert<std::string, uintptr_t>(reinterpret_cast<uintptr_t>(source.udata)) + " }";
+}
+
+
+DEFINE_CONVERT(std::string, struct kevent);
+IMPLEMENT_CONVERT(std::string, struct kevent, toString);
 
 
 namespace iridium::io::implementation::platform {
@@ -163,16 +226,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
 
-        LOGT
-            << __FUNCTION__
-            << ", id: "     << triggered_event.ident
-            << ", flags: "  << triggered_event.flags
-            << ", flags: "  << TEventFlag(triggered_event.flags).convertToFlagsString()
-            << ", filter: " << (int16_t)triggered_event.filter
-            << ", filter: " << TEventFilter(triggered_event.filter)
-            << ", data: "   << triggered_event.data
-            << ", fflags: " << triggered_event.fflags
-            << ", udata: "  << (uint64_t)triggered_event.udata;
+        LOGT << triggered_event;
 
         if (triggered_event.ident   == 1 &&
             triggered_event.filter  == EVFILT_USER)
@@ -240,9 +294,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
             int result = kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr);
             if (result < 0 && errno != ENOENT) {
-                LOGE << "kevent update monitored events error: " + string(strerror(errno));
-                // throw std::runtime_error(
-                //     "kevent update monitored events error: " + string(strerror(errno)));
+                LOGE << "kevent update monitored events error: " << string(strerror(errno)) << ", monitored events: " << monitored;
+                throw std::runtime_error(
+                    "kevent update monitored events error: " + string(strerror(errno)));
             }
         } else {
             auto fd_stream  = m_map_fd_stream.find(triggered_event.ident);

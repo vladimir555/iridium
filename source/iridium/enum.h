@@ -124,7 +124,11 @@ public: \
         std::string result; \
         for (auto const &f: TEnum::getEnums()) \
             if (m_value & f) \
-                result += convert(f) + " "; \
+                result += convert(f) + " | "; \
+        if (result.size() > 3) \
+            result.resize(result.size() - 3); \
+        else \
+            result = "UNKNOWN"; \
         return result; \
     } \
 };

@@ -13,6 +13,7 @@ rtsp
 simd json parser
 node diff for transferring
 kasperskyos io
+C++26 reflections enum
 
 video codec wrapper: libaom + libopus
 or
