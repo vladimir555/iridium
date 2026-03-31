@@ -285,7 +285,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                         EV_SET(&e, fd, EVFILT_READ,  action, 0, 0, nullptr);
                     if (i == 2)
                         EV_SET(&e, fd, EVFILT_WRITE, action, 0, 0, nullptr);
-                    if (i == 3)
+                    if (i == 3 && kill(fd, 0) != 0)
                         EV_SET(&e, fd, EVFILT_PROC,  action, NOTE_EXIT, 0, nullptr);
 
                     monitored.push_back(e);
@@ -296,7 +296,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 continue; // <---
 
             int result = kevent(m_kqueue, monitored.data(), static_cast<int>(monitored.size()), nullptr, 0, nullptr);
-            if (result < 0 && errno != ENOENT && errno != ESRCH) {
+            if (result < 0 && errno != ENOENT && errno != ESRCH && errno != EINTR && errno != EPIPE) {
                 LOGE << "kevent update monitored events error: " << string(strerror(errno)) << ", monitored events: " << monitored;
                 throw std::runtime_error(
                     "kevent update monitored events error: " + string(strerror(errno)));
