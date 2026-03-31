@@ -119,7 +119,7 @@ std::string toString(struct kevent const &source) {
 
     return
         "{ ident: "     + convert<std::string>(source.ident)
-        + ", filter: "  + TEventFilter  (source.filter).convertToFlagsString()
+        + ", filter: "  + convert<std::string, TEventFilter>(source.filter)
         + ", flags: "   + TEventFlag    (source.flags) .convertToFlagsString()
         + ", fflags: "  + fflags
         + ", data: "    + convert<std::string,  intptr_t>(source.data)
