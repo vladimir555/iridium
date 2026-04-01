@@ -182,7 +182,14 @@ void CMultiplexer::initialize() {
 
     try {
         struct kevent event;
+
         EV_SET(&event, DEFAULT_IDENT_WAKEUP, EVFILT_USER, EV_ADD | EV_CLEAR, 0, 0, nullptr);
+
+        assertOK(
+            kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
+           "kevent user registration error");
+
+        EV_SET(&event, SIGCHLD, EVFILT_SIGNAL, EV_ADD | EV_CLEAR, 0, 0, nullptr);
 
         assertOK(
             kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
@@ -225,6 +232,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     LOGT << "triggered_event_count: " << triggered_event_count;
 
     LOCK_SCOPE();
+
+    size_t signal_count = 0;
+    std::unordered_set<int> closed_process_idents;
 
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
@@ -302,6 +312,18 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     "kevent update monitored events error: " + string(strerror(errno)));
             }
         } else {
+            if (triggered_event.filter == EVFILT_SIGNAL) {
+                auto signal_number = static_cast<int>(triggered_event.ident);
+
+                LOGT
+                    << "signal received: "  << signal_number
+                    << ", count: "          << triggered_event.data;
+
+                signal_count = triggered_event.data;
+
+                continue; // <---
+            }
+
             auto ident_stream  = m_map_ident_stream.find(triggered_event.ident);
             if  (ident_stream == m_map_ident_stream.end()) {
                 LOGT << "multiplexer skipping event for unmapped ident: "
@@ -317,16 +339,43 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             if (triggered_event.filter == EVFILT_WRITE)
                 events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
 
-            if (triggered_event.flags & EV_ERROR)
+            if (triggered_event.flags & EV_ERROR) {
                 events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::END));
+                if (stream->getHandles().size() == 3)
+                    closed_process_idents.insert(stream->getHandles().back());
+            }
 
             if ((triggered_event.flags   & EV_EOF) ||
                 (triggered_event.filter == EVFILT_PROC &&
                 (triggered_event.fflags  & NOTE_EXIT)))
             {
                 events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+                if (stream->getHandles().size() == 3)
+                    closed_process_idents.insert(stream->getHandles().back());
             }
         }
+    }
+
+    if (signal_count > 0) {
+        LOGT
+            << "SIGNAL_COUNT: "             << signal_count
+            << " > events.size: "           << events.size()
+            << ", closed_process_idents: "  << closed_process_idents
+            << ", m_map_ident_stream: "     << m_map_ident_stream;
+
+        // for (auto const &ident_stream: m_map_ident_stream) {
+        //     if (ident_stream.second->getHandles().size() != 3)
+        //         continue; // <---
+
+        //     auto stream = ident_stream.second;
+        //     auto pid    = stream->getHandles().back();
+
+        //     if (kill(pid, 0) == 0 && closed_process_idents.count(pid) == 0) {
+        //         auto event = Event::create(ident_stream.second, Event::TOperation::CLOSE, Event::TStatus::BEGIN);
+        //         LOGT << "FORCE CLOSE EVENT: " << event;
+        //         m_wake_events->push(event);
+        //     }
+        // }
     }
 
     events.splice(events.end(), m_wake_events->pop(false));

@@ -183,8 +183,16 @@ TEST(specializations) {
 
     convert<int, int, true>({});
     convert<std::string, std::string, true>({});
-
     convert<std::string, std::nested_exception, true>({});
+    convert<std::string, uintptr_t, true>({});
+    convert<std::string, intptr_t, true>({});
+
+    convert<std::string, std::unordered_map<string, int>, true >( { {"s1", 1}, {"s2", 2} } );
+    convert<std::string, std::map<string, int>, true >( { {"s1", 1}, {"s2", 2} } );
+    convert<std::string, std::vector<string>, true >( { "s1", "s2" } );
+    convert<std::string, std::list<string>, true >( { "s1", "s2" } );
+    convert<std::string, std::set<string>, true >( { "s1", "s2" } );
+    convert<std::string, std::pair<string, int>, true >( { "s1", 1 } );
 }
 
 

@@ -59,14 +59,21 @@ template<typename, typename = void>
 struct TIsSTLAssociativeContainer: std::false_type {};
 
 
+template<typename T> struct TIsPair: std::false_type {};
+template<typename T1, typename T2>
+struct TIsPair<std::pair<T1, T2>>: std::true_type {};
+
+
 template<typename T>
 struct TIsSTLAssociativeContainer<
     T,
     std::void_t<
         typename T::key_type,
-        typename T::mapped_type > >
+        typename T::mapped_type,
+        typename T::value_type
+    > >
 {
-    static constexpr bool value = TIsSTLType<T>::value;
+    static constexpr bool value = TIsPair<typename T::value_type>::value;
 };
 
 
@@ -147,6 +154,46 @@ struct TConvert<std::string, std::atomic<TValue> > {
 };
 
 
+template<typename TFirst, typename TSecond, bool is_throwable>
+struct TConvert<std::string, std::pair<TFirst, TSecond>, void, is_throwable> {
+    static std::string convert(std::pair<TFirst, TSecond> const &pair) {
+        return
+            "{ " + TConvert<std::string, TFirst >::convert(pair.first) +
+            ": " + TConvert<std::string, TSecond>::convert(pair.second) + " }";    }
+};
+
+
+template<typename TContainer, bool is_throwable>
+struct TConvert<
+    std::string,
+    TContainer,
+    std::enable_if_t<
+        detail::TIsSTLAssociativeContainer<TContainer>::value>, is_throwable >
+{
+    static std::string convert(TContainer const &container) {
+        std::string result;
+        result.reserve(container.size() * 8 + 4);
+        result = "{ ";
+        bool first = true;
+
+        for (auto const &pair: container) {
+            if (!first) {
+                result += ", ";
+            } else {
+                first = false;
+            }
+            result += TConvert<std::string, typename TContainer::key_type>::convert(pair.first);
+            result += ": ";
+            result += TConvert<std::string, typename TContainer::mapped_type>::convert(pair.second);
+        }
+
+        result += " }";
+
+        return result;
+    }
+};
+
+
 template<typename TContainer, bool is_throwable>
 struct TConvert<
     std::string,
@@ -168,38 +215,6 @@ struct TConvert<
                 first = false;
             }
             result += TConvert<std::string, std::decay_t<decltype(item)>>::convert(item);
-        }
-
-        result += " ]";
-
-        return result;
-    }
-};
-
-
-template<typename TContainer, bool is_throwable>
-struct TConvert<
-    std::string,
-    TContainer,
-    std::enable_if_t<
-       !detail::TIsSTLSequentialContainer <TContainer>::value &&
-        detail::TIsSTLAssociativeContainer<TContainer>::value>, is_throwable >
-{
-    static std::string convert(TContainer const &container) {
-        std::string result;
-        result.reserve(container.size() * 8 + 4);
-        result = "[ ";
-        bool first = true;
-
-        for (auto const &pair: container) {
-            if (!first) {
-                result += ", ";
-            } else {
-                first = false;
-            }
-            result += TConvert<std::string, typename TContainer::key_type>::convert(pair.first);
-            result += ": ";
-            result += TConvert<std::string, typename TContainer::mapped_type>::convert(pair.second);
         }
 
         result += " ]";
