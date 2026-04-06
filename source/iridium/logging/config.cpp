@@ -15,7 +15,7 @@ namespace iridium::logging::config {
 TLogger createDefault() {
     auto root = CNode::create("logger");
 
-//    root->addChild("level", "TRACE");
+    // root->addChild("level", "TRACE");
     root->addChild("sink")->addChild("type", "console");
 
 //    if (!file_name.empty()) {

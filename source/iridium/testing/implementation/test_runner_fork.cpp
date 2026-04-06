@@ -101,7 +101,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
             if (checkOneOf(state.condition,
                 IProcess::TState::TCondition::DONE,
-                IProcess::TState::TCondition::RUNNING))
+                IProcess::TState::TCondition::RUNNING) && result->node)
             {
                 LOGI << result->path << ":\n"
                      << result->output;
@@ -109,7 +109,10 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
                     TResult::TTests test;
                     test.Path   = result->path + "/" + node->getName();
-                    test.Error  = convert<string>(result->state.condition);
+                    test.Error  = result->node ?
+                        convert<string>(result->state.condition) :
+                        "child process stdout json not parsed:\n" +
+                        convert<string>(result->output);
 
                     test_results.Tests.add(test);
                 }
@@ -335,6 +338,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         //     << m_process_result->state.condition;
         m_process_result->output    = io::Buffer::create("empty process output");
         m_process_result->state     = m_process->getState();
+        // m_process_result->
     }
 
 //        || (event->operation   == io::Event::TOperation::CLOSE &&

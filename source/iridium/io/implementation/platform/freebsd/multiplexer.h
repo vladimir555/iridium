@@ -20,6 +20,7 @@
 
 #include <sys/event.h>
 #include <cstring>
+#include <unordered_set>
 
 
 namespace iridium::io::implementation::platform {
@@ -54,6 +55,8 @@ private:
 
     void wakeKEvent();
 
+    std::list<Event::TSharedPtr> finalizeAllEvents();
+
     struct timespec
         m_timeout;
 
@@ -63,7 +66,10 @@ private:
         m_is_initialized;
     std::atomic<int>
         m_kqueue;
+    std::unordered_set<IStream::TSharedPtr>
+        m_closed_process_streams;
 };
+
 
 
 template<typename T>

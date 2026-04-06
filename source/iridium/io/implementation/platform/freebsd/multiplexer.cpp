@@ -165,19 +165,6 @@ void CMultiplexer::initialize() {
     if (m_kqueue)
         throw std::runtime_error("initialization error: kqueue is not finalized"); // ----->
 
-    // struct sigaction signal_handler;
-    // struct sigaction old_signal_handler;
-
-    // // can set to SIG_IGN
-    // signal_handler.sa_handler   = &handleSignal;
-    // // restart interrupted system calls
-    // signal_handler.sa_flags     = SA_RESTART;
-    // // block every signal during the handler
-    // sigemptyset(&signal_handler.sa_mask);
-
-    // assertOK(sigaction(SIGPIPE, &signal_handler, &old_signal_handler), "sigaction error");
-    // assertOK(sigaction(SIGCHLD, &signal_handler, &old_signal_handler), "sigaction error");
-
     m_kqueue = assertOK(kqueue(), "kqueue create error");
 
     try {
@@ -233,7 +220,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
     LOCK_SCOPE();
 
+#ifdef FREEBSD_PLATFORM
     size_t signal_count = 0;
+#endif // FREEBSD_PLATFORM
     std::unordered_set<int> closed_process_idents;
 
     for (int i = 0; i < triggered_event_count; i++) {
@@ -319,7 +308,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     << "signal received: "  << signal_number
                     << ", count: "          << triggered_event.data;
 
+#ifdef FREEBSD_PLATFORM
                 signal_count = triggered_event.data;
+#endif // FREEBSD_PLATFORM
 
                 continue; // <---
             }
@@ -356,6 +347,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         }
     }
 
+#ifdef FREEBSD_PLATFORM
     if (signal_count > 0) {
         LOGT
             << "SIGNAL_COUNT: "             << signal_count
@@ -363,20 +355,22 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             << ", closed_process_idents: "  << closed_process_idents
             << ", m_map_ident_stream: "     << m_map_ident_stream;
 
-        // for (auto const &ident_stream: m_map_ident_stream) {
-        //     if (ident_stream.second->getHandles().size() != 3)
-        //         continue; // <---
+        for (auto const &ident_stream: m_map_ident_stream) {
+            if (ident_stream.second->getHandles().size() != 3)
+                continue; // <---
 
-        //     auto stream = ident_stream.second;
-        //     auto pid    = stream->getHandles().back();
+            auto stream = ident_stream.second;
+            auto pid    = stream->getHandles().back();
 
-        //     if (kill(pid, 0) == 0 && closed_process_idents.count(pid) == 0) {
-        //         auto event = Event::create(ident_stream.second, Event::TOperation::CLOSE, Event::TStatus::BEGIN);
-        //         LOGT << "FORCE CLOSE EVENT: " << event;
-        //         m_wake_events->push(event);
-        //     }
-        // }
+            if (kill(pid, 0) == 0 /*&& closed_process_idents.count(pid) == 0 && m_closed_process_streams.count(stream) == 0*/) {
+                auto event = Event::create(ident_stream.second, Event::TOperation::TIMEOUT, Event::TStatus::BEGIN);
+                LOGT << "FORCE EVENT: " << event;
+                m_wake_events->push(event);
+                m_closed_process_streams.insert(ident_stream.second);
+            }
+        }
     }
+#endif // FREEBSD_PLATFORM
 
     events.splice(events.end(), m_wake_events->pop(false));
 
@@ -437,6 +431,18 @@ void CMultiplexer::wakeKEvent() {
     EV_SET(&trigger, DEFAULT_IDENT_WAKEUP, EVFILT_USER, 0, NOTE_TRIGGER, 0, nullptr);
 
     kevent(m_kqueue, &trigger, 1, nullptr, 0, nullptr);
+}
+
+
+std::list<Event::TSharedPtr> CMultiplexer::finalizeAllEvents() {
+    std::list<Event::TSharedPtr> result;
+    auto events = CMultiplexerBase::finalizeAllEvents();
+
+    for (auto const &event: events) {
+        if (event->stream->getHandles().size() == 3 && m_closed_process_streams.count(event->stream) == 0)
+            result.push_back(event);
+    }
+    return result; // ----->
 }
 
 

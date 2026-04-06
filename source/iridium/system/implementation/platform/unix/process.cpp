@@ -63,22 +63,27 @@ CProcessStream::CProcessStream(
 
 
 void CProcessStream::initialize() {
+    int cin_pipe[2]  = { 0 };
+    int cout_pipe[2] = { 0 };
+
+    posix_spawn_file_actions_t
+        actions = {};
+
     try {
         if (m_fd_reader || m_fd_writer)
             throw std::runtime_error("not finalized");
 
-        int cin_pipe[2]  = { 0 };
-        // The only one output pipe for stdout + stderr
-        int cout_pipe[2] = { 0 };
-
         assertOK(
             pipe(cin_pipe),
            "pipe(stdin)");
-        // one pipe instead of two
+
         assertOK(
             pipe(cout_pipe),
            "pipe(stdout, stderr)");
 
+        fcntl(cin_pipe[0], F_SETFD, FD_CLOEXEC);
+        fcntl(cin_pipe[1], F_SETFD, FD_CLOEXEC);
+#
         posix_spawn_file_actions_t actions;
 
         assertOK(
@@ -159,6 +164,17 @@ void CProcessStream::initialize() {
             throw std::runtime_error("process is not running, condition: " + convert<string>(state.condition)); // ----->
 
     } catch (std::exception const &e) {
+        // cleanup pipes on error to avoid fd leak
+        if (cin_pipe[0])
+            ::close(cin_pipe[0]);
+        if (cin_pipe[1])
+            ::close(cin_pipe[1]);
+        if (cout_pipe[0])
+            ::close(cout_pipe[0]);
+        if (cout_pipe[1])
+            ::close(cout_pipe[1]);
+        posix_spawn_file_actions_destroy(&actions);
+
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
 }
