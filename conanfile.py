@@ -82,7 +82,7 @@ class IridiumConan(ConanFile):
         self.folders.generators = "build/conan"
 
     def generate(self):
-        tc = CMakeToolchain(self)
+        tc = CMakeToolchain(self, generator="Ninja")
         tc.variables["CONAN_PROJECT_NAME"] = self.name
         tc.variables["CONFIG_OPENSSL"] = self.options.with_openssl
         tc.variables["CONFIG_POSTGRES"] = self.options.with_postgres
