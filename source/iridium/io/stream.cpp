@@ -20,6 +20,8 @@ std::string convertStreamToString(IStream const &stream) {
 } // unnamed
 
 
+IMPLEMENT_ENUM(iridium::io::IStream::THandleType);
+
 IMPLEMENT_CONVERT(std::string, iridium::io::IStream,        convertStreamToString);
 IMPLEMENT_CONVERT(std::string, iridium::io::IStreamReader,  convertStreamToString);
 IMPLEMENT_CONVERT(std::string, iridium::io::IStreamWriter,  convertStreamToString);

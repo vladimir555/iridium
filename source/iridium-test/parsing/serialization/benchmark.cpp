@@ -204,7 +204,7 @@ struct TJsonRoot {
 //2025-03-10 17:03:38.769 I 0x1ee6d8840
 TEST(benchmark_2_iridium) {
     if (!iridium::io::fs::checkFileExistence("sample.json")) {
-        LOGI << "skip";
+        LOGI << "'sample.json' not found, skip";
         return;
     }
 

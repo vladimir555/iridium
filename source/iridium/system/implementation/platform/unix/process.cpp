@@ -12,6 +12,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <sys/socket.h>
 
 #include <chrono>
 #include <array>
@@ -66,25 +67,33 @@ void CProcessStream::initialize() {
     int cin_pipe[2]  = { 0 };
     int cout_pipe[2] = { 0 };
 
-    posix_spawn_file_actions_t
-        actions = {};
+    posix_spawn_file_actions_t actions = {};
 
     try {
         if (m_fd_reader || m_fd_writer)
             throw std::runtime_error("not finalized");
 
         assertOK(
-            pipe(cin_pipe),
-           "pipe(stdin)");
+            socketpair(AF_UNIX, SOCK_STREAM, 0, cin_pipe),
+           "socketpair(stdin)");
 
         assertOK(
-            pipe(cout_pipe),
-           "pipe(stdout, stderr)");
+            socketpair(AF_UNIX, SOCK_STREAM, 0, cout_pipe),
+           "socketpair(stdout, stderr)");
 
-        fcntl(cin_pipe[0], F_SETFD, FD_CLOEXEC);
-        fcntl(cin_pipe[1], F_SETFD, FD_CLOEXEC);
-#
-        posix_spawn_file_actions_t actions;
+        // Устанавливаем FD_CLOEXEC для всех дескрипторов
+        fcntl(cin_pipe[0],  F_SETFD, FD_CLOEXEC);
+        fcntl(cin_pipe[1],  F_SETFD, FD_CLOEXEC);
+        fcntl(cout_pipe[0], F_SETFD, FD_CLOEXEC);
+        fcntl(cout_pipe[1], F_SETFD, FD_CLOEXEC);
+
+#ifdef SO_NOSIGPIPE
+        int optval = 1;
+        setsockopt(cin_pipe[0],  SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
+        setsockopt(cin_pipe[1],  SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
+        setsockopt(cout_pipe[0], SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
+        setsockopt(cout_pipe[1], SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
+#endif // SO_NOSIGPIPE
 
         assertOK(
             posix_spawn_file_actions_init(&actions),
@@ -98,16 +107,16 @@ void CProcessStream::initialize() {
             posix_spawn_file_actions_addclose(&actions, cin_pipe[1]),
            "posix_spawn_file_actions_addclose (stdin write-end)");
 
-        // stdout -> general output pipe
+        // stdout -> general output socket
         assertOK(
             posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 1),
            "posix_spawn_file_actions_adddup2 (stdout)");
-        // stderr -> same output pipe (stream merging)
+        // stderr -> same output socket (stream merging)
         assertOK(
             posix_spawn_file_actions_adddup2(&actions, cout_pipe[1], 2),
            "posix_spawn_file_actions_adddup2 (stderr)");
 
-        // close both ends of the output pipe in the child process after duplication
+        // close both ends of the output socket in the child process after duplication
         assertOK(
             posix_spawn_file_actions_addclose(&actions, cout_pipe[0]),
            "posix_spawn_file_actions_addclose (output read-end)");
@@ -122,23 +131,9 @@ void CProcessStream::initialize() {
 
         argv[1 + m_args.size()] = nullptr;
 
-        //    LOGT << "start process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd;
-
-#ifdef POSIX_SPAWN_SETSID
-        posix_spawnattr_t attr = {};
-        posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID);
-#elif defined(POSIX_SPAWN_SETSID_NP)
-        posix_spawnattr_t attr = {};
-        posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSID_NP);
-#else
-//        posix_spawnattr_t attr = {};
-//            posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
-//            throw std::runtime_error("posix_spawnattr_setflags error: POSIX_SPAWN_SETSID is not defined");
-#endif
-
         pid_t pid = m_pid;
         assertOK(
-            posix_spawnp(&pid, m_app.c_str(), &actions, 0, argv.data(), environ),
+            posix_spawnp(&pid, m_app.c_str(), &actions, nullptr, argv.data(), environ),
            "posix_spawnp");
 
         assertOK(
@@ -149,11 +144,11 @@ void CProcessStream::initialize() {
 
         // read-end stdin
         close(cin_pipe[0]);
-        // write-end
+        // write-end stdout
         close(cout_pipe[1]);
 
-        m_fd_writer = cin_pipe[1];
         m_fd_reader = cout_pipe[0];
+        m_fd_writer = cin_pipe[1];
 
         setBlockingMode(false);
         m_exit_code.reset();
@@ -164,15 +159,16 @@ void CProcessStream::initialize() {
             throw std::runtime_error("process is not running, condition: " + convert<string>(state.condition)); // ----->
 
     } catch (std::exception const &e) {
-        // cleanup pipes on error to avoid fd leak
-        if (cin_pipe[0])
+        // cleanup sockets on error to avoid fd leak
+        if (cin_pipe[0] > 0)
             ::close(cin_pipe[0]);
-        if (cin_pipe[1])
+        if (cin_pipe[1] > 0)
             ::close(cin_pipe[1]);
-        if (cout_pipe[0])
+        if (cout_pipe[0] > 0)
             ::close(cout_pipe[0]);
-        if (cout_pipe[1])
+        if (cout_pipe[1] > 0)
             ::close(cout_pipe[1]);
+
         posix_spawn_file_actions_destroy(&actions);
 
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
@@ -181,6 +177,7 @@ void CProcessStream::initialize() {
 
 
 void CProcessStream::finalize() {
+    // LOGT << "finalize: " << getHandles();
 //    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
@@ -224,6 +221,8 @@ void CProcessStream::finalize() {
             close(m_fd_writer);
             m_fd_writer = 0;
         }
+
+        m_pid = 0;
 
         //    m_state_internal = { 0 };
 //            LOGT << "stop process: " << m_command_line << " pid: " << m_pid << " fd: " << m_fd_reader << " done";

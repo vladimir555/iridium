@@ -1,6 +1,7 @@
 #include "session_manager.h"
 
 #include "multiplexer.h"
+#include "platform/unix/multiplexer.h"
 
 #include "iridium/logging/logger.h"
 #include "iridium/threading/implementation/thread.h"
@@ -92,11 +93,11 @@ void CSessionManager::initialize() {
 
 
 void CSessionManager::finalize() {
-    LOGT << "CSessionManager::finalize ...";
+    // LOGT << "CSessionManager::finalize ...";
     m_multiplexer->finalize();
     m_context_worker->finalize();
     m_multiplexer_thread->finalize();
-    LOGT << "CSessionManager::finalize OK";
+    // LOGT << "CSessionManager::finalize OK";
 }
 
 
@@ -105,7 +106,7 @@ void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::T
     if (stream && protocol) {
         m_context_manager->createContext(stream, protocol);
         auto event = Event::create(stream, Event::TOperation::OPEN, Event::TStatus::BEGIN);
-        LOGT << "push: " << event;
+        // LOGT << "push: " << event;
         m_context_worker->push(event);
     } else
         throw std::runtime_error("session manage error: null stream or protocol"); // ----->
@@ -199,18 +200,19 @@ CSessionManager::CContextWorkerHandler::handle(
                 // if (!is_context_valid)
                 //     break; // --->
 
-                LOGT << "context event: " << event;
+                // threading::sleep(1000);
+                // LOGT << "context event: " << event;
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {
                         if (event->operation == Event::TOperation::OPEN) {
                             if (event->stream->getHandles().empty()) {
-                                LOGT << "[INIT]";
+                                // LOGT << "[INIT]";
                                 event->stream->initialize();
-                                LOGT << "[SUBSCRIBE]";
+                                // LOGT << "[SUBSCRIBE]";
                                 m_multiplexer->subscribe(event->stream);
                             } else {
-                                LOGT << "[INIT SKIP]";
+                                // LOGT << "[INIT SKIP]";
                             }
                         }
 
@@ -221,7 +223,7 @@ CSessionManager::CContextWorkerHandler::handle(
                             // LOGT << "[REDIRECT]: to protocol";
                             // event->status = Event::TStatus::END;
                             // events_to_repeat.push_back(event);
-                            LOGT << "[UNSUBSCRIBE]";
+                            // LOGT << "[UNSUBSCRIBE]";
                             m_multiplexer->unsubscribe(event->stream);
                             continue; // <---
                         }
@@ -232,14 +234,14 @@ CSessionManager::CContextWorkerHandler::handle(
                             // read / write to end on close
                             auto pipe = context->getPipe(event);
                             if (pipe) {
-                                LOGT << "[TRANSMIT]: flush";
+                                // LOGT << "[TRANSMIT]: flush";
 
-                                while (pipe->transmit(event))
-                                    LOGT << "transmit flush next";
+                                while (pipe->transmit(event));
+                                    // LOGT << "transmit flush next";
 
                                 // event->status = Event::TStatus::END;
                                 // events_to_repeat.push_back(event);
-                                LOGT << "[UNSUBSCRIBE]";
+                                // LOGT << "[UNSUBSCRIBE]";
                                 m_multiplexer->unsubscribe(event->stream);
                             }
                         }
@@ -249,14 +251,21 @@ CSessionManager::CContextWorkerHandler::handle(
                         {
                             auto pipe = context->getPipe(event);
                             if (pipe) {
+                                // LOGT << "[TRANSMIT]: found pipe";
+                                // auto is_transmitted = false;
+                                // while (pipe->transmit(event))
+                                //     is_transmitted  = true;
+
                                 auto is_transmitted = pipe->transmit(event);
-                                LOGT << "[TRANSMIT]: " << is_transmitted;
+
+                                // LOGT << "[TRANSMIT]: " << is_transmitted;
 
                                 if (is_transmitted) {
                                     event->status = Event::TStatus::END;
                                     events_to_repeat.push_back(event);
                                 }
                             } else {
+                                // LOGT << "[TRANSMIT]: pipe not found";
                                 events_to_repeat.push_back(event);
                             }
                         }
@@ -280,13 +289,14 @@ CSessionManager::CContextWorkerHandler::handle(
                         try {
                             is_context_valid = context->update(event);
                         } catch (std::exception const &e) {
-                            LOGE << "protocol error: " << e;
+                            LOGE << "protocol error: " << e << "\nevent:\n" << event;
                             is_context_valid = false;
                         }
 
                         if (event->operation == Event::TOperation::CLOSE) {
-                            LOGT << "[FINALIZE]";
-                            event->stream->finalize();
+                            // LOGT << "[FINALIZE]";
+                            if(!event->stream->getHandles().empty())
+                                event->stream->finalize();
                         }
 
                         else
@@ -310,7 +320,7 @@ CSessionManager::CContextWorkerHandler::handle(
                             //     events_to_repeat.push_back(event);
                             // }
 
-                            LOGT << "[SKIP]";
+                            // LOGT << "[SKIP]";
                         }
                     } catch (std::exception const &e) {
                         LOGE

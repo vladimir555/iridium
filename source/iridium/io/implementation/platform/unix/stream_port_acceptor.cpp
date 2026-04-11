@@ -81,10 +81,10 @@ void CStreamPortAcceptor::finalize() {
 }
 
 
-std::list<uintptr_t> CStreamPortAcceptor::getHandles() const {
-    return {
-        static_cast<uintptr_t>(m_fd)
-    };
+IStream::TMapHandleTypeIdent CStreamPortAcceptor::getHandles() const {
+    std::unordered_map<IStream::THandleType, uintptr_t> map_handle_type_ident;
+    map_handle_type_ident[THandleType::READER] = static_cast<uintptr_t>(m_fd);
+    return map_handle_type_ident; // ----->
 }
 
 

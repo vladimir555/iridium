@@ -29,7 +29,9 @@ void CSinkConsole::flush() {
 void CSinkConsole::initialize() {}
 
 
-void CSinkConsole::finalize() {}
+void CSinkConsole::finalize() {
+    cout << std::flush;
+}
 
 
 } // iridium::logging::implementation

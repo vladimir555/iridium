@@ -10,6 +10,9 @@
 #include "iridium/items.h"
 #include "iridium/assert.h"
 
+// fallback to poll multiplexer for freebsd kevent pipe bug workaround
+#include "../unix/multiplexer.h"
+
 #include <signal.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -155,8 +158,6 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
     },
     m_triggered_events
         ( DEFAULT_EVENTS_LIMIT, (struct kevent) { } ),
-    m_is_initialized
-        (false),
     m_kqueue(0)
 {}
 
@@ -176,12 +177,6 @@ void CMultiplexer::initialize() {
             kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
            "kevent user registration error");
 
-        EV_SET(&event, SIGCHLD, EVFILT_SIGNAL, EV_ADD | EV_CLEAR, 0, 0, nullptr);
-
-        assertOK(
-            kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
-           "kevent user registration error");
-
         m_is_initialized = true;
     } catch (std::exception const &e) {
         throw std::runtime_error("multiplexer initialization error: " + string(e.what())); // ----->
@@ -192,7 +187,7 @@ void CMultiplexer::initialize() {
 void CMultiplexer::finalize() {
     try {
         assertExists(m_kqueue.load(), "kqueue is not initialized");
-        LOGT << "finalization begin";
+        // LOGT << "finalization begin";
         m_is_initialized = false;
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -207,28 +202,32 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
     std::list<Event::TSharedPtr> events;
 
+#ifdef FREEBSD_PLATFORM
+    if (m_poll_multiplexer)
+        events = m_poll_multiplexer->waitEvents();
+    // LOGT << "POLL EVENTS: " << events;
+#endif // FREEBSD_PLATFORM
+
     auto triggered_event_count = assertOK(
         kevent(
             m_kqueue,
             nullptr, 0,
             m_triggered_events.data(),
-            std::min(m_triggered_events.size(), static_cast<size_t>(std::numeric_limits<int>::max())),
+            std::min(m_triggered_events.size(),
+            static_cast<size_t>(std::numeric_limits<int>::max())),
            &m_timeout),
        "kevent waiting event error");
 
-    LOGT << "triggered_event_count: " << triggered_event_count;
+    // LOGT << "triggered_event_count: " << triggered_event_count;
 
     LOCK_SCOPE();
 
-#ifdef FREEBSD_PLATFORM
-    size_t signal_count = 0;
-#endif // FREEBSD_PLATFORM
     std::unordered_set<int> closed_process_idents;
 
     for (int i = 0; i < triggered_event_count; i++) {
         auto const &triggered_event = m_triggered_events[i];
 
-        LOGT << triggered_event;
+        // LOGT << triggered_event;
 
         if (triggered_event.ident   == DEFAULT_IDENT_WAKEUP &&
             triggered_event.filter  == EVFILT_USER)
@@ -237,7 +236,12 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 close(m_kqueue);
                 m_kqueue = 0;
 
-                LOGT << "finalization end";
+#ifdef FREEBSD_PLATFORM
+                if (m_poll_multiplexer) {
+                    m_poll_multiplexer->finalize();
+                    m_poll_multiplexer.reset();
+                }
+#endif // FREEBSD_PLATFORM
 
                 return finalizeAllEvents(); // ----->
             }
@@ -245,50 +249,65 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             std::vector<struct kevent>
                 monitored;
 
-            for (auto const &stream_to_handle: m_streams_to_handle->pop(false)) {
-                int i = 0;
-                for (auto ident: stream_to_handle.stream->getHandles()) {
-                    i++;
+            for (auto const &stream_to_handle : m_streams_to_handle->pop(false)) {
+                auto const &stream      = stream_to_handle.stream;
+                auto operation          = stream_to_handle.is_add_action ? Event::TOperation::OPEN : Event::TOperation::CLOSE;
+                auto action             = stream_to_handle.is_add_action ? EV_ADD | EV_CLEAR : EV_DELETE;
+                auto map_type_handle    = stream->getHandles();
 
-                    // zero ident on wake event
-                    if (ident == 0)
-                        continue; // <---
-
-                    struct kevent e;
-
-                    auto ident_stream   = m_map_ident_stream.find(ident);
-                    auto action         = EV_ADD | EV_CLEAR;
-                    auto operation      = Event::TOperation::OPEN;
-
-                    if (stream_to_handle.is_add_action) {
-                        if (ident_stream != m_map_ident_stream.end()) {
-                            LOGW <<   "subscribe: ident " << ident << " in map (already subscribed)";
-                            continue; // <---
-                        } else {
-                            m_map_ident_stream[ident] = stream_to_handle.stream;
-                        }
-                    } else {
-                        if (ident_stream == m_map_ident_stream.end()) {
-                            LOGW << "unsubscribe: ident " << ident << " not in map (already unsubscribed)";
-                            continue; // <---
-                        } else {
-                            action      = EV_DELETE;
-                            operation   = Event::TOperation::CLOSE;
-                            m_map_ident_stream.erase(ident_stream);
-                        }
+                if (int pid = map_type_handle[IStream::THandleType::PID]) {
+#ifdef FREEBSD_PLATFORM
+                    // fallback to poll multiplexer for freebsd kevent pipe bug workaround
+                    if(!m_poll_multiplexer) {
+                        m_poll_multiplexer = unix_::CMultiplexer::create();
+                        m_poll_multiplexer->initialize();
                     }
 
-                    events.push_back(Event::create(stream_to_handle.stream, operation, Event::TStatus::END));
+                    if (stream_to_handle.is_add_action)
+                        m_poll_multiplexer->subscribe(stream);
+                    else
+                        m_poll_multiplexer->unsubscribe(stream);
 
-                    if (i == 1)
-                        EV_SET(&e, ident, EVFILT_READ,  action, 0, 0, nullptr);
-                    if (i == 2)
-                        EV_SET(&e, ident, EVFILT_WRITE, action, 0, 0, nullptr);
-                    if (i == 3 && kill(ident, 0) != 0)
-                        EV_SET(&e, ident, EVFILT_PROC,  action, NOTE_EXIT, 0, nullptr);
+                    if (m_poll_multiplexer)
+                        continue; // <---
+#endif // FREEBSD_PLATFORM
 
+                    if (stream_to_handle.is_add_action)
+                        m_map_pid_stream[pid] = stream;
+                    else
+                        m_map_pid_stream.erase(pid);
+
+                    struct kevent e;
+                    EV_SET(&e, pid, EVFILT_PROC, action, NOTE_EXIT, 0, nullptr);
                     monitored.push_back(e);
                 }
+
+                std::list< std::pair<int, short> > fd_mask_items;
+
+                if (auto fd = map_type_handle[IStream::THandleType::READER]) {
+                    fd_mask_items.push_back(
+                        { fd,  EVFILT_READ }
+                    );
+                }
+
+                if (auto fd = map_type_handle[IStream::THandleType::WRITER]) {
+                    fd_mask_items.push_back(
+                        { fd,  EVFILT_WRITE }
+                    );
+                }
+
+                for (auto const &fd_mask: fd_mask_items) {
+                    if (stream_to_handle.is_add_action) {
+                        struct kevent e;
+                        EV_SET(&e, fd_mask.first, fd_mask.second, action, 0, 0, nullptr);
+                        monitored.push_back(e);
+                        m_map_fd_stream.emplace(fd_mask.first, stream);
+                    } else {
+                        m_map_fd_stream.erase(fd_mask.first);
+                    }
+                }
+
+                events.push_back(Event::create(stream, operation, Event::TStatus::END));
             }
 
             if (monitored.empty())
@@ -301,24 +320,10 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     "kevent update monitored events error: " + string(strerror(errno)));
             }
         } else {
-            if (triggered_event.filter == EVFILT_SIGNAL) {
-                auto signal_number = static_cast<int>(triggered_event.ident);
-
-                LOGT
-                    << "signal received: "  << signal_number
-                    << ", count: "          << triggered_event.data;
-
-#ifdef FREEBSD_PLATFORM
-                signal_count = triggered_event.data;
-#endif // FREEBSD_PLATFORM
-
-                continue; // <---
-            }
-
-            auto ident_stream  = m_map_ident_stream.find(triggered_event.ident);
-            if  (ident_stream == m_map_ident_stream.end()) {
-                LOGT << "multiplexer skipping event for unmapped ident: "
-                     << convert<string>(triggered_event.ident);
+            auto ident_stream  = m_map_fd_stream.find(triggered_event.ident);
+            if  (ident_stream == m_map_fd_stream.end()) {
+                // LOGT << "multiplexer skipping event for unmapped ident: "
+                //      << convert<string>(triggered_event.ident);
                 continue; // <---
             }
 
@@ -332,8 +337,8 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
             if (triggered_event.flags & EV_ERROR) {
                 events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::END));
-                if (stream->getHandles().size() == 3)
-                    closed_process_idents.insert(stream->getHandles().back());
+                if (auto pid = stream->getHandles()[IStream::THandleType::PID])
+                    closed_process_idents.insert(pid);
             }
 
             if ((triggered_event.flags   & EV_EOF) ||
@@ -341,36 +346,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 (triggered_event.fflags  & NOTE_EXIT)))
             {
                 events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
-                if (stream->getHandles().size() == 3)
-                    closed_process_idents.insert(stream->getHandles().back());
+                if (auto pid = stream->getHandles()[IStream::THandleType::PID])
+                    closed_process_idents.insert(pid);
             }
         }
     }
-
-#ifdef FREEBSD_PLATFORM
-    if (signal_count > 0) {
-        LOGT
-            << "SIGNAL_COUNT: "             << signal_count
-            << " > events.size: "           << events.size()
-            << ", closed_process_idents: "  << closed_process_idents
-            << ", m_map_ident_stream: "     << m_map_ident_stream;
-
-        for (auto const &ident_stream: m_map_ident_stream) {
-            if (ident_stream.second->getHandles().size() != 3)
-                continue; // <---
-
-            auto stream = ident_stream.second;
-            auto pid    = stream->getHandles().back();
-
-            if (kill(pid, 0) == 0 /*&& closed_process_idents.count(pid) == 0 && m_closed_process_streams.count(stream) == 0*/) {
-                auto event = Event::create(ident_stream.second, Event::TOperation::TIMEOUT, Event::TStatus::BEGIN);
-                LOGT << "FORCE EVENT: " << event;
-                m_wake_events->push(event);
-                m_closed_process_streams.insert(ident_stream.second);
-            }
-        }
-    }
-#endif // FREEBSD_PLATFORM
 
     events.splice(events.end(), m_wake_events->pop(false));
 
@@ -428,21 +408,10 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
 
 void CMultiplexer::wakeKEvent() {
     struct kevent trigger;
+
     EV_SET(&trigger, DEFAULT_IDENT_WAKEUP, EVFILT_USER, 0, NOTE_TRIGGER, 0, nullptr);
 
     kevent(m_kqueue, &trigger, 1, nullptr, 0, nullptr);
-}
-
-
-std::list<Event::TSharedPtr> CMultiplexer::finalizeAllEvents() {
-    std::list<Event::TSharedPtr> result;
-    auto events = CMultiplexerBase::finalizeAllEvents();
-
-    for (auto const &event: events) {
-        if (event->stream->getHandles().size() == 3 && m_closed_process_streams.count(event->stream) == 0)
-            result.push_back(event);
-    }
-    return result; // ----->
 }
 
 

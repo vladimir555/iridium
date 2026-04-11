@@ -23,7 +23,7 @@ size_t std::hash<iridium::io::Event>::operator()
 
     if (e.stream) {
         for (auto const &handle: e.stream->getHandles())
-            hash ^= static_cast<size_t>(handle) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            hash ^= static_cast<size_t>(handle.second) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     }
 
     hash ^= static_cast<size_t>(e.operation) + 0x9e3779b9 + (hash << 6) + (hash >> 2);

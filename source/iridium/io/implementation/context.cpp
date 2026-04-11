@@ -78,14 +78,14 @@ bool CContext::update(Event::TSharedPtr const &event) {
     if (event->operation == Event::TOperation::OPEN)
         m_map_stream_pipe[event->stream];
 
-    LOGT << "[PROTOCOL] control called with: " << event->operation << " " << event->status;
+    // LOGT << "[PROTOCOL] control called with: " << event->operation << " " << event->status;
     auto result = m_protocol->control(event, shared_from_this());
-    LOGT << "[PROTOCOL] control returned: " << result;
+    // LOGT << "[PROTOCOL] control returned: " << result;
 
     if (event->operation    == Event::TOperation::CLOSE &&
         event->status       == Event::TStatus::END)
     {
-        LOGT << "[CLEANUP] removing pipe for stream";
+        // LOGT << "[CLEANUP] removing pipe for stream";
         removeStream(event->stream, false);
         if (auto pipe = m_map_stream_pipe[event->stream])
             removePipe(pipe);

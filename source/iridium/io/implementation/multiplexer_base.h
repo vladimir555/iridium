@@ -20,23 +20,21 @@ public:
 
 protected:
     struct TStreamToHandle {
-        IStream::TSharedPtr
-            stream;
-        bool
-            is_add_action;
+        IStream::TSharedPtr stream;
+        bool                is_add_action;
     };
-    std::unordered_map<uintptr_t, IStream::TSharedPtr>
-        m_map_ident_stream;
-    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
-        m_streams_to_add;
-    threading::IAsyncQueue<IStream::TSharedPtr>::TSharedPtr
-        m_streams_to_del;
     threading::IAsyncQueue<TStreamToHandle>::TSharedPtr
         m_streams_to_handle;
+    std::unordered_map<uintptr_t, IStream::TSharedPtr>
+        m_map_fd_stream;
+    std::unordered_map<pid_t, IStream::TSharedPtr>
+        m_map_pid_stream;
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_wake_events;
     std::atomic<bool>
         m_is_closing;
+    std::atomic<bool>
+        m_is_initialized;
 };
 
 

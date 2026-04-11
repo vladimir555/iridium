@@ -1,15 +1,11 @@
-// Copyright © 2019 Bulaev Vladimir.
-// Contacts: <bulaev_vladimir@mail.ru>
-// License: https://www.gnu.org/licenses/lgpl-3.0
-
-#ifndef HEADER_EVENT_PROVIDER_14F82211_CB2B_4426_94FE_0D72FE64652E
-#define HEADER_EVENT_PROVIDER_14F82211_CB2B_4426_94FE_0D72FE64652E
+#ifndef HEADER_MULTIPLEXER_F5DA57B6_AFA7_4B31_A690_9EB5892AE006
+#define HEADER_MULTIPLEXER_F5DA57B6_AFA7_4B31_A690_9EB5892AE006
 
 
 #include "iridium/platform.h"
 
 
-#ifdef FREEBSD_LIKE_PLATFORM
+#ifdef UNIX_PLATFORM
 
 
 #include "iridium/io/multiplexer.h"
@@ -17,13 +13,17 @@
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/synchronized.h"
 
-
-#include <sys/event.h>
+#include <cstring>
+#include <unordered_set>
+#include <poll.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <signal.h>
 #include <cstring>
 #include <unordered_set>
 
 
-namespace iridium::io::implementation::platform {
+namespace iridium::io::implementation::platform::unix_ {
 
 
 class CMultiplexer:
@@ -33,6 +33,7 @@ class CMultiplexer:
 {
 public:
     DEFINE_IMPLEMENTATION(CMultiplexer)
+
     CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);
 
     void initialize() override;
@@ -51,18 +52,16 @@ private:
     template<typename T>
     static T assertOK(T const &result, std::string const &message);
 
-    static void handleSignal(int signal);
+    int m_wake_pipe[2] =
+        { -1, -1 };
 
-    void wakeKEvent();
-
-    struct timespec
+    std::vector<struct pollfd>
+        m_pollfds;
+    std::chrono::microseconds
         m_timeout;
-    std::vector<struct kevent>
-        m_triggered_events;
-    std::atomic<int>
-        m_kqueue;
-    IMultiplexer::TSharedPtr
-        m_poll_multiplexer;
+
+    std::list<Event::TSharedPtr> applyPendingChanges();
+    void processWakePipe(std::list<Event::TSharedPtr> &events);
 };
 
 
@@ -76,8 +75,8 @@ T CMultiplexer::assertOK(T const &result, std::string const &message) {
 }
 
 
-} // iridium::io::implementation::platform
+} // iridium::io::implementation::platform::unix_
 
 
-#endif // FREEBSD_LIKE_PLATFORM
-#endif // HEADER_EVENT_PROVIDER_14F82211_CB2B_4426_94FE_0D72FE64652E
+#endif // UNIX_PLATFORM
+#endif // HEADER_MULTIPLEXER_F5DA57B6_AFA7_4B31_A690_9EB5892AE006

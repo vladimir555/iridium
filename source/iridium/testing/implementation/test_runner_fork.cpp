@@ -73,8 +73,8 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
 
     // TODO: exception handling
     while (!map_path_fork.empty()) {
-        for (auto const &i: map_path_fork)
-            LOGT << "path left: " << i.first;
+        // for (auto const &i: map_path_fork)
+        //     LOGT << "path left: " << i.first;
 
         if (m_is_serial && !map_path_fork.empty()) {
             auto fork = map_path_fork.begin()->second;
@@ -82,7 +82,7 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
         }
 
         auto results = process_result_queue->pop(m_timeout);
-        //LOGT << "wait, paths_left: " << paths_left << " OK, results: " << results.size();
+        // LOGT << "wait, paths_left: " << map_path_fork << " OK, results: " << results.size();
 
         for (auto const &result: results) {
             if (result->node) {
@@ -106,13 +106,16 @@ TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
                 LOGI << result->path << ":\n"
                      << result->output;
             } else {
+                if (!result->node) {
+                    LOGF
+                        << "process '" << result->path
+                        << "' wrong json output:\n-----\n" << result->output
+                        << "'\n-----\nstate: " << convert<string>(result->state.condition);
+                }
                 for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
                     TResult::TTests test;
                     test.Path   = result->path + "/" + node->getName();
-                    test.Error  = result->node ?
-                        convert<string>(result->state.condition) :
-                        "child process stdout json not parsed:\n" +
-                        convert<string>(result->output);
+                    test.Error  = result->node ? convert<string>(result->state.condition) : "process stdout json not parsed";
 
                     test_results.Tests.add(test);
                 }
@@ -196,7 +199,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     m_process_result->state = m_process->getState();
 
-    LOGT << "event: " << event << "\nstate: " << m_process_result->state.condition;
+    // LOGT << "event: " << event << "\nstate: " << m_process_result->state.condition;
 
     if (event->operation == io::Event::TOperation::OPEN) {
         static std::string const DEFAULT_PIPE_NAME = "process";
@@ -293,10 +296,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                         m_process_result->node      = node;
                         m_process_result->output    = m_buffer_output;
 
-                        LOGT << "json:\n"   << json;
-                        LOGT << "node:\n"   << node;
+                        // LOGT << "json:\n"   << json;
+                        // LOGT << "node:\n"   << node;
                         //LOGT << "output:\n" << m_buffer_output;
-                        LOGT << "set result = false";
+                        // LOGT << "set result = false";
                         result = false;
                     }
                 }
@@ -344,18 +347,18 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //        || (event->operation   == io::Event::TOperation::CLOSE &&
 //            event->status      == io::Event::TStatus::END));
 
-    LOGT
-        << "\nresult:   "           << result
-        << "\ncond:     "           << m_process_result->state.condition
-        << "\nevent fd: "           << event->stream->getHandles()
-        << "\nevent operation: "    << event->operation
-        << "\nevent status   : "    << event->status
-        << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
+    // LOGT
+    //     << "\nresult:   "           << result
+    //     << "\ncond:     "           << m_process_result->state.condition
+    //     << "\nevent fd: "           << event->stream->getHandles()
+    //     << "\nevent operation: "    << event->operation
+    //     << "\nevent status   : "    << event->status
+    //     << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
 
     if (m_process_result->output)
         m_process_result_queue->push(m_process_result);
 
-    LOGT << "protocol return: " << result;
+    // LOGT << "protocol return: " << result;
 
     return result; // ----->
 }

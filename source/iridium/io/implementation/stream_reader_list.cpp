@@ -33,7 +33,7 @@ Buffer::TSharedPtr CStreamReaderList::read(size_t const &size) {
 }
 
 
-std::list<uintptr_t> CStreamReaderList::getHandles() const {
+IStream::TMapHandleTypeIdent CStreamReaderList::getHandles() const {
     return m_stream->get()->getHandles(); // ----->
 }
 

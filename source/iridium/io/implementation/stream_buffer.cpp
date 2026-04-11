@@ -19,7 +19,7 @@ void CStreamBuffer::initialize() {}
 void CStreamBuffer::finalize() {}
 
 
-std::list<uintptr_t> CStreamBuffer::getHandles() const {
+IStream::TMapHandleTypeIdent CStreamBuffer::getHandles() const {
     return {}; // ----->
 }
 

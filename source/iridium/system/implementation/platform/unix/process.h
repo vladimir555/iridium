@@ -26,6 +26,7 @@ class CProcessStream:
 {
 public:
     DEFINE_IMPLEMENTATION(CProcessStream)
+
     CProcessStream(
         std::string const &app,
         std::string const &args = {});

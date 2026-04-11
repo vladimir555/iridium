@@ -11,6 +11,7 @@
 #include <sys/eventfd.h>
 #include <unistd.h>
 
+#include "iridium/items.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/implementation/async_queue.h"
 
@@ -89,21 +90,25 @@ void CMultiplexer::finalize() {
 
 
 void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
-    if (!stream || m_is_closing || !m_epoll_fd)
+    if (!stream || m_is_closing || !m_epoll_fd || stream->getHandles().empty())
         return; // ----->
 
-    m_streams_to_add->push(stream);
-    eventfd_write(m_event_fd, 0);
+    m_streams_to_handle->push(
+        { stream, true }
+    );
 
-    LOGT << stream;
+    eventfd_write(m_event_fd, 0);
 }
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
-    if (!stream || stream->getHandles().empty() || m_is_closing || !m_epoll_fd)
+    if (!stream || m_is_closing || !m_epoll_fd || stream->getHandles().empty())
         return; // ----->
 
-    m_streams_to_del->push(stream);
+    m_streams_to_handle->push(
+        { stream, false }
+    );
+
     eventfd_write(m_event_fd, 0);
 }
 
@@ -117,14 +122,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     if (m_is_closing) {
         ::close(m_epoll_fd);
         ::close(m_event_fd);
+
         m_epoll_fd = 0;
         m_event_fd = 0;
 
-        auto events = finalizeAllEvents();
-        LOGT << "finalization end: " << events;
-        return events;
-
-        // return finalizeAllEvents(); // ----->
+        return finalizeAllEvents(); // ----->
     }
 
     std::list<Event::TSharedPtr>
@@ -132,16 +134,16 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     struct epoll_event
         epoll_events[DEFAULT_EVENTS_COUNT_LIMIT];
 
-    for (auto const &stream: m_streams_to_add->pop(false)) {
-        addInternal(stream);
-        events.push_back(
-            Event::create(stream, Event::TOperation::OPEN, Event::TStatus::END));
-    }
-
-    for (auto const &stream: m_streams_to_del->pop(false)) {
-        delInternal(stream);
-        events.push_back(
-            Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
+    for (auto const &stream_to_handle: m_streams_to_handle->pop(false)) {
+        if (stream_to_handle.is_add_action) {
+            addInternal(stream_to_handle.stream);
+            events.push_back(
+                Event::create(stream_to_handle.stream, Event::TOperation::OPEN, Event::TStatus::END));
+        } else {
+            delInternal(stream_to_handle.stream);
+            events.push_back(
+                Event::create(stream_to_handle.stream, Event::TOperation::CLOSE, Event::TStatus::END));
+        }
     }
 
     auto count = epoll_wait(
@@ -199,8 +201,8 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 
 
 void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
-    // if (!m_epoll_fd)
-    //     return; // ----->
+    if (!m_epoll_fd)
+        return; // ----->
 
     // if (!m_epoll_fd)
     //     throw std::runtime_error("multiplexer wake error: epoll is not initialized"); // ----->
@@ -212,31 +214,70 @@ void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
 
 
 void CMultiplexer::addInternal(IStream::TSharedPtr const &stream) {
-    for (auto const &fd: stream->getHandles()) {
-        if (fd > 0 && m_map_fd_stream.find(fd) == m_map_fd_stream.end()) {
-            struct epoll_event event = {};
+    auto map_handle_type_ident = stream->getHandles();
 
-            event.events    = EPOLLERR | EPOLLHUP | EPOLLIN | EPOLLOUT | EPOLLET;
+    if (int pid = map_handle_type_ident[IStream::THandleType::PID])
+        m_map_pid_stream[pid] = stream;
+
+    std::unordered_map<int, uint32_t> map_fd_mask;
+
+    if (auto fd = map_handle_type_ident[IStream::THandleType::READER])
+        map_fd_mask[static_cast<int>(fd)] |= EPOLLIN;
+
+    if (auto fd = map_handle_type_ident[IStream::THandleType::WRITER])
+        map_fd_mask[static_cast<int>(fd)] |= EPOLLOUT;
+
+    for (auto const &fd_mask : map_fd_mask) {
+        int fd = fd_mask.first;
+        uint32_t mask = fd_mask.second;
+
+        if (m_map_fd_stream.emplace(fd, stream).second) {
+            struct epoll_event event = {};
+            event.events    = mask | EPOLLERR | EPOLLHUP | EPOLLET;
             event.data.fd   = fd;
 
-            assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event), "epoll add error");
-
-            m_map_fd_stream[fd] = stream;
+            assertOK(epoll_ctl(m_epoll_fd, EPOLL_CTL_ADD, fd, &event),
+                "epoll add fd '" + convert<std::string>(fd) + "' error");
         }
     }
 }
 
 
 void CMultiplexer::delInternal(IStream::TSharedPtr const &stream) {
-    for (auto const &fd: stream->getHandles()) {
-        if (fd > 0) {
-            m_map_fd_stream.erase(fd);
-            auto result = epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr);
-            if ( result < 0 && errno != ENOENT)
-                assertOK(result, "epoll del error");
-        }
+    auto map_handle_type_ident = stream->getHandles();
+
+    if (int pid = map_handle_type_ident[IStream::THandleType::PID])
+        m_map_pid_stream.erase(pid);
+
+    std::unordered_set<int> fds;
+
+    if (int fd = map_handle_type_ident[IStream::THandleType::READER])
+        fds.insert(fd);
+
+    if (int fd = map_handle_type_ident[IStream::THandleType::WRITER])
+        fds.insert(fd);
+
+    for (auto const &fd: fds) {
+        int result = epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr);
+
+        if (result < 0 && !checkOneOf(errno, ENOENT, EBADF))
+            assertOK(result, "epoll del fd '" + convert<std::string>(fd) + "' error");
+
+        m_map_fd_stream.erase(fd);
     }
 }
+
+
+// void CMultiplexer::delInternal(IStream::TSharedPtr const &stream) {
+//     for (auto const &fd: stream->getHandles()) {
+//         if (fd > 0) {
+//             m_map_fd_stream.erase(fd);
+//             auto result = epoll_ctl(m_epoll_fd, EPOLL_CTL_DEL, fd, nullptr);
+//             if ( result < 0 && errno != ENOENT)
+//                 assertOK(result, "epoll del error");
+//         }
+//     }
+// }
 
 
 int CMultiplexer::assertOK(int const &result, std::string const &message) {

@@ -233,18 +233,18 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             ITestRunner::TSharedPtr test_runner;
 
             if (args->mode == TCmdArgs::TMode::RAW) {
-                using namespace iridium::logging::config;
+                // using namespace iridium::logging::config;
 
-                auto config = createDefault();
+                // auto config = createDefault();
 
-                TLogger::TSink file_sink;
-                file_sink.Uri       = convert<string>(::getpid()) + ".log";
-                file_sink.Type      = TLogger::TSink::TSinkType::FILE;
-                // file_sink.Level     = iridium::logging::TEvent::TLevel::TRACE;
-                file_sink.IsAsync   = true;
-                config.Sink.add(file_sink);
+                // TLogger::TSink file_sink;
+                // file_sink.Uri       = convert<string>(::getpid()) + ".log";
+                // file_sink.Type      = TLogger::TSink::TSinkType::FILE;
+                // // file_sink.Level     = iridium::logging::TEvent::TLevel::TRACE;
+                // file_sink.IsAsync   = true;
+                // config.Sink.add(file_sink);
 
-                iridium::logging::setConfig(config);
+                // iridium::logging::setConfig(config);
 
                 test_runner = CTestRunnerRaw::create();
             } else {

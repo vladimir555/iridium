@@ -25,8 +25,10 @@ protected:
     void initialize() override;
     void finalize()   override;
 
-    std::list<uintptr_t>    getHandles()    const override;
-    URI::TSharedPtr         getURI()        const override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
 
     Buffer::TSharedPtr m_buffer;
 };
