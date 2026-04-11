@@ -61,7 +61,7 @@ class IridiumConan(ConanFile):
         self.output.info(f"Version: {self.version}")
 
     def config_options(self):
-        if self.settings.os == "Windows":
+        if self.settings.os == "Windows" and "fPIC" in self.options:
             del self.options.fPIC
 
     def configure(self):
