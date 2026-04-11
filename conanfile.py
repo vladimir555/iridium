@@ -65,7 +65,7 @@ class IridiumConan(ConanFile):
             del self.options.fPIC
 
     def configure(self):
-        if self.options.shared:
+        if self.options.shared and "fPIC" in self.options:
             del self.options.fPIC
 
     def requirements(self):
