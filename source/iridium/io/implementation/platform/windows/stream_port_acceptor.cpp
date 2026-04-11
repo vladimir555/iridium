@@ -31,7 +31,7 @@ void CStreamPortAcceptor::finalize() {
 }
 
 
-std::list<uintptr_t> CStreamPortAcceptor::getHandles() const {
+IStream::TMapHandleTypeIdent CStreamPortAcceptor::getHandles() const {
     throw std::runtime_error("not implemented");
 }
 

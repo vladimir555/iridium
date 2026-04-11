@@ -27,7 +27,7 @@ protected:
         m_streams_to_handle;
     std::unordered_map<uintptr_t, IStream::TSharedPtr>
         m_map_fd_stream;
-    std::unordered_map<pid_t, IStream::TSharedPtr>
+    std::unordered_map<uintptr_t, IStream::TSharedPtr>
         m_map_pid_stream;
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_wake_events;

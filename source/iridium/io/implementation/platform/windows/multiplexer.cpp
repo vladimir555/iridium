@@ -64,8 +64,10 @@ DWORD CMultiplexer::assertOK(bool const &is_ok, std::string const &message) {
 
 CMultiplexer::CMultiplexer()
 :
-    m_iocp(nullptr),
-    m_wake_events(CAsyncQueue<Event::TSharedPtr>::create())
+    m_iocp
+        (nullptr),
+    m_wake_events
+        (CAsyncQueue<Event::TSharedPtr>::create())
 {}
 
 
@@ -85,7 +87,7 @@ void CMultiplexer::finalize() {
     // LOGT << "finalize ...";
     try {
         if (m_iocp) {
-            // Post finalization signal to wake up any waiting threads
+            // post finalization signal to wake up any waiting threads
             PostQueuedCompletionStatus(m_iocp, 0, FINALIZE_COMPLETION_KEY, nullptr);
             CancelIo(m_iocp);
             assertOK(
@@ -202,10 +204,11 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
         assertExists(stream, "stream is null");
 
         for (auto const &handle_ : stream->getHandles()) {
-            if (!handle_)
-                continue;
 
-            auto handle          = reinterpret_cast<HANDLE>      (handle_);
+            if (handle_.first == IStream::THandleType::PID)
+                continue; // <---
+
+            auto handle          = reinterpret_cast<HANDLE>      (handle_.second);
             auto completion_key  = reinterpret_cast<ULONG_PTR>   (handle);
 
             // LOGT << "subscribe handle: " << handle_;
@@ -242,7 +245,7 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
         assertExists(m_iocp, "iocp is not initialized");
 
         for (auto const &handle: assertExists(stream, "stream is null")->getHandles()) {
-            auto handle_ = reinterpret_cast<HANDLE>(handle);
+            auto handle_ = reinterpret_cast<HANDLE>(handle.second);
 
             if (handle_) {
                 assertOK(

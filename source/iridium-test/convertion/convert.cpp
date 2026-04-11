@@ -283,7 +283,7 @@ TEST(types) {
 
     ASSERT(std::string(u8"ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));
 
-    ASSERT(convert<string>(0, 0), std::exception);
+    ASSERT(convert<string>(0, uint8_t(0)), std::exception);
 }
 
 

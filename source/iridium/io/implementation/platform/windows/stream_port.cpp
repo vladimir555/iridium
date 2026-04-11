@@ -32,14 +32,14 @@ CStreamPort::CStreamPort(URI const &uri)
 {}
 
 
-std::list<uintptr_t> CStreamPort::getHandles() const {
-    std::list<uintptr_t> handles;
+IStream::TMapHandleTypeIdent CStreamPort::getHandles() const {
+    TMapHandleTypeIdent handles;
 
     // if (m_writer_fd && m_writer_fd != INVALID_HANDLE_VALUE)
-        handles.push_back(reinterpret_cast<uintptr_t>(m_writer_fd));
+        handles[THandleType::WRITER] = reinterpret_cast<uintptr_t>(m_writer_fd);
 
     // if (m_reader_fd && m_reader_fd != INVALID_HANDLE_VALUE && m_reader_fd != m_writer_fd)
-        handles.push_back(reinterpret_cast<uintptr_t>(m_reader_fd));
+        handles[THandleType::WRITER] = reinterpret_cast<uintptr_t>(m_reader_fd);
 
     return handles; // ----->
 }

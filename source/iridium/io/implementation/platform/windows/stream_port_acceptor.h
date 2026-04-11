@@ -25,10 +25,12 @@ public:
     void initialize() override;
     void finalize() override;
 
-    std::list<uintptr_t> getHandles() const override;
-    URI::TSharedPtr getURI() const override;
-
-    std::list<IStreamPort::TSharedPtr> accept() override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
+    std::list<IStreamPort::TSharedPtr>
+        accept() override;
 private:
     URI::TSharedPtr m_uri;
 };

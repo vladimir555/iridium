@@ -21,8 +21,10 @@
 
 namespace iridium::io::implementation::platform {
 
+
 // special completion keys for internal signals
 static constexpr ULONG_PTR FINALIZE_COMPLETION_KEY = static_cast<ULONG_PTR>(-2);
+
 
 class CMultiplexer : public IMultiplexer, public threading::Synchronized<std::mutex> {
 public:
@@ -31,19 +33,27 @@ public:
 
     void initialize() override;
     void finalize() override;
-    std::list<Event::TSharedPtr> waitEvents() override;
-    void   subscribe(IStream::TSharedPtr const &stream) override;
-    void unsubscribe(IStream::TSharedPtr const &stream) override;
-    void wake(Event::TSharedPtr const &event) override;
-    void wake(std::list<Event::TSharedPtr> const &events) override;
+
+    std::list<Event::TSharedPtr>
+        waitEvents() override;
+    void subscribe
+        (IStream::TSharedPtr const &stream) override;
+    void unsubscribe
+        (IStream::TSharedPtr const &stream) override;
+    void wake
+        (Event::TSharedPtr const &event) override;
+    void wake
+        (std::list<Event::TSharedPtr> const &events) override;
 
 private:
     DWORD assertOK(bool const &is_ok, std::string const &message);
 
-    HANDLE m_iocp;
-    std::unordered_map<HANDLE, IStream::TSharedPtr> m_map_id_stream;
-
-    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr m_wake_events;
+    HANDLE
+        m_iocp;
+    std::unordered_map<HANDLE, IStream::TSharedPtr>
+        m_map_id_stream;
+    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
+        m_wake_events;
 };
 
 
