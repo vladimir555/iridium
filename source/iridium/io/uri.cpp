@@ -89,12 +89,8 @@ URI::URI(std::string const &source_)
     static string const PORT_DELIMITER              = ":";
     static string const PROCESS_ARGUMENT_DELIMITER  = " ";
     static string const WEB_ARGUMENT_DELIMITER      = "?";
-
-#ifdef WINDOWS_PLATFORM
-    static string const PATH_DELIMITER = "\\";
-#else
-    static string const PATH_DELIMITER = "/";
-#endif // WINDOWS_PLATFORM
+    static string const PATH_DELIMITER              = "/";
+    static string const WINDOWS_FILE_PATH_DELIMITER = "\\";
 
     if (m_source.empty())
         throw std::runtime_error("uri '" + m_source + "' parsing error: empty"); // ----->
@@ -131,11 +127,18 @@ URI::URI(std::string const &source_)
                 m_address = unmask(m_address);
 
             // todo: check file or dir
-            auto pos =   m_address.find_last_of(PATH_DELIMITER);
+            auto path_delimeter = PATH_DELIMITER;
+            auto pos = m_address.find_last_of(path_delimeter);
+#ifdef WINDOWS_PLATFORM
+            if (pos == string::npos) {
+                path_delimeter = WINDOWS_FILE_PATH_DELIMITER;
+                pos = m_address.find_last_of(path_delimeter);
+            }
+#endif // WINDOWS_PLATFORM
             if  (pos == string::npos)
                 m_host = m_address;
             else
-                m_host = m_address.substr(pos + PATH_DELIMITER.size());
+                m_host = m_address.substr(pos + path_delimeter.size());
 
             m_path = m_address;
         } else {
