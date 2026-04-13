@@ -201,7 +201,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 //     break; // --->
 
                 // threading::sleep(1000);
-                // LOGT << "context event: " << event;
+                //LOGT << "context event: " << event;
 
                 if (event->status == Event::TStatus::BEGIN) {
                     try {

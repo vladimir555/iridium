@@ -69,6 +69,7 @@
     <ClInclude Include="io\implementation\context_manager.h" />
     <ClInclude Include="io\implementation\listener.h" />
     <ClInclude Include="io\implementation\multiplexer.h" />
+    <ClInclude Include="io\implementation\multiplexer_base.h" />
     <ClInclude Include="io\implementation\pipe.h" />
     <ClInclude Include="io\implementation\platform\freebsd\listener.h" />
     <ClInclude Include="io\implementation\platform\linux\listener.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="io\fs\implementation\platform\windows\file_api.cpp" />
     <ClCompile Include="io\implementation\context.cpp" />
     <ClCompile Include="io\implementation\context_manager.cpp" />
+    <ClCompile Include="io\implementation\multiplexer_base.cpp" />
     <ClCompile Include="io\implementation\pipe.cpp" />
     <ClCompile Include="io\implementation\platform\windows\multiplexer.cpp" />
     <ClCompile Include="io\implementation\platform\windows\stream_port.cpp" />

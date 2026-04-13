@@ -23,23 +23,29 @@ namespace iridium::io::implementation::platform {
 
 CStreamPort::CStreamPort(URI const &uri)
 :
-    m_reader_fd         (0),
-    m_writer_fd         (0),
-    m_writer_overlapped {0},
-    m_reader_overlapped {0},
-    m_uri               (URI::create(uri)),
-    m_is_opened         (false)
+    m_reader_fd
+        (INVALID_HANDLE_VALUE),
+    m_writer_fd
+        (INVALID_HANDLE_VALUE),
+    m_writer_overlapped
+        {0},
+    m_reader_overlapped
+        {0},
+    m_uri
+        (URI::create(uri)),
+    m_is_opened
+        (false)
 {}
 
 
 IStream::TMapHandleTypeIdent CStreamPort::getHandles() const {
     TMapHandleTypeIdent handles;
 
-    // if (m_writer_fd && m_writer_fd != INVALID_HANDLE_VALUE)
+    if (m_writer_fd != INVALID_HANDLE_VALUE)
         handles[THandleType::WRITER] = reinterpret_cast<uintptr_t>(m_writer_fd);
 
-    // if (m_reader_fd && m_reader_fd != INVALID_HANDLE_VALUE && m_reader_fd != m_writer_fd)
-        handles[THandleType::WRITER] = reinterpret_cast<uintptr_t>(m_reader_fd);
+    if (m_reader_fd != INVALID_HANDLE_VALUE)
+        handles[THandleType::READER] = reinterpret_cast<uintptr_t>(m_reader_fd);
 
     return handles; // ----->
 }
@@ -53,8 +59,6 @@ URI::TSharedPtr CStreamPort::getURI() const {
 DWORD CStreamPort::assertOK(bool const &is_ok, std::string const &message) {
     using convertion::convert;
     using std::string;
-
-    // LOGT << "check: " << message;
 
     if (is_ok) {
         return ERROR_SUCCESS;
@@ -82,6 +86,10 @@ DWORD CStreamPort::assertOK(bool const &is_ok, std::string const &message) {
         std::string api_message(buffer, size);
         LocalFree(buffer);
 
+        LOGT << "check: " << message
+            << ", error " << static_cast<uint16_t>(error_code)
+            << " (" << api_message << ")";
+
         throw std::runtime_error(
             message + ": " + trim(api_message) + " ("+
             convert<string, uint64_t>(error_code, uint8_t{16}) + "), uri '" +
@@ -97,18 +105,15 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
 
 
 void CStreamPort::closeFDs() {
-    if (!m_writer_fd && !m_reader_fd)
-        throw std::runtime_error("closing error: not initialized");
-
-    if (m_reader_fd) {
+    if (m_reader_fd != INVALID_HANDLE_VALUE) {
         CloseHandle(m_reader_fd);
-        m_reader_fd = nullptr;
+        m_reader_fd = INVALID_HANDLE_VALUE;
         m_reader_overlapped = { 0 };
     }
 
-    if (m_writer_fd) {
+    if (m_writer_fd != INVALID_HANDLE_VALUE) {
         CloseHandle(m_writer_fd);
-        m_writer_fd = nullptr;
+        m_writer_fd = INVALID_HANDLE_VALUE;
         m_writer_overlapped = { 0 };
     }
 }
@@ -116,7 +121,7 @@ void CStreamPort::closeFDs() {
 
 Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
     try {
-        if (!m_reader_fd || m_reader_fd == INVALID_HANDLE_VALUE)
+        if (m_reader_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("reading error: not initialized");
 
         auto  buffer = Buffer::create();
@@ -144,7 +149,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
                 m_reader_buffer->data(),
                 static_cast<DWORD>(m_reader_buffer->size()),
                 nullptr,
-                &m_reader_overlapped),
+               &m_reader_overlapped),
             "ReadFile");
 
         return buffer; // ----->
@@ -156,19 +161,19 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
 
 size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
     try {
-        if (!m_writer_fd || m_writer_fd == INVALID_HANDLE_VALUE)
-            throw std::runtime_error("writing error: not initialized");
+        if (m_writer_fd == INVALID_HANDLE_VALUE)
+            throw std::runtime_error("writing error: not initialized"); // ----->
 
         if (!buffer || buffer->empty())
-            return 0;
+            return 0; // ----->
 
         DWORD bytes_written = 0;
 
         auto result = assertOK(
             GetOverlappedResult(
                 m_writer_fd,
-                &m_writer_overlapped,
-                &bytes_written,
+               &m_writer_overlapped,
+               &bytes_written,
                 FALSE
             ),
             "GetOverlappedResult"

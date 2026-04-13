@@ -31,13 +31,18 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::string const &args)
 :
-    CStreamPort             (URI("process://" + app + " " + args)),
-    m_app                   (app),
-    m_args                  (args),
-    m_command_line          (m_app + " " + m_args),
-    m_process               {0},
-    m_uri                   (io::URI::create("process://" + m_app + " " + m_args)),
-    m_security_attributes   {0}
+    CStreamPort
+        (URI("process://" + app + " " + args)),
+    m_app
+        (app),
+    m_args
+        (args),
+    m_command_line
+        (m_app + " " + m_args),
+    m_process
+        {0},
+    m_security_attributes
+        {0}
 {}
 
 
@@ -45,15 +50,20 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::vector<std::string> const &args)
 :
-    CStreamPort         (URI("process://" + app)),
-    m_app               (app),
-    m_process           {0}
+    CStreamPort
+        (URI("process://" + app)),
+    m_app
+        (app),
+    m_process
+        {0}
 {
     m_command_line = m_app;
+
     for (auto const &arg: args) {
         m_args += arg + " ";
         m_command_line += " " + arg;
     }
+
     if (!m_args.empty() && m_args.back() == ' ')
         m_args.pop_back();
 }
@@ -61,7 +71,7 @@ CProcessStream::CProcessStream(
 
 void CProcessStream::initialize() {
     try {
-        if (m_reader_fd || m_writer_fd)
+        if (m_reader_fd != INVALID_HANDLE_VALUE || m_writer_fd != INVALID_HANDLE_VALUE)
             throw std::runtime_error("not finalized");
 
         STARTUPINFOA startup_info{0};
@@ -149,7 +159,7 @@ void CProcessStream::initialize() {
             "CreateProcessA"
         );
 
-        // Close child-side handles in parent (no longer needed)
+        // close child-side handles in parent (no longer needed)
         assertOK(
             CloseHandle(stdout_writer_fd),
            "CloseHandle stdout");
@@ -157,7 +167,7 @@ void CProcessStream::initialize() {
             CloseHandle(stdin_reader_fd),
            "CloseHandle stdout");
 
-        // LOGT << "create process cmdline: '" << m_command_line << "'";
+        //LOGT << "create process cmdline: '" << m_command_line << "'";
     } catch (std::exception const &e) {
         closeFDs();
         throw std::runtime_error(convert<string>(m_uri) + "' initialization error: " + e.what());
@@ -167,7 +177,7 @@ void CProcessStream::initialize() {
 
 void CProcessStream::finalize() {
     try {
-        if (!m_reader_fd)
+        if (m_reader_fd == INVALID_HANDLE_VALUE || m_writer_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("not initialized");
 
         auto result = WaitForSingleObject(
@@ -194,7 +204,7 @@ void CProcessStream::finalize() {
 
 IProcess::TState CProcessStream::getState() {
     try {
-        if (!m_reader_fd) {
+        if (m_reader_fd == INVALID_HANDLE_VALUE && m_writer_fd == INVALID_HANDLE_VALUE) {
             if (m_finalized_state)
                 return *m_finalized_state;
             return { IProcess::TState::TCondition::UNKNOWN, nullptr };
@@ -272,7 +282,7 @@ void CProcessStream::sendSignal(TSignal const& signal) {
         default:
             throw std::runtime_error("unknown signal type");
         }
-    } catch (std::exception const& e) {
+    } catch (std::exception const &e) {
         throw std::runtime_error(
             "sending signal '" + convert<string>(signal) +
             "' to process '" + m_app + "' error: " + e.what());

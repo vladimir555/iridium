@@ -540,6 +540,9 @@
     <ClInclude Include="version.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="io\implementation\multiplexer_base.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp">
@@ -753,6 +756,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\implementation\platform\windows\stream_port_peer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="io\implementation\multiplexer_base.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

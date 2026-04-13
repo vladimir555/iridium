@@ -38,8 +38,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parsing\node.cpp" />
     <ClCompile Include="parsing\parsing.cpp" />
+    <ClCompile Include="parsing\serialization\benchmark.cpp" />
     <ClCompile Include="parsing\serialization\http.cpp" />
     <ClCompile Include="parsing\serialization\node.cpp" />
+    <ClCompile Include="parsing\serialization\schema.cpp" />
     <ClCompile Include="pattern\fsm.cpp" />
     <ClCompile Include="pattern\observer.cpp" />
     <ClCompile Include="system\process.cpp" />

@@ -3,6 +3,7 @@
 #include "iridium/strings.h"
 #include "iridium/assert.h"
 #include "iridium/items.h"
+#include "iridium/platform.h"
 #include "net/dns.h"
 
 
@@ -88,11 +89,15 @@ URI::URI(std::string const &source_)
     static string const PORT_DELIMITER              = ":";
     static string const PROCESS_ARGUMENT_DELIMITER  = " ";
     static string const WEB_ARGUMENT_DELIMITER      = "?";
-    static string const PATH_DELIMITER              = "/";
+
+#ifdef WINDOWS_PLATFORM
+    static string const PATH_DELIMITER = "\\";
+#else
+    static string const PATH_DELIMITER = "/";
+#endif // WINDOWS_PLATFORM
 
     if (m_source.empty())
-        throw std::runtime_error("uri '" + m_source +
-                                 "' parsing error: empty"); // ----->
+        throw std::runtime_error("uri '" + m_source + "' parsing error: empty"); // ----->
 
     try {
         string source = m_source;
