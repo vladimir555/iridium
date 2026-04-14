@@ -22,7 +22,6 @@
 namespace iridium::io::implementation::platform {
 
 
-// todo: fix handling orphan sockets on lost connection
 class CMultiplexer:
     public IMultiplexer,
     public CMultiplexerBase,

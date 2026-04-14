@@ -193,7 +193,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
             auto context_events = removeDuplicates(context->popEvents());
 
-            // LOGT << "[CONTEXT] events: " << context_events;
+             //LOGT << "[CONTEXT] events: " << context_events;
 
             // events for one context
             for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {

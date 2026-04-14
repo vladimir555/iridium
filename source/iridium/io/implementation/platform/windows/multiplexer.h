@@ -9,6 +9,7 @@
 
 
 #include "iridium/io/multiplexer.h"
+#include "iridium/io/implementation/multiplexer_base.h"
 #include "iridium/threading/synchronized.h"
 #include "iridium/threading/async_queue.h"
 
@@ -26,7 +27,11 @@ namespace iridium::io::implementation::platform {
 static constexpr ULONG_PTR FINALIZE_COMPLETION_KEY = static_cast<ULONG_PTR>(-2);
 
 
-class CMultiplexer : public IMultiplexer, public threading::Synchronized<std::mutex> {
+class CMultiplexer:
+    public IMultiplexer,
+    public CMultiplexerBase,
+    public threading::Synchronized<std::mutex>
+{
 public:
     CMultiplexer();
     DEFINE_IMPLEMENTATION(CMultiplexer)
