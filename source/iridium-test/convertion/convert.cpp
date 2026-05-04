@@ -251,22 +251,22 @@ TEST(types) {
     ASSERT(convert<float>(string(""))          , std::exception);
 
     // time_point
-    typedef system_clock::time_point TTime;
+    typedef system_clock::time_point TTimePoint;
     using std::chrono::seconds;
-    auto to_time_t = [] (TTime const &t) {
+    auto to_time_t = [] (TTimePoint const &t) {
         return time_t(std::chrono::duration_cast<std::chrono::seconds>(t.time_since_epoch()).count());
     };
 
-    ASSERT("2015-05-05 05:05:05.000", equal, convert<string>(TTime(seconds(1430802305))));
+    ASSERT("2015-05-05 05:05:05.000", equal, convert<string>(TTimePoint(seconds(1430802305))));
 
-    ASSERT(to_time_t(convert<TTime>(string("2015-05-05 05:05:05.000"))), equal, 1430802305);
-    ASSERT(TTime(std::chrono::milliseconds(555)), equal, convert<TTime>(string("1970-01-01 00:00:00.555")));
+    ASSERT(to_time_t(convert<TTimePoint>(string("2015-05-05 05:05:05.000"))), equal, 1430802305);
+    ASSERT(TTimePoint(std::chrono::milliseconds(555)), equal, convert<TTimePoint>(string("1970-01-01 00:00:00.555")));
 
 #ifdef PLATFORM_CPU64
-    ASSERT(4449517261, equal, to_time_t(convert<TTime>(string("2111-01-01 01:01:01.000"))));
+    ASSERT(4449517261, equal, to_time_t(convert<TTimePoint>(string("2111-01-01 01:01:01.000"))));
 #endif
 
-    ASSERT(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
+    ASSERT(convert<TTimePoint>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
 
     {
         system_clock::duration d =
@@ -279,6 +279,7 @@ TEST(types) {
         std::string s = "1h2m3s4ms5us";
         ASSERT(s, equal, convert<string>(d));
         ASSERT(d, equal, convert<system_clock::duration>(s));
+        ASSERT(std::chrono::seconds(5), equal, convert<system_clock::duration>(string("5")));
     }
 
     ASSERT(std::string(u8"ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));

@@ -88,11 +88,11 @@ void CProcessStream::initialize() {
         fcntl(cout_pipe[1], F_SETFD, FD_CLOEXEC);
 
 #ifdef SO_NOSIGPIPE
-        int optval = 1;
-        setsockopt(cin_pipe[0],  SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
-        setsockopt(cin_pipe[1],  SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
-        setsockopt(cout_pipe[0], SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
-        setsockopt(cout_pipe[1], SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval));
+        static int const option_value = 1;
+        setsockopt(cin_pipe[0],  SOL_SOCKET, SO_NOSIGPIPE, &option_value, sizeof(option_value));
+        setsockopt(cin_pipe[1],  SOL_SOCKET, SO_NOSIGPIPE, &option_value, sizeof(option_value));
+        setsockopt(cout_pipe[0], SOL_SOCKET, SO_NOSIGPIPE, &option_value, sizeof(option_value));
+        setsockopt(cout_pipe[1], SOL_SOCKET, SO_NOSIGPIPE, &option_value, sizeof(option_value));
 #endif // SO_NOSIGPIPE
 
         assertOK(
@@ -173,12 +173,12 @@ void CProcessStream::initialize() {
 
         throw std::runtime_error("initialization process '" + m_command_line + "' error: " + e.what()); // ----->
     }
+    // LOGT << "initialize OK : " << getHandles();
 }
 
 
 void CProcessStream::finalize() {
     // LOGT << "finalize: " << getHandles();
-//    LOGT << "finalize   process '" << m_command_line << "', fd: " << static_cast<int>(m_fd_reader);
     try {
         if (m_pid == 0)
             throw std::runtime_error("not initialized"); // ----->
@@ -262,38 +262,44 @@ IProcess::TState CProcessStream::getState() {
         }
     }
 
-    string process_state_str;
+    // {
+    //     string process_state_str;
 
-    if (m_state_internal.is_exited)
-        process_state_str += " exit code: " +
-        convert<string>(m_state_internal.exit_status);
+    //     if (m_state_internal.is_exited)
+    //         process_state_str += "\nexit code: " +
+    //         convert<string>(m_state_internal.exit_status);
 
-    if (m_state_internal.is_signaled)
-        process_state_str += " terminate signal code: " +
-        convert<string>(m_state_internal.terminate_signal);
+    //     if (m_state_internal.is_signaled)
+    //         process_state_str += "\nterminate signal code: " +
+    //         convert<string>(m_state_internal.terminate_signal);
 
-    if (m_state_internal.is_stopped)
-        process_state_str += " stop signal code: " +
-        convert<string>(m_state_internal.stop_signal);
+    //     if (m_state_internal.is_stopped)
+    //         process_state_str += "\nstop signal code: " +
+    //         convert<string>(m_state_internal.stop_signal);
 
-    if (m_state_internal.is_coredumped)
-        process_state_str += " coredumped";
+    //     if (m_state_internal.is_coredumped)
+    //         process_state_str += "\ncoredumped";
 
-    if (m_state_internal.is_continued)
-        process_state_str += " continued";
+    //     if (m_state_internal.is_continued)
+    //         process_state_str += "\ncontinued";
 
-//    if (!process_state_str.empty())
-//        LOGT << "process '" << m_command_line << "' state: " << process_state_str << " fd: " << m_fd_reader;
+    //     if (!process_state_str.empty())
+    //     LOGT << "\n" << m_uri << "\npid: " << m_pid << process_state_str;
+    // }
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
         m_exit_code = std::make_shared<int>(m_state_internal.exit_status);
         condition = TState::TCondition::DONE;
     }
 
-    if (!m_state_internal.is_exited &&  m_state_internal.is_signaled)
-        condition = TState::TCondition::CRASHED;
+    if (!m_state_internal.is_exited &&  m_state_internal.is_signaled) {
+        condition =
+            checkOneOf<int>(m_state_internal.terminate_signal, SIGINT, SIGTERM, SIGHUP) ?
+            TState::TCondition::INTERRUPTED :
+            TState::TCondition::CRASHED;
+    }
 
-//    LOGT << "process '" << m_app << " " << m_args.back() << "' condition: " << condition;
+    // LOGT << "process '" << m_app << " " << m_args.back() << "' condition: " << condition;
 
     return {
         .condition = condition,
@@ -303,6 +309,8 @@ IProcess::TState CProcessStream::getState() {
 
 
 void CProcessStream::sendSignal(TSignal const &signal) {
+    // LOGT << "send signal: " << signal;
+
     pid_t pid = m_pid.load();
     if (pid <= 0) {
         throw std::runtime_error("sendSignal error: invalid or not running process");

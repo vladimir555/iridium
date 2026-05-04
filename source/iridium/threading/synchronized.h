@@ -29,6 +29,7 @@ namespace iridium::threading {
 // ----- class definition
 
 
+// todo: multi mutex waiting; shared mutex wrapping
 template<typename TMutex, bool const is_tracable = false>
 class Synchronized {
 protected:

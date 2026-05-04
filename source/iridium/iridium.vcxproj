@@ -181,6 +181,7 @@
     <ClInclude Include="testing\tester.h" />
     <ClInclude Include="testing\test_runner.h" />
     <ClInclude Include="testing\unit_test.h" />
+    <ClInclude Include="testing\unit_test_case.h" />
     <ClInclude Include="threading\async_queue.h" />
     <ClInclude Include="threading\condition.h" />
     <ClInclude Include="threading\implementation\async_queue.h" />
@@ -272,7 +273,7 @@
     <ClCompile Include="testing\implementation\test_runner_raw.cpp" />
     <ClCompile Include="testing\tester.cpp" />
     <ClCompile Include="testing\test_runner.cpp" />
-    <ClCompile Include="testing\unit_test.cpp" />
+    <ClCompile Include="testing\unit_test_case.cpp" />
     <ClCompile Include="threading\implementation\thread.cpp" />
     <ClCompile Include="threading\implementation\worker.cpp" />
     <ClCompile Include="threading\implementation\worker_pool.cpp" />

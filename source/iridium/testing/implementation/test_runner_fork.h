@@ -20,22 +20,33 @@ namespace iridium::testing::implementation {
 
 class CTestRunnerFork: public ITestRunner {
 public:
-    DEFINE_IMPLEMENTATION(CTestRunnerFork)
-    static std::chrono::seconds const DEFAULT_TIMEOUT;
+    DEFINE_CREATE(CTestRunnerFork)
+
+    static std::chrono::system_clock::duration const DEFAULT_TIMEOUT;
+
     CTestRunnerFork(
-        std::string                 const &app_name,
-        std::chrono::milliseconds   const &timeout      = DEFAULT_TIMEOUT,
-        bool                        const &is_serial    = false
+        std::string
+            const &app_name,
+        std::chrono::system_clock::duration
+            const &timeout = DEFAULT_TIMEOUT,
+        bool
+            const &is_serial = false
     );
 
-    TResult run(INodeTest::TSharedPtr const &node_test) override;
+    virtual ~CTestRunnerFork();
+
+    TTestRunResult run(IUnitTestCaseNode::TSharedPtr const &node_test) override;
 private:
     struct TProcessResult {
         DEFINE_CREATE(TProcessResult)
-        std::string                 path;
-        system::IProcess::TState    state;
-        io::Buffer::TSharedPtr      output;
-        parsing::INode::TSharedPtr  node;
+        std::string
+            path;
+        system::IProcess::TState
+            state;
+        io::Buffer::TSharedPtr
+            output;
+        parsing::INode::TSharedPtr
+            node;
     };
 
     class CTestProtocolHandler: public io::IProtocol {
@@ -48,7 +59,7 @@ private:
                 const &path,
             threading::IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
                 const &process_result_queue,
-            std::chrono::milliseconds
+            std::chrono::system_clock::duration
                 const &timeout);
 
         bool control(
@@ -57,8 +68,10 @@ private:
             io::IPipeManager::TSharedPtr
                 const &pipe_manager) override;
 
-        io::Buffer::TSharedPtr      getBuffer() const;
-        system::IProcess::TState    getExitState() const;
+        io::Buffer::TSharedPtr
+            getBuffer() const;
+        system::IProcess::TState
+            getExitState() const;
 
     private:
         system::IProcess::TSharedPtr
@@ -78,14 +91,21 @@ private:
     };
 
     void scan(
-        INodeTest::TSharedPtr const &node,
-        std::string           const &path,
-        std::list<std::string>      &paths);
+        IUnitTestCaseNode::TSharedPtr
+            const &node,
+        std::string
+            const &path,
+        std::list<std::string>
+                  &paths);
 
-    std::string                     m_app_path;
-    std::chrono::milliseconds       m_timeout;
-    bool                            m_is_serial;
-    io::ISessionManager::TSharedPtr m_session_manager;
+    std::string
+        m_app_path;
+    std::chrono::system_clock::duration
+        m_timeout;
+    bool
+        m_is_serial;
+    io::ISessionManager::TSharedPtr
+        m_session_manager;
 };
 
 

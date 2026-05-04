@@ -13,6 +13,8 @@ class IProtocol {
 public:
     DEFINE_INTERFACE(IProtocol)
     virtual bool control(Event::TSharedPtr const &event, IPipeManager::TSharedPtr const &pipe_manager) = 0;
+    // todo: variadic timeout for transmiting controling by protocol
+    // std::chrono::system_clock::duration getTimeout();
 };
 
 

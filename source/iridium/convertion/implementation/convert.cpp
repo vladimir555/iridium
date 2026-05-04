@@ -409,6 +409,9 @@ system_clock::duration TConvert<system_clock::duration, string>::convert(string 
 
         std::string unit = value.substr(unit_start, position - unit_start);
 
+        if (unit.empty())
+            unit = "s";
+
         if (unit == "h") {
             total_nanoseconds += count * 3600000000000LL;
         } else if (unit == "m") {

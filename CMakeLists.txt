@@ -87,7 +87,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         add_compile_options(-O0 -g -Wall -Wextra)
 
-        # set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
         # set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
 
         message(STATUS "Debug mode enabled: -O0 -g -Wall -Wextra")
@@ -339,7 +339,8 @@ if(NOT DEFINED CONAN_PROJECT_NAME)
     foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
         add_test(
             NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
-            COMMAND ${TEST_BIN} run "${TEST_PATH}"
+            COMMAND ${TEST_BIN} run --print-result=ctest-vscode "${TEST_PATH}"
+            WORKING_DIRECTORY ${TEST_SOURCE_DIR}
         )
     endforeach()
 endif()

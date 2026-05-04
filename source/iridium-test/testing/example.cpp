@@ -412,11 +412,6 @@ TEST(mock) {
 //}
 
 
-//TEST(crash) {
-//    int *a = nullptr;
-//    *a = 5;
-//}
-
 //#include <simd/simd.h>
 //#include <experimental/simd>
 //TEST(simd_) {
@@ -428,3 +423,19 @@ TEST(mock) {
 ////    for (auto const &i: simd_vector)
 //
 //}
+
+
+// TEST(timeout) {
+//     iridium::threading::sleep(10000);
+// }
+
+
+// TEST(crash) {
+//     int *a = nullptr;
+//    *a = 5;
+// }
+
+
+// TEST(comparing_equal_error) {
+//     ASSERT(55, equal, 5);
+// }

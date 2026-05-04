@@ -23,143 +23,230 @@ using iridium::convertion::convert;
 
 using std::string;
 using std::list;
-using std::chrono::milliseconds;
+using std::chrono::seconds;
+using std::chrono::system_clock;
 
 
 namespace iridium::testing::implementation {
 
 
-std::chrono::seconds const CTestRunnerFork::DEFAULT_TIMEOUT(10);
+std::chrono::system_clock::duration const CTestRunnerFork::DEFAULT_TIMEOUT = seconds(10);
 
 
 CTestRunnerFork::CTestRunnerFork(
-    std::string     const &app_path,
-    milliseconds    const &timeout,
-    bool            const &is_serial)
+    std::string
+        const &app_path,
+    std::chrono::system_clock::duration
+        const &timeout,
+    bool
+        const &is_serial)
 :
-    m_app_path          (app_path),
-    m_timeout           (timeout),
-    m_is_serial         (is_serial),
-    m_session_manager   (CSessionManager::create())
-{}
-
-
-TResult CTestRunnerFork::run(INodeTest::TSharedPtr const &node_test) {
-    TResult test_results;
+    m_app_path
+        (app_path),
+    m_timeout
+        (timeout),
+    m_is_serial
+        (is_serial),
+    m_session_manager
+        (CSessionManager::create())
+{
     m_session_manager->initialize();
+}
 
-    list<string> paths;
-    scan(node_test, "", paths);
 
+CTestRunnerFork::~CTestRunnerFork() {
+    m_session_manager->finalize();
+}
+
+
+TTestRunResult CTestRunnerFork::run(IUnitTestCaseNode::TSharedPtr const &test_node) {
     struct TFork {
-        CProcessStream::TSharedPtr       process;
-        CTestProtocolHandler::TSharedPtr handler;
+        CProcessStream::TSharedPtr
+            process;
+        CTestProtocolHandler::TSharedPtr
+            handler;
+        std::chrono::system_clock::time_point
+            expiration_time;
     };
 
-    std::unordered_map<std::string, TFork> map_path_fork;
-    auto process_result_queue = CAsyncQueue<TProcessResult::TConstSharedPtr>::create();
+    TTestRunResult
+        test_results;
+    list<string>
+        paths;
+    std::map<std::string, TFork>
+        map_path_fork;
+    int32_t const
+        forks_limit = m_is_serial ? 1 : std::thread::hardware_concurrency();
+    int32_t
+        forks_count = 0;
 
-    for (auto const &path: paths) {
-        auto process = CProcessStream::create(m_app_path, "run --mode=raw --print-result=json " + path);
-        auto handler = CTestProtocolHandler::create(process, path, process_result_queue, m_timeout);
+    auto process_result_queue =
+        CAsyncQueue<TProcessResult::TConstSharedPtr>::create();
 
-        map_path_fork[path] = TFork { process, handler };
+    scan(test_node, "", paths);
 
-        if (!m_is_serial)
+    do {
+        list<string>
+            processing_paths;
+
+        // start forks
+        for (; forks_count < forks_limit && !paths.empty(); forks_count++) {
+            auto path = paths.front();
+
+            processing_paths.push_back(path);
+            paths.pop_front();
+
+            auto process =
+                CProcessStream::create(m_app_path, "run --mode=raw --print-result=json " + path);
+            auto handler =
+                CTestProtocolHandler::create(process, path, process_result_queue, m_timeout);
+
+            map_path_fork[path] = TFork {
+                process,
+                handler,
+                system_clock::now() + m_timeout
+            };
+
+            // LOGT << "start: " << process->getURI();
             m_session_manager->manage(process, handler);
-    }
-
-    std::list<TProcessResult::TConstSharedPtr> interrupted;
-
-    // TODO: exception handling
-    while (!map_path_fork.empty()) {
-        // for (auto const &i: map_path_fork)
-        //     LOGT << "path left: " << i.first;
-
-        if (m_is_serial && !map_path_fork.empty()) {
-            auto fork = map_path_fork.begin()->second;
-            m_session_manager->manage(fork.process, fork.handler);
         }
 
-        auto results = process_result_queue->pop(m_timeout);
-        // LOGT << "wait, paths_left: " << map_path_fork << " OK, results: " << results.size();
+        // LOGT << "forks_count 1: " << forks_count;
+        auto process_results = process_result_queue->pop(m_timeout);
+        forks_count -= process_results.size();
+        // LOGT << "forks_count 2: " << forks_count;
 
-        for (auto const &result: results) {
-            if (result->node) {
-//                LOGT << result->node;
-                TResult test_results_fork(result->node);
-                for (auto const &test: test_results_fork.Tests)
-                    test_results.Tests.add(test);
-            }
+        // for (auto const &process_result: process_results) {
+        //     LOGT << process_result->path << ":" << process_result->node;
+        // }
 
-            auto state = result->state;
+        // timeout
+        bool is_interrupted = false;
+        auto now = system_clock::now();
 
-            if (state.condition == IProcess::TState::TCondition::RUNNING)
-                state = map_path_fork[result->path].handler->getExitState();
-
-            map_path_fork.erase(result->path);
-
-            if (checkOneOf(state.condition,
-                IProcess::TState::TCondition::DONE,
-                IProcess::TState::TCondition::RUNNING) && result->node)
-            {
-                LOGI << result->path << ":\n"
-                     << result->output;
-            } else {
-                if (!result->node) {
-                    LOGF
-                        << "process '" << result->path
-                        << "' wrong json output:\n-----\n" << result->output
-                        << "'\n-----\nstate: " << convert<string>(result->state.condition);
-                }
-                for (auto const &node: *assertOne(node_test->slice(result->path), "unexpected few paths by handler").back()) {
-                    TResult::TTests test;
-                    test.Path   = result->path + "/" + node->getName();
-                    test.Error  = result->node ? convert<string>(result->state.condition) : "process stdout json not parsed";
-
-                    test_results.Tests.add(test);
-                }
-                interrupted.push_back(result);
-                LOGF << result->path << ":\n"
-                     << result->state.condition << "\n\n";
-            }
-        }
-    }
-
-    m_session_manager->finalize();
-
-    if (!interrupted.empty()) {
-        LOGF << "\nINTERRUPTED:\n";
-        for (auto const &process_result: interrupted)
-            LOGF << process_result->state.condition << " "
-                 << process_result->path << ":\n\n"
-                 << process_result->output;
-    }
-
-    if (!map_path_fork.empty()) {
-        LOGF << "\nTIMEOUT:\n";
         for (auto const &path_fork: map_path_fork) {
-            for (auto const &node: *node_test->slice(path_fork.first).back()) {
-                TResult::TTests test;
-                test.Path   = path_fork.first + "/" + node->getName();
-                // TODO: getExitState() thread sync
-                test.Error  = "TIMEOUT: process status " + convert<string>(path_fork.second.handler->getExitState().condition);
-                test_results.Tests.add(test);
+            if (path_fork.second.expiration_time < now &&
+                path_fork.second.process->getState().condition == IProcess::TState::TCondition::RUNNING)
+            {
+                // LOGT << "interrupt: " << path_fork.second.process->getURI();
+                path_fork.second.process->sendSignal(IProcess::TSignal::INTERRUPT);
+                is_interrupted = true;
             }
-            LOGF << "TIMEOUT "
-                 << path_fork.first << ":\n\n"
-                 << path_fork.second.handler->getBuffer();
         }
-    }
 
-    return test_results;
+        std::unordered_set<TProcessResult::TConstSharedPtr>
+            timed_out_process_results;
+
+        if (is_interrupted) {
+            auto interrupted_process_results = process_result_queue->pop(m_timeout);
+            forks_count -= interrupted_process_results.size();
+            // LOGT << "forks_count 3: " << forks_count;
+
+            timed_out_process_results.insert(
+                interrupted_process_results.begin(),
+                interrupted_process_results.end());
+
+            process_results.insert(
+                process_results.end(),
+                interrupted_process_results.begin(),
+                interrupted_process_results.end());
+        }
+
+        // LOGT << "process_results: " << process_results.size();
+        // LOGT << "forks_count: " << forks_count;
+
+        for (auto const &process_result: process_results) {
+
+            // LOGT << "result: " << process_result->path << ", " << process_result->state.condition;
+
+            if (checkOneOf(
+                    process_result->state.condition,
+                    IProcess::TState::TCondition::DONE,
+                    IProcess::TState::TCondition::RUNNING)
+                && process_result->node)
+            {
+                LOGI << process_result->path << ":\n"
+                     << process_result->output;
+
+                TTestRunResult test_run_result(process_result->node);
+
+                for (auto const &result: test_run_result.TestCases)
+                    test_results.TestCases.add(result);
+
+                // LOGT << "erase 1: " << process_result->path;
+                map_path_fork.erase(process_result->path);
+            } else {
+                bool is_timeout =
+                    timed_out_process_results.count(process_result);
+                auto test_file_node =
+                    assertOne(
+                        test_node->slice(process_result->path),
+                        "unexpected few paths by handler");
+                auto test_file_path =
+                    process_result->path;
+
+                string error;
+
+                if (!process_result->node) {
+                    LOGT << error;
+                    if (process_result->state.condition == IProcess::TState::TCondition::DONE) {
+                        error = "internal error: process '" + process_result->path +
+                            "' stdout json not parsed, output:\n"
+                            + convert<string>(process_result->output);
+                    } else {
+                        if (is_timeout)
+                            error = "TIMEOUT: ";
+
+                        error += convert<string>(process_result->state.condition);
+
+                        LOGE
+                            << "\n\n" << error << ":\n"
+                            << process_result->path << ":\n"
+                            << "-----\n"
+                            << process_result->output
+                            << "-----";
+                    }
+                }
+
+                if (error.empty())
+                    error = "no error text";
+
+                for (auto const &test_case_node: *assertOne(test_node->slice(test_file_path), "unexpected few copies of test suites")) {
+                    TTestRunResult::TTestCases test_case;
+
+                    test_case.Path   = process_result->path;
+                    test_case.Error  = error;
+                    test_case.Name   = test_case_node->getName();
+
+                    test_results.TestCases.add(test_case);
+                }
+
+                // LOGT << "erase 2: " << process_result->path;
+                map_path_fork.erase(process_result->path);
+            }
+        }
+
+        if (forks_count > forks_limit)
+            throw std::runtime_error("internal testing error: forks limit " +
+                convert<string>(forks_limit) + " exceeded");
+
+        // LOGT << "forks_count: " << forks_count;
+    } while (!paths.empty() || !map_path_fork.empty());
+
+    // LOGT << "test_results cases size: " << test_results.TestCases.size();
+    return test_results; // ----->
+
+    return {};
 }
 
 
 void CTestRunnerFork::scan(
-    INodeTest::TSharedPtr const &node,
-    string                const &path,
-    list<std::string>           &paths)
+    IUnitTestCaseNode::TSharedPtr
+        const &node,
+    string
+        const &path,
+    list<std::string>
+              &paths)
 {
     for (auto const &child: *node) {
         if (child->hasChilds() && !child->begin()->get()->hasChilds())
@@ -176,21 +263,29 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
         const &path,
     IAsyncQueuePusher<TProcessResult::TConstSharedPtr>::TSharedPtr
         const &process_result_queue,
-    std::chrono::milliseconds
+    std::chrono::system_clock::duration
         const &)
 :
-    m_process               (process),
-    m_process_result_queue  (process_result_queue),
-    m_buffer_output         (io::Buffer::create()),
-    m_parser                (CJSONParser::create()),
-    m_process_result        (TProcessResult::create( TProcessResult { path, {}, {}, {} } ) )
-//    m_timeout               (timeout)
+    m_process
+        (process),
+    m_process_result_queue
+        (process_result_queue),
+    m_buffer_output
+        (io::Buffer::create()),
+    m_parser
+        (CJSONParser::create()),
+    m_process_result
+        (TProcessResult::create( TProcessResult { path, {}, {}, {} } ) )
+//    m_timeout
+//        (timeout)
 {}
 
 
 bool CTestRunnerFork::CTestProtocolHandler::control(
-    io::Event::TSharedPtr           const &event,
-    io::IPipeManager::TSharedPtr    const &pipe_manager)
+    io::Event::TSharedPtr
+        const &event,
+    io::IPipeManager::TSharedPtr
+        const &pipe_manager)
 {
     if (m_process_result->output || event->operation == io::Event::TOperation::ERROR_) {
         //LOGT << "return false";
@@ -224,7 +319,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 ////        m_process_result->output    = m_buffer_output;
 //    }
 
-    bool result = true;
+    bool result = m_process_result->state.condition == IProcess::TState::TCondition::RUNNING;
 
     try {
         // if (event->operation == io::Event::TOperation::ERROR_) {
@@ -307,10 +402,10 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         }
 
         if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE)
-           throw std::runtime_error("unexpected closing console pipe");
+           throw std::runtime_error("unexpected closing console pipe, event: " + convert<string>(event));
 
         if (!m_process_result->output && event->operation == io::Event::TOperation::TIMEOUT)
-           throw std::runtime_error("console pipe timeout");
+           throw std::runtime_error("console pipe timeout, event: " + convert<string>(event));
 
     } catch (std::exception const &e) {
         LOGF << e.what();
@@ -344,19 +439,11 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         // m_process_result->
     }
 
-//        || (event->operation   == io::Event::TOperation::CLOSE &&
-//            event->status      == io::Event::TStatus::END));
-
-    // LOGT
-    //     << "\nresult:   "           << result
-    //     << "\ncond:     "           << m_process_result->state.condition
-    //     << "\nevent fd: "           << event->stream->getHandles()
-    //     << "\nevent operation: "    << event->operation
-    //     << "\nevent status   : "    << event->status
-    //     << "\nBUFFER_BEGIN:\n"      << m_buffer_output << "\nBUFFER_END\n";
-
-    if (m_process_result->output)
+    // todo: check / fix condition
+    if(!result && (m_process_result->node || m_process_result->output)) {
+        // LOGT << "push result: " << m_process_result->path << "\nevent: " << event;
         m_process_result_queue->push(m_process_result);
+    }
 
     // LOGT << "protocol return: " << result;
 

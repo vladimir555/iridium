@@ -6,7 +6,7 @@ using iridium::testing::ITestRunner;
 
 
 string convertNodeTestToString(
-    typename ITestRunner::INodeTest const &node,
+    typename ITestRunner::IUnitTestCaseNode const &node,
     string const &tab = "")
 {
     string result = "\n" + tab + "'" + node.getName() + "'";
@@ -18,4 +18,4 @@ string convertNodeTestToString(
 }
 
 
-IMPLEMENT_CONVERT(std::string, ITestRunner::INodeTest, convertNodeTestToString)
+IMPLEMENT_CONVERT(std::string, ITestRunner::IUnitTestCaseNode, convertNodeTestToString)

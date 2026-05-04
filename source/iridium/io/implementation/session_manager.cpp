@@ -193,7 +193,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
             auto context_events = removeDuplicates(context->popEvents());
 
-             //LOGT << "[CONTEXT] events: " << context_events;
+            //  LOGT << "[CONTEXT] events: " << context_events;
 
             // events for one context
             for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
@@ -204,7 +204,7 @@ CSessionManager::CContextWorkerHandler::handle(
                 //LOGT << "context event: " << event;
 
                 if (event->status == Event::TStatus::BEGIN) {
-                    try {
+                    try  {
                         if (event->operation == Event::TOperation::OPEN) {
                             if (event->stream->getHandles().empty()) {
                                 // LOGT << "[INIT]";
@@ -295,8 +295,13 @@ CSessionManager::CContextWorkerHandler::handle(
 
                         if (event->operation == Event::TOperation::CLOSE) {
                             // LOGT << "[FINALIZE]";
-                            if(!event->stream->getHandles().empty())
-                                event->stream->finalize();
+                            if(!event->stream->getHandles().empty()) {
+                                // todo: check empty -> not empty on interrupting process
+                                try {
+                                    event->stream->finalize();
+                                } catch (...) {
+                                }
+                            }
                         }
 
                         else
