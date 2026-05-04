@@ -43,8 +43,8 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     std::sort(filtered.begin(), filtered.end(),
         [] (auto const &a, auto const &b) {
             return
-                std::tie(a->stream, a->operation, a->status) <
-                std::tie(b->stream, b->operation, b->status);
+                std::tie(a->operation, a->status) <
+                std::tie(b->operation, b->status);
         }
     );
 
