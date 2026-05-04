@@ -32,13 +32,19 @@ struct Event {
         END)
 
     Event(
-        IStream::TSharedPtr const &stream,
-        TOperation          const &operation,
-        TStatus             const &status = TStatus::UNKNOWN);
+        IStream::TSharedPtr
+            const &stream,
+        TOperation
+            const &operation,
+        TStatus
+            const &status = TStatus::UNKNOWN);
 
-    IStream::TSharedPtr stream;
-    TOperation          operation;
-    TStatus             status;
+    IStream::TSharedPtr
+              stream;
+    TOperation
+        operation;
+    TStatus
+        status;
 };
 
 

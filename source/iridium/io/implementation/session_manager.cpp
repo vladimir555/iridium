@@ -21,47 +21,71 @@ namespace iridium::io::implementation {
 
 
 static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
-    if (events_.size() <= 1)
-        return events_;
+    if (events_.size() <= 1) return events_;
 
-    std::vector<Event::TSharedPtr> filtered;
-    filtered.reserve(events_.size());
+    // snapshot
+    struct TEventView {
+        Event::TSharedPtr
+            ptr;
+        void*
+            stream_key;
+        Event::TOperation
+            operation;
+        Event::TStatus
+            status;
+
+        bool operator<(TEventView const& rhs) const {
+            return
+                std::tie(    stream_key,     operation,     status) <
+                std::tie(rhs.stream_key, rhs.operation, rhs.status);
+        }
+        bool operator==(TEventView const& rhs) const {
+            return
+                stream_key == rhs.stream_key &&
+                operation == rhs.operation &&
+                status == rhs.status;
+        }
+    };
+
+    std::vector<TEventView> views;
+    views.reserve(events_.size());
 
     for (auto const &event: events_) {
-        if (event && event->stream &&
-          (!event->stream->getHandles().empty() ||
-          ( event->operation    == Event::TOperation::OPEN &&
-            event->status       == Event::TStatus::BEGIN)))
-        {
-            filtered.push_back(event);
+        if (!event || !event->stream) continue;
+
+        bool is_keep =
+            !event->stream->getHandles().empty() ||
+            (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN);
+
+        if (is_keep) {
+            // read only once to avoid data racing
+            views.push_back({
+                event,
+                event->stream.get(),
+                event->operation,
+                event->status
+            });
         }
     }
 
-    if (filtered.empty())
+    if (views.empty())
         return {};
 
-    std::sort(filtered.begin(), filtered.end(),
-        [] (auto const &a, auto const &b) {
-            return
-                std::tie(a->operation, a->status) <
-                std::tie(b->operation, b->status);
+    // sort and rm dups
+    std::sort(views.begin(), views.end());
+    auto last = std::unique(views.begin(), views.end(),
+        [] (TEventView const &a, TEventView const &b) {
+            return a == b;
         }
     );
 
-    auto last = std::unique(filtered.begin(), filtered.end(),
-        [] (auto const &a, auto const &b) {
-            return
-                std::tie(a->stream, a->operation, a->status) ==
-                std::tie(b->stream, b->operation, b->status);
-        }
-    );
+    views.erase(last, views.end());
 
-    filtered.erase(last, filtered.end());
+    std::list<Event::TSharedPtr> result;
+    for (auto &v: views)
+        result.push_back(std::move(v.ptr));
 
-    return {
-        std::make_move_iterator(filtered.begin()),
-        std::make_move_iterator(filtered.end())
-    };
+    return result;
 }
 
 
@@ -114,13 +138,19 @@ void CSessionManager::manage(IStreamPort::TSharedPtr const &stream, IProtocol::T
 
 
 CSessionManager::CMultiplexerThreadHandler::CMultiplexerThreadHandler(
-    IContextWorker::TSharedPtr  const &context_worker,
-    IContextManager::TSharedPtr const &context_manager,
-    IMultiplexer::TSharedPtr    const &multiplexer)
+    IContextWorker::TSharedPtr
+        const &context_worker,
+    IContextManager::TSharedPtr
+        const &context_manager,
+    IMultiplexer::TSharedPtr
+        const &multiplexer)
 :
-    m_context_worker    (context_worker),
-    m_context_manager   (context_manager),
-    m_multiplexer       (multiplexer)
+    m_context_worker
+        (context_worker),
+    m_context_manager
+        (context_manager),
+    m_multiplexer
+        (multiplexer)
 {}
 
 
@@ -147,11 +177,15 @@ void CSessionManager::CMultiplexerThreadHandler::run(std::atomic<bool> &is_runni
 
 
 CSessionManager::CContextWorkerHandler::CContextWorkerHandler(
-    IContextManager::TSharedPtr const &context_manager,
-    IMultiplexer::TSharedPtr    const &multiplexer)
+    IContextManager::TSharedPtr
+        const &context_manager,
+    IMultiplexer::TSharedPtr
+        const &multiplexer)
 :
-    m_context_manager   (context_manager),
-    m_multiplexer       (multiplexer)
+    m_context_manager
+        (context_manager),
+    m_multiplexer
+        (multiplexer)
 {}
 
 
