@@ -87,6 +87,7 @@ class IridiumConan(ConanFile):
         tc.variables["CONFIG_OPENSSL"] = self.options.with_openssl
         tc.variables["CONFIG_POSTGRES"] = self.options.with_postgres
         tc.variables["CONFIG_MYSQL"] = self.options.with_mysql
+        tc.variables["BUILD_TESTING"] = self.conf.get("user.iridium:run_tests", default=False)
         tc.generate()
 
         deps = CMakeDeps(self)

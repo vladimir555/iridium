@@ -57,7 +57,8 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
 
         bool is_keep =
             !event->stream->getHandles().empty() ||
-            (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN);
+            (event->operation == Event::TOperation::OPEN &&
+             event->status == Event::TStatus::BEGIN);
 
         if (is_keep) {
             // read once to avoid data racing

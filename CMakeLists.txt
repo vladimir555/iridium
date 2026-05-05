@@ -128,9 +128,9 @@ endif()
 
 # -----
 # Optional components
-set(CONFIG_POSTGRES 0)
-set(CONFIG_MYSQL    0)
-set(CONFIG_OPENSSL  0)
+set(CONFIG_POSTGRES 1)
+set(CONFIG_MYSQL    1)
+set(CONFIG_OPENSSL  1)
 
 if(CONFIG_POSTGRES)
     add_definitions(-DBUILD_FLAG_POSTGRES)
@@ -140,7 +140,24 @@ endif()
 if(CONFIG_MYSQL)
     add_definitions(-DBUILD_FLAG_MYSQL)
     find_package(PkgConfig REQUIRED)
-    pkg_check_modules(LIBMYSQLCLIENT REQUIRED mysqlclient)
+
+    # Linux -> FreeBSD -> Old MariaDB -> fallback
+    set(_MYSQL_PKG_NAMES "mysqlclient" "libmariadb" "mariadb" "mariadbclient")
+    set(_MYSQL_FOUND FALSE)
+
+    foreach(_pkg IN LISTS _MYSQL_PKG_NAMES)
+        pkg_check_modules(LIBMYSQLCLIENT QUIET ${_pkg})
+        if(LIBMYSQLCLIENT_FOUND)
+            message(STATUS "Found MySQL/MariaDB via pkg-config: ${_pkg}")
+            set(_MYSQL_FOUND TRUE)
+            break()
+        endif()
+    endforeach()
+
+    if(NOT _MYSQL_FOUND)
+        message(FATAL_ERROR "MySQL/MariaDB client not found. Tried: ${_MYSQL_PKG_NAMES}")
+    endif()
+
     set(MySQL_INCLUDE_DIR ${LIBMYSQLCLIENT_INCLUDE_DIRS})
     link_directories(${LIBMYSQLCLIENT_LIBRARY_DIRS})
 endif()
@@ -199,7 +216,7 @@ install(
 )
 
 # -----
-# Packaging: Auto-detect generator and arch
+# Arch detection
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64)")
     set(ARCH "arm64")
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64)")
@@ -209,36 +226,6 @@ elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(i?86|x86)")
 else()
     set(ARCH "${CMAKE_SYSTEM_PROCESSOR}")
 endif()
-
-find_program(DPKG_EXECUTABLE dpkg)
-find_program(RPM_EXECUTABLE rpm)
-unset(CPACK_GENERATOR)
-
-if(DPKG_EXECUTABLE)
-    set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-    if(IN_PACKAGE_DEPENDENCIES)
-        set(CPACK_DEBIAN_PACKAGE_DEPENDS "${IN_PACKAGE_DEPENDENCIES}")
-    endif()
-    set(CPACK_DEBIAN_PACKAGE_SECTION "libs")
-    set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
-elseif(RPM_EXECUTABLE)
-    set(CPACK_GENERATOR "RPM")
-    set(CPACK_RPM_PACKAGE_AUTOREQ ON)
-    set(CPACK_RPM_PACKAGE_AUTOPROV ON)
-    if(IN_PACKAGE_DEPENDENCIES)
-        set(CPACK_RPM_PACKAGE_REQUIRES "${IN_PACKAGE_DEPENDENCIES}")
-    endif()
-    set(CPACK_RPM_PACKAGE_RELEASE "1")
-    set(CPACK_RPM_PACKAGE_GROUP "System Environment/Libraries")
-else()
-    set(CPACK_GENERATOR "TGZ")
-endif()
-
-set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
-set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-set(CPACK_PACKAGE_CONTACT "Vladimir Bulaev <bulaev_vladimir@mail.ru>")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} C++ library")
 
 # -----
 # OS detection for package naming
@@ -255,25 +242,93 @@ function(detect_os_name)
         endif()
     elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
         set(OS_NAME "darwin" PARENT_SCOPE)
-    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-        set(OS_NAME "windows" PARENT_SCOPE)
     elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
         set(OS_NAME "freebsd" PARENT_SCOPE)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        set(OS_NAME "windows" PARENT_SCOPE)
     else()
         set(OS_NAME "unknown" PARENT_SCOPE)
     endif()
 endfunction()
-
 detect_os_name()
 
-if(NOT CPACK_PACKAGE_FILE_NAME)
-    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}+${OS_NAME}_${ARCH}")
+# DEB/RPM-deps -> FreeBSD Pkg deps
+function(convert_to_freebsd_deps input_var output_var)
+    set(_fb_deps "")
+    foreach(_dep ${${input_var}})
+        if(_dep MATCHES "libmysql")
+            list(APPEND _fb_deps "databases/mariadb110-client")
+        elseif(_dep MATCHES "libpq")
+            list(APPEND _fb_deps "databases/postgresql16-client")
+        elseif(_dep MATCHES "libssl|libcrypto")
+            list(APPEND _fb_deps "security/openssl")
+        endif()
+    endforeach()
+    string(REPLACE ";" " " _fb_deps_str "${_fb_deps}")
+    set(${output_var} "${_fb_deps_str}" PARENT_SCOPE)
+endfunction()
+
+# -----
+# Package metadata
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_CONTACT "Vladimir Bulaev <bulaev_vladimir@mail.ru>")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} C++ library")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}+${OS_NAME}_${ARCH}")
+set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://vladimir555.github.io/iridium/index.html")
+
+# -----
+# Generator auto-detect
+unset(CPACK_GENERATOR)
+find_program(DPKG_EXECUTABLE dpkg)
+find_program(RPM_EXECUTABLE rpm)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+    set(CPACK_GENERATOR "FREEBSD")
+    set(CPACK_FREEBSD_PACKAGE_LICENSE "LGPL-3.0")
+    set(CPACK_FREEBSD_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}")
+    set(CPACK_FREEBSD_PACKAGE_CATEGORIES "devel")
+    set(CPACK_FREEBSD_PACKAGE_ORIGIN "devel/${PROJECT_NAME}")
+    set(CPACK_FREEBSD_PACKAGE_COMMENT "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
+    set(CPACK_FREEBSD_PACKAGE_WWW "${CPACK_PACKAGE_HOMEPAGE_URL}")
+
+    # note: CPACK_FREEBSD_PACKAGE_DEPENDS still not implemented in freebsd
+    if(CONFIG_MYSQL)
+        set(CPACK_FREEBSD_PACKAGE_DEPENDS "${CPACK_FREEBSD_PACKAGE_DEPENDS} databases/mariadb-connector-c")
+    endif()
+    if(CONFIG_OPENSSL)
+        set(CPACK_FREEBSD_PACKAGE_DEPENDS "${CPACK_FREEBSD_PACKAGE_DEPENDS} security/openssl")
+    endif()
+    if(CONFIG_POSTGRES)
+        set(CPACK_FREEBSD_PACKAGE_DEPENDS "${CPACK_FREEBSD_PACKAGE_DEPENDS} databases/postgresql18-client")
+    endif()
+    string(STRIP "${CPACK_FREEBSD_PACKAGE_DEPENDS}" CPACK_FREEBSD_PACKAGE_DEPENDS)
+
+elseif(DPKG_EXECUTABLE)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}")
+    set(CPACK_DEBIAN_PACKAGE_SECTION "libs")
+    set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+    if(IN_PACKAGE_DEPENDENCIES)
+        set(CPACK_DEBIAN_PACKAGE_DEPENDS "${IN_PACKAGE_DEPENDENCIES}")
+    endif()
+elseif(RPM_EXECUTABLE)
+    set(CPACK_GENERATOR "RPM")
+    set(CPACK_RPM_PACKAGE_RELEASE "1")
+    set(CPACK_RPM_PACKAGE_GROUP "System Environment/Libraries")
+    set(CPACK_RPM_PACKAGE_AUTOREQ ON)
+    set(CPACK_RPM_PACKAGE_AUTOPROV ON)
+    if(IN_PACKAGE_DEPENDENCIES)
+        set(CPACK_RPM_PACKAGE_REQUIRES "${IN_PACKAGE_DEPENDENCIES}")
+    endif()
+else()
+    set(CPACK_GENERATOR "TGZ")
 endif()
 
-set(CPACK_COMPONENTS_ALL ${PROJECT_NAME} ${PROJECT_NAME}-dev)
-set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
-set(CPACK_SET_DESTDIR ON)
-
+# -----
+# CPack inclusion
 include(CPack)
 
 cpack_add_component(${PROJECT_NAME}
@@ -281,7 +336,6 @@ cpack_add_component(${PROJECT_NAME}
     DESCRIPTION  "${PROJECT_NAME} shared library"
     REQUIRED
 )
-
 cpack_add_component(${PROJECT_NAME}-dev
     DISPLAY_NAME "${PROJECT_NAME}-dev"
     DESCRIPTION  "${PROJECT_NAME} development headers and library"
@@ -290,7 +344,7 @@ cpack_add_component(${PROJECT_NAME}-dev
 
 # -----
 # Testing
-if(NOT DEFINED CONAN_PROJECT_NAME)
+if(NOT DEFINED CONAN_PROJECT_NAME OR BUILD_TESTING)
     set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
 
     include_directories(
