@@ -14,6 +14,7 @@ simd json parser
 node diff for transferring
 kasperskyos io
 C++26 reflections enum
+junit xml
 
 video codec wrapper: libaom + libopus
 or

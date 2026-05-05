@@ -21,20 +21,21 @@ namespace iridium::io::implementation {
 
 
 static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr> const &events_) {
-    if (events_.size() <= 1) return events_;
+    if (events_.size() <= 1)
+        return events_;
 
     // snapshot
     struct TEventView {
         Event::TSharedPtr
             ptr;
-        void*
-            stream_key;
+        void
+           *stream_key;
         Event::TOperation
             operation;
         Event::TStatus
             status;
 
-        bool operator<(TEventView const& rhs) const {
+        bool operator<(TEventView const &rhs) const {
             return
                 std::tie(    stream_key,     operation,     status) <
                 std::tie(rhs.stream_key, rhs.operation, rhs.status);
@@ -48,6 +49,7 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     };
 
     std::vector<TEventView> views;
+
     views.reserve(events_.size());
 
     for (auto const &event: events_) {
@@ -58,7 +60,7 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
             (event->operation == Event::TOperation::OPEN && event->status == Event::TStatus::BEGIN);
 
         if (is_keep) {
-            // read only once to avoid data racing
+            // read once to avoid data racing
             views.push_back({
                 event,
                 event->stream.get(),
@@ -82,6 +84,7 @@ static std::list<Event::TSharedPtr> removeDuplicates(std::list<Event::TSharedPtr
     views.erase(last, views.end());
 
     std::list<Event::TSharedPtr> result;
+
     for (auto &v: views)
         result.push_back(std::move(v.ptr));
 
@@ -117,11 +120,9 @@ void CSessionManager::initialize() {
 
 
 void CSessionManager::finalize() {
-    // LOGT << "CSessionManager::finalize ...";
     m_multiplexer->finalize();
     m_context_worker->finalize();
     m_multiplexer_thread->finalize();
-    // LOGT << "CSessionManager::finalize OK";
 }
 
 

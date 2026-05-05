@@ -278,13 +278,13 @@ include(CPack)
 
 cpack_add_component(${PROJECT_NAME}
     DISPLAY_NAME "${PROJECT_NAME}"
-    DESCRIPTION "${PROJECT_NAME} shared library"
+    DESCRIPTION  "${PROJECT_NAME} shared library"
     REQUIRED
 )
 
 cpack_add_component(${PROJECT_NAME}-dev
     DISPLAY_NAME "${PROJECT_NAME}-dev"
-    DESCRIPTION "${PROJECT_NAME} development headers and library"
+    DESCRIPTION  "${PROJECT_NAME} development headers and library"
     DEPENDS ${PROJECT_NAME}
 )
 
@@ -329,7 +329,7 @@ if(NOT DEFINED CONAN_PROJECT_NAME)
     foreach(SRC IN LISTS TEST_SOURCES)
         file(RELATIVE_PATH REL_PATH "${TEST_SOURCE_DIR}" "${SRC}")
         string(REPLACE "\\" "/" REL_PATH "${REL_PATH}")
-        list(APPEND TEST_CASE_PATHS "/${REL_PATH}")
+        list(APPEND TEST_CASE_PATHS "${REL_PATH}")
     endforeach()
 
     list(REMOVE_DUPLICATES TEST_CASE_PATHS)
@@ -338,9 +338,9 @@ if(NOT DEFINED CONAN_PROJECT_NAME)
 
     foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
         add_test(
-            NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
+            NAME   "${TEST_PATH}"
             COMMAND ${TEST_BIN} run --print-result=ctest-vscode "${TEST_PATH}"
-            WORKING_DIRECTORY ${TEST_SOURCE_DIR}
         )
+        set_tests_properties("${TEST_PATH}" PROPERTIES TIMEOUT 10)
     endforeach()
 endif()

@@ -162,6 +162,11 @@ CMultiplexer::CMultiplexer(std::chrono::microseconds const &timeout)
 {}
 
 
+CMultiplexer::~CMultiplexer() {
+    LOCK_SCOPE();
+}
+
+
 void CMultiplexer::initialize() {
     if (m_kqueue)
         throw std::runtime_error("initialization error: kqueue is not finalized"); // ----->
@@ -189,6 +194,10 @@ void CMultiplexer::finalize() {
         assertExists(m_kqueue.load(), "kqueue is not initialized");
         // LOGT << "finalization begin";
         m_is_initialized = false;
+#ifdef FREEBSD_PLATFORM
+        if (m_poll_multiplexer)
+            m_poll_multiplexer->finalize();
+#endif // FREEBSD_PLATFORM
         wakeKEvent();
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer finalization error: ") + e.what());
@@ -203,11 +212,18 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     std::list<Event::TSharedPtr> events;
 
 #ifdef FREEBSD_PLATFORM
-    if (m_poll_multiplexer)
+    if (m_poll_multiplexer) {
         events = m_poll_multiplexer->waitEvents();
+        if (!events.empty()) {
+            // LOGT << "wake by poll ...";
+            wakeKEvent();
+            // LOGT << "wake by poll OK";
+        }
+    }
     // LOGT << "POLL EVENTS: " << events;
 #endif // FREEBSD_PLATFORM
 
+    // LOGT << "wait kevent ...";
     auto triggered_event_count = assertOK(
         kevent(
             m_kqueue,
@@ -218,7 +234,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
            &m_timeout),
        "kevent waiting event error");
 
-    // LOGT << "triggered_event_count: " << triggered_event_count;
+    // LOGT << "wait kevent OK, triggered_event_count: " << triggered_event_count;
 
     LOCK_SCOPE();
 
@@ -237,10 +253,8 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 m_kqueue = 0;
 
 #ifdef FREEBSD_PLATFORM
-                if (m_poll_multiplexer) {
-                    m_poll_multiplexer->finalize();
-                    m_poll_multiplexer.reset();
-                }
+                // if (m_poll_multiplexer)
+                //     m_poll_multiplexer.reset();
 #endif // FREEBSD_PLATFORM
 
                 return finalizeAllEvents(); // ----->
@@ -256,22 +270,6 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 auto map_type_handle    = stream->getHandles();
 
                 if (int pid = map_type_handle[IStream::THandleType::PID]) {
-#ifdef FREEBSD_PLATFORM
-                    // fallback to poll multiplexer for freebsd kevent pipe bug workaround
-                    if(!m_poll_multiplexer) {
-                        m_poll_multiplexer = unix_::CMultiplexer::create();
-                        m_poll_multiplexer->initialize();
-                    }
-
-                    if (stream_to_handle.is_add_action)
-                        m_poll_multiplexer->subscribe(stream);
-                    else
-                        m_poll_multiplexer->unsubscribe(stream);
-
-                    if (m_poll_multiplexer)
-                        continue; // <---
-#endif // FREEBSD_PLATFORM
-
                     if (stream_to_handle.is_add_action)
                         m_map_pid_stream[pid] = stream;
                     else
@@ -363,6 +361,22 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
         return; // ----->
 
     try {
+#ifdef FREEBSD_PLATFORM
+        if (stream->getHandles()[IStream::THandleType::PID]) {
+            {
+                LOCK_SCOPE();
+                if(!m_poll_multiplexer) {
+                    m_poll_multiplexer = unix_::CMultiplexer::create();
+                    m_poll_multiplexer->initialize();
+                }
+            }
+            // LOGT << "subscribe poll ...";
+            if (m_poll_multiplexer)
+                m_poll_multiplexer->subscribe(stream);
+            // LOGT << "subscribe poll OK";
+            return; // ----->
+        }
+#endif // FREEBSD_PLATFORM
         m_streams_to_handle->push(TStreamToHandle { stream, true } );
         wakeKEvent();
     } catch (std::exception const &e) {
@@ -376,6 +390,14 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
         return; // ----->
 
     try {
+#ifdef FREEBSD_PLATFORM
+        if (stream->getHandles()[IStream::THandleType::PID] && m_poll_multiplexer) {
+            // LOGT << "unsubscribe poll ...";
+            m_poll_multiplexer->unsubscribe(stream);
+            // LOGT << "unsubscribe poll OK";
+            return; // ----->
+        }
+#endif // FREEBSD_PLATFORM
         m_streams_to_handle->push(TStreamToHandle { stream, false } );
         wakeKEvent();
     } catch (std::exception const &e) {

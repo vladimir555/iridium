@@ -32,8 +32,9 @@ class CMultiplexer:
     public threading::Synchronized<std::mutex>
 {
 public:
-    DEFINE_IMPLEMENTATION(CMultiplexer)
+    DEFINE_CREATE(CMultiplexer)
     CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);
+    virtual ~CMultiplexer();
 
     void initialize() override;
     void finalize() override;

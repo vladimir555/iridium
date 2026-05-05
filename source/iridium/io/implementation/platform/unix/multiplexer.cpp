@@ -122,14 +122,15 @@ void CMultiplexer::processWakePipe(std::list<Event::TSharedPtr> &events) {
 
 std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     std::list<Event::TSharedPtr> events;
+    std::vector<struct pollfd> pollfds_copy;
 
     {
-        LOCK_SCOPE();
-
         if (!m_is_initialized)
             return events;
 
+        LOCK_SCOPE();
         events.splice(events.end(), applyPendingChanges());
+        pollfds_copy = m_pollfds;
     }
 
     int timeout_ms = static_cast<int>(
@@ -138,7 +139,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
     if (timeout_ms < 1)
         timeout_ms = 1;
 
-    int result = poll(m_pollfds.data(), static_cast<nfds_t>(m_pollfds.size()), timeout_ms);
+    int result = poll(pollfds_copy.data(), static_cast<nfds_t>(pollfds_copy.size()), timeout_ms);
 
     {
         LOCK_SCOPE();
@@ -152,7 +153,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
         if (result == 0)
             return events; // Таймаут
 
-        for (auto &pfd : m_pollfds) {
+        for (auto &pfd : pollfds_copy) {
             if (pfd.revents == 0)
                 continue;
 
@@ -187,12 +188,11 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
 
 
 void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE();
-
     m_streams_to_handle->push(
         { stream, true }
     );
 
+    LOCK_SCOPE();
     if (m_wake_pipe[1] >= 0) {
         char byte = 0;
         write(m_wake_pipe[1], &byte, 1);
@@ -201,12 +201,11 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
-    LOCK_SCOPE();
-
     m_streams_to_handle->push(
         { stream, false }
     );
 
+    LOCK_SCOPE();
     if (m_wake_pipe[1] >= 0) {
         char byte = 0;
         write(m_wake_pipe[1], &byte, 1);
@@ -215,10 +214,9 @@ void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
 
 
 void CMultiplexer::wake(Event::TSharedPtr const &event) {
-    LOCK_SCOPE();
-
     m_wake_events->push(event);
 
+    LOCK_SCOPE();
     if (m_wake_pipe[1] >= 0) {
         char byte = 0;
         write(m_wake_pipe[1], &byte, 1);
@@ -229,8 +227,7 @@ void CMultiplexer::wake(Event::TSharedPtr const &event) {
 void CMultiplexer::wake(std::list<Event::TSharedPtr> const &events) {
     LOCK_SCOPE();
 
-    for (auto const &event : events)
-        m_wake_events->push(event);
+    m_wake_events->push(events);
 
     if (m_wake_pipe[1] >= 0) {
         char byte = 0;
