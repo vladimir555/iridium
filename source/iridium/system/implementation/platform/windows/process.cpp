@@ -42,7 +42,9 @@ CProcessStream::CProcessStream(
     m_process
         {0},
     m_security_attributes
-        {0}
+        {0},
+    m_condition_override
+        (TSignal::UNKNOWN)
 {}
 
 
@@ -55,7 +57,9 @@ CProcessStream::CProcessStream(
     m_app
         (app),
     m_process
-        {0}
+        {0},
+    m_condition_override
+        (TSignal::UNKNOWN)
 {
     m_command_line = m_app;
 
@@ -64,15 +68,18 @@ CProcessStream::CProcessStream(
         m_command_line += " " + arg;
     }
 
-    if (!m_args.empty() && m_args.back() == ' ')
+    if(!m_args.empty() && m_args.back() == ' ')
         m_args.pop_back();
 }
 
 
 void CProcessStream::initialize() {
     try {
-        if (m_reader_fd != INVALID_HANDLE_VALUE || m_writer_fd != INVALID_HANDLE_VALUE)
+        if (m_reader_fd != INVALID_HANDLE_VALUE ||
+            m_writer_fd != INVALID_HANDLE_VALUE)
+        {
             throw std::runtime_error("not finalized");
+        }
 
         STARTUPINFOA startup_info{0};
         startup_info.dwFlags = STARTF_USESTDHANDLES;
@@ -167,6 +174,7 @@ void CProcessStream::initialize() {
             CloseHandle(stdin_reader_fd),
            "CloseHandle stdout");
 
+        m_pid = m_process.hProcess;
         //LOGT << "create process cmdline: '" << m_command_line << "'";
     } catch (std::exception const &e) {
         closeFDs();
@@ -210,8 +218,10 @@ IProcess::TState CProcessStream::getState() {
             return { IProcess::TState::TCondition::UNKNOWN, nullptr };
         }
 
-        IProcess::TState    result      {};
-        DWORD               exit_code   {};
+        IProcess::TState
+            result{};
+        DWORD
+            exit_code{};
 
         assertOK(GetExitCodeProcess(m_process.hProcess, &exit_code), "GetExitCodeProcess");
 
@@ -223,12 +233,17 @@ IProcess::TState CProcessStream::getState() {
                 result.condition = TState::TCondition::RUNNING;
                 break;
             default:
-                result.condition = TState::TCondition::DONE;
+                if (m_condition_override == IProcess::TSignal::UNKNOWN)
+                    result.condition = TState::TCondition::DONE;
+                else
+                    result.condition = m_condition_override;
                 result.exit_code = std::make_shared<int>(exit_code);
                 break;
         }
 
         m_finalized_state = TState::create(result);
+
+        // LOGT << "process state: " << result;
 
         return result;
     } catch (std::exception const &e) {
@@ -249,23 +264,40 @@ void CProcessStream::sendSignal(TSignal const& signal) {
             return;
 
         switch (signal) {
-        case TSignal::INTERRUPT: {
-            DWORD pid = assertOK(GetProcessId(m_process.hProcess), "GetProcessId");
+        case TSignal::INTERRUPT:
+            m_condition_override = IProcess::TState::TCondition::INTERRUPTED;
+        // {
+            // DWORD pid = assertOK(GetProcessId(m_process.hProcess), "GetProcessId");
 
-            if (AttachConsole(pid)) {
-                assertOK(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
-            }
-            else {
-                throw std::runtime_error("can not send CTRL+C to non console app");
-            }
+            // if (AttachConsole(pid)) {
+            //     assertOK(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
+            // }
+            // else {
+            //     throw std::runtime_error("can not send CTRL+C to non console app");
+            // }
 
-            assertOK(
-                WaitForSingleObject(
-                    m_process.hProcess,
-                    static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
-                "WaitForSingleObject");
-            break;
-        }
+            // assertOK(
+            //     WaitForSingleObject(
+            //         m_process.hProcess,
+            //         static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
+            //     "WaitForSingleObject");
+            // break;
+
+            // const char* cmd = "__SHUTDOWN__\n";
+            // DWORD written = 0;
+
+            // assertOK(
+            //     WriteFile(m_writer_fd, cmd, static_cast<DWORD>(strlen(cmd)), &written, nullptr),
+            //    "WriteFile");
+
+            // assertOK(
+            //     WaitForSingleObject(
+            //         m_process.hProcess,
+            //         static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
+            //    "WaitForSingleObject"
+            // );
+            // break;
+        // }
 
         case TSignal::TERMINATE:
         case TSignal::KILL:
@@ -273,10 +305,10 @@ void CProcessStream::sendSignal(TSignal const& signal) {
                 TerminateProcess(
                     m_process.hProcess, 0),
                 "TerminateProcess");
-            assertOK(
-                WaitForSingleObject(
-                    m_process.hProcess, INFINITE),
-                "WaitForSingleObject");
+            // assertOK(
+            //     WaitForSingleObject(
+            //         m_process.hProcess, INFINITE),
+            //     "WaitForSingleObject");
             break;
 
         default:

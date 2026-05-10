@@ -7,6 +7,35 @@
 #include <sys/stat.h>
 
 
+#include <iridium/logging/logger.h>
+#include <iridium/enum.h>
+#include <poll.h>
+
+
+
+// poll.h events
+DEFINE_ENUM(
+    TPollEvent,
+    IN          = POLLIN,
+    PRI         = POLLPRI,
+    OUT         = POLLOUT,
+    RDNORM      = POLLRDNORM,
+    // WRNORM      = POLLWRNORM,
+    RDBAND      = POLLRDBAND,
+    WRBAND      = POLLWRBAND,
+#ifndef FREEBSD_PLATFORM
+    EXTEND      = POLLEXTEND,
+    ATTRIB      = POLLATTRIB,
+    NLINK       = POLLNLINK,
+    WRITE       = POLLWRITE,
+#endif // not FREEBSD_PLATFORM
+    ERR         = POLLERR,
+    HUP         = POLLHUP,
+    NVAL        = POLLNVAL
+)
+IMPLEMENT_ENUM(TPollEvent)
+
+
 namespace iridium::io::implementation::platform::unix_ {
 
 
@@ -30,7 +59,7 @@ void CMultiplexer::initialize() {
         fcntl(m_wake_pipe[i], F_SETFD, FD_CLOEXEC);
     }
 
-    m_pollfds.push_back({ m_wake_pipe[0], POLLIN, 0 });
+    m_pollfds.push_back({ m_wake_pipe[0], TPollEvent::IN, 0 });
 
     m_is_initialized = true;
 }
@@ -62,9 +91,12 @@ std::list<Event::TSharedPtr> CMultiplexer::applyPendingChanges() {
     std::list<Event::TSharedPtr> events;
 
     for (auto const &stream_to_handle : m_streams_to_handle->pop(false)) {
-        auto const &stream      = stream_to_handle.stream;
-        auto operation          = stream_to_handle.is_add_action ? Event::TOperation::OPEN : Event::TOperation::CLOSE;
-        auto map_type_handle    = stream->getHandles();
+        auto const &stream
+            = stream_to_handle.stream;
+        auto operation
+            = stream_to_handle.is_add_action ? Event::TOperation::OPEN : Event::TOperation::CLOSE;
+        auto map_type_handle
+            = stream->getHandles();
 
         if (auto pid = static_cast<int>(map_type_handle[IStream::THandleType::PID])) {
             if (stream_to_handle.is_add_action)
@@ -76,10 +108,10 @@ std::list<Event::TSharedPtr> CMultiplexer::applyPendingChanges() {
         std::unordered_map<int, short> map_fd_mask;
 
         if (auto fd = map_type_handle[IStream::THandleType::READER])
-            map_fd_mask[fd] |= POLLIN;
+            map_fd_mask[fd] |= TPollEvent::IN;
 
         if (auto fd = map_type_handle[IStream::THandleType::WRITER])
-            map_fd_mask[fd] |= POLLOUT;
+            map_fd_mask[fd] |= TPollEvent::OUT;
 
         for (auto const &fd_mask: map_fd_mask) {
             if (stream_to_handle.is_add_action) {
@@ -150,8 +182,9 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             throw std::runtime_error("poll error: " + std::string(strerror(errno)));
         }
 
+        // timeout
         if (result == 0)
-            return events; // Таймаут
+            return events;
 
         for (auto &pfd : pollfds_copy) {
             if (pfd.revents == 0)
@@ -168,18 +201,25 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                 continue;
 
             auto const &stream = i->second;
+            // LOGT << "event fd: " << pfd.fd << ", stream: "
+            // << stream->getURI() << ", revents: " << TPollEvent(pfd.revents).convertToFlagsString();
 
-            if (pfd.revents & (POLLERR | POLLNVAL))
-                events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::BEGIN));
+            // process error first (similar to EV_ERROR in kevent)
+            if (pfd.revents & (TPollEvent::ERR | TPollEvent::NVAL)) {
+                events.push_back(Event::create(stream, Event::TOperation::ERROR_, Event::TStatus::END));
+                continue;  // don't process other events if there's an error
+            }
 
-            if (pfd.revents & POLLHUP)
+            // POLLHUP indicates the other end closed - generate READ event to ensure all data is read
+            if (pfd.revents & TPollEvent::HUP)
                 events.push_back(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
 
-            if (pfd.revents & POLLIN)
-                events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
-
-            if (pfd.revents & POLLOUT)
+            // always try to read data first, even if POLLHUP is set
+            if (pfd.revents & TPollEvent::IN)
                 events.push_back(Event::create(stream, Event::TOperation::READ, Event::TStatus::BEGIN));
+
+            if (pfd.revents & TPollEvent::OUT)
+                events.push_back(Event::create(stream, Event::TOperation::WRITE, Event::TStatus::BEGIN));
         }
     }
 

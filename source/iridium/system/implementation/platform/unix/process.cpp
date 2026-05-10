@@ -284,7 +284,7 @@ IProcess::TState CProcessStream::getState() {
     //         process_state_str += "\ncontinued";
 
     //     if (!process_state_str.empty())
-    //     LOGT << "\n" << m_uri << "\npid: " << m_pid << process_state_str;
+    //     LOGT << "process state:\n" << m_uri << "\npid: " << m_pid << process_state_str;
     // }
 
     if ( m_state_internal.is_exited && !m_state_internal.is_signaled) {
@@ -299,7 +299,9 @@ IProcess::TState CProcessStream::getState() {
             TState::TCondition::CRASHED;
     }
 
-    // LOGT << "process '" << m_app << " " << m_args.back() << "' condition: " << condition;
+    // LOGT    << "process '" << m_app << " " << m_args.back()
+    //     <<"', condition: " << condition
+    //     << ", exit_code: " << m_exit_code;
 
     return {
         .condition = condition,

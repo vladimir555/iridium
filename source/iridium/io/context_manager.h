@@ -11,6 +11,7 @@
 namespace iridium::io {
 
 
+// todo: rm, deprecated
 class IContextManager {
 public:
     DEFINE_INTERFACE(IContextManager)

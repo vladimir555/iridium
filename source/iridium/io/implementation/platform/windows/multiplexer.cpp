@@ -21,7 +21,11 @@ using iridium::threading::implementation::CAsyncQueue;
 namespace iridium::io::implementation::platform {
 
 
-static constexpr ULONG_PTR WAKE_COMPLETION_KEY = static_cast<ULONG_PTR>(-1);
+static constexpr ULONG_PTR WAKE_COMPLETION_KEY
+    = static_cast<ULONG_PTR>(-1);
+// special completion keys for internal signals
+static constexpr ULONG_PTR FINALIZE_COMPLETION_KEY
+    = static_cast<ULONG_PTR>(-2);
 
 
 // todo: mv to common place
@@ -122,12 +126,14 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
             &overlapped, 1000);
         // LOGT << "wait, is_ok: " << is_ok;
 
-
+        // if (is_ok)
         // LOGT << "\nGetQueuedCompletionStatus\n  is_ok: "  << is_ok
         //     << "\n  number_of_bytes_transfered: " << (uint32_t)number_of_bytes_transfered
         //     << "\n  completion_key: " << completion_key
         //     << "\n  overlapped is null: " << (overlapped == nullptr)
         //     << "\n  pointer: " << (overlapped ? (uint64_t)overlapped->Pointer : 0);
+
+        // threading::sleep(1000);
 
         if  (is_ok) {
             // finalization signal: wake up the multiplexer thread to exit
@@ -166,7 +172,7 @@ std::list<Event::TSharedPtr> CMultiplexer::waitEvents() {
                     result.push_back(
                         Event::create(
                             stream, o,
-                            Event::TStatus::END));
+                            Event::TStatus::BEGIN));
                 } else {
                     LOGW << "wait event got unsubscribed id: " << uint64_t(completion_key);
                 }
@@ -211,6 +217,57 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
         bool is_added = false;
 
         for (auto const &handle_ : stream->getHandles()) {
+
+            if (handle_.first == IStream::THandleType::PID) {
+                HANDLE hProc = reinterpret_cast<HANDLE>(handle_.second);
+                HANDLE pid_handle_copy  = nullptr;
+
+                assertOK(
+                    DuplicateHandle(
+                        GetCurrentProcess(),
+                        hProc,
+                        GetCurrentProcess(),
+                       &pid_handle_copy,
+                        SYNCHRONIZE,
+                        FALSE,
+                        DUPLICATE_SAME_ACCESS),
+                   "DuplicateHandle");
+
+                struct TContext {
+                    CMultiplexer
+                       *multiplexer;
+                    IStream::TSharedPtr
+                        stream;
+                    HANDLE
+                        pid_handle_copy;
+                };
+
+                auto *context = new TContext {
+                    this,
+                    stream,
+                    pid_handle_copy
+                };
+
+                HANDLE wait_pid_handle = nullptr;
+
+                assertOK(
+                    RegisterWaitForSingleObject(
+                        &wait_pid_handle, pid_handle_copy,
+                        [] (PVOID p, BOOLEAN) {
+                            auto *context = static_cast<TContext *>(p);
+                            context->multiplexer->wake(
+                                Event::create(context->stream, Event::TOperation::CLOSE, Event::TStatus::BEGIN));
+                            CloseHandle(context->pid_handle_copy);
+                            delete context;
+                        },
+                        context,
+                        INFINITE,
+                        WT_EXECUTEONLYONCE),
+                   "RegisterWaitForSingleObject");
+
+                m_map_stream_wait_pid_handle[stream] = wait_pid_handle;
+                continue; // <---
+            }
 
             auto operation = Event::TOperation::UNKNOWN;
 
@@ -268,24 +325,39 @@ void CMultiplexer::subscribe(IStream::TSharedPtr const &stream) {
 
 void CMultiplexer::unsubscribe(IStream::TSharedPtr const &stream) {
     try {
+        LOCK_SCOPE();
         if (m_iocp == INVALID_HANDLE_VALUE)
             throw std::runtime_error("iocp is not initialized"); // ----->
 
         for (auto const &handle: assertExists(stream, "stream is null")->getHandles()) {
+            if (handle.first == IStream::THandleType::PID) {
+                // LOGT << "unregister pid: " << handle.first;
+                assertOK(
+                    UnregisterWaitEx(
+                        m_map_stream_wait_pid_handle[stream],
+                        INVALID_HANDLE_VALUE),
+                   "UnregisterWaitEx");
+                m_map_stream_wait_pid_handle.erase(stream);
+                continue; // <---
+            }
+
             auto handle_ = reinterpret_cast<HANDLE>(handle.second);
 
             if (handle_) {
+                // LOGT << "cancelIO fd: " << reinterpret_cast<uintptr_t>(handle_);
                 assertOK(
                     CancelIo(handle_),
                    "CancelIo");
 
-                LOCK_SCOPE();
                 m_map_id_stream.erase(handle_);
             }
         }
     } catch (std::exception const &e) {
         throw std::runtime_error(std::string("multiplexer unsubscribing error: ") + e.what()); // ----->
+    } catch (...) {
+        LOGF << "multiplexer unsubscribing unknown error";
     }
+    wake(Event::create(stream, Event::TOperation::CLOSE, Event::TStatus::END));
 }
 
 

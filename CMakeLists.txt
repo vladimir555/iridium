@@ -128,9 +128,9 @@ endif()
 
 # -----
 # Optional components
-set(CONFIG_POSTGRES 1)
-set(CONFIG_MYSQL    1)
-set(CONFIG_OPENSSL  1)
+set(CONFIG_POSTGRES 0)
+set(CONFIG_MYSQL    0)
+set(CONFIG_OPENSSL  0)
 
 if(CONFIG_POSTGRES)
     add_definitions(-DBUILD_FLAG_POSTGRES)

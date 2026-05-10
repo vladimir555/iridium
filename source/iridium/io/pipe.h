@@ -13,6 +13,7 @@
 namespace iridium::io {
 
 
+// todo: rm, deprecated
 class IPipeStreams {
 public:
     DEFINE_INTERFACE(IPipeStreams)

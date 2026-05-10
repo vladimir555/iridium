@@ -9,6 +9,7 @@
 namespace iridium::io {
 
 
+// todo: rm, deprecated
 class IContext {
 public:
     DEFINE_INTERFACE(IContext)

@@ -23,10 +23,6 @@
 namespace iridium::io::implementation::platform {
 
 
-// special completion keys for internal signals
-static constexpr ULONG_PTR FINALIZE_COMPLETION_KEY = static_cast<ULONG_PTR>(-2);
-
-
 class CMultiplexer:
     public IMultiplexer,
     public CMultiplexerBase,
@@ -59,6 +55,8 @@ private:
         m_map_id_stream;
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_wake_events;
+    std::unordered_map<IStream::TSharedPtr, HANDLE>
+        m_map_stream_wait_pid_handle;
 };
 
 

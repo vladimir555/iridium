@@ -14,6 +14,7 @@
 namespace iridium::io {
 
 
+// todo: rm, deprecated
 struct Event {
     DEFINE_CREATE(Event)
 

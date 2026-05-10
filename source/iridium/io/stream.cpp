@@ -8,12 +8,10 @@ using iridium::convertion::convert;
 namespace {
 
 
-std::string convertStreamToString(IStream const &stream) {
-    return
-        "{ " +
-        convert<std::string>(stream.getHandles()) + ", '" +
-        convert<std::string>(stream.getURI())
-        + "' }";
+std::string convertToString(IStream const &stream) {
+    return "{ '" +
+        convert<std::string>(stream.getURI())     + "', " +
+        convert<std::string>(stream.getHandles()) + " }";
 };
 
 
@@ -22,10 +20,10 @@ std::string convertStreamToString(IStream const &stream) {
 
 IMPLEMENT_ENUM(iridium::io::IStream::THandleType);
 
-IMPLEMENT_CONVERT(std::string, iridium::io::IStream,        convertStreamToString);
-IMPLEMENT_CONVERT(std::string, iridium::io::IStreamReader,  convertStreamToString);
-IMPLEMENT_CONVERT(std::string, iridium::io::IStreamWriter,  convertStreamToString);
-IMPLEMENT_CONVERT(std::string, iridium::io::IStreamPort,    convertStreamToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStream,        convertToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStreamReader,  convertToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStreamWriter,  convertToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStreamPort,    convertToString);
 
 
 ////

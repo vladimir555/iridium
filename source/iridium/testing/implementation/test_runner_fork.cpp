@@ -75,9 +75,9 @@ TTestRunResult CTestRunnerFork::run(IUnitTestCaseNode::TSharedPtr const &test_no
         paths;
     std::map<std::string, TFork>
         map_path_fork;
-    int32_t const
+    int64_t const
         forks_limit = m_is_serial ? 1 : std::thread::hardware_concurrency();
-    int32_t
+    int64_t
         forks_count = 0;
 
     auto process_result_queue =
@@ -156,14 +156,13 @@ TTestRunResult CTestRunnerFork::run(IUnitTestCaseNode::TSharedPtr const &test_no
         // LOGT << "forks_count: " << forks_count;
 
         for (auto const &process_result: process_results) {
-
-            // LOGT << "result: " << process_result->path << ", " << process_result->state.condition;
+            // LOGT << process_result->path << ", state: " << process_result->state;
 
             if (checkOneOf(
                     process_result->state.condition,
                     IProcess::TState::TCondition::DONE,
                     IProcess::TState::TCondition::RUNNING)
-                && process_result->node)
+                &&  process_result->node)
             {
                 LOGI << process_result->path << ":\n"
                      << process_result->output;
@@ -185,17 +184,17 @@ TTestRunResult CTestRunnerFork::run(IUnitTestCaseNode::TSharedPtr const &test_no
                 auto test_file_path =
                     process_result->path;
 
+                // LOGT << is_timeout;
                 string error;
 
                 if (!process_result->node) {
-                    LOGT << error;
                     if (process_result->state.condition == IProcess::TState::TCondition::DONE) {
                         error = "internal error: process '" + process_result->path +
                             "' stdout json not parsed, output:\n"
                             + convert<string>(process_result->output);
                     } else {
                         if (is_timeout)
-                            error = "TIMEOUT: ";
+                            error = "TIMEOUT " + convert<string>(m_timeout) + ", ";
 
                         error += convert<string>(process_result->state.condition);
 
@@ -235,8 +234,6 @@ TTestRunResult CTestRunnerFork::run(IUnitTestCaseNode::TSharedPtr const &test_no
 
     // LOGT << "test_results cases size: " << test_results.TestCases.size();
     return test_results; // ----->
-
-    return {};
 }
 
 
@@ -270,8 +267,8 @@ CTestRunnerFork::CTestProtocolHandler::CTestProtocolHandler(
         (process),
     m_process_result_queue
         (process_result_queue),
-    m_buffer_output
-        (io::Buffer::create()),
+    // m_buffer_output
+    //     (io::Buffer::create()),
     m_parser
         (CJSONParser::create()),
     m_process_result
@@ -287,6 +284,17 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
     io::IPipeManager::TSharedPtr
         const &pipe_manager)
 {
+    // LOGT
+    //     << "\nevent: " << event
+    //     << "\nstate: " << m_process_result->state.condition;
+
+    if (!m_buffer_output && event->operation != io::Event::TOperation::OPEN) {
+        // LOGT << "skip, return true";
+        return true; // ----->
+    } else {
+        // LOGT << "inited";
+    }
+
     if (m_process_result->output || event->operation == io::Event::TOperation::ERROR_) {
         //LOGT << "return false";
         return false; // ----->
@@ -294,9 +302,13 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 
     m_process_result->state = m_process->getState();
 
-    // LOGT << "event: " << event << "\nstate: " << m_process_result->state.condition;
-
     if (event->operation == io::Event::TOperation::OPEN) {
+        // todo: fix event state machine, repeating open begin
+        if (m_buffer_output)
+            return true; // ----->
+
+        m_buffer_output = io::Buffer::create();
+
         static std::string const DEFAULT_PIPE_NAME = "process";
         pipe_manager->createPipe(DEFAULT_PIPE_NAME);
         pipe_manager->updatePipe(DEFAULT_PIPE_NAME,
@@ -320,6 +332,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
 //    }
 
     bool result = m_process_result->state.condition == IProcess::TState::TCondition::RUNNING;
+    // LOGT << "result: " << result << ", condition: " << m_process_result->state.condition;
 
     try {
         // if (event->operation == io::Event::TOperation::ERROR_) {
@@ -394,12 +407,29 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
                         // LOGT << "json:\n"   << json;
                         // LOGT << "node:\n"   << node;
                         //LOGT << "output:\n" << m_buffer_output;
-                        // LOGT << "set result = false";
                         result = false;
                     }
                 }
             }
         }
+
+// freebsd posix bug handling
+#ifdef FREEBSD_PLATFORM
+        if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE) {
+            // todo: timeout
+            while (m_process_result->state.condition == IProcess::TState::TCondition::RUNNING) {
+                m_process_result->state = m_process->getState();
+                // LOGT << "update state: " << m_process_result->state;
+            }
+
+            result = false;
+
+            if (m_process_result->state.exit_code && *m_process_result->state.exit_code == 1)
+                m_process_result->state.condition = IProcess::TState::TCondition::CRASHED;
+        }
+        // LOGT << "fixed freebsd state: " << m_process_result->state;
+#endif // FREEBSD_PLATFORM
+
 
         if (!m_process_result->output && event->operation == io::Event::TOperation::CLOSE)
            throw std::runtime_error("unexpected closing console pipe, event: " + convert<string>(event));
@@ -408,7 +438,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
            throw std::runtime_error("console pipe timeout, event: " + convert<string>(event));
 
     } catch (std::exception const &e) {
-        LOGF << e.what();
+        LOGF << e.what() << + ", state: " + convert<string>(m_process_result->state);
         if (m_process_result->state.condition != IProcess::TState::TCondition::RUNNING)
             m_process_result->output = m_buffer_output;
     } catch (...) {
@@ -435,7 +465,7 @@ bool CTestRunnerFork::CTestProtocolHandler::control(
         //LOGT << "empty output, close, m_process_result->state.condition: "
         //     << m_process_result->state.condition;
         m_process_result->output    = io::Buffer::create("empty process output");
-        m_process_result->state     = m_process->getState();
+        // m_process_result->state     = m_process->getState();
         // m_process_result->
     }
 

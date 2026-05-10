@@ -25,6 +25,7 @@ namespace iridium::io {
 static size_t const DEFAULT_BUFFER_SIZE = 16384;
 
 
+// todo: rm, deprecated
 class IStream: public virtual pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)

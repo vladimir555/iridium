@@ -46,24 +46,41 @@ public:
         getURI() const override;
 
 protected:
-    DWORD   assertOK     (bool const &is_ok, std::string const &message);
-    void    setBlockingMode (bool const &is_blocking);
-    void    closeFDs();
+    DWORD
+        assertOK(bool const &is_ok, std::string const &message);
+    void
+        setBlockingMode (bool const &is_blocking);
+    void
+        closeFDs();
 
-    static int initSignal();
+    static int
+        initSignal();
 
-    HANDLE              m_reader_fd;
-    HANDLE              m_writer_fd;
+    HANDLE
+        m_reader_fd;
+    HANDLE
+        m_writer_fd;
+    HANDLE
+        m_pid;
 
-    OVERLAPPED          m_reader_overlapped;
-    OVERLAPPED          m_writer_overlapped;
+    OVERLAPPED
+        m_reader_overlapped;
+    OVERLAPPED
+        m_writer_overlapped;
+    OVERLAPPED
+        m_pid_overlapped;
 
-    URI::TSharedPtr     m_uri;
-    bool                m_is_opened;
-    bool                m_is_blocking_mode;
+    URI::TSharedPtr
+        m_uri;
+    bool
+        m_is_opened;
+    bool
+        m_is_blocking_mode;
 
-    Buffer::TSharedPtr m_reader_buffer;
-    Buffer::TSharedPtr m_writer_buffer;
+    Buffer::TSharedPtr
+        m_reader_buffer;
+    Buffer::TSharedPtr
+        m_writer_buffer;
 };
 
 

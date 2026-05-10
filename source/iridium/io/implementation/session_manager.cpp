@@ -229,7 +229,7 @@ CSessionManager::CContextWorkerHandler::handle(
 
             auto context_events = removeDuplicates(context->popEvents());
 
-            //  LOGT << "[CONTEXT] events: " << context_events;
+            // LOGT << "[CONTEXT] events: " << context_events;
 
             // events for one context
             for (auto const &event: /*removeDuplicates(context->popEvents())*/context_events) {
@@ -271,8 +271,11 @@ CSessionManager::CContextWorkerHandler::handle(
                             auto pipe = context->getPipe(event);
                             if (pipe) {
                                 // LOGT << "[TRANSMIT]: flush";
-
                                 while (pipe->transmit(event));
+                                // LOGT << "win flush transmit";
+#ifdef WINDOW_ACTION
+                                pipe->transmit(event);
+#endif // WINDOW_ACTION
                                     // LOGT << "transmit flush next";
 
                                 // event->status = Event::TStatus::END;
@@ -291,15 +294,18 @@ CSessionManager::CContextWorkerHandler::handle(
                                 // auto is_transmitted = false;
                                 // while (pipe->transmit(event))
                                 //     is_transmitted  = true;
-
-                                auto is_transmitted = pipe->transmit(event);
+#ifndef WINDOWS_PLATFORM
+                                auto is_transmitted =
+#endif // WINDOWS_PLATFORM
+                                pipe->transmit(event);
 
                                 // LOGT << "[TRANSMIT]: " << is_transmitted;
-
+#ifndef WINDOWS_PLATFORM
                                 if (is_transmitted) {
                                     event->status = Event::TStatus::END;
                                     events_to_repeat.push_back(event);
                                 }
+#endif // WINDOWS_PLATFORM
                             } else {
                                 // LOGT << "[TRANSMIT]: pipe not found";
                                 events_to_repeat.push_back(event);
@@ -324,10 +330,21 @@ CSessionManager::CContextWorkerHandler::handle(
                     try {
                         try {
                             is_context_valid = context->update(event);
+#ifdef WINDOW_ACTION
+                            if (event->operation == Event::TOperation::OPEN) {
+                                if (auto pipe = context->getPipe(event)) {
+                                    event->operation = Event::TOperation::READ;
+                                    // LOGT << "win transmit, get pending data";
+                                    pipe->transmit(event);
+                                }
+                            }
+#endif // WINDOW_ACTION
                         } catch (std::exception const &e) {
                             LOGE << "protocol error: " << e << "\nevent:\n" << event;
                             is_context_valid = false;
                         }
+
+                        // LOGT << "is_context_valid: " << is_context_valid;
 
                         if (event->operation == Event::TOperation::CLOSE) {
                             // LOGT << "[FINALIZE]";
@@ -350,8 +367,8 @@ CSessionManager::CContextWorkerHandler::handle(
                         {
                             // repeat rw only if more data available
                             event->status = Event::TStatus::BEGIN;
+                            // LOGT << "repeat by context: " << event;
                             events_to_repeat.push_back(event);
-                            //LOGT << "repeat by context: " << event;
                             continue; // <---
                         } else {
 

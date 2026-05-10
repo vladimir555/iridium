@@ -43,13 +43,13 @@ size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
 namespace {
 
 
-std::string convertEventToString(iridium::io::Event const &event) {
+std::string convertToString(iridium::io::Event const &event) {
     using iridium::convertion::convert;
     return
-        "\n{\n  "   + convert<std::string>(event.stream)
-        + ",\n  "   + convert<std::string>(event.operation)
-        + ",\n  "   + convert<std::string>(event.status)
-        +  "\n}";
+          "{ "   + convert<std::string>(event.stream)
+        + ", "   + convert<std::string>(event.operation)
+        + ", "   + convert<std::string>(event.status)
+        +  " }";
 }
 
 
@@ -58,4 +58,4 @@ std::string convertEventToString(iridium::io::Event const &event) {
 
 IMPLEMENT_ENUM(iridium::io::Event::TOperation)
 IMPLEMENT_ENUM(iridium::io::Event::TStatus)
-IMPLEMENT_CONVERT(std::string, iridium::io::Event, convertEventToString)
+IMPLEMENT_CONVERT(std::string, iridium::io::Event, convertToString)

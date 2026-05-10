@@ -14,6 +14,7 @@
 namespace iridium::io {
 
 
+// todo: rm, deprecated
 class ISessionManager: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(ISessionManager)

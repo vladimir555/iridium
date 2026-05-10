@@ -13,6 +13,7 @@
 namespace iridium::system {
 
 
+// todo: rm, deprecated
 class IProcess: public virtual io::IStreamPort {
 public:
     DEFINE_INTERFACE(IProcess)

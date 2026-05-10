@@ -63,6 +63,8 @@ private:
         m_security_attributes;
     TState::TSharedPtr
         m_finalized_state;
+    IProcess::TState::TCondition
+        m_condition_override;
 };
 
 
