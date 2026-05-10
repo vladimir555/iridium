@@ -17,7 +17,7 @@
 #include <map>
 
 #include "test.h"
-#include "unit_test.h"
+#include "unit_test_case.h"
 
 
 namespace iridium::testing {
@@ -40,98 +40,58 @@ public:
     /// \~russian @brief Виртуальный деструктор по умолчанию.
     virtual ~Tester() = default;
 
-    /// \~english @typedef INodeTest
-    /// @brief Type alias for a specialized `INodeType` that holds a raw pointer to an `ITest` instance as its value.
-    ///     This is used internally by the `Tester` to represent a test case or a suite of tests within a hierarchical node structure.
-    /// \~russian @typedef INodeTest
-    /// @brief Псевдоним типа для специализированного `INodeType`, который хранит сырой указатель на экземпляр `ITest` в качестве своего значения.
-    ///     Используется внутри `Tester` для представления тестового случая или набора тестов в иерархической структуре узлов.
-    typedef parsing::INodeType<ITest *> INodeTest;
+    typedef parsing::INodeType<IUnitTestCase *> IUnitTestCaseNode;
 
-    /// \~english @brief Adds a test case to the tester's registry.
-    ///     This method is typically called automatically by the `TEST` macro when a test case is defined.
-    /// \~russian @brief Добавляет тестовый случай в реестр тестера.
-    ///     Этот метод обычно вызывается автоматически макросом `TEST` при определении тестового случая.
-    /// \~english @param test A raw pointer to the `ITest` instance (the test case object).
-    /// \~russian @param test Сырой указатель на экземпляр `ITest` (объект тестового случая).
-    /// \~english @param path A string representing the unique path or identifier for the test case, often constructed from file path and test name.
-    /// \~russian @param path Строка, представляющая уникальный путь или идентификатор для тестового случая, часто создаваемая из пути к файлу и имени теста.
-    void add(ITest * const test, std::string const &path);
+    void add(
+        IUnitTestCase
+          * const  test,
+        std::string
+            const &path,
+        size_t
+            const &line,
+        std::string
+            const &name);
 
-    /// \~english @brief Runs the registered tests, potentially filtered by command-line arguments.
-    ///     This method is the main entry point for test execution.
-    /// \~russian @brief Запускает зарегистрированные тесты, возможно, отфильтрованные аргументами командной строки.
-    ///     Этот метод является основной точкой входа для выполнения тестов.
-    /// \~english @param argc The argument count from `main`.
-    /// \~russian @param argc Количество аргументов из `main`.
-    /// \~english @param argv The argument vector from `main`. Used to filter tests or configure test execution.
-    /// \~russian @param argv Вектор аргументов из `main`. Используется для фильтрации тестов или настройки выполнения тестов.
-    /// \~english @param main_cpp_path The path to the main .cpp file where tests are being run, used for context.
-    /// \~russian @param main_cpp_path Путь к основному .cpp файлу, где запускаются тесты, используется для контекста.
-    /// \~english @return An integer exit code (typically 0 for success, non-zero for failure).
-    /// \~russian @return Целочисленный код выхода (обычно 0 для успеха, ненулевой для неудачи).
-    int  run(int argc, char* argv[], std::string const &main_cpp_path);
+    int run(int argc, char* argv[], std::string const &main_cpp_path);
 
 private:
-
     friend class pattern::Singleton<Tester>;
 
-    /// \~english @brief Type alias for a map storing test cases, keyed by their unique path string.
-    /// \~russian @brief Псевдоним типа для карты, хранящей тестовые случаи, с ключом по их уникальной строке пути.
-    typedef std::map< std::string, ITest * > TTestList;
+    struct TEntry {
+        std::string
+            path;
+        size_t
+            line;
+        std::string
+            name;
 
-    /// \~english @brief Builds a tree structure of tests, potentially by parsing source files or using currently registered tests.
-    ///     This method helps organize tests and might be used for filtering or selective execution.
-    /// \~russian @brief Строит древовидную структуру тестов, возможно, путем разбора исходных файлов или использования текущих зарегистрированных тестов.
-    ///     Этот метод помогает организовать тесты и может использоваться для фильтрации или выборочного выполнения.
-    /// \~english @param main_cpp_path_ The path to the main test file, used as a reference or root for test discovery.
-    /// \~russian @param main_cpp_path_ Путь к основному тестовому файлу, используемый как ссылка или корень для обнаружения тестов.
-    /// \~english @param include A filter string to include specific tests (not fully implemented or detailed here).
-    /// \~russian @param include Строка фильтра для включения определенных тестов (здесь не полностью реализовано или детализировано).
-    /// \~english @param exclude A list of filter strings to exclude specific tests (not fully implemented or detailed here).
-    /// \~russian @param exclude Список строк фильтра для исключения определенных тестов (здесь не полностью реализовано или детализировано).
-    /// \~english @return A shared pointer to the root `INodeTest` of the constructed test tree.
-    /// \~russian @return Разделяемый указатель на корневой `INodeTest` построенного дерева тестов.
-    INodeTest::TSharedPtr getTestTree(
-        std::string             const &main_cpp_path_,
-        std::string             const &include = {},
-        std::list<std::string>  const &exclude = {}
+        bool operator < (TEntry const &o) const {
+            return std::tie(path, line, name) < std::tie(o.path, o.line, o.name);
+        }
+    };
+
+    typedef std::map< TEntry, IUnitTestCase * >
+        TMapEntryUnitTestCase;
+
+    IUnitTestCaseNode::TSharedPtr getTestTree(
+        std::string
+            const &testing_source_directory_path,
+        std::string
+            const &include = {},
+        std::list<std::string>
+            const &exclude = {}
     ) const;
 
-    /// \~english @brief Map storing all registered test cases, keyed by a unique path string (e.g., "filepath/testname").
-    /// \~russian @brief Карта, хранящая все зарегистрированные тестовые случаи, с ключом по уникальной строке пути (например, "путь_к_файлу/имя_теста").
-    TTestList m_map_path_test;
-
+    TMapEntryUnitTestCase
+        m_map_path_test;
 };
 
 
 } // namespace iridium::testing
 
-/// \~english @def CONCAT_IMPL(x, y)
-/// @brief Inner macro for direct token concatenation using the preprocessor `##` operator.
-///     This is a utility macro, similar to those in `concat.h`, but defined locally for this file's macros.
-///     It does not expand its arguments before concatenation.
-/// \~russian @def CONCAT_IMPL(x, y)
-/// @brief Внутренний макрос для прямого склеивания токенов с использованием оператора препроцессора `##`.
-///     Это служебный макрос, аналогичный макросам в `concat.h`, но определенный локально для макросов этого файла.
-///     Он не раскрывает свои аргументы перед конкатенацией.
-/// \~english @param x The first token.
-/// \~russian @param x Первый токен.
-/// \~english @param y The second token.
-/// \~russian @param y Второй токен.
-#define CONCAT_IMPL( x, y ) x##y
 
-/// \~english @def MACRO_CONCAT(x, y)
-/// @brief Macro that performs token concatenation with prior expansion of its arguments, using `CONCAT_IMPL`.
-///     Ensures that if `x` or `y` are macros themselves, they are expanded before their results are pasted together.
-/// \~russian @def MACRO_CONCAT(x, y)
-/// @brief Макрос, выполняющий конкатенацию токенов с предварительным раскрытием своих аргументов, используя `CONCAT_IMPL`.
-///     Гарантирует, что если `x` или `y` сами являются макросами, они будут раскрыты перед склеиванием их результатов.
-/// \~english @param x The first token or macro expanding to a token.
-/// \~russian @param x Первый токен или макрос, раскрывающийся в токен.
-/// \~english @param y The second token or macro expanding to a token.
-/// \~russian @param y Второй токен или макрос, раскрывающийся в токен.
-#define MACRO_CONCAT( x, y ) CONCAT_IMPL( x, y )
+// #define CONCAT_IMPL( x, y ) x##y
+// #define MACRO_CONCAT( x, y ) CONCAT_IMPL( x, y )
 
 /// \~english @def TEST(name)
 /// @brief Defines a test case and registers it with the `Tester` singleton.
@@ -148,13 +108,17 @@ private:
 /// \~english @param name The symbolic name of the test case. This name is used to generate the class name and for registration.
 /// \~russian @param name Символическое имя тестового случая. Это имя используется для генерации имени класса и для регистрации.
 #define TEST(name) \
-class Test_##name final: public ::iridium::testing::ITest, public ::iridium::testing::UnitTest { \
+class UnitTestCase_##name final: \
+    public ::iridium::testing::IUnitTestCase, \
+    public ::iridium::testing::UnitTestCase { \
 public: \
-    DEFINE_IMPLEMENTATION(Test_##name) \
-    Test_##name() { iridium::testing::Tester::instance().add(this, std::string(__FILE__) + "/" + #name); } \
+    DEFINE_IMPLEMENTATION(UnitTestCase_##name) \
+    UnitTestCase_##name() { iridium::testing::Tester::instance().add(this, std::string(__FILE__), __LINE__, #name); } \
     void run() override; \
-} test_##name; \
-void Test_##name::run()
+private: \
+    size_t getLine() const override { return __LINE__; }; \
+} UnitTestCase_##name; \
+void UnitTestCase_##name::run()
 
 /// \~english @def ASSERT_3(left, condition, right)
 /// @brief Assertion macro for binary conditions (e.g., equality, inequality, less than).
@@ -171,9 +135,7 @@ void Test_##name::run()
 /// \~english @param right The right-hand operand of the assertion.
 /// \~russian @param right Правый операнд утверждения.
 #define ASSERT_3(left, condition, right) \
-condition(left, right, std::string(#left) + " " + #condition + " " + #right, \
-iridium::convertion::convert<std::string, std::string>(__FILE__) + ":" + \
-iridium::convertion::convert<std::string, uint32_t>(__LINE__));
+condition(left, right, std::string(#left) + " " + #condition + " " + #right, __LINE__);
 
 /// \~english @def ASSERT_2(func, exception)
 /// @brief Assertion macro to check if a given function call throws a specific exception.
@@ -189,9 +151,7 @@ iridium::convertion::convert<std::string, uint32_t>(__LINE__));
 /// \~russian @param exception Тип ожидаемого исключения.
 #define ASSERT_2(func, exception) \
 { auto const l = [&](){func;}; assert_<decltype(l), exception> \
-(l, std::string(#func) + " doesn't throw " + #exception, \
-iridium::convertion::convert<std::string, std::string>(__FILE__) + ":" + \
-iridium::convertion::convert<std::string, uint32_t>(__LINE__)); }
+(l, std::string(#func) + " doesn't throw " + #exception, __LINE__); }
 
 /// \~english @def ASSERT_1(is_true)
 /// @brief Assertion macro to check if a boolean condition is true.
@@ -202,9 +162,7 @@ iridium::convertion::convert<std::string, uint32_t>(__LINE__)); }
 /// \~english @param is_true The boolean expression to assert.
 /// \~russian @param is_true Булево выражение для проверки.
 #define ASSERT_1(is_true) \
-assert_(is_true, std::string(#is_true), \
-iridium::convertion::convert<std::string, std::string>(__FILE__) + ":" + \
-iridium::convertion::convert<std::string, uint32_t>(__LINE__));
+assert_(is_true, std::string(#is_true), __LINE__);
 
 /// \~english @def ASSERT(...)
 /// @brief Chooser macro that dispatches to `ASSERT_1`, `ASSERT_2`, or `ASSERT_3` based on the number of arguments provided.

@@ -145,9 +145,7 @@ public:
     /// \~english @brief Pops items from the output queue.
     /// \~russian @brief Извлекает элементы из выходной очереди.
     TOutputItems pop(bool const &is_wait_required) override;
-    /// \~english @brief Pops items from the output queue with a timeout.
-    /// \~russian @brief Извлекает элементы из выходной очереди с тайм-аутом.
-    TOutputItems pop(std::chrono::nanoseconds const &timeout) override;
+    TOutputItems pop(std::chrono::system_clock::duration const &timeout) override;
 
 private:
     typename IAsyncQueue<TInputItem>::TSharedPtr    m_input_queue;
@@ -295,7 +293,7 @@ typename CWorkerPool<TInputItem, TOutputItem>::TOutputItems CWorkerPool<TInputIt
 
 
 template<typename TInputItem, typename TOutputItem>
-typename CWorkerPool<TInputItem, TOutputItem>::TOutputItems CWorkerPool<TInputItem, TOutputItem>::pop(std::chrono::nanoseconds const &timeout) {
+typename CWorkerPool<TInputItem, TOutputItem>::TOutputItems CWorkerPool<TInputItem, TOutputItem>::pop(std::chrono::system_clock::duration const &timeout) {
     return m_output_queue->pop(timeout);
 }
 

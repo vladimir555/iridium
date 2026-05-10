@@ -33,6 +33,9 @@ namespace iridium::convertion::implementation::platform {
 /// \~english @brief Converts a 32-bit signed integer to a string.
 /// \~russian @brief Преобразует 32-битное знаковое целое число в строку.
 void itoa(int32_t const &value, char *buffer, int const &base) {
+    if (base < 2 || base > 64)
+        throw std::invalid_argument("convertion int32_t error: wrong base " + std::to_string(base));
+
     ::_itoa_s(value, buffer, 64, base);
 }
 
@@ -40,6 +43,9 @@ void itoa(int32_t const &value, char *buffer, int const &base) {
 /// \~english @brief Converts a 32-bit unsigned integer to a string.
 /// \~russian @brief Преобразует 32-битное беззнаковое целое число в строку.
 void itoa(uint32_t const &value, char *buffer, int const &base) {
+    if (base < 2 || base > 64)
+        throw std::invalid_argument("convertion uint32_t error: wrong base " + std::to_string(base));
+
     ::_itoa_s(value, buffer, 64, base);
 }
 
@@ -47,6 +53,9 @@ void itoa(uint32_t const &value, char *buffer, int const &base) {
 /// \~english @brief Converts a 64-bit signed integer to a string.
 /// \~russian @brief Преобразует 64-битное знаковое целое число в строку.
 void itoa(int64_t const &value, char *buffer, int const &base) {
+    if (base < 2 || base > 64)
+        throw std::invalid_argument("convertion int64_t error: wrong base " + std::to_string(base));
+
     ::_i64toa_s(value, buffer, 64, base);
 }
 
@@ -54,6 +63,9 @@ void itoa(int64_t const &value, char *buffer, int const &base) {
 /// \~english @brief Converts a 64-bit unsigned integer to a string.
 /// \~russian @brief Преобразует 64-битное беззнаковое целое число в строку.
 void itoa(uint64_t const &value, char *buffer, int const &base) {
+    if (base < 2 || base > 64)
+        throw std::invalid_argument("convertion uint64_t error: wrong base " + std::to_string(base));
+
     ::_ui64toa_s(value, buffer, 64, base);
 }
 

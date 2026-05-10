@@ -50,12 +50,7 @@ public:
     /// \~english @brief Defines standard implementation helpers for `CProcessStream`, such as smart pointer typedefs and a static `create` method.
     /// \~russian @brief Определяет стандартные вспомогательные средства реализации для `CProcessStream`, такие как typedef-ы умных указателей и статический метод `create`.
     DEFINE_IMPLEMENTATION(CProcessStream)
-    /// \~english @brief Constructs a process stream for a given application and string of arguments.
-    /// \~russian @brief Конструирует поток процесса для данного приложения и строки аргументов.
-    /// \~english @param app The path to the executable application.
-    /// \~russian @param app Путь к исполняемому приложению.
-    /// \~english @param args A single string containing all arguments to be passed to the application. Arguments are typically space-separated. Defaults to an empty string if no arguments.
-    /// \~russian @param args Одна строка, содержащая все аргументы для передачи приложению. Аргументы обычно разделены пробелами. По умолчанию пустая строка, если аргументы отсутствуют.
+
     CProcessStream(
         std::string const &app,
         std::string const &args = {});
@@ -131,12 +126,7 @@ private:
     /// \~english @brief The full command line (application + arguments) used for logging/debugging.
     /// \~russian @brief Полная командная строка (приложение + аргументы), используемая для логирования/отладки.
     std::string                 m_command_line;
-    /// \~english @brief Process ID (PID) of the child process. Atomic for thread-safe access if needed, though primary synchronization is via mutex.
-    /// \~russian @brief Идентификатор процесса (PID) дочернего процесса. Атомарный для потокобезопасного доступа при необходимости, хотя основная синхронизация осуществляется через мьютекс.
-    std::atomic<pid_t>          m_pid;
-
-    /// \~english @brief Shared pointer to store the exit code of the process once it has terminated. `nullptr` if not yet terminated or code not available.
-    /// \~russian @brief Разделяемый указатель для хранения кода завершения процесса после его завершения. `nullptr`, если еще не завершен или код недоступен.
+    // std::atomic<pid_t>          m_pid;
     std::shared_ptr<int>        m_exit_code;
 };
 

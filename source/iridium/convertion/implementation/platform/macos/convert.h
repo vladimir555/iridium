@@ -30,7 +30,7 @@ namespace iridium::convertion::implementation {
 /// \~russian @brief Специализация для преобразования `long` в `std::string`.
 template<>
 struct TConvert<std::string, long> {
-    static std::string convert(long const &value);
+    static std::string convert(long const &value, uint8_t const &base = 10);
 };
 
 
@@ -38,7 +38,19 @@ struct TConvert<std::string, long> {
 /// \~russian @brief Специализация для преобразования `unsigned long` в `std::string`.
 template<>
 struct TConvert<std::string, unsigned long> {
-    static std::string convert(unsigned long const &value);
+    static std::string convert(unsigned long const &value, uint8_t const &base = 10);
+};
+
+
+template<>
+struct TConvert<long, std::string> {
+    static long convert(std::string const &value, uint8_t const &base = 10);
+};
+
+
+template<>
+struct TConvert<unsigned long, std::string> {
+    static unsigned long convert(std::string const &value, uint8_t const &base = 10);
 };
 
 

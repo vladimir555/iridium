@@ -6,3 +6,12 @@ XLM tag: 1752484
 
 # Documentation
 https://vladimir555.github.io/iridium/index.html
+
+
+# Conan
+```bash
+conan remote add iridium --force https://registry.gitflic.ru/project/volodja/iridium/package/-/conan
+conan list "iridium/*" -r=iridium
+conan install --requires=iridium/{VERSION} -r=iridium --build=missing
+conan create . -c user.iridium:run_tests=True
+```

@@ -21,9 +21,9 @@ public:
     DEFINE_IMPLEMENTATION(Shell)
     Shell();
 
-    typedef std::chrono::seconds TTimeDuration;
+    // typedef std::chrono::system_clock::duration TTimeDuration;
 
-    static TTimeDuration const DEFAULT_TIMEOUT;
+    static std::chrono::minutes const DEFAULT_TIMEOUT;
 
     /// \~english @brief The result of a shell command execution.
     /// \~russian @brief Результат выполнения команды оболочки.
@@ -39,15 +39,7 @@ public:
     /// \~russian @brief Финализирует оболочку.
     void finalize()   override;
 
-    /// \~english @brief Runs a shell command.
-    /// \~russian @brief Выполняет команду оболочки.
-    /// \~english @param command_line The command to execute.
-    /// \~russian @param command_line Команда для выполнения.
-    /// \~english @param timeout The timeout for the command.
-    /// \~russian @param timeout Тайм-аут для команды.
-    /// \~english @return The result of the command execution.
-    /// \~russian @return Результат выполнения команды.
-    TResult run(std::string const &command_line, TTimeDuration const &timeout = DEFAULT_TIMEOUT);
+    TResult run(std::string const &command_line, std::chrono::system_clock::duration const &timeout = DEFAULT_TIMEOUT);
 
 private:
     /// \~english @brief The I/O multiplexer for handling process streams.

@@ -54,11 +54,7 @@ public:
     /// \~english @param is_wait_required If true, waits until items are available.
     /// \~russian @param is_wait_required Если true, ожидает, пока элементы не станут доступны.
     virtual TItems pop(bool const &is_wait_required = true) = 0;
-    /// \~english @brief Pops items from the queue with a timeout.
-    /// \~russian @brief Извлекает элементы из очереди с тайм-аутом.
-    /// \~english @param timeout The maximum time to wait for items.
-    /// \~russian @param timeout Максимальное время ожидания элементов.
-    virtual TItems pop(std::chrono::nanoseconds const &timeout) = 0;
+    virtual TItems pop(std::chrono::system_clock::duration const &timeout) = 0;
 };
 
 

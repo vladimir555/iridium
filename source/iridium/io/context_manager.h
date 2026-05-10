@@ -20,75 +20,23 @@
 namespace iridium::io {
 
 
-/// \~english @brief Interface for managing a collection of I/O contexts (`IContext`).
-///     A context manager is responsible for creating, destroying, and possibly distributing
-///     I/O operations or streams among multiple contexts. This can be used to manage
-///     resources, balance load, or handle different types of I/O tasks in separate contexts.
-/// \~russian @brief Интерфейс для управления коллекцией контекстов ввода-вывода (`IContext`).
-///     Менеджер контекстов отвечает за создание, уничтожение и, возможно, распределение
-///     операций ввода-вывода или потоков между несколькими контекстами. Это может использоваться
-///     для управления ресурсами, балансировки нагрузки или обработки различных типов задач ввода-вывода
-///     в отдельных контекстах.
+// todo: rm, deprecated
 class IContextManager {
 public:
     /// \~english @brief Macro used to define common interface elements (e.g., virtual destructor).
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContextManager)
 
-    /// \~english @brief Creates a new I/O context for a given stream and protocol.
-    /// \~russian @brief Создает новый контекст ввода-вывода для заданного потока и протокола.
-    /// \~english @param stream A shared pointer to the `IStream` that the context will manage.
-    /// \~russian @param stream Умный указатель на `IStream`, которым будет управлять контекст.
-    /// \~english @param protocol A shared pointer to the `IProtocol` to be used for communication over the stream.
-    /// \~russian @param protocol Умный указатель на `IProtocol`, который будет использоваться для обмена данными через поток.
-    virtual void    createContext (IStream::TSharedPtr  const &stream, IProtocol::TSharedPtr const &protocol) = 0;
-
-    /// \~english @brief Removes an I/O context.
-    /// \~russian @brief Удаляет контекст ввода-вывода.
-    /// \~english @param context A shared pointer to the `IContext` to be removed.
-    /// \~russian @param context Умный указатель на `IContext`, который необходимо удалить.
-    virtual void    removeContext (IContext::TSharedPtr const &context) = 0;
-
-    /// \~english @brief Acquires or selects an appropriate I/O context to handle a given event,
-    ///     possibly associating it with a specific I/O multiplexer.
-    ///     This could be used in a scenario where events arrive and need to be routed to a suitable context for processing.
-    /// \~russian @brief Получает или выбирает подходящий контекст ввода-вывода для обработки данного события,
-    ///     возможно, связывая его с определенным мультиплексором ввода-вывода.
-    ///     Это может использоваться в сценарии, когда события поступают и должны быть направлены
-    ///     в подходящий контекст для обработки.
-    /// \~english @param event A shared pointer to the `Event` that needs to be processed.
-    /// \~russian @param event Умный указатель на `Event`, которое необходимо обработать.
-    /// \~english @param multiplexer A shared pointer to an `IMultiplexer` that might be associated with or used by the context.
-    /// \~russian @param multiplexer Умный указатель на `IMultiplexer`, который может быть связан с контекстом или использоваться им.
-    /// \~english @return A shared pointer to an `IContext` deemed suitable for handling the event.
-    ///     May return `nullptr` or throw if no suitable context can be acquired.
-    /// \~russian @return Умный указатель на `IContext`, считающийся подходящим для обработки события.
-    ///     Может вернуть `nullptr` или выбросить исключение, если подходящий контекст не может быть получен.
-    virtual IContext::TSharedPtr acquireContext(Event::TSharedPtr    const &event, IMultiplexer::TSharedPtr const &multiplexer) = 0;
-
-    /// \~english @brief Releases an I/O context, possibly after it has finished its primary tasks.
-    ///     This might not immediately destroy the context but could transition it to an inactive state
-    ///     or trigger processing of any pending events before eventual removal.
-    /// \~russian @brief Освобождает контекст ввода-вывода, возможно, после того как он завершил свои основные задачи.
-    ///     Это может не приводить к немедленному уничтожению контекста, а переводить его в неактивное состояние
-    ///     или инициировать обработку любых ожидающих событий перед окончательным удалением.
-    /// \~english @param context A shared pointer to the `IContext` to be released.
-    /// \~russian @param context Умный указатель на `IContext`, который необходимо освободить.
-    /// \~english @return A list of `Event::TSharedPtr` which might be pending or unprocessed events from the released context.
-    /// \~russian @return Список `Event::TSharedPtr`, который может содержать ожидающие или необработанные события из освобожденного контекста.
-    virtual std::list<Event::TSharedPtr> releaseContext(IContext::TSharedPtr const &context) = 0;
-
-    /// \~english @brief Checks for and retrieves events related to outdated streams across all managed contexts.
-    ///     This method likely iterates through its managed contexts, calling a similar method on each,
-    ///     or directly inspects streams to identify those that are outdated or have timed out.
-    /// \~russian @brief Проверяет и извлекает события, связанные с устаревшими потоками, во всех управляемых контекстах.
-    ///     Этот метод, вероятно, итерирует по управляемым им контекстам, вызывая аналогичный метод для каждого,
-    ///     или напрямую проверяет потоки для выявления устаревших или просроченных.
-    /// \~english @return A list of shared pointers to events representing outdated streams or timeout notifications
-    ///     from any of the managed contexts.
-    /// \~russian @return Список умных указателей на события, представляющие устаревшие потоки или уведомления о тайм-ауте
-    ///     из любого из управляемых контекстов.
-    virtual std::list<Event::TSharedPtr> checkOutdatedStreams() = 0;
+    virtual void
+        createContext (IStream::TSharedPtr const &event, IProtocol::TSharedPtr const &protocol) = 0;
+    // virtual void
+    //     removeContext (IContext::TSharedPtr const &context) = 0;
+    virtual IContext::TSharedPtr
+        acquireContext(Event::TSharedPtr const &event, IMultiplexer::TSharedPtr const &multiplexer) = 0;
+    virtual std::list<Event::TSharedPtr>
+        releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) = 0;
+    virtual std::list<Event::TSharedPtr>
+        checkOutdatedStreams() = 0;
 };
 
 

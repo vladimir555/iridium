@@ -13,14 +13,7 @@
 namespace iridium::io::implementation {
 
 
-/// \~english @brief Concrete implementation of the `IPipe` interface.
-///     A `CPipe` acts as a conduit, typically between a logical stream (represented by its reader/writer)
-///     and a physical or multiplexed stream (represented by the reader/writer set via the `set` method).
-///     It can buffer data and handles the transmission of data based on events.
-/// \~russian @brief Конкретная реализация интерфейса `IPipe`.
-///     `CPipe` действует как канал, обычно между логическим потоком (представленным его читателем/писателем)
-///     и физическим или мультиплексированным потоком (представленным читателем/писателем, установленным через метод `set`).
-///     Он может буферизировать данные и обрабатывает передачу данных на основе событий.
+// todo: rm, deprecated
 class CPipe: public IPipe {
 public:
     DEFINE_CREATE(CPipe)

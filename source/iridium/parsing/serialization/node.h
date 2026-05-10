@@ -21,8 +21,7 @@ namespace iridium::parsing::serialization {
 
 
 // todo: copy constructor; rm TType; fix List property name
-/// \~english @brief A view class for a node with a specific value type. Provides a convenient way to access and modify node values.
-/// \~russian @brief Класс-представление для узла с определенным типом значения. Предоставляет удобный способ доступа и изменения значений узла.
+// todo: copy-on-write (cow)
 template<typename TValue>
 class NodeView {
 public:
@@ -80,6 +79,7 @@ public:
          std::string        const &name);
    ~NodeView() = default;
     INode::TSharedPtr       getNode() const;
+
     INode::TSharedPtr       m_node;
     std::string             m_path;
 
@@ -276,9 +276,8 @@ NodeViewList<TNodeView>::NodeViewList(NodeView<void> const * const parent, std::
     m_name  (name)
 {
     if (parent->m_node) {
-        for (auto const &i: *parent->m_node)
-            if (i->getName() == name)
-                m_nodes.push_back(TNodeView(i, parent->m_path));
+        for (auto const &i: parent->m_node->getChilds(name))
+            m_nodes.push_back(TNodeView(i, parent->m_path));
     }
 }
 
@@ -389,9 +388,9 @@ std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode co
 #define DEFINE_ROOT_NODE_BEGIN_2(class_name, naming_strategy_) \
     struct T##class_name: protected iridium::parsing::serialization::NodeView<void> { \
         static iridium::parsing::serialization::TNamingStrategyCPPToNode constexpr naming_strategy = naming_strategy_; \
-        T##class_name(iridium::parsing::INode::TConstSharedPtr const &node): \
+        T##class_name(iridium::parsing::INode::TSharedPtr const &node_): \
             iridium::parsing::serialization::NodeView<void> \
-                (node->clone(), iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
+                (node_, iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \
         T##class_name(): \
             iridium::parsing::serialization::NodeView<void> \
                 (iridium::parsing::serialization::convertNameCPPToNode(#class_name, naming_strategy)) {} \

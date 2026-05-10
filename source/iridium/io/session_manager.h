@@ -21,16 +21,7 @@
 namespace iridium::io {
 
 
-/// \~english @brief Interface for managing communication sessions.
-///     A session manager is responsible for overseeing the lifecycle of individual sessions,
-///     which typically involve an I/O stream (or stream port) and a specific protocol handler.
-///     It inherits from `IInitializable`, suggesting that the manager itself might require
-///     an initialization step before it can manage sessions.
-/// \~russian @brief Интерфейс для управления сессиями обмена данными.
-///     Менеджер сессий отвечает за контроль жизненного цикла отдельных сессий,
-///     которые обычно включают поток ввода-вывода (или порт потока) и определенный обработчик протокола.
-///     Наследуется от `IInitializable`, что предполагает, что сам менеджер может требовать
-///     этапа инициализации перед тем, как сможет управлять сессиями.
+// todo: rm, deprecated
 class ISessionManager: public pattern::IInitializable {
 public:
     /// \~english @brief Macro used to define common interface elements (e.g., virtual destructor).

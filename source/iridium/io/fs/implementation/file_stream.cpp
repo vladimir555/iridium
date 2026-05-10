@@ -34,7 +34,7 @@ Buffer::TSharedPtr CFileStream::read(size_t const &size) {
     if (!m_file)
         throw std::runtime_error("file stream '" + m_file_name + "' not initialized"); // ----->
 
-    auto buffer = Buffer::create(size, 0);
+    auto buffer = Buffer::create(size, static_cast<uint8_t>(0));
     auto count  = freadInternal(buffer->data(), 1, buffer->size(), m_file);
 
     if (count == 0)
@@ -131,10 +131,15 @@ void CFileStream::finalize() {
 }
 
 
-std::list<uintptr_t> CFileStream::getHandles() const {
-    if (m_file)
-        return std::list<uintptr_t>{ static_cast<uintptr_t>(getFD(m_file)) }; // ----->
-    else
+IStream::TMapHandleTypeIdent CFileStream::getHandles() const {
+    if (m_file) {
+        TMapHandleTypeIdent map_handle_type_ident;
+        if (m_open_mode == TOpenMode::READ)
+            map_handle_type_ident[THandleType::READER] = static_cast<uintptr_t>(getFD(m_file));
+        if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
+            map_handle_type_ident[THandleType::WRITER] = static_cast<uintptr_t>(getFD(m_file));
+        return map_handle_type_ident; // ----->
+    } else
         return {}; // ----->
 }
 

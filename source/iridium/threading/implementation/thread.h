@@ -46,7 +46,7 @@ public:
     CThread(
         std::string const &name,
         IRunnable::TSharedPtr const &runnuble,
-        std::chrono::nanoseconds const &timeout = DEFAULT_TIMEOUT);
+        std::chrono::system_clock::duration const &timeout = DEFAULT_TIMEOUT);
     virtual ~CThread();
 
     void initialize() override;
@@ -90,9 +90,7 @@ private:
     /// \~russian @brief Очередь, используемая статическим методом `run` для передачи статуса/ошибок остановки обратно в `finalize()`.
     IAsyncQueue<std::string>::TSharedPtr
         m_error_queue_stop;
-    /// \~english @brief Timeout duration for operations like waiting for thread start/stop signals.
-    /// \~russian @brief Продолжительность тайм-аута для операций, таких как ожидание сигналов запуска/остановки потока.
-    std::chrono::nanoseconds const
+    std::chrono::system_clock::duration const
         m_timeout;
 };
 

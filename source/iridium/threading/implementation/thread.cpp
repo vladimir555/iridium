@@ -23,7 +23,7 @@ namespace iridium::threading::implementation {
 std::chrono::seconds const CThread::DEFAULT_TIMEOUT(30);
 
 
-CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::nanoseconds const &timeout)
+CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std::chrono::system_clock::duration const &timeout)
 :
     m_name              (name),
     m_runnuble          (assertExists(runnuble, "thread '" + name + "' creation error: runnuble is null")),
@@ -37,7 +37,13 @@ CThread::CThread(string const &name, IRunnable::TSharedPtr const &runnuble, std:
 CThread::~CThread() {
     if (m_is_running) {
         std::cerr << "FATAL: destroying thread '" << m_name << "' without finalization" << std::endl;
-        finalize();
+        try {
+            finalize();
+        } catch (std::exception const &e) {
+            std::cerr << "FATAL: thread " << m_name << " destroing error: " << e.what() << std::endl;
+        } catch (...) {
+            std::cerr << "FATAL: thread " << m_name << " destroing error: unknown exception" << std::endl;;
+        }
     }
 }
 
@@ -48,7 +54,13 @@ void CThread::initialize() {
 
     m_runnuble->initialize();
     m_is_running = true;
-    m_thread = std::make_shared<thread>(run, m_name, m_runnuble, m_error_queue_start, m_error_queue_stop, &m_is_running);
+    m_thread = std::make_shared<thread>(
+        run,
+        m_name,
+        m_runnuble,
+        m_error_queue_start,
+        m_error_queue_stop,
+       &m_is_running);
 
     string error;
 
@@ -141,7 +153,7 @@ string CThread::checkErrorQueue(IAsyncQueuePopper<std::string>::TSharedPtr const
     auto errors = error_queue->pop(m_timeout);
 
     if (errors.empty())
-        throw std::runtime_error("timeout: " + convert<string>(m_timeout)); // ----->
+        throw std::runtime_error("timeout " + convert<string>(m_timeout)); // ----->
 
     string error_message;
 

@@ -54,7 +54,13 @@ CPostgresConnector::CPostgresConnector(config::TDatebase const &config)
 {}
 
 
-CPostgresConnector::~CPostgresConnector() {}
+CPostgresConnector::~CPostgresConnector() {
+}
+
+
+void handlePostgresMessage(void *, PGresult const *result) {
+    LOGD << string(PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY));
+}
 
 
 void CPostgresConnector::initialize() {

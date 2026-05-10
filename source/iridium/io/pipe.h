@@ -14,10 +14,7 @@
 namespace iridium::io {
 
 
-/// \~english @brief Interface for accessing the reader and writer streams of a pipe-like structure.
-///     Provides methods to get and set the underlying stream components that handle reading and writing.
-/// \~russian @brief Интерфейс для доступа к потокам чтения и записи каналоподобной структуры.
-///     Предоставляет методы для получения и установки базовых потоковых компонентов, которые обрабатывают чтение и запись.
+// todo: rm, deprecated
 class IPipeStreams {
 public:
     /// \~english @brief Macro used to define common interface elements (e.g., virtual destructor).

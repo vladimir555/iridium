@@ -16,14 +16,7 @@
 namespace iridium::io {
 
 
-/// \~english @brief Interface for an I/O multiplexer.
-/// \~english @details An I/O multiplexer monitors multiple I/O streams (e.g., sockets, file descriptors)
-/// \~english and waits for one or more of them to become ready for I/O operations (like read or write).
-/// \~english This is a central component in scalable, non-blocking I/O architectures.
-/// \~russian @brief Интерфейс для мультиплексора ввода-вывода.
-/// \~russian @details Мультиплексор ввода-вывода отслеживает несколько потоков ввода-вывода (например, сокеты, файловые дескрипторы)
-/// \~russian и ожидает, пока один или несколько из них станут готовы для выполнения операций ввода-вывода (например, чтения или записи).
-/// \~russian Это центральный компонент в масштабируемых, неблокирующих архитектурах ввода-вывода.
+// todo: rm, deprecated
 class IMultiplexer: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IMultiplexer)
@@ -33,6 +26,7 @@ public:
     virtual void subscribe  (IStream::TSharedPtr const &stream) = 0;
     virtual void unsubscribe(IStream::TSharedPtr const &stream) = 0;
     virtual void wake(Event::TSharedPtr const &event) = 0;
+    virtual void wake(std::list<Event::TSharedPtr> const &events) = 0;
 };
 
 

@@ -205,6 +205,7 @@ struct TContainerHasSizeMethod<T, std::void_t<decltype(std::declval<T>().size())
 template<typename T, typename TException>
 [[nodiscard]] std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exception) {
     static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
+    static_assert(std::is_base_of_v<std::exception, TException>, "TException must inherit from std::exception");
 
     auto values_size = values.size();
     if (values_size == size) {
@@ -237,37 +238,35 @@ template<typename T>
 }
 
 
-/// \~english @brief Asserts that a container has exactly one element, throwing a custom exception if it does not.
-/// \~russian @brief Утверждает, что контейнер содержит ровно один элемент, и выбрасывает пользовательское исключение, если это не так.
-/// \~english @tparam T The type of the container.
-/// \~russian @tparam T Тип контейнера.
-/// \~english @tparam TException The type of the exception to throw.
-/// \~russian @tparam TException Тип выбрасываемого исключения.
-/// \~english @param values The container to check.
-/// \~russian @param values Контейнер для проверки.
-/// \~english @param exception The exception to throw if the size is not 1.
-/// \~russian @param exception Исключение, которое будет выброшено, если размер не равен 1.
-/// \~english @return The original container.
-/// \~russian @return Исходный контейнер.
-template<typename T, typename TException>
-[[nodiscard]] std::decay_t<T> assertOne(T &&values, TException const &exception) {
-    return assertSize(std::forward<T>(values), 1, exception);
+template<typename T>
+[[nodiscard]] std::decay_t<T> assertSize(T &&values, size_t const &size, char const * const error) {
+    return assertSize(std::forward<T>(values), size, std::string(error));
 }
 
 
-/// \~english @brief Asserts that a container has exactly one element, throwing a `std::runtime_error` if it does not.
-/// \~russian @brief Утверждает, что контейнер содержит ровно один элемент, и выбрасывает `std::runtime_error`, если это не так.
-/// \~english @tparam T The type of the container.
-/// \~russian @tparam T Тип контейнера.
-/// \~english @param values The container to check.
-/// \~russian @param values Контейнер для проверки.
-/// \~english @param error The error message.
-/// \~russian @param error Сообщение об ошибке.
-/// \~english @return The original container.
-/// \~russian @return Исходный контейнер.
-template<typename T>
-[[nodiscard]] std::decay_t<T> assertOne(T &&values, std::string const &error) {
-    return assertOne(std::forward<T>(values), std::runtime_error(error));
+template<typename TContainer, typename TException>
+typename TContainer::value_type
+assertOne(TContainer const &values, TException const &exception) {
+    static_assert(std::is_base_of_v<std::exception, TException>, "TException must inherit from std::exception");
+
+    if (values.size() == 1)
+        return values.front(); // ----->
+    else
+        throw exception; // ----->
+}
+
+
+template<typename TContainer>
+typename TContainer::value_type
+assertOne(TContainer const &values, std::string const &error) {
+    return assertOne(values, std::runtime_error(error));
+}
+
+
+template<typename TContainer>
+typename TContainer::value_type
+assertOne(TContainer const &values, char const * const error) {
+    return assertOne(values, std::runtime_error(error));
 }
 
 

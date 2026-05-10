@@ -14,7 +14,7 @@ namespace iridium::io::implementation {
 
 
 size_t const CPipe::DEFAULT_BUFFER_SIZE  = 248;
-size_t const CPipe::DEFAULT_BUFFER_COUNT = 8;
+size_t const CPipe::DEFAULT_BUFFER_COUNT = 64;  // Increased from 8 to handle larger output (248*64 = 15.8KB max)
 
 
 CPipe::CPipe()
@@ -119,21 +119,21 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
 //       (!m_reader->getURI() ||
 //        (m_reader->getID()  == event->stream->getID() &&
 //        (checkOneOf(event->operation, Event::TOperation::READ, Event::TOperation::CLOSE, Event::TOperation::TIMEOUT)))))
-    if ( m_buffers.size() < m_buffer_count &&
+    if  (m_buffers.size() < m_buffer_count &&
         (m_reader->getHandles().empty() ||
         (m_reader == event->stream &&
         checkOneOf(
             event->operation,
             Event::TOperation::READ,
             Event::TOperation::CLOSE,
-            Event::TOperation::EOF_,
+//            Event::TOperation::EOF_,
             Event::TOperation::TIMEOUT)))
     ) {
         //LOGT << "do read";
         auto buffer = m_reader->read(m_buffer_size);
 
         //LOGT << "read buffer size: " << buffer->size();
-        if  (buffer && buffer->size() > 0) {
+        if  (buffer && !buffer->empty()) {
             m_buffers.push_back(buffer);
             result |= true;
             //LOGT << "read " << buffer->size();
@@ -152,16 +152,25 @@ bool CPipe::transmit(Event::TConstSharedPtr const &event) {
         checkOneOf(
             event->operation,
             Event::TOperation::WRITE,
-            Event::TOperation::TIMEOUT)))
-    ) {
+            Event::TOperation::TIMEOUT))))
+    {
 //        LOGT << "do write";
         auto size =  m_writer->write(m_buffers.front());
         result |= size > 0;
-        if  (size == m_buffers.front()->size()) {
+
+        if (!result)
+            return false; // ----->
+
+        if (size == m_buffers.front()->size()) {
             m_buffers.pop_front();
         } else {
-            Buffer::TSharedPtr buffer = m_buffers.front();
-            buffer->assign(buffer->begin() + size, buffer->end());
+            // todo: optimize
+            auto buffer = m_buffers.front();
+            m_buffers.pop_front();
+            if (buffer->size() > size) {
+                buffer = Buffer::create(buffer->begin() + size, buffer->end());
+                m_buffers.push_front(buffer);
+            }
         }
 
 //        LOGT << "wrote " << size;

@@ -23,49 +23,6 @@
 namespace iridium::io::implementation {
 
 
-// The commented-out section below appears to be design notes or examples for different I/O models (kevent, epoll, iocp)
-// and how they might interact with session and stream states. It outlines potential event flows and state transitions.
-// todo:
-// fsm: kevent, epoll, iocp
-// session: fsm state + pipes
-// stream statuses:
-// open,    begin   -> fsm
-// open,    end     -> fsm -> protocol -> add, rm, modify pipes
-// read,    begin   -> fsm.
-// read,    end     -> fsm -> protocol
-// write,   begin   -> fsm
-// write,   end     -> fsm -> protocol
-// close,   begin   -> fsm
-// close,   end     -> fsm -> protocol
-
-// example(kevent or epoll):
-// stream -> manage -> event(open, begin) -> multiplexer(subscribe) +
-// worker(initialize) -> event(open, end) ->
-// worker(protocol) -> pipe(event(read, begin)) ->
-// worker(read) -> event(read, end) -> if read size > 0 then repeat event(read, begin) + worker(protocol) -> context still valid, no event
-// ...
-// kevent -> event(read, begin) -> repeat worker(read) or event(timeout, unknown) -> worker(protocol) ->
-// ...
-// worker(protocol) -> not valid context -> event(close, begin) ->
-// unsubscribe ->
-// kevent -> event(close, end) ->
-// worker(finalize + remove context)
-
-// example(iocp):
-// stream -> manage -> event(open, begin) ->
-// worker(initialize) -> event(open, end) ->
-// worker(protocol) -> pipe(event(read, begin)) ->
-// worker(read) -> none
-// iocp -> event(read, end) -> if size > 0 then repeat + worker(protocol) ->
-// worker(protocol) -> not valid context -> event(close, begin) ->
-
-
-/// \~english @brief Concrete implementation of `ISessionManager`.
-///     Manages I/O sessions, typically for network connections. It integrates a multiplexer for handling multiple streams,
-///     a context manager for associating state with streams, and worker threads for processing events and I/O operations.
-/// \~russian @brief Конкретная реализация `ISessionManager`.
-///     Управляет сеансами ввода-вывода, обычно для сетевых подключений. Интегрирует мультиплексор для обработки нескольких потоков,
-///     менеджер контекстов для связывания состояния с потоками и рабочие потоки для обработки событий и операций ввода-вывода.
 class CSessionManager: public ISessionManager {
 public:
     DEFINE_IMPLEMENTATION(CSessionManager);
@@ -139,41 +96,6 @@ private:
         IMultiplexer::TSharedPtr    m_multiplexer;
     };
 
-    /// \~english @brief Runnable handler for repeating events, potentially for retries or scheduled tasks.
-    ///     (The current implementation of `run` is empty, suggesting it's a placeholder or its logic is elsewhere).
-    /// \~russian @brief Исполняемый обработчик для повторения событий, возможно, для повторных попыток или запланированных задач.
-    ///     (Текущая реализация `run` пуста, что предполагает, что это заглушка или ее логика находится в другом месте).
-    class CEventRepeaterHandler: public threading::IRunnable {
-    public:
-        DEFINE_IMPLEMENTATION(CEventRepeaterHandler)
-
-        CEventRepeaterHandler(IContextWorker::TSharedPtr const &context_worker);
-
-        /// \~english @brief Initializes the handler. (Currently a no-op).
-        /// \~russian @brief Инициализирует обработчик. (В настоящее время не выполняет никаких действий).
-        void initialize() override;
-        /// \~english @brief Finalizes the handler. (Currently a no-op).
-        /// \~russian @brief Завершает работу обработчика. (В настоящее время не выполняет никаких действий).
-        void finalize() override;
-
-        /// \~english @brief The main run loop for the event repeater thread. (Currently empty).
-        /// \~russian @brief Основной цикл выполнения для потока повторителя событий. (В настоящее время пуст).
-        /// \~english @param is_running Atomic boolean to control the loop's execution.
-        /// \~russian @param is_running Атомарный булев флаг для управления выполнением цикла.
-        void run(std::atomic<bool> &is_running) override;
-    private:
-        /// \~english @brief Worker to which repeated events would be sent.
-        /// \~russian @brief Обработчик, которому будут отправляться повторенные события.
-        IContextWorker::TSharedPtr
-            m_context_worker;
-    };
-
-    /// \~english @brief Handler for processing events within a context worker.
-    ///     This class implements the `IContextWorker::IHandler` interface, providing the logic
-    ///     to acquire, update/transmit on, and release contexts based on incoming events.
-    /// \~russian @brief Обработчик для обработки событий в рамках обработчика контекстов.
-    ///     Этот класс реализует интерфейс `IContextWorker::IHandler`, предоставляя логику
-    ///     для получения, обновления/передачи и освобождения контекстов на основе входящих событий.
     class CContextWorkerHandler: public IContextWorker::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CContextWorkerHandler)
@@ -214,8 +136,8 @@ private:
             m_multiplexer;
     };
 
-    /// \~english @brief The I/O multiplexer (e.g., epoll, select) used to wait for events on multiple streams.
-    /// \~russian @brief Мультиплексор ввода-вывода (например, epoll, select), используемый для ожидания событий на нескольких потоках.
+    threading::IAsyncQueue<int>::TSharedPtr
+        m_finalization_queue;
     IMultiplexer::TSharedPtr
         m_multiplexer;
     /// \~english @brief Manages all active contexts, associating them with streams.
@@ -234,10 +156,6 @@ private:
     /// \~russian @brief Поток, выполняющий цикл мультиплексора (`CMultiplexerThreadHandler`).
     threading::IThread::TSharedPtr
         m_multiplexer_thread;
-    /// \~english @brief Thread that runs the event repeater logic (`CEventRepeaterHandler`).
-    /// \~russian @brief Поток, выполняющий логику повторителя событий (`CEventRepeaterHandler`).
-    threading::IThread::TSharedPtr
-        m_event_repeater_thread;
 };
 
 

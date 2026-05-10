@@ -14,6 +14,7 @@
 using iridium::convertion::convert;
 
 
+#include "iridium/logging/logger.h"
 namespace iridium::io::implementation::platform::unix_ {
 
 
@@ -22,10 +23,11 @@ int const CStreamPort::YES = CStreamPort::initSignal();
 
 CStreamPort::CStreamPort(URI const &uri)
 :
-    m_fd_reader     (0),
-    m_fd_writer     (0),
-    m_uri           (URI::create(uri)),
-    m_is_opened     (false)
+    m_fd_reader (0),
+    m_fd_writer (0),
+    m_pid       (0),
+    m_uri       (URI::create(uri)),
+    m_is_opened (false)
 {}
 
 
@@ -73,10 +75,14 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
     auto buffer = Buffer::create(size);
     auto result = ::read(m_fd_reader, buffer->data(), size - 1);
 
+    // LOGT << result << " = ::read(" << m_fd_reader << ", '" << buffer << "', " << size - 1 << ");";
+    // LOGT << result << " = ::read(" << m_fd_reader << ", buffer->data(), " << size - 1 << ");";
+
     if (result < 0) {
-        if (errno == EAGAIN || errno == EWOULDBLOCK)
+        if (errno == EAGAIN || errno == EWOULDBLOCK) {
+            // LOGT << "(errno == EAGAIN || errno == EWOULDBLOCK)";
             return Buffer::create();
-        else
+        } else
             assertOK(result, "write error");
     }
 
@@ -101,22 +107,20 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size_) {
 }
 
 
-std::list<uintptr_t> CStreamPort::getHandles() const {
-    std::list<uintptr_t> handles;
+IStream::TMapHandleTypeIdent CStreamPort::getHandles() const {
+    TMapHandleTypeIdent
+        map_stream_type_ident;
+
+    if (m_fd_reader)
+        map_stream_type_ident[THandleType::READER] = m_fd_reader;
 
     if (m_fd_writer)
-        handles.push_back(m_fd_writer);
+        map_stream_type_ident[THandleType::WRITER] = m_fd_writer;
 
-    if (m_fd_reader && m_fd_reader != m_fd_writer)
-        handles.push_back(m_fd_reader);
+    if (m_pid)
+        map_stream_type_ident[THandleType::PID] = m_pid;
 
-//    if (handles.empty())
-//        throw std::runtime_error(
-//            "stream port get handles error: '" +
-//            (m_uri ? m_uri->getSource() : "") +
-//            "' not initialized"); // ----->
-
-    return handles; // ----->
+    return map_stream_type_ident; // ----->
 }
 
 
@@ -126,16 +130,20 @@ URI::TSharedPtr CStreamPort::getURI() const {
 
 
 void CStreamPort::setBlockingMode(bool const &is_blocking) {
-    for (auto const &fd: { static_cast<int>(m_fd_reader), static_cast<int>(m_fd_writer) }) {
+    auto setBlockingFlags = [this, is_blocking] (uintptr_t fd) {
         if (!fd)
-            continue; // <---
-        auto flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
-        if (is_blocking)
-            flags &= !O_NONBLOCK;
-        else
-            flags |=  O_NONBLOCK;
+            return; // ----->
+
+        int flags = assertOK(fcntl(fd, F_GETFL, 0), "get flag error, fd " + convert<std::string>(fd));
+        is_blocking ? (flags &= ~O_NONBLOCK) : (flags |= O_NONBLOCK);
         assertOK(fcntl(fd, F_SETFL, flags), "set flag error, fd " + convert<std::string>(fd));
-    }
+    };
+
+    setBlockingFlags(m_fd_writer);
+
+    if (m_fd_reader != m_fd_writer)
+        setBlockingFlags(m_fd_reader);
+
     m_is_blocking_mode = is_blocking;
 }
 
@@ -150,8 +158,13 @@ void CStreamPort::closeFDs() {
         m_fd_reader = 0;
     }
 
+    if (m_pid) {
+        close(m_pid);
+    }
+
     m_fd_writer = 0;
     m_fd_reader = 0;
+    m_pid       = 0;
 }
 
 

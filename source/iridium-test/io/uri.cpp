@@ -52,11 +52,16 @@ TEST(uri) {
 //    auto ipv4 = URI("http://example.org").getIPv4();
 //    auto ipv4_expected = URI("http://23.215.0.132").getIPv4();
 
-    auto ipv4 = URI("http://localhost").getIPv4();
+#ifdef WINDOWS_PLATFORM
+    auto ipv4_expected = URI("http://0.0.0.0").getIPv4();
+#else
     auto ipv4_expected = URI("http://127.0.0.1").getIPv4();
+#endif // WINDOWS_PLATFORM
 
+    auto ipv4 = URI("http://localhost").getIPv4();
     ASSERT(static_cast<bool>(ipv4));
     ASSERT(static_cast<bool>(ipv4_expected));
+
     ASSERT(*ipv4_expected, equal, *ipv4);
     ASSERT(URI("http://ya.rur").getIPv4(), std::exception);
 
@@ -64,11 +69,11 @@ TEST(uri) {
         string source =
             "process:///1/2/Debug/iridium_test "
             "run --mode=raw --print-result=json /parsing/node.cpp";
-        URI uri(source);
+        URI uri_(source);
 
-        ASSERT("/1/2/Debug/iridium_test", equal, uri.getAddress());
-        ASSERT("iridium_test", equal, uri.getHost());
-        ASSERT("run --mode=raw --print-result=json /parsing/node.cpp", equal, uri.getArguments());
+        ASSERT("/1/2/Debug/iridium_test", equal, uri_.getAddress());
+        ASSERT("iridium_test", equal, uri_.getHost());
+        ASSERT("run --mode=raw --print-result=json /parsing/node.cpp", equal, uri_.getArguments());
     }
     ASSERT(URI("postgres://user:").getHost(), std::exception);
 }

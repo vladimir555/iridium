@@ -31,7 +31,7 @@ size_t std::hash<iridium::io::Event>::operator() (iridium::io::Event const &e) c
 
     if (e.stream) {
         for (auto const &handle: e.stream->getHandles())
-            hash ^= static_cast<size_t>(handle) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            hash ^= static_cast<size_t>(handle.second) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     }
 
     hash ^= static_cast<size_t>(e.operation) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
@@ -41,15 +41,29 @@ size_t std::hash<iridium::io::Event>::operator() (iridium::io::Event const &e) c
 }
 
 
-size_t std::hash<iridium::io::Event::TSharedPtr>::operator() (iridium::io::Event::TSharedPtr const &e) const {
-    size_t hash = 0;
-
-    if (e)
-        return std::hash<iridium::io::Event>()(*e);
-
-    return hash; // ----->
+size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
+    (iridium::io::Event::TSharedPtr const &e) const
+{
+    return e ? std::hash<iridium::io::Event>()(*e) : 0; // ----->
 }
+
+
+namespace {
+
+
+std::string convertToString(iridium::io::Event const &event) {
+    using iridium::convertion::convert;
+    return
+          "{ "   + convert<std::string>(event.stream)
+        + ", "   + convert<std::string>(event.operation)
+        + ", "   + convert<std::string>(event.status)
+        +  " }";
+}
+
+
+} // unnamed
 
 
 IMPLEMENT_ENUM(iridium::io::Event::TOperation)
 IMPLEMENT_ENUM(iridium::io::Event::TStatus)
+IMPLEMENT_CONVERT(std::string, iridium::io::Event, convertToString)

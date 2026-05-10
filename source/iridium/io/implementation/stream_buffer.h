@@ -35,12 +35,10 @@ protected:
     /// \~russian @brief Завершает работу потока. (В настоящее время не выполняет никаких действий для потоков на основе буфера).
     void finalize()   override;
 
-    std::list<uintptr_t>    getHandles()    const override;
-    /// \~english @brief Gets the URI for this stream. Not typically applicable for memory buffer streams.
-    /// \~russian @brief Получает URI для этого потока. Обычно неприменимо для потоков буфера памяти.
-    /// \~english @return `nullptr`, as generic buffer streams don't have a URI.
-    /// \~russian @return `nullptr`, так как у общих буферных потоков нет URI.
-    URI::TSharedPtr         getURI()        const override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
 
     /// \~english @brief The underlying shared memory buffer used by this stream.
     /// \~russian @brief Нижележащий разделяемый буфер памяти, используемый этим потоком.

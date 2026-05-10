@@ -29,32 +29,17 @@ public:
     ///     Потоки должны быть добавлены с помощью метода `add()`.
     CStreamReaderList();
 
-    /// \~english @brief Initializes all managed stream readers.
-    /// \~russian @brief Инициализирует все управляемые читатели потоков.
-    void    initialize()    override;
-    /// \~english @brief Finalizes all managed stream readers.
-    /// \~russian @brief Завершает работу всех управляемых читателей потоков.
-    void    finalize()      override;
+    void initialize() override;
+    void finalize() override;
 
-    Buffer::TSharedPtr      read(size_t const &size) override;
+    Buffer::TSharedPtr
+        read(size_t const &size) override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
 
-    /// \~english @brief Gets the OS handles of the currently active stream reader.
-    /// \~russian @brief Получает дескрипторы ОС текущего активного читателя потока.
-    /// \~english @return A list of OS handles from the current stream, or an empty list if no stream is active or the current stream has no handles.
-    /// \~russian @return Список дескрипторов ОС из текущего потока или пустой список, если ни один поток не активен или текущий поток не имеет дескрипторов.
-    std::list<uintptr_t>    getHandles() const override;
-
-    /// \~english @brief Gets the URI of the currently active stream reader.
-    /// \~russian @brief Получает URI текущего активного читателя потока.
-    /// \~english @return The URI of the current stream, or `nullptr` if no stream is active or the current stream has no URI.
-    /// \~russian @return URI текущего потока или `nullptr`, если ни один поток не активен или текущий поток не имеет URI.
-    URI::TSharedPtr         getURI() const override;
-
-    /// \~english @brief Adds a stream reader to the end of the list of streams to be read.
-    /// \~russian @brief Добавляет читателя потока в конец списка потоков для чтения.
-    /// \~english @param stream_reader The stream reader to add.
-    /// \~russian @param stream_reader Читатель потока для добавления.
-    void    add(IStreamReader::TSharedPtr const &stream_reader);
+    void add(IStreamReader::TSharedPtr const &stream_reader);
 
 private:
     /// \~english @brief The list of stream readers managed by this instance.

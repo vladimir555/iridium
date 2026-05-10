@@ -23,61 +23,55 @@
 namespace iridium::io {
 
 
-/// \~english @brief A Buffer class for handling raw binary data, inheriting from std::vector<uint8_t>.
-/// \~english @details Provides various constructors to create buffers from strings or other buffers, and utility functions for data manipulation, such as checking suffixes.
-/// \~russian @brief Класс Buffer для работы с сырыми двоичными данными, унаследованный от std::vector<uint8_t>.
-/// \~russian @details Предоставляет различные конструкторы для создания буферов из строк или других буферов, а также вспомогательные функции для манипулирования данными, например, для проверки суффиксов.
-class Buffer: public std::vector<uint8_t> {
+//todo: maybe rm inheritance
+class Buffer: private std::vector<uint8_t> {
 public:
     DEFINE_CREATE(Buffer)
 
-    /// \~english @brief Default constructor.
-    /// \~russian @brief Конструктор по умолчанию.
     Buffer() = default;
-
-    /// \~english @brief Constructs a buffer from a C-style string.
-    /// \~russian @brief Конструирует буфер из строки в стиле C.
-    Buffer(char const * const str);
-
-    /// \~english @brief Constructs a buffer from a `std::string`.
-    /// \~russian @brief Конструирует буфер из `std::string`.
-    Buffer(std::string const &str);
-
-    /// \~english @brief Constructs a buffer from a list of shared pointers to other buffers.
-    /// \~russian @brief Конструирует буфер из списка умных указателей на другие буферы.
+    Buffer(char const *s);
+    Buffer(std::string const &s);
     Buffer(std::list<Buffer::TSharedPtr> const &buffers);
 
     /// \~english @brief Constructs a buffer from a variadic list of arguments.
     /// \~russian @brief Конструирует буфер из вариативного списка аргументов.
     template<typename ... TArgs>
-    Buffer(TArgs ... args);
+    Buffer(TArgs && ... args);
+
+    using std::vector<uint8_t>::size;
+    using std::vector<uint8_t>::empty;
+    using std::vector<uint8_t>::clear;
+    using std::vector<uint8_t>::resize;
+    using std::vector<uint8_t>::data;
+    using std::vector<uint8_t>::begin;
+    using std::vector<uint8_t>::end;
+    using std::vector<uint8_t>::cbegin;
+    using std::vector<uint8_t>::cend;
+    using std::vector<uint8_t>::rbegin;
+    using std::vector<uint8_t>::rend;
+    using std::vector<uint8_t>::insert;
+    using std::vector<uint8_t>::operator[];
+    using std::vector<uint8_t>::at;
+    using std::vector<uint8_t>::front;
+    using std::vector<uint8_t>::back;
 
     /// \~english @brief Checks if the buffer ends with a given suffix, optionally skipping some characters.
     /// \~russian @brief Проверяет, заканчивается ли буфер заданным суффиксом, опционально пропуская некоторые символы.
     bool checkSuffixEqual(std::string const &suffix, std::string const &skip = "") const;
-
-    /// \~english @brief Checks if the buffer ends with a given suffix.
-    /// \~russian @brief Проверяет, заканчивается ли буфер заданным суффиксом.
-    bool checkSuffixEqual(uint8_t const * const suffix, size_t const &size) const;
-
-    /// \~english @brief Checks if the buffer ends with a given suffix.
-    /// \~russian @brief Проверяет, заканчивается ли буфер заданным суффиксом.
+    bool checkSuffixEqual(uint8_t const *suffix, size_t const &size) const;
     bool checkSuffixEqual(std::vector<uint8_t> const &suffix) const;
-
-    /// \~english @brief Appends another buffer to the end of this one.
-    /// \~russian @brief Добавляет другой буфер в конец этого.
-    void emplace_back(TSharedPtr const &);
+    void emplace_back(Buffer::TSharedPtr const &buffer);
 };
 
 
 template<typename ... TArgs>
-Buffer::Buffer(TArgs ... args)
+Buffer::Buffer(TArgs && ... args)
 :
-    std::vector<uint8_t>(args ...)
+    std::vector<uint8_t>(std::forward<TArgs>(args) ...)
 {}
 
 
-} // namespace iridium::io
+} // iridium::io
 
 
 DEFINE_CONVERT(iridium::io::Buffer, std::string)

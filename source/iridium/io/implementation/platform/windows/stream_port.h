@@ -8,9 +8,19 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/io/stream.h"
+#include "iridium/items.h"
 #include "iridium/io/uri.h"
+#include "iridium/io/stream.h"
+#include "iridium/convertion/convert.h"
 #include "iridium/pattern/non_copyable.h"
+
+#include <cstring>
+#include <string>
+#include <atomic>
+#include <stdexcept>
+
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 
 
 namespace iridium::io::implementation::platform {
@@ -27,59 +37,60 @@ namespace iridium::io::implementation::platform {
 ///     Класс является некопируемым. Особенности его поведения (например, для сокетов, файлов или каналов)
 ///     будут определяться деталями его конкретной реализации в соответствующем .cpp файле или производных классах.
 class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
- public:
-	DEFINE_IMPLEMENTATION(CStreamPort)
-	/// \~english @brief Constructs a `CStreamPort` with a given URI.
-	///     The URI is stored for later use, e.g., to establish a connection in `initialize()`.
-	/// \~russian @brief Конструирует `CStreamPort` с заданным URI.
-	///     URI сохраняется для последующего использования, например, для установления соединения в `initialize()`.
-	/// \~english @param uri The URI associated with this stream port (e.g., "tcp://host:port", "file:///path").
-	/// \~russian @param uri URI, связанный с этим потоковым портом (например, "tcp://host:port", "file:///path").
-	CStreamPort(URI const &uri);
+protected:
+    CStreamPort(URI const &uri);
+    virtual ~CStreamPort() = default;
 
-	/// \~english @brief Initializes the stream port.
-	///     This method should perform any setup required to make the stream usable,
-	///     such as opening a file, creating a socket, or connecting to a remote host.
-	///     The actual operations depend on the concrete implementation.
-	/// \~russian @brief Инициализирует потоковый порт.
-	///     Этот метод должен выполнять любую настройку, необходимую для того, чтобы сделать поток пригодным для использования,
-	///     например, открытие файла, создание сокета или подключение к удаленному хосту.
-	///     Фактические операции зависят от конкретной реализации.
-	void initialize() override;
+public:
+    virtual void
+        initialize() override = 0;
+    virtual void
+        finalize() override = 0;
+    size_t
+        write(Buffer::TSharedPtr const &buffer) override;
+    Buffer::TSharedPtr
+        read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
 
-    /// \~english @brief Finalizes the stream port.
-    ///     This method should perform any cleanup required, such as closing handles or releasing resources.
-    /// \~russian @brief Завершает работу потокового порта.
-    ///     Этот метод должен выполнять любую необходимую очистку, такую как закрытие дескрипторов или освобождение ресурсов.
-    void finalize() override;
+protected:
+    DWORD
+        assertOK(bool const &is_ok, std::string const &message);
+    void
+        setBlockingMode (bool const &is_blocking);
+    void
+        closeFDs();
 
-	/// \~english @brief Gets the list of underlying OS handles (e.g., `HANDLE` on Windows) for this stream.
-	/// \~russian @brief Получает список базовых дескрипторов ОС (например, `HANDLE` в Windows) для этого потока.
-	/// \~english @return A list of `uintptr_t` representing the OS handles. The content depends on the specific stream type and state.
-	/// \~russian @return Список `uintptr_t`, представляющий дескрипторы ОС. Содержимое зависит от конкретного типа и состояния потока.
-	std::list<uintptr_t> getHandles() const override;
+    static int
+        initSignal();
 
-	/// \~english @brief Reads data from the stream into a new buffer.
-	/// \~russian @brief Читает данные из потока в новый буфер.
-	/// \~english @param size The maximum number of bytes to read. Defaults to `DEFAULT_BUFFER_SIZE`.
-	/// \~russian @param size Максимальное количество байт для чтения. По умолчанию `DEFAULT_BUFFER_SIZE`.
-	/// \~english @return A shared pointer to a buffer containing the data read. Behavior on EOF or error depends on implementation.
-	/// \~russian @return Умный указатель на буфер, содержащий прочитанные данные. Поведение при EOF или ошибке зависит от реализации.
-	Buffer::TSharedPtr read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
+    HANDLE
+        m_reader_fd;
+    HANDLE
+        m_writer_fd;
+    HANDLE
+        m_pid;
 
-    /// \~english @brief Writes data from the provided buffer to the stream.
-    /// \~russian @brief Записывает данные из предоставленного буфера в поток.
-    /// \~english @param buffer The buffer containing data to write.
-    /// \~russian @param buffer Буфер, содержащий данные для записи.
-    /// \~english @return The number of bytes actually written. Behavior on error depends on implementation.
-    /// \~russian @return Количество фактически записанных байт. Поведение при ошибке зависит от реализации.
-    size_t write(Buffer::TSharedPtr const &buffer) override;
-private:
-    // TODO: Add Doxygen comments for members when they are defined and used.
-    // URI::TSharedPtr m_uri; // Expected member based on constructor
-    // HANDLE m_handle_reader; // Example of a possible member for reading
-    // HANDLE m_handle_writer; // Example of a possible member for writing
-	//HANDLE m_handle; // This was the original commented-out member
+    OVERLAPPED
+        m_reader_overlapped;
+    OVERLAPPED
+        m_writer_overlapped;
+    OVERLAPPED
+        m_pid_overlapped;
+
+    URI::TSharedPtr
+        m_uri;
+    bool
+        m_is_opened;
+    bool
+        m_is_blocking_mode;
+
+    Buffer::TSharedPtr
+        m_reader_buffer;
+    Buffer::TSharedPtr
+        m_writer_buffer;
 };
 
 

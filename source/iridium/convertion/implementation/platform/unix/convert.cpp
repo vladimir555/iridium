@@ -28,6 +28,9 @@ namespace {
 /// \~russian @brief Преобразует беззнаковое целое число в строку.
 template<typename TUInt>
 void itoaUInt(TUInt const &value_, char *buffer, uint8_t const &base) {
+    if (base < 2 || base > 64)
+        throw std::invalid_argument("convertion int error: wrong base " + std::to_string(base));
+
     TUInt value = value_;
 
     char* buffer_begin = buffer;

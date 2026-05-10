@@ -1,5 +1,4 @@
 #include "tester.h"
-#include "unit_test.h"
 
 #include "iridium/logging/logger.h"
 #include "iridium/strings.h"
@@ -11,6 +10,8 @@
 
 #include "implementation/test_runner_raw.h"
 #include "implementation/test_runner_fork.h"
+
+// #include <unistd.h>
 
 
 using std::string;
@@ -56,16 +57,24 @@ struct TCmdArgs {
     /// \~russian @brief Перечисляет форматы для вывода результатов тестов.
     DEFINE_ENUM(
         TPrintResult,
-        JSON ///< \~english Print results in JSON format. \~russian Вывести результаты в формате JSON.
+        JSON,
+        CTEST_VSCODE
     );
 
-    TCommand                command;        ///< \~english The command to execute. \~russian Команда для выполнения.
-    TMode                   mode;           ///< \~english The test execution mode. \~russian Режим выполнения тестов.
-    TPrintResult            print_result;   ///< \~english The format for the output results. \~russian Формат для вывода результатов.
-    std::chrono::seconds    timeout;        ///< \~english The timeout for each test. \~russian Тайм-аут для каждого теста.
-    string                  app_name;       ///< \~english The name of the test application executable. \~russian Имя исполняемого файла тестового приложения.
-    string                  include_path;   ///< \~english The path filter to include tests. \~russian Фильтр путей для включения тестов.
-    list<string>            exclude_paths;  ///< \~english A list of path filters to exclude tests. \~russian Список фильтров путей для исключения тестов.
+    TCommand
+        command;
+    TMode
+        mode;
+    TPrintResult
+        print_result;
+    std::chrono::system_clock::duration
+        timeout;
+    string
+        app_name;
+    string
+        include_path;
+    list<string>
+        exclude_paths;
 };
 
 
@@ -84,18 +93,48 @@ IMPLEMENT_ENUM(iridium::testing::TCmdArgs::TPrintResult);
 namespace iridium::testing {
 
 
-typedef CNodeType<ITest *> CNodeTest;
+typedef CNodeType<IUnitTestCase *>
+    CNodeTest;
 
 
-void Tester::add(ITest * const test, std::string const &path_) {
+void Tester::add(
+    IUnitTestCase
+      * const  test,
+    std::string
+        const &path_,
+    size_t
+        const &line,
+    std::string
+        const &name)
+{
     auto path = path_;
     std::replace(path.begin(), path.end(), '\\', '/');
-    m_map_path_test[path] = test;
+    TEntry entry {
+        path,
+        line,
+        name
+    };
+    m_map_path_test[entry] = test;
+}
+
+
+template<typename TCmdArgEnum>
+string convertCmdArgEnumsToString() {
+    string result;
+
+    for (auto const &enum_: TCmdArgEnum::getEnums())
+        result += convert<string>(enum_) + "|";
+
+    if(!result.empty())
+        result.pop_back();
+
+    return lowerCase(replace(result, "_", "-")); // ----->
 }
 
 
 TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
     vector<string> args;
+
     for (int i = 0; i < argc; i++)
         args.push_back(argv[i]);
 
@@ -147,18 +186,31 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
             static string const MODE            = "--mode";
 
             while (i < args.size() && args[i].substr(0, 2) == "--") {
-                if (args[i].substr(0, MODE.size()) == MODE)
-                    result->mode = convert<TCmdArgs::TMode>(split(args[i], "=").back());
+                string arg_name;
+                string arg_value;
+
+                {
+                    auto arg_entry = split(args[i], "=");
+                    arg_name = arg_entry.front();
+                    if (arg_entry.size() == 2)
+                        arg_value = replace(arg_entry.back(), "-", "_");
+                }
+
+                if (arg_name == MODE)
+                    result->mode = convert<TCmdArgs::TMode>(arg_value);
                 else
-                if (args[i].substr(0, PRINT_RESULT.size()) == PRINT_RESULT)
-                    result->print_result = convert<TCmdArgs::TPrintResult>(split(args[i], "=").back());
+                if (arg_name == PRINT_RESULT)
+                    result->print_result = convert<TCmdArgs::TPrintResult>(arg_value);
                 else
-                if (args[i].substr(0, TIMEOUT.size()) == TIMEOUT)
-                    result->timeout = seconds(convert<uint64_t>(split(args[i], "=").back()));
+                if (arg_name == TIMEOUT)
+                    result->timeout = convert<std::chrono::system_clock::duration>(arg_value);
                 else
                     throw nullptr; // --->
+
                 i++;
             }
+
+            // LOGT << result->timeout;
 
             if (args.size() > 2 && i < args.size()) {
                 result->include_path = args[i];
@@ -174,19 +226,24 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
         } else
             throw nullptr; // --->
 
-        return result; // ----->
+        // return result; // ----->
     } catch (std::exception const &e) {
         LOGE << e.what();
     } catch (...) {
     }
 
-    // todo: print availabe enums
     LOGI << "\nusage:\n"
         << args[0] << " help\n"
         << args[0] << " list\n"
-        << args[0] << " run [ --mode=raw|serial|parallel ] [ --print-result=json ]"
-        << " [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]\n"
-        << "example:\n" << args[0] << " run / \n";
+        << args[0] << " run [ --mode="
+        << convertCmdArgEnumsToString<TCmdArgs::TMode>()
+        << " ] [ --print-result="
+        << convertCmdArgEnumsToString<TCmdArgs::TPrintResult>()
+        << " ] [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]\n"
+        << "example:\n"
+        << args[0] << " run / \n"
+        << args[0] << " run --timeout=12345 --mode=serial / \n"
+        << args[0] << " run --timeout=5m50s --mode=parallel / \n";
 
     return nullptr; // ----->
 }
@@ -195,11 +252,15 @@ TCmdArgs::TSharedPtr parseCommandLine(int argc, char* argv[]) {
 int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
     {
         auto config = logging::config::createDefault();
-        config.Sink.begin()->IsAsync = false;
         logging::setConfig(config);
     }
 
     try {
+        string testing_source_directory_path = main_cpp_path;
+
+        std::replace(testing_source_directory_path.begin(), testing_source_directory_path.end(), '\\', '/');
+        testing_source_directory_path = testing_source_directory_path.substr(0, testing_source_directory_path.find_last_of('/'));
+
         auto args = parseCommandLine(argc, argv);
 
         if (args) {
@@ -226,38 +287,58 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
             if (args->command == TCmdArgs::TCommand::LIST) {
 //                LOGI << getTestTree(main_cpp_path);
 
-                auto main_cpp_path_ = main_cpp_path;
-                std::replace(main_cpp_path_.begin(), main_cpp_path_.end(), '\\', '/');
-                main_cpp_path_ = main_cpp_path_.substr(0, main_cpp_path_.find_last_of('/'));
+                // auto main_cpp_path_ = main_cpp_path;
+                // std::replace(main_cpp_path_.begin(), main_cpp_path_.end(), '\\', '/');
+                // main_cpp_path_ = main_cpp_path_.substr(0, main_cpp_path_.find_last_of('/'));
 
                 string paths;
                 for (auto const &path_test: m_map_path_test)
-                    paths += "\n" + path_test.first.substr(main_cpp_path_.size());
+                    paths += "\n"
+                        + path_test.first.path.substr(testing_source_directory_path.size()) + "/"
+                        + path_test.first.name;
                 LOGI << "\n" << paths << "\n\ntotal:  " << m_map_path_test.size();
                 return 0; // ----->
             }
 
             ITestRunner::TSharedPtr test_runner;
 
-            if (args->mode == TCmdArgs::TMode::RAW)
+            if (args->mode == TCmdArgs::TMode::RAW) {
+                // using namespace iridium::logging::config;
+
+                // auto config = createDefault();
+
+                // TLogger::TSink file_sink;
+                // file_sink.Uri       = convert<string>(::getpid()) + ".log";
+                // file_sink.Type      = TLogger::TSink::TSinkType::FILE;
+                // // file_sink.Level     = iridium::logging::TEvent::TLevel::TRACE;
+                // file_sink.IsAsync   = true;
+                // config.Sink.add(file_sink);
+
+                // iridium::logging::setConfig(config);
+
                 test_runner = CTestRunnerRaw::create();
-            else
+            } else {
                 test_runner = CTestRunnerFork::create
                     (args->app_name, args->timeout, args->mode == TCmdArgs::TMode::SERIAL);
+            }
 
-            auto root   = getTestTree(main_cpp_path, args->include_path, args->exclude_paths);
+            auto root   = getTestTree(testing_source_directory_path, args->include_path, args->exclude_paths);
             auto result = test_runner->run(root);
 
             size_t failed_count = 0;
             size_t passed_count = 0;
             string errors;
 
-            for (auto const &test: result.Tests) {
-                if (test.Error.get().empty())
+            for (auto const &test_case: result.TestCases) {
+                if (test_case.Error.get().empty()) {
                     passed_count++;
-                else {
-    //                if (test.Output.get().empty())
-                    errors += "\n" + test.Path.get() + "\n" + test.Error.get() + "\n";
+                } else {
+                    size_t line = test_case.Line.get();
+                    errors += "\n" +
+                        test_case.Path.get()  + ":"  +
+                        convert<string>(line) + "/"  +
+                        test_case.Name.get()  + "\n" +
+                        test_case.Error.get() + "\n";
                     failed_count++;
                 }
             }
@@ -276,34 +357,55 @@ int Tester::run(int argc, char* argv[], std::string const &main_cpp_path) {
                 LOGI << "\n\n" << json << "\n" << json.size();
             }
 
+            // for vscode ctest stdout parsing
+            if(args->print_result == TCmdArgs::TPrintResult::CTEST_VSCODE) {
+                for (auto test_case: result.TestCases) {
+                    if (!test_case.Error.get().empty()) {
+                        std::cerr
+                            << testing_source_directory_path
+                            << test_case.Path.get() << ":"
+                            << test_case.Line.get()
+                            << ": error: "
+                            << replace(test_case.Error.get(), "\n", "; ")
+                            << std::endl;
+                    }
+                }
+            }
+
             return !errors.empty(); // ----->
         } else
             return 1; // ----->
     } catch (std::exception const &e) {
         LOGF << e.what();
         return 1;
+    } catch (char const *e) {
+        LOGF << e;
+        return 1;
+    } catch (...) {
+        LOGF << "unknown exception";
+        return 1;
     }
-    return 0;
+    // return 0;
 }
 
 
-Tester::INodeTest::TSharedPtr Tester::getTestTree(
-    string          const &main_cpp_path_,
-    string          const &include,
-    list<string>    const &excludes) const
+Tester::IUnitTestCaseNode::TSharedPtr Tester::getTestTree(
+    string
+        const &testing_source_directory_path,
+    string
+        const &include,
+    list<string>
+        const &excludes) const
 {
     static string const ROOT_NODE_NAME = "root";
 
-    auto main_cpp_path = main_cpp_path_;
-    std::replace(main_cpp_path.begin(), main_cpp_path.end(), '\\', '/');
-    main_cpp_path = main_cpp_path.substr(0, main_cpp_path.find_last_of('/'));
+    IUnitTestCaseNode::TSharedPtr root_node = CNodeTest::create(ROOT_NODE_NAME);
 
-    INodeTest::TSharedPtr root_node = CNodeTest::create(ROOT_NODE_NAME);
     for (auto const &path_test: m_map_path_test) {
 
-        auto path = path_test.first;
-        if (path.substr(0, main_cpp_path.size()) == main_cpp_path)
-            path = path.substr(main_cpp_path.size());
+        auto path = path_test.first.path + "/" + path_test.first.name;
+        if (path.substr(0, testing_source_directory_path.size()) == testing_source_directory_path)
+            path = path.substr(testing_source_directory_path.size());
 
         if (path.substr(0, include.size()) != include)
             continue; // <---

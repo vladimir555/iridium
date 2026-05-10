@@ -35,7 +35,7 @@ using implementation::config;
 /// \~russian @return Преобразованное значение.
 template<typename TResult, typename TValue, bool is_throwable = false>
 TResult convert(TValue const &value) {
-    return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value);
+    return implementation::TConvertPolicy<TResult, TValue, void, is_throwable>::convert(value);
 }
 
 /// \~english @brief Converts a value from a source type to a target type using a specific format.
@@ -56,7 +56,7 @@ TResult convert(TValue const &value) {
 /// \~russian @return Преобразованное значение.
 template<typename TResult, typename TValue, typename TFormat, bool is_throwable = false>
 TResult convert(TValue const &value, TFormat const &format) {
-    return implementation::TConvert<TResult, TValue, void, is_throwable>::convert(value, format);
+    return implementation::TConvertPolicy<TResult, TValue, void, is_throwable>::convert(value, format);
 }
 
 } // iridium::convertion

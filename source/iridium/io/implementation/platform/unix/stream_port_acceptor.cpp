@@ -1,5 +1,9 @@
 #include "stream_port_acceptor.h"
 
+
+#ifdef UNIX_PLATFORM
+
+
 #include "stream_port_peer.h"
 
 #include <iridium/convertion/convert.h>
@@ -77,10 +81,10 @@ void CStreamPortAcceptor::finalize() {
 }
 
 
-std::list<uintptr_t> CStreamPortAcceptor::getHandles() const {
-    return {
-        static_cast<uintptr_t>(m_fd)
-    };
+IStream::TMapHandleTypeIdent CStreamPortAcceptor::getHandles() const {
+    std::unordered_map<IStream::THandleType, uintptr_t> map_handle_type_ident;
+    map_handle_type_ident[THandleType::READER] = static_cast<uintptr_t>(m_fd);
+    return map_handle_type_ident; // ----->
 }
 
 
@@ -127,3 +131,6 @@ void CStreamPortAcceptor::setBlockingMode(bool const &is_blocking) {
 
 
 } // iridium::io::implementation::platform::unix_
+
+
+#endif // UNIX_PLATFORM

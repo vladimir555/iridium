@@ -69,6 +69,7 @@
     <ClInclude Include="io\implementation\context_manager.h" />
     <ClInclude Include="io\implementation\listener.h" />
     <ClInclude Include="io\implementation\multiplexer.h" />
+    <ClInclude Include="io\implementation\multiplexer_base.h" />
     <ClInclude Include="io\implementation\pipe.h" />
     <ClInclude Include="io\implementation\platform\freebsd\listener.h" />
     <ClInclude Include="io\implementation\platform\linux\listener.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="testing\tester.h" />
     <ClInclude Include="testing\test_runner.h" />
     <ClInclude Include="testing\unit_test.h" />
+    <ClInclude Include="testing\unit_test_case.h" />
     <ClInclude Include="threading\async_queue.h" />
     <ClInclude Include="threading\condition.h" />
     <ClInclude Include="threading\implementation\async_queue.h" />
@@ -206,7 +208,6 @@
   <ItemGroup>
     <ClCompile Include="convertion\implementation\convert.cpp" />
     <ClCompile Include="convertion\implementation\platform\windows\convert.cpp" />
-    <ClCompile Include="convertion\implementation\type_name.cpp" />
     <ClCompile Include="db\config.cpp" />
     <ClCompile Include="db\connector.cpp" />
     <ClCompile Include="db\implementation\connector.cpp" />
@@ -225,9 +226,13 @@
     <ClCompile Include="io\fs\implementation\platform\windows\file_api.cpp" />
     <ClCompile Include="io\implementation\context.cpp" />
     <ClCompile Include="io\implementation\context_manager.cpp" />
+    <ClCompile Include="io\implementation\multiplexer_base.cpp" />
     <ClCompile Include="io\implementation\pipe.cpp" />
     <ClCompile Include="io\implementation\platform\windows\multiplexer.cpp" />
     <ClCompile Include="io\implementation\platform\windows\stream_port.cpp" />
+    <ClCompile Include="io\implementation\platform\windows\stream_port_acceptor.cpp" />
+    <ClCompile Include="io\implementation\platform\windows\stream_port_client.cpp" />
+    <ClCompile Include="io\implementation\platform\windows\stream_port_peer.cpp" />
     <ClCompile Include="io\implementation\session_manager.cpp" />
     <ClCompile Include="io\implementation\stream_buffer.cpp" />
     <ClCompile Include="io\implementation\stream_reader_list.cpp" />
@@ -253,9 +258,9 @@
     <ClCompile Include="logging\logger.cpp" />
     <ClCompile Include="logging\sink.cpp" />
     <ClCompile Include="parsing\file_parser.cpp" />
-    <ClCompile Include="parsing\implementation\parser_http.cpp" />
-    <ClCompile Include="parsing\implementation\parser_json.cpp" />
-    <ClCompile Include="parsing\implementation\parser_xml.cpp" />
+    <ClCompile Include="parsing\implementation\http_parser.cpp" />
+    <ClCompile Include="parsing\implementation\json_parser.cpp" />
+    <ClCompile Include="parsing\implementation\xml_parser.cpp" />
     <ClCompile Include="parsing\node.cpp" />
     <ClCompile Include="parsing\serialization\node.cpp" />
     <ClCompile Include="pattern\implementation\initializer.cpp" />
@@ -268,7 +273,7 @@
     <ClCompile Include="testing\implementation\test_runner_raw.cpp" />
     <ClCompile Include="testing\tester.cpp" />
     <ClCompile Include="testing\test_runner.cpp" />
-    <ClCompile Include="testing\unit_test.cpp" />
+    <ClCompile Include="testing\unit_test_case.cpp" />
     <ClCompile Include="threading\implementation\thread.cpp" />
     <ClCompile Include="threading\implementation\worker.cpp" />
     <ClCompile Include="threading\implementation\worker_pool.cpp" />
@@ -285,39 +290,39 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

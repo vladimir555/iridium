@@ -29,45 +29,16 @@ class CContextManager:
 public:
     DEFINE_IMPLEMENTATION(CContextManager)
 
-    void    createContext (IStream::TSharedPtr  const &event, IProtocol::TSharedPtr const &protocol) override;
-    void    removeContext (IContext::TSharedPtr const &context) override;
-
-    /// \~english @brief Acquires a context associated with an event's stream, potentially creating it if it doesn't exist.
-    ///     If a context for the event's stream exists, it is returned.
-    ///     If not, and the event is an `Event::NEW_STREAM`, a new context is created using the event's stream and protocol.
-    ///     The acquired context is marked as "acquired" to prevent concurrent modification or premature removal.
-    /// \~russian @brief Получает контекст, связанный с потоком события, потенциально создавая его, если он не существует.
-    ///     Если контекст для потока события существует, он возвращается.
-    ///     В противном случае, и если событие является `Event::NEW_STREAM`, создается новый контекст с использованием потока и протокола события.
-    ///     Полученный контекст помечается как "полученный" для предотвращения одновременного изменения или преждевременного удаления.
-    /// \~english @param event The event whose stream is used to find or create a context.
-    /// \~russian @param event Событие, поток которого используется для поиска или создания контекста.
-    /// \~english @param multiplexer The multiplexer to associate with the stream if a new context is created and the stream needs to be managed.
-    /// \~russian @param multiplexer Мультиплексор для связи с потоком, если создается новый контекст и поток нуждается в управлении.
-    /// \~english @return A shared pointer to the acquired or newly created context, or `nullptr` if no context could be associated or created.
-    /// \~russian @return Умный указатель на полученный или вновь созданный контекст, или `nullptr`, если контекст не удалось связать или создать.
+    void
+        createContext (IStream::TSharedPtr const &event, IProtocol::TSharedPtr const &protocol) override;
+    // void
+    //     removeContext (IContext::TSharedPtr const &context) override;
     IContext::TSharedPtr
-            acquireContext(Event::TSharedPtr    const &event, IMultiplexer::TSharedPtr const &multiplexer) override;
-
-    /// \~english @brief Releases a previously acquired context.
-    ///     Removes the context from the set of "acquired" contexts. If the context was marked for removal,
-    ///     this might trigger its actual deletion and generate `Event::CLOSE_STREAM` events for associated streams.
-    /// \~russian @brief Освобождает ранее полученный контекст.
-    ///     Удаляет контекст из набора "полученных" контекстов. Если контекст был помечен для удаления,
-    ///     это может инициировать его фактическое удаление и генерацию событий `Event::CLOSE_STREAM` для связанных потоков.
-    /// \~english @param context The context to release.
-    /// \~russian @param context Контекст для освобождения.
-    /// \~english @return A list of events (e.g., `Event::CLOSE_STREAM`) generated as a result of releasing and potentially cleaning up the context.
-    /// \~russian @return Список событий (например, `Event::CLOSE_STREAM`), сгенерированных в результате освобождения и потенциальной очистки контекста.
+        acquireContext(Event::TSharedPtr const &event, IMultiplexer::TSharedPtr const &multiplexer) override;
     std::list<Event::TSharedPtr>
-            releaseContext(IContext::TSharedPtr const &context) override;
-
-    /// \~english @brief Checks all managed contexts for outdated streams and collects any resulting close events.
-    /// \~russian @brief Проверяет все управляемые контексты на наличие устаревших потоков и собирает все результирующие события закрытия.
-    /// \~english @return A list of `Event::CLOSE_STREAM` events from all contexts that had outdated streams.
-    /// \~russian @return Список событий `Event::CLOSE_STREAM` из всех контекстов, в которых были устаревшие потоки.
+        releaseContext(IContext::TSharedPtr const &context, bool const &is_valid_context) override;
     std::list<Event::TSharedPtr>
-            checkOutdatedStreams() override;
+        checkOutdatedStreams() override;
 
 private:
     /// \~english @brief Maps a stream to its associated communication context. Used for quick lookup.

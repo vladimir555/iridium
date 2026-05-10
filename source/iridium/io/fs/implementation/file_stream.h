@@ -62,81 +62,22 @@ public:
     ///     Вызывает `finalize()` для выполнения очистки.
     virtual ~CFileStream();
 
-    /// \~english @brief Initializes the file stream by opening the file.
-    ///     This method is part of the `IInitializable` interface. It uses the filename and open mode
-    ///     provided during construction to open the file using `fopen`.
-    /// \~russian @brief Инициализирует файловый поток, открывая файл.
-    ///     Этот метод является частью интерфейса `IInitializable`. Он использует имя файла и режим открытия,
-    ///     предоставленные при конструировании, для открытия файла с помощью `fopen`.
-    /// \~english @throws iridium::io::fs::Exception (or a derived class) if the file cannot be opened based on the specified mode.
-    /// \~russian @throws iridium::io::fs::Exception (или производный класс), если файл не может быть открыт в указанном режиме.
-    void initialize()   override;
+    void initialize() override;
+    void finalize() override;
 
-    /// \~english @brief Finalizes the file stream by closing the file if it is open.
-    ///     This method is part of the `IInitializable` interface. It calls `fclose` on the internal file handle.
-    /// \~russian @brief Финализирует файловый поток, закрывая файл, если он открыт.
-    ///     Этот метод является частью интерфейса `IInitializable`. Он вызывает `fclose` для внутреннего дескриптора файла.
-    void finalize()     override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
+    TFileStatus
+        getStatus() const override;
 
-    /// \~english @brief Gets the underlying OS file handle(s) associated with this stream.
-    ///     For `CFileStream`, this typically returns the file descriptor number obtained via `fileno(m_file)`.
-    /// \~russian @brief Получает базовый(е) дескриптор(ы) ОС, связанный(е) с этим потоком.
-    ///     Для `CFileStream` это обычно возвращает номер файлового дескриптора, полученный через `fileno(m_file)`.
-    /// \~english @return A list containing the file descriptor number if the file is open; otherwise, an empty list.
-    /// \~russian @return Список, содержащий номер файлового дескриптора, если файл открыт; в противном случае — пустой список.
-    std::list<uintptr_t>    getHandles()    const override;
-
-    /// \~english @brief Gets the URI associated with this file stream.
-    ///     The URI will typically be a "file://" scheme URI.
-    /// \~russian @brief Получает URI, связанный с этим файловым потоком.
-    ///     URI обычно будет иметь схему "file://".
-    /// \~english @return A shared pointer to a `URI` object representing the file path.
-    /// \~russian @return Умный указатель на объект `URI`, представляющий путь к файлу.
-    URI::TSharedPtr         getURI()        const override;
-
-    /// \~english @brief Retrieves the status information (size and modification time) of the opened file.
-    /// \~russian @brief Получает информацию о состоянии (размер и время изменения) открытого файла.
-    /// \~english @return A `TFileStatus` structure containing the file's status.
-    /// \~russian @return Структура `TFileStatus`, содержащая состояние файла.
-    /// \~english @throws iridium::io::fs::Exception (or derived) if the file is not open or status cannot be retrieved (e.g., `fstat` fails).
-    /// \~russian @throws iridium::io::fs::Exception (или производный), если файл не открыт или статус не может быть получен (например, сбой `fstat`).
-    TFileStatus             getStatus()     const override;
-
-    /// \~english @brief Reads up to `size` bytes of data from the file stream into a buffer.
-    ///     Implements the `IStreamReader::read` method.
-    /// \~russian @brief Читает до `size` байт данных из файлового потока в буфер.
-    ///     Реализует метод `IStreamReader::read`.
-    /// \~english @param size The maximum number of bytes to read.
-    /// \~russian @param size Максимальное количество байт для чтения.
-    /// \~english @return A shared pointer to a `Buffer` containing the data read.
-    ///     Returns `nullptr` on EOF if no bytes were read, or if an error occurs.
-    ///     Returns an empty buffer if `size` is 0 and no prior accumulated data (not typical for file streams).
-    /// \~russian @return Умный указатель на `Buffer`, содержащий прочитанные данные.
-    ///     Возвращает `nullptr` при EOF, если не было прочитано ни одного байта, или в случае ошибки.
-    ///     Возвращает пустой буфер, если `size` равен 0 и нет предварительно накопленных данных (нетипично для файловых потоков).
-    /// \~english @throws iridium::io::fs::Exception (or derived) on read errors if not returning nullptr.
-    /// \~russian @throws iridium::io::fs::Exception (или производный) при ошибках чтения, если не возвращается nullptr.
-    Buffer::TSharedPtr      read(size_t const &size) override;
-
-    /// \~english @brief Writes data from a buffer to the file stream.
-    ///     Implements the `IStreamWriter::write` method.
-    /// \~russian @brief Записывает данные из буфера в файловый поток.
-    ///     Реализует метод `IStreamWriter::write`.
-    /// \~english @param buffer A shared pointer to a `Buffer` containing the data to write.
-    /// \~russian @param buffer Умный указатель на `Buffer`, содержащий данные для записи.
-    /// \~english @return The number of bytes actually written to the file.
-    /// \~russian @return Количество байт, фактически записанных в файл.
-    /// \~english @throws iridium::io::fs::Exception (or derived) on write errors.
-    /// \~russian @throws iridium::io::fs::Exception (или производный) при ошибках записи.
-    size_t                  write(Buffer::TSharedPtr const &buffer) override;
-
-    /// \~english @brief Flushes any buffered data associated with the file stream to the underlying file.
-    ///     Calls `fflush` on the internal `FILE*` handle.
-    /// \~russian @brief Сбрасывает все буферизованные данные, связанные с файловым потоком, в базовый файл.
-    ///     Вызывает `fflush` для внутреннего дескриптора `FILE*`.
-    /// \~english @throws iridium::io::fs::Exception (or derived) if the flush operation fails.
-    /// \~russian @throws iridium::io::fs::Exception (или производный), если операция сброса не удалась.
-    void                    flush() override;
+    Buffer::TSharedPtr
+        read(size_t const &size) override;
+    size_t
+        write(Buffer::TSharedPtr const &buffer) override;
+    void
+        flush() override;
 
 protected:
     /// \~english @brief Protected constructor to set up the file stream parameters.

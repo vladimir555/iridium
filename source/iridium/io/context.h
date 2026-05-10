@@ -11,85 +11,34 @@
 #define HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6
 
 
-#include "event.h" // For Event::TSharedPtr
+#include "event.h"
+#include "pipe.h"
 
 
 namespace iridium::io {
 
 
-/// \~english @brief Interface for an I/O context, responsible for managing and dispatching I/O events.
-///     An I/O context typically handles asynchronous operations, event notifications,
-///     and management of I/O resources like streams or sockets.
-/// \~russian @brief Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывода.
-///     Контекст ввода-вывода обычно обрабатывает асинхронные операции, уведомления о событиях
-///     и управление ресурсами ввода-вывода, такими как потоки или сокеты.
+// todo: rm, deprecated
 class IContext {
 public:
     /// \~english @brief Macro used to define common interface elements (e.g., virtual destructor).
     /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContext)
 
-    /// \~english @brief Pushes an event into the context's event queue.
-    /// \~russian @brief Помещает событие в очередь событий контекста.
-    /// \~english @param event A shared pointer to the event to be pushed.
-    /// \~russian @param event Умный указатель на событие, которое нужно поместить в очередь.
-    virtual void pushEvent(Event::TSharedPtr const &event) = 0;
-
-    /// \~english @brief Pops (retrieves and removes) events from the context's event queue.
-    ///     This method is typically called by an event loop to get pending events for dispatching.
-    /// \~russian @brief Извлекает (получает и удаляет) события из очереди событий контекста.
-    ///     Этот метод обычно вызывается циклом событий для получения ожидающих событий для диспетчеризации.
-    /// \~english @return A list of shared pointers to events that were popped from the queue.
-    ///     The list may be empty if no events are pending.
-    /// \~russian @return Список умных указателей на события, извлеченные из очереди.
-    ///     Список может быть пустым, если нет ожидающих событий.
+    virtual void
+        pushEvent(Event::TSharedPtr const &event) = 0;
     virtual std::list<Event::TSharedPtr>
-                 popEvents() = 0;
-
-    /// \~english @brief Checks for and retrieves events related to outdated or timed-out I/O streams.
-    ///     This could be used to manage stream lifecycles, detect idle connections, or handle timeouts.
-    /// \~russian @brief Проверяет и извлекает события, связанные с устаревшими или просроченными потоками ввода-вывода.
-    ///     Может использоваться для управления жизненным циклом потоков, обнаружения неактивных соединений или обработки тайм-аутов.
-    /// \~english @return A list of shared pointers to events representing outdated streams or timeout notifications.
-    /// \~russian @return Список умных указателей на события, представляющие устаревшие потоки или уведомления о тайм-ауте.
+        popEvents() = 0;
     virtual std::list<Event::TSharedPtr>
-                 checkOutdatedStreams() = 0;
+        checkOutdatedStreams() = 0;
+    virtual bool
+        update  (Event::TSharedPtr const &event) = 0;
+    virtual IPipe::TSharedPtr
+        getPipe (Event::TSharedPtr const &event) = 0;
+    virtual void
+        remove  () = 0;
 
-    /// \~english @brief Updates the context's handling of an I/O source based on an event.
-    ///     This might involve re-registering a file descriptor with an event multiplexer (e.g., epoll, kqueue)
-    ///     with new interest flags (e.g., read, write) based on the event's content or type.
-    /// \~russian @brief Обновляет обработку источника ввода-вывода контекстом на основе события.
-    ///     Это может включать перерегистрацию файлового дескриптора в мультиплексоре событий (например, epoll, kqueue)
-    ///     с новыми флагами интереса (например, чтение, запись) на основе содержимого или типа события.
-    /// \~english @param event A shared pointer to the event triggering the update.
-    /// \~russian @param event Умный указатель на событие, инициирующее обновление.
-    /// \~english @return True if the update was successful, false otherwise.
-    /// \~russian @return True, если обновление прошло успешно, иначе false.
-    virtual bool update  (Event::TSharedPtr const &event) = 0;
-
-    /// \~english @brief Transmits data or handles I/O operations based on an event.
-    ///     This method likely initiates or continues data transfer (read/write) for an I/O source
-    ///     associated with the event, or performs other I/O operations as indicated by the event.
-    /// \~russian @brief Передает данные или обрабатывает операции ввода-вывода на основе события.
-    ///     Этот метод, вероятно, инициирует или продолжает передачу данных (чтение/запись) для источника ввода-вывода,
-    ///     связанного с событием, или выполняет другие операции ввода-вывода, указанные событием.
-    /// \~english @param event A shared pointer to the event triggering the transmission.
-    /// \~russian @param event Умный указатель на событие, инициирующее передачу.
-    /// \~english @return True if the transmission was successful or successfully initiated, false otherwise.
-    /// \~russian @return True, если передача прошла успешно или была успешно инициирована, иначе false.
-    virtual bool transmit(Event::TSharedPtr const &event) = 0;
-
-    /// \~english @brief Removes or cleans up resources associated with this context or its I/O sources.
-    ///     The exact scope of removal (e.g., specific stream, all streams, or the context itself
-    ///     from a higher-level manager) depends on the concrete implementation.
-    ///     Given it takes no arguments, it might signal the context to clean up all its managed resources
-    ///     or unregister itself.
-    /// \~russian @brief Удаляет или очищает ресурсы, связанные с этим контекстом или его источниками ввода-вывода.
-    ///     Точный объем удаления (например, конкретный поток, все потоки или сам контекст
-    ///     из менеджера более высокого уровня) зависит от конкретной реализации.
-    ///     Учитывая отсутствие аргументов, это может сигнализировать контексту об очистке всех управляемых им ресурсов
-    ///     или о снятии с регистрации самого себя.
-    virtual void remove  () = 0;
+    // virtual bool transmit(Event::TSharedPtr const &event) = 0;
 };
 
 

@@ -24,12 +24,7 @@
 namespace iridium::io {
 
 
-/// \~english @brief Represents an I/O event associated with a stream.
-///     This structure encapsulates information about an event that has occurred on an I/O stream,
-///     such as the type of operation (read, write, etc.) and its status.
-/// \~russian @brief Представляет событие ввода-вывода, связанное с потоком.
-///     Эта структура инкапсулирует информацию о событии, произошедшем в потоке ввода-вывода,
-///     такую как тип операции (чтение, запись и т.д.) и ее статус.
+// todo: rm, deprecated
 struct Event {
     /// \~english @brief Macro likely defining a static `create` method or similar factory functionality
     ///     for creating shared pointers (`Event::TSharedPtr`) to `Event` instances.
@@ -50,11 +45,6 @@ struct Event {
         /// \~english @brief Indicates a write operation.
         /// \~russian @brief Указывает на операцию записи.
         WRITE,
-        /// \~english @brief Indicates the end of a stream has been reached.
-        /// \~russian @brief Указывает, что достигнут конец потока.
-        EOF_,
-        /// \~english @brief Indicates a timeout has occurred related to a stream operation.
-        /// \~russian @brief Указывает, что произошел тайм-аут, связанный с операцией потока.
         TIMEOUT,
         /// \~english @brief Indicates an error has occurred on a stream.
         /// \~russian @brief Указывает, что произошла ошибка на потоке.
@@ -77,27 +67,20 @@ struct Event {
         /// \~russian @brief Указывает на конец операции.
         END)
 
-    /// \~english @brief Constructs an Event object.
-    /// \~russian @brief Конструирует объект Event.
-    /// \~english @param[in] stream The stream associated with the event.
-    /// \~russian @param[in] stream Поток, связанный с событием.
-    /// \~english @param[in] operation The type of operation for the event.
-    /// \~russian @param[in] operation Тип операции для события.
-    /// \~english @param[in] status The status of the operation (defaults to UNKNOWN).
-    /// \~russian @param[in] status Статус операции (по умолчанию UNKNOWN).
-    Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
+    Event(
+        IStream::TSharedPtr
+            const &stream,
+        TOperation
+            const &operation,
+        TStatus
+            const &status = TStatus::UNKNOWN);
 
-    /// \~english @brief A shared pointer to the stream on which the event occurred.
-    /// \~russian @brief Умный указатель на поток, в котором произошло событие.
-    IStream::TSharedPtr stream;
-
-    /// \~english @brief The type of I/O operation or occurrence this event represents (e.g., READ, WRITE, EOF_).
-    /// \~russian @brief Тип операции ввода-вывода или события, которое представляет это событие (например, READ, WRITE, EOF_).
-    TOperation          operation;
-
-    /// \~english @brief The status of the operation associated with this event (e.g., BEGIN, END).
-    /// \~russian @brief Статус операции, связанной с этим событием (например, BEGIN, END).
-    TStatus             status;
+    IStream::TSharedPtr
+              stream;
+    TOperation
+        operation;
+    TStatus
+        status;
 };
 
 
@@ -116,13 +99,8 @@ struct Event {
 ///     Фактическая логика вычисления хэша реализована в соответствующем .cpp файле.
 template<>
 struct std::hash<iridium::io::Event> {
-    /// \~english @brief Computes the hash value for an `iridium::io::Event` object.
-    /// \~russian @brief Вычисляет хэш-значение для объекта `iridium::io::Event`.
-    /// \~english @param e The `iridium::io::Event` object to hash.
-    /// \~russian @param e Объект `iridium::io::Event` для хэширования.
-    /// \~english @return The computed hash value as `size_t`.
-    /// \~russian @return Вычисленное хэш-значение типа `size_t`.
-    size_t operator()(iridium::io::Event const &e) const;
+    size_t operator()
+        (iridium::io::Event const &e) const;
 };
 
 
@@ -140,18 +118,14 @@ struct std::hash<iridium::io::Event> {
 ///     Фактическая логика вычисления хэша реализована в соответствующем .cpp файле.
 template<>
 struct std::hash<iridium::io::Event::TSharedPtr> {
-    /// \~english @brief Computes the hash value for a shared pointer to an `iridium::io::Event` object.
-    /// \~russian @brief Вычисляет хэш-значение для умного указателя на объект `iridium::io::Event`.
-    /// \~english @param e The `iridium::io::Event::TSharedPtr` to hash.
-    /// \~russian @param e Умный указатель `iridium::io::Event::TSharedPtr` для хэширования.
-    /// \~english @return The computed hash value as `size_t`.
-    /// \~russian @return Вычисленное хэш-значение типа `size_t`.
-    size_t operator()(iridium::io::Event::TSharedPtr const &e) const;
+    size_t operator()
+        (iridium::io::Event::TSharedPtr const &e) const;
 };
 
 
 DEFINE_ENUM_CONVERT(iridium::io::Event::TOperation)
 DEFINE_ENUM_CONVERT(iridium::io::Event::TStatus)
+DEFINE_CONVERT(std::string, iridium::io::Event)
 
 
 #endif // HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347

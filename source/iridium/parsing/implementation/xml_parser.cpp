@@ -93,9 +93,9 @@ TXMLNode *convertNodeToXMLNode(INode::TConstSharedPtr const &node, TXMLNode *xml
 
         for (auto const &child: *node) {
             if (!child->hasChilds() && m[child->getName()] > 1) {
-                auto name  = xml_document.allocate_string(mask(child->getName()).c_str());
+                auto name_ = xml_document.allocate_string(mask(child->getName()).c_str());
                 auto value = xml_document.allocate_string(mask(child->getValue()).c_str());
-                auto xml_node_array_item = xml_document.allocate_node(rapidxml::node_element, name);
+                auto xml_node_array_item = xml_document.allocate_node(rapidxml::node_element, name_);
                 xml_node_array_item->value(value);
                 xml_node_child->append_node(xml_node_array_item);
             } else

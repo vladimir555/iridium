@@ -43,24 +43,13 @@ public:
     std::list<Event::TSharedPtr>
          popEvents() override;
 
-    /// \~english @brief Checks for outdated streams (pipes) associated with this context and generates close events for them.
-    ///     A stream is considered outdated based on a timeout mechanism.
-    /// \~russian @brief Проверяет наличие устаревших потоков (каналов), связанных с этим контекстом, и генерирует для них события закрытия.
-    ///     Поток считается устаревшим на основе механизма тайм-аута.
-    /// \~english @return A list of `Event::CLOSE_STREAM` events for any streams deemed outdated.
-    /// \~russian @return Список событий `Event::CLOSE_STREAM` для всех потоков, признанных устаревшими.
     std::list<Event::TSharedPtr>
          checkOutdatedStreams() override;
 
-    bool update    (Event::TSharedPtr const &event) override;
-
-    /// \~english @brief Transmits an event, typically by encoding it with the protocol and writing it to the event's stream.
-    /// \~russian @brief Передает событие, обычно кодируя его с помощью протокола и записывая в поток события.
-    /// \~english @param event The event to transmit (e.g., `Event::DATA`).
-    /// \~russian @param event Событие для передачи (например, `Event::DATA`).
-    /// \~english @return `true` if the transmission was successful, `false` otherwise (e.g., protocol error, stream error).
-    /// \~russian @return `true`, если передача прошла успешно, иначе `false` (например, ошибка протокола, ошибка потока).
-    bool transmit  (Event::TSharedPtr const &event) override;
+    bool update(Event::TSharedPtr const &event) override;
+    // bool transmit  (Event::TSharedPtr const &event) override;
+    IPipe::TSharedPtr
+        getPipe(Event::TSharedPtr const &event) override;
 
     void createPipe(std::string const &name) override;
 

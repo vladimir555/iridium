@@ -26,6 +26,7 @@ using std::string;
 using std::vector;
 using iridium::io::URI;
 using iridium::convertion::convert;
+using iridium::parsing::implementation::CNode;
 
 
 namespace {
@@ -136,7 +137,7 @@ CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &quer
                 for (unsigned int i = 0; i < fields_size; i++) {
                     // todo: node type
                     switch (fields[i].type) {
-                    case MYSQL_TYPE_BOOL:
+                    // case MYSQL_TYPE_BOOL:
                     case MYSQL_TYPE_BIT:
                         table->addChild(fields[i].name, row[i] ? "1" : "0");
 //                        r[fields[i].name] = row[i] ? "1" : "0";
@@ -172,7 +173,7 @@ CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &quer
                 // query does not return data
                 // (it was not a SELECT)
                 auto rows_size = mysql_affected_rows(&m_connection);
-                table->addChild(FIELD_NAME_AFFECTED_ROWS, convert<string>(rows_size));
+                table->addChild(FIELD_NAME_AFFECTED_ROWS, convert<string, uint64_t>(rows_size));
 //                TRow row;
 //                row[FIELD_NAME_AFFECTED_ROWS] = convert<string>(rows_size);
 //                rows.push_back(row);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.23)
 
 # -----
 # Project name
@@ -37,14 +37,14 @@ file(READ "${VERSION_HEADER}" version_content)
 
 string(TOUPPER "${PROJECT_NAME}" PROJECT_NAME_UPPER)
 
-# Extract version components — robust to whitespace
-string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MAJOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+# Extract version components — robust to optional '=' and semicolon
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MAJOR[^0-9]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MAJOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MINOR[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_MINOR[^0-9]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_MINOR "${CMAKE_MATCH_1}")
 
-string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_PATCH[ \t]*=[ \t]*([0-9]+)" _ "${version_content}")
+string(REGEX MATCH "${PROJECT_NAME_UPPER}_VERSION_PATCH[^0-9]*([0-9]+)" _ "${version_content}")
 set(PROJECT_VERSION_PATCH "${CMAKE_MATCH_1}")
 
 # Validate (0 is valid, empty is not)
@@ -84,18 +84,43 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_compile_options(-O0 -g -Wall -Wextra)
-    message(STATUS "Debug mode enabled: -O0 -g")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-O0 -g -Wall -Wextra)
+
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
+        # set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
+
+        message(STATUS "Debug mode enabled: -O0 -g -Wall -Wextra")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/Od /RTC1 /W4)  # /Od = disable optimizations, /RTC1 = runtime checks, /W4 = maximum warnings
+        message(STATUS "Debug mode enabled: /Od /RTC1 /W4")
+    endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    add_compile_options(-O3 -DNDEBUG -flto)
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-    message(STATUS "Release mode enabled: -O3 -DNDEBUG -flto")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-O3 -DNDEBUG -flto)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+        message(STATUS "Release mode enabled: -O3 -DNDEBUG -flto")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/O2 /DNDEBUG /GL)  # /O2 = maximum speed optimization, /GL = program-level optimization (LTO analog)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)  # enables /LTCG when linking
+        message(STATUS "Release mode enabled: /O2 /DNDEBUG /GL")
+    endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    add_compile_options(-O2 -g -DNDEBUG)
-    message(STATUS "RelWithDebInfo mode enabled: -O2 -g -DNDEBUG")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-O2 -g -DNDEBUG)
+        message(STATUS "RelWithDebInfo mode enabled: -O2 -g -DNDEBUG")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/O2 /DNDEBUG /Zi)  # /Zi = debug information
+        message(STATUS "RelWithDebInfo mode enabled: /O2 /DNDEBUG /Zi")
+    endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-    add_compile_options(-Os -DNDEBUG)
-    message(STATUS "MinSizeRel mode enabled: -Os -DNDEBUG")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-Os -DNDEBUG)
+        message(STATUS "MinSizeRel mode enabled: -Os -DNDEBUG")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        add_compile_options(/Os /DNDEBUG)  # /Os = optimization for size
+        message(STATUS "MinSizeRel mode enabled: /Os /DNDEBUG")
+    endif()
 else()
     message(WARNING "Unknown CMAKE_BUILD_TYPE: '${CMAKE_BUILD_TYPE}'")
 endif()
@@ -115,7 +140,24 @@ endif()
 if(CONFIG_MYSQL)
     add_definitions(-DBUILD_FLAG_MYSQL)
     find_package(PkgConfig REQUIRED)
-    pkg_check_modules(LIBMYSQLCLIENT REQUIRED mysqlclient)
+
+    # Linux -> FreeBSD -> Old MariaDB -> fallback
+    set(_MYSQL_PKG_NAMES "mysqlclient" "libmariadb" "mariadb" "mariadbclient")
+    set(_MYSQL_FOUND FALSE)
+
+    foreach(_pkg IN LISTS _MYSQL_PKG_NAMES)
+        pkg_check_modules(LIBMYSQLCLIENT QUIET ${_pkg})
+        if(LIBMYSQLCLIENT_FOUND)
+            message(STATUS "Found MySQL/MariaDB via pkg-config: ${_pkg}")
+            set(_MYSQL_FOUND TRUE)
+            break()
+        endif()
+    endforeach()
+
+    if(NOT _MYSQL_FOUND)
+        message(FATAL_ERROR "MySQL/MariaDB client not found. Tried: ${_MYSQL_PKG_NAMES}")
+    endif()
+
     set(MySQL_INCLUDE_DIR ${LIBMYSQLCLIENT_INCLUDE_DIRS})
     link_directories(${LIBMYSQLCLIENT_LIBRARY_DIRS})
 endif()
@@ -124,7 +166,6 @@ if(CONFIG_OPENSSL)
     add_definitions(-DBUILD_FLAG_OPENSSL)
     find_package(OpenSSL REQUIRED)
 endif()
-
 
 find_package(Threads REQUIRED)
 
@@ -145,8 +186,17 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME} FILES ${SOU
 
 
 # -----
-# Build shared library
-add_library(${PROJECT_NAME} SHARED ${SOURCE})
+# # auto export symbols for windows
+# if(WIN32)
+#     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+# endif()
+# # Build shared library
+# add_library(${PROJECT_NAME} SHARED ${SOURCE})
+if(WIN32)
+    add_library(${PROJECT_NAME} STATIC ${SOURCE})
+else()
+    add_library(${PROJECT_NAME} SHARED ${SOURCE})
+endif()
 
 
 # -----
@@ -166,7 +216,7 @@ install(
 )
 
 # -----
-# Packaging: Auto-detect generator and arch
+# Arch detection
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64)")
     set(ARCH "arm64")
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64)")
@@ -176,36 +226,6 @@ elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(i?86|x86)")
 else()
     set(ARCH "${CMAKE_SYSTEM_PROCESSOR}")
 endif()
-
-find_program(DPKG_EXECUTABLE dpkg)
-find_program(RPM_EXECUTABLE rpm)
-unset(CPACK_GENERATOR)
-
-if(DPKG_EXECUTABLE)
-    set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-    if(IN_PACKAGE_DEPENDENCIES)
-        set(CPACK_DEBIAN_PACKAGE_DEPENDS "${IN_PACKAGE_DEPENDENCIES}")
-    endif()
-    set(CPACK_DEBIAN_PACKAGE_SECTION "libs")
-    set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
-elseif(RPM_EXECUTABLE)
-    set(CPACK_GENERATOR "RPM")
-    set(CPACK_RPM_PACKAGE_AUTOREQ ON)
-    set(CPACK_RPM_PACKAGE_AUTOPROV ON)
-    if(IN_PACKAGE_DEPENDENCIES)
-        set(CPACK_RPM_PACKAGE_REQUIRES "${IN_PACKAGE_DEPENDENCIES}")
-    endif()
-    set(CPACK_RPM_PACKAGE_RELEASE "1")
-    set(CPACK_RPM_PACKAGE_GROUP "System Environment/Libraries")
-else()
-    set(CPACK_GENERATOR "TGZ")
-endif()
-
-set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
-set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-set(CPACK_PACKAGE_CONTACT "Vladimir Bulaev <bulaev_vladimir@mail.ru>")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} C++ library")
 
 # -----
 # OS detection for package naming
@@ -222,88 +242,159 @@ function(detect_os_name)
         endif()
     elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
         set(OS_NAME "darwin" PARENT_SCOPE)
-    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-        set(OS_NAME "windows" PARENT_SCOPE)
     elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
         set(OS_NAME "freebsd" PARENT_SCOPE)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        set(OS_NAME "windows" PARENT_SCOPE)
     else()
         set(OS_NAME "unknown" PARENT_SCOPE)
     endif()
 endfunction()
-
 detect_os_name()
 
-if(NOT CPACK_PACKAGE_FILE_NAME)
-    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}+${OS_NAME}_${ARCH}")
+# DEB/RPM-deps -> FreeBSD Pkg deps
+function(convert_to_freebsd_deps input_var output_var)
+    set(_fb_deps "")
+    foreach(_dep ${${input_var}})
+        if(_dep MATCHES "libmysql")
+            list(APPEND _fb_deps "databases/mariadb110-client")
+        elseif(_dep MATCHES "libpq")
+            list(APPEND _fb_deps "databases/postgresql16-client")
+        elseif(_dep MATCHES "libssl|libcrypto")
+            list(APPEND _fb_deps "security/openssl")
+        endif()
+    endforeach()
+    string(REPLACE ";" " " _fb_deps_str "${_fb_deps}")
+    set(${output_var} "${_fb_deps_str}" PARENT_SCOPE)
+endfunction()
+
+# -----
+# Package metadata
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_CONTACT "Vladimir Bulaev <bulaev_vladimir@mail.ru>")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} C++ library")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}+${OS_NAME}_${ARCH}")
+set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://vladimir555.github.io/iridium/index.html")
+
+# -----
+# Generator auto-detect
+unset(CPACK_GENERATOR)
+find_program(DPKG_EXECUTABLE dpkg)
+find_program(RPM_EXECUTABLE rpm)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+    set(CPACK_GENERATOR "FREEBSD")
+    set(CPACK_FREEBSD_PACKAGE_LICENSE "LGPL-3.0")
+    set(CPACK_FREEBSD_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}")
+    set(CPACK_FREEBSD_PACKAGE_CATEGORIES "devel")
+    set(CPACK_FREEBSD_PACKAGE_ORIGIN "devel/${PROJECT_NAME}")
+    set(CPACK_FREEBSD_PACKAGE_COMMENT "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
+    set(CPACK_FREEBSD_PACKAGE_WWW "${CPACK_PACKAGE_HOMEPAGE_URL}")
+
+    # note: CPACK_FREEBSD_PACKAGE_DEPENDS still not implemented in freebsd
+    if(CONFIG_MYSQL)
+        set(CPACK_FREEBSD_PACKAGE_DEPENDS "${CPACK_FREEBSD_PACKAGE_DEPENDS} databases/mariadb-connector-c")
+    endif()
+    if(CONFIG_OPENSSL)
+        set(CPACK_FREEBSD_PACKAGE_DEPENDS "${CPACK_FREEBSD_PACKAGE_DEPENDS} security/openssl")
+    endif()
+    if(CONFIG_POSTGRES)
+        set(CPACK_FREEBSD_PACKAGE_DEPENDS "${CPACK_FREEBSD_PACKAGE_DEPENDS} databases/postgresql18-client")
+    endif()
+    string(STRIP "${CPACK_FREEBSD_PACKAGE_DEPENDS}" CPACK_FREEBSD_PACKAGE_DEPENDS)
+
+elseif(DPKG_EXECUTABLE)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}")
+    set(CPACK_DEBIAN_PACKAGE_SECTION "libs")
+    set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+    if(IN_PACKAGE_DEPENDENCIES)
+        set(CPACK_DEBIAN_PACKAGE_DEPENDS "${IN_PACKAGE_DEPENDENCIES}")
+    endif()
+elseif(RPM_EXECUTABLE)
+    set(CPACK_GENERATOR "RPM")
+    set(CPACK_RPM_PACKAGE_RELEASE "1")
+    set(CPACK_RPM_PACKAGE_GROUP "System Environment/Libraries")
+    set(CPACK_RPM_PACKAGE_AUTOREQ ON)
+    set(CPACK_RPM_PACKAGE_AUTOPROV ON)
+    if(IN_PACKAGE_DEPENDENCIES)
+        set(CPACK_RPM_PACKAGE_REQUIRES "${IN_PACKAGE_DEPENDENCIES}")
+    endif()
+else()
+    set(CPACK_GENERATOR "TGZ")
 endif()
 
-set(CPACK_COMPONENTS_ALL ${PROJECT_NAME} ${PROJECT_NAME}-dev)
-set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
-set(CPACK_SET_DESTDIR ON)
-
+# -----
+# CPack inclusion
 include(CPack)
 
 cpack_add_component(${PROJECT_NAME}
     DISPLAY_NAME "${PROJECT_NAME}"
-    DESCRIPTION "${PROJECT_NAME} shared library"
+    DESCRIPTION  "${PROJECT_NAME} shared library"
     REQUIRED
 )
-
 cpack_add_component(${PROJECT_NAME}-dev
     DISPLAY_NAME "${PROJECT_NAME}-dev"
-    DESCRIPTION "${PROJECT_NAME} development headers and library"
+    DESCRIPTION  "${PROJECT_NAME} development headers and library"
     DEPENDS ${PROJECT_NAME}
 )
 
 # -----
 # Testing
-set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
+if(NOT DEFINED CONAN_PROJECT_NAME OR BUILD_TESTING)
+    set(PROJECT_TEST_NAME ${PROJECT_NAME}-test)
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/source
-    /opt/homebrew/include
-)
-
-file(GLOB_RECURSE SOURCE_TEST
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.cpp
-)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test FILES ${SOURCE_TEST})
-
-add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
-
-target_link_libraries(
-    ${PROJECT_TEST_NAME}
-    PRIVATE
-    ${PROJECT_NAME}
-    ${OPENSSL_LIBRARIES}
-    ${PostgreSQL_LIBRARIES}
-    ${LIBMYSQLCLIENT_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
-)
-
-enable_testing()
-
-set(TEST_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test")
-
-file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
-    "${TEST_SOURCE_DIR}/*.cpp"
-)
-
-set(TEST_CASE_PATHS "")
-foreach(SRC IN LISTS TEST_SOURCES)
-    file(RELATIVE_PATH REL_PATH "${TEST_SOURCE_DIR}" "${SRC}")
-    string(REPLACE "\\" "/" REL_PATH "${REL_PATH}")
-    list(APPEND TEST_CASE_PATHS "/${REL_PATH}")
-endforeach()
-
-list(REMOVE_DUPLICATES TEST_CASE_PATHS)
-
-set(TEST_BIN "$<TARGET_FILE:${PROJECT_TEST_NAME}>")
-
-foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
-    add_test(
-        NAME   "${TEST_PATH}" # "test_${SAFE_NAME}"
-        COMMAND ${TEST_BIN} run "${TEST_PATH}"
+    include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/source
+        /opt/homebrew/include
+        /opt/homebrew/Cellar/nlohmann-json/3.12.0/include
     )
-endforeach()
+
+    file(GLOB_RECURSE SOURCE_TEST
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test/*.cpp
+    )
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test FILES ${SOURCE_TEST})
+
+    add_executable(${PROJECT_TEST_NAME} ${SOURCE_TEST})
+
+    target_link_libraries(
+        ${PROJECT_TEST_NAME}
+        PRIVATE
+        ${PROJECT_NAME}
+        ${OPENSSL_LIBRARIES}
+        ${PostgreSQL_LIBRARIES}
+        ${LIBMYSQLCLIENT_LIBRARIES}
+        ${CMAKE_THREAD_LIBS_INIT}
+    )
+
+    enable_testing()
+
+    set(TEST_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source/${PROJECT_NAME}-test")
+
+    file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
+        "${TEST_SOURCE_DIR}/*.cpp"
+    )
+
+    set(TEST_CASE_PATHS "")
+    foreach(SRC IN LISTS TEST_SOURCES)
+        file(RELATIVE_PATH REL_PATH "${TEST_SOURCE_DIR}" "${SRC}")
+        string(REPLACE "\\" "/" REL_PATH "${REL_PATH}")
+        list(APPEND TEST_CASE_PATHS "${REL_PATH}")
+    endforeach()
+
+    list(REMOVE_DUPLICATES TEST_CASE_PATHS)
+
+    set(TEST_BIN "$<TARGET_FILE:${PROJECT_TEST_NAME}>")
+
+    foreach(TEST_PATH IN LISTS TEST_CASE_PATHS)
+        add_test(
+            NAME   "${TEST_PATH}"
+            COMMAND ${TEST_BIN} run --print-result=ctest-vscode "${TEST_PATH}"
+        )
+        set_tests_properties("${TEST_PATH}" PROPERTIES TIMEOUT 10)
+    endforeach()
+endif()

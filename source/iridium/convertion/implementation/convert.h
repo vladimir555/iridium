@@ -37,9 +37,7 @@ namespace iridium::convertion::implementation {
 /// \~english @brief Configuration for the conversion framework.
 /// \~russian @brief Конфигурация для фреймворка преобразования.
 struct config {
-    /// \~english @brief The precision to use for double to string conversions.
-    /// \~russian @brief Точность, используемая для преобразования double в строку.
-    static std::atomic<int> double_precission;
+    static thread_local int double_precission;
 };
 
 
@@ -55,48 +53,8 @@ struct TConvert<std::string, std::chrono::system_clock::time_point> {
 /// \~english @brief Specialization for converting a `std::chrono::hours` to a `std::string`.
 /// \~russian @brief Специализация для преобразования `std::chrono::hours` в `std::string`.
 template<>
-struct TConvert<std::string, std::chrono::hours> {
-    static std::string convert(std::chrono::hours const &value);
-};
-
-
-/// \~english @brief Specialization for converting a `std::chrono::minutes` to a `std::string`.
-/// \~russian @brief Специализация для преобразования `std::chrono::minutes` в `std::string`.
-template<>
-struct TConvert<std::string, std::chrono::minutes> {
-    static std::string convert(std::chrono::minutes const &value);
-};
-
-
-/// \~english @brief Specialization for converting a `std::chrono::seconds` to a `std::string`.
-/// \~russian @brief Специализация для преобразования `std::chrono::seconds` в `std::string`.
-template<>
-struct TConvert<std::string, std::chrono::seconds> {
-    static std::string convert(std::chrono::seconds const &value);
-};
-
-
-/// \~english @brief Specialization for converting a `std::chrono::milliseconds` to a `std::string`.
-/// \~russian @brief Специализация для преобразования `std::chrono::milliseconds` в `std::string`.
-template<>
-struct TConvert<std::string, std::chrono::milliseconds> {
-    static std::string convert(std::chrono::milliseconds const &value);
-};
-
-
-/// \~english @brief Specialization for converting a `std::chrono::microseconds` to a `std::string`.
-/// \~russian @brief Специализация для преобразования `std::chrono::microseconds` в `std::string`.
-template<>
-struct TConvert<std::string, std::chrono::microseconds> {
-    static std::string convert(std::chrono::microseconds const &value);
-};
-
-
-/// \~english @brief Specialization for converting a `std::chrono::nanoseconds` to a `std::string`.
-/// \~russian @brief Специализация для преобразования `std::chrono::nanoseconds` в `std::string`.
-template<>
-struct TConvert<std::string, std::chrono::nanoseconds> {
-    static std::string convert(std::chrono::nanoseconds const &value);
+struct TConvert<std::string, std::chrono::system_clock::duration> {
+    static std::string convert(std::chrono::system_clock::duration const &value);
 };
 
 
@@ -233,6 +191,12 @@ struct TConvert<std::chrono::system_clock::time_point, std::string> {
 /// \~english @brief Specialization for converting a `std::string` to a `bool`.
 /// \~russian @brief Специализация для преобразования `std::string` в `bool`.
 template<>
+struct TConvert<std::chrono::system_clock::duration, std::string> {
+    static std::chrono::system_clock::duration convert(std::string const &value);
+};
+
+
+template<>
 struct TConvert<bool, std::string> {
     static bool convert(std::string const &value);
 };
@@ -310,8 +274,14 @@ struct TConvert<int, int> {
 };
 
 
-/// \~english @brief Specialization for converting a `std::wstring` to a `std::string`.
-/// \~russian @brief Специализация для преобразования `std::wstring` в `std::string`.
+#ifdef __OHOS__
+template<>
+struct TConvert<std::string, long long> {
+    static std::string convert(long long const &value);
+};
+#endif // __OHOS__
+
+
 template<>
 struct TConvert<std::string, std::wstring> {
     static std::string convert(std::wstring const &value);
