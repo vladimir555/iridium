@@ -105,8 +105,8 @@ config::TLogger Logger::getConfig() {
 
 
 void Logger::log(TEvent::TConstSharedPtr const &e) {
-    if (!m_is_alive)
-        return;
+    if (!m_is_alive || !e)
+        return; // ----->
 
     LOCK_SCOPE();
     try {
@@ -150,7 +150,15 @@ LogStream::LogStream(TEvent::TLevel const &level)
 
 
 LogStream::~LogStream() {
-    Logger::instance().log(m_event);
+    try {
+        Logger::instance().log(m_event);
+    } catch (...) {
+        try {
+            if (m_event)
+                std::cout << "FATAL LOGGING ERROR: " << m_event->line << std::endl;
+        } catch (...) {
+        }
+    }
 }
 
 

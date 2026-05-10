@@ -14,6 +14,7 @@
 namespace iridium::io {
 
 
+// todo: rm, deprecated
 struct Event {
     DEFINE_CREATE(Event)
 
@@ -31,11 +32,20 @@ struct Event {
         BEGIN,
         END)
 
-    Event(IStream::TSharedPtr const &stream, TOperation const &operation, TStatus const &status = TStatus::UNKNOWN);
+    Event(
+        IStream::TSharedPtr
+            const &stream,
+        TOperation
+            const &operation,
+        TStatus
+            const &status = TStatus::UNKNOWN);
 
-    IStream::TSharedPtr stream;
-    TOperation          operation;
-    TStatus             status;
+    IStream::TSharedPtr
+              stream;
+    TOperation
+        operation;
+    TStatus
+        status;
 };
 
 
@@ -44,13 +54,15 @@ struct Event {
 
 template<>
 struct std::hash<iridium::io::Event> {
-    size_t operator()(iridium::io::Event const &e) const;
+    size_t operator()
+        (iridium::io::Event const &e) const;
 };
 
 
 template<>
 struct std::hash<iridium::io::Event::TSharedPtr> {
-    size_t operator()(iridium::io::Event::TSharedPtr const &e) const;
+    size_t operator()
+        (iridium::io::Event::TSharedPtr const &e) const;
 };
 
 

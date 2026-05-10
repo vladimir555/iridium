@@ -14,6 +14,20 @@
 
 #include "../unix/convert.h"
 
+#include "iridium/convertion/implementation/common.h"
+
+
+namespace iridium::convertion::implementation {
+
+
+template<>
+struct TConvert<std::string, long long> {
+    static std::string convert(long long const &value);
+};
+
+
+} // iridium::convertion::implementation
+
 
 #endif // FREEBSD_PLATFORM
 

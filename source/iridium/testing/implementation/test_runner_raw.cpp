@@ -1,6 +1,6 @@
 #include "test_runner_raw.h"
 
-#include "iridium/testing/unit_test.h"
+#include "iridium/testing/unit_test_case.h"
 #include "iridium/logging/logger.h"
 #include "iridium/parsing/implementation/json_parser.h"
 
@@ -14,47 +14,53 @@ using iridium::parsing::implementation::CJSONParser;
 namespace iridium::testing::implementation {
 
 
-TResult CTestRunnerRaw::run(INodeTest::TSharedPtr const &node_test) {
-    TResult result;
+TTestRunResult CTestRunnerRaw::run(IUnitTestCaseNode::TSharedPtr const &node_test) {
+    TTestRunResult test_run_result;
 
-    run(result, node_test);
+    run(test_run_result, node_test);
 
-    return result; // ----->
+    return test_run_result; // ----->
 }
 
 
 void CTestRunnerRaw::run(
-    TResult                       &results,
-    INodeTest::TSharedPtr   const &node,
-    std::string             const &path)
+    TTestRunResult
+              &test_run_result,
+    IUnitTestCaseNode::TSharedPtr
+        const &unit_test_case_tree,
+    std::string
+        const &path)
 {
-    for (auto const &node_child : *node) {
-        string run_path = path + "/" + node_child->getName();
+    for (auto const &test_case_node: *unit_test_case_tree) {
+        auto run_path = path + "/" + test_case_node->getName();
 
-        TResult::TTests tests;
-        tests.Path = run_path;
+        TTestRunResult::TTestCases test_case;
+        test_case.Path = path;
+        test_case.Name = test_case_node->getName();
 
-        if (node_child->getValue()) {
+        if (test_case_node->getValue()) {
             try {
                 LOGI << "RUN  " << run_path;
-                node_child->getValue()->run();
+                test_case_node->getValue()->run();
                 LOGI << "OK   " << run_path;
             } catch (Exception const &e) {
-                tests.Error = e.what();
+                test_case.Line  = e.getLine();
+                test_case.Error = e.what();
             } catch (std::exception const &e) {
-                tests.Error = e.what();
+                test_case.Line  = test_case_node->getValue()->getLine();
+                test_case.Error = string("exception: ") + e.what();
             } catch (...) {
-                tests.Error = "unknown exception";
+                test_case.Error = "unknown exception";
             }
 
-            if (!tests.Error.get().empty()) {
-                LOGE << "\n"    << tests.Error.get();
+            if (!test_case.Error.get().empty()) {
+                LOGE << "\n"    << test_case.Error.get();
                 LOGE << "FAIL " << run_path;
             }
 
-            results.Tests.add(tests);
+            test_run_result.TestCases.add(test_case);
         } else
-            run(results, node_child, path + "/" + node_child->getName());
+            run(test_run_result, test_case_node, path + "/" + test_case_node->getName());
     }
 }
 

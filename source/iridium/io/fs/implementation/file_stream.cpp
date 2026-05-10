@@ -131,10 +131,15 @@ void CFileStream::finalize() {
 }
 
 
-std::list<uintptr_t> CFileStream::getHandles() const {
-    if (m_file)
-        return std::list<uintptr_t>{ static_cast<uintptr_t>(getFD(m_file)) }; // ----->
-    else
+IStream::TMapHandleTypeIdent CFileStream::getHandles() const {
+    if (m_file) {
+        TMapHandleTypeIdent map_handle_type_ident;
+        if (m_open_mode == TOpenMode::READ)
+            map_handle_type_ident[THandleType::READER] = static_cast<uintptr_t>(getFD(m_file));
+        if (checkOneOf(m_open_mode, TOpenMode::WRITE, TOpenMode::REWRITE))
+            map_handle_type_ident[THandleType::WRITER] = static_cast<uintptr_t>(getFD(m_file));
+        return map_handle_type_ident; // ----->
+    } else
         return {}; // ----->
 }
 

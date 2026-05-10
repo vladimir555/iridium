@@ -1,6 +1,7 @@
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps
 from conan.tools.files import load
+from conan.tools.build import cross_building
 from conan.errors import ConanException
 import os
 import re
@@ -10,7 +11,7 @@ required_conan_version = ">=2.0"
 class IridiumConan(ConanFile):
     name = None
     version = None
-    license = "LGPL"
+    license = ("LGPL-3.0-only", "BSL-1.0")
     author = "Vladimir Bulaev bulaev_vladimir@mail.ru"
     url = "https://github.com/volodja555/iridium"
     description = "Iridium C++ library"
@@ -32,7 +33,7 @@ class IridiumConan(ConanFile):
         "with_mysql": False,
     }
 
-    exports_sources = "CMakeLists.txt", "source/*", "external/*"
+    exports_sources = "CMakeLists.txt", "source/*", "external/*", "LICENSE"
 
     def set_name(self):
         source_dir = os.path.join(self.recipe_folder, "source")
@@ -51,20 +52,20 @@ class IridiumConan(ConanFile):
             raise ConanException(f"version.h not found: {version_h}")
         content = load(self, version_h)
         name_upper = self.name.upper()
-        major = re.search(rf"{name_upper}_VERSION_MAJOR\s*=\s*([0-9]+)", content)
-        minor = re.search(rf"{name_upper}_VERSION_MINOR\s*=\s*([0-9]+)", content)
-        patch = re.search(rf"{name_upper}_VERSION_PATCH\s*=\s*([0-9]+)", content)
+        major = re.search(rf"{name_upper}_VERSION_MAJOR\s* \s*([0-9]+)", content)
+        minor = re.search(rf"{name_upper}_VERSION_MINOR\s* \s*([0-9]+)", content)
+        patch = re.search(rf"{name_upper}_VERSION_PATCH\s* \s*([0-9]+)", content)
         if not all([major, minor, patch]):
             raise ConanException("Failed to parse version from version.h")
         self.version = f"{major.group(1)}.{minor.group(1)}.{patch.group(1)}"
         self.output.info(f"Version: {self.version}")
 
     def config_options(self):
-        if self.settings.os == "Windows":
+        if self.settings.os == "Windows" and "fPIC" in self.options:
             del self.options.fPIC
 
     def configure(self):
-        if self.options.shared:
+        if self.options.shared and "fPIC" in self.options:
             del self.options.fPIC
 
     def requirements(self):
@@ -81,11 +82,12 @@ class IridiumConan(ConanFile):
         self.folders.generators = "build/conan"
 
     def generate(self):
-        tc = CMakeToolchain(self)
+        tc = CMakeToolchain(self, generator="Ninja")
         tc.variables["CONAN_PROJECT_NAME"] = self.name
         tc.variables["CONFIG_OPENSSL"] = self.options.with_openssl
         tc.variables["CONFIG_POSTGRES"] = self.options.with_postgres
         tc.variables["CONFIG_MYSQL"] = self.options.with_mysql
+        tc.variables["BUILD_TESTING"] = self.conf.get("user.iridium:run_tests", default=False)
         tc.generate()
 
         deps = CMakeDeps(self)
@@ -95,7 +97,12 @@ class IridiumConan(ConanFile):
         cmake = CMake(self)
         cmake.configure(variables={"CONAN_PROJECT_NAME": self.name})
         cmake.build()
-        cmake.test()
+
+        # conan create . -c user.iridium:run_tests=True
+        run_tests = self.conf.get("user.iridium:run_tests", default=False)
+
+        if run_tests and not cross_building(self):
+            cmake.test()
 
     def package(self):
         cmake = CMake(self)

@@ -31,13 +31,20 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::string const &args)
 :
-    CStreamPort             (URI("process://" + app + " " + args)),
-    m_app                   (app),
-    m_args                  (args),
-    m_command_line          (m_app + " " + m_args),
-    m_process               {0},
-    m_uri                   (io::URI::create("process://" + m_app + " " + m_args)),
-    m_security_attributes   {0}
+    CStreamPort
+        (URI("process://" + app + " " + args)),
+    m_app
+        (app),
+    m_args
+        (args),
+    m_command_line
+        (m_app + " " + m_args),
+    m_process
+        {0},
+    m_security_attributes
+        {0},
+    m_condition_override
+        (TSignal::UNKNOWN)
 {}
 
 
@@ -45,24 +52,34 @@ CProcessStream::CProcessStream(
     std::string const &app,
     std::vector<std::string> const &args)
 :
-    CStreamPort         (URI("process://" + app)),
-    m_app               (app),
-    m_process           {0}
+    CStreamPort
+        (URI("process://" + app)),
+    m_app
+        (app),
+    m_process
+        {0},
+    m_condition_override
+        (TSignal::UNKNOWN)
 {
     m_command_line = m_app;
+
     for (auto const &arg: args) {
         m_args += arg + " ";
         m_command_line += " " + arg;
     }
-    if (!m_args.empty() && m_args.back() == ' ')
+
+    if(!m_args.empty() && m_args.back() == ' ')
         m_args.pop_back();
 }
 
 
 void CProcessStream::initialize() {
     try {
-        if (m_reader_fd || m_writer_fd)
+        if (m_reader_fd != INVALID_HANDLE_VALUE ||
+            m_writer_fd != INVALID_HANDLE_VALUE)
+        {
             throw std::runtime_error("not finalized");
+        }
 
         STARTUPINFOA startup_info{0};
         startup_info.dwFlags = STARTF_USESTDHANDLES;
@@ -86,7 +103,7 @@ void CProcessStream::initialize() {
             1024 * 4,
             0,
             &sa);
-        checkResult(m_reader_fd, "CreateNamedPipe stdout reader");
+        assertOK(m_reader_fd, "CreateNamedPipe stdout reader");
 
         stdout_writer_fd = CreateFileA(
             stdout_pipe_name.c_str(),
@@ -96,7 +113,7 @@ void CProcessStream::initialize() {
             OPEN_EXISTING,
             FILE_ATTRIBUTE_NORMAL,
             nullptr);
-        checkResult(stdout_writer_fd, "CreateFile stdout writer");
+        assertOK(stdout_writer_fd, "CreateFile stdout writer");
         // -----
 
         // ----- stdin
@@ -112,7 +129,7 @@ void CProcessStream::initialize() {
             1024 * 4,
             0,
             &sa);
-        checkResult(m_writer_fd, "CreateNamedPipe stdout reader");
+        assertOK(m_writer_fd, "CreateNamedPipe stdout reader");
 
         stdin_reader_fd = CreateFileA(
             stdin_pipe_name.c_str(),
@@ -122,7 +139,7 @@ void CProcessStream::initialize() {
             OPEN_EXISTING,
             FILE_ATTRIBUTE_NORMAL,
             nullptr);
-        checkResult(stdin_reader_fd, "CreateFile stdin reader");
+        assertOK(stdin_reader_fd, "CreateFile stdin reader");
         // -----
 
         // Connect child-side handles
@@ -133,7 +150,7 @@ void CProcessStream::initialize() {
         // child reads stdin from here
         startup_info.hStdInput  = stdin_reader_fd;
 
-        checkResult(
+        assertOK(
             CreateProcessA(
                 nullptr,
                 const_cast<LPSTR>(m_command_line.c_str()),
@@ -149,15 +166,16 @@ void CProcessStream::initialize() {
             "CreateProcessA"
         );
 
-        // Close child-side handles in parent (no longer needed)
-        checkResult(
+        // close child-side handles in parent (no longer needed)
+        assertOK(
             CloseHandle(stdout_writer_fd),
            "CloseHandle stdout");
-        checkResult(
+        assertOK(
             CloseHandle(stdin_reader_fd),
            "CloseHandle stdout");
 
-        // LOGT << "create process cmdline: '" << m_command_line << "'";
+        m_pid = m_process.hProcess;
+        //LOGT << "create process cmdline: '" << m_command_line << "'";
     } catch (std::exception const &e) {
         closeFDs();
         throw std::runtime_error(convert<string>(m_uri) + "' initialization error: " + e.what());
@@ -167,7 +185,7 @@ void CProcessStream::initialize() {
 
 void CProcessStream::finalize() {
     try {
-        if (!m_reader_fd)
+        if (m_reader_fd == INVALID_HANDLE_VALUE || m_writer_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("not initialized");
 
         auto result = WaitForSingleObject(
@@ -176,12 +194,12 @@ void CProcessStream::finalize() {
 
         if (checkOneOf<int64_t>(result, WAIT_TIMEOUT, WAIT_FAILED)) {
             LOGW << "kill process " << m_app;
-            checkResult(TerminateProcess(m_process.hProcess, 1), "TerminateProcess");
+            assertOK(TerminateProcess(m_process.hProcess, 1), "TerminateProcess");
             WaitForSingleObject(m_process.hProcess, INFINITE);
         }
 
-        checkResult(CloseHandle(m_process.hProcess), "CloseHandle");
-        checkResult(CloseHandle(m_process.hThread) , "CloseHandle");
+        assertOK(CloseHandle(m_process.hProcess), "CloseHandle");
+        assertOK(CloseHandle(m_process.hThread) , "CloseHandle");
 
         closeFDs();
 
@@ -194,16 +212,18 @@ void CProcessStream::finalize() {
 
 IProcess::TState CProcessStream::getState() {
     try {
-        if (!m_reader_fd) {
+        if (m_reader_fd == INVALID_HANDLE_VALUE && m_writer_fd == INVALID_HANDLE_VALUE) {
             if (m_finalized_state)
                 return *m_finalized_state;
             return { IProcess::TState::TCondition::UNKNOWN, nullptr };
         }
 
-        IProcess::TState    result      {};
-        DWORD               exit_code   {};
+        IProcess::TState
+            result{};
+        DWORD
+            exit_code{};
 
-        checkResult(GetExitCodeProcess(m_process.hProcess, &exit_code), "GetExitCodeProcess");
+        assertOK(GetExitCodeProcess(m_process.hProcess, &exit_code), "GetExitCodeProcess");
 
         switch (exit_code) {
             case STATUS_ACCESS_VIOLATION:
@@ -213,12 +233,17 @@ IProcess::TState CProcessStream::getState() {
                 result.condition = TState::TCondition::RUNNING;
                 break;
             default:
-                result.condition = TState::TCondition::DONE;
+                if (m_condition_override == IProcess::TSignal::UNKNOWN)
+                    result.condition = TState::TCondition::DONE;
+                else
+                    result.condition = m_condition_override;
                 result.exit_code = std::make_shared<int>(exit_code);
                 break;
         }
 
         m_finalized_state = TState::create(result);
+
+        // LOGT << "process state: " << result;
 
         return result;
     } catch (std::exception const &e) {
@@ -230,7 +255,7 @@ IProcess::TState CProcessStream::getState() {
 void CProcessStream::sendSignal(TSignal const& signal) {
     try {
         DWORD exitCode = STILL_ACTIVE;
-        checkResult(
+        assertOK(
             GetExitCodeProcess(m_process.hProcess, &exitCode),
             "GetExitCodeProcess"
         );
@@ -239,40 +264,57 @@ void CProcessStream::sendSignal(TSignal const& signal) {
             return;
 
         switch (signal) {
-        case TSignal::INTERRUPT: {
-            DWORD pid = checkResult(GetProcessId(m_process.hProcess), "GetProcessId");
+        case TSignal::INTERRUPT:
+            m_condition_override = IProcess::TState::TCondition::INTERRUPTED;
+        // {
+            // DWORD pid = assertOK(GetProcessId(m_process.hProcess), "GetProcessId");
 
-            if (AttachConsole(pid)) {
-                checkResult(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
-            }
-            else {
-                throw std::runtime_error("can not send CTRL+C to non console app");
-            }
+            // if (AttachConsole(pid)) {
+            //     assertOK(GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0), "GenerateConsoleCtrlEvent");
+            // }
+            // else {
+            //     throw std::runtime_error("can not send CTRL+C to non console app");
+            // }
 
-            checkResult(
-                WaitForSingleObject(
-                    m_process.hProcess,
-                    static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
-                "WaitForSingleObject");
-            break;
-        }
+            // assertOK(
+            //     WaitForSingleObject(
+            //         m_process.hProcess,
+            //         static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
+            //     "WaitForSingleObject");
+            // break;
+
+            // const char* cmd = "__SHUTDOWN__\n";
+            // DWORD written = 0;
+
+            // assertOK(
+            //     WriteFile(m_writer_fd, cmd, static_cast<DWORD>(strlen(cmd)), &written, nullptr),
+            //    "WriteFile");
+
+            // assertOK(
+            //     WaitForSingleObject(
+            //         m_process.hProcess,
+            //         static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count())),
+            //    "WaitForSingleObject"
+            // );
+            // break;
+        // }
 
         case TSignal::TERMINATE:
         case TSignal::KILL:
-            checkResult(
+            assertOK(
                 TerminateProcess(
                     m_process.hProcess, 0),
                 "TerminateProcess");
-            checkResult(
-                WaitForSingleObject(
-                    m_process.hProcess, INFINITE),
-                "WaitForSingleObject");
+            // assertOK(
+            //     WaitForSingleObject(
+            //         m_process.hProcess, INFINITE),
+            //     "WaitForSingleObject");
             break;
 
         default:
             throw std::runtime_error("unknown signal type");
         }
-    } catch (std::exception const& e) {
+    } catch (std::exception const &e) {
         throw std::runtime_error(
             "sending signal '" + convert<string>(signal) +
             "' to process '" + m_app + "' error: " + e.what());

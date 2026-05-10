@@ -23,23 +23,34 @@ namespace iridium::io::implementation::platform {
 
 CStreamPort::CStreamPort(URI const &uri)
 :
-    m_reader_fd         (0),
-    m_writer_fd         (0),
-    m_writer_overlapped {0},
-    m_reader_overlapped {0},
-    m_uri               (URI::create(uri)),
-    m_is_opened         (false)
+    m_reader_fd
+        (INVALID_HANDLE_VALUE),
+    m_writer_fd
+        (INVALID_HANDLE_VALUE),
+    m_pid
+        (INVALID_HANDLE_VALUE),
+    m_writer_overlapped
+        {0},
+    m_reader_overlapped
+        {0},
+    m_uri
+        (URI::create(uri)),
+    m_is_opened
+        (false)
 {}
 
 
-std::list<uintptr_t> CStreamPort::getHandles() const {
-    std::list<uintptr_t> handles;
+IStream::TMapHandleTypeIdent CStreamPort::getHandles() const {
+    TMapHandleTypeIdent handles;
 
-    // if (m_writer_fd && m_writer_fd != INVALID_HANDLE_VALUE)
-        handles.push_back(reinterpret_cast<uintptr_t>(m_writer_fd));
+    if (m_writer_fd != INVALID_HANDLE_VALUE)
+        handles[THandleType::WRITER] = reinterpret_cast<uintptr_t>(m_writer_fd);
 
-    // if (m_reader_fd && m_reader_fd != INVALID_HANDLE_VALUE && m_reader_fd != m_writer_fd)
-        handles.push_back(reinterpret_cast<uintptr_t>(m_reader_fd));
+    if (m_reader_fd != INVALID_HANDLE_VALUE)
+        handles[THandleType::READER] = reinterpret_cast<uintptr_t>(m_reader_fd);
+
+    if (m_pid != INVALID_HANDLE_VALUE)
+        handles[THandleType::PID] = reinterpret_cast<uintptr_t>(m_pid);
 
     return handles; // ----->
 }
@@ -50,11 +61,9 @@ URI::TSharedPtr CStreamPort::getURI() const {
 }
 
 
-DWORD CStreamPort::checkResult(bool const &is_ok, std::string const &message) {
+DWORD CStreamPort::assertOK(bool const &is_ok, std::string const &message) {
     using convertion::convert;
     using std::string;
-
-    // LOGT << "check: " << message;
 
     if (is_ok) {
         return ERROR_SUCCESS;
@@ -82,6 +91,10 @@ DWORD CStreamPort::checkResult(bool const &is_ok, std::string const &message) {
         std::string api_message(buffer, size);
         LocalFree(buffer);
 
+        // LOGT << "check: " << message
+        //     << ", error " << static_cast<uint16_t>(error_code)
+        //     << " (" << api_message << ")";
+
         throw std::runtime_error(
             message + ": " + trim(api_message) + " ("+
             convert<string, uint64_t>(error_code, uint8_t{16}) + "), uri '" +
@@ -97,56 +110,67 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
 
 
 void CStreamPort::closeFDs() {
-    if (!m_writer_fd && !m_reader_fd)
-        throw std::runtime_error("closing error: not initialized");
-
-    if (m_reader_fd) {
+    if (m_reader_fd != INVALID_HANDLE_VALUE) {
         CloseHandle(m_reader_fd);
-        m_reader_fd = nullptr;
+        m_reader_fd = INVALID_HANDLE_VALUE;
         m_reader_overlapped = { 0 };
     }
 
-    if (m_writer_fd) {
+    if (m_writer_fd != INVALID_HANDLE_VALUE) {
         CloseHandle(m_writer_fd);
-        m_writer_fd = nullptr;
+        m_writer_fd = INVALID_HANDLE_VALUE;
         m_writer_overlapped = { 0 };
+    }
+
+    if (m_pid != INVALID_HANDLE_VALUE) {
+        CloseHandle(m_pid);
+        m_pid = INVALID_HANDLE_VALUE;
+        m_pid_overlapped = { 0 };
     }
 }
 
 
 Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
     try {
-        if (!m_reader_fd || m_reader_fd == INVALID_HANDLE_VALUE)
+        if (m_reader_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("reading error: not initialized");
 
         auto  buffer = Buffer::create();
         DWORD bytes_read = 0;
 
-        auto result = checkResult(
+        auto result = assertOK(
             GetOverlappedResult(m_reader_fd, &m_reader_overlapped, &bytes_read, FALSE),
            "GetOverlappedResult");
-
         if  (result == ERROR_SUCCESS && m_reader_buffer) {
+            // LOGT << "overlapped bytes_read: " << uint32_t(bytes_read);
             m_reader_buffer->resize(bytes_read);
             buffer = m_reader_buffer;
+            // LOGT << "read:\n" << buffer;
         } else {
-            if (m_reader_buffer)
+            if (m_reader_buffer) {
+                // LOGT << "overlapped return buffer:\n'" << buffer << "'";
                 return buffer;
+            }
         }
 
-        m_reader_buffer     = Buffer::create(size, uint8_t{0});
-        m_reader_overlapped = { 0 };
-        m_reader_overlapped.Pointer = reinterpret_cast<PVOID>(Event::TOperation::READ);
+        m_reader_buffer
+            = Buffer::create(size, uint8_t{0});
+        m_reader_overlapped
+            = { 0 };
+        m_reader_overlapped.Pointer
+            = reinterpret_cast<PVOID>(Event::TOperation::READ);
 
-        checkResult(
+        // LOGT << "pending, readfile";
+        assertOK(
             ReadFile(
                 m_reader_fd,
                 m_reader_buffer->data(),
                 static_cast<DWORD>(m_reader_buffer->size()),
                 nullptr,
-                &m_reader_overlapped),
+               &m_reader_overlapped),
             "ReadFile");
 
+        // LOGT << "return buffer:\n" << buffer;
         return buffer; // ----->
     } catch (std::exception const &e) {
         throw std::runtime_error(convert<string>(m_uri) + "reading error: " + e.what());
@@ -156,19 +180,19 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
 
 size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
     try {
-        if (!m_writer_fd || m_writer_fd == INVALID_HANDLE_VALUE)
-            throw std::runtime_error("writing error: not initialized");
+        if (m_writer_fd == INVALID_HANDLE_VALUE)
+            throw std::runtime_error("writing error: not initialized"); // ----->
 
         if (!buffer || buffer->empty())
-            return 0;
+            return 0; // ----->
 
         DWORD bytes_written = 0;
 
-        auto result = checkResult(
+        auto result = assertOK(
             GetOverlappedResult(
                 m_writer_fd,
-                &m_writer_overlapped,
-                &bytes_written,
+               &m_writer_overlapped,
+               &bytes_written,
                 FALSE
             ),
             "GetOverlappedResult"
@@ -181,11 +205,14 @@ size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
                 return 0;
         }
 
-        m_writer_buffer     = buffer;
-        m_writer_overlapped = {};
-        m_writer_overlapped.Pointer = reinterpret_cast<PVOID>(Event::TOperation::WRITE);
+        m_writer_buffer
+            = buffer;
+        m_writer_overlapped
+            = {};
+        m_writer_overlapped.Pointer
+            = reinterpret_cast<PVOID>(Event::TOperation::WRITE);
 
-        checkResult(
+        assertOK(
             WriteFile(
                 m_writer_fd,
                 buffer->data(),

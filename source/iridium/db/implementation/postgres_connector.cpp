@@ -35,7 +35,7 @@ CPostgresConnector::~CPostgresConnector() {
 
 
 void handlePostgresMessage(void *, PGresult const *result) {
-    LOGD << PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY);
+    LOGD << string(PQresultErrorField(result, PG_DIAG_MESSAGE_PRIMARY));
 }
 
 

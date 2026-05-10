@@ -13,63 +13,57 @@
 
 
 #include "iridium/io/multiplexer.h"
+#include "iridium/io/implementation/multiplexer_base.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/threading/synchronized.h"
-#include "iridium/threading/async_queue.h"
-#include "iridium/threading/worker.h"
 
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
-#include <cstring>
-#include <array>
-#include <atomic>
-#include <mutex>
 
 #include <sys/event.h>
+#include <cstring>
+#include <unordered_set>
 
 
 namespace iridium::io::implementation::platform {
 
 
-class CMultiplexer: public IMultiplexer, public threading::Synchronized<std::mutex> {
+class CMultiplexer:
+    public IMultiplexer,
+    public CMultiplexerBase,
+    public threading::Synchronized<std::mutex>
+{
 public:
-    DEFINE_IMPLEMENTATION(CMultiplexer)
+    DEFINE_CREATE(CMultiplexer)
     CMultiplexer(std::chrono::microseconds const &timeout = DEFAULT_WAITING_TIMEOUT);
+    virtual ~CMultiplexer();
 
-    void initialize()   override;
-    void finalize()     override;
+    void initialize() override;
+    void finalize() override;
 
     std::list<Event::TSharedPtr> waitEvents() override;
 
-    void wake(Event::TSharedPtr const &event) override;
-    void wake(std::list<Event::TSharedPtr> const &events) override;
-
     void subscribe  (IStream::TSharedPtr const &stream) override;
     void unsubscribe(IStream::TSharedPtr const &stream) override;
+    void wake       (Event::TSharedPtr const &event) override;
+    void wake       (std::list<Event::TSharedPtr> const &events) override;
 
 private:
-    static size_t const DEFAULT_EVENTS_LIMIT = 4;
+    static size_t const DEFAULT_EVENTS_LIMIT = 65535;
 
     template<typename T>
     static T assertOK(T const &result, std::string const &message);
 
     static void handleSignal(int signal);
 
-    std::array<int, 2> registerPipe();
+    void wakeKEvent();
 
-    struct timespec m_timeout;
-
-    std::vector<struct kevent> m_triggered_events;
-
-    std::atomic<int>    m_kqueue;
-    std::array<int, 2>  m_pipe_add;
-    std::array<int, 2>  m_pipe_del;
-
-    std::unordered_map<uintptr_t, IStream::TSharedPtr>
-        m_map_fd_stream;
-    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
-        m_wake_events;
+    struct timespec
+        m_timeout;
+    std::vector<struct kevent>
+        m_triggered_events;
+    std::atomic<int>
+        m_kqueue;
+    IMultiplexer::TSharedPtr
+        m_poll_multiplexer;
 };
 
 
@@ -78,8 +72,8 @@ T CMultiplexer::assertOK(T const &result, std::string const &message) {
     if (result < 0)
         throw std::runtime_error(message + ": " + std::strerror(errno) +
           ", code " + iridium::convertion::convert<std::string>(errno)); // ----->
-    else
-        return result; // ----->
+
+    return result; // ----->
 }
 
 

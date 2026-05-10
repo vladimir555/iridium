@@ -27,16 +27,22 @@ public:
 
     virtual ~CFileStream();
 
-    void initialize()   override;
-    void finalize()     override;
+    void initialize() override;
+    void finalize() override;
 
-    std::list<uintptr_t>    getHandles()    const override;
-    URI::TSharedPtr         getURI()        const override;
-    TFileStatus             getStatus()     const override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
+    TFileStatus
+        getStatus() const override;
 
-    Buffer::TSharedPtr      read(size_t const &size) override;
-    size_t                  write(Buffer::TSharedPtr const &buffer) override;
-    void                    flush() override;
+    Buffer::TSharedPtr
+        read(size_t const &size) override;
+    size_t
+        write(Buffer::TSharedPtr const &buffer) override;
+    void
+        flush() override;
 
 protected:
 

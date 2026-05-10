@@ -7,16 +7,17 @@
 
 
 #include <string>
-#include "iridium/smart_ptr.h"
+#include "iridium/parsing/node_type.h"
 
 
 namespace iridium::testing {
 
 
-class ITest {
+class IUnitTestCase {
 public:
-    DEFINE_INTERFACE(ITest)
+    DEFINE_INTERFACE(IUnitTestCase)
     virtual void run() = 0;
+    virtual size_t getLine() const = 0;
 };
 
 

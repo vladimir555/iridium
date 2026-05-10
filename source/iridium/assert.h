@@ -89,6 +89,7 @@ struct TContainerHasSizeMethod<T, std::void_t<decltype(std::declval<T>().size())
 template<typename T, typename TException>
 [[nodiscard]] std::decay_t<T> assertSize(T &&values, size_t const &size, TException const &exception) {
     static_assert(TContainerHasSizeMethod<std::decay_t<T>>::value, "Type T must have a size() method");
+    static_assert(std::is_base_of_v<std::exception, TException>, "TException must inherit from std::exception");
 
     auto values_size = values.size();
     if (values_size == size) {
@@ -109,15 +110,35 @@ template<typename T>
 }
 
 
-template<typename T, typename TException>
-[[nodiscard]] std::decay_t<T> assertOne(T &&values, TException const &exception) {
-    return assertSize(std::forward<T>(values), 1, exception);
+template<typename T>
+[[nodiscard]] std::decay_t<T> assertSize(T &&values, size_t const &size, char const * const error) {
+    return assertSize(std::forward<T>(values), size, std::string(error));
 }
 
 
-template<typename T>
-[[nodiscard]] std::decay_t<T> assertOne(T &&values, std::string const &error) {
-    return assertOne(std::forward<T>(values), std::runtime_error(error));
+template<typename TContainer, typename TException>
+typename TContainer::value_type
+assertOne(TContainer const &values, TException const &exception) {
+    static_assert(std::is_base_of_v<std::exception, TException>, "TException must inherit from std::exception");
+
+    if (values.size() == 1)
+        return values.front(); // ----->
+    else
+        throw exception; // ----->
+}
+
+
+template<typename TContainer>
+typename TContainer::value_type
+assertOne(TContainer const &values, std::string const &error) {
+    return assertOne(values, std::runtime_error(error));
+}
+
+
+template<typename TContainer>
+typename TContainer::value_type
+assertOne(TContainer const &values, char const * const error) {
+    return assertOne(values, std::runtime_error(error));
 }
 
 

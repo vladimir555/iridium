@@ -1,6 +1,31 @@
 #include "stream.h"
 
 
+using iridium::io::IStream;
+using iridium::convertion::convert;
+
+
+namespace {
+
+
+std::string convertToString(IStream const &stream) {
+    return "{ '" +
+        convert<std::string>(stream.getURI())     + "', " +
+        convert<std::string>(stream.getHandles()) + " }";
+};
+
+
+} // unnamed
+
+
+IMPLEMENT_ENUM(iridium::io::IStream::THandleType);
+
+IMPLEMENT_CONVERT(std::string, iridium::io::IStream,        convertToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStreamReader,  convertToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStreamWriter,  convertToString);
+IMPLEMENT_CONVERT(std::string, iridium::io::IStreamPort,    convertToString);
+
+
 ////
 //bool operator < (IStream::TSharedPtr const &l, IStream::TSharedPtr const &r) {
 //    return !(l && r && (l->getID() < r->getID()));

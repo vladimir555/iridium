@@ -23,55 +23,39 @@ size_t std::hash<iridium::io::Event>::operator()
 
     if (e.stream) {
         for (auto const &handle: e.stream->getHandles())
-            hash ^= static_cast<size_t>(handle) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            hash ^= static_cast<size_t>(handle.second) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     }
 
     hash ^= static_cast<size_t>(e.operation) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     hash ^= static_cast<size_t>(e.status)    + 0x9e3779b9 + (hash << 6) + (hash >> 2);
 
     return hash; // ----->
-
-//    size_t hash = 17;
-//
-//    if (e.stream) {
-//        for (size_t const handle: e.stream->getHandles())
-//            hash = hash * 31 + std::hash<size_t>()(handle);
-//    }
-//
-//    hash = hash * 31 + std::hash<size_t>()(static_cast<size_t>(e.operation));
-//    hash = hash * 31 + std::hash<size_t>()(static_cast<size_t>(e.status));
-//
-//    return hash; // ----->
 }
 
 
 size_t std::hash<iridium::io::Event::TSharedPtr>::operator()
     (iridium::io::Event::TSharedPtr const &e) const
 {
-    size_t hash = 0;
-
-    if (e)
-        return std::hash<iridium::io::Event>()(*e);
-
-    return hash; // ----->
+    return e ? std::hash<iridium::io::Event>()(*e) : 0; // ----->
 }
 
 
 namespace {
 
 
-std::string convertEnumToString(iridium::io::Event const &event) {
+std::string convertToString(iridium::io::Event const &event) {
     using iridium::convertion::convert;
     return
-        convert<std::string>(event.stream->getHandles()) + " " +
-        convert<std::string>(event.operation) + " " +
-        convert<std::string>(event.status);
+          "{ "   + convert<std::string>(event.stream)
+        + ", "   + convert<std::string>(event.operation)
+        + ", "   + convert<std::string>(event.status)
+        +  " }";
 }
 
 
-}
+} // unnamed
 
 
 IMPLEMENT_ENUM(iridium::io::Event::TOperation)
 IMPLEMENT_ENUM(iridium::io::Event::TStatus)
-IMPLEMENT_CONVERT(std::string, iridium::io::Event, convertEnumToString)
+IMPLEMENT_CONVERT(std::string, iridium::io::Event, convertToString)

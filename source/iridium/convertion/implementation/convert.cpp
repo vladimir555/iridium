@@ -57,7 +57,7 @@ size_t const time_to_string_buffer_size     = 64;
 namespace iridium::convertion::implementation {
 
 
-std::atomic<int> config::double_precission(5);
+thread_local int config::double_precission = 5;
 
 
 //template<>
@@ -107,29 +107,42 @@ string TConvert<string, system_clock::time_point>::convert(
 }
 
 
-string TConvert<string, hours>::convert(hours const &value) {
-    return TConvert<string, hours::rep>::convert(static_cast<uint32_t>(value.count())) + " hours"; // ----->
-}
+std::string TConvert<std::string, system_clock::duration>::convert(system_clock::duration const &value) {
+    if (value == system_clock::duration::zero())
+        return "0s"; // ----->
 
+    bool is_negative    = value < system_clock::duration::zero();
+    auto remaining      = is_negative ? -value : value;
 
-string TConvert<string, minutes>::convert(minutes const &value) {
-    return TConvert<string, minutes::rep>::convert(static_cast<uint32_t>(value.count())) + " minutes";
-}
+    auto h  = duration_cast<hours>(remaining);
+    remaining -= h;
+    auto m  = duration_cast<minutes>(remaining);
+    remaining -= m;
+    auto s  = duration_cast<seconds>(remaining);
+    remaining -= s;
+    auto ms = duration_cast<milliseconds>(remaining);
+    remaining -= ms;
+    auto us = duration_cast<microseconds>(remaining);
+    remaining -= us;
+    auto ns = duration_cast<nanoseconds>(remaining);
 
-string TConvert<string, seconds>::convert(seconds const &value) {
-    return TConvert<string, seconds::rep>::convert(static_cast<uint32_t>(value.count())) + " seconds";
-}
+    std::string result;
+    if (is_negative) result += "-";
 
-string TConvert<string, milliseconds>::convert(milliseconds const &value) {
-    return TConvert<string, milliseconds::rep>::convert(static_cast<uint32_t>(value.count())) + " milliseconds";
-}
+    if (h.count())
+        result += TConvert<std::string, int64_t>::convert(h.count()) + "h";
+    if (m.count())
+        result += TConvert<std::string, int64_t>::convert(m.count()) + "m";
+    if (s.count())
+        result += TConvert<std::string, int64_t>::convert(s.count()) + "s";
+    if (ms.count())
+        result += TConvert<std::string, int64_t>::convert(ms.count()) + "ms";
+    if (us.count())
+        result += TConvert<std::string, int64_t>::convert(us.count()) + "us";
+    if (ns.count())
+        result += TConvert<std::string, int64_t>::convert(ns.count()) + "ns";
 
-string TConvert<string, microseconds>::convert(microseconds const &value) {
-    return TConvert<string, microseconds::rep>::convert(static_cast<uint32_t>(value.count())) + " microseconds";
-}
-
-string TConvert<string, nanoseconds>::convert(nanoseconds const &value) {
-    return TConvert<string, nanoseconds::rep>::convert(static_cast<uint32_t>(value.count())) + " nanoseconds";
+    return result.empty() ? "0s" : result;
 }
 
 
@@ -313,20 +326,21 @@ string TConvert<string, std::exception>::convert(std::exception const &e) {
 
 string TConvert<string, std::nested_exception>::convert(std::nested_exception const &e) {
     try {
-        e.rethrow_nested();
+        if (e.nested_ptr())
+            e.rethrow_nested();
+        else
+            return "";
     } catch (std::exception const &inner) {
         return formatException(inner);
     } catch (...) {
         return "unknown exception";
     }
-
-    // return "";
 }
 
 
 system_clock::time_point TConvert<system_clock::time_point, string>::convert(string const &value) {
     if (value.size() != time_scan_format_size)
-        throw runtime_error("convert '" + value + "' to time_t error, wrong source string format"); // ----->
+        throw runtime_error("convertion '" + value + "' to time_t error, wrong source string format"); // ----->
 
     struct std::tm  tm_ = {};
     int ms = 0;
@@ -346,12 +360,78 @@ system_clock::time_point TConvert<system_clock::time_point, string>::convert(str
         auto time = platform::mkgmtime(&tm_);
 
         if (time < 0)
-            throw runtime_error("convert '" + value + "' to time_t error, mkgmtime error"); // ----->
+            throw runtime_error("convertion '" + value + "' to time_t error, mkgmtime error"); // ----->
 
         return system_clock::time_point(std::chrono::seconds(time)) + std::chrono::milliseconds(ms); // ----->
     }
     else
-        throw runtime_error("convert '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
+        throw runtime_error("convertion '" + value + "' to time_t error, sscanf: wrong source string format"); // ----->
+}
+
+
+system_clock::duration TConvert<system_clock::duration, string>::convert(string const &value) {
+    if (value.empty()) {
+        return std::chrono::system_clock::duration::zero();
+    }
+
+    size_t position = 0;
+    bool negative = false;
+
+    if (value[position] == '-') {
+        negative = true;
+        ++position;
+    }
+
+    int64_t total_nanoseconds = 0;
+
+    while (position < value.size()) {
+        while (position < value.size() && std::isspace(value[position])) {
+            ++position;
+        }
+
+        if (position >= value.size())
+            break;
+
+        size_t number_start = position;
+        while (position < value.size() && (std::isdigit(value[position]) || value[position] == '.')) {
+            ++position;
+        }
+
+        if (position == number_start)
+            break;
+
+        int64_t count = std::stoll(value.substr(number_start, position - number_start));
+
+        size_t unit_start = position;
+        while (position < value.size() && std::isalpha(value[position])) {
+            ++position;
+        }
+
+        std::string unit = value.substr(unit_start, position - unit_start);
+
+        if (unit.empty())
+            unit = "s";
+
+        if (unit == "h") {
+            total_nanoseconds += count * 3600000000000LL;
+        } else if (unit == "m") {
+            total_nanoseconds += count * 60000000000LL;
+        } else if (unit == "s") {
+            total_nanoseconds += count * 1000000000LL;
+        } else if (unit == "ms") {
+            total_nanoseconds += count * 1000000LL;
+        } else if (unit == "us" || unit == "µs") {
+            total_nanoseconds += count * 1000LL;
+        } else if (unit == "ns") {
+            total_nanoseconds += count;
+        }
+    }
+
+    auto result = std::chrono::duration_cast<std::chrono::system_clock::duration>(
+        std::chrono::nanoseconds(total_nanoseconds)
+    );
+
+    return negative ? -result : result;
 }
 
 
@@ -371,14 +451,14 @@ bool TConvert<bool, string>::convert(string const &value_) {
     if (value == "false")
         return false; // ----->
 
-    throw runtime_error("convert '" + value_ + "' to bool error"); // ----->
+    throw runtime_error("convertion '" + value_ + "' to bool error"); // ----->
 }
 
 
 int32_t TConvert<int32_t, string>::convert(string const &value) {
     for (auto const ch: value)
         if ((ch < '0' || ch > '9') && ch != '-')
-            throw runtime_error("convert '" + value + "' to int32 error"); // ----->
+            throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
 
     int32_t i = atoi(value.c_str());
 
@@ -387,7 +467,7 @@ int32_t TConvert<int32_t, string>::convert(string const &value) {
         if (result == 1)
             return i; // ----->
         else
-            throw runtime_error("convert '" + value + "' to int32 error"); // ----->
+            throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
     } else {
         return i; // ----->
     }
@@ -397,7 +477,7 @@ int32_t TConvert<int32_t, string>::convert(string const &value) {
 int64_t TConvert<int64_t, string>::convert(string const &value) {
     for (auto const ch : value)
         if ((ch < '0' || ch > '9') && ch != '-')
-            throw runtime_error("convert '" + value + "' to int64 error"); // ----->
+            throw runtime_error("convertion '" + value + "' to int64 error"); // ----->
 
     int64_t i = atoll(value.c_str());
 
@@ -406,7 +486,7 @@ int64_t TConvert<int64_t, string>::convert(string const &value) {
         if (result == 1)
             return i; // ----->
         else
-            throw runtime_error("convert '" + value + "' to int64 error"); // ----->
+            throw runtime_error("convertion '" + value + "' to int64 error"); // ----->
     } else {
         return i; // ----->
     }
@@ -417,7 +497,7 @@ uint32_t TConvert<uint32_t, string>::convert(string const &value) {
     // todo: int test
     auto result = TConvert<uint64_t, string>::convert(value);
     if (result > UINT32_MAX)
-        throw runtime_error("convert '" + value + "' to uint32 error"); // ----->
+        throw runtime_error("convertion '" + value + "' to uint32 error"); // ----->
     return static_cast<uint32_t>(result); // ----->
 }
 
@@ -425,7 +505,7 @@ uint32_t TConvert<uint32_t, string>::convert(string const &value) {
 uint16_t TConvert<uint16_t, string>::convert(string const &value) {
     auto result = TConvert<uint64_t, string>::convert(value);
     if (result > UINT16_MAX)
-        throw runtime_error("convert '" + value + "' to uint16 error"); // ----->
+        throw runtime_error("convertion '" + value + "' to uint16 error"); // ----->
     return static_cast<uint16_t>(result); // ----->
 }
 
@@ -433,7 +513,7 @@ uint16_t TConvert<uint16_t, string>::convert(string const &value) {
 uint8_t TConvert<uint8_t, string>::convert(string const &value) {
     auto result = TConvert<uint64_t, string>::convert(value);
     if (result > UINT8_MAX)
-        throw runtime_error("convert '" + value + "' to uint8 error"); // ----->
+        throw runtime_error("convertion '" + value + "' to uint8 error"); // ----->
     return static_cast<uint8_t>(result); // ----->
 }
 
@@ -450,7 +530,7 @@ TResult convertStringToReal(string const &value, std::string const &format) {
 
     for (auto const &ch: value)
         if ((ch < '0' || ch > '9') && ch != '.' && ch != '-')
-            throw runtime_error("convert '" + value + "' to double error"); // ----->
+            throw runtime_error("convertion '" + value + "' to double error"); // ----->
 
     auto d = ::atof(value.c_str());
 
@@ -460,7 +540,7 @@ TResult convertStringToReal(string const &value, std::string const &format) {
         if (result == 1)
             return static_cast<TResult>(d); // ----->
         else
-            throw runtime_error("convert '" + value + "' to double error"); // ----->
+            throw runtime_error("convertion '" + value + "' to double error"); // ----->
     } else
         return static_cast<TResult>(d); // ----->
 }
@@ -571,14 +651,14 @@ string TConvert<string, u16string>::convert(u16string const &value) {
                     symbol = 0x10000 + ((symbol - 0xD800) << 10) + (low - 0xDC00);
                 else
                     throw std::runtime_error(
-                        "convert utf16 to utf8 error: invalid surrogate pair sequence"); // ----->
+                        "convertion utf16 to utf8 error: invalid surrogate pair sequence"); // ----->
             } else
                 throw std::runtime_error(
-                    "convert utf16 to utf8 error: high surrogate without following low surrogate"); // ----->
+                    "convertion utf16 to utf8 error: high surrogate without following low surrogate"); // ----->
         } else
         if (symbol >= 0xDC00 && symbol <= 0xDFFF)
             throw std::runtime_error(
-                "convert utf16 to utf8 error: orphan low surrogate without preceding high surrogate"); // ----->
+                "convertion utf16 to utf8 error: orphan low surrogate without preceding high surrogate"); // ----->
 
         if (symbol <= 0x7F) {
             result.push_back(static_cast<char>(symbol));
@@ -625,7 +705,7 @@ string TConvert<string, u32string>::convert(u32string const &value) {
             result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
         } else
-            throw std::invalid_argument("Invalid UTF-32 code symbol: " +
+            throw std::invalid_argument("convertion utf32 to utf8 error: invalid UTF-32 code symbol: " +
                 TConvert<string, uint32_t>::convert(symbol, 16)); // ----->
     }
     return result; // ----->

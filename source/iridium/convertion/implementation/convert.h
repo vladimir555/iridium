@@ -29,7 +29,7 @@ namespace iridium::convertion::implementation {
 
 
 struct config {
-    static std::atomic<int> double_precission;
+    static thread_local int double_precission;
 };
 
 
@@ -41,38 +41,8 @@ struct TConvert<std::string, std::chrono::system_clock::time_point> {
 
 
 template<>
-struct TConvert<std::string, std::chrono::hours> {
-    static std::string convert(std::chrono::hours const &value);
-};
-
-
-template<>
-struct TConvert<std::string, std::chrono::minutes> {
-    static std::string convert(std::chrono::minutes const &value);
-};
-
-
-template<>
-struct TConvert<std::string, std::chrono::seconds> {
-    static std::string convert(std::chrono::seconds const &value);
-};
-
-
-template<>
-struct TConvert<std::string, std::chrono::milliseconds> {
-    static std::string convert(std::chrono::milliseconds const &value);
-};
-
-
-template<>
-struct TConvert<std::string, std::chrono::microseconds> {
-    static std::string convert(std::chrono::microseconds const &value);
-};
-
-
-template<>
-struct TConvert<std::string, std::chrono::nanoseconds> {
-    static std::string convert(std::chrono::nanoseconds const &value);
+struct TConvert<std::string, std::chrono::system_clock::duration> {
+    static std::string convert(std::chrono::system_clock::duration const &value);
 };
 
 
@@ -173,6 +143,12 @@ struct TConvert<std::string, std::nested_exception> {
 template<>
 struct TConvert<std::chrono::system_clock::time_point, std::string> {
     static std::chrono::system_clock::time_point convert(std::string const &value);
+};
+
+
+template<>
+struct TConvert<std::chrono::system_clock::duration, std::string> {
+    static std::chrono::system_clock::duration convert(std::string const &value);
 };
 
 

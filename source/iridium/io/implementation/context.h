@@ -29,11 +29,14 @@ public:
     void pushEvent(Event::TSharedPtr const &event) override;
     std::list<Event::TSharedPtr>
          popEvents() override;
+
     std::list<Event::TSharedPtr>
          checkOutdatedStreams() override;
 
-    bool update    (Event::TSharedPtr const &event) override;
-    bool transmit  (Event::TSharedPtr const &event) override;
+    bool update(Event::TSharedPtr const &event) override;
+    // bool transmit  (Event::TSharedPtr const &event) override;
+    IPipe::TSharedPtr
+        getPipe(Event::TSharedPtr const &event) override;
 
     void createPipe(std::string const &name) override;
     void removePipe(std::string const &name) override;

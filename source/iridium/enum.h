@@ -87,8 +87,11 @@ private: \
             std::string name = iridium::trim(iridium::split(arg, "=").front()); \
             if (m.find(*i) == m.end()) \
                 (m)[*i++] = name; \
-            else \
-                throw std::runtime_error(std::string(#TEnum) + " map key collision " + (m)[*i] + " and " + name); \
+            else { \
+                auto error = std::string(#TEnum) + " map key collision " + (m)[*i] + " and " + name; \
+                printf("%s\n", error.c_str()); \
+                throw std::runtime_error(error); \
+            } \
         } \
         return std::forward<std::map<TEnumInternal, std::string> const>(m); \
     } \
@@ -124,7 +127,11 @@ public: \
         std::string result; \
         for (auto const &f: TEnum::getEnums()) \
             if (m_value & f) \
-                result += convert(f) + " "; \
+                result += convert(f) + " | "; \
+        if (result.size() > 3) \
+            result.resize(result.size() - 3); \
+        else \
+            result = "UNKNOWN"; \
         return result; \
     } \
 };

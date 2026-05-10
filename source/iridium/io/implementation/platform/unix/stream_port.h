@@ -30,12 +30,18 @@ protected:
     virtual ~CStreamPort() = default;
 
 public:
-    virtual void            initialize() override = 0;
-    virtual void            finalize() override = 0;
-    size_t                  write(Buffer::TSharedPtr const &buffer) override;
-    Buffer::TSharedPtr      read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
-    std::list<uintptr_t>    getHandles() const override;
-    URI::TSharedPtr         getURI() const override;
+    virtual void
+        initialize() override = 0;
+    virtual void
+        finalize() override = 0;
+    size_t
+        write(Buffer::TSharedPtr const &buffer) override;
+    Buffer::TSharedPtr
+        read(size_t const &size = DEFAULT_BUFFER_SIZE) override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
 
 protected:
     void setBlockingMode(bool const &is_blocking);
@@ -50,6 +56,7 @@ protected:
 
     std::atomic<int>    m_fd_reader;
     std::atomic<int>    m_fd_writer;
+    std::atomic<int>    m_pid;
     URI::TSharedPtr     m_uri;
     bool                m_is_opened;
     bool                m_is_blocking_mode;

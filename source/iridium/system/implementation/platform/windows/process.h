@@ -34,7 +34,7 @@ public:
 
     CProcessStream(
         std::string const &app,
-        std::string const &args);
+        std::string const &args = {});
     CProcessStream(
         std::string const &app,
         std::vector<std::string> const &args);
@@ -46,15 +46,25 @@ public:
     void   sendSignal(TSignal const &signal) override;
 
 private:
-    static std::atomic<uint64_t>    m_process_counter;
+    static std::atomic<uint64_t>
+        m_process_counter;
 
-    io::URI::TSharedPtr             m_uri;
-    std::string                     m_app;
-    std::string                     m_args;
-    std::string                     m_command_line;
-    PROCESS_INFORMATION             m_process;
-    SECURITY_ATTRIBUTES             m_security_attributes;
-    TState::TSharedPtr              m_finalized_state;
+    io::URI::TSharedPtr
+        m_uri;
+    std::string
+        m_app;
+    std::string
+        m_args;
+    std::string
+        m_command_line;
+    PROCESS_INFORMATION
+        m_process;
+    SECURITY_ATTRIBUTES
+        m_security_attributes;
+    TState::TSharedPtr
+        m_finalized_state;
+    IProcess::TState::TCondition
+        m_condition_override;
 };
 
 

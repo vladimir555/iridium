@@ -16,7 +16,7 @@
 namespace iridium::io {
 
 
-// todo: public IAsyncQueuePopper<IEvent::TSharedPtr>
+// todo: rm, deprecated
 class IMultiplexer: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IMultiplexer)

@@ -19,14 +19,17 @@ public:
     DEFINE_IMPLEMENTATION(CStreamReaderList)
     CStreamReaderList();
 
-    void    initialize()    override;
-    void    finalize()      override;
+    void initialize() override;
+    void finalize() override;
 
-    Buffer::TSharedPtr      read(size_t const &size) override;
-    std::list<uintptr_t>    getHandles() const override;
-    URI::TSharedPtr         getURI() const override;
+    Buffer::TSharedPtr
+        read(size_t const &size) override;
+    TMapHandleTypeIdent
+        getHandles() const override;
+    URI::TSharedPtr
+        getURI() const override;
 
-    void    add(IStreamReader::TSharedPtr const &stream_reader);
+    void add(IStreamReader::TSharedPtr const &stream_reader);
 
 private:
     std::list<IStreamReader::TSharedPtr>            m_streams;

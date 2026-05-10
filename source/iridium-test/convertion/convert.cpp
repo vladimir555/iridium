@@ -133,18 +133,81 @@ namespace iridium::convertion {
 //}
 
 
+TEST(specializations) {
+    convert<std::string, std::chrono::system_clock::time_point, true>({});
+    convert<std::string, std::chrono::system_clock::duration, true>(std::chrono::system_clock::duration::zero());
+
+    convert<std::string, bool, true>({});
+    convert<std::string, int64_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int64_t, true>({});
+    convert<std::string, uint64_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint64_t, true>({});
+    convert<std::string, int32_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int32_t, true>({});
+    convert<std::string, uint32_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint32_t, true>({});
+    convert<std::string, int16_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int16_t, true>({});
+    convert<std::string, uint16_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint16_t, true>({});
+    convert<std::string, int8_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, int8_t, true>({});
+    convert<std::string, uint8_t, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, uint8_t, true>({});
+    convert<std::string, double, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, double, true>({});
+    convert<std::string, float, uint8_t, true>({}, uint8_t{10});
+    convert<std::string, float, true>({});
+
+    convert<std::string, std::thread::id, true>({});
+    convert<std::string, std::exception, true>({});
+    convert<std::chrono::system_clock::time_point, std::string, true>("2025-12-12 01:01:01.001");
+
+    convert<bool, std::string, true>("true");
+    convert<int32_t, std::string, true>("0");
+    convert<int64_t, std::string, true>("0");
+    convert<uint32_t, std::string, true>("0");
+    convert<uint16_t, std::string, true>("0");
+    convert<uint8_t, std::string, true>("0");
+    convert<uint64_t, std::string, true>("0");
+    convert<double, std::string, true>("0");
+    convert<float, std::string, true>("0");
+
+    convert<std::string, long long, true>({});
+    convert<std::string, std::wstring, true>({});
+    convert<std::wstring, std::string, true>({});
+    convert<std::string, std::u16string, true>({});
+    convert<std::string, std::u32string, true>({});
+    convert<std::u16string, std::string, true>({});
+    convert<std::u32string, std::string, true>({});
+
+    convert<int, int, true>({});
+    convert<std::string, std::string, true>({});
+    convert<std::string, std::nested_exception, true>({});
+    convert<std::string, uintptr_t, true>({});
+    convert<std::string, intptr_t, true>({});
+
+    convert<std::string, std::unordered_map<string, int>, true >( { {"s1", 1}, {"s2", 2} } );
+    convert<std::string, std::map<string, int>, true >( { {"s1", 1}, {"s2", 2} } );
+    convert<std::string, std::vector<string>, true >( { "s1", "s2" } );
+    convert<std::string, std::list<string>, true >( { "s1", "s2" } );
+    convert<std::string, std::set<string>, true >( { "s1", "s2" } );
+    convert<std::string, std::pair<string, int>, true >( { "s1", 1 } );
+}
+
+
 TEST(types) {
     ASSERT("true"   , equal, convert<string>(true));
     ASSERT("false"  , equal, convert<string>(false));
 
-    ASSERT("12345"  , equal, convert<string>(static_cast<uint64_t>(12345)));
-    ASSERT("5"      , equal, convert<string>(static_cast<uint64_t>(5)));
-    ASSERT("5"      , equal, convert<string>(static_cast<uint32_t>(5)));
-    ASSERT("-5"     , equal, convert<string>(static_cast<int64_t>(-5)));
-    ASSERT("-5"     , equal, convert<string>(static_cast<int32_t>(-5)));
-    ASSERT("0"      , equal, convert<string>(static_cast<int64_t>(0)));
-    ASSERT("0"      , equal, convert<string>(static_cast<int32_t>(0)));
-    ASSERT("F"      , equal, convert<string>(15, static_cast<uint8_t>(16)));
+    ASSERT("12345"  , equal, convert<string>(uint64_t{12345}));
+    ASSERT("5"      , equal, convert<string>(uint64_t{5}));
+    ASSERT("5"      , equal, convert<string>(uint32_t{5}));
+    ASSERT("-5"     , equal, convert<string>(int64_t{-5}));
+    ASSERT("-5"     , equal, convert<string>(int32_t{-5}));
+    ASSERT("0"      , equal, convert<string>(int64_t{0}));
+    ASSERT("0"      , equal, convert<string>(int32_t{0}));
+    ASSERT("F"      , equal, convert<string>(15, uint8_t{16}));
 
     ASSERT("5.50000", equal, convert<string>(5.5));
     ASSERT("5.56"   , equal, convert<string>(5.556, static_cast<uint8_t>(2)));
@@ -188,35 +251,40 @@ TEST(types) {
     ASSERT(convert<float>(string(""))          , std::exception);
 
     // time_point
-    typedef system_clock::time_point TTime;
+    typedef system_clock::time_point TTimePoint;
     using std::chrono::seconds;
-    auto to_time_t = [] (TTime const &t) {
+    auto to_time_t = [] (TTimePoint const &t) {
         return time_t(std::chrono::duration_cast<std::chrono::seconds>(t.time_since_epoch()).count());
     };
 
-    ASSERT("2015-05-05 05:05:05.000", equal, convert<string>(TTime(seconds(1430802305))));
+    ASSERT("2015-05-05 05:05:05.000", equal, convert<string>(TTimePoint(seconds(1430802305))));
 
-    ASSERT(to_time_t(convert<TTime>(string("2015-05-05 05:05:05.000"))), equal, 1430802305);
-    ASSERT(TTime(std::chrono::milliseconds(555)), equal, convert<TTime>(string("1970-01-01 00:00:00.555")));
+    ASSERT(to_time_t(convert<TTimePoint>(string("2015-05-05 05:05:05.000"))), equal, 1430802305);
+    ASSERT(TTimePoint(std::chrono::milliseconds(555)), equal, convert<TTimePoint>(string("1970-01-01 00:00:00.555")));
 
 #ifdef PLATFORM_CPU64
-    ASSERT(4449517261, equal, to_time_t(convert<TTime>(string("2111-01-01 01:01:01.000"))));
+    ASSERT(4449517261, equal, to_time_t(convert<TTimePoint>(string("2111-01-01 01:01:01.000"))));
 #endif
 
-    ASSERT(convert<TTime>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
+    ASSERT(convert<TTimePoint>(string("2015-05-05 05:05:05.000 wrong")), std::exception);
 
+    {
+        system_clock::duration d =
+            std::chrono::hours(1) +
+            std::chrono::minutes(2) +
+            std::chrono::seconds(3) +
+            std::chrono::milliseconds(4) +
+            std::chrono::microseconds(5);
+            // std::chrono::nanoseconds(6);
+        std::string s = "1h2m3s4ms5us";
+        ASSERT(s, equal, convert<string>(d));
+        ASSERT(d, equal, convert<system_clock::duration>(s));
+        ASSERT(std::chrono::seconds(5), equal, convert<system_clock::duration>(string("5")));
+    }
 
-//#ifndef _WIN32
-//    ASSERT(string("ħëłlö"), equal, convert<string>(wstring(L"ħëłlö")));
     ASSERT(std::string(u8"ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));
-//#endif // !_WIN32
-//    uint8_t  const hello_s[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
-//    uint32_t const hello_w[] = { 0xC4, 0xA7, 0xC3, 0xAB, 0xC5, 0x82, 0x6C, 0xC3, 0xB6 };
-//    wstring hello_wstr(hello_w, hello_w + sizeof(hello_w) / sizeof(hello_w[0]));
-//    string  hello_str (hello_s, hello_s + sizeof(hello_s) / sizeof(hello_s[0]));
-//    //LOGT << hello_str;
-//    //LOGT << convert<string>(hello_wstr);
-//    ASSERT(hello_str, equal, convert<string>(hello_wstr));
+
+    ASSERT(convert<string>(0, uint8_t(0)), std::exception);
 }
 
 

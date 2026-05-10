@@ -21,6 +21,7 @@ namespace iridium::parsing::implementation {
 // ----- interface
 
 
+// todo: copy-on-write (cow) + node diff
 template<typename TValue>
 class CNodeType : virtual public INodeType<TValue> {
 public:
@@ -30,45 +31,75 @@ public:
     explicit CNodeType(std::string const &name);
     virtual ~CNodeType();
 
-    virtual typename INodeType<TValue>::TNodesPtr getParents() const override;
-    std::string getName() const override final;
-    TValue      getValue() const override;
-    void        setValue(TValue const &value) override;
-    std::string getType() const override;
+    virtual typename INodeType<TValue>::TNodesPtr
+        getParents() const override;
+    std::string
+        getName() const override final;
+    TValue
+        getValue() const override;
+    void
+        setValue(TValue const &value) override;
+    std::string
+        getType() const override;
 
-    typename INodeType<TValue>::TNodesSharedPtr slice(std::string const &path) const override;
+    typename INodeType<TValue>::TNodesSharedPtr
+        slice(std::string const &path) const override;
 
-    typename INodeType<TValue>::iterator        begin() override;
-    typename INodeType<TValue>::iterator        end() override;
-    typename INodeType<TValue>::const_iterator  begin() const override;
-    typename INodeType<TValue>::const_iterator  end() const override;
+    typename INodeType<TValue>::iterator
+        begin() override;
+    typename INodeType<TValue>::iterator
+        end() override;
+    typename INodeType<TValue>::const_iterator
+        begin() const override;
+    typename INodeType<TValue>::const_iterator
+        end() const override;
 
-    size_t size() const override;
-    bool hasChilds() const override;
+    size_t
+        size() const override;
+    bool
+        hasChilds() const override;
 
-    typename INodeType<TValue>::TSharedPtr      getChild(std::string const &name) override;
-    typename INodeType<TValue>::TConstSharedPtr getChild(std::string const &name) const override;
-    typename INodeType<TValue>::TNodesSharedPtr getChilds(std::string const &name) const override;
+    typename INodeType<TValue>::TSharedPtr
+        getChild(std::string const &name) override;
+    typename INodeType<TValue>::TConstSharedPtr
+        getChild(std::string const &name) const override;
+    typename INodeType<TValue>::TNodesSharedPtr
+        getChilds(std::string const &name) const override;
 
-    typename INodeType<TValue>::TSharedPtr      addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
-    typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name) override;
-    typename INodeType<TValue>::TSharedPtr      addChild(std::string const &name, TValue const &value) override;
+    typename INodeType<TValue>::TSharedPtr
+        addChild(typename INodeType<TValue>::TSharedPtr const &child_node) override;
+    typename INodeType<TValue>::TSharedPtr
+        addChild(std::string const &name) override;
+    typename INodeType<TValue>::TSharedPtr
+        addChild(std::string const &name, TValue const &value) override;
 
-    void                                        delChilds(std::string const &name) override;
+    void
+        delChilds(std::string const &name) override;
 
-    typename INodeType<TValue>::TSharedPtr      clone() const override;
+    typename INodeType<TValue>::TSharedPtr
+        clone() const override;
 
 private:
-    typedef std::unordered_set<std::string> TStrings;
-    explicit CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings);
-    explicit CNodeType(std::string const &name, std::shared_ptr<TStrings> const &strings);
-    std::string const *makeName(std::string const &name);
-    std::shared_ptr<TStrings> m_strings;
-    std::string const * const m_name = nullptr;
-    std::string const * const m_type = nullptr;
-    TValue m_value;
-    typename INodeType<TValue>::TNodesSharedPtr m_nodes;
-    typename INodeType<TValue>::TNodesPtr       m_parent_nodes;
+    typedef std::unordered_set<std::string>
+        TStrings;
+    explicit
+        CNodeType(std::string const &name, TValue const &value, std::shared_ptr<TStrings> const &strings);
+    explicit
+        CNodeType(std::string const &name, std::shared_ptr<TStrings> const &strings);
+    std::string const
+       *makeName(std::string const &name);
+    std::shared_ptr<TStrings>
+        m_strings;
+    std::string const * const
+        m_name = nullptr;
+    std::string const * const
+        m_type = nullptr;
+    TValue
+        m_value;
+    typename INodeType<TValue>::TNodesSharedPtr
+        m_nodes;
+    typename INodeType<TValue>::TNodesPtr
+        m_parent_nodes;
 };
 
 
@@ -202,8 +233,16 @@ typename INodeType<TValue>::TNodesSharedPtr CNodeType<TValue>::slice(std::string
                 nodes.push_back(node);
     } else {
         for (auto &node: m_nodes)
-            if (node->getName() == child_path)
+            if (node->getName() == child_path) {
+                // this is faster
                 nodes.splice(nodes.end(), node->slice(next_path));
+                // then this
+                // auto slice = node->slice(next_path);
+                // nodes.insert(
+                //     nodes.end(),
+                //     std::make_move_iterator(slice.begin()),
+                //     std::make_move_iterator(slice.end()));
+            }
     }
 
     return nodes; // ----->
@@ -304,10 +343,12 @@ typename INodeType<TValue>::TSharedPtr CNodeType<TValue>::addChild(std::string c
 
 template<typename TValue>
 void CNodeType<TValue>::delChilds(std::string const &name) {
-    m_nodes.remove_if(
-        [&] (auto const &node) {
-            return node->getName() == name;
-        }
+    m_nodes.erase(
+        std::remove_if(m_nodes.begin(), m_nodes.end(),
+            [&](auto const& node) {
+                return node->getName() == name;
+            }),
+        m_nodes.end()
     );
 }
 

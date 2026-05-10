@@ -13,6 +13,7 @@
 namespace iridium::system {
 
 
+// todo: rm, deprecated
 class IProcess: public virtual io::IStreamPort {
 public:
     DEFINE_INTERFACE(IProcess)
@@ -39,8 +40,9 @@ public:
 } // namespace iridium::system
 
 
-//DEFINE_ENUM_CONVERT(iridium::system::IProcess::TState::TCondition)
-//DEFINE_ENUM_CONVERT(iridium::system::IProcess::TSignal)
+DEFINE_ENUM_CONVERT(iridium::system::IProcess::TState::TCondition)
+DEFINE_ENUM_CONVERT(iridium::system::IProcess::TSignal)
+DEFINE_CONVERT(std::string, iridium::system::IProcess::TState);
 
 
 #endif // HEADER_PROCESS_70CE2A25_38CC_4D60_A1A7_B14F33DB94CF
