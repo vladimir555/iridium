@@ -1354,8 +1354,6 @@ The test executable created with `IMPLEMENT_TEST_MAIN()` supports the following 
         -   If not specified, the standard text format is used (see example above).
         -   `json`: Results are output in JSON format.
     -   `--timeout=SECONDS`: Sets the maximum timeout for tests in seconds (default is 60).
-    -   `--gtest_filter=PATTERN`: (If applicable) filter tests using a pattern.
-    -   `--jobs=COUNT`: For parallel mode, specify the number of concurrent jobs (defaults to hardware concurrency).
 
     Parameters for the `run` command:
     -   `include_path` (optional): If specified, only tests whose path (as in the `list` output) starts with `include_path` are run. Defaults to `/` (all tests).
