@@ -2,11 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-/// \~english @file
-/// @brief Defines the `IContextManager` interface for managing I/O contexts.
-/// \~russian @file
-/// @brief Определяет интерфейс `IContextManager` для управления контекстами ввода-вывода.
-
 #ifndef HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 #define HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 
@@ -21,10 +16,10 @@ namespace iridium::io {
 
 
 // todo: rm, deprecated
+/// \~english @deprecated This interface is deprecated and scheduled for removal.
+/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
 class IContextManager {
 public:
-    /// \~english @brief Macro used to define common interface elements (e.g., virtual destructor).
-    /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContextManager)
 
     virtual void

@@ -966,27 +966,27 @@ public:
     void doSomething() {
         LOCK_SCOPE(); // Операции блокировки и разблокировки будут залогированы
         // ... какая-то работа с защищенными данными ...
-        std::cout << "TraceableSafeDataContainer (" << iridium::threading::IThread::getNameStatic() 
+        std::cout << "TraceableSafeDataContainer (" << iridium::threading::IThread::getNameStatic()
                   << "): Executing doSomething." << std::endl;
     }
 };
 
 void demo_synchronized_traceable() {
     TraceableSafeDataContainer container;
-    
-    std::cout << "Main thread (" << iridium::threading::IThread::getNameStatic() 
+
+    std::cout << "Main thread (" << iridium::threading::IThread::getNameStatic()
               << "): Calling doSomething." << std::endl;
     container.doSomething();
 
     std::thread t1([&]() {
         iridium::threading::IThread::setNameStatic("WorkerThread1"); // Устанавливаем имя потока для лога
-        std::cout << "WorkerThread1 (" << iridium::threading::IThread::getNameStatic() 
+        std::cout << "WorkerThread1 (" << iridium::threading::IThread::getNameStatic()
                   << "): Calling doSomething." << std::endl;
         container.doSomething();
     });
 
     t1.join();
-    std::cout << "Main thread (" << iridium::threading::IThread::getNameStatic() 
+    std::cout << "Main thread (" << iridium::threading::IThread::getNameStatic()
               << "): WorkerThread1 finished." << std::endl;
 }
 
@@ -1239,7 +1239,7 @@ public:
 
 TEST(MyClassConstruction) {
     MyClassToTest obj("test_param");
-    ASSERT(obj.getParameter(), equal, "test_param"); 
+    ASSERT(obj.getParameter(), equal, "test_param");
 }
 
 TEST(MyClassAddsNumbers) {
@@ -1342,7 +1342,7 @@ TEST(MyClassDoesNotThrowException) {
 
 // Включите здесь ваши тестовые файлы или файлы, где определены тесты TEST(...)
 // Например:
-// #include "my_class_tests.cpp" 
+// #include "my_class_tests.cpp"
 // #include "another_module_tests.cpp"
 
 IMPLEMENT_TEST_MAIN()
@@ -1376,13 +1376,13 @@ IMPLEMENT_TEST_MAIN()
     Пример вывода:
     @code{.txt}
     main thread: 281473424756000
-    2025-06-06 10:30:56.839 I 281473424756000 
+    2025-06-06 10:30:56.839 I 281473424756000
     usage:
     ./ваше_приложение_тестов help
     ./ваше_приложение_тестов list
     ./ваше_приложение_тестов run [ --mode=raw|serial|parallel ] [ --print-result=json ] [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]
     example:
-    ./ваше_приложение_тестов run / 
+    ./ваше_приложение_тестов run /
     @endcode
     (Примечание: фактический номер потока и временная метка в вашем выводе будут отличаться.)
 
@@ -1393,7 +1393,7 @@ IMPLEMENT_TEST_MAIN()
     Это полезно для просмотра структуры тестов и их полных путей, которые могут использоваться в качестве `путь_включения` или `путь_исключения` для команды `run`. Пример вывода:
     @code{.txt}
     main thread: 281473794346272
-    2025-06-06 10:30:22.166 I 281473794346272 
+    2025-06-06 10:30:22.166 I 281473794346272
     'root'
       'convertion'
         'convert.cpp'
@@ -1424,10 +1424,10 @@ IMPLEMENT_TEST_MAIN()
     2025-06-06 10:30:39.745 I 281473243745568 OK   /testing/example.cpp/comparing_equal
     # ... (и так далее для других тестов)
     # ... (в случае ошибки будет FAILED вместо OK и сообщение об ошибке)
-    2025-06-06 10:30:39.747 I 281473243745568 
+    2025-06-06 10:30:39.747 I 281473243745568
     passed: 8
     failed: 0
-    total:  51 
+    total:  51
     @endcode
     (Примечание: фактические номера потоков, временные метки и результаты в вашем выводе будут отличаться.)
 
@@ -1440,6 +1440,8 @@ IMPLEMENT_TEST_MAIN()
         -   Если не указана, используется стандартный текстовый формат (см. пример выше).
         -   `json`: Результаты выводятся в формате JSON.
     -   `--timeout=СЕКУНДЫ`: Устанавливает максимальное время ожидания для тестов в секундах (по умолчанию 60).
+    -   `--gtest_filter=PATTERN`: (Если применимо) фильтрация тестов по шаблону.
+    -   `--jobs=COUNT`: Для параллельного режима, укажите количество одновременных заданий (по умолчанию соответствует аппаратному количеству ядер).
 
     Параметры команды `run`:
     -   `путь_включения` (необязательный): Если указан, запускаются только тесты, чей путь (как в выводе `list`) начинается с `путь_включения`. По умолчанию `/` (все тесты).
@@ -1497,7 +1499,7 @@ public:
     virtual std::string getName() const = 0;
     virtual void processData(const std::vector<int>& data) = 0;
     // Конструктор с аргументами для демонстрации DEFINE_MOCK_CONSTRUCTOR
-    IMyDependency(const std::string& /* initial_config */) {} 
+    IMyDependency(const std::string& /* initial_config */) {}
     IMyDependency() = default; // Добавим конструктор по умолчанию, если он тоже нужен
 };
 
@@ -1507,7 +1509,7 @@ public:
     // Если базовый класс IMyDependency имеет конструктор с аргументами,
     // и вы хотите его вызывать из мока:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    
+
     // Мокирование методов интерфейса
     DEFINE_MOCK_METHOD(int, getValue, int)          // int getValue(int key)
     DEFINE_MOCK_METHOD_CONST(std::string, getName)  // std::string getName() const
@@ -1536,8 +1538,8 @@ public:
     virtual int getValue(int key) = 0;
     virtual std::string getName() const = 0;
     virtual void processData(const std::vector<int>& data) = 0;
-    IMyDependency(const std::string& /* initial_config */) {} 
-    IMyDependency() = default; 
+    IMyDependency(const std::string& /* initial_config */) {}
+    IMyDependency() = default;
 };
 
 DEFINE_MOCK_CLASS(IMyDependency) {
@@ -1590,7 +1592,7 @@ TEST(MyClassUsesDependency_Behavior) {
         // Лямбда для метода без аргументов: [=]() -> std::string { ... }
         return "MockedName";
     };
-    
+
     // Определяем поведение для processData (void метод)
     std::vector<int> received_data;
     DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, const std::vector<int> &data) {
@@ -1609,7 +1611,7 @@ TEST(MyClassUsesDependency_Behavior) {
     mainObj.sendData(data_to_send);
     ASSERT(received_data.size(),    equal, 3);
     ASSERT(received_data[0],        equal, 1);
-    
+
     // Проверка вызова исключения из основного класса, не из мока
     ASSERT(mainObj.fetchValue(-1), std::runtime_error);
 }
@@ -1809,3 +1811,14 @@ TEST(DataConsumer_UsesMockService) {
 -   `method`: Имя мокированного метода, который должен быть вызван.
 
 В текущей реализации этот макрос не позволяет указывать ожидаемые аргументы для вызова метода.
+
+@section sec_versioning Версионирование
+
+Проект Iridium использует динамическую систему версионирования, основанную на состоянии git-репозитория. Версия автоматически обновляется с помощью скрипта `shell/update-version.sh`.
+
+Логика версионирования следующая:
+- **MAJOR**: Статически определено (в данный момент 0).
+- **MINOR**: Увеличивается для каждого слияния (merge) из ветки `develop` в основную ветку (`main` или `master`).
+- **PATCH**: Количество коммитов в ветке `develop` с момента последнего слияния в основную ветку.
+
+Это гарантирует, что каждая сборка имеет уникальный и отслеживаемый номер версии, соответствующий прогрессу разработки.

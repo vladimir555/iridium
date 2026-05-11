@@ -28,8 +28,6 @@ namespace iridium::logging {
 ///     Эта структура инкапсулирует всю информацию, связанную с событием логирования,
 ///     такую как временная метка, уровень серьезности, идентификатор потока и само сообщение журнала.
 struct TEvent {
-    /// \~english @brief Macro call to define a static `create` method for `TEvent`, enabling shared pointer instantiation.
-    /// \~russian @brief Вызов макроса для определения статического метода `create` для `TEvent`, обеспечивающего создание экземпляров через разделяемые указатели.
     DEFINE_CREATE(TEvent)
     /// \~english @brief Enumerates the different severity levels for log events.
     /// \~russian @brief Перечисляет различные уровни серьезности для событий журнала.

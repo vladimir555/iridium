@@ -23,12 +23,14 @@ DEFINE_ENUM(
     // WRNORM      = POLLWRNORM,
     RDBAND      = POLLRDBAND,
     WRBAND      = POLLWRBAND,
-#ifndef FREEBSD_PLATFORM
+#if defined(FREEBSD_PLATFORM) || defined(LINUX_PLATFORM)
+    // Not defined on FreeBSD or Linux
+#else
     EXTEND      = POLLEXTEND,
     ATTRIB      = POLLATTRIB,
     NLINK       = POLLNLINK,
     WRITE       = POLLWRITE,
-#endif // not FREEBSD_PLATFORM
+#endif
     ERR         = POLLERR,
     HUP         = POLLHUP,
     NVAL        = POLLNVAL

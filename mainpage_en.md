@@ -1153,7 +1153,7 @@ public:
 
 TEST(MyClassConstruction) {
     MyClassToTest obj("test_param");
-    ASSERT(obj.getParameter(), equal, "test_param"); 
+    ASSERT(obj.getParameter(), equal, "test_param");
 }
 
 TEST(MyClassAddsNumbers) {
@@ -1256,7 +1256,7 @@ Example (`tests_main.cpp`):
 
 // Include your test files here or files where TEST(...) tests are defined
 // For example:
-// #include "my_class_tests.cpp" 
+// #include "my_class_tests.cpp"
 // #include "another_module_tests.cpp"
 
 IMPLEMENT_TEST_MAIN()
@@ -1290,13 +1290,13 @@ The test executable created with `IMPLEMENT_TEST_MAIN()` supports the following 
     Example output:
     @code{.txt}
     main thread: 281473424756000
-    2025-06-06 10:30:56.839 I 281473424756000 
+    2025-06-06 10:30:56.839 I 281473424756000
     usage:
     ./your_test_app help
     ./your_test_app list
     ./your_test_app run [ --mode=raw|serial|parallel ] [ --print-result=json ] [ --timeout=seconds ] [ include_path ] [ exclude_path ] ... [ exclude_path ]
     example:
-    ./your_test_app run / 
+    ./your_test_app run /
     @endcode
     (Note: The actual thread number and timestamp in your output will differ.)
 
@@ -1307,7 +1307,7 @@ The test executable created with `IMPLEMENT_TEST_MAIN()` supports the following 
     This is useful for viewing the structure of tests and their full paths, which can be used as `include_path` or `exclude_path` for the `run` command. Example output:
     @code{.txt}
     main thread: 281473794346272
-    2025-06-06 10:30:22.166 I 281473794346272 
+    2025-06-06 10:30:22.166 I 281473794346272
     'root'
       'convertion'
         'convert.cpp'
@@ -1338,10 +1338,10 @@ The test executable created with `IMPLEMENT_TEST_MAIN()` supports the following 
     2025-06-06 10:30:39.745 I 281473243745568 OK   /testing/example.cpp/comparing_equal
     # ... (and so on for other tests)
     # ... (in case of failure, FAILED will appear instead of OK, along with an error message)
-    2025-06-06 10:30:39.747 I 281473243745568 
+    2025-06-06 10:30:39.747 I 281473243745568
     passed: 8
     failed: 0
-    total:  51 
+    total:  51
     @endcode
     (Note: Actual thread numbers, timestamps, and results in your output will differ.)
 
@@ -1354,6 +1354,8 @@ The test executable created with `IMPLEMENT_TEST_MAIN()` supports the following 
         -   If not specified, the standard text format is used (see example above).
         -   `json`: Results are output in JSON format.
     -   `--timeout=SECONDS`: Sets the maximum timeout for tests in seconds (default is 60).
+    -   `--gtest_filter=PATTERN`: (If applicable) filter tests using a pattern.
+    -   `--jobs=COUNT`: For parallel mode, specify the number of concurrent jobs (defaults to hardware concurrency).
 
     Parameters for the `run` command:
     -   `include_path` (optional): If specified, only tests whose path (as in the `list` output) starts with `include_path` are run. Defaults to `/` (all tests).
@@ -1411,7 +1413,7 @@ public:
     virtual std::string getName() const = 0;
     virtual void processData(const std::vector<int>& data) = 0;
     // Constructor with arguments to demonstrate DEFINE_MOCK_CONSTRUCTOR
-    IMyDependency(const std::string& /* initial_config */) {} 
+    IMyDependency(const std::string& /* initial_config */) {}
     IMyDependency() = default; // Add a default constructor if it's also needed
 };
 
@@ -1421,7 +1423,7 @@ public:
     // If the base class IMyDependency has a constructor with arguments
     // and you want to call it from the mock:
     DEFINE_MOCK_CONSTRUCTOR(IMyDependency)
-    
+
     // Mocking interface methods
     DEFINE_MOCK_METHOD(int, getValue, (int))                  // int getValue(int key)
     DEFINE_MOCK_METHOD_CONST(std::string, getName, ())        // std::string getName() const
@@ -1450,8 +1452,8 @@ public:
     virtual int getValue(int key) = 0;
     virtual std::string getName() const = 0;
     virtual void processData(const std::vector<int>& data) = 0;
-    IMyDependency(const std::string& /* initial_config */) {} 
-    IMyDependency() = default; 
+    IMyDependency(const std::string& /* initial_config */) {}
+    IMyDependency() = default;
 };
 
 DEFINE_MOCK_CLASS(IMyDependency) {
@@ -1504,7 +1506,7 @@ TEST(MyClassUsesDependency_Behavior) {
         // Lambda for a method with no arguments: [=]() -> std::string { ... }
         return "MockedName";
     };
-    
+
     // Define behavior for processData (void method)
     std::vector<int> receivedData;
     DEFINE_MOCK_BEHAVIOR(void, processData, mockDep, (const std::vector<int> &data)) {
@@ -1523,7 +1525,7 @@ TEST(MyClassUsesDependency_Behavior) {
     mainObj.sendData(dataToSend);
     ASSERT(receivedData.size(),    equal, 3);
     ASSERT(receivedData[0],        equal, 1);
-    
+
     // Check exception throwing from the main class, not the mock
     ASSERT(mainObj.fetchValue(-1), std::runtime_error);
 }
@@ -1723,3 +1725,14 @@ After defining a sequence object, you add expected calls to it using the `DEFINE
 -   `method`: The name of the mocked method that is expected to be called.
 
 In the current implementation, this macro does not allow specifying the expected arguments for the method call.
+
+@section sec_versioning Versioning
+
+The Iridium project uses a dynamic versioning system based on the git repository state. The version is automatically updated using the `shell/update-version.sh` script.
+
+The versioning logic is as follows:
+- **MAJOR**: Statically defined (currently 0).
+- **MINOR**: Incremented for each merge from the `develop` branch into the primary branch (`main` or `master`).
+- **PATCH**: Number of commits on the `develop` branch since the last merge into the primary branch.
+
+This ensures that every build has a unique and traceable version number corresponding to its development progress.
