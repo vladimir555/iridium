@@ -17,7 +17,7 @@
 namespace iridium::threading {
 
 
-/// \~english @brief An interface for a worker that pushes items to a queue.
+/// \~english @brief Interface for a worker that pushes items to a queue.
 /// \~russian @brief Интерфейс для "работника", который добавляет элементы в очередь.
 template<typename TItem>
 class IWorkerPusher:
@@ -26,7 +26,7 @@ class IWorkerPusher:
 {
 public:
     DEFINE_INTERFACE(IWorkerPusher);
-    /// \~english @brief An interface for a handler that processes items.
+    /// \~english @brief Interface for a handler that processes items.
     /// \~russian @brief Интерфейс для обработчика, который обрабатывает элементы.
     class IHandler: public pattern::IInitializable {
     public:
@@ -41,7 +41,7 @@ public:
     };
 };
 
-/// \~english @brief An interface for a worker that pops items from a queue.
+/// \~english @brief Interface for a worker that pops items from a queue.
 /// \~russian @brief Интерфейс для "работника", который извлекает элементы из очереди.
 template<typename TItem>
 class IWorkerPopper:
@@ -50,7 +50,7 @@ class IWorkerPopper:
 {
 public:
     DEFINE_INTERFACE(IWorkerPopper)
-    /// \~english @brief An interface for a handler that provides items.
+    /// \~english @brief Interface for a handler that provides items.
     /// \~russian @brief Интерфейс для обработчика, который предоставляет элементы.
     class IHandler: public pattern::IInitializable {
     public:
@@ -65,7 +65,7 @@ public:
     };
 };
 
-/// \~english @brief An interface for a worker that processes items, taking input and producing output.
+/// \~english @brief Interface for a worker that processes items, taking input and producing output.
 /// \~russian @brief Интерфейс для "работника", который обрабатывает элементы, принимая входные данные и производя выходные.
 template<typename TInputItem, typename TOutputItem = TInputItem>
 class IWorker:
@@ -74,7 +74,7 @@ class IWorker:
 {
 public:
     DEFINE_INTERFACE(IWorker)
-    /// \~english @brief An interface for a handler that processes items.
+    /// \~english @brief Interface for a handler that processes items.
     /// \~russian @brief Интерфейс для обработчика, который обрабатывает элементы.
     class IHandler: public pattern::IInitializable {
     public:

@@ -2,11 +2,6 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-/// \~english @file
-/// @brief Defines interfaces for I/O context and pipe management.
-/// \~russian @file
-/// @brief Определяет интерфейсы для управления контекстом ввода-вывода и каналами.
-
 #ifndef HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6
 #define HEADER_CONTEXT_5E470497_AC46_415C_B3E2_7003AE1D21F6
 
@@ -21,8 +16,6 @@ namespace iridium::io {
 // todo: rm, deprecated
 class IContext {
 public:
-    /// \~english @brief Macro used to define common interface elements (e.g., virtual destructor).
-    /// \~russian @brief Макрос, используемый для определения общих элементов интерфейса (например, виртуального деструктора).
     DEFINE_INTERFACE(IContext)
 
     virtual void

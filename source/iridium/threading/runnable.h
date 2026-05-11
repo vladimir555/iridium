@@ -15,7 +15,7 @@
 namespace iridium::threading {
 
 
-/// \~english @brief An interface for objects that can be run in a separate thread.
+/// \~english @brief Interface for objects that can be run in a separate thread.
 /// \~russian @brief Интерфейс для объектов, которые могут быть запущены в отдельном потоке.
 class IRunnable: public pattern::IInitializable {
 public:

@@ -17,7 +17,7 @@ namespace iridium::threading {
 // todo: must be SyncQueue
 // todo: rename to ThreadSafeQueuePusher
 // todo: virtual public ISynchronized
-/// \~english @brief An interface for pushing items to an asynchronous queue.
+/// \~english @brief Interface for pushing items to an asynchronous queue.
 /// \~russian @brief Интерфейс для добавления элементов в асинхронную очередь.
 template<typename TItem>
 class IAsyncQueuePusher {
@@ -38,7 +38,7 @@ public:
 
 
 // todo: virtual public ISynchronized
-/// \~english @brief An interface for popping items from an asynchronous queue.
+/// \~english @brief Interface for popping items from an asynchronous queue.
 /// \~russian @brief Интерфейс для извлечения элементов из асинхронной очереди.
 template<typename TItem>
 class IAsyncQueuePopper {
@@ -59,7 +59,7 @@ public:
 
 
 // todo: rename to ThreadSafeQueue
-/// \~english @brief An interface for an asynchronous queue.
+/// \~english @brief Interface for an asynchronous queue.
 /// \~russian @brief Интерфейс для асинхронной очереди.
 template<typename TItem>
 class IAsyncQueue:

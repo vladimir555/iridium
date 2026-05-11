@@ -86,7 +86,7 @@ struct LogStreamDummy
 
 /// \~english @brief A temporary stream-like object for constructing log messages.
 /// \~english @details This object is created by the LOGX macros. It collects the streamed data, and upon destruction, submits the complete log event to the Logger singleton.
-/// \-russian @brief Временный потокоподобный объект для конструирования лог-сообщений.
+/// \~russian @brief Временный потокоподобный объект для конструирования лог-сообщений.
 /// \~russian @details Этот объект создается макросами LOGX. Он собирает потоковые данные и при уничтожении отправляет завершенное событие журнала в синглтон Logger.
 struct LogStream {
     /// \~english @brief Constructs a LogStream for a specific log level.

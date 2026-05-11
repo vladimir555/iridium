@@ -235,19 +235,17 @@ bool Synchronized<TMutex, is_tracable>::Locker::wait(std::chrono::system_clock::
 
 
 /// \~english @def LOCK_SCOPE()
-/// @brief Creates a `Synchronized::Locker` instance named `_____locked_scope_____` for the current scope.
-///     This macro is used within a method of a class that inherits from or uses `Synchronized`.
-///     It locks the associated mutex and ensures it's unlocked when `_____locked_scope_____` goes out of scope.
-///     Requires `this` to point to an instance of a class derived from `Synchronized<TMutex, is_tracable>`.
+/// @brief Creates a `Synchronized::Locker` instance for the current scope.
 /// \~russian @def LOCK_SCOPE()
-/// @brief Создает экземпляр `Synchronized::Locker` с именем `_____locked_scope_____` для текущей области видимости.
-///     Этот макрос используется внутри метода класса, который наследует от `Synchronized` или использует его.
-///     Он блокирует связанный мьютекс и гарантирует его разблокировку, когда `_____locked_scope_____` выходит из области видимости.
-///     Требует, чтобы `this` указывал на экземпляр класса, производного от `Synchronized<TMutex, is_tracable>`.
+/// @brief Создает экземпляр `Synchronized::Locker` для текущей области видимости.
 #define LOCK_SCOPE() \
 Synchronized::Locker _____locked_scope_##__LINE__(this, __FILE__, __LINE__)
 
 
+/// \~english @def LOCK_SCOPE_TRY_WAIT(...)
+/// @brief Tries to wait on the condition variable within the current locked scope.
+/// \~russian @def LOCK_SCOPE_TRY_WAIT(...)
+/// @brief Пытается ожидать на условной переменной внутри текущей заблокированной области.
 #define LOCK_SCOPE_TRY_WAIT(...) \
 _____locked_scope_##__LINE__.wait(__VA_ARGS__)
 

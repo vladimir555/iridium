@@ -26,10 +26,10 @@
 namespace iridium::logging {
 
 
+/// \~english @brief Interface for log sinks.
+/// \~russian @brief Интерфейс для приемников журналов.
 class ISink : public pattern::IInitializable {
 public:
-    /// \~english @brief Defines standard smart pointer typedefs (`TSharedPtr`, `TWeakPtr`, etc.) for the ISink interface.
-    /// \~russian @brief Определяет стандартные typedef-ы умных указателей (`TSharedPtr`, `TWeakPtr` и т.д.) для интерфейса ISink.
     DEFINE_SMART_PTR(ISink)
     DEFINE_ENUM(
         TType,

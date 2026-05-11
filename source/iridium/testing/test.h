@@ -13,10 +13,16 @@
 namespace iridium::testing {
 
 
+/// \~english @brief Interface for a unit test case.
+/// \~russian @brief Интерфейс для случая модульного теста.
 class IUnitTestCase {
 public:
     DEFINE_INTERFACE(IUnitTestCase)
+    /// \~english @brief Runs the test case.
+    /// \~russian @brief Запускает тестовый случай.
     virtual void run() = 0;
+    /// \~english @brief Gets the line number where the test is defined.
+    /// \~russian @brief Возвращает номер строки, на которой определен тест.
     virtual size_t getLine() const = 0;
 };
 

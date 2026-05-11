@@ -29,8 +29,6 @@ namespace iridium::parsing {
 /// \~russian @details Парсер отвечает за преобразование строкового представления структурированных данных в дерево объектов INode (разбор) и обратно (формирование).
 class IParser {
 public:
-    /// \~english @brief Defines standard smart pointer typedefs (`TSharedPtr`, `TWeakPtr`, etc.) for the `IParser` interface.
-    /// \~russian @brief Определяет стандартные typedef-ы умных указателей (`TSharedPtr`, `TWeakPtr` и т.д.) для интерфейса `IParser`.
     DEFINE_SMART_PTR(IParser)
     virtual ~IParser() = default;
 

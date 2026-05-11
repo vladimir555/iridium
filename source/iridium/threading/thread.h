@@ -24,12 +24,12 @@
 namespace iridium::threading {
 
 
+/// \~english @brief Interface for thread management.
+/// \~russian @brief Интерфейс для управления потоками.
 class IThread:
     public pattern::IInitializable
 {
 public:
-    /// \~english @brief Defines standard smart pointer typedefs for `IThread` (e.g., `TSharedPtr`, `TUniquePtr`).
-    /// \~russian @brief Определяет стандартные typedef-ы умных указателей для `IThread` (например, `TSharedPtr`, `TUniquePtr`).
     DEFINE_SMART_PTR(IThread)
     virtual ~IThread() = default;
 
@@ -48,8 +48,6 @@ protected:
     /// \~russian @brief Устанавливает имя текущего потока.
     static void setNameStatic(std::string const &name);
 private:
-    /// \~english @brief The name of the current thread.
-    /// \~russian @brief Имя текущего потока.
     static thread_local std::string thread_name_static;
 };
 
