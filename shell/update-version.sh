@@ -79,44 +79,32 @@ else
 fi
 
 if [ -z "$DEVELOP_REF" ]; then
-    # No develop → MINOR=0, PATCH=count of primary
     MINOR=0
     PATCH=$(git rev-list "$PRIMARY_BRANCH" --count 2>/dev/null || echo 0)
 else
-    # Find all relevant merges from 'develop'
     MERGE_COMMITS=""
     for merge in $(git rev-list --merges --first-parent "$PRIMARY_BRANCH" 2>/dev/null); do
-        # Check message
         if git log -1 --format='%s' "$merge" 2>/dev/null | grep -q "Merge branch 'develop'"; then
-            # Optional: verify topology
             if parent2=$(git rev-parse "$merge"^2 2>/dev/null) && \
                git merge-base --is-ancestor "$parent2" "$DEVELOP_REF" 2>/dev/null; then
-                MERGE_COMMITS="$merge $MERGE_COMMITS"  # prepend → keep order (latest first)
+                MERGE_COMMITS="$merge $MERGE_COMMITS"
             fi
         fi
     done
 
     if [ -n "$MERGE_COMMITS" ]; then
-        # Count merges by looping (avoids wc whitespace issues)
         MINOR=0
         LATEST_MERGE=""
         for m in $MERGE_COMMITS; do
             MINOR=$((MINOR + 1))
-            if [ -z "$LATEST_MERGE" ]; then
-                LATEST_MERGE="$m"
-            fi
+            [ -z "$LATEST_MERGE" ] && LATEST_MERGE="$m"
         done
 
-        # Get second parent of latest merge
-        PARENT2=$(git rev-parse "$LATEST_MERGE"^2 2>/dev/null)
-        if [ -n "$PARENT2" ]; then
-            PATCH=$(git rev-list "$PARENT2".."$DEVELOP_REF" --count 2>/dev/null || echo 0)
-        else
-            PATCH=0
-        fi
+        # ← ИСПРАВЛЕНИЕ: только коммиты develop, которых нет в master
+        PATCH=$(git rev-list "$DEVELOP_REF" "^$PRIMARY_BRANCH" --count 2>/dev/null || echo 0)
     else
         MINOR=0
-        PATCH=$(git rev-list "$DEVELOP_REF" --count 2>/dev/null || echo 0)
+        PATCH=$(git rev-list "$DEVELOP_REF" "^$PRIMARY_BRANCH" --count 2>/dev/null || echo 0)
     fi
 fi
 
