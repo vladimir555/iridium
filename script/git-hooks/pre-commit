@@ -2,7 +2,7 @@
 # Always update version before committing
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
-"$REPO_ROOT/shell/update-version.sh"
+"$REPO_ROOT/script/iridium-update-version.sh"
 
 # Функция для очистки пробелов в файлах определённых типов
 clean_whitespace() {

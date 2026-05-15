@@ -4,10 +4,10 @@
 # Auto-detect project name from source/ directory structure
 # -----------------------------------------------------------------------------
 PROJECT_NAME=""
-SOURCE_DIR="source"
+SOURCE_DIR="source/library"
 
 if [ ! -d "$SOURCE_DIR" ]; then
-    echo "Error: directory 'source/' not found"
+    echo "Error: directory 'source/library' not found"
     exit 1
 fi
 
