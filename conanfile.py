@@ -1,3 +1,7 @@
+# Copyright © 2019 Bulaev Vladimir.
+# Contacts: <bulaev_vladimir@mail.ru>
+# License: https://www.gnu.org/licenses/lgpl-3.0
+
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 from conan.tools.files import load, copy
@@ -11,7 +15,7 @@ required_conan_version = ">=2.0"
 class IridiumConan(ConanFile):
     name = None
     version = None
-    license = ("LGPL-3.0-only", "BSL-1.0")
+    license = ("LGPL-3.0-only")
     author = "Vladimir Bulaev <bulaev_vladimir@mail.ru>"
     url = "https://github.com/volodja555/iridium"
     description = "Iridium C++ library"
