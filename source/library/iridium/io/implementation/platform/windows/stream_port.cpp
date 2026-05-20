@@ -41,6 +41,7 @@ CStreamPort::CStreamPort(URI const &uri)
 
 
 IStream::TMapHandleTypeIdent CStreamPort::getHandles() const {
+    LOCK_SCOPE();
     TMapHandleTypeIdent handles;
 
     if (m_writer_fd != INVALID_HANDLE_VALUE)
@@ -110,27 +111,32 @@ void CStreamPort::setBlockingMode(bool const &is_blocking) {
 
 
 void CStreamPort::closeFDs() {
-    if (m_reader_fd != INVALID_HANDLE_VALUE) {
+    LOCK_SCOPE();
+    if (!checkOneOf(m_reader_fd, nullptr, INVALID_HANDLE_VALUE)) {
+        // CancelIoEx (m_reader_fd, nullptr);
         CloseHandle(m_reader_fd);
         m_reader_fd = INVALID_HANDLE_VALUE;
         m_reader_overlapped = { 0 };
     }
 
-    if (m_writer_fd != INVALID_HANDLE_VALUE) {
+    if (!checkOneOf(m_writer_fd, nullptr, INVALID_HANDLE_VALUE)) {
+        // CancelIoEx (m_writer_fd, nullptr);
         CloseHandle(m_writer_fd);
         m_writer_fd = INVALID_HANDLE_VALUE;
         m_writer_overlapped = { 0 };
     }
 
-    if (m_pid != INVALID_HANDLE_VALUE) {
-        CloseHandle(m_pid);
-        m_pid = INVALID_HANDLE_VALUE;
-        m_pid_overlapped = { 0 };
-    }
+     if (!checkOneOf(m_pid, nullptr, INVALID_HANDLE_VALUE)) {
+        //  CancelIoEx (m_pid, nullptr);
+         CloseHandle(m_pid);
+         m_pid = INVALID_HANDLE_VALUE;
+         m_pid_overlapped = { 0 };
+     }
 }
 
 
 Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
+    LOCK_SCOPE();
     try {
         if (m_reader_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("reading error: not initialized");
@@ -179,6 +185,7 @@ Buffer::TSharedPtr CStreamPort::read(size_t const &size) {
 
 
 size_t CStreamPort::write(Buffer::TSharedPtr const &buffer) {
+    LOCK_SCOPE();
     try {
         if (m_writer_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("writing error: not initialized"); // ----->

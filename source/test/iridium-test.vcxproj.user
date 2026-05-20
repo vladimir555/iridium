@@ -4,30 +4,30 @@
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <LocalDebuggerCommandArguments>run --mode=serial --timeout=5 /convertion/convert.cpp </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>run /</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArgumentsHistory>run --mode=parallel /threading/worker.cpp|run --mode=serial --timeout=5 /convertion/convert.cpp |</LocalDebuggerCommandArgumentsHistory>
+    <LocalDebuggerCommandArgumentsHistory>run --mode=parallel /threading/worker.cpp|run --mode=serial --timeout=5 /convertion/convert.cpp |run /|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <LocalDebuggerCommandArguments>run --mode=serial --timeout=5 /convertion/convert.cpp </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>run /</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArgumentsHistory>run --timeout=5 /threading/worker.cpp |</LocalDebuggerCommandArgumentsHistory>
+    <LocalDebuggerCommandArgumentsHistory>run --timeout=5 /threading/worker.cpp |run /|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>run --mode=serial --timeout=5 /convertion/convert.cpp </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>run /</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerCommandArguments>run --mode=serial --timeout=5 /convertion/convert.cpp </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>run /</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>run --mode=serial --timeout=5 /convertion/convert.cpp </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>run /</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArgumentsHistory>run --mode=parallel /threading/worker.cpp|</LocalDebuggerCommandArgumentsHistory>
+    <LocalDebuggerCommandArgumentsHistory>run --mode=parallel /threading/worker.cpp|run /|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>run --mode=serial --timeout=5 /convertion/convert.cpp </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>run /</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
