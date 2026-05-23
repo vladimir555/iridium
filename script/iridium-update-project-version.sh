@@ -115,8 +115,8 @@ fi
 # -----------------------------------------------------------------------------
 # Write version.h
 # -----------------------------------------------------------------------------
-VERSION_HEADER="source/${PROJECT_NAME}/version.h"
-mkdir -p "source/${PROJECT_NAME}"
+VERSION_HEADER="source/library/${PROJECT_NAME}/version.h"
+mkdir -p "source/library/${PROJECT_NAME}"
 
 UPPER_PROJECT_NAME=$(printf '%s' "$PROJECT_NAME" | tr '[:lower:]' '[:upper:]')
 

@@ -3,137 +3,167 @@
 # License: https://www.gnu.org/licenses/lgpl-3.0
 
 from conan import ConanFile
-from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
-from conan.tools.files import load, copy
-from conan.tools.build import cross_building
-from conan.errors import ConanException
-import os
-import re
+from conanfile_base import ProjectBase
 
-required_conan_version = ">=2.0"
 
-class IridiumConan(ConanFile):
-    name = None
-    version = None
-    license = ("LGPL-3.0-only")
+class IridiumConan(ProjectBase, ConanFile):
+    license = "LGPL-3.0-only"
     author = "Vladimir Bulaev <bulaev_vladimir@mail.ru>"
     url = "https://github.com/volodja555/iridium"
     description = "Iridium C++ library"
     topics = ("cpp", "network", "security")
-    settings = "os", "compiler", "build_type", "arch"
-    package_type = "shared-library"  # Явно указываем тип
-    options = {
-        "fPIC": [True, False],
-        "with_openssl": [True, False],
-        "with_postgres": [True, False],
-        "with_mysql": [True, False],
-    }
-    default_options = {
-        "fPIC": True,
-        "with_openssl": False,
-        "with_postgres": False,
-        "with_mysql": False,
-    }
+    package_type = "shared-library"
+    exports = ("conanfile_base.py",)
 
-    exports_sources = "CMakeLists.txt", "source/*", "external/*", "LICENSE", "cmake/*"
+# from conan import ConanFile
+# from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
+# from conan.tools.files import load, copy
+# from conan.tools.build import cross_building, check_min_cppstd
+# from conan.errors import ConanException, ConanInvalidConfiguration
+# import os
+# import re
 
-    def set_name(self):
-        source_dir = os.path.join(self.recipe_folder, "source/library")
-        for d in os.listdir(source_dir):
-            if d.endswith("-test") or d.endswith("-binary"):
-                continue
-            if os.path.isfile(os.path.join(source_dir, d, "version.h")):
-                self.name = d
-                self.output.info(f"Project name: {self.name}")
-                return
-        raise ConanException("Main library folder with version.h not found")
 
-    def set_version(self):
-        version_h = os.path.join(self.recipe_folder, "source/library", self.name, "version.h")
-        if not os.path.exists(version_h):
-            raise ConanException(f"version.h not found: {version_h}")
-        content = load(self, version_h)
-        name_upper = self.name.upper().replace("-", "_")
-        major = re.search(rf"{name_upper}_VERSION_MAJOR\s*[= \t]+([0-9]+)", content)
-        minor = re.search(rf"{name_upper}_VERSION_MINOR\s*[= \t]+([0-9]+)", content)
-        patch = re.search(rf"{name_upper}_VERSION_PATCH\s*[= \t]+([0-9]+)", content)
-        if not all([major, minor, patch]):
-            raise ConanException("Failed to parse version from version.h")
-        self.version = f"{major.group(1)}.{minor.group(1)}.{patch.group(1)}"
-        self.output.info(f"Version: {self.version}")
+# class IridiumConan(ConanFile):
+#     name = None
+#     version = None
+#     license = ("LGPL-3.0-only")
+#     author = "Vladimir Bulaev <bulaev_vladimir@mail.ru>"
+#     url = "https://github.com/volodja555/iridium"
+#     description = "Iridium C++ library"
+#     topics = ("cpp", "network", "security")
+#     settings = "os", "compiler", "build_type", "arch"
+#     package_type = "shared-library"
+#     options = {
+#         "fPIC": [True, False],
+#         "with_openssl": [True, False],
+#         "with_postgres": [True, False],
+#         "with_mysql": [True, False],
+#     }
+#     default_options = {
+#         "fPIC": True,
+#         "with_openssl": False,
+#         "with_postgres": False,
+#         "with_mysql": False,
+#     }
 
-    def config_options(self):
-        if self.settings.os == "Windows":
-            self.options.rm_safe("fPIC")
+#     exports_sources = \
+#         "LICENSE", \
+#         "CMakeLists.txt", \
+#         "source/*", \
+#         "external/*", \
+#         "cmake/*", \
+#         "script/iridium-update-project-version.sh", \
+#         "conan_helper/*"
 
-    def configure(self):
-        if self.options.get_safe("shared"):
-            self.options.rm_safe("fPIC")
+#     def validate(self):
+#         cppstd = self.settings.compiler.get_safe("cppstd")
 
-    def requirements(self):
-        if self.options.with_openssl:
-            self.requires("openssl/[>=3.0 <4]", transitive_headers=True, transitive_libs=True)
-        if self.options.with_postgres:
-            self.requires("libpq/[>=14 <17]", transitive_headers=True, transitive_libs=True)
-        if self.options.with_mysql:
-            self.requires("mysql-connector-c/[>=6.1 <7]", transitive_headers=True, transitive_libs=True)
+#         if cppstd:
+#             check_min_cppstd(self, "17")
 
-    def layout(self):
-        cmake_layout(self)
-        self.folders.source = "."
-        self.folders.generators = "build/conan"
+#         if str(cppstd) not in ("17", "gnu17"):
+#             raise ConanInvalidConfiguration("Only C++17 is supported")
 
-    def generate(self):
-        tc = CMakeToolchain(self)
-        tc.variables["CONAN_PROJECT_NAME"] = self.name
-        tc.variables["CONFIG_OPENSSL"] = self.options.with_openssl
-        tc.variables["CONFIG_POSTGRES"] = self.options.with_postgres
-        tc.variables["CONFIG_MYSQL"] = self.options.with_mysql
-        tc.variables["BUILD_TESTING"] = self.conf.get("user.iridium:run_tests", default=False, check_type=bool)
-        tc.generate()
+#     def set_name(self):
+#         source_dir = os.path.join(self.recipe_folder, "source/library")
+#         for d in os.listdir(source_dir):
+#             if os.path.isfile(os.path.join(source_dir, d, "version.h")):
+#                 self.name = d
+#                 self.output.info(f"Project name: {self.name}")
+#                 return
+#         raise ConanException("Main library folder with version.h not found")
 
-        deps = CMakeDeps(self)
-        deps.generate()
+#     def set_version(self):
+#         version_h = os.path.join(self.recipe_folder, "source/library", self.name, "version.h")
 
-    def build(self):
-        cmake = CMake(self)
-        cmake.configure(variables={"CONAN_PROJECT_NAME": self.name})
-        cmake.build()
+#         if not os.path.exists(version_h):
+#             raise ConanException(f"version.h not found: {version_h}")
 
-        run_tests = self.conf.get("user.iridium:run_tests", default=False, check_type=bool)
-        if run_tests and not cross_building(self):
-            cmake.test()
+#         content = load(self, version_h)
+#         name_upper = self.name.upper().replace("-", "_")
+#         major = re.search(rf"{name_upper}_VERSION_MAJOR\s*[= \t]+([0-9]+)", content)
+#         minor = re.search(rf"{name_upper}_VERSION_MINOR\s*[= \t]+([0-9]+)", content)
+#         patch = re.search(rf"{name_upper}_VERSION_PATCH\s*[= \t]+([0-9]+)", content)
 
-    def package(self):
-        cmake = CMake(self)
-        cmake.install()
+#         if not all([major, minor, patch]):
+#             raise ConanException("Failed to parse version from version.h")
 
-        copy(self, "LICENSE", src=self.source_folder, dst=os.path.join(self.package_folder, "licenses"))
+#         self.version = f"{major.group(1)}.{minor.group(1)}.{patch.group(1)}"
+#         self.output.info(f"Version: {self.version}")
 
-    def package_info(self):
-        self.cpp_info.set_property("cmake_file_name", self.name)
-        self.cpp_info.set_property("cmake_target_name", f"{self.name}::{self.name}")
-        self.cpp_info.set_property("cmake_config_version_compat", "SameMinorVersion")
+#     def config_options(self):
+#         if self.settings.os == "Windows":
+#             self.options.rm_safe("fPIC")
 
-        self.cpp_info.libs = [self.name]
+#     def configure(self):
+#         if self.options.get_safe("shared"):
+#             self.options.rm_safe("fPIC")
 
-        if self.settings.os in ["Linux", "FreeBSD"]:
-            self.cpp_info.system_libs = ["pthread", "dl", "m"]
-        elif self.settings.os == "Windows":
-            self.cpp_info.system_libs = ["ws2_32", "iphlpapi"]
+#     def requirements(self):
+#         if self.options.with_openssl:
+#             self.requires("openssl/[>=3.0 <4]", transitive_headers=True, transitive_libs=True)
+#         if self.options.with_postgres:
+#             self.requires("libpq/[>=14 <17]", transitive_headers=True, transitive_libs=True)
+#         if self.options.with_mysql:
+#             self.requires("mysql-connector-c/[>=6.1 <7]", transitive_headers=True, transitive_libs=True)
 
-        # Флаги компиляции для опциональных зависимостей
-        if self.options.with_openssl:
-            self.cpp_info.defines.append("BUILD_FLAG_OPENSSL")
-        if self.options.with_postgres:
-            self.cpp_info.defines.append("BUILD_FLAG_POSTGRES")
-        if self.options.with_mysql:
-            self.cpp_info.defines.append("BUILD_FLAG_MYSQL")
+#     def layout(self):
+#         cmake_layout(self)
+#         self.folders.source = "."
+#         self.folders.generators = "build/conan"
 
-        # Прозрачное пробрасывание зависимостей потребителям
-        if self.options.with_openssl:
-            self.cpp_info.requires.append("openssl::openssl")
-        if self.options.with_postgres:
-            self.cpp_info.requires.append("libpq::libpq")
-        if self.options.with_mysql:
-            self.cpp_info.requires.append("mysql-connector-c::mysqlclient")
+#     def generate(self):
+#         tc = CMakeToolchain(self)
+#         tc.variables["CONAN_PROJECT_NAME"] = self.name
+#         tc.variables["CONFIG_OPENSSL"] = self.options.with_openssl
+#         tc.variables["CONFIG_POSTGRES"] = self.options.with_postgres
+#         tc.variables["CONFIG_MYSQL"] = self.options.with_mysql
+#         tc.variables["BUILD_TESTING"] = self.conf.get("user.iridium:run_tests", default=False, check_type=bool)
+#         tc.generate()
+
+#         deps = CMakeDeps(self)
+#         deps.generate()
+
+#     def build(self):
+#         cmake = CMake(self)
+#         cmake.configure(variables={"CONAN_PROJECT_NAME": self.name})
+#         cmake.build()
+
+#         run_tests = self.conf.get("user.iridium:run_tests", default=False, check_type=bool)
+#         if run_tests and not cross_building(self):
+#             cmake.test()
+
+#     def package(self):
+#         cmake = CMake(self)
+#         cmake.install()
+
+#         copy(self, "LICENSE", src=self.source_folder, dst=os.path.join(self.package_folder, "licenses"))
+
+#     def package_info(self):
+#         self.cpp_info.set_property("cmake_file_name", self.name)
+#         self.cpp_info.set_property("cmake_target_name", f"{self.name}::{self.name}")
+#         self.cpp_info.set_property("cmake_config_version_compat", "SameMinorVersion")
+
+#         self.cpp_info.libs = [self.name]
+
+#         if self.settings.os in ["Linux", "FreeBSD"]:
+#             self.cpp_info.system_libs = ["pthread", "dl", "m"]
+#         elif self.settings.os == "Windows":
+#             self.cpp_info.system_libs = ["ws2_32", "iphlpapi"]
+
+#         # Флаги компиляции для опциональных зависимостей
+#         if self.options.with_openssl:
+#             self.cpp_info.defines.append("BUILD_FLAG_OPENSSL")
+#         if self.options.with_postgres:
+#             self.cpp_info.defines.append("BUILD_FLAG_POSTGRES")
+#         if self.options.with_mysql:
+#             self.cpp_info.defines.append("BUILD_FLAG_MYSQL")
+
+#         # Прозрачное пробрасывание зависимостей потребителям
+#         if self.options.with_openssl:
+#             self.cpp_info.requires.append("openssl::openssl")
+#         if self.options.with_postgres:
+#             self.cpp_info.requires.append("libpq::libpq")
+#         if self.options.with_mysql:
+#             self.cpp_info.requires.append("mysql-connector-c::mysqlclient")

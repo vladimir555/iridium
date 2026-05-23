@@ -69,7 +69,7 @@ macro(iridium_detect_project)
         message(
             FATAL_ERROR
             "version.h not found: ${VERSION_HEADER}\n"
-            "Run: scripts/update-version.sh to generate it")
+            "Run: script/iridium-update-project-version.sh to generate it")
     endif()
 
     file(READ "${VERSION_HEADER}" version_content)
@@ -197,7 +197,7 @@ macro(iridium_detect_project)
         target_link_libraries(
             ${LIBRARY_TARGET_NAME}
             PUBLIC
-            ${IRIDIUM_NAME}
+            ${IRIDIUM_NAME}::${IRIDIUM_NAME}
         )
     endif()
 
@@ -212,6 +212,15 @@ macro(iridium_detect_project)
         add_executable(
             ${TEST_TARGET_NAME}
             ${TEST_SOURCE})
+
+        if(APPLE)
+            set_target_properties(
+                ${TEST_TARGET_NAME}
+                PROPERTIES
+                INSTALL_RPATH "@executable_path/../lib"
+                BUILD_WITH_INSTALL_RPATH TRUE
+            )
+        endif()
 
         target_link_libraries(
             ${TEST_TARGET_NAME}
@@ -257,13 +266,31 @@ macro(iridium_detect_project)
         set_target_properties(
             ${APPLICATION_TARGET_NAME}
             PROPERTIES OUTPUT_NAME
-            "${PROJECT_NAME}")
+            "${PROJECT_NAME}"
+        )
+
+        if(APPLE)
+            set_target_properties(
+                ${APPLICATION_TARGET_NAME}
+                PROPERTIES
+                INSTALL_RPATH "@executable_path/../lib"
+                BUILD_WITH_INSTALL_RPATH TRUE
+            )
+        endif()
 
         target_link_libraries(
             ${APPLICATION_TARGET_NAME}
             PRIVATE
             ${LIBRARY_TARGET_NAME}
         )
+
+        if (NOT PROJECT_NAME STREQUAL IRIDIUM_NAME)
+            target_link_libraries(
+                ${APPLICATION_TARGET_NAME}
+                PRIVATE
+                ${IRIDIUM_NAME}::${IRIDIUM_NAME}
+            )
+        endif()
     endif()
     # -----
 
@@ -480,5 +507,4 @@ macro(iridium_detect_project)
             runtime
     )
     # -----
-
 endmacro()
