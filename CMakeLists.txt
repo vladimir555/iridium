@@ -32,13 +32,13 @@ if(BUILD_FLAG_POSTGRES)
 
     target_compile_definitions(
         ${LIBRARY_TARGET_NAME}
-        PUBLIC
+        PRIVATE
         BUILD_FLAG_POSTGRES
     )
 
     target_link_libraries(
         ${LIBRARY_TARGET_NAME}
-        PUBLIC
+        PRIVATE
         PostgreSQL::PostgreSQL
     )
 endif()
@@ -51,7 +51,11 @@ if(BUILD_FLAG_MYSQL)
             pkg_check_modules(MYSQL_CLIENT QUIET IMPORTED_TARGET ${_pkg})
             if(TARGET PkgConfig::MYSQL_CLIENT)
                 message(STATUS "Found MySQL/MariaDB via pkg-config: ${_pkg}")
-                target_link_libraries(${LIBRARY_TARGET_NAME} PUBLIC PkgConfig::MYSQL_CLIENT)
+                target_link_libraries(
+                    ${LIBRARY_TARGET_NAME}
+                    PRIVATE
+                    PkgConfig::MYSQL_CLIENT
+                )
                 break()
             endif()
         endforeach()
@@ -62,14 +66,14 @@ if(BUILD_FLAG_MYSQL)
 
         target_compile_definitions(
             ${LIBRARY_TARGET_NAME}
-            PUBLIC
+            PRIVATE
             BUILD_FLAG_MYSQL
         )
     else()
         find_package(libmysqlclient REQUIRED CONFIG)
         target_link_libraries(
             ${LIBRARY_TARGET_NAME}
-            PUBLIC
+            PRIVATE
             libmysqlclient::libmysqlclient
         )
     endif()
@@ -80,16 +84,25 @@ if(BUILD_FLAG_OPENSSL)
 
     target_include_directories(
         ${LIBRARY_TARGET_NAME}
-        PUBLIC
+        PRIVATE
         ${OPENSSL_INCLUDE_DIR}
     )
 
     target_link_libraries(
         ${LIBRARY_TARGET_NAME}
-        PUBLIC
+        PRIVATE
         ${OPENSSL_LIBRARIES}
     )
 endif()
+
+install(
+    FILES
+        cmake/iridium.cmake
+    DESTINATION
+        "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+    COMPONENT
+        dev
+)
 
 install(
     PROGRAMS

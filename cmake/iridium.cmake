@@ -196,7 +196,7 @@ macro(iridium_detect_project)
     get_cmake_property(_all_vars VARIABLES)
     foreach(_var IN LISTS _all_vars)
         if(_var MATCHES "^BUILD_FLAG_" AND ${_var})
-            target_compile_definitions(${LIBRARY_TARGET_NAME} PRIVATE ${_var})
+            target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC ${_var})
         endif()
     endforeach()
 
