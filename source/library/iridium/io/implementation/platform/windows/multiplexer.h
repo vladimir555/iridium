@@ -49,7 +49,7 @@ public:
 private:
     DWORD assertOK(bool const &is_ok, std::string const &message);
 
-    HANDLE
+    std::atomic<HANDLE>
         m_iocp;
     std::unordered_map<HANDLE, IStream::TSharedPtr>
         m_map_id_stream;

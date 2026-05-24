@@ -12,7 +12,6 @@
 #include <poll.h>
 
 
-
 // poll.h events
 DEFINE_ENUM(
     TPollEvent,
@@ -23,14 +22,12 @@ DEFINE_ENUM(
     // WRNORM      = POLLWRNORM,
     RDBAND      = POLLRDBAND,
     WRBAND      = POLLWRBAND,
-#if defined(FREEBSD_PLATFORM) || defined(LINUX_PLATFORM)
-    // Not defined on FreeBSD or Linux
-#else
+#ifdef MACOS_PLATFORM
     EXTEND      = POLLEXTEND,
     ATTRIB      = POLLATTRIB,
     NLINK       = POLLNLINK,
     WRITE       = POLLWRITE,
-#endif
+#endif // MACOS_PLATFORM
     ERR         = POLLERR,
     HUP         = POLLHUP,
     NVAL        = POLLNVAL

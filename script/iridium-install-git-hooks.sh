@@ -12,7 +12,7 @@ if [ ! -d "$HOOKS_DIR" ]; then
 fi
 
 # Copy the pre-commit hook
-cp "$REPO_ROOT/shell/git-hooks/pre-commit" "$HOOKS_DIR/pre-commit"
+cp "$REPO_ROOT/script/git-hooks/pre-commit" "$HOOKS_DIR/pre-commit"
 chmod +x "$HOOKS_DIR/pre-commit"
 
 echo "Pre-commit hook has been successfully installed!"

@@ -13,11 +13,13 @@
 #include "iridium/io/stream.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/pattern/non_copyable.h"
+#include "iridium/threading/synchronized.h"
 
 #include <cstring>
 #include <string>
 #include <atomic>
 #include <stdexcept>
+#include <mutex>
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -26,17 +28,11 @@
 namespace iridium::io::implementation::platform {
 
 
-/// \~english @brief Windows-specific stream port implementation.
-///     This class is intended to provide a concrete implementation of `IStreamPort` for Windows,
-///     likely using Windows-specific APIs like `HANDLE` for I/O operations.
-///     It is non-copyable. The specifics of its behavior (e.g., for sockets, files, or pipes)
-///     would be determined by its concrete implementation details in a corresponding .cpp file or derived classes.
-/// \~russian @brief Реализация потокового порта для Windows.
-///     Этот класс предназначен для предоставления конкретной реализации `IStreamPort` для Windows,
-///     вероятно, используя специфичные для Windows API, такие как `HANDLE`, для операций ввода-вывода.
-///     Класс является некопируемым. Особенности его поведения (например, для сокетов, файлов или каналов)
-///     будут определяться деталями его конкретной реализации в соответствующем .cpp файле или производных классах.
-class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
+class CStreamPort:
+    virtual public IStreamPort,
+    public pattern::NonCopyable,
+    public threading::Synchronized<std::mutex, false>
+{
 protected:
     CStreamPort(URI const &uri);
     virtual ~CStreamPort() = default;
