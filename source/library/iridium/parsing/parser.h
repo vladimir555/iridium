@@ -16,12 +16,18 @@
 namespace iridium::parsing {
 
 
+/// \~english @brief Interface for parsing and composing data (serialization/deserialization).
+/// \~russian @brief Интерфейс для парсинга и формирования данных (сериализация/десериализация).
 class IParser {
 public:
     DEFINE_SMART_PTR(IParser)
     virtual ~IParser() = default;
 
+    /// \~english @brief Parses a string into a node tree.
+    /// \~russian @brief Парсит строку в дерево узлов.
     virtual INode::TSharedPtr parse(std::string const &source) const = 0;
+    /// \~english @brief Composes a node tree into its string representation.
+    /// \~russian @brief Преобразует дерево узлов в его строковое представление.
     virtual std::string compose(INode::TConstSharedPtr const &root_node) const = 0;
 };
 

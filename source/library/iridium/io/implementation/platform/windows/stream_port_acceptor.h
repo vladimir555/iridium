@@ -16,6 +16,8 @@
 namespace iridium::io::implementation::platform {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamPortAcceptor: public IStreamAcceptor, public pattern::NonCopyable {
 public:
     DEFINE_IMPLEMENTATION(CStreamPortAcceptor)

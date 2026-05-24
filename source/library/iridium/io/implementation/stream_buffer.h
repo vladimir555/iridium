@@ -18,6 +18,8 @@ namespace iridium::io::implementation {
 #endif // _MSC_VER
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamBuffer: public virtual IStream {
 protected:
     explicit CStreamBuffer(Buffer::TSharedPtr const &buffer);

@@ -12,12 +12,18 @@
 namespace iridium::pattern {
 
 
+/// \~english @brief Interface for objects that require initialization and finalization.
+/// \~russian @brief Интерфейс для объектов, требующих инициализации и финализации.
 class IInitializable {
 public:
     DEFINE_SMART_PTR(IInitializable)
     virtual ~IInitializable() = default;
 
+    /// \~english @brief Initializes the object.
+    /// \~russian @brief Инициализирует объект.
     virtual void initialize() = 0;
+    /// \~english @brief Finalizes the object.
+    /// \~russian @brief Завершает работу объекта.
     virtual void finalize() = 0;
 };
 

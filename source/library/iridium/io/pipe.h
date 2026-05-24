@@ -13,7 +13,10 @@
 namespace iridium::io {
 
 
-// todo: rm, deprecated
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IPipeStreams {
 public:
     DEFINE_INTERFACE(IPipeStreams)
@@ -31,6 +34,8 @@ public:
 };
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IPipeTransmitter {
 public:
     DEFINE_INTERFACE(IPipeTransmitter)

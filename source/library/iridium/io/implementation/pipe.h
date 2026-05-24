@@ -13,7 +13,10 @@
 namespace iridium::io::implementation {
 
 
-// todo: rm, deprecated
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CPipe: public IPipe {
 public:
     DEFINE_CREATE(CPipe)

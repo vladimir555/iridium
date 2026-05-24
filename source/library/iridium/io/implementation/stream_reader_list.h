@@ -14,6 +14,8 @@
 namespace iridium::io::implementation {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamReaderList: public IStreamReader {
 public:
     DEFINE_IMPLEMENTATION(CStreamReaderList)

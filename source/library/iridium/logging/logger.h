@@ -30,6 +30,8 @@ namespace iridium::logging {
 
 
 // todo: wait for finalizing async sinks
+/// \~english @brief Main logger class for managing log events and sinks.
+/// \~russian @brief Основной класс логгера для управления событиями логирования и стоками.
 class Logger:
     public pattern::Singleton<Logger>,
     public threading::Synchronized<std::mutex>
@@ -37,10 +39,18 @@ class Logger:
 public:
     virtual ~Logger();
 
+    /// \~english @brief Sets the logger configuration.
+    /// \~russian @brief Устанавливает конфигурацию логгера.
     void setConfig(config::TLogger const &config);
+    /// \~english @brief Gets the current logger configuration.
+    /// \~russian @brief Возвращает текущую конфигурацию логгера.
     config::TLogger getConfig();
 
+    /// \~english @brief Logs a specific event.
+    /// \~russian @brief Записывает в лог конкретное событие.
     void log(TEvent::TConstSharedPtr const &event);
+    /// \~english @brief Adds a custom sink to the logger.
+    /// \~russian @brief Добавляет пользовательский сток в логгер.
     void addCustomSink(ISink::TSharedPtr const &sink);
 
 private:
@@ -52,20 +62,32 @@ private:
 };
 
 
+/// \~english @brief Dummy log stream that ignores all input.
+/// \~russian @brief Фиктивный поток лога, который игнорирует все входные данные.
 struct LogStreamDummy {
     template<typename TValue>
     LogStreamDummy const & operator << (TValue v) const;
 };
 
 
+/// \~english @brief Stream-like object for creating and submitting log events.
+/// \~russian @brief Потоковый объект для создания и отправки событий лога.
 struct LogStream {
+    /// \~english @brief Constructs a log stream with a specific severity level.
+    /// \~russian @brief Создает поток лога с определенным уровнем важности.
     explicit LogStream(TEvent::TLevel const &level);
     ~LogStream();
 
+    /// \~english @brief Appends a string to the log event.
+    /// \~russian @brief Добавляет строку к событию лога.
     LogStream const & operator << (char const * const s) const;
 
+    /// \~english @brief Appends any convertible value to the log event.
+    /// \~russian @brief Добавляет любое конвертируемое значение к событию лога.
     template<typename TValue>
     LogStream const & operator << (TValue const &v) const;
+    /// \~english @brief Appends a pointer value to the log event.
+    /// \~russian @brief Добавляет значение указателя к событию лога.
     template<typename TValue>
     LogStream const & operator << (TValue * const * v) const;
 
@@ -94,8 +116,14 @@ LogStream const &LogStream::operator << (TValue * const * v) const {
 }
 
 
+/// \~english @brief Globally sets the logger configuration.
+/// \~russian @brief Глобально устанавливает конфигурацию логгера.
 void setConfig(config::TLogger const &config);
+/// \~english @brief Converts a raw function name to a cleaner format for logs.
+/// \~russian @brief Преобразует имя функции в более чистый формат для логов.
 std::string convertFunctionNameToLogFunctionName(std::string const &name);
+/// \~english @brief Extracts the file name from a full path for log output.
+/// \~russian @brief Извлекает имя файла из полного пути для вывода в лог.
 std::string extractFileNameToLog(std::string const &path);
 
 

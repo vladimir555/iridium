@@ -17,6 +17,8 @@
 namespace iridium::io::fs::implementation {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CFileCache : public ICache {
 public:
     DEFINE_CREATE(CFileCache)
