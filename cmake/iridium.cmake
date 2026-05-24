@@ -193,6 +193,13 @@ macro(iridium_detect_project)
         add_library(${LIBRARY_TARGET_NAME} SHARED ${LIBRARY_SOURCE})
     endif()
 
+    get_cmake_property(_all_vars VARIABLES)
+    foreach(_var IN LISTS _all_vars)
+        if(_var MATCHES "^BUILD_FLAG_" AND ${_var})
+            target_compile_definitions(${LIBRARY_TARGET_NAME} PRIVATE ${_var})
+        endif()
+    endforeach()
+
     target_include_directories(
         ${LIBRARY_TARGET_NAME}
         PUBLIC

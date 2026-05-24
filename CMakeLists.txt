@@ -65,10 +65,13 @@ if(BUILD_FLAG_MYSQL)
             PUBLIC
             BUILD_FLAG_MYSQL
         )
-        # message(FATAL_ERROR "pkg-config not found. Install: sudo apt install pkg-config")
     else()
         find_package(libmysqlclient REQUIRED CONFIG)
-        target_link_libraries(${LIBRARY_TARGET_NAME} PUBLIC libmysqlclient::libmysqlclient)
+        target_link_libraries(
+            ${LIBRARY_TARGET_NAME}
+            PUBLIC
+            libmysqlclient::libmysqlclient
+        )
     endif()
 endif()
 
@@ -85,12 +88,6 @@ if(BUILD_FLAG_OPENSSL)
         ${LIBRARY_TARGET_NAME}
         PUBLIC
         ${OPENSSL_LIBRARIES}
-    )
-
-    target_compile_definitions(
-        ${LIBRARY_TARGET_NAME}
-        PUBLIC
-        BUILD_FLAG_OPENSSL
     )
 endif()
 

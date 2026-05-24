@@ -80,7 +80,6 @@ class ProjectBase:
 
         for option_name in self.__class__.options:
             if option_name.startswith("with_") and self.options.get_safe(option_name):
-                tc.preprocessor_definitions[f"BUILD_FLAG_{option_name[5:].upper()}"] = "1"
                 tc.variables[f"BUILD_FLAG_{option_name[5:].upper()}"] = self.options.get_safe(option_name, False)
 
         tc.generate()
