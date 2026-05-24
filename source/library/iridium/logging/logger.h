@@ -30,39 +30,27 @@ namespace iridium::logging {
 
 
 // todo: wait for finalizing async sinks
-/// \~english @brief Main logger class, implemented as a thread-safe singleton.
-/// \~english @details This class manages the logging configuration, a collection of sinks, and provides the central point for log message submission.
-/// \~russian @brief Основной класс логгера, реализованный как потокобезопасный синглтон.
-/// \~russian @details Этот класс управляет конфигурацией логирования, коллекцией приемников и предоставляет центральную точку для отправки лог-сообщений.
-class Logger :
+/// \~english @brief Main logger class for managing log events and sinks.
+/// \~russian @brief Основной класс логгера для управления событиями логирования и стоками.
+class Logger:
     public pattern::Singleton<Logger>,
     public threading::Synchronized<std::mutex>
 {
 public:
     virtual ~Logger();
 
-    /// \~english @brief Sets the logger's configuration.
+    /// \~english @brief Sets the logger configuration.
     /// \~russian @brief Устанавливает конфигурацию логгера.
-    /// \~english @param config The configuration to apply.
-    /// \~russian @param config Конфигурация для применения.
     void setConfig(config::TLogger const &config);
-
     /// \~english @brief Gets the current logger configuration.
     /// \~russian @brief Возвращает текущую конфигурацию логгера.
-    /// \~english @return The current configuration.
-    /// \~russian @return Текущая конфигурация.
     config::TLogger getConfig();
 
-    /// \~english @brief Logs a log event.
-    /// \~russian @brief Логирует событие журнала.
-    /// \~english @param event The log event to be processed.
-    /// \~russian @param event Событие журнала для обработки.
+    /// \~english @brief Logs a specific event.
+    /// \~russian @brief Записывает в лог конкретное событие.
     void log(TEvent::TConstSharedPtr const &event);
-
     /// \~english @brief Adds a custom sink to the logger.
-    /// \~russian @brief Добавляет пользовательский приемник в логгер.
-    /// \~english @param sink The sink to add.
-    /// \~russian @param sink Приемник для добавления.
+    /// \~russian @brief Добавляет пользовательский сток в логгер.
     void addCustomSink(ISink::TSharedPtr const &sink);
 
 private:
@@ -73,40 +61,33 @@ private:
     parsing::INode::TSharedPtr      m_config;
 };
 
-/// \~english @brief A dummy log stream that does nothing. Used to disable logging at compile time.
-/// \~russian @brief "Пустой" поток лога, который ничего не делает. Используется для отключения логирования на этапе компиляции.
-struct LogStreamDummy
-{
-    /// \~english @brief Ignores any value streamed to it.
-    /// \~russian @brief Игнорирует любое значение, направленное в поток.
+
+/// \~english @brief Dummy log stream that ignores all input.
+/// \~russian @brief Фиктивный поток лога, который игнорирует все входные данные.
+struct LogStreamDummy {
     template<typename TValue>
-    LogStreamDummy const &operator << (TValue v) const;
+    LogStreamDummy const & operator << (TValue v) const;
 };
 
 
-/// \~english @brief A temporary stream-like object for constructing log messages.
-/// \~english @details This object is created by the LOGX macros. It collects the streamed data, and upon destruction, submits the complete log event to the Logger singleton.
-/// \~russian @brief Временный потокоподобный объект для конструирования лог-сообщений.
-/// \~russian @details Этот объект создается макросами LOGX. Он собирает потоковые данные и при уничтожении отправляет завершенное событие журнала в синглтон Logger.
+/// \~english @brief Stream-like object for creating and submitting log events.
+/// \~russian @brief Потоковый объект для создания и отправки событий лога.
 struct LogStream {
-    /// \~english @brief Constructs a LogStream for a specific log level.
-    /// \~russian @brief Конструирует LogStream для определенного уровня логирования.
-    /// \~english @param level The severity level of the log message.
-    /// \~russian @param level Уровень серьезности лог-сообщения.
+    /// \~english @brief Constructs a log stream with a specific severity level.
+    /// \~russian @brief Создает поток лога с определенным уровнем важности.
     explicit LogStream(TEvent::TLevel const &level);
-
-    /// \~english @brief Destructor that submits the log event.
-    /// \~russian @brief Деструктор, который отправляет событие журнала.
     ~LogStream();
 
-    /// \~english @brief Appends a C-style string to the log message.
-    /// \~russian @brief Добавляет строку в стиле C к лог-сообщению.
+    /// \~english @brief Appends a string to the log event.
+    /// \~russian @brief Добавляет строку к событию лога.
     LogStream const & operator << (char const * const s) const;
 
-    /// \~english @brief Appends a value of any type to the log message.
-    /// \~russian @brief Добавляет значение любого типа к лог-сообщению.
+    /// \~english @brief Appends any convertible value to the log event.
+    /// \~russian @brief Добавляет любое конвертируемое значение к событию лога.
     template<typename TValue>
     LogStream const & operator << (TValue const &v) const;
+    /// \~english @brief Appends a pointer value to the log event.
+    /// \~russian @brief Добавляет значение указателя к событию лога.
     template<typename TValue>
     LogStream const & operator << (TValue * const * v) const;
 
@@ -116,51 +97,33 @@ private:
 
 
 template<typename TValue>
-LogStreamDummy const &
-LogStreamDummy::operator<<(TValue) const
-{
+LogStreamDummy const &LogStreamDummy::operator << (TValue) const {
     return *this;
 }
 
 
 template<typename TValue>
-LogStream const &
-LogStream::operator<<(TValue const &v) const
-{
+LogStream const &LogStream::operator << (TValue const &v) const {
     m_event->line += convertion::convert<std::string>(v);
     return std::move(*this); // ----->
 }
 
 
 template<typename TValue>
-LogStream const &
-LogStream::operator<<(TValue* const* v) const
-{
+LogStream const &LogStream::operator << (TValue * const * v) const {
     m_event->line += v ? convertion::convert<std::string>(*v) : "nullptr";
     return std::move(*this); // ----->
 }
 
 
-/// \~english @brief Sets the global logger configuration.
-/// \~russian @brief Устанавливает глобальную конфигурацию логгера.
-/// \~english @param config The configuration to apply.
-/// \~russian @param config Конфигурация для применения.
+/// \~english @brief Globally sets the logger configuration.
+/// \~russian @brief Глобально устанавливает конфигурацию логгера.
 void setConfig(config::TLogger const &config);
-
-/// \~english @brief Converts a C++ function name (e.g., from `__PRETTY_FUNCTION__`) into a cleaner format for logging.
-/// \~russian @brief Преобразует имя функции C++ (например, из `__PRETTY_FUNCTION__`) в более чистый формат для логирования.
-/// \~english @param name The raw function name.
-/// \~russian @param name "Сырое" имя функции.
-/// \~english @return A cleaned-up function name.
-/// \~russian @return Очищенное имя функции.
+/// \~english @brief Converts a raw function name to a cleaner format for logs.
+/// \~russian @brief Преобразует имя функции в более чистый формат для логов.
 std::string convertFunctionNameToLogFunctionName(std::string const &name);
-
-/// \~english @brief Extracts the filename from a full path for concise logging.
-/// \~russian @brief Извлекает имя файла из полного пути для краткого логирования.
-/// \~english @param path The full file path.
-/// \~russian @param path Полный путь к файлу.
-/// \~english @return The filename component of the path.
-/// \~russian @return Компонент имени файла из пути.
+/// \~english @brief Extracts the file name from a full path for log output.
+/// \~russian @brief Извлекает имя файла из полного пути для вывода в лог.
 std::string extractFileNameToLog(std::string const &path);
 
 
@@ -169,9 +132,10 @@ std::string extractFileNameToLog(std::string const &path);
 
 #ifdef _MSC_VER
 #define __PRETTY_FUNCTION__ __FUNCSIG__
-#endif
+#endif // _MSC_VER
 
 
+// macros: __func__
 #if defined(BUILD_TYPE_DEBUG) || defined(BUILD_FLAG_FORCE_DEBUG_LOG)
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE) << \
@@ -179,7 +143,7 @@ iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_str
 #else
 #define LOGT \
 if (false) iridium::logging::LogStreamDummy()
-#endif
+#endif // BUILD_TYPE_DEBUG
 
 
 #if defined(BUILD_TYPE_DEBUG) || defined(BUILD_FLAG_FORCE_DEBUG_LOG)
@@ -188,7 +152,7 @@ iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG)
 #else
 #define LOGD \
 if (false) iridium::logging::LogStreamDummy()
-#endif
+#endif // BUILD_TYPE_DEBUG
 
 
 #define LOGI \

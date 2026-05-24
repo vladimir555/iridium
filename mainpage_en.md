@@ -1734,3 +1734,71 @@ The versioning logic is as follows:
 - **PATCH**: Number of commits on the `develop` branch since the last merge into the primary branch.
 
 This ensures that every build has a unique and traceable version number corresponding to its development progress.
+
+@section sec_build_system Integrated Build System (CMake & Conan)
+
+Iridium provides a streamlined way to set up new projects using its integrated CMake and Conan build system. This automation handles project detection, versioning, and packaging.
+
+@subsection subsec_project_structure Required Project Structure
+
+To use the `iridium_detect_project` CMake macro, your project should follow this structure:
+
+@code
+.
+├── CMakeLists.txt
+├── conanfile.py
+├── source
+│   ├── application
+│   │   └── main.cpp
+│   └── library
+│       └── <project-name>
+│           ├── version.h (generated)
+│           ├── module.h
+│           └── module.cpp
+└── (optional) source/test
+@endcode
+
+@subsection subsec_cmake_integration CMake Integration
+
+In your root `CMakeLists.txt`, you can use `iridium_detect_project` to automatically configure your project:
+
+@code{.cmake}
+cmake_minimum_required(VERSION 3.23)
+
+project("") # Project name will be detected from source/library/ folder
+
+find_package(iridium REQUIRED CONFIG)
+
+iridium_detect_project(
+    CONTACT "your.email@example.com"
+    HOMEPAGE_URL "https://your-project-homepage.com"
+    DESCRIPTION "A brief description of your project"
+)
+@endcode
+
+The `iridium_detect_project` macro:
+- Detects the project name from the subfolder in `source/library/`.
+- Detects the project version from `version.h`.
+- Sets up library, application, and test targets.
+- Configures default compiler flags for Debug and Release builds.
+- Sets up installation and packaging (CPack) rules.
+
+@subsection subsec_conan_integration Conan Integration
+
+Iridium provides a base class for Conan recipes to simplify dependency management and project configuration.
+
+@code{.python}
+from conan import ConanFile
+
+class AppConan(ConanFile):
+    requires = "iridium/0.3.0" # Use the appropriate version
+    python_requires = requires
+    python_requires_extend = "iridium.ProjectBase"
+
+    def configure(self):
+        # Optional: configure Iridium components
+        self.options["iridium/*"].with_postgres = True
+        self.options["iridium/*"].with_mysql = True
+@endcode
+
+By extending `iridium.ProjectBase`, your recipe inherits standard logic for versioning, layout, and building that is compatible with the Iridium ecosystem.

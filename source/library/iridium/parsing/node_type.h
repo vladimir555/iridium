@@ -18,13 +18,10 @@ namespace iridium::parsing {
 
 
 // todo: Depth-First Search, DFS) and (Breadth-First Search, BFS) methods maybe parallel
-/// \~english @brief Generic interface for a node in a tree-like data structure.
-/// \~english @details This template class defines the common operations for a node, such as accessing its name, value, and children. It is designed to be cloneable via the IPrototype interface.
-/// \~russian @brief Обобщенный интерфейс для узла в древовидной структуре данных.
-/// \~russian @details Этот шаблонный класс определяет общие операции для узла, такие как доступ к его имени, значению и дочерним элементам. Он спроектирован для клонирования через интерфейс IPrototype.
+/// \~english @brief Interface for a generic node in a hierarchical data structure.
+/// \~russian @brief Интерфейс для универсального узла в иерархической структуре данных.
 template<typename TValue>
-class INodeType : public pattern::IPrototype<INodeType<TValue>>
-{
+class INodeType : public pattern::IPrototype<INodeType<TValue> > {
 public:
     DEFINE_INTERFACE(INodeType)
 
@@ -40,76 +37,74 @@ public:
         const_iterator;
     typedef typename TNodesSharedPtr::const_reference
         const_reference;
-    /// \~english @brief Gets the list of parent nodes.
+    /// \~english @brief Returns a list of parent nodes.
     /// \~russian @brief Возвращает список родительских узлов.
     virtual typename INodeType::TNodesPtr
         getParents() const = 0;
 
-    /// \~english @brief Gets the name of the node.
+    /// \~english @brief Returns the name of the node.
     /// \~russian @brief Возвращает имя узла.
     virtual std::string
         getName() const = 0;
-    /// \~english @brief Gets the value of the node.
-    /// \~russian @brief Возвращает значение узла.
+    /// \~english @brief Returns the value associated with the node.
+    /// \~russian @brief Возвращает значение, связанное с узлом.
     virtual TValue
         getValue() const = 0;
-    /// \~english @brief Sets the value of the node.
-    /// \~russian @brief Устанавливает значение узла.
+    /// \~english @brief Sets the value associated with the node.
+    /// \~russian @brief Устанавливает значение, связанное с узлом.
     virtual void
         setValue(TValue const &value) = 0;
-    /// \~english @brief Gets the type of the node.
+    /// \~english @brief Returns the type of the node.
     /// \~russian @brief Возвращает тип узла.
     virtual std::string
         getType() const = 0;
-    /// \~english @brief Slices the tree based on the provided path.
-    /// \~russian @brief Срезает дерево на основе предоставленного пути.
+    /// \~english @brief Finds nodes matching a path.
+    /// \~russian @brief Находит узлы, соответствующие пути.
     virtual typename INodeType::TNodesSharedPtr
         slice(std::string const &path) const = 0;
-    /// \~english @brief Returns an iterator to the beginning of the children list.
-    /// \~russian @brief Возвращает итератор на начало списка дочерних узлов.
     virtual iterator
         begin() = 0;
-    /// \~english @brief Returns an iterator to the end of the children list.
-    /// \~russian @brief Возвращает итератор на конец списка дочерних узлов.
     virtual iterator
         end() = 0;
-    /// \~english @brief Returns a constant iterator to the beginning of the children list.
-    /// \~russian @brief Возвращает константный итератор на начало списка дочерних узлов.
     virtual const_iterator
         begin() const = 0;
-    /// \~english @brief Returns a constant iterator to the end of the children list.
-    /// \~russian @brief Возвращает константный итератор на конец списка дочерних узлов.
     virtual const_iterator
         end() const = 0;
-    /// \~english @brief Gets the number of children.
-    /// \~russian @brief Возвращает количество дочерних элементов.
+    /// \~english @brief Returns the number of child nodes.
+    /// \~russian @brief Возвращает количество дочерних узлов.
     virtual size_t
         size() const = 0;
-    /// \~english @brief Checks if the node has children.
-    /// \~russian @brief Проверяет, есть ли у узла дочерние элементы.
+    /// \~english @brief Returns true if the node has children.
+    /// \~russian @brief Возвращает true, если у узла есть дочерние элементы.
     virtual bool
         hasChilds() const = 0;
 
-    /// \~english @brief Gets a child node by name.
-    /// \~russian @brief Возвращает дочерний узел по имени.
+    /// \~english @brief Returns a single child node by name.
+    /// \~russian @brief Возвращает один дочерний узел по имени.
     virtual typename INodeType<TValue>::TSharedPtr
         getChild(std::string const &name) = 0;
+    /// \~english @brief Returns a single constant child node by name.
+    /// \~russian @brief Возвращает один константный дочерний узел по имени.
     virtual typename INodeType<TValue>::TConstSharedPtr
         getChild(std::string const &name) const = 0;
-    /// \~english @brief Gets all child nodes with a specific name.
+    /// \~english @brief Returns all child nodes with a specific name.
     /// \~russian @brief Возвращает все дочерние узлы с определенным именем.
     virtual TNodesSharedPtr
         getChilds(std::string const &name) const = 0;
-    /// \~english @brief Adds a child node.
-    /// \~russian @brief Добавляет дочерний узел.
+    /// \~english @brief Adds an existing node as a child.
+    /// \~russian @brief Добавляет существующий узел в качестве дочернего.
     virtual typename INodeType::TSharedPtr
         addChild(typename INodeType::TSharedPtr const &child_node) = 0;
+    /// \~english @brief Creates and adds a new child node by name.
+    /// \~russian @brief Создает и добавляет новый дочерний узел по имени.
     virtual typename INodeType::TSharedPtr
         addChild(std::string const &name) = 0;
+    /// \~english @brief Creates and adds a new child node with a name and value.
+    /// \~russian @brief Создает и добавляет новый дочерний узел с именем и значением.
     virtual typename INodeType::TSharedPtr
         addChild(std::string const &name, TValue const &value) = 0;
-    /// \~english @brief Deletes child nodes by name.
-    /// \~russian @brief Удаляет дочерние узлы по имени.
+    /// \~english @brief Deletes all child nodes with a specific name.
+    /// \~russian @brief Удаляет все дочерние узлы с определенным именем.
     virtual void
         delChilds(std::string const &name) = 0;
 };

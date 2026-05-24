@@ -1820,3 +1820,71 @@ TEST(DataConsumer_UsesMockService) {
 - **PATCH**: Количество коммитов в ветке `develop` с момента последнего слияния в основную ветку.
 
 Это гарантирует, что каждая сборка имеет уникальный и отслеживаемый номер версии, соответствующий прогрессу разработки.
+
+@section sec_build_system Интегрированная система сборки (CMake и Conan)
+
+Iridium предоставляет упрощенный способ настройки новых проектов с помощью интегрированной системы сборки CMake и Conan. Эта автоматизация берет на себя обнаружение проекта, версионирование и упаковку.
+
+@subsection subsec_project_structure Необходимая структура проекта
+
+Для использования CMake-макроса `iridium_detect_project`, ваш проект должен иметь следующую структуру:
+
+@code
+.
+├── CMakeLists.txt
+├── conanfile.py
+├── source
+│   ├── application
+│   │   └── main.cpp
+│   └── library
+│       └── <имя-проекта>
+│           ├── version.h (генерируется)
+│           ├── module.h
+│           └── module.cpp
+└── (опционально) source/test
+@endcode
+
+@subsection subsec_cmake_integration Интеграция с CMake
+
+В корневом файле `CMakeLists.txt` вы можете использовать `iridium_detect_project` для автоматической настройки вашего проекта:
+
+@code{.cmake}
+cmake_minimum_required(VERSION 3.23)
+
+project("") # Имя проекта будет определено по папке в source/library/
+
+find_package(iridium REQUIRED CONFIG)
+
+iridium_detect_project(
+    CONTACT "your.email@example.com"
+    HOMEPAGE_URL "https://your-project-homepage.com"
+    DESCRIPTION "Краткое описание вашего проекта"
+)
+@endcode
+
+Макрос `iridium_detect_project`:
+- Определяет имя проекта по подпапке в `source/library/`.
+- Определяет версию проекта из `version.h`.
+- Создает цели для библиотеки, приложения и тестов.
+- Настраивает стандартные флаги компилятора для сборок Debug и Release.
+- Настраивает правила установки и упаковки (CPack).
+
+@subsection subsec_conan_integration Интеграция с Conan
+
+Iridium предоставляет базовый класс для рецептов Conan, чтобы упростить управление зависимостями и конфигурацию проекта.
+
+@code{.python}
+from conan import ConanFile
+
+class AppConan(ConanFile):
+    requires = "iridium/0.3.0" # Используйте подходящую версию
+    python_requires = requires
+    python_requires_extend = "iridium.ProjectBase"
+
+    def configure(self):
+        # Опционально: настройка компонентов Iridium
+        self.options["iridium/*"].with_postgres = True
+        self.options["iridium/*"].with_mysql = True
+@endcode
+
+Расширяя `iridium.ProjectBase`, ваш рецепт наследует стандартную логику версионирования, структуры и сборки, совместимую с экосистемой Iridium.
