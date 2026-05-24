@@ -102,6 +102,20 @@ macro(iridium_detect_project)
     message(STATUS "Project: ${PROJECT_NAME} ${PROJECT_VERSION}")
     # -----
 
+    # ----- output paths
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+
+    # multi-config Xcode, VS, Ninja Multi
+    foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
+        string(TOUPPER ${CONFIG} CONFIG_UPPER)
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_BINARY_DIR}/bin")
+        set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_BINARY_DIR}/lib")
+        set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_BINARY_DIR}/lib")
+    endforeach()
+    # -----
+
     # ----- project definition
     if(NOT DEFINED CMAKE_CXX_STANDARD)
         set(CMAKE_CXX_STANDARD 17)
@@ -202,7 +216,7 @@ macro(iridium_detect_project)
     endif()
 
     # test target
-    if (DEFINED TEST_TARGET_NAME AND (NOT DEFINED CONAN_PROJECT_NAME OR BUILD_TESTING))
+    if (DEFINED TEST_TARGET_NAME)
         file(GLOB_RECURSE TEST_SOURCE CONFIGURE_DEPENDS
             "${TEST_SOURCE_DIRECTORY}/*.h"
             "${TEST_SOURCE_DIRECTORY}/*.cpp"
@@ -213,7 +227,7 @@ macro(iridium_detect_project)
             ${TEST_TARGET_NAME}
             ${TEST_SOURCE})
 
-        if(APPLE)
+        if(APPLE AND DEFINED CONAN_PROJECT_NAME)
             set_target_properties(
                 ${TEST_TARGET_NAME}
                 PROPERTIES
@@ -238,8 +252,6 @@ macro(iridium_detect_project)
             string(REPLACE "\\" "/" TEST_SOURCE_FILE_RELATIVE_PATH "${TEST_SOURCE_FILE_RELATIVE_PATH}")
             list(APPEND TEST_CASE_PATHS "/${TEST_SOURCE_FILE_RELATIVE_PATH}")
         endforeach()
-
-        # list(REMOVE_DUPLICATES TEST_CASE_PATHS)
 
         foreach(TEST_CASE_PATH IN LISTS TEST_CASE_PATHS)
             add_test(
@@ -269,7 +281,7 @@ macro(iridium_detect_project)
             "${PROJECT_NAME}"
         )
 
-        if(APPLE)
+        if(APPLE AND DEFINED CONAN_PROJECT_NAME)
             set_target_properties(
                 ${APPLICATION_TARGET_NAME}
                 PROPERTIES

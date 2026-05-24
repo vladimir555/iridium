@@ -1,10 +1,4 @@
-from conan.tools.cmake import (
-    CMake,
-    CMakeToolchain,
-    CMakeDeps,
-    cmake_layout
-)
-
+from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 from conan.tools.files import load, copy
 from conan.tools.build import cross_building, check_min_cppstd
 from conan.errors import ConanException, ConanInvalidConfiguration
@@ -18,16 +12,10 @@ class ProjectBase:
 
     options = {
         "fPIC": [True, False],
-        "with_openssl": [True, False],
-        "with_postgres": [True, False],
-        "with_mysql": [True, False],
     }
 
     default_options = {
         "fPIC": True,
-        "with_openssl": False,
-        "with_postgres": False,
-        "with_mysql": False,
     }
 
     exports_sources = (
@@ -45,54 +33,29 @@ class ProjectBase:
         if cppstd:
             check_min_cppstd(self, "17")
 
-        if str(cppstd) not in ("17", "gnu17"):
-            raise ConanInvalidConfiguration(
-                "Only C++17 is supported"
-            )
-
     def set_name(self):
-        source_dir = os.path.join(
-            self.recipe_folder,
-            "source/library"
-        )
+        source_dir = os.path.join(self.recipe_folder, "source/library")
 
         for d in os.listdir(source_dir):
-            if os.path.isfile(
-                os.path.join(source_dir, d, "version.h")
-            ):
+            if os.path.isfile(os.path.join(source_dir, d, "version.h")):
                 self.name = d
                 return
 
-        raise ConanException(
-            "Main library folder with version.h not found"
-        )
+        raise ConanException("Main library folder with version.h not found")
 
     def set_version(self):
-        version_h = os.path.join(
+        version_h_path = os.path.join(
             self.recipe_folder,
             "source/library",
             self.name,
             "version.h"
         )
 
-        content = load(self, version_h)
-
+        version_h = load(self, version_h_path)
         name_upper = self.name.upper().replace("-", "_")
-
-        major = re.search(
-            rf"{name_upper}_VERSION_MAJOR\s*[= \t]+([0-9]+)",
-            content
-        )
-
-        minor = re.search(
-            rf"{name_upper}_VERSION_MINOR\s*[= \t]+([0-9]+)",
-            content
-        )
-
-        patch = re.search(
-            rf"{name_upper}_VERSION_PATCH\s*[= \t]+([0-9]+)",
-            content
-        )
+        major = re.search(rf"{name_upper}_VERSION_MAJOR\s*[= \t]+([0-9]+)", version_h)
+        minor = re.search(rf"{name_upper}_VERSION_MINOR\s*[= \t]+([0-9]+)", version_h)
+        patch = re.search(rf"{name_upper}_VERSION_PATCH\s*[= \t]+([0-9]+)", version_h)
 
         self.version = (
             f"{major.group(1)}."
@@ -103,10 +66,6 @@ class ProjectBase:
     def config_options(self):
         if self.settings.os == "Windows":
             self.options.rm_safe("fPIC")
-
-    def requirements(self):
-        if self.options.with_openssl:
-            self.requires("openssl/[>=3.0 <4]")
 
     def layout(self):
         cmake_layout(self)
@@ -119,6 +78,11 @@ class ProjectBase:
 
         tc.variables["CONAN_PROJECT_NAME"] = self.name
 
+        for option_name in self.__class__.options:
+            if option_name.startswith("with_") and self.options.get_safe(option_name):
+                tc.preprocessor_definitions[f"BUILD_FLAG_{option_name[5:].upper()}"] = "1"
+                tc.variables[f"BUILD_FLAG_{option_name[5:].upper()}"] = self.options.get_safe(option_name, False)
+
         tc.generate()
 
         deps = CMakeDeps(self)
@@ -126,13 +90,7 @@ class ProjectBase:
 
     def build(self):
         cmake = CMake(self)
-
-        cmake.configure(
-            variables={
-                "CONAN_PROJECT_NAME": self.name
-            }
-        )
-
+        cmake.configure( variables={ "CONAN_PROJECT_NAME": self.name } )
         cmake.build()
 
         if (self.conf.get("user.iridium:run_tests", default=False, check_type=bool) and not cross_building(self)):
@@ -154,22 +112,13 @@ class ProjectBase:
         self.cpp_info.bindirs = ["bin"]
         self.cpp_info.libs = [self.name]
 
-        self.cpp_info.set_property(
-            "cmake_file_name", self.name)
-        self.cpp_info.set_property(
-            "cmake_target_name", f"{self.name}::{self.name}")
-        self.cpp_info.set_property(
-            "cmake_build_modules", [
-                os.path.join("lib", "cmake", self.name, "iridium.cmake")
-            ]
+        self.cpp_info.set_property("cmake_file_name", self.name)
+        self.cpp_info.set_property("cmake_target_name", f"{self.name}::{self.name}")
+        self.cpp_info.set_property("cmake_build_modules",
+            [ os.path.join("lib", "cmake", self.name, "iridium.cmake") ]
         )
 
         if self.settings.os in ["Linux", "FreeBSD"]:
             self.cpp_info.system_libs = ["pthread", "dl", "m"]
         elif self.settings.os == "Windows":
             self.cpp_info.system_libs = ["ws2_32", "iphlpapi"]
-
-        for option_name, enabled in self.options.items():
-            if option_name.startswith("with_") and bool(enabled):
-                define = f"BUILD_FLAG_{option_name[5:].upper()}"
-                self.cpp_info.defines.append(define)

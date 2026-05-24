@@ -16,18 +16,18 @@ iridium_detect_project(
 )
 
 # ----- optional components
-if (NOT DEFINED CONFIG_POSTGRES)
-    set(CONFIG_POSTGRES 0)
+if (NOT DEFINED BUILD_FLAG_POSTGRES)
+    set(BUILD_FLAG_POSTGRES 0)
 endif()
-if (NOT DEFINED CONFIG_MYSQL)
-    set(CONFIG_MYSQL 0)
+if (NOT DEFINED BUILD_FLAG_MYSQL)
+    set(BUILD_FLAG_MYSQL 0)
 endif()
-if (NOT DEFINED CONFIG_OPENSSL)
-    set(CONFIG_OPENSSL 0)
+if (NOT DEFINED BUILD_FLAG_OPENSSL)
+    set(BUILD_FLAG_OPENSSL 0)
 endif()
 # -----
 
-if(CONFIG_POSTGRES)
+if(BUILD_FLAG_POSTGRES)
     find_package(PostgreSQL REQUIRED)
 
     target_compile_definitions(
@@ -43,35 +43,36 @@ if(CONFIG_POSTGRES)
     )
 endif()
 
-if(CONFIG_MYSQL)
+if(BUILD_FLAG_MYSQL)
     find_package(PkgConfig)
-    if(NOT PkgConfig_FOUND)
-        message(FATAL_ERROR "pkg-config not found. Install: sudo apt install pkg-config")
-    endif()
+    if(PkgConfig_FOUND)
+        set(_MYSQL_PKG_NAMES "mysqlclient" "libmariadb" "mariadb" "mariadbclient")
+        foreach(_pkg IN LISTS _MYSQL_PKG_NAMES)
+            pkg_check_modules(MYSQL_CLIENT QUIET IMPORTED_TARGET ${_pkg})
+            if(TARGET PkgConfig::MYSQL_CLIENT)
+                message(STATUS "Found MySQL/MariaDB via pkg-config: ${_pkg}")
+                target_link_libraries(${LIBRARY_TARGET_NAME} PUBLIC PkgConfig::MYSQL_CLIENT)
+                break()
+            endif()
+        endforeach()
 
-    set(_MYSQL_PKG_NAMES "mysqlclient" "libmariadb" "mariadb" "mariadbclient")
-    foreach(_pkg IN LISTS _MYSQL_PKG_NAMES)
-        pkg_check_modules(MYSQL_CLIENT QUIET IMPORTED_TARGET ${_pkg})
-        if(TARGET PkgConfig::MYSQL_CLIENT)
-            message(STATUS "Found MySQL/MariaDB via pkg-config: ${_pkg}")
-            target_link_libraries(${LIBRARY_TARGET_NAME} PUBLIC PkgConfig::MYSQL_CLIENT)
-            break()
+        if(NOT TARGET PkgConfig::MYSQL_CLIENT)
+            message(FATAL_ERROR "MySQL/MariaDB client not found. Tried: ${_MYSQL_PKG_NAMES}")
         endif()
-    endforeach()
 
-    if(NOT TARGET PkgConfig::MYSQL_CLIENT)
-        message(FATAL_ERROR "MySQL/MariaDB client not found. Tried: ${_MYSQL_PKG_NAMES}")
+        target_compile_definitions(
+            ${LIBRARY_TARGET_NAME}
+            PUBLIC
+            BUILD_FLAG_MYSQL
+        )
+        # message(FATAL_ERROR "pkg-config not found. Install: sudo apt install pkg-config")
+    else()
+        find_package(libmysqlclient REQUIRED CONFIG)
+        target_link_libraries(${LIBRARY_TARGET_NAME} PUBLIC libmysqlclient::libmysqlclient)
     endif()
-
-    target_compile_definitions(
-        ${LIBRARY_TARGET_NAME}
-        PUBLIC
-        BUILD_FLAG_MYSQL
-    )
-
 endif()
 
-if(CONFIG_OPENSSL)
+if(BUILD_FLAG_OPENSSL)
     find_package(OpenSSL REQUIRED)
 
     target_include_directories(
