@@ -13,11 +13,13 @@
 #include "iridium/io/stream.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/pattern/non_copyable.h"
+#include "iridium/threading/synchronized.h"
 
 #include <cstring>
 #include <string>
 #include <atomic>
 #include <stdexcept>
+#include <mutex>
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -26,7 +28,11 @@
 namespace iridium::io::implementation::platform {
 
 
-class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
+class CStreamPort:
+    virtual public IStreamPort,
+    public pattern::NonCopyable,
+    public threading::Synchronized<std::mutex, false>
+{
 protected:
     CStreamPort(URI const &uri);
     virtual ~CStreamPort() = default;

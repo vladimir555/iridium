@@ -75,6 +75,7 @@ CProcessStream::CProcessStream(
 
 void CProcessStream::initialize() {
     try {
+        LOCK_SCOPE();
         if (m_reader_fd != INVALID_HANDLE_VALUE ||
             m_writer_fd != INVALID_HANDLE_VALUE)
         {
@@ -185,6 +186,7 @@ void CProcessStream::initialize() {
 
 void CProcessStream::finalize() {
     try {
+        LOCK_SCOPE();
         if (m_reader_fd == INVALID_HANDLE_VALUE || m_writer_fd == INVALID_HANDLE_VALUE)
             throw std::runtime_error("not initialized");
 
@@ -194,15 +196,25 @@ void CProcessStream::finalize() {
 
         if (checkOneOf<int64_t>(result, WAIT_TIMEOUT, WAIT_FAILED)) {
             LOGW << "kill process " << m_app;
-            assertOK(TerminateProcess(m_process.hProcess, 1), "TerminateProcess");
-            WaitForSingleObject(m_process.hProcess, INFINITE);
+
+            assertOK(
+                TerminateProcess(m_process.hProcess, 1),
+               "TerminateProcess");
+            WaitForSingleObject(
+                m_process.hProcess,
+                static_cast<DWORD>(DEFAULT_PROCESS_TIMEOUT.count()));
         }
 
-        assertOK(CloseHandle(m_process.hProcess), "CloseHandle");
-        assertOK(CloseHandle(m_process.hThread) , "CloseHandle");
+        // getState();
 
-        closeFDs();
+        assertOK(
+            CloseHandle(m_process.hProcess),
+           "CloseHandle");
+        assertOK(
+            CloseHandle(m_process.hThread),
+           "CloseHandle");
 
+        // closeFDs();
     } catch (std::exception const &e) {
         closeFDs();
         throw std::runtime_error(convert<string>(m_uri) + "' finalization error: " + e.what());
@@ -212,18 +224,22 @@ void CProcessStream::finalize() {
 
 IProcess::TState CProcessStream::getState() {
     try {
-        if (m_reader_fd == INVALID_HANDLE_VALUE && m_writer_fd == INVALID_HANDLE_VALUE) {
-            if (m_finalized_state)
-                return *m_finalized_state;
-            return { IProcess::TState::TCondition::UNKNOWN, nullptr };
-        }
+        LOCK_SCOPE();
+
+        if (m_finalized_state)
+            return *m_finalized_state; // ----->
+
+        if (m_reader_fd == INVALID_HANDLE_VALUE && m_writer_fd == INVALID_HANDLE_VALUE)
+            return { IProcess::TState::TCondition::UNKNOWN, nullptr }; // ----->
 
         IProcess::TState
             result{};
         DWORD
             exit_code{};
 
-        assertOK(GetExitCodeProcess(m_process.hProcess, &exit_code), "GetExitCodeProcess");
+        assertOK(
+            GetExitCodeProcess(m_process.hProcess, &exit_code),
+           "GetExitCodeProcess");
 
         switch (exit_code) {
             case STATUS_ACCESS_VIOLATION:
@@ -237,11 +253,14 @@ IProcess::TState CProcessStream::getState() {
                     result.condition = TState::TCondition::DONE;
                 else
                     result.condition = m_condition_override;
+
                 result.exit_code = std::make_shared<int>(exit_code);
+
                 break;
         }
 
-        m_finalized_state = TState::create(result);
+        if (result.exit_code)
+            m_finalized_state = TState::create(result);
 
         // LOGT << "process state: " << result;
 
@@ -304,7 +323,7 @@ void CProcessStream::sendSignal(TSignal const& signal) {
             assertOK(
                 TerminateProcess(
                     m_process.hProcess, 0),
-                "TerminateProcess");
+               "TerminateProcess");
             // assertOK(
             //     WaitForSingleObject(
             //         m_process.hProcess, INFINITE),
