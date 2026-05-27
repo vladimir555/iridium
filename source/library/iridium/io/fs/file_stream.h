@@ -13,6 +13,8 @@
 namespace iridium::io::fs {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IFileStream: public virtual IStream {
 public:
     DEFINE_INTERFACE(IFileStream)
@@ -20,6 +22,8 @@ public:
 };
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IFileStreamWriter: public virtual IFileStream, public virtual IStreamWriter {
 public:
     DEFINE_INTERFACE(IFileStreamWriter)
@@ -27,6 +31,8 @@ public:
 };
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IFileStreamReader: public virtual IFileStream, public virtual IStreamReader {
 public:
     DEFINE_INTERFACE(IFileStreamReader)
@@ -34,6 +40,8 @@ public:
 
 
 // todo: maybe
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 //class IFileStreamPort: public IFileStreamReader, public IFileStreamWriter {
 //public:
 //    virtual void seek(...) = 0;

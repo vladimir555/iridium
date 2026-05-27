@@ -25,6 +25,8 @@ namespace iridium::system::implementation::platform {
 #endif
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CProcessStream:
     public IProcess,
     public io::implementation::CStreamPort

@@ -28,6 +28,8 @@
 namespace iridium::io::implementation::platform {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamPort:
     virtual public IStreamPort,
     public pattern::NonCopyable,

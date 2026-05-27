@@ -14,7 +14,8 @@
 namespace iridium::io {
 
 
-// todo: rm, deprecated
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 struct Event {
     DEFINE_CREATE(Event)
 

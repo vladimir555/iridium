@@ -14,6 +14,8 @@
 namespace iridium::io::implementation {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CContextManager:
     public IContextManager,
     public threading::Synchronized<std::mutex>

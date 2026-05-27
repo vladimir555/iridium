@@ -22,6 +22,8 @@
 namespace iridium::io::implementation::platform {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CMultiplexer:
     public IMultiplexer,
     public CMultiplexerBase,

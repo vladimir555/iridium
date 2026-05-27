@@ -15,12 +15,16 @@ namespace iridium::convertion {
 using implementation::config;
 
 
+/// \~english @brief Converts a value from one type to another using standard policy.
+/// \~russian @brief Преобразует значение из одного типа в другой, используя стандартную политику.
 template<typename TResult, typename TValue, bool is_throwable = false>
 TResult convert(TValue const &value) {
     return implementation::TConvertPolicy<TResult, TValue, void, is_throwable>::convert(value);
 }
 
 
+/// \~english @brief Converts a value with a specific format.
+/// \~russian @brief Преобразует значение с использованием определенного формата.
 template<typename TResult, typename TValue, typename TFormat, bool is_throwable = false>
 TResult convert(TValue const &value, TFormat const &format) {
     return implementation::TConvertPolicy<TResult, TValue, void, is_throwable>::convert(value, format);
