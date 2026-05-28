@@ -12,6 +12,8 @@
 namespace iridium::io::fs::implementation {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CFileStreamWriter: public virtual CFileStream {
 public:
     DEFINE_IMPLEMENTATION(CFileStreamWriter)

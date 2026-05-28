@@ -36,6 +36,8 @@ protected:
 };
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamReaderBuffer:
     public CStreamBuffer,
     public IStreamReader
@@ -52,6 +54,8 @@ private:
 
 
 // todo: interface with getBuffer
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamWriterBuffer:
     public CStreamBuffer,
     public IStreamWriter

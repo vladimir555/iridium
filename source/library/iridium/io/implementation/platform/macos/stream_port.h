@@ -21,6 +21,8 @@ namespace iridium::io::implementation::platform {
 typedef platform::unix_::CStreamPort CStreamPort;
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamPortSSL: public platform::unix_::CStreamPort {
 public:
     DEFINE_IMPLEMENTATION(CStreamPortSSL)

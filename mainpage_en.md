@@ -1802,3 +1802,50 @@ class AppConan(ConanFile):
 @endcode
 
 By extending `iridium.ProjectBase`, your recipe inherits standard logic for versioning, layout, and building that is compatible with the Iridium ecosystem.
+
+@section sec_database Database Support
+
+Iridium provides a unified interface for interacting with various database systems (PostgreSQL, MySQL/MariaDB). This is achieved through the `iridium::db::IConnector` interface and the `iridium::db::createConnector` factory function.
+
+@subsection subsec_db_configuration Configuration
+
+Database connection parameters are defined using the `iridium::db::config::TDatebase` structure, which can be populated manually or created from a URI.
+
+@subsection subsec_db_usage_example Usage Example
+
+Here's how to connect to a database and execute a query:
+
+@code{.cpp}
+#include "iridium/db/factory.h"
+#include "iridium/db/connector.h"
+#include "iridium/parsing/node.h"
+#include <iostream>
+
+int main() {
+    try {
+        // Create a connector using a URI
+        auto connector = iridium::db::createConnector(
+            iridium::io::URI("postgres://user:password@localhost:5432/dbname")
+        );
+
+        if (connector) {
+            connector->initialize();
+
+            // Send a query and get results as a node tree
+            auto results = connector->sendQuery("SELECT * FROM users LIMIT 5");
+
+            // Process results...
+            if (results) {
+                std::cout << "Query successful. Found " << results->size() << " rows." << std::endl;
+            }
+
+            connector->finalize();
+        }
+    } catch (const iridium::db::Exception& e) {
+        std::cerr << "Database error: " << e.what() << std::endl;
+    }
+    return 0;
+}
+@endcode
+
+The `sendQuery` method returns an `iridium::parsing::INode::TSharedPtr`, allowing you to traverse the result set using Iridium's common node API.

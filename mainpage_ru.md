@@ -1888,3 +1888,50 @@ class AppConan(ConanFile):
 @endcode
 
 Расширяя `iridium.ProjectBase`, ваш рецепт наследует стандартную логику версионирования, структуры и сборки, совместимую с экосистемой Iridium.
+
+@section sec_database Работа с базами данных
+
+Iridium предоставляет унифицированный интерфейс для взаимодействия с различными системами баз данных (PostgreSQL, MySQL/MariaDB). Это достигается через интерфейс `iridium::db::IConnector` и фабричную функцию `iridium::db::createConnector`.
+
+@subsection subsec_db_configuration Конфигурация
+
+Параметры подключения к базе данных определяются с помощью структуры `iridium::db::config::TDatebase`, которую можно заполнить вручную или создать из URI.
+
+@subsection subsec_db_usage_example Пример использования
+
+Пример подключения к базе данных и выполнения запроса:
+
+@code{.cpp}
+#include "iridium/db/factory.h"
+#include "iridium/db/connector.h"
+#include "iridium/parsing/node.h"
+#include <iostream>
+
+int main() {
+    try {
+        // Создание коннектора через URI
+        auto connector = iridium::db::createConnector(
+            iridium::io::URI("postgres://user:password@localhost:5432/dbname")
+        );
+
+        if (connector) {
+            connector->initialize();
+
+            // Отправка запроса и получение результата в виде дерева узлов
+            auto results = connector->sendQuery("SELECT * FROM users LIMIT 5");
+
+            // Обработка результатов...
+            if (results) {
+                std::cout << "Запрос выполнен успешно. Найдено " << results->size() << " строк." << std::endl;
+            }
+
+            connector->finalize();
+        }
+    } catch (const iridium::db::Exception& e) {
+        std::cerr << "Ошибка базы данных: " << e.what() << std::endl;
+    }
+    return 0;
+}
+@endcode
+
+Метод `sendQuery` возвращает `iridium::parsing::INode::TSharedPtr`, что позволяет обходить результирующий набор данных, используя общий API узлов Iridium.

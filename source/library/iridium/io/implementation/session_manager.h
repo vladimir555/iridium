@@ -39,6 +39,8 @@ public:
 private:
     typedef threading::IWorker<Event::TSharedPtr> IContextWorker;
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
     class CMultiplexerThreadHandler: public iridium::threading::IRunnable {
     public:
         DEFINE_IMPLEMENTATION(CMultiplexerThreadHandler)
@@ -59,6 +61,8 @@ private:
         IMultiplexer::TSharedPtr    m_multiplexer;
     };
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
     class CContextWorkerHandler: public IContextWorker::IHandler {
     public:
         DEFINE_IMPLEMENTATION(CContextWorkerHandler)
