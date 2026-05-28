@@ -1,23 +1,18 @@
-// Copyright © 2019 Bulaev Vladimir.
-// Contacts: <bulaev_vladimir@mail.ru>
-// License: https://www.gnu.org/licenses/lgpl-3.0
-
 #ifndef HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 #define HEADER_CONTEXT_MANAGER_342147A2_0A13_4C1F_B1BD_7AD4D8B307AF
 
 
-#include "context.h"    // For IContext, Event (via context.h -> event.h)
-#include "protocol.h"   // For IProtocol
-#include "event.h"      // For Event::TSharedPtr (explicitly, though also via context.h)
-#include "multiplexer.h"// For IMultiplexer
+#include "context.h"
+#include "protocol.h"
+#include "event.h"
+#include "multiplexer.h"
 
 
 namespace iridium::io {
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IContextManager {
 public:
     DEFINE_INTERFACE(IContextManager)

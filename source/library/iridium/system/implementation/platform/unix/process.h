@@ -7,16 +7,20 @@
 
 #ifdef UNIX_PLATFORM
 
+
 #include "iridium/io/implementation/stream_port.h"
 #include "iridium/system/process.h"
 #include "iridium/threading/synchronized.h"
 
 #include <string>
-#include <sched.h> // For sched_yield, often used in process management utilities
+#include <sched.h>
 
 
 namespace iridium::system::implementation::platform::unix_ {
 
+
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CProcessStream:
     public IProcess,
     public io::implementation::CStreamPort,

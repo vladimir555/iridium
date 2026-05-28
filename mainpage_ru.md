@@ -1877,7 +1877,7 @@ Iridium предоставляет базовый класс для рецепт
 from conan import ConanFile
 
 class AppConan(ConanFile):
-    requires = "iridium/0.3.0" # Используйте подходящую версию
+    requires = "iridium/0.3.0"
     python_requires = requires
     python_requires_extend = "iridium.ProjectBase"
 

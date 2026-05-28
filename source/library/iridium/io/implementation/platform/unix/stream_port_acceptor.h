@@ -23,6 +23,8 @@
 namespace iridium::io::implementation::platform::unix_ {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamPortAcceptor: public IStreamAcceptor {
 public:
     DEFINE_IMPLEMENTATION(CStreamPortAcceptor)

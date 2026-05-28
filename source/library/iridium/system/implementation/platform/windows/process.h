@@ -25,6 +25,8 @@ namespace iridium::system::implementation::platform {
 #endif
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CProcessStream:
     public IProcess,
     public io::implementation::CStreamPort
@@ -40,13 +42,9 @@ public:
         std::vector<std::string> const &args);
 
     void initialize()   override;
-    /// \~english @brief Finalizes the process and its streams.
-    /// \~russian @brief Финализирует процесс и его потоки.
     void finalize()     override;
 
     TState getState() override;
-    /// \~english @brief Sends a signal to the process.
-    /// \~russian @brief Отправляет сигнал процессу.
     void   sendSignal(TSignal const &signal) override;
 
 private:

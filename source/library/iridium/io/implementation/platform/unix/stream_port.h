@@ -24,6 +24,8 @@
 namespace iridium::io::implementation::platform::unix_ {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
 protected:
     CStreamPort(URI const &uri);

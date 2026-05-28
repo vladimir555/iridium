@@ -6,18 +6,16 @@
 #define HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
 
 
-#include "iridium/enum.h"     // For DEFINE_ENUM
-#include "iridium/smart_ptr.h"// For DEFINE_CREATE and TSharedPtr (used by Event::TSharedPtr)
+#include "iridium/enum.h"
 
-#include "stream.h"           // For IStream::TSharedPtr
+#include "stream.h"
 
 
 namespace iridium::io {
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This structure is deprecated and scheduled for removal.
-/// \~russian @deprecated Эта структура устарела и запланирована к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 struct Event {
     DEFINE_CREATE(Event)
 
@@ -28,8 +26,7 @@ struct Event {
         WRITE,
         TIMEOUT,
         ERROR_,
-        CLOSE
-    )
+        CLOSE)
 
     DEFINE_ENUM(
         TStatus,

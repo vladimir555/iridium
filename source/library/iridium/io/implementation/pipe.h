@@ -13,7 +13,8 @@
 namespace iridium::io::implementation {
 
 
-// todo: rm, deprecated
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CPipe: public IPipe {
 public:
     DEFINE_CREATE(CPipe)
@@ -30,7 +31,6 @@ public:
     ) override;
 
     IStreamReader::TSharedPtr getReader() const override;
-
     IStreamWriter::TSharedPtr getWriter() const override;
 
     bool transmit(Event::TConstSharedPtr const &event) override;

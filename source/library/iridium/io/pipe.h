@@ -6,28 +6,24 @@
 #define HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
 
 
-#include "iridium/io/stream.h" // For IStreamReader, IStreamWriter
-#include "iridium/io/event.h"  // For Event
-#include "iridium/smart_ptr.h" // For DEFINE_INTERFACE and TSharedPtr
+#include "iridium/io/stream.h"
+#include "iridium/io/event.h"
 
 
 namespace iridium::io {
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IPipeStreams {
 public:
     DEFINE_INTERFACE(IPipeStreams)
-
     virtual IStreamReader::TSharedPtr getReader() const = 0;
-
     virtual IStreamWriter::TSharedPtr getWriter() const = 0;
 
-    // todo: The following methods were commented out in the original source.
-    //    virtual IStreamReader::TConstSharedPtr setReader(IStreamReader::TSharedPtr const &reader) const = 0;
-    //    virtual IStreamWriter::TConstSharedPtr setWriter(IStreamWriter::TSharedPtr const &writer) const = 0;
+    // todo:
+//    virtual IStreamReader::TConstSharedPtr setReader(IStreamReader::TSharedPtr const &reader) const = 0;
+//    virtual IStreamWriter::TConstSharedPtr setWriter(IStreamWriter::TSharedPtr const &writer) const = 0;
 
     virtual void set(
         IStreamReader::TSharedPtr const &reader,
@@ -36,25 +32,23 @@ public:
 };
 
 
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IPipeTransmitter {
 public:
     DEFINE_INTERFACE(IPipeTransmitter)
-
+    // false - buffers are empty
     virtual bool transmit(Event::TConstSharedPtr const &event) = 0;
 };
 
 
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
 class IPipe: public IPipeStreams, public IPipeTransmitter {
 public:
     DEFINE_INTERFACE(IPipe)
 };
 
 
-//bool operator < (IPipeStreams::TSharedPtr const &l, IPipeStreams::TSharedPtr const &r); // Commented out in source
+//bool operator < (IPipeStreams::TSharedPtr const &l, IPipeStreams::TSharedPtr const &r);
 
 
 } // namespace iridium::io

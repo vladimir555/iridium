@@ -14,6 +14,8 @@
 namespace iridium::io::implementation {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CContextManager:
     public IContextManager,
     public threading::Synchronized<std::mutex>
@@ -35,13 +37,10 @@ public:
 private:
     std::unordered_map<IStream::TSharedPtr, IContext::TSharedPtr>
         m_map_stream_context;
-
     std::unordered_set<IContext::TSharedPtr>
         m_acquired_contexts;
-
     std::unordered_set<IContext::TSharedPtr>
         m_contexts;
-
     std::unordered_set<IContext::TSharedPtr>
         m_contexts_to_remove;
 };

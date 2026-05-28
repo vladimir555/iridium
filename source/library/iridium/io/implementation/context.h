@@ -15,6 +15,8 @@
 namespace iridium::io::implementation {
 
 
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class CContext:
     public IContext,
     public IPipeManager,
@@ -27,7 +29,6 @@ public:
     CContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);
 
     void pushEvent(Event::TSharedPtr const &event) override;
-
     std::list<Event::TSharedPtr>
          popEvents() override;
 
@@ -40,35 +41,26 @@ public:
         getPipe(Event::TSharedPtr const &event) override;
 
     void createPipe(std::string const &name) override;
-
     void removePipe(std::string const &name) override;
-
     void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader) override;
-
     void updatePipe(std::string const &name, IStreamWriter::TSharedPtr const &writer) override;
-
     void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader,
                                              IStreamWriter::TSharedPtr const &writer) override;
-
     void remove() override;
 
 private:
     void removePipe(IPipe::TSharedPtr const &pipe);
-
     void removeStream(IStream::TSharedPtr const &stream, bool const &is_send_close_event = true);
 
     threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
         m_events;
-
     IProtocol::TSharedPtr
         m_protocol;
 
     std::unordered_map<std::string, IPipe::TSharedPtr>
         m_map_name_pipe;
-
     std::unordered_map<IStream::TSharedPtr, IPipe::TSharedPtr>
         m_map_stream_pipe;
-
     std::unordered_map<IStream::TSharedPtr, std::chrono::system_clock::time_point>
         m_map_stream_timestamp;
 };

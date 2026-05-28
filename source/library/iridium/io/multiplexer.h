@@ -16,9 +16,8 @@
 namespace iridium::io {
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IMultiplexer: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IMultiplexer)

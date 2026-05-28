@@ -13,9 +13,8 @@
 namespace iridium::system {
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IProcess: public virtual io::IStreamPort {
 public:
     DEFINE_INTERFACE(IProcess)

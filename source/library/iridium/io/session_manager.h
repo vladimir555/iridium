@@ -2,36 +2,27 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-/// \~english @brief Defines the interface for a session manager.
-/// \~russian @brief Определяет интерфейс для менеджера сессий.
 #ifndef HEADER_SESSION_MANAGER_BB5946FC_0AA1_4747_AE53_07DB1F105A72
 #define HEADER_SESSION_MANAGER_BB5946FC_0AA1_4747_AE53_07DB1F105A72
 
 
-#include "iridium/pattern/initializable.h" // For IInitializable
-#include "iridium/smart_ptr.h"           // For DEFINE_INTERFACE and TSharedPtr
+#include "iridium/pattern/initializable.h"
 
-#include "protocol.h" // For IProtocol::TSharedPtr
-// Assuming IStreamPort::TSharedPtr is a valid type, likely defined in a header included transitively
-// or in a common types header for iridium::io. It represents an I/O channel endpoint.
-// For example, it could be a typedef for IStream::TSharedPtr or a specific stream port class.
-#include "stream.h" // For IStreamPort
+#include "protocol.h"
 
 
 namespace iridium::io {
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class ISessionManager: public pattern::IInitializable {
 public:
     DEFINE_INTERFACE(ISessionManager)
 
     virtual void manage(
-        IStreamPort::TSharedPtr const &stream_port,
-        IProtocol::TSharedPtr   const &protocol
-    ) = 0;
+        IStreamPort::TSharedPtr const &stream,
+        IProtocol::TSharedPtr   const &protocol) = 0;
 };
 
 

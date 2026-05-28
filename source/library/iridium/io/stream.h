@@ -25,9 +25,8 @@ namespace iridium::io {
 static size_t const DEFAULT_BUFFER_SIZE = 16384;
 
 
-// todo: rm, deprecated
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IStream: public virtual pattern::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)
@@ -48,27 +47,33 @@ public:
         getURI() const = 0;
 };
 
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IStreamReader: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamReader)
+    /// return nullptr on EOF or unexpected closed,
+    /// empty buffer on not ready data
+    /// size = 0 returns last accumulated buffer if exists
     virtual Buffer::TSharedPtr
         read(size_t const &size = DEFAULT_BUFFER_SIZE) = 0;
 };
 
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IStreamWriter: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamWriter)
+    /// return 0 - socket/fd not ready
     virtual size_t
         write(Buffer::TSharedPtr const &buffer) = 0;
 };
 
 
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IStreamPort:
     public virtual IStreamReader,
     public virtual IStreamWriter
@@ -77,8 +82,9 @@ public:
     DEFINE_INTERFACE(IStreamPort)
 };
 
-/// \~english @deprecated This interface is deprecated and scheduled for removal.
-/// \~russian @deprecated Этот интерфейс устарел и запланирован к удалению.
+
+//! \~english @deprecated todo: rm, deprecated
+//! \~russian @deprecated todo: rm, deprecated
 class IStreamAcceptor: public virtual IStream {
 public:
     DEFINE_INTERFACE(IStreamAcceptor)
