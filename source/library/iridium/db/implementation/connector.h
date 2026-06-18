@@ -7,19 +7,19 @@
 
 
 #include "iridium/pattern/non_copyable.h"
-#include "iridium/db/config.h"
+#include "iridium/io/uri.h"
 
 
 namespace iridium::db::implementation {
 
 
-class CConnector : public pattern::NonCopyable {
+class CConnector: public pattern::NonCopyable {
 public:
-    CConnector(config::TDatebase const &config);
+    CConnector(io::URI const &uri);
     virtual ~CConnector() = default;
 
 protected:
-    config::TDatebase m_config;
+    io::URI m_uri;
 };
 
 

@@ -46,9 +46,9 @@ string displayWarnings(MYSQL *connection) {
     do {
         // Format: "message [Type: number]"
         result +=
-            static_cast<char const * const>(row[2]) + string("[") +
-            static_cast<char const * const>(row[0]) + ":" +
-            static_cast<char const * const>(row[1]) + "]\n";
+            static_cast<char *>(row[2]) + string("[") +
+            static_cast<char *>(row[0]) + ":" +
+            static_cast<char *>(row[1]) + "]\n";
         row = mysql_fetch_row(sql_result);
     } while (row);
     mysql_free_result(sql_result);
@@ -63,9 +63,9 @@ string displayWarnings(MYSQL *connection) {
 namespace iridium::db::implementation {
 
 
-CMySQLConnector::CMySQLConnector(config::TDatebase const &config)
+CMySQLConnector::CMySQLConnector(URI const &uri)
 :
-    CConnector(config)
+    CConnector(uri)
 {
     mysql_library_init(0, nullptr, nullptr);
     mysql_init(&m_connection);
@@ -80,33 +80,37 @@ CMySQLConnector::~CMySQLConnector() {
 
 
 void CMySQLConnector::initialize() {
+    auto path = m_uri.getPath();
+    if (!path.empty())
+        path = path.substr(1);
+
     auto result = mysql_real_connect(
        &m_connection,
-        m_config.Host.get().c_str(),
-        m_config.User.get().c_str(),
-        m_config.Password.get().c_str(),
-        m_config.Database.get().empty() ? nullptr : m_config.Database.get().c_str(),
-        m_config.Port.get() ? 3306 : m_config.Port.get(),
+        m_uri.getHost().c_str(),
+        m_uri.getUser().c_str(),
+        m_uri.getPassword().c_str(),
+        path.empty() ? nullptr : path.c_str(),
+        m_uri.getPort() ? 3306 : m_uri.getPort(),
         nullptr, 0);
 
     if (!result) {
         mysql_close(&m_connection);
         throw Exception("connection to mysql host error: " + string(mysql_error(&m_connection))); // ----->
     }
-    LOGI << "initialization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
+    LOGI << "initialization mysql '" << m_uri << "' done";
 }
 
 
 void CMySQLConnector::finalize() {
     mysql_close(&m_connection);
-    LOGI << "finalization mysql '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
+    LOGI << "finalization mysql '" << m_uri << "' done";
 }
 
 
 CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &query) {
     LOGD << "send mysql sql query:\n" << query;
 
-    auto table = CNode::create(m_config.Database.get());
+    auto table = CNode::create(m_uri.getPath());
 
     if (mysql_query(&m_connection, query.c_str())) {
         throw Exception("failed to send query: " + string(mysql_error(&m_connection))); // ----->

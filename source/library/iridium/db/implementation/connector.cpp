@@ -4,11 +4,10 @@
 namespace iridium::db::implementation {
 
 
-CConnector::CConnector(config::TDatebase const &config)
+CConnector::CConnector(io::URI const &uri)
 :
-    m_config(config)
+    m_uri(uri)
 {}
-
 
 
 } // iridium::db::implementation

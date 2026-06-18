@@ -53,7 +53,7 @@ protected:
         char
             const *m_file = nullptr;
         int
-            const  m_line = 0;
+                   m_line = 0;
     };
 
 protected:

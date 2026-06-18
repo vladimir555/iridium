@@ -29,7 +29,7 @@ class CPostgresConnector:
 {
 public:
     DEFINE_CREATE(CPostgresConnector)
-    CPostgresConnector(config::TDatebase const &config);
+    CPostgresConnector(io::URI const &uri);
     virtual ~CPostgresConnector() override;
     void initialize() override;
     void finalize() override;

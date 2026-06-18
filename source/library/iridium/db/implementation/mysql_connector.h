@@ -10,7 +10,6 @@
 #ifdef BUILD_FLAG_MYSQL
 
 
-#include "iridium/smart_ptr.h"
 #include "iridium/db/connector.h"
 #include "iridium/io/uri.h"
 
@@ -29,7 +28,7 @@ class CMySQLConnector:
 {
 public:
     DEFINE_CREATE(CMySQLConnector)
-    CMySQLConnector(config::TDatebase const &config);
+    CMySQLConnector(io::URI const &uri);
     virtual ~CMySQLConnector();
     void initialize() override;
     void finalize() override;

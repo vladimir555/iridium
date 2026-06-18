@@ -7,7 +7,6 @@
 #include "iridium/build_flags.h"
 
 
-using iridium::db::config::TDatebase;
 using iridium::io::URI;
 using iridium::convertion::convert;
 using std::string;
@@ -24,55 +23,21 @@ using iridium::db::implementation::CPostgresConnector;
 namespace iridium::db {
 
 
-config::TDatebase makeConfig(io::URI const &uri) {
-    config::TDatebase config;
-
+IConnector::TSharedPtr createConnector(io::URI const &uri) {
     switch (uri.getProtocol()) {
-    case URI::TProtocol::POSTGRES:
-        config.Type = TDatebase::TDBType::POSTGRES;
-        break;
+#ifdef BUILD_FLAG_MYSQL
     case URI::TProtocol::MYSQL:
-        config.Type = TDatebase::TDBType::MYSQL;
-        break;
+        return CMySQLConnector::create(uri); // ----->
+#endif // BUILD_FLAG_MYSQL
+#ifdef BUILD_FLAG_POSTGRES
+    case URI::TProtocol::POSTGRES:
+        return CPostgresConnector::create(uri); // ----->
+#endif // BUILD_FLAG_POSTGRES
+    case URI::TProtocol::UNKNOWN:
     default:
         throw std::runtime_error("creating db connector error: unknown db type " +
             convert<string>(uri.getProtocol())); // ----->
     }
-
-    auto path = uri.getPath();
-    if (!path.empty())
-        path = path.substr(1);
-
-    config.User = uri.getUser();
-    config.Password = uri.getPassword();
-    config.Host = uri.getHost();
-    config.Port = uri.getPort();
-    config.Database = path;
-
-    return config; // ----->
-}
-
-
-IConnector::TSharedPtr createConnector(TDatebase const &config) {
-    switch (config.Type.get()) {
-#ifdef BUILD_FLAG_MYSQL
-    case TDatebase::TDBType::MYSQL:
-        return CMySQLConnector::create(config); // ----->
-#endif // BUILD_FLAG_MYSQL
-#ifdef BUILD_FLAG_POSTGRES
-    case TDatebase::TDBType::POSTGRES:
-        return CPostgresConnector::create(config); // ----->
-#endif // BUILD_FLAG_POSTGRES
-    case TDatebase::TDBType::UNKNOWN:
-    default:
-        throw std::runtime_error("creating db connector error: unknown db type " +
-            convert<string>(config.Type.get())); // ----->
-    }
-}
-
-
-IConnector::TSharedPtr createConnector(io::URI const &uri) {
-    return createConnector(makeConfig(uri)); // ----->
 }
 
 

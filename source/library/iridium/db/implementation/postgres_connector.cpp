@@ -23,9 +23,9 @@ using iridium::parsing::implementation::CNode;
 namespace iridium::db::implementation {
 
 
-CPostgresConnector::CPostgresConnector(config::TDatebase const &config)
+CPostgresConnector::CPostgresConnector(io::URI const &uri)
 :
-    CConnector  (config),
+    CConnector  (uri),
     m_connection(nullptr)
 {}
 
@@ -49,24 +49,32 @@ void CPostgresConnector::initialize() {
 //        // ...
 //        throw DBException("connect to mysql host error: " + e.what())); // ----->
 //    }
-    m_connection = assertExists(PQconnectdb(string(
-        "host='"        + m_config.Host.get()       + "'" +
-       " port='"        + convert<std::string>(m_config.Port.get()) + "'" +
-       " user='"        + m_config.User.get()       + "'" +
-       " password='"    + m_config.Password.get()   + "'" +
-       " dbname='"      + m_config.Database.get()   + "'").c_str()),
-        "connection to postgresql host error: null connector");
+
+    auto path = m_uri.getPath();
+    if (!path.empty())
+        path = path.substr(1);
+
+    m_connection = assertExists(
+        PQconnectdb(
+            string(
+                "host='"        + m_uri.getHost()
+            + "' port='"        + convert<std::string>(m_uri.getPort())
+            + "' user='"        + m_uri.getUser()
+            + "' password='"    + m_uri.getPassword()
+            + "' dbname='"      + path + "'").c_str()),
+                "connection to postgresql host error: null connector");
 
     if (PQstatus(m_connection) != CONNECTION_OK) {
         string error = PQerrorMessage(m_connection);
         PQfinish(m_connection);
         m_connection = nullptr;
-        throw Exception("connection to postgresql '" + m_config.Host.get() + "' error: " + error); // ----->
+        throw Exception(
+            "connection to postgresql '" + convert<string>(m_uri) + "' error: " + error); // ----->
     }
 
     PQsetNoticeReceiver(m_connection, handlePostgresMessage, nullptr);
 
-    LOGI << "initialization postgres '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
+    LOGI << "initialization postgres '" << m_uri << "' done";
 }
 
 
@@ -74,18 +82,15 @@ void CPostgresConnector::finalize() {
     if (m_connection) {
         PQfinish(m_connection);
         m_connection = nullptr;
-        LOGI << "finalization postgres '" << m_config.Host.get() << "' database '" << m_config.Database.get() << "' done";
+        LOGI << "finalization postgres '" << m_uri << "' done";
     }
 }
-
-
-// void CPostgresConnector::executeCommand(std::string const &command) {}
 
 
 CPostgresConnector::INode::TSharedPtr CPostgresConnector::sendQuery(string const &query) {
     LOGD << "send postgres sql query:\n" << query;
 //    TRows rows;
-    auto table  = CNode::create(m_config.Database.get());
+    auto table  = CNode::create(m_uri.getPath());
     auto result = PQexec(m_connection, query.c_str());
     auto status = PQresultStatus(result);
 
