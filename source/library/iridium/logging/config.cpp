@@ -6,7 +6,7 @@
 using iridium::parsing::implementation::CNode;
 
 
-IMPLEMENT_ENUM(iridium::logging::config::TLogger::TSink::TSinkType)
+// IMPLEMENT_ENUM(iridium::logging::config::TLogger::TSink::TSinkType)
 
 
 namespace iridium::logging::config {

@@ -105,4 +105,4 @@ std::string convertNameCPPToNode(std::string &&name, TNamingStrategyCPPToNode co
 } // iridium::parsing::serialization
 
 
-//IMPLEMENT_ENUM(iridium::parsing::serialization::TNamingStrategyCPPToNode)
+//// IMPLEMENT_ENUM(iridium::parsing::serialization::TNamingStrategyCPPToNode)

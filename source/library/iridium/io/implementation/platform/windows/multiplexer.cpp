@@ -6,7 +6,7 @@
 
 #include "iridium/assert.h"
 #include "iridium/items.h"
-#include "iridium/io/event.h"
+#include "iridium/io/event_.h"
 #include "iridium/threading/implementation/async_queue.h"
 
 #include <stdint.h>

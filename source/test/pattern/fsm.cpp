@@ -96,8 +96,8 @@ DEFINE_ENUM_CONVERT(iridium::pattern::TState)
 DEFINE_ENUM_CONVERT(iridium::pattern::TEvent)
 
 
-IMPLEMENT_ENUM(iridium::pattern::TState)
-IMPLEMENT_ENUM(iridium::pattern::TEvent)
+// IMPLEMENT_ENUM(iridium::pattern::TState)
+// IMPLEMENT_ENUM(iridium::pattern::TEvent)
 
 
 //#define DEFINE_FSM_SWOTCH(TState, TEvent)

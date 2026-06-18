@@ -8,7 +8,7 @@
 
 #include "iridium/pattern/initializable.h"
 
-#include "protocol.h"
+#include "protocol_.h"
 
 
 namespace iridium::io {

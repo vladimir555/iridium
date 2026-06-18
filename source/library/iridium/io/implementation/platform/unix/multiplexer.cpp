@@ -32,7 +32,7 @@ DEFINE_ENUM(
     HUP         = POLLHUP,
     NVAL        = POLLNVAL
 )
-IMPLEMENT_ENUM(TPollEvent)
+// IMPLEMENT_ENUM(TPollEvent)
 
 
 namespace iridium::io::implementation::platform::unix_ {

@@ -1,4 +1,4 @@
-#include "stream.h"
+#include "stream_.h"
 
 
 using iridium::io::IStream;
@@ -18,7 +18,7 @@ std::string convertToString(IStream const &stream) {
 } // unnamed
 
 
-IMPLEMENT_ENUM(iridium::io::IStream::THandleType);
+// IMPLEMENT_ENUM(iridium::io::IStream::THandleType);
 
 IMPLEMENT_CONVERT(std::string, iridium::io::IStream,        convertToString);
 IMPLEMENT_CONVERT(std::string, iridium::io::IStreamReader,  convertToString);

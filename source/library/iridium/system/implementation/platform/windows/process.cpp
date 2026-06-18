@@ -4,7 +4,7 @@
 #ifdef WINDOWS_PLATFORM
 
 
-#include "iridium/io/event.h"
+#include "iridium/io/event_.h"
 
 
 using std::chrono::milliseconds;

@@ -27,7 +27,7 @@ enum TAnotherEnum {
 
 DEFINE_ENUM(TEnum, E1, E2, E3 = 5, E4 = AE1, E5)
 DEFINE_ENUM_CONVERT(TEnum)
-IMPLEMENT_ENUM(TEnum)
+// IMPLEMENT_ENUM(TEnum)
 
 
 namespace iridium::convertion {
@@ -183,7 +183,9 @@ TEST(specializations) {
 
     convert<int, int, true>({});
     convert<std::string, std::string, true>({});
+#if __cplusplus < 202302L
     convert<std::string, std::nested_exception, true>({});
+#endif
     convert<std::string, uintptr_t, true>({});
     convert<std::string, intptr_t, true>({});
 
@@ -281,9 +283,11 @@ TEST(types) {
         ASSERT(d, equal, convert<system_clock::duration>(s));
         ASSERT(std::chrono::seconds(5), equal, convert<system_clock::duration>(string("5")));
     }
-
+#if __cplusplus < 202302L
     ASSERT(std::string(u8"ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));
-
+#else
+    ASSERT(std::string("ħëłlö"), equal, convert<string>(std::wstring(L"ħëłlö")));
+#endif
     ASSERT(convert<string>(0, uint8_t(0)), std::exception);
 }
 
@@ -342,6 +346,7 @@ TEST(strings) {
 }
 
 
+#if __cplusplus < 202302L
 void innerFunction() {
     throw std::runtime_error("Inner exception");
 }
@@ -372,6 +377,7 @@ TEST(exception) {
         ASSERT("Outer exception: Middle exception: Inner exception", equal, convert<string>(e));
     }
 }
+#endif
 
 
 } // namespace iridium::convertion

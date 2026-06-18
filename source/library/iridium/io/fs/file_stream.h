@@ -6,7 +6,7 @@
 #define HEADER_FILE_WRITER_F3E80B53_9C20_48EC_9242_9B22CED298F0
 
 
-#include "iridium/io/stream.h"
+#include "iridium/io/stream_.h"
 #include "iridium/io/fs/file_status.h"
 
 

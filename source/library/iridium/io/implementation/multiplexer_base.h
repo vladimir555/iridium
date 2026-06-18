@@ -3,8 +3,8 @@
 
 
 #include "iridium/threading/async_queue.h"
-#include "iridium/io/stream.h"
-#include "iridium/io/event.h"
+#include "iridium/io/stream_.h"
+#include "iridium/io/event_.h"
 #include <unordered_map>
 
 

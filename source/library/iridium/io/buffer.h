@@ -27,9 +27,7 @@ public:
     Buffer(std::string const &s);
     Buffer(std::list<Buffer::TSharedPtr> const &buffers);
 
-    template<typename ... TArgs>
-    Buffer(TArgs && ... args);
-
+    using std::vector<uint8_t>::vector;
     using std::vector<uint8_t>::size;
     using std::vector<uint8_t>::empty;
     using std::vector<uint8_t>::clear;
@@ -46,19 +44,13 @@ public:
     using std::vector<uint8_t>::at;
     using std::vector<uint8_t>::front;
     using std::vector<uint8_t>::back;
+    using std::vector<uint8_t>::capacity;
 
     bool checkSuffixEqual(std::string const &suffix, std::string const &skip = "") const;
     bool checkSuffixEqual(uint8_t const *suffix, size_t const &size) const;
     bool checkSuffixEqual(std::vector<uint8_t> const &suffix) const;
     void emplace_back(Buffer::TSharedPtr const &buffer);
 };
-
-
-template<typename ... TArgs>
-Buffer::Buffer(TArgs && ... args)
-:
-    std::vector<uint8_t>(std::forward<TArgs>(args) ...)
-{}
 
 
 } // iridium::io

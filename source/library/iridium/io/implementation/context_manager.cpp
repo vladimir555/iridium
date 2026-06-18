@@ -1,6 +1,6 @@
 #include "context_manager.h"
 
-#include "context.h"
+#include "context_.h"
 
 
 #include "iridium/logging/logger.h"
@@ -10,7 +10,7 @@ namespace iridium::io::implementation {
 void CContextManager::createContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol) {
     LOCK_SCOPE();
 
-    auto context = CContext::create(stream, protocol);
+    auto context = CContext_::create(stream, protocol);
     m_map_stream_context[stream] = context;
     m_contexts.insert(context);
 }

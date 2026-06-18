@@ -1,4 +1,4 @@
 #include "config.h"
 
 
-IMPLEMENT_ENUM(iridium::db::config::TDatebase::TDBType)
+// IMPLEMENT_ENUM(iridium::db::config::TDatebase::TDBType)

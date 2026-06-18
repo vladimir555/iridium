@@ -9,7 +9,7 @@ namespace iridium::io {
 
 Buffer::Buffer(char const *s)
 :
-    Buffer(std::vector<uint8_t>(s, s + strlen(s)))
+    std::vector<uint8_t>(s, s + strlen(s))
 {}
 
 

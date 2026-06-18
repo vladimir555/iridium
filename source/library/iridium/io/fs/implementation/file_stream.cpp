@@ -10,7 +10,7 @@ using std::string;
 using iridium::convertion::convert;
 
 
-IMPLEMENT_ENUM(iridium::io::fs::implementation::CFileStream::TOpenMode)
+// IMPLEMENT_ENUM(iridium::io::fs::implementation::CFileStream::TOpenMode)
 
 
 namespace iridium::io::fs::implementation {

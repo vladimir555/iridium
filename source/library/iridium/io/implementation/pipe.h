@@ -6,8 +6,8 @@
 #define HEADER_TRANSMITTER_5C67BADB_452C_4A6B_963B_63DBF32A6D5D
 
 
-#include "iridium/io/pipe.h"
-#include "iridium/io/stream.h"
+#include "iridium/io/pipe_.h"
+#include "iridium/io/stream_.h"
 
 
 namespace iridium::io::implementation {

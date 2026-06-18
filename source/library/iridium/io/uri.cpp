@@ -189,22 +189,22 @@ URI::URI(std::string const &source_)
         }
 
     } catch (std::exception const &e) {
-        throw std::runtime_error("uri '" + m_source + "' parsing error: " + e.what());
+        throw std::runtime_error("uri '" + m_source + "' parsing error: " + e.what()); // ----->
     }
 }
 
 
 URI::TIPv4::TConstSharedPtr URI::getIPv4() const {
     if(!m_ipv4)
-        m_ipv4 = std::make_shared<TIPv4>(net::getIPv4ByHost(m_host)); // ----->
+        m_ipv4 = std::make_shared<TIPv4>(net::getIPv4ByHost(m_host));
 
-    return m_ipv4;
+    return m_ipv4; // ----->
 }
 
 
 URI::TIPv6::TConstSharedPtr URI::getIPv6() const {
     // todo:
-    return {};
+    return {}; // ----->
 }
 
 
@@ -239,7 +239,7 @@ std::string URI::getPath() const {
 
 
 std::string URI::getArguments() const {
-    return m_arguments;
+    return m_arguments; // ----->
 }
 
 
@@ -259,7 +259,7 @@ bool URI::operator == (URI const &uri) const {
 
 
 bool URI::operator <  (URI const &uri) const {
-    return m_source < uri.m_source;
+    return m_source < uri.m_source; // ----->
 }
 
 
@@ -318,6 +318,6 @@ IMPLEMENT_CONVERT(iridium::io::URI::TIPv4, std::string, convertStringToIPv4)
 IMPLEMENT_CONVERT(std::string, iridium::io::URI::TIPv4, convertIPv4ToString)
 
 
-IMPLEMENT_ENUM(iridium::io::URI::TProtocol)
+// IMPLEMENT_ENUM(iridium::io::URI::TProtocol)
 IMPLEMENT_CONVERT(iridium::io::URI, std::string, createURI)
 IMPLEMENT_CONVERT(std::string, iridium::io::URI, getAddress)

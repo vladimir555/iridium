@@ -6,7 +6,7 @@
 #define HEADER_STREAM_BUFFER_4242674C_C032_40C0_980A_3962F4396ACB
 
 
-#include "iridium/io/stream.h"
+#include "iridium/io/stream_.h"
 
 
 namespace iridium::io::implementation {

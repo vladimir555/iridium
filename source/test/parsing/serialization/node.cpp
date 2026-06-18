@@ -232,4 +232,4 @@ TEST(node_to_struct) {
 } // iridium::parsing::serialization
 
 
-IMPLEMENT_ENUM(iridium::parsing::serialization::C::TEnum)
+// IMPLEMENT_ENUM(iridium::parsing::serialization::C::TEnum)

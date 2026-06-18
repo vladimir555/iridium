@@ -7,7 +7,7 @@
 
 
 #include "iridium/testing/test_runner.h"
-#include "iridium/io/protocol.h"
+#include "iridium/io/protocol_.h"
 #include "iridium/io/session_manager.h"
 #include "iridium/system/process.h"
 #include "iridium/threading/async_queue.h"

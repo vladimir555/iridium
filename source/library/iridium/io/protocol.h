@@ -1,24 +1,30 @@
-#ifndef HEADER_PROTOCOL_A4280CC9_7465_4C74_805A_D60B575171BB
-#define HEADER_PROTOCOL_A4280CC9_7465_4C74_805A_D60B575171BB
+// Copyright © 2019 Bulaev Vladimir.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: https://www.gnu.org/licenses/lgpl-3.0
+
+#ifndef HEADER_PROTOCOL_1092ADC0_796B_48CD_A2C7_B461837C9682
+#define HEADER_PROTOCOL_1092ADC0_796B_48CD_A2C7_B461837C9682
 
 
-#include "context.h"
 #include "event.h"
 
 
-namespace iridium::io {
+namespace iridium {
+namespace io {
 
 
 class IProtocol {
 public:
     DEFINE_INTERFACE(IProtocol)
-    virtual bool control(Event::TSharedPtr const &event, IPipeManager::TSharedPtr const &pipe_manager) = 0;
-    // todo: variadic timeout for transmiting controling by protocol
-    // std::chrono::system_clock::duration getTimeout();
+    // returns false - need rm context
+    virtual bool control(
+        TEvent::TSharedPtr
+            const &event) = 0;
 };
 
 
-} // namespace iridium::io
+} // io
+} // iridium
 
 
-#endif // HEADER_PROTOCOL_A4280CC9_7465_4C74_805A_D60B575171BB
+#endif // HEADER_PROTOCOL_1092ADC0_796B_48CD_A2C7_B461837C9682

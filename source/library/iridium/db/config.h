@@ -13,6 +13,7 @@
 namespace iridium::db::config {
 
 
+// todo: rm, deprecated
 DEFINE_ROOT_NODE_BEGIN(Datebase)
     DEFINE_ENUM(
         TDBType,

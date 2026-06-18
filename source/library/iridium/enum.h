@@ -40,7 +40,7 @@ public: \
     TEnum(TEnumInternal const &e): m_value(e) {} \
     TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
-        for (auto const &i: map_enum_string) { \
+        for (auto const &i: getMap()) { \
             if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) { \
                 m_value = i.first; \
                 break; \
@@ -50,7 +50,7 @@ public: \
    ~TEnum() = default; \
     operator std::string() const { \
         try { \
-            return map_enum_string.at(m_value); \
+            return getMap().at(m_value); \
         } catch (...) { \
             return "UNKNOWN"; \
         } \
@@ -63,41 +63,47 @@ private: \
     public: \
         Enums(TEnum::TEnumInternal const &e) { \
             index = e; \
-            enums.push_back(TEnum(e)); \
+            enums().push_back(TEnum(e)); \
         } \
         Enums(int const &e) { \
             index = e; \
-            enums.push_back(TEnum(static_cast<TEnum::TEnumInternal>(e))); \
+            enums().push_back(TEnum(static_cast<TEnum::TEnumInternal>(e))); \
         } \
         Enums() { \
             index++; \
-            enums.push_back(TEnum(static_cast<TEnum::TEnumInternal>(index))); \
+            enums().push_back(TEnum(static_cast<TEnum::TEnumInternal>(index))); \
         } \
        ~Enums() = default; \
-        static std::list<TEnum> enums; \
-        static int index; \
+        static std::list<TEnum> &enums() { \
+            static std::list<TEnum> instance; \
+            return instance; \
+        } \
+        inline static int index = -1; \
     }; \
     TEnumInternal m_value; \
-    static std::map<TEnumInternal, std::string> const map_enum_string; \
-    static std::map<TEnumInternal, std::string> const generateMap() { \
-        auto m = std::map<TEnumInternal, std::string>(); \
-        Enums UNUSED __VA_ARGS__; \
-        auto i = Enums::enums.begin(); \
-        for (auto const &arg:  iridium::split(#__VA_ARGS__, ",")) { \
-            std::string name = iridium::trim(iridium::split(arg, "=").front()); \
-            if (m.find(*i) == m.end()) \
-                (m)[*i++] = name; \
-            else { \
-                auto error = std::string(#TEnum) + " map key collision " + (m)[*i] + " and " + name; \
-                printf("%s\n", error.c_str()); \
-                throw std::runtime_error(error); \
-            } \
-        } \
-        return std::forward<std::map<TEnumInternal, std::string> const>(m); \
+    static std::map<TEnumInternal, std::string> const &getMap() { \
+        static const std::map<TEnumInternal, std::string> map = \
+            [] () { \
+                auto m = std::map<TEnumInternal, std::string>(); \
+                Enums UNUSED __VA_ARGS__; \
+                auto i = Enums::enums().begin(); \
+                for (auto const &arg:  iridium::split(#__VA_ARGS__, ",")) { \
+                    std::string name = iridium::trim(iridium::split(arg, "=").front()); \
+                    if (m.find(*i) == m.end()) \
+                        (m)[*i++] = name; \
+                    else { \
+                        auto error = std::string(#TEnum) + " map key collision " + (m)[*i] + " and " + name; \
+                        printf("FATAL: %s\n", error.c_str()); \
+                        throw std::runtime_error(error); \
+                    } \
+                } \
+                return m; \
+            } (); \
+        return map; \
     } \
 public: \
     static std::list<TEnum> const &getEnums() { \
-        return Enums::enums; \
+        return Enums::enums(); \
     } \
     static TEnum convert(std::string const &s) { \
         TEnum e(s); \
@@ -137,6 +143,10 @@ public: \
 };
 
 
+// #define DEFINE_ENUM_CONVERT(TEnum)
+
+
+// todo: C++20/23 rm macros
 #define DEFINE_ENUM_CONVERT(TEnum) \
 template<> \
 struct iridium::convertion::implementation::TConvert<std::string, TEnum::TEnumInternal> { \
@@ -161,9 +171,7 @@ struct hash<TEnum> { \
 
 
 #define IMPLEMENT_ENUM(TEnum) \
-std::list<TEnum> TEnum::Enums::enums = std::list<TEnum>(); \
-int TEnum::Enums::index = -1; \
-std::map<TEnum::TEnumInternal, std::string> const TEnum::map_enum_string(TEnum::generateMap());
+_Pragma("message(\"WARNING: IMPLEMENT_ENUM is deprecated\")")
 
 
 namespace iridium::convertion::implementation {

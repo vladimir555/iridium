@@ -2,73 +2,46 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-#ifndef HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
-#define HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
+#ifndef HEADER_EVENT_F84E6917_BBFF_4221_8C01_335F46089357
+#define HEADER_EVENT_F84E6917_BBFF_4221_8C01_335F46089357
 
 
 #include "iridium/enum.h"
 
-#include "stream.h"
+#include "context.h"
 
 
-namespace iridium::io {
+namespace iridium {
+namespace io {
 
 
-// todo: rm, deprecated
-struct Event {
-    DEFINE_CREATE(Event)
-
+struct TEvent {
+    DEFINE_CREATE(TEvent)
     DEFINE_ENUM(
         TOperation,
         OPEN,
         READ,
         WRITE,
+        READ_EOF,
         TIMEOUT,
         ERROR_,
-        CLOSE)
+        CLOSE);
 
-    DEFINE_ENUM(
-        TStatus,
-        BEGIN,
-        END)
-
-    Event(
-        IStream::TSharedPtr
-            const &stream,
-        TOperation
-            const &operation,
-        TStatus
-            const &status = TStatus::UNKNOWN);
-
-    IStream::TSharedPtr
-              stream;
     TOperation
         operation;
-    TStatus
-        status;
+    URI::TSharedPtr
+        uri;
+    IContext::TSharedPtr
+        context;
 };
 
 
-} // namespace iridium::io
+} // io
+} // iridium
 
 
-template<>
-struct std::hash<iridium::io::Event> {
-    size_t operator()
-        (iridium::io::Event const &e) const;
-};
+DEFINE_ENUM_CONVERT(iridium::io::TEvent::TOperation);
+DEFINE_CONVERT(std::string, iridium::io::TEvent);
 
 
-template<>
-struct std::hash<iridium::io::Event::TSharedPtr> {
-    size_t operator()
-        (iridium::io::Event::TSharedPtr const &e) const;
-};
-
-
-DEFINE_ENUM_CONVERT(iridium::io::Event::TOperation)
-DEFINE_ENUM_CONVERT(iridium::io::Event::TStatus)
-DEFINE_CONVERT(std::string, iridium::io::Event)
-
-
-#endif // HEADER_EVENT_4E4FC1CA_35F4_4CDC_9A74_D42BEB643347
+#endif // HEADER_EVENT_F84E6917_BBFF_4221_8C01_335F46089357

@@ -1,7 +1,7 @@
 #include "event.h"
 
 
-IMPLEMENT_ENUM(iridium::logging::TEvent::TLevel)
+// IMPLEMENT_ENUM(iridium::logging::TEvent::TLevel)
 
 
 namespace iridium::logging {

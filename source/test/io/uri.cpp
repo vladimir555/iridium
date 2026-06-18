@@ -5,6 +5,11 @@
 using std::string;
 
 #include <vector>
+
+
+using iridium::convertion::convert;
+
+
 namespace iridium::io {
 
 

@@ -6,7 +6,7 @@
 #include <chrono>
 
 
-IMPLEMENT_ENUM(iridium::logging::ISink::TType)
+// IMPLEMENT_ENUM(iridium::logging::ISink::TType)
 
 
 using iridium::convertion::convert;

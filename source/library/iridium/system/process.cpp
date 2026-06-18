@@ -12,6 +12,6 @@ string toString(iridium::system::IProcess::TState const &state) {
 }
 
 
-IMPLEMENT_ENUM(iridium::system::IProcess::TState::TCondition)
-IMPLEMENT_ENUM(iridium::system::IProcess::TSignal)
+// IMPLEMENT_ENUM(iridium::system::IProcess::TState::TCondition)
+// IMPLEMENT_ENUM(iridium::system::IProcess::TSignal)
 IMPLEMENT_CONVERT(string, iridium::system::IProcess::TState, toString);

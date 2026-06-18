@@ -66,42 +66,61 @@ public:
     };
 
     typedef uint16_t
-                TPort;
+        TPort;
     typedef std::unordered_map<std::string, std::string>
-                TMapNameValue;
+        TMapNameValue;
 
     TIPv4::TConstSharedPtr
-                getIPv4()       const;
+        getIPv4() const;
     TIPv6::TConstSharedPtr
-                getIPv6()       const;
-
-    TProtocol   getProtocol()   const;
-    std::string getUser()       const;
-    std::string getPassword()   const;
-    std::string getHost()       const;
-    TPort       getPort()       const;
-    std::string getPath()       const;
+        getIPv6() const;
+    TProtocol
+        getProtocol() const;
+    std::string
+        getUser() const;
+    std::string
+        getPassword() const;
+    std::string
+        getHost() const;
+    TPort
+        getPort() const;
+    std::string
+        getPath() const;
     // todo: map
-    std::string getArguments()  const;
-    std::string getAddress()    const;
-    std::string getSource()     const;
+    std::string
+        getArguments() const;
+    std::string
+        getAddress() const;
+    std::string
+        getSource() const;
     // todo: url arguments
 
     bool operator == (URI const &uri) const;
     bool operator <  (URI const &uri) const;
 
 private:
-    std::string     m_source;
-    TProtocol       m_protocol;
-    std::string     m_user;
-    std::string     m_password;
-    std::string     m_host;
-    std::string     m_path;
-    std::string     m_address;
-    std::string     m_arguments;
-    std::shared_ptr<TIPv4> mutable m_ipv4;
-    std::shared_ptr<TIPv6> mutable m_ipv6;
-    TPort           m_port;
+    std::string
+        m_source;
+    TProtocol
+        m_protocol;
+    std::string
+        m_user;
+    std::string
+        m_password;
+    std::string
+        m_host;
+    std::string
+        m_path;
+    std::string
+        m_address;
+    std::string
+        m_arguments;
+    std::shared_ptr<TIPv4> mutable
+        m_ipv4;
+    std::shared_ptr<TIPv6> mutable
+        m_ipv6;
+    TPort
+        m_port;
 };
 
 

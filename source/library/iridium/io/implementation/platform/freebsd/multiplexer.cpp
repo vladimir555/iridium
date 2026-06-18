@@ -46,7 +46,7 @@ DEFINE_ENUM(
     EOF_        = EV_EOF,
     ERROR_      = EV_ERROR
 )
-IMPLEMENT_ENUM(TEventFlag)
+// IMPLEMENT_ENUM(TEventFlag)
 
 // struct kevent.filter
 DEFINE_ENUM(
@@ -62,7 +62,7 @@ DEFINE_ENUM(
     USER        = EVFILT_USER,
     SYSCOUNT    = EVFILT_SYSCOUNT
 )
-IMPLEMENT_ENUM(TEventFilter)
+// IMPLEMENT_ENUM(TEventFilter)
 
 // EVFILT_PROC
 DEFINE_ENUM(
@@ -73,11 +73,11 @@ DEFINE_ENUM(
     TRACK       = NOTE_TRACK,
     TRACKERR    = NOTE_TRACKERR
 )
-IMPLEMENT_ENUM(TEventProcFFlag)
+// IMPLEMENT_ENUM(TEventProcFFlag)
 
 // EVFILT_VNODE
 DEFINE_ENUM(
-    TEventVnodeFFlag,
+    TEventVNodeFFlag,
     DELETE      = NOTE_DELETE,
     WRITE       = NOTE_WRITE,
     EXTEND      = NOTE_EXTEND,
@@ -86,7 +86,7 @@ DEFINE_ENUM(
     RENAME      = NOTE_RENAME,
     REVOKE      = NOTE_REVOKE
 )
-IMPLEMENT_ENUM(TEventVnodeFFlag)
+// IMPLEMENT_ENUM(TEventVNodeFFlag)
 
 // EVFILT_USER
 DEFINE_ENUM(
@@ -99,7 +99,7 @@ DEFINE_ENUM(
     // FFCTRLMASK  = NOTE_FFCTRLMASK,
     FFLAGSMASK  = NOTE_FFLAGSMASK
 )
-IMPLEMENT_ENUM(TEventUserFFlag)
+// IMPLEMENT_ENUM(TEventUserFFlag)
 
 std::string toString(struct kevent const &source) {
     std::string fflags;
@@ -110,7 +110,7 @@ std::string toString(struct kevent const &source) {
             fflags = TEventProcFFlag(source.fflags).convertToFlagsString();
             break;
         case EVFILT_VNODE:
-            fflags = TEventVnodeFFlag(source.fflags).convertToFlagsString();
+            fflags = TEventVNodeFFlag(source.fflags).convertToFlagsString();
             break;
         case EVFILT_USER:
             fflags = TEventUserFFlag(source.fflags).convertToFlagsString();

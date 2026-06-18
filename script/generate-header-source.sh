@@ -1,40 +1,61 @@
 #!/bin/zsh
 
-
 cd $(dirname "$0")
-cd ../source
+cd ../source/library
+
+FORCE=0
+if [[ "$1" == "-f" || "$1" == "--force" ]]; then
+    FORCE=1
+    shift
+fi
 
 UUID=`uuidgen | sed -e 's/-/_/g' | tr '[:lower:]' '[:upper:]'`
-HEADER_NAME="HEADER_`echo $1| tr '[:lower:]' '[:upper:]'`_${UUID}"
+HEADER_NAME="HEADER_`echo $1 | tr '[:lower:]' '[:upper:]'`_${UUID}"
+
 HEADER_MACRO_BEGIN="#ifndef ${HEADER_NAME}\n#define ${HEADER_NAME}\n\n\n"
 HEADER_MACRO_END="\n\n\n#endif // ${HEADER_NAME}"
 
-NAMESPACE_BEGIN='namespace '
-NAMESPACE_END='} // '
 FILE_PATH=''
-NS_PARTS=()
+NAMESPACE_PARTS=()
 
 for ARG in ${@:2}; do
-    NS_PARTS+=("${ARG}")
     FILE_PATH="${FILE_PATH}${ARG}/"
-done;
+    NAMESPACE_PARTS+=("${ARG}")
+done
 
-if [ ${#NS_PARTS[@]} -gt 0 ]; then
-    # Join with :: using printf (reliable across zsh versions)
-    NS_PATH=$(printf '%s::' "${NS_PARTS[@]}")
-    NS_PATH=${NS_PATH%::}  # remove trailing ::
-    NAMESPACE_BEGIN="${NAMESPACE_BEGIN}${NS_PATH} {\n"
-    NAMESPACE_END="${NAMESPACE_END}${NS_PATH}"
+NAMESPACE_BEGIN=''
+NAMESPACE_END=''
+
+if [ ${#NAMESPACE_PARTS[@]} -gt 0 ]; then
+    NAMESPACE_PATH="${(j[::])NAMESPACE_PARTS}"
+    NAMESPACE_BEGIN="namespace ${NAMESPACE_PATH} {\n"
+    NAMESPACE_END="\n} // ${NAMESPACE_PATH}"
 fi
 
 HEADER_PATH="${FILE_PATH}/$1.h"
+SOURCE_PATH="${FILE_PATH}/$1.cpp"
 
-if [ -f "${HEADER_PATH}" ]; then
-    echo "${HEADER_PATH} exists."
-    return 1
+if [ $FORCE -eq 0 ]; then
+    if [ -f "${HEADER_PATH}" ]; then
+        echo "Warning: ${HEADER_PATH} already exists. Skipping."
+        return 1
+    fi
+    if [ -f "${SOURCE_PATH}" ]; then
+        echo "Warning: ${SOURCE_PATH} already exists. Skipping."
+        return 1
+    fi
 fi
 
-print "${HEADER_MACRO_BEGIN}${NAMESPACE_BEGIN}${NAMESPACE_END}${HEADER_MACRO_END}" > ${HEADER_PATH}
+mkdir -p "$(dirname "${HEADER_PATH}")"
 
-SOURCE_PATH="${FILE_PATH}/$1.cpp"
-print "#include \"$1.h\"\n\n${NAMESPACE_BEGIN}${NAMESPACE_END}" >> ${SOURCE_PATH}
+# .h
+print "${HEADER_MACRO_BEGIN}${NAMESPACE_BEGIN}${NAMESPACE_END}${HEADER_MACRO_END}" > ${HEADER_PATH}
+echo "Created: ${HEADER_PATH}"
+
+# .cpp (--force)
+if [ $FORCE -eq 1 ] || [ ! -f "${SOURCE_PATH}" ]; then
+    print "#include \"$1.h\"\n\n\n${NAMESPACE_BEGIN}${NAMESPACE_END}" > ${SOURCE_PATH}
+    echo "Created: ${SOURCE_PATH}"
+else
+    echo "Skipped: ${SOURCE_PATH} (already exists)"
+fi

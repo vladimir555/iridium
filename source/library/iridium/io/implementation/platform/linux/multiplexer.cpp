@@ -292,7 +292,7 @@ int CMultiplexer::assertOK(int const &result, std::string const &message) {
 } // iridium::io::implementation::platform
 
 
-IMPLEMENT_ENUM(iridium::io::implementation::platform::TEpollEvent)
+// IMPLEMENT_ENUM(iridium::io::implementation::platform::TEpollEvent)
 
 
 #endif // LINUX_PLATFORM

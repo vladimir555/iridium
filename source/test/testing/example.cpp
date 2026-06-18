@@ -8,6 +8,9 @@
 #include <iridium/items.h>
 
 
+using iridium::convertion::convert;
+
+
 TEST(bool_) {
     ASSERT(1 == 1);
     ASSERT(true);

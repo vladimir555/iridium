@@ -1,70 +1,141 @@
-#ifndef HEADER_CONTEXT_3763EB60_69EF_4930_9328_F8727441990E
-#define HEADER_CONTEXT_3763EB60_69EF_4930_9328_F8727441990E
+#ifndef HEADER_CONTEXT_89DD55FF_8778_4F30_8072_24E183C9568F
+#define HEADER_CONTEXT_89DD55FF_8778_4F30_8072_24E183C9568F
 
 
-#include "iridium/io/event.h"
-#include "iridium/io/protocol.h"
 #include "iridium/io/context.h"
-#include "iridium/io/pipe.h"
-#include "iridium/threading/synchronized.h"
-#include "iridium/threading/async_queue.h"
+#include "iridium/items.h"
 
-#include <chrono>
+#include <unordered_map>
 
 
 namespace iridium::io::implementation {
 
 
-class CContext:
-    public IContext,
-    public IPipeManager,
-    public threading::Synchronized<std::mutex>,
-    public std::enable_shared_from_this<CContext>
-{
+class CContext: public IContextActions {
 public:
-    DEFINE_CREATE(CContext)
+    DEFINE_IMPLEMENTATION(CContext)
+    CContext() = default;
 
-    CContext(IStream::TSharedPtr const &stream, IProtocol::TSharedPtr const &protocol);
+    void setPipe(
+        std::string
+            const &name,
+        URI::TSharedPtr
+            const &reader_uri,
+        URI::TSharedPtr
+            const &writer_uri) override;
+    void delPipe(
+        std::string
+            const &name) override;
+    void delPipe(
+        URI::TSharedPtr
+            const &uri) override;
 
-    void pushEvent(Event::TSharedPtr const &event) override;
-    std::list<Event::TSharedPtr>
-         popEvents() override;
+    void swapPipe(
+        std::string
+            const &name) override;
+    void swapPipe(
+        URI::TSharedPtr
+            const &uri) override;
 
-    std::list<Event::TSharedPtr>
-         checkOutdatedStreams() override;
+    std::list<Buffer::TSharedPtr>
+        getBuffers(
+            std::string
+                const &name,
+            TStreamType
+                const &stream_type) override;
+    std::list<Buffer::TSharedPtr>
+        getBuffers(
+            URI::TSharedPtr
+                const &uri,
+            TStreamType
+                const &stream_type) override;
+    void
+        addBuffer(
+            std::string
+                const &name,
+            TStreamType
+                const &stream_type,
+            Buffer::TSharedPtr
+                const &buffer) override;
+    void
+        addBuffer(
+            URI::TSharedPtr
+                const &uri,
+            TStreamType
+                const &stream_type,
+            Buffer::TSharedPtr
+                const &buffer) override;
 
-    bool update(Event::TSharedPtr const &event) override;
-    // bool transmit  (Event::TSharedPtr const &event) override;
-    IPipe::TSharedPtr
-        getPipe(Event::TSharedPtr const &event) override;
+    void
+        setPosition(
+            URI::TSharedPtr
+                const &uri,
+            TStreamType
+                const &stream_type,
+            size_t
+                const &pos) override;
 
-    void createPipe(std::string const &name) override;
-    void removePipe(std::string const &name) override;
-    void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader) override;
-    void updatePipe(std::string const &name, IStreamWriter::TSharedPtr const &writer) override;
-    void updatePipe(std::string const &name, IStreamReader::TSharedPtr const &reader,
-                                             IStreamWriter::TSharedPtr const &writer) override;
-    void remove() override;
+    size_t
+        getPosition(
+            URI::TSharedPtr
+                const &uri,
+            TStreamType
+                const &stream_type) override;
+
+    std::list<TAction>
+        getActions() override;
 
 private:
-    void removePipe(IPipe::TSharedPtr const &pipe);
-    void removeStream(IStream::TSharedPtr const &stream, bool const &is_send_close_event = true);
+    struct TStream {
+        DEFINE_CREATE(TStream)
+        URI::TSharedPtr
+            uri;
+        std::list<Buffer::TSharedPtr>
+            buffers;
+        size_t
+            position;
+    };
+    struct TPipe {
+        DEFINE_CREATE(TPipe)
+        TStream::TSharedPtr
+            reader;
+        TStream::TSharedPtr
+            writer;
+        std::string
+            name;
+    };
 
-    threading::IAsyncQueue<Event::TSharedPtr>::TSharedPtr
-        m_events;
-    IProtocol::TSharedPtr
-        m_protocol;
+    TStream::TSharedPtr
+        getStream(
+            URI::TSharedPtr
+                const &uri,
+            TStreamType
+                const &stream_type);
+    TStream::TSharedPtr
+        getStream(
+            std::string
+                const &name,
+            TStreamType
+                const &stream_type);
+    TPipe::TSharedPtr
+        getPipe(
+            std::string
+                const &name);
+    TPipe::TSharedPtr
+        getPipe(
+            URI::TSharedPtr
+                const &uri);
 
-    std::unordered_map<std::string, IPipe::TSharedPtr>
+    std::list<TAction>
+        m_actions;
+    std::unordered_map<std::string, TPipe::TSharedPtr>
         m_map_name_pipe;
-    std::unordered_map<IStream::TSharedPtr, IPipe::TSharedPtr>
-        m_map_stream_pipe;
-    std::unordered_map<IStream::TSharedPtr, std::chrono::system_clock::time_point>
-        m_map_stream_timestamp;
+    std::unordered_map<URI::TSharedPtr, TPipe::TSharedPtr>
+        m_map_uri_pipe;
 };
 
 
 } // iridium::io::implementation
 
 
-#endif // HEADER_CONTEXT_3763EB60_69EF_4930_9328_F8727441990E
+#endif // HEADER_CONTEXT_89DD55FF_8778_4F30_8072_24E183C9568F

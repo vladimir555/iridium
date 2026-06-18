@@ -1,5 +1,5 @@
 @PACKAGE_INIT@
-# Подгружаем макрос в глобальную область видимости потребителя
+# public macros
 include("${CMAKE_CURRENT_LIST_DIR}/iridium.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@-targets.cmake")
 check_required_components(@PROJECT_NAME@)

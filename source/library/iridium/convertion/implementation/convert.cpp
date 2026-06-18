@@ -301,6 +301,7 @@ string TConvert<string, std::thread::id>::convert(std::thread::id const &value) 
 }
 
 
+#if __cplusplus < 202302L
 inline string formatException(std::exception const &e) {
     std::string result = e.what();
     const auto* nested = dynamic_cast<std::nested_exception const *>(&e);
@@ -336,6 +337,11 @@ string TConvert<string, std::nested_exception>::convert(std::nested_exception co
         return "unknown exception";
     }
 }
+#else
+string TConvert<string, std::exception>::convert(std::exception const &e) {
+    return e.what();
+}
+#endif
 
 
 system_clock::time_point TConvert<system_clock::time_point, string>::convert(string const &value) {

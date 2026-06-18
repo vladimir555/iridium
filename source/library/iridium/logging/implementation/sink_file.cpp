@@ -17,7 +17,7 @@ using std::chrono::system_clock;
 using std::string;
 
 
-IMPLEMENT_ENUM(iridium::logging::implementation::CSinkFile::TRotation)
+// IMPLEMENT_ENUM(iridium::logging::implementation::CSinkFile::TRotation)
 
 
 namespace iridium::logging::implementation {

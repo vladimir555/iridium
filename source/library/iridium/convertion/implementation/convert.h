@@ -134,10 +134,12 @@ struct TConvert<std::string, std::exception> {
 };
 
 
+#if __cplusplus < 202302L
 template<>
 struct TConvert<std::string, std::nested_exception> {
     static std::string convert(std::nested_exception const &value);
 };
+#endif
 
 
 template<>

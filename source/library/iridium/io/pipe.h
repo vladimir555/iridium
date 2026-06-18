@@ -2,53 +2,26 @@
 // Contacts: <bulaev_vladimir@mail.ru>
 // License: https://www.gnu.org/licenses/lgpl-3.0
 
-#ifndef HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
-#define HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
+#ifndef HEADER_PIPE_E26326CD_9194_40C7_A155_003BF8889BA1
+#define HEADER_PIPE_E26326CD_9194_40C7_A155_003BF8889BA1
 
 
-#include "iridium/io/stream.h"
-#include "iridium/io/event.h"
+#include "stream.h"
 
 
 namespace iridium::io {
 
 
-// todo: rm, deprecated
-class IPipeStreams {
-public:
-    DEFINE_INTERFACE(IPipeStreams)
-    virtual IStreamReader::TSharedPtr getReader() const = 0;
-    virtual IStreamWriter::TSharedPtr getWriter() const = 0;
-
-    // todo:
-//    virtual IStreamReader::TConstSharedPtr setReader(IStreamReader::TSharedPtr const &reader) const = 0;
-//    virtual IStreamWriter::TConstSharedPtr setWriter(IStreamWriter::TSharedPtr const &writer) const = 0;
-
-    virtual void set(
-        IStreamReader::TSharedPtr const &reader,
-        IStreamWriter::TSharedPtr const &writer
-    ) = 0;
+struct TPipe {
+    DEFINE_CREATE(TPipe);
+    TStream::TSharedPtr
+        reader;
+    TStream::TSharedPtr
+        writer;
 };
 
 
-class IPipeTransmitter {
-public:
-    DEFINE_INTERFACE(IPipeTransmitter)
-    // false - buffers are empty
-    virtual bool transmit(Event::TConstSharedPtr const &event) = 0;
-};
+} // iridium::io
 
 
-class IPipe: public IPipeStreams, public IPipeTransmitter {
-public:
-    DEFINE_INTERFACE(IPipe)
-};
-
-
-//bool operator < (IPipeStreams::TSharedPtr const &l, IPipeStreams::TSharedPtr const &r);
-
-
-} // namespace iridium::io
-
-
-#endif // HEADER_TRANSMITTER_77691541_E3E0_49E9_8FEB_C42A3ED7114B
+#endif // HEADER_PIPE_E26326CD_9194_40C7_A155_003BF8889BA1
