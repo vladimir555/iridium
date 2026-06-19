@@ -8,7 +8,7 @@
 
 #include "iridium/smart_ptr.h"
 #include "iridium/io/fs/file_stream.h"
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 #include <string>
 
 

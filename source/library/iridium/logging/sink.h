@@ -7,7 +7,7 @@
 
 
 #include "iridium/smart_ptr.h"
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 
 #include "iridium/enum.h"
 
@@ -19,7 +19,7 @@
 namespace iridium::logging {
 
 
-class ISink : public pattern::IInitializable {
+class ISink : public dp::IInitializable {
 public:
     DEFINE_SMART_PTR(ISink)
     DEFINE_ENUM(

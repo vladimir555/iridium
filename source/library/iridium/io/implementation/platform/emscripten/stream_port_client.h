@@ -10,13 +10,13 @@
 
 #include "iridium/io/uri.h"
 #include "iridium/io/stream.h"
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 
 
 namespace iridium::io::implementation::platform {
 
 
-class CStreamPortClient: virtual public IStreamPort, public pattern::NonCopyable {
+class CStreamPortClient: virtual public IStreamPort, public dp::NonCopyable {
 protected:
     CStreamPortClient(URI const &) {
         throw std::runtime_error("not implemented for emscripten");

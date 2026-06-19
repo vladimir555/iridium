@@ -15,7 +15,7 @@
 #include "iridium/io/uri.h"
 #include "iridium/io/stream_.h"
 #include "iridium/convertion/convert.h"
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 
 #include <cstring>
 #include <string>
@@ -24,7 +24,7 @@
 namespace iridium::io::implementation::platform::unix_ {
 
 
-class CStreamPort: virtual public IStreamPort, public pattern::NonCopyable {
+class CStreamPort: virtual public IStreamPort, public dp::NonCopyable {
 protected:
     CStreamPort(URI const &uri);
     virtual ~CStreamPort() = default;

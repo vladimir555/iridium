@@ -2,13 +2,13 @@
 
 #include <iridium/enum.h>
 #include <iridium/logging/logger.h>
-#include <iridium/pattern/fsm.h>
+#include <iridium/dp/fsm.h>
 
 
 using namespace std;
 
 
-namespace iridium::pattern {
+namespace iridium::dp {
 
 
 /*
@@ -89,15 +89,15 @@ TEST(fsm_map) {
 }
 
 
-} // namespace iridium::pattern
+} // namespace iridium::dp
 
 
-DEFINE_ENUM_CONVERT(iridium::pattern::TState)
-DEFINE_ENUM_CONVERT(iridium::pattern::TEvent)
+DEFINE_ENUM_CONVERT(iridium::dp::TState)
+DEFINE_ENUM_CONVERT(iridium::dp::TEvent)
 
 
-// IMPLEMENT_ENUM(iridium::pattern::TState)
-// IMPLEMENT_ENUM(iridium::pattern::TEvent)
+// IMPLEMENT_ENUM(iridium::dp::TState)
+// IMPLEMENT_ENUM(iridium::dp::TEvent)
 
 
 //#define DEFINE_FSM_SWOTCH(TState, TEvent)

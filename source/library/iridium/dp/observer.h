@@ -9,7 +9,7 @@
 #include "iridium/smart_ptr.h"
 
 
-namespace iridium::pattern {
+namespace iridium::dp {
 
 
 template <typename TEvent>
@@ -20,7 +20,7 @@ public:
 };
 
 
-} // namespace iridium::pattern
+} // namespace iridium::dp
 
 
 #endif // HEADER_OBSERVER_D355605F_6C18_40F5_A7C1_509CA5AA9BC6

@@ -6,7 +6,7 @@
 #define HEADER_CONNECTOR_D4211A6B_FEA8_449C_9D30_6F854241610C
 
 
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 #include "iridium/parsing/node.h"
 
 #include <stdexcept>
@@ -24,7 +24,7 @@ public:
 };
 
 
-class IConnector: public pattern::IInitializable {
+class IConnector: public dp::IInitializable {
 public:
     DEFINE_INTERFACE(IConnector)
     using INode = parsing::INode;

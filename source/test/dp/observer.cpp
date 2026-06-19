@@ -1,11 +1,11 @@
 #include <iridium/testing/tester.h>
 
-#include "iridium/pattern/implementation/observable.h"
+#include "iridium/dp/implementation/observable.h"
 
 
-using iridium::pattern::IObserver;
-using iridium::pattern::IObservable;
-using iridium::pattern::implementation::CObservable;
+using iridium::dp::IObserver;
+using iridium::dp::IObservable;
+using iridium::dp::implementation::CObservable;
 
 
 struct ButtonClickEvent {

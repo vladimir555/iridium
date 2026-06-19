@@ -10,7 +10,7 @@
 #include <list>
 
 #include "iridium/convertion/convert.h"
-#include "iridium/pattern/prototype.h"
+#include "iridium/dp/prototype.h"
 #include "iridium/smart_ptr.h"
 
 
@@ -19,7 +19,7 @@ namespace iridium::parsing {
 
 // todo: Depth-First Search, DFS) and (Breadth-First Search, BFS) methods maybe parallel
 template<typename TValue>
-class INodeType : public pattern::IPrototype<INodeType<TValue> > {
+class INodeType : public dp::IPrototype<INodeType<TValue> > {
 public:
     DEFINE_INTERFACE(INodeType)
 

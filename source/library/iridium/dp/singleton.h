@@ -14,7 +14,7 @@
 #include <atomic>
 
 
-namespace iridium::pattern {
+namespace iridium::dp {
 
 
 template<typename TClass>
@@ -53,7 +53,7 @@ template<typename TClass>
 std::atomic<bool> Singleton<TClass>::m_is_alive(false);
 
 
-} // namespace iridium::pattern
+} // namespace iridium::dp
 
 
 #endif // HEADER_SINGLETON_33ED8344_7855_4F54_A108_7FF9BC7D71B4

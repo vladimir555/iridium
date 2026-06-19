@@ -6,7 +6,7 @@
 #define HEADER_LOGGER_68035722_1476_4595_9F55_5338D1576CF9
 
 
-#include "iridium/pattern/singleton.h"
+#include "iridium/dp/singleton.h"
 
 #include "iridium/threading/synchronized.h"
 #include "iridium/platform.h"
@@ -31,7 +31,7 @@ namespace iridium::logging {
 
 // todo: wait for finalizing async sinks
 class Logger:
-    public pattern::Singleton<Logger>,
+    public dp::Singleton<Logger>,
     public threading::Synchronized<std::mutex>
 {
 public:
@@ -44,7 +44,7 @@ public:
     void addCustomSink(ISink::TSharedPtr const &sink);
 
 private:
-    friend class pattern::Singleton<Logger>;
+    friend class dp::Singleton<Logger>;
     Logger() = default;
 
     std::list<ISink::TSharedPtr>    m_sinks;

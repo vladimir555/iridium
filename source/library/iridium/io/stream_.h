@@ -9,7 +9,7 @@
 #include "iridium/platform.h"
 #include "iridium/smart_ptr.h"
 #include "iridium/enum.h"
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 #include "iridium/convertion/convert.h"
 
 #include "buffer.h"
@@ -26,7 +26,7 @@ static size_t const DEFAULT_BUFFER_SIZE = 16384;
 
 
 // todo: rm, deprecated
-class IStream: public virtual pattern::IInitializable {
+class IStream: public virtual dp::IInitializable {
 public:
     DEFINE_INTERFACE(IStream)
 

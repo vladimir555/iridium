@@ -13,7 +13,7 @@
 //#include <>
 
 
-namespace iridium::pattern {
+namespace iridium::dp {
 
 
 template<typename TState, typename TEvent>
@@ -103,7 +103,7 @@ size_t FSM<TState, TEvent>::TPairStateEventHash::operator()(std::pair<TState, TE
 };
 
 
-} // namespace iridium::pattern
+} // namespace iridium::dp
 
 
 #endif // HEADER_FSM_732D8850_143F_4B86_ABD1_CB9CB17B9C34

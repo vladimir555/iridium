@@ -6,13 +6,13 @@
 #define HEADER_INITIALIZER_A79AA8C7_D7C5_492D_A771_2633A8E098DA
 
 
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 
 #include <list>
 #include <stdexcept>
 
 
-namespace iridium::pattern::implementation {
+namespace iridium::dp::implementation {
 
 
 class CInitializer: public IInitializable {
@@ -44,7 +44,7 @@ CInitializer::CInitializer(TArgs const & ... items)
 }
 
 
-} // iridium::pattern::implementation
+} // iridium::dp::implementation
 
 
 #endif // HEADER_INITIALIZER_A79AA8C7_D7C5_492D_A771_2633A8E098DA

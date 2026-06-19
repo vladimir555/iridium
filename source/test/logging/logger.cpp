@@ -14,7 +14,7 @@
 ////#include "Poco/FileChannel.h"
 ////#include "Poco/AsyncChannel.h"
 ////#include "Poco/FormattingChannel.h"
-////#include "Poco/PatternFormatter.h"
+////#include "Poco/dpFormatter.h"
 //
 //
 //using namespace std;
@@ -174,10 +174,10 @@
 //            Poco::AutoPtr<Poco::AsyncChannel> pAsyncChannel(new Poco::AsyncChannel);
 //            pAsyncChannel->setChannel(new Poco::FileChannel("poco.log"));
 //
-//            Poco::AutoPtr<Poco::PatternFormatter> pPatternFormatter(new Poco::PatternFormatter);
-//            pPatternFormatter->setProperty("pattern", "%Y-%m-%d %H:%M:%S.%i %q %I %t");
+//            Poco::AutoPtr<Poco::dpFormatter> pdpFormatter(new Poco::dpFormatter);
+//            pdpFormatter->setProperty("dp", "%Y-%m-%d %H:%M:%S.%i %q %I %t");
 //
-//            Poco::AutoPtr<Poco::FormattingChannel> pFormattingChannel(new Poco::FormattingChannel(pPatternFormatter, pAsyncChannel));
+//            Poco::AutoPtr<Poco::FormattingChannel> pFormattingChannel(new Poco::FormattingChannel(pdpFormatter, pAsyncChannel));
 //
 //            Poco::Logger& logger = Poco::Logger::get("MyLogger");
 //            logger.setChannel(pFormattingChannel);

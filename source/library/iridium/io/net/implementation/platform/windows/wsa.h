@@ -12,7 +12,7 @@
 #define HEADER_WSA_51FA6227_172E_42DD_BF9E_98E03940D246
 
 
-#include "iridium/pattern/singleton.h"
+#include "iridium/dp/singleton.h"
 #include "iridium/io/uri.h"
 //#include "iridium/io/buffer.h"
 //#include "iridium/smart_ptr.h"
@@ -26,7 +26,7 @@
 namespace iridium::io::net::implementation::platform {
 
 
-class WSA: public iridium::pattern::Singleton<WSA> {
+class WSA: public iridium::dp::Singleton<WSA> {
 public:
     virtual ~WSA();
 
@@ -42,7 +42,7 @@ public:
     //void    setBlockingMode(SOCKET const &socket, bool const &is_blocking);
 
 private:
-    friend class iridium::pattern::Singleton<WSA>;
+    friend class iridium::dp::Singleton<WSA>;
 
     WSA();
 

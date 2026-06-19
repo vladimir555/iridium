@@ -7,8 +7,8 @@
 
 
 #include "thread.h"
-#include "iridium/pattern/non_copyable.h"
-#include "iridium/pattern/non_movable.h"
+#include "iridium/dp/non_copyable.h"
+#include "iridium/dp/non_movable.h"
 #include "iridium/convertion/convert.h"
 #include "iridium/strings.h"
 #include "iridium/platform.h"
@@ -26,7 +26,12 @@ namespace iridium::threading {
 // ----- class definition
 
 
-// todo: multi mutex waiting; shared mutex wrapping
+// todo:
+// multi mutex waiting:
+//   Synchronized(SynchronizedMulti * const)
+//   LOCK_SCOPE_MULTI / TRY_WAIT_MULTI
+// shared mutex specialization:
+//   for const / non const methods)
 template<typename TMutex, bool const is_tracable = false>
 class Synchronized {
 protected:
@@ -36,8 +41,8 @@ protected:
     void interrupt();
 
     class Locker:
-        public pattern::NonCopyable,
-        public pattern::NonMovable
+        public dp::NonCopyable,
+        public dp::NonMovable
     {
     public:
         Locker(Synchronized const * const, char const *, int);

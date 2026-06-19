@@ -9,21 +9,21 @@
 #include <list>
 #include <string>
 
-#include "iridium/pattern/singleton.h"
+#include "iridium/dp/singleton.h"
 
 
 namespace iridium::io::protocol::http::implementation {
 
 
 // not synchronized - only readable
-class MIME: public pattern::Singleton<MIME> {
+class MIME: public dp::Singleton<MIME> {
 public:
     virtual ~MIME() = default;
     std::string getByFileNameExtension(std::string const &extension) const;
 
 private:
     MIME();
-    friend class pattern::Singleton<MIME>;
+    friend class dp::Singleton<MIME>;
 
     struct TMIME {
         std::list<std::string>  extensions;

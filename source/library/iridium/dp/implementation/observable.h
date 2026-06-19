@@ -2,7 +2,7 @@
 #define HEADER_OBSERVABLE_FE9A8D01_3845_472A_8A6E_B413B9C5FB6C
 
 
-#include "iridium/pattern/observable.h"
+#include "iridium/dp/observable.h"
 #include "iridium/threading/synchronized.h"
 
 #include <list>
@@ -10,7 +10,7 @@
 #include <algorithm>
 
 
-namespace iridium::pattern::implementation {
+namespace iridium::dp::implementation {
 
 
 template<typename TEvent>
@@ -90,7 +90,7 @@ std::list<typename IObserver<TEvent>::TWeakPtr> CObservable<TEvent>::getLiveObse
 }
 
 
-} // iridium::pattern::implementation
+} // iridium::dp::implementation
 
 
 #endif // HEADER_OBSERVABLE_FE9A8D01_3845_472A_8A6E_B413B9C5FB6C

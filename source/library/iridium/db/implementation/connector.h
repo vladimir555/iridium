@@ -6,14 +6,14 @@
 #define HEADER_CONNECTOR_926752A7_A77B_4CD8_9A9E_699A4945401D
 
 
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 #include "iridium/io/uri.h"
 
 
 namespace iridium::db::implementation {
 
 
-class CConnector: public pattern::NonCopyable {
+class CConnector: public dp::NonCopyable {
 public:
     CConnector(io::URI const &uri);
     virtual ~CConnector() = default;

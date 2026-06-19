@@ -7,14 +7,14 @@
 
 
 #include "acceptor.h"
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 #include "iridium/enum.h"
 
 
 namespace iridium::io {
 
 
-class IConnectionManager: public pattern::IInitializable {
+class IConnectionManager: public dp::IInitializable {
 public:
     DEFINE_INTERFACE(IConnectionManager)
 

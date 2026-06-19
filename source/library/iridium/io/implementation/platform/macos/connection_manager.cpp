@@ -655,40 +655,225 @@ URI::TSharedPtr CConnectionManager::getPeerURI(int const &fd) {
 }
 
 
-CConnectionManager::THandleInfo::TSharedPtr CConnectionManager::getHandleInfo(int const &fd) {
-    auto handle_info = THandleInfo::create();
+std::list<CConnectionManager::THandle::TSharedPtr>
+CConnectionManager::getHandles(std::vector<struct kevent> const &events) {
+    std::list<CConnectionManager::THandle::TSharedPtr>
+        result;
 
     LOCK_SCOPE();
 
-    auto fd_uri  = m_map_fd_uri.find(fd);
-    if ( fd_uri == m_map_fd_uri.end()) {
-        LOGW << "connection manager: uri not found, not registered fd: " << fd;
-        ::close(fd);
-        return {}; // ----->
-    } else {
-        handle_info->uri = fd_uri->second;
+    for (auto const &event: events) {
+        if (event.filter == EVFILT_PROC)
+            continue; // <---
+
+        auto const &fd = event.ident;
+        auto handle_info = THandle::create();
+
+        auto fd_uri  = m_map_fd_uri.find(fd);
+        if ( fd_uri == m_map_fd_uri.end()) {
+            LOGW << "connection manager: uri not found, not registered fd: " << fd;
+            ::close(fd);
+            continue; // <---
+        } else {
+            handle_info->uri = fd_uri->second;
+        }
+
+        auto uri_protocol  = m_map_uri_protocol.find(handle_info->uri);
+        if ( uri_protocol == m_map_uri_protocol.end()) {
+            LOGW
+                << "connection manager: protocol not found by uri '" << handle_info->uri
+                << "' not registered fd: " << fd;
+            ::close(fd);
+            continue; // <---
+        } else {
+            handle_info->protocol = uri_protocol->second;
+        }
+
+        auto uri_context  = m_map_uri_context.find(handle_info->uri);
+        if ( uri_context == m_map_uri_context.end()) {
+            handle_info->context = m_map_uri_context[handle_info->uri] = CContext::create();
+        } else {
+            handle_info->context = uri_context->second;
+        }
+
+        result.push_back(handle_info);
     }
 
-    auto uri_protocol  = m_map_uri_protocol.find(handle_info->uri);
-    if ( uri_protocol == m_map_uri_protocol.end()) {
-        LOGW
-            << "connection manager: protocol not found by uri '" << handle_info->uri
-            << "' not registered fd: " << fd;
-        ::close(fd);
-        return {}; // ----->
-    } else {
-        handle_info->protocol = uri_protocol->second;
-    }
-
-    auto uri_context  = m_map_uri_context.find(handle_info->uri);
-    if ( uri_context == m_map_uri_context.end()) {
-        handle_info->context = m_map_uri_context[handle_info->uri] = CContext::create();
-    } else {
-        handle_info->context = uri_context->second;
-    }
-
-    return handle_info; // ----->
+    return result; // ----->
 }
+
+
+CConnectionManager::CKEventRunnable::CKEventRunnable(CConnectionManager * const manager)
+:
+    m_manager(manager)
+{}
+
+
+void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
+    struct timespec
+        timeout {};
+
+    timeout.tv_sec  =
+        duration_cast<seconds>(DEFAULT_KEVENT_TIMEOUT).count();
+    timeout.tv_nsec =
+        duration_cast<nanoseconds>(
+            DEFAULT_KEVENT_TIMEOUT % seconds(1)).count();
+
+    auto kqueue = m_manager->m_kqueue.load();
+    std::vector<struct kevent>
+        triggered_events(DEFAULT_EVENTS_LIMIT);
+
+    while (is_running) {
+        auto count = assertOK(
+            kevent(
+                kqueue, nullptr, 0, triggered_events.data(),
+                static_cast<int>(triggered_events.size()), &timeout),
+           "kevent wait error");
+
+        if (count == 0)
+            continue;
+
+        auto handles = m_manager->getHandles(triggered_events);
+
+        for (int i = 0; i < count; ++i) {
+            auto const &event = triggered_events[i];
+
+            LOGT << "event, ident: " << event.ident << ", filter: " << event.filter;
+
+            if (event.filter == EVFILT_USER && event.ident == DEFAULT_IDENT_WAKEUP) {
+                int code = static_cast<int>(event.data);
+                if (code == 1) {
+                    is_running = false;
+                    break;
+                }
+                continue;
+            }
+
+            // acceptor event
+            if (event.udata == reinterpret_cast<void *>(1)) {
+                std::vector<TTCPPeer::TSharedPtr> peers;
+
+                while (true) {
+                    sockaddr_storage
+                        address {};
+                    socklen_t
+                        address_length = sizeof(address);
+
+                    int peer_fd = ::accept(
+                        event.ident,
+                        reinterpret_cast<struct sockaddr *>(&address),
+                        &address_length);
+
+                    if (peer_fd == -1) {
+                        if (errno == EAGAIN || errno == EWOULDBLOCK)
+                            break;
+                        if (errno == EINTR)
+                            continue;
+                        LOGW << "peer accept error: " << string(std::strerror(errno));
+                        break;
+                    }
+
+                    auto peer = TTCPPeer::create();
+                    peer->fd  = peer_fd;
+                    peer->uri = getPeerURI(address);
+
+                    struct kevent peer_event;
+                    EV_SET(&peer_event, peer_fd, EVFILT_READ, EV_ADD | EV_CLEAR,
+                        0, 0, reinterpret_cast<void *>(static_cast<uintptr_t>(peer_fd)));
+
+                    if (::kevent(kqueue, &peer_event, 1, nullptr, 0, nullptr) == -1) {
+                        LOGE << "kevent registration peer fd " << peer_fd << " error: " << string(std::strerror(errno));
+                        ::close(peer_fd);
+                        continue;
+                    }
+
+                    peers.push_back(peer);
+                }
+
+                // m_manager->handleEvent(event.ident, std::move(peers));
+                continue;
+            }
+
+            Buffer::TSharedPtr write_buffer;
+            // peer / client event
+            if (event.filter == EVFILT_READ) {
+                // drain loop until end, EV_CLEAR
+                while (true) {
+                    auto buffer = Buffer::create(DEFAULT_BUFFER_SIZE);
+                    ssize_t n = ::read(event.ident, buffer->data(), buffer->capacity());
+
+                    if (n > 0) {
+                        buffer->resize(n);
+                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::READ, buffer, 0);
+                    }
+
+                    else
+
+                    if (n == 0) {
+                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
+                        break;
+                    }
+
+                    else
+
+                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::READ_EOF, nullptr, 0);
+                        break;
+                    } else {
+                        buffer = Buffer::create(std::strerror(errno));
+                        // m_manager->handleEvent(event.ident, TEvent::TOperation::ERROR_, buffer, 0);
+                        break;
+                    }
+                }
+            }
+
+            // else
+
+            if (event.filter == EVFILT_WRITE || write_buffer) {
+                if (event.flags & EV_EOF) {
+                    // m_manager->handleEvent(event.ident, TEvent::TOperation::ERROR_, nullptr, 0);
+                } else {
+                    Buffer::TSharedPtr buffer;
+
+                    if (write_buffer) {
+                        buffer = write_buffer;
+                    } else {
+                        // buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::WRITE, nullptr, 0);
+
+                        ssize_t n = 0;
+
+                        if  (buffer)
+                            n = ::write(event.ident, buffer->data(), buffer->size());
+
+                        LOGT << "wrote, n: " << n;
+                    }
+                    // m_manager->handleEvent(event.ident, TEvent::TOperation::WRITE, nullptr, n);
+
+                }
+            }
+
+            else
+
+            if (event.filter == EVFILT_PROC && (event.fflags & NOTE_EXIT)) {
+                // m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
+                // clean zombie
+                ::waitpid(static_cast<pid_t>(event.ident), nullptr, 0);
+            }
+        }
+    }
+}
+
+
+void CConnectionManager::CKEventRunnable::initialize() {}
+
+
+void CConnectionManager::CKEventRunnable::finalize() {}
+
+
+} // iridium::io::implementation::platform
+
+
+#endif // MACOS_PLATFORM
 
 
 // IContextActions::TSharedPtr CConnectionManager::handleEvent(
@@ -705,7 +890,7 @@ CConnectionManager::THandleInfo::TSharedPtr CConnectionManager::getHandleInfo(in
 //          << ", buffer: " << read_buffer;
 
 //     try {
-//         auto handle_info = getHandleInfo(fd);
+//         auto handle_info = getHandles(fd);
 
 //         URI::TSharedPtr
 //             uri = handle_info->uri;
@@ -911,172 +1096,3 @@ CConnectionManager::THandleInfo::TSharedPtr CConnectionManager::getHandleInfo(in
 //             convert<string>(acceptor_fd) + " error: " + e.what());
 //     }
 // }
-
-
-CConnectionManager::CKEventRunnable::CKEventRunnable(CConnectionManager * const manager)
-:
-    m_manager(manager)
-{}
-
-
-void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
-    struct timespec timeout {};
-    timeout.tv_sec  =
-        duration_cast<seconds>(DEFAULT_KEVENT_TIMEOUT).count();
-    timeout.tv_nsec =
-        duration_cast<nanoseconds>(
-            DEFAULT_KEVENT_TIMEOUT % seconds(1)).count();
-
-    auto kqueue = m_manager->m_kqueue.load();
-    std::vector<struct kevent>
-        triggered_events(DEFAULT_EVENTS_LIMIT);
-
-    while (is_running) {
-        auto count = assertOK(
-            kevent(
-                kqueue, nullptr, 0, triggered_events.data(),
-                static_cast<int>(triggered_events.size()), &timeout),
-           "kevent wait error");
-
-        if (count == 0)
-            continue;
-
-        for (int i = 0; i < count; ++i) {
-            auto const &event = triggered_events[i];
-
-            LOGT << "event, ident: " << event.ident << ", filter: " << event.filter;
-
-            if (event.filter == EVFILT_USER && event.ident == DEFAULT_IDENT_WAKEUP) {
-                int code = static_cast<int>(event.data);
-                if (code == 1) {
-                    is_running = false;
-                    break;
-                }
-                continue;
-            }
-
-            // acceptor event
-            if (event.udata == reinterpret_cast<void *>(1)) {
-                std::vector<TTCPPeer::TSharedPtr> peers;
-
-                while (true) {
-                    sockaddr_storage
-                        address {};
-                    socklen_t
-                        address_length = sizeof(address);
-
-                    int peer_fd = ::accept(
-                        event.ident,
-                        reinterpret_cast<struct sockaddr *>(&address),
-                        &address_length);
-
-                    if (peer_fd == -1) {
-                        if (errno == EAGAIN || errno == EWOULDBLOCK)
-                            break;
-                        if (errno == EINTR)
-                            continue;
-                        LOGW << "peer accept error: " << string(std::strerror(errno));
-                        break;
-                    }
-
-                    auto peer = TTCPPeer::create();
-                    peer->fd  = peer_fd;
-                    peer->uri = getPeerURI(address);
-
-                    struct kevent peer_event;
-                    EV_SET(&peer_event, peer_fd, EVFILT_READ, EV_ADD | EV_CLEAR,
-                        0, 0, reinterpret_cast<void *>(static_cast<uintptr_t>(peer_fd)));
-
-                    if (::kevent(kqueue, &peer_event, 1, nullptr, 0, nullptr) == -1) {
-                        LOGE << "kevent registration peer fd " << peer_fd << " error: " << string(std::strerror(errno));
-                        ::close(peer_fd);
-                        continue;
-                    }
-
-                    peers.push_back(peer);
-                }
-
-                // m_manager->handleEvent(event.ident, std::move(peers));
-                continue;
-            }
-
-            Buffer::TSharedPtr write_buffer;
-            // peer / client event
-            if (event.filter == EVFILT_READ) {
-                // drain loop until end, EV_CLEAR
-                while (true) {
-                    auto buffer = Buffer::create(DEFAULT_BUFFER_SIZE);
-                    ssize_t n = ::read(event.ident, buffer->data(), buffer->capacity());
-
-                    if (n > 0) {
-                        buffer->resize(n);
-                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::READ, buffer, 0);
-                    }
-
-                    else
-
-                    if (n == 0) {
-                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
-                        break;
-                    }
-
-                    else
-
-                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::READ_EOF, nullptr, 0);
-                        break;
-                    } else {
-                        buffer = Buffer::create(std::strerror(errno));
-                        // m_manager->handleEvent(event.ident, TEvent::TOperation::ERROR_, buffer, 0);
-                        break;
-                    }
-                }
-            }
-
-            // else
-
-            if (event.filter == EVFILT_WRITE || write_buffer) {
-                if (event.flags & EV_EOF) {
-                    // m_manager->handleEvent(event.ident, TEvent::TOperation::ERROR_, nullptr, 0);
-                } else {
-                    Buffer::TSharedPtr buffer;
-
-                    if (write_buffer) {
-                        buffer = write_buffer;
-                    } else {
-                        // buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::WRITE, nullptr, 0);
-
-                        ssize_t n = 0;
-
-                        if  (buffer)
-                            n = ::write(event.ident, buffer->data(), buffer->size());
-
-                        LOGT << "wrote, n: " << n;
-                    }
-                    // m_manager->handleEvent(event.ident, TEvent::TOperation::WRITE, nullptr, n);
-
-                }
-            }
-
-            else
-
-            if (event.filter == EVFILT_PROC && (event.fflags & NOTE_EXIT)) {
-                // m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
-                // clean zombie
-                ::waitpid(static_cast<pid_t>(event.ident), nullptr, 0);
-            }
-        }
-    }
-}
-
-
-void CConnectionManager::CKEventRunnable::initialize() {}
-
-
-void CConnectionManager::CKEventRunnable::finalize() {}
-
-
-} // iridium::io::implementation::platform
-
-
-#endif // MACOS_PLATFORM

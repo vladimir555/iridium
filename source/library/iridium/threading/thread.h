@@ -6,7 +6,7 @@
 #define HEADER_THREAD_EC50D1AB_7469_400A_90D9_4977B01B0A71
 
 
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 #include "iridium/smart_ptr.h"
 
 #include <string>
@@ -18,7 +18,7 @@ namespace iridium::threading {
 
 
 class IThread:
-    public pattern::IInitializable
+    public dp::IInitializable
 {
 public:
     DEFINE_SMART_PTR(IThread)

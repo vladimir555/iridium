@@ -6,7 +6,7 @@
 #define HEADER_TESTER_2DFB0DB0_F2C1_425A_947D_7883FD5FAB64
 
 
-#include "iridium/pattern/singleton.h"
+#include "iridium/dp/singleton.h"
 #include "iridium/parsing/node_type.h"
 #include "iridium/smart_ptr.h"
 #include "iridium/logging/logger.h"
@@ -23,7 +23,7 @@
 namespace iridium::testing {
 
 
-class Tester final: public pattern::Singleton<Tester> {
+class Tester final: public dp::Singleton<Tester> {
 public:
     Tester() = default;
     virtual ~Tester() = default;
@@ -43,7 +43,7 @@ public:
     int run(int argc, char* argv[], std::string const &main_cpp_path);
 
 private:
-    friend class pattern::Singleton<Tester>;
+    friend class dp::Singleton<Tester>;
 
     struct TEntry {
         std::string

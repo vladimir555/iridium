@@ -15,7 +15,7 @@
 namespace iridium::logging::implementation {
 
 
-class CSinkConsole: public ISink, pattern::NonCopyable {
+class CSinkConsole: public ISink, dp::NonCopyable {
 public:
     DEFINE_IMPLEMENTATION(CSinkConsole)
     explicit CSinkConsole(TEvent::TLevel const &level);

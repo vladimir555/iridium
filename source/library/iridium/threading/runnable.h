@@ -7,7 +7,7 @@
 
 
 #include "iridium/smart_ptr.h"
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 
 #include <atomic>
 
@@ -15,7 +15,7 @@
 namespace iridium::threading {
 
 
-class IRunnable: public pattern::IInitializable {
+class IRunnable: public dp::IInitializable {
 public:
     DEFINE_INTERFACE(IRunnable)
     virtual void run(std::atomic<bool> &is_running) = 0;

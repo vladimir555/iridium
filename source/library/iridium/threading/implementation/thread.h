@@ -9,8 +9,8 @@
 #include "iridium/smart_ptr.h"
 #include "iridium/threading/thread.h"
 #include "iridium/threading/runnable.h"
-#include "iridium/pattern/non_copyable.h"
-#include "iridium/pattern/non_movable.h"
+#include "iridium/dp/non_copyable.h"
+#include "iridium/dp/non_movable.h"
 
 #include "async_queue.h"
 
@@ -25,8 +25,8 @@ namespace iridium::threading::implementation {
 
 class CThread:
     public IThread,
-    public pattern::NonCopyable,
-    public pattern::NonMovable
+    public dp::NonCopyable,
+    public dp::NonMovable
 {
 public:
     DEFINE_CREATE(CThread)

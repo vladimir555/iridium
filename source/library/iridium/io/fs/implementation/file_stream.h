@@ -8,7 +8,7 @@
 
 #include "iridium/enum.h"
 #include "iridium/io/fs/file_stream.h"
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 
 #include <string>
 #include <stdio.h>
@@ -18,7 +18,7 @@ namespace iridium::io::fs::implementation {
 
 
 class CFileStream:
-    public virtual pattern::NonCopyable,
+    public virtual dp::NonCopyable,
     public virtual IFileStreamReader,
     public virtual IFileStreamWriter
 {

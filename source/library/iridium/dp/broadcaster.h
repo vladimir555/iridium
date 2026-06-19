@@ -10,7 +10,7 @@
 #include <functional>
 
 
-namespace iridium::pattern {
+namespace iridium::dp {
 
 
 // ----- interface
@@ -58,7 +58,7 @@ void Broadcaster<TReceiver>::broadcast(void(TReceiver_::*f)(TArgs const & ...), 
 }
 
 
-} // namespace iridium::pattern
+} // namespace iridium::dp
 
 
 #endif // HEADER_BROADCASTER_843F1FB7_7A80_4BAF_8C67_457F4D84B287

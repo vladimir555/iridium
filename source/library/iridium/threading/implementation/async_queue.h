@@ -6,7 +6,7 @@
 #define HEADER_ASYNC_QUEUE_A0382C4D_41C2_4C4F_BC6D_DD295F054258
 
 
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 #include "iridium/threading/async_queue.h"
 #include "iridium/threading/synchronized.h"
 #include "iridium/logging/logger.h"
@@ -24,7 +24,7 @@ template<typename TItem>
 class CAsyncQueue:
     public  IAsyncQueue<TItem>,
     private Synchronized<std::mutex>,
-    private pattern::NonCopyable
+    private dp::NonCopyable
 {
 public:
     DEFINE_IMPLEMENTATION(CAsyncQueue)

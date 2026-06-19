@@ -9,7 +9,7 @@
 #include "iridium/smart_ptr.h"
 
 #include "iridium/threading/async_queue.h"
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 
 #include <string>
 
@@ -20,11 +20,11 @@ namespace iridium::threading {
 template<typename TItem>
 class IWorkerPusher:
     public virtual IAsyncQueuePusher<TItem>,
-    public virtual pattern::IInitializable
+    public virtual dp::IInitializable
 {
 public:
     DEFINE_INTERFACE(IWorkerPusher);
-    class IHandler: public pattern::IInitializable {
+    class IHandler: public dp::IInitializable {
     public:
         using TInputItems = typename IAsyncQueuePusher<TItem>::TItems;
 
@@ -37,11 +37,11 @@ public:
 template<typename TItem>
 class IWorkerPopper:
     public virtual IAsyncQueuePopper<TItem>,
-    public virtual pattern::IInitializable
+    public virtual dp::IInitializable
 {
 public:
     DEFINE_INTERFACE(IWorkerPopper)
-    class IHandler: public pattern::IInitializable {
+    class IHandler: public dp::IInitializable {
     public:
         using TOutputItems = typename IAsyncQueuePopper<TItem>::TItems;
 
@@ -58,7 +58,7 @@ class IWorker:
 {
 public:
     DEFINE_INTERFACE(IWorker)
-    class IHandler: public pattern::IInitializable {
+    class IHandler: public dp::IInitializable {
     public:
         using TInputItems   = typename IWorkerPusher<TInputItem>::IHandler::TInputItems;
         using TOutputItems  = typename IWorkerPopper<TOutputItem>::IHandler::TOutputItems;

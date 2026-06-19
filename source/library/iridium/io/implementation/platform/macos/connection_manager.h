@@ -23,7 +23,8 @@
 #include "../unix/connection_manager.h"
 
 
-#include <map>
+#include <unordered_map>
+#include <list>
 #include <mutex>
 #include <atomic>
 
@@ -83,12 +84,14 @@ private:
     URI::TSharedPtr
         getPeerURI(int const &fd);
 
-    struct THandleInfo {
-        DEFINE_CREATE(THandleInfo)
+    struct THandle {
+        DEFINE_CREATE(THandle)
         URI::TSharedPtr
             uri;
         IProtocol::TSharedPtr
             protocol;
+        IAcceptor::TSharedPtr
+            acceptor;
         IContextActions::TSharedPtr
             context;
     };
@@ -101,8 +104,8 @@ private:
             fd;
     };
 
-    THandleInfo::TSharedPtr
-        getHandleInfo(int const &fd);
+    std::list<THandle::TSharedPtr>
+        getHandles(std::vector<struct kevent> const &events);
 
     std::vector<int> connect(
         URI::TSharedPtr

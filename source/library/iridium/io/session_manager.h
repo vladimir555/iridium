@@ -6,7 +6,7 @@
 #define HEADER_SESSION_MANAGER_BB5946FC_0AA1_4747_AE53_07DB1F105A72
 
 
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 
 #include "protocol_.h"
 
@@ -15,7 +15,7 @@ namespace iridium::io {
 
 
 // todo: rm, deprecated
-class ISessionManager: public pattern::IInitializable {
+class ISessionManager: public dp::IInitializable {
 public:
     DEFINE_INTERFACE(ISessionManager)
 

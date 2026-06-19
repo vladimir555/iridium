@@ -6,7 +6,7 @@
 #define HEADER_NON_COPYABLE_F54A924C_4ECF_486A_BEB7_5E749E8DC0BD
 
 
-namespace iridium::pattern {
+namespace iridium::dp {
 
 
 ///
@@ -20,7 +20,7 @@ protected:
 };
 
 
-} // namespace iridium::pattern
+} // namespace iridium::dp
 
 
 #endif // HEADER_NON_COPYABLE_F54A924C_4ECF_486A_BEB7_5E749E8DC0BD

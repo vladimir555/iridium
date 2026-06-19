@@ -6,7 +6,7 @@
 #define HEADER_SINK_175E1AB3_5BEE_4AFC_A1E2_DB31099E39EB
 
 
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 #include "iridium/threading/worker.h"
 #include "iridium/logging/sink.h"
 
@@ -16,7 +16,7 @@ namespace iridium::logging::implementation {
 
 // todo: CSinkAsync(ISink::TSharedPtr ... ) wrapper
 // cached async sink
-class CSinkAsync: public ISink, pattern::NonCopyable {
+class CSinkAsync: public ISink, dp::NonCopyable {
 public:
     DEFINE_IMPLEMENTATION(CSinkAsync)
     CSinkAsync(ISink::TSharedPtr const &sink);

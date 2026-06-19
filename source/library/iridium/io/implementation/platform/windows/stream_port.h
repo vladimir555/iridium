@@ -12,7 +12,7 @@
 #include "iridium/io/uri.h"
 #include "iridium/io/stream.h"
 #include "iridium/convertion/convert.h"
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 #include "iridium/threading/synchronized.h"
 
 #include <cstring>
@@ -30,7 +30,7 @@ namespace iridium::io::implementation::platform {
 
 class CStreamPort:
     virtual public IStreamPort,
-    public pattern::NonCopyable,
+    public dp::NonCopyable,
     public threading::Synchronized<std::mutex, false>
 {
 protected:

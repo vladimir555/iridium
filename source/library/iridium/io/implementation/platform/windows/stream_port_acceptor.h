@@ -7,7 +7,7 @@
 
 #include "iridium/io/uri.h"
 #include "iridium/io/stream.h"
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 #include <mutex>
 #include <list>
 #include <string>
@@ -16,7 +16,7 @@
 namespace iridium::io::implementation::platform {
 
 
-class CStreamPortAcceptor: public IStreamAcceptor, public pattern::NonCopyable {
+class CStreamPortAcceptor: public IStreamAcceptor, public dp::NonCopyable {
 public:
     DEFINE_IMPLEMENTATION(CStreamPortAcceptor)
 

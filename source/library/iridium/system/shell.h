@@ -14,7 +14,7 @@
 namespace iridium::system {
 
 
-class Shell: public pattern::IInitializable {
+class Shell: public dp::IInitializable {
 public:
     DEFINE_IMPLEMENTATION(Shell)
     Shell();

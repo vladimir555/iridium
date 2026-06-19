@@ -16,8 +16,8 @@
 #include <string>
 #include <memory>
 
-#include "iridium/pattern/non_copyable.h"
-#include "iridium/pattern/non_movable.h"
+#include "iridium/dp/non_copyable.h"
+#include "iridium/dp/non_movable.h"
 
 
 namespace iridium::testing {
@@ -66,7 +66,7 @@ public:
 
     template<typename TResult, typename ... TArgs>
     class Behavior<TResult( TClass::*)(TArgs...)>:
-        public pattern::NonCopyable, public pattern::NonMovable
+        public dp::NonCopyable, public dp::NonMovable
     {
     public:
         explicit Behavior(Mock<TClass> &mock, std::type_info const *method);
@@ -81,7 +81,7 @@ public:
 
     template<typename TResult, typename ... TArgs>
     class Behavior<TResult( TClass::*)(TArgs...) const>:
-        public pattern::NonCopyable, public pattern::NonMovable
+        public dp::NonCopyable, public dp::NonMovable
     {
     public:
         explicit Behavior(Mock<TClass> &mock, std::type_info const *method);

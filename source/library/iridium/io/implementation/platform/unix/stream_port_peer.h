@@ -11,7 +11,7 @@
 #include "iridium/io/uri.h"
 #include "iridium/io/implementation/stream_port.h"
 #include "iridium/convertion/convert.h"
-#include "iridium/pattern/non_copyable.h"
+#include "iridium/dp/non_copyable.h"
 
 #include <string>
 #include <cstring>

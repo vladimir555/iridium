@@ -6,7 +6,7 @@
 #define HEADER_MULTIPLEXER_CD0A061D_A439_4770_B4FD_89D8393DBA1E
 
 
-#include "iridium/pattern/initializable.h"
+#include "iridium/dp/initializable.h"
 
 #include "event_.h"
 
@@ -17,7 +17,7 @@ namespace iridium::io {
 
 
 // todo: rm, deprecated
-class IMultiplexer: public pattern::IInitializable {
+class IMultiplexer: public dp::IInitializable {
 public:
     DEFINE_INTERFACE(IMultiplexer)
     static std::chrono::seconds const DEFAULT_WAITING_TIMEOUT;
