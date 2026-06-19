@@ -261,34 +261,34 @@
     <ClInclude Include="parsing\serialization\node.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\broadcaster.h">
+    <ClInclude Include="dp\broadcaster.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\fsm.h">
+    <ClInclude Include="dp\fsm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\implementation\initializer.h">
+    <ClInclude Include="dp\implementation\initializer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\initializable.h">
+    <ClInclude Include="dp\initializable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\non_copyable.h">
+    <ClInclude Include="dp\non_copyable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\non_movable.h">
+    <ClInclude Include="dp\non_movable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\observable.h">
+    <ClInclude Include="dp\observable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\observer.h">
+    <ClInclude Include="dp\observer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\prototype.h">
+    <ClInclude Include="dp\prototype.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\singleton.h">
+    <ClInclude Include="dp\singleton.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="platform.h">
@@ -528,7 +528,7 @@
     <ClInclude Include="macros\concat.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pattern\implementation\observable.h">
+    <ClInclude Include="dp\implementation\observable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="convertion\implementation\common.h">
@@ -644,7 +644,7 @@
     <ClCompile Include="parsing\serialization\node.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="pattern\implementation\initializer.cpp">
+    <ClCompile Include="dp\implementation\initializer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="strings.cpp">
@@ -719,7 +719,7 @@
     <ClCompile Include="testing\test_runner.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="pattern\singleton.cpp">
+    <ClCompile Include="dp\singleton.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="io\uri.cpp">
