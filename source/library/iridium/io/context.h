@@ -26,9 +26,9 @@ public:
         std::string
             const &name,
         URI::TSharedPtr
-            const &reader,
+                   reader,
         URI::TSharedPtr
-            const &writer) = 0;
+                   writer) = 0;
     virtual void delPipe(
         std::string
             const &name) = 0;
@@ -85,12 +85,12 @@ public:
         UNSUBSCRIBE
     );
     struct TAction {
+        URI::TSharedPtr
+            uri;
         TStreamType
             stream_type;
         TActionType
             action_type;
-        URI::TSharedPtr
-            uri;
     };
 
     virtual std::list<TAction>

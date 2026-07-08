@@ -74,16 +74,6 @@ private:
             const m_manager;
     };
 
-    friend class CKEventRunnable;
-
-    template<typename T>
-    static T assertOK(T const &result, std::string const &message);
-
-    static URI::TSharedPtr
-        getPeerURI(sockaddr_storage const &address);
-    URI::TSharedPtr
-        getPeerURI(int const &fd);
-
     struct THandle {
         DEFINE_CREATE(THandle)
         URI::TSharedPtr
@@ -94,57 +84,47 @@ private:
             acceptor;
         IContextActions::TSharedPtr
             context;
+        int
+            fd = 0;
+        IContextActions::TStreamType
+            stream_type;
     };
 
-    struct TTCPPeer {
-        DEFINE_CREATE(TTCPPeer);
-        URI::TSharedPtr
-            uri;
-        int
-            fd;
-    };
+    friend class CKEventRunnable;
+
+    template<typename T>
+    static T assertOK(T const &result, std::string const &message);
+
+    static URI::TSharedPtr
+        getPeerURI(sockaddr_storage const &address);
+    URI::TSharedPtr
+        getPeerURI(int const &fd);
 
     std::list<THandle::TSharedPtr>
-        getHandles(std::vector<struct kevent> const &events);
+        getHandles(std::vector<struct kevent> const &events, size_t const &count);
+    void
+        updateHandles(std::list<THandle::TSharedPtr> const &handles);
+    void
+        updateHandles(
+            std::map<IProtocol::TSharedPtr, std::list<IContextActions::TAction> >
+                const &map_protocol_actions);
+    void
+        releaseHandle(THandle::TSharedPtr const &handle);
 
     std::vector<int> connect(
         URI::TSharedPtr
             const &uri,
-        bool
-            const &is_writer = false);
+        IContextActions::TStreamType
+            const &stream_type);
 
     void wakeKEvent(int const &code);
 
-    // IContextActions::TSharedPtr
-    //     handleEvent(
-    //         std::vector<int>
-    //             const &fds,
-    //         TEvent::TOperation
-    //             const &operation,
-    //         Buffer::TSharedPtr
-    //             const &read_buffer,
-    //         size_t
-    //             const &written_bytes_count);
-
-    // IContextActions::TSharedPtr
-    //     handleEvent(
-    //         int
-    //             const &acceptor_fd,
-    //         std::vector<TTCPPeer::TSharedPtr>
-    //             const &peers);
-
+    std::unordered_map<int, THandle::TSharedPtr>
+        m_map_fd_handle;
+    std::unordered_map<URI::TSharedPtr, int>
+        m_map_uri_fd;
     threading::IThread::TSharedPtr
         m_thread;
-    std::unordered_map<int, URI::TSharedPtr>
-        m_map_fd_uri;
-    std::unordered_map<URI::TSharedPtr, std::vector<int> >
-        m_map_uri_fd;
-    std::unordered_map<URI::TSharedPtr, IProtocol::TSharedPtr>
-        m_map_uri_protocol;
-    std::unordered_map<int, IAcceptor::TSharedPtr>
-        m_map_fd_acceptor;
-    std::unordered_map<URI::TSharedPtr, IContextActions::TSharedPtr>
-        m_map_uri_context;
     std::atomic<int>
         m_kqueue;
 };

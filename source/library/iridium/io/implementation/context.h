@@ -20,9 +20,9 @@ public:
         std::string
             const &name,
         URI::TSharedPtr
-            const &reader_uri,
+                   reader_uri,
         URI::TSharedPtr
-            const &writer_uri) override;
+                   writer_uri) override;
     void delPipe(
         std::string
             const &name) override;

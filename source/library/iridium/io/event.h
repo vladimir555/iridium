@@ -6,8 +6,6 @@
 #define HEADER_EVENT_F84E6917_BBFF_4221_8C01_335F46089357
 
 
-#include "iridium/enum.h"
-
 #include "context.h"
 
 
@@ -22,7 +20,6 @@ struct TEvent {
         OPEN,
         READ,
         WRITE,
-        READ_EOF,
         TIMEOUT,
         ERROR_,
         CLOSE);

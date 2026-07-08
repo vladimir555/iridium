@@ -1,6 +1,7 @@
 #include "context.h"
 
 #include "iridium/convertion/convert.h"
+#include "iridium/assert.h"
 
 
 using iridium::convertion::convert;
@@ -11,38 +12,109 @@ using std::string;
 namespace iridium::io::implementation {
 
 
+// void CContext::setPipe(
+//     std::string
+//         const &name,
+//     URI::TSharedPtr
+//         const &reader_uri,
+//     URI::TSharedPtr
+//         const &writer_uri)
+// {
+//     LOGT << "setPipe actions 1: " << m_actions;
+//     LOGT << "setPipe name: " << name << ", reader_uri: " << reader_uri << ", writer_uri: " << writer_uri;
+//     auto pipe = getPipe(name);
+
+//     if (pipe && pipe->reader && pipe->reader->uri && pipe->reader->uri != reader_uri) {
+//         m_actions.push_back( TAction { pipe->reader->uri, TStreamType::READER, TActionType::UNSUBSCRIBE } );
+//         if (pipe->reader->uri != writer_uri)
+//             m_actions.push_back( TAction { pipe->reader->uri, TStreamType::READER, TActionType::CLOSE } );
+//         LOGT << "m_map_uri_pipe.erase reader " << pipe->reader->uri;
+//         m_map_uri_pipe.erase(pipe->reader->uri);
+//     }
+
+//     if (pipe && pipe->writer && pipe->writer->uri && pipe->writer->uri != writer_uri) {
+//         m_actions.push_back( TAction { pipe->writer->uri, TStreamType::WRITER, TActionType::UNSUBSCRIBE } );
+//         if (pipe->writer->uri != reader_uri)
+//             m_actions.push_back( TAction { pipe->writer->uri, TStreamType::WRITER, TActionType::CLOSE } );
+//         LOGT << "m_map_uri_pipe.erase writer " << pipe->writer->uri;
+//         m_map_uri_pipe.erase(pipe->writer->uri);
+//     }
+
+//     if(!pipe && (reader_uri || writer_uri)) {
+//         pipe            = TPipe::create();
+//         pipe->reader    = TStream::create();
+//         pipe->writer    = TStream::create();
+//         pipe->name      = name;
+
+//         if (reader_uri)
+//             m_actions.push_back( TAction { reader_uri, TStreamType::READER, TActionType::OPEN } );
+//         if (writer_uri)
+//             m_actions.push_back( TAction { writer_uri, TStreamType::WRITER, TActionType::OPEN } );
+//     }
+
+//     if (pipe && pipe->reader->uri != reader_uri) {
+//         pipe->reader->uri = reader_uri;
+//         if (reader_uri) {
+//             m_actions.push_back( TAction { pipe->reader->uri, TStreamType::READER, TActionType::SUBSCRIBE } );
+//             m_map_uri_pipe[pipe->reader->uri] = pipe;
+//         }
+//     }
+
+//     if (pipe && pipe->writer->uri != writer_uri) {
+//         pipe->writer->uri = writer_uri;
+//         if (writer_uri) {
+//             m_actions.push_back( TAction { pipe->writer->uri, TStreamType::WRITER, TActionType::SUBSCRIBE } );
+//             m_map_uri_pipe[pipe->writer->uri] = pipe;
+//         }
+//     }
+
+//     if (pipe)
+//         m_map_name_pipe[name] = pipe;
+//     else
+//         m_map_name_pipe.erase(name);
+
+//     LOGT << "setPipe actions 2: " << m_actions;
+
+//     LOGT << "map_uri_pipe 11, " << reinterpret_cast<uint64_t>(this);
+//     for (auto const &uri_pipe: m_map_uri_pipe) {
+//         LOGT
+//         << "map_uri_pipe: " << uri_pipe.first
+//         << " " << uri_pipe.second->name
+//         << " " << uri_pipe.second->reader->uri
+//         << " " << uri_pipe.second->writer->uri;
+//     }
+//     LOGT << "map_uri_pipe 22";
+// }
+
+
 void CContext::setPipe(
-    std::string
-        const &name,
-    URI::TSharedPtr
-        const &reader_uri,
-    URI::TSharedPtr
-        const &writer_uri)
+    std::string const &name,
+    URI::TSharedPtr reader_uri,
+    URI::TSharedPtr writer_uri)
 {
+    LOGT << "setPipe actions 1: " << m_actions;
     LOGT << "setPipe name: " << name << ", reader_uri: " << reader_uri << ", writer_uri: " << writer_uri;
     auto pipe = getPipe(name);
 
+    // === ЛОГ: состояние pipe после getPipe ===
+    if (pipe) {
+        LOGT << "setPipe getPipe: reader->uri=" << pipe->reader->uri
+             << ", writer->uri=" << pipe->writer->uri;
+    }
+
     if (pipe && pipe->reader && pipe->reader->uri && pipe->reader->uri != reader_uri) {
-        m_actions.push_back(
-            TAction { TStreamType::READER, TActionType::UNSUBSCRIBE, pipe->reader->uri }
-        );
-        if (pipe->reader->uri != writer_uri) {
-            m_actions.push_back(
-                TAction { TStreamType::READER, TActionType::CLOSE, pipe->reader->uri }
-            );
-        }
+        m_actions.push_back(TAction{pipe->reader->uri, TStreamType::READER, TActionType::UNSUBSCRIBE});
+        if (pipe->reader->uri != writer_uri)
+            m_actions.push_back(TAction{pipe->reader->uri, TStreamType::READER, TActionType::CLOSE});
+        LOGT << "m_map_uri_pipe.erase reader " << pipe->reader->uri;
         m_map_uri_pipe.erase(pipe->reader->uri);
     }
 
     if (pipe && pipe->writer && pipe->writer->uri && pipe->writer->uri != writer_uri) {
-        m_actions.push_back(
-            TAction { TStreamType::WRITER, TActionType::UNSUBSCRIBE, pipe->writer->uri }
-        );
-        if (pipe->writer->uri != reader_uri) {
-            m_actions.push_back(
-                TAction { TStreamType::WRITER, TActionType::CLOSE, pipe->writer->uri }
-            );
-        }
+        m_actions.push_back(TAction{pipe->writer->uri, TStreamType::WRITER, TActionType::UNSUBSCRIBE});
+        if (pipe->writer->uri != reader_uri)
+            m_actions.push_back(TAction{pipe->writer->uri, TStreamType::WRITER, TActionType::CLOSE});
+        LOGT << "m_map_uri_pipe.erase writer " << pipe->writer->uri;
         m_map_uri_pipe.erase(pipe->writer->uri);
     }
 
@@ -50,35 +122,42 @@ void CContext::setPipe(
         pipe = TPipe::create();
         pipe->reader = TStream::create();
         pipe->writer = TStream::create();
-
         pipe->name = name;
 
-        if (reader_uri) {
-            m_actions.push_back(
-                TAction { TStreamType::READER, TActionType::OPEN, reader_uri }
-            );
-        }
-        if (writer_uri) {
-            m_actions.push_back(
-                TAction { TStreamType::WRITER, TActionType::OPEN, writer_uri }
-            );
-        }
+        if (reader_uri)
+            m_actions.push_back(TAction{reader_uri, TStreamType::READER, TActionType::OPEN});
+        if (writer_uri)
+            m_actions.push_back(TAction{writer_uri, TStreamType::WRITER, TActionType::OPEN});
     }
 
-    if (pipe && reader_uri && pipe->reader->uri != reader_uri) {
+    // === ЛОГ: перед обновлением reader ===
+    if (pipe) {
+        LOGT << "setPipe before reader update: reader->uri=" << pipe->reader->uri
+             << ", reader_uri=" << reader_uri
+             << ", condition=" << (pipe->reader->uri != reader_uri);
+    }
+
+    if (pipe && pipe->reader->uri != reader_uri) {
         pipe->reader->uri = reader_uri;
-        m_actions.push_back(
-            TAction { TStreamType::READER, TActionType::SUBSCRIBE, pipe->reader->uri }
-        );
-        m_map_uri_pipe[pipe->reader->uri] = pipe;
+        if (reader_uri) {
+            m_actions.push_back(TAction{pipe->reader->uri, TStreamType::READER, TActionType::SUBSCRIBE});
+            m_map_uri_pipe[pipe->reader->uri] = pipe;
+        }
     }
 
-    if (pipe && writer_uri && pipe->writer->uri != writer_uri) {
+    // === ЛОГ: перед обновлением writer ===
+    if (pipe) {
+        LOGT << "setPipe before writer update: writer->uri=" << pipe->writer->uri
+             << ", writer_uri=" << writer_uri
+             << ", condition=" << (pipe->writer->uri != writer_uri);
+    }
+
+    if (pipe && pipe->writer->uri != writer_uri) {
         pipe->writer->uri = writer_uri;
-        m_actions.push_back(
-            TAction { TStreamType::WRITER, TActionType::SUBSCRIBE, pipe->writer->uri }
-        );
-        m_map_uri_pipe[pipe->writer->uri] = pipe;
+        if (writer_uri) {
+            m_actions.push_back(TAction{pipe->writer->uri, TStreamType::WRITER, TActionType::SUBSCRIBE});
+            m_map_uri_pipe[pipe->writer->uri] = pipe;
+        }
     }
 
     if (pipe)
@@ -86,7 +165,16 @@ void CContext::setPipe(
     else
         m_map_name_pipe.erase(name);
 
-    LOGT << "setPipe actions: " << m_actions;
+    LOGT << "setPipe actions 2: " << m_actions;
+
+    LOGT << "map_uri_pipe 11, " << reinterpret_cast<uint64_t>(this);
+    for (auto const &uri_pipe : m_map_uri_pipe) {
+        LOGT << "map_uri_pipe: " << uri_pipe.first
+             << " " << uri_pipe.second->name
+             << " " << uri_pipe.second->reader->uri
+             << " " << uri_pipe.second->writer->uri;
+    }
+    LOGT << "map_uri_pipe 22";
 }
 
 
@@ -123,11 +211,11 @@ void CContext::swapPipe(
 {
     LOGT << "swapPipe name: " << name;
     if (auto pipe = getPipe(name)) {
-        setPipe(name, pipe->writer->uri, pipe->reader->uri);
+        setPipe(name, pipe->reader->uri, pipe->writer->uri);
         std::swap(pipe->writer->buffers, pipe->reader->buffers);
     } else
         throw std::runtime_error(
-            "swap pipe error: pipe not found by name '" + convert<std::string>(name) + "'");
+            "context swap pipe error: pipe not found by name '" + convert<std::string>(name) + "'");
 }
 
 
@@ -173,7 +261,13 @@ void CContext::addBuffer(
     Buffer::TSharedPtr
         const &buffer)
 {
-    getStream(name, stream_type)->buffers.push_back(buffer);
+    assertExists(
+        getStream(name, stream_type),
+        "context add buffer error: stream " +
+            convert<string>(stream_type) +
+        " not found by name '" +
+            convert<string>(name) + "'"
+    )->buffers.push_back(buffer);
 }
 
 
@@ -185,7 +279,13 @@ void CContext::addBuffer(
     Buffer::TSharedPtr
         const &buffer)
 {
-    getStream(uri, stream_type)->buffers.push_back(buffer);
+    assertExists(
+        getStream(uri, stream_type),
+        "context add buffer error: stream " +
+            convert<string>(stream_type) +
+        " not found by uri " +
+            convert<string>(uri)
+    )->buffers.push_back(buffer);
 }
 
 
@@ -197,7 +297,13 @@ void CContext::setPosition(
     size_t
         const &position)
 {
-    auto stream = getStream(uri, stream_type);
+    auto stream = assertExists(
+        getStream(uri, stream_type),
+        "context set position error: stream " +
+            convert<string>(stream_type) +
+        " not found by uri " +
+            convert<string>(uri)
+    );
 
     if (stream->buffers.empty()) {
         stream->position = 0;
@@ -224,80 +330,79 @@ size_t CContext::getPosition(
 
 
 std::list<CContext::TAction> CContext::getActions() {
-    return std::move(m_actions);
-    // struct TPipeEnd {
-    //     TStreamType
-    //         stream_type;
-    //     URI::TSharedPtr
-    //         uri;
+    LOGT << "get actions: " << m_actions;
 
-    //     bool operator==(TPipeEnd const &other) const {
-    //         return stream_type == other.stream_type && uri == other.uri;
-    //     }
-    // };
+    struct TPipeEnd {
+        TStreamType
+            stream_type;
+        URI::TSharedPtr
+            uri;
 
-    // struct TPipeEndHash {
-    //     size_t operator()(TPipeEnd const &pipe_end) const {
-    //         return
-    //             std::hash<int>()
-    //                 (static_cast<int>(pipe_end.stream_type)) ^
-    //            (std::hash<void *>()
-    //                 (pipe_end.uri.get()) << 1);
-    //     }
-    // };
+        bool operator==(TPipeEnd const &other) const {
+            return stream_type == other.stream_type && uri == other.uri;
+        }
+    };
 
-    // struct TActionNets {
-    //     int open_close = 0;
-    //     int subscribe_unsubscribe = 0;
-    // };
+    struct TPipeEndHash {
+        size_t operator()(TPipeEnd const &pipe_end) const {
+            return
+                std::hash<int>()
+                    (static_cast<int>(pipe_end.stream_type)) ^
+               (std::hash<void*>()
+                    (pipe_end.uri.get()) << 1);
+        }
+    };
 
-    // std::unordered_map<TPipeEnd, TActionNets, TPipeEndHash>
-    //     map_pipe_end_nets;
-    // std::list<TAction>
-    //     optimized_actions;
+    struct TActionNets {
+        int open_close = 0;
+        int subscribe_unsubscribe = 0;
+    };
 
-    // for (auto const& action : m_actions) {
-    //     TPipeEnd pe{action.stream_type, action.uri};
-    //     auto& nets = map_pipe_end_nets[pe];
+    std::unordered_map<TPipeEnd, TActionNets, TPipeEndHash>
+        map_pipe_end_nets;
 
-    //     if (action.action_type == TActionType::OPEN)
-    //         nets.open_close++;
-    //     else
-    //     if (action.action_type == TActionType::CLOSE)
-    //         nets.open_close--;
-    //     else
-    //     if (action.action_type == TActionType::SUBSCRIBE)
-    //         nets.subscribe_unsubscribe++;
-    //     else
-    //     if (action.action_type == TActionType::UNSUBSCRIBE)
-    //         nets.subscribe_unsubscribe--;
-    // }
+    for (auto const &action: m_actions) {
+        TPipeEnd pe { action.stream_type, action.uri };
+        auto &nets = map_pipe_end_nets[pe];
 
-    // for (auto const &[pipe_end, nets]: map_pipe_end_nets) {
-    //     if (nets.open_close > 0)
-    //         optimized_actions.push_back(
-    //             {pipe_end.stream_type, TActionType::OPEN, pipe_end.uri}
-    //         );
-    //     else
-    //     if (nets.open_close < 0)
-    //         optimized_actions.push_back(
-    //             {pipe_end.stream_type, TActionType::CLOSE, pipe_end.uri}
-    //         );
+        if (action.action_type == TActionType::OPEN)
+            nets.open_close++;
+        else
+        if (action.action_type == TActionType::CLOSE)
+            nets.open_close--;
+        else
+        if (action.action_type == TActionType::SUBSCRIBE)
+            nets.subscribe_unsubscribe++;
+        else
+        if (action.action_type == TActionType::UNSUBSCRIBE)
+            nets.subscribe_unsubscribe--;
+    }
 
-    //     if (nets.subscribe_unsubscribe > 0)
-    //         optimized_actions.push_back(
-    //             {pipe_end.stream_type, TActionType::SUBSCRIBE, pipe_end.uri}
-    //         );
-    //     else
-    //     if (nets.subscribe_unsubscribe < 0)
-    //         optimized_actions.push_back(
-    //             {pipe_end.stream_type, TActionType::UNSUBSCRIBE, pipe_end.uri}
-    //         );
-    // }
+    std::list<TAction> optimized_actions;
 
-    // m_actions.clear();
+    // open / close
+    for (auto const &[pipe_end, nets]: map_pipe_end_nets) {
+        if (nets.open_close > 0)
+            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::OPEN } );
+        else
+        if (nets.open_close < 0)
+            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::CLOSE } );
+    }
 
-    // return optimized_actions;
+    // subscribe / unsubscribe
+    for (auto const &[pipe_end, nets]: map_pipe_end_nets) {
+        if (nets.subscribe_unsubscribe > 0)
+            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::SUBSCRIBE } );
+        else
+        if (nets.subscribe_unsubscribe < 0)
+            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::UNSUBSCRIBE } );
+    }
+
+    m_actions.clear();
+
+    LOGT << "get optimized_actions: " << optimized_actions;
+
+    return optimized_actions;
 }
 
 
@@ -310,17 +415,27 @@ CContext::TStream::TSharedPtr CContext::getStream(
     auto uri_pipe  = m_map_uri_pipe.find(uri);
     if  (uri_pipe != m_map_uri_pipe.end()) {
         if (stream_type == TStreamType::READER)
-            return uri_pipe->second->reader;
+            return uri_pipe->second->reader; // ----->
 
         if (stream_type == TStreamType::WRITER)
-            return uri_pipe->second->writer;
+            return uri_pipe->second->writer; // ----->
     }
 
+    LOGT << "map_uri_pipe 1, " << reinterpret_cast<uint64_t>(this);
+    for (auto const &uri_pipe: m_map_uri_pipe) {
+        LOGT
+        << "map_uri_pipe: " << uri_pipe.first
+        << " " << uri_pipe.second->name
+        << " " << uri_pipe.second->reader->uri
+        << " " << uri_pipe.second->writer->uri;
+    }
+    LOGT << "map_uri_pipe 2";
+
     throw std::runtime_error(
-        "stream " +
+        "context getting stream error: " +
             convert<std::string>(stream_type) +
         " not found by uri " +
-            convert<std::string>(uri));
+            convert<std::string>(uri)); // ----->
 }
 
 
@@ -333,17 +448,17 @@ CContext::TStream::TSharedPtr CContext::getStream(
     auto name_pipe  = m_map_name_pipe.find(name);
     if  (name_pipe != m_map_name_pipe.end()) {
         if (stream_type == TStreamType::READER)
-            return name_pipe->second->reader;
+            return name_pipe->second->reader; // ----->
 
         if (stream_type == TStreamType::WRITER)
-            return name_pipe->second->writer;
+            return name_pipe->second->writer; // ----->
     }
 
     throw std::runtime_error(
-        "stream " +
+        "context getting stream error: " +
             convert<std::string>(stream_type) +
         " not found by name '" +
-            name + "'");
+            name + "'"); // ----->
 }
 
 
@@ -351,7 +466,7 @@ CContext::TPipe::TSharedPtr CContext::getPipe(
     std::string
         const &name)
 {
-    auto   name_pipe =  m_map_name_pipe.find(name);
+    auto   name_pipe  = m_map_name_pipe.find(name);
     return name_pipe == m_map_name_pipe.end() ? nullptr : name_pipe->second;
 }
 
@@ -360,7 +475,7 @@ CContext::TPipe::TSharedPtr CContext::getPipe(
     URI::TSharedPtr
         const &uri)
 {
-    auto   uri_pipe =  m_map_uri_pipe.find(uri);
+    auto   uri_pipe  = m_map_uri_pipe.find(uri);
     return uri_pipe == m_map_uri_pipe.end() ? nullptr : uri_pipe->second;
 }
 

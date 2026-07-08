@@ -200,12 +200,12 @@ void CConnectionManager::finalize() {
         wakeKEvent(1);
         m_thread->finalize();
 
-        for (auto const &fd_acceptor: m_map_fd_acceptor)
-            ::close(fd_acceptor.first);
+        LOCK_SCOPE();
+        for (auto const &fd_handle: m_map_fd_handle)
+            ::close(fd_handle.first);
 
-        for (auto const &fd_uri: m_map_fd_uri)
-            ::close(fd_uri.first);
-
+        m_map_fd_handle.clear();
+        m_map_uri_fd.clear();
     } catch (std::exception const &e) {
         throw std::runtime_error(
             std::string("connection manager finalization error: ") + e.what());
@@ -220,24 +220,52 @@ void CConnectionManager::manage(
         const &protocol)
 {
     try {
-        auto fds = connect(uri);
+        std::vector<int> fds;
 
+        THandle::TSharedPtr handle;
+        {
+            LOCK_SCOPE();
+            auto uri_fd  = m_map_uri_fd.find(uri);
+            // peer
+            // todo: fix multi fd
+            if ( uri_fd != m_map_uri_fd.end()) {
+                fds.push_back(uri_fd->second);
+
+                auto fd_handle  = m_map_fd_handle.find(uri_fd->second);
+                if ( fd_handle != m_map_fd_handle.end())
+                    handle = fd_handle->second;
+            }
+        }
+
+        LOGT << "fds: " << fds;
+        if (fds.empty())
+            fds = connect(uri, IContext::TStreamType::WRITER);
+
+        if(!handle) {
+            handle              = THandle::create();
+            handle->context     = CContext::create();
+            handle->protocol    = protocol;
+        }
+
+        handle->uri         = uri;
+        handle->fd          = fds.empty() ? -1 : fds.front();
+
+        // todo: pid, stdin, stdout
         {
             LOCK_SCOPE();
 
-            for (int id: fds) {
-                if (id != -1)
-                    m_map_fd_uri[id] = uri;
+            for (int const &fd: fds) {
+                if (fd < 0)
+                    continue; // <---
+                m_map_fd_handle[fd] = handle;
+                m_map_uri_fd[uri] = fd;
             }
-
-            m_map_uri_fd[uri] = fds;
-            m_map_uri_protocol[uri] = protocol;
         }
 
         wakeKEvent(0);
     } catch (std::exception const &e) {
         throw std::runtime_error(
-            string("connection manage protocol error: ") + e.what());
+            string("connection manage " + convert<string>(uri) + " protocol error: ") + e.what());
     }
 }
 
@@ -262,7 +290,7 @@ void CConnectionManager::manage(
             domain  = AF_UNIX;
             type    = SOCK_STREAM;
 
-            auto* address_unix = reinterpret_cast<sockaddr_un*>(&address);
+            auto *address_unix = reinterpret_cast<sockaddr_un*>(&address);
             address_unix->sun_family = AF_UNIX;
 
             std::string path = uri->getPath();
@@ -304,7 +332,7 @@ void CConnectionManager::manage(
             type        = SOCK_STREAM;
             protocol    = IPPROTO_TCP;
 
-            auto* address_in            = reinterpret_cast<sockaddr_in*>(&address);
+            auto *address_in            = reinterpret_cast<sockaddr_in*>(&address);
 
             address_in->sin_family      = AF_INET;
             address_in->sin_port        = htons(uri->getPort() ?: static_cast<uint16_t>(uri->getProtocol()));
@@ -315,8 +343,12 @@ void CConnectionManager::manage(
         int fd = assertOK(::socket(domain, type, protocol), "socket");
 
         static int const YES = 1;
-        assertOK(::setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES)), "setsockopt REUSEADDR");
-        assertOK(::setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &YES, sizeof(YES)), "setsockopt REUSEPORT");
+        assertOK(
+            ::setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES)),
+             "setsockopt REUSEADDR");
+        assertOK(
+            ::setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &YES, sizeof(YES)),
+             "setsockopt REUSEPORT");
 
         int flags = assertOK(
             ::fcntl(fd, F_GETFL, 0),
@@ -342,9 +374,16 @@ void CConnectionManager::manage(
             ::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr),
              "kevent");
 
+        auto handle = THandle::create();
+        handle->acceptor = acceptor;
+        handle->uri = uri;
+        handle->fd = fd;
+
         {
             LOCK_SCOPE();
-            m_map_fd_acceptor[fd] = acceptor;
+            LOGT << "add acceptor, fd: " << fd << ", uri: " << uri;
+            m_map_fd_handle[fd] = handle;
+            m_map_uri_fd[handle->uri] = fd;
         }
 
         // wakeKEvent(0);
@@ -359,14 +398,14 @@ void CConnectionManager::manage(
 std::vector<int> CConnectionManager::connect(
     URI::TSharedPtr
         const &uri,
-    bool
-        const &is_writer)
+    IContextActions::TStreamType
+        const &stream_type)
 {
     std::vector<int> fds;
 
     if (uri->getProtocol() == URI::TProtocol::PROCESS) {
-        int stdin_pipe[2]  = {-1, -1};
-        int stdout_pipe[2] = {-1, -1};
+        int stdin_pipe[2]  = { -1, -1 };
+        int stdout_pipe[2] = { -1, -1 };
 
         // pipes
         assertOK(pipe(stdin_pipe),  "pipe stdin");
@@ -415,10 +454,8 @@ std::vector<int> CConnectionManager::connect(
 
         // EV_SET(&event, fds[THandleType::READER], EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, udata);
         // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent READER");
-
         // EV_SET(&event, fds[THandleType::WRITER], EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, udata);
         // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent WRITER");
-
         // EV_SET(&event, static_cast<intptr_t>(pid), EVFILT_PROC, EV_ADD, NOTE_EXIT, 0, udata);
         // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent PROC");
 
@@ -427,7 +464,7 @@ std::vector<int> CConnectionManager::connect(
 
     if (uri->getProtocol() == URI::TProtocol::FILE) {
         // struct kevent event;
-        if (is_writer) {
+        if (stream_type == IContextActions::TStreamType::WRITER) {
             auto fd = assertOK(::open(uri->getPath().c_str(), O_WRONLY | O_CREAT), "open file WRONLY");
             assertOK(::flock(fd, LOCK_EX | LOCK_NB), "flock");
             fds = { fd };
@@ -443,7 +480,7 @@ std::vector<int> CConnectionManager::connect(
 
     int domain      = -1;
     int type        = -1;
-    int protocol    = 0;
+    int protocol    =  0;
 
     struct sockaddr_storage address {};
     socklen_t address_length = 0;
@@ -507,14 +544,16 @@ std::vector<int> CConnectionManager::connect(
         type        = SOCK_STREAM;
         protocol    = IPPROTO_TCP;
 
-        auto* address_in        = reinterpret_cast<sockaddr_in*>(&address);
+        auto *address_in        = reinterpret_cast<sockaddr_in *>(&address);
         address_in->sin_family  = AF_INET;
         address_in->sin_port    = htons(uri->getPort() ? 0 : static_cast<uint16_t>(uri->getProtocol()));
 
         if (auto ipv4 = uri->getIPv4()) {
             address_in->sin_addr.s_addr =
-                (ipv4->at(0) << 24) | (ipv4->at(1) << 16) |
-                (ipv4->at(2) << 8)  |  ipv4->at(3);
+                (ipv4->at(0) << 24) |
+                (ipv4->at(1) << 16) |
+                (ipv4->at(2) <<  8) |
+                 ipv4->at(3);
         } else {
             address_in->sin_addr.s_addr = htonl(INADDR_ANY);
         }
@@ -535,10 +574,8 @@ std::vector<int> CConnectionManager::connect(
         assertOK(result, "connect");
 
     // struct kevent event;
-
     // EV_SET(&event, fd, EVFILT_READ, EV_ADD | (type == SOCK_DGRAM ? EV_CLEAR : 0), 0, 0, nullptr);
     // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent READ");
-
     // if (result < 0 && errno == EINPROGRESS) {
     //     EV_SET(&event, fd, EVFILT_WRITE, EV_ADD | EV_ONESHOT, 0, 0, nullptr);
     //     assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent WRITE (pending)");
@@ -565,7 +602,7 @@ URI::TSharedPtr CConnectionManager::getPeerURI(sockaddr_storage const &address) 
     uint16_t port;
 
     if (address.ss_family == AF_INET) {
-        const auto* in = reinterpret_cast<const sockaddr_in*>(&address);
+        auto const *in = reinterpret_cast<const sockaddr_in*>(&address);
         inet_ntop(AF_INET, &in->sin_addr, ip, sizeof(ip));
         port = ntohs(in->sin_port);
         return URI::create("tcp://" + string(ip) + ":" + convert<string>(port));
@@ -574,7 +611,7 @@ URI::TSharedPtr CConnectionManager::getPeerURI(sockaddr_storage const &address) 
     else
 
     if (address.ss_family == AF_INET6) {
-        const auto* in6 = reinterpret_cast<const sockaddr_in6*>(&address);
+        auto const *in6 = reinterpret_cast<const sockaddr_in6*>(&address);
         inet_ntop(AF_INET6, &in6->sin6_addr, ip, sizeof(ip));
         port = ntohs(in6->sin6_port);
         return URI::create("tcp://[" + string(ip) + "]:" + convert<string>(port));
@@ -591,9 +628,10 @@ URI::TSharedPtr CConnectionManager::getPeerURI(int const &fd) {
     assertOK(::getpeername(fd, reinterpret_cast<sockaddr*>(&address), &address_length), "getpeername");
 
     if (address.ss_family == AF_INET) {
-        auto* address_in = reinterpret_cast<const sockaddr_in*>(&address);
+        auto *address_in = reinterpret_cast<const sockaddr_in *>(&address);
         char buffer[INET_ADDRSTRLEN];
-        const char* ip = inet_ntop(AF_INET, &address_in->sin_addr, buffer, sizeof(buffer));
+        const char *ip = inet_ntop(AF_INET, &address_in->sin_addr, buffer, sizeof(buffer));
+
         return URI::create(
             "tcp://" + std::string(ip ?: "0.0.0.0") +
             ":" + convert<std::string>(ntohs(address_in->sin_port)));
@@ -604,7 +642,7 @@ URI::TSharedPtr CConnectionManager::getPeerURI(int const &fd) {
     if (address.ss_family == AF_INET6) {
         auto *address_in6 = reinterpret_cast<const sockaddr_in6*>(&address);
         char buffer[INET6_ADDRSTRLEN];
-        const char* ip = inet_ntop(AF_INET6, &address_in6->sin6_addr, buffer, sizeof(buffer));
+        const char *ip = inet_ntop(AF_INET6, &address_in6->sin6_addr, buffer, sizeof(buffer));
         return URI::create(
             "tcp://[" + std::string(ip ?: "::1") +
             "]:" + convert<std::string>(ntohs(address_in6->sin6_port)));
@@ -651,59 +689,146 @@ URI::TSharedPtr CConnectionManager::getPeerURI(int const &fd) {
             "ipc://" + path + "?fd=" + convert<std::string>(fd));
     }
 
-    throw std::runtime_error("get peer error: unknown type of fd " + convert<std::string>(fd));
+    throw std::runtime_error(
+        "get peer error: unknown type of fd " + convert<std::string>(fd));
 }
 
 
 std::list<CConnectionManager::THandle::TSharedPtr>
-CConnectionManager::getHandles(std::vector<struct kevent> const &events) {
+CConnectionManager::getHandles(
+    std::vector<struct kevent>
+        const &events,
+    size_t
+        const &count)
+{
     std::list<CConnectionManager::THandle::TSharedPtr>
         result;
 
     LOCK_SCOPE();
 
-    for (auto const &event: events) {
-        if (event.filter == EVFILT_PROC)
+    for (size_t i = 0; i < count; i++) {
+        auto const &event = events[i];
+        if (event.filter == EVFILT_PROC || event.ident <= 0 || event.ident == DEFAULT_IDENT_WAKEUP)
             continue; // <---
 
-        auto const &fd = event.ident;
-        auto handle_info = THandle::create();
-
-        auto fd_uri  = m_map_fd_uri.find(fd);
-        if ( fd_uri == m_map_fd_uri.end()) {
-            LOGW << "connection manager: uri not found, not registered fd: " << fd;
-            ::close(fd);
+        auto fd_handle  = m_map_fd_handle.find(static_cast<int>(event.ident));
+        if ( fd_handle == m_map_fd_handle.end()) {
+            LOGW << "connection manager: get handle error: not registered fd: " << event.ident;
+            ::close(static_cast<int>(event.ident));
             continue; // <---
         } else {
-            handle_info->uri = fd_uri->second;
+            if (fd_handle->second->protocol) {
+                if (event.filter == EVFILT_READ)
+                    fd_handle->second->stream_type = IContextActions::TStreamType::READER;
+                if (event.filter == EVFILT_WRITE)
+                    fd_handle->second->stream_type = IContextActions::TStreamType::WRITER;
+            }
+            result.push_back(fd_handle->second);
         }
-
-        auto uri_protocol  = m_map_uri_protocol.find(handle_info->uri);
-        if ( uri_protocol == m_map_uri_protocol.end()) {
-            LOGW
-                << "connection manager: protocol not found by uri '" << handle_info->uri
-                << "' not registered fd: " << fd;
-            ::close(fd);
-            continue; // <---
-        } else {
-            handle_info->protocol = uri_protocol->second;
-        }
-
-        auto uri_context  = m_map_uri_context.find(handle_info->uri);
-        if ( uri_context == m_map_uri_context.end()) {
-            handle_info->context = m_map_uri_context[handle_info->uri] = CContext::create();
-        } else {
-            handle_info->context = uri_context->second;
-        }
-
-        result.push_back(handle_info);
     }
 
     return result; // ----->
+
+    // if (event.filter == EVFILT_PROC && (event.fflags & NOTE_EXIT)) {
+    //     // m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
+    //     // clean zombie
+    //     ::waitpid(static_cast<pid_t>(event.ident), nullptr, 0);
+    // }
 }
 
 
-CConnectionManager::CKEventRunnable::CKEventRunnable(CConnectionManager * const manager)
+void CConnectionManager::updateHandles(std::list<THandle::TSharedPtr> const &handles) {
+    LOCK_SCOPE();
+    for (auto const &handle: handles) {
+        m_map_fd_handle[handle->fd] = handle;
+        m_map_uri_fd[handle->uri] = handle->fd;
+    }
+}
+
+
+void CConnectionManager::updateHandles(
+    std::map<IProtocol::TSharedPtr, std::list<IContextActions::TAction> >
+        const &map_protocol_actions)
+{
+    std::vector<struct kevent> batch;
+
+    for(auto const &protocol_actions: map_protocol_actions) {
+        auto const &protocol = protocol_actions.first;
+        for (auto const &action: protocol_actions.second) {
+            if (action.action_type == IContextActions::TActionType::OPEN) {
+                manage(action.uri, protocol);
+                continue; // <---
+            }
+
+            // todo: optimize
+            int fd = -1;
+            {
+                LOCK_SCOPE();
+
+                auto uri_fd  = m_map_uri_fd.find(action.uri);
+                if ( uri_fd == m_map_uri_fd.end()) {
+                    throw std::runtime_error(
+                        "update handle error: fd not found by " +
+                        convert<string>(action.uri)); // ----->
+                } else {
+                    fd = uri_fd->second;
+                }
+
+                if (action.action_type == IContextActions::TActionType::CLOSE) {
+                    ::close(fd);
+                    m_map_fd_handle.erase(fd);
+                    m_map_uri_fd.erase(action.uri);
+                    continue; // <---
+                }
+            }
+
+            short filter = 0;
+            if (action.stream_type == IContextActions::TStreamType::READER)
+                filter = EVFILT_READ;
+            if (action.stream_type == IContextActions::TStreamType::WRITER)
+                filter = EVFILT_WRITE;
+
+            short flags = 0;
+            if (action.action_type == IContextActions::TActionType::SUBSCRIBE)
+                flags = EV_ADD | EV_CLEAR;
+            if (action.action_type == IContextActions::TActionType::UNSUBSCRIBE)
+                flags = EV_DELETE;
+
+            struct kevent event;
+            EV_SET(&event, fd, filter, flags, 0, 0, nullptr);
+            batch.push_back(event);
+
+            LOGT << "EV_SET: " << fd << " " << filter << " " << flags;
+        }
+    }
+
+    if (batch.empty())
+        return; // ----->
+
+    assertOK(
+        ::kevent(m_kqueue, batch.data(), static_cast<int>(batch.size()), nullptr, 0, nullptr),
+         "kevent actions batch");
+}
+
+
+void CConnectionManager::releaseHandle(THandle::TSharedPtr const &handle) {
+    LOCK_SCOPE();
+    for (auto fd_handle = m_map_fd_handle.begin(); fd_handle != m_map_fd_handle.end(); ) {
+        if (fd_handle->second == handle) {
+            fd_handle = m_map_fd_handle.erase(fd_handle);
+            ::close(fd_handle->first);
+        } else {
+            fd_handle++;
+        }
+    }
+
+    m_map_uri_fd.erase(handle->uri);
+}
+
+
+CConnectionManager::CKEventRunnable::CKEventRunnable(
+    CConnectionManager
+        * const manager)
 :
     m_manager(manager)
 {}
@@ -728,31 +853,21 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
             kevent(
                 kqueue, nullptr, 0, triggered_events.data(),
                 static_cast<int>(triggered_events.size()), &timeout),
-           "kevent wait error");
+           "kevent waiting error");
 
         if (count == 0)
             continue;
 
-        auto handles = m_manager->getHandles(triggered_events);
+        std::list<CConnectionManager::THandle::TSharedPtr>
+            peers;
 
-        for (int i = 0; i < count; ++i) {
-            auto const &event = triggered_events[i];
+        std::map<IProtocol::TSharedPtr, std::list<IContextActions::TAction> >
+            map_protocol_actions;
 
-            LOGT << "event, ident: " << event.ident << ", filter: " << event.filter;
-
-            if (event.filter == EVFILT_USER && event.ident == DEFAULT_IDENT_WAKEUP) {
-                int code = static_cast<int>(event.data);
-                if (code == 1) {
-                    is_running = false;
-                    break;
-                }
-                continue;
-            }
-
-            // acceptor event
-            if (event.udata == reinterpret_cast<void *>(1)) {
-                std::vector<TTCPPeer::TSharedPtr> peers;
-
+        LOGT << "NEXT";
+        for (auto const &handle: m_manager->getHandles(triggered_events, count)) {
+            LOGT << "event handle: " << handle->uri << " " << handle->stream_type << ", fd: " << handle->fd;
+            if (handle->acceptor) {
                 while (true) {
                     sockaddr_storage
                         address {};
@@ -760,105 +875,158 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                         address_length = sizeof(address);
 
                     int peer_fd = ::accept(
-                        event.ident,
+                        handle->fd,
                         reinterpret_cast<struct sockaddr *>(&address),
                         &address_length);
 
                     if (peer_fd == -1) {
                         if (errno == EAGAIN || errno == EWOULDBLOCK)
-                            break;
+                            break; // --->
                         if (errno == EINTR)
-                            continue;
+                            continue; // <---
                         LOGW << "peer accept error: " << string(std::strerror(errno));
-                        break;
+                        break; // --->
                     }
 
-                    auto peer = TTCPPeer::create();
-                    peer->fd  = peer_fd;
-                    peer->uri = getPeerURI(address);
+                    try {
+                        auto peer_handle = CConnectionManager::THandle::create();
+                        peer_handle->fd         = peer_fd;
+                        peer_handle->uri        = getPeerURI(address);
+                        peer_handle->protocol   = handle->acceptor->accept(peer_handle->uri);
+                        peer_handle->context    = CContext::create();
 
-                    struct kevent peer_event;
-                    EV_SET(&peer_event, peer_fd, EVFILT_READ, EV_ADD | EV_CLEAR,
-                        0, 0, reinterpret_cast<void *>(static_cast<uintptr_t>(peer_fd)));
+                        auto peer_event         = TEvent::create();
+                        peer_event->context     = peer_handle->context;
+                        peer_event->uri         = peer_handle->uri;
+                        peer_event->operation   = TEvent::TOperation::OPEN;
 
-                    if (::kevent(kqueue, &peer_event, 1, nullptr, 0, nullptr) == -1) {
-                        LOGE << "kevent registration peer fd " << peer_fd << " error: " << string(std::strerror(errno));
-                        ::close(peer_fd);
-                        continue;
+                        // handle peer
+                        bool result = false;
+                        try {
+                            result = peer_handle->protocol->control(peer_event);
+                        } catch (std::exception const &e) {
+                            LOGE << "peer " << peer_handle->uri << " opening error: " << e.what();
+                        } catch (...) {
+                            LOGE << "peer " << peer_handle->uri << " opening unknown error";
+                        }
+
+                        if (result) {
+                            // add peer fd to map
+                            auto &target_list = map_protocol_actions[peer_handle->protocol];
+                            target_list.splice(target_list.end(), peer_handle->context->getActions());
+                        } else {
+                            // close peer after accepting
+                            ::close(peer_handle->fd);
+                            continue; // <---
+                        }
+
+                        // struct kevent event;
+                        // EV_SET(&event, peer_fd, EVFILT_READ, EV_ADD | EV_CLEAR,
+                        //     0, 0, reinterpret_cast<void *>(static_cast<uintptr_t>(peer_fd)));
+
+                        // if (::kevent(kqueue, &event, 1, nullptr, 0, nullptr) == -1) {
+                        //     LOGE << "kevent registration peer fd " << peer_fd << " error: " << string(std::strerror(errno));
+                        //     ::close(peer_fd);
+                        //     continue; // <---
+                        // }
+
+                        peers.push_back(peer_handle);
+
+                    } catch (std::exception const &e) {
+                        LOGE << "accepting on " << handle->uri << " error: " << e.what();
+                        continue; // <---
+                    } catch (...) {
+                        LOGE << "accepting on " << handle->uri << " unknown error";
+                        continue; // <---
                     }
-
-                    peers.push_back(peer);
                 }
-
-                // m_manager->handleEvent(event.ident, std::move(peers));
-                continue;
             }
 
-            Buffer::TSharedPtr write_buffer;
-            // peer / client event
-            if (event.filter == EVFILT_READ) {
-                // drain loop until end, EV_CLEAR
-                while (true) {
+            if (handle->protocol) {
+                auto event      = TEvent::create();
+                event->context  = handle->context;
+                event->uri      = handle->uri;
+
+                if (handle->stream_type == IContextActions::TStreamType::READER) {
                     auto buffer = Buffer::create(DEFAULT_BUFFER_SIZE);
-                    ssize_t n = ::read(event.ident, buffer->data(), buffer->capacity());
+                    auto n      = ::read(handle->fd, buffer->data(), buffer->capacity());
+
+                    LOGT << "read, n: " << n;
 
                     if (n > 0) {
                         buffer->resize(n);
-                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::READ, buffer, 0);
+                        // handle->context->addBuffer(handle->uri, handle->stream_type, buffer);
+
+                        handle->context->addBuffer(handle->uri, IContextActions::TStreamType::READER, buffer);
+                        handle->context->addBuffer(handle->uri, IContextActions::TStreamType::WRITER, buffer);
+
+                        event->operation = TEvent::TOperation::READ;
                     }
 
                     else
 
                     if (n == 0) {
-                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
-                        break;
+                        event->operation = TEvent::TOperation::CLOSE;
                     }
 
                     else
 
-                    if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                        // write_buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::READ_EOF, nullptr, 0);
-                        break;
-                    } else {
-                        buffer = Buffer::create(std::strerror(errno));
-                        // m_manager->handleEvent(event.ident, TEvent::TOperation::ERROR_, buffer, 0);
-                        break;
+                    {
+                        handle->context->addBuffer(handle->uri, handle->stream_type, Buffer::create(std::strerror(errno)));
+                        event->operation = TEvent::TOperation::ERROR_;
                     }
                 }
-            }
 
-            // else
+                if (handle->stream_type == IContextActions::TStreamType::WRITER) {
+                    auto buffers= handle->context->getBuffers(handle->uri, IContextActions::TStreamType::WRITER);
+                    auto buffer = assertExists(buffers.front(), "buffer to wrtie is empty");
+                    auto n      = ::write(handle->fd, buffer->data(), buffer->size());
 
-            if (event.filter == EVFILT_WRITE || write_buffer) {
-                if (event.flags & EV_EOF) {
-                    // m_manager->handleEvent(event.ident, TEvent::TOperation::ERROR_, nullptr, 0);
+                    LOGT << "wrote, n: " << n;
+
+                    if (n > 0) {
+                        handle->context->setPosition(handle->uri, IContextActions::TStreamType::WRITER, n);
+                        event->operation = TEvent::TOperation::WRITE;
+                    }
+
+                    else
+
+                    if (n == 0) {
+                        event->operation = TEvent::TOperation::CLOSE;
+                    }
+
+                    else
+
+                    {
+                        handle->context->addBuffer(
+                            handle->uri,
+                            handle->stream_type,
+                            Buffer::create(std::strerror(errno)));
+                        event->operation = TEvent::TOperation::ERROR_;
+                    }
+                }
+
+                bool result = false;
+                try {
+                    result = handle->protocol->control(event);
+                } catch (std::exception const &e) {
+                    LOGE << e.what();
+                } catch (...) {
+                    LOGE << "unknown error";
+                }
+
+                if (result) {
+                    auto &target_list = map_protocol_actions[handle->protocol];
+                    target_list.splice(target_list.end(), handle->context->getActions());
                 } else {
-                    Buffer::TSharedPtr buffer;
-
-                    if (write_buffer) {
-                        buffer = write_buffer;
-                    } else {
-                        // buffer = m_manager->handleEvent(event.ident, TEvent::TOperation::WRITE, nullptr, 0);
-
-                        ssize_t n = 0;
-
-                        if  (buffer)
-                            n = ::write(event.ident, buffer->data(), buffer->size());
-
-                        LOGT << "wrote, n: " << n;
-                    }
-                    // m_manager->handleEvent(event.ident, TEvent::TOperation::WRITE, nullptr, n);
-
+                    m_manager->releaseHandle(handle);
                 }
             }
 
-            else
-
-            if (event.filter == EVFILT_PROC && (event.fflags & NOTE_EXIT)) {
-                // m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
-                // clean zombie
-                ::waitpid(static_cast<pid_t>(event.ident), nullptr, 0);
-            }
+            // update maps
+            m_manager->updateHandles(peers);
+            // update kqueue
+            m_manager->updateHandles(map_protocol_actions);
         }
     }
 }
@@ -874,225 +1042,3 @@ void CConnectionManager::CKEventRunnable::finalize() {}
 
 
 #endif // MACOS_PLATFORM
-
-
-// IContextActions::TSharedPtr CConnectionManager::handleEvent(
-//     int const &fd,
-//     TEvent::TOperation
-//         const &operation,
-//     Buffer::TSharedPtr
-//         const &read_buffer,
-//     size_t
-//         const &written_bytes_count)
-// {
-//     LOGT << "handleEvent, fd: " << fd
-//          << ", operation: " << operation
-//          << ", buffer: " << read_buffer;
-
-//     try {
-//         auto handle_info = getHandles(fd);
-
-//         URI::TSharedPtr
-//             uri = handle_info->uri;
-//         IProtocol::TSharedPtr
-//             protocol = handle_info->protocol;
-//         IContextActions::TSharedPtr
-//             context = handle_info->context;
-
-//         auto event = TEvent::create();
-//         event->operation = operation;
-//         event->uri = uri;
-//         event->context = context;
-
-//         if (operation == TEvent::TOperation::READ && read_buffer) {
-//             context->addBuffer(uri, IContext::TStreamType::READER, read_buffer);
-//             context->addBuffer(uri, IContext::TStreamType::WRITER, read_buffer);
-//         }
-//         context->setPosition(uri, IContext::TStreamType::WRITER, written_bytes_count);
-
-//         // update context pipes by protocol
-//         auto result = protocol->control(event);
-
-//         auto buffers = context->getBuffers(uri, IContext::TStreamType::WRITER);
-//         Buffer::TSharedPtr write_buffer = buffers.empty() ? nullptr : buffers.back();
-
-//         if (!result) {
-//             LOGT << "destroy context, result: " << result << ", event: " << event;
-//             event->context->delPipe("");
-//         }
-
-//         auto actions = context->getActions();
-//         LOGT << "actions: " << actions;
-
-//         if (actions.empty())
-//             return write_buffer; // ----->
-
-//         std::unordered_map<URI::TSharedPtr, int>
-//             map_uri_new_fd;
-
-//         for (auto const &action : actions) {
-//             if (action.action_type == IContextActions::TActionType::OPEN) {
-//                 try {
-//                     bool is_writer = (action.stream_type == IContextActions::TStreamType::WRITER);
-//                     auto new_fds = connect(action.uri, is_writer);
-
-//                     if (!new_fds.empty()) {
-//                         int primary_fd = new_fds[0];
-//                         map_uri_new_fd[action.uri] = primary_fd;
-//                         m_map_uri_fd[action.uri] = new_fds;
-//                     }
-//                 } catch (std::exception const &e) {
-//                     LOGE << "OPEN failed for " << action.uri << ": " << e.what();
-//                 }
-//             }
-
-//             else
-
-//             if (action.action_type == IContextActions::TActionType::CLOSE) {
-//                 auto uri_fd_it = m_map_uri_fd.find(action.uri);
-//                 if (uri_fd_it != m_map_uri_fd.end()) {
-//                     for (int old_fd : uri_fd_it->second) {
-//                         ::close(old_fd);
-//                         m_map_fd_uri.erase(old_fd);
-//                     }
-//                     m_map_uri_fd.erase(uri_fd_it);
-//                 }
-//             }
-//         }
-
-//             // {
-//             //     for (int new_fd : new_fds) {
-//             //         m_map_fd_uri[new_fd] = action.uri;
-//             //     }
-//             // }
-
-//         // === 8. Проход 2: Обрабатываем SUBSCRIBE / UNSUBSCRIBE (строят kevent batch) ===
-//         std::vector<struct kevent> batch;
-//         batch.reserve(actions.size());
-
-//         {
-//             LOCK_SCOPE();
-//             for (auto const &action : actions) {
-//                 if (action.action_type != IContextActions::TActionType::SUBSCRIBE &&
-//                     action.action_type != IContextActions::TActionType::UNSUBSCRIBE)
-//                 {
-//                     continue;
-//                 }
-
-//                 auto uri_fd_it = m_map_uri_fd.find(action.uri);
-
-//                 // КРИТИЧЕСКАЯ ЛОГИКА: Если у URI больше 1 FD — это процесс.
-//                 // Процесс уже полностью подписан (READ + WRITE) при создании через connect().
-//                 // Менять подписку с reader на writer и наоборот для него нет смысла.
-//                 if (uri_fd_it != m_map_uri_fd.end() && uri_fd_it->second.size() > 1) {
-//                     LOGT << "skip subscribe/unsubscribe for process uri (multiple FDs): " << action.uri << " fds: " << uri_fd_it->second;
-//                     continue;
-//                 }
-
-//                 // Ищем целевой FD: сначала в новых (от OPEN в этом же батче), потом в мапе
-//                 int target_fd = -1;
-//                 auto new_fd_it = map_uri_new_fd.find(action.uri);
-//                 if (new_fd_it != map_uri_new_fd.end()) {
-//                     target_fd = new_fd_it->second;
-//                 } else if (uri_fd_it != m_map_uri_fd.end() && !uri_fd_it->second.empty()) {
-//                     target_fd = uri_fd_it->second[0];
-//                 }
-
-//                 if (target_fd < 0) {
-//                     LOGW << "FD not found for action on " << action.uri;
-//                     continue;
-//                 }
-
-//                 uint16_t filter =
-//                     (action.stream_type == IContextActions::TStreamType::READER)
-//                         ? EVFILT_READ
-//                         : EVFILT_WRITE;
-
-//                 auto &ev = batch.emplace_back();
-//                 if (action.action_type == IContextActions::TActionType::SUBSCRIBE) {
-//                     EV_SET(&ev, target_fd, filter, EV_ADD | EV_CLEAR, 0, 0, uri.get());
-//                     m_map_fd_uri[target_fd] = action.uri;
-//                 } else { // UNSUBSCRIBE
-//                     EV_SET(&ev, target_fd, filter, EV_DELETE, 0, 0, nullptr);
-//                     m_map_fd_uri.erase(target_fd);
-//                 }
-//             }
-//         }
-
-//         // === 9. Атомарный вызов kevent batch ===
-//         if (!batch.empty()) {
-//             assertOK(
-//                 kevent(m_kqueue, batch.data(), static_cast<int>(batch.size()), nullptr, 0, nullptr),
-//                "kevent batch"
-//             );
-//         }
-
-//         LOGT << "handle event, write_buffer: " << write_buffer;
-//         return write_buffer;
-
-//     } catch (std::exception const &e) {
-//         throw std::runtime_error(
-//             "handle event " + convert<std::string>(operation) +
-//             " fd " + convert<std::string>(fd) + " error: " + e.what());
-//     }
-// }
-
-
-// IContextActions::TSharedPtr CConnectionManager::handleEvent(
-//     int const &acceptor_fd,
-//     std::vector<TTCPPeer::TSharedPtr>
-//         const &peers)
-// {
-//     IAcceptor::TSharedPtr
-//         acceptor;
-
-//     LOGT << "handleEvent, acceptor fd: " << acceptor_fd;
-
-//     try {
-//         {
-//             LOCK_SCOPE();
-
-//             auto fd_acceptor  = m_map_fd_acceptor.find(acceptor_fd);
-//             if  (fd_acceptor == m_map_fd_acceptor.end()) {
-//                 LOGW << "connection manager, not registered acceptor fd: " << acceptor_fd;
-//                 ::close(acceptor_fd);
-//                 return;
-//             } else {
-//                 acceptor = fd_acceptor->second;
-//             }
-//         }
-
-//         for(auto const &peer: peers) {
-//             auto peer_protocol = acceptor->accept(peer->uri);
-//             if (!peer_protocol)
-//                 continue;
-
-//             auto context = CContext::create();
-//             {
-//                 auto event = TEvent::create();
-//                 event->uri = peer->uri;
-//                 event->operation = TEvent::TOperation::OPEN;
-//                 event->context = context;
-
-//                 peer_protocol->control(event);
-//                 auto actions = std::dynamic_pointer_cast<IContextActions>(event->context)->getActions();
-//                 // todo: connect uris if uri != peer uri
-//             }
-
-//             std::vector<int> fds;
-//             fds = { peer->fd };
-//             {
-//                 LOCK_SCOPE();
-
-//                 m_map_fd_uri[peer->fd]  = peer->uri;
-//                 m_map_uri_fd[peer->uri] = fds;
-//                 m_map_uri_protocol[peer->uri] = peer_protocol;
-//                 m_map_uri_context [peer->uri] = context;
-//             }
-//         }
-//     } catch (std::exception const &e) {
-//         throw std::runtime_error(
-//             "handle acceptor event fd " +
-//             convert<string>(acceptor_fd) + " error: " + e.what());
-//     }
-// }

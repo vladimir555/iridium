@@ -19,20 +19,21 @@ class CTestProtocol: public IProtocol {
 public:
     DEFINE_IMPLEMENTATION(CTestProtocol);
     CTestProtocol() = default;
+
     bool control(TEvent::TSharedPtr const &event) override {
         static std::string const DEFAULT_PIPE_NAME = "default";
         LOGT << "event: " << event;
 
         if (event->operation == TEvent::TOperation::OPEN) {
-            LOGT << 1;
             event->context->setPipe(DEFAULT_PIPE_NAME, event->uri, nullptr);
             return true;
         }
 
-        if (checkOneOf(event->operation, TEvent::TOperation::READ_EOF, TEvent::TOperation::READ)) {
-            LOGT << 2 << " " <<
-            event->context->getBuffers(event->uri, IContext::TStreamType::READER) << " -> " <<
-            event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
+        if (event->operation == TEvent::TOperation::READ) {
+            LOGT <<
+                event->operation << ": " <<
+                event->context->getBuffers(event->uri, IContext::TStreamType::READER) << " -> " <<
+                event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
 
             event->context->swapPipe(event->uri);
             return true;
@@ -44,6 +45,9 @@ public:
             return false;
         }
 
+        if (event->operation == TEvent::TOperation::CLOSE)
+            return false;
+
         return true;
     }
 };
@@ -53,6 +57,7 @@ class CTestAcceptor: public IAcceptor {
 public:
     DEFINE_IMPLEMENTATION(CTestAcceptor);
     CTestAcceptor() = default;
+
     IProtocol::TSharedPtr accept(URI::TSharedPtr const &uri) override {
         LOGT << "accept: " << uri;
         auto protocol = CTestProtocol::create();
