@@ -80,9 +80,9 @@ public:
     DEFINE_ENUM(
         TActionType,
         OPEN,
-        CLOSE,
         SUBSCRIBE,
-        UNSUBSCRIBE
+        UNSUBSCRIBE,
+        CLOSE
     );
     struct TAction {
         URI::TSharedPtr

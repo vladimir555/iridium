@@ -359,44 +359,46 @@ std::list<CContext::TAction> CContext::getActions() {
     };
 
     std::unordered_map<TPipeEnd, TActionNets, TPipeEndHash>
-        map_pipe_end_nets;
+        map_pipe_end_count;
 
     for (auto const &action: m_actions) {
         TPipeEnd pe { action.stream_type, action.uri };
-        auto &nets = map_pipe_end_nets[pe];
+        auto &count = map_pipe_end_count[pe];
 
         if (action.action_type == TActionType::OPEN)
-            nets.open_close++;
+            count.open_close++;
         else
         if (action.action_type == TActionType::CLOSE)
-            nets.open_close--;
+            count.open_close--;
         else
         if (action.action_type == TActionType::SUBSCRIBE)
-            nets.subscribe_unsubscribe++;
+            count.subscribe_unsubscribe++;
         else
         if (action.action_type == TActionType::UNSUBSCRIBE)
-            nets.subscribe_unsubscribe--;
+            count.subscribe_unsubscribe--;
     }
 
     std::list<TAction> optimized_actions;
 
-    // open / close
-    for (auto const &[pipe_end, nets]: map_pipe_end_nets) {
-        if (nets.open_close > 0)
-            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::OPEN } );
+    for (auto const &pipe_end_count: map_pipe_end_count) {
+        if (pipe_end_count.second.open_close > 0)
+            optimized_actions.push_back( { pipe_end_count.first.uri, pipe_end_count.first.stream_type, TActionType::OPEN } );
         else
-        if (nets.open_close < 0)
-            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::CLOSE } );
+        if (pipe_end_count.second.open_close < 0)
+            optimized_actions.push_back( { pipe_end_count.first.uri, pipe_end_count.first.stream_type, TActionType::CLOSE } );
+
+        if (pipe_end_count.second.subscribe_unsubscribe > 0)
+            optimized_actions.push_back( { pipe_end_count.first.uri, pipe_end_count.first.stream_type, TActionType::SUBSCRIBE } );
+        else
+        if (pipe_end_count.second.subscribe_unsubscribe < 0)
+            optimized_actions.push_back( { pipe_end_count.first.uri, pipe_end_count.first.stream_type, TActionType::UNSUBSCRIBE } );
     }
 
-    // subscribe / unsubscribe
-    for (auto const &[pipe_end, nets]: map_pipe_end_nets) {
-        if (nets.subscribe_unsubscribe > 0)
-            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::SUBSCRIBE } );
-        else
-        if (nets.subscribe_unsubscribe < 0)
-            optimized_actions.push_back( { pipe_end.uri, pipe_end.stream_type, TActionType::UNSUBSCRIBE } );
-    }
+    optimized_actions.sort(
+        [] (TAction const &a, TAction const &b) {
+            return static_cast<int>(a.action_type) < static_cast<int>(b.action_type);
+        }
+    );
 
     m_actions.clear();
 

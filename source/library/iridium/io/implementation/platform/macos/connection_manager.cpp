@@ -737,11 +737,19 @@ CConnectionManager::getHandles(
 }
 
 
-void CConnectionManager::updateHandles(std::list<THandle::TSharedPtr> const &handles) {
+void CConnectionManager::updateHandles(
+    std::list<THandle::TSharedPtr>
+        const &handles)
+{
     LOCK_SCOPE();
     for (auto const &handle: handles) {
-        m_map_fd_handle[handle->fd] = handle;
-        m_map_uri_fd[handle->uri] = handle->fd;
+        if (handle->protocol) {
+            m_map_fd_handle[handle->fd] = handle;
+            m_map_uri_fd[handle->uri] = handle->fd;
+        } else {
+            m_map_fd_handle.erase(handle->fd);
+            m_map_uri_fd.erase(handle->uri);
+        }
     }
 }
 
@@ -751,6 +759,7 @@ void CConnectionManager::updateHandles(
         const &map_protocol_actions)
 {
     std::vector<struct kevent> batch;
+    std::list< std::pair<int, URI::TSharedPtr> > fd_uri_list_to_close;
 
     for(auto const &protocol_actions: map_protocol_actions) {
         auto const &protocol = protocol_actions.first;
@@ -775,9 +784,7 @@ void CConnectionManager::updateHandles(
                 }
 
                 if (action.action_type == IContextActions::TActionType::CLOSE) {
-                    ::close(fd);
-                    m_map_fd_handle.erase(fd);
-                    m_map_uri_fd.erase(action.uri);
+                    fd_uri_list_to_close.push_back( { fd, action.uri} );
                     continue; // <---
                 }
             }
@@ -808,6 +815,13 @@ void CConnectionManager::updateHandles(
     assertOK(
         ::kevent(m_kqueue, batch.data(), static_cast<int>(batch.size()), nullptr, 0, nullptr),
          "kevent actions batch");
+
+    LOCK_SCOPE();
+    for (auto const &fd_uri: fd_uri_list_to_close) {
+        ::close(fd_uri.first);
+        m_map_fd_handle.erase(fd_uri.first);
+        m_map_uri_fd.erase(fd_uri.second);
+    }
 }
 
 
@@ -823,6 +837,7 @@ void CConnectionManager::releaseHandle(THandle::TSharedPtr const &handle) {
     }
 
     m_map_uri_fd.erase(handle->uri);
+    LOGT << "RELEASE PROTOCOL";
 }
 
 
@@ -859,7 +874,7 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
             continue;
 
         std::list<CConnectionManager::THandle::TSharedPtr>
-            peers;
+            handles_to_update;
 
         std::map<IProtocol::TSharedPtr, std::list<IContextActions::TAction> >
             map_protocol_actions;
@@ -920,18 +935,7 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                             continue; // <---
                         }
 
-                        // struct kevent event;
-                        // EV_SET(&event, peer_fd, EVFILT_READ, EV_ADD | EV_CLEAR,
-                        //     0, 0, reinterpret_cast<void *>(static_cast<uintptr_t>(peer_fd)));
-
-                        // if (::kevent(kqueue, &event, 1, nullptr, 0, nullptr) == -1) {
-                        //     LOGE << "kevent registration peer fd " << peer_fd << " error: " << string(std::strerror(errno));
-                        //     ::close(peer_fd);
-                        //     continue; // <---
-                        // }
-
-                        peers.push_back(peer_handle);
-
+                        handles_to_update.push_back(peer_handle);
                     } catch (std::exception const &e) {
                         LOGE << "accepting on " << handle->uri << " error: " << e.what();
                         continue; // <---
@@ -1015,16 +1019,18 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                     LOGE << "unknown error";
                 }
 
-                if (result) {
-                    auto &target_list = map_protocol_actions[handle->protocol];
-                    target_list.splice(target_list.end(), handle->context->getActions());
-                } else {
-                    m_manager->releaseHandle(handle);
+                if (!result) {
+                    // delete all pipes
+                    handle->context->delPipe("");
+                    handle->protocol.reset();
                 }
+
+                auto &target_list = map_protocol_actions[handle->protocol];
+                target_list.splice(target_list.end(), handle->context->getActions());
             }
 
             // update maps
-            m_manager->updateHandles(peers);
+            m_manager->updateHandles(handles_to_update);
             // update kqueue
             m_manager->updateHandles(map_protocol_actions);
         }
