@@ -424,49 +424,69 @@ std::vector<int> CConnectionManager::connect(
         int stdin_pipe[2]  = { -1, -1 };
         int stdout_pipe[2] = { -1, -1 };
 
-        // pipes
+#ifdef LINUX_PLATFORM
+        assertOK(pipe2 (stdin_pipe, O_CLOEXEC | O_NONBLOCK), "pipe stdin");
+        assertOK(pipe2(stdout_pipe, O_CLOEXEC | O_NONBLOCK), "pipe stdout");
+#endif
+
+#ifdef MACOS_PLATFORM
         assertOK(pipe(stdin_pipe),  "pipe stdin");
         assertOK(pipe(stdout_pipe), "pipe stdout");
-
         // non-blocking
         static auto setNonblock = [] (int ident) {
-            int flags = assertOK(
+            int flags_fd = assertOK(
+                ::fcntl(ident, F_GETFD, 0),
+                 "fcntl GETFD");
+            assertOK(
+                ::fcntl(ident, F_SETFD, flags_fd | FD_CLOEXEC),
+                 "fcntl SETFD FD_CLOEXEC");
+            int flags_fl = assertOK(
                 ::fcntl(ident, F_GETFL, 0),
                  "fcntl GETFL");
             assertOK(
-                ::fcntl(ident, F_SETFL, flags | O_NONBLOCK),
+                ::fcntl(ident, F_SETFL, flags_fl | O_NONBLOCK),
                  "fcntl SETFL O_NONBLOCK");
         };
 
         setNonblock(stdin_pipe[1]);   // Parent -> Child STDIN
         setNonblock(stdout_pipe[0]);  // Parent <- Child STDOUT
+#endif
 
         LOGT << "::execlp(\"" << uri->getPath()
         << "\", \"" <<  uri->getHost()
         << "\", \"" << uri->getArguments()
         << "\", nullptr);";
 
+        std::vector<char const *> argv;
+        // argv[0]
+        argv.push_back(uri->getPath().c_str());
+        for (auto const &arg: split(uri->getArguments(), " "))
+            argv.push_back(arg.c_str());
+        argv.push_back(nullptr);
+
         // fork
         pid_t pid = assertOK(::fork(), "fork");
 
         if (pid == 0) {
             // ----- CHILD
-            ::close(stdin_pipe[1]);
-            ::close(stdout_pipe[0]);
-
             assertOK(::dup2(stdin_pipe[0],  STDIN_FILENO),  "dup2 stdin");
             assertOK(::dup2(stdout_pipe[1], STDOUT_FILENO), "dup2 stdout");
             assertOK(::dup2(STDOUT_FILENO, STDERR_FILENO),  "dup2 stderr");
 
             ::close(stdin_pipe[0]);
+            ::close(stdin_pipe[1]);
+            ::close(stdout_pipe[0]);
             ::close(stdout_pipe[1]);
 
-            ::execlp(
-                uri->getPath().c_str(),
-                uri->getPath().c_str(),
-                uri->getArguments().empty() ? nullptr :
-                uri->getArguments().c_str(),  nullptr);
-            string error = std::strerror(errno);
+            ::signal(SIGPIPE, SIG_DFL);
+            ::signal(SIGSEGV, SIG_DFL);
+            ::signal(SIGABRT, SIG_DFL);
+            ::signal(SIGFPE,  SIG_DFL);
+            ::signal(SIGILL,  SIG_DFL);
+
+            ::execvp(uri->getPath().c_str(), const_cast<char * const *>(argv.data()));
+
+            auto error = string(std::strerror(errno)) + "\n";
             ::write(STDOUT_FILENO, error.c_str(), error.size());
             _exit(127);
             // -----
