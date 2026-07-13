@@ -142,18 +142,26 @@ assertOne(TContainer const &values, char const * const error) {
 }
 
 
-template<typename T, typename TException>
-[[nodiscard]] std::decay_t<T> assertComplete(T &&values, TException const &exception) {
+template<typename TContainer, typename TException>
+auto assertComplete(TContainer const &values, TException const &exception) {
+    static_assert(std::is_base_of_v<std::exception, TException>, "TException must inherit from std::exception");
+
     if (values.size() > 0)
-        return std::move(values);
+        return values; // ----->
     else
-        throw exception;
+        throw exception; // ----->
 }
 
 
-template<typename T>
-[[nodiscard]] std::decay_t<T> assertComplete(T &&values, std::string const &error) {
-    return assertComplete(std::forward<T>(values), std::runtime_error(error));
+template<typename TContainer>
+auto assertComplete(TContainer const &values, std::string const &error) {
+    return assertComplete(values, std::runtime_error(error));
+}
+
+
+template<typename TContainer>
+auto assertComplete(TContainer const &values, char const * const error) {
+    return assertComplete(values, std::runtime_error(error));
 }
 
 

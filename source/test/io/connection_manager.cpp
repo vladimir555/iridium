@@ -15,10 +15,9 @@ using iridium::threading::sleep;
 using iridium::checkOneOf;
 
 
-class CTestProtocol: public IProtocol {
+class CTestPeerEchoProtocol: public IProtocol {
 public:
-    DEFINE_IMPLEMENTATION(CTestProtocol);
-    CTestProtocol() = default;
+    DEFINE_IMPLEMENTATION(CTestPeerEchoProtocol);
 
     bool control(TEvent::TSharedPtr const &event) override {
         static std::string const DEFAULT_PIPE_NAME = "default";
@@ -56,11 +55,10 @@ public:
 class CTestAcceptor: public IAcceptor {
 public:
     DEFINE_IMPLEMENTATION(CTestAcceptor);
-    CTestAcceptor() = default;
 
     IProtocol::TSharedPtr accept(URI::TSharedPtr const &uri) override {
         LOGT << "accept: " << uri;
-        auto protocol = CTestProtocol::create();
+        auto protocol = CTestPeerEchoProtocol::create();
         return protocol;
     }
 };
@@ -71,5 +69,39 @@ TEST(echo) {
     connection_manager->initialize();
     connection_manager->manage(URI::create("tcp://127.0.0.1:55550"), CTestAcceptor::create());
     sleep(5000);
+    connection_manager->finalize();
+}
+
+
+class CTestProcessProtocol: public IProtocol {
+public:
+    DEFINE_IMPLEMENTATION(CTestProcessProtocol);
+
+    bool control(TEvent::TSharedPtr const &event) override {
+        static std::string const DEFAULT_PIPE_NAME = "default";
+        LOGT << "event: " << event;
+
+        if (event->operation == TEvent::TOperation::OPEN) {
+            event->context->setPipe(DEFAULT_PIPE_NAME, event->uri, nullptr);
+            return true;
+        }
+
+        if (event->operation == TEvent::TOperation::READ) {
+            LOGT <<
+                event->operation << ": " <<
+                event->context->getBuffers(event->uri, IContext::TStreamType::READER) << " -> " <<
+                event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
+        }
+
+        return false;
+    }
+};
+
+
+TEST(process) {
+    auto connection_manager = CConnectionManager::create();
+    connection_manager->initialize();
+    connection_manager->manage(URI::create("process:///bin/ls"), CTestProcessProtocol::create());
+    sleep(500);
     connection_manager->finalize();
 }

@@ -84,8 +84,8 @@ private:
             acceptor;
         IContextActions::TSharedPtr
             context;
-        int
-            fd = 0;
+        std::vector<int>
+            idents;
         IContextActions::TStreamType
             stream_type;
     };
@@ -97,8 +97,6 @@ private:
 
     static URI::TSharedPtr
         getPeerURI(sockaddr_storage const &address);
-    URI::TSharedPtr
-        getPeerURI(int const &fd);
 
     std::list<THandle::TSharedPtr>
         getHandles(std::vector<struct kevent> const &events, size_t const &count);
@@ -120,9 +118,10 @@ private:
     void wakeKEvent(int const &code);
 
     std::unordered_map<int, THandle::TSharedPtr>
-        m_map_fd_handle;
-    std::unordered_map<URI::TSharedPtr, int>
-        m_map_uri_fd;
+        m_map_ident_handle;
+    // std::vector<int> - { pid, stdin, stdout } or { fd }
+    std::unordered_map<URI::TSharedPtr, std::vector<int> >
+        m_map_uri_idents;
     threading::IThread::TSharedPtr
         m_thread;
     std::atomic<int>

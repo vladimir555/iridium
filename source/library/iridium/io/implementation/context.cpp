@@ -92,21 +92,20 @@ void CContext::setPipe(
     URI::TSharedPtr reader_uri,
     URI::TSharedPtr writer_uri)
 {
-    LOGT << "setPipe actions 1: " << m_actions;
+    // LOGT << "setPipe actions 1: " << m_actions;
     LOGT << "setPipe name: " << name << ", reader_uri: " << reader_uri << ", writer_uri: " << writer_uri;
     auto pipe = getPipe(name);
 
-    // === ЛОГ: состояние pipe после getPipe ===
-    if (pipe) {
-        LOGT << "setPipe getPipe: reader->uri=" << pipe->reader->uri
-             << ", writer->uri=" << pipe->writer->uri;
-    }
+    // if (pipe) {
+    //     LOGT << "setPipe getPipe: reader->uri=" << pipe->reader->uri
+    //          << ", writer->uri=" << pipe->writer->uri;
+    // }
 
     if (pipe && pipe->reader && pipe->reader->uri && pipe->reader->uri != reader_uri) {
         m_actions.push_back(TAction{pipe->reader->uri, TStreamType::READER, TActionType::UNSUBSCRIBE});
         if (pipe->reader->uri != writer_uri)
             m_actions.push_back(TAction{pipe->reader->uri, TStreamType::READER, TActionType::CLOSE});
-        LOGT << "m_map_uri_pipe.erase reader " << pipe->reader->uri;
+        // LOGT << "m_map_uri_pipe.erase reader " << pipe->reader->uri;
         m_map_uri_pipe.erase(pipe->reader->uri);
     }
 
@@ -114,7 +113,7 @@ void CContext::setPipe(
         m_actions.push_back(TAction{pipe->writer->uri, TStreamType::WRITER, TActionType::UNSUBSCRIBE});
         if (pipe->writer->uri != reader_uri)
             m_actions.push_back(TAction{pipe->writer->uri, TStreamType::WRITER, TActionType::CLOSE});
-        LOGT << "m_map_uri_pipe.erase writer " << pipe->writer->uri;
+        // LOGT << "m_map_uri_pipe.erase writer " << pipe->writer->uri;
         m_map_uri_pipe.erase(pipe->writer->uri);
     }
 
@@ -130,12 +129,11 @@ void CContext::setPipe(
             m_actions.push_back(TAction{writer_uri, TStreamType::WRITER, TActionType::OPEN});
     }
 
-    // === ЛОГ: перед обновлением reader ===
-    if (pipe) {
-        LOGT << "setPipe before reader update: reader->uri=" << pipe->reader->uri
-             << ", reader_uri=" << reader_uri
-             << ", condition=" << (pipe->reader->uri != reader_uri);
-    }
+    // if (pipe) {
+    //     LOGT << "setPipe before reader update: reader->uri=" << pipe->reader->uri
+    //          << ", reader_uri=" << reader_uri
+    //          << ", condition=" << (pipe->reader->uri != reader_uri);
+    // }
 
     if (pipe && pipe->reader->uri != reader_uri) {
         pipe->reader->uri = reader_uri;
@@ -145,12 +143,11 @@ void CContext::setPipe(
         }
     }
 
-    // === ЛОГ: перед обновлением writer ===
-    if (pipe) {
-        LOGT << "setPipe before writer update: writer->uri=" << pipe->writer->uri
-             << ", writer_uri=" << writer_uri
-             << ", condition=" << (pipe->writer->uri != writer_uri);
-    }
+    // if (pipe) {
+    //     LOGT << "setPipe before writer update: writer->uri=" << pipe->writer->uri
+    //          << ", writer_uri=" << writer_uri
+    //          << ", condition=" << (pipe->writer->uri != writer_uri);
+    // }
 
     if (pipe && pipe->writer->uri != writer_uri) {
         pipe->writer->uri = writer_uri;
@@ -165,16 +162,16 @@ void CContext::setPipe(
     else
         m_map_name_pipe.erase(name);
 
-    LOGT << "setPipe actions 2: " << m_actions;
+    // LOGT << "setPipe actions 2: " << m_actions;
 
-    LOGT << "map_uri_pipe 11, " << reinterpret_cast<uint64_t>(this);
-    for (auto const &uri_pipe : m_map_uri_pipe) {
-        LOGT << "map_uri_pipe: " << uri_pipe.first
-             << " " << uri_pipe.second->name
-             << " " << uri_pipe.second->reader->uri
-             << " " << uri_pipe.second->writer->uri;
-    }
-    LOGT << "map_uri_pipe 22";
+    // LOGT << "map_uri_pipe 11, " << reinterpret_cast<uint64_t>(this);
+    // for (auto const &uri_pipe : m_map_uri_pipe) {
+    //     LOGT << "map_uri_pipe: " << uri_pipe.first
+    //          << " " << uri_pipe.second->name
+    //          << " " << uri_pipe.second->reader->uri
+    //          << " " << uri_pipe.second->writer->uri;
+    // }
+    // LOGT << "map_uri_pipe 22";
 }
 
 
@@ -330,7 +327,7 @@ size_t CContext::getPosition(
 
 
 std::list<CContext::TAction> CContext::getActions() {
-    LOGT << "get actions: " << m_actions;
+    // LOGT << "get actions: " << m_actions;
 
     struct TPipeEnd {
         TStreamType

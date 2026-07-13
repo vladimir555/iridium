@@ -116,7 +116,7 @@ URI::URI(std::string const &source_)
             if (!tokens.empty())
                 m_address   = tokens.front();
 
-            if (!tokens.empty())
+            if (tokens.size() > 1)
                 m_arguments = tokens.back();
 
             // todo: windows path delimeter

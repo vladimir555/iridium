@@ -171,6 +171,7 @@ CConnectionManager::CConnectionManager()
 void CConnectionManager::initialize() {
     try {
         std::signal(SIGPIPE, SIG_IGN);
+
         if (m_kqueue)
             throw std::runtime_error("kqueue is not finalized");
 
@@ -201,11 +202,11 @@ void CConnectionManager::finalize() {
         m_thread->finalize();
 
         LOCK_SCOPE();
-        for (auto const &fd_handle: m_map_fd_handle)
-            ::close(fd_handle.first);
+        for (auto const &ident_handle: m_map_ident_handle)
+            ::close(ident_handle.first);
 
-        m_map_fd_handle.clear();
-        m_map_uri_fd.clear();
+        m_map_ident_handle.clear();
+        m_map_uri_idents.clear();
     } catch (std::exception const &e) {
         throw std::runtime_error(
             std::string("connection manager finalization error: ") + e.what());
@@ -220,46 +221,62 @@ void CConnectionManager::manage(
         const &protocol)
 {
     try {
-        std::vector<int> fds;
+        std::vector<int> idents;
 
         THandle::TSharedPtr handle;
+
         {
             LOCK_SCOPE();
-            auto uri_fd  = m_map_uri_fd.find(uri);
+            auto uri_idents  = m_map_uri_idents.find(uri);
             // peer
-            // todo: fix multi fd
-            if ( uri_fd != m_map_uri_fd.end()) {
-                fds.push_back(uri_fd->second);
+            if ( uri_idents != m_map_uri_idents.end()) {
+                idents = assertComplete(uri_idents->second, "idents are empty");
+                idents = uri_idents->second;
 
-                auto fd_handle  = m_map_fd_handle.find(uri_fd->second);
-                if ( fd_handle != m_map_fd_handle.end())
-                    handle = fd_handle->second;
+                auto ident_handle  = m_map_ident_handle.find(uri_idents->second.front());
+                if ( ident_handle != m_map_ident_handle.end())
+                    handle = ident_handle->second;
             }
         }
 
-        LOGT << "fds: " << fds;
-        if (fds.empty())
-            fds = connect(uri, IContext::TStreamType::WRITER);
+        LOGT << "idents: " << idents;
 
+        if (idents.empty())
+            idents = connect(uri, IContext::TStreamType::WRITER);
+
+        LOGT << "idents: " << idents;
+
+        bool is_new = false;
         if(!handle) {
             handle              = THandle::create();
             handle->context     = CContext::create();
             handle->protocol    = protocol;
+            is_new = true;
         }
 
-        handle->uri         = uri;
-        handle->fd          = fds.empty() ? -1 : fds.front();
+        handle->uri     = uri;
+        handle->idents  = assertComplete(idents, "empty idents");
 
-        // todo: pid, stdin, stdout
         {
             LOCK_SCOPE();
 
-            for (int const &fd: fds) {
-                if (fd < 0)
+            for (int const &ident: idents) {
+                if (ident < 0)
                     continue; // <---
-                m_map_fd_handle[fd] = handle;
-                m_map_uri_fd[uri] = fd;
+                m_map_ident_handle[ident] = handle;
             }
+            m_map_uri_idents[uri] = idents;
+        }
+
+        if (is_new) {
+            auto event = TEvent::create();
+            event->context      = handle->context;
+            event->operation    = TEvent::TOperation::OPEN;
+            event->uri          = uri;
+            protocol->control(event);
+            std::map<IProtocol::TSharedPtr, std::list<IContextActions::TAction> > m;
+            m[protocol] = handle->context->getActions();
+            updateHandles(m);
         }
 
         wakeKEvent(0);
@@ -340,34 +357,34 @@ void CConnectionManager::manage(
             address_length              = sizeof(sockaddr_in);
         }
 
-        int fd = assertOK(::socket(domain, type, protocol), "socket");
+        int ident = assertOK(::socket(domain, type, protocol), "socket");
 
         static int const YES = 1;
         assertOK(
-            ::setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES)),
+            ::setsockopt(ident, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES)),
              "setsockopt REUSEADDR");
         assertOK(
-            ::setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &YES, sizeof(YES)),
+            ::setsockopt(ident, SOL_SOCKET, SO_REUSEPORT, &YES, sizeof(YES)),
              "setsockopt REUSEPORT");
 
         int flags = assertOK(
-            ::fcntl(fd, F_GETFL, 0),
+            ::fcntl(ident, F_GETFL, 0),
              "fcntl GETFL");
         assertOK(
-            ::fcntl(fd, F_SETFL, flags | O_NONBLOCK),
+            ::fcntl(ident, F_SETFL, flags | O_NONBLOCK),
              "fcntl SETFL O_NONBLOCK");
 
         assertOK(
-            ::bind(fd, reinterpret_cast<sockaddr*>(&address), address_length),
+            ::bind(ident, reinterpret_cast<sockaddr*>(&address), address_length),
              "bind");
 
         if (type == SOCK_STREAM)
             assertOK(
-                ::listen(fd, SOMAXCONN),
+                ::listen(ident, SOMAXCONN),
                  "listen");
 
         struct kevent event;
-        EV_SET(&event, fd, EVFILT_READ, EV_ADD |
+        EV_SET(&event, ident, EVFILT_READ, EV_ADD |
             (type == SOCK_DGRAM ? EV_CLEAR : 0), 0, 0, reinterpret_cast<void *>(1));
 
         assertOK(
@@ -375,15 +392,15 @@ void CConnectionManager::manage(
              "kevent");
 
         auto handle = THandle::create();
-        handle->acceptor = acceptor;
-        handle->uri = uri;
-        handle->fd = fd;
+        handle->acceptor    = acceptor;
+        handle->uri         = uri;
+        handle->idents      = { ident };
 
         {
             LOCK_SCOPE();
-            LOGT << "add acceptor, fd: " << fd << ", uri: " << uri;
-            m_map_fd_handle[fd] = handle;
-            m_map_uri_fd[handle->uri] = fd;
+            LOGT << "add acceptor, ident: " << ident << ", uri: " << uri;
+            m_map_ident_handle[ident]       = handle;
+            m_map_uri_idents[handle->uri]   = { ident };
         }
 
         // wakeKEvent(0);
@@ -401,8 +418,8 @@ std::vector<int> CConnectionManager::connect(
     IContextActions::TStreamType
         const &stream_type)
 {
-    std::vector<int> fds;
-
+    LOGT << "connect: " << uri;
+    std::vector<int> idents;
     if (uri->getProtocol() == URI::TProtocol::PROCESS) {
         int stdin_pipe[2]  = { -1, -1 };
         int stdout_pipe[2] = { -1, -1 };
@@ -412,12 +429,22 @@ std::vector<int> CConnectionManager::connect(
         assertOK(pipe(stdout_pipe), "pipe stdout");
 
         // non-blocking
-        static auto set_nonblock = [] (int fd) {
-            int flags = assertOK(::fcntl(fd, F_GETFL, 0), "fcntl GETFL");
-            assertOK(::fcntl(fd, F_SETFL, flags | O_NONBLOCK), "fcntl SETFL O_NONBLOCK");
+        static auto setNonblock = [] (int ident) {
+            int flags = assertOK(
+                ::fcntl(ident, F_GETFL, 0),
+                 "fcntl GETFL");
+            assertOK(
+                ::fcntl(ident, F_SETFL, flags | O_NONBLOCK),
+                 "fcntl SETFL O_NONBLOCK");
         };
-        set_nonblock(stdin_pipe[1]);   // Parent -> Child STDIN
-        set_nonblock(stdout_pipe[0]);  // Parent <- Child STDOUT
+
+        setNonblock(stdin_pipe[1]);   // Parent -> Child STDIN
+        setNonblock(stdout_pipe[0]);  // Parent <- Child STDOUT
+
+        LOGT << "::execlp(\"" << uri->getPath()
+        << "\", \"" <<  uri->getHost()
+        << "\", \"" << uri->getArguments()
+        << "\", nullptr);";
 
         // fork
         pid_t pid = assertOK(::fork(), "fork");
@@ -429,6 +456,7 @@ std::vector<int> CConnectionManager::connect(
 
             assertOK(::dup2(stdin_pipe[0],  STDIN_FILENO),  "dup2 stdin");
             assertOK(::dup2(stdout_pipe[1], STDOUT_FILENO), "dup2 stdout");
+            assertOK(::dup2(STDOUT_FILENO, STDERR_FILENO),  "dup2 stderr");
 
             ::close(stdin_pipe[0]);
             ::close(stdout_pipe[1]);
@@ -438,6 +466,8 @@ std::vector<int> CConnectionManager::connect(
                 uri->getPath().c_str(),
                 uri->getArguments().empty() ? nullptr :
                 uri->getArguments().c_str(),  nullptr);
+            string error = std::strerror(errno);
+            ::write(STDOUT_FILENO, error.c_str(), error.size());
             _exit(127);
             // -----
         }
@@ -446,51 +476,48 @@ std::vector<int> CConnectionManager::connect(
         ::close(stdin_pipe[0]);
         ::close(stdout_pipe[1]);
 
-        fds = { stdout_pipe[0], stdin_pipe[1], static_cast<int>(pid) };
+        idents = { static_cast<int>(pid), stdout_pipe[0], stdin_pipe[1] };
 
-        // // kqueue Registration
-        // struct kevent event;
-        // void* udata = uri.get();
-
-        // EV_SET(&event, fds[THandleType::READER], EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, udata);
-        // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent READER");
-        // EV_SET(&event, fds[THandleType::WRITER], EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, udata);
-        // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent WRITER");
-        // EV_SET(&event, static_cast<intptr_t>(pid), EVFILT_PROC, EV_ADD, NOTE_EXIT, 0, udata);
-        // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent PROC");
-
-        return fds; // ----->
+        return idents; // ----->
     }
 
     if (uri->getProtocol() == URI::TProtocol::FILE) {
         // struct kevent event;
         if (stream_type == IContextActions::TStreamType::WRITER) {
-            auto fd = assertOK(::open(uri->getPath().c_str(), O_WRONLY | O_CREAT), "open file WRONLY");
-            assertOK(::flock(fd, LOCK_EX | LOCK_NB), "flock");
-            fds = { fd };
+            auto ident = assertOK(
+                ::open(uri->getPath().c_str(), O_WRONLY | O_CREAT),
+                 "open file WRONLY");
+            assertOK(
+                ::flock(ident, LOCK_EX | LOCK_NB),
+                 "flock");
+            idents = { ident };
             // EV_SET(&event, fd, EVFILT_WRITE, EV_ADD | EV_ONESHOT, 0, 0, nullptr);
             // flock(fd, LOCK_UN);
         } else {
-            auto fd = assertOK(::open(uri->getPath().c_str(), O_RDONLY), "open file RDONLY");
-            fds = { fd };
+            auto ident = assertOK(
+                ::open(uri->getPath().c_str(), O_RDONLY),
+                 "open file RDONLY");
+            idents = { ident };
             // EV_SET(&event, fd, EVFILT_READ, EV_ADD | EV_ONESHOT, 0, 0, nullptr);
         }
-        return fds; // ----->
+        return idents; // ----->
     }
 
     int domain      = -1;
     int type        = -1;
     int protocol    =  0;
 
-    struct sockaddr_storage address {};
-    socklen_t address_length = 0;
+    struct sockaddr_storage
+        address {};
+    socklen_t
+        address_length = 0;
 
     if (uri->getProtocol() == URI::TProtocol::UDP) {
         domain      = AF_INET;
         type        = SOCK_DGRAM;
         protocol    = IPPROTO_UDP;
 
-        auto* address_in = reinterpret_cast<sockaddr_in*>(&address);
+        auto *address_in = reinterpret_cast<sockaddr_in*>(&address);
 
         address_in->sin_family  = AF_INET;
         address_in->sin_port    = htons(uri->getPort());
@@ -512,7 +539,7 @@ std::vector<int> CConnectionManager::connect(
         domain  = AF_UNIX;
         type    = SOCK_STREAM;
 
-        auto* address_unix          = reinterpret_cast<sockaddr_un*>(&address);
+        auto *address_unix          = reinterpret_cast<sockaddr_un *>(&address);
         address_unix->sun_family    = AF_UNIX;
 
         std::string path = uri->getPath();
@@ -560,16 +587,26 @@ std::vector<int> CConnectionManager::connect(
         address_length = sizeof(sockaddr_in);
     }
 
-    int fd = assertOK(::socket(domain, type, protocol), "socket");
+    int ident = assertOK(
+        ::socket(domain, type, protocol),
+         "socket");
 
     static int const YES = 1;
-    assertOK(::setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES)), "setsockopt REUSEADDR");
-    assertOK(::setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &YES, sizeof(YES)), "setsockopt REUSEPORT");
+    assertOK(
+        ::setsockopt(ident, SOL_SOCKET, SO_REUSEADDR, &YES, sizeof(YES)),
+         "setsockopt REUSEADDR");
+    assertOK(
+        ::setsockopt(ident, SOL_SOCKET, SO_REUSEPORT, &YES, sizeof(YES)),
+         "setsockopt REUSEPORT");
 
-    int flags = assertOK(::fcntl(fd, F_GETFL, 0), "fcntl GETFL");
-    assertOK(::fcntl(fd, F_SETFL, flags | O_NONBLOCK), "fcntl SETFL O_NONBLOCK");
+    int flags = assertOK(
+        ::fcntl(ident, F_GETFL, 0),
+         "fcntl GETFL");
+    assertOK(
+        ::fcntl(ident, F_SETFL, flags | O_NONBLOCK),
+         "fcntl SETFL O_NONBLOCK");
 
-    int result = ::connect(fd, reinterpret_cast<sockaddr*>(&address), address_length);
+    int result = ::connect(ident, reinterpret_cast<sockaddr*>(&address), address_length);
     if (result < 0 && errno != EINPROGRESS)
         assertOK(result, "connect");
 
@@ -581,7 +618,7 @@ std::vector<int> CConnectionManager::connect(
     //     assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent WRITE (pending)");
     // }
 
-    return fds;
+    return idents;
 }
 
 
@@ -602,7 +639,7 @@ URI::TSharedPtr CConnectionManager::getPeerURI(sockaddr_storage const &address) 
     uint16_t port;
 
     if (address.ss_family == AF_INET) {
-        auto const *in = reinterpret_cast<const sockaddr_in*>(&address);
+        auto const *in = reinterpret_cast<const sockaddr_in *>(&address);
         inet_ntop(AF_INET, &in->sin_addr, ip, sizeof(ip));
         port = ntohs(in->sin_port);
         return URI::create("tcp://" + string(ip) + ":" + convert<string>(port));
@@ -611,86 +648,13 @@ URI::TSharedPtr CConnectionManager::getPeerURI(sockaddr_storage const &address) 
     else
 
     if (address.ss_family == AF_INET6) {
-        auto const *in6 = reinterpret_cast<const sockaddr_in6*>(&address);
+        auto const *in6 = reinterpret_cast<const sockaddr_in6 *>(&address);
         inet_ntop(AF_INET6, &in6->sin6_addr, ip, sizeof(ip));
         port = ntohs(in6->sin6_port);
         return URI::create("tcp://[" + string(ip) + "]:" + convert<string>(port));
     }
 
     throw std::runtime_error("get peer uri error: unknown sockaddr type");
-}
-
-
-URI::TSharedPtr CConnectionManager::getPeerURI(int const &fd) {
-    struct sockaddr_storage address{};
-    socklen_t address_length = sizeof(address);
-
-    assertOK(::getpeername(fd, reinterpret_cast<sockaddr*>(&address), &address_length), "getpeername");
-
-    if (address.ss_family == AF_INET) {
-        auto *address_in = reinterpret_cast<const sockaddr_in *>(&address);
-        char buffer[INET_ADDRSTRLEN];
-        const char *ip = inet_ntop(AF_INET, &address_in->sin_addr, buffer, sizeof(buffer));
-
-        return URI::create(
-            "tcp://" + std::string(ip ?: "0.0.0.0") +
-            ":" + convert<std::string>(ntohs(address_in->sin_port)));
-    }
-
-    else
-
-    if (address.ss_family == AF_INET6) {
-        auto *address_in6 = reinterpret_cast<const sockaddr_in6*>(&address);
-        char buffer[INET6_ADDRSTRLEN];
-        const char *ip = inet_ntop(AF_INET6, &address_in6->sin6_addr, buffer, sizeof(buffer));
-        return URI::create(
-            "tcp://[" + std::string(ip ?: "::1") +
-            "]:" + convert<std::string>(ntohs(address_in6->sin6_port)));
-    }
-
-    else
-
-    if (address.ss_family == AF_UNIX) {
-        auto *address_unix = reinterpret_cast<const sockaddr_un*>(&address);
-
-        if (address_unix->sun_path[0] == '\0') {
-            size_t length = strnlen(address_unix->sun_path + 1, sizeof(address_unix->sun_path) - 1);
-            return URI::create(
-                "ipc://abstract/" + std::string(address_unix->sun_path + 1, length) +
-                "?fd=" + convert<std::string>(fd));
-        }
-
-        std::string path = address_unix->sun_path;
-
-#ifdef MACOS_PLATFORM
-        // PID (macOS >= 10.8)
-        pid_t pid = -1;
-        socklen_t length = sizeof(pid);
-        if (::getsockopt(fd, SOL_LOCAL, LOCAL_PEERPID, &pid, &length) == 0 && pid > 0)
-            return URI::create(
-                "ipc://" + path + "?pid=" + convert<std::string>(pid) +
-                "?fd=" + convert<std::string>(fd));
-
-        // UID/GID (POSIX)
-        uid_t uid = -1; gid_t gid = -1;
-        if (::getpeereid(fd, &uid, &gid) == 0)
-            return URI::create(
-                "ipc://" + path + "?uid=" + convert<std::string>(uid) +
-                "?fd=" + convert<std::string>(fd));
-#elif LINUX_PLATFORM
-        struct ucred cred{};
-        socklen_t length = sizeof(cred);
-        if (::getsockopt(fd, SOL_SOCKET, SO_PEERCRED, &cred, &length) == 0)
-            return URI::create(
-                "ipc://" + path + "?pid=" + convert<std::string>(cred.pid) +
-                "?fd=" + convert<std::string>(fd));
-#endif
-        return URI::create(
-            "ipc://" + path + "?fd=" + convert<std::string>(fd));
-    }
-
-    throw std::runtime_error(
-        "get peer error: unknown type of fd " + convert<std::string>(fd));
 }
 
 
@@ -711,19 +675,19 @@ CConnectionManager::getHandles(
         if (event.filter == EVFILT_PROC || event.ident <= 0 || event.ident == DEFAULT_IDENT_WAKEUP)
             continue; // <---
 
-        auto fd_handle  = m_map_fd_handle.find(static_cast<int>(event.ident));
-        if ( fd_handle == m_map_fd_handle.end()) {
-            LOGW << "connection manager: get handle error: not registered fd: " << event.ident;
+        auto ident_handle  = m_map_ident_handle.find(static_cast<int>(event.ident));
+        if ( ident_handle == m_map_ident_handle.end()) {
+            LOGW << "connection manager: get handle error: not registered ident: " << event.ident;
             ::close(static_cast<int>(event.ident));
             continue; // <---
         } else {
-            if (fd_handle->second->protocol) {
+            if (ident_handle->second->protocol) {
                 if (event.filter == EVFILT_READ)
-                    fd_handle->second->stream_type = IContextActions::TStreamType::READER;
+                    ident_handle->second->stream_type = IContextActions::TStreamType::READER;
                 if (event.filter == EVFILT_WRITE)
-                    fd_handle->second->stream_type = IContextActions::TStreamType::WRITER;
+                    ident_handle->second->stream_type = IContextActions::TStreamType::WRITER;
             }
-            result.push_back(fd_handle->second);
+            result.push_back(ident_handle->second);
         }
     }
 
@@ -742,13 +706,16 @@ void CConnectionManager::updateHandles(
         const &handles)
 {
     LOCK_SCOPE();
+
     for (auto const &handle: handles) {
         if (handle->protocol) {
-            m_map_fd_handle[handle->fd] = handle;
-            m_map_uri_fd[handle->uri] = handle->fd;
+            for (auto const &ident: handle->idents)
+                m_map_ident_handle[ident] = handle;
+            m_map_uri_idents[handle->uri] = handle->idents;
         } else {
-            m_map_fd_handle.erase(handle->fd);
-            m_map_uri_fd.erase(handle->uri);
+            for (auto const &ident: handle->idents)
+                m_map_ident_handle.erase(ident);
+            m_map_uri_idents.erase(handle->uri);
         }
     }
 }
@@ -758,33 +725,40 @@ void CConnectionManager::updateHandles(
     std::map<IProtocol::TSharedPtr, std::list<IContextActions::TAction> >
         const &map_protocol_actions)
 {
-    std::vector<struct kevent> batch;
-    std::list< std::pair<int, URI::TSharedPtr> > fd_uri_list_to_close;
+    std::vector<struct kevent>
+        batch;
+    std::list< std::pair<int, URI::TSharedPtr> >
+        ident_uri_list_to_close;
+    std::unordered_set<URI::TSharedPtr>
+        just_opened_uris;
 
     for(auto const &protocol_actions: map_protocol_actions) {
         auto const &protocol = protocol_actions.first;
         for (auto const &action: protocol_actions.second) {
             if (action.action_type == IContextActions::TActionType::OPEN) {
                 manage(action.uri, protocol);
+                just_opened_uris.insert(action.uri);
                 continue; // <---
             }
 
             // todo: optimize
-            int fd = -1;
+            std::vector<int> idents;
+
             {
                 LOCK_SCOPE();
 
-                auto uri_fd  = m_map_uri_fd.find(action.uri);
-                if ( uri_fd == m_map_uri_fd.end()) {
+                auto uri_idents  = m_map_uri_idents.find(action.uri);
+                if ( uri_idents == m_map_uri_idents.end()) {
                     throw std::runtime_error(
-                        "update handle error: fd not found by " +
+                        "update handle error: ident not found by " +
                         convert<string>(action.uri)); // ----->
                 } else {
-                    fd = uri_fd->second;
+                    idents = uri_idents->second;
                 }
 
                 if (action.action_type == IContextActions::TActionType::CLOSE) {
-                    fd_uri_list_to_close.push_back( { fd, action.uri} );
+                    for (auto const &ident: idents)
+                        ident_uri_list_to_close.push_back( { ident, action.uri } );
                     continue; // <---
                 }
             }
@@ -796,16 +770,49 @@ void CConnectionManager::updateHandles(
                 filter = EVFILT_WRITE;
 
             short flags = 0;
-            if (action.action_type == IContextActions::TActionType::SUBSCRIBE)
+            if (action.action_type == IContextActions::TActionType::SUBSCRIBE) {
                 flags = EV_ADD | EV_CLEAR;
-            if (action.action_type == IContextActions::TActionType::UNSUBSCRIBE)
+            }
+
+            if (action.action_type == IContextActions::TActionType::UNSUBSCRIBE) {
+                // skip processes with stdin / stdout idents
                 flags = EV_DELETE;
+            }
 
-            struct kevent event;
-            EV_SET(&event, fd, filter, flags, 0, 0, nullptr);
-            batch.push_back(event);
+            if (idents.size() == 1) {
+                struct kevent event;
+                EV_SET(&event, idents[0], filter, flags, 0, 0, nullptr);
+                batch.push_back(event);
+                LOGT << "EV_SET: " << idents[0] << " " << filter << " " << flags;
+            }
 
-            LOGT << "EV_SET: " << fd << " " << filter << " " << flags;
+            else
+
+            if (idents.size() == 3) {
+                struct kevent event;
+
+                // 1. Отслеживание завершения процесса (pid = idents[0])
+                // Добавляем только при открытии или закрытии, чтобы не дублировать подписку
+                // if (just_opened_uris.count(action.uri) || action.action_type == IContextActions::TActionType::CLOSE) {
+                //     EV_SET(&event, idents[0], EVFILT_PROC, flags, NOTE_EXIT, 0, nullptr);
+                //     batch.push_back(event);
+                //     LOGT << "EV_SET: " << idents[0] << " EVFILT_PROC " << flags;
+                // }
+
+                // 2. Подписка строго на нужный конец канала в зависимости от stream_type
+                if (action.stream_type == IContextActions::TStreamType::READER) {
+                    // idents[1] = stdout процесса (мы из него читаем)
+                    EV_SET(&event, idents[1], EVFILT_READ, flags, 0, 0, nullptr);
+                    batch.push_back(event);
+                    LOGT << "EV_SET: " << idents[1] << " EVFILT_READ " << flags;
+                }
+                else if (action.stream_type == IContextActions::TStreamType::WRITER) {
+                    // idents[2] = stdin процесса (мы в него пишем)
+                    EV_SET(&event, idents[2], EVFILT_WRITE, flags, 0, 0, nullptr);
+                    batch.push_back(event);
+                    LOGT << "EV_SET: " << idents[2] << " EVFILT_WRITE " << flags;
+                }
+            }
         }
     }
 
@@ -817,26 +824,26 @@ void CConnectionManager::updateHandles(
          "kevent actions batch");
 
     LOCK_SCOPE();
-    for (auto const &fd_uri: fd_uri_list_to_close) {
-        ::close(fd_uri.first);
-        m_map_fd_handle.erase(fd_uri.first);
-        m_map_uri_fd.erase(fd_uri.second);
+    for (auto const &ident_uri: ident_uri_list_to_close) {
+        ::close(ident_uri.first);
+        m_map_ident_handle.erase(ident_uri.first);
+        m_map_uri_idents.erase(ident_uri.second);
     }
 }
 
 
 void CConnectionManager::releaseHandle(THandle::TSharedPtr const &handle) {
     LOCK_SCOPE();
-    for (auto fd_handle = m_map_fd_handle.begin(); fd_handle != m_map_fd_handle.end(); ) {
-        if (fd_handle->second == handle) {
-            fd_handle = m_map_fd_handle.erase(fd_handle);
-            ::close(fd_handle->first);
+    for (auto ident_handle = m_map_ident_handle.begin(); ident_handle != m_map_ident_handle.end(); ) {
+        if (ident_handle->second == handle) {
+            ident_handle = m_map_ident_handle.erase(ident_handle);
+            ::close(ident_handle->first);
         } else {
-            fd_handle++;
+            ident_handle++;
         }
     }
 
-    m_map_uri_fd.erase(handle->uri);
+    m_map_uri_idents.erase(handle->uri);
     LOGT << "RELEASE PROTOCOL";
 }
 
@@ -881,7 +888,7 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
 
         LOGT << "NEXT";
         for (auto const &handle: m_manager->getHandles(triggered_events, count)) {
-            LOGT << "event handle: " << handle->uri << " " << handle->stream_type << ", fd: " << handle->fd;
+            LOGT << "event handle: " << handle->uri << " " << handle->stream_type << ", idents: " << handle->idents;
             if (handle->acceptor) {
                 while (true) {
                     sockaddr_storage
@@ -889,12 +896,12 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                     socklen_t
                         address_length = sizeof(address);
 
-                    int peer_fd = ::accept(
-                        handle->fd,
+                    int peer_ident = ::accept(
+                        assertOne(handle->idents, "few idents for acceptor not allowed"),
                         reinterpret_cast<struct sockaddr *>(&address),
                         &address_length);
 
-                    if (peer_fd == -1) {
+                    if (peer_ident == -1) {
                         if (errno == EAGAIN || errno == EWOULDBLOCK)
                             break; // --->
                         if (errno == EINTR)
@@ -905,7 +912,7 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
 
                     try {
                         auto peer_handle = CConnectionManager::THandle::create();
-                        peer_handle->fd         = peer_fd;
+                        peer_handle->idents     = { peer_ident };
                         peer_handle->uri        = getPeerURI(address);
                         peer_handle->protocol   = handle->acceptor->accept(peer_handle->uri);
                         peer_handle->context    = CContext::create();
@@ -926,12 +933,12 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                         }
 
                         if (result) {
-                            // add peer fd to map
+                            // add peer ident to map
                             auto &target_list = map_protocol_actions[peer_handle->protocol];
                             target_list.splice(target_list.end(), peer_handle->context->getActions());
                         } else {
                             // close peer after accepting
-                            ::close(peer_handle->fd);
+                            ::close(peer_ident);
                             continue; // <---
                         }
 
@@ -952,14 +959,22 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                 event->uri      = handle->uri;
 
                 if (handle->stream_type == IContextActions::TStreamType::READER) {
+                    int ident = -1;
+                    if (handle->idents.size() == 3)
+                        ident = handle->idents[1];
+                    else
+                    if (handle->idents.size() == 1)
+                        ident = handle->idents[0];
+                    else
+                        throw std::runtime_error("wrong idents size " + convert<string>(handle->idents));
+
                     auto buffer = Buffer::create(DEFAULT_BUFFER_SIZE);
-                    auto n      = ::read(handle->fd, buffer->data(), buffer->capacity());
+                    auto n      = ::read(ident, buffer->data(), buffer->capacity());
 
                     LOGT << "read, n: " << n;
 
                     if (n > 0) {
                         buffer->resize(n);
-                        // handle->context->addBuffer(handle->uri, handle->stream_type, buffer);
 
                         handle->context->addBuffer(handle->uri, IContextActions::TStreamType::READER, buffer);
                         handle->context->addBuffer(handle->uri, IContextActions::TStreamType::WRITER, buffer);
@@ -982,9 +997,18 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                 }
 
                 if (handle->stream_type == IContextActions::TStreamType::WRITER) {
+                    int ident = -1;
+                    if (handle->idents.size() == 3)
+                        ident = handle->idents[2];
+                    else
+                    if (handle->idents.size() == 1)
+                        ident = handle->idents[0];
+                    else
+                        throw std::runtime_error("wrong idents size " + convert<string>(handle->idents));
+
                     auto buffers= handle->context->getBuffers(handle->uri, IContextActions::TStreamType::WRITER);
-                    auto buffer = assertExists(buffers.front(), "buffer to wrtie is empty");
-                    auto n      = ::write(handle->fd, buffer->data(), buffer->size());
+                    auto buffer = assertExists(buffers.front(), "buffer to write is empty");
+                    auto n      = ::write(ident, buffer->data(), buffer->size());
 
                     LOGT << "wrote, n: " << n;
 
@@ -1028,7 +1052,6 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                 auto &target_list = map_protocol_actions[handle->protocol];
                 target_list.splice(target_list.end(), handle->context->getActions());
             }
-
             // update maps
             m_manager->updateHandles(handles_to_update);
             // update kqueue
