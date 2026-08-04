@@ -156,7 +156,7 @@ static int
 static size_t
     constexpr DEFAULT_EVENTS_LIMIT      = 65535;
 static size_t
-    constexpr DEFAULT_BUFFER_SIZE       = 8192;
+    constexpr DEFAULT_BUFFER_SIZE       = 8;//192;
 
 
 CConnectionManager::CConnectionManager()
@@ -421,7 +421,7 @@ std::vector<int> CConnectionManager::connect(
     LOGT << "connect: " << uri;
     std::vector<int> idents;
     if (uri->getProtocol() == URI::TProtocol::PROCESS) {
-        int stdin_pipe[2]  = { -1, -1 };
+        int  stdin_pipe[2] = { -1, -1 };
         int stdout_pipe[2] = { -1, -1 };
 
 #ifdef LINUX_PLATFORM
@@ -430,10 +430,10 @@ std::vector<int> CConnectionManager::connect(
 #endif
 
 #ifdef MACOS_PLATFORM
-        assertOK(pipe(stdin_pipe),  "pipe stdin");
+        assertOK(pipe (stdin_pipe), "pipe stdin");
         assertOK(pipe(stdout_pipe), "pipe stdout");
         // non-blocking
-        static auto setNonblock = [] (int ident) {
+        static auto setPipeFlags = [] (int ident) {
             int flags_fd = assertOK(
                 ::fcntl(ident, F_GETFD, 0),
                  "fcntl GETFD");
@@ -448,8 +448,8 @@ std::vector<int> CConnectionManager::connect(
                  "fcntl SETFL O_NONBLOCK");
         };
 
-        setNonblock(stdin_pipe[1]);   // Parent -> Child STDIN
-        setNonblock(stdout_pipe[0]);  // Parent <- Child STDOUT
+        setPipeFlags(stdin_pipe[1]);   // Parent -> Child STDIN
+        setPipeFlags(stdout_pipe[0]);  // Parent <- Child STDOUT
 #endif
 
         LOGT << "::execlp(\"" << uri->getPath()
@@ -469,12 +469,12 @@ std::vector<int> CConnectionManager::connect(
 
         if (pid == 0) {
             // ----- CHILD
-            assertOK(::dup2(stdin_pipe[0],  STDIN_FILENO),  "dup2 stdin");
+            assertOK(::dup2(stdin_pipe[0],   STDIN_FILENO), "dup2 stdin");
             assertOK(::dup2(stdout_pipe[1], STDOUT_FILENO), "dup2 stdout");
-            assertOK(::dup2(STDOUT_FILENO, STDERR_FILENO),  "dup2 stderr");
+            assertOK(::dup2(STDOUT_FILENO,  STDERR_FILENO), "dup2 stderr");
 
-            ::close(stdin_pipe[0]);
-            ::close(stdin_pipe[1]);
+            ::close (stdin_pipe[0]);
+            ::close (stdin_pipe[1]);
             ::close(stdout_pipe[0]);
             ::close(stdout_pipe[1]);
 
@@ -511,14 +511,11 @@ std::vector<int> CConnectionManager::connect(
                 ::flock(ident, LOCK_EX | LOCK_NB),
                  "flock");
             idents = { ident };
-            // EV_SET(&event, fd, EVFILT_WRITE, EV_ADD | EV_ONESHOT, 0, 0, nullptr);
-            // flock(fd, LOCK_UN);
         } else {
             auto ident = assertOK(
                 ::open(uri->getPath().c_str(), O_RDONLY),
                  "open file RDONLY");
             idents = { ident };
-            // EV_SET(&event, fd, EVFILT_READ, EV_ADD | EV_ONESHOT, 0, 0, nullptr);
         }
         return idents; // ----->
     }
@@ -537,7 +534,7 @@ std::vector<int> CConnectionManager::connect(
         type        = SOCK_DGRAM;
         protocol    = IPPROTO_UDP;
 
-        auto *address_in = reinterpret_cast<sockaddr_in*>(&address);
+        auto *address_in = reinterpret_cast<sockaddr_in *>(&address);
 
         address_in->sin_family  = AF_INET;
         address_in->sin_port    = htons(uri->getPort());
@@ -630,14 +627,6 @@ std::vector<int> CConnectionManager::connect(
     if (result < 0 && errno != EINPROGRESS)
         assertOK(result, "connect");
 
-    // struct kevent event;
-    // EV_SET(&event, fd, EVFILT_READ, EV_ADD | (type == SOCK_DGRAM ? EV_CLEAR : 0), 0, 0, nullptr);
-    // assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent READ");
-    // if (result < 0 && errno == EINPROGRESS) {
-    //     EV_SET(&event, fd, EVFILT_WRITE, EV_ADD | EV_ONESHOT, 0, 0, nullptr);
-    //     assertOK(::kevent(m_kqueue, &event, 1, nullptr, 0, nullptr), "kevent WRITE (pending)");
-    // }
-
     return idents;
 }
 
@@ -712,12 +701,6 @@ CConnectionManager::getHandles(
     }
 
     return result; // ----->
-
-    // if (event.filter == EVFILT_PROC && (event.fflags & NOTE_EXIT)) {
-    //     // m_manager->handleEvent(event.ident, TEvent::TOperation::CLOSE, nullptr, 0);
-    //     // clean zombie
-    //     ::waitpid(static_cast<pid_t>(event.ident), nullptr, 0);
-    // }
 }
 
 
@@ -811,23 +794,17 @@ void CConnectionManager::updateHandles(
             if (idents.size() == 3) {
                 struct kevent event;
 
-                // 1. Отслеживание завершения процесса (pid = idents[0])
-                // Добавляем только при открытии или закрытии, чтобы не дублировать подписку
-                // if (just_opened_uris.count(action.uri) || action.action_type == IContextActions::TActionType::CLOSE) {
-                //     EV_SET(&event, idents[0], EVFILT_PROC, flags, NOTE_EXIT, 0, nullptr);
-                //     batch.push_back(event);
-                //     LOGT << "EV_SET: " << idents[0] << " EVFILT_PROC " << flags;
-                // }
-
-                // 2. Подписка строго на нужный конец канала в зависимости от stream_type
                 if (action.stream_type == IContextActions::TStreamType::READER) {
-                    // idents[1] = stdout процесса (мы из него читаем)
+                    // idents[1] = stdout
                     EV_SET(&event, idents[1], EVFILT_READ, flags, 0, 0, nullptr);
                     batch.push_back(event);
                     LOGT << "EV_SET: " << idents[1] << " EVFILT_READ " << flags;
                 }
-                else if (action.stream_type == IContextActions::TStreamType::WRITER) {
-                    // idents[2] = stdin процесса (мы в него пишем)
+
+                else
+
+                if (action.stream_type == IContextActions::TStreamType::WRITER) {
+                    // idents[2] = stdin
                     EV_SET(&event, idents[2], EVFILT_WRITE, flags, 0, 0, nullptr);
                     batch.push_back(event);
                     LOGT << "EV_SET: " << idents[2] << " EVFILT_WRITE " << flags;
@@ -890,6 +867,9 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
     std::vector<struct kevent>
         triggered_events(DEFAULT_EVENTS_LIMIT);
 
+    std::list<CConnectionManager::THandle::TSharedPtr>
+        handles;
+
     while (is_running) {
         auto count = assertOK(
             kevent(
@@ -907,8 +887,16 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
             map_protocol_actions;
 
         LOGT << "NEXT";
-        for (auto const &handle: m_manager->getHandles(triggered_events, count)) {
+
+        bool is_processed = false;
+
+        handles.splice(handles.end(), m_manager->getHandles(triggered_events, count));
+        auto   i  = handles.begin();
+        while (i != handles.end()) {
+            auto &handle = *i;
+
             LOGT << "event handle: " << handle->uri << " " << handle->stream_type << ", idents: " << handle->idents;
+
             if (handle->acceptor) {
                 while (true) {
                     sockaddr_storage
@@ -971,6 +959,8 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                         continue; // <---
                     }
                 }
+
+                is_processed = true;
             }
 
             if (handle->protocol) {
@@ -1006,13 +996,19 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
 
                     if (n == 0) {
                         event->operation = TEvent::TOperation::CLOSE;
+                        is_processed = true;
                     }
 
                     else
 
                     {
-                        handle->context->addBuffer(handle->uri, handle->stream_type, Buffer::create(std::strerror(errno)));
-                        event->operation = TEvent::TOperation::ERROR_;
+                        if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                            event->operation = TEvent::TOperation::READ_END;
+                        } else {
+                            event->operation = TEvent::TOperation::ERROR_;
+                            handle->context->addBuffer(handle->uri, handle->stream_type, Buffer::create(std::strerror(errno)));
+                        }
+                        is_processed = true;
                     }
                 }
 
@@ -1026,31 +1022,46 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                     else
                         throw std::runtime_error("wrong idents size " + convert<string>(handle->idents));
 
-                    auto buffers= handle->context->getBuffers(handle->uri, IContextActions::TStreamType::WRITER);
-                    auto buffer = assertExists(buffers.front(), "buffer to write is empty");
-                    auto n      = ::write(ident, buffer->data(), buffer->size());
+                    auto buffers = handle->context->getBuffers(handle->uri, IContextActions::TStreamType::WRITER);
 
-                    LOGT << "wrote, n: " << n;
+                    if (buffers.empty()) {
+                        event->operation = TEvent::TOperation::WRITE_END;
+                        is_processed = true;
+                    } else {
+                        auto buffer = buffers.front();
+                        auto n      = ::write(ident, buffer->data(), buffer->size());
 
-                    if (n > 0) {
-                        handle->context->setPosition(handle->uri, IContextActions::TStreamType::WRITER, n);
-                        event->operation = TEvent::TOperation::WRITE;
-                    }
+                        buffers.pop_front();
 
-                    else
+                        LOGT << "wrote, n: " << n;
 
-                    if (n == 0) {
-                        event->operation = TEvent::TOperation::CLOSE;
-                    }
+                        if (n > 0) {
+                            handle->context->setPosition(handle->uri, IContextActions::TStreamType::WRITER, n);
+                            event->operation = TEvent::TOperation::WRITE;
+                        }
 
-                    else
+                        else
 
-                    {
-                        handle->context->addBuffer(
-                            handle->uri,
-                            handle->stream_type,
-                            Buffer::create(std::strerror(errno)));
-                        event->operation = TEvent::TOperation::ERROR_;
+                        if (n < 0) {
+                            if (errno == EPIPE) {
+                                event->operation = TEvent::TOperation::CLOSE;
+                            }
+
+                            else
+
+                            if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                                event->operation = TEvent::TOperation::WRITE_END;
+                            }
+
+                            else
+
+                            {
+                                event->operation = TEvent::TOperation::ERROR_;
+                                handle->context->addBuffer(handle->uri, handle->stream_type, Buffer::create(std::strerror(errno)));
+                            }
+
+                            is_processed = true;
+                        }
                     }
                 }
 
@@ -1067,16 +1078,25 @@ void CConnectionManager::CKEventRunnable::run(std::atomic<bool> &is_running) {
                     // delete all pipes
                     handle->context->delPipe("");
                     handle->protocol.reset();
+                    is_processed = true;
                 }
 
                 auto &target_list = map_protocol_actions[handle->protocol];
                 target_list.splice(target_list.end(), handle->context->getActions());
             }
+
             // update maps
             m_manager->updateHandles(handles_to_update);
             // update kqueue
             m_manager->updateHandles(map_protocol_actions);
-        }
+
+            // если был protocol context swap то handle
+            // должен быть удален чтобы не было повторного read / write
+
+            if (is_processed)
+                i = handles.erase(i);
+            LOGT << "NEXT WHILE";
+        } // while
     }
 }
 

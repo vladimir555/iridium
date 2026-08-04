@@ -30,15 +30,9 @@ std::vector<T> assign(std::list<T> const &source) {
 }
 
 
-template<typename T, typename ... TItems>
-bool checkOneOf(T const &source, TItems const & ... items_) {
-    std::initializer_list<T const> const &items{items_ ...};
-
-    for (auto const &item: items)
-        if (item == source)
-            return true;
-
-    return false; // ----->
+template<typename T, typename... TItems>
+constexpr bool checkOneOf(T const &source, TItems const & ... items_) {
+    return ((source == items_) || ...);
 }
 
 

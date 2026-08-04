@@ -127,139 +127,145 @@ std::string TConvert<std::string, system_clock::duration>::convert(system_clock:
     auto ns = duration_cast<nanoseconds>(remaining);
 
     std::string result;
-    if (is_negative) result += "-";
+    if (is_negative)
+        result += "-";
 
     if (h.count())
         result += TConvert<std::string, int64_t>::convert(h.count()) + "h";
+
     if (m.count())
         result += TConvert<std::string, int64_t>::convert(m.count()) + "m";
+
     if (s.count())
         result += TConvert<std::string, int64_t>::convert(s.count()) + "s";
+
     if (ms.count())
         result += TConvert<std::string, int64_t>::convert(ms.count()) + "ms";
+
     if (us.count())
         result += TConvert<std::string, int64_t>::convert(us.count()) + "us";
+
     if (ns.count())
         result += TConvert<std::string, int64_t>::convert(ns.count()) + "ns";
 
-    return result.empty() ? "0s" : result;
+    return result.empty() ? "0s" : result; // ----->
 }
 
 
 string TConvert<string, bool>::convert(bool const &value) {
-    return value ? "true" : "false";
+    return value ? "true" : "false"; // ----->
 }
 
 
 string TConvert<string, int64_t>::convert(int64_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, int64_t>::convert(int64_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, uint64_t>::convert(uint64_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return upperCase(string(buffer));
+    return upperCase(string(buffer)); // ----->
 }
 
 
 string TConvert<string, uint64_t>::convert(uint64_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return upperCase(string(buffer));
+    return upperCase(string(buffer)); // ----->
 }
 
 
 string TConvert<string, int32_t>::convert(int32_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return upperCase(string(buffer));
+    return upperCase(string(buffer)); // ----->
 }
 
 
 string TConvert<string, int32_t>::convert(int32_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return upperCase(string(buffer));
+    return upperCase(string(buffer)); // ----->
 }
 
 
 string TConvert<string, uint32_t>::convert(uint32_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, uint32_t>::convert(uint32_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, int16_t>::convert(int16_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, int16_t>::convert(int16_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, uint16_t>::convert(uint16_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, uint16_t>::convert(uint16_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, int8_t>::convert(int8_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, int8_t>::convert(int8_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, uint8_t>::convert(uint8_t const &value, uint8_t const &base) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, base);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
 string TConvert<string, uint8_t>::convert(uint8_t const &value) {
     char buffer[int_to_string_buffer_size];
     platform::itoa(value, buffer, 10);
-    return string(buffer);
+    return string(buffer); // ----->
 }
 
 
@@ -275,29 +281,29 @@ string convertRealToString(TValue const &value, std::string const &format) {
 
 
 string TConvert<string, double>::convert(double const &value, uint8_t const &precision) {
-    return convertRealToString(value, "%0." + TConvert<string, uint8_t>::convert(precision) + "lf");
+    return convertRealToString(value, "%0." + TConvert<string, uint8_t>::convert(precision) + "lf"); // ----->
 }
 
 
 string TConvert<string, double>::convert(double const &value) {
-    return TConvert<string, double>::convert(value, static_cast<uint8_t>(config::double_precission));
+    return TConvert<string, double>::convert(value, static_cast<uint8_t>(config::double_precission)); // ----->
 }
 
 
 string TConvert<string, float>::convert(float const &value, uint8_t const &precision) {
-    return convertRealToString(value, "%0." + TConvert<string, uint8_t>::convert(precision) + "f");
+    return convertRealToString(value, "%0." + TConvert<string, uint8_t>::convert(precision) + "f"); // ----->
 }
 
 
 string TConvert<string, float>::convert(float const &value) {
-    return TConvert<string, float>::convert(value, static_cast<uint8_t>(config::double_precission));
+    return TConvert<string, float>::convert(value, static_cast<uint8_t>(config::double_precission)); // ----->
 }
 
 
 string TConvert<string, std::thread::id>::convert(std::thread::id const &value) {
     stringstream ss;
     ss << value;
-    return ss.str();
+    return ss.str(); // ----->
 }
 
 
@@ -316,12 +322,12 @@ inline string formatException(std::exception const &e) {
         }
     }
 
-    return result;
+    return result; // ----->
 }
 
 
 string TConvert<string, std::exception>::convert(std::exception const &e) {
-    return formatException(e);
+    return formatException(e); // ----->
 }
 
 
@@ -330,16 +336,16 @@ string TConvert<string, std::nested_exception>::convert(std::nested_exception co
         if (e.nested_ptr())
             e.rethrow_nested();
         else
-            return "";
+            return ""; // ----->
     } catch (std::exception const &inner) {
-        return formatException(inner);
+        return formatException(inner); // ----->
     } catch (...) {
-        return "unknown exception";
+        return "unknown exception"; // ----->
     }
 }
 #else
 string TConvert<string, std::exception>::convert(std::exception const &e) {
-    return e.what();
+    return e.what(); // ----->
 }
 #endif
 
@@ -420,15 +426,35 @@ system_clock::duration TConvert<system_clock::duration, string>::convert(string 
 
         if (unit == "h") {
             total_nanoseconds += count * 3600000000000LL;
-        } else if (unit == "m") {
+        }
+
+        else
+
+        if (unit == "m") {
             total_nanoseconds += count * 60000000000LL;
-        } else if (unit == "s") {
+        }
+
+        else
+
+        if (unit == "s") {
             total_nanoseconds += count * 1000000000LL;
-        } else if (unit == "ms") {
+        }
+
+        else
+
+        if (unit == "ms") {
             total_nanoseconds += count * 1000000LL;
-        } else if (unit == "us" || unit == "µs") {
+        }
+
+        else
+
+        if (unit == "us" || unit == "µs") {
             total_nanoseconds += count * 1000LL;
-        } else if (unit == "ns") {
+        }
+
+        else
+
+        if (unit == "ns") {
             total_nanoseconds += count;
         }
     }
@@ -437,7 +463,7 @@ system_clock::duration TConvert<system_clock::duration, string>::convert(string 
         std::chrono::nanoseconds(total_nanoseconds)
     );
 
-    return negative ? -result : result;
+    return negative ? -result : result; // ----->
 }
 
 
@@ -470,7 +496,7 @@ int32_t TConvert<int32_t, string>::convert(string const &value) {
 
     if (i == 0) {
         auto result = platform::sscanf(value.c_str(), "%i", &i);
-        if (result == 1)
+        if ( result == 1)
             return i; // ----->
         else
             throw runtime_error("convertion '" + value + "' to int32 error"); // ----->
@@ -489,7 +515,7 @@ int64_t TConvert<int64_t, string>::convert(string const &value) {
 
     if (i == 0) {
         auto result = platform::sscanf(value.c_str(), "%i", &i);
-        if (result == 1)
+        if ( result == 1)
             return i; // ----->
         else
             throw runtime_error("convertion '" + value + "' to int64 error"); // ----->
@@ -502,7 +528,7 @@ int64_t TConvert<int64_t, string>::convert(string const &value) {
 uint32_t TConvert<uint32_t, string>::convert(string const &value) {
     // todo: int test
     auto result = TConvert<uint64_t, string>::convert(value);
-    if (result > UINT32_MAX)
+    if ( result > UINT32_MAX)
         throw runtime_error("convertion '" + value + "' to uint32 error"); // ----->
     return static_cast<uint32_t>(result); // ----->
 }
@@ -510,7 +536,7 @@ uint32_t TConvert<uint32_t, string>::convert(string const &value) {
 
 uint16_t TConvert<uint16_t, string>::convert(string const &value) {
     auto result = TConvert<uint64_t, string>::convert(value);
-    if (result > UINT16_MAX)
+    if ( result > UINT16_MAX)
         throw runtime_error("convertion '" + value + "' to uint16 error"); // ----->
     return static_cast<uint16_t>(result); // ----->
 }
@@ -518,7 +544,7 @@ uint16_t TConvert<uint16_t, string>::convert(string const &value) {
 
 uint8_t TConvert<uint8_t, string>::convert(string const &value) {
     auto result = TConvert<uint64_t, string>::convert(value);
-    if (result > UINT8_MAX)
+    if ( result > UINT8_MAX)
         throw runtime_error("convertion '" + value + "' to uint8 error"); // ----->
     return static_cast<uint8_t>(result); // ----->
 }
@@ -553,12 +579,12 @@ TResult convertStringToReal(string const &value, std::string const &format) {
 
 
 double TConvert<double, string>::convert(string const &value) {
-    return convertStringToReal<double>(value, "%lf");
+    return convertStringToReal<double>(value, "%lf"); // ----->
 }
 
 
 float TConvert<float, string>::convert(string const &value) {
-    return convertStringToReal<float>(value, "%f");
+    return convertStringToReal<float>(value, "%f"); // ----->
 }
 
 
@@ -609,7 +635,7 @@ string convertInternal<string, wstring, 2>(wstring const &value) {
 template<>
 wstring convertInternal<wstring, string, 2>(string const &value) {
     auto result = TConvert<u16string, string>::convert(value);
-    return wstring(result.begin(), result.end());
+    return wstring(result.begin(), result.end()); // ----->
 }
 
 
@@ -625,7 +651,7 @@ string convertInternal<string, wstring, 4>(wstring const &value) {
 template<>
 wstring convertInternal<wstring, string, 4>(string const &value) {
     auto result = TConvert<u32string, string>::convert(value);
-    return wstring(result.begin(), result.end());
+    return wstring(result.begin(), result.end()); // ----->
 }
 
 
@@ -644,8 +670,10 @@ wstring TConvert<wstring, string>::convert(string const &value) {
 
 string TConvert<string, u16string>::convert(u16string const &value) {
     // todo: test, not complete errors handling
-    std::string result;
-    size_t      length = value.length();
+    std::string
+        result;
+    size_t
+        length = value.length();
 
     for (size_t i = 0; i < length; ++i) {
         uint32_t symbol = value[i];
@@ -661,28 +689,48 @@ string TConvert<string, u16string>::convert(u16string const &value) {
             } else
                 throw std::runtime_error(
                     "convertion utf16 to utf8 error: high surrogate without following low surrogate"); // ----->
-        } else
+        }
+
+        else
+
         if (symbol >= 0xDC00 && symbol <= 0xDFFF)
             throw std::runtime_error(
                 "convertion utf16 to utf8 error: orphan low surrogate without preceding high surrogate"); // ----->
 
         if (symbol <= 0x7F) {
             result.push_back(static_cast<char>(symbol));
-        } else if (symbol <= 0x7FF) {
+        }
+
+        else
+
+        if (symbol <= 0x7FF) {
             result.push_back(static_cast<char>(0xC0 | ((symbol >> 6)  & 0x1F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
-        } else if (symbol <= 0xFFFF) {
+        }
+
+        else
+
+        if (symbol <= 0xFFFF) {
             result.push_back(static_cast<char>(0xE0 | ((symbol >> 12) & 0x0F)));
-            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >>  6) & 0x3F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
-        } else if (symbol <= 0x10FFFF) {
+        }
+
+        else
+
+        if (symbol <= 0x10FFFF) {
             result.push_back(static_cast<char>(0xF0 | ((symbol >> 18) & 0x07)));
             result.push_back(static_cast<char>(0x80 | ((symbol >> 12) & 0x3F)));
-            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >>  6) & 0x3F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
-        } else
+        }
+
+        else
+
+        {
             throw std::invalid_argument("convertion utf16 to utf8 error: invalid code point on position " +
                 TConvert<string, uint64_t>::convert(i)); // ----->
+        }
     }
     return result; // ----->
 }
@@ -695,24 +743,38 @@ string TConvert<string, u32string>::convert(u32string const &value) {
     for (char32_t const &symbol: value) {
         if (symbol <= 0x7F) {
             result.push_back(static_cast<char>(symbol));
-        } else
+        }
+
+        else
+
         if (symbol <= 0x7FF) {
             result.push_back(static_cast<char>(0xC0 | ((symbol >> 6)  & 0x1F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
-        } else
+        }
+
+        else
+
         if (symbol <= 0xFFFF) {
             result.push_back(static_cast<char>(0xE0 | ((symbol >> 12) & 0x0F)));
-            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >>  6) & 0x3F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
-        } else
+        }
+
+        else
+
         if (symbol <= 0x10FFFF) {
             result.push_back(static_cast<char>(0xF0 | ((symbol >> 18) & 0x07)));
             result.push_back(static_cast<char>(0x80 | ((symbol >> 12) & 0x3F)));
-            result.push_back(static_cast<char>(0x80 | ((symbol >> 6)  & 0x3F)));
+            result.push_back(static_cast<char>(0x80 | ((symbol >>  6) & 0x3F)));
             result.push_back(static_cast<char>(0x80 |  (symbol        & 0x3F)));
-        } else
+        }
+
+        else
+
+        {
             throw std::invalid_argument("convertion utf32 to utf8 error: invalid UTF-32 code symbol: " +
                 TConvert<string, uint32_t>::convert(symbol, 16)); // ----->
+        }
     }
     return result; // ----->
 }
@@ -720,40 +782,58 @@ string TConvert<string, u32string>::convert(u32string const &value) {
 
 u16string TConvert<u16string, string>::convert(string const &value) {
     // todo: test, not complete errors handling
-    std::u16string result;
-    auto length = value.length();
-    size_t i = 0;
+    std::u16string
+        result;
+    auto
+        length = value.length();
+    size_t
+        i = 0;
+
     while (i < length) {
         uint32_t symbol = static_cast<uint8_t>(value[i]);
 
         if (symbol <= 0x7F) {
             result.push_back(static_cast<char16_t>(symbol));
-        } else
+        }
+
+        else
+
         if (symbol >= 0xC0 && symbol <= 0xDF && i + 1 < length) {
             symbol = ((symbol & 0x1F) << 6) |
                  (static_cast<uint8_t>(value[i + 1]) & 0x3F);
             i++;
             result.push_back(static_cast<char16_t>(symbol));
-        } else
+        }
+
+        else
+
         if (symbol >= 0xE0 && symbol <= 0xEF && i + 2 < length) {
             symbol = ((symbol & 0x0F) << 12) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 6) |
                  (static_cast<uint8_t>(value[i + 2]) & 0x3F);
             i += 2;
             result.push_back(static_cast<char16_t>(symbol));
-        } else
+        }
+
+        else
+
         if (symbol >= 0xF0 && symbol <= 0xF7 && i + 3 < length) {
             symbol = ((symbol & 0x07) << 18) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 12) |
-                ((static_cast<uint8_t>(value[i + 2]) & 0x3F) << 6)  |
+                ((static_cast<uint8_t>(value[i + 2]) & 0x3F) <<  6) |
                  (static_cast<uint8_t>(value[i + 3]) & 0x3F);
             i += 3;
             symbol -= 0x10000;
             result.push_back(static_cast<char16_t>((symbol >> 10)   + 0xD800));
             result.push_back(static_cast<char16_t>((symbol & 0x3FF) + 0xDC00));
-        } else
+        }
+
+        else
+
+        {
             throw std::invalid_argument("convertion utf8 to utf16 error: invalid code point on position " +
                 TConvert<string, uint64_t>::convert(i)); // ----->
+        }
         i++;
     }
     return result; // ----->
@@ -762,38 +842,57 @@ u16string TConvert<u16string, string>::convert(string const &value) {
 
 u32string TConvert<u32string, string>::convert(string const &value) {
     // todo: test, not complete errors handling
-    std::u32string result;
-    size_t length = value.length();
-    size_t i = 0;
+    std::u32string
+        result;
+    size_t
+        length = value.length();
+    size_t
+        i = 0;
+
     while (i < length) {
         uint32_t symbol = static_cast<uint8_t>(value[i]);
 
         if (symbol <= 0x7F) {
             result.push_back(symbol);
-        } else
+        }
+
+        else
+
         if (symbol >= 0xC0 && symbol <= 0xDF && i + 1 < length) {
             symbol = ((symbol & 0x1F) << 6) |
                  (static_cast<uint8_t>(value[i + 1]) & 0x3F);
             i += 1;
             result.push_back(symbol);
-        } else
+        }
+
+        else
+
         if (symbol >= 0xE0 && symbol <= 0xEF && i + 2 < length) {
             symbol = ((symbol & 0x0F) << 12) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 6) |
                  (static_cast<uint8_t>(value[i + 2]) & 0x3F);
             i += 2;
             result.push_back(symbol);
-        } else
+        }
+
+        else
+
         if (symbol >= 0xF0 && symbol <= 0xF7 && i + 3 < length) {
             symbol = ((symbol & 0x07) << 18) |
                 ((static_cast<uint8_t>(value[i + 1]) & 0x3F) << 12) |
-                ((static_cast<uint8_t>(value[i + 2]) & 0x3F) << 6) |
+                ((static_cast<uint8_t>(value[i + 2]) & 0x3F) <<  6) |
                  (static_cast<uint8_t>(value[i + 3]) & 0x3F);
             i += 3;
             result.push_back(symbol);
-        } else
-            throw std::invalid_argument("convertion utf8 to utf32 error: invalid code point on position " +
+        }
+
+        else
+
+        {
+            throw std::invalid_argument(
+                "convertion utf8 to utf32 error: invalid code point on position " +
                 TConvert<string, uint64_t>::convert(i)); // ----->
+        }
         i++;
     }
     return result; // ----->

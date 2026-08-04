@@ -9,10 +9,16 @@
 #include "iridium/strings.h"
 #include "iridium/convertion/convert.h"
 
-#include <list>
 #include <map>
+#include <list>
+#include <string>
+#include <cstdio>
+#include <cstdlib>
 #include <iostream>
-#include <limits.h>
+#include <climits>
+#include <stdexcept>
+#include <functional>
+#include <type_traits>
 
 
 #ifdef _MSC_VER
@@ -38,7 +44,7 @@ public: \
     TEnum(): m_value(TEnumInternal::UNKNOWN) {} \
     TEnum(TEnum const &e) = default; \
     TEnum(TEnumInternal const &e): m_value(e) {} \
-    TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
+    explicit TEnum(int const &value): m_value(static_cast<TEnumInternal>(value)) {} \
     TEnum(std::string const &s): m_value(UNKNOWN) { \
         for (auto const &i: getMap()) { \
             if (iridium::lowerCase(i.second) == iridium::lowerCase(s)) { \
@@ -93,8 +99,8 @@ private: \
                         (m)[*i++] = name; \
                     else { \
                         auto error = std::string(#TEnum) + " map key collision " + (m)[*i] + " and " + name; \
-                        printf("FATAL: %s\n", error.c_str()); \
-                        throw std::runtime_error(error); \
+                        std::fprintf(stderr, "FATAL: %s\n", error.c_str()); \
+                        std::abort(); \
                     } \
                 } \
                 return m; \
@@ -195,8 +201,11 @@ struct TConvert<
     TEnum,
     std::enable_if_t<!std::is_enum_v<TEnum> && detail::TIsIridiumEnum<TEnum>::value> >
 {
-    static std::string convert(TEnum const &value) {
-        return TEnum::convert(value);
+    static std::string convert(TEnum const &value, bool const &is_flags = false) {
+        if (is_flags)
+            return value.convertToFlagsString();
+        else
+            return TEnum::convert(value);
     }
 };
 

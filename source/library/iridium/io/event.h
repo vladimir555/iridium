@@ -19,7 +19,9 @@ struct TEvent {
         TOperation,
         OPEN,
         READ,
+        READ_END,
         WRITE,
+        WRITE_END,
         TIMEOUT,
         ERROR_,
         CLOSE);

@@ -18,7 +18,7 @@ namespace iridium::io {
 
 
 //todo: maybe rm inheritance
-class Buffer: private std::vector<uint8_t> {
+class Buffer final: private std::vector<uint8_t> {
 public:
     DEFINE_CREATE(Buffer)
 
@@ -51,6 +51,9 @@ public:
     bool checkSuffixEqual(std::vector<uint8_t> const &suffix) const;
     void emplace_back(Buffer::TSharedPtr const &buffer);
 };
+
+
+bool checkSuffix(std::list<Buffer::TSharedPtr> const &buffers, std::string const &suffix);
 
 
 } // iridium::io

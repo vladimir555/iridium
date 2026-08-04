@@ -207,6 +207,49 @@ string const http_header_composed = ""
 "content-length: 1984\n\n";
 
 
+// 2026-07-20 08:50:46.469 T 0x1fa359d80 parsing.cpp:255
+// 'MyBeerJournal' = ''
+//   'Brewery' = ''
+//     'Beer' = ''
+//       '' = '
+//             "What an excellent IPA. This is the most delicious beer I have ever tasted!"
+//         '
+//       'dateSampled' = '01/02/2011'
+//       'description' = 'IPA'
+//       'name' = 'Centennial'
+//       'rating' = 'A+'
+//     'location' = 'Grand Rapids, MI'
+//     'name' = 'Founders Brewing Company'
+//   'Brewery' = ''
+//     'Beer' = ''
+//       '' = '
+//             This beer is not so good... but I am not that big of a fan of english style ales.
+//         '
+//       'dateSampled' = '02/07/2015'
+//       'description' = 'Belgian Ale'
+//       'name' = 'Farmhouse Ale'
+//       'rating' = 'B'
+//     'location' = 'Grand Rapids, MI'
+//     'name' = 'Brewery Vivant'
+//   'Brewery' = ''
+//     'Beer' = ''
+//       '' = '
+//             Another execllent brew. Two Hearted gives Founders Centennial a run for it's money.
+//         '
+//       'dateSampled' = '03/15/2012'
+//       'description' = 'IPA'
+//       'name' = 'Two Hearted Ale'
+//       'rating' = 'A'
+//     'location' = 'Kalamazoo, MI'
+//     'name' = 'Bells Brewery'
+//   'array' = '5'
+//   'array' = '4'
+//   'array' = '3'
+//   'array' = '2'
+//   'array' = '1'
+// 2026-07-20 08:50:46.470 I 0x1fa359d80 OK   /parsing/parsing.cpp/parse_json
+
+
 } // unnamed
 
 
@@ -245,11 +288,45 @@ TEST(compose_xml) {
 }
 
 
-TEST(parse_json) {
+TEST(parse_json_basic) {
     auto parser = CJSONParser::create();
 
-    ASSERT(std::string("null\n"), equal, parser->parse("{  \"value\":\"null\n\"}  ")->getValue());
+    {
+        auto node = parser->parse("{}");
+        ASSERT("root", equal, node->getName());
+        ASSERT("", equal, node->getValue());
+    }
 
+    {
+        auto node = parser->parse("{ \"key\": \"value\" }");
+        ASSERT("key",   equal, node->getName());
+        ASSERT("value", equal, node->getValue());
+    }
+
+    {
+        auto node = parser->parse("{  \"key1\":\"null\n\"}  ");
+        ASSERT("key1",   equal, node->getName());
+        ASSERT("null\n", equal, node->getValue());
+    }
+
+    {
+        auto node = parser->parse("{  \"key2\":123.0}");
+        ASSERT("key2",   equal, node->getName());
+        ASSERT("123.0",  equal, node->getValue());
+    }
+    {
+        auto node = parser->parse("{  \"parent\":{\"key3\":1},\"key4\":2}");
+        ASSERT(static_cast<bool>(node->getChild("parent")));
+        ASSERT(static_cast<bool>(node->getChild("parent")->getChild("key3")));
+        ASSERT(static_cast<bool>(node->getChild("key4")));
+        ASSERT("1", equal, node->getChild("parent")->getChild("key3")->getValue());
+        ASSERT("2", equal, node->getChild("key4")->getValue());
+    }
+}
+
+
+TEST(parse_json_beer_journal) {
+    auto parser = CJSONParser::create();
     auto node   = parser->parse(beer_json);
 
     ASSERT(8, equal, node->size());
@@ -267,15 +344,26 @@ TEST(parse_json) {
             array += i->getValue();
 
     ASSERT("54321"          , equal, array);
+}
+
+
+TEST(parse_json_unquoted_values) {
+    auto parser = CJSONParser::create();
+
     ASSERT("true"           , equal, parser->parse("{ \"value\":true }")->getValue());
     ASSERT("false"          , equal, parser->parse("{ \"value\":false }")->getValue());
     ASSERT("null"           , equal, parser->parse("{ \"value\":null }")->getValue());
     ASSERT("0.123456789"    , equal, parser->parse("{ \"value\":0.123456789 }")->getValue());
     ASSERT("null0"          , equal, parser->parse("{ \"value\":\"null0\" }")->getValue());
     ASSERT(parser->parse("{ \"value\":null0 }"), std::exception);
+}
+
+
+TEST(parse_json_arrays) {
+    auto parser = CJSONParser::create();
 
     {
-        auto slice = parser->parse("{ array: [ {\"value\": 1}, {\"value\": 2} ] }")->slice("/array/value");
+        auto slice = parser->parse("{ \"array\": [ {\"value\": 1}, {\"value\": 2} ] }")->slice("/array/value");
 
         ASSERT( 2       , equal, slice.size());
 
@@ -286,7 +374,7 @@ TEST(parse_json) {
         ASSERT("2"      , equal, slice.back()->getValue());
     }
     {
-        auto slice = parser->parse("{ value: [ \"1\", \"2\" ] }")->slice("/value");
+        auto slice = parser->parse("{ \"value\": [ \"1\", \"2\" ] }")->slice("/value");
 
         ASSERT( 2       , equal, slice.size());
 
@@ -329,6 +417,11 @@ TEST(parse_json) {
         ASSERT("array"  , equal, slice.back()->getName());
         ASSERT("2"      , equal, slice.back()->getValue());
     }
+}
+
+
+TEST(parse_json_syntax_errors) {
+    auto parser = CJSONParser::create();
 
     ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 ]"), std::exception);
     ASSERT(parser->parse("[ {\"value\": 1}, {\"value\": 2 }"), std::exception);
@@ -338,6 +431,13 @@ TEST(parse_json) {
 //    LOGT << "BEGIN";
     ASSERT(parser->parse("{\"value\": 1,}"),                   std::exception);
 //    LOGT << "END";
+}
+
+
+TEST(parse_json_edge_cases) {
+    auto parser = CJSONParser::create();
+    INode::TSharedPtr node;
+
     node = parser->parse(
 "{\n"
 "      \"result\": {\n"
@@ -360,7 +460,6 @@ TEST(parse_json) {
 "{ \"value\":"
 "2110\t"
 "}");
-
 }
 
 

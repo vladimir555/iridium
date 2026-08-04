@@ -420,15 +420,15 @@ CContext::TStream::TSharedPtr CContext::getStream(
             return uri_pipe->second->writer; // ----->
     }
 
-    LOGT << "map_uri_pipe 1, " << reinterpret_cast<uint64_t>(this);
-    for (auto const &uri_pipe: m_map_uri_pipe) {
-        LOGT
-        << "map_uri_pipe: " << uri_pipe.first
-        << " " << uri_pipe.second->name
-        << " " << uri_pipe.second->reader->uri
-        << " " << uri_pipe.second->writer->uri;
-    }
-    LOGT << "map_uri_pipe 2";
+    // LOGT << "map_uri_pipe 1, " << reinterpret_cast<uint64_t>(this);
+    // for (auto const &uri_pipe: m_map_uri_pipe) {
+    //     LOGT
+    //     << "map_uri_pipe: " << uri_pipe.first
+    //     << " " << uri_pipe.second->name
+    //     << " " << uri_pipe.second->reader->uri
+    //     << " " << uri_pipe.second->writer->uri;
+    // }
+    // LOGT << "map_uri_pipe 2";
 
     throw std::runtime_error(
         "context getting stream error: " +

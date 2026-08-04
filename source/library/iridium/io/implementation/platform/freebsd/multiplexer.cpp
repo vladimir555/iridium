@@ -101,19 +101,23 @@ DEFINE_ENUM(
 )
 // IMPLEMENT_ENUM(TEventUserFFlag)
 
+
 std::string toString(struct kevent const &source) {
     std::string fflags;
 
     // enum fflags depends filter
     switch (source.filter) {
         case EVFILT_PROC:
-            fflags = TEventProcFFlag(source.fflags).convertToFlagsString();
+            // fflags = TEventProcFFlag(source.fflags).convertToFlagsString();
+            fflags = convert<string, TEventProcFFlag>(static_cast<TEventProcFFlag::TEnumInternal>(source.fflags), true);
             break;
         case EVFILT_VNODE:
-            fflags = TEventVNodeFFlag(source.fflags).convertToFlagsString();
+            // fflags = TEventVNodeFFlag(source.fflags).convertToFlagsString();
+            fflags = convert<string, TEventVNodeFFlag>(static_cast<TEventVNodeFFlag::TEnumInternal>(source.fflags), true);
             break;
         case EVFILT_USER:
-            fflags = TEventUserFFlag(source.fflags).convertToFlagsString();
+            // fflags = TEventUserFFlag(source.fflags).convertToFlagsString();
+            fflags = convert<string, TEventVNodeFFlag>(static_cast<TEventVNodeFFlag::TEnumInternal>(source.fflags), true);
             break;
         default:
             fflags = convert<std::string, uint32_t>(source.fflags, 16);
@@ -122,8 +126,8 @@ std::string toString(struct kevent const &source) {
 
     return
         "{ ident: "     + convert<std::string>(source.ident)
-        + ", filter: "  + convert<std::string, TEventFilter>(source.filter)
-        + ", flags: "   + TEventFlag    (source.flags) .convertToFlagsString()
+        + ", filter: "  + convert<std::string, TEventFilter>(static_cast<TEventFilter::TEnumInternal>(source.filter))
+        + ", flags: "   + TEventFlag(TEventFlag::TEnumInternal(source.flags)).convertToFlagsString()
         + ", fflags: "  + fflags
         + ", data: "    + convert<std::string,  intptr_t>(source.data)
         + ", udata: "   + convert<std::string, uintptr_t>(reinterpret_cast<uintptr_t>(source.udata)) + " }";

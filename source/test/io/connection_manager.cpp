@@ -11,6 +11,7 @@ using iridium::io::IContext;
 using iridium::io::TStream;
 using iridium::io::URI;
 using iridium::io::TEvent;
+using iridium::io::checkSuffix;
 using iridium::threading::sleep;
 using iridium::checkOneOf;
 
@@ -21,7 +22,6 @@ public:
 
     bool control(TEvent::TSharedPtr const &event) override {
         static std::string const DEFAULT_PIPE_NAME = "default";
-        LOGT << "event: " << event;
 
         if (event->operation == TEvent::TOperation::OPEN) {
             event->context->setPipe(DEFAULT_PIPE_NAME, event->uri, nullptr);
@@ -31,16 +31,35 @@ public:
         if (event->operation == TEvent::TOperation::READ) {
             LOGT <<
                 event->operation << ": " <<
+                event->context->getBuffers(event->uri, IContext::TStreamType::READER);
+
+            if (checkSuffix(event->context->getBuffers(event->uri, IContext::TStreamType::READER), "\n\n")) {
+                event->context->swapPipe(event->uri);
+                LOGT << "SWAP, " <<
+                    event->operation << ": " <<
+                    event->context->getBuffers(event->uri, IContext::TStreamType::READER) << " -> " <<
+                    event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
+            }
+        }
+
+        if (event->operation == TEvent::TOperation::WRITE) {
+            LOGT <<
+                event->operation << ": " <<
+                event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
+        }
+
+        if (event->operation == TEvent::TOperation::READ_END) {
+            LOGT <<
+                event->operation << ": " <<
                 event->context->getBuffers(event->uri, IContext::TStreamType::READER) << " -> " <<
                 event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
 
             event->context->swapPipe(event->uri);
+            LOGT << "SWAP";
             return true;
         }
 
-        if (event->operation == TEvent::TOperation::WRITE &&
-            event->context->getBuffers(event->uri, IContext::TStreamType::WRITER).empty())
-        {
+        if (event->operation == TEvent::TOperation::WRITE_END) {
             return false;
         }
 
@@ -93,7 +112,10 @@ public:
                 event->context->getBuffers(event->uri, IContext::TStreamType::WRITER);
         }
 
-        return false;
+        if (event->operation == TEvent::TOperation::CLOSE)
+            return false;
+
+        return true;
     }
 };
 

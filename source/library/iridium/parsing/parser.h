@@ -22,7 +22,11 @@ public:
     virtual ~IParser() = default;
 
     virtual INode::TSharedPtr parse(std::string const &source) const = 0;
+    // todo:
+    // virtual INode::TSharedPtr parse(std::list<io::Buffer::TSharedPtr> const &source) const = 0;
     virtual std::string compose(INode::TConstSharedPtr const &root_node) const = 0;
+    // todo:
+    // virtual std::list<io::Buffer::TSharedPtr> compose(INode::TConstSharedPtr const &root_node) const = 0;
 };
 
 

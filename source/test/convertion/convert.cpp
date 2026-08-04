@@ -298,17 +298,21 @@ enum TEnumTest {
 
 
 TEST(enum_) {
+    {
+        // TEnum e = 42;
+    }
+
     ASSERT(TEnum::E1, equal, static_cast<int>(TEnumTest::E1));
     ASSERT(TEnum::E2, equal, static_cast<int>(TEnumTest::E2));
     ASSERT(TEnum::E3, equal, static_cast<int>(TEnumTest::E3));
     ASSERT(TEnum::E4, equal, static_cast<int>(TEnumTest::E4));
     ASSERT(TEnum::E5, equal, static_cast<int>(TEnumTest::E5));
 
-    ASSERT(static_cast<int>(TEnumTest::E1), equal, convert<TEnum>(string("E1")));
-    ASSERT(static_cast<int>(TEnumTest::E2), equal, convert<TEnum>(string("E2")));
-    ASSERT(static_cast<int>(TEnumTest::E3), equal, convert<TEnum>(string("E3")));
-    ASSERT(static_cast<int>(TEnumTest::E4), equal, convert<TEnum>(string("E4")));
-    ASSERT(static_cast<int>(TEnumTest::E5), equal, convert<TEnum>(string("E5")));
+    ASSERT(static_cast<int>(TEnumTest::E1), equal, static_cast<int>(convert<TEnum>(string("E1"))));
+    ASSERT(static_cast<int>(TEnumTest::E2), equal, static_cast<int>(convert<TEnum>(string("E2"))));
+    ASSERT(static_cast<int>(TEnumTest::E3), equal, static_cast<int>(convert<TEnum>(string("E3"))));
+    ASSERT(static_cast<int>(TEnumTest::E4), equal, static_cast<int>(convert<TEnum>(string("E4"))));
+    ASSERT(static_cast<int>(TEnumTest::E5), equal, static_cast<int>(convert<TEnum>(string("E5"))));
 
     ASSERT("E1", equal, convert<string>(TEnum::E1));
     ASSERT("E2", equal, convert<string>(TEnum::E2));
