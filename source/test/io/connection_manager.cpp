@@ -1,5 +1,6 @@
 #include <iridium/testing/tester.h>
 
+#include <iridium/io/connection_manager.h>
 #include <iridium/io/implementation/connection_manager.h>
 #include <iridium/items.h>
 
