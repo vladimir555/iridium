@@ -217,7 +217,7 @@ macro(iridium_detect_project)
     )
 
     if (NOT PROJECT_NAME STREQUAL IRIDIUM_NAME)
-        target_link_libraries(]
+        target_link_libraries(
             ${LIBRARY_TARGET_NAME}
             PUBLIC
             ${IRIDIUM_NAME}::${IRIDIUM_NAME}
