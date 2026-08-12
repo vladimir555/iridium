@@ -195,8 +195,10 @@ macro(iridium_detect_project)
 
     get_cmake_property(_all_vars VARIABLES)
     foreach(_var IN LISTS _all_vars)
-        if(_var MATCHES "^BUILD_FLAG_" AND ${_var})
-            target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC ${_var})
+        if(_var MATCHES "^BUILD_FLAG_" AND NOT _var MATCHES "^CMAKE_")
+            if(DEFINED ${_var} AND ${_var})
+                target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC ${_var})
+            endif()
         endif()
     endforeach()
 
@@ -215,7 +217,7 @@ macro(iridium_detect_project)
     )
 
     if (NOT PROJECT_NAME STREQUAL IRIDIUM_NAME)
-        target_link_libraries(
+        target_link_libraries(]
             ${LIBRARY_TARGET_NAME}
             PUBLIC
             ${IRIDIUM_NAME}::${IRIDIUM_NAME}

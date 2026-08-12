@@ -118,7 +118,7 @@ fi
 VERSION_HEADER="source/library/${PROJECT_NAME}/version.h"
 mkdir -p "source/library/${PROJECT_NAME}"
 
-UPPER_PROJECT_NAME=$(printf '%s' "$PROJECT_NAME" | tr '[:lower:]' '[:upper:]')
+UPPER_PROJECT_NAME=$(printf '%s' "$PROJECT_NAME" | tr '[:lower:]-' '[:upper:]_')
 
 cat > "$VERSION_HEADER" << EOF
 // Copyright © 2019 Bulaev Vladimir.
