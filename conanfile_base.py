@@ -1,4 +1,9 @@
+# Copyright © 2019-2026 Bulaev Vladimir.
+# Contacts: <bulaev_vladimir@mail.ru>
+# License: https://www.gnu.org/licenses/lgpl-3.0
+
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
+from conan.tools.env import VirtualRunEnv
 from conan.tools.files import load, copy
 from conan.tools.build import cross_building, check_min_cppstd
 from conan.errors import ConanException, ConanInvalidConfiguration
@@ -80,12 +85,24 @@ class ProjectBase:
 
         for option_name in self.__class__.options:
             if option_name.startswith("with_") and self.options.get_safe(option_name):
-                tc.variables[f"BUILD_FLAG_{option_name[5:].upper()}"] = self.options.get_safe(option_name, False)
+                tc.variables[f"IRIDIUM_BUILD_FLAG_{option_name[5:].upper()}"] = self.options.get_safe(option_name, False)
+
+        conan_directory = os.environ.get(
+            "CONAN_HOME",
+            os.path.join(os.path.expanduser("~"), ".conan2"),
+        )
+        cache_directory = self.conf.get(
+            "user.iridium:cache_directory",
+            default=os.path.join(conan_directory, "cache_directory"),
+        )
+        tc.variables["IRIDIUM_BUILD_CACHE_DIRECTORY"] = cache_directory
 
         tc.generate()
 
         deps = CMakeDeps(self)
         deps.generate()
+        env = VirtualRunEnv(self)
+        env.generate()
 
     def build(self):
         cmake = CMake(self)
@@ -93,7 +110,13 @@ class ProjectBase:
         cmake.build()
 
         if (self.conf.get("user.iridium:run_tests", default=False, check_type=bool) and not cross_building(self)):
-            cmake.test()
+            try:
+                cmake.test(env="conanrun")
+            finally:
+                log_path = os.path.join(self.build_folder, "Testing", "Temporary", "LastTest.log")
+
+                if os.path.isfile(log_path):
+                    self.output.info(load(self, log_path))
 
     def package(self):
         cmake = CMake(self)

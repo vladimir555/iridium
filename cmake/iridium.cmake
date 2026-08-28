@@ -193,11 +193,30 @@ macro(iridium_detect_project)
         add_library(${LIBRARY_TARGET_NAME} SHARED ${LIBRARY_SOURCE})
     endif()
 
+    if (NOT DEFINED IRIDIUM_BUILD_CACHE_DIRECTORY)
+        set(IRIDIUM_BUILD_CACHE_DIRECTORY ${CMAKE_BINARY_DIR})
+    endif()
+
     get_cmake_property(_all_vars VARIABLES)
     foreach(_var IN LISTS _all_vars)
-        if(_var MATCHES "^BUILD_FLAG_" AND NOT _var MATCHES "^CMAKE_")
-            if(DEFINED ${_var} AND ${_var})
-                target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC ${_var})
+        if(_var MATCHES "^IRIDIUM_BUILD_" AND NOT _var MATCHES "^CMAKE_")
+            set(_val "${${_var}}")
+
+            if(NOT _val STREQUAL "")
+                string(TOUPPER "${_val}" _val_up)
+
+                if(_val_up MATCHES "^(FALSE|OFF|NO)$" OR _val STREQUAL "0")
+                    # dont create macros, old behaviour
+                elseif(_val_up MATCHES "^(TRUE|ON|YES)$")
+                    # bool true -> =1
+                    target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC "${_var}=1")
+                elseif(_val MATCHES "^[0-9]+$")
+                    # number
+                    target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC "${_var}=${_val}")
+                else()
+                    # string
+                    target_compile_definitions(${LIBRARY_TARGET_NAME} PUBLIC "${_var}=\"${_val}\"")
+                endif()
             endif()
         endif()
     endforeach()
@@ -242,7 +261,9 @@ macro(iridium_detect_project)
                 PROPERTIES
                 INSTALL_RPATH "@executable_path/../lib"
                 BUILD_WITH_INSTALL_RPATH TRUE
+                INSTALL_RPATH_USE_LINK_PATH TRUE
             )
+
         endif()
 
         target_link_libraries(
@@ -296,6 +317,7 @@ macro(iridium_detect_project)
                 PROPERTIES
                 INSTALL_RPATH "@executable_path/../lib"
                 BUILD_WITH_INSTALL_RPATH TRUE
+                INSTALL_RPATH_USE_LINK_PATH TRUE
             )
         endif()
 
