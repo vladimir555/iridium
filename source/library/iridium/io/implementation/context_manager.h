@@ -2,6 +2,10 @@
 #define HEADER_CONTEXT_MANAGER_741A7C4F_8CDD_47F0_9277_640033DD67AB
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/io/event_.h"
 #include "iridium/io/protocol_.h"
 #include "iridium/io/context_manager.h"

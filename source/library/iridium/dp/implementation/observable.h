@@ -2,6 +2,10 @@
 #define HEADER_OBSERVABLE_FE9A8D01_3845_472A_8A6E_B413B9C5FB6C
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/dp/observable.h"
 #include "iridium/threading/synchronized.h"
 

@@ -2,6 +2,10 @@
 #define HEADER_CONNECTION_MANAGER_5DB70C0D_5A67_45B8_92E1_C62348476EFA
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/platform.h"
 
 

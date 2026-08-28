@@ -1,6 +1,10 @@
 #ifndef HEADER_STREAM_PORT_ACCEPTOR_WINDOWS_0F1A5F2B
 #define HEADER_STREAM_PORT_ACCEPTOR_WINDOWS_0F1A5F2B
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/platform.h"
 
 #ifdef WINDOWS_PLATFORM

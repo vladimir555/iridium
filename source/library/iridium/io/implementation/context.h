@@ -2,6 +2,10 @@
 #define HEADER_CONTEXT_89DD55FF_8778_4F30_8072_24E183C9568F
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/io/context.h"
 #include "iridium/items.h"
 

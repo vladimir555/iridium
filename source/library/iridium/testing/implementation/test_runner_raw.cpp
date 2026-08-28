@@ -1,3 +1,7 @@
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "test_runner_raw.h"
 
 #include "iridium/testing/unit_test_case.h"

@@ -2,6 +2,10 @@
 #define HEADER_STREAM_PORT_070ECA4F_6B07_4564_A97F_165282BB6685
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/platform.h"
 
 

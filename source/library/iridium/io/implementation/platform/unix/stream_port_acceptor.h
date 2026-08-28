@@ -2,6 +2,10 @@
 #define HEADER_STREAM_PORT_ACCEPTOR_A42C26B0_AEFA_4B20_8793_0FE647A6153E
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/platform.h"
 
 

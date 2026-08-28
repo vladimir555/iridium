@@ -2,6 +2,10 @@
 #define HEADER_PROTOCOL_A4280CC9_7465_4C74_805A_D60B575171BB
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "context_.h"
 #include "event_.h"
 

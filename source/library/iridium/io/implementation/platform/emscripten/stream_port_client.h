@@ -2,6 +2,10 @@
 #define HEADER_SHARED_MEMORY_STREAM_PORT_19198010_6870_4A6B_A997_4F4B2E87311D
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/platform.h"
 
 

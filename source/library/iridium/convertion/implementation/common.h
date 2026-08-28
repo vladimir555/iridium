@@ -2,6 +2,10 @@
 #define HEADER_COMMON_BAC2AFE8_4236_4301_A650_E60876F56E15
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include <type_traits>
 #include <string>
 #include <sstream>

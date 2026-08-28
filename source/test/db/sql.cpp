@@ -1,3 +1,7 @@
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include <iridium/testing/tester.h>
 
 #include <iridium/parsing/serialization/node.h>
@@ -199,7 +203,7 @@ TEST(query) {
     from(Join<TAuthors, TBooks>()).select(authors.Rows.id, authors.Rows.name).getSQL();
 
 //    Condition(5) < 5;
-    
+
 //    From f(authors);
 //    f.Select_();
 

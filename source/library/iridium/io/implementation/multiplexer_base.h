@@ -2,6 +2,10 @@
 #define HEADER_MULTIPLEXER_BASE_8C2C1486_C382_4991_ACC1_E2EAF41EC058
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/threading/async_queue.h"
 #include "iridium/io/stream_.h"
 #include "iridium/io/event_.h"

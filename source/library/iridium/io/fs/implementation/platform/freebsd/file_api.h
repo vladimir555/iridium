@@ -2,6 +2,10 @@
 #define HEADER_FILE_API_731A6D20_F27C_43F9_BF0B_26863A9C8A4D
 
 
+// Copyright © 2019-2026 Vladimir Bulaev.
+// Contacts: <bulaev_vladimir@mail.ru>
+// License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0)
+
 #include "iridium/platform.h"
 
 
