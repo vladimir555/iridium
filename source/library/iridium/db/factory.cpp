@@ -16,12 +16,12 @@ using iridium::convertion::convert;
 using std::string;
 
 
-#ifdef BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_MYSQL
 using iridium::db::implementation::CMySQLConnector;
-#endif // BUILD_FLAG_MYSQL
-#ifdef BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_POSTGRES
 using iridium::db::implementation::CPostgresConnector;
-#endif // BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_POSTGRES
 
 
 namespace iridium::db {
@@ -29,14 +29,14 @@ namespace iridium::db {
 
 IConnector::TSharedPtr createConnector(io::URI const &uri) {
     switch (uri.getProtocol()) {
-#ifdef BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_MYSQL
     case URI::TProtocol::MYSQL:
         return CMySQLConnector::create(uri); // ----->
-#endif // BUILD_FLAG_MYSQL
-#ifdef BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_POSTGRES
     case URI::TProtocol::POSTGRES:
         return CPostgresConnector::create(uri); // ----->
-#endif // BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_POSTGRES
     case URI::TProtocol::UNKNOWN:
     default:
         throw std::runtime_error("creating db connector error: unknown db type " +

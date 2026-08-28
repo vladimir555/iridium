@@ -16,24 +16,24 @@ iridium_detect_project(
 )
 
 # ----- optional components
-if (NOT DEFINED BUILD_FLAG_POSTGRES)
-    set(BUILD_FLAG_POSTGRES 0)
+if (NOT DEFINED IRIDIUM_BUILD_FLAG_POSTGRES)
+    set(IRIDIUM_BUILD_FLAG_POSTGRES 0)
 endif()
-if (NOT DEFINED BUILD_FLAG_MYSQL)
-    set(BUILD_FLAG_MYSQL 0)
+if (NOT DEFINED IRIDIUM_BUILD_FLAG_MYSQL)
+    set(IRIDIUM_BUILD_FLAG_MYSQL 0)
 endif()
-if (NOT DEFINED BUILD_FLAG_OPENSSL)
-    set(BUILD_FLAG_OPENSSL 0)
+if (NOT DEFINED IRIDIUM_BUILD_FLAG_OPENSSL)
+    set(IRIDIUM_BUILD_FLAG_OPENSSL 0)
 endif()
 # -----
 
-if(BUILD_FLAG_POSTGRES)
+if(IRIDIUM_BUILD_FLAG_POSTGRES)
     find_package(PostgreSQL REQUIRED)
 
     target_compile_definitions(
         ${LIBRARY_TARGET_NAME}
         PRIVATE
-        BUILD_FLAG_POSTGRES
+        IRIDIUM_BUILD_FLAG_POSTGRES
     )
 
     target_link_libraries(
@@ -43,7 +43,7 @@ if(BUILD_FLAG_POSTGRES)
     )
 endif()
 
-if(BUILD_FLAG_MYSQL)
+if(IRIDIUM_BUILD_FLAG_MYSQL)
     find_package(PkgConfig)
     if(PkgConfig_FOUND)
         set(_MYSQL_PKG_NAMES "mysqlclient" "libmariadb" "mariadb" "mariadbclient")
@@ -67,7 +67,7 @@ if(BUILD_FLAG_MYSQL)
         target_compile_definitions(
             ${LIBRARY_TARGET_NAME}
             PRIVATE
-            BUILD_FLAG_MYSQL
+            IRIDIUM_BUILD_FLAG_MYSQL
         )
     else()
         find_package(libmysqlclient REQUIRED CONFIG)
@@ -79,7 +79,7 @@ if(BUILD_FLAG_MYSQL)
     endif()
 endif()
 
-if(BUILD_FLAG_OPENSSL)
+if(IRIDIUM_BUILD_FLAG_OPENSSL)
     find_package(OpenSSL REQUIRED)
 
     target_include_directories(

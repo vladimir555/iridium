@@ -6,7 +6,7 @@
 #include <iridium/build_flags.h>
 
 
-#ifdef BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_MYSQL
 
 
 #include <iridium/db/factory.h>
@@ -33,4 +33,4 @@ TEST(mysql) {
 } // namespace iridium::db
 
 
-#endif // BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_POSTGRES

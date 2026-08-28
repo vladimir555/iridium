@@ -98,17 +98,17 @@
 #if defined(_MSC_VER)
 #ifdef NDEBUG
 #else
-#define BUILD_TYPE_DEBUG
+#define IRIDIUM_BUILD_TYPE_DEBUG
 #endif
 // GCC and Clang
 #elif defined(__GNUC__) || defined(__clang__)
 #ifdef NDEBUG
 #else
-#define BUILD_TYPE_DEBUG
+#define IRIDIUM_BUILD_TYPE_DEBUG
 #endif
 // Unknown compiler
 #else
-// #define BUILD_TYPE_UNKNOWN
+// #define IRIDIUM_BUILD_TYPE_UNKNOWN
 #endif
 
 

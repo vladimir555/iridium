@@ -108,23 +108,23 @@ std::string extractFileNameToLog(std::string const &path);
 
 
 // macros: __func__
-#if defined(BUILD_TYPE_DEBUG) || defined(BUILD_FLAG_FORCE_DEBUG_LOG)
+#if defined(IRIDIUM_BUILD_TYPE_DEBUG) || defined(IRIDIUM_BUILD_FLAG_FORCE_DEBUG_LOG)
 #define LOGT \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::TRACE) << \
 iridium::logging::extractFileNameToLog(std::string(__FILE__) + ":" + std::to_string(__LINE__)) << " "
 #else
 #define LOGT \
 if (false) iridium::logging::LogStreamDummy()
-#endif // BUILD_TYPE_DEBUG
+#endif // IRIDIUM_BUILD_TYPE_DEBUG
 
 
-#if defined(BUILD_TYPE_DEBUG) || defined(BUILD_FLAG_FORCE_DEBUG_LOG)
+#if defined(IRIDIUM_BUILD_TYPE_DEBUG) || defined(IRIDIUM_BUILD_FLAG_FORCE_DEBUG_LOG)
 #define LOGD \
 iridium::logging::LogStream(iridium::logging::TEvent::TLevel::DEBUG)
 #else
 #define LOGD \
 if (false) iridium::logging::LogStreamDummy()
-#endif // BUILD_TYPE_DEBUG
+#endif // IRIDIUM_BUILD_TYPE_DEBUG
 
 
 #define LOGI \

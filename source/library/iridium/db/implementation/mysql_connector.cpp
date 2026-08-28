@@ -5,7 +5,7 @@
 #include "iridium/build_flags.h"
 
 
-#ifdef BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_MYSQL
 
 
 #include "mysql_connector.h"
@@ -188,4 +188,4 @@ CMySQLConnector::INode::TSharedPtr CMySQLConnector::sendQuery(string const &quer
 } // iridium::db::implementation
 
 
-#endif // COMPILATION_FLAG_MYSQL
+#endif // IRIDIUM_BUILD_FLAG_MYSQL

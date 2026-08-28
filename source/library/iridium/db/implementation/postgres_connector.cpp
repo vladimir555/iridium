@@ -5,7 +5,7 @@
 #include "iridium/build_flags.h"
 
 
-#ifdef BUILD_FLAG_POSTGRES
+#ifdef IRIDIUM_BUILD_FLAG_POSTGRES
 
 
 #include "postgres_connector.h"
@@ -129,4 +129,4 @@ CPostgresConnector::INode::TSharedPtr CPostgresConnector::sendQuery(string const
 } // iridium::db::implementation
 
 
-#endif // BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_POSTGRES

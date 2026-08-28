@@ -7,7 +7,7 @@
 
 
 #include "iridium/build_flags.h"
-#ifdef BUILD_FLAG_POSTGRES
+#ifdef IRIDIUM_BUILD_FLAG_POSTGRES
 
 
 #include "iridium/smart_ptr.h"
@@ -43,7 +43,7 @@ private:
 } // iridium::db::implementation
 
 
-#endif // BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_POSTGRES
 
 
 #endif // HEADER_POSTGRES_CONNECTOR_750EE9B7_825A_426E_91B4_C860C650CB1C

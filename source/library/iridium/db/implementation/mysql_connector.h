@@ -7,7 +7,7 @@
 
 
 #include "iridium/build_flags.h"
-#ifdef BUILD_FLAG_MYSQL
+#ifdef IRIDIUM_BUILD_FLAG_MYSQL
 
 
 #include "iridium/db/connector.h"
@@ -42,7 +42,7 @@ private:
 } // iridium::db::implementation
 
 
-#endif // COMPILATION_FLAG_MYSQL
+#endif // IRIDIUM_BUILD_FLAG_MYSQL
 
 
 #endif // HEADER_MYSQL_CONNECTOR_1DD931FC_0862_4845_8CB9_DF0E40666155

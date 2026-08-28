@@ -6,7 +6,7 @@
 #include <iridium/build_flags.h>
 
 
-#ifdef BUILD_FLAG_POSTGRES
+#ifdef IRIDIUM_BUILD_FLAG_POSTGRES
 
 
 #include <iridium/db/factory.h>
@@ -34,4 +34,4 @@ TEST(postgres) {
 } // namespace iridium::db
 
 
-#endif // BUILD_FLAG_POSTGRES
+#endif // IRIDIUM_BUILD_FLAG_POSTGRES
