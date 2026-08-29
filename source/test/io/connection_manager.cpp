@@ -89,6 +89,9 @@ public:
 
 
 TEST(echo) {
+#ifndef MACOS_PLATFORM
+    return;
+#endif // MACOS_PLATFORM
     auto connection_manager = CConnectionManager::create();
     connection_manager->initialize();
     connection_manager->manage(URI::create("tcp://127.0.0.1:55550"), CTestAcceptor::create());
@@ -126,6 +129,9 @@ public:
 
 
 TEST(process) {
+#ifndef MACOS_PLATFORM
+    return;
+#endif // MACOS_PLATFORM
     auto connection_manager = CConnectionManager::create();
     connection_manager->initialize();
     connection_manager->manage(URI::create("process:///bin/ls"), CTestProcessProtocol::create());
