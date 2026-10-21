@@ -1,0 +1,11 @@
+<map id="iridium::parsing::getValueTypeName" name="iridium::parsing::getValueTypeName">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,173,80"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="52,38,50,29,56,20,69,15,89,13,110,15,124,23,119,24,109,20,89,18,71,20,59,24,55,30,57,39"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="252,5,316,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,39,239,27,235,29,174,44"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="221,79,348,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,74,208,83,203,84,173,79"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="247,77,245,69,251,60,265,55,284,53,306,55,320,64,314,63,304,60,284,58,266,60,255,64,251,70,252,80"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="396,72,575,127"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="348,97,383,99,377,100,349,102"/>
+</map>

@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Iridium: Файл source/iridium/io/fs/file_value.h</title>
+<title>Iridium: Файл iridium/io/fs/file_value.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,38 +34,64 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
-});
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('file__value_8h.html','',''); });
 </script>
-<div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<div id="MSearchSelectWindow">
 </div>
 
 <!-- iframe showing the search results (closed by default) -->
@@ -82,79 +108,82 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li><li class="navelem"><a class="el" href="dir_5705b813285e54309934c93cc9191ba4.html">fs</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Классы</a> &#124;
-<a href="#namespaces">Пространства имен</a>  </div>
   <div class="headertitle"><div class="title">Файл file_value.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;stdexcept&gt;</code><br />
-<code>#include &quot;<a class="el" href="convert_8h_source.html">iridium/convertion/convert.h</a>&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
+<div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для file_value.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="file__value_8h__incl.png" border="0" usemap="#asource_2iridium_2io_2fs_2file__value_8h" alt=""/></div>
-<map name="asource_2iridium_2io_2fs_2file__value_8h" id="asource_2iridium_2io_2fs_2file__value_8h">
-<area shape="rect" title=" " alt="" coords="105,5,236,46"/>
-<area shape="rect" title=" " alt="" coords="5,256,59,282"/>
-<area shape="poly" title=" " alt="" coords="162,48,49,244,44,241,157,45"/>
-<area shape="rect" title=" " alt="" coords="306,102,371,127"/>
-<area shape="poly" title=" " alt="" coords="210,44,303,92,301,97,208,49"/>
-<area shape="rect" title=" " alt="" coords="82,256,160,282"/>
-<area shape="poly" title=" " alt="" coords="165,47,149,95,134,174,126,241,121,241,129,173,144,93,160,46"/>
-<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="158,94,282,135"/>
-<area shape="poly" title=" " alt="" coords="184,45,204,79,199,82,180,48"/>
-<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="186,183,353,208"/>
-<area shape="poly" title=" " alt="" coords="234,134,256,168,251,171,230,136"/>
-<area shape="poly" title=" " alt="" coords="230,211,74,258,73,253,228,206"/>
-<area shape="poly" title=" " alt="" coords="245,211,162,252,159,247,243,206"/>
-<area shape="rect" title=" " alt="" coords="526,256,565,282"/>
-<area shape="poly" title=" " alt="" coords="328,206,412,226,512,253,511,258,411,231,327,212"/>
-<area shape="rect" title=" " alt="" coords="184,256,245,282"/>
-<area shape="poly" title=" " alt="" coords="262,210,235,246,231,242,258,207"/>
-<area shape="rect" title=" " alt="" coords="269,256,326,282"/>
-<area shape="poly" title=" " alt="" coords="276,208,289,241,285,243,271,210"/>
-<area shape="rect" title=" " alt="" coords="350,256,418,282"/>
-<area shape="poly" title=" " alt="" coords="290,207,353,245,350,250,287,211"/>
-<area shape="rect" title=" " alt="" coords="442,256,502,282"/>
-<area shape="poly" title=" " alt="" coords="305,206,428,250,426,255,303,211"/>
+<div class="center"><img src="file__value_8h__incl.png" border="0" usemap="#airidium_2io_2fs_2file__value_8h" loading="lazy" alt=""/></div>
+<map name="airidium_2io_2fs_2file__value_8h" id="airidium_2io_2fs_2file__value_8h">
+<area shape="rect" title=" " alt="" coords="66,5,176,46"/>
+<area shape="rect" title=" " alt="" coords="121,330,174,356"/>
+<area shape="poly" title=" " alt="" coords="101,49,67,92,29,152,16,184,9,217,11,250,23,281,40,299,61,314,108,333,104,335,58,318,36,303,19,283,6,251,4,217,11,183,24,149,63,89,103,44"/>
+<area shape="rect" title=" " alt="" coords="256,102,322,127"/>
+<area shape="poly" title=" " alt="" coords="159,44,255,93,250,95,159,49"/>
+<area shape="rect" title=" " alt="" coords="33,256,111,282"/>
+<area shape="poly" title=" " alt="" coords="114,44,100,95,85,174,77,241,71,240,79,173,95,93,112,49"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="109,94,232,135"/>
+<area shape="poly" title=" " alt="" coords="132,44,154,80,149,81,132,49"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="293,183,461,208"/>
+<area shape="poly" title=" " alt="" coords="222,133,334,176,329,178,222,138"/>
+<area shape="poly" title=" " alt="" coords="316,210,266,230,213,258,184,287,163,319,159,315,180,284,210,254,263,225,321,208"/>
+<area shape="poly" title=" " alt="" coords="324,212,127,258,125,253,325,206"/>
+<area shape="rect" href="common_8h.html" title=" " alt="" coords="741,256,824,282"/>
+<area shape="poly" title=" " alt="" coords="456,206,729,255,724,256,456,212"/>
+<area shape="rect" title=" " alt="" coords="379,330,447,356"/>
+<area shape="poly" title=" " alt="" coords="306,210,270,223,238,238,227,247,221,257,220,268,226,280,254,307,290,324,328,334,366,341,361,341,327,339,288,329,251,311,222,284,215,269,215,256,223,244,235,234,268,218,311,208"/>
+<area shape="rect" title=" " alt="" coords="843,330,911,356"/>
+<area shape="poly" title=" " alt="" coords="461,196,561,200,670,210,770,228,809,239,837,254,851,267,861,283,874,317,869,314,856,285,847,270,834,259,807,244,768,233,670,216,560,206,462,201"/>
+<area shape="rect" title=" " alt="" coords="236,256,323,282"/>
+<area shape="poly" title=" " alt="" coords="363,208,309,249,307,245,358,210"/>
+<area shape="rect" title=" " alt="" coords="347,256,407,282"/>
+<area shape="poly" title=" " alt="" coords="379,206,379,242,375,239,375,211"/>
+<area shape="rect" title=" " alt="" coords="431,256,488,282"/>
+<area shape="poly" title=" " alt="" coords="392,206,437,246,432,246,390,211"/>
+<area shape="rect" title=" " alt="" coords="512,256,573,282"/>
+<area shape="poly" title=" " alt="" coords="406,206,503,250,498,250,405,212"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="596,256,718,282"/>
+<area shape="poly" title=" " alt="" coords="425,206,597,251,592,253,424,212"/>
+<area shape="poly" title=" " alt="" coords="744,280,731,285,575,306,421,323,190,342,190,336,420,318,574,301,730,279,738,280"/>
+<area shape="rect" title=" " alt="" coords="736,330,818,356"/>
+<area shape="poly" title=" " alt="" coords="783,280,781,316,777,313,780,284"/>
+<area shape="poly" title=" " alt="" coords="744,279,731,285,463,335,462,330,730,279,738,280"/>
+<area shape="poly" title=" " alt="" coords="799,280,852,321,846,320,798,285"/>
+<area shape="rect" title=" " alt="" coords="645,330,712,356"/>
+<area shape="poly" title=" " alt="" coords="767,282,709,323,708,318,762,283"/>
 </map>
 </div>
-</div>
-<p><a href="file__value_8h_source.html">См. исходные тексты.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html">iridium::io::fs::FileValue&lt; TValue &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного файла при конструировании. Когда объекту <code><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></code> присваивается новое значение, он обновляет свое внутреннее состояние и записывает новое значение обратно в файл. Преобразования между <code>TValue</code> и <code>std::string</code> (для файлового ввода-вывода) обрабатываются фреймворком <code><a class="el" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации....">iridium::convertion::convert</a></code>.  <a href="classiridium_1_1io_1_1fs_1_1_file_value.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium_3A_3Aio_3A_3Afs_3A_3AFileValue_3C_20TValue_20_3E" id="r_iridium_3A_3Aio_3A_3Afs_3A_3AFileValue_3C_20TValue_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html">iridium::io::fs::FileValue&lt; TValue &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного файла при конструировании. Когда объекту <span class="tt"><a class="el" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай...">FileValue</a></span> присваивается новое значение, он обновляет свое внутреннее состояние и записывает новое значение обратно в файл. Преобразования между <span class="tt">TValue</span> и <span class="tt">std::string</span> (для файлового ввода-вывода) обрабатываются фреймворком <span class="tt"><a class="el" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику.">iridium::convertion::convert</a></span>.  <a href="classiridium_1_1io_1_1fs_1_1_file_value.html#details">Подробнее...</a><br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с вводом-выводом. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io_1_1fs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности ввода-вывода, связанной с файловой системой. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aio" id="r_iridium_3A_3Aio"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
+<tr class="memitem:iridium_3A_3Aio_3A_3Afs" id="r_iridium_3A_3Aio_3A_3Afs"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">iridium::io::fs</a></td></tr>
+<tr class="memdesc:namespaceiridium_1_1io_1_1fs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейс для обобщенного кэша строк. <br /></td></tr>
 </table>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_8c6393cb1db31ac16803acf12e6d112e.html">io</a></li><li class="navelem"><a href="dir_3f5a814022cc2dc49c15bc4286d87188.html">fs</a></li><li class="navelem"><a href="file__value_8h.html">file_value.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

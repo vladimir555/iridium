@@ -1,9 +1,7 @@
-<map id="source/iridium/io/fs/implementation/file_api_assert.h" name="source/iridium/io/fs/implementation/file_api_assert.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="50,5,184,61"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,66,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,63,59,99,55,96,90,59"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="90,109,144,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="120,61,120,93,114,93,114,61"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="167,109,245,135"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="146,59,184,96,181,100,143,63"/>
+<map id="iridium/io/fs/implementation/file_api_assert.h" name="iridium/io/fs/implementation/file_api_assert.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,186,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="25,94,86,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,45,71,81,66,78,83,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="110,94,164,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="107,44,126,80,121,80,104,49"/>
 </map>

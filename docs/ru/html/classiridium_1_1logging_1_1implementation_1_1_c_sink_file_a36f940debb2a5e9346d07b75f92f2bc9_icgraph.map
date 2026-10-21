@@ -1,5 +1,8 @@
 <map id="iridium::logging::implementation::CSinkFile::finalize" name="iridium::logging::implementation::CSinkFile::finalize">
-<area shape="rect" id="Node000001" title="Завершает работу файлового приемника, обеспечивая сброс всех буферизованных сообщений и закрытие лог&#45;..." alt="" coords="258,5,462,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро..." alt="" coords="5,5,210,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,28,210,28,210,23,242,23"/>
+<area shape="rect" id="Node000001" title="Завершает работу файлового приемника, обеспечивая сброс всех буферизованных сообщений и закрытие лог&#45;..." alt="" coords="510,5,714,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0" title="Перечисляет доступные стратегии ротации лог&#45;файлов." alt="" coords="5,5,210,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="492,22,462,24,258,24,210,25,210,20,258,19,462,19,497,22"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Логирует одно событие в файл, если его уровень достаточен и файл открыт. Событие форматируется в стро..." alt="" coords="258,33,462,74"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="497,38,463,45,462,40,492,39"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="240,41,210,40,210,34,245,40"/>
 </map>

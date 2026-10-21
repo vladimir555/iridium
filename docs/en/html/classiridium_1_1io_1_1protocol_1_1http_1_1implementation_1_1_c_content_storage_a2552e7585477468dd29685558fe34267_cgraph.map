@@ -1,5 +1,6 @@
 <map id="iridium::io::protocol::http::implementation::CContentStorage::getContent" name="iridium::io::protocol::http::implementation::CContentStorage::getContent">
-<area shape="rect" id="Node000001" title="Retrieves content as a readable file stream from the configured root path. The requested path is appe..." alt="" coords="5,5,208,61"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="256,13,416,54"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,30,240,30,240,36,208,36"/>
+<area shape="rect" id="Node000001" title="Retrieves content as a readable file stream from the configured root path. The requested path is appe..." alt="" coords="5,22,208,78"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="256,29,416,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,47,242,49,237,50,208,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="293,27,290,19,298,10,313,5,336,3,361,5,377,14,372,13,359,10,336,8,314,10,301,15,296,21,297,30"/>
 </map>

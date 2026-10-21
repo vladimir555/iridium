@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Шаблон класса iridium::dp::FSM&lt; TState, TEvent &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classiridium_1_1dp_1_1_f_s_m.html','','classiridium_1_1dp_1_1_f_s_m-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Шаблон класса iridium::dp::FSM&lt; TState, TEvent &gt;</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Обобщенная конечная машина состояний (<a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>).  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;iridium/dp/fsm.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:TTransition" id="r_TTransition"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1dp_1_1_f_s_m_1_1_t_transition.html">TTransition</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет переход в <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>.  <a href="structiridium_1_1dp_1_1_f_s_m_1_1_t_transition.html#details">Подробнее...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a6d0483f695967052c8b9c19e575e4aaa" id="r_a6d0483f695967052c8b9c19e575e4aaa"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a6d0483f695967052c8b9c19e575e4aaa">THandler</a> = std::function&lt;void()&gt;</td></tr>
+<tr class="memdesc:a6d0483f695967052c8b9c19e575e4aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция-обработчик, выполняемая при переходе.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a1e1743fece79bf718d16ab7f8c823ef6" id="r_a1e1743fece79bf718d16ab7f8c823ef6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1e1743fece79bf718d16ab7f8c823ef6">FSM</a> (TState const &amp;initial_state)</td></tr>
+<tr class="memdesc:a1e1743fece79bf718d16ab7f8c823ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструирует <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a> с начальным состоянием.  <br /></td></tr>
+<tr class="memitem:ad63af1df68ef341aca39a8680c821939" id="r_ad63af1df68ef341aca39a8680c821939"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad63af1df68ef341aca39a8680c821939">addTransition</a> (TEvent const &amp;event, TState const &amp;from, TState const &amp;to, <a class="el" href="#a6d0483f695967052c8b9c19e575e4aaa">THandler</a> const &amp;handler={})</td></tr>
+<tr class="memdesc:ad63af1df68ef341aca39a8680c821939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет переход в <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>.  <br /></td></tr>
+<tr class="memitem:aa73fd22a3980eed7bbc65821e811ee54" id="r_aa73fd22a3980eed7bbc65821e811ee54"><td class="memItemLeft">TState&#160;</td><td class="memItemRight"><a class="el" href="#aa73fd22a3980eed7bbc65821e811ee54">doAction</a> (TEvent const &amp;event)</td></tr>
+<tr class="memdesc:aa73fd22a3980eed7bbc65821e811ee54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обрабатывает событие, вызывая переход состояния.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TState, typename TEvent&gt;<br />
+class iridium::dp::FSM&lt; TState, TEvent &gt;</div><p>Обобщенная конечная машина состояний (<a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>). </p>
+<p>Этот класс предоставляет простую реализацию <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>, где состояния и события являются шаблонными типами. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Определения типов</h2>
+<a id="a6d0483f695967052c8b9c19e575e4aaa" name="a6d0483f695967052c8b9c19e575e4aaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d0483f695967052c8b9c19e575e4aaa">&#9670;&#160;</a></span>THandler</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TState, typename TEvent&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html">iridium::dp::FSM</a>&lt; TState, TEvent &gt;::THandler = std::function&lt;void()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция-обработчик, выполняемая при переходе. </p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a1e1743fece79bf718d16ab7f8c823ef6" name="a1e1743fece79bf718d16ab7f8c823ef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1743fece79bf718d16ab7f8c823ef6">&#9670;&#160;</a></span>FSM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TState, typename TEvent&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiridium_1_1dp_1_1_f_s_m.html">iridium::dp::FSM</a>&lt; TState, TEvent &gt;::FSM </td>
+          <td>(</td>
+          <td class="paramtype">TState const &amp;</td>          <td class="paramname"><span class="paramname"><em>initial_state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструирует <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a> с начальным состоянием. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">initial_state</td><td>Начальное состояние <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="ad63af1df68ef341aca39a8680c821939" name="ad63af1df68ef341aca39a8680c821939"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad63af1df68ef341aca39a8680c821939">&#9670;&#160;</a></span>addTransition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TState, typename TEvent&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html">iridium::dp::FSM</a>&lt; TState, TEvent &gt;::addTransition </td>
+          <td>(</td>
+          <td class="paramtype">TEvent const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TState const &amp;</td>          <td class="paramname"><span class="paramname"><em>from</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TState const &amp;</td>          <td class="paramname"><span class="paramname"><em>to</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a6d0483f695967052c8b9c19e575e4aaa">THandler</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляет переход в <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Событие, которое вызывает переход. </td></tr>
+    <tr><td class="paramname">from</td><td>Исходное состояние. </td></tr>
+    <tr><td class="paramname">to</td><td>Конечное состояние. </td></tr>
+    <tr><td class="paramname">handler</td><td>Необязательный обработчик, который будет выполнен при переходе. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1dp_1_1_f_s_m_ad63af1df68ef341aca39a8680c821939_cgraph.png" border="0" usemap="#aclassiridium_1_1dp_1_1_f_s_m_ad63af1df68ef341aca39a8680c821939_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1dp_1_1_f_s_m_ad63af1df68ef341aca39a8680c821939_cgraph" id="aclassiridium_1_1dp_1_1_f_s_m_ad63af1df68ef341aca39a8680c821939_cgraph">
+<area shape="rect" title="Добавляет переход в FSM." alt="" coords="5,37,209,62"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="257,29,384,70"/>
+<area shape="poly" title=" " alt="" coords="209,47,244,49,238,50,209,52"/>
+<area shape="poly" title=" " alt="" coords="282,27,280,19,286,10,300,5,320,3,342,5,357,14,351,13,341,10,320,8,301,10,290,15,285,20,287,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="432,22,611,78"/>
+<area shape="poly" title=" " alt="" coords="384,47,419,50,413,50,385,52"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa73fd22a3980eed7bbc65821e811ee54" name="aa73fd22a3980eed7bbc65821e811ee54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa73fd22a3980eed7bbc65821e811ee54">&#9670;&#160;</a></span>doAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TState, typename TEvent&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">TState <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html">iridium::dp::FSM</a>&lt; TState, TEvent &gt;::doAction </td>
+          <td>(</td>
+          <td class="paramtype">TEvent const &amp;</td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Обрабатывает событие, вызывая переход состояния. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Событие для обработки. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Новое состояние <a class="el" href="classiridium_1_1dp_1_1_f_s_m.html" title="Обобщенная конечная машина состояний (FSM).">FSM</a>. </dd></dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1dp_1_1_f_s_m_aa73fd22a3980eed7bbc65821e811ee54_cgraph.png" border="0" usemap="#aclassiridium_1_1dp_1_1_f_s_m_aa73fd22a3980eed7bbc65821e811ee54_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1dp_1_1_f_s_m_aa73fd22a3980eed7bbc65821e811ee54_cgraph" id="aclassiridium_1_1dp_1_1_f_s_m_aa73fd22a3980eed7bbc65821e811ee54_cgraph">
+<area shape="rect" title="Обрабатывает событие, вызывая переход состояния." alt="" coords="5,37,182,62"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="230,29,357,70"/>
+<area shape="poly" title=" " alt="" coords="182,47,217,49,211,50,182,52"/>
+<area shape="poly" title=" " alt="" coords="256,27,253,19,260,10,273,5,293,3,315,5,329,14,324,13,314,10,293,8,274,10,263,15,259,20,260,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="405,22,584,78"/>
+<area shape="poly" title=" " alt="" coords="357,47,392,50,386,50,358,52"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1dp.html">dp</a></li><li class="navelem"><a href="classiridium_1_1dp_1_1_f_s_m.html">FSM</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

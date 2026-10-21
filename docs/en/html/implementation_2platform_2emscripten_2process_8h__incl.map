@@ -1,5 +1,5 @@
-<map id="source/iridium/system/implementation/platform/emscripten/process.h" name="source/iridium/system/implementation/platform/emscripten/process.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,170,61"/>
-<area shape="rect" id="Node000002" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="27,109,148,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,61,90,93,85,93,85,61"/>
+<map id="iridium/system/implementation/platform/emscripten/process.h" name="iridium/system/implementation/platform/emscripten/process.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,207,46"/>
+<area shape="rect" id="Node000002" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="45,94,167,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,44,108,79,104,77,104,48"/>
 </map>

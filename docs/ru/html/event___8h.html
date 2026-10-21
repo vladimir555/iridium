@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл iridium/io/event_.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('event___8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл event_.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для event_.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="event___8h__incl.png" border="0" usemap="#airidium_2io_2event___8h" loading="lazy" alt=""/></div>
+<map name="airidium_2io_2event___8h" id="airidium_2io_2event___8h">
+<area shape="rect" title=" " alt="" coords="787,5,914,31"/>
+<area shape="rect" href="enum_8h.html" title="Предоставляет макросы для определения и реализации типобезопасных перечислений с возможностями рефлек..." alt="" coords="567,226,673,252"/>
+<area shape="poly" title=" " alt="" coords="840,30,645,218,642,214,836,33"/>
+<area shape="rect" href="stream___8h.html" title=" " alt="" coords="1014,79,1093,105"/>
+<area shape="poly" title=" " alt="" coords="885,29,1007,73,1002,74,885,34"/>
+<area shape="rect" href="strings_8h.html" title="Предоставляет набор вспомогательных функций для работы со строками." alt="" coords="709,308,822,333"/>
+<area shape="poly" title=" " alt="" coords="642,250,732,300,727,300,642,255"/>
+<area shape="rect" title=" " alt="" coords="669,536,723,562"/>
+<area shape="poly" title=" " alt="" coords="564,244,440,251,287,262,153,279,107,290,83,302,77,311,76,320,84,339,111,373,142,402,177,428,213,451,293,488,376,513,458,530,535,540,656,548,651,548,535,545,457,536,375,518,291,492,211,456,174,433,139,406,107,376,79,342,70,320,72,309,80,298,105,285,152,274,287,257,440,246,569,241"/>
+<area shape="rect" title=" " alt="" coords="986,389,1043,414"/>
+<area shape="poly" title=" " alt="" coords="674,249,752,269,836,298,918,338,987,380,981,380,916,343,834,302,750,274,674,254"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="1302,300,1426,341"/>
+<area shape="poly" title=" " alt="" coords="673,242,919,263,1240,297,1290,306,1285,307,1240,303,919,268,674,247"/>
+<area shape="rect" title=" " alt="" coords="786,536,868,562"/>
+<area shape="poly" title=" " alt="" coords="625,250,641,294,667,355,703,423,749,486,771,507,796,528,790,526,767,511,745,490,698,426,662,357,636,296,623,255"/>
+<area shape="rect" title=" " alt="" coords="758,462,836,488"/>
+<area shape="poly" title=" " alt="" coords="630,250,782,450,777,450,628,255"/>
+<area shape="rect" title=" " alt="" coords="93,308,139,333"/>
+<area shape="poly" title=" " alt="" coords="564,242,485,248,381,257,266,274,153,303,151,303,148,299,151,297,265,269,380,252,485,242,569,240"/>
+<area shape="rect" title=" " alt="" coords="164,308,220,333"/>
+<area shape="poly" title=" " alt="" coords="564,245,414,263,323,280,233,303,230,304,227,299,231,297,322,274,414,258,569,243"/>
+<area shape="rect" title=" " alt="" coords="244,308,303,333"/>
+<area shape="poly" title=" " alt="" coords="564,248,450,269,382,284,315,303,312,304,309,299,314,297,381,279,449,264,569,246"/>
+<area shape="rect" title=" " alt="" coords="327,308,398,333"/>
+<area shape="poly" title=" " alt="" coords="570,254,411,303,407,304,405,299,410,297,575,251"/>
+<area shape="rect" title=" " alt="" coords="422,308,482,333"/>
+<area shape="poly" title=" " alt="" coords="592,254,492,303,490,298,596,251"/>
+<area shape="rect" title=" " alt="" coords="505,308,583,333"/>
+<area shape="poly" title=" " alt="" coords="611,251,568,298,565,294,606,254"/>
+<area shape="poly" title=" " alt="" coords="760,332,733,389,717,425,705,463,698,523,694,519,700,462,712,423,728,387,756,335"/>
+<area shape="poly" title=" " alt="" coords="804,331,974,386,969,387,803,336"/>
+<area shape="rect" title=" " alt="" coords="849,389,887,414"/>
+<area shape="poly" title=" " alt="" coords="782,331,843,379,838,378,780,336"/>
+<area shape="rect" href="implementation_2convert_8h.html" title="Объявляет специализации шаблона TConvert для различных типов." alt="" coords="1176,389,1344,414"/>
+<area shape="poly" title=" " alt="" coords="1341,340,1289,381,1287,376,1336,342"/>
+<area shape="poly" title=" " alt="" coords="1178,409,1044,430,971,445,900,465,874,477,849,490,738,535,737,530,847,486,872,472,898,460,970,440,1043,425,1173,410"/>
+<area shape="rect" href="common_8h.html" title=" " alt="" coords="911,462,993,488"/>
+<area shape="poly" title=" " alt="" coords="1210,415,1009,463,1008,458,1205,415"/>
+<area shape="rect" title=" " alt="" coords="996,536,1065,562"/>
+<area shape="poly" title=" " alt="" coords="1215,414,1161,436,1108,465,1075,494,1049,526,1046,521,1071,490,1105,460,1159,431,1210,415"/>
+<area shape="rect" title=" " alt="" coords="1274,536,1342,562"/>
+<area shape="poly" title=" " alt="" coords="1337,412,1417,432,1449,445,1470,461,1478,477,1475,493,1465,505,1448,516,1405,532,1358,543,1357,538,1403,527,1446,511,1461,501,1470,490,1472,478,1466,464,1447,450,1415,437,1337,418"/>
+<area shape="rect" title=" " alt="" coords="1119,462,1206,488"/>
+<area shape="poly" title=" " alt="" coords="1246,414,1192,456,1190,451,1241,416"/>
+<area shape="rect" title=" " alt="" coords="1230,462,1290,488"/>
+<area shape="poly" title=" " alt="" coords="1262,413,1262,448,1258,445,1258,417"/>
+<area shape="rect" title=" " alt="" coords="1314,462,1371,488"/>
+<area shape="poly" title=" " alt="" coords="1275,412,1320,453,1315,451,1273,417"/>
+<area shape="rect" title=" " alt="" coords="1395,462,1456,488"/>
+<area shape="poly" title=" " alt="" coords="1289,412,1386,456,1381,455,1288,418"/>
+<area shape="poly" title=" " alt="" coords="1179,414,855,465,852,466,851,460,854,460,1173,414"/>
+<area shape="rect" href="platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="1531,462,1653,488"/>
+<area shape="poly" title=" " alt="" coords="1317,412,1523,459,1518,459,1316,418"/>
+<area shape="poly" title=" " alt="" coords="913,488,738,539,737,533,908,488"/>
+<area shape="poly" title=" " alt="" coords="933,488,862,531,860,526,928,489"/>
+<area shape="poly" title=" " alt="" coords="966,486,1009,526,1004,525,964,491"/>
+<area shape="poly" title=" " alt="" coords="994,482,1261,538,1256,538,993,487"/>
+<area shape="rect" title=" " alt="" coords="906,536,972,562"/>
+<area shape="poly" title=" " alt="" coords="952,487,946,523,942,519,948,490"/>
+<area shape="poly" title=" " alt="" coords="1011,104,842,155,664,223,662,218,840,150,1016,102"/>
+<area shape="poly" title=" " alt="" coords="1011,95,775,108,611,118,438,132,274,151,137,175,83,189,42,205,16,221,10,229,8,238,8,403,13,425,29,445,54,463,87,479,172,505,274,522,383,534,490,541,657,548,651,548,489,546,383,540,273,528,170,510,85,484,51,468,25,449,9,428,3,403,3,238,5,227,13,217,40,200,81,184,135,170,273,146,437,127,610,113,775,102,1016,93"/>
+<area shape="poly" title=" " alt="" coords="1047,103,991,187,920,301,881,376,878,372,915,299,987,184,1043,107"/>
+<area shape="poly" title=" " alt="" coords="1093,94,1215,106,1374,131,1452,148,1523,169,1579,195,1600,209,1616,225,1626,248,1622,268,1605,283,1580,295,1513,311,1442,319,1441,314,1512,306,1578,290,1602,279,1617,265,1621,248,1611,228,1597,213,1576,199,1521,174,1451,153,1373,136,1215,112,1094,99"/>
+<area shape="poly" title=" " alt="" coords="1093,90,1256,94,1362,101,1472,113,1575,131,1661,157,1694,173,1720,191,1737,213,1743,238,1743,322,1740,345,1732,367,1704,404,1669,435,1632,457,1631,452,1665,430,1700,401,1727,364,1735,344,1737,321,1737,238,1732,215,1716,195,1692,177,1659,162,1573,136,1471,118,1362,107,1256,100,1094,96"/>
+<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="1100,308,1228,333"/>
+<area shape="poly" title=" " alt="" coords="1061,103,1154,294,1149,293,1058,108"/>
+<area shape="rect" href="initializable_8h.html" title=" " alt="" coords="1116,153,1273,178"/>
+<area shape="poly" title=" " alt="" coords="1078,103,1160,145,1154,145,1077,108"/>
+<area shape="rect" href="buffer_8h.html" title="Определяет класс Buffer для работы с сырыми двоичными данными." alt="" coords="980,226,1044,252"/>
+<area shape="poly" title=" " alt="" coords="1052,103,1022,213,1017,210,1048,107"/>
+<area shape="rect" href="uri_8h.html" title=" " alt="" coords="1297,153,1343,178"/>
+<area shape="poly" title=" " alt="" coords="1093,100,1284,151,1279,152,1093,105"/>
+<area shape="poly" title=" " alt="" coords="1144,333,1052,384,1050,379,1139,334"/>
+<area shape="poly" title=" " alt="" coords="1121,333,903,394,902,389,1116,334"/>
+<area shape="poly" title=" " alt="" coords="1155,332,1132,365,1109,404,1101,426,1097,447,1100,468,1109,486,1123,502,1140,514,1178,532,1220,542,1261,548,1255,548,1219,547,1177,537,1137,519,1119,506,1104,490,1094,469,1092,447,1096,424,1104,402,1127,362,1151,335"/>
+<area shape="poly" title=" " alt="" coords="1194,177,1171,294,1167,291,1190,181"/>
+<area shape="poly" title=" " alt="" coords="1009,251,989,294,961,342,935,383,921,400,900,417,879,428,859,435,822,439,786,444,768,452,748,464,724,492,707,524,704,519,720,489,745,460,766,447,785,439,821,434,857,430,877,424,897,412,918,396,931,380,956,339,984,291,1004,254"/>
+<area shape="poly" title=" " alt="" coords="1018,250,1033,300,1035,320,1033,341,1025,376,1021,372,1028,340,1030,320,1028,300,1016,255"/>
+<area shape="poly" title=" " alt="" coords="1004,251,891,379,888,375,999,254"/>
+<area shape="poly" title=" " alt="" coords="1045,245,1290,302,1285,302,1044,250"/>
+<area shape="poly" title=" " alt="" coords="1035,250,1130,300,1124,300,1035,255"/>
+<area shape="poly" title=" " alt="" coords="1294,176,1286,181,1119,209,952,226,803,235,689,240,688,234,803,230,952,221,1118,203,1285,176,1299,175"/>
+<area shape="poly" title=" " alt="" coords="1320,177,1314,212,1299,256,1276,302,1260,324,1242,343,1198,370,1149,388,1101,398,1059,402,1058,397,1100,392,1148,383,1196,365,1238,339,1256,321,1271,300,1294,254,1308,210,1316,181"/>
+<area shape="poly" title=" " alt="" coords="1324,176,1344,251,1354,287,1350,284,1339,253,1321,181"/>
+<area shape="poly" title=" " alt="" coords="1343,166,1407,171,1488,182,1565,199,1594,211,1615,224,1645,256,1670,288,1690,321,1702,354,1708,387,1704,421,1691,455,1667,490,1646,506,1614,519,1530,536,1437,546,1357,549,1357,544,1437,540,1529,531,1612,514,1643,501,1663,486,1686,453,1699,420,1702,387,1697,355,1685,323,1666,291,1641,259,1612,228,1592,216,1563,205,1487,188,1406,177,1344,171"/>
+<area shape="poly" title=" " alt="" coords="1306,178,1249,228,1184,298,1182,293,1245,224,1301,180"/>
+<area shape="rect" title=" " alt="" coords="1354,226,1404,252"/>
+<area shape="poly" title=" " alt="" coords="1331,176,1362,215,1357,214,1329,181"/>
+<area shape="rect" title=" " alt="" coords="1428,226,1538,252"/>
+<area shape="poly" title=" " alt="" coords="1344,175,1444,220,1439,220,1343,180"/>
+<area shape="rect" title=" " alt="" coords="1562,226,1601,252"/>
+<area shape="poly" title=" " alt="" coords="1344,170,1430,191,1549,226,1544,226,1429,196,1344,175"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="event___8h__dep__incl.png" border="0" usemap="#airidium_2io_2event___8hdep" loading="lazy" alt=""/></div>
+<map name="airidium_2io_2event___8hdep" id="airidium_2io_2event___8hdep">
+<area shape="rect" title=" " alt="" coords="1008,5,1135,31"/>
+<area shape="rect" href="context___8h.html" title=" " alt="" coords="896,175,1034,201"/>
+<area shape="poly" title=" " alt="" coords="1058,43,974,177,971,173,1054,46"/>
+<area shape="rect" href="context__manager_8h.html" title=" " alt="" coords="698,330,819,371"/>
+<area shape="poly" title=" " alt="" coords="1042,38,991,78,928,128,864,189,807,258,785,296,768,331,765,327,780,293,803,255,860,185,925,124,988,73,1038,41"/>
+<area shape="rect" href="implementation_2context__manager_8h.html" title=" " alt="" coords="573,419,738,459"/>
+<area shape="poly" title=" " alt="" coords="990,25,735,44,573,58,408,76,255,98,127,124,78,138,41,154,18,170,10,187,10,271,10,326,17,347,35,369,62,380,112,391,258,410,427,423,575,433,570,434,426,428,257,415,111,397,60,386,31,373,12,350,5,327,5,270,5,186,14,167,39,149,76,133,126,119,254,92,407,70,572,52,734,38,995,22"/>
+<area shape="rect" href="implementation_2context___8h.html" title=" " alt="" coords="1141,330,1306,371"/>
+<area shape="poly" title=" " alt="" coords="1085,43,1217,330,1212,329,1082,47"/>
+<area shape="rect" href="protocol___8h.html" title=" " alt="" coords="894,256,1036,282"/>
+<area shape="poly" title=" " alt="" coords="1076,44,1078,81,1075,123,1066,168,1049,210,1023,238,992,258,990,253,1019,234,1044,207,1061,166,1070,122,1073,81,1073,49"/>
+<area shape="rect" href="event___8cpp.html" title=" " alt="" coords="1305,86,1446,112"/>
+<area shape="poly" title=" " alt="" coords="1133,33,1331,86,1326,86,1133,38"/>
+<area shape="rect" href="multiplexer__base_8h.html" title=" " alt="" coords="1470,79,1636,120"/>
+<area shape="poly" title=" " alt="" coords="1151,28,1459,76,1473,81,1467,81,1458,82,1151,33"/>
+<area shape="rect" href="multiplexer_8h.html" title=" " alt="" coords="506,256,656,282"/>
+<area shape="poly" title=" " alt="" coords="990,28,849,50,783,64,737,81,710,100,684,123,641,173,609,222,589,258,585,254,604,219,637,170,681,119,706,96,734,77,781,59,848,45,995,26"/>
+<area shape="rect" href="pipe___8h.html" title=" " alt="" coords="1161,86,1281,112"/>
+<area shape="poly" title=" " alt="" coords="1108,36,1201,86,1195,86,1107,41"/>
+<area shape="poly" title=" " alt="" coords="923,206,880,231,839,258,801,295,773,332,770,328,797,292,835,254,877,226,918,208"/>
+<area shape="rect" href="implementation_2session__manager_8h.html" title=" " alt="" coords="762,419,928,459"/>
+<area shape="poly" title=" " alt="" coords="932,208,906,232,885,258,866,300,855,344,847,420,843,416,849,343,861,298,880,255,902,228,928,211"/>
+<area shape="poly" title=" " alt="" coords="995,207,1106,280,1190,330,1185,329,1104,284,994,213"/>
+<area shape="poly" title=" " alt="" coords="967,214,967,257,963,254,963,219"/>
+<area shape="poly" title=" " alt="" coords="726,380,680,421,678,416,721,382"/>
+<area shape="poly" title=" " alt="" coords="790,379,828,419,823,418,788,384"/>
+<area shape="rect" href="context__manager_8cpp.html" title=" " alt="" coords="812,507,977,548"/>
+<area shape="poly" title=" " alt="" coords="724,462,843,507,837,507,724,468"/>
+<area shape="rect" href="session__manager_8cpp.html" title=" " alt="" coords="606,507,772,548"/>
+<area shape="poly" title=" " alt="" coords="670,472,684,508,679,506,667,476"/>
+<area shape="poly" title=" " alt="" coords="799,466,725,509,723,504,794,468"/>
+<area shape="rect" href="test__runner__fork_8cpp.html" title=" " alt="" coords="1196,507,1390,548"/>
+<area shape="poly" title=" " alt="" coords="944,457,1198,508,1193,508,943,462"/>
+<area shape="poly" title=" " alt="" coords="1129,366,1058,389,1024,404,992,421,966,441,943,464,908,509,905,505,939,461,962,437,989,416,1021,399,1056,384,1124,367"/>
+<area shape="rect" href="context___8cpp.html" title=" " alt="" coords="1221,419,1386,459"/>
+<area shape="poly" title=" " alt="" coords="1253,380,1288,419,1283,417,1251,385"/>
+<area shape="poly" title=" " alt="" coords="922,287,811,332,809,327,917,289"/>
+<area shape="poly" title=" " alt="" coords="943,291,893,333,832,373,775,400,720,421,718,416,773,395,829,368,890,329,938,293"/>
+<area shape="poly" title=" " alt="" coords="1019,284,1162,329,1156,329,1019,290"/>
+<area shape="rect" href="session__manager_8h.html" title=" " alt="" coords="944,330,1066,371"/>
+<area shape="poly" title=" " alt="" coords="979,294,998,331,993,329,977,298"/>
+<area shape="rect" href="test__runner__fork_8h.html" title=" " alt="" coords="1003,419,1197,459"/>
+<area shape="poly" title=" " alt="" coords="1022,286,1054,303,1080,328,1092,350,1099,375,1103,420,1098,417,1094,376,1088,352,1076,332,1051,308,1021,291"/>
+<area shape="poly" title=" " alt="" coords="958,377,882,421,880,416,953,379"/>
+<area shape="poly" title=" " alt="" coords="1039,379,1081,419,1076,418,1037,384"/>
+<area shape="poly" title=" " alt="" coords="1158,463,1252,507,1246,506,1157,469"/>
+<area shape="rect" href="tester_8cpp.html" title=" " alt="" coords="1009,515,1172,540"/>
+<area shape="poly" title=" " alt="" coords="1098,473,1093,516,1090,513,1094,477"/>
+<area shape="rect" href="multiplexer__base_8cpp.html" title=" " alt="" coords="1470,168,1636,208"/>
+<area shape="poly" title=" " alt="" coords="1555,133,1555,169,1551,166,1551,137"/>
+<area shape="poly" title=" " alt="" coords="622,286,717,329,711,330,622,291"/>
+<area shape="poly" title=" " alt="" coords="601,291,640,330,688,368,737,395,787,418,782,418,734,400,685,373,637,334,600,296"/>
+<area shape="rect" href="implementation_2platform_2emscripten_2multiplexer_8h.html" title=" " alt="" coords="218,330,435,371"/>
+<area shape="poly" title=" " alt="" coords="525,288,391,332,389,327,530,286"/>
+<area shape="rect" href="multiplexer_8cpp.html" title=" " alt="" coords="459,338,623,363"/>
+<area shape="poly" title=" " alt="" coords="570,294,549,339,545,335,566,298"/>
+<area shape="rect" href="shell_8h.html" title=" " alt="" coords="46,338,194,363"/>
+<area shape="poly" title=" " alt="" coords="490,286,205,333,173,339,170,335,205,327,492,281"/>
+<area shape="rect" href="shell_8cpp.html" title=" " alt="" coords="39,426,201,452"/>
+<area shape="poly" title=" " alt="" coords="121,377,122,426,117,425,118,381"/>
+<area shape="poly" title=" " alt="" coords="1168,118,1002,177,1000,172,1173,117"/>
+<area shape="poly" title=" " alt="" coords="1223,125,1226,331,1221,328,1219,129"/>
+<area shape="rect" href="implementation_2pipe_8h.html" title=" " alt="" coords="1337,330,1502,371"/>
+<area shape="poly" title=" " alt="" coords="1241,122,1407,330,1402,329,1239,127"/>
+<area shape="poly" title=" " alt="" coords="1422,385,1416,424,1401,461,1374,489,1341,509,1339,504,1370,485,1396,458,1411,423,1418,388"/>
+<area shape="poly" title=" " alt="" coords="1384,379,1331,421,1329,416,1379,381"/>
+<area shape="rect" href="pipe_8cpp.html" title=" " alt="" coords="1461,419,1626,459"/>
+<area shape="poly" title=" " alt="" coords="1461,377,1518,419,1513,418,1460,382"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:iridium_3A_3Aio_3A_3AEvent" id="r_iridium_3A_3Aio_3A_3AEvent"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1io_1_1_event.html">iridium::io::Event</a></td></tr>
+<tr class="memitem:std_3A_3Ahash_3C_20iridium_3A_3Aio_3A_3AEvent_20_3E" id="r_std_3A_3Ahash_3C_20iridium_3A_3Aio_3A_3AEvent_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html">std::hash&lt; iridium::io::Event &gt;</a></td></tr>
+<tr class="memitem:std_3A_3Ahash_3C_20iridium_3A_3Aio_3A_3AEvent_3A_3ATSharedPtr_20_3E" id="r_std_3A_3Ahash_3C_20iridium_3A_3Aio_3A_3AEvent_3A_3ATSharedPtr_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html">std::hash&lt; iridium::io::Event::TSharedPtr &gt;</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aio" id="r_iridium_3A_3Aio"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_8c6393cb1db31ac16803acf12e6d112e.html">io</a></li><li class="navelem"><a href="event___8h.html">event_.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

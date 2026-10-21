@@ -1,0 +1,9 @@
+<map id="iridium::dp::Broadcaster::~Broadcaster" name="iridium::dp::Broadcaster::~Broadcaster">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,71,165,111"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1dp_1_1_broadcaster.html#ae2ba4b426aa698ad05e4f43f5fe39de8" title="Присоединяет получателя к вещателю." alt="" coords="213,5,372,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,68,213,50,209,53,153,73"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1dp_1_1_broadcaster.html#adb899fccdd1a855a9478f2e1035935d0" title="Отправляет сообщение, вызывая функцию&#45;член у всех присоединенных получателей." alt="" coords="213,71,372,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,88,200,90,195,92,165,94"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1dp_1_1_broadcaster.html#a94e52f9ee2d077d33c549469bbe54b49" title="Отсоединяет получателя от вещателя." alt="" coords="213,136,372,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="152,109,214,130,209,131,151,115"/>
+</map>

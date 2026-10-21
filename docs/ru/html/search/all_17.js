@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['автоматическое_20создание_20и_20предоставление_20мок_20объектов_20через_20tt_20create_20tt_0',['Автоматическое создание и предоставление мок-объектов через &lt;tt&gt;create()&lt;/tt&gt;',['../index.html#subsubsec_testing_mock_auto_creation',1,'']]],
-  ['аргументы_20командной_20строки_1',['Аргументы командной строки',['../index.html#subsubsec_testing_cli',1,'']]]
+  ['xml_5fparser_2ecpp_0',['xml_parser.cpp',['../xml__parser_8cpp.html',1,'']]],
+  ['xml_5fparser_2eh_1',['xml_parser.h',['../xml__parser_8h.html',1,'']]]
 ];

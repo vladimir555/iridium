@@ -1,0 +1,104 @@
+<map id="iridium::dp::IInitializable" name="iridium::dp::IInitializable">
+<area shape="rect" id="Node000001" title="Интерфейс для объектов, требующих инициализации и финализации." alt="" coords="5,831,164,857"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="245,32,381,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,815,92,665,112,446,128,333,149,229,176,143,192,109,210,83,225,70,246,61,243,65,228,74,214,87,197,112,181,145,155,230,133,334,117,447,97,665,89,816"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="212,97,414,138"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="85,815,95,678,118,482,134,380,155,287,180,210,194,179,210,155,236,136,234,140,214,159,199,182,185,212,160,288,139,381,123,482,101,679,90,816"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="228,469,398,525"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="87,815,99,758,122,683,158,605,182,568,210,535,229,522,226,527,214,539,186,571,162,607,127,685,104,759,93,816"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="245,549,381,590"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="90,815,105,769,129,711,164,652,185,625,210,600,246,581,243,586,213,605,189,628,168,655,134,714,110,771,95,817"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="249,614,377,655"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="95,816,114,781,139,741,171,700,210,664,250,646,247,650,213,669,175,703,144,744,118,784,101,818"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="212,169,414,210"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="86,815,97,729,120,605,156,463,181,391,209,323,228,289,249,258,293,207,291,212,253,261,232,292,214,325,186,393,162,464,125,606,103,730,91,816"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1db_1_1_i_connector.html" title=" " alt="" coords="236,679,390,705"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="102,817,148,765,177,738,210,715,240,703,237,707,213,719,181,742,151,768,107,819"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1dp_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable...." alt="" coords="224,729,402,770"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="122,822,211,780,247,768,243,772,213,785,126,825"/>
+<area shape="rect" id="Node000015" href="$classiridium_1_1io_1_1_i_connection_manager.html" title=" " alt="" coords="235,794,390,835"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="177,830,237,823,233,826,181,834"/>
+<area shape="rect" id="Node000016" href="$classiridium_1_1io_1_1_i_multiplexer.html" title=" " alt="" coords="237,859,389,885"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="178,853,238,861,234,864,180,858"/>
+<area shape="rect" id="Node000018" href="$classiridium_1_1io_1_1_i_session_manager.html" title=" " alt="" coords="220,908,406,934"/>
+<area shape="poly" id="edge19_Node000001_Node000018" title=" " alt="" coords="127,861,213,895,251,906,246,909,211,900,129,866"/>
+<area shape="rect" id="Node000020" href="$classiridium_1_1io_1_1_i_stream.html" title=" " alt="" coords="247,958,378,983"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="108,865,155,906,183,927,213,944,249,958,244,961,211,949,180,931,152,910,109,870"/>
+<area shape="rect" id="Node000036" href="$classiridium_1_1io_1_1fs_1_1_i_cache.html" title=" " alt="" coords="240,1019,386,1045"/>
+<area shape="poly" id="edge29_Node000001_Node000036" title=" " alt="" coords="101,867,148,931,179,964,213,994,235,1006,261,1017,256,1020,233,1011,210,998,175,968,144,934,102,873"/>
+<area shape="rect" id="Node000038" href="$classiridium_1_1logging_1_1_i_sink.html" title=" " alt="" coords="240,1082,386,1107"/>
+<area shape="poly" id="edge31_Node000001_Node000038" title=" " alt="" coords="95,869,114,911,139,960,172,1011,213,1055,234,1069,258,1080,253,1082,231,1073,210,1059,168,1014,134,963,109,913,95,874"/>
+<area shape="rect" id="Node000042" href="$classiridium_1_1system_1_1_shell.html" title=" " alt="" coords="239,1131,386,1157"/>
+<area shape="poly" id="edge35_Node000001_Node000042" title=" " alt="" coords="90,869,105,925,128,991,163,1060,186,1091,213,1118,241,1134,236,1135,210,1122,182,1094,158,1063,123,994,100,926,90,875"/>
+<area shape="rect" id="Node000043" href="$classiridium_1_1threading_1_1_i_runnable.html" title=" " alt="" coords="253,1181,373,1222"/>
+<area shape="poly" id="edge36_Node000001_Node000043" title=" " alt="" coords="89,869,101,933,123,1012,139,1054,159,1095,184,1134,213,1167,232,1180,255,1191,250,1193,229,1185,210,1171,179,1137,154,1098,134,1056,118,1014,96,934,89,875"/>
+<area shape="rect" id="Node000047" href="$classiridium_1_1threading_1_1_i_thread.html" title="Интерфейс для управления потоками и их идентификации." alt="" coords="253,1246,373,1287"/>
+<area shape="poly" id="edge40_Node000001_Node000047" title=" " alt="" coords="87,869,96,944,115,1040,131,1091,152,1142,179,1189,214,1231,232,1245,255,1256,249,1257,229,1249,210,1235,175,1192,147,1144,126,1093,110,1041,91,944,87,875"/>
+<area shape="rect" id="Node000049" href="$classiridium_1_1threading_1_1_i_worker_1_1_i_handler.html" title=" " alt="" coords="229,1311,396,1366"/>
+<area shape="poly" id="edge42_Node000001_Node000049" title=" " alt="" coords="86,869,92,954,109,1066,124,1128,146,1188,176,1245,214,1297,231,1313,226,1313,210,1300,171,1248,142,1190,119,1129,103,1067,87,954,85,875"/>
+<area shape="rect" id="Node000050" href="$classiridium_1_1threading_1_1_i_worker_popper.html" title="Интерфейс для &quot;работника&quot;, который извлекает элементы из очереди." alt="" coords="226,405,400,446"/>
+<area shape="poly" id="edge43_Node000001_Node000050" title=" " alt="" coords="84,815,91,744,110,648,126,596,147,545,175,497,210,455,227,444,225,448,214,459,179,500,152,547,131,598,115,649,96,745,89,816"/>
+<area shape="rect" id="Node000054" href="$classiridium_1_1threading_1_1_i_worker_popper_1_1_i_handler.html" title=" " alt="" coords="232,1391,394,1446"/>
+<area shape="poly" id="edge48_Node000001_Node000054" title=" " alt="" coords="89,869,106,981,132,1132,149,1209,168,1279,190,1337,214,1377,235,1395,229,1396,210,1380,185,1339,163,1281,144,1210,127,1133,101,982,89,875"/>
+<area shape="rect" id="Node000055" href="$classiridium_1_1threading_1_1_i_worker_pusher.html" title="Интерфейс для &quot;работника&quot;, который добавляет элементы в очередь." alt="" coords="226,336,400,376"/>
+<area shape="poly" id="edge49_Node000001_Node000055" title=" " alt="" coords="83,815,87,733,103,621,119,560,141,499,171,442,210,391,234,374,231,379,214,395,176,445,146,502,124,561,108,622,92,734,88,815"/>
+<area shape="rect" id="Node000058" href="$classiridium_1_1threading_1_1_i_worker_pusher_1_1_i_handler.html" title=" " alt="" coords="232,1471,394,1526"/>
+<area shape="poly" id="edge53_Node000001_Node000058" title=" " alt="" coords="88,869,103,996,127,1171,144,1261,164,1343,187,1410,214,1457,234,1476,229,1475,210,1460,182,1412,159,1344,139,1262,122,1172,98,997,88,875"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="501,85,654,141"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="428,113,503,113,499,116,431,118"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1threading_1_1_i_worker.html" title="Интерфейс для &quot;работника&quot;, который обрабатывает элементы, принимая входные данные и производя выходны..." alt="" coords="501,5,654,61"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="392,90,502,55,499,59,396,93"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker.html" title="&quot;Работник&quot;, который обрабатывает элементы из входной очереди и добавляет их в выходную очередь." alt="" coords="748,125,937,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="669,125,750,138,745,140,671,129"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html" title="Пул &quot;работников&quot;, который обрабатывает элементы из входной очереди и добавляет их в выходную очередь." alt="" coords="741,45,944,101"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="668,97,743,87,739,90,671,102"/>
+<area shape="poly" id="edge12_Node000011_Node000004" title=" " alt="" coords="399,162,502,133,499,137,403,166"/>
+<area shape="poly" id="edge13_Node000011_Node000007" title=" " alt="" coords="394,160,412,147,428,129,435,110,443,91,460,71,502,49,499,54,464,75,448,93,440,112,432,131,416,151,398,163"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="499,165,656,221"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="428,189,501,190,496,194,431,193"/>
+<area shape="rect" id="Node000017" href="$classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html" title=" " alt="" coords="491,629,664,670"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="401,853,412,845,427,825,434,806,436,765,437,723,444,702,460,681,492,662,489,666,464,684,449,704,442,724,441,765,440,807,432,828,416,848,405,857"/>
+<area shape="rect" id="Node000019" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html" title=" " alt="" coords="491,694,664,735"/>
+<area shape="poly" id="edge20_Node000018_Node000019" title=" " alt="" coords="409,898,412,895,426,878,433,860,436,822,438,783,445,764,460,745,492,726,489,730,464,748,450,766,443,784,441,822,439,861,431,880,416,899,413,901"/>
+<area shape="rect" id="Node000021" href="$classiridium_1_1io_1_1_i_stream_acceptor.html" title=" " alt="" coords="486,972,669,998"/>
+<area shape="poly" id="edge22_Node000020_Node000021" title=" " alt="" coords="393,972,488,979,483,981,395,977"/>
+<area shape="rect" id="Node000022" href="$classiridium_1_1io_1_1_i_stream_reader.html" title=" " alt="" coords="491,808,664,834"/>
+<area shape="poly" id="edge23_Node000020_Node000022" title=" " alt="" coords="391,957,412,944,423,933,430,921,435,895,441,869,448,856,460,843,493,828,489,832,464,847,452,859,446,871,440,896,435,923,428,936,416,949,395,961"/>
+<area shape="rect" id="Node000031" href="$classiridium_1_1io_1_1_i_stream_writer.html" title=" " alt="" coords="495,759,660,785"/>
+<area shape="poly" id="edge25_Node000020_Node000031" title=" " alt="" coords="391,958,412,945,426,927,433,909,435,871,437,832,445,813,460,794,476,783,496,776,492,780,478,788,464,798,449,815,442,833,440,871,438,910,431,930,416,948,395,962"/>
+<area shape="rect" id="Node000034" href="$classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title=" " alt="" coords="492,858,663,883"/>
+<area shape="poly" id="edge27_Node000020_Node000034" title=" " alt="" coords="391,954,413,944,427,932,436,920,445,906,461,894,494,881,490,885,463,898,449,910,440,923,431,936,415,949,395,958"/>
+<area shape="rect" id="Node000035" href="$classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title=" " alt="" coords="491,908,664,948"/>
+<area shape="poly" id="edge28_Node000020_Node000035" title=" " alt="" coords="393,955,493,940,488,943,395,960"/>
+<area shape="rect" id="Node000023" href="$classiridium_1_1io_1_1_i_stream_port.html" title=" " alt="" coords="765,783,920,809"/>
+<area shape="poly" id="edge24_Node000022_Node000023" title=" " alt="" coords="679,809,767,802,762,805,681,814"/>
+<area shape="poly" id="edge26_Node000031_Node000023" title=" " alt="" coords="675,778,767,788,762,790,677,783"/>
+<area shape="rect" id="Node000037" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html" title=" " alt="" coords="482,1022,674,1063"/>
+<area shape="poly" id="edge30_Node000036_Node000037" title=" " alt="" coords="401,1033,483,1037,479,1040,403,1038"/>
+<area shape="rect" id="Node000039" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title=" " alt="" coords="476,1088,680,1128"/>
+<area shape="poly" id="edge32_Node000038_Node000039" title=" " alt="" coords="401,1096,478,1102,473,1104,403,1101"/>
+<area shape="rect" id="Node000040" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title=" " alt="" coords="476,1153,680,1194"/>
+<area shape="poly" id="edge33_Node000038_Node000040" title=" " alt="" coords="391,1109,415,1116,463,1137,502,1152,497,1153,461,1142,413,1121,393,1114"/>
+<area shape="rect" id="Node000041" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html" title="Конкретная реализация приемника для вывода сообщений журнала в файл, с поддержкой ротации файлов...." alt="" coords="476,1218,680,1259"/>
+<area shape="poly" id="edge34_Node000038_Node000041" title=" " alt="" coords="400,1107,416,1116,434,1138,441,1161,447,1183,464,1203,484,1217,479,1218,460,1207,443,1185,436,1162,429,1141,412,1121,401,1113"/>
+<area shape="rect" id="Node000044" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_popper_runnable.html" title="&quot;Runnable&quot; для &quot;работника&quot;, который извлекает элементы из очереди." alt="" coords="469,1283,686,1338"/>
+<area shape="poly" id="edge37_Node000043_Node000044" title=" " alt="" coords="387,1220,415,1232,440,1250,463,1268,489,1282,484,1282,461,1273,436,1255,413,1237,388,1225"/>
+<area shape="rect" id="Node000045" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher_runnable.html" title="&quot;Runnable&quot; для &quot;работника&quot;, который добавляет элементы в очередь." alt="" coords="469,1363,686,1418"/>
+<area shape="poly" id="edge38_Node000043_Node000045" title=" " alt="" coords="388,1215,416,1232,428,1247,436,1262,441,1292,446,1321,452,1335,464,1349,480,1362,474,1362,460,1352,448,1338,441,1322,435,1293,430,1264,424,1250,412,1237,388,1220"/>
+<area shape="rect" id="Node000046" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_runnable.html" title="&quot;Runnable&quot; для &quot;работника&quot;, который обрабатывает элементы." alt="" coords="462,1443,693,1498"/>
+<area shape="poly" id="edge39_Node000043_Node000046" title=" " alt="" coords="387,1213,416,1233,433,1258,441,1283,443,1308,441,1333,439,1357,440,1381,448,1405,464,1429,478,1443,473,1442,460,1432,443,1407,435,1382,434,1357,436,1332,437,1308,436,1284,429,1260,412,1236,387,1218"/>
+<area shape="rect" id="Node000048" href="$classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title=" " alt="" coords="490,1522,665,1563"/>
+<area shape="poly" id="edge41_Node000047_Node000048" title=" " alt="" coords="388,1277,416,1297,434,1324,442,1351,443,1379,440,1405,437,1432,438,1457,446,1483,464,1509,492,1530,487,1529,460,1512,441,1485,433,1458,432,1431,435,1405,438,1378,437,1352,430,1326,412,1300,387,1283"/>
+<area shape="poly" id="edge45_Node000050_Node000012" title=" " alt="" coords="403,395,412,386,426,367,433,348,435,310,438,271,445,251,460,231,478,217,500,207,497,211,480,222,464,235,450,254,443,272,440,310,438,349,431,370,416,390,407,398"/>
+<area shape="rect" id="Node000051" href="$classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="474,405,681,446"/>
+<area shape="poly" id="edge44_Node000050_Node000051" title=" " alt="" coords="414,423,476,424,472,427,417,427"/>
+<area shape="rect" id="Node000052" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html" title="Пул &quot;работников&quot;, который извлекает элементы из очереди." alt="" coords="476,549,679,605"/>
+<area shape="poly" id="edge46_Node000050_Node000052" title=" " alt="" coords="409,451,416,455,433,476,441,496,448,516,464,535,482,548,477,550,460,539,443,519,436,498,428,478,412,459,410,456"/>
+<area shape="rect" id="Node000053" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html" title="&quot;Работник&quot;, который извлекает элементы из очереди." alt="" coords="469,469,686,525"/>
+<area shape="poly" id="edge47_Node000050_Node000053" title=" " alt="" coords="404,448,475,467,470,470,406,453"/>
+<area shape="poly" id="edge50_Node000055_Node000051" title=" " alt="" coords="407,378,500,403,495,406,409,383"/>
+<area shape="rect" id="Node000056" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title="Пул &quot;работников&quot;, который добавляет элементы в очередь." alt="" coords="476,245,679,301"/>
+<area shape="poly" id="edge51_Node000055_Node000056" title=" " alt="" coords="393,328,488,300,484,304,397,332"/>
+<area shape="rect" id="Node000057" href="$classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title="&quot;Работник&quot;, который добавляет элементы в очередь." alt="" coords="469,325,686,381"/>
+<area shape="poly" id="edge52_Node000055_Node000057" title=" " alt="" coords="414,353,471,353,467,356,417,357"/>
+</map>

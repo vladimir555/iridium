@@ -1,0 +1,14 @@
+<map id="iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY" name="iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY">
+<area shape="rect" id="Node000001" title=" " alt="" coords="214,165,374,221"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="325,151,314,146,294,144,276,146,264,151,258,157,258,166,253,164,253,155,261,146,274,141,294,139,316,141,331,150"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a78b09f32b50a60fdcd93a3a407c3c155" title=" " alt="" coords="5,5,166,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,154,213,115,164,75,148,64,147,59,167,71,217,111,259,154"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#ac367e20f307cf3bfbc9f22f89795668a" title=" " alt="" coords="5,85,166,141"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="203,160,160,144,160,139,208,158"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#adb6d2390294c661d6c8fcb9e367e1a05" title=" " alt="" coords="5,165,166,221"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="196,194,167,196,165,191,201,192"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a20de640db14b4e4b754f24238b0716c5" title=" " alt="" coords="5,245,166,301"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="203,229,161,247,159,242,207,226"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#ac069831676c0160b650d6ece94936a55" title=" " alt="" coords="5,325,166,381"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="259,231,217,275,167,315,149,327,146,322,164,311,213,271,255,234"/>
+</map>

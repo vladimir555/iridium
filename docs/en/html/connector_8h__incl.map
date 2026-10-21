@@ -1,17 +1,82 @@
-<map id="source/iridium/db/connector.h" name="source/iridium/db/connector.h">
-<area shape="rect" id="Node000001" title="Defines the IConnector interface for database communication and the Exception class for database erro..." alt="" coords="245,5,436,31"/>
-<area shape="rect" id="Node000002" href="$initializable_8h.html" title=" " alt="" coords="5,79,188,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,34,153,77,152,72,298,29"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="212,79,290,105"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="327,34,280,71,276,67,324,29"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="314,79,367,105"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="343,31,343,63,338,63,338,31"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="392,79,449,105"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="356,30,398,67,394,71,352,34"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="473,79,520,105"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="368,29,460,71,458,76,366,34"/>
-<area shape="rect" id="Node000003" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="32,153,161,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,105,99,137,94,137,94,105"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="62,226,131,252"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,179,99,211,94,211,94,179"/>
+<map id="iridium/db/connector.h" name="iridium/db/connector.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1420,5,1568,31"/>
+<area shape="rect" id="Node000002" href="$initializable_8h.html" title=" " alt="" coords="513,79,669,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1418,27,685,86,684,80,1421,23"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="1020,389,1077,414"/>
+<area shape="poly" id="edge49_Node000001_Node000006" title=" " alt="" coords="1496,29,1497,164,1497,241,1491,277,1476,302,1452,323,1419,343,1393,355,1357,365,1268,381,1093,400,1093,394,1267,376,1356,360,1391,350,1417,338,1448,319,1472,299,1486,275,1491,240,1491,164,1492,34"/>
+<area shape="rect" id="Node000007" href="$node_8h.html" title="Defines the INode typedef, a specialization of INodeType&lt;std::string&gt;. This serves as the primary typ..." alt="" coords="1020,79,1168,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1423,32,1178,78,1176,73,1428,31"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="917,536,970,562"/>
+<area shape="poly" id="edge48_Node000001_Node000009" title=" " alt="" coords="1524,29,1563,49,1603,78,1621,97,1635,117,1645,139,1649,164,1649,403,1646,432,1637,455,1621,473,1596,490,1560,502,1498,513,1322,530,986,549,985,543,1322,524,1497,507,1559,497,1594,486,1617,469,1632,452,1641,431,1643,403,1643,164,1640,141,1631,119,1617,100,1600,82,1560,54,1523,34"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1505,462,1584,488"/>
+<area shape="poly" id="edge47_Node000001_Node000020" title=" " alt="" coords="1511,29,1537,51,1566,83,1588,121,1595,142,1598,164,1598,322,1594,357,1585,392,1560,450,1557,446,1580,390,1589,356,1593,322,1593,164,1590,143,1584,123,1561,86,1534,55,1510,34"/>
+<area shape="rect" id="Node000003" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="254,308,382,333"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="540,107,495,124,441,149,388,183,365,204,345,228,330,260,323,293,318,291,325,258,341,225,361,201,385,179,438,144,493,119,545,104"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="66,536,135,562"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,335,238,354,189,381,142,418,122,439,106,463,97,492,98,522,93,520,92,491,101,461,118,436,138,414,186,377,236,350,283,332"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,389,44,414"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="269,336,63,391,60,392,57,388,61,386,270,331"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="382,328,467,338,1006,394,1003,398,467,343,383,333"/>
+<area shape="rect" id="Node000008" href="$node__type_8h.html" title=" " alt="" coords="464,153,556,178"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1017,104,572,159,571,154,1021,101"/>
+<area shape="rect" id="Node000023" href="$schema__type_8h.html" title=" " alt="" coords="1039,153,1149,178"/>
+<area shape="poly" id="edge30_Node000007_Node000023" title=" " alt="" coords="1095,103,1096,138,1092,135,1092,107"/>
+<area shape="poly" id="edge29_Node000008_Node000003" title=" " alt="" coords="461,179,416,199,392,212,370,228,345,260,329,295,324,292,341,258,367,224,389,208,414,194,466,176"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="468,180,411,202,344,229,262,268,182,311,59,382,55,378,180,306,260,264,342,224,409,197,473,178"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="525,176,921,524,915,526,522,181"/>
+<area shape="rect" id="Node000010" href="$convert_8h.html" title=" " alt="" coords="479,300,602,341"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="519,176,532,199,542,226,546,256,546,286,541,283,541,256,537,227,527,202,517,182"/>
+<area shape="rect" id="Node000022" href="$prototype_8h.html" title=" " alt="" coords="381,226,527,252"/>
+<area shape="poly" id="edge27_Node000008_Node000022" title=" " alt="" coords="503,177,475,216,471,212,499,180"/>
+<area shape="rect" id="Node000011" href="$implementation_2convert_8h.html" title="Declares specializations of the TConvert template for various types." alt="" coords="409,389,576,414"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="531,339,510,377,506,373,527,343"/>
+<area shape="poly" id="edge22_Node000011_Node000004" title=" " alt="" coords="406,407,330,415,247,426,175,442,147,452,128,464,118,476,111,491,104,522,99,519,106,489,113,473,124,460,145,447,173,437,246,420,330,410,411,406"/>
+<area shape="poly" id="edge18_Node000011_Node000009" title=" " alt="" coords="577,410,681,428,737,442,792,460,859,491,916,527,911,526,857,496,790,465,736,447,680,434,577,415"/>
+<area shape="rect" id="Node000012" href="$common_8h.html" title=" " alt="" coords="355,462,438,488"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="479,414,426,456,423,451,474,416"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="284,536,352,562"/>
+<area shape="poly" id="edge25_Node000011_Node000014" title=" " alt="" coords="431,414,384,435,363,448,345,464,330,491,322,522,318,519,325,489,341,461,360,444,382,430,426,416"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="692,462,779,488"/>
+<area shape="poly" id="edge19_Node000011_Node000016" title=" " alt="" coords="534,412,682,457,677,458,533,418"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="138,462,199,488"/>
+<area shape="poly" id="edge20_Node000011_Node000017" title=" " alt="" coords="428,417,214,464,213,459,431,413"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="223,462,280,488"/>
+<area shape="poly" id="edge21_Node000011_Node000018" title=" " alt="" coords="449,416,296,464,294,458,454,414"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="462,462,523,488"/>
+<area shape="poly" id="edge23_Node000011_Node000019" title=" " alt="" coords="494,413,495,448,490,445,491,417"/>
+<area shape="poly" id="edge24_Node000011_Node000020" title=" " alt="" coords="577,406,1490,468,1489,473,577,411"/>
+<area shape="rect" id="Node000021" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="547,462,668,488"/>
+<area shape="poly" id="edge26_Node000011_Node000021" title=" " alt="" coords="513,412,577,454,572,453,511,417"/>
+<area shape="poly" id="edge16_Node000012_Node000004" title=" " alt="" coords="356,489,151,538,149,533,354,484"/>
+<area shape="poly" id="edge14_Node000012_Node000009" title=" " alt="" coords="438,483,450,485,706,521,904,544,899,544,706,526,449,491,438,488"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="651,536,734,562"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="439,484,639,534,634,534,438,489"/>
+<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="386,488,344,528,341,523,381,489"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="377,536,443,562"/>
+<area shape="poly" id="edge17_Node000012_Node000015" title=" " alt="" coords="400,486,407,522,403,519,397,490"/>
+<area shape="poly" id="edge28_Node000022_Node000003" title=" " alt="" coords="431,254,353,302,350,297,435,251"/>
+<area shape="rect" id="Node000024" href="$enum_8h.html" title="Provides macros for defining and implementing type&#45;safe enums with reflection capabilities." alt="" coords="1041,226,1147,252"/>
+<area shape="poly" id="edge31_Node000023_Node000024" title=" " alt="" coords="1095,176,1096,212,1092,209,1092,181"/>
+<area shape="poly" id="edge38_Node000024_Node000006" title=" " alt="" coords="1093,251,1058,375,1054,372,1088,254"/>
+<area shape="poly" id="edge39_Node000024_Node000009" title=" " alt="" coords="1147,240,1220,245,1302,255,1374,272,1401,284,1420,298,1427,309,1429,320,1420,342,1377,394,1323,437,1264,471,1201,498,1139,518,1080,532,985,547,984,541,1078,526,1137,512,1199,493,1261,466,1320,433,1373,391,1416,339,1423,320,1422,311,1416,302,1399,288,1372,277,1301,260,1220,250,1148,245"/>
+<area shape="poly" id="edge36_Node000024_Node000010" title=" " alt="" coords="1038,249,672,303,618,310,617,305,671,297,1043,247"/>
+<area shape="poly" id="edge46_Node000024_Node000013" title=" " alt="" coords="1038,241,956,247,858,256,771,273,738,286,717,302,709,314,706,325,711,346,727,367,750,388,773,410,792,434,801,460,800,474,793,489,772,514,745,532,743,527,769,510,789,487,794,473,796,461,787,436,769,414,746,392,723,371,706,348,701,324,704,311,713,298,736,281,769,268,857,250,955,241,1043,240"/>
+<area shape="poly" id="edge44_Node000024_Node000020" title=" " alt="" coords="1147,240,1228,247,1321,257,1406,274,1439,285,1463,298,1495,331,1518,371,1533,412,1542,448,1538,445,1528,413,1513,373,1491,334,1460,302,1437,290,1404,279,1320,263,1228,252,1148,246"/>
+<area shape="rect" id="Node000025" href="$strings_8h.html" title="Provides a set of utility functions for string manipulation." alt="" coords="912,308,1025,333"/>
+<area shape="poly" id="edge32_Node000024_Node000025" title=" " alt="" coords="1077,251,1002,301,999,297,1072,253"/>
+<area shape="rect" id="Node000026" title=" " alt="" coords="1100,308,1146,333"/>
+<area shape="poly" id="edge37_Node000024_Node000026" title=" " alt="" coords="1100,250,1116,294,1111,292,1097,255"/>
+<area shape="rect" id="Node000027" title=" " alt="" coords="1171,308,1227,333"/>
+<area shape="poly" id="edge40_Node000024_Node000027" title=" " alt="" coords="1110,250,1174,299,1169,298,1109,255"/>
+<area shape="rect" id="Node000028" title=" " alt="" coords="1251,308,1310,333"/>
+<area shape="poly" id="edge41_Node000024_Node000028" title=" " alt="" coords="1125,250,1240,298,1244,301,1238,301,1238,302,1124,255"/>
+<area shape="rect" id="Node000029" title=" " alt="" coords="1334,308,1406,333"/>
+<area shape="poly" id="edge42_Node000024_Node000029" title=" " alt="" coords="1147,250,1231,271,1323,297,1330,302,1325,302,1321,303,1229,276,1147,255"/>
+<area shape="rect" id="Node000030" title=" " alt="" coords="727,308,786,333"/>
+<area shape="poly" id="edge43_Node000024_Node000030" title=" " alt="" coords="1038,248,928,269,863,284,799,303,795,304,793,299,797,297,862,279,927,264,1043,247"/>
+<area shape="rect" id="Node000031" title=" " alt="" coords="810,308,887,333"/>
+<area shape="poly" id="edge45_Node000024_Node000031" title=" " alt="" coords="1055,252,901,303,896,304,894,299,900,297,1050,253"/>
+<area shape="poly" id="edge35_Node000025_Node000005" title=" " alt="" coords="927,334,900,343,718,363,470,381,60,401,59,396,470,375,718,358,899,338,932,333"/>
+<area shape="poly" id="edge34_Node000025_Node000006" title=" " alt="" coords="982,331,1028,378,1023,377,980,336"/>
+<area shape="poly" id="edge33_Node000025_Node000009" title=" " alt="" coords="969,332,948,523,944,519,965,335"/>
 </map>

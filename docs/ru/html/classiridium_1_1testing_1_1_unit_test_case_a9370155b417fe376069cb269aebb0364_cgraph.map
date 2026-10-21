@@ -1,0 +1,14 @@
+<map id="iridium::testing::UnitTestCase::assert_" name="iridium::testing::UnitTestCase::assert_">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>

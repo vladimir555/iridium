@@ -1,7 +1,11 @@
 <map id="iridium::assertSize" name="iridium::assertSize">
-<area shape="rect" id="Node000001" title="Эта функция computes assertSize. Russian detailed description (if any)." alt="" coords="5,35,135,60"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Эта функция computes assertSize. Russian detailed description (if any)." alt="" coords="183,5,312,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,34,167,29,168,34,135,39"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="184,55,311,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,55,169,60,168,66,134,60"/>
+<area shape="rect" id="Node000001" title="Утверждает, что контейнер имеет определенный размер, и выбрасывает std::runtime_error с подробным соо..." alt="" coords="5,71,135,96"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Утверждает, что контейнер имеет определенный размер, и выбрасывает пользовательское исключение,..." alt="" coords="183,29,312,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,68,177,58,172,60,129,73"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="184,103,311,144"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="130,94,171,105,166,106,130,100"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="217,28,212,21,215,11,227,5,247,3,269,5,281,14,276,14,267,10,247,8,229,10,219,15,217,20,222,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="214,101,212,93,217,84,229,79,247,77,267,79,280,88,274,87,265,84,247,82,231,84,221,88,217,94,218,104"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="360,96,539,151"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="311,121,347,123,342,124,311,126"/>
 </map>

@@ -1,7 +1,9 @@
 <map id="iridium::io::implementation::CPipe::transmit" name="iridium::io::implementation::CPipe::transmit">
-<area shape="rect" id="Node000001" title="Transmits data based on the provided event. If the event indicates data is available on the pipe&#39;s lo..." alt="" coords="5,23,179,64"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="227,5,367,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,30,211,26,211,31,179,35"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Checks if a source item is equal to any of the specified items." alt="" coords="227,55,367,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,51,211,55,211,60,179,56"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,59,179,100"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#a1315b3a96f6964943359e40747b8df37" title="Asserts that a value (e.g., a boolean, integer, or other type convertible to bool) is &quot;truthy&quot;,..." alt="" coords="227,29,367,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,61,214,57,209,58,180,66"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#ac26baddfcc40e8343d29329b2dd3e609" title=" " alt="" coords="227,103,367,128"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="179,92,214,100,209,101,179,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="262,28,256,21,260,11,274,5,297,3,322,5,336,15,331,14,320,10,297,8,275,10,264,15,261,20,267,30"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="262,101,256,94,260,84,274,78,297,76,322,79,336,88,331,87,320,84,297,81,275,83,264,88,261,93,267,103"/>
 </map>

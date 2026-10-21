@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['обработка_20перечислений_20с_20помощью_20define_5fenum_0',['Обработка перечислений с помощью DEFINE_ENUM',['../index.html#sec_define_enum',1,'']]],
-  ['ожидания_20в_20последовательности_20define_5fmock_5fsequence_5fexpectation_1',['Ожидания в последовательности (DEFINE_MOCK_SEQUENCE_EXPECTATION)',['../index.html#subsubsec_testing_sequence_expectations',1,'']]],
-  ['определение_20мок_20классов_2',['Определение мок-классов',['../index.html#subsubsec_testing_defining_mocks',1,'']]],
-  ['определение_20поведения_20моков_3',['Определение поведения моков',['../index.html#subsubsec_testing_mock_behavior',1,'']]],
-  ['определение_20последовательности_20define_5fmock_5fsequence_4',['Определение последовательности (DEFINE_MOCK_SEQUENCE)',['../index.html#subsubsec_testing_defining_sequences',1,'']]],
-  ['основные_20концепции_5',['Основные концепции',['../index.html#subsec_testing_core_concepts',1,'']]],
-  ['обработки_20задач_6',['обработки задач',['../index.html#subsec_cworker',1,'Использование CWorker для обработки задач'],['../index.html#subsec_cworkerpool',1,'Использование CWorkerPool для параллельной обработки задач']]],
-  ['объектов_20через_20tt_20create_20tt_7',['Автоматическое создание и предоставление мок-объектов через &lt;tt&gt;create()&lt;/tt&gt;',['../index.html#subsubsec_testing_mock_auto_creation',1,'']]],
-  ['операций_20мьютекса_8',['Логирование операций мьютекса',['../index.html#subsec_synchronized_logging',1,'']]]
+  ['макрос_20утверждений_20assert_0',['Макрос утверждений ASSERT',['../index.html#subsubsec_testing_assertions',1,'']]],
+  ['макрос_20implement_5ftest_5fmain_1',['Макрос IMPLEMENT_TEST_MAIN',['../index.html#subsubsec_testing_main',1,'']]],
+  ['макрос_20test_2',['Макрос TEST',['../index.html#subsubsec_testing_test_macro',1,'']]],
+  ['мокирование_20зависимостей_3',['Мокирование зависимостей',['../index.html#subsec_testing_mocking',1,'']]],
+  ['многопоточности_4',['Примитивы многопоточности',['../index.html#sec_threading',1,'']]],
+  ['моков_5',['Определение поведения моков',['../index.html#subsubsec_testing_mock_behavior',1,'']]],
+  ['мок_20классов_6',['Определение мок-классов',['../index.html#subsubsec_testing_defining_mocks',1,'']]],
+  ['мок_20объектов_20через_20create_7',['Автоматическое создание и предоставление мок-объектов через &lt;span class=&quot;tt&quot;&gt;create()&lt;/span&gt;',['../index.html#subsubsec_testing_mock_auto_creation',1,'']]],
+  ['мьютекса_8',['Логирование операций мьютекса',['../index.html#subsec_synchronized_logging',1,'']]]
 ];

@@ -1,0 +1,6 @@
+<map id="iridium::io::fs::writeFile" name="iridium::io::fs::writeFile">
+<area shape="rect" id="Node000001" title=" " alt="" coords="207,29,360,55"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="317,14,306,10,283,8,262,10,251,15,248,20,254,30,249,28,243,21,247,11,261,5,283,3,308,5,322,15"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#a2f30791592ee0f2aa5ea2634f0194ca5" title="Записывает данную строку в файл, перезаписывая файл, если он уже существует. Если файл не существует,..." alt="" coords="5,29,159,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,42,159,45,159,40,194,42"/>
+</map>

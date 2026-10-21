@@ -1,5 +1,7 @@
 <map id="iridium::db::implementation::CConnector" name="iridium::db::implementation::CConnector">
-<area shape="rect" id="Node000001" title="Base class for database connector implementations. This class provides common functionality,..." alt="" coords="14,79,191,120"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1pattern_1_1_non_copyable.html" title="A utility base class that makes derived classes non&#45;copyable. By inheriting from NonCopyable (typical..." alt="" coords="5,5,200,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,46,105,79,100,79,100,46"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="82,102,260,143"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1dp_1_1_non_copyable.html" title="A utility base class that makes derived classes non&#45;copyable. By inheriting from NonCopyable (typical..." alt="" coords="5,5,174,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,41,158,101,153,102,107,46"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1_u_r_i.html" title="Represents a Uniform Resource Identifier (URI)." alt="" coords="198,5,307,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,42,188,104,185,100,231,44"/>
 </map>

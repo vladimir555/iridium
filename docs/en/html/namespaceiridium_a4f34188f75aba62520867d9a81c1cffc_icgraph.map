@@ -1,0 +1,17 @@
+<map id="iridium::replace" name="iridium::replace">
+<area shape="rect" id="Node000001" title="Replaces all occurrences of a substring with another substring." alt="" coords="913,94,1022,120"/>
+<area shape="poly" id="edge8_Node000001_Node000001" title=" " alt="" coords="997,78,988,75,967,73,948,75,938,79,936,85,941,95,936,93,931,86,934,76,947,70,967,68,989,70,1002,80"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1testing.html#aafb239aa469a9ae2db9f39562ad2c860" title=" " alt="" coords="706,29,865,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="907,89,852,73,853,68,913,89"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1testing.html#aa72cd6418653662c222966cdbf7fdcfe" title=" " alt="" coords="428,66,658,92"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="894,103,659,89,659,84,900,102"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium.html#a5764890e808bc3b5d45099f564ebc16b" title="Converts a string to upper case." alt="" coords="720,145,851,170"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="906,124,834,147,834,142,901,125"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="813,13,804,10,785,8,768,10,758,14,754,20,756,30,751,27,749,19,755,10,767,5,786,3,805,5,819,14"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="688,61,655,68,654,63,693,61"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="584,52,572,47,543,45,517,47,503,52,501,57,508,67,503,65,495,58,500,48,516,42,543,40,573,42,590,52"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1testing_1_1_tester.html#a4e6c7cc6c2f9608885baab4e45d6b2e7" title=" " alt="" coords="204,66,380,92"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="410,79,381,82,380,76,415,79"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1testing_1_1_tester.html#af607ece111a4ba9992af78333f45c234" title=" " alt="" coords="5,59,156,99"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="186,80,157,82,156,76,191,78"/>
+</map>

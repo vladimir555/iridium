@@ -1,0 +1,8 @@
+<map id="iridium::io::fs::readFile" name="iridium::io::fs::readFile">
+<area shape="rect" id="Node000001" title="Reads the entire content of a file into a single string." alt="" coords="5,29,156,55"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#afe69d76950814a6204c79e45f5f94a7d" title=" " alt="" coords="204,29,354,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,40,191,42,186,42,156,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="252,28,247,21,250,11,261,5,279,3,298,5,309,15,304,14,296,10,279,8,263,10,254,15,252,20,257,30"/>
+<area shape="rect" id="Node000003" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="402,29,466,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="354,40,389,42,384,42,354,45"/>
+</map>

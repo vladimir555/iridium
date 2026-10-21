@@ -1,0 +1,7 @@
+<map id="iridium::testing::UnitTestCase::fail" name="iridium::testing::UnitTestCase::fail">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,169,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="217,5,389,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,23,204,25,198,26,169,28"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="437,5,609,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="390,23,424,26,419,26,390,28"/>
+</map>

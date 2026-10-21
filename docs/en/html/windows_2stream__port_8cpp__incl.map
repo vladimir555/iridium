@@ -1,7 +1,7 @@
-<map id="source/iridium/io/implementation/platform/windows/stream_port.cpp" name="source/iridium/io/implementation/platform/windows/stream_port.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,231,46"/>
-<area shape="rect" id="Node000002" href="$platform_2windows_2stream__port_8h.html" title=" " alt="" coords="67,94,169,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,46,121,78,115,78,115,46"/>
-<area shape="rect" id="Node000003" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="57,168,179,193"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,120,121,152,115,152,115,120"/>
+<map id="iridium/io/implementation/platform/windows/stream_port.cpp" name="iridium/io/implementation/platform/windows/stream_port.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,177,61"/>
+<area shape="rect" id="Node000002" href="$platform_2windows_2stream__port_8h.html" title=" " alt="" coords="40,109,142,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,59,94,94,88,93,90,64"/>
+<area shape="rect" id="Node000003" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="30,183,152,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,133,94,168,88,166,89,137"/>
 </map>

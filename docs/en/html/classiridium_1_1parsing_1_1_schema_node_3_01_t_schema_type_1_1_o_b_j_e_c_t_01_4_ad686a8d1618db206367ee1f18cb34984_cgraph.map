@@ -1,0 +1,11 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::getType" name="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::getType">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,36,215,91"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="335,5,400,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,42,322,25,317,27,216,48"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ae4e4b9aa53a9964df1fabf49712627b0" title=" " alt="" coords="263,80,472,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,79,250,87,245,87,215,84"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="319,78,319,69,328,60,344,55,367,53,394,56,412,65,406,65,392,61,367,58,345,60,330,65,324,71,323,81"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a79a4233c3785f0a2ca0e5be434cf3005" title=" " alt="" coords="520,87,719,128"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="472,105,507,107,501,108,472,110"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="573,85,570,77,578,68,594,63,620,61,647,63,665,72,659,71,646,68,620,66,595,68,581,73,575,78,577,88"/>
+</map>

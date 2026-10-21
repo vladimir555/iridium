@@ -1,7 +1,14 @@
 <map id="iridium::parsing::createParserByExtension" name="iridium::parsing::createParserByExtension">
-<area shape="rect" id="Node000001" title=" " alt="" coords="245,23,398,64"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="5,5,197,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,36,197,32,198,27,230,30"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing.html#ab5867486cd60924f7e4bff6acd74fc37" title=" " alt="" coords="16,55,186,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="230,56,187,61,186,56,229,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="484,59,637,100"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="595,43,583,40,561,38,540,40,527,44,522,50,524,60,519,57,517,49,524,40,539,35,561,33,585,35,600,44"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="245,29,436,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="466,64,420,58,420,53,472,64"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1parsing.html#ab5867486cd60924f7e4bff6acd74fc37" title=" " alt="" coords="255,103,426,128"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="471,94,423,105,423,99,466,95"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="377,14,366,10,340,8,317,10,304,15,302,20,308,30,303,28,296,21,301,11,316,5,340,3,367,5,383,15"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing.html#ad50094a37c8790f71aee13cc754ccdea" title="Composes a tree of INode objects into a file, serializing its structure." alt="" coords="5,29,197,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="226,43,198,45,197,40,231,42"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="377,87,366,84,340,81,317,83,304,88,302,93,308,103,303,101,296,94,301,84,316,78,340,76,367,79,382,88"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1parsing.html#ab61415abe931f9a6feca5e4ef7a519fb" title="Parses a file and constructs a tree of INode objects representing its structure." alt="" coords="16,103,186,128"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="237,116,187,118,187,113,242,115"/>
 </map>

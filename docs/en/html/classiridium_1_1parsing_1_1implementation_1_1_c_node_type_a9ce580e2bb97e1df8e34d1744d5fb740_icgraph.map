@@ -1,0 +1,18 @@
+<map id="iridium::parsing::implementation::CNodeType::CNodeType" name="iridium::parsing::implementation::CNodeType::CNodeType">
+<area shape="rect" id="Node000001" title=" " alt="" coords="512,140,717,181"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a703b260de894976c320790be6614205a" title=" " alt="" coords="5,5,211,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="581,129,530,86,498,65,463,48,400,30,334,21,270,17,212,18,210,13,270,12,335,15,401,25,465,43,500,60,533,81,587,129"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a4e92e618fe8153a0ab9011f703a5d0b6" title=" " alt="" coords="5,75,211,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="494,147,211,111,211,106,498,143"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#adb91bf7968b07732568601648f7df4d8" title=" " alt="" coords="5,148,211,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="495,164,211,169,211,164,498,160"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ace189523e8c6e9f0f8838125456a9576" title=" " alt="" coords="259,57,464,98"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="533,135,426,101,426,96,539,134"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#ad9d1d1669306974a10e7ecaa71064838" title="Creates a clone of the object." alt="" coords="259,223,464,263"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="538,185,427,225,426,219,533,187"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a9400e77de58f0dc346c1db78342e1234" title=" " alt="" coords="259,288,464,329"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="582,190,529,236,465,277,437,290,436,285,463,273,526,232,577,192"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="242,55,211,49,210,44,247,53"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="241,87,212,90,210,86,245,84"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="286,106,168,150,166,145,290,102"/>
+</map>

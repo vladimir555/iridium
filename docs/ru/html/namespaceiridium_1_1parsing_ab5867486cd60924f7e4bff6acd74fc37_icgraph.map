@@ -1,0 +1,6 @@
+<map id="iridium::parsing::parseFile" name="iridium::parsing::parseFile">
+<area shape="rect" id="Node000001" title=" " alt="" coords="224,29,394,55"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="345,14,334,10,309,8,286,10,273,15,271,20,277,30,272,28,265,21,270,11,284,5,309,3,336,5,351,15"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing.html#ab61415abe931f9a6feca5e4ef7a519fb" title="Разбирает файл и строит дерево объектов INode, представляющее его структуру." alt="" coords="5,29,176,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,42,176,45,176,40,211,42"/>
+</map>

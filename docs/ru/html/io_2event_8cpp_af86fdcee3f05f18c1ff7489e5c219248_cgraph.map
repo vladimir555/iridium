@@ -1,0 +1,10 @@
+<map id="convert_" name="convert_">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,43,77,68"/>
+<area shape="rect" id="Node000002" href="$io_2event_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="128,5,192,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,42,115,31,111,34,78,47"/>
+<area shape="rect" id="Node000003" href="$context_8cpp.html#af10ef9fc6f39fbdc673718fa976a67d3" title=" " alt="" coords="125,79,196,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="77,63,112,75,107,77,76,69"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="140,77,136,70,138,61,147,54,160,52,175,55,184,64,178,63,173,60,160,57,149,59,143,64,141,70,145,79"/>
+<area shape="rect" id="Node000004" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="244,79,308,104"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="196,89,231,91,226,92,196,94"/>
+</map>

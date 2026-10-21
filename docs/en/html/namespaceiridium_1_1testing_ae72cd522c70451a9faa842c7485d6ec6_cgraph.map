@@ -1,0 +1,15 @@
+<map id="iridium::testing::fail&lt; std::string &gt;" name="iridium::testing::fail&lt; std::string &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,137,75"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Constructor." alt="" coords="396,5,568,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,48,381,30,379,35,137,53"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="185,63,348,103"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="137,62,172,68,167,70,137,67"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Gets the exception message." alt="" coords="620,5,792,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="568,23,607,25,602,26,569,28"/>
+<area shape="poly" id="edge7_Node000004_Node000002" title=" " alt="" coords="345,60,386,51,391,50,346,65"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="418,95,546,135"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="348,92,406,103,401,103,348,98"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="442,93,439,85,446,76,460,70,482,68,506,70,521,79,516,79,504,76,482,73,462,75,449,80,445,86,446,96"/>
+<area shape="rect" id="Node000006" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="616,87,796,143"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="546,112,604,115,598,115,546,118"/>
+</map>

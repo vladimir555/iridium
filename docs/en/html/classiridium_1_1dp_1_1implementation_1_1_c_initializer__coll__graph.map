@@ -1,0 +1,5 @@
+<map id="iridium::dp::implementation::CInitializer" name="iridium::dp::implementation::CInitializer">
+<area shape="rect" id="Node000001" title="A concrete implementation of IInitializable that manages a collection of other IInitializable objects..." alt="" coords="5,79,183,120"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1dp_1_1_i_initializable.html" title="Interface for objects that require initialization and finalization." alt="" coords="15,5,173,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,44,97,80,91,78,92,48"/>
+</map>

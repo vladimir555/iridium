@@ -1,11 +1,14 @@
-<map id="source/iridium/threading/async_queue.h" name="source/iridium/threading/async_queue.h">
-<area shape="rect" id="Node000001" title="Defines interfaces for asynchronous queues, including pusher, popper, and combined queue functionalit..." alt="" coords="18,5,178,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,44,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,48,48,84,44,81,78,45"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="68,94,128,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,46,101,78,95,78,95,46"/>
-<area shape="rect" id="Node000004" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="152,94,281,120"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,44,187,83,184,87,126,49"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="182,168,251,193"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="219,120,219,152,214,152,214,120"/>
+<map id="iridium/threading/async_queue.h" name="iridium/threading/async_queue.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,161,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="50,168,89,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,49,54,70,43,95,41,110,43,125,55,154,50,155,38,126,36,110,38,93,49,67,67,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="53,94,113,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="84,44,86,79,80,78,82,49"/>
+<area shape="rect" id="Node000004" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="138,94,266,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="113,44,173,84,168,86,112,49"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="182,120,104,164,101,159,177,120"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="124,168,192,193"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="197,119,175,156,171,152,192,121"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="216,168,273,193"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="210,118,232,155,227,154,207,122"/>
 </map>

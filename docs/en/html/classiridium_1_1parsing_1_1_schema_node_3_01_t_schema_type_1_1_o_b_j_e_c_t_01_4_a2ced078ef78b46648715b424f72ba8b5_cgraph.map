@@ -1,0 +1,16 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::~SchemaNode" name="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::~SchemaNode">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,85,215,141"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#a6ce651202f910402d34cb5f31ec98464" title=" " alt="" coords="263,5,472,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,82,264,65,259,67,203,87"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ad686a8d1618db206367ee1f18cb34984" title=" " alt="" coords="263,85,472,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,111,250,113,245,114,216,116"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ae4e4b9aa53a9964df1fabf49712627b0" title=" " alt="" coords="520,151,729,206"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="208,139,263,151,387,166,507,176,501,176,387,171,262,156,208,144"/>
+<area shape="rect" id="Node000004" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="592,76,657,102"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="472,101,579,93,574,94,473,106"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="473,137,508,148,502,148,472,142"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="576,148,576,140,585,131,601,126,625,124,651,127,669,136,664,135,650,132,625,129,602,131,588,136,581,142,580,152"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a79a4233c3785f0a2ca0e5be434cf3005" title=" " alt="" coords="777,158,977,199"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="730,176,764,178,759,179,730,181"/>
+<area shape="poly" id="edge7_Node000006_Node000006" title=" " alt="" coords="830,156,827,148,835,139,852,134,877,132,904,134,922,143,917,142,903,139,877,137,853,139,838,144,833,149,834,159"/>
+</map>

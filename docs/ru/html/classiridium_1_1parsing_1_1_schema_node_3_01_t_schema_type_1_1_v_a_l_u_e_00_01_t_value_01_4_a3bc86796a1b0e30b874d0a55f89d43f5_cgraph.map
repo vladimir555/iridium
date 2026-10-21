@@ -1,0 +1,14 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::VALUE, TValue &gt;::getAllowedValues" name="iridium::parsing::SchemaNode&lt; TSchemaType::VALUE, TValue &gt;::getAllowedValues">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,70,208,126"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="293,29,420,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,76,280,64,275,66,209,81"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_01_4.html#ab682b7f212d60c57876d8be7a7085699" title=" " alt="" coords="256,118,458,174"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="208,114,243,123,238,124,208,120"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="310,28,308,19,316,10,332,5,357,3,384,5,401,14,396,14,382,10,357,8,333,10,318,15,313,21,315,30"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="516,22,695,78"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="421,47,503,49,498,50,421,52"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="309,116,309,107,318,99,334,93,357,91,383,94,400,103,395,103,382,99,357,96,335,98,320,103,314,109,313,119"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a79a4233c3785f0a2ca0e5be434cf3005" title=" " alt="" coords="506,125,705,166"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="459,143,493,146,487,146,459,148"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="559,123,557,115,564,106,581,101,606,99,632,101,650,110,645,109,631,106,606,104,582,106,567,111,562,117,564,126"/>
+</map>

@@ -1,0 +1,1235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Класс iridium::testing::UnitTestCase</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classiridium_1_1testing_1_1_unit_test_case.html','','classiridium_1_1testing_1_1_unit_test_case-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс iridium::testing::UnitTestCase</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;iridium/testing/unit_test_case.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ad4bd1ab55938a81860cce77ce3f9ce8f" id="r_ad4bd1ab55938a81860cce77ce3f9ce8f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad4bd1ab55938a81860cce77ce3f9ce8f">UnitTestCase</a> ()=default</td></tr>
+<tr class="memitem:afa0f9ac826796cf81cf5d880c5830faa" id="r_afa0f9ac826796cf81cf5d880c5830faa"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afa0f9ac826796cf81cf5d880c5830faa">~UnitTestCase</a> ()=default</td></tr>
+<tr class="memitem:a530027791e4105481d575702ff62db15" id="r_a530027791e4105481d575702ff62db15"><td class="memTemplParams" colspan="2">template&lt;typename TValue&gt; </td></tr>
+<tr class="memitem:a530027791e4105481d575702ff62db15 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a530027791e4105481d575702ff62db15">fail</a> (TValue const &amp;left, TValue const &amp;right, std::string const &amp;, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a100a0a617efca743ca6f7e7c441fe1ee" id="r_a100a0a617efca743ca6f7e7c441fe1ee"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a100a0a617efca743ca6f7e7c441fe1ee">fail</a> (std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a92213ebbfeee2cb12e29e2b5d7fea929" id="r_a92213ebbfeee2cb12e29e2b5d7fea929"><td class="memTemplParams" colspan="2">template&lt;typename TLeft, typename TRight&gt; </td></tr>
+<tr class="memitem:a92213ebbfeee2cb12e29e2b5d7fea929 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a92213ebbfeee2cb12e29e2b5d7fea929">less</a> (TLeft const &amp;left, TRight const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:abaea5257ce99169b593c70559270adc4" id="r_abaea5257ce99169b593c70559270adc4"><td class="memTemplParams" colspan="2">template&lt;typename TLeft, typename TRight&gt; </td></tr>
+<tr class="memitem:abaea5257ce99169b593c70559270adc4 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abaea5257ce99169b593c70559270adc4">lessEqual</a> (TLeft const &amp;left, TRight const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a87495df1df7e5c61c59824539690a902" id="r_a87495df1df7e5c61c59824539690a902"><td class="memTemplParams" colspan="2">template&lt;typename TLeft, typename TRight&gt; </td></tr>
+<tr class="memitem:a87495df1df7e5c61c59824539690a902 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a87495df1df7e5c61c59824539690a902">equal</a> (TLeft const &amp;left, TRight const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a69288471d33daed738d4265c75cfc9e6" id="r_a69288471d33daed738d4265c75cfc9e6"><td class="memTemplParams" colspan="2">template&lt;typename TLeft, typename TRight&gt; </td></tr>
+<tr class="memitem:a69288471d33daed738d4265c75cfc9e6 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a69288471d33daed738d4265c75cfc9e6">greater</a> (TLeft const &amp;left, TRight const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a526d7eaad07a38339c210e9f98a0f5fa" id="r_a526d7eaad07a38339c210e9f98a0f5fa"><td class="memTemplParams" colspan="2">template&lt;typename TLeft, typename TRight&gt; </td></tr>
+<tr class="memitem:a526d7eaad07a38339c210e9f98a0f5fa template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a526d7eaad07a38339c210e9f98a0f5fa">greaterEqual</a> (TLeft const &amp;left, TRight const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:aa618442ce7e12a8ac2f52771e2a69339" id="r_aa618442ce7e12a8ac2f52771e2a69339"><td class="memTemplParams" colspan="2">template&lt;typename TFunction, typename TException&gt; </td></tr>
+<tr class="memitem:aa618442ce7e12a8ac2f52771e2a69339 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa618442ce7e12a8ac2f52771e2a69339">assert_</a> (TFunction const &amp;func, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a9370155b417fe376069cb269aebb0364" id="r_a9370155b417fe376069cb269aebb0364"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9370155b417fe376069cb269aebb0364">assert_</a> (bool const &amp;is_true, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:ad6fa5749ccda763364769965e80d9931" id="r_ad6fa5749ccda763364769965e80d9931"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ad6fa5749ccda763364769965e80d9931 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad6fa5749ccda763364769965e80d9931">less</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a988e9485970d0db2f964c09b0fd58ad3" id="r_a988e9485970d0db2f964c09b0fd58ad3"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a988e9485970d0db2f964c09b0fd58ad3 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a988e9485970d0db2f964c09b0fd58ad3">lessEqual</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:aade590db062fd09cd25425524c9798c7" id="r_aade590db062fd09cd25425524c9798c7"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:aade590db062fd09cd25425524c9798c7 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aade590db062fd09cd25425524c9798c7">equal</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:ad7ac197067845ef5d0bd8c97d774017e" id="r_ad7ac197067845ef5d0bd8c97d774017e"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ad7ac197067845ef5d0bd8c97d774017e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad7ac197067845ef5d0bd8c97d774017e">greater</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a1f9170f4c5aaf159df5057ba9e6dfb31" id="r_a1f9170f4c5aaf159df5057ba9e6dfb31"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a1f9170f4c5aaf159df5057ba9e6dfb31 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1f9170f4c5aaf159df5057ba9e6dfb31">greaterEqual</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:ad6fa5749ccda763364769965e80d9931" id="r_ad6fa5749ccda763364769965e80d9931"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ad6fa5749ccda763364769965e80d9931 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad6fa5749ccda763364769965e80d9931">less</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a988e9485970d0db2f964c09b0fd58ad3" id="r_a988e9485970d0db2f964c09b0fd58ad3"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a988e9485970d0db2f964c09b0fd58ad3 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a988e9485970d0db2f964c09b0fd58ad3">lessEqual</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:aade590db062fd09cd25425524c9798c7" id="r_aade590db062fd09cd25425524c9798c7"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:aade590db062fd09cd25425524c9798c7 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aade590db062fd09cd25425524c9798c7">equal</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:ad7ac197067845ef5d0bd8c97d774017e" id="r_ad7ac197067845ef5d0bd8c97d774017e"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:ad7ac197067845ef5d0bd8c97d774017e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad7ac197067845ef5d0bd8c97d774017e">greater</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+<tr class="memitem:a1f9170f4c5aaf159df5057ba9e6dfb31" id="r_a1f9170f4c5aaf159df5057ba9e6dfb31"><td class="memItemLeft">template&lt;&gt; </td></tr>
+<tr class="memitem:a1f9170f4c5aaf159df5057ba9e6dfb31 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1f9170f4c5aaf159df5057ba9e6dfb31">greaterEqual</a> (double const &amp;left, double const &amp;right, std::string const &amp;condition_source, size_t const &amp;line)</td></tr>
+</table>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="ad4bd1ab55938a81860cce77ce3f9ce8f" name="ad4bd1ab55938a81860cce77ce3f9ce8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4bd1ab55938a81860cce77ce3f9ce8f">&#9670;&#160;</a></span>UnitTestCase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::testing::UnitTestCase::UnitTestCase </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa0f9ac826796cf81cf5d880c5830faa" name="afa0f9ac826796cf81cf5d880c5830faa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa0f9ac826796cf81cf5d880c5830faa">&#9670;&#160;</a></span>~UnitTestCase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::testing::UnitTestCase::~UnitTestCase </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_afa0f9ac826796cf81cf5d880c5830faa_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_afa0f9ac826796cf81cf5d880c5830faa_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_afa0f9ac826796cf81cf5d880c5830faa_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_afa0f9ac826796cf81cf5d880c5830faa_cgraph">
+<area shape="rect" title=" " alt="" coords="5,185,169,226"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#aa618442ce7e12a8ac2f52771e2a69339" title=" " alt="" coords="217,5,380,46"/>
+<area shape="poly" title=" " alt="" coords="101,184,148,125,180,92,215,62,235,52,231,56,218,66,184,96,152,129,105,187"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="428,185,591,226"/>
+<area shape="poly" title=" " alt="" coords="105,183,152,141,183,121,216,106,261,93,298,88,336,93,381,106,410,118,436,135,481,174,476,174,433,140,407,123,379,111,335,98,298,94,262,98,218,111,185,126,155,145,109,187"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a87495df1df7e5c61c59824539690a902" title=" " alt="" coords="217,120,380,161"/>
+<area shape="poly" title=" " alt="" coords="154,183,218,164,214,168,156,187"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a69288471d33daed738d4265c75cfc9e6" title=" " alt="" coords="217,185,380,226"/>
+<area shape="poly" title=" " alt="" coords="168,203,203,204,199,207,170,208"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a526d7eaad07a38339c210e9f98a0f5fa" title=" " alt="" coords="217,251,380,291"/>
+<area shape="poly" title=" " alt="" coords="155,224,218,244,213,247,155,229"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a92213ebbfeee2cb12e29e2b5d7fea929" title=" " alt="" coords="217,316,380,357"/>
+<area shape="poly" title=" " alt="" coords="112,224,160,262,218,301,230,309,225,309,215,305,157,266,111,229"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#abaea5257ce99169b593c70559270adc4" title=" " alt="" coords="217,381,380,422"/>
+<area shape="poly" title=" " alt="" coords="101,224,148,293,181,332,218,366,226,374,221,373,215,370,177,336,144,297,99,229"/>
+<area shape="poly" title=" " alt="" coords="350,44,382,62,412,88,441,117,487,173,482,173,437,120,409,92,378,67,351,49"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="662,151,789,191"/>
+<area shape="poly" title=" " alt="" coords="591,190,649,183,644,184,592,195"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="639,217,812,258"/>
+<area shape="poly" title=" " alt="" coords="591,215,626,222,621,223,592,220"/>
+<area shape="poly" title=" " alt="" coords="685,149,683,141,689,132,704,126,726,124,749,126,764,135,759,135,748,132,725,129,705,131,693,136,688,142,690,151"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="860,140,1039,196"/>
+<area shape="poly" title=" " alt="" coords="789,168,847,169,842,170,790,173"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="863,220,1036,261"/>
+<area shape="poly" title=" " alt="" coords="811,236,850,239,845,239,812,241"/>
+<area shape="poly" title=" " alt="" coords="366,159,430,180,424,181,366,164"/>
+<area shape="poly" title=" " alt="" coords="380,203,415,205,410,206,381,208"/>
+<area shape="poly" title=" " alt="" coords="365,248,429,230,424,232,367,253"/>
+<area shape="poly" title=" " alt="" coords="354,313,379,301,428,268,471,237,476,235,431,272,381,305,356,318"/>
+<area shape="poly" title=" " alt="" coords="359,378,378,366,412,336,442,302,487,241,491,238,446,306,416,340,382,370,361,383"/>
+</map>
+</div>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a9370155b417fe376069cb269aebb0364" name="a9370155b417fe376069cb269aebb0364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9370155b417fe376069cb269aebb0364">&#9670;&#160;</a></span>assert_() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::assert_ </td>
+          <td>(</td>
+          <td class="paramtype">bool const &amp;</td>          <td class="paramname"><span class="paramname"><em>is_true</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a9370155b417fe376069cb269aebb0364_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a9370155b417fe376069cb269aebb0364_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a9370155b417fe376069cb269aebb0364_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a9370155b417fe376069cb269aebb0364_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa618442ce7e12a8ac2f52771e2a69339" name="aa618442ce7e12a8ac2f52771e2a69339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa618442ce7e12a8ac2f52771e2a69339">&#9670;&#160;</a></span>assert_() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TFunction, typename TException&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::assert_ </td>
+          <td>(</td>
+          <td class="paramtype">TFunction const &amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_aa618442ce7e12a8ac2f52771e2a69339_icgraph">
+<area shape="rect" title=" " alt="" coords="217,5,380,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" title=" " alt="" coords="199,26,169,28,169,23,204,25"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aade590db062fd09cd25425524c9798c7" name="aade590db062fd09cd25425524c9798c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aade590db062fd09cd25425524c9798c7">&#9670;&#160;</a></span>equal() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::equal </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_aade590db062fd09cd25425524c9798c7_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_aade590db062fd09cd25425524c9798c7_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_aade590db062fd09cd25425524c9798c7_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_aade590db062fd09cd25425524c9798c7_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aade590db062fd09cd25425524c9798c7" name="aade590db062fd09cd25425524c9798c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aade590db062fd09cd25425524c9798c7">&#9670;&#160;</a></span>equal() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::equal </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87495df1df7e5c61c59824539690a902" name="a87495df1df7e5c61c59824539690a902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87495df1df7e5c61c59824539690a902">&#9670;&#160;</a></span>equal() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLeft, typename TRight&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::equal </td>
+          <td>(</td>
+          <td class="paramtype">TLeft const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRight const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a87495df1df7e5c61c59824539690a902_icgraph">
+<area shape="rect" title=" " alt="" coords="217,5,380,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" title=" " alt="" coords="199,26,169,28,169,23,204,25"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a100a0a617efca743ca6f7e7c441fe1ee" name="a100a0a617efca743ca6f7e7c441fe1ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a100a0a617efca743ca6f7e7c441fe1ee">&#9670;&#160;</a></span>fail() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::fail </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a100a0a617efca743ca6f7e7c441fe1ee_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a100a0a617efca743ca6f7e7c441fe1ee_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a100a0a617efca743ca6f7e7c441fe1ee_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a100a0a617efca743ca6f7e7c441fe1ee_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,169,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="217,5,389,46"/>
+<area shape="poly" title=" " alt="" coords="169,23,204,25,198,26,169,28"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="437,5,609,46"/>
+<area shape="poly" title=" " alt="" coords="390,23,424,26,419,26,390,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a530027791e4105481d575702ff62db15" name="a530027791e4105481d575702ff62db15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a530027791e4105481d575702ff62db15">&#9670;&#160;</a></span>fail() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TValue&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::fail </td>
+          <td>(</td>
+          <td class="paramtype">TValue const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TValue const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="239,29,366,70"/>
+<area shape="poly" title=" " alt="" coords="168,69,227,61,221,63,170,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="217,96,389,137"/>
+<area shape="poly" title=" " alt="" coords="169,94,204,101,198,102,169,99"/>
+<area shape="poly" title=" " alt="" coords="262,28,260,19,267,10,281,5,303,3,326,5,342,14,336,14,325,10,303,8,282,10,270,15,265,21,267,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="437,19,616,75"/>
+<area shape="poly" title=" " alt="" coords="367,46,424,48,419,49,367,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="440,99,613,139"/>
+<area shape="poly" title=" " alt="" coords="389,115,428,118,422,118,389,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a530027791e4105481d575702ff62db15_icgraph">
+<area shape="rect" title=" " alt="" coords="428,447,591,487"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a9370155b417fe376069cb269aebb0364" title=" " alt="" coords="217,5,380,46"/>
+<area shape="poly" title=" " alt="" coords="504,430,496,356,476,257,460,205,439,153,412,104,378,61,365,49,364,44,382,57,416,102,443,151,465,203,481,256,502,355,509,432"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#aa618442ce7e12a8ac2f52771e2a69339" title=" " alt="" coords="217,71,380,111"/>
+<area shape="poly" title=" " alt="" coords="501,431,489,369,466,290,430,206,406,167,378,132,358,114,356,109,382,128,411,164,435,204,471,288,494,368,506,432"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,381,169,422"/>
+<area shape="poly" title=" " alt="" coords="502,430,492,372,470,301,454,265,434,231,409,201,379,176,337,154,299,148,261,155,218,176,191,196,168,221,148,249,132,278,108,336,95,382,90,380,103,334,127,276,143,246,164,217,187,192,215,171,259,150,299,142,339,149,381,171,412,197,438,228,459,262,475,299,497,371,507,432"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#aade590db062fd09cd25425524c9798c7" title=" " alt="" coords="217,185,380,226"/>
+<area shape="poly" title=" " alt="" coords="494,432,477,390,452,339,419,287,378,241,363,229,362,224,382,237,424,283,457,336,482,388,500,433"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a87495df1df7e5c61c59824539690a902" title=" " alt="" coords="217,251,380,291"/>
+<area shape="poly" title=" " alt="" coords="486,434,442,370,412,336,378,306,361,295,359,289,382,302,416,333,446,367,492,433"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#ad7ac197067845ef5d0bd8c97d774017e" title=" " alt="" coords="217,316,380,357"/>
+<area shape="poly" title=" " alt="" coords="471,437,428,405,379,372,356,360,355,355,381,367,431,400,476,436"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a69288471d33daed738d4265c75cfc9e6" title=" " alt="" coords="217,381,380,422"/>
+<area shape="poly" title=" " alt="" coords="425,443,367,425,366,420,430,441"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a1f9170f4c5aaf159df5057ba9e6dfb31" title=" " alt="" coords="217,447,380,487"/>
+<area shape="poly" title=" " alt="" coords="410,468,382,469,379,465,415,466"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a526d7eaad07a38339c210e9f98a0f5fa" title=" " alt="" coords="217,512,380,553"/>
+<area shape="poly" title=" " alt="" coords="425,494,368,514,365,509,430,491"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#ad6fa5749ccda763364769965e80d9931" title=" " alt="" coords="217,577,380,618"/>
+<area shape="poly" title=" " alt="" coords="471,499,431,534,381,567,357,579,354,575,379,562,428,529,475,496"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a92213ebbfeee2cb12e29e2b5d7fea929" title=" " alt="" coords="217,643,380,683"/>
+<area shape="poly" title=" " alt="" coords="491,499,446,567,416,601,382,632,361,644,358,640,378,628,412,598,442,564,487,502"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a988e9485970d0db2f964c09b0fd58ad3" title=" " alt="" coords="217,708,380,749"/>
+<area shape="poly" title=" " alt="" coords="499,500,482,546,457,598,424,651,382,697,364,710,361,705,378,693,419,647,452,595,477,544,495,504"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#abaea5257ce99169b593c70559270adc4" title=" " alt="" coords="217,773,380,814"/>
+<area shape="poly" title=" " alt="" coords="503,501,490,559,466,628,431,699,408,732,382,762,365,775,362,771,378,758,404,729,426,696,461,626,485,558,500,505"/>
+<area shape="rect" href="namespaceiridium_1_1testing.html#a0adba9967a0a036c182420638083eda7" title=" " alt="" coords="224,838,373,894"/>
+<area shape="poly" title=" " alt="" coords="506,501,496,570,473,656,457,701,436,746,412,789,382,827,368,840,366,835,378,824,407,786,432,743,452,699,468,654,490,569,503,505"/>
+<area shape="rect" href="namespaceiridium_1_1testing.html#ae72cd522c70451a9faa842c7485d6ec6" title=" " alt="" coords="233,917,364,958"/>
+<area shape="poly" title=" " alt="" coords="509,501,505,584,486,692,469,749,447,806,418,859,382,908,366,921,363,916,378,904,414,856,442,804,464,747,481,690,499,584,507,505"/>
+<area shape="poly" title=" " alt="" coords="227,122,219,132,193,162,170,195,134,266,110,332,96,381,90,380,104,330,129,264,165,192,188,158,215,128,229,118"/>
+<area shape="poly" title=" " alt="" coords="226,301,218,307,160,345,114,383,109,380,157,341,215,302,229,296"/>
+<area shape="poly" title=" " alt="" coords="199,403,171,404,168,399,203,400"/>
+<area shape="poly" title=" " alt="" coords="225,506,215,501,157,462,112,425,111,420,160,458,218,497,230,504"/>
+<area shape="poly" title=" " alt="" coords="219,634,215,632,191,607,169,580,134,522,108,466,95,425,95,420,113,464,138,519,174,577,195,604,218,628,224,633"/>
+<area shape="poly" title=" " alt="" coords="218,764,215,762,182,721,155,675,134,626,117,577,96,487,90,425,90,420,101,486,122,576,139,624,160,672,186,718,219,759,223,764"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad7ac197067845ef5d0bd8c97d774017e" name="ad7ac197067845ef5d0bd8c97d774017e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7ac197067845ef5d0bd8c97d774017e">&#9670;&#160;</a></span>greater() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::greater </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_ad7ac197067845ef5d0bd8c97d774017e_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_ad7ac197067845ef5d0bd8c97d774017e_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_ad7ac197067845ef5d0bd8c97d774017e_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_ad7ac197067845ef5d0bd8c97d774017e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad7ac197067845ef5d0bd8c97d774017e" name="ad7ac197067845ef5d0bd8c97d774017e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7ac197067845ef5d0bd8c97d774017e">&#9670;&#160;</a></span>greater() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::greater </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69288471d33daed738d4265c75cfc9e6" name="a69288471d33daed738d4265c75cfc9e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69288471d33daed738d4265c75cfc9e6">&#9670;&#160;</a></span>greater() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLeft, typename TRight&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::greater </td>
+          <td>(</td>
+          <td class="paramtype">TLeft const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRight const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a69288471d33daed738d4265c75cfc9e6_icgraph">
+<area shape="rect" title=" " alt="" coords="217,5,380,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" title=" " alt="" coords="199,26,169,28,169,23,204,25"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1f9170f4c5aaf159df5057ba9e6dfb31" name="a1f9170f4c5aaf159df5057ba9e6dfb31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f9170f4c5aaf159df5057ba9e6dfb31">&#9670;&#160;</a></span>greaterEqual() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::greaterEqual </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a1f9170f4c5aaf159df5057ba9e6dfb31_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a1f9170f4c5aaf159df5057ba9e6dfb31_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a1f9170f4c5aaf159df5057ba9e6dfb31_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a1f9170f4c5aaf159df5057ba9e6dfb31_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1f9170f4c5aaf159df5057ba9e6dfb31" name="a1f9170f4c5aaf159df5057ba9e6dfb31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f9170f4c5aaf159df5057ba9e6dfb31">&#9670;&#160;</a></span>greaterEqual() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::greaterEqual </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a526d7eaad07a38339c210e9f98a0f5fa" name="a526d7eaad07a38339c210e9f98a0f5fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a526d7eaad07a38339c210e9f98a0f5fa">&#9670;&#160;</a></span>greaterEqual() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLeft, typename TRight&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::greaterEqual </td>
+          <td>(</td>
+          <td class="paramtype">TLeft const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRight const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a526d7eaad07a38339c210e9f98a0f5fa_icgraph">
+<area shape="rect" title=" " alt="" coords="217,5,380,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" title=" " alt="" coords="199,26,169,28,169,23,204,25"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad6fa5749ccda763364769965e80d9931" name="ad6fa5749ccda763364769965e80d9931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fa5749ccda763364769965e80d9931">&#9670;&#160;</a></span>less() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::less </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_ad6fa5749ccda763364769965e80d9931_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_ad6fa5749ccda763364769965e80d9931_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_ad6fa5749ccda763364769965e80d9931_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_ad6fa5749ccda763364769965e80d9931_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad6fa5749ccda763364769965e80d9931" name="ad6fa5749ccda763364769965e80d9931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fa5749ccda763364769965e80d9931">&#9670;&#160;</a></span>less() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::less </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92213ebbfeee2cb12e29e2b5d7fea929" name="a92213ebbfeee2cb12e29e2b5d7fea929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92213ebbfeee2cb12e29e2b5d7fea929">&#9670;&#160;</a></span>less() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLeft, typename TRight&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::less </td>
+          <td>(</td>
+          <td class="paramtype">TLeft const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRight const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a92213ebbfeee2cb12e29e2b5d7fea929_icgraph">
+<area shape="rect" title=" " alt="" coords="217,5,380,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" title=" " alt="" coords="199,26,169,28,169,23,204,25"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a988e9485970d0db2f964c09b0fd58ad3" name="a988e9485970d0db2f964c09b0fd58ad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a988e9485970d0db2f964c09b0fd58ad3">&#9670;&#160;</a></span>lessEqual() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::lessEqual </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_a988e9485970d0db2f964c09b0fd58ad3_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_a988e9485970d0db2f964c09b0fd58ad3_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_a988e9485970d0db2f964c09b0fd58ad3_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_a988e9485970d0db2f964c09b0fd58ad3_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a988e9485970d0db2f964c09b0fd58ad3" name="a988e9485970d0db2f964c09b0fd58ad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a988e9485970d0db2f964c09b0fd58ad3">&#9670;&#160;</a></span>lessEqual() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::lessEqual </td>
+          <td>(</td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abaea5257ce99169b593c70559270adc4" name="abaea5257ce99169b593c70559270adc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaea5257ce99169b593c70559270adc4">&#9670;&#160;</a></span>lessEqual() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TLeft, typename TRight&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void iridium::testing::UnitTestCase::lessEqual </td>
+          <td>(</td>
+          <td class="paramtype">TLeft const &amp;</td>          <td class="paramname"><span class="paramname"><em>left</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TRight const &amp;</td>          <td class="paramname"><span class="paramname"><em>right</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>condition_source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t const &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_cgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_cgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_cgraph">
+<area shape="rect" title=" " alt="" coords="5,64,169,105"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#a530027791e4105481d575702ff62db15" title=" " alt="" coords="217,64,380,105"/>
+<area shape="poly" title=" " alt="" coords="169,82,204,84,199,85,169,87"/>
+<area shape="rect" href="namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="450,29,578,70"/>
+<area shape="poly" title=" " alt="" coords="380,69,438,62,433,63,381,74"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="428,96,600,137"/>
+<area shape="poly" title=" " alt="" coords="380,94,415,101,410,101,380,99"/>
+<area shape="poly" title=" " alt="" coords="474,27,471,19,478,10,492,5,514,3,538,5,553,14,548,14,536,10,514,8,494,10,481,15,477,21,478,30"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="648,19,828,75"/>
+<area shape="poly" title=" " alt="" coords="578,46,636,48,630,48,578,52"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="652,99,824,139"/>
+<area shape="poly" title=" " alt="" coords="600,115,639,118,634,118,600,120"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_icgraph.png" border="0" usemap="#aclassiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_icgraph" id="aclassiridium_1_1testing_1_1_unit_test_case_abaea5257ce99169b593c70559270adc4_icgraph">
+<area shape="rect" title=" " alt="" coords="217,5,380,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html#afa0f9ac826796cf81cf5d880c5830faa" title=" " alt="" coords="5,5,169,46"/>
+<area shape="poly" title=" " alt="" coords="199,26,169,28,169,23,204,25"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1testing.html">testing</a></li><li class="navelem"><a href="classiridium_1_1testing_1_1_unit_test_case.html">UnitTestCase</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

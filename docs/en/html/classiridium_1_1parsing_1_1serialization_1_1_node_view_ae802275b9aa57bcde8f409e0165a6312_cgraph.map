@@ -1,5 +1,0 @@
-<map id="iridium::parsing::serialization::NodeView&lt; void &gt;::NodeView" name="iridium::parsing::serialization::NodeView&lt; void &gt;::NodeView">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,211,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html#ab889fc48c7a4a322045694711bff13a5" title="Constructor for a root node view, intended primarily for deserialization where the node is yet to be ..." alt="" coords="259,5,464,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,23,243,23,243,28,211,28"/>
-</map>

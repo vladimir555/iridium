@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['конфигурация_20логгера_0',['Конфигурация логгера',['../index.html#subsec_logger_configuration',1,'']]],
-  ['конфигурация_20по_20умолчанию_1',['Конфигурация по умолчанию',['../index.html#subsec_default_config',1,'']]],
-  ['класса_20tester_2',['Роль класса Tester',['../index.html#subsubsec_testing_tester',1,'']]],
-  ['классов_3',['Определение мок-классов',['../index.html#subsubsec_testing_defining_mocks',1,'']]],
-  ['командной_20строки_4',['Аргументы командной строки',['../index.html#subsubsec_testing_cli',1,'']]],
-  ['конфигурации_5',['Пример программной конфигурации',['../index.html#subsec_logger_config_example',1,'']]],
-  ['конфигурация_20логгера_6',['Использование и конфигурация логгера',['../index.html#sec_logging',1,'']]],
-  ['концепции_7',['Основные концепции',['../index.html#subsec_testing_core_concepts',1,'']]]
+  ['запуск_20тестов_0',['Запуск тестов',['../index.html#subsec_testing_running_tests',1,'']]],
+  ['зависимостей_1',['Мокирование зависимостей',['../index.html#subsec_testing_mocking',1,'']]],
+  ['задач_2',['задач',['../index.html#subsec_cworker',1,'Использование CWorker для обработки задач'],['../index.html#subsec_cworkerpool',1,'Использование CWorkerPool для параллельной обработки задач']]],
+  ['защиты_20данных_3',['Использование Synchronized для защиты данных',['../index.html#subsec_synchronized',1,'']]]
 ];

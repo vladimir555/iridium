@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Пространство имен iridium::io::protocol::http::request</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,38 +34,64 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
-});
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html','',''); });
 </script>
-<div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<div id="MSearchSelectWindow">
 </div>
 
 <!-- iframe showing the search results (closed by default) -->
@@ -82,75 +108,252 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Классы</a> &#124;
-<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Пространство имен iridium::io::protocol::http::request</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет первую строку HTTP-запроса, также известную как строка запроса.  <a href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:TMessageLine" id="r_TMessageLine"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:a27065c46a3da323c165b2667a95dee93" id="r_a27065c46a3da323c165b2667a95dee93"><td class="memItemLeft" align="right" valign="top">THttp::TMessageLine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27065c46a3da323c165b2667a95dee93">convert</a> (string const &amp;source)</td></tr>
-<tr class="separator:a27065c46a3da323c165b2667a95dee93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a368121d025b8edc6cd9c9fa9b41baea7" id="r_a368121d025b8edc6cd9c9fa9b41baea7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a368121d025b8edc6cd9c9fa9b41baea7">convert</a> (THttp::TMessageLine const &amp;source)</td></tr>
-<tr class="separator:a368121d025b8edc6cd9c9fa9b41baea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acecc94a03e66423f66c766c006665eeb" id="r_acecc94a03e66423f66c766c006665eeb"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acecc94a03e66423f66c766c006665eeb">DEFINE_SCHEMA_OBJECT_BEGIN</a> (Http)</td></tr>
+<tr class="memitem:a3e5683e449b0d60db086fcbc13987724" id="r_a3e5683e449b0d60db086fcbc13987724"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3e5683e449b0d60db086fcbc13987724">DEFINE_SCHEMA_VALUE</a> (<a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a>, Message)</td></tr>
+<tr class="memitem:adcdb77c1a64b8455d8293d871322e5aa" id="r_adcdb77c1a64b8455d8293d871322e5aa"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adcdb77c1a64b8455d8293d871322e5aa">DEFINE_SCHEMA_OBJECT_BEGIN</a> (Header)</td></tr>
+<tr class="memitem:a90c1e9c1865d42196fe83e634d0c49dc" id="r_a90c1e9c1865d42196fe83e634d0c49dc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a90c1e9c1865d42196fe83e634d0c49dc">DEFINE_SCHEMA_VALUE</a> (std::string, Host)</td></tr>
+<tr class="memitem:ac09d666b8bb4f7418e72e003f2ed7d6a" id="r_ac09d666b8bb4f7418e72e003f2ed7d6a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac09d666b8bb4f7418e72e003f2ed7d6a">DEFINE_SCHEMA_VALUE</a> (std::string, UserAgent)</td></tr>
+<tr class="memitem:a730fdb24e97dada99419d5ec4b6c302b" id="r_a730fdb24e97dada99419d5ec4b6c302b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a730fdb24e97dada99419d5ec4b6c302b">DEFINE_SCHEMA_VALUE</a> (std::string, Connection)</td></tr>
+<tr class="memitem:a6cd3ff0da029cfdb0a6b8a03b89096ae" id="r_a6cd3ff0da029cfdb0a6b8a03b89096ae"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6cd3ff0da029cfdb0a6b8a03b89096ae">DEFINE_SCHEMA_ARRAY</a> (std::string, Accept)</td></tr>
+<tr class="memitem:a20de640db14b4e4b754f24238b0716c5" id="r_a20de640db14b4e4b754f24238b0716c5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a20de640db14b4e4b754f24238b0716c5">DEFINE_SCHEMA_ARRAY</a> (std::string, AcceptLanguage)</td></tr>
+<tr class="memitem:adb6d2390294c661d6c8fcb9e367e1a05" id="r_adb6d2390294c661d6c8fcb9e367e1a05"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adb6d2390294c661d6c8fcb9e367e1a05">DEFINE_SCHEMA_ARRAY</a> (std::string, AcceptEncoding)</td></tr>
+<tr class="memitem:ac367e20f307cf3bfbc9f22f89795668a" id="r_ac367e20f307cf3bfbc9f22f89795668a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac367e20f307cf3bfbc9f22f89795668a">DEFINE_SCHEMA_ARRAY</a> (std::string, AcceptCharset)</td></tr>
+<tr class="memitem:ac069831676c0160b650d6ece94936a55" id="r_ac069831676c0160b650d6ece94936a55"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac069831676c0160b650d6ece94936a55">DEFINE_SCHEMA_ARRAY</a> (std::string, Cookie)</td></tr>
+<tr class="memitem:a570c78c19a6b7e4f389703a1333632bf" id="r_a570c78c19a6b7e4f389703a1333632bf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a570c78c19a6b7e4f389703a1333632bf">DEFINE_SCHEMA_OBJECT_END</a> ()</td></tr>
+<tr class="memitem:a78b09f32b50a60fdcd93a3a407c3c155" id="r_a78b09f32b50a60fdcd93a3a407c3c155"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a78b09f32b50a60fdcd93a3a407c3c155">DEFINE_SCHEMA_ARRAY</a> (Header, Heareds)</td></tr>
+<tr class="memitem:a463137fe99b820cf159326766678f38b" id="r_a463137fe99b820cf159326766678f38b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a463137fe99b820cf159326766678f38b">DEFINE_SCHEMA_VALUE</a> (std::string, Body)</td></tr>
 </table>
-<h2 class="groupheader">Функции</h2>
-<a id="a27065c46a3da323c165b2667a95dee93" name="a27065c46a3da323c165b2667a95dee93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27065c46a3da323c165b2667a95dee93">&#9670;&#160;</a></span>convert() <span class="overload">[1/2]</span></h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="a78b09f32b50a60fdcd93a3a407c3c155" name="a78b09f32b50a60fdcd93a3a407c3c155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78b09f32b50a60fdcd93a3a407c3c155">&#9670;&#160;</a></span>DEFINE_SCHEMA_ARRAY() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">THttp::TMessageLine iridium::io::protocol::http::request::convert </td>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY </td>
           <td>(</td>
-          <td class="paramtype">string const &amp;</td>          <td class="paramname"><span class="paramname"><em>source</em></span></td><td>)</td>
+          <td class="paramtype">Header</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Heareds</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a27065c46a3da323c165b2667a95dee93_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a27065c46a3da323c165b2667a95dee93_cgraph" alt=""/></div>
-<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a27065c46a3da323c165b2667a95dee93_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a27065c46a3da323c165b2667a95dee93_cgraph">
-<area shape="rect" title=" " alt="" coords="5,55,159,96"/>
-<area shape="rect" href="namespaceiridium.html#a5f7a2b2889e7686d89a0f1d2d09bf7bf" title="Эта функция computes assertSize. Russian detailed description (if any)." alt="" coords="207,5,336,31"/>
-<area shape="poly" title=" " alt="" coords="150,52,211,33,213,39,152,57"/>
-<area shape="rect" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="208,55,335,96"/>
-<area shape="poly" title=" " alt="" coords="159,73,192,73,192,78,159,78"/>
-<area shape="rect" href="namespaceiridium.html#a0b0c6335e1267c02ad5e676b9a19b610" title=" " alt="" coords="226,120,317,146"/>
-<area shape="poly" title=" " alt="" coords="152,94,213,112,211,118,150,99"/>
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a78b09f32b50a60fdcd93a3a407c3c155_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a78b09f32b50a60fdcd93a3a407c3c155_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a78b09f32b50a60fdcd93a3a407c3c155_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a78b09f32b50a60fdcd93a3a407c3c155_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a6cd3ff0da029cfdb0a6b8a03b89096ae" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a368121d025b8edc6cd9c9fa9b41baea7" name="a368121d025b8edc6cd9c9fa9b41baea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a368121d025b8edc6cd9c9fa9b41baea7">&#9670;&#160;</a></span>convert() <span class="overload">[2/2]</span></h2>
+<a id="a6cd3ff0da029cfdb0a6b8a03b89096ae" name="a6cd3ff0da029cfdb0a6b8a03b89096ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cd3ff0da029cfdb0a6b8a03b89096ae">&#9670;&#160;</a></span>DEFINE_SCHEMA_ARRAY() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string iridium::io::protocol::http::request::convert </td>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY </td>
           <td>(</td>
-          <td class="paramtype">THttp::TMessageLine const &amp;</td>          <td class="paramname"><span class="paramname"><em>source</em></span></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Accept</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="poly" title=" " alt="" coords="53,28,54,19,59,10,70,5,86,3,102,5,114,14,109,14,101,10,85,8,72,10,63,14,59,21,58,30"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_icgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a6cd3ff0da029cfdb0a6b8a03b89096ae_icgraph">
+<area shape="rect" title=" " alt="" coords="214,165,374,221"/>
+<area shape="poly" title=" " alt="" coords="325,151,314,146,294,144,276,146,264,151,258,157,258,166,253,164,253,155,261,146,274,141,294,139,316,141,331,150"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a78b09f32b50a60fdcd93a3a407c3c155" title=" " alt="" coords="5,5,166,61"/>
+<area shape="poly" title=" " alt="" coords="254,154,213,115,164,75,148,64,147,59,167,71,217,111,259,154"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#ac367e20f307cf3bfbc9f22f89795668a" title=" " alt="" coords="5,85,166,141"/>
+<area shape="poly" title=" " alt="" coords="203,160,160,144,160,139,208,158"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#adb6d2390294c661d6c8fcb9e367e1a05" title=" " alt="" coords="5,165,166,221"/>
+<area shape="poly" title=" " alt="" coords="196,194,167,196,165,191,201,192"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a20de640db14b4e4b754f24238b0716c5" title=" " alt="" coords="5,245,166,301"/>
+<area shape="poly" title=" " alt="" coords="203,229,161,247,159,242,207,226"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#ac069831676c0160b650d6ece94936a55" title=" " alt="" coords="5,325,166,381"/>
+<area shape="poly" title=" " alt="" coords="259,231,217,275,167,315,149,327,146,322,164,311,213,271,255,234"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac367e20f307cf3bfbc9f22f89795668a" name="ac367e20f307cf3bfbc9f22f89795668a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac367e20f307cf3bfbc9f22f89795668a">&#9670;&#160;</a></span>DEFINE_SCHEMA_ARRAY() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AcceptCharset</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac367e20f307cf3bfbc9f22f89795668a_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac367e20f307cf3bfbc9f22f89795668a_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac367e20f307cf3bfbc9f22f89795668a_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac367e20f307cf3bfbc9f22f89795668a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a6cd3ff0da029cfdb0a6b8a03b89096ae" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="adb6d2390294c661d6c8fcb9e367e1a05" name="adb6d2390294c661d6c8fcb9e367e1a05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb6d2390294c661d6c8fcb9e367e1a05">&#9670;&#160;</a></span>DEFINE_SCHEMA_ARRAY() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AcceptEncoding</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adb6d2390294c661d6c8fcb9e367e1a05_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adb6d2390294c661d6c8fcb9e367e1a05_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adb6d2390294c661d6c8fcb9e367e1a05_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adb6d2390294c661d6c8fcb9e367e1a05_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a6cd3ff0da029cfdb0a6b8a03b89096ae" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a20de640db14b4e4b754f24238b0716c5" name="a20de640db14b4e4b754f24238b0716c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20de640db14b4e4b754f24238b0716c5">&#9670;&#160;</a></span>DEFINE_SCHEMA_ARRAY() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AcceptLanguage</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a20de640db14b4e4b754f24238b0716c5_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a20de640db14b4e4b754f24238b0716c5_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a20de640db14b4e4b754f24238b0716c5_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a20de640db14b4e4b754f24238b0716c5_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a6cd3ff0da029cfdb0a6b8a03b89096ae" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac069831676c0160b650d6ece94936a55" name="ac069831676c0160b650d6ece94936a55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac069831676c0160b650d6ece94936a55">&#9670;&#160;</a></span>DEFINE_SCHEMA_ARRAY() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_ARRAY </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Cookie</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac069831676c0160b650d6ece94936a55_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac069831676c0160b650d6ece94936a55_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac069831676c0160b650d6ece94936a55_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac069831676c0160b650d6ece94936a55_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a6cd3ff0da029cfdb0a6b8a03b89096ae" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="adcdb77c1a64b8455d8293d871322e5aa" name="adcdb77c1a64b8455d8293d871322e5aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcdb77c1a64b8455d8293d871322e5aa">&#9670;&#160;</a></span>DEFINE_SCHEMA_OBJECT_BEGIN() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_OBJECT_BEGIN </td>
+          <td>(</td>
+          <td class="paramtype">Header</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -158,21 +361,285 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Граф вызовов:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a368121d025b8edc6cd9c9fa9b41baea7_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a368121d025b8edc6cd9c9fa9b41baea7_cgraph" alt=""/></div>
-<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a368121d025b8edc6cd9c9fa9b41baea7_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a368121d025b8edc6cd9c9fa9b41baea7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,159,46"/>
-<area shape="rect" href="namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="207,5,334,46"/>
-<area shape="poly" title=" " alt="" coords="159,23,191,23,191,28,159,28"/>
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adcdb77c1a64b8455d8293d871322e5aa_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adcdb77c1a64b8455d8293d871322e5aa_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adcdb77c1a64b8455d8293d871322e5aa_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_adcdb77c1a64b8455d8293d871322e5aa_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,201,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#acecc94a03e66423f66c766c006665eeb" title=" " alt="" coords="249,29,444,85"/>
+<area shape="poly" title=" " alt="" coords="201,55,236,57,231,57,201,60"/>
+<area shape="poly" title=" " alt="" coords="299,27,299,19,308,10,324,5,346,3,372,5,389,15,384,14,371,10,346,8,325,10,311,15,304,21,303,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="acecc94a03e66423f66c766c006665eeb" name="acecc94a03e66423f66c766c006665eeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acecc94a03e66423f66c766c006665eeb">&#9670;&#160;</a></span>DEFINE_SCHEMA_OBJECT_BEGIN() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_OBJECT_BEGIN </td>
+          <td>(</td>
+          <td class="paramtype">Http</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,201,85"/>
+<area shape="poly" title=" " alt="" coords="64,28,65,19,72,10,85,5,103,3,124,5,138,14,132,15,122,10,103,8,86,10,75,15,70,21,69,30"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_icgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_acecc94a03e66423f66c766c006665eeb_icgraph">
+<area shape="rect" title=" " alt="" coords="249,29,444,85"/>
+<area shape="poly" title=" " alt="" coords="384,14,371,10,346,8,325,10,311,15,304,21,303,31,299,27,299,19,308,10,324,5,346,3,372,5,389,15"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#adcdb77c1a64b8455d8293d871322e5aa" title=" " alt="" coords="5,29,201,85"/>
+<area shape="poly" title=" " alt="" coords="230,57,201,60,201,55,236,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a570c78c19a6b7e4f389703a1333632bf" name="a570c78c19a6b7e4f389703a1333632bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a570c78c19a6b7e4f389703a1333632bf">&#9670;&#160;</a></span>DEFINE_SCHEMA_OBJECT_END()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_OBJECT_END </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,188,85"/>
+<area shape="poly" title=" " alt="" coords="60,28,61,19,67,10,79,5,97,3,116,5,129,14,124,15,114,10,96,8,81,10,71,14,66,21,65,30"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_icgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a570c78c19a6b7e4f389703a1333632bf_icgraph">
+<area shape="rect" title=" " alt="" coords="214,29,396,85"/>
+<area shape="poly" title=" " alt="" coords="338,14,326,10,305,8,286,10,273,15,267,21,266,31,262,27,262,19,270,10,284,5,305,3,328,5,344,15"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a463137fe99b820cf159326766678f38b" title=" " alt="" coords="5,29,166,85"/>
+<area shape="poly" title=" " alt="" coords="196,57,166,60,166,55,201,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a463137fe99b820cf159326766678f38b" name="a463137fe99b820cf159326766678f38b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a463137fe99b820cf159326766678f38b">&#9670;&#160;</a></span>DEFINE_SCHEMA_VALUE() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_VALUE </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Body</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a463137fe99b820cf159326766678f38b_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a463137fe99b820cf159326766678f38b_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a463137fe99b820cf159326766678f38b_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a463137fe99b820cf159326766678f38b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,81,166,137"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a570c78c19a6b7e4f389703a1333632bf" title=" " alt="" coords="214,29,396,85"/>
+<area shape="poly" title=" " alt="" coords="165,88,201,81,196,83,167,93"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a3e5683e449b0d60db086fcbc13987724" title=" " alt="" coords="225,133,385,189"/>
+<area shape="poly" title=" " alt="" coords="166,126,212,138,207,139,166,131"/>
+<area shape="poly" title=" " alt="" coords="262,28,262,19,270,10,284,5,305,3,328,5,344,14,338,15,326,10,305,8,286,10,273,15,267,21,267,30"/>
+<area shape="poly" title=" " alt="" coords="262,131,262,123,270,114,284,109,305,107,328,109,344,119,338,118,326,114,305,112,286,114,273,119,267,125,266,135"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a730fdb24e97dada99419d5ec4b6c302b" name="a730fdb24e97dada99419d5ec4b6c302b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a730fdb24e97dada99419d5ec4b6c302b">&#9670;&#160;</a></span>DEFINE_SCHEMA_VALUE() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_VALUE </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Connection</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a730fdb24e97dada99419d5ec4b6c302b_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a730fdb24e97dada99419d5ec4b6c302b_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a730fdb24e97dada99419d5ec4b6c302b_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a730fdb24e97dada99419d5ec4b6c302b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a3e5683e449b0d60db086fcbc13987724" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a90c1e9c1865d42196fe83e634d0c49dc" name="a90c1e9c1865d42196fe83e634d0c49dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c1e9c1865d42196fe83e634d0c49dc">&#9670;&#160;</a></span>DEFINE_SCHEMA_VALUE() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_VALUE </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Host</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a90c1e9c1865d42196fe83e634d0c49dc_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a90c1e9c1865d42196fe83e634d0c49dc_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a90c1e9c1865d42196fe83e634d0c49dc_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a90c1e9c1865d42196fe83e634d0c49dc_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a3e5683e449b0d60db086fcbc13987724" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac09d666b8bb4f7418e72e003f2ed7d6a" name="ac09d666b8bb4f7418e72e003f2ed7d6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac09d666b8bb4f7418e72e003f2ed7d6a">&#9670;&#160;</a></span>DEFINE_SCHEMA_VALUE() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_VALUE </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UserAgent</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac09d666b8bb4f7418e72e003f2ed7d6a_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac09d666b8bb4f7418e72e003f2ed7d6a_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac09d666b8bb4f7418e72e003f2ed7d6a_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_ac09d666b8bb4f7418e72e003f2ed7d6a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a3e5683e449b0d60db086fcbc13987724" title=" " alt="" coords="214,29,374,85"/>
+<area shape="poly" title=" " alt="" coords="166,55,201,57,195,57,166,60"/>
+<area shape="poly" title=" " alt="" coords="253,27,253,19,261,10,274,5,294,3,316,5,331,15,325,14,314,10,294,8,276,10,264,15,258,21,257,31"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3e5683e449b0d60db086fcbc13987724" name="a3e5683e449b0d60db086fcbc13987724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5683e449b0d60db086fcbc13987724">&#9670;&#160;</a></span>DEFINE_SCHEMA_VALUE() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">iridium::io::protocol::http::request::DEFINE_SCHEMA_VALUE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html">TMessageLine</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Message</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_cgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,166,85"/>
+<area shape="poly" title=" " alt="" coords="53,28,54,19,59,10,70,5,86,3,102,5,114,14,109,14,101,10,85,8,72,10,63,14,59,21,58,30"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_icgraph" id="anamespaceiridium_1_1io_1_1protocol_1_1http_1_1request_a3e5683e449b0d60db086fcbc13987724_icgraph">
+<area shape="rect" title=" " alt="" coords="214,125,374,181"/>
+<area shape="poly" title=" " alt="" coords="325,111,314,106,294,104,276,106,264,111,258,117,258,126,253,124,253,115,261,106,274,101,294,99,316,101,331,110"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a463137fe99b820cf159326766678f38b" title=" " alt="" coords="5,5,166,61"/>
+<area shape="poly" title=" " alt="" coords="235,118,164,75,145,64,144,59,167,71,240,116"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a730fdb24e97dada99419d5ec4b6c302b" title=" " alt="" coords="5,85,166,141"/>
+<area shape="poly" title=" " alt="" coords="196,136,167,131,166,126,201,134"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#a90c1e9c1865d42196fe83e634d0c49dc" title=" " alt="" coords="5,165,166,221"/>
+<area shape="poly" title=" " alt="" coords="196,173,167,180,165,175,201,170"/>
+<area shape="rect" href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html#ac09d666b8bb4f7418e72e003f2ed7d6a" title=" " alt="" coords="5,245,166,301"/>
+<area shape="poly" title=" " alt="" coords="240,189,167,235,146,247,143,242,164,231,235,191"/>
 </map>
 </div>
 
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1io.html">io</a></li><li class="navelem"><a href="namespaceiridium_1_1io_1_1protocol.html">protocol</a></li><li class="navelem"><a href="namespaceiridium_1_1io_1_1protocol_1_1http.html">http</a></li><li class="navelem"><a href="namespaceiridium_1_1io_1_1protocol_1_1http_1_1request.html">request</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

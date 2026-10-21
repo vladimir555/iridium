@@ -1,0 +1,6 @@
+<map id="iridium::convertion::convert" name="iridium::convertion::convert">
+<area shape="rect" id="Node000001" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="5,29,133,70"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="31,28,29,19,35,10,49,5,69,3,91,5,105,13,100,14,89,10,69,8,50,10,38,15,34,20,36,29"/>
+<area shape="rect" id="Node000002" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="181,22,360,78"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="133,47,167,49,162,50,133,52"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="iridium::logging::config::DEFINE_SCHEMA_VALUE" name="iridium::logging::config::DEFINE_SCHEMA_VALUE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="247,104,440,145"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="381,88,368,85,343,83,320,85,306,89,301,95,303,104,298,102,296,94,303,85,319,79,343,77,369,80,386,88"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging_1_1config.html#a482d777a873d05960c5b138240c93a83" title=" " alt="" coords="5,5,199,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="283,98,198,61,166,49,165,44,200,57,288,96"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1logging_1_1config.html#ae3ff38ee145155b3550c92fcfb30b123" title=" " alt="" coords="5,71,199,111"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="229,110,199,107,199,102,234,108"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1logging_1_1config.html#a41fd91a8872330217cb6ade2779c760d" title=" " alt="" coords="5,136,199,177"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="229,140,200,146,198,141,234,138"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1logging_1_1config.html#a73af5d25cc360ff00803cfc749f51b8a" title=" " alt="" coords="5,201,199,242"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="287,151,200,191,167,203,165,198,198,186,281,152"/>
+</map>

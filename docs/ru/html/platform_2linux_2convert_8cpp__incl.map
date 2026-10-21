@@ -1,0 +1,7 @@
+<map id="iridium/convertion/implementation/platform/linux/convert.cpp" name="iridium/convertion/implementation/platform/linux/convert.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,170,61"/>
+<area shape="rect" id="Node000002" href="$implementation_2platform_2linux_2convert_8h.html" title="Включает заголовочный файл преобразования для платформы Unix для Linux." alt="" coords="50,109,125,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,59,90,94,85,93,86,64"/>
+<area shape="rect" id="Node000003" href="$platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="27,183,148,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,133,90,168,85,166,86,137"/>
+</map>

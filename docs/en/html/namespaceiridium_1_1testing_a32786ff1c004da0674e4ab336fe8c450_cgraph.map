@@ -1,7 +1,14 @@
 <map id="iridium::testing::fail&lt; std::string &gt;" name="iridium::testing::fail&lt; std::string &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,137,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test.html#a63e487f944b7e9c72d2c0b5c9c021368" title=" " alt="" coords="185,5,348,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,23,169,23,169,28,137,28"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Provides access to the core conversion function template from the implementation namespace...." alt="" coords="396,5,523,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,23,381,23,381,28,349,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,64,137,105"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test.html#a63e487f944b7e9c72d2c0b5c9c021368" title="Fails a test with a message." alt="" coords="185,64,348,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,82,171,84,166,85,137,87"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="418,29,546,70"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="348,69,406,62,401,63,349,74"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Constructor." alt="" coords="396,96,568,137"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="348,94,383,101,378,101,348,99"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="442,27,439,19,446,10,460,5,482,3,506,5,521,14,516,14,504,10,482,8,462,10,449,15,445,21,446,30"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="616,19,796,75"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="546,46,604,48,598,49,546,52"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Gets the exception message." alt="" coords="620,99,792,139"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="568,115,607,118,602,118,568,120"/>
 </map>

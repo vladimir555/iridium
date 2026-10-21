@@ -1,0 +1,38 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,710,113,736"/>
+<area shape="rect" id="Node000001" href="$structiridium_1_1_t_container_has_size_method_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d3b8610498e5b86d4cfe251817e736f71.html" title="A trait to check if a type T has a size() method. Specialization for when size() exists." alt="" coords="200,5,382,76"/>
+<area shape="poly" id="edge159_Node000000_Node000001" title=" " alt="" coords="61,694,108,354,137,175,149,115,158,86,177,69,201,57,198,61,180,73,163,89,154,116,142,176,113,355,67,695"/>
+<area shape="rect" id="Node000003" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_has_convert_3_01_t_to_00_01_t_from6793cb355db87b20a7719fdad53e7929.html" title=" " alt="" coords="184,100,398,200"/>
+<area shape="poly" id="edge160_Node000000_Node000003" title=" " alt="" coords="60,695,70,590,89,446,103,373,119,305,137,249,159,210,185,187,183,192,163,213,142,251,124,307,108,374,95,447,75,591,65,696"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum_3_01_t_00_01std_1_a22352c967e61128065a7bcf54823e30.html" title="A trait to check if a type T is an enum defined with DEFINE_ENUM. Specialization for when it is." alt="" coords="161,224,421,295"/>
+<area shape="poly" id="edge161_Node000000_Node000004" title=" " alt="" coords="61,695,73,607,94,491,122,379,139,335,159,304,173,293,171,298,163,308,144,337,127,381,99,492,78,608,66,695"/>
+<area shape="rect" id="Node000005" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_pair_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4.html" title=" " alt="" coords="210,319,372,389"/>
+<area shape="poly" id="edge162_Node000000_Node000005" title=" " alt="" coords="58,695,64,635,80,556,92,515,109,474,131,435,159,400,182,382,211,369,208,373,185,386,163,404,136,438,114,476,97,516,85,558,69,636,64,695"/>
+<area shape="rect" id="Node000008" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_05aa78a1002c3c759e047fa0efcd41687.html" title=" " alt="" coords="179,808,402,908"/>
+<area shape="poly" id="edge163_Node000000_Node000008" title=" " alt="" coords="88,743,162,793,184,806,179,808,159,798,90,748"/>
+<area shape="rect" id="Node000006" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container_3_01fec33ec6a8916ef75c312c88953d79fe.html" title="Metafunction to determine if a type T is an STL sequential container." alt="" coords="188,414,394,545"/>
+<area shape="poly" id="edge164_Node000000_Node000006" title=" " alt="" coords="69,696,104,628,129,590,159,555,189,532,186,536,163,559,133,593,109,630,74,697"/>
+<area shape="rect" id="Node000007" href="$structiridium_1_1parsing_1_1detail_1_1has__constraint_3_01_t_00_01std_1_1void__t_3_01decltype_07_t_1_1m__constraint_08_4_01_4.html" title=" " alt="" coords="170,569,412,624"/>
+<area shape="poly" id="edge165_Node000000_Node000007" title=" " alt="" coords="80,698,116,664,159,633,184,623,180,627,162,638,119,668,85,700"/>
+<area shape="rect" id="Node000009" href="$structiridium_1_1_t_container_has_size_method.html" title="A trait to check if a type T has a size() method." alt="" coords="200,932,382,973"/>
+<area shape="poly" id="edge166_Node000000_Node000009" title=" " alt="" coords="66,749,81,789,100,834,126,880,162,919,180,930,202,940,197,942,178,935,159,923,122,883,95,837,76,791,67,754"/>
+<area shape="rect" id="Node000010" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_has_convert.html" title=" " alt="" coords="201,997,381,1068"/>
+<area shape="poly" id="edge167_Node000000_Node000010" title=" " alt="" coords="64,749,75,801,93,863,121,927,140,956,163,983,181,997,203,1010,198,1012,178,1002,159,987,136,960,116,929,88,865,70,802,64,755"/>
+<area shape="rect" id="Node000011" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum.html" title="A trait to check if a type T is an enum defined with DEFINE_ENUM." alt="" coords="183,1092,399,1147"/>
+<area shape="poly" id="edge168_Node000000_Node000011" title=" " alt="" coords="60,749,65,818,79,906,91,952,109,998,132,1041,163,1079,185,1097,180,1098,159,1083,128,1044,104,1001,86,954,73,907,60,818,60,754"/>
+<area shape="rect" id="Node000012" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_pair.html" title=" " alt="" coords="213,1172,369,1227"/>
+<area shape="poly" id="edge169_Node000000_Node000012" title=" " alt="" coords="63,749,77,843,97,965,126,1082,143,1127,163,1158,186,1175,215,1189,210,1190,183,1180,159,1161,138,1129,121,1083,92,966,72,844,63,754"/>
+<area shape="rect" id="Node000013" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html" title="Metafunction to determine if a type T is an STL associative container." alt="" coords="193,1251,389,1321"/>
+<area shape="poly" id="edge170_Node000000_Node000013" title=" " alt="" coords="62,749,74,858,93,1003,106,1077,122,1144,141,1200,163,1238,177,1251,195,1264,190,1263,174,1255,159,1241,136,1202,117,1146,101,1078,87,1004,69,858,62,754"/>
+<area shape="rect" id="Node000014" href="$structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html" title="Metafunction to determine if a type T is an STL sequential container." alt="" coords="196,648,386,719"/>
+<area shape="poly" id="edge171_Node000000_Node000014" title=" " alt="" coords="126,709,198,698,194,702,130,714"/>
+<area shape="rect" id="Node000015" href="$structiridium_1_1parsing_1_1detail_1_1has__constraint.html" title=" " alt="" coords="186,743,396,784"/>
+<area shape="poly" id="edge172_Node000000_Node000015" title=" " alt="" coords="126,733,188,744,184,747,129,737"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="8,294,110,320"/>
+<area shape="poly" id="edge173_Node000002_Node000001" title=" " alt="" coords="63,279,74,237,93,185,121,132,138,107,159,85,178,71,201,60,198,65,180,76,162,89,143,111,125,135,98,187,79,238,68,280"/>
+<area shape="poly" id="edge174_Node000002_Node000003" title=" " alt="" coords="79,282,115,245,159,209,185,195,182,199,162,213,119,249,84,284"/>
+<area shape="poly" id="edge175_Node000002_Node000004" title=" " alt="" coords="123,292,162,284,159,288,127,296"/>
+<area shape="poly" id="edge176_Node000002_Node000005" title=" " alt="" coords="124,318,212,336,208,339,126,323"/>
+<area shape="poly" id="edge177_Node000002_Node000006" title=" " alt="" coords="82,328,120,363,162,399,190,419,185,421,159,403,117,367,84,333"/>
+<area shape="poly" id="edge178_Node000002_Node000007" title=" " alt="" coords="64,333,75,383,93,442,121,502,140,530,162,555,178,567,173,569,159,559,136,534,117,505,88,444,70,384,64,338"/>
+</map>

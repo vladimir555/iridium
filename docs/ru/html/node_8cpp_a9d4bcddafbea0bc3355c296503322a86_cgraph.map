@@ -1,0 +1,13 @@
+<map id="convert_" name="convert_">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,88,77,114"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="353,21,417,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,86,79,51,100,33,124,20,180,6,238,3,292,9,340,20,335,22,291,14,237,9,180,11,126,25,103,38,82,55,53,89"/>
+<area shape="rect" id="Node000003" href="$context_8cpp.html#af10ef9fc6f39fbdc673718fa976a67d3" title=" " alt="" coords="179,59,250,84"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="76,92,166,78,163,82,78,97"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_i_node_type.html#a9c302fb37e0491eb7dcc7d343bcf7607" title=" " alt="" coords="125,109,305,149"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="76,104,112,110,107,113,78,109"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_i_node_type.html#a185e76fe25574719af2ef82715a9c608" title=" " alt="" coords="125,174,305,215"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="58,112,89,135,126,159,140,167,135,167,123,163,86,140,58,117"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="250,61,340,43,335,46,252,66"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="186,58,180,50,184,40,196,34,215,32,236,35,248,43,242,44,234,40,215,37,197,39,188,44,186,49,191,59"/>
+</map>

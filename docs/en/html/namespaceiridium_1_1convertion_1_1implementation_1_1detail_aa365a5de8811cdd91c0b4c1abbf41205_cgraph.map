@@ -1,0 +1,6 @@
+<map id="iridium::convertion::implementation::detail::testIsSTD" name="iridium::convertion::implementation::detail::testIsSTD">
+<area shape="rect" id="Node000001" title="SFINAE helper to test if a type is in the std namespace." alt="" coords="5,29,162,85"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion_1_1implementation_1_1detail.html#a9ea1413b4faaa668d1d6199aa75fe17e" title="SFINAE helper to test if a type is in the std namespace." alt="" coords="210,29,366,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,55,197,57,192,57,162,60"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="248,27,248,19,255,10,269,5,288,3,309,5,324,15,319,14,308,10,288,8,270,10,258,15,253,21,252,31"/>
+</map>

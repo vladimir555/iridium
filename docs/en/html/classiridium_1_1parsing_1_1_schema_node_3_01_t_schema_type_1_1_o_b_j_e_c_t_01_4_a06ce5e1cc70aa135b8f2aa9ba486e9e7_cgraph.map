@@ -1,0 +1,20 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::serialize" name="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::serialize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,86,215,142"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a4d9d31787a2a0d8a45ffb48185a96e8d" title=" " alt="" coords="542,13,707,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,84,197,48,229,32,262,20,330,7,400,3,467,5,529,14,524,15,466,11,400,8,331,12,263,25,231,37,200,53,147,88"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a15917b382b11075ab6c5c23b85ed527d" title=" " alt="" coords="285,58,450,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,97,271,91,267,93,216,102"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ad686a8d1618db206367ee1f18cb34984" title=" " alt="" coords="263,122,472,178"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="215,126,250,133,245,134,216,132"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ae4e4b9aa53a9964df1fabf49712627b0" title=" " alt="" coords="520,188,729,243"/>
+<area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="156,140,207,166,263,188,324,201,387,210,507,219,502,219,386,215,323,206,262,193,205,171,155,145"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="450,61,529,49,524,51,451,66"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="319,56,317,48,325,39,342,33,367,31,395,34,413,42,408,42,394,39,367,37,343,38,328,43,322,49,324,58"/>
+<area shape="rect" id="Node000005" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="592,113,657,139"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="472,138,579,130,574,131,473,143"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="473,174,508,185,502,185,472,180"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="576,185,576,177,585,168,601,163,625,161,651,164,669,173,664,173,650,169,625,166,602,168,588,173,581,179,580,189"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a79a4233c3785f0a2ca0e5be434cf3005" title=" " alt="" coords="777,195,977,236"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="730,213,764,215,759,216,730,218"/>
+<area shape="poly" id="edge10_Node000007_Node000007" title=" " alt="" coords="830,193,827,185,835,176,852,171,877,169,904,171,922,180,917,179,903,176,877,174,853,176,838,181,833,186,834,196"/>
+</map>

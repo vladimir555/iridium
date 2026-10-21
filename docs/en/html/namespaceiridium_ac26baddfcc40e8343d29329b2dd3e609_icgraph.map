@@ -1,0 +1,35 @@
+<map id="iridium::checkOneOf" name="iridium::checkOneOf">
+<area shape="rect" id="Node000001" title=" " alt="" coords="809,286,950,312"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="921,272,908,267,879,265,854,267,840,272,837,277,844,286,839,285,832,278,836,268,853,262,880,260,910,262,926,272"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing_1_1implementation.html#a384ae55db616d63b9067b9651aa1b956" title=" " alt="" coords="535,29,740,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="868,270,854,230,832,180,801,128,781,105,760,85,741,73,741,68,763,81,785,102,805,125,837,177,859,228,873,272"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1parsing.html#aa7d26563dbf5ad24c479875fa3198b4b" title=" " alt="" coords="554,119,721,159"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="858,272,818,223,790,197,760,175,722,157,722,152,763,170,794,193,821,220,864,273"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a0ab15172f3afc0af852bca1a30a497f8" title=" " alt="" coords="542,184,734,225"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="840,278,760,240,725,228,725,223,762,235,846,278"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748" title="Initializes the file sink. This involves opening/creating the log file according to the path and rota..." alt="" coords="536,249,740,290"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="791,289,741,285,740,279,797,288"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1system_1_1_shell.html#af0cb0d7688e15d1a8cd9bb4c7d2f9d01" title=" " alt="" coords="551,314,724,340"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="791,310,725,320,724,314,796,308"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#afb1f97b97dc6b4988c660aea4bb41df7" title=" " alt="" coords="536,364,739,405"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="841,318,762,355,727,366,726,361,760,350,836,320"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1io_1_1implementation_1_1_c_pipe.html#a28abc2674c0d7a8cbbe6ee6a9d5a6f9d" title=" " alt="" coords="551,429,724,470"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="862,323,820,373,793,398,763,419,726,435,724,430,760,414,789,394,816,370,857,326"/>
+<area shape="rect" id="Node000014" href="$structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_002a7bbb814dfddc16cc166872bbc882df.html#aeebd6c29d60add593eaa34bbf2200dde" title=" " alt="" coords="514,518,761,589"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="868,325,827,402,798,445,763,484,714,520,712,515,760,480,793,441,823,400,864,328"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="676,14,662,10,638,8,615,10,600,15,595,21,597,29,592,28,590,19,597,10,613,5,638,3,664,5,681,13"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a46e6a1cb92a3570e535faa31cf0e892e" title="Parses a string into a node tree." alt="" coords="260,29,465,70"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="517,51,466,52,464,47,522,48"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html#a9f44cd971717939e3f5c4af23a904975" title="Defines standard implementation helpers for CJSONParser, such as smart pointer typedefs and a static ..." alt="" coords="5,29,211,70"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="242,51,212,52,210,47,246,48"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="148,15,134,10,108,8,84,10,69,15,63,21,66,28,60,29,58,19,66,10,83,5,108,3,135,5,153,12"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="676,103,662,100,638,97,615,99,600,104,595,110,597,119,592,117,590,109,597,100,613,94,638,92,664,94,681,103"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1" title="Enumerates the modes in which a file can be opened." alt="" coords="259,184,466,225"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="524,205,467,207,466,202,529,203"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0" title="Enumerates the available strategies for log file rotation." alt="" coords="6,273,210,314"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="519,277,211,292,210,286,522,273"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title="Logs a single event to the file if its level is sufficient and the file is open. The event is formatt..." alt="" coords="260,303,464,343"/>
+<area shape="poly" id="edge13_Node000008_Node000010" title=" " alt="" coords="518,293,466,306,464,301,523,291"/>
+<area shape="poly" id="edge14_Node000010_Node000009" title=" " alt="" coords="242,311,212,308,210,303,247,308"/>
+<area shape="poly" id="edge19_Node000014_Node000014" title=" " alt="" coords="674,504,661,500,638,497,618,499,604,503,597,510,594,520,591,516,592,507,602,499,617,494,638,492,662,494,679,505"/>
+</map>

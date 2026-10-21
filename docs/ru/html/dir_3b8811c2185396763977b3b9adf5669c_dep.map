@@ -1,0 +1,20 @@
+<map id="iridium/io/protocol" name="iridium/io/protocol">
+<area shape="rect" id="node1" href="dir_3f5a814022cc2dc49c15bc4286d87188.html" title="fs" alt="" coords="131,137,170,162"/>
+<area shape="rect" id="node3" href="dir_e3ab535bdc681a8045746c94424579e5.html" title="http" alt="" coords="129,63,172,89"/>
+<area shape="poly" id="edge2" href="dir_000014_000013.html" alt="" coords="152,87,153,122,148,120,149,91"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000014_000013.html" title="3" alt="" coords="156,111,163,126"/>
+<area shape="rect" id="node4" href="dir_001b74264b0d2effc73429836bfa55a2.html" title="dp" alt="" coords="203,137,242,162"/>
+<area shape="poly" id="edge1" href="dir_000014_000002.html" alt="" coords="163,86,202,125,197,126,162,91"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000014_000002.html" title="2" alt="" coords="200,110,207,125"/>
+<area shape="rect" id="node5" href="dir_faf958cc4344700559ae9861ea5683ee.html" title="convertion" alt="" coords="266,137,347,162"/>
+<area shape="poly" id="edge4" href="dir_000014_000000.html" alt="" coords="173,85,269,129,264,131,172,90"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000014_000000.html" title="2" alt="" coords="264,113,271,128"/>
+<area shape="rect" id="node6" href="dir_c1a02bf2f7e6f2e1d7a358f7fab9ab18.html" title="parsing" alt="" coords="371,137,434,162"/>
+<area shape="poly" id="edge3" href="dir_000014_000042.html" alt="" coords="173,81,358,133,354,137,172,86"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000014_000042.html" title="2" alt="" coords="352,119,359,134"/>
+<area shape="rect" id="node7" href="dir_2c51a477a00b1ad8ba8aec06d2e2f7fe.html" title="logging" alt="" coords="458,137,520,162"/>
+<area shape="poly" id="edge5" href="dir_000014_000034.html" alt="" coords="173,78,285,100,446,135,441,137,284,105,173,84"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000014_000034.html" title="1" alt="" coords="438,120,445,135"/>
+<area shape="rect" id="clust2" href="dir_3b8811c2185396763977b3b9adf5669c.html" alt="" coords="27,52,183,99"/>
+<area shape="rect" id="clust1" href="dir_8c6393cb1db31ac16803acf12e6d112e.html" title="io" alt="" coords="16,16,193,173"/>
+</map>

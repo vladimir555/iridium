@@ -1,6 +1,0 @@
-<map id="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;::Behavior" name="iridium::testing::Mock::Behavior&lt; TResult(TClass::*)(TArgs...)&gt;::Behavior">
-<area shape="rect" id="Node000001" title="Конструирует объект Behavior." alt="" coords="238,29,422,85"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="367,17,353,10,330,8,309,10,296,15,290,21,290,29,284,29,285,19,293,10,308,5,330,3,354,5,369,12"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html#a9161e6bfcd0abf40c4bc83305d535004" title="Присваивает лямбда&#45;функцию в качестве действия для этого поведения." alt="" coords="5,29,190,85"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="222,60,190,60,190,54,222,54"/>
-</map>

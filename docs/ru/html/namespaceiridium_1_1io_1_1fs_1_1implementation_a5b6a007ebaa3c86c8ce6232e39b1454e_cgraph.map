@@ -1,0 +1,6 @@
+<map id="iridium::io::fs::implementation::assertOK" name="iridium::io::fs::implementation::assertOK">
+<area shape="rect" id="Node000001" title="Проверяет целочисленный код результата файловой операции и выбрасывает исключение при ошибке...." alt="" coords="5,29,198,70"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs_1_1implementation.html#a8e237a5ad76c558edf5a997c2ba4cd19" title=" " alt="" coords="246,29,438,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,47,233,49,227,50,198,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="297,27,294,19,302,10,318,5,342,3,368,5,385,14,379,13,366,10,342,8,319,10,305,15,300,21,302,30"/>
+</map>

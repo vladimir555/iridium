@@ -1,0 +1,21 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::ARRAY, TItem &gt;::serialize" name="iridium::parsing::SchemaNode&lt; TSchemaType::ARRAY, TItem &gt;::serialize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,137,210,193"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="328,5,392,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,135,188,87,221,62,256,41,284,30,315,24,310,27,286,35,259,46,224,66,191,91,138,138"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="296,79,424,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,136,283,118,279,121,211,141"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a4d9d31787a2a0d8a45ffb48185a96e8d" title=" " alt="" coords="277,144,442,185"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="209,162,264,164,259,166,211,167"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_01_4.html#a6d0a090a9c79495d92ab04068e3b53e2" title=" " alt="" coords="258,209,462,265"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="207,191,248,204,242,205,208,196"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_01_4.html#a507414b2b87a610b372a755fd3136c4a" title=" " alt="" coords="510,241,714,297"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="136,190,190,237,223,258,259,274,317,288,378,294,438,293,492,291,497,291,439,299,378,299,316,294,257,279,220,263,186,241,134,195"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="313,78,310,69,318,60,335,55,360,53,387,55,405,63,400,64,386,60,360,58,336,60,321,65,315,70,318,79"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="522,72,702,127"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="423,97,509,99,504,100,424,102"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="462,247,497,254,492,254,462,252"/>
+<area shape="poly" id="edge8_Node000007_Node000007" title=" " alt="" coords="564,239,564,230,573,222,589,216,612,214,638,217,656,227,651,226,637,222,612,220,590,222,576,226,569,233,568,242"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a79a4233c3785f0a2ca0e5be434cf3005" title=" " alt="" coords="762,248,962,289"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="715,266,750,269,744,269,715,271"/>
+<area shape="poly" id="edge10_Node000008_Node000008" title=" " alt="" coords="816,246,813,238,821,229,837,224,862,222,889,224,907,233,901,233,888,229,862,227,838,229,823,234,818,240,820,249"/>
+</map>

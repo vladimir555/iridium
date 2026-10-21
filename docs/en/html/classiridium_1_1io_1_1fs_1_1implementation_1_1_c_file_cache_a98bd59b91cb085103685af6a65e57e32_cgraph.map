@@ -1,0 +1,37 @@
+<map id="iridium::io::fs::implementation::CFileCache::~CFileCache" name="iridium::io::fs::implementation::CFileCache::~CFileCache">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,267,198,307"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a79a3e5a80aadab1cb4a7452a00244cce" title="Checks if an entry with the given ID exists in the cache." alt="" coords="246,5,445,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,265,126,222,155,166,194,108,218,81,244,57,255,52,251,56,247,61,222,84,198,111,159,169,131,224,113,267"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a3f322d9f6b1587338fd743a8aea8919f" title="Clears all entries from the cache." alt="" coords="249,397,442,438"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,305,183,344,247,382,263,391,257,391,244,387,180,348,129,311"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#ac892effc2c48adac42d817fcf970d489" title="Finalizes the object." alt="" coords="249,136,442,177"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="127,264,180,226,244,187,262,181,258,185,247,192,183,230,131,268"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a95007842fc99d0133e2b18fb90ad16a8" title="Flushes any pending changes to a persistent storage, if applicable." alt="" coords="249,201,442,242"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="178,264,254,245,250,248,181,268"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aeee0b058d084e5d12dbe22c63a48d37d" title="Retrieves a string from the cache by its ID." alt="" coords="249,267,442,307"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="197,285,236,286,231,288,199,289"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#aae27c3a7c44506fa0452f16c0168d4b5" title="Initializes the object." alt="" coords="249,332,442,373"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="179,305,254,326,250,329,180,310"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#af98955e86becccc7cf8416aaceb43950" title="Pushes a string into the cache." alt="" coords="493,455,685,495"/>
+<area shape="poly" id="edge18_Node000001_Node000011" title=" " alt="" coords="114,305,136,339,165,378,203,417,247,447,303,468,362,480,422,485,480,487,475,488,422,491,362,486,301,474,244,452,199,421,161,382,132,342,113,310"/>
+<area shape="rect" id="Node000013" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a27f9c59ddcfe79efa32f8bb1cd2b9147" title="Removes a string from the cache by its ID." alt="" coords="249,71,442,111"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="113,265,165,195,202,156,244,122,257,117,253,121,247,127,206,160,169,199,118,268"/>
+<area shape="rect" id="Node000014" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html#a676a1d7cc792f5edd459e19f211c9af6" title="Gets the number of items currently in the cache." alt="" coords="249,512,442,553"/>
+<area shape="poly" id="edge21_Node000001_Node000014" title=" " alt="" coords="112,305,134,345,163,395,201,446,247,492,265,505,260,504,244,496,197,450,159,398,129,348,112,310"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1fs.html#a55440a3765f390ab06c22a0fa07d69a3" title=" " alt="" coords="516,405,663,430"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="442,415,503,417,498,418,442,420"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="551,404,545,396,549,386,564,380,589,378,617,381,632,390,627,390,615,386,589,383,565,386,553,390,550,396,557,405"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="733,324,894,365"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="630,402,732,371,737,369,632,407"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="771,322,769,314,776,305,791,299,814,297,838,300,854,309,848,308,836,305,813,303,792,305,779,309,774,315,776,325"/>
+<area shape="rect" id="Node000009" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Converts a value from one type to another using standard policy." alt="" coords="557,206,621,232"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="420,264,545,231,540,233,422,269"/>
+<area shape="poly" id="edge17_Node000010_Node000004" title=" " alt="" coords="424,371,526,400,521,401,424,376"/>
+<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="411,329,444,317,467,303,492,292,546,282,589,279,632,283,686,292,722,302,759,317,754,317,721,307,685,298,631,288,589,284,547,287,494,298,470,308,446,321,413,334"/>
+<area shape="poly" id="edge13_Node000010_Node000009" title=" " alt="" coords="423,329,443,317,459,301,467,284,475,266,491,249,515,235,544,227,539,229,518,240,495,253,479,269,471,286,463,304,447,321,426,334"/>
+<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="423,370,447,384,462,398,471,413,480,427,495,441,502,448,497,447,491,445,476,430,467,416,458,402,443,388,422,376"/>
+<area shape="rect" id="Node000012" href="$namespaceiridium_1_1io_1_1fs.html#a055a5bef61c863eb58873ce80e37851f" title=" " alt="" coords="502,332,677,357"/>
+<area shape="poly" id="edge15_Node000010_Node000012" title=" " alt="" coords="441,347,489,347,483,348,443,352"/>
+<area shape="poly" id="edge16_Node000012_Node000012" title=" " alt="" coords="551,330,545,323,549,313,564,307,589,305,617,308,632,317,627,317,615,313,589,310,565,312,553,317,550,322,557,332"/>
+<area shape="poly" id="edge20_Node000013_Node000009" title=" " alt="" coords="415,109,446,122,509,158,562,197,556,197,506,163,444,127,416,115"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="iridium::io::fs::checkFileExistence" name="iridium::io::fs::checkFileExistence">
+<area shape="rect" id="Node000001" title="Проверяет, существует ли файл по указанному пути." alt="" coords="5,29,166,70"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs.html#ae8eea305450bd3d222d01e44dd5c748a" title=" " alt="" coords="214,29,374,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,47,201,49,195,50,166,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="255,27,252,19,259,10,273,5,294,3,316,5,331,14,326,13,315,10,294,8,274,10,262,15,258,20,259,30"/>
+</map>

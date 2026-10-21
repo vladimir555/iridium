@@ -1,5 +1,6 @@
 <map id="iridium::io::implementation::CSessionManager::CSessionManager" name="iridium::io::implementation::CSessionManager::CSessionManager">
-<area shape="rect" id="Node000001" title="Constructs a CSessionManager instance. Initializes internal components like the multiplexer,..." alt="" coords="5,5,257,46"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d" title="Creates a list of shared pointers to objects of type TObject." alt="" coords="305,13,453,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,23,289,23,289,28,257,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,22,257,62"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d" title="Creates a list of shared pointers to objects of type TObject." alt="" coords="305,29,453,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,40,291,42,286,42,257,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="338,28,330,21,335,11,351,5,379,3,410,5,426,15,421,15,408,11,379,8,352,10,338,15,335,20,343,30"/>
 </map>

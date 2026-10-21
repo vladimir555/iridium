@@ -1,0 +1,19 @@
+<map id="iridium::parsing::SchemaNodeBase::getPath" name="iridium::parsing::SchemaNodeBase::getPath">
+<area shape="rect" id="Node000001" title=" " alt="" coords="513,188,678,228"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="632,172,620,168,596,166,573,168,560,173,554,179,556,188,552,186,549,178,556,168,572,163,596,161,621,163,638,172"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_01_4.html#a3f64847eb4e42e4312a6c7dec20199e4" title=" " alt="" coords="258,5,462,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="567,175,522,125,494,99,464,75,445,64,444,59,466,71,497,95,526,121,572,175"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ac837e5d01f5f8b9fc6130db5eae74d47" title=" " alt="" coords="256,85,465,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="527,182,431,144,432,139,532,181"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_01_4.html#a42584b96bde61cfd69f367c2f7a87c73" title=" " alt="" coords="5,216,208,272"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="495,200,381,199,318,201,256,206,199,218,197,213,255,201,318,195,381,193,500,198"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a8f7bee8721e212e8713c4e3af3552b86" title=" " alt="" coords="278,216,443,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="495,220,444,229,443,223,501,219"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#a06ce5e1cc70aa135b8f2aa9ba486e9e7" title=" " alt="" coords="256,280,465,336"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="540,234,466,270,438,282,436,277,464,265,535,236"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1_schema_node_base.html#ae853af79804011fdf4ab9518512ca3eb" title=" " alt="" coords="278,360,443,400"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="574,240,528,297,499,326,466,350,444,361,443,356,464,346,495,322,524,294,570,242"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="265,353,254,350,192,313,141,274,142,269,195,309,257,345,270,354"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a8252100b163cccbe6b04befee84a2a00" title=" " alt="" coords="24,360,189,400"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="259,380,190,382,190,377,265,380"/>
+</map>

@@ -1,5 +1,7 @@
 <map id="iridium::assign" name="iridium::assign">
-<area shape="rect" id="Node000001" title="Преобразует std::list&lt;T&gt; в std::vector&lt;T&gt;." alt="" coords="231,20,336,46"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a96285e07f4342f950a7600384e2dc9be" title=" " alt="" coords="5,5,183,61"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,36,183,36,183,30,215,30"/>
+<area shape="rect" id="Node000001" title="Преобразует std::list&lt;T&gt; в std::vector&lt;T&gt;." alt="" coords="231,44,336,70"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="314,29,305,25,283,23,263,25,253,30,251,35,256,45,251,43,245,36,249,26,262,20,283,18,306,20,320,29"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#ada05ae0c6c1e2250ca34c1c8ac46eb16" title=" " alt="" coords="5,29,183,85"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="212,57,183,60,183,55,217,57"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="123,15,112,10,94,8,78,10,67,14,62,21,62,30,57,28,57,19,64,10,76,5,94,3,114,5,128,14"/>
 </map>

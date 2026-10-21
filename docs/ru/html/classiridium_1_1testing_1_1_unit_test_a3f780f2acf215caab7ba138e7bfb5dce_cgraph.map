@@ -1,0 +1,31 @@
+<map id="iridium::testing::UnitTest::fail" name="iridium::testing::UnitTest::fail">
+<area shape="rect" id="Node000001" title="&quot;Проваливает&quot; тест с сообщением." alt="" coords="5,169,169,210"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1_unit_test.html#a66f215a2707abef925322dd95014eb4d" title="Утверждает, что функция выбрасывает определенное исключение." alt="" coords="217,5,380,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,167,149,113,181,84,215,57,227,52,223,56,218,61,184,88,153,117,106,171"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1testing_1_1_unit_test.html#a309245439f38d46ba94959d3ec251707" title="Утверждает, что левое значение равно правому." alt="" coords="217,71,380,111"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="126,167,216,122,233,116,229,119,218,127,129,171"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1testing_1_1_unit_test.html#af5e7143fdaf34561c9361efddcde049b" title="Утверждает, что левое значение больше правого." alt="" coords="217,136,380,177"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="168,174,203,170,199,173,170,179"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1testing_1_1_unit_test.html#a2c37c76646874d3a88d2400daf198283" title="Утверждает, что левое значение больше или равно правому." alt="" coords="217,201,380,242"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="168,199,204,206,199,208,170,205"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1testing_1_1_unit_test.html#a68d9237c9e11ce6faa1157fbdf4a5ab4" title="Утверждает, что левое значение меньше правого." alt="" coords="217,267,380,307"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="129,208,218,251,234,260,228,260,216,256,128,213"/>
+<area shape="rect" id="Node000012" href="$classiridium_1_1testing_1_1_unit_test.html#aa902f8d206dd0f04f8f3f0e42bcc4011" title="Утверждает, что левое значение меньше или равно правому." alt="" coords="217,332,380,373"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="105,208,154,262,185,291,218,317,228,325,223,324,215,321,181,295,150,265,104,213"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1testing_1_1_unit_test.html#a63e487f944b7e9c72d2c0b5c9c021368" title="&quot;Проваливает&quot; тест с сообщением." alt="" coords="428,169,591,210"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="358,44,382,57,440,106,486,157,480,157,436,109,378,61,358,49"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="662,135,789,175"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="591,174,649,167,644,168,592,179"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1testing_1_1_exception.html#a3898735f7fe40a08120ca4153b2e1040" title="Конструктор." alt="" coords="639,201,812,242"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="591,199,626,206,621,207,592,204"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="685,133,683,125,689,116,704,110,726,108,749,110,764,119,759,119,748,116,725,113,705,115,693,120,688,126,690,135"/>
+<area shape="rect" id="Node000005" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="860,124,1039,180"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="789,152,847,153,842,154,790,157"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1testing_1_1_exception.html#a5f533bc7fe4c1940a9c5439fd273c762" title="Возвращает сообщение об исключении." alt="" coords="863,204,1036,245"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="812,220,850,223,845,223,812,225"/>
+<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="352,109,381,122,459,162,454,162,379,127,352,115"/>
+<area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="380,167,415,174,410,175,381,172"/>
+<area shape="poly" id="edge13_Node000010_Node000003" title=" " alt="" coords="380,207,415,204,410,205,381,212"/>
+<area shape="poly" id="edge15_Node000011_Node000003" title=" " alt="" coords="351,264,379,251,452,218,457,217,381,256,353,268"/>
+<area shape="poly" id="edge17_Node000012_Node000003" title=" " alt="" coords="357,329,378,317,435,269,480,224,485,221,439,273,382,321,359,334"/>
+</map>

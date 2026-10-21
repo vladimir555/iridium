@@ -1,13 +1,19 @@
 <map id="iridium::upperCase" name="iridium::upperCase">
-<area shape="rect" id="Node000001" title=" " alt="" coords="461,78,591,104"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1convertion_1_1implementation.html#a37724dcf9f954b0851af5a13222821b3" title="Преобразует int32_t в std::string с использованием указанного основания." alt="" coords="245,5,413,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="470,75,392,49,393,44,471,70"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion_1_1implementation.html#a50a35cd79960728dd1007b3ce3f84f12" title="Преобразует uint64_t в std::string с использованием указанного основания." alt="" coords="245,71,413,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="445,94,413,94,413,88,445,88"/>
-<area shape="rect" id="Node000004" href="$namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="252,136,406,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="471,112,393,138,392,133,470,107"/>
-<area shape="rect" id="Node000005" href="$namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="5,118,197,144"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="236,149,197,144,197,139,237,143"/>
-<area shape="rect" id="Node000006" href="$namespaceiridium_1_1parsing.html#ab5867486cd60924f7e4bff6acd74fc37" title=" " alt="" coords="16,168,186,193"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="237,169,187,174,186,169,237,163"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="685,95,816,120"/>
+<area shape="poly" id="edge10_Node000001_Node000001" title=" " alt="" coords="782,79,772,76,750,73,731,75,720,80,718,85,723,95,718,93,712,86,716,76,729,70,751,68,773,71,787,80"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="484,58,637,98"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="667,95,637,93,638,87,672,95"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium.html#a5764890e808bc3b5d45099f564ebc16b" title="Преобразует строку в верхний регистр." alt="" coords="496,123,626,148"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="672,119,626,129,626,123,667,120"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="590,42,580,39,561,36,543,38,532,43,528,49,529,59,525,56,523,48,529,39,541,33,561,31,581,34,595,43"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="245,29,436,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="466,63,423,58,423,53,471,63"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1parsing.html#ab5867486cd60924f7e4bff6acd74fc37" title=" " alt="" coords="255,103,426,128"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="472,93,420,105,420,99,466,94"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="377,14,366,10,340,8,317,10,304,15,302,20,308,30,303,28,296,21,301,11,316,5,340,3,367,5,383,15"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1parsing.html#ad50094a37c8790f71aee13cc754ccdea" title="Формирует дерево объектов INode в файл, сериализуя его структуру." alt="" coords="5,29,197,55"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="226,43,198,45,197,40,231,41"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="377,88,366,84,340,81,317,83,304,88,302,93,308,103,303,101,296,94,301,84,316,78,340,76,367,79,382,88"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1parsing.html#ab61415abe931f9a6feca5e4ef7a519fb" title="Разбирает файл и строит дерево объектов INode, представляющее его структуру." alt="" coords="16,103,186,128"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="237,116,187,118,187,113,242,115"/>
 </map>

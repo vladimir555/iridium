@@ -1,9 +1,25 @@
 <map id="iridium::parsing::implementation::CJSONParser::parse" name="iridium::parsing::implementation::CJSONParser::parse">
-<area shape="rect" id="Node000001" title="Разбирает строку JSON в древовидную структуру узлов. Результирующее дерево представляет объекты,..." alt="" coords="5,23,211,64"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing_1_1implementation.html#a0f0c3b61ecdc47aee266cedc9ce71490" title=" " alt="" coords="259,23,464,64"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,41,243,41,243,46,211,46"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium.html#adffcf6b0c6105b41d23a833e49d22688" title="Проверяет, равен ли исходный элемент любому из указанных элементов." alt="" coords="512,5,652,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="464,29,496,25,497,31,464,34"/>
-<area shape="rect" id="Node000004" href="$factory_8cpp.html#a5afe4d5e065e8b085dcd6b8b391f2c2d" title="Предоставляет доступ к основной шаблонной функции преобразования из пространства имен реализации...." alt="" coords="550,55,614,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="464,52,535,60,534,65,464,57"/>
+<area shape="rect" id="Node000001" title="Парсит строку в дерево узлов." alt="" coords="5,144,211,185"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing_1_1implementation.html#a384ae55db616d63b9067b9651aa1b956" title=" " alt="" coords="259,144,464,185"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,162,245,164,240,166,212,167"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="314,143,312,134,319,125,336,120,361,118,389,120,406,129,401,129,387,125,361,123,337,125,322,130,317,136,319,145"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#ac26baddfcc40e8343d29329b2dd3e609" title=" " alt="" coords="544,29,685,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="387,142,442,102,511,64,532,58,527,61,513,69,444,107,390,146"/>
+<area shape="rect" id="Node000004" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title="Преобразует значение из одного типа в другой, используя стандартную политику." alt="" coords="582,79,647,104"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="421,141,511,113,570,100,565,102,513,118,423,146"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium.html#a627d2f2ec5720695a4e72cc1a16491c4" title=" " alt="" coords="568,152,661,178"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="464,162,556,164,550,166,465,167"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1_i_node_type.html#a7b9c2ac4bd8f0b6576824ec109e8bc76" title="Возвращает количество дочерних узлов." alt="" coords="524,202,705,242"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="454,183,512,198,507,199,454,188"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium_1_1parsing_1_1implementation.html#a171483d9aeaa08fc324692cb581c1740" title=" " alt="" coords="512,291,717,332"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="398,183,513,252,566,284,560,283,511,256,396,188"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="572,29,565,21,570,11,587,5,615,3,646,5,663,15,658,15,645,11,615,8,588,10,573,15,570,20,578,29"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="572,151,565,143,570,133,587,127,615,125,646,128,663,138,658,138,645,133,615,131,588,133,573,138,570,143,578,152"/>
+<area shape="poly" id="edge14_Node000007_Node000007" title=" " alt="" coords="568,289,565,281,573,272,589,267,615,265,642,267,660,276,654,275,641,272,615,270,590,272,576,277,570,282,572,292"/>
+<area shape="rect" id="Node000008" href="$namespaceiridium_1_1parsing_1_1implementation.html#a90c6b3c990749431b87c6af2970a18d2" title=" " alt="" coords="765,246,971,286"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="718,290,747,288,752,287,718,296"/>
+<area shape="rect" id="Node000009" href="$namespaceiridium_1_1parsing_1_1implementation.html#a1546b2bce4bfd2dda979fc297fed8509" title=" " alt="" coords="765,335,971,376"/>
+<area shape="poly" id="edge12_Node000007_Node000009" title=" " alt="" coords="718,327,752,335,747,335,718,332"/>
+<area shape="poly" id="edge11_Node000008_Node000008" title=" " alt="" coords="821,244,818,236,826,227,843,221,868,219,895,222,913,230,908,230,894,227,868,224,844,226,829,231,823,237,825,247"/>
+<area shape="poly" id="edge13_Node000009_Node000009" title=" " alt="" coords="821,333,818,325,826,316,843,311,868,309,895,311,913,320,908,319,894,316,868,314,844,316,829,321,823,326,825,336"/>
 </map>

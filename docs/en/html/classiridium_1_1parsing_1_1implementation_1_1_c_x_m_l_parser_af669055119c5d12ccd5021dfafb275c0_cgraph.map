@@ -1,8 +1,6 @@
 <map id="iridium::parsing::implementation::CXMLParser::parse" name="iridium::parsing::implementation::CXMLParser::parse">
-<area shape="rect" id="Node000001" title="Parses an XML string into a node tree structure. The resulting tree represents XML elements as nodes,..." alt="" coords="5,39,211,80"/>
-<area shape="rect" id="Node000002" href="$namespaceiridium.html#a2e6cafa3fd86fa7c27dcf67b7267f51a" title="Checks if a value exists (is not false, null, or empty) and throws a custom exception if it doesn&#39;t." alt="" coords="291,5,432,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,40,276,29,276,35,212,45"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing_1_1implementation.html#a988edd6f090ffa2ca64dbead47872439" title=" " alt="" coords="259,79,464,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,73,244,78,243,83,211,78"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="314,79,312,69,319,60,336,55,361,53,389,55,405,61,403,66,387,60,361,58,337,60,322,65,317,70,319,78"/>
+<area shape="rect" id="Node000001" title="Parses a string into a node tree." alt="" coords="5,22,211,62"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium.html#aa8f02bbb8cec02ac05eef710482715b2" title=" " alt="" coords="259,29,418,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,40,246,42,240,42,211,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="300,28,293,21,297,11,313,5,338,3,366,5,382,15,377,14,365,10,338,8,314,10,301,15,298,20,305,30"/>
 </map>

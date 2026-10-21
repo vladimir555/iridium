@@ -1,0 +1,16 @@
+<map id="iridium::parsing::composeFile" name="iridium::parsing::composeFile">
+<area shape="rect" id="Node000001" title="Формирует дерево объектов INode в файл, сериализуя его структуру." alt="" coords="5,71,197,96"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1parsing.html#aa8712a6719913defc4a55db045852136" title=" " alt="" coords="245,71,436,96"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,81,231,83,226,84,197,86"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="303,69,296,62,301,52,316,46,340,44,367,47,382,56,377,56,366,52,340,49,317,51,304,56,302,61,308,71"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1parsing.html#a5627b457369870b42028a84bd05bc8b4" title=" " alt="" coords="484,34,637,74"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="436,68,466,67,472,66,437,73"/>
+<area shape="rect" id="Node000006" href="$file__parser_8cpp.html#a3591cb9769f0fd00dd9411edaa5520be" title=" " alt="" coords="526,99,596,124"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="437,93,513,105,508,105,436,98"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="521,32,518,24,525,15,539,9,561,7,584,10,599,19,594,18,582,15,561,12,541,14,528,19,524,25,525,35"/>
+<area shape="rect" id="Node000004" href="$file__parser_8cpp.html#a649954a8bbebb18edb2d02ec6ad1d971" title=" " alt="" coords="685,5,861,31"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="637,39,676,35,681,34,638,44"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium.html#a5e9267b1ead0c871d0655be654802298" title=" " alt="" coords="708,79,838,104"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="638,65,695,78,690,77,638,70"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="737,77,731,70,735,60,749,54,773,52,799,55,814,64,808,63,798,60,773,57,751,59,739,64,736,69,742,79"/>
+</map>

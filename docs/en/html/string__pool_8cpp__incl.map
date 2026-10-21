@@ -1,0 +1,21 @@
+<map id="iridium/string_pool.cpp" name="iridium/string_pool.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="353,5,504,31"/>
+<area shape="rect" id="Node000002" href="$string__pool_8h.html" title=" " alt="" coords="381,79,476,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,29,431,64,427,62,427,33"/>
+<area shape="rect" id="Node000003" href="$smart__ptr_8h.html" title="Provides helper macros for defining standard smart pointer typedefs and static create factory methods..." alt="" coords="53,153,181,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="379,106,186,151,184,146,382,102"/>
+<area shape="rect" id="Node000007" href="$non__copyable_8h.html" title=" " alt="" coords="205,153,378,178"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="408,104,330,148,327,143,403,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="402,153,456,178"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="431,103,431,138,427,135,427,107"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="480,153,567,178"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="446,103,498,143,493,143,444,108"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="591,153,701,178"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="466,103,597,147,592,148,465,108"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,226,74,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="106,178,65,218,62,214,101,180"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="98,226,136,252"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="119,177,119,212,114,209,115,181"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="160,226,218,252"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="130,176,168,215,163,215,128,181"/>
+</map>
