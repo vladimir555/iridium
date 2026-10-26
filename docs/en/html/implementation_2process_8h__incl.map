@@ -1,5 +1,7 @@
-<map id="source/iridium/system/implementation/process.h" name="source/iridium/system/implementation/process.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,180,46"/>
-<area shape="rect" id="Node000002" href="$platform_8h.html" title="Defines macros for platform, compiler, and architecture detection, and for platform&#45;specific path con..." alt="" coords="32,94,153,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,46,95,78,90,78,90,46"/>
+<map id="iridium/system/implementation/process.h" name="iridium/system/implementation/process.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="64,5,262,46"/>
+<area shape="rect" id="Node000002" href="$platform_8h.html" title=" " alt="" coords="5,94,127,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,46,94,86,91,82,137,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="151,94,373,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,44,238,84,232,84,187,49"/>
 </map>

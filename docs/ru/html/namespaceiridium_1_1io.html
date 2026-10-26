@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Пространство имен iridium::io</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,38 +34,64 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
-});
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespaceiridium_1_1io.html','',''); });
 </script>
-<div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<div id="MSearchSelectWindow">
 </div>
 
 <!-- iframe showing the search results (closed by default) -->
@@ -82,97 +108,93 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespaceiridium.html">iridium</a></li><li class="navelem"><a class="el" href="namespaceiridium_1_1io.html">io</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a> &#124;
-<a href="#nested-classes">Классы</a> &#124;
-<a href="#func-members">Функции</a>  </div>
   <div class="headertitle"><div class="title">Пространство имен iridium::io</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Пространство имен для функциональности, связанной с вводом-выводом.  
-<a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">fs</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io_1_1fs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности ввода-вывода, связанной с файловой системой. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1net.html">net</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:fs" id="r_fs"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1fs.html">fs</a></td></tr>
+<tr class="memitem:implementation" id="r_implementation"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1implementation.html">implementation</a></td></tr>
+<tr class="memitem:net" id="r_net"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1net.html">net</a></td></tr>
+<tr class="memitem:protocol" id="r_protocol"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io_1_1protocol.html">protocol</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_buffer.html">Buffer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Динамический буфер памяти для операций ввода-вывода, унаследованный от <code>std::vector&lt;unsigned char&gt;</code>. Этот класс расширяет <code>std::vector&lt;unsigned char&gt;</code>, наследуя его методы для управления памятью, доступа к элементам и итерации. Он предоставляет дополнительные конструкторы для удобной инициализации из строк и списков других буферов.  <a href="classiridium_1_1io_1_1_buffer.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structiridium_1_1io_1_1_event.html">Event</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет событие ввода-вывода, связанное с потоком. Эта структура инкапсулирует информацию о событии, произошедшем в потоке ввода-вывода, такую как тип операции (чтение, запись и т.д.) и ее статус.  <a href="structiridium_1_1io_1_1_event.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_context.html">IContext</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывода. Контекст ввода-вывода обычно обрабатывает асинхронные операции, уведомления о событиях и управление ресурсами ввода-вывода, такими как потоки или сокеты.  <a href="classiridium_1_1io_1_1_i_context.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_context_manager.html">IContextManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для управления коллекцией контекстов ввода-вывода (<code><a class="el" href="classiridium_1_1io_1_1_i_context.html" title="Интерфейс для контекста ввода-вывода, отвечающего за управление и диспетчеризацию событий ввода-вывод...">IContext</a></code>). Менеджер контекстов отвечает за создание, уничтожение и, возможно, распределение операций ввода-вывода или потоков между несколькими контекстами. Это может использоваться для управления ресурсами, балансировки нагрузки или обработки различных типов задач ввода-вывода в отдельных контекстах.  <a href="classiridium_1_1io_1_1_i_context_manager.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_multiplexer.html">IMultiplexer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для мультиплексора событий ввода-вывода. Мультиплексор ввода-вывода позволяет одному потоку отслеживать несколько потоков ввода-вывода (например, сокеты, каналы) на предмет событий, таких как готовность к чтению или записи. Это фундаментальный компонент для создания масштабируемых неблокирующих приложений ввода-вывода. Наследуется от <code>IInitializable</code>, что предполагает, что экземпляры мультиплексора могут требовать фазы инициализации. Комментарий <code>todo: public IAsyncQueuePopper&lt;IEvent::TSharedPtr&gt;</code> предполагает потенциальное проектное решение, чтобы этот интерфейс также выступал в роли очереди, из которой можно извлекать события.  <a href="classiridium_1_1io_1_1_i_multiplexer.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_pipe.html">IPipe</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс, представляющий канал, объединяющий возможности доступа к потокам и передачи данных. Канал представляет собой средство для потока данных, позволяющее чтение и запись, и может активно передавать данные. Этот интерфейс агрегирует <code><a class="el" href="classiridium_1_1io_1_1_i_pipe_streams.html" title="Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для по...">IPipeStreams</a></code> для доступа к конечным точкам потока и <code><a class="el" href="classiridium_1_1io_1_1_i_pipe_transmitter.html" title="Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент,...">IPipeTransmitter</a></code> для операций потока данных.  <a href="classiridium_1_1io_1_1_i_pipe.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_pipe_manager.html">IPipeManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для управления именованными каналами. Предоставляет методы для создания, удаления и обновления именованных каналов путем связывания их с интерфейсами чтения и/или записи потоков. Это предполагает механизм межпроцессного или внутрипроцессного взаимодействия с использованием абстракций именованных каналов.  <a href="classiridium_1_1io_1_1_i_pipe_manager.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_pipe_streams.html">IPipeStreams</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для получения и установки базовых потоковых компонентов, которые обрабатывают чтение и запись.  <a href="classiridium_1_1io_1_1_i_pipe_streams.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_pipe_transmitter.html">IPipeTransmitter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент, который активно обрабатывает события для перемещения данных, возможно, между внутренними буферами или связанными потоками канала.  <a href="classiridium_1_1io_1_1_i_pipe_transmitter.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_protocol.html">IProtocol</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для обработчика протокола. Обработчик протокола отвечает за реализацию логики конкретного протокола обмена данными. Это включает разбор входящих данных, форматирование исходящих данных, управление состояниями протокола и реакцию на события ввода-вывода.  <a href="classiridium_1_1io_1_1_i_protocol.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_session_manager.html">ISessionManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для управления сессиями обмена данными. Менеджер сессий отвечает за контроль жизненного цикла отдельных сессий, которые обычно включают поток ввода-вывода (или порт потока) и определенный обработчик протокола. Наследуется от <code>IInitializable</code>, что предполагает, что сам менеджер может требовать этапа инициализации перед тем, как сможет управлять сессиями.  <a href="classiridium_1_1io_1_1_i_session_manager.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_stream.html">IStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех типов потоков, такие как доступ к базовым системным дескрипторам и получение связанного <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>. Он также наследуется от <code>IInitializable</code>, подразумевая, что потоки могут требовать шага инициализации. Этот интерфейс использует виртуальное наследование, чтобы позволить производным интерфейсам, таким как <code><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода-вывода, объединяющий возможности чтения и записи....">IStreamPort</a></code>, наследовать от нескольких интерфейсов, связанных с потоками (<code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>, <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>), без неоднозначности.  <a href="classiridium_1_1io_1_1_i_stream.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html">IStreamPort</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для дуплексного порта потока ввода-вывода, объединяющий возможности чтения и записи. Этот интерфейс наследуется как от <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code>, так и от <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code>, представляя двунаправленный канал связи. Он также виртуально наследуется от общего базового класса <code><a class="el" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...">IStream</a></code>.  <a href="classiridium_1_1io_1_1_i_stream_port.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html">IStreamReader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать данные. Наследуется виртуально от <code><a class="el" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...">IStream</a></code>, чтобы обеспечить возможность комбинации с <code><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно зап...">IStreamWriter</a></code> в <code><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода-вывода, объединяющий возможности чтения и записи....">IStreamPort</a></code>.  <a href="classiridium_1_1io_1_1_i_stream_reader.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html">IStreamWriter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерфейс для записываемых потоков ввода-вывода. Определяет контракт для потоков, в которые можно записывать данные. Наследуется виртуально от <code><a class="el" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода-вывода. Предоставляет общие функциональные возможности для всех т...">IStream</a></code>, чтобы обеспечить возможность комбинации с <code><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода-вывода. Определяет контракт для потоков, из которых можно читать...">IStreamReader</a></code> в <code><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода-вывода, объединяющий возможности чтения и записи....">IStreamPort</a></code>.  <a href="classiridium_1_1io_1_1_i_stream_writer.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiridium_1_1io_1_1_u_r_i.html">URI</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Представляет и облегчает разбор универсальных идентификаторов ресурсов (<a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a>). Этот класс может разбирать строку <a class="el" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир...">URI</a> на ее составные компоненты, такие как схема (протокол), информация о пользователе, хост, порт, путь и аргументы запроса. Он предоставляет методы для доступа к этим компонентам.  <a href="classiridium_1_1io_1_1_u_r_i.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:Buffer" id="r_Buffer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_buffer.html">Buffer</a></td></tr>
+<tr class="memitem:Event" id="r_Event"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1io_1_1_event.html">Event</a></td></tr>
+<tr class="memitem:IAcceptor" id="r_IAcceptor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_acceptor.html">IAcceptor</a></td></tr>
+<tr class="memitem:IConnectionManager" id="r_IConnectionManager"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_connection_manager.html">IConnectionManager</a></td></tr>
+<tr class="memitem:IContext" id="r_IContext"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_context.html">IContext</a></td></tr>
+<tr class="memitem:IContextActions" id="r_IContextActions"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_context_actions.html">IContextActions</a></td></tr>
+<tr class="memitem:IContextManager" id="r_IContextManager"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_context_manager.html">IContextManager</a></td></tr>
+<tr class="memitem:IMultiplexer" id="r_IMultiplexer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_multiplexer.html">IMultiplexer</a></td></tr>
+<tr class="memitem:IPipe" id="r_IPipe"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_pipe.html">IPipe</a></td></tr>
+<tr class="memitem:IPipeManager" id="r_IPipeManager"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_pipe_manager.html">IPipeManager</a></td></tr>
+<tr class="memitem:IPipeStreams" id="r_IPipeStreams"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_pipe_streams.html">IPipeStreams</a></td></tr>
+<tr class="memitem:IPipeTransmitter" id="r_IPipeTransmitter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_pipe_transmitter.html">IPipeTransmitter</a></td></tr>
+<tr class="memitem:IProtocol" id="r_IProtocol"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_protocol.html">IProtocol</a></td></tr>
+<tr class="memitem:ISessionManager" id="r_ISessionManager"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_session_manager.html">ISessionManager</a></td></tr>
+<tr class="memitem:IStream" id="r_IStream"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_stream.html">IStream</a></td></tr>
+<tr class="memitem:IStreamAcceptor" id="r_IStreamAcceptor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_stream_acceptor.html">IStreamAcceptor</a></td></tr>
+<tr class="memitem:IStreamPort" id="r_IStreamPort"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_stream_port.html">IStreamPort</a></td></tr>
+<tr class="memitem:IStreamReader" id="r_IStreamReader"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_stream_reader.html">IStreamReader</a></td></tr>
+<tr class="memitem:IStreamWriter" id="r_IStreamWriter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_i_stream_writer.html">IStreamWriter</a></td></tr>
+<tr class="memitem:TEvent" id="r_TEvent"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1io_1_1_t_event.html">TEvent</a></td></tr>
+<tr class="memitem:TPipe" id="r_TPipe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1io_1_1_t_pipe.html">TPipe</a></td></tr>
+<tr class="memitem:TStream" id="r_TStream"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structiridium_1_1io_1_1_t_stream.html">TStream</a></td></tr>
+<tr class="memitem:URI" id="r_URI"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1io_1_1_u_r_i.html">URI</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:a0a9644a0328194eef5271f0734c31f0c" id="r_a0a9644a0328194eef5271f0734c31f0c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a9644a0328194eef5271f0734c31f0c">unmask</a> (string const &amp;source)</td></tr>
-<tr class="separator:a0a9644a0328194eef5271f0734c31f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f34538bf3cd6c9d1c0ad61dd76b7812" id="r_a2f34538bf3cd6c9d1c0ad61dd76b7812"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f34538bf3cd6c9d1c0ad61dd76b7812">extractTokens</a> (std::string const &amp;delimiter, std::string &amp;source, std::string &amp;argument)</td></tr>
-<tr class="separator:a2f34538bf3cd6c9d1c0ad61dd76b7812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9081dff62876bac8c5d0f47b13bd7340" id="r_a9081dff62876bac8c5d0f47b13bd7340"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9081dff62876bac8c5d0f47b13bd7340">checkSuffix</a> (std::list&lt; Buffer::TSharedPtr &gt; const &amp;buffers, std::string const &amp;suffix)</td></tr>
+<tr class="memitem:a0a9644a0328194eef5271f0734c31f0c" id="r_a0a9644a0328194eef5271f0734c31f0c"><td class="memItemLeft">string&#160;</td><td class="memItemRight"><a class="el" href="#a0a9644a0328194eef5271f0734c31f0c">unmask</a> (string const &amp;source)</td></tr>
+<tr class="memitem:a2f34538bf3cd6c9d1c0ad61dd76b7812" id="r_a2f34538bf3cd6c9d1c0ad61dd76b7812"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2f34538bf3cd6c9d1c0ad61dd76b7812">extractTokens</a> (std::string const &amp;delimiter, std::string &amp;source, std::string &amp;argument)</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Пространство имен для функциональности, связанной с вводом-выводом. </p>
-</div><h2 class="groupheader">Функции</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="a9081dff62876bac8c5d0f47b13bd7340" name="a9081dff62876bac8c5d0f47b13bd7340"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9081dff62876bac8c5d0f47b13bd7340">&#9670;&#160;</a></span>checkSuffix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool iridium::io::checkSuffix </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; Buffer::TSharedPtr &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>buffers</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>suffix</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_cgraph" id="anamespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,160,55"/>
+<area shape="poly" title=" " alt="" coords="56,29,51,21,54,11,65,5,83,3,101,5,113,14,107,14,100,10,82,8,67,10,58,15,56,20,61,29"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_icgraph" id="anamespaceiridium_1_1io_a9081dff62876bac8c5d0f47b13bd7340_icgraph">
+<area shape="rect" title=" " alt="" coords="174,37,328,62"/>
+<area shape="poly" title=" " alt="" coords="281,21,272,18,251,15,231,17,221,22,219,28,224,37,219,35,214,28,217,19,230,12,251,10,273,13,286,22"/>
+<area shape="rect" href="classiridium_1_1io_1_1_buffer.html#a4669adf0b8a958180850edcf11713705" title=" " alt="" coords="5,29,126,70"/>
+<area shape="poly" title=" " alt="" coords="155,50,126,52,126,47,161,49"/>
+<area shape="poly" title=" " alt="" coords="94,14,84,10,65,8,48,10,38,15,34,20,35,29,30,28,28,19,34,10,47,5,66,3,86,5,99,13"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a2f34538bf3cd6c9d1c0ad61dd76b7812" name="a2f34538bf3cd6c9d1c0ad61dd76b7812"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f34538bf3cd6c9d1c0ad61dd76b7812">&#9670;&#160;</a></span>extractTokens()</h2>
 
@@ -197,19 +219,21 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 <div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_cgraph" id="anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,173,55"/>
+<area shape="poly" title=" " alt="" coords="60,29,55,21,58,11,70,5,89,3,109,5,121,14,116,14,108,10,89,8,72,10,62,15,60,20,65,29"/>
+</map>
+</div>
+<div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_icgraph" alt=""/></div>
+<div class="center"><img src="namespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_icgraph" loading="lazy" alt=""/></div>
 <map name="anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_icgraph" id="anamespaceiridium_1_1io_a2f34538bf3cd6c9d1c0ad61dd76b7812_icgraph">
-<area shape="rect" title=" " alt="" coords="457,55,624,80"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#adf0ba8afa5964c537a254a917da49e1d" title="Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл..." alt="" coords="268,55,409,80"/>
-<area shape="poly" title=" " alt="" coords="441,70,409,70,409,65,441,65"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#a104cf25efdd090f56305aa229e83927a" title="Перечисление известных схем/протоколов URI и их типичных портов по умолчанию или идентификаторов...." alt="" coords="5,5,220,31"/>
-<area shape="poly" title=" " alt="" coords="261,53,174,34,175,29,262,48"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#a7980fedcc7286b2f760a9e69f10ce09f" title="Оператор сравнения &quot;меньше чем&quot;. Сравнивает этот URI с другим URI. Обеспечивает строгий слабый порядо..." alt="" coords="26,55,199,80"/>
-<area shape="poly" title=" " alt="" coords="252,70,199,70,199,65,252,65"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#adddf5538ee40a90ff03f33517de0056a" title="Оператор сравнения на равенство. Сравнивает этот URI с другим URI. Сравнение, вероятно,..." alt="" coords="22,104,203,130"/>
-<area shape="poly" title=" " alt="" coords="262,87,175,106,174,101,261,82"/>
+<area shape="rect" title=" " alt="" coords="5,29,173,55"/>
+<area shape="poly" title=" " alt="" coords="116,14,108,10,89,8,72,10,62,15,60,20,65,29,60,29,55,21,58,11,70,5,89,3,109,5,121,14"/>
 </map>
 </div>
 
@@ -230,29 +254,42 @@ $(function(){ initResizable(false); });
       </table>
 </div><div class="memdoc">
 <div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_cgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_cgraph" id="anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,137,55"/>
+<area shape="poly" title=" " alt="" coords="48,29,44,21,46,11,56,5,71,3,87,5,97,14,92,14,85,10,71,8,58,10,51,14,49,20,53,29"/>
+</map>
+</div>
+<div class="dynheader">
 Граф вызова функции:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_icgraph" alt=""/></div>
+<div class="center"><img src="namespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_icgraph.png" border="0" usemap="#anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_icgraph" loading="lazy" alt=""/></div>
 <map name="anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_icgraph" id="anamespaceiridium_1_1io_a0a9644a0328194eef5271f0734c31f0c_icgraph">
-<area shape="rect" title=" " alt="" coords="457,55,588,80"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#adf0ba8afa5964c537a254a917da49e1d" title="Макрос, вероятно, определяющий статический метод create или аналогичную фабричную функциональность дл..." alt="" coords="268,55,409,80"/>
-<area shape="poly" title=" " alt="" coords="441,70,410,70,410,65,441,65"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#a104cf25efdd090f56305aa229e83927a" title="Перечисление известных схем/протоколов URI и их типичных портов по умолчанию или идентификаторов...." alt="" coords="5,5,220,31"/>
-<area shape="poly" title=" " alt="" coords="261,53,174,34,175,29,262,48"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#a7980fedcc7286b2f760a9e69f10ce09f" title="Оператор сравнения &quot;меньше чем&quot;. Сравнивает этот URI с другим URI. Обеспечивает строгий слабый порядо..." alt="" coords="26,55,199,80"/>
-<area shape="poly" title=" " alt="" coords="252,70,199,70,199,65,252,65"/>
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html#adddf5538ee40a90ff03f33517de0056a" title="Оператор сравнения на равенство. Сравнивает этот URI с другим URI. Сравнение, вероятно,..." alt="" coords="22,104,203,130"/>
-<area shape="poly" title=" " alt="" coords="262,87,175,106,174,101,261,82"/>
+<area shape="rect" title=" " alt="" coords="5,29,137,55"/>
+<area shape="poly" title=" " alt="" coords="92,14,85,10,71,8,58,10,51,14,49,20,53,29,48,29,44,21,46,11,56,5,71,3,87,5,97,14"/>
 </map>
 </div>
 
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceiridium.html">iridium</a></li><li class="navelem"><a href="namespaceiridium_1_1io.html">io</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

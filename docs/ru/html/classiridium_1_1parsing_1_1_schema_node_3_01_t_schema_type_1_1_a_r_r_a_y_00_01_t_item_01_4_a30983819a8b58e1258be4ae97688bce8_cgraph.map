@@ -1,0 +1,12 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::ARRAY, TItem &gt;::serialize" name="iridium::parsing::SchemaNode&lt; TSchemaType::ARRAY, TItem &gt;::serialize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,72,210,127"/>
+<area shape="rect" id="Node000002" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title=" " alt="" coords="308,5,372,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,69,257,41,295,31,291,33,259,46,183,73"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1convertion.html#aaf31a5335a6afae5d2fdffcdd0b83483" title=" " alt="" coords="277,79,404,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,97,263,99,258,100,210,102"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a4d9d31787a2a0d8a45ffb48185a96e8d" title=" " alt="" coords="258,144,423,185"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="209,125,253,140,248,140,209,131"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="299,77,297,69,303,60,318,55,340,53,364,55,380,64,375,64,363,60,340,58,319,60,307,64,302,70,304,80"/>
+<area shape="rect" id="Node000004" href="$structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html#ace2d933df7a4cdfbf2548fbfd57f8387" title=" " alt="" coords="471,72,650,127"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="404,97,458,99,453,100,405,102"/>
+</map>

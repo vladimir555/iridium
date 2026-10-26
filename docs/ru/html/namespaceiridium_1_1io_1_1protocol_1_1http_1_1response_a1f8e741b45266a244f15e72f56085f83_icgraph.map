@@ -1,0 +1,16 @@
+<map id="iridium::io::protocol::http::response::DEFINE_SCHEMA_VALUE" name="iridium::io::protocol::http::response::DEFINE_SCHEMA_VALUE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="224,205,394,261"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="342,191,330,186,309,184,290,186,277,191,271,197,271,206,266,204,266,195,274,186,288,181,309,179,332,181,347,190"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a8c8ae73b37cd8b5b37c8752074a67b98" title=" " alt="" coords="5,5,176,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,193,234,134,205,103,174,75,159,64,158,59,177,71,209,99,238,131,284,192"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a467f89296a08247361633ac51fa897a4" title=" " alt="" coords="5,85,176,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,198,174,156,154,144,152,139,177,151,253,196"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a4d14b31dfb06bded86c2c9ea3f3abb3e" title=" " alt="" coords="5,165,176,221"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,216,177,211,176,206,211,214"/>
+<area shape="rect" id="Node000005" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#ae44aa2644e6f1135745bea10b6c049c7" title=" " alt="" coords="5,245,176,301"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="206,253,178,260,175,255,211,250"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a4ae4eddd77889188d1701b72c8d897b8" title=" " alt="" coords="5,325,176,381"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="249,271,177,316,155,327,152,323,174,311,253,268"/>
+<area shape="rect" id="Node000007" href="$namespaceiridium_1_1io_1_1protocol_1_1http_1_1response.html#a5f258aa6c05dd87a2e3207fb7a68d233" title=" " alt="" coords="5,405,176,461"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="284,272,238,336,209,367,177,395,160,407,157,402,174,391,205,363,234,332,279,275"/>
+</map>

@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['макрос_20утверждений_20assert_0',['Макрос утверждений ASSERT',['../index.html#subsubsec_testing_assertions',1,'']]],
-  ['макрос_20implement_5ftest_5fmain_1',['Макрос IMPLEMENT_TEST_MAIN',['../index.html#subsubsec_testing_main',1,'']]],
-  ['макрос_20test_2',['Макрос TEST',['../index.html#subsubsec_testing_test_macro',1,'']]],
-  ['мокирование_20зависимостей_3',['Мокирование зависимостей',['../index.html#subsec_testing_mocking',1,'']]],
-  ['многопоточности_4',['Примитивы многопоточности',['../index.html#sec_threading',1,'']]],
-  ['моков_5',['Определение поведения моков',['../index.html#subsubsec_testing_mock_behavior',1,'']]],
-  ['мок_20классов_6',['Определение мок-классов',['../index.html#subsubsec_testing_defining_mocks',1,'']]],
-  ['мок_20объектов_20через_20tt_20create_20tt_7',['Автоматическое создание и предоставление мок-объектов через &lt;tt&gt;create()&lt;/tt&gt;',['../index.html#subsubsec_testing_mock_auto_creation',1,'']]],
-  ['мьютекса_8',['Логирование операций мьютекса',['../index.html#subsec_synchronized_logging',1,'']]]
+  ['конфигурация_20логгера_0',['Конфигурация логгера',['../index.html#subsec_logger_configuration',1,'']]],
+  ['конфигурация_20по_20умолчанию_1',['Конфигурация по умолчанию',['../index.html#subsec_default_config',1,'']]],
+  ['класса_20tester_2',['Роль класса Tester',['../index.html#subsubsec_testing_tester',1,'']]],
+  ['классов_3',['Определение мок-классов',['../index.html#subsubsec_testing_defining_mocks',1,'']]],
+  ['командной_20строки_4',['Аргументы командной строки',['../index.html#subsubsec_testing_cli',1,'']]],
+  ['конфигурации_5',['Пример программной конфигурации',['../index.html#subsec_logger_config_example',1,'']]],
+  ['конфигурация_20логгера_6',['Использование и конфигурация логгера',['../index.html#sec_logging',1,'']]],
+  ['концепции_7',['Основные концепции',['../index.html#subsec_testing_core_concepts',1,'']]],
+  ['копирования_20и_20перемещения_8',['Семантика копирования и перемещения',['../index.html#subsubsec_schema_semantics',1,'']]]
 ];

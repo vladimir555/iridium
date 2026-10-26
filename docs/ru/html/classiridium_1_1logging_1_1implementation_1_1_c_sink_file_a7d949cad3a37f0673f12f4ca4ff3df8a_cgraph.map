@@ -1,0 +1,26 @@
+<map id="iridium::logging::implementation::CSinkFile::DEFINE_ENUM" name="iridium::logging::implementation::CSinkFile::DEFINE_ENUM">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,120,210,161"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ab5e0fe663ecfaf05836156d0b15ae8ef" title=" " alt="" coords="258,5,462,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,117,257,62,289,51,285,54,259,67,148,122"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a36f940debb2a5e9346d07b75f92f2bc9" title=" " alt="" coords="510,88,714,129"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,117,257,106,380,99,497,101,492,103,380,104,258,111,192,122"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#adb7420a5c388283284293cab77552943" title=" " alt="" coords="258,120,462,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="209,138,245,139,240,141,211,143"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#ae0b2dbfdca7aa7a43e5c1ff411598748" title=" " alt="" coords="510,243,714,283"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="133,158,188,200,222,220,259,235,317,251,379,260,497,269,492,269,378,266,316,256,257,240,220,224,185,204,132,164"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#aa60e534e568948ac1b550d468d68ed2d" title=" " alt="" coords="258,185,462,226"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="189,159,266,180,261,182,189,164"/>
+<area shape="rect" id="Node000006" href="$namespaceiridium.html#ac26baddfcc40e8343d29329b2dd3e609" title=" " alt="" coords="762,282,903,308"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="715,275,749,283,744,282,715,281"/>
+<area shape="rect" id="Node000007" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title=" " alt="" coords="800,209,865,234"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="714,241,782,231,788,230,715,246"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="796,281,789,274,793,264,808,258,833,256,859,258,875,268,869,267,858,263,832,261,809,263,797,268,794,273,800,283"/>
+<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="426,182,461,170,548,136,554,135,463,175,428,187"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="453,224,508,239,502,239,452,229"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1logging_1_1_i_sink.html#a6e93ea7f4f088ce7a14fb1207d3ca67e" title=" " alt="" coords="539,177,685,218"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="462,200,526,200,521,201,463,205"/>
+<area shape="poly" id="edge12_Node000009_Node000007" title=" " alt="" coords="686,203,787,216,782,217,686,208"/>
+<area shape="rect" id="Node000010" href="$namespaceiridium.html#a627d2f2ec5720695a4e72cc1a16491c4" title=" " alt="" coords="786,160,879,185"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="686,187,774,179,769,180,686,192"/>
+<area shape="poly" id="edge14_Node000010_Node000010" title=" " alt="" coords="795,158,789,151,793,141,808,135,833,133,859,136,875,145,869,144,858,141,832,138,809,140,797,145,794,150,801,160"/>
+</map>

@@ -1,5 +1,14 @@
 <map id="iridium::io::fs::implementation::assertOK" name="iridium::io::fs::implementation::assertOK">
-<area shape="rect" id="Node000001" title=" " alt="" coords="246,5,438,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c" title="Сбрасывает все буферизованные данные, связанные с файловым потоком, в базовый файл...." alt="" coords="5,5,198,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,28,198,28,198,23,230,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="501,104,693,145"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="635,88,622,85,597,83,574,85,560,89,555,95,557,105,552,102,550,94,557,85,573,79,597,77,623,80,640,89"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1io_1_1fs_1_1implementation.html#a39099db2e5f840f9d0d1c7db0ddb2788" title=" " alt="" coords="261,5,453,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="537,97,452,61,420,49,420,44,454,57,542,97"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1io_1_1fs_1_1implementation.html#a08d44ea93407628f0d12df4a5d54d1ca" title=" " alt="" coords="261,71,453,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="483,109,454,107,453,102,488,109"/>
+<area shape="rect" id="Node000004" href="$namespaceiridium_1_1io_1_1fs_1_1implementation.html#a5b6a007ebaa3c86c8ce6232e39b1454e" title=" " alt="" coords="261,136,453,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="483,140,454,146,453,141,488,139"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a662aab47ff28a850bf1bb3d0b161c30c" title=" " alt="" coords="261,201,453,242"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="541,151,454,191,421,203,420,198,452,186,535,152"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a5754cbd211349e7ee0144a8c150f0591" title=" " alt="" coords="5,201,213,242"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="242,222,213,224,213,219,247,222"/>
 </map>

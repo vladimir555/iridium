@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['node_2ecpp_0',['node.cpp',['../node_8cpp.html',1,'(Global Namespace)'],['../serialization_2node_8cpp.html',1,'(Global Namespace)']]],
-  ['node_2eh_1',['node.h',['../implementation_2node_8h.html',1,'(Global Namespace)'],['../node_8h.html',1,'(Global Namespace)'],['../serialization_2node_8h.html',1,'(Global Namespace)']]],
-  ['node_5ftype_2eh_2',['node_type.h',['../implementation_2node__type_8h.html',1,'(Global Namespace)'],['../node__type_8h.html',1,'(Global Namespace)']]],
-  ['non_5fcopyable_2eh_3',['non_copyable.h',['../non__copyable_8h.html',1,'']]],
-  ['non_5fmovable_2eh_4',['non_movable.h',['../non__movable_8h.html',1,'']]]
+  ['logger_2ecpp_0',['logger.cpp',['../logger_8cpp.html',1,'']]],
+  ['logger_2eh_1',['logger.h',['../logger_8h.html',1,'']]]
 ];

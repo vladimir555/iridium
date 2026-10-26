@@ -1,0 +1,19 @@
+<map id="iridium/string_pool.h" name="iridium/string_pool.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="360,5,498,31"/>
+<area shape="rect" id="Node000002" href="$smart__ptr_8h.html" title=" " alt="" coords="53,79,181,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="374,34,185,78,184,73,377,29"/>
+<area shape="rect" id="Node000006" href="$non__copyable_8h.html" title=" " alt="" coords="205,79,378,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="408,31,330,74,327,69,403,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="402,79,456,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="431,29,431,65,427,62,427,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="480,79,567,105"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="446,29,498,70,493,69,444,34"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="591,79,701,105"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="466,29,597,73,592,74,465,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,74,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,104,65,144,62,140,101,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="98,153,136,178"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="119,103,119,138,114,136,115,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="160,153,218,178"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="130,102,168,141,163,142,128,107"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="iridium::logging::config::DEFINE_SCHEMA_OBJECT_BEGIN" name="iridium::logging::config::DEFINE_SCHEMA_OBJECT_BEGIN">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,51,259,91"/>
+<area shape="rect" id="Node000002" href="$namespaceiridium_1_1logging_1_1config.html#a89d7e1691e9b371076bf63312b18e7c4" title=" " alt="" coords="358,5,509,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="259,49,345,39,339,40,260,55"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium_1_1logging_1_1config.html#a5c9f710cd7348b59d412402ed07eeb66" title=" " alt="" coords="307,95,560,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,87,294,94,289,94,259,92"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="378,93,375,85,384,75,403,70,433,68,466,70,487,79,481,79,465,76,433,73,404,75,386,80,380,86,382,95"/>
+</map>

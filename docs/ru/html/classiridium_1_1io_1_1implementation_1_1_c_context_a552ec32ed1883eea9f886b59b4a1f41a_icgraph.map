@@ -1,0 +1,16 @@
+<map id="iridium::io::implementation::CContext::setPipe" name="iridium::io::implementation::CContext::setPipe">
+<area shape="rect" id="Node000001" title=" " alt="" coords="448,63,621,103"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a6db6201e1f1f1255e6b8d7706c84159b" title=" " alt="" coords="5,29,179,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="486,55,445,36,399,20,339,12,277,13,218,21,167,31,165,26,218,16,277,8,339,7,401,15,448,31,491,55"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#aa2abf20c954f2d7b54d5511419b9f180" title=" " alt="" coords="227,95,400,135"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="430,98,401,105,400,100,435,97"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#ad41841a72eb00c14072341fb459e7648" title=" " alt="" coords="227,29,400,70"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="430,68,401,65,400,60,435,67"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a3f3eefef2bfc95e765eabdaa40c8f61c" title=" " alt="" coords="227,160,400,201"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="481,110,401,149,371,162,369,157,399,145,476,111"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="127,15,115,10,92,8,71,10,58,15,53,21,55,29,50,29,48,19,55,10,70,5,92,3,116,5,132,13"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="225,91,164,73,164,68,230,89"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a796ac8c6c82403560c1cb47a07038bcd" title=" " alt="" coords="5,95,179,135"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="209,116,180,118,179,112,214,114"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="209,51,180,52,178,47,214,49"/>
+</map>

@@ -1,5 +1,8 @@
 <map id="iridium::io::fs::implementation::CFileStream::finalize" name="iridium::io::fs::implementation::CFileStream::finalize">
-<area shape="rect" id="Node000001" title="Финализирует файловый поток, закрывая файл, если он открыт. Этот метод является частью интерфейса IIn..." alt="" coords="246,5,438,46"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84" title="Инициализирует файловый поток, открывая файл. Этот метод является частью интерфейса IInitializable...." alt="" coords="5,5,198,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,28,198,28,198,23,230,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="501,5,693,46"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a5754cbd211349e7ee0144a8c150f0591" title=" " alt="" coords="5,5,213,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="483,22,453,24,261,24,213,25,213,20,261,19,453,19,488,22"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#af1de0e8276f3374d1142f7ece3941d84" title=" " alt="" coords="261,33,453,74"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="488,38,454,45,453,40,483,39"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="242,41,213,40,213,35,247,41"/>
 </map>

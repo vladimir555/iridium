@@ -1,0 +1,9 @@
+<map id="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::serialize" name="iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;::serialize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,215,61"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a4d9d31787a2a0d8a45ffb48185a96e8d" title=" " alt="" coords="476,13,641,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,18,263,15,345,11,428,15,463,20,457,20,428,20,345,17,263,20,215,23"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a15917b382b11075ab6c5c23b85ed527d" title=" " alt="" coords="263,53,428,94"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,48,250,56,245,57,215,54"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="428,55,458,52,463,51,428,60"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="305,51,303,43,310,34,324,28,345,26,368,29,384,38,378,37,367,34,345,31,325,33,313,38,308,44,310,54"/>
+</map>

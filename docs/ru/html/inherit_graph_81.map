@@ -1,0 +1,9 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="Node000000" href="$classiridium_1_1parsing_1_1_schema_node_base.html" title=" " alt="" coords="5,85,171,126"/>
+<area shape="rect" id="Node000001" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_01_4.html" title=" " alt="" coords="227,5,432,61"/>
+<area shape="poly" id="edge12_Node000000_Node000001" title=" " alt="" coords="171,78,236,60,232,63,174,83"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html" title=" " alt="" coords="219,85,440,126"/>
+<area shape="poly" id="edge13_Node000000_Node000002" title=" " alt="" coords="186,103,221,104,215,106,187,108"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_01_4.html" title=" " alt="" coords="228,149,430,205"/>
+<area shape="poly" id="edge14_Node000000_Node000003" title=" " alt="" coords="173,128,236,148,231,149,172,133"/>
+</map>

@@ -1,4 +1,7 @@
 <map id="iridium::testing::implementation::CTestRunnerRaw::CTestRunnerRaw" name="iridium::testing::implementation::CTestRunnerRaw::CTestRunnerRaw">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,29,251,70"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="82,29,80,19,87,10,103,5,128,3,154,5,170,11,168,16,153,10,128,8,105,10,90,15,85,21,87,28"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="77,28,75,19,83,10,101,5,128,3,157,5,176,14,171,14,156,10,128,8,102,10,86,15,80,21,82,29"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1testing_1_1implementation_1_1_c_test_runner_raw.html#af41c4a1f0856ecb5590003dc2731750d" title=" " alt="" coords="299,29,501,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="251,47,286,50,280,50,251,52"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="349,27,347,19,355,10,373,5,400,3,429,5,448,14,443,13,428,10,400,8,374,10,358,15,352,21,354,30"/>
 </map>

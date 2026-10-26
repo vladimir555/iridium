@@ -1,0 +1,17 @@
+<map id="iridium::parsing::SchemaNodeBase::getType" name="iridium::parsing::SchemaNodeBase::getType">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,116,171,157"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1parsing_1_1_schema_node_base.html#ae21310a6c5fc0732da56b876a6fb8129" title=" " alt="" coords="244,5,410,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,113,164,85,218,57,239,50,234,53,220,61,167,89,121,118"/>
+<area shape="rect" id="Node000003" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a7460c850e5e1bc287914d043229174e9" title=" " alt="" coords="219,71,435,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,118,206,113,201,116,172,123"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a79a4233c3785f0a2ca0e5be434cf3005" title=" " alt="" coords="227,160,426,201"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,149,214,158,209,160,172,154"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1parsing_1_1_schema_node_base.html#ae853af79804011fdf4ab9518512ca3eb" title=" " alt="" coords="244,225,410,266"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="121,155,167,183,220,210,239,220,234,219,218,215,164,187,120,160"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="282,158,280,150,287,141,303,135,327,133,353,136,370,144,364,144,351,141,327,139,304,141,290,145,285,151,287,161"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a15917b382b11075ab6c5c23b85ed527d" title=" " alt="" coords="483,225,648,266"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="410,243,470,246,465,246,410,248"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="526,223,523,215,530,206,544,201,566,199,589,201,604,210,599,209,587,206,566,204,545,206,533,211,528,216,530,226"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1parsing_1_1_schema_node_base.html#a4d9d31787a2a0d8a45ffb48185a96e8d" title=" " alt="" coords="696,225,862,266"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="648,243,683,246,678,246,648,248"/>
+</map>

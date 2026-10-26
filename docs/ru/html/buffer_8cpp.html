@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Iridium: Файл source/iridium/io/buffer.cpp</title>
+<title>Iridium: Файл iridium/io/buffer.cpp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,38 +34,64 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
-});
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('buffer_8cpp.html','',''); });
 </script>
-<div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<div id="MSearchSelectWindow">
 </div>
 
 <!-- iframe showing the search results (closed by default) -->
@@ -82,71 +108,92 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_73db56d11ff6760bdab318ef9b789ffb.html">iridium</a></li><li class="navelem"><a class="el" href="dir_bc9bb292d18931eb4b852f43ac186ea9.html">io</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a>  </div>
   <div class="headertitle"><div class="title">Файл buffer.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="buffer_8h_source.html">buffer.h</a>&quot;</code><br />
-<code>#include &lt;string&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
+<div class="textblock"><div class="dynheader">
 Граф включаемых заголовочных файлов для buffer.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="buffer_8cpp__incl.png" border="0" usemap="#asource_2iridium_2io_2buffer_8cpp" alt=""/></div>
-<map name="asource_2iridium_2io_2buffer_8cpp" id="asource_2iridium_2io_2buffer_8cpp">
-<area shape="rect" title=" " alt="" coords="5,5,183,31"/>
-<area shape="rect" href="buffer_8h.html" title=" " alt="" coords="184,79,249,105"/>
-<area shape="poly" title=" " alt="" coords="116,29,184,69,182,73,113,34"/>
-<area shape="rect" title=" " alt="" coords="6,315,59,341"/>
-<area shape="poly" title=" " alt="" coords="94,32,41,300,35,299,89,31"/>
-<area shape="rect" href="convert_8h.html" title="Публичный интерфейс для фреймворка преобразования типов Iridium. Предоставляет доступ к функциям прео..." alt="" coords="212,153,336,193"/>
-<area shape="poly" title=" " alt="" coords="228,104,253,138,249,142,223,107"/>
-<area shape="rect" title=" " alt="" coords="528,315,567,341"/>
-<area shape="poly" title=" " alt="" coords="250,96,310,111,385,138,424,157,461,180,495,207,524,240,539,269,547,299,542,300,534,271,520,243,491,211,458,184,421,161,383,143,308,116,249,101"/>
-<area shape="poly" title=" " alt="" coords="189,108,155,127,121,154,103,181,82,221,46,302,41,300,78,219,99,178,117,151,152,123,187,103"/>
-<area shape="rect" href="smart__ptr_8h.html" title="Предоставляет вспомогательные макросы для определения стандартных typedef&#45;ов умных указателей и стати..." alt="" coords="382,241,510,267"/>
-<area shape="poly" title=" " alt="" coords="250,102,298,122,349,150,394,189,429,228,425,231,390,193,346,155,296,127,248,107"/>
-<area shape="rect" title=" " alt="" coords="131,160,188,186"/>
-<area shape="poly" title=" " alt="" coords="210,107,179,149,175,146,206,104"/>
-<area shape="rect" href="implementation_2convert_8h.html" title="Основные детали реализации для фреймворка преобразования типов Iridium. Определяет основные шаблонные..." alt="" coords="190,241,358,267"/>
-<area shape="poly" title=" " alt="" coords="277,194,277,226,271,226,271,194"/>
-<area shape="poly" title=" " alt="" coords="332,265,415,284,514,312,513,317,413,290,331,270"/>
-<area shape="poly" title=" " alt="" coords="233,270,75,317,74,312,232,265"/>
-<area shape="rect" title=" " alt="" coords="84,315,144,341"/>
-<area shape="poly" title=" " alt="" coords="248,270,156,311,154,306,246,265"/>
-<area shape="rect" title=" " alt="" coords="168,315,225,341"/>
-<area shape="poly" title=" " alt="" coords="263,270,223,306,219,302,259,266"/>
-<area shape="rect" title=" " alt="" coords="436,315,504,341"/>
-<area shape="poly" title=" " alt="" coords="308,265,424,307,422,312,306,270"/>
-<area shape="rect" title=" " alt="" coords="249,315,310,341"/>
-<area shape="poly" title=" " alt="" coords="278,267,280,299,275,300,272,267"/>
-<area shape="rect" title=" " alt="" coords="334,315,412,341"/>
-<area shape="poly" title=" " alt="" coords="292,265,346,304,342,308,289,270"/>
-<area shape="poly" title=" " alt="" coords="452,266,464,299,459,301,447,268"/>
+<div class="center"><img src="buffer_8cpp__incl.png" border="0" usemap="#airidium_2io_2buffer_8cpp" loading="lazy" alt=""/></div>
+<map name="airidium_2io_2buffer_8cpp" id="airidium_2io_2buffer_8cpp">
+<area shape="rect" title=" " alt="" coords="644,5,778,31"/>
+<area shape="rect" href="buffer_8h.html" title=" " alt="" coords="678,79,743,105"/>
+<area shape="poly" title=" " alt="" coords="712,29,713,65,708,62,709,33"/>
+<area shape="rect" title=" " alt="" coords="59,389,112,414"/>
+<area shape="poly" title=" " alt="" coords="641,21,469,29,364,38,258,51,161,70,81,96,50,112,27,130,13,150,8,172,8,255,14,290,28,323,46,352,65,376,60,378,42,355,23,325,8,292,3,256,3,171,8,148,24,126,48,107,79,91,160,65,258,46,363,32,469,24,645,19"/>
+<area shape="rect" title=" " alt="" coords="766,79,831,105"/>
+<area shape="poly" title=" " alt="" coords="726,29,775,69,769,69,725,34"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="529,153,652,193"/>
+<area shape="poly" title=" " alt="" coords="695,104,634,146,632,142,690,106"/>
+<area shape="poly" title=" " alt="" coords="675,103,518,155,456,175,402,190,309,212,266,227,223,247,178,276,130,317,109,345,95,375,91,372,104,342,126,313,175,272,221,242,264,222,307,207,401,184,455,170,517,150,680,101"/>
+<area shape="rect" href="smart__ptr_8h.html" title=" " alt="" coords="1018,160,1147,186"/>
+<area shape="poly" title=" " alt="" coords="743,99,755,102,1006,156,1001,157,754,107,743,105"/>
+<area shape="rect" title=" " alt="" coords="975,241,1014,267"/>
+<area shape="poly" title=" " alt="" coords="733,103,964,234,959,235,731,108"/>
+<area shape="rect" title=" " alt="" coords="1254,241,1311,267"/>
+<area shape="poly" title=" " alt="" coords="743,100,755,102,816,111,869,114,961,112,1005,113,1051,118,1102,129,1160,150,1190,166,1219,187,1264,230,1259,229,1216,191,1188,171,1158,155,1100,134,1050,123,1004,118,961,118,869,119,816,116,754,107,743,105"/>
+<area shape="rect" href="implementation_2convert_8h.html" title=" " alt="" coords="447,241,614,267"/>
+<area shape="poly" title=" " alt="" coords="578,192,551,231,547,227,574,195"/>
+<area shape="rect" href="common_8h.html" title=" " alt="" coords="1046,315,1128,341"/>
+<area shape="poly" title=" " alt="" coords="615,260,801,280,1033,315,1028,315,801,285,615,266"/>
+<area shape="poly" title=" " alt="" coords="444,264,290,286,218,300,168,317,131,346,103,378,100,374,127,342,165,313,217,295,289,281,449,262"/>
+<area shape="rect" title=" " alt="" coords="144,389,213,414"/>
+<area shape="poly" title=" " alt="" coords="444,259,372,266,293,277,226,293,201,304,185,317,177,329,174,344,174,375,170,373,168,343,172,327,181,313,199,299,224,288,292,271,371,261,449,257"/>
+<area shape="rect" title=" " alt="" coords="1144,389,1213,414"/>
+<area shape="poly" title=" " alt="" coords="614,256,921,276,1063,292,1113,302,1141,313,1155,326,1165,341,1176,375,1172,372,1160,343,1151,329,1139,317,1111,307,1062,297,920,281,614,262"/>
+<area shape="rect" title=" " alt="" coords="195,315,282,341"/>
+<area shape="poly" title=" " alt="" coords="479,268,298,315,297,310,484,267"/>
+<area shape="rect" title=" " alt="" coords="306,315,366,341"/>
+<area shape="poly" title=" " alt="" coords="500,267,382,313,380,308,495,268"/>
+<area shape="rect" title=" " alt="" coords="390,315,447,341"/>
+<area shape="poly" title=" " alt="" coords="514,267,452,309,449,304,509,269"/>
+<area shape="rect" title=" " alt="" coords="471,315,532,341"/>
+<area shape="poly" title=" " alt="" coords="528,266,514,302,510,298,524,269"/>
+<area shape="rect" title=" " alt="" coords="556,315,634,341"/>
+<area shape="poly" title=" " alt="" coords="542,265,576,304,571,303,540,270"/>
+<area shape="rect" href="platform_8h.html" title=" " alt="" coords="658,315,779,341"/>
+<area shape="poly" title=" " alt="" coords="563,265,675,309,670,309,562,270"/>
+<area shape="rect" title=" " alt="" coords="803,315,1021,341"/>
+<area shape="poly" title=" " alt="" coords="596,265,835,311,830,312,596,270"/>
+<area shape="rect" title=" " alt="" coords="947,389,1029,414"/>
+<area shape="poly" title=" " alt="" coords="1072,340,1018,382,1016,377,1067,342"/>
+<area shape="poly" title=" " alt="" coords="1048,339,1034,343,897,358,781,365,582,365,384,366,269,375,132,391,128,392,127,387,132,386,268,369,384,361,582,360,780,360,896,353,1033,338,1042,339"/>
+<area shape="poly" title=" " alt="" coords="1047,338,1034,343,798,370,567,388,229,402,229,397,567,382,798,365,1033,338,1042,339"/>
+<area shape="poly" title=" " alt="" coords="1103,339,1154,380,1149,378,1101,344"/>
+<area shape="rect" title=" " alt="" coords="1054,389,1120,414"/>
+<area shape="poly" title=" " alt="" coords="1089,339,1089,375,1085,371,1085,343"/>
+<area shape="poly" title=" " alt="" coords="1094,184,1133,238,1155,275,1172,314,1179,344,1181,375,1177,372,1174,345,1167,316,1150,277,1129,241,1091,189"/>
+<area shape="poly" title=" " alt="" coords="1072,185,1021,233,1018,228,1067,187"/>
+<area shape="poly" title=" " alt="" coords="1114,184,1242,236,1237,236,1113,189"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
-<tr class="memdesc:namespaceiridium"><td class="mdescLeft">&#160;</td><td class="mdescRight">Определяет интерфейсы для управления контекстом ввода-вывода и именованными каналами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
-<tr class="memdesc:namespaceiridium_1_1io"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имен для функциональности, связанной с вводом-выводом. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aio" id="r_iridium_3A_3Aio"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io.html">iridium::io</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a9081dff62876bac8c5d0f47b13bd7340" id="r_a9081dff62876bac8c5d0f47b13bd7340"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1io.html#a9081dff62876bac8c5d0f47b13bd7340">iridium::io::checkSuffix</a> (std::list&lt; Buffer::TSharedPtr &gt; const &amp;buffers, std::string const &amp;suffix)</td></tr>
 </table>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_8c6393cb1db31ac16803acf12e6d112e.html">io</a></li><li class="navelem"><a href="buffer_8cpp.html">buffer.cpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

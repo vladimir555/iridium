@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Иерархия классов</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,40 +34,64 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
-});
-/* @license-end */
-</script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
 </div><!-- top -->
-<div id="doc-content">
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('hierarchy.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<div id="MSearchSelectWindow">
 </div>
 
 <!-- iframe showing the search results (closed by default) -->
@@ -91,527 +115,919 @@ $(function(){ initResizable(false); });
 <div class="textblock">
 <p><a href="hierarchy.html">см. текстовый вид.</a></p>
 </div><table border="0" cellspacing="10" cellpadding="0">
-<tr><td><img src="inherit_graph_0.png" border="0" usemap="#a_i_process_1_1_t_state" alt=""/>
+<tr><td><img src="inherit_graph_0.png" border="0" usemap="#a_i_context_actions_1_1_t_action" loading="lazy" alt=""/>
+<map name="a_i_context_actions_1_1_t_action" id="a_i_context_actions_1_1_t_action">
+<area shape="rect" href="struct_i_context_actions_1_1_t_action.html" title=" " alt="" coords="5,5,173,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_1.png" border="0" usemap="#a_i_process_1_1_t_state" loading="lazy" alt=""/>
 <map name="a_i_process_1_1_t_state" id="a_i_process_1_1_t_state">
-<area shape="rect" href="struct_i_process_1_1_t_state.html" title="Определяет общие элементы интерфейса для IProcess, такие как typedef&#45;ы умных указателей (TSharedPtr,..." alt="" coords="5,5,126,31"/>
+<area shape="rect" href="struct_i_process_1_1_t_state.html" title=" " alt="" coords="5,5,126,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_1.png" border="0" usemap="#airidium_1_1convertion_1_1config" alt=""/>
+<tr><td><img src="inherit_graph_2.png" border="0" usemap="#airidium_1_1convertion_1_1config" loading="lazy" alt=""/>
 <map name="airidium_1_1convertion_1_1config" id="airidium_1_1convertion_1_1config">
-<area shape="rect" href="structiridium_1_1convertion_1_1config.html" title="Настройки конфигурации для фреймворка преобразования. Примечание: Комментарий TODO в исходном коде (&quot;..." alt="" coords="5,5,133,46"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1config.html" title=" " alt="" coords="5,5,133,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_2.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1config" alt=""/>
+<tr><td><img src="inherit_graph_3.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1config" loading="lazy" alt=""/>
 <map name="airidium_1_1convertion_1_1implementation_1_1config" id="airidium_1_1convertion_1_1implementation_1_1config">
-<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1config.html" title="Настройки конфигурации для фреймворка преобразования. Примечание: Комментарий TODO в исходном коде (&quot;..." alt="" coords="5,5,166,46"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1config.html" title=" " alt="" coords="5,5,166,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_3.png" border="0" usemap="#airidium_1_1db_1_1sql_1_1_query" alt=""/>
+<tr><td><img src="inherit_graph_4.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation_3_01_t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation_3_01_t_01_4" id="airidium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation_3_01_t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_in_s_t_d_namespace_implementation.html" title=" " alt="" coords="5,5,283,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_5.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type_3_01_t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type_3_01_t_01_4" id="airidium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type_3_01_t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_type.html" title=" " alt="" coords="5,5,162,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_6.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01bool_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01bool_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01bool_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01bool_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_7.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01double_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01double_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01double_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01double_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_8.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01float_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01float_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01float_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01float_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_9.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int_00_01int_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int_00_01int_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int_00_01int_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01int_00_01int_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_10.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int32__t_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int32__t_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int32__t_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01int32__t_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_11.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int64__t_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int64__t_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01int64__t_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01int64__t_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_12.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1_1duration_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1_1duration_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1_1duration_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_18c818c33cddfade233671662033e7d14.html" title=" " alt="" coords="5,5,193,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_13.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1_1time__point_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1_1time__point_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1_1time__point_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1chrono_1_1system__clock_1143040e574cbdb8f03d953634cde42e7.html" title=" " alt="" coords="5,5,193,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_14.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01bool_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01bool_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01bool_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01bool_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_15.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01double_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01double_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01double_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01double_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_16.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01float_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01float_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01float_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01float_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_17.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int16__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int16__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int16__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int16__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_18.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int32__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int32__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int32__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int32__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_19.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int64__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int64__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int64__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int64__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_20.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int8__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int8__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int8__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01int8__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_21.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1atomic_3_01_t_value_01_4_01_4.html" title=" " alt="" coords="5,5,185,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_22.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono_1_1system__clock_1_1duration_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono_1_1system__clock_1_1duration_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono_1_1system__clock_1_1duration_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono7100a0627525744df325063d7cccdb94.html" title=" " alt="" coords="5,5,185,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_23.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono_1_1system__clock_1_1time__point_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono_1_1system__clock_1_1time__point_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono_1_1system__clock_1_1time__point_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1chrono96a9b00fe8c8641cd7768f98505006ca.html" title=" " alt="" coords="5,5,196,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_24.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1exception_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1exception_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1exception_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1exception_01_4.html" title=" " alt="" coords="5,5,199,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_25.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1nested__exception_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1nested__exception_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1nested__exception_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1nested__exception_01_4.html" title=" " alt="" coords="5,5,185,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_26.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1optional_3_01_t_value_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1optional_3_01_t_value_01_4_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1optional_3_01_t_value_01_4_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1optional_3_01_t_value_01_4_01_4.html" title=" " alt="" coords="5,5,185,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_27.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1pair_3_01_t_first_00_01_t_second_01_4_00_01void_00_01is__throwable_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1pair_3_01_t_first_00_01_t_second_01_4_00_01void_00_01is__throwable_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1pair_3_01_t_first_00_01_t_second_01_4_00_01void_00_01is__throwable_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1pair_31974e982d6ff6c8890ba653ff3c8099a.html" title=" " alt="" coords="5,5,185,91"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_28.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1shared__ptr_3_01_t_value_01_4_01_4.html" title=" " alt="" coords="5,5,185,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_29.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_30.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string__view_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string__view_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string__view_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1string__view_01_4.html" title=" " alt="" coords="5,5,209,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_31.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1thread_1_1id_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1thread_1_1id_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1thread_1_1id_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1thread_1_1id_01_4.html" title=" " alt="" coords="5,5,197,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_32.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u16string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u16string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u16string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u16string_01_4.html" title=" " alt="" coords="5,5,196,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_33.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u32string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u32string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u32string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1u32string_01_4.html" title=" " alt="" coords="5,5,196,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_34.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1wstring_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1wstring_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1wstring_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01std_1_1wstring_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_35.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_s_t_l_associative_container_3_01_t_container_01_4_1_1value_01_4_00_01is__throwable_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_s_t_l_associative_container_3_01_t_container_01_4_1_1value_01_4_00_01is__throwable_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_s_t_l_associative_container_3_01_t_container_01_4_1_1value_01_4_00_01is__throwable_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_24731a2a66b29614f465b5cb5a36dcb2.html" title=" " alt="" coords="5,5,259,106"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_36.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_s_t_l_sequential_container_3_01_t_container_01_4_1_1value_01_6_6_9detail_1_1_t_is_s_t_l_associative_container_3_01_t_container_01_4_1_1value_01_4_00_01is__throwable_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_s_t_l_sequential_container_3_01_t_container_01_4_1_1value_01_6_6_9detail_1_1_t_is_s_t_l_associative_container_3_01_t_container_01_4_1_1value_01_4_00_01is__throwable_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_s_t_l_sequential_container_3_01_t_container_01_4_1_1value_01_6_6_9detail_1_1_t_is_s_t_l_associative_container_3_01_t_container_01_4_1_1value_01_4_00_01is__throwable_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_container_98053b6f8d1c169577513b0767f09d7c.html" title=" " alt="" coords="5,5,278,136"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_37.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_enum_00_01std_1_1enable__if__t_3_9std_1_1is__enum__v_3_01_t_enum_01_4_01_6_6detail_1_1_t_is_iridium_enum_3_01_t_enum_01_4_1_1value_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_enum_00_01std_1_1enable__if__t_3_9std_1_1is__enum__v_3_01_t_enum_01_4_01_6_6detail_1_1_t_is_iridium_enum_3_01_t_enum_01_4_1_1value_01_4_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_enum_00_01std_1_1enable__if__t_3_9std_1_1is__enum__v_3_01_t_enum_01_4_01_6_6detail_1_1_t_is_iridium_enum_3_01_t_enum_01_4_1_1value_01_4_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01_t_enum_00_0185464367468d10e1263edd8628547adc.html" title=" " alt="" coords="5,5,260,106"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_38.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint16__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint16__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint16__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint16__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_39.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint32__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint32__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint32__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint32__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_40.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint64__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint64__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint64__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint64__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_41.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint8__t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint8__t_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint8__t_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1string_00_01uint8__t_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_42.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u16string_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u16string_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u16string_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u16string_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,196,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_43.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u32string_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u32string_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u32string_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1u32string_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,196,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_44.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1wstring_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1wstring_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1wstring_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01std_1_1wstring_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_45.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_enum_00_01std_1_1string_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_iridium_enum_3_01_t_enum_01_4_1_1value_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_enum_00_01std_1_1string_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_iridium_enum_3_01_t_enum_01_4_1_1value_01_4_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_enum_00_01std_1_1string_00_01std_1_1enable__if__t_3_01detail_1_1_t_is_iridium_enum_3_01_t_enum_01_4_1_1value_01_4_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_enum_00_01std_1_1string_00_01d8808a79d8ebe607e4ba2ad4c746a918.html" title=" " alt="" coords="5,5,241,91"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_46.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_result_00_01_t_value_00_01_t_is_enabled_00_01is__throwable_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_result_00_01_t_value_00_01_t_is_enabled_00_01is__throwable_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01_t_result_00_01_t_value_00_01_t_is_enabled_00_01is__throwable_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert.html" title=" " alt="" coords="5,5,211,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_47.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint16__t_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint16__t_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint16__t_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint16__t_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_48.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint32__t_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint32__t_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint32__t_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint32__t_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_49.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint64__t_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint64__t_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint64__t_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint64__t_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_50.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint8__t_00_01std_1_1string_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint8__t_00_01std_1_1string_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint8__t_00_01std_1_1string_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_3_01uint8__t_00_01std_1_1string_01_4.html" title=" " alt="" coords="5,5,185,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_51.png" border="0" usemap="#airidium_1_1convertion_1_1implementation_1_1_t_convert_policy_3_01_t_result_00_01_t_value_00_01_t_is_enabled_00_01is__throwable_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1convertion_1_1implementation_1_1_t_convert_policy_3_01_t_result_00_01_t_value_00_01_t_is_enabled_00_01is__throwable_01_4" id="airidium_1_1convertion_1_1implementation_1_1_t_convert_policy_3_01_t_result_00_01_t_value_00_01_t_is_enabled_00_01is__throwable_01_4">
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1_t_convert_policy.html" title=" " alt="" coords="5,5,190,76"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_52.png" border="0" usemap="#airidium_1_1db_1_1sql_1_1_query" loading="lazy" alt=""/>
 <map name="airidium_1_1db_1_1sql_1_1_query" id="airidium_1_1db_1_1sql_1_1_query">
-<area shape="rect" href="classiridium_1_1db_1_1sql_1_1_query.html" title="Представляет SQL&#45;запрос, потенциально для построения и манипулирования. В текущем определении этот кл..." alt="" coords="5,5,155,31"/>
+<area shape="rect" href="classiridium_1_1db_1_1sql_1_1_query.html" title=" " alt="" coords="5,5,155,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_4.png" border="0" usemap="#airidium_1_1io_1_1_event" alt=""/>
+<tr><td><img src="inherit_graph_53.png" border="0" usemap="#airidium_1_1dp_1_1_broadcaster_3_01_t_receiver_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1dp_1_1_broadcaster_3_01_t_receiver_01_4" id="airidium_1_1dp_1_1_broadcaster_3_01_t_receiver_01_4">
+<area shape="rect" href="classiridium_1_1dp_1_1_broadcaster.html" title=" " alt="" coords="5,5,165,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_54.png" border="0" usemap="#airidium_1_1dp_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1dp_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4" id="airidium_1_1dp_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4">
+<area shape="rect" href="classiridium_1_1dp_1_1_f_s_m.html" title=" " alt="" coords="5,5,178,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_55.png" border="0" usemap="#airidium_1_1dp_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4_1_1_t_transition" loading="lazy" alt=""/>
+<map name="airidium_1_1dp_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4_1_1_t_transition" id="airidium_1_1dp_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4_1_1_t_transition">
+<area shape="rect" href="structiridium_1_1dp_1_1_f_s_m_1_1_t_transition.html" title=" " alt="" coords="5,5,178,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_56.png" border="0" usemap="#airidium_1_1dp_1_1_i_observer_3_01_t_event_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1dp_1_1_i_observer_3_01_t_event_01_4" id="airidium_1_1dp_1_1_i_observer_3_01_t_event_01_4">
+<area shape="rect" href="classiridium_1_1dp_1_1_i_observer.html" title=" " alt="" coords="5,5,152,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_57.png" border="0" usemap="#airidium_1_1dp_1_1_i_prototype_3_01_i_node_type_3_01_t_value_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1dp_1_1_i_prototype_3_01_i_node_type_3_01_t_value_01_4_01_4" id="airidium_1_1dp_1_1_i_prototype_3_01_i_node_type_3_01_t_value_01_4_01_4">
+<area shape="rect" href="classiridium_1_1dp_1_1_i_prototype.html" title=" " alt="" coords="5,5,178,46"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="226,5,406,46"/>
+<area shape="poly" title=" " alt="" coords="193,23,228,25,223,26,193,28"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title=" " alt="" coords="454,5,659,46"/>
+<area shape="poly" title=" " alt="" coords="422,23,456,26,451,26,422,28"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_58.png" border="0" usemap="#airidium_1_1dp_1_1_i_prototype_3_01_t_subject_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1dp_1_1_i_prototype_3_01_t_subject_01_4" id="airidium_1_1dp_1_1_i_prototype_3_01_t_subject_01_4">
+<area shape="rect" href="classiridium_1_1dp_1_1_i_prototype.html" title=" " alt="" coords="5,39,155,79"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="203,5,383,46"/>
+<area shape="poly" title=" " alt="" coords="169,42,205,39,200,41,170,48"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="203,71,383,111"/>
+<area shape="poly" title=" " alt="" coords="170,70,205,77,199,78,170,75"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title=" " alt="" coords="431,5,641,46"/>
+<area shape="poly" title=" " alt="" coords="399,23,433,25,428,26,399,28"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_59.png" border="0" usemap="#airidium_1_1io_1_1_event" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1_event" id="airidium_1_1io_1_1_event">
-<area shape="rect" href="structiridium_1_1io_1_1_event.html" title="Представляет событие ввода&#45;вывода, связанное с потоком. Эта структура инкапсулирует информацию о собы..." alt="" coords="5,5,125,31"/>
+<area shape="rect" href="structiridium_1_1io_1_1_event.html" title=" " alt="" coords="5,5,125,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_5.png" border="0" usemap="#airidium_1_1io_1_1fs_1_1_file_value_3_01_t_value_01_4" alt=""/>
+<tr><td><img src="inherit_graph_60.png" border="0" usemap="#airidium_1_1io_1_1fs_1_1_file_value_3_01_t_value_01_4" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1fs_1_1_file_value_3_01_t_value_01_4" id="airidium_1_1io_1_1fs_1_1_file_value_3_01_t_value_01_4">
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title="Шаблонный класс, представляющий значение, сохраняемое в файле. Значение загружается из указанного фай..." alt="" coords="5,5,163,46"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_file_value.html" title=" " alt="" coords="5,5,163,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_6.png" border="0" usemap="#airidium_1_1io_1_1fs_1_1_t_file_status" alt=""/>
+<tr><td><img src="inherit_graph_61.png" border="0" usemap="#airidium_1_1io_1_1fs_1_1_t_file_status" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1fs_1_1_t_file_status" id="airidium_1_1io_1_1fs_1_1_t_file_status">
-<area shape="rect" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html" title="Структура, содержащая информацию о состоянии файла. Включает время последнего изменения и размер файл..." alt="" coords="5,5,177,31"/>
+<area shape="rect" href="structiridium_1_1io_1_1fs_1_1_t_file_status.html" title=" " alt="" coords="5,5,177,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_7.png" border="0" usemap="#airidium_1_1io_1_1_i_pipe_streams" alt=""/>
+<tr><td><img src="inherit_graph_62.png" border="0" usemap="#airidium_1_1io_1_1_i_acceptor" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1_i_acceptor" id="airidium_1_1io_1_1_i_acceptor">
+<area shape="rect" href="classiridium_1_1io_1_1_i_acceptor.html" title=" " alt="" coords="5,5,147,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_63.png" border="0" usemap="#airidium_1_1io_1_1_i_context_actions_1_1_t_action" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1_i_context_actions_1_1_t_action" id="airidium_1_1io_1_1_i_context_actions_1_1_t_action">
+<area shape="rect" href="structiridium_1_1io_1_1_i_context_actions_1_1_t_action.html" title=" " alt="" coords="5,5,185,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_64.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_multiplexer_base" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1implementation_1_1_c_multiplexer_base" id="airidium_1_1io_1_1implementation_1_1_c_multiplexer_base">
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_multiplexer_base.html" title=" " alt="" coords="5,5,179,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_65.png" border="0" usemap="#airidium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle" id="airidium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle">
+<area shape="rect" href="structiridium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle.html" title=" " alt="" coords="5,5,251,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_66.png" border="0" usemap="#airidium_1_1io_1_1_i_pipe_streams" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1_i_pipe_streams" id="airidium_1_1io_1_1_i_pipe_streams">
-<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_streams.html" title="Интерфейс для доступа к потокам чтения и записи каналоподобной структуры. Предоставляет методы для по..." alt="" coords="14,5,178,31"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_pipe.html" title="Интерфейс, представляющий канал, объединяющий возможности доступа к потокам и передачи данных...." alt="" coords="235,31,350,56"/>
-<area shape="poly" title=" " alt="" coords="194,28,235,33,234,39,193,33"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_pipe.html" title="Конкретная реализация интерфейса IPipe. CPipe действует как канал, обычно между логическим потоком (п..." alt="" coords="398,23,571,64"/>
-<area shape="poly" title=" " alt="" coords="366,41,397,41,397,46,366,46"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_transmitter.html" title="Интерфейс для передачи данных, обычно в ответ на событие. Это предполагает компонент,..." alt="" coords="5,55,187,80"/>
-<area shape="poly" title=" " alt="" coords="202,52,234,48,234,53,202,57"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_streams.html" title=" " alt="" coords="14,5,178,31"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe.html" title=" " alt="" coords="235,31,350,56"/>
+<area shape="poly" title=" " alt="" coords="193,28,237,36,232,36,194,33"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_pipe.html" title=" " alt="" coords="398,23,571,64"/>
+<area shape="poly" title=" " alt="" coords="366,41,400,43,395,44,366,46"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_transmitter.html" title=" " alt="" coords="5,55,187,80"/>
+<area shape="poly" title=" " alt="" coords="202,52,237,50,231,51,202,57"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_8.png" border="0" usemap="#airidium_1_1io_1_1_i_protocol" alt=""/>
+<tr><td><img src="inherit_graph_67.png" border="0" usemap="#airidium_1_1io_1_1_i_protocol" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1_i_protocol" id="airidium_1_1io_1_1_i_protocol">
-<area shape="rect" href="classiridium_1_1io_1_1_i_protocol.html" title="Интерфейс для обработчика протокола. Обработчик протокола отвечает за реализацию логики конкретного п..." alt="" coords="5,5,143,31"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_protocol.html" title=" " alt="" coords="5,5,143,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_9.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1_i_content_storage" alt=""/>
+<tr><td><img src="inherit_graph_68.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1_i_content_storage" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1protocol_1_1http_1_1_i_content_storage" id="airidium_1_1io_1_1protocol_1_1http_1_1_i_content_storage">
-<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1_i_content_storage.html" title="Интерфейс для системы хранения контента, используемый для получения HTTP&#45;контента (например,..." alt="" coords="5,13,160,54"/>
-<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html" title="Конкретная реализация IContentStorage, которая обслуживает контент из локального каталога файловой си..." alt="" coords="208,5,355,61"/>
-<area shape="poly" title=" " alt="" coords="175,30,207,30,207,36,175,36"/>
+<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1_i_content_storage.html" title=" " alt="" coords="5,13,160,54"/>
+<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_c_content_storage.html" title=" " alt="" coords="208,5,355,61"/>
+<area shape="poly" title=" " alt="" coords="175,31,210,33,205,33,175,36"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_10.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line" alt=""/>
+<tr><td><img src="inherit_graph_69.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line" id="airidium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line">
-<area shape="rect" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html" title="Представляет первую строку HTTP&#45;запроса, также известную как строка запроса." alt="" coords="5,5,201,46"/>
+<area shape="rect" href="structiridium_1_1io_1_1protocol_1_1http_1_1request_1_1_t_message_line.html" title=" " alt="" coords="5,5,201,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_11.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date" alt=""/>
+<tr><td><img src="inherit_graph_70.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date" id="airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date">
-<area shape="rect" href="structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date.html" title="Представляет дату и время HTTP, обычно для заголовков типа &quot;Date&quot; или &quot;Last&#45;Modified&quot;." alt="" coords="5,5,197,46"/>
+<area shape="rect" href="structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date.html" title=" " alt="" coords="5,5,197,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_12.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line" alt=""/>
+<tr><td><img src="inherit_graph_71.png" border="0" usemap="#airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line" id="airidium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line">
-<area shape="rect" href="structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line.html" title="Представляет первую строку HTTP&#45;ответа, также известную как строка состояния." alt="" coords="5,5,211,46"/>
+<area shape="rect" href="structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_message_line.html" title=" " alt="" coords="5,5,211,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_13.png" border="0" usemap="#airidium_1_1io_1_1_u_r_i" alt=""/>
+<tr><td><img src="inherit_graph_72.png" border="0" usemap="#airidium_1_1io_1_1_t_event" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1_t_event" id="airidium_1_1io_1_1_t_event">
+<area shape="rect" href="structiridium_1_1io_1_1_t_event.html" title=" " alt="" coords="5,5,133,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_73.png" border="0" usemap="#airidium_1_1io_1_1_t_pipe" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1_t_pipe" id="airidium_1_1io_1_1_t_pipe">
+<area shape="rect" href="structiridium_1_1io_1_1_t_pipe.html" title=" " alt="" coords="5,5,125,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_74.png" border="0" usemap="#airidium_1_1io_1_1_t_stream" loading="lazy" alt=""/>
+<map name="airidium_1_1io_1_1_t_stream" id="airidium_1_1io_1_1_t_stream">
+<area shape="rect" href="structiridium_1_1io_1_1_t_stream.html" title=" " alt="" coords="5,5,141,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_75.png" border="0" usemap="#airidium_1_1io_1_1_u_r_i" loading="lazy" alt=""/>
 <map name="airidium_1_1io_1_1_u_r_i" id="airidium_1_1io_1_1_u_r_i">
-<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир..." alt="" coords="5,5,115,31"/>
+<area shape="rect" href="classiridium_1_1io_1_1_u_r_i.html" title=" " alt="" coords="5,5,115,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_14.png" border="0" usemap="#airidium_1_1logging_1_1_log_stream" alt=""/>
+<tr><td><img src="inherit_graph_76.png" border="0" usemap="#airidium_1_1logging_1_1_log_stream" loading="lazy" alt=""/>
 <map name="airidium_1_1logging_1_1_log_stream" id="airidium_1_1logging_1_1_log_stream">
-<area shape="rect" href="structiridium_1_1logging_1_1_log_stream.html" title="Представляет активный поток для конструирования сообщения журнала. Объект этого типа обычно создается..." alt="" coords="5,5,185,31"/>
+<area shape="rect" href="structiridium_1_1logging_1_1_log_stream.html" title=" " alt="" coords="5,5,185,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_15.png" border="0" usemap="#airidium_1_1logging_1_1_log_stream_dummy" alt=""/>
+<tr><td><img src="inherit_graph_77.png" border="0" usemap="#airidium_1_1logging_1_1_log_stream_dummy" loading="lazy" alt=""/>
 <map name="airidium_1_1logging_1_1_log_stream_dummy" id="airidium_1_1logging_1_1_log_stream_dummy">
-<area shape="rect" href="structiridium_1_1logging_1_1_log_stream_dummy.html" title="Потоковый объект&#45;пустышка для логирования. Эта структура используется для уровней логирования,..." alt="" coords="5,5,185,46"/>
+<area shape="rect" href="structiridium_1_1logging_1_1_log_stream_dummy.html" title=" " alt="" coords="5,5,185,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" usemap="#airidium_1_1logging_1_1_t_event" alt=""/>
+<tr><td><img src="inherit_graph_78.png" border="0" usemap="#airidium_1_1logging_1_1_t_event" loading="lazy" alt=""/>
 <map name="airidium_1_1logging_1_1_t_event" id="airidium_1_1logging_1_1_t_event">
-<area shape="rect" href="structiridium_1_1logging_1_1_t_event.html" title="Представляет одно событие или сообщение журнала. Эта структура инкапсулирует всю информацию,..." alt="" coords="5,5,164,31"/>
+<area shape="rect" href="structiridium_1_1logging_1_1_t_event.html" title=" " alt="" coords="5,5,164,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" usemap="#airidium_1_1parsing_1_1_i_parser" alt=""/>
+<tr><td><img src="inherit_graph_79.png" border="0" usemap="#airidium_1_1parsing_1_1_i_parser" loading="lazy" alt=""/>
 <map name="airidium_1_1parsing_1_1_i_parser" id="airidium_1_1parsing_1_1_i_parser">
-<area shape="rect" href="classiridium_1_1parsing_1_1_i_parser.html" title="Интерфейс для парсеров и компоновщиков (сериализаторов) данных. Парсеры отвечают за преобразование ст..." alt="" coords="5,78,165,104"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_h_t_t_p_parser.html" title="Конкретная реализация парсера для HTTP&#45;сообщений. Этот класс предоставляет функциональность для разбо..." alt="" coords="213,5,418,46"/>
-<area shape="poly" title=" " alt="" coords="147,71,240,44,242,49,148,76"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html" title="Конкретная реализация парсера для данных в формате JSON (JavaScript Object Notation)...." alt="" coords="213,71,418,111"/>
-<area shape="poly" title=" " alt="" coords="180,88,212,88,212,94,180,94"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html" title="Конкретная реализация парсера для данных в формате XML (eXtensible Markup Language)...." alt="" coords="213,136,418,177"/>
-<area shape="poly" title=" " alt="" coords="148,106,242,133,240,138,147,111"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_i_parser.html" title=" " alt="" coords="5,46,165,72"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_j_s_o_n_parser.html" title=" " alt="" coords="213,5,418,46"/>
+<area shape="poly" title=" " alt="" coords="180,43,215,40,210,41,181,48"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html" title=" " alt="" coords="213,71,418,111"/>
+<area shape="poly" title=" " alt="" coords="181,70,215,76,210,77,180,75"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_18.png" border="0" usemap="#airidium_1_1parsing_1_1serialization_1_1_node_view_3_01_t_value_01_4" alt=""/>
-<map name="airidium_1_1parsing_1_1serialization_1_1_node_view_3_01_t_value_01_4" id="airidium_1_1parsing_1_1serialization_1_1_node_view_3_01_t_value_01_4">
-<area shape="rect" href="classiridium_1_1parsing_1_1serialization_1_1_node_view.html" title="Предоставляет типизированное представление или обертку над базовым объектом INode...." alt="" coords="5,5,192,46"/>
+<tr><td><img src="inherit_graph_80.png" border="0" usemap="#airidium_1_1parsing_1_1_schema_node_3_01schema__type_00_01_t_args_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_schema_node_3_01schema__type_00_01_t_args_01_4" id="airidium_1_1parsing_1_1_schema_node_3_01schema__type_00_01_t_args_01_4">
+<area shape="rect" href="classiridium_1_1parsing_1_1_schema_node.html" title=" " alt="" coords="5,5,202,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_19.png" border="0" usemap="#airidium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4" alt=""/>
-<map name="airidium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4" id="airidium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4">
-<area shape="rect" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_3_01void_01_4.html" title="Специализация NodeView для безузловых узлов (тип значения void). Обычно используется как базовый клас..." alt="" coords="5,5,192,46"/>
+<tr><td><img src="inherit_graph_81.png" border="0" usemap="#airidium_1_1parsing_1_1_schema_node_base" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_schema_node_base" id="airidium_1_1parsing_1_1_schema_node_base">
+<area shape="rect" href="classiridium_1_1parsing_1_1_schema_node_base.html" title=" " alt="" coords="5,85,171,126"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_01_4.html" title=" " alt="" coords="227,5,432,61"/>
+<area shape="poly" title=" " alt="" coords="171,78,236,60,232,63,174,83"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html" title=" " alt="" coords="219,85,440,126"/>
+<area shape="poly" title=" " alt="" coords="186,103,221,104,215,106,187,108"/>
+<area shape="rect" href="classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_01_4.html" title=" " alt="" coords="228,149,430,205"/>
+<area shape="poly" title=" " alt="" coords="173,128,236,148,231,149,172,133"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_20.png" border="0" usemap="#airidium_1_1parsing_1_1serialization_1_1_node_view_list_3_01_t_node_view_01_4" alt=""/>
-<map name="airidium_1_1parsing_1_1serialization_1_1_node_view_list_3_01_t_node_view_01_4" id="airidium_1_1parsing_1_1serialization_1_1_node_view_list_3_01_t_node_view_01_4">
-<area shape="rect" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_list.html" title="Представляет список объектов NodeView определенного типа TNodeView. Этот класс предоставляет интерфей..." alt="" coords="5,5,208,46"/>
+<tr><td><img src="inherit_graph_82.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01schema__type_00_01_t_value_type_00_01_enable_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01schema__type_00_01_t_value_type_00_01_enable_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01schema__type_00_01_t_value_type_00_01_enable_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint.html" title=" " alt="" coords="5,5,197,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_21.png" border="0" usemap="#airidium_1_1parsing_1_1serialization_1_1_node_view_ptr_3_01_t_node_view_01_4" alt=""/>
-<map name="airidium_1_1parsing_1_1serialization_1_1_node_view_ptr_3_01_t_node_view_01_4" id="airidium_1_1parsing_1_1serialization_1_1_node_view_ptr_3_01_t_node_view_01_4">
-<area shape="rect" href="classiridium_1_1parsing_1_1serialization_1_1_node_view_ptr.html" title="Обертка для лениво инициализируемого разделяемого указателя на TNodeView. Используется для опциональн..." alt="" coords="5,5,204,46"/>
+<tr><td><img src="inherit_graph_83.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std_1_1enable__if__t_3_01_9std_1_1is__base__of__v_3_01_schema_node_base_00_01_t_item_01_4_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std_1_1enable__if__t_3_01_9std_1_1is__base__of__v_3_01_schema_node_base_00_01_t_item_01_4_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std_1_1enable__if__t_3_01_9std_1_1is__base__of__v_3_01_schema_node_base_00_01_t_item_01_4_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std2c1d1df2749bc0e9fa289bd923fc3d9b.html" title=" " alt="" coords="5,5,221,91"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_22.png" border="0" usemap="#airidium_1_1pattern_1_1_broadcaster_3_01_t_receiver_01_4" alt=""/>
-<map name="airidium_1_1pattern_1_1_broadcaster_3_01_t_receiver_01_4" id="airidium_1_1pattern_1_1_broadcaster_3_01_t_receiver_01_4">
-<area shape="rect" href="classiridium_1_1pattern_1_1_broadcaster.html" title="Шаблон класса, реализующий роль вещателя (или субъекта) в шаблоне, подобном &quot;Наблюдателю&quot;...." alt="" coords="5,5,191,46"/>
+<tr><td><img src="inherit_graph_84.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std_1_1enable__if__t_3_01std_1_1is__base__of__v_3_01_schema_node_base_00_01_t_item_01_4_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std_1_1enable__if__t_3_01std_1_1is__base__of__v_3_01_schema_node_base_00_01_t_item_01_4_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01std_1_1enable__if__t_3_01std_1_1is__base__of__v_3_01_schema_node_base_00_01_t_item_01_4_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_00_01stdedf88f40b5953fc4084ea0f801679fc3.html" title=" " alt="" coords="5,5,221,91"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_23.png" border="0" usemap="#airidium_1_1pattern_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4" alt=""/>
-<map name="airidium_1_1pattern_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4" id="airidium_1_1pattern_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4">
-<area shape="rect" href="classiridium_1_1pattern_1_1_f_s_m.html" title=" " alt="" coords="5,5,149,46"/>
+<tr><td><img src="inherit_graph_85.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html" title=" " alt="" coords="5,5,196,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_24.png" border="0" usemap="#airidium_1_1pattern_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4_1_1_t_transition" alt=""/>
-<map name="airidium_1_1pattern_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4_1_1_t_transition" id="airidium_1_1pattern_1_1_f_s_m_3_01_t_state_00_01_t_event_01_4_1_1_t_transition">
-<area shape="rect" href="structiridium_1_1pattern_1_1_f_s_m_1_1_t_transition.html" title=" " alt="" coords="5,5,213,46"/>
+<tr><td><img src="inherit_graph_86.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_arithmetic_3_01_t_value_type_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_arithmetic_3_01_t_value_type_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_arithmetic_3_01_t_value_type_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_0098091abc10b179f3931c69c97a4a8edd.html" title=" " alt="" coords="5,5,273,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_25.png" border="0" usemap="#airidium_1_1pattern_1_1_i_observer_3_01_t_event_01_4" alt=""/>
-<map name="airidium_1_1pattern_1_1_i_observer_3_01_t_event_01_4" id="airidium_1_1pattern_1_1_i_observer_3_01_t_event_01_4">
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_observer.html" title="Интерфейс для &#39;Наблюдателя&#39; в рамках шаблона проектирования &quot;Наблюдатель&quot;. Объекты,..." alt="" coords="5,5,178,46"/>
+<tr><td><img src="inherit_graph_87.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_bool_3_01_t_value_type_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_bool_3_01_t_value_type_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_bool_3_01_t_value_type_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_002a7bbb814dfddc16cc166872bbc882df.html" title=" " alt="" coords="5,5,253,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_26.png" border="0" usemap="#airidium_1_1pattern_1_1_i_prototype_3_01_i_node_type_3_01_t_value_01_4_01_4" alt=""/>
-<map name="airidium_1_1pattern_1_1_i_prototype_3_01_i_node_type_3_01_t_value_01_4_01_4" id="airidium_1_1pattern_1_1_i_prototype_3_01_i_node_type_3_01_t_value_01_4_01_4">
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_prototype.html" title=" " alt="" coords="5,5,181,46"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1_i_node_type.html" title="Интерфейс для обобщенного узла в древовидной структуре, параметризованный типом его значения...." alt="" coords="229,5,409,46"/>
-<area shape="poly" title=" " alt="" coords="197,23,228,23,228,28,197,28"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title="Конкретная реализация интерфейса INodeType. Этот шаблон класса предоставляет полную реализацию для уз..." alt="" coords="457,5,662,46"/>
-<area shape="poly" title=" " alt="" coords="425,23,456,23,456,28,425,28"/>
+<tr><td><img src="inherit_graph_88.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_enum_3_01_t_value_type_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_enum_3_01_t_value_type_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_enum_3_01_t_value_type_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00ba131dc9fb4f783508eede533cc69847.html" title=" " alt="" coords="5,5,253,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_27.png" border="0" usemap="#airidium_1_1pattern_1_1_i_prototype_3_01_t_subject_01_4" alt=""/>
-<map name="airidium_1_1pattern_1_1_i_prototype_3_01_t_subject_01_4" id="airidium_1_1pattern_1_1_i_prototype_3_01_t_subject_01_4">
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_prototype.html" title="Интерфейс для шаблона проектирования &quot;Прототип&quot;. Этот шаблон позволяет создавать новые объекты путем ..." alt="" coords="5,39,181,79"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="229,5,409,46"/>
-<area shape="poly" title=" " alt="" coords="196,41,228,36,229,42,197,46"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1_i_node_type.html" title=" " alt="" coords="229,71,409,111"/>
-<area shape="poly" title=" " alt="" coords="197,71,229,76,228,81,196,76"/>
-<area shape="rect" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html" title=" " alt="" coords="457,5,662,46"/>
-<area shape="poly" title=" " alt="" coords="425,23,456,23,456,28,425,28"/>
+<tr><td><img src="inherit_graph_89.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_other_3_01_t_value_type_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_other_3_01_t_value_type_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_other_3_01_t_value_type_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00833a956f703e502b984de3a9192ce309.html" title=" " alt="" coords="5,5,253,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_28.png" border="0" usemap="#airidium_1_1system_1_1_i_process_1_1_t_state" alt=""/>
+<tr><td><img src="inherit_graph_90.png" border="0" usemap="#airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_string_3_01_t_value_type_01_4_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_string_3_01_t_value_type_01_4_01_4" id="airidium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00_01detail_1_1_t_value_string_3_01_t_value_type_01_4_01_4">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00caec390c1eb2a9f7f0036412fc0e1523.html" title=" " alt="" coords="5,5,253,61"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_91.png" border="0" usemap="#airidium_1_1parsing_1_1_t_schema_value" loading="lazy" alt=""/>
+<map name="airidium_1_1parsing_1_1_t_schema_value" id="airidium_1_1parsing_1_1_t_schema_value">
+<area shape="rect" href="structiridium_1_1parsing_1_1_t_schema_value.html" title=" " alt="" coords="5,5,179,46"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_92.png" border="0" usemap="#airidium_1_1system_1_1_i_process_1_1_t_state" loading="lazy" alt=""/>
 <map name="airidium_1_1system_1_1_i_process_1_1_t_state" id="airidium_1_1system_1_1_i_process_1_1_t_state">
-<area shape="rect" href="structiridium_1_1system_1_1_i_process_1_1_t_state.html" title="Определяет общие элементы интерфейса для IProcess, такие как typedef&#45;ы умных указателей (TSharedPtr,..." alt="" coords="5,5,176,46"/>
+<area shape="rect" href="structiridium_1_1system_1_1_i_process_1_1_t_state.html" title=" " alt="" coords="5,5,176,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_29.png" border="0" usemap="#airidium_1_1system_1_1_shell_1_1_t_result" alt=""/>
+<tr><td><img src="inherit_graph_93.png" border="0" usemap="#airidium_1_1system_1_1_shell_1_1_t_result" loading="lazy" alt=""/>
 <map name="airidium_1_1system_1_1_shell_1_1_t_result" id="airidium_1_1system_1_1_shell_1_1_t_result">
 <area shape="rect" href="structiridium_1_1system_1_1_shell_1_1_t_result.html" title=" " alt="" coords="5,5,153,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_30.png" border="0" usemap="#airidium_1_1testing_1_1_exception" alt=""/>
+<tr><td><img src="inherit_graph_94.png" border="0" usemap="#airidium_1_1testing_1_1_exception" loading="lazy" alt=""/>
 <map name="airidium_1_1testing_1_1_exception" id="airidium_1_1testing_1_1_exception">
 <area shape="rect" href="classiridium_1_1testing_1_1_exception.html" title=" " alt="" coords="5,5,178,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_31.png" border="0" usemap="#airidium_1_1testing_1_1_i_test" alt=""/>
-<map name="airidium_1_1testing_1_1_i_test" id="airidium_1_1testing_1_1_i_test">
-<area shape="rect" href="classiridium_1_1testing_1_1_i_test.html" title="Интерфейс для запускаемого тестового случая. Конкретные тестовые классы должны реализовывать этот инт..." alt="" coords="5,5,149,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_32.png" border="0" usemap="#airidium_1_1testing_1_1_i_test_runner" alt=""/>
+<tr><td><img src="inherit_graph_95.png" border="0" usemap="#airidium_1_1testing_1_1_i_test_runner" loading="lazy" alt=""/>
 <map name="airidium_1_1testing_1_1_i_test_runner" id="airidium_1_1testing_1_1_i_test_runner">
-<area shape="rect" href="classiridium_1_1testing_1_1_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа..." alt="" coords="5,17,191,42"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_i_test_runner.html" title=" " alt="" coords="5,17,191,42"/>
 <area shape="rect" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html" title=" " alt="" coords="239,5,441,46"/>
-<area shape="poly" title=" " alt="" coords="206,25,238,25,238,30,207,31"/>
+<area shape="poly" title=" " alt="" coords="206,25,241,27,236,28,207,31"/>
 <area shape="rect" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_raw.html" title=" " alt="" coords="239,71,441,111"/>
-<area shape="poly" title=" " alt="" coords="167,44,258,68,256,73,166,49"/>
-<area shape="rect" href="class_i_test_runner.html" title="Представляет общий результат выполнения тестового прогона. Эта структура обычно сериализуется в/из фа..." alt="" coords="52,70,144,96"/>
-<area shape="poly" title=" " alt="" coords="158,66,250,44,252,49,160,71"/>
-<area shape="poly" title=" " alt="" coords="159,82,238,85,238,90,159,88"/>
+<area shape="poly" title=" " alt="" coords="167,44,260,69,254,71,166,50"/>
+<area shape="rect" href="class_i_test_runner.html" title=" " alt="" coords="52,70,144,96"/>
+<area shape="poly" title=" " alt="" coords="158,66,254,46,249,47,160,71"/>
+<area shape="poly" title=" " alt="" coords="159,82,241,87,236,88,159,88"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_33.png" border="0" usemap="#airidium_1_1testing_1_1_mock_3_01_t_class_01_4" alt=""/>
+<tr><td><img src="inherit_graph_96.png" border="0" usemap="#airidium_1_1testing_1_1_i_unit_test_case" loading="lazy" alt=""/>
+<map name="airidium_1_1testing_1_1_i_unit_test_case" id="airidium_1_1testing_1_1_i_unit_test_case">
+<area shape="rect" href="classiridium_1_1testing_1_1_i_unit_test_case.html" title=" " alt="" coords="5,5,204,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_97.png" border="0" usemap="#airidium_1_1testing_1_1_mock_3_01_t_class_01_4" loading="lazy" alt=""/>
 <map name="airidium_1_1testing_1_1_mock_3_01_t_class_01_4" id="airidium_1_1testing_1_1_mock_3_01_t_class_01_4">
-<area shape="rect" href="classiridium_1_1testing_1_1_mock.html" title="Базовый класс для создания мок&#45;объектов. Для создания мока для интерфейса или класса TClass,..." alt="" coords="5,5,152,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_mock.html" title=" " alt="" coords="5,5,152,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_34.png" border="0" usemap="#airidium_1_1testing_1_1_mock_3_01_t_class_01_4_1_1_behavior_3_01_t_result_00_01_t_args_01_4" alt=""/>
-<map name="airidium_1_1testing_1_1_mock_3_01_t_class_01_4_1_1_behavior_3_01_t_result_00_01_t_args_01_4" id="airidium_1_1testing_1_1_mock_3_01_t_class_01_4_1_1_behavior_3_01_t_result_00_01_t_args_01_4">
-<area shape="rect" href="classiridium_1_1testing_1_1_mock_1_1_behavior.html" title="Представляет ожидаемое поведение для мокированного метода. Экземпляры этого класса обычно создаются и..." alt="" coords="5,5,160,61"/>
+<tr><td><img src="inherit_graph_98.png" border="0" usemap="#airidium_1_1testing_1_1_mock_3_01_t_class_01_4_1_1_behavior_3_01_t_method_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1testing_1_1_mock_3_01_t_class_01_4_1_1_behavior_3_01_t_method_01_4" id="airidium_1_1testing_1_1_mock_3_01_t_class_01_4_1_1_behavior_3_01_t_method_01_4">
+<area shape="rect" href="classiridium_1_1testing_1_1_mock_1_1_behavior.html" title=" " alt="" coords="5,5,160,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_35.png" border="0" usemap="#airidium_1_1testing_1_1_mock_sequence_3_01_t_class_mock_01_4" alt=""/>
+<tr><td><img src="inherit_graph_99.png" border="0" usemap="#airidium_1_1testing_1_1_mock_sequence_3_01_t_class_mock_01_4" loading="lazy" alt=""/>
 <map name="airidium_1_1testing_1_1_mock_sequence_3_01_t_class_mock_01_4" id="airidium_1_1testing_1_1_mock_sequence_3_01_t_class_mock_01_4">
-<area shape="rect" href="classiridium_1_1testing_1_1_mock_sequence.html" title="Предварительное объявление для шаблонного класса MockSequence." alt="" coords="5,5,210,46"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_mock_sequence.html" title=" " alt="" coords="5,5,210,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_36.png" border="0" usemap="#airidium_1_1testing_1_1_t_cmd_args" alt=""/>
+<tr><td><img src="inherit_graph_100.png" border="0" usemap="#airidium_1_1testing_1_1_t_cmd_args" loading="lazy" alt=""/>
 <map name="airidium_1_1testing_1_1_t_cmd_args" id="airidium_1_1testing_1_1_t_cmd_args">
 <area shape="rect" href="structiridium_1_1testing_1_1_t_cmd_args.html" title=" " alt="" coords="5,5,183,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_37.png" border="0" usemap="#airidium_1_1testing_1_1_unit_test" alt=""/>
-<map name="airidium_1_1testing_1_1_unit_test" id="airidium_1_1testing_1_1_unit_test">
-<area shape="rect" href="classiridium_1_1testing_1_1_unit_test.html" title=" " alt="" coords="5,5,169,31"/>
+<tr><td><img src="inherit_graph_101.png" border="0" usemap="#airidium_1_1testing_1_1_unit_test_case" loading="lazy" alt=""/>
+<map name="airidium_1_1testing_1_1_unit_test_case" id="airidium_1_1testing_1_1_unit_test_case">
+<area shape="rect" href="classiridium_1_1testing_1_1_unit_test_case.html" title=" " alt="" coords="5,5,200,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_38.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_popper_3_01_event_1_1_t_shared_ptr_01_4" alt=""/>
+<tr><td><img src="inherit_graph_102.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_popper_3_01_event_1_1_t_shared_ptr_01_4" loading="lazy" alt=""/>
 <map name="airidium_1_1threading_1_1_i_async_queue_popper_3_01_event_1_1_t_shared_ptr_01_4" id="airidium_1_1threading_1_1_i_async_queue_popper_3_01_event_1_1_t_shared_ptr_01_4">
 <area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="5,5,159,61"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="207,45,361,101"/>
-<area shape="poly" title=" " alt="" coords="175,49,207,55,206,60,174,54"/>
+<area shape="poly" title=" " alt="" coords="174,49,209,57,204,58,174,54"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="5,85,159,141"/>
-<area shape="poly" title=" " alt="" coords="174,92,206,86,207,91,175,98"/>
+<area shape="poly" title=" " alt="" coords="174,92,209,88,204,89,175,98"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_39.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_popper_3_01std_1_1string_01_4" alt=""/>
+<tr><td><img src="inherit_graph_103.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_popper_3_01int_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1threading_1_1_i_async_queue_popper_3_01int_01_4" id="airidium_1_1threading_1_1_i_async_queue_popper_3_01int_01_4">
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="5,5,155,61"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="203,53,349,94"/>
+<area shape="poly" title=" " alt="" coords="170,49,205,58,200,59,170,54"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="5,85,155,141"/>
+<area shape="poly" title=" " alt="" coords="169,92,205,87,200,89,170,97"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_104.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_popper_3_01iridium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle_01_4" loading="lazy" alt=""/>
+<map name="airidium_1_1threading_1_1_i_async_queue_popper_3_01iridium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle_01_4" id="airidium_1_1threading_1_1_i_async_queue_popper_3_01iridium_1_1io_1_1implementation_1_1_c_multiplexer_base_1_1_t_stream_to_handle_01_4">
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="5,5,263,76"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="311,53,560,124"/>
+<area shape="poly" title=" " alt="" coords="278,61,313,68,307,69,278,66"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="5,100,263,171"/>
+<area shape="poly" title=" " alt="" coords="278,110,313,108,307,109,279,116"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_105.png" border="0" usemap="#airidium_1_1threading_1_1_i_async_queue_popper_3_01std_1_1string_01_4" loading="lazy" alt=""/>
 <map name="airidium_1_1threading_1_1_i_async_queue_popper_3_01std_1_1string_01_4" id="airidium_1_1threading_1_1_i_async_queue_popper_3_01std_1_1string_01_4">
 <area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="5,5,155,61"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="203,45,349,101"/>
-<area shape="poly" title=" " alt="" coords="170,49,203,56,202,61,169,54"/>
+<area shape="poly" title=" " alt="" coords="170,49,205,58,200,59,170,54"/>
 <area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="5,85,155,141"/>
-<area shape="poly" title=" " alt="" coords="169,92,202,85,203,91,170,97"/>
+<area shape="poly" title=" " alt="" coords="169,92,205,87,200,89,170,97"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_40.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4" alt=""/>
+<tr><td><img src="inherit_graph_106.png" border="0" usemap="#airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4" loading="lazy" alt=""/>
 <map name="airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4" id="airidium_1_1threading_1_1_synchronized_3_01_t_mutex_00_01is__tracable_01_4">
-<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о..." alt="" coords="5,5,174,61"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="5,5,174,61"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_41.png" border="0" usemap="#aruntime__error" alt=""/>
+<tr><td><img src="inherit_graph_107.png" border="0" usemap="#aruntime__error" loading="lazy" alt=""/>
 <map name="aruntime__error" id="aruntime__error">
 <area shape="rect" href="classruntime__error.html" title=" " alt="" coords="18,5,116,31"/>
-<area shape="rect" href="classiridium_1_1db_1_1_exception.html" title="Пользовательский класс исключений для ошибок, связанных с базами данных. Наследуется от std::runtime_..." alt="" coords="177,31,324,56"/>
-<area shape="poly" title=" " alt="" coords="131,24,177,31,176,36,131,30"/>
+<area shape="rect" href="classiridium_1_1db_1_1_exception.html" title=" " alt="" coords="177,31,324,56"/>
+<area shape="poly" title=" " alt="" coords="131,24,179,33,174,34,131,30"/>
 <area shape="rect" title=" " alt="" coords="5,55,129,80"/>
-<area shape="poly" title=" " alt="" coords="144,55,176,51,177,56,144,60"/>
+<area shape="poly" title=" " alt="" coords="144,55,179,53,174,54,144,60"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_42.png" border="0" usemap="#astd_1_1array" alt=""/>
+<tr><td><img src="inherit_graph_108.png" border="0" usemap="#astd_1_1array" loading="lazy" alt=""/>
 <map name="astd_1_1array" id="astd_1_1array">
 <area shape="rect" title=" " alt="" coords="5,31,82,56"/>
-<area shape="rect" href="structiridium_1_1io_1_1_u_r_i_1_1_t_i_pv4.html" title="Представляет IPv4&#45;адрес. Эта структура хранит IPv4&#45;адрес в виде массива из 4 байт." alt="" coords="130,5,282,31"/>
-<area shape="poly" title=" " alt="" coords="97,33,129,27,130,33,98,38"/>
-<area shape="rect" href="structiridium_1_1io_1_1_u_r_i_1_1_t_i_pv6.html" title="Представляет IPv6&#45;адрес. Эта структура хранит IPv6&#45;адрес в виде массива из 8 16&#45;битных целых чисел." alt="" coords="130,55,282,80"/>
-<area shape="poly" title=" " alt="" coords="98,49,130,54,129,59,97,54"/>
+<area shape="rect" href="structiridium_1_1io_1_1_u_r_i_1_1_t_i_pv4.html" title=" " alt="" coords="130,5,282,31"/>
+<area shape="poly" title=" " alt="" coords="97,33,132,29,127,31,98,38"/>
+<area shape="rect" href="structiridium_1_1io_1_1_u_r_i_1_1_t_i_pv6.html" title=" " alt="" coords="130,55,282,80"/>
+<area shape="poly" title=" " alt="" coords="97,49,132,56,127,57,97,54"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_43.png" border="0" usemap="#astd_1_1enable__shared__from__this" alt=""/>
+<tr><td><img src="inherit_graph_109.png" border="0" usemap="#astd_1_1enable__shared__from__this" loading="lazy" alt=""/>
 <map name="astd_1_1enable__shared__from__this" id="astd_1_1enable__shared__from__this">
-<area shape="rect" title=" " alt="" coords="283,55,414,96"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context.html" title="Конкретная реализация IContext и IPipeManager. Этот класс управляет состоянием и событиями для контек..." alt="" coords="537,75,710,116"/>
-<area shape="poly" title=" " alt="" coords="430,79,537,87,536,92,430,84"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title="Интерфейс для извлечения элементов из асинхронной очереди. Этот интерфейс определяет операции для изв..." alt="" coords="23,538,172,594"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="281,611,417,652"/>
-<area shape="poly" title=" " alt="" coords="188,587,281,611,280,616,187,592"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title="Интерфейс для асинхронной очереди, предоставляющий операции добавления и извлечения...." alt="" coords="266,480,432,521"/>
-<area shape="poly" title=" " alt="" coords="187,540,267,519,268,524,188,545"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="262,546,436,586"/>
-<area shape="poly" title=" " alt="" coords="188,564,262,564,262,569,188,569"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title="Конкретная реализация IAsyncQueue&lt;TItem&gt;. Этот класс предоставляет потокобезопасную очередь,..." alt="" coords="518,366,729,422"/>
-<area shape="poly" title=" " alt="" coords="410,472,507,432,538,420,540,425,509,437,412,476"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="520,526,727,566"/>
-<area shape="poly" title=" " alt="" coords="451,556,520,551,520,556,451,561"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="545,1354,702,1410"/>
-<area shape="poly" title=" " alt="" coords="451,587,462,598,479,627,490,663,497,705,499,752,497,857,488,970,479,1084,475,1189,478,1236,484,1277,495,1313,510,1341,526,1356,546,1366,544,1371,523,1360,506,1344,490,1315,479,1278,473,1236,470,1189,473,1083,482,970,491,857,494,752,491,705,485,664,474,629,458,601,447,590"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html" title=" " alt="" coords="522,934,725,990"/>
-<area shape="poly" title=" " alt="" coords="451,587,462,598,488,638,497,678,496,718,489,756,481,795,479,834,487,873,510,914,530,932,526,936,506,917,482,875,474,834,476,794,483,755,490,717,492,679,483,640,458,601,447,591"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html" title="Реализует IWorkerPopper для извлечения элементов, обработанных выделенным рабочим потоком,..." alt="" coords="515,446,732,502"/>
-<area shape="poly" title=" " alt="" coords="435,538,459,530,507,512,539,500,541,505,509,517,461,535,437,543"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="23,1874,172,1930"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="251,1938,446,1978"/>
-<area shape="poly" title=" " alt="" coords="188,1920,255,1935,254,1940,187,1925"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="248,1700,450,1741"/>
-<area shape="poly" title=" " alt="" coords="124,1860,172,1803,203,1775,236,1751,258,1739,261,1744,239,1755,206,1779,176,1807,129,1864"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="547,1594,700,1650"/>
-<area shape="poly" title=" " alt="" coords="439,1693,459,1685,507,1660,546,1644,548,1649,509,1665,461,1690,441,1698"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="547,1674,700,1730"/>
-<area shape="poly" title=" " alt="" coords="465,1710,546,1705,547,1710,466,1716"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html" title="Реализует IWorker для обработки элементов из входной очереди и помещения результатов в выходную очере..." alt="" coords="794,1594,983,1650"/>
-<area shape="poly" title=" " alt="" coords="716,1620,793,1620,793,1625,716,1625"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html" title=" " alt="" coords="787,1297,990,1353"/>
-<area shape="poly" title=" " alt="" coords="713,1596,738,1580,764,1555,789,1526,828,1462,857,1401,876,1352,881,1354,862,1403,833,1465,793,1529,768,1558,741,1584,715,1601"/>
-<area shape="rect" href="class_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="23,788,172,829"/>
-<area shape="poly" title=" " alt="" coords="183,780,188,775,207,745,215,715,214,685,210,655,206,625,207,594,215,563,236,532,264,512,267,517,240,536,220,566,212,595,212,625,216,655,220,685,220,716,212,747,192,778,187,784"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="264,676,434,731"/>
-<area shape="poly" title=" " alt="" coords="177,780,188,775,212,758,236,741,263,729,265,734,239,746,215,762,191,779,180,785"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="281,755,417,796"/>
-<area shape="poly" title=" " alt="" coords="188,794,280,782,281,787,188,800"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="285,886,413,926"/>
-<area shape="poly" title=" " alt="" coords="155,834,239,870,285,886,283,891,237,875,153,839"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="262,820,436,861"/>
-<area shape="poly" title=" " alt="" coords="188,818,262,827,261,832,187,823"/>
-<area shape="poly" title=" " alt="" coords="447,815,458,806,477,778,485,750,485,721,481,693,477,664,478,635,486,606,506,576,519,565,523,569,510,580,491,608,483,636,483,664,486,692,490,721,490,750,482,780,462,809,451,819"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title=" " alt="" coords="522,1014,725,1070"/>
-<area shape="poly" title=" " alt="" coords="451,863,462,872,475,888,483,905,487,937,491,969,498,985,510,1000,525,1012,521,1016,506,1004,493,988,486,971,482,938,478,906,471,891,458,876,447,868"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title="Реализует IWorkerPusher для добавления элементов во внутреннюю очередь, обрабатываемую выделенным раб..." alt="" coords="515,590,732,646"/>
-<area shape="poly" title=" " alt="" coords="447,814,458,806,472,788,479,770,482,733,484,695,492,676,506,656,520,644,524,648,510,660,496,678,490,696,487,733,484,771,477,790,462,809,451,819"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title="Интерфейс для добавления элементов в асинхронную очередь. Этот интерфейс определяет операции для доба..." alt="" coords="23,709,172,765"/>
-<area shape="poly" title=" " alt="" coords="125,695,187,605,208,566,218,549,236,532,264,516,267,521,239,536,222,552,213,568,192,608,130,698"/>
-<area shape="poly" title=" " alt="" coords="188,722,263,712,264,717,188,728"/>
-<area shape="poly" title=" " alt="" coords="188,748,281,762,280,768,187,753"/>
-<area shape="poly" title=" " alt="" coords="186,770,192,775,209,800,216,825,222,848,239,871,261,885,285,894,283,899,259,889,236,875,217,851,210,826,204,802,188,779,183,774"/>
-<area shape="poly" title=" " alt="" coords="181,769,191,775,215,790,239,805,270,817,268,822,236,810,212,795,188,779,179,774"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="23,1684,172,1739"/>
-<area shape="poly" title=" " alt="" coords="126,1751,190,1855,220,1900,239,1923,260,1935,257,1940,236,1927,216,1903,186,1858,121,1754"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="248,1635,450,1676"/>
-<area shape="poly" title=" " alt="" coords="187,1689,254,1674,255,1679,188,1694"/>
-<area shape="poly" title=" " alt="" coords="456,1624,458,1622,475,1597,483,1573,484,1549,482,1524,480,1498,481,1473,488,1447,506,1420,523,1406,543,1395,546,1400,526,1410,510,1424,493,1449,486,1473,485,1498,487,1523,489,1548,488,1574,480,1600,462,1625,460,1627"/>
-<area shape="poly" title=" " alt="" coords="465,1639,546,1629,547,1634,466,1644"/>
-<area shape="poly" title=" " alt="" coords="466,1673,547,1687,546,1692,465,1678"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_context.html" title="Интерфейс для контекста ввода&#45;вывода, отвечающего за управление и диспетчеризацию событий ввода&#45;вывод..." alt="" coords="281,120,416,146"/>
-<area shape="poly" title=" " alt="" coords="432,119,536,105,537,110,432,124"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_context_manager.html" title="Интерфейс для управления коллекцией контекстов ввода&#45;вывода (IContext). Менеджер контекстов отвечает ..." alt="" coords="256,169,442,195"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context_manager.html" title="Конкретная реализация интерфейса IContextManager. Управляет жизненным циклом множества экземпляров IC..." alt="" coords="537,158,710,198"/>
-<area shape="poly" title=" " alt="" coords="457,178,536,177,537,182,457,183"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_initializable.html" title="Интерфейс для объектов, требующих явных шагов инициализации и финализации в их жизненном цикле...." alt="" coords="5,1237,190,1263"/>
-<area shape="poly" title=" " alt="" coords="102,1222,175,903,214,738,235,662,256,646,279,637,281,642,259,651,240,665,219,740,180,904,108,1223"/>
-<area shape="poly" title=" " alt="" coords="103,1221,187,840,193,803,194,769,192,710,194,683,200,655,213,627,236,598,260,580,263,584,240,601,218,630,205,657,199,684,197,710,199,769,198,803,192,841,108,1222"/>
-<area shape="poly" title=" " alt="" coords="102,1278,108,1358,116,1411,128,1468,145,1526,169,1584,200,1638,240,1686,255,1698,252,1702,236,1689,196,1641,164,1587,140,1528,123,1469,110,1412,103,1359,97,1279"/>
-<area shape="poly" title=" " alt="" coords="102,1222,164,958,203,819,221,769,236,742,262,722,265,726,240,745,226,772,208,820,170,959,108,1223"/>
-<area shape="poly" title=" " alt="" coords="96,1221,102,1141,110,1087,122,1029,140,970,164,911,196,856,236,807,256,792,279,782,281,787,259,797,239,811,200,859,169,913,145,971,127,1031,115,1088,108,1141,102,1222"/>
-<area shape="poly" title=" " alt="" coords="101,1222,114,1163,139,1086,156,1045,178,1005,205,968,236,936,258,922,283,912,285,917,261,926,239,940,209,972,183,1008,161,1047,144,1088,119,1164,106,1223"/>
-<area shape="poly" title=" " alt="" coords="98,1221,108,1151,131,1058,148,1007,171,958,200,913,236,872,260,856,263,860,239,876,205,916,176,961,153,1010,136,1059,113,1152,104,1222"/>
-<area shape="poly" title=" " alt="" coords="104,1278,113,1348,136,1440,153,1489,176,1538,205,1582,239,1622,254,1632,251,1637,236,1625,200,1586,171,1540,148,1491,131,1442,108,1349,98,1279"/>
-<area shape="rect" href="classiridium_1_1db_1_1_i_connector.html" title="Интерфейс для коннектора базы данных. Определяет контракт для классов, обеспечивающих подключение к б..." alt="" coords="272,1585,426,1611"/>
-<area shape="poly" title=" " alt="" coords="105,1278,117,1339,141,1419,159,1461,181,1501,207,1539,239,1571,255,1581,273,1588,271,1593,252,1586,236,1575,203,1542,176,1504,154,1463,136,1421,112,1341,100,1279"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_multiplexer.html" title="Интерфейс для мультиплексора событий ввода&#45;вывода. Мультиплексор ввода&#45;вывода позволяет одному потоку..." alt="" coords="273,1765,425,1791"/>
-<area shape="poly" title=" " alt="" coords="105,1278,122,1383,152,1525,170,1597,191,1663,214,1716,240,1751,255,1762,273,1770,271,1775,253,1767,236,1755,210,1718,186,1665,165,1599,146,1527,117,1384,100,1279"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_session_manager.html" title="Интерфейс для управления сессиями обмена данными. Менеджер сессий отвечает за контроль жизненного цик..." alt="" coords="256,1131,442,1156"/>
-<area shape="poly" title=" " alt="" coords="128,1226,177,1194,237,1165,270,1154,272,1159,239,1170,180,1199,131,1230"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title="Базовый интерфейс для потоков ввода&#45;вывода. Предоставляет общие функциональные возможности для всех т..." alt="" coords="283,951,414,976"/>
-<area shape="poly" title=" " alt="" coords="103,1221,118,1171,145,1107,183,1042,208,1012,236,987,258,974,282,966,284,971,260,979,239,991,212,1016,188,1045,150,1109,123,1172,108,1223"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_cache.html" title="Интерфейс для кэша, который хранит строки и извлекает их с использованием числовых идентификаторов...." alt="" coords="276,1180,422,1206"/>
-<area shape="poly" title=" " alt="" coords="171,1231,289,1204,290,1209,173,1236"/>
-<area shape="rect" href="classiridium_1_1logging_1_1_i_sink.html" title="Интерфейс для приемников событий журнала, также известных как аппендеры. Определяет контракт для клас..." alt="" coords="276,1823,422,1848"/>
-<area shape="poly" title=" " alt="" coords="107,1277,167,1565,206,1719,224,1773,240,1802,256,1815,276,1824,274,1828,254,1819,236,1805,219,1775,201,1721,162,1567,102,1279"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1implementation_1_1_c_initializer.html" title="Конкретная реализация IInitializable, управляющая коллекцией других объектов IInitializable...." alt="" coords="247,1066,450,1106"/>
-<area shape="poly" title=" " alt="" coords="117,1223,167,1169,200,1140,236,1116,260,1105,262,1110,239,1120,204,1145,171,1173,121,1227"/>
-<area shape="rect" href="classiridium_1_1system_1_1_shell.html" title=" " alt="" coords="275,1295,422,1320"/>
-<area shape="poly" title=" " alt="" coords="173,1264,290,1291,289,1297,171,1270"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_runnable.html" title=" " alt="" coords="289,1230,409,1270"/>
-<area shape="poly" title=" " alt="" coords="205,1248,288,1248,288,1253,205,1253"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html" title="Интерфейс для объекта потока. Предоставляет базу для реализаций потоков, включая инициализацию,..." alt="" coords="289,1872,409,1913"/>
-<area shape="poly" title=" " alt="" coords="107,1278,179,1609,219,1781,240,1859,262,1875,289,1885,287,1890,260,1880,235,1862,213,1782,174,1610,102,1279"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_1_1_i_handler.html" title=" " alt="" coords="265,1345,432,1401"/>
-<area shape="poly" title=" " alt="" coords="133,1270,182,1300,239,1330,266,1342,264,1347,237,1335,179,1305,130,1274"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper_1_1_i_handler.html" title=" " alt="" coords="268,1425,430,1481"/>
-<area shape="poly" title=" " alt="" coords="117,1275,167,1342,201,1379,239,1411,269,1427,266,1432,236,1415,197,1383,162,1345,113,1278"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher_1_1_i_handler.html" title=" " alt="" coords="268,1505,430,1561"/>
-<area shape="poly" title=" " alt="" coords="110,1276,127,1323,155,1380,192,1439,214,1467,239,1491,269,1509,266,1514,236,1495,210,1470,188,1442,150,1383,122,1325,105,1278"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html" title="Заглушечная реализация IMultiplexer для платформы Emscripten. Все методы в настоящее время выбрасываю..." alt="" coords="537,1754,710,1794"/>
-<area shape="poly" title=" " alt="" coords="441,1774,537,1773,537,1778,441,1779"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html" title="Конкретная реализация ISessionManager. Управляет сеансами ввода&#45;вывода, обычно для сетевых подключени..." alt="" coords="537,1144,710,1185"/>
-<area shape="poly" title=" " alt="" coords="458,1149,537,1155,536,1161,457,1155"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title="Интерфейс для читаемых потоков ввода&#45;вывода. Определяет контракт для потоков, из которых можно читать..." alt="" coords="537,735,710,760"/>
-<area shape="poly" title=" " alt="" coords="428,954,444,946,458,936,473,917,481,897,481,855,482,812,490,790,506,769,535,752,538,757,510,774,494,793,487,813,486,855,486,898,478,919,462,940,447,951,431,958"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title="Интерфейс для записываемых потоков ввода&#45;вывода. Определяет контракт для потоков, в которые можно зап..." alt="" coords="541,784,706,810"/>
-<area shape="poly" title=" " alt="" coords="428,953,458,936,470,923,477,909,481,879,486,848,493,833,506,819,539,801,542,806,510,823,497,836,491,850,487,880,482,910,475,926,462,940,431,957"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title="Базовый интерфейс для файловых потоков. Расширяет общий интерфейс IStream специфичными для файлов опе..." alt="" coords="538,833,709,859"/>
-<area shape="poly" title=" " alt="" coords="429,946,459,936,540,896,602,857,605,862,542,901,461,941,430,951"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title="Базовый класс для реализаций потоков, работающих с нижележащим буфером памяти. Реализует общие методы..." alt="" coords="537,670,710,710"/>
-<area shape="poly" title=" " alt="" coords="428,954,444,947,458,936,477,911,485,885,485,858,482,831,479,804,479,776,487,748,506,720,535,701,538,705,510,724,492,750,484,777,484,803,487,830,490,858,490,885,482,913,462,940,447,951,431,959"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_stream_port.html" title="Интерфейс для дуплексного порта потока ввода&#45;вывода, объединяющий возможности чтения и записи...." alt="" coords="811,788,966,814"/>
-<area shape="poly" title=" " alt="" coords="707,761,822,785,821,790,705,767"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title="Интерфейс для читаемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFileSt..." alt="" coords="803,838,974,878"/>
-<area shape="poly" title=" " alt="" coords="726,762,741,769,757,783,766,797,774,811,789,824,809,835,807,840,786,828,770,814,761,800,753,786,738,774,724,767"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title="Реализует читаемый поток (IStreamReader), который читает из Buffer. Чтение не разрушает исходный буфе..." alt="" coords="802,592,975,633"/>
-<area shape="poly" title=" " alt="" coords="723,728,738,720,754,703,761,684,769,664,786,644,806,631,809,636,789,648,773,667,766,686,758,705,741,724,726,733"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title="Реализует IStreamReader путем композиции списка других экземпляров IStreamReader. Он последовательно ..." alt="" coords="802,723,975,764"/>
-<area shape="poly" title=" " alt="" coords="726,743,802,742,802,747,726,749"/>
-<area shape="rect" href="classiridium_1_1system_1_1_i_process.html" title="Интерфейс для взаимодействия с системным процессом. Определяет методы для получения состояния процесс..." alt="" coords="1049,788,1219,814"/>
-<area shape="poly" title=" " alt="" coords="982,798,1048,798,1048,804,982,804"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title="Конкретная реализация файлового потока, предоставляющая возможности чтения, записи и позиционирования..." alt="" coords="1038,903,1230,944"/>
-<area shape="poly" title=" " alt="" coords="983,880,1055,900,1054,905,982,886"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title="Конкретная реализация файлового потока, специализированная для чтения. Этот класс наследуется от CFil..." alt="" coords="1278,870,1470,910"/>
-<area shape="poly" title=" " alt="" coords="1245,905,1277,901,1278,906,1246,911"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title="Конкретная реализация файлового потока, специализированная для записи. Этот класс наследуется от CFil..." alt="" coords="1278,935,1470,976"/>
-<area shape="poly" title=" " alt="" coords="1246,936,1278,940,1277,945,1245,941"/>
-<area shape="poly" title=" " alt="" coords="722,796,810,797,810,802,722,801"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title="Интерфейс для записываемых файловых потоков. Объединяет специфичные для файлов свойства потока из IFi..." alt="" coords="803,903,974,944"/>
-<area shape="poly" title=" " alt="" coords="722,809,741,819,758,836,766,854,774,871,789,888,810,900,807,905,786,892,769,874,761,856,754,839,738,823,720,814"/>
-<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title="Реализует записываемый поток (IStreamWriter), который пишет в Buffer. Запись добавляет данные в конец..." alt="" coords="802,658,975,698"/>
-<area shape="poly" title=" " alt="" coords="720,780,738,771,753,757,761,742,770,725,786,709,808,697,811,701,789,714,774,729,766,744,757,760,741,775,722,784"/>
-<area shape="poly" title=" " alt="" coords="990,921,1037,921,1037,926,990,926"/>
-<area shape="poly" title=" " alt="" coords="725,848,802,852,802,857,725,853"/>
-<area shape="poly" title=" " alt="" coords="689,861,740,876,821,900,819,905,739,881,688,866"/>
-<area shape="poly" title=" " alt="" coords="715,663,739,656,819,631,821,636,740,661,716,668"/>
-<area shape="poly" title=" " alt="" coords="726,683,801,679,802,685,726,688"/>
-<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html" title="Реализация кэша строк с файловым хранилищем. Этот класс реализует интерфейс ICache,..." alt="" coords="528,1210,720,1250"/>
-<area shape="poly" title=" " alt="" coords="438,1202,528,1214,527,1220,437,1207"/>
-<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title="Предоставляет асинхронную обертку вокруг реализации ISink. Использует рабочий поток для обработки соб..." alt="" coords="522,1950,726,1990"/>
-<area shape="poly" title=" " alt="" coords="438,1846,462,1859,479,1878,487,1898,494,1917,510,1935,530,1947,528,1952,506,1939,489,1919,482,1899,474,1880,458,1863,435,1851"/>
-<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title="Конкретная реализация приемника для вывода сообщений журнала в стандартную консоль/терминал...." alt="" coords="522,1884,726,1925"/>
-<area shape="poly" title=" " alt="" coords="425,1850,461,1858,548,1881,547,1886,459,1863,424,1855"/>
-<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html" title="Конкретная реализация приемника для вывода сообщений журнала в файл, с поддержкой ротации файлов...." alt="" coords="522,1819,726,1860"/>
-<area shape="poly" title=" " alt="" coords="438,1834,521,1835,521,1841,438,1839"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper_runnable.html" title=" " alt="" coords="515,1434,732,1490"/>
-<area shape="poly" title=" " alt="" coords="425,1259,445,1268,462,1280,476,1298,484,1316,487,1351,490,1386,497,1403,510,1420,524,1432,521,1436,506,1424,492,1406,485,1388,482,1352,478,1317,472,1301,458,1284,442,1272,423,1264"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher_runnable.html" title=" " alt="" coords="515,1514,732,1570"/>
-<area shape="poly" title=" " alt="" coords="425,1258,445,1267,462,1280,481,1308,490,1336,490,1364,487,1392,484,1419,485,1446,492,1473,510,1500,523,1512,519,1516,506,1504,487,1475,479,1447,479,1419,482,1391,485,1364,484,1337,477,1311,458,1284,442,1271,423,1262"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_runnable.html" title=" " alt="" coords="508,1274,739,1330"/>
-<area shape="poly" title=" " alt="" coords="425,1262,508,1278,507,1283,424,1267"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title="Конкретная реализация интерфейса IThread. Управляет фактическим std::thread для выполнения задачи IRu..." alt="" coords="536,2130,711,2170"/>
-<area shape="poly" title=" " alt="" coords="425,1901,445,1911,462,1924,479,1949,487,1973,488,1998,487,2022,485,2046,486,2069,493,2092,510,2115,537,2133,534,2138,506,2119,489,2094,481,2070,479,2046,481,2021,483,1998,482,1974,474,1951,458,1928,442,1915,422,1906"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_i_observable.html" title="Интерфейс для &#39;Наблюдаемого объекта&#39; (или &#39;Субъекта&#39;) в рамках шаблона проектирования &quot;Наблюдатель&quot;...." alt="" coords="256,302,442,342"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1implementation_1_1_c_observable.html" title=" " alt="" coords="522,302,725,342"/>
-<area shape="poly" title=" " alt="" coords="457,320,522,320,522,325,457,325"/>
-<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_manager.html" title="Интерфейс для управления именованными каналами. Предоставляет методы для создания,..." alt="" coords="266,5,432,31"/>
-<area shape="poly" title=" " alt="" coords="428,33,461,41,562,72,560,77,459,46,427,38"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_non_copyable.html" title="Служебный базовый класс, делающий производные классы некопируемыми. Путем наследования от NonCopyable..." alt="" coords="252,2203,446,2228"/>
-<area shape="poly" title=" " alt="" coords="365,2188,414,2102,439,2047,457,1990,463,1902,466,1721,470,1207,473,935,479,695,489,517,497,462,506,433,517,421,521,424,510,436,502,463,495,518,485,695,478,935,475,1207,472,1721,469,1902,463,1991,444,2049,419,2105,370,2191"/>
-<area shape="poly" title=" " alt="" coords="366,2188,423,2119,462,2081,507,2051,540,2036,570,2029,625,2027,678,2024,707,2016,738,2000,791,1963,832,1928,866,1893,893,1857,917,1817,939,1772,987,1661,1027,1558,1058,1450,1082,1341,1100,1237,1122,1057,1129,944,1134,945,1127,1057,1106,1238,1088,1342,1063,1451,1032,1559,992,1663,943,1775,921,1820,898,1860,870,1897,836,1932,794,1967,741,2004,709,2021,679,2030,625,2032,571,2034,542,2041,509,2055,465,2086,426,2122,370,2191"/>
-<area shape="poly" title=" " alt="" coords="361,2187,384,2147,417,2099,458,2050,506,2007,539,1989,542,1993,510,2011,462,2053,421,2102,389,2150,366,2190"/>
-<area shape="poly" title=" " alt="" coords="360,2187,427,2051,469,1982,488,1955,506,1936,527,1923,530,1928,510,1940,492,1958,473,1984,432,2054,365,2189"/>
-<area shape="poly" title=" " alt="" coords="420,2196,535,2168,536,2174,421,2201"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="539,2486,708,2526"/>
-<area shape="poly" title=" " alt="" coords="374,2238,417,2292,462,2360,476,2393,481,2421,489,2447,510,2472,540,2490,537,2495,506,2476,485,2449,476,2422,471,2394,458,2362,413,2295,370,2242"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="539,2195,708,2236"/>
-<area shape="poly" title=" " alt="" coords="462,2213,539,2213,539,2218,462,2218"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title=" " alt="" coords="539,2260,708,2301"/>
-<area shape="poly" title=" " alt="" coords="421,2230,539,2258,538,2263,420,2235"/>
-<area shape="rect" href="classiridium_1_1db_1_1implementation_1_1_c_connector.html" title="Базовый класс для реализаций коннекторов баз данных. Этот класс предоставляет общую функциональность,..." alt="" coords="535,2064,712,2105"/>
-<area shape="poly" title=" " alt="" coords="379,2191,437,2153,507,2116,540,2103,542,2108,509,2121,440,2158,382,2196"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_singleton.html" title="Шаблон класса для реализации шаблона проектирования &quot;Одиночка&quot; (Singleton). Этот шаблон гарантирует,..." alt="" coords="539,2326,708,2366"/>
-<area shape="poly" title=" " alt="" coords="382,2235,440,2273,509,2310,542,2323,540,2328,507,2315,437,2278,379,2240"/>
-<area shape="rect" href="classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html" title="Специализация Behavior для константных функций&#45;членов." alt="" coords="530,2391,718,2462"/>
-<area shape="poly" title=" " alt="" coords="371,2239,429,2306,467,2343,510,2376,530,2388,528,2393,506,2380,464,2347,425,2309,367,2242"/>
-<area shape="rect" href="classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html" title="Специализация Behavior для неконстантных функций&#45;членов." alt="" coords="526,2630,722,2686"/>
-<area shape="poly" title=" " alt="" coords="376,2238,421,2291,444,2324,462,2360,475,2398,479,2433,476,2496,475,2526,478,2555,488,2585,510,2616,527,2631,523,2635,506,2620,484,2587,473,2556,469,2526,471,2496,474,2434,470,2399,458,2362,439,2327,417,2294,372,2242"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title="Класс для области видимости блокировки, который захватывает мьютекс объекта Synchronized при создании..." alt="" coords="540,2550,708,2606"/>
-<area shape="poly" title=" " alt="" coords="375,2238,419,2291,443,2325,462,2360,473,2386,477,2411,479,2454,485,2495,494,2515,510,2536,541,2558,537,2562,506,2540,489,2518,480,2496,474,2455,472,2411,468,2388,458,2362,438,2327,415,2295,371,2242"/>
-<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html" title="Класс&#45;одиночка для управления и поиска MIME&#45;типов на основе расширений файлов. Он предварительно загр..." alt="" coords="793,2486,984,2526"/>
-<area shape="poly" title=" " alt="" coords="723,2504,793,2504,793,2509,723,2509"/>
-<area shape="rect" href="classiridium_1_1logging_1_1_logger.html" title="Центральный механизм логирования для приложения. Этот класс реализован как потокобезопасный singleton..." alt="" coords="811,2133,966,2159"/>
-<area shape="poly" title=" " alt="" coords="718,2188,835,2157,837,2162,719,2193"/>
-<area shape="rect" href="classiridium_1_1testing_1_1_tester.html" title="Класс&#45;одиночка, отвечающий за регистрацию, управление и запуск всех тестов в рамках фреймворка...." alt="" coords="813,2268,964,2294"/>
-<area shape="poly" title=" " alt="" coords="724,2278,813,2278,813,2284,724,2284"/>
-<area shape="rect" href="classiridium_1_1pattern_1_1_non_movable.html" title="Служебный базовый класс, предназначенный для того, чтобы делать производные классы неперемещаемыми...." alt="" coords="255,2373,443,2399"/>
-<area shape="poly" title=" " alt="" coords="367,2359,448,2253,506,2181,534,2167,537,2172,510,2186,452,2256,371,2362"/>
-<area shape="poly" title=" " alt="" coords="384,2405,441,2439,509,2472,539,2483,538,2488,507,2477,439,2443,382,2410"/>
-<area shape="poly" title=" " alt="" coords="370,2360,428,2303,466,2273,507,2246,538,2233,540,2238,509,2251,469,2277,432,2307,374,2364"/>
-<area shape="poly" title=" " alt="" coords="389,2364,507,2312,544,2299,546,2304,509,2317,391,2369"/>
-<area shape="poly" title=" " alt="" coords="456,2368,538,2356,539,2361,457,2373"/>
-<area shape="poly" title=" " alt="" coords="457,2399,530,2410,529,2415,457,2405"/>
-<area shape="poly" title=" " alt="" coords="364,2412,385,2456,417,2511,459,2567,510,2616,528,2628,525,2632,506,2620,455,2571,413,2514,381,2459,359,2414"/>
-<area shape="poly" title=" " alt="" coords="372,2410,430,2472,468,2506,509,2536,540,2551,538,2556,507,2540,465,2510,426,2476,368,2413"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="280,222,418,278"/>
-<area shape="poly" title=" " alt="" coords="431,222,458,205,473,191,482,176,491,160,506,144,532,127,559,114,562,119,535,132,510,148,495,163,486,178,477,194,462,210,434,226"/>
-<area shape="poly" title=" " alt="" coords="434,272,462,288,478,305,486,321,495,337,510,352,529,364,526,368,506,356,490,340,482,323,473,308,458,292,431,276"/>
-<area shape="poly" title=" " alt="" coords="432,226,543,196,544,202,434,231"/>
-<area shape="poly" title=" " alt="" coords="434,270,544,299,543,304,432,275"/>
-<area shape="poly" title=" " alt="" coords="434,266,449,275,462,289,475,312,484,340,491,411,490,494,484,583,479,672,478,754,487,822,497,849,510,870,536,891,564,899,593,899,624,894,654,889,684,889,714,898,741,920,751,939,759,968,771,1052,778,1162,782,1285,785,1521,790,1662,814,1807,842,1946,886,2132,881,2133,837,1948,808,1808,785,1662,780,1521,777,1285,773,1162,765,1053,754,969,746,941,737,924,711,903,684,894,654,895,624,899,594,904,563,904,534,896,506,873,492,851,482,823,473,754,473,672,479,583,485,494,486,411,479,341,470,314,458,292,446,280,431,270"/>
-<area shape="rect" href="classiridium_1_1threading_1_1_synchronized_container.html" title=" " alt="" coords="542,222,706,278"/>
-<area shape="poly" title=" " alt="" coords="434,248,541,248,541,253,434,253"/>
-<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html" title=" " alt="" coords="238,1000,460,1041"/>
-<area shape="poly" title=" " alt="" coords="462,994,521,981,523,986,463,999"/>
-<area shape="poly" title=" " alt="" coords="442,1044,461,1052,485,1066,509,1080,543,1090,573,1096,627,1098,680,1104,709,1114,741,1131,786,1168,825,1213,855,1257,876,1295,871,1298,850,1260,820,1216,783,1172,738,1135,707,1118,679,1109,627,1103,573,1101,542,1096,507,1085,483,1071,459,1057,440,1049"/>
-<area shape="poly" title=" " alt="" coords="476,1028,522,1032,522,1037,475,1033"/>
+<area shape="rect" title=" " alt="" coords="257,5,388,46"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context__.html" title=" " alt="" coords="511,91,684,131"/>
+<area shape="poly" title=" " alt="" coords="402,46,435,55,537,89,532,92,433,60,405,51"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="10,830,159,886"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="255,837,391,878"/>
+<area shape="poly" title=" " alt="" coords="173,856,256,856,252,860,177,860"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="240,772,406,813"/>
+<area shape="poly" title=" " alt="" coords="173,831,247,811,244,815,177,835"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="236,968,410,1009"/>
+<area shape="poly" title=" " alt="" coords="126,893,168,925,213,953,243,966,238,969,210,957,165,929,128,898"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_async_queue.html" title=" " alt="" coords="492,707,703,763"/>
+<area shape="poly" title=" " alt="" coords="420,770,494,755,490,759,423,774"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="494,1077,701,1118"/>
+<area shape="poly" title=" " alt="" coords="374,1014,427,1039,483,1063,517,1075,512,1078,481,1068,425,1044,376,1019"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="519,368,676,424"/>
+<area shape="poly" title=" " alt="" coords="420,965,432,953,443,934,452,910,460,849,460,776,456,696,452,617,452,543,460,481,468,455,480,435,497,419,520,408,517,412,500,423,484,438,473,457,465,482,457,543,457,617,461,696,465,775,465,849,457,911,448,937,436,957,425,967"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_popper.html" title=" " alt="" coords="496,838,699,894"/>
+<area shape="poly" title=" " alt="" coords="420,960,433,953,447,941,456,929,465,916,480,903,505,892,502,896,484,908,469,920,460,932,451,945,435,957,425,963"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper.html" title=" " alt="" coords="489,918,706,974"/>
+<area shape="poly" title=" " alt="" coords="423,971,490,961,487,964,427,975"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_popper.html" title=" " alt="" coords="10,236,159,292"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue.html" title=" " alt="" coords="225,231,420,271"/>
+<area shape="poly" title=" " alt="" coords="173,257,227,255,223,258,176,261"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper.html" title=" " alt="" coords="222,296,424,337"/>
+<area shape="poly" title=" " alt="" coords="173,282,229,294,225,297,176,286"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="521,208,674,264"/>
+<area shape="poly" title=" " alt="" coords="408,289,522,257,519,261,412,293"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker.html" title=" " alt="" coords="521,288,674,344"/>
+<area shape="poly" title=" " alt="" coords="438,314,523,315,519,318,441,318"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker.html" title=" " alt="" coords="768,211,957,267"/>
+<area shape="poly" title=" " alt="" coords="689,235,769,236,765,240,692,239"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool.html" title=" " alt="" coords="761,532,964,588"/>
+<area shape="poly" title=" " alt="" coords="687,257,715,274,744,304,770,337,811,409,840,477,857,532,851,532,835,479,806,411,766,340,740,307,712,278,689,262"/>
+<area shape="rect" href="class_i_async_queue_pusher.html" title=" " alt="" coords="10,1113,159,1154"/>
+<area shape="poly" title=" " alt="" coords="93,1098,144,948,177,873,193,844,210,824,241,806,238,811,213,828,198,847,181,875,149,950,99,1099"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="238,1142,408,1198"/>
+<area shape="poly" title=" " alt="" coords="173,1145,240,1155,235,1159,176,1149"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="255,1221,391,1262"/>
+<area shape="poly" title=" " alt="" coords="155,1159,165,1163,180,1175,189,1186,199,1197,213,1207,257,1226,252,1229,210,1212,195,1201,185,1190,176,1179,162,1168,157,1164"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="259,1287,387,1327"/>
+<area shape="poly" title=" " alt="" coords="160,1161,166,1164,177,1178,184,1192,190,1220,195,1246,202,1259,213,1272,235,1286,260,1296,256,1299,232,1290,210,1276,198,1262,190,1248,184,1221,179,1194,173,1181,162,1167,162,1166"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="236,1077,410,1118"/>
+<area shape="poly" title=" " alt="" coords="173,1118,238,1109,234,1113,177,1122"/>
+<area shape="poly" title=" " alt="" coords="424,1096,496,1096,492,1099,427,1100"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pool_pusher.html" title=" " alt="" coords="496,998,699,1054"/>
+<area shape="poly" title=" " alt="" coords="416,1071,498,1050,494,1054,420,1075"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher.html" title=" " alt="" coords="489,1142,706,1198"/>
+<area shape="poly" title=" " alt="" coords="417,1120,491,1140,486,1143,419,1125"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="10,1178,159,1234"/>
+<area shape="poly" title=" " alt="" coords="161,1166,161,1164,175,1141,184,1119,192,1076,189,1034,181,993,174,952,172,910,182,868,193,846,210,824,223,812,241,803,238,808,226,816,214,827,198,849,187,869,177,910,179,951,186,992,194,1034,197,1077,190,1121,180,1144,166,1167,166,1167"/>
+<area shape="poly" title=" " alt="" coords="173,1190,239,1181,236,1184,176,1194"/>
+<area shape="poly" title=" " alt="" coords="173,1217,256,1230,252,1233,176,1221"/>
+<area shape="poly" title=" " alt="" coords="145,1239,213,1271,260,1289,256,1292,211,1276,147,1244"/>
+<area shape="poly" title=" " alt="" coords="155,1168,162,1163,186,1145,210,1127,240,1116,237,1121,213,1132,189,1149,165,1168,159,1171"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_async_queue_pusher.html" title=" " alt="" coords="10,342,159,398"/>
+<area shape="poly" title=" " alt="" coords="131,331,169,305,211,282,244,270,241,274,213,287,172,309,136,334"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher.html" title=" " alt="" coords="222,361,424,402"/>
+<area shape="poly" title=" " alt="" coords="173,372,223,375,219,378,176,376"/>
+<area shape="poly" title=" " alt="" coords="438,386,521,390,516,394,441,390"/>
+<area shape="poly" title=" " alt="" coords="424,352,432,346,448,329,456,312,464,293,480,274,522,253,519,257,484,278,468,296,461,314,452,332,436,350,429,355"/>
+<area shape="poly" title=" " alt="" coords="424,355,522,333,519,336,428,359"/>
+<area shape="rect" href="class_i_context.html" title=" " alt="" coords="287,120,358,145"/>
+<area shape="poly" title=" " alt="" coords="372,126,513,116,509,120,375,130"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_context_actions.html" title=" " alt="" coords="508,156,687,181"/>
+<area shape="poly" title=" " alt="" coords="372,137,510,155,506,158,375,141"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context.html" title=" " alt="" coords="776,147,949,187"/>
+<area shape="poly" title=" " alt="" coords="701,166,778,166,774,169,705,170"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_context.html" title=" " alt="" coords="255,169,390,194"/>
+<area shape="poly" title=" " alt="" coords="403,163,433,155,481,140,522,130,519,134,483,146,435,160,407,167"/>
+<area shape="poly" title=" " alt="" coords="405,176,509,171,506,175,408,180"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_context_manager.html" title=" " alt="" coords="230,456,416,481"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_context_manager.html" title=" " alt="" coords="511,448,684,489"/>
+<area shape="poly" title=" " alt="" coords="430,466,512,467,508,470,433,470"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_i_initializable.html" title=" " alt="" coords="5,1589,164,1614"/>
+<area shape="poly" title=" " alt="" coords="90,1574,123,1433,161,1245,167,1166,171,1061,182,960,193,919,210,889,230,873,256,863,252,867,232,878,214,893,198,921,187,961,176,1062,172,1166,166,1246,128,1434,95,1574"/>
+<area shape="poly" title=" " alt="" coords="89,1573,152,1287,187,1139,209,1064,241,1031,279,1007,277,1011,244,1035,214,1067,193,1140,157,1288,94,1574"/>
+<area shape="poly" title=" " alt="" coords="91,1573,126,1433,145,1340,161,1245,164,1182,165,1075,167,790,170,641,177,509,190,406,199,371,210,348,226,335,224,339,214,351,204,372,195,407,183,509,176,642,172,790,171,1075,170,1182,166,1246,151,1341,131,1434,96,1574"/>
+<area shape="poly" title=" " alt="" coords="84,1573,91,1501,110,1404,126,1351,148,1300,175,1251,210,1208,239,1188,237,1193,214,1212,180,1254,152,1302,131,1353,115,1405,96,1502,89,1574"/>
+<area shape="poly" title=" " alt="" coords="86,1573,96,1511,117,1431,133,1388,154,1346,179,1307,210,1273,230,1259,256,1250,253,1254,233,1263,213,1277,183,1311,158,1349,138,1390,122,1432,101,1512,91,1574"/>
+<area shape="poly" title=" " alt="" coords="89,1573,102,1522,126,1459,161,1393,184,1363,210,1337,233,1323,260,1314,257,1318,235,1327,213,1341,188,1367,165,1396,130,1461,107,1524,94,1574"/>
+<area shape="poly" title=" " alt="" coords="89,1573,145,1327,180,1199,196,1153,210,1128,237,1111,234,1115,214,1131,201,1155,185,1200,150,1328,94,1574"/>
+<area shape="poly" title=" " alt="" coords="91,1573,126,1433,145,1340,161,1245,167,1093,172,839,183,588,194,495,201,463,209,442,231,418,261,400,259,405,235,422,214,444,206,464,199,496,189,588,177,840,172,1094,166,1246,150,1341,131,1434,96,1574"/>
+<area shape="rect" href="classiridium_1_1db_1_1_i_connector.html" title=" " alt="" coords="246,1512,400,1537"/>
+<area shape="poly" title=" " alt="" coords="125,1580,211,1546,252,1536,249,1540,213,1551,129,1584"/>
+<area shape="rect" href="classiridium_1_1dp_1_1implementation_1_1_c_initializer.html" title=" " alt="" coords="234,1660,412,1701"/>
+<area shape="poly" title=" " alt="" coords="132,1618,213,1646,249,1658,245,1661,211,1651,135,1623"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_connection_manager.html" title=" " alt="" coords="245,1725,400,1766"/>
+<area shape="poly" title=" " alt="" coords="107,1623,155,1668,183,1690,213,1710,247,1726,242,1728,210,1715,180,1695,151,1672,108,1629"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_multiplexer.html" title=" " alt="" coords="247,2536,399,2561"/>
+<area shape="poly" title=" " alt="" coords="86,1627,90,1810,95,1939,105,2078,120,2218,142,2346,157,2402,173,2451,192,2491,214,2521,229,2533,249,2543,244,2544,226,2538,210,2525,188,2494,168,2453,152,2403,137,2347,115,2218,99,2079,90,1939,85,1810,85,1633"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_session_manager.html" title=" " alt="" coords="230,2585,416,2610"/>
+<area shape="poly" title=" " alt="" coords="85,1628,88,1819,93,1955,101,2103,116,2251,139,2386,154,2445,171,2497,191,2540,214,2572,232,2587,226,2587,210,2576,186,2543,166,2499,149,2447,134,2387,111,2251,96,2103,87,1955,83,1819,85,1633"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream.html" title=" " alt="" coords="257,2232,388,2257"/>
+<area shape="poly" title=" " alt="" coords="92,1627,137,1805,172,1923,214,2041,240,2097,269,2151,316,2231,310,2231,264,2154,235,2100,209,2043,167,1925,132,1806,92,1632"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_cache.html" title=" " alt="" coords="250,2328,396,2353"/>
+<area shape="poly" title=" " alt="" coords="88,1627,104,1762,129,1951,146,2049,166,2139,188,2215,214,2268,229,2286,248,2302,289,2326,284,2328,245,2306,226,2290,209,2271,183,2217,160,2141,141,2050,124,1952,99,1762,88,1632"/>
+<area shape="rect" href="classiridium_1_1logging_1_1_i_sink.html" title=" " alt="" coords="250,2004,396,2029"/>
+<area shape="poly" title=" " alt="" coords="98,1626,149,1723,214,1842,270,1934,315,2003,310,2004,266,1937,209,1844,145,1725,99,1631"/>
+<area shape="rect" href="classiridium_1_1system_1_1_shell.html" title=" " alt="" coords="249,2634,396,2660"/>
+<area shape="poly" title=" " alt="" coords="87,1627,104,1841,130,2157,147,2317,167,2458,189,2564,201,2600,214,2621,230,2634,251,2643,246,2645,227,2638,210,2625,197,2602,184,2566,162,2458,142,2317,124,2157,98,1841,87,1633"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_runnable.html" title=" " alt="" coords="263,2471,383,2511"/>
+<area shape="poly" title=" " alt="" coords="85,1627,89,1751,94,1838,103,1937,119,2043,141,2153,173,2261,214,2364,232,2395,254,2424,299,2470,294,2471,250,2427,228,2398,209,2367,168,2263,136,2154,114,2044,98,1938,89,1839,84,1751,85,1633"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_thread.html" title=" " alt="" coords="263,1791,383,1831"/>
+<area shape="poly" title=" " alt="" coords="97,1626,118,1661,143,1701,175,1741,213,1775,237,1789,265,1799,260,1802,235,1794,210,1780,171,1745,139,1704,114,1664,98,1631"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_1_1_i_handler.html" title=" " alt="" coords="239,2684,406,2740"/>
+<area shape="poly" title=" " alt="" coords="85,1627,88,1833,92,1982,100,2145,115,2309,138,2460,153,2526,171,2585,191,2633,214,2671,241,2694,236,2694,210,2674,186,2636,166,2586,148,2528,133,2461,110,2309,95,2145,87,1982,83,1833,85,1633"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_popper_1_1_i_handler.html" title=" " alt="" coords="242,1351,404,1407"/>
+<area shape="poly" title=" " alt="" coords="95,1574,139,1497,171,1454,210,1417,243,1399,240,1404,213,1421,175,1458,143,1500,100,1576"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_i_worker_pusher_1_1_i_handler.html" title=" " alt="" coords="242,1431,404,1487"/>
+<area shape="poly" title=" " alt="" coords="107,1577,153,1536,210,1497,244,1482,240,1486,213,1501,157,1540,112,1579"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1platform_1_1_c_multiplexer.html" title=" " alt="" coords="511,2727,684,2767"/>
+<area shape="poly" title=" " alt="" coords="413,2557,436,2570,451,2588,458,2606,461,2643,464,2679,470,2696,484,2713,513,2734,508,2733,480,2717,466,2699,458,2680,456,2643,453,2608,446,2591,432,2574,413,2562"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html" title=" " alt="" coords="511,2792,684,2833"/>
+<area shape="poly" title=" " alt="" coords="430,2615,436,2620,452,2639,459,2659,461,2700,463,2739,470,2758,484,2777,513,2798,508,2797,480,2781,465,2761,457,2740,456,2700,454,2660,447,2642,432,2624,429,2620"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_acceptor.html" title=" " alt="" coords="506,2308,689,2333"/>
+<area shape="poly" title=" " alt="" coords="375,2260,483,2294,528,2306,523,2308,481,2299,376,2265"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_reader.html" title=" " alt="" coords="511,2209,684,2234"/>
+<area shape="poly" title=" " alt="" coords="403,2235,513,2227,508,2230,405,2240"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_writer.html" title=" " alt="" coords="515,2258,680,2284"/>
+<area shape="poly" title=" " alt="" coords="403,2250,517,2262,512,2264,405,2255"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream.html" title=" " alt="" coords="512,2160,683,2185"/>
+<area shape="poly" title=" " alt="" coords="378,2224,481,2194,529,2184,525,2187,483,2199,381,2229"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_buffer.html" title=" " alt="" coords="511,2357,684,2398"/>
+<area shape="poly" title=" " alt="" coords="357,2263,483,2343,514,2356,508,2357,481,2348,357,2268"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_stream_port.html" title=" " alt="" coords="785,2262,940,2288"/>
+<area shape="poly" title=" " alt="" coords="680,2236,798,2261,792,2262,680,2241"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_reader.html" title=" " alt="" coords="777,2067,948,2107"/>
+<area shape="poly" title=" " alt="" coords="697,2204,712,2196,728,2178,735,2159,743,2138,760,2118,783,2106,779,2110,763,2122,747,2141,740,2161,733,2181,715,2200,700,2208"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_buffer.html" title=" " alt="" coords="776,2312,949,2353"/>
+<area shape="poly" title=" " alt="" coords="699,2236,715,2243,731,2257,740,2271,748,2285,763,2298,785,2311,779,2312,760,2303,744,2288,735,2274,727,2260,712,2248,699,2241"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_reader_list.html" title=" " alt="" coords="776,2197,949,2238"/>
+<area shape="poly" title=" " alt="" coords="699,2218,778,2218,773,2220,701,2223"/>
+<area shape="rect" href="classiridium_1_1system_1_1_i_process.html" title=" " alt="" coords="1023,2262,1193,2288"/>
+<area shape="poly" title=" " alt="" coords="955,2272,1025,2274,1020,2276,956,2278"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html" title=" " alt="" coords="1012,2067,1204,2107"/>
+<area shape="poly" title=" " alt="" coords="963,2084,1014,2086,1009,2088,964,2090"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_reader.html" title=" " alt="" coords="1252,2035,1444,2075"/>
+<area shape="poly" title=" " alt="" coords="1219,2070,1254,2067,1249,2069,1220,2075"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream_writer.html" title=" " alt="" coords="1252,2100,1444,2141"/>
+<area shape="poly" title=" " alt="" coords="1219,2100,1254,2106,1249,2108,1220,2105"/>
+<area shape="poly" title=" " alt="" coords="695,2270,787,2273,782,2275,697,2275"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1_i_file_stream_writer.html" title=" " alt="" coords="777,2132,948,2173"/>
+<area shape="poly" title=" " alt="" coords="693,2254,712,2245,727,2231,735,2216,744,2200,760,2184,785,2172,781,2175,763,2188,748,2203,740,2218,731,2234,715,2249,696,2259"/>
+<area shape="rect" href="classiridium_1_1io_1_1implementation_1_1_c_stream_writer_buffer.html" title=" " alt="" coords="776,2377,949,2418"/>
+<area shape="poly" title=" " alt="" coords="695,2283,715,2293,732,2310,740,2328,748,2345,763,2362,785,2377,780,2377,760,2366,743,2348,735,2330,728,2313,712,2297,695,2288"/>
+<area shape="poly" title=" " alt="" coords="955,2125,1031,2107,1026,2109,957,2130"/>
+<area shape="poly" title=" " alt="" coords="687,2153,712,2145,736,2132,760,2118,795,2106,791,2109,762,2123,739,2136,714,2149,690,2157"/>
+<area shape="poly" title=" " alt="" coords="698,2162,779,2158,774,2160,700,2167"/>
+<area shape="poly" title=" " alt="" coords="699,2358,778,2346,773,2348,701,2363"/>
+<area shape="poly" title=" " alt="" coords="700,2383,778,2390,773,2392,701,2388"/>
+<area shape="rect" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_cache.html" title=" " alt="" coords="502,2423,694,2463"/>
+<area shape="poly" title=" " alt="" coords="365,2357,483,2407,522,2422,517,2423,481,2412,365,2363"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_async.html" title=" " alt="" coords="496,1964,700,2005"/>
+<area shape="poly" title=" " alt="" coords="410,2004,497,1995,493,1998,413,2008"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_console.html" title=" " alt="" coords="496,2029,700,2070"/>
+<area shape="poly" title=" " alt="" coords="410,2025,497,2036,493,2039,412,2029"/>
+<area shape="rect" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html" title=" " alt="" coords="496,2095,700,2135"/>
+<area shape="poly" title=" " alt="" coords="367,2033,483,2079,523,2093,518,2095,481,2084,368,2038"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_popper_runnable.html" title=" " alt="" coords="489,2567,706,2623"/>
+<area shape="poly" title=" " alt="" coords="398,2506,435,2521,460,2537,483,2553,511,2566,505,2567,481,2557,457,2541,433,2525,398,2512"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_pusher_runnable.html" title=" " alt="" coords="489,2647,706,2703"/>
+<area shape="poly" title=" " alt="" coords="398,2500,418,2509,436,2521,448,2535,456,2550,461,2578,466,2606,472,2620,484,2633,500,2647,494,2646,480,2637,468,2622,461,2608,456,2579,451,2551,444,2538,432,2525,416,2514,398,2505"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_worker_runnable.html" title=" " alt="" coords="482,2487,713,2543"/>
+<area shape="poly" title=" " alt="" coords="398,2495,484,2504,479,2506,399,2500"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html" title=" " alt="" coords="510,1735,685,1775"/>
+<area shape="poly" title=" " alt="" coords="397,1794,512,1771,508,1775,400,1798"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_i_observable.html" title=" " alt="" coords="243,643,402,683"/>
+<area shape="rect" href="classiridium_1_1dp_1_1implementation_1_1_c_observable.html" title=" " alt="" coords="509,643,686,683"/>
+<area shape="poly" title=" " alt="" coords="416,661,511,661,507,665,420,665"/>
+<area shape="rect" href="classiridium_1_1io_1_1_i_pipe_manager.html" title=" " alt="" coords="240,70,406,96"/>
+<area shape="poly" title=" " alt="" coords="419,91,513,101,508,104,422,95"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_non_copyable.html" title=" " alt="" coords="239,1610,407,1636"/>
+<area shape="poly" title=" " alt="" coords="419,1609,432,1597,450,1569,462,1534,471,1492,475,1444,475,1337,467,1221,459,1103,454,992,459,897,467,857,480,824,507,789,545,761,542,766,511,792,484,827,472,859,464,898,459,993,464,1103,473,1220,480,1337,480,1445,476,1493,468,1535,455,1572,436,1601,423,1612"/>
+<area shape="poly" title=" " alt="" coords="420,1635,436,1647,458,1678,466,1711,466,1743,460,1776,455,1807,455,1839,463,1869,484,1900,510,1922,536,1935,561,1941,587,1942,645,1940,678,1942,714,1950,901,2009,1054,2065,1049,2067,899,2014,713,1955,677,1948,645,1946,587,1947,560,1946,534,1940,507,1927,480,1903,458,1872,449,1839,450,1807,455,1775,460,1743,461,1712,453,1681,432,1650,421,1640"/>
+<area shape="poly" title=" " alt="" coords="420,1635,436,1647,461,1684,471,1721,469,1759,462,1796,456,1833,454,1870,461,1907,484,1944,506,1963,501,1964,480,1947,456,1909,448,1870,450,1832,457,1795,464,1758,465,1722,456,1686,432,1650,422,1640"/>
+<area shape="poly" title=" " alt="" coords="420,1635,436,1646,454,1670,466,1693,473,1716,476,1740,472,1786,462,1832,452,1877,447,1923,450,1946,456,1969,467,1992,484,2015,499,2029,494,2029,480,2018,463,1994,451,1971,445,1947,442,1923,446,1877,457,1831,467,1785,471,1740,468,1717,461,1695,449,1673,432,1650,422,1640"/>
+<area shape="poly" title=" " alt="" coords="420,1638,436,1646,453,1664,461,1684,468,1702,484,1720,512,1736,507,1738,480,1724,464,1705,456,1686,448,1667,432,1650,422,1643"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_singleton.html" title=" " alt="" coords="526,1604,669,1645"/>
+<area shape="poly" title=" " alt="" coords="421,1621,528,1622,524,1626,424,1626"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_singleton.html" title=" " alt="" coords="526,1395,669,1435"/>
+<area shape="poly" title=" " alt="" coords="419,1607,432,1597,447,1579,454,1561,456,1523,458,1484,465,1464,480,1445,501,1430,528,1421,524,1425,504,1435,484,1449,470,1467,463,1485,461,1524,459,1563,451,1582,436,1601,423,1610"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_singleton.html" title=" " alt="" coords="526,1539,669,1579"/>
+<area shape="poly" title=" " alt="" coords="400,1604,433,1596,528,1575,524,1579,435,1602,403,1608"/>
+<area shape="rect" href="classiridium_1_1_string_pool.html" title=" " alt="" coords="534,1800,661,1825"/>
+<area shape="poly" title=" " alt="" coords="420,1636,436,1646,450,1664,458,1682,461,1718,463,1753,470,1769,484,1785,507,1799,536,1809,531,1811,505,1804,480,1789,466,1772,458,1754,455,1718,453,1683,446,1666,432,1650,422,1642"/>
+<area shape="rect" href="classiridium_1_1db_1_1implementation_1_1_c_connector.html" title=" " alt="" coords="509,1849,686,1890"/>
+<area shape="poly" title=" " alt="" coords="420,1636,436,1646,454,1670,462,1694,463,1719,461,1743,459,1767,460,1790,467,1813,484,1836,511,1855,506,1856,480,1840,463,1815,455,1791,454,1766,456,1742,458,1719,457,1695,449,1673,432,1650,421,1641"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_singleton.html" title=" " alt="" coords="526,1669,669,1710"/>
+<area shape="poly" title=" " alt="" coords="397,1638,435,1646,528,1670,523,1673,433,1651,400,1642"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_01const_01_4.html" title=" " alt="" coords="504,1221,692,1292"/>
+<area shape="poly" title=" " alt="" coords="419,1608,432,1597,457,1562,466,1526,465,1491,459,1454,452,1417,450,1379,457,1341,480,1301,504,1282,502,1286,484,1305,462,1343,455,1380,457,1417,464,1453,470,1490,471,1527,461,1564,436,1601,423,1611"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_mock_1_1_behavior_3_01_t_result_07_t_class_1_1_5_08_07_t_args_8_8_8_08_4.html" title=" " alt="" coords="500,1315,696,1371"/>
+<area shape="poly" title=" " alt="" coords="419,1607,432,1597,451,1572,459,1546,460,1520,457,1493,454,1465,454,1438,462,1409,480,1381,501,1366,498,1371,484,1385,466,1412,459,1438,459,1465,462,1492,465,1519,464,1547,456,1574,436,1601,423,1610"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized_1_1_locker.html" title=" " alt="" coords="514,1459,682,1515"/>
+<area shape="poly" title=" " alt="" coords="419,1605,432,1597,448,1580,456,1563,464,1544,480,1525,515,1507,511,1511,484,1529,468,1547,461,1565,453,1583,436,1601,423,1608"/>
+<area shape="rect" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html" title=" " alt="" coords="767,1604,958,1645"/>
+<area shape="poly" title=" " alt="" coords="684,1622,769,1623,765,1626,686,1627"/>
+<area shape="rect" href="classiridium_1_1logging_1_1_logger.html" title=" " alt="" coords="785,888,940,913"/>
+<area shape="poly" title=" " alt="" coords="682,1400,712,1381,736,1354,758,1324,794,1259,820,1190,838,1120,849,1053,856,994,861,916,862,911,861,995,855,1054,843,1121,825,1191,798,1262,762,1327,740,1357,715,1385,686,1404"/>
+<area shape="rect" href="classiridium_1_1testing_1_1_tester.html" title=" " alt="" coords="787,1546,938,1572"/>
+<area shape="poly" title=" " alt="" coords="684,1557,789,1558,785,1560,686,1561"/>
+<area shape="rect" href="classiridium_1_1dp_1_1_non_movable.html" title=" " alt="" coords="242,1561,404,1586"/>
+<area shape="poly" title=" " alt="" coords="417,1585,436,1596,449,1611,457,1627,461,1659,465,1690,472,1705,484,1720,512,1739,507,1740,480,1724,467,1708,460,1692,456,1659,452,1628,445,1614,432,1600,419,1590"/>
+<area shape="poly" title=" " alt="" coords="410,1587,528,1610,523,1613,412,1592"/>
+<area shape="poly" title=" " alt="" coords="416,1558,432,1548,444,1536,450,1524,456,1498,461,1471,468,1458,480,1445,501,1431,528,1423,524,1427,504,1436,484,1449,473,1461,466,1473,461,1499,455,1526,448,1539,436,1552,421,1561"/>
+<area shape="poly" title=" " alt="" coords="418,1566,528,1561,523,1565,421,1571"/>
+<area shape="poly" title=" " alt="" coords="418,1587,436,1595,452,1610,461,1625,469,1640,483,1654,528,1675,523,1677,481,1659,465,1643,456,1628,448,1613,432,1600,420,1592"/>
+<area shape="poly" title=" " alt="" coords="416,1560,432,1548,453,1519,462,1489,462,1459,458,1429,454,1398,453,1366,460,1334,480,1301,505,1282,502,1287,484,1305,465,1336,458,1367,459,1398,463,1428,467,1459,467,1490,458,1521,436,1552,420,1563"/>
+<area shape="poly" title=" " alt="" coords="416,1559,432,1548,448,1528,455,1509,457,1468,457,1425,465,1403,480,1381,501,1367,498,1371,484,1385,469,1405,463,1426,462,1468,460,1510,452,1531,436,1552,420,1562"/>
+<area shape="poly" title=" " alt="" coords="410,1555,433,1547,481,1525,515,1513,511,1517,483,1529,435,1552,413,1558"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized.html" title=" " alt="" coords="254,538,392,594"/>
+<area shape="poly" title=" " alt="" coords="397,528,416,511,432,492,445,468,453,445,460,399,456,356,448,313,441,271,440,229,451,186,463,164,480,141,494,129,512,121,509,125,497,134,484,145,468,166,456,188,445,229,446,271,453,312,461,355,465,400,459,446,450,470,436,495,420,515,402,530"/>
+<area shape="poly" title=" " alt="" coords="393,599,436,629,451,647,459,663,468,678,484,693,504,706,499,708,480,697,464,681,455,665,446,650,432,633,395,604"/>
+<area shape="poly" title=" " alt="" coords="400,529,481,498,518,487,515,491,483,503,404,533"/>
+<area shape="poly" title=" " alt="" coords="405,595,483,622,536,641,531,643,481,627,408,599"/>
+<area shape="poly" title=" " alt="" coords="405,573,591,599,671,614,715,629,748,657,776,691,800,728,819,766,847,837,861,887,856,887,842,838,814,768,795,731,772,694,744,661,712,633,669,619,590,604,408,578"/>
+<area shape="rect" href="classiridium_1_1threading_1_1_synchronized_container.html" title=" " alt="" coords="516,512,680,568"/>
+<area shape="poly" title=" " alt="" coords="406,556,517,546,513,550,409,560"/>
+<area shape="rect" href="classiridium_1_1threading_1_1implementation_1_1_worker_pool_base.html" title=" " alt="" coords="212,903,434,943"/>
+<area shape="poly" title=" " alt="" coords="436,897,498,885,494,889,440,901"/>
+<area shape="poly" title=" " alt="" coords="423,894,432,888,447,872,455,856,464,839,480,823,513,807,543,799,598,798,652,797,681,789,712,773,737,753,759,731,798,680,828,630,851,586,849,591,832,632,803,683,763,734,740,757,715,777,683,794,653,802,598,804,544,805,515,812,484,828,468,843,460,858,452,875,436,892,428,897"/>
+<area shape="poly" title=" " alt="" coords="415,947,435,954,459,969,483,983,511,996,506,998,481,988,457,973,433,959,417,951"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_44.png" border="0" usemap="#astd_1_1false__type" alt=""/>
+<tr><td><img src="inherit_graph_110.png" border="0" usemap="#astd_1_1false__type" loading="lazy" alt=""/>
 <map name="astd_1_1false__type" id="astd_1_1false__type">
-<area shape="rect" title=" " alt="" coords="5,92,113,118"/>
-<area shape="rect" href="structiridium_1_1_t_container_has_size_method_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d3b8610498e5b86d4cfe251817e736f71.html" title="Метафункция для проверки наличия у контейнерного типа T метода size(). Специализация для типов,..." alt="" coords="161,5,342,76"/>
-<area shape="poly" title=" " alt="" coords="114,84,159,68,161,73,115,89"/>
-<area shape="rect" href="structiridium_1_1_t_container_has_size_method.html" title="Метафункция для проверки наличия у контейнерного типа T метода size(). По умолчанию std::false_type." alt="" coords="161,100,342,141"/>
-<area shape="poly" title=" " alt="" coords="129,108,160,110,160,116,128,113"/>
-<area shape="rect" title=" " alt="" coords="8,28,110,54"/>
-<area shape="poly" title=" " alt="" coords="125,38,160,38,160,43,125,43"/>
+<area shape="rect" title=" " alt="" coords="5,710,113,736"/>
+<area shape="rect" href="structiridium_1_1_t_container_has_size_method_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d3b8610498e5b86d4cfe251817e736f71.html" title=" " alt="" coords="200,5,382,76"/>
+<area shape="poly" title=" " alt="" coords="61,694,108,354,137,175,149,115,158,86,177,69,201,57,198,61,180,73,163,89,154,116,142,176,113,355,67,695"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_has_convert_3_01_t_to_00_01_t_from6793cb355db87b20a7719fdad53e7929.html" title=" " alt="" coords="184,100,398,200"/>
+<area shape="poly" title=" " alt="" coords="60,695,70,590,89,446,103,373,119,305,137,249,159,210,185,187,183,192,163,213,142,251,124,307,108,374,95,447,75,591,65,696"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum_3_01_t_00_01std_1_a22352c967e61128065a7bcf54823e30.html" title=" " alt="" coords="161,224,421,295"/>
+<area shape="poly" title=" " alt="" coords="61,695,73,607,94,491,122,379,139,335,159,304,173,293,171,298,163,308,144,337,127,381,99,492,78,608,66,695"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_pair_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4.html" title=" " alt="" coords="210,319,372,389"/>
+<area shape="poly" title=" " alt="" coords="58,695,64,635,80,556,92,515,109,474,131,435,159,400,182,382,211,369,208,373,185,386,163,404,136,438,114,476,97,516,85,558,69,636,64,695"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container_3_05aa78a1002c3c759e047fa0efcd41687.html" title=" " alt="" coords="179,808,402,908"/>
+<area shape="poly" title=" " alt="" coords="88,743,162,793,184,806,179,808,159,798,90,748"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container_3_01fec33ec6a8916ef75c312c88953d79fe.html" title=" " alt="" coords="188,414,394,545"/>
+<area shape="poly" title=" " alt="" coords="69,696,104,628,129,590,159,555,189,532,186,536,163,559,133,593,109,630,74,697"/>
+<area shape="rect" href="structiridium_1_1parsing_1_1detail_1_1has__constraint_3_01_t_00_01std_1_1void__t_3_01decltype_07_t_1_1m__constraint_08_4_01_4.html" title=" " alt="" coords="170,569,412,624"/>
+<area shape="poly" title=" " alt="" coords="80,698,116,664,159,633,184,623,180,627,162,638,119,668,85,700"/>
+<area shape="rect" href="structiridium_1_1_t_container_has_size_method.html" title=" " alt="" coords="200,932,382,973"/>
+<area shape="poly" title=" " alt="" coords="66,749,81,789,100,834,126,880,162,919,180,930,202,940,197,942,178,935,159,923,122,883,95,837,76,791,67,754"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_has_convert.html" title=" " alt="" coords="201,997,381,1068"/>
+<area shape="poly" title=" " alt="" coords="64,749,75,801,93,863,121,927,140,956,163,983,181,997,203,1010,198,1012,178,1002,159,987,136,960,116,929,88,865,70,802,64,755"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_iridium_enum.html" title=" " alt="" coords="183,1092,399,1147"/>
+<area shape="poly" title=" " alt="" coords="60,749,65,818,79,906,91,952,109,998,132,1041,163,1079,185,1097,180,1098,159,1083,128,1044,104,1001,86,954,73,907,60,818,60,754"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_pair.html" title=" " alt="" coords="213,1172,369,1227"/>
+<area shape="poly" title=" " alt="" coords="63,749,77,843,97,965,126,1082,143,1127,163,1158,186,1175,215,1189,210,1190,183,1180,159,1161,138,1129,121,1083,92,966,72,844,63,754"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_associative_container.html" title=" " alt="" coords="193,1251,389,1321"/>
+<area shape="poly" title=" " alt="" coords="62,749,74,858,93,1003,106,1077,122,1144,141,1200,163,1238,177,1251,195,1264,190,1263,174,1255,159,1241,136,1202,117,1146,101,1078,87,1004,69,858,62,754"/>
+<area shape="rect" href="structiridium_1_1convertion_1_1implementation_1_1detail_1_1_t_is_s_t_l_sequential_container.html" title=" " alt="" coords="196,648,386,719"/>
+<area shape="poly" title=" " alt="" coords="126,709,198,698,194,702,130,714"/>
+<area shape="rect" href="structiridium_1_1parsing_1_1detail_1_1has__constraint.html" title=" " alt="" coords="186,743,396,784"/>
+<area shape="poly" title=" " alt="" coords="126,733,188,744,184,747,129,737"/>
+<area shape="rect" title=" " alt="" coords="8,294,110,320"/>
+<area shape="poly" title=" " alt="" coords="63,279,74,237,93,185,121,132,138,107,159,85,178,71,201,60,198,65,180,76,162,89,143,111,125,135,98,187,79,238,68,280"/>
+<area shape="poly" title=" " alt="" coords="79,282,115,245,159,209,185,195,182,199,162,213,119,249,84,284"/>
+<area shape="poly" title=" " alt="" coords="123,292,162,284,159,288,127,296"/>
+<area shape="poly" title=" " alt="" coords="124,318,212,336,208,339,126,323"/>
+<area shape="poly" title=" " alt="" coords="82,328,120,363,162,399,190,419,185,421,159,403,117,367,84,333"/>
+<area shape="poly" title=" " alt="" coords="64,333,75,383,93,442,121,502,140,530,162,555,178,567,173,569,159,559,136,534,117,505,88,444,70,384,64,338"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_45.png" border="0" usemap="#astd_1_1hash_3_01iridium_1_1io_1_1_event_01_4" alt=""/>
+<tr><td><img src="inherit_graph_111.png" border="0" usemap="#astd_1_1hash_3_01iridium_1_1io_1_1_event_01_4" loading="lazy" alt=""/>
 <map name="astd_1_1hash_3_01iridium_1_1io_1_1_event_01_4" id="astd_1_1hash_3_01iridium_1_1io_1_1_event_01_4">
-<area shape="rect" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html" title="Специализация std::hash для iridium::io::Event. Позволяет использовать объекты iridium::io::Event в к..." alt="" coords="5,5,131,46"/>
+<area shape="rect" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_01_4.html" title=" " alt="" coords="5,5,131,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_46.png" border="0" usemap="#astd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4" alt=""/>
+<tr><td><img src="inherit_graph_112.png" border="0" usemap="#astd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4" loading="lazy" alt=""/>
 <map name="astd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4" id="astd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4">
-<area shape="rect" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html" title="Специализация std::hash для iridium::io::Event::TSharedPtr. Позволяет использовать iridium::io::Event..." alt="" coords="5,5,173,46"/>
+<area shape="rect" href="structstd_1_1hash_3_01iridium_1_1io_1_1_event_1_1_t_shared_ptr_01_4.html" title=" " alt="" coords="5,5,173,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_47.png" border="0" usemap="#astd_1_1vector" alt=""/>
+<tr><td><img src="inherit_graph_113.png" border="0" usemap="#astd_1_1vector" loading="lazy" alt=""/>
 <map name="astd_1_1vector" id="astd_1_1vector">
 <area shape="rect" title=" " alt="" coords="5,5,89,31"/>
-<area shape="rect" href="classiridium_1_1io_1_1_buffer.html" title="Динамический буфер памяти для операций ввода&#45;вывода, унаследованный от std::vector&lt;unsigned char&gt;...." alt="" coords="137,31,257,56"/>
-<area shape="poly" title=" " alt="" coords="105,25,136,31,136,36,104,30"/>
+<area shape="rect" href="classiridium_1_1io_1_1_buffer.html" title=" " alt="" coords="137,31,257,56"/>
+<area shape="poly" title=" " alt="" coords="104,25,139,33,133,34,104,30"/>
 <area shape="rect" href="classvector.html" title=" " alt="" coords="18,55,76,80"/>
-<area shape="poly" title=" " alt="" coords="91,58,136,51,137,56,91,63"/>
+<area shape="poly" title=" " alt="" coords="91,58,139,53,134,54,91,63"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_48.png" border="0" usemap="#a_synchronized_3_01_t_mutex_00_01is__tracable_01_4" alt=""/>
+<tr><td><img src="inherit_graph_114.png" border="0" usemap="#a_synchronized_3_01_t_mutex_00_01is__tracable_01_4" loading="lazy" alt=""/>
 <map name="a_synchronized_3_01_t_mutex_00_01is__tracable_01_4" id="a_synchronized_3_01_t_mutex_00_01is__tracable_01_4">
-<area shape="rect" href="class_synchronized.html" title="Шаблонный класс, предоставляющий примитивы синхронизации (мьютекс и условная переменная) для защиты о..." alt="" coords="5,5,166,46"/>
+<area shape="rect" href="class_synchronized.html" title=" " alt="" coords="5,5,166,46"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_49.png" border="0" usemap="#a_u_r_i" alt=""/>
+<tr><td><img src="inherit_graph_115.png" border="0" usemap="#a_t_schema_value" loading="lazy" alt=""/>
+<map name="a_t_schema_value" id="a_t_schema_value">
+<area shape="rect" href="struct_t_schema_value.html" title=" " alt="" coords="5,5,115,31"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_116.png" border="0" usemap="#a_u_r_i" loading="lazy" alt=""/>
 <map name="a_u_r_i" id="a_u_r_i">
-<area shape="rect" href="class_u_r_i.html" title="Представляет и облегчает разбор универсальных идентификаторов ресурсов (URI). Этот класс может разбир..." alt="" coords="5,5,51,31"/>
+<area shape="rect" href="class_u_r_i.html" title=" " alt="" coords="5,5,51,31"/>
 </map>
 </td></tr>
 </table>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iridium: Файл iridium/parsing/implementation/xml_parser.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
+   </div>
+   <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('xml__parser_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл xml_parser.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для xml_parser.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="xml__parser_8h__incl.png" border="0" usemap="#airidium_2parsing_2implementation_2xml__parser_8h" loading="lazy" alt=""/></div>
+<map name="airidium_2parsing_2implementation_2xml__parser_8h" id="airidium_2parsing_2implementation_2xml__parser_8h">
+<area shape="rect" title=" " alt="" coords="369,5,566,46"/>
+<area shape="rect" href="smart__ptr_8h.html" title=" " alt="" coords="297,396,425,422"/>
+<area shape="poly" title=" " alt="" coords="421,48,387,71,351,100,324,136,316,157,313,179,313,255,316,290,325,324,349,382,344,382,320,326,311,291,308,256,308,179,311,156,319,134,347,96,384,66,425,45"/>
+<area shape="rect" href="node_8h.html" title=" " alt="" coords="508,168,656,193"/>
+<area shape="poly" title=" " alt="" coords="504,44,534,65,559,92,573,122,581,153,576,151,568,124,555,96,530,69,504,49"/>
+<area shape="rect" href="parser_8h.html" title=" " alt="" coords="390,94,545,120"/>
+<area shape="poly" title=" " alt="" coords="468,44,470,79,465,78,467,49"/>
+<area shape="rect" title=" " alt="" coords="5,625,74,650"/>
+<area shape="poly" title=" " alt="" coords="308,424,256,442,193,469,129,505,100,528,74,553,56,581,47,610,42,608,51,578,69,549,96,524,126,501,190,464,254,437,313,421"/>
+<area shape="rect" title=" " alt="" coords="403,477,441,503"/>
+<area shape="poly" title=" " alt="" coords="371,420,406,465,401,465,369,425"/>
+<area shape="rect" title=" " alt="" coords="1384,477,1442,503"/>
+<area shape="poly" title=" " alt="" coords="425,414,560,427,1033,462,1371,486,1366,486,1032,467,559,432,426,420"/>
+<area shape="rect" href="node__type_8h.html" title=" " alt="" coords="536,241,628,267"/>
+<area shape="poly" title=" " alt="" coords="583,191,585,227,580,224,581,196"/>
+<area shape="rect" href="schema__type_8h.html" title=" " alt="" coords="799,241,909,267"/>
+<area shape="poly" title=" " alt="" coords="628,191,796,236,790,238,628,197"/>
+<area shape="poly" title=" " alt="" coords="533,258,500,265,460,275,421,292,388,317,378,331,371,347,364,382,359,379,366,346,373,328,384,313,419,287,458,270,499,260,538,256"/>
+<area shape="poly" title=" " alt="" coords="582,265,575,302,559,342,534,380,505,415,449,469,446,465,501,411,530,377,554,339,570,300,579,269"/>
+<area shape="rect" title=" " alt="" coords="1389,625,1442,650"/>
+<area shape="poly" title=" " alt="" coords="629,257,873,281,1210,319,1372,340,1509,363,1603,385,1629,396,1639,407,1639,492,1639,518,1634,540,1624,559,1607,579,1572,603,1533,620,1493,630,1458,636,1458,631,1492,625,1531,615,1570,599,1603,575,1620,556,1629,538,1633,518,1634,491,1634,409,1626,400,1601,390,1508,368,1371,346,1209,324,872,286,629,262"/>
+<area shape="rect" href="convert_8h.html" title=" " alt="" coords="571,389,694,429"/>
+<area shape="poly" title=" " alt="" coords="587,265,624,375,619,373,585,270"/>
+<area shape="rect" href="prototype_8h.html" title=" " alt="" coords="398,315,545,341"/>
+<area shape="poly" title=" " alt="" coords="561,269,504,309,501,304,566,266"/>
+<area shape="rect" href="implementation_2convert_8h.html" title=" " alt="" coords="465,477,632,503"/>
+<area shape="poly" title=" " alt="" coords="614,428,574,469,571,464,610,431"/>
+<area shape="poly" title=" " alt="" coords="463,504,240,533,106,553,90,565,76,580,54,613,50,609,71,577,86,561,104,549,240,528,466,500"/>
+<area shape="poly" title=" " alt="" coords="633,498,790,518,971,548,1072,574,1239,606,1376,630,1371,630,1238,611,1071,579,970,554,790,524,633,503"/>
+<area shape="rect" href="common_8h.html" title=" " alt="" coords="876,551,958,577"/>
+<area shape="poly" title=" " alt="" coords="616,501,863,550,858,551,616,506"/>
+<area shape="rect" title=" " alt="" coords="435,625,503,650"/>
+<area shape="poly" title=" " alt="" coords="463,503,246,532,155,545,117,553,113,564,118,575,137,590,167,602,249,619,340,629,422,635,416,635,340,634,248,625,166,607,135,594,113,578,107,564,114,549,154,540,245,527,467,500"/>
+<area shape="rect" title=" " alt="" coords="128,551,215,577"/>
+<area shape="poly" title=" " alt="" coords="479,506,231,553,230,548,481,501"/>
+<area shape="rect" title=" " alt="" coords="239,551,299,577"/>
+<area shape="poly" title=" " alt="" coords="496,505,315,553,313,547,501,503"/>
+<area shape="rect" title=" " alt="" coords="323,551,380,577"/>
+<area shape="poly" title=" " alt="" coords="518,503,396,549,394,544,513,504"/>
+<area shape="rect" title=" " alt="" coords="404,551,464,577"/>
+<area shape="poly" title=" " alt="" coords="532,503,468,545,466,540,527,504"/>
+<area shape="rect" title=" " alt="" coords="1083,551,1161,577"/>
+<area shape="poly" title=" " alt="" coords="633,496,831,517,1065,548,1071,552,1065,551,1064,554,830,522,633,502"/>
+<area shape="rect" href="platform_8h.html" title=" " alt="" coords="488,551,610,577"/>
+<area shape="poly" title=" " alt="" coords="551,501,551,537,547,534,547,505"/>
+<area shape="rect" title=" " alt="" coords="633,551,851,577"/>
+<area shape="poly" title=" " alt="" coords="582,501,698,545,692,545,581,506"/>
+<area shape="poly" title=" " alt="" coords="878,574,864,579,638,606,416,623,90,638,89,632,415,617,638,600,863,574,872,575"/>
+<area shape="poly" title=" " alt="" coords="959,568,1376,630,1371,630,958,574"/>
+<area shape="rect" title=" " alt="" coords="954,625,1037,650"/>
+<area shape="poly" title=" " alt="" coords="931,575,974,615,968,613,929,580"/>
+<area shape="poly" title=" " alt="" coords="878,574,864,579,673,611,518,632,518,627,672,605,863,574,873,575"/>
+<area shape="rect" title=" " alt="" coords="864,625,930,650"/>
+<area shape="poly" title=" " alt="" coords="916,575,906,612,903,608,911,579"/>
+<area shape="poly" title=" " alt="" coords="457,340,392,389,389,385,453,343"/>
+<area shape="rect" href="enum_8h.html" title=" " alt="" coords="946,315,1053,341"/>
+<area shape="poly" title=" " alt="" coords="879,265,964,308,958,308,879,270"/>
+<area shape="poly" title=" " alt="" coords="1053,329,1133,335,1225,346,1309,363,1342,374,1366,387,1383,403,1395,422,1410,463,1405,460,1390,424,1378,406,1363,391,1340,379,1308,368,1224,351,1133,341,1053,335"/>
+<area shape="poly" title=" " alt="" coords="1053,330,1124,337,1203,348,1274,364,1302,375,1323,387,1342,420,1366,481,1409,611,1405,609,1361,483,1337,422,1319,391,1300,379,1273,369,1202,353,1123,342,1053,335"/>
+<area shape="poly" title=" " alt="" coords="944,341,713,391,710,392,709,387,712,386,949,339"/>
+<area shape="poly" title=" " alt="" coords="944,338,857,360,819,374,796,390,787,411,790,431,801,449,818,466,854,491,873,501,900,515,925,521,948,529,972,549,988,579,995,611,991,608,983,580,968,553,946,534,923,526,898,519,870,505,851,496,814,470,797,452,785,432,782,410,792,387,817,369,856,355,949,337"/>
+<area shape="poly" title=" " alt="" coords="943,337,891,350,838,368,819,380,806,394,803,410,810,428,826,444,851,461,919,494,998,523,1071,548,1065,547,996,528,917,499,848,466,822,448,805,431,797,410,802,392,815,376,836,364,889,345,949,335"/>
+<area shape="rect" href="strings_8h.html" title=" " alt="" coords="1435,396,1548,422"/>
+<area shape="poly" title=" " alt="" coords="1053,332,1216,353,1416,386,1434,392,1429,392,1415,391,1215,358,1053,338"/>
+<area shape="rect" title=" " alt="" coords="819,396,865,422"/>
+<area shape="poly" title=" " alt="" coords="977,340,879,391,877,386,972,342"/>
+<area shape="rect" title=" " alt="" coords="890,396,946,422"/>
+<area shape="poly" title=" " alt="" coords="989,340,943,387,940,383,985,342"/>
+<area shape="rect" title=" " alt="" coords="970,396,1029,422"/>
+<area shape="poly" title=" " alt="" coords="1001,339,1002,382,997,379,998,343"/>
+<area shape="rect" title=" " alt="" coords="1053,396,1124,422"/>
+<area shape="poly" title=" " alt="" coords="1014,339,1066,386,1061,385,1012,344"/>
+<area shape="rect" title=" " alt="" coords="1148,396,1208,422"/>
+<area shape="poly" title=" " alt="" coords="1028,339,1138,386,1141,390,1136,389,1136,391,1028,344"/>
+<area shape="rect" title=" " alt="" coords="1232,396,1309,422"/>
+<area shape="poly" title=" " alt="" coords="1050,339,1220,386,1228,391,1222,390,1219,391,1050,344"/>
+<area shape="poly" title=" " alt="" coords="1432,418,1321,432,1190,440,1078,442,888,439,796,439,698,444,587,457,457,480,456,475,586,452,697,439,795,434,888,433,1078,437,1190,435,1321,427,1437,417"/>
+<area shape="poly" title=" " alt="" coords="1482,421,1437,469,1434,464,1477,423"/>
+<area shape="poly" title=" " alt="" coords="1490,421,1426,612,1422,608,1485,424"/>
+<area shape="poly" title=" " alt="" coords="450,122,418,152,372,196,327,252,309,283,294,316,292,335,300,353,314,370,331,387,326,387,310,374,295,356,287,336,289,314,304,281,323,249,368,193,414,148,454,118"/>
+<area shape="poly" title=" " alt="" coords="487,118,552,158,547,160,487,123"/>
+<area shape="poly" title=" " alt="" coords="545,107,816,118,987,128,1162,142,1324,161,1460,185,1513,199,1553,214,1579,232,1586,242,1589,253,1589,492,1585,516,1575,539,1560,559,1542,577,1499,605,1457,625,1456,619,1497,600,1539,572,1556,555,1571,536,1580,515,1584,491,1584,253,1581,244,1575,236,1551,219,1511,204,1459,190,1324,166,1161,147,986,133,815,123,546,113"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="xml__parser_8h__dep__incl.png" border="0" usemap="#airidium_2parsing_2implementation_2xml__parser_8hdep" loading="lazy" alt=""/></div>
+<map name="airidium_2parsing_2implementation_2xml__parser_8hdep" id="airidium_2parsing_2implementation_2xml__parser_8hdep">
+<area shape="rect" title=" " alt="" coords="62,5,259,46"/>
+<area shape="rect" href="file__parser_8cpp.html" title=" " alt="" coords="5,94,132,135"/>
+<area shape="poly" title=" " alt="" coords="131,56,91,96,88,91,126,58"/>
+<area shape="rect" href="xml__parser_8cpp.html" title=" " alt="" coords="155,94,352,135"/>
+<area shape="poly" title=" " alt="" coords="194,54,235,94,230,93,192,59"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:iridium_3A_3Aparsing_3A_3Aimplementation_3A_3ACXMLParser" id="r_iridium_3A_3Aparsing_3A_3Aimplementation_3A_3ACXMLParser"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_x_m_l_parser.html">iridium::parsing::implementation::CXMLParser</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:iridium" id="r_iridium"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium.html">iridium</a></td></tr>
+<tr class="memitem:iridium_3A_3Aparsing" id="r_iridium_3A_3Aparsing"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1parsing.html">iridium::parsing</a></td></tr>
+<tr class="memitem:iridium_3A_3Aparsing_3A_3Aimplementation" id="r_iridium_3A_3Aparsing_3A_3Aimplementation"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceiridium_1_1parsing_1_1implementation.html">iridium::parsing::implementation</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_7cd3eaa654d669bf9310c145d0239157.html">iridium</a></li><li class="navelem"><a href="dir_c1a02bf2f7e6f2e1d7a358f7fab9ab18.html">parsing</a></li><li class="navelem"><a href="dir_01aa5fc76b6b42d4dde77f9fecacc9eb.html">implementation</a></li><li class="navelem"><a href="xml__parser_8h.html">xml_parser.h</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

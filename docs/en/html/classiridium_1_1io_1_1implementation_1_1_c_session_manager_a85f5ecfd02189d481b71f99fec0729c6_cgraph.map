@@ -1,11 +1,15 @@
 <map id="iridium::io::implementation::CSessionManager::DEFINE_IMPLEMENTATION" name="iridium::io::implementation::CSessionManager::DEFINE_IMPLEMENTATION">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,200,119"/>
-<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a105de3e1c94e02af4831d7baf22c9455" title="Constructs a CSessionManager instance. Initializes internal components like the multiplexer,..." alt="" coords="248,5,499,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,65,271,47,272,53,201,70"/>
-<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a61bdf570ff5046cb79d20aeb1fd75cb0" title="Finalizes the session manager and its components. This typically stops worker threads and cleans up r..." alt="" coords="281,71,466,111"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="200,88,265,88,265,94,200,94"/>
-<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a4fe1caa2fcab0505523ffe96b18ad474" title="Initializes the session manager and its components. This typically starts worker threads for event pr..." alt="" coords="278,136,469,177"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="201,112,272,129,271,135,200,117"/>
-<area shape="rect" id="Node000003" href="$namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d" title="Creates a list of shared pointers to objects of type TObject." alt="" coords="547,13,695,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="499,23,531,23,531,28,499,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,113,200,169"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="50,112,51,102,60,94,77,88,103,86,131,89,150,98,145,99,130,94,102,92,78,94,63,98,55,105,55,113"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a105de3e1c94e02af4831d7baf22c9455" title=" " alt="" coords="248,22,499,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,110,247,73,275,66,270,69,249,78,162,115"/>
+<area shape="rect" id="Node000004" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a61bdf570ff5046cb79d20aeb1fd75cb0" title=" " alt="" coords="281,87,466,128"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="200,126,268,120,263,122,201,131"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a4fe1caa2fcab0505523ffe96b18ad474" title=" " alt="" coords="278,152,469,193"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="200,150,265,159,260,161,200,155"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#aa986cdbdee1166dcea4b009bf4a183ae" title=" " alt="" coords="278,218,468,258"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="163,167,249,202,275,213,270,213,247,207,162,172"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#aae09416cedabd7b9a68a964717bb8d0d" title=" " alt="" coords="547,29,695,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="499,40,534,42,528,43,500,45"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="580,28,572,21,577,11,594,5,621,3,652,5,669,15,663,15,651,11,621,8,595,10,581,15,577,20,585,30"/>
 </map>

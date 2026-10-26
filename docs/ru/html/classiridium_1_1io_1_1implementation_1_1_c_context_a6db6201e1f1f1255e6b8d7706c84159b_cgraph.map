@@ -1,0 +1,30 @@
+<map id="iridium::io::implementation::CContext::CContext" name="iridium::io::implementation::CContext::CContext">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,231,179,272"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="50,231,48,221,55,212,70,207,92,205,116,207,132,214,127,217,115,212,92,210,71,212,58,216,53,222,55,230"/>
+<area shape="rect" id="Node000002" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a4710bf24ac4e436c043f0c7b3775bb37" title=" " alt="" coords="227,14,400,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,230,147,151,183,105,225,65,236,60,232,64,228,70,187,109,152,154,106,232"/>
+<area shape="rect" id="Node000005" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#aa2abf20c954f2d7b54d5511419b9f180" title=" " alt="" coords="227,259,400,300"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="178,260,213,265,209,268,180,265"/>
+<area shape="rect" id="Node000006" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a552ec32ed1883eea9f886b59b4a1f41a" title=" " alt="" coords="448,202,621,242"/>
+<area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="179,243,434,227,431,231,180,248"/>
+<area shape="rect" id="Node000007" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a0d5be49a3a980d2847e63b030d699bb8" title=" " alt="" coords="227,324,400,365"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="138,270,228,309,246,318,241,319,226,314,138,275"/>
+<area shape="rect" id="Node000008" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a19e3d33d3752cb1e39867c6e220db264" title=" " alt="" coords="227,390,400,430"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="111,270,162,322,194,350,228,375,239,383,234,383,225,379,190,354,158,326,110,275"/>
+<area shape="rect" id="Node000009" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#ad4ebd7d0e10acb4439b34d59bf65bf33" title=" " alt="" coords="227,455,400,496"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="103,270,124,307,151,352,186,399,228,440,236,448,231,447,225,444,182,403,147,355,119,310,102,275"/>
+<area shape="rect" id="Node000010" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#a21c2ec7e56908fb156bc46b35b7f5028" title=" " alt="" coords="227,79,400,120"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="110,229,160,180,191,154,225,131,239,125,235,129,228,135,195,158,163,184,114,232"/>
+<area shape="rect" id="Node000011" href="$classiridium_1_1io_1_1implementation_1_1_c_context.html#ad41841a72eb00c14072341fb459e7648" title=" " alt="" coords="227,144,400,185"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="145,228,247,189,243,193,148,233"/>
+<area shape="rect" id="Node000003" href="$namespaceiridium.html#a1315b3a96f6964943359e40747b8df37" title=" " alt="" coords="464,29,605,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="400,35,451,38,447,40,401,40"/>
+<area shape="rect" id="Node000004" href="$factory_8cpp.html#aaf31a5335a6afae5d2fdffcdd0b83483" title=" " alt="" coords="502,87,567,112"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="384,52,490,85,485,87,385,58"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="497,29,491,21,495,11,510,5,535,3,562,5,577,14,572,15,560,10,535,8,511,10,499,15,496,20,503,29"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="393,256,441,246,436,248,395,261"/>
+<area shape="poly" id="edge13_Node000010_Node000003" title=" " alt="" coords="393,76,470,58,465,61,395,81"/>
+<area shape="poly" id="edge14_Node000010_Node000004" title=" " alt="" coords="400,97,490,98,485,101,401,102"/>
+<area shape="poly" id="edge16_Node000011_Node000004" title=" " alt="" coords="383,142,490,112,485,115,386,146"/>
+<area shape="poly" id="edge17_Node000011_Node000006" title=" " alt="" coords="394,183,441,197,436,198,395,188"/>
+</map>

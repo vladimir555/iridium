@@ -1,5 +1,7 @@
-<map id="source/iridium/io/implementation/multiplexer.h" name="source/iridium/io/implementation/multiplexer.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,214,46"/>
-<area shape="rect" id="Node000002" href="$platform_8h.html" title="Определяет макросы для определения платформы, компилятора и архитектуры, а также для построения путей..." alt="" coords="49,94,170,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,46,112,78,107,78,107,46"/>
+<map id="iridium/io/implementation/multiplexer.h" name="iridium/io/implementation/multiplexer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="85,5,250,46"/>
+<area shape="rect" id="Node000002" href="$platform_8h.html" title=" " alt="" coords="5,94,127,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,46,95,86,92,82,140,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="151,94,389,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,44,245,84,240,84,192,49"/>
 </map>

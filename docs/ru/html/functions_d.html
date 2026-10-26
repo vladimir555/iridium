@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Iridium: Члены классов</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Iridium<span id="projectnumber">&#160;0.9.95</span>
+   <div id="projectname">Iridium<span id="projectnumber">&#160;0.4.0</span>
    </div>
    <div id="projectbrief">Легковесный C++ фреймворк (логгер, сериализация, потоки, процессы, ввод/вывод, тестирование)</div>
   </td>
@@ -34,40 +34,64 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.13.2 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Поиск',false);
-  $(function() { init_search(); });
-});
-/* @license-end */
-</script>
-<div id="main-nav"></div>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
 </div><!-- top -->
-<div id="doc-content">
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
+document.addEventListener('DOMContentLoaded',() => { initNavTree('functions_d.html','',''); });
 </script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<div id="MSearchSelectWindow">
 </div>
 
 <!-- iframe showing the search results (closed by default) -->
@@ -85,28 +109,40 @@ $(function(){ initResizable(false); });
 </div>
 
 <div class="contents">
-<div class="textblock">Список всех членов классов со ссылками на классы, к которым они принадлежат.</div>
+<div class="textblock">Список всех членов классов со ссылками на классы, к которым они принадлежат.</div><br/>
+<div class="qindex"><a class="qindex" href="functions.html#index_a">A</a><div class="alphasepar"></div><a class="qindex" href="functions_b.html#index_b">B</a><div class="alphasepar"></div><a class="qindex" href="functions_c.html#index_c">C</a><div class="alphasepar"></div><a class="qindex" href="functions_d.html#index_d">D</a><div class="alphasepar"></div><a class="qindex" href="functions_e.html#index_e">E</a><div class="alphasepar"></div><a class="qindex" href="functions_f.html#index_f">F</a><div class="alphasepar"></div><a class="qindex" href="functions_g.html#index_g">G</a><div class="alphasepar"></div><a class="qindex" href="functions_h.html#index_h">H</a><div class="alphasepar"></div><a class="qindex" href="functions_i.html#index_i">I</a><div class="alphasepar"></div><a class="qindex" href="functions_l.html#index_l">L</a><div class="alphasepar"></div><a class="qindex" href="functions_m.html#index_m">M</a><div class="alphasepar"></div><a class="qindex" href="functions_n.html#index_n">N</a><div class="alphasepar"></div><a class="qindex" href="functions_o.html#index_o">O</a><div class="alphasepar"></div><a class="qindex" href="functions_p.html#index_p">P</a><div class="alphasepar"></div><a class="qindex" href="functions_r.html#index_r">R</a><div class="alphasepar"></div><a class="qindex" href="functions_s.html#index_s">S</a><div class="alphasepar"></div><a class="qindex" href="functions_t.html#index_t">T</a><div class="alphasepar"></div><a class="qindex" href="functions_u.html#index_u">U</a><div class="alphasepar"></div><a class="qindex" href="functions_v.html#index_v">V</a><div class="alphasepar"></div><a class="qindex" href="functions_w.html#index_w">W</a><div class="alphasepar"></div><a class="qindex" href="functions_~.html#index_~">~</a></div>
 
-<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+
+<h3 class="doxsection"><a id="index_d" name="index_d"></a>- d -</h3><ul>
 <li>date&#160;:&#160;<a class="el" href="structiridium_1_1io_1_1protocol_1_1http_1_1response_1_1_t_h_t_t_p_date.html#a3d8d248d13364c2daecb46cecfcbbcea">iridium::io::protocol::http::response::THTTPDate</a></li>
 <li>DEFAULT_BUFFER_COUNT&#160;:&#160;<a class="el" href="class_c_pipe.html#a2ecb80f1b6f3db102257a349af8d8f96">CPipe</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_pipe.html#a2ecb80f1b6f3db102257a349af8d8f96">iridium::io::implementation::CPipe</a></li>
 <li>DEFAULT_BUFFER_SIZE&#160;:&#160;<a class="el" href="class_c_pipe.html#a9c13b418954aae055a5fb7c3db3d4e01">CPipe</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_pipe.html#a9c13b418954aae055a5fb7c3db3d4e01">iridium::io::implementation::CPipe</a></li>
-<li>DEFAULT_TIMEOUT&#160;:&#160;<a class="el" href="class_c_test_runner_fork.html#ae45c1892c2e77f742032e28ff0ff2715">CTestRunnerFork</a>, <a class="el" href="class_c_thread.html#aa6fe3af120f75b39029fbf5775311e59">CThread</a>, <a class="el" href="classiridium_1_1system_1_1_shell.html#a84cd94c56fff457b40a72c7e3fa9521f">iridium::system::Shell</a>, <a class="el" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#ae45c1892c2e77f742032e28ff0ff2715">iridium::testing::implementation::CTestRunnerFork</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html#aa6fe3af120f75b39029fbf5775311e59">iridium::threading::implementation::CThread</a></li>
+<li>DEFAULT_TIMEOUT&#160;:&#160;<a class="el" href="class_c_test_runner_fork.html#a3f27b45b0bf548c2ddb4b7dc798002e2">CTestRunnerFork</a>, <a class="el" href="class_c_thread.html#aa6fe3af120f75b39029fbf5775311e59">CThread</a>, <a class="el" href="classiridium_1_1system_1_1_shell.html#afecaee729ddc21d98f25eb6fcd682db7">iridium::system::Shell</a>, <a class="el" href="classiridium_1_1testing_1_1implementation_1_1_c_test_runner_fork.html#a3f27b45b0bf548c2ddb4b7dc798002e2">iridium::testing::implementation::CTestRunnerFork</a>, <a class="el" href="classiridium_1_1threading_1_1implementation_1_1_c_thread.html#aa6fe3af120f75b39029fbf5775311e59">iridium::threading::implementation::CThread</a></li>
+<li>default_value&#160;:&#160;<a class="el" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_0098091abc10b179f3931c69c97a4a8edd.html#a64ad7c10c81212e11b94e05e51ff552c">iridium::parsing::TConstraint&lt; TSchemaType::VALUE, TValueType, detail::TValueArithmetic&lt; TValueType &gt; &gt;</a>, <a class="el" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_002a7bbb814dfddc16cc166872bbc882df.html#a6ac07de2f379bbade9b0d9a5b2e0baff">iridium::parsing::TConstraint&lt; TSchemaType::VALUE, TValueType, detail::TValueBool&lt; TValueType &gt; &gt;</a>, <a class="el" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00ba131dc9fb4f783508eede533cc69847.html#adaabbc5b640b5106a2789d3ecf3413fd">iridium::parsing::TConstraint&lt; TSchemaType::VALUE, TValueType, detail::TValueEnum&lt; TValueType &gt; &gt;</a>, <a class="el" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00833a956f703e502b984de3a9192ce309.html#a35b5ad97128643153f1873b701b08322">iridium::parsing::TConstraint&lt; TSchemaType::VALUE, TValueType, detail::TValueOther&lt; TValueType &gt; &gt;</a>, <a class="el" href="structiridium_1_1parsing_1_1_t_constraint_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_type_00caec390c1eb2a9f7f0036412fc0e1523.html#ab52ee7718afc30435abc57968ebd50f2">iridium::parsing::TConstraint&lt; TSchemaType::VALUE, TValueType, detail::TValueString&lt; TValueType &gt; &gt;</a></li>
 <li>DEFAULT_WAITING_TIMEOUT&#160;:&#160;<a class="el" href="classiridium_1_1io_1_1_i_multiplexer.html#a517f4358d3d59d304ab04c9657c37e80">iridium::io::IMultiplexer</a></li>
-<li>DEFINE_ENUM()&#160;:&#160;<a class="el" href="class_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">CSinkFile</a>, <a class="el" href="struct_i_process_1_1_t_state.html#a58707839dbe1c6d6a0aeb6cf84b521dd">IProcess::TState</a>, <a class="el" href="structiridium_1_1io_1_1_event.html#aa0cad7d38c9fd2f30ea12ee5d464277f">iridium::io::Event</a>, <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a29be7789c1f60eb09cea4750a8bc17d1">iridium::io::fs::implementation::CFileStream</a>, <a class="el" href="classiridium_1_1io_1_1_u_r_i.html#a104cf25efdd090f56305aa229e83927a">iridium::io::URI</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a264320e5ebaa3d6cfd24e5c95a1f96d0">iridium::logging::implementation::CSinkFile</a>, <a class="el" href="classiridium_1_1logging_1_1_i_sink.html#a456f55d89d7db23e23885f2543aed84f">iridium::logging::ISink</a>, <a class="el" href="structiridium_1_1system_1_1_i_process_1_1_t_state.html#a58707839dbe1c6d6a0aeb6cf84b521dd">iridium::system::IProcess::TState</a>, <a class="el" href="structiridium_1_1testing_1_1_t_cmd_args.html#abb65c6c213e0e128622dbc66f1d80ce2">iridium::testing::TCmdArgs</a>, <a class="el" href="class_u_r_i.html#a104cf25efdd090f56305aa229e83927a">URI</a></li>
+<li>DEFINE_CREATE()&#160;:&#160;<a class="el" href="structiridium_1_1io_1_1_t_pipe.html#a0a1152de27113946db4204b2b6441295">iridium::io::TPipe</a>, <a class="el" href="classiridium_1_1_string_pool.html#ac5f4decb6cdcd53b5e63615ee61dcc6c">iridium::StringPool</a></li>
+<li>DEFINE_ENUM()&#160;:&#160;<a class="el" href="class_c_sink_file.html#a7d949cad3a37f0673f12f4ca4ff3df8a">CSinkFile</a>, <a class="el" href="class_i_context.html#aeb03d082fab5cffd9d8f0e13e75b6ec9">IContext</a>, <a class="el" href="class_i_context_actions.html#a90bcf78d860eb830264d09053b073762">IContextActions</a>, <a class="el" href="class_i_process.html#ab48c2aba97cdd61ebbb667a2972b288e">IProcess</a>, <a class="el" href="struct_i_process_1_1_t_state.html#a72d8bcbac1b59828efba05d9cf66bb47">IProcess::TState</a>, <a class="el" href="structiridium_1_1io_1_1_event.html#a2eb20170b5c70c12d5092fbbe7e26553">iridium::io::Event</a>, <a class="el" href="classiridium_1_1io_1_1fs_1_1implementation_1_1_c_file_stream.html#a5754cbd211349e7ee0144a8c150f0591">iridium::io::fs::implementation::CFileStream</a>, <a class="el" href="classiridium_1_1io_1_1_i_connection_manager.html#aad6ca24b6c859b7ed200e92da9000715">iridium::io::IConnectionManager</a>, <a class="el" href="classiridium_1_1io_1_1_i_context.html#aeb03d082fab5cffd9d8f0e13e75b6ec9">iridium::io::IContext</a>, <a class="el" href="classiridium_1_1io_1_1_i_context_actions.html#a90bcf78d860eb830264d09053b073762">iridium::io::IContextActions</a>, <a class="el" href="classiridium_1_1io_1_1_i_stream.html#a5cd47f77f0b1807b19f151c945d96dde">iridium::io::IStream</a>, <a class="el" href="structiridium_1_1io_1_1_t_event.html#a37c215fef882773544c3f373d0493e11">iridium::io::TEvent</a>, <a class="el" href="classiridium_1_1logging_1_1implementation_1_1_c_sink_file.html#a7d949cad3a37f0673f12f4ca4ff3df8a">iridium::logging::implementation::CSinkFile</a>, <a class="el" href="classiridium_1_1logging_1_1_i_sink.html#a50f61612c6351ee4a6baf5e378249a63">iridium::logging::ISink</a>, <a class="el" href="classiridium_1_1system_1_1_i_process.html#ab48c2aba97cdd61ebbb667a2972b288e">iridium::system::IProcess</a>, <a class="el" href="structiridium_1_1system_1_1_i_process_1_1_t_state.html#a72d8bcbac1b59828efba05d9cf66bb47">iridium::system::IProcess::TState</a>, <a class="el" href="structiridium_1_1testing_1_1_t_cmd_args.html#ac61338e4550527970f4db3eaf2025ae1">iridium::testing::TCmdArgs</a>, <a class="el" href="class_i_stream.html#a5cd47f77f0b1807b19f151c945d96dde">IStream</a></li>
 <li>DEFINE_IMPLEMENTATION()&#160;:&#160;<a class="el" href="class_c_session_manager.html#a85f5ecfd02189d481b71f99fec0729c6">CSessionManager</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_session_manager.html#a85f5ecfd02189d481b71f99fec0729c6">iridium::io::implementation::CSessionManager</a></li>
-<li>DEFINE_INTERFACE()&#160;:&#160;<a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html#a0e7e14d07c6fcf06a06b228a7069b32d">iridium::threading::IWorkerPusher&lt; TItem &gt;</a></li>
+<li>DEFINE_INTERFACE()&#160;:&#160;<a class="el" href="class_i_context.html#ae00cfa9ea38618aba14cec56c77bbadd">IContext</a>, <a class="el" href="class_i_context_actions.html#a97670a16b3d179e655f659a8591c1b81">IContextActions</a>, <a class="el" href="classiridium_1_1io_1_1_i_context.html#ae00cfa9ea38618aba14cec56c77bbadd">iridium::io::IContext</a>, <a class="el" href="classiridium_1_1io_1_1_i_context_actions.html#a97670a16b3d179e655f659a8591c1b81">iridium::io::IContextActions</a>, <a class="el" href="classiridium_1_1threading_1_1_i_worker_pusher.html#a0e7e14d07c6fcf06a06b228a7069b32d">iridium::threading::IWorkerPusher&lt; TItem &gt;</a></li>
 <li>del()&#160;:&#160;<a class="el" href="classiridium_1_1threading_1_1_synchronized_container.html#ab0a1f60fad1ef3cf8bc46a53dd1bcf5d">iridium::threading::SynchronizedContainer&lt; TKey, TValue &gt;</a></li>
-<li>delChild()&#160;:&#160;<a class="el" href="class_c_node_type.html#a470e45df2701779636964a4f6dfe37c6">CNodeType&lt; TValue &gt;</a>, <a class="el" href="class_i_node_type.html#a29138c8c9531a5ac371e6450053059c1">INodeType&lt; TValue &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a470e45df2701779636964a4f6dfe37c6">iridium::parsing::implementation::CNodeType&lt; TValue &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html#a29138c8c9531a5ac371e6450053059c1">iridium::parsing::INodeType&lt; TValue &gt;</a></li>
-<li>detach()&#160;:&#160;<a class="el" href="classiridium_1_1pattern_1_1_broadcaster.html#a88ac7fed367b9a652de41b7758057c87">iridium::pattern::Broadcaster&lt; TReceiver &gt;</a></li>
-<li>doAction()&#160;:&#160;<a class="el" href="classiridium_1_1pattern_1_1_f_s_m.html#a5691596af51112c5689cb0c6cd8aa4e4">iridium::pattern::FSM&lt; TState, TEvent &gt;</a></li>
-<li>double_precission&#160;:&#160;<a class="el" href="structiridium_1_1convertion_1_1config.html#ad25cf04b9125d1085a3c0c0a6be13db1">iridium::convertion::config</a>, <a class="el" href="structiridium_1_1convertion_1_1implementation_1_1config.html#ad25cf04b9125d1085a3c0c0a6be13db1">iridium::convertion::implementation::config</a></li>
+<li>delChilds()&#160;:&#160;<a class="el" href="class_c_node_type.html#a324fa3ba1df347626288d21ac4cb811d">CNodeType&lt; TValue &gt;</a>, <a class="el" href="class_i_node_type.html#aba34f7e9050d081dc5307b6d349099a4">INodeType&lt; TValue &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1implementation_1_1_c_node_type.html#a324fa3ba1df347626288d21ac4cb811d">iridium::parsing::implementation::CNodeType&lt; TValue &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1_i_node_type.html#aba34f7e9050d081dc5307b6d349099a4">iridium::parsing::INodeType&lt; TValue &gt;</a></li>
+<li>delPipe()&#160;:&#160;<a class="el" href="class_i_context.html#a3137b82c7b1f4653cb06f2621c7b968b">IContext</a>, <a class="el" href="classiridium_1_1io_1_1_i_context.html#a3137b82c7b1f4653cb06f2621c7b968b">iridium::io::IContext</a>, <a class="el" href="classiridium_1_1io_1_1implementation_1_1_c_context.html#aa2abf20c954f2d7b54d5511419b9f180">iridium::io::implementation::CContext</a></li>
+<li>deserialize()&#160;:&#160;<a class="el" href="classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_a_r_r_a_y_00_01_t_item_01_4.html#a3f64847eb4e42e4312a6c7dec20199e4">iridium::parsing::SchemaNode&lt; TSchemaType::ARRAY, TItem &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_o_b_j_e_c_t_01_4.html#ac837e5d01f5f8b9fc6130db5eae74d47">iridium::parsing::SchemaNode&lt; TSchemaType::OBJECT &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1_schema_node_3_01_t_schema_type_1_1_v_a_l_u_e_00_01_t_value_01_4.html#a42584b96bde61cfd69f367c2f7a87c73">iridium::parsing::SchemaNode&lt; TSchemaType::VALUE, TValue &gt;</a>, <a class="el" href="classiridium_1_1parsing_1_1_schema_node_base.html#a8f7bee8721e212e8713c4e3af3552b86">iridium::parsing::SchemaNodeBase</a></li>
+<li>detach()&#160;:&#160;<a class="el" href="classiridium_1_1dp_1_1_broadcaster.html#a94e52f9ee2d077d33c549469bbe54b49">iridium::dp::Broadcaster&lt; TReceiver &gt;</a></li>
+<li>doAction()&#160;:&#160;<a class="el" href="classiridium_1_1dp_1_1_f_s_m.html#aa73fd22a3980eed7bbc65821e811ee54">iridium::dp::FSM&lt; TState, TEvent &gt;</a></li>
+<li>double_precission&#160;:&#160;<a class="el" href="structiridium_1_1convertion_1_1config.html#a8eb978d84309c52fdc33262317c2cee5">iridium::convertion::config</a>, <a class="el" href="structiridium_1_1convertion_1_1implementation_1_1config.html#a8eb978d84309c52fdc33262317c2cee5">iridium::convertion::implementation::config</a></li>
+<li>dp::Singleton&lt; Logger &gt;&#160;:&#160;<a class="el" href="classiridium_1_1logging_1_1_logger.html#aff8776f2a1eeca598723ac80a4043441">iridium::logging::Logger</a></li>
+<li>dp::Singleton&lt; MIME &gt;&#160;:&#160;<a class="el" href="classiridium_1_1io_1_1protocol_1_1http_1_1implementation_1_1_m_i_m_e.html#a93c21ae29e67885d69e48e9a5bdadc16">iridium::io::protocol::http::implementation::MIME</a></li>
+<li>dp::Singleton&lt; Tester &gt;&#160;:&#160;<a class="el" href="classiridium_1_1testing_1_1_tester.html#af607ece111a4ba9992af78333f45c234">iridium::testing::Tester</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>
