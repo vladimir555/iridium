@@ -112,10 +112,17 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
   <div class="headertitle"><div class="title">Iridium </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__2_users_2volodja_2workspace_2iridium_2mainpage__en"></a> </p><div style="float: left; margin-right: 15px; max-height: 50px;"> <div class="image">
-<img src="logo.png" alt="" width="100px"/>
+<div class="textblock"><p><a class="anchor" id="md__2_users_2volodja_2workspace_2iridium_2mainpage__en"></a> <div style="float: left; margin-right: 10px; max-height: 50px;">
+  <video width="100" style="max-height:60px;" autoplay playsinline poster="logo.png">
+    <!-- Chrome / Firefox / Edge -->
+    <source src="logo.webm" type="video/webm">
+    <!-- Safari -->
+    <source src="logo.mp4" type="video/mp4; codecs=hvc1">
+    <!-- Image -->
+    <img src="logo.png" width="120" style="max-height:60px;" alt="Iridium Logo">
+  </video>
 </div>
- </div><p>Welcome to the Iridium Library documentation!</p>
+<p>Welcome to the Iridium Library documentation!</p>
 <p>This documentation provides information on how to use various components of the Iridium library. Explore the sections below to learn about its features.</p>
 <h1 class="doxsection"><a class="anchor" id="sec_license"></a>
 License</h1>
